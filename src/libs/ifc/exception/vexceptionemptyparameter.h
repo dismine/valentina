@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef VEXCEPTIONEMPTYPARAMETER_H
 #define VEXCEPTIONEMPTYPARAMETER_H
 
-#include <qcompilerdetection.h>
 #include <QString>
 #include <QtGlobal>
 
@@ -41,31 +40,41 @@ class QDomElement;
 /**
  * @brief The VExceptionEmptyParameter class for exception empty parameter
  */
-class VExceptionEmptyParameter : public VException
+class VExceptionEmptyParameter final : public VException
 {
 public:
-    VExceptionEmptyParameter(const QString &what, const QString &name, const QDomElement &domElement);
-    VExceptionEmptyParameter(const VExceptionEmptyParameter &e);
-    VExceptionEmptyParameter &operator=(const VExceptionEmptyParameter &e);
-    virtual         ~VExceptionEmptyParameter() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
-    virtual QString ErrorMessage() const override;
-    virtual QString DetailedInformation() const override;
-    QString         Name() const;
-    QString         TagText() const;
-    QString         TagName() const;
-    qint32          LineNumber() const;
-protected:
+    VExceptionEmptyParameter(const QString &what, const QString &name, const QDomElement &domElement)
+        V_NOEXCEPT_EXPR(true);
+    VExceptionEmptyParameter(const VExceptionEmptyParameter &e) V_NOEXCEPT_EXPR(true);
+    auto operator=(const VExceptionEmptyParameter &e) V_NOEXCEPT_EXPR(true) -> VExceptionEmptyParameter &;
+    virtual ~VExceptionEmptyParameter() V_NOEXCEPT_EXPR(true) = default;
+
+    Q_NORETURN virtual void raise() const override { throw *this; }
+
+    Q_REQUIRED_RESULT virtual auto clone() const -> VExceptionEmptyParameter * override
+    {
+        return new VExceptionEmptyParameter(*this);
+    }
+
+    virtual auto ErrorMessage() const -> QString override;
+    virtual auto DetailedInformation() const -> QString override;
+    auto Name() const -> QString;
+    auto TagText() const -> QString;
+    auto TagName() const -> QString;
+    auto LineNumber() const -> qint32;
+
+private:
     /** @brief name name attribute */
-    QString         name;
+    QString name;
 
     /** @brief tagText tag text */
-    QString         tagText;
+    QString tagText;
 
     /** @brief tagName tag name */
-    QString         tagName;
+    QString tagName;
 
     /** @brief lineNumber line number */
-    qint32          lineNumber;
+    qint32 lineNumber;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -73,7 +82,7 @@ protected:
  * @brief Name return name of attribute where error
  * @return name
  */
-inline QString VExceptionEmptyParameter::Name() const
+inline auto VExceptionEmptyParameter::Name() const -> QString
 {
     return name;
 }
@@ -83,7 +92,7 @@ inline QString VExceptionEmptyParameter::Name() const
  * @brief TagText return tag text
  * @return tag text
  */
-inline QString VExceptionEmptyParameter::TagText() const
+inline auto VExceptionEmptyParameter::TagText() const -> QString
 {
     return tagText;
 }
@@ -93,7 +102,7 @@ inline QString VExceptionEmptyParameter::TagText() const
  * @brief TagName return tag name
  * @return tag name
  */
-inline QString VExceptionEmptyParameter::TagName() const
+inline auto VExceptionEmptyParameter::TagName() const -> QString
 {
     return tagName;
 }
@@ -103,7 +112,7 @@ inline QString VExceptionEmptyParameter::TagName() const
  * @brief LineNumber return line number of tag
  * @return line number
  */
-inline qint32 VExceptionEmptyParameter::LineNumber() const
+inline auto VExceptionEmptyParameter::LineNumber() const -> qint32
 {
     return lineNumber;
 }

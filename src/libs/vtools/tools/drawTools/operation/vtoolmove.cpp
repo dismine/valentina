@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -28,47 +28,41 @@
 
 #include "vtoolmove.h"
 
-#include <limits.h>
-#include <qiterator.h>
 #include <QColor>
 #include <QDomNode>
 #include <QDomNodeList>
 #include <QMapIterator>
 #include <QPoint>
 #include <QSharedPointer>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <QUndoStack>
+#include <climits>
 #include <new>
+#include <qiterator.h>
 
-#include "../../../dialogs/tools/dialogtool.h"
 #include "../../../dialogs/tools/dialogmove.h"
+#include "../../../dialogs/tools/dialogtool.h"
 #include "../../../visualization/line/operation/vistoolmove.h"
 #include "../../../visualization/visualization.h"
+#include "../../vabstracttool.h"
+#include "../../vdatatool.h"
+#include "../ifc/exception/vexception.h"
+#include "../ifc/ifcdef.h"
+#include "../vdrawtool.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
-#include "../vgeometry/vellipticalarc.h"
 #include "../vgeometry/vcubicbezier.h"
 #include "../vgeometry/vcubicbezierpath.h"
+#include "../vgeometry/vellipticalarc.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
 #include "../vgeometry/vsplinepath.h"
-#include "../vpatterndb/vtranslatevars.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
-#include "../vmisc/diagnostic.h"
-#include "../vmisc/logging.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vformula.h"
-#include "../ifc/ifcdef.h"
-#include "../ifc/exception/vexception.h"
-#include "../vwidgets/vabstractsimple.h"
+#include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "../../vabstracttool.h"
-#include "../../vdatatool.h"
-#include "../vdrawtool.h"
 
 template <class T> class QSharedPointer;
 
@@ -76,23 +70,22 @@ const QString VToolMove::ToolType = QStringLiteral("moving");
 
 namespace
 {
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Wswitch-default")
-QPointF GetOriginPoint(const QVector<quint32> objects, const VContainer *data, qreal calcLength, qreal calcAngle)
+auto GetOriginPoint(const QVector<SourceItem> &objects, const VContainer *data, qreal calcLength, qreal calcAngle)
+    -> QPointF
 {
     QPolygonF originObjects;
 
-    for (auto id : objects)
+    for (const auto &object : objects)
     {
-        const QSharedPointer<VGObject> obj = data->GetGObject(id);
+        const QSharedPointer<VGObject> obj = data->GetGObject(object.id);
 
         // This check helps to find missed objects in the switch
         Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects were handled.");
 
-        switch(static_cast<GOType>(obj->getType()))
+        switch (obj->getType())
         {
             case GOType::Point:
-                originObjects.append(data->GeometricObject<VPointF>(id)->toQPointF());
+                originObjects.append(data->GeometricObject<VPointF>(object.id)->toQPointF());
                 break;
             case GOType::Arc:
             case GOType::EllipticalArc:
@@ -100,35 +93,26 @@ QPointF GetOriginPoint(const QVector<quint32> objects, const VContainer *data, q
             case GOType::SplinePath:
             case GOType::CubicBezier:
             case GOType::CubicBezierPath:
-            {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
-                originObjects.append(data->GeometricObject<VAbstractCurve>(id)->GetPoints());
-#else
-                const QVector<QPointF> points = data->GeometricObject<VAbstractCurve>(id)->GetPoints();
-                for (auto &point : points)
-                {
-                    originObjects.append(point);
-                }
-#endif // QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
+                originObjects.append(data->GeometricObject<VAbstractCurve>(object.id)->GetPoints());
                 break;
-            }
             case GOType::Unknown:
             case GOType::PlaceLabel:
                 Q_UNREACHABLE();
                 break;
+            default:
+                break;
         }
     }
 
-    QPointF rotationOrigin = originObjects.boundingRect().center();
-    QLineF move(rotationOrigin, QPointF(rotationOrigin.x()+calcLength, rotationOrigin.y()));
+    QPointF const rotationOrigin = originObjects.boundingRect().center();
+    QLineF move(rotationOrigin, QPointF(rotationOrigin.x() + calcLength, rotationOrigin.y()));
     move.setAngle(calcAngle);
     return move.p2();
 }
-QT_WARNING_POP
-}
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolMove::setDialog()
+void VToolMove::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogMove> dialogTool = qobject_cast<DialogMove *>(m_dialog);
@@ -138,11 +122,15 @@ void VToolMove::setDialog()
     dialogTool->SetLength(formulaLength);
     dialogTool->SetSuffix(suffix);
     dialogTool->SetRotationOrigPointId(origPointId);
+    dialogTool->SetNotes(m_notes);
+    dialogTool->SetSourceObjects(source);
+
+    SetDialogVisibilityGroupData(dialogTool);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolMove *VToolMove::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                             VContainer *data)
+auto VToolMove::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolMove *
 {
     SCASSERT(not dialog.isNull())
     const QPointer<DialogMove> dialogTool = qobject_cast<DialogMove *>(dialog);
@@ -154,14 +142,18 @@ VToolMove *VToolMove::Create(const QPointer<DialogTool> &dialog, VMainGraphicsSc
     initData.formulaLength = dialogTool->GetLength();
     initData.rotationOrigin = dialogTool->GetRotationOrigPointId();
     initData.suffix = dialogTool->GetSuffix();
-    initData.source = dialogTool->GetObjects();
+    initData.source = dialogTool->GetSourceObjects();
+    initData.hasLinkedVisibilityGroup = dialogTool->HasLinkedVisibilityGroup();
+    initData.visibilityGroupName = dialogTool->GetVisibilityGroupName();
+    initData.visibilityGroupTags = dialogTool->GetVisibilityGroupTags();
     initData.scene = scene;
     initData.doc = doc;
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
-    VToolMove* operation = Create(initData);
+    VToolMove *operation = Create(initData);
     if (operation != nullptr)
     {
         operation->m_dialog = dialog;
@@ -170,7 +162,7 @@ VToolMove *VToolMove::Create(const QPointer<DialogTool> &dialog, VMainGraphicsSc
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolMove *VToolMove::Create(VToolMoveInitData &initData)
+auto VToolMove::Create(VToolMoveInitData &initData) -> VToolMove *
 {
     qreal calcAngle = 0;
     qreal calcRotationAngle = 0;
@@ -178,7 +170,8 @@ VToolMove *VToolMove::Create(VToolMoveInitData &initData)
 
     calcAngle = CheckFormula(initData.id, initData.formulaAngle, initData.data);
     calcRotationAngle = CheckFormula(initData.id, initData.formulaRotationAngle, initData.data);
-    calcLength = qApp->toPixel(CheckFormula(initData.id, initData.formulaLength, initData.data));
+    calcLength =
+        VAbstractValApplication::VApp()->toPixel(CheckFormula(initData.id, initData.formulaLength, initData.data));
 
     QPointF rotationOrigin;
     QSharedPointer<VPointF> originPoint;
@@ -195,121 +188,122 @@ VToolMove *VToolMove::Create(VToolMoveInitData &initData)
 
     if (initData.typeCreation == Source::FromGui)
     {
-        initData.destination.clear();// Try to avoid mistake, value must be empty
+        initData.destination.clear(); // Try to avoid mistake, value must be empty
 
-        initData.id = initData.data->getNextId();//Just reserve id for tool
+        initData.id = initData.data->getNextId(); // Just reserve id for tool
 
-        for (auto idObject : qAsConst(initData.source))
+        for (const auto &object : qAsConst(initData.source))
         {
-            const QSharedPointer<VGObject> obj = initData.data->GetGObject(idObject);
+            const QSharedPointer<VGObject> obj = initData.data->GetGObject(object.id);
 
             // This check helps to find missed objects in the switch
             Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects were handled.");
 
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Wswitch-default")
-            switch(static_cast<GOType>(obj->getType()))
+            QT_WARNING_PUSH
+            QT_WARNING_DISABLE_GCC("-Wswitch-default")
+            QT_WARNING_DISABLE_CLANG("-Wswitch-default")
+
+            switch (obj->getType())
             {
                 case GOType::Point:
-                    initData.destination.append(CreatePoint(initData.id, idObject, calcAngle, calcLength,
+                    initData.destination.append(CreatePoint(initData.id, object, calcAngle, calcLength,
                                                             calcRotationAngle, rotationOrigin, initData.suffix,
                                                             initData.data));
                     break;
                 case GOType::Arc:
-                    initData.destination.append(CreateArc<VArc>(initData.id, idObject, calcAngle, calcLength,
+                    initData.destination.append(CreateArc<VArc>(initData.id, object, calcAngle, calcLength,
                                                                 calcRotationAngle, rotationOrigin, initData.suffix,
                                                                 initData.data));
                     break;
                 case GOType::EllipticalArc:
-                    initData.destination.append(CreateArc<VEllipticalArc>(initData.id, idObject, calcAngle, calcLength,
+                    initData.destination.append(CreateArc<VEllipticalArc>(initData.id, object, calcAngle, calcLength,
                                                                           calcRotationAngle, rotationOrigin,
                                                                           initData.suffix, initData.data));
                     break;
                 case GOType::Spline:
-                    initData.destination.append(CreateCurve<VSpline>(initData.id, idObject, calcAngle, calcLength,
+                    initData.destination.append(CreateCurve<VSpline>(initData.id, object, calcAngle, calcLength,
                                                                      calcRotationAngle, rotationOrigin, initData.suffix,
                                                                      initData.data));
                     break;
                 case GOType::SplinePath:
-                    initData.destination.append(CreateCurveWithSegments<VSplinePath>(initData.id, idObject, calcAngle,
-                                                                                     calcLength, calcRotationAngle,
-                                                                                     rotationOrigin, initData.suffix,
-                                                                                     initData.data));
+                    initData.destination.append(CreateCurveWithSegments<VSplinePath>(
+                        initData.id, object, calcAngle, calcLength, calcRotationAngle, rotationOrigin, initData.suffix,
+                        initData.data));
                     break;
                 case GOType::CubicBezier:
-                    initData.destination.append(CreateCurve<VCubicBezier>(initData.id, idObject, calcAngle, calcLength,
+                    initData.destination.append(CreateCurve<VCubicBezier>(initData.id, object, calcAngle, calcLength,
                                                                           calcRotationAngle, rotationOrigin,
                                                                           initData.suffix, initData.data));
                     break;
                 case GOType::CubicBezierPath:
-                    initData.destination.append(CreateCurveWithSegments<VCubicBezierPath>(initData.id, idObject,
-                                                                                          calcAngle, calcLength,
-                                                                                          calcRotationAngle,
-                                                                                          rotationOrigin,
-                                                                                          initData.suffix,
-                                                                                          initData.data));
+                    initData.destination.append(CreateCurveWithSegments<VCubicBezierPath>(
+                        initData.id, object, calcAngle, calcLength, calcRotationAngle, rotationOrigin, initData.suffix,
+                        initData.data));
                     break;
                 case GOType::Unknown:
                 case GOType::PlaceLabel:
                     Q_UNREACHABLE();
                     break;
             }
-QT_WARNING_POP
+
+            QT_WARNING_POP
         }
     }
     else
     {
         for (int i = 0; i < initData.source.size(); ++i)
         {
-            const quint32 idObject = initData.source.at(i);
-            const QSharedPointer<VGObject> obj = initData.data->GetGObject(idObject);
+            const SourceItem object = initData.source.at(i);
+            const QSharedPointer<VGObject> obj = initData.data->GetGObject(object.id);
 
             // This check helps to find missed objects in the switch
             Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects were handled.");
 
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Wswitch-default")
-            switch(static_cast<GOType>(obj->getType()))
+            QT_WARNING_PUSH
+            QT_WARNING_DISABLE_GCC("-Wswitch-default")
+            QT_WARNING_DISABLE_CLANG("-Wswitch-default")
+
+            switch (obj->getType())
             {
                 case GOType::Point:
-                    UpdatePoint(initData.id, idObject, calcAngle, calcLength, calcRotationAngle, rotationOrigin,
+                    UpdatePoint(initData.id, object, calcAngle, calcLength, calcRotationAngle, rotationOrigin,
                                 initData.suffix, initData.data, initData.destination.at(i));
                     break;
                 case GOType::Arc:
-                    UpdateArc<VArc>(initData.id, idObject, calcAngle, calcLength, calcRotationAngle, rotationOrigin,
+                    UpdateArc<VArc>(initData.id, object, calcAngle, calcLength, calcRotationAngle, rotationOrigin,
                                     initData.suffix, initData.data, initData.destination.at(i).id);
                     break;
                 case GOType::EllipticalArc:
-                    UpdateArc<VEllipticalArc>(initData.id, idObject, calcAngle, calcLength, calcRotationAngle,
+                    UpdateArc<VEllipticalArc>(initData.id, object, calcAngle, calcLength, calcRotationAngle,
                                               rotationOrigin, initData.suffix, initData.data,
                                               initData.destination.at(i).id);
                     break;
                 case GOType::Spline:
-                    UpdateCurve<VSpline>(initData.id, idObject, calcAngle, calcLength, calcRotationAngle,
-                                         rotationOrigin, initData.suffix, initData.data, initData.destination.at(i).id);
+                    UpdateCurve<VSpline>(initData.id, object, calcAngle, calcLength, calcRotationAngle, rotationOrigin,
+                                         initData.suffix, initData.data, initData.destination.at(i).id);
                     break;
                 case GOType::SplinePath:
-                    UpdateCurveWithSegments<VSplinePath>(initData.id, idObject, calcAngle, calcLength,
-                                                         calcRotationAngle, rotationOrigin,initData.suffix,
-                                                         initData.data, initData.destination.at(i).id);
+                    UpdateCurveWithSegments<VSplinePath>(initData.id, object, calcAngle, calcLength, calcRotationAngle,
+                                                         rotationOrigin, initData.suffix, initData.data,
+                                                         initData.destination.at(i).id);
                     break;
                 case GOType::CubicBezier:
-                    UpdateCurve<VCubicBezier>(initData.id, idObject, calcAngle, calcLength, calcRotationAngle,
-                                              rotationOrigin,initData.suffix, initData.data,
+                    UpdateCurve<VCubicBezier>(initData.id, object, calcAngle, calcLength, calcRotationAngle,
+                                              rotationOrigin, initData.suffix, initData.data,
                                               initData.destination.at(i).id);
                     break;
                 case GOType::CubicBezierPath:
-                    UpdateCurveWithSegments<VCubicBezierPath>(initData.id, idObject, calcAngle, calcLength,
-                                                              calcRotationAngle, rotationOrigin,
-                                                              initData.suffix, initData.data,
-                                                              initData.destination.at(i).id);
+                    UpdateCurveWithSegments<VCubicBezierPath>(initData.id, object, calcAngle, calcLength,
+                                                              calcRotationAngle, rotationOrigin, initData.suffix,
+                                                              initData.data, initData.destination.at(i).id);
                     break;
                 case GOType::Unknown:
                 case GOType::PlaceLabel:
                     Q_UNREACHABLE();
                     break;
             }
-QT_WARNING_POP
+
+            QT_WARNING_POP
         }
         if (initData.parse != Document::FullParse)
         {
@@ -319,8 +313,13 @@ QT_WARNING_POP
 
     if (initData.parse == Document::FullParse)
     {
+        if (initData.typeCreation == Source::FromGui && initData.hasLinkedVisibilityGroup)
+        {
+            VAbstractApplication::VApp()->getUndoStack()->beginMacro(tr("move"));
+        }
+
         VAbstractTool::AddRecord(initData.id, Tool::Move, initData.doc);
-        VToolMove *tool = new VToolMove(initData);
+        auto *tool = new VToolMove(initData);
         initData.scene->addItem(tool);
         InitOperationToolConnections(initData.scene, tool);
         VAbstractPattern::AddTool(initData.id, tool);
@@ -330,20 +329,26 @@ QT_WARNING_POP
             initData.doc->IncrementReferens(originPoint->getIdTool());
         }
 
-        for (auto idObject : qAsConst(initData.source))
+        for (const auto &object : qAsConst(initData.source))
         {
-            initData.doc->IncrementReferens(initData.data->GetGObject(idObject)->getIdTool());
+            initData.doc->IncrementReferens(initData.data->GetGObject(object.id)->getIdTool());
         }
+
+        if (initData.typeCreation == Source::FromGui && initData.hasLinkedVisibilityGroup)
+        {
+            VAbstractOperation::CreateVisibilityGroup(initData);
+            VAbstractApplication::VApp()->getUndoStack()->endMacro();
+        }
+
         return tool;
     }
     return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolMove::GetFormulaAngle() const
+auto VToolMove::GetFormulaAngle() const -> VFormula
 {
     VFormula fAngle(formulaAngle, getData());
-    fAngle.setCheckZero(false);
     fAngle.setToolId(m_id);
     fAngle.setPostfix(degreeSymbol);
     fAngle.Eval();
@@ -353,7 +358,7 @@ VFormula VToolMove::GetFormulaAngle() const
 //---------------------------------------------------------------------------------------------------------------------
 void VToolMove::SetFormulaAngle(const VFormula &value)
 {
-    if (value.error() == false)
+    if (!value.error())
     {
         formulaAngle = value.GetFormula(FormulaType::FromUser);
 
@@ -363,10 +368,9 @@ void VToolMove::SetFormulaAngle(const VFormula &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolMove::GetFormulaRotationAngle() const
+auto VToolMove::GetFormulaRotationAngle() const -> VFormula
 {
     VFormula fAngle(formulaRotationAngle, getData());
-    fAngle.setCheckZero(false);
     fAngle.setToolId(m_id);
     fAngle.setPostfix(degreeSymbol);
     fAngle.Eval();
@@ -376,7 +380,7 @@ VFormula VToolMove::GetFormulaRotationAngle() const
 //---------------------------------------------------------------------------------------------------------------------
 void VToolMove::SetFormulaRotationAngle(const VFormula &value)
 {
-    if (value.error() == false)
+    if (!value.error())
     {
         formulaRotationAngle = value.GetFormula(FormulaType::FromUser);
 
@@ -386,12 +390,11 @@ void VToolMove::SetFormulaRotationAngle(const VFormula &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolMove::GetFormulaLength() const
+auto VToolMove::GetFormulaLength() const -> VFormula
 {
     VFormula fLength(formulaLength, getData());
-    fLength.setCheckZero(true);
     fLength.setToolId(m_id);
-    fLength.setPostfix(UnitsToStr(qApp->patternUnit()));
+    fLength.setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits()));
     fLength.Eval();
     return fLength;
 }
@@ -409,7 +412,7 @@ void VToolMove::SetFormulaLength(const VFormula &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolMove::OriginPointName() const
+auto VToolMove::OriginPointName() const -> QString
 {
     try
     {
@@ -434,10 +437,10 @@ void VToolMove::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 i
     {
         ContextMenu<DialogMove>(event, id);
     }
-    catch(const VExceptionToolWasDeleted &e)
+    catch (const VExceptionToolWasDeleted &e)
     {
         Q_UNUSED(e)
-        return;//Leave this method immediately!!!
+        return; // Leave this method immediately!!!
     }
 }
 
@@ -446,15 +449,18 @@ void VToolMove::SetVisualization()
 {
     if (not vis.isNull())
     {
-        VisToolMove *visual = qobject_cast<VisToolMove *>(vis);
+        auto *visual = qobject_cast<VisToolMove *>(vis);
         SCASSERT(visual != nullptr)
 
-        visual->SetObjects(source);
-        visual->SetAngle(qApp->TrVars()->FormulaToUser(formulaAngle, qApp->Settings()->GetOsSeparator()));
-        visual->SetRotationAngle(qApp->TrVars()->FormulaToUser(formulaRotationAngle,
-                                                               qApp->Settings()->GetOsSeparator()));
-        visual->SetLength(qApp->TrVars()->FormulaToUser(formulaLength, qApp->Settings()->GetOsSeparator()));
+        const bool osSeparator = VAbstractApplication::VApp()->Settings()->GetOsSeparator();
+        const VTranslateVars *trVars = VAbstractApplication::VApp()->TrVars();
+
+        visual->SetObjects(SourceToObjects(source));
+        visual->SetAngle(trVars->FormulaToUser(formulaAngle, osSeparator));
+        visual->SetRotationAngle(trVars->FormulaToUser(formulaRotationAngle, osSeparator));
+        visual->SetLength(trVars->FormulaToUser(formulaLength, osSeparator));
         visual->SetRotationOriginPointId(origPointId);
+        visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
 }
@@ -474,72 +480,83 @@ void VToolMove::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependenc
     doc->SetAttribute(domElement, AttrSuffix, dialogTool->GetSuffix());
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetRotationOrigPointId()));
     doc->SetAttribute(domElement, AttrRotationAngle, dialogTool->GetRotationAngle());
+    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
+                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
+
+    source = dialogTool->GetSourceObjects();
+    SaveSourceDestination(domElement);
+
+    // Save visibility data for later use
+    SaveVisibilityGroupData(dialogTool);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolMove::ReadToolAttributes(const QDomElement &domElement)
 {
-    origPointId = doc->GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
-    formulaAngle = doc->GetParametrString(domElement, AttrAngle, QChar('0'));
-    formulaRotationAngle = doc->GetParametrString(domElement, AttrRotationAngle, QChar('0'));
-    formulaLength = doc->GetParametrString(domElement, AttrLength, QChar('0'));
-    suffix = doc->GetParametrString(domElement, AttrSuffix);
+    VAbstractOperation::ReadToolAttributes(domElement);
+
+    origPointId = VDomDocument::GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
+    formulaAngle = VDomDocument::GetParametrString(domElement, AttrAngle, QChar('0'));
+    formulaRotationAngle = VDomDocument::GetParametrString(domElement, AttrRotationAngle, QChar('0'));
+    formulaLength = VDomDocument::GetParametrString(domElement, AttrLength, QChar('0'));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolMove::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-    VDrawTool::SaveOptions(tag, obj);
+    VAbstractOperation::SaveOptions(tag, obj);
 
     doc->SetAttribute(tag, AttrType, ToolType);
     doc->SetAttribute(tag, AttrAngle, formulaAngle);
     doc->SetAttribute(tag, AttrRotationAngle, formulaRotationAngle);
     doc->SetAttribute(tag, AttrLength, formulaLength);
-    doc->SetAttribute(tag, AttrSuffix, suffix);
     doc->SetAttribute(tag, AttrCenter, QString().setNum(origPointId));
-
-    SaveSourceDestination(tag);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolMove::MakeToolTip() const
+auto VToolMove::MakeToolTip() const -> QString
 {
     return QStringLiteral("<tr> <td><b>%1:</b> %2°</td> </tr>"
                           "<tr> <td><b>%3:</b> %4 %5</td> </tr>"
                           "<tr> <td><b>%6:</b> %7°</td> </tr>"
-                          "<tr> <td><b>%8:</b> %9</td> </tr>")
-            .arg(tr("Angle"))                                // 1
-            .arg(GetFormulaAngle().getDoubleValue())         // 2
-            .arg(tr("Length"))                               // 3
-            .arg(GetFormulaLength().getDoubleValue())        // 4
-            .arg(UnitsToStr(qApp->patternUnit(), true),      // 5
-                 tr("Rotation angle"))                       // 6
-            .arg(GetFormulaRotationAngle().getDoubleValue()) // 7
-            .arg(tr("Rotation origin point"),                // 8
-                 OriginPointName());                         // 9
+                          "<tr> <td><b>%8:</b> %9</td> </tr>"
+                          "%10")
+        .arg(tr("Angle"))                                                       // 1
+        .arg(GetFormulaAngle().getDoubleValue())                                // 2
+        .arg(tr("Length"))                                                      // 3
+        .arg(GetFormulaLength().getDoubleValue())                               // 4
+        .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), // 5
+             tr("Rotation angle"))                                              // 6
+        .arg(GetFormulaRotationAngle().getDoubleValue())                        // 7
+        .arg(tr("Rotation origin point"),                                       // 8
+             OriginPointName(),                                                 // 9
+             VisibilityGroupToolTip());                                         // 10
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolMove::VToolMove(const VToolMoveInitData &initData, QGraphicsItem *parent)
-    : VAbstractOperation(initData.doc, initData.data, initData.id, initData.suffix, initData.source,
-                         initData.destination, parent),
-      formulaAngle(initData.formulaAngle),
-      formulaRotationAngle(initData.formulaRotationAngle),
-      formulaLength(initData.formulaLength),
-      origPointId(initData.rotationOrigin)
+  : VAbstractOperation(initData, parent),
+    formulaAngle(initData.formulaAngle),
+    formulaRotationAngle(initData.formulaRotationAngle),
+    formulaLength(initData.formulaLength),
+    origPointId(initData.rotationOrigin)
 {
     InitOperatedObjects();
     ToolCreation(initData.typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-DestinationItem VToolMove::CreatePoint(quint32 idTool, quint32 idItem, qreal angle,
-                                         qreal length, qreal rotationAngle, const QPointF &rotationOrigin,
-                                       const QString &suffix, VContainer *data)
+auto VToolMove::CreatePoint(quint32 idTool, const SourceItem &sItem, qreal angle, qreal length, qreal rotationAngle,
+                            const QPointF &rotationOrigin, const QString &suffix, VContainer *data) -> DestinationItem
 {
-    const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(idItem);
+    const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(sItem.id);
     VPointF moved = point->Move(length, angle, suffix).Rotate(rotationOrigin, rotationAngle);
     moved.setIdObject(idTool);
+
+    if (not sItem.alias.isEmpty())
+    {
+        moved.setName(sItem.alias);
+    }
 
     DestinationItem item;
     item.mx = moved.mx();
@@ -551,104 +568,138 @@ DestinationItem VToolMove::CreatePoint(quint32 idTool, quint32 idItem, qreal ang
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class Item>
-DestinationItem VToolMove::CreateArc(quint32 idTool, quint32 idItem, qreal angle, qreal length, qreal rotationAngle,
-                                     const QPointF &rotationOrigin, const QString &suffix, VContainer *data)
+auto VToolMove::CreateArc(quint32 idTool, const SourceItem &sItem, qreal angle, qreal length, qreal rotationAngle,
+                          const QPointF &rotationOrigin, const QString &suffix, VContainer *data) -> DestinationItem
 {
-    const DestinationItem item = CreateItem<Item>(idTool, idItem, angle, length, rotationAngle, rotationOrigin, suffix,
-                                                  data);
+    const DestinationItem item =
+        CreateItem<Item>(idTool, sItem, angle, length, rotationAngle, rotationOrigin, suffix, data);
     data->AddArc(data->GeometricObject<Item>(item.id), item.id);
     return item;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolMove::UpdatePoint(quint32 idTool, quint32 idItem, qreal angle, qreal length, qreal rotationAngle,
+void VToolMove::UpdatePoint(quint32 idTool, const SourceItem &sItem, qreal angle, qreal length, qreal rotationAngle,
                             const QPointF &rotationOrigin, const QString &suffix, VContainer *data,
                             const DestinationItem &item)
 {
-    const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(idItem);
+    const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(sItem.id);
     VPointF moved = point->Move(length, angle, suffix).Rotate(rotationOrigin, rotationAngle);
     moved.setIdObject(idTool);
     moved.setMx(item.mx);
     moved.setMy(item.my);
     moved.SetShowLabel(item.showLabel);
+
+    if (not sItem.alias.isEmpty())
+    {
+        moved.setName(sItem.alias);
+    }
+
     data->UpdateGObject(item.id, new VPointF(moved));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class Item>
-void VToolMove::UpdateArc(quint32 idTool, quint32 idItem, qreal angle, qreal length, qreal rotationAngle,
+void VToolMove::UpdateArc(quint32 idTool, const SourceItem &sItem, qreal angle, qreal length, qreal rotationAngle,
                           const QPointF &rotationOrigin, const QString &suffix, VContainer *data, quint32 id)
 {
-    UpdateItem<Item>(idTool, idItem, angle, length, rotationAngle, rotationOrigin, suffix, data, id);
+    UpdateItem<Item>(idTool, sItem, angle, length, rotationAngle, rotationOrigin, suffix, data, id);
     data->AddArc(data->GeometricObject<Item>(id), id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class Item>
-DestinationItem VToolMove::CreateItem(quint32 idTool, quint32 idItem, qreal angle, qreal length, qreal rotationAngle,
-                                      const QPointF &rotationOrigin, const QString &suffix, VContainer *data)
+auto VToolMove::CreateItem(quint32 idTool, const SourceItem &sItem, qreal angle, qreal length, qreal rotationAngle,
+                           const QPointF &rotationOrigin, const QString &suffix, VContainer *data) -> DestinationItem
 {
-    const QSharedPointer<Item> i = data->GeometricObject<Item>(idItem);
+    const QSharedPointer<Item> i = data->GeometricObject<Item>(sItem.id);
     Item moved = i->Move(length, angle, suffix).Rotate(rotationOrigin, rotationAngle);
     moved.setIdObject(idTool);
 
+    if (not sItem.alias.isEmpty())
+    {
+        moved.SetAliasSuffix(sItem.alias);
+    }
+
+    if (sItem.penStyle != TypeLineDefault)
+    {
+        moved.SetPenStyle(sItem.penStyle);
+    }
+
+    if (sItem.color != ColorDefault)
+    {
+        moved.SetColor(sItem.color);
+    }
+
     DestinationItem item;
-    item.mx = INT_MAX;
-    item.my = INT_MAX;
     item.id = data->AddGObject(new Item(moved));
     return item;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class Item>
-DestinationItem VToolMove::CreateCurve(quint32 idTool, quint32 idItem, qreal angle, qreal length, qreal rotationAngle,
-                                       const QPointF &rotationOrigin, const QString &suffix, VContainer *data)
+auto VToolMove::CreateCurve(quint32 idTool, const SourceItem &sItem, qreal angle, qreal length, qreal rotationAngle,
+                            const QPointF &rotationOrigin, const QString &suffix, VContainer *data) -> DestinationItem
 {
-    const DestinationItem item = CreateItem<Item>(idTool, idItem, angle, length, rotationAngle, rotationOrigin, suffix,
-                                                  data);
+    const DestinationItem item =
+        CreateItem<Item>(idTool, sItem, angle, length, rotationAngle, rotationOrigin, suffix, data);
     data->AddSpline(data->GeometricObject<Item>(item.id), item.id);
     return item;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class Item>
-DestinationItem VToolMove::CreateCurveWithSegments(quint32 idTool, quint32 idItem, qreal angle,
-                                                   qreal length, qreal rotationAngle,
-                                                   const QPointF &rotationOrigin, const QString &suffix,
-                                                   VContainer *data)
+auto VToolMove::CreateCurveWithSegments(quint32 idTool, const SourceItem &sItem, qreal angle, qreal length,
+                                        qreal rotationAngle, const QPointF &rotationOrigin, const QString &suffix,
+                                        VContainer *data) -> DestinationItem
 {
-    const DestinationItem item = CreateItem<Item>(idTool, idItem, angle, length, rotationAngle, rotationOrigin, suffix,
-                                                  data);
+    const DestinationItem item =
+        CreateItem<Item>(idTool, sItem, angle, length, rotationAngle, rotationOrigin, suffix, data);
     data->AddCurveWithSegments(data->GeometricObject<Item>(item.id), item.id);
     return item;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class Item>
-void VToolMove::UpdateItem(quint32 idTool, quint32 idItem, qreal angle, qreal length, qreal rotationAngle,
+void VToolMove::UpdateItem(quint32 idTool, const SourceItem &sItem, qreal angle, qreal length, qreal rotationAngle,
                            const QPointF &rotationOrigin, const QString &suffix, VContainer *data, quint32 id)
 {
-    const QSharedPointer<Item> i = data->GeometricObject<Item>(idItem);
+    const QSharedPointer<Item> i = data->GeometricObject<Item>(sItem.id);
     Item moved = i->Move(length, angle, suffix).Rotate(rotationOrigin, rotationAngle);
     moved.setIdObject(idTool);
+
+    if (not sItem.alias.isEmpty())
+    {
+        moved.SetAliasSuffix(sItem.alias);
+    }
+
+    if (sItem.penStyle != TypeLineDefault)
+    {
+        moved.SetPenStyle(sItem.penStyle);
+    }
+
+    if (sItem.color != ColorDefault)
+    {
+        moved.SetColor(sItem.color);
+    }
+
     data->UpdateGObject(id, new Item(moved));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class Item>
-void VToolMove::UpdateCurve(quint32 idTool, quint32 idItem, qreal angle, qreal length, qreal rotationAngle,
+void VToolMove::UpdateCurve(quint32 idTool, const SourceItem &sItem, qreal angle, qreal length, qreal rotationAngle,
                             const QPointF &rotationOrigin, const QString &suffix, VContainer *data, quint32 id)
 {
-    UpdateItem<Item>(idTool, idItem, angle, length, rotationAngle, rotationOrigin, suffix, data, id);
+    UpdateItem<Item>(idTool, sItem, angle, length, rotationAngle, rotationOrigin, suffix, data, id);
     data->AddSpline(data->GeometricObject<Item>(id), id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class Item>
-void VToolMove::UpdateCurveWithSegments(quint32 idTool, quint32 idItem, qreal angle, qreal length, qreal rotationAngle,
-                                        const QPointF &rotationOrigin, const QString &suffix, VContainer *data,
-                                        quint32 id)
+void VToolMove::UpdateCurveWithSegments(quint32 idTool, const SourceItem &sItem, qreal angle, qreal length,
+                                        qreal rotationAngle, const QPointF &rotationOrigin, const QString &suffix,
+                                        VContainer *data, quint32 id)
 {
-    UpdateItem<Item>(idTool, idItem, angle, length, rotationAngle, rotationOrigin, suffix, data, id);
+    UpdateItem<Item>(idTool, sItem, angle, length, rotationAngle, rotationOrigin, suffix, data, id);
     data->AddCurveWithSegments(data->GeometricObject<Item>(id), id);
 }

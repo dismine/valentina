@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -35,6 +35,7 @@
 #include <QVector>
 #include <QtGlobal>
 
+#include "../vmisc/defglobal.h"
 #include "vlayoutdef.h"
 
 class VContourData;
@@ -48,53 +49,55 @@ class VContour
 {
 public:
     VContour();
-    VContour(int height, int width);
+    VContour(int height, int width, qreal layoutWidth);
     VContour(const VContour &contour);
 
     ~VContour();
 
-    VContour &operator=(const VContour &contour);
-#ifdef Q_COMPILER_RVALUE_REFS
-    VContour &operator=(VContour &&contour) Q_DECL_NOTHROW { Swap(contour); return *this; }
-#endif
+    auto operator=(const VContour &contour) -> VContour &;
 
-    inline void Swap(VContour &contour) Q_DECL_NOTHROW
-    { std::swap(d, contour.d); }
+    VContour(VContour &&contour) noexcept;
+    auto operator=(VContour &&contour) noexcept -> VContour &;
 
-    void             SetContour(const QVector<QPointF> &contour);
-    QVector<QPointF> GetContour() const;
+    void CeateEmptySheetContour();
 
-    quint32 GetShift() const;
-    void    SetShift(quint32 shift);
+    void SetContour(const QVector<QPointF> &contour);
+    auto GetContour() const -> QVector<QPointF>;
 
-    int  GetHeight() const;
+    auto GetShift() const -> qreal;
+    void SetShift(qreal shift);
+
+    auto GetHeight() const -> int;
     void SetHeight(int height);
 
-    int  GetWidth() const;
+    auto GetWidth() const -> int;
     void SetWidth(int width);
 
-    QSizeF GetSize() const;
+    auto IsPortrait() const -> bool;
 
-    QVector<QPointF> UniteWithContour(const VLayoutPiece &detail, int globalI, int detJ, BestFrom type) const;
+    auto GetSize() const -> QSizeF;
 
-    QLineF EmptySheetEdge() const;
-    int    GlobalEdgesCount() const;
-    QLineF GlobalEdge(int i) const;
-    QVector<QPointF> CutEdge(const QLineF &edge) const;
-    QVector<QPointF> CutEmptySheetEdge() const;
+    auto UniteWithContour(const VLayoutPiece &detail, int globalI, int detJ, BestFrom type) const -> QVector<QPointF>;
 
-    const QPointF &	at(int i) const;
+    auto EmptySheetEdge() const -> QLineF;
+    auto GlobalEdgesCount() const -> vsizetype;
+    auto GlobalEdge(int i) const -> QLineF;
+    auto CutEdge(const QLineF &edge) const -> QVector<QPointF>;
+    auto CutEmptySheetEdge() const -> QVector<QPointF>;
 
-    QRectF BoundingRect() const;
-
-    QPainterPath ContourPath() const;
+    auto at(int i) const -> const QPointF &;
 
 private:
     QSharedDataPointer<VContourData> d;
 
     void AppendWhole(QVector<QPointF> &contour, const VLayoutPiece &detail, int detJ) const;
+    void InsertDetail(QVector<QPointF> &contour, const VLayoutPiece &detail, int detJ) const;
+
+    void ResetAttributes();
+
+    auto EmptySheetEdgesCount() const -> int;
 };
 
-Q_DECLARE_TYPEINFO(VContour, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VContour, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VCONTOUR_H

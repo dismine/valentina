@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef DIALOGUNIONDETAILS_H
 #define DIALOGUNIONDETAILS_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -40,7 +39,7 @@
 
 namespace Ui
 {
-    class DialogUnionDetails;
+class DialogUnionDetails;
 }
 
 /**
@@ -48,54 +47,59 @@ namespace Ui
  */
 class DialogUnionDetails : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
-    DialogUnionDetails(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual ~DialogUnionDetails() override;
+    DialogUnionDetails(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
+    ~DialogUnionDetails() override;
 
-    quint32          getD1() const;
-    quint32          getD2() const;
-    int        getIndexD1() const;
-    int        getIndexD2() const;
+    auto getD1() const -> quint32;
+    auto getD2() const -> quint32;
+    auto getIndexD1() const -> vsizetype;
+    auto getIndexD2() const -> vsizetype;
 
-    bool RetainPieces() const;
+    auto RetainPieces() const -> bool;
+
 public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type) override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
+
+protected:
+    auto IsValid() const -> bool final { return true; }
+
 private:
-    Q_DISABLE_COPY(DialogUnionDetails)
+    Q_DISABLE_COPY_MOVE(DialogUnionDetails) // NOLINT
 
     /** @brief ui keeps information about user interface */
     Ui::DialogUnionDetails *ui;
 
     /** @brief indexD1 index edge first detail */
-    int        indexD1;
+    vsizetype indexD1;
 
     /** @brief indexD2 index edge second detail */
-    int        indexD2;
+    vsizetype indexD2;
 
     /** @brief d1 id first detail */
-    quint32           d1;
+    quint32 d1;
 
     /** @brief d2 id second detail */
-    quint32           d2;
+    quint32 d2;
 
     /** @brief numberD number of detail, what we already have */
-    qint32           numberD;
+    qint32 numberD;
 
     /** @brief numberP number of points, what we already have */
-    qint32           numberP;
+    qint32 numberP;
 
     /** @brief p1 id first point of detail */
-    quint32           p1;
+    quint32 p1;
 
     /** @brief p2 id second point of detail */
-    quint32           p2;
+    quint32 p2;
 
-    bool             CheckObject(const quint32 &id, const quint32 &idDetail) const;
-    bool             CheckDetail(const quint32 &idDetail) const;
+    auto CheckObject(const quint32 &id, const quint32 &idDetail) const -> bool;
+    auto CheckDetail(const quint32 &idDetail) const -> bool;
 
-    void             ChoosedDetail(const quint32 &id, const SceneObject &type, quint32 &idDetail,
-                                   int &index);
+    void ChoosedDetail(const quint32 &id, const SceneObject &type, quint32 &idDetail, vsizetype &index);
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -103,7 +107,7 @@ private:
  * @brief getD1 return id first detail
  * @return id
  */
-inline quint32 DialogUnionDetails::getD1() const
+inline auto DialogUnionDetails::getD1() const -> quint32
 {
     return d1;
 }
@@ -113,7 +117,7 @@ inline quint32 DialogUnionDetails::getD1() const
  * @brief getD2 return id second detail
  * @return id
  */
-inline quint32 DialogUnionDetails::getD2() const
+inline auto DialogUnionDetails::getD2() const -> quint32
 {
     return d2;
 }
@@ -123,7 +127,7 @@ inline quint32 DialogUnionDetails::getD2() const
  * @brief getIndexD1 return index edge first detail
  * @return index
  */
-inline int DialogUnionDetails::getIndexD1() const
+inline auto DialogUnionDetails::getIndexD1() const -> vsizetype
 {
     return indexD1;
 }
@@ -133,7 +137,7 @@ inline int DialogUnionDetails::getIndexD1() const
  * @brief getIndexD2 return index edge second detail
  * @return index
  */
-inline int DialogUnionDetails::getIndexD2() const
+inline auto DialogUnionDetails::getIndexD2() const -> vsizetype
 {
     return indexD2;
 }

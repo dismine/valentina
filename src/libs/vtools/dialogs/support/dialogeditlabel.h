@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@
 
 namespace Ui
 {
-    class DialogEditLabel;
+class DialogEditLabel;
 }
 
 struct VLabelTemplateLine;
@@ -42,16 +42,17 @@ struct VLabelTemplateLine;
 class QMenu;
 class VAbstractPattern;
 class VPiece;
+class VContainer;
 
 class DialogEditLabel : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
-    explicit DialogEditLabel(VAbstractPattern *doc, QWidget *parent = nullptr);
-    virtual ~DialogEditLabel();
+    explicit DialogEditLabel(const VAbstractPattern *doc, const VContainer *data, QWidget *parent = nullptr);
+    ~DialogEditLabel() override;
 
-    QVector<VLabelTemplateLine> GetTemplate() const;
+    auto GetTemplate() const -> QVector<VLabelTemplateLine>;
     void SetTemplate(const QVector<VLabelTemplateLine> &lines);
 
     void SetPiece(const VPiece &piece);
@@ -71,18 +72,21 @@ private slots:
     void SaveAdditionalFontSize(int i);
 
 private:
-    Q_DISABLE_COPY(DialogEditLabel)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DialogEditLabel) // NOLINT
     Ui::DialogEditLabel *ui;
-    QMenu               *m_placeholdersMenu;
-    VAbstractPattern    *m_doc;
+    QMenu *m_placeholdersMenu;
+    const VAbstractPattern *m_doc;
+    const VContainer *m_data;
 
-    QMap<QString, QPair<QString, QString>> m_placeholders;
+    QMap<QString, QPair<QString, QString>> m_placeholders{};
 
     void SetupControls();
+    auto SortedActions() const -> QMap<QString, QString>;
     void InitPlaceholdersMenu();
     void InitPlaceholders();
 
-    QString ReplacePlaceholders(QString line) const;
+    auto ReplacePlaceholders(QString line) const -> QString;
 
     void InitPreviewLines(const QVector<VLabelTemplateLine> &lines);
 };

@@ -22,16 +22,17 @@
 #ifndef QMUTOKENPARSER_H
 #define QMUTOKENPARSER_H
 
-#include <qcompilerdetection.h>
 #include <QString>
 #include <QtGlobal>
 
-#include "../qmuparser/qmuparser_global.h"
 #include "qmuformulabase.h"
 #include "qmuparser_global.h"
 
 namespace qmu
 {
+
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
 
 class QMUPARSERSHARED_EXPORT QmuTokenParser : public QmuFormulaBase
 {
@@ -40,12 +41,17 @@ public:
                    const QMap<QString, QString> &translatedFunctions = QMap<QString, QString>());
     virtual ~QmuTokenParser() = default;
 
-    static bool IsSingle(const QString &formula);
+    static auto IsSingle(const QString &formula) -> bool;
+
+protected:
+    static auto Warning(const QString &warningMsg, qreal value) -> qreal;
 
 private:
-    Q_DISABLE_COPY(QmuTokenParser)
+    Q_DISABLE_COPY_MOVE(QmuTokenParser) // NOLINT
     QmuTokenParser();
 };
+
+QT_WARNING_POP
 
 } // namespace qmu
 

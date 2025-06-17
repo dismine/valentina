@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 #ifndef VISTOOLTRUEDARTS_H
 #define VISTOOLTRUEDARTS_H
 
-#include <qcompilerdetection.h>
+
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>
@@ -41,39 +41,73 @@
 
 class VisToolTrueDarts :public VisLine
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolTrueDarts(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolTrueDarts() = default;
+    ~VisToolTrueDarts() override = default;
 
-    virtual void RefreshGeometry() override;
+    void RefreshGeometry() override;
+    void VisualMode(quint32 id) override;
 
-    void setObject2Id(const quint32 &value);
-    void setD1PointId(const quint32 &value);
-    void setD2PointId(const quint32 &value);
-    void setD3PointId(const quint32 &value);
+    void SetBaseLineP1Id(quint32 value);
+    void SetBaseLineP2Id(quint32 value);
+    void SetD1PointId(quint32 value);
+    void SetD2PointId(quint32 value);
+    void SetD3PointId(quint32 value);
 
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolTrueDarts)};
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ToolTrueDarts)};
 private:
-    Q_DISABLE_COPY(VisToolTrueDarts)
-    quint32 baseLineP2Id;
-    quint32 dartP1Id;
-    quint32 dartP2Id;
-    quint32 dartP3Id;
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VisToolTrueDarts) // NOLINT
+    quint32 m_baseLineP1Id{NULL_ID};
+    quint32 m_baseLineP2Id{NULL_ID};
+    quint32 m_dartP1Id{NULL_ID};
+    quint32 m_dartP2Id{NULL_ID};
+    quint32 m_dartP3Id{NULL_ID};
 
-    VScaledEllipse *point1;
-    VScaledEllipse *point2;
-    VScaledEllipse *baseLineP1;
-    VScaledEllipse *baseLineP2;
-    VScaledEllipse *dartP1;
-    VScaledEllipse *dartP2;
-    VScaledEllipse *dartP3;
+    VScaledEllipse *m_point1{nullptr};
+    VScaledEllipse *m_point2{nullptr};
+    VScaledEllipse *m_baseLineP1{nullptr};
+    VScaledEllipse *m_baseLineP2{nullptr};
+    VScaledEllipse *m_dartP1{nullptr};
+    VScaledEllipse *m_dartP2{nullptr};
+    VScaledEllipse *m_dartP3{nullptr};
 
-    VScaledLine *lineblP1P1;
-    VScaledLine *lineblP2P2;
-    VScaledLine *p1d2;
-    VScaledLine *d2p2;
+    VScaledLine *m_lineblP1P1{nullptr};
+    VScaledLine *m_lineblP2P2{nullptr};
+    VScaledLine *m_p1d2{nullptr};
+    VScaledLine *m_d2p2{nullptr};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolTrueDarts::SetBaseLineP1Id(quint32 value)
+{
+    m_baseLineP1Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolTrueDarts::SetBaseLineP2Id(quint32 value)
+{
+    m_baseLineP2Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolTrueDarts::SetD1PointId(quint32 value)
+{
+    m_dartP1Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolTrueDarts::SetD2PointId(quint32 value)
+{
+    m_dartP2Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolTrueDarts::SetD3PointId(quint32 value)
+{
+    m_dartP3Id = value;
+}
 
 #endif // VISTOOLTRUEDARTS_H

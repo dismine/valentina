@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -26,161 +26,707 @@
  **
  *************************************************************************/
 
+#include <QApplication>
 #include <QDate>
+#include <QDebug>
 #include <QFileInfo>
+#include <QFlags> // QFlags<Qt::Alignment>
 #include <QFontMetrics>
 #include <QLatin1String>
 #include <QRegularExpression>
-#include <QApplication>
-#include <QDebug>
+#include <QtMath>
 
-#include "../ifc/xml/vabstractpattern.h"
-#include "../vpatterndb/floatItemData/vpiecelabeldata.h"
-#include "../vmisc/vabstractapplication.h"
-#include "../vmisc/vmath.h"
-#include "../vpatterndb/vcontainer.h"
+#include "../qmuparser/qmutokenparser.h"
+#include "../vmisc/svgfont/vsvgfont.h"
+#include "../vmisc/svgfont/vsvgfontdatabase.h"
+#include "../vmisc/svgfont/vsvgfontengine.h"
+#include "../vmisc/vabstractvalapplication.h"
+#include "../vmisc/vcommonsettings.h"
+#include "../vmisc/vtranslator.h"
+#include "../vpatterndb/calculator.h"
+#include "../vpatterndb/variables/vmeasurement.h"
+#include "../vpatterndb/variables/vpiecearea.h"
 #include "vtextmanager.h"
 
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief TextLine::TextLine default constructor
- */
-TextLine::TextLine()
-    : m_qsText(),
-      m_iFontSize(MIN_FONT_SIZE),
-      bold(false),
-      italic(false),
-      m_eAlign(Qt::AlignCenter)
-{}
-
-QList<TextLine> VTextManager::m_patternLabelLines = QList<TextLine>();
+using namespace Qt::Literals::StringLiterals;
 
 namespace
 {
+//---------------------------------------------------------------------------------------------------------------------
+auto FileBaseName(const QString &filePath) -> QString
+{
+    // Known suffixes to check for
+    QStringList const knownSuffixes = {".val", ".vst", ".vit"};
+
+    QFileInfo const fileInfo(filePath);
+
+    // Check if the file has one of the known suffixes
+    for (const QString &suffix : knownSuffixes)
+    {
+        if (fileInfo.completeSuffix().endsWith(suffix, Qt::CaseInsensitive))
+        {
+            // Remove the known suffix and return the modified file name
+            QString modifiedFileName = fileInfo.fileName();
+            modifiedFileName.chop(suffix.length());
+            return modifiedFileName;
+        }
+    }
+
+    // Fallback to QFileInfo::baseName if no known suffix is found
+    return fileInfo.baseName();
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-QMap<QString, QString> PreparePlaceholders(const VAbstractPattern *doc)
+auto SplitTextByWidth(const QString &text, const QFont &font, int maxWidth) -> QStringList
 {
-    SCASSERT(doc != nullptr)
-
-    QMap<QString, QString> placeholders;
-
-    // Pattern tags
-    QLocale locale(qApp->Settings()->GetLocale());
-
-    const QString date = locale.toString(QDate::currentDate(), doc->GetLabelDateFormat());
-    placeholders.insert(pl_date, date);
-
-    const QString time = locale.toString(QTime::currentTime(), doc->GetLabelTimeFormat());
-    placeholders.insert(pl_time, time);
-
-    placeholders.insert(pl_patternName, doc->GetPatternName());
-    placeholders.insert(pl_patternNumber, doc->GetPatternNumber());
-    placeholders.insert(pl_author, doc->GetCompanyName());
-
-    if (qApp->patternType() == MeasurementsType::Individual)
+    QFontMetrics const fontMetrics(font);
+    if (fontMetrics.horizontalAdvance(text) <= maxWidth)
     {
-        placeholders.insert(pl_customer, qApp->GetCustomerName());
-    }
-    else
-    {
-        placeholders.insert(pl_customer, doc->GetCustomerName());
+        return {text};
     }
 
-    placeholders.insert(pl_pExt, QString("val"));
-    placeholders.insert(pl_pFileName, QFileInfo(qApp->GetPatternPath()).baseName());
-    placeholders.insert(pl_mFileName, QFileInfo(doc->MPath()).baseName());
+    QStringList substrings;
+    substrings.reserve(2);
 
-    QString curSize;
-    QString curHeight;
-    QString mExt;
-    if (qApp->patternType() == MeasurementsType::Multisize)
+    const auto textLength = static_cast<int>(text.length());
+    int lineWidth = 0;
+
+    for (int endIndex = 0; endIndex < textLength; ++endIndex)
     {
-        curSize = QString::number(VContainer::size(valentinaNamespace));
-        curHeight = QString::number(VContainer::height(valentinaNamespace));
-        mExt = "vst";
-    }
-    else if (qApp->patternType() == MeasurementsType::Individual)
-    {
-        curSize = QString::number(VContainer::size(valentinaNamespace));
-        curHeight = QString::number(VContainer::height(valentinaNamespace));
-        mExt = "vit";
-    }
+        QChar const currentChar = text.at(endIndex);
+        const int charWidth = fontMetrics.horizontalAdvance(currentChar);
 
-    placeholders.insert(pl_size, curSize);
-    placeholders.insert(pl_height, curHeight);
-    placeholders.insert(pl_mExt, mExt);
-
-    const QMap<int, QString> materials = doc->GetPatternMaterials();
-    for (int i = 0; i < userMaterialPlaceholdersQuantity; ++i)
-    {
-        const QString number = QString::number(i + 1);
-
-        QString value;
-        if (materials.contains(i + 1))
+        if (lineWidth + charWidth > maxWidth)
         {
-            value = materials.value(i + 1);
+            if (endIndex > 0)
+            {
+                substrings.append(text.mid(0, endIndex));
+            }
+
+            if (endIndex < textLength)
+            {
+                substrings.append(text.mid(endIndex));
+            }
+
+            break;
         }
 
-        placeholders.insert(pl_userMaterial + number, value);
+        lineWidth += charWidth;
     }
 
-    // Piece tags
-    placeholders.insert(pl_pLetter, QString());
-    placeholders.insert(pl_pAnnotation, QString());
-    placeholders.insert(pl_pOrientation, QString());
-    placeholders.insert(pl_pRotation, QString());
-    placeholders.insert(pl_pTilt, QString());
-    placeholders.insert(pl_pFoldPosition, QString());
-    placeholders.insert(pl_pName, QString());
-    placeholders.insert(pl_pQuantity, QString());
-    placeholders.insert(pl_wOnFold, QString());
-    placeholders.insert(pl_mFabric, QObject::tr("Fabric"));
-    placeholders.insert(pl_mLining, QObject::tr("Lining"));
-    placeholders.insert(pl_mInterfacing, QObject::tr("Interfacing"));
-    placeholders.insert(pl_mInterlining, QObject::tr("Interlining"));
-    placeholders.insert(pl_wCut, QObject::tr("Cut"));
+    return substrings;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto SplitTextByWidth(const QString &text, const VSvgFont &font, int maxWidth, qreal penWidth) -> QStringList
+{
+    VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
+    VSvgFontEngine const engine = db->FontEngine(font);
+
+    if (engine.TextWidth(text, penWidth) <= maxWidth)
+    {
+        return {text};
+    }
+
+    QStringList substrings;
+    substrings.reserve(2);
+
+    const auto textLength = static_cast<int>(text.length());
+    qreal lineWidth = 0;
+
+    for (int endIndex = 0; endIndex < textLength; ++endIndex)
+    {
+        QChar const currentChar = text.at(endIndex);
+        const qreal charWidth = engine.TextWidth(currentChar, penWidth);
+
+        if (lineWidth + charWidth > maxWidth)
+        {
+            if (endIndex > 0)
+            {
+                substrings.append(text.mid(0, endIndex));
+            }
+
+            if (endIndex < textLength)
+            {
+                substrings.append(text.mid(endIndex));
+            }
+
+            break;
+        }
+
+        lineWidth += charWidth;
+    }
+
+    return substrings;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto LinePlaceholders(const QString &line) -> QSet<QString>
+{
+    QSet<QString> placeholders;
+
+    static const QRegularExpression pattern(QStringLiteral("(%[^%]+%)"));
+
+    QRegularExpressionMatchIterator matches = pattern.globalMatch(line);
+    while (matches.hasNext())
+    {
+        QRegularExpressionMatch const match = matches.next();
+        placeholders.insert(match.captured(1));
+    }
 
     return placeholders;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void InitPiecePlaceholders(QMap<QString, QString> &placeholders, const QString &name, const VPieceLabelData& data)
+auto UniquePlaceholders(const QVector<VLabelTemplateLine> &lines) -> QSet<QString>
 {
-    placeholders[pl_pLetter] = data.GetLetter();
-    placeholders[pl_pAnnotation] = data.GetAnnotation();
-    placeholders[pl_pOrientation] = data.GetOrientation();
-    placeholders[pl_pRotation] = data.GetRotationWay();
-    placeholders[pl_pTilt] = data.GetTilt();
-    placeholders[pl_pFoldPosition] = data.GetFoldPosition();
-    placeholders[pl_pName] = name;
-    placeholders[pl_pQuantity] = QString::number(data.GetQuantity());
+    QSet<QString> placeholders;
 
-    if (data.IsOnFold())
+    for (const auto &line : lines)
     {
-        placeholders[pl_wOnFold] = QObject::tr("on fold");
+        placeholders |= LinePlaceholders(line.line);
+    }
+
+    return placeholders;
+}
+} // namespace
+
+const quint32 TextLine::streamHeader = 0xA3881E49; // CRC-32Q string "TextLine"
+const quint16 TextLine::classVersion = 1;
+
+// Friend functions
+//---------------------------------------------------------------------------------------------------------------------
+auto operator<<(QDataStream &dataStream, const TextLine &data) -> QDataStream &
+{
+    dataStream << TextLine::streamHeader << TextLine::classVersion;
+
+    // Added in classVersion = 1
+    dataStream << data.m_qsText;
+    dataStream << data.m_iFontSize;
+    dataStream << data.m_bold;
+    dataStream << data.m_italic;
+    dataStream << data.m_eAlign;
+
+    // Added in classVersion = 2
+
+    return dataStream;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto operator>>(QDataStream &dataStream, TextLine &data) -> QDataStream &
+{
+    quint32 actualStreamHeader = 0;
+    dataStream >> actualStreamHeader;
+
+    if (actualStreamHeader != TextLine::streamHeader)
+    {
+        QString const message = QCoreApplication::tr("TextLine prefix mismatch error: actualStreamHeader = 0x%1 and "
+                                                     "streamHeader = 0x%2")
+                                    .arg(actualStreamHeader, 8, 0x10, '0'_L1)
+                                    .arg(TextLine::streamHeader, 8, 0x10, '0'_L1);
+        throw VException(message);
+    }
+
+    quint16 actualClassVersion = 0;
+    dataStream >> actualClassVersion;
+
+    if (actualClassVersion > TextLine::classVersion)
+    {
+        QString const message = QCoreApplication::tr("TextLine compatibility error: actualClassVersion = %1 and "
+                                                     "classVersion = %2")
+                                    .arg(actualClassVersion)
+                                    .arg(TextLine::classVersion);
+        throw VException(message);
+    }
+
+    dataStream >> data.m_qsText;
+    dataStream >> data.m_iFontSize;
+    dataStream >> data.m_bold;
+    dataStream >> data.m_italic;
+    dataStream >> data.m_eAlign;
+
+    //    if (actualClassVersion >= 2)
+    //    {
+
+    //    }
+
+    return dataStream;
+}
+
+const quint32 VTextManager::streamHeader = 0x47E6A9EE; // CRC-32Q string "VTextManager"
+const quint16 VTextManager::classVersion = 2;
+
+// Friend functions
+//---------------------------------------------------------------------------------------------------------------------
+auto operator<<(QDataStream &dataStream, const VTextManager &data) -> QDataStream &
+{
+    dataStream << VTextManager::streamHeader << VTextManager::classVersion;
+
+    // Added in classVersion = 1
+    dataStream << data.m_font;
+    dataStream << data.m_liLines;
+
+    // Added in classVersion = 2
+    dataStream << data.m_svgFontFamily;
+    dataStream << data.m_svgFontPointSize;
+
+    return dataStream;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto operator>>(QDataStream &dataStream, VTextManager &data) -> QDataStream &
+{
+    quint32 actualStreamHeader = 0;
+    dataStream >> actualStreamHeader;
+
+    if (actualStreamHeader != VTextManager::streamHeader)
+    {
+        QString const message =
+            QCoreApplication::tr("VTextManager prefix mismatch error: actualStreamHeader = 0x%1 and "
+                                 "streamHeader = 0x%2")
+                .arg(actualStreamHeader, 8, 0x10, '0'_L1)
+                .arg(VTextManager::streamHeader, 8, 0x10, '0'_L1);
+        throw VException(message);
+    }
+
+    quint16 actualClassVersion = 0;
+    dataStream >> actualClassVersion;
+
+    if (actualClassVersion > VTextManager::classVersion)
+    {
+        QString const message = QCoreApplication::tr("VTextManager compatibility error: actualClassVersion = %1 and "
+                                                     "classVersion = %2")
+                                    .arg(actualClassVersion)
+                                    .arg(VTextManager::classVersion);
+        throw VException(message);
+    }
+
+    dataStream >> data.m_font;
+    dataStream >> data.m_liLines;
+
+    if (actualClassVersion >= 2)
+    {
+        dataStream >> data.m_svgFontFamily;
+        dataStream >> data.m_svgFontPointSize;
+    }
+
+    return dataStream;
+}
+
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+void PrepareMeasurementsPlaceholders(const VPieceLabelInfo &info, QMap<QString, QString> &placeholders,
+                                     const QSet<QString> &uniquePlaceholders)
+{
+    auto AddPlaceholder = [&placeholders, uniquePlaceholders](const QString &name, const QString &value)
+    {
+        if (uniquePlaceholders.contains('%' + name + '%'))
+        {
+            placeholders.insert(name, value);
+        }
+    };
+
+    const QMap<QString, QSharedPointer<VMeasurement>> measurements = info.measurements;
+    auto i = measurements.constBegin();
+    while (i != measurements.constEnd())
+    {
+        AddPlaceholder(pl_measurement + i.key(), QString::number(*i.value()->GetValue()));
+        AddPlaceholder(pl_measurement + i.key() + pl_valueAlias, i.value()->GetValueAlias());
+        ++i;
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString ReplacePlaceholders(const QMap<QString, QString> &placeholders, QString line)
+void PrepareDimensionPlaceholders(const VPieceLabelInfo &info, QMap<QString, QString> &placeholders,
+                                  const QSet<QString> &uniquePlaceholders)
 {
-    QChar per('%');
+    auto AddPlaceholder = [&placeholders, uniquePlaceholders](const QString &name, const QString &value)
+    {
+        if (uniquePlaceholders.contains('%' + name + '%'))
+        {
+            placeholders.insert(name, value);
+        }
+    };
+
+    AddPlaceholder(pl_height, info.dimensionHeight);
+    AddPlaceholder(pl_dimensionX, info.dimensionHeight);
+
+    AddPlaceholder(pl_size, info.dimensionSize);
+    AddPlaceholder(pl_dimensionY, info.dimensionSize);
+
+    AddPlaceholder(pl_hip, info.dimensionHip);
+    AddPlaceholder(pl_dimensionZ, info.dimensionHip);
+
+    AddPlaceholder(pl_waist, info.dimensionWaist);
+    AddPlaceholder(pl_dimensionW, info.dimensionWaist);
+
+    AddPlaceholder(pl_heightLabel,
+                   not info.dimensionHeightLabel.isEmpty() ? info.dimensionHeightLabel : info.dimensionHeight);
+    AddPlaceholder(pl_dimensionXLabel,
+                   not info.dimensionHeightLabel.isEmpty() ? info.dimensionHeightLabel : info.dimensionHeight);
+    AddPlaceholder(pl_sizeLabel, not info.dimensionSizeLabel.isEmpty() ? info.dimensionSizeLabel : info.dimensionSize);
+    AddPlaceholder(pl_dimensionYLabel,
+                   not info.dimensionSizeLabel.isEmpty() ? info.dimensionSizeLabel : info.dimensionSize);
+    AddPlaceholder(pl_hipLabel, not info.dimensionHipLabel.isEmpty() ? info.dimensionHipLabel : info.dimensionHip);
+    AddPlaceholder(pl_dimensionZLabel,
+                   not info.dimensionHipLabel.isEmpty() ? info.dimensionHipLabel : info.dimensionHip);
+    AddPlaceholder(pl_waistLabel,
+                   not info.dimensionWaistLabel.isEmpty() ? info.dimensionWaistLabel : info.dimensionWaist);
+    AddPlaceholder(pl_dimensionWLabel,
+                   not info.dimensionWaistLabel.isEmpty() ? info.dimensionWaistLabel : info.dimensionWaist);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PrepareUserMaterialsPlaceholders(const VPieceLabelInfo &info, QMap<QString, QString> &placeholders,
+                                      const QSet<QString> &uniquePlaceholders)
+{
+    auto AddPlaceholder = [&placeholders, uniquePlaceholders](const QString &name, const QString &value)
+    {
+        if (uniquePlaceholders.contains('%' + name + '%'))
+        {
+            placeholders.insert(name, value);
+        }
+    };
+
+    for (int i = 0; i < userMaterialPlaceholdersQuantity; ++i)
+    {
+        const QString number = QString::number(i + 1);
+
+        QString value;
+        if (info.patternMaterials.contains(i + 1))
+        {
+            value = info.patternMaterials.value(i + 1);
+        }
+
+        AddPlaceholder(pl_userMaterial + number, value);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void AddMeasurementTokensToUniqueNames(const VFinalMeasurement &m, QSet<QString> &uniquePieceNames)
+{
+    QMap<vsizetype, QString> tokens;
+
+    try
+    {
+        QScopedPointer<qmu::QmuTokenParser> const cal(new qmu::QmuTokenParser(m.formula, false, false)); // Eval formula
+        tokens = cal->GetTokens(); // Tokens (variables, measurements)
+    }
+    catch (qmu::QmuParserError &)
+    {
+        // Skip formula errors
+    }
+
+    QMapIterator i(tokens);
+    while (i.hasNext())
+    {
+        i.next();
+        if (i.value().startsWith(pieceArea_))
+        {
+            QString name = i.value();
+            uniquePieceNames.insert(name.remove(0, pieceArea_.length()));
+        }
+        else if (i.value().startsWith(pieceSeamLineArea_))
+        {
+            QString name = i.value();
+            uniquePieceNames.insert(name.remove(0, pieceSeamLineArea_.length()));
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto ExtractUniquePieceNames(const VPieceLabelInfo &info, const QSet<QString> &uniquePlaceholders) -> QSet<QString>
+{
+    QSet<QString> uniquePieceNames;
+
+    if (uniquePlaceholders.contains('%' + pieceArea_ + info.labelData.GetAreaShortName() + '%') ||
+        uniquePlaceholders.contains('%' + pieceSeamLineArea_ + info.labelData.GetAreaShortName() + '%'))
+    {
+        uniquePieceNames.insert(info.labelData.GetAreaShortName());
+    }
+
+    const QVector<VFinalMeasurement> measurements = info.finalMeasurements;
+    for (const auto &m : measurements)
+    {
+        if (uniquePlaceholders.contains('%' + pl_finalMeasurement + m.name + '%'))
+        {
+            AddMeasurementTokensToUniqueNames(m, uniquePieceNames);
+        }
+    }
+
+    return uniquePieceNames;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PopulatePieceData(VContainer &completeData, const QSet<QString> &uniquePieceNames)
+{
+    const QHash<quint32, VPiece> *pieces = completeData.DataPieces();
+    Unit const patternUnits = VAbstractValApplication::VApp()->patternUnits();
+    QSet<QString> processedNames;
+
+    auto i = pieces->constBegin();
+    while (i != pieces->constEnd())
+    {
+        if (uniquePieceNames.contains(i.value().GetShortName()) && !processedNames.contains(i.value().GetShortName()))
+        {
+            completeData.AddVariable(QSharedPointer<VPieceArea>::create(PieceAreaType::External, i.key(), i.value(),
+                                                                        &completeData, patternUnits));
+            completeData.AddVariable(QSharedPointer<VPieceArea>::create(PieceAreaType::SeamLine, i.key(), i.value(),
+                                                                        &completeData, patternUnits));
+            processedNames.insert(i.value().GetShortName());
+        }
+        ++i;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void InsertPlaceholderValue(const VContainer &completeData, const QString &formula,
+                            QMap<QString, QString> &placeholders, const QString &placeholderKey,
+                            const QString &errorMsg)
+{
+    QScopedPointer<Calculator> const cal(new Calculator());
+
+    try
+    {
+        const qreal result = cal->EvalFormula(completeData.DataVariables(), formula);
+        placeholders.insert(placeholderKey, QString::number(result));
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        const QString error = QStringLiteral("%1 %2.").arg(errorMsg).arg(e.GetMsg());
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(error)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + error;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PreparePieceLabelPlaceholders(const VContainer &completeData, const VPieceLabelInfo &info,
+                                   QMap<QString, QString> &placeholders, const QSet<QString> &uniquePlaceholders)
+{
+    if (uniquePlaceholders.contains('%' + pl_currentArea + '%'))
+    {
+        InsertPlaceholderValue(completeData, pieceArea_ + info.labelData.GetAreaShortName(), placeholders,
+                               pl_currentArea, "Failed to prepare full piece area placeholder.");
+    }
+
+    if (uniquePlaceholders.contains('%' + pl_currentSeamLineArea + '%'))
+    {
+        InsertPlaceholderValue(completeData, pieceSeamLineArea_ + info.labelData.GetAreaShortName(), placeholders,
+                               pl_currentSeamLineArea, "Failed to prepare piece seam line area placeholder.");
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void SetEmptyPieceLabelPlaceholders(QMap<QString, QString> &placeholders, const QSet<QString> &uniquePlaceholders)
+{
+    if (uniquePlaceholders.contains('%' + pl_currentArea + '%'))
+    {
+        placeholders.insert(pl_currentArea, QString());
+    }
+
+    if (uniquePlaceholders.contains('%' + pl_currentSeamLineArea + '%'))
+    {
+        placeholders.insert(pl_currentSeamLineArea, QString());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void InsertMeasurementPlaceholder(const VContainer &completeData, const VFinalMeasurement &m, int index,
+                                  QMap<QString, QString> &placeholders)
+{
+    try
+    {
+        QScopedPointer<Calculator> const cal(new Calculator());
+        const qreal result = cal->EvalFormula(completeData.DataVariables(), m.formula);
+
+        placeholders.insert(pl_finalMeasurement + m.name, QString::number(result));
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        const QString errorMsg =
+            QObject::tr("Failed to prepare final measurement placeholder. Parser error at line %1: %2.")
+                .arg(index + 1)
+                .arg(e.GetMsg());
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(errorMsg)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PrepareFinalMeasurementPlaceholders(const VPieceLabelInfo &info, const VContainer &completeData,
+                                         QMap<QString, QString> &placeholders, const QSet<QString> &uniquePlaceholders)
+{
+    for (int i = 0; i < info.finalMeasurements.size(); ++i)
+    {
+        const VFinalMeasurement &m = info.finalMeasurements.at(i);
+
+        if (uniquePlaceholders.contains('%' + pl_finalMeasurement + m.name + '%'))
+        {
+            InsertMeasurementPlaceholder(completeData, m, i, placeholders);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PrepareFinalMeasurementsPlaceholders(bool pieceLabel, const VPieceLabelInfo &info,
+                                          QMap<QString, QString> &placeholders, const QSet<QString> &uniquePlaceholders)
+{
+    QSet<QString> uniquePieceNames = ExtractUniquePieceNames(info, uniquePlaceholders);
+
+    VContainer completeData = info.completeData;
+    PopulatePieceData(completeData, uniquePieceNames);
+
+    if (pieceLabel)
+    {
+        PreparePieceLabelPlaceholders(completeData, info, placeholders, uniquePlaceholders);
+    }
+    else
+    {
+        SetEmptyPieceLabelPlaceholders(placeholders, uniquePlaceholders);
+    }
+
+    PrepareFinalMeasurementPlaceholders(info, completeData, placeholders, uniquePlaceholders);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto PreparePlaceholders(const VPieceLabelInfo &info, const QSet<QString> &uniquePlaceholders, bool pieceLabel = false)
+    -> QMap<QString, QString>
+{
+    QMap<QString, QString> placeholders;
+
+    auto AddPlaceholder = [&placeholders, uniquePlaceholders](const QString &name, const QString &value)
+    {
+        if (uniquePlaceholders.contains('%' + name + '%'))
+        {
+            placeholders.insert(name, value);
+        }
+    };
+
+    // Pattern tags
+    AddPlaceholder(pl_date, info.locale.toString(QDate::currentDate(), info.labelDateFormat));
+    AddPlaceholder(pl_time, info.locale.toString(QTime::currentTime(), info.LabelTimeFormat));
+    AddPlaceholder(pl_patternName, info.patternName);
+    AddPlaceholder(pl_patternNumber, info.patternNumber);
+    AddPlaceholder(pl_author, info.companyName);
+
+    AddPlaceholder(pl_mUnits, UnitsToStr(info.measurementsUnits, true));
+    const QString pUnits = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
+    AddPlaceholder(pl_pUnits, pUnits);
+    AddPlaceholder(pl_mSizeUnits, UnitsToStr(info.dimensionSizeUnits, true));
+    AddPlaceholder(pl_areaUnits, pUnits + QStringLiteral("²"));
+
+    AddPlaceholder(pl_customer, info.customerName);
+    AddPlaceholder(pl_birthDate, info.locale.toString(info.customerBirthDate, info.labelDateFormat));
+    AddPlaceholder(pl_email, info.customerEmail);
+
+    AddPlaceholder(pl_pExt, QStringLiteral("val"));
+    AddPlaceholder(pl_pFileName, FileBaseName(VAbstractValApplication::VApp()->GetPatternPath()));
+    AddPlaceholder(pl_mFileName, FileBaseName(info.measurementsPath));
+
+    PrepareDimensionPlaceholders(info, placeholders, uniquePlaceholders);
+
+    AddPlaceholder(pl_mExt, info.measurementsType == MeasurementsType::Multisize ? QStringLiteral("vst")
+                                                                                 : QStringLiteral("vit"));
+
+    PrepareUserMaterialsPlaceholders(info, placeholders, uniquePlaceholders);
+    PrepareMeasurementsPlaceholders(info, placeholders, uniquePlaceholders);
+    PrepareFinalMeasurementsPlaceholders(pieceLabel, info, placeholders, uniquePlaceholders);
+
+    // Piece tags
+    if (QSharedPointer<VTranslator> const phTr = info.placeholderTranslator; !phTr.isNull())
+    {
+        AddPlaceholder(pl_mFabric, phTr->translate("Placeholder", "Fabric"));
+        AddPlaceholder(pl_mLining, phTr->translate("Placeholder", "Lining"));
+        AddPlaceholder(pl_mInterfacing, phTr->translate("Placeholder", "Interfacing"));
+        AddPlaceholder(pl_mInterlining, phTr->translate("Placeholder", "Interlining"));
+        AddPlaceholder(pl_wCut, phTr->translate("Placeholder", "Cut"));
+    }
+
+    return placeholders;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void InitPiecePlaceholders(QMap<QString, QString> &placeholders, const VPieceLabelInfo &info,
+                           const QSet<QString> &uniquePlaceholders)
+{
+    const VPieceLabelData data = info.labelData;
+
+    auto AddPlaceholder = [&placeholders, uniquePlaceholders](const QString &name, const QString &value)
+    {
+        if (uniquePlaceholders.contains('%' + name + '%'))
+        {
+            placeholders.insert(name, value);
+        }
+    };
+
+    AddPlaceholder(pl_pLetter, data.GetLetter());
+    AddPlaceholder(pl_pAnnotation, data.GetAnnotation());
+    AddPlaceholder(pl_pOrientation, data.GetOrientation());
+    AddPlaceholder(pl_pRotation, data.GetRotationWay());
+    AddPlaceholder(pl_pTilt, data.GetTilt());
+    AddPlaceholder(pl_pFoldPosition, data.GetFoldPosition());
+    AddPlaceholder(pl_pName, info.pieceName);
+    AddPlaceholder(pl_pQuantity, QString::number(data.GetQuantity()));
+
+    if (uniquePlaceholders.contains('%' + pl_wOnFold + '%'))
+    {
+        if (data.IsOnFold())
+        {
+            if (QSharedPointer<VTranslator> const phTr = info.placeholderTranslator; !phTr.isNull())
+            {
+                placeholders.insert(pl_wOnFold, phTr->translate("Placeholder", "on fold"));
+            }
+        }
+        else
+        {
+            placeholders.insert(pl_wOnFold, QString());
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto ReplacePlaceholders(const QMap<QString, QString> &placeholders, QString line) -> QString
+{
+    QChar const per('%');
+
+    auto TestDimension = [per, placeholders, line](const QString &placeholder, const QString &errorMsg)
+    {
+        if (line.contains(per + placeholder + per) && placeholders.value(placeholder) == '0'_L1)
+        {
+            VAbstractApplication::VApp()->IsPedantic()
+                ? throw VException(errorMsg)
+                : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        }
+    };
+
+    TestDimension(pl_height, QObject::tr("No data for the height dimension."));
+    TestDimension(pl_size, QObject::tr("No data for the size dimension."));
+    TestDimension(pl_hip, QObject::tr("No data for the hip dimension."));
+    TestDimension(pl_waist, QObject::tr("No data for the waist dimension."));
+
+    TestDimension(pl_dimensionX, QObject::tr("No data for the X dimension."));
+    TestDimension(pl_dimensionY, QObject::tr("No data for the Y dimension."));
+    TestDimension(pl_dimensionZ, QObject::tr("No data for the Z dimension."));
+    TestDimension(pl_dimensionW, QObject::tr("No data for the W dimension."));
+
     auto i = placeholders.constBegin();
     while (i != placeholders.constEnd())
     {
-        line.replace(per+i.key()+per, i.value());
+        line.replace(per + i.key() + per, i.value());
         ++i;
     }
     return line;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<TextLine> PrepareLines(const QVector<VLabelTemplateLine> &lines)
+auto PrepareLines(const QVector<VLabelTemplateLine> &lines) -> QVector<TextLine>
 {
-    QList<TextLine> textLines;
+    QVector<TextLine> textLines;
 
-    for (auto &line : lines)
+    for (const auto &line : lines)
     {
         if (not line.line.isEmpty())
         {
@@ -188,8 +734,8 @@ QList<TextLine> PrepareLines(const QVector<VLabelTemplateLine> &lines)
             tl.m_qsText = line.line;
             tl.m_eAlign = static_cast<Qt::Alignment>(line.alignment);
             tl.m_iFontSize = line.fontSizeIncrement;
-            tl.bold = line.bold;
-            tl.italic = line.italic;
+            tl.m_bold = line.bold;
+            tl.m_italic = line.italic;
 
             textLines << tl;
         }
@@ -197,39 +743,14 @@ QList<TextLine> PrepareLines(const QVector<VLabelTemplateLine> &lines)
 
     return textLines;
 }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VTextManager::VTextManager constructor
- */
-VTextManager::VTextManager()
-     : m_font(), m_liLines()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VTextManager::VTextManager(const VTextManager &text)
-    : m_font(text.GetFont()), m_liLines(text.GetAllSourceLines())
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VTextManager &VTextManager::operator=(const VTextManager &text)
-{
-    if ( &text == this )
-    {
-        return *this;
-    }
-    m_font = text.GetFont();
-    m_liLines = text.GetAllSourceLines();
-    return *this;
-}
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief GetSpacing returns the vertical spacing between the lines
  * @return spacing
  */
-int VTextManager::GetSpacing() const
+auto VTextManager::GetSpacing() const -> int
 {
     return 0;
 }
@@ -239,7 +760,7 @@ int VTextManager::GetSpacing() const
  * @brief SetFont set the text base font
  * @param font text base font
  */
-void VTextManager::SetFont(const QFont& font)
+void VTextManager::SetFont(const QFont &font)
 {
     m_font = font;
 }
@@ -249,9 +770,35 @@ void VTextManager::SetFont(const QFont& font)
  * @brief GetFont returns the text base font
  * @return text base font
  */
-const QFont& VTextManager::GetFont() const
+auto VTextManager::GetFont() const -> const QFont &
 {
     return m_font;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTextManager::SetSVGFontFamily(const QString &fontFamily)
+{
+    m_svgFontFamily = fontFamily;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTextManager::GetSVGFontFamily() const -> QString
+{
+    return m_svgFontFamily;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTextManager::SetSVGFontPointSize(int pointSize)
+{
+    m_svgFontPointSize = pointSize < VCommonSettings::MinPieceLabelFontPointSize()
+                             ? VCommonSettings::MinPieceLabelFontPointSize()
+                             : pointSize;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTextManager::GetSVGFontPointSize() const -> int
+{
+    return m_svgFontPointSize;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -261,13 +808,21 @@ const QFont& VTextManager::GetFont() const
  */
 void VTextManager::SetFontSize(int iFS)
 {
-    iFS < MIN_FONT_SIZE ? m_font.setPixelSize(MIN_FONT_SIZE) : m_font.setPixelSize(iFS);
+    iFS < VCommonSettings::MinPieceLabelFontPointSize()
+        ? m_font.setPointSize(qMax(VCommonSettings::MinPieceLabelFontPointSize(), 1))
+        : m_font.setPointSize(qMax(iFS, 1));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<TextLine> VTextManager::GetAllSourceLines() const
+auto VTextManager::GetAllSourceLines() const -> QVector<TextLine>
 {
     return m_liLines;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTextManager::SetAllSourceLines(const QVector<TextLine> &lines)
+{
+    m_liLines = lines;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -275,7 +830,7 @@ QList<TextLine> VTextManager::GetAllSourceLines() const
  * @brief VTextManager::GetSourceLinesCount returns the number of input text lines
  * @return number of text lines that were added to the list by calling AddLine
  */
-int VTextManager::GetSourceLinesCount() const
+auto VTextManager::GetSourceLinesCount() const -> vsizetype
 {
     return m_liLines.count();
 }
@@ -286,7 +841,7 @@ int VTextManager::GetSourceLinesCount() const
  * @param i index of the requested line
  * @return reference to the requested TextLine object
  */
-const TextLine& VTextManager::GetSourceLine(int i) const
+auto VTextManager::GetSourceLine(vsizetype i) const -> const TextLine &
 {
     Q_ASSERT(i >= 0);
     Q_ASSERT(i < m_liLines.count());
@@ -294,82 +849,107 @@ const TextLine& VTextManager::GetSourceLine(int i) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VTextManager::FitFontSize sets the font size just big enough, so that the text fits into rectangle of
- * size (fW, fH)
- * @param fW rectangle width
- * @param fH rectangle height
- */
-void VTextManager::FitFontSize(qreal fW, qreal fH)
+auto VTextManager::GetLabelSourceLines(int width, const QFont &font) const -> QVector<TextLine>
 {
-    int iFS = 0;
-    if (GetSourceLinesCount() > 0)
-    {//division by zero
-        iFS = 3*qFloor(fH/GetSourceLinesCount())/4;
-    }
+    QVector<TextLine> lines;
+    lines.reserve(m_liLines.size());
+    QFont fnt = font;
+    int const fSize = m_font.pointSize();
 
-    if (iFS < MIN_FONT_SIZE)
+    for (const auto &tl : m_liLines)
     {
-        iFS = MIN_FONT_SIZE;
-    }
-
-    // get ratio between char width and height
-
-    int iMaxLen = 0;
-    TextLine maxLine;
-    QFont fnt;
-    for (int i = 0; i < GetSourceLinesCount(); ++i)
-    {
-        const TextLine& tl = GetSourceLine(i);
-        fnt = m_font;
-        fnt.setPixelSize(iFS + tl.m_iFontSize);
-        fnt.setBold(tl.bold);
-        fnt.setItalic(tl.italic);
-        QFontMetrics fm(fnt);
-        const int iTW = fm.width(tl.m_qsText);
-        if (iTW > iMaxLen)
+        fnt.setPointSize(qMax(fSize + tl.m_iFontSize, 1));
+        if (!VAbstractApplication::VApp()->Settings()->GetSingleStrokeOutlineFont())
         {
-            iMaxLen = iTW;
-            maxLine = tl;
+            fnt.setBold(tl.m_bold);
+        }
+        fnt.setItalic(tl.m_italic);
+
+        QString const qsText = tl.m_qsText;
+        if (HorizontalAdvance(qsText, fnt) > width)
+        {
+            const QStringList brokeLines = BreakTextIntoLines(qsText, fnt, width);
+            for (const auto &lineText : brokeLines)
+            {
+                TextLine line = tl;
+                line.m_qsText = lineText;
+                lines.append(line);
+            }
+        }
+        else
+        {
+            lines.append(tl);
         }
     }
-    if (iMaxLen > fW)
-    {
-        QFont fnt = m_font;
-        fnt.setBold(maxLine.bold);
-        fnt.setItalic(maxLine.italic);
+    return lines;
+}
 
-        int lineLength = 0;
-        do
-        {
-            --iFS;
-            fnt.setPixelSize(iFS + maxLine.m_iFontSize);
-            QFontMetrics fm(fnt);
-            lineLength = fm.width(maxLine.m_qsText);
-        }
-        while (lineLength > fW && iFS > MIN_FONT_SIZE);
+//---------------------------------------------------------------------------------------------------------------------
+auto VTextManager::GetLabelSourceLines(int width, const VSvgFont &font, qreal penWidth) const -> QVector<TextLine>
+{
+    if (!font.IsValid())
+    {
+        return m_liLines;
     }
-    SetFontSize(iFS);
+
+    VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
+    QVector<TextLine> lines;
+    lines.reserve(m_liLines.size());
+    int const fSize = m_font.pointSize();
+
+    for (const auto &tl : m_liLines)
+    {
+        VSvgFont lineFont = font;
+        lineFont.SetPointSize(fSize + tl.m_iFontSize);
+        lineFont.SetBold(tl.m_bold);
+        lineFont.SetItalic(tl.m_italic);
+
+        VSvgFontEngine const engine = db->FontEngine(lineFont);
+
+        VSvgFont const svgFont = engine.Font();
+        if (!svgFont.IsValid())
+        {
+            lines.append(tl);
+            continue;
+        }
+
+        QString const qsText = tl.m_qsText;
+        if (engine.TextWidth(qsText, penWidth) > width)
+        {
+            const QStringList brokeLines = BreakTextIntoLines(qsText, svgFont, width, penWidth);
+            for (const auto &lineText : brokeLines)
+            {
+                TextLine line = tl;
+                line.m_qsText = lineText;
+                lines.append(line);
+            }
+        }
+        else
+        {
+            lines.append(tl);
+        }
+    }
+    return lines;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VTextManager::Update updates the text lines with detail data
- * @param qsName detail name
- * @param data reference to the detail data
  */
-void VTextManager::Update(const QString& qsName, const VPieceLabelData& data)
+void VTextManager::UpdatePieceLabelInfo(const VPieceLabelInfo &info)
 {
     m_liLines.clear();
 
-    QMap<QString, QString> placeholders = PreparePlaceholders(qApp->getCurrentDocument());
-    InitPiecePlaceholders(placeholders, qsName, data);
+    QSet<QString> const uniquePlaceholders = UniquePlaceholders(info.labelData.GetLabelTemplate());
 
-    QVector<VLabelTemplateLine> lines = data.GetLabelTemplate();
+    QMap<QString, QString> placeholders = PreparePlaceholders(info, uniquePlaceholders, true);
+    InitPiecePlaceholders(placeholders, info, uniquePlaceholders);
 
-    for (int i=0; i<lines.size(); ++i)
+    QVector<VLabelTemplateLine> lines = info.labelData.GetLabelTemplate();
+
+    for (auto &line : lines)
     {
-        lines[i].line = ReplacePlaceholders(placeholders, lines.at(i).line);
+        line.line = ReplacePlaceholders(placeholders, line.line);
     }
 
     m_liLines = PrepareLines(lines);
@@ -378,30 +958,314 @@ void VTextManager::Update(const QString& qsName, const VPieceLabelData& data)
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VTextManager::Update updates the text lines with pattern info
- * @param pDoc pointer to the abstract pattern object
  */
-void VTextManager::Update(VAbstractPattern *pDoc)
+void VTextManager::UpdatePatternLabelInfo(const VPieceLabelInfo &info)
 {
     m_liLines.clear();
 
-    if (m_patternLabelLines.isEmpty() || pDoc->GetPatternWasChanged())
+    QVector<VLabelTemplateLine> lines = info.patternLabelTemplate;
+    if (lines.isEmpty())
     {
-        QVector<VLabelTemplateLine> lines = pDoc->GetPatternLabelTemplate();
-        if (lines.isEmpty() && m_patternLabelLines.isEmpty())
-        {
-            return; // Nothing to parse
-        }
-
-        const QMap<QString, QString> placeholders = PreparePlaceholders(pDoc);
-
-        for (int i=0; i<lines.size(); ++i)
-        {
-            lines[i].line = ReplacePlaceholders(placeholders, lines.at(i).line);
-        }
-
-        pDoc->SetPatternWasChanged(false);
-        m_patternLabelLines = PrepareLines(lines);
+        return; // Nothing to parse
     }
 
-    m_liLines = m_patternLabelLines;
+    QSet<QString> const uniquePlaceholders = UniquePlaceholders(lines);
+
+    QMap<QString, QString> placeholders = PreparePlaceholders(info, uniquePlaceholders);
+
+    if (QSharedPointer<VTranslator> const phTr = info.placeholderTranslator; !phTr.isNull())
+    {
+        // These placeholders must be available only in piece label
+        const QString errorValue = '<' + phTr->translate("Placeholder", "Error") + '>';
+        auto AddPlaceholder = [&placeholders, uniquePlaceholders, errorValue](const QString &name, const QString &value)
+        {
+            const QString placeholder = '%' + name + '%';
+            if (uniquePlaceholders.contains(placeholder))
+            {
+                const QString errorMsg =
+                    QObject::tr("Incorrect use of placeholder %1. This placeholder is not available in pattern label.")
+                        .arg(placeholder);
+                VAbstractApplication::VApp()->IsPedantic()
+                    ? throw VException(errorMsg)
+                    : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+
+                placeholders.insert(name, value);
+            }
+        };
+
+        AddPlaceholder(pl_pLetter, errorValue);
+        AddPlaceholder(pl_pAnnotation, errorValue);
+        AddPlaceholder(pl_pOrientation, errorValue);
+        AddPlaceholder(pl_pRotation, errorValue);
+        AddPlaceholder(pl_pTilt, errorValue);
+        AddPlaceholder(pl_pFoldPosition, errorValue);
+        AddPlaceholder(pl_pName, errorValue);
+        AddPlaceholder(pl_pQuantity, errorValue);
+        AddPlaceholder(pl_wOnFold, errorValue);
+    }
+
+    for (auto &line : lines)
+    {
+        line.line = ReplacePlaceholders(placeholders, line.line);
+    }
+
+    m_liLines = PrepareLines(lines);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTextManager::BreakTextIntoLines(const QString &text, const QFont &font, int maxWidth) -> QStringList
+{
+    QStringList words = text.split(' ');
+
+    QString currentLine;
+    int currentLineWidth = 0;
+    const int spaceWidth = HorizontalAdvance(QChar(' '), font);
+    const float tolerance = 0.3F;
+
+    QStringList lines;
+    lines.reserve(words.size());
+    QMutableListIterator iterator(words);
+
+    auto AppendWord = [&currentLine, &currentLineWidth](const QString &word, int totalWidth)
+    {
+        if (!currentLine.isEmpty())
+        {
+            currentLine += ' '_L1;
+        }
+        currentLine += word;
+        currentLineWidth = totalWidth;
+    };
+
+    while (iterator.hasNext())
+    {
+        const QString &word = iterator.next();
+        int const wordWidth = HorizontalAdvance(word, font);
+        int const totalWidth = !currentLine.isEmpty() ? currentLineWidth + spaceWidth + wordWidth : wordWidth;
+
+        if (totalWidth <= maxWidth)
+        {
+            // Append the word to the current line
+            AppendWord(word, totalWidth);
+        }
+        else if ((maxWidth - currentLineWidth) <= qRound(static_cast<float>(maxWidth) * tolerance) &&
+                 maxWidth >= wordWidth)
+        {
+            // Start a new line with the word if it doesn't exceed the tolerance
+            lines.append(currentLine);
+            currentLine = word;
+            currentLineWidth = wordWidth;
+        }
+        else
+        {
+            // Word is too long, force line break
+            if (currentLineWidth + spaceWidth + HorizontalAdvance(word.at(0), font) > maxWidth)
+            {
+                lines.append(currentLine);
+                currentLine.clear();
+                currentLineWidth = 0;
+            }
+
+            const int subWordWidth = !currentLine.isEmpty() ? maxWidth - (currentLineWidth + spaceWidth) : maxWidth;
+            const QStringList subWords = SplitTextByWidth(word, font, subWordWidth);
+
+            if (subWords.isEmpty() || subWords.size() > 2)
+            {
+                AppendWord(word, totalWidth);
+            }
+            else
+            {
+                const int width = HorizontalAdvance(subWords.constFirst(), font);
+                const int tWidth = !currentLine.isEmpty() ? currentLineWidth + spaceWidth + width : width;
+                AppendWord(subWords.constFirst(), tWidth);
+                lines.append(currentLine);
+
+                if (subWords.size() == 2)
+                {
+                    currentLine.clear();
+                    currentLineWidth = 0;
+
+                    // Insert the item after the current item
+                    iterator.insert(subWords.constLast());
+                    iterator.previous();
+                }
+            }
+        }
+    }
+
+    // Add the last line
+    if (!currentLine.isEmpty())
+    {
+        lines.append(currentLine);
+    }
+
+    return lines;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTextManager::BreakTextIntoLines(const QString &text, const VSvgFont &font, int maxWidth, qreal penWidth) const
+    -> QStringList
+{
+    VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
+
+    VSvgFontEngine const engine = db->FontEngine(font);
+
+    VSvgFont const svgFont = engine.Font();
+    if (!svgFont.IsValid())
+    {
+        return {text};
+    }
+
+    QStringList words = text.split(' ');
+
+    QString currentLine;
+    int currentLineWidth = 0;
+    const int spaceWidth = qRound(engine.TextWidth(QChar(' ')));
+    const float tolerance = 0.3F;
+
+    QStringList lines;
+    lines.reserve(words.size());
+    QMutableListIterator iterator(words);
+
+    auto AppendWord = [&currentLine, &currentLineWidth](const QString &word, int totalWidth)
+    {
+        if (!currentLine.isEmpty())
+        {
+            currentLine += ' '_L1;
+        }
+        currentLine += word;
+        currentLineWidth = totalWidth;
+    };
+
+    while (iterator.hasNext())
+    {
+        const QString &word = iterator.next();
+        int const wordWidth = qRound(engine.TextWidth(word, penWidth));
+        int const totalWidth = !currentLine.isEmpty() ? currentLineWidth + spaceWidth + wordWidth : wordWidth;
+
+        if (totalWidth <= maxWidth)
+        {
+            // Append the word to the current line
+            AppendWord(word, totalWidth);
+        }
+        else if ((maxWidth - currentLineWidth) <= qFloor(static_cast<float>(maxWidth) * tolerance) &&
+                 maxWidth >= wordWidth)
+        {
+            // Start a new line with the word if it doesn't exceed the tolerance
+            lines.append(currentLine);
+            currentLine = word;
+            currentLineWidth = wordWidth;
+        }
+        else
+        {
+            // Word is too long, force line break
+            if (currentLineWidth + spaceWidth + engine.TextWidth(word.at(0), penWidth) > maxWidth)
+            {
+                lines.append(currentLine);
+                currentLine.clear();
+                currentLineWidth = 0;
+            }
+
+            const int subWordWidth = !currentLine.isEmpty() ? maxWidth - (currentLineWidth + spaceWidth) : maxWidth;
+            const QStringList subWords = SplitTextByWidth(word, svgFont, subWordWidth, penWidth);
+
+            if (subWords.isEmpty() || subWords.size() > 2)
+            {
+                AppendWord(word, totalWidth);
+            }
+            else
+            {
+                const int width = qRound(engine.TextWidth(subWords.constFirst(), penWidth));
+                const int tWidth = !currentLine.isEmpty() ? currentLineWidth + spaceWidth + width : width;
+                AppendWord(subWords.constFirst(), tWidth);
+                lines.append(currentLine);
+
+                if (subWords.size() == 2)
+                {
+                    currentLine.clear();
+                    currentLineWidth = 0;
+
+                    // Insert the item after the current item
+                    iterator.insert(subWords.constLast());
+                    iterator.previous();
+                }
+            }
+        }
+    }
+
+    // Add the last line
+    if (!currentLine.isEmpty())
+    {
+        lines.append(currentLine);
+    }
+
+    return lines;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTextManager::PrepareLabelInfo(const VAbstractPattern *doc, const VContainer *pattern, bool pieceLabel)
+    -> VPieceLabelInfo
+{
+    VPieceLabelInfo info(doc->GetCompleteData());
+    info.measurements = pattern->DataMeasurements();
+    info.finalMeasurements = doc->GetFinalMeasurements();
+    info.locale = QLocale(VAbstractApplication::VApp()->Settings()->GetLocale());
+    info.labelDateFormat = doc->GetLabelDateFormat();
+    info.LabelTimeFormat = doc->GetLabelTimeFormat();
+    info.patternName = doc->GetPatternName();
+    info.patternNumber = doc->GetPatternNumber();
+    info.companyName = doc->GetCompanyName();
+    info.measurementsUnits = VAbstractValApplication::VApp()->MeasurementsUnits();
+    info.dimensionSizeUnits = VAbstractValApplication::VApp()->DimensionSizeUnits();
+    info.measurementsPath = doc->MPath();
+    info.placeholderTranslator = VAbstractApplication::VApp()->GetPlaceholderTranslator();
+    info.measurementsType = VAbstractValApplication::VApp()->GetMeasurementsType();
+
+    if (info.measurementsType == MeasurementsType::Individual)
+    {
+        info.customerName = VAbstractValApplication::VApp()->GetCustomerName();
+        info.customerBirthDate = VAbstractValApplication::VApp()->GetCustomerBirthDate();
+        info.customerEmail = VAbstractValApplication::VApp()->CustomerEmail();
+    }
+    else
+    {
+        info.customerName = doc->GetCustomerName();
+        info.customerBirthDate = doc->GetCustomerBirthDate();
+        info.customerEmail = doc->GetCustomerEmail();
+    }
+
+    info.dimensionHeight = QString::number(VAbstractValApplication::VApp()->GetDimensionHeight());
+    info.dimensionSize = QString::number(VAbstractValApplication::VApp()->GetDimensionSize());
+    info.dimensionHip = QString::number(VAbstractValApplication::VApp()->GetDimensionHip());
+    info.dimensionWaist = QString::number(VAbstractValApplication::VApp()->GetDimensionWaist());
+    info.dimensionHeightLabel = VAbstractValApplication::VApp()->GetDimensionHeightLabel();
+    info.dimensionSizeLabel = VAbstractValApplication::VApp()->GetDimensionSizeLabel();
+    info.dimensionHipLabel = VAbstractValApplication::VApp()->GetDimensionHipLabel();
+    info.dimensionWaistLabel = VAbstractValApplication::VApp()->GetDimensionWaistLabel();
+    info.patternMaterials = doc->GetPatternMaterials();
+    if (!pieceLabel)
+    {
+        info.patternLabelTemplate = doc->GetPatternLabelTemplate();
+    }
+
+    return info;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTextManager::HorizontalAdvance(const QString &text, const QFont &font) -> int
+{
+    const VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    qreal const penWidth = VAbstractApplication::VApp()->Settings()->WidthHairLine();
+
+    QFontMetrics const fm(font);
+    if (settings->GetSingleStrokeOutlineFont())
+    {
+        int w = 0;
+        for (auto c : qAsConst(text))
+        {
+            w += fm.horizontalAdvance(c) + qRound(penWidth / 2.0);
+        }
+
+        return w;
+    }
+    return fm.horizontalAdvance(text);
 }

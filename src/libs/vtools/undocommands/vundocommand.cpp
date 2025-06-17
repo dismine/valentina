@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -28,21 +28,31 @@
 
 #include "vundocommand.h"
 
-#include <QDomNode>
 #include <QApplication>
+#include <QDomNode>
 
 #include "../ifc/ifcdef.h"
-#include "../vmisc/def.h"
-#include "../vmisc/customevents.h"
-#include "../vpatterndb/vnodedetail.h"
-#include "../vpatterndb/vpiecenode.h"
 #include "../tools/drawTools/operation/vabstractoperation.h"
+#include "../vmisc/customevents.h"
+#include "../vmisc/def.h"
+#include "../vpatterndb/vpiecenode.h"
 
-Q_LOGGING_CATEGORY(vUndo, "v.undo")
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
+QT_WARNING_DISABLE_INTEL(1418)
+
+Q_LOGGING_CATEGORY(vUndo, "v.undo") // NOLINT
+
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 VUndoCommand::VUndoCommand(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent)
-    :QObject(), QUndoCommand(parent), xml(xml), doc(doc), nodeId(NULL_ID), redoFlag(false)
+  : QObject(),
+    QUndoCommand(parent),
+    xml(xml),
+    doc(doc),
+    nodeId(NULL_ID),
+    redoFlag(false)
 {
     SCASSERT(doc != nullptr)
 }
@@ -62,7 +72,7 @@ void VUndoCommand::RedoFullParsing()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VUndoCommand::UndoDeleteAfterSibling(QDomNode &parentNode, const quint32 &siblingId) const
+void VUndoCommand::UndoDeleteAfterSibling(QDomNode &parentNode, quint32 siblingId, const QString &tagName) const
 {
     if (siblingId == NULL_ID)
     {
@@ -70,8 +80,9 @@ void VUndoCommand::UndoDeleteAfterSibling(QDomNode &parentNode, const quint32 &s
     }
     else
     {
-        const QDomElement refElement = doc->NodeById(siblingId);
+        const QDomElement refElement = doc->NodeById(siblingId, tagName);
         parentNode.insertAfter(xml, refElement);
+        doc->RefreshElementIdCache();
     }
 }
 
@@ -111,6 +122,7 @@ void VUndoCommand::DecrementReferences(const QVector<quint32> &nodes) const
 void VUndoCommand::IncrementReferences(const QVector<CustomSARecord> &nodes) const
 {
     QVector<quint32> n;
+    n.reserve(nodes.size());
 
     for (qint32 i = 0; i < nodes.size(); ++i)
     {
@@ -124,6 +136,7 @@ void VUndoCommand::IncrementReferences(const QVector<CustomSARecord> &nodes) con
 void VUndoCommand::DecrementReferences(const QVector<CustomSARecord> &nodes) const
 {
     QVector<quint32> n;
+    n.reserve(nodes.size());
 
     for (qint32 i = 0; i < nodes.size(); ++i)
     {
@@ -137,6 +150,7 @@ void VUndoCommand::DecrementReferences(const QVector<CustomSARecord> &nodes) con
 void VUndoCommand::IncrementReferences(const QVector<VPieceNode> &nodes) const
 {
     QVector<quint32> n;
+    n.reserve(nodes.size());
 
     for (qint32 i = 0; i < nodes.size(); ++i)
     {
@@ -150,6 +164,7 @@ void VUndoCommand::IncrementReferences(const QVector<VPieceNode> &nodes) const
 void VUndoCommand::DecrementReferences(const QVector<VPieceNode> &nodes) const
 {
     QVector<quint32> n;
+    n.reserve(nodes.size());
 
     for (qint32 i = 0; i < nodes.size(); ++i)
     {
@@ -160,9 +175,9 @@ void VUndoCommand::DecrementReferences(const QVector<VPieceNode> &nodes) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VUndoCommand::GetDestinationObject(quint32 idTool, quint32 idPoint) const
+auto VUndoCommand::GetDestinationObject(quint32 idTool, quint32 idPoint) const -> QDomElement
 {
-    const QDomElement tool = doc->elementById(idTool, VAbstractPattern::TagOperation);
+    const QDomElement tool = doc->FindElementById(idTool, VAbstractPattern::TagOperation);
     if (tool.isElement())
     {
         QDomElement correctDest;
@@ -185,7 +200,7 @@ QDomElement VUndoCommand::GetDestinationObject(quint32 idTool, quint32 idPoint) 
                 const QDomElement obj = destObjects.at(i).toElement();
                 if (not obj.isNull() && obj.isElement())
                 {
-                    const quint32 id = doc->GetParametrUInt(obj, AttrIdObject, NULL_ID_STR);
+                    const quint32 id = VAbstractPattern::GetParametrUInt(obj, AttrIdObject, NULL_ID_STR);
                     if (idPoint == id)
                     {
                         return obj;
@@ -195,5 +210,5 @@ QDomElement VUndoCommand::GetDestinationObject(quint32 idTool, quint32 idPoint) 
         }
     }
 
-    return QDomElement();
+    return {};
 }

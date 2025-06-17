@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef VMEASUREMENTS_H
 #define VMEASUREMENTS_H
 
-#include <qcompilerdetection.h>
 #include <QCoreApplication>
 #include <QDomElement>
 #include <QString>
@@ -38,72 +37,116 @@
 
 #include "../ifc/xml/vdomdocument.h"
 #include "../vmisc/def.h"
-#include "../vpatterndb/vcontainer.h"
+#include "vdimensions.h"
 
-enum class GenderType : char { Male, Female, Unknown };
+class VContainer;
+class VPatternImage;
+class VMeasurement;
+
+enum class GenderType : qint8
+{
+    Male,
+    Female,
+    Unknown
+};
+
+using VDimensions = QMap<MeasurementDimension, MeasurementDimension_p>;
 
 class VMeasurements : public VDomDocument
 {
-    Q_DECLARE_TR_FUNCTIONS(VMeasurements)
+    Q_OBJECT // NOLINT
+
 public:
-    explicit VMeasurements(VContainer *data);
-    VMeasurements(Unit unit, VContainer *data);
-    VMeasurements(Unit unit, int baseSize, int baseHeight, VContainer *data);
-    virtual ~VMeasurements() Q_DECL_EQ_DEFAULT;
+    explicit VMeasurements(VContainer *data, QObject *parent = nullptr);
+    VMeasurements(Unit unit, VContainer *data, QObject *parent = nullptr);
+    VMeasurements(Unit unit, const QVector<MeasurementDimension_p> &dimensions, VContainer *data,
+                  QObject *parent = nullptr);
+    ~VMeasurements() override = default;
 
-    virtual void setXMLContent(const QString &fileName) override;
-    virtual bool SaveDocument(const QString &fileName, QString &error) override;
+    void setXMLContent(const QString &fileName) override;
+    auto SaveDocument(const QString &fileName, QString &error) -> bool override;
 
-    void AddEmpty(const QString &name, const QString &formula = QString());
-    void AddEmptyAfter(const QString &after, const QString &name, const QString &formula = QString());
+    void AddEmpty(const QString &name, const QString &formula = QString(), bool specialUnits = false);
+    void AddEmptyAfter(const QString &after, const QString &name, const QString &formula = QString(),
+                       bool specialUnits = false);
+    void AddSeparator(const QString &name);
+    void AddSeparatorAfter(const QString &after, const QString &name);
     void Remove(const QString &name);
     void MoveTop(const QString &name);
     void MoveUp(const QString &name);
     void MoveDown(const QString &name);
     void MoveBottom(const QString &name);
 
-    void ReadMeasurements(qreal height, qreal size) const;
+    auto Units() const -> Unit;
+
+    void StoreNames(bool store);
+
+    void ReadMeasurements(qreal baseA, qreal baseB = 0, qreal baseC = 0) const;
     void ClearForExport();
 
-    MeasurementsType Type() const;
-    int BaseSize() const;
-    int BaseHeight() const;
+    auto Type() const -> MeasurementsType;
+    auto DimensionABase() const -> qreal;
+    auto DimensionBBase() const -> qreal;
+    auto DimensionCBase() const -> qreal;
 
-    QString Notes() const;
-    void    SetNotes(const QString &text);
+    auto DimensionAStep() const -> qreal;
+    auto DimensionBStep() const -> qreal;
+    auto DimensionCStep() const -> qreal;
 
-    QString Customer() const;
-    void    SetCustomer(const QString &text);
+    auto Notes() const -> QString;
+    void SetNotes(const QString &text);
 
-    QDate   BirthDate() const;
-    void    SetBirthDate(const QDate &date);
+    auto Customer() const -> QString;
+    void SetCustomer(const QString &text);
 
-    GenderType Gender() const;
-    void    SetGender(const GenderType &gender);
+    auto BirthDate() const -> QDate;
+    void SetBirthDate(const QDate &date);
 
-    QString PMSystem() const;
-    void    SetPMSystem(const QString &system);
+    auto Gender() const -> GenderType;
+    void SetGender(const GenderType &gender);
 
-    QString Email() const;
-    void    SetEmail(const QString &text);
+    auto KnownMeasurements() const -> QUuid;
+    void SetKnownMeasurements(const QUuid &system);
 
-    bool    IsReadOnly() const;
-    void    SetReadOnly(bool ro);
+    auto Email() const -> QString;
+    void SetEmail(const QString &text);
+
+    auto IsReadOnly() const -> bool;
+    void SetReadOnly(bool ro);
+
+    auto IsFullCircumference() const -> bool;
+    void SetFullCircumference(bool fc);
 
     void SetMName(const QString &name, const QString &text);
     void SetMValue(const QString &name, const QString &text);
     void SetMBaseValue(const QString &name, double value);
-    void SetMSizeIncrease(const QString &name, double value);
-    void SetMHeightIncrease(const QString &name, double value);
+    void SetMShiftA(const QString &name, double value);
+    void SetMShiftB(const QString &name, double value);
+    void SetMShiftC(const QString &name, double value);
+    void SetMSpecialUnits(const QString &name, bool special);
+    void SetMCorrectionValue(const QString &name, qreal baseA, qreal baseB, qreal baseC, double value);
+    void SetMValueAlias(const QString &name, qreal baseA, qreal baseB, qreal baseC, const QString &alias);
+    void SetMValueAlias(const QString &name, const QString &alias) const;
     void SetMDescription(const QString &name, const QString &text);
     void SetMFullName(const QString &name, const QString &text);
+    void SetMDimension(const QString &name, IMD type);
+    void SetMImage(const QString &name, const VPatternImage &image);
+
+    auto MeasurementForDimension(IMD type) const -> QString;
+
+    auto Dimensions() const -> VDimensions;
+
+    auto GetRestrictions() const -> QMap<QString, VDimensionRestriction>;
+    void SetRestrictions(const QMap<QString, VDimensionRestriction> &restrictions);
+    auto Restriction(qreal base, qreal base2 = 0) const -> VDimensionRestriction;
+
+    void SetDimensionLabels(const QMap<MeasurementDimension, DimesionLabels> &labels);
+    void SetDimensionCustomNames(const QMap<MeasurementDimension, QString> &names);
 
     static const QString TagVST;
     static const QString TagVIT;
     static const QString TagBodyMeasurements;
     static const QString TagNotes;
-    static const QString TagSize;
-    static const QString TagHeight;
     static const QString TagPersonal;
     static const QString TagCustomer;
     static const QString TagBirthDate;
@@ -112,48 +155,104 @@ public:
     static const QString TagEmail;
     static const QString TagReadOnly;
     static const QString TagMeasurement;
+    static const QString TagDimensions;
+    static const QString TagDimension;
+    static const QString TagRestrictions;
+    static const QString TagRestriction;
+    static const QString TagCorrections;
+    static const QString TagCorrection;
+    static const QString TagLabels;
+    static const QString TagLabel;
+    static const QString TagImage;
 
     static const QString AttrBase;
     static const QString AttrValue;
-    static const QString AttrSizeIncrease;
-    static const QString AttrHeightIncrease;
+    static const QString AttrShiftA;
+    static const QString AttrShiftB;
+    static const QString AttrShiftC;
+    static const QString AttrCorrection;
+    static const QString AttrCoordinates;
+    static const QString AttrExclude;
+    static const QString AttrSpecialUnits;
     static const QString AttrDescription;
     static const QString AttrName;
     static const QString AttrFullName;
+    static const QString AttrValueAlias;
+    static const QString AttrMin;
+    static const QString AttrMax;
+    static const QString AttrStep;
+    static const QString AttrMeasurement;
+    static const QString AttrFullCircumference;
+    static const QString AttrLabel;
+    static const QString AttrDimension;
+    static const QString AttrCustomName;
+    static const QString AttrContentType;
 
     static const QString GenderMale;
     static const QString GenderFemale;
     static const QString GenderUnknown;
 
-    static QString GenderToStr(const GenderType &sex);
-    static GenderType StrToGender(const QString &sex);
+    static const QString DimensionN;
+    static const QString DimensionX;
+    static const QString DimensionY;
+    static const QString DimensionW;
+    static const QString DimensionZ;
 
-    QStringList ListAll() const;
-    QStringList ListKnown() const;
+    static auto GenderToStr(const GenderType &sex) -> QString;
+    static auto StrToGender(const QString &sex) -> GenderType;
 
-    bool IsDefinedKnownNamesValid() const;
+    static auto DimensionTypeToStr(const MeasurementDimension &type) -> QString;
+    static auto StrToDimensionType(const QString &type) -> MeasurementDimension;
 
-    VContainer *GetData() const;
+    static auto IMDToStr(const IMD &type) -> QString;
+    static auto StrToIMD(const QString &type) -> IMD;
+
+    static auto IMDName(IMD type) -> QString;
+
+    auto ListAll() const -> QStringList;
+    auto ListKnown() const -> QStringList;
+
+    auto GetData() const -> VContainer *;
 
 private:
-    Q_DISABLE_COPY(VMeasurements)
+    Q_DISABLE_COPY_MOVE(VMeasurements) // NOLINT
 
     /** @brief data container with data. */
-    VContainer     *data;
+    VContainer *data;
     MeasurementsType type;
 
-    void CreateEmptyMultisizeFile(Unit unit, int baseSize, int baseHeight);
+    // Cache data to quick access
+    Unit m_units{Unit::LAST_UNIT_DO_NOT_USE};
+    VDimensions m_dimensions{};
+
+    /** @brief m_keepNames store names in container to check uniqueness. */
+    bool m_keepNames{true};
+
+    void CreateEmptyMultisizeFile(Unit unit, const QVector<MeasurementDimension_p> &dimensions);
     void CreateEmptyIndividualFile(Unit unit);
 
-    qreal UniqueTagAttr(const QString &tag, const QString &attr, qreal defValue) const;
+    auto CreateDimensions(const QVector<MeasurementDimension_p> &dimensions) -> QDomElement;
 
-    QDomElement MakeEmpty(const QString &name, const QString &formula);
-    QDomElement FindM(const QString &name) const;
-    MeasurementsType ReadType() const;
+    auto UniqueTagAttr(const QString &tag, const QString &attr, qreal defValue) const -> qreal;
 
-    qreal EvalFormula(VContainer *data, const QString &formula, bool *ok) const;
+    auto MakeEmpty(const QString &name, const QString &formula, MeasurementType varType) -> QDomElement;
+    auto FindM(const QString &name) const -> QDomElement;
+    auto ReadType() const -> MeasurementsType;
+    auto ReadUnits() const -> Unit;
+    auto ReadDimensions() const -> VDimensions;
 
-    QString ClearPMCode(const QString &code) const;
+    void WriteCorrections(QDomElement &mElement, const QMap<QString, VMeasurementCorrection> &corrections);
+
+    static auto ReadImage(const QDomElement &mElement) -> VPatternImage;
+    void WriteImage(QDomElement &mElement, const VPatternImage &image);
+
+    void SaveDimesionLabels(QDomElement &dElement, const DimesionLabels &labels);
+
+    void ClearDimension(IMD type);
+
+    void ReadMeasurement(const QDomElement &dom, QSharedPointer<VContainer> &tempData,
+                         QSharedPointer<VMeasurement> &meash, QSharedPointer<VMeasurement> &tempMeash, int i,
+                         qreal baseA, qreal baseB, qreal baseC) const;
 };
 
 #endif // VMEASUREMENTS_H

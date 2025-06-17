@@ -1,0 +1,88 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="known-measurements">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="info">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="name"/>
+              <xs:element type="xs:string" name="description"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="diagrams">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="image" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="contentType" name="contentType" use="optional"/>
+                      <xs:attribute type="uuid" name="uid" use="required"/>
+                      <xs:attribute type="xs:string" name="title" use="optional"/>
+                      <xs:attribute type="imageScale" name="size" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="measurements">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="m" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:string" name="description" use="optional"/>
+                      <xs:attribute type="xs:string" name="full_name" use="optional"/>
+                      <xs:attribute type="shortName" name="name" use="required"/>
+                      <xs:attribute type="xs:string" name="formula" use="optional"/>
+                      <xs:attribute type="uuid" name="diagram" use="optional"/>
+                      <xs:attribute name="specialUnits" type="xs:boolean" use="optional"/>
+                      <xs:attribute name="group" type="xs:string" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute type="formatVersion" name="version" use="required"/>
+      <xs:attribute type="xs:boolean" name="read-only" use="optional"/>
+      <xs:attribute type="uuid" name="uid" use="required"/>
+    </xs:complexType>
+    <xs:unique name="measurementName">
+      <xs:selector xpath="measurements/m"/>
+      <xs:field xpath="@name"/>
+    </xs:unique>
+  </xs:element>
+  <xs:simpleType name="shortName">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="([^@\p{Nd}\p{Zs}*\\/&amp;|!&lt;&gt;^&#10;\()\-−+.,٫, ٬.’=?:;'\\&quot;]){1,1}([^\p{Zs}*\\/&amp;|!&lt;&gt;^&#10;\()\-−+.,٫, ٬.’=?:;\\&quot;]){0,}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="formatVersion">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="contentType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="image/[-\w]+(\.[-\w]+)*([+][-\w]+)?"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="uuid">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="|\{[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}\}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="imageScale">
+    <xs:restriction base="xs:decimal">
+      <xs:minInclusive value="0.1"/>
+      <xs:maxInclusive value="100.0"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

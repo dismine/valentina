@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2018 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -28,23 +28,25 @@
 #ifndef TST_ABSTRACTTRANSLATION_H
 #define TST_ABSTRACTTRANSLATION_H
 
-#include <QObject>
-#include <QFile>
-#include <QSharedPointer>
 #include <QDomDocument>
+#include <QFile>
+#include <QObject>
+#include <QSharedPointer>
 
-#ifdef Q_CC_MSVC
-#include <ciso646>
-#endif /* Q_CC_MSVC */
+// Header <ciso646> is removed in C++20.
+#if defined(Q_CC_MSVC) && __cplusplus <= 201703L
+#include <ciso646> // and, not, or
+#endif
 
 class TST_AbstractTranslation : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     explicit TST_AbstractTranslation(QObject *parent = nullptr);
 
 protected:
-    QDomNodeList LoadTSFile(const QString &filename);
+    auto LoadTSFile(const QString &filename) -> QDomNodeList;
 
     static const QString TagName;
     static const QString TagMessage;
@@ -57,7 +59,8 @@ protected:
     static const QString AttrValObsolete;
 
 private:
-    Q_DISABLE_COPY(TST_AbstractTranslation)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(TST_AbstractTranslation) // NOLINT
 
     QSharedPointer<QFile> tsFile;
     QSharedPointer<QDomDocument> tsXML;

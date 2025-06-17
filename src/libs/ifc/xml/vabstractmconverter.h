@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef VABSTRACTMCONVERTER_H
 #define VABSTRACTMCONVERTER_H
 
-#include <qcompilerdetection.h>
 #include <QMap>
 #include <QMultiMap>
 #include <QString>
@@ -39,17 +38,21 @@
 
 class VAbstractMConverter : public VAbstractConverter
 {
+    Q_OBJECT // NOLINT
+
 public:
     explicit VAbstractMConverter(const QString &fileName);
-    virtual ~VAbstractMConverter() Q_DECL_EQ_DEFAULT;
+    ~VAbstractMConverter() override = default;
+
+    auto Units() const -> Unit;
 
 protected:
     void AddRootComment();
-    static QMultiMap<QString, QString> OldNamesToNewNames_InV0_3_0();
-    static QMap<QString, QString> OldNamesToNewNames_InV0_3_3();
+    static auto OldNamesToNewNames_InV0_3_0() -> QMultiMap<QString, QString>;
+    static auto OldNamesToNewNames_InV0_3_3() -> QMap<QString, QString>;
 
 private:
-    Q_DISABLE_COPY(VAbstractMConverter)
+    Q_DISABLE_COPY_MOVE(VAbstractMConverter) // NOLINT
 };
 
 #endif // VABSTRACTMCONVERTER_H

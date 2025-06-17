@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -28,19 +28,20 @@
 
 #include "dialoggroup.h"
 
+#include <QCompleter>
 #include <QLineEdit>
 
 #include "ui_dialoggroup.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogGroup::DialogGroup(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogGroup),
-      group()
+DialogGroup::DialogGroup(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
+    ui(new Ui::DialogGroup),
+    group(),
+    flagName(false)
 {
     ui->setupUi(this);
     InitOkCancel(ui);
-    DialogTool::CheckState();
 
     connect(ui->lineEditName, &QLineEdit::textChanged, this, &DialogGroup::NameChanged);
 }
@@ -58,9 +59,27 @@ void DialogGroup::SetName(const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogGroup::GetName() const
+auto DialogGroup::GetName() const -> QString
 {
     return ui->lineEditName->text();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogGroup::SetTags(const QStringList &tags)
+{
+    ui->lineEditTags->setText(tags.join(", "));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogGroup::GetTags() const -> QStringList
+{
+    return ui->lineEditTags->text().split(",");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogGroup::SetGroupCategories(const QStringList &categories)
+{
+    ui->lineEditTags->SetCompletion(categories);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -102,7 +121,7 @@ void DialogGroup::NameChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMap<quint32, quint32> DialogGroup::GetGroup() const
+auto DialogGroup::GetGroup() const -> QMap<quint32, quint32>
 {
     return group;
 }

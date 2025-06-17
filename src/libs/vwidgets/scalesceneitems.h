@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -32,43 +32,94 @@
 #include <QGraphicsLineItem>
 
 #include "../vmisc/def.h"
+#include "../vmisc/theme/themeDef.h"
 
 class VScaledLine : public QGraphicsLineItem
 {
 public:
-    explicit VScaledLine(QGraphicsItem * parent = nullptr);
-    VScaledLine(const QLineF &line, QGraphicsItem * parent = nullptr);
-    virtual ~VScaledLine() = default;
+    explicit VScaledLine(VColorRole role, QGraphicsItem *parent = nullptr);
+    VScaledLine(const QLineF &line, VColorRole role, QGraphicsItem *parent = nullptr);
+    ~VScaledLine() override = default;
 
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ScaledLine)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Vis::ScaledLine)
+    };
 
-    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                       QWidget *widget = nullptr) override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 
-    bool IsBoldLine() const;
+    auto IsBoldLine() const -> bool;
     void SetBoldLine(bool bold);
 
-protected:
-    bool m_isBoldLine;
+    auto GetColorRole() const -> VColorRole;
+    void SetColorRole(VColorRole role);
 
 private:
-    Q_DISABLE_COPY(VScaledLine)
+    Q_DISABLE_COPY_MOVE(VScaledLine) // NOLINT
+
+    bool m_isBoldLine{true};
+    VColorRole m_role;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VScaledLine::GetColorRole() const -> VColorRole
+{
+    return m_role;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VScaledLine::SetColorRole(VColorRole role)
+{
+    m_role = role;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VScaledLine::IsBoldLine() const -> bool
+{
+    return m_isBoldLine;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VScaledLine::SetBoldLine(bool bold)
+{
+    m_isBoldLine = bold;
+}
 
 class VScaledEllipse : public QGraphicsEllipseItem
 {
 public:
-    explicit VScaledEllipse(QGraphicsItem * parent = nullptr);
-    virtual ~VScaledEllipse() = default;
+    explicit VScaledEllipse(VColorRole role, QGraphicsItem *parent = nullptr);
+    ~VScaledEllipse() override = default;
 
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ScaledEllipse)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Vis::ScaledEllipse)
+    };
 
-    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                       QWidget *widget = nullptr) override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+
+    auto PointMode() const -> bool;
+    void SetPointMode(bool newPointMode);
+
 private:
-    Q_DISABLE_COPY(VScaledEllipse)
+    Q_DISABLE_COPY_MOVE(VScaledEllipse) // NOLINT
+
+    bool m_pointMode{true};
+    VColorRole m_role;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VScaledEllipse::PointMode() const -> bool
+{
+    return m_pointMode;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VScaledEllipse::SetPointMode(bool newPointMode)
+{
+    m_pointMode = newPointMode;
+}
 
 #endif // SCALESCENEITEMS_H

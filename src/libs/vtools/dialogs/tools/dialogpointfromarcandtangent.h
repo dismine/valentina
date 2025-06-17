@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef DIALOGPOINTFROMARCANDTANGENT_H
 #define DIALOGPOINTFROMARCANDTANGENT_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -41,43 +40,61 @@
 
 namespace Ui
 {
-    class DialogPointFromArcAndTangent;
+class DialogPointFromArcAndTangent;
 }
 
-class DialogPointFromArcAndTangent : public DialogTool
+class DialogPointFromArcAndTangent final : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
-    DialogPointFromArcAndTangent(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    ~DialogPointFromArcAndTangent();
+    DialogPointFromArcAndTangent(const VContainer *data, VAbstractPattern *doc, quint32 toolId,
+                                 QWidget *parent = nullptr);
+    ~DialogPointFromArcAndTangent() override;
 
+    auto GetPointName() const -> QString;
+    void SetPointName(const QString &value);
 
-    void           SetPointName(const QString &value);
+    auto GetArcId() const -> quint32;
+    void SetArcId(quint32 value);
 
-    quint32        GetArcId() const;
-    void           SetArcId(const quint32 &value);
+    auto GetTangentPointId() const -> quint32;
+    void SetTangentPointId(quint32 value);
 
-    quint32        GetTangentPointId() const;
-    void           SetTangentPointId(const quint32 &value);
+    auto GetCrossCirclesPoint() const -> CrossCirclesPoint;
+    void SetCrossCirclesPoint(CrossCirclesPoint p);
 
-    CrossCirclesPoint GetCrossCirclesPoint() const;
-    void              SetCrossCirclesPoint(const CrossCirclesPoint &p);
+    void SetNotes(const QString &notes);
+    auto GetNotes() const -> QString;
 
 public slots:
-    virtual void   ChosenObject(quint32 id, const SceneObject &type) override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
 
 protected:
-    virtual void   ShowVisualization() override;
+    void ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void   SaveData() override;
+    void SaveData() override;
+    auto IsValid() const -> bool override;
 
 private:
-    Q_DISABLE_COPY(DialogPointFromArcAndTangent)
+    Q_DISABLE_COPY_MOVE(DialogPointFromArcAndTangent) // NOLINT
 
     Ui::DialogPointFromArcAndTangent *ui;
+
+    QString pointName;
+
+    bool flagName;
+
+    /** @brief number number of handled objects */
+    qint32 number{0};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto DialogPointFromArcAndTangent::IsValid() const -> bool
+{
+    return flagName;
+}
 
 #endif // DIALOGPOINTFROMARCANDTANGENT_H

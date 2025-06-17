@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 #ifndef VISTOOLPOINTOFINTERSECTIONARCS_H
 #define VISTOOLPOINTOFINTERSECTIONARCS_H
 
-#include <qcompilerdetection.h>
+
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>
@@ -42,28 +42,47 @@
 
 class VisToolPointOfIntersectionArcs : public VisLine
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolPointOfIntersectionArcs(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolPointOfIntersectionArcs() = default;
+    ~VisToolPointOfIntersectionArcs() override = default;
 
-    virtual void RefreshGeometry() override;
-    virtual void VisualMode(const quint32 &id) override;
+    void RefreshGeometry() override;
+    void VisualMode(quint32 id) override;
 
-    void         setArc1Id(const quint32 &value);
-    void         setArc2Id(const quint32 &value);
-    void         setCrossPoint(const CrossCirclesPoint &value);
+    void SetArc1Id(quint32 value);
+    void SetArc2Id(quint32 value);
+    void SetCrossPoint(CrossCirclesPoint value);
 
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolPointOfIntersectionArcs)};
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ToolPointOfIntersectionArcs)};
 private:
-    Q_DISABLE_COPY(VisToolPointOfIntersectionArcs)
-    quint32            arc1Id;
-    quint32            arc2Id;
-    CrossCirclesPoint  crossPoint;
-    VScaledEllipse    *point;
-    VCurvePathItem    *arc1Path;
-    VCurvePathItem    *arc2Path;
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VisToolPointOfIntersectionArcs) // NOLINT
+    quint32            m_arc1Id{NULL_ID};
+    quint32            m_arc2Id{NULL_ID};
+    CrossCirclesPoint  m_crossPoint{CrossCirclesPoint::FirstPoint};
+    VScaledEllipse    *m_point{nullptr};
+    VCurvePathItem    *m_arc1Path{nullptr};
+    VCurvePathItem    *m_arc2Path{nullptr};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolPointOfIntersectionArcs::SetArc1Id(quint32 value)
+{
+    m_arc1Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolPointOfIntersectionArcs::SetArc2Id(quint32 value)
+{
+    m_arc2Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolPointOfIntersectionArcs::SetCrossPoint(CrossCirclesPoint value)
+{
+    m_crossPoint = value;
+}
 
 #endif // VISTOOLPOINTOFINTERSECTIONARCS_H

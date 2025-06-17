@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -30,33 +30,37 @@
 #define VLABELTEMPLATECONVERTER_H
 
 #include "vabstractconverter.h"
+#include "../vmisc/projectversion.h"
 
 class VLabelTemplateConverter : public VAbstractConverter
 {
 public:
     explicit VLabelTemplateConverter(const QString &fileName);
-    virtual ~VLabelTemplateConverter() Q_DECL_EQ_DEFAULT;
+    virtual ~VLabelTemplateConverter() = default;
 
     static const QString LabelTemplateMaxVerStr;
     static const QString CurrentSchema;
-    static Q_DECL_CONSTEXPR const int LabelTemplateMinVer = FORMAT_VERSION(1, 0, 0);
-    static Q_DECL_CONSTEXPR const int LabelTemplateMaxVer = FORMAT_VERSION(1, 0, 0);
+    static constexpr const unsigned LabelTemplateMinVer = FormatVersion(1, 0, 0);
+    static constexpr const unsigned LabelTemplateMaxVer = FormatVersion(1, 0, 0);
+
+    static auto XSDSchemas() -> QHash <unsigned, QString>;
 
 protected:
-    virtual int     MinVer() const override;
-    virtual int     MaxVer() const override;
+    virtual auto MinVer() const -> unsigned override;
+    virtual auto MaxVer() const -> unsigned override;
 
-    virtual QString MinVerStr() const override;
-    virtual QString MaxVerStr() const override;
+    virtual auto MinVerStr() const -> QString override;
+    virtual auto MaxVerStr() const -> QString override;
 
-    virtual QString XSDSchema(int ver) const override;
-    virtual void    ApplyPatches() override;
-    virtual void    DowngradeToCurrentMaxVersion() override;
+    virtual void ApplyPatches() override;
+    virtual void DowngradeToCurrentMaxVersion() override;
 
-    virtual bool IsReadOnly() const override {return false;}
+    virtual auto IsReadOnly() const -> bool override { return false; }
+
+    auto Schemas() const -> QHash <unsigned, QString> override;
 
 private:
-    Q_DISABLE_COPY(VLabelTemplateConverter)
+    Q_DISABLE_COPY_MOVE(VLabelTemplateConverter) // NOLINT
     static const QString LabelTemplateMinVerStr;
 };
 

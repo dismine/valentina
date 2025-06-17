@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -27,59 +27,109 @@
  *************************************************************************/
 
 #include "vpattern.h"
-#include "../vwidgets/vabstractmainwindow.h"
-#include "../vtools/tools/vdatatool.h"
-#include "../vtools/tools/vtoolseamallowance.h"
-#include "../vtools/tools/vtooluniondetails.h"
-#include "../vtools/tools/drawTools/drawtools.h"
-#include "../vtools/tools/nodeDetails/nodedetails.h"
-#include "../ifc/exception/vexceptionobjecterror.h"
-#include "../ifc/exception/vexceptionwrongid.h"
+#include "../core/vapplication.h"
 #include "../ifc/exception/vexceptionconversionerror.h"
 #include "../ifc/exception/vexceptionemptyparameter.h"
+#include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/exception/vexceptionundo.h"
+#include "../ifc/exception/vexceptionwrongid.h"
+#include "../ifc/ifcdef.h"
 #include "../ifc/xml/vpatternconverter.h"
-#include "../vmisc/customevents.h"
-#include "../vmisc/vsettings.h"
-#include "../vmisc/vmath.h"
-#include "../vmisc/projectversion.h"
 #include "../qmuparser/qmuparsererror.h"
 #include "../qmuparser/qmutokenparser.h"
 #include "../vgeometry/varc.h"
-#include "../vgeometry/vellipticalarc.h"
-#include "../vgeometry/vsplinepath.h"
 #include "../vgeometry/vcubicbezier.h"
 #include "../vgeometry/vcubicbezierpath.h"
-#include "../core/vapplication.h"
-#include "../vpatterndb/vpiecenode.h"
+#include "../vgeometry/vellipticalarc.h"
+#include "../vgeometry/vsplinepath.h"
+#include "../vmisc/compatibility.h"
+#include "../vmisc/customevents.h"
+#include "../vmisc/def.h"
+#include "../vmisc/projectversion.h"
+#include "../vmisc/vsysexits.h"
+#include "../vmisc/vvalentinasettings.h"
 #include "../vpatterndb/calculator.h"
-#include "../vpatterndb/floatItemData/vpiecelabeldata.h"
-#include "../vpatterndb/floatItemData/vpatternlabeldata.h"
 #include "../vpatterndb/floatItemData/vgrainlinedata.h"
-#include "../vpatterndb/vpiecepath.h"
+#include "../vpatterndb/floatItemData/vpatternlabeldata.h"
+#include "../vpatterndb/floatItemData/vpiecelabeldata.h"
+#include "../vpatterndb/variables/vincrement.h"
 #include "../vpatterndb/vnodedetail.h"
+#include "../vpatterndb/vpiecenode.h"
+#include "../vpatterndb/vpiecepath.h"
+#include "../vtools/tools/drawTools/operation/flipping/vtoolflippingbyaxis.h"
+#include "../vtools/tools/drawTools/operation/flipping/vtoolflippingbyline.h"
+#include "../vtools/tools/drawTools/operation/vtoolmove.h"
+#include "../vtools/tools/drawTools/operation/vtoolrotation.h"
+#include "../vtools/tools/drawTools/toolcurve/vtoolarc.h"
+#include "../vtools/tools/drawTools/toolcurve/vtoolarcwithlength.h"
+#include "../vtools/tools/drawTools/toolcurve/vtoolcubicbezier.h"
+#include "../vtools/tools/drawTools/toolcurve/vtoolcubicbezierpath.h"
+#include "../vtools/tools/drawTools/toolcurve/vtoolellipticalarc.h"
+#include "../vtools/tools/drawTools/toolcurve/vtoolspline.h"
+#include "../vtools/tools/drawTools/toolcurve/vtoolsplinepath.h"
+#include "../vtools/tools/drawTools/toolpoint/tooldoublepoint/vtooltruedarts.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutspline.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutsplinepath.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolalongline.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolbisector.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolcurveintersectaxis.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolendline.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolheight.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoollineintersectaxis.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolnormal.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolshoulderpoint.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolbasepoint.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoollineintersect.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointfromarcandtangent.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointfromcircleandtangent.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofcontact.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersection.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectionarcs.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncircles.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtooltriangle.h"
+#include "../vtools/tools/drawTools/vtoolline.h"
+#include "../vtools/tools/nodeDetails/vnodearc.h"
+#include "../vtools/tools/nodeDetails/vnodeellipticalarc.h"
+#include "../vtools/tools/nodeDetails/vnodepoint.h"
+#include "../vtools/tools/nodeDetails/vnodespline.h"
+#include "../vtools/tools/nodeDetails/vnodesplinepath.h"
+#include "../vtools/tools/nodeDetails/vtoolpiecepath.h"
+#include "../vtools/tools/nodeDetails/vtoolpin.h"
+#include "../vtools/tools/nodeDetails/vtoolplacelabel.h"
+#include "../vtools/tools/vdatatool.h"
+#include "../vtools/tools/vtoolseamallowance.h"
+#include "../vtools/tools/vtooluniondetails.h"
+#include "../vwidgets/vabstractmainwindow.h"
 
-#include <QMessageBox>
-#include <QUndoStack>
-#include <QtNumeric>
+#include <chrono>
+#include <functional>
 #include <QDebug>
 #include <QFileInfo>
-#include <QtConcurrentMap>
 #include <QFuture>
+#include <QFutureWatcher>
+#include <QMessageBox>
+#include <QScopeGuard>
+#include <QTimer>
+#include <QUndoStack>
+#include <QtConcurrentMap>
 #include <QtConcurrentRun>
+#include <QtNumeric>
 
-#ifdef Q_CC_MSVC
-    #include <functional>
-#endif /* Q_CC_MSVC */
+using namespace std::chrono_literals;
 
-const QString VPattern::AttrReadOnly = QStringLiteral("readOnly");
+using namespace Qt::Literals::StringLiterals;
+
+const QString VPattern::AttrReadOnly = QStringLiteral("readOnly");       // NOLINT(cert-err58-cpp)
+const QString VPattern::AttrLabelPrefix = QStringLiteral("labelPrefix"); // NOLINT(cert-err58-cpp)
 
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
-QString FileComment()
+auto FileComment() -> QString
 {
-    return QString("Pattern created with Valentina v%1 (https://valentinaproject.bitbucket.io/).").arg(APP_VERSION_STR);
+    return QStringLiteral("Pattern created with Valentina v%1 (https://smart-pattern.com.ua/).").arg(AppVersionStr());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -87,14 +137,86 @@ void GatherCount(int &count, const int nodes)
 {
     count += nodes;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DefLabelLanguage() -> QString
+{
+    QString def = VAbstractValApplication::VApp()->ValentinaSettings()->GetLabelLanguage();
+    if (not ConvertToSet<QString>(VApplication::LabelLanguages()).contains(def))
+    {
+        def = QStringLiteral("en");
+    }
+    return def;
 }
+
+struct VPieceFoldLineData
+{
+    quint32 p1{NULL_ID};
+    quint32 p2{NULL_ID};
+    bool mirrorLineVisible{true};
+    QString heightFormula{};
+    QString widthFormula{};
+    QString centerFormula{};
+    bool manualHeight{false};
+    bool manualWidth{false};
+    bool manualCenter{false};
+    FoldLineType type{FoldLineType::TwoArrowsTextAbove};
+    unsigned int fontSize{defFoldLineFontSize};
+    bool italic{false};
+    bool bold{false};
+    QString label{};
+    int alignment{Qt::AlignHCenter};
+};
+
+//---------------------------------------------------------------------------------------------------------------------
+auto ParsePieceMirrorLine(const QDomElement &domElement) -> VPieceFoldLineData
+{
+    VPieceFoldLineData data;
+
+    data.p1 = VDomDocument::GetParametrUInt(domElement, VAbstractPattern::AttrMirrorLineP1, NULL_ID_STR);
+    data.p2 = VDomDocument::GetParametrUInt(domElement, VAbstractPattern::AttrMirrorLineP2, NULL_ID_STR);
+    data.mirrorLineVisible =
+        VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrMirrorLineVisible, trueStr);
+    data.heightFormula = VDomDocument::GetParametrEmptyString(domElement, VAbstractPattern::AttrFoldLineHeightFormula);
+    data.widthFormula = VDomDocument::GetParametrEmptyString(domElement, VAbstractPattern::AttrFoldLineWidthFormula);
+    data.centerFormula = VDomDocument::GetParametrEmptyString(domElement, VAbstractPattern::AttrFoldLineCenterFormula);
+    data.manualHeight = VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrFoldLineManualHeight, falseStr);
+    data.manualWidth = VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrFoldLineManualWidth, falseStr);
+    data.manualCenter = VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrFoldLineManualCenter, falseStr);
+    data.type = StringToFoldLineType(VDomDocument::GetParametrString(
+        domElement, VAbstractPattern::AttrFoldLineType, FoldLineTypeToString(FoldLineType::TwoArrowsTextAbove)));
+    data.fontSize = qMax(static_cast<unsigned int>(VCommonSettings::MinPieceLabelFontPointSize()),
+                         VDomDocument::GetParametrUInt(domElement, VAbstractPattern::AttrFoldLineFontSize,
+                                                       QString::number(defFoldLineFontSize)));
+    data.italic = VDomDocument::GetParametrBool(domElement, VDomDocument::AttrItalic, falseStr);
+    data.bold = VDomDocument::GetParametrBool(domElement, VDomDocument::AttrBold, falseStr);
+    data.label = VDomDocument::GetParametrEmptyString(domElement, VAbstractPattern::AttrFoldLineLabel);
+    data.alignment =
+        VDomDocument::GetParametrInt(domElement, VDomDocument::AttrAlignment, QString::number(Qt::AlignHCenter));
+
+    return data;
+}
+} // anonymous namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VPattern::VPattern(VContainer *data, VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail, QObject *parent)
-    : VAbstractPattern(parent), data(data), sceneDraw(sceneDraw), sceneDetail(sceneDetail)
+  : VAbstractPattern(parent),
+    data(data),
+    sceneDraw(sceneDraw),
+    sceneDetail(sceneDetail),
+    m_refreshPieceGeometryWatcher(new QFutureWatcher<void>(this))
 {
     SCASSERT(sceneDraw != nullptr)
     SCASSERT(sceneDetail != nullptr)
+
+    connect(qApp,
+            &QCoreApplication::aboutToQuit,
+            m_refreshPieceGeometryWatcher,
+            [this]()
+            {
+                m_refreshPieceGeometryWatcher->cancel();
+                m_refreshPieceGeometryWatcher->waitForFinished();
+            });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -105,18 +227,12 @@ void VPattern::CreateEmptyFile()
 {
     this->clear();
     QDomElement patternElement = this->createElement(TagPattern);
+    SetAttribute(patternElement, AttrLabelPrefix, DefLabelLanguage());
 
     patternElement.appendChild(createComment(FileComment()));
-
-    QDomElement version = createElement(TagVersion);
-    QDomText newNodeText = createTextNode(VPatternConverter::PatternMaxVerStr);
-    version.appendChild(newNodeText);
-    patternElement.appendChild(version);
-
-    QDomElement unit = createElement(TagUnit);
-    newNodeText = createTextNode(UnitsToStr(qApp->patternUnit()));
-    unit.appendChild(newNodeText);
-    patternElement.appendChild(unit);
+    patternElement.appendChild(CreateElementWithText(TagVersion, VPatternConverter::PatternMaxVerStr));
+    patternElement.appendChild(
+        CreateElementWithText(TagUnit, UnitsToStr(VAbstractValApplication::VApp()->patternUnits())));
 
     patternElement.appendChild(createElement(TagDescription));
     patternElement.appendChild(createElement(TagNotes));
@@ -126,14 +242,12 @@ void VPattern::CreateEmptyFile()
     patternElement.appendChild(createElement(TagPreviewCalculations));
 
     this->appendChild(patternElement);
-    insertBefore(createProcessingInstruction("xml", "version=\"1.0\" encoding=\"UTF-8\""), this->firstChild());
-}
+    insertBefore(
+        createProcessingInstruction(QStringLiteral("xml"), QStringLiteral("version=\"1.0\" encoding=\"UTF-8\"")),
+        this->firstChild());
 
-//---------------------------------------------------------------------------------------------------------------------
-void VPattern::setXMLContent(const QString &fileName)
-{
-    VDomDocument::setXMLContent(fileName);
-    GarbageCollector();
+    // Cache values
+    m_units = VAbstractValApplication::VApp()->patternUnits();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -152,6 +266,9 @@ void VPattern::Parse(const Document &parse)
         case Document::LiteParse:
             qCDebug(vXML, "Lite parse.");
             break;
+        case Document::FullLiteParse:
+            qCDebug(vXML, "Full lite parse.");
+            break;
         case Document::LitePPParse:
             qCDebug(vXML, "Lite pattern piece parse.");
             break;
@@ -159,103 +276,26 @@ void VPattern::Parse(const Document &parse)
             break;
     }
 
+    emit PreParseState();
     SCASSERT(sceneDraw != nullptr)
     SCASSERT(sceneDetail != nullptr)
-    QStringList tags = QStringList() << TagDraw << TagIncrements << TagDescription << TagNotes
-                                     << TagMeasurements << TagVersion << TagGradation << TagImage << TagUnit
-                                     << TagPatternName << TagPatternNum << TagCompanyName << TagCustomerName
-                                     << TagPatternLabel << TagPatternMaterials << TagPreviewCalculations
-                                     << TagFinalMeasurements;
     PrepareForParse(parse);
+
     QDomNode domNode = documentElement().firstChild();
-    while (domNode.isNull() == false)
+    while (not domNode.isNull())
     {
-        if (domNode.isElement())
-        {
-            const QDomElement domElement = domNode.toElement();
-            if (domElement.isNull() == false)
-            {
-                switch (tags.indexOf(domElement.tagName()))
-                {
-                    case 0: // TagDraw
-                        qCDebug(vXML, "Tag draw.");
-                        if (parse == Document::FullParse)
-                        {
-                            if (nameActivPP.isEmpty())
-                            {
-                                SetActivPP(GetParametrString(domElement, AttrName));
-                            }
-                            else
-                            {
-                                ChangeActivPP(GetParametrString(domElement, AttrName));
-                            }
-                            patternPieces << GetParametrString(domElement, AttrName);
-                        }
-                        else
-                        {
-                            ChangeActivPP(GetParametrString(domElement, AttrName), Document::LiteParse);
-                        }
-                        ParseDrawElement(domElement, parse);
-                        break;
-                    case 1: // TagIncrements
-                        qCDebug(vXML, "Tag increments.");
-                        ParseIncrementsElement(domElement, parse);
-                        break;
-                    case 2: // TagDescription
-                        qCDebug(vXML, "Tag description.");
-                        break;
-                    case 3: // TagNotes
-                        qCDebug(vXML, "Tag notes.");
-                        break;
-                    case 4: // TagMeasurements
-                        qCDebug(vXML, "Tag measurements.");
-                        break;
-                    case 5: // TagVersion
-                        qCDebug(vXML, "Tag version.");
-                        break;
-                    case 6: // TagGradation
-                        qCDebug(vXML, "Tag gradation.");
-                        break;
-                    case 7: // TagImage
-                        qCDebug(vXML, "Tag image.");
-                        break;
-                    case 8: // TagUnit
-                        qCDebug(vXML, "Tag unit.");
-                        break;
-                    case 9: // TagPatternName
-                        qCDebug(vXML, "Pattern name.");
-                        break;
-                    case 10: // TagPatternNumber
-                        qCDebug(vXML, "Pattern number.");
-                        break;
-                    case 11: // TagCompanyName
-                        qCDebug(vXML, "Company name.");
-                        break;
-                    case 12: // TagCustomerName
-                        qCDebug(vXML, "Customer name.");
-                        break;
-                    case 13: // TagPatternLabel
-                        qCDebug(vXML, "Pattern label.");
-                        break;
-                    case 14: // TagPatternMaterials
-                        qCDebug(vXML, "Pattern materials.");
-                        break;
-                    case 15: // TagPreviewCalculations
-                        qCDebug(vXML, "Tag prewiew calculations.");
-                        ParseIncrementsElement(domElement, parse);
-                        break;
-                    case 16: // TagFinalMeasurements
-                        qCDebug(vXML, "Tag final measurements.");
-                        break;
-                    default:
-                        qCDebug(vXML, "Wrong tag name %s", qUtf8Printable(domElement.tagName()));
-                        break;
-                }
-            }
-        }
+        ParseRootElement(parse, domNode);
         domNode = domNode.nextSibling();
     }
-    emit CheckLayout();
+
+    if (VApplication::IsGUIMode())
+    {
+        QTimer::singleShot(1s, Qt::VeryCoarseTimer, this, &VPattern::RefreshPieceGeometry);
+    }
+    else if (VApplication::CommandLine()->IsTestModeEnabled())
+    {
+        RefreshPieceGeometry();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -268,51 +308,50 @@ void VPattern::Parse(const Document &parse)
  */
 void VPattern::setCurrentData()
 {
-    if (qApp->GetDrawMode() == Draw::Calculation)
+    const int countPP = CountPP();
+    // don't need upadate data if we have only one pattern piece
+    if (VAbstractValApplication::VApp()->GetDrawMode() != Draw::Calculation || countPP <= 1)
     {
-        const int countPP = CountPP();
-        if (countPP > 1)//don't need upadate data if we have only one pattern piece
-        {
-            qCDebug(vXML, "Setting current data");
-            qCDebug(vXML, "Current PP name %s", qUtf8Printable(nameActivPP));
-            qCDebug(vXML, "PP count %d", countPP);
-
-            const QVector<VToolRecord> localHistory = getLocalHistory();
-            if (localHistory.size() == 0)
-            {
-                qCDebug(vXML, "History is empty!");
-                return;
-            }
-
-            const quint32 id = localHistory.last().getId();
-            qCDebug(vXML, "Resoring data from tool with id %u", id);
-
-            if (tools.size() > 0)
-            {
-                try
-                {
-                    ToolExists(id);
-                }
-                catch (VExceptionBadId &e)
-                {
-                    Q_UNUSED(e)
-                    qCDebug(vXML, "List of tools doesn't containe id= %u", id);
-                    return;
-                }
-
-                const VDataTool *vTool = tools.value(id);
-                *data = vTool->getData();
-                //Delete special variables if exist
-                data->RemoveVariable(currentLength);
-                data->RemoveVariable(currentSeamAllowance);
-                qCDebug(vXML, "Data successfully updated.");
-            }
-            else
-            {
-                qCDebug(vXML, "List of tools is empty!");
-            }
-        }
+        return;
     }
+
+    qCDebug(vXML, "Setting current data");
+    qCDebug(vXML, "Current PP name %s", qUtf8Printable(nameActivPP));
+    qCDebug(vXML, "PP count %d", countPP);
+
+    const QVector<VToolRecord> localHistory = getLocalHistory();
+    if (localHistory.isEmpty())
+    {
+        qCDebug(vXML, "History is empty!");
+        return;
+    }
+
+    const quint32 id = localHistory.constLast().getId();
+    qCDebug(vXML, "Resoring data from tool with id %u", id);
+
+    if (tools.isEmpty())
+    {
+        qCDebug(vXML, "List of tools is empty!");
+        return;
+    }
+
+    try
+    {
+        ToolExists(id);
+    }
+    catch (VExceptionBadId &e)
+    {
+        Q_UNUSED(e)
+        qCDebug(vXML, "List of tools doesn't containe id= %u", id);
+        return;
+    }
+
+    const VDataTool *vTool = tools.value(id);
+    *data = vTool->getData();
+    // Delete special variables if exist
+    data->RemoveVariable(currentLength);
+    data->RemoveVariable(currentSeamAllowance);
+    qCDebug(vXML, "Data successfully updated.");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -332,7 +371,7 @@ void VPattern::UpdateToolData(const quint32 &id, VContainer *data)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VContainer VPattern::GetCompleteData() const
+auto VPattern::GetCompleteData() const -> VContainer
 {
     const int countPP = CountPP();
     if (countPP <= 0 || history.isEmpty() || tools.isEmpty())
@@ -340,7 +379,7 @@ VContainer VPattern::GetCompleteData() const
         return (data != nullptr ? *data : VContainer(nullptr, nullptr, VContainer::UniqueNamespace()));
     }
 
-    const quint32 id = (countPP == 1 ? history.last().getId() : LastToolId());
+    const quint32 id = (countPP == 1 ? history.constLast().getId() : LastToolId());
 
     if (id == NULL_ID)
     {
@@ -358,8 +397,44 @@ VContainer VPattern::GetCompleteData() const
     }
 
     const VDataTool *vTool = tools.value(id);
+    SCASSERT(vTool != nullptr)
     VContainer lastData = vTool->getData();
-    //Delete special variables if exist
+    // Delete special variables if exist
+    lastData.RemoveVariable(currentLength);
+    lastData.RemoveVariable(currentSeamAllowance);
+    return lastData;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPattern::GetCompletePPData(const QString &name) const -> VContainer
+{
+    const int countPP = CountPP();
+    if (countPP <= 0 || history.isEmpty() || tools.isEmpty())
+    {
+        return (data != nullptr ? *data : VContainer(nullptr, nullptr, VContainer::UniqueNamespace()));
+    }
+
+    const quint32 id = (countPP == 1 ? history.constLast().getId() : PPLastToolId(name));
+
+    if (id == NULL_ID)
+    {
+        return (data != nullptr ? *data : VContainer(nullptr, nullptr, VContainer::UniqueNamespace()));
+    }
+
+    try
+    {
+        ToolExists(id);
+    }
+    catch (VExceptionBadId &e)
+    {
+        Q_UNUSED(e)
+        return (data != nullptr ? *data : VContainer(nullptr, nullptr, VContainer::UniqueNamespace()));
+    }
+
+    const VDataTool *vTool = tools.value(id);
+    SCASSERT(vTool != nullptr)
+    VContainer lastData = vTool->getData();
+    // Delete special variables if exist
     lastData.RemoveVariable(currentLength);
     lastData.RemoveVariable(currentSeamAllowance);
     return lastData;
@@ -371,21 +446,17 @@ VContainer VPattern::GetCompleteData() const
  * @return id base point.
  */
 // cppcheck-suppress unusedFunction
-quint32 VPattern::SPointActiveDraw()
+auto VPattern::SPointActiveDraw() -> quint32
 {
-    QDomElement calcElement;
-    if (GetActivNodeElement(TagCalculation, calcElement))
+    if (QDomElement calcElement; GetActivNodeElement(TagCalculation, calcElement))
     {
-        const QDomNode domNode = calcElement.firstChild();
-        if (domNode.isNull() == false && domNode.isElement())
+        if (const QDomNode domNode = calcElement.firstChild(); not domNode.isNull() && domNode.isElement())
         {
-            const QDomElement domElement = domNode.toElement();
-            if (domElement.isNull() == false)
+            if (const QDomElement domElement = domNode.toElement();
+                not domElement.isNull() && domElement.tagName() == TagPoint &&
+                domElement.attribute(AttrType, QString()) == VToolBasePoint::ToolType)
             {
-                if (domElement.tagName() == TagPoint && domElement.attribute(AttrType, QString()) == VToolBasePoint::ToolType)
-                {
-                    return GetParametrId(domElement);
-                }
+                return GetParametrId(domElement);
             }
         }
     }
@@ -393,20 +464,18 @@ quint32 VPattern::SPointActiveDraw()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<quint32> VPattern::GetActivePPPieces() const
+auto VPattern::GetActivePPPieces() const -> QVector<quint32>
 {
     QVector<quint32> pieces;
-    QDomElement drawElement;
-    if (GetActivDrawElement(drawElement))
+    if (QDomElement drawElement; GetActivDrawElement(drawElement))
     {
         const QDomElement details = drawElement.firstChildElement(TagDetails);
         if (not details.isNull())
         {
             QDomElement detail = details.firstChildElement(TagDetail);
-            while(not detail.isNull())
+            while (not detail.isNull())
             {
-                bool united = GetParametrBool(detail, VToolSeamAllowance::AttrUnited, falseStr);
-                if (not united)
+                if (bool const united = GetParametrBool(detail, VToolSeamAllowance::AttrUnited, falseStr); not united)
                 {
                     pieces.append(GetParametrId(detail));
                 }
@@ -418,7 +487,7 @@ QVector<quint32> VPattern::GetActivePPPieces() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPattern::SaveDocument(const QString &fileName, QString &error)
+auto VPattern::SaveDocument(const QString &fileName, QString &error) -> bool
 {
     try
     {
@@ -426,21 +495,20 @@ bool VPattern::SaveDocument(const QString &fileName, QString &error)
     }
     catch (const VExceptionWrongId &e)
     {
-        qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error not unique id.")),
-                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error not unique id.")), qUtf8Printable(e.ErrorMessage()),
+                   qUtf8Printable(e.DetailedInformation()));
         return false;
     }
 
     // Update comment with Valentina version
-    QDomNode commentNode = documentElement().firstChild();
-    if (commentNode.isComment())
+    if (QDomNode const commentNode = documentElement().firstChild(); commentNode.isComment())
     {
         QDomComment comment = commentNode.toComment();
         comment.setData(FileComment());
     }
 
     const bool saved = VAbstractPattern::SaveDocument(fileName, error);
-    if (saved && QFileInfo(fileName).suffix() != QLatin1String("autosave"))
+    if (saved && QFileInfo(fileName).suffix() != "autosave"_L1)
     {
         modified = false;
     }
@@ -456,13 +524,15 @@ void VPattern::LiteParseIncrements()
         emit SetEnabledGUI(true);
 
         data->ClearUniqueIncrementNames();
+
+        Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 12, "Check that you used all types");
         data->ClearVariables(VarType::Increment);
+        data->ClearVariables(VarType::IncrementSeparator);
 
         QDomNodeList tags = elementsByTagName(TagIncrements);
         if (not tags.isEmpty())
         {
-            const QDomNode domElement = tags.at(0);
-            if (not domElement.isNull())
+            if (const QDomNode domElement = tags.at(0); not domElement.isNull())
             {
                 ParseIncrementsElement(domElement, Document::LiteParse);
             }
@@ -471,8 +541,7 @@ void VPattern::LiteParseIncrements()
         tags = elementsByTagName(TagPreviewCalculations);
         if (not tags.isEmpty())
         {
-            const QDomNode domElement = tags.at(0);
-            if (not domElement.isNull())
+            if (const QDomNode domElement = tags.at(0); not domElement.isNull())
             {
                 ParseIncrementsElement(domElement, Document::LiteParse);
             }
@@ -509,15 +578,15 @@ void VPattern::LiteParseIncrements()
     }
     catch (const VExceptionWrongId &e)
     {
-        qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error wrong id.")),
-                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error wrong id.")), qUtf8Printable(e.ErrorMessage()),
+                   qUtf8Printable(e.DetailedInformation()));
         emit SetEnabledGUI(false);
         return;
     }
     catch (VException &e)
     {
-        qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file.")),
-                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file.")), qUtf8Printable(e.ErrorMessage()),
+                   qUtf8Printable(e.DetailedInformation()));
         emit SetEnabledGUI(false);
         return;
     }
@@ -530,14 +599,12 @@ void VPattern::LiteParseIncrements()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VPattern::ElementsToParse() const
+auto VPattern::ElementsToParse() const -> int
 {
-    QVector<QString> tags{TagCalculation, TagDetails, TagModeling, TagIncrements};
+    QVector<QString> const tags{TagCalculation, TagDetails, TagModeling, TagIncrements};
 
-    std::function<int (const QString &tagName)> TagsCount = [this](const QString &tagName)
-    {
-        return elementsByTagName(tagName).length();
-    };
+    std::function<int(const QString &tagName)> const TagsCount = [this](const QString &tagName)
+    { return elementsByTagName(tagName).length(); };
 
     return QtConcurrent::blockingMappedReduced(tags, TagsCount, GatherCount);
 }
@@ -549,7 +616,7 @@ int VPattern::ElementsToParse() const
 void VPattern::LiteParseTree(const Document &parse)
 {
     // Save name current pattern piece
-    QString namePP = nameActivPP;
+    QString const namePP = nameActivPP;
 
     try
     {
@@ -559,6 +626,7 @@ void VPattern::LiteParseTree(const Document &parse)
             case Document::LitePPParse:
                 ParseCurrentPP();
                 break;
+            case Document::FullLiteParse:
             case Document::LiteParse:
                 Parse(parse);
                 break;
@@ -584,7 +652,7 @@ void VPattern::LiteParseTree(const Document &parse)
         emit SetEnabledGUI(false);
         if (not VApplication::IsGUIMode())
         {
-            qApp->exit(V_EX_NOINPUT);
+            QCoreApplication::exit(V_EX_NOINPUT);
         }
         return;
     }
@@ -595,7 +663,7 @@ void VPattern::LiteParseTree(const Document &parse)
         emit SetEnabledGUI(false);
         if (not VApplication::IsGUIMode())
         {
-            qApp->exit(V_EX_NOINPUT);
+            QCoreApplication::exit(V_EX_NOINPUT);
         }
         return;
     }
@@ -606,29 +674,29 @@ void VPattern::LiteParseTree(const Document &parse)
         emit SetEnabledGUI(false);
         if (not VApplication::IsGUIMode())
         {
-            qApp->exit(V_EX_NOINPUT);
+            QCoreApplication::exit(V_EX_NOINPUT);
         }
         return;
     }
     catch (const VExceptionWrongId &e)
     {
-        qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error wrong id.")),
-                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error wrong id.")), qUtf8Printable(e.ErrorMessage()),
+                   qUtf8Printable(e.DetailedInformation()));
         emit SetEnabledGUI(false);
         if (not VApplication::IsGUIMode())
         {
-            qApp->exit(V_EX_NOINPUT);
+            QCoreApplication::exit(V_EX_NOINPUT);
         }
         return;
     }
     catch (VException &e)
     {
-        qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file.")),
-                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file.")), qUtf8Printable(e.ErrorMessage()),
+                   qUtf8Printable(e.DetailedInformation()));
         emit SetEnabledGUI(false);
         if (not VApplication::IsGUIMode())
         {
-            qApp->exit(V_EX_NOINPUT);
+            QCoreApplication::exit(V_EX_NOINPUT);
         }
         return;
     }
@@ -638,7 +706,7 @@ void VPattern::LiteParseTree(const Document &parse)
         emit SetEnabledGUI(false);
         if (not VApplication::IsGUIMode())
         {
-            qApp->exit(V_EX_NOINPUT);
+            QCoreApplication::exit(V_EX_NOINPUT);
         }
         return;
     }
@@ -649,8 +717,8 @@ void VPattern::LiteParseTree(const Document &parse)
     setCurrentData();
     emit FullUpdateFromFile();
     // Recalculate scene rect
-    VMainGraphicsView::NewSceneRect(sceneDraw, qApp->getSceneView());
-    VMainGraphicsView::NewSceneRect(sceneDetail, qApp->getSceneView());
+    VMainGraphicsView::NewSceneRect(sceneDraw, VAbstractValApplication::VApp()->getSceneView());
+    VMainGraphicsView::NewSceneRect(sceneDetail, VAbstractValApplication::VApp()->getSceneView());
     qCDebug(vXML, "Scene size updated.");
 }
 
@@ -660,7 +728,7 @@ void VPattern::customEvent(QEvent *event)
 {
     if (event->type() == UNDO_EVENT)
     {
-        qApp->getUndoStack()->undo();
+        VAbstractApplication::VApp()->getUndoStack()->undo();
     }
     else if (event->type() == LITE_PARSE_EVENT)
     {
@@ -669,23 +737,95 @@ void VPattern::customEvent(QEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VNodeDetail VPattern::ParseDetailNode(const QDomElement &domElement) const
+auto VPattern::IsPieceGeometryDirty() const -> bool
+{
+    return m_pieceGeometryDirty;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::SetPieceGeometryDirty(bool newPieceGeometryDirty)
+{
+    m_pieceGeometryDirty = newPieceGeometryDirty;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::RefreshDirtyPieceGeometry(const QList<vidtype> &list)
+{
+    if (!list.isEmpty())
+    {
+        if (m_refreshPieceGeometryWatcher->isRunning())
+        {
+            m_refreshPieceGeometryWatcher->cancel();
+            m_refreshPieceGeometryWatcher->waitForFinished();
+        }
+
+        auto future = QtConcurrent::run(
+            [this, list]()
+            {
+                RefreshPieceGeometryForList(list);
+                PostRefreshActions();
+            });
+
+        m_refreshPieceGeometryWatcher->setFuture(future);
+    }
+
+    m_pieceGeometryDirty = false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::RefreshPieceGeometryForList(const QList<vidtype> &list) const
+{
+    for (auto pieceId : qAsConst(list))
+    {
+        QMetaObject::invokeMethod(
+            QApplication::instance(),
+            [pieceId]()
+            {
+                try
+                {
+                    if (auto *piece = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(pieceId)))
+                    {
+                        piece->RefreshGeometry();
+                    }
+                }
+                catch (const VExceptionBadId &)
+                {
+                    // do nothing
+                }
+            },
+            Qt::QueuedConnection);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::PostRefreshActions()
+{
+    QMetaObject::invokeMethod(
+        QApplication::instance(),
+        [this]()
+        {
+            emit CheckLayout();
+            VMainGraphicsView::NewSceneRect(sceneDetail, VAbstractValApplication::VApp()->getSceneView());
+        },
+        Qt::QueuedConnection);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPattern::ParseDetailNode(const QDomElement &domElement) -> VNodeDetail
 {
     const quint32 id = GetParametrUInt(domElement, AttrIdObject, NULL_ID_STR);
-    const qreal mx = GetParametrDouble(domElement, AttrMx, "0.0");
-    const qreal my = GetParametrDouble(domElement, AttrMy, "0.0");
+    const qreal mx = GetParametrDouble(domElement, AttrMx, QStringLiteral("0.0"));
+    const qreal my = GetParametrDouble(domElement, AttrMy, QStringLiteral("0.0"));
     const bool reverse = GetParametrUInt(domElement, VAbstractPattern::AttrNodeReverse, QChar('0'));
     const NodeDetail nodeType = NodeDetail::Contour;
 
-    const QString t = GetParametrString(domElement, AttrType, "NodePoint");
+    const QString t = GetParametrString(domElement, AttrType, QStringLiteral("NodePoint"));
     Tool tool;
 
-    QStringList types = QStringList() << VAbstractPattern::NodePoint
-                                      << VAbstractPattern::NodeArc
-                                      << VAbstractPattern::NodeSpline
-                                      << VAbstractPattern::NodeSplinePath
-                                      << VAbstractPattern::NodeElArc;
-    switch (types.indexOf(t))
+    switch (QStringList const types{VAbstractPattern::NodePoint, VAbstractPattern::NodeArc,
+                                    VAbstractPattern::NodeSpline, VAbstractPattern::NodeSplinePath,
+                                    VAbstractPattern::NodeElArc};
+            types.indexOf(t))
     {
         case 0: // NodePoint
             tool = Tool::NodePoint;
@@ -703,10 +843,67 @@ VNodeDetail VPattern::ParseDetailNode(const QDomElement &domElement) const
             tool = Tool::NodeElArc;
             break;
         default:
-            VException e(tr("Wrong tag name '%1'.").arg(t));
-            throw e;
+            throw VException(tr("Wrong tag name '%1'.").arg(t));
     }
-    return VNodeDetail(id, tool, nodeType, mx, my, reverse);
+    return {id, tool, nodeType, mx, my, reverse};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseRootElement(const Document &parse, const QDomNode &node)
+{
+    static const QStringList tags({TagDraw, TagIncrements, TagPreviewCalculations});
+
+    if (not node.isElement())
+    {
+        return;
+    }
+
+    const QDomElement domElement = node.toElement();
+    if (domElement.isNull())
+    {
+        return;
+    }
+
+    switch (tags.indexOf(domElement.tagName()))
+    {
+        case 0: // TagDraw
+            qCDebug(vXML, "Tag draw.");
+            if (parse == Document::FullParse)
+            {
+                if (nameActivPP.isEmpty())
+                {
+                    SetActivPP(GetParametrString(domElement, AttrName));
+                }
+                else
+                {
+                    ChangeActivPP(GetParametrString(domElement, AttrName));
+                }
+                patternPieces << GetParametrString(domElement, AttrName);
+            }
+            else
+            {
+                ChangeActivPP(GetParametrString(domElement, AttrName), Document::LiteParse);
+            }
+            ParseDrawElement(domElement, parse);
+            break;
+        case 1: // TagIncrements
+            if (parse != Document::LiteParse)
+            {
+                qCDebug(vXML, "Tag increments.");
+                ParseIncrementsElement(domElement, parse);
+            }
+            break;
+        case 2: // TagPreviewCalculations
+            if (parse != Document::LiteParse)
+            {
+                qCDebug(vXML, "Tag prewiew calculations.");
+                ParseIncrementsElement(domElement, parse);
+            }
+            break;
+        default:
+            qCDebug(vXML, "Ignoring tag %s", qUtf8Printable(domElement.tagName()));
+            break;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -717,39 +914,44 @@ VNodeDetail VPattern::ParseDetailNode(const QDomElement &domElement) const
  */
 void VPattern::ParseDrawElement(const QDomNode &node, const Document &parse)
 {
-    QStringList tags = QStringList() << TagCalculation << TagModeling << TagDetails << TagGroups;
+    QStringList const tags{TagCalculation, TagModeling, TagDetails, TagGroups};
     QDomNode domNode = node.firstChild();
-    while (domNode.isNull() == false)
+    while (not domNode.isNull())
     {
-        if (domNode.isElement())
+        if (not domNode.isElement())
         {
-            const QDomElement domElement = domNode.toElement();
-            if (domElement.isNull() == false)
-            {
-                switch (tags.indexOf(domElement.tagName()))
-                {
-                    case 0: // TagCalculation
-                        qCDebug(vXML, "Tag calculation.");
-                        data->ClearCalculationGObjects();
-                        ParseDrawMode(domElement, parse, Draw::Calculation);
-                        break;
-                    case 1: // TagModeling
-                        qCDebug(vXML, "Tag modeling.");
-                        ParseDrawMode(domElement, parse, Draw::Modeling);
-                        break;
-                    case 2: // TagDetails
-                        qCDebug(vXML, "Tag details.");
-                        ParseDetails(domElement, parse);
-                        break;
-                    case 3: // TagGroups
-                        qCDebug(vXML, "Tag groups.");
-                        ParseGroups(domElement);
-                        break;
-                    default:
-                        VException e(tr("Wrong tag name '%1'.").arg(domElement.tagName()));
-                        throw e;
-                }
-            }
+            domNode = domNode.nextSibling();
+            continue;
+        }
+
+        const QDomElement domElement = domNode.toElement();
+        if (domElement.isNull())
+        {
+            domNode = domNode.nextSibling();
+            continue;
+        }
+
+        switch (tags.indexOf(domElement.tagName()))
+        {
+            case 0: // TagCalculation
+                qCDebug(vXML, "Tag calculation.");
+                data->ClearCalculationGObjects();
+                ParseDrawMode(domElement, parse, Draw::Calculation);
+                break;
+            case 1: // TagModeling
+                qCDebug(vXML, "Tag modeling.");
+                ParseDrawMode(domElement, parse, Draw::Modeling);
+                break;
+            case 2: // TagDetails
+                qCDebug(vXML, "Tag details.");
+                ParseDetails(domElement, parse);
+                break;
+            case 3: // TagGroups
+                qCDebug(vXML, "Tag groups.");
+                ParseGroups(domElement);
+                break;
+            default:
+                throw VException(tr("Wrong tag name '%1'.").arg(domElement.tagName()));
         }
         domNode = domNode.nextSibling();
     }
@@ -766,74 +968,67 @@ void VPattern::ParseDrawMode(const QDomNode &node, const Document &parse, const 
 {
     SCASSERT(sceneDraw != nullptr)
     SCASSERT(sceneDetail != nullptr)
-    VMainGraphicsScene *scene = nullptr;
-    if (mode == Draw::Calculation)
-    {
-        scene = sceneDraw;
-    }
-    else
-    {
-        scene = sceneDetail;
-    }
-    const QStringList tags = QStringList() << TagPoint
-                                           << TagLine
-                                           << TagSpline
-                                           << TagArc
-                                           << TagTools
-                                           << TagOperation
-                                           << TagElArc
-                                           << TagPath;
+
     const QDomNodeList nodeList = node.childNodes();
-    const qint32 num = nodeList.size();
-    for (qint32 i = 0; i < num; ++i)
+    for (qint32 i = 0; i < nodeList.size(); ++i)
     {
         QDomElement domElement = nodeList.at(i).toElement();
-        if (domElement.isNull() == false)
-        {
-            switch (tags.indexOf(domElement.tagName()))
-            {
-                case 0: // TagPoint
-                    qCDebug(vXML, "Tag point.");
-                    ParsePointElement(scene, domElement, parse, domElement.attribute(AttrType, QString()));
-                    break;
-                case 1: // TagLine
-                    qCDebug(vXML, "Tag line.");
-                    ParseLineElement(scene, domElement, parse);
-                    break;
-                case 2: // TagSpline
-                    qCDebug(vXML, "Tag spline.");
-                    ParseSplineElement(scene, domElement, parse, domElement.attribute(AttrType, QString()));
-                    break;
-                case 3: // TagArc
-                    qCDebug(vXML, "Tag arc.");
-                    ParseArcElement(scene, domElement, parse, domElement.attribute(AttrType, QString()));
-                    break;
-                case 4: // TagTools
-                    qCDebug(vXML, "Tag tools.");
-                    ParseToolsElement(scene, domElement, parse, domElement.attribute(AttrType, QString()));
-                    break;
-                case 5: // TagOperation
-                    qCDebug(vXML, "Tag operation.");
-                    ParseOperationElement(scene, domElement, parse, domElement.attribute(AttrType, QString()));
-                    break;
-                case 6: // TagElArc
-                    qCDebug(vXML, "Tag elliptical arc.");
-                    ParseEllipticalArcElement(scene, domElement, parse, domElement.attribute(AttrType, QString()));
-                    break;
-                case 7: // TagPath
-                    qCDebug(vXML, "Tag path.");
-                    ParsePathElement(scene, domElement, parse);
-                    break;
-                default:
-                    VException e(tr("Wrong tag name '%1'.").arg(domElement.tagName()));
-                    throw e;
-            }
-        }
+        ParseDrawModeElement(domElement, parse, mode);
     }
 
     if (parse == Document::FullParse)
     {
         emit MadeProgress();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseDrawModeElement(QDomElement &domElement, const Document &parse, const Draw &mode)
+{
+    VMainGraphicsScene *scene = mode == Draw::Calculation ? sceneDraw : sceneDetail;
+    static const QStringList tags({TagPoint, TagLine, TagSpline, TagArc, TagTools, TagOperation, TagElArc, TagPath});
+
+    if (domElement.isNull())
+    {
+        return;
+    }
+
+    switch (tags.indexOf(domElement.tagName()))
+    {
+        case 0: // TagPoint
+            qCDebug(vXML, "Tag point.");
+            ParsePointElement(scene, domElement, parse, domElement.attribute(AttrType, QString()));
+            break;
+        case 1: // TagLine
+            qCDebug(vXML, "Tag line.");
+            ParseLineElement(scene, domElement, parse);
+            break;
+        case 2: // TagSpline
+            qCDebug(vXML, "Tag spline.");
+            ParseSplineElement(scene, domElement, parse, domElement.attribute(AttrType, QString()));
+            break;
+        case 3: // TagArc
+            qCDebug(vXML, "Tag arc.");
+            ParseArcElement(scene, domElement, parse, domElement.attribute(AttrType, QString()));
+            break;
+        case 4: // TagTools
+            qCDebug(vXML, "Tag tools.");
+            ParseToolsElement(scene, domElement, parse, domElement.attribute(AttrType, QString()));
+            break;
+        case 5: // TagOperation
+            qCDebug(vXML, "Tag operation.");
+            ParseOperationElement(scene, domElement, parse, domElement.attribute(AttrType, QString()));
+            break;
+        case 6: // TagElArc
+            qCDebug(vXML, "Tag elliptical arc.");
+            ParseEllipticalArcElement(scene, domElement, parse, domElement.attribute(AttrType, QString()));
+            break;
+        case 7: // TagPath
+            qCDebug(vXML, "Tag path.");
+            ParsePathElement(scene, domElement, parse);
+            break;
+        default:
+            throw VException(tr("Wrong tag name '%1'.").arg(domElement.tagName()));
     }
 }
 
@@ -851,23 +1046,37 @@ void VPattern::ParseDetailElement(QDomElement &domElement, const Document &parse
         VToolSeamAllowanceInitData initData;
         initData.id = GetParametrId(domElement);
         initData.detail.SetName(GetParametrString(domElement, AttrName, tr("Detail")));
-        initData.detail.SetMx(qApp->toPixel(GetParametrDouble(domElement, AttrMx, "0.0")));
-        initData.detail.SetMy(qApp->toPixel(GetParametrDouble(domElement, AttrMy, "0.0")));
+        initData.detail.SetUUID(GetParametrEmptyString(domElement, AttrUUID));
+        initData.detail.SetShortName(GetParametrEmptyString(domElement, AttrShortName).left(25));
+        initData.detail.SetGradationLabel(GetParametrEmptyString(domElement, AttrGradationLabel));
+        initData.detail.SetMx(
+            VAbstractValApplication::VApp()->toPixel(GetParametrDouble(domElement, AttrMx, QStringLiteral("0.0"))));
+        initData.detail.SetMy(
+            VAbstractValApplication::VApp()->toPixel(GetParametrDouble(domElement, AttrMy, QStringLiteral("0.0"))));
         initData.detail.SetSeamAllowance(GetParametrBool(domElement, VToolSeamAllowance::AttrSeamAllowance, falseStr));
-        initData.detail.SetHideMainPath(GetParametrBool(domElement, VToolSeamAllowance::AttrHideMainPath,
-                                               QString().setNum(qApp->ValentinaSettings()->IsHideMainPath())));
-        initData.detail.SetSeamAllowanceBuiltIn(GetParametrBool(domElement,
-                                                                VToolSeamAllowance::AttrSeamAllowanceBuiltIn,
-                                                                falseStr));
-        initData.detail.SetForbidFlipping(GetParametrBool(domElement, AttrForbidFlipping,
-                                          QString().setNum(qApp->ValentinaSettings()->GetForbidWorkpieceFlipping())));
-        initData.detail.SetForceFlipping(GetParametrBool(domElement, AttrForceFlipping,
-                                         QString().setNum(qApp->ValentinaSettings()->GetForceWorkpieceFlipping())));
+        initData.detail.SetHideMainPath(
+            GetParametrBool(domElement, VToolSeamAllowance::AttrHideMainPath,
+                            QString().setNum(VAbstractValApplication::VApp()->ValentinaSettings()->IsHideMainPath())));
+        initData.detail.SetShowFullPiece(GetParametrBool(domElement, VToolSeamAllowance::AttrShowFullPiece, trueStr));
+        initData.detail.SetSeamAllowanceBuiltIn(
+            GetParametrBool(domElement, VToolSeamAllowance::AttrSeamAllowanceBuiltIn, falseStr));
+        initData.detail.SetForbidFlipping(GetParametrBool(
+            domElement, AttrForbidFlipping,
+            QString().setNum(VAbstractValApplication::VApp()->ValentinaSettings()->GetForbidWorkpieceFlipping())));
+        initData.detail.SetForceFlipping(GetParametrBool(
+            domElement, AttrForceFlipping,
+            QString().setNum(VAbstractValApplication::VApp()->ValentinaSettings()->GetForceWorkpieceFlipping())));
+        initData.detail.SetSymmetricalCopy(GetParametrBool(domElement, AttrSymmetricalCopy, falseStr));
+        initData.detail.SetFollowGrainline(GetParametrBool(domElement, AttrFollowGrainline, falseStr));
+        initData.detail.SetSewLineOnDrawing(GetParametrBool(
+            domElement, AttrSewLineOnDrawing,
+            QString().setNum(VAbstractValApplication::VApp()->ValentinaSettings()->GetSewLineOnDrawing())));
         initData.detail.SetInLayout(GetParametrBool(domElement, AttrInLayout, trueStr));
         initData.detail.SetUnited(GetParametrBool(domElement, VToolSeamAllowance::AttrUnited, falseStr));
+        initData.detail.SetPriority(GetParametrUInt(domElement, VToolSeamAllowance::AttrPiecePriority, QChar('0')));
 
-        initData.width = GetParametrString(domElement, AttrWidth, "0.0");
-        const QString w = initData.width;//need for saving fixed formula;
+        initData.width = GetParametrString(domElement, AttrWidth, QStringLiteral("0.0"));
+        const QString w = initData.width; // need for saving fixed formula;
 
         ParseDetailInternals(domElement, initData.detail);
 
@@ -877,8 +1086,12 @@ void VPattern::ParseDetailElement(QDomElement &domElement, const Document &parse
         initData.parse = parse;
         initData.typeCreation = Source::FromFile;
 
-        VToolSeamAllowance::Create(initData);
-        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        VToolSeamAllowance *piece = VToolSeamAllowance::Create(initData);
+        if (parse == Document::FullParse)
+        {
+            updatePieces.append(piece->getId());
+        }
+        // Rewrite attribute formula. Need for situation when we have wrong formula.
         if (w != initData.width)
         {
             SetAttribute(domElement, AttrWidth, initData.width);
@@ -899,14 +1112,15 @@ void VPattern::ParseDetailInternals(const QDomElement &domElement, VPiece &detai
 {
     const uint version = GetParametrUInt(domElement, AttrVersion, QChar('1'));
 
-    const QStringList tags = QStringList() << TagNodes
-                                           << TagData
-                                           << TagPatternInfo
-                                           << TagGrainline
-                                           << VToolSeamAllowance::TagCSA
-                                           << VToolSeamAllowance::TagIPaths
-                                           << VToolSeamAllowance::TagPins
-                                           << VToolSeamAllowance::TagPlaceLabels;
+    const QStringList tags{TagNodes,
+                           TagData,
+                           TagPatternInfo,
+                           TagGrainline,
+                           VToolSeamAllowance::TagCSA,
+                           VToolSeamAllowance::TagIPaths,
+                           VToolSeamAllowance::TagPins,
+                           VToolSeamAllowance::TagPlaceLabels,
+                           VToolSeamAllowance::TagMirrorLine};
 
     QFuture<QVector<VPieceNode>> futurePathV1;
     QFuture<VPiecePath> futurePathV2;
@@ -917,53 +1131,62 @@ void VPattern::ParseDetailInternals(const QDomElement &domElement, VPiece &detai
     QFuture<QVector<quint32>> futureIPaths;
     QFuture<QVector<quint32>> futurePins;
     QFuture<QVector<quint32>> futurePlaceLabels;
+    QFuture<VPieceFoldLineData> futureMirrorLine;
 
     const QDomNodeList nodeList = domElement.childNodes();
     for (qint32 i = 0; i < nodeList.size(); ++i)
     {
-        const QDomElement element = nodeList.at(i).toElement();
-        if (not element.isNull())
+        if (const QDomElement element = nodeList.at(i).toElement(); not element.isNull())
         {
             switch (tags.indexOf(element.tagName()))
             {
-                case 0:// TagNodes
+                case 0: // TagNodes
                     if (version == 1)
                     {
                         // TODO. Delete if minimal supported version is 0.4.0
-                        Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 4, 0),
+                        Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 4, 0),
                                           "Time to refactor the code.");
-                        const bool closed = GetParametrUInt(domElement, AttrClosed, QChar('1'));
-                        const qreal width = GetParametrDouble(domElement, AttrWidth, "0.0");
-                        futurePathV1 = QtConcurrent::run(this, &VPattern::ParseDetailNodes, element, width, closed);
+                        futurePathV1 = QtConcurrent::run(
+                            [this, domElement, element]()
+                            {
+                                const bool closed = GetParametrUInt(domElement, AttrClosed, QChar('1'));
+                                const qreal width = GetParametrDouble(domElement, AttrWidth, QStringLiteral("0.0"));
+                                return ParseDetailNodes(element, width, closed);
+                            });
                     }
                     else
                     {
                         futurePathV2 = QtConcurrent::run(&VPattern::ParsePieceNodes, element);
                     }
                     break;
-                case 1:// TagData
-                    futurePPData = QtConcurrent::run(this, &VPattern::ParsePieceDataTag, element,
-                                                     detail.GetPatternPieceData());
+                case 1: // TagData
+                    futurePPData = QtConcurrent::run(
+                        [this, element, detail]() { return ParsePieceDataTag(element, detail.GetPieceLabelData()); });
                     break;
-                case 2:// TagPatternInfo
-                    futurePatternInfo = QtConcurrent::run(this, &VPattern::ParsePiecePatternInfo, element,
-                                                          detail.GetPatternInfo());
+                case 2: // TagPatternInfo
+                    futurePatternInfo =
+                        QtConcurrent::run([this, element, detail]()
+                                          { return ParsePiecePatternInfo(element, detail.GetPatternLabelData()); });
                     break;
-                case 3:// TagGrainline
-                    futureGGeometry = QtConcurrent::run(this, &VPattern::ParsePieceGrainline, element,
-                                                        detail.GetGrainlineGeometry());
+                case 3: // TagGrainline
+                    futureGGeometry =
+                        QtConcurrent::run([this, element, detail]()
+                                          { return ParsePieceGrainline(element, detail.GetGrainlineGeometry()); });
                     break;
-                case 4:// VToolSeamAllowance::TagCSA
+                case 4: // VToolSeamAllowance::TagCSA
                     futureRecords = QtConcurrent::run(&VPattern::ParsePieceCSARecords, element);
                     break;
-                case 5:// VToolSeamAllowance::TagIPaths
+                case 5: // VToolSeamAllowance::TagIPaths
                     futureIPaths = QtConcurrent::run(&VPattern::ParsePieceInternalPaths, element);
                     break;
-                case 6:// VToolSeamAllowance::TagPins
+                case 6: // VToolSeamAllowance::TagPins
                     futurePins = QtConcurrent::run(&VPattern::ParsePiecePointRecords, element);
                     break;
-                case 7:// VToolSeamAllowance::TagPlaceLabels
+                case 7: // VToolSeamAllowance::TagPlaceLabels
                     futurePlaceLabels = QtConcurrent::run(&VPattern::ParsePiecePointRecords, element);
+                    break;
+                case 8: // VToolSeamAllowance::TagMirrorLine
+                    futureMirrorLine = QtConcurrent::run(&ParsePieceMirrorLine, element);
                     break;
                 default:
                     break;
@@ -982,12 +1205,12 @@ void VPattern::ParseDetailInternals(const QDomElement &domElement, VPiece &detai
 
     if (not futurePPData.isCanceled())
     {
-        detail.SetPatternPieceData(futurePPData.result());
+        detail.SetPieceLabelData(futurePPData.result());
     }
 
     if (not futurePatternInfo.isCanceled())
     {
-        detail.SetPatternInfo(futurePatternInfo.result());
+        detail.SetPatternLabelData(futurePatternInfo.result());
     }
 
     if (not futureGGeometry.isCanceled())
@@ -1014,18 +1237,38 @@ void VPattern::ParseDetailInternals(const QDomElement &domElement, VPiece &detai
     {
         detail.SetPlaceLabels(futurePlaceLabels.result());
     }
+
+    if (not futureMirrorLine.isCanceled())
+    {
+        VPieceFoldLineData const data = futureMirrorLine.result();
+        detail.SetMirrorLineStartPoint(data.p1);
+        detail.SetMirrorLineEndPoint(data.p2);
+        detail.SetShowMirrorLine(data.mirrorLineVisible);
+        detail.SetManualFoldHeight(data.manualHeight);
+        detail.SetManualFoldWidth(data.manualWidth);
+        detail.SetManualFoldCenter(data.manualCenter);
+        detail.SetFormulaFoldHeight(data.heightFormula);
+        detail.SetFormulaFoldWidth(data.widthFormula);
+        detail.SetFormulaFoldCenter(data.centerFormula);
+        detail.SetFoldLineType(data.type);
+        detail.SetFoldLineSvgFontSize(data.fontSize);
+        detail.SetFoldLineLabelFontItalic(data.italic);
+        detail.SetFoldLineLabelFontBold(data.bold);
+        detail.SetFoldLineLabel(data.label);
+        detail.SetFoldLineLabelAlignment(data.alignment);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VPieceNode> VPattern::ParseDetailNodes(const QDomElement &domElement, qreal width, bool closed) const
+auto VPattern::ParseDetailNodes(const QDomElement &domElement, qreal width, bool closed) const -> QVector<VPieceNode>
 {
     QVector<VNodeDetail> oldNodes;
     const QDomNodeList nodeList = domElement.childNodes();
     for (qint32 i = 0; i < nodeList.size(); ++i)
     {
         const QDomElement element = nodeList.at(i).toElement();
-        if (not element.isNull()
-                && element.tagName() == VAbstractPattern::TagNode) // Old detail version need this check!
+        if (not element.isNull() &&
+            element.tagName() == VAbstractPattern::TagNode) // Old detail version need this check!
         {
             oldNodes.append(ParseDetailNode(element));
         }
@@ -1035,58 +1278,110 @@ QVector<VPieceNode> VPattern::ParseDetailNodes(const QDomElement &domElement, qr
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceLabelData VPattern::ParsePieceDataTag(const QDomElement &domElement, VPieceLabelData ppData) const
+auto VPattern::ParsePieceDataTag(const QDomElement &domElement, VPieceLabelData ppData) const -> VPieceLabelData
 {
-    ppData.SetVisible(GetParametrBool(domElement, AttrVisible, trueStr));
+    ppData.SetEnabled(GetParametrBool(domElement, AttrVisible, trueStr));
     ppData.SetLetter(GetParametrEmptyString(domElement, AttrLetter));
     ppData.SetAnnotation(GetParametrEmptyString(domElement, AttrAnnotation));
     ppData.SetOrientation(GetParametrEmptyString(domElement, AttrOrientation));
     ppData.SetRotationWay(GetParametrEmptyString(domElement, AttrRotationWay));
     ppData.SetTilt(GetParametrEmptyString(domElement, AttrTilt));
     ppData.SetFoldPosition(GetParametrEmptyString(domElement, AttrFoldPosition));
-    ppData.SetQuantity(static_cast<int>(GetParametrUInt(domElement, AttrQuantity, QChar('1'))));
+    ppData.SetQuantity(static_cast<quint16>(GetParametrUInt(domElement, AttrQuantity, QChar('1'))));
     ppData.SetOnFold(GetParametrBool(domElement, AttrOnFold, falseStr));
-    ppData.SetPos(QPointF(GetParametrDouble(domElement, AttrMx, QChar('0')),
-                          GetParametrDouble(domElement, AttrMy, QChar('0'))));
-    ppData.SetLabelWidth(GetParametrString(domElement, AttrWidth, QChar('1')));
-    ppData.SetLabelHeight(GetParametrString(domElement, AttrHeight, QChar('1')));
+    ppData.SetPos(
+        QPointF(GetParametrDouble(domElement, AttrMx, QChar('0')), GetParametrDouble(domElement, AttrMy, QChar('0'))));
     ppData.SetFontSize(static_cast<int>(GetParametrUInt(domElement, VToolSeamAllowance::AttrFont, QChar('0'))));
     ppData.SetRotation(GetParametrString(domElement, AttrRotation, QChar('0')));
-    ppData.SetCenterPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrCenterPin, NULL_ID_STR));
-    ppData.SetTopLeftPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrTopLeftPin, NULL_ID_STR));
-    ppData.SetBottomRightPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrBottomRightPin, NULL_ID_STR));
+
+    const quint32 topLeftPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrTopLeftPin, NULL_ID_STR);
+
+    if (const quint32 bottomRightPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrBottomRightPin, NULL_ID_STR);
+        topLeftPin != NULL_ID && bottomRightPin != NULL_ID && topLeftPin != bottomRightPin)
+    {
+        ppData.SetTopLeftPin(topLeftPin);
+        ppData.SetBottomRightPin(bottomRightPin);
+        ppData.SetCenterPin(NULL_ID);
+        ppData.SetLabelWidth(QChar('1'));
+        ppData.SetLabelHeight(QChar('1'));
+    }
+    else
+    {
+        ppData.SetTopLeftPin(NULL_ID);
+        ppData.SetBottomRightPin(NULL_ID);
+        ppData.SetCenterPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrCenterPin, NULL_ID_STR));
+        ppData.SetLabelWidth(GetParametrString(domElement, AttrWidth, QChar('1')));
+        ppData.SetLabelHeight(GetParametrString(domElement, AttrHeight, QChar('1')));
+    }
+
     ppData.SetLabelTemplate(GetLabelTemplate(domElement));
     return ppData;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPatternLabelData VPattern::ParsePiecePatternInfo(const QDomElement &domElement, VPatternLabelData patternInfo) const
+auto VPattern::ParsePiecePatternInfo(const QDomElement &domElement, VPatternLabelData patternInfo) const
+    -> VPatternLabelData
 {
-    patternInfo.SetVisible(GetParametrBool(domElement, AttrVisible, trueStr));
-    patternInfo.SetPos(QPointF(GetParametrDouble(domElement, AttrMx, QChar('0')),
-                               GetParametrDouble(domElement, AttrMy, QChar('0'))));
-    patternInfo.SetLabelWidth(GetParametrString(domElement, AttrWidth, QChar('1')));
-    patternInfo.SetLabelHeight(GetParametrString(domElement, AttrHeight, QChar('1')));
+    patternInfo.SetEnabled(GetParametrBool(domElement, AttrVisible, trueStr));
+    patternInfo.SetPos(
+        QPointF(GetParametrDouble(domElement, AttrMx, QChar('0')), GetParametrDouble(domElement, AttrMy, QChar('0'))));
     patternInfo.SetFontSize(static_cast<int>(GetParametrUInt(domElement, VToolSeamAllowance::AttrFont, QChar('0'))));
     patternInfo.SetRotation(GetParametrString(domElement, AttrRotation, QChar('0')));
-    patternInfo.SetCenterPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrCenterPin, NULL_ID_STR));
-    patternInfo.SetTopLeftPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrTopLeftPin, NULL_ID_STR));
-    patternInfo.SetBottomRightPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrBottomRightPin, NULL_ID_STR));
+
+    const quint32 topLeftPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrTopLeftPin, NULL_ID_STR);
+
+    if (const quint32 bottomRightPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrBottomRightPin, NULL_ID_STR);
+        topLeftPin != NULL_ID && bottomRightPin != NULL_ID && topLeftPin != bottomRightPin)
+    {
+        patternInfo.SetTopLeftPin(topLeftPin);
+        patternInfo.SetBottomRightPin(bottomRightPin);
+        patternInfo.SetCenterPin(NULL_ID);
+        patternInfo.SetLabelWidth(QChar('1'));
+        patternInfo.SetLabelHeight(QChar('1'));
+    }
+    else
+    {
+        patternInfo.SetTopLeftPin(NULL_ID);
+        patternInfo.SetBottomRightPin(NULL_ID);
+        patternInfo.SetCenterPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrCenterPin, NULL_ID_STR));
+        patternInfo.SetLabelWidth(GetParametrString(domElement, AttrWidth, QChar('1')));
+        patternInfo.SetLabelHeight(GetParametrString(domElement, AttrHeight, QChar('1')));
+    }
+
     return patternInfo;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VGrainlineData VPattern::ParsePieceGrainline(const QDomElement &domElement, VGrainlineData gGeometry) const
+auto VPattern::ParsePieceGrainline(const QDomElement &domElement, VGrainlineData gGeometry) const -> VGrainlineData
 {
-    gGeometry.SetVisible(GetParametrBool(domElement, AttrVisible, falseStr));
-    gGeometry.SetPos(QPointF(GetParametrDouble(domElement, AttrMx, QChar('0')),
-                             GetParametrDouble(domElement, AttrMy, QChar('0'))));
-    gGeometry.SetLength(GetParametrString(domElement, AttrLength, QChar('1')));
-    gGeometry.SetRotation(GetParametrString(domElement, AttrRotation, "90"));
-    gGeometry.SetArrowType(static_cast<ArrowType>(GetParametrUInt(domElement, AttrArrows, QChar('0'))));
-    gGeometry.SetCenterPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrCenterPin, NULL_ID_STR));
-    gGeometry.SetTopPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrTopPin, NULL_ID_STR));
-    gGeometry.SetBottomPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrBottomPin, NULL_ID_STR));
+    gGeometry.SetEnabled(GetParametrBool(domElement, AttrEnabled, falseStr));
+    gGeometry.SetVisible(GetParametrBool(domElement, AttrVisible, trueStr));
+    gGeometry.SetPos(
+        QPointF(GetParametrDouble(domElement, AttrMx, QChar('0')), GetParametrDouble(domElement, AttrMy, QChar('0'))));
+    gGeometry.SetArrowType(static_cast<GrainlineArrowDirection>(GetParametrUInt(domElement, AttrArrows, QChar('0'))));
+
+    const quint32 topPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrTopPin, NULL_ID_STR);
+
+    if (const quint32 bottomPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrBottomPin, NULL_ID_STR);
+        topPin != NULL_ID && bottomPin != NULL_ID && topPin != bottomPin)
+    {
+        gGeometry.SetTopPin(topPin);
+        gGeometry.SetBottomPin(bottomPin);
+
+        gGeometry.SetLength(QChar('1'));
+        gGeometry.SetRotation(QString::number(90));
+        gGeometry.SetCenterPin(NULL_ID);
+    }
+    else
+    {
+        gGeometry.SetTopPin(NULL_ID);
+        gGeometry.SetBottomPin(NULL_ID);
+
+        gGeometry.SetLength(GetParametrString(domElement, AttrLength, QChar('1')));
+        gGeometry.SetRotation(GetParametrString(domElement, AttrRotation, QString::number(90)));
+        gGeometry.SetCenterPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrCenterPin, NULL_ID_STR));
+    }
+
     return gGeometry;
 }
 
@@ -1105,12 +1400,9 @@ void VPattern::ParseDetails(const QDomElement &domElement, const Document &parse
         if (domNode.isElement())
         {
             QDomElement domElement = domNode.toElement();
-            if (domElement.isNull() == false)
+            if (domElement.isNull() == false && domElement.tagName() == TagDetail)
             {
-                if (domElement.tagName() == TagDetail)
-                {
-                    ParseDetailElement(domElement, parse);
-                }
+                ParseDetailElement(domElement, parse);
             }
         }
         domNode = domNode.nextSibling();
@@ -1133,8 +1425,8 @@ void VPattern::PointsWithLineCommonAttributes(const QDomElement &domElement, VTo
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::PointsCommonAttributes(const QDomElement &domElement, VToolSinglePointInitData &initData)
 {
-    PointsCommonAttributes(domElement, initData.id, initData.mx, initData.my);
-    initData.name = GetParametrString(domElement, AttrName, "A");
+    DrawPointsCommonAttributes(domElement, initData.id, initData.mx, initData.my, initData.notes);
+    initData.name = GetParametrString(domElement, AttrName, QChar('A'));
     initData.showLabel = GetParametrBool(domElement, AttrShowLabel, trueStr);
 }
 
@@ -1142,8 +1434,17 @@ void VPattern::PointsCommonAttributes(const QDomElement &domElement, VToolSingle
 void VPattern::PointsCommonAttributes(const QDomElement &domElement, quint32 &id, qreal &mx, qreal &my)
 {
     ToolsCommonAttributes(domElement, id);
-    mx = qApp->toPixel(GetParametrDouble(domElement, AttrMx, "10.0"));
-    my = qApp->toPixel(GetParametrDouble(domElement, AttrMy, "15.0"));
+    mx = VAbstractValApplication::VApp()->toPixel(GetParametrDouble(domElement, AttrMx, QString::number(labelMX)));
+    my = VAbstractValApplication::VApp()->toPixel(GetParametrDouble(domElement, AttrMy, QString::number(labelMY)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::DrawPointsCommonAttributes(const QDomElement &domElement, quint32 &id, qreal &mx, qreal &my,
+                                          QString &notes)
+{
+    DrawToolsCommonAttributes(domElement, id, notes);
+    mx = VAbstractValApplication::VApp()->toPixel(GetParametrDouble(domElement, AttrMx, QString::number(labelMX)));
+    my = VAbstractValApplication::VApp()->toPixel(GetParametrDouble(domElement, AttrMy, QString::number(labelMY)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1154,118 +1455,117 @@ void VPattern::PointsCommonAttributes(const QDomElement &domElement, quint32 &id
  * @param parse parser file mode.
  * @param type type of point.
  */
-void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElement,
-                                 const Document &parse, const QString &type)
+void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse,
+                                 const QString &type)
 {
     SCASSERT(scene != nullptr)
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(not type.isEmpty(), Q_FUNC_INFO, "type of point is empty");
 
-    QStringList points = QStringList() << VToolBasePoint::ToolType                  /*0*/
-                                       << VToolEndLine::ToolType                    /*1*/
-                                       << VToolAlongLine::ToolType                  /*2*/
-                                       << VToolShoulderPoint::ToolType              /*3*/
-                                       << VToolNormal::ToolType                     /*4*/
-                                       << VToolBisector::ToolType                   /*5*/
-                                       << VToolLineIntersect::ToolType              /*6*/
-                                       << VToolPointOfContact::ToolType             /*7*/
-                                       << VNodePoint::ToolType                      /*8*/
-                                       << VToolHeight::ToolType                     /*9*/
-                                       << VToolTriangle::ToolType                   /*10*/
-                                       << VToolPointOfIntersection::ToolType        /*11*/
-                                       << VToolCutSpline::ToolType                  /*12*/
-                                       << VToolCutSplinePath::ToolType              /*13*/
-                                       << VToolCutArc::ToolType                     /*14*/
-                                       << VToolLineIntersectAxis::ToolType          /*15*/
-                                       << VToolCurveIntersectAxis::ToolType         /*16*/
-                                       << VToolPointOfIntersectionArcs::ToolType    /*17*/
-                                       << VToolPointOfIntersectionCircles::ToolType /*18*/
-                                       << VToolPointFromCircleAndTangent::ToolType  /*19*/
-                                       << VToolPointFromArcAndTangent::ToolType     /*20*/
-                                       << VToolTrueDarts::ToolType                  /*21*/
-                                       << VToolPointOfIntersectionCurves::ToolType  /*22*/
-                                       << VToolPin::ToolType                        /*23*/
-                                       << VToolPlaceLabel::ToolType;                /*24*/
+    static const QStringList points({VToolBasePoint::ToolType,                  /*0*/
+                                     VToolEndLine::ToolType,                    /*1*/
+                                     VToolAlongLine::ToolType,                  /*2*/
+                                     VToolShoulderPoint::ToolType,              /*3*/
+                                     VToolNormal::ToolType,                     /*4*/
+                                     VToolBisector::ToolType,                   /*5*/
+                                     VToolLineIntersect::ToolType,              /*6*/
+                                     VToolPointOfContact::ToolType,             /*7*/
+                                     VNodePoint::ToolType,                      /*8*/
+                                     VToolHeight::ToolType,                     /*9*/
+                                     VToolTriangle::ToolType,                   /*10*/
+                                     VToolPointOfIntersection::ToolType,        /*11*/
+                                     VToolCutSpline::ToolType,                  /*12*/
+                                     VToolCutSplinePath::ToolType,              /*13*/
+                                     VToolCutArc::ToolType,                     /*14*/
+                                     VToolLineIntersectAxis::ToolType,          /*15*/
+                                     VToolCurveIntersectAxis::ToolType,         /*16*/
+                                     VToolPointOfIntersectionArcs::ToolType,    /*17*/
+                                     VToolPointOfIntersectionCircles::ToolType, /*18*/
+                                     VToolPointFromCircleAndTangent::ToolType,  /*19*/
+                                     VToolPointFromArcAndTangent::ToolType,     /*20*/
+                                     VToolTrueDarts::ToolType,                  /*21*/
+                                     VToolPointOfIntersectionCurves::ToolType,  /*22*/
+                                     VToolPin::ToolType,                        /*23*/
+                                     VToolPlaceLabel::ToolType});               /*24*/
     switch (points.indexOf(type))
     {
-        case 0: //VToolBasePoint::ToolType
+        case 0: // VToolBasePoint::ToolType
             ParseToolBasePoint(scene, domElement, parse);
             break;
-        case 1: //VToolEndLine::ToolType
+        case 1: // VToolEndLine::ToolType
             ParseToolEndLine(scene, domElement, parse);
             break;
-        case 2: //VToolAlongLine::ToolType
+        case 2: // VToolAlongLine::ToolType
             ParseToolAlongLine(scene, domElement, parse);
             break;
-        case 3: //VToolShoulderPoint::ToolType
+        case 3: // VToolShoulderPoint::ToolType
             ParseToolShoulderPoint(scene, domElement, parse);
             break;
-        case 4: //VToolNormal::ToolType
+        case 4: // VToolNormal::ToolType
             ParseToolNormal(scene, domElement, parse);
             break;
-        case 5: //VToolBisector::ToolType
+        case 5: // VToolBisector::ToolType
             ParseToolBisector(scene, domElement, parse);
             break;
-        case 6: //VToolLineIntersect::ToolType
+        case 6: // VToolLineIntersect::ToolType
             ParseToolLineIntersect(scene, domElement, parse);
             break;
-        case 7: //VToolPointOfContact::ToolType
+        case 7: // VToolPointOfContact::ToolType
             ParseToolPointOfContact(scene, domElement, parse);
             break;
-        case 8: //VNodePoint::ToolType
+        case 8: // VNodePoint::ToolType
             ParseNodePoint(domElement, parse);
             break;
-        case 9: //VToolHeight::ToolType
+        case 9: // VToolHeight::ToolType
             ParseToolHeight(scene, domElement, parse);
             break;
-        case 10: //VToolTriangle::ToolType
+        case 10: // VToolTriangle::ToolType
             ParseToolTriangle(scene, domElement, parse);
             break;
-        case 11: //VToolPointOfIntersection::ToolType
+        case 11: // VToolPointOfIntersection::ToolType
             ParseToolPointOfIntersection(scene, domElement, parse);
             break;
-        case 12: //VToolCutSpline::ToolType
+        case 12: // VToolCutSpline::ToolType
             ParseToolCutSpline(scene, domElement, parse);
             break;
-        case 13: //VToolCutSplinePath::ToolType
+        case 13: // VToolCutSplinePath::ToolType
             ParseToolCutSplinePath(scene, domElement, parse);
             break;
-        case 14: //VToolCutArc::ToolType
+        case 14: // VToolCutArc::ToolType
             ParseToolCutArc(scene, domElement, parse);
             break;
-        case 15: //VToolLineIntersectAxis::ToolType
+        case 15: // VToolLineIntersectAxis::ToolType
             ParseToolLineIntersectAxis(scene, domElement, parse);
             break;
-        case 16: //VToolCurveIntersectAxis::ToolType
+        case 16: // VToolCurveIntersectAxis::ToolType
             ParseToolCurveIntersectAxis(scene, domElement, parse);
             break;
-        case 17: //VToolPointOfIntersectionArcs::ToolType
+        case 17: // VToolPointOfIntersectionArcs::ToolType
             ParseToolPointOfIntersectionArcs(scene, domElement, parse);
             break;
-        case 18: //VToolPointOfIntersectionCircles::ToolType
+        case 18: // VToolPointOfIntersectionCircles::ToolType
             ParseToolPointOfIntersectionCircles(scene, domElement, parse);
             break;
-        case 19: //VToolPointFromCircleAndTangent::ToolType
+        case 19: // VToolPointFromCircleAndTangent::ToolType
             ParseToolPointFromCircleAndTangent(scene, domElement, parse);
             break;
-        case 20: //VToolPointFromArcAndTangent::ToolType
+        case 20: // VToolPointFromArcAndTangent::ToolType
             ParseToolPointFromArcAndTangent(scene, domElement, parse);
             break;
-        case 21: //VToolTrueDarts::ToolType
+        case 21: // VToolTrueDarts::ToolType
             ParseToolTrueDarts(scene, domElement, parse);
             break;
-        case 22: //VToolPointOfIntersectionCurves::ToolType
+        case 22: // VToolPointOfIntersectionCurves::ToolType
             ParseToolPointOfIntersectionCurves(scene, domElement, parse);
             break;
-        case 23: //VToolPin::ToolType
+        case 23: // VToolPin::ToolType
             ParsePinPoint(domElement, parse);
             break;
-        case 24: //VToolPlaceLabel::ToolType
+        case 24: // VToolPlaceLabel::ToolType
             ParsePlaceLabel(domElement, parse);
             break;
         default:
-            VException e(tr("Unknown point type '%1'.").arg(type));
-            throw e;
+            throw VException(tr("Unknown point type '%1'.").arg(type));
     }
 }
 
@@ -1276,15 +1576,14 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
  * @param domElement tag in xml tree.
  * @param parse parser file mode.
  */
-void VPattern::ParseLineElement(VMainGraphicsScene *scene, const QDomElement &domElement,
-                                const Document &parse)
+void VPattern::ParseLineElement(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse)
 {
     SCASSERT(scene != nullptr)
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
     try
     {
         VToolLineInitData initData;
-        ToolsCommonAttributes(domElement, initData.id);
+        DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
         initData.firstPoint = GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
         initData.secondPoint = GetParametrUInt(domElement, AttrSecondPoint, NULL_ID_STR);
         initData.typeLine = GetParametrString(domElement, AttrTypeLine, TypeLineLine);
@@ -1316,8 +1615,7 @@ void VPattern::SplinesCommonAttributes(const QDomElement &domElement, quint32 &i
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::ParseCurrentPP()
 {
-    QDomElement domElement;
-    if (GetActivDrawElement(domElement))
+    if (QDomElement domElement; GetActivDrawElement(domElement))
     {
         ParseDrawElement(domElement, Document::LiteParse);
     }
@@ -1325,61 +1623,67 @@ void VPattern::ParseCurrentPP()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPattern::GetLabelBase(quint32 index) const
+auto VPattern::GetLabelBase(quint32 index) const -> QString
 {
-    const QStringList list = VApplication::LabelLanguages();
-    const QString def = QStringLiteral("A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z");
     QStringList alphabet;
-    switch (list.indexOf(qApp->ValentinaSettings()->GetLabelLanguage()))
+    switch (VApplication::LabelLanguages().indexOf(GetLabelPrefix()))
     {
         case 0: // de
         {
-            const QString al = QStringLiteral("A,Ä,B,C,D,E,F,G,H,I,J,K,L,M,N,O,Ö,P,Q,R,S,ß,T,U,Ü,V,W,X,Y,Z");
-            alphabet = al.split(QChar(','));
+            const auto al = QStringLiteral("A,Ä,B,C,D,E,F,G,H,I,J,K,L,M,N,O,Ö,P,Q,R,S,ß,T,U,Ü,V,W,X,Y,Z");
+            alphabet = al.split(','_L1);
             break;
         }
         case 2: // fr
         {
-            const QString al = QStringLiteral("A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z");
-            alphabet = al.split(QChar(','));
+            const auto al = QStringLiteral("A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z");
+            alphabet = al.split(','_L1);
             break;
         }
         case 3: // ru
         {
-            const QString al = QStringLiteral("А,Б,В,Г,Д,Е,Ж,З,И,К,Л,М,Н,О,П,Р,С,Т,У,Ф,Х,Ц,Ч,Ш,Щ,Э,Ю,Я");
-            alphabet = al.split(QChar(','));
+            const auto al = QStringLiteral("А,Б,В,Г,Д,Е,Ж,З,И,К,Л,М,Н,О,П,Р,С,Т,У,Ф,Х,Ц,Ч,Ш,Щ,Э,Ю,Я");
+            alphabet = al.split(','_L1);
             break;
         }
         case 4: // uk
         {
-            const QString al = QStringLiteral("А,Б,В,Г,Д,Е,Ж,З,І,Ї,Й,К,Л,М,Н,О,П,Р,С,Т,У,Ф,Х,Ц,Ч,Ш,Щ,Є,Ю,Я");
-            alphabet = al.split(QChar(','));
+            const auto al = QStringLiteral("А,Б,В,Г,Д,Е,Ж,З,І,Ї,Й,К,Л,М,Н,О,П,Р,С,Т,У,Ф,Х,Ц,Ч,Ш,Щ,Є,Ю,Я");
+            alphabet = al.split(','_L1);
             break;
         }
         case 5: // hr
         case 7: // bs
         {
-            const QString al = QStringLiteral("A,B,C,Č,Ć,D,Dž,Ð,E,F,G,H,I,J,K,L,Lj,M,N,Nj,O,P,R,S,Š,T,U,V,Z,Ž");
-            alphabet = al.split(QChar(','));
+            const auto al = QStringLiteral("A,B,C,Č,Ć,D,Dž,Ð,E,F,G,H,I,J,K,L,Lj,M,N,Nj,O,P,R,S,Š,T,U,V,Z,Ž");
+            alphabet = al.split(','_L1);
             break;
         }
         case 6: // sr
         {
-            const QString al = QStringLiteral("А,Б,В,Г,Д,Ђ,Е,Ж,З,И,Ј,К,Л,Љ,М,Н,Њ,О,П,Р,С,Т,Ћ,У,Ф,Х,Ц,Ч,Џ,Ш");
-            alphabet = al.split(QChar(','));
+            const auto al = QStringLiteral("А,Б,В,Г,Д,Ђ,Е,Ж,З,И,Ј,К,Л,Љ,М,Н,Њ,О,П,Р,С,Т,Ћ,У,Ф,Х,Ц,Ч,Џ,Ш");
+            alphabet = al.split(','_L1);
             break;
         }
-        case 1: // en
+        case 8: // cs
+        {
+            const auto al = QStringLiteral("a,á,b,c,č,d,ď,e,é,ě,f,g,h,ch,i,í,j,k,l,m,n,ň,o,ó,p,q,r,ř,s,š,t,ť,u,ú,ů,"
+                                           "v,w,x,y,ý,z,ž");
+            alphabet = al.split(','_L1);
+            break;
+        }
+        case 1:  // en
         default: // en
         {
-            alphabet = def.split(QChar(','));
+            const auto al = QStringLiteral("A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z");
+            alphabet = al.split(','_L1);
             break;
         }
     }
 
     QString base;
-    const int count = qFloor(index/static_cast<quint32>(alphabet.size()));
-    const int number = static_cast<int>(index) - alphabet.size() * count;
+    const int count = qFloor(index / static_cast<quint32>(alphabet.size()));
+    const auto number = static_cast<int>(index) - static_cast<int>(alphabet.size()) * count;
     int i = 0;
     do
     {
@@ -1406,8 +1710,10 @@ void VPattern::ParseToolBasePoint(VMainGraphicsScene *scene, const QDomElement &
         initData.typeCreation = Source::FromFile;
 
         PointsCommonAttributes(domElement, initData);
-        initData.x = qApp->toPixel(GetParametrDouble(domElement, AttrX, "10.0"));
-        initData.y = qApp->toPixel(GetParametrDouble(domElement, AttrY, "10.0"));
+        initData.x =
+            VAbstractValApplication::VApp()->toPixel(GetParametrDouble(domElement, AttrX, QStringLiteral("10.0")));
+        initData.y =
+            VAbstractValApplication::VApp()->toPixel(GetParametrDouble(domElement, AttrY, QStringLiteral("10.0")));
 
         spoint = VToolBasePoint::Create(initData);
     }
@@ -1438,16 +1744,16 @@ void VPattern::ParseToolEndLine(VMainGraphicsScene *scene, QDomElement &domEleme
 
         PointsWithLineCommonAttributes(domElement, initData);
 
-        initData.formulaLength = GetParametrString(domElement, AttrLength, "100.0");
-        const QString f = initData.formulaLength;//need for saving fixed formula;
+        initData.formulaLength = GetParametrString(domElement, AttrLength, QStringLiteral("100.0"));
+        const QString f = initData.formulaLength; // need for saving fixed formula;
 
         initData.basePointId = GetParametrUInt(domElement, AttrBasePoint, NULL_ID_STR);
 
-        initData.formulaAngle = GetParametrString(domElement, AttrAngle, "0.0");
+        initData.formulaAngle = GetParametrString(domElement, AttrAngle, QStringLiteral("0.0"));
         const QString angleFix = initData.formulaAngle;
 
         VToolEndLine::Create(initData);
-        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        // Rewrite attribute formula. Need for situation when we have wrong formula.
         if (f != initData.formulaLength || angleFix != initData.formulaAngle)
         {
             SetAttribute(domElement, AttrLength, initData.formulaLength);
@@ -1465,7 +1771,7 @@ void VPattern::ParseToolEndLine(VMainGraphicsScene *scene, QDomElement &domEleme
     catch (qmu::QmuParserError &e)
     {
         VExceptionObjectError excep(tr("Error creating or updating point of end line"), domElement);
-        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+        excep.AddMoreInformation("Message:     "_L1 + e.GetMsg() + '\n'_L1 + "Expression:  "_L1 + e.GetExpr());
         throw excep;
     }
 }
@@ -1478,7 +1784,13 @@ void VPattern::ParseToolAlongLine(VMainGraphicsScene *scene, QDomElement &domEle
 
     try
     {
+        QT_WARNING_PUSH
+        QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
         VToolAlongLineInitData initData;
+
+        QT_WARNING_POP
+
         initData.scene = scene;
         initData.doc = this;
         initData.data = data;
@@ -1486,13 +1798,13 @@ void VPattern::ParseToolAlongLine(VMainGraphicsScene *scene, QDomElement &domEle
         initData.typeCreation = Source::FromFile;
 
         PointsWithLineCommonAttributes(domElement, initData);
-        initData.formula = GetParametrString(domElement, AttrLength, "100.0");
-        const QString f = initData.formula;//need for saving fixed formula;
+        initData.formula = GetParametrString(domElement, AttrLength, QStringLiteral("100.0"));
+        const QString f = initData.formula; // need for saving fixed formula;
         initData.firstPointId = GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
         initData.secondPointId = GetParametrUInt(domElement, AttrSecondPoint, NULL_ID_STR);
 
         VToolAlongLine::Create(initData);
-        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        // Rewrite attribute formula. Need for situation when we have wrong formula.
         if (f != initData.formula)
         {
             SetAttribute(domElement, AttrLength, initData.formula);
@@ -1509,7 +1821,7 @@ void VPattern::ParseToolAlongLine(VMainGraphicsScene *scene, QDomElement &domEle
     catch (qmu::QmuParserError &e)
     {
         VExceptionObjectError excep(tr("Error creating or updating point along line"), domElement);
-        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+        excep.AddMoreInformation("Message:     "_L1 + e.GetMsg() + '\n'_L1 + "Expression:  "_L1 + e.GetExpr());
         throw excep;
     }
 }
@@ -1530,14 +1842,14 @@ void VPattern::ParseToolShoulderPoint(VMainGraphicsScene *scene, QDomElement &do
         initData.typeCreation = Source::FromFile;
 
         PointsWithLineCommonAttributes(domElement, initData);
-        initData.formula = GetParametrString(domElement, AttrLength, "100.0");
-        const QString f = initData.formula;//need for saving fixed formula;
+        initData.formula = GetParametrString(domElement, AttrLength, QStringLiteral("100.0"));
+        const QString f = initData.formula; // need for saving fixed formula;
         initData.p1Line = GetParametrUInt(domElement, AttrP1Line, NULL_ID_STR);
         initData.p2Line = GetParametrUInt(domElement, AttrP2Line, NULL_ID_STR);
         initData.pShoulder = GetParametrUInt(domElement, AttrPShoulder, NULL_ID_STR);
 
         VToolShoulderPoint::Create(initData);
-        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        // Rewrite attribute formula. Need for situation when we have wrong formula.
         if (f != initData.formula)
         {
             SetAttribute(domElement, AttrLength, initData.formula);
@@ -1554,7 +1866,7 @@ void VPattern::ParseToolShoulderPoint(VMainGraphicsScene *scene, QDomElement &do
     catch (qmu::QmuParserError &e)
     {
         VExceptionObjectError excep(tr("Error creating or updating point of shoulder"), domElement);
-        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+        excep.AddMoreInformation("Message:     "_L1 + e.GetMsg() + '\n'_L1 + "Expression:  "_L1 + e.GetExpr());
         throw excep;
     }
 }
@@ -1575,14 +1887,14 @@ void VPattern::ParseToolNormal(VMainGraphicsScene *scene, QDomElement &domElemen
         initData.typeCreation = Source::FromFile;
 
         PointsWithLineCommonAttributes(domElement, initData);
-        initData.formula = GetParametrString(domElement, AttrLength, "100.0");
-        const QString f = initData.formula;//need for saving fixed formula;
+        initData.formula = GetParametrString(domElement, AttrLength, QStringLiteral("100.0"));
+        const QString f = initData.formula; // need for saving fixed formula;
         initData.firstPointId = GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
         initData.secondPointId = GetParametrUInt(domElement, AttrSecondPoint, NULL_ID_STR);
-        initData.angle = GetParametrDouble(domElement, AttrAngle, "0.0");
+        initData.angle = GetParametrDouble(domElement, AttrAngle, QStringLiteral("0.0"));
 
         VToolNormal::Create(initData);
-        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        // Rewrite attribute formula. Need for situation when we have wrong formula.
         if (f != initData.formula)
         {
             SetAttribute(domElement, AttrLength, initData.formula);
@@ -1599,7 +1911,7 @@ void VPattern::ParseToolNormal(VMainGraphicsScene *scene, QDomElement &domElemen
     catch (qmu::QmuParserError &e)
     {
         VExceptionObjectError excep(tr("Error creating or updating point of normal"), domElement);
-        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+        excep.AddMoreInformation("Message:     "_L1 + e.GetMsg() + '\n'_L1 + "Expression:  "_L1 + e.GetExpr());
         throw excep;
     }
 }
@@ -1620,14 +1932,14 @@ void VPattern::ParseToolBisector(VMainGraphicsScene *scene, QDomElement &domElem
         initData.typeCreation = Source::FromFile;
 
         PointsWithLineCommonAttributes(domElement, initData);
-        initData.formula = GetParametrString(domElement, AttrLength, "100.0");
-        const QString f = initData.formula;//need for saving fixed formula;
+        initData.formula = GetParametrString(domElement, AttrLength, QStringLiteral("100.0"));
+        const QString f = initData.formula; // need for saving fixed formula;
         initData.firstPointId = GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
         initData.secondPointId = GetParametrUInt(domElement, AttrSecondPoint, NULL_ID_STR);
         initData.thirdPointId = GetParametrUInt(domElement, AttrThirdPoint, NULL_ID_STR);
 
         VToolBisector::Create(initData);
-        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        // Rewrite attribute formula. Need for situation when we have wrong formula.
         if (f != initData.formula)
         {
             SetAttribute(domElement, AttrLength, initData.formula);
@@ -1644,7 +1956,7 @@ void VPattern::ParseToolBisector(VMainGraphicsScene *scene, QDomElement &domElem
     catch (qmu::QmuParserError &e)
     {
         VExceptionObjectError excep(tr("Error creating or updating point of bisector"), domElement);
-        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+        excep.AddMoreInformation("Message:     "_L1 + e.GetMsg() + '\n'_L1 + "Expression:  "_L1 + e.GetExpr());
         throw excep;
     }
 }
@@ -1697,13 +2009,13 @@ void VPattern::ParseToolPointOfContact(VMainGraphicsScene *scene, QDomElement &d
 
         PointsCommonAttributes(domElement, initData);
         initData.radius = GetParametrString(domElement, AttrRadius, QChar('0'));
-        const QString f = initData.radius;//need for saving fixed formula;
+        const QString f = initData.radius; // need for saving fixed formula;
         initData.center = GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
         initData.firstPointId = GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
         initData.secondPointId = GetParametrUInt(domElement, AttrSecondPoint, NULL_ID_STR);
 
         VToolPointOfContact::Create(initData);
-        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        // Rewrite attribute formula. Need for situation when we have wrong formula.
         if (f != initData.radius)
         {
             SetAttribute(domElement, AttrRadius, initData.radius);
@@ -1720,7 +2032,7 @@ void VPattern::ParseToolPointOfContact(VMainGraphicsScene *scene, QDomElement &d
     catch (qmu::QmuParserError &e)
     {
         VExceptionObjectError excep(tr("Error creating or updating point of contact"), domElement);
-        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+        excep.AddMoreInformation("Message:     "_L1 + e.GetMsg() + '\n'_L1 + "Expression:  "_L1 + e.GetExpr());
         throw excep;
     }
 }
@@ -1750,18 +2062,19 @@ void VPattern::ParseNodePoint(const QDomElement &domElement, const Document &par
         {
             point = initData.data->GeometricObject<VPointF>(initData.idObject);
         }
-        catch (const VExceptionBadId &e)
+        catch (const VExceptionBadId &)
         { // Possible case. Parent was deleted, but the node object is still here.
-            Q_UNUSED(e)
             qDebug() << "Broken relation. Parent was deleted, but the node object is still here. Node point id ="
                      << initData.id << ".";
-            return;// Just ignore
+            return; // Just ignore
         }
 
-        QSharedPointer<VPointF> p(new VPointF(*point));
+        QSharedPointer<VPointF> const p(new VPointF(*point));
         p->setIdObject(initData.idObject);
         p->setMode(Draw::Modeling);
         p->SetShowLabel(GetParametrBool(domElement, AttrShowLabel, trueStr));
+        p->setMx(mx);
+        p->setMy(my);
 
         initData.data->UpdateGObject(initData.id, p);
         VNodePoint::Create(initData);
@@ -1789,6 +2102,19 @@ void VPattern::ParsePinPoint(const QDomElement &domElement, const Document &pars
 
         ToolsCommonAttributes(domElement, initData.id);
         initData.pointId = GetParametrUInt(domElement, AttrIdObject, NULL_ID_STR);
+
+        try
+        {
+            initData.data->GeometricObject<VPointF>(initData.pointId);
+        }
+        catch (const VExceptionBadId &)
+        { // Possible case. Parent was deleted, but the node object is still here.
+            qDebug() << "Broken relation. Parent was deleted, but the place label object is still here. Place label "
+                        "id ="
+                     << initData.id << ".";
+            return; // Just ignore
+        }
+
         initData.idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, NULL_ID_STR);
         VToolPin::Create(initData);
     }
@@ -1815,27 +2141,43 @@ void VPattern::ParsePlaceLabel(QDomElement &domElement, const Document &parse)
 
         ToolsCommonAttributes(domElement, initData.id);
         initData.centerPoint = GetParametrUInt(domElement, AttrIdObject, NULL_ID_STR);
+
+        try
+        {
+            initData.data->GeometricObject<VPointF>(initData.centerPoint);
+        }
+        catch (const VExceptionBadId &)
+        { // Possible case. Parent was deleted, but the node object is still here.
+            qDebug() << "Broken relation. Parent was deleted, but the place label object is still here. Place label "
+                        "id ="
+                     << initData.id << ".";
+            return; // Just ignore
+        }
+
         initData.idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, NULL_ID_STR);
 
-        initData.width = GetParametrString(domElement, AttrWidth, "1.0");
-        const QString w = initData.width;//need for saving fixed formula;
+        initData.width = GetParametrString(domElement, AttrWidth, QStringLiteral("1.0"));
+        const QString w = initData.width; // need for saving fixed formula;
 
-        initData.height = GetParametrString(domElement, AttrHeight, "1.0");
-        const QString h = initData.height;//need for saving fixed formula;
+        initData.height = GetParametrString(domElement, AttrHeight, QStringLiteral("1.0"));
+        const QString h = initData.height; // need for saving fixed formula;
 
-        initData.angle = GetParametrString(domElement, AttrAngle, "0.0");
-        const QString angle = initData.angle;//need for saving fixed formula;
+        initData.angle = GetParametrString(domElement, AttrAngle, QStringLiteral("0.0"));
+        const QString angle = initData.angle; // need for saving fixed formula;
 
-        initData.visibilityTrigger = GetParametrString(domElement, VAbstractPattern::AttrVisible, "1.0");
-        const QString visibility = initData.visibilityTrigger;//need for saving fixed formula;
+        initData.visibilityTrigger =
+            GetParametrString(domElement, VAbstractPattern::AttrVisible, QStringLiteral("1.0"));
+        const QString visibility = initData.visibilityTrigger; // need for saving fixed formula;
 
         initData.type = static_cast<PlaceLabelType>(GetParametrUInt(domElement, AttrPlaceLabelType, QChar('0')));
 
+        initData.notMirrored = GetParametrBool(domElement, AttrNotMirrored, falseStr);
+
         VToolPlaceLabel::Create(initData);
 
-        //Rewrite attribute formula. Need for situation when we have wrong formula.
-        if (w != initData.width || h != initData.height || angle != initData.angle
-                || visibility != initData.visibilityTrigger)
+        // Rewrite attribute formula. Need for situation when we have wrong formula.
+        if (w != initData.width || h != initData.height || angle != initData.angle ||
+            visibility != initData.visibilityTrigger)
         {
             SetAttribute(domElement, AttrWidth, initData.width);
             SetAttribute(domElement, AttrHeight, initData.height);
@@ -1847,14 +2189,14 @@ void VPattern::ParsePlaceLabel(QDomElement &domElement, const Document &parse)
     }
     catch (const VExceptionBadId &e)
     {
-        VExceptionObjectError excep(tr("Error creating or updating place lavel"), domElement);
+        VExceptionObjectError excep(tr("Error creating or updating place label"), domElement);
         excep.AddMoreInformation(e.ErrorMessage());
         throw excep;
     }
     catch (qmu::QmuParserError &e)
     {
-        VExceptionObjectError excep(tr("Error creating or updating place lavel"), domElement);
-        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+        VExceptionObjectError excep(tr("Error creating or updating place label"), domElement);
+        excep.AddMoreInformation("Message:     "_L1 + e.GetMsg() + '\n'_L1 + "Expression:  "_L1 + e.GetExpr());
         throw excep;
     }
 }
@@ -1958,7 +2300,7 @@ void VPattern::ParseToolCutSpline(VMainGraphicsScene *scene, QDomElement &domEle
 
     try
     {
-        VToolCutSplineInitData initData;
+        VToolCutInitData initData;
         initData.scene = scene;
         initData.doc = this;
         initData.data = data;
@@ -1967,11 +2309,13 @@ void VPattern::ParseToolCutSpline(VMainGraphicsScene *scene, QDomElement &domEle
 
         PointsCommonAttributes(domElement, initData);
         initData.formula = GetParametrString(domElement, AttrLength, QChar('0'));
-        const QString f = initData.formula;//need for saving fixed formula;
-        initData.splineId = GetParametrUInt(domElement, VToolCutSpline::AttrSpline, NULL_ID_STR);
+        const QString f = initData.formula; // need for saving fixed formula;
+        initData.baseCurveId = GetParametrUInt(domElement, VToolCutSpline::AttrSpline, NULL_ID_STR);
+        initData.aliasSuffix1 = GetParametrEmptyString(domElement, AttrAlias1);
+        initData.aliasSuffix2 = GetParametrEmptyString(domElement, AttrAlias2);
 
         VToolCutSpline::Create(initData);
-        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        // Rewrite attribute formula. Need for situation when we have wrong formula.
         if (f != initData.formula)
         {
             SetAttribute(domElement, AttrLength, initData.formula);
@@ -1988,7 +2332,7 @@ void VPattern::ParseToolCutSpline(VMainGraphicsScene *scene, QDomElement &domEle
     catch (qmu::QmuParserError &e)
     {
         VExceptionObjectError excep(tr("Error creating or updating cut spline point"), domElement);
-        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+        excep.AddMoreInformation("Message:     "_L1 + e.GetMsg() + '\n'_L1 + "Expression:  "_L1 + e.GetExpr());
         throw excep;
     }
 }
@@ -2001,7 +2345,7 @@ void VPattern::ParseToolCutSplinePath(VMainGraphicsScene *scene, QDomElement &do
 
     try
     {
-        VToolCutSplinePathInitData initData;
+        VToolCutInitData initData;
         initData.scene = scene;
         initData.doc = this;
         initData.data = data;
@@ -2010,11 +2354,13 @@ void VPattern::ParseToolCutSplinePath(VMainGraphicsScene *scene, QDomElement &do
 
         PointsCommonAttributes(domElement, initData);
         initData.formula = GetParametrString(domElement, AttrLength, QChar('0'));
-        const QString f = initData.formula;//need for saving fixed formula;
-        initData.splinePathId = GetParametrUInt(domElement, VToolCutSplinePath::AttrSplinePath, NULL_ID_STR);
+        const QString f = initData.formula; // need for saving fixed formula;
+        initData.baseCurveId = GetParametrUInt(domElement, VToolCutSplinePath::AttrSplinePath, NULL_ID_STR);
+        initData.aliasSuffix1 = GetParametrEmptyString(domElement, AttrAlias1);
+        initData.aliasSuffix2 = GetParametrEmptyString(domElement, AttrAlias2);
 
         VToolCutSplinePath::Create(initData);
-        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        // Rewrite attribute formula. Need for situation when we have wrong formula.
         if (f != initData.formula)
         {
             SetAttribute(domElement, AttrLength, initData.formula);
@@ -2031,7 +2377,7 @@ void VPattern::ParseToolCutSplinePath(VMainGraphicsScene *scene, QDomElement &do
     catch (qmu::QmuParserError &e)
     {
         VExceptionObjectError excep(tr("Error creating or updating cut spline path point"), domElement);
-        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+        excep.AddMoreInformation("Message:     "_L1 + e.GetMsg() + '\n'_L1 + "Expression:  "_L1 + e.GetExpr());
         throw excep;
     }
 }
@@ -2044,7 +2390,7 @@ void VPattern::ParseToolCutArc(VMainGraphicsScene *scene, QDomElement &domElemen
 
     try
     {
-        VToolCutArcInitData initData;
+        VToolCutInitData initData;
         initData.scene = scene;
         initData.doc = this;
         initData.data = data;
@@ -2053,11 +2399,13 @@ void VPattern::ParseToolCutArc(VMainGraphicsScene *scene, QDomElement &domElemen
 
         PointsCommonAttributes(domElement, initData);
         initData.formula = GetParametrString(domElement, AttrLength, QChar('0'));
-        const QString f = initData.formula;//need for saving fixed formula;
-        initData.arcId = GetParametrUInt(domElement, AttrArc, NULL_ID_STR);
+        const QString f = initData.formula; // need for saving fixed formula;
+        initData.baseCurveId = GetParametrUInt(domElement, AttrArc, NULL_ID_STR);
+        initData.aliasSuffix1 = GetParametrEmptyString(domElement, AttrAlias1);
+        initData.aliasSuffix2 = GetParametrEmptyString(domElement, AttrAlias2);
 
         VToolCutArc::Create(initData);
-        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        // Rewrite attribute formula. Need for situation when we have wrong formula.
         if (f != initData.formula)
         {
             SetAttribute(domElement, AttrLength, initData.formula);
@@ -2074,14 +2422,13 @@ void VPattern::ParseToolCutArc(VMainGraphicsScene *scene, QDomElement &domElemen
     catch (qmu::QmuParserError &e)
     {
         VExceptionObjectError excep(tr("Error creating or updating cut arc point"), domElement);
-        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+        excep.AddMoreInformation("Message:     "_L1 + e.GetMsg() + '\n'_L1 + "Expression:  "_L1 + e.GetExpr());
         throw excep;
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::ParseToolLineIntersectAxis(VMainGraphicsScene *scene, QDomElement &domElement,
-                                          const Document &parse)
+void VPattern::ParseToolLineIntersectAxis(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse)
 {
     SCASSERT(scene != nullptr)
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
@@ -2101,11 +2448,11 @@ void VPattern::ParseToolLineIntersectAxis(VMainGraphicsScene *scene, QDomElement
         initData.firstPointId = GetParametrUInt(domElement, AttrP1Line, NULL_ID_STR);
         initData.secondPointId = GetParametrUInt(domElement, AttrP2Line, NULL_ID_STR);
 
-        initData.formulaAngle = GetParametrString(domElement, AttrAngle, "0.0");
+        initData.formulaAngle = GetParametrString(domElement, AttrAngle, QStringLiteral("0.0"));
         const QString angleFix = initData.formulaAngle;
 
         VToolLineIntersectAxis::Create(initData);
-        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        // Rewrite attribute formula. Need for situation when we have wrong formula.
         if (angleFix != initData.formulaAngle)
         {
             SetAttribute(domElement, AttrAngle, initData.formulaAngle);
@@ -2115,30 +2462,33 @@ void VPattern::ParseToolLineIntersectAxis(VMainGraphicsScene *scene, QDomElement
     }
     catch (const VExceptionBadId &e)
     {
-        VExceptionObjectError excep(tr("Error creating or updating point of intersection line and axis"),
-                                    domElement);
+        VExceptionObjectError excep(tr("Error creating or updating point of intersection line and axis"), domElement);
         excep.AddMoreInformation(e.ErrorMessage());
         throw excep;
     }
     catch (qmu::QmuParserError &e)
     {
-        VExceptionObjectError excep(tr("Error creating or updating point of intersection line and axis"),
-                                    domElement);
-        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+        VExceptionObjectError excep(tr("Error creating or updating point of intersection line and axis"), domElement);
+        excep.AddMoreInformation("Message:     "_L1 + e.GetMsg() + '\n'_L1 + "Expression:  "_L1 + e.GetExpr());
         throw excep;
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::ParseToolCurveIntersectAxis(VMainGraphicsScene *scene, QDomElement &domElement,
-                                           const Document &parse)
+void VPattern::ParseToolCurveIntersectAxis(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse)
 {
     SCASSERT(scene != nullptr)
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
     try
     {
+        QT_WARNING_PUSH
+        QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
         VToolCurveIntersectAxisInitData initData;
+
+        QT_WARNING_POP
+
         initData.scene = scene;
         initData.doc = this;
         initData.data = data;
@@ -2149,11 +2499,13 @@ void VPattern::ParseToolCurveIntersectAxis(VMainGraphicsScene *scene, QDomElemen
 
         initData.basePointId = GetParametrUInt(domElement, AttrBasePoint, NULL_ID_STR);
         initData.curveId = GetParametrUInt(domElement, AttrCurve, NULL_ID_STR);
-        initData.formulaAngle = GetParametrString(domElement, AttrAngle, "0.0");
+        initData.formulaAngle = GetParametrString(domElement, AttrAngle, QStringLiteral("0.0"));
         const QString angleFix = initData.formulaAngle;
+        initData.aliasSuffix1 = GetParametrEmptyString(domElement, AttrAlias1);
+        initData.aliasSuffix2 = GetParametrEmptyString(domElement, AttrAlias2);
 
         VToolCurveIntersectAxis::Create(initData);
-        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        // Rewrite attribute formula. Need for situation when we have wrong formula.
         if (angleFix != initData.formulaAngle)
         {
             SetAttribute(domElement, AttrAngle, initData.formulaAngle);
@@ -2163,16 +2515,14 @@ void VPattern::ParseToolCurveIntersectAxis(VMainGraphicsScene *scene, QDomElemen
     }
     catch (const VExceptionBadId &e)
     {
-        VExceptionObjectError excep(tr("Error creating or updating point of intersection curve and axis"),
-                                    domElement);
+        VExceptionObjectError excep(tr("Error creating or updating point of intersection curve and axis"), domElement);
         excep.AddMoreInformation(e.ErrorMessage());
         throw excep;
     }
     catch (qmu::QmuParserError &e)
     {
-        VExceptionObjectError excep(tr("Error creating or updating point of intersection curve and axis"),
-                                    domElement);
-        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+        VExceptionObjectError excep(tr("Error creating or updating point of intersection curve and axis"), domElement);
+        excep.AddMoreInformation("Message:     "_L1 + e.GetMsg() + '\n'_L1 + "Expression:  "_L1 + e.GetExpr());
         throw excep;
     }
 }
@@ -2234,11 +2584,11 @@ void VPattern::ParseToolPointOfIntersectionCircles(VMainGraphicsScene *scene, QD
         initData.crossPoint = static_cast<CrossCirclesPoint>(GetParametrUInt(domElement, AttrCrossPoint, QChar('1')));
 
         VToolPointOfIntersectionCircles::Create(initData);
-        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        // Rewrite attribute formula. Need for situation when we have wrong formula.
         if (c1R != initData.firstCircleRadius || c2R != initData.secondCircleRadius)
         {
-            SetAttribute(domElement, AttrC1Center, initData.firstCircleRadius);
-            SetAttribute(domElement, AttrC2Center, initData.secondCircleRadius);
+            SetAttribute(domElement, AttrC1Radius, initData.firstCircleRadius);
+            SetAttribute(domElement, AttrC2Radius, initData.secondCircleRadius);
             modified = true;
             haveLiteChange();
         }
@@ -2260,7 +2610,13 @@ void VPattern::ParseToolPointOfIntersectionCurves(VMainGraphicsScene *scene, QDo
 
     try
     {
+        QT_WARNING_PUSH
+        QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
         VToolPointOfIntersectionCurvesInitData initData;
+
+        QT_WARNING_POP
+
         initData.scene = scene;
         initData.doc = this;
         initData.data = data;
@@ -2272,6 +2628,10 @@ void VPattern::ParseToolPointOfIntersectionCurves(VMainGraphicsScene *scene, QDo
         initData.secondCurveId = GetParametrUInt(domElement, AttrCurve2, NULL_ID_STR);
         initData.vCrossPoint = static_cast<VCrossCurvesPoint>(GetParametrUInt(domElement, AttrVCrossPoint, QChar('1')));
         initData.hCrossPoint = static_cast<HCrossCurvesPoint>(GetParametrUInt(domElement, AttrHCrossPoint, QChar('1')));
+        initData.curve1AliasSuffix1 = GetParametrEmptyString(domElement, AttrCurve1Alias1);
+        initData.curve1AliasSuffix2 = GetParametrEmptyString(domElement, AttrCurve1Alias2);
+        initData.curve2AliasSuffix1 = GetParametrEmptyString(domElement, AttrCurve2Alias1);
+        initData.curve2AliasSuffix2 = GetParametrEmptyString(domElement, AttrCurve2Alias2);
 
         VToolPointOfIntersectionCurves::Create(initData);
     }
@@ -2307,10 +2667,10 @@ void VPattern::ParseToolPointFromCircleAndTangent(VMainGraphicsScene *scene, QDo
         initData.crossPoint = static_cast<CrossCirclesPoint>(GetParametrUInt(domElement, AttrCrossPoint, QChar('1')));
 
         VToolPointFromCircleAndTangent::Create(initData);
-        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        // Rewrite attribute formula. Need for situation when we have wrong formula.
         if (cR != initData.circleRadius)
         {
-            SetAttribute(domElement, AttrCCenter, initData.circleRadius);
+            SetAttribute(domElement, AttrCRadius, initData.circleRadius);
             modified = true;
             haveLiteChange();
         }
@@ -2369,7 +2729,7 @@ void VPattern::ParseToolTrueDarts(VMainGraphicsScene *scene, const QDomElement &
         initData.parse = parse;
         initData.typeCreation = Source::FromFile;
 
-        ToolsCommonAttributes(domElement, initData.id);
+        DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
 
         initData.p1id = GetParametrUInt(domElement, AttrPoint1, NULL_ID_STR);
         initData.p2id = GetParametrUInt(domElement, AttrPoint2, NULL_ID_STR);
@@ -2380,14 +2740,18 @@ void VPattern::ParseToolTrueDarts(VMainGraphicsScene *scene, const QDomElement &
         initData.dartP2Id = GetParametrUInt(domElement, AttrDartP2, NULL_ID_STR);
         initData.dartP3Id = GetParametrUInt(domElement, AttrDartP3, NULL_ID_STR);
 
-        initData.name1 = GetParametrString(domElement, AttrName1, "A");
-        initData.mx1 = qApp->toPixel(GetParametrDouble(domElement, AttrMx1, "10.0"));
-        initData.my1 = qApp->toPixel(GetParametrDouble(domElement, AttrMy1, "15.0"));
+        initData.name1 = GetParametrString(domElement, AttrName1, QChar('A'));
+        initData.mx1 =
+            VAbstractValApplication::VApp()->toPixel(GetParametrDouble(domElement, AttrMx1, QString::number(labelMX)));
+        initData.my1 =
+            VAbstractValApplication::VApp()->toPixel(GetParametrDouble(domElement, AttrMy1, QString::number(labelMY)));
         initData.showLabel1 = GetParametrBool(domElement, AttrShowLabel1, trueStr);
 
-        initData.name2 = GetParametrString(domElement, AttrName2, "A");
-        initData.mx2 = qApp->toPixel(GetParametrDouble(domElement, AttrMx2, "10.0"));
-        initData.my2 = qApp->toPixel(GetParametrDouble(domElement, AttrMy2, "15.0"));
+        initData.name2 = GetParametrString(domElement, AttrName2, QChar('A'));
+        initData.mx2 =
+            VAbstractValApplication::VApp()->toPixel(GetParametrDouble(domElement, AttrMx2, QString::number(labelMX)));
+        initData.my2 =
+            VAbstractValApplication::VApp()->toPixel(GetParametrDouble(domElement, AttrMy2, QString::number(labelMY)));
         initData.showLabel2 = GetParametrBool(domElement, AttrShowLabel2, trueStr);
 
         VToolTrueDarts::Create(initData);
@@ -2402,7 +2766,7 @@ void VPattern::ParseToolTrueDarts(VMainGraphicsScene *scene, const QDomElement &
 
 //---------------------------------------------------------------------------------------------------------------------
 // TODO. Delete if minimal supported version is 0.2.7
-void VPattern::ParseOldToolSpline(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse)
+void VPattern::ParseOldToolSpline(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse)
 {
     SCASSERT(scene != nullptr)
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
@@ -2416,21 +2780,21 @@ void VPattern::ParseOldToolSpline(VMainGraphicsScene *scene, const QDomElement &
         initData.parse = parse;
         initData.typeCreation = Source::FromFile;
 
-        ToolsCommonAttributes(domElement, initData.id);
+        DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
         const quint32 point1 = GetParametrUInt(domElement, AttrPoint1, NULL_ID_STR);
         const quint32 point4 = GetParametrUInt(domElement, AttrPoint4, NULL_ID_STR);
-        const qreal angle1 = GetParametrDouble(domElement, AttrAngle1, "270.0");
-        const qreal angle2 = GetParametrDouble(domElement, AttrAngle2, "90.0");
-        const qreal kAsm1 = GetParametrDouble(domElement, AttrKAsm1, "1.0");
-        const qreal kAsm2 = GetParametrDouble(domElement, AttrKAsm2, "1.0");
-        const qreal kCurve = GetParametrDouble(domElement, AttrKCurve, "1.0");
+        const qreal angle1 = GetParametrDouble(domElement, AttrAngle1, QStringLiteral("270.0"));
+        const qreal angle2 = GetParametrDouble(domElement, AttrAngle2, QStringLiteral("90.0"));
+        const qreal kAsm1 = GetParametrDouble(domElement, AttrKAsm1, QStringLiteral("1.0"));
+        const qreal kAsm2 = GetParametrDouble(domElement, AttrKAsm2, QStringLiteral("1.0"));
+        const qreal kCurve = GetParametrDouble(domElement, AttrKCurve, QStringLiteral("1.0"));
         const QString color = GetParametrString(domElement, AttrColor, ColorBlack);
         const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, QChar('0'));
 
         const auto p1 = data->GeometricObject<VPointF>(point1);
         const auto p4 = data->GeometricObject<VPointF>(point4);
 
-        auto* spline = new VSpline(*p1, *p4, angle1, angle2, kAsm1, kAsm2, kCurve);
+        auto *spline = new VSpline(*p1, *p4, angle1, angle2, kAsm1, kAsm2, kCurve);
         if (duplicate > 0)
         {
             spline->SetDuplicate(duplicate);
@@ -2438,6 +2802,9 @@ void VPattern::ParseOldToolSpline(VMainGraphicsScene *scene, const QDomElement &
         spline->SetColor(color);
 
         VToolSpline::Create(initData, spline);
+
+        // Convert to newer format
+        SetAttribute(domElement, AttrType, VToolSpline::ToolType);
     }
     catch (const VExceptionBadId &e)
     {
@@ -2462,37 +2829,36 @@ void VPattern::ParseToolSpline(VMainGraphicsScene *scene, QDomElement &domElemen
         initData.parse = parse;
         initData.typeCreation = Source::FromFile;
 
-        ToolsCommonAttributes(domElement, initData.id);
+        DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
         initData.point1 = GetParametrUInt(domElement, AttrPoint1, NULL_ID_STR);
         initData.point4 = GetParametrUInt(domElement, AttrPoint4, NULL_ID_STR);
 
         initData.a1 = GetParametrString(domElement, AttrAngle1, QChar('0'));
-        const QString angle1 = initData.a1;//need for saving fixed formula;
+        const QString angle1 = initData.a1; // need for saving fixed formula;
 
         initData.a2 = GetParametrString(domElement, AttrAngle2, QChar('0'));
-        const QString angle2 = initData.a2;//need for saving fixed formula;
+        const QString angle2 = initData.a2; // need for saving fixed formula;
 
         initData.l1 = GetParametrString(domElement, AttrLength1, QChar('0'));
-        const QString length1 = initData.l1;//need for saving fixed formula;
+        const QString length1 = initData.l1; // need for saving fixed formula;
 
         initData.l2 = GetParametrString(domElement, AttrLength2, QChar('0'));
-        const QString length2 = initData.l2;//need for saving fixed formula;
+        const QString length2 = initData.l2; // need for saving fixed formula;
 
         initData.color = GetParametrString(domElement, AttrColor, ColorBlack);
         initData.penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         initData.duplicate = GetParametrUInt(domElement, AttrDuplicate, QChar('0'));
         initData.approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
+        initData.aliasSuffix = GetParametrEmptyString(domElement, AttrAlias);
 
-        VToolSpline *spl = VToolSpline::Create(initData);
-
-        if (spl != nullptr)
+        if (const VToolSpline *spl = VToolSpline::Create(initData); spl != nullptr)
         {
-            VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
+            auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
             SCASSERT(window != nullptr)
             connect(spl, &VToolSpline::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
         }
 
-        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        // Rewrite attribute formula. Need for situation when we have wrong formula.
         if (angle1 != initData.a1 || angle2 != initData.a2 || length1 != initData.l1 || length2 != initData.l2)
         {
             SetAttribute(domElement, AttrAngle1, initData.a1);
@@ -2512,7 +2878,7 @@ void VPattern::ParseToolSpline(VMainGraphicsScene *scene, QDomElement &domElemen
     catch (qmu::QmuParserError &e)
     {
         VExceptionObjectError excep(tr("Error creating or updating simple interactive spline"), domElement);
-        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+        excep.AddMoreInformation("Message:     "_L1 + e.GetMsg() + '\n'_L1 + "Expression:  "_L1 + e.GetExpr());
         throw excep;
     }
 }
@@ -2532,7 +2898,7 @@ void VPattern::ParseToolCubicBezier(VMainGraphicsScene *scene, const QDomElement
         initData.parse = parse;
         initData.typeCreation = Source::FromFile;
 
-        ToolsCommonAttributes(domElement, initData.id);
+        DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
 
         const quint32 point1 = GetParametrUInt(domElement, AttrPoint1, NULL_ID_STR);
         const quint32 point2 = GetParametrUInt(domElement, AttrPoint2, NULL_ID_STR);
@@ -2543,6 +2909,7 @@ void VPattern::ParseToolCubicBezier(VMainGraphicsScene *scene, const QDomElement
         const QString penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, QChar('0'));
         const qreal approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
+        const QString alias = GetParametrEmptyString(domElement, AttrAlias);
 
         auto p1 = data->GeometricObject<VPointF>(point1);
         auto p2 = data->GeometricObject<VPointF>(point2);
@@ -2558,6 +2925,7 @@ void VPattern::ParseToolCubicBezier(VMainGraphicsScene *scene, const QDomElement
         initData.spline->SetPenStyle(penStyle);
         initData.spline->SetPenStyle(penStyle);
         initData.spline->SetApproximationScale(approximationScale);
+        initData.spline->SetAliasSuffix(alias);
 
         VToolCubicBezier::Create(initData);
     }
@@ -2570,7 +2938,7 @@ void VPattern::ParseToolCubicBezier(VMainGraphicsScene *scene, const QDomElement
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::ParseOldToolSplinePath(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse)
+void VPattern::ParseOldToolSplinePath(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse)
 {
     SCASSERT(scene != nullptr)
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
@@ -2584,8 +2952,8 @@ void VPattern::ParseOldToolSplinePath(VMainGraphicsScene *scene, const QDomEleme
         initData.parse = parse;
         initData.typeCreation = Source::FromFile;
 
-        ToolsCommonAttributes(domElement, initData.id);
-        const qreal kCurve = GetParametrDouble(domElement, AttrKCurve, "1.0");
+        DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
+        const qreal kCurve = GetParametrDouble(domElement, AttrKCurve, QStringLiteral("1.0"));
         const QString color = GetParametrString(domElement, AttrColor, ColorBlack);
         const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, QChar('0'));
         const qreal approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
@@ -2597,30 +2965,27 @@ void VPattern::ParseOldToolSplinePath(VMainGraphicsScene *scene, const QDomEleme
         for (qint32 i = 0; i < num; ++i)
         {
             const QDomElement element = nodeList.at(i).toElement();
-            if (element.isNull() == false)
+            if (element.isNull() == false && element.tagName() == AttrPathPoint)
             {
-                if (element.tagName() == AttrPathPoint)
+                const qreal kAsm1 = GetParametrDouble(element, AttrKAsm1, QStringLiteral("1.0"));
+                const qreal angle = GetParametrDouble(element, AttrAngle, QChar('0'));
+                const qreal kAsm2 = GetParametrDouble(element, AttrKAsm2, QStringLiteral("1.0"));
+                const quint32 pSpline = GetParametrUInt(element, AttrPSpline, NULL_ID_STR);
+                const VPointF p = *data->GeometricObject<VPointF>(pSpline);
+
+                QLineF line(0, 0, 100, 0);
+                line.setAngle(angle + 180);
+
+                VFSplinePoint const splPoint(p, kAsm1, line.angle(), kAsm2, angle);
+                points.append(splPoint);
+                if (parse == Document::FullParse)
                 {
-                    const qreal kAsm1 = GetParametrDouble(element, AttrKAsm1, "1.0");
-                    const qreal angle = GetParametrDouble(element, AttrAngle, QChar('0'));
-                    const qreal kAsm2 = GetParametrDouble(element, AttrKAsm2, "1.0");
-                    const quint32 pSpline = GetParametrUInt(element, AttrPSpline, NULL_ID_STR);
-                    const VPointF p = *data->GeometricObject<VPointF>(pSpline);
-
-                    QLineF line(0, 0, 100, 0);
-                    line.setAngle(angle+180);
-
-                    VFSplinePoint splPoint(p, kAsm1, line.angle(), kAsm2, angle);
-                    points.append(splPoint);
-                    if (parse == Document::FullParse)
-                    {
-                        IncrementReferens(p.getIdTool());
-                    }
+                    IncrementReferens(p.getIdTool());
                 }
             }
         }
 
-        auto* path = new VSplinePath(points, kCurve);
+        auto *path = new VSplinePath(points, kCurve);
         if (duplicate > 0)
         {
             path->SetDuplicate(duplicate);
@@ -2629,6 +2994,9 @@ void VPattern::ParseOldToolSplinePath(VMainGraphicsScene *scene, const QDomEleme
         path->SetApproximationScale(approximationScale);
 
         VToolSplinePath::Create(initData, path);
+
+        // Convert to newer format
+        SetAttribute(domElement, AttrType, VToolSplinePath::ToolType);
     }
     catch (const VExceptionBadId &e)
     {
@@ -2653,11 +3021,12 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
         initData.parse = parse;
         initData.typeCreation = Source::FromFile;
 
-        ToolsCommonAttributes(domElement, initData.id);
+        DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
         initData.color = GetParametrString(domElement, AttrColor, ColorBlack);
         initData.penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         initData.duplicate = GetParametrUInt(domElement, AttrDuplicate, QChar('0'));
         initData.approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
+        initData.aliasSuffix = GetParametrEmptyString(domElement, AttrAlias);
 
         const QDomNodeList nodeList = domElement.childNodes();
         const qint32 num = nodeList.size();
@@ -2680,22 +3049,20 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
             }
         }
 
-        //need for saving fixed formula;
+        // need for saving fixed formula;
         const QVector<QString> angle1 = initData.a1;
         const QVector<QString> angle2 = initData.a2;
         const QVector<QString> length1 = initData.l1;
         const QVector<QString> length2 = initData.l2;
 
-        VToolSplinePath *spl = VToolSplinePath::Create(initData);
-
-        if (spl != nullptr)
+        if (const VToolSplinePath *spl = VToolSplinePath::Create(initData); spl != nullptr)
         {
-            VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
+            const auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
             SCASSERT(window != nullptr)
             connect(spl, &VToolSplinePath::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
         }
 
-        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        // Rewrite attribute formula. Need for situation when we have wrong formula.
         int count = 0;
         for (qint32 i = 0; i < num; ++i)
         {
@@ -2725,7 +3092,7 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
     catch (qmu::QmuParserError &e)
     {
         VExceptionObjectError excep(tr("Error creating or updating interactive spline path"), domElement);
-        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+        excep.AddMoreInformation("Message:     "_L1 + e.GetMsg() + '\n'_L1 + "Expression:  "_L1 + e.GetExpr());
         throw excep;
     }
 }
@@ -2745,11 +3112,12 @@ void VPattern::ParseToolCubicBezierPath(VMainGraphicsScene *scene, const QDomEle
         initData.parse = parse;
         initData.typeCreation = Source::FromFile;
 
-        ToolsCommonAttributes(domElement, initData.id);
+        DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
         const QString color = GetParametrString(domElement, AttrColor, ColorBlack);
         const QString penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, QChar('0'));
         const qreal approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
+        const QString alias = GetParametrEmptyString(domElement, AttrAlias);
 
         QVector<VPointF> points;
 
@@ -2758,17 +3126,14 @@ void VPattern::ParseToolCubicBezierPath(VMainGraphicsScene *scene, const QDomEle
         for (qint32 i = 0; i < num; ++i)
         {
             const QDomElement element = nodeList.at(i).toElement();
-            if (element.isNull() == false)
+            if (element.isNull() == false && element.tagName() == AttrPathPoint)
             {
-                if (element.tagName() == AttrPathPoint)
+                const quint32 pSpline = GetParametrUInt(element, AttrPSpline, NULL_ID_STR);
+                const VPointF p = *data->GeometricObject<VPointF>(pSpline);
+                points.append(p);
+                if (parse == Document::FullParse)
                 {
-                    const quint32 pSpline = GetParametrUInt(element, AttrPSpline, NULL_ID_STR);
-                    const VPointF p = *data->GeometricObject<VPointF>(pSpline);
-                    points.append(p);
-                    if (parse == Document::FullParse)
-                    {
-                        IncrementReferens(p.getIdTool());
-                    }
+                    IncrementReferens(p.getIdTool());
                 }
             }
         }
@@ -2781,6 +3146,7 @@ void VPattern::ParseToolCubicBezierPath(VMainGraphicsScene *scene, const QDomEle
         initData.path->SetColor(color);
         initData.path->SetPenStyle(penStyle);
         initData.path->SetApproximationScale(approximationScale);
+        initData.path->SetAliasSuffix(alias);
 
         VToolCubicBezierPath::Create(initData);
     }
@@ -2811,14 +3177,14 @@ void VPattern::ParseNodeSpline(const QDomElement &domElement, const Document &pa
             const auto obj = initData.data->GetGObject(initData.idObject);
             if (obj->getType() == GOType::Spline)
             {
-                VSpline *spl = new VSpline(*data->GeometricObject<VSpline>(initData.idObject));
+                auto *spl = new VSpline(*data->GeometricObject<VSpline>(initData.idObject));
                 spl->setIdObject(initData.idObject);
                 spl->setMode(Draw::Modeling);
                 initData.data->UpdateGObject(initData.id, spl);
             }
             else
             {
-                VCubicBezier *spl = new VCubicBezier(*initData.data->GeometricObject<VCubicBezier>(initData.idObject));
+                auto *spl = new VCubicBezier(*initData.data->GeometricObject<VCubicBezier>(initData.idObject));
                 spl->setIdObject(initData.idObject);
                 spl->setMode(Draw::Modeling);
                 initData.data->UpdateGObject(initData.id, spl);
@@ -2827,7 +3193,7 @@ void VPattern::ParseNodeSpline(const QDomElement &domElement, const Document &pa
         catch (const VExceptionBadId &e)
         { // Possible case. Parent was deleted, but the node object is still here.
             Q_UNUSED(e)
-            return;// Just ignore
+            return; // Just ignore
         }
 
         VNodeSpline::Create(initData);
@@ -2859,15 +3225,14 @@ void VPattern::ParseNodeSplinePath(const QDomElement &domElement, const Document
             const auto obj = initData.data->GetGObject(initData.idObject);
             if (obj->getType() == GOType::SplinePath)
             {
-                VSplinePath *path = new VSplinePath(*initData.data->GeometricObject<VSplinePath>(initData.idObject));
+                auto *path = new VSplinePath(*initData.data->GeometricObject<VSplinePath>(initData.idObject));
                 path->setIdObject(initData.idObject);
                 path->setMode(Draw::Modeling);
                 initData.data->UpdateGObject(initData.id, path);
             }
             else
             {
-                VCubicBezierPath *spl =
-                        new VCubicBezierPath(*initData.data->GeometricObject<VCubicBezierPath>(initData.idObject));
+                auto *spl = new VCubicBezierPath(*initData.data->GeometricObject<VCubicBezierPath>(initData.idObject));
                 spl->setIdObject(initData.idObject);
                 spl->setMode(Draw::Modeling);
                 initData.data->UpdateGObject(initData.id, spl);
@@ -2876,7 +3241,7 @@ void VPattern::ParseNodeSplinePath(const QDomElement &domElement, const Document
         catch (const VExceptionBadId &e)
         { // Possible case. Parent was deleted, but the node object is still here.
             Q_UNUSED(e)
-            return;// Just ignore
+            return; // Just ignore
         }
         VNodeSplinePath::Create(initData);
     }
@@ -2903,20 +3268,21 @@ void VPattern::ParseToolArc(VMainGraphicsScene *scene, QDomElement &domElement, 
         initData.parse = parse;
         initData.typeCreation = Source::FromFile;
 
-        ToolsCommonAttributes(domElement, initData.id);
+        DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
         initData.center = GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
-        initData.radius = GetParametrString(domElement, AttrRadius, "10");
-        const QString r = initData.radius;//need for saving fixed formula;
-        initData.f1 = GetParametrString(domElement, AttrAngle1, "180");
-        const QString f1Fix = initData.f1;//need for saving fixed formula;
-        initData.f2 = GetParametrString(domElement, AttrAngle2, "270");
-        const QString f2Fix = initData.f2;//need for saving fixed formula;
+        initData.radius = GetParametrString(domElement, AttrRadius, QStringLiteral("10"));
+        const QString r = initData.radius; // need for saving fixed formula;
+        initData.f1 = GetParametrString(domElement, AttrAngle1, QStringLiteral("180"));
+        const QString f1Fix = initData.f1; // need for saving fixed formula;
+        initData.f2 = GetParametrString(domElement, AttrAngle2, QStringLiteral("270"));
+        const QString f2Fix = initData.f2; // need for saving fixed formula;
         initData.color = GetParametrString(domElement, AttrColor, ColorBlack);
         initData.penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         initData.approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
+        initData.aliasSuffix = GetParametrEmptyString(domElement, AttrAlias);
 
         VToolArc::Create(initData);
-        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        // Rewrite attribute formula. Need for situation when we have wrong formula.
         if (r != initData.radius || f1Fix != initData.f1 || f2Fix != initData.f2)
         {
             SetAttribute(domElement, AttrRadius, initData.radius);
@@ -2935,7 +3301,7 @@ void VPattern::ParseToolArc(VMainGraphicsScene *scene, QDomElement &domElement, 
     catch (qmu::QmuParserError &e)
     {
         VExceptionObjectError excep(tr("Error creating or updating simple arc"), domElement);
-        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+        excep.AddMoreInformation("Message:     "_L1 + e.GetMsg() + '\n'_L1 + "Expression:  "_L1 + e.GetExpr());
         throw excep;
     }
 }
@@ -2955,26 +3321,27 @@ void VPattern::ParseToolEllipticalArc(VMainGraphicsScene *scene, QDomElement &do
         initData.parse = parse;
         initData.typeCreation = Source::FromFile;
 
-        ToolsCommonAttributes(domElement, initData.id);
+        DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
         initData.center = GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
-        initData.radius1 = GetParametrString(domElement, AttrRadius1, "10");
-        initData.radius2 = GetParametrString(domElement, AttrRadius2, "10");
-        const QString r1 = initData.radius1;//need for saving fixed formula;
-        const QString r2 = initData.radius2;//need for saving fixed formula;
-        initData.f1 = GetParametrString(domElement, AttrAngle1, "180");
-        const QString f1Fix = initData.f1;//need for saving fixed formula;
-        initData.f2 = GetParametrString(domElement, AttrAngle2, "270");
-        const QString f2Fix = initData.f2;//need for saving fixed formula;
+        initData.radius1 = GetParametrString(domElement, AttrRadius1, QStringLiteral("10"));
+        initData.radius2 = GetParametrString(domElement, AttrRadius2, QStringLiteral("10"));
+        const QString r1 = initData.radius1; // need for saving fixed formula;
+        const QString r2 = initData.radius2; // need for saving fixed formula;
+        initData.f1 = GetParametrString(domElement, AttrAngle1, QStringLiteral("180"));
+        const QString f1Fix = initData.f1; // need for saving fixed formula;
+        initData.f2 = GetParametrString(domElement, AttrAngle2, QStringLiteral("270"));
+        const QString f2Fix = initData.f2; // need for saving fixed formula;
         initData.rotationAngle = GetParametrString(domElement, AttrRotationAngle, QChar('0'));
-        const QString frotationFix = initData.rotationAngle;//need for saving fixed formula;
+        const QString frotationFix = initData.rotationAngle; // need for saving fixed formula;
         initData.color = GetParametrString(domElement, AttrColor, ColorBlack);
         initData.penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         initData.approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
+        initData.aliasSuffix = GetParametrEmptyString(domElement, AttrAlias);
 
         VToolEllipticalArc::Create(initData);
-        //Rewrite attribute formula. Need for situation when we have wrong formula.
-        if (r1 != initData.radius1 || r2 != initData.radius2 || f1Fix != initData.f1 || f2Fix != initData.f2
-                || frotationFix != initData.rotationAngle)
+        // Rewrite attribute formula. Need for situation when we have wrong formula.
+        if (r1 != initData.radius1 || r2 != initData.radius2 || f1Fix != initData.f1 || f2Fix != initData.f2 ||
+            frotationFix != initData.rotationAngle)
         {
             SetAttribute(domElement, AttrRadius1, initData.radius1);
             SetAttribute(domElement, AttrRadius2, initData.radius2);
@@ -2994,7 +3361,7 @@ void VPattern::ParseToolEllipticalArc(VMainGraphicsScene *scene, QDomElement &do
     catch (qmu::QmuParserError &e)
     {
         VExceptionObjectError excep(tr("Error creating or updating simple elliptical arc"), domElement);
-        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+        excep.AddMoreInformation("Message:     "_L1 + e.GetMsg() + '\n'_L1 + "Expression:  "_L1 + e.GetExpr());
         throw excep;
     }
 }
@@ -3023,7 +3390,7 @@ void VPattern::ParseNodeEllipticalArc(const QDomElement &domElement, const Docum
         catch (const VExceptionBadId &e)
         { // Possible case. Parent was deleted, but the node object is still here.
             Q_UNUSED(e)
-            return;// Just ignore
+            return; // Just ignore
         }
         arc->setIdObject(initData.idObject);
         arc->setMode(Draw::Modeling);
@@ -3062,7 +3429,7 @@ void VPattern::ParseNodeArc(const QDomElement &domElement, const Document &parse
         catch (const VExceptionBadId &e)
         { // Possible case. Parent was deleted, but the node object is still here.
             Q_UNUSED(e)
-            return;// Just ignore
+            return; // Just ignore
         }
         arc->setIdObject(initData.idObject);
         arc->setMode(Draw::Modeling);
@@ -3092,19 +3459,21 @@ void VPattern::ParseToolArcWithLength(VMainGraphicsScene *scene, QDomElement &do
         initData.parse = parse;
         initData.typeCreation = Source::FromFile;
 
-        ToolsCommonAttributes(domElement, initData.id);
+        DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
         initData.center = GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
-        initData.radius = GetParametrString(domElement, AttrRadius, "10");
-        const QString r = initData.radius;//need for saving fixed formula;
-        initData.f1 = GetParametrString(domElement, AttrAngle1, "180");
-        const QString f1Fix = initData.f1;//need for saving fixed formula;
-        initData.length = GetParametrString(domElement, AttrLength, "10");
-        const QString lengthFix = initData.length;//need for saving fixed length;
+        initData.radius = GetParametrString(domElement, AttrRadius, QStringLiteral("10"));
+        const QString r = initData.radius; // need for saving fixed formula;
+        initData.f1 = GetParametrString(domElement, AttrAngle1, QStringLiteral("180"));
+        const QString f1Fix = initData.f1; // need for saving fixed formula;
+        initData.length = GetParametrString(domElement, AttrLength, QStringLiteral("10"));
+        const QString lengthFix = initData.length; // need for saving fixed length;
         initData.color = GetParametrString(domElement, AttrColor, ColorBlack);
         initData.penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
+        initData.approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
+        initData.aliasSuffix = GetParametrEmptyString(domElement, AttrAlias);
 
         VToolArcWithLength::Create(initData);
-        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        // Rewrite attribute formula. Need for situation when we have wrong formula.
         if (r != initData.radius || f1Fix != initData.f1 || lengthFix != initData.length)
         {
             SetAttribute(domElement, AttrRadius, initData.radius);
@@ -3123,7 +3492,7 @@ void VPattern::ParseToolArcWithLength(VMainGraphicsScene *scene, QDomElement &do
     catch (qmu::QmuParserError &e)
     {
         VExceptionObjectError excep(tr("Error creating or updating simple arc"), domElement);
-        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+        excep.AddMoreInformation("Message:     "_L1 + e.GetMsg() + '\n'_L1 + "Expression:  "_L1 + e.GetExpr());
         throw excep;
     }
 }
@@ -3143,16 +3512,16 @@ void VPattern::ParseToolRotation(VMainGraphicsScene *scene, QDomElement &domElem
         initData.parse = parse;
         initData.typeCreation = Source::FromFile;
 
-        ToolsCommonAttributes(domElement, initData.id);
+        DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
         initData.origin = GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
-        initData.angle = GetParametrString(domElement, AttrAngle, "10");
-        const QString a = initData.angle;//need for saving fixed formula;
+        initData.angle = GetParametrString(domElement, AttrAngle, QStringLiteral("10"));
+        const QString a = initData.angle; // need for saving fixed formula;
         initData.suffix = GetParametrString(domElement, AttrSuffix, QString());
 
         VAbstractOperation::ExtractData(domElement, initData);
 
         VToolRotation::Create(initData);
-        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        // Rewrite attribute formula. Need for situation when we have wrong formula.
         if (a != initData.angle)
         {
             SetAttribute(domElement, AttrAngle, initData.angle);
@@ -3169,7 +3538,7 @@ void VPattern::ParseToolRotation(VMainGraphicsScene *scene, QDomElement &domElem
     catch (qmu::QmuParserError &e)
     {
         VExceptionObjectError excep(tr("Error creating or updating operation of rotation"), domElement);
-        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+        excep.AddMoreInformation("Message:     "_L1 + e.GetMsg() + '\n'_L1 + "Expression:  "_L1 + e.GetExpr());
         throw excep;
     }
 }
@@ -3189,7 +3558,7 @@ void VPattern::ParseToolFlippingByLine(VMainGraphicsScene *scene, QDomElement &d
         initData.parse = parse;
         initData.typeCreation = Source::FromFile;
 
-        ToolsCommonAttributes(domElement, initData.id);
+        DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
         initData.firstLinePointId = GetParametrUInt(domElement, AttrP1Line, NULL_ID_STR);
         initData.secondLinePointId = GetParametrUInt(domElement, AttrP2Line, NULL_ID_STR);
         initData.suffix = GetParametrString(domElement, AttrSuffix, QString());
@@ -3221,7 +3590,7 @@ void VPattern::ParseToolFlippingByAxis(VMainGraphicsScene *scene, QDomElement &d
         initData.parse = parse;
         initData.typeCreation = Source::FromFile;
 
-        ToolsCommonAttributes(domElement, initData.id);
+        DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
         initData.originPointId = GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
         initData.axisType = static_cast<AxisType>(GetParametrUInt(domElement, AttrAxisType, QChar('1')));
         initData.suffix = GetParametrString(domElement, AttrSuffix, QString());
@@ -3253,20 +3622,20 @@ void VPattern::ParseToolMove(VMainGraphicsScene *scene, QDomElement &domElement,
         initData.parse = parse;
         initData.typeCreation = Source::FromFile;
 
-        ToolsCommonAttributes(domElement, initData.id);
+        DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
         initData.formulaAngle = GetParametrString(domElement, AttrAngle, QChar('0'));
-        const QString a = initData.formulaAngle;//need for saving fixed formula;
+        const QString a = initData.formulaAngle; // need for saving fixed formula;
         initData.formulaRotationAngle = GetParametrString(domElement, AttrRotationAngle, QChar('0'));
-        const QString r = initData.formulaRotationAngle;//need for saving fixed formula;
+        const QString r = initData.formulaRotationAngle; // need for saving fixed formula;
         initData.formulaLength = GetParametrString(domElement, AttrLength, QChar('0'));
-        const QString len = initData.formulaLength;//need for saving fixed formula;
+        const QString len = initData.formulaLength; // need for saving fixed formula;
         initData.suffix = GetParametrString(domElement, AttrSuffix, QString());
         initData.rotationOrigin = GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
 
         VAbstractOperation::ExtractData(domElement, initData);
 
         VToolMove::Create(initData);
-        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        // Rewrite attribute formula. Need for situation when we have wrong formula.
         if (a != initData.formulaAngle || r != initData.formulaRotationAngle || len != initData.formulaLength)
         {
             SetAttribute(domElement, AttrAngle, initData.formulaAngle);
@@ -3285,13 +3654,13 @@ void VPattern::ParseToolMove(VMainGraphicsScene *scene, QDomElement &domElement,
     catch (qmu::QmuParserError &e)
     {
         VExceptionObjectError excep(tr("Error creating or updating operation of moving"), domElement);
-        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+        excep.AddMoreInformation("Message:     "_L1 + e.GetMsg() + '\n'_L1 + "Expression:  "_L1 + e.GetExpr());
         throw excep;
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPattern::EvalFormula(VContainer *data, const QString &formula, bool *ok) const
+auto VPattern::EvalFormula(VContainer *data, const QString &formula, bool *ok) const -> qreal
 {
     if (formula.isEmpty())
     {
@@ -3318,27 +3687,27 @@ qreal VPattern::EvalFormula(VContainer *data, const QString &formula, bool *ok) 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPattern::MakeEmptyIncrement(const QString &name)
+auto VPattern::MakeEmptyIncrement(const QString &name, IncrementType type) -> QDomElement
 {
     QDomElement element = createElement(TagIncrement);
     SetAttribute(element, AttrName, name);
-    SetAttribute(element, AttrFormula, QChar('0'));
-    SetAttribute(element, AttrDescription, QString());
+    if (type != IncrementType::Increment)
+    {
+        SetAttribute(element, AttrType, IncrementTypeToString(type));
+    }
     return element;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPattern::FindIncrement(const QString &name) const
+auto VPattern::FindIncrement(const QString &name) const -> QDomElement
 {
-    QDomNodeList list = elementsByTagName(TagIncrement);
+    QDomNodeList const list = elementsByTagName(TagIncrement);
 
-    for (int i=0; i < list.size(); ++i)
+    for (int i = 0; i < list.size(); ++i)
     {
-        const QDomElement domElement = list.at(i).toElement();
-        if (domElement.isNull() == false)
+        if (const QDomElement domElement = list.at(i).toElement(); not domElement.isNull())
         {
-            const QString parameter = domElement.attribute(AttrName);
-            if (parameter == name)
+            if (const QString parameter = domElement.attribute(AttrName); parameter == name)
             {
                 return domElement;
             }
@@ -3353,8 +3722,8 @@ void VPattern::GarbageCollector(bool commit)
 {
     bool cleared = false;
 
-    QDomNodeList modelingList = elementsByTagName(TagModeling);
-    for (int i=0; i < modelingList.size(); ++i)
+    QDomNodeList const modelingList = elementsByTagName(TagModeling);
+    for (int i = 0; i < modelingList.size(); ++i)
     {
         QDomElement modElement = modelingList.at(i).toElement();
         if (not modElement.isNull())
@@ -3363,7 +3732,7 @@ void VPattern::GarbageCollector(bool commit)
             while (not modNode.isNull())
             {
                 // First get next sibling because later will not have chance to get it
-                QDomElement nextSibling = modNode.nextSibling().toElement();
+                QDomElement const nextSibling = modNode.nextSibling().toElement();
                 if (modNode.hasAttribute(VAbstractTool::AttrInUse))
                 {
                     const NodeUsage inUse = GetParametrUsage(modNode, VAbstractTool::AttrInUse);
@@ -3378,6 +3747,23 @@ void VPattern::GarbageCollector(bool commit)
                         {
                             modElement.removeChild(modNode);
                             cleared = true;
+
+                            // Clear history
+                            try
+                            {
+                                vidtype const id = GetParametrId(modNode);
+                                auto record =
+                                    std::find_if(history.begin(), history.end(),
+                                                 [id](const VToolRecord &record) { return record.getId() == id; });
+                                if (record != history.end())
+                                {
+                                    history.erase(record);
+                                }
+                            }
+                            catch (const VExceptionWrongId &)
+                            {
+                                // do nothing
+                            }
                         }
                     }
                 }
@@ -3398,9 +3784,9 @@ void VPattern::GarbageCollector(bool commit)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::NewEmptyIncrement(const QString &type, const QString &name)
+void VPattern::NewEmptyIncrement(const QString &type, const QString &name, IncrementType varType)
 {
-    const QDomElement element = MakeEmptyIncrement(name);
+    const QDomElement element = MakeEmptyIncrement(name, varType);
 
     const QDomNodeList list = elementsByTagName(type);
     list.at(0).appendChild(element);
@@ -3408,9 +3794,10 @@ void VPattern::NewEmptyIncrement(const QString &type, const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::NewEmptyIncrementAfter(const QString &type, const QString &after, const QString &name)
+void VPattern::NewEmptyIncrementAfter(const QString &type, const QString &after, const QString &name,
+                                      IncrementType varType)
 {
-    const QDomElement element = MakeEmptyIncrement(name);
+    const QDomElement element = MakeEmptyIncrement(name, varType);
     const QDomElement sibling = FindIncrement(after);
 
     const QDomNodeList list = elementsByTagName(type);
@@ -3437,8 +3824,7 @@ void VPattern::RemoveIncrement(const QString &type, const QString &name)
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::MoveUpIncrement(const QString &type, const QString &name)
 {
-    const QDomElement node = FindIncrement(name);
-    if (not node.isNull())
+    if (const QDomElement node = FindIncrement(name); not node.isNull())
     {
         const QDomElement prSibling = node.previousSiblingElement(TagIncrement);
         if (not prSibling.isNull())
@@ -3452,8 +3838,7 @@ void VPattern::MoveUpIncrement(const QString &type, const QString &name)
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::MoveDownIncrement(const QString &type, const QString &name)
 {
-    const QDomElement node = FindIncrement(name);
-    if (not node.isNull())
+    if (const QDomElement node = FindIncrement(name); not node.isNull())
     {
         const QDomElement nextSibling = node.nextSiblingElement(TagIncrement);
         if (not nextSibling.isNull())
@@ -3467,8 +3852,7 @@ void VPattern::MoveDownIncrement(const QString &type, const QString &name)
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::SetIncrementAttribute(const QString &name, const QString &attr, const QString &text)
 {
-    QDomElement node = FindIncrement(name);
-    if (not node.isNull())
+    if (QDomElement node = FindIncrement(name); not node.isNull())
     {
         SetAttribute(node, attr, text);
         emit patternChanged(false);
@@ -3476,16 +3860,15 @@ void VPattern::SetIncrementAttribute(const QString &name, const QString &attr, c
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPattern::LastDrawName() const
+auto VPattern::LastDrawName() const -> QString
 {
     const QDomNodeList elements = this->documentElement().elementsByTagName(TagDraw);
-    if (elements.size() == 0)
+    if (elements.isEmpty())
     {
         return QString();
     }
 
-    const QDomElement &elem = elements.at(elements.size()-1).toElement();
-    if (not elem.isNull())
+    if (const QDomElement &elem = elements.at(elements.size() - 1).toElement(); not elem.isNull())
     {
         return GetParametrString(elem, AttrName);
     }
@@ -3494,7 +3877,7 @@ QString VPattern::LastDrawName() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VPattern::LastToolId() const
+auto VPattern::LastToolId() const -> quint32
 {
     const QString name = LastDrawName();
     if (name.isEmpty())
@@ -3502,9 +3885,35 @@ quint32 VPattern::LastToolId() const
         return NULL_ID;
     }
 
+    return PPLastToolId(name);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPattern::PPLastToolId(const QString &name) const -> quint32
+{
     const QVector<VToolRecord> localHistory = getLocalHistory(name);
 
-    return (not localHistory.isEmpty() ? localHistory.last().getId() : NULL_ID);
+    return (not localHistory.isEmpty() ? localHistory.constLast().getId() : NULL_ID);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::RefreshPieceGeometry()
+{
+    if (!VAbstractApplication::VApp()->IsAppInGUIMode()
+        || VAbstractValApplication::VApp()->GetDrawMode() == Draw::Modeling)
+    {
+        if (updatePieces.isEmpty())
+        {
+            updatePieces = data->DataPieces()->keys();
+        }
+        RefreshDirtyPieceGeometry(updatePieces);
+    }
+    else
+    {
+        m_pieceGeometryDirty = true;
+    }
+
+    updatePieces.clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3515,57 +3924,57 @@ quint32 VPattern::LastToolId() const
  * @param parse parser file mode.
  * @param type type of spline.
  */
-void VPattern::ParseSplineElement(VMainGraphicsScene *scene, QDomElement &domElement,
-                                  const Document &parse, const QString &type)
+void VPattern::ParseSplineElement(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse,
+                                  const QString &type)
 {
     SCASSERT(scene != nullptr)
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(type.isEmpty() == false, Q_FUNC_INFO, "type of spline is empty");
 
-    QStringList splines = QStringList() << VToolSpline::OldToolType        /*0*/
-                                        << VToolSpline::ToolType           /*1*/
-                                        << VToolSplinePath::OldToolType    /*2*/
-                                        << VToolSplinePath::ToolType       /*3*/
-                                        << VNodeSpline::ToolType           /*4*/
-                                        << VNodeSplinePath::ToolType       /*5*/
-                                        << VToolCubicBezier::ToolType      /*6*/
-                                        << VToolCubicBezierPath::ToolType; /*7*/
+    static const QStringList splines({VToolSpline::OldToolType,         /*0*/
+                                      VToolSpline::ToolType,            /*1*/
+                                      VToolSplinePath::OldToolType,     /*2*/
+                                      VToolSplinePath::ToolType,        /*3*/
+                                      VNodeSpline::ToolType,            /*4*/
+                                      VNodeSplinePath::ToolType,        /*5*/
+                                      VToolCubicBezier::ToolType,       /*6*/
+                                      VToolCubicBezierPath::ToolType}); /*7*/
     switch (splines.indexOf(type))
     {
-        case 0: //VToolSpline::OldToolType
+        case 0: // VToolSpline::OldToolType
             qCDebug(vXML, "VOldToolSpline.");
-            ParseOldToolSpline(scene, domElement, parse);// TODO. Delete if minimal supported version is 0.2.7
+            ParseOldToolSpline(scene, domElement, parse); // TODO. Delete if minimal supported version is 0.2.7
             break;
-        case 1: //VToolSpline::ToolType
+        case 1: // VToolSpline::ToolType
             qCDebug(vXML, "VToolSpline.");
             ParseToolSpline(scene, domElement, parse);
             break;
-        case 2: //VToolSplinePath::OldToolType
+        case 2: // VToolSplinePath::OldToolType
             qCDebug(vXML, "VOldToolSplinePath.");
-            ParseOldToolSplinePath(scene, domElement, parse);// TODO. Delete if minimal supported version is 0.2.7
+            ParseOldToolSplinePath(scene, domElement, parse); // TODO. Delete if minimal supported version is 0.2.7
             break;
-        case 3: //VToolSplinePath::ToolType
+        case 3: // VToolSplinePath::ToolType
             qCDebug(vXML, "VToolSplinePath.");
             ParseToolSplinePath(scene, domElement, parse);
             break;
-        case 4: //VNodeSpline::ToolType
+        case 4: // VNodeSpline::ToolType
             qCDebug(vXML, "VNodeSpline.");
             ParseNodeSpline(domElement, parse);
             break;
-        case 5: //VNodeSplinePath::ToolType
+        case 5: // VNodeSplinePath::ToolType
             qCDebug(vXML, "VNodeSplinePath.");
             ParseNodeSplinePath(domElement, parse);
             break;
-        case 6: //VToolCubicBezier::ToolType
+        case 6: // VToolCubicBezier::ToolType
             qCDebug(vXML, "VToolCubicBezier.");
             ParseToolCubicBezier(scene, domElement, parse);
             break;
-        case 7: //VToolCubicBezierPath::ToolType
+        case 7: // VToolCubicBezierPath::ToolType
             qCDebug(vXML, "VToolCubicBezierPath.");
             ParseToolCubicBezierPath(scene, domElement, parse);
             break;
         default:
-            VException e(tr("Unknown spline type '%1'.").arg(type));
+            VException const e(tr("Unknown spline type '%1'.").arg(type));
             throw e;
     }
 }
@@ -3585,23 +3994,23 @@ void VPattern::ParseArcElement(VMainGraphicsScene *scene, QDomElement &domElemen
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(not type.isEmpty(), Q_FUNC_INFO, "type of arc is empty");
 
-    QStringList arcs = QStringList() << VToolArc::ToolType            /*0*/
-                                     << VNodeArc::ToolType            /*1*/
-                                     << VToolArcWithLength::ToolType; /*2*/
+    auto const arcs = QStringList() << VToolArc::ToolType            /*0*/
+                                    << VNodeArc::ToolType            /*1*/
+                                    << VToolArcWithLength::ToolType; /*2*/
 
     switch (arcs.indexOf(type))
     {
-        case 0: //VToolArc::ToolType
+        case 0: // VToolArc::ToolType
             ParseToolArc(scene, domElement, parse);
             break;
-        case 1: //VNodeArc::ToolType
+        case 1: // VNodeArc::ToolType
             ParseNodeArc(domElement, parse);
             break;
-        case 2: //VToolArcWithLength::ToolType
+        case 2: // VToolArcWithLength::ToolType
             ParseToolArcWithLength(scene, domElement, parse);
             break;
         default:
-            VException e(tr("Unknown arc type '%1'.").arg(type));
+            VException const e(tr("Unknown arc type '%1'.").arg(type));
             throw e;
     }
 }
@@ -3615,25 +4024,25 @@ void VPattern::ParseArcElement(VMainGraphicsScene *scene, QDomElement &domElemen
  * @param type type of spline.
  */
 void VPattern::ParseEllipticalArcElement(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse,
-                               const QString &type)
+                                         const QString &type)
 {
     SCASSERT(scene != nullptr)
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(not type.isEmpty(), Q_FUNC_INFO, "type of elliptical arc is empty");
 
-    const QStringList arcs = QStringList() << VToolEllipticalArc::ToolType  /*0*/
-                                           << VNodeEllipticalArc::ToolType; /*1*/
+    const auto arcs = QStringList() << VToolEllipticalArc::ToolType  /*0*/
+                                    << VNodeEllipticalArc::ToolType; /*1*/
 
     switch (arcs.indexOf(type))
     {
-        case 0: //VToolArc::ToolType
+        case 0: // VToolArc::ToolType
             ParseToolEllipticalArc(scene, domElement, parse);
             break;
-        case 1: //VNodeEllipticalArc::ToolType
+        case 1: // VNodeEllipticalArc::ToolType
             ParseNodeEllipticalArc(domElement, parse);
             break;
         default:
-            VException e(tr("Unknown elliptical arc type '%1'.").arg(type));
+            VException const e(tr("Unknown elliptical arc type '%1'.").arg(type));
             throw e;
     }
 }
@@ -3646,22 +4055,22 @@ void VPattern::ParseEllipticalArcElement(VMainGraphicsScene *scene, QDomElement 
  * @param parse parser file mode.
  * @param type type of spline.
  */
-void VPattern::ParseToolsElement(VMainGraphicsScene *scene, const QDomElement &domElement,
-                                 const Document &parse, const QString &type)
+void VPattern::ParseToolsElement(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse,
+                                 const QString &type)
 {
     SCASSERT(scene != nullptr)
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(type.isEmpty() == false, Q_FUNC_INFO, "type of spline is empty");
 
-    const QStringList tools = QStringList() << VToolUnionDetails::ToolType;
+    const auto tools = QStringList() << VToolUnionDetails::ToolType;
     switch (tools.indexOf(type))
     {
-        case 0: //VToolUnionDetails::ToolType
+        case 0: // VToolUnionDetails::ToolType
             try
             {
                 VToolUnionDetailsInitData initData;
-                initData.indexD1 = GetParametrUInt(domElement, VToolUnionDetails::AttrIndexD1, "-1");
-                initData.indexD2 = GetParametrUInt(domElement, VToolUnionDetails::AttrIndexD2, "-1");
+                initData.indexD1 = GetParametrUInt(domElement, VToolUnionDetails::AttrIndexD1, QStringLiteral("-1"));
+                initData.indexD2 = GetParametrUInt(domElement, VToolUnionDetails::AttrIndexD2, QStringLiteral("-1"));
                 initData.version = GetParametrUInt(domElement, AttrVersion, QChar('1'));
                 initData.scene = scene;
                 initData.doc = this;
@@ -3681,7 +4090,7 @@ void VPattern::ParseToolsElement(VMainGraphicsScene *scene, const QDomElement &d
             }
             break;
         default:
-            VException e(tr("Unknown tools type '%1'.").arg(type));
+            VException const e(tr("Unknown tools type '%1'.").arg(type));
             throw e;
     }
 }
@@ -3694,27 +4103,27 @@ void VPattern::ParseOperationElement(VMainGraphicsScene *scene, QDomElement &dom
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(not type.isEmpty(), Q_FUNC_INFO, "type of operation is empty");
 
-    const QStringList opers = QStringList() << VToolRotation::ToolType        /*0*/
-                                            << VToolFlippingByLine::ToolType  /*1*/
-                                            << VToolFlippingByAxis::ToolType  /*2*/
-                                            << VToolMove::ToolType;           /*3*/
+    const auto opers = QStringList() << VToolRotation::ToolType       /*0*/
+                                     << VToolFlippingByLine::ToolType /*1*/
+                                     << VToolFlippingByAxis::ToolType /*2*/
+                                     << VToolMove::ToolType;          /*3*/
 
     switch (opers.indexOf(type))
     {
-        case 0: //VToolRotation::ToolType
+        case 0: // VToolRotation::ToolType
             ParseToolRotation(scene, domElement, parse);
             break;
-        case 1: //VToolFlippingByLine::ToolType
+        case 1: // VToolFlippingByLine::ToolType
             ParseToolFlippingByLine(scene, domElement, parse);
             break;
-        case 2: //VToolFlippingByAxis::ToolType
+        case 2: // VToolFlippingByAxis::ToolType
             ParseToolFlippingByAxis(scene, domElement, parse);
             break;
-        case 3: //VToolMove::ToolType
+        case 3: // VToolMove::ToolType
             ParseToolMove(scene, domElement, parse);
             break;
         default:
-            VException e(tr("Unknown operation type '%1'.").arg(type));
+            VException const e(tr("Unknown operation type '%1'.").arg(type));
             throw e;
     }
 }
@@ -3736,10 +4145,30 @@ void VPattern::ParsePathElement(VMainGraphicsScene *scene, QDomElement &domEleme
         ToolsCommonAttributes(domElement, initData.id);
         initData.idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, NULL_ID_STR);
 
-        const QDomElement element = domElement.firstChildElement(VAbstractPattern::TagNodes);
-        if (not element.isNull())
+        if (const QDomElement element = domElement.firstChildElement(VAbstractPattern::TagNodes); not element.isNull())
         {
             initData.path = ParsePathNodes(element);
+
+            try
+            {
+                for (int i = 0; i < initData.path.CountNodes(); ++i)
+                {
+                    initData.data->GetGObject(initData.path.at(i).GetId());
+                }
+            }
+            catch (const VExceptionBadId &)
+            { // Possible case. Parent was deleted, but the node object is still here.
+                qDebug() << "Broken relation. Parent was deleted, but the piece path object is still here. Piece "
+                            "path id ="
+                         << initData.id << ".";
+                return; // Just ignore
+            }
+        }
+        else
+        {
+            VExceptionObjectError excep(tr("Error creating or updating a piece path"), domElement);
+            excep.AddMoreInformation(tr("Piece path doesn't contain nodes"));
+            throw excep;
         }
 
         const QString defType = QString().setNum(static_cast<int>(PiecePathType::CustomSeamAllowance));
@@ -3750,9 +4179,10 @@ void VPattern::ParsePathElement(VMainGraphicsScene *scene, QDomElement &domEleme
         if (initData.path.GetType() == PiecePathType::InternalPath)
         {
             initData.path.SetCutPath(GetParametrBool(domElement, AttrCut, falseStr));
-            initData.path.SetFirstToCuttingCountour(GetParametrBool(domElement, AttrFirstToCountour, falseStr));
-            initData.path.SetLastToCuttingCountour(GetParametrBool(domElement, AttrLastToCountour, falseStr));
+            initData.path.SetFirstToCuttingContour(GetParametrBool(domElement, AttrFirstToContour, falseStr));
+            initData.path.SetLastToCuttingContour(GetParametrBool(domElement, AttrLastToContour, falseStr));
             initData.path.SetVisibilityTrigger(GetParametrString(domElement, AttrVisible, QChar('1')));
+            initData.path.SetNotMirrored(GetParametrBool(domElement, AttrNotMirrored, falseStr));
         }
 
         VToolPiecePath::Create(initData);
@@ -3775,27 +4205,32 @@ void VPattern::ParseIncrementsElement(const QDomNode &node, const Document &pars
 {
     int index = 0;
     QDomNode domNode = node.firstChild();
-    while (domNode.isNull() == false)
+    while (not domNode.isNull())
     {
         if (domNode.isElement())
         {
-            const QDomElement domElement = domNode.toElement();
-            if (domElement.isNull() == false)
+            if (const QDomElement domElement = domNode.toElement();
+                not domElement.isNull() && domElement.tagName() == TagIncrement)
             {
-                if (domElement.tagName() == TagIncrement)
-                {
-                    const QString name = GetParametrString(domElement, AttrName, QString());
-                    const QString desc = GetParametrEmptyString(domElement, AttrDescription);
-                    const QString formula = GetParametrString(domElement, AttrFormula, QChar('0'));
-                    bool ok = false;
-                    const qreal value = EvalFormula(data, formula, &ok);
+                const QString name = GetParametrString(domElement, AttrName, QString()).simplified();
+                const QString desc = GetParametrEmptyString(domElement, AttrDescription);
+                const IncrementType type =
+                    StringToIncrementType(GetParametrString(domElement, AttrType, strTypeIncrement));
+                const QString formula = (type == IncrementType::Separator)
+                                            ? QChar('0')
+                                            : GetParametrString(domElement, AttrFormula, QChar('0'));
+                const bool specialUnits = GetParametrBool(domElement, AttrSpecialUnits, falseStr);
 
-                    VIncrement *increment = new VIncrement(data, name, static_cast<quint32>(index), value, formula, ok,
-                                                           desc);
-                    increment->SetPreviewCalculation(node.toElement().tagName() == TagPreviewCalculations);
-                    data->AddVariable(name, increment);
-                    ++index;
-                }
+                bool ok = false;
+                const qreal value = EvalFormula(data, formula, &ok);
+
+                auto *increment = new VIncrement(data, name, type);
+                increment->SetIndex(static_cast<quint32>(index++));
+                increment->SetFormula(value, formula, ok);
+                increment->SetDescription(desc);
+                increment->SetSpecialUnits(specialUnits);
+                increment->SetPreviewCalculation(node.toElement().tagName() == TagPreviewCalculations);
+                data->AddUniqueVariable(increment);
             }
         }
         domNode = domNode.nextSibling();
@@ -3808,27 +4243,27 @@ void VPattern::ParseIncrementsElement(const QDomNode &node, const Document &pars
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::AddEmptyIncrement(const QString &name)
+void VPattern::AddEmptyIncrement(const QString &name, IncrementType type)
 {
-    NewEmptyIncrement(TagIncrements, name);
+    NewEmptyIncrement(TagIncrements, name, type);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::AddEmptyPreviewCalculation(const QString &name)
+void VPattern::AddEmptyPreviewCalculation(const QString &name, IncrementType type)
 {
-    NewEmptyIncrement(TagPreviewCalculations, name);
+    NewEmptyIncrement(TagPreviewCalculations, name, type);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::AddEmptyIncrementAfter(const QString &after, const QString &name)
+void VPattern::AddEmptyIncrementAfter(const QString &after, const QString &name, IncrementType type)
 {
-    NewEmptyIncrementAfter(TagIncrements, after, name);
+    NewEmptyIncrementAfter(TagIncrements, after, name, type);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::AddEmptyPreviewCalculationAfter(const QString &after, const QString &name)
+void VPattern::AddEmptyPreviewCalculationAfter(const QString &after, const QString &name, IncrementType type)
 {
-    NewEmptyIncrementAfter(TagPreviewCalculations, after, name);
+    NewEmptyIncrementAfter(TagPreviewCalculations, after, name, type);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3882,31 +4317,56 @@ void VPattern::SetIncrementFormula(const QString &name, const QString &text)
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::SetIncrementDescription(const QString &name, const QString &text)
 {
-    SetIncrementAttribute(name, AttrDescription, text);
+    if (not text.isEmpty())
+    {
+        SetIncrementAttribute(name, AttrDescription, text);
+    }
+    else
+    {
+        if (QDomElement node = FindIncrement(name); not node.isNull())
+        {
+            node.removeAttribute(AttrDescription);
+            emit patternChanged(false);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::SetIncrementSpecialUnits(const QString &name, bool special)
+{
+    if (QDomElement node = FindIncrement(name); not node.isNull())
+    {
+        SetAttributeOrRemoveIf<bool>(node, AttrSpecialUnits, special,
+                                     [](bool special) noexcept { return not special; });
+        emit patternChanged(false);
+    }
+    else
+    {
+        qWarning() << tr("Can't find increment '%1'").arg(name);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::ReplaceNameInFormula(QVector<VFormulaField> &expressions, const QString &name, const QString &newName)
 {
-    const int bias = name.length() - newName.length();
+    const auto bias = name.length() - newName.length();
 
-    for(int i = 0; i < expressions.size(); ++i)
+    for (int i = 0; i < expressions.size(); ++i)
     {
         if (expressions.at(i).expression.indexOf(name) != -1)
         {
-            QMap<int, QString> tokens;
+            QMap<vsizetype, QString> tokens;
 
             // Eval formula
             try
             {
-                QScopedPointer<qmu::QmuTokenParser> cal(new qmu::QmuTokenParser(expressions.at(i).expression, false,
-                                                                                false));
-                tokens = cal->GetTokens();// Tokens (variables, measurements)
-
+                QScopedPointer<qmu::QmuTokenParser> const cal(
+                    new qmu::QmuTokenParser(expressions.at(i).expression, false, false));
+                tokens = cal->GetTokens(); // Tokens (variables, measurements)
             }
             catch (const qmu::QmuParserError &)
             {
-                continue;// Because we not sure if used. A formula is broken.
+                continue; // Because we not sure if used. A formula is broken.
             }
 
             QList<QString> tValues = tokens.values();
@@ -3915,7 +4375,7 @@ void VPattern::ReplaceNameInFormula(QVector<VFormulaField> &expressions, const Q
                 continue;
             }
 
-            QList<int> tKeys = tokens.keys();// Take all tokens positions
+            QList<vsizetype> tKeys = tokens.keys(); // Take all tokens positions
             QString newFormula = expressions.at(i).expression;
 
             for (int i = 0; i < tKeys.size(); ++i)
@@ -3928,7 +4388,7 @@ void VPattern::ReplaceNameInFormula(QVector<VFormulaField> &expressions, const Q
                 newFormula.replace(tKeys.at(i), name.length(), newName);
 
                 if (bias != 0)
-                {// Translated token has different length than original. Position next tokens need to be corrected.
+                { // Translated token has different length than original. Position next tokens need to be corrected.
                     VTranslateVars::BiasTokens(tKeys.at(i), bias, tokens);
                     tKeys = tokens.keys();
                     tValues = tokens.values();
@@ -3949,7 +4409,7 @@ void VPattern::ReplaceNameInFormula(QVector<VFormulaField> &expressions, const Q
  * @param reservedName reversed point name. Use when need reserve name, but point is not in data base yet.
  * @return unique name for current pattern piece.
  */
-QString VPattern::GenerateLabel(const LabelType &type, const QString &reservedName) const
+auto VPattern::GenerateLabel(const LabelType &type, const QString &reservedName) const -> QString
 {
     if (type == LabelType::NewPatternPiece)
     {
@@ -3980,7 +4440,7 @@ QString VPattern::GenerateLabel(const LabelType &type, const QString &reservedNa
         QString name;
         do
         {
-            name = QString("%1%2").arg(labelBase).arg(num);
+            name = QStringLiteral("%1%2").arg(labelBase).arg(num);
             num++;
             if (num == INT_MAX)
             {
@@ -3995,7 +4455,7 @@ QString VPattern::GenerateLabel(const LabelType &type, const QString &reservedNa
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPattern::GenerateSuffix() const
+auto VPattern::GenerateSuffix() const -> QString
 {
     const QString suffixBase = GetLabelBase(static_cast<quint32>(GetIndexActivPP())).toLower();
     const QStringList uniqueNames = data->AllUniqueNames();
@@ -4003,16 +4463,16 @@ QString VPattern::GenerateSuffix() const
     QString suffix;
     for (;;)
     {
-        suffix = QString("%1%2").arg(suffixBase).arg(num);
+        suffix = QStringLiteral("%1%2").arg(suffixBase).arg(num);
 
-        for (int i=0; i < uniqueNames.size(); ++i)
+        for (int i = 0; i < uniqueNames.size(); ++i)
         {
             if (not data->IsUnique(uniqueNames.at(i) + suffix))
             {
                 break;
             }
 
-            if (i == uniqueNames.size()-1)
+            if (i == uniqueNames.size() - 1)
             {
                 qCDebug(vXML, "Suffix is: %s", qUtf8Printable(suffix));
                 return suffix;
@@ -4029,179 +4489,7 @@ QString VPattern::GenerateSuffix() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPattern::IsDefCustom() const
-{
-    QDomNodeList tags = elementsByTagName(TagGradation);
-    if (tags.size() == 0)
-    {
-        return false;
-    }
-
-    const QDomNode domNode = tags.at(0);
-    const QDomElement domElement = domNode.toElement();
-    if (domElement.isNull() == false)
-    {
-        return GetParametrBool(domElement, AttrCustom, falseStr);
-    }
-    else
-    {
-        return false;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPattern::SetDefCustom(bool value)
-{
-    CheckTagExists(TagGradation);
-    QDomNodeList tags = elementsByTagName(TagGradation);
-    if (tags.isEmpty())
-    {
-        qDebug()<<"Can't save attribute "<<AttrCustom<<Q_FUNC_INFO;
-        return;
-    }
-
-    QDomNode domNode = tags.at(0);
-    QDomElement domElement = domNode.toElement();
-    if (domElement.isNull() == false)
-    {
-        if (value == false)
-        {
-            domElement.removeAttribute(AttrDefHeight);
-            SetDefCustomHeight(0);
-            SetDefCustomSize(0);
-        }
-        else
-        {
-            SetAttribute(domElement, AttrCustom, value);
-        }
-        modified = true;
-    }
-    else
-    {
-        qDebug()<<"Can't save attribute "<<AttrCustom<<Q_FUNC_INFO;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int VPattern::GetDefCustomHeight() const
-{
-    if (IsDefCustom())
-    {
-        QDomNodeList tags = elementsByTagName(TagGradation);
-        if (tags.size() == 0)
-        {
-            return 0;
-        }
-
-        const QDomNode domNode = tags.at(0);
-        const QDomElement domElement = domNode.toElement();
-        if (domElement.isNull() == false)
-        {
-            return static_cast<int>(GetParametrUInt(domElement, AttrDefHeight, QChar('0')));
-        }
-        else
-        {
-            return 0;
-        }
-    }
-    else
-    {
-        return 0;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPattern::SetDefCustomHeight(int value)
-{
-    CheckTagExists(TagGradation);
-    QDomNodeList tags = elementsByTagName(TagGradation);
-    if (tags.isEmpty())
-    {
-        qDebug()<<"Can't save attribute "<<AttrDefHeight<<Q_FUNC_INFO;
-        return;
-    }
-
-    QDomNode domNode = tags.at(0);
-    QDomElement domElement = domNode.toElement();
-    if (domElement.isNull() == false)
-    {
-        if (value == 0)
-        {
-            domElement.removeAttribute(AttrDefHeight);
-        }
-        else
-        {
-            SetAttribute(domElement, AttrDefHeight, value);
-        }
-        modified = true;
-    }
-    else
-    {
-        qDebug()<<"Can't save attribute "<<AttrDefHeight<<Q_FUNC_INFO;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int VPattern::GetDefCustomSize() const
-{
-    if (IsDefCustom())
-    {
-        QDomNodeList tags = elementsByTagName(TagGradation);
-        if (tags.size() == 0)
-        {
-            return 0;
-        }
-
-        const QDomNode domNode = tags.at(0);
-        const QDomElement domElement = domNode.toElement();
-        if (domElement.isNull() == false)
-        {
-            return static_cast<int>(GetParametrUInt(domElement, AttrDefSize, QChar('0')));
-        }
-        else
-        {
-            return 0;
-        }
-    }
-    else
-    {
-        return 0;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPattern::SetDefCustomSize(int value)
-{
-    CheckTagExists(TagGradation);
-    QDomNodeList tags = elementsByTagName(TagGradation);
-    if (tags.isEmpty())
-    {
-        qDebug()<<"Can't save attribute "<<AttrDefSize<<Q_FUNC_INFO;
-        return;
-    }
-
-    QDomNode domNode = tags.at(0);
-    QDomElement domElement = domNode.toElement();
-    if (domElement.isNull() == false)
-    {
-        if (value == 0)
-        {
-            domElement.removeAttribute(AttrDefSize);
-        }
-        else
-        {
-            SetAttribute(domElement, AttrDefSize, value);
-        }
-        modified = true;
-    }
-    else
-    {
-        qDebug()<<"Can't save attribute "<<AttrDefSize<<Q_FUNC_INFO;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VPattern::IsReadOnly() const
+auto VPattern::IsReadOnly() const -> bool
 {
     const QDomElement pattern = documentElement();
 
@@ -4220,14 +4508,32 @@ void VPattern::SetReadOnly(bool rOnly)
 
     if (not pattern.isNull())
     {
-        if (rOnly)
-        {
-            SetAttribute(pattern, AttrReadOnly, rOnly);
-        }
-        else
-        {// For better backward compatibility
-            pattern.removeAttribute(AttrReadOnly);
-        }
+        SetAttributeOrRemoveIf<bool>(pattern, AttrReadOnly, rOnly, [](bool rOnly) noexcept { return not rOnly; });
+        modified = true;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPattern::GetLabelPrefix() const -> QString
+{
+    const QDomElement pattern = documentElement();
+
+    if (pattern.isNull())
+    {
+        return DefLabelLanguage();
+    }
+
+    return GetParametrString(pattern, AttrLabelPrefix, DefLabelLanguage());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::SetLabelPrefix(const QString &prefix)
+{
+    QDomElement pattern = documentElement();
+
+    if (not pattern.isNull() && ConvertToSet<QString>(VApplication::LabelLanguages()).contains(prefix))
+    {
+        SetAttribute(pattern, AttrLabelPrefix, prefix);
         modified = true;
     }
 }
@@ -4237,9 +4543,11 @@ void VPattern::PrepareForParse(const Document &parse)
 {
     SCASSERT(sceneDraw != nullptr)
     SCASSERT(sceneDetail != nullptr)
+
+    emit CancelLabelRendering();
+
     if (parse == Document::FullParse)
     {
-        TestUniqueId();
         RefreshElementIdCache();
         sceneDraw->clear();
         sceneDraw->InitOrigins();
@@ -4249,24 +4557,27 @@ void VPattern::PrepareForParse(const Document &parse)
         nameActivPP.clear();
         patternPieces.clear();
 
-        qDeleteAll(toolsOnRemove);//Remove all invisible on a scene objects.
+        qDeleteAll(toolsOnRemove); // Remove all invisible on a scene objects.
         toolsOnRemove.clear();
 
         tools.clear();
         cursor = 0;
         history.clear();
     }
-    else if (parse == Document::LiteParse)
+    else if (parse == Document::LiteParse || parse == Document::FullLiteParse)
     {
-        data->ClearUniqueNames();
-        Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 8, "Check that you used all types");
-        data->ClearVariables(QVector<VarType>({VarType::Increment,
-                                               VarType::LineAngle,
-                                               VarType::LineLength,
-                                               VarType::CurveLength,
-                                               VarType::CurveCLength,
-                                               VarType::ArcRadius,
-                                               VarType::CurveAngle}));
+        Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 12, "Check that you used all types");
+        QVector<VarType> types{VarType::LineAngle,         VarType::LineLength,       VarType::CurveLength,
+                               VarType::CurveCLength,      VarType::ArcRadius,        VarType::CurveAngle,
+                               VarType::PieceExternalArea, VarType::PieceSeamLineArea};
+        if (parse == Document::FullLiteParse)
+        {
+            types.append(VarType::Increment);
+            types.append(VarType::IncrementSeparator);
+        }
+
+        data->ClearVariables(types);
+        parse == Document::FullLiteParse ? data->ClearUniqueNames() : data->ClearExceptUniqueIncrementNames();
     }
 }
 
@@ -4277,22 +4588,25 @@ void VPattern::ToolsCommonAttributes(const QDomElement &domElement, quint32 &id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Wswitch-default")
+void VPattern::DrawToolsCommonAttributes(const QDomElement &domElement, quint32 &id, QString &notes)
+{
+    ToolsCommonAttributes(domElement, id);
+    notes = GetParametrEmptyString(domElement, AttrNotes);
+}
 
-QRectF VPattern::ActiveDrawBoundingRect() const
+//---------------------------------------------------------------------------------------------------------------------
+auto VPattern::ActiveDrawBoundingRect() const -> QRectF
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 55, "Not all tools were used.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 61, "Not all tools were used.");
 
     QRectF rec;
 
-    for (qint32 i = 0; i< history.size(); ++i)
+    for (const auto &tool : history)
     {
-        const VToolRecord tool = history.at(i);
         if (tool.getNameDraw() == nameActivPP)
         {
-            switch ( tool.getTypeTool() )
+            switch (tool.getTypeTool())
             {
                 case Tool::Arrow:
                 case Tool::SinglePoint:
@@ -4300,8 +4614,14 @@ QRectF VPattern::ActiveDrawBoundingRect() const
                 case Tool::LinePoint:
                 case Tool::AbstractSpline:
                 case Tool::Cut:
-                case Tool::Midpoint:// Same as Tool::AlongLine, but tool will never has such type
-                case Tool::ArcIntersectAxis:// Same as Tool::CurveIntersectAxis, but tool will never has such type
+                case Tool::Midpoint:         // Same as Tool::AlongLine, but tool will never has such type
+                case Tool::ArcIntersectAxis: // Same as Tool::CurveIntersectAxis, but tool will never has such type
+                case Tool::BackgroundImage:  // Not part of active draw
+                case Tool::BackgroundImageControls: // Not part of active draw
+                case Tool::BackgroundPixmapImage:   // Not part of active draw
+                case Tool::BackgroundSVGImage:      // Not part of active draw
+                case Tool::ArcStart:                // Same as Tool::CutArc, but tool will never has such type
+                case Tool::ArcEnd:                  // Same as Tool::CutArc, but tool will never has such type
                 case Tool::LAST_ONE_DO_NOT_USE:
                     Q_UNREACHABLE();
                     break;
@@ -4351,7 +4671,7 @@ QRectF VPattern::ActiveDrawBoundingRect() const
                 case Tool::Move:
                     rec = ToolBoundingRect<VAbstractOperation>(rec, tool.getId());
                     break;
-                //These tools are not accesseble in Draw mode, but still 'history' contains them.
+                // These tools are not accesseble in Draw mode, but still 'history' contains them.
                 case Tool::Piece:
                 case Tool::UnionDetails:
                 case Tool::NodeArc:
@@ -4365,6 +4685,7 @@ QRectF VPattern::ActiveDrawBoundingRect() const
                 case Tool::InsertNode:
                 case Tool::PlaceLabel:
                 case Tool::DuplicateDetail:
+                default:
                     break;
             }
         }
@@ -4372,28 +4693,29 @@ QRectF VPattern::ActiveDrawBoundingRect() const
     return rec;
 }
 
-QT_WARNING_POP
-
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-QRectF VPattern::ToolBoundingRect(const QRectF &rec, const quint32 &id) const
+template <typename T> auto VPattern::ToolBoundingRect(const QRectF &rec, quint32 id) const -> QRectF
 {
     QRectF recTool = rec;
     if (tools.contains(id))
     {
-        const T *vTool = qobject_cast<T *>(tools.value(id));
-        SCASSERT(vTool != nullptr)
+        if (const T *vTool = qobject_cast<T *>(tools.value(id)); vTool != nullptr)
+        {
+            QRectF childrenRect = vTool->childrenBoundingRect();
+            // map to scene coordinate.
+            childrenRect.translate(vTool->scenePos());
 
-        QRectF childrenRect = vTool->childrenBoundingRect();
-        //map to scene coordinate.
-        childrenRect.translate(vTool->scenePos());
-
-        recTool = recTool.united(vTool->sceneBoundingRect());
-        recTool = recTool.united(childrenRect);
+            recTool = recTool.united(vTool->sceneBoundingRect());
+            recTool = recTool.united(childrenRect);
+        }
+        else
+        {
+            qDebug() << "qobject_cast failed for tool with id=" << id;
+        }
     }
     else
     {
-        qDebug()<<"Can't find tool with id="<<id;
+        qDebug() << "Can't find tool with id=" << id;
     }
     return recTool;
 }

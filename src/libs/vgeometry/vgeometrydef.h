@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,10 +29,13 @@
 #ifndef VGEOMETRYDEF_H
 #define VGEOMETRYDEF_H
 
-#include <QVector>
 #include <QPolygonF>
+#include <QTransform>
+#include <QVector>
 
-enum class GOType : char
+#include "../vmisc/def.h"
+
+enum class GOType : qint8
 {
     Point,
     Arc,
@@ -44,12 +47,16 @@ enum class GOType : char
     PlaceLabel,
     Unknown
 };
-enum class SplinePointPosition : char { FirstPoint, LastPoint };
+enum class SplinePointPosition : qint8
+{
+    FirstPoint,
+    LastPoint
+};
 
 // Keep synchronized with XSD schema
-enum class PlaceLabelType :  unsigned char
+enum class PlaceLabelType : quint8
 {
-    Segment= 0,
+    Segment = 0,
     Rectangle = 1,
     Cross = 2,
     Tshaped = 3,
@@ -57,22 +64,51 @@ enum class PlaceLabelType :  unsigned char
     Corner = 5,
     Triangle = 6,
     Hshaped = 7,
-    Button = 8
+    Button = 8,
+    Circle = 9
 };
 
-typedef QVector<QPolygonF> PlaceLabelImg;
-
-struct VLayoutPlaceLabel
+struct VLayoutPassmark
 {
-    VLayoutPlaceLabel()
-        : center(),
-          type(PlaceLabelType::Button),
-          shape()
-    {}
+    QVector<QLineF> lines{};
+    PassmarkLineType type{PassmarkLineType::OneLine};
+    QLineF baseLine{};
+    bool isBuiltIn{false};
+    bool isClockwiseOpening{false};
+    QString label{};
 
-    QPointF        center;
-    PlaceLabelType type;
-    PlaceLabelImg  shape;
+    friend auto operator<<(QDataStream &dataStream, const VLayoutPassmark &data) -> QDataStream &;
+    friend auto operator>>(QDataStream &dataStream, VLayoutPassmark &data) -> QDataStream &;
+
+    auto toJson() const -> QJsonObject;
+
+private:
+    static const quint32 streamHeader;
+    static const quint16 classVersion;
 };
+Q_DECLARE_METATYPE(VLayoutPassmark) // NOLINT
+
+constexpr qreal accuracyPointOnLine = MmToPixel(0.1555);
+
+Q_REQUIRED_RESULT inline auto VFuzzyComparePoints(const QPointF &p1, const QPointF &p2,
+                                                  qreal accuracy = accuracyPointOnLine) -> bool;
+inline auto VFuzzyComparePoints(const QPointF &p1, const QPointF &p2, qreal accuracy) -> bool
+{
+    return QLineF(p1, p2).length() <= accuracy;
+}
+
+Q_REQUIRED_RESULT inline auto VFuzzyOnAxis(qreal v1, qreal v2, qreal accuracy = accuracyPointOnLine) -> bool;
+inline auto VFuzzyOnAxis(qreal v1, qreal v2, qreal accuracy) -> bool
+{
+    return qAbs(v1 - v2) <= accuracy;
+}
+
+template <class T> inline void Swap(T &line)
+{
+    line = T(line.p2(), line.p1());
+}
+
+auto SingleParallelPoint(const QPointF &p1, const QPointF &p2, qreal angle, qreal width) -> QPointF;
+auto SimpleParallelLine(const QPointF &p1, const QPointF &p2, qreal width) -> QLineF;
 
 #endif // VGEOMETRYDEF_H

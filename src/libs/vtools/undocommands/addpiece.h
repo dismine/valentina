@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef ADDPIECE_H
 #define ADDPIECE_H
 
-#include <qcompilerdetection.h>
 #include <QDomElement>
 #include <QMetaObject>
 #include <QObject>
@@ -37,32 +36,34 @@
 #include <QtGlobal>
 
 #include "../tools/vtoolseamallowance.h"
-#include "vpiece.h"
+#include "../vpatterndb/vpiece.h"
 #include "vundocommand.h"
 
 class AddPiece : public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
-    AddPiece(const QDomElement &xml, VAbstractPattern *doc, VContainer data, VMainGraphicsScene *scene,
+    AddPiece(const QDomElement &xml, VAbstractPattern *doc, const VContainer &data, VMainGraphicsScene *scene,
              const QString &drawName = QString(), QUndoCommand *parent = nullptr);
-    virtual ~AddPiece();
+    ~AddPiece() override;
 
     // cppcheck-suppress unusedFunction
-    virtual void undo() override;
+    void undo() override;
     // cppcheck-suppress unusedFunction
-    virtual void redo() override;
+    void redo() override;
+
 private:
-    Q_DISABLE_COPY(AddPiece)
+    Q_DISABLE_COPY_MOVE(AddPiece) // NOLINT
 
-    VPiece m_detail;
+    VPiece m_detail{};
     QString m_drawName;
-    QPointer<VToolSeamAllowance> m_tool;
-    VToolRecord                  m_record;
-    VMainGraphicsScene          *m_scene;
-    VContainer                   m_data;
+    QPointer<VToolSeamAllowance> m_tool{};
+    VToolRecord m_record{};
+    VMainGraphicsScene *m_scene;
+    VContainer m_data;
 
-    QDomElement GetDetailsSection() const;
+    auto GetDetailsSection() const -> QDomElement;
 };
 
 #endif // ADDPIECE_H

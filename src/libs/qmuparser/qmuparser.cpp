@@ -23,17 +23,15 @@
 
 #include <QCoreApplication>
 #include <QLineF>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
+#include <QtDebug>
 #include <QtGlobal>
+#include <QtMath>
 #include <sstream>
 #include <string>
 
-#include "qmuparserdef.h"
-#include "qmuparsererror.h"
-#include "../vmisc/vmath.h"
 #include "../vmisc/defglobal.h"
+#include "qmudef.h"
+#include "qmuparsererror.h"
 
 /**
  * @file
@@ -52,7 +50,7 @@ namespace
  * @param arcLength length of arc that create two pieces after rotation
  * @return an angle the second piece should be rotated
  */
-qreal CSR(qreal length, qreal split, qreal arcLength)
+auto CSR(qreal length, qreal split, qreal arcLength) -> qreal
 {
     length = qAbs(length);
     arcLength = qAbs(arcLength);
@@ -66,16 +64,16 @@ qreal CSR(qreal length, qreal split, qreal arcLength)
     const QLineF line(QPointF(0, 0), QPointF(0, length));
 
     QLineF tmp = line;
-    tmp.setAngle(tmp.angle()+90.0*sign);
+    tmp.setAngle(tmp.angle() + 90.0 * sign);
     tmp.setLength(split);
 
-    QPointF p1 = tmp.p2();
+    QPointF const p1 = tmp.p2();
 
     tmp = QLineF(QPointF(0, length), QPointF(0, 0));
-    tmp.setAngle(tmp.angle()-90.0*sign);
+    tmp.setAngle(tmp.angle() - 90.0 * sign);
     tmp.setLength(split);
 
-    QPointF p2 = tmp.p2();
+    QPointF const p2 = tmp.p2();
 
     const QLineF line2(p1, p2);
 
@@ -85,11 +83,11 @@ qreal CSR(qreal length, qreal split, qreal arcLength)
     {
         if (arcL > arcLength)
         {
-            angle = angle - angle/2.0;
+            angle = angle - angle / 2.0;
         }
         else if (arcL < arcLength)
         {
-            angle = angle + angle/2.0;
+            angle = angle + angle / 2.0;
         }
         else
         {
@@ -102,24 +100,22 @@ qreal CSR(qreal length, qreal split, qreal arcLength)
         }
 
         tmp = line2;
-        tmp.setAngle(tmp.angle()+angle*sign);
+        tmp.setAngle(tmp.angle() + angle * sign);
 
         QPointF crosPoint;
-        const auto type = line.intersect(tmp, &crosPoint);
-        if (type == QLineF::NoIntersection)
+        if (const auto type = line.intersects(tmp, &crosPoint); type == QLineF::NoIntersection)
         {
             return 0;
         }
 
-        QLineF radius(crosPoint, tmp.p2());
-        const qreal arcAngle = sign > 0 ? line.angleTo(radius): radius.angleTo(line);
-        arcL = (M_PI*radius.length())/180.0 * arcAngle;
-    }
-    while(qAbs(arcL - arcLength) > (0.5/*mm*/ / 25.4) * PrintDPI);
+        QLineF const radius(crosPoint, tmp.p2());
+        const qreal arcAngle = sign > 0 ? line.angleTo(radius) : radius.angleTo(line);
+        arcL = (M_PI * radius.length()) / 180.0 * arcAngle;
+    } while (qAbs(arcL - arcLength) > (0.5 /*mm*/ / 25.4) * PrintDPI);
 
     return angle;
 }
-}
+} // namespace
 
 /**
  * @brief Namespace for mathematical applications.
@@ -128,85 +124,85 @@ namespace qmu
 {
 //---------------------------------------------------------------------------------------------------------------------
 // Trigonometric function
-qreal QmuParser::DegreeToRadian(qreal deg)
+auto QmuParser::DegreeToRadian(qreal deg) -> qreal
 {
-     return qDegreesToRadians(deg);
+    return qDegreesToRadians(deg);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::RadianToDegree(qreal rad)
+auto QmuParser::RadianToDegree(qreal rad) -> qreal
 {
-     return qRadiansToDegrees(rad);
+    return qRadiansToDegrees(rad);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::Sinh(qreal v)
+auto QmuParser::Sinh(qreal v) -> qreal
 {
     return sinh(v);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::ASinh(qreal v)
+auto QmuParser::ASinh(qreal v) -> qreal
 {
     return log(v + qSqrt(v * v + 1));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::Cosh(qreal v)
+auto QmuParser::Cosh(qreal v) -> qreal
 {
     return cosh(v);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::ACosh(qreal v)
+auto QmuParser::ACosh(qreal v) -> qreal
 {
     return log(v + qSqrt(v * v - 1));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::Tanh(qreal v)
+auto QmuParser::Tanh(qreal v) -> qreal
 {
     return tanh(v);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::ATanh(qreal v)
+auto QmuParser::ATanh(qreal v) -> qreal
 {
     return (0.5 * log((1 + v) / (1 - v)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::SinD(qreal v)
+auto QmuParser::SinD(qreal v) -> qreal
 {
     return qSin(qDegreesToRadians(v));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::ASinD(qreal v)
+auto QmuParser::ASinD(qreal v) -> qreal
 {
     return qRadiansToDegrees(qAsin(v));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::CosD(qreal v)
+auto QmuParser::CosD(qreal v) -> qreal
 {
     return qCos(qDegreesToRadians(v));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::ACosD(qreal v)
+auto QmuParser::ACosD(qreal v) -> qreal
 {
     return qRadiansToDegrees(qAcos(v));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::TanD(qreal v)
+auto QmuParser::TanD(qreal v) -> qreal
 {
     return qTan(qDegreesToRadians(v));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::ATanD(qreal v)
+auto QmuParser::ATanD(qreal v) -> qreal
 {
     return qRadiansToDegrees(qAtan(v));
 }
@@ -216,23 +212,23 @@ qreal QmuParser::ATanD(qreal v)
 
 //---------------------------------------------------------------------------------------------------------------------
 // Logarithm base 2
-qreal QmuParser::Log2(qreal v)
+auto QmuParser::Log2(qreal v) -> qreal
 {
 #ifdef MUP_MATH_EXCEPTIONS
-    if (v<=0)
+    if (v <= 0)
     {
         throw QmuParserError(ecDOMAIN_ERROR, "Log2");
     }
 #endif
-    return log(v)/log(2.0);
+    return log(v) / log(2.0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 // Logarithm base 10
-qreal QmuParser::Log10(qreal v)
+auto QmuParser::Log10(qreal v) -> qreal
 {
 #ifdef MUP_MATH_EXCEPTIONS
-    if (v<=0)
+    if (v <= 0)
     {
         throw QmuParserError(ecDOMAIN_ERROR, "Log10");
     }
@@ -242,25 +238,25 @@ qreal QmuParser::Log10(qreal v)
 
 //---------------------------------------------------------------------------------------------------------------------
 //  misc
-qreal QmuParser::Abs(qreal v)
+auto QmuParser::Abs(qreal v) -> qreal
 {
     return qAbs(v);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::Rint(qreal v)
+auto QmuParser::Rint(qreal v) -> qreal
 {
     return qFloor(v + 0.5);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::R2CM(qreal v)
+auto QmuParser::R2CM(qreal v) -> qreal
 {
-    return Rint(v*10.0)/10.0;
+    return Rint(v * 10.0) / 10.0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::CSRCm(qreal length, qreal split, qreal arcLength)
+auto QmuParser::CSRCm(qreal length, qreal split, qreal arcLength) -> qreal
 {
     length = ((length * 10.0) / 25.4) * PrintDPI;
     split = ((split * 10.0) / 25.4) * PrintDPI;
@@ -270,7 +266,7 @@ qreal QmuParser::CSRCm(qreal length, qreal split, qreal arcLength)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::CSRInch(qreal length, qreal split, qreal arcLength)
+auto QmuParser::CSRInch(qreal length, qreal split, qreal arcLength) -> qreal
 {
     length = length * PrintDPI;
     split = split * PrintDPI;
@@ -280,13 +276,13 @@ qreal QmuParser::CSRInch(qreal length, qreal split, qreal arcLength)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::Sign(qreal v)
+auto QmuParser::Sign(qreal v) -> qreal
 {
-    return ((v<0) ? -1 : (v>0) ? 1 : 0);
+    return ((v < 0) ? -1 : (v > 0) ? 1 : 0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::FMod(qreal number, qreal denom)
+auto QmuParser::FMod(qreal number, qreal denom) -> qreal
 {
     return fmod(number, denom);
 }
@@ -297,15 +293,15 @@ qreal QmuParser::FMod(qreal number, qreal denom)
  * @param [in] a_afArg Vector with the function arguments
  * @param [in] a_iArgc The size of a_afArg
  */
-qreal QmuParser::Sum(const qreal *a_afArg, int a_iArgc)
+auto QmuParser::Sum(const qreal *a_afArg, qmusizetype a_iArgc) -> qreal
 {
     if (a_iArgc == 0)
     {
-        throw QmuParserError(QCoreApplication::translate("QmuParser", "too few arguments for function sum.",
-                                                         "parser error message"));
+        throw QmuParserError(
+            QCoreApplication::translate("QmuParser", "too few arguments for function sum.", "parser error message"));
     }
-    qreal fRes=0;
-    for (int i=0; i<a_iArgc; ++i)
+    qreal fRes = 0;
+    for (int i = 0; i < a_iArgc; ++i)
     {
         fRes += a_afArg[i];
     }
@@ -318,19 +314,19 @@ qreal QmuParser::Sum(const qreal *a_afArg, int a_iArgc)
  * @param [in] a_afArg Vector with the function arguments
  * @param [in] a_iArgc The size of a_afArg
  */
-qreal QmuParser::Avg(const qreal *a_afArg, int a_iArgc)
+auto QmuParser::Avg(const qreal *a_afArg, qmusizetype a_iArgc) -> qreal
 {
     if (a_iArgc == 0)
     {
-        throw QmuParserError(QCoreApplication::translate("QmuParser", "too few arguments for function sum.",
-                                                         "parser error message"));
+        throw QmuParserError(
+            QCoreApplication::translate("QmuParser", "too few arguments for function sum.", "parser error message"));
     }
-    qreal fRes=0;
-    for (int i=0; i<a_iArgc; ++i)
+    qreal fRes = 0;
+    for (int i = 0; i < a_iArgc; ++i)
     {
         fRes += a_afArg[i];
     }
-    return fRes/static_cast<qreal>(a_iArgc);
+    return fRes / static_cast<qreal>(a_iArgc);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -339,15 +335,15 @@ qreal QmuParser::Avg(const qreal *a_afArg, int a_iArgc)
  * @param [in] a_afArg Vector with the function arguments
  * @param [in] a_iArgc The size of a_afArg
  */
-qreal QmuParser::Min(const qreal *a_afArg, int a_iArgc)
+auto QmuParser::Min(const qreal *a_afArg, qmusizetype a_iArgc) -> qreal
 {
     if (a_iArgc == 0)
     {
-        throw QmuParserError(QCoreApplication::translate("QmuParser", "too few arguments for function min.",
-                                                         "parser error message"));
+        throw QmuParserError(
+            QCoreApplication::translate("QmuParser", "too few arguments for function min.", "parser error message"));
     }
-    qreal fRes=a_afArg[0];
-    for (int i=0; i<a_iArgc; ++i)
+    qreal fRes = a_afArg[0];
+    for (int i = 0; i < a_iArgc; ++i)
     {
         fRes = qMin(fRes, a_afArg[i]);
     }
@@ -360,15 +356,15 @@ qreal QmuParser::Min(const qreal *a_afArg, int a_iArgc)
  * @param [in] a_afArg Vector with the function arguments
  * @param [in] a_iArgc The size of a_afArg
  */
-qreal QmuParser::Max(const qreal *a_afArg, int a_iArgc)
+auto QmuParser::Max(const qreal *a_afArg, qmusizetype a_iArgc) -> qreal
 {
     if (a_iArgc == 0)
     {
-        throw QmuParserError(QCoreApplication::translate("QmuParser", "too few arguments for function min.",
-                                                         "parser error message"));
+        throw QmuParserError(
+            QCoreApplication::translate("QmuParser", "too few arguments for function min.", "parser error message"));
     }
-    qreal fRes=a_afArg[0];
-    for (int i=0; i<a_iArgc; ++i)
+    qreal fRes = a_afArg[0];
+    for (int i = 0; i < a_iArgc; ++i)
     {
         fRes = qMax(fRes, a_afArg[i]);
     }
@@ -377,18 +373,19 @@ qreal QmuParser::Max(const qreal *a_afArg, int a_iArgc)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
-* @brief Default value recognition callback.
-* @param [in] a_szExpr Pointer to the expression
-* @param [in, out] a_iPos Pointer to an index storing the current position within the expression
-* @param [out] a_fVal Pointer where the value should be stored in case one is found.
-* @return 1 if a value was found 0 otherwise.
-*/
-int QmuParser::IsVal(const QString &a_szExpr, int *a_iPos, qreal *a_fVal, const QLocale &locale, const QChar &decimal,
-                     const QChar &thousand)
+ * @brief Default value recognition callback.
+ * @param [in] a_szExpr Pointer to the expression
+ * @param [in, out] a_iPos Pointer to an index storing the current position within the expression
+ * @param [out] a_fVal Pointer where the value should be stored in case one is found.
+ * @return 1 if a value was found 0 otherwise.
+ */
+auto QmuParser::IsVal(const QString &a_szExpr, qmusizetype *a_iPos, qreal *a_fVal, const QLocale &locale, bool cNumbers,
+                      const QChar &decimal, const QChar &thousand) -> int
 {
     qreal fVal(0);
 
-    const int pos = ReadVal(a_szExpr, fVal, locale, decimal, thousand);
+    qmusizetype const pos =
+        ReadVal(a_szExpr, fVal, locale != QLocale::c() && cNumbers ? QLocale::c() : locale, decimal, thousand);
 
     if (pos == -1)
     {
@@ -406,14 +403,12 @@ int QmuParser::IsVal(const QString &a_szExpr, int *a_iPos, qreal *a_fVal, const 
  *
  * Call QmuParserBase class constructor and trigger Function, Operator and Constant initialization.
  */
-QmuParser::QmuParser():QmuParserBase()
+QmuParser::QmuParser()
+  : QmuParserBase()
 {
     AddValIdent(IsVal);
 
-    InitCharSets();
-    InitFun();
-    InitConst();
-    InitOprt();
+    Init();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -426,9 +421,9 @@ QmuParser::QmuParser():QmuParserBase()
  */
 void QmuParser::InitCharSets()
 {
-    DefineNameChars( QStringLiteral("0123456789_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") );
-    DefineOprtChars( QStringLiteral("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+-*^/?<>=#!$%&|~'_{}") );
-    DefineInfixOprtChars( QStringLiteral("/+-*^?<>=#!$%&|~'_") );
+    DefineNameChars(QStringLiteral("0123456789_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"));
+    DefineOprtChars(QStringLiteral("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+-*^/?<>=#!$%&|~'_{}"));
+    DefineInfixOprtChars(QStringLiteral("/+-*^?<>=#!$%&|~'_"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -438,52 +433,76 @@ void QmuParser::InitCharSets()
 void QmuParser::InitFun()
 {
     // trigonometric helper functions
-    DefineFun(QStringLiteral("degTorad"),   DegreeToRadian);
-    DefineFun(QStringLiteral("radTodeg"),   RadianToDegree);
+    DefineFun(QStringLiteral("degTorad"), DegreeToRadian);
+    DefineFun(QStringLiteral("radTodeg"), RadianToDegree);
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#define QSIN_FUN qSin<qreal>
+#define QCOS_FUN qCos<qreal>
+#define QTAN_FUN qTan<qreal>
+#define QASIN_FUN qAsin<qreal>
+#define QACOS_FUN qAcos<qreal>
+#define QATAN_FUN qAtan<qreal>
+#define QATAN2_FUN qAtan2<qreal, qreal>
+#define QLN_FUN qLn<qreal>
+#define QEXP_FUN qExp<qreal>
+#define QSQRT_FUN qSqrt<qreal>
+#else
+#define QSIN_FUN qSin
+#define QCOS_FUN qCos
+#define QTAN_FUN qTan
+#define QASIN_FUN qAsin
+#define QACOS_FUN qAcos
+#define QATAN_FUN qAtan
+#define QATAN2_FUN qAtan2
+#define QLN_FUN qLn
+#define QEXP_FUN qExp
+#define QSQRT_FUN qSqrt
+#endif
 
     // trigonometric functions
-    DefineFun(QStringLiteral("sin"),   qSin);
-    DefineFun(QStringLiteral("cos"),   qCos);
-    DefineFun(QStringLiteral("tan"),   qTan);
-    DefineFun(QStringLiteral("sinD"),   SinD);
-    DefineFun(QStringLiteral("cosD"),   CosD);
-    DefineFun(QStringLiteral("tanD"),   TanD);
+    DefineFun(QStringLiteral("sin"), QSIN_FUN);
+    DefineFun(QStringLiteral("cos"), QCOS_FUN);
+    DefineFun(QStringLiteral("tan"), QTAN_FUN);
+    DefineFun(QStringLiteral("sinD"), SinD);
+    DefineFun(QStringLiteral("cosD"), CosD);
+    DefineFun(QStringLiteral("tanD"), TanD);
     // arcus functions
-    DefineFun(QStringLiteral("asin"),  qAsin);
-    DefineFun(QStringLiteral("acos"),  qAcos);
-    DefineFun(QStringLiteral("atan"),  qAtan);
-    DefineFun(QStringLiteral("atan2"), qAtan2);
-    DefineFun(QStringLiteral("asinD"),  ASinD);
-    DefineFun(QStringLiteral("acosD"),  ACosD);
-    DefineFun(QStringLiteral("atanD"),  ATanD);
+    DefineFun(QStringLiteral("asin"), QASIN_FUN);
+    DefineFun(QStringLiteral("acos"), QACOS_FUN);
+    DefineFun(QStringLiteral("atan"), QATAN_FUN);
+    DefineFun(QStringLiteral("atan2"), QATAN2_FUN);
+    DefineFun(QStringLiteral("asinD"), ASinD);
+    DefineFun(QStringLiteral("acosD"), ACosD);
+    DefineFun(QStringLiteral("atanD"), ATanD);
     // hyperbolic functions
-    DefineFun(QStringLiteral("sinh"),  Sinh);
-    DefineFun(QStringLiteral("cosh"),  Cosh);
-    DefineFun(QStringLiteral("tanh"),  Tanh);
+    DefineFun(QStringLiteral("sinh"), Sinh);
+    DefineFun(QStringLiteral("cosh"), Cosh);
+    DefineFun(QStringLiteral("tanh"), Tanh);
     // arcus hyperbolic functions
     DefineFun(QStringLiteral("asinh"), ASinh);
     DefineFun(QStringLiteral("acosh"), ACosh);
     DefineFun(QStringLiteral("atanh"), ATanh);
     // Logarithm functions
-    DefineFun(QStringLiteral("log2"),  Log2);
+    DefineFun(QStringLiteral("log2"), Log2);
     DefineFun(QStringLiteral("log10"), Log10);
-    DefineFun(QStringLiteral("log"),   Log10);
-    DefineFun(QStringLiteral("ln"),    qLn);
+    DefineFun(QStringLiteral("log"), Log10);
+    DefineFun(QStringLiteral("ln"), QLN_FUN);
     // misc
-    DefineFun(QStringLiteral("exp"),   qExp);
-    DefineFun(QStringLiteral("sqrt"),  qSqrt);
-    DefineFun(QStringLiteral("sign"),  Sign);
-    DefineFun(QStringLiteral("rint"),  Rint);
-    DefineFun(QStringLiteral("r2cm"),  R2CM);
+    DefineFun(QStringLiteral("exp"), QEXP_FUN);
+    DefineFun(QStringLiteral("sqrt"), QSQRT_FUN);
+    DefineFun(QStringLiteral("sign"), Sign);
+    DefineFun(QStringLiteral("rint"), Rint);
+    DefineFun(QStringLiteral("r2cm"), R2CM);
     DefineFun(QStringLiteral("csrCm"), CSRCm);
     DefineFun(QStringLiteral("csrInch"), CSRInch);
-    DefineFun(QStringLiteral("abs"),   Abs);
-    DefineFun(QStringLiteral("fmod"),  FMod);
+    DefineFun(QStringLiteral("abs"), Abs);
+    DefineFun(QStringLiteral("fmod"), FMod);
     // Functions with variable number of arguments
-    DefineFun(QStringLiteral("sum"),   Sum);
-    DefineFun(QStringLiteral("avg"),   Avg);
-    DefineFun(QStringLiteral("min"),   Min);
-    DefineFun(QStringLiteral("max"),   Max);
+    DefineFun(QStringLiteral("sum"), Sum);
+    DefineFun(QStringLiteral("avg"), Avg);
+    DefineFun(QStringLiteral("min"), Min);
+    DefineFun(QStringLiteral("max"), Max);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -495,8 +514,8 @@ void QmuParser::InitFun()
  */
 void QmuParser::InitConst()
 {
-    DefineConst("_pi", static_cast<qreal>(M_PI));
-    DefineConst("_e", static_cast<qreal>(M_E));
+    DefineConst(QStringLiteral("_pi"), M_PI);
+    DefineConst(QStringLiteral("_e"), M_E);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -507,11 +526,11 @@ void QmuParser::InitConst()
  */
 void QmuParser::InitOprt()
 {
-    DefineInfixOprt(m_locale.negativeSign(), UnaryMinus);
+    DefineInfixOprt(LocaleNegativeSign(m_locale), UnaryMinus);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void QmuParser::OnDetectVar(const QString &pExpr, int &nStart, int &nEnd)
+void QmuParser::OnDetectVar(const QString &pExpr, qmusizetype &nStart, qmusizetype &nEnd)
 {
     Q_UNUSED(pExpr)
     Q_UNUSED(nStart)
@@ -553,27 +572,28 @@ void QmuParser::OnDetectVar(const QString &pExpr, int &nStart, int &nEnd)
  * http://sourceforge.net/forum/forum.php?thread_id=1994611&forum_id=462843
  */
 // cppcheck-suppress unusedFunction
-qreal QmuParser::Diff(qreal *a_Var, qreal  a_fPos, qreal  a_fEpsilon) const
+auto QmuParser::Diff(qreal *a_Var, qreal a_fPos, qreal a_fEpsilon) const -> qreal
 {
-    qreal fRes(0),
-          fBuf(*a_Var),
-          f[4] = {0, 0, 0, 0},
-          fEpsilon(a_fEpsilon);
+    qreal fRes(0), fBuf(*a_Var), f[4] = {0, 0, 0, 0}, fEpsilon(a_fEpsilon);
 
     // Backwards compatible calculation of epsilon inc case the user doesnt provide
     // his own epsilon
     if (qFuzzyIsNull(fEpsilon))
     {
-        fEpsilon = qFuzzyIsNull(a_fPos) ? static_cast<qreal>(1e-10) : static_cast<qreal>(1e-7) * a_fPos;
+        fEpsilon = qFuzzyIsNull(a_fPos) ? 1e-10 : 1e-7 * a_fPos;
     }
 
-    *a_Var = a_fPos+2 * fEpsilon;  f[0] = Eval();
-    *a_Var = a_fPos+1 * fEpsilon;  f[1] = Eval();
-    *a_Var = a_fPos-1 * fEpsilon;  f[2] = Eval();
-    *a_Var = a_fPos-2 * fEpsilon;  f[3] = Eval();
+    *a_Var = a_fPos + 2 * fEpsilon;
+    f[0] = Eval();
+    *a_Var = a_fPos + 1 * fEpsilon;
+    f[1] = Eval();
+    *a_Var = a_fPos - 1 * fEpsilon;
+    f[2] = Eval();
+    *a_Var = a_fPos - 2 * fEpsilon;
+    f[3] = Eval();
     *a_Var = fBuf; // restore variable
 
-    fRes = (-f[0] + 8*f[1] - 8*f[2] + f[3]) / (12*fEpsilon);
+    fRes = (-f[0] + 8 * f[1] - 8 * f[2] + f[3]) / (12 * fEpsilon);
     return fRes;
 }
 } // namespace qmu

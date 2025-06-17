@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -27,76 +27,22 @@
  *************************************************************************/
 
 #include "tst_tstranslation.h"
-#include "../vmisc/logging.h"
-#include "../vmisc/def.h"
 
 #include <QDomDocument>
 #include <QtTest>
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
 
 Q_DECLARE_METATYPE(QDomElement) // Need for testing
 
 //---------------------------------------------------------------------------------------------------------------------
 TST_TSTranslation::TST_TSTranslation(QObject *parent)
-    : TST_AbstractTranslation(parent)
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TST_TSTranslation::CheckEnglishLocalization_data()
+  : TST_AbstractTranslation(parent)
 {
-    QTest::addColumn<QString>("source");
-    QTest::addColumn<QString>("translation");
-
-    const QString fileName = QStringLiteral("valentina_en_US.ts");
-    const QDomNodeList messages = LoadTSFile(fileName);
-    if (messages.isEmpty())
-    {
-        QFAIL("Can't begin test.");
-    }
-
-    for (qint32 i = 0, num = messages.size(); i < num; ++i)
-    {
-        const QDomElement message = messages.at(i).toElement();
-        if (message.isNull() == false)
-        {
-            const QString source = message.firstChildElement(TagSource).text();
-            if (source.isEmpty())
-            {
-                continue;
-            }
-
-            const QDomElement translationTag = message.firstChildElement(TagTranslation);
-            if (translationTag.hasAttribute(AttrType))
-            {
-                const QString attrVal = translationTag.attribute(AttrType);
-                if (attrVal == AttrValVanished || attrVal == AttrValUnfinished || attrVal == AttrValObsolete)
-                {
-                    continue;
-                }
-            }
-            const QString translation = translationTag.text();
-            if (translation.isEmpty())
-            {
-                continue;
-            }
-
-            const QString message = QString("File '%1'. Check modification source message '%2'.").arg(fileName, source);
-            QTest::newRow(qUtf8Printable(message)) << source << translation;
-        }
-        else
-        {
-            const QString message = QString("Message %1 is null.").arg(i);
-            QFAIL(qUtf8Printable(message));
-        }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TST_TSTranslation::CheckEnglishLocalization()
-{
-    QFETCH(QString, source);
-    QFETCH(QString, translation);
-
-    QCOMPARE(source, translation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -111,7 +57,7 @@ void TST_TSTranslation::CheckEmptyToolButton()
     QFETCH(QString, source);
     QFETCH(QDomElement, message);
 
-    if (source == QLatin1String("..."))
+    if (source == "..."_L1)
     {
         const QDomElement translationTag = message.firstChildElement(TagTranslation);
         if (translationTag.hasAttribute(AttrType))
@@ -130,7 +76,7 @@ void TST_TSTranslation::CheckEmptyToolButton()
         }
 
         const QString contextName = context.firstChildElement(TagName).text();
-        const QString error = QString("Found '...' in context '%1'").arg(contextName);
+        const QString error = u"Found '...' in context '%1'"_s.arg(contextName);
         QFAIL(qUtf8Printable(error));
     }
 }
@@ -166,8 +112,35 @@ void TST_TSTranslation::CheckEllipsis()
         }
 
         const QString contextName = context.firstChildElement(TagName).text();
-        const QString error = QString("String '%1' ends with '...' in context '%2'. Repalce it with '…'.")
-                .arg(source, contextName);
+        const QString error =
+            u"String '%1' ends with '...' in context '%2'. Repalce it with '…'."_s.arg(source, contextName);
+        QFAIL(qUtf8Printable(error));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_TSTranslation::CheckInvalidCharacter_data()
+{
+    PrepareOriginalStrings();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_TSTranslation::CheckInvalidCharacter()
+{
+    QFETCH(QString, source);
+    QFETCH(QDomElement, message);
+
+    if (source == '='_L1 or source == '%'_L1)
+    {
+        const QDomNode context = message.parentNode();
+        if (context.isNull())
+        {
+            QFAIL("Can't get context.");
+        }
+
+        const QString contextName = context.firstChildElement(TagName).text();
+        const QString error = u"String contains invalid character '%1' in context '%2'. It should not be "
+                              u"marked for translation."_s.arg(source, contextName);
         QFAIL(qUtf8Printable(error));
     }
 }
@@ -178,7 +151,7 @@ void TST_TSTranslation::PrepareOriginalStrings()
     QTest::addColumn<QString>("source");
     QTest::addColumn<QDomElement>("message");
 
-    const QString fileName = QStringLiteral("valentina.ts");
+    const auto fileName = QStringLiteral("valentina.ts");
     const QDomNodeList messages = LoadTSFile(fileName);
     if (messages.isEmpty())
     {
@@ -188,7 +161,7 @@ void TST_TSTranslation::PrepareOriginalStrings()
     for (qint32 i = 0, num = messages.size(); i < num; ++i)
     {
         const QDomElement message = messages.at(i).toElement();
-        if (message.isNull() == false)
+        if (not message.isNull())
         {
             const QString source = message.firstChildElement(TagSource).text();
             if (source.isEmpty())
@@ -196,13 +169,13 @@ void TST_TSTranslation::PrepareOriginalStrings()
                 continue;
             }
 
-            const QString tag = QString("File '%1'. Check modification source message '%2'.").arg(fileName, source);
+            const auto tag = QStringLiteral("File '%1'. Check modification source message '%2'.").arg(fileName, source);
             QTest::newRow(qUtf8Printable(tag)) << source << message;
         }
         else
         {
-            const QString message = QString("Message %1 is null.").arg(i);
-            QFAIL(qUtf8Printable(message));
+            const auto errorMessage = QStringLiteral("Message %1 is null.").arg(i);
+            QFAIL(qUtf8Printable(errorMessage));
         }
     }
 }

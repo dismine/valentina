@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -30,19 +30,17 @@
 
 #include <QPen>
 #include <QSharedPointer>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
-#include <Qt>
 #include <new>
 
-#include "../../../dialogs/tools/dialogtool.h"
 #include "../../../dialogs/tools/dialogarcwithlength.h"
-#include "../../../visualization/visualization.h"
+#include "../../../dialogs/tools/dialogtool.h"
 #include "../../../visualization/path/vistoolarcwithlength.h"
+#include "../../../visualization/visualization.h"
+#include "../../vabstracttool.h"
 #include "../ifc/exception/vexception.h"
-#include "../ifc/xml/vdomdocument.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vdomdocument.h"
+#include "../vdrawtool.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
@@ -52,25 +50,29 @@
 #include "../vpatterndb/vformula.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "../../vabstracttool.h"
-#include "../vdrawtool.h"
 #include "vabstractspline.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
 
 const QString VToolArcWithLength::ToolType = QStringLiteral("arcWithLength");
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolArcWithLength::VToolArcWithLength(const VToolArcWithLengthInitData &initData, QGraphicsItem *parent)
-    :VToolAbstractArc(initData.doc, initData.data, initData.id, parent)
+  : VToolAbstractArc(initData.doc, initData.data, initData.id, initData.notes, parent)
 {
-    sceneType = SceneObject::Arc;
+    SetSceneType(SceneObject::Arc);
 
-    this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
+    this->setFlag(QGraphicsItem::ItemIsFocusable, true); // For keyboard input focus
 
     ToolCreation(initData.typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolArcWithLength::setDialog()
+void VToolArcWithLength::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogArcWithLength> dialogTool = qobject_cast<DialogArcWithLength *>(m_dialog);
@@ -83,11 +85,13 @@ void VToolArcWithLength::setDialog()
     dialogTool->SetColor(arc->GetColor());
     dialogTool->SetPenStyle(arc->GetPenStyle());
     dialogTool->SetApproximationScale(arc->GetApproximationScale());
+    dialogTool->SetNotes(m_notes);
+    dialogTool->SetAliasSuffix(arc->GetAliasSuffix());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolArcWithLength *VToolArcWithLength::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
-                                               VAbstractPattern *doc, VContainer *data)
+auto VToolArcWithLength::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                                VContainer *data) -> VToolArcWithLength *
 {
     SCASSERT(not dialog.isNull())
     const QPointer<DialogArcWithLength> dialogTool = qobject_cast<DialogArcWithLength *>(dialog);
@@ -106,8 +110,10 @@ VToolArcWithLength *VToolArcWithLength::Create(const QPointer<DialogTool> &dialo
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
+    initData.aliasSuffix = dialogTool->GetAliasSuffix();
 
-    VToolArcWithLength* point = Create(initData);
+    VToolArcWithLength *point = Create(initData);
     if (point != nullptr)
     {
         point->m_dialog = dialog;
@@ -116,18 +122,20 @@ VToolArcWithLength *VToolArcWithLength::Create(const QPointer<DialogTool> &dialo
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolArcWithLength *VToolArcWithLength::Create(VToolArcWithLengthInitData &initData)
+auto VToolArcWithLength::Create(VToolArcWithLengthInitData &initData) -> VToolArcWithLength *
 {
     qreal calcRadius = 0, calcF1 = 0, calcLength = 0;
 
-    calcRadius = qApp->toPixel(CheckFormula(initData.id, initData.radius, initData.data));
-    calcLength = qApp->toPixel(CheckFormula(initData.id, initData.length, initData.data));
+    calcRadius = VAbstractValApplication::VApp()->toPixel(CheckFormula(initData.id, initData.radius, initData.data));
+    calcLength = VAbstractValApplication::VApp()->toPixel(CheckFormula(initData.id, initData.length, initData.data));
     calcF1 = CheckFormula(initData.id, initData.f1, initData.data);
 
     const VPointF c = *initData.data->GeometricObject<VPointF>(initData.center);
-    VArc *arc = new VArc(calcLength, initData.length, c, calcRadius, initData.radius, calcF1, initData.f1);
+    auto *arc = new VArc(calcLength, initData.length, c, calcRadius, initData.radius, calcF1, initData.f1);
     arc->SetColor(initData.color);
     arc->SetPenStyle(initData.penStyle);
+    arc->SetApproximationScale(initData.approximationScale);
+    arc->SetAliasSuffix(initData.aliasSuffix);
 
     if (initData.typeCreation == Source::FromGui)
     {
@@ -147,7 +155,7 @@ VToolArcWithLength *VToolArcWithLength::Create(VToolArcWithLengthInitData &initD
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::ArcWithLength, initData.doc);
-        VToolArcWithLength *toolArc = new VToolArcWithLength(initData);
+        auto *toolArc = new VToolArcWithLength(initData);
         initData.scene->addItem(toolArc);
         InitArcToolConnections(initData.scene, toolArc);
         VAbstractPattern::AddTool(initData.id, toolArc);
@@ -158,21 +166,20 @@ VToolArcWithLength *VToolArcWithLength::Create(VToolArcWithLengthInitData &initD
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolArcWithLength::getTagName() const
+auto VToolArcWithLength::getTagName() const -> QString
 {
     return VAbstractPattern::TagArc;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolArcWithLength::GetFormulaRadius() const
+auto VToolArcWithLength::GetFormulaRadius() const -> VFormula
 {
-    QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
+    QSharedPointer<VArc> const arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
     SCASSERT(arc.isNull() == false)
 
     VFormula radius(arc->GetFormulaRadius(), getData());
-    radius.setCheckZero(true);
     radius.setToolId(m_id);
-    radius.setPostfix(UnitsToStr(qApp->patternUnit()));
+    radius.setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits()));
     radius.Eval();
     return radius;
 }
@@ -182,24 +189,20 @@ void VToolArcWithLength::SetFormulaRadius(const VFormula &value)
 {
     if (value.error() == false)
     {
-        if (value.getDoubleValue() > 0)// Formula don't check this, but radius can't be 0 or negative
-        {
-            QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-            QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
-            arc->SetFormulaRadius(value.GetFormula(FormulaType::FromUser), value.getDoubleValue());
-            SaveOption(obj);
-        }
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
+        QSharedPointer<VArc> const arc = qSharedPointerDynamicCast<VArc>(obj);
+        arc->SetFormulaRadius(value.GetFormula(FormulaType::FromUser), value.getDoubleValue());
+        SaveOption(obj);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolArcWithLength::GetFormulaF1() const
+auto VToolArcWithLength::GetFormulaF1() const -> VFormula
 {
-    QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
+    QSharedPointer<VArc> const arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
     SCASSERT(arc.isNull() == false)
 
     VFormula f1(arc->GetFormulaF1(), getData());
-    f1.setCheckZero(false);
     f1.setToolId(m_id);
     f1.setPostfix(degreeSymbol);
     f1.Eval();
@@ -212,9 +215,9 @@ void VToolArcWithLength::SetFormulaF1(const VFormula &value)
     if (value.error() == false)
     {
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
+        QSharedPointer<VArc> const arc = qSharedPointerDynamicCast<VArc>(obj);
 
-        if (not VFuzzyComparePossibleNulls(value.getDoubleValue(), arc->GetEndAngle()))// Angles can't be equal
+        if (not VFuzzyComparePossibleNulls(value.getDoubleValue(), arc->GetEndAngle())) // Angles can't be equal
         {
             arc->SetFormulaF1(value.GetFormula(FormulaType::FromUser), value.getDoubleValue());
             SaveOption(obj);
@@ -223,15 +226,15 @@ void VToolArcWithLength::SetFormulaF1(const VFormula &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolArcWithLength::GetFormulaLength() const
+auto VToolArcWithLength::GetFormulaLength() const -> VFormula
 {
-    QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
+    QSharedPointer<VArc> const arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
     SCASSERT(arc.isNull() == false)
 
     VFormula radius(arc->GetFormulaLength(), getData());
     radius.setCheckZero(true);
     radius.setToolId(m_id);
-    radius.setPostfix(UnitsToStr(qApp->patternUnit()));
+    radius.setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits()));
     radius.Eval();
     return radius;
 }
@@ -242,16 +245,16 @@ void VToolArcWithLength::SetFormulaLength(const VFormula &value)
     if (value.error() == false)
     {
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
+        QSharedPointer<VArc> const arc = qSharedPointerDynamicCast<VArc>(obj);
         arc->SetFormulaLength(value.GetFormula(FormulaType::FromUser), value.getDoubleValue());
         SaveOption(obj);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VToolArcWithLength::GetApproximationScale() const
+auto VToolArcWithLength::GetApproximationScale() const -> qreal
 {
-    QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
+    QSharedPointer<VArc> const arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
     SCASSERT(arc.isNull() == false)
 
     return arc->GetApproximationScale();
@@ -261,7 +264,7 @@ qreal VToolArcWithLength::GetApproximationScale() const
 void VToolArcWithLength::SetApproximationScale(qreal value)
 {
     QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-    QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
+    QSharedPointer<VArc> const arc = qSharedPointerDynamicCast<VArc>(obj);
     arc->SetApproximationScale(value);
     SaveOption(obj);
 }
@@ -280,10 +283,10 @@ void VToolArcWithLength::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, 
     {
         ContextMenu<DialogArcWithLength>(event);
     }
-    catch(const VExceptionToolWasDeleted &e)
+    catch (const VExceptionToolWasDeleted &e)
     {
         Q_UNUSED(e)
-        return;//Leave this method immediately!!!
+        return; // Leave this method immediately!!!
     }
 }
 
@@ -302,7 +305,7 @@ void VToolArcWithLength::SaveDialog(QDomElement &domElement, QList<quint32> &old
     const QPointer<DialogArcWithLength> dialogTool = qobject_cast<DialogArcWithLength *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
-    QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
+    QSharedPointer<VArc> const arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
     SCASSERT(arc.isNull() == false)
     AddDependence(oldDependencies, arc->GetCenter().id());
     AddDependence(newDependencies, dialogTool->GetCenter());
@@ -314,6 +317,10 @@ void VToolArcWithLength::SaveDialog(QDomElement &domElement, QList<quint32> &old
     doc->SetAttribute(domElement, AttrColor, dialogTool->GetColor());
     doc->SetAttribute(domElement, AttrPenStyle, dialogTool->GetPenStyle());
     doc->SetAttribute(domElement, AttrAScale, dialogTool->GetApproximationScale());
+    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrAlias, dialogTool->GetAliasSuffix(),
+                                         [](const QString &suffix) noexcept { return suffix.isEmpty(); });
+    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
+                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -321,7 +328,7 @@ void VToolArcWithLength::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> 
 {
     VAbstractSpline::SaveOptions(tag, obj);
 
-    QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
+    QSharedPointer<VArc> const arc = qSharedPointerDynamicCast<VArc>(obj);
     SCASSERT(arc.isNull() == false)
 
     doc->SetAttribute(tag, AttrType, ToolType);
@@ -337,40 +344,42 @@ void VToolArcWithLength::SetVisualization()
     if (not vis.isNull())
     {
         const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
-        VisToolArcWithLength *visual = qobject_cast<VisToolArcWithLength *>(vis);
+        auto *visual = qobject_cast<VisToolArcWithLength *>(vis);
         SCASSERT(visual != nullptr)
 
-        const VTranslateVars *trVars = qApp->TrVars();
-        visual->setObject1Id(arc->GetCenter().id());
-        visual->setRadius(trVars->FormulaToUser(arc->GetFormulaRadius(), qApp->Settings()->GetOsSeparator()));
-        visual->setF1(trVars->FormulaToUser(arc->GetFormulaF1(), qApp->Settings()->GetOsSeparator()));
-        visual->setLength(trVars->FormulaToUser(arc->GetFormulaLength(), qApp->Settings()->GetOsSeparator()));
-        visual->setLineStyle(LineStyleToPenStyle(arc->GetPenStyle()));
-        visual->setApproximationScale(arc->GetApproximationScale());
+        const bool osSeparator = VAbstractApplication::VApp()->Settings()->GetOsSeparator();
+        const VTranslateVars *trVars = VAbstractApplication::VApp()->TrVars();
+
+        visual->SetCenterId(arc->GetCenter().id());
+        visual->SetRadius(trVars->FormulaToUser(arc->GetFormulaRadius(), osSeparator));
+        visual->SetF1(trVars->FormulaToUser(arc->GetFormulaF1(), osSeparator));
+        visual->SetLength(trVars->FormulaToUser(arc->GetFormulaLength(), osSeparator));
+        visual->SetLineStyle(LineStyleToPenStyle(arc->GetPenStyle()));
+        visual->SetApproximationScale(arc->GetApproximationScale());
+        visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolArcWithLength::MakeToolTip() const
+auto VToolArcWithLength::MakeToolTip() const -> QString
 {
     const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
 
-    const QString toolTip = QString("<table>"
-                                    "<tr> <td><b>%10:</b> %11</td> </tr>"
-                                    "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
-                                    "<tr> <td><b>%4:</b> %5 %3</td> </tr>"
-                                    "<tr> <td><b>%6:</b> %7°</td> </tr>"
-                                    "<tr> <td><b>%8:</b> %9°</td> </tr>"
-                                    "</table>")
-            .arg(tr("Length"))
-            .arg(qApp->fromPixel(arc->GetLength()))
-            .arg(UnitsToStr(qApp->patternUnit(), true), tr("Radius"))
-            .arg(qApp->fromPixel(arc->GetRadius()))
-            .arg(tr("Start angle"))
-            .arg(qApp->fromPixel(arc->GetStartAngle()))
-            .arg(tr("End angle"))
-            .arg(qApp->fromPixel(arc->GetEndAngle()))
-            .arg(tr("Label"), arc->name());
+    const QString toolTip = u"<table>"
+                            u"<tr> <td><b>%10:</b> %11</td> </tr>"
+                            u"<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                            u"<tr> <td><b>%4:</b> %5 %3</td> </tr>"
+                            u"<tr> <td><b>%6:</b> %7°</td> </tr>"
+                            u"<tr> <td><b>%8:</b> %9°</td> </tr>"
+                            u"</table>"_s.arg(tr("Length"))
+                                .arg(VAbstractValApplication::VApp()->fromPixel(arc->GetLength()))
+                                .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), tr("Radius"))
+                                .arg(VAbstractValApplication::VApp()->fromPixel(arc->GetRadius()))
+                                .arg(tr("Start angle"))
+                                .arg(arc->GetStartAngle())
+                                .arg(tr("End angle"))
+                                .arg(arc->GetEndAngle())
+                                .arg(tr("Label"), arc->ObjectName());
     return toolTip;
 }

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,43 +29,53 @@
 #ifndef VBESTSQUARE_H
 #define VBESTSQUARE_H
 
+#include <QSharedDataPointer>
 #include <QSizeF>
 #include <QTransform>
+#include <QTypeInfo>
 #include <QtGlobal>
 
 #include "vlayoutdef.h"
 
-class VBestSquare
+class VBestSquareData;
+
+class VBestSquare final
 {
 public:
-    VBestSquare(const QSizeF &sheetSize, bool saveLength);
+    VBestSquare();
+    VBestSquare(QSizeF sheetSize, bool saveLength, bool isPortrait);
+    VBestSquare(const VBestSquare &res);
+    ~VBestSquare();
 
-    void NewResult(const QSizeF &candidate, int i, int j, const QTransform &matrix, bool mirror, BestFrom type);
+    auto operator=(const VBestSquare &res) -> VBestSquare &;
+
+    VBestSquare(VBestSquare &&res) noexcept;
+    auto operator=(VBestSquare &&res) noexcept -> VBestSquare &;
+
+    void NewResult(const VBestSquareResData &data);
     void NewResult(const VBestSquare &best);
 
-    QSizeF     BestSize() const;
-    int        GContourEdge() const;
-    int        DetailEdge() const;
-    QTransform Matrix() const;
-    bool       ValidResult() const;
-    bool       Mirror() const;
-    BestFrom   Type() const;
+    auto BestSize() const -> QSizeF;
+    auto GContourEdge() const -> int;
+    auto DetailEdge() const -> int;
+    auto Matrix() const -> QTransform;
+    auto HasValidResult() const -> bool;
+    auto Mirror() const -> bool;
+    auto Type() const -> BestFrom;
+    auto IsTerminatedByException() const -> bool;
+    auto ReasonTerminatedByException() const -> QString;
+    void TerminatedByException(const QString &reason);
 
-    bool IsSaveLength() const;
+    auto BestResultData() const -> VBestSquareResData;
+
+    auto IsSaveLength() const -> bool;
+    auto IsImprovedSidePosition(qreal sidePosition) const -> bool;
+    auto IsPortrait() const -> bool;
 
 private:
-    // All nedded information about best result
-    int resI; // Edge of global contour
-    int resJ; // Edge of detail
-    QTransform resMatrix; // Matrix for rotation and translation detail
-    QSizeF bestSize;
-    qreal sheetWidth;
-    bool valideResult;
-    bool resMirror;
-    BestFrom type;
-    bool saveLength;
-
-    static qint64 Square(const QSizeF &size);
+    QSharedDataPointer<VBestSquareData> d;
 };
+
+Q_DECLARE_TYPEINFO(VBestSquare, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VBESTSQUARE_H

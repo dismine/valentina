@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -47,7 +47,7 @@
 */
 class VWidgetPopup : public QFrame
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     /** Constructor.
@@ -63,12 +63,12 @@ public:
     void SetWidget(QWidget *widget, bool own = true);
 
     /** Returns widget to be popped up. */
-    QWidget* Widget() const;
+    auto Widget() const -> QWidget *;
 
     /** Returns true if widget is owned by this popup widget, false otherwise. */
-    bool isOwned() const;
+    auto isOwned() const -> bool;
 
-    int GetLifeTime() const;
+    auto GetLifeTime() const -> int;
     void SetLifeTime(int value);
 
     static void PopupMessage(QWidget *w, const QString &msg);
@@ -78,7 +78,8 @@ public slots:
     void Show(QPoint coord);
 
 protected:
-    Q_DISABLE_COPY(VWidgetPopup)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VWidgetPopup) // NOLINT
     QWidget *mWidget;
     bool mOwn;
     QWidget *mOldParent;
@@ -86,19 +87,19 @@ protected:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QWidget *VWidgetPopup::Widget() const
+inline auto VWidgetPopup::Widget() const -> QWidget *
 {
     return mWidget;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool VWidgetPopup::isOwned() const
+inline auto VWidgetPopup::isOwned() const -> bool
 {
     return mOwn;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline int VWidgetPopup::GetLifeTime() const
+inline auto VWidgetPopup::GetLifeTime() const -> int
 {
     return lifeTime;
 }

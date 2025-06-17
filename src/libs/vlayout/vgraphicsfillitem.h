@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -32,6 +32,8 @@
 #include <QGraphicsPathItem>
 #include <QPainter>
 
+#include "../vmisc/def.h"
+
 class VGraphicsFillItem : public QGraphicsPathItem
 {
 public:
@@ -39,17 +41,90 @@ public:
      * @brief VGraphicsFillItem Constructor
      */
     explicit VGraphicsFillItem(QGraphicsItem *parent = nullptr);
-    /**
-     * @brief ~VGraphicsFillItem Destructor
-     */
-    ~VGraphicsFillItem();
+    explicit VGraphicsFillItem(const QPainterPath &path, QGraphicsItem *parent = nullptr);
+    ~VGraphicsFillItem() override = default;
+
     /**
      * @brief paint Paints the item, filling the inside surface
      * @param painter pointer to the painter object
      * @param option unused
      * @param widget unused
      */
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Layout::GrainlineItem)
+    };
+
+    auto GetWidth() const -> qreal;
+    void SetWidth(const qreal &value);
+
+    auto CustomPen() const -> bool;
+    void SetCustomPen(bool newCustomPen);
+
+    auto IsNoBrush() const -> bool;
+    void SetNoBrush(bool noBrush);
+
+private:
+    Q_DISABLE_COPY_MOVE(VGraphicsFillItem) // NOLINT
+    qreal width{1};
+    bool m_customPen{false};
+    bool m_noBrush{false};
+};
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VGraphicsFillItem::GetWidth() const -> qreal
+{
+    return width;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VGraphicsFillItem::SetWidth(const qreal &value)
+{
+    width = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VGraphicsFillItem::CustomPen() const -> bool
+{
+    return m_customPen;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VGraphicsFillItem::SetCustomPen(bool newCustomPen)
+{
+    m_customPen = newCustomPen;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VGraphicsFillItem::IsNoBrush() const -> bool
+{
+    return m_noBrush;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VGraphicsFillItem::SetNoBrush(bool noBrush)
+{
+    m_noBrush = noBrush;
+}
+
+class VGraphicsFoldLineItem : public VGraphicsFillItem
+{
+public:
+    explicit VGraphicsFoldLineItem(QGraphicsItem *parent = nullptr);
+    explicit VGraphicsFoldLineItem(const QPainterPath &path, QGraphicsItem *parent = nullptr);
+    ~VGraphicsFoldLineItem() override = default;
+
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Layout::FoldLineItem)
+    };
+
+private:
+    Q_DISABLE_COPY_MOVE(VGraphicsFoldLineItem) // NOLINT
 };
 
 #endif // VGRAPHICSFILLITEM_H

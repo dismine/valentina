@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -27,51 +27,31 @@
  *************************************************************************/
 
 #include "dialogfinalmeasurements.h"
-#include "ui_dialogfinalmeasurements.h"
-#include "../vmisc/vsettings.h"
 #include "../qmuparser/qmudef.h"
-#include "../qmuparser/qmutokenparser.h"
-#include "../vpatterndb/vtranslatevars.h"
+#include "../vmisc/compatibility.h"
+#include "../vmisc/theme/themeDef.h"
+#include "../vmisc/theme/vtheme.h"
+#include "../vmisc/vabstractvalapplication.h"
+#include "../vmisc/vvalentinasettings.h"
 #include "../vpatterndb/calculator.h"
+#include "../vtools/dialogs/dialogtoolbox.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"
+#include "ui_dialogfinalmeasurements.h"
 
-#define DIALOG_MAX_FORMULA_HEIGHT 64
+#include <QMenu>
 
-namespace
-{
-#if QT_VERSION < QT_VERSION_CHECK(5, 6, 0)
-template <typename T>
-void Move(QVector<T> &vector, int from, int to)
-{
-    Q_ASSERT_X(from >= 0 && from < vector.size(), "QVector::move(int,int)", "'from' is out-of-range");
-    Q_ASSERT_X(to >= 0 && to < vector.size(), "QVector::move(int,int)", "'to' is out-of-range");
-    if (from == to) // don't detach when no-op
-    {
-        return;
-    }
-    T * const b = vector.begin();
-    if (from < to)
-    {
-        std::rotate(b + from, b + from + 1, b + to + 1);
-    }
-    else
-    {
-        std::rotate(b + to, b + from, b + from + 1);
-    }
-}
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 6, 0)
-}
+using namespace Qt::Literals::StringLiterals;
+
+constexpr int DIALOG_MAX_FORMULA_HEIGHT = 64;
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogFinalMeasurements::DialogFinalMeasurements(VPattern *doc, QWidget *parent)
-    : QDialog(parent),
-      ui(new Ui::DialogFinalMeasurements),
-      m_doc(doc),
-      m_data(doc->GetCompleteData()),
-      m_measurements(doc->GetFinalMeasurements()),
-      m_search(),
-      formulaBaseHeight(0),
-      m_isInitialized(false)
+  : QDialog(parent),
+    ui(new Ui::DialogFinalMeasurements),
+    m_doc(doc),
+    m_data(doc->GetCompleteData()),
+    m_measurements(doc->GetFinalMeasurements()),
+    m_searchHistory(new QMenu(this))
 {
     ui->setupUi(this);
 
@@ -79,19 +59,21 @@ DialogFinalMeasurements::DialogFinalMeasurements(VPattern *doc, QWidget *parent)
     setWindowFlags(Qt::Window);
 #endif
 
+    InitIcons();
+
+    m_data.FillPiecesAreas(VAbstractValApplication::VApp()->patternUnits());
+
     ui->lineEditName->setClearButtonEnabled(true);
-    ui->lineEditFind->setClearButtonEnabled(true);
 
     ui->lineEditFind->installEventFilter(this);
 
-    m_search = QSharedPointer<VTableSearch>(new VTableSearch(ui->tableWidget));
+    InitSearch();
 
     formulaBaseHeight = ui->plainTextEditFormula->height();
     ui->plainTextEditFormula->installEventFilter(this);
 
-    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+    VAbstractApplication::VApp()->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
-    qCDebug(vDialog, "Showing variables.");
     ShowUnits();
 
     const bool freshCall = true;
@@ -99,8 +81,8 @@ DialogFinalMeasurements::DialogFinalMeasurements(VPattern *doc, QWidget *parent)
 
     connect(m_doc, &VPattern::FullUpdateFromFile, this, &DialogFinalMeasurements::FullUpdateFromFile);
 
-    ui->lineEditName->setValidator( new QRegularExpressionValidator(QRegularExpression(
-                                                                        QLatin1String("^$|")+NameRegExp()), this));
+    ui->lineEditName->setValidator(
+        new QRegularExpressionValidator(QRegularExpression(QStringLiteral("^$|") + NameRegExp()), this));
 
     connect(ui->tableWidget, &QTableWidget::itemSelectionChanged, this,
             &DialogFinalMeasurements::ShowFinalMeasurementDetails);
@@ -115,29 +97,31 @@ DialogFinalMeasurements::DialogFinalMeasurements(VPattern *doc, QWidget *parent)
     connect(ui->plainTextEditDescription, &QPlainTextEdit::textChanged, this,
             &DialogFinalMeasurements::SaveDescription);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogFinalMeasurements::SaveFormula);
-    connect(ui->lineEditFind, &QLineEdit::textEdited, this, [this](const QString &term){m_search->Find(term);});
-    connect(ui->toolButtonFindPrevious, &QToolButton::clicked, this, [this](){m_search->FindPrevious();});
-    connect(ui->toolButtonFindNext, &QToolButton::clicked, this, [this](){m_search->FindNext();});
-
-    connect(m_search.data(), &VTableSearch::HasResult, this, [this] (bool state)
-    {
-        ui->toolButtonFindPrevious->setEnabled(state);
-    });
-
-    connect(m_search.data(), &VTableSearch::HasResult, this, [this] (bool state)
-    {
-        ui->toolButtonFindNext->setEnabled(state);
-    });
 
     if (ui->tableWidget->rowCount() > 0)
     {
         ui->tableWidget->selectRow(0);
+    }
+
+    m_shortcuts.insert(VShortcutAction::CaseSensitiveMatch, ui->toolButtonCaseSensitive);
+    m_shortcuts.insert(VShortcutAction::WholeWordMatch, ui->toolButtonWholeWord);
+    m_shortcuts.insert(VShortcutAction::RegexMatch, ui->toolButtonRegexp);
+    m_shortcuts.insert(VShortcutAction::SearchHistory, ui->pushButtonSearch);
+    m_shortcuts.insert(VShortcutAction::RegexMatchUnicodeProperties, ui->toolButtonUseUnicodeProperties);
+    m_shortcuts.insert(VShortcutAction::FindNext, ui->toolButtonFindNext);
+    m_shortcuts.insert(VShortcutAction::FindPrevious, ui->toolButtonFindNext);
+
+    if (VAbstractShortcutManager *manager = VAbstractApplication::VApp()->GetShortcutManager())
+    {
+        connect(manager, &VAbstractShortcutManager::ShortcutsUpdated, this, &DialogFinalMeasurements::UpdateShortcuts);
+        UpdateShortcuts();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogFinalMeasurements::~DialogFinalMeasurements()
 {
+    ui->lineEditFind->blockSignals(true); // prevents crash
     delete ui;
 }
 
@@ -147,6 +131,12 @@ void DialogFinalMeasurements::closeEvent(QCloseEvent *event)
     ui->plainTextEditFormula->blockSignals(true);
     ui->lineEditName->blockSignals(true);
     ui->plainTextEditDescription->blockSignals(true);
+
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    settings->SetFinalMeasurementsSearchOptionMatchCase(m_search->IsMatchCase());
+    settings->SetFinalMeasurementsSearchOptionWholeWord(m_search->IsMatchWord());
+    settings->SetFinalMeasurementsSearchOptionRegexp(m_search->IsMatchRegexp());
+    settings->SetFinalMeasurementsSearchOptionUseUnicodeProperties(m_search->IsUseUnicodePreperties());
 
     QDialog::closeEvent(event);
 }
@@ -158,29 +148,39 @@ void DialogFinalMeasurements::changeEvent(QEvent *event)
     {
         // retranslate designer form (single inheritance approach)
         ui->retranslateUi(this);
+        ui->lineEditFind->setPlaceholderText(m_search->SearchPlaceholder());
+        UpdateSearchControlsTooltips();
         FullUpdateFromFile();
     }
+
+    if (event->type() == QEvent::PaletteChange)
+    {
+        InitIcons();
+        InitDialogButtonBoxIcons(ui->buttonBox);
+    }
+
     // remember to call base class implementation
     QDialog::changeEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogFinalMeasurements::eventFilter(QObject *object, QEvent *event)
+auto DialogFinalMeasurements::eventFilter(QObject *object, QEvent *event) -> bool
 {
-    if (QLineEdit *textEdit = qobject_cast<QLineEdit *>(object))
+    if (auto *textEdit = qobject_cast<QLineEdit *>(object))
     {
         if (event->type() == QEvent::KeyPress)
         {
-            QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
-            if ((keyEvent->key() == Qt::Key_Period) && (keyEvent->modifiers() & Qt::KeypadModifier))
+            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+            if (const auto *keyEvent = static_cast<QKeyEvent *>(event);
+                (keyEvent->key() == Qt::Key_Period) && (keyEvent->modifiers() & Qt::KeypadModifier))
             {
-                if (qApp->Settings()->GetOsSeparator())
+                if (VAbstractApplication::VApp()->Settings()->GetOsSeparator())
                 {
-                    textEdit->insert(QLocale().decimalPoint());
+                    textEdit->insert(LocaleDecimalPoint(QLocale()));
                 }
                 else
                 {
-                    textEdit->insert(QLocale::c().decimalPoint());
+                    textEdit->insert(LocaleDecimalPoint(QLocale::c()));
                 }
                 return true;
             }
@@ -191,14 +191,14 @@ bool DialogFinalMeasurements::eventFilter(QObject *object, QEvent *event)
         // pass the event on to the parent class
         return QDialog::eventFilter(object, event);
     }
-    return false;// pass the event to the widget
+    return false; // pass the event to the widget // clazy:exclude=base-class-event
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFinalMeasurements::showEvent(QShowEvent *event)
 {
     QDialog::showEvent(event);
-    if ( event->spontaneous() )
+    if (event->spontaneous())
     {
         return;
     }
@@ -209,13 +209,12 @@ void DialogFinalMeasurements::showEvent(QShowEvent *event)
     }
     // do your init stuff here
 
-    const QSize sz = qApp->Settings()->GetFinalMeasurementsDialogSize();
-    if (not sz.isEmpty())
+    if (const QSize sz = VAbstractApplication::VApp()->Settings()->GetFinalMeasurementsDialogSize(); not sz.isEmpty())
     {
         resize(sz);
     }
 
-    m_isInitialized = true;//first show windows are held
+    m_isInitialized = true; // first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -226,7 +225,7 @@ void DialogFinalMeasurements::resizeEvent(QResizeEvent *event)
     // dialog creating, which would
     if (m_isInitialized)
     {
-        qApp->Settings()->SetFinalMeasurementsDialogSize(size());
+        VAbstractApplication::VApp()->Settings()->SetFinalMeasurementsDialogSize(size());
     }
     QDialog::resizeEvent(event);
 }
@@ -251,7 +250,8 @@ void DialogFinalMeasurements::ShowFinalMeasurementDetails()
         EvalUserFormula(m.formula, false);
         ui->plainTextEditFormula->blockSignals(true);
 
-        const QString formula = VTranslateVars::TryFormulaToUser(m.formula, qApp->Settings()->GetOsSeparator());
+        const QString formula =
+            VTranslateVars::TryFormulaToUser(m.formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 
         ui->plainTextEditFormula->setPlainText(formula);
         ui->plainTextEditFormula->blockSignals(false);
@@ -265,11 +265,11 @@ void DialogFinalMeasurements::ShowFinalMeasurementDetails()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFinalMeasurements::Add()
 {
-    const int currentRow = ui->tableWidget->currentRow()+1;
+    const int currentRow = ui->tableWidget->currentRow() + 1;
 
     VFinalMeasurement m;
     m.name = tr("measurement");
-    m.formula = QLatin1Char('0');
+    m.formula = '0'_L1;
 
     m_measurements.append(m);
 
@@ -313,15 +313,10 @@ void DialogFinalMeasurements::MoveUp()
         return;
     }
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 6, 0)
-    Move(m_measurements, row, row-1);
-#else
-    m_measurements.move(row, row-1);
-#endif
-
+    m_measurements.move(row, row - 1);
     UpdateTree();
 
-    ui->tableWidget->selectRow(row-1);
+    ui->tableWidget->selectRow(row - 1);
     ui->tableWidget->repaint(); // Force repain to fix paint artifacts on Mac OS X
 }
 
@@ -330,20 +325,15 @@ void DialogFinalMeasurements::MoveDown()
 {
     const int row = ui->tableWidget->currentRow();
 
-    if (row == -1 || row == ui->tableWidget->rowCount()-1 || row >= m_measurements.size())
+    if (row == -1 || row == ui->tableWidget->rowCount() - 1 || row >= m_measurements.size())
     {
         return;
     }
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 6, 0)
-    Move(m_measurements, row, row+1);
-#else
-    m_measurements.move(row, row+1);
-#endif
-
+    m_measurements.move(row, row + 1);
     UpdateTree();
 
-    ui->tableWidget->selectRow(row+1);
+    ui->tableWidget->selectRow(row + 1);
     ui->tableWidget->repaint(); // Force repain to fix paint artifacts on Mac OS X
 }
 
@@ -399,22 +389,21 @@ void DialogFinalMeasurements::SaveFormula()
     }
 
     // Replace line return character with spaces for calc if exist
-    QString text = ui->plainTextEditFormula->toPlainText();
+    QString const text = ui->plainTextEditFormula->toPlainText();
 
-    QTableWidgetItem *formulaField = ui->tableWidget->item(row, 2);
-    if (formulaField->text() == text)
+    if (const QTableWidgetItem *formulaField = ui->tableWidget->item(row, 2); formulaField->text() == text)
     {
         QTableWidgetItem *result = ui->tableWidget->item(row, 1);
-        //Show unit in dialog lable (cm, mm or inch)
-        const QString postfix = UnitsToStr(qApp->patternUnit());
-        ui->labelCalculatedValue->setText(result->text() + QChar(QChar::Space) +postfix);
+        // Show unit in dialog lable (cm, mm or inch)
+        const QString postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits());
+        ui->labelCalculatedValue->setText(result->text() + QChar(QChar::Space) + postfix);
         return;
     }
 
     if (text.isEmpty())
     {
-        //Show unit in dialog lable (cm, mm or inch)
-        const QString postfix = UnitsToStr(qApp->patternUnit());
+        // Show unit in dialog lable (cm, mm or inch)
+        const QString postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits());
         ui->labelCalculatedValue->setText(tr("Error") + " (" + postfix + "). " + tr("Empty field."));
         return;
     }
@@ -426,7 +415,8 @@ void DialogFinalMeasurements::SaveFormula()
 
     try
     {
-        m_measurements[row].formula = qApp->TrVars()->FormulaFromUser(text, qApp->Settings()->GetOsSeparator());
+        m_measurements[row].formula = VAbstractApplication::VApp()->TrVars()->FormulaFromUser(
+            text, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     }
     catch (qmu::QmuParserError &e) // Just in case something bad will happen
     {
@@ -452,16 +442,14 @@ void DialogFinalMeasurements::DeployFormula()
     if (ui->plainTextEditFormula->height() < DIALOG_MAX_FORMULA_HEIGHT)
     {
         ui->plainTextEditFormula->setFixedHeight(DIALOG_MAX_FORMULA_HEIGHT);
-        //Set icon from theme (internal for Windows system)
-        ui->pushButtonGrow->setIcon(QIcon::fromTheme("go-next",
-                                                     QIcon(":/icons/win.icon.theme/16x16/actions/go-next.png")));
+        // Set icon from theme (internal for Windows system)
+        ui->pushButtonGrow->setIcon(FromTheme(VThemeIcon::GoNext));
     }
     else
     {
-       ui->plainTextEditFormula->setFixedHeight(formulaBaseHeight);
-       //Set icon from theme (internal for Windows system)
-       ui->pushButtonGrow->setIcon(QIcon::fromTheme("go-down",
-                                                    QIcon(":/icons/win.icon.theme/16x16/actions/go-down.png")));
+        ui->plainTextEditFormula->setFixedHeight(formulaBaseHeight);
+        // Set icon from theme (internal for Windows system)
+        ui->pushButtonGrow->setIcon(FromTheme(VThemeIcon::GoDown));
     }
 
     // I found that after change size of formula field, it was filed for angle formula, field for formula became black.
@@ -484,12 +472,13 @@ void DialogFinalMeasurements::Fx()
         return;
     }
 
-    QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(&m_data, NULL_ID, this));
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(&m_data, NULL_ID, this));
     dialog->setWindowTitle(tr("Edit measurement"));
-    dialog->SetFormula(qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditFormula->toPlainText(),
-                                                          qApp->Settings()->GetOsSeparator()));
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    dialog->setPostfix(postfix);//Show unit in dialog lable (cm, mm or inch)
+    dialog->SetFormula(VTranslateVars::TryFormulaFromUser(ui->plainTextEditFormula->toPlainText(),
+                                                          VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+    dialog->ShowPieceArea(true);
+    const QString postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
+    dialog->setPostfix(postfix); // Show unit in dialog lable (cm, mm or inch)
 
     if (dialog->exec() == QDialog::Accepted)
     {
@@ -505,6 +494,7 @@ void DialogFinalMeasurements::Fx()
 void DialogFinalMeasurements::FullUpdateFromFile()
 {
     m_data = m_doc->GetCompleteData();
+    m_data.FillPiecesAreas(VAbstractValApplication::VApp()->patternUnits());
     m_measurements = m_doc->GetFinalMeasurements();
 
     FillFinalMeasurements();
@@ -513,13 +503,23 @@ void DialogFinalMeasurements::FullUpdateFromFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogFinalMeasurements::UpdateShortcuts()
+{
+    if (VAbstractShortcutManager *manager = VAbstractApplication::VApp()->GetShortcutManager())
+    {
+        manager->UpdateButtonShortcut(m_shortcuts);
+        UpdateSearchControlsTooltips();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogFinalMeasurements::FillFinalMeasurements(bool freshCall)
 {
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->clearContents();
 
-    ui->tableWidget->setRowCount(m_measurements.size());
-    for (int i=0; i < m_measurements.size(); ++i)
+    ui->tableWidget->setRowCount(static_cast<int>(m_measurements.size()));
+    for (int i = 0; i < m_measurements.size(); ++i)
     {
         const VFinalMeasurement &m = m_measurements.at(i);
 
@@ -527,11 +527,12 @@ void DialogFinalMeasurements::FillFinalMeasurements(bool freshCall)
 
         bool ok = true;
         const qreal result = EvalFormula(m.formula, ok);
-        AddCell(qApp->LocaleToString(result), i, 1, Qt::AlignHCenter | Qt::AlignVCenter, ok); // calculated value
+        AddCell(VAbstractApplication::VApp()->LocaleToString(result), i, 1, Qt::AlignHCenter | Qt::AlignVCenter,
+                ok); // calculated value
 
-        const QString formula = VTranslateVars::TryFormulaFromUser(m.formula, qApp->Settings()->GetOsSeparator());
+        const QString formula =
+            VTranslateVars::TryFormulaFromUser(m.formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
         AddCell(formula, i, 2, Qt::AlignVCenter); // formula
-
     }
 
     if (freshCall)
@@ -546,19 +547,19 @@ void DialogFinalMeasurements::FillFinalMeasurements(bool freshCall)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFinalMeasurements::ShowUnits()
 {
-    const QString unit = UnitsToStr(qApp->patternUnit());
+    const QString unit = UnitsToStr(VAbstractValApplication::VApp()->patternUnits());
 
     {
         // calculated value
         const QString header = ui->tableWidget->horizontalHeaderItem(1)->text();
-        const QString unitHeader = QString("%1 (%2)").arg(header, unit);
+        const auto unitHeader = QStringLiteral("%1 (%2)").arg(header, unit);
         ui->tableWidget->horizontalHeaderItem(1)->setText(unitHeader);
     }
 
     {
         // formula
         const QString header = ui->tableWidget->horizontalHeaderItem(2)->text();
-        const QString unitHeader = QString("%1 (%2)").arg(header, unit);
+        const auto unitHeader = QStringLiteral("%1 (%2)").arg(header, unit);
         ui->tableWidget->horizontalHeaderItem(2)->setText(unitHeader);
     }
 }
@@ -566,8 +567,8 @@ void DialogFinalMeasurements::ShowUnits()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFinalMeasurements::AddCell(const QString &text, int row, int column, int aligment, bool ok)
 {
-    QTableWidgetItem *item = new QTableWidgetItem(text);
-    item->setTextAlignment(aligment);
+    auto *item = new QTableWidgetItem(text);
+    SetTextAlignment(item, static_cast<Qt::Alignment>(aligment));
 
     // set the item non-editable (view only), and non-selectable
     Qt::ItemFlags flags = item->flags();
@@ -585,51 +586,52 @@ void DialogFinalMeasurements::AddCell(const QString &text, int row, int column, 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogFinalMeasurements::EvalUserFormula(const QString &formula, bool fromUser)
+auto DialogFinalMeasurements::EvalUserFormula(const QString &formula, bool fromUser) -> bool
 {
-    const QString postfix = UnitsToStr(qApp->patternUnit());//Show unit in dialog lable (cm, mm or inch)
+    const QString postfix =
+        UnitsToStr(VAbstractValApplication::VApp()->patternUnits()); // Show unit in dialog lable (cm, mm or inch)
     if (formula.isEmpty())
     {
         ui->labelCalculatedValue->setText(tr("Error") + " (" + postfix + "). " + tr("Empty field."));
         ui->labelCalculatedValue->setToolTip(tr("Empty field"));
         return false;
     }
-    else
+
+    try
     {
-        try
+        QString f;
+        // Replace line return character with spaces for calc if exist
+        if (fromUser)
         {
-            QString f;
-            // Replace line return character with spaces for calc if exist
-            if (fromUser)
-            {
-                f = qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
-            }
-            else
-            {
-                f = formula;
-            }
-            QScopedPointer<Calculator> cal(new Calculator());
-            const qreal result = cal->EvalFormula(m_data.DataVariables(), f);
-
-            if (qIsInf(result) || qIsNaN(result))
-            {
-                ui->labelCalculatedValue->setText(tr("Error") + " (" + postfix + ").");
-                ui->labelCalculatedValue->setToolTip(tr("Invalid result. Value is infinite or NaN. Please, check your "
-                                                        "calculations."));
-                return false;
-            }
-
-            ui->labelCalculatedValue->setText(qApp->LocaleToString(result) + QChar(QChar::Space) + postfix);
-            ui->labelCalculatedValue->setToolTip(tr("Value"));
-            return true;
+            f = VAbstractApplication::VApp()->TrVars()->FormulaFromUser(
+                formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
         }
-        catch (qmu::QmuParserError &e)
+        else
         {
-            ui->labelCalculatedValue->setText(tr("Error") + " (" + postfix + "). " +
-                                              tr("Parser error: %1").arg(e.GetMsg()));
-            ui->labelCalculatedValue->setToolTip(tr("Parser error: %1").arg(e.GetMsg()));
+            f = formula;
+        }
+        QScopedPointer<Calculator> const cal(new Calculator());
+        const qreal result = cal->EvalFormula(m_data.DataVariables(), f);
+
+        if (qIsInf(result) || qIsNaN(result))
+        {
+            ui->labelCalculatedValue->setText(tr("Error") + " (" + postfix + ").");
+            ui->labelCalculatedValue->setToolTip(tr("Invalid result. Value is infinite or NaN. Please, check your "
+                                                    "calculations."));
             return false;
         }
+
+        ui->labelCalculatedValue->setText(VAbstractApplication::VApp()->LocaleToString(result) + QChar(QChar::Space) +
+                                          postfix);
+        ui->labelCalculatedValue->setToolTip(tr("Value"));
+        return true;
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        ui->labelCalculatedValue->setText(tr("Error") + " (" + postfix + "). " +
+                                          tr("Parser error: %1").arg(e.GetMsg()));
+        ui->labelCalculatedValue->setToolTip(tr("Parser error: %1").arg(e.GetMsg()));
+        return false;
     }
 }
 
@@ -645,7 +647,7 @@ void DialogFinalMeasurements::Controls()
             ui->toolButtonUp->setEnabled(false);
             ui->toolButtonDown->setEnabled(true);
         }
-        else if (ui->tableWidget->currentRow() == ui->tableWidget->rowCount()-1)
+        else if (ui->tableWidget->currentRow() == ui->tableWidget->rowCount() - 1)
         {
             ui->toolButtonUp->setEnabled(true);
             ui->toolButtonDown->setEnabled(false);
@@ -706,7 +708,7 @@ void DialogFinalMeasurements::EnableDetails(bool enabled)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFinalMeasurements::UpdateTree()
 {
-    int row = ui->tableWidget->currentRow();
+    int const row = ui->tableWidget->currentRow();
     FillFinalMeasurements();
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
@@ -716,7 +718,7 @@ void DialogFinalMeasurements::UpdateTree()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal DialogFinalMeasurements::EvalFormula(const QString &formula, bool &ok)
+auto DialogFinalMeasurements::EvalFormula(const QString &formula, bool &ok) -> qreal
 {
     qreal result = 0;
     if (formula.isEmpty())
@@ -724,27 +726,242 @@ qreal DialogFinalMeasurements::EvalFormula(const QString &formula, bool &ok)
         ok = false;
         return result;
     }
-    else
-    {
-        try
-        {
-            // Replace line return character with spaces for calc if exist
-            QScopedPointer<Calculator> cal(new Calculator());
-            result = cal->EvalFormula(m_data.DataVariables(), formula);
 
-            if (qIsInf(result) || qIsNaN(result))
-            {
-                ok = false;
-                return 0;
-            }
-        }
-        catch (qmu::QmuParserError &)
+    try
+    {
+        // Replace line return character with spaces for calc if exist
+        QScopedPointer<Calculator> const cal(new Calculator());
+        result = cal->EvalFormula(m_data.DataVariables(), formula);
+
+        if (qIsInf(result) || qIsNaN(result))
         {
             ok = false;
             return 0;
         }
     }
+    catch (qmu::QmuParserError &)
+    {
+        ok = false;
+        return 0;
+    }
 
     ok = true;
     return result;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFinalMeasurements::InitSearch()
+{
+    m_search = QSharedPointer<VTableSearch>(new VTableSearch(ui->tableWidget));
+
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    m_search->SetUseUnicodePreperties(settings->GetFinalMeasurementsSearchOptionUseUnicodeProperties());
+    m_search->SetMatchWord(settings->GetFinalMeasurementsSearchOptionWholeWord());
+    m_search->SetMatchRegexp(settings->GetFinalMeasurementsSearchOptionRegexp());
+    m_search->SetMatchCase(settings->GetFinalMeasurementsSearchOptionMatchCase());
+
+    ui->lineEditFind->setPlaceholderText(m_search->SearchPlaceholder());
+
+    UpdateSearchControlsTooltips();
+
+    connect(ui->lineEditFind, &QLineEdit::textEdited, this, [this](const QString &term) { m_search->Find(term); });
+    connect(ui->lineEditFind, &QLineEdit::editingFinished, this,
+            [this]()
+            {
+                SaveSearchRequest();
+                InitSearchHistory();
+                m_search->Find(ui->lineEditFind->text());
+            });
+    connect(ui->toolButtonFindPrevious, &QToolButton::clicked, this,
+            [this]()
+            {
+                SaveSearchRequest();
+                InitSearchHistory();
+                m_search->FindPrevious();
+                ui->labelResults->setText(
+                    QStringLiteral("%1/%2").arg(m_search->MatchIndex() + 1).arg(m_search->MatchCount()));
+            });
+    connect(ui->toolButtonFindNext, &QToolButton::clicked, this,
+            [this]()
+            {
+                SaveSearchRequest();
+                InitSearchHistory();
+                m_search->FindNext();
+                ui->labelResults->setText(
+                    QStringLiteral("%1/%2").arg(m_search->MatchIndex() + 1).arg(m_search->MatchCount()));
+            });
+
+    connect(m_search.data(), &VTableSearch::HasResult, this,
+            [this](bool state)
+            {
+                ui->toolButtonFindPrevious->setEnabled(state);
+                ui->toolButtonFindNext->setEnabled(state);
+
+                if (state)
+                {
+                    ui->labelResults->setText(
+                        QStringLiteral("%1/%2").arg(m_search->MatchIndex() + 1).arg(m_search->MatchCount()));
+                }
+                else
+                {
+                    ui->labelResults->setText(tr("0 results"));
+                }
+
+                QPalette palette;
+
+                if (not state && not ui->lineEditFind->text().isEmpty())
+                {
+                    palette.setColor(QPalette::Text, Qt::red);
+                    ui->lineEditFind->setPalette(palette);
+
+                    palette.setColor(QPalette::Active, ui->labelResults->foregroundRole(), Qt::red);
+                    palette.setColor(QPalette::Inactive, ui->labelResults->foregroundRole(), Qt::red);
+                    ui->labelResults->setPalette(palette);
+                }
+                else
+                {
+                    ui->lineEditFind->setPalette(palette);
+                    ui->labelResults->setPalette(palette);
+                }
+            });
+
+    connect(ui->toolButtonCaseSensitive, &QToolButton::toggled, this,
+            [this](bool checked)
+            {
+                m_search->SetMatchCase(checked);
+                m_search->Find(ui->lineEditFind->text());
+                ui->lineEditFind->setPlaceholderText(m_search->SearchPlaceholder());
+            });
+
+    connect(ui->toolButtonWholeWord, &QToolButton::toggled, this,
+            [this](bool checked)
+            {
+                m_search->SetMatchWord(checked);
+                m_search->Find(ui->lineEditFind->text());
+                ui->lineEditFind->setPlaceholderText(m_search->SearchPlaceholder());
+            });
+
+    connect(ui->toolButtonRegexp, &QToolButton::toggled, this,
+            [this](bool checked)
+            {
+                m_search->SetMatchRegexp(checked);
+
+                if (checked)
+                {
+                    ui->toolButtonWholeWord->blockSignals(true);
+                    ui->toolButtonWholeWord->setChecked(false);
+                    ui->toolButtonWholeWord->blockSignals(false);
+                    ui->toolButtonWholeWord->setEnabled(false);
+
+                    ui->toolButtonUseUnicodeProperties->setEnabled(true);
+                }
+                else
+                {
+                    ui->toolButtonWholeWord->setEnabled(true);
+                    ui->toolButtonUseUnicodeProperties->blockSignals(true);
+                    ui->toolButtonUseUnicodeProperties->setChecked(false);
+                    ui->toolButtonUseUnicodeProperties->blockSignals(false);
+                    ui->toolButtonUseUnicodeProperties->setEnabled(false);
+                }
+                m_search->Find(ui->lineEditFind->text());
+                ui->lineEditFind->setPlaceholderText(m_search->SearchPlaceholder());
+            });
+
+    connect(ui->toolButtonUseUnicodeProperties, &QToolButton::toggled, this,
+            [this](bool checked)
+            {
+                m_search->SetUseUnicodePreperties(checked);
+                m_search->Find(ui->lineEditFind->text());
+            });
+
+    m_searchHistory->setStyleSheet(QStringLiteral("QMenu { menu-scrollable: 1; }"));
+    InitSearchHistory();
+    ui->pushButtonSearch->setMenu(m_searchHistory);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFinalMeasurements::InitSearchHistory()
+{
+    QStringList const searchHistory =
+        VAbstractValApplication::VApp()->ValentinaSettings()->GetFinalMeasurementsSearchHistory();
+    m_searchHistory->clear();
+
+    if (searchHistory.isEmpty())
+    {
+        QAction *action = m_searchHistory->addAction('<'_L1 + tr("Empty", "list") + '>'_L1);
+        action->setDisabled(true);
+        return;
+    }
+
+    for (const auto &term : searchHistory)
+    {
+        QAction *action = m_searchHistory->addAction(term);
+        action->setData(term);
+        connect(action, &QAction::triggered, this,
+                [this]()
+                {
+                    auto *action = qobject_cast<QAction *>(sender());
+                    if (action != nullptr)
+                    {
+                        QString const term = action->data().toString();
+                        ui->lineEditFind->setText(term);
+                        m_search->Find(term);
+                        ui->lineEditFind->setFocus();
+                    }
+                });
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFinalMeasurements::SaveSearchRequest()
+{
+    QStringList searchHistory =
+        VAbstractValApplication::VApp()->ValentinaSettings()->GetFinalMeasurementsSearchHistory();
+    QString const term = ui->lineEditFind->text();
+    if (term.isEmpty())
+    {
+        return;
+    }
+
+    searchHistory.removeAll(term);
+    searchHistory.prepend(term);
+    while (searchHistory.size() > VTableSearch::MaxHistoryRecords)
+    {
+        searchHistory.removeLast();
+    }
+    VAbstractValApplication::VApp()->ValentinaSettings()->SetFinalMeasurementsSearchHistory(searchHistory);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFinalMeasurements::UpdateSearchControlsTooltips()
+{
+    auto UpdateToolTip = [this](QAbstractButton *button)
+    {
+        if (button->toolTip().contains("%1"_L1))
+        {
+            m_serachButtonTooltips.insert(button, button->toolTip());
+            button->setToolTip(button->toolTip().arg(button->shortcut().toString(QKeySequence::NativeText)));
+        }
+        else if (m_serachButtonTooltips.contains(button))
+        {
+            QString const tooltip = m_serachButtonTooltips.value(button);
+            button->setToolTip(tooltip.arg(button->shortcut().toString(QKeySequence::NativeText)));
+        }
+    };
+
+    UpdateToolTip(ui->toolButtonCaseSensitive);
+    UpdateToolTip(ui->toolButtonWholeWord);
+    UpdateToolTip(ui->toolButtonRegexp);
+    UpdateToolTip(ui->toolButtonUseUnicodeProperties);
+    UpdateToolTip(ui->pushButtonSearch);
+    UpdateToolTip(ui->toolButtonFindPrevious);
+    UpdateToolTip(ui->toolButtonFindNext);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFinalMeasurements::InitIcons()
+{
+    auto const resource = QStringLiteral("icon");
+
+    ui->toolButtonExpr->setIcon(VTheme::GetIconResource(resource, QStringLiteral("24x24/fx.png")));
 }

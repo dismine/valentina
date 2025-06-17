@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -47,45 +47,43 @@ const QString VLabelTemplateConverter::CurrentSchema          = QStringLiteral("
 VLabelTemplateConverter::VLabelTemplateConverter(const QString &fileName)
     : VAbstractConverter(fileName)
 {
+    m_ver = GetFormatVersion(GetFormatVersionStr());
     ValidateInputFile(CurrentSchema);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VLabelTemplateConverter::MinVer() const
+auto VLabelTemplateConverter::XSDSchemas() -> QHash<unsigned int, QString>
+{
+    static const auto schemas = QHash <unsigned, QString>
+    {
+        std::make_pair(FormatVersion(1, 0, 0), CurrentSchema)
+    };
+
+    return schemas;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLabelTemplateConverter::MinVer() const -> unsigned
 {
     return LabelTemplateMinVer;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VLabelTemplateConverter::MaxVer() const
+auto VLabelTemplateConverter::MaxVer() const -> unsigned
 {
     return LabelTemplateMaxVer;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VLabelTemplateConverter::MinVerStr() const
+auto VLabelTemplateConverter::MinVerStr() const -> QString
 {
     return LabelTemplateMinVerStr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VLabelTemplateConverter::MaxVerStr() const
+auto VLabelTemplateConverter::MaxVerStr() const -> QString
 {
     return LabelTemplateMaxVerStr;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VLabelTemplateConverter::XSDSchema(int ver) const
-{
-    switch (ver)
-    {
-        case (0x010000):
-            return CurrentSchema;
-        default:
-            InvalidVersion(ver);
-            break;
-    }
-    return QString();//unreachable code
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -93,7 +91,7 @@ void VLabelTemplateConverter::ApplyPatches()
 {
     switch (m_ver)
     {
-        case (0x010000):
+        case (FormatVersion(1, 0, 0)):
             break;
         default:
             InvalidVersion(m_ver);
@@ -106,4 +104,10 @@ void VLabelTemplateConverter::DowngradeToCurrentMaxVersion()
 {
     SetVersion(LabelTemplateMaxVerStr);
     Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLabelTemplateConverter::Schemas() const -> QHash<unsigned int, QString>
+{
+    return XSDSchemas();
 }

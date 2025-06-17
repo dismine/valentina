@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,44 +29,40 @@
 #ifndef VTOOLSEAMALLOWANCE_H
 #define VTOOLSEAMALLOWANCE_H
 
-#include <QtGlobal>
-#include <qcompilerdetection.h>
-#include <QObject>
 #include <QGraphicsPathItem>
+#include <QObject>
+#include <QtGlobal>
 
-#include "vinteractivetool.h"
-#include "../vwidgets/vtextgraphicsitem.h"
 #include "../vwidgets/vgrainlineitem.h"
+#include "../vwidgets/vtextgraphicsitem.h"
+#include "vinteractivetool.h"
 
 class DialogTool;
 class VNoBrushScalePathItem;
+class VFoldLine;
 
 struct VToolSeamAllowanceInitData : VAbstractToolInitData
 {
-    VToolSeamAllowanceInitData()
-        : VAbstractToolInitData(),
-          detail(),
-          width('0'),
-          drawName()
-    {}
+    VToolSeamAllowanceInitData() = default;
 
-    VPiece detail;
-    QString width;
-    QString drawName;
+    VPiece detail{};    // NOLINT(misc-non-private-member-variables-in-classes)
+    QString width{'0'}; // NOLINT(misc-non-private-member-variables-in-classes)
+    QString drawName{}; // NOLINT(misc-non-private-member-variables-in-classes)
 };
 
-class VToolSeamAllowance : public VInteractiveTool, public QGraphicsPathItem
+class VToolSeamAllowance final : public VInteractiveTool, public QGraphicsPathItem
 {
-    Q_OBJECT
-public:
-    virtual ~VToolSeamAllowance() Q_DECL_EQ_DEFAULT;
+    Q_OBJECT // NOLINT
 
-    static VToolSeamAllowance* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
-                                      VAbstractPattern *doc, VContainer *data);
-    static VToolSeamAllowance* Create(VToolSeamAllowanceInitData &initData);
-    static VToolSeamAllowance* Duplicate(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
-                                         VAbstractPattern *doc);
-    static VToolSeamAllowance* Duplicate(VToolSeamAllowanceInitData &initData);
+public:
+    ~VToolSeamAllowance() override;
+
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolSeamAllowance *;
+    static auto Create(VToolSeamAllowanceInitData &initData) -> VToolSeamAllowance *;
+    static auto Duplicate(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc)
+        -> VToolSeamAllowance *;
+    static auto Duplicate(VToolSeamAllowanceInitData &initData) -> VToolSeamAllowance *;
 
     static const quint8 pieceVersion;
 
@@ -75,10 +71,11 @@ public:
     static const QString TagIPaths;
     static const QString TagPins;
     static const QString TagPlaceLabels;
-
+    static const QString TagMirrorLine;
 
     static const QString AttrSeamAllowance;
     static const QString AttrHideMainPath;
+    static const QString AttrShowFullPiece;
     static const QString AttrSeamAllowanceBuiltIn;
     static const QString AttrUnited;
     static const QString AttrFont;
@@ -87,14 +84,15 @@ public:
     static const QString AttrCenterPin;
     static const QString AttrTopPin;
     static const QString AttrBottomPin;
+    static const QString AttrPiecePriority;
 
     void RemoveWithConfirm(bool ask);
 
-    static void InsertNode(VPieceNode node, quint32 pieceId, VMainGraphicsScene *scene, VContainer *data,
-                           VAbstractPattern *doc);
+    static void InsertNodes(const QVector<VPieceNode> &nodes, quint32 pieceId, VMainGraphicsScene *scene,
+                            VContainer *data, VAbstractPattern *doc);
 
     static void AddAttributes(VAbstractPattern *doc, QDomElement &domElement, quint32 id, const VPiece &piece);
-    static void AddCSARecord(VAbstractPattern *doc, QDomElement &domElement, const CustomSARecord &record);
+    static void AddCSARecord(VAbstractPattern *doc, QDomElement &domElement, CustomSARecord record);
     static void AddCSARecords(VAbstractPattern *doc, QDomElement &domElement, const QVector<CustomSARecord> &records);
     static void AddInternalPaths(VAbstractPattern *doc, QDomElement &domElement, const QVector<quint32> &paths);
     static void AddPins(VAbstractPattern *doc, QDomElement &domElement, const QVector<quint32> &pins);
@@ -102,7 +100,9 @@ public:
     static void AddPatternPieceData(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
     static void AddPatternInfo(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
     static void AddGrainline(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
+    static void AddMirrorLine(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
 
+    void SetName(const QString &name);
     void Move(qreal x, qreal y);
     void Update(const VPiece &piece);
     void DisconnectOutsideSignals();
@@ -110,124 +110,159 @@ public:
     void ReinitInternals(const VPiece &detail, VMainGraphicsScene *scene);
     void RefreshGeometry(bool updateChildren = true);
 
-    virtual int        type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Tool::Piece)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Tool::Piece)
+    };
 
-    virtual QString      getTagName() const override;
-    virtual void         ShowVisualization(bool show) override;
-    virtual void         GroupVisibility(quint32 object, bool visible) override;
-    virtual void         paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                               QWidget *widget) override;
-    virtual QRectF       boundingRect() const override;
-    virtual QPainterPath shape() const override;
+    auto getTagName() const -> QString override;
+    void ShowVisualization(bool show) override;
+    void GroupVisibility(quint32 object, bool visible) override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+    auto boundingRect() const -> QRectF override;
+    auto shape() const -> QPainterPath override;
+
 public slots:
-    virtual void FullUpdateFromGuiApply() override;
-    virtual void FullUpdateFromFile () override;
-    void         EnableToolMove(bool move);
-    virtual void AllowHover(bool enabled) override;
-    virtual void AllowSelecting(bool enabled) override;
-    virtual void ResetChildren(QGraphicsItem* pItem);
-    virtual void UpdateAll();
-    virtual void retranslateUi();
-    void         Highlight(quint32 id);
-    void         UpdateDetailLabel();
-    void         UpdatePatternInfo();
+    void FullUpdateFromGuiApply() override;
+    void FullUpdateFromFile() override;
+    void EnableToolMove(bool move);
+    void AllowHover(bool enabled) override;
+    void AllowSelecting(bool enabled) override;
+    void ResetChildren(QGraphicsItem *pItem);
+    void UpdateAll();
+    void retranslateUi();
+    void Highlight(quint32 id);
+    void UpdateDetailLabel();
+    void UpdatePatternInfo();
+    void UpdatePassmarks();
+    void ShowOptions();
+    void DeleteFromMenu();
+    void CancelLabelRendering();
+
 protected slots:
     void UpdateGrainline();
     void SaveMoveDetail(const QPointF &ptPos);
-    void SaveResizeDetail(qreal dLabelW, int iFontSize);
+    void SaveResizeDetail(qreal dLabelW);
     void SaveRotationDetail(qreal dRot);
-    void SaveMovePattern(const QPointF& ptPos);
-    void SaveResizePattern(qreal dLabelW, int iFontSize);
+    void SaveMovePattern(const QPointF &ptPos);
+    void SaveResizePattern(qreal dLabelW);
     void SaveRotationPattern(qreal dRot);
-    void SaveMoveGrainline(const QPointF& ptPos);
+    void SaveMoveGrainline(const QPointF &ptPos);
     void SaveResizeGrainline(qreal dLength);
-    void SaveRotateGrainline(qreal dRot, const QPointF& ptPos);
+    void SaveRotateGrainline(qreal dRot, const QPointF &ptPos);
+
 protected:
-    virtual void       AddToFile () override;
-    virtual void       RefreshDataInFile() override;
-    virtual QVariant   itemChange ( GraphicsItemChange change, const QVariant &value ) override;
-    virtual void       mousePressEvent( QGraphicsSceneMouseEvent * event) override;
-    virtual void       mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) override;
-    virtual void       hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) override;
-    virtual void       hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) override;
-    virtual void       contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) override;
-    virtual void       keyReleaseEvent(QKeyEvent * event) override;
-    virtual void       SetVisualization() override {}
-    virtual void       DeleteToolWithConfirm(bool ask = true) override;
-    virtual void       ToolCreation(const Source &typeCreation) override;
-    virtual void       SetDialog() final;
-    virtual void       SaveDialogChange(const QString &undoText = QString()) final;
+    void AddToFile() override;
+    void RefreshDataInFile() override;
+    auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
+    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
+    void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
+    void keyReleaseEvent(QKeyEvent *event) override;
+    void SetVisualization() override {}
+    void DeleteToolWithConfirm(bool ask = true) override;
+    void ToolCreation(const Source &typeCreation) override;
+    void SetDialog() override;
+    void SaveDialogChange(const QString &undoText = QString()) override;
 
 private slots:
-    void ShowOptions();
     void ToggleInLayout(bool checked);
+    void ToggleHideMainPath(bool checked);
     void ToggleForbidFlipping(bool checked);
     void ToggleForceFlipping(bool checked);
-    void DeleteFromMenu();
+    void ToggleShowFullPiece(bool checked);
     void ToggleExcludeState(quint32 id);
+    void ToggleTurnPointState(quint32 id);
     void ToggleNodePointAngleType(quint32 id, PieceNodeAngle type);
+    void ToggleNodePointPassmark(quint32 id, bool toggle);
+    void TogglePassmarkAngleType(quint32 id, PassmarkAngleType type);
+    void TogglePassmarkLineType(quint32 id, PassmarkLineType type);
+    void ResetPieceLabelTemplate();
 
 private:
-    Q_DISABLE_COPY(VToolSeamAllowance)
+    Q_DISABLE_COPY_MOVE(VToolSeamAllowance) // NOLINT
 
-    QPainterPath m_mainPath; // Must be first to prevent crash
-    QRectF       m_mainPathRect;
+    QPainterPath m_mainPath{}; // Must be first to prevent crash
+    QRectF m_pieceBoundingRect{};
 
     /** @brief sceneDetails pointer to the scene. */
     VMainGraphicsScene *m_sceneDetails;
-    QString             m_drawName;
+    QString m_drawName;
 
     VNoBrushScalePathItem *m_seamAllowance;
-    VTextGraphicsItem     *m_dataLabel;
-    VTextGraphicsItem     *m_patternInfo;
-    VGrainlineItem        *m_grainLine;
-    QGraphicsPathItem     *m_passmarks;
-    QGraphicsPathItem     *m_placeLabels;
+    VTextGraphicsItem *m_dataLabel;
+    VTextGraphicsItem *m_patternInfo;
+    VGrainlineItem *m_grainLine;
+    QGraphicsPathItem *m_passmarks;
+    QGraphicsPathItem *m_placeLabels;
+    QGraphicsPathItem *m_mirrorLine;
+    QGraphicsPathItem *m_foldLineMark;
+    QGraphicsPathItem *m_foldLineLabel;
+    QGraphicsSimpleTextItem *m_foldLineLabelText;
 
-    bool m_acceptHoverEvents;
+    bool m_acceptHoverEvents{true};
 
-    VToolSeamAllowance(const VToolSeamAllowanceInitData &initData, QGraphicsItem * parent = nullptr);
+    /** @brief m_geometryIsReady is true when a piece's geometry is ready and checks for validity can be enabled. */
+    bool m_geometryIsReady{false};
+
+    QPointF m_patternLabelPos{};
+    qreal m_patternLabelAngle{0};
+
+    QPointF m_pieceLabelPos{};
+    qreal m_pieceLabelAngle{0};
+
+    QFutureWatcher<void> *m_patternUpdateInfoWatcher;
+    QFutureWatcher<void> *m_pieceUpdateInfoWatcher;
+
+    bool m_patternLabelInfoStale{false};
+    bool m_pieceLabelInfoStale{false};
+
+    explicit VToolSeamAllowance(const VToolSeamAllowanceInitData &initData, QGraphicsItem *parent = nullptr);
 
     void UpdateExcludeState();
     void UpdateInternalPaths();
 
-    VPieceItem::MoveTypes FindLabelGeometry(const VPatternLabelData &labelData, qreal &rotationAngle, qreal &labelWidth,
-                                            qreal &labelHeight, QPointF &pos);
-    VPieceItem::MoveTypes FindGrainlineGeometry(const VGrainlineData &geom, qreal &length, qreal &rotationAngle,
-                                                QPointF &pos);
+    auto FindLabelGeometry(const VPatternLabelData &labelData, const QVector<quint32> &pins, qreal &rotationAngle,
+                           qreal &labelWidth, qreal &labelHeight, QPointF &pos) -> VPieceItem::MoveTypes;
+    auto FindGrainlineGeometry(const VGrainlineData &geom, const QVector<quint32> &pins, qreal &length,
+                               qreal &rotationAngle, QPointF &pos) -> VPieceItem::MoveTypes;
 
     void InitNodes(const VPiece &detail, VMainGraphicsScene *scene);
-    static void InitNode(const VPieceNode &node, VMainGraphicsScene *scene, VContainer *data, VAbstractPattern *doc,
-                         VToolSeamAllowance *parent);
+    static void InitNode(const VPieceNode &node, VMainGraphicsScene *scene, VToolSeamAllowance *parent);
     void InitCSAPaths(const VPiece &detail) const;
     void InitInternalPaths(const VPiece &detail);
     void InitSpecialPoints(const QVector<quint32> &points) const;
 
-    bool PrepareLabelData(const VPatternLabelData &labelData, VTextGraphicsItem *labelItem, QPointF &pos,
-                          qreal &labelAngle);
-    void UpdateLabelItem(VTextGraphicsItem *labelItem, QPointF pos, qreal labelAngle);
+    auto PrepareLabelData(const VPatternLabelData &labelData, const QVector<quint32> &pins,
+                          VTextGraphicsItem *labelItem, QPointF &pos, qreal &labelAngle) -> bool;
 
-    QList<VToolSeamAllowance *> SelectedTools() const;
+    auto SelectedTools() const -> QList<VToolSeamAllowance *>;
+
+    auto IsGrainlinePositionValid() const -> bool;
+    auto IsFoldLinePositionValid(const QVector<QPainterPath> &shape, FoldLineType type) const -> bool;
 
     static void AddPointRecords(VAbstractPattern *doc, QDomElement &domElement, const QVector<quint32> &records,
                                 const QString &tag);
 
-    static QVector<VPieceNode> DuplicateNodes(const VPiecePath &path, const VToolSeamAllowanceInitData &initData,
-                                              QMap<quint32, quint32> &replacements);
-    static quint32             DuplicateNode(const VPieceNode &node, const VToolSeamAllowanceInitData &initData);
+    static auto DuplicateNodes(const VPiecePath &path, const VToolSeamAllowanceInitData &initData,
+                               QMap<quint32, quint32> &replacements) -> QVector<VPieceNode>;
+    static auto DuplicateNode(const VPieceNode &node, const VToolSeamAllowanceInitData &initData) -> quint32;
 
-    static quint32 DuplicatePiecePath(quint32 id, const VToolSeamAllowanceInitData &initData);
+    static auto DuplicatePiecePath(quint32 id, const VToolSeamAllowanceInitData &initData) -> quint32;
 
-    static QVector<CustomSARecord> DuplicateCustomSARecords(const QVector<CustomSARecord> &records,
-                                                            const VToolSeamAllowanceInitData &initData,
-                                                            const QMap<quint32, quint32> &replacements);
+    static auto DuplicateCustomSARecords(const QVector<CustomSARecord> &records,
+                                         const VToolSeamAllowanceInitData &initData,
+                                         const QMap<quint32, quint32> &replacements) -> QVector<CustomSARecord>;
 
-    static QVector<quint32> DuplicateInternalPaths(const QVector<quint32> &iPaths,
-                                                   const VToolSeamAllowanceInitData &initData);
-    static QVector<quint32> DuplicatePins(const QVector<quint32> &pins, const VToolSeamAllowanceInitData &initData);
-    static QVector<quint32> DuplicatePlaceLabels(const QVector<quint32> &placeLabels,
-                                                 const VToolSeamAllowanceInitData &initData);
+    static auto DuplicateInternalPaths(const QVector<quint32> &iPaths, const VToolSeamAllowanceInitData &initData)
+        -> QVector<quint32>;
+    static auto DuplicatePlaceLabels(const QVector<quint32> &placeLabels, const VToolSeamAllowanceInitData &initData)
+        -> QVector<quint32>;
+
+    void UpdateFoldLine(const VFoldLine &foldLine);
 };
 
 #endif // VTOOLSEAMALLOWANCE_H

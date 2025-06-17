@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,45 +29,45 @@
 #ifndef IFCDEF_H
 #define IFCDEF_H
 
+#include <QtGlobal>
+#ifdef Q_OS_WIN
+//   extern Q_CORE_EXPORT int qt_ntfs_permission_lookup;
+#include <qt_windows.h>
+#endif /*Q_OS_WIN*/
+
+#include <QColor>
+#include <QFont>
 #include <QString>
 #include <QStringList>
-#include <QtGlobal>
 
 #include "../vmisc/def.h"
-#include "../vmisc/diagnostic.h"
+#include "../vmisc/typedef.h"
 
 extern const QString CustomMSign;
 extern const QString CustomIncrSign;
 
-#ifdef Q_OS_WIN32
-    extern Q_CORE_EXPORT int qt_ntfs_permission_lookup;
-    #include <windows.h>
-#endif /*Q_OS_WIN32*/
-
-static const quint32 null_id = 0;
-
-#define NULL_ID null_id//use this value for initialization variables that keeps id values. 0 mean uknown id value.
-#define NULL_ID_STR QChar('0')
-
 // Detect whether the compiler supports C++11 noexcept exception specifications.
-#  if   defined(__clang__)
-#    if __has_feature(cxx_noexcept)
-#      define V_NOEXCEPT_EXPR(x) noexcept(x) // Clang 3.0 and above have noexcept
-#    endif
-#  elif defined(__GNUC__)
-#    if (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6)) && defined(__GXX_EXPERIMENTAL_CXX0X__)
-#      define V_NOEXCEPT_EXPR(x) noexcept(x) // GCC 4.7 and following have noexcept
-#    endif
-#  elif defined(_MSC_FULL_VER) && _MSC_FULL_VER >= 190023026
-#    define V_NOEXCEPT_EXPR(x) noexcept(x) // Visual Studio 2015 and following have noexcept
-#  else
-#    define V_NOEXCEPT_EXPR(x)
-#  endif
+#if defined(__clang__)
+#if __has_feature(cxx_noexcept)
+#define V_NOEXCEPT_EXPR(x) noexcept(x) // Clang 3.0 and above have noexcept
+#endif
+#elif defined(__GNUC__)
+#if (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6)) && defined(__GXX_EXPERIMENTAL_CXX0X__)
+#define V_NOEXCEPT_EXPR(x) noexcept(x) // GCC 4.7 and following have noexcept
+#endif
+#elif defined(_MSC_FULL_VER) && _MSC_FULL_VER >= 190023026
+#define V_NOEXCEPT_EXPR(x) noexcept(x) // Visual Studio 2015 and following have noexcept
+#else
+#define V_NOEXCEPT_EXPR(x)
+#endif
 
 extern const QString AttrType;
 extern const QString AttrMx;
 extern const QString AttrMy;
 extern const QString AttrName;
+extern const QString AttrShortName;
+extern const QString AttrUUID;
+extern const QString AttrGradationLabel;
 extern const QString AttrMx1;
 extern const QString AttrMy1;
 extern const QString AttrName1;
@@ -109,9 +109,9 @@ extern const QString AttrPoint1;
 extern const QString AttrPoint2;
 extern const QString AttrPoint3;
 extern const QString AttrPoint4;
-extern const QString AttrKAsm1;// TODO. Delete if minimal supported version is 0.2.7
-extern const QString AttrKAsm2;// TODO. Delete if minimal supported version is 0.2.7
-extern const QString AttrKCurve;// TODO. Delete if minimal supported version is 0.2.7
+extern const QString AttrKAsm1;  // TODO. Delete if minimal supported version is 0.2.7
+extern const QString AttrKAsm2;  // TODO. Delete if minimal supported version is 0.2.7
+extern const QString AttrKCurve; // TODO. Delete if minimal supported version is 0.2.7
 extern const QString AttrDuplicate;
 extern const QString AttrAScale;
 extern const QString AttrPathPoint;
@@ -139,10 +139,14 @@ extern const QString AttrTangent;
 extern const QString AttrCRadius;
 extern const QString AttrArc;
 extern const QString AttrSuffix;
+extern const QString AttrItem;
 extern const QString AttrIdObject;
 extern const QString AttrInLayout;
 extern const QString AttrForbidFlipping;
 extern const QString AttrForceFlipping;
+extern const QString AttrSymmetricalCopy;
+extern const QString AttrFollowGrainline;
+extern const QString AttrSewLineOnDrawing;
 extern const QString AttrClosed;
 extern const QString AttrShowLabel;
 extern const QString AttrShowLabel1;
@@ -151,9 +155,21 @@ extern const QString AttrWidth;
 extern const QString AttrHeight;
 extern const QString AttrPlaceLabelType;
 extern const QString AttrVersion;
-extern const QString AttrFirstToCountour;
-extern const QString AttrLastToCountour;
+extern const QString AttrFirstToContour;
+extern const QString AttrLastToContour;
+extern const QString AttrNotes;
+extern const QString AttrAlias;
+extern const QString AttrAlias1;
+extern const QString AttrAlias2;
+extern const QString AttrCurve1Alias1;
+extern const QString AttrCurve1Alias2;
+extern const QString AttrCurve2Alias1;
+extern const QString AttrCurve2Alias2;
+extern const QString AttrLayoutVersion;
+extern const QString AttrKMVersion;
+extern const QString AttrNotMirrored;
 
+extern const QString TypeLineDefault;
 extern const QString TypeLineNone;
 extern const QString TypeLineLine;
 extern const QString TypeLineDashLine;
@@ -161,12 +177,14 @@ extern const QString TypeLineDotLine;
 extern const QString TypeLineDashDotLine;
 extern const QString TypeLineDashDotDotLine;
 
-QStringList          StylesList();
-Qt::PenStyle         LineStyleToPenStyle(const QString &typeLine);
-QString              PenStyleToLineStyle(Qt::PenStyle penStyle);
-QMap<QString, QIcon> LineStylesPics();
-QMap<QString, QIcon> CurvePenStylesPics();
+auto StylesList() -> QStringList;
+auto LineStyleToPenStyle(const QString &typeLine) -> Qt::PenStyle;
+auto PenStyleToLineStyle(Qt::PenStyle penStyle) -> QString;
+auto PenStylePic(QColor backgroundColor, QColor textColor, Qt::PenStyle style) -> QIcon;
+auto LineStylesPics(QColor backgroundColor, QColor textColor) -> QMap<QString, QIcon>;
+auto CurvePenStylesPics(QColor backgroundColor, QColor textColor) -> QMap<QString, QIcon>;
 
+extern const QString ColorDefault;
 extern const QString ColorBlack;
 extern const QString ColorGreen;
 extern const QString ColorBlue;
@@ -184,7 +202,6 @@ extern const QString ColorMediumSeaGreen;
 extern const QString ColorLime;
 extern const QString ColorDeepSkyBlue;
 extern const QString ColorCornFlowerBlue;
-
 
 // variables name
 // Hacks for avoiding the linker error "undefined reference to"
@@ -225,8 +242,10 @@ extern const QString currentLength;
 extern const QString currentSeamAllowance;
 extern const QString rotation_V;
 extern const QString rotationElArc_;
+extern const QString pieceArea_;
+extern const QString pieceSeamLineArea_;
 
-extern const QStringList builInVariables;
+auto BuilInVariables() -> QStringList;
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -234,10 +253,32 @@ QT_WARNING_DISABLE_GCC("-Weffc++")
 struct VLabelTemplateLine
 {
     QString line;
-    bool    bold;
-    bool    italic;
-    int     alignment;
-    int     fontSizeIncrement;
+    bool bold;
+    bool italic;
+    int alignment;
+    int fontSizeIncrement;
+};
+
+struct VWatermarkData
+{
+    int opacity{20};             // NOLINT(misc-non-private-member-variables-in-classes)
+    bool showText{true};         // NOLINT(misc-non-private-member-variables-in-classes)
+    QString text{};              // NOLINT(misc-non-private-member-variables-in-classes)
+    int textRotation{0};         // NOLINT(misc-non-private-member-variables-in-classes)
+    QFont font{};                // NOLINT(misc-non-private-member-variables-in-classes)
+    bool showImage{true};        // NOLINT(misc-non-private-member-variables-in-classes)
+    QString path{};              // NOLINT(misc-non-private-member-variables-in-classes)
+    int imageRotation{0};        // NOLINT(misc-non-private-member-variables-in-classes)
+    bool grayscale{false};       // NOLINT(misc-non-private-member-variables-in-classes)
+    bool invalidFile{false};     // NOLINT(misc-non-private-member-variables-in-classes)
+    QColor textColor{Qt::black}; // NOLINT(misc-non-private-member-variables-in-classes)
+
+    VWatermarkData() = default;
+    VWatermarkData(VWatermarkData &&) noexcept = default;
+    auto operator=(VWatermarkData &&) noexcept -> VWatermarkData & = default;
+    VWatermarkData(const VWatermarkData &) = default;
+    auto operator=(const VWatermarkData &) -> VWatermarkData & = default;
+    ~VWatermarkData() = default;
 };
 
 QT_WARNING_POP

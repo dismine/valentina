@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef DIALOGPOINTFROMCIRCLEANDTANGENT_H
 #define DIALOGPOINTFROMCIRCLEANDTANGENT_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -41,58 +40,81 @@
 
 namespace Ui
 {
-    class DialogPointFromCircleAndTangent;
+class DialogPointFromCircleAndTangent;
 }
 
-class DialogPointFromCircleAndTangent : public DialogTool
+class DialogPointFromCircleAndTangent final : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
-    DialogPointFromCircleAndTangent(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    ~DialogPointFromCircleAndTangent();
+    DialogPointFromCircleAndTangent(const VContainer *data, VAbstractPattern *doc, quint32 toolId,
+                                    QWidget *parent = nullptr);
+    ~DialogPointFromCircleAndTangent() override;
 
-    void           SetPointName(const QString &value);
+    auto GetPointName() const -> QString;
+    void SetPointName(const QString &value);
 
-    quint32        GetCircleCenterId() const;
-    void           SetCircleCenterId(const quint32 &value);
+    auto GetCircleCenterId() const -> quint32;
+    void SetCircleCenterId(const quint32 &value);
 
-    QString        GetCircleRadius() const;
-    void           SetCircleRadius(const QString &value);
+    auto GetCircleRadius() const -> QString;
+    void SetCircleRadius(const QString &value);
 
-    quint32        GetTangentPointId() const;
-    void           SetTangentPointId(const quint32 &value);
+    auto GetTangentPointId() const -> quint32;
+    void SetTangentPointId(quint32 value);
 
-    CrossCirclesPoint GetCrossCirclesPoint() const;
-    void              SetCrossCirclesPoint(const CrossCirclesPoint &p);
+    auto GetCrossCirclesPoint() const -> CrossCirclesPoint;
+    void SetCrossCirclesPoint(CrossCirclesPoint p);
+
+    void SetNotes(const QString &notes);
+    auto GetNotes() const -> QString;
+
+    void ShowDialog(bool click) override;
 
 public slots:
-    virtual void   ChosenObject(quint32 id, const SceneObject &type) override;
-    void           PointChanged();
+    void ChosenObject(quint32 id, const SceneObject &type) override;
+    void PointChanged();
 
-    void           DeployCircleRadiusTextEdit();
-    void           CircleRadiusChanged();
-    void           FXCircleRadius();
-    void           EvalCircleRadius();
+    void DeployCircleRadiusTextEdit();
+    void FXCircleRadius();
+    void EvalCircleRadius();
 
 protected:
-    virtual void   ShowVisualization() override;
+    void ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void   SaveData() override;
-    virtual void   closeEvent(QCloseEvent *event) override;
-    virtual void   CheckState() final;
+    void SaveData() override;
+    void closeEvent(QCloseEvent *event) override;
+    void changeEvent(QEvent *event) override;
+    auto IsValid() const -> bool override;
 
 private:
-    Q_DISABLE_COPY(DialogPointFromCircleAndTangent)
+    Q_DISABLE_COPY_MOVE(DialogPointFromCircleAndTangent) // NOLINT
 
     Ui::DialogPointFromCircleAndTangent *ui;
 
-    bool          flagCircleRadius;
-    QTimer        *timerCircleRadius;
-    QString       circleRadius;
-    int           formulaBaseHeightCircleRadius;
+    QTimer *m_timerCircleRadius{nullptr};
+    QString m_circleRadius{};
+    int m_formulaBaseHeightCircleRadius{0};
+    QString m_pointName{};
+    bool m_flagCircleRadius{false};
+    bool m_flagName{true};
+    bool m_flagError{true};
+    /** @brief number number of handled objects */
+    qint32 m_number{0};
+    bool m_firstRelease{false};
+
+    void FinishCreating();
+
+    void InitIcons();
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto DialogPointFromCircleAndTangent::IsValid() const -> bool
+{
+    return m_flagCircleRadius && m_flagName && m_flagError;
+}
 
 #endif // DIALOGPOINTFROMCIRCLEANDTANGENT_H

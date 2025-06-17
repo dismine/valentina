@@ -26,10 +26,10 @@
 #include <QStack>
 #include <QString>
 #include <QtDebug>
+#include <QtMath>
 
 #include "qmudef.h"
 #include "qmuparsererror.h"
-#include "../vmisc/vmath.h"
 
 namespace qmu
 {
@@ -38,7 +38,6 @@ namespace qmu
  * @brief Bytecode default constructor.
  */
 QmuParserByteCode::QmuParserByteCode()
-    :m_iStackPos(0), m_iMaxStackSize(0), m_vRPN(), m_bEnableOptimizer(true)
 {
     m_vRPN.reserve(50);
 }
@@ -50,8 +49,7 @@ QmuParserByteCode::QmuParserByteCode()
  * Implemented in Terms of Assign(const QParserByteCode &a_ByteCode)
  */
 QmuParserByteCode::QmuParserByteCode(const QmuParserByteCode &a_ByteCode)
-    :m_iStackPos(a_ByteCode.m_iStackPos), m_iMaxStackSize(a_ByteCode.m_iMaxStackSize), m_vRPN(a_ByteCode.m_vRPN),
-      m_bEnableOptimizer(true)
+    :m_iStackPos(a_ByteCode.m_iStackPos), m_iMaxStackSize(a_ByteCode.m_iMaxStackSize), m_vRPN(a_ByteCode.m_vRPN)
 {
     Assign(a_ByteCode);
 }
@@ -62,7 +60,7 @@ QmuParserByteCode::QmuParserByteCode(const QmuParserByteCode &a_ByteCode)
  *
  * Implemented in Terms of Assign(const QParserByteCode &a_ByteCode)
  */
-QmuParserByteCode& QmuParserByteCode::operator=(const QmuParserByteCode &a_ByteCode)
+auto QmuParserByteCode::operator=(const QmuParserByteCode &a_ByteCode) -> QmuParserByteCode&
 {
     if (this != &a_ByteCode)
     {
@@ -75,7 +73,7 @@ QmuParserByteCode& QmuParserByteCode::operator=(const QmuParserByteCode &a_ByteC
 /**
  * @brief Copy state of another object to this.
  *
- * @throw nowthrow
+ * @throw None No exceptions are thrown.
  */
 void QmuParserByteCode::Assign(const QmuParserByteCode &a_ByteCode)
 {
@@ -94,7 +92,7 @@ void QmuParserByteCode::Assign(const QmuParserByteCode &a_ByteCode)
 /**
  * @brief Add a Variable pointer to bytecode.
  * @param a_pVar Pointer to be added.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
 void QmuParserByteCode::AddVar(qreal *a_pVar)
 {
@@ -102,7 +100,7 @@ void QmuParserByteCode::AddVar(qreal *a_pVar)
     m_iMaxStackSize = qMax(m_iMaxStackSize, m_iStackPos);
 
     // optimization does not apply
-    SToken tok;
+    SToken tok; // NOLINT
     tok.Cmd       = cmVAR;
     tok.Val.ptr   = a_pVar;
     tok.Val.data  = 1;
@@ -122,7 +120,7 @@ void QmuParserByteCode::AddVar(qreal *a_pVar)
  * </ul>
  *
  * @param a_fVal Value to be added.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
 void QmuParserByteCode::AddVal(qreal a_fVal)
 {
@@ -130,7 +128,7 @@ void QmuParserByteCode::AddVal(qreal a_fVal)
     m_iMaxStackSize = qMax(m_iMaxStackSize, m_iStackPos);
 
     // If optimization does not apply
-    SToken tok;
+    SToken tok; // NOLINT
     tok.Cmd = cmVAL;
     tok.Val.ptr   = nullptr;
     tok.Val.data  = 0;
@@ -141,40 +139,48 @@ void QmuParserByteCode::AddVal(qreal a_fVal)
 //---------------------------------------------------------------------------------------------------------------------
 void QmuParserByteCode::ConstantFolding(ECmdCode a_Oprt)
 {
-    int sz = m_vRPN.size();
+    qmusizetype const sz = m_vRPN.size();
     qreal &x = m_vRPN[sz-2].Val.data2,
           &y = m_vRPN[sz-1].Val.data2;
     switch (a_Oprt)
     {
         case cmLAND:
+            // cppcheck-suppress assignBoolToFloat
             x = static_cast<int>(x) && static_cast<int>(y);
             m_vRPN.pop_back();
             break;
         case cmLOR:
+            // cppcheck-suppress assignBoolToFloat
             x = static_cast<int>(x) || static_cast<int>(y);
             m_vRPN.pop_back();
             break;
         case cmLT:
+            // cppcheck-suppress assignBoolToFloat
             x = x < y;
             m_vRPN.pop_back();
             break;
         case cmGT:
+            // cppcheck-suppress assignBoolToFloat
             x = x > y;
             m_vRPN.pop_back();
             break;
         case cmLE:
+            // cppcheck-suppress assignBoolToFloat
             x = x <= y;
             m_vRPN.pop_back();
             break;
         case cmGE:
+            // cppcheck-suppress assignBoolToFloat
             x = x >= y;
             m_vRPN.pop_back();
             break;
         case cmNEQ:
+            // cppcheck-suppress assignBoolToFloat
             x = not QmuFuzzyComparePossibleNulls(x, y);
             m_vRPN.pop_back();
             break;
         case cmEQ:
+            // cppcheck-suppress assignBoolToFloat
             x = QmuFuzzyComparePossibleNulls(x, y);
             m_vRPN.pop_back();
             break;
@@ -206,7 +212,124 @@ void QmuParserByteCode::ConstantFolding(ECmdCode a_Oprt)
             break;
         default:
             break;
-    } // switch opcode
+        } // switch opcode
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void QmuParserByteCode::OpPOW(qmusizetype sz, bool &bOptimized)
+{
+    if (m_vRPN.at(sz-2).Cmd == cmVAR && m_vRPN.at(sz-1).Cmd == cmVAL) //-V807
+    {
+        if (qFuzzyCompare(m_vRPN.at(sz-1).Val.data2, 2)) //-V807
+        {
+            m_vRPN[sz-2].Cmd = cmVARPOW2;
+        }
+        else if (qFuzzyCompare(m_vRPN.at(sz-1).Val.data2, 3))
+        {
+            m_vRPN[sz-2].Cmd = cmVARPOW3;
+        }
+        else if (qFuzzyCompare(m_vRPN.at(sz-1).Val.data2, 4))
+        {
+            m_vRPN[sz-2].Cmd = cmVARPOW4;
+        }
+        else
+        {
+            return;
+        }
+        m_vRPN.pop_back();
+        bOptimized = true;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void QmuParserByteCode::OpSUBADD(ECmdCode a_Oprt, qmusizetype sz, bool &bOptimized)
+{
+    if ( (m_vRPN.at(sz-1).Cmd == cmVAR    && m_vRPN.at(sz-2).Cmd == cmVAL)   ||
+        (m_vRPN.at(sz-1).Cmd == cmVAL    && m_vRPN.at(sz-2).Cmd == cmVAR)    ||
+        (m_vRPN.at(sz-1).Cmd == cmVAL    && m_vRPN.at(sz-2).Cmd == cmVARMUL) ||
+        (m_vRPN.at(sz-1).Cmd == cmVARMUL && m_vRPN.at(sz-2).Cmd == cmVAL)    ||
+        (m_vRPN.at(sz-1).Cmd == cmVAR    && m_vRPN.at(sz-2).Cmd == cmVAR &&
+         m_vRPN.at(sz-2).Val.ptr == m_vRPN.at(sz-1).Val.ptr) || //-V807
+        (m_vRPN.at(sz-1).Cmd == cmVAR && m_vRPN.at(sz-2).Cmd == cmVARMUL
+         && m_vRPN.at(sz-2).Val.ptr == m_vRPN.at(sz-1).Val.ptr) ||
+        (m_vRPN.at(sz-1).Cmd == cmVARMUL && m_vRPN.at(sz-2).Cmd == cmVAR &&
+         m_vRPN.at(sz-2).Val.ptr == m_vRPN.at(sz-1).Val.ptr) ||
+        (m_vRPN.at(sz-1).Cmd == cmVARMUL && m_vRPN.at(sz-2).Cmd == cmVARMUL &&
+         m_vRPN.at(sz-2).Val.ptr == m_vRPN.at(sz-1).Val.ptr) )
+    {
+        assert( (m_vRPN.at(sz-2).Val.ptr==nullptr && m_vRPN.at(sz-1).Val.ptr!=nullptr) ||
+               (m_vRPN.at(sz-2).Val.ptr!=nullptr && m_vRPN.at(sz-1).Val.ptr==nullptr) ||
+               (m_vRPN.at(sz-2).Val.ptr == m_vRPN.at(sz-1).Val.ptr) );
+
+        m_vRPN[sz-2].Cmd = cmVARMUL;
+        m_vRPN[sz-2].Val.ptr = reinterpret_cast<qreal*>( //-V807 NOLINT(cppcoreguidelines-pro-type-reinterpret-cast)
+            reinterpret_cast<qlonglong>(m_vRPN.at(sz-2).Val.ptr) | // NOLINT(cppcoreguidelines-pro-type-reinterpret-cast, hicpp-signed-bitwise)
+            reinterpret_cast<qlonglong>(m_vRPN.at(sz-1).Val.ptr)); // variable NOLINT(cppcoreguidelines-pro-type-reinterpret-cast)
+        m_vRPN[sz-2].Val.data2 += ((a_Oprt==cmSUB) ? -1 : 1) * m_vRPN.at(sz-1).Val.data2; // offset
+        m_vRPN[sz-2].Val.data  += ((a_Oprt==cmSUB) ? -1 : 1) * m_vRPN.at(sz-1).Val.data;  // multiplikatior
+        m_vRPN.pop_back();
+        bOptimized = true;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void QmuParserByteCode::OpMUL(qmusizetype sz, bool &bOptimized)
+{
+    if ( (m_vRPN.at(sz-1).Cmd == cmVAR && m_vRPN.at(sz-2).Cmd == cmVAL) ||
+        (m_vRPN.at(sz-1).Cmd == cmVAL && m_vRPN.at(sz-2).Cmd == cmVAR) )
+    {
+        m_vRPN[sz-2].Cmd        = cmVARMUL;
+        m_vRPN[sz-2].Val.ptr    = reinterpret_cast<qreal*>( // NOLINT(cppcoreguidelines-pro-type-reinterpret-cast)
+            reinterpret_cast<qlonglong>(m_vRPN.at(sz-2).Val.ptr) | // NOLINT(cppcoreguidelines-pro-type-reinterpret-cast, hicpp-signed-bitwise)
+            reinterpret_cast<qlonglong>(m_vRPN.at(sz-1).Val.ptr)); // NOLINT(cppcoreguidelines-pro-type-reinterpret-cast)
+        m_vRPN[sz-2].Val.data   = m_vRPN.at(sz-2).Val.data2 + m_vRPN.at(sz-1).Val.data2;
+        m_vRPN[sz-2].Val.data2  = 0;
+        m_vRPN.pop_back();
+        bOptimized = true;
+    }
+    else if ( (m_vRPN.at(sz-1).Cmd == cmVAL    && m_vRPN.at(sz-2).Cmd == cmVARMUL) ||
+             (m_vRPN.at(sz-1).Cmd == cmVARMUL && m_vRPN.at(sz-2).Cmd == cmVAL) )
+    {
+        // Optimization: 2*(3*b+1) or (3*b+1)*2 -> 6*b+2
+        m_vRPN[sz-2].Cmd     = cmVARMUL;
+        m_vRPN[sz-2].Val.ptr = reinterpret_cast<qreal*>( // NOLINT(cppcoreguidelines-pro-type-reinterpret-cast)
+            reinterpret_cast<qlonglong>(m_vRPN.at(sz-2).Val.ptr) | // NOLINT(cppcoreguidelines-pro-type-reinterpret-cast, hicpp-signed-bitwise)
+            reinterpret_cast<qlonglong>(m_vRPN.at(sz-1).Val.ptr)); // NOLINT(cppcoreguidelines-pro-type-reinterpret-cast)
+        if (m_vRPN.at(sz-1).Cmd == cmVAL)
+        {
+            m_vRPN[sz-2].Val.data  *= m_vRPN.at(sz-1).Val.data2;
+            m_vRPN[sz-2].Val.data2 *= m_vRPN.at(sz-1).Val.data2;
+        }
+        else
+        {
+            m_vRPN[sz-2].Val.data  = m_vRPN.at(sz-1).Val.data  * m_vRPN.at(sz-2).Val.data2;
+            m_vRPN[sz-2].Val.data2 = m_vRPN.at(sz-1).Val.data2 * m_vRPN.at(sz-2).Val.data2;
+        }
+        m_vRPN.pop_back();
+        bOptimized = true;
+    }
+    else if (m_vRPN.at(sz-1).Cmd == cmVAR && m_vRPN.at(sz-2).Cmd == cmVAR &&
+             m_vRPN.at(sz-1).Val.ptr == m_vRPN.at(sz-2).Val.ptr)
+    {
+        // Optimization: a*a -> a^2
+        m_vRPN[sz-2].Cmd = cmVARPOW2;
+        m_vRPN.pop_back();
+        bOptimized = true;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void QmuParserByteCode::OpDIV(qmusizetype sz, bool &bOptimized)
+{
+    if (m_vRPN.at(sz-1).Cmd == cmVAL && m_vRPN.at(sz-2).Cmd == cmVARMUL &&
+        not qFuzzyIsNull(m_vRPN.at(sz-1).Val.data2))
+    {
+        // Optimization: 4*a/2 -> 2*a
+        m_vRPN[sz-2].Val.data  /= m_vRPN.at(sz-1).Val.data2;
+        m_vRPN[sz-2].Val.data2 /= m_vRPN.at(sz-1).Val.data2;
+        m_vRPN.pop_back();
+        bOptimized = true;
+    }
 }
 
 QT_WARNING_PUSH
@@ -227,150 +350,64 @@ QT_WARNING_DISABLE_MSVC(4826)
  */
 void QmuParserByteCode::AddOp(ECmdCode a_Oprt)
 {
+    auto WriteValue = [this, a_Oprt](bool bOptimized)
+    {
+        if (not bOptimized)
+        {
+            --m_iStackPos;
+            SToken tok; // NOLINT
+            tok.Cmd = a_Oprt;
+            m_vRPN.push_back(tok);
+        }
+    };
+
     bool bOptimized = false;
 
-    if (m_bEnableOptimizer)
+    if (not m_bEnableOptimizer)
     {
-        int sz = m_vRPN.size();
+        // If optimization can't be applied just write the value
+        WriteValue(bOptimized);
+        return;
+    }
 
-        // Check for foldable constants like:
-        //   cmVAL cmVAL cmADD
-        // where cmADD can stand fopr any binary operator applied to
-        // two constant values.
-        if (sz>=2 && m_vRPN.at(sz-2).Cmd == cmVAL && m_vRPN.at(sz-1).Cmd == cmVAL)
+    // Check for foldable constants like:
+    //   cmVAL cmVAL cmADD
+    // where cmADD can stand fopr any binary operator applied to
+    // two constant values.
+    if (qmusizetype const sz = m_vRPN.size();
+        sz >= 2 && m_vRPN.at(sz - 2).Cmd == cmVAL && m_vRPN.at(sz - 1).Cmd == cmVAL)
+    {
+        ConstantFolding(a_Oprt);
+        bOptimized = true;
+    }
+    else
+    {
+        switch (a_Oprt)
         {
-            ConstantFolding(a_Oprt);
-            bOptimized = true;
-        }
-        else
-        {
-            switch (a_Oprt)
-            {
-                case cmPOW:
-                    // Optimization for ploynomials of low order
-                    if (m_vRPN.at(sz-2).Cmd == cmVAR && m_vRPN.at(sz-1).Cmd == cmVAL) //-V807
-                    {
-                        if (qFuzzyCompare(m_vRPN.at(sz-1).Val.data2, 2)) //-V807
-                        {
-                            m_vRPN[sz-2].Cmd = cmVARPOW2;
-                        }
-                        else if (qFuzzyCompare(m_vRPN.at(sz-1).Val.data2, 3))
-                        {
-                            m_vRPN[sz-2].Cmd = cmVARPOW3;
-                        }
-                        else if (qFuzzyCompare(m_vRPN.at(sz-1).Val.data2, 4))
-                        {
-                            m_vRPN[sz-2].Cmd = cmVARPOW4;
-                        }
-                        else
-                        {
-                            break;
-                        }
-                        m_vRPN.pop_back();
-                        bOptimized = true;
-                    }
-                    break;
+            case cmPOW:
+                // Optimization for ploynomials of low order
+                OpPOW(sz, bOptimized);
+                break;
+            case cmSUB:
+            case cmADD:
+                // Simple optimization based on pattern recognition for a shitload of different
+                // bytecode combinations of addition/subtraction
+                OpSUBADD(a_Oprt, sz, bOptimized);
+                break;
+            case cmMUL:
+                OpMUL(sz, bOptimized);
+                break;
+            case cmDIV:
+                OpDIV(sz, bOptimized);
+                break;
+            default:
+                break;
 
-                case cmSUB:
-                case cmADD:
-                    // Simple optimization based on pattern recognition for a shitload of different
-                    // bytecode combinations of addition/subtraction
-                    if ( (m_vRPN.at(sz-1).Cmd == cmVAR    && m_vRPN.at(sz-2).Cmd == cmVAL)    ||
-                         (m_vRPN.at(sz-1).Cmd == cmVAL    && m_vRPN.at(sz-2).Cmd == cmVAR)    ||
-                         (m_vRPN.at(sz-1).Cmd == cmVAL    && m_vRPN.at(sz-2).Cmd == cmVARMUL) ||
-                         (m_vRPN.at(sz-1).Cmd == cmVARMUL && m_vRPN.at(sz-2).Cmd == cmVAL)    ||
-                         (m_vRPN.at(sz-1).Cmd == cmVAR    && m_vRPN.at(sz-2).Cmd == cmVAR &&
-                          m_vRPN.at(sz-2).Val.ptr == m_vRPN.at(sz-1).Val.ptr) || //-V807
-                         (m_vRPN.at(sz-1).Cmd == cmVAR && m_vRPN.at(sz-2).Cmd == cmVARMUL
-                          && m_vRPN.at(sz-2).Val.ptr == m_vRPN.at(sz-1).Val.ptr) ||
-                         (m_vRPN.at(sz-1).Cmd == cmVARMUL && m_vRPN.at(sz-2).Cmd == cmVAR &&
-                          m_vRPN.at(sz-2).Val.ptr == m_vRPN.at(sz-1).Val.ptr) ||
-                         (m_vRPN.at(sz-1).Cmd == cmVARMUL && m_vRPN.at(sz-2).Cmd == cmVARMUL &&
-                          m_vRPN.at(sz-2).Val.ptr == m_vRPN.at(sz-1).Val.ptr) )
-                    {
-                        assert( (m_vRPN.at(sz-2).Val.ptr==nullptr && m_vRPN.at(sz-1).Val.ptr!=nullptr) ||
-                        (m_vRPN.at(sz-2).Val.ptr!=nullptr && m_vRPN.at(sz-1).Val.ptr==nullptr) ||
-                        (m_vRPN.at(sz-2).Val.ptr == m_vRPN.at(sz-1).Val.ptr) );
-
-                        m_vRPN[sz-2].Cmd = cmVARMUL;
-                        m_vRPN[sz-2].Val.ptr = reinterpret_cast<qreal*>( //-V807
-                                reinterpret_cast<qlonglong>(m_vRPN.at(sz-2).Val.ptr) |
-                                reinterpret_cast<qlonglong>(m_vRPN.at(sz-1).Val.ptr));    // variable
-                        m_vRPN[sz-2].Val.data2 += ((a_Oprt==cmSUB) ? -1 : 1) * m_vRPN.at(sz-1).Val.data2; // offset
-                        m_vRPN[sz-2].Val.data  += ((a_Oprt==cmSUB) ? -1 : 1) * m_vRPN.at(sz-1).Val.data;  // multiplikatior
-                        m_vRPN.pop_back();
-                        bOptimized = true;
-                    }
-                    break;
-                case cmMUL:
-                    if ( (m_vRPN.at(sz-1).Cmd == cmVAR && m_vRPN.at(sz-2).Cmd == cmVAL) ||
-                    (m_vRPN.at(sz-1).Cmd == cmVAL && m_vRPN.at(sz-2).Cmd == cmVAR) )
-                    {
-                        m_vRPN[sz-2].Cmd        = cmVARMUL;
-                        m_vRPN[sz-2].Val.ptr    = reinterpret_cast<qreal*>(
-                                reinterpret_cast<qlonglong>(m_vRPN.at(sz-2).Val.ptr) |
-                                reinterpret_cast<qlonglong>(m_vRPN.at(sz-1).Val.ptr));
-                        m_vRPN[sz-2].Val.data   = m_vRPN.at(sz-2).Val.data2 + m_vRPN.at(sz-1).Val.data2;
-                        m_vRPN[sz-2].Val.data2  = 0;
-                        m_vRPN.pop_back();
-                        bOptimized = true;
-                    }
-                    else if ( (m_vRPN.at(sz-1).Cmd == cmVAL    && m_vRPN.at(sz-2).Cmd == cmVARMUL) ||
-                    (m_vRPN.at(sz-1).Cmd == cmVARMUL && m_vRPN.at(sz-2).Cmd == cmVAL) )
-                    {
-                        // Optimization: 2*(3*b+1) or (3*b+1)*2 -> 6*b+2
-                        m_vRPN[sz-2].Cmd     = cmVARMUL;
-                        m_vRPN[sz-2].Val.ptr = reinterpret_cast<qreal*>(
-                                reinterpret_cast<qlonglong>(m_vRPN.at(sz-2).Val.ptr) |
-                                reinterpret_cast<qlonglong>(m_vRPN.at(sz-1).Val.ptr));
-                        if (m_vRPN.at(sz-1).Cmd == cmVAL)
-                        {
-                            m_vRPN[sz-2].Val.data  *= m_vRPN.at(sz-1).Val.data2;
-                            m_vRPN[sz-2].Val.data2 *= m_vRPN.at(sz-1).Val.data2;
-                        }
-                        else
-                        {
-                            m_vRPN[sz-2].Val.data  = m_vRPN.at(sz-1).Val.data  * m_vRPN.at(sz-2).Val.data2;
-                            m_vRPN[sz-2].Val.data2 = m_vRPN.at(sz-1).Val.data2 * m_vRPN.at(sz-2).Val.data2;
-                        }
-                        m_vRPN.pop_back();
-                        bOptimized = true;
-                    }
-                    else if (m_vRPN.at(sz-1).Cmd == cmVAR && m_vRPN.at(sz-2).Cmd == cmVAR &&
-                    m_vRPN.at(sz-1).Val.ptr == m_vRPN.at(sz-2).Val.ptr)
-                    {
-                        // Optimization: a*a -> a^2
-                        m_vRPN[sz-2].Cmd = cmVARPOW2;
-                        m_vRPN.pop_back();
-                        bOptimized = true;
-                    }
-                    break;
-                case cmDIV:
-                    if (m_vRPN.at(sz-1).Cmd == cmVAL && m_vRPN.at(sz-2).Cmd == cmVARMUL &&
-                            not qFuzzyIsNull(m_vRPN.at(sz-1).Val.data2))
-                    {
-                        // Optimization: 4*a/2 -> 2*a
-                        m_vRPN[sz-2].Val.data  /= m_vRPN.at(sz-1).Val.data2;
-                        m_vRPN[sz-2].Val.data2 /= m_vRPN.at(sz-1).Val.data2;
-                        m_vRPN.pop_back();
-                        bOptimized = true;
-                    }
-                    break;
-                default:
-                    break;
-
-            } // switch a_Oprt
-        }
+        } // switch a_Oprt
     }
 
     // If optimization can't be applied just write the value
-    if (bOptimized == false)
-    {
-        --m_iStackPos;
-        SToken tok;
-        tok.Cmd = a_Oprt;
-        m_vRPN.push_back(tok);
-    }
+    WriteValue(bOptimized);
 }
 
 QT_WARNING_POP
@@ -378,7 +415,7 @@ QT_WARNING_POP
 //---------------------------------------------------------------------------------------------------------------------
 void QmuParserByteCode::AddIfElse(ECmdCode a_Oprt)
 {
-    SToken tok;
+    SToken tok; // NOLINT
     tok.Cmd = a_Oprt;
     m_vRPN.push_back(tok);
 }
@@ -399,7 +436,7 @@ void QmuParserByteCode::AddAssignOp(qreal *a_pVar)
 {
     --m_iStackPos;
 
-    SToken tok;
+    SToken tok; // NOLINT
     tok.Cmd = cmASSIGN;
     tok.Oprt.ptr = a_pVar;
     m_vRPN.push_back(tok);
@@ -425,7 +462,7 @@ void QmuParserByteCode::AddFun(generic_fun_type a_pFun, int a_iArgc)
     }
     m_iMaxStackSize = qMax(m_iMaxStackSize, m_iStackPos);
 
-    SToken tok;
+    SToken tok; // NOLINT
     tok.Cmd = cmFUNC;
     tok.Fun.argc = a_iArgc;
     tok.Fun.ptr = a_pFun;
@@ -439,12 +476,12 @@ void QmuParserByteCode::AddFun(generic_fun_type a_pFun, int a_iArgc)
  * @param a_iArgc Number of arguments, negative numbers indicate multiarg functions.
  * @param a_pFun Pointer to function callback.
  */
-void QmuParserByteCode::AddBulkFun(generic_fun_type a_pFun, int a_iArgc)
+void QmuParserByteCode::AddBulkFun(generic_fun_type a_pFun, qmusizetype a_iArgc)
 {
     m_iStackPos = static_cast<quint32>(static_cast<int>(m_iStackPos) - a_iArgc + 1);
     m_iMaxStackSize = qMax(m_iMaxStackSize, m_iStackPos);
 
-    SToken tok;
+    SToken tok; // NOLINT
     tok.Cmd = cmFUNC_BULK;
     tok.Fun.argc = a_iArgc;
     tok.Fun.ptr = a_pFun;
@@ -454,16 +491,16 @@ void QmuParserByteCode::AddBulkFun(generic_fun_type a_pFun, int a_iArgc)
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Add Strung function entry to the parser bytecode.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  *
  * A string function entry consists of the stack position of the return value, followed by a cmSTRFUNC code, the
  * function pointer and an index into the string buffer maintained by the parser.
  */
-void QmuParserByteCode::AddStrFun(generic_fun_type a_pFun, int a_iArgc, int a_iIdx)
+void QmuParserByteCode::AddStrFun(generic_fun_type a_pFun, int a_iArgc, qmusizetype a_iIdx)
 {
     m_iStackPos = static_cast<quint32>(static_cast<int>(m_iStackPos) - a_iArgc + 1);
 
-    SToken tok;
+    SToken tok; // NOLINT
     tok.Cmd = cmFUNC_STR;
     tok.Fun.argc = a_iArgc;
     tok.Fun.idx = a_iIdx;
@@ -477,11 +514,11 @@ void QmuParserByteCode::AddStrFun(generic_fun_type a_pFun, int a_iArgc, int a_iI
 /**
  * @brief Add end marker to bytecode.
  *
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
 void QmuParserByteCode::Finalize()
 {
-    SToken tok;
+    SToken tok; // NOLINT
     tok.Cmd = cmEND;
     m_vRPN.push_back(tok);
     rpn_type(m_vRPN).swap(m_vRPN);     // shrink bytecode vector to fit
@@ -512,23 +549,21 @@ void QmuParserByteCode::Finalize()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const SToken* QmuParserByteCode::GetBase() const
+auto QmuParserByteCode::GetBase() const -> const SToken*
 {
-    if (m_vRPN.size()==0)
+    if (m_vRPN.empty())
     {
         throw QmuParserError(ecINTERNAL_ERROR);
     }
-    else
-    {
-        return &m_vRPN.at(0);
-    }
+
+    return &m_vRPN.at(0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Delete the bytecode.
  *
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  *
  * The name of this function is a violation of my own coding guidelines but this way it's more in line with the STL
  * functions thus more intuitive.
@@ -546,7 +581,7 @@ void QmuParserByteCode::clear()
  */
 void QmuParserByteCode::AsciiDump()
 {
-    if (m_vRPN.size() == false)
+    if (m_vRPN.empty())
     {
         qDebug() << "No bytecode available\n";
         return;

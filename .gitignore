@@ -1,0 +1,184 @@
+# This line is a comment, and will be skipped.
+# Empty lines are skipped too.
+
+# Backup files left behind by the Emacs editor.
+*~
+
+# Valentina lock files
+*.lock
+
+# Valentina and Tape makes reserve copy of each pattern file before conversion to higher version.
+*(v*).val*
+*(v*).vit*
+*(v*).vst*
+
+# Valentina's backup file
+*.bak
+
+# KDE directory preferences
+.directory
+
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+
+# Lock files used by the Emacs editor.
+# Notice that the "#" character is quoted with a backslash.
+# This prevents it from being interpreted as starting a comment.
+.\#*
+
+# Temporary files used by the vim editor.
+.*.swp
+
+# A hidden files created by the Mac OS X Finder.
+.DS_Store
+._.DS_Store
+
+# Ignore these directories.
+html/
+latex/
+bin/
+moc/
+obj/
+uic/
+rcc/
+man/
+build/
+
+# Ignore Coverity Scan Build Tool
+cov-int/
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+*.ko
+*.elf
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+*.so.*
+
+# Fortran module files
+*.mod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Debug files
+*.dSYM/
+
+# Qt-es
+/.qmake.cache
+/.qmake.stash
+*.pro.user
+*.pro.user.*
+*.qbs.user
+*.moc
+moc_*.cpp
+qrc_*.cpp
+ui_*.h
+Makefile*
+
+# Ignore Qt translation file
+*.qm
+
+# QtCreator
+*.autosave
+
+# Ignore Mercurial .orig files
+*.orig
+
+*.rej
+
+# QtCtreator Qml
+*.qmlproject.user
+*.qmlproject.user.*
+
+# Xcode project
+*.xcodeproj
+
+# OSX specific
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+# Understand IDE file
+*.udb
+
+__pycache__
+
+# Temporary svg cursor files
+/src/app/valentina/share/resources/cursor/svg/light/
+/src/app/valentina/share/resources/cursor/svg/dark/
+
+# Sonar Cloud
+.scannerwork
+bw-output
+
+# Conan
+/activate_run.ps1
+/activate_run.sh
+/conanbuildinfo.txt
+/conaninfo.txt
+/deactivate_run.ps1
+/deactivate_run.sh
+/environment_run.ps1.env
+/environment_run.sh.env
+/graph_info.json

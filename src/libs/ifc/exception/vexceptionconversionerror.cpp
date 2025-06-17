@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -32,14 +32,21 @@
 
 #include "vexception.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VExceptionConversionError exception conversion error
  * @param error string with error
  * @param str string, where happend error
  */
-VExceptionConversionError::VExceptionConversionError(const QString &error, const QString &str)
-    :VException(error), str(str)
+VExceptionConversionError::VExceptionConversionError(const QString &error, const QString &str) V_NOEXCEPT_EXPR(true)
+  : VException(error),
+    str(str)
 {
     Q_ASSERT_X(not str.isEmpty(), Q_FUNC_INFO, "Error converting string is empty");
 }
@@ -49,14 +56,17 @@ VExceptionConversionError::VExceptionConversionError(const QString &error, const
  * @brief VExceptionConversionError copy constructor
  * @param e exception
  */
-VExceptionConversionError::VExceptionConversionError(const VExceptionConversionError &e)
-    :VException(e), str(e.String())
-{}
+VExceptionConversionError::VExceptionConversionError(const VExceptionConversionError &e) V_NOEXCEPT_EXPR(true)
+  : VException(e),
+    str(e.String())
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionConversionError &VExceptionConversionError::operator=(const VExceptionConversionError &e)
+auto VExceptionConversionError::operator=(const VExceptionConversionError &e) V_NOEXCEPT_EXPR(true)
+    -> VExceptionConversionError &
 {
-    if ( &e == this )
+    if (&e == this)
     {
         return *this;
     }
@@ -70,7 +80,7 @@ VExceptionConversionError &VExceptionConversionError::operator=(const VException
  * @brief ErrorMessage return main error message
  * @return main error message
  */
-QString VExceptionConversionError::ErrorMessage() const
+auto VExceptionConversionError::ErrorMessage() const -> QString
 {
-    return QString("ExceptionConversionError: %1 \"%2\"").arg(error, str);
+    return u"ExceptionConversionError: %1 \"%2\""_s.arg(error, str);
 }

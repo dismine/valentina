@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -28,18 +28,16 @@
 
 #include "vistoolrotation.h"
 
-#include <limits.h>
 #include <QGraphicsLineItem>
 #include <QGraphicsPathItem>
 #include <QGuiApplication>
 #include <QLineF>
 #include <QPainterPath>
 #include <QSharedPointer>
-#include <Qt>
 #include <QtAlgorithms>
+#include <climits>
 #include <new>
 
-#include "../vmisc/diagnostic.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vcubicbezier.h"
@@ -50,53 +48,43 @@
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
 #include "../vgeometry/vsplinepath.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vmodifierkey.h"
 #include "../vpatterndb/vcontainer.h"
-#include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/global.h"
 #include "visoperation.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolRotation::VisToolRotation(const VContainer *data, QGraphicsItem *parent)
-    : VisOperation(data, parent),
-      angle(INT_MIN),
-      point(nullptr),
-      angleArc(nullptr),
-      xAxis(nullptr)
+  : VisOperation(data, parent)
 {
-    point = InitPoint(supportColor2, this);
-    angleArc = InitItem<VCurvePathItem>(supportColor2, this);
-    xAxis = InitItem<VScaledLine>(supportColor2, this);
+    SetColorRole(VColorRole::VisSupportColor2);
+
+    m_point = InitPoint(VColorRole::VisSupportColor2, this);
+    m_angleArc = InitItem<VCurvePathItem>(VColorRole::VisSupportColor2, this);
+    m_xAxis = InitItem<VScaledLine>(VColorRole::VisSupportColor2, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolRotation::~VisToolRotation()
-{
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Wswitch-default")
-
 void VisToolRotation::RefreshGeometry()
 {
-    if (objects.isEmpty())
+    if (Objects().isEmpty())
     {
         return;
     }
 
-    QSharedPointer<VPointF> origin = QSharedPointer<VPointF>(new VPointF());
+    auto origin = QSharedPointer<VPointF>(new VPointF());
 
     qreal tempAngle = 0;
 
-    if (object1Id != NULL_ID)
+    if (m_originPointId != NULL_ID)
     {
-        origin = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(point, static_cast<QPointF>(*origin), supportColor2);
+        origin = GetData()->GeometricObject<VPointF>(m_originPointId);
+        DrawPoint(m_point, static_cast<QPointF>(*origin));
 
         QLineF rLine;
-        if (VFuzzyComparePossibleNulls(angle, INT_MIN))
+        if (VFuzzyComparePossibleNulls(m_angle, INT_MIN))
         {
-            rLine = QLineF(static_cast<QPointF>(*origin), Visualization::scenePos);
+            rLine = QLineF(static_cast<QPointF>(*origin), ScenePos());
 
             if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
             {
@@ -108,47 +96,51 @@ void VisToolRotation::RefreshGeometry()
         }
         else
         {
-            rLine = QLineF(static_cast<QPointF>(*origin), Ray(static_cast<QPointF>(*origin), angle));
-            tempAngle = angle;
+            rLine = QLineF(static_cast<QPointF>(*origin), Ray(static_cast<QPointF>(*origin), m_angle));
+            tempAngle = m_angle;
         }
 
-        DrawLine(this, rLine, supportColor2, Qt::DashLine);
-        DrawLine(xAxis, QLineF(static_cast<QPointF>(*origin), Ray(static_cast<QPointF>(*origin), 0)), supportColor2,
-                 Qt::DashLine);
+        DrawLine(this, rLine, Qt::DashLine);
+        DrawLine(m_xAxis, QLineF(static_cast<QPointF>(*origin), Ray(static_cast<QPointF>(*origin), 0)), Qt::DashLine);
 
-        VArc arc(*origin, ScaledRadius(SceneScale(qApp->getCurrentScene()))*2, 0, tempAngle);
-        DrawPath(angleArc, arc.GetPath(), supportColor2, Qt::SolidLine, Qt::RoundCap);
+        VArc const arc(*origin, ScaledRadius(SceneScale(VAbstractValApplication::VApp()->getCurrentScene())) * 2, 0,
+                       tempAngle);
+        DrawPath(m_angleArc, arc.GetPath(), Qt::SolidLine, Qt::RoundCap);
 
-        Visualization::toolTip = tr("Rotating angle = %1°, <b>Shift</b> - sticking angle, "
-                                    "<b>Mouse click</b> - finish creation").arg(tempAngle);
+        SetToolTip(tr("Rotating angle = %1°, <b>%2</b> - sticking angle, "
+                      "<b>Mouse click</b> - finish creation")
+                       .arg(AngleToUser(tempAngle), VModifierKey::Shift()));
     }
 
     int iPoint = -1;
     int iCurve = -1;
-    for (auto id : qAsConst(objects))
+    for (auto id : Objects())
     {
-        const QSharedPointer<VGObject> obj = Visualization::data->GetGObject(id);
+        const QSharedPointer<VGObject> obj = GetData()->GetGObject(id);
 
         // This check helps to find missed objects in the switch
         Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects was handled.");
 
-        switch(static_cast<GOType>(obj->getType()))
+        QT_WARNING_PUSH
+        QT_WARNING_DISABLE_GCC("-Wswitch-default")
+        QT_WARNING_DISABLE_CLANG("-Wswitch-default")
+
+        switch (obj->getType())
         {
             case GOType::Point:
             {
-                const QSharedPointer<VPointF> p = Visualization::data->GeometricObject<VPointF>(id);
+                const QSharedPointer<VPointF> p = GetData()->GeometricObject<VPointF>(id);
 
                 ++iPoint;
-                VScaledEllipse *point = GetPoint(static_cast<quint32>(iPoint), supportColor2);
-                DrawPoint(point, static_cast<QPointF>(*p), supportColor2);
+                VScaledEllipse *point = GetPoint(static_cast<quint32>(iPoint), VColorRole::VisSupportColor2);
+                DrawPoint(point, static_cast<QPointF>(*p));
 
                 ++iPoint;
-                point = GetPoint(static_cast<quint32>(iPoint), supportColor);
+                point = GetPoint(static_cast<quint32>(iPoint), VColorRole::VisSupportColor);
 
-                if (object1Id != NULL_ID)
+                if (m_originPointId != NULL_ID)
                 {
-                    DrawPoint(point, static_cast<QPointF>(p->Rotate(static_cast<QPointF>(*origin), tempAngle)),
-                              supportColor);
+                    DrawPoint(point, static_cast<QPointF>(p->Rotate(static_cast<QPointF>(*origin), tempAngle)));
                 }
                 break;
             }
@@ -187,18 +179,13 @@ void VisToolRotation::RefreshGeometry()
                 Q_UNREACHABLE();
                 break;
         }
+
+        QT_WARNING_POP
     }
 }
-QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolRotation::SetOriginPointId(quint32 value)
-{
-    object1Id = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VisToolRotation::Angle() const
+auto VisToolRotation::Angle() const -> QString
 {
     return QString::number(line().angle());
 }
@@ -206,25 +193,24 @@ QString VisToolRotation::Angle() const
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolRotation::SetAngle(const QString &expression)
 {
-    angle = FindValFromUser(expression, Visualization::data->DataVariables());
+    m_angle = FindValFromUser(expression, GetData()->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <class Item>
-int VisToolRotation::AddCurve(qreal angle, const QPointF &origin, quint32 id, int i)
+template <class Item> auto VisToolRotation::AddCurve(qreal angle, const QPointF &origin, quint32 id, int i) -> int
 {
-    const QSharedPointer<Item> curve = Visualization::data->template GeometricObject<Item>(id);
+    const QSharedPointer<Item> curve = GetData()->template GeometricObject<Item>(id);
 
     ++i;
-    VCurvePathItem *path = GetCurve(static_cast<quint32>(i), supportColor2);
-    DrawPath(path, curve->GetPath(), curve->DirectionArrows(), supportColor2, Qt::SolidLine, Qt::RoundCap);
+    VCurvePathItem *path = GetCurve(static_cast<quint32>(i), VColorRole::VisSupportColor2);
+    DrawPath(path, curve->GetPath(), curve->DirectionArrows(), Qt::SolidLine, Qt::RoundCap);
 
     ++i;
-    path = GetCurve(static_cast<quint32>(i), supportColor);
-    if (object1Id != NULL_ID)
+    path = GetCurve(static_cast<quint32>(i), VColorRole::VisSupportColor);
+    if (m_originPointId != NULL_ID)
     {
         const Item rotated = curve->Rotate(origin, angle);
-        DrawPath(path, rotated.GetPath(), rotated.DirectionArrows(), supportColor, Qt::SolidLine, Qt::RoundCap);
+        DrawPath(path, rotated.GetPath(), rotated.DirectionArrows(), Qt::SolidLine, Qt::RoundCap);
     }
 
     return i;

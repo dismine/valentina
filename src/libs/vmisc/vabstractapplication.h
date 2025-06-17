@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,192 +29,178 @@
 #ifndef VABSTRACTAPPLICATION_H
 #define VABSTRACTAPPLICATION_H
 
-#include <qcompilerdetection.h>
 #include <QApplication>
 #include <QCoreApplication>
-#include <QGraphicsScene>
+#include <QElapsedTimer>
+#include <QFileDialog>
 #include <QLocale>
 #include <QMetaObject>
 #include <QObject>
 #include <QPointer>
 #include <QString>
+#include <QTranslator>
 #include <QtGlobal>
 
-#include "../vmisc/def.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "def.h"
 #include "vcommonsettings.h"
-#include "vlockguard.h"
-#include "vsettings.h"
 
 class QUndoStack;
-class VAbstractApplication;// use in define
-class VAbstractPattern;
-class VMainGraphicsView;
+class VAbstractApplication; // use in define
+class VCommonSettings;
+class VSvgFontDatabase;
+class QFileSystemWatcher;
+class VAbstractShortcutManager;
+class VKnownMeasurementsDatabase;
+class VTranslator;
 
-#if defined(qApp)
-#undef qApp
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+class VTextCodec;
+#else
+class QTextCodec;
+using VTextCodec = QTextCodec;
 #endif
-#define qApp (static_cast<VAbstractApplication*>(QCoreApplication::instance()))
+
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
 
 class VAbstractApplication : public QApplication
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
-    VAbstractApplication(int &argc, char ** argv);
-    virtual ~VAbstractApplication() override;
+    VAbstractApplication(int &argc, char **argv);
+    ~VAbstractApplication() override;
 
-    virtual const VTranslateVars *TrVars()=0;
+    virtual auto TrVars() -> const VTranslateVars * = 0;
 
-    QString          translationsPath(const QString &locale = QString()) const;
+    static auto translationsPath(const QString &locale = QString()) -> QString;
+    static auto QtTranslationsPath(const QString &locale = QString()) -> QString;
 
-    void             LoadTranslation(const QString &locale);
+    static auto ReduceLogContextFilePath(QString path) -> QString;
 
-    Unit             patternUnit() const;
-    const Unit      *patternUnitP() const;
-    void             setPatternUnit(const Unit &patternUnit);
+    void LoadTranslation(QString locale);
 
-    MeasurementsType patternType() const;
-    void             setPatternType(const MeasurementsType &patternType);
+    virtual void OpenSettings() = 0;
+    auto Settings() -> VCommonSettings *;
 
-    QString GetCustomerName() const;
-    void    SetCustomerName(const QString &name);
+    template <typename T> auto LocaleToString(const T &value) -> QString;
 
-    virtual void     OpenSettings()=0;
-    VCommonSettings *Settings();
+    auto getUndoStack() const -> QUndoStack *;
 
-    template <typename T>
-    QString          LocaleToString(const T &value);
+    virtual auto IsAppInGUIMode() const -> bool = 0;
+    virtual auto IsPedantic() const -> bool;
 
-    QGraphicsScene  *getCurrentScene() const;
-    void             setCurrentScene(QGraphicsScene **value);
+    static auto ClearMessage(QString msg) -> QString;
 
-    VMainGraphicsView *getSceneView() const;
-    void               setSceneView(VMainGraphicsView *value);
+    static const QString warningMessageSignature;
+    auto IsWarningMessage(const QString &message) const -> bool;
 
-    double           toPixel(double val) const;
-    double           fromPixel(double pix) const;
+    auto NativeFileDialog(QFileDialog::Options options = QFileDialog::Options()) const -> QFileDialog::Options;
 
-    void             setCurrentDocument(VAbstractPattern *doc);
-    VAbstractPattern *getCurrentDocument()const;
-
-    bool             getOpeningPattern() const;
-    void             setOpeningPattern();
-
-    QWidget         *getMainWindow() const;
-    void             setMainWindow(QWidget *value);
-
-    QUndoStack      *getUndoStack() const;
-
-    virtual bool     IsAppInGUIMode()const =0;
-    virtual bool     IsPedantic() const;
-
-    QString         GetPatternPath() const;
-    void            SetPatternPath(const QString &value);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    auto TextCodecCache(QStringConverter::Encoding encoding) const -> VTextCodec *;
+    void CacheTextCodec(QStringConverter::Encoding encoding, VTextCodec *codec);
+#endif
 
 #if defined(Q_OS_WIN)
     static void WinAttachConsole();
 #endif
 
-    static QString ClearMessage(QString msg);
+    static auto VApp() -> VAbstractApplication *;
 
-    QMap<int, QString> GetUserMaterials() const;
-    void               SetUserMaterials(const QMap<int, QString> &userMaterials);
+    auto SVGFontDatabase() -> VSvgFontDatabase *;
 
-    const Draw &GetDrawMode() const;
-    void        SetDrawMode(const Draw &value);
+    virtual auto KnownMeasurementsDatabase() -> VKnownMeasurementsDatabase *;
+
+    auto AppUptime() const -> qint64;
+
+    auto GetShortcutManager() const -> VAbstractShortcutManager *;
+
+    auto GetPlaceholderTranslator() -> QSharedPointer<VTranslator>;
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays, hicpp-avoid-c-arrays, modernize-avoid-c-arrays)
+    static auto IsOptionSet(int argc, char *argv[], const char *option) -> bool;
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays, hicpp-avoid-c-arrays, modernize-avoid-c-arrays)
+    static void InitHighDpiScaling(int argc, char *argv[]);
+#endif
+
+    static auto LogDirPath() -> QString;
+    static auto CreateLogDir() -> bool;
+    static void ClearOldLogs();
 
 protected:
-    QUndoStack         *undoStack;
-
-    /**
-     * @brief mainWindow pointer to main window. Usefull if need create modal dialog. Without pointer to main window
-     * modality doesn't work.
-     */
-    QWidget            *mainWindow;
+    QUndoStack *undoStack;
 
     /**
      * @brief settings pointer to settings. Help hide constructor creation settings. Make make code more readable.
      */
-    VCommonSettings    *settings;
+    VCommonSettings *settings{nullptr};
 
-    QPointer<QTranslator> qtTranslator;
-    QPointer<QTranslator> qtxmlTranslator;
-    QPointer<QTranslator> qtBaseTranslator;
-    QPointer<QTranslator> appTranslator;
-    QPointer<QTranslator> pmsTranslator;
+    QPointer<QTranslator> qtTranslator{nullptr};
+#if defined(APPIMAGE)
+    QPointer<QTranslator> qtxmlTranslator{nullptr};
+    QPointer<QTranslator> qtBaseTranslator{nullptr};
+#endif // defined(APPIMAGE)
+    QPointer<QTranslator> appTranslator{nullptr};
 
-    virtual void InitTrVars()=0;
+    QElapsedTimer m_uptimeTimer{};
+
+    VAbstractShortcutManager *m_shortcutManager{nullptr};
+
+    virtual void InitTrVars() = 0;
+
+    static void CheckSystemLocale();
+
+protected slots:
+    virtual void AboutToQuit() = 0;
+    void SVGFontsPathChanged(const QString &oldPath, const QString &newPath);
+
+private slots:
+    void RepopulateFontDatabase(const QString &path);
 
 private:
-    Q_DISABLE_COPY(VAbstractApplication)
-    Unit               _patternUnit;
-    MeasurementsType   _patternType;
-    QString            patternFilePath;
+    Q_DISABLE_COPY_MOVE(VAbstractApplication) // NOLINT
 
-    QGraphicsScene     **currentScene;
-    VMainGraphicsView  *sceneView;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    QHash<QStringConverter::Encoding, VTextCodec *> m_codecs{};
+#endif
 
-    VAbstractPattern   *doc;
-    QString            m_customerName;
-
-    QMap<int, QString> m_userMaterials;
-
-    /**
-     * @brief openingPattern true when we opening pattern. If something will be wrong in formula this help understand if
-     * we can allow user use Undo option.
-     */
-    bool               openingPattern;
-
-    /** @brief mode keep current draw mode. */
-    Draw               mode;
+    VSvgFontDatabase *m_svgFontDatabase{nullptr};
+    QFileSystemWatcher *m_svgFontDatabaseWatcher{nullptr};
 
     void ClearTranslation();
+
+    void RestartSVGFontDatabaseWatcher();
 };
 
-//---------------------------------------------------------------------------------------------------------------------
-inline QString VAbstractApplication::GetCustomerName() const
-{
-    return m_customerName;
-}
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
-inline void VAbstractApplication::SetCustomerName(const QString &name)
-{
-    m_customerName = name;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline QString VAbstractApplication::GetPatternPath() const
-{
-    return patternFilePath;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline void VAbstractApplication::SetPatternPath(const QString &value)
-{
-    patternFilePath = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline QMap<int, QString> VAbstractApplication::GetUserMaterials() const
-{
-    return m_userMaterials;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline void VAbstractApplication::SetUserMaterials(const QMap<int, QString> &userMaterials)
-{
-    m_userMaterials = userMaterials;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-inline QString VAbstractApplication::LocaleToString(const T &value)
+template <typename T> inline auto VAbstractApplication::LocaleToString(const T &value) -> QString
 {
     QLocale loc;
-    qApp->Settings()->GetOsSeparator() ? loc = QLocale() : loc = QLocale::c();
+    VAbstractApplication::VApp()->Settings()->GetOsSeparator() ? loc = QLocale() : loc = QLocale::c();
     return loc.toString(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VAbstractApplication::VApp() -> VAbstractApplication *
+{
+    return qobject_cast<VAbstractApplication *>(QCoreApplication::instance());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getSettings hide settings constructor.
+ * @return pointer to class for acssesing to settings in ini file.
+ */
+inline auto VAbstractApplication::Settings() -> VCommonSettings *
+{
+    SCASSERT(settings != nullptr)
+    return settings;
 }
 
 #endif // VABSTRACTAPPLICATION_H

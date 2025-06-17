@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -27,10 +27,10 @@
  *************************************************************************/
 
 #include "dialogabouttape.h"
-#include "ui_dialogabouttape.h"
-#include "../version.h"
-#include "../vmisc/def.h"
 #include "../fervor/fvupdater.h"
+#include "../vmisc/def.h"
+#include "../vmisc/projectversion.h"
+#include "ui_dialogabouttape.h"
 
 #include <QDate>
 #include <QDesktopServices>
@@ -38,32 +38,36 @@
 #include <QShowEvent>
 #include <QUrl>
 #include <QtDebug>
+#include <vcsRepoState.h>
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogAboutTape::DialogAboutTape(QWidget *parent)
-    :QDialog(parent),
-      ui(new Ui::DialogAboutTape),
-      isInitialized(false)
+  : QDialog(parent),
+    ui(std::make_unique<Ui::DialogAboutTape>()),
+    m_isInitialized(false)
 {
     ui->setupUi(this);
 
-    //mApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+    // mApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
     RetranslateUi();
-    connect(ui->pushButton_Web_Site, &QPushButton::clicked, this, [this]()
-    {
-        if ( QDesktopServices::openUrl(QUrl(VER_COMPANYDOMAIN_STR)) == false)
-        {
-            qWarning() << tr("Cannot open your default browser");
-        }
-    });
+    connect(ui->pushButton_Web_Site, &QPushButton::clicked, this,
+            []()
+            {
+                if (not QDesktopServices::openUrl(
+                        QUrl(QStringLiteral("https://%1").arg(QStringLiteral(VER_COMPANYDOMAIN_STR)))))
+                {
+                    qWarning() << tr("Cannot open your default browser");
+                }
+            });
     connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &DialogAboutTape::close);
-    connect(ui->pushButtonCheckUpdate, &QPushButton::clicked, []()
-    {
-        // Set feed URL before doing anything else
-        FvUpdater::sharedUpdater()->SetFeedURL(FvUpdater::CurrentFeedURL());
-        FvUpdater::sharedUpdater()->CheckForUpdatesNotSilent();
-    });
+    connect(ui->pushButtonCheckUpdate, &QPushButton::clicked,
+            []()
+            {
+                // Set feed URL before doing anything else
+                FvUpdater::sharedUpdater()->SetFeedURL(FvUpdater::CurrentFeedURL());
+                FvUpdater::sharedUpdater()->CheckForUpdatesNotSilent();
+            });
 
     // By default on Windows font point size 8 points we need 11 like on Linux.
     FontPointSize(ui->label_Legal_Stuff, 11);
@@ -72,10 +76,7 @@ DialogAboutTape::DialogAboutTape(QWidget *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogAboutTape::~DialogAboutTape()
-{
-    delete ui;
-}
+DialogAboutTape::~DialogAboutTape() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogAboutTape::changeEvent(QEvent *event)
@@ -94,13 +95,13 @@ void DialogAboutTape::changeEvent(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogAboutTape::showEvent(QShowEvent *event)
 {
-    QDialog::showEvent( event );
-    if ( event->spontaneous() )
+    QDialog::showEvent(event);
+    if (event->spontaneous())
     {
         return;
     }
 
-    if (isInitialized)
+    if (m_isInitialized)
     {
         return;
     }
@@ -109,7 +110,7 @@ void DialogAboutTape::showEvent(QShowEvent *event)
     setMaximumSize(size());
     setMinimumSize(size());
 
-    isInitialized = true;//first show windows are held
+    m_isInitialized = true; // first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -118,24 +119,24 @@ void DialogAboutTape::FontPointSize(QWidget *w, int pointSize)
     SCASSERT(w != nullptr)
 
     QFont font = w->font();
-    font.setPointSize(pointSize);
+    font.setPointSize(qMax(pointSize, 1));
     w->setFont(font);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogAboutTape::RetranslateUi()
 {
-    ui->label_Tape_Version->setText(QString("Tape %1").arg(APP_VERSION_STR));
-    ui->labelBuildRevision->setText(tr("Build revision: %1").arg(BUILD_REVISION));
+    ui->label_Tape_Version->setText(QStringLiteral("Tape %1").arg(AppVersionStr()));
+    ui->labelBuildRevision->setText(tr("Build revision: %1").arg(QStringLiteral(VCS_REPO_STATE_REVISION)));
     ui->label_QT_Version->setText(buildCompatibilityString());
 
-    const QDate date = QLocale::c().toDate(QString(__DATE__).simplified(), QLatin1String("MMM d yyyy"));
-    ui->label_Tape_Built->setText(tr("Built on %1 at %2").arg(date.toString(), __TIME__));
+    const QDate date = QLocale::c().toDate(QStringLiteral(__DATE__).simplified(), QStringLiteral("MMM d yyyy"));
+    ui->label_Tape_Built->setText(tr("Built on %1 at %2").arg(date.toString(), QStringLiteral(__TIME__)));
 
     ui->label_Legal_Stuff->setText(QApplication::translate("InternalStrings",
                                                            "The program is provided AS IS with NO WARRANTY OF ANY "
                                                            "KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY "
                                                            "AND FITNESS FOR A PARTICULAR PURPOSE."));
 
-    ui->pushButton_Web_Site->setText(tr("Web site : %1").arg(VER_COMPANYDOMAIN_STR));
+    ui->pushButton_Web_Site->setText(tr("Web site : %1").arg(QStringLiteral(VER_COMPANYDOMAIN_STR)));
 }

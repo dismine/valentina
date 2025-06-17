@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -30,7 +30,13 @@
 
 #include "../vmisc/def.h"
 
-Q_LOGGING_CATEGORY(vTool, "v.tool")
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
+QT_WARNING_DISABLE_INTEL(1418)
+
+Q_LOGGING_CATEGORY(vTool, "v.tool") // NOLINT
+
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -39,7 +45,7 @@ Q_LOGGING_CATEGORY(vTool, "v.tool")
  * @param parent parent object
  */
 VDataTool::VDataTool(VContainer *data, QObject *parent)
-    : QObject(parent), data(*data), _referens(1)
+    : QObject(parent), data(*data), _referens(0)
 {
     SCASSERT(data != nullptr)
 }

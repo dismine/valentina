@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -35,9 +35,11 @@
 #include <QTableWidget>
 #include <QtGlobal>
 
+#include "../vmisc/defglobal.h"
+
 class VTableSearch: public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VTableSearch(QTableWidget *table, QObject *parent = nullptr);
 
@@ -45,21 +47,48 @@ public:
     void FindPrevious();
     void FindNext();
     void RemoveRow(int row);
-    void AddRow(int row);
+    void AddRow(vsizetype row);
     void RefreshList(const QString &term);
+
+    void SetMatchCase(bool value);
+    auto IsMatchCase() const -> bool;
+
+    void SetMatchWord(bool value);
+    auto IsMatchWord() const -> bool;
+
+    void SetMatchRegexp(bool value);
+    auto IsMatchRegexp() const -> bool;
+
+    void SetUseUnicodePreperties(bool value);
+    auto IsUseUnicodePreperties() const -> bool;
+
+    auto MatchIndex() const -> vsizetype;
+    auto MatchCount() const -> vsizetype;
+
+    auto SearchPlaceholder() const -> QString;
+
+    static const int MaxHistoryRecords;
 
 signals:
     void HasResult(bool state);
 
 private:
-    Q_DISABLE_COPY(VTableSearch)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VTableSearch) // NOLINT
 
     QTableWidget *table;
-    int           searchIndex;
-    QList<QTableWidgetItem *> searchList;
+    vsizetype searchIndex{-1};
+    QList<QTableWidgetItem *> searchList{};
+
+    bool m_matchCase{false};
+    bool m_matchWord{false};
+    bool m_matchRegexp{false};
+    bool m_useUnicodePreperties{false};
 
     void Clear();
-    void ShowNext(int newIndex);
+    void ShowNext(vsizetype newIndex);
+    auto FindTableItems(QString term) -> QList<QTableWidgetItem *>;
+    auto FindCurrentMatchIndex() const -> int;
 };
 
 #endif // VTABLESEARCH_H

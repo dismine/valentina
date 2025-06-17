@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -28,16 +28,23 @@
 
 #include "tst_vcommandline.h"
 #include "../vmisc/commandoptions.h"
-#include "../vmisc/logging.h"
 
 #include <QtTest>
 
-#ifdef Q_CC_MSVC
-    #include <ciso646>
-#endif /* Q_CC_MSVC */
+// Header <ciso646> is removed in C++20.
+#if defined(Q_CC_MSVC) && __cplusplus <= 201703L
+#include <ciso646> // and, not, or
+#endif
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 TST_VCommandLine::TST_VCommandLine(QObject *parent)
-    :QObject(parent)
+  : QObject(parent)
 {
 }
 
@@ -48,9 +55,10 @@ void TST_VCommandLine::UniqueKeys()
     const QStringList options = AllKeys();
     QSet<QString> unique;
 
-    for (auto &str : options)
+    for (const auto &str : options)
     {
-        const QString message = QString("Options '%1' is not unique!").arg(str);
+        // cppcheck-suppress unreadVariable
+        const QString message = u"Options '%1' is not unique!"_s.arg(str);
         QVERIFY2(not unique.contains(str), qUtf8Printable(message));
         unique.insert(str);
     }

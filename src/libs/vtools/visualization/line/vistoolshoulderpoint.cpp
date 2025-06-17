@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -32,82 +32,98 @@
 #include <QLineF>
 #include <QPointF>
 #include <QSharedPointer>
-#include <Qt>
 #include <new>
 
 #include "../../tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolshoulderpoint.h"
-#include "../ifc/ifcdef.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
-#include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
+#include "../vmisc/vmodifierkey.h"
+#include "../vpatterndb/vcontainer.h"
 #include "visline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolShoulderPoint::VisToolShoulderPoint(const VContainer *data, QGraphicsItem *parent)
-    :VisLine(data, parent), lineP1Id(NULL_ID), lineP2Id(NULL_ID), point(nullptr), line1P1(nullptr), line1P2(nullptr),
-      line1(nullptr), line2P2(nullptr), line2(nullptr), line3(nullptr), length(0)
+  : VisLine(data, parent)
 {
-    line1P1 = InitPoint(supportColor, this);
-    line1P2 = InitPoint(supportColor, this); //-V656
-    line1 = InitItem<VScaledLine>(supportColor, this);
+    m_line1P1 = InitPoint(VColorRole::VisSupportColor, this);
+    m_line1P2 = InitPoint(VColorRole::VisSupportColor, this); //-V656
+    m_line1 = InitItem<VScaledLine>(VColorRole::VisSupportColor, this);
 
-    line2P2 = InitPoint(supportColor, this);
-    line2 = InitItem<VScaledLine>(supportColor, this);
-    line3 = InitItem<VScaledLine>(supportColor, this); //-V656
+    m_line2P2 = InitPoint(VColorRole::VisSupportColor, this);
+    m_line2 = InitItem<VScaledLine>(VColorRole::VisSupportColor, this);
+    m_line3 = InitItem<VScaledLine>(VColorRole::VisSupportColor, this); //-V656
 
-    point = InitPoint(mainColor, this);
+    m_point = InitPoint(VColorRole::VisMainColor, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolShoulderPoint::RefreshGeometry()
 {
-    if (object1Id > NULL_ID)
+    if (m_point3Id > NULL_ID)
     {
-        const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(line1P1, static_cast<QPointF>(*first), supportColor);
+        const QSharedPointer<VPointF> first = GetData()->GeometricObject<VPointF>(m_point3Id);
+        DrawPoint(m_line1P1, static_cast<QPointF>(*first));
 
-        if (lineP1Id <= NULL_ID)
+        if (m_lineP1Id <= NULL_ID)
         {
-            DrawLine(line1, QLineF(static_cast<QPointF>(*first), Visualization::scenePos), supportColor);
+            DrawLine(m_line1, QLineF(static_cast<QPointF>(*first), ScenePos()));
         }
         else
         {
-            const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(lineP1Id);
-            DrawPoint(line1P2, static_cast<QPointF>(*second), supportColor);
+            const QSharedPointer<VPointF> second = GetData()->GeometricObject<VPointF>(m_lineP1Id);
+            DrawPoint(m_line1P2, static_cast<QPointF>(*second));
 
-            DrawLine(line1, QLineF(static_cast<QPointF>(*first), static_cast<QPointF>(*second)), supportColor);
+            DrawLine(m_line1, QLineF(static_cast<QPointF>(*first), static_cast<QPointF>(*second)));
 
-            if (lineP2Id <= NULL_ID)
+            if (m_lineP2Id <= NULL_ID)
             {
-                DrawLine(line2, QLineF(static_cast<QPointF>(*second), Visualization::scenePos), supportColor);
+                DrawLine(m_line2, QLineF(static_cast<QPointF>(*second), ScenePos()));
             }
             else
             {
-                const QSharedPointer<VPointF> third = Visualization::data->GeometricObject<VPointF>(lineP2Id);
-                DrawPoint(line2P2, static_cast<QPointF>(*third), supportColor);
+                const QSharedPointer<VPointF> third = GetData()->GeometricObject<VPointF>(m_lineP2Id);
+                DrawPoint(m_line2P2, static_cast<QPointF>(*third));
 
-                DrawLine(line2, QLineF(static_cast<QPointF>(*second), static_cast<QPointF>(*third)), supportColor);
+                DrawLine(m_line2, QLineF(static_cast<QPointF>(*second), static_cast<QPointF>(*third)));
 
-                if (not qFuzzyIsNull(length))
+                if (not qFuzzyIsNull(m_length))
                 {
-                    QPointF fPoint = VToolShoulderPoint::FindPoint(static_cast<QPointF>(*second),
-                                                                   static_cast<QPointF>(*third),
-                                                                   static_cast<QPointF>(*first), length);
-                    QLineF mainLine = QLineF(static_cast<QPointF>(*second), fPoint);
-                    DrawLine(this, mainLine, mainColor, lineStyle);
+                    QPointF const fPoint =
+                        VToolShoulderPoint::FindPoint(static_cast<QPointF>(*second), static_cast<QPointF>(*third),
+                                                      static_cast<QPointF>(*first), m_length);
+                    auto const mainLine = QLineF(static_cast<QPointF>(*second), fPoint);
+                    DrawLine(this, mainLine, LineStyle());
 
-                    DrawPoint(point, mainLine.p2(), mainColor);
-                    DrawLine(line3, QLineF(static_cast<QPointF>(*first), mainLine.p2()), supportColor, Qt::DashLine);
+                    DrawPoint(m_point, mainLine.p2());
+                    DrawLine(m_line3, QLineF(static_cast<QPointF>(*first), mainLine.p2()), Qt::DashLine);
+                }
+                else if (GetMode() == Mode::Creation)
+                {
+                    QLineF const cursorLine(static_cast<QPointF>(*first), ScenePos());
+
+                    qreal const len = cursorLine.length();
+                    QPointF const fPoint = VToolShoulderPoint::FindPoint(
+                        static_cast<QPointF>(*second), static_cast<QPointF>(*third), static_cast<QPointF>(*first), len);
+                    auto const mainLine = QLineF(static_cast<QPointF>(*second), fPoint);
+                    DrawLine(this, mainLine, LineStyle());
+
+                    DrawPoint(m_point, mainLine.p2());
+                    DrawLine(m_line3, QLineF(static_cast<QPointF>(*first), mainLine.p2()), Qt::DashLine);
+
+                    const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
+                    SetToolTip(tr("Length = %1%2; "
+                                  "<b>Mouse click</b> - finish selecting the length, "
+                                  "<b>%3</b> - skip")
+                                   .arg(LengthToUser(len), prefix, VModifierKey::EnterKey()));
                 }
                 else
                 {
-                    qreal angle = QLineF(static_cast<QPointF>(*second), static_cast<QPointF>(*third)).angle();
-                    QPointF endRay = Ray(static_cast<QPointF>(*second), angle);
-                    QLineF mainLine = VGObject::BuildLine(static_cast<QPointF>(*second),
-                                                          QLineF(static_cast<QPointF>(*second), endRay).length(),
-                                                          angle);
-                    DrawLine(this, mainLine, mainColor, lineStyle);
+                    qreal const angle = QLineF(static_cast<QPointF>(*second), static_cast<QPointF>(*third)).angle();
+                    QPointF const endRay = Ray(static_cast<QPointF>(*second), angle);
+                    QLineF const mainLine = VGObject::BuildLine(
+                        static_cast<QPointF>(*second), QLineF(static_cast<QPointF>(*second), endRay).length(), angle);
+                    DrawLine(this, mainLine, LineStyle());
                 }
             }
         }
@@ -115,19 +131,14 @@ void VisToolShoulderPoint::RefreshGeometry()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolShoulderPoint::setLineP1Id(const quint32 &value)
+void VisToolShoulderPoint::VisualMode(quint32 id)
 {
-    lineP1Id = value;
+    m_point3Id = id;
+    StartVisualMode();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolShoulderPoint::setLineP2Id(const quint32 &value)
+void VisToolShoulderPoint::SetLength(const QString &expression)
 {
-    lineP2Id = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolShoulderPoint::setLength(const QString &expression)
-{
-    length = FindLengthFromUser(expression, Visualization::data->DataVariables());
+    m_length = FindLengthFromUser(expression, GetData()->DataVariables());
 }

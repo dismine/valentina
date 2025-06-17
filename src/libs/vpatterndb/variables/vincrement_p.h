@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -31,69 +31,46 @@
 
 #include <QSharedData>
 
-#include "../ifc/ifcdef.h"
 #include "../vcontainer.h"
-#include "../vmisc/diagnostic.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
-class VIncrementData : public QSharedData
+class VIncrementData final : public QSharedData
 {
 public:
-
-    VIncrementData()
-        : index(NULL_ID),
-          formula(QString()),
-          formulaOk(false),
-          previewCalculation(false),
-          data()
-    {}
-
-    VIncrementData(VContainer *data, quint32 index, const QString &formula, bool ok)
-        : index(index),
-          formula(formula),
-          formulaOk(ok),
-          previewCalculation(false),
-          data(QSharedPointer<VContainer>(new VContainer(*data)))
-    {
-        // When we create an increment in the dialog it will get neccesary data. Such data must be removed because will
-        // confuse a user. Increment should not know nothing about internal variables.
-        Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 8, "Check that you used all types");
-        this->data->ClearVariables(QVector<VarType>({VarType::LineAngle,
-                                                     VarType::LineLength,
-                                                     VarType::CurveLength,
-                                                     VarType::CurveCLength,
-                                                     VarType::ArcRadius,
-                                                     VarType::CurveAngle}));
-    }
-
-    VIncrementData(const VIncrementData &incr)
-        : QSharedData(incr),
-          index(incr.index),
-          formula(incr.formula),
-          formulaOk(incr.formulaOk),
-          previewCalculation(incr.previewCalculation),
-          data(incr.data)
-    {}
-
-    virtual  ~VIncrementData();
+    VIncrementData() = default;
+    VIncrementData(VContainer *data, IncrementType incrType);
+    VIncrementData(const VIncrementData &incr) = default;
+    ~VIncrementData() = default;
 
     /** @brief id each increment have unique identificator */
-    quint32 index;
-    QString formula;
-    bool    formulaOk;
-    bool    previewCalculation;
-    QSharedPointer<VContainer> data;
+    quint32 index{0};                                 // NOLINT(misc-non-private-member-variables-in-classes)
+    QString formula{};                                // NOLINT(misc-non-private-member-variables-in-classes)
+    bool formulaOk{false};                            // NOLINT(misc-non-private-member-variables-in-classes)
+    bool previewCalculation{false};                   // NOLINT(misc-non-private-member-variables-in-classes)
+    QSharedPointer<VContainer> data;                  // NOLINT(misc-non-private-member-variables-in-classes)
+    IncrementType incrType{IncrementType::Increment}; // NOLINT(misc-non-private-member-variables-in-classes)
+    bool specialUnits{false};                         // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
-    VIncrementData &operator=(const VIncrementData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN_MOVE(VIncrementData) // NOLINT
 };
 
-VIncrementData::~VIncrementData()
-{}
-
 QT_WARNING_POP
+
+//---------------------------------------------------------------------------------------------------------------------
+inline VIncrementData::VIncrementData(VContainer *data, IncrementType incrType)
+  : data(QSharedPointer<VContainer>(new VContainer(*data))),
+    incrType(incrType)
+{
+    // When we create an increment in the dialog it will get neccesary data. Such data must be removed because will
+    // confuse a user. Increment should not know nothing about internal variables.
+    Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 12, "Check that you used all types");
+    this->data->ClearVariables(QVector<VarType>{
+        VarType::LineAngle, VarType::LineLength, VarType::CurveLength, VarType::CurveCLength, VarType::ArcRadius,
+        VarType::CurveAngle, VarType::IncrementSeparator, VarType::PieceExternalArea, VarType::PieceSeamLineArea});
+}
 
 #endif // VINCREMENT_P_H

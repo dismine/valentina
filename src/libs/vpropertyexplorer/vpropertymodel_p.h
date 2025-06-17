@@ -47,17 +47,16 @@ public:
 
     //! Constructor
     VPropertyModelPrivate()
-        : Properties(nullptr), HeadlineProperty(QString()), HeadlineValue(QString())
-    {
+        : Properties(nullptr),
         //: The text that appears in the first column header
-        HeadlineProperty = QObject::tr("Property");
-
+        HeadlineProperty(QObject::tr("Property")),
         //: The text that appears in the second column header
-        HeadlineValue = QObject::tr("Value");
-    }
+        HeadlineValue(QObject::tr("Value"))
+    {}
 
 private:
-    Q_DISABLE_COPY(VPropertyModelPrivate)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VPropertyModelPrivate) // NOLINT
 };
 
 }

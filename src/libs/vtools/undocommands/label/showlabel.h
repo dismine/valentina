@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -35,6 +35,7 @@ class QGraphicsScene;
 
 class ShowLabel : public VUndoCommand
 {
+    Q_OBJECT // NOLINT
 public:
     ShowLabel(VAbstractPattern *doc, quint32 id, bool visible, QUndoCommand *parent = nullptr);
     virtual ~ShowLabel()=default;
@@ -42,7 +43,8 @@ public:
     virtual void undo() override;
     virtual void redo() override;
 private:
-    Q_DISABLE_COPY(ShowLabel)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(ShowLabel) // NOLINT
     bool m_visible;
     bool m_oldVisible;
     //Need for resizing scene rect

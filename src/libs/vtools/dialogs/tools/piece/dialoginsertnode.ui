@@ -6,37 +6,26 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>244</width>
-    <height>103</height>
+    <width>411</width>
+    <height>399</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Insert node</string>
+   <string>Insert nodes</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../../../vmisc/share/resources/icon.qrc">
+   <iconset resource="../../../../vmisc/share/resources/icon.qrc">
     <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QListWidget" name="listWidget"/>
+   </item>
    <item>
     <layout class="QFormLayout" name="formLayout">
      <property name="fieldGrowthPolicy">
       <enum>QFormLayout::ExpandingFieldsGrow</enum>
      </property>
-     <item row="0" column="0">
-      <widget class="QLabel" name="labelItem">
-       <property name="text">
-        <string>Item:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLabel" name="labelItemName">
-       <property name="text">
-        <string notr="true">item name</string>
-       </property>
-      </widget>
-     </item>
      <item row="1" column="0">
       <widget class="QLabel" name="labelPiece">
        <property name="text">
@@ -46,6 +35,23 @@
      </item>
      <item row="1" column="1">
       <widget class="QComboBox" name="comboBoxPiece"/>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="labelNumber">
+       <property name="text">
+        <string>Number:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QSpinBox" name="spinBoxNodeNumber">
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>50</number>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -62,7 +68,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../../../vmisc/share/resources/icon.qrc"/>
+  <include location="../../../../vmisc/share/resources/icon.qrc"/>
  </resources>
  <connections>
   <connection>

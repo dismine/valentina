@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -30,14 +30,13 @@
 
 #include <QDomElement>
 
-#include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/ifcdef.h"
-#include "../vmisc/logging.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../tools/vtoolseamallowance.h"
 #include "../vmisc/def.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vwidgets/vmaingraphicsview.h"
 #include "vundocommand.h"
-#include "../tools/vtoolseamallowance.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 MovePiece::MovePiece(VAbstractPattern *doc, const double &x, const double &y, const quint32 &id,
@@ -53,11 +52,11 @@ MovePiece::MovePiece(VAbstractPattern *doc, const double &x, const double &y, co
     nodeId = id;
 
     SCASSERT(scene != nullptr)
-    QDomElement domElement = doc->elementById(id, VAbstractPattern::TagDetail);
+    QDomElement const domElement = doc->FindElementById(id, VAbstractPattern::TagDetail);
     if (domElement.isElement())
     {
-        m_oldX = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMx, "0.0"));
-        m_oldY = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMy, "0.0"));
+        m_oldX = VAbstractValApplication::VApp()->toPixel(VDomDocument::GetParametrDouble(domElement, AttrMx, "0.0"));
+        m_oldY = VAbstractValApplication::VApp()->toPixel(VDomDocument::GetParametrDouble(domElement, AttrMy, "0.0"));
     }
     else
     {
@@ -81,9 +80,9 @@ void MovePiece::redo()
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-bool MovePiece::mergeWith(const QUndoCommand *command)
+auto MovePiece::mergeWith(const QUndoCommand *command) -> bool
 {
-    const MovePiece *moveCommand = static_cast<const MovePiece *>(command);
+    const auto *moveCommand = static_cast<const MovePiece *>(command);
     SCASSERT(moveCommand != nullptr)
     const quint32 id = moveCommand->getDetId();
 
@@ -98,7 +97,7 @@ bool MovePiece::mergeWith(const QUndoCommand *command)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int MovePiece::id() const
+auto MovePiece::id() const -> int
 {
     return static_cast<int>(UndoCommand::MovePiece);
 }
@@ -108,17 +107,17 @@ void MovePiece::Do(qreal x, qreal y)
 {
     qCDebug(vUndo, "Do.");
 
-    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagDetail);
+    QDomElement domElement = doc->FindElementById(nodeId, VAbstractPattern::TagDetail);
     if (domElement.isElement())
     {
         SaveCoordinates(domElement, x, y);
 
-        VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId));
-        if (tool)
+        auto *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId));
+        if (tool != nullptr)
         {
             tool->Move(x, y);
         }
-        VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView(), tool);
+        VMainGraphicsView::NewSceneRect(m_scene, VAbstractValApplication::VApp()->getSceneView(), tool);
     }
     else
     {
@@ -129,6 +128,6 @@ void MovePiece::Do(qreal x, qreal y)
 //---------------------------------------------------------------------------------------------------------------------
 void MovePiece::SaveCoordinates(QDomElement &domElement, double x, double y)
 {
-    doc->SetAttribute(domElement, AttrMx, QString().setNum(qApp->fromPixel(x)));
-    doc->SetAttribute(domElement, AttrMy, QString().setNum(qApp->fromPixel(y)));
+    doc->SetAttribute(domElement, AttrMx, QString().setNum(VAbstractValApplication::VApp()->fromPixel(x)));
+    doc->SetAttribute(domElement, AttrMy, QString().setNum(VAbstractValApplication::VApp()->fromPixel(y)));
 }

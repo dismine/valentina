@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>scenestyle/light/style.json</file>
+        <file>scenestyle/dark/style.json</file>
+    </qresource>
+</RCC>

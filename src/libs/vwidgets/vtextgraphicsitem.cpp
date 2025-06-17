@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include <QColor>
+#include <QDebug>
 #include <QFlags>
 #include <QFont>
 #include <QGraphicsItem>
@@ -36,23 +37,38 @@
 #include <QPen>
 #include <QPoint>
 #include <QStyleOptionGraphicsItem>
-#include <Qt>
-#include <QDebug>
+#include <QtMath>
+#include <array>
 
+#include "../ifc/exception/vexception.h"
+#include "../vformat/vsinglelineoutlinechar.h"
+#include "../vmisc/compatibility.h"
 #include "../vmisc/def.h"
-#include "../vmisc/vmath.h"
+#include "../vmisc/literals.h"
+#include "../vmisc/svgfont/svgdef.h"
+#include "../vmisc/svgfont/vsvgfont.h"
+#include "../vmisc/svgfont/vsvgfontdatabase.h"
+#include "../vmisc/vabstractvalapplication.h"
+#include "../vwidgets/global.h"
+#include "theme/vscenestylesheet.h"
 #include "vtextgraphicsitem.h"
 
-const qreal resizeSquare = (3./*mm*/ / 25.4) * PrintDPI;
-const qreal rotateCircle = (2./*mm*/ / 25.4) * PrintDPI;
-#define ROTATE_RECT                 60
-#define ROTATE_ARC                  50
-const qreal minW = (4./*mm*/ / 25.4) * PrintDPI + resizeSquare;
-const qreal minH = (4./*mm*/ / 25.4) * PrintDPI + resizeSquare;
-#define ACTIVE_Z                    10
+#if QT_VERSION < QT_VERSION_CHECK(6, 9, 0)
+#include "../vmisc/backport/qpainterstateguard.h"
+#else
+#include <QPainterStateGuard>
+#endif
 
 namespace
 {
+constexpr qreal resizeSquare = MmToPixel(3.);
+constexpr qreal rotateCircle = MmToPixel(2.);
+constexpr int rotateRect = 60;
+constexpr int rotateArc = 50;
+constexpr qreal minW = MmToPixel(4.) + resizeSquare;
+constexpr qreal minH = MmToPixel(4.) + resizeSquare;
+constexpr int activeZ = 10;
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief GetBoundingRect calculates the bounding box around rectBB rectangle, rotated around its center by dRot degrees
@@ -60,22 +76,22 @@ namespace
  * @param dRot rectangle rotation
  * @return bounding box around rectBB rotated by dRot
  */
-QRectF GetBoundingRect(QRectF rectBB, qreal dRot)
+auto GetBoundingRect(const QRectF &rectBB, qreal dRot) -> QRectF
 {
-    QPointF apt[4] = { rectBB.topLeft(), rectBB.topRight(), rectBB.bottomLeft(), rectBB.bottomRight() };
-    QPointF ptCenter = rectBB.center();
+    std::array<QPointF, 4> apt = {rectBB.topLeft(), rectBB.topRight(), rectBB.bottomLeft(), rectBB.bottomRight()};
+    QPointF const ptCenter = rectBB.center();
 
     qreal dX1 = 0;
     qreal dX2 = 0;
     qreal dY1 = 0;
     qreal dY2 = 0;
 
-    double dAng = qDegreesToRadians(dRot);
-    for (int i = 0; i < 4; ++i)
+    double const dAng = qDegreesToRadians(dRot);
+    for (std::size_t i = 0; i < 4; ++i)
     {
-        QPointF pt = apt[i] - ptCenter;
-        qreal dX = pt.x()*cos(dAng) + pt.y()*sin(dAng);
-        qreal dY = -pt.x()*sin(dAng) + pt.y()*cos(dAng);
+        QPointF const pt = apt.at(i) - ptCenter;
+        qreal const dX = pt.x() * cos(dAng) + pt.y() * sin(dAng);
+        qreal const dY = -pt.x() * sin(dAng) + pt.y() * cos(dAng);
 
         if (i == 0)
         {
@@ -108,22 +124,127 @@ QRectF GetBoundingRect(QRectF rectBB, qreal dRot)
     rect.setHeight(dY2 - dY1);
     return rect;
 }
-}//static functions
+
+//---------------------------------------------------------------------------------------------------------------------
+auto InitializePainter(QPainter *painter, bool textAsPaths, const QRectF &boundingRect) -> qreal
+{
+    qreal iY = 0;
+    qreal const penWidth = VAbstractApplication::VApp()->Settings()->WidthHairLine();
+
+    if (textAsPaths)
+    {
+        QPen pen = painter->pen();
+        pen.setCapStyle(Qt::RoundCap);
+        pen.setJoinStyle(Qt::RoundJoin);
+        pen.setWidthF(penWidth);
+        painter->setPen(pen);
+
+        iY += penWidth * 2;
+    }
+
+    painter->setClipRect(boundingRect);
+    return iY;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto CalculateNextStep(qreal iY, const QFontMetrics &fm, bool textAsPaths) -> qreal
+{
+    qreal penWidth = textAsPaths ? VAbstractApplication::VApp()->Settings()->WidthHairLine() : 0;
+    return iY + fm.height() + penWidth * 2 + MmToPixel(1.5);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void ConstructPath(const QString &qsText,
+                   const VSingleLineOutlineChar &corrector,
+                   const QFontMetrics &fm,
+                   QPainterPath &path)
+{
+    int w = 0;
+    const VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    const qreal penWidth = settings->WidthHairLine();
+    for (auto c : qsText)
+    {
+        path.addPath(corrector.DrawChar(w, static_cast<qreal>(fm.ascent()), c));
+        w += fm.horizontalAdvance(c);
+        if (settings->GetSingleStrokeOutlineFont())
+        {
+            w += qRound(penWidth / 2.0);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto CalculateTextAlignment(const TextLine &tl,
+                            const QString &qsText,
+                            const QFontMetrics &fm,
+                            const QRectF &boundingRect) -> qreal
+{
+    if (tl.m_eAlign == 0 || (tl.m_eAlign & Qt::AlignLeft) > 0)
+    {
+        return 0;
+    }
+
+    if ((tl.m_eAlign & Qt::AlignHCenter) > 0)
+    {
+        return (boundingRect.width() - fm.horizontalAdvance(qsText)) / 2;
+    }
+
+    if ((tl.m_eAlign & Qt::AlignRight) > 0)
+    {
+        return boundingRect.width() - fm.horizontalAdvance(qsText);
+    }
+    return 0;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DrawTextAsPaths(const TextLine &tl,
+                     const QFont &fnt,
+                     const QFontMetrics &fm,
+                     const QRectF &boundingRect,
+                     qreal iY,
+                     QPainter *painter)
+{
+    const qreal dX = CalculateTextAlignment(tl, tl.m_qsText, fm, boundingRect);
+
+    VSingleLineOutlineChar const corrector(fnt);
+    if (!corrector.IsPopulated())
+    {
+        corrector.LoadCorrections(VAbstractApplication::VApp()->Settings()->GetPathFontCorrections());
+    }
+
+    QPainterPath path;
+    ConstructPath(tl.m_qsText, corrector, fm, path);
+
+    QTransform matrix;
+    matrix.translate(dX, iY);
+    path = matrix.map(path);
+
+    QPainterStateGuard const guard(painter);
+    painter->setBrush(QBrush(Qt::NoBrush));
+    painter->drawPath(path);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto AdjustFont(const TextLine &tl, QFont fnt) -> QFont
+{
+    fnt.setPointSize(qMax(fnt.pointSize() + tl.m_iFontSize, 1));
+    if (!VAbstractApplication::VApp()->Settings()->GetSingleStrokeOutlineFont())
+    {
+        fnt.setBold(tl.m_bold);
+    }
+    fnt.setItalic(tl.m_italic);
+    return fnt;
+}
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VTextGraphicsItem::VTextGraphicsItem constructor
  * @param pParent pointer to the parent item
  */
-VTextGraphicsItem::VTextGraphicsItem(QGraphicsItem* pParent)
-    : VPieceItem(pParent),
-      m_ptStartPos(),
-      m_ptStart(),
-      m_szStart(),
-      m_dRotation(0),
-      m_dAngle(0),
-      m_rectResize(),
-      m_tm()
+VTextGraphicsItem::VTextGraphicsItem(ItemType type, QGraphicsItem *pParent)
+  : VPieceItem(pParent),
+    m_itemType(type)
 {
     m_inactiveZ = 2;
     SetSize(minW, minH);
@@ -135,9 +256,21 @@ VTextGraphicsItem::VTextGraphicsItem(QGraphicsItem* pParent)
  * @brief VTextGraphicsItem::SetFont sets the item font
  * @param fnt font to be used in item
  */
-void VTextGraphicsItem::SetFont(const QFont& fnt)
+void VTextGraphicsItem::SetFont(const QFont &fnt)
 {
     m_tm.SetFont(fnt);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTextGraphicsItem::SetSVGFontFamily(const QString &fntFamily)
+{
+    m_tm.SetSVGFontFamily(fntFamily);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTextGraphicsItem::SetSVGFontPointSize(int pointSize)
+{
+    m_tm.SetSVGFontPointSize(pointSize);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -151,85 +284,53 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
 {
     Q_UNUSED(widget)
     Q_UNUSED(option)
-    painter->fillRect(m_rectBoundingBox, QColor(251, 251, 175));
+    painter->fillRect(m_rectBoundingBox, VSceneStylesheet::PatternPieceStyle().LabelBackgroundColor());
     painter->setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
+    painter->setPen(VSceneStylesheet::PatternPieceStyle().LabelTextColor());
 
-    painter->setPen(Qt::black);
-    QFont fnt = m_tm.GetFont();
-    int iW = qFloor(boundingRect().width());
-    // draw text lines
-    int iY = 0;
-    for (int i = 0; i < m_tm.GetSourceLinesCount(); ++i)
-    {
-        const TextLine& tl = m_tm.GetSourceLine(i);
-
-        fnt.setPixelSize(m_tm.GetFont().pixelSize() + tl.m_iFontSize);
-        fnt.setBold(tl.bold);
-        fnt.setItalic(tl.italic);
-
-        QString qsText = tl.m_qsText;
-        QFontMetrics fm(fnt);
-
-        // check if the next line will go out of bounds
-        if (iY + fm.height() > boundingRect().height())
-        {
-            break;
-        }
-
-        if (fm.width(qsText) > iW)
-        {
-            qsText = fm.elidedText(qsText, Qt::ElideMiddle, iW);
-        }
-
-        painter->setFont(fnt);
-        painter->drawText(0, iY, iW, fm.height(), static_cast<int>(tl.m_eAlign), qsText);
-        iY += fm.height() + m_tm.GetSpacing();
-    }
+    PaintLabel(painter);
 
     // now draw the features specific to non-normal modes
     if (m_eMode != mNormal)
     {
         // outline the rectangle
-        painter->setPen(QPen(Qt::black, 2, Qt::DashLine));
+        painter->setPen(QPen(VSceneStylesheet::PatternPieceStyle().LabelModeColor(), 2, Qt::DashLine));
         painter->drawRect(boundingRect().adjusted(1, 1, -1, -1));
 
         if (m_eMode != mRotate)
         {
             // draw the resize square
-            painter->setPen(Qt::black);
-            painter->setBrush(Qt::black);
+            painter->setPen(VSceneStylesheet::PatternPieceStyle().LabelModeColor());
+            painter->setBrush(VSceneStylesheet::PatternPieceStyle().LabelModeColor());
             painter->drawRect(m_rectResize.adjusted(-1, -1, -1, -1));
 
             if (m_eMode == mResize)
             {
                 // draw the resize diagonal lines
-                painter->drawLine(1, 1, qFloor(m_rectBoundingBox.width())-1, qFloor(m_rectBoundingBox.height())-1);
-                painter->drawLine(1, qFloor(m_rectBoundingBox.height())-1, qFloor(m_rectBoundingBox.width())-1, 1);
+                painter->drawLine(1, 1, qFloor(m_rectBoundingBox.width()) - 1, qFloor(m_rectBoundingBox.height()) - 1);
+                painter->drawLine(1, qFloor(m_rectBoundingBox.height()) - 1, qFloor(m_rectBoundingBox.width()) - 1, 1);
             }
         }
         else
         {
             // in rotate mode, draw the circle in the middle
-            painter->setPen(Qt::black);
-            painter->setBrush(Qt::black);
-            painter->drawEllipse(
-                        QPointF(m_rectBoundingBox.width()/2, m_rectBoundingBox.height()/2),
-                        rotateCircle,
-                        rotateCircle
-                        );
-            if (m_rectBoundingBox.width() > minW*3 && m_rectBoundingBox.height() > minH*3)
+            painter->setPen(VSceneStylesheet::PatternPieceStyle().LabelModeColor());
+            painter->setBrush(VSceneStylesheet::PatternPieceStyle().LabelModeColor());
+            painter->drawEllipse(QPointF(m_rectBoundingBox.width() / 2, m_rectBoundingBox.height() / 2), rotateCircle,
+                                 rotateCircle);
+            if (m_rectBoundingBox.width() > minW * 3 && m_rectBoundingBox.height() > minH * 3)
             {
-                painter->setPen(QPen(Qt::black, 3));
+                painter->setPen(QPen(VSceneStylesheet::PatternPieceStyle().LabelModeColor(), 3));
                 painter->setBrush(Qt::NoBrush);
                 // and then draw the arc in each of the corners
-                int iTop = ROTATE_RECT - ROTATE_ARC;
-                int iLeft = ROTATE_RECT - ROTATE_ARC;
-                int iRight = qRound(m_rectBoundingBox.width()) - ROTATE_RECT;
-                int iBottom = qRound(m_rectBoundingBox.height()) - ROTATE_RECT;
-                painter->drawArc(iLeft, iTop, ROTATE_ARC, ROTATE_ARC, 180*16, -90*16);
-                painter->drawArc(iRight, iTop, ROTATE_ARC, ROTATE_ARC, 90*16, -90*16);
-                painter->drawArc(iLeft, iBottom, ROTATE_ARC, ROTATE_ARC, 270*16, -90*16);
-                painter->drawArc(iRight, iBottom, ROTATE_ARC, ROTATE_ARC, 0*16, -90*16);
+                int const iTop = rotateRect - rotateArc;
+                int const iLeft = rotateRect - rotateArc;
+                int const iRight = qRound(m_rectBoundingBox.width()) - rotateRect;
+                int const iBottom = qRound(m_rectBoundingBox.height()) - rotateRect;
+                painter->drawArc(iLeft, iTop, rotateArc, rotateArc, 180 * 16, -90 * 16);
+                painter->drawArc(iRight, iTop, rotateArc, rotateArc, 90 * 16, -90 * 16);
+                painter->drawArc(iLeft, iBottom, rotateArc, rotateArc, 270 * 16, -90 * 16);
+                painter->drawArc(iRight, iBottom, rotateArc, rotateArc, 0 * 16, -90 * 16);
             }
         }
     }
@@ -275,14 +376,14 @@ void VTextGraphicsItem::Update()
  * @param dY vertical translation needed to put the box inside parent item
  * @return true, if rectBB is contained in parent item and false otherwise
  */
-bool VTextGraphicsItem::IsContained(QRectF rectBB, qreal dRot, qreal &dX, qreal &dY) const
+auto VTextGraphicsItem::IsContained(QRectF rectBB, qreal dRot, qreal &dX, qreal &dY) const -> bool
 {
-    QRectF rectParent = parentItem()->boundingRect();
+    QRectF const rectParent = parentItem()->boundingRect();
     rectBB = GetBoundingRect(rectBB, dRot);
     dX = 0;
     dY = 0;
 
-    if (rectParent.contains(rectBB) == false)
+    if (not rectParent.contains(rectBB))
     {
         if (rectParent.left() - rectBB.left() > fabs(dX))
         {
@@ -310,22 +411,19 @@ bool VTextGraphicsItem::IsContained(QRectF rectBB, qreal dRot, qreal &dX, qreal 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VTextGraphicsItem::UpdateData Updates the detail label
- * @param qsName name of detail
- * @param data reference to VPatternPieceData
  */
-void VTextGraphicsItem::UpdateData(const QString &qsName, const VPieceLabelData &data)
+void VTextGraphicsItem::UpdatePieceLabelData(const VPieceLabelInfo &info)
 {
-    m_tm.Update(qsName, data);
+    m_tm.UpdatePieceLabelInfo(info);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VTextGraphicsItem::UpdateData Updates the pattern label
- * @param pDoc pointer to the pattern object
  */
-void VTextGraphicsItem::UpdateData(VAbstractPattern* pDoc)
+void VTextGraphicsItem::UpdatePatternLabelData(const VPieceLabelInfo &info)
 {
-    m_tm.Update(pDoc);
+    m_tm.UpdatePatternLabelInfo(info);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -333,9 +431,15 @@ void VTextGraphicsItem::UpdateData(VAbstractPattern* pDoc)
  * @brief VTextGraphicsItem::GetTextLines returns the number of lines of text to show
  * @return number of lines of text
  */
-int VTextGraphicsItem::GetTextLines() const
+auto VTextGraphicsItem::GetTextLines() const -> vsizetype
 {
     return m_tm.GetSourceLinesCount();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTextGraphicsItem::SetPieceName(const QString &name)
+{
+    m_pieceName = name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -343,9 +447,16 @@ int VTextGraphicsItem::GetTextLines() const
  * @brief VTextGraphicsItem::GetFontSize returns the currently used text base font size
  * @return current text base font size
  */
-int VTextGraphicsItem::GetFontSize() const
+auto VTextGraphicsItem::GetFontSize() const -> int
 {
-    return m_tm.GetFont().pixelSize();
+    int size = m_tm.GetFont().pixelSize();
+    if (size == -1)
+    {
+        QFontMetrics const fontMetrics(m_tm.GetFont());
+        size = fontMetrics.height();
+    }
+
+    return size;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -355,8 +466,8 @@ int VTextGraphicsItem::GetFontSize() const
  */
 void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
 {
-    if (pME->button() == Qt::LeftButton && pME->type() != QEvent::GraphicsSceneMouseDoubleClick
-            && (flags() & QGraphicsItem::ItemIsMovable))
+    if (pME->button() == Qt::LeftButton && pME->type() != QEvent::GraphicsSceneMouseDoubleClick &&
+        (flags() & QGraphicsItem::ItemIsMovable))
     {
         if (m_moveType == NotMovable)
         {
@@ -376,10 +487,10 @@ void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
         // in rotation mode, do not do any changes here, because user might want to
         // rotate the label more.
 
-        if ((m_moveType & AllModifications ) == AllModifications)
+        if ((m_moveType & AllModifications) == AllModifications)
         {
             AllUserModifications(pME->pos());
-            setZValue(ACTIVE_Z);
+            setZValue(activeZ);
             Update();
         }
         else if (m_moveType & IsRotatable)
@@ -397,7 +508,7 @@ void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
                 m_eMode = mRotate;
                 SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
             }
-            setZValue(ACTIVE_Z);
+            setZValue(activeZ);
             Update();
         }
         else if (m_moveType & IsResizable)
@@ -410,7 +521,7 @@ void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
             {
                 UserMoveAndResize(pME->pos());
             }
-            setZValue(ACTIVE_Z);
+            setZValue(activeZ);
             Update();
         }
         else if (m_moveType & IsMovable)
@@ -429,7 +540,7 @@ void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
                 SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
             }
 
-            setZValue(ACTIVE_Z);
+            setZValue(activeZ);
             Update();
         }
         else
@@ -448,102 +559,19 @@ void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
  * @brief VTextGraphicsItem::mouseMoveEvent handles mouse move events
  * @param pME pointer to QGraphicsSceneMouseEvent object
  */
-void VTextGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
+void VTextGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent *pME)
 {
-    qreal dX;
-    qreal dY;
-    QRectF rectBB;
     if (m_eMode == mMove && m_moveType & IsMovable)
     {
-        const QPointF ptDiff = pME->scenePos() - m_ptStart;
-        // in move mode move the label along the mouse move from the origin
-        QPointF pt = m_ptStartPos + ptDiff;
-        rectBB.setTopLeft(pt);
-        rectBB.setWidth(m_rectBoundingBox.width());
-        rectBB.setHeight(m_rectBoundingBox.height());
-        // before moving label to a new position, check if it will still be inside the parent item
-        if (IsContained(rectBB, rotation(), dX, dY) == false)
-        {
-            pt.setX(pt.x() + dX);
-            pt.setY(pt.y() + dY);
-        }
-        setPos(pt);
-        UpdateBox();
+        MoveLabel(pME);
     }
     else if (m_eMode == mResize && m_moveType & IsResizable)
     {
-        QLineF vectorDiff(m_ptStart, pME->scenePos());
-        vectorDiff.setAngle(vectorDiff.angle() + m_dRotation);
-        const QPointF ptDiff = vectorDiff.p2() - m_ptStart;
-
-        // in resize mode, resize the label along the mouse move from the origin
-        QPointF pt;
-        QSizeF sz;
-
-        if (m_moveType & IsMovable)
-        {
-            const qreal newWidth = m_szStart.width() + ptDiff.x();
-            const qreal newHeight = m_szStart.height() + ptDiff.y();
-            if (newWidth <= minW || newHeight <= minH)
-            {
-                return;
-            }
-
-            pt = m_ptStartPos;
-            sz = QSizeF(newWidth, newHeight);
-        }
-        else
-        {
-            const qreal newWidth = m_szStart.width() + ptDiff.x()*2.0;
-            const qreal newHeight = m_szStart.height() + ptDiff.y()*2.0;
-            if (newWidth <= minW || newHeight <= minH)
-            {
-                return;
-            }
-
-            pt = QPointF(m_ptRotCenter.x() - newWidth/2.0, m_ptRotCenter.y() - newHeight/2.0);
-            sz = QSizeF(m_szStart.width() + ptDiff.x()*2.0, m_szStart.height() + ptDiff.y()*2.0);
-        }
-
-        rectBB.setTopLeft(pt);
-        rectBB.setSize(sz);
-        // before resizing the label to a new size, check if it will still be inside the parent item
-        if (IsContained(rectBB, rotation(), dX, dY))
-        {
-            if (not (m_moveType & IsMovable))
-            {
-                setPos(pt);
-            }
-        }
-        else
-        {
-            return;
-        }
-
-        SetSize(sz.width(), sz.height());
-        Update();
-        emit SignalShrink();
+        ResizeLabel(pME);
     }
     else if (m_eMode == mRotate && m_moveType & IsRotatable)
     {
-        // if the angle from the original position is small (0.5 degrees), just remeber the new angle
-        // new angle will be the starting angle for rotation
-        if (fabs(m_dAngle) < 0.01)
-        {
-            m_dAngle = GetAngle(mapToParent(pME->pos()));
-            return;
-        }
-        // calculate the angle difference from the starting angle
-        double dAng =  qRadiansToDegrees(GetAngle(mapToParent(pME->pos())) - m_dAngle);
-        rectBB.setTopLeft(m_ptStartPos);
-        rectBB.setWidth(m_rectBoundingBox.width());
-        rectBB.setHeight(m_rectBoundingBox.height());
-        // check if the rotated label will be inside the parent item and then rotate it
-        if (IsContained(rectBB, m_dRotation + dAng, dX, dY) == true)
-        {
-            setRotation(m_dRotation + dAng);
-            Update();
-        }
+        RotateLabel(pME);
     }
 }
 
@@ -552,56 +580,60 @@ void VTextGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
  * @brief VTextGraphicsItem::mouseReleaseEvent handles left button mouse release events
  * @param pME pointer to QGraphicsSceneMouseEvent object
  */
-void VTextGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
+void VTextGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *pME)
 {
-    if (pME->button() == Qt::LeftButton)
+    if (pME->button() != Qt::LeftButton)
     {
-        // restore the cursor
-        if ((m_eMode == mMove || m_eMode == mRotate || m_eMode == mResize) && (flags() & QGraphicsItem::ItemIsMovable))
-        {
-            SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
-        }
-        double dDist = fabs(pME->scenePos().x() - m_ptStart.x()) + fabs(pME->scenePos().y() - m_ptStart.y());
-        // determine if this was just press/release (bShort == true) or user did some operation between press and release
-        bool bShort = (dDist < 2);
+        return;
+    }
 
-        if (m_eMode == mMove || m_eMode == mResize)
-        {   // if user just pressed and released the button, we must switch the mode to rotate
-            // but if user did some operation (move/resize), emit the proper signal and update the label
-            if (bShort == true)
+    // restore the cursor
+    if ((m_eMode == mMove || m_eMode == mRotate || m_eMode == mResize) && (flags() & QGraphicsItem::ItemIsMovable))
+    {
+        SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
+    }
+
+    double const dDist = fabs(pME->scenePos().x() - m_ptStart.x()) + fabs(pME->scenePos().y() - m_ptStart.y());
+    // determine if this was just press/release (bShort == true) or user did some operation between press and
+    // release
+    bool const bShort = (dDist < 2);
+
+    if (m_eMode == mMove || m_eMode == mResize)
+    { // if user just pressed and released the button, we must switch the mode to rotate
+        // but if user did some operation (move/resize), emit the proper signal and update the label
+        if (bShort)
+        {
+            if (m_bReleased && m_moveType & IsRotatable)
             {
-                if (m_bReleased == true && m_moveType & IsRotatable)
-                {
-                    m_eMode = mRotate;
-                    UpdateBox();
-                }
-            }
-            else if (m_eMode == mMove && m_moveType & IsMovable)
-            {
-                emit SignalMoved(pos());
+                m_eMode = mRotate;
                 UpdateBox();
             }
-            else if (m_moveType & IsResizable)
-            {
-                emit SignalResized(m_rectBoundingBox.width(), m_tm.GetFont().pixelSize());
-                Update();
-            }
         }
-        else
-        {   // in rotate mode, if user did just press/release, switch to move mode
-            if (bShort == true && (m_moveType & IsMovable || m_moveType & IsResizable))
-            {
-                m_eMode = mMove;
-            }
-            else if (m_moveType & IsRotatable)
-            {
-                // if user rotated the item, emit proper signal and update the label
-                emit SignalRotated(rotation());
-            }
+        else if (m_eMode == mMove && m_moveType & IsMovable)
+        {
+            emit SignalMoved(pos());
             UpdateBox();
         }
-        m_bReleased = true;
+        else if (m_moveType & IsResizable)
+        {
+            emit SignalResized(m_rectBoundingBox.width());
+            Update();
+        }
     }
+    else
+    { // in rotate mode, if user did just press/release, switch to move mode
+        if (bShort && (m_moveType & IsMovable || m_moveType & IsResizable))
+        {
+            m_eMode = mMove;
+        }
+        else if (m_moveType & IsRotatable)
+        {
+            // if user rotated the item, emit proper signal and update the label
+            emit SignalRotated(rotation());
+        }
+        UpdateBox();
+    }
+    m_bReleased = true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -609,11 +641,11 @@ void VTextGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
  * @brief VTextGraphicsItem::hoverMoveEvent checks if cursor has to be changed
  * @param pHE pointer to the scene hover event
  */
-void VTextGraphicsItem::hoverMoveEvent(QGraphicsSceneHoverEvent* pHE)
+void VTextGraphicsItem::hoverMoveEvent(QGraphicsSceneHoverEvent *pHE)
 {
     if (m_eMode == mResize && m_moveType & IsResizable)
     {
-        if (m_rectResize.contains(pHE->pos()) == true)
+        if (m_rectResize.contains(pHE->pos()))
         {
             setCursor(Qt::SizeFDiagCursor);
         }
@@ -656,12 +688,11 @@ void VTextGraphicsItem::CorrectLabel()
     QRectF rectBB;
     rectBB.setTopLeft(pos());
     rectBB.setSize(m_rectBoundingBox.size());
-    if (IsContained(rectBB, rotation(), dX, dY) == false)
+    if (not IsContained(rectBB, rotation(), dX, dY))
     {
         // put the label inside the pattern
         setPos(pos().x() + dX, pos().y() + dY);
     }
-    m_tm.FitFontSize(m_rectBoundingBox.width(), m_rectBoundingBox.height());
     UpdateBox();
 }
 
@@ -691,7 +722,7 @@ void VTextGraphicsItem::UserRotateAndMove()
 //---------------------------------------------------------------------------------------------------------------------
 void VTextGraphicsItem::UserMoveAndResize(const QPointF &pos)
 {
-    if (m_rectResize.contains(pos) == true)
+    if (m_rectResize.contains(pos))
     {
         m_eMode = mResize;
         setCursor(Qt::SizeFDiagCursor);
@@ -700,5 +731,278 @@ void VTextGraphicsItem::UserMoveAndResize(const QPointF &pos)
     {
         m_eMode = mMove; // block later if need
         SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTextGraphicsItem::MoveLabel(QGraphicsSceneMouseEvent *pME)
+{
+    const QPointF ptDiff = pME->scenePos() - m_ptStart;
+    // in move mode move the label along the mouse move from the origin
+    QPointF pt = m_ptStartPos + ptDiff;
+    QRectF rectBB;
+    rectBB.setTopLeft(pt);
+    rectBB.setWidth(m_rectBoundingBox.width());
+    rectBB.setHeight(m_rectBoundingBox.height());
+    // before moving label to a new position, check if it will still be inside the parent item
+    qreal dX;
+    qreal dY;
+    if (not IsContained(rectBB, rotation(), dX, dY))
+    {
+        pt.setX(pt.x() + dX);
+        pt.setY(pt.y() + dY);
+    }
+    setPos(pt);
+    UpdateBox();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTextGraphicsItem::ResizeLabel(QGraphicsSceneMouseEvent *pME)
+{
+    QLineF vectorDiff(m_ptStart, pME->scenePos());
+    vectorDiff.setAngle(vectorDiff.angle() + m_dRotation);
+    const QPointF ptDiff = vectorDiff.p2() - m_ptStart;
+
+    // in resize mode, resize the label along the mouse move from the origin
+    QPointF pt;
+    QSizeF sz;
+
+    if (m_moveType & IsMovable)
+    {
+        const qreal newWidth = m_szStart.width() + ptDiff.x();
+        const qreal newHeight = m_szStart.height() + ptDiff.y();
+        if (newWidth <= minW || newHeight <= minH)
+        {
+            return;
+        }
+
+        pt = m_ptStartPos;
+        sz = QSizeF(newWidth, newHeight);
+    }
+    else
+    {
+        const qreal newWidth = m_szStart.width() + ptDiff.x() * 2.0;
+        const qreal newHeight = m_szStart.height() + ptDiff.y() * 2.0;
+        if (newWidth <= minW || newHeight <= minH)
+        {
+            return;
+        }
+
+        pt = QPointF(m_ptRotCenter.x() - newWidth / 2.0, m_ptRotCenter.y() - newHeight / 2.0);
+        sz = QSizeF(m_szStart.width() + ptDiff.x() * 2.0, m_szStart.height() + ptDiff.y() * 2.0);
+    }
+
+    QRectF rectBB;
+    rectBB.setTopLeft(pt);
+    rectBB.setSize(sz);
+    // before resizing the label to a new size, check if it will still be inside the parent item
+    qreal dX;
+    qreal dY;
+    if (IsContained(rectBB, rotation(), dX, dY))
+    {
+        if (not(m_moveType & IsMovable))
+        {
+            setPos(pt);
+        }
+    }
+    else
+    {
+        return;
+    }
+
+    SetSize(sz.width(), sz.height());
+    Update();
+    emit SignalShrink();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTextGraphicsItem::RotateLabel(QGraphicsSceneMouseEvent *pME)
+{
+    // if the angle from the original position is small (0.5 degrees), just remeber the new angle
+    // new angle will be the starting angle for rotation
+    if (fabs(m_dAngle) < 0.01)
+    {
+        m_dAngle = GetAngle(mapToParent(pME->pos()));
+        return;
+    }
+
+    QRectF rectBB;
+    rectBB.setTopLeft(m_ptStartPos);
+    rectBB.setWidth(m_rectBoundingBox.width());
+    rectBB.setHeight(m_rectBoundingBox.height());
+
+    // calculate the angle difference from the starting angle
+    double const dAng = qRadiansToDegrees(GetAngle(mapToParent(pME->pos())) - m_dAngle);
+
+    // check if the rotated label will be inside the parent item and then rotate it
+    qreal dX;
+    qreal dY;
+    if (IsContained(rectBB, m_dRotation + dAng, dX, dY))
+    {
+        setRotation(m_dRotation + dAng);
+        Update();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTextGraphicsItem::PaintLabel(QPainter *painter)
+{
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    if (settings->GetSingleLineFonts())
+    {
+        PaintLabelSVGFont(painter);
+    }
+    else
+    {
+        PaintLabelOutlineFont(painter);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTextGraphicsItem::PaintLabelOutlineFont(QPainter *painter)
+{
+    const QRectF boundingRect = this->boundingRect();
+    const int iW = qFloor(boundingRect.width());
+    const QVector<TextLine> labelLines = m_tm.GetLabelSourceLines(iW, m_tm.GetFont());
+    bool const textAsPaths = VAbstractApplication::VApp()->Settings()->GetSingleStrokeOutlineFont();
+    qreal iY = InitializePainter(painter, textAsPaths, boundingRect);
+
+    // draw text lines
+    for (const auto &tl : labelLines)
+    {
+        if (!ProcessTextLine(tl, painter, boundingRect, iY, iW, textAsPaths))
+        {
+            break;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTextGraphicsItem::PaintLabelSVGFont(QPainter *painter)
+{
+    VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
+    VSvgFontEngine engine = db->FontEngine(m_tm.GetSVGFontFamily(), SVGFontStyle::Normal, SVGFontWeight::Normal,
+                                           m_tm.GetSVGFontPointSize());
+
+    VSvgFont const svgFont = engine.Font();
+    if (!svgFont.IsValid())
+    {
+        QString const errorMsg = tr("Invalid SVG font '%1'. Fallback to outline font.").arg(svgFont.Name());
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(errorMsg)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        PaintLabelOutlineFont(painter);
+        return;
+    }
+
+    qreal const penWidth = VAbstractApplication::VApp()->Settings()->WidthHairLine();
+    QPen pen = painter->pen();
+    pen.setCapStyle(Qt::RoundCap);
+    pen.setJoinStyle(Qt::RoundJoin);
+    pen.setWidthF(penWidth);
+    painter->setPen(pen);
+
+    const QRectF boundingRect = this->boundingRect().adjusted(-penWidth, -penWidth, -penWidth, -penWidth);
+
+    const qreal iW = boundingRect.width();
+    const QVector<TextLine> labelLines = m_tm.GetLabelSourceLines(qFloor(iW), svgFont, penWidth / 2);
+
+    // draw text lines
+    qreal iY = 0;
+    for (const auto &tl : labelLines)
+    {
+        VSvgFont lineFont = svgFont;
+        lineFont.SetBold(tl.m_bold);
+        lineFont.SetItalic(tl.m_italic);
+        lineFont.SetPointSize(svgFont.PointSize() + tl.m_iFontSize);
+
+        engine = db->FontEngine(lineFont);
+
+        qreal lineHeight = engine.FontHeight() + painter->pen().widthF() * 2;
+        if (iY + lineHeight > boundingRect.height())
+        {
+            lineHeight = boundingRect.height() - iY;
+        }
+
+        engine.Draw(painter, QRectF(0, iY, iW, lineHeight), tl.m_qsText, tl.m_eAlign);
+
+        // check if the next line will go out of bounds
+        qreal const nextStep = iY + engine.FontHeight() + painter->pen().widthF() * 2 + MmToPixel(1.);
+        if (nextStep > boundingRect.height())
+        {
+            NotEnoughSpace();
+            break;
+        }
+
+        iY = nextStep + m_tm.GetSpacing();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTextGraphicsItem::NotEnoughSpace() const
+{
+    QString errorMsg;
+    switch (m_itemType)
+    {
+        case PatternLabel:
+            errorMsg = tr("Piece '%1'. Not enough space for pattern info label.").arg(m_pieceName);
+            break;
+        case PieceLabel:
+            errorMsg = tr("Piece '%1'. Not enough space for piece info label.").arg(m_pieceName);
+            break;
+        case Unknown:
+        default:
+            errorMsg = tr("Piece '%1'. Not enough space for label.").arg(m_pieceName);
+            break;
+    };
+
+    VAbstractApplication::VApp()->IsPedantic()
+        ? throw VException(errorMsg)
+        : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTextGraphicsItem::ProcessTextLine(
+    const TextLine &tl, QPainter *painter, const QRectF &boundingRect, qreal &iY, int iW, bool textAsPaths) const
+    -> bool
+{
+    const QFont fnt = AdjustFont(tl, m_tm.GetFont());
+    QFontMetrics const fm(fnt);
+    qreal lineHeight = fm.height();
+
+    if (iY + lineHeight > boundingRect.height())
+    {
+        lineHeight = boundingRect.height() - iY;
+    }
+
+    if (textAsPaths || (fnt.pointSize() * SceneScale(this->scene()) < minVisibleFontSize))
+    {
+        DrawTextAsPaths(tl, fnt, fm, boundingRect, iY, painter);
+    }
+    else
+    {
+        DrawTextAsPlain(tl, fnt, iW, lineHeight, painter, iY);
+    }
+
+    qreal const nextStep = CalculateNextStep(iY, fm, textAsPaths);
+    if (nextStep > boundingRect.height())
+    {
+        NotEnoughSpace();
+        return false;
+    }
+
+    iY = nextStep + m_tm.GetSpacing();
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTextGraphicsItem::DrawTextAsPlain(
+    const TextLine &tl, const QFont &fnt, int iW, qreal lineHeight, QPainter *painter, qreal iY) const
+{
+    if (fnt.pointSize() * SceneScale(this->scene()) >= minVisibleFontSize)
+    {
+        QPainterStateGuard const guard(painter);
+        painter->setFont(fnt);
+        painter->drawText(QRectF(0, iY, iW, lineHeight * 2), static_cast<int>(tl.m_eAlign), tl.m_qsText);
     }
 }

@@ -28,22 +28,32 @@
 #include "../vproperty_p.h"
 
 VPE::VEnumProperty::VEnumProperty(const QString& name)
-    : VProperty(name, QVariant::Int), EnumerationLiterals()
+    : VProperty(name,
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                QMetaType::Int),
+#else
+                QVariant::Int),
+#endif
+      EnumerationLiterals()
 {
-    VProperty::d_ptr->VariantValue = 0;
-    VProperty::d_ptr->VariantValue.convert(QVariant::Int);
+    VProperty::vproperty_d_ptr->VariantValue = 0;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    VProperty::vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::Int));
+#else
+    VProperty::vproperty_d_ptr->VariantValue.convert(QVariant::Int);
+#endif
 }
 
 
 //! Get the data how it should be displayed
-QVariant VPE::VEnumProperty::data (int column, int role) const
+auto VPE::VEnumProperty::data(int column, int role) const -> QVariant
 {
     if (EnumerationLiterals.empty())
     {
         return QVariant();
     }
 
-    int tmpIndex = VProperty::d_ptr->VariantValue.toInt();
+    int tmpIndex = VProperty::vproperty_d_ptr->VariantValue.toInt();
 
     if (tmpIndex < 0 || tmpIndex >= EnumerationLiterals.count())
     {
@@ -64,26 +74,26 @@ QVariant VPE::VEnumProperty::data (int column, int role) const
 
 
 //! Returns an editor widget, or NULL if it doesn't supply one
-QWidget* VPE::VEnumProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options,
-                                          const QAbstractItemDelegate* delegate)
+auto VPE::VEnumProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
+                                      const QAbstractItemDelegate *delegate) -> QWidget *
 {
     Q_UNUSED(options)
     Q_UNUSED(delegate)
-    QComboBox* tmpEditor = new QComboBox(parent);
+    auto *tmpEditor = new QComboBox(parent);
     tmpEditor->clear();
     tmpEditor->setLocale(parent->locale());
     tmpEditor->addItems(EnumerationLiterals);
-    tmpEditor->setCurrentIndex(VProperty::d_ptr->VariantValue.toInt());
+    tmpEditor->setCurrentIndex(VProperty::vproperty_d_ptr->VariantValue.toInt());
     connect(tmpEditor, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &VEnumProperty::currentIndexChanged);
 
-    VProperty::d_ptr->editor = tmpEditor;
-    return VProperty::d_ptr->editor;
+    VProperty::vproperty_d_ptr->editor = tmpEditor;
+    return VProperty::vproperty_d_ptr->editor;
 }
 
 //! Gets the data from the widget
-QVariant VPE::VEnumProperty::getEditorData(const QWidget *editor) const
+auto VPE::VEnumProperty::getEditorData(const QWidget *editor) const -> QVariant
 {
-    const QComboBox* tmpEditor = qobject_cast<const QComboBox*>(editor);
+    const auto *tmpEditor = qobject_cast<const QComboBox *>(editor);
     if (tmpEditor)
     {
         return tmpEditor->currentIndex();
@@ -99,7 +109,7 @@ void VPE::VEnumProperty::setLiterals(const QStringList& literals)
 }
 
 //! Get the settings. This function has to be implemented in a subclass in order to have an effect
-QStringList VPE::VEnumProperty::getLiterals() const
+auto VPE::VEnumProperty::getLiterals() const -> QStringList
 {
     return EnumerationLiterals;
 }
@@ -114,21 +124,25 @@ void VPE::VEnumProperty::setValue(const QVariant& value)
         tmpIndex = 0;
     }
 
-    VProperty::d_ptr->VariantValue = tmpIndex;
-    VProperty::d_ptr->VariantValue.convert(QVariant::Int);
+    VProperty::vproperty_d_ptr->VariantValue = tmpIndex;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    VProperty::vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::Int));
+#else
+    VProperty::vproperty_d_ptr->VariantValue.convert(QVariant::Int);
+#endif
 
-    if (VProperty::d_ptr->editor != nullptr)
+    if (VProperty::vproperty_d_ptr->editor != nullptr)
     {
-        setEditorData(VProperty::d_ptr->editor);
+        setEditorData(VProperty::vproperty_d_ptr->editor);
     }
 }
 
-QString VPE::VEnumProperty::type() const
+auto VPE::VEnumProperty::type() const -> QString
 {
     return "enum";
 }
 
-VPE::VProperty* VPE::VEnumProperty::clone(bool include_children, VProperty* container) const
+auto VPE::VEnumProperty::clone(bool include_children, VProperty *container) const -> VPE::VProperty *
 {
     return VProperty::clone(include_children, container ? container : new VEnumProperty(getName()));
 }
@@ -141,7 +155,7 @@ void VPE::VEnumProperty::setSetting(const QString& key, const QVariant& value)
     }
 }
 
-QVariant VPE::VEnumProperty::getSetting(const QString& key) const
+auto VPE::VEnumProperty::getSetting(const QString &key) const -> QVariant
 {
     if (key == "literals")
     {
@@ -151,7 +165,7 @@ QVariant VPE::VEnumProperty::getSetting(const QString& key) const
         return VProperty::getSetting(key);
 }
 
-QStringList VPE::VEnumProperty::getSettingKeys() const
+auto VPE::VEnumProperty::getSettingKeys() const -> QStringList
 {
     return QStringList("literals");
 }
@@ -159,6 +173,6 @@ QStringList VPE::VEnumProperty::getSettingKeys() const
 void VPE::VEnumProperty::currentIndexChanged(int index)
 {
     Q_UNUSED(index)
-    UserChangeEvent *event = new UserChangeEvent();
-    QCoreApplication::postEvent ( VProperty::d_ptr->editor, event );
+    auto *event = new UserChangeEvent();
+    QCoreApplication::postEvent ( VProperty::vproperty_d_ptr->editor, event );
 }

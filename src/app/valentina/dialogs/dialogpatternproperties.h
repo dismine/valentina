@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -30,92 +30,70 @@
 #define DIALOGPATTERNPROPERTIES_H
 
 #include <QDialog>
-#include "../options.h"
 #include <QMap>
+#include <QPointer>
 
 class VPattern;
 class VContainer;
 class QCheckBox;
+class QCompleter;
+class QTemporaryFile;
 
 namespace Ui
 {
-    class DialogPatternProperties;
+class DialogPatternProperties;
 }
 
 class DialogPatternProperties : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     explicit DialogPatternProperties(VPattern *doc, VContainer *pattern, QWidget *parent = nullptr);
-    virtual ~DialogPatternProperties() override;
+    ~DialogPatternProperties() override;
 signals:
-    void UpdateGradation();
+    void UpddatePieces();
+
+protected:
+    auto eventFilter(QObject *object, QEvent *event) -> bool override;
 private slots:
-    void DefValueChanged();
-    void LabelDataChanged();
     void Apply();
     void Ok();
-    void SelectAll(int state);
-    void CheckStateHeight(int state);
-    void CheckStateSize(int state);
     void DescEdited();
     void ChangeImage();
     void SaveImage();
-    void EditLabel();
-    void ManagePatternMaterials();
+    void ShowImage();
+    void BrowseLabelPath();
+    void LabelPathChanged(const QString &text);
+
 private:
-    Q_DISABLE_COPY(DialogPatternProperties)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DialogPatternProperties) // NOLINT
     Ui::DialogPatternProperties *ui;
-    VPattern               *doc;
-    VContainer             *pattern;
-    int                    heightsChecked;
-    int                    sizesChecked;
-    QMap<GHeights, bool>   heights;
-    QMap<GSizes, bool>     sizes;
-    QMap<QCheckBox *, int> data;
-    bool                   descriptionChanged;
-    bool                   gradationChanged;
-    bool                   defaultChanged;
-    bool                   securityChanged;
-    bool                   labelDataChanged;
-    bool                   askSaveLabelData;
-    bool                   templateDataChanged;
-    bool                   patternMaterialsChanged;
-    QAction                *deleteAction;
-    QAction                *changeImageAction;
-    QAction                *saveImageAction;
-    QAction                *showImageAction;
+    VPattern *m_doc;
+    VContainer *m_pattern;
+    QMap<QCheckBox *, int> m_data{};
+    bool m_descriptionChanged{false};
+    bool m_defaultChanged{false};
+    bool m_securityChanged{false};
+    QAction *m_deleteAction{nullptr};
+    QAction *m_changeImageAction{nullptr};
+    QAction *m_saveImageAction{nullptr};
+    QAction *m_showImageAction{nullptr};
+    QCompleter *m_completerLength{nullptr};
+    QCompleter *m_completerWidth{nullptr};
+    QStringList m_variables{};
+    QString m_oldPassmarkLength{};
+    QString m_oldPassmarkWidth{};
+    QPointer<QTemporaryFile> m_tmpImage{};
 
-    QVector<VLabelTemplateLine> templateLines;
-    QMap<int, QString>          patternMaterials;
+    void SaveDescription();
+    void SaveReadOnlyState();
 
-    void         SetHeightsChecked(bool enabled);
-    void         SetSizesChecked(bool enabled);
-    void         InitHeights();
-    void         InitSizes();
-    template<typename Func>
-    void         Init(QCheckBox *check, int val, Func slot);
-    template<typename GVal>
-    void         SetOptions(const QMap<GVal, bool> &option);
-    template<typename GVal>
-    void         InitComboBox(QComboBox *box, const QMap<GVal, bool> &option);
-    void         InitComboBoxFormats(QComboBox *box, const QStringList &items, const QString &currentFormat);
-    void         CheckApplyOk();
-    void         SaveDescription();
-    void         SaveGradation();
-    void         SaveDefValues();
-    void         SaveLabelData();
-    void         SaveTemplateData();
-    void         SaveMaterialData();
-    void         SaveReadOnlyState();
+    void InitImage();
 
-    void         SetDefaultHeight(const QString &def);
-    void         SetDefaultSize(const QString &def);
-
-    void         UpdateDefHeight();
-    void         UpdateDefSize();
-    void         InitImage();
-    QImage       GetImage();
+    void ValidatePassmarkLength() const;
+    void ValidatePassmarkWidth() const;
 };
 
 #endif // DIALOGPATTERNPROPERTIES_H

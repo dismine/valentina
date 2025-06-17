@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef DELTOOL_H
 #define DELTOOL_H
 
-#include <qcompilerdetection.h>
 #include <QDomNode>
 #include <QMetaObject>
 #include <QObject>
@@ -40,17 +39,24 @@
 
 class DelTool : public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     DelTool(VAbstractPattern *doc, quint32 id, QUndoCommand *parent = nullptr);
-    virtual ~DelTool() override;
-    virtual void undo() override;
-    virtual void redo() override;
+    ~DelTool() override = default;
+    void undo() override;
+    void redo() override;
+
 private:
-    Q_DISABLE_COPY(DelTool)
-    QDomNode      parentNode;
-    quint32       siblingId;
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DelTool) // NOLINT
+    QDomNode parentNode{};
+    quint32 siblingId{NULL_ID};
     const QString nameActivDraw;
+    QMap<quint32, VGroupData> m_groupsBefore{};
+    QMap<quint32, VGroupData> m_groupsAfter{};
+
+    void UpdateGroups(const QMap<quint32, VGroupData> &groups) const;
 };
 
 #endif // DELTOOL_H

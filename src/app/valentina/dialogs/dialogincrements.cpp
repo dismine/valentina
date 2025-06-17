@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -27,25 +27,48 @@
  *************************************************************************/
 
 #include "dialogincrements.h"
-#include "ui_dialogincrements.h"
-#include "../vwidgets/vwidgetpopup.h"
-#include "../vmisc/vsettings.h"
 #include "../qmuparser/qmudef.h"
 #include "../qmuparser/qmutokenparser.h"
-#include "../vpatterndb/vtranslatevars.h"
+#include "../vmisc/theme/vtheme.h"
+#include "../vmisc/vvalentinasettings.h"
 #include "../vpatterndb/calculator.h"
+#include "../vpatterndb/variables/varcradius.h"
+#include "../vpatterndb/variables/vcurveangle.h"
+#include "../vpatterndb/variables/vcurveclength.h"
+#include "../vpatterndb/variables/vcurvelength.h"
+#include "../vpatterndb/variables/vincrement.h"
+#include "../vpatterndb/variables/vlineangle.h"
+#include "../vpatterndb/variables/vlinelength.h"
+#include "../vpatterndb/vtranslatevars.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"
+#include "ui_dialogincrements.h"
 
-#include <QFileDialog>
-#include <QDir>
-#include <QMessageBox>
 #include <QCloseEvent>
-#include <QTableWidget>
+#include <QDir>
+#include <QFileDialog>
+#include <QMenu>
+#include <QMessageBox>
 #include <QSettings>
+#include <QTableWidget>
 #include <QTableWidgetItem>
 #include <QtNumeric>
 
-#define DIALOG_MAX_FORMULA_HEIGHT 64
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
+constexpr int DIALOG_MAX_FORMULA_HEIGHT = 64;
+
+namespace
+{
+enum class IncrUnits : qint8
+{
+    Pattern,
+    Degrees
+};
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -55,17 +78,13 @@
  * @param parent parent widget
  */
 DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *parent)
-    :DialogTool(data, NULL_ID, parent),
-      ui(new Ui::DialogIncrements),
-      data(data),
-      doc(doc),
-      m_completeData(doc->GetCompleteData()),
-      formulaBaseHeight(0),
-      formulaBaseHeightPC(0),
-      search(),
-      searchPC(),
-      hasChanges(false),
-      renameList()
+  : DialogTool(data, doc, NULL_ID, parent),
+    ui(new Ui::DialogIncrements),
+    m_data(data),
+    m_patternDoc(doc),
+    m_completeData(doc->GetCompleteData()),
+    m_searchHistory(new QMenu(this)),
+    m_searchHistoryPC(new QMenu(this))
 {
     ui->setupUi(this);
 
@@ -73,30 +92,43 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     setWindowFlags(Qt::Window);
 #endif
 
+    InitIcons();
+
     ui->lineEditName->setClearButtonEnabled(true);
-    ui->lineEditFind->setClearButtonEnabled(true);
     ui->lineEditNamePC->setClearButtonEnabled(true);
-    ui->lineEditFindPC->setClearButtonEnabled(true);
 
     ui->lineEditFind->installEventFilter(this);
     ui->lineEditFindPC->installEventFilter(this);
 
-    search = QSharedPointer<VTableSearch>(new VTableSearch(ui->tableWidgetIncrement));
-    searchPC = QSharedPointer<VTableSearch>(new VTableSearch(ui->tableWidgetPC));
+    m_search = QSharedPointer<VTableSearch>(new VTableSearch(ui->tableWidgetIncrement));
+    m_searchPC = QSharedPointer<VTableSearch>(new VTableSearch(ui->tableWidgetPC));
 
-    formulaBaseHeight = ui->plainTextEditFormula->height();
+    m_formulaBaseHeight = ui->plainTextEditFormula->height();
     ui->plainTextEditFormula->installEventFilter(this);
-    formulaBaseHeightPC = ui->plainTextEditFormulaPC->height();
+    m_formulaBaseHeightPC = ui->plainTextEditFormulaPC->height();
     ui->plainTextEditFormulaPC->installEventFilter(this);
 
-    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+    VAbstractApplication::VApp()->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
     qCDebug(vDialog, "Showing variables.");
     ShowUnits();
 
-    const bool freshCall = true;
-    FillIncrements(freshCall);
-    FillPreviewCalculations(freshCall);
+    InitIncrementUnits(ui->comboBoxIncrementUnits);
+    InitIncrementUnits(ui->comboBoxPreviewCalculationUnits);
+
+    ui->comboBoxIncrementUnits->blockSignals(true);
+    ui->comboBoxIncrementUnits->setCurrentIndex(-1);
+    ui->comboBoxIncrementUnits->blockSignals(true);
+
+    ui->comboBoxPreviewCalculationUnits->blockSignals(true);
+    ui->comboBoxPreviewCalculationUnits->setCurrentIndex(-1);
+    ui->comboBoxPreviewCalculationUnits->blockSignals(true);
+
+    connect(ui->comboBoxIncrementUnits, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            &DialogIncrements::SaveIncrUnits);
+
+    FillIncrements();
+    FillPreviewCalculations();
     FillLengthsLines();
     FillLengthLinesAngles();
     FillLengthsCurves();
@@ -104,18 +136,19 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     FillRadiusesArcs();
     FillAnglesCurves();
 
-    connect(this->doc, &VPattern::FullUpdateFromFile, this, &DialogIncrements::FullUpdateFromFile);
+    connect(this->m_patternDoc, &VPattern::FullUpdateFromFile, this, &DialogIncrements::FullUpdateFromFile);
 
     ui->tabWidget->setCurrentIndex(0);
-    ui->lineEditName->setValidator( new QRegularExpressionValidator(QRegularExpression(
-                                                                        QLatin1String("^$|")+NameRegExp()), this));
-    ui->lineEditNamePC->setValidator( new QRegularExpressionValidator(QRegularExpression(
-                                                                        QLatin1String("^$|")+NameRegExp()), this));
+    auto *validator = new QRegularExpressionValidator(QRegularExpression(QStringLiteral("^$|") + NameRegExp()), this);
+    ui->lineEditName->setValidator(validator);
+    ui->lineEditNamePC->setValidator(validator);
 
     connect(ui->tableWidgetIncrement, &QTableWidget::itemSelectionChanged, this,
             &DialogIncrements::ShowIncrementDetails);
-    connect(ui->tableWidgetPC, &QTableWidget::itemSelectionChanged, this,
-            &DialogIncrements::ShowIncrementDetails);
+    connect(ui->tableWidgetPC, &QTableWidget::itemSelectionChanged, this, &DialogIncrements::ShowIncrementDetails);
+
+    ui->toolButtonAdd->setMenu(InitVarTypeMenu(ui->toolButtonAdd->menu(), true /*increments tab*/));
+    ui->toolButtonAddPC->setMenu(InitVarTypeMenu(ui->toolButtonAddPC->menu(), false /*preview calculations tab*/));
 
     connect(ui->toolButtonAdd, &QToolButton::clicked, this, &DialogIncrements::AddIncrement);
     connect(ui->toolButtonAddPC, &QToolButton::clicked, this, &DialogIncrements::AddIncrement);
@@ -135,34 +168,10 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     connect(ui->plainTextEditDescriptionPC, &QPlainTextEdit::textChanged, this, &DialogIncrements::SaveIncrDescription);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogIncrements::SaveIncrFormula);
     connect(ui->plainTextEditFormulaPC, &QPlainTextEdit::textChanged, this, &DialogIncrements::SaveIncrFormula);
-    connect(ui->lineEditFind, &QLineEdit::textEdited, this, [this](const QString &term){search->Find(term);});
-    connect(ui->lineEditFindPC, &QLineEdit::textEdited, this, [this](const QString &term){searchPC->Find(term);});
-    connect(ui->toolButtonFindPrevious, &QToolButton::clicked, this, [this](){search->FindPrevious();});
-    connect(ui->toolButtonFindPreviousPC, &QToolButton::clicked, this, [this](){searchPC->FindPrevious();});
-    connect(ui->toolButtonFindNext, &QToolButton::clicked, this, [this](){search->FindNext();});
-    connect(ui->toolButtonFindNextPC, &QToolButton::clicked, this, [this](){searchPC->FindNext();});
     connect(ui->pushButtonRefresh, &QPushButton::clicked, this, &DialogIncrements::RefreshPattern);
     connect(ui->pushButtonRefreshPC, &QPushButton::clicked, this, &DialogIncrements::RefreshPattern);
 
-    connect(search.data(), &VTableSearch::HasResult, this, [this] (bool state)
-    {
-        ui->toolButtonFindPrevious->setEnabled(state);
-    });
-
-    connect(searchPC.data(), &VTableSearch::HasResult, this, [this] (bool state)
-    {
-        ui->toolButtonFindPreviousPC->setEnabled(state);
-    });
-
-    connect(search.data(), &VTableSearch::HasResult, this, [this] (bool state)
-    {
-        ui->toolButtonFindNext->setEnabled(state);
-    });
-
-    connect(searchPC.data(), &VTableSearch::HasResult, this, [this] (bool state)
-    {
-        ui->toolButtonFindNextPC->setEnabled(state);
-    });
+    InitSearch();
 
     if (ui->tableWidgetIncrement->rowCount() > 0)
     {
@@ -173,26 +182,51 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     {
         ui->tableWidgetPC->selectRow(0);
     }
+
+    m_shortcuts.insert(VShortcutAction::CaseSensitiveMatch, ui->toolButtonCaseSensitive);
+    m_shortcuts.insert(VShortcutAction::WholeWordMatch, ui->toolButtonWholeWord);
+    m_shortcuts.insert(VShortcutAction::RegexMatch, ui->toolButtonRegexp);
+    m_shortcuts.insert(VShortcutAction::SearchHistory, ui->pushButtonSearch);
+    m_shortcuts.insert(VShortcutAction::RegexMatchUnicodeProperties, ui->toolButtonUseUnicodeProperties);
+    m_shortcuts.insert(VShortcutAction::FindNext, ui->toolButtonFindNext);
+    m_shortcuts.insert(VShortcutAction::FindPrevious, ui->toolButtonFindNext);
+
+    m_shortcuts.insert(VShortcutAction::CaseSensitiveMatch, ui->toolButtonCaseSensitivePC);
+    m_shortcuts.insert(VShortcutAction::WholeWordMatch, ui->toolButtonWholeWordPC);
+    m_shortcuts.insert(VShortcutAction::RegexMatch, ui->toolButtonRegexpPC);
+    m_shortcuts.insert(VShortcutAction::SearchHistory, ui->pushButtonSearchPC);
+    m_shortcuts.insert(VShortcutAction::RegexMatchUnicodeProperties, ui->toolButtonUseUnicodePropertiesPC);
+    m_shortcuts.insert(VShortcutAction::FindNext, ui->toolButtonFindNextPC);
+    m_shortcuts.insert(VShortcutAction::FindPrevious, ui->toolButtonFindNextPC);
+
+    if (VAbstractShortcutManager *manager = VAbstractApplication::VApp()->GetShortcutManager())
+    {
+        connect(manager, &VAbstractShortcutManager::ShortcutsUpdated, this, &DialogIncrements::UpdateShortcuts);
+        UpdateShortcuts();
+    }
+
+    const QPushButton *bClose = ui->buttonBox->button(QDialogButtonBox::Close);
+    SCASSERT(bClose != nullptr)
+    connect(bClose, &QPushButton::clicked, this, &DialogIncrements::close);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief FillIncrementTable fill data for increment table
  */
-void DialogIncrements::FillIncrements(bool freshCall)
+void DialogIncrements::FillIncrements()
 {
-    FillIncrementsTable(ui->tableWidgetIncrement, data->DataIncrements(), false, freshCall);
+    FillIncrementsTable(ui->tableWidgetIncrement, m_data->DataIncrementsWithSeparators(), false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogIncrements::FillPreviewCalculations(bool freshCall)
+void DialogIncrements::FillPreviewCalculations()
 {
-    FillIncrementsTable(ui->tableWidgetPC, data->DataIncrements(), true, freshCall);
+    FillIncrementsTable(ui->tableWidgetPC, m_data->DataIncrementsWithSeparators(), true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-void DialogIncrements::FillTable(const QMap<QString, T> &varTable, QTableWidget *table)
+template <typename T> void DialogIncrements::FillTable(const QMap<QString, T> &varTable, QTableWidget *table)
 {
     SCASSERT(table != nullptr)
 
@@ -201,16 +235,18 @@ void DialogIncrements::FillTable(const QMap<QString, T> &varTable, QTableWidget 
     while (i.hasNext())
     {
         i.next();
-        qreal length = *i.value()->GetValue();
+        qreal const length = *i.value()->GetValue();
         currentRow++;
-        table->setRowCount ( varTable.size() );
+        table->setRowCount(static_cast<int>(varTable.size()));
 
-        QTableWidgetItem *item = new QTableWidgetItem(i.key());
+        auto *item = new QTableWidgetItem(i.key());
         item->setTextAlignment(Qt::AlignLeft);
-        item->setFont(QFont("Times", 12, QFont::Bold));
+        QFont font = item->font();
+        font.setBold(true);
+        item->setFont(font);
         table->setItem(currentRow, 0, item);
 
-        item = new QTableWidgetItem(qApp->LocaleToString(length));
+        item = new QTableWidgetItem(VAbstractApplication::VApp()->LocaleToString(length));
         item->setTextAlignment(Qt::AlignHCenter);
         table->setItem(currentRow, 1, item);
     }
@@ -264,19 +300,19 @@ void DialogIncrements::FillAnglesCurves()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::ShowUnits()
 {
-    const QString unit = UnitsToStr(qApp->patternUnit());
+    const QString unit = UnitsToStr(VAbstractValApplication::VApp()->patternUnits());
 
-    ShowHeaderUnits(ui->tableWidgetIncrement, 1, unit);// calculated value
-    ShowHeaderUnits(ui->tableWidgetIncrement, 2, unit);// formula
-    ShowHeaderUnits(ui->tableWidgetPC, 1, unit);// calculated value
-    ShowHeaderUnits(ui->tableWidgetPC, 2, unit);// formula
+    ShowHeaderUnits(ui->tableWidgetIncrement, 1, unit); // calculated value
+    ShowHeaderUnits(ui->tableWidgetIncrement, 2, unit); // formula
+    ShowHeaderUnits(ui->tableWidgetPC, 1, unit);        // calculated value
+    ShowHeaderUnits(ui->tableWidgetPC, 2, unit);        // formula
 
-    ShowHeaderUnits(ui->tableWidgetLines, 1, unit);// lengths
-    ShowHeaderUnits(ui->tableWidgetSplines, 1, unit);// lengths
-    ShowHeaderUnits(ui->tableWidgetCLength, 1, unit);// lengths
-    ShowHeaderUnits(ui->tableWidgetLinesAngles, 1, degreeSymbol);// angle
-    ShowHeaderUnits(ui->tableWidgetRadiusesArcs, 1, unit);// radius
-    ShowHeaderUnits(ui->tableWidgetAnglesCurves, 1, degreeSymbol);// angle
+    ShowHeaderUnits(ui->tableWidgetLines, 1, unit);                // lengths
+    ShowHeaderUnits(ui->tableWidgetSplines, 1, unit);              // lengths
+    ShowHeaderUnits(ui->tableWidgetCLength, 1, unit);              // lengths
+    ShowHeaderUnits(ui->tableWidgetLinesAngles, 1, degreeSymbol);  // angle
+    ShowHeaderUnits(ui->tableWidgetRadiusesArcs, 1, unit);         // radius
+    ShowHeaderUnits(ui->tableWidgetAnglesCurves, 1, degreeSymbol); // angle
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -285,17 +321,19 @@ void DialogIncrements::ShowHeaderUnits(QTableWidget *table, int column, const QS
     SCASSERT(table != nullptr)
 
     const QString header = table->horizontalHeaderItem(column)->text();
-    const QString unitHeader = QString("%1 (%2)").arg(header, unit);
+    const auto unitHeader = QStringLiteral("%1 (%2)").arg(header, unit);
     table->horizontalHeaderItem(column)->setText(unitHeader);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogIncrements::AddCell(QTableWidget *table, const QString &text, int row, int column, int aligment, bool ok)
+auto DialogIncrements::AddCell(QTableWidget *table, const QString &text, int row, int column, int aligment, bool ok)
+    -> QTableWidgetItem *
 {
     SCASSERT(table != nullptr)
 
-    QTableWidgetItem *item = new QTableWidgetItem(text);
-    item->setTextAlignment(aligment);
+    auto *item = new QTableWidgetItem(text);
+    SetTextAlignment(item, static_cast<Qt::Alignment>(aligment));
+    item->setToolTip(text);
 
     // set the item non-editable (view only), and non-selectable
     Qt::ItemFlags flags = item->flags();
@@ -310,27 +348,42 @@ void DialogIncrements::AddCell(QTableWidget *table, const QString &text, int row
     }
 
     table->setItem(row, column, item);
+
+    return item;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogIncrements::GetCustomName() const
+auto DialogIncrements::AddSeparatorCell(QTableWidget *table, const QString &text, int row, int column, int aligment,
+                                        bool ok) -> QTableWidgetItem *
+{
+    QTableWidgetItem *item = AddCell(table, text, row, column, aligment, ok);
+
+    QFont itemFont = item->font();
+    itemFont.setBold(true);
+    itemFont.setItalic(true);
+    item->setFont(itemFont);
+    return item;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogIncrements::GetCustomName() const -> QString
 {
     qint32 num = 1;
     QString name;
     do
     {
-        name = CustomIncrSign + qApp->TrVars()->InternalVarToUser(increment_) + QString().number(num);
+        name = CustomIncrSign + VAbstractApplication::VApp()->TrVars()->InternalVarToUser(increment_) +
+               QString::number(num);
         num++;
-    } while (not data->IsUnique(name));
+    } while (not m_data->IsUnique(name));
     return name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogIncrements::ClearIncrementName(const QString &name) const
+auto DialogIncrements::ClearIncrementName(const QString &name) -> QString
 {
     QString clear = name;
-    const int index = clear.indexOf(CustomIncrSign);
-    if (index == 0)
+    if (const auto index = clear.indexOf(CustomIncrSign); index == 0)
     {
         clear.remove(0, 1);
     }
@@ -338,49 +391,58 @@ QString DialogIncrements::ClearIncrementName(const QString &name) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogIncrements::EvalIncrementFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label)
+auto DialogIncrements::EvalIncrementFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label,
+                                            bool special) -> bool
 {
-    const QString postfix = UnitsToStr(qApp->patternUnit());//Show unit in dialog lable (cm, mm or inch)
+    QString postfix;
+    if (special)
+    {
+        postfix = degreeSymbol;
+    }
+    else
+    {
+        postfix =
+            UnitsToStr(VAbstractValApplication::VApp()->patternUnits()); // Show unit in dialog lable (cm, mm or inch)
+    }
     if (formula.isEmpty())
     {
         label->setText(tr("Error") + " (" + postfix + "). " + tr("Empty field."));
         label->setToolTip(tr("Empty field"));
         return false;
     }
-    else
+
+    try
     {
-        try
+        QString f;
+        // Replace line return character with spaces for calc if exist
+        if (fromUser)
         {
-            QString f;
-            // Replace line return character with spaces for calc if exist
-            if (fromUser)
-            {
-                f = qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
-            }
-            else
-            {
-                f = formula;
-            }
-            QScopedPointer<Calculator> cal(new Calculator());
-            const qreal result = cal->EvalFormula(data->DataVariables(), f);
-
-            if (qIsInf(result) || qIsNaN(result))
-            {
-                label->setText(tr("Error") + " (" + postfix + ").");
-                label->setToolTip(tr("Invalid result. Value is infinite or NaN. Please, check your calculations."));
-                return false;
-            }
-
-            label->setText(qApp->LocaleToString(result) + QChar(QChar::Space) + postfix);
-            label->setToolTip(tr("Value"));
-            return true;
+            f = VAbstractApplication::VApp()->TrVars()->FormulaFromUser(
+                formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
         }
-        catch (qmu::QmuParserError &e)
+        else
         {
-            label->setText(tr("Error") + " (" + postfix + "). " + tr("Parser error: %1").arg(e.GetMsg()));
-            label->setToolTip(tr("Parser error: %1").arg(e.GetMsg()));
+            f = formula;
+        }
+        QScopedPointer<Calculator> const cal(new Calculator());
+        const qreal result = cal->EvalFormula(data->DataVariables(), f);
+
+        if (qIsInf(result) || qIsNaN(result))
+        {
+            label->setText(tr("Error") + " (" + postfix + ").");
+            label->setToolTip(tr("Invalid result. Value is infinite or NaN. Please, check your calculations."));
             return false;
         }
+
+        label->setText(VAbstractApplication::VApp()->LocaleToString(result) + QChar(QChar::Space) + postfix);
+        label->setToolTip(tr("Value"));
+        return true;
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        label->setText(tr("Error") + " (" + postfix + "). " + tr("Parser error: %1").arg(e.GetMsg()));
+        label->setToolTip(tr("Parser error: %1").arg(e.GetMsg()));
+        return false;
     }
 }
 
@@ -430,7 +492,7 @@ void DialogIncrements::Controls(QTableWidget *table)
                 ui->toolButtonDownPC->setEnabled(true);
             }
         }
-        else if (table->currentRow() == table->rowCount()-1)
+        else if (table->currentRow() == table->rowCount() - 1)
         {
             if (table == ui->tableWidgetIncrement)
             {
@@ -505,6 +567,10 @@ void DialogIncrements::EnableDetails(QTableWidget *table, bool enabled)
             ui->lineEditName->clear();
             ui->lineEditName->blockSignals(false);
 
+            ui->comboBoxIncrementUnits->blockSignals(true);
+            ui->comboBoxIncrementUnits->setCurrentIndex(-1);
+            ui->comboBoxIncrementUnits->blockSignals(false);
+
             ui->plainTextEditDescription->blockSignals(true);
             ui->plainTextEditDescription->clear();
             ui->plainTextEditDescription->blockSignals(false);
@@ -522,6 +588,10 @@ void DialogIncrements::EnableDetails(QTableWidget *table, bool enabled)
             ui->lineEditNamePC->blockSignals(true);
             ui->lineEditNamePC->clear();
             ui->lineEditNamePC->blockSignals(false);
+
+            ui->comboBoxPreviewCalculationUnits->blockSignals(true);
+            ui->comboBoxPreviewCalculationUnits->setCurrentIndex(-1);
+            ui->comboBoxPreviewCalculationUnits->blockSignals(false);
 
             ui->plainTextEditDescriptionPC->blockSignals(true);
             ui->plainTextEditDescriptionPC->clear();
@@ -542,6 +612,7 @@ void DialogIncrements::EnableDetails(QTableWidget *table, bool enabled)
         ui->pushButtonGrow->setEnabled(enabled);
         ui->toolButtonExpr->setEnabled(enabled);
         ui->lineEditName->setEnabled(enabled);
+        ui->comboBoxIncrementUnits->setEnabled(enabled);
         ui->plainTextEditDescription->setEnabled(enabled);
         ui->plainTextEditFormula->setEnabled(enabled);
     }
@@ -550,15 +621,47 @@ void DialogIncrements::EnableDetails(QTableWidget *table, bool enabled)
         ui->pushButtonGrowPC->setEnabled(enabled);
         ui->toolButtonExprPC->setEnabled(enabled);
         ui->lineEditNamePC->setEnabled(enabled);
+        ui->comboBoxPreviewCalculationUnits->setEnabled(enabled);
         ui->plainTextEditDescriptionPC->setEnabled(enabled);
         ui->plainTextEditFormulaPC->setEnabled(enabled);
+    }
+
+    if (table->rowCount() > 0)
+    {
+        const QTableWidgetItem *nameField = table->item(table->currentRow(), 0);
+        SCASSERT(nameField != nullptr)
+        QSharedPointer<VIncrement> const incr = m_data->GetVariable<VIncrement>(nameField->text());
+        const bool isSeparator = incr->GetIncrementType() == IncrementType::Separator;
+
+        if (table == ui->tableWidgetIncrement)
+        {
+            ui->labelCalculated->setVisible(not isSeparator);
+            ui->labelCalculatedValue->setVisible(not isSeparator);
+            ui->labelFormula->setVisible(not isSeparator);
+            ui->plainTextEditFormula->setVisible(not isSeparator);
+            ui->pushButtonGrow->setVisible(not isSeparator);
+            ui->toolButtonExpr->setVisible(not isSeparator);
+            ui->labelIncrementUnits->setVisible(not isSeparator);
+            ui->comboBoxIncrementUnits->setVisible(not isSeparator);
+        }
+        else if (table == ui->tableWidgetPC)
+        {
+            ui->labelCalculatedPC->setVisible(not isSeparator);
+            ui->labelCalculatedValuePC->setVisible(not isSeparator);
+            ui->labelFormulaPC->setVisible(not isSeparator);
+            ui->plainTextEditFormulaPC->setVisible(not isSeparator);
+            ui->pushButtonGrowPC->setVisible(not isSeparator);
+            ui->toolButtonExprPC->setVisible(not isSeparator);
+            ui->labelPreviewCalculationUnits->setVisible(not isSeparator);
+            ui->comboBoxPreviewCalculationUnits->setVisible(not isSeparator);
+        }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::LocalUpdateTree()
 {
-    doc->LiteParseIncrements();
+    m_patternDoc->LiteParseIncrements();
 
     int row = ui->tableWidgetIncrement->currentRow();
 
@@ -576,52 +679,56 @@ void DialogIncrements::LocalUpdateTree()
     ui->tableWidgetPC->selectRow(row);
     ui->tableWidgetPC->blockSignals(false);
 
-    search->RefreshList(ui->lineEditFind->text());
-    searchPC->RefreshList(ui->lineEditFindPC->text());
+    m_search->RefreshList(ui->lineEditFind->text());
+    m_searchPC->RefreshList(ui->lineEditFindPC->text());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogIncrements::IncrementUsed(const QString &name) const
+auto DialogIncrements::IncrementUsed(const QString &name) const -> bool
 {
-    const QVector<VFormulaField> expressions = doc->ListExpressions();
+    const QVector<VFormulaField> expressions = m_patternDoc->ListExpressions();
 
-    for(auto field : expressions)
-    {
-        if (field.expression.indexOf(name) != -1)
-        {
-            // Eval formula
-            try
-            {
-                QScopedPointer<qmu::QmuTokenParser> cal(new qmu::QmuTokenParser(field.expression, false, false));
+    return std::any_of(expressions.constBegin(), expressions.constEnd(),
+                       [name](const auto &field)
+                       {
+                           if (field.expression.indexOf(name) == -1)
+                           {
+                               return false;
+                           }
 
-                // Tokens (variables, measurements)
-                if (cal->GetTokens().values().contains(name))
-                {
-                    return true;
-                }
-            }
-            catch (const qmu::QmuParserError &)
-            {
-                // Do nothing. Because we not sure if used. A formula is broken.
-            }
-        }
-    }
-    return false;
+                           // Eval formula
+                           try
+                           {
+                               QScopedPointer<qmu::QmuTokenParser> const cal(
+                                   new qmu::QmuTokenParser(field.expression, false, false));
+
+                               // Tokens (variables, measurements)
+                               if (cal->GetTokens().values().contains(name))
+                               {
+                                   return true;
+                               }
+                           }
+                           catch (const qmu::QmuParserError &)
+                           {
+                               // Do nothing. Because we not sure if used. A formula is broken.
+                           }
+                           return false;
+                       });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::CacheRename(const QString &name, const QString &newName)
 {
-    for (int i = 0; i < renameList.size(); ++i)
+    for (auto &[first, second] : m_renameList)
     {
-        if (renameList.at(i).second == name)
+        if (second == name)
         {
-            renameList[i].second = newName;
+            second = newName;
             return;
         }
     }
 
-    renameList.append(qMakePair(name, newName));
+    m_renameList.append(qMakePair(name, newName));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -631,6 +738,7 @@ void DialogIncrements::ShowTableIncrementDetails(QTableWidget *table)
     QPlainTextEdit *plainTextEditDescription = nullptr;
     QPlainTextEdit *plainTextEditFormula = nullptr;
     QLabel *labelCalculatedValue = nullptr;
+    QComboBox *comboboxUnits = nullptr;
 
     if (table == ui->tableWidgetIncrement)
     {
@@ -638,6 +746,7 @@ void DialogIncrements::ShowTableIncrementDetails(QTableWidget *table)
         plainTextEditDescription = ui->plainTextEditDescription;
         plainTextEditFormula = ui->plainTextEditFormula;
         labelCalculatedValue = ui->labelCalculatedValue;
+        comboboxUnits = ui->comboBoxIncrementUnits;
     }
     else if (table == ui->tableWidgetPC)
     {
@@ -645,6 +754,7 @@ void DialogIncrements::ShowTableIncrementDetails(QTableWidget *table)
         plainTextEditDescription = ui->plainTextEditDescriptionPC;
         plainTextEditFormula = ui->plainTextEditFormulaPC;
         labelCalculatedValue = ui->labelCalculatedValuePC;
+        comboboxUnits = ui->comboBoxPreviewCalculationUnits;
     }
     else
     {
@@ -661,9 +771,9 @@ void DialogIncrements::ShowTableIncrementDetails(QTableWidget *table)
 
         try
         {
-            incr = data->GetVariable<VIncrement>(nameField->text());
+            incr = m_data->GetVariable<VIncrement>(nameField->text());
         }
-        catch(const VExceptionBadId &e)
+        catch (const VExceptionBadId &e)
         {
             Q_UNUSED(e)
             EnableDetails(table, false);
@@ -674,14 +784,20 @@ void DialogIncrements::ShowTableIncrementDetails(QTableWidget *table)
         lineEditName->setText(ClearIncrementName(incr->GetName()));
         lineEditName->blockSignals(false);
 
+        comboboxUnits->blockSignals(true);
+        comboboxUnits->setCurrentIndex(comboboxUnits->findData(
+            static_cast<int>(incr->IsSpecialUnits() ? IncrUnits::Degrees : IncrUnits::Pattern)));
+        comboboxUnits->blockSignals(false);
+
         plainTextEditDescription->blockSignals(true);
         plainTextEditDescription->setPlainText(incr->GetDescription());
         plainTextEditDescription->blockSignals(false);
 
-        EvalIncrementFormula(incr->GetFormula(), false, incr->GetData(), labelCalculatedValue);
+        EvalIncrementFormula(incr->GetFormula(), false, incr->GetData(), labelCalculatedValue, incr->IsSpecialUnits());
         plainTextEditFormula->blockSignals(true);
 
-        QString formula = VTranslateVars::TryFormulaToUser(incr->GetFormula(), qApp->Settings()->GetOsSeparator());
+        QString const formula = VTranslateVars::TryFormulaToUser(
+            incr->GetFormula(), VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 
         plainTextEditFormula->setPlainText(formula);
         plainTextEditFormula->blockSignals(false);
@@ -693,12 +809,525 @@ void DialogIncrements::ShowTableIncrementDetails(QTableWidget *table)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto DialogIncrements::InitVarTypeMenu(QMenu *menu, bool incrementTab) -> QMenu *
+{
+    if (menu == nullptr)
+    {
+        menu = new QMenu(this);
+    }
+    else
+    {
+        menu->clear();
+    }
+
+    QAction *action = menu->addAction(tr("Increment"));
+    action->setData(incrementTab); // Increments tab
+    connect(action, &QAction::triggered, this, &DialogIncrements::AddIncrement);
+
+    action = menu->addAction(tr("Separator"));
+    action->setData(incrementTab); // Increments tab
+    connect(action, &QAction::triggered, this, &DialogIncrements::AddSeparator);
+
+    return menu;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::AddNewIncrement(IncrementType type)
+{
+    qCDebug(vDialog, "Add new increment");
+
+    bool incrementMode = true;
+    if (auto *action = qobject_cast<QAction *>(sender()))
+    {
+        incrementMode = action->data().toBool();
+    }
+    else if (auto *button = qobject_cast<QToolButton *>(sender()))
+    {
+        incrementMode = button == ui->toolButtonAdd;
+    }
+    else
+    {
+        return;
+    }
+
+    QTableWidget *table = incrementMode ? ui->tableWidgetIncrement : ui->tableWidgetPC;
+
+    const QString name = GetCustomName();
+    qint32 currentRow = -1;
+
+    if (table->currentRow() == -1)
+    {
+        currentRow = table->rowCount();
+        incrementMode ? m_patternDoc->AddEmptyIncrement(name, type)
+                      : m_patternDoc->AddEmptyPreviewCalculation(name, type);
+    }
+    else
+    {
+        currentRow = table->currentRow() + 1;
+        const QTableWidgetItem *nameField = table->item(table->currentRow(), 0);
+
+        incrementMode ? m_patternDoc->AddEmptyIncrementAfter(nameField->text(), name, type)
+                      : m_patternDoc->AddEmptyPreviewCalculationAfter(nameField->text(), name, type);
+    }
+
+    m_hasChanges = true;
+    LocalUpdateTree();
+
+    table->selectRow(currentRow);
+    table->repaint(); // Force repain to fix paint artifacts on Mac OS X
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::InitSearch()
+{
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+
+    m_search->SetUseUnicodePreperties(settings->GetIncrementsSearchOptionUseUnicodeProperties());
+    m_search->SetMatchWord(settings->GetIncrementsSearchOptionWholeWord());
+    m_search->SetMatchRegexp(settings->GetIncrementsSearchOptionRegexp());
+    m_search->SetMatchCase(settings->GetIncrementsSearchOptionMatchCase());
+
+    m_searchPC->SetUseUnicodePreperties(settings->GetPreviewCalculationsSearchOptionUseUnicodeProperties());
+    m_searchPC->SetMatchWord(settings->GetPreviewCalculationsSearchOptionWholeWord());
+    m_searchPC->SetMatchRegexp(settings->GetPreviewCalculationsSearchOptionRegexp());
+    m_searchPC->SetMatchCase(settings->GetPreviewCalculationsSearchOptionMatchCase());
+
+    ui->lineEditFind->setPlaceholderText(m_search->SearchPlaceholder());
+    ui->lineEditFindPC->setPlaceholderText(m_searchPC->SearchPlaceholder());
+
+    UpdateSearchControlsTooltips();
+
+    connect(ui->lineEditFind, &QLineEdit::textEdited, this, [this](const QString &term) { m_search->Find(term); });
+    connect(ui->lineEditFind, &QLineEdit::editingFinished, this,
+            [this]()
+            {
+                SaveIncrementsSearchRequest();
+                InitIncrementsSearchHistory();
+                m_search->Find(ui->lineEditFind->text());
+            });
+    connect(ui->lineEditFindPC, &QLineEdit::textEdited, this, [this](const QString &term) { m_searchPC->Find(term); });
+    connect(ui->lineEditFindPC, &QLineEdit::editingFinished, this,
+            [this]()
+            {
+                SavePreviewCalculationsSearchRequest();
+                InitPreviewCalculationsSearchHistory();
+                m_searchPC->Find(ui->lineEditFindPC->text());
+            });
+
+    connect(ui->toolButtonFindPrevious, &QToolButton::clicked, this,
+            [this]()
+            {
+                SaveIncrementsSearchRequest();
+                InitPreviewCalculationsSearchHistory();
+                m_search->FindPrevious();
+                ui->labelResults->setText(
+                    QStringLiteral("%1/%2").arg(m_search->MatchIndex() + 1).arg(m_search->MatchCount()));
+            });
+    connect(ui->toolButtonFindPreviousPC, &QToolButton::clicked, this,
+            [this]()
+            {
+                SavePreviewCalculationsSearchRequest();
+                InitPreviewCalculationsSearchHistory();
+                m_searchPC->FindPrevious();
+                ui->labelResultsPC->setText(
+                    QStringLiteral("%1/%2").arg(m_searchPC->MatchIndex() + 1).arg(m_searchPC->MatchCount()));
+            });
+    connect(ui->toolButtonFindNext, &QToolButton::clicked, this,
+            [this]()
+            {
+                SaveIncrementsSearchRequest();
+                InitIncrementsSearchHistory();
+                m_search->FindNext();
+                ui->labelResults->setText(
+                    QStringLiteral("%1/%2").arg(m_search->MatchIndex() + 1).arg(m_search->MatchCount()));
+            });
+    connect(ui->toolButtonFindNextPC, &QToolButton::clicked, this,
+            [this]()
+            {
+                SavePreviewCalculationsSearchRequest();
+                InitPreviewCalculationsSearchHistory();
+                m_searchPC->FindNext();
+                ui->labelResultsPC->setText(
+                    QStringLiteral("%1/%2").arg(m_searchPC->MatchIndex() + 1).arg(m_searchPC->MatchCount()));
+            });
+
+    connect(m_search.data(), &VTableSearch::HasResult, this,
+            [this](bool state)
+            {
+                ui->toolButtonFindPrevious->setEnabled(state);
+                ui->toolButtonFindNext->setEnabled(state);
+
+                if (state)
+                {
+                    ui->labelResults->setText(
+                        QStringLiteral("%1/%2").arg(m_search->MatchIndex() + 1).arg(m_search->MatchCount()));
+                }
+                else
+                {
+                    ui->labelResults->setText(tr("0 results"));
+                }
+
+                QPalette palette;
+
+                if (not state && not ui->lineEditFind->text().isEmpty())
+                {
+                    palette.setColor(QPalette::Text, Qt::red);
+                    ui->lineEditFind->setPalette(palette);
+
+                    palette.setColor(QPalette::Active, ui->labelResults->foregroundRole(), Qt::red);
+                    palette.setColor(QPalette::Inactive, ui->labelResults->foregroundRole(), Qt::red);
+                    ui->labelResults->setPalette(palette);
+                }
+                else
+                {
+                    ui->lineEditFind->setPalette(palette);
+                    ui->labelResults->setPalette(palette);
+                }
+            });
+
+    connect(m_searchPC.data(), &VTableSearch::HasResult, this,
+            [this](bool state)
+            {
+                ui->toolButtonFindPreviousPC->setEnabled(state);
+                ui->toolButtonFindNextPC->setEnabled(state);
+
+                if (state)
+                {
+                    ui->labelResultsPC->setText(
+                        QStringLiteral("%1/%2").arg(m_searchPC->MatchIndex() + 1).arg(m_searchPC->MatchCount()));
+                }
+                else
+                {
+                    ui->labelResultsPC->setText(tr("0 results"));
+                }
+
+                QPalette palette;
+
+                if (not state && not ui->lineEditFindPC->text().isEmpty())
+                {
+                    palette.setColor(QPalette::Text, Qt::red);
+                    ui->lineEditFindPC->setPalette(palette);
+
+                    palette.setColor(QPalette::Active, ui->labelResultsPC->foregroundRole(), Qt::red);
+                    palette.setColor(QPalette::Inactive, ui->labelResultsPC->foregroundRole(), Qt::red);
+                    ui->labelResultsPC->setPalette(palette);
+                }
+                else
+                {
+                    ui->lineEditFindPC->setPalette(palette);
+                    ui->labelResultsPC->setPalette(palette);
+                }
+            });
+
+    connect(ui->toolButtonCaseSensitive, &QToolButton::toggled, this,
+            [this](bool checked)
+            {
+                m_search->SetMatchCase(checked);
+                m_search->Find(ui->lineEditFind->text());
+                ui->lineEditFind->setPlaceholderText(m_search->SearchPlaceholder());
+            });
+
+    connect(ui->toolButtonCaseSensitivePC, &QToolButton::toggled, this,
+            [this](bool checked)
+            {
+                m_searchPC->SetMatchCase(checked);
+                m_searchPC->Find(ui->lineEditFindPC->text());
+                ui->lineEditFindPC->setPlaceholderText(m_searchPC->SearchPlaceholder());
+            });
+
+    connect(ui->toolButtonWholeWord, &QToolButton::toggled, this,
+            [this](bool checked)
+            {
+                m_search->SetMatchWord(checked);
+                m_search->Find(ui->lineEditFind->text());
+                ui->lineEditFind->setPlaceholderText(m_search->SearchPlaceholder());
+            });
+
+    connect(ui->toolButtonWholeWordPC, &QToolButton::toggled, this,
+            [this](bool checked)
+            {
+                m_searchPC->SetMatchWord(checked);
+                m_searchPC->Find(ui->lineEditFindPC->text());
+                ui->lineEditFindPC->setPlaceholderText(m_searchPC->SearchPlaceholder());
+            });
+
+    connect(ui->toolButtonRegexp, &QToolButton::toggled, this,
+            [this](bool checked)
+            {
+                m_search->SetMatchRegexp(checked);
+
+                if (checked)
+                {
+                    ui->toolButtonWholeWord->blockSignals(true);
+                    ui->toolButtonWholeWord->setChecked(false);
+                    ui->toolButtonWholeWord->blockSignals(false);
+                    ui->toolButtonWholeWord->setEnabled(false);
+
+                    ui->toolButtonUseUnicodeProperties->setEnabled(true);
+                }
+                else
+                {
+                    ui->toolButtonWholeWord->setEnabled(true);
+                    ui->toolButtonUseUnicodeProperties->blockSignals(true);
+                    ui->toolButtonUseUnicodeProperties->setChecked(false);
+                    ui->toolButtonUseUnicodeProperties->blockSignals(false);
+                    ui->toolButtonUseUnicodeProperties->setEnabled(false);
+                }
+                m_search->Find(ui->lineEditFind->text());
+                ui->lineEditFind->setPlaceholderText(m_search->SearchPlaceholder());
+            });
+
+    connect(ui->toolButtonRegexpPC, &QToolButton::toggled, this,
+            [this](bool checked)
+            {
+                m_searchPC->SetMatchRegexp(checked);
+
+                if (checked)
+                {
+                    ui->toolButtonWholeWordPC->blockSignals(true);
+                    ui->toolButtonWholeWordPC->setChecked(false);
+                    ui->toolButtonWholeWordPC->blockSignals(false);
+                    ui->toolButtonWholeWordPC->setEnabled(false);
+
+                    ui->toolButtonUseUnicodePropertiesPC->setEnabled(true);
+                }
+                else
+                {
+                    ui->toolButtonWholeWordPC->setEnabled(true);
+                    ui->toolButtonUseUnicodePropertiesPC->blockSignals(true);
+                    ui->toolButtonUseUnicodePropertiesPC->setChecked(false);
+                    ui->toolButtonUseUnicodePropertiesPC->blockSignals(false);
+                    ui->toolButtonUseUnicodePropertiesPC->setEnabled(false);
+                }
+                m_searchPC->Find(ui->lineEditFindPC->text());
+                ui->lineEditFindPC->setPlaceholderText(m_searchPC->SearchPlaceholder());
+            });
+
+    connect(ui->toolButtonUseUnicodeProperties, &QToolButton::toggled, this,
+            [this](bool checked)
+            {
+                m_search->SetUseUnicodePreperties(checked);
+                m_search->Find(ui->lineEditFind->text());
+            });
+
+    connect(ui->toolButtonUseUnicodePropertiesPC, &QToolButton::toggled, this,
+            [this](bool checked)
+            {
+                m_searchPC->SetUseUnicodePreperties(checked);
+                m_searchPC->Find(ui->lineEditFindPC->text());
+            });
+
+    m_searchHistory->setStyleSheet(QStringLiteral("QMenu { menu-scrollable: 1; }"));
+    m_searchHistoryPC->setStyleSheet(QStringLiteral("QMenu { menu-scrollable: 1; }"));
+
+    InitIncrementsSearchHistory();
+    InitPreviewCalculationsSearchHistory();
+
+    ui->pushButtonSearch->setMenu(m_searchHistory);
+    ui->pushButtonSearchPC->setMenu(m_searchHistoryPC);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::InitIncrementsSearchHistory()
+{
+    QStringList const searchHistory =
+        VAbstractValApplication::VApp()->ValentinaSettings()->GetIncrementsSearchHistory();
+    m_searchHistory->clear();
+
+    if (searchHistory.isEmpty())
+    {
+        QAction *action = m_searchHistory->addAction('<'_L1 + tr("Empty", "list") + '>'_L1);
+        action->setDisabled(true);
+        return;
+    }
+
+    for (const auto &term : searchHistory)
+    {
+        QAction *action = m_searchHistory->addAction(term);
+        action->setData(term);
+        connect(action, &QAction::triggered, this,
+                [this]()
+                {
+                    auto *action = qobject_cast<QAction *>(sender());
+                    if (action != nullptr)
+                    {
+                        QString const termText = action->data().toString();
+                        ui->lineEditFind->setText(termText);
+                        m_search->Find(termText);
+                        ui->lineEditFind->setFocus();
+                    }
+                });
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::InitPreviewCalculationsSearchHistory()
+{
+    QStringList const searchHistory =
+        VAbstractValApplication::VApp()->ValentinaSettings()->GetPreviewCalculationsSearchHistory();
+    m_searchHistoryPC->clear();
+
+    if (searchHistory.isEmpty())
+    {
+        QAction *action = m_searchHistoryPC->addAction('<'_L1 + tr("Empty", "list") + '>'_L1);
+        action->setDisabled(true);
+        return;
+    }
+
+    for (const auto &term : searchHistory)
+    {
+        QAction *action = m_searchHistoryPC->addAction(term);
+        action->setData(term);
+        connect(action, &QAction::triggered, this,
+                [this]()
+                {
+                    auto *action = qobject_cast<QAction *>(sender());
+                    if (action != nullptr)
+                    {
+                        QString const termText = action->data().toString();
+                        ui->lineEditFindPC->setText(termText);
+                        m_searchPC->Find(termText);
+                        ui->lineEditFindPC->setFocus();
+                    }
+                });
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::SaveIncrementsSearchRequest()
+{
+    QStringList searchHistory = VAbstractValApplication::VApp()->ValentinaSettings()->GetIncrementsSearchHistory();
+    QString const term = ui->lineEditFind->text();
+    if (term.isEmpty())
+    {
+        return;
+    }
+
+    searchHistory.removeAll(term);
+    searchHistory.prepend(term);
+    while (searchHistory.size() > VTableSearch::MaxHistoryRecords)
+    {
+        searchHistory.removeLast();
+    }
+    VAbstractValApplication::VApp()->ValentinaSettings()->SetIncrementsSearchHistory(searchHistory);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::SavePreviewCalculationsSearchRequest()
+{
+    QStringList searchHistory =
+        VAbstractValApplication::VApp()->ValentinaSettings()->GetPreviewCalculationsSearchHistory();
+    QString const term = ui->lineEditFindPC->text();
+    if (term.isEmpty())
+    {
+        return;
+    }
+
+    searchHistory.removeAll(term);
+    searchHistory.prepend(term);
+    while (searchHistory.size() > VTableSearch::MaxHistoryRecords)
+    {
+        searchHistory.removeLast();
+    }
+    VAbstractValApplication::VApp()->ValentinaSettings()->SetPreviewCalculationsSearchHistory(searchHistory);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::UpdateSearchControlsTooltips()
+{
+    auto UpdateToolTip = [this](QAbstractButton *button)
+    {
+        if (button->toolTip().contains("%1"_L1))
+        {
+            m_serachButtonTooltips.insert(button, button->toolTip());
+            button->setToolTip(button->toolTip().arg(button->shortcut().toString(QKeySequence::NativeText)));
+        }
+        else if (m_serachButtonTooltips.contains(button))
+        {
+            QString const tooltip = m_serachButtonTooltips.value(button);
+            button->setToolTip(tooltip.arg(button->shortcut().toString(QKeySequence::NativeText)));
+        }
+    };
+
+    UpdateToolTip(ui->toolButtonCaseSensitive);
+    UpdateToolTip(ui->toolButtonWholeWord);
+    UpdateToolTip(ui->toolButtonRegexp);
+    UpdateToolTip(ui->toolButtonUseUnicodeProperties);
+    UpdateToolTip(ui->pushButtonSearch);
+    UpdateToolTip(ui->toolButtonFindPrevious);
+    UpdateToolTip(ui->toolButtonFindNext);
+
+    UpdateToolTip(ui->toolButtonCaseSensitivePC);
+    UpdateToolTip(ui->toolButtonWholeWordPC);
+    UpdateToolTip(ui->toolButtonRegexpPC);
+    UpdateToolTip(ui->toolButtonUseUnicodePropertiesPC);
+    UpdateToolTip(ui->pushButtonSearchPC);
+    UpdateToolTip(ui->toolButtonFindPreviousPC);
+    UpdateToolTip(ui->toolButtonFindNextPC);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::InitIncrementUnits(QComboBox *combo)
+{
+    SCASSERT(combo != nullptr)
+
+    combo->blockSignals(true);
+
+    int current = -1;
+    if (combo->currentIndex() != -1)
+    {
+        current = combo->currentData().toInt();
+    }
+
+    QString units;
+    switch (VAbstractValApplication::VApp()->patternUnits())
+    {
+        case Unit::Mm:
+            units = tr("Millimeters");
+            break;
+        case Unit::Inch:
+            units = tr("Inches");
+            break;
+        case Unit::Cm:
+            units = tr("Centimeters");
+            break;
+        default:
+            units = QStringLiteral("<Invalid>");
+            break;
+    }
+
+    combo->clear();
+    combo->addItem(units, QVariant(static_cast<int>(IncrUnits::Pattern)));
+    combo->addItem(tr("Degrees"), QVariant(static_cast<int>(IncrUnits::Degrees)));
+
+    if (int const i = combo->findData(current); i != -1)
+    {
+        combo->setCurrentIndex(i);
+    }
+
+    combo->blockSignals(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::InitIcons()
+{
+    const auto resource = QStringLiteral("icon");
+    const auto fxIcon = QStringLiteral("24x24/fx.png");
+
+    ui->toolButtonExpr->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    ui->toolButtonExprPC->setIcon(VTheme::GetIconResource(resource, fxIcon));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief FullUpdateFromFile update information in tables form file
  */
 void DialogIncrements::FullUpdateFromFile()
 {
-    hasChanges = false;
+    m_hasChanges = false;
+
+    const int incrementRow = ui->tableWidgetIncrement->currentRow();
+    const int pcRow = ui->tableWidgetPC->currentRow();
 
     ui->tableWidgetLines->clearContents();
     ui->tableWidgetSplines->clearContents();
@@ -706,7 +1335,7 @@ void DialogIncrements::FullUpdateFromFile()
     ui->tableWidgetLinesAngles->clearContents();
     ui->tableWidgetRadiusesArcs->clearContents();
 
-    m_completeData = doc->GetCompleteData();
+    m_completeData = m_patternDoc->GetCompleteData();
 
     FillIncrements();
     FillPreviewCalculations();
@@ -717,26 +1346,29 @@ void DialogIncrements::FullUpdateFromFile()
     FillRadiusesArcs();
     FillAnglesCurves();
 
-    search->RefreshList(ui->lineEditFind->text());
-    searchPC->RefreshList(ui->lineEditFindPC->text());
+    m_search->RefreshList(ui->lineEditFind->text());
+    m_searchPC->RefreshList(ui->lineEditFindPC->text());
+
+    ui->tableWidgetIncrement->selectRow(incrementRow);
+    ui->tableWidgetPC->selectRow(pcRow);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::RefreshPattern()
 {
-    if (hasChanges)
+    if (m_hasChanges)
     {
-        QVector<VFormulaField> expressions = doc->ListExpressions();
-        for (auto &item : renameList)
+        QVector<VFormulaField> expressions = m_patternDoc->ListExpressions();
+        for (const auto &[first, second] : m_renameList)
         {
-            doc->ReplaceNameInFormula(expressions, item.first, item.second);
+            m_patternDoc->ReplaceNameInFormula(expressions, first, second);
         }
-        renameList.clear();
+        m_renameList.clear();
 
         const int row = ui->tableWidgetIncrement->currentRow();
         const int rowPC = ui->tableWidgetPC->currentRow();
 
-        doc->LiteParseTree(Document::LiteParse);
+        m_patternDoc->LiteParseTree(Document::FullLiteParse);
 
         ui->tableWidgetIncrement->blockSignals(true);
         ui->tableWidgetIncrement->selectRow(row);
@@ -746,55 +1378,79 @@ void DialogIncrements::RefreshPattern()
         ui->tableWidgetPC->selectRow(rowPC);
         ui->tableWidgetPC->blockSignals(false);
 
-        hasChanges = false;
+        m_hasChanges = false;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::UpdateShortcuts()
+{
+    if (VAbstractShortcutManager *manager = VAbstractApplication::VApp()->GetShortcutManager())
+    {
+        manager->UpdateButtonShortcut(m_shortcuts);
+        UpdateSearchControlsTooltips();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::FillIncrementsTable(QTableWidget *table,
-                                           const QMap<QString, QSharedPointer<VIncrement> > &increments,
-                                           bool takePreviewCalculations, bool freshCall)
+                                           const QMap<QString, QSharedPointer<VIncrement>> &increments,
+                                           bool takePreviewCalculations)
 {
     SCASSERT(table != nullptr)
 
     table->blockSignals(true);
     table->clearContents();
 
-    QMap<QString, QSharedPointer<VIncrement> >::const_iterator i;
     QMap<quint32, QString> map;
-    //Sorting QHash by id
-    for (i = increments.constBegin(); i != increments.constEnd(); ++i)
+    // Sorting QHash by id
+    for (auto i = increments.constBegin(); i != increments.constEnd(); ++i)
     {
-        QSharedPointer<VIncrement> incr = i.value();
+        const QSharedPointer<VIncrement> &incr = i.value();
         if (takePreviewCalculations == incr->IsPreviewCalculation())
         {
-            map.insert(incr->getIndex(), i.key());
+            map.insert(incr->GetIndex(), i.key());
         }
     }
 
     qint32 currentRow = -1;
-    QMapIterator<quint32, QString> iMap(map);
-    table->setRowCount ( map.size() );
+    QMapIterator iMap(map);
+    table->setRowCount(static_cast<int>(map.size()));
     while (iMap.hasNext())
     {
         iMap.next();
-        QSharedPointer<VIncrement> incr = increments.value(iMap.value());
-        currentRow++;
+        const QSharedPointer<VIncrement> &incr = increments.value(iMap.value());
+        ++currentRow;
 
-        AddCell(table, incr->GetName(), currentRow, 0, Qt::AlignVCenter); // name
-        AddCell(table, qApp->LocaleToString(*incr->GetValue()), currentRow, 1,
-                Qt::AlignHCenter | Qt::AlignVCenter, incr->IsFormulaOk()); // calculated value
+        if (incr->GetType() == VarType::Increment)
+        {
+            AddCell(table, incr->GetName(), currentRow, 0, Qt::AlignVCenter); // name
 
-        QString formula = VTranslateVars::TryFormulaToUser(incr->GetFormula(), qApp->Settings()->GetOsSeparator());
+            QString calculatedValue = VAbstractApplication::VApp()->LocaleToString(*incr->GetValue());
+            if (incr->IsSpecialUnits())
+            {
+                calculatedValue = calculatedValue + degreeSymbol;
+            }
+            AddCell(table, calculatedValue, currentRow, 1, Qt::AlignCenter, incr->IsFormulaOk()); // calculated value
 
-        AddCell(table, formula, currentRow, 2, Qt::AlignVCenter); // formula
+            QString const formula = VTranslateVars::TryFormulaToUser(
+                incr->GetFormula(), VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+
+            AddCell(table, formula, currentRow, 2, Qt::AlignVCenter); // formula
+
+            if (table->columnSpan(currentRow, 1) > 1)
+            {
+                table->setSpan(currentRow, 1, 1, 1);
+            }
+        }
+        else if (incr->GetType() == VarType::IncrementSeparator)
+        {
+            AddSeparatorCell(table, incr->GetName(), currentRow, 0, Qt::AlignVCenter); // name
+            AddCell(table, incr->GetDescription(), currentRow, 1, Qt::AlignCenter);    // description
+            table->setSpan(currentRow, 1, 1, 2);
+        }
     }
 
-    if (freshCall)
-    {
-        table->resizeColumnsToContents();
-        table->resizeRowsToContents();
-    }
     table->horizontalHeader()->setStretchLastSection(true);
     table->blockSignals(false);
 }
@@ -805,60 +1461,13 @@ void DialogIncrements::FillIncrementsTable(QTableWidget *table,
  */
 void DialogIncrements::AddIncrement()
 {
-    qCDebug(vDialog, "Add new increment");
+    AddNewIncrement(IncrementType::Increment);
+}
 
-    QToolButton *button = qobject_cast<QToolButton *>(sender());
-    QTableWidget *table = nullptr;
-
-    if (button == ui->toolButtonAdd)
-    {
-        table = ui->tableWidgetIncrement;
-    }
-    else if (button == ui->toolButtonAddPC)
-    {
-        table = ui->tableWidgetPC;
-    }
-    else
-    {
-        return;
-    }
-
-    const QString name = GetCustomName();
-    qint32 currentRow = -1;
-
-    if (table->currentRow() == -1)
-    {
-        currentRow = table->rowCount();
-
-        if (button == ui->toolButtonAdd)
-        {
-            doc->AddEmptyIncrement(name);
-        }
-        else if (button == ui->toolButtonAddPC)
-        {
-            doc->AddEmptyPreviewCalculation(name);
-        }
-    }
-    else
-    {
-        currentRow  = table->currentRow()+1;
-        const QTableWidgetItem *nameField = table->item(table->currentRow(), 0);
-
-        if (button == ui->toolButtonAdd)
-        {
-            doc->AddEmptyIncrementAfter(nameField->text(), name);
-        }
-        else if (button == ui->toolButtonAddPC)
-        {
-            doc->AddEmptyPreviewCalculationAfter(nameField->text(), name);
-        }
-    }
-
-    hasChanges = true;
-    LocalUpdateTree();
-
-    table->selectRow(currentRow);
-    table->repaint(); // Force repain to fix paint artifacts on Mac OS X
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::AddSeparator()
+{
+    AddNewIncrement(IncrementType::Separator);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -867,7 +1476,7 @@ void DialogIncrements::AddIncrement()
  */
 void DialogIncrements::RemoveIncrement()
 {
-    QToolButton *button = qobject_cast<QToolButton *>(sender());
+    auto *button = qobject_cast<QToolButton *>(sender());
 
     QTableWidget *table = nullptr;
 
@@ -895,32 +1504,24 @@ void DialogIncrements::RemoveIncrement()
 
     if (button == ui->toolButtonRemove)
     {
-        doc->RemoveIncrement(nameField->text());
+        m_patternDoc->RemoveIncrement(nameField->text());
     }
     else if (button == ui->toolButtonRemovePC)
     {
-        doc->RemovePreviewCalculation(nameField->text());
+        m_patternDoc->RemovePreviewCalculation(nameField->text());
     }
 
-    hasChanges = true;
+    m_hasChanges = true;
     LocalUpdateTree();
 
-    if (table->rowCount() > 0)
-    {
-        table->selectRow(0);
-    }
-    else
-    {
-        EnableDetails(table, false);
-    }
-
+    table->rowCount() > 0 ? table->selectRow(0) : EnableDetails(table, false);
     table->repaint(); // Force repain to fix paint artifacts on Mac OS X
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::MoveUp()
 {
-    QToolButton *button = qobject_cast<QToolButton *>(sender());
+    auto *button = qobject_cast<QToolButton *>(sender());
 
     QTableWidget *table = nullptr;
 
@@ -948,24 +1549,24 @@ void DialogIncrements::MoveUp()
 
     if (button == ui->toolButtonUp)
     {
-        doc->MoveUpIncrement(nameField->text());
+        m_patternDoc->MoveUpIncrement(nameField->text());
     }
     else if (button == ui->toolButtonUpPC)
     {
-        doc->MoveUpPreviewCalculation(nameField->text());
+        m_patternDoc->MoveUpPreviewCalculation(nameField->text());
     }
 
-    hasChanges = true;
+    m_hasChanges = true;
     LocalUpdateTree();
 
-    table->selectRow(row-1);
+    table->selectRow(row - 1);
     table->repaint(); // Force repain to fix paint artifacts on Mac OS X
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::MoveDown()
 {
-    QToolButton *button = qobject_cast<QToolButton *>(sender());
+    auto *button = qobject_cast<QToolButton *>(sender());
 
     QTableWidget *table = nullptr;
 
@@ -993,24 +1594,24 @@ void DialogIncrements::MoveDown()
 
     if (button == ui->toolButtonDown)
     {
-        doc->MoveDownIncrement(nameField->text());
+        m_patternDoc->MoveDownIncrement(nameField->text());
     }
     else if (button == ui->toolButtonDownPC)
     {
-        doc->MoveDownPreviewCalculation(nameField->text());
+        m_patternDoc->MoveDownPreviewCalculation(nameField->text());
     }
 
-    hasChanges = true;
+    m_hasChanges = true;
     LocalUpdateTree();
 
-    table->selectRow(row+1);
+    table->selectRow(row + 1);
     table->repaint(); // Force repain to fix paint artifacts on Mac OS X
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::SaveIncrName(const QString &text)
 {
-    QLineEdit *lineEdit = qobject_cast<QLineEdit *>(sender());
+    auto *lineEdit = qobject_cast<QLineEdit *>(sender());
 
     QTableWidget *table = nullptr;
 
@@ -1039,26 +1640,26 @@ void DialogIncrements::SaveIncrName(const QString &text)
     QString newName = text.isEmpty() ? GetCustomName() : CustomIncrSign + text;
     bool updateFlag = not text.isEmpty();
 
-    if (not data->IsUnique(newName))
+    if (not m_data->IsUnique(newName))
     {
         updateFlag = false;
         qint32 num = 2;
         QString name = newName;
         do
         {
-            name = name + QLatin1String("_") + QString().number(num);
+            name = name + '_'_L1 + QString::number(num);
             num++;
-        } while (not data->IsUnique(name));
+        } while (not m_data->IsUnique(name));
         newName = name;
     }
 
-    doc->SetIncrementName(nameField->text(), newName);
-    QVector<VFormulaField> expression = doc->ListIncrementExpressions();
-    doc->ReplaceNameInFormula(expression, nameField->text(), newName);
+    m_patternDoc->SetIncrementName(nameField->text(), newName);
+    QVector<VFormulaField> expression = m_patternDoc->ListIncrementExpressions();
+    m_patternDoc->ReplaceNameInFormula(expression, nameField->text(), newName);
 
     CacheRename(nameField->text(), newName);
 
-    hasChanges = true;
+    m_hasChanges = true;
     if (updateFlag)
     {
         LocalUpdateTree();
@@ -1066,7 +1667,7 @@ void DialogIncrements::SaveIncrName(const QString &text)
     else
     {
         nameField->setText(newName);
-        doc->LiteParseIncrements();
+        m_patternDoc->LiteParseIncrements();
     }
 
     table->blockSignals(true);
@@ -1075,9 +1676,49 @@ void DialogIncrements::SaveIncrName(const QString &text)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::SaveIncrUnits()
+{
+    auto *combo = qobject_cast<QComboBox *>(sender());
+
+    QTableWidget *table = nullptr;
+
+    if (combo == ui->comboBoxIncrementUnits)
+    {
+        table = ui->tableWidgetIncrement;
+    }
+    else if (combo == ui->comboBoxPreviewCalculationUnits)
+    {
+        table = ui->tableWidgetPC;
+    }
+    else
+    {
+        return;
+    }
+
+    const int row = table->currentRow();
+
+    if (row == -1)
+    {
+        return;
+    }
+
+    const QTableWidgetItem *nameField = table->item(row, 0);
+
+    const auto units = static_cast<IncrUnits>(combo->currentData().toInt());
+    m_patternDoc->SetIncrementSpecialUnits(nameField->text(), units == IncrUnits::Degrees);
+    LocalUpdateTree();
+
+    table->blockSignals(true);
+    table->selectRow(row);
+    table->blockSignals(false);
+
+    ShowTableIncrementDetails(table);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::SaveIncrDescription()
 {
-    QPlainTextEdit *textEdit = qobject_cast<QPlainTextEdit *>(sender());
+    auto *textEdit = qobject_cast<QPlainTextEdit *>(sender());
 
     QTableWidget *table = nullptr;
 
@@ -1104,7 +1745,7 @@ void DialogIncrements::SaveIncrDescription()
     const QTextCursor cursor = textEdit->textCursor();
 
     const QTableWidgetItem *nameField = table->item(row, 0);
-    doc->SetIncrementDescription(nameField->text(), textEdit->toPlainText());
+    m_patternDoc->SetIncrementDescription(nameField->text(), textEdit->toPlainText());
     LocalUpdateTree();
 
     table->blockSignals(true);
@@ -1116,7 +1757,7 @@ void DialogIncrements::SaveIncrDescription()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::SaveIncrFormula()
 {
-    QPlainTextEdit *textEdit = qobject_cast<QPlainTextEdit *>(sender());
+    auto *textEdit = qobject_cast<QPlainTextEdit *>(sender());
 
     QTableWidget *table = nullptr;
     QLabel *labelCalculatedValue = nullptr;
@@ -1145,36 +1786,55 @@ void DialogIncrements::SaveIncrFormula()
 
     const QTableWidgetItem *nameField = table->item(row, 0);
 
-    QString text = textEdit->toPlainText();
+    QString const text = textEdit->toPlainText();
+    QSharedPointer<VIncrement> const incr = m_data->GetVariable<VIncrement>(nameField->text());
 
-    QTableWidgetItem *formulaField = table->item(row, 2);
-    if (formulaField->text() == text)
+    if (const QTableWidgetItem *formulaField = table->item(row, 2); formulaField->text() == text)
     {
         QTableWidgetItem *result = table->item(row, 1);
-        //Show unit in dialog lable (cm, mm or inch)
-        const QString postfix = UnitsToStr(qApp->patternUnit());
-        labelCalculatedValue->setText(result->text() + QChar(QChar::Space) +postfix);
+        if (incr->IsSpecialUnits())
+        {
+            labelCalculatedValue->setText(result->text() + QChar(QChar::Space) + degreeSymbol);
+        }
+        else
+        {
+            // Show unit in dialog lable (cm, mm or inch)
+            const QString postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits());
+            labelCalculatedValue->setText(result->text() + QChar(QChar::Space) + postfix);
+        }
         return;
     }
 
     if (text.isEmpty())
     {
-        //Show unit in dialog lable (cm, mm or inch)
-        const QString postfix = UnitsToStr(qApp->patternUnit());
-        labelCalculatedValue->setText(tr("Error") + " (" + postfix + "). " + tr("Empty field."));
+        if (incr->IsSpecialUnits())
+        {
+            labelCalculatedValue->setText(tr("Error") + " (" + degreeSymbol + "). " + tr("Empty field."));
+        }
+        else
+        {
+            // Show unit in dialog lable (cm, mm or inch)
+            const QString postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits());
+            labelCalculatedValue->setText(tr("Error") + " (" + postfix + "). " + tr("Empty field."));
+        }
         return;
     }
 
-    QSharedPointer<VIncrement> incr = data->GetVariable<VIncrement>(nameField->text());
-    if (not EvalIncrementFormula(text, true, incr->GetData(), labelCalculatedValue))
+    if (incr->GetIncrementType() == IncrementType::Separator)
+    {
+        return;
+    }
+
+    if (not EvalIncrementFormula(text, true, incr->GetData(), labelCalculatedValue, incr->IsSpecialUnits()))
     {
         return;
     }
 
     try
     {
-        const QString formula = qApp->TrVars()->FormulaFromUser(text, qApp->Settings()->GetOsSeparator());
-        doc->SetIncrementFormula(nameField->text(), formula);
+        const QString formula = VAbstractApplication::VApp()->TrVars()->FormulaFromUser(
+            text, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+        m_patternDoc->SetIncrementFormula(nameField->text(), formula);
     }
     catch (qmu::QmuParserError &e) // Just in case something bad will happen
     {
@@ -1184,7 +1844,7 @@ void DialogIncrements::SaveIncrFormula()
 
     const QTextCursor cursor = textEdit->textCursor();
 
-    hasChanges = true;
+    m_hasChanges = true;
     LocalUpdateTree();
 
     table->blockSignals(true);
@@ -1201,7 +1861,7 @@ void DialogIncrements::DeployFormula()
     SCASSERT(ui->plainTextEditFormulaPC != nullptr)
     SCASSERT(ui->pushButtonGrowPC != nullptr)
 
-    QPushButton *button = qobject_cast<QPushButton *>(sender());
+    auto *button = qobject_cast<QPushButton *>(sender());
 
     QPlainTextEdit *plainTextEditFormula = nullptr;
     QPushButton *pushButtonGrow = nullptr;
@@ -1211,13 +1871,13 @@ void DialogIncrements::DeployFormula()
     {
         plainTextEditFormula = ui->plainTextEditFormula;
         pushButtonGrow = ui->pushButtonGrow;
-        baseHeight = formulaBaseHeight;
+        baseHeight = m_formulaBaseHeight;
     }
     else if (button == ui->pushButtonGrowPC)
     {
         plainTextEditFormula = ui->plainTextEditFormulaPC;
         pushButtonGrow = ui->pushButtonGrowPC;
-        baseHeight = formulaBaseHeightPC;
+        baseHeight = m_formulaBaseHeightPC;
     }
     else
     {
@@ -1229,16 +1889,14 @@ void DialogIncrements::DeployFormula()
     if (plainTextEditFormula->height() < DIALOG_MAX_FORMULA_HEIGHT)
     {
         plainTextEditFormula->setFixedHeight(DIALOG_MAX_FORMULA_HEIGHT);
-        //Set icon from theme (internal for Windows system)
-        pushButtonGrow->setIcon(QIcon::fromTheme("go-next",
-                                                  QIcon(":/icons/win.icon.theme/16x16/actions/go-next.png")));
+        // Set icon from theme (internal for Windows system)
+        pushButtonGrow->setIcon(FromTheme(VThemeIcon::GoNext));
     }
     else
     {
-       plainTextEditFormula->setFixedHeight(baseHeight);
-       //Set icon from theme (internal for Windows system)
-       pushButtonGrow->setIcon(QIcon::fromTheme("go-down",
-                                                 QIcon(":/icons/win.icon.theme/16x16/actions/go-down.png")));
+        plainTextEditFormula->setFixedHeight(baseHeight);
+        // Set icon from theme (internal for Windows system)
+        pushButtonGrow->setIcon(FromTheme(VThemeIcon::GoDown));
     }
 
     // I found that after change size of formula field, it was filed for angle formula, field for formula became black.
@@ -1254,7 +1912,7 @@ void DialogIncrements::DeployFormula()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::Fx()
 {
-    QToolButton *button = qobject_cast<QToolButton *>(sender());
+    auto *button = qobject_cast<QToolButton *>(sender());
 
     QTableWidget *table = nullptr;
     QPlainTextEdit *plainTextEditFormula = nullptr;
@@ -1285,25 +1943,24 @@ void DialogIncrements::Fx()
     }
 
     const QTableWidgetItem *nameField = table->item(row, 0);
-    QSharedPointer<VIncrement> incr = data->GetVariable<VIncrement>(nameField->text());
+    QSharedPointer<VIncrement> const incr = m_data->GetVariable<VIncrement>(nameField->text());
 
-    QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(incr->GetData(), NULL_ID, this));
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(incr->GetData(), NULL_ID, this));
     dialog->setWindowTitle(tr("Edit increment"));
     incrementMode ? dialog->SetIncrementsMode() : dialog->SetPreviewCalculationsMode();
 
-    dialog->SetFormula(qApp->TrVars()->TryFormulaFromUser(plainTextEditFormula->toPlainText(),
-                                                          qApp->Settings()->GetOsSeparator()));
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    dialog->setPostfix(postfix);//Show unit in dialog lable (cm, mm or inch)
+    dialog->SetFormula(VTranslateVars::TryFormulaFromUser(plainTextEditFormula->toPlainText(),
+                                                          VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+    const QString postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
+    dialog->setPostfix(postfix); // Show unit in dialog lable (cm, mm or inch)
 
     if (dialog->exec() == QDialog::Accepted)
     {
         // Fix the bug #492. https://bitbucket.org/dismine/valentina/issues/492/valentina-crashes-when-add-an-increment
         // Because of the bug need to take QTableWidgetItem twice time. Previous update "killed" the pointer.
-        const QTableWidgetItem *nameField = table->item(row, 0);
-        doc->SetIncrementFormula(nameField->text(), dialog->GetFormula());
+        m_patternDoc->SetIncrementFormula(table->item(row, 0)->text(), dialog->GetFormula());
 
-        hasChanges = true;
+        m_hasChanges = true;
         LocalUpdateTree();
 
         table->selectRow(row);
@@ -1320,7 +1977,19 @@ void DialogIncrements::closeEvent(QCloseEvent *event)
     ui->lineEditName->blockSignals(true);
     ui->plainTextEditDescription->blockSignals(true);
 
-    disconnect(this->doc, &VPattern::FullUpdateFromFile, this, &DialogIncrements::FullUpdateFromFile);
+    disconnect(this->m_patternDoc, &VPattern::FullUpdateFromFile, this, &DialogIncrements::FullUpdateFromFile);
+
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+
+    settings->SetIncrementsSearchOptionMatchCase(m_search->IsMatchCase());
+    settings->SetIncrementsSearchOptionWholeWord(m_search->IsMatchWord());
+    settings->SetIncrementsSearchOptionRegexp(m_search->IsMatchRegexp());
+    settings->SetIncrementsSearchOptionUseUnicodeProperties(m_search->IsUseUnicodePreperties());
+
+    settings->SetPreviewCalculationsSearchOptionMatchCase(m_searchPC->IsMatchCase());
+    settings->SetPreviewCalculationsSearchOptionWholeWord(m_searchPC->IsMatchWord());
+    settings->SetPreviewCalculationsSearchOptionRegexp(m_searchPC->IsMatchRegexp());
+    settings->SetPreviewCalculationsSearchOptionUseUnicodeProperties(m_searchPC->IsUseUnicodePreperties());
 
     emit UpdateProperties();
     emit DialogClosed(QDialog::Accepted);
@@ -1334,48 +2003,59 @@ void DialogIncrements::changeEvent(QEvent *event)
     {
         // retranslate designer form (single inheritance approach)
         ui->retranslateUi(this);
+
+        ui->toolButtonAdd->setMenu(InitVarTypeMenu(ui->toolButtonAdd->menu(), true /*increments tab*/));
+        ui->toolButtonAddPC->setMenu(InitVarTypeMenu(ui->toolButtonAddPC->menu(), false /*preview calculations tab*/));
+
+        ui->lineEditFind->setPlaceholderText(m_search->SearchPlaceholder());
+        ui->lineEditFindPC->setPlaceholderText(m_searchPC->SearchPlaceholder());
+        UpdateSearchControlsTooltips();
+
         FullUpdateFromFile();
     }
+
+    if (event->type() == QEvent::PaletteChange)
+    {
+        InitIcons();
+    }
+
     // remember to call base class implementation
     QWidget::changeEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogIncrements::eventFilter(QObject *object, QEvent *event)
+auto DialogIncrements::eventFilter(QObject *object, QEvent *event) -> bool
 {
-    if (QLineEdit *textEdit = qobject_cast<QLineEdit *>(object))
+    if (auto *textEdit = qobject_cast<QLineEdit *>(object))
     {
         if (event->type() == QEvent::KeyPress)
         {
-            QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
-            if ((keyEvent->key() == Qt::Key_Period) && (keyEvent->modifiers() & Qt::KeypadModifier))
+            if (const auto *keyEvent = static_cast<QKeyEvent *>(event);
+                (keyEvent->key() == Qt::Key_Period) && (keyEvent->modifiers() & Qt::KeypadModifier))
             {
-                if (qApp->Settings()->GetOsSeparator())
+                if (VAbstractApplication::VApp()->Settings()->GetOsSeparator())
                 {
-                    textEdit->insert(QLocale().decimalPoint());
+                    textEdit->insert(LocaleDecimalPoint(QLocale()));
                 }
                 else
                 {
-                    textEdit->insert(QLocale::c().decimalPoint());
+                    textEdit->insert(LocaleDecimalPoint(QLocale::c()));
                 }
                 return true;
             }
         }
     }
-    else
-    {
-        // pass the event on to the parent class
-        return DialogTool::eventFilter(object, event);
-    }
-    return false;// pass the event to the widget
+
+    // pass the event on to the parent class
+    return DialogTool::eventFilter(object, event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::showEvent(QShowEvent *event)
 {
     // Skip DialogTool implementation
-    QDialog::showEvent(event);
-    if ( event->spontaneous() )
+    QDialog::showEvent(event); // NOLINT(bugprone-parent-virtual-call)
+    if (event->spontaneous())
     {
         return;
     }
@@ -1386,13 +2066,12 @@ void DialogIncrements::showEvent(QShowEvent *event)
     }
     // do your init stuff here
 
-    const QSize sz = qApp->Settings()->GetIncrementsDialogSize();
-    if (not sz.isEmpty())
+    if (const QSize sz = VAbstractApplication::VApp()->Settings()->GetIncrementsDialogSize(); not sz.isEmpty())
     {
         resize(sz);
     }
 
-    isInitialized = true;//first show windows are held
+    isInitialized = true; // first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1403,7 +2082,7 @@ void DialogIncrements::resizeEvent(QResizeEvent *event)
     // dialog creating, which would
     if (isInitialized)
     {
-        qApp->Settings()->SetIncrementsDialogSize(size());
+        VAbstractApplication::VApp()->Settings()->SetIncrementsDialogSize(size());
     }
     DialogTool::resizeEvent(event);
 }
@@ -1417,16 +2096,15 @@ void DialogIncrements::ShowIncrementDetails()
 //---------------------------------------------------------------------------------------------------------------------
 DialogIncrements::~DialogIncrements()
 {
+    ui->lineEditFind->blockSignals(true);   // prevents crash
+    ui->lineEditFindPC->blockSignals(true); // prevents crash
     delete ui;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::RestoreAfterClose()
 {
-    // Because of bug on Mac OS with Qt 5.11 closing this dialog causes a crash. Instead of closing we will keep
-    // dialog in memory and reuse it again. This function redo some moves made after close.
-
-    connect(this->doc, &VPattern::FullUpdateFromFile, this, &DialogIncrements::FullUpdateFromFile);
+    connect(this->m_patternDoc, &VPattern::FullUpdateFromFile, this, &DialogIncrements::FullUpdateFromFile);
 
     ui->tabWidget->setCurrentIndex(0);
 

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,15 +29,14 @@
 #ifndef VTOOLCUBICBEZIER_H
 #define VTOOLCUBICBEZIER_H
 
-#include <qcompilerdetection.h>
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
 #include <QtGlobal>
 
-#include "../vmisc/def.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/def.h"
 #include "vabstractspline.h"
 
 class VCubicBezier;
@@ -46,53 +45,56 @@ template <class T> class QSharedPointer;
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 
-struct VToolCubicBezierInitData : VAbstractToolInitData
+struct VToolCubicBezierInitData : VDrawToolInitData
 {
-    VToolCubicBezierInitData()
-        : VAbstractToolInitData(),
-          spline(nullptr)
-    {}
+    VToolCubicBezierInitData() = default;
 
-    VCubicBezier *spline;
+    VCubicBezier *spline{nullptr}; // NOLINT(misc-non-private-member-variables-in-classes)
 };
 
 QT_WARNING_POP
 
 class VToolCubicBezier : public VAbstractSpline
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
-    virtual ~VToolCubicBezier() Q_DECL_EQ_DEFAULT;
-    virtual void setDialog() override;
-    static VToolCubicBezier *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
-                                    VAbstractPattern *doc, VContainer *data);
-    static VToolCubicBezier *Create(VToolCubicBezierInitData initData);
+    ~VToolCubicBezier() override = default;
+    void SetDialog() override;
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolCubicBezier *;
+    static auto Create(VToolCubicBezierInitData initData) -> VToolCubicBezier *;
     static const QString ToolType;
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Tool::CubicBezier)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Tool::CubicBezier)
+    };
 
-    QString FirstPointName() const;
-    QString SecondPointName() const;
-    QString ThirdPointName() const;
-    QString ForthPointName() const;
+    auto FirstPointName() const -> QString;
+    auto SecondPointName() const -> QString;
+    auto ThirdPointName() const -> QString;
+    auto ForthPointName() const -> QString;
 
-    VCubicBezier getSpline()const;
-    void         setSpline(const VCubicBezier &spl);
+    auto getSpline() const -> VCubicBezier;
+    void setSpline(const VCubicBezier &spl);
 
-    virtual void ShowVisualization(bool show) override;
+    void ShowVisualization(bool show) override;
+
 protected slots:
-    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
-protected:
-    virtual void RemoveReferens() override;
-    virtual void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                            QList<quint32> &newDependencies) override;
-    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
-    virtual void SetVisualization() override;
-    virtual void RefreshGeometry() override;
-private:
-    Q_DISABLE_COPY(VToolCubicBezier)
+    void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) override;
 
-    VToolCubicBezier(const VToolCubicBezierInitData &initData, QGraphicsItem *parent = nullptr);
+protected:
+    void RemoveReferens() override;
+    void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies) override;
+    void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    void SetVisualization() override;
+    void RefreshGeometry() override;
+
+private:
+    Q_DISABLE_COPY_MOVE(VToolCubicBezier) // NOLINT
+
+    explicit VToolCubicBezier(const VToolCubicBezierInitData &initData, QGraphicsItem *parent = nullptr);
 
     void SetSplineAttributes(QDomElement &domElement, const VCubicBezier &spl);
 };

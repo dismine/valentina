@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef DIALOGPOINTOFINTERSECTIONCURVES_H
 #define DIALOGPOINTOFINTERSECTIONCURVES_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -39,51 +38,93 @@
 #include "../vmisc/def.h"
 #include "dialogtool.h"
 
-namespace Ui {
+namespace Ui
+{
 class DialogPointOfIntersectionCurves;
 }
 
-class DialogPointOfIntersectionCurves : public DialogTool
+class DialogPointOfIntersectionCurves final : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
-    explicit DialogPointOfIntersectionCurves(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual ~DialogPointOfIntersectionCurves() override;
+    explicit DialogPointOfIntersectionCurves(const VContainer *data, VAbstractPattern *doc, quint32 toolId,
+                                             QWidget *parent = nullptr);
+    ~DialogPointOfIntersectionCurves() override;
 
-    void    SetPointName(const QString &value);
+    auto GetPointName() const -> QString;
+    void SetPointName(const QString &value);
 
-    quint32 GetFirstCurveId() const;
-    void    SetFirstCurveId(const quint32 &value);
+    auto GetFirstCurveId() const -> quint32;
+    void SetFirstCurveId(quint32 value);
 
-    quint32 GetSecondCurveId() const;
-    void    SetSecondCurveId(const quint32 &value);
+    auto GetSecondCurveId() const -> quint32;
+    void SetSecondCurveId(quint32 value);
 
-    VCrossCurvesPoint GetVCrossPoint() const;
-    void              SetVCrossPoint(const VCrossCurvesPoint &vP);
+    auto GetVCrossPoint() const -> VCrossCurvesPoint;
+    void SetVCrossPoint(VCrossCurvesPoint vP);
 
-    HCrossCurvesPoint GetHCrossPoint() const;
-    void              SetHCrossPoint(const HCrossCurvesPoint &hP);
+    auto GetHCrossPoint() const -> HCrossCurvesPoint;
+    void SetHCrossPoint(HCrossCurvesPoint hP);
+
+    void SetNotes(const QString &notes);
+    auto GetNotes() const -> QString;
+
+    void SetCurve1AliasSuffix1(const QString &alias);
+    auto GetCurve1AliasSuffix1() const -> QString;
+
+    void SetCurve1AliasSuffix2(const QString &alias);
+    auto GetCurve1AliasSuffix2() const -> QString;
+
+    void SetCurve2AliasSuffix1(const QString &alias);
+    auto GetCurve2AliasSuffix1() const -> QString;
+
+    void SetCurve2AliasSuffix2(const QString &alias);
+    auto GetCurve2AliasSuffix2() const -> QString;
 
 public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type) override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
 
 protected:
-    virtual void ShowVisualization() override;
+    void ShowVisualization() override;
 
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void SaveData() override;
-    virtual void CheckState() final;
+    void SaveData() override;
+    auto IsValid() const -> bool override;
 
 private slots:
     void CurveChanged();
+    void ValidateAlias();
 
 private:
-    Q_DISABLE_COPY(DialogPointOfIntersectionCurves)
+    Q_DISABLE_COPY_MOVE(DialogPointOfIntersectionCurves) // NOLINT
 
     Ui::DialogPointOfIntersectionCurves *ui;
+
+    QString pointName;
+
+    bool flagName;
+    bool flagError;
+    bool flagCurve1Alias1{true};
+    bool flagCurve1Alias2{true};
+    bool flagCurve2Alias1{true};
+    bool flagCurve2Alias2{true};
+
+    QString originCurve1AliasSuffix1{};
+    QString originCurve1AliasSuffix2{};
+    QString originCurve2AliasSuffix1{};
+    QString originCurve2AliasSuffix2{};
+
+    /** @brief number number of handled objects */
+    qint32 number{0};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto DialogPointOfIntersectionCurves::IsValid() const -> bool
+{
+    return flagName && flagError && flagCurve1Alias1 && flagCurve1Alias2 && flagCurve2Alias1 && flagCurve2Alias2;
+}
 
 #endif // DIALOGPOINTOFINTERSECTIONCURVES_H

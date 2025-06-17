@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -27,15 +27,21 @@
  *************************************************************************/
 
 #include "tst_qmutokenparser.h"
+#include "../qmuparser/qmudef.h"
 #include "../qmuparser/qmutokenparser.h"
-#include "../vmisc/logging.h"
 
 #include <QtTest>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 TST_QmuTokenParser::TST_QmuTokenParser(QObject *parent)
-    : QObject(parent),
-      m_systemLocale(QLocale::system())
+  : QObject(parent),
+    m_systemLocale(QLocale::system())
 {
 }
 
@@ -83,9 +89,13 @@ void TST_QmuTokenParser::TokenFromUser_data()
     QTest::addColumn<QLocale>("locale");
 
     const QList<QLocale> allLocales =
-            QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
-    for(auto &locale : allLocales)
+        QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
+    for (const auto &locale : allLocales)
     {
+        if (not SupportedLocale(locale))
+        {
+            continue;
+        }
         PrepareVal(1000.5, locale);
         PrepareVal(-1000.5, locale);
     }
@@ -114,54 +124,47 @@ void TST_QmuTokenParser::PrepareVal(qreal val, const QLocale &locale)
 {
     const QString formula = locale.toString(val);
     QString string = formula;
-    QString tag = QString("%1. String '%2'").arg(locale.name(), string);
+    QString tag = u"%1. String '%2'"_s.arg(locale.name(), string);
     QTest::newRow(qUtf8Printable(tag)) << string << true << locale;
 
-    string = formula+QLatin1String("+");
-    tag = QString("%1. String '%2'").arg(locale.name(), string);
+    string = formula + '+'_L1;
+    tag = u"%1. String '%2'"_s.arg(locale.name(), string);
     QTest::newRow(qUtf8Printable(tag)) << string << false << locale;
 
-    string = formula+QLatin1String("+")+formula;
-    tag = QString("%1. String '%2'").arg(locale.name(), string);
+    string = formula + '+'_L1 + formula;
+    tag = u"%1. String '%2'"_s.arg(locale.name(), string);
     QTest::newRow(qUtf8Printable(tag)) << string << false << locale;
 
-    string = formula+QString("+б");
-    tag = QString("%1. String '%2'").arg(locale.name(), string);
+    string = formula + u"+б"_s;
+    tag = u"%1. String '%2'"_s.arg(locale.name(), string);
     QTest::newRow(qUtf8Printable(tag)) << string << false << locale;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool TST_QmuTokenParser::IsSingleFromUser(const QString &formula)
+auto TST_QmuTokenParser::IsSingleFromUser(const QString &formula) -> bool
 {
     if (formula.isEmpty())
     {
-        return false;// if don't know say no
+        return false; // if don't know say no
     }
 
-    QMap<int, QString> tokens;
-    QMap<int, QString> numbers;
+    QMap<qmusizetype, QString> tokens;
+    QMap<qmusizetype, QString> numbers;
 
     try
     {
-        QScopedPointer<qmu::QmuTokenParser> cal(new qmu::QmuTokenParser(formula, true, true));
-        tokens = cal->GetTokens();// Tokens (variables, measurements)
-        numbers = cal->GetNumbers();// All numbers in expression
+        QScopedPointer<qmu::QmuTokenParser> const cal(new qmu::QmuTokenParser(formula, true, true));
+        tokens = cal->GetTokens();   // Tokens (variables, measurements)
+        numbers = cal->GetNumbers(); // All numbers in expression
     }
     catch (const qmu::QmuParserError &e)
     {
         Q_UNUSED(e)
-        return false;// something wrong with formula, say no
+        return false; // something wrong with formula, say no
     }
 
     // Remove "-" from tokens list if exist. If don't do that unary minus operation will broken.
-    qmu::QmuFormulaBase::RemoveAll(tokens, QLocale().negativeSign());
+    qmu::QmuFormulaBase::RemoveAll(tokens, LocaleNegativeSign(QLocale()));
 
-    if (tokens.isEmpty() && numbers.size() == 1)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return tokens.isEmpty() && numbers.size() == 1;
 }

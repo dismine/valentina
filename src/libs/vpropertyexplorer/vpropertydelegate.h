@@ -21,7 +21,7 @@
 #ifndef VPROPERTYDELEGATE_H
 #define VPROPERTYDELEGATE_H
 
-#include <qcompilerdetection.h>
+
 #include <QMetaObject>
 #include <QObject>
 #include <QSize>
@@ -36,14 +36,14 @@ namespace VPE
 
 class VPROPERTYEXPLORERSHARED_EXPORT VPropertyDelegate : public QStyledItemDelegate
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VPropertyDelegate(QObject *parent = nullptr);
     virtual ~VPropertyDelegate() override;
 
     //! Creates the editor widget
-    virtual QWidget* createEditor (QWidget* parent, const QStyleOptionViewItem& option,
-                                   const QModelIndex& index) const override;
+    virtual auto createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const
+        -> QWidget * override;
 
     //! Sets the index data to the editor
     virtual void setEditorData (QWidget * editor, const QModelIndex & index) const override;
@@ -53,7 +53,7 @@ public:
                                const QModelIndex & index) const override;
 
     //! Returns the size hint
-    virtual QSize sizeHint (const QStyleOptionViewItem& option, const QModelIndex& index) const override;
+    virtual auto sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const -> QSize override;
 
     //! Sets the row height. Set this to 0 and the standard will be taken
     void setRowHeight(int height = 0, bool add_to_standard = false);

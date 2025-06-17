@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,33 +29,30 @@
 #include "vcurvevariable.h"
 
 #include "../vmisc/def.h"
-#include "../ifc/ifcdef.h"
-#include "vinternalvariable.h"
 #include "vcurvevariable_p.h"
+#include "vinternalvariable.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VCurveVariable::VCurveVariable()
-    :VInternalVariable(), d(new VCurveVariableData)
+  : d(new VCurveVariableData)
 {
     SetType(VarType::Unknown);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VCurveVariable::VCurveVariable(const quint32 &id, const quint32 &parentId)
-    :VInternalVariable(), d(new VCurveVariableData(id, parentId))
+  : d(new VCurveVariableData(id, parentId))
 {
     SetType(VarType::Unknown);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VCurveVariable::VCurveVariable(const VCurveVariable &var)
-    :VInternalVariable(var), d(var.d)
-{}
+COPY_CONSTRUCTOR_IMPL_2(VCurveVariable, VInternalVariable)
 
 //---------------------------------------------------------------------------------------------------------------------
-VCurveVariable &VCurveVariable::operator=(const VCurveVariable &var)
+auto VCurveVariable::operator=(const VCurveVariable &var) -> VCurveVariable &
 {
-    if ( &var == this )
+    if (&var == this)
     {
         return *this;
     }
@@ -65,30 +62,48 @@ VCurveVariable &VCurveVariable::operator=(const VCurveVariable &var)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VCurveVariable::~VCurveVariable()
-{}
+VCurveVariable::VCurveVariable(VCurveVariable &&var) noexcept
+  : VInternalVariable(std::move(var)),
+    d(std::move(var.d)) // NOLINT(bugprone-use-after-move)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VCurveVariable::Filter(quint32 id)
+auto VCurveVariable::operator=(VCurveVariable &&var) noexcept -> VCurveVariable &
+{
+    VInternalVariable::operator=(var);
+    std::swap(d, var.d);
+    return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VCurveVariable::~VCurveVariable() = default;
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCurveVariable::Filter(quint32 id) -> bool
 {
     if (id == NULL_ID)
     {
         return false;
     }
 
-    if (d->parentId != NULL_ID)//Do not check if value zero
-    {// Not all curves have parents. Only those who was created after cutting the parent curve.
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wnull-dereference")
+
+    if (d->parentId != NULL_ID) // Do not check if value zero
+    { // Not all curves have parents. Only those who was created after cutting the parent curve.
         return d->id == id || d->parentId == id;
     }
-    else
-    {
-        return d->id == id;
-    }
+
+    // cppcheck-suppress unknownMacro
+    QT_WARNING_POP
+
+    return d->id == id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-quint32 VCurveVariable::GetId() const
+auto VCurveVariable::GetId() const -> quint32
 {
     return d->id;
 }
@@ -101,7 +116,7 @@ void VCurveVariable::SetId(const quint32 &id)
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-quint32 VCurveVariable::GetParentId() const
+auto VCurveVariable::GetParentId() const -> quint32
 {
     return d->parentId;
 }

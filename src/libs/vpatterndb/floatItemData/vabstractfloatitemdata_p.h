@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@
 #include <QPointF>
 #include <QSharedData>
 
-#include "../vmisc/diagnostic.h"
+#include "../vmisc/defglobal.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -41,29 +41,19 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VAbstractFloatItemDataPrivate : public QSharedData
 {
 public:
-    VAbstractFloatItemDataPrivate()
-        : m_ptPos(),
-          m_bVisible(false)
-    {}
-
-    VAbstractFloatItemDataPrivate(const VAbstractFloatItemDataPrivate &data)
-        : QSharedData(data),
-          m_ptPos(data.m_ptPos),
-          m_bVisible(data.m_bVisible)
-    {}
-
-    ~VAbstractFloatItemDataPrivate() Q_DECL_EQ_DEFAULT;
+    VAbstractFloatItemDataPrivate() = default;
+    VAbstractFloatItemDataPrivate(const VAbstractFloatItemDataPrivate &data) = default;
+    ~VAbstractFloatItemDataPrivate() = default;
 
     /** @brief m_ptPos position of label's top left corner */
-    QPointF m_ptPos;
-    /** @brief m_bVisible visibility flag */
-    bool    m_bVisible;
+    QPointF m_ptPos{}; // NOLINT(misc-non-private-member-variables-in-classes)
+    /** @brief m_bEnabled activity flag */
+    bool m_bEnabled{false}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
-    VAbstractFloatItemDataPrivate &operator=(const VAbstractFloatItemDataPrivate &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN_MOVE(VAbstractFloatItemDataPrivate) // NOLINT
 };
 
 QT_WARNING_POP
 
 #endif // VABSTRACTFLOATITEMDATA_P_H
-

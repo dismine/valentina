@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,29 +29,29 @@
 #ifndef DIALOGDATETIMEFORMATS_H
 #define DIALOGDATETIMEFORMATS_H
 
-#include <QDialog>
 #include <QDate>
+#include <QDialog>
 #include <QTime>
 
 namespace Ui
 {
-    class DialogDateTimeFormats;
+class DialogDateTimeFormats;
 }
 
 class QListWidgetItem;
 
 class DialogDateTimeFormats : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     DialogDateTimeFormats(const QDate &date, const QStringList &predefinedFormats,
                           const QStringList &userDefinedFormats, QWidget *parent = nullptr);
     DialogDateTimeFormats(const QTime &time, const QStringList &predefinedFormats,
                           const QStringList &userDefinedFormats, QWidget *parent = nullptr);
-    virtual ~DialogDateTimeFormats();
+    ~DialogDateTimeFormats() override;
 
-    QStringList GetFormats() const;
+    auto GetFormats() const -> QStringList;
 
 private slots:
     void AddLine();
@@ -60,20 +60,21 @@ private slots:
     void ShowFormatDetails();
 
 private:
-    Q_DISABLE_COPY(DialogDateTimeFormats)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DialogDateTimeFormats) // NOLINT
     Ui::DialogDateTimeFormats *ui;
-    bool  m_dateMode;
-    QDate m_date;
-    QTime m_time;
+    bool m_dateMode;
+    QDate m_date{};
+    QTime m_time{};
     QStringList m_predefined;
 
     void Init(const QStringList &predefined, const QStringList &userDefined);
     void SetFormatLines(const QStringList &predefined, const QStringList &userDefined);
     void SetupControls();
 
-    bool IsPredefined() const;
+    auto IsPredefined() const -> bool;
 
-    QListWidgetItem *AddListLine(const QString &format);
+    auto AddListLine(const QString &format) -> QListWidgetItem *;
 };
 
 #endif // DIALOGDATETIMEFORMATS_H

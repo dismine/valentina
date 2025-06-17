@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 #ifndef VTOOLPOINTOFINTERSECTION_H
 #define VTOOLPOINTOFINTERSECTION_H
 
-#include <qcompilerdetection.h>
+
 #include <QDomElement>
 #include <QGraphicsItem>
 #include <QMetaObject>
@@ -60,18 +60,18 @@ struct VToolPointOfIntersectionInitData : VToolSinglePointInitData
  */
 class VToolPointOfIntersection : public VToolSinglePoint
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
-    virtual void setDialog() override;
-    static VToolPointOfIntersection *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
-                                            VAbstractPattern *doc, VContainer *data);
-    static VToolPointOfIntersection *Create(VToolPointOfIntersectionInitData initData);
+    virtual void SetDialog() override;
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolPointOfIntersection *;
+    static auto Create(VToolPointOfIntersectionInitData initData) -> VToolPointOfIntersection *;
     static const QString ToolType;
-    virtual int  type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::PointOfIntersection) };
 
-    QString FirstPointName() const;
-    QString SecondPointName() const;
+    auto FirstPointName() const -> QString;
+    auto SecondPointName() const -> QString;
 
     virtual void ShowVisualization(bool show) override;
 protected:
@@ -84,7 +84,7 @@ protected:
 private slots:
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
 private:
-    Q_DISABLE_COPY(VToolPointOfIntersection)
+    Q_DISABLE_COPY_MOVE(VToolPointOfIntersection) // NOLINT
 
     /** @brief firstPointId id first line point. */
     quint32       firstPointId;

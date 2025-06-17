@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -33,20 +33,20 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 TST_VLayoutDetail::TST_VLayoutDetail(QObject *parent)
-    :AbstractTest(parent)
+  : AbstractTest(parent)
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VLayoutDetail::RemoveDublicates() const
 {
-    qDebug()<<"Case 1.";
+    qDebug() << "Case 1.";
     Case1();
 
-    qDebug()<<"Case 2.";
+    qDebug() << "Case 2.";
     Case2();
 
-    qDebug()<<"Case 3.";
+    qDebug() << "Case 3.";
     Case3();
 }
 
@@ -56,15 +56,19 @@ void TST_VLayoutDetail::Case1() const
     // See issue #304. Layout appears different than my pattern.
     // https://bitbucket.org/dismine/valentina/issue/304/layout-appears-different-than-my-pattern
 
-    VLayoutPiece det = VLayoutPiece();
-    det.SetCountourPoints(InputPointsCase1());
+    VLayoutPiece det;
+    QVector<VLayoutPoint> inputPoints;
+    CastTo(InputPointsCase1(), inputPoints);
+    det.SetContourPoints(inputPoints);
 
     // Begin comparison
-    Comparison(det.GetContourPoints(), OutputPointsCase1());
+    QVector<QPointF> contourPoints;
+    CastTo(det.GetMappedContourPoints(), contourPoints);
+    ComparePaths(contourPoints, OutputPointsCase1());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> TST_VLayoutDetail::InputPointsCase1() const
+auto TST_VLayoutDetail::InputPointsCase1() const -> QVector<QPointF>
 {
     QVector<QPointF> points;
 
@@ -118,23 +122,27 @@ QVector<QPointF> TST_VLayoutDetail::OutputPointsCase1() const //-V524
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VLayoutDetail::Case2() const
 {
-    VLayoutPiece det = VLayoutPiece();
-    det.SetCountourPoints(InputPointsCase2());
+    VLayoutPiece det;
+    QVector<VLayoutPoint> inputPoints;
+    CastTo(InputPointsCase2(), inputPoints);
+    det.SetContourPoints(inputPoints);
 
     // Begin comparison
-    Comparison(det.GetContourPoints(), OutputPointsCase2());
+    QVector<QPointF> contourPoints;
+    CastTo(det.GetMappedContourPoints(), contourPoints);
+    ComparePaths(contourPoints, OutputPointsCase2());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> TST_VLayoutDetail::InputPointsCase2() const
+auto TST_VLayoutDetail::InputPointsCase2() const -> QVector<QPointF>
 {
     QVector<QPointF> points;
 
     points += QPointF(557.0, -94.0);
     points += QPointF(760.0, -53.0);
-    points += QPointF(760.0, -53.0);// Need delete this part
-    points += QPointF(760.0, -53.0);// Need delete this part
-    points += QPointF(760.0, -53.0);// Need delete this part
+    points += QPointF(760.0, -53.0); // Need delete this part
+    points += QPointF(760.0, -53.0); // Need delete this part
+    points += QPointF(760.0, -53.0); // Need delete this part
     points += QPointF(661.0, 411.0);
     points += QPointF(708.0, 467.0);
     points += QPointF(366.0, 845.0);
@@ -143,7 +151,7 @@ QVector<QPointF> TST_VLayoutDetail::InputPointsCase2() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> TST_VLayoutDetail::OutputPointsCase2() const
+auto TST_VLayoutDetail::OutputPointsCase2() const -> QVector<QPointF>
 {
     QVector<QPointF> points;
 
@@ -159,19 +167,23 @@ QVector<QPointF> TST_VLayoutDetail::OutputPointsCase2() const
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VLayoutDetail::Case3() const
 {
-    VLayoutPiece det = VLayoutPiece();
-    det.SetCountourPoints(InputPointsCase3());
+    VLayoutPiece det;
+    QVector<VLayoutPoint> inputPoints;
+    CastTo(InputPointsCase3(), inputPoints);
+    det.SetContourPoints(inputPoints);
 
     // Begin comparison
-    Comparison(det.GetContourPoints(), OutputPointsCase3());
+    QVector<QPointF> contourPoints;
+    CastTo(det.GetMappedContourPoints(), contourPoints);
+    ComparePathsDistance(contourPoints, OutputPointsCase3());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> TST_VLayoutDetail::InputPointsCase3() const
+auto TST_VLayoutDetail::InputPointsCase3() const -> QVector<QPointF>
 {
     QVector<QPointF> points;
 
-    points += QPointF(557.0, -94.0);// Only one point
+    points += QPointF(557.0, -94.0); // Only one point
 
     return points;
 }
@@ -181,7 +193,7 @@ QVector<QPointF> TST_VLayoutDetail::OutputPointsCase3() const //-V524
 {
     QVector<QPointF> points;
 
-    points += QPointF(557.0, -94.0);// Only one point
+    points += QPointF(557.0, -94.0); // Only one point
 
     return points;
 }

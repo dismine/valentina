@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -31,20 +31,53 @@
 
 #include <QLineEdit>
 
+class QStringListModel;
+
 class VLineEdit : public QLineEdit
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
-    explicit VLineEdit(QWidget * parent = nullptr);
-    VLineEdit(const QString &contents, QWidget *parent = nullptr);
+    explicit VLineEdit(QWidget *parent = nullptr);
+    explicit VLineEdit(const QString &contents, QWidget *parent = nullptr);
 
 protected:
     virtual void focusInEvent(QFocusEvent *e) override;
     virtual void focusOutEvent(QFocusEvent *e) override;
     virtual void mousePressEvent(QMouseEvent *e) override;
+
 private:
-    Q_DISABLE_COPY(VLineEdit)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VLineEdit) // NOLINT
     bool m_selectOnMousePress;
+};
+
+/*! Line edit widget with auto completion based on QStringListModel.
+  Modified behaviour: completion list will appear even when contents of
+  line edit is empty. Full list of options will be showed when line edit
+  has focus and is empty.
+  */
+class VCompleterLineEdit : public VLineEdit
+{
+    Q_OBJECT // NOLINT
+
+public:
+    explicit VCompleterLineEdit(QWidget *parent = nullptr);
+
+    //! Set list of options used for completion.
+    void SetCompletion(const QStringList &list);
+
+protected:
+    virtual void focusInEvent(QFocusEvent *e) override;
+    virtual void customEvent(QEvent *e) override;
+
+private slots:
+    void ShowCompletion();
+    void CompletionPopup();
+
+private:
+    Q_DISABLE_COPY_MOVE(VCompleterLineEdit) // NOLINT
+    QStringListModel *m_model;
 };
 
 #endif // VLINEEDIT_H

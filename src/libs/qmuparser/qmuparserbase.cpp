@@ -27,14 +27,14 @@
 #include <QStringList>
 #include <QTextStream>
 #include <QtDebug>
+#include <QtMath>
 #include <map>
 #ifdef QMUP_USE_OPENMP
-    #include <omp.h>
+#include <omp.h>
 #endif
-#include <assert.h>
+#include <cassert>
 
 #include "qmudef.h"
-#include "../vmisc/vmath.h"
 
 /**
  * @file
@@ -47,46 +47,36 @@ namespace qmu
 bool QmuParserBase::g_DbgDumpCmdCode = false;
 bool QmuParserBase::g_DbgDumpStack = false;
 
-/**
- * @brief Identifiers for built in binary operators.
- *
- * When defining custom binary operators with #AddOprt(...) make sure not to choose
- * names conflicting with these definitions.
- */
-const QStringList QmuParserBase::c_DefaultOprt = QStringList()<< "<=" << ">=" << "!=" << "==" << "<"  << ">"  << "+"
-                                                              << "-"  << "*"  << "/"  << "^"  << "&&" << "||" << "="
-                                                              << "("  << ")"  << "?"  << ":";
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Constructor.
  */
 QmuParserBase::QmuParserBase()
-    : m_locale(QLocale::c()),
-      m_decimalPoint(QLocale::c().decimalPoint()),
-      m_thousandsSeparator(QLocale::c().groupSeparator()),
-      m_FunDef(),
-      m_pTokenReader(),
-      m_pParseFormula(&QmuParserBase::ParseString),
-      m_vRPN(),
-      m_vStringBuf(),
-      m_vStringVarBuf(),
-      m_PostOprtDef(),
-      m_InfixOprtDef(),
-      m_OprtDef(),
-      m_ConstDef(),
-      m_StrVarDef(),
-      m_VarDef(),
-      m_bBuiltInOp(true),
-      m_sNameChars(),
-      m_sOprtChars(),
-      m_sInfixOprtChars(),
-      m_nIfElseCounter(0),
-      m_vStackBuffer(),
-      m_nFinalResultIdx(0),
-      m_Tokens(QMap<int, QString>()),
-      m_Numbers(QMap<int, QString>()),
-      allowSubexpressions(true)
+  : m_locale(QLocale::c()),
+    m_decimalPoint(LocaleDecimalPoint(QLocale::c())),
+    m_thousandsSeparator(LocaleGroupSeparator(QLocale::c())),
+    m_FunDef(),
+    m_pTokenReader(),
+    m_pParseFormula(&QmuParserBase::ParseString),
+    m_vRPN(),
+    m_vStringBuf(),
+    m_vStringVarBuf(),
+    m_PostOprtDef(),
+    m_InfixOprtDef(),
+    m_OprtDef(),
+    m_ConstDef(),
+    m_StrVarDef(),
+    m_VarDef(),
+    m_bBuiltInOp(true),
+    m_sNameChars(),
+    m_sOprtChars(),
+    m_sInfixOprtChars(),
+    m_nIfElseCounter(0),
+    m_vStackBuffer(),
+    m_nFinalResultIdx(0),
+    m_Tokens(QMap<qmusizetype, QString>()),
+    m_Numbers(QMap<qmusizetype, QString>()),
+    allowSubexpressions(true)
 {
     InitTokenReader();
 }
@@ -98,31 +88,31 @@ QmuParserBase::QmuParserBase()
  * Tha parser can be safely copy constructed but the bytecode is reset during copy construction.
  */
 QmuParserBase::QmuParserBase(const QmuParserBase &a_Parser)
-    : m_locale(a_Parser.getLocale()),
-      m_decimalPoint(a_Parser.getDecimalPoint()),
-      m_thousandsSeparator(a_Parser.getThousandsSeparator()),
-      m_FunDef(),
-      m_pTokenReader(),
-      m_pParseFormula(&QmuParserBase::ParseString),
-      m_vRPN(),
-      m_vStringBuf(),
-      m_vStringVarBuf(),
-      m_PostOprtDef(),
-      m_InfixOprtDef(),
-      m_OprtDef(),
-      m_ConstDef(),
-      m_StrVarDef(),
-      m_VarDef(),
-      m_bBuiltInOp(true),
-      m_sNameChars(),
-      m_sOprtChars(),
-      m_sInfixOprtChars(),
-      m_nIfElseCounter(0),
-      m_vStackBuffer(),
-      m_nFinalResultIdx(0),
-      m_Tokens(QMap<int, QString>()),
-      m_Numbers(QMap<int, QString>()),
-      allowSubexpressions(true)
+  : m_locale(a_Parser.getLocale()),
+    m_decimalPoint(a_Parser.getDecimalPoint()),
+    m_thousandsSeparator(a_Parser.getThousandsSeparator()),
+    m_FunDef(),
+    m_pTokenReader(),
+    m_pParseFormula(&QmuParserBase::ParseString),
+    m_vRPN(),
+    m_vStringBuf(),
+    m_vStringVarBuf(),
+    m_PostOprtDef(),
+    m_InfixOprtDef(),
+    m_OprtDef(),
+    m_ConstDef(),
+    m_StrVarDef(),
+    m_VarDef(),
+    m_bBuiltInOp(true),
+    m_sNameChars(),
+    m_sOprtChars(),
+    m_sInfixOprtChars(),
+    m_nIfElseCounter(0),
+    m_vStackBuffer(),
+    m_nFinalResultIdx(0),
+    m_Tokens(QMap<qmusizetype, QString>()),
+    m_Numbers(QMap<qmusizetype, QString>()),
+    allowSubexpressions(true)
 {
     m_pTokenReader.reset(new token_reader_type(this));
     Assign(a_Parser);
@@ -130,7 +120,8 @@ QmuParserBase::QmuParserBase(const QmuParserBase &a_Parser)
 
 //---------------------------------------------------------------------------------------------------------------------
 QmuParserBase::~QmuParserBase()
-{}
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -139,9 +130,9 @@ QmuParserBase::~QmuParserBase()
  * Implemented by calling Assign(a_Parser). Self assignement is suppressed.
  * @param a_Parser Object to copy to this.
  * @return *this
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
-QmuParserBase& QmuParserBase::operator=(const QmuParserBase &a_Parser)
+auto QmuParserBase::operator=(const QmuParserBase &a_Parser) -> QmuParserBase &
 {
     if (this != &a_Parser)
     {
@@ -162,34 +153,34 @@ QmuParserBase& QmuParserBase::operator=(const QmuParserBase &a_Parser)
  */
 void QmuParserBase::Assign(const QmuParserBase &a_Parser)
 {
-    if (&a_Parser==this)
+    if (&a_Parser == this)
     {
-      return;
+        return;
     }
 
     // Don't copy bytecode instead cause the parser to create new bytecode
     // by resetting the parse function.
     ReInit();
 
-    m_ConstDef        = a_Parser.m_ConstDef;         // Copy user define constants
-    m_VarDef          = a_Parser.m_VarDef;           // Copy user defined variables
-    m_bBuiltInOp      = a_Parser.m_bBuiltInOp;
-    m_vStringBuf      = a_Parser.m_vStringBuf;
-    m_vStackBuffer    = a_Parser.m_vStackBuffer;
+    m_ConstDef = a_Parser.m_ConstDef; // Copy user define constants
+    m_VarDef = a_Parser.m_VarDef;     // Copy user defined variables
+    m_bBuiltInOp = a_Parser.m_bBuiltInOp;
+    m_vStringBuf = a_Parser.m_vStringBuf;
+    m_vStackBuffer = a_Parser.m_vStackBuffer;
     m_nFinalResultIdx = a_Parser.m_nFinalResultIdx;
-    m_StrVarDef       = a_Parser.m_StrVarDef;
-    m_vStringVarBuf   = a_Parser.m_vStringVarBuf;
-    m_nIfElseCounter  = a_Parser.m_nIfElseCounter;
+    m_StrVarDef = a_Parser.m_StrVarDef;
+    m_vStringVarBuf = a_Parser.m_vStringVarBuf;
+    m_nIfElseCounter = a_Parser.m_nIfElseCounter;
     m_pTokenReader.reset(a_Parser.m_pTokenReader->Clone(this));
 
     // Copy function and operator callbacks
-    m_FunDef          = a_Parser.m_FunDef;             // Copy function definitions
-    m_PostOprtDef     = a_Parser.m_PostOprtDef;   // post value unary operators
-    m_InfixOprtDef    = a_Parser.m_InfixOprtDef; // unary operators for infix notation
-    m_OprtDef         = a_Parser.m_OprtDef;           // binary operators
+    m_FunDef = a_Parser.m_FunDef;             // Copy function definitions
+    m_PostOprtDef = a_Parser.m_PostOprtDef;   // post value unary operators
+    m_InfixOprtDef = a_Parser.m_InfixOprtDef; // unary operators for infix notation
+    m_OprtDef = a_Parser.m_OprtDef;           // binary operators
 
-    m_sNameChars      = a_Parser.m_sNameChars;
-    m_sOprtChars      = a_Parser.m_sOprtChars;
+    m_sNameChars = a_Parser.m_sNameChars;
+    m_sOprtChars = a_Parser.m_sOprtChars;
     m_sInfixOprtChars = a_Parser.m_sInfixOprtChars;
 }
 
@@ -203,8 +194,9 @@ void QmuParserBase::Assign(const QmuParserBase &a_Parser)
 void QmuParserBase::ResetLocale()
 {
     setLocale(QLocale::c());
-    m_decimalPoint = m_locale.decimalPoint();
-    m_thousandsSeparator = m_locale.groupSeparator();
+    m_decimalPoint = LocaleDecimalPoint(m_locale);
+    m_thousandsSeparator = LocaleGroupSeparator(m_locale);
+    m_cNumbers = false;
     SetArgSep(';');
 }
 
@@ -213,7 +205,7 @@ void QmuParserBase::ResetLocale()
  * @brief Reset parser to string parsing mode and clear internal buffers.
  *
  * Clear bytecode, reset the token reader.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
 void QmuParserBase::ReInit() const
 {
@@ -227,7 +219,7 @@ void QmuParserBase::ReInit() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void QmuParserBase::OnDetectVar(const QString &pExpr, int &nStart, int &nEnd)
+void QmuParserBase::OnDetectVar(const QString &pExpr, qmusizetype &nStart, qmusizetype &nEnd)
 {
     Q_UNUSED(pExpr)
     Q_UNUSED(nStart)
@@ -241,7 +233,7 @@ void QmuParserBase::setAllowSubexpressions(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QLocale QmuParserBase::getLocale() const
+auto QmuParserBase::getLocale() const -> QLocale
 {
     return m_locale;
 }
@@ -255,7 +247,7 @@ void QmuParserBase::setLocale(const QLocale &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QChar QmuParserBase::getDecimalPoint() const
+auto QmuParserBase::getDecimalPoint() const -> QChar
 {
     return m_decimalPoint;
 }
@@ -267,7 +259,7 @@ void QmuParserBase::setDecimalPoint(const QChar &c)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QChar QmuParserBase::getThousandsSeparator() const
+auto QmuParserBase::getThousandsSeparator() const -> QChar
 {
     return m_thousandsSeparator;
 }
@@ -279,6 +271,18 @@ void QmuParserBase::setThousandsSeparator(const QChar &c)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto QmuParserBase::getCNumbers() const -> bool
+{
+    return m_cNumbers;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void QmuParserBase::setCNumbers(bool cNumbers)
+{
+    m_cNumbers = cNumbers;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Returns the version of muparser.
  * @param eInfo A flag indicating whether the full version info should be returned or not.
@@ -286,45 +290,45 @@ void QmuParserBase::setThousandsSeparator(const QChar &c)
  * Format is as follows: "MAJOR.MINOR (COMPILER_FLAGS)" The COMPILER_FLAGS are returned only if eInfo==pviFULL.
  */
 // cppcheck-suppress unusedFunction
-QString QmuParserBase::GetVersion(EParserVersionInfo eInfo)
+auto QmuParserBase::GetVersion(EParserVersionInfo eInfo) -> QString
 {
     QString versionInfo;
     QTextStream ss(&versionInfo);
 
     ss << QMUP_VERSION;
 
-    if (eInfo==pviFULL)
+    if (eInfo == pviFULL)
     {
         ss << " (" << QMUP_VERSION_DATE;
-        ss << "; " << sizeof(void*)*8 << "BIT";
+        ss << "; " << sizeof(void *) * 8 << "BIT";
 
-    #ifdef _DEBUG
+#ifdef _DEBUG
         ss << "; DEBUG";
-    #else
+#else
         ss << "; RELEASE";
-    #endif
+#endif
 
-    #ifdef _UNICODE
+#ifdef _UNICODE
         ss << "; UNICODE";
-    #else
-    #ifdef _MBCS
+#else
+#ifdef _MBCS
         ss << "; MBCS";
-    #else
+#else
         ss << "; ASCII";
-    #endif
-    #endif
+#endif
+#endif
 
-    #ifdef QMUP_USE_OPENMP
+#ifdef QMUP_USE_OPENMP
         ss << "; OPENMP";
-    //#else
-    //  ss << "; NO_OPENMP";
-    #endif
+// #else
+//   ss << "; NO_OPENMP";
+#endif
 
-    #if defined(MUP_MATH_EXCEPTIONS)
+#if defined(MUP_MATH_EXCEPTIONS)
         ss << "; MATHEXC";
-    //#else
-    //  ss << "; NO_MATHEXC";
-    #endif
+// #else
+//   ss << "; NO_MATHEXC";
+#endif
 
         ss << ")";
     }
@@ -335,8 +339,8 @@ QString QmuParserBase::GetVersion(EParserVersionInfo eInfo)
 /**
  * @brief Add a function or operator callback to the parser.
  */
-void QmuParserBase::AddCallback(const QString &a_strName, const QmuParserCallback &a_Callback,
-                                funmap_type &a_Storage, const QString &a_szCharSet )
+void QmuParserBase::AddCallback(const QString &a_strName, const QmuParserCallback &a_Callback, funmap_type &a_Storage,
+                                const QString &a_szCharSet)
 {
     if (a_Callback.GetAddr() == nullptr)
     {
@@ -346,22 +350,22 @@ void QmuParserBase::AddCallback(const QString &a_strName, const QmuParserCallbac
     const funmap_type *pFunMap = &a_Storage;
 
     // Check for conflicting operator or function names
-    if ( pFunMap!=&m_FunDef && m_FunDef.find(a_strName)!=m_FunDef.end() )
+    if (pFunMap != &m_FunDef && m_FunDef.find(a_strName) != m_FunDef.end())
     {
         Error(ecNAME_CONFLICT, -1, a_strName);
     }
 
-    if ( pFunMap!=&m_PostOprtDef && m_PostOprtDef.find(a_strName)!=m_PostOprtDef.end() )
+    if (pFunMap != &m_PostOprtDef && m_PostOprtDef.find(a_strName) != m_PostOprtDef.end())
     {
         Error(ecNAME_CONFLICT, -1, a_strName);
     }
 
-    if ( pFunMap!=&m_InfixOprtDef && pFunMap!=&m_OprtDef && m_InfixOprtDef.find(a_strName)!=m_InfixOprtDef.end() )
+    if (pFunMap != &m_InfixOprtDef && pFunMap != &m_OprtDef && m_InfixOprtDef.find(a_strName) != m_InfixOprtDef.end())
     {
         Error(ecNAME_CONFLICT, -1, a_strName);
     }
 
-    if ( pFunMap!=&m_InfixOprtDef && pFunMap!=&m_OprtDef && m_OprtDef.find(a_strName)!=m_OprtDef.end() )
+    if (pFunMap != &m_InfixOprtDef && pFunMap != &m_OprtDef && m_OprtDef.find(a_strName) != m_OprtDef.end())
     {
         Error(ecNAME_CONFLICT, -1, a_strName);
     }
@@ -381,8 +385,8 @@ void QmuParserBase::AddCallback(const QString &a_strName, const QmuParserCallbac
 void QmuParserBase::CheckOprt(const QString &a_sName, const QmuParserCallback &a_Callback,
                               const QString &a_szCharSet) const
 {
-    if ( a_sName.isEmpty() || (FindFirstNotOf(a_sName, a_szCharSet) != -1) ||
-         (a_sName.at(0)>='0' && a_sName.at(0)<='9'))
+    if (a_sName.isEmpty() || (FindFirstNotOf(a_sName, a_szCharSet) != -1) ||
+        (a_sName.at(0) >= '0' && a_sName.at(0) <= '9'))
     {
         switch (a_Callback.GetCode())
         {
@@ -407,8 +411,8 @@ void QmuParserBase::CheckOprt(const QString &a_sName, const QmuParserCallback &a
  */
 void QmuParserBase::CheckName(const QString &a_sName, const QString &a_szCharSet) const
 {
-    if ( a_sName.isEmpty() || (FindFirstNotOf(a_sName, a_szCharSet) != -1) ||
-         (a_sName.at(0)>='0' && a_sName.at(0)<='9'))
+    if (a_sName.isEmpty() || (FindFirstNotOf(a_sName, a_szCharSet) != -1) ||
+        (a_sName.at(0) >= '0' && a_sName.at(0) <= '9'))
     {
         Error(ecINVALID_NAME);
     }
@@ -425,8 +429,8 @@ void QmuParserBase::CheckName(const QString &a_sName, const QString &a_szCharSet
 void QmuParserBase::SetExpr(const QString &a_sExpr)
 {
     // Check locale compatibility
-    std::locale loc;
-    if (m_pTokenReader->GetArgSep()==std::use_facet<std::numpunct<char_type> >(loc).decimal_point())
+    if (std::locale const loc;
+        m_pTokenReader->GetArgSep() == QChar(std::use_facet<std::numpunct<char_type>>(loc).decimal_point()))
     {
         Error(ecLOCALE);
     }
@@ -436,7 +440,7 @@ void QmuParserBase::SetExpr(const QString &a_sExpr)
     // when calling tellg on a stringstream created from the expression after
     // reading a value at the end of an expression. (qmu::QmuParser::IsVal function)
     // (tellg returns -1 otherwise causing the parser to ignore the value)
-    QString sBuf(a_sExpr + QChar(' ') );
+    QString const sBuf(a_sExpr + QChar(' '));
     m_pTokenReader->SetFormula(sBuf);
     ReInit();
 }
@@ -446,7 +450,7 @@ void QmuParserBase::SetExpr(const QString &a_sExpr)
  * @brief Virtual function that defines the characters allowed in name identifiers.
  * @sa #ValidOprtChars, #ValidPrefixOprtChars
  */
-const QString& QmuParserBase::ValidNameChars() const
+auto QmuParserBase::ValidNameChars() const -> const QString &
 {
     assert(m_sNameChars.size());
     return m_sNameChars;
@@ -457,7 +461,7 @@ const QString& QmuParserBase::ValidNameChars() const
  * @brief Virtual function that defines the characters allowed in operator definitions.
  * @sa #ValidNameChars, #ValidPrefixOprtChars
  */
-const QString &QmuParserBase::ValidOprtChars() const
+auto QmuParserBase::ValidOprtChars() const -> const QString &
 {
     assert(m_sOprtChars.size());
     return m_sOprtChars;
@@ -468,7 +472,7 @@ const QString &QmuParserBase::ValidOprtChars() const
  * @brief Virtual function that defines the characters allowed in infix operator definitions.
  * @sa #ValidNameChars, #ValidOprtChars
  */
-const QString &QmuParserBase::ValidInfixOprtChars() const
+auto QmuParserBase::ValidInfixOprtChars() const -> const QString &
 {
     assert(m_sInfixOprtChars.size());
     return m_sInfixOprtChars;
@@ -482,7 +486,7 @@ const QString &QmuParserBase::ValidInfixOprtChars() const
 void QmuParserBase::DefinePostfixOprt(const QString &a_sFun, fun_type1 a_pFun, bool a_bAllowOpt)
 {
     AddCallback(a_sFun, QmuParserCallback(a_pFun, a_bAllowOpt, prPOSTFIX, cmOPRT_POSTFIX), m_PostOprtDef,
-                ValidOprtChars() );
+                ValidOprtChars());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -513,7 +517,7 @@ void QmuParserBase::Init()
 void QmuParserBase::DefineInfixOprt(const QString &a_sName, fun_type1 a_pFun, int a_iPrec, bool a_bAllowOpt)
 {
     AddCallback(a_sName, QmuParserCallback(a_pFun, a_bAllowOpt, a_iPrec, cmOPRT_INFIX), m_InfixOprtDef,
-                ValidInfixOprtChars() );
+                ValidInfixOprtChars());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -527,20 +531,20 @@ void QmuParserBase::DefineInfixOprt(const QString &a_sName, fun_type1 a_pFun, in
  *
  * Adds a new Binary operator the the parser instance.
  */
-void QmuParserBase::DefineOprt( const QString &a_sName, fun_type2 a_pFun, unsigned a_iPrec,
-                                EOprtAssociativity a_eAssociativity, bool a_bAllowOpt )
+void QmuParserBase::DefineOprt(const QString &a_sName, fun_type2 a_pFun, unsigned a_iPrec,
+                               EOprtAssociativity a_eAssociativity, bool a_bAllowOpt)
 {
     // Check for conflicts with built in operator names
-    for (int i=0; m_bBuiltInOp && i<cmENDIF; ++i)
+    for (int i = 0; m_bBuiltInOp && i < cmENDIF; ++i)
     {
-        if (a_sName == c_DefaultOprt.at(i))
+        if (a_sName == GetOprtDef().at(i))
         {
             Error(ecBUILTIN_OVERLOAD, -1, a_sName);
         }
     }
 
     AddCallback(a_sName, QmuParserCallback(a_pFun, a_bAllowOpt, static_cast<int>(a_iPrec), a_eAssociativity), m_OprtDef,
-                ValidOprtChars() );
+                ValidOprtChars());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -553,15 +557,15 @@ void QmuParserBase::DefineOprt( const QString &a_sName, fun_type2 a_pFun, unsign
 void QmuParserBase::DefineStrConst(const QString &a_strName, const QString &a_strVal)
 {
     // Test if a constant with that names already exists
-    if (m_StrVarDef.find(a_strName)!=m_StrVarDef.end())
+    if (m_StrVarDef.find(a_strName) != m_StrVarDef.end())
     {
         Error(ecNAME_CONFLICT);
     }
 
     CheckName(a_strName, ValidNameChars());
 
-    m_vStringVarBuf.push_back(a_strVal);           // Store variable string in internal buffer
-    m_StrVarDef[a_strName] = m_vStringBuf.size();  // bind buffer index to variable name
+    m_vStringVarBuf.push_back(a_strVal);          // Store variable string in internal buffer
+    m_StrVarDef[a_strName] = m_vStringBuf.size(); // bind buffer index to variable name
 
     ReInit();
 }
@@ -582,7 +586,7 @@ void QmuParserBase::DefineVar(const QString &a_sName, qreal *a_pVar)
     }
 
     // Test if a constant with that names already exists
-    if (m_ConstDef.find(a_sName)!=m_ConstDef.end())
+    if (m_ConstDef.find(a_sName) != m_ConstDef.end())
     {
         Error(ecNAME_CONFLICT);
     }
@@ -612,7 +616,7 @@ void QmuParserBase::DefineConst(const QString &a_sName, qreal a_fVal)
  * @brief Get operator priority.
  * @throw ParserException if a_Oprt is no operator code
  */
-int QmuParserBase::GetOprtPrecedence(const token_type &a_Tok) const
+auto QmuParserBase::GetOprtPrecedence(const token_type &a_Tok) const -> int
 {
     switch (a_Tok.GetCode())
     {
@@ -660,7 +664,7 @@ int QmuParserBase::GetOprtPrecedence(const token_type &a_Tok) const
  * @brief Get operator priority.
  * @throw ParserException if a_Oprt is no operator code
  */
-EOprtAssociativity QmuParserBase::GetOprtAssociativity(const token_type &a_Tok) const
+auto QmuParserBase::GetOprtAssociativity(const token_type &a_Tok) const -> EOprtAssociativity
 {
     switch (a_Tok.GetCode())
     {
@@ -691,7 +695,7 @@ EOprtAssociativity QmuParserBase::GetOprtAssociativity(const token_type &a_Tok) 
 /**
  * @brief Return a map containing the used variables only.
  */
-const varmap_type& QmuParserBase::GetUsedVar() const
+auto QmuParserBase::GetUsedVar() const -> const varmap_type &
 {
     try
     {
@@ -719,15 +723,15 @@ const varmap_type& QmuParserBase::GetUsedVar() const
  * @param a_FunTok Function token.
  * @throw QmuParserError If the function token is not a string function
  */
-QmuParserBase::token_type QmuParserBase::ApplyStrFunc(const token_type &a_FunTok,
-                                                      const QVector<token_type> &a_vArg) const
+auto QmuParserBase::ApplyStrFunc(const token_type &a_FunTok, const QVector<token_type> &a_vArg) const
+    -> QmuParserBase::token_type
 {
-    if (a_vArg.back().GetCode()!=cmSTRING)
+    if (a_vArg.back().GetCode() != cmSTRING)
     {
         Error(ecSTRING_EXPECTED, m_pTokenReader->GetPos(), a_FunTok.GetAsString());
     }
 
-    token_type  valTok;
+    token_type valTok;
     generic_fun_type pFunc = a_FunTok.GetFuncAddr();
     assert(pFunc);
 
@@ -756,7 +760,7 @@ QmuParserBase::token_type QmuParserBase::ApplyStrFunc(const token_type &a_FunTok
                 break;
         }
     }
-    catch (QmuParserError& )
+    catch (QmuParserError &)
     {
         Error(ecVAL_EXPECTED, m_pTokenReader->GetPos(), a_FunTok.GetAsString());
     }
@@ -776,7 +780,7 @@ QmuParserBase::token_type QmuParserBase::ApplyStrFunc(const token_type &a_FunTok
  * @post The function token is removed from the stack
  * @throw QmuParserError if Argument count does not mach function requirements.
  */
-void QmuParserBase::ApplyFunc( QStack<token_type> &a_stOpt, QStack<token_type> &a_stVal, int a_iArgCount) const
+void QmuParserBase::ApplyFunc(QStack<token_type> &a_stOpt, QStack<token_type> &a_stVal, int a_iArgCount) const
 {
     assert(m_pTokenReader.get());
 
@@ -786,52 +790,52 @@ void QmuParserBase::ApplyFunc( QStack<token_type> &a_stOpt, QStack<token_type> &
         return;
     }
 
-    token_type funTok = a_stOpt.pop();
+    token_type const funTok = a_stOpt.pop();
     assert(funTok.GetFuncAddr());
 
     // Binary operators must rely on their internal operator number
     // since counting of operators relies on commas for function arguments
     // binary operators do not have commas in their expression
-    int iArgCount = (funTok.GetCode()==cmOPRT_BIN) ? funTok.GetArgCount() : a_iArgCount;
+    int const iArgCount = (funTok.GetCode() == cmOPRT_BIN) ? funTok.GetArgCount() : a_iArgCount;
 
     // determine how many parameters the function needs. To remember iArgCount includes the
     // string parameter whilst GetArgCount() counts only numeric parameters.
-    int iArgRequired = funTok.GetArgCount() + ((funTok.GetType()==tpSTR) ? 1 : 0);
+    int const iArgRequired = funTok.GetArgCount() + ((funTok.GetType() == tpSTR) ? 1 : 0);
 
     // Thats the number of numerical parameters
-    int iArgNumerical = iArgCount - ((funTok.GetType()==tpSTR) ? 1 : 0);
+    int const iArgNumerical = iArgCount - ((funTok.GetType() == tpSTR) ? 1 : 0);
 
-    if (funTok.GetCode()==cmFUNC_STR && iArgCount-iArgNumerical>1)
+    if (funTok.GetCode() == cmFUNC_STR && iArgCount - iArgNumerical > 1)
     {
         Error(ecINTERNAL_ERROR);
     }
 
-    if (funTok.GetArgCount()>=0 && iArgCount>iArgRequired)
+    if (funTok.GetArgCount() >= 0 && iArgCount > iArgRequired)
     {
-        Error(ecTOO_MANY_PARAMS, m_pTokenReader->GetPos()-1, funTok.GetAsString());
+        Error(ecTOO_MANY_PARAMS, m_pTokenReader->GetPos() - 1, funTok.GetAsString());
     }
 
-    if (funTok.GetCode()!=cmOPRT_BIN && iArgCount<iArgRequired )
+    if (funTok.GetCode() != cmOPRT_BIN && iArgCount < iArgRequired)
     {
-        Error(ecTOO_FEW_PARAMS, m_pTokenReader->GetPos()-1, funTok.GetAsString());
+        Error(ecTOO_FEW_PARAMS, m_pTokenReader->GetPos() - 1, funTok.GetAsString());
     }
 
-    if (funTok.GetCode()==cmFUNC_STR && iArgCount>iArgRequired )
+    if (funTok.GetCode() == cmFUNC_STR && iArgCount > iArgRequired)
     {
-        Error(ecTOO_MANY_PARAMS, m_pTokenReader->GetPos()-1, funTok.GetAsString());
+        Error(ecTOO_MANY_PARAMS, m_pTokenReader->GetPos() - 1, funTok.GetAsString());
     }
 
     // Collect the numeric function arguments from the value stack and store them
     // in a vector
     QVector<token_type> stArg;
-    for (int i=0; i<iArgNumerical; ++i)
+    for (int i = 0; i < iArgNumerical; ++i)
     {
-        if (a_stVal.isEmpty())// Check if stack is empty like in origin muparser.
+        if (a_stVal.isEmpty()) // Check if stack is empty like in origin muparser.
         {
             Error(ecUNASSIGNABLE_TOKEN, m_pTokenReader->GetPos(), funTok.GetAsString());
         }
-        stArg.push_back( a_stVal.pop() );
-        if ( stArg.back().GetType()==tpSTR && funTok.GetType()!=tpSTR )
+        stArg.push_back(a_stVal.pop());
+        if (stArg.back().GetType() == tpSTR && funTok.GetType() != tpSTR)
         {
             Error(ecVAL_EXPECTED, m_pTokenReader->GetPos(), funTok.GetAsString());
         }
@@ -842,7 +846,7 @@ void QmuParserBase::ApplyFunc( QStack<token_type> &a_stOpt, QStack<token_type> &
         case cmFUNC_STR:
             stArg.push_back(a_stVal.pop());
 
-            if ( stArg.back().GetType()==tpSTR && funTok.GetType()!=tpSTR )
+            if (stArg.back().GetType() == tpSTR && funTok.GetType() != tpSTR)
             {
                 Error(ecVAL_EXPECTED, m_pTokenReader->GetPos(), funTok.GetAsString());
             }
@@ -856,12 +860,12 @@ void QmuParserBase::ApplyFunc( QStack<token_type> &a_stOpt, QStack<token_type> &
         case cmOPRT_POSTFIX:
         case cmOPRT_INFIX:
         case cmFUNC:
-            if (funTok.GetArgCount()==-1 && iArgCount==0)
+            if (funTok.GetArgCount() == -1 && iArgCount == 0)
             {
                 Error(ecTOO_FEW_PARAMS, m_pTokenReader->GetPos(), funTok.GetAsString());
             }
 
-            m_vRPN.AddFun(funTok.GetFuncAddr(), (funTok.GetArgCount()==-1) ? -iArgNumerical : iArgNumerical);
+            m_vRPN.AddFun(funTok.GetFuncAddr(), (funTok.GetArgCount() == -1) ? -iArgNumerical : iArgNumerical);
             break;
         default:
             break;
@@ -876,27 +880,27 @@ void QmuParserBase::ApplyFunc( QStack<token_type> &a_stOpt, QStack<token_type> &
 void QmuParserBase::ApplyIfElse(QStack<token_type> &a_stOpt, QStack<token_type> &a_stVal) const
 {
     // Check if there is an if Else clause to be calculated
-    while (a_stOpt.size() && a_stOpt.top().GetCode()==cmELSE)
+    while (a_stOpt.size() && a_stOpt.top().GetCode() == cmELSE)
     {
-        token_type opElse = a_stOpt.pop();
-        Q_ASSERT(a_stOpt.size()>0);
+        token_type const opElse = a_stOpt.pop();
+        Q_ASSERT(a_stOpt.size() > 0);
 
         // Take the value associated with the else branch from the value stack
-        token_type vVal2 = a_stVal.pop();
+        token_type const vVal2 = a_stVal.pop();
 
-        Q_ASSERT(a_stOpt.size()>0);
-        Q_ASSERT(a_stVal.size()>=2);
+        Q_ASSERT(a_stOpt.size() > 0);
+        Q_ASSERT(a_stVal.size() >= 2);
 
         // it then else is a ternary operator Pop all three values from the value s
         // tack and just return the right value
-        token_type vVal1 = a_stVal.pop();
-        token_type vExpr = a_stVal.pop();
+        token_type const vVal1 = a_stVal.pop();
+        token_type const vExpr = a_stVal.pop();
 
-        a_stVal.push( not qFuzzyIsNull(vExpr.GetVal()) ? vVal1 : vVal2);
+        a_stVal.push(not qFuzzyIsNull(vExpr.GetVal()) ? vVal1 : vVal2);
 
-        token_type opIf = a_stOpt.pop();
-        Q_ASSERT(opElse.GetCode()==cmELSE);
-        Q_ASSERT(opIf.GetCode()==cmIF);
+        token_type const opIf = a_stOpt.pop();
+        Q_ASSERT(opElse.GetCode() == cmELSE);
+        Q_ASSERT(opIf.GetCode() == cmIF);
 
         m_vRPN.AddIfElse(cmENDIF);
     } // while pending if-else-clause found
@@ -909,28 +913,29 @@ void QmuParserBase::ApplyIfElse(QStack<token_type> &a_stOpt, QStack<token_type> 
 void QmuParserBase::ApplyBinOprt(QStack<token_type> &a_stOpt, QStack<token_type> &a_stVal) const
 {
     // is it a user defined binary operator?
-    if (a_stOpt.top().GetCode()==cmOPRT_BIN)
+    if (a_stOpt.top().GetCode() == cmOPRT_BIN)
     {
         ApplyFunc(a_stOpt, a_stVal, 2);
     }
     else
     {
-        Q_ASSERT(a_stVal.size()>=2);
-        token_type valTok1 = a_stVal.pop(),
-                   valTok2 = a_stVal.pop(),
-                   optTok  = a_stOpt.pop(),
-                   resTok;
+        if (a_stVal.size() < 2)
+        {
+            Error(ecUNEXPECTED_OPERATOR);
+        }
 
-        if ( valTok1.GetType()!=valTok2.GetType() || (valTok1.GetType()==tpSTR && valTok2.GetType()==tpSTR) )
+        token_type valTok1 = a_stVal.pop(), valTok2 = a_stVal.pop(), optTok = a_stOpt.pop(), resTok;
+
+        if (valTok1.GetType() != valTok2.GetType() || (valTok1.GetType() == tpSTR && valTok2.GetType() == tpSTR))
         {
             Error(ecOPRT_TYPE_CONFLICT, m_pTokenReader->GetPos(), optTok.GetAsString());
         }
 
-        if (optTok.GetCode()==cmASSIGN)
+        if (optTok.GetCode() == cmASSIGN)
         {
-            if (valTok2.GetCode()!=cmVAR)
+            if (valTok2.GetCode() != cmVAR)
             {
-                Error(ecUNEXPECTED_OPERATOR, -1, "=");
+                Error(ecUNEXPECTED_OPERATOR, -1, QChar('='));
             }
             m_vRPN.AddAssignOp(valTok2.GetVar());
         }
@@ -957,7 +962,7 @@ void QmuParserBase::ApplyRemainingOprt(QStack<token_type> &stOpt, QStack<token_t
 
         if ((code >= cmLE && code <= cmASSIGN) || code == cmOPRT_INFIX || code == cmOPRT_BIN)
         {
-            if (code==cmOPRT_INFIX)
+            if (code == cmOPRT_INFIX)
             {
                 ApplyFunc(stOpt, stVal, 1);
             }
@@ -985,7 +990,7 @@ void QmuParserBase::ApplyRemainingOprt(QStack<token_type> &stOpt, QStack<token_t
  * Command code contains precalculated stack positions of the values and the associated operators. The Stack is
  * filled beginning from index one the value at index zero is not used at all.
  */
-qreal QmuParserBase::ParseCmdCode() const
+auto QmuParserBase::ParseCmdCode() const -> qreal
 {
     return ParseCmdCodeBulk(0, 0);
 }
@@ -996,84 +1001,85 @@ qreal QmuParserBase::ParseCmdCode() const
  * @param nOffset The offset added to variable addresses (for bulk mode)
  * @param nThreadID OpenMP Thread id of the calling thread
  */
-qreal QmuParserBase::ParseCmdCodeBulk(int nOffset, int nThreadID) const
+auto QmuParserBase::ParseCmdCodeBulk(int nOffset, int nThreadID) const -> qreal
 {
-    assert(nThreadID<=s_MaxNumOpenMPThreads);
+    assert(nThreadID <= s_MaxNumOpenMPThreads);
 
     // Note: The check for nOffset==0 and nThreadID here is not necessary but
     //       brings a minor performance gain when not in bulk mode.
-    qreal *Stack = ((nOffset==0) && (nThreadID==0)) ? &m_vStackBuffer[0] : &m_vStackBuffer[nThreadID *
-            (m_vStackBuffer.size() / s_MaxNumOpenMPThreads)];
+    qreal *Stack = ((nOffset == 0) && (nThreadID == 0))
+                       ? &m_vStackBuffer[0]
+                       : &m_vStackBuffer[nThreadID * (m_vStackBuffer.size() / s_MaxNumOpenMPThreads)];
     qreal buf;
-    int sidx(0);
-    for (const SToken *pTok = m_vRPN.GetBase(); pTok->Cmd!=cmEND ; ++pTok)
+    qmusizetype sidx(0);
+    for (const SToken *pTok = m_vRPN.GetBase(); pTok->Cmd != cmEND; ++pTok)
     {
         switch (pTok->Cmd)
         {
-          // built in binary operators
+                // built in binary operators
             case cmLE:
                 --sidx;
-                Stack[sidx]  = Stack[sidx] <= Stack[sidx+1];
+                Stack[sidx] = Stack[sidx] <= Stack[sidx + 1];
                 continue;
             case cmGE:
                 --sidx;
-                Stack[sidx]  = Stack[sidx] >= Stack[sidx+1];
+                Stack[sidx] = Stack[sidx] >= Stack[sidx + 1];
                 continue;
             case cmNEQ:
                 --sidx;
-                Stack[sidx]  = not QmuFuzzyComparePossibleNulls(Stack[sidx], Stack[sidx+1]);
+                Stack[sidx] = not QmuFuzzyComparePossibleNulls(Stack[sidx], Stack[sidx + 1]);
                 continue;
             case cmEQ:
                 --sidx;
-                Stack[sidx]  = QmuFuzzyComparePossibleNulls(Stack[sidx], Stack[sidx+1]);
+                Stack[sidx] = QmuFuzzyComparePossibleNulls(Stack[sidx], Stack[sidx + 1]);
                 continue;
             case cmLT:
                 --sidx;
-                Stack[sidx]  = Stack[sidx] < Stack[sidx+1];
+                Stack[sidx] = Stack[sidx] < Stack[sidx + 1];
                 continue;
             case cmGT:
                 --sidx;
-                Stack[sidx]  = Stack[sidx] > Stack[sidx+1];
+                Stack[sidx] = Stack[sidx] > Stack[sidx + 1];
                 continue;
             case cmADD:
                 --sidx;
-                Stack[sidx] += Stack[1+sidx];
+                Stack[sidx] += Stack[1 + sidx];
                 continue;
             case cmSUB:
                 --sidx;
-                Stack[sidx] -= Stack[1+sidx];
+                Stack[sidx] -= Stack[1 + sidx];
                 continue;
             case cmMUL:
                 --sidx;
-                Stack[sidx] *= Stack[1+sidx];
+                Stack[sidx] *= Stack[1 + sidx];
                 continue;
             case cmDIV:
                 --sidx;
-    #if defined(MUP_MATH_EXCEPTIONS)
-                if (Stack[1+sidx]==0)
+#if defined(MUP_MATH_EXCEPTIONS)
+                if (Stack[1 + sidx] == 0)
                 {
                     Error(ecDIV_BY_ZERO);
                 }
-    #endif
-                Stack[sidx] /= Stack[1+sidx];
+#endif
+                Stack[sidx] /= Stack[1 + sidx];
                 continue;
             case cmPOW:
                 --sidx;
-                Stack[sidx] = qPow(Stack[sidx], Stack[1+sidx]);
+                Stack[sidx] = qPow(Stack[sidx], Stack[1 + sidx]);
                 continue;
             case cmLAND:
                 --sidx;
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Wfloat-equal")
-                Stack[sidx] = static_cast<bool>(Stack[sidx]) && static_cast<bool>(Stack[sidx+1]);
-QT_WARNING_POP
+                QT_WARNING_PUSH
+                QT_WARNING_DISABLE_GCC("-Wfloat-equal")
+                Stack[sidx] = static_cast<bool>(Stack[sidx]) && static_cast<bool>(Stack[sidx + 1]);
+                QT_WARNING_POP
                 continue;
             case cmLOR:
                 --sidx;
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Wfloat-equal")
-                Stack[sidx] = static_cast<bool>(Stack[sidx]) || static_cast<bool>(Stack[sidx+1]);
-QT_WARNING_POP
+                QT_WARNING_PUSH
+                QT_WARNING_DISABLE_GCC("-Wfloat-equal")
+                Stack[sidx] = static_cast<bool>(Stack[sidx]) || static_cast<bool>(Stack[sidx + 1]);
+                QT_WARNING_POP
                 continue;
             case cmASSIGN:
                 // Bugfix for Bulkmode:
@@ -1086,8 +1092,8 @@ QT_WARNING_POP
                 continue;
                 // original code:
                 //--sidx;
-                //Stack[sidx] = *pTok->Oprt.ptr = Stack[sidx+1];
-                //continue;
+                // Stack[sidx] = *pTok->Oprt.ptr = Stack[sidx+1];
+                // continue;
             case cmIF:
                 if (qFuzzyIsNull(Stack[sidx--]))
                 {
@@ -1105,19 +1111,19 @@ QT_WARNING_POP
                 Stack[++sidx] = *(pTok->Val.ptr + nOffset);
                 continue;
             case cmVAL:
-                Stack[++sidx] =  pTok->Val.data2;
+                Stack[++sidx] = pTok->Val.data2;
                 continue;
             case cmVARPOW2:
                 buf = *(pTok->Val.ptr + nOffset);
-                Stack[++sidx] = buf*buf;
+                Stack[++sidx] = buf * buf;
                 continue;
             case cmVARPOW3:
                 buf = *(pTok->Val.ptr + nOffset);
-                Stack[++sidx] = buf*buf*buf;
+                Stack[++sidx] = buf * buf * buf;
                 continue;
             case cmVARPOW4:
                 buf = *(pTok->Val.ptr + nOffset);
-                Stack[++sidx] = buf*buf*buf*buf;
+                Stack[++sidx] = buf * buf * buf * buf;
                 continue;
             case cmVARMUL:
                 Stack[++sidx] = *(pTok->Val.ptr + nOffset) * pTok->Val.data + pTok->Val.data2;
@@ -1125,11 +1131,14 @@ QT_WARNING_POP
             // Next is treatment of numeric functions
             case cmFUNC:
             {
-                int iArgCount = pTok->Fun.argc;
+                qmusizetype const iArgCount = pTok->Fun.argc;
 
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_CLANG("-Wundefined-reinterpret-cast")
-QT_WARNING_DISABLE_MSVC(4191)
+                QT_WARNING_PUSH
+                QT_WARNING_DISABLE_GCC("-Wcast-function-type")
+                QT_WARNING_DISABLE_CLANG("-Wundefined-reinterpret-cast")
+                QT_WARNING_DISABLE_CLANG("-Wunknown-warning-option")
+                QT_WARNING_DISABLE_CLANG("-Wcast-function-type-mismatch") // Since Clang 19
+                QT_WARNING_DISABLE_MSVC(4191)
 
                 // switch according to argument count
                 switch (iArgCount)
@@ -1143,83 +1152,85 @@ QT_WARNING_DISABLE_MSVC(4191)
                         continue;
                     case 2:
                         sidx -= 1;
-                        Stack[sidx] = (*reinterpret_cast<fun_type2>(pTok->Fun.ptr))(Stack[sidx], Stack[sidx+1]);
+                        Stack[sidx] = (*reinterpret_cast<fun_type2>(pTok->Fun.ptr))(Stack[sidx], Stack[sidx + 1]);
                         continue;
                     case 3:
                         sidx -= 2;
-                        Stack[sidx] = (*reinterpret_cast<fun_type3>(pTok->Fun.ptr))(Stack[sidx], Stack[sidx+1],
-                                Stack[sidx+2]);
+                        Stack[sidx] = (*reinterpret_cast<fun_type3>(pTok->Fun.ptr))(Stack[sidx], Stack[sidx + 1],
+                                                                                    Stack[sidx + 2]);
                         continue;
                     case 4:
                         sidx -= 3;
-                        Stack[sidx] = (*reinterpret_cast<fun_type4>(pTok->Fun.ptr))(Stack[sidx], Stack[sidx+1],
-                                Stack[sidx+2], Stack[sidx+3]);
+                        Stack[sidx] = (*reinterpret_cast<fun_type4>(pTok->Fun.ptr))(Stack[sidx], Stack[sidx + 1],
+                                                                                    Stack[sidx + 2], Stack[sidx + 3]);
                         continue;
                     case 5:
                         sidx -= 4;
-                        Stack[sidx] = (*reinterpret_cast<fun_type5>(pTok->Fun.ptr))(Stack[sidx], Stack[sidx+1],
-                                Stack[sidx+2], Stack[sidx+3], Stack[sidx+4]);
+                        Stack[sidx] = (*reinterpret_cast<fun_type5>(pTok->Fun.ptr))(
+                            Stack[sidx], Stack[sidx + 1], Stack[sidx + 2], Stack[sidx + 3], Stack[sidx + 4]);
                         continue;
                     case 6:
                         sidx -= 5;
-                        Stack[sidx] = (*reinterpret_cast<fun_type6>(pTok->Fun.ptr))(Stack[sidx], Stack[sidx+1],
-                                Stack[sidx+2], Stack[sidx+3], Stack[sidx+4], Stack[sidx+5]);
+                        Stack[sidx] = (*reinterpret_cast<fun_type6>(pTok->Fun.ptr))(Stack[sidx], Stack[sidx + 1],
+                                                                                    Stack[sidx + 2], Stack[sidx + 3],
+                                                                                    Stack[sidx + 4], Stack[sidx + 5]);
                         continue;
                     case 7:
                         sidx -= 6;
-                        Stack[sidx] = (*reinterpret_cast<fun_type7>(pTok->Fun.ptr))(Stack[sidx], Stack[sidx+1],
-                                Stack[sidx+2], Stack[sidx+3], Stack[sidx+4], Stack[sidx+5], Stack[sidx+6]);
+                        Stack[sidx] = (*reinterpret_cast<fun_type7>(pTok->Fun.ptr))(
+                            Stack[sidx], Stack[sidx + 1], Stack[sidx + 2], Stack[sidx + 3], Stack[sidx + 4],
+                            Stack[sidx + 5], Stack[sidx + 6]);
                         continue;
                     case 8:
                         sidx -= 7;
-                        Stack[sidx] = (*reinterpret_cast<fun_type8>(pTok->Fun.ptr))(Stack[sidx], Stack[sidx+1],
-                                Stack[sidx+2], Stack[sidx+3], Stack[sidx+4], Stack[sidx+5], Stack[sidx+6],
-                                Stack[sidx+7]);
+                        Stack[sidx] = (*reinterpret_cast<fun_type8>(pTok->Fun.ptr))(
+                            Stack[sidx], Stack[sidx + 1], Stack[sidx + 2], Stack[sidx + 3], Stack[sidx + 4],
+                            Stack[sidx + 5], Stack[sidx + 6], Stack[sidx + 7]);
                         continue;
                     case 9:
                         sidx -= 8;
-                        Stack[sidx] = (*reinterpret_cast<fun_type9>(pTok->Fun.ptr))(Stack[sidx], Stack[sidx+1],
-                                Stack[sidx+2], Stack[sidx+3], Stack[sidx+4], Stack[sidx+5], Stack[sidx+6],
-                                Stack[sidx+7], Stack[sidx+8]);
+                        Stack[sidx] = (*reinterpret_cast<fun_type9>(pTok->Fun.ptr))(
+                            Stack[sidx], Stack[sidx + 1], Stack[sidx + 2], Stack[sidx + 3], Stack[sidx + 4],
+                            Stack[sidx + 5], Stack[sidx + 6], Stack[sidx + 7], Stack[sidx + 8]);
                         continue;
                     case 10:
                         sidx -= 9;
-                        Stack[sidx] = (*reinterpret_cast<fun_type10>(pTok->Fun.ptr))(Stack[sidx], Stack[sidx+1],
-                                Stack[sidx+2], Stack[sidx+3], Stack[sidx+4], Stack[sidx+5], Stack[sidx+6],
-                                Stack[sidx+7], Stack[sidx+8], Stack[sidx+9]);
+                        Stack[sidx] = (*reinterpret_cast<fun_type10>(pTok->Fun.ptr))(
+                            Stack[sidx], Stack[sidx + 1], Stack[sidx + 2], Stack[sidx + 3], Stack[sidx + 4],
+                            Stack[sidx + 5], Stack[sidx + 6], Stack[sidx + 7], Stack[sidx + 8], Stack[sidx + 9]);
                         continue;
                     default:
-                        if (iArgCount>0) // function with variable arguments store the number as a negative value
+                        if (iArgCount > 0) // function with variable arguments store the number as a negative value
                         {
                             Error(ecINTERNAL_ERROR, 1);
                         }
 
                         sidx -= -iArgCount - 1;
-                        Stack[sidx] =(*reinterpret_cast<multfun_type>(pTok->Fun.ptr))(&Stack[sidx], -iArgCount);
+                        Stack[sidx] = (*reinterpret_cast<multfun_type>(pTok->Fun.ptr))(&Stack[sidx], -iArgCount);
                         continue;
                 }
             }
             // Next is treatment of string functions
             case cmFUNC_STR:
             {
-                sidx -= pTok->Fun.argc -1;
+                sidx -= pTok->Fun.argc - 1;
 
                 // The index of the string argument in the string table
-                int iIdxStack = pTok->Fun.idx;
-                Q_ASSERT( iIdxStack>=0 && iIdxStack<m_vStringBuf.size() );
+                qmusizetype const iIdxStack = pTok->Fun.idx;
+                Q_ASSERT(iIdxStack >= 0 && iIdxStack < m_vStringBuf.size());
 
-                switch (pTok->Fun.argc)  // switch according to argument count
+                switch (pTok->Fun.argc) // switch according to argument count
                 {
                     case 0:
                         Stack[sidx] = (*reinterpret_cast<strfun_type1>(pTok->Fun.ptr))(m_vStringBuf.at(iIdxStack));
                         continue;
                     case 1:
-                        Stack[sidx] = (*reinterpret_cast<strfun_type2>(pTok->Fun.ptr))(m_vStringBuf.at(iIdxStack),
-                                                                                       Stack[sidx]);
+                        Stack[sidx] =
+                            (*reinterpret_cast<strfun_type2>(pTok->Fun.ptr))(m_vStringBuf.at(iIdxStack), Stack[sidx]);
                         continue;
                     case 2:
                         Stack[sidx] = (*reinterpret_cast<strfun_type3>(pTok->Fun.ptr))(m_vStringBuf.at(iIdxStack),
-                                                                                       Stack[sidx], Stack[sidx+1]);
+                                                                                       Stack[sidx], Stack[sidx + 1]);
                         continue;
                     default:
                         break;
@@ -1229,7 +1240,7 @@ QT_WARNING_DISABLE_MSVC(4191)
             }
             case cmFUNC_BULK:
             {
-                int iArgCount = pTok->Fun.argc;
+                qmusizetype const iArgCount = pTok->Fun.argc;
 
                 // switch according to argument count
                 switch (iArgCount)
@@ -1239,61 +1250,60 @@ QT_WARNING_DISABLE_MSVC(4191)
                         Stack[sidx] = (*reinterpret_cast<bulkfun_type0>(pTok->Fun.ptr))(nOffset, nThreadID);
                         continue;
                     case 1:
-                        Stack[sidx] = (*reinterpret_cast<bulkfun_type1>(pTok->Fun.ptr))(nOffset, nThreadID,
-                                                                                        Stack[sidx]);
+                        Stack[sidx] =
+                            (*reinterpret_cast<bulkfun_type1>(pTok->Fun.ptr))(nOffset, nThreadID, Stack[sidx]);
                         continue;
                     case 2:
                         sidx -= 1;
                         Stack[sidx] = (*reinterpret_cast<bulkfun_type2>(pTok->Fun.ptr))(nOffset, nThreadID, Stack[sidx],
-                                                                       Stack[sidx+1]);
+                                                                                        Stack[sidx + 1]);
                         continue;
                     case 3:
                         sidx -= 2;
-                        Stack[sidx] = (*reinterpret_cast<bulkfun_type3>(pTok->Fun.ptr))(nOffset, nThreadID, Stack[sidx],
-                                                                       Stack[sidx+1], Stack[sidx+2]);
+                        Stack[sidx] = (*reinterpret_cast<bulkfun_type3>(pTok->Fun.ptr))(
+                            nOffset, nThreadID, Stack[sidx], Stack[sidx + 1], Stack[sidx + 2]);
                         continue;
                     case 4:
                         sidx -= 3;
-                        Stack[sidx] = (*reinterpret_cast<bulkfun_type4>(pTok->Fun.ptr))(nOffset, nThreadID, Stack[sidx],
-                                                                       Stack[sidx+1], Stack[sidx+2], Stack[sidx+3]);
+                        Stack[sidx] = (*reinterpret_cast<bulkfun_type4>(pTok->Fun.ptr))(
+                            nOffset, nThreadID, Stack[sidx], Stack[sidx + 1], Stack[sidx + 2], Stack[sidx + 3]);
                         continue;
                     case 5:
                         sidx -= 4;
-                        Stack[sidx] = (*reinterpret_cast<bulkfun_type5>(pTok->Fun.ptr))(nOffset, nThreadID, Stack[sidx],
-                                                                       Stack[sidx+1], Stack[sidx+2], Stack[sidx+3],
-                                Stack[sidx+4]);
+                        Stack[sidx] = (*reinterpret_cast<bulkfun_type5>(pTok->Fun.ptr))(
+                            nOffset, nThreadID, Stack[sidx], Stack[sidx + 1], Stack[sidx + 2], Stack[sidx + 3],
+                            Stack[sidx + 4]);
                         continue;
                     case 6:
                         sidx -= 5;
-                        Stack[sidx] = (*reinterpret_cast<bulkfun_type6>(pTok->Fun.ptr))(nOffset, nThreadID, Stack[sidx],
-                                                                       Stack[sidx+1], Stack[sidx+2],
-                                Stack[sidx+3], Stack[sidx+4], Stack[sidx+5]);
+                        Stack[sidx] = (*reinterpret_cast<bulkfun_type6>(pTok->Fun.ptr))(
+                            nOffset, nThreadID, Stack[sidx], Stack[sidx + 1], Stack[sidx + 2], Stack[sidx + 3],
+                            Stack[sidx + 4], Stack[sidx + 5]);
                         continue;
                     case 7:
                         sidx -= 6;
-                        Stack[sidx] = (*reinterpret_cast<bulkfun_type7>(pTok->Fun.ptr))(nOffset, nThreadID, Stack[sidx],
-                                                                       Stack[sidx+1], Stack[sidx+2], Stack[sidx+3],
-                                Stack[sidx+4], Stack[sidx+5], Stack[sidx+6]);
+                        Stack[sidx] = (*reinterpret_cast<bulkfun_type7>(pTok->Fun.ptr))(
+                            nOffset, nThreadID, Stack[sidx], Stack[sidx + 1], Stack[sidx + 2], Stack[sidx + 3],
+                            Stack[sidx + 4], Stack[sidx + 5], Stack[sidx + 6]);
                         continue;
                     case 8:
                         sidx -= 7;
-                        Stack[sidx] = (*reinterpret_cast<bulkfun_type8>(pTok->Fun.ptr))(nOffset, nThreadID, Stack[sidx],
-                                                                       Stack[sidx+1], Stack[sidx+2], Stack[sidx+3],
-                                Stack[sidx+4], Stack[sidx+5], Stack[sidx+6], Stack[sidx+7]);
+                        Stack[sidx] = (*reinterpret_cast<bulkfun_type8>(pTok->Fun.ptr))(
+                            nOffset, nThreadID, Stack[sidx], Stack[sidx + 1], Stack[sidx + 2], Stack[sidx + 3],
+                            Stack[sidx + 4], Stack[sidx + 5], Stack[sidx + 6], Stack[sidx + 7]);
                         continue;
                     case 9:
                         sidx -= 8;
-                        Stack[sidx] = (*reinterpret_cast<bulkfun_type9>(pTok->Fun.ptr))(nOffset, nThreadID, Stack[sidx],
-                                                                       Stack[sidx+1], Stack[sidx+2], Stack[sidx+3],
-                                Stack[sidx+4], Stack[sidx+5], Stack[sidx+6], Stack[sidx+7], Stack[sidx+8]);
+                        Stack[sidx] = (*reinterpret_cast<bulkfun_type9>(pTok->Fun.ptr))(
+                            nOffset, nThreadID, Stack[sidx], Stack[sidx + 1], Stack[sidx + 2], Stack[sidx + 3],
+                            Stack[sidx + 4], Stack[sidx + 5], Stack[sidx + 6], Stack[sidx + 7], Stack[sidx + 8]);
                         continue;
                     case 10:
                         sidx -= 9;
-                        Stack[sidx] = (*reinterpret_cast<bulkfun_type10>(pTok->Fun.ptr))(nOffset, nThreadID,
-                                                                                         Stack[sidx],
-                                                                       Stack[sidx+1], Stack[sidx+2], Stack[sidx+3],
-                                Stack[sidx+4], Stack[sidx+5], Stack[sidx+6], Stack[sidx+7], Stack[sidx+8],
-                                Stack[sidx+9]);
+                        Stack[sidx] = (*reinterpret_cast<bulkfun_type10>(pTok->Fun.ptr))(
+                            nOffset, nThreadID, Stack[sidx], Stack[sidx + 1], Stack[sidx + 2], Stack[sidx + 3],
+                            Stack[sidx + 4], Stack[sidx + 5], Stack[sidx + 6], Stack[sidx + 7], Stack[sidx + 8],
+                            Stack[sidx + 9]);
                         continue;
                     default:
                         Error(ecINTERNAL_ERROR, 2);
@@ -1307,10 +1317,10 @@ QT_WARNING_DISABLE_MSVC(4191)
             //      Q_ASSERT(INVALID_CODE_IN_BYTECODE);
             //      continue;
             case cmEND:
-               //     return Stack[m_nFinalResultIdx];
+                //     return Stack[m_nFinalResultIdx];
             case cmPOW2:
             case cmUNKNOWN:
-            case cmBO:  // unused, listed for compiler optimization purposes
+            case cmBO: // unused, listed for compiler optimization purposes
             case cmBC:
             //    Q_ASSERT(INVALID_CODE_IN_BYTECODE);
             //    continue;
@@ -1322,7 +1332,7 @@ QT_WARNING_DISABLE_MSVC(4191)
                 return 0;
         } // switch CmdCode
 
-QT_WARNING_POP
+        QT_WARNING_POP
 
     } // for all bytecode tokens
 
@@ -1339,9 +1349,9 @@ void QmuParserBase::CreateRPN() const
 
     QStack<token_type> stOpt, stVal;
     QStack<int> stArgCount;
-    token_type opta, opt;  // for storing operators
-    //token_type val, tval;  // for storing value
-    //string_type strBuf;    // buffer for string function arguments
+    token_type opta, opt; // for storing operators
+    // token_type val, tval;  // for storing value
+    // string_type strBuf;    // buffer for string function arguments
 
     ReInit();
 
@@ -1351,7 +1361,7 @@ void QmuParserBase::CreateRPN() const
 
     for (;;)
     {
-        opt = m_pTokenReader->ReadNextToken(m_locale, m_decimalPoint, m_thousandsSeparator);
+        opt = m_pTokenReader->ReadNextToken(m_locale, m_cNumbers, m_decimalPoint, m_thousandsSeparator);
 
         switch (opt.GetCode())
         {
@@ -1360,32 +1370,31 @@ void QmuParserBase::CreateRPN() const
             //
             case cmSTRING:
             {
-                opt.SetIdx(m_vStringBuf.size());      // Assign buffer index to token
+                opt.SetIdx(m_vStringBuf.size()); // Assign buffer index to token
                 stVal.push(opt);
                 const QString &str = opt.GetAsString();
                 m_vStringBuf.push_back(str); // Store string in internal buffer
-                m_Tokens.insert(m_pTokenReader->GetPos()-str.length(), str);
                 break;
             }
             case cmVAR:
             {
                 stVal.push(opt);
-                m_vRPN.AddVar( static_cast<qreal*>(opt.GetVar()) );
+                m_vRPN.AddVar(static_cast<qreal *>(opt.GetVar()));
                 const QString &str = opt.GetAsString();
-                m_Tokens.insert(m_pTokenReader->GetPos()-str.length(), str);
+                m_Tokens.insert(m_pTokenReader->GetPos() - str.length(), str);
                 break;
             }
             case cmVAL:
             {
                 stVal.push(opt);
-                m_vRPN.AddVal( opt.GetVal() );
+                m_vRPN.AddVal(opt.GetVal());
                 const QString &str = opt.GetAsString();
-                m_Numbers.insert(m_pTokenReader->GetPos()-str.length(), str);
+                m_Numbers.insert(m_pTokenReader->GetPos() - str.length(), str);
                 break;
             }
             case cmELSE:
                 m_nIfElseCounter--;
-                if (m_nIfElseCounter<0)
+                if (m_nIfElseCounter < 0)
                 {
                     Error(ecMISPLACED_COLON, m_pTokenReader->GetPos());
                 }
@@ -1404,7 +1413,7 @@ void QmuParserBase::CreateRPN() const
                 }
                 ++stArgCount.top();
                 // fallthrough intentional (no break!)
-                QMUP_FALLTHROUGH
+                Q_FALLTHROUGH();
             case cmEND:
                 ApplyRemainingOprt(stOpt, stVal);
                 break;
@@ -1414,7 +1423,7 @@ void QmuParserBase::CreateRPN() const
                 // by default an opening bracket sets parameter count to 1
                 // in preparation of arguments to come. If the last token
                 // was an opening bracket we know better...
-                if (opta.GetCode()==cmBO)
+                if (opta.GetCode() == cmBO)
                 {
                     --stArgCount.top();
                 }
@@ -1422,7 +1431,7 @@ void QmuParserBase::CreateRPN() const
                 ApplyRemainingOprt(stOpt, stVal);
 
                 // Check if the bracket content has been evaluated completely
-                if (stOpt.size() && stOpt.top().GetCode()==cmBO)
+                if (!stOpt.empty() && stOpt.top().GetCode() == cmBO)
                 {
                     // if opt is ")" and opta is "(" the bracket has been evaluated, now its time to check
                     // if there is either a function or a sign pending
@@ -1430,22 +1439,22 @@ void QmuParserBase::CreateRPN() const
                     // the operator stack
                     // Check if a function is standing in front of the opening bracket,
                     // if yes evaluate it afterwards check for infix operators
-                    assert(stArgCount.size());
-                    int iArgCount = stArgCount.pop();
+                    assert(!stArgCount.empty());
+                    int const iArgCount = stArgCount.pop();
 
                     stOpt.pop(); // Take opening bracket from stack
 
-                    if (iArgCount>1 && ( stOpt.size()==0 || (stOpt.top().GetCode()!=cmFUNC &&
-                                                             stOpt.top().GetCode()!=cmFUNC_BULK &&
-                                                             stOpt.top().GetCode()!=cmFUNC_STR) ) )
+                    if (iArgCount > 1 &&
+                        (stOpt.isEmpty() || (stOpt.top().GetCode() != cmFUNC && stOpt.top().GetCode() != cmFUNC_BULK &&
+                                             stOpt.top().GetCode() != cmFUNC_STR)))
                     {
                         Error(ecUNEXPECTED_ARG, m_pTokenReader->GetPos());
                     }
 
                     // The opening bracket was popped from the stack now check if there
                     // was a function before this bracket
-                    if (stOpt.size() && stOpt.top().GetCode()!=cmOPRT_INFIX && stOpt.top().GetCode()!=cmOPRT_BIN &&
-                            stOpt.top().GetFuncAddr()!=nullptr)
+                    if (!stOpt.empty() && stOpt.top().GetCode() != cmOPRT_INFIX &&
+                        stOpt.top().GetCode() != cmOPRT_BIN && stOpt.top().GetFuncAddr() != nullptr)
                     {
                         ApplyFunc(stOpt, stVal, iArgCount);
                     }
@@ -1455,13 +1464,13 @@ void QmuParserBase::CreateRPN() const
             //
             // Next are the binary operator entries
             //
-            //case cmAND:   // built in binary operators
-            //case cmOR:
-            //case cmXOR:
+            // case cmAND:   // built in binary operators
+            // case cmOR:
+            // case cmXOR:
             case cmIF:
                 m_nIfElseCounter++;
                 // fallthrough intentional (no break!)
-                QMUP_FALLTHROUGH
+                Q_FALLTHROUGH();
             case cmLE:
             case cmGE:
             case cmNEQ:
@@ -1478,20 +1487,19 @@ void QmuParserBase::CreateRPN() const
             case cmASSIGN:
             case cmOPRT_BIN:
                 // A binary operator (user defined or built in) has been found.
-                while ( stOpt.size() && stOpt.top().GetCode() != cmBO && stOpt.top().GetCode() != cmELSE &&
-                        stOpt.top().GetCode() != cmIF)
+                while (!stOpt.empty() && stOpt.top().GetCode() != cmBO && stOpt.top().GetCode() != cmELSE &&
+                       stOpt.top().GetCode() != cmIF)
                 {
                     const token_type &topToken = stOpt.top();
-                    int nPrec1 = GetOprtPrecedence(topToken),
-                        nPrec2 = GetOprtPrecedence(opt);
+                    int const nPrec1 = GetOprtPrecedence(topToken);
+                    int const nPrec2 = GetOprtPrecedence(opt);
 
                     const ECmdCode code = topToken.GetCode();
-                    if (code==opt.GetCode())
+                    if (code == opt.GetCode())
                     {
                         // Deal with operator associativity
-                        EOprtAssociativity eOprtAsct = GetOprtAssociativity(opt);
-                        if ( (eOprtAsct==oaRIGHT && (nPrec1 <= nPrec2)) ||
-                             (eOprtAsct==oaLEFT  && (nPrec1 <  nPrec2)) )
+                        EOprtAssociativity const eOprtAsct = GetOprtAssociativity(opt);
+                        if ((eOprtAsct == oaRIGHT && (nPrec1 <= nPrec2)) || (eOprtAsct == oaLEFT && (nPrec1 < nPrec2)))
                         {
                             break;
                         }
@@ -1501,7 +1509,7 @@ void QmuParserBase::CreateRPN() const
                         // In case the operators are not equal the precedence decides alone...
                         break;
                     }
-                    if (code==cmOPRT_INFIX)
+                    if (code == cmOPRT_INFIX)
                     {
                         ApplyFunc(stOpt, stVal, 1);
                     }
@@ -1511,12 +1519,12 @@ void QmuParserBase::CreateRPN() const
                     }
                 } // while ( ... )
 
-                if (opt.GetCode()==cmIF)
+                if (opt.GetCode() == cmIF)
                 {
                     m_vRPN.AddIfElse(opt.GetCode());
                 }
 
-                      // The operator can't be evaluated right now, push back to the operator stack
+                // The operator can't be evaluated right now, push back to the operator stack
                 stOpt.push(opt);
                 break;
             //
@@ -1531,12 +1539,12 @@ void QmuParserBase::CreateRPN() const
             case cmFUNC_BULK:
             case cmFUNC_STR:
                 stOpt.push(opt);
-                m_Tokens.insert(m_pTokenReader->GetPos()-opt.GetAsString().length(), opt.GetAsString());
+                m_Tokens.insert(m_pTokenReader->GetPos() - opt.GetAsString().length(), opt.GetAsString());
                 break;
             case cmOPRT_POSTFIX:
                 stOpt.push(opt);
-                ApplyFunc(stOpt, stVal, 1);  // this is the postfix operator
-                m_Tokens.insert(m_pTokenReader->GetPos()-opt.GetAsString().length(), opt.GetAsString());
+                ApplyFunc(stOpt, stVal, 1); // this is the postfix operator
+                m_Tokens.insert(m_pTokenReader->GetPos() - opt.GetAsString().length(), opt.GetAsString());
                 break;
             case cmENDIF:
             case cmVARPOW2:
@@ -1551,7 +1559,7 @@ void QmuParserBase::CreateRPN() const
 
         opta = opt;
 
-        if ( opt.GetCode() == cmEND )
+        if (opt.GetCode() == cmEND)
         {
             m_vRPN.Finalize();
             break;
@@ -1569,25 +1577,25 @@ void QmuParserBase::CreateRPN() const
         m_vRPN.AsciiDump();
     }
 
-    if (m_nIfElseCounter>0)
+    if (m_nIfElseCounter > 0)
     {
         Error(ecMISSING_ELSE_CLAUSE);
     }
 
     // get the last value (= final result) from the stack
-    Q_ASSERT(stArgCount.size()==1);
+    Q_ASSERT(stArgCount.size() == 1);
     m_nFinalResultIdx = stArgCount.top();
-    if (m_nFinalResultIdx==0)
+    if (m_nFinalResultIdx == 0)
     {
         Error(ecINTERNAL_ERROR, 9);
     }
 
-    if (stVal.size()==0)
+    if (stVal.isEmpty())
     {
         Error(ecEMPTY_EXPRESSION);
     }
 
-    if (stVal.top().GetType()!=tpDBL)
+    if (stVal.top().GetType() != tpDBL)
     {
         Error(ecSTR_RESULT);
     }
@@ -1604,7 +1612,7 @@ void QmuParserBase::CreateRPN() const
  * creating the bytecode the function pointer #m_pParseFormula will be changed to the second parse routine the
  * uses bytecode instead of string parsing.
  */
-qreal QmuParserBase::ParseString() const
+auto QmuParserBase::ParseString() const -> qreal
 {
     try
     {
@@ -1621,24 +1629,24 @@ qreal QmuParserBase::ParseString() const
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
-* @brief Create an error containing the parse error position.
-*
-* This function will create an Parser Exception object containing the error text and its position.
-*
-* @param a_iErrc [in] The error code of type #EErrorCodes.
-* @param a_iPos [in] The position where the error was detected.
-* @param a_sTok [in] The token string representation associated with the error.
-* @throw ParserException always throws thats the only purpose of this function.
-*/
-void Q_NORETURN QmuParserBase::Error(EErrorCodes a_iErrc, int a_iPos, const QString &a_sTok) const
+ * @brief Create an error containing the parse error position.
+ *
+ * This function will create an Parser Exception object containing the error text and its position.
+ *
+ * @param a_iErrc [in] The error code of type #EErrorCodes.
+ * @param a_iPos [in] The position where the error was detected.
+ * @param a_sTok [in] The token string representation associated with the error.
+ * @throw ParserException always throws thats the only purpose of this function.
+ */
+Q_NORETURN void QmuParserBase::Error(EErrorCodes a_iErrc, qmusizetype a_iPos, const QString &a_sTok) const
 {
-    throw qmu::QmuParserError (a_iErrc, a_sTok, m_pTokenReader->GetExpr(), a_iPos);
+    throw qmu::QmuParserError(a_iErrc, a_sTok, m_pTokenReader->GetExpr(), a_iPos);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Clear all user defined variables.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  *
  * Resets the parser to string parsing mode by calling #ReInit.
  */
@@ -1652,14 +1660,14 @@ void QmuParserBase::ClearVar()
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Remove a variable from internal storage.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  *
  * Removes a variable if it exists. If the Variable does not exist nothing will be done.
  */
 void QmuParserBase::RemoveVar(const QString &a_strVarName)
 {
-    varmap_type::iterator item = m_VarDef.find(a_strVarName);
-    if (item!=m_VarDef.end())
+    auto const item = m_VarDef.find(a_strVarName);
+    if (item != m_VarDef.end())
     {
         m_VarDef.erase(item);
         ReInit();
@@ -1670,7 +1678,7 @@ void QmuParserBase::RemoveVar(const QString &a_strVarName)
 /**
  * @brief Clear all functions.
  * @post Resets the parser to string parsing mode.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
 // cppcheck-suppress unusedFunction
 void QmuParserBase::ClearFun()
@@ -1685,7 +1693,7 @@ void QmuParserBase::ClearFun()
  *
  * Both numeric and string constants will be removed from the internal storage.
  * @post Resets the parser to string parsing mode.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
 void QmuParserBase::ClearConst()
 {
@@ -1698,7 +1706,7 @@ void QmuParserBase::ClearConst()
 /**
  * @brief Clear all user defined postfix operators.
  * @post Resets the parser to string parsing mode.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
 void QmuParserBase::ClearPostfixOprt()
 {
@@ -1710,7 +1718,7 @@ void QmuParserBase::ClearPostfixOprt()
 /**
  * @brief Clear all user defined binary operators.
  * @post Resets the parser to string parsing mode.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
 // cppcheck-suppress unusedFunction
 void QmuParserBase::ClearOprt()
@@ -1723,7 +1731,7 @@ void QmuParserBase::ClearOprt()
 /**
  * @brief Clear the user defined Prefix operators.
  * @post Resets the parser to string parser mode.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
 // cppcheck-suppress unusedFunction
 void QmuParserBase::ClearInfixOprt()
@@ -1736,7 +1744,7 @@ void QmuParserBase::ClearInfixOprt()
 /**
  * @brief Enable or disable the formula optimization feature.
  * @post Resets the parser to string parser mode.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
 void QmuParserBase::EnableOptimizer(bool a_bIsOn)
 {
@@ -1756,13 +1764,13 @@ void QmuParserBase::EnableOptimizer(bool a_bIsOn)
 void QmuParserBase::EnableDebugDump(bool bDumpCmd, bool bDumpStack)
 {
     QmuParserBase::g_DbgDumpCmdCode = bDumpCmd;
-    QmuParserBase::g_DbgDumpStack   = bDumpStack;
+    QmuParserBase::g_DbgDumpStack = bDumpStack;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Enable or disable the built in binary operators.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  * @sa m_bBuiltInOp, ReInit()
  *
  * If you disable the built in binary operators there will be no binary operators defined. Thus you must add them
@@ -1779,7 +1787,7 @@ void QmuParserBase::EnableBuiltInOprt(bool a_bIsOn)
 /**
  * @brief Get the argument separator character.
  */
-QChar QmuParserBase::GetArgSep() const
+auto QmuParserBase::GetArgSep() const -> QChar
 {
     return m_pTokenReader->GetArgSep();
 }
@@ -1802,14 +1810,13 @@ void QmuParserBase::SetArgSep(char_type cArgSep)
  */
 void QmuParserBase::StackDump(const QStack<token_type> &a_stVal, const QStack<token_type> &a_stOprt) const
 {
-    QStack<token_type> stOprt(a_stOprt),
-                       stVal(a_stVal);
+    QStack<token_type> stOprt(a_stOprt), stVal(a_stVal);
 
     qDebug() << "\nValue stack:\n";
-    while ( stVal.empty() == false )
+    while (stVal.empty() == false)
     {
-        token_type val = stVal.pop();
-        if (val.GetType()==tpSTR)
+        token_type const val = stVal.pop();
+        if (val.GetType() == tpSTR)
         {
             qDebug() << " \"" << val.GetAsString() << "\" ";
         }
@@ -1820,16 +1827,15 @@ void QmuParserBase::StackDump(const QStack<token_type> &a_stVal, const QStack<to
     }
     qDebug() << "\nOperator stack:\n";
 
-    while ( stOprt.empty() == false )
+    while (stOprt.empty() == false)
     {
-        const token_type &topToken = stOprt.top();
-        if (topToken.GetCode()<=cmASSIGN)
+        if (const token_type &topToken = stOprt.top(); topToken.GetCode() <= cmASSIGN)
         {
-            qDebug() << "OPRT_INTRNL \"" << QmuParserBase::c_DefaultOprt[topToken.GetCode()] << "\" \n";
+            qDebug() << "OPRT_INTRNL \"" << QmuParserBase::GetOprtDef()[topToken.GetCode()] << "\" \n";
         }
         else
         {
-            switch ( topToken.GetCode())
+            switch (topToken.GetCode())
             {
                 case cmVAR:
                     qDebug() << "VAR\n";
@@ -1880,18 +1886,18 @@ void QmuParserBase::StackDump(const QStack<token_type> &a_stVal, const QStack<to
         }
         stOprt.pop();
     }
-    qDebug() << dec;
+    qDebug() << Qt::dec;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /** @brief Evaluate an expression containing comma seperated subexpressions
-  * @param [out] nStackSize The total number of results available
-  * @return Pointer to the array containing all expression results
-  *
-  * This member function can be used to retriev all results of an expression made up of multiple comma seperated
-  * subexpressions (i.e. "x+y,sin(x),cos(y)")
-  */
-qreal* QmuParserBase::Eval(int &nStackSize) const
+ * @param [out] nStackSize The total number of results available
+ * @return Pointer to the array containing all expression results
+ *
+ * This member function can be used to retriev all results of an expression made up of multiple comma seperated
+ * subexpressions (i.e. "x+y,sin(x),cos(y)")
+ */
+auto QmuParserBase::Eval(int &nStackSize) const -> qreal *
 {
     (this->*m_pParseFormula)();
     nStackSize = m_nFinalResultIdx;
@@ -1905,55 +1911,52 @@ void QmuParserBase::Eval(qreal *results, int nBulkSize) const
 {
     CreateRPN();
 
-    int i = 0;
-
-    #ifdef QMUP_USE_OPENMP
-    //#define DEBUG_OMP_STUFF
-    #ifdef DEBUG_OMP_STUFF
-        int *pThread = new int[nBulkSize];
-        int *pIdx = new int[nBulkSize];
-    #endif
+#ifdef QMUP_USE_OPENMP
+// #define DEBUG_OMP_STUFF
+#ifdef DEBUG_OMP_STUFF
+    int *pThread = new int[nBulkSize];
+    int *pIdx = new int[nBulkSize];
+#endif
 
     int nMaxThreads = qMin(omp_get_max_threads(), s_MaxNumOpenMPThreads);
-    // cppcheck-suppress unreadVariable
-    int ct=0;
+    int ct = 0;
     omp_set_num_threads(nMaxThreads);
 
-    #pragma omp parallel for schedule(static, nBulkSize/nMaxThreads) private(nThreadID)
-    for (i=0; i<nBulkSize; ++i)
+#pragma omp parallel for schedule(static, nBulkSize / nMaxThreads) private(nThreadID)
+    for (int i = 0; i < nBulkSize; ++i)
     {
         int nThreadID = omp_get_thread_num();
         results[i] = ParseCmdCodeBulk(i, nThreadID);
 
-        #ifdef DEBUG_OMP_STUFF
-        #pragma omp critical
+#ifdef DEBUG_OMP_STUFF
+#pragma omp critical
         {
             pThread[ct] = nThreadID;
             pIdx[ct] = i;
             ct++;
         }
-        #endif
+#endif
     }
 
-    #ifdef DEBUG_OMP_STUFF
+#ifdef DEBUG_OMP_STUFF
     FILE *pFile = fopen("bulk_dbg.txt", "w");
-    for (i=0; i<nBulkSize; ++i)
+    for (i = 0; i < nBulkSize; ++i)
     {
         fprintf(pFile, "idx: %d  thread: %d \n", pIdx[i], pThread[i]);
     }
 
-    delete [] pIdx;
-    delete [] pThread;
+    delete[] pIdx;
+    delete[] pThread;
 
     fclose(pFile);
-    #endif
+#endif
 
-    #else
-    for (i=0; i<nBulkSize; ++i)
+#else
+    for (int i = 0; i < nBulkSize; ++i)
     {
         results[i] = ParseCmdCodeBulk(i, 0);
     }
-    #endif
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -30,20 +30,23 @@
 #include "../vmisc/def.h"
 #include "../vmisc/vabstractapplication.h"
 
+#include <QBitmap>
 #include <QGraphicsItem>
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsView>
 
-const qreal minVisibleFontSize = 5;
+const qreal minVisibleFontSize = 4;
 
-inline qreal DefPointRadiusPixel()
+extern auto qt_regionToPath(const QRegion &region) -> QPainterPath;
+
+inline auto DefPointRadiusPixel() -> qreal
 {
-    return (qApp->Settings()->GetLineWidth() + 0.8) / 25.4 * PrintDPI;
+    return (VAbstractApplication::VApp()->Settings()->GetLineWidth() + 0.8) / 25.4 * PrintDPI;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal SceneScale(QGraphicsScene *scene)
+auto SceneScale(QGraphicsScene *scene) -> qreal
 {
     qreal scale = 1;
 
@@ -52,7 +55,7 @@ qreal SceneScale(QGraphicsScene *scene)
         const QList<QGraphicsView *> views = scene->views();
         if (not views.isEmpty())
         {
-            scale = views.first()->transform().m11();
+            scale = views.constFirst()->transform().m11();
         }
     }
 
@@ -60,35 +63,20 @@ qreal SceneScale(QGraphicsScene *scene)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QColor CorrectColor(const QGraphicsItem *item, const QColor &color)
+auto PointRect(qreal radius) -> QRectF
 {
-    SCASSERT(item != nullptr)
-
-    if (item->isEnabled())
-    {
-        return color;
-    }
-    else
-    {
-        return Qt::gray;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QRectF PointRect(qreal radius)
-{
-    QRectF rec = QRectF(0, 0, radius*2, radius*2);
+    auto rec = QRectF(0, 0, radius * 2, radius * 2);
     rec.translate(-rec.center().x(), -rec.center().y());
     return rec;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal ScaledRadius(qreal scale)
+auto ScaledRadius(qreal scale) -> qreal
 {
     qreal scaledRadius = DefPointRadiusPixel();
     if (scale > 1)
     {
-        scaledRadius = qMax(DefPointRadiusPixel()/96, DefPointRadiusPixel()/scale);
+        scaledRadius = qMax(DefPointRadiusPixel() / 96, DefPointRadiusPixel() / scale);
     }
     return scaledRadius;
 }
@@ -102,21 +90,21 @@ void ScaleCircleSize(QGraphicsEllipseItem *item, qreal scale)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal ScaleWidth(qreal width, qreal scale)
+auto ScaleWidth(qreal width, qreal scale) -> qreal
 {
     if (scale > 1)
     {
-        width = qMax(0.01, width/scale);
+        width = qMax(0.01, width / scale);
     }
     return width;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath ItemShapeFromPath(const QPainterPath &path, const QPen &pen)
+auto ItemShapeFromPath(const QPainterPath &path, const QPen &pen) -> QPainterPath
 {
     // We unfortunately need this hack as QPainterPathStroker will set a width of 1.0
     // if we pass a value of 0.0 to QPainterPathStroker::setWidth()
-    const qreal penWidthZero = qreal(0.00000001);
+    const auto penWidthZero = qreal(0.00000001);
 
     if (path == QPainterPath() || pen == Qt::NoPen)
     {
@@ -140,8 +128,23 @@ QPainterPath ItemShapeFromPath(const QPainterPath &path, const QPen &pen)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto PixmapToPainterPath(const QPixmap &pixmap) -> QPainterPath
+{
+    if (not pixmap.isNull())
+    {
+        QBitmap const mask = pixmap.mask();
+        if (not mask.isNull())
+        {
+            return qt_regionToPath(QRegion(mask));
+        }
+    }
+
+    return {};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void GraphicsItemHighlightSelected(const QRectF &boundingRect, qreal itemPenWidth, QPainter *painter,
-                                    const QStyleOptionGraphicsItem *option)
+                                   const QStyleOptionGraphicsItem *option)
 {
     const QRectF murect = painter->transform().mapRect(QRectF(0, 0, 1, 1));
     if (qFuzzyIsNull(qMax(murect.width(), murect.height())))
@@ -161,9 +164,7 @@ void GraphicsItemHighlightSelected(const QRectF &boundingRect, qreal itemPenWidt
 
     const QColor fgcolor = option->palette.windowText().color();
     const QColor bgcolor( // ensure good contrast against fgcolor
-                          fgcolor.red()   > 127 ? 0 : 255,
-                          fgcolor.green() > 127 ? 0 : 255,
-                          fgcolor.blue()  > 127 ? 0 : 255);
+        fgcolor.red() > 127 ? 0 : 255, fgcolor.green() > 127 ? 0 : 255, fgcolor.blue() > 127 ? 0 : 255);
 
     painter->setPen(QPen(bgcolor, penWidth, Qt::SolidLine));
     painter->setBrush(Qt::NoBrush);
@@ -175,9 +176,9 @@ void GraphicsItemHighlightSelected(const QRectF &boundingRect, qreal itemPenWidt
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool IsSelectedByReleaseEvent(QGraphicsItem *item, QGraphicsSceneMouseEvent *event)
+auto IsSelectedByReleaseEvent(QGraphicsItem *item, QGraphicsSceneMouseEvent *event) -> bool
 {
     SCASSERT(item != nullptr)
-    return event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick
-            && item->contains(event->pos());
+    return event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick &&
+           item->contains(event->pos());
 }

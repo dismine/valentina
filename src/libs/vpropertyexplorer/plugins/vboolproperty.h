@@ -21,14 +21,12 @@
 #ifndef VBOOLPROPERTY_H
 #define VBOOLPROPERTY_H
 
-#include <qcompilerdetection.h>
-#include <stddef.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
 #include <QVariant>
-#include <Qt>
 #include <QtGlobal>
+#include <stddef.h>
 
 #include "../vproperty.h"
 #include "../vpropertyexplorer_global.h"
@@ -36,50 +34,63 @@
 namespace VPE
 {
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+
 //! The VBoolProperty can take two states: True or False.
 class VPROPERTYEXPLORERSHARED_EXPORT VBoolProperty : public VProperty
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     //! Default constructor
-    explicit VBoolProperty(const QString& name);
+    explicit VBoolProperty(const QString &name);
 
     //! Destructor
-    virtual ~VBoolProperty()  override {}
+    ~VBoolProperty() override = default;
 
     //! Get the data how it should be displayed
-    virtual QVariant data (int column = DPC_Name, int role = Qt::DisplayRole) const override;
+    auto data(int column = DPC_Name, int role = Qt::DisplayRole) const -> QVariant override;
 
-    //! This is used by the model to set the data
-    //! \param data The data to set
-    //! \param role The role. Default is Qt::EditRole
-    //! \return Returns true, if the data was changed, false if not.
-    virtual bool setData (const QVariant& data, int role = Qt::EditRole) override;
+    //! Returns an editor widget, or NULL if it doesn't supply one
+    //! \param parent The widget to which the editor will be added as a child
+    //! \options Render options
+    //! \delegate A pointer to the QAbstractItemDelegate requesting the editor. This can be used to connect signals and
+    //! slots.
+    auto createEditor(QWidget *parent, const QStyleOptionViewItem &options, const QAbstractItemDelegate *delegate)
+        -> QWidget * override;
+
+    //! Sets the property's data to the editor (returns false, if the standard delegate should do that)
+    auto setEditorData(QWidget *editor) -> bool override;
+
+    //! Gets the data from the widget
+    auto getEditorData(const QWidget *editor) const -> QVariant override;
+
+    //! Sets the value of the property
+    void setValue(const QVariant &value) override;
 
     //! Returns item flags
-    virtual Qt::ItemFlags flags(int column = DPC_Name) const override;
+    auto flags(int column = DPC_Name) const -> Qt::ItemFlags override;
 
     //! Returns a string containing the type of the property
-    virtual QString type() const override;
+    auto type() const -> QString override;
 
     //! Clones this property
     //! \param include_children Indicates whether to also clone the children
     //! \param container If a property is being passed here, no new VProperty is being created but instead it is tried
     //! to fill all the data into container. This can also be used when subclassing this function.
     //! \return Returns the newly created property (or container, if it was not NULL)
-    virtual VProperty* clone(bool include_children = true, VProperty* container = NULL) const override;
+    auto clone(bool include_children = true, VProperty *container = nullptr) const -> VProperty * override;
 
-protected:
-    //! The (translatable) text displayed when the property is set to true (default: "True")
-    static QVariant TrueText;
-
-    //! The (translatable) text displayed when the property is set to false (default: "False")
-    static QVariant FalseText;
+public slots:
+    void StateChanged();
 
 private:
-    Q_DISABLE_COPY(VBoolProperty)
+    Q_DISABLE_COPY_MOVE(VBoolProperty) // NOLINT
 };
 
-}
+QT_WARNING_POP
+
+} // namespace VPE
 
 #endif // VBOOLPROPERTY_H

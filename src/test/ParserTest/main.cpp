@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -32,9 +32,9 @@
 #include "../qmuparser/qmuparsertest.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-void testMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+inline void testMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
-    QByteArray localMsg = msg.toLocal8Bit();
+    QByteArray const localMsg = msg.toLocal8Bit();
     switch (type)
     {
         case QtDebugMsg:
@@ -55,15 +55,11 @@ void testMessageOutput(QtMsgType type, const QMessageLogContext &context, const 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int main(int argc, char *argv[])
+auto main(int argc, char *argv[]) -> int
 {
-    QCoreApplication a(argc, argv);
+    QCoreApplication const a(argc, argv);
     qInstallMessageHandler(testMessageOutput);
-    qmu::Test::QmuParserTester pt;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
+    qmu::Test::QmuParserTester const pt;
     QTimer::singleShot(0, &pt, &qmu::Test::QmuParserTester::Run);
-#else
-    QTimer::singleShot(0, &pt, SLOT(Run()));
-#endif
-    return a.exec();
+    return QCoreApplication::exec();
 }

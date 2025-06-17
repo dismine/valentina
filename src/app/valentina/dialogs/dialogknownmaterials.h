@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -33,19 +33,19 @@
 
 namespace Ui
 {
-    class DialogKnownMaterials;
+class DialogKnownMaterials;
 }
 
 class DialogKnownMaterials : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit DialogKnownMaterials(QWidget *parent = nullptr);
-    virtual ~DialogKnownMaterials();
+    ~DialogKnownMaterials() override;
 
-    void        SetList(const QStringList &list);
-    QStringList GetList() const;
+    void SetList(const QStringList &list);
+    auto GetList() const -> QStringList;
 
 private slots:
     void ShowDetails();
@@ -54,7 +54,8 @@ private slots:
     void SaveText(const QString &text);
 
 private:
-    Q_DISABLE_COPY(DialogKnownMaterials)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DialogKnownMaterials) // NOLINT
     Ui::DialogKnownMaterials *ui;
 
     void SetupControls();

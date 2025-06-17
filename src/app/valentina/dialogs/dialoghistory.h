@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,15 +29,23 @@
 #ifndef DIALOGHISTORY_H
 #define DIALOGHISTORY_H
 
+#include "../vmisc/vabstractshortcutmanager.h"
 #include "../vtools/dialogs/tools/dialogtool.h"
 
 #include <QDomElement>
 
 class VPattern;
+class VTableSearch;
+
+struct HistoryRecord
+{
+    QString description{};
+    quint32 id{NULL_ID};
+};
 
 namespace Ui
 {
-    class DialogHistory;
+class DialogHistory;
 }
 
 /**
@@ -45,52 +53,70 @@ namespace Ui
  */
 class DialogHistory : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     DialogHistory(VContainer *data, VPattern *doc, QWidget *parent = nullptr);
-    virtual ~DialogHistory() override;
+    ~DialogHistory() override;
 public slots:
-    virtual void      DialogAccepted() override;
+    void DialogAccepted() override;
     /** TODO ISSUE 79 : create real function
-    * @brief DialogApply apply data and emit signal about applied dialog.
-    */
-    virtual void      DialogApply() override {}
-    void              cellClicked(int row, int column);
-    void              ChangedCursor(quint32 id);
-    void              UpdateHistory();
+     * @brief DialogApply apply data and emit signal about applied dialog.
+     */
+    void DialogApply() override {}
+    void cellClicked(int row, int column);
+    void ChangedCursor(quint32 id);
+    void UpdateHistory();
 signals:
     /**
      * @brief ShowHistoryTool signal change color of selected in records tool
      * @param id id of tool
      * @param enable true enable selection, false disable selection
      */
-    void              ShowHistoryTool(quint32 id, bool enable);
+    void ShowHistoryTool(quint32 id, bool enable);
+
 protected:
-    virtual void      closeEvent ( QCloseEvent * event ) override;
-    virtual void      changeEvent(QEvent* event) override;
+    void closeEvent(QCloseEvent *event) override;
+    void changeEvent(QEvent *event) override;
+    auto IsValid() const -> bool final { return true; }
+    void showEvent(QShowEvent *event) override;
+
+private slots:
+    void UpdateShortcuts();
+
 private:
-    Q_DISABLE_COPY(DialogHistory)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DialogHistory) // NOLINT
 
     /** @brief ui keeps information about user interface */
     Ui::DialogHistory *ui;
 
-    /** @brief doc dom document container */
-    VPattern          *doc;
-
     /** @brief cursorRow save number of row where is cursor */
-    qint32            cursorRow;
+    qint32 m_cursorRow{0};
 
     /** @brief cursorToolRecordRow save number of row selected record */
-    qint32            cursorToolRecordRow;
+    qint32 m_cursorToolRecordRow{0};
+    QSharedPointer<VTableSearch> m_search{};
 
-    void              FillTable();
-    QString           Record(const VToolRecord &tool);
-    void              InitialTable();
-    void              ShowPoint();
-    QString           PointName(quint32 pointId);
-    quint32           AttrUInt(const QDomElement &domElement, const QString &name);
-    void              RetranslateUi();
-    int               CursorRow() const;
+    QMenu *m_searchHistory;
+
+    QMultiHash<VShortcutAction, QAbstractButton *> m_shortcuts{};
+    QHash<QAbstractButton *, QString> m_serachButtonTooltips{};
+
+    void FillTable();
+    auto Record(const VToolRecord &tool) const -> HistoryRecord;
+    auto RecordDescription(const VToolRecord &tool, HistoryRecord record, const QDomElement &domElem) const
+        -> HistoryRecord;
+    void InitialTable();
+    void ShowPoint();
+    auto PointName(quint32 pointId) const -> QString;
+    void RetranslateUi();
+    auto CursorRow() const -> int;
+
+    void InitSearch();
+    void InitSearchHistory();
+    void SaveSearchRequest();
+    void UpdateSearchControlsTooltips();
 };
 
 #endif // DIALOGHISTORY_H

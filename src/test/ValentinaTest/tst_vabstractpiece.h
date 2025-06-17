@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -35,96 +35,58 @@ class VSAPoint;
 
 class TST_VAbstractPiece : public AbstractTest
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     explicit TST_VAbstractPiece(QObject *parent = nullptr);
 
 private slots:
     void EquidistantRemoveLoop_data();
     void EquidistantRemoveLoop() const;
+    void LayoutAllowanceRemoveLoop_data();
+    void LayoutAllowanceRemoveLoop() const;
     void SumTrapezoids() const;
+    void TestAreaCalculation_data();
+    void TestAreaCalculation() const;
+    void RawPathRemoveLoop_data() const;
+    void RawPathRemoveLoop() const;
     void PathRemoveLoop_data() const;
     void PathRemoveLoop() const;
     void PathLoopsCase_data() const;
     void PathLoopsCase() const;
-    void BrokenDetailEquidistant_data() const;
+    void BrokenDetailEquidistant_data();
     void BrokenDetailEquidistant() const;
-    void EquidistantAngleType_data() const;
+    void EquidistantAngleType_data();
     void EquidistantAngleType() const;
-    void CorrectEquidistantPoints_data() const;
+    void CorrectEquidistantPoints_data();
     void CorrectEquidistantPoints() const;
     void TestCorrectEquidistantPoints_data();
     void TestCorrectEquidistantPoints() const;
-#ifndef Q_OS_WIN // Disabled due to "undefined behavior" problem
     void PossibleInfiniteClearLoops_data() const;
     void PossibleInfiniteClearLoops() const;
-#endif
+    void IsAllowanceValid_data() const;
+    void IsAllowanceValid() const;
+    void TestFullSeamPath_data() const;
+    void TestFullSeamPath() const;
+    void TestFullSeamAllowancePath_data() const;
+    void TestFullSeamAllowancePath() const;
+    void TestSeamLineTurnPoints_data() const;
+    void TestSeamLineTurnPoints() const;
 
 private:
-    QVector<VSAPoint> InputPointsSeamTest1PieceByAngle() const;
-    QVector<QPointF>  OutputPointsSeamTest1PieceByAngle() const;
-
-    QVector<VSAPoint> InputPointsSeamTest1PieceByIntersection() const;
-    QVector<QPointF>  OutputPointsSeamTest1PieceByIntersection() const;
-
-    QVector<VSAPoint> InputPointsSeamTest1PieceByFirstEdgeSymmerty() const;
-    QVector<QPointF>  OutputPointsSeamTest1PieceByFirstEdgeSymmerty() const;
-
-    QVector<VSAPoint> InputPointsSeamTest1PieceBySecondEdgeSymmerty() const;
-    QVector<QPointF>  OutputPointsSeamTest1PieceBySecondEdgeSymmerty() const;
-
-    QVector<VSAPoint> InputPointsSeamTest1PieceByFirstRightAngle() const;
-    QVector<QPointF>  OutputPointsSeamTest1PieceByFirstRightAngle() const;
-
-    QVector<VSAPoint> InputPointsSeamTest1PieceBySecondRightAngle() const;
-    QVector<QPointF>  OutputPointsSeamTest1PieceBySecondRightAngle() const;
-
-    QVector<VSAPoint> InputPointsCase2() const;
-    QVector<QPointF>  OutputPointsCase2() const;
-
-    QVector<VSAPoint> InputPointsCase3() const;
-    QVector<QPointF>  OutputPointsCase3() const;
-
-    QVector<VSAPoint> InputPointsIssue627() const;
-    QVector<QPointF>  OutputPointsIssue627() const;
-
-    QVector<VSAPoint> InputPointsIssue767_Fabric_TopCollar() const;
-    QVector<QPointF>  OutputPointsIssue767_Fabric_TopCollar() const;
-
-    QVector<VSAPoint> InputPointsIssue767_SkinFusing_TopCollar_Notch() const;
-    QVector<QPointF>  OutputPointsIssue767_SkinFusing_TopCollar_Notch() const;
-
-    QVector<VSAPoint> InputPointsIssue880_Piece_Detail() const;
-    QVector<QPointF>  OutputPointsIssue880_Piece_Detail() const;
-
-    QVector<VSAPoint> InputPointsIssue880_Piece_Detail_1() const;
-    QVector<QPointF>  OutputPointsIssue880_Piece_Detail_1() const;
+    auto InputPointsCase3() const -> QVector<VSAPoint>;
+    auto OutputPointsCase3() const -> QVector<QPointF>;
 
     void Case3() const;
     void Case4() const;
     void Case5() const;
 
-    QVector<VSAPoint> InputPointsIssue298Case1() const;
-    QVector<QPointF> OutputPointsIssue298Case1() const;
+    auto InputPointsCase3a() const -> QVector<QPointF>;
+    auto InputPointsCase4a() const -> QVector<QPointF>;
+    auto InputPointsCase5a() const -> QVector<QPointF>;
 
-    QVector<VSAPoint> InputPointsIssue298Case2() const;
-    QVector<QPointF> OutputPointsIssue298Case2() const;
-
-    QVector<VSAPoint> InputPointsIssue548Case1() const;
-    QVector<QPointF> OutputPointsIssue548Case1() const;
-
-    QVector<VSAPoint> InputPointsIssue548Case2() const;
-    QVector<QPointF> OutputPointsIssue548Case2() const;
-
-    QVector<VSAPoint> InputPointsIssue548Case3() const;
-    QVector<QPointF> OutputPointsIssue548Case3() const;
-
-    QVector<QPointF> InputPointsCase3a() const;
-    QVector<QPointF> InputPointsCase4a() const;
-    QVector<QPointF> InputPointsCase5a() const;
-
-    QVector<VSAPoint> InputPointsIssue646() const;
-    QVector<QPointF>  OutputPointsIssue646() const;
+    auto InputLoopByIntersectionTest() -> QVector<VSAPoint>;
+    auto OutputLoopByIntersectionTest() -> QVector<QPointF>;
 };
 
 #endif // TST_VABSTRACTPIECE_H

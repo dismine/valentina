@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -38,14 +38,14 @@ class VTranslateVars;
 
 class TST_BuitInRegExp : public TST_AbstractRegExp
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit TST_BuitInRegExp(const QString &locale, QObject *parent = nullptr);
-    virtual ~TST_BuitInRegExp() Q_DECL_EQ_DEFAULT;
+    virtual ~TST_BuitInRegExp() = default;
 
 protected:
     virtual void        PrepareData() override;
-    virtual QStringList AllNames() override;
+    virtual auto AllNames() -> QStringList override;
 
 private slots:
     void initTestCase();
@@ -61,11 +61,12 @@ private slots:
     void TestCheckUnderlineExists();
     void TestCheckInternalVaribleRegExp_data();
     void TestCheckInternalVaribleRegExp();
-    void TestTemplatePlaceholders();
+    void TestForValidChars_data();
+    void TestForValidChars();
     void cleanupTestCase();
 
 private:
-    Q_DISABLE_COPY(TST_BuitInRegExp)
+    Q_DISABLE_COPY_MOVE(TST_BuitInRegExp) // NOLINT
 };
 
 #endif // TST_BUITINREGEXP_H

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -32,97 +32,118 @@
 #include <QPen>
 #include <QPointF>
 #include <QSharedPointer>
-#include <Qt>
 #include <new>
 
 #include "../../tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncircles.h"
-#include "../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"
-#include "../vmisc/vabstractapplication.h"
-#include "../vpatterndb/vcontainer.h"
-#include "../vwidgets/vmaingraphicsscene.h"
 #include "../visualization.h"
+#include "../vmisc/vmodifierkey.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/global.h"
 #include "visline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPointOfIntersectionCircles::VisToolPointOfIntersectionCircles(const VContainer *data, QGraphicsItem *parent)
-    : VisLine(data, parent), object2Id(NULL_ID), c1Radius(0), c2Radius(0),
-      crossPoint(CrossCirclesPoint::FirstPoint), point(nullptr), c1Center(nullptr), c2Center(nullptr), c1Path(nullptr),
-      c2Path(nullptr)
+  : VisLine(data, parent)
 {
     this->setPen(QPen(Qt::NoPen)); // don't use parent this time
 
-    c1Path = InitItem<QGraphicsEllipseItem>(Qt::darkGreen, this);
-    c2Path = InitItem<QGraphicsEllipseItem>(Qt::darkRed, this);
-    point = InitPoint(mainColor, this);
-    c1Center = InitPoint(supportColor, this);
-    c2Center = InitPoint(supportColor, this);  //-V656
+    m_c1Path = InitItem<VScaledEllipse>(VColorRole::VisSupportColor2, this);
+    m_c1Path->SetPointMode(false);
+
+    m_c2Path = InitItem<VScaledEllipse>(VColorRole::VisSupportColor4, this);
+    m_c2Path->SetPointMode(false);
+
+    m_point = InitPoint(VColorRole::VisMainColor, this);
+    m_point->setZValue(1);
+
+    m_c1Center = InitPoint(VColorRole::VisSupportColor, this);
+    m_c2Center = InitPoint(VColorRole::VisSupportColor, this); //-V656
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolPointOfIntersectionCircles::RefreshGeometry()
 {
-    if (object1Id > NULL_ID)
+    if (m_circle1Id > NULL_ID)
     {
-        const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(c1Center, static_cast<QPointF>(*first), supportColor);
+        const QSharedPointer<VPointF> first = GetData()->GeometricObject<VPointF>(m_circle1Id);
+        DrawPoint(m_c1Center, static_cast<QPointF>(*first));
 
-        if (object2Id > NULL_ID)
+        if (m_c1Radius > 0)
         {
-            const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(object2Id);
-            DrawPoint(c2Center, static_cast<QPointF>(*second), supportColor);
+            m_c1Path->setRect(PointRect(m_c1Radius));
+            DrawPoint(m_c1Path, static_cast<QPointF>(*first), Qt::DashLine);
 
-            if (c1Radius > 0 && c2Radius > 0)
+            if (m_circle2Id > NULL_ID)
             {
-                c1Path->setRect(PointRect(c1Radius));
-                DrawPoint(c1Path, static_cast<QPointF>(*first), Qt::darkGreen, Qt::DashLine);
+                const QSharedPointer<VPointF> second = GetData()->GeometricObject<VPointF>(m_circle2Id);
+                DrawPoint(m_c2Center, static_cast<QPointF>(*second));
 
-                c2Path->setRect(PointRect(c2Radius));
-                DrawPoint(c2Path, static_cast<QPointF>(*second), Qt::darkRed, Qt::DashLine);
+                if (m_c2Radius > 0)
+                {
+                    m_c2Path->setRect(PointRect(m_c2Radius));
+                    DrawPoint(m_c2Path, static_cast<QPointF>(*second), Qt::DashLine);
 
-                QPointF fPoint;
-                VToolPointOfIntersectionCircles::FindPoint(static_cast<QPointF>(*first),
-                                                           static_cast<QPointF>(*second),
-                                                           c1Radius, c2Radius, crossPoint, &fPoint);
-                DrawPoint(point, fPoint, mainColor);
+                    QPointF fPoint;
+                    VToolPointOfIntersectionCircles::FindPoint(static_cast<QPointF>(*first),
+                                                               static_cast<QPointF>(*second), m_c1Radius, m_c2Radius,
+                                                               m_crossPoint, &fPoint);
+                    DrawPoint(m_point, fPoint);
+                }
+                else if (GetMode() == Mode::Creation)
+                {
+                    QLineF const radiusLine(static_cast<QPointF>(*second), ScenePos());
+                    const qreal length = radiusLine.length();
+
+                    m_c2Path->setRect(PointRect(length));
+                    DrawPoint(m_c2Path, static_cast<QPointF>(*second), Qt::DashLine);
+
+                    QPointF fPoint;
+                    VToolPointOfIntersectionCircles::FindPoint(static_cast<QPointF>(*first),
+                                                               static_cast<QPointF>(*second), m_c1Radius, length,
+                                                               m_crossPoint, &fPoint);
+                    DrawPoint(m_point, fPoint);
+
+                    const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
+                    SetToolTip(tr("Radius = %1%2; "
+                                  "<b>Mouse click</b> - finish selecting the second radius, "
+                                  "<b>%3</b> - skip")
+                                   .arg(LengthToUser(length), prefix, VModifierKey::EnterKey()));
+                }
             }
+        }
+        else if (GetMode() == Mode::Creation && VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
+        {
+            QLineF const radiusLine(static_cast<QPointF>(*first), ScenePos());
+            const qreal length = radiusLine.length();
+
+            m_c1Path->setRect(PointRect(length));
+            DrawPoint(m_c1Path, static_cast<QPointF>(*first), Qt::DashLine);
+
+            const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
+            SetToolTip(tr("Radius = %1%2; "
+                          "<b>Mouse click</b> - finish selecting the first radius, "
+                          "<b>%3</b> - skip")
+                           .arg(LengthToUser(length), prefix, VModifierKey::EnterKey()));
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolPointOfIntersectionCircles::VisualMode(const quint32 &id)
+void VisToolPointOfIntersectionCircles::VisualMode(quint32 id)
 {
-    VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-    SCASSERT(scene != nullptr)
-
-    this->object1Id = id;
-    Visualization::scenePos = scene->getScenePos();
-    RefreshGeometry();
-
-    AddOnScene();
+    m_circle1Id = id;
+    StartVisualMode();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolPointOfIntersectionCircles::setObject2Id(const quint32 &value)
+void VisToolPointOfIntersectionCircles::SetC1Radius(const QString &value)
 {
-    object2Id = value;
+    m_c1Radius = FindLengthFromUser(value, GetData()->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolPointOfIntersectionCircles::setC1Radius(const QString &value)
+void VisToolPointOfIntersectionCircles::SetC2Radius(const QString &value)
 {
-    c1Radius = FindLengthFromUser(value, Visualization::data->DataVariables());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolPointOfIntersectionCircles::setC2Radius(const QString &value)
-{
-    c2Radius = FindLengthFromUser(value, Visualization::data->DataVariables());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolPointOfIntersectionCircles::setCrossPoint(const CrossCirclesPoint &value)
-{
-    crossPoint = value;
+    m_c2Radius = FindLengthFromUser(value, GetData()->DataVariables());
 }

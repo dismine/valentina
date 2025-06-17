@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -32,36 +32,24 @@
 #include <QSharedData>
 
 #include "vpointf.h"
-#include "../vmisc/diagnostic.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
-class VCubicBezierPathData : public QSharedData
+class VCubicBezierPathData final : public QSharedData
 {
 public:
-
-    VCubicBezierPathData()
-        : path()
-    {}
-
-    VCubicBezierPathData(const VCubicBezierPathData &splPath)
-        : QSharedData(splPath),
-          path(splPath.path)
-    {}
-
-    virtual ~VCubicBezierPathData();
+    VCubicBezierPathData() = default;
+    VCubicBezierPathData(const VCubicBezierPathData &splPath) = default;
+    ~VCubicBezierPathData() = default;
 
     /** @brief path list of points. */
-    QVector<VPointF> path;
+    QVector<VPointF> path{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
-    VCubicBezierPathData &operator=(const VCubicBezierPathData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN_MOVE(VCubicBezierPathData) // NOLINT
 };
-
-VCubicBezierPathData::~VCubicBezierPathData()
-{}
 
 QT_WARNING_POP
 

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -32,7 +32,6 @@
 #include <QString>
 
 #include "vpatternlabeldata.h"
-#include "floatitemdef.h"
 
 class VPieceLabelDataPrivate;
 struct VLabelTemplateLine;
@@ -47,45 +46,45 @@ public:
     VPieceLabelData();
     VPieceLabelData(const VPieceLabelData &data);
 
-    virtual ~VPieceLabelData();
+    ~VPieceLabelData() override;
 
-    VPieceLabelData &operator=(const VPieceLabelData &data);
-#ifdef Q_COMPILER_RVALUE_REFS
-    VPieceLabelData &operator=(VPieceLabelData &&data) Q_DECL_NOTHROW { Swap(data); return *this; }
-#endif
+    auto operator=(const VPieceLabelData &data) -> VPieceLabelData &;
 
-    inline void Swap(VPieceLabelData &data) Q_DECL_NOTHROW
-    { VPatternLabelData::Swap(data); std::swap(d, data.d); }
+    VPieceLabelData(VPieceLabelData &&data) noexcept;
+    auto operator=(VPieceLabelData &&data) noexcept -> VPieceLabelData &;
 
     void Clear();
 
     // methods, which operate on other members
-    QString GetLetter() const;
-    void    SetLetter(const QString &qsLetter);
+    auto GetLetter() const -> QString;
+    void SetLetter(const QString &qsLetter);
 
-    QString GetAnnotation() const;
-    void    SetAnnotation(const QString &val);
+    auto GetAnnotation() const -> QString;
+    void SetAnnotation(const QString &val);
 
-    QString GetOrientation() const;
-    void    SetOrientation(const QString &val);
+    auto GetOrientation() const -> QString;
+    void SetOrientation(const QString &val);
 
-    QString GetRotationWay() const;
-    void    SetRotationWay(const QString &val);
+    auto GetRotationWay() const -> QString;
+    void SetRotationWay(const QString &val);
 
-    QString GetTilt() const;
-    void    SetTilt(const QString &val);
+    auto GetTilt() const -> QString;
+    void SetTilt(const QString &val);
 
-    QString GetFoldPosition() const;
-    void    SetFoldPosition(const QString &val);
+    auto GetFoldPosition() const -> QString;
+    void SetFoldPosition(const QString &val);
 
-    int  GetQuantity() const;
-    void SetQuantity(int val);
+    auto GetQuantity() const -> quint16;
+    void SetQuantity(quint16 val);
 
-    bool IsOnFold() const;
+    auto IsOnFold() const -> bool;
     void SetOnFold(bool onFold);
 
-    QVector<VLabelTemplateLine> GetLabelTemplate() const;
-    void                        SetLabelTemplate(const QVector<VLabelTemplateLine> &lines);
+    auto GetAreaShortName() const -> QString;
+    void SetAreaShortName(const QString &val);
+
+    auto GetLabelTemplate() const -> QVector<VLabelTemplateLine>;
+    void SetLabelTemplate(const QVector<VLabelTemplateLine> &lines);
 
 private:
     QSharedDataPointer<VPieceLabelDataPrivate> d;

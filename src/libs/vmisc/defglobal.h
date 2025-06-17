@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -30,17 +30,39 @@
 
 #include <QtGlobal>
 
-#include "backport/qoverload.h"
-
 constexpr qreal PrintDPI = 96.0;
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-// this adds const to non-const objects (like std::as_const)
-template <typename T>
-Q_DECL_CONSTEXPR typename std::add_const<T>::type &qAsConst(T &t) Q_DECL_NOTHROW { return t; }
-// prevent rvalue arguments:
-template <typename T>
-void qAsConst(const T &&) Q_DECL_EQ_DELETE;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 6, 0)
+// Since Qt 6.0 minimal requirement is C++17. There is no longer need for qAsConst.
+#define qAsConst std::as_const
+#endif
+
+#ifndef Q_DISABLE_ASSIGN
+#define Q_DISABLE_ASSIGN(Class) Class &operator=(const Class &) = delete;
+#endif
+
+#ifndef Q_DISABLE_ASSIGN_MOVE
+#define Q_DISABLE_ASSIGN_MOVE(Class)                                                                                   \
+    Q_DISABLE_ASSIGN(Class)                                                                                            \
+    Class(Class &&) = delete;                                                                                          \
+    Class &operator=(Class &&) = delete;
+#endif
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+using vsizetype = qsizetype;
+#else
+using vsizetype = int;
+#endif
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+class QTextCodec;
+using VTextCodec = QTextCodec;
+#endif
+
+#if __cplusplus >= 202002L && defined(__cpp_consteval) && __cpp_consteval >= 201811L
+#define Q_DECL_CONSTEVAL consteval
+#else
+#define Q_DECL_CONSTEVAL constexpr
 #endif
 
 #endif // DEFGLOBAL_H

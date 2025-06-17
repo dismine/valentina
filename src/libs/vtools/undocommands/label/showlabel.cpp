@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -31,7 +31,6 @@
 #include <QDomElement>
 
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vmisc/logging.h"
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vtools/tools/drawTools/vdrawtool.h"
@@ -41,16 +40,16 @@ ShowLabel::ShowLabel(VAbstractPattern *doc, quint32 id, bool visible, QUndoComma
     : VUndoCommand(QDomElement(), doc, parent),
       m_visible(visible),
       m_oldVisible(true),
-      m_scene(qApp->getCurrentScene())
+      m_scene(VAbstractValApplication::VApp()->getCurrentScene())
 {
     setText(tr("toggle label"));
 
     nodeId = id;
 
-    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagPoint);
+    QDomElement const domElement = doc->FindElementById(nodeId, VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
-        m_oldVisible = doc->GetParametrBool(domElement, AttrShowLabel, trueStr);
+        m_oldVisible = VDomDocument::GetParametrBool(domElement, AttrShowLabel, trueStr);
     }
     else
     {
@@ -77,12 +76,12 @@ void ShowLabel::redo()
 //---------------------------------------------------------------------------------------------------------------------
 void ShowLabel::Do(bool visible)
 {
-    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagPoint);
+    QDomElement domElement = doc->FindElementById(nodeId, VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
         doc->SetAttribute<bool>(domElement, AttrShowLabel, visible);
 
-        if (VAbstractTool *tool = qobject_cast<VAbstractTool *>(VAbstractPattern::getTool(nodeId)))
+        if (auto *tool = qobject_cast<VAbstractTool *>(VAbstractPattern::getTool(nodeId)))
         {
             tool->SetLabelVisible(nodeId, visible);
         }

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,79 +29,123 @@
 #ifndef MAPPLICATION_H
 #define MAPPLICATION_H
 
-#include "../vpatterndb/vtranslatevars.h"
-#include "../vmisc/def.h"
-#include "../vmisc/vtapesettings.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vlockguard.h"
+#include "../vpatterndb/vtranslatevars.h"
 #include "dialogs/dialogmdatabase.h"
+#include "vtapesettings.h"
 
-class MApplication;// use in define
+#include <QFutureWatcher>
+
 class TMainWindow;
+class TKMMainWindow;
 class QLocalServer;
+class QCommandLineParser;
+class VKnownMeasurementsDatabase;
 
-#if defined(qApp)
-#undef qApp
-#endif
-#define qApp (static_cast<MApplication*>(VAbstractApplication::instance()))
-
-enum class SocketConnection : bool {Client = false, Server = true};
+enum class SocketConnection : bool
+{
+    Client = false,
+    Server = true
+};
 
 class MApplication : public VAbstractApplication
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     MApplication(int &argc, char **argv);
-    virtual ~MApplication() override;
+    ~MApplication() override;
 
-    virtual bool notify(QObject * receiver, QEvent * event) override;
+    auto notify(QObject *receiver, QEvent *event) -> bool override;
 
-    bool IsTestMode() const;
-    virtual bool IsAppInGUIMode() const override;
-    TMainWindow *MainWindow();
-    QList<TMainWindow*> MainWindows();
-    TMainWindow *NewMainWindow();
+    auto IsTestMode() const -> bool;
+    auto IsAppInGUIMode() const -> bool override;
+
+    auto MainTapeWindow() -> TMainWindow *;
+    auto MainTapeWindows() -> QList<TMainWindow *>;
+    auto NewMainTapeWindow() -> TMainWindow *;
+
+    auto MainKMWindow() -> TKMMainWindow *;
+    auto MainKMWindows() -> QList<TKMMainWindow *>;
+    auto NewMainKMWindow() -> TKMMainWindow *;
 
     void InitOptions();
 
-    virtual const VTranslateVars *TrVars() override;
+    void StartLogging();
+    auto LogFile() -> QTextStream *;
 
-    virtual void  OpenSettings() override;
-    VTapeSettings *TapeSettings();
+    auto TrVars() -> const VTranslateVars * override;
 
-    QString diagramsPath() const;
-
-    void ShowDataBase();
-    void RetranslateGroups();
-    void RetranslateTables();
+    void OpenSettings() override;
+    auto TapeSettings() -> VTapeSettings *;
 
     void ParseCommandLine(const SocketConnection &connection, const QStringList &arguments);
+
+    static auto VApp() -> MApplication *;
+
+    auto KnownMeasurementsDatabase() -> VKnownMeasurementsDatabase * override;
+
+    void Preferences(QWidget *parent = nullptr);
 
 public slots:
     void ProcessCMD();
 
 protected:
-    virtual void InitTrVars() override;
-    virtual bool event(QEvent *e) override;
+    void InitTrVars() override;
+    auto event(QEvent *e) -> bool override;
+
+protected slots:
+    void AboutToQuit() override;
 
 private slots:
     void NewLocalSocketConnection();
+    void RepopulateMeasurementsDatabase(const QString &path);
+    void KnownMeasurementsPathChanged(const QString &oldPath, const QString &newPath);
+    void SyncKnownMeasurements();
 
 private:
-    Q_DISABLE_COPY(MApplication)
-    QList<QPointer<TMainWindow> > mainWindows;
-    QLocalServer *localServer;
-    VTranslateVars *trVars;
-    QPointer<DialogMDataBase> dataBase;
-    bool testMode;
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(MApplication) // NOLINT
+    QList<QPointer<TMainWindow>> m_mainWindows{};
+    QList<QPointer<TKMMainWindow>> m_kmMainWindows{};
+    QLocalServer *m_localServer{nullptr};
+    VTranslateVars *m_trVars{nullptr};
+    QPointer<DialogMDataBase> m_dataBase{};
+    bool m_testMode{false};
+    bool m_knownMeasurementsMode{false};
+    VKnownMeasurementsDatabase *m_knownMeasurementsDatabase{nullptr};
+    QFileSystemWatcher *m_knownMeasurementsDatabaseWatcher{nullptr};
+    QFutureWatcher<void> *m_knownMeasurementsRepopulateWatcher;
+    QSharedPointer<VLockGuard<QFile>> m_lockLog{};
+    std::shared_ptr<QTextStream> m_out{nullptr};
 
-    void Clean();
+    void CleanTapeWindows();
+    void CleanKMWindows();
+
+    static void InitParserOptions(QCommandLineParser &parser);
+    void StartLocalServer(const QString &serverName);
+
+    auto StartWithFiles(QCommandLineParser &parser) -> bool;
+    auto StartWithMeasurementFiles(QCommandLineParser &parser) -> bool;
+    auto StartWithKnownMeasurementFiles(QCommandLineParser &parser) -> bool;
+    auto SingleStart(QCommandLineParser &parser) -> bool;
+
+    static void ParseDimensionAOption(QCommandLineParser &parser, qreal &dimensionAValue, bool &flagDimensionA);
+    static void ParseDimensionBOption(QCommandLineParser &parser, qreal &dimensionBValue, bool &flagDimensionB);
+    static void ParseDimensionCOption(QCommandLineParser &parser, qreal &dimensionCValue, bool &flagDimensionC);
+    static void ParseUnitsOption(QCommandLineParser &parser, Unit &unit, bool &flagUnits);
+
+    void RestartKnownMeasurementsDatabaseWatcher();
+
+    static auto LogPath() -> QString;
+    void BeginLogging();
 };
-//---------------------------------------------------------------------------------------------------------------------
 
-inline const VTranslateVars *MApplication::TrVars()
+//---------------------------------------------------------------------------------------------------------------------
+inline auto MApplication::TrVars() -> const VTranslateVars *
 {
-    return trVars;
+    return m_trVars;
 }
 
 #endif // MAPPLICATION_H

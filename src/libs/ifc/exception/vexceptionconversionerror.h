@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef VEXCEPTIONCONVERSIONERROR_H
 #define VEXCEPTIONCONVERSIONERROR_H
 
-#include <qcompilerdetection.h>
 #include <QString>
 
 #include "../ifcdef.h"
@@ -38,18 +37,27 @@
 /**
  * @brief The VExceptionConversionError class for exception of conversion error
  */
-class VExceptionConversionError : public VException
+class VExceptionConversionError final : public VException
 {
 public:
-    VExceptionConversionError(const QString &error, const QString &str);
-    VExceptionConversionError(const VExceptionConversionError &e);
-    VExceptionConversionError &operator=(const VExceptionConversionError &e);
-    virtual         ~VExceptionConversionError() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
-    virtual QString ErrorMessage() const override;
-    QString         String() const;
-protected:
+    VExceptionConversionError(const QString &error, const QString &str) V_NOEXCEPT_EXPR(true);
+    VExceptionConversionError(const VExceptionConversionError &e) V_NOEXCEPT_EXPR(true);
+    auto operator=(const VExceptionConversionError &e) V_NOEXCEPT_EXPR(true) -> VExceptionConversionError &;
+    virtual ~VExceptionConversionError() V_NOEXCEPT_EXPR(true) = default;
+
+    Q_NORETURN virtual void raise() const override { throw *this; }
+
+    Q_REQUIRED_RESULT virtual auto clone() const -> VExceptionConversionError * override
+    {
+        return new VExceptionConversionError(*this);
+    }
+
+    virtual auto ErrorMessage() const -> QString override;
+    auto String() const -> QString;
+
+private:
     /** @brief str string, where happend error */
-    QString         str;
+    QString str;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -57,7 +65,7 @@ protected:
  * @brief String return string, where happend error
  * @return string
  */
-inline QString VExceptionConversionError::String() const
+inline auto VExceptionConversionError::String() const -> QString
 {
     return str;
 }

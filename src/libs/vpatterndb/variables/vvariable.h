@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,42 +29,36 @@
 #ifndef VVARIABLE_H
 #define VVARIABLE_H
 
-#include <qcompilerdetection.h>
 #include <QSharedDataPointer>
 #include <QString>
 #include <QTypeInfo>
 #include <QtGlobal>
 
-#include "../vmisc/def.h"
-#include "../ifc/ifcdef.h"
 #include "vinternalvariable.h"
 
 class VVariableData;
 
-class VVariable :public VInternalVariable
+class VVariable : public VInternalVariable
 {
 public:
     VVariable();
-    VVariable(const QString &name, const QString &description = QString());
+    explicit VVariable(const QString &name, const QString &description = QString());
     VVariable(const VVariable &var);
 
-    virtual ~VVariable() override;
+    ~VVariable() override;
 
-    VVariable &operator=(const VVariable &var);
-#ifdef Q_COMPILER_RVALUE_REFS
-    VVariable &operator=(VVariable &&var) Q_DECL_NOTHROW { Swap(var); return *this; }
-#endif
+    auto operator=(const VVariable &var) -> VVariable &;
 
-    inline void Swap(VVariable &var) Q_DECL_NOTHROW
-    { VInternalVariable::Swap(var); std::swap(d, var.d); }
+    VVariable(VVariable &&var) noexcept;
+    auto operator=(VVariable &&var) noexcept -> VVariable &;
 
-    QString GetDescription() const;
-    void    SetDescription(const QString &desc);
+    auto GetDescription() const -> QString;
+    void SetDescription(const QString &desc);
 
 private:
     QSharedDataPointer<VVariableData> d;
 };
 
-Q_DECLARE_TYPEINFO(VVariable, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VVariable, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VVARIABLE_H

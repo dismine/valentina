@@ -32,24 +32,25 @@ class QGraphicsScene;
 
 namespace Ui
 {
-    class FvUpdateWindow;
+class FvUpdateWindow;
 }
 
 class FvUpdateWindow : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit FvUpdateWindow(QWidget *parent = nullptr);
     virtual ~FvUpdateWindow();
 
     // Update the current update proposal from FvUpdater
-    bool UpdateWindowWithCurrentProposedUpdate();
+    auto UpdateWindowWithCurrentProposedUpdate() -> bool;
 
 private:
-    Q_DISABLE_COPY(FvUpdateWindow)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(FvUpdateWindow) // NOLINT
 
-    Ui::FvUpdateWindow*	m_ui;
+    Ui::FvUpdateWindow *m_ui;
 };
 
 #endif // FVUPDATEWINDOW_H

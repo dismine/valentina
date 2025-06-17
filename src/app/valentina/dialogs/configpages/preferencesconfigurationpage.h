@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -33,31 +33,45 @@
 
 namespace Ui
 {
-    class PreferencesConfigurationPage;
+class PreferencesConfigurationPage;
 }
 
 class PreferencesConfigurationPage : public QWidget
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit PreferencesConfigurationPage(QWidget *parent = nullptr);
-    virtual ~PreferencesConfigurationPage();
+    ~PreferencesConfigurationPage() override;
 
-    QStringList Apply();
+    auto Apply() -> QStringList;
+
 protected:
-    virtual void changeEvent(QEvent* event) override;
+    void changeEvent(QEvent *event) override;
+
+private slots:
+    void ShortcutCellDoubleClicked(int row, int column);
+
 private:
-    Q_DISABLE_COPY(PreferencesConfigurationPage)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(PreferencesConfigurationPage) // NOLINT
     Ui::PreferencesConfigurationPage *ui;
-    bool m_langChanged;
-    bool m_systemChanged;
-    bool m_unitChanged;
-    bool m_labelLangChanged;
+    bool m_langChanged{false};
+    bool m_pieceLabelLangChanged{false};
+    bool m_unitChanged{false};
+    bool m_labelLangChanged{false};
+    bool m_sendCrashReportsChanged{false};
+    bool m_crashUserEmailChanged{false};
+    QList<QStringList> m_transientShortcuts{};
 
     void SetLabelComboBox(const QStringList &list);
+    void SetThemeModeComboBox();
+    void SetPointerModeComboBox();
     void InitUnits();
     void RetranslateUi();
+    void InitShortcuts(bool defaults = false);
+    void UpdateShortcutsTable();
+    void RetranslateShortcutsTable();
 };
 
 #endif // PREFERENCESCONFIGURATIONPAGE_H

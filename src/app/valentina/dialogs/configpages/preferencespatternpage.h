@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,42 +29,45 @@
 #ifndef PREFERENCESPATTERNPAGE_H
 #define PREFERENCESPATTERNPAGE_H
 
-#include <QWidget>
 #include "../vmisc/def.h"
+#include <QWidget>
 
 namespace Ui
 {
-    class PreferencesPatternPage;
+class PreferencesPatternPage;
 }
 
 class QComboBox;
 
 class PreferencesPatternPage : public QWidget
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit PreferencesPatternPage(QWidget *parent = nullptr);
-    virtual ~PreferencesPatternPage();
+    ~PreferencesPatternPage() override;
 
-    QStringList Apply();
+    auto Apply() -> QStringList;
     void InitDefaultSeamAllowance();
 
 protected:
-    virtual void changeEvent(QEvent* event) override;
+    void changeEvent(QEvent *event) override;
 
 private slots:
     void EditDateTimeFormats();
     void ManageKnownMaterials();
 
 private:
-    Q_DISABLE_COPY(PreferencesPatternPage)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(PreferencesPatternPage) // NOLINT
     Ui::PreferencesPatternPage *ui;
-    QStringList m_knownMaterials;
-    Unit m_oldLineUnit;
+    QStringList m_knownMaterials{};
+    Unit m_oldLineUnit{Unit::Mm};
 
     void InitLabelDateTimeFormats();
-    void InitComboBoxFormats(QComboBox *box, const QStringList &items, const QString &currentFormat);
+    void InitLabelFontSizes();
+    void InitSingleLineFonts();
+    static void InitComboBoxFormats(QComboBox *box, const QStringList &items, const QString &currentFormat);
     void InitUnits();
     void RetranslateUi();
 

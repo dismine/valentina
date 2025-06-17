@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -37,7 +37,10 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VObjPaintDevice::VObjPaintDevice()
-    :QPaintDevice(), engine(new VObjEngine()), fileName(), owns_iodevice(1)
+  : QPaintDevice(),
+    engine(new VObjEngine()),
+    fileName(),
+    owns_iodevice(1)
 {
     owns_iodevice = static_cast<int>(false);
 }
@@ -53,14 +56,14 @@ VObjPaintDevice::~VObjPaintDevice()
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-QPaintEngine *VObjPaintDevice::paintEngine() const
+auto VObjPaintDevice::paintEngine() const -> QPaintEngine *
 {
     return engine.data();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-QString VObjPaintDevice::getFileName() const
+auto VObjPaintDevice::getFileName() const -> QString
 {
     return fileName;
 }
@@ -82,12 +85,12 @@ void VObjPaintDevice::setFileName(const QString &value)
     owns_iodevice = static_cast<int>(true);
 
     fileName = value;
-    QFile *file = new QFile(fileName);
+    auto *file = new QFile(fileName);
     engine->setOutputDevice(file);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSize VObjPaintDevice::getSize()
+auto VObjPaintDevice::getSize() -> QSize
 {
     return engine->getSize();
 }
@@ -104,7 +107,7 @@ void VObjPaintDevice::setSize(const QSize &size)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QIODevice *VObjPaintDevice::getOutputDevice()
+auto VObjPaintDevice::getOutputDevice() -> QIODevice *
 {
     return engine->getOutputDevice();
 }
@@ -123,7 +126,7 @@ void VObjPaintDevice::setOutputDevice(QIODevice *outputDevice)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VObjPaintDevice::getResolution() const
+auto VObjPaintDevice::getResolution() const -> int
 {
     return engine->getResolution();
 }
@@ -135,7 +138,7 @@ void VObjPaintDevice::setResolution(int dpi)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VObjPaintDevice::metric(QPaintDevice::PaintDeviceMetric metric) const
+auto VObjPaintDevice::metric(QPaintDevice::PaintDeviceMetric metric) const -> int
 {
     switch (metric)
     {
@@ -157,10 +160,14 @@ int VObjPaintDevice::metric(QPaintDevice::PaintDeviceMetric metric) const
         case QPaintDevice::PdmPhysicalDpiY:
             return engine->getResolution();
         case QPaintDevice::PdmDevicePixelRatio:
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
         case QPaintDevice::PdmDevicePixelRatioScaled:
-#endif
             return 1;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 8, 0)
+        case QPaintDevice::PdmDevicePixelRatioF_EncodedA:
+            return QPaintDevice::encodeMetricF(QPaintDevice::PdmDevicePixelRatioF_EncodedA, 1.0);
+        case QPaintDevice::PdmDevicePixelRatioF_EncodedB:
+            return QPaintDevice::encodeMetricF(QPaintDevice::PdmDevicePixelRatioF_EncodedB, 1.0);
+#endif
         default:
             qWarning("VObjPaintDevice::metric(), unhandled metric %d\n", metric);
             break;

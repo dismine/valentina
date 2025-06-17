@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef DIALOGHEIGHT_H
 #define DIALOGHEIGHT_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -40,49 +39,72 @@
 
 namespace Ui
 {
-    class DialogHeight;
+class DialogHeight;
 }
 
 /**
  * @brief The DialogHeight class dialog for ToolHeight. Help create point and edit option.
  */
-class DialogHeight : public DialogTool
+class DialogHeight final : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
-    DialogHeight(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual ~DialogHeight() override;
+    DialogHeight(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
+    ~DialogHeight() override;
 
-    void             SetPointName(const QString &value);
+    auto GetPointName() const -> QString;
+    void SetPointName(const QString &value);
 
-    QString          GetTypeLine() const;
-    void             SetTypeLine(const QString &value);
+    auto GetTypeLine() const -> QString;
+    void SetTypeLine(const QString &value);
 
-    quint32          GetBasePointId() const;
-    void             SetBasePointId(const quint32 &value);
+    auto GetBasePointId() const -> quint32;
+    void SetBasePointId(const quint32 &value);
 
-    quint32          GetP1LineId() const;
-    void             SetP1LineId(const quint32 &value);
+    auto GetP1LineId() const -> quint32;
+    void SetP1LineId(const quint32 &value);
 
-    quint32          GetP2LineId() const;
-    void             SetP2LineId(const quint32 &value);
+    auto GetP2LineId() const -> quint32;
+    void SetP2LineId(const quint32 &value);
 
-    QString          GetLineColor() const;
-    void             SetLineColor(const QString &value);
+    auto GetLineColor() const -> QString;
+    void SetLineColor(const QString &value);
+
+    void SetNotes(const QString &notes);
+    auto GetNotes() const -> QString;
+
 public slots:
-    virtual void     ChosenObject(quint32 id, const SceneObject &type) override;
-    virtual void     PointNameChanged() override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
+    void PointNameChanged() override;
+
 protected:
-    virtual void     ShowVisualization() override;
+    void ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void     SaveData() override;
+    void SaveData() override;
+    auto IsValid() const -> bool override;
+
 private:
-    Q_DISABLE_COPY(DialogHeight)
+    Q_DISABLE_COPY_MOVE(DialogHeight) // NOLINT
 
     /** @brief ui keeps information about user interface */
     Ui::DialogHeight *ui;
+
+    QString m_pointName{};
+
+    bool m_flagError{true};
+    bool m_flagName{true};
+
+    /** @brief number number of handled objects */
+    qint32 m_number{0};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto DialogHeight::IsValid() const -> bool
+{
+    return m_flagError && m_flagName;
+}
 
 #endif // DIALOGHEIGHT_H

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 #ifndef VEXCEPTIONWRONGID_H
 #define VEXCEPTIONWRONGID_H
 
-#include <qcompilerdetection.h>
+
 #include <QString>
 #include <QtGlobal>
 
@@ -44,15 +44,24 @@ class QDomElement;
 class VExceptionWrongId : public VException
 {
 public:
-    VExceptionWrongId(const QString &what, const QDomElement &domElement);
-    VExceptionWrongId(const VExceptionWrongId &e);
-    VExceptionWrongId &operator=(const VExceptionWrongId &e);
-    virtual ~VExceptionWrongId() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
-    virtual QString ErrorMessage() const override;
-    virtual QString DetailedInformation() const override;
-    QString         TagText() const;
-    QString         TagName() const;
-    qint32          LineNumber() const;
+    VExceptionWrongId(const QString &what, const QDomElement &domElement) V_NOEXCEPT_EXPR (true);
+    VExceptionWrongId(const VExceptionWrongId &e) V_NOEXCEPT_EXPR (true);
+    auto operator=(const VExceptionWrongId &e) V_NOEXCEPT_EXPR(true) -> VExceptionWrongId &;
+    virtual ~VExceptionWrongId() V_NOEXCEPT_EXPR (true) = default;
+
+    Q_NORETURN virtual void raise() const override { throw *this; }
+
+    Q_REQUIRED_RESULT virtual auto clone() const -> VExceptionWrongId * override
+    {
+        return new VExceptionWrongId(*this);
+    }
+
+    virtual auto ErrorMessage() const -> QString override;
+    virtual auto DetailedInformation() const -> QString override;
+    auto TagText() const -> QString;
+    auto TagName() const -> QString;
+    auto LineNumber() const -> qint32;
+
 protected:
     /** @brief tagText tag text */
     QString         tagText;
@@ -69,7 +78,7 @@ protected:
  * @brief TagText return tag text
  * @return tag text
  */
-inline QString VExceptionWrongId::TagText() const
+inline auto VExceptionWrongId::TagText() const -> QString
 {
     return tagText;
 }
@@ -79,7 +88,7 @@ inline QString VExceptionWrongId::TagText() const
  * @brief TagName return tag name
  * @return tag name
  */
-inline QString VExceptionWrongId::TagName() const
+inline auto VExceptionWrongId::TagName() const -> QString
 {
     return tagName;
 }
@@ -89,7 +98,7 @@ inline QString VExceptionWrongId::TagName() const
  * @brief LineNumber return line number in file
  * @return line number
  */
-inline qint32 VExceptionWrongId::LineNumber() const
+inline auto VExceptionWrongId::LineNumber() const -> qint32
 {
     return lineNumber;
 }

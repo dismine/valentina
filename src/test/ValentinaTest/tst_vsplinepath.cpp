@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -28,15 +28,19 @@
 
 #include "tst_vsplinepath.h"
 #include "../vgeometry/vsplinepath.h"
-#include "../vmisc/logging.h"
 
 #include <QtTest>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 TST_VSplinePath::TST_VSplinePath(QObject *parent)
-    : QObject (parent)
+  : QObject(parent)
 {
-
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -51,49 +55,48 @@ void TST_VSplinePath::TestRotation_data()
     QVector<VSplinePoint> originPoints;
 
     {
-        VPointF pSpline(30, 39.999874015748034, "X", 5.0000125984251973, 9.9999874015748045);
-        VSplinePoint p(pSpline, 89.208600000000004, "89.2086", 269.20859999999999, "269.209", 0, QChar('0'),
-                       153.33618897637794, "4.05702");
+        VPointF const pSpline(30, 39.999874015748034, "X", 5.0000125984251973, 9.9999874015748045);
+        VSplinePoint const p(pSpline, 89.208600000000004, "89.2086", 269.20859999999999, "269.209", 0, QChar('0'),
+                             153.33618897637794, "4.05702");
         originPoints.append(p);
     }
 
     {
-        VPointF pSpline(198.77104389529981, 249.18158602595835, "X", 5.0000125984251973, 9.9999874015748045);
-        VSplinePoint p(pSpline, 146.43199999999999, "146.432", 326.43200000000002, "326.432",
-                       36.387590551181106, "0.962755", 60.978897637795278, "1.6134");
+        VPointF const pSpline(198.77104389529981, 249.18158602595835, "X", 5.0000125984251973, 9.9999874015748045);
+        VSplinePoint const p(pSpline, 146.43199999999999, "146.432", 326.43200000000002, "326.432", 36.387590551181106,
+                             "0.962755", 60.978897637795278, "1.6134");
         originPoints.append(p);
     }
 
     {
-        VPointF pSpline(820.42771653543309, 417.95262992125987, "X", 5.0000125984251973, 9.9999874015748045);
-        VSplinePoint p(pSpline, 173.39500000000001, "173.395", 353.39499999999998, "353.395",
-                       381.23716535433073, "10.0869", 0, QChar('0'));
+        VPointF const pSpline(820.42771653543309, 417.95262992125987, "X", 5.0000125984251973, 9.9999874015748045);
+        VSplinePoint const p(pSpline, 173.39500000000001, "173.395", 353.39499999999998, "353.395", 381.23716535433073,
+                             "10.0869", 0, QChar('0'));
         originPoints.append(p);
     }
 
     QVector<VSplinePoint> rotatedPoints;
 
     {
-        VPointF pSpline(-347.55140568256883, 400.53936590535034, "X", 5.0000125984251973, 9.9999874015748045);
-        VSplinePoint p(pSpline, 176.56789999999998, "176.568", 356.56790000000001, "356.568", 0, QChar('0'),
-                       153.33618897637794, "4.05702");
+        VPointF const pSpline(-347.55140568256883, 400.53936590535034, "X", 5.0000125984251973, 9.9999874015748045);
+        VSplinePoint const p(pSpline, 176.56789999999998, "176.568", 356.56790000000001, "356.568", 0, QChar('0'),
+                             153.33618897637794, "4.05702");
         rotatedPoints.append(p);
     }
 
     {
-        VPointF pSpline(-130.81610509751462, 241.58508512833563, "X", 5.0000125984251973, 9.9999874015748045);
-        VSplinePoint p(pSpline, 233.79130000000001, "233.791", 53.791300000000014, "53.7913",
-                       36.387590551181141, "0.962755", 60.978897637795207, "1.6134");
+        VPointF const pSpline(-130.81610509751462, 241.58508512833563, "X", 5.0000125984251973, 9.9999874015748045);
+        VSplinePoint const p(pSpline, 233.79130000000001, "233.791", 53.791300000000014, "53.7913", 36.387590551181141,
+                             "0.962755", 60.978897637795207, "1.6134");
         rotatedPoints.append(p);
     }
 
     {
-        VPointF pSpline(66.417055567032421, -371.63572683892357, "X", 5.0000125984251973, 9.9999874015748045);
-        VSplinePoint p(pSpline, 260.7543, "260.754", 80.754300000000015, "80.7543", 381.23716535433078, "10.0869", 0,
-                       QChar('0'));
+        VPointF const pSpline(66.417055567032421, -371.63572683892357, "X", 5.0000125984251973, 9.9999874015748045);
+        VSplinePoint const p(pSpline, 260.7543, "260.754", 80.754300000000015, "80.7543", 381.23716535433078, "10.0869",
+                             0, QChar('0'));
         rotatedPoints.append(p);
     }
-
 
     QTest::newRow("Test spline path 1") << originPoints << QPointF(30, 417.95262992125987) << 87.359300000000005 << "a2"
                                         << rotatedPoints;
@@ -117,12 +120,13 @@ void TST_VSplinePath::TestRotation()
     QCOMPARE(rotatedPath.GetLength(), res.GetLength());
     QCOMPARE(rotatedPath.CountPoints(), res.CountPoints());
 
-    const QString errorMsg = QString("The name doesn't contain the prefix '%1'.").arg(prefix);
+    // cppcheck-suppress unreadVariable
+    const QString errorMsg = u"The name doesn't contain the prefix '%1'."_s.arg(prefix);
     QVERIFY2(res.name().endsWith(prefix), qUtf8Printable(errorMsg));
 
     const QVector<VSplinePoint> resPoints = res.GetSplinePath();
 
-    for (int i=0; i < resPoints.size(); ++i)
+    for (int i = 0; i < resPoints.size(); ++i)
     {
         const VSplinePoint resPoint = resPoints.at(i);
         const VSplinePoint rotatedPoint = rotatedPoints.at(i);
@@ -145,23 +149,23 @@ void TST_VSplinePath::TestFlip_data()
     QVector<VSplinePoint> originPoints;
 
     {
-        VPointF pSpline(30, 39.999874015748034, "X", 5.0000125984251973, 9.9999874015748045);
-        VSplinePoint p(pSpline, 89.208600000000004, "89.2086", 269.20859999999999, "269.209", 0, QChar('0'),
-                       153.33618897637794, "4.05702");
+        VPointF const pSpline(30, 39.999874015748034, "X", 5.0000125984251973, 9.9999874015748045);
+        VSplinePoint const p(pSpline, 89.208600000000004, "89.2086", 269.20859999999999, "269.209", 0, QChar('0'),
+                             153.33618897637794, "4.05702");
         originPoints.append(p);
     }
 
     {
-        VPointF pSpline(198.77104389529981, 249.18158602595835, "X", 5.0000125984251973, 9.9999874015748045);
-        VSplinePoint p(pSpline, 146.43199999999999, "146.432", 326.43200000000002, "326.432",
-                       36.387590551181106, "0.962755", 60.978897637795278, "1.6134");
+        VPointF const pSpline(198.77104389529981, 249.18158602595835, "X", 5.0000125984251973, 9.9999874015748045);
+        VSplinePoint const p(pSpline, 146.43199999999999, "146.432", 326.43200000000002, "326.432", 36.387590551181106,
+                             "0.962755", 60.978897637795278, "1.6134");
         originPoints.append(p);
     }
 
     {
-        VPointF pSpline(820.42771653543309, 417.95262992125987, "X", 5.0000125984251973, 9.9999874015748045);
-        VSplinePoint p(pSpline, 173.39500000000001, "173.395", 353.39499999999998, "353.395",
-                       381.23716535433073, "10.0869", 0, QChar('0'));
+        VPointF const pSpline(820.42771653543309, 417.95262992125987, "X", 5.0000125984251973, 9.9999874015748045);
+        VSplinePoint const p(pSpline, 173.39500000000001, "173.395", 353.39499999999998, "353.395", 381.23716535433073,
+                             "10.0869", 0, QChar('0'));
         originPoints.append(p);
     }
 
@@ -189,10 +193,10 @@ void TST_VSplinePath::TestFlip()
     const VSplinePath splPath(originPoints);
     const VSplinePath res = splPath.Flip(axis, prefix);
 
-    const QString errorMsg = QStringLiteral("The name doesn't contain the prefix '%1'.").arg(prefix);
+    // cppcheck-suppress unreadVariable
+    const auto errorMsg = QStringLiteral("The name doesn't contain the prefix '%1'.").arg(prefix);
     QVERIFY2(res.name().endsWith(prefix), qUtf8Printable(errorMsg));
 
     QCOMPARE(splPath.GetLength(), res.GetLength());
     QCOMPARE(splPath.CountPoints(), res.CountPoints());
 }
-

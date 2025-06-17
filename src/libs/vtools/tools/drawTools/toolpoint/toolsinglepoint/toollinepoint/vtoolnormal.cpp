@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -30,9 +30,6 @@
 
 #include <QLineF>
 #include <QSharedPointer>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <new>
 
 #include "../../../../../dialogs/tools/dialognormal.h"
@@ -64,7 +61,7 @@ const QString VToolNormal::ToolType = QStringLiteral("normal");
  */
 VToolNormal::VToolNormal(const VToolNormalInitData &initData, QGraphicsItem *parent)
     :VToolLinePoint(initData.doc, initData.data, initData.id, initData.typeLine, initData.lineColor, initData.formula,
-                    initData.firstPointId, initData.angle, parent),
+                    initData.firstPointId, initData.angle, initData.notes, parent),
     secondPointId(initData.secondPointId)
 {
 
@@ -75,18 +72,20 @@ VToolNormal::VToolNormal(const VToolNormalInitData &initData, QGraphicsItem *par
 /**
  * @brief setDialog set dialog when user want change tool option.
  */
-void VToolNormal::setDialog()
+void VToolNormal::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogNormal> dialogTool = qobject_cast<DialogNormal *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
     dialogTool->SetTypeLine(m_lineType);
+    dialogTool->SetLineColor(lineColor);
     dialogTool->SetFormula(formulaLength);
     dialogTool->SetAngle(angle);
     dialogTool->SetFirstPointId(basePointId);
     dialogTool->SetSecondPointId(secondPointId);
     dialogTool->SetPointName(p->name());
+    dialogTool->SetNotes(m_notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -97,8 +96,8 @@ void VToolNormal::setDialog()
  * @param doc dom document container.
  * @param data container with variables.
  */
-VToolNormal* VToolNormal::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                 VContainer *data)
+auto VToolNormal::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                         VContainer *data) -> VToolNormal *
 {
     SCASSERT(not dialog.isNull())
     const QPointer<DialogNormal> dialogTool = qobject_cast<DialogNormal *>(dialog);
@@ -111,12 +110,13 @@ VToolNormal* VToolNormal::Create(const QPointer<DialogTool> &dialog, VMainGraphi
     initData.angle = dialogTool->GetAngle();
     initData.typeLine = dialogTool->GetTypeLine();
     initData.lineColor = dialogTool->GetLineColor();
-    initData.name = dialogTool->getPointName();
+    initData.name = dialogTool->GetPointName();
     initData.scene = scene;
     initData.doc = doc;
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
     VToolNormal *point = Create(initData);
     if (point != nullptr)
@@ -131,17 +131,17 @@ VToolNormal* VToolNormal::Create(const QPointer<DialogTool> &dialog, VMainGraphi
  * @brief Create help create tool.
  * @param initData init data.
  */
-VToolNormal* VToolNormal::Create(VToolNormalInitData initData)
+auto VToolNormal::Create(VToolNormalInitData initData) -> VToolNormal *
 {
     const QSharedPointer<VPointF> firstPoint = initData.data->GeometricObject<VPointF>(initData.firstPointId);
     const QSharedPointer<VPointF> secondPoint = initData.data->GeometricObject<VPointF>(initData.secondPointId);
 
     const qreal result = CheckFormula(initData.id, initData.formula, initData.data);
 
-    QPointF fPoint = VToolNormal::FindPoint(static_cast<QPointF>(*firstPoint), static_cast<QPointF>(*secondPoint),
-                                            qApp->toPixel(result), initData.angle);
+    QPointF const fPoint = VToolNormal::FindPoint(static_cast<QPointF>(*firstPoint), static_cast<QPointF>(*secondPoint),
+                                                  VAbstractValApplication::VApp()->toPixel(result), initData.angle);
 
-    VPointF *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
+    auto *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
 
     if (initData.typeCreation == Source::FromGui)
@@ -162,7 +162,7 @@ VToolNormal* VToolNormal::Create(VToolNormalInitData initData)
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::Normal, initData.doc);
-        VToolNormal *point = new VToolNormal(initData);
+        auto *point = new VToolNormal(initData);
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
@@ -182,10 +182,9 @@ VToolNormal* VToolNormal::Create(VToolNormalInitData initData)
  * @param angle additional angle.
  * @return normal point.
  */
-QPointF VToolNormal::FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const qreal &length,
-                               const qreal &angle)
+auto VToolNormal::FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, qreal length, qreal angle) -> QPointF
 {
-    QLineF line(firstPoint, secondPoint);
+    QLineF const line(firstPoint, secondPoint);
     QLineF normal = line.normalVector();
     normal.setAngle(normal.angle()+angle);
     normal.setLength(length);
@@ -193,7 +192,7 @@ QPointF VToolNormal::FindPoint(const QPointF &firstPoint, const QPointF &secondP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolNormal::SecondPointName() const
+auto VToolNormal::SecondPointName() const -> QString
 {
     return VAbstractTool::data.GetGObject(secondPointId)->name();
 }
@@ -225,13 +224,15 @@ void VToolNormal::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepende
     AddDependence(newDependencies, dialogTool->GetFirstPointId());
     AddDependence(newDependencies, dialogTool->GetSecondPointId());
 
-    doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
+    doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrAngle, QString().setNum(dialogTool->GetAngle()));
     doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->GetFirstPointId()));
     doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->GetSecondPointId()));
+    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
+                                         [](const QString &notes) noexcept {return notes.isEmpty();});
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -249,12 +250,14 @@ void VToolNormal::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolNormal::ReadToolAttributes(const QDomElement &domElement)
 {
-    m_lineType = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
-    lineColor = doc->GetParametrString(domElement, AttrLineColor, ColorBlack);
-    formulaLength = doc->GetParametrString(domElement, AttrLength, QString());
-    basePointId = doc->GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
-    secondPointId = doc->GetParametrUInt(domElement, AttrSecondPoint, NULL_ID_STR);
-    angle = doc->GetParametrDouble(domElement, AttrAngle, QChar('0'));
+    VToolLinePoint::ReadToolAttributes(domElement);
+
+    m_lineType = VDomDocument::GetParametrString(domElement, AttrTypeLine, TypeLineLine);
+    lineColor = VDomDocument::GetParametrString(domElement, AttrLineColor, ColorBlack);
+    formulaLength = VDomDocument::GetParametrString(domElement, AttrLength, QString());
+    basePointId = VAbstractPattern::GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
+    secondPointId = VAbstractPattern::GetParametrUInt(domElement, AttrSecondPoint, NULL_ID_STR);
+    angle = VDomDocument::GetParametrDouble(domElement, AttrAngle, QChar('0'));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -262,14 +265,16 @@ void VToolNormal::SetVisualization()
 {
     if (not vis.isNull())
     {
-        VisToolNormal *visual = qobject_cast<VisToolNormal *>(vis);
+        auto *visual = qobject_cast<VisToolNormal *>(vis);
         SCASSERT(visual != nullptr)
 
-        visual->setObject1Id(basePointId);
-        visual->setObject2Id(secondPointId);
-        visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength, qApp->Settings()->GetOsSeparator()));
+        visual->SetPoint1Id(basePointId);
+        visual->SetPoint2Id(secondPointId);
+        visual->SetLength(VAbstractApplication::VApp()->TrVars()
+                          ->FormulaToUser(formulaLength, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
         visual->SetAngle(angle);
-        visual->setLineStyle(LineStyleToPenStyle(m_lineType));
+        visual->SetLineStyle(LineStyleToPenStyle(m_lineType));
+        visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
 }

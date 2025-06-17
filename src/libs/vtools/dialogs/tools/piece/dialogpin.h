@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -33,41 +33,49 @@
 
 namespace Ui
 {
-    class DialogPin;
+class DialogPin;
 }
 
-class DialogPin : public DialogTool
+class DialogPin final : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
-    explicit DialogPin(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    virtual ~DialogPin();
+    explicit DialogPin(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
+    ~DialogPin() override;
 
     void EnbleShowMode(bool disable);
 
-    quint32 GetPieceId() const;
-    void    SetPieceId(quint32 id);
+    auto GetPieceId() const -> quint32;
+    void SetPieceId(quint32 id);
 
-    quint32 GetPointId() const;
-    void    SetPointId(quint32 id);
+    auto GetPointId() const -> quint32;
+    void SetPointId(quint32 id);
 
-    virtual void SetPiecesList(const QVector<quint32> &list) override;
+    void SetPiecesList(const QVector<quint32> &list) override;
 
 public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type) override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
 
 protected:
-    virtual void CheckState() final;
-    virtual void ShowVisualization() override;
+    void ShowVisualization() override;
+    auto IsValid() const -> bool override;
 
 private:
-    Q_DISABLE_COPY(DialogPin)
+    Q_DISABLE_COPY_MOVE(DialogPin) // NOLINT
     Ui::DialogPin *ui;
-    bool  m_showMode;
-    bool  m_flagPoint;
+    bool m_showMode;
+    bool m_flagPoint;
+    bool m_flagError;
 
     void CheckPieces();
     void CheckPoint();
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto DialogPin::IsValid() const -> bool
+{
+    return m_flagPoint && m_flagError;
+}
 
 #endif // DIALOGPIN_H

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,12 +29,12 @@
 #ifndef VTOOLARCWITHLENGTH_H
 #define VTOOLARCWITHLENGTH_H
 
-#include <qcompilerdetection.h>
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
 #include <QtGlobal>
+
 
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vmisc/def.h"
@@ -45,61 +45,61 @@ template <class T> class QSharedPointer;
 
 struct VToolArcWithLengthInitData : VAbstractSplineInitData
 {
-    VToolArcWithLengthInitData()
-        : VAbstractSplineInitData(),
-          center(NULL_ID),
-          radius('0'),
-          f1('0'),
-          length('0')
-    {}
+    VToolArcWithLengthInitData() = default;
 
-    quint32 center;
-    QString radius;
-    QString f1;
-    QString length;
+    quint32 center{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
+    QString radius{'0'};     // NOLINT(misc-non-private-member-variables-in-classes)
+    QString f1{'0'};         // NOLINT(misc-non-private-member-variables-in-classes)
+    QString length{'0'};     // NOLINT(misc-non-private-member-variables-in-classes)
 };
 
 class VToolArcWithLength : public VToolAbstractArc
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
-    virtual void     setDialog() override;
-    static VToolArcWithLength* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
-                                      VAbstractPattern *doc, VContainer *data);
-    static VToolArcWithLength* Create(VToolArcWithLengthInitData &initData);
+    void SetDialog() override;
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolArcWithLength *;
+    static auto Create(VToolArcWithLengthInitData &initData) -> VToolArcWithLength *;
 
     static const QString ToolType;
-    virtual int      type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Tool::ArcWithLength)};
-    virtual QString  getTagName() const override;
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Tool::ArcWithLength)
+    };
+    auto getTagName() const -> QString override;
 
-    VFormula         GetFormulaRadius() const;
-    void             SetFormulaRadius(const VFormula &value);
+    auto GetFormulaRadius() const -> VFormula;
+    void SetFormulaRadius(const VFormula &value);
 
-    VFormula         GetFormulaF1() const;
-    void             SetFormulaF1(const VFormula &value);
+    auto GetFormulaF1() const -> VFormula;
+    void SetFormulaF1(const VFormula &value);
 
-    VFormula         GetFormulaLength() const;
-    void             SetFormulaLength(const VFormula &value);
+    auto GetFormulaLength() const -> VFormula;
+    void SetFormulaLength(const VFormula &value);
 
-    qreal            GetApproximationScale() const;
-    void             SetApproximationScale(qreal value);
+    auto GetApproximationScale() const -> qreal override;
+    void SetApproximationScale(qreal value);
 
-    virtual void     ShowVisualization(bool show) override;
+    void ShowVisualization(bool show) override;
+
 protected slots:
-    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
-protected:
-    virtual void    RemoveReferens() override;
-    virtual void    SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                               QList<quint32> &newDependencies) override;
-    virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
-    virtual void    SetVisualization() override;
-    virtual QString MakeToolTip() const override;
-private:
-    Q_DISABLE_COPY(VToolArcWithLength)
+    void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) override;
 
-    VToolArcWithLength(const VToolArcWithLengthInitData &initData, QGraphicsItem *parent = nullptr);
-    virtual ~VToolArcWithLength()=default;
+protected:
+    void RemoveReferens() override;
+    void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies) override;
+    void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    void SetVisualization() override;
+    auto MakeToolTip() const -> QString override;
+
+private:
+    Q_DISABLE_COPY_MOVE(VToolArcWithLength) // NOLINT
+
+    explicit VToolArcWithLength(const VToolArcWithLengthInitData &initData, QGraphicsItem *parent = nullptr);
+    ~VToolArcWithLength() override = default;
 };
 
 #endif // VTOOLARCWITHLENGTH_H

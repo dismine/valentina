@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef VISTOOLCUBICBEZIERPATH_H
 #define VISTOOLCUBICBEZIERPATH_H
 
-#include <qcompilerdetection.h>
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>
@@ -43,33 +42,44 @@
 
 class VisToolCubicBezierPath : public VisPath
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     explicit VisToolCubicBezierPath(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolCubicBezierPath();
+    ~VisToolCubicBezierPath() override;
 
-    virtual void RefreshGeometry() override;
+    void RefreshGeometry() override;
+    void VisualMode(quint32 id = NULL_ID) override;
 
-    void              setPath(const VCubicBezierPath &value);
-    VCubicBezierPath  getPath();
+    void SetPath(const VCubicBezierPath &value);
+    auto GetPath() const -> VCubicBezierPath;
 
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolCubicBezierPath)};
-protected:
-    Q_DISABLE_COPY(VisToolCubicBezierPath)
-    QVector<VScaledEllipse *> mainPoints;
-    QVector<VScaledEllipse *> ctrlPoints;
-    QVector<VScaledLine *>    lines;
-    VCurvePathItem           *newCurveSegment;
-    VCubicBezierPath          path;
-    VScaledLine              *helpLine1;
-    VScaledLine              *helpLine2;
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Vis::ToolCubicBezierPath)
+    };
 
 private:
-    VScaledEllipse *getPoint(QVector<VScaledEllipse *> &points, quint32 i, qreal z = 0);
-    VScaledLine    *getLine(quint32 i);
-    void Creating(const QVector<VPointF> &pathPoints , int pointsLeft);
+    Q_DISABLE_COPY_MOVE(VisToolCubicBezierPath) // NOLINT
+    QVector<VScaledEllipse *> mainPoints{};
+    QVector<VScaledEllipse *> ctrlPoints{};
+    QVector<VScaledLine *> lines{};
+    VCurvePathItem *newCurveSegment{nullptr};
+    VCubicBezierPath path{};
+    VScaledLine *helpLine1{nullptr};
+    VScaledLine *helpLine2{nullptr};
+
+    auto GetPoint(QVector<VScaledEllipse *> &points, quint32 i, VColorRole role, qreal z = 0) -> VScaledEllipse *;
+    auto GetLine(quint32 i, VColorRole role) -> VScaledLine *;
+    void Creating(const QVector<VPointF> &pathPoints, vsizetype pointsLeft);
     void RefreshToolTip();
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VisToolCubicBezierPath::GetPath() const -> VCubicBezierPath
+{
+    return path;
+}
 
 #endif // VISTOOLCUBICBEZIERPATH_H

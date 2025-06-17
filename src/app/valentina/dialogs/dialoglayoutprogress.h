@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -30,40 +30,43 @@
 #define DIALOGLAYOUTPROGRESS_H
 
 #include <QDialog>
-
-#include "../vlayout/vlayoutdef.h"
+#include <QElapsedTimer>
+#include <QTimer>
 
 namespace Ui
 {
-    class DialogLayoutProgress;
+class DialogLayoutProgress;
 }
 
 class DialogLayoutProgress : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
-    explicit DialogLayoutProgress(int count, QWidget *parent = nullptr);
-    ~DialogLayoutProgress();
+    explicit DialogLayoutProgress(QElapsedTimer timer, qint64 timeout, QWidget *parent = nullptr);
+    ~DialogLayoutProgress() override;
 
 signals:
     void Abort();
+    void Timeout();
 
 public slots:
     void Start();
-    void Arranged(int count);
-    void Error(const LayoutErrors &state);
     void Finished();
+    void Efficiency(qreal value);
 
 protected:
-    virtual void showEvent(QShowEvent *event) override;
+    void showEvent(QShowEvent *event) override;
 
 private:
-    Q_DISABLE_COPY(DialogLayoutProgress)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DialogLayoutProgress) // NOLINT
     Ui::DialogLayoutProgress *ui;
-    const int maxCount;
-    QMovie *movie;
-    bool isInitialized;
+    QMovie *m_movie{nullptr};
+    QElapsedTimer m_timer;
+    qint64 m_timeout;
+    bool m_isInitialized{false};
+    QTimer *m_progressTimer;
 };
 
 #endif // DIALOGLAYOUTPROGRESS_H

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -28,21 +28,26 @@
 
 #include <QtTest>
 
-#include "tst_measurementregexp.h"
 #include "tst_buitinregexp.h"
 #include "tst_qmuparsererrormsg.h"
-#include "tst_tstranslation.h"
 #include "tst_tslocaletranslation.h"
+#include "tst_tstranslation.h"
 
 #include "../vmisc/def.h"
 #include "../vmisc/testvapplication.h"
 
-int main(int argc, char** argv)
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
+auto main(int argc, char **argv) -> int
 {
-    TestVApplication app( argc, argv );// For QPrinter
+    TestVApplication const app(argc, argv); // For QPrinter
 
     int status = 0;
-    auto ASSERT_TEST = [&status, argc, argv](QObject* obj)
+    auto ASSERT_TEST = [&status, argc, argv](QObject *obj)
     {
         status |= QTest::qExec(obj, argc, argv);
         delete obj;
@@ -51,13 +56,8 @@ int main(int argc, char** argv)
     ASSERT_TEST(new TST_TSTranslation());
 
     const QStringList locales = SupportedLocales();
-    for(auto &locale : locales)
+    for (const auto &locale : locales)
     {
-        for(quint32 s = 0; s < TST_MeasurementRegExp::systemCounts; ++s)
-        {
-            ASSERT_TEST(new TST_MeasurementRegExp(s, locale));
-        }
-
         ASSERT_TEST(new TST_TSLocaleTranslation(locale));
         ASSERT_TEST(new TST_BuitInRegExp(locale));
         ASSERT_TEST(new TST_QmuParserErrorMsg(locale));

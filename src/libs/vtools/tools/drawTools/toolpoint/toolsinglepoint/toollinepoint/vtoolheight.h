@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 #ifndef VTOOLHEIGHT_H
 #define VTOOLHEIGHT_H
 
-#include <qcompilerdetection.h>
+
 #include <QDomElement>
 #include <QGraphicsItem>
 #include <QLineF>
@@ -64,19 +64,19 @@ struct VToolHeightInitData : VToolLinePointInitData
  */
 class VToolHeight: public VToolLinePoint
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
-    virtual void   setDialog() override;
-    static VToolHeight *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
-                               VContainer *data);
-    static VToolHeight *Create(VToolHeightInitData initData);
-    static QPointF FindPoint(const QLineF &line, const QPointF &point);
+    virtual void   SetDialog() override;
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolHeight *;
+    static auto Create(VToolHeightInitData initData) -> VToolHeight *;
+    static auto FindPoint(const QLineF &line, const QPointF &point) -> QPointF;
     static const QString ToolType;
-    virtual int    type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::Height)};
 
-    QString FirstLinePointName() const;
-    QString SecondLinePointName() const;
+    auto FirstLinePointName() const -> QString;
+    auto SecondLinePointName() const -> QString;
 
     virtual void   ShowVisualization(bool show) override;
 protected slots:
@@ -87,9 +87,10 @@ protected:
     virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     virtual void    ReadToolAttributes(const QDomElement &domElement) override;
     virtual void    SetVisualization() override;
-    virtual QString MakeToolTip() const override;
+    virtual auto MakeToolTip() const -> QString override;
+
 private:
-    Q_DISABLE_COPY(VToolHeight)
+    Q_DISABLE_COPY_MOVE(VToolHeight) // NOLINT
 
     /** @brief p1LineId id first point of line. */
     quint32         p1LineId;

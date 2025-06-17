@@ -2,14 +2,14 @@
  **
  **  @file   tapepreferencespathpage.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   12 4, 2017
+ **  @date   26 10, 2023
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  Copyright (C) 2023 Valentina project
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -25,50 +25,44 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-
 #include "tapepreferencespathpage.h"
-#include "ui_tapepreferencespathpage.h"
 #include "../../mapplication.h"
-#include "../vmisc/vtapesettings.h"
-
-#include <QDir>
-#include <QFileDialog>
+#include "../../vtapesettings.h"
+#include "ui_tapepreferencespathpage.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 TapePreferencesPathPage::TapePreferencesPathPage(QWidget *parent)
-    : QWidget(parent),
-      ui(new Ui::TapePreferencesPathPage)
+  : QWidget(parent),
+    ui(std::make_unique<Ui::TapePreferencesPathPage>())
 {
     ui->setupUi(this);
 
     InitTable();
 
-    connect(ui->pathTable, &QTableWidget::itemSelectionChanged, this, [this]()
-    {
-        ui->defaultButton->setEnabled(not ui->pathTable->selectedItems().isEmpty());
-        ui->defaultButton->setDefault(false);
+    connect(ui->pathTable, &QTableWidget::itemSelectionChanged, this,
+            [this]()
+            {
+                ui->defaultButton->setEnabled(not ui->pathTable->selectedItems().isEmpty());
+                ui->defaultButton->setDefault(false);
 
-        ui->editButton->setEnabled(not ui->pathTable->selectedItems().isEmpty());
-        ui->editButton->setDefault(true);
-    });
+                ui->editButton->setEnabled(not ui->pathTable->selectedItems().isEmpty());
+                ui->editButton->setDefault(true);
+            });
 
     connect(ui->defaultButton, &QPushButton::clicked, this, &TapePreferencesPathPage::DefaultPath);
     connect(ui->editButton, &QPushButton::clicked, this, &TapePreferencesPathPage::EditPath);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-TapePreferencesPathPage::~TapePreferencesPathPage()
-{
-    delete ui;
-}
+TapePreferencesPathPage::~TapePreferencesPathPage() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
-void TapePreferencesPathPage::Apply()
+auto TapePreferencesPathPage::Apply() -> QStringList
 {
-    VTapeSettings *settings = qApp->TapeSettings();
-    settings->SetPathIndividualMeasurements(ui->pathTable->item(0, 1)->text());
-    settings->SetPathMultisizeMeasurements(ui->pathTable->item(1, 1)->text());
-    settings->SetPathTemplate(ui->pathTable->item(2, 1)->text());
+    VTapeSettings *settings = MApplication::VApp()->TapeSettings();
+    settings->SetPathKnownMeasurements(ui->pathTable->item(0, 1)->text());
+
+    return {}; // No changes which require restart.
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -92,16 +86,11 @@ void TapePreferencesPathPage::DefaultPath()
     SCASSERT(item != nullptr)
 
     QString path;
+
     switch (row)
     {
-        case 0: // individual measurements
-            path = VCommonSettings::GetDefPathIndividualMeasurements();
-            break;
-        case 1: // multisize measurements
-            path = VCommonSettings::GetDefPathMultisizeMeasurements();
-            break;
-        case 2: // templates
-            path = VCommonSettings::GetDefPathTemplate();
+        case 0: // known measurements
+            path = VCommonSettings::GetDefPathKnownMeasurements();
             break;
         default:
             break;
@@ -121,77 +110,58 @@ void TapePreferencesPathPage::EditPath()
     QString path;
     switch (row)
     {
-        case 0: // individual measurements
-            path = qApp->TapeSettings()->GetPathIndividualMeasurements();
-            break;
-        case 1: // multisize measurements
-            path = qApp->TapeSettings()->GetPathMultisizeMeasurements();
-            path = VCommonSettings::PrepareMultisizeTables(path);
-            break;
-        case 2: // templates
-            path = qApp->TapeSettings()->GetPathTemplate();
+        case 0: // known measurements
+            path = MApplication::VApp()->TapeSettings()->GetPathKnownMeasurements();
             break;
         default:
             break;
     }
 
     bool usedNotExistedDir = false;
-    QDir directory(path);
-    if (not directory.exists())
+    if (QDir const directory(path); not directory.exists())
     {
         usedNotExistedDir = directory.mkpath(QChar('.'));
     }
 
-    const QString dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"), path,
-                                                          QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+    const QString dir = QFileDialog::getExistingDirectory(
+        this, tr("Open Directory"), path,
+        VAbstractApplication::VApp()->NativeFileDialog(QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks));
     if (dir.isEmpty())
     {
         if (usedNotExistedDir)
         {
-            QDir directory(path);
-            directory.rmpath(QChar('.'));
+            QDir(path).rmpath(QChar('.'));
         }
-
         DefaultPath();
         return;
     }
 
     item->setText(dir);
     item->setToolTip(dir);
+
+    if (usedNotExistedDir)
+    {
+        QDir(path).rmpath(QChar('.'));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TapePreferencesPathPage::InitTable()
 {
     ui->pathTable->clearContents();
-    ui->pathTable->setRowCount(3);
+    ui->pathTable->setRowCount(1);
     ui->pathTable->setColumnCount(2);
 
-    const VTapeSettings *settings = qApp->TapeSettings();
+    const VTapeSettings *settings = MApplication::VApp()->TapeSettings();
 
     {
-        ui->pathTable->setItem(0, 0, new QTableWidgetItem(tr("My Individual Measurements")));
-        QTableWidgetItem *item = new QTableWidgetItem(settings->GetPathIndividualMeasurements());
-        item->setToolTip(settings->GetPathIndividualMeasurements());
+        ui->pathTable->setItem(0, 0, new QTableWidgetItem(tr("My known measurements")));
+        auto *item = new QTableWidgetItem(settings->GetPathKnownMeasurements());
+        item->setToolTip(settings->GetPathKnownMeasurements());
         ui->pathTable->setItem(0, 1, item);
-    }
-
-    {
-        ui->pathTable->setItem(1, 0, new QTableWidgetItem(tr("My Multisize Measurements")));
-        QTableWidgetItem *item = new QTableWidgetItem(settings->GetPathMultisizeMeasurements());
-        item->setToolTip(settings->GetPathMultisizeMeasurements());
-        ui->pathTable->setItem(1, 1, item);
-    }
-
-    {
-        ui->pathTable->setItem(2, 0, new QTableWidgetItem(tr("My Templates")));
-        QTableWidgetItem *item = new QTableWidgetItem(settings->GetPathTemplate());
-        item->setToolTip(settings->GetPathTemplate());
-        ui->pathTable->setItem(2, 1, item);
     }
 
     ui->pathTable->verticalHeader()->setDefaultSectionSize(20);
     ui->pathTable->resizeColumnsToContents();
     ui->pathTable->resizeRowsToContents();
-    ui->pathTable->horizontalHeader()->setStretchLastSection(true);
 }

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -30,42 +30,45 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolDuplicateDetail::VisToolDuplicateDetail(const VContainer *data, QGraphicsItem *parent)
-    : VisPath(data, parent),
-      m_start(),
-      m_started(false),
-      m_diff()
-{}
+  : VisPath(data, parent)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolDuplicateDetail::RefreshGeometry()
 {
-    const VPiece piece = Visualization::data->GetPiece(object1Id);
+    const VPiece piece = GetData()->GetPiece(m_pieceId);
 
     if (not m_started)
     {
-        m_start = Visualization::scenePos;
+        m_start = ScenePos();
         m_started = true;
         setPos(QPointF(piece.GetMx(), piece.GetMy()));
     }
     else
     {
-        m_diff = Visualization::scenePos - m_start;
+        m_diff = ScenePos() - m_start;
         m_diff = QPointF(m_diff.x() + piece.GetMx(), m_diff.y() + piece.GetMy());
         setPos(m_diff);
     }
 
-    DrawPath(this, PiecePath(piece), mainColor, Qt::SolidLine, Qt::RoundCap);
+    DrawPath(this, PiecePath(piece), Qt::SolidLine, Qt::RoundCap);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VisToolDuplicateDetail::PiecePath(const VPiece &piece) const
+void VisToolDuplicateDetail::VisualMode(quint32 id)
+{
+    m_pieceId = id;
+    StartVisualMode();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VisToolDuplicateDetail::PiecePath(const VPiece &piece) const -> QPainterPath
 {
     if (not piece.IsHideMainPath() || not piece.IsSeamAllowance() || piece.IsSeamAllowanceBuiltIn())
     {
-        return piece.MainPathPath(Visualization::data);
+        return piece.MainPathPath(GetData());
     }
-    else
-    {
-        return piece.SeamAllowancePath(Visualization::data);
-    }
+
+    return piece.SeamAllowancePath(GetData());
 }

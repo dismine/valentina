@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef DIALOGARCWITHLENGTH_H
 #define DIALOGARCWITHLENGTH_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -40,39 +39,47 @@
 
 namespace Ui
 {
-    class DialogArcWithLength;
+class DialogArcWithLength;
 }
 
-class DialogArcWithLength : public DialogTool
+class DialogArcWithLength final : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
-    DialogArcWithLength(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    ~DialogArcWithLength();
+    DialogArcWithLength(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
+    ~DialogArcWithLength() override;
 
-    quint32       GetCenter() const;
-    void          SetCenter(const quint32 &value);
+    auto GetCenter() const -> quint32;
+    void SetCenter(const quint32 &value);
 
-    QString       GetRadius() const;
-    void          SetRadius(const QString &value);
+    auto GetRadius() const -> QString;
+    void SetRadius(const QString &value);
 
-    QString       GetF1() const;
-    void          SetF1(const QString &value);
+    auto GetF1() const -> QString;
+    void SetF1(const QString &value);
 
-    QString       GetLength() const;
-    void          SetLength(const QString &value);
+    auto GetLength() const -> QString;
+    void SetLength(const QString &value);
 
-    QString       GetPenStyle() const;
-    void          SetPenStyle(const QString &value);
+    auto GetPenStyle() const -> QString;
+    void SetPenStyle(const QString &value);
 
-    QString       GetColor() const;
-    void          SetColor(const QString &value);
+    auto GetColor() const -> QString;
+    void SetColor(const QString &value);
 
-    qreal         GetApproximationScale() const;
-    void          SetApproximationScale(qreal value);
+    auto GetApproximationScale() const -> qreal;
+    void SetApproximationScale(qreal value);
+
+    void SetNotes(const QString &notes);
+    auto GetNotes() const -> QString;
+
+    void SetAliasSuffix(const QString &alias);
+    auto GetAliasSuffix() const -> QString;
+
+    void ShowDialog(bool click) override;
 public slots:
-    virtual void  ChosenObject(quint32 id, const SceneObject &type) override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
     /**
      * @brief DeployFormulaTextEdit grow or shrink formula input
      */
@@ -80,61 +87,78 @@ public slots:
     void DeployF1TextEdit();
     void DeployLengthTextEdit();
 
-    void          RadiusChanged();
-    void          F1Changed();
-    void          LengthChanged();
-
-    void          FXRadius();
-    void          FXF1();
-    void          FXLength();
+    void FXRadius();
+    void FXF1();
+    void FXLength();
 
 protected:
-    virtual void  CheckState() final;
-    virtual void  ShowVisualization() override;
+    void ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void  SaveData() override;
-    virtual void  closeEvent(QCloseEvent *event) override;
+    void SaveData() override;
+    void closeEvent(QCloseEvent *event) override;
+    void changeEvent(QEvent *event) override;
+    auto IsValid() const -> bool override;
+
+private slots:
+    void ValidateAlias();
 
 private:
-    Q_DISABLE_COPY(DialogArcWithLength)
+    Q_DISABLE_COPY_MOVE(DialogArcWithLength) // NOLINT
     Ui::DialogArcWithLength *ui;
 
     /** @brief flagRadius true if value of radius is correct */
-    bool          flagRadius;
+    bool m_flagRadius{false};
 
     /** @brief flagF1 true if value of first angle is correct */
-    bool          flagF1;
+    bool m_flagF1{false};
 
-    bool          flagLength;
+    bool m_flagLength{false};
+
+    bool m_flagAlias{true};
 
     /** @brief timerRadius timer of check formula of radius */
-    QTimer        *timerRadius;
+    QTimer *m_timerRadius;
 
     /** @brief timerF1 timer of check formula of first angle */
-    QTimer        *timerF1;
+    QTimer *m_timerF1;
 
-    QTimer        *timerLength;
+    QTimer *m_timerLength;
 
     /** @brief radius formula of radius */
-    QString       radius;
+    QString m_radius{};
 
     /** @brief f1 formula of first angle */
-    QString       f1;
+    QString m_f1{};
 
-    QString       length;
+    QString m_length{};
 
     /** @brief formulaBaseHeight base height defined by dialogui */
-    int           formulaBaseHeightRadius;
-    int           formulaBaseHeightF1;
-    int           formulaBaseHeightLength;
+    int m_formulaBaseHeightRadius{0};
+    int m_formulaBaseHeightF1{0};
+    int m_formulaBaseHeightLength{0};
 
-    qreal         angleF1;
+    QString m_originAliasSuffix{};
 
-    void          Radius();
-    void          Length();
-    void          EvalF();
+    bool m_stageRadius{true};
+    bool m_stageF1{false};
+
+    bool m_firstRelease{false};
+
+    void Radius();
+    void Length();
+    void EvalF();
+
+    void FinishCreating();
+
+    void InitIcons();
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto DialogArcWithLength::IsValid() const -> bool
+{
+    return m_flagRadius && m_flagF1 && m_flagLength && m_flagAlias;
+}
 
 #endif // DIALOGARCWITHLENGTH_H

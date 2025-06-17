@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -28,25 +28,24 @@
 
 #include <QPointF>
 
+#include "../vmisc/def.h"
 #include "vgrainlinedata.h"
 #include "vgrainlinedata_p.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VGrainlineData::VGrainlineData()
-    : VAbstractFloatItemData(),
-      d(new VGrainlineDataPrivate())
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VGrainlineData::VGrainlineData(const VGrainlineData &data)
-    : VAbstractFloatItemData(data),
-      d (data.d)
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VGrainlineData &VGrainlineData::operator=(const VGrainlineData &data)
+  : VAbstractFloatItemData(),
+    d(new VGrainlineDataPrivate())
 {
-    if ( &data == this )
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+COPY_CONSTRUCTOR_IMPL_2(VGrainlineData, VAbstractFloatItemData)
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VGrainlineData::operator=(const VGrainlineData &data) -> VGrainlineData &
+{
+    if (&data == this)
     {
         return *this;
     }
@@ -56,47 +55,61 @@ VGrainlineData &VGrainlineData::operator=(const VGrainlineData &data)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VGrainlineData::~VGrainlineData()
-{}
+VGrainlineData::VGrainlineData(VGrainlineData &&data) noexcept
+  : VAbstractFloatItemData(std::move(data)),
+    d(std::move(data.d)) // NOLINT(bugprone-use-after-move)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VGrainlineData::GetLength() const
+auto VGrainlineData::operator=(VGrainlineData &&data) noexcept -> VGrainlineData &
+{
+    VAbstractFloatItemData::operator=(data);
+    std::swap(d, data.d);
+    return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VGrainlineData::~VGrainlineData() = default;
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VGrainlineData::GetLength() const -> QString
 {
     return d->m_qsLength;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VGrainlineData::SetLength(const QString& qsLen)
+void VGrainlineData::SetLength(const QString &qsLen)
 {
     d->m_qsLength = qsLen;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VGrainlineData::GetRotation() const
+auto VGrainlineData::GetRotation() const -> QString
 {
     return d->m_dRotation;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VGrainlineData::SetRotation(const QString& qsRot)
+void VGrainlineData::SetRotation(const QString &qsRot)
 {
     d->m_dRotation = qsRot;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-ArrowType VGrainlineData::GetArrowType() const
+auto VGrainlineData::GetArrowType() const -> GrainlineArrowDirection
 {
     return d->m_eArrowType;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VGrainlineData::SetArrowType(ArrowType eAT)
+void VGrainlineData::SetArrowType(GrainlineArrowDirection eAT)
 {
     d->m_eArrowType = eAT;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VGrainlineData::CenterPin() const
+auto VGrainlineData::CenterPin() const -> quint32
 {
     return d->m_centerPin;
 }
@@ -108,7 +121,7 @@ void VGrainlineData::SetCenterPin(quint32 centerPin)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VGrainlineData::TopPin() const
+auto VGrainlineData::TopPin() const -> quint32
 {
     return d->m_topPin;
 }
@@ -120,7 +133,7 @@ void VGrainlineData::SetTopPin(quint32 topPin)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VGrainlineData::BottomPin() const
+auto VGrainlineData::BottomPin() const -> quint32
 {
     return d->m_bottomPin;
 }
@@ -129,4 +142,16 @@ quint32 VGrainlineData::BottomPin() const
 void VGrainlineData::SetBottomPin(quint32 bottomPin)
 {
     d->m_bottomPin = bottomPin;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VGrainlineData::IsVisible() const -> bool
+{
+    return d->m_visible;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VGrainlineData::SetVisible(bool visible)
+{
+    d->m_visible = visible;
 }

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 #ifndef VTOOLBISECTOR_H
 #define VTOOLBISECTOR_H
 
-#include <qcompilerdetection.h>
+
 #include <QDomElement>
 #include <QGraphicsItem>
 #include <QMetaObject>
@@ -65,21 +65,22 @@ struct VToolBisectorInitData : VToolLinePointInitData
  */
 class VToolBisector : public VToolLinePoint
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
-    static qreal   BisectorAngle(const QPointF &firstPoint, const QPointF &secondPoint, const QPointF &thirdPoint);
-    static QPointF FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const QPointF &thirdPoint,
-                             const qreal& length);
-    virtual void   setDialog() override;
-    static VToolBisector* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
-                                 VContainer *data);
-    static VToolBisector* Create(VToolBisectorInitData &initData);
+    static auto BisectorAngle(const QPointF &firstPoint, const QPointF &secondPoint, const QPointF &thirdPoint)
+        -> qreal;
+    static auto FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const QPointF &thirdPoint,
+                          const qreal &length) -> QPointF;
+    virtual void   SetDialog() override;
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolBisector *;
+    static auto Create(VToolBisectorInitData &initData) -> VToolBisector *;
     static const QString ToolType;
-    virtual int    type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::Bisector)};
 
-    QString FirstPointName() const;
-    QString ThirdPointName() const;
+    auto FirstPointName() const -> QString;
+    auto ThirdPointName() const -> QString;
 
     virtual void   ShowVisualization(bool show) override;
 protected slots:
@@ -92,7 +93,7 @@ protected:
     virtual void   ReadToolAttributes(const QDomElement &domElement) override;
     virtual void   SetVisualization() override;
 private:
-    Q_DISABLE_COPY(VToolBisector)
+    Q_DISABLE_COPY_MOVE(VToolBisector) // NOLINT
 
     /** @brief firstPointId id first point of angle. */
     quint32         firstPointId;

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -28,23 +28,20 @@
 
 #include "addpatternpiece.h"
 
-#include "../vmisc/def.h"
-#include "../vmisc/logging.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/def.h"
 #include "vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 AddPatternPiece::AddPatternPiece(const QDomElement &xml, VAbstractPattern *doc, const QString &namePP,
                                  QUndoCommand *parent)
-    : VUndoCommand(xml, doc, parent), namePP(namePP)
+  : VUndoCommand(xml, doc, parent),
+    namePP(namePP)
 {
+    // cppcheck-suppress unknownMacro
     SCASSERT(namePP.isEmpty() == false)
     setText(tr("add pattern piece %1").arg(namePP));
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-AddPatternPiece::~AddPatternPiece()
-{}
 
 //---------------------------------------------------------------------------------------------------------------------
 void AddPatternPiece::undo()
@@ -58,7 +55,7 @@ void AddPatternPiece::undo()
     else
     {
         QDomElement rootElement = doc->documentElement();
-        QDomElement patternPiece = doc->GetPPElement(namePP);
+        QDomElement const patternPiece = doc->GetPPElement(namePP);
         rootElement.removeChild(patternPiece);
         emit NeedFullParsing();
     }

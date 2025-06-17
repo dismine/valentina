@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,39 +29,28 @@
 #ifndef VSPLINEPATH_P_H
 #define VSPLINEPATH_P_H
 
-#include <QSharedData>
 #include "vsplinepoint.h"
+#include <QSharedData>
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
-class VSplinePathData : public QSharedData
+class VSplinePathData final : public QSharedData
 {
 public:
-
-    VSplinePathData()
-        : path(QVector<VSplinePoint>())
-    {}
-
-    VSplinePathData(const VSplinePathData &splPath)
-        : QSharedData(splPath),
-          path(splPath.path)
-    {}
-
-    virtual ~VSplinePathData();
+    VSplinePathData() = default;
+    VSplinePathData(const VSplinePathData &splPath) = default;
+    ~VSplinePathData() = default;
 
     /**
      * @brief path list spline point.
      */
-    QVector<VSplinePoint> path;
+    QVector<VSplinePoint> path{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
-    VSplinePathData &operator=(const VSplinePathData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN_MOVE(VSplinePathData) // NOLINT
 };
-
-VSplinePathData::~VSplinePathData()
-{}
 
 QT_WARNING_POP
 

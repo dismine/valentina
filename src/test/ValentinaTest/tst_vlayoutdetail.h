@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@
 
 class TST_VLayoutDetail : public AbstractTest
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit TST_VLayoutDetail(QObject *parent = nullptr);
 
@@ -42,16 +42,16 @@ private slots:
 
 private:
     void Case1() const;
-    QVector<QPointF> InputPointsCase1() const;
-    QVector<QPointF> OutputPointsCase1() const;
+    auto InputPointsCase1() const -> QVector<QPointF>;
+    auto OutputPointsCase1() const -> QVector<QPointF>;
 
     void Case2() const;
-    QVector<QPointF> InputPointsCase2() const;
-    QVector<QPointF> OutputPointsCase2() const;
+    auto InputPointsCase2() const -> QVector<QPointF>;
+    auto OutputPointsCase2() const -> QVector<QPointF>;
 
     void Case3() const;
-    QVector<QPointF> InputPointsCase3() const;
-    QVector<QPointF> OutputPointsCase3() const;
+    auto InputPointsCase3() const -> QVector<QPointF>;
+    auto OutputPointsCase3() const -> QVector<QPointF>;
 };
 
 #endif // TST_VLAYOUTDETAIL_H

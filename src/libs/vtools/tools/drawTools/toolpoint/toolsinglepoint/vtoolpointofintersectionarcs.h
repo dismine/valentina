@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 #ifndef VTOOLPOINTOFINTERSECTIONARCS_H
 #define VTOOLPOINTOFINTERSECTIONARCS_H
 
-#include <qcompilerdetection.h>
+
 #include <QDomElement>
 #include <QGraphicsItem>
 #include <QMetaObject>
@@ -43,6 +43,7 @@
 #include "vtoolsinglepoint.h"
 
 template <class T> class QSharedPointer;
+class VArc;
 
 struct VToolPointOfIntersectionArcsInitData : VToolSinglePointInitData
 {
@@ -60,23 +61,23 @@ struct VToolPointOfIntersectionArcsInitData : VToolSinglePointInitData
 
 class VToolPointOfIntersectionArcs : public VToolSinglePoint
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
-    virtual void setDialog() override;
-    static VToolPointOfIntersectionArcs *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
-                                                VAbstractPattern *doc, VContainer *data);
-    static VToolPointOfIntersectionArcs *Create(VToolPointOfIntersectionArcsInitData initData);
-    static bool FindPoint(const VArc *arc1, const VArc *arc2, const CrossCirclesPoint pType,
-                          QPointF *intersectionPoint);
+    virtual void SetDialog() override;
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolPointOfIntersectionArcs *;
+    static auto Create(VToolPointOfIntersectionArcsInitData initData) -> VToolPointOfIntersectionArcs *;
+    static auto FindPoint(const VArc *arc1, const VArc *arc2, const CrossCirclesPoint pType, QPointF *intersectionPoint)
+        -> bool;
     static const QString ToolType;
-    virtual int  type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::PointOfIntersectionArcs) };
 
-    QString FirstArcName() const;
-    QString SecondArcName() const;
+    auto FirstArcName() const -> QString;
+    auto SecondArcName() const -> QString;
 
-    CrossCirclesPoint GetCrossCirclesPoint() const;
+    auto GetCrossCirclesPoint() const -> CrossCirclesPoint;
     void              SetCrossCirclesPoint(const CrossCirclesPoint &value);
 
     virtual void ShowVisualization(bool show) override;
@@ -90,7 +91,7 @@ protected:
     virtual void ReadToolAttributes(const QDomElement &domElement) override;
     virtual void SetVisualization() override;
 private:
-    Q_DISABLE_COPY(VToolPointOfIntersectionArcs)
+    Q_DISABLE_COPY_MOVE(VToolPointOfIntersectionArcs) // NOLINT
 
     /** @brief firstArcId id first arc. */
     quint32       firstArcId;

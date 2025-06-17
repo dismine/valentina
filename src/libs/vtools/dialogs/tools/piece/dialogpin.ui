@@ -14,7 +14,7 @@
    <string>Pin</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../../../vmisc/share/resources/icon.qrc">
+   <iconset resource="../../../../vmisc/share/resources/icon.qrc">
     <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
   </property>
   <property name="toolTip">
@@ -57,8 +57,12 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>comboBoxPoint</tabstop>
+  <tabstop>comboBoxPiece</tabstop>
+ </tabstops>
  <resources>
-  <include location="../../../vmisc/share/resources/icon.qrc"/>
+  <include location="../../../../vmisc/share/resources/icon.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -68,8 +72,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
+     <x>184</x>
+     <y>104</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -84,8 +88,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
+     <x>184</x>
+     <y>104</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>

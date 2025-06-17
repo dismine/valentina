@@ -2,14 +2,14 @@
  **
  **  @file   tapepreferencespathpage.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   12 4, 2017
+ **  @date   26 10, 2023
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  Copyright (C) 2023 Valentina project
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -25,34 +25,38 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-
 #ifndef TAPEPREFERENCESPATHPAGE_H
 #define TAPEPREFERENCESPATHPAGE_H
 
 #include <QWidget>
+#include <memory>
 
 namespace Ui
 {
-    class TapePreferencesPathPage;
+class TapePreferencesPathPage;
 }
 
 class TapePreferencesPathPage : public QWidget
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit TapePreferencesPathPage(QWidget *parent = nullptr);
-    virtual ~TapePreferencesPathPage();
+    ~TapePreferencesPathPage() override;
 
-    void Apply();
+    auto Apply() -> QStringList;
+
 protected:
-    virtual void changeEvent(QEvent* event) override;
+    void changeEvent(QEvent *event) override;
+
 private slots:
     void DefaultPath();
     void EditPath();
+
 private:
-    Q_DISABLE_COPY(TapePreferencesPathPage)
-    Ui::TapePreferencesPathPage *ui;
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(TapePreferencesPathPage) // NOLINT
+    std::unique_ptr<Ui::TapePreferencesPathPage> ui;
 
     void InitTable();
 };

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -28,12 +28,19 @@
 
 #include "vsplinepath.h"
 
+#include <QJsonArray>
+#include <QJsonObject>
 #include <QPoint>
 
 #include "../ifc/exception/vexception.h"
-#include "../vmisc/vmath.h"
 #include "vabstractcurve.h"
 #include "vsplinepath_p.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -42,14 +49,15 @@
  * @param mode mode creation spline path.
  */
 VSplinePath::VSplinePath(quint32 idObject, Draw mode)
-    : VAbstractCubicBezierPath(GOType::SplinePath, idObject, mode),
-      d(new VSplinePathData())
-{}
+  : VAbstractCubicBezierPath(GOType::SplinePath, idObject, mode),
+    d(new VSplinePathData())
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VSplinePath::VSplinePath(const QVector<VFSplinePoint> &points, qreal kCurve, quint32 idObject, Draw mode)
-    : VAbstractCubicBezierPath(GOType::SplinePath, idObject, mode),
-      d(new VSplinePathData())
+  : VAbstractCubicBezierPath(GOType::SplinePath, idObject, mode),
+    d(new VSplinePathData())
 {
     if (points.size() < 3)
     {
@@ -57,15 +65,15 @@ VSplinePath::VSplinePath(const QVector<VFSplinePoint> &points, qreal kCurve, qui
     }
 
     QVector<VSplinePoint> newPoints(points.size());
-    for (qint32 i = 1; i <= points.size()-1; ++i)
+    for (qint32 i = 1; i <= points.size() - 1; ++i)
     {
-        const VFSplinePoint &p1 = points.at(i-1);
+        const VFSplinePoint &p1 = points.at(i - 1);
         const VFSplinePoint &p2 = points.at(i);
-        VSpline spl(p1.P(), p2.P(), p1.Angle2(), p2.Angle1(), p1.KAsm2(), p2.KAsm1(), kCurve);
+        VSpline const spl(p1.P(), p2.P(), p1.Angle2(), p2.Angle1(), p1.KAsm2(), p2.KAsm1(), kCurve);
 
-        newPoints[i-1].SetP(p1.P());
-        newPoints[i-1].SetAngle2(p1.Angle2(), spl.GetStartAngleFormula());
-        newPoints[i-1].SetLength2(spl.GetC1Length(), spl.GetC1LengthFormula());
+        newPoints[i - 1].SetP(p1.P());
+        newPoints[i - 1].SetAngle2(p1.Angle2(), spl.GetStartAngleFormula());
+        newPoints[i - 1].SetLength2(spl.GetC1Length(), spl.GetC1LengthFormula());
 
         newPoints[i].SetP(p2.P());
         newPoints[i].SetAngle1(p2.Angle1(), spl.GetEndAngleFormula());
@@ -78,8 +86,8 @@ VSplinePath::VSplinePath(const QVector<VFSplinePoint> &points, qreal kCurve, qui
 
 //---------------------------------------------------------------------------------------------------------------------
 VSplinePath::VSplinePath(const QVector<VSplinePoint> &points, quint32 idObject, Draw mode)
-    : VAbstractCubicBezierPath(GOType::SplinePath, idObject, mode),
-      d(new VSplinePathData())
+  : VAbstractCubicBezierPath(GOType::SplinePath, idObject, mode),
+    d(new VSplinePathData())
 {
     if (points.isEmpty())
     {
@@ -91,26 +99,19 @@ VSplinePath::VSplinePath(const QVector<VSplinePoint> &points, quint32 idObject, 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VSplinePath copy constructor.
- * @param splPath spline path.
- */
-VSplinePath::VSplinePath(const VSplinePath &splPath)
-    : VAbstractCubicBezierPath(splPath),
-      d(splPath.d)
-{}
+COPY_CONSTRUCTOR_IMPL_2(VSplinePath, VAbstractCubicBezierPath)
 
 //---------------------------------------------------------------------------------------------------------------------
-VSplinePath VSplinePath::Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix) const
+auto VSplinePath::Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix) const -> VSplinePath
 {
     QVector<VSplinePoint> newPoints(CountPoints());
     for (qint32 i = 1; i <= CountSubSpl(); ++i)
     {
         const VSpline spl = GetSpline(i).Rotate(originPoint, degrees);
 
-        newPoints[i-1].SetP(spl.GetP1());
-        newPoints[i-1].SetAngle2(spl.GetStartAngle(), spl.GetStartAngleFormula());
-        newPoints[i-1].SetLength2(spl.GetC1Length(), spl.GetC1LengthFormula());
+        newPoints[i - 1].SetP(spl.GetP1());
+        newPoints[i - 1].SetAngle2(spl.GetStartAngle(), spl.GetStartAngleFormula());
+        newPoints[i - 1].SetLength2(spl.GetC1Length(), spl.GetC1LengthFormula());
 
         newPoints[i].SetP(spl.GetP4());
         newPoints[i].SetAngle1(spl.GetEndAngle(), spl.GetEndAngleFormula());
@@ -119,6 +120,12 @@ VSplinePath VSplinePath::Rotate(const QPointF &originPoint, qreal degrees, const
 
     VSplinePath splPath(newPoints);
     splPath.setName(name() + prefix);
+
+    if (not GetAliasSuffix().isEmpty())
+    {
+        splPath.SetAliasSuffix(GetAliasSuffix() + prefix);
+    }
+
     splPath.SetColor(GetColor());
     splPath.SetPenStyle(GetPenStyle());
     splPath.SetApproximationScale(GetApproximationScale());
@@ -126,16 +133,16 @@ VSplinePath VSplinePath::Rotate(const QPointF &originPoint, qreal degrees, const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSplinePath VSplinePath::Flip(const QLineF &axis, const QString &prefix) const
+auto VSplinePath::Flip(const QLineF &axis, const QString &prefix) const -> VSplinePath
 {
     QVector<VSplinePoint> newPoints(CountPoints());
     for (qint32 i = 1; i <= CountSubSpl(); ++i)
     {
         const VSpline spl = GetSpline(i).Flip(axis);
 
-        newPoints[i-1].SetP(spl.GetP1());
-        newPoints[i-1].SetAngle2(spl.GetStartAngle(), spl.GetStartAngleFormula());
-        newPoints[i-1].SetLength2(spl.GetC1Length(), spl.GetC1LengthFormula());
+        newPoints[i - 1].SetP(spl.GetP1());
+        newPoints[i - 1].SetAngle2(spl.GetStartAngle(), spl.GetStartAngleFormula());
+        newPoints[i - 1].SetLength2(spl.GetC1Length(), spl.GetC1LengthFormula());
 
         newPoints[i].SetP(spl.GetP4());
         newPoints[i].SetAngle1(spl.GetEndAngle(), spl.GetEndAngleFormula());
@@ -144,6 +151,12 @@ VSplinePath VSplinePath::Flip(const QLineF &axis, const QString &prefix) const
 
     VSplinePath splPath(newPoints);
     splPath.setName(name() + prefix);
+
+    if (not GetAliasSuffix().isEmpty())
+    {
+        splPath.SetAliasSuffix(GetAliasSuffix() + prefix);
+    }
+
     splPath.SetColor(GetColor());
     splPath.SetPenStyle(GetPenStyle());
     splPath.SetApproximationScale(GetApproximationScale());
@@ -151,16 +164,16 @@ VSplinePath VSplinePath::Flip(const QLineF &axis, const QString &prefix) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSplinePath VSplinePath::Move(qreal length, qreal angle, const QString &prefix) const
+auto VSplinePath::Move(qreal length, qreal angle, const QString &prefix) const -> VSplinePath
 {
     QVector<VSplinePoint> newPoints(CountPoints());
     for (qint32 i = 1; i <= CountSubSpl(); ++i)
     {
         const VSpline spl = GetSpline(i).Move(length, angle);
 
-        newPoints[i-1].SetP(spl.GetP1());
-        newPoints[i-1].SetAngle2(spl.GetStartAngle(), spl.GetStartAngleFormula());
-        newPoints[i-1].SetLength2(spl.GetC1Length(), spl.GetC1LengthFormula());
+        newPoints[i - 1].SetP(spl.GetP1());
+        newPoints[i - 1].SetAngle2(spl.GetStartAngle(), spl.GetStartAngleFormula());
+        newPoints[i - 1].SetLength2(spl.GetC1Length(), spl.GetC1LengthFormula());
 
         newPoints[i].SetP(spl.GetP4());
         newPoints[i].SetAngle1(spl.GetEndAngle(), spl.GetEndAngleFormula());
@@ -169,6 +182,12 @@ VSplinePath VSplinePath::Move(qreal length, qreal angle, const QString &prefix) 
 
     VSplinePath splPath(newPoints);
     splPath.setName(name() + prefix);
+
+    if (not GetAliasSuffix().isEmpty())
+    {
+        splPath.SetAliasSuffix(GetAliasSuffix() + prefix);
+    }
+
     splPath.SetColor(GetColor());
     splPath.SetPenStyle(GetPenStyle());
     splPath.SetApproximationScale(GetApproximationScale());
@@ -176,8 +195,7 @@ VSplinePath VSplinePath::Move(qreal length, qreal angle, const QString &prefix) 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSplinePath::~VSplinePath()
-{}
+VSplinePath::~VSplinePath() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -186,11 +204,6 @@ VSplinePath::~VSplinePath()
  */
 void VSplinePath::append(const VSplinePoint &point)
 {
-    if (d->path.size() > 0 && static_cast<QPointF>(d->path.last().P()) == static_cast<QPointF>(point.P())) //-V807
-    {
-        return;
-    }
-
     d->path.append(point);
     CreateName();
 }
@@ -200,16 +213,14 @@ void VSplinePath::append(const VSplinePoint &point)
  * @brief CountSubSpl return count of simple splines.
  * @return count.
  */
-qint32 VSplinePath::CountSubSpl() const
+auto VSplinePath::CountSubSpl() const -> vsizetype
 {
     if (d->path.isEmpty())
     {
         return 0;
     }
-    else
-    {
-        return d->path.size() - 1;
-    }
+
+    return d->path.size() - 1;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -218,9 +229,9 @@ qint32 VSplinePath::CountSubSpl() const
  * @param index index spline in spline path.
  * @return spline
  */
-VSpline VSplinePath::GetSpline(qint32 index) const
+auto VSplinePath::GetSpline(vsizetype index) const -> VSpline
 {
-    if (CountPoints()<1)
+    if (CountPoints() < 1)
     {
         throw VException(tr("Not enough points to create the spline."));
     }
@@ -230,7 +241,7 @@ VSpline VSplinePath::GetSpline(qint32 index) const
         throw VException(tr("This spline does not exist."));
     }
 
-    const VSplinePoint &p1 = d->path.at(index-1);
+    const VSplinePoint &p1 = d->path.at(index - 1);
     const VSplinePoint &p2 = d->path.at(index);
     VSpline spl(p1.P(), p2.P(), p1.Angle2(), p1.Angle2Formula(), p2.Angle1(), p2.Angle1Formula(), p1.Length2(),
                 p1.Length2Formula(), p2.Length1(), p2.Length1Formula(), 1);
@@ -253,7 +264,7 @@ void VSplinePath::UpdatePoint(qint32 indexSpline, const SplinePointPosition &pos
     }
     if (pos == SplinePointPosition::FirstPoint)
     {
-        d->path[indexSpline-1] = point;
+        d->path[indexSpline - 1] = point;
     }
     else
     {
@@ -268,7 +279,7 @@ void VSplinePath::UpdatePoint(qint32 indexSpline, const SplinePointPosition &pos
  * @param pos position point in spline.
  * @return spline point.
  */
-VSplinePoint VSplinePath::GetSplinePoint(qint32 indexSpline, SplinePointPosition pos) const
+auto VSplinePath::GetSplinePoint(qint32 indexSpline, SplinePointPosition pos) const -> VSplinePoint
 {
     if (indexSpline < 1 || indexSpline > CountSubSpl())
     {
@@ -276,7 +287,7 @@ VSplinePoint VSplinePath::GetSplinePoint(qint32 indexSpline, SplinePointPosition
     }
     if (pos == SplinePointPosition::FirstPoint)
     {
-        return d->path.at(indexSpline-1);
+        return d->path.at(indexSpline - 1);
     }
     else
     {
@@ -290,9 +301,9 @@ VSplinePoint VSplinePath::GetSplinePoint(qint32 indexSpline, SplinePointPosition
  * @param path spline path.
  * @return spline path.
  */
-VSplinePath &VSplinePath::operator =(const VSplinePath &path)
+auto VSplinePath::operator=(const VSplinePath &path) -> VSplinePath &
 {
-    if ( &path == this )
+    if (&path == this)
     {
         return *this;
     }
@@ -302,12 +313,27 @@ VSplinePath &VSplinePath::operator =(const VSplinePath &path)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VSplinePath::VSplinePath(VSplinePath &&splPath) noexcept
+  : VAbstractCubicBezierPath(std::move(splPath)),
+    d(std::move(splPath.d)) // NOLINT(bugprone-use-after-move)
+{
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VSplinePath::operator=(VSplinePath &&path) noexcept -> VSplinePath &
+{
+    VAbstractCubicBezierPath::operator=(path);
+    std::swap(d, path.d);
+    return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief operator [] return spline point by index.
  * @param indx index in list.
  * @return spline point.
  */
-VSplinePoint & VSplinePath::operator[](int indx)
+auto VSplinePath::operator[](vsizetype indx) -> VSplinePoint &
 {
     return d->path[indx];
 }
@@ -318,108 +344,68 @@ VSplinePoint & VSplinePath::operator[](int indx)
  * @param indx index in list.
  * @return spline point.
  */
-const VSplinePoint &VSplinePath::at(int indx) const
+auto VSplinePath::at(vsizetype indx) const -> const VSplinePoint &
 {
     return d->path[indx];
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VSplinePath::GetStartAngle() const
+auto VSplinePath::ToJson() const -> QJsonObject
 {
-    if (CountPoints() > 0)
+    QJsonObject object = VAbstractCubicBezierPath::ToJson();
+    object["aScale"_L1] = GetApproximationScale();
+
+    QJsonArray nodesArray;
+    for (const auto &node : d->path)
     {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-        return GetSplinePath().constFirst().Angle2();
-#else
-        return GetSplinePath().first().Angle2(); // clazy:exclude=detaching-temporary
-#endif
+        nodesArray.append(node.ToJson());
     }
-    else
-    {
-        return 0;
-    }
+    object["nodes"_L1] = nodesArray;
+
+    return object;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VSplinePath::GetEndAngle() const
+auto VSplinePath::GetStartAngle() const -> qreal
+{
+    return CountPoints() > 0 ? GetSplinePath().constFirst().Angle2() : 0;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VSplinePath::GetEndAngle() const -> qreal
 {
     if (CountPoints() > 0)
     {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
         return GetSplinePath().constLast().Angle1();
-#else
-        return GetSplinePath().last().Angle1(); // clazy:exclude=detaching-temporary
-#endif
     }
-    else
-    {
-        return 0;
-    }
+
+    return 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VSplinePath::GetC1Length() const
+auto VSplinePath::GetC1Length() const -> qreal
 {
-    if (CountPoints() > 0)
-    {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-        return GetSplinePath().constFirst().Length2();
-#else
-        return GetSplinePath().first().Length2(); // clazy:exclude=detaching-temporary
-#endif
-    }
-    else
-    {
-        return 0;
-    }
+    return CountPoints() > 0 ? GetSplinePath().constFirst().Length2() : 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VSplinePath::GetC2Length() const
+auto VSplinePath::GetC2Length() const -> qreal
 {
-    if (CountPoints() > 0)
-    {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-        return GetSplinePath().constLast().Length1();
-#else
-        return GetSplinePath().last().Length1(); // clazy:exclude=detaching-temporary
-#endif
-    }
-    else
-    {
-        return 0;
-    }
+    return CountPoints() > 0 ? GetSplinePath().constFirst().Length1() : 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPointF VSplinePath::FirstPoint() const
+auto VSplinePath::FirstPoint() const -> VPointF
 {
-    if (not d->path.isEmpty())
-    {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-        return d->path.constFirst().P();
-#else
-        return d->path.first().P(); // clazy:exclude=detaching-temporary
-#endif
-    }
-    else
-    {
-        return VPointF();
-    }
+    return not d->path.isEmpty() ? d->path.constFirst().P() : VPointF();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPointF VSplinePath::LastPoint() const
+auto VSplinePath::LastPoint() const -> VPointF
 {
-    const qint32 count = CountSubSpl();
-    if (count >= 1)
-    {
-        return d->path.at(count).P();// Take last point of the last real spline
-    }
-    else
-    {
-        return VPointF();
-    }
+    const vsizetype count = CountSubSpl();
+    return count >= 1 ? d->path.at(count).P() : // Take last point of the last real spline
+               VPointF();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -427,7 +413,7 @@ VPointF VSplinePath::LastPoint() const
  * @brief CountPoints return count of points.
  * @return count.
  */
-qint32 VSplinePath::CountPoints() const
+auto VSplinePath::CountPoints() const -> vsizetype
 {
     return d->path.size();
 }
@@ -437,27 +423,27 @@ qint32 VSplinePath::CountPoints() const
  * @brief GetSplinePath return list with spline points.
  * @return list.
  */
-QVector<VSplinePoint> VSplinePath::GetSplinePath() const
+auto VSplinePath::GetSplinePath() const -> QVector<VSplinePoint>
 {
     return d->path;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VFSplinePoint> VSplinePath::GetFSplinePath() const
+auto VSplinePath::GetFSplinePath() const -> QVector<VFSplinePoint>
 {
     QVector<VFSplinePoint> points;
     points.reserve(d->path.size());
 
     for (qint32 i = 1; i <= CountSubSpl(); ++i)
     {
-        const VSplinePoint &p1 = d->path.at(i-1);
+        const VSplinePoint &p1 = d->path.at(i - 1);
         const VSplinePoint &p2 = d->path.at(i);
-        VSpline spl(p1.P(), p2.P(), p1.Angle2(), p1.Angle2Formula(), p2.Angle1(), p2.Angle1Formula(), p1.Length2(),
-                    p1.Length2Formula(), p2.Length1(), p2.Length1Formula(), 1);
+        VSpline const spl(p1.P(), p2.P(), p1.Angle2(), p1.Angle2Formula(), p2.Angle1(), p2.Angle1Formula(),
+                          p1.Length2(), p1.Length2Formula(), p2.Length1(), p2.Length1Formula(), 1);
 
-        points[i-1].SetP(p1.P());
-        points[i-1].SetAngle2(p1.Angle2());
-        points[i-1].SetKAsm2(spl.GetKasm1());
+        points[i - 1].SetP(p1.P());
+        points[i - 1].SetAngle2(p1.Angle2());
+        points[i - 1].SetKAsm2(spl.GetKasm1());
 
         points[i].SetP(p2.P());
         points[i].SetAngle1(p2.Angle1());

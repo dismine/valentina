@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -28,7 +28,6 @@
 
 #include "dialogeditwrongformula.h"
 
-#include <qiterator.h>
 #include <QAbstractItemView>
 #include <QApplication>
 #include <QCheckBox>
@@ -47,68 +46,90 @@
 #include <QTableWidget>
 #include <QTableWidgetItem>
 #include <QTextCursor>
+#include <QTimer>
 #include <QToolButton>
 #include <QWidget>
-#include <Qt>
 #include <new>
 
-#include "../vpatterndb/vcontainer.h"
-#include "../vpatterndb/vtranslatevars.h"
+#include "../tools/dialogtool.h"
+#include "../vformat/knownmeasurements/vknownmeasurement.h"
+#include "../vformat/knownmeasurements/vknownmeasurements.h"
+#include "../vformat/knownmeasurements/vknownmeasurementsdatabase.h"
+#include "../vmisc/def.h"
+#include "../vmisc/theme/vtheme.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
 #include "../vpatterndb/variables/varcradius.h"
 #include "../vpatterndb/variables/vcurveangle.h"
+#include "../vpatterndb/variables/vcurveclength.h"
 #include "../vpatterndb/variables/vcurvelength.h"
 #include "../vpatterndb/variables/vincrement.h"
 #include "../vpatterndb/variables/vlineangle.h"
 #include "../vpatterndb/variables/vlinelength.h"
 #include "../vpatterndb/variables/vmeasurement.h"
-#include "../ifc/xml/vdomdocument.h"
-#include "../vmisc/def.h"
-#include "../vmisc/vabstractapplication.h"
-#include "../vmisc/vcommonsettings.h"
-#include "../tools/dialogtool.h"
+#include "../vpatterndb/variables/vpiecearea.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vtranslatevars.h"
 #include "ui_dialogeditwrongformula.h"
 
 template <class T> class QSharedPointer;
 
-enum {ColumnName = 0, ColumnFullName};
+enum
+{
+    ColumnName = 0,
+    ColumnFullName
+};
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogEditWrongFormula::DialogEditWrongFormula(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogEditWrongFormula), formula(QString()), formulaBaseHeight(0),
-      checkZero(false), checkLessThanZero(false), postfix(QString()), restoreCursor(false)
+DialogEditWrongFormula::DialogEditWrongFormula(const VContainer *data, quint32 toolId, QWidget *parent)
+  : QDialog(parent),
+    ui(new Ui::DialogEditWrongFormula),
+    m_data(data),
+    m_toolId(toolId),
+    timerFormula(new QTimer(this))
 {
+    SCASSERT(data != nullptr)
+
     ui->setupUi(this);
+
+    ui->radioButtonPieceArea->setVisible(false);
+
+    timerFormula->setSingleShot(true);
+    connect(timerFormula, &QTimer::timeout, this, &DialogEditWrongFormula::EvalFormula);
 
 #if defined(Q_OS_MAC)
     setWindowFlags(Qt::Window);
 #endif
 
     InitVariables();
-    InitFormulaUI(ui);
     this->formulaBaseHeight = ui->plainTextEditFormula->height();
     ui->plainTextEditFormula->installEventFilter(this);
     ui->filterFormulaInputs->setClearButtonEnabled(true);
 
     connect(ui->filterFormulaInputs, &QLineEdit::textChanged, this, &DialogEditWrongFormula::FilterVariablesEdited);
 
-    InitOkCancel(ui);
-    flagFormula = false;
-    CheckState();
+    QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
+    SCASSERT(bOk != nullptr)
+    connect(bOk, &QPushButton::clicked, this, &DialogEditWrongFormula::DialogAccepted);
+
+    QPushButton *bCancel = ui->buttonBox->button(QDialogButtonBox::Cancel);
+    SCASSERT(bCancel != nullptr)
+    connect(bCancel, &QPushButton::clicked, this, &DialogEditWrongFormula::DialogRejected);
+
+    VAbstractApplication::VApp()->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogEditWrongFormula::PutHere);
     connect(ui->tableWidget, &QTableWidget::itemDoubleClicked, this, &DialogEditWrongFormula::PutVal);
 
-    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogEditWrongFormula::FormulaChanged);
+    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this,
+            [this]() { timerFormula->start(formulaTimerTimeout); });
 
-    //Disable Qt::WaitCursor
+    // Disable Qt::WaitCursor
 #ifndef QT_NO_CURSOR
-    if (QGuiApplication::overrideCursor() != nullptr)
+    if (QGuiApplication::overrideCursor() != nullptr && QGuiApplication::overrideCursor()->shape() == Qt::WaitCursor)
     {
-        if (QGuiApplication::overrideCursor()->shape() == Qt::WaitCursor)
-        {
-            restoreCursor = true;
-            QGuiApplication::restoreOverrideCursor();
-        }
+        restoreCursor = true;
+        QGuiApplication::restoreOverrideCursor();
     }
 #endif
     ui->tableWidget->setColumnCount(2);
@@ -147,10 +168,16 @@ void DialogEditWrongFormula::DialogRejected()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::EvalFormula()
 {
-    SCASSERT(plainTextEditFormula != nullptr)
-    SCASSERT(labelResultCalculation != nullptr)
-    Eval(plainTextEditFormula->toPlainText(), flagFormula, labelResultCalculation, postfix, checkZero,
-         checkLessThanZero);
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditFormula->toPlainText();
+    formulaData.variables = m_data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditFormula;
+    formulaData.labelResult = ui->labelResultCalculation;
+    formulaData.postfix = postfix;
+    formulaData.checkZero = checkZero;
+    formulaData.checkLessThanZero = checkLessThanZero;
+
+    Eval(formulaData, flagFormula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -165,53 +192,59 @@ void DialogEditWrongFormula::ValChanged(int row)
         ui->labelDescription->setText(QString());
         return;
     }
-    QTableWidgetItem *item = ui->tableWidget->item( row, ColumnName );
-    const QString name = qApp->TrVars()->VarFromUser(item->text());
+    QTableWidgetItem *item = ui->tableWidget->item(row, ColumnName);
+    const QString name = VAbstractApplication::VApp()->TrVars()->VarFromUser(item->text());
 
     try
     {
         if (ui->radioButtonStandardTable->isChecked())
         {
-            const QSharedPointer<VMeasurement> stable = data->GetVariable<VMeasurement>(name);
-            SetDescription(item->text(), *stable->GetValue(), UnitsToStr(qApp->patternUnit(), true),
-                           stable->GetGuiText());
+            SetMeasurementDescription(item, name);
         }
-        else if (ui->radioButtonIncrements->isChecked())
+        else if (ui->radioButtonIncrements->isChecked() || ui->radioButtonPC->isChecked())
         {
-            const QSharedPointer<VIncrement> incr = data->GetVariable<VIncrement>(name);
-            SetDescription(item->text(), *incr->GetValue(), UnitsToStr(qApp->patternUnit(), true),
-                           incr->GetDescription());
-        }
-        else if (ui->radioButtonPC->isChecked())
-        {
-            const QSharedPointer<VIncrement> incr = data->GetVariable<VIncrement>(name);
-            SetDescription(item->text(), *incr->GetValue(), UnitsToStr(qApp->patternUnit(), true),
-                           incr->GetDescription());
+            const QSharedPointer<VIncrement> incr = m_data->GetVariable<VIncrement>(name);
+            SetDescription(item->text(), *incr->GetValue(), incr->IsSpecialUnits(), incr->GetDescription());
         }
         else if (ui->radioButtonLengthLine->isChecked())
         {
-            SetDescription(item->text(), *data->GetVariable<VLengthLine>(name)->GetValue(),
-                           UnitsToStr(qApp->patternUnit(), true), tr("Line length"));
+            const bool specialUnits = false;
+            SetDescription(item->text(), *m_data->GetVariable<VLengthLine>(name)->GetValue(), specialUnits,
+                           tr("Line length"));
         }
         else if (ui->radioButtonLengthSpline->isChecked())
         {
-            SetDescription(item->text(), *data->GetVariable<VCurveLength>(name)->GetValue(),
-                           UnitsToStr(qApp->patternUnit(), true), tr("Curve length"));
+            const bool specialUnits = false;
+            SetDescription(item->text(), *m_data->GetVariable<VCurveLength>(name)->GetValue(), specialUnits,
+                           tr("Curve length"));
         }
         else if (ui->radioButtonAngleLine->isChecked())
         {
-            SetDescription(item->text(), *data->GetVariable<VLineAngle>(name)->GetValue(), degreeSymbol,
+            const bool specialUnits = true;
+            SetDescription(item->text(), *m_data->GetVariable<VLineAngle>(name)->GetValue(), specialUnits,
                            tr("Line Angle"));
         }
         else if (ui->radioButtonRadiusesArcs->isChecked())
         {
-            SetDescription(item->text(), *data->GetVariable<VArcRadius>(name)->GetValue(),
-                           UnitsToStr(qApp->patternUnit(), true), tr("Arc radius"));
+            const bool specialUnits = false;
+            SetDescription(item->text(), *m_data->GetVariable<VArcRadius>(name)->GetValue(), specialUnits,
+                           tr("Arc radius"));
         }
         else if (ui->radioButtonAnglesCurves->isChecked())
         {
-            SetDescription(item->text(), *data->GetVariable<VCurveAngle>(name)->GetValue(), degreeSymbol,
+            const bool specialUnits = true;
+            SetDescription(item->text(), *m_data->GetVariable<VCurveAngle>(name)->GetValue(), specialUnits,
                            tr("Curve angle"));
+        }
+        else if (ui->radioButtonCLength->isChecked())
+        {
+            const bool specialUnits = false;
+            SetDescription(item->text(), *m_data->GetVariable<VCurveCLength>(name)->GetValue(), specialUnits,
+                           tr("Length to control point"));
+        }
+        else if (ui->radioButtonPieceArea->isChecked())
+        {
+            SetPieceAreaDescription(item, name);
         }
         else if (ui->radioButtonFunctions->isChecked())
         {
@@ -230,12 +263,10 @@ void DialogEditWrongFormula::ValChanged(int row)
  */
 void DialogEditWrongFormula::PutHere()
 {
-    const QTableWidgetItem *item = ui->tableWidget->currentItem();
+    QTableWidgetItem *item = ui->tableWidget->currentItem();
     if (item != nullptr)
     {
-        QTextCursor cursor = ui->plainTextEditFormula->textCursor();
-        cursor.insertText(ui->tableWidget->item(item->row(), ColumnName)->text());
-        ui->plainTextEditFormula->setTextCursor(cursor);
+        PutVal(item);
         ui->plainTextEditFormula->setFocus();
     }
 }
@@ -248,8 +279,20 @@ void DialogEditWrongFormula::PutHere()
 void DialogEditWrongFormula::PutVal(QTableWidgetItem *item)
 {
     SCASSERT(item != nullptr)
+    QTableWidgetItem *valItem = ui->tableWidget->item(item->row(), ColumnName);
     QTextCursor cursor = ui->plainTextEditFormula->textCursor();
-    cursor.insertText(ui->tableWidget->item(item->row(), ColumnName)->text());
+    if (ui->radioButtonFunctions->isChecked())
+    {
+        QString const function = valItem->data(Qt::UserRole).toString();
+        const VTranslateVars *trVars = VAbstractApplication::VApp()->TrVars();
+        const QMap<QString, QString> functionsArguments = trVars->GetFunctionsArguments();
+        cursor.insertText(valItem->text() + functionsArguments.value(function));
+    }
+    else
+    {
+        cursor.insertText(valItem->text());
+    }
+
     ui->plainTextEditFormula->setTextCursor(cursor);
 }
 
@@ -260,7 +303,13 @@ void DialogEditWrongFormula::PutVal(QTableWidgetItem *item)
 void DialogEditWrongFormula::Measurements()
 {
     ui->checkBoxHideEmpty->setEnabled(true);
-    ShowMeasurements(data->DataMeasurements());
+
+    QList<QSharedPointer<VMeasurement>> vars = m_data->DataMeasurements().values();
+    std::stable_sort(vars.begin(), vars.end(),
+                     [](const QSharedPointer<VMeasurement> &obj1, const QSharedPointer<VMeasurement> &obj2)
+                     { return obj1->Index() < obj2->Index(); });
+
+    ShowMeasurements(vars);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -270,21 +319,21 @@ void DialogEditWrongFormula::Measurements()
 void DialogEditWrongFormula::LengthLines()
 {
     ui->checkBoxHideEmpty->setEnabled(false);
-    ShowVariable(data->DataLengthLines());
+    ShowVariable(m_data->DataLengthLines().values());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::RadiusArcs()
 {
     ui->checkBoxHideEmpty->setEnabled(false);
-    ShowVariable(data->DataRadiusesArcs());
+    ShowVariable(m_data->DataRadiusesArcs().values());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::AnglesCurves()
 {
     ui->checkBoxHideEmpty->setEnabled(false);
-    ShowVariable(data->DataAnglesCurves());
+    ShowVariable(m_data->DataAnglesCurves().values());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -294,21 +343,21 @@ void DialogEditWrongFormula::AnglesCurves()
 void DialogEditWrongFormula::LengthCurves()
 {
     ui->checkBoxHideEmpty->setEnabled(false);
-    ShowVariable(data->DataLengthCurves());
+    ShowVariable(m_data->DataLengthCurves().values());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::CurvesCLength()
 {
     ui->checkBoxHideEmpty->setEnabled(false);
-    ShowVariable(data->DataCurvesCLength());
+    ShowVariable(m_data->DataCurvesCLength().values());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::AngleLines()
 {
     ui->checkBoxHideEmpty->setEnabled(false);
-    ShowVariable(data->DataAngleLines());
+    ShowVariable(m_data->DataAngleLines().values());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -327,6 +376,13 @@ void DialogEditWrongFormula::PreviewCalculations()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogEditWrongFormula::PieceArea()
+{
+    ui->checkBoxHideEmpty->setEnabled(false);
+    ShowVariable(m_data->DataPieceArea().values());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Functions show in list functions
  */
@@ -337,41 +393,36 @@ void DialogEditWrongFormula::Functions()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogEditWrongFormula::CheckState()
-{
-    SCASSERT(bOk != nullptr)
-    bOk->setEnabled(flagFormula);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::closeEvent(QCloseEvent *event)
 {
     ui->plainTextEditFormula->blockSignals(true);
-    DialogTool::closeEvent(event);
+    QDialog::closeEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::showEvent(QShowEvent *event)
 {
-    QDialog::showEvent( event );
-    if ( event->spontaneous() )
+    QDialog::showEvent(event);
+    if (event->spontaneous())
     {
         return;
     }
 
-    if (isInitialized)
+    if (m_isInitialized)
     {
         return;
     }
     // do your init stuff here
 
-    const QSize sz = qApp->Settings()->GetFormulaWizardDialogSize();
+    const QSize sz = VAbstractApplication::VApp()->Settings()->GetFormulaWizardDialogSize();
     if (not sz.isEmpty())
     {
         resize(sz);
     }
 
-    isInitialized = true;//first show windows are held
+    CheckState();
+
+    m_isInitialized = true; // first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -380,19 +431,53 @@ void DialogEditWrongFormula::resizeEvent(QResizeEvent *event)
     // remember the size for the next time this dialog is opened, but only
     // if widget was already initialized, which rules out the resize at
     // dialog creating, which would
-    if (isInitialized)
+    if (m_isInitialized)
     {
-        qApp->Settings()->SetFormulaWizardDialogSize(size());
+        VAbstractApplication::VApp()->Settings()->SetFormulaWizardDialogSize(size());
     }
-    DialogTool::resizeEvent(event);
+    QDialog::resizeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEditWrongFormula::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+
+    if (event->type() == QEvent::PaletteChange)
+    {
+        InitIcons();
+        InitDialogButtonBoxIcons(ui->buttonBox);
+    }
+
+    // remember to call base class implementation
+    QDialog::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEditWrongFormula::CheckState()
+{
+    QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
+    SCASSERT(bOk != nullptr)
+    bOk->setEnabled(IsValid());
+    // In case dialog hasn't apply button
+    QPushButton *bApply = ui->buttonBox->button(QDialogButtonBox::Apply);
+    if (bApply != nullptr)
+    {
+        bApply->setEnabled(bOk->isEnabled());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::SetFormula(const QString &value)
 {
-    formula = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
+    formula = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     ui->plainTextEditFormula->setPlainText(formula);
     MoveCursorToEnd(ui->plainTextEditFormula);
+    ui->plainTextEditFormula->selectAll();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -439,9 +524,15 @@ void DialogEditWrongFormula::SetPreviewCalculationsMode()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogEditWrongFormula::GetFormula() const
+void DialogEditWrongFormula::ShowPieceArea(bool show) const
 {
-    return qApp->TrVars()->TryFormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
+    ui->radioButtonPieceArea->setVisible(show);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogEditWrongFormula::GetFormula() const -> QString
+{
+    return VTranslateVars::TryFormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -453,7 +544,7 @@ void DialogEditWrongFormula::InitVariables()
     Measurements();
 
     // clear text filter every time when new radio button selected
-    auto ClearFilterFormulaInputs = [this] () { ui->filterFormulaInputs->clear(); };
+    auto ClearFilterFormulaInputs = [this]() { ui->filterFormulaInputs->clear(); };
 
     connect(ui->radioButtonStandardTable, &QRadioButton::clicked, this, &DialogEditWrongFormula::Measurements);
     connect(ui->radioButtonStandardTable, &QRadioButton::clicked, this, ClearFilterFormulaInputs);
@@ -482,27 +573,56 @@ void DialogEditWrongFormula::InitVariables()
     connect(ui->radioButtonCLength, &QRadioButton::clicked, this, &DialogEditWrongFormula::CurvesCLength);
     connect(ui->radioButtonCLength, &QRadioButton::clicked, this, ClearFilterFormulaInputs);
 
+    connect(ui->radioButtonPieceArea, &QRadioButton::clicked, this, &DialogEditWrongFormula::PieceArea);
+    connect(ui->radioButtonPieceArea, &QRadioButton::clicked, this, ClearFilterFormulaInputs);
+
     connect(ui->radioButtonFunctions, &QRadioButton::clicked, this, &DialogEditWrongFormula::Functions);
     connect(ui->radioButtonFunctions, &QRadioButton::clicked, this, ClearFilterFormulaInputs);
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
+    connect(ui->checkBoxHideEmpty, &QCheckBox::checkStateChanged, this, &DialogEditWrongFormula::Measurements);
+#else
     connect(ui->checkBoxHideEmpty, &QCheckBox::stateChanged, this, &DialogEditWrongFormula::Measurements);
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogEditWrongFormula::SetDescription(const QString &name, qreal value, const QString &unit,
-                                            const QString &description)
+void DialogEditWrongFormula::SetDescription(const QString &name, qreal value, bool specialUnits,
+                                            const QString &description, bool square)
 {
-    const QString desc = QString("%1(%2 %3) - %4").arg(name).arg(value).arg(unit, description);
+    QString unitName = postfix;
+    if (not specialUnits && square)
+    {
+        unitName += QStringLiteral("²");
+    }
+
+    const QString unit = specialUnits ? degreeSymbol : ' ' + unitName;
+    const auto desc = QStringLiteral("%1(%2%3) - %4").arg(name).arg(value).arg(unit, description);
     ui->labelDescription->setText(desc);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogEditWrongFormula::Eval(const FormulaData &formulaData, bool &flag) -> qreal
+{
+    const qreal result = EvalToolFormula(this, formulaData, flag);
+    CheckState(); // Disable Ok and Apply buttons if something wrong.
+    return result;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEditWrongFormula::InitIcons()
+{
+    const auto resource = QStringLiteral("icon");
+
+    ui->label->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/equal.png")));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ShowVariable show variables in list
- * @param var container with variables
+ * @param vars container with variables
  */
-template <class key, class val>
-void DialogEditWrongFormula::ShowVariable(const QMap<key, val> &var)
+template <class T> void DialogEditWrongFormula::ShowVariable(const QList<T> &vars)
 {
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->clearContents();
@@ -510,22 +630,40 @@ void DialogEditWrongFormula::ShowVariable(const QMap<key, val> &var)
     ui->tableWidget->setColumnHidden(ColumnFullName, true);
     ui->labelDescription->setText(QString());
 
-    QMapIterator<key, val> iMap(var);
-    while (iMap.hasNext())
+    const VTranslateVars *trVars = VAbstractApplication::VApp()->TrVars();
+
+    QSet<QString> processedNames;
+
+    for (const auto &var : vars)
     {
-        iMap.next();
-        if (ui->checkBoxHideEmpty->isEnabled() && ui->checkBoxHideEmpty->isChecked() && iMap.value()->IsNotUsed())
+        if (ui->checkBoxHideEmpty->isEnabled() && ui->checkBoxHideEmpty->isChecked() && var->IsNotUsed())
         {
-            continue; //skip this measurement
+            continue; // skip this measurement
         }
-        if (iMap.value()->Filter(toolId) == false)
-        {// If we create this variable don't show
+
+        if (!var->Filter(m_toolId))
+        { // If we create this variable don't show
+            QString name = var->GetName();
+            if (processedNames.contains(name))
+            {
+                name = var->GetAlias();
+                if (name.isEmpty() || processedNames.contains(name))
+                {
+                    continue;
+                }
+            }
+
+            processedNames.insert(name);
+
             ui->tableWidget->setRowCount(ui->tableWidget->rowCount() + 1);
-            QTableWidgetItem *item = new QTableWidgetItem(iMap.key());
-            item->setFont(QFont("Times", 12, QFont::Bold));
-            ui->tableWidget->setItem(ui->tableWidget->rowCount()-1, ColumnName, item);
+            auto *item = new QTableWidgetItem(trVars->VarToUser(name));
+            QFont font = item->font();
+            font.setBold(true);
+            item->setFont(font);
+            ui->tableWidget->setItem(ui->tableWidget->rowCount() - 1, ColumnName, item);
         }
     }
+
     ui->tableWidget->blockSignals(false);
     ui->tableWidget->selectRow(0);
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -534,9 +672,9 @@ void DialogEditWrongFormula::ShowVariable(const QMap<key, val> &var)
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ShowMeasurements show measurements in table
- * @param var container with measurements
+ * @param vars container with measurements
  */
-void DialogEditWrongFormula::ShowMeasurements(const QMap<QString, QSharedPointer<VMeasurement> > &var)
+void DialogEditWrongFormula::ShowMeasurements(const QList<QSharedPointer<VMeasurement>> &vars)
 {
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->clearContents();
@@ -544,37 +682,49 @@ void DialogEditWrongFormula::ShowMeasurements(const QMap<QString, QSharedPointer
     ui->tableWidget->setColumnHidden(ColumnFullName, false);
     ui->labelDescription->setText(QString());
 
-    QMapIterator<QString, QSharedPointer<VMeasurement>> iMap(var);
-    while (iMap.hasNext())
+    for (const auto &var : vars)
     {
-        iMap.next();
-        if (ui->checkBoxHideEmpty->isEnabled() && ui->checkBoxHideEmpty->isChecked() && iMap.value()->IsNotUsed())
+        if (ui->checkBoxHideEmpty->isEnabled() && ui->checkBoxHideEmpty->isChecked() && var->IsNotUsed())
         {
-            continue; //skip this measurement
+            continue; // skip this measurement
         }
-        if (iMap.value()->Filter(toolId) == false)
-        {// If we create this variable don't show
+
+        if (not var->Filter(m_toolId))
+        { // If we create this variable don't show
             ui->tableWidget->setRowCount(ui->tableWidget->rowCount() + 1);
-            QTableWidgetItem *itemName = new QTableWidgetItem(iMap.key());
-            itemName->setFont(QFont("Times", 12, QFont::Bold));
+            auto *itemName = new QTableWidgetItem(var->GetName());
+            QFont fontName = itemName->font();
+            fontName.setBold(true);
+            itemName->setFont(fontName);
             itemName->setToolTip(itemName->text());
 
-            QTableWidgetItem *itemFullName = new QTableWidgetItem();
-            itemFullName->setFont(QFont("Times", 12, QFont::Bold));
-            if (iMap.value()->IsCustom())
+            auto *itemFullName = new QTableWidgetItem();
+            QFont fontFullName = itemName->font();
+            fontFullName.setBold(true);
+            itemFullName->setFont(fontFullName);
+            if (var->IsCustom())
             {
-                itemFullName->setText(iMap.value()->GetGuiText());
+                itemFullName->setText(var->GetGuiText());
             }
             else
             {
-                itemFullName->setText(qApp->TrVars()->GuiText(iMap.value()->GetName()));
+                itemFullName->setText(QString());
+                if (VKnownMeasurementsDatabase *db = VAbstractApplication::VApp()->KnownMeasurementsDatabase())
+                {
+                    VKnownMeasurements const known = db->KnownMeasurements(var->GetKnownMeasurementsId());
+                    if (known.IsValid())
+                    {
+                        itemFullName->setText(known.Measurement(var->GetName()).fullName);
+                    }
+                }
             }
 
             itemFullName->setToolTip(itemFullName->text());
-            ui->tableWidget->setItem(ui->tableWidget->rowCount()-1, ColumnName, itemName);
-            ui->tableWidget->setItem(ui->tableWidget->rowCount()-1, ColumnFullName, itemFullName);
+            ui->tableWidget->setItem(ui->tableWidget->rowCount() - 1, ColumnName, itemName);
+            ui->tableWidget->setItem(ui->tableWidget->rowCount() - 1, ColumnFullName, itemFullName);
         }
     }
+
     ui->tableWidget->blockSignals(false);
     ui->tableWidget->selectRow(0);
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -592,15 +742,38 @@ void DialogEditWrongFormula::ShowFunctions()
     ui->tableWidget->setColumnHidden(ColumnFullName, true);
     ui->labelDescription->setText(QString());
 
-    const QMap<QString, qmu::QmuTranslation> functions = qApp->TrVars()->GetFunctions();
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    const VTranslateVars *trVars = VAbstractApplication::VApp()->TrVars();
+    const QMap<QString, qmu::QmuTranslation> functionsDescriptions = trVars->GetFunctionsDescriptions();
+    const QMap<QString, qmu::QmuTranslation> functions = trVars->GetFunctions();
     QMap<QString, qmu::QmuTranslation>::const_iterator i = functions.constBegin();
     while (i != functions.constEnd())
     {
         ui->tableWidget->setRowCount(ui->tableWidget->rowCount() + 1);
-        QTableWidgetItem *item = new QTableWidgetItem(i.value().translate(qApp->Settings()->GetLocale()));
-        item->setFont(QFont("Times", 12, QFont::Bold));
-        ui->tableWidget->setItem(ui->tableWidget->rowCount()-1, ColumnName, item);
-        item->setToolTip(i.value().getMdisambiguation());
+
+        QString const name = (!settings->IsTranslateFormula()
+                                  ? i.value().getMsourceText()
+                                  : i.value().translate(VAbstractApplication::VApp()->Settings()->GetLocale()));
+
+        auto *item = new QTableWidgetItem(name);
+        item->setData(Qt::UserRole, i.key());
+        QFont font = item->font();
+        font.setBold(true);
+        item->setFont(font);
+        ui->tableWidget->setItem(ui->tableWidget->rowCount() - 1, ColumnName, item);
+
+        if (functionsDescriptions.contains(i.key()))
+        {
+            QString const description =
+                (!settings->IsTranslateFormula() ? functionsDescriptions.value(i.key()).getMsourceText()
+                                                 : functionsDescriptions.value(i.key()).translate(
+                                                       VAbstractApplication::VApp()->Settings()->GetLocale()));
+            item->setToolTip(description);
+        }
+        else
+        {
+            item->setToolTip(i.value().getMdisambiguation());
+        }
         ++i;
     }
 
@@ -614,20 +787,75 @@ void DialogEditWrongFormula::ShowIncrementsInPreviewCalculation(bool show)
 {
     ui->checkBoxHideEmpty->setEnabled(false);
 
-    QMap<QString, QSharedPointer<VIncrement> > increments;
+    QMap<QString, QSharedPointer<VIncrement>> increments;
 
-    const QMap<QString, QSharedPointer<VIncrement> > list = data->DataIncrements();
-    QMap<QString, QSharedPointer<VIncrement> >::const_iterator i = list.constBegin();
+    const QMap<QString, QSharedPointer<VIncrement>> list = m_data->DataIncrements();
+    QMap<QString, QSharedPointer<VIncrement>>::const_iterator i = list.constBegin();
     while (i != list.constEnd())
     {
-        if(i.value()->IsPreviewCalculation() == show)
+        if (i.value()->IsPreviewCalculation() == show)
         {
             increments.insert(i.key(), i.value());
         }
         ++i;
     }
 
-    ShowVariable(increments);
+    QList<QSharedPointer<VIncrement>> vars = increments.values();
+    std::stable_sort(vars.begin(), vars.end(),
+                     [](const QSharedPointer<VIncrement> &obj1, const QSharedPointer<VIncrement> &obj2)
+                     { return obj1->GetIndex() < obj2->GetIndex(); });
+
+    ShowVariable(vars);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEditWrongFormula::SetMeasurementDescription(QTableWidgetItem *item, const QString &name)
+{
+    const QSharedPointer<VMeasurement> stable = m_data->GetVariable<VMeasurement>(name);
+
+    QString description;
+
+    if (!stable->IsCustom())
+    {
+        if (VKnownMeasurementsDatabase *db = VAbstractApplication::VApp()->KnownMeasurementsDatabase())
+        {
+            VKnownMeasurements const known = db->KnownMeasurements(stable->GetKnownMeasurementsId());
+            if (known.IsValid())
+            {
+                description = known.Measurement(stable->GetName()).description;
+            }
+        }
+    }
+    else
+    {
+        description = stable->GetDescription();
+    }
+
+    SetDescription(item->text(), *stable->GetValue(), stable->IsSpecialUnits(), description);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEditWrongFormula::SetPieceAreaDescription(QTableWidgetItem *item, const QString &name)
+{
+    const bool specialUnits = false;
+    const QSharedPointer<VPieceArea> var = m_data->GetVariable<VPieceArea>(name);
+    QString description = tr("Area of piece");
+
+    try
+    {
+        VPiece const piece = m_data->GetPiece(var->GetPieceId());
+        QString const name = piece.GetName();
+        if (not name.isEmpty())
+        {
+            description += QStringLiteral(" '%1'").arg(piece.GetName());
+        }
+    }
+    catch (const VExceptionBadId &)
+    {
+        // do nothing
+    }
+
+    SetDescription(item->text(), *var->GetValue(), specialUnits, description, true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -654,10 +882,11 @@ void DialogEditWrongFormula::FilterVariablesEdited(const QString &filter)
         }
 
         // show rows with matched filter
-        const QList<QTableWidgetItem*> items = ui->tableWidget->findItems(filter, Qt::MatchContains);
-        for (auto item : items)
+        const QList<QTableWidgetItem *> items = ui->tableWidget->findItems(filter, Qt::MatchContains);
+        for (auto *item : items)
         {
-            // If filter is empty findItems() for unknown reason returns nullptr items.
+            // If filter is empty findItems() for unknown reason returns nullptr
+            // items.
             if (item)
             {
                 ui->tableWidget->showRow(item->row());

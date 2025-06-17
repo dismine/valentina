@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef VDXFPAINTDEVICE_H
 #define VDXFPAINTDEVICE_H
 
-#include <qcompilerdetection.h>
 #include <QPaintDevice>
 #include <QSize>
 #include <QString>
@@ -45,35 +44,53 @@ class VDxfPaintDevice : public QPaintDevice
 {
 public:
     VDxfPaintDevice();
-    virtual ~VDxfPaintDevice() override;
-    virtual QPaintEngine *paintEngine() const override;
+    ~VDxfPaintDevice() override;
 
-    QString getFileName() const;
-    void setFileName(const QString &value);
+    auto paintEngine() const -> QPaintEngine * override;
 
-    QSize getSize();
-    void setSize(const QSize &size);
+    auto GetFileName() const -> QString;
+    void SetFileName(const QString &value);
 
-    double getResolution() const;
-    void   setResolution(double dpi);
+    auto GetSize() -> QSize;
+    void SetSize(const QSize &size);
 
-    DRW::Version GetVersion() const;
-    void         SetVersion(DRW::Version version);
+    auto GetResolution() const -> double;
+    void SetResolution(double dpi);
+
+    auto GetVersion() const -> DRW::Version;
+    void SetVersion(DRW::Version version);
 
     void SetBinaryFormat(bool binary);
-    bool IsBinaryFromat() const;
+    auto IsBinaryFromat() const -> bool;
 
-    void setMeasurement(const VarMeasurement &var);
-    void setInsunits(const VarInsunits &var);
+    void SetMeasurement(const VarMeasurement &var);
+    void SetInsunits(const VarInsunits &var);
 
-    bool ExportToAAMA(const QVector<VLayoutPiece> &details) const;
+    auto GetXScale() const -> qreal;
+    void SetXScale(const qreal &xscale);
+
+    auto GetYScale() const -> qreal;
+    void SetYScale(const qreal &yscale);
+
+    void SetBoundaryTogetherWithNotches(bool value);
+    auto IsBoundaryTogetherWithNotches() const -> bool;
+
+    auto DxfApparelCompatibility() const -> DXFApparelCompatibility;
+    void SetDxfApparelCompatibility(DXFApparelCompatibility mode);
+
+    auto ExportToAAMA(const QVector<VLayoutPiece> &details) const -> bool;
+    auto ExportToASTM(const QVector<VLayoutPiece> &details) const -> bool;
+
+    auto ErrorString() const -> QString;
 
 protected:
-    virtual int metric(PaintDeviceMetric metric) const override;
+    auto metric(PaintDeviceMetric metric) const -> int override;
+
 private:
-    Q_DISABLE_COPY(VDxfPaintDevice)
-    VDxfEngine *engine;
-    QString     fileName;
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VDxfPaintDevice) // NOLINT
+    VDxfEngine *m_engine;
+    QString m_fileName{};
 };
 
 #endif // VDXFPAINTDEVICE_H

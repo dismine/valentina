@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -30,76 +30,101 @@
 #define VBANK_H
 
 #include <QHash>
+#include <QLoggingCategory>
+#include <QMap>
 #include <QRectF>
 #include <QVector>
 #include <QtGlobal>
 
+#include "../vmisc/typedef.h"
+#include "vlayoutdef.h"
+#include "vlayoutpiece.h"
+
 // An annoying char define, from the Windows team in <rpcndr.h>
 // #define small char
 // http://stuartjames.info/Journal/c--visual-studio-2012-vs2012--win8--converting-projects-up-some-conflicts-i-found.aspx
-#if defined (Q_OS_WIN) && defined (Q_CC_MSVC)
+#if defined(Q_OS_WIN) && defined(Q_CC_MSVC)
 #pragma push_macro("small")
 #undef small
 #endif
 
-class VLayoutPiece;
-
-enum class Cases : char { CaseThreeGroup = 0, CaseTwoGroup, CaseDesc, UnknownCase};
+Q_DECLARE_LOGGING_CATEGORY(lBank) // NOLINT
 
 class VBank
 {
+    Q_DECLARE_TR_FUNCTIONS(VBank) // NOLINT
+
 public:
     VBank();
+    ~VBank() = default;
 
-    qreal GetLayoutWidth() const;
-    void SetLayoutWidth(const qreal &value);
+    auto GetLayoutWidth() const -> qreal;
+    void SetLayoutWidth(qreal value);
+
+    auto GetManualPriority() const -> bool;
+    void SetManualPriority(bool value);
+
+    auto IsNestQuantity() const -> bool;
+    void SetNestQuantity(bool value);
 
     void SetDetails(const QVector<VLayoutPiece> &details);
-    int  GetTiket();
-    VLayoutPiece GetDetail(int i) const;
+    auto GetNext() -> int;
+    auto GetDetail(int i) const -> VLayoutPiece;
 
     void Arranged(int i);
     void NotArranged(int i);
 
-    bool Prepare();
+    auto PrepareUnsorted() -> bool;
+    auto PrepareDetails(bool togetherWithNotches) -> bool;
     void Reset();
     void SetCaseType(Cases caseType);
 
-    int AllDetailsCount() const;
-    int LeftArrange() const;
-    int ArrangedCount() const;
+    auto AllDetailsCount() const -> vsizetype;
+    auto LeftToArrange() const -> vsizetype;
+    auto FailedToArrange() const -> vsizetype;
 
-    qreal GetBiggestDiagonal() const;
+    auto GetBiggestDiagonal() const -> qreal;
+
+    auto IsRotationNeeded() const -> bool;
 
 private:
-    Q_DISABLE_COPY(VBank)
-    QVector<VLayoutPiece> details;
-    QHash<int, qint64> unsorted;
+    Q_DISABLE_COPY_MOVE(VBank) // NOLINT
+    QVector<VLayoutPiece> details{};
 
-    QHash<int, qint64> big;
-    QHash<int, qint64> middle;
-    QHash<int, qint64> small;
+    QMap<uint, QHash<int, qint64>> unsorted{};
+    QMap<uint, QHash<int, qint64>> big{};
+    QMap<uint, QHash<int, qint64>> middle{};
+    QMap<uint, QHash<int, qint64>> small{};
+    QMap<uint, QMultiMap<qint64, int>> desc{};
 
-    qreal layoutWidth;
+    QVector<uint> groups{};
+    QVector<vidtype> arranged{};
 
-    Cases caseType;
-    bool prepare;
-    qreal diagonal;
+    qreal layoutWidth{0};
+
+    Cases caseType{Cases::CaseDesc};
+    bool prepare{false};
+    qreal diagonal{0};
+    bool m_nestQuantity{false};
+    bool m_manualPriority{false};
 
     void PrepareGroup();
 
-    void PrepareThreeGroups();
-    void PrepareTwoGroups();
-    void PrepareDescGroup();
+    void PrepareThreeGroups(uint priority);
+    void PrepareTwoGroups(uint priority);
+    void PrepareDescGroup(uint priority);
 
-    int GetNextThreeGroups() const;
-    int GetNextTwoGroups() const;
-    int GetNextDescGroup() const;
+    auto GetNextThreeGroups(uint priority) const -> int;
+    auto GetNextTwoGroups(uint priority) const -> int;
+    auto GetNextDescGroup(uint priority) const -> int;
 
-    void SqMaxMin(qint64 &sMax, qint64 &sMin) const;
+    void SqMaxMin(qint64 &sMax, qint64 &sMin, uint priority) const;
+
+    auto ArrangedDetail(QMap<uint, QHash<int, qint64>> &container, int i) -> bool;
+    auto ArrangedDetail(QMap<uint, QMultiMap<qint64, int>> &container, int i) -> bool;
 };
 
-#if defined (Q_OS_WIN) && defined (Q_CC_MSVC)
+#if defined(Q_OS_WIN) && defined(Q_CC_MSVC)
 #pragma pop_macro("small")
 #endif
 

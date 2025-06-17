@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -27,26 +27,16 @@
  *************************************************************************/
 
 #include "vistoolpiece.h"
-#include "../vpatterndb/vpiecepath.h"
 #include "../vgeometry/vpointf.h"
+#include "../vpatterndb/vpiecepath.h"
 #include "../vwidgets/scalesceneitems.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPiece::VisToolPiece(const VContainer *data, QGraphicsItem *parent)
-    : VisPath(data, parent),
-      m_points(),
-      m_curves(),
-      m_line1(nullptr),
-      m_line2(nullptr),
-      m_piece(),
-      m_pieceCached(false),
-      m_cachedMainPath(),
-      m_cachedNodes(),
-      m_cachedMainPathPoints(),
-      m_cachedCurvesPath()
+  : VisPath(data, parent)
 {
-    m_line1 = InitItem<VScaledLine>(supportColor, this);
-    m_line2 = InitItem<VScaledLine>(supportColor, this);
+    m_line1 = InitItem<VScaledLine>(VColorRole::VisSupportColor, this);
+    m_line2 = InitItem<VScaledLine>(VColorRole::VisSupportColor, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -58,46 +48,51 @@ void VisToolPiece::RefreshGeometry()
     {
         if (not m_pieceCached)
         {
-            m_cachedNodes = m_piece.MainPathNodePoints(Visualization::data);
-            if (mode == Mode::Creation)
+            m_cachedNodes = m_piece.MainPathNodePoints(GetData());
+            if (GetMode() == Mode::Creation)
             {
-                m_cachedCurvesPath = m_piece.CurvesPainterPath(Visualization::data);
-                m_cachedMainPathPoints = m_piece.MainPathPoints(Visualization::data);
+                m_cachedCurvesPath = m_piece.CurvesPainterPath(GetData());
+                CastTo(m_piece.MainPathPoints(GetData()), m_cachedMainPathPoints);
                 m_cachedMainPath = VPiece::MainPathPath(m_cachedMainPathPoints);
             }
             else
             {
-                m_cachedMainPath = m_piece.MainPathPath(Visualization::data);
+                m_cachedMainPath = m_piece.MainPathPath(GetData());
             }
             m_pieceCached = true;
         }
 
-        DrawPath(this, m_cachedMainPath, mainColor, Qt::SolidLine, Qt::RoundCap);
+        DrawPath(this, m_cachedMainPath, Qt::SolidLine, Qt::RoundCap);
 
         for (int i = 0; i < m_cachedNodes.size(); ++i)
         {
-            VScaledEllipse *point = GetPoint(static_cast<quint32>(i), supportColor);
-            DrawPoint(point, m_cachedNodes.at(i).toQPointF(), supportColor);
+            VScaledEllipse *point = GetPoint(static_cast<quint32>(i), VColorRole::VisSupportColor);
+            DrawPoint(point, m_cachedNodes.at(i).toQPointF());
         }
 
-        if (mode == Mode::Creation)
+        if (GetMode() == Mode::Creation)
         {
             for (int i = 0; i < m_cachedCurvesPath.size(); ++i)
             {
-                VCurvePathItem *path = GetCurve(static_cast<quint32>(i), supportColor);
-                DrawPath(path, m_cachedCurvesPath.at(i), supportColor);
+                VCurvePathItem *path = GetCurve(static_cast<quint32>(i), VColorRole::VisSupportColor);
+                DrawPath(path, m_cachedCurvesPath.at(i));
             }
 
-            DrawLine(m_line1, QLineF(m_cachedMainPathPoints.first(), Visualization::scenePos), supportColor,
-                     Qt::DashLine);
+            DrawLine(m_line1, QLineF(m_cachedMainPathPoints.constFirst(), ScenePos()), Qt::DashLine);
 
             if (m_cachedMainPathPoints.size() > 1)
             {
-                DrawLine(m_line2, QLineF(m_cachedMainPathPoints.last(), Visualization::scenePos), supportColor,
-                         Qt::DashLine);
+                DrawLine(m_line2, QLineF(m_cachedMainPathPoints.constLast(), ScenePos()), Qt::DashLine);
             }
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolPiece::VisualMode(quint32 id)
+{
+    Q_UNUSED(id)
+    StartVisualMode();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -108,15 +103,15 @@ void VisToolPiece::SetPiece(const VPiece &piece)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VScaledEllipse *VisToolPiece::GetPoint(quint32 i, const QColor &color)
+auto VisToolPiece::GetPoint(quint32 i, VColorRole role) -> VScaledEllipse *
 {
-    return GetPointItem(m_points, i, color, this);
+    return GetPointItem(m_points, i, role, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VCurvePathItem *VisToolPiece::GetCurve(quint32 i, const QColor &color)
+auto VisToolPiece::GetCurve(quint32 i, VColorRole role) -> VCurvePathItem *
 {
-    return GetCurveItem(m_curves, i, color, this);
+    return GetCurveItem(m_curves, i, role, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -132,7 +127,7 @@ void VisToolPiece::HideAllItems()
         m_line2->setVisible(false);
     }
 
-    for(QGraphicsEllipseItem *item : qAsConst(m_points))
+    for (QGraphicsEllipseItem *item : qAsConst(m_points))
     {
         if (item)
         {
@@ -140,7 +135,7 @@ void VisToolPiece::HideAllItems()
         }
     }
 
-    for(QGraphicsPathItem *item : qAsConst(m_curves))
+    for (QGraphicsPathItem *item : qAsConst(m_curves))
     {
         if (item)
         {

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef ADDTOCALC_H
 #define ADDTOCALC_H
 
-#include <qcompilerdetection.h>
 #include <QDomElement>
 #include <QMetaObject>
 #include <QObject>
@@ -40,18 +39,22 @@
 
 class AddToCalc : public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     AddToCalc(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
-    virtual ~AddToCalc() =default;
-    virtual void undo() override;
-    virtual void redo() override;
+    ~AddToCalc() override = default;
+    void undo() override;
+    void redo() override;
+
 protected:
-    virtual void RedoFullParsing() override;
+    void RedoFullParsing() override;
+
 private:
-    Q_DISABLE_COPY(AddToCalc)
-    const QString     nameActivDraw;
-    quint32           cursor;
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(AddToCalc) // NOLINT
+    const QString nameActivDraw;
+    quint32 cursor;
 };
 
 #endif // ADDTOCALC_H

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -32,7 +32,6 @@
 
 #include "../ifc/xml/vabstractpattern.h"
 #include "../tools/drawTools/toolcurve/vtoolsplinepath.h"
-#include "../vmisc/logging.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/def.h"
 #include "../vwidgets/vmaingraphicsview.h"
@@ -45,7 +44,7 @@ MoveSplinePath::MoveSplinePath(VAbstractPattern *doc, const VSplinePath &oldSplP
     : VUndoCommand(QDomElement(), doc, parent),
       oldSplinePath(oldSplPath),
       newSplinePath(newSplPath),
-      scene(qApp->getCurrentScene())
+      scene(VAbstractValApplication::VApp()->getCurrentScene())
 {
     setText(tr("move spline path"));
     nodeId = id;
@@ -70,9 +69,9 @@ void MoveSplinePath::redo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool MoveSplinePath::mergeWith(const QUndoCommand *command)
+auto MoveSplinePath::mergeWith(const QUndoCommand *command) -> bool
 {
-    const MoveSplinePath *moveCommand = static_cast<const MoveSplinePath *>(command);
+    const auto *moveCommand = static_cast<const MoveSplinePath *>(command);
     SCASSERT(moveCommand != nullptr)
     const quint32 id = moveCommand->getSplinePathId();
 
@@ -86,7 +85,7 @@ bool MoveSplinePath::mergeWith(const QUndoCommand *command)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int MoveSplinePath::id() const
+auto MoveSplinePath::id() const -> int
 {
     return static_cast<int>(UndoCommand::MoveSplinePath);
 }
@@ -94,7 +93,7 @@ int MoveSplinePath::id() const
 //---------------------------------------------------------------------------------------------------------------------
 void MoveSplinePath::Do(const VSplinePath &splPath)
 {
-    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagSpline);
+    QDomElement domElement = doc->FindElementById(nodeId, VAbstractPattern::TagSpline);
     if (domElement.isElement())
     {
         VToolSplinePath::UpdatePathPoints(doc, domElement, splPath);

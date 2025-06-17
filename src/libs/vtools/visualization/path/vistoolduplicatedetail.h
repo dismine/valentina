@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -33,36 +33,47 @@
 
 class VisToolDuplicateDetail : public VisPath
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
-    VisToolDuplicateDetail(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolDuplicateDetail() = default;
+    explicit VisToolDuplicateDetail(const VContainer *data, QGraphicsItem *parent = nullptr);
+    ~VisToolDuplicateDetail() override = default;
 
-    qreal Mx() const;
-    qreal My() const;
+    auto Mx() const -> qreal;
+    auto My() const -> qreal;
 
-    virtual void RefreshGeometry() override;
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolDuplicateDetail)};
+    void RefreshGeometry() override;
+    void VisualMode(quint32 id) override;
+
+    void SetPieceId(quint32 newPieceId);
+
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ToolDuplicateDetail)};
 private:
-    Q_DISABLE_COPY(VisToolDuplicateDetail)
-    QPointF m_start;
-    bool m_started;
-    QPointF m_diff;
+    Q_DISABLE_COPY_MOVE(VisToolDuplicateDetail) // NOLINT
+    QPointF m_start{};
+    bool    m_started{false};
+    QPointF m_diff{};
+    quint32 m_pieceId{NULL_ID};
 
-    QPainterPath PiecePath(const VPiece &piece) const;
+    auto PiecePath(const VPiece &piece) const -> QPainterPath;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline qreal VisToolDuplicateDetail::Mx() const
+inline auto VisToolDuplicateDetail::Mx() const -> qreal
 {
     return m_diff.x();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline qreal VisToolDuplicateDetail::My() const
+inline auto VisToolDuplicateDetail::My() const -> qreal
 {
     return m_diff.y();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolDuplicateDetail::SetPieceId(quint32 newPieceId)
+{
+    m_pieceId = newPieceId;
 }
 
 #endif // VISTOOLDUPLICATEDETAIL_H

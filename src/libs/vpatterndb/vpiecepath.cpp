@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -27,87 +27,115 @@
  *************************************************************************/
 
 #include "vpiecepath.h"
-#include "vpiecepath_p.h"
-#include "vcontainer.h"
-#include "../vgeometry/vpointf.h"
-#include "../vlayout/vabstractpiece.h"
-#include "calculator.h"
-#include "../vmisc/vabstractapplication.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
+#include "../vgeometry/vpointf.h"
+#include "../vmisc/compatibility.h"
+#include "../vmisc/vabstractvalapplication.h"
+#include "calculator.h"
+#include "vcontainer.h"
+#include "vpiecepath_p.h"
 
 #include <QPainterPath>
+#include <qnumeric.h>
 
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
-VSAPoint CurvePoint(VSAPoint candidate, const VContainer *data, const VPieceNode &node,
-                    const QVector<QPointF> &curvePoints)
+auto CurvePoint(VSAPoint candidate, const VContainer *data, const VPieceNode &node, const QVector<QPointF> &curvePoints)
+    -> VSAPoint
 {
     if (node.GetTypeTool() == Tool::NodePoint)
     {
-        const QPointF p = static_cast<QPointF>(*data->GeometricObject<VPointF>(node.GetId()));
+        const auto p = static_cast<QPointF>(*data->GeometricObject<VPointF>(node.GetId()));
         if (VAbstractCurve::IsPointOnCurve(curvePoints, p))
         {
             candidate = VSAPoint(p);
             candidate.SetSAAfter(node.GetSAAfter(data, *data->GetPatternUnit()));
             candidate.SetSABefore(node.GetSABefore(data, *data->GetPatternUnit()));
             candidate.SetAngleType(node.GetAngleType());
+            candidate.SetTurnPoint(node.IsTurnPoint());
         }
     }
     return candidate;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSAPoint CurveStartPoint(VSAPoint candidate, const VContainer *data, const VPieceNode &node,
-                         const QVector<QPointF> &curvePoints)
+auto CurveStartPoint(VSAPoint candidate, const VContainer *data, const VPieceNode &node,
+                     const QVector<QPointF> &curvePoints) -> VSAPoint
 {
     if (node.GetTypeTool() == Tool::NodePoint)
     {
         return CurvePoint(candidate, data, node, curvePoints);
     }
-    else
-    {
-        // See issue #620. Detail path not correct. Previous curve also should cut segment.
-        const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(node.GetId());
 
-        const QVector<QPointF> points = curve->GetPoints();
-        if (not points.isEmpty())
-        {
-            QPointF end; // Last point for this curve show start of next segment
-            node.GetReverse() ? end = points.first() : end = points.last();
-            if (VAbstractCurve::IsPointOnCurve(curvePoints, end))
-            {
-                candidate = VSAPoint(end);
-            }
-        }
+    // See issue #620. Detail path not correct. Previous curve also should cut segment.
+    const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(node.GetId());
+    const QVector<QPointF> points = curve->GetPoints();
+
+    if (points.isEmpty())
+    {
+        return candidate;
     }
+
+    QVector<QPointF> intersections;
+    for (auto i = 0; i < curvePoints.count() - 1; ++i)
+    {
+        QLineF const segment(curvePoints.at(i), curvePoints.at(i + 1));
+        intersections << VAbstractCurve::CurveIntersectLine(points, segment);
+    }
+
+    for (auto &p : intersections)
+    {
+        if (VFuzzyComparePoints(p, curvePoints.constFirst()) || VFuzzyComparePoints(p, curvePoints.constLast()))
+        {
+            continue;
+        }
+
+        candidate = VSAPoint(p);
+        candidate.SetTurnPoint(true);
+        break;
+    }
+
     return candidate;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSAPoint CurveEndPoint(VSAPoint candidate, const VContainer *data, const VPieceNode &node,
-                       const QVector<QPointF> &curvePoints)
+auto CurveEndPoint(VSAPoint candidate, const VContainer *data, const VPieceNode &node,
+                   const QVector<QPointF> &curvePoints) -> VSAPoint
 {
     if (node.GetTypeTool() == Tool::NodePoint)
     {
         return CurvePoint(candidate, data, node, curvePoints);
     }
-    else
-    {
-        // See issue #620. Detail path not correct. Previous curve also should cut segment.
-        const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(node.GetId());
 
-        const QVector<QPointF> points = curve->GetPoints();
-        if (not points.isEmpty())
-        {
-            QPointF begin;// First point for this curve show finish of previous segment
-            node.GetReverse() ? begin = points.last() : begin = points.first();
-            if (VAbstractCurve::IsPointOnCurve(curvePoints, begin))
-            {
-                candidate = VSAPoint(begin);
-            }
-        }
+    // See issue #620. Detail path not correct. Previous curve also should cut segment.
+    const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(node.GetId());
+    const QVector<QPointF> points = curve->GetPoints();
+
+    if (points.isEmpty())
+    {
+        return candidate;
     }
+
+    QVector<QPointF> intersections;
+    for (auto i = 0; i < curvePoints.count() - 1; ++i)
+    {
+        QLineF const segment(curvePoints.at(i), curvePoints.at(i + 1));
+        intersections << VAbstractCurve::CurveIntersectLine(points, segment);
+    }
+
+    for (auto &p : intersections)
+    {
+        if (VFuzzyComparePoints(p, curvePoints.constFirst()) || VFuzzyComparePoints(p, curvePoints.constLast()))
+        {
+            continue;
+        }
+
+        candidate = VSAPoint(p);
+        candidate.SetTurnPoint(true);
+        break;
+    }
+
     return candidate;
 }
 
@@ -118,7 +146,7 @@ VSAPoint CurveEndPoint(VSAPoint candidate, const VContainer *data, const VPieceN
  * @param id object (arc, point, spline, splinePath) id.
  * @return index in list or -1 id can't find.
  */
-int IndexOfNode(const QVector<VPieceNode> &list, quint32 id)
+auto IndexOfNode(const QVector<VPieceNode> &list, quint32 id) -> int
 {
     for (int i = 0; i < list.size(); ++i)
     {
@@ -127,35 +155,21 @@ int IndexOfNode(const QVector<VPieceNode> &list, quint32 id)
             return i;
         }
     }
-    qDebug()<<"Can't find node.";
+    qDebug() << "Can't find node.";
     return -1;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath MakePainterPath(const QVector<QPointF> &points)
-{
-    QPainterPath path;
-
-    if (not points.isEmpty())
-    {
-        path.addPolygon(QPolygonF(points));
-        path.setFillRule(Qt::WindingFill);
-    }
-
-    return path;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal FindTipDirection(const QVector<QPointF> &points)
+template <class T> auto FindTipDirection(const QVector<T> &points) -> qreal
 {
     if (points.size() <= 1)
     {
         return 0;
     }
 
-    const QPointF first = points.first();
+    const T &first = points.constFirst();
 
-    for(int i = 1; i < points.size(); ++i)
+    for (int i = 1; i < points.size(); ++i)
     {
         if (first != points.at(i))
         {
@@ -169,47 +183,68 @@ qreal FindTipDirection(const QVector<QPointF> &points)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool IntersectionWithCuttingCountour(const QVector<QPointF> &cuttingPath, const QVector<QPointF> &points,
-                                     QPointF *firstConnection)
+auto IntersectionWithCuttingContour(const QVector<QPointF> &cuttingPath, const QVector<VLayoutPoint> &points,
+                                    QPointF *connection) -> bool
 {
     if (points.size() <= 1)
     {
         return false;
     }
 
-    const QPointF first = points.first();
+    const QPointF &first = points.constFirst();
 
     if (VAbstractCurve::IsPointOnCurve(cuttingPath, first))
-    { // Point is already part of a cutting countour
-        *firstConnection = first;
+    { // Point is already part of a cutting contour
+        *connection = first;
         return true;
     }
-    else
+
+    return VAbstractCurve::CurveIntersectAxis(first, FindTipDirection(points), cuttingPath, connection);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class T>
+void AppendCurveSegment(QVector<T> &points, QVector<QPointF> &segment, const VSAPoint &begin, const VSAPoint &end)
+{
+    points.reserve(points.size() + segment.size());
+
+    for (int i = 0; i < segment.size(); ++i)
     {
-        return VAbstractCurve::CurveIntersectAxis(first, FindTipDirection(points), cuttingPath, firstConnection);
+        VLayoutPoint lp(segment.at(i));
+        if (i == 0)
+        {
+            lp.SetTurnPoint(VFuzzyComparePoints(lp, begin) ? begin.TurnPoint() : true);
+        }
+        else if (i == segment.size() - 1)
+        {
+            lp.SetTurnPoint(VFuzzyComparePoints(lp, end) ? end.TurnPoint() : true);
+        }
+
+        lp.SetCurvePoint(true);
+        points.append(lp);
     }
 }
-}
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VPiecePath::VPiecePath()
-    : d(new VPiecePathData)
-{}
+  : d(new VPiecePathData)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VPiecePath::VPiecePath(PiecePathType type)
-    : d(new VPiecePathData(type))
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VPiecePath::VPiecePath(const VPiecePath &path)
-    : d (path.d)
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VPiecePath &VPiecePath::operator=(const VPiecePath &path)
+  : d(new VPiecePathData(type))
 {
-    if ( &path == this )
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+COPY_CONSTRUCTOR_IMPL(VPiecePath)
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiecePath::operator=(const VPiecePath &path) -> VPiecePath &
+{
+    if (&path == this)
     {
         return *this;
     }
@@ -218,8 +253,20 @@ VPiecePath &VPiecePath::operator=(const VPiecePath &path)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPiecePath::~VPiecePath()
-{}
+VPiecePath::VPiecePath(VPiecePath &&path) noexcept
+  : d(std::move(path.d))
+{
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiecePath::operator=(VPiecePath &&path) noexcept -> VPiecePath &
+{
+    std::swap(d, path.d);
+    return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPiecePath::~VPiecePath() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPiecePath::Append(const VPieceNode &node)
@@ -234,25 +281,25 @@ void VPiecePath::Clear()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qint32 VPiecePath::CountNodes() const
+auto VPiecePath::CountNodes() const -> vsizetype
 {
     return d->m_nodes.size();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceNode &VPiecePath::operator[](int indx)
+auto VPiecePath::operator[](vsizetype indx) -> VPieceNode &
 {
     return d->m_nodes[indx];
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const VPieceNode &VPiecePath::at(int indx) const
+auto VPiecePath::at(vsizetype indx) const -> const VPieceNode &
 {
     return d->m_nodes.at(indx);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VPieceNode> VPiecePath::GetNodes() const
+auto VPiecePath::GetNodes() const -> QVector<VPieceNode>
 {
     return d->m_nodes;
 }
@@ -264,7 +311,7 @@ void VPiecePath::SetNodes(const QVector<VPieceNode> &nodes)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PiecePathType VPiecePath::GetType() const
+auto VPiecePath::GetType() const -> PiecePathType
 {
     return d->m_type;
 }
@@ -276,7 +323,7 @@ void VPiecePath::SetType(PiecePathType type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPiecePath::GetName() const
+auto VPiecePath::GetName() const -> QString
 {
     return d->m_name;
 }
@@ -288,7 +335,7 @@ void VPiecePath::SetName(const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Qt::PenStyle VPiecePath::GetPenType() const
+auto VPiecePath::GetPenType() const -> Qt::PenStyle
 {
     return d->m_penType;
 }
@@ -300,7 +347,7 @@ void VPiecePath::SetPenType(const Qt::PenStyle &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPiecePath::IsCutPath() const
+auto VPiecePath::IsCutPath() const -> bool
 {
     return d->m_cut;
 }
@@ -312,7 +359,7 @@ void VPiecePath::SetCutPath(bool cut)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPiecePath::GetVisibilityTrigger() const
+auto VPiecePath::GetVisibilityTrigger() const -> QString
 {
     return d->m_visibilityTrigger;
 }
@@ -324,101 +371,85 @@ void VPiecePath::SetVisibilityTrigger(const QString &formula)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPiecePath::SetFirstToCuttingCountour(bool value)
+void VPiecePath::SetFirstToCuttingContour(bool value)
 {
-    d->m_firstToCuttingCountour = value;
+    d->m_firstToCuttingContour = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPiecePath::IsFirstToCuttingCountour() const
+auto VPiecePath::IsFirstToCuttingContour() const -> bool
 {
-    return d->m_firstToCuttingCountour;
+    return d->m_firstToCuttingContour;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPiecePath::SetLastToCuttingCountour(bool value)
+void VPiecePath::SetLastToCuttingContour(bool value)
 {
-    d->m_lastToCuttingCountour = value;
+    d->m_lastToCuttingContour = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPiecePath::IsLastToCuttingCountour() const
+auto VPiecePath::IsLastToCuttingContour() const -> bool
 {
-    return d->m_lastToCuttingCountour;
+    return d->m_lastToCuttingContour;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VPiecePath::PathPoints(const VContainer *data, const QVector<QPointF> &cuttingPath) const
+void VPiecePath::SetNotMirrored(bool value)
 {
-    QVector<QPointF> points;
-    for (int i = 0; i < CountNodes(); ++i)
-    {
-        if (at(i).IsExcluded())
-        {
-            continue;// skip excluded node
-        }
+    d->m_notMirrored = value;
+}
 
-        switch (at(i).GetTypeTool())
-        {
-            case (Tool::NodePoint):
-            {
-                const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(at(i).GetId());
-                points.append(static_cast<QPointF>(*point));
-            }
-            break;
-            case (Tool::NodeArc):
-            case (Tool::NodeElArc):
-            case (Tool::NodeSpline):
-            case (Tool::NodeSplinePath):
-            {
-                const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(at(i).GetId());
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiecePath::IsNotMirrored() const -> bool
+{
+    return d->m_notMirrored;
+}
 
-                const QPointF begin = StartSegment(data, i, at(i).GetReverse());
-                const QPointF end = EndSegment(data, i, at(i).GetReverse());
-
-                points << curve->GetSegmentPoints(begin, end, at(i).GetReverse());
-            }
-            break;
-            default:
-                qDebug()<<"Get wrong tool type. Ignore."<< static_cast<char>(at(i).GetTypeTool());
-                break;
-        }
-    }
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiecePath::PathPoints(const VContainer *data, const QVector<QPointF> &cuttingPath) const -> QVector<VLayoutPoint>
+{
+    QVector<VLayoutPoint> points = NodesToPoints(data, d->m_nodes, GetName());
 
     if (GetType() == PiecePathType::InternalPath && not cuttingPath.isEmpty() && points.size() > 1)
     {
-        QVector<QPointF> extended = points;
+        QVector<VLayoutPoint> extended = points;
 
-        if (IsFirstToCuttingCountour())
+        if (IsFirstToCuttingContour())
         {
-            QPointF firstConnection;
-            if (IntersectionWithCuttingCountour(cuttingPath, points, &firstConnection))
+            VLayoutPoint firstConnection;
+            if (IntersectionWithCuttingContour(cuttingPath, points, &firstConnection))
             {
+                firstConnection.SetTurnPoint(true);
                 extended.prepend(firstConnection);
             }
             else
             {
                 const QString errorMsg = QObject::tr("Error in internal path '%1'. There is no intersection of first "
-                                                     "point with cutting countour")
-                        .arg(GetName());
-                qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) : qWarning() << errorMsg;
+                                                     "point with cutting contour")
+                                             .arg(GetName());
+                VAbstractApplication::VApp()->IsPedantic()
+                    ? throw VExceptionObjectError(errorMsg)
+                    : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
             }
         }
 
-        if (IsLastToCuttingCountour())
+        if (IsLastToCuttingContour())
         {
-            QPointF lastConnection;
-            if (IntersectionWithCuttingCountour(cuttingPath, VGObject::GetReversePoints(points),
-                                                &lastConnection))
+            VLayoutPoint lastConnection;
+            if (IntersectionWithCuttingContour(cuttingPath, Reverse(points), &lastConnection))
             {
+                lastConnection.SetTurnPoint(true);
                 extended.append(lastConnection);
             }
             else
             {
                 const QString errorMsg = QObject::tr("Error in internal path '%1'. There is no intersection of last "
-                                                     "point with cutting countour")
-                        .arg(GetName());
-                qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) : qWarning() << errorMsg;
+                                                     "point with cutting contour")
+                                             .arg(GetName());
+                VAbstractApplication::VApp()->IsPedantic()
+                    ? throw VExceptionObjectError(errorMsg)
+                    : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
             }
         }
 
@@ -429,7 +460,7 @@ QVector<QPointF> VPiecePath::PathPoints(const VContainer *data, const QVector<QP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VPointF> VPiecePath::PathNodePoints(const VContainer *data, bool showExcluded) const
+auto VPiecePath::PathNodePoints(const VContainer *data, bool showExcluded) const -> QVector<VPointF>
 {
     QVector<VPointF> points;
     for (int i = 0; i < CountNodes(); ++i)
@@ -458,14 +489,14 @@ QVector<VPointF> VPiecePath::PathNodePoints(const VContainer *data, bool showExc
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QVector<QPointF> > VPiecePath::PathCurvePoints(const VContainer *data) const
+auto VPiecePath::PathCurvePoints(const VContainer *data) const -> QVector<QVector<QPointF>>
 {
-    QVector<QVector<QPointF> > curves;
+    QVector<QVector<QPointF>> curves;
     for (int i = 0; i < CountNodes(); ++i)
     {
         if (at(i).IsExcluded())
         {
-            continue;// skip excluded node
+            continue; // skip excluded node
         }
 
         switch (at(i).GetTypeTool())
@@ -477,10 +508,10 @@ QVector<QVector<QPointF> > VPiecePath::PathCurvePoints(const VContainer *data) c
             {
                 const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(at(i).GetId());
 
-                const QPointF begin = StartSegment(data, i, at(i).GetReverse());
-                const QPointF end = EndSegment(data, i, at(i).GetReverse());
+                const QPointF begin = StartSegment(data, i).ToQPointF();
+                const QPointF end = EndSegment(data, i).ToQPointF();
 
-                curves.append(curve->GetSegmentPoints(begin, end, at(i).GetReverse()));
+                curves.append(curve->GetSegmentPoints(begin, end, at(i).GetReverse(), GetName()));
                 break;
             }
             case (Tool::NodePoint):
@@ -493,14 +524,19 @@ QVector<QVector<QPointF> > VPiecePath::PathCurvePoints(const VContainer *data) c
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VSAPoint> VPiecePath::SeamAllowancePoints(const VContainer *data, qreal width, bool reverse) const
+auto VPiecePath::SeamAllowancePoints(const VContainer *data, qreal width, bool reverse) const -> QVector<VSAPoint>
 {
     SCASSERT(data != nullptr);
 
     QVector<VSAPoint> pointsEkv;
-    for (int i = 0; i< d->m_nodes.size(); ++i)
+    for (int i = 0; i < d->m_nodes.size(); ++i)
     {
         const VPieceNode &node = d->m_nodes.at(i);
+        if (node.IsExcluded())
+        {
+            continue; // skip excluded node
+        }
+
         switch (node.GetTypeTool())
         {
             case (Tool::NodePoint):
@@ -514,37 +550,41 @@ QVector<VSAPoint> VPiecePath::SeamAllowancePoints(const VContainer *data, qreal 
             case (Tool::NodeSplinePath):
             {
                 const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(node.GetId());
-                pointsEkv += CurveSeamAllowanceSegment(data, d->m_nodes, curve, i, node.GetReverse(), width);
+                pointsEkv += CurveSeamAllowanceSegment(data, d->m_nodes, curve, i, node.GetReverse(), width, QLineF(),
+                                                       GetName());
             }
             break;
             default:
-                qDebug()<<"Get wrong tool type. Ignore."<< static_cast<char>(node.GetTypeTool());
+                qDebug() << "Get wrong tool type. Ignore." << static_cast<char>(node.GetTypeTool());
                 break;
         }
     }
 
     if (reverse)
     {
-        pointsEkv = VGObject::GetReversePoints(pointsEkv);
+        pointsEkv = Reverse(pointsEkv);
     }
 
     return pointsEkv;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VPiecePath::PainterPath(const VContainer *data, const QVector<QPointF> &cuttingPath) const
+auto VPiecePath::PainterPath(const VContainer *data, const QVector<QPointF> &cuttingPath) const -> QPainterPath
 {
-    return MakePainterPath(PathPoints(data, cuttingPath));
+    QVector<VLayoutPoint> const points = PathPoints(data, cuttingPath);
+    QVector<QPointF> casted;
+    CastTo(points, casted);
+    return MakePainterPath(casted);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPainterPath> VPiecePath::CurvesPainterPath(const VContainer *data) const
+auto VPiecePath::CurvesPainterPath(const VContainer *data) const -> QVector<QPainterPath>
 {
-    const QVector<QVector<QPointF> > curves = PathCurvePoints(data);
+    const QVector<QVector<QPointF>> curves = PathCurvePoints(data);
     QVector<QPainterPath> paths;
     paths.reserve(curves.size());
 
-    for(auto &curve : curves)
+    for (const auto &curve : curves)
     {
         paths.append(MakePainterPath(curve));
     }
@@ -552,27 +592,31 @@ QVector<QPainterPath> VPiecePath::CurvesPainterPath(const VContainer *data) cons
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSAPoint VPiecePath::StartSegment(const VContainer *data, const QVector<VPieceNode> &nodes, int i, bool reverse)
+auto VPiecePath::StartSegment(const VContainer *data, const QVector<VPieceNode> &nodes, vsizetype i) -> VSAPoint
 {
-    if (i < 0 || i > nodes.size()-1)
+    if (i < 0 || i > nodes.size() - 1)
     {
-        return VSAPoint();
+        return {};
     }
 
     const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(nodes.at(i).GetId());
 
-    const QVector<QPointF> points = curve->GetPoints();
+    QVector<QPointF> points = curve->GetPoints();
     if (points.isEmpty())
     {
-        return VSAPoint();
+        return {};
     }
 
-    VSAPoint begin;
-    reverse ? begin = VSAPoint(points.last()) : begin = VSAPoint(points.first());
+    if (nodes.at(i).GetReverse())
+    {
+        points = Reverse(points);
+    }
+
+    VSAPoint begin(points.constFirst());
 
     if (nodes.size() > 1)
     {
-        const int index = FindInLoopNotExcludedUp(i, nodes);
+        const vsizetype index = FindInLoopNotExcludedUp(i, nodes);
 
         if (index != i && index != -1)
         {
@@ -583,27 +627,31 @@ VSAPoint VPiecePath::StartSegment(const VContainer *data, const QVector<VPieceNo
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSAPoint VPiecePath::EndSegment(const VContainer *data, const QVector<VPieceNode> &nodes, int i, bool reverse)
+auto VPiecePath::EndSegment(const VContainer *data, const QVector<VPieceNode> &nodes, vsizetype i) -> VSAPoint
 {
-    if (i < 0 || i > nodes.size()-1)
+    if (i < 0 || i > nodes.size() - 1)
     {
-        return VSAPoint();
+        return {};
     }
 
     const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(nodes.at(i).GetId());
 
-    const QVector<QPointF> points = curve->GetPoints();
+    QVector<QPointF> points = curve->GetPoints();
     if (points.isEmpty())
     {
-        return VSAPoint();
+        return {};
     }
 
-    VSAPoint end;
-    reverse ? end = VSAPoint(points.first()) : end = VSAPoint(points.last());
+    if (nodes.at(i).GetReverse())
+    {
+        points = Reverse(points);
+    }
+
+    VSAPoint end(points.constLast());
 
     if (nodes.size() > 2)
     {
-        const int index = FindInLoopNotExcludedDown(i, nodes);
+        const vsizetype index = FindInLoopNotExcludedDown(i, nodes);
 
         if (index != i && index != -1)
         {
@@ -614,11 +662,11 @@ VSAPoint VPiecePath::EndSegment(const VContainer *data, const QVector<VPieceNode
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<quint32> VPiecePath::Dependencies() const
+auto VPiecePath::Dependencies() const -> QList<quint32>
 {
     QList<quint32> list;
     list.reserve(d->m_nodes.size());
-    for (auto &node : d->m_nodes)
+    for (const auto &node : d->m_nodes)
     {
         list.append(node.GetId());
     }
@@ -626,7 +674,7 @@ QList<quint32> VPiecePath::Dependencies() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<quint32> VPiecePath::MissingNodes(const VPiecePath &path) const
+auto VPiecePath::MissingNodes(const VPiecePath &path) const -> QVector<quint32>
 {
     if (d->m_nodes.size() == path.CountNodes()) //-V807
     {
@@ -645,7 +693,7 @@ QVector<quint32> VPiecePath::MissingNodes(const VPiecePath &path) const
         set2.insert(path.at(j).GetId());
     }
 
-    const QList<quint32> set3 = set1.subtract(set2).toList();
+    const QList<quint32> set3 = set1.subtract(set2).values();
     QVector<quint32> nodes;
     nodes.reserve(set3.size());
     for (qint32 i = 0; i < set3.size(); ++i)
@@ -661,13 +709,13 @@ QVector<quint32> VPiecePath::MissingNodes(const VPiecePath &path) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPiecePath::NodeName(int nodeIndex, const VContainer *data) const
+auto VPiecePath::NodeName(int nodeIndex, const VContainer *data) const -> QString
 {
     return NodeName(d->m_nodes, nodeIndex, data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VPiecePath::indexOfNode(quint32 id) const
+auto VPiecePath::indexOfNode(quint32 id) const -> int
 {
     return indexOfNode(d->m_nodes, id);
 }
@@ -684,7 +732,7 @@ void VPiecePath::NodeOnEdge(quint32 index, VPieceNode &p1, VPieceNode &p2) const
     const QVector<VPieceNode> list = ListNodePoint();
     if (index > static_cast<quint32>(list.size()))
     {
-        qDebug()<<"Wrong edge index index ="<<index;
+        qDebug() << "Wrong edge index index =" << index;
         return;
     }
     p1 = list.at(static_cast<int>(index));
@@ -694,14 +742,14 @@ void VPiecePath::NodeOnEdge(quint32 index, VPieceNode &p1, VPieceNode &p2) const
     }
     else
     {
-        p2 = list.at(static_cast<int>(index+1));
+        p2 = list.at(static_cast<int>(index + 1));
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPiecePath::Contains(quint32 id) const
+auto VPiecePath::Contains(quint32 id) const -> bool
 {
-    for (auto &node : d->m_nodes)
+    for (const auto &node : d->m_nodes)
     {
         if (node.GetId() == id)
         {
@@ -719,20 +767,20 @@ bool VPiecePath::Contains(quint32 id) const
  * @param p2 id second point.
  * @return true - on edge, false - no.
  */
-bool VPiecePath::OnEdge(quint32 p1, quint32 p2) const
+auto VPiecePath::OnEdge(quint32 p1, quint32 p2) const -> bool
 {
     const QVector<VPieceNode> list = ListNodePoint();
     if (list.size() < 2)
     {
-        qDebug()<<"Not enough points.";
+        qDebug() << "Not enough points.";
         return false;
     }
-    int i = IndexOfNode(list, p1);
-    int j1 = 0, j2 = 0;
+    int const i = IndexOfNode(list, p1);
+    vsizetype j1 = 0, j2 = 0;
 
     if (i == list.size() - 1)
     {
-        j1 = i-1;
+        j1 = i - 1;
         j2 = 0;
     }
     else if (i == 0)
@@ -764,28 +812,26 @@ bool VPiecePath::OnEdge(quint32 p1, quint32 p2) const
  * @param p2 id second point.
  * @return edge index or -1 if points don't located on edge
  */
-int VPiecePath::Edge(quint32 p1, quint32 p2) const
+auto VPiecePath::Edge(quint32 p1, quint32 p2) const -> vsizetype
 {
     if (OnEdge(p1, p2) == false)
     {
-        qDebug()<<"Points don't on edge.";
+        qDebug() << "Points don't on edge.";
         return -1;
     }
 
     const QVector<VPieceNode> list = ListNodePoint();
-    int i = IndexOfNode(list, p1);
-    int j = IndexOfNode(list, p2);
+    int const i = IndexOfNode(list, p1);
+    int const j = IndexOfNode(list, p2);
 
-    int min = qMin(i, j);
+    int const min = qMin(i, j);
 
     if (min == 0 && (i == list.size() - 1 || j == list.size() - 1))
     {
         return list.size() - 1;
     }
-    else
-    {
-        return min;
-    }
+
+    return min;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -793,10 +839,10 @@ int VPiecePath::Edge(quint32 p1, quint32 p2) const
  * @brief listNodePoint return list nodes only with points.
  * @return list points node.
  */
-QVector<VPieceNode> VPiecePath::ListNodePoint() const
+auto VPiecePath::ListNodePoint() const -> QVector<VPieceNode>
 {
     QVector<VPieceNode> list;
-    for (auto &node : d->m_nodes) //-V807
+    for (const auto &node : d->m_nodes) //-const V807
     {
         if (node.GetTypeTool() == Tool::NodePoint)
         {
@@ -812,14 +858,14 @@ QVector<VPieceNode> VPiecePath::ListNodePoint() const
  * @param index idex of edge.
  * @return path without edge with index.
  */
-VPiecePath VPiecePath::RemoveEdge(quint32 index) const
+auto VPiecePath::RemoveEdge(quint32 index) const -> VPiecePath
 {
     VPiecePath path(*this);
     path.Clear();
 
     // Edge can be only segment. We ignore all curves inside segments.
-    const quint32 edges = static_cast<quint32>(ListNodePoint().size());
-    for (quint32 i=0; i<edges; ++i)
+    const auto edges = static_cast<quint32>(ListNodePoint().size());
+    for (quint32 i = 0; i < edges; ++i)
     {
         VPieceNode p1;
         VPieceNode p2;
@@ -844,43 +890,42 @@ VPiecePath VPiecePath::RemoveEdge(quint32 index) const
                 {
                     j = 0;
                 }
-            }
-            while (j != j2);
+            } while (j != j2);
         }
     }
     return path;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSAPoint VPiecePath::StartSegment(const VContainer *data, int i, bool reverse) const
+auto VPiecePath::StartSegment(const VContainer *data, int i) const -> VSAPoint
 {
-    return StartSegment(data, d->m_nodes, i, reverse);
+    return StartSegment(data, d->m_nodes, i);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSAPoint VPiecePath::EndSegment(const VContainer *data, int i, bool reverse) const
+auto VPiecePath::EndSegment(const VContainer *data, int i) const -> VSAPoint
 {
-    return EndSegment(data, d->m_nodes, i, reverse);
+    return EndSegment(data, d->m_nodes, i);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VPiecePath::NodePreviousPoint(const VContainer *data, int i) const
+auto VPiecePath::NodePreviousPoint(const VContainer *data, int i) const -> QPointF
 {
-    if (i < 0 || i > d->m_nodes.size()-1)
+    if (i < 0 || i > d->m_nodes.size() - 1)
     {
-        return QPointF();
+        return {};
     }
 
     if (d->m_nodes.size() > 1)
     {
-        int index = 0;
+        vsizetype index = 0;
         if (i == 0)
         {
-            index = d->m_nodes.size()-1;
+            index = d->m_nodes.size() - 1;
         }
         else
         {
-            index = i-1;
+            index = i - 1;
         }
 
         const VPieceNode &node = d->m_nodes.at(index);
@@ -895,18 +940,18 @@ QPointF VPiecePath::NodePreviousPoint(const VContainer *data, int i) const
             {
                 const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(node.GetId());
 
-                const VSAPoint begin = StartSegment(data, d->m_nodes, index, node.GetReverse());
-                const VSAPoint end = EndSegment(data, d->m_nodes, index, node.GetReverse());
+                const VSAPoint begin = StartSegment(data, d->m_nodes, index);
+                const VSAPoint end = EndSegment(data, d->m_nodes, index);
 
-                const QVector<QPointF> points = curve->GetSegmentPoints(begin, end, node.GetReverse());
+                const QVector<QPointF> points = curve->GetSegmentPoints(begin, end, node.GetReverse(), GetName());
                 if (points.size() > 1)
                 {
-                    return points.at(points.size()-2);
+                    return points.at(points.size() - 2);
                 }
             }
-                break;
+            break;
             default:
-                qDebug()<<"Get wrong tool type. Ignore."<< static_cast<char>(node.GetTypeTool());
+                qDebug() << "Get wrong tool type. Ignore." << static_cast<char>(node.GetTypeTool());
                 break;
         }
     }
@@ -915,10 +960,10 @@ QPointF VPiecePath::NodePreviousPoint(const VContainer *data, int i) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VPiecePath::NodeNextPoint(const VContainer *data, int i) const
+auto VPiecePath::NodeNextPoint(const VContainer *data, int i) const -> QPointF
 {
     QPointF point;
-    if (i < 0 || i > d->m_nodes.size()-1)
+    if (i < 0 || i > d->m_nodes.size() - 1)
     {
         return point;
     }
@@ -932,7 +977,7 @@ QPointF VPiecePath::NodeNextPoint(const VContainer *data, int i) const
         }
         else
         {
-            index = i+1;
+            index = i + 1;
         }
 
         const VPieceNode &node = d->m_nodes.at(index);
@@ -947,18 +992,18 @@ QPointF VPiecePath::NodeNextPoint(const VContainer *data, int i) const
             {
                 const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(node.GetId());
 
-                const VSAPoint begin = StartSegment(data, d->m_nodes, index, node.GetReverse());
-                const VSAPoint end = EndSegment(data, d->m_nodes, index, node.GetReverse());
+                const VSAPoint begin = StartSegment(data, d->m_nodes, index);
+                const VSAPoint end = EndSegment(data, d->m_nodes, index);
 
-                const QVector<QPointF> points = curve->GetSegmentPoints(begin, end, node.GetReverse());
+                const QVector<QPointF> points = curve->GetSegmentPoints(begin, end, node.GetReverse(), GetName());
                 if (points.size() > 1)
                 {
                     return points.at(1);
                 }
             }
-                break;
+            break;
             default:
-                qDebug()<<"Get wrong tool type. Ignore."<< static_cast<char>(node.GetTypeTool());
+                qDebug() << "Get wrong tool type. Ignore." << static_cast<char>(node.GetTypeTool());
                 break;
         }
     }
@@ -967,13 +1012,13 @@ QPointF VPiecePath::NodeNextPoint(const VContainer *data, int i) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPiecePath::IsVisible(const QHash<QString, QSharedPointer<VInternalVariable>> *vars) const
+auto VPiecePath::IsVisible(const QHash<QString, QSharedPointer<VInternalVariable>> *vars) const -> bool
 {
     SCASSERT(vars != nullptr)
     bool visible = true;
     try
     {
-        QScopedPointer<Calculator> cal(new Calculator());
+        QScopedPointer<Calculator> const cal(new Calculator());
         const qreal result = cal->EvalFormula(vars, GetVisibilityTrigger());
 
         if (qIsInf(result) || qIsNaN(result))
@@ -995,7 +1040,7 @@ bool VPiecePath::IsVisible(const QHash<QString, QSharedPointer<VInternalVariable
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VPiecePath::indexOfNode(const QVector<VPieceNode> &nodes, quint32 id)
+auto VPiecePath::indexOfNode(const QVector<VPieceNode> &nodes, quint32 id) -> int
 {
     for (int i = 0; i < nodes.size(); ++i)
     {
@@ -1004,19 +1049,19 @@ int VPiecePath::indexOfNode(const QVector<VPieceNode> &nodes, quint32 id)
             return i;
         }
     }
-    qDebug()<<"Can't find node.";
+    qDebug() << "Can't find node.";
     return -1;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VPiecePath::FindInLoopNotExcludedUp(int start, const QVector<VPieceNode> &nodes)
+auto VPiecePath::FindInLoopNotExcludedUp(vsizetype start, const QVector<VPieceNode> &nodes) -> vsizetype
 {
     if (start < 0 || start >= nodes.size())
     {
         return -1;
     }
 
-    int i = (start == 0) ? nodes.size()-1 : start-1;
+    vsizetype i = (start == 0) ? nodes.size() - 1 : start - 1;
 
     if (i < 0 || i >= nodes.size())
     {
@@ -1045,14 +1090,14 @@ int VPiecePath::FindInLoopNotExcludedUp(int start, const QVector<VPieceNode> &no
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VPiecePath::FindInLoopNotExcludedDown(int start, const QVector<VPieceNode> &nodes)
+auto VPiecePath::FindInLoopNotExcludedDown(vsizetype start, const QVector<VPieceNode> &nodes) -> vsizetype
 {
     if (start < 0 || start >= nodes.size())
     {
         return -1;
     }
 
-    int i = (start == nodes.size()-1) ? 0 : start+1;
+    vsizetype i = (start == nodes.size() - 1) ? 0 : start + 1;
 
     if (i < 0 || i >= nodes.size())
     {
@@ -1081,58 +1126,94 @@ int VPiecePath::FindInLoopNotExcludedDown(int start, const QVector<VPieceNode> &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSAPoint VPiecePath::PreparePointEkv(const VPieceNode &node, const VContainer *data)
+auto VPiecePath::PreparePointEkv(const VPieceNode &node, const VContainer *data) -> VSAPoint
 {
-    SCASSERT(data !=nullptr)
+    SCASSERT(data != nullptr)
 
     const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(node.GetId());
     VSAPoint p(point->toQPointF());
 
+    p.SetTurnPoint(node.IsTurnPoint());
     p.SetSAAfter(node.GetSAAfter(data, *data->GetPatternUnit()));
     p.SetSABefore(node.GetSABefore(data, *data->GetPatternUnit()));
     p.SetAngleType(node.GetAngleType());
+    p.SetManualPasskmarkLength(node.IsManualPassmarkLength());
+    p.SetPasskmarkLength(node.GetPassmarkLength(data, *data->GetPatternUnit()));
+    p.SetManualPasskmarkWidth(node.IsManualPassmarkWidth());
+    p.SetPasskmarkWidth(node.GetPassmarkWidth(data, *data->GetPatternUnit()));
+    p.SetManualPasskmarkAngle(node.IsManualPassmarkAngle());
+    p.SetPasskmarkAngle(node.GetPassmarkAngle(data));
+    p.SetPassmarkClockwiseOpening(node.IsPassmarkClockwiseOpening());
 
     return p;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VSAPoint> VPiecePath::CurveSeamAllowanceSegment(const VContainer *data, const QVector<VPieceNode> &nodes,
-                                                        const QSharedPointer<VAbstractCurve> &curve, int i,
-                                                        bool reverse, qreal width)
+auto VPiecePath::CurveSeamAllowanceSegment(const VContainer *data, const QVector<VPieceNode> &nodes,
+                                           const QSharedPointer<VAbstractCurve> &curve, vsizetype i, bool reverse,
+                                           qreal width, const QLineF &mirrorLine, const QString &piece)
+    -> QVector<VSAPoint>
 {
-    QVector<VSAPoint> pointsEkv;
-
-    const VSAPoint begin = StartSegment(data, nodes, i, reverse);
-    const VSAPoint end = EndSegment(data, nodes, i, reverse);
-
-    const QVector<QPointF> points = curve->GetSegmentPoints(begin, end, reverse);
-    if (points.isEmpty())
+    VSAPoint begin = StartSegment(data, nodes, i);
+    if (!mirrorLine.isNull())
     {
-        return pointsEkv;
+        if (VFuzzyComparePoints(begin, mirrorLine.p1()))
+        {
+            begin.SetSAAfter(0);
+        }
+        else if (VFuzzyComparePoints(begin, mirrorLine.p2()))
+        {
+            begin.SetSABefore(0);
+        }
     }
 
+    VSAPoint end = EndSegment(data, nodes, i);
+    if (!mirrorLine.isNull())
+    {
+        if (VFuzzyComparePoints(end, mirrorLine.p1()))
+        {
+            end.SetSAAfter(0);
+        }
+        else if (VFuzzyComparePoints(end, mirrorLine.p2()))
+        {
+            end.SetSABefore(0);
+        }
+    }
+
+    const QVector<QPointF> points = curve->GetSegmentPoints(begin, end, reverse, piece);
+    if (points.size() < 2)
+    {
+        return {};
+    }
+
+    QVector<VSAPoint> pointsEkv;
     pointsEkv.reserve(points.size());
 
     qreal w1 = begin.GetSAAfter();
     qreal w2 = end.GetSABefore();
     if (w1 < 0 && w2 < 0)
-    {// no local widths
-        for(int i = 0; i < points.size(); ++i)
+    { // no local widths
+        for (int i = 0; i < points.size(); ++i)
         {
             VSAPoint p(points.at(i));
             p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+            p.SetCurvePoint(true);
+
             if (i == 0)
             { // first point
                 p.SetSAAfter(begin.GetSAAfter());
                 p.SetSABefore(begin.GetSABefore());
                 p.SetAngleType(begin.GetAngleType());
+                p.SetTurnPoint(VFuzzyComparePoints(p, begin) ? begin.TurnPoint() : true);
             }
             else if (i == points.size() - 1)
             { // last point
                 p.SetSAAfter(end.GetSAAfter());
                 p.SetSABefore(end.GetSABefore());
                 p.SetAngleType(end.GetAngleType());
+                p.SetTurnPoint(VFuzzyComparePoints(p, end) ? end.TurnPoint() : true);
             }
+
             pointsEkv.append(p);
         }
     }
@@ -1148,31 +1229,35 @@ QVector<VSAPoint> VPiecePath::CurveSeamAllowanceSegment(const VContainer *data, 
             w2 = width;
         }
 
-        const qreal wDiff = w2 - w1;// Difference between to local widths
+        const qreal wDiff = w2 - w1; // Difference between two local widths
         const qreal fullLength = VAbstractCurve::PathLength(points);
 
-        VSAPoint p(points.at(0));//First point in the list
+        VSAPoint p(points.at(0)); // First point in the list
         p.SetSAAfter(begin.GetSAAfter());
         p.SetSABefore(begin.GetSABefore());
         p.SetAngleType(begin.GetAngleType());
+        p.SetCurvePoint(true);
+        p.SetTurnPoint(VFuzzyComparePoints(p, begin) ? begin.TurnPoint() : true);
         pointsEkv.append(p);
 
         qreal length = 0; // how much we handle
 
-        for(int i = 1; i < points.size(); ++i)
+        for (int i = 1; i < points.size(); ++i)
         {
             p = VSAPoint(points.at(i));
+            p.SetCurvePoint(true);
 
             if (i == points.size() - 1)
-            {// last point
+            { // last point
                 p.SetSAAfter(end.GetSAAfter());
                 p.SetSABefore(end.GetSABefore());
                 p.SetAngleType(end.GetAngleType());
+                p.SetTurnPoint(VFuzzyComparePoints(p, end) ? end.TurnPoint() : true);
             }
             else
             {
-                length += QLineF(points.at(i-1), points.at(i)).length();
-                const qreal localWidth = w1 + wDiff*(length/fullLength);
+                length += QLineF(points.at(i - 1), points.at(i)).length();
+                const qreal localWidth = w1 + wDiff * (length / fullLength);
 
                 p.SetSAAfter(localWidth);
                 p.SetSABefore(localWidth);
@@ -1187,20 +1272,81 @@ QVector<VSAPoint> VPiecePath::CurveSeamAllowanceSegment(const VContainer *data, 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPiecePath::NodeName(const QVector<VPieceNode> &nodes, int nodeIndex, const VContainer *data)
+auto VPiecePath::NodeName(const QVector<VPieceNode> &nodes, vsizetype nodeIndex, const VContainer *data) -> QString
 {
     if (not nodes.isEmpty() && (nodeIndex < 0 || nodeIndex >= nodes.size()))
     {
-        return QString();
+        return {};
     }
 
     try
     {
-        QSharedPointer<VGObject> obj = data->GetGObject(nodes.at(nodeIndex).GetId());
+        QSharedPointer<VGObject> const obj = data->GetGObject(nodes.at(nodeIndex).GetId());
         return obj->name();
     }
-    catch (VExceptionBadId) {
+    catch (const VExceptionBadId &)
+    {
         // ignore
     }
-    return QString();
+    return {};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiecePath::NodesToPoints(const VContainer *data, const QVector<VPieceNode> &nodes, const QString &piece)
+    -> QVector<VLayoutPoint>
+{
+    QVector<VLayoutPoint> points;
+    for (int i = 0; i < nodes.size(); ++i)
+    {
+        const VPieceNode &node = nodes.at(i);
+        if (node.IsExcluded())
+        {
+            continue; // skip excluded node
+        }
+
+        switch (node.GetTypeTool())
+        {
+            case (Tool::NodePoint):
+            {
+                const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(node.GetId());
+                VLayoutPoint layoutPoint(point->toQPointF());
+                layoutPoint.SetTurnPoint(node.IsTurnPoint());
+                points.append(layoutPoint);
+            }
+            break;
+            case (Tool::NodeArc):
+            case (Tool::NodeElArc):
+            case (Tool::NodeSpline):
+            case (Tool::NodeSplinePath):
+            {
+                const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(node.GetId());
+
+                const VSAPoint begin = StartSegment(data, nodes, i);
+                const VSAPoint end = EndSegment(data, nodes, i);
+
+                QVector<QPointF> segment = curve->GetSegmentPoints(begin, end, node.GetReverse(), piece);
+                AppendCurveSegment(points, segment, begin, end);
+            }
+            break;
+            default:
+                qDebug() << "Get wrong tool type. Ignore." << static_cast<char>(node.GetTypeTool());
+                break;
+        }
+    }
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiecePath::MakePainterPath(const QVector<QPointF> &points) -> QPainterPath
+{
+    QPainterPath path;
+
+    if (not points.isEmpty())
+    {
+        path.addPolygon(QPolygonF(points));
+        path.setFillRule(Qt::WindingFill);
+    }
+
+    return path;
 }

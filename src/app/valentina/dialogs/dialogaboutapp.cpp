@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -27,54 +27,57 @@
  *************************************************************************/
 
 #include "dialogaboutapp.h"
+#include "../fervor/fvupdater.h"
+#include "../vmisc/projectversion.h"
+#include "../vmisc/vabstractvalapplication.h"
+#include "../vmisc/vvalentinasettings.h"
 #include "ui_dialogaboutapp.h"
-#include "../version.h"
 #include <QDate>
 #include <QDesktopServices>
 #include <QMessageBox>
 #include <QtDebug>
-#include "../options.h"
-#include "../core/vapplication.h"
-#include "../fervor/fvupdater.h"
+#include <vcsRepoState.h>
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogAboutApp::DialogAboutApp(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::DialogAboutApp),
-    isInitialized(false)
+DialogAboutApp::DialogAboutApp(QWidget *parent)
+  : QDialog(parent),
+    ui(new Ui::DialogAboutApp)
 {
     ui->setupUi(this);
 
-    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+    VAbstractValApplication::VApp()->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale())
+                                                                           : setLocale(QLocale::c());
 
-    ui->label_Valentina_Version->setText(QString("Valentina %1").arg(APP_VERSION_STR));
-    ui->labelBuildRevision->setText(QString("Build revision: %1").arg(BUILD_REVISION));
+    ui->label_Valentina_Version->setText(QStringLiteral("Valentina %1").arg(AppVersionStr()));
+    ui->labelBuildRevision->setText(QStringLiteral("Build revision: %1").arg(QStringLiteral(VCS_REPO_STATE_REVISION)));
     ui->label_QT_Version->setText(buildCompatibilityString());
 
-    QDate date = QLocale::c().toDate(QString(__DATE__).simplified(), QLatin1String("MMM d yyyy"));
-    ui->label_Valentina_Built->setText(tr("Built on %1 at %2").arg(date.toString(), __TIME__));
+    QDate const date = QLocale::c().toDate(QStringLiteral(__DATE__).simplified(), QStringLiteral("MMM d yyyy"));
+    ui->label_Valentina_Built->setText(tr("Built on %1 at %2").arg(date.toString(), QStringLiteral(__TIME__)));
 
     ui->label_Legal_Stuff->setText(QApplication::translate("InternalStrings",
                                                            "The program is provided AS IS with NO WARRANTY OF ANY "
                                                            "KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY "
                                                            "AND FITNESS FOR A PARTICULAR PURPOSE."));
 
+    ui->pushButton_Web_Site->setText(tr("Web site : %1").arg(QStringLiteral(VER_COMPANYDOMAIN_STR)));
+    connect(ui->pushButton_Web_Site, &QPushButton::clicked, this,
+            []()
+            {
+                if (not QDesktopServices::openUrl(
+                        QUrl(QStringLiteral("https://%1").arg(QStringLiteral(VER_COMPANYDOMAIN_STR)))))
+                {
+                    qWarning() << tr("Cannot open your default browser");
+                }
+            });
 
-    ui->pushButton_Web_Site->setText(tr("Web site : %1").arg(VER_COMPANYDOMAIN_STR));
-    connect(ui->pushButton_Web_Site, &QPushButton::clicked, this, []()
-    {
-        if ( QDesktopServices::openUrl(QUrl(VER_COMPANYDOMAIN_STR)) == false)
-        {
-            qWarning() << tr("Cannot open your default browser");
-        }
-    });
-
-    connect(ui->pushButtonCheckUpdate, &QPushButton::clicked, []()
-    {
-        // Set feed URL before doing anything else
-        FvUpdater::sharedUpdater()->SetFeedURL(FvUpdater::CurrentFeedURL());
-        FvUpdater::sharedUpdater()->CheckForUpdatesNotSilent();
-    });
+    connect(ui->pushButtonCheckUpdate, &QPushButton::clicked,
+            []()
+            {
+                // Set feed URL before doing anything else
+                FvUpdater::sharedUpdater()->SetFeedURL(FvUpdater::CurrentFeedURL());
+                FvUpdater::sharedUpdater()->CheckForUpdatesNotSilent();
+            });
 
     // By default on Windows font point size 8 points we need 11 like on Linux.
     FontPointSize(ui->label_Legal_Stuff, 11);
@@ -92,13 +95,13 @@ DialogAboutApp::~DialogAboutApp()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogAboutApp::showEvent(QShowEvent *event)
 {
-    QDialog::showEvent( event );
-    if ( event->spontaneous() )
+    QDialog::showEvent(event);
+    if (event->spontaneous())
     {
         return;
     }
 
-    if (isInitialized)
+    if (m_isInitialized)
     {
         return;
     }
@@ -107,7 +110,7 @@ void DialogAboutApp::showEvent(QShowEvent *event)
     setMaximumSize(size());
     setMinimumSize(size());
 
-    isInitialized = true;//first show windows are held
+    m_isInitialized = true; // first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -116,6 +119,6 @@ void DialogAboutApp::FontPointSize(QWidget *w, int pointSize)
     SCASSERT(w != nullptr)
 
     QFont font = w->font();
-    font.setPointSize(pointSize);
+    font.setPointSize(qMax(pointSize, 1));
     w->setFont(font);
 }

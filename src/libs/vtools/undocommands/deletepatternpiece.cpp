@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -31,30 +31,25 @@
 #include <QDomNode>
 #include <QDomNodeList>
 
-#include "../vmisc/logging.h"
-#include "../vmisc/vabstractapplication.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DeletePatternPiece::DeletePatternPiece(VAbstractPattern *doc, const QString &namePP, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent), namePP(namePP), patternPiece(QDomElement()),
-      previousPPName(QString())
+  : VUndoCommand(QDomElement(), doc, parent),
+    namePP(namePP)
 {
     setText(tr("delete pattern piece %1").arg(namePP));
 
     const QDomElement patternP = doc->GetPPElement(namePP);
     patternPiece = patternP.cloneNode().toElement();
-    const QDomElement previousPP = patternP.previousSibling().toElement();//find previous pattern piece
+    const QDomElement previousPP = patternP.previousSibling().toElement(); // find previous pattern piece
     if (not previousPP.isNull() && previousPP.tagName() == VAbstractPattern::TagDraw)
     {
-        previousPPName = doc->GetParametrString(previousPP, VAbstractPattern::AttrName, QString());
+        previousPPName = VAbstractPattern::GetParametrString(previousPP, VAbstractPattern::AttrName, QString());
     }
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-DeletePatternPiece::~DeletePatternPiece()
-{}
 
 //---------------------------------------------------------------------------------------------------------------------
 void DeletePatternPiece::undo()
@@ -70,10 +65,9 @@ void DeletePatternPiece::undo()
     }
     else
     { // first in the list, add before tag draw
-        const QDomNodeList list = rootElement.elementsByTagName(VAbstractPattern::TagDraw);
         QDomElement draw;
 
-        if (not list.isEmpty())
+        if (const QDomNodeList list = rootElement.elementsByTagName(VAbstractPattern::TagDraw); not list.isEmpty())
         {
             draw = list.at(0).toElement();
         }
@@ -83,9 +77,9 @@ void DeletePatternPiece::undo()
     }
 
     emit NeedFullParsing();
-    if (qApp->GetDrawMode() == Draw::Calculation)
+    if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
     {
-        emit doc->SetCurrentPP(namePP);//Without this user will not see this change
+        emit doc->SetCurrentPP(namePP); // Without this user will not see this change
     }
 }
 
@@ -94,12 +88,12 @@ void DeletePatternPiece::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    if (qApp->GetDrawMode() == Draw::Calculation)
+    if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
     {
-        emit doc->SetCurrentPP(namePP);//Without this user will not see this change
+        emit doc->SetCurrentPP(namePP); // Without this user will not see this change
     }
     QDomElement rootElement = doc->documentElement();
-    const QDomElement patternPiece = doc->GetPPElement(namePP);
-    rootElement.removeChild(patternPiece);
+    const QDomElement patternPieceElement = doc->GetPPElement(namePP);
+    rootElement.removeChild(patternPieceElement);
     emit NeedFullParsing();
 }

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,47 +29,100 @@
 #ifndef CUSTOMEVENTS_H
 #define CUSTOMEVENTS_H
 
-#include <qcompilerdetection.h>
 #include <QEvent>
+#include <QString>
 
-enum CustomEventType { UndoEventType = 1, LiteParseEventType = 2, FitBestCurrentEventType = 3 };
+enum CustomEventType
+{
+    UndoEventType = 1,
+    LiteParseEventType = 2,
+    FitBestCurrentEventType = 3,
+    WarningMessageEventType = 4,
+};
 
+//---------------------------------------------------------------------------------------------------------------------
 // Define undo event identifier
-const QEvent::Type UNDO_EVENT = static_cast<QEvent::Type>(QEvent::User + CustomEventType::UndoEventType);
+const QEvent::Type UNDO_EVENT =
+    static_cast<QEvent::Type>(QEvent::User + static_cast<int>(CustomEventType::UndoEventType));
 
 class UndoEvent : public QEvent
 {
 public:
-    UndoEvent()
-        : QEvent(UNDO_EVENT)
-    {}
-
-    virtual ~UndoEvent() =default;
+    UndoEvent();
+    ~UndoEvent() override = default;
 };
 
-const QEvent::Type LITE_PARSE_EVENT = static_cast<QEvent::Type>(QEvent::User + CustomEventType::LiteParseEventType);
+inline UndoEvent::UndoEvent()
+  : QEvent(UNDO_EVENT)
+{
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+const QEvent::Type LITE_PARSE_EVENT =
+    static_cast<QEvent::Type>(QEvent::User + static_cast<int>(CustomEventType::LiteParseEventType));
 
 class LiteParseEvent : public QEvent
 {
 public:
-    LiteParseEvent()
-        : QEvent(LITE_PARSE_EVENT)
-    {}
-
-    virtual ~LiteParseEvent() =default;
+    LiteParseEvent();
+    ~LiteParseEvent() override = default;
 };
 
-const QEvent::Type FIT_BEST_CURRENT_EVENT = static_cast<QEvent::Type>(QEvent::User +
-                                                                      CustomEventType::FitBestCurrentEventType);
+inline LiteParseEvent::LiteParseEvent()
+  : QEvent(LITE_PARSE_EVENT)
+{
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+const QEvent::Type FIT_BEST_CURRENT_EVENT =
+    static_cast<QEvent::Type>(QEvent::User + static_cast<int>(CustomEventType::FitBestCurrentEventType));
 
 class FitBestCurrentEvent : public QEvent
 {
 public:
-    FitBestCurrentEvent()
-        : QEvent(FIT_BEST_CURRENT_EVENT)
-    {}
-
-    virtual ~FitBestCurrentEvent() =default;
+    FitBestCurrentEvent();
+    ~FitBestCurrentEvent() override = default;
 };
+
+inline FitBestCurrentEvent::FitBestCurrentEvent()
+  : QEvent(FIT_BEST_CURRENT_EVENT)
+{
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+const QEvent::Type WARNING_MESSAGE_EVENT =
+    static_cast<QEvent::Type>(QEvent::User + static_cast<int>(CustomEventType::WarningMessageEventType));
+
+class WarningMessageEvent : public QEvent
+{
+public:
+    WarningMessageEvent(const QString &message, QtMsgType severity);
+    ~WarningMessageEvent() override = default;
+
+    auto Message() const -> QString;
+
+    auto Severity() const -> QtMsgType;
+
+private:
+    QString m_message;
+    QtMsgType m_severity;
+};
+
+inline WarningMessageEvent::WarningMessageEvent(const QString &message, QtMsgType severity)
+  : QEvent(WARNING_MESSAGE_EVENT),
+    m_message(message),
+    m_severity(severity)
+{
+}
+
+inline auto WarningMessageEvent::Message() const -> QString
+{
+    return m_message;
+}
+
+inline auto WarningMessageEvent::Severity() const -> QtMsgType
+{
+    return m_severity;
+}
 
 #endif // CUSTOMEVENTS_H

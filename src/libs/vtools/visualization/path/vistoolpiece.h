@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -32,37 +32,45 @@
 #include <QtCore/QObject>
 #include <QtGlobal>
 
-#include "vispath.h"
-#include "../vpatterndb/vpiece.h"
 #include "../vgeometry/vpointf.h"
+#include "../vpatterndb/vpiece.h"
+#include "vispath.h"
 
 class VisToolPiece : public VisPath
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
-    VisToolPiece(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolPiece() Q_DECL_EQ_DEFAULT;
+    explicit VisToolPiece(const VContainer *data, QGraphicsItem *parent = nullptr);
+    ~VisToolPiece() override = default;
 
-    virtual void RefreshGeometry() override;
-    void         SetPiece(const VPiece &piece);
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolPiece)};
+    void RefreshGeometry() override;
+    void VisualMode(quint32 id = NULL_ID) override;
+
+    void SetPiece(const VPiece &piece);
+
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Vis::ToolPiece)
+    };
+
 private:
-    Q_DISABLE_COPY(VisToolPiece)
-    QVector<VScaledEllipse *> m_points;
-    QVector<VCurvePathItem *> m_curves;
+    Q_DISABLE_COPY_MOVE(VisToolPiece) // NOLINT
+    QVector<VScaledEllipse *> m_points{};
+    QVector<VCurvePathItem *> m_curves{};
 
-    VScaledLine *m_line1;
-    VScaledLine *m_line2;
-    VPiece m_piece;
-    bool m_pieceCached;
-    QPainterPath m_cachedMainPath;
-    QVector<VPointF> m_cachedNodes;
-    QVector<QPointF> m_cachedMainPathPoints;
-    QVector<QPainterPath> m_cachedCurvesPath;
+    VScaledLine *m_line1{nullptr};
+    VScaledLine *m_line2{nullptr};
+    VPiece m_piece{};
+    bool m_pieceCached{false};
+    QPainterPath m_cachedMainPath{};
+    QVector<VPointF> m_cachedNodes{};
+    QVector<QPointF> m_cachedMainPathPoints{};
+    QVector<QPainterPath> m_cachedCurvesPath{};
 
-    VScaledEllipse* GetPoint(quint32 i, const QColor &color);
-    VCurvePathItem *GetCurve(quint32 i, const QColor &color);
+    auto GetPoint(quint32 i, VColorRole role) -> VScaledEllipse *;
+    auto GetCurve(quint32 i, VColorRole role) -> VCurvePathItem *;
 
     void HideAllItems();
 };

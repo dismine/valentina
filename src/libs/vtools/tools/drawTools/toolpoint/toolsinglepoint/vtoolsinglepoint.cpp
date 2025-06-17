@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -40,32 +40,36 @@
 #include <QRectF>
 #include <QSharedPointer>
 #include <QUndoStack>
-#include <Qt>
 #include <new>
 
 #include "../../../../undocommands/label/movelabel.h"
 #include "../../../../undocommands/label/showlabel.h"
-#include "../ifc/exception/vexception.h"
-#include "../ifc/exception/vexceptionbadid.h"
-#include "../ifc/ifcdef.h"
-#include "../ifc/xml/vabstractpattern.h"
-#include "../vmisc/diagnostic.h"
-#include "../vmisc/logging.h"
-#include "../vgeometry/vgobject.h"
-#include "../vgeometry/vpointf.h"
-#include "../vmisc/vabstractapplication.h"
-#include "../vpatterndb/vcontainer.h"
-#include "../vwidgets/vgraphicssimpletextitem.h"
-#include "../vwidgets/scalesceneitems.h"
 #include "../../../vabstracttool.h"
 #include "../../vdrawtool.h"
+#include "../ifc/exception/vexception.h"
+#include "../ifc/ifcdef.h"
+#include "../ifc/xml/vabstractpattern.h"
 #include "../vabstractpoint.h"
+#include "../vgeometry/vabstractcubicbezier.h"
+#include "../vgeometry/vabstractcubicbezierpath.h"
+#include "../vgeometry/varc.h"
+#include "../vgeometry/vellipticalarc.h"
+#include "../vgeometry/vgobject.h"
+#include "../vgeometry/vpointf.h"
+#include "../vgeometry/vspline.h"
+#include "../vgeometry/vsplinepath.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/global.h"
+#include "../vwidgets/scalesceneitems.h"
+#include "../vwidgets/vgraphicssimpletextitem.h"
+#include "toolcut/vtoolcutsplinepath.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
 QT_WARNING_DISABLE_INTEL(1418)
 
-Q_LOGGING_CATEGORY(vToolSinglePoint, "v.toolSinglePoint")
+Q_LOGGING_CATEGORY(vToolSinglePoint, "v.toolSinglePoint") // NOLINT
 
 QT_WARNING_POP
 
@@ -77,9 +81,10 @@ QT_WARNING_POP
  * @param id object id in container.
  * @param parent parent object.
  */
-VToolSinglePoint::VToolSinglePoint(VAbstractPattern *doc, VContainer *data, quint32 id, QGraphicsItem *parent)
-    : VAbstractPoint(doc, data, id),
-      VScenePoint(parent)
+VToolSinglePoint::VToolSinglePoint(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes,
+                                   QGraphicsItem *parent)
+  : VAbstractPoint(doc, data, id, notes),
+    VScenePoint(VColorRole::PatternColor, parent)
 {
     connect(m_namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this, &VToolSinglePoint::contextMenuEvent);
     connect(m_namePoint, &VGraphicsSimpleTextItem::DeleteTool, this, &VToolSinglePoint::DeleteFromLabel);
@@ -90,7 +95,7 @@ VToolSinglePoint::VToolSinglePoint(VAbstractPattern *doc, VContainer *data, quin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolSinglePoint::name() const
+auto VToolSinglePoint::name() const -> QString
 {
     return ObjectName<VPointF>(m_id);
 }
@@ -116,17 +121,15 @@ void VToolSinglePoint::GroupVisibility(quint32 object, bool visible)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VToolSinglePoint::IsLabelVisible(quint32 id) const
+auto VToolSinglePoint::IsLabelVisible(quint32 id) const -> bool
 {
     if (m_id == id)
     {
         const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
         return point->IsShowLabel();
     }
-    else
-    {
-        return false;
-    }
+
+    return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -139,7 +142,7 @@ void VToolSinglePoint::SetLabelVisible(quint32 id, bool visible)
         RefreshPointGeometry(*point);
         if (QGraphicsScene *sc = scene())
         {
-            VMainGraphicsView::NewSceneRect(sc, qApp->getSceneView(), this);
+            VMainGraphicsView::NewSceneRect(sc, VAbstractValApplication::VApp()->getSceneView(), this);
         }
     }
 }
@@ -162,7 +165,7 @@ void VToolSinglePoint::UpdateNamePosition(quint32 id, const QPointF &pos)
 {
     if (id == m_id)
     {
-        qApp->getUndoStack()->push(new MoveLabel(doc, pos, id));
+        VAbstractApplication::VApp()->getUndoStack()->push(new MoveLabel(doc, pos, id));
     }
 }
 
@@ -173,14 +176,15 @@ void VToolSinglePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
     VScenePoint::mousePressEvent(event);
 
     // Somehow clicking on notselectable object do not clean previous selections.
-    if (not (flags() & ItemIsSelectable) && scene())
+    if (not(flags() & ItemIsSelectable) && scene())
     {
         scene()->clearSelection();
     }
 
     if (selectionType == SelectionType::ByMouseRelease)
     {
-        event->accept();// Special for not selectable item first need to call standard mousePressEvent then accept event
+        event
+            ->accept(); // Special for not selectable item first need to call standard mousePressEvent then accept event
     }
     else
     {
@@ -197,7 +201,7 @@ void VToolSinglePoint::Disable(bool disable, const QString &namePP)
 {
     const bool enabled = !CorrectDisable(disable, namePP);
     SetEnabled(enabled);
-    m_namePoint->setEnabled(enabled);
+    m_namePoint->SetEnabledState(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -238,12 +242,9 @@ void VToolSinglePoint::FullUpdateFromFile()
  */
 void VToolSinglePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (selectionType == SelectionType::ByMouseRelease)
+    if (selectionType == SelectionType::ByMouseRelease && IsSelectedByReleaseEvent(this, event))
     {
-        if (IsSelectedByReleaseEvent(this, event))
-        {
-            PointChoosed();
-        }
+        PointChoosed();
     }
     VScenePoint::mouseReleaseEvent(event);
 }
@@ -262,7 +263,7 @@ void VToolSinglePoint::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
  * @param value value.
  * @return value.
  */
-QVariant VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
+auto VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value) -> QVariant
 {
     if (change == QGraphicsItem::ItemSelectedHasChanged)
     {
@@ -293,16 +294,16 @@ void VToolSinglePoint::keyReleaseEvent(QKeyEvent *event)
             {
                 DeleteToolWithConfirm();
             }
-            catch(const VExceptionToolWasDeleted &e)
+            catch (const VExceptionToolWasDeleted &e)
             {
                 Q_UNUSED(e)
-                return;//Leave this method immediately!!!
+                return; // Leave this method immediately!!!
             }
             break;
         default:
             break;
     }
-    VScenePoint::keyReleaseEvent ( event );
+    VScenePoint::keyReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -316,12 +317,12 @@ void VToolSinglePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &o
 {
     VDrawTool::SaveOptions(tag, obj);
 
-    QSharedPointer<VPointF> point = qSharedPointerDynamicCast<VPointF>(obj);
+    QSharedPointer<VPointF> const point = qSharedPointerDynamicCast<VPointF>(obj);
     SCASSERT(point.isNull() == false)
 
     doc->SetAttribute(tag, AttrName, point->name());
-    doc->SetAttribute(tag, AttrMx, qApp->fromPixel(point->mx()));
-    doc->SetAttribute(tag, AttrMy, qApp->fromPixel(point->my()));
+    doc->SetAttribute(tag, AttrMx, VAbstractValApplication::VApp()->fromPixel(point->mx()));
+    doc->SetAttribute(tag, AttrMy, VAbstractValApplication::VApp()->fromPixel(point->my()));
     doc->SetAttribute<bool>(tag, AttrShowLabel, point->IsShowLabel());
 }
 
@@ -330,7 +331,7 @@ void VToolSinglePoint::ChangeLabelVisibility(quint32 id, bool visible)
 {
     if (id == m_id)
     {
-        qApp->getUndoStack()->push(new ShowLabel(doc, id, visible));
+        VAbstractApplication::VApp()->getUndoStack()->push(new ShowLabel(doc, id, visible));
     }
 }
 
@@ -339,17 +340,15 @@ void VToolSinglePoint::ChangeLabelPosition(quint32 id, const QPointF &pos)
 {
     if (id == m_id)
     {
-        QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
+        QSharedPointer<VPointF> const point = VAbstractTool::data.GeometricObject<VPointF>(id);
         point->setMx(pos.x());
         point->setMy(pos.y());
-        m_namePoint->blockSignals(true);
-        m_namePoint->setPos(pos);
-        m_namePoint->blockSignals(false);
+        m_namePoint->SetRealPos(pos);
         RefreshLine();
 
         if (QGraphicsScene *sc = scene())
         {
-            VMainGraphicsView::NewSceneRect(sc, qApp->getSceneView(), this);
+            VMainGraphicsView::NewSceneRect(sc, VAbstractValApplication::VApp()->getSceneView(), this);
         }
     }
 }
@@ -385,4 +384,141 @@ void VToolSinglePoint::ToolSelectionType(const SelectionType &type)
 {
     VAbstractTool::ToolSelectionType(type);
     m_namePoint->LabelSelectionType(type);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+
+auto VToolSinglePoint::InitSegments(GOType curveType, qreal segLength, const VPointF *p, quint32 curveId,
+                                    VContainer *data, const QString &alias1, const QString &alias2)
+    -> QPair<QString, QString>
+{
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wswitch-default")
+    QT_WARNING_DISABLE_CLANG("-Wswitch-default")
+
+    switch (curveType)
+    {
+        case GOType::EllipticalArc:
+            return InitArc<VEllipticalArc>(data, segLength, p, curveId, alias1, alias2);
+        case GOType::Arc:
+            return InitArc<VArc>(data, segLength, p, curveId, alias1, alias2);
+        case GOType::CubicBezier:
+        case GOType::Spline:
+        {
+            QSharedPointer<VAbstractBezier> spline1;
+            QSharedPointer<VAbstractBezier> spline2;
+
+            const auto spl = data->GeometricObject<VAbstractCubicBezier>(curveId);
+            QPointF spl1p2, spl1p3, spl2p2, spl2p3;
+            if (not VFuzzyComparePossibleNulls(segLength, -1))
+            {
+                spl->CutSpline(segLength, spl1p2, spl1p3, spl2p2, spl2p3, p->name());
+            }
+            else
+            {
+                spl->CutSpline(0, spl1p2, spl1p3, spl2p2, spl2p3, p->name());
+            }
+
+            auto *spl1 = new VSpline(spl->GetP1(), spl1p2, spl1p3, *p);
+            auto *spl2 = new VSpline(*p, spl2p2, spl2p3, spl->GetP4());
+
+            if (not VFuzzyComparePossibleNulls(segLength, -1))
+            {
+                spline1 = QSharedPointer<VAbstractBezier>(spl1);
+                spline2 = QSharedPointer<VAbstractBezier>(spl2);
+            }
+            else
+            {
+                spline1 = QSharedPointer<VAbstractBezier>(new VSpline());
+                spline2 = QSharedPointer<VAbstractBezier>(new VSpline());
+
+                // Take names for empty splines from donors.
+                spline1->setName(spl1->name());
+                spline2->setName(spl2->name());
+
+                delete spl1;
+                delete spl2;
+            }
+
+            spline1->SetAliasSuffix(alias1);
+            spline2->SetAliasSuffix(alias2);
+
+            data->RegisterUniqueName(spline1);
+            data->AddSpline(spline1, NULL_ID, p->id());
+
+            data->RegisterUniqueName(spline2);
+            data->AddSpline(spline2, NULL_ID, p->id());
+
+            // Because we don't store segments, but only data about them we must register the names manually
+            data->RegisterUniqueName(spline1);
+            data->RegisterUniqueName(spline2);
+
+            return qMakePair(spline1->ObjectName(), spline2->ObjectName());
+        }
+        case GOType::CubicBezierPath:
+        case GOType::SplinePath:
+        {
+            QSharedPointer<VAbstractBezier> splP1;
+            QSharedPointer<VAbstractBezier> splP2;
+
+            const auto splPath = data->GeometricObject<VAbstractCubicBezierPath>(curveId);
+            VSplinePath *splPath1 = nullptr;
+            VSplinePath *splPath2 = nullptr;
+            if (not VFuzzyComparePossibleNulls(segLength, -1))
+            {
+                VPointF *pC = VToolCutSplinePath::CutSplinePath(segLength, splPath, p->name(), &splPath1, &splPath2);
+                delete pC;
+            }
+            else
+            {
+                VPointF *pC = VToolCutSplinePath::CutSplinePath(0, splPath, p->name(), &splPath1, &splPath2);
+                delete pC;
+            }
+
+            SCASSERT(splPath1 != nullptr)
+            SCASSERT(splPath2 != nullptr)
+
+            if (not VFuzzyComparePossibleNulls(segLength, -1))
+            {
+                splP1 = QSharedPointer<VAbstractBezier>(splPath1);
+                splP2 = QSharedPointer<VAbstractBezier>(splPath2);
+            }
+            else
+            {
+                splP1 = QSharedPointer<VAbstractBezier>(new VSplinePath());
+                splP2 = QSharedPointer<VAbstractBezier>(new VSplinePath());
+
+                // Take names for empty spline paths from donors.
+                splP1->setName(splPath1->name());
+                splP2->setName(splPath2->name());
+
+                delete splPath1;
+                delete splPath2;
+            }
+
+            splP1->SetAliasSuffix(alias1);
+            splP2->SetAliasSuffix(alias2);
+
+            data->RegisterUniqueName(splP1);
+            data->AddSpline(splP1, NULL_ID, p->id());
+
+            data->RegisterUniqueName(splP2);
+            data->AddSpline(splP2, NULL_ID, p->id());
+
+            // Because we don't store segments, but only data about them we must register the names manually
+            data->RegisterUniqueName(splP1);
+            data->RegisterUniqueName(splP2);
+
+            return qMakePair(splP1->ObjectName(), splP2->ObjectName());
+        }
+        case GOType::Point:
+        case GOType::PlaceLabel:
+        case GOType::Unknown:
+            Q_UNREACHABLE();
+            break;
+    }
+
+    QT_WARNING_POP
+
+    return {};
 }

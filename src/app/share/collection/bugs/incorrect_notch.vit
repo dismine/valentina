@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vit>
+    <!--Measurements created with Valentina v0.7.49.0 (https://smart-pattern.com.ua/).-->
+    <version>0.5.1</version>
+    <read-only>false</read-only>
+    <notes/>
+    <unit>cm</unit>
+    <pm_system>998</pm_system>
+    <personal>
+        <customer/>
+        <birth-date>1800-01-01</birth-date>
+        <gender>unknown</gender>
+        <email/>
+    </personal>
+    <body-measurements>
+        <m name="bust_circ" value="100"/>
+        <m name="width_shoulder" value="42"/>
+        <m name="neck_circ" value="42"/>
+        <m name="neck_back_to_waist_b" value="44"/>
+        <m name="neck_side_to_waist_b" value="45.5"/>
+        <m full_name="Длина рукава в сумме с шириной плеча" name="@Др" value="72"/>
+        <m full_name="Обхват бедер с учетом выступания живота" name="@Об" value="104"/>
+        <m full_name="Расстояние от талии до бёдер" name="@Б" value="18"/>
+        <m full_name="Длтна изделия" name="@Ди" value="85"/>
+        <m description="не менее 40 для сборки или подворота" full_name="ширина рукава" name="@Шр" value="40"/>
+        <m name="@Дгол" value="60+6"/>
+        <m full_name="Обхват головы" name="@Огол" value="60"/>
+    </body-measurements>
+</vit>

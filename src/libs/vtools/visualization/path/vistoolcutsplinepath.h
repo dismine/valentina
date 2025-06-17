@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,33 +29,49 @@
 #ifndef VISTOOLCUTSPLINEPATH_H
 #define VISTOOLCUTSPLINEPATH_H
 
-#include <qcompilerdetection.h>
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
 #include <QtGlobal>
+#include <limits>
 
 #include "../vmisc/def.h"
 #include "vispath.h"
 
-class VisToolCutSplinePath : public VisPath
+class VisToolCutSplinePath final : public VisPath
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     explicit VisToolCutSplinePath(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolCutSplinePath() Q_DECL_EQ_DEFAULT;
+    ~VisToolCutSplinePath() override = default;
 
-    virtual void RefreshGeometry() override;
-    void         setLength(const QString &expression);
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolCutSpline)};
-protected:
-    Q_DISABLE_COPY(VisToolCutSplinePath)
-    VScaledEllipse *point;
-    VCurvePathItem *splPath1;
-    VCurvePathItem *splPath2;
-    qreal           length;
+    void RefreshGeometry() override;
+    void VisualMode(quint32 id) override;
+
+    void SetSplinePathId(quint32 newSplineId);
+    void SetLength(const QString &expression);
+
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Vis::ToolCutSpline)
+    };
+
+private:
+    Q_DISABLE_COPY_MOVE(VisToolCutSplinePath) // NOLINT
+    VScaledEllipse *m_point{nullptr};
+    VCurvePathItem *m_splPath1{nullptr};
+    VCurvePathItem *m_splPath2{nullptr};
+    qreal m_length{std::numeric_limits<qreal>::infinity()};
+    quint32 m_splinePathId{NULL_ID};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolCutSplinePath::SetSplinePathId(quint32 newSplineId)
+{
+    m_splinePathId = newSplineId;
+}
 
 #endif // VISTOOLCUTSPLINEPATH_H

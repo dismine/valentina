@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef VCUBICBEZIERPATH_H
 #define VCUBICBEZIERPATH_H
 
-#include <qcompilerdetection.h>
 #include <QCoreApplication>
 #include <QPointF>
 #include <QSharedDataPointer>
@@ -39,60 +38,59 @@
 #include <QtGlobal>
 
 #include "vabstractcubicbezierpath.h"
-#include "vgeometrydef.h"
 #include "vpointf.h"
 
 class VCubicBezierPathData;
 
-class VCubicBezierPath : public VAbstractCubicBezierPath
+class VCubicBezierPath final : public VAbstractCubicBezierPath
 {
-    Q_DECLARE_TR_FUNCTIONS(VCubicBezierPath)
+    Q_DECLARE_TR_FUNCTIONS(VCubicBezierPath) // NOLINT
+
 public:
     explicit VCubicBezierPath(quint32 idObject = 0, Draw mode = Draw::Calculation);
     VCubicBezierPath(const VCubicBezierPath &curve);
-    VCubicBezierPath(const QVector<VPointF> &points, quint32 idObject = 0, Draw mode = Draw::Calculation);
-    VCubicBezierPath Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const;
-    VCubicBezierPath Flip(const QLineF &axis, const QString &prefix = QString()) const;
-    VCubicBezierPath Move(qreal length, qreal angle, const QString &prefix = QString()) const;
-    virtual ~VCubicBezierPath();
+    explicit VCubicBezierPath(const QVector<VPointF> &points, quint32 idObject = 0, Draw mode = Draw::Calculation);
+    auto Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const -> VCubicBezierPath;
+    auto Flip(const QLineF &axis, const QString &prefix = QString()) const -> VCubicBezierPath;
+    auto Move(qreal length, qreal angle, const QString &prefix = QString()) const -> VCubicBezierPath;
+    ~VCubicBezierPath() override;
 
-    VCubicBezierPath &operator=(const VCubicBezierPath &curve);
-#ifdef Q_COMPILER_RVALUE_REFS
-    VCubicBezierPath &operator=(VCubicBezierPath &&curve) Q_DECL_NOTHROW { Swap(curve); return *this; }
-#endif
+    auto operator=(const VCubicBezierPath &curve) -> VCubicBezierPath &;
 
-    inline void Swap(VCubicBezierPath &curve) Q_DECL_NOTHROW
-    { VAbstractCubicBezierPath::Swap(curve); std::swap(d, curve.d); }
+    VCubicBezierPath(VCubicBezierPath &&curve) noexcept;
+    auto operator=(VCubicBezierPath &&curve) noexcept -> VCubicBezierPath &;
 
-    VPointF &operator[](int indx);
+    auto operator[](vsizetype indx) -> VPointF &;
 
-    const VPointF &at(int indx) const;
+    auto at(vsizetype indx) const -> const VPointF &;
 
-    void   append(const VPointF &point);
+    void append(const VPointF &point);
 
-    virtual qint32  CountSubSpl() const override;
-    virtual qint32  CountPoints() const override;
-    virtual void    Clear() override;
-    virtual VSpline GetSpline(qint32 index) const override;
-    virtual qreal   GetStartAngle () const override;
-    virtual qreal   GetEndAngle () const override;
+    auto CountSubSpl() const -> vsizetype override;
+    auto CountPoints() const -> vsizetype override;
+    void Clear() override;
+    auto GetSpline(vsizetype index) const -> VSpline override;
+    auto GetStartAngle() const -> qreal override;
+    auto GetEndAngle() const -> qreal override;
 
-    virtual qreal GetC1Length() const override;
-    virtual qreal GetC2Length() const override;
+    auto GetC1Length() const -> qreal override;
+    auto GetC2Length() const -> qreal override;
 
-    virtual QVector<VSplinePoint> GetSplinePath() const override;
-    QVector<VPointF> GetCubicPath() const;
+    auto GetSplinePath() const -> QVector<VSplinePoint> override;
+    auto GetCubicPath() const -> QVector<VPointF>;
 
-    static qint32 CountSubSpl(qint32 size);
-    static qint32 SubSplOffset(qint32 subSplIndex);
-    static qint32 SubSplPointsCount(qint32 countSubSpl);
+    static auto CountSubSpl(vsizetype size) -> vsizetype;
+    static auto SubSplOffset(vsizetype subSplIndex) -> vsizetype;
+    static auto SubSplPointsCount(vsizetype countSubSpl) -> vsizetype;
+
 protected:
-    virtual VPointF FirstPoint() const  override;
-    virtual VPointF LastPoint() const  override;
+    auto FirstPoint() const -> VPointF override;
+    auto LastPoint() const -> VPointF override;
+
 private:
     QSharedDataPointer<VCubicBezierPathData> d;
 };
 
-Q_DECLARE_TYPEINFO(VCubicBezierPath, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VCubicBezierPath, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VCUBICBEZIERPATH_H

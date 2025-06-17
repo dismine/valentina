@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,13 +29,14 @@
 #ifndef VLAYOUTPAPER_H
 #define VLAYOUTPAPER_H
 
-#include <qcompilerdetection.h>
+#include <QGraphicsPathItem>
 #include <QSharedDataPointer>
 #include <QTypeInfo>
+#include <QtCore/qcontainerfwd.h>
 #include <QtGlobal>
 #include <atomic>
 
-#include "vlayoutdef.h"
+#include "../vmisc/defglobal.h"
 
 class VBestSquare;
 class VLayoutPaperData;
@@ -43,68 +44,81 @@ class VLayoutPiece;
 class QGraphicsRectItem;
 class QRectF;
 class QGraphicsItem;
-template <typename T> class QList;
-template <typename T> class QVector;
+class QMutex;
 
 class VLayoutPaper
 {
 public:
     VLayoutPaper();
-    VLayoutPaper(int height, int width);
+    VLayoutPaper(int height, int width, qreal layoutWidth);
     VLayoutPaper(const VLayoutPaper &paper);
 
     ~VLayoutPaper();
 
-    VLayoutPaper &operator=(const VLayoutPaper &paper);
-#ifdef Q_COMPILER_RVALUE_REFS
-    VLayoutPaper &operator=(VLayoutPaper &&paper) Q_DECL_NOTHROW { Swap(paper); return *this; }
-#endif
+    auto operator=(const VLayoutPaper &paper) -> VLayoutPaper &;
 
-    inline void Swap(VLayoutPaper &paper) Q_DECL_NOTHROW
-    { std::swap(d, paper.d); }
+    VLayoutPaper(VLayoutPaper &&paper) noexcept;
+    auto operator=(VLayoutPaper &&paper) noexcept -> VLayoutPaper &;
 
-    int  GetHeight() const;
+    auto GetHeight() const -> int;
     void SetHeight(int height);
 
-    int  GetWidth() const;
+    auto GetWidth() const -> int;
     void SetWidth(int width);
 
-    qreal GetLayoutWidth() const;
-    void  SetLayoutWidth(qreal width);
+    auto GetLayoutWidth() const -> qreal;
+    void SetLayoutWidth(qreal width);
 
-    quint32 GetShift() const;
-    void    SetShift(quint32 shift);
+    auto GetShift() const -> qreal;
+    void SetShift(qreal shift);
 
-    bool GetRotate() const;
+    auto GetRotate() const -> bool;
     void SetRotate(bool value);
 
-    int GetRotationIncrease() const;
-    void SetRotationIncrease(int value);
+    auto GetFollowGrainline() const -> bool;
+    void SetFollowGrainline(bool value);
 
-    bool IsSaveLength() const;
+    auto GetRotationNumber() const -> int;
+    void SetRotationNumber(int value);
+
+    auto IsSaveLength() const -> bool;
     void SetSaveLength(bool value);
 
     void SetPaperIndex(quint32 index);
 
-    bool ArrangeDetail(const VLayoutPiece &detail, std::atomic_bool &stop);
-    int  Count() const;
-    Q_REQUIRED_RESULT QGraphicsRectItem *GetPaperItem(bool autoCrop, bool textAsPaths) const;
-    Q_REQUIRED_RESULT QList<QGraphicsItem *> GetItemDetails(bool textAsPaths) const;
+    auto IsOriginPaperPortrait() const -> bool;
+    void SetOriginPaperPortrait(bool portrait);
 
-    QVector<VLayoutPiece> GetDetails() const;
-    void                   SetDetails(const QList<VLayoutPiece>& details);
+    auto ArrangeDetail(const VLayoutPiece &detail, std::atomic_bool &stop) -> bool;
+    auto Count() const -> vsizetype;
+    Q_REQUIRED_RESULT auto GetPaperItem(bool autoCropLength, bool autoCropWidth, bool textAsPaths,
+                                        bool togetherWithNotches, bool showLayoutAllowance) const
+        -> QGraphicsRectItem *;
+    Q_REQUIRED_RESULT auto GetGlobalContour() const -> QGraphicsPathItem *;
+    Q_REQUIRED_RESULT auto GetItemDetails(bool textAsPaths, bool togetherWithNotches, bool showLayoutAllowance) const
+        -> QList<QGraphicsItem *>;
 
-    QRectF DetailsBoundingRect() const;
+    auto GetDetails() const -> QVector<VLayoutPiece>;
+    void SetDetails(const QVector<VLayoutPiece> &details);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    void SetDetails(const QList<VLayoutPiece> &details);
+#endif
+
+    auto DetailsBoundingRect() const -> QRectF;
+
+    auto Efficiency() const -> qreal;
 
 private:
     QSharedDataPointer<VLayoutPaperData> d;
 
-    bool AddToSheet(const VLayoutPiece &detail, std::atomic_bool &stop);
-
-    bool SaveResult(const VBestSquare &bestResult, const VLayoutPiece &detail);
-
+    auto SaveResult(const VBestSquare &bestResult, const VLayoutPiece &detail
+#ifdef LAYOUT_DEBUG
+                    ,
+                    QMutex *mutex
+#endif
+                    ) -> bool;
 };
 
-Q_DECLARE_TYPEINFO(VLayoutPaper, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VLayoutPaper, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VLAYOUTPAPER_H

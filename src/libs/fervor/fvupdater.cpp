@@ -21,29 +21,25 @@
 
 #include "fvupdater.h"
 
-#include <qsystemdetection.h>
-#include <qxmlstream.h>
 #include <QApplication>
 #include <QByteArray>
 #include <QDate>
 #include <QDesktopServices>
+#include <QDir>
+#include <QGlobalStatic>
 #include <QLatin1String>
 #include <QMessageBox>
 #include <QMessageLogger>
 #include <QMutex>
 #include <QNetworkReply>
 #include <QNetworkRequest>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
+#include <QSslConfiguration>
 #include <QStringList>
-#include <QStringRef>
 #include <QVariant>
 #include <QXmlStreamAttributes>
 #include <QtDebug>
-#include <QSslConfiguration>
-#include <QDir>
-#include <QGlobalStatic>
+#include <qsystemdetection.h>
+#include <qxmlstream.h>
 
 #include "../ifc/exception/vexception.h"
 #include "../ifc/xml/vabstractconverter.h"
@@ -53,18 +49,29 @@
 #include "fvavailableupdate.h"
 #include "fvupdatewindow.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, defaultFeedURL,
-                          (QLatin1String("https://valentinaproject.bitbucket.io/Appcast.xml")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, testFeedURL,
-                          (QLatin1String("https://valentinaproject.bitbucket.io/Appcast_testing.xml")))
-}
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
+
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, defaultFeedURL, ("https://smart-pattern.com.ua/appcast.xml?appID=%1"_L1))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, testFeedURL, ("https://smart-pattern.com.ua/appcast_edge.xml?appID=%1"_L1))
+
+QT_WARNING_POP
+} // namespace
 
 QPointer<FvUpdater> FvUpdater::m_Instance;
 
 //---------------------------------------------------------------------------------------------------------------------
-FvUpdater* FvUpdater::sharedUpdater()
+auto FvUpdater::sharedUpdater() -> FvUpdater *
 {
     static QMutex mutex;
     if (m_Instance.isNull())
@@ -82,77 +89,36 @@ void FvUpdater::drop()
 {
     static QMutex mutex;
     mutex.lock();
-    delete m_Instance;
+    delete m_Instance.data();
     mutex.unlock();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString FvUpdater::CurrentFeedURL()
+auto FvUpdater::CurrentFeedURL() -> QString
 {
-    return FvUpdater::IsTestBuild() ? *testFeedURL : *defaultFeedURL;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int FvUpdater::CurrentVersion()
-{
-#ifdef Q_OS_MAC
-    const QString path = QCoreApplication::applicationDirPath() + QLatin1String("/../Resources/VERSION");
-#else
-    const QString path = QApplication::applicationDirPath() + QDir::separator() + QLatin1String("VERSION");
-#endif
-
-    QFile file(path);
-    if (file.exists())
+    const VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    QString clientID = settings->GetClientID();
+    if (clientID.isEmpty())
     {
-        if (not file.open(QIODevice::ReadOnly | QIODevice::Text))
-        {
-            return APP_VERSION;
-        }
+        clientID = QUuid::createUuid().toString();
+        settings->SetClientID(clientID);
+    }
 
-        QTextStream in(&file);
-        try
-        {
-            return VAbstractConverter::GetVersion(in.read(15));
-        }
-        catch(const VException &)
-        {
-            return APP_VERSION;
-        }
-    }
-    else
-    {
-        return APP_VERSION;
-    }
+    return FvUpdater::IsTestBuild() ? (*testFeedURL).arg(clientID) : (*defaultFeedURL).arg(clientID);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool FvUpdater::IsTestBuild()
+auto FvUpdater::IsTestBuild() -> bool
 {
-    const int version = FvUpdater::CurrentVersion();
-    return (version != 0x0 && version != APP_VERSION);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-FvUpdater::FvUpdater()
-    : QObject(nullptr),
-      m_updaterWindow(nullptr),
-      m_proposedUpdate(nullptr),
-      m_silentAsMuchAsItCouldGet(true),
-      m_feedURL(),
-      m_qnam(),
-      m_reply(nullptr),
-      m_httpRequestAborted(false),
-      m_dropOnFinnish(true),
-      m_xml()
-{
-    // noop
+    return (MAJOR_VERSION * 1000 + MINOR_VERSION) % 2 != 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 FvUpdater::~FvUpdater()
 {
     hideUpdaterWindow();
-    delete m_reply;
+    delete m_reply.data();
+    delete m_updaterWindow.data();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -162,7 +128,7 @@ void FvUpdater::showUpdaterWindowUpdatedWithCurrentUpdateProposal()
     hideUpdaterWindow();
 
     // Create a new window
-    m_updaterWindow = new FvUpdateWindow(qApp->getMainWindow());
+    m_updaterWindow = new FvUpdateWindow(m_mainWindow);
     m_updaterWindow->UpdateWindowWithCurrentProposedUpdate();
     m_updaterWindow->exec();
 }
@@ -170,7 +136,7 @@ void FvUpdater::showUpdaterWindowUpdatedWithCurrentUpdateProposal()
 //---------------------------------------------------------------------------------------------------------------------
 void FvUpdater::hideUpdaterWindow()
 {
-    if (m_updaterWindow)
+    if (m_updaterWindow != nullptr)
     {
         m_updaterWindow->close();
     }
@@ -189,13 +155,19 @@ void FvUpdater::SetFeedURL(const QString &feedURL)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString FvUpdater::GetFeedURL() const
+auto FvUpdater::GetFeedURL() const -> QString
 {
     return m_feedURL.toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool FvUpdater::IsDropOnFinnish() const
+void FvUpdater::SetMainWindow(QWidget *mainWindow)
+{
+    m_mainWindow = mainWindow;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto FvUpdater::IsDropOnFinnish() const -> bool
 {
     return m_dropOnFinnish;
 }
@@ -207,7 +179,7 @@ void FvUpdater::SetDropOnFinnish(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointer<FvAvailableUpdate> FvUpdater::GetProposedUpdate()
+auto FvUpdater::GetProposedUpdate() -> QPointer<FvAvailableUpdate>
 {
     return m_proposedUpdate;
 }
@@ -225,7 +197,7 @@ void FvUpdater::SkipUpdate()
 {
     qDebug() << "Skip update";
 
-    QPointer<FvAvailableUpdate> proposedUpdate = GetProposedUpdate();
+    QPointer<FvAvailableUpdate> const proposedUpdate = GetProposedUpdate();
     if (proposedUpdate.isNull())
     {
         qWarning() << "Proposed update is NULL (shouldn't be at this point)";
@@ -243,7 +215,7 @@ void FvUpdater::RemindMeLater()
 {
     qDebug() << "Remind me later";
 
-    qApp->Settings()->SetDateOfLastRemind(QDate::currentDate());
+    VAbstractApplication::VApp()->Settings()->SetDateOfLastRemind(QDate::currentDate());
 
     hideUpdaterWindow();
 }
@@ -253,7 +225,7 @@ void FvUpdater::UpdateInstallationConfirmed()
 {
     qDebug() << "Confirm update installation";
 
-    QPointer<FvAvailableUpdate> proposedUpdate = GetProposedUpdate();
+    QPointer<FvAvailableUpdate> const proposedUpdate = GetProposedUpdate();
     if (proposedUpdate.isNull())
     {
         qWarning() << "Proposed update is NULL (shouldn't be at this point)";
@@ -271,7 +243,7 @@ void FvUpdater::UpdateInstallationConfirmed()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool FvUpdater::CheckForUpdates(bool silentAsMuchAsItCouldGet)
+auto FvUpdater::CheckForUpdates(bool silentAsMuchAsItCouldGet) -> bool
 {
     if (m_feedURL.isEmpty())
     {
@@ -315,9 +287,9 @@ bool FvUpdater::CheckForUpdates(bool silentAsMuchAsItCouldGet)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool FvUpdater::CheckForUpdatesSilent()
+auto FvUpdater::CheckForUpdatesSilent() -> bool
 {
-    if (qApp->Settings()->GetDateOfLastRemind().daysTo(QDate::currentDate()) >= 1)
+    if (VAbstractApplication::VApp()->Settings()->GetDateOfLastRemind().daysTo(QDate::currentDate()) >= 1)
     {
         const bool success = CheckForUpdates(true);
         if (m_dropOnFinnish && not success)
@@ -326,18 +298,16 @@ bool FvUpdater::CheckForUpdatesSilent()
         }
         return success;
     }
-    else
+
+    if (m_dropOnFinnish)
     {
-        if (m_dropOnFinnish)
-        {
-            drop();
-        }
-        return true;
+        drop();
     }
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool FvUpdater::CheckForUpdatesNotSilent()
+auto FvUpdater::CheckForUpdatesNotSilent() -> bool
 {
     const bool success = CheckForUpdates(false);
     if (m_dropOnFinnish && not success)
@@ -362,31 +332,33 @@ void FvUpdater::startDownloadFeed(const QUrl &url)
 
     m_reply = m_qnam.get(request);
 
-    connect(m_reply.data(), &QNetworkReply::readyRead, this, [this]()
-    {
-        // this slot gets called every time the QNetworkReply has new data.
-        // We read all of its new data and write it into the file.
-        // That way we use less RAM than when reading it at the finished()
-        // signal of the QNetworkReply
-        m_xml.addData(m_reply->readAll());
-    });
-    connect(m_reply.data(), &QNetworkReply::downloadProgress, this, [this](qint64 bytesRead, qint64 totalBytes)
-    {
-        Q_UNUSED(bytesRead)
-        Q_UNUSED(totalBytes)
+    connect(m_reply.data(), &QNetworkReply::readyRead, this,
+            [this]()
+            {
+                // this slot gets called every time the QNetworkReply has new data.
+                // We read all of its new data and write it into the file.
+                // That way we use less RAM than when reading it at the finished()
+                // signal of the QNetworkReply
+                m_xml.addData(m_reply->readAll());
+            });
+    connect(m_reply.data(), &QNetworkReply::downloadProgress, this,
+            [this](qint64 bytesRead, qint64 totalBytes)
+            {
+                Q_UNUSED(bytesRead)
+                Q_UNUSED(totalBytes)
 
-        if (m_httpRequestAborted)
-        {
-            return;
-        }
-    });
+                if (m_httpRequestAborted)
+                {
+                    return;
+                }
+            });
     connect(m_reply.data(), &QNetworkReply::finished, this, &FvUpdater::httpFeedDownloadFinished);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void FvUpdater::cancelDownloadFeed()
 {
-    if (m_reply)
+    if (m_reply != nullptr)
     {
         m_httpRequestAborted = true;
         m_reply->abort();
@@ -433,7 +405,7 @@ void FvUpdater::httpFeedDownloadFinished()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool FvUpdater::xmlParseFeed()
+auto FvUpdater::xmlParseFeed() -> bool
 {
     QString xmlEnclosureUrl, xmlEnclosureVersion, xmlEnclosurePlatform;
 
@@ -444,66 +416,57 @@ bool FvUpdater::xmlParseFeed()
 
         if (m_xml.isStartElement())
         {
-            if (m_xml.name() == QLatin1String("item"))
+            if (m_xml.name() == "item"_L1)
             {
                 xmlEnclosureUrl.clear();
                 xmlEnclosureVersion.clear();
                 xmlEnclosurePlatform.clear();
             }
-            else if (m_xml.name() == QLatin1String("enclosure"))
+            else if (m_xml.name() == "enclosure"_L1)
             {
                 const QXmlStreamAttributes attribs = m_xml.attributes();
-                const QString fervorPlatform = QStringLiteral("fervor:platform");
+                const auto fervorPlatform = QStringLiteral("fervor:platform");
 
-                if (attribs.hasAttribute(fervorPlatform))
+                if (attribs.hasAttribute(fervorPlatform) &&
+                    CurrentlyRunningOnPlatform(attribs.value(fervorPlatform).toString().trimmed()))
                 {
-                    if (CurrentlyRunningOnPlatform(attribs.value(fervorPlatform).toString().trimmed()))
+                    xmlEnclosurePlatform = attribs.value(fervorPlatform).toString().trimmed();
+
+                    if (const auto attributeUrl = QStringLiteral("url"); attribs.hasAttribute(attributeUrl))
                     {
-                        xmlEnclosurePlatform = attribs.value(fervorPlatform).toString().trimmed();
+                        xmlEnclosureUrl = attribs.value(attributeUrl).toString().trimmed();
+                    }
+                    else
+                    {
+                        xmlEnclosureUrl.clear();
+                    }
 
-                        const QString attributeUrl = QStringLiteral("url");
-                        if (attribs.hasAttribute(attributeUrl))
+                    const auto fervorVersion = QStringLiteral("fervor:version");
+                    if (attribs.hasAttribute(fervorVersion))
+                    {
+                        const QString candidateVersion = attribs.value(fervorVersion).toString().trimmed();
+                        if (not candidateVersion.isEmpty())
                         {
-                            xmlEnclosureUrl = attribs.value(attributeUrl).toString().trimmed();
-                        }
-                        else
-                        {
-                            xmlEnclosureUrl.clear();
-                        }
-
-                        const QString fervorVersion = QStringLiteral("fervor:version");
-                        if (attribs.hasAttribute(fervorVersion))
-                        {
-                            const QString candidateVersion = attribs.value(fervorVersion).toString().trimmed();
-                            if (not candidateVersion.isEmpty())
-                            {
-                                xmlEnclosureVersion = candidateVersion;
-                            }
+                            xmlEnclosureVersion = candidateVersion;
                         }
                     }
                 }
             }
         }
-        else if (m_xml.isEndElement())
+        else if (m_xml.isEndElement() && m_xml.name() == "item"_L1)
         {
-            if (m_xml.name() == QLatin1String("item"))
-            {
-                // That's it - we have analyzed a single <item> and we'll stop
-                // here (because the topmost is the most recent one, and thus
-                // the newest version.
+            // That's it - we have analyzed a single <item> and we'll stop
+            // here (because the topmost is the most recent one, and thus
+            // the newest version.
 
-                return searchDownloadedFeedForUpdates(xmlEnclosureUrl,
-                                                      xmlEnclosureVersion,
-                                                      xmlEnclosurePlatform);
-            }
+            return searchDownloadedFeedForUpdates(xmlEnclosureUrl, xmlEnclosureVersion, xmlEnclosurePlatform);
         }
 
         if (m_xml.error() && m_xml.error() != QXmlStreamReader::PrematureEndOfDocumentError)
         {
-            showErrorDialog(tr("Feed parsing failed: %1 %2.").arg(QString::number(m_xml.lineNumber()),
-                                                                  m_xml.errorString()), false);
+            showErrorDialog(
+                tr("Feed parsing failed: %1 %2.").arg(QString::number(m_xml.lineNumber()), m_xml.errorString()), false);
             return false;
-
         }
     }
 
@@ -515,9 +478,8 @@ bool FvUpdater::xmlParseFeed()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool FvUpdater::searchDownloadedFeedForUpdates(const QString &xmlEnclosureUrl,
-                                               const QString &xmlEnclosureVersion,
-                                               const QString &xmlEnclosurePlatform)
+auto FvUpdater::searchDownloadedFeedForUpdates(const QString &xmlEnclosureUrl, const QString &xmlEnclosureVersion,
+                                               const QString &xmlEnclosurePlatform) -> bool
 {
     qDebug() << "Enclosure URL:" << xmlEnclosureUrl;
     qDebug() << "Enclosure version:" << xmlEnclosureVersion;
@@ -537,7 +499,7 @@ bool FvUpdater::searchDownloadedFeedForUpdates(const QString &xmlEnclosureUrl,
 
         showInformationDialog(tr("No updates were found."), false);
 
-        return true;	// Things have succeeded when you think of it.
+        return true; // Things have succeeded when you think of it.
     }
 
     //
@@ -545,7 +507,7 @@ bool FvUpdater::searchDownloadedFeedForUpdates(const QString &xmlEnclosureUrl,
     // to the user.
     //
 
-    delete m_proposedUpdate;
+    delete m_proposedUpdate.data();
     m_proposedUpdate = new FvAvailableUpdate(this);
     m_proposedUpdate->SetEnclosureUrl(xmlEnclosureUrl);
     m_proposedUpdate->SetEnclosureVersion(xmlEnclosureVersion);
@@ -558,7 +520,7 @@ bool FvUpdater::searchDownloadedFeedForUpdates(const QString &xmlEnclosureUrl,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool FvUpdater::VersionIsIgnored(const QString &version)
+auto FvUpdater::VersionIsIgnored(const QString &version) -> bool
 {
     // We assume that variable 'version' contains either:
     //	1) The current version of the application (ignore)
@@ -566,10 +528,10 @@ bool FvUpdater::VersionIsIgnored(const QString &version)
     //	3) A newer version (don't ignore)
     // 'version' is not likely to contain an older version in any case.
 
-    int decVersion = 0x0;
+    unsigned decVersion = 0x0;
     try
     {
-        decVersion = VAbstractConverter::GetVersion(version);
+        decVersion = VAbstractConverter::GetFormatVersion(version);
     }
     catch (const VException &e)
     {
@@ -577,22 +539,19 @@ bool FvUpdater::VersionIsIgnored(const QString &version)
         return true; // Ignore invalid version
     }
 
-    if (decVersion == FvUpdater::CurrentVersion())
+    if (decVersion == AppVersion())
     {
         return true;
     }
 
-    const int lastSkippedVersion = qApp->Settings()->GetLatestSkippedVersion();
-    if (lastSkippedVersion != 0x0)
+    if (const unsigned lastSkippedVersion = VAbstractApplication::VApp()->Settings()->GetLatestSkippedVersion();
+        lastSkippedVersion != 0x0 && decVersion == lastSkippedVersion)
     {
-        if (decVersion == lastSkippedVersion)
-        {
-            // Implicitly skipped version - skip
-            return true;
-        }
+        // Implicitly skipped version - skip
+        return true;
     }
 
-    if (decVersion > FvUpdater::CurrentVersion())
+    if (decVersion > AppVersion())
     {
         // Newer version - do not skip
         return false;
@@ -605,36 +564,33 @@ bool FvUpdater::VersionIsIgnored(const QString &version)
 //---------------------------------------------------------------------------------------------------------------------
 void FvUpdater::IgnoreVersion(const QString &version)
 {
-    int decVersion = 0x0;
+    unsigned decVersion = 0x0;
     try
     {
-        decVersion = VAbstractConverter::GetVersion(version);
+        decVersion = VAbstractConverter::GetFormatVersion(version);
     }
     catch (const VException &e)
     {
         Q_UNUSED(e)
-        return ; // Ignore invalid version
+        return; // Ignore invalid version
     }
 
-    if (decVersion == FvUpdater::CurrentVersion())
+    if (decVersion == AppVersion())
     {
         // Don't ignore the current version
         return;
     }
 
-    qApp->Settings()->SetLatestSkippedVersion(decVersion);
+    VAbstractApplication::VApp()->Settings()->SetLatestSkippedVersion(decVersion);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool FvUpdater::CurrentlyRunningOnPlatform(const QString &platform)
+auto FvUpdater::CurrentlyRunningOnPlatform(const QString &platform) -> bool
 {
-    const QStringList platforms = QStringList() << "Q_OS_LINUX"
-                                                << "Q_OS_MAC"
-                                                << "Q_OS_WIN32";
-
-    switch (platforms.indexOf(platform.toUpper().trimmed()))
+    switch (const auto platforms = QStringList({"Q_OS_LINUX", "Q_OS_MAC", "Q_OS_WIN32"});
+            platforms.indexOf(platform.toUpper().trimmed()))
     {
-        case 0: // Q_OS_LINUX
+        case 0:   // Q_OS_LINUX
 #ifdef Q_OS_LINUX // Defined on Linux.
             return true;
 #else
@@ -646,7 +602,7 @@ bool FvUpdater::CurrentlyRunningOnPlatform(const QString &platform)
 #else
             return false;
 #endif
-        case 2: // Q_OS_WIN32
+        case 2:   // Q_OS_WIN32
 #ifdef Q_OS_WIN32 // Defined on all supported versions of Windows.
             return true;
 #else
@@ -663,13 +619,10 @@ bool FvUpdater::CurrentlyRunningOnPlatform(const QString &platform)
 //---------------------------------------------------------------------------------------------------------------------
 void FvUpdater::showErrorDialog(const QString &message, bool showEvenInSilentMode)
 {
-    if (m_silentAsMuchAsItCouldGet)
+    if (m_silentAsMuchAsItCouldGet && not showEvenInSilentMode)
     {
-        if (not showEvenInSilentMode)
-        {
-            // Don't show errors in the silent mode
-            return;
-        }
+        // Don't show errors in the silent mode
+        return;
     }
 
     QMessageBox dlFailedMsgBox;
@@ -681,13 +634,10 @@ void FvUpdater::showErrorDialog(const QString &message, bool showEvenInSilentMod
 //---------------------------------------------------------------------------------------------------------------------
 void FvUpdater::showInformationDialog(const QString &message, bool showEvenInSilentMode)
 {
-    if (m_silentAsMuchAsItCouldGet)
+    if (m_silentAsMuchAsItCouldGet && not showEvenInSilentMode)
     {
-        if (not showEvenInSilentMode)
-        {
-            // Don't show information dialogs in the silent mode
-            return;
-        }
+        // Don't show information dialogs in the silent mode
+        return;
     }
 
     QMessageBox dlInformationMsgBox;

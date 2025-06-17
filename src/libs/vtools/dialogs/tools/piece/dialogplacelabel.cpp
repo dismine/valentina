@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -28,48 +28,44 @@
 #include "dialogplacelabel.h"
 #include "ui_dialogplacelabel.h"
 
-#include "visualization/line/vistoolspecialpoint.h"
-#include "../../../tools/vabstracttool.h"
-#include "../../../tools/vtoolseamallowance.h"
+#include "../../../visualization/line/vistoolspecialpoint.h"
 #include "../../support/dialogeditwrongformula.h"
-#include "../vgeometry/vplacelabelitem.h"
+#include "../vmisc/theme/vtheme.h"
+#include "../vpatterndb/vcontainer.h"
 
 #include <QTimer>
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogPlaceLabel::DialogPlaceLabel(const VContainer *data, quint32 toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogPlaceLabel),
-      m_showMode(false),
-      m_flagPoint(false),
-      m_flagWidth(false),
-      m_flagHeight(false),
-      m_flagAngle(false),
-      m_flagFormulaVisible(false),
-      m_formulaBaseHeightWidth(0),
-      m_formulaBaseHeightHeight(0),
-      m_formulaBaseHeightAngle(0),
-      m_formulaBaseVisible(0),
-      timerAngle(new QTimer(this)),
-      timerWidth(new QTimer(this)),
-      timerHeight(new QTimer(this)),
-      m_timerVisible(new QTimer(this))
+DialogPlaceLabel::DialogPlaceLabel(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
+    ui(new Ui::DialogPlaceLabel),
+    m_showMode(false),
+    m_formulaBaseHeightWidth(0),
+    m_formulaBaseHeightHeight(0),
+    m_formulaBaseHeightAngle(0),
+    m_formulaBaseVisible(0),
+    timerAngle(new QTimer(this)),
+    timerWidth(new QTimer(this)),
+    timerHeight(new QTimer(this)),
+    m_timerVisible(new QTimer(this)),
+    m_flagPoint(false),
+    m_flagWidth(false),
+    m_flagHeight(false),
+    m_flagAngle(false),
+    m_flagFormulaVisible(false),
+    m_flagError(false)
 {
     ui->setupUi(this);
     InitOkCancel(ui);
+
+    InitIcons();
 
     InitPlaceLabelTab();
     InitControlTab();
 
     EvalVisible();
 
-    flagError = false;
-    CheckState();
-
-    connect(ui->comboBoxPiece, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
-    {
-        CheckPieces();
-    });
+    connect(ui->comboBoxPiece, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]() { CheckPieces(); });
 
     vis = new VisToolSpecialPoint(data);
 }
@@ -89,7 +85,7 @@ void DialogPlaceLabel::EnbleShowMode(bool disable)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogPlaceLabel::GetCenterPoint() const
+auto DialogPlaceLabel::GetCenterPoint() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxPoint);
 }
@@ -101,16 +97,16 @@ void DialogPlaceLabel::SetCenterPoint(quint32 id)
 
     if (not m_showMode)
     {
-        VisToolSpecialPoint *point = qobject_cast<VisToolSpecialPoint *>(vis);
+        auto *point = qobject_cast<VisToolSpecialPoint *>(vis);
         SCASSERT(point != nullptr)
-        point->setObject1Id(id);
+        point->SetPointId(id);
     }
 
     CheckPoint();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PlaceLabelType DialogPlaceLabel::GetLabelType() const
+auto DialogPlaceLabel::GetLabelType() const -> PlaceLabelType
 {
     return static_cast<PlaceLabelType>(ui->comboBoxLabelType->currentData().toInt());
 }
@@ -126,16 +122,17 @@ void DialogPlaceLabel::SetLabelType(PlaceLabelType type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogPlaceLabel::GetWidth() const
+auto DialogPlaceLabel::GetWidth() const -> QString
 {
-    return qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditFormulaWidth->toPlainText(),
-                                              qApp->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(ui->plainTextEditFormulaWidth->toPlainText(),
+                                              VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::SetWidth(const QString &value)
 {
-    const QString formula = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
+    const QString formula = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed. TODO : see if I can get the max number of caracters in one line
     // of this PlainTextEdit to change 80 to this value
     if (formula.length() > 80)
@@ -144,24 +141,25 @@ void DialogPlaceLabel::SetWidth(const QString &value)
     }
     ui->plainTextEditFormulaWidth->setPlainText(formula);
 
-//    VisToolPlaceLabel *point = qobject_cast<VisToolPlaceLabel *>(vis);
-//    SCASSERT(point != nullptr)
-//    point->setObject1Id(id);
+    //    VisToolPlaceLabel *point = qobject_cast<VisToolPlaceLabel *>(vis);
+    //    SCASSERT(point != nullptr)
+    //    point->SetPointId(id);
 
     MoveCursorToEnd(ui->plainTextEditFormulaWidth);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogPlaceLabel::GetHeight() const
+auto DialogPlaceLabel::GetHeight() const -> QString
 {
-    return qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditFormulaHeight->toPlainText(),
-                                              qApp->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(ui->plainTextEditFormulaHeight->toPlainText(),
+                                              VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::SetHeight(const QString &value)
 {
-    const QString formula = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
+    const QString formula = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed. TODO : see if I can get the max number of caracters in one line
     // of this PlainTextEdit to change 80 to this value
     if (formula.length() > 80)
@@ -170,24 +168,25 @@ void DialogPlaceLabel::SetHeight(const QString &value)
     }
     ui->plainTextEditFormulaHeight->setPlainText(formula);
 
-//    VisToolPlaceLabel *point = qobject_cast<VisToolPlaceLabel *>(vis);
-//    SCASSERT(point != nullptr)
-//    point->setObject1Id(id);
+    //    VisToolPlaceLabel *point = qobject_cast<VisToolPlaceLabel *>(vis);
+    //    SCASSERT(point != nullptr)
+    //    point->SetPointId(id);
 
     MoveCursorToEnd(ui->plainTextEditFormulaHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogPlaceLabel::GetAngle() const
+auto DialogPlaceLabel::GetAngle() const -> QString
 {
-    return qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditFormulaAngle->toPlainText(),
-                                              qApp->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(ui->plainTextEditFormulaAngle->toPlainText(),
+                                              VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::SetAngle(const QString &value)
 {
-    const QString formula = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
+    const QString formula = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed. TODO : see if I can get the max number of caracters in one line
     // of this PlainTextEdit to change 80 to this value
     if (formula.length() > 80)
@@ -196,15 +195,15 @@ void DialogPlaceLabel::SetAngle(const QString &value)
     }
     ui->plainTextEditFormulaAngle->setPlainText(formula);
 
-//    VisToolPlaceLabel *point = qobject_cast<VisToolPlaceLabel *>(vis);
-//    SCASSERT(point != nullptr)
-//    point->setObject1Id(id);
+    //    VisToolPlaceLabel *point = qobject_cast<VisToolPlaceLabel *>(vis);
+    //    SCASSERT(point != nullptr)
+    //    point->SetPointId(id);
 
     MoveCursorToEnd(ui->plainTextEditFormulaAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogPlaceLabel::GetPieceId() const
+auto DialogPlaceLabel::GetPieceId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxPiece);
 }
@@ -245,32 +244,22 @@ void DialogPlaceLabel::SetPiecesList(const QVector<quint32> &list)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (not prepare)
+    if (not prepare && type == SceneObject::Point && SetObject(id, ui->comboBoxPoint, QString()))
     {
-        if (type == SceneObject::Point)
+        if (vis != nullptr)
         {
-            if (SetObject(id, ui->comboBoxPoint, QString()))
-            {
-                vis->VisualMode(id);
-                CheckPoint();
-                prepare = true;
-
-                FormulaWidthChanged();
-                FormulaHeightChanged();
-                FormulaAngleChanged();
-
-                this->setModal(true);
-                this->show();
-            }
+            vis->VisualMode(id);
         }
-    }
-}
+        CheckPoint();
+        prepare = true;
 
-//---------------------------------------------------------------------------------------------------------------------
-void DialogPlaceLabel::CheckState()
-{
-    SCASSERT(bOk != nullptr);
-    bOk->setEnabled(m_flagPoint && flagError && m_flagWidth && m_flagHeight && m_flagAngle && m_flagFormulaVisible);
+        timerWidth->setSingleShot(formulaTimerTimeout.count());
+        timerHeight->setSingleShot(formulaTimerTimeout.count());
+        timerAngle->setSingleShot(formulaTimerTimeout.count());
+
+        this->setModal(true);
+        this->show();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -293,104 +282,110 @@ void DialogPlaceLabel::closeEvent(QCloseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPlaceLabel::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+
+    if (event->type() == QEvent::PaletteChange)
+    {
+        InitIcons();
+        InitDialogButtonBoxIcons(ui->buttonBox);
+    }
+
+    // remember to call base class implementation
+    DialogTool::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::DeployFormulaWidthEdit()
 {
-    DeployFormula(ui->plainTextEditFormulaWidth, ui->pushButtonGrowWidth, m_formulaBaseHeightWidth);
+    DeployFormula(this, ui->plainTextEditFormulaWidth, ui->pushButtonGrowWidth, m_formulaBaseHeightWidth);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::DeployFormulaHeightEdit()
 {
-    DeployFormula(ui->plainTextEditFormulaHeight, ui->pushButtonGrowHeight, m_formulaBaseHeightHeight);
+    DeployFormula(this, ui->plainTextEditFormulaHeight, ui->pushButtonGrowHeight, m_formulaBaseHeightHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::DeployFormulaAngleEdit()
 {
-    DeployFormula(ui->plainTextEditFormulaAngle, ui->pushButtonGrowAngle, m_formulaBaseHeightAngle);
+    DeployFormula(this, ui->plainTextEditFormulaAngle, ui->pushButtonGrowAngle, m_formulaBaseHeightAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::DeployVisibleFormulaTextEdit()
 {
-    DeployFormula(ui->plainTextEditFormulaVisible, ui->pushButtonGrowVisible, m_formulaBaseVisible);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogPlaceLabel::FormulaWidthChanged()
-{
-    labelEditFormula = ui->labelEditFormulaWidth;
-    labelResultCalculation = ui->labelResultCalculationWidth;
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    ValFormulaChanged(m_flagWidth, ui->plainTextEditFormulaWidth, timerWidth, postfix);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogPlaceLabel::FormulaHeightChanged()
-{
-    labelEditFormula = ui->labelEditFormulaHeight;
-    labelResultCalculation = ui->labelResultCalculationHeight;
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    ValFormulaChanged(m_flagHeight, ui->plainTextEditFormulaHeight, timerHeight, postfix);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogPlaceLabel::FormulaAngleChanged()
-{
-    labelEditFormula = ui->labelEditFormulaAngle;
-    labelResultCalculation = ui->labelResultCalculationAngle;
-    ValFormulaChanged(m_flagAngle, ui->plainTextEditFormulaAngle, timerAngle, degreeSymbol);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogPlaceLabel::VisibleChanged()
-{
-    labelEditFormula = ui->labelEditVisible;
-    labelResultCalculation = ui->labelResultVisible;
-    ValFormulaChanged(m_flagFormulaVisible, ui->plainTextEditFormulaVisible, m_timerVisible, QString());
+    DeployFormula(this, ui->plainTextEditFormulaVisible, ui->pushButtonGrowVisible, m_formulaBaseVisible);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::EvalWidth()
 {
-    labelEditFormula = ui->labelEditFormulaWidth;
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    Eval(ui->plainTextEditFormulaWidth->toPlainText(), m_flagWidth, ui->labelResultCalculationWidth, postfix, true,
-         true);
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditFormulaWidth->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditFormulaWidth;
+    formulaData.labelResult = ui->labelResultCalculationWidth;
+    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
+    formulaData.checkLessThanZero = true;
+
+    Eval(formulaData, m_flagWidth);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::EvalHeight()
 {
-    labelEditFormula = ui->labelEditFormulaHeight;
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    Eval(ui->plainTextEditFormulaHeight->toPlainText(), m_flagHeight, ui->labelResultCalculationHeight, postfix, true,
-         true);
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditFormulaHeight->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditFormulaHeight;
+    formulaData.labelResult = ui->labelResultCalculationHeight;
+    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
+    formulaData.checkLessThanZero = true;
+
+    Eval(formulaData, m_flagHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::EvalAngle()
 {
-    labelEditFormula = ui->labelEditFormulaAngle;
-    Eval(ui->plainTextEditFormulaAngle->toPlainText(), m_flagAngle, ui->labelResultCalculationAngle, degreeSymbol,
-         false);
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditFormulaAngle->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditFormulaAngle;
+    formulaData.labelResult = ui->labelResultCalculationAngle;
+    formulaData.postfix = degreeSymbol;
+
+    Eval(formulaData, m_flagAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::EvalVisible()
 {
-    labelEditFormula = ui->labelEditVisible;
-    QString formula = ui->plainTextEditFormulaVisible->toPlainText();
-    Eval(formula, m_flagFormulaVisible, ui->labelResultVisible, QString(), false, true);
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditFormulaVisible->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditVisible;
+    formulaData.labelResult = ui->labelResultVisible;
+    formulaData.postfix = QString();
+    formulaData.checkLessThanZero = true;
+
+    Eval(formulaData, m_flagFormulaVisible);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::FXWidth()
 {
-    QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(data, toolId, this));
     dialog->setWindowTitle(tr("Edit rectangle width"));
     dialog->SetFormula(GetWidth());
-    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
+    dialog->setCheckLessThanZero(true);
+    dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetWidth(dialog->GetFormula());
@@ -400,10 +395,11 @@ void DialogPlaceLabel::FXWidth()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::FXHeight()
 {
-    QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(data, toolId, this));
     dialog->setWindowTitle(tr("Edit rectangle width"));
     dialog->SetFormula(GetHeight());
-    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
+    dialog->setCheckLessThanZero(true);
+    dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetHeight(dialog->GetFormula());
@@ -413,7 +409,7 @@ void DialogPlaceLabel::FXHeight()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::FXAngle()
 {
-    QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(data, toolId, this));
     dialog->setWindowTitle(tr("Edit angle"));
     dialog->SetFormula(GetAngle());
     dialog->setPostfix(degreeSymbol);
@@ -426,7 +422,7 @@ void DialogPlaceLabel::FXAngle()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::FXVisible()
 {
-    QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(data, toolId, this));
     dialog->setWindowTitle(tr("Control visibility"));
     dialog->SetFormula(GetFormulaVisible());
     if (dialog->exec() == QDialog::Accepted)
@@ -449,25 +445,39 @@ void DialogPlaceLabel::InitPlaceLabelTab()
     ui->plainTextEditFormulaHeight->installEventFilter(this);
     ui->plainTextEditFormulaAngle->installEventFilter(this);
 
-    ui->plainTextEditFormulaWidth->setPlainText(QString::number(UnitConvertor(1, Unit::Cm, qApp->patternUnit())));
-    ui->plainTextEditFormulaHeight->setPlainText(QString::number(UnitConvertor(1, Unit::Cm, qApp->patternUnit())));
+    ui->plainTextEditFormulaWidth->setPlainText(
+        QString::number(UnitConvertor(1, Unit::Cm, VAbstractValApplication::VApp()->patternUnits())));
+    ui->plainTextEditFormulaHeight->setPlainText(
+        QString::number(UnitConvertor(1, Unit::Cm, VAbstractValApplication::VApp()->patternUnits())));
 
     connect(ui->toolButtonExprWidth, &QPushButton::clicked, this, &DialogPlaceLabel::FXWidth);
     connect(ui->toolButtonExprHeight, &QPushButton::clicked, this, &DialogPlaceLabel::FXHeight);
     connect(ui->toolButtonExprAngle, &QPushButton::clicked, this, &DialogPlaceLabel::FXAngle);
 
-    connect(ui->plainTextEditFormulaWidth, &QPlainTextEdit::textChanged, this, &DialogPlaceLabel::FormulaWidthChanged);
+    connect(ui->plainTextEditFormulaWidth, &QPlainTextEdit::textChanged, this,
+            [this]() { timerWidth->start(formulaTimerTimeout); });
+
     connect(ui->plainTextEditFormulaHeight, &QPlainTextEdit::textChanged, this,
-            &DialogPlaceLabel::FormulaHeightChanged);
-    connect(ui->plainTextEditFormulaAngle, &QPlainTextEdit::textChanged, this, &DialogPlaceLabel::FormulaAngleChanged);
+            [this]() { timerHeight->start(formulaTimerTimeout); });
+
+    connect(ui->plainTextEditFormulaAngle, &QPlainTextEdit::textChanged, this,
+            [this]() { timerAngle->start(formulaTimerTimeout); });
 
     connect(ui->pushButtonGrowWidth, &QPushButton::clicked, this, &DialogPlaceLabel::DeployFormulaWidthEdit);
     connect(ui->pushButtonGrowHeight, &QPushButton::clicked, this, &DialogPlaceLabel::DeployFormulaHeightEdit);
     connect(ui->pushButtonGrowAngle, &QPushButton::clicked, this, &DialogPlaceLabel::DeployFormulaAngleEdit);
 
+    timerWidth->setSingleShot(true);
+    timerHeight->setSingleShot(true);
+    timerAngle->setSingleShot(true);
+
     connect(timerWidth, &QTimer::timeout, this, &DialogPlaceLabel::EvalWidth);
     connect(timerHeight, &QTimer::timeout, this, &DialogPlaceLabel::EvalHeight);
     connect(timerAngle, &QTimer::timeout, this, &DialogPlaceLabel::EvalAngle);
+
+    EvalWidth();
+    EvalHeight();
+    EvalAngle();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -477,56 +487,56 @@ void DialogPlaceLabel::InitControlTab()
 
     ui->plainTextEditFormulaVisible->installEventFilter(this);
 
+    m_timerVisible->setSingleShot(true);
+
     connect(m_timerVisible, &QTimer::timeout, this, &DialogPlaceLabel::EvalVisible);
     connect(ui->toolButtonExprVisible, &QPushButton::clicked, this, &DialogPlaceLabel::FXVisible);
-    connect(ui->plainTextEditFormulaVisible, &QPlainTextEdit::textChanged, this, &DialogPlaceLabel::VisibleChanged);
-    connect(ui->pushButtonGrowVisible, &QPushButton::clicked, this,
-            &DialogPlaceLabel::DeployVisibleFormulaTextEdit);
+    connect(ui->plainTextEditFormulaVisible, &QPlainTextEdit::textChanged, this,
+            [this]() { m_timerVisible->start(formulaTimerTimeout); });
+    connect(ui->pushButtonGrowVisible, &QPushButton::clicked, this, &DialogPlaceLabel::DeployVisibleFormulaTextEdit);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::FillPlaceLabelTypes()
 {
+    ui->comboBoxLabelType->addItem(tr("Cross"), static_cast<int>(PlaceLabelType::Cross));
     ui->comboBoxLabelType->addItem(tr("Segment"), static_cast<int>(PlaceLabelType::Segment));
     ui->comboBoxLabelType->addItem(tr("Rectangle"), static_cast<int>(PlaceLabelType::Rectangle));
-    ui->comboBoxLabelType->addItem(tr("Cross"), static_cast<int>(PlaceLabelType::Cross));
     ui->comboBoxLabelType->addItem(tr("T-shaped"), static_cast<int>(PlaceLabelType::Tshaped));
     ui->comboBoxLabelType->addItem(tr("Doubletree"), static_cast<int>(PlaceLabelType::Doubletree));
     ui->comboBoxLabelType->addItem(tr("Corner"), static_cast<int>(PlaceLabelType::Corner));
     ui->comboBoxLabelType->addItem(tr("Triangle"), static_cast<int>(PlaceLabelType::Triangle));
     ui->comboBoxLabelType->addItem(tr("H-shaped"), static_cast<int>(PlaceLabelType::Hshaped));
     ui->comboBoxLabelType->addItem(tr("Button"), static_cast<int>(PlaceLabelType::Button));
+    ui->comboBoxLabelType->addItem(tr("Circle"), static_cast<int>(PlaceLabelType::Circle));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::CheckPieces()
 {
-    if (not m_showMode)
+    QColor color;
+    if (ui->comboBoxPiece->count() <= 0 || ui->comboBoxPiece->currentIndex() == -1)
     {
-        QColor color = okColor;
-        if (ui->comboBoxPiece->count() <= 0 || ui->comboBoxPiece->currentIndex() == -1)
-        {
-            flagError = false;
-            color = errorColor;
-        }
-        else
-        {
-            flagError = true;
-            color = okColor;
-        }
-        ChangeColor(ui->labelPiece, color);
-        CheckState();
+        m_flagError = false;
+        color = errorColor;
     }
+    else
+    {
+        m_flagError = true;
+        color = OkColor(this);
+    }
+    ChangeColor(ui->labelPiece, color);
+    CheckState();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::CheckPoint()
 {
-    QColor color = okColor;
+    QColor color;
     if (ui->comboBoxPoint->currentIndex() != -1)
     {
         m_flagPoint = true;
-        color = okColor;
+        color = OkColor(this);
     }
     else
     {
@@ -538,16 +548,35 @@ void DialogPlaceLabel::CheckPoint()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogPlaceLabel::GetFormulaVisible() const
+void DialogPlaceLabel::InitIcons()
 {
-    QString formula = ui->plainTextEditFormulaVisible->toPlainText();
-    return qApp->TrVars()->TryFormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
+    const auto resource = QStringLiteral("icon");
+
+    const auto fxIcon = QStringLiteral("24x24/fx.png");
+    ui->toolButtonExprWidth->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    ui->toolButtonExprHeight->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    ui->toolButtonExprAngle->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    ui->toolButtonExprVisible->setIcon(VTheme::GetIconResource(resource, fxIcon));
+
+    const auto equalIcon = QStringLiteral("24x24/equal.png");
+    ui->label_4->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    ui->label_5->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    ui->label_6->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    ui->label_8->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogPlaceLabel::GetFormulaVisible() const -> QString
+{
+    QString const formula = ui->plainTextEditFormulaVisible->toPlainText();
+    return VTranslateVars::TryFormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::SetFormulaVisible(const QString &formula)
 {
-    const QString f = qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator());
+    const QString f = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (f.length() > 80)
     {
@@ -555,4 +584,16 @@ void DialogPlaceLabel::SetFormulaVisible(const QString &formula)
     }
     ui->plainTextEditFormulaVisible->setPlainText(f);
     MoveCursorToEnd(ui->plainTextEditFormulaVisible);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogPlaceLabel::IsNotMirrored() const -> bool
+{
+    return ui->checkBoxNotMirrored->isChecked();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPlaceLabel::SetNotMirrored(bool value)
+{
+    ui->checkBoxNotMirrored->setChecked(value);
 }

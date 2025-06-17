@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 #ifndef VNOBRUSHSCALEPATHITEM_H
 #define VNOBRUSHSCALEPATHITEM_H
 
-#include <qcompilerdetection.h>
+
 #include <QGraphicsPathItem>
 #include <QtGlobal>
 
@@ -39,16 +39,19 @@ class VNoBrushScalePathItem : public QGraphicsPathItem
 {
 public:
     explicit VNoBrushScalePathItem(QGraphicsItem *parent = nullptr);
+    ~VNoBrushScalePathItem() override = default;
+
+    void SetWidth(qreal width);
 
 protected:
-    virtual void paint(QPainter * painter, const QStyleOptionGraphicsItem * option,
-                       QWidget * widget = nullptr) override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 
-    virtual int  type() const override {return Type;}
+    auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Vis::NoBrush)};
 
 private:
-    Q_DISABLE_COPY(VNoBrushScalePathItem)
+    Q_DISABLE_COPY_MOVE(VNoBrushScalePathItem) // NOLINT
+    qreal m_defaultWidth;
 };
 
 #endif // VNOBRUSHSCALEPATHITEM_H

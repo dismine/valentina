@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -31,11 +31,11 @@
 #include "vexception.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionUndo::VExceptionUndo(const QString &what)
+VExceptionUndo::VExceptionUndo(const QString &what) V_NOEXCEPT_EXPR (true)
     :VException(what)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionUndo::VExceptionUndo(const VExceptionUndo &e)
+VExceptionUndo::VExceptionUndo(const VExceptionUndo &e) V_NOEXCEPT_EXPR (true)
     :VException(e)
 {}

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef DIALOGBISECTOR_H
 #define DIALOGBISECTOR_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -40,69 +39,102 @@
 
 namespace Ui
 {
-    class DialogBisector;
+class DialogBisector;
 }
 
 /**
  * @brief The DialogBisector class dialog for ToolBisector. Help create point and edit option.
  */
-class DialogBisector : public DialogTool
+class DialogBisector final : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
+    DialogBisector(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
+    ~DialogBisector() override;
 
-    DialogBisector(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual ~DialogBisector() override;
+    auto GetPointName() const -> QString;
+    void SetPointName(const QString &value);
 
-    void               SetPointName(const QString &value);
+    auto GetTypeLine() const -> QString;
+    void SetTypeLine(const QString &value);
 
-    QString            GetTypeLine() const;
-    void               SetTypeLine(const QString &value);
+    auto GetFormula() const -> QString;
+    void SetFormula(const QString &value);
 
-    QString            GetFormula() const;
-    void               SetFormula(const QString &value);
+    auto GetFirstPointId() const -> quint32;
+    void SetFirstPointId(const quint32 &value);
 
-    quint32            GetFirstPointId() const;
-    void               SetFirstPointId(const quint32 &value);
+    auto GetSecondPointId() const -> quint32;
+    void SetSecondPointId(const quint32 &value);
 
-    quint32            GetSecondPointId() const;
-    void               SetSecondPointId(const quint32 &value);
+    auto GetThirdPointId() const -> quint32;
+    void SetThirdPointId(const quint32 &value);
 
-    quint32            GetThirdPointId() const;
-    void               SetThirdPointId(const quint32 &value);
+    auto GetLineColor() const -> QString;
+    void SetLineColor(const QString &value);
 
-    QString            GetLineColor() const;
-    void               SetLineColor(const QString &value);
+    void SetNotes(const QString &notes);
+    auto GetNotes() const -> QString;
+
+    void ShowDialog(bool click) override;
+
 public slots:
-    virtual void       ChosenObject(quint32 id, const SceneObject &type) override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
     /**
      * @brief DeployFormulaTextEdit grow or shrink formula input
      */
-    void               DeployFormulaTextEdit();
-    /**
-     * @brief FormulaTextChanged when formula text changes for validation and calc
-     */
-    void               FormulaTextChanged();
-    virtual void       PointNameChanged() override;
-    void               FXLength();
+    void DeployFormulaTextEdit();
+
+    void PointNameChanged() override;
+    void FXLength();
+    void EvalFormula();
+
 protected:
-    virtual void       ShowVisualization() override;
+    void ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void       SaveData() override;
-    virtual void       closeEvent(QCloseEvent *event) override;
+    void SaveData() override;
+    void closeEvent(QCloseEvent *event) override;
+    void changeEvent(QEvent *event) override;
+    auto IsValid() const -> bool override;
+
 private:
-    Q_DISABLE_COPY(DialogBisector)
+    Q_DISABLE_COPY_MOVE(DialogBisector) // NOLINT
 
     /** @brief ui keeps information about user interface */
     Ui::DialogBisector *ui;
 
     /** @brief formula formula */
-    QString            formula;
+    QString m_formula{};
+    QString m_pointName{};
 
     /** @brief formulaBaseHeight base height defined by dialogui */
-    int                formulaBaseHeight;
+    int m_formulaBaseHeight{0};
+
+    QTimer *m_timerFormula;
+
+    bool m_flagFormula{false};
+    bool m_flagError{true};
+    bool m_flagName{true};
+
+    bool m_firstRelease{false};
+
+    /** @brief number number of handled objects */
+    qint32 m_number{0};
+
+    void ChosenThirdPoint(quint32 id);
+
+    void FinishCreating();
+
+    void InitIcons();
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto DialogBisector::IsValid() const -> bool
+{
+    return m_flagFormula && m_flagError && m_flagName;
+}
 
 #endif // DIALOGBISECTOR_H

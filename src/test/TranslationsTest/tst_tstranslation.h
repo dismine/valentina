@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -33,20 +33,21 @@
 
 class TST_TSTranslation : public TST_AbstractTranslation
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     explicit TST_TSTranslation(QObject *parent = nullptr);
 
 private slots:
-    void CheckEnglishLocalization_data();
-    void CheckEnglishLocalization();
     void CheckEmptyToolButton_data();
     void CheckEmptyToolButton();
     void CheckEllipsis_data();
     void CheckEllipsis();
+    void CheckInvalidCharacter_data();
+    void CheckInvalidCharacter();
 
 private:
-    Q_DISABLE_COPY(TST_TSTranslation)
+    Q_DISABLE_COPY_MOVE(TST_TSTranslation) // NOLINT
 
     void PrepareOriginalStrings();
 };

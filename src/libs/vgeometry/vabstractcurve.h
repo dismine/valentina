@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef VABSTRACTCURVE_H
 #define VABSTRACTCURVE_H
 
-#include <qcompilerdetection.h>
 #include <QPointF>
 #include <QSharedDataPointer>
 #include <QString>
@@ -37,81 +36,95 @@
 #include <QVector>
 #include <QtGlobal>
 
-#include "../ifc/ifcdef.h"
-#include "../vmisc/vmath.h"
+#include "../vmisc/typedef.h"
 #include "vgeometrydef.h"
 #include "vgobject.h"
 
-typedef QPair<QLineF, QLineF> DirectionArrow;
+using DirectionArrow = QPair<QLineF, QLineF>;
 
 class QPainterPath;
 class VAbstractCurveData;
 
-class VAbstractCurve :public VGObject
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
+
+class VAbstractCurve : public VGObject
 {
 public:
     explicit VAbstractCurve(const GOType &type, const quint32 &idObject = NULL_ID,
                             const Draw &mode = Draw::Calculation);
-    explicit VAbstractCurve(const VAbstractCurve &curve);
-    virtual ~VAbstractCurve() override;
+    VAbstractCurve(const VAbstractCurve &curve);
+    ~VAbstractCurve() override;
 
-    VAbstractCurve& operator= (const VAbstractCurve &curve);
-#ifdef Q_COMPILER_RVALUE_REFS
-    VAbstractCurve &operator=(VAbstractCurve &&curve) Q_DECL_NOTHROW { Swap(curve); return *this; }
-#endif
+    auto operator=(const VAbstractCurve &curve) -> VAbstractCurve &;
 
-    inline void Swap(VAbstractCurve &curve) Q_DECL_NOTHROW
-    { VGObject::Swap(curve); std::swap(d, curve.d); }
+    VAbstractCurve(VAbstractCurve &&curve) noexcept;
+    auto operator=(VAbstractCurve &&curve) noexcept -> VAbstractCurve &;
 
-    virtual QVector<QPointF> GetPoints() const =0;
-    static QVector<QPointF>  GetSegmentPoints(const QVector<QPointF> &points, const QPointF &begin, const QPointF &end,
-                                              bool reverse = false);
-    QVector<QPointF>         GetSegmentPoints(const QPointF &begin, const QPointF &end, bool reverse = false) const;
+    virtual auto GetPoints() const -> QVector<QPointF> = 0;
+    static auto GetSegmentPoints(const QVector<QPointF> &points, const QPointF &begin, const QPointF &end, bool reverse,
+                                 QString &error) -> QVector<QPointF>;
+    auto GetSegmentPoints(const QPointF &begin, const QPointF &end, bool reverse,
+                          const QString &piece = QString()) const -> QVector<QPointF>;
 
-    virtual QPainterPath     GetPath() const;
-    virtual qreal            GetLength() const =0;
-    qreal                    GetLengthByPoint(const QPointF &point) const;
-    virtual QVector<QPointF> IntersectLine(const QLineF &line) const;
-    virtual bool             IsIntersectLine(const QLineF &line) const;
+    virtual auto GetPath() const -> QPainterPath;
+    virtual auto GetLength() const -> qreal = 0;
+    auto GetLengthByPoint(const QPointF &point) const -> qreal;
+    virtual auto IntersectLine(const QLineF &line) const -> QVector<QPointF>;
+    virtual auto IsIntersectLine(const QLineF &line) const -> bool;
 
-    static bool              IsPointOnCurve(const QVector<QPointF> &points, const QPointF &p);
-    bool                     IsPointOnCurve(const QPointF &p) const;
+    static auto IsPointOnCurve(const QVector<QPointF> &points, const QPointF &p) -> bool;
+    auto IsPointOnCurve(const QPointF &p) const -> bool;
 
-    virtual qreal            GetStartAngle () const=0;
-    virtual qreal            GetEndAngle () const=0;
+    auto ClosestPoint(QPointF scenePoint) const -> QPointF;
 
-    quint32                  GetDuplicate() const;
-    void                     SetDuplicate(quint32 number);
+    virtual auto GetStartAngle() const -> qreal = 0;
+    virtual auto GetEndAngle() const -> qreal = 0;
 
-    QString                  GetColor() const;
-    void                     SetColor(const QString &color);
+    auto GetDuplicate() const -> quint32;
+    void SetDuplicate(quint32 number);
 
-    QString                  GetPenStyle() const;
-    void                     SetPenStyle(const QString &penStyle);
+    auto GetColor() const -> QString;
+    void SetColor(const QString &color);
 
-    qreal                    GetApproximationScale() const;
-    void                     SetApproximationScale(qreal value);
+    auto GetPenStyle() const -> QString;
+    void SetPenStyle(const QString &penStyle);
 
-    static qreal             PathLength(const QVector<QPointF> &path);
+    auto GetApproximationScale() const -> qreal;
+    void SetApproximationScale(qreal value);
 
-    static QVector<QPointF>  CurveIntersectLine(const QVector<QPointF> &points, const QLineF &line);
-    static bool              CurveIntersectAxis(const QPointF &point, qreal angle, const QVector<QPointF> &curvePoints,
-                                                QPointF *intersectionPoint);
+    static auto PathLength(const QVector<QPointF> &path) -> qreal;
 
-    virtual QString          NameForHistory(const QString &toolName) const=0;
-    virtual QVector<DirectionArrow> DirectionArrows() const;
-    static QPainterPath      ShowDirection(const QVector<DirectionArrow> &arrows, qreal width);
+    static auto CurveIntersectLine(const QVector<QPointF> &points, const QLineF &line) -> QVector<QPointF>;
+    static auto CurveIntersectAxis(const QPointF &point, qreal angle, const QVector<QPointF> &curvePoints,
+                                   QPointF *intersectionPoint) -> bool;
 
-    static qreal LengthCurveDirectionArrow();
+    virtual auto NameForHistory(const QString &toolName) const -> QString = 0;
+    virtual auto DirectionArrows() const -> QVector<DirectionArrow>;
+    static auto ShowDirection(const QVector<DirectionArrow> &arrows, qreal width) -> QPainterPath;
+
+    static auto LengthCurveDirectionArrow() -> qreal;
+
+    void SetAliasSuffix(const QString &aliasSuffix) override;
+
+    static auto Curvature(const QVector<QPointF> &vertices) -> double;
+
 protected:
-    virtual void             CreateName() =0;
+    virtual void CreateName() = 0;
+    virtual void CreateAlias() = 0;
+
 private:
     QSharedDataPointer<VAbstractCurveData> d;
 
-    static QVector<QPointF>  FromBegin(const QVector<QPointF> &points, const QPointF &begin, bool *ok = nullptr);
-    static QVector<QPointF>  ToEnd(const QVector<QPointF> &points, const QPointF &end, bool *ok = nullptr);
+    static auto FromBegin(const QVector<QPointF> &points, const QPointF &begin, bool *ok = nullptr) -> QVector<QPointF>;
+    static auto ToEnd(const QVector<QPointF> &points, const QPointF &end, bool *ok = nullptr) -> QVector<QPointF>;
 };
 
-Q_DECLARE_TYPEINFO(VAbstractCurve, Q_MOVABLE_TYPE);
+QT_WARNING_POP
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 7, 0)
+Q_DECLARE_TYPEINFO(VAbstractCurve, Q_MOVABLE_TYPE); // NOLINT
+#endif
 
 #endif // VABSTRACTCURVE_H

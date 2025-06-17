@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -27,29 +27,24 @@
  *************************************************************************/
 
 #include "dialogpin.h"
+#include "../../../visualization/line/vistoolspecialpoint.h"
+#include "../vpatterndb/vcontainer.h"
 #include "ui_dialogpin.h"
-#include "visualization/line/vistoolspecialpoint.h"
-#include "../../../tools/vabstracttool.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogPin::DialogPin(const VContainer *data, quint32 toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogPin),
-      m_showMode(false),
-      m_flagPoint(false)
+DialogPin::DialogPin(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
+    ui(new Ui::DialogPin),
+    m_showMode(false),
+    m_flagPoint(false),
+    m_flagError(false)
 {
     ui->setupUi(this);
     InitOkCancel(ui);
 
     FillComboBoxPoints(ui->comboBoxPoint);
 
-    flagError = false;
-    CheckState();
-
-    connect(ui->comboBoxPiece, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
-    {
-        CheckPieces();
-    });
+    connect(ui->comboBoxPiece, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]() { CheckPieces(); });
 
     vis = new VisToolSpecialPoint(data);
 }
@@ -68,7 +63,7 @@ void DialogPin::EnbleShowMode(bool disable)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogPin::GetPieceId() const
+auto DialogPin::GetPieceId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxPiece);
 }
@@ -95,7 +90,7 @@ void DialogPin::SetPieceId(quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogPin::GetPointId() const
+auto DialogPin::GetPointId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxPoint);
 }
@@ -105,9 +100,9 @@ void DialogPin::SetPointId(quint32 id)
 {
     setCurrentPointId(ui->comboBoxPoint, id);
 
-    VisToolSpecialPoint *point = qobject_cast<VisToolSpecialPoint *>(vis);
+    auto *point = qobject_cast<VisToolSpecialPoint *>(vis);
     SCASSERT(point != nullptr)
-    point->setObject1Id(id);
+    point->SetPointId(id);
 
     CheckPoint();
 }
@@ -127,27 +122,17 @@ void DialogPin::SetPiecesList(const QVector<quint32> &list)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPin::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (not prepare)
+    if (not prepare && type == SceneObject::Point && SetObject(id, ui->comboBoxPoint, QString()))
     {
-        if (type == SceneObject::Point)
+        if (vis != nullptr)
         {
-            if (SetObject(id, ui->comboBoxPoint, QString()))
-            {
-                vis->VisualMode(id);
-                CheckPoint();
-                prepare = true;
-                this->setModal(true);
-                this->show();
-            }
+            vis->VisualMode(id);
         }
+        CheckPoint();
+        prepare = true;
+        this->setModal(true);
+        this->show();
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogPin::CheckState()
-{
-    SCASSERT(bOk != nullptr);
-    bOk->setEnabled(m_flagPoint && flagError);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -161,16 +146,16 @@ void DialogPin::CheckPieces()
 {
     if (not m_showMode)
     {
-        QColor color = okColor;
+        QColor color;
         if (ui->comboBoxPiece->count() <= 0 || ui->comboBoxPiece->currentIndex() == -1)
         {
-            flagError = false;
+            m_flagError = false;
             color = errorColor;
         }
         else
         {
-            flagError = true;
-            color = okColor;
+            m_flagError = true;
+            color = OkColor(this);
         }
         ChangeColor(ui->labelPiece, color);
         CheckState();
@@ -180,11 +165,11 @@ void DialogPin::CheckPieces()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPin::CheckPoint()
 {
-    QColor color = okColor;
+    QColor color;
     if (ui->comboBoxPoint->currentIndex() != -1)
     {
         m_flagPoint = true;
-        color = okColor;
+        color = OkColor(this);
     }
     else
     {

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,16 +29,14 @@
 #ifndef VMAINGRAPHICSVIEW_H
 #define VMAINGRAPHICSVIEW_H
 
-#include <qcompilerdetection.h>
 #include <QGraphicsView>
 #include <QMetaObject>
 #include <QObject>
 #include <QPointF>
+#include <QPointer>
 #include <QRectF>
 #include <QString>
-#include <Qt>
 #include <QtGlobal>
-#include <QPointer>
 
 /*!
  * This class adds ability to zoom QGraphicsView using mouse wheel. The point under cursor
@@ -72,42 +70,48 @@ class QPinchGesture;
 
 class GraphicsViewZoom : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
-    explicit GraphicsViewZoom(QGraphicsView* view);
+    explicit GraphicsViewZoom(QGraphicsView *view);
     void gentle_zoom(double factor);
     void set_modifiers(Qt::KeyboardModifiers modifiers);
     void set_zoom_factor_base(double value);
     void InitScrollingAnimation();
+
 signals:
     void zoomed();
+
 public slots:
     void VerticalScrollingTime(qreal x);
     void HorizontalScrollingTime(qreal x);
     void animFinished();
+
 protected:
-    virtual bool eventFilter(QObject* object, QEvent* event) override;
+    auto eventFilter(QObject *object, QEvent *event) -> bool override;
+
 private:
-    Q_DISABLE_COPY(GraphicsViewZoom)
-    QGraphicsView        *_view;
-    Qt::KeyboardModifiers _modifiers;
-    double                _zoom_factor_base;
-    QPointF               target_scene_pos;
-    QPointF               target_viewport_pos;
-    QPointer<QTimeLine>   verticalScrollAnim;
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(GraphicsViewZoom) // NOLINT
+    QGraphicsView *_view;
+    Qt::KeyboardModifiers _modifiers{Qt::ControlModifier};
+    double _zoom_factor_base{1.0015};
+    QPointF target_scene_pos{};
+    QPointF target_viewport_pos{};
+    QPointer<QTimeLine> verticalScrollAnim{};
     /** @brief _numScheduledVerticalScrollings keep number scheduled vertical scrollings. */
-    qreal                _numScheduledVerticalScrollings;
-    QPointer<QTimeLine>   horizontalScrollAnim;
+    qreal _numScheduledVerticalScrollings{0};
+    QPointer<QTimeLine> horizontalScrollAnim{};
     /** @brief _numScheduledHorizontalScrollings keep number scheduled horizontal scrollings. */
-    qreal                _numScheduledHorizontalScrollings;
+    qreal _numScheduledHorizontalScrollings{0};
 
-    void FictiveSceneRect(QGraphicsScene *sc, QGraphicsView *view);
+    static void FictiveSceneRect(QGraphicsScene *sc, QGraphicsView *view);
 
-    void StartVerticalScrollings(QWheelEvent* wheel_event);
-    void StartHorizontalScrollings(QWheelEvent* wheel_event);
+    void StartVerticalScrollings(QWheelEvent *wheel_event);
+    void StartHorizontalScrollings(QWheelEvent *wheel_event);
 
-    bool GestureEvent(QGestureEvent *event);
-    void PinchTriggered(QPinchGesture* gesture);
+    auto GestureEvent(QGestureEvent *event) -> bool;
+    void PinchTriggered(QPinchGesture *gesture);
 };
 
 /**
@@ -115,17 +119,20 @@ private:
  */
 class VMainGraphicsView : public QGraphicsView
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     explicit VMainGraphicsView(QWidget *parent = nullptr);
     void setShowToolOptions(bool value);
     void AllowRubberBand(bool value);
 
     static void NewSceneRect(QGraphicsScene *sc, QGraphicsView *view, QGraphicsItem *item = nullptr);
-    static QRectF SceneVisibleArea(QGraphicsView *view);
+    static auto SceneVisibleArea(QGraphicsView *view) -> QRectF;
 
-    static qreal MinScale();
-    static qreal MaxScale();
+    static auto MinScale() -> qreal;
+    static auto MaxScale() -> qreal;
+
+    void EnsureItemVisibleWithDelay(const QGraphicsItem *item, unsigned long msecs, int xmargin = 5, int ymargin = 5);
 
     void EnsureVisibleWithDelay(const QRectF &rect, unsigned long msecs, int xmargin = 50, int ymargin = 50);
     void EnsureVisibleWithDelay(const QGraphicsItem *item, unsigned long msecs, int xmargin = 50, int ymargin = 50);
@@ -136,7 +143,7 @@ public:
 
     void SetAntialiasing(bool value);
 
-    bool IsOpenGLRender() const;
+    auto IsOpenGLRender() const -> bool;
 
 signals:
     /**
@@ -144,29 +151,36 @@ signals:
      *
      * Usefull when you need show dialog after working with tool visualization.
      */
-    void     MouseRelease();
-    void     itemClicked(QGraphicsItem *item);
-    void     ScaleChanged(qreal scale);
+    void MouseRelease();
+    void itemClicked(QGraphicsItem *item);
+    void ScaleChanged(qreal scale);
+    void ZoomFitBestCurrent();
+
 public slots:
-    void     Zoom(qreal scale);
-    void     ZoomIn();
-    void     ZoomOut();
-    void     ZoomOriginal();
-    void     ZoomFitBest();
-    void     ResetScrollingAnimation();
+    void Zoom(qreal scale);
+    void ZoomIn();
+    void ZoomOut();
+    void ZoomOriginal();
+    void ZoomFitBest();
+    void ResetScrollingAnimation();
+
 protected:
-    virtual void mousePressEvent(QMouseEvent *event) override;
-    virtual void mouseMoveEvent(QMouseEvent *event) override;
-    virtual void mouseReleaseEvent(QMouseEvent *event) override;
-    virtual void mouseDoubleClickEvent(QMouseEvent *event) override;
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseMoveEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
+    void mouseDoubleClickEvent(QMouseEvent *event) override;
+    void dragEnterEvent(QDragEnterEvent *event) override;
+    void dragMoveEvent(QDragMoveEvent *event) override;
+    void dropEvent(QDropEvent *event) override;
+
 private:
-    Q_DISABLE_COPY(VMainGraphicsView)
-    GraphicsViewZoom* zoom;
-    bool              showToolOptions;
-    bool              isAllowRubberBand;
-    QPoint            m_ptStartPos;
-    QCursor           m_oldCursor;
-    Qt::CursorShape   m_currentCursor;
+    Q_DISABLE_COPY_MOVE(VMainGraphicsView) // NOLINT
+    GraphicsViewZoom *zoom{nullptr};
+    bool showToolOptions{true};
+    bool isAllowRubberBand{true};
+    QPoint m_ptStartPos{};
+    QCursor m_oldCursor{};
+    Qt::CursorShape m_currentCursor{Qt::ArrowCursor};
 };
 
 #endif // VMAINGRAPHICSVIEW_H

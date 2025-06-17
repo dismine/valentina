@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 #ifndef VTOOLPOINTOFINTERSECTIONCIRCLES_H
 #define VTOOLPOINTOFINTERSECTIONCIRCLES_H
 
-#include <qcompilerdetection.h>
+
 #include <QDomElement>
 #include <QGraphicsItem>
 #include <QMetaObject>
@@ -65,28 +65,28 @@ struct VToolPointOfIntersectionCirclesInitData : VToolSinglePointInitData
 
 class VToolPointOfIntersectionCircles : public VToolSinglePoint
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
-    virtual void setDialog() override;
-    static VToolPointOfIntersectionCircles *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
-                                                   VAbstractPattern *doc, VContainer *data);
-    static VToolPointOfIntersectionCircles *Create(VToolPointOfIntersectionCirclesInitData &initData);
-    static bool FindPoint(const QPointF &c1Point, const QPointF &c2Point, qreal c1Radius, qreal c2Radius,
-                             const CrossCirclesPoint crossPoint, QPointF *intersectionPoint);
+    virtual void SetDialog() override;
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolPointOfIntersectionCircles *;
+    static auto Create(VToolPointOfIntersectionCirclesInitData &initData) -> VToolPointOfIntersectionCircles *;
+    static auto FindPoint(const QPointF &c1Point, const QPointF &c2Point, qreal c1Radius, qreal c2Radius,
+                          const CrossCirclesPoint crossPoint, QPointF *intersectionPoint) -> bool;
     static const QString ToolType;
-    virtual int  type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::PointOfIntersectionCircles) };
 
-    QString FirstCircleCenterPointName() const;
-    QString SecondCircleCenterPointName() const;
+    auto FirstCircleCenterPointName() const -> QString;
+    auto SecondCircleCenterPointName() const -> QString;
 
-    VFormula GetFirstCircleRadius() const;
+    auto GetFirstCircleRadius() const -> VFormula;
     void     SetFirstCircleRadius(const VFormula &value);
 
-    VFormula GetSecondCircleRadius() const;
+    auto GetSecondCircleRadius() const -> VFormula;
     void     SetSecondCircleRadius(const VFormula &value);
 
-    CrossCirclesPoint GetCrossCirclesPoint() const;
+    auto GetCrossCirclesPoint() const -> CrossCirclesPoint;
     void              SetCrossCirclesPoint(const CrossCirclesPoint &value);
 
     virtual void ShowVisualization(bool show) override;
@@ -100,7 +100,7 @@ protected:
     virtual void ReadToolAttributes(const QDomElement &domElement) override;
     virtual void SetVisualization() override;
 private:
-    Q_DISABLE_COPY(VToolPointOfIntersectionCircles)
+    Q_DISABLE_COPY_MOVE(VToolPointOfIntersectionCircles) // NOLINT
 
     quint32 firstCircleCenterId;
     quint32 secondCircleCenterId;

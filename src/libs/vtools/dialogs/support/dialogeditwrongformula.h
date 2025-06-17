@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 #ifndef DIALOGEDITWRONGFORMULA_H
 #define DIALOGEDITWRONGFORMULA_H
 
-#include <qcompilerdetection.h>
+#include <QDialog>
 #include <QMap>
 #include <QMetaObject>
 #include <QObject>
@@ -37,10 +37,9 @@
 #include <QTableWidgetItem>
 #include <QtGlobal>
 
-#include "../tools/dialogtool.h"
-
-template <class T> class QSharedPointer;
 class VMeasurement;
+struct FormulaData;
+class VContainer;
 
 namespace Ui
 {
@@ -55,71 +54,115 @@ class DialogEditWrongFormula;
  *
  * Don't implemant button "Apply" for this dialog!!
  */
-class DialogEditWrongFormula : public DialogTool
+class DialogEditWrongFormula final : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
-    DialogEditWrongFormula(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual ~DialogEditWrongFormula() override;
+    DialogEditWrongFormula(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
+    ~DialogEditWrongFormula() override;
 
-    QString      GetFormula() const;
-    void         SetFormula(const QString &value);
-    void         setCheckZero(bool value);
-    void         setCheckLessThanZero(bool value);
-    void         setPostfix(const QString &value);
-    void         SetMeasurementsMode();
-    void         SetIncrementsMode();
-    void         SetPreviewCalculationsMode();
+    auto GetFormula() const -> QString;
+    void SetFormula(const QString &value);
+    void setCheckZero(bool value);
+    void setCheckLessThanZero(bool value);
+    void setPostfix(const QString &value);
+    void SetMeasurementsMode();
+    void SetIncrementsMode();
+    void SetPreviewCalculationsMode();
+    void ShowPieceArea(bool show) const;
+
 public slots:
-    virtual void DialogAccepted() override;
-    virtual void DialogRejected() override;
-    virtual void EvalFormula() override;
-    void         ValChanged(int row);
-    void         PutHere();
-    void         PutVal(QTableWidgetItem * item);
+    virtual void DialogAccepted();
+    virtual void DialogRejected();
 
-    void         Measurements();
-    void         LengthLines();
-    void         RadiusArcs();
-    void         AnglesCurves();
-    void         LengthCurves();
-    void         CurvesCLength();
-    void         AngleLines();
-    void         Increments();
-    void         PreviewCalculations();
-    void         Functions();
-protected:
-    virtual void CheckState() final;
-    virtual void closeEvent(QCloseEvent *event) override;
-    virtual void showEvent( QShowEvent *event ) override;
-    virtual void resizeEvent(QResizeEvent *event) override;
+    void EvalFormula();
+    void ValChanged(int row);
+    void PutHere();
+    void PutVal(QTableWidgetItem *item);
+
+    void Measurements();
+    void LengthLines();
+    void RadiusArcs();
+    void AnglesCurves();
+    void LengthCurves();
+    void CurvesCLength();
+    void AngleLines();
+    void Increments();
+    void PreviewCalculations();
+    void PieceArea();
+    void Functions();
+
+signals:
+    /**
+     * @brief DialogClosed signal dialog closed
+     * @param result keep result
+     */
+    void DialogClosed(int result);
+    /**
+     * @brief DialogApplied emit signal dialog apply changes
+     */
+    void DialogApplied();
+
 private slots:
     void FilterVariablesEdited(const QString &filter);
+
 private:
-    Q_DISABLE_COPY(DialogEditWrongFormula)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DialogEditWrongFormula) // NOLINT
     Ui::DialogEditWrongFormula *ui;
 
+    const VContainer *m_data;
+
+    quint32 m_toolId;
+
     /** @brief formula string with formula */
-    QString           formula;
+    QString formula{};
 
     /** @brief formulaBaseHeight base height defined by dialogui */
-    int formulaBaseHeight;
+    int formulaBaseHeight{0};
 
-    bool checkZero;
-    bool checkLessThanZero;
-    QString postfix;
-    bool restoreCursor;
+    bool checkZero{false};
+    bool checkLessThanZero{false};
+    QString postfix{};
+    bool restoreCursor{false};
+
+    QTimer *timerFormula;
+
+    bool flagFormula{false};
+
+    /** @brief m_isInitialized true if window is initialized */
+    bool m_isInitialized{false};
 
     void InitVariables();
 
-    template <class key, class val>
-    void ShowVariable(const QMap<key, val> &var);
-    void ShowMeasurements(const QMap<QString, QSharedPointer<VMeasurement> > &var);
+    template <class T> void ShowVariable(const QList<T> &vars);
+    void ShowMeasurements(const QList<QSharedPointer<VMeasurement>> &vars);
     void ShowFunctions();
     void ShowIncrementsInPreviewCalculation(bool show);
 
-    void SetDescription(const QString &name, qreal value, const QString &unit, const QString &description);
+    void SetMeasurementDescription(QTableWidgetItem *item, const QString &name);
+    void SetPieceAreaDescription(QTableWidgetItem *item, const QString &name);
+
+    void SetDescription(const QString &name, qreal value, bool specialUnits, const QString &description,
+                        bool square = false);
+
+    auto Eval(const FormulaData &formulaData, bool &flag) -> qreal;
+
+    void InitIcons();
+
+    virtual auto IsValid() const -> bool;
+    void closeEvent(QCloseEvent *event) override;
+    void showEvent(QShowEvent *event) override;
+    void resizeEvent(QResizeEvent *event) override;
+    void changeEvent(QEvent *event) override;
+    virtual void CheckState();
 };
 
+//---------------------------------------------------------------------------------------------------------------------
+inline auto DialogEditWrongFormula::IsValid() const -> bool
+{
+    return flagFormula;
+}
 
 #endif // DIALOGEDITWRONGFORMULA_H

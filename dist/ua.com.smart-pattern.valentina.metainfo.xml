@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2023 Roman Telezhynskyi dismine@gmail.com -->
+<component type="desktop">
+ <id>ua.com.smart-pattern.valentina.desktop</id>
+ <launchable type="desktop-id">ua.com.smart-pattern.valentina.desktop</launchable>
+ <name>Valentina</name>
+ <summary>Provides a cross-platform patternmaking program which allows designers to create and model patterns of clothing</summary>
+ <metadata_license>CC0-1.0</metadata_license>
+ <project_license>GPL-3.0-or-later</project_license>
+ <description>
+  <p>
+   Valentina is a cross-platform patternmaking program which allows designers 
+   to create and model patterns of clothing. This software allows pattern 
+   creation, using either standard sizing tables or an individual’s set of 
+   measurements. It blends new technologies with traditional methods to create 
+   a unique pattern making tool.
+  </p>
+ </description>
+ <categories>
+  <category>Graphics</category>
+ </categories> 
+ <url type="homepage">https://smart-pattern.com.ua/valentina/download/</url>
+ <url type="bugtracker">https://gitlab.com/smart-pattern/valentina/-/issues</url>
+ <url type="translate">https://explore.transifex.com/valentina/valentina-project/</url> 
+ <url type="contact">https://smart-pattern.com.ua/contact/</url> 
+ <url type="vcs-browser">https://gitlab.com/smart-pattern/valentina</url> 
+ <url type="contribute">https://smart-pattern.com.ua/valentina/contribute/</url> 
+ <developer_name>Roman Telezhynskyi</developer_name>
+ <update_contact>contact@smart-pattern.com.ua</update_contact>
+ <content_rating type="oars-1.1" />
+ <releases>
+  <release version="0.7.53" type="development">
+      <description>
+        <p>
+          This is a development release in the 0.7 series.
+        </p>
+        <ul>
+          <li>Fix layout sheet export with empty name.</li>
+          <li>Fix visualization for tool Point from circle and tangent.</li>
+          <li>Fix loading background image.</li>
+          <li>Puzzle: message "Invalid version: Max supported version 0.1.2" when opening 0.1.1 file in Val 0.7.52.</li>
+          <li>Fix export measurement separator to CSV.</li>
+          <li>Fix option Hide labels.</li>
+          <li>Improve segmenting a curve for calculating a piece path.</li>
+          <li>[smart-pattern/valentina#184] Fix incorrect seam allowance.</li>
+          <li>Export area of piece in Final measurements.</li>
+          <li>New option Show accuracy radius.</li> 
+          <li>New option Interactive tools.</li>
+          <li>Improve error messages while import CSV data.</li>
+          <li>Fix regression in dialog Known measurements.</li>
+          <li>New option. Default piece label template for new pieces.</li>
+          <li>Shortcut to quickly enable/disable Interactive tools mode.</li>
+          <li>Improve labels for V notch.</li>
+          <li>Fix QT issue on MacOS version 11.0 "Big Sur".</li>
+          <li>Fix excluding objects in internal path.</li>
+          <li>Fix float-point accuracy issue in multisize measurements dimensions.</li>
+          <li>Fix compatibility with Richpeace DXF-AAMA/ASTM R12.</li>
+          <li>Fix seam allowance. Loose requirements to case with prong.</li>
+          <li>Fix list of dimension popup list. Make sure it will always has enough space for values.</li>
+          <li>New grainline type: Four way.</li>
+          <li>Show/hide grainline when export.</li>
+          <li>Improve calculating notches.</li>
+          <li>Simplify number of versions for DXF AAMA/ASTM.</li>
+          <li>New notch type - Check Notch.</li>
+          <li>Control a notch width and angle with formulas.</li>
+          <li>Independent translation for piece labels.</li>
+          <li>Piece labels line break.</li>
+          <li>Support for single-line fonts.</li>
+          <li>Export to HP-GL format.</li>
+          <li>Fix crash after using tool Union of details.</li>
+          <li>Tool box redesign.</li>
+          <li>Increased requirement for minimal Qt version.</li>
+          <li>Support for Dark mode.</li>
+          <li>Fix issue with passing incorrect number of dimension to Tape.</li>
+          <li>New option: Pointer mode.</li>
+          <li>Fix GUI freezing while nesting.</li>
+          <li>New option: Use Tool Groups.</li>
+          <li>Redesign notch context menu to allow quick selection of the notch type.</li>
+          <li>Redesign standard path system.</li>
+          <li>New option: Translate formula.</li>
+          <li>Fix filling piece label data.</li>
+          <li>New piece option Follow grainline.</li>
+          <li>Validate sheet and layout names before proposing file name.</li>
+          <li>Puzzle app. Fix piece position move when update layout data.</li>
+          <li>Puzzle app. Fix losing selection by piece.</li>
+          <li>Puzzle app. Fix updating layout when file already opened.</li>
+          <li>Tape app. Custom measurement name.</li>
+          <li>Tape app. Show variables in order they were added.</li>
+          <li>Shortcuts manager.</li>
+          <li>Support for custom known measurements.</li>
+          <li>Allow negative values.</li>
+          <li>Tape app. New feature: Always keep on top.</li>
+          <li>Label %mFileName% file name punctuation.</li>
+          <li>Adding removing nodes of curved path.</li>
+          <li>New tools: Arc start point, Arc end point.</li>
+          <li>Optimize U-notch shape.</li>
+          <li>New feature. Boundary together with notches.</li>
+          <li>Puzzle app. Horizontal piece flipping.</li>
+          <li>Mirror line.</li>
+          <li>Fold line.</li>
+          <li>Minimal Qt version increased to Qt 5.15. Minimal C++ standard to C++17.</li>
+          <li>Updated Windows installer.</li>
+          <li>Automatic crash reports.</li>
+          <li>Improve compatibility with Richpeace CAD.</li>
+          <li>New warning "Piece gape position".</li>
+          <li>New feature. Hide/Show enabled grainline.</li>
+        </ul>
+      </description>
+      <issues>
+      <issue url="https://gitlab.com/smart-pattern/valentina/-/issues/187">valentina#187</issue>
+      <issue url="https://gitlab.com/smart-pattern/valentina/-/issues/189">valentina#189</issue>
+      <issue url="https://gitlab.com/smart-pattern/valentina/-/issues/163">valentina#163</issue>
+      <issue url="https://gitlab.com/smart-pattern/valentina/-/issues/188">valentina#188</issue>
+    </issues>
+    </release>
+  </releases>
+  <release version="0.7.52" type="development" date="2020-09-12">
+      <description>
+        <p>
+          This is a development release in the 0.7 series.
+        </p>
+        <ul>
+          <li>Fix crash when default locale is ru.</li>
+          <li>Puzzle app. Fix incorrect update of a layout piece.</li>
+          <li>Fix visualization for tool Point of intersection line and axis.</li>
+          <li>Improved curve segment warnings.</li>
+          <li>Tape app. Add action Add separator to menu.</li>
+          <li>Tape app. Fix crash after switching language.</li>
+          <li>Fix Valentina app crash after canceling a tool.</li>
+          <li>Puzzle app. Fix reading a piece name.</li>
+          <li>Fix warning while segmenting flipped arc.</li>
+          <li>Tape app. "Export from existing ..." now supports multisize measurements.</li>
+          <li>Fix main path validation. False positive double curve.</li>
+          <li>Fix Setup multisize measurements dialog. Improved handling Height dimension.</li>
+          <li>Fix updating dimension labels in Valentina app.</li>
+          <li>Fix menu on Mac OS X.</li>
+          <li>Add function's argument template with name in the Formula Wizard.</li>
+          <li>Unit type for increments.</li>
+          <li>Support for options Force Flipping and Forbid Flipping in Puzzle.</li>
+          <li>Remember selected dimension values.</li>
+          <li>Fix segmenting a simple curve.</li>
+          <li>Fix export tiled pdf on Mac OS.</li>
+          <li>Improve visualization for tools.</li>
+          <li>Fix calculating an elliptical arc.</li>
+          <li>Enable Approximation scale option for Elliptical arc.</li>
+          <li>Fix bug in seam allowance.</li>
+          <li>Allow resizing Spline path dialog.</li>
+          <li>Improve highlighting file in file browser for Linux.</li>
+        </ul>
+      </description>
+    </release>
+ </releases>
+</component>

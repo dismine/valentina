@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -27,26 +27,37 @@
  *************************************************************************/
 
 #include "tst_vtranslatevars.h"
-#include "../vmisc/logging.h"
+#include "../qmuparser/qmudef.h"
+#include "../vmisc/compatibility.h"
 #include "../vpatterndb/vtranslatevars.h"
-#include "../qmuparser/qmuparsererror.h"
 #include "testvapplication.h"
 
 #include <QtTest>
 
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 TST_VTranslateVars::TST_VTranslateVars(QObject *parent)
-    : QObject(parent),
-      m_trMs(nullptr),
-      m_systemLocale(QLocale::system())
+  : QObject(parent),
+    m_trMs(nullptr),
+    m_systemLocale(QLocale::system())
 {
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    m_translateFomula = settings->IsTranslateFormula();
+    settings->SetTranslateFormula(true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+TST_VTranslateVars::~TST_VTranslateVars()
+{
+    VAbstractApplication::VApp()->Settings()->SetTranslateFormula(m_translateFomula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VTranslateVars::initTestCase()
 {
     m_trMs = new VTranslateVars();
-    qApp->SetTrVars(m_trMs);
+    TestVApplication::VApp()->SetTrVars(m_trMs);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -57,9 +68,14 @@ void TST_VTranslateVars::TestFormulaFromUser_data()
     QTest::addColumn<QLocale>("locale");
 
     const QList<QLocale> allLocales =
-            QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
-    for(auto &locale : allLocales)
+        QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
+    for (const auto &locale : allLocales)
     {
+        if (not SupportedLocale(locale))
+        {
+            continue;
+        }
+
         PrepareValFromUser(1000.5, locale);
         PrepareValFromUser(-1000.5, locale);
     }
@@ -87,9 +103,14 @@ void TST_VTranslateVars::TestFormulaToUser_data()
     QTest::addColumn<QLocale>("locale");
 
     const QList<QLocale> allLocales =
-            QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
-    for(auto &locale : allLocales)
+        QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
+    for (const auto &locale : allLocales)
     {
+        if (not SupportedLocale(locale))
+        {
+            continue;
+        }
+
         PrepareValToUser(1000.5, locale);
         PrepareValToUser(-1000.5, locale);
     }
@@ -130,9 +151,9 @@ void TST_VTranslateVars::PrepareValToUser(double d, const QLocale &locale)
 {
     const QString formulaFromSystem = QLocale::c().toString(d);
     QString formulaToUser = locale.toString(d);
-    if (locale.groupSeparator().isSpace())
+    if (LocaleGroupSeparator(locale).isSpace())
     {
-        formulaToUser.replace(locale.groupSeparator(), QString());
+        formulaToUser.replace(LocaleGroupSeparator(locale), QString());
     }
 
     PrepareVal(formulaFromSystem, formulaToUser, locale);
@@ -146,17 +167,17 @@ void TST_VTranslateVars::PrepareVal(const QString &inputFormula, const QString &
 
     auto PREPARE_CASE = [locale](const QString &inputString, const QString &outputString)
     {
-        QString tag = QString("%1. String '%2'").arg(locale.name(), inputString);
+        auto const tag = QStringLiteral("%1. String '%2'").arg(locale.name(), inputString);
         QTest::newRow(qUtf8Printable(tag)) << inputString << outputString << locale;
     };
 
     PREPARE_CASE(inputString, outputString);
 
-    inputString = inputFormula+QLatin1String("+")+inputFormula;
-    outputString = outputFormula+QLatin1String("+")+outputFormula;
+    inputString = inputFormula + '+'_L1 + inputFormula;
+    outputString = outputFormula + '+'_L1 + outputFormula;
     PREPARE_CASE(inputString, outputString);
 
-    inputString = inputFormula+QString("+a");
-    outputString = outputFormula+QString("+a");
+    inputString = inputFormula + "+a"_L1;
+    outputString = outputFormula + "+a"_L1;
     PREPARE_CASE(inputString, outputString);
 }

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -27,110 +27,193 @@
  *************************************************************************/
 
 #include "vbestsquare.h"
+#include "../vgeometry/vgeometrydef.h"
+#include "vbestsquare_p.h"
 
-#include <QMatrix>
-
-//---------------------------------------------------------------------------------------------------------------------
-VBestSquare::VBestSquare(const QSizeF &sheetSize, bool saveLength)
-    :resI(0), resJ(0), resMatrix(QMatrix()), bestSize(QSizeF(sheetSize.width()+10, sheetSize.height()+10)),
-      sheetWidth(sheetSize.width()), valideResult(false), resMirror(false), type (BestFrom::Rotation),
-      saveLength(saveLength)
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VBestSquare::NewResult(const QSizeF &candidate, int i, int j, const QTransform &matrix, bool mirror, BestFrom type)
+namespace
 {
-    if (saveLength)
-    {
-        const QSizeF saveLengthSize(sheetWidth, candidate.height());
-        if (Square(saveLengthSize) <= Square(bestSize) && Square(saveLengthSize) > 0 && type >= this->type)
-        {
-            bestSize = saveLengthSize;
-        }
-        else
-        {
-            return;
-        }
-    }
-    else
-    {
-        if (Square(candidate) <= Square(bestSize) && Square(candidate) > 0 && type >= this->type)
-        {
-            bestSize = candidate;
-        }
-        else
-        {
-            return;
-        }
-    }
+//---------------------------------------------------------------------------------------------------------------------
+constexpr auto Square(QSizeF size) -> qint64
+{
+    return static_cast<qint64>(size.width() * size.height());
+}
+} // anonymous namespace
 
-    resI = i;
-    resJ = j;
-    resMatrix = matrix;
-    valideResult = true;
-    resMirror = mirror;
-    this->type = type;
+//---------------------------------------------------------------------------------------------------------------------
+VBestSquare::VBestSquare()
+  : d(new VBestSquareData())
+{
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VBestSquare::VBestSquare(QSizeF sheetSize, bool saveLength, bool isPortrait)
+  : d(new VBestSquareData(sheetSize, saveLength, isPortrait))
+{
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+COPY_CONSTRUCTOR_IMPL(VBestSquare)
+
+//---------------------------------------------------------------------------------------------------------------------
+VBestSquare::~VBestSquare() = default;
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VBestSquare::operator=(const VBestSquare &res) -> VBestSquare &
+{
+    if (&res == this)
+    {
+        return *this;
+    }
+    d = res.d;
+    return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VBestSquare::VBestSquare(VBestSquare &&res) noexcept
+  : d(std::move(res.d))
+{
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VBestSquare::operator=(VBestSquare &&res) noexcept -> VBestSquare &
+{
+    std::swap(d, res.d);
+    return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VBestSquare::NewResult(const VBestSquareResData &data)
+{
+    auto SaveResult = [this, &data]()
+    {
+        d->valideResult = true;
+        d->data = data;
+    };
+
+    const qint64 candidateSquare = Square(data.bestSize);
+
+    if (candidateSquare > 0 && data.type >= d->data.type && candidateSquare <= Square(d->data.bestSize))
+    {
+        if (not HasValidResult())
+        {
+            SaveResult(); // First result
+        }
+        else
+        {
+            if (d->saveLength)
+            {
+                if ((VFuzzyOnAxis(data.depthPosition, d->data.depthPosition) &&
+                     IsImprovedSidePosition(data.sidePosition)) ||
+                    data.depthPosition < d->data.depthPosition)
+                {
+                    SaveResult();
+                }
+            }
+            else
+            {
+                if (IsImprovedSidePosition(data.sidePosition) || VFuzzyOnAxis(data.sidePosition, d->data.sidePosition))
+                {
+                    SaveResult();
+                }
+            }
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VBestSquare::NewResult(const VBestSquare &best)
 {
-    if (best.ValidResult() && saveLength == best.IsSaveLength())
+    if (best.d->isValid && best.HasValidResult() && d->saveLength == best.IsSaveLength())
     {
-        NewResult(best.BestSize(), best.GContourEdge(), best.DetailEdge(), best.Matrix(), best.Mirror(), best.Type());
+        NewResult(best.BestResultData());
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSizeF VBestSquare::BestSize() const
+auto VBestSquare::BestSize() const -> QSizeF
 {
-    return bestSize;
+    return d->data.bestSize;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VBestSquare::GContourEdge() const
+auto VBestSquare::GContourEdge() const -> int
 {
-    return resI;
+    return d->data.globalI;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VBestSquare::DetailEdge() const
+auto VBestSquare::DetailEdge() const -> int
 {
-    return resJ;
+    return d->data.detJ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QTransform VBestSquare::Matrix() const
+auto VBestSquare::Matrix() const -> QTransform
 {
-    return resMatrix;
+    return d->data.resMatrix;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VBestSquare::ValidResult() const
+auto VBestSquare::HasValidResult() const -> bool
 {
-    return valideResult;
+    return d->valideResult;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VBestSquare::Mirror() const
+auto VBestSquare::Mirror() const -> bool
 {
-    return resMirror;
+    return d->data.resMirror;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-BestFrom VBestSquare::Type() const
+auto VBestSquare::Type() const -> BestFrom
 {
-    return type;
+    return d->data.type;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VBestSquare::IsSaveLength() const
+auto VBestSquare::IsTerminatedByException() const -> bool
 {
-    return saveLength;
+    return d->terminatedByException;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qint64 VBestSquare::Square(const QSizeF &size)
+auto VBestSquare::ReasonTerminatedByException() const -> QString
 {
-    return static_cast<qint64>(size.width()*size.height());
+    return d->exceptionReason;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VBestSquare::TerminatedByException(const QString &reason)
+{
+    d->valideResult = false;
+    d->terminatedByException = true;
+    d->exceptionReason = reason;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VBestSquare::BestResultData() const -> VBestSquareResData
+{
+    return d->data;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VBestSquare::IsSaveLength() const -> bool
+{
+    return d->saveLength;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VBestSquare::IsImprovedSidePosition(qreal sidePosition) const -> bool
+{
+    const bool lessThan = d->data.sidePosition < sidePosition;
+    const bool greaterThan = d->data.sidePosition > sidePosition;
+
+    return IsPortrait() ? greaterThan : lessThan;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VBestSquare::IsPortrait() const -> bool
+{
+    return d->isPortrait;
 }

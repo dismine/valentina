@@ -23,118 +23,98 @@
 #define QMUDEF_H
 
 #include "qmuparser_global.h"
+#include "qmuparserdef.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-
-/*
- * Warning/diagnostic handling
- */
-
-#define QT_DO_PRAGMA(text)                      _Pragma(#text)
-#if defined(Q_CC_INTEL) && defined(Q_CC_MSVC)
-/* icl.exe: Intel compiler on Windows */
-#  undef QT_DO_PRAGMA                           /* not needed */
-#  define QT_WARNING_PUSH                       __pragma(warning(push))
-#  define QT_WARNING_POP                        __pragma(warning(pop))
-#  define QT_WARNING_DISABLE_MSVC(number)
-#  define QT_WARNING_DISABLE_INTEL(number)      __pragma(warning(disable: number))
-#  define QT_WARNING_DISABLE_CLANG(text)
-#  define QT_WARNING_DISABLE_GCC(text)
-#elif defined(Q_CC_INTEL)
-/* icc: Intel compiler on Linux or OS X */
-#  define QT_WARNING_PUSH                       QT_DO_PRAGMA(warning(push))
-#  define QT_WARNING_POP                        QT_DO_PRAGMA(warning(pop))
-#  define QT_WARNING_DISABLE_INTEL(number)      QT_DO_PRAGMA(warning(disable: number))
-#  define QT_WARNING_DISABLE_MSVC(number)
-#  define QT_WARNING_DISABLE_CLANG(text)
-#  define QT_WARNING_DISABLE_GCC(text)
-#elif defined(Q_CC_MSVC) && _MSC_VER >= 1500
-#  undef QT_DO_PRAGMA                           /* not needed */
-#  define QT_WARNING_PUSH                       __pragma(warning(push))
-#  define QT_WARNING_POP                        __pragma(warning(pop))
-#  define QT_WARNING_DISABLE_MSVC(number)       __pragma(warning(disable: number))
-#  define QT_WARNING_DISABLE_INTEL(number)
-#  define QT_WARNING_DISABLE_CLANG(text)
-#  define QT_WARNING_DISABLE_GCC(text)
-#elif defined(Q_CC_CLANG)
-#  define QT_WARNING_PUSH                       QT_DO_PRAGMA(clang diagnostic push)
-#  define QT_WARNING_POP                        QT_DO_PRAGMA(clang diagnostic pop)
-#  define QT_WARNING_DISABLE_CLANG(text)        QT_DO_PRAGMA(clang diagnostic ignored text)
-#  define QT_WARNING_DISABLE_GCC(text)          QT_DO_PRAGMA(GCC diagnostic ignored text)// GCC directives work in Clang too
-#  define QT_WARNING_DISABLE_INTEL(number)
-#  define QT_WARNING_DISABLE_MSVC(number)
-#elif defined(Q_CC_GNU) && (__GNUC__ * 100 + __GNUC_MINOR__ >= 406)
-#  define QT_WARNING_PUSH                       QT_DO_PRAGMA(GCC diagnostic push)
-#  define QT_WARNING_POP                        QT_DO_PRAGMA(GCC diagnostic pop)
-#  define QT_WARNING_DISABLE_GCC(text)          QT_DO_PRAGMA(GCC diagnostic ignored text)
-#  define QT_WARNING_DISABLE_CLANG(text)
-#  define QT_WARNING_DISABLE_INTEL(number)
-#  define QT_WARNING_DISABLE_MSVC(number)
-#else       // All other compilers, GCC < 4.6 and MSVC < 2008
-#  define QT_WARNING_DISABLE_GCC(text)
-#  define QT_WARNING_PUSH
-#  define QT_WARNING_POP
-#  define QT_WARNING_DISABLE_INTEL(number)
-#  define QT_WARNING_DISABLE_MSVC(number)
-#  define QT_WARNING_DISABLE_CLANG(text)
-#  define QT_WARNING_DISABLE_GCC(text)
+#ifndef Q_DISABLE_ASSIGN
+#define Q_DISABLE_ASSIGN(Class) Class &operator=(const Class &) = delete;
 #endif
 
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+#ifndef Q_DISABLE_ASSIGN_MOVE
+#define Q_DISABLE_ASSIGN_MOVE(Class)                                                                                   \
+    Q_DISABLE_ASSIGN(Class)                                                                                            \
+    Class(Class &&) = delete;                                                                                          \
+    Class &operator=(Class &&) = delete;
+#endif
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wattributes")
 
-#ifdef Q_CC_MSVC
-    #include <ciso646>
-#endif /* Q_CC_MSVC */
+// Header <ciso646> is removed in C++20.
+#if defined(Q_CC_MSVC) && __cplusplus <= 201703L
+#include <ciso646> // and, not, or
+#endif
 
 class QLocale;
 class QChar;
 class QString;
 
-#define INIT_LOCALE_VARIABLES(locale)                          \
-const QChar positiveSign   = (locale).positiveSign();          \
-const QChar negativeSign   = (locale).negativeSign();          \
-const QChar sign0          = (locale).toString(0).at(0);       \
-const QChar sign1          = (locale).toString(1).at(0);       \
-const QChar sign2          = (locale).toString(2).at(0);       \
-const QChar sign3          = (locale).toString(3).at(0);       \
-const QChar sign4          = (locale).toString(4).at(0);       \
-const QChar sign5          = (locale).toString(5).at(0);       \
-const QChar sign6          = (locale).toString(6).at(0);       \
-const QChar sign7          = (locale).toString(7).at(0);       \
-const QChar sign8          = (locale).toString(8).at(0);       \
-const QChar sign9          = (locale).toString(9).at(0);       \
-const QChar expUpper       = (locale).exponential().toUpper(); \
-const QChar expLower       = (locale).exponential().toLower(); \
-const QChar decimalPoint   = (locale).decimalPoint();          \
-const QChar groupSeparator = (locale).groupSeparator()         \
+QMUPARSERSHARED_EXPORT auto SupportedLocale(const QLocale &locale) -> bool;
 
-QMUPARSERSHARED_EXPORT QString NameRegExp();
+QMUPARSERSHARED_EXPORT auto LocalePositiveSign(const QLocale &locale) -> QChar;
+QMUPARSERSHARED_EXPORT auto LocaleNegativeSign(const QLocale &locale) -> QChar;
+QMUPARSERSHARED_EXPORT auto LocaleSign0(const QLocale &locale) -> QChar;
+QMUPARSERSHARED_EXPORT auto LocaleSign1(const QLocale &locale) -> QChar;
+QMUPARSERSHARED_EXPORT auto LocaleSign2(const QLocale &locale) -> QChar;
+QMUPARSERSHARED_EXPORT auto LocaleSign3(const QLocale &locale) -> QChar;
+QMUPARSERSHARED_EXPORT auto LocaleSign4(const QLocale &locale) -> QChar;
+QMUPARSERSHARED_EXPORT auto LocaleSign5(const QLocale &locale) -> QChar;
+QMUPARSERSHARED_EXPORT auto LocaleSign6(const QLocale &locale) -> QChar;
+QMUPARSERSHARED_EXPORT auto LocaleSign7(const QLocale &locale) -> QChar;
+QMUPARSERSHARED_EXPORT auto LocaleSign8(const QLocale &locale) -> QChar;
+QMUPARSERSHARED_EXPORT auto LocaleSign9(const QLocale &locale) -> QChar;
+QMUPARSERSHARED_EXPORT auto LocaleExpUpper(const QLocale &locale) -> QChar;
+QMUPARSERSHARED_EXPORT auto LocaleExpLower(const QLocale &locale) -> QChar;
+QMUPARSERSHARED_EXPORT auto LocaleDecimalPoint(const QLocale &locale) -> QChar;
+QMUPARSERSHARED_EXPORT auto LocaleGroupSeparator(const QLocale &locale) -> QChar;
+
+#define INIT_LOCALE_VARIABLES(locale)                                                                                  \
+    const QChar positiveSign = LocalePositiveSign((locale));                                                           \
+    const QChar negativeSign = LocaleNegativeSign((locale));                                                           \
+    const QChar sign0 = LocaleSign0((locale));                                                                         \
+    const QChar sign1 = LocaleSign1((locale));                                                                         \
+    const QChar sign2 = LocaleSign2((locale));                                                                         \
+    const QChar sign3 = LocaleSign3((locale));                                                                         \
+    const QChar sign4 = LocaleSign4((locale));                                                                         \
+    const QChar sign5 = LocaleSign5((locale));                                                                         \
+    const QChar sign6 = LocaleSign6((locale));                                                                         \
+    const QChar sign7 = LocaleSign7((locale));                                                                         \
+    const QChar sign8 = LocaleSign8((locale));                                                                         \
+    const QChar sign9 = LocaleSign9((locale));                                                                         \
+    const QChar expUpper = LocaleExpUpper((locale));                                                                   \
+    const QChar expLower = LocaleExpLower((locale));                                                                   \
+    const QChar decimalPoint = LocaleDecimalPoint((locale));                                                           \
+    const QChar groupSeparator = LocaleGroupSeparator((locale));
+
+enum class VariableRegex
+{
+    Variable,
+    KnownMeasurement
+};
+
+QMUPARSERSHARED_EXPORT auto NameRegExp(VariableRegex type = VariableRegex::Variable) -> QString;
 
 QT_WARNING_POP
 
-Q_REQUIRED_RESULT static inline bool QmuFuzzyComparePossibleNulls(double p1, double p2);
-static inline bool QmuFuzzyComparePossibleNulls(double p1, double p2)
+Q_REQUIRED_RESULT static inline auto QmuFuzzyComparePossibleNulls(double p1, double p2) -> bool;
+static inline auto QmuFuzzyComparePossibleNulls(double p1, double p2) -> bool
 {
-    if(qFuzzyIsNull(p1))
+    if (qFuzzyIsNull(p1))
     {
         return qFuzzyIsNull(p2);
     }
-    else if(qFuzzyIsNull(p2))
+
+    if (qFuzzyIsNull(p2))
     {
         return false;
     }
-    else
-    {
-        return qFuzzyCompare(p1, p2);
-    }
+
+    return qFuzzyCompare(p1, p2);
 }
 
-QMUPARSERSHARED_EXPORT int ReadVal(const QString &formula, qreal &val, const QLocale &locale, const QChar &decimal,
-                                   const QChar &thousand);
+QMUPARSERSHARED_EXPORT auto ReadVal(const QString &formula, qreal &val, const QLocale &locale, const QChar &decimal,
+                                    const QChar &thousand) -> qmusizetype;
 
-int FindFirstNotOf(const QString &string, const QString &chars, int pos = 0);
+QMUPARSERSHARED_EXPORT auto FindFirstNotOf(const QString &string, const QString &chars, qmusizetype pos = 0)
+    -> qmusizetype;
 
 #endif // QMUDEF_H

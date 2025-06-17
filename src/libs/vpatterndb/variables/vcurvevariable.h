@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef VCURVEVARIABLE_H
 #define VCURVEVARIABLE_H
 
-#include <qcompilerdetection.h>
 #include <QSharedDataPointer>
 #include <QTypeInfo>
 #include <QtGlobal>
@@ -44,28 +43,25 @@ public:
     VCurveVariable();
     VCurveVariable(const quint32 &id, const quint32 &parentId);
     VCurveVariable(const VCurveVariable &var);
+    ~VCurveVariable() override;
 
-    virtual ~VCurveVariable() override;
+    auto operator=(const VCurveVariable &var) -> VCurveVariable &;
 
-    VCurveVariable &operator=(const VCurveVariable &var);
-#ifdef Q_COMPILER_RVALUE_REFS
-    VCurveVariable &operator=(VCurveVariable &&var) Q_DECL_NOTHROW { Swap(var); return *this; }
-#endif
+    VCurveVariable(VCurveVariable &&var) noexcept;
+    auto operator=(VCurveVariable &&var) noexcept -> VCurveVariable &;
 
-    inline void Swap(VCurveVariable &var) Q_DECL_NOTHROW
-    { VInternalVariable::Swap(var); std::swap(d, var.d); }
+    auto Filter(quint32 id) -> bool override;
 
-    virtual bool Filter(quint32 id) override;
+    auto GetId() const -> quint32;
+    void SetId(const quint32 &id);
 
-    quint32      GetId() const;
-    void         SetId(const quint32 &id);
+    auto GetParentId() const -> quint32;
+    void SetParentId(const quint32 &value);
 
-    quint32      GetParentId() const;
-    void         SetParentId(const quint32 &value);
 private:
     QSharedDataPointer<VCurveVariableData> d;
 };
 
-Q_DECLARE_TYPEINFO(VCurveVariable, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VCurveVariable, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VCURVEVARIABLE_H

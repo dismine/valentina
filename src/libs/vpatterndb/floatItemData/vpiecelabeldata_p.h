@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -33,9 +33,8 @@
 #include <QString>
 #include <QVector>
 
-#include "../vmisc/diagnostic.h"
-#include "floatitemdef.h"
 #include "../ifc/ifcdef.h"
+#include "../vmisc/defglobal.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -44,51 +43,28 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VPieceLabelDataPrivate : public QSharedData
 {
 public:
-    VPieceLabelDataPrivate()
-        : m_qsLetter(),
-          m_annotation(),
-          m_orientation(),
-          m_rotationWay(),
-          m_tilt(),
-          m_foldPosition(),
-          m_quantity(1),
-          m_onFold(false),
-          m_lines()
-    {}
-
-    VPieceLabelDataPrivate(const VPieceLabelDataPrivate &data)
-        : QSharedData(data),
-          m_qsLetter(data.m_qsLetter),
-          m_annotation(data.m_annotation),
-          m_orientation(data.m_orientation),
-          m_rotationWay(data.m_rotationWay),
-          m_tilt(data.m_tilt),
-          m_foldPosition(data.m_foldPosition),
-          m_quantity(data.m_quantity),
-          m_onFold(data.m_onFold),
-          m_lines(data.m_lines)
-    {}
-
-    ~VPieceLabelDataPrivate() Q_DECL_EQ_DEFAULT;
+    VPieceLabelDataPrivate() = default;
+    VPieceLabelDataPrivate(const VPieceLabelDataPrivate &data) = default;
+    ~VPieceLabelDataPrivate() = default;
 
     /** @brief m_qsLetter Detail letter (should be no more than 3 characters) */
-    QString m_qsLetter;
-    QString m_annotation;
-    QString m_orientation;
-    QString m_rotationWay;
-    QString m_tilt;
-    QString m_foldPosition;
+    QString m_qsLetter{};      // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_annotation{};    // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_orientation{};   // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_rotationWay{};   // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_tilt{};          // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_foldPosition{};  // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_areaShortName{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    int  m_quantity;
-    bool m_onFold;
+    quint16 m_quantity{1}; // NOLINT(misc-non-private-member-variables-in-classes)
+    bool m_onFold{false};  // NOLINT(misc-non-private-member-variables-in-classes)
 
-    QVector<VLabelTemplateLine> m_lines;
+    QVector<VLabelTemplateLine> m_lines{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
-    VPieceLabelDataPrivate &operator=(const VPieceLabelDataPrivate &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN_MOVE(VPieceLabelDataPrivate) // NOLINT
 };
 
 QT_WARNING_POP
 
 #endif // VPIECELABELDATA_P_H
-

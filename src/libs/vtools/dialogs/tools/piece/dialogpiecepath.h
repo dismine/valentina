@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -33,38 +33,42 @@
 
 namespace Ui
 {
-    class DialogPiecePath;
+class DialogPiecePath;
 }
 
-class DialogPiecePath : public DialogTool
+class DialogPiecePath final : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
-    explicit DialogPiecePath(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    virtual ~DialogPiecePath();
+    explicit DialogPiecePath(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
+    ~DialogPiecePath() override;
 
     void EnbleShowMode(bool disable);
     void HideVisibilityTrigger();
 
-    VPiecePath GetPiecePath() const;
-    void       SetPiecePath(const VPiecePath &path);
+    auto GetPiecePath() const -> VPiecePath;
+    void SetPiecePath(const VPiecePath &path);
 
-    quint32 GetPieceId() const;
-    void    SetPieceId(quint32 id);
+    auto GetPieceId() const -> quint32;
+    void SetPieceId(quint32 id);
 
-    QString GetFormulaSAWidth() const;
-    void    SetFormulaSAWidth(const QString &formula);
+    auto GetFormulaSAWidth() const -> QString;
+    void SetFormulaSAWidth(const QString &formula);
 
-    virtual void SetPiecesList(const QVector<quint32> &list) override;
+    void SetPiecesList(const QVector<quint32> &list) override;
 
 public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type) override;
-    virtual void ShowDialog(bool click) override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
+    void ShowDialog(bool click) override;
 
 protected:
-    virtual void CheckState() final;
-    virtual void ShowVisualization() override;
-    virtual void closeEvent(QCloseEvent *event) override;
+    void CheckState() override;
+    void ShowVisualization() override;
+    void closeEvent(QCloseEvent *event) override;
+    void changeEvent(QEvent *event) override;
+    auto IsValid() const -> bool override;
+    auto eventFilter(QObject *obj, QEvent *event) -> bool override;
 
 private slots:
     void ShowContextMenu(const QPoint &pos);
@@ -77,48 +81,66 @@ private slots:
     void PassmarkLineTypeChanged(int id);
     void PassmarkAngleTypeChanged(int id);
     void PassmarkShowSecondChanged(int state);
+    void PassmarkClockwiseOrientationChanged(int state);
 
     void EvalWidth();
     void EvalWidthBefore();
     void EvalWidthAfter();
     void EvalVisible();
+    void EvalPassmarkLength();
+    void EvalPassmarkWidth();
+    void EvalPassmarkAngle();
 
     void FXWidth();
     void FXWidthBefore();
     void FXWidthAfter();
     void FXVisible();
-
-    void WidthChanged();
-    void WidthBeforeChanged();
-    void WidthAfterChanged();
-    void VisibleChanged();
+    void FXPassmarkLength();
+    void FXPassmarkWidth();
+    void FXPassmarkAngle();
 
     void DeployWidthFormulaTextEdit();
     void DeployWidthBeforeFormulaTextEdit();
     void DeployWidthAfterFormulaTextEdit();
     void DeployVisibleFormulaTextEdit();
+    void DeployPassmarkLength();
+    void DeployPassmarkWidth();
+    void DeployPassmarkAngle();
 
     void SetMoveControls();
+    void SetOptionControls();
 
 private:
-    Q_DISABLE_COPY(DialogPiecePath)
+    Q_DISABLE_COPY_MOVE(DialogPiecePath) // NOLINT
     Ui::DialogPiecePath *ui;
-    bool  m_showMode;
-    qreal m_saWidth;
+    bool m_showMode{false};
+    qreal m_saWidth{0};
 
     QTimer *m_timerWidth;
     QTimer *m_timerWidthBefore;
     QTimer *m_timerWidthAfter;
     QTimer *m_timerVisible;
+    QTimer *m_timerPassmarkLength;
+    QTimer *m_timerPassmarkWidth;
+    QTimer *m_timerPassmarkAngle;
 
-    int m_formulaBaseWidth;
-    int m_formulaBaseWidthBefore;
-    int m_formulaBaseWidthAfter;
-    int m_formulaBaseVisible;
+    int m_formulaBaseWidth{0};
+    int m_formulaBaseWidthBefore{0};
+    int m_formulaBaseWidthAfter{0};
+    int m_formulaBaseVisible{0};
+    int m_formulaBasePassmarkLength{0};
+    int m_formulaBasePassmarkWidth{0};
+    int m_formulaBasePassmarkAngle{0};
 
-    bool m_flagFormulaBefore;
-    bool m_flagFormulaAfter;
-    bool m_flagFormulaVisible;
+    bool m_flagFormulaBefore{true};
+    bool m_flagFormulaAfter{true};
+    bool m_flagFormulaVisible{true};
+    bool m_flagFormulaPassmarkLength{true};
+    bool m_flagFormulaPassmarkWidth{true};
+    bool m_flagFormulaPassmarkAngle{true};
+    bool m_flagName{true}; // We have default name of piece.
+    bool m_flagError{false};
+    bool m_flagFormula{false};
 
     void InitPathTab();
     void InitSeamAllowanceTab();
@@ -129,43 +151,77 @@ private:
     void InitPassmarksList();
     void NodeAngleChanged(int index);
 
-    VPiecePath CreatePath() const;
+    auto CreatePath() const -> VPiecePath;
 
-    bool PathIsValid() const;
+    auto PathIsValid() const -> bool;
     void ValidObjects(bool value);
     void NewItem(const VPieceNode &node);
 
-    PiecePathType GetType() const;
-    void          SetType(PiecePathType type);
+    auto GetType() const -> PiecePathType;
+    void SetType(PiecePathType type);
 
-    Qt::PenStyle GetPenType() const;
-    void         SetPenType(const Qt::PenStyle &type);
+    auto GetPenType() const -> Qt::PenStyle;
+    void SetPenType(const Qt::PenStyle &type);
 
-    bool IsCutPath() const;
+    auto IsCutPath() const -> bool;
     void SetCutPath(bool value);
 
-    QListWidgetItem *GetItemById(quint32 id);
+    auto GetItemById(quint32 id) -> QListWidgetItem *;
 
-    quint32 GetLastId() const;
+    auto GetLastId() const -> quint32;
 
     void SetCurrentSABefore(const QString &formula);
     void SetCurrentSAAfter(const QString &formula);
 
     void UpdateNodeSABefore(const QString &formula);
     void UpdateNodeSAAfter(const QString &formula);
+    void UpdateNodePassmarkLength(const QString &formula);
+    void UpdateNodePassmarkWidth(const QString &formula);
+    void UpdateNodePassmarkAngle(const QString &formula);
 
-    QString GetFormulaSAWidthBefore() const;
-    QString GetFormulaSAWidthAfter() const;
+    void EnabledManualPassmarkLength();
+    void EnabledManualPassmarkWidth();
+    void EnabledManualPassmarkAngle();
 
-    QString GetFormulaVisible() const;
-    void    SetFormulaVisible(const QString &formula);
+    auto GetFormulaSAWidthBefore() const -> QString;
+    auto GetFormulaSAWidthAfter() const -> QString;
 
-    bool IsShowNotch() const;
+    auto GetFormulaVisible() const -> QString;
+    void SetFormulaVisible(const QString &formula);
+
+    auto GetFormulaPassmarkLength() const -> QString;
+    void SetFormulaPassmarkLength(const QString &formula);
+
+    auto GetFormulaPassmarkWidth() const -> QString;
+    void SetFormulaPassmarkWidth(const QString &formula);
+
+    auto GetFormulaPassmarkAngle() const -> QString;
+    void SetFormulaPassmarkAngle(const QString &formula);
+
+    auto IsShowNotch() const -> bool;
 
     void RefreshPathList(const VPiecePath &path);
+
+    void InitPassmarkLengthFormula(const VPieceNode &node);
+    void InitPassmarkWidthFormula(const VPieceNode &node);
+    void InitPassmarkAngleFormula(const VPieceNode &node);
+    void InitPassmarkShapeType(const VPieceNode &node);
+    void InitPassmarkAngleType(const VPieceNode &node);
+
+    void InitIcons();
+
+    auto InitContextMenu(QMenu *menu, const VPieceNode &rowNode) -> QHash<int, QAction *>;
 };
 
-inline bool DialogPiecePath::IsShowNotch() const
+//---------------------------------------------------------------------------------------------------------------------
+inline auto DialogPiecePath::IsValid() const -> bool
+{
+    return m_flagName && m_flagError && m_flagFormula && m_flagFormulaBefore && m_flagFormulaAfter &&
+           m_flagFormulaVisible && m_flagFormulaPassmarkLength;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto DialogPiecePath::IsShowNotch() const -> bool
 {
     return m_showMode && GetType() == PiecePathType::CustomSeamAllowance;
 }

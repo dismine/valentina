@@ -15,34 +15,6 @@
 #include "intern/dxfwriter.h"
 #include "intern/drw_dbg.h"
 
-void DRW_Class::parseCode(int code, dxfReader *reader){
-    switch (code) {
-    case 1:
-        recName = reader->getUtf8String();
-        break;
-    case 2:
-        className = reader->getUtf8String();
-        break;
-    case 3:
-        appName = reader->getUtf8String();
-        break;
-    case 90:
-        proxyFlag = reader->getInt32();
-        break;
-    case 91:
-        instanceCount = reader->getInt32();
-        break;
-    case 280:
-        wasaProxyFlag = reader->getInt32();
-        break;
-    case 281:
-        entityFlag = reader->getInt32();
-        break;
-    default:
-        break;
-    }
-}
-
 void DRW_Class::write(dxfWriter *writer, DRW::Version ver){
     if (ver > DRW::AC1009) {
         writer->writeString(0, "CLASS");

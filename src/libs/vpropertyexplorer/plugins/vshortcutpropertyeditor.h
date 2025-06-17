@@ -21,7 +21,7 @@
 #ifndef VSHORTCUTPROPERTYEDITOR_H
 #define VSHORTCUTPROPERTYEDITOR_H
 
-#include <qcompilerdetection.h>
+
 #include <QKeySequence>
 #include <QLineEdit>
 #include <QMetaObject>
@@ -40,20 +40,20 @@ namespace VPE
 
 class VPROPERTYEXPLORERSHARED_EXPORT VShortcutEditWidget : public QWidget
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit VShortcutEditWidget(QWidget* parent);
     virtual ~VShortcutEditWidget() override;
 
     //! Needed for proper event handling
-    virtual bool eventFilter(QObject* obj, QEvent* event) override;
+    virtual auto eventFilter(QObject *obj, QEvent *event) -> bool override;
 
     //! Returns the currently set shortcut
-    QString getShortcutAsString() const;
+    auto getShortcutAsString() const -> QString;
 
     //! Returns the currently set shortcut
-    QKeySequence getShortcut();
+    auto getShortcut() -> QKeySequence;
 
 signals:
     //! This signal is emitted when the user changed the current shortcut
@@ -86,7 +86,7 @@ protected:
     QLineEdit* LineEdit;
 
 private:
-    Q_DISABLE_COPY(VShortcutEditWidget)
+    Q_DISABLE_COPY_MOVE(VShortcutEditWidget) // NOLINT
 };
 
 }

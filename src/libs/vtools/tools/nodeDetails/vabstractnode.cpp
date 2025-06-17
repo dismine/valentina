@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,19 +29,16 @@
 #include "vabstractnode.h"
 
 #include <QSharedPointer>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <QUndoStack>
-#include <Qt>
 
+#include "../ifc/exception/vexceptionwrongid.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vgeometry/vgobject.h"
-#include "../vmisc/vabstractapplication.h"
-#include "../vmisc/def.h"
-#include "../vpatterndb/vcontainer.h"
 #include "../vabstracttool.h"
+#include "../vgeometry/vgobject.h"
+#include "../vmisc/def.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vpatterndb/vcontainer.h"
 
 const QString VAbstractNode::AttrIdTool = QStringLiteral("idTool");
 
@@ -57,12 +54,12 @@ const QString VAbstractNode::AttrIdTool = QStringLiteral("idTool");
  */
 VAbstractNode::VAbstractNode(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &idNode,
                              const QString &drawName, const quint32 &idTool, QObject *parent)
-    : VAbstractTool(doc, data, id, parent),
-      parentType(ParentType::Item),
-      idNode(idNode),
-      idTool(idTool),
-      m_drawName(drawName),
-      m_exluded(false)
+  : VAbstractTool(doc, data, id, parent),
+    parentType(ParentType::Item),
+    idNode(idNode),
+    idTool(idTool),
+    m_drawName(drawName),
+    m_exluded(false)
 {
     _referens = 0;
 }
@@ -89,10 +86,10 @@ void VAbstractNode::incrementReferens()
             doc->IncrementReferens(node->getIdTool());
         }
         ShowNode();
-        QDomElement domElement = doc->elementById(m_id, getTagName());
+        QDomElement domElement = doc->FindElementById(m_id, getTagName());
         if (domElement.isElement())
         {
-            doc->SetParametrUsage(domElement, AttrInUse, NodeUsage::InUse);
+            VDomDocument::SetParametrUsage(domElement, AttrInUse, NodeUsage::InUse);
         }
     }
 }
@@ -116,16 +113,16 @@ void VAbstractNode::decrementReferens()
             doc->DecrementReferens(node->getIdTool());
         }
         HideNode();
-        QDomElement domElement = doc->elementById(m_id, getTagName());
+        QDomElement domElement = doc->FindElementById(m_id, getTagName());
         if (domElement.isElement())
         {
-            doc->SetParametrUsage(domElement, AttrInUse, NodeUsage::NotInUse);
+            VDomDocument::SetParametrUsage(domElement, AttrInUse, NodeUsage::NotInUse);
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-ParentType VAbstractNode::GetParentType() const
+auto VAbstractNode::GetParentType() const -> ParentType
 {
     return parentType;
 }
@@ -144,7 +141,7 @@ void VAbstractNode::GroupVisibility(quint32 object, bool visible)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VAbstractNode::IsExluded() const
+auto VAbstractNode::IsExluded() const -> bool
 {
     return m_exluded;
 }
@@ -175,6 +172,12 @@ void VAbstractNode::ToolCreation(const Source &typeCreation)
  */
 void VAbstractNode::AddToModeling(const QDomElement &domElement)
 {
+    const QDomElement duplicate = doc->FindElementById(m_id);
+    if (not duplicate.isNull())
+    {
+        throw VExceptionWrongId(tr("This id (%1) is not unique.").arg(m_id), duplicate);
+    }
+
     QDomElement modeling;
     if (m_drawName.isEmpty())
     {

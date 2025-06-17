@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,15 +29,23 @@
 #ifndef FLOATITEMDEF_H
 #define FLOATITEMDEF_H
 
-#include <QList>
-#include <QString>
+#include <QtGlobal>
 
 // denotes the type of arrow for the grainline
-enum class ArrowType : char
+enum class GrainlineArrowDirection : qint8
 {
-    atBoth,
-    atFront,
-    atRear
+    twoWaysUpDown = 0,
+    oneWayUp = 1,
+    oneWayDown = 2,
+    fourWays = 3,
+    twoWaysUpLeft = 4,
+    twoWaysUpRight = 5,
+    twoWaysDownLeft = 6,
+    twoWaysDownRight = 7,
+    threeWaysUpDownLeft = 8,
+    threeWaysUpDownRight = 9,
+    threeWaysUpLeftRight = 10,
+    threeWaysDownLeftRight = 11
 };
 
 #endif // FLOATITEMDEF_H

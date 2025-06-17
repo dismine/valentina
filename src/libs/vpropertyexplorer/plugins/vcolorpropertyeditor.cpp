@@ -60,9 +60,9 @@ VPE::VColorPropertyEditor::VColorPropertyEditor(QWidget *parent)
     Spacer = new QSpacerItem(1, 0, QSizePolicy::Expanding, QSizePolicy::Ignored);
 
     // The layout (a horizontal layout)
-    QHBoxLayout* layout = new QHBoxLayout(this);
+    auto *layout = new QHBoxLayout(this);
     layout->setSpacing(3);
-    layout->setMargin(0);
+    layout->setContentsMargins(0, 0, 0, 0);
     layout->addWidget(ColorLabel);
     layout->addWidget(TextLabel);
     layout->addItem(Spacer);
@@ -81,7 +81,7 @@ void VPE::VColorPropertyEditor::SetColor(const QColor& color_)
     }
 }
 
-QPixmap VPE::VColorPropertyEditor::GetColorPixmap(const QColor& color, quint32 size)
+auto VPE::VColorPropertyEditor::GetColorPixmap(const QColor &color, quint32 size) -> QPixmap
 {
     QImage tmpImgage(static_cast<int>(size), static_cast<int>(size), QImage::Format_ARGB32_Premultiplied);
     tmpImgage.fill(static_cast<quint32>(color.rgb()));
@@ -89,26 +89,24 @@ QPixmap VPE::VColorPropertyEditor::GetColorPixmap(const QColor& color, quint32 s
     // todo: support alpha channel
 }
 
-QString VPE::VColorPropertyEditor::GetColorString(const QColor& color)
+auto VPE::VColorPropertyEditor::GetColorString(const QColor &color) -> QString
 {
     return QString("[%1, %2, %3] (%4)").arg(color.red()).arg(color.green()).arg(color.blue()).arg(color.alpha());
 }
 
 void VPE::VColorPropertyEditor::onToolButtonClicked()
 {
-    bool ok = false;
-    QRgb oldRgba = Color.rgba();
-    QRgb newRgba = QColorDialog::getRgba(oldRgba, &ok, this);
-    if (ok && newRgba != oldRgba)
+    const QColor newColor = QColorDialog::getColor(Color, this, QString(), QColorDialog::ShowAlphaChannel);
+    if (newColor.isValid() && newColor != Color)
     {
-        SetColor(QColor::fromRgba(newRgba));
+        SetColor(newColor);
         emit dataChangedByUser(Color, this);
-        UserChangeEvent *event = new UserChangeEvent();
+        auto *event = new UserChangeEvent();
         QCoreApplication::postEvent ( this, event );
     }
 }
 
-bool VPE::VColorPropertyEditor::eventFilter(QObject *obj, QEvent *ev)
+auto VPE::VColorPropertyEditor::eventFilter(QObject *obj, QEvent *ev) -> bool
 {
     if (obj == ToolButton && ev->type() == QEvent::KeyPress)
     {
@@ -126,7 +124,7 @@ VPE::VColorPropertyEditor::~VColorPropertyEditor()
     //
 }
 
-QColor VPE::VColorPropertyEditor::GetColor() const
+auto VPE::VColorPropertyEditor::GetColor() const -> QColor
 {
     return Color;
 }

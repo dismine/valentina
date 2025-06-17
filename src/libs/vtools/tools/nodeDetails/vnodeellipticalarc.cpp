@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,9 +29,6 @@
 #include "vnodeellipticalarc.h"
 
 #include <QDomElement>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 
 #include "../ifc/xml/vdomdocument.h"
 #include "../ifc/ifcdef.h"
@@ -47,7 +44,7 @@ void VNodeEllipticalArc::Create(const VAbstractNodeInitData &initData)
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::NodeElArc, initData.doc);
-        VNodeEllipticalArc *arc = new VNodeEllipticalArc(initData);
+        auto *arc = new VNodeEllipticalArc(initData);
 
         VAbstractPattern::AddTool(initData.id, arc);
         if (initData.idTool != NULL_ID)
@@ -70,7 +67,7 @@ void VNodeEllipticalArc::Create(const VAbstractNodeInitData &initData)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VNodeEllipticalArc::getTagName() const
+auto VNodeEllipticalArc::getTagName() const -> QString
 {
     return VAbstractPattern::TagElArc;
 }

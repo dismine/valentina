@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -27,41 +27,140 @@
  *************************************************************************/
 
 #include "mapplication.h"
-#include "version.h"
-#include "tmainwindow.h"
-#include "../ifc/exception/vexceptionobjecterror.h"
+#include "../fervor/fvupdater.h"
 #include "../ifc/exception/vexceptionbadid.h"
 #include "../ifc/exception/vexceptionconversionerror.h"
 #include "../ifc/exception/vexceptionemptyparameter.h"
+#include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/exception/vexceptionwrongid.h"
-#include "../vmisc/logging.h"
-#include "../vmisc/vsysexits.h"
-#include "../vmisc/diagnostic.h"
-#include "../vmisc/qt_dispatch/qt_dispatch.h"
 #include "../qmuparser/qmuparsererror.h"
+#include "../vformat/knownmeasurements/vknownmeasurementsdatabase.h"
+#include "../vganalytics/vganalytics.h"
+#include "../vmisc/projectversion.h"
+#include "../vmisc/qt_dispatch/qt_dispatch.h"
+#include "../vmisc/theme/vtheme.h"
+#include "../vmisc/vsysexits.h"
+#include "dialogs/dialogtapepreferences.h"
+#include "qfuturewatcher.h"
+#include "tkmmainwindow.h"
+#include "tmainwindow.h"
+#include "version.h"
+#include "vtapeshortcutmanager.h"
 
+#include "QtConcurrent/qtconcurrentrun.h"
+#include <vcsRepoState.h>
+#include <QCommandLineParser>
 #include <QDir>
+#include <QDirIterator>
+#include <QEvent>
 #include <QFileOpenEvent>
-#include <QLocalSocket>
-#include <QResource>
-#include <QTranslator>
-#include <QPointer>
-#include <QLocalServer>
-#include <QMessageBox>
-#include <iostream>
+#include <QFileSystemWatcher>
+#include <QFuture>
+#include <QGlobalStatic>
 #include <QGridLayout>
+#include <QLocalServer>
+#include <QLocalSocket>
+#include <QMessageBox>
+#include <QPointer>
+#include <QResource>
 #include <QSpacerItem>
+#include <QStyleFactory>
 #include <QThread>
+#include <QTimer>
+#include <QTranslator>
+#include <QUuid>
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
 QT_WARNING_DISABLE_INTEL(1418)
 
-Q_LOGGING_CATEGORY(mApp, "m.application")
+Q_LOGGING_CATEGORY(mApp, "m.application") // NOLINT
 
 QT_WARNING_POP
 
-#include <QCommandLineParser>
+namespace
+{
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
+
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, LONG_OPTION_DIMENSION_A, ("dimensionA"_L1)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, SINGLE_OPTION_DIMENSION_A, ('a'_L1))        // NOLINT
+
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, LONG_OPTION_DIMENSION_B, ("dimensionB"_L1)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, SINGLE_OPTION_DIMENSION_B, ('b'_L1))        // NOLINT
+
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, LONG_OPTION_DIMENSION_C, ("dimensionC"_L1)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, SINGLE_OPTION_DIMENSION_C, ('c'_L1))        // NOLINT
+
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, LONG_OPTION_UNITS, ("units"_L1)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, SINGLE_OPTION_UNITS, ('u'_L1))   // NOLINT
+
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, LONG_OPTION_KNOWN, ("known"_L1)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, SINGLE_OPTION_KNOWN, ('k'_L1))   // NOLINT
+
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, LONG_OPTION_TEST, ("test"_L1)) // NOLINT
+
+QT_WARNING_POP
+} // namespace
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void LogMessageDetails(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+{
+    QString debugdate = "["_L1 + QDateTime::currentDateTime().toString(QStringLiteral("yyyy.MM.dd hh:mm:ss"));
+    QString const file = VAbstractApplication::ReduceLogContextFilePath(context.file);
+
+    switch (type)
+    {
+        case QtDebugMsg:
+            debugdate += QStringLiteral(":DEBUG:%1(%2)] %3: %4: %5")
+                             .arg(file)
+                             .arg(context.line)
+                             .arg(context.function, context.category, msg);
+            vStdOut() << QApplication::translate("mNoisyHandler", "DEBUG:") << msg << "\n";
+            break;
+        case QtWarningMsg:
+            debugdate += QStringLiteral(":WARNING:%1(%2)] %3: %4: %5")
+                             .arg(file)
+                             .arg(context.line)
+                             .arg(context.function, context.category, msg);
+            vStdErr() << QApplication::translate("mNoisyHandler", "WARNING:") << msg << "\n";
+            break;
+        case QtCriticalMsg:
+            debugdate += QStringLiteral(":CRITICAL:%1(%2)] %3: %4: %5")
+                             .arg(file)
+                             .arg(context.line)
+                             .arg(context.function, context.category, msg);
+            vStdErr() << QApplication::translate("mNoisyHandler", "CRITICAL:") << msg << "\n";
+            break;
+        case QtFatalMsg:
+            debugdate += QStringLiteral(":FATAL:%1(%2)] %3: %4: %5")
+                             .arg(file)
+                             .arg(context.line)
+                             .arg(context.function, context.category, msg);
+            vStdErr() << QApplication::translate("mNoisyHandler", "FATAL:") << msg << "\n";
+            break;
+        case QtInfoMsg:
+            debugdate += QStringLiteral(":INFO:%1(%2)] %3: %4: %5")
+                             .arg(file)
+                             .arg(context.line)
+                             .arg(context.function, context.category, msg);
+            vStdOut() << QApplication::translate("mNoisyHandler", "INFO:") << msg << "\n";
+            break;
+        default:
+            break;
+    }
+
+    vStdOut().flush();
+    vStdErr().flush();
+
+    (*MApplication::VApp()->LogFile()) << debugdate << Qt::endl;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
@@ -75,9 +174,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     if (not isGuiThread)
     {
         auto Handler = [](QtMsgType type, const QMessageLogContext &context, const QString &msg)
-        {
-            noisyFailureMsgHandler(type, context, msg);
-        };
+        { noisyFailureMsgHandler(type, context, msg); };
 
         q_dispatch_async_main(Handler, type, context, msg);
         return;
@@ -100,23 +197,11 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     {
         type = QtDebugMsg;
     }
-#endif //defined(V_NO_ASSERT)
+#endif // defined(V_NO_ASSERT)
 
 #if defined(Q_OS_MAC)
-#   if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0) && QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-        // Try hide very annoying, Qt related, warnings in Mac OS X
-        // QNSView mouseDragged: Internal mouse button tracking invalid (missing Qt::LeftButton)
-        // https://bugreports.qt.io/browse/QTBUG-42846
-        if ((type == QtWarningMsg) && msg.contains(QStringLiteral("QNSView")))
-        {
-            type = QtDebugMsg;
-        }
-#   endif
-
-    // Hide Qt bug 'Assertion when reading an icns file'
-    // https://bugreports.qt.io/browse/QTBUG-45537
-    // Remove after Qt fix will be released
-    if ((type == QtWarningMsg) && msg.contains(QStringLiteral("QICNSHandler::read()")))
+    // Hide anything that starts with QMacCGContext
+    if ((type == QtWarningMsg) && msg.contains(QStringLiteral("QMacCGContext::")))
     {
         type = QtDebugMsg;
     }
@@ -131,8 +216,8 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     // this is another one that doesn't make sense as just a debug message.  pretty serious
     // sign of a problem
     // http://www.developer.nokia.com/Community/Wiki/QPainter::begin:Paint_device_returned_engine_%3D%3D_0_(Known_Issue)
-    if ((type == QtDebugMsg) && msg.contains(QStringLiteral("QPainter::begin"))
-        && msg.contains(QStringLiteral("Paint device returned engine")))
+    if ((type == QtDebugMsg) && msg.contains(QStringLiteral("QPainter::begin")) &&
+        msg.contains(QStringLiteral("Paint device returned engine")))
     {
         type = QtWarningMsg;
     }
@@ -140,44 +225,34 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     // This qWarning about "Cowardly refusing to send clipboard message to hung application..."
     // is something that can easily happen if you are debugging and the application is paused.
     // As it is so common, not worth popping up a dialog.
-    if ((type == QtWarningMsg) && msg.contains(QStringLiteral("QClipboard::event"))
-            && msg.contains(QStringLiteral("Cowardly refusing")))
+    if ((type == QtWarningMsg) && msg.contains(QStringLiteral("QClipboard::event")) &&
+        msg.contains(QStringLiteral("Cowardly refusing")))
     {
         type = QtDebugMsg;
     }
 
-    switch (type)
+    // Annoying warning that we can ignore
+    if ((type == QtWarningMsg) && (msg.contains(QStringLiteral("OpenType support missing for")) ||
+                                   msg.contains(QStringLiteral("DirectWrite: CreateFontFaceFromHDC() failed (Indicates "
+                                                               "an error in an input file such as a font file.)"))))
     {
-        case QtDebugMsg:
-            vStdOut() << QApplication::translate("mNoisyHandler", "DEBUG:") << msg << "\n";
-            return;
-        case QtWarningMsg:
-            vStdErr() << QApplication::translate("mNoisyHandler", "WARNING:") << msg << "\n";
-            break;
-        case QtCriticalMsg:
-            vStdErr() << QApplication::translate("mNoisyHandler", "CRITICAL:") << msg << "\n";
-            break;
-        case QtFatalMsg:
-            vStdErr() << QApplication::translate("mNoisyHandler", "FATAL:") << msg << "\n";
-            break;
-        #if QT_VERSION > QT_VERSION_CHECK(5, 4, 2)
-        case QtInfoMsg:
-            vStdOut() << QApplication::translate("mNoisyHandler", "INFO:") << msg << "\n";
-            break;
-        #endif
-        default:
-            break;
+        type = QtDebugMsg;
     }
 
-    vStdOut().flush();
-    vStdErr().flush();
+    QString logMsg = msg;
+    if (const bool isWarningMessage = VAbstractApplication::VApp()->IsWarningMessage(msg); isWarningMessage)
+    {
+        logMsg = logMsg.remove(VAbstractApplication::warningMessageSignature);
+    }
+
+    LogMessageDetails(type, context, logMsg);
 
     if (isGuiThread)
     {
-        //fixme: trying to make sure there are no save/load dialogs are opened, because error message during them will
-        //lead to crash
+        // fixme: trying to make sure there are no save/load dialogs are opened, because error message during them will
+        // lead to crash
         const bool topWinAllowsPop = (QApplication::activeModalWidget() == nullptr) ||
-                !QApplication::activeModalWidget()->inherits("QFileDialog");
+                                     !QApplication::activeModalWidget()->inherits("QFileDialog");
         QMessageBox messageBox;
         switch (type)
         {
@@ -193,38 +268,29 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
                 messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Fatal error"));
                 messageBox.setIcon(QMessageBox::Critical);
                 break;
-            #if QT_VERSION > QT_VERSION_CHECK(5, 4, 2)
             case QtInfoMsg:
                 messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Information"));
                 messageBox.setIcon(QMessageBox::Information);
                 break;
-            #endif
             case QtDebugMsg:
-                Q_UNREACHABLE(); //-V501
-                break;
             default:
                 break;
         }
 
-        if (type == QtWarningMsg || type == QtCriticalMsg || type == QtFatalMsg)
+        if ((type == QtWarningMsg || type == QtCriticalMsg || type == QtFatalMsg) &&
+            not MApplication::VApp()->IsTestMode() && topWinAllowsPop)
         {
-            if (not qApp->IsTestMode())
-            {
-                if (topWinAllowsPop)
-                {
-                    messageBox.setText(VAbstractApplication::ClearMessage(msg));
-                    messageBox.setStandardButtons(QMessageBox::Ok);
-                    messageBox.setWindowModality(Qt::ApplicationModal);
-                    messageBox.setModal(true);
-                #ifndef QT_NO_CURSOR
-                    QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
-                #endif
-                    messageBox.exec();
-                #ifndef QT_NO_CURSOR
-                    QGuiApplication::restoreOverrideCursor();
-                #endif
-                }
-            }
+            messageBox.setText(VAbstractApplication::ClearMessage(logMsg));
+            messageBox.setStandardButtons(QMessageBox::Ok);
+            messageBox.setWindowModality(Qt::ApplicationModal);
+            messageBox.setModal(true);
+#ifndef QT_NO_CURSOR
+            QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
+#endif
+            messageBox.exec();
+#ifndef QT_NO_CURSOR
+            QGuiApplication::restoreOverrideCursor();
+#endif
         }
 
         if (QtFatalMsg == type)
@@ -243,35 +309,41 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
 
 //---------------------------------------------------------------------------------------------------------------------
 MApplication::MApplication(int &argc, char **argv)
-    :VAbstractApplication(argc, argv),
-      mainWindows(),
-      localServer(nullptr),
-      trVars(nullptr),
-      dataBase(QPointer<DialogMDataBase>()),
-      testMode(false)
+  : VAbstractApplication(argc, argv),
+    m_knownMeasurementsRepopulateWatcher(new QFutureWatcher<void>(this))
 {
-    setApplicationDisplayName(VER_PRODUCTNAME_STR);
-    setApplicationName(VER_INTERNALNAME_STR);
-    setOrganizationName(VER_COMPANYNAME_STR);
-    setOrganizationDomain(VER_COMPANYDOMAIN_STR);
+    setApplicationDisplayName(QStringLiteral(VER_PRODUCTNAME_STR));
+    setApplicationName(QStringLiteral(VER_INTERNALNAME_STR));
+    setOrganizationName(QStringLiteral(VER_COMPANYNAME_STR));
+    setOrganizationDomain(QStringLiteral(VER_COMPANYDOMAIN_STR));
     // Setting the Application version
-    setApplicationVersion(APP_VERSION_STR);
+    setApplicationVersion(AppVersionStr());
     // We have been running Tape in two different cases.
     // The first inside own bundle where info.plist is works fine, but the second,
     // when we run inside Valentina's bundle, require direct setting the icon.
     setWindowIcon(QIcon(":/tapeicon/64x64/logo.png"));
+    VTheme::Instance()->StoreDefaultThemeName(QIcon::themeName());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 MApplication::~MApplication()
 {
-    qDeleteAll(mainWindows);
-
-    delete trVars;
-    if (not dataBase.isNull())
+    if (MApplication::IsAppInGUIMode() && settings->IsCollectStatistic())
     {
-        delete dataBase;
+        auto *statistic = VGAnalytics::Instance();
+
+        QString const clientID = settings->GetClientID();
+        if (!clientID.isEmpty())
+        {
+            statistic->SendAppCloseEvent(m_uptimeTimer.elapsed());
+        }
     }
+
+    qDeleteAll(m_mainWindows);
+    qDeleteAll(m_kmMainWindows);
+
+    delete m_trVars;
+    delete m_dataBase.data();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -282,7 +354,7 @@ MApplication::~MApplication()
  * @return value that is returned from the receiver's event handler.
  */
 // reimplemented from QApplication so we can throw exceptions in slots
-bool MApplication::notify(QObject *receiver, QEvent *event)
+auto MApplication::notify(QObject *receiver, QEvent *event) -> bool
 {
     try
     {
@@ -290,7 +362,8 @@ bool MApplication::notify(QObject *receiver, QEvent *event)
     }
     catch (const VExceptionObjectError &e)
     {
-        qCCritical(mApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file. Program will be terminated.")), //-V807
+        qCCritical(mApp, "%s\n\n%s\n\n%s",
+                   qUtf8Printable(tr("Error parsing file. Program will be terminated.")), //-V807
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         exit(V_EX_DATAERR);
     }
@@ -321,15 +394,20 @@ bool MApplication::notify(QObject *receiver, QEvent *event)
     catch (const VExceptionToolWasDeleted &e)
     {
         qCCritical(mApp, "%s\n\n%s\n\n%s",
-                   qUtf8Printable("Unhadled deleting tool. Continue use object after deleting!"),
+                   qUtf8Printable(QStringLiteral("Unhadled deleting tool. Continue use object after deleting!")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         exit(V_EX_DATAERR);
     }
     catch (const VException &e)
     {
-        qCCritical(mApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Something's wrong!!")),
-                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        qCCritical(mApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Something's wrong!!")), qUtf8Printable(e.ErrorMessage()),
+                   qUtf8Printable(e.DetailedInformation()));
         return true;
+    }
+    catch (const qmu::QmuParserWarning &e)
+    {
+        qCCritical(mApp, "%s", qUtf8Printable(tr("Formula warning: %1. Program will be terminated.").arg(e.GetMsg())));
+        exit(V_EX_DATAERR);
     }
     // These last two cases special. I found that we can't show here modal dialog with error message.
     // Somehow program doesn't waite untile an error dialog will be closed. But if ignore this program will hang.
@@ -347,37 +425,38 @@ bool MApplication::notify(QObject *receiver, QEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool MApplication::IsTestMode() const
+auto MApplication::IsTestMode() const -> bool
 {
-    return testMode;
+    return m_testMode;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief IsAppInGUIMode little hack that allow to have access to application state from VAbstractApplication class.
  */
-bool MApplication::IsAppInGUIMode() const
+auto MApplication::IsAppInGUIMode() const -> bool
 {
-    return IsTestMode();
+    return not IsTestMode();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-TMainWindow *MApplication::MainWindow()
+auto MApplication::MainTapeWindow() -> TMainWindow *
 {
-    Clean();
-    if (mainWindows.isEmpty())
+    CleanTapeWindows();
+    if (m_mainWindows.isEmpty())
     {
-        NewMainWindow();
+        NewMainTapeWindow();
     }
-    return mainWindows[0];
+    return m_mainWindows.first();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<TMainWindow *> MApplication::MainWindows()
+auto MApplication::MainTapeWindows() -> QList<TMainWindow *>
 {
-    Clean();
-    QList<TMainWindow*> list;
-    for (auto &w : mainWindows)
+    CleanTapeWindows();
+    QList<TMainWindow *> list;
+    list.reserve(m_mainWindows.size());
+    for (auto &w : m_mainWindows)
     {
         list.append(w);
     }
@@ -387,79 +466,130 @@ QList<TMainWindow *> MApplication::MainWindows()
 //---------------------------------------------------------------------------------------------------------------------
 void MApplication::InitOptions()
 {
-    qInstallMessageHandler(noisyFailureMsgHandler);
-
     OpenSettings();
 
-    qCDebug(mApp, "Version: %s", qUtf8Printable(APP_VERSION_STR));
-    qCDebug(mApp, "Build revision: %s", BUILD_REVISION);
+    StartLogging();
+
+    qCDebug(mApp, "Version: %s", qUtf8Printable(AppVersionStr()));
+    qCDebug(mApp, "Build revision: %s", VCS_REPO_STATE_REVISION);
     qCDebug(mApp, "%s", qUtf8Printable(buildCompatibilityString()));
     qCDebug(mApp, "Built on %s at %s", __DATE__, __TIME__);
-    qCDebug(mApp, "Command-line arguments: %s", qUtf8Printable(arguments().join(", ")));
+    qCDebug(mApp, "Command-line arguments: %s", qUtf8Printable(arguments().join(QStringLiteral(", "))));
     qCDebug(mApp, "Process ID: %s", qUtf8Printable(QString().setNum(applicationPid())));
 
-    LoadTranslation(QLocale().name());// By default the console version uses system locale
+    LoadTranslation(QString()); // By default the console version uses system locale
 
-    static const char * GENERIC_ICON_TO_CHECK = "document-open";
-    if (QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK) == false)
+    CheckSystemLocale();
+
+    QTimer::singleShot(0, this,
+                       []()
+                       {
+                           QString const country = VGAnalytics::CountryCode();
+                           if (country == "ru"_L1 || country == "by"_L1 || country == "ir"_L1)
+                           {
+                               QCoreApplication::exit();
+                           }
+                       });
+
+    VTheme::InitApplicationStyle();
+    VTheme::SetIconTheme();
+    VTheme::InitThemeMode();
+
+    VGAnalytics::Init(settings);
+
+    m_shortcutManager = new VTapeShortcutManager(this);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::StartLogging()
+{
+    if (CreateLogDir())
     {
-       //If there is no default working icon theme then we should
-       //use an icon theme that we provide via a .qrc file
-       //This case happens under Windows and Mac OS X
-       //This does not happen under GNOME or KDE
-       QIcon::setThemeName("win.icon.theme");
+        BeginLogging();
+        ClearOldLogs();
     }
+}
 
-    QResource::registerResource(diagramsPath());
+//---------------------------------------------------------------------------------------------------------------------
+auto MApplication::LogFile() -> QTextStream *
+{
+    return m_out.get();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void MApplication::InitTrVars()
 {
-    if (trVars != nullptr)
+    if (m_trVars != nullptr)
     {
-        trVars->Retranslate();
+        m_trVars->Retranslate();
     }
     else
     {
-        trVars = new VTranslateVars();
+        m_trVars = new VTranslateVars();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool MApplication::event(QEvent *e)
+auto MApplication::event(QEvent *e) -> bool
 {
-    switch(e->type())
+    switch (e->type())
     {
         // In Mac OS X the QFileOpenEvent event is generated when user perform "Open With" from Finder (this event is
         // Mac specific).
         case QEvent::FileOpen:
         {
-            QFileOpenEvent *fileOpenEvent = static_cast<QFileOpenEvent *>(e);
-            const QString macFileOpen = fileOpenEvent->file();
-            if(not macFileOpen.isEmpty())
+            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+            auto *fileOpenEvent = static_cast<QFileOpenEvent *>(e);
+            if (const QString macFileOpen = fileOpenEvent->file(); not macFileOpen.isEmpty())
             {
-                TMainWindow *mw = MainWindow();
-                if (mw)
+                if (macFileOpen.endsWith(".vkm"_L1))
                 {
-                    mw->LoadFile(macFileOpen);  // open file in existing window
+                    TKMMainWindow *mw = MainKMWindow();
+                    if (mw)
+                    {
+                        m_knownMeasurementsMode = true;
+                        mw->LoadFile(macFileOpen); // open file in existing window
+                    }
+                }
+                else
+                {
+                    TMainWindow *mw = MainTapeWindow();
+                    if (mw)
+                    {
+                        mw->LoadFile(macFileOpen); // open file in existing window
+                    }
                 }
                 return true;
             }
             break;
         }
 #if defined(Q_OS_MAC)
-        case QEvent::ApplicationActivate:
-        {
-            Clean();
-            TMainWindow *mw = MainWindow();
-            if (mw && not mw->isMinimized())
+        case QEvent::ApplicationStateChange:
+            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+            if (static_cast<QApplicationStateChangeEvent *>(e)->applicationState() == Qt::ApplicationActive)
             {
-                mw->show();
+                if (m_knownMeasurementsMode)
+                {
+                    CleanKMWindows();
+                    TKMMainWindow *mw = MainKMWindow();
+                    if (mw && not mw->isMinimized())
+                    {
+                        mw->show();
+                    }
+                }
+                else
+                {
+                    CleanTapeWindows();
+                    TMainWindow *mw = MainTapeWindow();
+                    if (mw && not mw->isMinimized())
+                    {
+                        mw->show();
+                    }
+                }
+                return true;
             }
-            return true;
-        }
-#endif //defined(Q_OS_MAC)
+            break;
+#endif // defined(Q_OS_MAC)
         default:
             return VAbstractApplication::event(e);
     }
@@ -467,89 +597,35 @@ bool MApplication::event(QEvent *e)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MApplication::OpenSettings()
+void MApplication::AboutToQuit()
 {
-    settings = new VTapeSettings(QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(),
-                                 QCoreApplication::applicationName(), this);
+    // If try to use the method QApplication::exit program can't sync settings and show warning about QApplication
+    // instance. Solution is to call sync() before quit.
+    // Connect this slot with VApplication::aboutToQuit.
+    Settings()->sync();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VTapeSettings *MApplication::TapeSettings()
+void MApplication::OpenSettings()
+{
+#if defined(Q_OS_WIN)
+    QString const docPath = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
+    if (!docPath.isEmpty())
+    {
+        QSettings::setPath(QSettings::IniFormat, QSettings::UserScope, docPath);
+    }
+#endif
+    settings = new VTapeSettings(QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(),
+                                 QCoreApplication::applicationName(), this);
+    connect(settings, &VTapeSettings::SVGFontsPathChanged, this, &MApplication::SVGFontsPathChanged);
+    connect(settings, &VTapeSettings::KnownMeasurementsPathChanged, this, &MApplication::KnownMeasurementsPathChanged);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto MApplication::TapeSettings() -> VTapeSettings *
 {
     SCASSERT(settings != nullptr)
     return qobject_cast<VTapeSettings *>(settings);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString MApplication::diagramsPath() const
-{
-    const QString dPath = QStringLiteral("/diagrams.rcc");
-#ifdef Q_OS_WIN
-    return QCoreApplication::applicationDirPath() + dPath;
-#elif defined(Q_OS_MAC)
-    QFileInfo fileBundle(QCoreApplication::applicationDirPath() + QStringLiteral("/../Resources") + dPath);
-    if (fileBundle.exists())
-    {
-        return fileBundle.absoluteFilePath();
-    }
-    else
-    {
-        QFileInfo file(QCoreApplication::applicationDirPath() + dPath);
-        if (file.exists())
-        {
-            return file.absoluteFilePath();
-        }
-        else
-        {
-            return QStringLiteral("/usr/share/valentina") + dPath;
-        }
-    }
-#else // Unix
-    QFileInfo file(QCoreApplication::applicationDirPath() + dPath);
-    if (file.exists())
-    {
-        return file.absoluteFilePath();
-    }
-    else
-    {
-        return QStringLiteral("/usr/share/valentina") + dPath;
-    }
-#endif
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MApplication::ShowDataBase()
-{
-    if (dataBase.isNull())
-    {
-        dataBase = new DialogMDataBase();
-        dataBase->setAttribute(Qt::WA_DeleteOnClose, true);
-        dataBase->setModal(false);
-        dataBase->show();
-    }
-    else
-    {
-        dataBase->activateWindow();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MApplication::RetranslateGroups()
-{
-    if (not dataBase.isNull())
-    {
-        dataBase->RetranslateGroups();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MApplication::RetranslateTables()
-{
-    const QList<TMainWindow*> list = MainWindows();
-    for (auto w : list)
-    {
-        w->RetranslateTable();
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -559,99 +635,15 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
     parser.setApplicationDescription(tr("Valentina's measurements editor."));
     parser.addHelpOption();
     parser.addVersionOption();
-    parser.addPositionalArgument("filename", tr("The measurement file."));
-    //-----
-    QCommandLineOption heightOption(QStringList() << "e" << "height",
-            tr("Open with the base height. Valid values: %1cm.")
-                                    .arg(VMeasurement::WholeListHeights(Unit::Cm).join(", ")),
-            tr("The base height"));
-    parser.addOption(heightOption);
-    //-----
-    QCommandLineOption sizeOption(QStringList() << "s" << "size",
-            tr("Open with the base size. Valid values: %1cm.").arg(VMeasurement::WholeListSizes(Unit::Cm).join(", ")),
-            tr("The base size"));
-    parser.addOption(sizeOption);
-    //-----
-    QCommandLineOption unitOption(QStringList() << "u" << "unit",
-            tr("Set pattern file unit: cm, mm, inch."),
-            tr("The pattern unit"));
-    parser.addOption(unitOption);
-    //-----
-    QCommandLineOption testOption(QStringList() << "test",
-            tr("Use for unit testing. Run the program and open a file without showing the main window."));
-    parser.addOption(testOption);
-    //-----
-    QCommandLineOption scalingOption(QStringList() << LONG_OPTION_NO_HDPI_SCALING,
-            tr("Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). "
-               "Alternatively you can use the %1 environment variable.").arg("QT_AUTO_SCREEN_SCALE_FACTOR=0"));
-    parser.addOption(scalingOption);
-    //-----
+
+    InitParserOptions(parser);
+
     parser.process(arguments);
 
-    bool flagHeight = false;
-    bool flagSize = false;
-    bool flagUnit = false;
+    m_testMode = parser.isSet(*LONG_OPTION_TEST);
+    m_knownMeasurementsMode = parser.isSet(*LONG_OPTION_KNOWN);
 
-    int size = 0;
-    int height = 0;
-    Unit unit = Unit::Cm;
-
-    if (parser.isSet(heightOption))
-    {
-        const QString heightValue = parser.value(heightOption);
-        if (VMeasurement::IsGradationHeightValid(heightValue))
-        {
-            flagHeight = true;
-            height = heightValue.toInt();
-        }
-        else
-        {
-            qCCritical(mApp, "%s\n",
-                    qPrintable(tr("Invalid base height argument. Must be %1cm.")
-                               .arg(VMeasurement::WholeListHeights(Unit::Cm).join(", "))));
-            parser.showHelp(V_EX_USAGE);
-        }
-    }
-
-    if (parser.isSet(sizeOption))
-    {
-        const QString sizeValue = parser.value(sizeOption);
-        if (VMeasurement::IsGradationSizeValid(sizeValue))
-        {
-            flagSize = true;
-            size = sizeValue.toInt();
-        }
-        else
-        {
-            qCCritical(mApp, "%s\n",
-                    qPrintable(tr("Invalid base size argument. Must be %1cm.")
-                               .arg(VMeasurement::WholeListSizes(Unit::Cm).join(", "))));
-            parser.showHelp(V_EX_USAGE);
-        }
-    }
-
-    {
-    const QString unitValue = parser.value(unitOption);
-    if (not unitValue.isEmpty())
-    {
-
-        const QStringList units = QStringList() << unitMM << unitCM << unitINCH;
-        if (units.contains(unitValue))
-        {
-            flagUnit = true;
-            unit = StrToUnits(unitValue);
-        }
-        else
-        {
-            qCCritical(mApp, "%s\n", qPrintable(tr("Invalid base size argument. Must be cm, mm or inch.")));
-            parser.showHelp(V_EX_USAGE);
-        }
-    }
-    }
-
-    testMode = parser.isSet(testOption);
-
-    if (not testMode && connection == SocketConnection::Client)
+    if (not m_testMode && connection == SocketConnection::Client)
     {
         const QString serverName = QCoreApplication::applicationName();
         QLocalSocket socket;
@@ -660,139 +652,627 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
         {
             qCDebug(mApp, "Connected to the server '%s'", qUtf8Printable(serverName));
             QTextStream stream(&socket);
-            stream << QCoreApplication::arguments().join(";;");
+            stream << QCoreApplication::arguments().join(";;"_L1);
             stream.flush();
             socket.waitForBytesWritten();
-            qApp->exit(V_EX_OK);
+            QCoreApplication::exit(V_EX_OK);
             return;
         }
 
         qCDebug(mApp, "Can't establish connection to the server '%s'", qUtf8Printable(serverName));
-
-        localServer = new QLocalServer(this);
-        connect(localServer, &QLocalServer::newConnection, this, &MApplication::NewLocalSocketConnection);
-        if (not localServer->listen(serverName))
-        {
-            qCDebug(mApp, "Can't begin to listen for incoming connections on name '%s'",
-                    qUtf8Printable(serverName));
-            if (localServer->serverError() == QAbstractSocket::AddressInUseError)
-            {
-                QLocalServer::removeServer(serverName);
-                if (not localServer->listen(serverName))
-                {
-                    qCWarning(mApp, "%s",
-                     qUtf8Printable(tr("Can't begin to listen for incoming connections on name '%1'").arg(serverName)));
-                }
-            }
-        }
-
+        StartLocalServer(serverName);
         LoadTranslation(TapeSettings()->GetLocale());
     }
 
     const QStringList args = parser.positionalArguments();
-    if (args.count() > 0)
+
+    if (bool const success = !args.isEmpty() ? StartWithFiles(parser) : SingleStart(parser); not success)
     {
-        if (testMode && args.count() > 1)
-        {
-            qCCritical(mApp, "%s\n", qPrintable(tr("Test mode doesn't support openning several files.")));
-            parser.showHelp(V_EX_USAGE);
-        }
-
-        for (auto &arg : args)
-        {
-            NewMainWindow();
-            if (not MainWindow()->LoadFile(arg))
-            {
-                if (testMode)
-                {
-                    return; // process only one input file
-                }
-                delete MainWindow();
-                continue;
-            }
-
-            if (flagSize)
-            {
-                MainWindow()->SetBaseMSize(size);
-            }
-
-            if (flagHeight)
-            {
-                MainWindow()->SetBaseMHeight(height);
-            }
-
-            if (flagUnit)
-            {
-                MainWindow()->SetPUnit(unit);
-            }
-        }
-    }
-    else
-    {
-        if (not testMode)
-        {
-            NewMainWindow();
-        }
-        else
-        {
-            qCCritical(mApp, "%s\n", qPrintable(tr("Please, provide one input file.")));
-            parser.showHelp(V_EX_USAGE);
-        }
+        return;
     }
 
-    if (testMode)
+    if (m_testMode)
     {
-        qApp->exit(V_EX_OK); // close program after processing in console mode
+        QCoreApplication::exit(V_EX_OK); // close program after processing in console mode
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-TMainWindow *MApplication::NewMainWindow()
+auto MApplication::VApp() -> MApplication *
 {
-    TMainWindow *tape = new TMainWindow();
-    mainWindows.prepend(tape);
-    if (not qApp->IsTestMode())
+    return qobject_cast<MApplication *>(QCoreApplication::instance());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto MApplication::KnownMeasurementsDatabase() -> VKnownMeasurementsDatabase *
+{
+    if (m_knownMeasurementsDatabase == nullptr)
+    {
+        m_knownMeasurementsDatabase = new VKnownMeasurementsDatabase();
+
+        RestartKnownMeasurementsDatabaseWatcher();
+    }
+
+    if (!m_knownMeasurementsDatabase->IsPopulated())
+    {
+        m_knownMeasurementsDatabase->PopulateMeasurementsDatabase();
+    }
+
+    return m_knownMeasurementsDatabase;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::Preferences(QWidget *parent)
+{
+    // Calling constructor of the dialog take some time. Because of this user have time to call the dialog twice.
+    static QPointer<DialogTapePreferences> guard; // Prevent any second run
+    if (guard.isNull())
+    {
+        QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+        auto *preferences = new DialogTapePreferences(parent);
+        // QScopedPointer needs to be sure any exception will never block guard
+        QScopedPointer<DialogTapePreferences> const dlg(preferences);
+        guard = preferences;
+        // Must be first
+
+        for (const auto &w : qAsConst(m_mainWindows))
+        {
+            if (!w.isNull())
+            {
+                connect(dlg.data(), &DialogTapePreferences::UpdateProperties, w, &TMainWindow::WindowsLocale,
+                        Qt::QueuedConnection);
+                connect(dlg.data(), &DialogTapePreferences::UpdateProperties, w, &TMainWindow::ToolBarStyles,
+                        Qt::QueuedConnection);
+            }
+        }
+
+        for (const auto &w : qAsConst(m_kmMainWindows))
+        {
+            if (!w.isNull())
+            {
+                connect(dlg.data(), &DialogTapePreferences::UpdateProperties, w, &TKMMainWindow::WindowsLocale,
+                        Qt::QueuedConnection);
+                connect(dlg.data(), &DialogTapePreferences::UpdateProperties, w, &TKMMainWindow::ToolBarStyles,
+                        Qt::QueuedConnection);
+            }
+        }
+
+        QGuiApplication::restoreOverrideCursor();
+        dlg->exec();
+    }
+    else
+    {
+        guard->raise();
+        guard->activateWindow();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::RestartKnownMeasurementsDatabaseWatcher()
+{
+    if (m_knownMeasurementsDatabase != nullptr)
+    {
+        delete m_knownMeasurementsDatabaseWatcher;
+        m_knownMeasurementsDatabaseWatcher = new QFileSystemWatcher({settings->GetPathKnownMeasurements()}, this);
+
+        QDirIterator it(settings->GetPathKnownMeasurements(),
+                        QDir::Dirs | QDir::NoDotAndDotDot,
+                        QDirIterator::Subdirectories);
+        while (it.hasNext())
+        {
+            m_knownMeasurementsDatabaseWatcher->addPath(it.next());
+        }
+
+        connect(m_knownMeasurementsDatabaseWatcher,
+                &QFileSystemWatcher::directoryChanged,
+                this,
+                &MApplication::RepopulateMeasurementsDatabase);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto MApplication::LogPath() -> QString
+{
+    // Keep in sync with VCrashPaths::GetAttachmentPath
+    return QStringLiteral("%1/tape-pid%2.log").arg(LogDirPath()).arg(applicationPid());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::BeginLogging()
+{
+    VlpCreateLock(m_lockLog, LogPath(), []() { return new QFile(LogPath()); });
+
+    if (m_lockLog->IsLocked())
+    {
+        if (m_lockLog->GetProtected()->open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
+        {
+            m_out.reset(new QTextStream(m_lockLog->GetProtected().data()));
+            qInstallMessageHandler(noisyFailureMsgHandler);
+            qCDebug(mApp, "Log file %s was locked.", qUtf8Printable(LogPath()));
+        }
+        else
+        {
+            qCDebug(mApp, "Error opening log file \'%s\'. All debug output redirected to console.",
+                    qUtf8Printable(LogPath()));
+        }
+    }
+    else
+    {
+        qCDebug(mApp, "Failed to lock %s", qUtf8Printable(LogPath()));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto MApplication::NewMainTapeWindow() -> TMainWindow *
+{
+    CleanTapeWindows();
+    int maxIndex = 1;
+    QSet<int> occupiedIndices;
+    for (const auto &window : m_mainWindows)
+    {
+        if (window->IsUntitled())
+        {
+            occupiedIndices.insert(window->GetUntitledIndex());
+        }
+    }
+
+    while (occupiedIndices.contains(maxIndex))
+    {
+        ++maxIndex;
+    }
+
+    auto *tape = new TMainWindow();
+    m_mainWindows.prepend(tape);
+    if (not MApplication::VApp()->IsTestMode())
     {
         tape->show();
+        tape->SetUntitledIndex(maxIndex);
+        tape->UpdateWindowTitle();
     }
     return tape;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto MApplication::MainKMWindow() -> TKMMainWindow *
+{
+    CleanKMWindows();
+    if (m_kmMainWindows.isEmpty())
+    {
+        NewMainKMWindow();
+    }
+    return m_kmMainWindows.first();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto MApplication::MainKMWindows() -> QList<TKMMainWindow *>
+{
+    CleanKMWindows();
+    QList<TKMMainWindow *> list;
+    list.reserve(m_kmMainWindows.size());
+    for (auto &w : m_kmMainWindows)
+    {
+        list.append(w);
+    }
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto MApplication::NewMainKMWindow() -> TKMMainWindow *
+{
+    CleanKMWindows();
+    int maxIndex = 1;
+    QSet<int> occupiedIndices;
+    for (const auto &window : m_kmMainWindows)
+    {
+        if (window->IsUntitled())
+        {
+            occupiedIndices.insert(window->GetUntitledIndex());
+        }
+    }
+
+    while (occupiedIndices.contains(maxIndex))
+    {
+        ++maxIndex;
+    }
+
+    auto *known = new TKMMainWindow();
+    m_kmMainWindows.prepend(known);
+    if (not MApplication::VApp()->IsTestMode())
+    {
+        known->show();
+        known->SetUntitledIndex(maxIndex);
+        known->UpdateWindowTitle();
+    }
+    return known;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void MApplication::ProcessCMD()
 {
     ParseCommandLine(SocketConnection::Client, arguments());
+
+    if (IsAppInGUIMode() && Settings()->IsAutomaticallyCheckUpdates())
+    {
+        // Set feed URL before doing anything else
+        FvUpdater::sharedUpdater()->SetFeedURL(FvUpdater::CurrentFeedURL());
+
+        QWidget *mainWindow = nullptr;
+        if (!m_knownMeasurementsMode)
+        {
+            mainWindow = MainTapeWindow();
+        }
+        else
+        {
+            mainWindow = MainKMWindow();
+        }
+        FvUpdater::sharedUpdater()->SetMainWindow(mainWindow);
+
+        // Check for updates automatically
+        FvUpdater::sharedUpdater()->CheckForUpdatesSilent();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void MApplication::NewLocalSocketConnection()
 {
-    QLocalSocket *socket = localServer->nextPendingConnection();
+    QLocalSocket *socket = m_localServer->nextPendingConnection();
     if (not socket)
     {
         return;
     }
     socket->waitForReadyRead(1000);
     QTextStream stream(socket);
-    const QString arg = stream.readAll();
-    if (not arg.isEmpty())
+
+    if (const QString arg = stream.readAll(); not arg.isEmpty())
     {
-        ParseCommandLine(SocketConnection::Server, arg.split(";;"));
+        ParseCommandLine(SocketConnection::Server, arg.split(QStringLiteral(";;")));
     }
     delete socket;
-    MainWindow()->raise();
-    MainWindow()->activateWindow();
+    MainTapeWindow()->raise();
+    MainTapeWindow()->activateWindow();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MApplication::Clean()
+void MApplication::RepopulateMeasurementsDatabase(const QString &path)
+{
+    Q_UNUSED(path)
+    if (m_knownMeasurementsDatabase != nullptr)
+    {
+        if (QFileInfo f(path); f.isDir() && f.exists())
+        {
+            QDirIterator it(path, QDir::Dirs | QDir::NoDotAndDotDot, QDirIterator::Subdirectories);
+            while (it.hasNext())
+            {
+                m_knownMeasurementsDatabaseWatcher->addPath(it.next());
+            }
+        }
+
+        connect(qApp,
+                &QCoreApplication::aboutToQuit,
+                m_knownMeasurementsRepopulateWatcher,
+                [this]()
+                {
+                    m_knownMeasurementsRepopulateWatcher->cancel();
+                    m_knownMeasurementsRepopulateWatcher->waitForFinished();
+                });
+        QObject::connect(m_knownMeasurementsRepopulateWatcher, &QFutureWatcher<void>::finished, this,
+                         &MApplication::SyncKnownMeasurements);
+        m_knownMeasurementsRepopulateWatcher->setFuture(QtConcurrent::run(
+            [this]()
+            {
+                if (m_knownMeasurementsRepopulateWatcher->isCanceled())
+                {
+                    return;
+                }
+
+                m_knownMeasurementsDatabase->PopulateMeasurementsDatabase();
+            }));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::KnownMeasurementsPathChanged(const QString &oldPath, const QString &newPath)
+{
+    if (oldPath != newPath && m_knownMeasurementsDatabase != nullptr)
+    {
+        RestartKnownMeasurementsDatabaseWatcher();
+        RepopulateMeasurementsDatabase(newPath);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::SyncKnownMeasurements()
+{
+    for (const auto &w : qAsConst(m_mainWindows))
+    {
+        if (!w.isNull())
+        {
+            w->SyncKnownMeasurements();
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::CleanTapeWindows()
 {
     // cleanup any deleted main windows first
-    for (int i = mainWindows.count() - 1; i >= 0; --i)
+    for (vsizetype i = m_mainWindows.count() - 1; i >= 0; --i)
     {
-        if (mainWindows.at(i).isNull())
+        if (m_mainWindows.at(i).isNull())
         {
-            mainWindows.removeAt(i);
+            m_mainWindows.removeAt(i);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::CleanKMWindows()
+{
+    // cleanup any deleted main windows first
+    for (vsizetype i = m_kmMainWindows.count() - 1; i >= 0; --i)
+    {
+        if (m_kmMainWindows.at(i).isNull())
+        {
+            m_kmMainWindows.removeAt(i);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::InitParserOptions(QCommandLineParser &parser)
+{
+    parser.addPositionalArgument(QStringLiteral("filename"), tr("The measurement file."));
+
+    parser.addOptions({
+        {{*SINGLE_OPTION_DIMENSION_A, *LONG_OPTION_DIMENSION_A},
+         tr("Set base for dimension A in the table units."),
+         tr("The dimension A base")},
+
+        {{*SINGLE_OPTION_DIMENSION_B, *LONG_OPTION_DIMENSION_B},
+         tr("Set base for dimension B in the table units."),
+         tr("The dimension B base")},
+
+        {{*SINGLE_OPTION_DIMENSION_C, *LONG_OPTION_DIMENSION_C},
+         tr("Set base for dimension C in the table units."),
+         tr("The dimension C base")},
+
+        {{*SINGLE_OPTION_UNITS, *LONG_OPTION_UNITS},
+         tr("Set pattern file units: cm, mm, inch."),
+         tr("The pattern units")},
+
+        {{*SINGLE_OPTION_KNOWN, *LONG_OPTION_KNOWN}, tr("Activate known measurements mode.")},
+
+        {*LONG_OPTION_TEST,
+         tr("Use for unit testing. Run the program and open a file without showing the main window.")},
+
+        {LONG_OPTION_NO_HDPI_SCALING,
+         tr("Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). "
+            "Alternatively you can use the %1 environment variable.")
+             .arg("QT_AUTO_SCREEN_SCALE_FACTOR=0")},
+    });
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::StartLocalServer(const QString &serverName)
+{
+    m_localServer = new QLocalServer(this);
+    connect(m_localServer, &QLocalServer::newConnection, this, &MApplication::NewLocalSocketConnection);
+    if (not m_localServer->listen(serverName))
+    {
+        qCDebug(mApp, "Can't begin to listen for incoming connections on name '%s'", qUtf8Printable(serverName));
+        if (m_localServer->serverError() == QAbstractSocket::AddressInUseError)
+        {
+            QLocalServer::removeServer(serverName);
+            if (not m_localServer->listen(serverName))
+            {
+                qCWarning(
+                    mApp, "%s",
+                    qUtf8Printable(tr("Can't begin to listen for incoming connections on name '%1'").arg(serverName)));
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto MApplication::StartWithFiles(QCommandLineParser &parser) -> bool
+{
+    const QStringList args = parser.positionalArguments();
+    if (args.count() <= 0)
+    {
+        QCoreApplication::exit(V_EX_DATAERR);
+        return false;
+    }
+
+    if (m_testMode && args.count() > 1)
+    {
+        qCCritical(mApp, "%s\n", qPrintable(tr("Test mode doesn't support opening several files.")));
+        parser.showHelp(V_EX_USAGE);
+    }
+
+    if (!m_knownMeasurementsMode)
+    {
+        return StartWithMeasurementFiles(parser);
+    }
+
+    return StartWithKnownMeasurementFiles(parser);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto MApplication::StartWithMeasurementFiles(QCommandLineParser &parser) -> bool
+{
+    const QStringList args = parser.positionalArguments();
+
+    bool flagDimensionA = false;
+    bool flagDimensionB = false;
+    bool flagDimensionC = false;
+    bool flagUnits = false;
+
+    qreal dimensionAValue = 0;
+    qreal dimensionBValue = 0;
+    qreal dimensionCValue = 0;
+    Unit unit = Unit::Cm;
+
+    ParseDimensionAOption(parser, dimensionAValue, flagDimensionA);
+    ParseDimensionBOption(parser, dimensionBValue, flagDimensionB);
+    ParseDimensionCOption(parser, dimensionCValue, flagDimensionC);
+    ParseUnitsOption(parser, unit, flagUnits);
+
+    return std::all_of(args.begin(), args.end(),
+                       [this, flagDimensionA, flagDimensionB, flagDimensionC, flagUnits, dimensionAValue,
+                        dimensionBValue, dimensionCValue, unit](const auto &arg)
+                       {
+                           this->NewMainTapeWindow();
+                           if (not this->MainTapeWindow()->LoadFile(arg))
+                           {
+                               delete this->MainTapeWindow();
+                               return !m_testMode;
+                           }
+
+                           if (flagDimensionA)
+                           {
+                               this->MainTapeWindow()->SetDimensionABase(dimensionAValue);
+                           }
+
+                           if (flagDimensionB)
+                           {
+                               this->MainTapeWindow()->SetDimensionBBase(dimensionBValue);
+                           }
+
+                           if (flagDimensionC)
+                           {
+                               this->MainTapeWindow()->SetDimensionCBase(dimensionCValue);
+                           }
+
+                           if (flagUnits)
+                           {
+                               this->MainTapeWindow()->SetPUnit(unit);
+                           }
+
+                           return true;
+                       });
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto MApplication::StartWithKnownMeasurementFiles(QCommandLineParser &parser) -> bool
+{
+    const QStringList args = parser.positionalArguments();
+
+    return std::all_of(args.begin(), args.end(),
+                       [this](const auto &arg)
+                       {
+                           this->NewMainKMWindow();
+                           if (not this->MainKMWindow()->LoadFile(arg))
+                           {
+                               delete this->MainKMWindow();
+                               return !m_testMode;
+                           }
+
+                           return true;
+                       });
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto MApplication::SingleStart(QCommandLineParser &parser) -> bool
+{
+    if (not m_testMode)
+    {
+        if (!m_knownMeasurementsMode)
+        {
+            NewMainTapeWindow();
+        }
+        else
+        {
+            NewMainKMWindow();
+        }
+    }
+    else
+    {
+        qCCritical(mApp, "%s\n", qPrintable(tr("Please, provide one input file.")));
+        parser.showHelp(V_EX_USAGE);
+        return false;
+    }
+
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::ParseDimensionAOption(QCommandLineParser &parser, qreal &dimensionAValue, bool &flagDimensionA)
+{
+    if (parser.isSet(*LONG_OPTION_DIMENSION_A))
+    {
+        const QString value = parser.value(*LONG_OPTION_DIMENSION_A);
+
+        bool ok = false;
+        dimensionAValue = value.toDouble(&ok);
+        if (ok && dimensionAValue > 0)
+        {
+            flagDimensionA = true;
+        }
+        else
+        {
+            qCCritical(mApp, "%s\n", qPrintable(tr("Invalid dimension A base value.")));
+            parser.showHelp(V_EX_USAGE);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::ParseDimensionBOption(QCommandLineParser &parser, qreal &dimensionBValue, bool &flagDimensionB)
+{
+    if (parser.isSet(*LONG_OPTION_DIMENSION_B))
+    {
+        const QString value = parser.value(*LONG_OPTION_DIMENSION_B);
+
+        bool ok = false;
+        dimensionBValue = value.toDouble(&ok);
+        if (ok && dimensionBValue > 0)
+        {
+            flagDimensionB = true;
+        }
+        else
+        {
+            qCCritical(mApp, "%s\n", qPrintable(tr("Invalid dimension B base value.")));
+            parser.showHelp(V_EX_USAGE);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::ParseDimensionCOption(QCommandLineParser &parser, qreal &dimensionCValue, bool &flagDimensionC)
+{
+    if (parser.isSet(*LONG_OPTION_DIMENSION_C))
+    {
+        const QString value = parser.value(*LONG_OPTION_DIMENSION_C);
+
+        bool ok = false;
+        dimensionCValue = value.toDouble(&ok);
+        if (ok && dimensionCValue > 0)
+        {
+            flagDimensionC = true;
+        }
+        else
+        {
+            qCCritical(mApp, "%s\n", qPrintable(tr("Invalid dimension C base value.")));
+            parser.showHelp(V_EX_USAGE);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::ParseUnitsOption(QCommandLineParser &parser, Unit &unit, bool &flagUnits)
+{
+    const QString unitValue = parser.value(*LONG_OPTION_UNITS);
+    if (not unitValue.isEmpty())
+    {
+        if (QStringList{unitMM, unitCM, unitINCH}.contains(unitValue))
+        {
+            flagUnits = true;
+            unit = StrToUnits(unitValue);
+        }
+        else
+        {
+            qCCritical(mApp, "%s\n", qPrintable(tr("Invalid base size argument. Must be cm, mm or inch.")));
+            parser.showHelp(V_EX_USAGE);
         }
     }
 }

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -47,15 +47,15 @@ struct VToolPiecePathInitData : VAbstractNodeInitData
 
 class VToolPiecePath : public VAbstractNode, public QGraphicsPathItem
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
-    static VToolPiecePath* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                  VContainer *data);
-    static VToolPiecePath *Create(VToolPiecePathInitData initData);
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolPiecePath *;
+    static auto Create(VToolPiecePathInitData initData) -> VToolPiecePath *;
 
-    virtual int  type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::PiecePath)};
-    virtual QString getTagName() const override;
+    virtual auto getTagName() const -> QString override;
 
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                        QWidget *widget = nullptr) override;
@@ -76,7 +76,8 @@ protected:
     virtual void HideNode() override;
     virtual void ToolCreation(const Source &typeCreation) override;
 private:
-    Q_DISABLE_COPY(VToolPiecePath)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VToolPiecePath) // NOLINT
 
     quint32 m_pieceId;
 

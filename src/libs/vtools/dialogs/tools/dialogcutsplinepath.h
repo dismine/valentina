@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef DIALOGCUTSPLINEPATH_H
 #define DIALOGCUTSPLINEPATH_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -40,51 +39,97 @@
 
 namespace Ui
 {
-    class DialogCutSplinePath;
+class DialogCutSplinePath;
 }
 
 /**
  * @brief The DialogCutSplinePath class dialog for ToolCutSplinePath.
  */
-class DialogCutSplinePath : public DialogTool
+class DialogCutSplinePath final : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
-    DialogCutSplinePath(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual ~DialogCutSplinePath() override;
+    DialogCutSplinePath(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
+    ~DialogCutSplinePath() override;
 
-    void         SetPointName(const QString &value);
+    auto GetPointName() const -> QString;
+    void SetPointName(const QString &value);
 
-    QString      GetFormula() const;
-    void         SetFormula(const QString &value);
+    auto GetFormula() const -> QString;
+    void SetFormula(const QString &value);
 
-    quint32      getSplinePathId() const;
-    void         setSplinePathId(const quint32 &value);
+    auto getSplinePathId() const -> quint32;
+    void setSplinePathId(quint32 value);
+
+    void SetNotes(const QString &notes);
+    auto GetNotes() const -> QString;
+
+    void SetAliasSuffix1(const QString &alias);
+    auto GetAliasSuffix1() const -> QString;
+
+    void SetAliasSuffix2(const QString &alias);
+    auto GetAliasSuffix2() const -> QString;
+
+    void ShowDialog(bool click) override;
+
 public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type) override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
     /**
      * @brief DeployFormulaTextEdit grow or shrink formula input
      */
-    void         DeployFormulaTextEdit();
-    void         FXLength();
+    void DeployFormulaTextEdit();
+    void FXLength();
+    void EvalFormula();
+
 protected:
-    virtual void ShowVisualization() override;
+    void ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void SaveData() override;
-    virtual void closeEvent(QCloseEvent *event) override;
+    void SaveData() override;
+    void closeEvent(QCloseEvent *event) override;
+    void changeEvent(QEvent *event) override;
+    auto IsValid() const -> bool override;
+
+private slots:
+    void SplinePathChanged();
+    void ValidateAlias();
+
 private:
-    Q_DISABLE_COPY(DialogCutSplinePath)
+    Q_DISABLE_COPY_MOVE(DialogCutSplinePath) // NOLINT
 
     /** @brief ui keeps information about user interface */
     Ui::DialogCutSplinePath *ui;
 
     /** @brief formula string with formula */
-    QString      formula;
+    QString m_formula{};
+    QString m_pointName{};
 
     /** @brief formulaBaseHeight base height defined by dialogui */
-    int formulaBaseHeight;
+    int m_formulaBaseHeight{0};
+
+    QTimer *m_timerFormula;
+
+    bool m_flagFormula{false};
+    bool m_flagName{true};
+    bool m_flagAlias1{true};
+    bool m_flagAlias2{true};
+
+    QString m_originAliasSuffix1{};
+    QString m_originAliasSuffix2{};
+
+    bool m_firstRelease{false};
+
+    void FinishCreating();
+
+    void InitIcons();
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto DialogCutSplinePath::IsValid() const -> bool
+{
+    return m_flagFormula && m_flagAlias1 && m_flagAlias2 && m_flagName;
+}
 
 #endif // DIALOGCUTSPLINEPATH_H

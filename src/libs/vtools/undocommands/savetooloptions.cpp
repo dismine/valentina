@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -30,20 +30,19 @@
 
 #include <QDomNode>
 
-#include "../vmisc/def.h"
-#include "../vmisc/logging.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/compatibility.h"
 #include "vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 SaveToolOptions::SaveToolOptions(const QDomElement &oldXml, const QDomElement &newXml,
                                  const QList<quint32> &oldDependencies, const QList<quint32> &newDependencies,
                                  VAbstractPattern *doc, const quint32 &id, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent),
-      oldXml(oldXml),
-      newXml(newXml),
-      oldDependencies(oldDependencies),
-      newDependencies(newDependencies)
+  : VUndoCommand(QDomElement(), doc, parent),
+    oldXml(oldXml),
+    newXml(newXml),
+    oldDependencies(oldDependencies),
+    newDependencies(newDependencies)
 {
     setText(tr("save tool option"));
     nodeId = id;
@@ -54,7 +53,7 @@ void SaveToolOptions::undo()
 {
     qCDebug(vUndo, "Undo.");
 
-    QDomElement domElement = doc->elementById(nodeId);
+    QDomElement const domElement = doc->FindElementById(nodeId);
     if (domElement.isElement())
     {
         domElement.parentNode().replaceChild(oldXml, domElement);
@@ -75,7 +74,7 @@ void SaveToolOptions::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    QDomElement domElement = doc->elementById(nodeId);
+    QDomElement const domElement = doc->FindElementById(nodeId);
     if (domElement.isElement())
     {
         domElement.parentNode().replaceChild(newXml, domElement);
@@ -92,18 +91,15 @@ void SaveToolOptions::redo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<quint32> SaveToolOptions::Missing(const QList<quint32> &list1, const QList<quint32> &list2) const
+auto SaveToolOptions::Missing(const QList<quint32> &list1, const QList<quint32> &list2) const -> QVector<quint32>
 {
-    QSet<quint32> set1 = QSet<quint32>::fromList(list1);
-    QSet<quint32> set2 = QSet<quint32>::fromList(list2);
-    return set1.subtract(set2).toList().toVector();
+    return ConvertToVector(ConvertToSet(list1).subtract(ConvertToSet(list2)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool SaveToolOptions::mergeWith(const QUndoCommand *command)
+auto SaveToolOptions::mergeWith(const QUndoCommand *command) -> bool
 {
-    const SaveToolOptions *saveCommand = static_cast<const SaveToolOptions *>(command);
-    SCASSERT(saveCommand != nullptr)
+    const auto *saveCommand = static_cast<const SaveToolOptions *>(command);
 
     if (saveCommand->getToolId() != nodeId)
     {
@@ -111,11 +107,8 @@ bool SaveToolOptions::mergeWith(const QUndoCommand *command)
     }
     else
     {
-        const QSet<quint32> currentSet;
-        currentSet.fromList(newDependencies);
-
-        const QSet<quint32> candidateSet;
-        candidateSet.fromList(saveCommand->NewDependencies());
+        auto currentSet = ConvertToSet(newDependencies);
+        auto candidateSet = ConvertToSet(saveCommand->NewDependencies());
 
         if (currentSet != candidateSet)
         {

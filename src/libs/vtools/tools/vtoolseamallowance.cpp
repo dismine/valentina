@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -27,67 +27,491 @@
  *************************************************************************/
 
 #include "vtoolseamallowance.h"
-#include "../dialogs/tools/piece/dialogseamallowance.h"
 #include "../dialogs/tools/piece/dialogduplicatedetail.h"
-#include "../vpatterndb/vpiecenode.h"
-#include "../vpatterndb/vpiecepath.h"
-#include "../vpatterndb/calculator.h"
-#include "../vpatterndb/floatItemData/vpatternlabeldata.h"
-#include "../vpatterndb/floatItemData/vpiecelabeldata.h"
-#include "nodeDetails/nodedetails.h"
-#include "../vgeometry/varc.h"
-#include "../vgeometry/vellipticalarc.h"
-#include "../vgeometry/vcubicbezier.h"
-#include "../vgeometry/vcubicbezierpath.h"
-#include "../vgeometry/vpointf.h"
-#include "../vgeometry/vspline.h"
-#include "../vgeometry/vsplinepath.h"
-#include "../vgeometry/vplacelabelitem.h"
+#include "../dialogs/tools/piece/dialogseamallowance.h"
+#include "../ifc/exception/vexceptionwrongid.h"
+#include "../ifc/xml/vlabeltemplateconverter.h"
 #include "../ifc/xml/vpatternconverter.h"
+#include "../qmuparser/qmutokenparser.h"
 #include "../undocommands/addpiece.h"
 #include "../undocommands/deletepiece.h"
 #include "../undocommands/movepiece.h"
 #include "../undocommands/savepieceoptions.h"
 #include "../undocommands/togglepiecestate.h"
+#include "../vformat/vlabeltemplate.h"
+#include "../vgeometry/varc.h"
+#include "../vgeometry/vellipticalarc.h"
+#include "../vgeometry/vplacelabelitem.h"
+#include "../vgeometry/vpointf.h"
+#include "../vlayout/vboundary.h"
+#include "../vlayout/vfoldline.h"
+#include "../vlayout/vlayoutpiece.h"
+#include "../vlayout/vlayoutpiecepath.h"
+#include "../vmisc/def.h"
+#include "../vmisc/theme/themeDef.h"
+#include "../vmisc/theme/vscenestylesheet.h"
+#include "../vmisc/vvalentinasettings.h"
+#include "../vpatterndb/calculator.h"
+#include "../vpatterndb/floatItemData/vgrainlinedata.h"
+#include "../vpatterndb/floatItemData/vpatternlabeldata.h"
+#include "../vpatterndb/floatItemData/vpiecelabeldata.h"
+#include "../vpatterndb/variables/vincrement.h"
+#include "../vpatterndb/vformula.h"
+#include "../vpatterndb/vpiecenode.h"
+#include "../vpatterndb/vpiecepath.h"
+#include "../vwidgets/global.h"
+#include "../vwidgets/vabstractmainwindow.h"
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../vwidgets/vnobrushscalepathitem.h"
-#include "../vwidgets/vabstractmainwindow.h"
-#include "../qmuparser/qmutokenparser.h"
+#include "../vwidgets/vpiecegrainline.h"
+#include "nodeDetails/vnodearc.h"
+#include "nodeDetails/vnodeellipticalarc.h"
+#include "nodeDetails/vnodepoint.h"
+#include "nodeDetails/vnodespline.h"
+#include "nodeDetails/vnodesplinepath.h"
+#include "nodeDetails/vtoolpiecepath.h"
+#include "nodeDetails/vtoolpin.h"
+#include "nodeDetails/vtoolplacelabel.h"
+#include "qpainterpath.h"
+#include "toolsdef.h"
 
 #include <QFuture>
-#include <QtConcurrent/QtConcurrentRun>
+#include <QFutureWatcher>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsView>
 #include <QKeyEvent>
 #include <QMenu>
 #include <QMessageBox>
+#include <QPainterPath>
+#include <QTimer>
+#include <QUuid>
+#include <QtConcurrent/QtConcurrentRun>
+#include <QtMath>
+#include <chrono>
+#include <memory>
+
+using namespace std::chrono_literals;
 
 // Current version of seam allowance tag need for backward compatibility
 const quint8 VToolSeamAllowance::pieceVersion = 2;
 
-const QString VToolSeamAllowance::TagCSA         = QStringLiteral("csa");
-const QString VToolSeamAllowance::TagRecord      = QStringLiteral("record");
-const QString VToolSeamAllowance::TagIPaths      = QStringLiteral("iPaths");
-const QString VToolSeamAllowance::TagPins        = QStringLiteral("pins");
-const QString VToolSeamAllowance::TagPlaceLabels = QStringLiteral("placeLabels");
+const QString VToolSeamAllowance::TagCSA = QStringLiteral("csa");                 // NOLINT(cert-err58-cpp)
+const QString VToolSeamAllowance::TagRecord = QStringLiteral("record");           // NOLINT(cert-err58-cpp)
+const QString VToolSeamAllowance::TagIPaths = QStringLiteral("iPaths");           // NOLINT(cert-err58-cpp)
+const QString VToolSeamAllowance::TagPins = QStringLiteral("pins");               // NOLINT(cert-err58-cpp)
+const QString VToolSeamAllowance::TagPlaceLabels = QStringLiteral("placeLabels"); // NOLINT(cert-err58-cpp)
+const QString VToolSeamAllowance::TagMirrorLine = QStringLiteral("mirrorLine");   // NOLINT(cert-err58-cpp)
 
-const QString VToolSeamAllowance::AttrSeamAllowance        = QStringLiteral("seamAllowance");
-const QString VToolSeamAllowance::AttrHideMainPath         = QStringLiteral("hideMainPath");
+const QString VToolSeamAllowance::AttrSeamAllowance = QStringLiteral("seamAllowance"); // NOLINT(cert-err58-cpp)
+const QString VToolSeamAllowance::AttrHideMainPath = QStringLiteral("hideMainPath");   // NOLINT(cert-err58-cpp)
+const QString VToolSeamAllowance::AttrShowFullPiece = QStringLiteral("showFullPiece"); // NOLINT(cert-err58-cpp)
+// NOLINTNEXTLINE(cert-err58-cpp)
 const QString VToolSeamAllowance::AttrSeamAllowanceBuiltIn = QStringLiteral("seamAllowanceBuiltIn");
-const QString VToolSeamAllowance::AttrUnited               = QStringLiteral("united");
-const QString VToolSeamAllowance::AttrFont                 = QStringLiteral("fontSize");
-const QString VToolSeamAllowance::AttrTopLeftPin           = QStringLiteral("topLeftPin");
-const QString VToolSeamAllowance::AttrBottomRightPin       = QStringLiteral("bottomRightPin");
-const QString VToolSeamAllowance::AttrCenterPin            = QStringLiteral("centerPin");
-const QString VToolSeamAllowance::AttrTopPin               = QStringLiteral("topPin");
-const QString VToolSeamAllowance::AttrBottomPin            = QStringLiteral("bottomPin");
+const QString VToolSeamAllowance::AttrUnited = QStringLiteral("united");                 // NOLINT(cert-err58-cpp)
+const QString VToolSeamAllowance::AttrFont = QStringLiteral("fontSize");                 // NOLINT(cert-err58-cpp)
+const QString VToolSeamAllowance::AttrTopLeftPin = QStringLiteral("topLeftPin");         // NOLINT(cert-err58-cpp)
+const QString VToolSeamAllowance::AttrBottomRightPin = QStringLiteral("bottomRightPin"); // NOLINT(cert-err58-cpp)
+const QString VToolSeamAllowance::AttrCenterPin = QStringLiteral("centerPin");           // NOLINT(cert-err58-cpp)
+const QString VToolSeamAllowance::AttrTopPin = QStringLiteral("topPin");                 // NOLINT(cert-err58-cpp)
+const QString VToolSeamAllowance::AttrBottomPin = QStringLiteral("bottomPin");           // NOLINT(cert-err58-cpp)
+const QString VToolSeamAllowance::AttrPiecePriority = QStringLiteral("priority");        // NOLINT(cert-err58-cpp)
+
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T> auto FixLabelPins(T itemData, const QMap<quint32, quint32> &mappedPins) -> T
+{
+    itemData.SetCenterPin(mappedPins.value(itemData.CenterPin(), NULL_ID));
+    itemData.SetTopLeftPin(mappedPins.value(itemData.TopLeftPin(), NULL_ID));
+    itemData.SetBottomRightPin(mappedPins.value(itemData.BottomRightPin(), NULL_ID));
+    return itemData;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolSeamAllowance *VToolSeamAllowance::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
-                                               VAbstractPattern *doc, VContainer *data)
+template <typename T> auto FixGrainlinePins(T itemData, const QMap<quint32, quint32> &mappedPins) -> T
+{
+    itemData.SetCenterPin(mappedPins.value(itemData.CenterPin(), NULL_ID));
+    itemData.SetTopPin(mappedPins.value(itemData.TopPin(), NULL_ID));
+    itemData.SetBottomPin(mappedPins.value(itemData.BottomPin(), NULL_ID));
+    return itemData;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DuplicatePins(const QVector<quint32> &pins, const VToolSeamAllowanceInitData &initData) -> QMap<quint32, quint32>
+{
+    QMap<quint32, quint32> newPins;
+    for (auto p : pins)
+    {
+        QSharedPointer<VPointF> const pin = initData.data->GeometricObject<VPointF>(p);
+
+        auto *tool = qobject_cast<VAbstractNode *>(VAbstractPattern::getTool(p));
+        SCASSERT(tool != nullptr)
+
+        VToolPinInitData initNodeData;
+        initNodeData.id = initData.data->AddGObject(new VPointF(*pin));
+        initNodeData.pointId = pin->getIdObject();
+        initNodeData.idObject = NULL_ID; // piece id
+        initNodeData.doc = initData.doc;
+        initNodeData.data = initData.data;
+        initNodeData.parse = Document::FullParse;
+        initNodeData.typeCreation = Source::FromTool;
+        initNodeData.drawName = initData.drawName;
+        initNodeData.idTool = tool->GetIdTool();
+
+        VToolPin::Create(initNodeData);
+        newPins.insert(p, initNodeData.id);
+    }
+    return newPins;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void UpdateLabelItem(VTextGraphicsItem *labelItem, QPointF pos, qreal labelAngle)
+{
+    SCASSERT(labelItem != nullptr)
+
+    QRectF rectBB;
+    rectBB.setTopLeft(pos);
+    rectBB.setWidth(labelItem->boundingRect().width());
+    rectBB.setHeight(labelItem->boundingRect().height());
+    qreal dX;
+    qreal dY;
+    if (!labelItem->IsContained(rectBB, labelAngle, dX, dY))
+    {
+        pos.setX(pos.x() + dX);
+        pos.setY(pos.y() + dY);
+    }
+
+    labelItem->setPos(pos);
+    labelItem->setRotation(-labelAngle); // expects clockwise direction
+    labelItem->Update();
+    labelItem->GetTextLines() > 0 ? labelItem->show() : labelItem->hide();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto SeamPoints(const VPiece &detail, bool combineTogether, const VContainer *data) -> QVector<VLayoutPoint>
+{
+    if (combineTogether)
+    {
+        const QVector<VLayoutPassmark> passmarks = VLayoutPiece::ConvertPassmarks(detail, data);
+        const QVector<VLayoutPoint> points = detail.FullMainPathPoints(data);
+
+        bool const seamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
+        bool const builtInSeamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
+
+        // DumpVector(points, QStringLiteral("points.json.XXXXXX")); // Uncomment for dumping test data
+        // DumpVector(passmarks, QStringLiteral("passmarks.json.XXXXXX")); // Uncomment for dumping test data
+
+        VBoundary boundary(points, seamAllowance, builtInSeamAllowance);
+        boundary.SetPieceName(detail.GetName());
+
+        if (QLineF const mirrorLine = detail.SeamMirrorLine(data); !mirrorLine.isNull() && detail.IsShowFullPiece())
+        {
+            boundary.SetMirrorLine(mirrorLine);
+        }
+        const QList<VBoundarySequenceItemData> sequence = boundary.Combine(passmarks, false, false);
+
+        QVector<VLayoutPoint> combinedBoundary;
+        for (const auto &item : sequence)
+        {
+            combinedBoundary += item.item.value<VLayoutPiecePath>().Points();
+        }
+
+        // DumpVector(combinedBoundary, QStringLiteral("boundary.json.XXXXXX")); // Uncomment for dumping test data
+        return combinedBoundary;
+    }
+
+    return detail.FullMainPathPoints(data);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto RenderSeamPath(const VPiece &detail, bool combineTogether, const VContainer *data) -> QPainterPath
+{
+    QVector<VLayoutPoint> const points = SeamPoints(detail, combineTogether, data);
+    QVector<QPointF> boundary;
+    CastTo(points, boundary);
+
+    if (combineTogether)
+    {
+        QPainterPath combinedPath;
+        combinedPath.addPolygon(QPolygonF(boundary));
+        combinedPath.closeSubpath();
+        combinedPath.setFillRule(Qt::OddEvenFill);
+
+        return combinedPath;
+    }
+
+    return VPiece::MainPathPath(boundary);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto SeamAllowancePoints(const VPiece &detail, bool combineTogether, const VContainer *data) -> QVector<VLayoutPoint>
+{
+    if (combineTogether)
+    {
+        const QVector<VLayoutPassmark> passmarks = VLayoutPiece::ConvertPassmarks(detail, data);
+        const QVector<VLayoutPoint> points = detail.FullSeamAllowancePoints(data);
+
+        // DumpVector(points, QStringLiteral("points.json.XXXXXX"));       // Uncomment for dumping test data
+        // DumpVector(passmarks, QStringLiteral("passmarks.json.XXXXXX")); // Uncomment for dumping test data
+
+        VBoundary boundary(points, true);
+        boundary.SetPieceName(detail.GetName());
+
+        if (QLineF const mirrorLine = detail.SeamAllowanceMirrorLine(data);
+            !mirrorLine.isNull() && detail.IsShowFullPiece())
+        {
+            boundary.SetMirrorLine(mirrorLine);
+        }
+
+        const QList<VBoundarySequenceItemData> sequence = boundary.Combine(passmarks, false, false);
+
+        QVector<VLayoutPoint> combinedBoundary;
+        for (const auto &item : sequence)
+        {
+            combinedBoundary += item.item.value<VLayoutPiecePath>().Points();
+        }
+
+        // DumpVector(combinedBoundary, QStringLiteral("boundary.json.XXXXXX")); // Uncomment for dumping test data
+        return combinedBoundary;
+    }
+
+    return detail.FullSeamAllowancePoints(data);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto RenderSeamAllowancePath(const VPiece &detail, bool combineTogether, const VContainer *data) -> QPainterPath
+{
+    QVector<VLayoutPoint> const points = SeamAllowancePoints(detail, combineTogether, data);
+    if (combineTogether)
+    {
+        QVector<QPointF> combinedBoundary;
+        CastTo(points, combinedBoundary);
+
+        QPainterPath combinedPath;
+        combinedPath.addPolygon(QPolygonF(combinedBoundary));
+        combinedPath.closeSubpath();
+        combinedPath.setFillRule(Qt::OddEvenFill);
+
+        return combinedPath;
+    }
+
+    return detail.SeamAllowancePath(points);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto RenderPassmarks(const VPiece &detail, const VContainer *data) -> QPainterPath
+{
+    if (const QLineF mirrorLine = detail.SeamMirrorLine(data); !mirrorLine.isNull() && detail.IsShowFullPiece())
+    {
+        if (!detail.IsSeamAllowance())
+        {
+            return {};
+        }
+
+        QPainterPath path;
+        const QTransform matrix = VGObject::FlippingMatrix(mirrorLine);
+        const QVector<VLayoutPassmark> passmarks = VLayoutPiece::ConvertPassmarks(detail, data);
+        for (const auto &passmark : passmarks)
+        {
+            QPainterPath passmaksPath;
+            for (const auto &line : passmark.lines)
+            {
+                passmaksPath.moveTo(line.p1());
+                passmaksPath.lineTo(line.p2());
+            }
+            path.addPath(passmaksPath);
+
+            if (!VGObject::IsPointOnLineviaPDP(passmark.baseLine.p1(), mirrorLine.p1(), mirrorLine.p2(),
+                                               accuracyPointOnLine * 2))
+            {
+                QPainterPath mirroredPassmaksPath;
+                for (const auto &line : passmark.lines)
+                {
+                    mirroredPassmaksPath.moveTo(line.p1());
+                    mirroredPassmaksPath.lineTo(line.p2());
+                }
+                path.addPath(matrix.map(mirroredPassmaksPath));
+            }
+        }
+
+        return path;
+    }
+    return detail.PassmarksPath(data);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto RenderFoldLine(const VPiece &detail, const VContainer *data) -> VFoldLine
+{
+    QLineF foldLine = detail.IsHideMainPath() ? detail.SeamAllowanceMirrorLine(data) : detail.SeamMirrorLine(data);
+    VFoldLine fLine(foldLine, detail.GetFoldLineType());
+    fLine.SetLabelSvgFontSize(detail.GetFoldLineSvgFontSize());
+    fLine.SetLabelFontItalic(detail.IsFoldLineLabelFontItalic());
+    fLine.SetLabelFontBold(detail.IsFoldLineLabelFontBold());
+    fLine.SetLabel(detail.GetFoldLineLabel());
+    fLine.SetLabelAlignment(detail.GetFoldLineLabelAlignment());
+
+    {
+        VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+        QFont font = settings->GetLabelFont();
+        font.setPointSize(static_cast<int>(detail.GetFoldLineSvgFontSize()));
+        fLine.SetOutlineFont(font);
+        fLine.SetSvgFont(settings->GetLabelSVGFont());
+    }
+
+    if (detail.IsManualFoldHeight())
+    {
+        VFormula formula(detail.GetFormulaFoldHeight(), data);
+        formula.setCheckZero(false);
+        formula.setCheckLessThanZero(true);
+        formula.Eval();
+
+        if (formula.error())
+        {
+            const QString errorMsg = QObject::tr("Cannot calculate fold line height for piece '%1'. Reason: %2.")
+                                         .arg(detail.GetName(), formula.Reason());
+            VAbstractApplication::VApp()->IsPedantic()
+                ? throw VException(errorMsg)
+                : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        }
+        else
+        {
+            fLine.SetHeight(ToPixel(formula.getDoubleValue(), *data->GetPatternUnit()));
+        }
+    }
+
+    if (detail.IsManualFoldWidth())
+    {
+        VFormula formula(detail.GetFormulaFoldWidth(), data);
+        formula.setCheckZero(false);
+        formula.setCheckLessThanZero(true);
+        formula.Eval();
+
+        if (formula.error())
+        {
+            const QString errorMsg = QObject::tr("Cannot calculate fold line width for piece '%1'. Reason: %2.")
+                                         .arg(detail.GetName(), formula.Reason());
+            VAbstractApplication::VApp()->IsPedantic()
+                ? throw VException(errorMsg)
+                : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        }
+        else
+        {
+            fLine.SetWidth(ToPixel(formula.getDoubleValue(), *data->GetPatternUnit()));
+        }
+    }
+
+    if (detail.IsManualFoldCenter())
+    {
+        VFormula formula(detail.GetFormulaFoldCenter(), data);
+        formula.setCheckZero(false);
+        formula.setCheckLessThanZero(true);
+        formula.Eval();
+
+        if (formula.error())
+        {
+            const QString errorMsg =
+                QObject::tr("Cannot calculate fold line center position for piece '%1'. Reason: %2.")
+                    .arg(detail.GetName(), formula.Reason());
+            VAbstractApplication::VApp()->IsPedantic()
+                ? throw VException(errorMsg)
+                : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        }
+        else
+        {
+            fLine.SetCenterPosition(formula.getDoubleValue());
+        }
+    }
+
+    return fLine;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto RenderMirrorLine(const VPiece &detail, const VContainer *data, bool combineTogether) -> QPainterPath
+{
+    if (!detail.IsShowFullPiece() || !detail.IsShowMirrorLine())
+    {
+        return {};
+    }
+
+    // Determine the appropriate seam line and points based on the seam allowance state
+    QLineF mirrorLine;
+    QVector<VLayoutPoint> points;
+
+    if (!detail.IsSeamAllowance() || detail.IsSeamAllowanceBuiltIn())
+    {
+        mirrorLine = detail.SeamMirrorLine(data);
+        // Return empty path if no valid mirror line is found
+        if (mirrorLine.isNull())
+        {
+            return {};
+        }
+
+        if (combineTogether)
+        {
+            points = SeamPoints(detail, combineTogether, data);
+        }
+    }
+    else
+    {
+        mirrorLine = detail.SeamAllowanceMirrorLine(data);
+        // Return empty path if no valid mirror line is found
+        if (mirrorLine.isNull())
+        {
+            return {};
+        }
+
+        if (combineTogether)
+        {
+            points = SeamAllowancePoints(detail, combineTogether, data);
+        }
+    }
+
+    QPointF p1 = mirrorLine.p1();
+    QPointF p2 = mirrorLine.p2();
+
+    // Adjust points based on intersections, if required
+    if (combineTogether && !points.isEmpty())
+    {
+        QVector<QPointF> seam;
+        CastTo(points, seam);
+
+        if (QVector<QPointF> const intersectionPoints = VAbstractCurve::CurveIntersectLine(seam,
+                                                                                           QLineF(mirrorLine.center(),
+                                                                                                  p1));
+            !intersectionPoints.isEmpty())
+        {
+            p1 = intersectionPoints.constFirst();
+        }
+
+        if (QVector<QPointF> const intersectionPoints = VAbstractCurve::CurveIntersectLine(seam,
+                                                                                           QLineF(mirrorLine.center(),
+                                                                                                  p2));
+            !intersectionPoints.isEmpty())
+        {
+            p2 = intersectionPoints.constFirst();
+        }
+    }
+
+    // Construct and return the path
+    QPainterPath path;
+    path.moveTo(p1);
+    path.lineTo(p2);
+    return path;
+}
+} // namespace
+
+//---------------------------------------------------------------------------------------------------------------------
+VToolSeamAllowance::~VToolSeamAllowance()
+{
+    CancelLabelRendering();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VToolSeamAllowance::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                                VContainer *data) -> VToolSeamAllowance *
 {
     SCASSERT(not dialog.isNull());
-    const QPointer<DialogSeamAllowance> dialogTool = qobject_cast<DialogSeamAllowance*>(dialog);
+    const QPointer<DialogSeamAllowance> dialogTool = qobject_cast<DialogSeamAllowance *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
     VToolSeamAllowanceInitData initData;
@@ -99,6 +523,30 @@ VToolSeamAllowance *VToolSeamAllowance::Create(const QPointer<DialogTool> &dialo
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
 
+    auto LoadLabelTemplate = [&initData](const QString &path)
+    {
+        if (not path.isEmpty())
+        {
+            try
+            {
+                VLabelTemplate ltemplate;
+                ltemplate.setXMLContent(VLabelTemplateConverter(path).Convert());
+                return ltemplate.ReadLines();
+            }
+            catch (VException &e)
+            {
+                const QString errorMsg = QObject::tr("Piece '%1'. Unable to load default piece label template.\n%2\n%3")
+                                             .arg(initData.detail.GetName(), e.ErrorMessage(), e.DetailedInformation());
+                VAbstractApplication::VApp()->IsPedantic()
+                    ? throw VException(errorMsg)
+                    : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+            }
+        }
+
+        return QVector<VLabelTemplateLine>();
+    };
+
+    initData.detail.GetPieceLabelData().SetLabelTemplate(LoadLabelTemplate(doc->GetDefaultPieceLabelPath()));
     initData.detail.GetPath().SetNodes(PrepareNodes(initData.detail.GetPath(), scene, doc, data));
 
     VToolSeamAllowance *piece = Create(initData);
@@ -106,19 +554,21 @@ VToolSeamAllowance *VToolSeamAllowance::Create(const QPointer<DialogTool> &dialo
     if (piece != nullptr)
     {
         piece->m_dialog = dialog;
+        piece->RefreshGeometry(true); // Refresh internal paths
     }
     return piece;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolSeamAllowance *VToolSeamAllowance::Create(VToolSeamAllowanceInitData &initData)
+auto VToolSeamAllowance::Create(VToolSeamAllowanceInitData &initData) -> VToolSeamAllowance *
 {
     if (initData.typeCreation == Source::FromGui || initData.typeCreation == Source::FromTool)
     {
-        initData.data->AddVariable(currentSeamAllowance, new VIncrement(initData.data, currentSeamAllowance, 0,
-                                                                        initData.detail.GetSAWidth(),
-                                                                        initData.width, true,
-                                                                        tr("Current seam allowance")));
+        auto *currentSA = new VIncrement(initData.data, currentSeamAllowance);
+        currentSA->SetFormula(initData.detail.GetSAWidth(), initData.width, true);
+        currentSA->SetDescription(tr("Current seam allowance"));
+
+        initData.data->AddVariable(currentSA);
         initData.id = initData.data->AddPiece(initData.detail);
     }
     else
@@ -126,9 +576,11 @@ VToolSeamAllowance *VToolSeamAllowance::Create(VToolSeamAllowanceInitData &initD
         const qreal calcWidth = CheckFormula(initData.id, initData.width, initData.data);
         initData.detail.SetFormulaSAWidth(initData.width, calcWidth);
 
-        initData.data->AddVariable(currentSeamAllowance, new VIncrement(initData.data, currentSeamAllowance, 0,
-                                                                        calcWidth, initData.width, true,
-                                                                        tr("Current seam allowance")));
+        auto *currentSA = new VIncrement(initData.data, currentSeamAllowance);
+        currentSA->SetFormula(calcWidth, initData.width, true);
+        currentSA->SetDescription(tr("Current seam allowance"));
+
+        initData.data->AddVariable(currentSA);
 
         initData.data->UpdatePiece(initData.id, initData.detail);
         if (initData.parse != Document::FullParse)
@@ -143,21 +595,20 @@ VToolSeamAllowance *VToolSeamAllowance::Create(VToolSeamAllowanceInitData &initD
         VAbstractTool::AddRecord(initData.id, Tool::Piece, initData.doc);
         piece = new VToolSeamAllowance(initData);
         initData.scene->addItem(piece);
-        VMainGraphicsView::NewSceneRect(initData.scene, qApp->getSceneView(), piece);
+        VMainGraphicsView::NewSceneRect(initData.scene, VAbstractValApplication::VApp()->getSceneView(), piece);
         VAbstractPattern::AddTool(initData.id, piece);
-        piece->RefreshGeometry(true); // Refresh internal paths
     }
-    //Very important to delete it. Only this tool need this special variable.
+    // Very important to delete it. Only this tool need this special variable.
     initData.data->RemoveVariable(currentSeamAllowance);
     return piece;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolSeamAllowance *VToolSeamAllowance::Duplicate(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
-                                                  VAbstractPattern *doc)
+auto VToolSeamAllowance::Duplicate(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc)
+    -> VToolSeamAllowance *
 {
     SCASSERT(not dialog.isNull());
-    const QPointer<DialogDuplicateDetail> dialogTool = qobject_cast<DialogDuplicateDetail*>(dialog);
+    const QPointer<DialogDuplicateDetail> dialogTool = qobject_cast<DialogDuplicateDetail *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
     VToolSeamAllowanceInitData initData;
@@ -176,21 +627,42 @@ VToolSeamAllowance *VToolSeamAllowance::Duplicate(const QPointer<DialogTool> &di
     initData.detail = detail;
     initData.width = initData.detail.GetFormulaSAWidth();
 
-    return Duplicate(initData);
+    VToolSeamAllowance *piece = Duplicate(initData);
+    if (piece != nullptr)
+    {
+        piece->RefreshGeometry(true); // Refresh internal paths
+    }
+    return piece;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolSeamAllowance *VToolSeamAllowance::Duplicate(VToolSeamAllowanceInitData &initData)
+auto VToolSeamAllowance::Duplicate(VToolSeamAllowanceInitData &initData) -> VToolSeamAllowance *
 {
     VPiece dupDetail = initData.detail;
 
     QMap<quint32, quint32> replacements;
     dupDetail.GetPath().SetNodes(DuplicateNodes(initData.detail.GetPath(), initData, replacements));
-    dupDetail.SetCustomSARecords(DuplicateCustomSARecords(initData.detail.GetCustomSARecords(), initData,
-                                                          replacements));
+    dupDetail.SetCustomSARecords(
+        DuplicateCustomSARecords(initData.detail.GetCustomSARecords(), initData, replacements));
     dupDetail.SetInternalPaths(DuplicateInternalPaths(initData.detail.GetInternalPaths(), initData));
-    dupDetail.SetPins(DuplicatePins(initData.detail.GetPins(), initData));
     dupDetail.SetPlaceLabels(DuplicatePlaceLabels(initData.detail.GetPlaceLabels(), initData));
+    dupDetail.SetUUID(QUuid::createUuid());
+
+    const QMap<quint32, quint32> mappedPins = DuplicatePins(initData.detail.GetPins(), initData);
+    dupDetail.SetPins(ConvertToVector(mappedPins.values()));
+    dupDetail.SetPieceLabelData(FixLabelPins(initData.detail.GetPieceLabelData(), mappedPins));
+    dupDetail.SetPatternLabelData(FixLabelPins(initData.detail.GetPatternLabelData(), mappedPins));
+    dupDetail.SetGrainlineGeometry(FixGrainlinePins(initData.detail.GetGrainlineGeometry(), mappedPins));
+
+    if (replacements.contains(dupDetail.GetMirrorLineStartPoint()))
+    {
+        dupDetail.SetMirrorLineStartPoint(replacements.value(dupDetail.GetMirrorLineStartPoint()));
+    }
+
+    if (replacements.contains(dupDetail.GetMirrorLineEndPoint()))
+    {
+        dupDetail.SetMirrorLineEndPoint(replacements.value(dupDetail.GetMirrorLineEndPoint()));
+    }
 
     initData.detail = dupDetail;
     return VToolSeamAllowance::Create(initData);
@@ -203,35 +675,40 @@ void VToolSeamAllowance::RemoveWithConfirm(bool ask)
     {
         DeleteToolWithConfirm(ask);
     }
-    catch(const VExceptionToolWasDeleted &e)
+    catch (const VExceptionToolWasDeleted &e)
     {
         Q_UNUSED(e);
-        return;//Leave this method immediately!!!
+        return; // Leave this method immediately!!!
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSeamAllowance::InsertNode(VPieceNode node, quint32 pieceId, VMainGraphicsScene *scene,
-                                    VContainer *data, VAbstractPattern *doc)
+void VToolSeamAllowance::InsertNodes(const QVector<VPieceNode> &nodes, quint32 pieceId, VMainGraphicsScene *scene,
+                                     VContainer *data, VAbstractPattern *doc)
 {
     SCASSERT(scene != nullptr)
     SCASSERT(data != nullptr)
     SCASSERT(doc != nullptr)
 
-    if (pieceId > NULL_ID)
+    if (pieceId <= NULL_ID || nodes.isEmpty())
     {
-        VPiece oldDet;
-        try
-        {
-            oldDet = data->GetPiece(pieceId);
-        }
-        catch (const VExceptionBadId &)
-        {
-            return;
-        }
+        return;
+    }
 
-        VPiece newDet = oldDet;
+    VPiece oldDet;
+    try
+    {
+        oldDet = data->GetPiece(pieceId);
+    }
+    catch (const VExceptionBadId &)
+    {
+        return;
+    }
 
+    VPiece newDet = oldDet;
+
+    for (auto node : nodes)
+    {
         const quint32 id = PrepareNode(node, scene, doc, data);
         if (id == NULL_ID)
         {
@@ -242,13 +719,13 @@ void VToolSeamAllowance::InsertNode(VPieceNode node, quint32 pieceId, VMainGraph
         newDet.GetPath().Append(node);
 
         // Seam allowance tool already initializated and can't init the node
-        VToolSeamAllowance *saTool = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(pieceId));
+        auto *saTool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(pieceId));
         SCASSERT(saTool != nullptr);
 
-        InitNode(node, scene, data, doc, saTool);
-
-        qApp->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, pieceId));
+        InitNode(node, scene, saTool);
     }
+
+    VAbstractApplication::VApp()->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, pieceId));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -258,31 +735,40 @@ void VToolSeamAllowance::AddAttributes(VAbstractPattern *doc, QDomElement &domEl
 
     doc->SetAttribute(domElement, VDomDocument::AttrId, id);
     doc->SetAttribute(domElement, AttrName, piece.GetName());
+    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrShortName, piece.GetShortName(),
+                                         [](const QString &name) noexcept { return name.isEmpty(); });
+    doc->SetAttribute(domElement, AttrUUID, piece.GetUUID().toString());
+    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrGradationLabel, piece.GetGradationLabel(),
+                                         [](const QString &label) noexcept { return label.isEmpty(); });
     doc->SetAttribute(domElement, AttrVersion, QString().setNum(pieceVersion));
-    doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(piece.GetMx()));
-    doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(piece.GetMy()));
-    doc->SetAttribute(domElement, AttrInLayout, piece.IsInLayout());
+    doc->SetAttribute(domElement, AttrMx, VAbstractValApplication::VApp()->fromPixel(piece.GetMx()));
+    doc->SetAttribute(domElement, AttrMy, VAbstractValApplication::VApp()->fromPixel(piece.GetMy()));
+    doc->SetAttributeOrRemoveIf<bool>(domElement, AttrInLayout, piece.IsInLayout(),
+                                      [](bool inLayout) noexcept { return inLayout; });
     doc->SetAttribute(domElement, AttrForbidFlipping, piece.IsForbidFlipping());
     doc->SetAttribute(domElement, AttrForceFlipping, piece.IsForceFlipping());
-    doc->SetAttribute(domElement, AttrSeamAllowance, piece.IsSeamAllowance());
+    doc->SetAttributeOrRemoveIf<bool>(domElement,
+                                      AttrSymmetricalCopy,
+                                      piece.IsSymmetricalCopy(),
+                                      [](bool sCopy) noexcept { return not sCopy; });
+    doc->SetAttribute(domElement, AttrFollowGrainline, piece.IsFollowGrainline());
+    doc->SetAttribute(domElement, AttrSewLineOnDrawing, piece.IsSewLineOnDrawing());
+    doc->SetAttributeOrRemoveIf<bool>(domElement, AttrSeamAllowance, piece.IsSeamAllowance(),
+                                      [](bool seamAllowance) noexcept { return not seamAllowance; });
     doc->SetAttribute(domElement, AttrHideMainPath, piece.IsHideMainPath());
-
-    const bool saBuiltIn = piece.IsSeamAllowanceBuiltIn();
-    if (saBuiltIn)
-    {
-        doc->SetAttribute(domElement, AttrSeamAllowanceBuiltIn, saBuiltIn);
-    }
-    else
-    { // For backward compatebility.
-        domElement.removeAttribute(AttrSeamAllowanceBuiltIn);
-    }
-
+    doc->SetAttributeOrRemoveIf<bool>(domElement, AttrSeamAllowanceBuiltIn, piece.IsSeamAllowanceBuiltIn(),
+                                      [](bool builtin) noexcept { return not builtin; });
+    doc->SetAttributeOrRemoveIf<bool>(domElement, AttrShowFullPiece, piece.IsShowFullPiece(),
+                                      [](bool show) noexcept { return show; });
     doc->SetAttribute(domElement, AttrWidth, piece.GetFormulaSAWidth());
-    doc->SetAttribute(domElement, AttrUnited, piece.IsUnited());
+    doc->SetAttributeOrRemoveIf<bool>(domElement, AttrUnited, piece.IsUnited(),
+                                      [](bool united) noexcept { return not united; });
+    doc->SetAttributeOrRemoveIf<uint>(domElement, AttrPiecePriority, piece.GetPriority(),
+                                      [](uint priority) noexcept { return priority == 0; });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSeamAllowance::AddCSARecord(VAbstractPattern *doc, QDomElement &domElement, const CustomSARecord &record)
+void VToolSeamAllowance::AddCSARecord(VAbstractPattern *doc, QDomElement &domElement, CustomSARecord record)
 {
     QDomElement recordNode = doc->createElement(VToolSeamAllowance::TagRecord);
 
@@ -299,7 +785,7 @@ void VToolSeamAllowance::AddCSARecord(VAbstractPattern *doc, QDomElement &domEle
 void VToolSeamAllowance::AddCSARecords(VAbstractPattern *doc, QDomElement &domElement,
                                        const QVector<CustomSARecord> &records)
 {
-    if (records.size() > 0)
+    if (not records.empty())
     {
         QDomElement csaRecordsElement = doc->createElement(VToolSeamAllowance::TagCSA);
         for (auto record : records)
@@ -313,7 +799,7 @@ void VToolSeamAllowance::AddCSARecords(VAbstractPattern *doc, QDomElement &domEl
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::AddInternalPaths(VAbstractPattern *doc, QDomElement &domElement, const QVector<quint32> &paths)
 {
-    if (paths.size() > 0)
+    if (not paths.empty())
     {
         QDomElement iPathsElement = doc->createElement(VToolSeamAllowance::TagIPaths);
         for (auto path : paths)
@@ -343,7 +829,7 @@ void VToolSeamAllowance::AddPlaceLabels(VAbstractPattern *doc, QDomElement &domE
 void VToolSeamAllowance::AddPatternPieceData(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece)
 {
     QDomElement domData = doc->createElement(VAbstractPattern::TagData);
-    const VPieceLabelData& data = piece.GetPatternPieceData();
+    const VPieceLabelData &data = piece.GetPieceLabelData();
     doc->SetAttribute(domData, VAbstractPattern::AttrLetter, data.GetLetter());
     doc->SetAttribute(domData, VAbstractPattern::AttrAnnotation, data.GetAnnotation());
     doc->SetAttribute(domData, VAbstractPattern::AttrOrientation, data.GetOrientation());
@@ -351,42 +837,21 @@ void VToolSeamAllowance::AddPatternPieceData(VAbstractPattern *doc, QDomElement 
     doc->SetAttribute(domData, VAbstractPattern::AttrTilt, data.GetTilt());
     doc->SetAttribute(domData, VAbstractPattern::AttrFoldPosition, data.GetFoldPosition());
     doc->SetAttribute(domData, VAbstractPattern::AttrQuantity, data.GetQuantity());
-    doc->SetAttribute(domData, VAbstractPattern::AttrVisible, data.IsVisible());
+    doc->SetAttribute(domData, VAbstractPattern::AttrVisible, data.IsEnabled());
     doc->SetAttribute(domData, VAbstractPattern::AttrOnFold, data.IsOnFold());
     doc->SetAttribute(domData, AttrMx, data.GetPos().x());
     doc->SetAttribute(domData, AttrMy, data.GetPos().y());
     doc->SetAttribute(domData, AttrWidth, data.GetLabelWidth());
     doc->SetAttribute(domData, AttrHeight, data.GetLabelHeight());
-    doc->SetAttribute(domData, AttrFont, data.GetFontSize());
+    doc->SetAttributeOrRemoveIf<int>(domData, AttrFont, data.GetFontSize(),
+                                     [](int size) noexcept { return size == 0; });
     doc->SetAttribute(domData, VAbstractPattern::AttrRotation, data.GetRotation());
-
-    if (data.CenterPin() > NULL_ID)
-    {
-        doc->SetAttribute(domData, AttrCenterPin, data.CenterPin());
-    }
-    else
-    {
-        domData.removeAttribute(AttrCenterPin);
-    }
-
-    if (data.TopLeftPin() > NULL_ID)
-    {
-        doc->SetAttribute(domData, AttrTopLeftPin, data.TopLeftPin());
-    }
-    else
-    {
-        domData.removeAttribute(AttrTopLeftPin);
-    }
-
-    if (data.BottomRightPin() > NULL_ID)
-    {
-        doc->SetAttribute(domData, AttrBottomRightPin, data.BottomRightPin());
-    }
-    else
-    {
-        domData.removeAttribute(AttrBottomRightPin);
-    }
-
+    doc->SetAttributeOrRemoveIf<quint32>(domData, AttrCenterPin, data.CenterPin(),
+                                         [](quint32 pin) noexcept { return pin == NULL_ID; });
+    doc->SetAttributeOrRemoveIf<quint32>(domData, AttrTopLeftPin, data.TopLeftPin(),
+                                         [](quint32 leftPin) noexcept { return leftPin == NULL_ID; });
+    doc->SetAttributeOrRemoveIf<quint32>(domData, AttrBottomRightPin, data.BottomRightPin(),
+                                         [](quint32 rightPin) noexcept { return rightPin == NULL_ID; });
     doc->SetLabelTemplate(domData, data.GetLabelTemplate());
 
     domElement.appendChild(domData);
@@ -396,41 +861,21 @@ void VToolSeamAllowance::AddPatternPieceData(VAbstractPattern *doc, QDomElement 
 void VToolSeamAllowance::AddPatternInfo(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece)
 {
     QDomElement domData = doc->createElement(VAbstractPattern::TagPatternInfo);
-    const VPatternLabelData& geom = piece.GetPatternInfo();
-    doc->SetAttribute(domData, VAbstractPattern::AttrVisible, geom.IsVisible());
+    const VPatternLabelData &geom = piece.GetPatternLabelData();
+    doc->SetAttribute(domData, VAbstractPattern::AttrVisible, geom.IsEnabled());
     doc->SetAttribute(domData, AttrMx, geom.GetPos().x());
     doc->SetAttribute(domData, AttrMy, geom.GetPos().y());
     doc->SetAttribute(domData, AttrWidth, geom.GetLabelWidth());
     doc->SetAttribute(domData, AttrHeight, geom.GetLabelHeight());
-    doc->SetAttribute(domData, AttrFont, geom.GetFontSize());
+    doc->SetAttributeOrRemoveIf<int>(domData, AttrFont, geom.GetFontSize(),
+                                     [](int size) noexcept { return size == 0; });
     doc->SetAttribute(domData, VAbstractPattern::AttrRotation, geom.GetRotation());
-
-    if (geom.CenterPin() > NULL_ID)
-    {
-        doc->SetAttribute(domData, AttrCenterPin, geom.CenterPin());
-    }
-    else
-    {
-        domData.removeAttribute(AttrCenterPin);
-    }
-
-    if (geom.TopLeftPin() > NULL_ID)
-    {
-        doc->SetAttribute(domData, AttrTopLeftPin, geom.TopLeftPin());
-    }
-    else
-    {
-        domData.removeAttribute(AttrTopLeftPin);
-    }
-
-    if (geom.BottomRightPin() > NULL_ID)
-    {
-        doc->SetAttribute(domData, AttrBottomRightPin, geom.BottomRightPin());
-    }
-    else
-    {
-        domData.removeAttribute(AttrBottomRightPin);
-    }
+    doc->SetAttributeOrRemoveIf<quint32>(domData, AttrCenterPin, geom.CenterPin(),
+                                         [](quint32 pin) noexcept { return pin <= NULL_ID; });
+    doc->SetAttributeOrRemoveIf<quint32>(domData, AttrTopLeftPin, geom.TopLeftPin(),
+                                         [](quint32 pin) noexcept { return pin <= NULL_ID; });
+    doc->SetAttributeOrRemoveIf<quint32>(domData, AttrBottomRightPin, geom.BottomRightPin(),
+                                         [](quint32 pin) noexcept { return pin <= NULL_ID; });
 
     domElement.appendChild(domData);
 }
@@ -440,42 +885,71 @@ void VToolSeamAllowance::AddGrainline(VAbstractPattern *doc, QDomElement &domEle
 {
     // grainline
     QDomElement domData = doc->createElement(VAbstractPattern::TagGrainline);
-    const VGrainlineData& glGeom = piece.GetGrainlineGeometry();
+    const VGrainlineData &glGeom = piece.GetGrainlineGeometry();
+    doc->SetAttribute(domData, VAbstractPattern::AttrEnabled, glGeom.IsEnabled());
     doc->SetAttribute(domData, VAbstractPattern::AttrVisible, glGeom.IsVisible());
     doc->SetAttribute(domData, AttrMx, glGeom.GetPos().x());
     doc->SetAttribute(domData, AttrMy, glGeom.GetPos().y());
     doc->SetAttribute(domData, AttrLength, glGeom.GetLength());
     doc->SetAttribute(domData, VAbstractPattern::AttrRotation, glGeom.GetRotation());
-    doc->SetAttribute(domData, VAbstractPattern::AttrArrows, int(glGeom.GetArrowType()));
-
-    if (glGeom.CenterPin() > NULL_ID)
-    {
-        doc->SetAttribute(domData, AttrCenterPin, glGeom.CenterPin());
-    }
-    else
-    {
-        domData.removeAttribute(AttrCenterPin);
-    }
-
-    if (glGeom.TopPin() > NULL_ID)
-    {
-        doc->SetAttribute(domData, AttrTopPin, glGeom.TopPin());
-    }
-    else
-    {
-        domData.removeAttribute(AttrTopPin);
-    }
-
-    if (glGeom.BottomPin() > NULL_ID)
-    {
-        doc->SetAttribute(domData, AttrBottomPin, glGeom.BottomPin());
-    }
-    else
-    {
-        domData.removeAttribute(AttrBottomPin);
-    }
+    doc->SetAttribute(domData, VAbstractPattern::AttrArrows, static_cast<int>(glGeom.GetArrowType()));
+    doc->SetAttributeOrRemoveIf<quint32>(domData, AttrCenterPin, glGeom.CenterPin(),
+                                         [](quint32 pin) noexcept { return pin <= NULL_ID; });
+    doc->SetAttributeOrRemoveIf<quint32>(domData, AttrTopPin, glGeom.TopPin(),
+                                         [](quint32 pin) noexcept { return pin <= NULL_ID; });
+    doc->SetAttributeOrRemoveIf<quint32>(domData, AttrBottomPin, glGeom.BottomPin(),
+                                         [](quint32 pin) noexcept { return pin <= NULL_ID; });
 
     domElement.appendChild(domData);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::AddMirrorLine(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece)
+{
+    QDomElement domData = doc->createElement(VToolSeamAllowance::TagMirrorLine);
+    doc->SetAttributeOrRemoveIf<quint32>(domData, VAbstractPattern::AttrMirrorLineP1, piece.GetMirrorLineStartPoint(),
+                                         [](quint32 id) noexcept { return id <= NULL_ID; });
+    doc->SetAttributeOrRemoveIf<quint32>(domData, VAbstractPattern::AttrMirrorLineP2, piece.GetMirrorLineEndPoint(),
+                                         [](quint32 id) noexcept { return id <= NULL_ID; });
+    doc->SetAttributeOrRemoveIf<bool>(domData, VAbstractPattern::AttrFoldLineManualHeight, piece.IsManualFoldHeight(),
+                                      [](bool manual) noexcept { return not manual; });
+    doc->SetAttributeOrRemoveIf<bool>(domData, VAbstractPattern::AttrFoldLineManualWidth, piece.IsManualFoldWidth(),
+                                      [](bool manual) noexcept { return not manual; });
+    doc->SetAttributeOrRemoveIf<bool>(domData, VAbstractPattern::AttrFoldLineManualCenter, piece.IsManualFoldCenter(),
+                                      [](bool manual) noexcept { return not manual; });
+    doc->SetAttributeOrRemoveIf<QString>(
+        domData, VAbstractPattern::AttrFoldLineHeightFormula, piece.GetFormulaFoldHeight(),
+        [piece](const QString &height) noexcept { return not piece.IsManualFoldHeight() || height.isEmpty(); });
+    doc->SetAttributeOrRemoveIf<QString>(
+        domData, VAbstractPattern::AttrFoldLineWidthFormula, piece.GetFormulaFoldWidth(),
+        [piece](const QString &width) noexcept { return not piece.IsManualFoldWidth() || width.isEmpty(); });
+    doc->SetAttributeOrRemoveIf<QString>(
+        domData, VAbstractPattern::AttrFoldLineCenterFormula, piece.GetFormulaFoldCenter(),
+        [piece](const QString &center) noexcept { return not piece.IsManualFoldCenter() || center.isEmpty(); });
+    doc->SetAttribute(domData, VAbstractPattern::AttrFoldLineType, FoldLineTypeToString(piece.GetFoldLineType()));
+    doc->SetAttributeOrRemoveIf<unsigned int>(domData, VAbstractPattern::AttrFoldLineFontSize,
+                                              piece.GetFoldLineSvgFontSize(),
+                                              [](unsigned int size) noexcept { return size == defFoldLineFontSize; });
+    doc->SetAttributeOrRemoveIf<bool>(domData, VDomDocument::AttrItalic, piece.IsFoldLineLabelFontItalic(),
+                                      [](bool italic) noexcept { return not italic; });
+    doc->SetAttributeOrRemoveIf<bool>(domData, VDomDocument::AttrBold, piece.IsFoldLineLabelFontBold(),
+                                      [](bool bold) noexcept { return not bold; });
+    doc->SetAttributeOrRemoveIf<QString>(domData, VAbstractPattern::AttrFoldLineLabel, piece.GetFoldLineLabel(),
+                                         [](const QString &label) noexcept { return label.isEmpty(); });
+    doc->SetAttributeOrRemoveIf<int>(domData, VDomDocument::AttrAlignment, piece.GetFoldLineLabelAlignment(),
+                                     [](int alignment) noexcept { return alignment == Qt::AlignHCenter; });
+    doc->SetAttributeOrRemoveIf<bool>(domData, VAbstractPattern::AttrMirrorLineVisible, piece.IsShowMirrorLine(),
+                                      [](bool visible) noexcept { return visible; });
+
+    domElement.appendChild(domData);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::SetName(const QString &name)
+{
+    VPiece detail = VAbstractTool::data.GetPiece(m_id);
+    detail.SetName(name);
+    VAbstractTool::data.UpdatePiece(m_id, detail);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -497,7 +971,7 @@ void VToolSeamAllowance::Update(const VPiece &piece)
     setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
     VAbstractTool::data.UpdatePiece(m_id, piece);
     RefreshGeometry();
-    VMainGraphicsView::NewSceneRect(m_sceneDetails, qApp->getSceneView(), this);
+    VMainGraphicsView::NewSceneRect(m_sceneDetails, VAbstractValApplication::VApp()->getSceneView(), this);
     setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
 }
 
@@ -541,7 +1015,7 @@ void VToolSeamAllowance::ConnectOutsideSignals()
     connect(doc, &VAbstractPattern::CheckLayout, this, &VToolSeamAllowance::UpdateGrainline);
 
     connect(m_sceneDetails, &VMainGraphicsScene::EnableToolMove, this, &VToolSeamAllowance::EnableToolMove);
-    connect(m_sceneDetails, &VMainGraphicsScene::ItemClicked, this, &VToolSeamAllowance::ResetChildren);
+    connect(m_sceneDetails, &VMainGraphicsScene::ItemByMousePress, this, &VToolSeamAllowance::ResetChildren);
     connect(m_sceneDetails, &VMainGraphicsScene::DimensionsChanged, this, &VToolSeamAllowance::UpdateDetailLabel);
     connect(m_sceneDetails, &VMainGraphicsScene::DimensionsChanged, this, &VToolSeamAllowance::UpdatePatternInfo);
     connect(m_sceneDetails, &VMainGraphicsScene::LanguageChanged, this, &VToolSeamAllowance::retranslateUi);
@@ -561,7 +1035,7 @@ void VToolSeamAllowance::ReinitInternals(const VPiece &detail, VMainGraphicsScen
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolSeamAllowance::getTagName() const
+auto VToolSeamAllowance::getTagName() const -> QString
 {
     return VAbstractPattern::TagDetail;
 }
@@ -582,8 +1056,7 @@ void VToolSeamAllowance::GroupVisibility(quint32 object, bool visible)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::FullUpdateFromFile()
 {
-    const bool updateChildren = false;// Chilren have their own signals. Avoid double refresh.
-    RefreshGeometry(updateChildren);
+    // Do nothing. Refresh triggered outside
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -617,28 +1090,20 @@ void VToolSeamAllowance::ResetChildren(QGraphicsItem *pItem)
 {
     const bool selected = isSelected();
     const VPiece detail = VAbstractTool::data.GetPiece(m_id);
-    VTextGraphicsItem* pVGI = qgraphicsitem_cast<VTextGraphicsItem*>(pItem);
-    if (pVGI != m_dataLabel)
+    auto *pVGI = qgraphicsitem_cast<VTextGraphicsItem *>(pItem);
+    if (pVGI != m_dataLabel && detail.GetPieceLabelData().IsEnabled())
     {
-        if (detail.GetPatternPieceData().IsVisible())
-        {
-            m_dataLabel->Reset();
-        }
+        m_dataLabel->Reset();
     }
-    if (pVGI != m_patternInfo)
+    if (pVGI != m_patternInfo && detail.GetPatternLabelData().IsEnabled())
     {
-        if (detail.GetPatternInfo().IsVisible())
-        {
-            m_patternInfo->Reset();
-        }
+        m_patternInfo->Reset();
     }
-    VGrainlineItem* pGLI = qgraphicsitem_cast<VGrainlineItem*>(pItem);
-    if (pGLI != m_grainLine)
+
+    if (const auto *pGLI = qgraphicsitem_cast<VGrainlineItem *>(pItem);
+        pGLI != m_grainLine && detail.GetGrainlineGeometry().IsEnabled())
     {
-        if (detail.GetGrainlineGeometry().IsVisible())
-        {
-            m_grainLine->Reset();
-        }
+        m_grainLine->Reset();
     }
 
     setSelected(selected);
@@ -671,23 +1136,41 @@ void VToolSeamAllowance::Highlight(quint32 id)
  */
 void VToolSeamAllowance::UpdateDetailLabel()
 {
-    const VPiece detail = VAbstractTool::data.GetPiece(m_id);
-    const VPieceLabelData& labelData = detail.GetPatternPieceData();
-
-    if (labelData.IsVisible() == true)
+    if (m_pieceUpdateInfoWatcher->isFinished())
     {
-        QPointF pos;
-        qreal labelAngle = 0;
+        VPiece detail = VAbstractTool::data.GetPiece(m_id);
+        detail.SetPieceLabelData(detail.GetPieceLabelData()); // Refresh translation
+        const VPieceLabelData &labelData = detail.GetPieceLabelData();
+        const QVector<quint32> &pins = detail.GetPins();
 
-        if (PrepareLabelData(labelData, m_dataLabel, pos, labelAngle))
+        if (labelData.IsEnabled())
         {
-            m_dataLabel->UpdateData(detail.GetName(), labelData);
-            UpdateLabelItem(m_dataLabel, pos, labelAngle);
+            m_pieceLabelPos = QPointF();
+            m_pieceLabelAngle = 0;
+            if (PrepareLabelData(labelData, pins, m_dataLabel, m_pieceLabelPos, m_pieceLabelAngle))
+            {
+
+                VPieceLabelInfo info = VTextManager::PrepareLabelInfo(doc, getData(), true);
+                info.pieceName = detail.GetName();
+                info.labelData = detail.GetPieceLabelData();
+
+                m_pieceLabelInfoStale = false;
+                m_pieceUpdateInfoWatcher->setFuture(QtConcurrent::run(
+                    [this, info, detail]()
+                    {
+                        m_dataLabel->SetPieceName(detail.GetName());
+                        m_dataLabel->UpdatePieceLabelData(info);
+                    }));
+            }
+        }
+        else
+        {
+            m_dataLabel->hide();
         }
     }
     else
     {
-        m_dataLabel->hide();
+        m_pieceLabelInfoStale = true;
     }
 }
 
@@ -697,24 +1180,45 @@ void VToolSeamAllowance::UpdateDetailLabel()
  */
 void VToolSeamAllowance::UpdatePatternInfo()
 {
-    const VPiece detail = VAbstractTool::data.GetPiece(m_id);
-    const VPatternLabelData& geom = detail.GetPatternInfo();
-
-    if (geom.IsVisible() == true)
+    if (m_patternUpdateInfoWatcher->isFinished())
     {
-        QPointF pos;
-        qreal labelAngle = 0;
+        const VPiece detail = VAbstractTool::data.GetPiece(m_id);
+        const VPatternLabelData &geom = detail.GetPatternLabelData();
+        const QVector<quint32> &pins = detail.GetPins();
 
-        if (PrepareLabelData(geom, m_patternInfo, pos, labelAngle))
+        if (geom.IsEnabled())
         {
-            m_patternInfo->UpdateData(doc);
-            UpdateLabelItem(m_patternInfo, pos, labelAngle);
+            m_patternLabelPos = QPointF();
+            m_patternLabelAngle = 0;
+            if (PrepareLabelData(geom, pins, m_patternInfo, m_patternLabelPos, m_patternLabelAngle))
+            {
+                VPieceLabelInfo const info = VTextManager::PrepareLabelInfo(doc, getData(), false);
+
+                m_patternLabelInfoStale = false;
+                m_patternUpdateInfoWatcher->setFuture(QtConcurrent::run(
+                    [this, info, detail]()
+                    {
+                        m_patternInfo->SetPieceName(detail.GetName());
+                        m_patternInfo->UpdatePatternLabelData(info);
+                    }));
+            }
+        }
+        else
+        {
+            m_patternInfo->hide();
         }
     }
     else
     {
-        m_patternInfo->hide();
+        m_patternLabelInfoStale = true;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::UpdatePassmarks()
+{
+    const VPiece detail = VAbstractTool::data.GetPiece(m_id);
+    m_passmarks->setPath(RenderPassmarks(detail, getData()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -724,16 +1228,17 @@ void VToolSeamAllowance::UpdatePatternInfo()
 void VToolSeamAllowance::UpdateGrainline()
 {
     const VPiece detail = VAbstractTool::data.GetPiece(m_id);
-    const VGrainlineData& geom = detail.GetGrainlineGeometry();
+    const VGrainlineData &geom = detail.GetGrainlineGeometry();
+    const QVector<quint32> &pins = detail.GetPins();
 
-    if (geom.IsVisible() == true)
+    if (geom.IsEnabled() && geom.IsVisible())
     {
         QPointF pos;
         qreal dRotation = 0;
         qreal dLength = 0;
 
-        const VGrainlineItem::MoveTypes type = FindGrainlineGeometry(geom, dLength, dRotation, pos);
-        if (type & VGrainlineItem::Error)
+        const VGrainlineItem::MoveTypes type = FindGrainlineGeometry(geom, pins, dLength, dRotation, pos);
+        if ((type & VGrainlineItem::Error) != 0U)
         {
             m_grainLine->hide();
             return;
@@ -743,6 +1248,14 @@ void VToolSeamAllowance::UpdateGrainline()
         m_grainLine->UpdateGeometry(pos, dRotation, ToPixel(dLength, *VDataTool::data.GetPatternUnit()),
                                     geom.GetArrowType());
         m_grainLine->show();
+
+        if (m_geometryIsReady && not IsGrainlinePositionValid())
+        {
+            const QString errorMsg = QObject::tr("Piece '%1'. Grainline is not valid.").arg(detail.GetName());
+            VAbstractApplication::VApp()->IsPedantic()
+                ? throw VException(errorMsg)
+                : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        }
     }
     else
     {
@@ -754,35 +1267,34 @@ void VToolSeamAllowance::UpdateGrainline()
 /**
  * @brief SaveMoveDetail saves the move detail operation to the undo stack
  */
-void VToolSeamAllowance::SaveMoveDetail(const QPointF& ptPos)
+void VToolSeamAllowance::SaveMoveDetail(const QPointF &ptPos)
 {
-    VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
+    VPiece const oldDet = VAbstractTool::data.GetPiece(m_id);
     VPiece newDet = oldDet;
-    newDet.GetPatternPieceData().SetPos(ptPos);
+    newDet.GetPieceLabelData().SetPos(ptPos);
 
-    SavePieceOptions* moveCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
+    auto *moveCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
     moveCommand->setText(tr("move pattern piece label"));
-    qApp->getUndoStack()->push(moveCommand);
+    VAbstractApplication::VApp()->getUndoStack()->push(moveCommand);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief SaveResizeDetail saves the resize detail label operation to the undo stack
  */
-void VToolSeamAllowance::SaveResizeDetail(qreal dLabelW, int iFontSize)
+void VToolSeamAllowance::SaveResizeDetail(qreal dLabelW)
 {
-    VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
+    VPiece const oldDet = VAbstractTool::data.GetPiece(m_id);
     VPiece newDet = oldDet;
 
     dLabelW = FromPixel(dLabelW, *VDataTool::data.GetPatternUnit());
-    newDet.GetPatternPieceData().SetLabelWidth(QString().setNum(dLabelW));
+    newDet.GetPieceLabelData().SetLabelWidth(QString().setNum(dLabelW));
     const qreal height = FromPixel(m_dataLabel->boundingRect().height(), *VDataTool::data.GetPatternUnit());
-    newDet.GetPatternPieceData().SetLabelHeight(QString().setNum(height));
-    newDet.GetPatternPieceData().SetFontSize(iFontSize);
+    newDet.GetPieceLabelData().SetLabelHeight(QString().setNum(height));
 
-    SavePieceOptions* resizeCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
+    auto *resizeCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
     resizeCommand->setText(tr("resize pattern piece label"));
-    qApp->getUndoStack()->push(resizeCommand);
+    VAbstractApplication::VApp()->getUndoStack()->push(resizeCommand);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -791,21 +1303,19 @@ void VToolSeamAllowance::SaveResizeDetail(qreal dLabelW, int iFontSize)
  */
 void VToolSeamAllowance::SaveRotationDetail(qreal dRot)
 {
-    VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
+    VPiece const oldDet = VAbstractTool::data.GetPiece(m_id);
     VPiece newDet = oldDet;
-    newDet.GetPatternPieceData().SetPos(m_dataLabel->pos());
-    newDet.GetPatternPieceData().SetFontSize(m_dataLabel->GetFontSize());
+    newDet.GetPieceLabelData().SetPos(m_dataLabel->pos());
 
     // Tranform angle to anticlockwise
     QLineF line(0, 0, 100, 0);
     line.setAngle(-dRot);
-    newDet.GetPatternPieceData().SetRotation(QString().setNum(line.angle()));
+    newDet.GetPieceLabelData().SetRotation(QString().setNum(line.angle()));
 
-    SavePieceOptions* rotateCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
+    auto *rotateCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
     rotateCommand->setText(tr("rotate pattern piece label"));
-    qApp->getUndoStack()->push(rotateCommand);
+    VAbstractApplication::VApp()->getUndoStack()->push(rotateCommand);
 }
-
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -813,95 +1323,92 @@ void VToolSeamAllowance::SaveRotationDetail(qreal dRot)
  */
 void VToolSeamAllowance::SaveMovePattern(const QPointF &ptPos)
 {
-    VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
+    VPiece const oldDet = VAbstractTool::data.GetPiece(m_id);
     VPiece newDet = oldDet;
-    newDet.GetPatternInfo().SetPos(ptPos);
+    newDet.GetPatternLabelData().SetPos(ptPos);
 
-    SavePieceOptions* moveCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
+    auto *moveCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
     moveCommand->setText(tr("move pattern info label"));
-    qApp->getUndoStack()->push(moveCommand);
+    VAbstractApplication::VApp()->getUndoStack()->push(moveCommand);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief: SaveResizePattern saves the pattern label width and font size
  */
-void VToolSeamAllowance::SaveResizePattern(qreal dLabelW, int iFontSize)
+void VToolSeamAllowance::SaveResizePattern(qreal dLabelW)
 {
-    VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
+    VPiece const oldDet = VAbstractTool::data.GetPiece(m_id);
     VPiece newDet = oldDet;
 
     dLabelW = FromPixel(dLabelW, *VDataTool::data.GetPatternUnit());
-    newDet.GetPatternInfo().SetLabelWidth(QString().setNum(dLabelW));
-    qreal height = FromPixel(m_patternInfo->boundingRect().height(), *VDataTool::data.GetPatternUnit());
-    newDet.GetPatternInfo().SetLabelHeight(QString().setNum(height));
-    newDet.GetPatternInfo().SetFontSize(iFontSize);
+    newDet.GetPatternLabelData().SetLabelWidth(QString().setNum(dLabelW));
+    qreal const height = FromPixel(m_patternInfo->boundingRect().height(), *VDataTool::data.GetPatternUnit());
+    newDet.GetPatternLabelData().SetLabelHeight(QString().setNum(height));
 
-    SavePieceOptions* resizeCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
+    auto *resizeCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
     resizeCommand->setText(tr("resize pattern info label"));
-    qApp->getUndoStack()->push(resizeCommand);
+    VAbstractApplication::VApp()->getUndoStack()->push(resizeCommand);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::SaveRotationPattern(qreal dRot)
 {
-    VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
+    VPiece const oldDet = VAbstractTool::data.GetPiece(m_id);
     VPiece newDet = oldDet;
 
-    newDet.GetPatternInfo().SetPos(m_patternInfo->pos());
-    newDet.GetPatternInfo().SetFontSize(m_patternInfo->GetFontSize());
+    newDet.GetPatternLabelData().SetPos(m_patternInfo->pos());
 
     // Tranform angle to anticlockwise
     QLineF line(0, 0, 100, 0);
     line.setAngle(-dRot);
-    newDet.GetPatternInfo().SetRotation(QString().setNum(line.angle()));
+    newDet.GetPatternLabelData().SetRotation(QString().setNum(line.angle()));
 
-    SavePieceOptions* rotateCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
+    auto *rotateCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
     rotateCommand->setText(tr("rotate pattern info label"));
-    qApp->getUndoStack()->push(rotateCommand);
+    VAbstractApplication::VApp()->getUndoStack()->push(rotateCommand);
 }
 
-
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSeamAllowance::SaveMoveGrainline(const QPointF& ptPos)
+void VToolSeamAllowance::SaveMoveGrainline(const QPointF &ptPos)
 {
-    VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
+    VPiece const oldDet = VAbstractTool::data.GetPiece(m_id);
     VPiece newDet = oldDet;
     newDet.GetGrainlineGeometry().SetPos(ptPos);
     qDebug() << "******* new grainline pos" << ptPos;
 
-    SavePieceOptions* moveCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
+    auto *moveCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
     moveCommand->setText(tr("move grainline"));
-    qApp->getUndoStack()->push(moveCommand);
+    VAbstractApplication::VApp()->getUndoStack()->push(moveCommand);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::SaveResizeGrainline(qreal dLength)
 {
-    VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
+    VPiece const oldDet = VAbstractTool::data.GetPiece(m_id);
     VPiece newDet = oldDet;
 
     dLength = FromPixel(dLength, *VDataTool::data.GetPatternUnit());
     newDet.GetGrainlineGeometry().SetPos(m_grainLine->pos());
     newDet.GetGrainlineGeometry().SetLength(QString().setNum(dLength));
 
-    SavePieceOptions* resizeCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
+    auto *resizeCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
     resizeCommand->setText(tr("resize grainline"));
-    qApp->getUndoStack()->push(resizeCommand);
+    VAbstractApplication::VApp()->getUndoStack()->push(resizeCommand);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSeamAllowance::SaveRotateGrainline(qreal dRot, const QPointF& ptPos)
+void VToolSeamAllowance::SaveRotateGrainline(qreal dRot, const QPointF &ptPos)
 {
-    VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
+    VPiece const oldDet = VAbstractTool::data.GetPiece(m_id);
     VPiece newDet = oldDet;
 
     newDet.GetGrainlineGeometry().SetRotation(QString().setNum(qRadiansToDegrees(dRot)));
     newDet.GetGrainlineGeometry().SetPos(ptPos);
 
-    SavePieceOptions* rotateCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
+    auto *rotateCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
     rotateCommand->setText(tr("rotate grainline"));
-    qApp->getUndoStack()->push(rotateCommand);
+    VAbstractApplication::VApp()->getUndoStack()->push(rotateCommand);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -911,16 +1418,31 @@ void VToolSeamAllowance::SaveRotateGrainline(qreal dRot, const QPointF& ptPos)
 void VToolSeamAllowance::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     QPen toolPen = pen();
-    toolPen.setWidthF(ScaleWidth(qApp->Settings()->WidthHairLine(), SceneScale(scene())));
+    toolPen.setWidthF(ScaleWidth(VAbstractApplication::VApp()->Settings()->WidthHairLine(), SceneScale(scene())));
+    toolPen.setColor(VSceneStylesheet::PatternPieceStyle().PieceColor());
 
     setPen(toolPen);
     m_seamAllowance->setPen(toolPen);
     m_passmarks->setPen(toolPen);
     m_placeLabels->setPen(toolPen);
+    m_foldLineMark->setPen(toolPen);
+    m_foldLineLabel->setPen(toolPen);
 
-    if ((m_dataLabel->IsIdle() == false
-            || m_patternInfo->IsIdle() == false
-            || m_grainLine->IsIdle() == false) && not isSelected())
+    QPen mirrorLinePen = toolPen;
+    mirrorLinePen.setStyle(Qt::DashDotLine);
+    m_mirrorLine->setPen(mirrorLinePen);
+
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    if (settings->GetSingleStrokeOutlineFont() || settings->GetSingleLineFonts())
+    {
+        m_foldLineLabel->setBrush(Qt::NoBrush);
+    }
+    else
+    {
+        m_foldLineLabel->setBrush(Qt::SolidPattern);
+    }
+
+    if ((not m_dataLabel->IsIdle() || not m_patternInfo->IsIdle() || not m_grainLine->IsIdle()) && not isSelected())
     {
         setSelected(true);
     }
@@ -928,29 +1450,35 @@ void VToolSeamAllowance::paint(QPainter *painter, const QStyleOptionGraphicsItem
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VToolSeamAllowance::boundingRect() const
+auto VToolSeamAllowance::boundingRect() const -> QRectF
 {
-    if (m_mainPathRect.isNull())
+    if (m_pieceBoundingRect.isNull())
     {
         return QGraphicsPathItem::boundingRect();
     }
-    else
-    {
-        return m_mainPathRect;
-    }
+
+    return m_pieceBoundingRect;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VToolSeamAllowance::shape() const
+auto VToolSeamAllowance::shape() const -> QPainterPath
 {
     if (m_mainPath == QPainterPath())
     {
         return QGraphicsPathItem::shape();
     }
-    else
-    {
-        return ItemShapeFromPath(m_mainPath, pen());
-    }
+
+    return ItemShapeFromPath(m_mainPath, pen());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::CancelLabelRendering()
+{
+    m_patternUpdateInfoWatcher->cancel();
+    m_pieceUpdateInfoWatcher->cancel();
+
+    m_patternUpdateInfoWatcher->waitForFinished();
+    m_pieceUpdateInfoWatcher->waitForFinished();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -962,9 +1490,15 @@ void VToolSeamAllowance::FullUpdateFromGuiApply()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::AddToFile()
 {
+    const QDomElement duplicate = doc->FindElementById(m_id);
+    if (not duplicate.isNull())
+    {
+        throw VExceptionWrongId(tr("This id (%1) is not unique.").arg(m_id), duplicate);
+    }
+
     const VPiece piece = VAbstractTool::data.GetPiece(m_id);
 
-    QDomElement domElement = doc->createElement(getTagName());
+    QDomElement domElement = doc->createElement(VToolSeamAllowance::getTagName());
 
     AddAttributes(doc, domElement, m_id, piece);
     AddPatternPieceData(doc, domElement, piece);
@@ -973,49 +1507,53 @@ void VToolSeamAllowance::AddToFile()
 
     // nodes
     AddNodes(doc, domElement, piece);
-    //custom seam allowance
+    // custom seam allowance
     AddCSARecords(doc, domElement, piece.GetCustomSARecords());
     AddInternalPaths(doc, domElement, piece.GetInternalPaths());
     AddPins(doc, domElement, piece.GetPins());
     AddPlaceLabels(doc, domElement, piece.GetPlaceLabels());
+    AddMirrorLine(doc, domElement, piece);
 
-    qApp->getUndoStack()->push(new AddPiece(domElement, doc, VAbstractTool::data, m_sceneDetails, m_drawName));
+    VAbstractApplication::VApp()->getUndoStack()->push(
+        new AddPiece(domElement, doc, VAbstractTool::data, m_sceneDetails, m_drawName));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::RefreshDataInFile()
 {
-    QDomElement domElement = doc->elementById(m_id, getTagName());
-    if (domElement.isElement())
+    QDomElement domElement = doc->FindElementById(m_id, VToolSeamAllowance::getTagName());
+    if (!domElement.isElement())
     {
-        // Refresh only parts that we possibly need to update
-        {
-            // TODO. Delete if minimal supported version is 0.4.0
-            Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 4, 0),
-                              "Time to refactor the code.");
+        return;
+    }
 
-            const uint version = doc->GetParametrUInt(domElement, AttrVersion, QChar('1'));
-            if (version == 1)
-            {
-                const VPiece piece = VAbstractTool::data.GetPiece(m_id);
+    // Refresh only parts that we possibly need to update
 
-                doc->SetAttribute(domElement, AttrVersion, QString().setNum(pieceVersion));
+    // TODO. Delete if minimal supported version is 0.4.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 4, 0), "Time to refactor the code.");
 
-                doc->RemoveAllChildren(domElement);//Very important to clear before rewrite
-                AddPatternPieceData(doc, domElement, piece);
-                AddPatternInfo(doc, domElement, piece);
-                AddGrainline(doc, domElement, piece);
-                AddNodes(doc, domElement, piece);
-                AddCSARecords(doc, domElement, piece.GetCustomSARecords());
-                AddInternalPaths(doc, domElement, piece.GetInternalPaths());
-                AddPins(doc, domElement, piece.GetPins());
-            }
-        }
+    const uint version = VAbstractPattern::GetParametrUInt(domElement, AttrVersion, QChar('1'));
+    if (version == 1)
+    {
+        const VPiece piece = VAbstractTool::data.GetPiece(m_id);
+
+        doc->SetAttribute(domElement, AttrVersion, QString().setNum(pieceVersion));
+
+        VAbstractPattern::RemoveAllChildren(domElement); // Very important to clear before rewrite
+        AddPatternPieceData(doc, domElement, piece);
+        AddPatternInfo(doc, domElement, piece);
+        AddGrainline(doc, domElement, piece);
+        AddNodes(doc, domElement, piece);
+        AddCSARecords(doc, domElement, piece.GetCustomSARecords());
+        AddInternalPaths(doc, domElement, piece.GetInternalPaths());
+        AddPins(doc, domElement, piece.GetPins());
+        AddPlaceLabels(doc, domElement, piece.GetPlaceLabels());
+        AddMirrorLine(doc, domElement, piece);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVariant VToolSeamAllowance::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
+auto VToolSeamAllowance::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value) -> QVariant
 {
     if (change == ItemPositionChange && scene())
     {
@@ -1029,36 +1567,15 @@ QVariant VToolSeamAllowance::itemChange(QGraphicsItem::GraphicsItemChange change
             // value - this is new position.
             const QPointF newPos = value.toPointF();
 
-            qApp->getUndoStack()->push(new MovePiece(doc, newPos.x(), newPos.y(), m_id, scene()));
+            VAbstractApplication::VApp()->getUndoStack()->push(
+                new MovePiece(doc, newPos.x(), newPos.y(), m_id, scene()));
 
             const QList<QGraphicsView *> viewList = scene()->views();
             if (not viewList.isEmpty())
             {
-                if (VMainGraphicsView *view = qobject_cast<VMainGraphicsView *>(viewList.at(0)))
+                if (auto *view = qobject_cast<VMainGraphicsView *>(viewList.at(0)))
                 {
-                    const qreal scale = SceneScale(scene());
-                    const int xmargin = qCeil(50/scale);
-                    const int ymargin = qCeil(50/scale);
-
-                    const QRectF viewRect = VMainGraphicsView::SceneVisibleArea(view);
-                    const QRectF itemRect = mapToScene(boundingRect()|childrenBoundingRect()).boundingRect();
-
-                    // If item's rect is bigger than view's rect ensureVisible works very unstable.
-                    if (itemRect.height() + 2*ymargin < viewRect.height() &&
-                        itemRect.width() + 2*xmargin < viewRect.width())
-                    {
-                        view->EnsureVisibleWithDelay(itemRect, VMainGraphicsView::scrollDelay, xmargin, ymargin);
-                    }
-                    else
-                    {
-                        // Ensure visible only small rect around a cursor
-                        VMainGraphicsScene *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
-                        SCASSERT(currentScene);
-                        const QPointF cursorPosition = currentScene->getScenePos();
-                        view->EnsureVisibleWithDelay(QRectF(cursorPosition.x()-5/scale, cursorPosition.y()-5/scale,
-                                                            10/scale, 10/scale),
-                                                     VMainGraphicsView::scrollDelay);
-                    }
+                    view->EnsureItemVisibleWithDelay(this, VMainGraphicsView::scrollDelay);
                 }
             }
 
@@ -1089,22 +1606,21 @@ void VToolSeamAllowance::mousePressEvent(QGraphicsSceneMouseEvent *event)
     QGraphicsPathItem::mousePressEvent(event);
 
     // Somehow clicking on notselectable object do not clean previous selections.
-    if (not (flags() & ItemIsSelectable) && scene())
+    if (not(flags() & ItemIsSelectable) && scene())
     {
         scene()->clearSelection();
     }
 
-    if (flags() & QGraphicsItem::ItemIsMovable)
+    if (flags() & QGraphicsItem::ItemIsMovable && event->button() == Qt::LeftButton &&
+        event->type() != QEvent::GraphicsSceneMouseDoubleClick)
     {
-        if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
-        {
-            SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
-        }
+        SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
     }
 
     if (selectionType == SelectionType::ByMouseRelease)
     {
-        event->accept();// Special for not selectable item first need to call standard mousePressEvent then accept event
+        event
+            ->accept(); // Special for not selectable item first need to call standard mousePressEvent then accept event
     }
     else
     {
@@ -1125,13 +1641,10 @@ void VToolSeamAllowance::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
     }
 
-    if (selectionType == SelectionType::ByMouseRelease)
+    if (selectionType == SelectionType::ByMouseRelease && IsSelectedByReleaseEvent(this, event))
     {
-        if (IsSelectedByReleaseEvent(this, event))
-        {
-            doc->SelectedDetail(m_id);
-            emit ChoosedTool(m_id, SceneObject::Detail);
-        }
+        doc->SelectedDetail(m_id);
+        emit ChoosedTool(m_id, SceneObject::Detail);
     }
     QGraphicsPathItem::mouseReleaseEvent(event);
 }
@@ -1147,13 +1660,13 @@ void VToolSeamAllowance::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
         }
         else
         {
-            setCursor(qApp->getSceneView()->viewport()->cursor());
+            setCursor(VAbstractValApplication::VApp()->getSceneView()->viewport()->cursor());
         }
         QGraphicsPathItem::hoverEnterEvent(event);
     }
     else
     {
-        setCursor(qApp->getSceneView()->viewport()->cursor());
+        setCursor(VAbstractValApplication::VApp()->getSceneView()->viewport()->cursor());
     }
 }
 
@@ -1175,13 +1688,17 @@ void VToolSeamAllowance::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     }
 
     QMenu menu;
-    QAction *actionOption = menu.addAction(QIcon::fromTheme("preferences-other"), tr("Options"));
+    QAction *actionOption = menu.addAction(FromTheme(VThemeIcon::PreferencesOther), tr("Options"));
 
     const VPiece detail = VAbstractTool::data.GetPiece(m_id);
 
     QAction *inLayoutOption = menu.addAction(tr("In layout"));
     inLayoutOption->setCheckable(true);
     inLayoutOption->setChecked(detail.IsInLayout());
+
+    QAction *hideMainPathOption = menu.addAction(tr("Hide main path"));
+    hideMainPathOption->setCheckable(true);
+    hideMainPathOption->setChecked(detail.IsHideMainPath());
 
     QAction *forbidFlippingOption = menu.addAction(tr("Forbid flipping"));
     forbidFlippingOption->setCheckable(true);
@@ -1191,8 +1708,23 @@ void VToolSeamAllowance::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     forceFlippingOption->setCheckable(true);
     forceFlippingOption->setChecked(detail.IsForceFlipping());
 
-    QAction *actionRemove = menu.addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
-    _referens > 1 ? actionRemove->setEnabled(false) : actionRemove->setEnabled(true);
+    QAction *showFullPiece = menu.addAction(tr("Show full piece"));
+    showFullPiece->setCheckable(true);
+    {
+        const QLineF mirrorLine = detail.SeamAllowanceMirrorLine(&(VAbstractTool::data));
+        showFullPiece->setEnabled(not mirrorLine.isNull());
+        showFullPiece->setChecked(true);
+        if (not mirrorLine.isNull())
+        {
+            showFullPiece->setChecked(detail.IsShowFullPiece());
+        }
+    }
+
+    QAction *reseteLabelTemplateOption = menu.addAction(tr("Reset piece label template"));
+    reseteLabelTemplateOption->setEnabled(not doc->GetDefaultPieceLabelPath().isEmpty());
+
+    QAction *actionRemove = menu.addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
+    actionRemove->setDisabled(_referens > 0);
 
     QAction *selectedAction = menu.exec(event->screenPos());
     if (selectedAction == actionOption)
@@ -1203,6 +1735,10 @@ void VToolSeamAllowance::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     {
         ToggleInLayout(selectedAction->isChecked());
     }
+    else if (selectedAction == hideMainPathOption)
+    {
+        ToggleHideMainPath(selectedAction->isChecked());
+    }
     else if (selectedAction == forbidFlippingOption)
     {
         ToggleForbidFlipping(selectedAction->isChecked());
@@ -1211,18 +1747,26 @@ void VToolSeamAllowance::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     {
         ToggleForceFlipping(selectedAction->isChecked());
     }
+    else if (selectedAction == reseteLabelTemplateOption)
+    {
+        ResetPieceLabelTemplate();
+    }
+    else if (selectedAction == showFullPiece)
+    {
+        ToggleShowFullPiece(selectedAction->isChecked());
+    }
     else if (selectedAction == actionRemove)
     {
         try
         {
             DeleteFromMenu();
         }
-        catch(const VExceptionToolWasDeleted &e)
+        catch (const VExceptionToolWasDeleted &e)
         {
             Q_UNUSED(e);
-            return;//Leave this method immediately!!!
+            return; // Leave this method immediately!!!
         }
-        //Leave this method immediately after call!!!
+        // Leave this method immediately after call!!!
     }
 }
 
@@ -1240,23 +1784,23 @@ void VToolSeamAllowance::keyReleaseEvent(QKeyEvent *event)
                 {
                     if (not toolList.isEmpty())
                     {
-                        qApp->getUndoStack()->beginMacro(tr("multi deletion"));
+                        VAbstractApplication::VApp()->getUndoStack()->beginMacro(tr("multi deletion"));
 
-                        for(auto tool : toolList)
+                        for (auto *tool : toolList)
                         {
                             tool->RemoveWithConfirm(false);
                         }
                     }
                     DeleteToolWithConfirm(false);
                 }
-                catch(const VExceptionToolWasDeleted &e)
+                catch (const VExceptionToolWasDeleted &e)
                 {
                     Q_UNUSED(e);
                     if (not toolList.isEmpty())
                     {
-                        qApp->getUndoStack()->endMacro();
+                        VAbstractApplication::VApp()->getUndoStack()->endMacro();
                     }
-                    return;//Leave this method immediately!!!
+                    return; // Leave this method immediately!!!
                 }
             }
             break;
@@ -1264,7 +1808,7 @@ void VToolSeamAllowance::keyReleaseEvent(QKeyEvent *event)
             break;
     }
 
-    QGraphicsPathItem::keyReleaseEvent ( event );
+    QGraphicsPathItem::keyReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1279,53 +1823,113 @@ void VToolSeamAllowance::SetDialog()
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolSeamAllowance::VToolSeamAllowance(const VToolSeamAllowanceInitData &initData, QGraphicsItem *parent)
-    : VInteractiveTool(initData.doc, initData.data, initData.id),
-      QGraphicsPathItem(parent),
-      m_mainPath(),
-      m_mainPathRect(),
-      m_sceneDetails(initData.scene),
-      m_drawName(initData.drawName),
-      m_seamAllowance(new VNoBrushScalePathItem(this)),
-      m_dataLabel(new VTextGraphicsItem(this)),
-      m_patternInfo(new VTextGraphicsItem(this)),
-      m_grainLine(new VGrainlineItem(this)),
-      m_passmarks(new QGraphicsPathItem(this)),
-      m_placeLabels(new QGraphicsPathItem(this)),
-      m_acceptHoverEvents(true)
+  : VInteractiveTool(initData.doc, initData.data, initData.id),
+    QGraphicsPathItem(parent),
+    m_sceneDetails(initData.scene),
+    m_drawName(initData.drawName),
+    m_seamAllowance(new VNoBrushScalePathItem(this)),
+    m_dataLabel(new VTextGraphicsItem(VTextGraphicsItem::ItemType::PieceLabel, this)),
+    m_patternInfo(new VTextGraphicsItem(VTextGraphicsItem::ItemType::PatternLabel, this)),
+    m_grainLine(new VGrainlineItem(VColorRole::PieceColor, this)),
+    m_passmarks(new QGraphicsPathItem(this)),
+    m_placeLabels(new QGraphicsPathItem(this)),
+    m_mirrorLine(new QGraphicsPathItem(this)),
+    m_foldLineMark(new QGraphicsPathItem(this)),
+    m_foldLineLabel(new QGraphicsPathItem(this)),
+    m_foldLineLabelText(new QGraphicsSimpleTextItem(this)),
+    m_patternUpdateInfoWatcher(new QFutureWatcher<void>(this)),
+    m_pieceUpdateInfoWatcher(new QFutureWatcher<void>(this))
 {
-    VPiece detail = initData.data->GetPiece(initData.id);
+    m_dataLabel->setVisible(false);
+    m_patternInfo->setVisible(false);
+
+    VPiece const detail = initData.data->GetPiece(initData.id);
     ReinitInternals(detail, m_sceneDetails);
-    AllowSelecting(true);
+    VToolSeamAllowance::AllowSelecting(true);
     EnableToolMove(true);
-    AllowHover(true);
+    VToolSeamAllowance::AllowHover(true);
 
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
-    this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
+    this->setFlag(QGraphicsItem::ItemIsFocusable, true); // For keyboard input focus
 
-    ToolCreation(initData.typeCreation);
+    VToolSeamAllowance::ToolCreation(initData.typeCreation);
     setAcceptHoverEvents(m_acceptHoverEvents);
 
     connect(this, &VToolSeamAllowance::ChoosedTool, m_sceneDetails, &VMainGraphicsScene::ChoosedItem);
     connect(m_sceneDetails, &VMainGraphicsScene::EnableToolMove, this, &VToolSeamAllowance::EnableToolMove);
     connect(m_sceneDetails, &VMainGraphicsScene::ItemSelection, this, &VToolSeamAllowance::ToolSelectionType);
+    connect(m_sceneDetails, &VMainGraphicsScene::UpdatePassmarks, this, &VToolSeamAllowance::UpdatePassmarks);
+    connect(doc, &VAbstractPattern::CancelLabelRendering, this, &VToolSeamAllowance::CancelLabelRendering);
 
     ConnectOutsideSignals();
+
+    m_foldLineMark->setBrush(Qt::SolidPattern);
+
+    connect(qApp, &QCoreApplication::aboutToQuit, m_patternUpdateInfoWatcher,
+            [this]()
+            {
+                m_patternUpdateInfoWatcher->cancel();
+                m_patternUpdateInfoWatcher->waitForFinished();
+            });
+    connect(m_patternUpdateInfoWatcher, &QFutureWatcher<void>::finished, this,
+            [this]()
+            {
+                if (m_patternUpdateInfoWatcher->isCanceled())
+                {
+                    return;
+                }
+
+                setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
+                m_patternInfo->show();
+                UpdateLabelItem(m_patternInfo, m_patternLabelPos, m_patternLabelAngle);
+                setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+                if (m_patternLabelInfoStale)
+                {
+                    m_patternLabelInfoStale = false;
+                    UpdatePatternInfo();
+                }
+            });
+    connect(qApp, &QCoreApplication::aboutToQuit, m_pieceUpdateInfoWatcher,
+            [this]()
+            {
+                m_pieceUpdateInfoWatcher->cancel();
+                m_pieceUpdateInfoWatcher->waitForFinished();
+            });
+    connect(m_pieceUpdateInfoWatcher, &QFutureWatcher<void>::finished, this,
+            [this]()
+            {
+                if (m_pieceUpdateInfoWatcher->isCanceled())
+                {
+                    return;
+                }
+
+                setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
+                m_dataLabel->show();
+                UpdateLabelItem(m_dataLabel, m_pieceLabelPos, m_pieceLabelAngle);
+                setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+                if (m_pieceLabelInfoStale)
+                {
+                    m_pieceLabelInfoStale = false;
+                    UpdateDetailLabel();
+                }
+            });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::UpdateExcludeState()
 {
     const VPiece detail = VAbstractTool::data.GetPiece(m_id);
-    for (int i = 0; i< detail.GetPath().CountNodes(); ++i)
+    const VPiecePath &path = detail.GetPath();
+    for (int i = 0; i < path.CountNodes(); ++i)
     {
-        const VPieceNode &node = detail.GetPath().at(i);
+        const VPieceNode &node = path.at(i);
         if (node.GetTypeTool() == Tool::NodePoint)
         {
-            VNodePoint *tool = qobject_cast<VNodePoint*>(VAbstractPattern::getTool(node.GetId()));
+            auto *tool = qobject_cast<VNodePoint *>(VAbstractPattern::getTool(node.GetId()));
             SCASSERT(tool != nullptr);
 
             tool->SetExluded(node.IsExcluded());
-            tool->setVisible(not node.IsExcluded());//Hide excluded point
+            tool->setVisible(not node.IsExcluded()); // Hide excluded point
         }
     }
 }
@@ -1333,17 +1937,19 @@ void VToolSeamAllowance::UpdateExcludeState()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::UpdateInternalPaths()
 {
-    const QVector<quint32> paths = VAbstractTool::data.GetPiece(m_id).GetInternalPaths();
+    VPiece piece = VAbstractTool::data.GetPiece(m_id);
+    piece.TestInternalPaths(&(VAbstractTool::data));
+    const QVector<quint32> paths = piece.GetInternalPaths();
     for (auto path : paths)
     {
         try
         {
-            if (auto *tool = qobject_cast<VToolPiecePath*>(VAbstractPattern::getTool(path)))
+            if (auto *tool = qobject_cast<VToolPiecePath *>(VAbstractPattern::getTool(path)))
             {
                 tool->RefreshGeometry();
             }
         }
-        catch(const VExceptionBadId &)
+        catch (const VExceptionBadId &)
         {
             // ignore
         }
@@ -1356,25 +1962,45 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
 
     const VPiece detail = VAbstractTool::data.GetPiece(m_id);
-    QFuture<QPainterPath > futurePath = QtConcurrent::run(detail,
-                                                          QOverload<const VContainer *>::of(&VPiece::MainPathPath),
-                                                          this->getData());
-    QFuture<QVector<QPointF> > futureSeamAllowance;
 
-    if (detail.IsSeamAllowance())
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    const bool combineTogether = settings->IsBoundaryTogetherWithNotches();
+
+    QFuture<QPainterPath> const futurePath = QtConcurrent::run(
+        [this, detail, combineTogether]() { return RenderSeamPath(detail, combineTogether, getData()); });
+
+    QFuture<QPainterPath> futurePassmarks;
+    if (!combineTogether)
     {
-        futureSeamAllowance = QtConcurrent::run(detail, &VPiece::SeamAllowancePoints, this->getData());
+        futurePassmarks = QtConcurrent::run([this, detail]() { return RenderPassmarks(detail, getData()); });
+    }
+
+    QFuture<VFoldLine> const futureFoldLine =
+        QtConcurrent::run([this, detail]() { return RenderFoldLine(detail, getData()); });
+
+    QFuture<QPainterPath> const futureMirrorLine = QtConcurrent::run(
+        [this, detail, combineTogether]() { return RenderMirrorLine(detail, getData(), combineTogether); });
+
+    QFuture<QPainterPath> futureSeamAllowance;
+    QFuture<bool> futureSeamAllowanceValid;
+
+    if (detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn())
+    {
+        futureSeamAllowance = QtConcurrent::run(
+            [this, detail, combineTogether]() { return RenderSeamAllowancePath(detail, combineTogether, getData()); });
+        futureSeamAllowanceValid =
+            QtConcurrent::run([this, detail]() { return detail.IsSeamAllowanceValid(getData()); });
     }
 
     this->setPos(detail.GetMx(), detail.GetMy());
 
     QPainterPath path;
 
-    if (not detail.IsHideMainPath() || not detail.IsSeamAllowance() || detail.IsSeamAllowanceBuiltIn())
+    if (VAbstractApplication::VApp()->Settings()->IsPieceShowMainPath() || not detail.IsHideMainPath() ||
+        not detail.IsSeamAllowance() || detail.IsSeamAllowanceBuiltIn())
     {
         m_mainPath = QPainterPath();
-        m_mainPathRect = QRectF();
-        m_seamAllowance->setBrush(QBrush(Qt::Dense7Pattern));
+        m_seamAllowance->setBrush(QBrush(VSceneStylesheet::PatternPieceStyle().PieceColor(), Qt::Dense7Pattern));
         path = futurePath.result();
     }
     else
@@ -1382,7 +2008,6 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
         m_seamAllowance->setBrush(QBrush(Qt::NoBrush)); // Disable if the main path was hidden
         // need for returning a bounding rect when main path is not visible
         m_mainPath = futurePath.result();
-        m_mainPathRect = m_mainPath.controlPointRect();
         path = QPainterPath();
     }
 
@@ -1390,82 +2015,114 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
 
     m_placeLabels->setPath(detail.PlaceLabelPath(this->getData()));
 
-    QVector<QPointF> seamAllowancePoints;
-
-    if (detail.IsSeamAllowance())
-    {
-        seamAllowancePoints = futureSeamAllowance.result();
-    }
-
-    QFuture<QPainterPath > futurePassmarks = QtConcurrent::run(detail, &VPiece::PassmarksPath, this->getData(),
-                                                               seamAllowancePoints);
-
     if (detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn())
     {
-        path.addPath(detail.SeamAllowancePath(seamAllowancePoints));
+        if (not futureSeamAllowanceValid.result())
+        {
+            const QString errorMsg = QObject::tr("Piece '%1'. Seam allowance is not valid.").arg(detail.GetName());
+            VAbstractApplication::VApp()->IsPedantic()
+                ? throw VException(errorMsg)
+                : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        }
+        path.addPath(futureSeamAllowance.result());
         path.setFillRule(Qt::OddEvenFill);
         m_seamAllowance->setPath(path);
+
+        m_pieceBoundingRect = m_seamAllowance->path().controlPointRect();
     }
     else
     {
         m_seamAllowance->setPath(QPainterPath());
+
+        m_pieceBoundingRect = m_mainPath.controlPointRect();
     }
 
-    UpdateDetailLabel();
-    UpdatePatternInfo();
-    UpdateGrainline();
-    UpdateExcludeState();
-    if (updateChildren)
+    m_mirrorLine->setPath(futureMirrorLine.result());
+
+    UpdateFoldLine(futureFoldLine.result());
+
+    if (VAbstractApplication::VApp()->IsAppInGUIMode())
     {
-        UpdateInternalPaths();
+        QTimer::singleShot(100ms, Qt::CoarseTimer, this,
+                           [this, updateChildren]()
+                           {
+                               this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
+                               UpdateDetailLabel();
+                               UpdatePatternInfo();
+                               UpdateGrainline();
+                               UpdateExcludeState();
+                               if (updateChildren)
+                               {
+                                   UpdateInternalPaths();
+                               }
+                               this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+                           });
+    }
+    else
+    {
+        UpdateDetailLabel();
+        UpdatePatternInfo();
+        UpdateGrainline();
+        UpdateExcludeState();
+        if (updateChildren)
+        {
+            UpdateInternalPaths();
+        }
     }
 
-    m_passmarks->setPath(futurePassmarks.result());
+    m_passmarks->setPath(!combineTogether ? futurePassmarks.result() : QPainterPath());
 
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+
+    // Now we can start checking validity of the grainline
+    m_geometryIsReady = true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::SaveDialogChange(const QString &undoText)
 {
     SCASSERT(not m_dialog.isNull());
-    DialogSeamAllowance *dialogTool = qobject_cast<DialogSeamAllowance*>(m_dialog.data());
+    auto *dialogTool = qobject_cast<DialogSeamAllowance *>(m_dialog.data());
     SCASSERT(dialogTool != nullptr);
     const VPiece newDet = dialogTool->GetPiece();
     const VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
 
-    QVector<QUndoCommand*> &undocommands = dialogTool->UndoStack();
+    CancelLabelRendering();
+
+    QVector<QPointer<VUndoCommand>> &undocommands = dialogTool->UndoStack();
     const bool groupChange = not undocommands.isEmpty();
 
-    SavePieceOptions *saveCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
-    if (VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow()))
+    auto *saveCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
+    if (auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow()))
     { // Better not to crash here, just silently do not update list.
         connect(saveCommand, &SavePieceOptions::UpdateGroups, window, &VAbstractMainWindow::UpdateDetailsList);
     }
 
     if (groupChange)
     {
-        qApp->getUndoStack()->beginMacro(undoText.isEmpty() ? saveCommand->text(): undoText);
+        VAbstractApplication::VApp()->getUndoStack()->beginMacro(undoText.isEmpty() ? saveCommand->text() : undoText);
 
         for (auto command : undocommands)
         {
-            qApp->getUndoStack()->push(command);
+            VAbstractApplication::VApp()->getUndoStack()->push(command);
+            command.clear(); // To prevent double free memory
         }
         undocommands.clear();
     }
 
-    qApp->getUndoStack()->push(saveCommand);
+    VAbstractApplication::VApp()->getUndoStack()->push(saveCommand);
 
     if (groupChange)
     {
-        qApp->getUndoStack()->endMacro();
+        VAbstractApplication::VApp()->getUndoStack()->endMacro();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::ShowOptions()
 {
-    QPointer<DialogSeamAllowance> dialog = new DialogSeamAllowance(getData(), doc, m_id, qApp->getMainWindow());
+    QPointer<DialogSeamAllowance> const dialog =
+        new DialogSeamAllowance(getData(), doc, m_id, VAbstractValApplication::VApp()->getMainWindow());
     dialog->EnableApply(true);
     m_dialog = dialog;
     m_dialog->setModal(true);
@@ -1478,24 +2135,39 @@ void VToolSeamAllowance::ShowOptions()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::ToggleInLayout(bool checked)
 {
-    TogglePieceInLayout *togglePrint = new TogglePieceInLayout(m_id, checked, &(VAbstractTool::data), doc);
-    connect(togglePrint, &TogglePieceInLayout::UpdateList, doc, &VAbstractPattern::CheckInLayoutList);
-    qApp->getUndoStack()->push(togglePrint);
+    auto *toggleInLayout = new TogglePieceInLayout(m_id, checked, &(VAbstractTool::data), doc);
+    connect(toggleInLayout, &TogglePieceInLayout::Toggled, doc, &VAbstractPattern::CheckInLayoutList);
+    VAbstractApplication::VApp()->getUndoStack()->push(toggleInLayout);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::ToggleHideMainPath(bool checked)
+{
+    auto *toggleHideMainPath = new class ToggleHideMainPath(m_id, checked, &(VAbstractTool::data), doc);
+    connect(toggleHideMainPath, &ToggleHideMainPath::Toggled, this, [this]() { RefreshGeometry(false); });
+    VAbstractApplication::VApp()->getUndoStack()->push(toggleHideMainPath);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::ToggleForbidFlipping(bool checked)
 {
-    qApp->getUndoStack()->push(new TogglePieceForceForbidFlipping(m_id, checked,
-                                                                  ForceForbidFlippingType::ForbidFlipping,
-                                                                  &(VAbstractTool::data), doc));
+    VAbstractApplication::VApp()->getUndoStack()->push(new TogglePieceForceForbidFlipping(
+        m_id, checked, ForceForbidFlippingType::ForbidFlipping, &(VAbstractTool::data), doc));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::ToggleForceFlipping(bool checked)
 {
-    qApp->getUndoStack()->push(new TogglePieceForceForbidFlipping(m_id, checked, ForceForbidFlippingType::ForceFlipping,
-                                                                  &(VAbstractTool::data), doc));
+    VAbstractApplication::VApp()->getUndoStack()->push(new TogglePieceForceForbidFlipping(
+        m_id, checked, ForceForbidFlippingType::ForceFlipping, &(VAbstractTool::data), doc));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::ToggleShowFullPiece(bool checked)
+{
+    auto *toggleShowFullPiece = new class ToggleShowFullPiece(m_id, checked, &(VAbstractTool::data), doc);
+    connect(toggleShowFullPiece, &ToggleShowFullPiece::Toggled, this, [this]() { RefreshGeometry(true); });
+    VAbstractApplication::VApp()->getUndoStack()->push(toggleShowFullPiece);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1510,7 +2182,7 @@ void VToolSeamAllowance::ToggleExcludeState(quint32 id)
     const VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
     VPiece newDet = oldDet;
 
-    for (int i = 0; i< oldDet.GetPath().CountNodes(); ++i)
+    for (int i = 0; i < oldDet.GetPath().CountNodes(); ++i)
     {
         VPieceNode node = oldDet.GetPath().at(i);
         if (node.GetId() == id && node.GetTypeTool() == Tool::NodePoint)
@@ -1518,7 +2190,27 @@ void VToolSeamAllowance::ToggleExcludeState(quint32 id)
             node.SetExcluded(not node.IsExcluded());
             newDet.GetPath()[i] = node;
 
-            qApp->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, m_id));
+            VAbstractApplication::VApp()->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, m_id));
+            return;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::ToggleTurnPointState(quint32 id)
+{
+    const VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
+    VPiece newDet = oldDet;
+
+    for (int i = 0; i < oldDet.GetPath().CountNodes(); ++i)
+    {
+        VPieceNode node = oldDet.GetPath().at(i);
+        if (node.GetId() == id && node.GetTypeTool() == Tool::NodePoint)
+        {
+            node.SetTurnPoint(not node.IsTurnPoint());
+            newDet.GetPath()[i] = node;
+
+            VAbstractApplication::VApp()->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, m_id));
             return;
         }
     }
@@ -1530,7 +2222,7 @@ void VToolSeamAllowance::ToggleNodePointAngleType(quint32 id, PieceNodeAngle typ
     const VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
     VPiece newDet = oldDet;
 
-    for (int i = 0; i< oldDet.GetPath().CountNodes(); ++i)
+    for (int i = 0; i < oldDet.GetPath().CountNodes(); ++i)
     {
         VPieceNode node = oldDet.GetPath().at(i);
         if (node.GetId() == id && node.GetTypeTool() == Tool::NodePoint)
@@ -1538,15 +2230,104 @@ void VToolSeamAllowance::ToggleNodePointAngleType(quint32 id, PieceNodeAngle typ
             node.SetAngleType(type);
             newDet.GetPath()[i] = node;
 
-            qApp->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, m_id));
+            VAbstractApplication::VApp()->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, m_id));
             return;
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceItem::MoveTypes VToolSeamAllowance::FindLabelGeometry(const VPatternLabelData& labelData, qreal &rotationAngle,
-                                                            qreal &labelWidth, qreal &labelHeight, QPointF &pos)
+void VToolSeamAllowance::ToggleNodePointPassmark(quint32 id, bool toggle)
+{
+    const VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
+    VPiece newDet = oldDet;
+
+    for (int i = 0; i < oldDet.GetPath().CountNodes(); ++i)
+    {
+        VPieceNode node = oldDet.GetPath().at(i);
+        if (node.GetId() == id && node.GetTypeTool() == Tool::NodePoint)
+        {
+            node.SetPassmark(toggle);
+            newDet.GetPath()[i] = node;
+
+            VAbstractApplication::VApp()->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, m_id));
+            return;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::TogglePassmarkAngleType(quint32 id, PassmarkAngleType type)
+{
+    const VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
+    VPiece newDet = oldDet;
+
+    for (int i = 0; i < oldDet.GetPath().CountNodes(); ++i)
+    {
+        VPieceNode node = oldDet.GetPath().at(i);
+        if (node.GetId() == id && node.GetTypeTool() == Tool::NodePoint)
+        {
+            node.SetPassmarkAngleType(type);
+            newDet.GetPath()[i] = node;
+
+            VAbstractApplication::VApp()->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, m_id));
+            return;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::TogglePassmarkLineType(quint32 id, PassmarkLineType type)
+{
+    const VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
+    VPiece newDet = oldDet;
+
+    for (int i = 0; i < oldDet.GetPath().CountNodes(); ++i)
+    {
+        VPieceNode node = oldDet.GetPath().at(i);
+        if (node.GetId() == id && node.GetTypeTool() == Tool::NodePoint)
+        {
+            node.SetPassmarkLineType(type);
+            newDet.GetPath()[i] = node;
+
+            VAbstractApplication::VApp()->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, m_id));
+            return;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::ResetPieceLabelTemplate()
+{
+    const VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
+    VPiece newDet = oldDet;
+
+    if (const QString path = doc->GetDefaultPieceLabelPath(); not path.isEmpty())
+    {
+        QVector<VLabelTemplateLine> lines;
+        try
+        {
+            VLabelTemplate ltemplate;
+            ltemplate.setXMLContent(VLabelTemplateConverter(path).Convert());
+            lines = ltemplate.ReadLines();
+            newDet.GetPieceLabelData().SetLabelTemplate(lines);
+            VAbstractApplication::VApp()->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, m_id));
+        }
+        catch (VException &e)
+        {
+            const QString errorMsg = QObject::tr("Piece '%1'. Unable to load default piece label template.\n%2\n%3")
+                                         .arg(newDet.GetName(), e.ErrorMessage(), e.DetailedInformation());
+            VAbstractApplication::VApp()->IsPedantic()
+                ? throw VException(errorMsg)
+                : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VToolSeamAllowance::FindLabelGeometry(const VPatternLabelData &labelData, const QVector<quint32> &pins,
+                                           qreal &rotationAngle, qreal &labelWidth, qreal &labelHeight, QPointF &pos)
+    -> VPieceItem::MoveTypes
 {
 
     VPieceItem::MoveTypes restrictions = VPieceItem::AllModifications;
@@ -1554,13 +2335,13 @@ VPieceItem::MoveTypes VToolSeamAllowance::FindLabelGeometry(const VPatternLabelD
     {
         if (not qmu::QmuTokenParser::IsSingle(labelData.GetRotation()))
         {
-            restrictions &= ~ VPieceItem::IsRotatable;
+            restrictions &= ~VPieceItem::IsRotatable;
         }
 
         Calculator cal1;
         rotationAngle = cal1.EvalFormula(VAbstractTool::data.DataVariables(), labelData.GetRotation());
     }
-    catch(qmu::QmuParserError &e)
+    catch (qmu::QmuParserError &e)
     {
         Q_UNUSED(e);
         return VPieceItem::Error;
@@ -1569,26 +2350,27 @@ VPieceItem::MoveTypes VToolSeamAllowance::FindLabelGeometry(const VPatternLabelD
     const quint32 topLeftPin = labelData.TopLeftPin();
     const quint32 bottomRightPin = labelData.BottomRightPin();
 
-    if (topLeftPin != NULL_ID && bottomRightPin != NULL_ID)
+    if (topLeftPin != NULL_ID && pins.contains(topLeftPin) && bottomRightPin != NULL_ID &&
+        pins.contains(bottomRightPin))
     {
         try
         {
             const auto topLeftPinPoint = VAbstractTool::data.GeometricObject<VPointF>(topLeftPin);
             const auto bottomRightPinPoint = VAbstractTool::data.GeometricObject<VPointF>(bottomRightPin);
 
-            const QRectF labelRect = QRectF(static_cast<QPointF>(*topLeftPinPoint),
-                                            static_cast<QPointF>(*bottomRightPinPoint));
+            const auto labelRect =
+                QRectF(static_cast<QPointF>(*topLeftPinPoint), static_cast<QPointF>(*bottomRightPinPoint));
             labelWidth = FromPixel(qAbs(labelRect.width()), *VDataTool::data.GetPatternUnit());
             labelHeight = FromPixel(qAbs(labelRect.height()), *VDataTool::data.GetPatternUnit());
 
             pos = labelRect.topLeft();
 
-            restrictions &= ~ VPieceItem::IsMovable;
-            restrictions &= ~ VPieceItem::IsResizable;
+            restrictions &= ~VPieceItem::IsMovable;
+            restrictions &= ~VPieceItem::IsResizable;
 
             return restrictions;
         }
-        catch(const VExceptionBadId &)
+        catch (const VExceptionBadId &)
         {
             // do nothing.
         }
@@ -1608,17 +2390,17 @@ VPieceItem::MoveTypes VToolSeamAllowance::FindLabelGeometry(const VPatternLabelD
 
         if (not widthIsSingle || not heightIsSingle)
         {
-            restrictions &= ~ VPieceItem::IsResizable;
+            restrictions &= ~VPieceItem::IsResizable;
         }
     }
-    catch(qmu::QmuParserError &e)
+    catch (qmu::QmuParserError &e)
     {
         Q_UNUSED(e);
         return VPieceItem::Error;
     }
 
     const quint32 centerPin = labelData.CenterPin();
-    if (centerPin != NULL_ID)
+    if (centerPin != NULL_ID && pins.contains(centerPin))
     {
         try
         {
@@ -1628,9 +2410,9 @@ VPieceItem::MoveTypes VToolSeamAllowance::FindLabelGeometry(const VPatternLabelD
             const qreal lHeight = ToPixel(labelHeight, *VDataTool::data.GetPatternUnit());
 
             pos = static_cast<QPointF>(*centerPinPoint) - QRectF(0, 0, lWidth, lHeight).center();
-            restrictions &= ~ VPieceItem::IsMovable;
+            restrictions &= ~VPieceItem::IsMovable;
         }
-        catch(const VExceptionBadId &)
+        catch (const VExceptionBadId &)
         {
             pos = labelData.GetPos();
         }
@@ -1644,13 +2426,13 @@ VPieceItem::MoveTypes VToolSeamAllowance::FindLabelGeometry(const VPatternLabelD
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceItem::MoveTypes VToolSeamAllowance::FindGrainlineGeometry(const VGrainlineData& geom, qreal &length,
-                                                               qreal &rotationAngle, QPointF &pos)
+auto VToolSeamAllowance::FindGrainlineGeometry(const VGrainlineData &geom, const QVector<quint32> &pins, qreal &length,
+                                               qreal &rotationAngle, QPointF &pos) -> VPieceItem::MoveTypes
 {
     const quint32 topPin = geom.TopPin();
-    const quint32 bottomPin = geom.BottomPin();
 
-    if (topPin != NULL_ID && bottomPin != NULL_ID)
+    if (const quint32 bottomPin = geom.BottomPin();
+        topPin != NULL_ID && pins.contains(topPin) && bottomPin != NULL_ID && pins.contains(bottomPin))
     {
         try
         {
@@ -1670,7 +2452,7 @@ VPieceItem::MoveTypes VToolSeamAllowance::FindGrainlineGeometry(const VGrainline
 
             return VPieceItem::NotMovable;
         }
-        catch(const VExceptionBadId &)
+        catch (const VExceptionBadId &)
         {
             // do nothing.
         }
@@ -1681,7 +2463,7 @@ VPieceItem::MoveTypes VToolSeamAllowance::FindGrainlineGeometry(const VGrainline
     {
         if (not qmu::QmuTokenParser::IsSingle(geom.GetRotation()))
         {
-            restrictions &= ~ VPieceItem::IsRotatable;
+            restrictions &= ~VPieceItem::IsRotatable;
         }
 
         Calculator cal1;
@@ -1689,37 +2471,36 @@ VPieceItem::MoveTypes VToolSeamAllowance::FindGrainlineGeometry(const VGrainline
 
         if (not qmu::QmuTokenParser::IsSingle(geom.GetLength()))
         {
-            restrictions &= ~ VPieceItem::IsResizable;
+            restrictions &= ~VPieceItem::IsResizable;
         }
 
         Calculator cal2;
         length = cal2.EvalFormula(VAbstractTool::data.DataVariables(), geom.GetLength());
     }
-    catch(qmu::QmuParserError &e)
+    catch (qmu::QmuParserError &e)
     {
         Q_UNUSED(e);
         return VPieceItem::Error;
     }
 
-    const quint32 centerPin = geom.CenterPin();
-    if (centerPin != NULL_ID)
+    if (const quint32 centerPin = geom.CenterPin(); centerPin != NULL_ID && pins.contains(centerPin))
     {
         try
         {
             const auto centerPinPoint = VAbstractTool::data.GeometricObject<VPointF>(centerPin);
 
             const qreal cLength = ToPixel(length, *VDataTool::data.GetPatternUnit());
-            QLineF grainline(centerPinPoint->x(), centerPinPoint->y(),
-                             centerPinPoint->x() + cLength / 2.0, centerPinPoint->y());
+            QLineF grainline(centerPinPoint->x(), centerPinPoint->y(), centerPinPoint->x() - cLength / 2.0,
+                             centerPinPoint->y());
 
             grainline.setAngle(rotationAngle);
-            grainline = QLineF(grainline.p2(), grainline.p1());
+            Swap(grainline);
             grainline.setLength(cLength);
 
             pos = grainline.p2();
-            restrictions &= ~ VPieceItem::IsMovable;
+            restrictions &= ~VPieceItem::IsMovable;
         }
-        catch(const VExceptionBadId &)
+        catch (const VExceptionBadId &)
         {
             pos = geom.GetPos();
         }
@@ -1735,26 +2516,26 @@ VPieceItem::MoveTypes VToolSeamAllowance::FindGrainlineGeometry(const VGrainline
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::InitNodes(const VPiece &detail, VMainGraphicsScene *scene)
 {
-    for (int i = 0; i< detail.GetPath().CountNodes(); ++i)
+    const VPiecePath &path = detail.GetPath();
+    for (int i = 0; i < path.CountNodes(); ++i)
     {
-        InitNode(detail.GetPath().at(i), scene, &(VAbstractTool::data), doc, this);
+        const VPieceNode &node = path.at(i);
+        InitNode(node, scene, this);
+        doc->IncrementReferens(VAbstractTool::data.GetGObject(node.GetId())->getIdTool());
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSeamAllowance::InitNode(const VPieceNode &node, VMainGraphicsScene *scene, VContainer *data,
-                                  VAbstractPattern *doc, VToolSeamAllowance *parent)
+void VToolSeamAllowance::InitNode(const VPieceNode &node, VMainGraphicsScene *scene, VToolSeamAllowance *parent)
 {
     SCASSERT(scene != nullptr)
-    SCASSERT(data != nullptr)
-    SCASSERT(doc != nullptr)
     SCASSERT(parent != nullptr)
 
     switch (node.GetTypeTool())
     {
         case (Tool::NodePoint):
         {
-            VNodePoint *tool = qobject_cast<VNodePoint*>(VAbstractPattern::getTool(node.GetId()));
+            auto *tool = qobject_cast<VNodePoint *>(VAbstractPattern::getTool(node.GetId()));
             SCASSERT(tool != nullptr);
 
             if (tool->parent() != parent)
@@ -1766,28 +2547,39 @@ void VToolSeamAllowance::InitNode(const VPieceNode &node, VMainGraphicsScene *sc
                         Qt::UniqueConnection);
                 connect(tool, &VNodePoint::ToggleForceFlipping, parent, &VToolSeamAllowance::ToggleForceFlipping,
                         Qt::UniqueConnection);
+                connect(tool, &VNodePoint::ToggleShowFullPiece, parent, &VToolSeamAllowance::ToggleShowFullPiece,
+                        Qt::UniqueConnection);
                 connect(tool, &VNodePoint::Delete, parent, &VToolSeamAllowance::DeleteFromMenu, Qt::UniqueConnection);
                 connect(tool, &VNodePoint::ToggleExcludeState, parent, &VToolSeamAllowance::ToggleExcludeState,
                         Qt::UniqueConnection);
-                connect(tool, &VNodePoint::ToggleAngleType, parent, &VToolSeamAllowance::ToggleNodePointAngleType,
+                connect(tool, &VNodePoint::ToggleTurnPointState, parent, &VToolSeamAllowance::ToggleTurnPointState,
+                        Qt::UniqueConnection);
+                connect(tool, &VNodePoint::ToggleSeamAllowanceAngleType, parent,
+                        &VToolSeamAllowance::ToggleNodePointAngleType, Qt::UniqueConnection);
+                connect(tool, &VNodePoint::TogglePassmark, parent, &VToolSeamAllowance::ToggleNodePointPassmark,
                         Qt::UniqueConnection);
                 connect(tool, &VNodePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem, Qt::UniqueConnection);
+                connect(tool, &VNodePoint::TogglePassmarkAngleType, parent,
+                        &VToolSeamAllowance::TogglePassmarkAngleType, Qt::UniqueConnection);
+                connect(tool, &VNodePoint::TogglePassmarkLineType, parent, &VToolSeamAllowance::TogglePassmarkLineType,
+                        Qt::UniqueConnection);
+                connect(tool, &VNodePoint::ResetPieceLabelTemplate, parent,
+                        &VToolSeamAllowance::ResetPieceLabelTemplate, Qt::UniqueConnection);
                 tool->setParentItem(parent);
                 tool->SetParentType(ParentType::Item);
                 tool->SetExluded(node.IsExcluded());
-                doc->IncrementReferens(node.GetId());
             }
-            tool->setVisible(not node.IsExcluded());//Hide excluded point
+            tool->setVisible(not node.IsExcluded()); // Hide excluded point
             break;
         }
         case (Tool::NodeArc):
         case (Tool::NodeElArc):
         case (Tool::NodeSpline):
         case (Tool::NodeSplinePath):
-            doc->IncrementReferens(data->GetGObject(node.GetId())->getIdTool());
+            // Do nothing
             break;
         default:
-            qDebug()<<"Get wrong tool type. Ignore.";
+            qDebug() << "Get wrong tool type. Ignore.";
             break;
     }
 }
@@ -1808,7 +2600,7 @@ void VToolSeamAllowance::InitInternalPaths(const VPiece &detail)
     const QVector<quint32> paths = detail.GetInternalPaths();
     for (auto path : paths)
     {
-        auto *tool = qobject_cast<VToolPiecePath*>(VAbstractPattern::getTool(path));
+        auto *tool = qobject_cast<VToolPiecePath *>(VAbstractPattern::getTool(path));
         SCASSERT(tool != nullptr);
 
         if (tool->parent() != this)
@@ -1833,20 +2625,16 @@ void VToolSeamAllowance::InitSpecialPoints(const QVector<quint32> &points) const
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::DeleteToolWithConfirm(bool ask)
 {
-    QScopedPointer<DeletePiece> delDet(new DeletePiece(doc, m_id, VAbstractTool::data, m_sceneDetails));
-    if (ask)
+    if (ask && ConfirmDeletion() == QMessageBox::No)
     {
-        if (ConfirmDeletion() == QMessageBox::No)
-        {
-            return;
-        }
+        return;
     }
 
-    qApp->getUndoStack()->push(delDet.take());
+    auto delDet = std::make_unique<DeletePiece>(doc, m_id, VAbstractTool::data, m_sceneDetails);
+    VAbstractApplication::VApp()->getUndoStack()->push(delDet.release());
 
     // Throw exception, this will help prevent case when we forget to immediately quit function.
-    VExceptionToolWasDeleted e("Tool was used after deleting.");
-    throw e;
+    throw VExceptionToolWasDeleted(tr("Tool was used after deleting."));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1854,23 +2642,24 @@ void VToolSeamAllowance::ToolCreation(const Source &typeCreation)
 {
     if (typeCreation == Source::FromGui || typeCreation == Source::FromTool)
     {
-        AddToFile();
+        VToolSeamAllowance::AddToFile();
     }
     else
     {
-        RefreshDataInFile();
+        VToolSeamAllowance::RefreshDataInFile();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VToolSeamAllowance::PrepareLabelData(const VPatternLabelData &labelData, VTextGraphicsItem *labelItem,
-                                          QPointF &pos, qreal &labelAngle)
+auto VToolSeamAllowance::PrepareLabelData(const VPatternLabelData &labelData, const QVector<quint32> &pins,
+                                          VTextGraphicsItem *labelItem, QPointF &pos, qreal &labelAngle) -> bool
 {
     SCASSERT(labelItem != nullptr)
 
     qreal labelWidth = 0;
     qreal labelHeight = 0;
-    const VTextGraphicsItem::MoveTypes type = FindLabelGeometry(labelData, labelAngle, labelWidth, labelHeight, pos);
+    const VTextGraphicsItem::MoveTypes type =
+        FindLabelGeometry(labelData, pins, labelAngle, labelWidth, labelHeight, pos);
     if (type & VGrainlineItem::Error)
     {
         labelItem->hide();
@@ -1878,12 +2667,17 @@ bool VToolSeamAllowance::PrepareLabelData(const VPatternLabelData &labelData, VT
     }
     labelItem->SetMoveType(type);
 
-    QFont fnt = qApp->Settings()->GetLabelFont();
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    QFont fnt = settings->GetLabelFont();
     {
-        const int iFS = labelData.GetFontSize();
-        iFS < MIN_FONT_SIZE ? fnt.setPixelSize(MIN_FONT_SIZE) : fnt.setPixelSize(iFS);
+        const int iFS = labelData.GetFontSize() < VCommonSettings::MinPieceLabelFontPointSize()
+                            ? settings->GetPieceLabelFontPointSize()
+                            : labelData.GetFontSize();
+        fnt.setPointSize(qMax(iFS, 1));
+        labelItem->SetSVGFontPointSize(iFS);
     }
     labelItem->SetFont(fnt);
+    labelItem->SetSVGFontFamily(settings->GetLabelSVGFont());
     labelItem->SetSize(ToPixel(labelWidth, *VDataTool::data.GetPatternUnit()),
                        ToPixel(labelHeight, *VDataTool::data.GetPatternUnit()));
 
@@ -1891,41 +2685,17 @@ bool VToolSeamAllowance::PrepareLabelData(const VPatternLabelData &labelData, VT
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSeamAllowance::UpdateLabelItem(VTextGraphicsItem *labelItem, QPointF pos, qreal labelAngle)
-{
-    SCASSERT(labelItem != nullptr)
-
-    QRectF rectBB;
-    rectBB.setTopLeft(pos);
-    rectBB.setWidth(labelItem->boundingRect().width());
-    rectBB.setHeight(labelItem->boundingRect().height());
-    qreal dX;
-    qreal dY;
-    if (labelItem->IsContained(rectBB, labelAngle, dX, dY) == false)
-    {
-        pos.setX(pos.x() + dX);
-        pos.setY(pos.y() + dY);
-    }
-
-    labelItem->setPos(pos);
-    labelItem->setRotation(-labelAngle);// expects clockwise direction
-    labelItem->Update();
-    labelItem->GetTextLines() > 0 ? labelItem->show() : labelItem->hide();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QList<VToolSeamAllowance *> VToolSeamAllowance::SelectedTools() const
+auto VToolSeamAllowance::SelectedTools() const -> QList<VToolSeamAllowance *>
 {
     QList<VToolSeamAllowance *> tools;
-    if(m_sceneDetails)
+    if (m_sceneDetails)
     {
-        const QList<QGraphicsItem *> list = m_sceneDetails->selectedItems();
-
-        if (not list.isEmpty())
+        if (const QList<QGraphicsItem *> list = m_sceneDetails->selectedItems(); not list.isEmpty())
         {
-            for(auto item : list)
+            tools.reserve(list.size());
+            for (auto *item : list)
             {
-                VToolSeamAllowance *tool = qgraphicsitem_cast<VToolSeamAllowance *>(item);
+                auto *tool = qgraphicsitem_cast<VToolSeamAllowance *>(item);
                 if (tool != nullptr && tool->getId() != m_id)
                 {
                     tools.append(tool);
@@ -1938,31 +2708,69 @@ QList<VToolSeamAllowance *> VToolSeamAllowance::SelectedTools() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VToolSeamAllowance::IsGrainlinePositionValid() const -> bool
+{
+    VPieceGrainline const grainLine = m_grainLine->Grainline();
+    const VPiece detail = VAbstractTool::data.GetPiece(m_id);
+    QVector<QPointF> contourPoints;
+    detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn()
+        ? CastTo(detail.FullSeamAllowancePoints(getData()), contourPoints)
+        : CastTo(detail.FullMainPathPoints(getData()), contourPoints);
+
+    return grainLine.IsPositionValid(contourPoints);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VToolSeamAllowance::IsFoldLinePositionValid(const QVector<QPainterPath> &shape, FoldLineType type) const -> bool
+{
+    if (type == FoldLineType::None || shape.isEmpty())
+    {
+        return true;
+    }
+
+    QPainterPath foldLinePath;
+    foldLinePath.addPath(shape.constFirst());
+
+    if (shape.size() > 1)
+    {
+        foldLinePath.addPath(shape.constLast());
+    }
+
+    const VPiece detail = VAbstractTool::data.GetPiece(m_id);
+    QVector<QPointF> contourPoints;
+    detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn()
+        ? CastTo(detail.FullSeamAllowancePoints(getData()), contourPoints)
+        : CastTo(detail.FullMainPathPoints(getData()), contourPoints);
+
+    const QPainterPath contourPath = VGObject::PainterPath(contourPoints);
+    return contourPath.contains(foldLinePath);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::AddPointRecords(VAbstractPattern *doc, QDomElement &domElement,
                                          const QVector<quint32> &records, const QString &tag)
 {
-    if (records.size() > 0)
+    if (not records.empty())
     {
         QDomElement pinsElement = doc->createElement(tag);
         for (auto record : records)
         {
-            QDomElement recordNode = doc->createElement(VToolSeamAllowance::TagRecord);
-            recordNode.appendChild(doc->createTextNode(QString().setNum(record)));
-            pinsElement.appendChild(recordNode);
+            pinsElement.appendChild(
+                doc->CreateElementWithText(VToolSeamAllowance::TagRecord, QString().setNum(record)));
         }
         domElement.appendChild(pinsElement);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolSeamAllowance::DuplicateNode(const VPieceNode &node, const VToolSeamAllowanceInitData &initData)
+auto VToolSeamAllowance::DuplicateNode(const VPieceNode &node, const VToolSeamAllowanceInitData &initData) -> quint32
 {
     SCASSERT(initData.scene != nullptr)
     SCASSERT(initData.doc != nullptr)
     SCASSERT(initData.data != nullptr)
 
     const QSharedPointer<VGObject> gobj = initData.data->GetGObject(node.GetId());
-    VAbstractNode *tool = qobject_cast<VAbstractNode *>(VAbstractPattern::getTool(node.GetId()));
+    auto *tool = qobject_cast<VAbstractNode *>(VAbstractPattern::getTool(node.GetId()));
     SCASSERT(tool != nullptr)
 
     VAbstractNodeInitData initNodeData;
@@ -1979,7 +2787,7 @@ quint32 VToolSeamAllowance::DuplicateNode(const VPieceNode &node, const VToolSea
     {
         case (Tool::NodePoint):
         {
-            const QSharedPointer<VPointF> point = qSharedPointerDynamicCast<VPointF>(gobj);
+            auto point = QSharedPointer<VPointF>(new VPointF(*qSharedPointerDynamicCast<VPointF>(gobj).data()));
             initNodeData.id = VAbstractTool::CreateNodePoint(initData.data, gobj->getIdObject(), point);
             VNodePoint::Create(initNodeData);
             break;
@@ -2001,14 +2809,14 @@ quint32 VToolSeamAllowance::DuplicateNode(const VPieceNode &node, const VToolSea
             VNodeSplinePath::Create(initNodeData);
             break;
         default:
-            qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
+            qDebug() << "May be wrong tool type!!! Ignoring." << Q_FUNC_INFO;
             break;
     }
     return initNodeData.id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolSeamAllowance::DuplicatePiecePath(quint32 id, const VToolSeamAllowanceInitData &initData)
+auto VToolSeamAllowance::DuplicatePiecePath(quint32 id, const VToolSeamAllowanceInitData &initData) -> quint32
 {
     const VPiecePath path = initData.data->GetPiecePath(id);
     VPiecePath newPath = path;
@@ -2017,7 +2825,7 @@ quint32 VToolSeamAllowance::DuplicatePiecePath(quint32 id, const VToolSeamAllowa
 
     const quint32 idPath = initData.data->AddPiecePath(newPath);
 
-    VAbstractNode *tool = qobject_cast<VAbstractNode *>(VAbstractPattern::getTool(id));
+    auto *tool = qobject_cast<VAbstractNode *>(VAbstractPattern::getTool(id));
     SCASSERT(tool != nullptr)
 
     VToolPiecePathInitData initNodeData;
@@ -2037,12 +2845,13 @@ quint32 VToolSeamAllowance::DuplicatePiecePath(quint32 id, const VToolSeamAllowa
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<CustomSARecord> VToolSeamAllowance::DuplicateCustomSARecords(const QVector<CustomSARecord> &records,
-                                                                     const VToolSeamAllowanceInitData &initData,
-                                                                     const QMap<quint32, quint32> &replacements)
+auto VToolSeamAllowance::DuplicateCustomSARecords(const QVector<CustomSARecord> &records,
+                                                  const VToolSeamAllowanceInitData &initData,
+                                                  const QMap<quint32, quint32> &replacements) -> QVector<CustomSARecord>
 {
     QVector<CustomSARecord> newRecords;
-    for(auto record : records)
+    newRecords.reserve(records.size());
+    for (auto record : records)
     {
         record.path = DuplicatePiecePath(record.path, initData);
         record.startPoint = replacements.value(record.startPoint, NULL_ID);
@@ -2053,11 +2862,12 @@ QVector<CustomSARecord> VToolSeamAllowance::DuplicateCustomSARecords(const QVect
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<quint32> VToolSeamAllowance::DuplicateInternalPaths(const QVector<quint32> &iPaths,
-                                                            const VToolSeamAllowanceInitData &initData)
+auto VToolSeamAllowance::DuplicateInternalPaths(const QVector<quint32> &iPaths,
+                                                const VToolSeamAllowanceInitData &initData) -> QVector<quint32>
 {
     QVector<quint32> newPaths;
-    for(auto iPath : iPaths)
+    newPaths.reserve(iPaths.size());
+    for (auto iPath : iPaths)
     {
         newPaths.append(DuplicatePiecePath(iPath, initData));
     }
@@ -2065,43 +2875,15 @@ QVector<quint32> VToolSeamAllowance::DuplicateInternalPaths(const QVector<quint3
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<quint32> VToolSeamAllowance::DuplicatePins(const QVector<quint32> &pins,
-                                                   const VToolSeamAllowanceInitData &initData)
-{
-    QVector<quint32> newPins;
-    for(auto p : pins)
-    {
-        QSharedPointer<VPointF> pin = initData.data->GeometricObject<VPointF>(p);
-
-        VAbstractNode *tool = qobject_cast<VAbstractNode *>(VAbstractPattern::getTool(p));
-        SCASSERT(tool != nullptr)
-
-        VToolPinInitData initNodeData;
-        initNodeData.id = initData.data->AddGObject(new VPointF(*pin));
-        initNodeData.pointId = pin->getIdObject();
-        initNodeData.idObject = NULL_ID; // piece id
-        initNodeData.doc = initData.doc;
-        initNodeData.data = initData.data;
-        initNodeData.parse = Document::FullParse;
-        initNodeData.typeCreation = Source::FromTool;
-        initNodeData.drawName = initData.drawName;
-        initNodeData.idTool = tool->GetIdTool();
-
-        VToolPin::Create(initNodeData);
-        newPins.append(initNodeData.id);
-    }
-    return newPins;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QVector<quint32> VToolSeamAllowance::DuplicatePlaceLabels(const QVector<quint32> &placeLabels,
-                                                          const VToolSeamAllowanceInitData &initData)
+auto VToolSeamAllowance::DuplicatePlaceLabels(const QVector<quint32> &placeLabels,
+                                              const VToolSeamAllowanceInitData &initData) -> QVector<quint32>
 {
     QVector<quint32> newPlaceLabels;
-    for(auto placeLabel : placeLabels)
+    newPlaceLabels.reserve(placeLabels.size());
+    for (auto placeLabel : placeLabels)
     {
-        QSharedPointer<VPlaceLabelItem> label = initData.data->GeometricObject<VPlaceLabelItem>(placeLabel);
-        VAbstractNode *tool = qobject_cast<VAbstractNode *>(VAbstractPattern::getTool(placeLabel));
+        QSharedPointer<VPlaceLabelItem> const label = initData.data->GeometricObject<VPlaceLabelItem>(placeLabel);
+        auto *tool = qobject_cast<VAbstractNode *>(VAbstractPattern::getTool(placeLabel));
         SCASSERT(tool != nullptr)
 
         VToolPlaceLabelInitData initNodeData;
@@ -2117,6 +2899,7 @@ QVector<quint32> VToolSeamAllowance::DuplicatePlaceLabels(const QVector<quint32>
         initNodeData.visibilityTrigger = label->GetVisibilityTrigger();
         initNodeData.type = label->GetLabelType();
         initNodeData.centerPoint = label->GetCenterPoint();
+        initNodeData.notMirrored = label->IsNotMirrored();
         initNodeData.id = initNodeData.data->AddGObject(new VPlaceLabelItem(*label));
         initNodeData.idTool = tool->GetIdTool();
 
@@ -2127,12 +2910,79 @@ QVector<quint32> VToolSeamAllowance::DuplicatePlaceLabels(const QVector<quint32>
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VPieceNode> VToolSeamAllowance::DuplicateNodes(const VPiecePath &path,
-                                                       const VToolSeamAllowanceInitData &initData,
-                                                       QMap<quint32, quint32> &replacements)
+void VToolSeamAllowance::UpdateFoldLine(const VFoldLine &foldLine)
+{
+    const VPiece detail = VAbstractTool::data.GetPiece(m_id);
+
+    if (detail.GetFoldLineType() == FoldLineType::None || (detail.IsShowFullPiece() && !detail.IsShowMirrorLine()))
+    {
+        m_foldLineLabelText->setVisible(false);
+        m_foldLineMark->setPath(QPainterPath());
+        m_foldLineLabel->setPath(QPainterPath());
+        return;
+    }
+
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+
+    if (settings->GetSingleStrokeOutlineFont() || settings->GetSingleLineFonts())
+    {
+        m_foldLineLabelText->setVisible(false);
+    }
+    else
+    {
+        foldLine.UpdateFoldLineLabel(m_foldLineLabelText);
+    }
+
+    QVector<QPainterPath> const shape = foldLine.FoldLinePath();
+
+    if (detail.GetFoldLineType() == FoldLineType::ThreeDots || detail.GetFoldLineType() == FoldLineType::ThreeX ||
+        detail.GetFoldLineType() == FoldLineType::TwoArrows)
+    {
+        m_foldLineMark->setPath(!shape.isEmpty() ? shape.constFirst() : QPainterPath());
+        m_foldLineLabel->setPath(QPainterPath());
+    }
+    else if (detail.GetFoldLineType() == FoldLineType::Text)
+    {
+        m_foldLineMark->setPath(QPainterPath());
+        if (!shape.isEmpty() && (settings->GetSingleStrokeOutlineFont() || settings->GetSingleLineFonts()))
+        {
+            m_foldLineLabel->setPath(shape.constFirst());
+        }
+        else
+        {
+            m_foldLineLabel->setPath(QPainterPath());
+        }
+    }
+    else
+    {
+        m_foldLineMark->setPath(!shape.isEmpty() ? shape.constFirst() : QPainterPath());
+
+        if (shape.size() > 1 && (settings->GetSingleStrokeOutlineFont() || settings->GetSingleLineFonts()))
+        {
+            m_foldLineLabel->setPath(shape.constLast());
+        }
+        else
+        {
+            m_foldLineLabel->setPath(QPainterPath());
+        }
+    }
+
+    if (m_geometryIsReady && not IsFoldLinePositionValid(shape, detail.GetFoldLineType()))
+    {
+        const QString errorMsg = QObject::tr("Piece '%1'. Fold line is not valid.").arg(detail.GetName());
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(errorMsg)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VToolSeamAllowance::DuplicateNodes(const VPiecePath &path, const VToolSeamAllowanceInitData &initData,
+                                        QMap<quint32, quint32> &replacements) -> QVector<VPieceNode>
 {
     QVector<VPieceNode> nodes;
-    for (int i = 0; i< path.CountNodes(); ++i)
+    nodes.reserve(path.CountNodes());
+    for (int i = 0; i < path.CountNodes(); ++i)
     {
         VPieceNode nodeD = path.at(i);
         const quint32 oldId = nodeD.GetId();

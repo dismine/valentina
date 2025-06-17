@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>425</width>
-    <height>530</height>
+    <width>396</width>
+    <height>633</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,10 +17,16 @@
    <iconset resource="../../../vmisc/share/resources/icon.qrc">
     <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_3">
+  <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout_2">
-     <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Tool</string>
+      </attribute>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_5">
@@ -93,11 +99,11 @@
             <string>Formula wizard</string>
            </property>
            <property name="text">
-            <string notr="true">...</string>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset resource="../../../vmisc/share/resources/icon.qrc">
-             <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
+             <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -113,7 +119,7 @@
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap resource="../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
+            <pixmap resource="../../../vmisc/share/resources/icon.qrc">:/icon/light/24x24/equal.png</pixmap>
            </property>
           </widget>
          </item>
@@ -192,8 +198,7 @@
             <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="go-down">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="go-down"/>
            </property>
            <property name="iconSize">
             <size>
@@ -279,11 +284,11 @@
             <string>Formula wizard</string>
            </property>
            <property name="text">
-            <string notr="true">...</string>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset resource="../../../vmisc/share/resources/icon.qrc">
-             <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
+             <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -299,7 +304,7 @@
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap resource="../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
+            <pixmap resource="../../../vmisc/share/resources/icon.qrc">:/icon/light/24x24/equal.png</pixmap>
            </property>
           </widget>
          </item>
@@ -378,8 +383,7 @@
             <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="go-down">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="go-down"/>
            </property>
            <property name="iconSize">
             <size>
@@ -465,11 +469,11 @@
             <string>Formula wizard</string>
            </property>
            <property name="text">
-            <string notr="true">...</string>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset resource="../../../vmisc/share/resources/icon.qrc">
-             <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
+             <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -485,7 +489,7 @@
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap resource="../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
+            <pixmap resource="../../../vmisc/share/resources/icon.qrc">:/icon/light/24x24/equal.png</pixmap>
            </property>
           </widget>
          </item>
@@ -564,8 +568,7 @@
             <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="go-down">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="go-down"/>
            </property>
            <property name="iconSize">
             <size>
@@ -651,11 +654,11 @@
             <string>Formula wizard</string>
            </property>
            <property name="text">
-            <string notr="true">...</string>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset resource="../../../vmisc/share/resources/icon.qrc">
-             <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
+             <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -671,7 +674,7 @@
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap resource="../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
+            <pixmap resource="../../../vmisc/share/resources/icon.qrc">:/icon/light/24x24/equal.png</pixmap>
            </property>
           </widget>
          </item>
@@ -750,8 +753,7 @@
             <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="go-down">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="go-down"/>
            </property>
            <property name="iconSize">
             <size>
@@ -837,11 +839,11 @@
             <string>Formula wizard</string>
            </property>
            <property name="text">
-            <string notr="true">...</string>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset resource="../../../vmisc/share/resources/icon.qrc">
-             <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
+             <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -857,7 +859,7 @@
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap resource="../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
+            <pixmap resource="../../../vmisc/share/resources/icon.qrc">:/icon/light/24x24/equal.png</pixmap>
            </property>
           </widget>
          </item>
@@ -936,8 +938,7 @@
             <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="go-down">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="go-down"/>
            </property>
            <property name="iconSize">
             <size>
@@ -977,13 +978,6 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="1">
-          <widget class="QComboBox" name="comboBoxColor">
-           <property name="toolTip">
-            <string/>
-           </property>
-          </widget>
-         </item>
          <item row="2" column="0">
           <widget class="QLabel" name="label_11">
            <property name="text">
@@ -1020,29 +1014,97 @@
            </property>
           </widget>
          </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="labelAlias">
+           <property name="text">
+            <string>Alias:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QLineEdit" name="lineEditAlias"/>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="label_13">
+           <property name="text">
+            <string>Approximation scale:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QDoubleSpinBox" name="doubleSpinBoxApproximationScale">
+           <property name="toolTip">
+            <string>Set approximation scale for this curve, 0 - use global value</string>
+           </property>
+           <property name="decimals">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <double>10.000000000000000</double>
+           </property>
+           <property name="singleStep">
+            <double>0.100000000000000</double>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="VPE::QtColorPicker" name="pushButtonColor">
+           <property name="text">
+            <string notr="true">Color</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
       </layout>
-     </item>
-     <item>
-      <widget class="QDialogButtonBox" name="buttonBox">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="standardButtons">
-        <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-       </property>
-      </widget>
-     </item>
-    </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>Notes</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QPlainTextEdit" name="plainTextEditToolNotes"/>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>
  <customwidgets>
   <customwidget>
+   <class>VPE::QtColorPicker</class>
+   <extends>QPushButton</extends>
+   <header>../vpropertyexplorer/qtcolorpicker.h</header>
+  </customwidget>
+  <customwidget>
    <class>VPlainTextEdit</class>
    <extends>QPlainTextEdit</extends>
-   <header location="global">vplaintextedit.h</header>
+   <header>../vwidgets/vplaintextedit.h</header>
   </customwidget>
  </customwidgets>
  <resources>

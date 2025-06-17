@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -33,9 +33,12 @@
 #include <QColor>
 #include <QComboBox>
 #include <QCursor>
+#include <QDesktopServices>
 #include <QDir>
 #include <QDirIterator>
 #include <QFileInfo>
+#include <QGlobalStatic>
+#include <QGraphicsItem>
 #include <QGuiApplication>
 #include <QImage>
 #include <QLatin1Char>
@@ -44,172 +47,90 @@
 #include <QMessageLogger>
 #include <QObject>
 #include <QPixmap>
+#include <QPixmapCache>
 #include <QPrinterInfo>
 #include <QProcess>
 #include <QRgb>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
+#include <QUrl>
 #include <QtDebug>
-#include <QPixmapCache>
-#include <QGraphicsItem>
-#include <QGlobalStatic>
 
+#include "../ifc/exception/vexception.h"
+#include "compatibility.h"
+#include "literals.h"
 #include "vabstractapplication.h"
 
-const qreal   defCurveApproximationScale = 0.5;
-const qreal   minCurveApproximationScale = 0.1;
-const qreal   maxCurveApproximationScale = 10.0;
+using namespace Qt::Literals::StringLiterals;
 
-//functions
-const QString degTorad_F = QStringLiteral("degTorad");
-const QString radTodeg_F = QStringLiteral("radTodeg");
-const QString sin_F   = QStringLiteral("sin");
-const QString cos_F   = QStringLiteral("cos");
-const QString tan_F   = QStringLiteral("tan");
-const QString asin_F  = QStringLiteral("asin");
-const QString acos_F  = QStringLiteral("acos");
-const QString atan_F  = QStringLiteral("atan");
-const QString sinh_F  = QStringLiteral("sinh");
-const QString cosh_F  = QStringLiteral("cosh");
-const QString tanh_F  = QStringLiteral("tanh");
-const QString asinh_F = QStringLiteral("asinh");
-const QString acosh_F = QStringLiteral("acosh");
-const QString atanh_F = QStringLiteral("atanh");
-const QString sinD_F   = QStringLiteral("sinD");
-const QString cosD_F   = QStringLiteral("cosD");
-const QString tanD_F   = QStringLiteral("tanD");
-const QString asinD_F  = QStringLiteral("asinD");
-const QString acosD_F  = QStringLiteral("acosD");
-const QString atanD_F  = QStringLiteral("atanD");
-const QString log2_F  = QStringLiteral("log2");
-const QString log10_F = QStringLiteral("log10");
-const QString log_F   = QStringLiteral("log");
-const QString ln_F    = QStringLiteral("ln");
-const QString exp_F   = QStringLiteral("exp");
-const QString sqrt_F  = QStringLiteral("sqrt");
-const QString sign_F  = QStringLiteral("sign");
-const QString rint_F  = QStringLiteral("rint");
-const QString r2cm_F  = QStringLiteral("r2cm");
-const QString csrCm_F = QStringLiteral("csrCm");
-const QString csrInch_F = QStringLiteral("csrInch");
-const QString abs_F   = QStringLiteral("abs");
-const QString min_F   = QStringLiteral("min");
-const QString max_F   = QStringLiteral("max");
-const QString sum_F   = QStringLiteral("sum");
-const QString avg_F   = QStringLiteral("avg");
-const QString fmod_F  = QStringLiteral("fmod");
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+auto LocalList() -> QStringList
+{
+    static QStringList fileNames;
 
-const QStringList builInFunctions = QStringList() << degTorad_F
-                                                  << radTodeg_F
-                                                  << sin_F
-                                                  << cos_F
-                                                  << tan_F
-                                                  << asin_F
-                                                  << acos_F
-                                                  << atan_F
-                                                  << sinh_F
-                                                  << cosh_F
-                                                  << tanh_F
-                                                  << asinh_F
-                                                  << acosh_F
-                                                  << atanh_F
-                                                  << sinD_F
-                                                  << cosD_F
-                                                  << tanD_F
-                                                  << asinD_F
-                                                  << acosD_F
-                                                  << atanD_F
-                                                  << log2_F
-                                                  << log10_F
-                                                  << log_F
-                                                  << ln_F
-                                                  << exp_F
-                                                  << sqrt_F
-                                                  << sign_F
-                                                  << rint_F
-                                                  << r2cm_F
-                                                  << csrCm_F
-                                                  << csrInch_F
-                                                  << abs_F
-                                                  << min_F
-                                                  << max_F
-                                                  << sum_F
-                                                  << avg_F
-                                                  << fmod_F;
+    // Check if file names have already been cached
+    if (!fileNames.isEmpty())
+    {
+        return fileNames;
+    }
 
-const QString pl_size          = QStringLiteral("size");
-const QString pl_height        = QStringLiteral("height");
-const QString pl_date          = QStringLiteral("date");
-const QString pl_time          = QStringLiteral("time");
-const QString pl_patternName   = QStringLiteral("patternName");
-const QString pl_patternNumber = QStringLiteral("patternNumber");
-const QString pl_author        = QStringLiteral("author");
-const QString pl_customer      = QStringLiteral("customer");
-const QString pl_userMaterial  = QStringLiteral("userMaterial");
-const QString pl_pExt          = QStringLiteral("pExt");
-const QString pl_pFileName     = QStringLiteral("pFileName");
-const QString pl_mFileName     = QStringLiteral("mFileName");
-const QString pl_mExt          = QStringLiteral("mExt");
-const QString pl_pLetter       = QStringLiteral("pLetter");
-const QString pl_pAnnotation   = QStringLiteral("pAnnotation");
-const QString pl_pOrientation  = QStringLiteral("pOrientation");
-const QString pl_pRotation     = QStringLiteral("pRotation");
-const QString pl_pTilt         = QStringLiteral("pTilt");
-const QString pl_pFoldPosition = QStringLiteral("pFoldPosition");
-const QString pl_pName         = QStringLiteral("pName");
-const QString pl_pQuantity     = QStringLiteral("pQuantity");
-const QString pl_mFabric       = QStringLiteral("mFabric");
-const QString pl_mLining       = QStringLiteral("mLining");
-const QString pl_mInterfacing  = QStringLiteral("mInterfacing");
-const QString pl_mInterlining  = QStringLiteral("mInterlining");
-const QString pl_wCut          = QStringLiteral("wCut");
-const QString pl_wOnFold       = QStringLiteral("wOnFold");
-
-const QStringList labelTemplatePlaceholders = QStringList() << pl_size
-                                                            << pl_height
-                                                            << pl_date
-                                                            << pl_time
-                                                            << pl_patternName
-                                                            << pl_patternNumber
-                                                            << pl_author
-                                                            << pl_customer
-                                                            << pl_userMaterial
-                                                            << pl_pExt
-                                                            << pl_pFileName
-                                                            << pl_mFileName
-                                                            << pl_mExt
-                                                            << pl_pLetter
-                                                            << pl_pAnnotation
-                                                            << pl_pOrientation
-                                                            << pl_pRotation
-                                                            << pl_pTilt
-                                                            << pl_pFoldPosition
-                                                            << pl_pName
-                                                            << pl_pQuantity
-                                                            << pl_mFabric
-                                                            << pl_mLining
-                                                            << pl_mInterfacing
-                                                            << pl_mInterlining
-                                                            << pl_wCut
-                                                            << pl_wOnFold;
-
-const QString cursorArrowOpenHand = QStringLiteral("://cursor/cursor-arrow-openhand.png");
-const QString cursorArrowCloseHand = QStringLiteral("://cursor/cursor-arrow-closehand.png");
-
-const QString unitMM   = QStringLiteral("mm");
-const QString unitCM   = QStringLiteral("cm");
-const QString unitINCH = QStringLiteral("inch");
-const QString unitPX   = QStringLiteral("px");
-
-const QString valentinaNamespace = QStringLiteral("valentina");
+    QDirIterator it(VAbstractApplication::translationsPath(), QStringList("valentina_*.qm"), QDir::Files,
+                    QDirIterator::Subdirectories);
+    while (it.hasNext())
+    {
+        it.next();
+        fileNames.append(it.fileName());
+    }
+    return fileNames;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-QPixmap QPixmapFromCache(const QString &pixmapPath)
+void InitLanguageList(QComboBox *combobox)
+{
+    SCASSERT(combobox != nullptr)
+    combobox->clear();
+
+    const QStringList fileNames = LocalList();
+    const QStringList supportedLocales = SupportedLocales();
+
+    for (auto locale : fileNames)
+    {
+        // get locale extracted by filename           "valentina_de_De.qm"
+        locale.truncate(locale.lastIndexOf('.'_L1));  // "valentina_de_De"
+        locale.remove(0, locale.indexOf('_'_L1) + 1); // "de_De"
+
+        if (locale.startsWith("ru"_L1) || locale.startsWith("ir"_L1) || !supportedLocales.contains(locale))
+        {
+            continue;
+        }
+
+        auto const loc = QLocale(locale);
+        QString const lang = loc.nativeLanguageName();
+        QString country = TerritoryToString(loc);
+        if (country == "Czechia"_L1)
+        {
+            country = "CzechRepublic"_L1;
+        }
+        QIcon const ico(u"://flags/%1.png"_s.arg(country));
+
+        combobox->addItem(ico, lang, locale);
+    }
+
+    // English language is internal and doesn't have own *.qm file.
+    // Since Qt 5.12 country names have spaces
+    QIcon const ico(u"://flags/%1.png"_s.arg(TerritoryToString(QLocale::UnitedStates)));
+    const auto en_US = QStringLiteral("en_US");
+    QString const lang = QLocale(en_US).nativeLanguageName();
+    combobox->addItem(ico, lang, en_US);
+}
+} // namespace
+
+//---------------------------------------------------------------------------------------------------------------------
+auto QPixmapFromCache(const QString &pixmapPath) -> QPixmap
 {
     QPixmap pixmap;
 
-    if (not QPixmapCache::find(pixmapPath, pixmap))
+    if (not QPixmapCache::find(pixmapPath, &pixmap))
     {
         pixmap = QPixmap(pixmapPath);
         QPixmapCache::insert(pixmapPath, pixmap);
@@ -232,169 +153,31 @@ void SetItemOverrideCursor(QGraphicsItem *item, const QString &pixmapPath, int h
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-double ToPixel(double val, const Unit &unit)
+auto SupportedLocales() -> QStringList
 {
-    switch (unit)
-    {
-        case Unit::Mm:
-            return (val / 25.4) * PrintDPI;
-        case Unit::Cm:
-            return ((val * 10.0) / 25.4) * PrintDPI;
-        case Unit::Inch:
-            return val * PrintDPI;
-        case Unit::Px:
-            return val;
-        default:
-            break;
-    }
-    return 0;
+    return QStringList{"uk_UA",
+                       "de_DE",
+                       "cs_CZ",
+                       "he_IL",
+                       "fr_FR",
+                       "it_IT",
+                       "nl_NL",
+                       "id_ID",
+                       "es_ES",
+                       "fi_FI",
+                       "ro_RO",
+                       "zh_CN",
+                       "pt_BR",
+                       "el_GR",
+                       "pl_PL",
+                       "hr_HR",
+                       "hu_HU",
+                       "pt_PT",
+                       "ja_JP"};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-double FromPixel(double pix, const Unit &unit)
-{
-    switch (unit)
-    {
-        case Unit::Mm:
-            return (pix / PrintDPI) * 25.4;
-        case Unit::Cm:
-            return ((pix / PrintDPI) * 25.4) / 10.0;
-        case Unit::Inch:
-            return pix / PrintDPI;
-        case Unit::Px:
-            return pix;
-        default:
-            break;
-    }
-    return 0;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal UnitConvertor(qreal value, const Unit &from, const Unit &to)
-{
-    switch (from)
-    {
-        case Unit::Mm:
-            switch (to)
-            {
-                case Unit::Mm:
-                    return value;
-                case Unit::Cm:
-                    return value / 10.0;
-                case Unit::Inch:
-                    return value / 25.4;
-                case Unit::Px:
-                    return (value / 25.4) * PrintDPI;
-                default:
-                    break;
-            }
-            break;
-        case Unit::Cm:
-            switch (to)
-            {
-                case Unit::Mm:
-                    return value * 10.0;
-                case Unit::Cm:
-                    return value;
-                case Unit::Inch:
-                    return value / 2.54;
-                case Unit::Px:
-                    return ((value * 10.0) / 25.4) * PrintDPI;
-                default:
-                    break;
-            }
-            break;
-        case Unit::Inch:
-            switch (to)
-            {
-                case Unit::Mm:
-                    return value * 25.4;
-                case Unit::Cm:
-                    return value * 2.54;
-                case Unit::Inch:
-                    return value;
-                case Unit::Px:
-                    return value * PrintDPI;
-                default:
-                    break;
-            }
-            break;
-        case Unit::Px:
-            switch (to)
-            {
-                case Unit::Mm:
-                    return (value / PrintDPI) * 25.4;
-                case Unit::Cm:
-                    return ((value / PrintDPI) * 25.4) / 10.0;
-                case Unit::Inch:
-                    return value / PrintDPI;
-                case Unit::Px:
-                    return value;
-                default:
-                    break;
-            }
-            break;
-        default:
-            break;
-    }
-    return 0;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief UnitConvertor Converts the values of the given margin from given unit to the new unit.
- * returns a new instand of QMarginsF.
- */
-QMarginsF UnitConvertor(const QMarginsF &margins, const Unit &from, const Unit &to)
-{
-    const qreal left = UnitConvertor(margins.left(), from, to);
-    const qreal top = UnitConvertor(margins.top(), from, to);
-    const qreal right = UnitConvertor(margins.right(), from, to);
-    const qreal bottom = UnitConvertor(margins.bottom(), from, to);
-
-    return QMarginsF(left, top, right, bottom);
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------
-QStringList SupportedLocales()
-{
-    const QStringList locales = QStringList() << QStringLiteral("ru_RU")
-                                              << QStringLiteral("uk_UA")
-                                              << QStringLiteral("de_DE")
-                                              << QStringLiteral("cs_CZ")
-                                              << QStringLiteral("he_IL")
-                                              << QStringLiteral("fr_FR")
-                                              << QStringLiteral("it_IT")
-                                              << QStringLiteral("nl_NL")
-                                              << QStringLiteral("id_ID")
-                                              << QStringLiteral("es_ES")
-                                              << QStringLiteral("fi_FI")
-                                              << QStringLiteral("en_US")
-                                              << QStringLiteral("en_CA")
-                                              << QStringLiteral("en_IN")
-                                              << QStringLiteral("ro_RO")
-                                              << QStringLiteral("zh_CN")
-                                              << QStringLiteral("pt_BR")
-                                              << QStringLiteral("el_GR")
-                                              << QStringLiteral("pl_PL");
-
-    return locales;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief strippedName the function call around curFile to exclude the path to the file.
- * @param fullFileName full path to the file.
- * @return file name.
- */
-QString StrippedName(const QString &fullFileName)
-{
-    return QFileInfo(fullFileName).fileName();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString RelativeMPath(const QString &patternPath, const QString &absoluteMPath)
+auto RelativeMPath(const QString &patternPath, const QString &absoluteMPath) -> QString
 {
     if (patternPath.isEmpty() || absoluteMPath.isEmpty())
     {
@@ -410,7 +193,7 @@ QString RelativeMPath(const QString &patternPath, const QString &absoluteMPath)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString AbsoluteMPath(const QString &patternPath, const QString &relativeMPath)
+auto AbsoluteMPath(const QString &patternPath, const QString &relativeMPath) -> QString
 {
     if (patternPath.isEmpty() || relativeMPath.isEmpty())
     {
@@ -426,43 +209,8 @@ QString AbsoluteMPath(const QString &patternPath, const QString &relativeMPath)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSharedPointer<QPrinter> PreparePrinter(const QPrinterInfo &info, QPrinter::PrinterMode mode)
+auto GetMinPrinterFields(const QSharedPointer<QPrinter> &printer) -> QMarginsF
 {
-    QPrinterInfo tmpInfo = info;
-    if(tmpInfo.isNull() || tmpInfo.printerName().isEmpty())
-    {
-#if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
-        const QList<QPrinterInfo> list = QPrinterInfo::availablePrinters();
-        if(list.isEmpty())
-        {
-            return QSharedPointer<QPrinter>();
-        }
-        else
-        {
-            tmpInfo = list.first();
-        }
-#else
-    const QStringList list = QPrinterInfo::availablePrinterNames();
-    if(list.isEmpty())
-    {
-        return QSharedPointer<QPrinter>();
-    }
-    else
-    {
-        tmpInfo = QPrinterInfo::printerInfo(list.first());
-    }
-#endif
-    }
-
-    auto printer = QSharedPointer<QPrinter>(new QPrinter(tmpInfo, mode));
-    printer->setResolution(static_cast<int>(PrintDPI));
-    return printer;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QMarginsF GetMinPrinterFields(const QSharedPointer<QPrinter> &printer)
-{
-#if QT_VERSION >= QT_VERSION_CHECK(5, 3, 0)
     QPageLayout layout = printer->pageLayout();
     layout.setUnits(QPageLayout::Millimeter);
     const QMarginsF minMargins = layout.minimumMargins();
@@ -473,38 +221,29 @@ QMarginsF GetMinPrinterFields(const QSharedPointer<QPrinter> &printer)
     min.setTop(UnitConvertor(minMargins.top(), Unit::Mm, Unit::Px));
     min.setBottom(UnitConvertor(minMargins.bottom(), Unit::Mm, Unit::Px));
     return min;
-#else
-    auto tempPrinter = QSharedPointer<QPrinter>(new QPrinter(QPrinterInfo(* printer)));
-    tempPrinter->setFullPage(false);
-    tempPrinter->setPageMargins(0, 0, 0, 0, QPrinter::Millimeter);
-    return GetPrinterFields(tempPrinter);
-#endif //QT_VERSION >= QT_VERSION_CHECK(5, 3, 0)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMarginsF GetPrinterFields(const QSharedPointer<QPrinter> &printer)
+auto GetPrinterFields(const QSharedPointer<QPrinter> &printer) -> QMarginsF
 {
     if (printer.isNull())
     {
-        return QMarginsF();
+        return {};
     }
 
-    qreal left = 0;
-    qreal top = 0;
-    qreal right = 0;
-    qreal bottom = 0;
-    printer->getPageMargins(&left, &top, &right, &bottom, QPrinter::Millimeter);
     // We can't use Unit::Px because our dpi in most cases is different
+    const QMarginsF m = printer->pageLayout().margins(QPageLayout::Millimeter);
+
     QMarginsF def;
-    def.setLeft(UnitConvertor(left, Unit::Mm, Unit::Px));
-    def.setRight(UnitConvertor(right, Unit::Mm, Unit::Px));
-    def.setTop(UnitConvertor(top, Unit::Mm, Unit::Px));
-    def.setBottom(UnitConvertor(bottom, Unit::Mm, Unit::Px));
+    def.setLeft(UnitConvertor(m.left(), Unit::Mm, Unit::Px));
+    def.setRight(UnitConvertor(m.right(), Unit::Mm, Unit::Px));
+    def.setTop(UnitConvertor(m.top(), Unit::Mm, Unit::Px));
+    def.setBottom(UnitConvertor(m.bottom(), Unit::Mm, Unit::Px));
     return def;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPixmap darkenPixmap(const QPixmap &pixmap)
+auto darkenPixmap(const QPixmap &pixmap) -> QPixmap
 {
     QImage img = pixmap.toImage().convertToFormat(QImage::Format_ARGB32);
     const int imgh = img.height();
@@ -513,7 +252,9 @@ QPixmap darkenPixmap(const QPixmap &pixmap)
     {
         for (int x = 0; x < imgw; ++x)
         {
-            int h, s, v;
+            int h;
+            int s;
+            int v;
             QRgb pixel = img.pixel(x, y);
             const int a = qAlpha(pixel);
             QColor hsvColor(pixel);
@@ -532,98 +273,77 @@ QPixmap darkenPixmap(const QPixmap &pixmap)
 void ShowInGraphicalShell(const QString &filePath)
 {
 #ifdef Q_OS_MAC
-    QStringList args;
-    args << "-e";
-    args << "tell application \"Finder\"";
-    args << "-e";
-    args << "activate";
-    args << "-e";
-    args << "select POSIX file \""+filePath+"\"";
-    args << "-e";
-    args << "end tell";
-    QProcess::startDetached("osascript", args);
+    QStringList args{"-e", "tell application \"Finder\"",
+                     "-e", "activate",
+                     "-e", "select POSIX file \"" + filePath + "\"",
+                     "-e", "end tell"};
+    QProcess::startDetached(QStringLiteral("osascript"), args);
 #elif defined(Q_OS_WIN)
-    QProcess::startDetached(QString("explorer /select, \"%1\"").arg(QDir::toNativeSeparators(filePath)));
+    QProcess::startDetached(QStringLiteral("explorer"), QStringList{"/select", QDir::toNativeSeparators(filePath)});
 #else
-    const QString app = "xdg-open %d";
-    QString cmd;
-    for (int i = 0; i < app.size(); ++i)
-    {
-        QChar c = app.at(i);
-        if (c == QLatin1Char('%') && i < app.size()-1)
-        {
-            c = app.at(++i);
-            QString s;
-            if (c == QLatin1Char('d'))
-            {
-                s = QLatin1Char('"') + QFileInfo(filePath).path() + QLatin1Char('"');
-            }
-            else if (c == QLatin1Char('%'))
-            {
-                s = c;
-            }
-            else
-            {
-                s = QLatin1Char('%');
-                s += c;
-            }
-            cmd += s;
-            continue;
-        }
-        cmd += c;
-    }
-    QProcess::startDetached(cmd);
-#endif
+    const int timeout = 1000; // ms
+    auto const command = QStringLiteral("dbus-send --reply-timeout=%1 --session --dest=org.freedesktop.FileManager1 "
+                                        "--type=method_call /org/freedesktop/FileManager1 "
+                                        "org.freedesktop.FileManager1.ShowItems array:string:\"%2\" string:\"\"")
+                             .arg(timeout)
+                             .arg(QUrl::fromLocalFile(filePath).toString());
 
+    // Sending message through dbus will highlighting file
+    QProcess dbus;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    // This approach works too.
+    dbus.start(command, QStringList()); // clazy:exclude=qt6-deprecated-api-fixes
+#else
+    dbus.startCommand(command);
+#endif
+    if (not dbus.waitForStarted(timeout))
+    {
+        // This way will open only window without highlighting file
+        QDesktopServices::openUrl(QUrl::fromLocalFile(QFileInfo(filePath).path()));
+        return;
+    }
+
+    if (not dbus.waitForFinished(timeout))
+    {
+        // This way will open only window without highlighting file
+        QDesktopServices::openUrl(QUrl::fromLocalFile(QFileInfo(filePath).path()));
+        return;
+    }
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool IsOptionSet(int argc, char *argv[], const char *option)
+#ifdef Q_OS_MAC
+#if MACOS_LAYER_BACKING_AFFECTED
+void MacosEnableLayerBacking()
 {
-    for (int i = 1; i < argc; ++i)
+    QOperatingSystemVersion osVer = QOperatingSystemVersion::current();
+    const int majorVer = osVer.majorVersion();
+    const int minorVer = osVer.minorVersion();
+    if (((majorVer == 10 && minorVer >= 16) || majorVer >= 11) && qEnvironmentVariableIsEmpty("QT_MAC_WANTS_LAYER"))
     {
-        if (!qstrcmp(argv[i], option))
-        {
-            return true;
-        }
-    }
-    return false;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-// See issue #624. https://bitbucket.org/dismine/valentina/issues/624
-void InitHighDpiScaling(int argc, char *argv[])
-{
-    /* For more info see: http://doc.qt.io/qt-5/highdpi.html */
-    if (IsOptionSet(argc, argv, qPrintable(QLatin1String("--") + LONG_OPTION_NO_HDPI_SCALING)))
-    {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-        QCoreApplication::setAttribute(Qt::AA_DisableHighDpiScaling);
-#else
-        qputenv("QT_DEVICE_PIXEL_RATIO", QByteArray("1"));
-#endif
-    }
-    else
-    {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-        QApplication::setAttribute(Qt::AA_EnableHighDpiScaling); // DPI support
-#else
-        qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", QByteArray("1"));
-#endif
+        qputenv("QT_MAC_WANTS_LAYER", "1");
     }
 }
+#endif // MACOS_LAYER_BACKING_AFFECTED
+#endif // Q_OS_MAC
 
-const QString strOne   = QStringLiteral("one");
-const QString strTwo   = QStringLiteral("two");
-const QString strThree = QStringLiteral("three");
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strTMark, (QLatin1String("tMark")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strVMark, (QLatin1String("vMark")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strTMark, ("tMark"_L1))         // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strVMark, ("vMark"_L1))         // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strVMark2, ("vMark2"_L1))       // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strUMark, ("uMark"_L1))         // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strBoxMark, ("boxMark"_L1))     // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCheckMark, ("checkMark"_L1)) // NOLINT
+
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
-QString PassmarkLineTypeToString(PassmarkLineType type)
+auto PassmarkLineTypeToString(PassmarkLineType type) -> QString
 {
-    switch(type)
+    switch (type)
     {
         case PassmarkLineType::OneLine:
             return strOne;
@@ -633,8 +353,16 @@ QString PassmarkLineTypeToString(PassmarkLineType type)
             return strThree;
         case PassmarkLineType::TMark:
             return *strTMark;
-        case PassmarkLineType::VMark:
+        case PassmarkLineType::ExternalVMark:
             return *strVMark;
+        case PassmarkLineType::InternalVMark:
+            return *strVMark2;
+        case PassmarkLineType::UMark:
+            return *strUMark;
+        case PassmarkLineType::BoxMark:
+            return *strBoxMark;
+        case PassmarkLineType::CheckMark:
+            return *strCheckMark;
         default:
             break;
     }
@@ -643,11 +371,12 @@ QString PassmarkLineTypeToString(PassmarkLineType type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PassmarkLineType StringToPassmarkLineType(const QString &value)
+auto StringToPassmarkLineType(const QString &value) -> PassmarkLineType
 {
-    const QStringList values = QStringList() << strOne << strTwo << strThree << *strTMark << *strVMark;
+    const QStringList values{strOne,     strTwo,    strThree,    *strTMark,    *strVMark,
+                             *strVMark2, *strUMark, *strBoxMark, *strCheckMark};
 
-    switch(values.indexOf(value))
+    switch (values.indexOf(value))
     {
         case 0: // strOne
             return PassmarkLineType::OneLine;
@@ -658,26 +387,25 @@ PassmarkLineType StringToPassmarkLineType(const QString &value)
         case 3: // strTMark
             return PassmarkLineType::TMark;
         case 4: // strVMark
-            return PassmarkLineType::VMark;
+            return PassmarkLineType::ExternalVMark;
+        case 5: // strVMark2
+            return PassmarkLineType::InternalVMark;
+        case 6: // strUMark
+            return PassmarkLineType::UMark;
+        case 7: // strBoxMark
+            return PassmarkLineType::BoxMark;
+        case 8: // strCheckMark
+            return PassmarkLineType::CheckMark;
         default:
             break;
     }
     return PassmarkLineType::OneLine;
 }
 
-const QString strStraightforward       = QStringLiteral("straightforward");
-const QString strBisector              = QStringLiteral("bisector");
-const QString strIntersection          = QStringLiteral("intersection");
-const QString strIntersectionOnlyLeft  = QStringLiteral("intersectionLeft");
-const QString strIntersectionOnlyRight = QStringLiteral("intersectionRight");
-const QString strIntersection2          = QStringLiteral("intersection2");
-const QString strIntersection2OnlyLeft  = QStringLiteral("intersection2Left");
-const QString strIntersection2OnlyRight = QStringLiteral("intersection2Right");
-
 //---------------------------------------------------------------------------------------------------------------------
-QString PassmarkAngleTypeToString(PassmarkAngleType type)
+auto PassmarkAngleTypeToString(PassmarkAngleType type) -> QString
 {
-    switch(type)
+    switch (type)
     {
         case PassmarkAngleType::Straightforward:
             return strStraightforward;
@@ -696,25 +424,18 @@ QString PassmarkAngleTypeToString(PassmarkAngleType type)
         case PassmarkAngleType::Intersection2OnlyRight:
             return strIntersection2OnlyRight;
         default:
-            break;
+            return strStraightforward;
     }
-
-    return strStraightforward;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PassmarkAngleType StringToPassmarkAngleType(const QString &value)
+auto StringToPassmarkAngleType(const QString &value) -> PassmarkAngleType
 {
-    const QStringList values = QStringList() << strStraightforward
-                                             << strBisector
-                                             << strIntersection
-                                             << strIntersectionOnlyLeft
-                                             << strIntersectionOnlyRight
-                                             << strIntersection2
-                                             << strIntersection2OnlyLeft
-                                             << strIntersection2OnlyRight;
+    const QStringList values{
+        strStraightforward,       strBisector,      strIntersection,          strIntersectionOnlyLeft,
+        strIntersectionOnlyRight, strIntersection2, strIntersection2OnlyLeft, strIntersection2OnlyRight};
 
-    switch(values.indexOf(value))
+    switch (values.indexOf(value))
     {
         case 0:
             return PassmarkAngleType::Straightforward;
@@ -733,34 +454,80 @@ PassmarkAngleType StringToPassmarkAngleType(const QString &value)
         case 7:
             return PassmarkAngleType::Intersection2OnlyRight;
         default:
-            break;
+            return PassmarkAngleType::Straightforward;
     }
-    return PassmarkAngleType::Straightforward;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+auto FoldLineTypeToString(FoldLineType type) -> QString
+{
+    switch (type)
+    {
+        case FoldLineType::TwoArrowsTextUnder:
+            return strFoldTypeTwoArrowsTextUnder;
+        case FoldLineType::TwoArrows:
+            return strFoldTypeTwoArrows;
+        case FoldLineType::Text:
+            return strFoldTypeText;
+        case FoldLineType::ThreeDots:
+            return strFoldTypeThreeDots;
+        case FoldLineType::ThreeX:
+            return strFoldTypeThreeX;
+        case FoldLineType::None:
+            return strFoldTypeNone;
+        case FoldLineType::TwoArrowsTextAbove:
+        default:
+            return strFoldTypeTwoArrowsTextAbove;
+    }
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-Unit StrToUnits(const QString &unit)
+auto StringToFoldLineType(const QString &value) -> FoldLineType
 {
-    const QStringList units = QStringList() << unitMM << unitCM << unitINCH << unitPX;
-    Unit result = Unit::Cm;
+    const QStringList values{strFoldTypeTwoArrowsTextAbove, // 0
+                             strFoldTypeTwoArrowsTextUnder, // 1
+                             strFoldTypeTwoArrows,          // 2
+                             strFoldTypeText,               // 3
+                             strFoldTypeThreeDots,          // 4
+                             strFoldTypeThreeX,             // 5
+                             strFoldTypeNone};              // 6
+
+    switch (values.indexOf(value))
+    {
+        case 1:
+            return FoldLineType::TwoArrowsTextUnder;
+        case 2:
+            return FoldLineType::TwoArrows;
+        case 3:
+            return FoldLineType::Text;
+        case 4:
+            return FoldLineType::ThreeDots;
+        case 5:
+            return FoldLineType::ThreeX;
+        case 6:
+            return FoldLineType::None;
+        case 0:
+        default:
+            return FoldLineType::TwoArrowsTextAbove;
+    };
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto StrToUnits(const QString &unit) -> Unit
+{
+    const QStringList units{unitMM, unitCM, unitINCH, unitPX};
     switch (units.indexOf(unit))
     {
-        case 0:// mm
-            result = Unit::Mm;
-            break;
-        case 2:// inch
-            result = Unit::Inch;
-            break;
-        case 3:// px
-            result = Unit::Px;
-            break;
-        case 1:// cm
+        case 0: // mm
+            return Unit::Mm;
+        case 2: // inch
+            return Unit::Inch;
+        case 3: // px
+            return Unit::Px;
+        case 1: // cm
         default:
-            result = Unit::Cm;
-            break;
+            return Unit::Cm;
     }
-    return result;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -772,75 +539,197 @@ Unit StrToUnits(const QString &unit)
  * @param translate true if need show translated name. Default value false.
  * @return string reprezantation for unit.
  */
-QString UnitsToStr(const Unit &unit, const bool translate)
+auto UnitsToStr(const Unit &unit, const bool translate) -> QString
 {
-    QString result;
     switch (unit)
     {
         case Unit::Mm:
-            translate ? result = QObject::tr("mm") : result = unitMM;
-            break;
+            return translate ? QObject::tr("mm") : unitMM;
         case Unit::Inch:
-            translate ? result = QObject::tr("inch") : result = unitINCH;
-            break;
+            return translate ? QObject::tr("inch") : unitINCH;
         case Unit::Px:
-            translate ? result = QObject::tr("px") : result = unitPX;
-            break;
+            return translate ? QObject::tr("px") : unitPX;
+        case Unit::LAST_UNIT_DO_NOT_USE:
+            return {};
         case Unit::Cm:
         default:
-            translate ? result = QObject::tr("cm") : result = unitCM;
-            break;
+            return translate ? QObject::tr("cm") : unitCM;
     }
-    return result;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void InitLanguages(QComboBox *combobox)
 {
-    SCASSERT(combobox != nullptr)
-    combobox->clear();
-
-    QStringList fileNames;
-    QDirIterator it(qApp->translationsPath(), QStringList("valentina_*.qm"), QDir::Files, QDirIterator::Subdirectories);
-    while (it.hasNext())
-    {
-        it.next();
-        fileNames.append(it.fileName());
-    }
-
-    bool englishUS = false;
-    const QString en_US = QStringLiteral("en_US");
-
-    for (auto locale : fileNames)
-    {
-        // get locale extracted by filename           "valentina_de_De.qm"
-        locale.truncate(locale.lastIndexOf('.'));  // "valentina_de_De"
-        locale.remove(0, locale.indexOf('_') + 1); // "de_De"
-
-        if (not englishUS)
-        {
-            englishUS = (en_US == locale);
-        }
-
-        QLocale loc = QLocale(locale);
-        QString lang = loc.nativeLanguageName();
-        QIcon ico(QString("%1/%2.png").arg("://flags", QLocale::countryToString(loc.country())));
-
-        combobox->addItem(ico, lang, locale);
-    }
-
-    if (combobox->count() == 0 || not englishUS)
-    {
-        // English language is internal and doens't have own *.qm file.
-        QIcon ico(QString("%1/%2.png").arg("://flags", QLocale::countryToString(QLocale::UnitedStates)));
-        QString lang = QLocale(en_US).nativeLanguageName();
-        combobox->addItem(ico, lang, en_US);
-    }
+    InitLanguageList(combobox);
 
     // set default translators and language checked
-    qint32 index = combobox->findData(qApp->Settings()->GetLocale());
+    qint32 const index = combobox->findData(VAbstractApplication::VApp()->Settings()->GetLocale());
     if (index != -1)
     {
         combobox->setCurrentIndex(index);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void InitPieceLabelLanguages(QComboBox *combobox)
+{
+    InitLanguageList(combobox);
+
+    combobox->addItem(QApplication::translate("InitPieceLabelLanguages", "Default"),
+                      VCommonSettings::defaultPieceLabelLocale);
+
+    qint32 const index = combobox->findData(VAbstractApplication::VApp()->Settings()->GetPieceLabelLocale());
+    if (index != -1)
+    {
+        combobox->setCurrentIndex(index);
+    }
+}
+
+const quint32 CustomSARecord::streamHeader = 0xEBFF7586; // CRC-32Q string "CustomSARecord"
+const quint16 CustomSARecord::classVersion = 1;
+
+// Friend functions
+//---------------------------------------------------------------------------------------------------------------------
+auto operator<<(QDataStream &out, const CustomSARecord &record) -> QDataStream &
+{
+    out << CustomSARecord::streamHeader << CustomSARecord::classVersion;
+
+    // Added in classVersion = 1
+    out << record.startPoint;
+    out << record.path;
+    out << record.endPoint;
+    out << record.reverse;
+    out << record.includeType;
+
+    // Added in classVersion = 2
+
+    return out;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto operator>>(QDataStream &in, CustomSARecord &record) -> QDataStream &
+{
+    quint32 actualStreamHeader = 0;
+    in >> actualStreamHeader;
+
+    if (actualStreamHeader != CustomSARecord::streamHeader)
+    {
+        QString const message = QCoreApplication::tr("CustomSARecord prefix mismatch error: actualStreamHeader = 0x%1 "
+                                                     "and streamHeader = 0x%2")
+                                    .arg(actualStreamHeader, 8, 0x10, '0'_L1)
+                                    .arg(CustomSARecord::streamHeader, 8, 0x10, '0'_L1);
+        throw VException(message);
+    }
+
+    quint16 actualClassVersion = 0;
+    in >> actualClassVersion;
+
+    if (actualClassVersion > CustomSARecord::classVersion)
+    {
+        QString const message = QCoreApplication::tr("CustomSARecord compatibility error: actualClassVersion = %1 and "
+                                                     "classVersion = %2")
+                                    .arg(actualClassVersion)
+                                    .arg(CustomSARecord::classVersion);
+        throw VException(message);
+    }
+
+    in >> record.startPoint;
+    in >> record.path;
+    in >> record.endPoint;
+    in >> record.reverse;
+    in >> record.includeType;
+
+    //    if (actualClassVersion >= 2)
+    //    {
+
+    //    }
+
+    return in;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto IncrementTypeToString(IncrementType type) -> QString
+{
+    switch (type)
+    {
+        case IncrementType::Increment:
+            return strTypeIncrement;
+        case IncrementType::Separator:
+            return strTypeSeparator;
+        default:
+            break;
+    }
+
+    return strTypeIncrement;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto StringToIncrementType(const QString &value) -> IncrementType
+{
+    const QStringList values{strTypeIncrement, strTypeSeparator};
+
+    switch (values.indexOf(value))
+    {
+        case 0:
+            return IncrementType::Increment;
+        case 1:
+            return IncrementType::Separator;
+        default:
+            break;
+    }
+    return IncrementType::Increment;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto MeasurementTypeToString(MeasurementType type) -> QString
+{
+    switch (type)
+    {
+        case MeasurementType::Measurement:
+            return strTypeMeasurement;
+        case MeasurementType::Separator:
+            return strTypeSeparator;
+        default:
+            break;
+    }
+
+    return strTypeIncrement;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto StringToMeasurementType(const QString &value) -> MeasurementType
+{
+    const QStringList values{strTypeMeasurement, strTypeSeparator};
+
+    switch (values.indexOf(value))
+    {
+        case 0:
+            return MeasurementType::Measurement;
+        case 1:
+            return MeasurementType::Separator;
+        default:
+            break;
+    }
+    return MeasurementType::Measurement;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto SplitFilePaths(const QString &path) -> QStringList
+{
+    QStringList result;
+    QString subPath = QDir::cleanPath(path);
+    QString lastFileName;
+
+    do
+    {
+        QFileInfo const fileInfo(subPath);
+        lastFileName = fileInfo.fileName();
+        if (not lastFileName.isEmpty())
+        {
+            result.prepend(lastFileName);
+            subPath = fileInfo.path();
+        }
+    } while (not lastFileName.isEmpty());
+
+    return result;
 }

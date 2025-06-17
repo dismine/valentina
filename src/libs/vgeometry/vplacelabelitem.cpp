@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -27,43 +27,42 @@
  *************************************************************************/
 #include "vplacelabelitem.h"
 #include "vplacelabelitem_p.h"
-#include "../vpatterndb/vcontainer.h"
-#include "varc.h"
 
+#include <QObject>
+#include <QPainterPath>
 #include <QPolygonF>
 #include <QTransform>
+#include <QtDebug>
+#include <qnumeric.h>
 
 //---------------------------------------------------------------------------------------------------------------------
 VPlaceLabelItem::VPlaceLabelItem()
-    : VPointF(), d(new VPlaceLabelItemData)
+  : d(new VPlaceLabelItemData)
 {
     setType(GOType::PlaceLabel);
     setMode(Draw::Modeling);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPlaceLabelItem::VPlaceLabelItem(const VPlaceLabelItem &item)
-    : VPointF(item), d(item.d)
-{}
+COPY_CONSTRUCTOR_IMPL_2(VPlaceLabelItem, VPointF)
 
 //---------------------------------------------------------------------------------------------------------------------
-VPlaceLabelItem::~VPlaceLabelItem()
-{}
+VPlaceLabelItem::~VPlaceLabelItem() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPlaceLabelItem::GetWidthFormula() const
+auto VPlaceLabelItem::GetWidthFormula() const -> QString
 {
     return d->width;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString &VPlaceLabelItem::GetWidthFormula()
+auto VPlaceLabelItem::GetWidthFormula() -> QString &
 {
     return d->width;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPlaceLabelItem::GetWidth() const
+auto VPlaceLabelItem::GetWidth() const -> qreal
 {
     return d->wValue;
 }
@@ -76,19 +75,19 @@ void VPlaceLabelItem::SetWidth(qreal value, const QString &formula)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPlaceLabelItem::GetHeightFormula() const
+auto VPlaceLabelItem::GetHeightFormula() const -> QString
 {
     return d->height;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString &VPlaceLabelItem::GetHeightFormula()
+auto VPlaceLabelItem::GetHeightFormula() -> QString &
 {
     return d->height;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPlaceLabelItem::GetHeight() const
+auto VPlaceLabelItem::GetHeight() const -> qreal
 {
     return d->hValue;
 }
@@ -101,19 +100,19 @@ void VPlaceLabelItem::SetHeight(qreal value, const QString &formula)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPlaceLabelItem::GetAngleFormula() const
+auto VPlaceLabelItem::GetAngleFormula() const -> QString
 {
     return d->angle;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString &VPlaceLabelItem::GetAngleFormula()
+auto VPlaceLabelItem::GetAngleFormula() -> QString &
 {
     return d->angle;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPlaceLabelItem::GetAngle() const
+auto VPlaceLabelItem::GetAngle() const -> qreal
 {
     return d->aValue;
 }
@@ -126,19 +125,19 @@ void VPlaceLabelItem::SetAngle(qreal value, const QString &formula)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPlaceLabelItem::GetVisibilityTrigger() const
+auto VPlaceLabelItem::GetVisibilityTrigger() const -> QString
 {
     return d->visibilityTrigger;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString &VPlaceLabelItem::GetVisibilityTrigger()
+auto VPlaceLabelItem::GetVisibilityTrigger() -> QString &
 {
     return d->visibilityTrigger;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPlaceLabelItem::IsVisible() const
+auto VPlaceLabelItem::IsVisible() const -> bool
 {
     bool visible = true;
 
@@ -161,7 +160,7 @@ void VPlaceLabelItem::SetVisibilityTrigger(qreal visible, const QString &formula
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPlaceLabelItem::GetCorrectionAngle() const
+auto VPlaceLabelItem::GetCorrectionAngle() const -> qreal
 {
     return d->correctionAngle;
 }
@@ -173,7 +172,7 @@ void VPlaceLabelItem::SetCorrectionAngle(qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VPlaceLabelItem::GetCenterPoint() const
+auto VPlaceLabelItem::GetCenterPoint() const -> quint32
 {
     return d->centerPoint;
 }
@@ -185,7 +184,7 @@ void VPlaceLabelItem::SetCenterPoint(quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PlaceLabelType VPlaceLabelItem::GetLabelType() const
+auto VPlaceLabelItem::GetLabelType() const -> PlaceLabelType
 {
     return d->type;
 }
@@ -197,9 +196,37 @@ void VPlaceLabelItem::SetLabelType(PlaceLabelType type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPlaceLabelItem &VPlaceLabelItem::operator=(const VPlaceLabelItem &item)
+auto VPlaceLabelItem::IsNotMirrored() const -> bool
 {
-    if ( &item == this )
+    return d->notMirrored;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPlaceLabelItem::SetNotMirrored(bool value)
+{
+    d->notMirrored = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPlaceLabelItem::RotationMatrix() const -> QTransform
+{
+    QTransform t;
+    t.translate(x(), y());
+    t.rotate(-d->aValue - d->correctionAngle);
+    t.translate(-x(), -y());
+    return t;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPlaceLabelItem::Box() const -> QRectF
+{
+    return {0, 0, d->wValue, d->hValue};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPlaceLabelItem::operator=(const VPlaceLabelItem &item) -> VPlaceLabelItem &
+{
+    if (&item == this)
     {
         return *this;
     }
@@ -209,161 +236,16 @@ VPlaceLabelItem &VPlaceLabelItem::operator=(const VPlaceLabelItem &item)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PlaceLabelImg VPlaceLabelItem::LabelShape() const
+VPlaceLabelItem::VPlaceLabelItem(VPlaceLabelItem &&item) noexcept
+  : VPointF(std::move(item)),
+    d(std::move(item.d)) // NOLINT(bugprone-use-after-move)
 {
-    QTransform t;
-    t.translate(x(), y());
-    t.rotate(-d->aValue-d->correctionAngle);
-    t.translate(-x(), -y());
+}
 
-    auto SegmentShape = [t, this]()
-    {
-        QPolygonF shape;
-        shape << QPointF(x(), y() - d->hValue/2.0) << QPointF(x(), y() + d->hValue/2.0);
-
-        return PlaceLabelImg({t.map(shape)});
-    };
-
-    auto RectangleShape = [t, this]()
-    {
-        QRectF rect(QPointF(x() - d->wValue/2.0, y() - d->hValue/2.0),
-                    QPointF(x() + d->wValue/2.0, y() + d->hValue/2.0));
-
-        QPolygonF shape;
-        shape << rect.topLeft() << rect.topRight() << rect.bottomRight() << rect.bottomLeft() << rect.topLeft();
-
-        return PlaceLabelImg({t.map(shape)});
-    };
-
-    auto CrossShape = [t, this]()
-    {
-        QPolygonF shape1;
-        shape1 << QPointF(x(), y() - d->hValue/2.0)
-               << QPointF(x(), y() + d->hValue/2.0);
-
-        QPolygonF shape2;
-        shape2 << QPointF(x() - d->wValue/2.0, y())
-               << QPointF(x() + d->wValue/2.0, y());
-
-        return PlaceLabelImg({t.map(shape1), t.map(shape2)});
-    };
-
-    auto TshapedShape = [t, this]()
-    {
-        QPointF center2(x(), y() + d->hValue/2.0);
-
-        QPolygonF shape1;
-        shape1 << QPointF(x(), y()) << center2;
-
-        QPolygonF shape2;
-        shape2 << QPointF(center2.x() - d->wValue/2.0, center2.y())
-               << QPointF(center2.x() + d->wValue/2.0, center2.y());
-
-        return PlaceLabelImg({t.map(shape1), t.map(shape2)});
-    };
-
-    auto DoubletreeShape = [t, this]()
-    {
-        QRectF rect(QPointF(x() - d->wValue/2.0, y() - d->hValue/2.0),
-                    QPointF(x() + d->wValue/2.0, y() + d->hValue/2.0));
-
-        QPolygonF shape1;
-        shape1 << rect.topLeft() << rect.bottomRight();
-
-        QPolygonF shape2;
-        shape2 << rect.topRight() << rect.bottomLeft();
-
-        return PlaceLabelImg({t.map(shape1), t.map(shape2)});
-    };
-
-    auto CornerShape = [t, this]()
-    {
-        QPolygonF shape1;
-        shape1 << QPointF(x(), y()) << QPointF(x(), y() + d->hValue/2.0);
-
-        QPolygonF shape2;
-        shape2 << QPointF(x() - d->wValue/2.0, y()) << QPointF(x(), y());
-
-        return PlaceLabelImg({t.map(shape1), t.map(shape2)});
-    };
-
-    auto TriangleShape = [t, this]()
-    {
-        QRectF rect(QPointF(x() - d->wValue/2.0, y() - d->hValue/2.0),
-                    QPointF(x() + d->wValue/2.0, y() + d->hValue/2.0));
-
-        QPolygonF shape;
-        shape << rect.topLeft() << rect.topRight() << rect.bottomRight() << rect.topLeft();
-
-        return PlaceLabelImg({t.map(shape)});
-    };
-
-    auto HshapedShape = [t, this]()
-    {
-        const QPointF center1 (x(), y() - d->hValue/2.0);
-        const QPointF center2 (x(), y() + d->hValue/2.0);
-
-        QPolygonF shape1;
-        shape1 << center1 << center2;
-
-        QPolygonF shape2;
-        shape2 << QPointF(center1.x() - d->wValue/2.0, center1.y())
-               << QPointF(center1.x() + d->wValue/2.0, center1.y());
-
-        QPolygonF shape3;
-        shape3 << QPointF(center2.x() - d->wValue/2.0, center2.y())
-               << QPointF(center2.x() + d->wValue/2.0, center2.y());
-
-        return PlaceLabelImg({t.map(shape1), t.map(shape2), t.map(shape3)});
-    };
-
-    auto ButtonShape = [t, this]()
-    {
-        const qreal radius = qMin(d->wValue/2.0, d->hValue/2.0);
-        QPolygonF shape1;
-        shape1 << QPointF(x(), y() - radius)
-               << QPointF(x(), y() + radius);
-
-        QPolygonF shape2;
-        shape2 << QPointF(x() - radius, y())
-               << QPointF(x() + radius, y());
-
-        const qreal circleSize = 0.85;
-        VArc arc(*this, radius*circleSize, 0, 360);
-        arc.SetApproximationScale(10);
-        QPolygonF shape3(arc.GetPoints());
-        if (not shape3.isClosed() && not shape3.isEmpty())
-        {
-            shape3 << shape3.first();
-        }
-
-        return PlaceLabelImg({t.map(shape1), t.map(shape2), t.map(shape3)});
-    };
-
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Wswitch-default")
-        switch(d->type)
-        {
-            case PlaceLabelType::Segment:
-                return SegmentShape();
-            case PlaceLabelType::Rectangle:
-                return RectangleShape();
-            case PlaceLabelType::Cross:
-                return CrossShape();
-            case PlaceLabelType::Tshaped:
-                return TshapedShape();
-            case PlaceLabelType::Doubletree:
-                return DoubletreeShape();
-            case PlaceLabelType::Corner:
-                return CornerShape();
-            case PlaceLabelType::Triangle:
-                return TriangleShape();
-            case PlaceLabelType::Hshaped:
-                return HshapedShape();
-            case PlaceLabelType::Button:
-                return ButtonShape();
-        }
-    QT_WARNING_POP
-
-        return PlaceLabelImg();
+//---------------------------------------------------------------------------------------------------------------------
+auto VPlaceLabelItem::operator=(VPlaceLabelItem &&item) noexcept -> VPlaceLabelItem &
+{
+    VPointF::operator=(item);
+    std::swap(d, item.d);
+    return *this;
 }

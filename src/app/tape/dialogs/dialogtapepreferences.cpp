@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -27,21 +27,28 @@
  *************************************************************************/
 
 #include "dialogtapepreferences.h"
-#include "ui_dialogtapepreferences.h"
 #include "../mapplication.h"
+#include "../vtools/dialogs/dialogtoolbox.h"
 #include "configpages/tapepreferencesconfigurationpage.h"
 #include "configpages/tapepreferencespathpage.h"
+#include "ui_dialogtapepreferences.h"
 
+#include <QMessageBox>
 #include <QPushButton>
 #include <QShowEvent>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 DialogTapePreferences::DialogTapePreferences(QWidget *parent)
-    :QDialog(parent),
-     ui(new Ui::DialogTapePreferences),
-     m_isInitialized(false),
-     m_configurationPage(new TapePreferencesConfigurationPage),
-     m_pathPage(new TapePreferencesPathPage)
+  : QDialog(parent),
+    ui(new Ui::DialogTapePreferences),
+    m_configurationPage(new TapePreferencesConfigurationPage),
+    m_pathPage(new TapePreferencesPathPage)
 {
     ui->setupUi(this);
 
@@ -49,7 +56,7 @@ DialogTapePreferences::DialogTapePreferences(QWidget *parent)
     setWindowFlags(Qt::Window);
 #endif
 
-    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+    VAbstractApplication::VApp()->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
     QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     SCASSERT(bOk != nullptr)
@@ -75,8 +82,8 @@ DialogTapePreferences::~DialogTapePreferences()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogTapePreferences::showEvent(QShowEvent *event)
 {
-    QDialog::showEvent( event );
-    if ( event->spontaneous() )
+    QDialog::showEvent(event);
+    if (event->spontaneous())
     {
         return;
     }
@@ -87,15 +94,12 @@ void DialogTapePreferences::showEvent(QShowEvent *event)
     }
     // do your init stuff here
 
-    setMinimumSize(size());
-
-    QSize sz = qApp->Settings()->GetPreferenceDialogSize();
-    if (sz.isEmpty() == false)
+    if (QSize const sz = VAbstractApplication::VApp()->Settings()->GetPreferenceDialogSize(); not sz.isEmpty())
     {
         resize(sz);
     }
 
-    m_isInitialized = true;//first show windows are held
+    m_isInitialized = true; // first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -107,7 +111,7 @@ void DialogTapePreferences::resizeEvent(QResizeEvent *event)
     // dialog creating, which would
     if (m_isInitialized)
     {
-        qApp->Settings()->SetPreferenceDialogSize(size());
+        VAbstractApplication::VApp()->Settings()->SetPreferenceDialogSize(size());
     }
 }
 
@@ -119,6 +123,12 @@ void DialogTapePreferences::changeEvent(QEvent *event)
         // retranslate designer form (single inheritance approach)
         ui->retranslateUi(this);
     }
+
+    if (event->type() == QEvent::PaletteChange)
+    {
+        InitDialogButtonBoxIcons(ui->buttonBox);
+    }
+
     // remember to call base class implementation
     QDialog::changeEvent(event);
 }
@@ -126,10 +136,20 @@ void DialogTapePreferences::changeEvent(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogTapePreferences::Apply()
 {
-    m_configurationPage->Apply();
-    m_pathPage->Apply();
+    QStringList preferences;
 
-    qApp->TapeSettings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+    preferences += m_configurationPage->Apply();
+    preferences += m_pathPage->Apply();
+
+    if (not preferences.isEmpty())
+    {
+        const QString text =
+            tr("Followed %n option(s) require restart to take effect: %1.", "", static_cast<int>(preferences.size()))
+                .arg(preferences.join(", "_L1));
+        QMessageBox::information(this, QCoreApplication::applicationName(), text);
+    }
+
+    MApplication::VApp()->TapeSettings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
     emit UpdateProperties();
     setResult(QDialog::Accepted);
 }
@@ -148,6 +168,6 @@ void DialogTapePreferences::PageChanged(QListWidgetItem *current, QListWidgetIte
     {
         current = previous;
     }
-    int rowIndex = ui->contentsWidget->row(current);
+    int const rowIndex = ui->contentsWidget->row(current);
     ui->pagesWidget->setCurrentIndex(rowIndex);
 }

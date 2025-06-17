@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -31,95 +31,113 @@
 #include <QGraphicsEllipseItem>
 #include <QGraphicsLineItem>
 #include <QSharedPointer>
-#include <Qt>
 #include <new>
 
 #include "../../tools/drawTools/toolpoint/toolsinglepoint/vtoolpointfromcircleandtangent.h"
-#include "../ifc/ifcdef.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
-#include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
+#include "../vmisc/vmodifierkey.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/global.h"
 #include "visline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPointFromCircleAndTangent::VisToolPointFromCircleAndTangent(const VContainer *data, QGraphicsItem *parent)
-    : VisLine(data, parent), object2Id(NULL_ID), cRadius(0), crossPoint(CrossCirclesPoint::FirstPoint),
-      point(nullptr), tangent(nullptr), cCenter(nullptr), cPath(nullptr), tangent2(nullptr)
+  : VisLine(data, parent)
 {
-    cPath = InitItem<QGraphicsEllipseItem>(Qt::darkGreen, this);
-    point = InitPoint(mainColor, this);
-    tangent = InitPoint(supportColor, this);
-    cCenter = InitPoint(supportColor, this); //-V656
-    tangent2 = InitItem<VScaledLine>(supportColor, this);
+    SetColorRole(VColorRole::VisSupportColor);
+
+    m_cPath = InitItem<VScaledEllipse>(VColorRole::VisSupportColor2, this);
+    m_cPath->SetPointMode(false);
+    m_point = InitPoint(VColorRole::VisMainColor, this);
+    m_tangent = InitPoint(VColorRole::VisSupportColor, this);
+    m_cCenter = InitPoint(VColorRole::VisSupportColor, this); //-V656
+    m_tangent2 = InitItem<VScaledLine>(VColorRole::VisSupportColor, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolPointFromCircleAndTangent::RefreshGeometry()
 {
-    if (object1Id > NULL_ID)// tangent point
+    if (m_pointId > NULL_ID) // tangent point
     {
-        const QSharedPointer<VPointF> tan = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(tangent, static_cast<QPointF>(*tan), supportColor);
+        const QSharedPointer<VPointF> tan = GetData()->GeometricObject<VPointF>(m_pointId);
+        DrawPoint(m_tangent, static_cast<QPointF>(*tan));
 
-        if (object2Id > NULL_ID)// circle center
+        if (m_centerId > NULL_ID) // circle center
         {
-            const QSharedPointer<VPointF> center = Visualization::data->GeometricObject<VPointF>(object2Id);
-            DrawPoint(cCenter, static_cast<QPointF>(*center), supportColor);
+            const QSharedPointer<VPointF> center = GetData()->GeometricObject<VPointF>(m_centerId);
+            DrawPoint(m_cCenter, static_cast<QPointF>(*center));
 
-            if (cRadius > 0)
+            if (m_cRadius > 0)
             {
-                cPath->setRect(PointRect(cRadius));
-                DrawPoint(cPath, static_cast<QPointF>(*center), Qt::darkGreen, Qt::DashLine);
+                m_cPath->setRect(PointRect(m_cRadius));
+                DrawPoint(m_cPath, static_cast<QPointF>(*center), Qt::DashLine);
 
-                FindRays(static_cast<QPointF>(*tan), static_cast<QPointF>(*center), cRadius);
+                FindRays(static_cast<QPointF>(*tan), static_cast<QPointF>(*center), m_cRadius);
 
                 QPointF fPoint;
                 VToolPointFromCircleAndTangent::FindPoint(static_cast<QPointF>(*tan), static_cast<QPointF>(*center),
-                                                          cRadius, crossPoint, &fPoint);
-                DrawPoint(point, fPoint, mainColor);
+                                                          m_cRadius, m_crossPoint, &fPoint);
+                DrawPoint(m_point, fPoint);
+            }
+            else if (GetMode() == Mode::Creation)
+            {
+                QLineF const cursorLine(static_cast<QPointF>(*center), ScenePos());
+                qreal const len = cursorLine.length();
+
+                m_cPath->setRect(PointRect(len));
+                DrawPoint(m_cPath, static_cast<QPointF>(*center), Qt::DashLine);
+
+                FindRays(static_cast<QPointF>(*tan), static_cast<QPointF>(*center), len);
+
+                QPointF fPoint;
+                VToolPointFromCircleAndTangent::FindPoint(static_cast<QPointF>(*tan), static_cast<QPointF>(*center),
+                                                          len, m_crossPoint, &fPoint);
+                DrawPoint(m_point, fPoint);
+
+                const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
+                SetToolTip(tr("Radius = %1%2; "
+                              "<b>Mouse click</b> - finish selecting the radius, "
+                              "<b>%3</b> - skip")
+                               .arg(LengthToUser(len), prefix, VModifierKey::EnterKey()));
             }
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolPointFromCircleAndTangent::setObject2Id(const quint32 &value)
+void VisToolPointFromCircleAndTangent::VisualMode(quint32 id)
 {
-    object2Id = value;
+    m_pointId = id;
+    StartVisualMode();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolPointFromCircleAndTangent::setCRadius(const QString &value)
+void VisToolPointFromCircleAndTangent::SetCRadius(const QString &value)
 {
-    cRadius = FindLengthFromUser(value, Visualization::data->DataVariables());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolPointFromCircleAndTangent::setCrossPoint(const CrossCirclesPoint &value)
-{
-    crossPoint = value;
+    m_cRadius = FindLengthFromUser(value, GetData()->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolPointFromCircleAndTangent::FindRays(const QPointF &p, const QPointF &center, qreal radius)
 {
     QPointF p1, p2;
-    const int res = VGObject::ContactPoints (p, center, radius, p1, p2);
+    const int res = VGObject::ContactPoints(p, center, radius, p1, p2);
 
-    switch(res)
+    switch (res)
     {
         case 2:
-            DrawRay(this, p, p1, supportColor, Qt::DashLine);
-            DrawRay(tangent2, p, p2, supportColor, Qt::DashLine);
+            DrawRay(this, p, p1, Qt::DashLine);
+            DrawRay(m_tangent2, p, p2, Qt::DashLine);
             break;
         case 1:
-            DrawRay(this, p, p1, supportColor, Qt::DashLine);
-            tangent2->setVisible(false);
+            DrawRay(this, p, p1, Qt::DashLine);
+            m_tangent2->setVisible(false);
             break;
         default:
             this->setVisible(false);
-            tangent2->setVisible(false);
+            m_tangent2->setVisible(false);
             break;
     }
 }

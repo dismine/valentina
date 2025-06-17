@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>396</width>
-    <height>414</height>
+    <height>443</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -99,11 +99,11 @@
             <string>Formula wizard</string>
            </property>
            <property name="text">
-            <string notr="true">...</string>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset resource="../../../../vmisc/share/resources/icon.qrc">
-             <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
+             <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -119,7 +119,7 @@
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap resource="../../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
+            <pixmap resource="../../../../vmisc/share/resources/icon.qrc">:/icon/light/24x24/equal.png</pixmap>
            </property>
           </widget>
          </item>
@@ -195,8 +195,7 @@
             <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="go-down">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="go-down"/>
            </property>
            <property name="iconSize">
             <size>
@@ -282,11 +281,11 @@
             <string>Formula wizard</string>
            </property>
            <property name="text">
-            <string notr="true">...</string>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset resource="../../../../vmisc/share/resources/icon.qrc">
-             <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
+             <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -302,7 +301,7 @@
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap resource="../../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
+            <pixmap resource="../../../../vmisc/share/resources/icon.qrc">:/icon/light/24x24/equal.png</pixmap>
            </property>
           </widget>
          </item>
@@ -378,8 +377,7 @@
             <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="go-down">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="go-down"/>
            </property>
            <property name="iconSize">
             <size>
@@ -465,11 +463,11 @@
             <string>Formula wizard</string>
            </property>
            <property name="text">
-            <string notr="true">...</string>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset resource="../../../../vmisc/share/resources/icon.qrc">
-             <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
+             <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -485,7 +483,7 @@
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap resource="../../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
+            <pixmap resource="../../../../vmisc/share/resources/icon.qrc">:/icon/light/24x24/equal.png</pixmap>
            </property>
           </widget>
          </item>
@@ -564,8 +562,7 @@
             <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="go-down">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="go-down"/>
            </property>
            <property name="iconSize">
             <size>
@@ -616,6 +613,13 @@
           <widget class="QComboBox" name="comboBoxLabelType"/>
          </item>
         </layout>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="checkBoxNotMirrored">
+         <property name="text">
+          <string>Not mirrored</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -698,11 +702,11 @@
             <string>Formula wizard</string>
            </property>
            <property name="text">
-            <string notr="true">...</string>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset resource="../../../../vmisc/share/resources/icon.qrc">
-             <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
+             <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -718,7 +722,7 @@
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap resource="../../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
+            <pixmap resource="../../../../vmisc/share/resources/icon.qrc">:/icon/light/24x24/equal.png</pixmap>
            </property>
           </widget>
          </item>
@@ -797,8 +801,7 @@
             <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="go-down">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="go-down"/>
            </property>
            <property name="iconSize">
             <size>
@@ -846,7 +849,7 @@
   <customwidget>
    <class>VPlainTextEdit</class>
    <extends>QPlainTextEdit</extends>
-   <header location="global">vplaintextedit.h</header>
+   <header>../vwidgets/vplaintextedit.h</header>
   </customwidget>
  </customwidgets>
  <resources>

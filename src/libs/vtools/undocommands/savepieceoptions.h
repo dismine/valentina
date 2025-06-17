@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -31,12 +31,12 @@
 
 #include <QtGlobal>
 
-#include "vpiece.h"
+#include "../vpatterndb/vpiece.h"
 #include "vundocommand.h"
 
 class SavePieceOptions : public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     SavePieceOptions(const VPiece &oldDet, const VPiece &newDet, VAbstractPattern *doc, quint32 id,
                      QUndoCommand *parent = nullptr);
@@ -44,27 +44,28 @@ public:
 
     virtual void undo() override;
     virtual void redo() override;
-    virtual bool mergeWith(const QUndoCommand *command) override;
-    virtual int  id() const override;
-    quint32      DetId() const;
-    VPiece       NewDet() const;
+    virtual auto mergeWith(const QUndoCommand *command) -> bool override;
+    virtual auto id() const -> int override;
+    auto DetId() const -> quint32;
+    auto NewDet() const -> VPiece;
 signals:
     void UpdateGroups();
 private:
-    Q_DISABLE_COPY(SavePieceOptions)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(SavePieceOptions) // NOLINT
 
     const VPiece    m_oldDet;
     VPiece          m_newDet;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline quint32 SavePieceOptions::DetId() const
+inline auto SavePieceOptions::DetId() const -> quint32
 {
     return nodeId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline VPiece SavePieceOptions::NewDet() const
+inline auto SavePieceOptions::NewDet() const -> VPiece
 {
     return m_newDet;
 }

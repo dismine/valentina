@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -30,29 +30,24 @@
 
 #include <QPen>
 
-#include "../ifc/ifcdef.h"
-#include "../vmisc/vabstractapplication.h"
-#include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
+#include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vsimplepoint.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisPath::VisPath(const VContainer *data, QGraphicsItem *parent)
-    : Visualization(data),
-      VCurvePathItem(parent),
-      m_approximationScale(0)
+  : Visualization(data),
+    VCurvePathItem(VColorRole::VisMainColor, parent)
 {
-    this->setZValue(1);// Show on top real tool
-    InitPen();
+    setZValue(1); // Show on top real tool
+    VisPath::InitPen();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisPath::InitPen()
 {
     QPen visPen = pen();
-    visPen.setColor(mainColor);
-    visPen.setStyle(lineStyle);
-
+    visPen.setStyle(LineStyle());
     setPen(visPen);
 }
 
@@ -63,27 +58,24 @@ void VisPath::AddOnScene()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSimplePoint *VisPath::GetPoint(QVector<VSimplePoint *> &points, quint32 i, const QColor &color)
+auto VisPath::GetPoint(QVector<VSimplePoint *> &points, quint32 i, VColorRole role) -> VSimplePoint *
 {
     if (not points.isEmpty() && static_cast<quint32>(points.size() - 1) >= i)
     {
         return points.at(static_cast<int>(i));
     }
-    else
-    {
-        VSimplePoint *point = new VSimplePoint(NULL_ID, color);
-        point->SetPointHighlight(true);
-        point->setParentItem(this);
-        point->SetVisualizationMode(true);
-        points.append(point);
 
-        return point;
-    }
-    return nullptr;
+    auto *point = new VSimplePoint(NULL_ID, role);
+    point->SetPointHighlight(true);
+    point->setParentItem(this);
+    point->SetVisualizationMode(true);
+    points.append(point);
+
+    return point;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisPath::setApproximationScale(qreal approximationScale)
+void VisPath::SetApproximationScale(qreal approximationScale)
 {
     m_approximationScale = approximationScale;
 }

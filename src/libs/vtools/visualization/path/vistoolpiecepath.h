@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -39,32 +39,47 @@ class VSimplePoint;
 
 class VisToolPiecePath : public VisPath
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
-    VisToolPiecePath(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolPiecePath() Q_DECL_EQ_DEFAULT;
+    explicit VisToolPiecePath(const VContainer *data, QGraphicsItem *parent = nullptr);
+    ~VisToolPiecePath() override = default;
 
-    virtual void RefreshGeometry() override;
-    void         SetPath(const VPiecePath &path);
-    void         SetCuttingPath(const QVector<QPointF> &cuttingPath);
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolPiecePath)};
+    void RefreshGeometry() override;
+    void VisualMode(quint32 id = NULL_ID) override;
+
+    void SetPath(const VPiecePath &path);
+    void SetCuttingPath(const QVector<QPointF> &cuttingPath);
+
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ToolPiecePath)};
 protected:
-    virtual void mousePressEvent( QGraphicsSceneMouseEvent * event ) override;
+    void mousePressEvent( QGraphicsSceneMouseEvent * event ) override;
 
 private:
-    Q_DISABLE_COPY(VisToolPiecePath)
-    QVector<VSimplePoint *> m_points;
+    Q_DISABLE_COPY_MOVE(VisToolPiecePath) // NOLINT
+    QVector<VSimplePoint *> m_points{};
 
-    VScaledLine *m_line;
+    VScaledLine *m_line{nullptr};
 
-    VPiecePath m_path;
+    VPiecePath m_path{};
 
-    QVector<QPointF> m_cuttingPath;
+    QVector<QPointF> m_cuttingPath{};
 
-    VSimplePoint *GetPoint(quint32 i, const QColor &color);
+    auto GetPoint(quint32 i, VColorRole role) -> VSimplePoint *;
 
     void HideAllItems();
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolPiecePath::SetPath(const VPiecePath &path)
+{
+    m_path = path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolPiecePath::SetCuttingPath(const QVector<QPointF> &cuttingPath)
+{
+    m_cuttingPath = cuttingPath;
+}
 
 #endif // VISTOOLPIECEPATH_H

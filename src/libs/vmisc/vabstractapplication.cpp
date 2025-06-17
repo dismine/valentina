@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -28,71 +28,122 @@
 
 #include "vabstractapplication.h"
 
+#include "compatibility.h"
+#include "svgfont/vsvgfontdatabase.h"
+#include "vlockguard.h"
+#include "vtranslator.h"
+
+#include "QtConcurrent/qtconcurrentrun.h"
 #include <QDir>
+#include <QDirIterator>
+#include <QFileSystemWatcher>
+#include <QFuture>
 #include <QLibraryInfo>
+#include <QLoggingCategory>
 #include <QMessageLogger>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
+#include <QScopeGuard>
+#include <QStandardPaths>
+#include <QTimeZone>
 #include <QTranslator>
 #include <QUndoStack>
-#include <Qt>
+#include <QWidget>
 #include <QtDebug>
 
-#include "../vmisc/def.h"
-#include "../vmisc/logging.h"
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#include "literals.h"
+#endif
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include "vtextcodec.h"
+#else
+#include <QTextCodec>
+#endif
+
+#ifdef Q_OS_UNIX
+#include <unistd.h>
+#endif
+
+#if defined(APPIMAGE) && defined(Q_OS_LINUX)
+#include "appimage.h"
+#endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
+
+using namespace Qt::Literals::StringLiterals;
+
+namespace
+{
+constexpr auto DAYS_TO_KEEP_LOGS = 3;
+
+auto FilterLocales(const QStringList &locales) -> QStringList
+{
+    QStringList filtered;
+    for (const auto &locale : locales)
+    {
+        if (not locale.startsWith("ru"_L1) && not locale.startsWith("ir"_L1))
+        {
+            filtered.append(locale);
+        }
+    }
+
+    return filtered;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto LoadQM(QTranslator *translator, const QString &filename, const QString &locale, const QString &qmDir) -> bool
+{
+    QStringList languages;
+    if (not locale.isEmpty())
+    {
+        languages.append(locale);
+    }
+    else
+    {
+        languages = QLocale().uiLanguages();
+    }
+
+    languages = FilterLocales(languages);
+
+    for (auto &locale : languages)
+    {
+        const bool loaded = translator->load(filename + locale, qmDir);
+        if (loaded)
+        {
+            return loaded;
+        }
+    }
+
+    return false;
+}
+} // namespace
+
+const QString VAbstractApplication::warningMessageSignature = QStringLiteral("[PATTERN MESSAGE]");
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractApplication::VAbstractApplication(int &argc, char **argv)
-    :QApplication(argc, argv),
-      undoStack(new QUndoStack(this)),
-      mainWindow(nullptr),
-      settings(nullptr),
-      qtTranslator(nullptr),
-      qtxmlTranslator(nullptr),
-      qtBaseTranslator(nullptr),
-      appTranslator(nullptr),
-      pmsTranslator(nullptr),
-      _patternUnit(Unit::Cm),
-      _patternType(MeasurementsType::Unknown),
-      patternFilePath(),
-      currentScene(nullptr),
-      sceneView(nullptr),
-      doc(nullptr),
-      m_customerName(),
-      m_userMaterials(),
-      openingPattern(false),
-      mode(Draw::Calculation)
+  : QApplication(argc, argv),
+    undoStack(new QUndoStack(this))
 {
+#if defined(V_NO_ASSERT)
     QString rules;
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
-    // In Qt 5.2 need manualy enable debug information for categories. This work
-    // because Qt doesn't provide debug information for categories itself. And in this
-    // case will show our messages. Another situation with Qt 5.3 that has many debug
-    // messages itself. We don't need this information and can turn on later if need.
-    // But here Qt already show our debug messages without enabling.
-    rules += QLatin1String("*.debug=true\n");
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
-
-#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 1)
-#if defined(V_NO_ASSERT)
     // Ignore SSL-related warnings
     // See issue #528: Error: QSslSocket: cannot resolve SSLv2_client_method.
-    rules += QLatin1String("qt.network.ssl.warning=false\n");
+    rules += "qt.network.ssl.warning=false\n"_L1;
     // See issue #568: Certificate checking on Mac OS X.
-    rules += QLatin1String("qt.network.ssl.critical=false\n"
-                           "qt.network.ssl.fatal=false\n");
-#endif //defined(V_NO_ASSERT)
-#endif // QT_VERSION >= QT_VERSION_CHECK(5, 4, 1)
+    rules += "qt.network.ssl.critical=false\n"
+             "qt.network.ssl.fatal=false\n"_L1;
 
-    // cppcheck-suppress reademptycontainer
+    // See issue #992: QXcbConnection: XCB Error.
+    rules += "qt.qpa*=false\n"_L1;
+    rules += "kf5.kio.core*=false\n"_L1;
+    rules += "qt.gui.icc.warning=false\n"_L1;
+
     if (not rules.isEmpty())
     {
         QLoggingCategory::setFilterRules(rules);
     }
+#endif
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     // Enable support for HiDPI bitmap resources
     // The attribute is available since Qt 5.1, but by default disabled.
     // Because on Windows and Mac OS X we always use last version
@@ -109,18 +160,24 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
     setAttribute(Qt::AA_UseHighDpiPixmaps);
 #endif
 
-    connect(this, &QApplication::aboutToQuit, this, [this]()
-    {
-        // If try to use the method QApplication::exit program can't sync settings and show warning about QApplication
-        // instance. Solution is to call sync() before quit.
-        // Connect this slot with VApplication::aboutToQuit.
-        Settings()->sync();
-    });
+    connect(this, &QApplication::aboutToQuit, this, &VAbstractApplication::AboutToQuit);
+
+    m_uptimeTimer.start();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractApplication::~VAbstractApplication()
-{}
+{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    QHashIterator i(m_codecs);
+    while (i.hasNext())
+    {
+        i.next();
+        delete i.value();
+    }
+#endif
+    delete m_svgFontDatabase;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -129,9 +186,9 @@ VAbstractApplication::~VAbstractApplication()
  * subdirectory inside an app bundle.
  * @return path to a directory that contain QM files.
  */
-QString VAbstractApplication::translationsPath(const QString &locale) const
+auto VAbstractApplication::translationsPath(const QString &locale) -> QString
 {
-    const QString trPath = QStringLiteral("/translations");
+    const auto trPath = QStringLiteral("/translations");
 #ifdef Q_OS_WIN
     Q_UNUSED(locale)
     return QCoreApplication::applicationDirPath() + trPath;
@@ -139,12 +196,11 @@ QString VAbstractApplication::translationsPath(const QString &locale) const
     QString mainPath;
     if (locale.isEmpty())
     {
-        mainPath = QCoreApplication::applicationDirPath() + QLatin1String("/../Resources") + trPath;
+        mainPath = QCoreApplication::applicationDirPath() + "/../Resources"_L1 + trPath;
     }
     else
     {
-        mainPath = QCoreApplication::applicationDirPath() + QLatin1String("/../Resources") + trPath + QLatin1String("/")
-                + locale + QLatin1String(".lproj");
+        mainPath = QCoreApplication::applicationDirPath() + "/../Resources"_L1 + trPath + '/'_L1 + locale + ".lproj"_L1;
     }
     QDir dirBundle(mainPath);
     if (dirBundle.exists())
@@ -164,7 +220,7 @@ QString VAbstractApplication::translationsPath(const QString &locale) const
         }
         else
         {
-            return QStringLiteral("/usr/share/valentina/translations");
+            return PKGDATADIR + trPath;
         }
     }
 #else // Unix
@@ -174,102 +230,83 @@ QString VAbstractApplication::translationsPath(const QString &locale) const
     {
         return dir.absolutePath();
     }
-    else
-    {
-        return QStringLiteral("/usr/share/valentina/translations");
-    }
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    dir.setPath(QCoreApplication::applicationDirPath() + "/../../.." + PKGDATADIR + trPath);
+#else
+    dir = QDir(QCoreApplication::applicationDirPath() + "/../../.." + PKGDATADIR + trPath);
 #endif
+    if (dir.exists())
+    {
+        return dir.absolutePath();
+    }
+
+#if defined(APPIMAGE) && defined(Q_OS_LINUX)
+    /* Fix path to translations when run inside AppImage. */
+    return AppImageRoot() + PKGDATADIR + trPath;
+#else
+    return PKGDATADIR + trPath;
+#endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
+#endif // Unix
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-MeasurementsType VAbstractApplication::patternType() const
+auto VAbstractApplication::QtTranslationsPath(const QString &locale) -> QString
 {
-    return _patternType;
+#if defined(Q_OS_LINUX)
+    const auto trPath = QStringLiteral("/translations");
+
+    QDir dir(QCoreApplication::applicationDirPath() + trPath);
+    if (dir.exists())
+    {
+        return dir.absolutePath();
+    }
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    dir.setPath(QCoreApplication::applicationDirPath() + "/../../.."_L1 + PKGDATADIR + trPath);
+#else
+    dir = QDir(QCoreApplication::applicationDirPath() + "/../../.."_L1 + PKGDATADIR + trPath);
+#endif
+    if (dir.exists())
+    {
+        return dir.absolutePath();
+    }
+
+#if defined(APPIMAGE)
+    Q_UNUSED(locale)
+    /* Fix path to translations when run inside AppImage. */
+    return AppImageRoot() + QLibraryPath(QLibraryInfo::TranslationsPath);
+#else
+    return translationsPath(locale);
+#endif // defined(APPIMAGE)
+#else
+    return translationsPath(locale);
+#endif // defined(Q_OS_LINUX)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractApplication::setPatternType(const MeasurementsType &patternType)
+auto VAbstractApplication::ReduceLogContextFilePath(QString path) -> QString
 {
-    _patternType = patternType;
+    // Find the position of the 'src' folder in the path
+    if (vsizetype const srcIndex = path.indexOf(QDir::toNativeSeparators(QStringLiteral("/src/"))); srcIndex != -1)
+    {
+        // Extract the substring starting from 'src' folder
+        path = path.mid(srcIndex);
+    }
+
+    return path;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractApplication::setCurrentDocument(VAbstractPattern *doc)
-{
-    this->doc = doc;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VAbstractPattern *VAbstractApplication::getCurrentDocument() const
-{
-    SCASSERT(doc != nullptr)
-    return doc;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VAbstractApplication::getOpeningPattern() const
-{
-    return openingPattern;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractApplication::setOpeningPattern()
-{
-    openingPattern = !openingPattern;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QWidget *VAbstractApplication::getMainWindow() const
-{
-    return mainWindow;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractApplication::setMainWindow(QWidget *value)
-{
-    SCASSERT(value != nullptr)
-    mainWindow = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QUndoStack *VAbstractApplication::getUndoStack() const
+auto VAbstractApplication::getUndoStack() const -> QUndoStack *
 {
     return undoStack;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VAbstractApplication::IsPedantic() const
+auto VAbstractApplication::IsPedantic() const -> bool
 {
     return false;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ClearMessage helps to clear a message string from standard Qt function.
- * @param msg the message that contains '"' at the start and at the end
- * @return cleared string
- */
-QString VAbstractApplication::ClearMessage(QString msg)
-{
-    if (msg.startsWith('"') && msg.endsWith('"'))
-    {
-        msg.remove(0, 1);
-        msg.chop(1);
-    }
-
-    return msg;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-const Draw &VAbstractApplication::GetDrawMode() const
-{
-    return mode;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractApplication::SetDrawMode(const Draw &value)
-{
-    mode = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -284,127 +321,67 @@ void VAbstractApplication::WinAttachConsole()
     auto stdout_type = GetFileType(GetStdHandle(STD_OUTPUT_HANDLE));
     if (stdout_type == FILE_TYPE_UNKNOWN && AttachConsole(ATTACH_PARENT_PROCESS))
     {
-        // cppcheck-suppress ignoredReturnValue
+#ifdef Q_CC_MSVC
+        FILE *fp = nullptr;
+        freopen_s(&fp, "CONOUT$", "w", stdout);
+        freopen_s(&fp, "CONOUT$", "w", stderr);
+#else
         freopen("CONOUT$", "w", stdout);
-        // cppcheck-suppress ignoredReturnValue
         freopen("CONOUT$", "w", stderr);
+#endif // Q_CC_MSVC
     }
 }
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-Unit VAbstractApplication::patternUnit() const
+void VAbstractApplication::LoadTranslation(QString locale)
 {
-    return _patternUnit;
-}
+    if (locale.startsWith("ru"_L1) || locale.startsWith("ir"_L1))
+    {
+        locale = QString();
+    }
 
-//---------------------------------------------------------------------------------------------------------------------
-const Unit *VAbstractApplication::patternUnitP() const
-{
-    return &_patternUnit;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractApplication::setPatternUnit(const Unit &patternUnit)
-{
-    _patternUnit = patternUnit;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getSettings hide settings constructor.
- * @return pointer to class for acssesing to settings in ini file.
- */
-VCommonSettings *VAbstractApplication::Settings()
-{
-    SCASSERT(settings != nullptr)
-    return settings;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QGraphicsScene *VAbstractApplication::getCurrentScene() const
-{
-    SCASSERT(*currentScene != nullptr)
-    return *currentScene;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractApplication::setCurrentScene(QGraphicsScene **value)
-{
-    currentScene = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VMainGraphicsView *VAbstractApplication::getSceneView() const
-{
-    return sceneView;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractApplication::setSceneView(VMainGraphicsView *value)
-{
-    sceneView = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-double VAbstractApplication::toPixel(double val) const
-{
-    return ToPixel(val, _patternUnit);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-double VAbstractApplication::fromPixel(double pix) const
-{
-    return FromPixel(pix, _patternUnit);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractApplication::LoadTranslation(const QString &locale)
-{
     if (locale.isEmpty())
     {
-        qDebug()<<"Locale is empty.";
-        return;
+        qDebug() << "Default locale";
     }
-    qDebug()<<"Checked locale:"<<locale;
+    else
+    {
+        qDebug() << "Checked locale:" << locale;
+    }
 
     ClearTranslation();
 
+    const QString appQmDir = VAbstractApplication::translationsPath(locale);
+
     qtTranslator = new QTranslator(this);
 #if defined(Q_OS_WIN) || defined(Q_OS_MAC)
-    qtTranslator->load("qt_" + locale, translationsPath(locale));
+    const QString qtQmDir = appQmDir;
 #else
-    qtTranslator->load("qt_" + locale, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+#if defined(APPIMAGE)
+    const QString qtQmDir = VAbstractApplication::QtTranslationsPath(locale);
+#else
+    const QString qtQmDir = QLibraryPath(QLibraryInfo::TranslationsPath);
+#endif // defined(APPIMAGE)
 #endif
+    LoadQM(qtTranslator, QStringLiteral("qt_"), locale, qtQmDir);
     installTranslator(qtTranslator);
 
+#if defined(APPIMAGE)
     qtxmlTranslator = new QTranslator(this);
-#if defined(Q_OS_WIN) || defined(Q_OS_MAC)
-    qtxmlTranslator->load("qtxmlpatterns_" + locale, translationsPath(locale));
-#else
-    qtxmlTranslator->load("qtxmlpatterns_" + locale, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-#endif
+    LoadQM(qtxmlTranslator, QStringLiteral("qtxmlpatterns_"), locale, qtQmDir);
     installTranslator(qtxmlTranslator);
 
     qtBaseTranslator = new QTranslator(this);
-#if defined(Q_OS_WIN) || defined(Q_OS_MAC)
-    qtBaseTranslator->load("qtbase_" + locale, translationsPath(locale));
-#else
-    qtBaseTranslator->load("qtbase_" + locale, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-#endif
+    LoadQM(qtBaseTranslator, QStringLiteral("qtbase_"), locale, qtQmDir);
     installTranslator(qtBaseTranslator);
+#endif // defined(APPIMAGE)
 
     appTranslator = new QTranslator(this);
-    appTranslator->load("valentina_" + locale, translationsPath(locale));
+    LoadQM(appTranslator, QStringLiteral("valentina_"), locale, appQmDir);
     installTranslator(appTranslator);
 
-    const QString system = Settings()->GetPMSystemCode();
-
-    pmsTranslator = new QTranslator(this);
-    pmsTranslator->load("measurements_" + system + "_" + locale, translationsPath(locale));
-    installTranslator(pmsTranslator);
-
-    InitTrVars();//Very important do it after load QM files.
+    InitTrVars(); // Very important do it after load QM files.
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -413,30 +390,384 @@ void VAbstractApplication::ClearTranslation()
     if (not qtTranslator.isNull())
     {
         removeTranslator(qtTranslator);
-        delete qtTranslator;
+        delete qtTranslator.data();
     }
 
+#if defined(APPIMAGE)
     if (not qtxmlTranslator.isNull())
     {
         removeTranslator(qtxmlTranslator);
-        delete qtxmlTranslator;
+        delete qtxmlTranslator.data();
     }
 
     if (not qtBaseTranslator.isNull())
     {
         removeTranslator(qtBaseTranslator);
-        delete qtBaseTranslator;
+        delete qtBaseTranslator.data();
     }
+#endif // defined(APPIMAGE)
 
     if (not appTranslator.isNull())
     {
         removeTranslator(appTranslator);
-        delete appTranslator;
+        delete appTranslator.data();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ClearMessage helps to clear a message string from standard Qt function.
+ * @param msg the message that contains '"' at the start and at the end
+ * @return cleared string
+ */
+auto VAbstractApplication::ClearMessage(QString msg) -> QString
+{
+    if (msg.startsWith('"'_L1) && msg.endsWith('"'_L1))
+    {
+        msg.remove(0, 1);
+        msg.chop(1);
     }
 
-    if (not pmsTranslator.isNull())
+    msg.replace("\\\""_L1, "\""_L1);
+
+    return msg;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractApplication::IsWarningMessage(const QString &message) const -> bool
+{
+    return VAbstractApplication::ClearMessage(message).startsWith(warningMessageSignature);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractApplication::NativeFileDialog(QFileDialog::Options options) const -> QFileDialog::Options
+{
+    if (settings->IsDontUseNativeDialog())
     {
-        removeTranslator(pmsTranslator);
-        delete pmsTranslator;
+        options |= QFileDialog::DontUseNativeDialog;
+    }
+
+    return options;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractApplication::SVGFontDatabase() -> VSvgFontDatabase *
+{
+    if (m_svgFontDatabase == nullptr)
+    {
+        m_svgFontDatabase = new VSvgFontDatabase();
+
+        RestartSVGFontDatabaseWatcher();
+    }
+
+    if (!m_svgFontDatabase->IsPopulated())
+    {
+        m_svgFontDatabase->PopulateFontDatabase(QString());
+    }
+
+    return m_svgFontDatabase;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractApplication::KnownMeasurementsDatabase() -> VKnownMeasurementsDatabase *
+{
+    return nullptr;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractApplication::RestartSVGFontDatabaseWatcher()
+{
+    if (m_svgFontDatabase != nullptr)
+    {
+        delete m_svgFontDatabaseWatcher;
+        m_svgFontDatabaseWatcher =
+            new QFileSystemWatcher({settings->GetPathSVGFonts(), VSvgFontDatabase::SystemSVGFontPath()});
+
+        if (m_svgFontDatabaseWatcher->thread() != this->thread())
+        {
+            m_svgFontDatabaseWatcher->moveToThread(this->thread());
+        }
+
+        m_svgFontDatabaseWatcher->setParent(this);
+        connect(m_svgFontDatabaseWatcher, &QFileSystemWatcher::directoryChanged, this,
+                &VAbstractApplication::RepopulateFontDatabase);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractApplication::AppUptime() const -> qint64
+{
+    return m_uptimeTimer.elapsed();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractApplication::GetShortcutManager() const -> VAbstractShortcutManager *
+{
+    return m_shortcutManager;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractApplication::GetPlaceholderTranslator() -> QSharedPointer<VTranslator>
+{
+    VCommonSettings *settings = Settings();
+
+    QString pieceLabelLocale = settings->GetPieceLabelLocale();
+    if (pieceLabelLocale == VCommonSettings::defaultPieceLabelLocale)
+    {
+        pieceLabelLocale = settings->GetLocale();
+    }
+
+    if (pieceLabelLocale.startsWith("ru"_L1) || pieceLabelLocale.startsWith("ir"_L1))
+    {
+        return QSharedPointer<VTranslator>(new VTranslator);
+    }
+
+    auto translator = QSharedPointer<VTranslator>(new VTranslator);
+    const QString appQmDir = VAbstractApplication::translationsPath(settings->GetLocale());
+    if (translator->load(QStringLiteral("valentina_") + pieceLabelLocale, appQmDir))
+    {
+        return translator;
+    }
+
+    return QSharedPointer<VTranslator>(new VTranslator);
+}
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractApplication::TextCodecCache(QStringConverter::Encoding encoding) const -> VTextCodec *
+{
+    if (m_codecs.contains(encoding))
+    {
+        return m_codecs.value(encoding);
+    }
+
+    return nullptr;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractApplication::CacheTextCodec(QStringConverter::Encoding encoding, VTextCodec *codec)
+{
+    if (not m_codecs.contains(encoding))
+    {
+        m_codecs.insert(encoding, codec);
+    }
+}
+#endif
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractApplication::CheckSystemLocale()
+{
+    if (const QString defLocale = QLocale::system().name();
+        defLocale.startsWith("ru"_L1) || defLocale.startsWith("ir"_L1))
+    {
+        QCoreApplication::exit();
+        return;
+    }
+
+    auto CheckLanguage = [](QStandardPaths::StandardLocation type, const QStringList &test)
+    {
+        const QString path = QStandardPaths::writableLocation(type);
+        bool const res = std::any_of(test.begin(), test.end(), [path](const QString &t) { return path.contains(t); });
+        return static_cast<int>(res);
+    };
+
+    int match = 0;
+    match += CheckLanguage(QStandardPaths::DesktopLocation, {"Рабочий стол"});
+    match += CheckLanguage(QStandardPaths::DocumentsLocation, {"Мои документы", "Документы"});
+    match += CheckLanguage(QStandardPaths::MusicLocation, {"Моя музыка", "Музыка"});
+    match += CheckLanguage(QStandardPaths::MoviesLocation, {"Мои видео", "Видео"});
+    match += CheckLanguage(QStandardPaths::PicturesLocation, {"Мои рисунки", "Изображения", "Картинки"});
+    match += CheckLanguage(QStandardPaths::DownloadLocation, {"Мои документы", "Загрузки"});
+
+    if (match >= 4)
+    {
+        QCoreApplication::exit();
+        return;
+    }
+
+    QString const timeZoneId = QString::fromUtf8(QTimeZone::systemTimeZone().id());
+    QSet<QString> const timeZones{"Asia/Anadyr",
+                                  "Asia/Barnaul",
+                                  "Asia/Chita",
+                                  "Asia/Irkutsk",
+                                  "Asia/Kamchatka",
+                                  "Asia/Khandyga",
+                                  "Asia/Krasnoyarsk",
+                                  "Asia/Magadan",
+                                  "Asia/Novokuznetsk",
+                                  "Asia/Novosibirsk",
+                                  "Asia/Omsk",
+                                  "Asia/Sakhalin",
+                                  "Asia/Srednekolymsk",
+                                  "Asia/Tomsk",
+                                  "Asia/Ust-Nera",
+                                  "Asia/Vladivostok",
+                                  "Asia/Yakutsk",
+                                  "Asia/Yekaterinburg",
+                                  "Europe/Astrakhan",
+                                  "Europe/Kaliningrad",
+                                  "Europe/Kirov",
+                                  "Europe/Moscow",
+                                  "Europe/Samara",
+                                  "Europe/Saratov",
+                                  "Europe/Simferopol",
+                                  "Europe/Ulyanovsk",
+                                  "Europe/Volgograd",
+                                  "W-SU",
+                                  "Europe/Minsk",
+                                  "Asia/Tehran",
+                                  "Iran"};
+    if (timeZones.contains(timeZoneId))
+    {
+        QCoreApplication::exit();
+        return;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractApplication::SVGFontsPathChanged(const QString &oldPath, const QString &newPath)
+{
+    if (oldPath != newPath && m_svgFontDatabase != nullptr)
+    {
+        RestartSVGFontDatabaseWatcher();
+        m_svgFontDatabase->InvalidatePath(oldPath);
+        RepopulateFontDatabase(newPath);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractApplication::RepopulateFontDatabase(const QString &path)
+{
+    if (m_svgFontDatabase != nullptr)
+    {
+        QFuture<void> const future =
+            QtConcurrent::run([this, path]() { m_svgFontDatabase->PopulateFontDatabase(path); });
+    }
+}
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+//---------------------------------------------------------------------------------------------------------------------
+// NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays, hicpp-avoid-c-arrays, modernize-avoid-c-arrays)
+auto VAbstractApplication::IsOptionSet(int argc, char *argv[], const char *option) -> bool
+{
+    for (int i = 1; i < argc; ++i)
+    {
+        if (qstrcmp(argv[i], option) == 0) // NOLINT(cppcoreguidelines-pro-bounds-pointer-arithmetic)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// See issue #624. https://bitbucket.org/dismine/valentina/issues/624
+// NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays, hicpp-avoid-c-arrays, modernize-avoid-c-arrays)
+void VAbstractApplication::InitHighDpiScaling(int argc, char *argv[])
+{
+    /* For more info see: http://doc.qt.io/qt-5/highdpi.html */
+    if (IsOptionSet(argc, argv, qPrintable("--"_L1 + LONG_OPTION_NO_HDPI_SCALING)))
+    {
+        QCoreApplication::setAttribute(Qt::AA_DisableHighDpiScaling);
+    }
+    else
+    {
+        QApplication::setAttribute(Qt::AA_EnableHighDpiScaling); // DPI support
+    }
+}
+#endif
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractApplication::LogDirPath() -> QString
+{
+    const auto logs = QStringLiteral("Logs");
+
+    QString const logDirPath = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
+    if (logDirPath.isEmpty())
+    {
+#if defined(Q_OS_WINDOWS)
+        return QStringList{QCoreApplication::applicationDirPath(), logs, QCoreApplication::applicationName()}.join(
+            QDir::separator());
+#else
+        return QStringList{QDir::homePath(), QCoreApplication::organizationName(), logs,
+                           QCoreApplication::applicationName()}
+            .join(QDir::separator());
+#endif
+    }
+#if defined(Q_OS_WINDOWS)
+    auto path = QStringList{logDirPath, logs}.join(QDir::separator());
+#else
+    auto path =
+        QStringList{logDirPath, QCoreApplication::organizationName(), logs, QCoreApplication::applicationName()}.join(
+            QDir::separator());
+#endif
+    return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractApplication::CreateLogDir() -> bool
+{
+    if (QDir const logDir(LogDirPath()); not logDir.exists())
+    {
+        return logDir.mkpath(QChar('.')); // Create directory for log if need
+    }
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractApplication::ClearOldLogs()
+{
+    const QString workingDirectory = QDir::currentPath(); // Save the app working directory
+    const QString logDirPath = LogDirPath();
+    QDir logsDir(logDirPath);
+
+    if (!logsDir.exists())
+    {
+        return;
+    }
+
+    logsDir.setNameFilters(QStringList(QStringLiteral("*.log")));
+    QDir::setCurrent(logDirPath);
+
+    // Restore working directory
+    auto restore = qScopeGuard([workingDirectory] { QDir::setCurrent(workingDirectory); });
+
+    QDirIterator it(logsDir.absolutePath(), QDir::Files | QDir::NoDotAndDotDot, QDirIterator::NoIteratorFlags);
+    QStringList allFiles;
+    while (it.hasNext())
+    {
+        allFiles << it.next();
+    }
+
+    if (allFiles.isEmpty())
+    {
+        qDebug("There are no old logs.");
+        return;
+    }
+
+    qDebug("Clearing old logs");
+    for (const auto &fn : allFiles)
+    {
+        QFileInfo const info(fn);
+        const QDateTime created = info.birthTime();
+        if (created.daysTo(QDateTime::currentDateTime()) >= DAYS_TO_KEEP_LOGS)
+        {
+            VLockGuard<QFile> const tmp(info.absoluteFilePath(), [&fn]() { return new QFile(fn); });
+            if (tmp.GetProtected() != nullptr)
+            {
+                if (tmp.GetProtected()->remove())
+                {
+                    qDebug("Deleted %s", qUtf8Printable(info.absoluteFilePath()));
+                }
+                else
+                {
+                    qDebug("Could not delete %s", qUtf8Printable(info.absoluteFilePath()));
+                }
+            }
+            else
+            {
+                qDebug("Failed to lock %s", qUtf8Printable(info.absoluteFilePath()));
+            }
+        }
     }
 }

@@ -39,7 +39,13 @@ public:
 
 
     //! Constructor passing name and type
-    VFilePropertyPrivate(const QString& name, QVariant::Type type, bool directory = false)
+    VFilePropertyPrivate(const QString& name,
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                         QMetaType::Type type,
+#else
+                         QVariant::Type type,
+#endif
+                         bool directory = false)
         : VPropertyPrivate(name, type), FileFilters(), Directory(directory) {}
 
     //! Constructor

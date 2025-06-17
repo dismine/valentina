@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -32,7 +32,6 @@
 #include <QDomElement>
 
 #include "../vmisc/def.h"
-#include "../vmisc/logging.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "vundocommand.h"
 
@@ -66,9 +65,9 @@ void RenamePP::redo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool RenamePP::mergeWith(const QUndoCommand *command)
+auto RenamePP::mergeWith(const QUndoCommand *command) -> bool
 {
-    const RenamePP *renameCommand = static_cast<const RenamePP *>(command);
+    const auto *renameCommand = static_cast<const RenamePP *>(command);
     SCASSERT(renameCommand != nullptr)
 
     const QString oldName = renameCommand->getOldPPname();
@@ -82,7 +81,7 @@ bool RenamePP::mergeWith(const QUndoCommand *command)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int RenamePP::id() const
+auto RenamePP::id() const -> int
 {
     return static_cast<int>(UndoCommand::RenamePP);
 }

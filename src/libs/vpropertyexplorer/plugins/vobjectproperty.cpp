@@ -27,64 +27,74 @@
 
 #include "../vproperty_p.h"
 
-VPE::VObjectProperty::VObjectProperty(const QString& name)
-    : VProperty(name, QVariant::Int), objects()
+VPE::VObjectProperty::VObjectProperty(const QString &name)
+  : VProperty(name,
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+              QMetaType::UInt),
+#else
+              QVariant::UInt),
+#endif
+    objects()
 {
-    VProperty::d_ptr->VariantValue = 0;
-    VProperty::d_ptr->VariantValue.convert(QVariant::UInt);
+    VProperty::vproperty_d_ptr->VariantValue = 0;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    VProperty::vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::UInt));
+#else
+    VProperty::vproperty_d_ptr->VariantValue.convert(QVariant::UInt);
+#endif
 }
 
 //! Get the data how it should be displayed
-QVariant VPE::VObjectProperty::data (int column, int role) const
+auto VPE::VObjectProperty::data(int column, int role) const -> QVariant
 {
     if (objects.empty())
     {
         return QVariant();
     }
 
-    QComboBox* tmpEditor = qobject_cast<QComboBox*>(VProperty::d_ptr->editor);
+    auto *tmpEditor = qobject_cast<QComboBox *>(VProperty::vproperty_d_ptr->editor);
 
     if (column == DPC_Data && Qt::DisplayRole == role)
     {
-        return VProperty::d_ptr->VariantValue;
+        return VProperty::vproperty_d_ptr->VariantValue;
     }
-    else if (column == DPC_Data && Qt::EditRole == role)
+
+    if (column == DPC_Data && Qt::EditRole == role)
     {
         return tmpEditor->currentIndex();
     }
-    else
-        return VProperty::data(column, role);
+    return VProperty::data(column, role);
 }
 
 //! Returns an editor widget, or NULL if it doesn't supply one
-QWidget* VPE::VObjectProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options,
-                                       const QAbstractItemDelegate* delegate)
+auto VPE::VObjectProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
+                                        const QAbstractItemDelegate *delegate) -> QWidget *
 {
     Q_UNUSED(options)
     Q_UNUSED(delegate)
-    QComboBox* tmpEditor = new QComboBox(parent);
+    auto *tmpEditor = new QComboBox(parent);
     tmpEditor->clear();
     tmpEditor->setLocale(parent->locale());
     FillList(tmpEditor, objects);
-    tmpEditor->setCurrentIndex(tmpEditor->findData(VProperty::d_ptr->VariantValue.toUInt()));
+    tmpEditor->setCurrentIndex(tmpEditor->findData(VProperty::vproperty_d_ptr->VariantValue.toUInt()));
     connect(tmpEditor, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
-                     &VObjectProperty::currentIndexChanged);
+            &VObjectProperty::currentIndexChanged);
 
-    VProperty::d_ptr->editor = tmpEditor;
-    return VProperty::d_ptr->editor;
+    VProperty::vproperty_d_ptr->editor = tmpEditor;
+    return VProperty::vproperty_d_ptr->editor;
 }
 
-bool VPE::VObjectProperty::setEditorData(QWidget *editor)
+auto VPE::VObjectProperty::setEditorData(QWidget *editor) -> bool
 {
     if (!editor)
     {
         return false;
     }
 
-    QComboBox* tmpEditor = qobject_cast<QComboBox*>(editor);
+    auto *tmpEditor = qobject_cast<QComboBox *>(editor);
     if (tmpEditor)
     {
-        quint32 objId = VProperty::d_ptr->VariantValue.toUInt();
+        quint32 const objId = VProperty::vproperty_d_ptr->VariantValue.toUInt();
         qint32 tmpIndex = tmpEditor->findData(objId);
 
         if (tmpIndex == -1)
@@ -101,9 +111,9 @@ bool VPE::VObjectProperty::setEditorData(QWidget *editor)
 }
 
 //! Gets the data from the widget
-QVariant VPE::VObjectProperty::getEditorData(const QWidget *editor) const
+auto VPE::VObjectProperty::getEditorData(const QWidget *editor) const -> QVariant
 {
-    const QComboBox* tmpEditor = qobject_cast<const QComboBox*>(editor);
+    const auto *tmpEditor = qobject_cast<const QComboBox *>(editor);
     if (tmpEditor)
     {
         return tmpEditor->itemData(tmpEditor->currentIndex());
@@ -121,29 +131,33 @@ void VPE::VObjectProperty::setObjectsList(const QMap<QString, quint32> &objects)
 
 //! Get the settings. This function has to be implemented in a subclass in order to have an effect
 // cppcheck-suppress unusedFunction
-QMap<QString, quint32> VPE::VObjectProperty::getObjects() const
+auto VPE::VObjectProperty::getObjects() const -> QMap<QString, quint32>
 {
     return objects;
 }
 
 //! Sets the value of the property
-void VPE::VObjectProperty::setValue(const QVariant& value)
+void VPE::VObjectProperty::setValue(const QVariant &value)
 {
-    VProperty::d_ptr->VariantValue = value;
-    VProperty::d_ptr->VariantValue.convert(QVariant::UInt);
+    VProperty::vproperty_d_ptr->VariantValue = value;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    VProperty::vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::UInt));
+#else
+    VProperty::vproperty_d_ptr->VariantValue.convert(QVariant::UInt);
+#endif
 
-    if (VProperty::d_ptr->editor != nullptr)
+    if (VProperty::vproperty_d_ptr->editor != nullptr)
     {
-        setEditorData(VProperty::d_ptr->editor);
+        setEditorData(VProperty::vproperty_d_ptr->editor);
     }
 }
 
-QString VPE::VObjectProperty::type() const
+auto VPE::VObjectProperty::type() const -> QString
 {
     return "objectList";
 }
 
-VPE::VProperty* VPE::VObjectProperty::clone(bool include_children, VProperty* container) const
+auto VPE::VObjectProperty::clone(bool include_children, VProperty *container) const -> VPE::VProperty *
 {
     return VProperty::clone(include_children, container ? container : new VObjectProperty(getName()));
 }
@@ -151,16 +165,15 @@ VPE::VProperty* VPE::VObjectProperty::clone(bool include_children, VProperty* co
 void VPE::VObjectProperty::currentIndexChanged(int index)
 {
     Q_UNUSED(index)
-    UserChangeEvent *event = new UserChangeEvent();
-    QCoreApplication::postEvent ( VProperty::d_ptr->editor, event );
+    auto *event = new UserChangeEvent();
+    QCoreApplication::postEvent(VProperty::vproperty_d_ptr->editor, event);
 }
 
 void VPE::VObjectProperty::FillList(QComboBox *box, const QMap<QString, quint32> &list) const
 {
     box->clear();
 
-    QMap<QString, quint32>::const_iterator i;
-    for (i = list.constBegin(); i != list.constEnd(); ++i)
+    for (auto i = list.constBegin(); i != list.constEnd(); ++i)
     {
         box->addItem(i.key(), i.value());
     }

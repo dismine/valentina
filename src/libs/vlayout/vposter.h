@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -32,12 +32,13 @@
 #include <QCoreApplication>
 #include <QRect>
 #include <QtGlobal>
+#include <QtCore/qcontainerfwd.h>
 
 #include "../vmisc/def.h"
 
 class QGraphicsItem;
 class QPrinter;
-template <class T> class QVector;
+struct VWatermarkData;
 
 struct PosterData
 {
@@ -57,16 +58,19 @@ struct PosterData
     QRect rect; // rect section
 };
 
-// cppcheck-suppress noConstructor
+Q_DECLARE_TYPEINFO(PosterData, Q_MOVABLE_TYPE); // NOLINT
+
 class VPoster
 {
-    Q_DECLARE_TR_FUNCTIONS(VPoster)
+    Q_DECLARE_TR_FUNCTIONS(VPoster) // NOLINT
 public:
     explicit VPoster(const QPrinter *printer);
 
-    QVector<PosterData> Calc(const QRect &imageRect, int page, PageOrientation orientation) const;
+    auto Calc(const QSize &imageRect, int page, PageOrientation orientation) const -> QVector<PosterData>;
 
-    QVector<QGraphicsItem *> Borders(QGraphicsItem *parent, const PosterData &img, int sheets) const;
+    auto Tile(QGraphicsItem *parent, const PosterData &img, vsizetype sheets, const VWatermarkData &watermarkData,
+              const QString &watermarkPath) const -> QVector<QGraphicsItem *>;
+
 private:
     const QPrinter *printer;
     /**
@@ -75,14 +79,21 @@ private:
      */
     quint32 allowance;
 
-    int CountRows(int height, PageOrientation orientation) const;
-    int CountColumns(int width, PageOrientation orientation) const;
+    auto CountRows(int height, PageOrientation orientation) const -> int;
+    auto CountColumns(int width, PageOrientation orientation) const -> int;
 
-    PosterData Cut(int i, int j, const QRect &imageRect, PageOrientation orientation) const;
+    auto Cut(int i, int j, const QSize &imageRect, PageOrientation orientation) const -> PosterData;
 
-    QRect PageRect() const;
+    auto PageRect() const -> QRect;
 
-    static qreal ToPixel(qreal val);
+    void Ruler(QVector<QGraphicsItem *> &data, QGraphicsItem *parent, QRect rec) const;
+
+    auto Borders(QGraphicsItem *parent, const PosterData &img, vsizetype sheets) const -> QVector<QGraphicsItem *>;
+
+    auto TextWatermark(QGraphicsItem *parent, const PosterData &img, const VWatermarkData &watermarkData) const
+        -> QVector<QGraphicsItem *>;
+    auto ImageWatermark(QGraphicsItem *parent, const PosterData &img, const VWatermarkData &watermarkData,
+                        const QString &watermarkPath) const -> QVector<QGraphicsItem *>;
 };
 
 #endif // VPOSTER_H

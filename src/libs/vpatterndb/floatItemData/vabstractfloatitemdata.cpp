@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -27,22 +27,27 @@
  *************************************************************************/
 
 #include "vabstractfloatitemdata.h"
+#include "../vmisc/def.h"
 #include "vabstractfloatitemdata_p.h"
 
 //---------------------------------------------------------------------------------------------------------------------
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
 VAbstractFloatItemData::VAbstractFloatItemData()
-    : d(new VAbstractFloatItemDataPrivate())
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VAbstractFloatItemData::VAbstractFloatItemData(const VAbstractFloatItemData &data)
-    : d (data.d)
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VAbstractFloatItemData &VAbstractFloatItemData::operator=(const VAbstractFloatItemData &data)
+  : d(new VAbstractFloatItemDataPrivate())
 {
-    if ( &data == this )
+}
+
+QT_WARNING_POP
+
+//---------------------------------------------------------------------------------------------------------------------
+COPY_CONSTRUCTOR_IMPL(VAbstractFloatItemData)
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractFloatItemData::operator=(const VAbstractFloatItemData &data) -> VAbstractFloatItemData &
+{
+    if (&data == this)
     {
         return *this;
     }
@@ -51,11 +56,23 @@ VAbstractFloatItemData &VAbstractFloatItemData::operator=(const VAbstractFloatIt
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractFloatItemData::~VAbstractFloatItemData()
-{}
+VAbstractFloatItemData::VAbstractFloatItemData(VAbstractFloatItemData &&data) noexcept
+  : d(std::move(data.d))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VAbstractFloatItemData::GetPos() const
+auto VAbstractFloatItemData::operator=(VAbstractFloatItemData &&data) noexcept -> VAbstractFloatItemData &
+{
+    std::swap(d, data.d);
+    return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VAbstractFloatItemData::~VAbstractFloatItemData() = default;
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractFloatItemData::GetPos() const -> QPointF
 {
     return d->m_ptPos;
 }
@@ -67,13 +84,13 @@ void VAbstractFloatItemData::SetPos(const QPointF &ptPos)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VAbstractFloatItemData::IsVisible() const
+auto VAbstractFloatItemData::IsEnabled() const -> bool
 {
-    return d->m_bVisible;
+    return d->m_bEnabled;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractFloatItemData::SetVisible(bool bVisible)
+void VAbstractFloatItemData::SetEnabled(bool bEnabled)
 {
-    d->m_bVisible = bVisible;
+    d->m_bEnabled = bEnabled;
 }

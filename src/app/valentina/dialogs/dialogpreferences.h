@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@
 
 namespace Ui
 {
-    class DialogPreferences;
+class DialogPreferences;
 }
 
 class PreferencesConfigurationPage;
@@ -44,26 +44,29 @@ class VPattern;
 
 class DialogPreferences : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit DialogPreferences(QWidget *parent = nullptr);
-    virtual ~DialogPreferences();
+    ~DialogPreferences() override;
 signals:
     void UpdateProperties();
+
 protected:
-    virtual void showEvent(QShowEvent *event) override;
-    virtual void resizeEvent(QResizeEvent *event) override;
-    virtual void changeEvent(QEvent* event) override;
+    void showEvent(QShowEvent *event) override;
+    void resizeEvent(QResizeEvent *event) override;
+    void changeEvent(QEvent *event) override;
 private slots:
     void PageChanged(QListWidgetItem *current, QListWidgetItem *previous);
+
 private:
-    Q_DISABLE_COPY(DialogPreferences)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DialogPreferences) // NOLINT
     Ui::DialogPreferences *ui;
-    bool m_isInitialized;
+    bool m_isInitialized{false};
     PreferencesConfigurationPage *m_configurePage;
-    PreferencesPatternPage       *m_patternPage;
-    PreferencesPathPage          *m_pathPage;
+    PreferencesPatternPage *m_patternPage;
+    PreferencesPathPage *m_pathPage;
 
     void Apply();
     void Ok();

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -52,17 +52,17 @@ void VLitePattern::DecrementReferens(quint32 id) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VLitePattern::GenerateLabel(const LabelType &type, const QString &reservedName) const
+auto VLitePattern::GenerateLabel(const LabelType &type, const QString &reservedName) const -> QString
 {
     Q_UNUSED(type)
     Q_UNUSED(reservedName)
-    return QString();
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VLitePattern::GenerateSuffix() const
+auto VLitePattern::GenerateSuffix() const -> QString
 {
-    return QString();
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

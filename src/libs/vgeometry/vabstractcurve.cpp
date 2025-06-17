@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -34,23 +34,60 @@
 #include <QPainterPath>
 #include <QPoint>
 #include <QtDebug>
+#include <QtMath>
 
+#include "../ifc/exception/vexceptionobjecterror.h"
+#include "../vmisc/compatibility.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "vabstractcurve_p.h"
-#include "../vmisc/vabstractapplication.h"
 
-VAbstractCurve::VAbstractCurve(const GOType &type, const quint32 &idObject, const Draw &mode)
-    :VGObject(type, idObject, mode), d (new VAbstractCurveData())
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VAbstractCurve::VAbstractCurve(const VAbstractCurve &curve)
-    :VGObject(curve), d (curve.d)
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VAbstractCurve &VAbstractCurve::operator=(const VAbstractCurve &curve)
+namespace
 {
-    if ( &curve == this )
+//---------------------------------------------------------------------------------------------------------------------
+auto NodeCurvature(const QPointF &p1, const QPointF &p2, const QPointF &p3, double length) -> double
+{
+    QLineF l1(p2, p1);
+    l1.setAngle(l1.angle() + 180);
+
+    QLineF const l2(p2, p3);
+    double const angle = qDegreesToRadians(l2.angleTo(l1));
+
+    return qSin(angle / 2.0) / length;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto MinimalLength(const QVector<QPointF> &points) -> double
+{
+    vsizetype const numPoints = points.size();
+    double smallestDistance = std::numeric_limits<double>::max();
+
+    for (int i = 0; i < numPoints - 1; ++i)
+    {
+        double const distance = QLineF(points[i], points[i + 1]).length();
+        if (!qFuzzyIsNull(distance))
+        {
+            smallestDistance = std::min(smallestDistance, distance);
+        }
+    }
+
+    return smallestDistance;
+}
+} // namespace
+
+//---------------------------------------------------------------------------------------------------------------------
+VAbstractCurve::VAbstractCurve(const GOType &type, const quint32 &idObject, const Draw &mode)
+  : VGObject(type, idObject, mode),
+    d(new VAbstractCurveData())
+{
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+COPY_CONSTRUCTOR_IMPL_2(VAbstractCurve, VGObject)
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractCurve::operator=(const VAbstractCurve &curve) -> VAbstractCurve &
+{
+    if (&curve == this)
     {
         return *this;
     }
@@ -60,17 +97,31 @@ VAbstractCurve &VAbstractCurve::operator=(const VAbstractCurve &curve)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractCurve::~VAbstractCurve()
-{}
+VAbstractCurve::VAbstractCurve(VAbstractCurve &&curve) noexcept
+  : VGObject(std::move(curve)),
+    d(std::move(curve.d))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VAbstractCurve::GetSegmentPoints(const QVector<QPointF> &points, const QPointF &begin,
-                                                  const QPointF &end, bool reverse)
+auto VAbstractCurve::operator=(VAbstractCurve &&curve) noexcept -> VAbstractCurve &
+{
+    VGObject::operator=(curve);
+    std::swap(d, curve.d);
+    return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VAbstractCurve::~VAbstractCurve() = default;
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractCurve::GetSegmentPoints(const QVector<QPointF> &points, const QPointF &begin, const QPointF &end,
+                                      bool reverse, QString &error) -> QVector<QPointF>
 {
     QVector<QPointF> segment = points;
     if (reverse)
     {
-        segment = GetReversePoints(segment);
+        segment = Reverse(segment);
     }
 
     QPointF start = begin;
@@ -78,120 +129,216 @@ QVector<QPointF> VAbstractCurve::GetSegmentPoints(const QVector<QPointF> &points
 
     if (begin == end)
     {
-        start = segment.first();
-        finish = segment.last();
+        start = segment.constFirst();
+        finish = segment.constLast();
     }
 
-    segment = FromBegin(segment, start);
-    segment = ToEnd(segment, finish);
+    bool ok = false;
+    segment = FromBegin(segment, start, &ok);
+
+    if (not ok)
+    {
+        error = QObject::tr("Could not find the segment start.");
+        return segment;
+    }
+
+    ok = false;
+    segment = ToEnd(segment, finish, &ok);
+
+    if (not ok)
+    {
+        error = QObject::tr("Could not find the segment end.");
+        return segment;
+    }
+
+    if (segment.length() < 2)
+    {
+        error = QObject::tr("Segment is too short.");
+    }
+
     return segment;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VAbstractCurve::GetSegmentPoints(const QPointF &begin, const QPointF &end, bool reverse) const
+auto VAbstractCurve::GetSegmentPoints(const QPointF &begin, const QPointF &end, bool reverse,
+                                      const QString &piece) const -> QVector<QPointF>
 {
-    return GetSegmentPoints(GetPoints(), begin, end, reverse);
-}
+    QString error;
+    QVector<QPointF> segment = GetSegmentPoints(GetPoints(), begin, end, reverse, error);
 
-//---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VAbstractCurve::FromBegin(const QVector<QPointF> &points, const QPointF &begin, bool *ok)
-{
-    if (points.count() >= 2)
+    if (not error.isEmpty())
     {
-        if (points.first().toPoint() == begin.toPoint())
+        QString errorMsg;
+        if (piece.isEmpty())
         {
-            if (ok != nullptr)
-            {
-                *ok = true;
-            }
-            return points;
-        }
-
-        QVector<QPointF> segment;
-        bool theBegin = false;
-        for (qint32 i = 0; i < points.count()-1; ++i)
-        {
-            if (theBegin == false)
-            {
-                if (IsPointOnLineSegment(begin, points.at(i), points.at(i+1)))
-                {
-                    theBegin = true;
-
-                    if (not VFuzzyComparePoints(begin, points.at(i+1)))
-                    {
-                        segment.append(begin);
-                    }
-
-                    if (i == points.count()-2)
-                    {
-                         segment.append(points.at(i+1));
-                    }
-                }
-            }
-            else
-            {
-                segment.append(points.at(i));
-                if (i == points.count()-2)
-                {
-                     segment.append(points.at(i+1));
-                }
-            }
-        }
-
-        if (segment.isEmpty())
-        {
-            if (ok != nullptr)
-            {
-                *ok = false;
-            }
-            return points;
+            errorMsg = QObject::tr("Error calculating segment for curve '%1'. %2").arg(name(), error);
         }
         else
         {
-            if (ok != nullptr)
-            {
-                *ok = true;
-            }
-            return segment;
+            errorMsg = QObject::tr("Error in path '%1'. Calculating segment for curve '%2' has failed. %3")
+                           .arg(piece, name(), error);
         }
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VExceptionObjectError(errorMsg)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
-    else
+
+    return segment;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractCurve::FromBegin(const QVector<QPointF> &points, const QPointF &begin, bool *ok) -> QVector<QPointF>
+{
+    auto SetResult = [&ok](bool res)
     {
         if (ok != nullptr)
         {
-            *ok = false;
+            *ok = res;
         }
+    };
+
+    if (points.count() < 2)
+    {
+        SetResult(false);
         return points;
     }
+
+    if (points.constFirst().toPoint() == begin.toPoint())
+    {
+        SetResult(true);
+        return points;
+    }
+
+    QVector<QPointF> segment;
+    bool theBegin = false;
+    for (qint32 i = 0; i < points.count() - 1; ++i)
+    {
+        if (not theBegin)
+        {
+            if (IsPointOnLineSegment(begin, points.at(i), points.at(i + 1)))
+            {
+                theBegin = true;
+
+                if (not VFuzzyComparePoints(begin, points.at(i + 1)))
+                {
+                    segment.append(begin);
+                }
+
+                if (i == points.count() - 2)
+                {
+                    segment.append(points.at(i + 1));
+                }
+            }
+        }
+        else
+        {
+            segment.append(points.at(i));
+            if (i == points.count() - 2)
+            {
+                segment.append(points.at(i + 1));
+            }
+        }
+    }
+
+    if (segment.isEmpty())
+    {
+        SetResult(false);
+        return points;
+    }
+
+    SetResult(true);
+    return segment;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VAbstractCurve::ToEnd(const QVector<QPointF> &points, const QPointF &end, bool *ok)
+auto VAbstractCurve::ToEnd(const QVector<QPointF> &points, const QPointF &end, bool *ok) -> QVector<QPointF>
 {
-    QVector<QPointF> reversed = GetReversePoints(points);
+    QVector<QPointF> reversed = Reverse(points);
     reversed = FromBegin(reversed, end, ok);
-    return GetReversePoints(reversed);
+    return Reverse(reversed);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VAbstractCurve::GetPath() const
+auto VAbstractCurve::ClosestPoint(QPointF scenePoint) const -> QPointF
+{
+    const QVector<QPointF> points = GetPoints();
+    if (points.count() < 2)
+    {
+        return {};
+    }
+
+    if (VFuzzyComparePoints(points.constFirst(), scenePoint))
+    {
+        return points.constFirst();
+    }
+
+    if (VFuzzyComparePoints(points.constLast(), scenePoint))
+    {
+        return points.constLast();
+    }
+
+    QPointF candidatePoint;
+    qreal bestDistance = INT_MAX;
+    bool found = false;
+
+    for (qint32 i = 0; i < points.count() - 1; ++i)
+    {
+        qreal length = QLineF(points.at(i), scenePoint).length();
+        if (length < bestDistance)
+        {
+            candidatePoint = points.at(i);
+            bestDistance = length;
+            found = true;
+        }
+
+        length = QLineF(points.at(i + 1), scenePoint).length();
+        if (length < bestDistance)
+        {
+            candidatePoint = points.at(i + 1);
+            bestDistance = length;
+            found = true;
+        }
+
+        const QPointF cPoint = VGObject::ClosestPoint(QLineF(points.at(i), points.at(i + 1)), scenePoint);
+
+        if (IsPointOnLineSegment(cPoint, points.at(i), points.at(i + 1)))
+        {
+            const qreal length = QLineF(scenePoint, cPoint).length();
+            if (length < bestDistance)
+            {
+                candidatePoint = cPoint;
+                bestDistance = length;
+                found = true;
+            }
+        }
+    }
+
+    if (found)
+    {
+        return candidatePoint;
+    }
+
+    return {};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractCurve::GetPath() const -> QPainterPath
 {
     QPainterPath path;
 
-    const QVector<QPointF> points = GetPoints();
-    if (points.count() >= 2)
+    if (const QVector<QPointF> points = GetPoints(); points.count() >= 2)
     {
         path.addPolygon(QPolygonF(points));
     }
     else
     {
-        qDebug()<<"points.count() < 2"<<Q_FUNC_INFO;
+        qDebug() << "points.count() < 2" << Q_FUNC_INFO;
     }
     return path;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VAbstractCurve::GetLengthByPoint(const QPointF &point) const
+auto VAbstractCurve::GetLengthByPoint(const QPointF &point) const -> qreal
 {
     const QVector<QPointF> points = GetPoints();
     if (points.size() < 2)
@@ -199,7 +346,7 @@ qreal VAbstractCurve::GetLengthByPoint(const QPointF &point) const
         return -1;
     }
 
-    if (points.first().toPoint() == point.toPoint())
+    if (points.constFirst().toPoint() == point.toPoint())
     {
         return 0;
     }
@@ -219,37 +366,36 @@ qreal VAbstractCurve::GetLengthByPoint(const QPointF &point) const
  * @param line line that intersect with curve
  * @return list of intersection points
  */
-QVector<QPointF> VAbstractCurve::IntersectLine(const QLineF &line) const
+auto VAbstractCurve::IntersectLine(const QLineF &line) const -> QVector<QPointF>
 {
     return CurveIntersectLine(this->GetPoints(), line);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VAbstractCurve::IsIntersectLine(const QLineF &line) const
+auto VAbstractCurve::IsIntersectLine(const QLineF &line) const -> bool
 {
     const QVector<QPointF> points = IntersectLine(line);
     return not points.isEmpty();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VAbstractCurve::IsPointOnCurve(const QVector<QPointF> &points, const QPointF &p)
+auto VAbstractCurve::IsPointOnCurve(const QVector<QPointF> &points, const QPointF &p) -> bool
 {
     if (points.isEmpty())
     {
         return false;
     }
-    else if (points.size() < 2)
+
+    if (points.size() < 2)
     {
         return points.at(0) == p;
     }
-    else
+
+    for (qint32 i = 0; i < points.count() - 1; ++i)
     {
-        for (qint32 i = 0; i < points.count()-1; ++i)
+        if (IsPointOnLineSegment(p, points.at(i), points.at(i + 1)))
         {
-            if (IsPointOnLineSegment(p, points.at(i), points.at(i+1)))
-            {
-                return true;
-            }
+            return true;
         }
     }
 
@@ -257,13 +403,13 @@ bool VAbstractCurve::IsPointOnCurve(const QVector<QPointF> &points, const QPoint
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VAbstractCurve::IsPointOnCurve(const QPointF &p) const
+auto VAbstractCurve::IsPointOnCurve(const QPointF &p) const -> bool
 {
     return IsPointOnCurve(GetPoints(), p);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VAbstractCurve::GetDuplicate() const
+auto VAbstractCurve::GetDuplicate() const -> quint32
 {
     return d->duplicate;
 }
@@ -276,7 +422,7 @@ void VAbstractCurve::SetDuplicate(quint32 number)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstractCurve::GetColor() const
+auto VAbstractCurve::GetColor() const -> QString
 {
     return d->color;
 }
@@ -288,7 +434,7 @@ void VAbstractCurve::SetColor(const QString &color)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstractCurve::GetPenStyle() const
+auto VAbstractCurve::GetPenStyle() const -> QString
 {
     return d->penStyle;
 }
@@ -300,7 +446,7 @@ void VAbstractCurve::SetPenStyle(const QString &penStyle)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VAbstractCurve::GetApproximationScale() const
+auto VAbstractCurve::GetApproximationScale() const -> qreal
 {
     return d->approximationScale;
 }
@@ -312,14 +458,19 @@ void VAbstractCurve::SetApproximationScale(qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VAbstractCurve::CurveIntersectLine(const QVector<QPointF> &points, const QLineF &line)
+auto VAbstractCurve::CurveIntersectLine(const QVector<QPointF> &points, const QLineF &line) -> QVector<QPointF>
 {
     QVector<QPointF> intersections;
-    for ( auto i = 0; i < points.count()-1; ++i )
+    intersections.reserve(points.count() - 1);
+    for (auto i = 0; i < points.count() - 1; ++i)
     {
         QPointF crosPoint;
-        const auto type = line.intersect(QLineF(points.at(i), points.at(i+1)), &crosPoint);
-        if ( type == QLineF::BoundedIntersection )
+        auto type = line.intersects(QLineF(points.at(i), points.at(i + 1)), &crosPoint);
+
+        // QLineF::intersects not always accurate on edge cases
+        if (type == QLineF::BoundedIntersection ||
+            (VGObject::IsPointOnLineSegment(crosPoint, points.at(i), points.at(i + 1)) &&
+             VGObject::IsPointOnLineSegment(crosPoint, line.p1(), line.p2())))
         {
             intersections.append(crosPoint);
         }
@@ -328,18 +479,29 @@ QVector<QPointF> VAbstractCurve::CurveIntersectLine(const QVector<QPointF> &poin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VAbstractCurve::CurveIntersectAxis(const QPointF &point, qreal angle, const QVector<QPointF> &curvePoints,
-                                        QPointF *intersectionPoint)
+auto VAbstractCurve::CurveIntersectAxis(const QPointF &point, qreal angle, const QVector<QPointF> &curvePoints,
+                                        QPointF *intersectionPoint) -> bool
 {
     SCASSERT(intersectionPoint != nullptr)
 
-    QRectF rec = QRectF(0, 0, INT_MAX, INT_MAX);
-    rec.translate(-INT_MAX/2.0, -INT_MAX/2.0);
+    // Normalize an angle
+    {
+        QLineF line(QPointF(10, 10), QPointF(100, 10));
+        line.setAngle(angle);
+        angle = line.angle();
+    }
 
-    const QLineF axis = VGObject::BuildAxis(point, angle, rec);
-    const QVector<QPointF> points = VAbstractCurve::CurveIntersectLine(curvePoints, axis);
+    auto rec = QRectF(0, 0, INT_MAX, INT_MAX);
+    rec.translate(-INT_MAX / 2.0, -INT_MAX / 2.0);
 
-    if (points.size() > 0)
+    // Instead of using axis compare two rays. See issue #963.
+    auto axis = QLineF(point, VGObject::BuildRay(point, angle, rec));
+    QVector<QPointF> points = VAbstractCurve::CurveIntersectLine(curvePoints, axis);
+
+    axis = QLineF(point, VGObject::BuildRay(point, angle + 180, rec));
+    points += VAbstractCurve::CurveIntersectLine(curvePoints, axis);
+
+    if (not points.isEmpty())
     {
         if (points.size() == 1)
         {
@@ -350,15 +512,15 @@ bool VAbstractCurve::CurveIntersectAxis(const QPointF &point, qreal angle, const
         QMap<qreal, int> forward;
         QMap<qreal, int> backward;
 
-        for ( qint32 i = 0; i < points.size(); ++i )
+        for (qint32 i = 0; i < points.size(); ++i)
         {
-            if (points.at(i) == point)
+            if (VFuzzyComparePoints(points.at(i), point))
             { // Always seek unique intersection
                 continue;
             }
 
             const QLineF length(point, points.at(i));
-            if (qAbs(length.angle()-angle) < 0.1)
+            if (qAbs(length.angle() - angle) < 0.1)
             {
                 forward.insert(length.length(), i);
             }
@@ -374,9 +536,24 @@ bool VAbstractCurve::CurveIntersectAxis(const QPointF &point, qreal angle, const
             *intersectionPoint = points.at(forward.first());
             return true;
         }
-        else if (not backward.isEmpty())
+
+        if (not backward.isEmpty())
         {
             *intersectionPoint = points.at(backward.first());
+            return true;
+        }
+
+        if (VAbstractCurve::IsPointOnCurve(curvePoints, point))
+        {
+            *intersectionPoint = point;
+            return true;
+        }
+    }
+    else
+    {
+        if (VAbstractCurve::IsPointOnCurve(curvePoints, point))
+        {
+            *intersectionPoint = point;
             return true;
         }
     }
@@ -385,42 +562,41 @@ bool VAbstractCurve::CurveIntersectAxis(const QPointF &point, qreal angle, const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<DirectionArrow> VAbstractCurve::DirectionArrows() const
+auto VAbstractCurve::DirectionArrows() const -> QVector<DirectionArrow>
 {
     QVector<DirectionArrow> arrows;
 
-    const QVector<QPointF> points = GetPoints();
-    if (points.count() >= 2)
+    if (const QVector<QPointF> points = GetPoints(); points.count() >= 2)
     {
         /*Need find coordinate midle of curve.
           Universal way is take all points and find sum.*/
-        const qreal seek_length = qAbs(GetLength())/2.0;
+        const qreal seek_length = qAbs(GetLength()) / 2.0;
         qreal found_length = 0;
         QLineF arrow;
-        for (qint32 i = 1; i <= points.size()-1; ++i)
+        for (qint32 i = 1; i <= points.size() - 1; ++i)
         {
-            arrow = QLineF(points.at(i-1), points.at(i));
-            found_length += arrow.length();//Length that we aready find
+            arrow = QLineF(points.at(i - 1), points.at(i));
+            found_length += arrow.length(); // Length that we aready find
 
-            if (seek_length <= found_length)// if have found more that need stop.
+            if (seek_length <= found_length) // if have found more that need stop.
             {
-                //subtract length in last line and you will find position of the middle point.
+                // subtract length in last line and you will find position of the middle point.
                 arrow.setLength(arrow.length() - (found_length - seek_length));
                 break;
             }
         }
 
-        //Reverse line because we want start arrow from this point
-        arrow = QLineF(arrow.p2(), arrow.p1());
-        const qreal angle = arrow.angle();//we each time change line angle, better save original angle value
+        // Reverse line because we want start arrow from this point
+        Swap(arrow);
+        const qreal angle = arrow.angle(); // we each time change line angle, better save original angle value
         arrow.setLength(VAbstractCurve::LengthCurveDirectionArrow());
 
         DirectionArrow dArrow;
 
-        arrow.setAngle(angle-35);
+        arrow.setAngle(angle - 35);
         dArrow.first = arrow;
 
-        arrow.setAngle(angle+35);
+        arrow.setAngle(angle + 35);
         dArrow.second = arrow;
 
         arrows.append(dArrow);
@@ -429,22 +605,22 @@ QVector<DirectionArrow> VAbstractCurve::DirectionArrows() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VAbstractCurve::ShowDirection(const QVector<DirectionArrow> &arrows, qreal width)
+auto VAbstractCurve::ShowDirection(const QVector<DirectionArrow> &arrows, qreal width) -> QPainterPath
 {
     QPainterPath path;
 
-    for (auto arrow : arrows)
+    for (const auto &[first, second] : arrows)
     {
-        if (not arrow.first.isNull() && not arrow.second.isNull())
+        if (not first.isNull() && not second.isNull())
         {
             QPainterPath arrowPath;
 
-            QLineF line = arrow.first;
+            QLineF line = first;
             line.setLength(width);
             arrowPath.moveTo(line.p1());
             arrowPath.lineTo(line.p2());
 
-            line = arrow.second;
+            line = second;
             line.setLength(width);
             arrowPath.moveTo(line.p1());
             arrowPath.lineTo(line.p2());
@@ -456,13 +632,40 @@ QPainterPath VAbstractCurve::ShowDirection(const QVector<DirectionArrow> &arrows
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VAbstractCurve::LengthCurveDirectionArrow()
+auto VAbstractCurve::LengthCurveDirectionArrow() -> qreal
 {
-    return qApp->Settings()->GetLineWidth() * 8.0;
+    return VAbstractApplication::VApp()->Settings()->GetLineWidth() * 8.0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VAbstractCurve::PathLength(const QVector<QPointF> &path)
+void VAbstractCurve::SetAliasSuffix(const QString &aliasSuffix)
+{
+    VGObject::SetAliasSuffix(aliasSuffix);
+    CreateAlias();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractCurve::Curvature(const QVector<QPointF> &vertices) -> double
+{
+    if (vsizetype const numVertices = vertices.size(); numVertices < 3)
+    {
+        // A polygonal chain needs at least 3 vertices
+        return 0.0;
+    }
+
+    qreal const minLength = MinimalLength(vertices);
+
+    double sumCurvature = 0.0;
+    for (vsizetype i = 1; i < vertices.size() - 1; ++i)
+    {
+        sumCurvature += NodeCurvature(vertices[i - 1], vertices[i], vertices[i + 1], minLength);
+    }
+
+    return sumCurvature / static_cast<double>(vertices.size() - 2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractCurve::PathLength(const QVector<QPointF> &path) -> qreal
 {
     if (path.size() < 2)
     {

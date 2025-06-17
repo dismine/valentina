@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -35,11 +35,10 @@ class VSpline;
 
 class TST_VSpline : public AbstractTest
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     explicit TST_VSpline(QObject *parent = nullptr);
-
-signals:
 
 private slots:
     void GetSegmentPoints();
@@ -49,14 +48,18 @@ private slots:
     void GetSegmentPoints_RotateTool();
     void GetSegmentPoints_issue767();
     void CompareThreeWays();
+    void TestParametrT_data();
     void TestParametrT();
     void TestLengthByPoint_data();
     void TestLengthByPoint();
     void TestFlip_data();
     void TestFlip();
+    void TestCutSpline_data();
+    void TestCutSpline();
 
 private:
-    Q_DISABLE_COPY(TST_VSpline)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(TST_VSpline) // NOLINT
     void CompareSplines(const VSpline &spl1, const VSpline &spl2) const;
 };
 

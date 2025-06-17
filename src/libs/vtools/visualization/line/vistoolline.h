@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,14 +29,12 @@
 #ifndef VGRAPHICSLINEITEM_H
 #define VGRAPHICSLINEITEM_H
 
-#include <qcompilerdetection.h>
 #include <QColor>
 #include <QGraphicsItem>
 #include <QLineF>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
-#include <Qt>
 #include <QtGlobal>
 
 #include "../vmisc/def.h"
@@ -44,21 +42,44 @@
 
 class VisToolLine : public VisLine
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     explicit VisToolLine(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolLine() = default;
+    ~VisToolLine() override = default;
 
-    virtual void RefreshGeometry() override;
-    void         setPoint2Id(const quint32 &value);
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolLine)};
+    void RefreshGeometry() override;
+    void VisualMode(quint32 id) override;
+
+    void SetPoint1Id(quint32 value);
+    void SetPoint2Id(quint32 value);
+
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Vis::ToolLine)
+    };
+
 protected:
-    virtual void DrawLine(VScaledLine *lineItem, const QLineF &line, const QColor &color,
-                          Qt::PenStyle style = Qt::SolidLine) override;
+    void DrawLine(VScaledLine *lineItem, const QLineF &line, Qt::PenStyle style = Qt::SolidLine) override;
+
 private:
-    Q_DISABLE_COPY(VisToolLine)
-    quint32      point2Id;
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VisToolLine) // NOLINT
+    quint32 m_point1Id{NULL_ID};
+    quint32 m_point2Id{NULL_ID};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolLine::SetPoint1Id(quint32 value)
+{
+    m_point1Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolLine::SetPoint2Id(quint32 value)
+{
+    m_point2Id = value;
+}
 
 #endif // VGRAPHICSLINEITEM_H

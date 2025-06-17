@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -34,9 +34,11 @@
 #include <QObject>
 #include <QLocale>
 
+#include "../vmisc/defglobal.h"
+
 class TST_ReadVal : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit TST_ReadVal(QObject *parent = nullptr);
 private slots:
@@ -46,11 +48,12 @@ private slots:
     void TestInvalidData();
     void cleanupTestCase();
 private:
-    Q_DISABLE_COPY(TST_ReadVal)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(TST_ReadVal) // NOLINT
     QLocale m_systemLocale;
 
     void PrepareVal(qreal val, const QLocale &locale);
-    void PrepareString(const QString &str, const QLocale &locale, qreal val=0, int count=-1);
+    void PrepareString(const QString &str, const QLocale &locale, qreal val=0, vsizetype count=-1);
 
     void TestVal();
 };

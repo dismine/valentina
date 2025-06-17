@@ -22,7 +22,6 @@
 #ifndef QMUPARSERTOKENREADER_H
 #define QMUPARSERTOKENREADER_H
 
-#include <qcompilerdetection.h>
 #include <QChar>
 #include <QString>
 #include <QtGlobal>
@@ -51,24 +50,27 @@ class QmuParserBase;
 class QmuParserTokenReader
 {
 private:
-    typedef QmuParserToken<qreal, QString> token_type;
+    using token_type = QmuParserToken<qreal, QString>;
+
 public:
     explicit QmuParserTokenReader(QmuParserBase *a_pParent);
-    QmuParserTokenReader* Clone(QmuParserBase *a_pParent) const;
+    ~QmuParserTokenReader() = default;
 
-    void           AddValIdent(identfun_type a_pCallback);
-    void           SetVarCreator(facfun_type a_pFactory, void *pUserData);
-    void           SetFormula(const QString &a_strFormula);
-    void           SetArgSep(char_type cArgSep);
-    int            GetPos() const;
-    const QString& GetExpr() const;
-    varmap_type&   GetUsedVar();
-    QChar          GetArgSep() const;
-    void           IgnoreUndefVar(bool bIgnore);
-    void           ReInit();
-    token_type     ReadNextToken(const QLocale &locale, const QChar &decimal, const QChar &thousand);
+    auto Clone(QmuParserBase *a_pParent) const -> QmuParserTokenReader *;
+
+    void AddValIdent(identfun_type a_pCallback);
+    void SetVarCreator(facfun_type a_pFactory, void *pUserData);
+    void SetFormula(const QString &a_strFormula);
+    void SetArgSep(char_type cArgSep);
+    auto GetPos() const -> qmusizetype;
+    auto GetExpr() const -> const QString &;
+    auto GetUsedVar() -> varmap_type &;
+    auto GetArgSep() const -> QChar;
+    void IgnoreUndefVar(bool bIgnore);
+    void ReInit();
+    auto ReadNextToken(const QLocale &locale, bool cNumbers, const QChar &decimal, const QChar &thousand) -> token_type;
+
 private:
-
     /**
      * @brief Syntax codes.
      *
@@ -78,69 +80,72 @@ private:
      */
     enum ESynCodes
     {
-        noBO      = 1 << 0,  ///< to avoid i.e. "cos(7)("
-        noBC      = 1 << 1,  ///< to avoid i.e. "sin)" or "()"
-        noVAL     = 1 << 2,  ///< to avoid i.e. "tan 2" or "sin(8)3.14"
-        noVAR     = 1 << 3,  ///< to avoid i.e. "sin a" or "sin(8)a"
-        noARG_SEP = 1 << 4,  ///< to avoid i.e. ",," or "+," ...
-        noFUN     = 1 << 5,  ///< to avoid i.e. "sqrt cos" or "(1)sin"
-        noOPT     = 1 << 6,  ///< to avoid i.e. "(+)"
-        noPOSTOP  = 1 << 7,  ///< to avoid i.e. "(5!!)" "sin!"
-        noINFIXOP = 1 << 8,  ///< to avoid i.e. "++4" "!!4"
-        noEND     = 1 << 9,  ///< to avoid unexpected end of formula
-        noSTR     = 1 << 10, ///< to block numeric arguments on string functions
-        noASSIGN  = 1 << 11, ///< to block assignement to constant i.e. "4=7"
-        noIF      = 1 << 12,
-        noELSE    = 1 << 13,
-        sfSTART_OF_LINE = noOPT | noBC | noPOSTOP | noASSIGN | noIF | noELSE | noARG_SEP,
-        noANY     = ~0       ///< All of he above flags set
+        noBO = 1 << 0,      ///< to avoid i.e. "cos(7)(" NOLINT(hicpp-signed-bitwise)
+        noBC = 1 << 1,      ///< to avoid i.e. "sin)" or "()" NOLINT(hicpp-signed-bitwise)
+        noVAL = 1 << 2,     ///< to avoid i.e. "tan 2" or "sin(8)3.14" NOLINT(hicpp-signed-bitwise)
+        noVAR = 1 << 3,     ///< to avoid i.e. "sin a" or "sin(8)a" NOLINT(hicpp-signed-bitwise)
+        noARG_SEP = 1 << 4, ///< to avoid i.e. ",," or "+," ... NOLINT(hicpp-signed-bitwise)
+        noFUN = 1 << 5,     ///< to avoid i.e. "sqrt cos" or "(1)sin" NOLINT(hicpp-signed-bitwise)
+        noOPT = 1 << 6,     ///< to avoid i.e. "(+)" NOLINT(hicpp-signed-bitwise)
+        noPOSTOP = 1 << 7,  ///< to avoid i.e. "(5!!)" "sin!" NOLINT(hicpp-signed-bitwise)
+        noINFIXOP = 1 << 8, ///< to avoid i.e. "++4" "!!4" NOLINT(hicpp-signed-bitwise)
+        noEND = 1 << 9,     ///< to avoid unexpected end of formula NOLINT(hicpp-signed-bitwise)
+        noSTR = 1 << 10,    ///< to block numeric arguments on string functions NOLINT(hicpp-signed-bitwise)
+        noASSIGN = 1 << 11, ///< to block assignement to constant i.e. "4=7" NOLINT(hicpp-signed-bitwise)
+        noIF = 1 << 12,     // NOLINT(hicpp-signed-bitwise)
+        noELSE = 1 << 13,   // NOLINT(hicpp-signed-bitwise)
+        sfSTART_OF_LINE =
+            noOPT | noBC | noPOSTOP | noASSIGN | noIF | noELSE | noARG_SEP, // NOLINT(hicpp-signed-bitwise)
+        noANY = ~0 ///< All of he above flags set NOLINT(hicpp-signed-bitwise)
     };
 
+    QmuParserBase *m_pParser;
+    QString m_strFormula{};
+    qmusizetype m_iPos{0};
+    int m_iSynFlags{0};
+    bool m_bIgnoreUndefVar{false};
+
+    const funmap_type *m_pFunDef{nullptr};
+    const funmap_type *m_pPostOprtDef{nullptr};
+    const funmap_type *m_pInfixOprtDef{nullptr};
+    const funmap_type *m_pOprtDef{nullptr};
+    const valmap_type *m_pConstDef{nullptr};
+    const strmap_type *m_pStrVarDef{nullptr};
+    varmap_type *m_pVarDef{nullptr}; ///< The only non const pointer to parser internals
+    facfun_type m_pFactory{nullptr};
+    void *m_pFactoryData{nullptr};
+    std::list<identfun_type> m_vIdentFun{}; ///< Value token identification function
+    varmap_type m_UsedVar{};
+    qreal m_fZero{0};   ///< Dummy value of zero, referenced by undefined variables
+    int m_iBrackets{0}; ///< Keep count open brackets
+    token_type m_lastTok{};
+    QChar m_cArgSep{';'}; ///< The character used for separating function arguments
+
     QmuParserTokenReader(const QmuParserTokenReader &a_Reader);
-    QmuParserTokenReader& operator=(const QmuParserTokenReader &a_Reader);
-    void            Assign(const QmuParserTokenReader &a_Reader);
+    auto operator=(const QmuParserTokenReader &a_Reader) -> QmuParserTokenReader &;
 
-    void            SetParent(QmuParserBase *a_pParent);
-    int             ExtractToken(const QString &a_szCharSet, QString &a_strTok, int a_iPos) const;
-    int             ExtractOperatorToken(QString &a_sTok, int a_iPos) const;
+    void Assign(const QmuParserTokenReader &a_Reader);
 
-    bool            IsBuiltIn(token_type &a_Tok);
-    bool            IsArgSep(token_type &a_Tok);
-    bool            IsEOF(token_type &a_Tok);
-    bool            IsInfixOpTok(token_type &a_Tok);
-    bool            IsFunTok(token_type &a_Tok);
-    bool            IsPostOpTok(token_type &a_Tok);
-    bool            IsOprt(token_type &a_Tok);
-    bool            IsValTok(token_type &a_Tok, const QLocale &locale, const QChar &decimal, const QChar &thousand);
-    bool            IsVarTok(token_type &a_Tok);
-    bool            IsStrVarTok(token_type &a_Tok);
-    bool            IsUndefVarTok(token_type &a_Tok);
-    bool            IsString(token_type &a_Tok);
-    void Q_NORETURN Error(EErrorCodes a_iErrc, int a_iPos = -1, const QString &a_sTok = QString() ) const;
+    void SetParent(QmuParserBase *a_pParent);
+    auto ExtractToken(const QString &a_szCharSet, QString &a_strTok, qmusizetype a_iPos) const -> qmusizetype;
+    auto ExtractOperatorToken(QString &a_sTok, qmusizetype a_iPos) const -> qmusizetype;
 
-    token_type& SaveBeforeReturn(const token_type &tok);
+    auto IsBuiltIn(token_type &a_Tok) -> bool;
+    auto IsArgSep(token_type &a_Tok) -> bool;
+    auto IsEOF(token_type &a_Tok) -> bool;
+    auto IsInfixOpTok(token_type &a_Tok) -> bool;
+    auto IsFunTok(token_type &a_Tok) -> bool;
+    auto IsPostOpTok(token_type &a_Tok) -> bool;
+    auto IsOprt(token_type &a_Tok) -> bool;
+    auto IsValTok(token_type &a_Tok, const QLocale &locale, bool cNumbers, const QChar &decimal, const QChar &thousand)
+        -> bool;
+    auto IsVarTok(token_type &a_Tok) -> bool;
+    auto IsStrVarTok(token_type &a_Tok) -> bool;
+    auto IsUndefVarTok(token_type &a_Tok) -> bool;
+    auto IsString(token_type &a_Tok) -> bool;
+    Q_NORETURN void Error(EErrorCodes a_iErrc, qmusizetype a_iPos = -1, const QString &a_sTok = QString()) const;
 
-    QmuParserBase     *m_pParser;
-    QString            m_strFormula;
-    int                m_iPos;
-    int                m_iSynFlags;
-    bool               m_bIgnoreUndefVar;
-
-    const funmap_type *m_pFunDef;
-    const funmap_type *m_pPostOprtDef;
-    const funmap_type *m_pInfixOprtDef;
-    const funmap_type *m_pOprtDef;
-    const valmap_type *m_pConstDef;
-    const strmap_type *m_pStrVarDef;
-    varmap_type       *m_pVarDef;         ///< The only non const pointer to parser internals
-    facfun_type        m_pFactory;
-    void              *m_pFactoryData;
-    std::list<identfun_type> m_vIdentFun; ///< Value token identification function
-    varmap_type        m_UsedVar;
-    qreal              m_fZero;           ///< Dummy value of zero, referenced by undefined variables
-    int                m_iBrackets;       ///< Keep count open brackets
-    token_type         m_lastTok;
-    QChar              m_cArgSep;         ///< The character used for separating function arguments
+    auto SaveBeforeReturn(const token_type &tok) -> token_type &;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -148,9 +153,9 @@ private:
  * @brief Return the current position of the token reader in the formula string.
  *
  * @return #m_iPos
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
-inline int QmuParserTokenReader::GetPos() const
+inline auto QmuParserTokenReader::GetPos() const -> qmusizetype
 {
     return m_iPos;
 }
@@ -160,9 +165,9 @@ inline int QmuParserTokenReader::GetPos() const
  * @brief Return a reference to the formula.
  *
  * @return #m_strFormula
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
-inline const QString& QmuParserTokenReader::GetExpr() const
+inline auto QmuParserTokenReader::GetExpr() const -> const QString &
 {
     return m_strFormula;
 }
@@ -171,7 +176,7 @@ inline const QString& QmuParserTokenReader::GetExpr() const
 /**
  * @brief Return a map containing the used variables only.
  */
-inline varmap_type& QmuParserTokenReader::GetUsedVar()
+inline auto QmuParserTokenReader::GetUsedVar() -> varmap_type &
 {
     return m_UsedVar;
 }
@@ -185,19 +190,19 @@ inline varmap_type& QmuParserTokenReader::GetUsedVar()
  * Those function should return a complete list of variables including
  * those the are not defined by the time of it's call.
  */
-inline void QmuParserTokenReader::IgnoreUndefVar ( bool bIgnore )
+inline void QmuParserTokenReader::IgnoreUndefVar(bool bIgnore)
 {
     m_bIgnoreUndefVar = bIgnore;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline void QmuParserTokenReader::SetArgSep ( char_type cArgSep )
+inline void QmuParserTokenReader::SetArgSep(char_type cArgSep)
 {
-    m_cArgSep = cArgSep;
+    m_cArgSep = QChar(cArgSep);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QChar QmuParserTokenReader::GetArgSep() const
+inline auto QmuParserTokenReader::GetArgSep() const -> QChar
 {
     return m_cArgSep;
 }

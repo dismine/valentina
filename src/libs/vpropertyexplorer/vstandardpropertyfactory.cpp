@@ -54,13 +54,13 @@ VPE::VStandardPropertyFactory::VStandardPropertyFactory(VPropertyFactoryManager 
     }
 }
 
-VPE::VProperty *VPE::VStandardPropertyFactory::createProperty(const QString &type, const QString &name)
+auto VPE::VStandardPropertyFactory::createProperty(const QString &type, const QString &name) -> VPE::VProperty *
 {
     if (type == QString("string"))
     {
         return new VProperty(name);
     }
-    else if (type == QString("bool"))
+    if (type == QString("bool"))
     {
         return new VBoolProperty(name);
     }

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -72,75 +72,73 @@ public:
      * @param node node
      * @return node
      */
-    VNodeDetail &operator=(const VNodeDetail &node);
-#ifdef Q_COMPILER_RVALUE_REFS
-    VNodeDetail &operator=(VNodeDetail &&node) Q_DECL_NOTHROW { Swap(node); return *this; }
-#endif
+    auto operator=(const VNodeDetail &node) -> VNodeDetail &;
 
-    inline void Swap(VNodeDetail &node) Q_DECL_NOTHROW
-    { std::swap(d, node.d); }
+    VNodeDetail(VNodeDetail &&node) noexcept;
+    auto operator=(VNodeDetail &&node) noexcept -> VNodeDetail &;
 
     /**
      * @brief getId return object id.
      * @return id.
      */
-    quint32     getId() const;
+    auto getId() const -> quint32;
     /**
      * @brief setId set object id.
      * @param value object id.
      */
-    void        setId(const quint32 &value);
+    void setId(const quint32 &value);
     /**
      * @brief getTypeTool return tool type.
      * @return tool type.
      */
-    Tool getTypeTool() const;
+    auto getTypeTool() const -> Tool;
     /**
      * @brief setTypeTool set tool type.
      * @param value tool type.
      */
-    void        setTypeTool(const Tool &value);
+    void setTypeTool(const Tool &value);
     /**
      * @brief getTypeNode return node type.
      * @return node type.
      */
-    NodeDetail getTypeNode() const;
+    auto getTypeNode() const -> NodeDetail;
     /**
      * @brief setTypeNode set node type.
      * @param value node type.
      */
-    void        setTypeNode(const NodeDetail &value);
+    void setTypeNode(const NodeDetail &value);
     /**
      * @brief getMx return object bias x axis.
      * @return bias x axis.
      */
-    qreal       getMx() const;
+    auto getMx() const -> qreal;
     /**
      * @brief setMx set object bias x axis.
      * @param value bias x axis.
      */
-    void        setMx(const qreal &value);
+    void setMx(const qreal &value);
     /**
      * @brief getMy return object bias y axis.
      * @return bias y axis.
      */
-    qreal       getMy() const;
+    auto getMy() const -> qreal;
     /**
      * @brief setMy set object bias y axis.
      * @param value bias y axis.
      */
-    void        setMy(const qreal &value);
+    void setMy(const qreal &value);
 
-    bool        getReverse() const;
-    void        setReverse(bool reverse);
+    auto getReverse() const -> bool;
+    void setReverse(bool reverse);
 
-    static QVector<VPieceNode> Convert(const VContainer *data, const QVector<VNodeDetail> &nodes, qreal width,
-                                       bool closed);
+    static auto Convert(const VContainer *data, const QVector<VNodeDetail> &nodes, qreal width, bool closed)
+        -> QVector<VPieceNode>;
+
 private:
     QSharedDataPointer<VNodeDetailData> d;
 };
 
-Q_DECLARE_METATYPE(VNodeDetail)
-Q_DECLARE_TYPEINFO(VNodeDetail, Q_MOVABLE_TYPE);
+Q_DECLARE_METATYPE(VNodeDetail)                  // NOLINT
+Q_DECLARE_TYPEINFO(VNodeDetail, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VNODEDETAIL_H

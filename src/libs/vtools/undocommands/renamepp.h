@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef RENAMEPP_H
 #define RENAMEPP_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -37,35 +36,40 @@
 
 #include "vundocommand.h"
 
-class RenamePP :public VUndoCommand
+class RenamePP : public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     RenamePP(VAbstractPattern *doc, const QString &newPPname, QComboBox *combo, QUndoCommand *parent = nullptr);
-    virtual ~RenamePP() override;
+    ~RenamePP() override;
 
-    virtual void undo() override;
-    virtual void redo() override;
-    virtual bool mergeWith(const QUndoCommand *command) override;
-    virtual int  id() const override;
-    QString      getNewPPname() const;
-    QString      getOldPPname() const;
+    void undo() override;
+    void redo() override;
+
+    auto mergeWith(const QUndoCommand *command) -> bool override;
+    auto id() const -> int override;
+
+    auto getNewPPname() const -> QString;
+    auto getOldPPname() const -> QString;
+
 private:
-    Q_DISABLE_COPY(RenamePP)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(RenamePP) // NOLINT
     QComboBox *combo;
-    QString   newPPname;
-    QString   oldPPname;
-    void      ChangeName(const QString &oldName, const QString &newName);
+    QString newPPname;
+    QString oldPPname;
+    void ChangeName(const QString &oldName, const QString &newName);
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QString RenamePP::getNewPPname() const
+inline auto RenamePP::getNewPPname() const -> QString
 {
     return newPPname;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QString RenamePP::getOldPPname() const
+inline auto RenamePP::getOldPPname() const -> QString
 {
     return oldPPname;
 }

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -33,57 +33,61 @@
 #include <QtDebug>
 
 #include "../ifc/ifcdef.h"
-#include "vvariable.h"
+#include "../ifc/xml/vpatternimage.h"
 #include "vmeasurement_p.h"
+#include "vvariable.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
+//---------------------------------------------------------------------------------------------------------------------
+VMeasurement::VMeasurement(quint32 index, const QString &name)
+  : VVariable(name),
+    d(new VMeasurementData(index, MeasurementType::Separator))
+{
+    SetType(VarType::MeasurementSeparator);
+    StoreValue(0);
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VMeasurement create measurement for multisize table
  * @param name measurement's name
- * @param base value in base size and height
- * @param ksize increment in sizes
- * @param kheight increment in heights
- * @param gui_text shor tooltip for user
- * @param description measurement full description
- * @param tagName measurement's tag name in file
+ * @param base measurement's base value
  */
-VMeasurement::VMeasurement(quint32 index, const QString &name, qreal baseSize, qreal baseHeight, const qreal &base,
-                           const qreal &ksize, const qreal &kheight, const QString &gui_text,
-                           const QString &description, const QString &tagName)
-    :VVariable(name, description),
-      d(new VMeasurementData(index, gui_text, tagName, baseSize, baseHeight, base, ksize, kheight))
+VMeasurement::VMeasurement(quint32 index, const QString &name, qreal baseA, qreal baseB, qreal baseC, qreal base)
+  : VVariable(name),
+    d(new VMeasurementData(index, baseA, baseB, baseC, base))
 {
     SetType(VarType::Measurement);
-    VInternalVariable::SetValue(d->base);
+    StoreValue(d->shiftBase);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VMeasurement create measurement for individual table
- * @param name measurement's name
+ * @param name measurement's base value
  * @param base value in base size and height
- * @param gui_text shor tooltip for user
- * @param description measurement full description
- * @param tagName measurement's tag name in file
  */
 VMeasurement::VMeasurement(VContainer *data, quint32 index, const QString &name, const qreal &base,
-                           const QString &formula, bool ok, const QString &gui_text, const QString &description,
-                           const QString &tagName)
-    :VVariable(name, description), d(new VMeasurementData(data, index, formula, ok, gui_text, tagName, base))
+                           const QString &formula, bool ok)
+  : VVariable(name),
+    d(new VMeasurementData(data, index, formula, ok, base))
 {
     SetType(VarType::Measurement);
-    VInternalVariable::SetValue(base);
+    StoreValue(base);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VMeasurement::VMeasurement(const VMeasurement &m)
-    :VVariable(m), d(m.d)
-{}
+COPY_CONSTRUCTOR_IMPL_2(VMeasurement, VVariable)
 
 //---------------------------------------------------------------------------------------------------------------------
-VMeasurement &VMeasurement::operator=(const VMeasurement &m)
+auto VMeasurement::operator=(const VMeasurement &m) -> VMeasurement &
 {
-    if ( &m == this )
+    if (&m == this)
     {
         return *this;
     }
@@ -93,150 +97,78 @@ VMeasurement &VMeasurement::operator=(const VMeasurement &m)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VMeasurement::~VMeasurement()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-QStringList VMeasurement::ListHeights(const QMap<GHeights, bool> &heights, Unit patternUnit)
+VMeasurement::VMeasurement(VMeasurement &&m) noexcept
+  : VVariable(std::move(m)),
+    d(std::move(m.d)) // NOLINT(bugprone-use-after-move)
 {
-    QStringList list;
-    if (patternUnit == Unit::Inch)
-    {
-        qWarning()<<"Multisize table doesn't support inches.";
-        return list;
-    }
-
-    QMap<GHeights, bool>::const_iterator i = heights.constBegin();
-    while (i != heights.constEnd())
-    {
-        if (i.value() && i.key() != GHeights::ALL)
-        {
-            list.append(QString::number(UnitConvertor(static_cast<int>(i.key()), Unit::Cm, patternUnit)));
-        }
-        ++i;
-    }
-
-    if (list.isEmpty())
-    {
-        list = VMeasurement::WholeListHeights(patternUnit);
-    }
-    return list;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList VMeasurement::ListSizes(const QMap<GSizes, bool> &sizes, Unit patternUnit)
+auto VMeasurement::operator=(VMeasurement &&m) noexcept -> VMeasurement &
 {
-    QStringList list;
-    if (patternUnit == Unit::Inch)
-    {
-        qWarning()<<"Multisize table doesn't support inches.";
-        return list;
-    }
-
-    QMap<GSizes, bool>::const_iterator i = sizes.constBegin();
-    while (i != sizes.constEnd())
-    {
-        if (i.value() && i.key() != GSizes::ALL)
-        {
-            list.append(QString::number(UnitConvertor(static_cast<int>(i.key()), Unit::Cm, patternUnit)));
-        }
-        ++i;
-    }
-
-    if (list.isEmpty())
-    {
-        list = VMeasurement::WholeListSizes(patternUnit);
-    }
-    return list;
+    VVariable::operator=(m);
+    std::swap(d, m.d);
+    return *this;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList VMeasurement::WholeListHeights(Unit patternUnit)
+VMeasurement::~VMeasurement() = default;
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VMeasurement::GetKnownMeasurementsId() const -> QUuid
 {
-    QStringList list;
-    if (patternUnit == Unit::Inch)
-    {
-        qWarning()<<"Multisize table doesn't support inches.";
-        return list;
-    }
-
-    list.reserve((static_cast<int>(GHeights::H200) - static_cast<int>(GHeights::H50))/heightStep);
-    for (int i = static_cast<int>(GHeights::H50); i<= static_cast<int>(GHeights::H200); i = i+heightStep)
-    {
-        list.append(QString::number(UnitConvertor(i, Unit::Cm, patternUnit)));
-    }
-
-    return list;
+    return d->dbId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList VMeasurement::WholeListSizes(Unit patternUnit)
+void VMeasurement::SetKnownMeasurementsId(const QUuid &id)
 {
-    QStringList list;
-    if (patternUnit == Unit::Inch)
-    {
-        qWarning()<<"Multisize table doesn't support inches.";
-        return list;
-    }
-
-    list.reserve((static_cast<int>(GSizes::S72) - static_cast<int>(GSizes::S22))/sizeStep);
-    for (int i = static_cast<int>(GSizes::S22); i<= static_cast<int>(GSizes::S72); i = i+sizeStep)
-    {
-       list.append(QString::number(UnitConvertor(i, Unit::Cm, patternUnit)));
-    }
-
-    return list;
+    d->dbId = id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VMeasurement::IsGradationSizeValid(const QString &size)
+auto VMeasurement::CorrectionHash(qreal baseA, qreal baseB, qreal baseC) -> QString
 {
-    if (not size.isEmpty())
+    QStringList hashBlocks{QString::number(baseA)};
+
+    if (baseB > 0)
     {
-        const QStringList sizes = VMeasurement::WholeListSizes(Unit::Cm);
-        return sizes.contains(size);
+        hashBlocks.append(QString::number(baseB));
     }
-    else
+
+    if (baseC > 0)
     {
-        return false;
+        hashBlocks.append(QString::number(baseC));
     }
+    return hashBlocks.join(';'_L1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VMeasurement::IsGradationHeightValid(const QString &height)
+auto VMeasurement::CalcValue() const -> qreal
 {
-    if (not height.isEmpty())
-    {
-        const QStringList heights = VMeasurement::WholeListHeights(Unit::Cm);
-        return heights.contains(height);
-    }
-    else
-    {
-        return false;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal VMeasurement::CalcValue() const
-{
-    if (d->currentUnit == nullptr || qFuzzyIsNull(d->currentSize) || qFuzzyIsNull(d->currentHeight))
+    if (qFuzzyIsNull(d->currentBaseA))
     {
         return VInternalVariable::GetValue();
     }
 
-    if (*d->currentUnit == Unit::Inch)
+    // Formula for calculation gradation
+    const qreal kA = d->stepA > 0 ? (d->currentBaseA - d->baseA) / d->stepA : 0;
+    const qreal kB = d->stepB > 0 ? (d->currentBaseB - d->baseB) / d->stepB : 0;
+    const qreal kC = d->stepC > 0 ? (d->currentBaseC - d->baseC) / d->stepC : 0;
+
+    return d->shiftBase + kA * d->shiftA + kB * d->shiftB + kC * d->shiftC + Correction();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VMeasurement::Correction() const -> qreal
+{
+    if (const QString hash = CorrectionHash(d->currentBaseA, d->currentBaseB, d->currentBaseC);
+        d->corrections.contains(hash))
     {
-        qWarning("Gradation doesn't support inches");
-        return 0;
+        return d->corrections.value(hash).correction;
     }
 
-    const qreal sizeIncrement = UnitConvertor(2.0, Unit::Cm, *d->currentUnit);
-    const qreal heightIncrement = UnitConvertor(6.0, Unit::Cm, *d->currentUnit);
-
-    // Formula for calculation gradation
-    const qreal k_size    = ( d->currentSize - d->baseSize ) / sizeIncrement;
-    const qreal k_height  = ( d->currentHeight - d->baseHeight ) / heightIncrement;
-    return d->base + k_size * d->ksize + k_height * d->kheight;
+    return 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -244,88 +176,88 @@ qreal VMeasurement::CalcValue() const
  * @brief GetGuiText measurement name for tooltip
  * @return measurement name
  */
-QString VMeasurement::GetGuiText() const
+auto VMeasurement::GetGuiText() const -> QString
 {
     return d->gui_text;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VMeasurement::TagName() const
+void VMeasurement::SetGuiText(const QString &guiText)
 {
-    return d->_tagName;
+    d->gui_text = guiText;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VMeasurement::setTagName(const QString &tagName)
-{
-    d->_tagName = tagName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VMeasurement::GetFormula() const
+auto VMeasurement::GetFormula() const -> QString
 {
     return d->formula;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VMeasurement::IsCustom() const
+auto VMeasurement::IsCustom() const -> bool
 {
     return GetName().indexOf(CustomMSign) == 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VMeasurement::Index() const
+auto VMeasurement::Index() const -> int
 {
     return static_cast<int>(d->index);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VMeasurement::IsFormulaOk() const
+auto VMeasurement::IsFormulaOk() const -> bool
 {
     return d->formulaOk;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VMeasurement::IsNotUsed() const
+auto VMeasurement::GetMeasurementType() const -> MeasurementType
 {
-    return qFuzzyIsNull(d->base) && qFuzzyIsNull(d->ksize) && qFuzzyIsNull(d->kheight);
+    return d->varType;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VMeasurement::GetValue() const
+auto VMeasurement::IsNotUsed() const -> bool
+{
+    return qFuzzyIsNull(d->shiftBase) && qFuzzyIsNull(d->shiftB) && qFuzzyIsNull(d->shiftA);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VMeasurement::GetValue() const -> qreal
 {
     return CalcValue();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal *VMeasurement::GetValue()
+auto VMeasurement::GetValue() -> qreal *
 {
-    VInternalVariable::SetValue(CalcValue());
+    StoreValue(CalcValue());
     return VInternalVariable::GetValue();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VContainer *VMeasurement::GetData()
+auto VMeasurement::GetData() -> VContainer *
 {
     return d->data.data();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VMeasurement::SetSize(qreal size)
+void VMeasurement::SetBaseA(qreal base)
 {
-    d->currentSize = size;
+    d->currentBaseA = base;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VMeasurement::SetHeight(qreal height)
+void VMeasurement::SetBaseB(qreal base)
 {
-    d->currentHeight = height;
+    d->currentBaseB = base;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VMeasurement::SetUnit(const Unit *unit)
+void VMeasurement::SetBaseC(qreal base)
 {
-    d->currentUnit = unit;
+    d->currentBaseC = base;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -333,32 +265,15 @@ void VMeasurement::SetUnit(const Unit *unit)
  * @brief GetBase return value in base size and height
  * @return value
  */
-qreal VMeasurement::GetBase() const
+auto VMeasurement::GetBase() const -> qreal
 {
-    return d->base;
+    return d->shiftBase;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VMeasurement::SetBase(const qreal &value)
+void VMeasurement::SetBase(qreal value)
 {
-    d->base = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetKsize return increment in sizes
- * @return increment
- */
-qreal VMeasurement::GetKsize() const
-{
-    return d->ksize;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-// cppcheck-suppress unusedFunction
-void VMeasurement::SetKsize(const qreal &value)
-{
-    d->ksize = value;
+    d->shiftBase = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -366,14 +281,166 @@ void VMeasurement::SetKsize(const qreal &value)
  * @brief GetKheight return increment in heights
  * @return increment
  */
-qreal VMeasurement::GetKheight() const
+auto VMeasurement::GetShiftA() const -> qreal
 {
-    return d->kheight;
+    return d->shiftA;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-void VMeasurement::SetKheight(const qreal &value)
+void VMeasurement::SetShiftA(qreal value)
 {
-    d->kheight = value;
+    d->shiftA = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetKsize return increment in sizes
+ * @return increment
+ */
+auto VMeasurement::GetShiftB() const -> qreal
+{
+    return d->shiftB;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
+void VMeasurement::SetShiftB(qreal value)
+{
+    d->shiftB = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VMeasurement::GetShiftC() const -> qreal
+{
+    return d->shiftC;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurement::SetShiftC(qreal value)
+{
+    d->shiftC = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VMeasurement::GetStepA() const -> qreal
+{
+    return d->shiftA;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurement::SetStepA(qreal value)
+{
+    d->stepA = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VMeasurement::GetStepB() const -> qreal
+{
+    return d->stepB;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurement::SetStepB(qreal value)
+{
+    d->stepB = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VMeasurement::GetStepC() const -> qreal
+{
+    return d->stepC;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurement::SetStepC(qreal value)
+{
+    d->stepC = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VMeasurement::IsSpecialUnits() const -> bool
+{
+    return d->specialUnits;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurement::SetSpecialUnits(bool special)
+{
+    d->specialUnits = special;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VMeasurement::GetDimension() const -> IMD
+{
+    return d->dimension;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurement::SetDimension(IMD type)
+{
+    d->dimension = type;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VMeasurement::GetCorrection(qreal baseA, qreal baseB, qreal baseC) const -> qreal
+{
+    if (const QString hash = VMeasurement::CorrectionHash(baseA, baseB, baseC); d->corrections.contains(hash))
+    {
+        return d->corrections[hash].correction;
+    }
+
+    return 0;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VMeasurement::GetCorrections() const -> QMap<QString, VMeasurementCorrection>
+{
+    return d->corrections;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurement::SetCorrections(const QMap<QString, VMeasurementCorrection> &corrections)
+{
+    d->corrections = corrections;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VMeasurement::GetImage() const -> VPatternImage
+{
+    return d->image;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurement::SetImage(const VPatternImage &image)
+{
+    d->image = image;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VMeasurement::GetValueAlias(qreal baseA, qreal baseB, qreal baseC) const -> QString
+{
+    if (const QString hash = VMeasurement::CorrectionHash(baseA, baseB, baseC); d->corrections.contains(hash))
+    {
+        return d->corrections[hash].alias;
+    }
+
+    return {};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VMeasurement::GetValueAlias() const -> QString
+{
+    if (qFuzzyIsNull(d->currentBaseA))
+    {
+        return d->valueAlias;
+    }
+
+    return GetValueAlias(d->currentBaseA, d->currentBaseB, d->currentBaseC);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurement::SetValueAlias(const QString &alias)
+{
+    d->valueAlias = alias;
 }

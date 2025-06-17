@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef VTOOLPOINTFROMARCANDTANGENT_H
 #define VTOOLPOINTFROMARCANDTANGENT_H
 
-#include <qcompilerdetection.h>
 #include <QDomElement>
 #include <QGraphicsItem>
 #include <QMetaObject>
@@ -43,58 +42,64 @@
 #include "vtoolsinglepoint.h"
 
 template <class T> class QSharedPointer;
+class VArc;
 
 struct VToolPointFromArcAndTangentInitData : VToolSinglePointInitData
 {
-    VToolPointFromArcAndTangentInitData()
-        : VToolSinglePointInitData(),
-          arcId(NULL_ID),
-          tangentPointId(NULL_ID),
-          crossPoint(CrossCirclesPoint::FirstPoint)
-    {}
-
-    quint32 arcId;
-    quint32 tangentPointId;
-    CrossCirclesPoint crossPoint;
+    quint32 arcId{NULL_ID};
+    quint32 tangentPointId{NULL_ID};
+    CrossCirclesPoint crossPoint{CrossCirclesPoint::FirstPoint};
 };
 
 class VToolPointFromArcAndTangent : public VToolSinglePoint
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
-    virtual void setDialog() override;
-    static VToolPointFromArcAndTangent *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
-                                               VAbstractPattern *doc, VContainer *data);
-    static VToolPointFromArcAndTangent *Create(VToolPointFromArcAndTangentInitData initData);
-    static bool FindPoint(const QPointF &p, const VArc *arc, const CrossCirclesPoint pType, QPointF *intersectionPoint);
+    void SetDialog() override;
+
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolPointFromArcAndTangent *;
+    static auto Create(VToolPointFromArcAndTangentInitData initData) -> VToolPointFromArcAndTangent *;
+
+    static auto FindPoint(const QPointF &p, const VArc *arc, const CrossCirclesPoint pType, QPointF *intersectionPoint)
+        -> bool;
+
     static const QString ToolType;
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Tool::PointFromArcAndTangent) };
 
-    QString TangentPointName() const;
-    QString ArcName() const;
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Tool::PointFromArcAndTangent)
+    };
 
-    CrossCirclesPoint GetCrossCirclesPoint() const;
-    void              SetCrossCirclesPoint(const CrossCirclesPoint &value);
+    auto TangentPointName() const -> QString;
+    auto ArcName() const -> QString;
 
-    virtual void ShowVisualization(bool show) override;
+    auto GetCrossCirclesPoint() const -> CrossCirclesPoint;
+    void SetCrossCirclesPoint(CrossCirclesPoint value);
+
+    void ShowVisualization(bool show) override;
+
 protected slots:
-    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
+    void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) override;
+
 protected:
-    virtual void RemoveReferens() override;
-    virtual void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                            QList<quint32> &newDependencies) override;
-    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
-    virtual void ReadToolAttributes(const QDomElement &domElement) override;
-    virtual void SetVisualization() override;
+    void RemoveReferens() override;
+    void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies) override;
+    void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    void ReadToolAttributes(const QDomElement &domElement) override;
+    void SetVisualization() override;
+
 private:
-    Q_DISABLE_COPY(VToolPointFromArcAndTangent)
+    Q_DISABLE_COPY_MOVE(VToolPointFromArcAndTangent) // NOLINT
 
     quint32 arcId;
     quint32 tangentPointId;
     CrossCirclesPoint crossPoint;
 
-    VToolPointFromArcAndTangent(const VToolPointFromArcAndTangentInitData &initData, QGraphicsItem *parent = nullptr);
+    explicit VToolPointFromArcAndTangent(const VToolPointFromArcAndTangentInitData &initData,
+                                         QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLPOINTFROMARCANDTANGENT_H

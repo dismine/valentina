@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+
+<svg
+   width="800px"
+   height="800px"
+   viewBox="0 0 24 24"
+   id="up-right-down-left-sign"
+   data-name="Multi Color"
+   class="icon multi-color"
+   version="1.1"
+   sodipodi:docname="vertical_grainline.svg"
+   inkscape:version="1.3 (1:1.3+202307231459+0e150ed6c4)"
+   inkscape:export-filename="../../dark/32x32/vertical_grainline@2x.png"
+   inkscape:export-xdpi="7.6799998"
+   inkscape:export-ydpi="7.6799998"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.70625"
+     inkscape:cx="474.33628"
+     inkscape:cy="356.81416"
+     inkscape:window-width="2560"
+     inkscape:window-height="1372"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="up-right-down-left-sign" />
+  <title
+     style="stroke-width: 2;"
+     id="title1">up right down left sign</title>
+  <path
+     id="secondary-fill"
+     d="m 13.000124,1.2716182 4.549621,4.450546 -3.460677,-0.08705 -0.09106,3.107313 -3.76836,-0.0824 0.09142,-3.119693 -3.4606779,-0.08705 4.8035619,-4.215267 a 0.94516261,0.87570185 0 0 1 1.33617,0.03361 z"
+     style="fill:#2ca9bc;stroke-width:1.81954" />
+  <path
+     id="tertiary-fill"
+     d="m 12.383408,22.317162 4.803562,-4.215267 -3.460677,-0.08705 0.09106,-3.107314 -3.767635,-0.107163 -0.09142,3.119692 -3.4606784,-0.08705 4.5496221,4.450546 a 0.94516261,0.87570185 0 0 0 1.336169,0.03362 z"
+     style="fill:#b7b7b7;stroke-width:1.81954" />
+  <path
+     id="primary-stroke"
+     d="m 12.719817,1.5298952 4.666603,4.327728 -3.461768,0.0052 -0.03275,12.3850028 3.461768,-0.0052 -4.689529,4.341774 a 0.87570185,0.94516261 88.473019 0 1 -1.33659,0.002 l -4.6666038,-4.327738 3.4617688,-0.0052 0.03275,-12.3850018 -3.4617686,0.0052 4.6895296,-4.341773 a 0.87570185,0.94516261 88.473019 0 1 1.336591,-0.002 z"
+     style="fill:none;fill-opacity:1;stroke:#dedede;stroke-width:1.81954;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1" />
+</svg>

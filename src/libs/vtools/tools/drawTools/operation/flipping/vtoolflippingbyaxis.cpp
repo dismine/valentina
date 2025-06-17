@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -28,46 +28,41 @@
 
 #include "vtoolflippingbyaxis.h"
 
-#include <limits.h>
-#include <qiterator.h>
 #include <QColor>
 #include <QDomNode>
 #include <QDomNodeList>
 #include <QMapIterator>
 #include <QPoint>
 #include <QSharedPointer>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <QUndoStack>
+#include <climits>
 #include <new>
+#include <qiterator.h>
 
-#include "../../../../dialogs/tools/dialogtool.h"
 #include "../../../../dialogs/tools/dialogflippingbyaxis.h"
+#include "../../../../dialogs/tools/dialogtool.h"
 #include "../../../../visualization/line/operation/vistoolflippingbyaxis.h"
 #include "../../../../visualization/visualization.h"
-#include "../vgeometry/vpointf.h"
-#include "../vpatterndb/vtranslatevars.h"
-#include "../vmisc/vabstractapplication.h"
-#include "../vmisc/vcommonsettings.h"
-#include "../vmisc/diagnostic.h"
-#include "../vmisc/logging.h"
-#include "../vpatterndb/vcontainer.h"
-#include "../vpatterndb/vformula.h"
-#include "../ifc/ifcdef.h"
-#include "../ifc/exception/vexception.h"
-#include "../vwidgets/vabstractsimple.h"
-#include "../vwidgets/vmaingraphicsscene.h"
 #include "../../../vabstracttool.h"
 #include "../../../vdatatool.h"
 #include "../../vdrawtool.h"
+#include "../ifc/exception/vexception.h"
+#include "../ifc/ifcdef.h"
+#include "../vgeometry/vpointf.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vformula.h"
+#include "../vpatterndb/vtranslatevars.h"
+#include "../vwidgets/vabstractsimple.h"
+#include "../vwidgets/vmaingraphicsscene.h"
 
 template <class T> class QSharedPointer;
 
 const QString VToolFlippingByAxis::ToolType = QStringLiteral("flippingByAxis");
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolFlippingByAxis::setDialog()
+void VToolFlippingByAxis::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogFlippingByAxis> dialogTool = qobject_cast<DialogFlippingByAxis *>(m_dialog);
@@ -75,11 +70,15 @@ void VToolFlippingByAxis::setDialog()
     dialogTool->SetOriginPointId(m_originPointId);
     dialogTool->SetAxisType(m_axisType);
     dialogTool->SetSuffix(suffix);
+    dialogTool->SetNotes(m_notes);
+    dialogTool->SetSourceObjects(source);
+
+    SetDialogVisibilityGroupData(dialogTool);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolFlippingByAxis *VToolFlippingByAxis::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
-                                                 VAbstractPattern *doc, VContainer *data)
+auto VToolFlippingByAxis::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                                 VContainer *data) -> VToolFlippingByAxis *
 {
     SCASSERT(not dialog.isNull())
     const QPointer<DialogFlippingByAxis> dialogTool = qobject_cast<DialogFlippingByAxis *>(dialog);
@@ -89,14 +88,18 @@ VToolFlippingByAxis *VToolFlippingByAxis::Create(const QPointer<DialogTool> &dia
     initData.originPointId = dialogTool->GetOriginPointId();
     initData.axisType = dialogTool->GetAxisType();
     initData.suffix = dialogTool->GetSuffix();
-    initData.source = dialogTool->GetObjects();
+    initData.source = dialogTool->GetSourceObjects();
+    initData.hasLinkedVisibilityGroup = dialogTool->HasLinkedVisibilityGroup();
+    initData.visibilityGroupName = dialogTool->GetVisibilityGroupName();
+    initData.visibilityGroupTags = dialogTool->GetVisibilityGroupTags();
     initData.scene = scene;
     initData.doc = doc;
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
-    VToolFlippingByAxis* operation = Create(initData);
+    VToolFlippingByAxis *operation = Create(initData);
     if (operation != nullptr)
     {
         operation->m_dialog = dialog;
@@ -105,10 +108,10 @@ VToolFlippingByAxis *VToolFlippingByAxis::Create(const QPointer<DialogTool> &dia
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolFlippingByAxis *VToolFlippingByAxis::Create(VToolFlippingByAxisInitData initData)
+auto VToolFlippingByAxis::Create(VToolFlippingByAxisInitData initData) -> VToolFlippingByAxis *
 {
     const auto originPoint = *initData.data->GeometricObject<VPointF>(initData.originPointId);
-    const QPointF fPoint = static_cast<QPointF>(originPoint);
+    const auto fPoint = static_cast<QPointF>(originPoint);
 
     QPointF sPoint;
     if (initData.axisType == AxisType::VerticalAxis)
@@ -124,23 +127,35 @@ VToolFlippingByAxis *VToolFlippingByAxis::Create(VToolFlippingByAxisInitData ini
 
     if (initData.parse == Document::FullParse)
     {
+        if (initData.typeCreation == Source::FromGui && initData.hasLinkedVisibilityGroup)
+        {
+            VAbstractApplication::VApp()->getUndoStack()->beginMacro(tr("Flipping by axis"));
+        }
+
         VAbstractTool::AddRecord(initData.id, Tool::FlippingByAxis, initData.doc);
-        VToolFlippingByAxis *tool = new VToolFlippingByAxis(initData);
+        auto *tool = new VToolFlippingByAxis(initData);
         initData.scene->addItem(tool);
         InitOperationToolConnections(initData.scene, tool);
         VAbstractPattern::AddTool(initData.id, tool);
         initData.doc->IncrementReferens(originPoint.getIdTool());
-        for (auto idObject : qAsConst(initData.source))
+        for (auto object : qAsConst(initData.source))
         {
-            initData.doc->IncrementReferens(initData.data->GetGObject(idObject)->getIdTool());
+            initData.doc->IncrementReferens(initData.data->GetGObject(object.id)->getIdTool());
         }
+
+        if (initData.typeCreation == Source::FromGui && initData.hasLinkedVisibilityGroup)
+        {
+            VAbstractOperation::CreateVisibilityGroup(initData);
+            VAbstractApplication::VApp()->getUndoStack()->endMacro();
+        }
+
         return tool;
     }
     return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-AxisType VToolFlippingByAxis::GetAxisType() const
+auto VToolFlippingByAxis::GetAxisType() const -> AxisType
 {
     return m_axisType;
 }
@@ -155,7 +170,7 @@ void VToolFlippingByAxis::SetAxisType(AxisType value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolFlippingByAxis::OriginPointName() const
+auto VToolFlippingByAxis::OriginPointName() const -> QString
 {
     return VAbstractTool::data.GetGObject(m_originPointId)->name();
 }
@@ -173,10 +188,10 @@ void VToolFlippingByAxis::ShowContextMenu(QGraphicsSceneContextMenuEvent *event,
     {
         ContextMenu<DialogFlippingByAxis>(event, id);
     }
-    catch(const VExceptionToolWasDeleted &e)
+    catch (const VExceptionToolWasDeleted &e)
     {
         Q_UNUSED(e)
-        return;//Leave this method immediately!!!
+        return; // Leave this method immediately!!!
     }
 }
 
@@ -185,12 +200,13 @@ void VToolFlippingByAxis::SetVisualization()
 {
     if (not vis.isNull())
     {
-        VisToolFlippingByAxis *visual = qobject_cast<VisToolFlippingByAxis *>(vis);
+        auto *visual = qobject_cast<VisToolFlippingByAxis *>(vis);
         SCASSERT(visual != nullptr)
 
-        visual->SetObjects(source);
+        visual->SetObjects(SourceToObjects(source));
         visual->SetOriginPointId(m_originPointId);
         visual->SetAxisType(m_axisType);
+        visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
 }
@@ -209,42 +225,49 @@ void VToolFlippingByAxis::SaveDialog(QDomElement &domElement, QList<quint32> &ol
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetOriginPointId()));
     doc->SetAttribute(domElement, AttrAxisType, QString().setNum(static_cast<int>(dialogTool->GetAxisType())));
     doc->SetAttribute(domElement, AttrSuffix, dialogTool->GetSuffix());
+    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
+                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
+
+    source = dialogTool->GetSourceObjects();
+    SaveSourceDestination(domElement);
+
+    // Save visibility data for later use
+    SaveVisibilityGroupData(dialogTool);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolFlippingByAxis::ReadToolAttributes(const QDomElement &domElement)
 {
-    m_originPointId = doc->GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
-    m_axisType = static_cast<AxisType>(doc->GetParametrUInt(domElement, AttrAxisType, QChar('1')));
-    suffix = doc->GetParametrString(domElement, AttrSuffix);
+    VAbstractFlipping::ReadToolAttributes(domElement);
+
+    m_originPointId = VAbstractPattern::GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
+    m_axisType = static_cast<AxisType>(VAbstractPattern::GetParametrUInt(domElement, AttrAxisType, QChar('1')));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolFlippingByAxis::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-    VDrawTool::SaveOptions(tag, obj);
+    VAbstractFlipping::SaveOptions(tag, obj);
 
     doc->SetAttribute(tag, AttrType, ToolType);
     doc->SetAttribute(tag, AttrCenter, QString().setNum(m_originPointId));
     doc->SetAttribute(tag, AttrAxisType, QString().setNum(static_cast<int>(m_axisType)));
-    doc->SetAttribute(tag, AttrSuffix, suffix);
-
-    SaveSourceDestination(tag);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolFlippingByAxis::MakeToolTip() const
+auto VToolFlippingByAxis::MakeToolTip() const -> QString
 {
-    return QStringLiteral("<tr> <td><b>%1:</b> %2</td> </tr>")
-            .arg(tr("Origin point"), OriginPointName());
+    return QStringLiteral("<tr> <td><b>%1:</b> %2</td> </tr>"
+                          "%3")
+        .arg(tr("Origin point"), OriginPointName()) // 1, 2
+        .arg(VisibilityGroupToolTip());             // 3
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolFlippingByAxis::VToolFlippingByAxis(const VToolFlippingByAxisInitData &initData, QGraphicsItem *parent)
-    : VAbstractFlipping(initData.doc, initData.data, initData.id, initData.suffix, initData.source,
-                        initData.destination, parent),
-      m_originPointId(initData.originPointId),
-      m_axisType(initData.axisType)
+  : VAbstractFlipping(initData, parent),
+    m_originPointId(initData.originPointId),
+    m_axisType(initData.axisType)
 {
     InitOperatedObjects();
     ToolCreation(initData.typeCreation);

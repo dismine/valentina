@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -167,6 +167,39 @@ void TST_VAbstractCurve::IsPointOnCurve() const
     QFETCH(QPointF, point);
     QFETCH(bool, expectedResult);
 
-    bool result = VAbstractCurve::IsPointOnCurve(points, point);
+    bool const result = VAbstractCurve::IsPointOnCurve(points, point);
     QCOMPARE(result, expectedResult);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractCurve::CurveIntersectLine_data()
+{
+    QTest::addColumn<QVector<QPointF>>("points");
+    QTest::addColumn<QVector<QPointF>>("intersections");
+    QTest::addColumn<QLineF>("line");
+
+    auto ASSERT_TEST_CASE = [](const char *title, const QString &input, const QString &output, const QLineF &line)
+    {
+        QVector<QPointF> const points = AbstractTest::VectorFromJson<QPointF>(input);
+        QVector<QPointF> const intersections = AbstractTest::VectorFromJson<QPointF>(output);
+        QTest::newRow(title) << points << intersections << line;
+    };
+
+    // See file src/app/share/collection/bugs/160-42.val (private collection)
+    ASSERT_TEST_CASE("Notch angle by intersection (right side)",
+                     QStringLiteral("://160-42_intersection/points.json"),
+                     QStringLiteral("://160-42_intersection/intersections.json"),
+                     QLineF(QPointF(1153.6026868898712, 828.1618345186405),
+                            QPointF(2072.237934910698, 903.3749180877085)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractCurve::CurveIntersectLine() const
+{
+    QFETCH(QVector<QPointF>, points);
+    QFETCH(QVector<QPointF>, intersections);
+    QFETCH(QLineF, line);
+
+    const QVector<QPointF> result = VAbstractCurve::CurveIntersectLine(points, line);
+    QCOMPARE(result, intersections);
 }

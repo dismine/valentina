@@ -25,49 +25,74 @@
 #include <QLineEdit>
 #include <QLocale>
 #include <QSizePolicy>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <QWidget>
 
 #include "../vproperty_p.h"
 
 VPE::VStringProperty::VStringProperty(const QString &name, const QMap<QString, QVariant> &settings)
-    : VProperty(name, QVariant::String), readOnly(false), typeForParent(0), clearButton(false), m_osSeparator(false)
+    : VProperty(name,
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                QMetaType::QString),
+#else
+                QVariant::String),
+#endif
+      readOnly(false), typeForParent(0), clearButton(false), m_osSeparator(false)
 {
     VProperty::setSettings(settings);
-    d_ptr->VariantValue.setValue(QString());
-    d_ptr->VariantValue.convert(QVariant::String);
+    vproperty_d_ptr->VariantValue.setValue(QString());
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::QString));
+#else
+    vproperty_d_ptr->VariantValue.convert(QVariant::String);
+#endif
 }
 
 VPE::VStringProperty::VStringProperty(const QString &name)
     : VProperty(name), readOnly(false), typeForParent(0), clearButton(false), m_osSeparator(false)
 {
-    d_ptr->VariantValue.setValue(QString());
-    d_ptr->VariantValue.convert(QVariant::String);
+    vproperty_d_ptr->VariantValue.setValue(QString());
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::QString));
+#else
+    vproperty_d_ptr->VariantValue.convert(QVariant::String);
+#endif
 }
 
-QWidget *VPE::VStringProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
-                                            const QAbstractItemDelegate *delegate)
+auto VPE::VStringProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
+                                        const QAbstractItemDelegate *delegate) -> QWidget *
 {
     Q_UNUSED(options)
     Q_UNUSED(delegate)
 
-    QLineEdit* tmpEditor = new QLineEdit(parent);
+    auto *tmpEditor = new QLineEdit(parent);
     tmpEditor->setLocale(parent->locale());
     tmpEditor->setReadOnly(readOnly);
     tmpEditor->installEventFilter(this);
     tmpEditor->setClearButtonEnabled(clearButton);
-    tmpEditor->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    tmpEditor->setText(d_ptr->VariantValue.toString());
+    tmpEditor->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    tmpEditor->setText(vproperty_d_ptr->VariantValue.toString());
 
-    d_ptr->editor = tmpEditor;
-    return d_ptr->editor;
+    vproperty_d_ptr->editor = tmpEditor;
+    return vproperty_d_ptr->editor;
 }
 
-QVariant VPE::VStringProperty::getEditorData(const QWidget *editor) const
+auto VPE::VStringProperty::setEditorData(QWidget *editor) -> bool
 {
-    const QLineEdit* tmpEditor = qobject_cast<const QLineEdit*>(editor);
+    if (auto *tmpWidget = qobject_cast<QLineEdit *>(editor))
+    {
+        if (not readOnly)
+        {
+            tmpWidget->setText(vproperty_d_ptr->VariantValue.toString());
+        }
+        return true;
+    }
+
+    return false;
+}
+
+auto VPE::VStringProperty::getEditorData(const QWidget *editor) const -> QVariant
+{
+    const auto *tmpEditor = qobject_cast<const QLineEdit *>(editor);
     if (tmpEditor)
     {
         return tmpEditor->text();
@@ -103,7 +128,7 @@ void VPE::VStringProperty::setSetting(const QString &key, const QVariant &value)
     }
 }
 
-QVariant VPE::VStringProperty::getSetting(const QString &key) const
+auto VPE::VStringProperty::getSetting(const QString &key) const -> QVariant
 {
     if (key == QLatin1String("ReadOnly"))
     {
@@ -117,19 +142,19 @@ QVariant VPE::VStringProperty::getSetting(const QString &key) const
         return VProperty::getSetting(key);
 }
 
-QStringList VPE::VStringProperty::getSettingKeys() const
+auto VPE::VStringProperty::getSettingKeys() const -> QStringList
 {
     QStringList settings;
     settings << QStringLiteral("ReadOnly") << QStringLiteral("TypeForParent");
     return settings;
 }
 
-QString VPE::VStringProperty::type() const
+auto VPE::VStringProperty::type() const -> QString
 {
     return QStringLiteral("string");
 }
 
-VPE::VProperty *VPE::VStringProperty::clone(bool include_children, VPE::VProperty *container) const
+auto VPE::VStringProperty::clone(bool include_children, VPE::VProperty *container) const -> VPE::VProperty *
 {
     return VProperty::clone(include_children, container ? container : new VStringProperty(getName(), getSettings()));
 }
@@ -140,7 +165,7 @@ void VPE::VStringProperty::UpdateParent(const QVariant &value)
 }
 
 // cppcheck-suppress unusedFunction
-int VPE::VStringProperty::getTypeForParent() const
+auto VPE::VStringProperty::getTypeForParent() const -> int
 {
     return typeForParent;
 }
@@ -150,22 +175,22 @@ void VPE::VStringProperty::setTypeForParent(int value)
     typeForParent = value;
 }
 
-bool VPE::VStringProperty::eventFilter(QObject *object, QEvent *event)
+auto VPE::VStringProperty::eventFilter(QObject *object, QEvent *event) -> bool
 {
-    if (QLineEdit *textEdit = qobject_cast<QLineEdit *>(object))
+    if (auto *textEdit = qobject_cast<QLineEdit *>(object))
     {
         if (event->type() == QEvent::KeyPress)
         {
-            QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
-            if ((keyEvent->key() == Qt::Key_Period) && (keyEvent->modifiers() & Qt::KeypadModifier))
+            if (const auto *keyEvent = static_cast<QKeyEvent *>(event);
+                (keyEvent->key() == Qt::Key_Period) && (keyEvent->modifiers() & Qt::KeypadModifier))
             {
                 if (m_osSeparator)
                 {
-                    textEdit->insert(QLocale().decimalPoint());
+                    textEdit->insert(VPELocaleDecimalPoint(QLocale()));
                 }
                 else
                 {
-                    textEdit->insert(QLocale::c().decimalPoint());
+                    textEdit->insert(VPELocaleDecimalPoint(QLocale::c()));
                 }
                 return true;
             }

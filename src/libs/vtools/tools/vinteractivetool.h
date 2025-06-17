@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -36,10 +36,10 @@
 
 class VInteractiveTool : public VAbstractTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VInteractiveTool(VAbstractPattern *doc, VContainer *data, quint32 id, QObject *parent = nullptr);
-    virtual ~VInteractiveTool() Q_DECL_EQ_DEFAULT;
+    ~VInteractiveTool() override = default;
 
     void DialogLinkDestroy();
 
@@ -49,14 +49,16 @@ public slots:
 
 protected:
     /** @brief m_dialog tool's dialog options.*/
-    QPointer<DialogTool> m_dialog;
+    QPointer<DialogTool> m_dialog{}; // NOLINT(cppcoreguidelines-non-private-member-variables-in-classes)
 
     /** @brief setDialog set dialog when user want change tool option. */
-    virtual void setDialog() {/*do nothing by default*/}
+    virtual void SetDialog()
+    { /*do nothing by default*/
+    }
     virtual void SaveDialogChange(const QString &undoText = QString())=0;
 
 private:
-    Q_DISABLE_COPY(VInteractiveTool)
+    Q_DISABLE_COPY_MOVE(VInteractiveTool) // NOLINT
 };
 
 #endif // VINTERACTIVETOOL_H

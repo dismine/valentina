@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,33 +29,49 @@
 #ifndef VISTOOLCUTARC_H
 #define VISTOOLCUTARC_H
 
-#include <qcompilerdetection.h>
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
 #include <QtGlobal>
+#include <limits>
 
 #include "../vmisc/def.h"
 #include "vispath.h"
 
-class VisToolCutArc : public VisPath
+class VisToolCutArc final : public VisPath
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     explicit VisToolCutArc(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolCutArc() Q_DECL_EQ_DEFAULT;
+    ~VisToolCutArc() override = default;
 
-    virtual void RefreshGeometry() override;
-    void         setLength(const QString &expression);
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolCutArc)};
-protected:
-    Q_DISABLE_COPY(VisToolCutArc)
-    VScaledEllipse *point;
-    VCurvePathItem *arc1;
-    VCurvePathItem *arc2;
-    qreal           length;
+    void RefreshGeometry() override;
+    void VisualMode(quint32 id) override;
+
+    void SetArcId(quint32 newArcId);
+    void SetLength(const QString &expression);
+
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Vis::ToolCutArc)
+    };
+
+private:
+    Q_DISABLE_COPY_MOVE(VisToolCutArc) // NOLINT
+    VScaledEllipse *m_point{nullptr};
+    VCurvePathItem *m_arc1{nullptr};
+    VCurvePathItem *m_arc2{nullptr};
+    qreal m_length{std::numeric_limits<qreal>::infinity()};
+    quint32 m_arcId{NULL_ID};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolCutArc::SetArcId(quint32 newArcId)
+{
+    m_arcId = newArcId;
+}
 
 #endif // VISTOOLCUTARC_H

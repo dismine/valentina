@@ -31,7 +31,6 @@
 #ifndef QXTCSVMODEL_H
 #define QXTCSVMODEL_H
 
-#include <qcompilerdetection.h>
 #include <QAbstractTableModel>
 #include <QChar>
 #include <QFlags>
@@ -43,80 +42,89 @@
 #include <QString>
 #include <QStringList>
 #include <QVariant>
-#include <Qt>
 #include <QtGlobal>
 
 #include "def.h"
 
 class QxtCsvModelPrivate;
 
-class QxtCsvModel : public QAbstractTableModel
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+class VTextCodec;
+#else
+class QTextCodec;
+using VTextCodec = QTextCodec;
+#endif
+
+class QxtCsvModel final : public QAbstractTableModel
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     explicit QxtCsvModel(QObject *parent = nullptr);
     explicit QxtCsvModel(QIODevice *file, QObject *parent = nullptr, bool withHeader = false, QChar separator = ',',
-                         QTextCodec *codec = nullptr);
+                         VTextCodec *codec = nullptr);
     explicit QxtCsvModel(const QString &filename, QObject *parent = nullptr, bool withHeader = false,
-                         QChar separator = ',', QTextCodec *codec = nullptr);
-    virtual ~QxtCsvModel() Q_DECL_EQ_DEFAULT;
+                         QChar separator = ',', VTextCodec *codec = nullptr);
+    virtual ~QxtCsvModel() = default;
 
-    virtual int      rowCount(const QModelIndex& parent = QModelIndex()) const override;
-    virtual int      columnCount(const QModelIndex& parent = QModelIndex()) const override;
-    virtual QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
-    virtual bool     setData(const QModelIndex& index, const QVariant& data, int role = Qt::EditRole) override;
-    virtual QVariant headerData(int section, Qt::Orientation orientation,
-                                int role = Qt::DisplayRole) const override;
-    virtual bool     setHeaderData(int section, Qt::Orientation orientation, const QVariant& value,
-                                   int role = Qt::DisplayRole) override;
-    void             setHeaderData(const QStringList& data);
+    virtual auto rowCount(const QModelIndex &parent = QModelIndex()) const -> int override;
+    virtual auto columnCount(const QModelIndex &parent = QModelIndex()) const -> int override;
+    virtual auto data(const QModelIndex &index, int role = Qt::DisplayRole) const -> QVariant override;
+    virtual auto setData(const QModelIndex &index, const QVariant &data, int role = Qt::EditRole) -> bool override;
+    virtual auto headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const
+        -> QVariant override;
+    virtual auto setHeaderData(int section, Qt::Orientation orientation, const QVariant &value,
+                               int role = Qt::DisplayRole) -> bool override;
+    void setHeaderData(const QStringList &data);
 
-    QString text(int row, int column) const;
-    void setText(int row, int column, const QString& value);
+    auto text(int row, int column) const -> QString;
+    void setText(int row, int column, const QString &value);
 
-    QString headerText(int column) const;
-    void setHeaderText(int column, const QString& value);
+    auto headerText(int column) const -> QString;
+    void setHeaderText(int column, const QString &value);
 
+    auto insertSingleRow(int row, const QModelIndex &parent = QModelIndex()) -> bool;
+    virtual auto insertRows(int row, int count, const QModelIndex &parent = QModelIndex()) -> bool override;
 
-    bool insertRow(int row, const QModelIndex& parent = QModelIndex());
-    virtual bool insertRows(int row, int count, const QModelIndex& parent = QModelIndex()) override;
+    auto removeSingleRow(int row, const QModelIndex &parent = QModelIndex()) -> bool;
+    virtual auto removeRows(int row, int count, const QModelIndex &parent = QModelIndex()) -> bool override;
 
-    bool removeRow(int row, const QModelIndex& parent = QModelIndex());
-    virtual bool removeRows(int row, int count, const QModelIndex& parent = QModelIndex()) override;
+    auto insertSingleColumn(int col, const QModelIndex &parent = QModelIndex()) -> bool;
+    virtual auto insertColumns(int col, int count, const QModelIndex &parent = QModelIndex()) -> bool override;
 
-    bool insertColumn(int col, const QModelIndex& parent = QModelIndex());
-    virtual bool insertColumns(int col, int count, const QModelIndex& parent = QModelIndex()) override;
+    auto removeSingleColumn(int col, const QModelIndex &parent = QModelIndex()) -> bool;
+    virtual auto removeColumns(int col, int count, const QModelIndex &parent = QModelIndex()) -> bool override;
 
-    bool removeColumn(int col, const QModelIndex& parent = QModelIndex());
-    virtual bool removeColumns(int col, int count, const QModelIndex& parent = QModelIndex()) override;
-
-    void setSource(QIODevice *file, bool withHeader = false, QChar separator = ',', QTextCodec* codec = nullptr);
+    void setSource(QIODevice *file, bool withHeader = false, QChar separator = ',', VTextCodec *codec = nullptr);
     void setSource(const QString &filename, bool withHeader = false, QChar separator = ',',
-                   QTextCodec* codec = nullptr);
+                   VTextCodec *codec = nullptr);
 
-    bool toCSV(QIODevice *file, QString &error, bool withHeader = false, QChar separator = ',',
-               QTextCodec* codec = nullptr) const;
-    bool toCSV(const QString &filename, QString &error, bool withHeader = false, QChar separator = ',',
-               QTextCodec* codec = nullptr) const;
+    auto toCSV(QIODevice *file, QString &error, bool withHeader = false, QChar separator = ',',
+               VTextCodec *codec = nullptr) const -> bool;
+    auto toCSV(const QString &filename, QString &error, bool withHeader = false, QChar separator = ',',
+               VTextCodec *codec = nullptr) const -> bool;
 
-    enum QuoteOption { NoQuotes = 0,
-                       SingleQuote = 1,
-                       DoubleQuote = 2,
-                       BothQuotes = 3,
-                       NoEscape = 0,
-                       TwoQuoteEscape = 4,
-                       BackslashEscape = 8,
-                       AlwaysQuoteOutput = 16,
-                       DefaultQuoteMode = BothQuotes | BackslashEscape | AlwaysQuoteOutput };
+    enum QuoteOption
+    {
+        NoQuotes = 0,
+        SingleQuote = 1,
+        DoubleQuote = 2,
+        BothQuotes = 3,
+        NoEscape = 0,
+        TwoQuoteEscape = 4,
+        BackslashEscape = 8,
+        AlwaysQuoteOutput = 16,
+        DefaultQuoteMode = BothQuotes | BackslashEscape | AlwaysQuoteOutput
+    };
     Q_DECLARE_FLAGS(QuoteMode, QuoteOption)
 
-    QuoteMode quoteMode() const;
+    auto quoteMode() const -> QuoteMode;
     void setQuoteMode(QuoteMode mode);
 
-    virtual Qt::ItemFlags flags(const QModelIndex& index) const override;
+    virtual auto flags(const QModelIndex &index) const -> Qt::ItemFlags override;
 
 private:
-    Q_DISABLE_COPY(QxtCsvModel)
+    Q_DISABLE_COPY_MOVE(QxtCsvModel) // NOLINT
     QXT_DECLARE_PRIVATE(QxtCsvModel)
 };
 Q_DECLARE_OPERATORS_FOR_FLAGS(QxtCsvModel::QuoteMode)

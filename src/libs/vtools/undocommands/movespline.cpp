@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -32,10 +32,8 @@
 
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vmisc/logging.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/def.h"
-#include "../vwidgets/vmaingraphicsview.h"
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
 #include "vundocommand.h"
@@ -46,7 +44,7 @@ MoveSpline::MoveSpline(VAbstractPattern *doc, const VSpline &oldSpl, const VSpli
     : VUndoCommand(QDomElement(), doc, parent),
       oldSpline(oldSpl),
       newSpline(newSpl),
-      scene(qApp->getCurrentScene())
+      scene(VAbstractValApplication::VApp()->getCurrentScene())
 {
     setText(tr("move spline"));
     nodeId = id;
@@ -75,13 +73,13 @@ void MoveSpline::redo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool MoveSpline::mergeWith(const QUndoCommand *command)
+auto MoveSpline::mergeWith(const QUndoCommand *command) -> bool
 {
-    const MoveSpline *moveCommand = static_cast<const MoveSpline *>(command);
+    const auto *moveCommand = static_cast<const MoveSpline *>(command);
     SCASSERT(moveCommand != nullptr)
-    const quint32 id = moveCommand->getSplineId();
+    const quint32 splineId = moveCommand->getSplineId();
 
-    if (id != nodeId)
+    if (splineId != nodeId)
     {
         return false;
     }
@@ -91,7 +89,7 @@ bool MoveSpline::mergeWith(const QUndoCommand *command)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int MoveSpline::id() const
+auto MoveSpline::id() const -> int
 {
     return static_cast<int>(UndoCommand::MoveSpline);
 }
@@ -99,8 +97,7 @@ int MoveSpline::id() const
 //---------------------------------------------------------------------------------------------------------------------
 void MoveSpline::Do(const VSpline &spl)
 {
-    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagSpline);
-    if (domElement.isElement())
+    if (QDomElement domElement = doc->FindElementById(nodeId, VAbstractPattern::TagSpline); domElement.isElement())
     {
         doc->SetAttribute(domElement, AttrPoint1,  spl.GetP1().id());
         doc->SetAttribute(domElement, AttrPoint4,  spl.GetP4().id());

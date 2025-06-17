@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -28,13 +28,18 @@
 
 #include "tst_vpointf.h"
 #include "../vgeometry/vpointf.h"
-#include "../vmisc/logging.h"
 
 #include <QtTest>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 TST_VPointF::TST_VPointF(QObject *parent)
-    : QObject(parent)
+  : QObject(parent)
 {
 }
 
@@ -46,9 +51,9 @@ void TST_VPointF::TestFlip_data()
     QTest::addColumn<QPointF>("flipped");
     QTest::addColumn<QString>("prefix");
 
-    VPointF originPoint;
-    QLineF axis = QLineF(QPointF(5, 0), QPointF(5, 10));
-    QPointF flipped = QPointF(10, 0);
+    VPointF const originPoint;
+    auto axis = QLineF(QPointF(5, 0), QPointF(5, 10));
+    auto flipped = QPointF(10, 0);
 
     QTest::newRow("Vertical axis") << originPoint << axis << flipped << "a2";
 
@@ -57,13 +62,13 @@ void TST_VPointF::TestFlip_data()
 
     QTest::newRow("Horizontal axis") << originPoint << axis << flipped << "a2";
 
-    QLineF l = QLineF(QPointF(), QPointF(10, 0));
+    auto l = QLineF(QPointF(), QPointF(10, 0));
     l.setAngle(315);
     flipped = l.p2();
-    l.setLength(l.length()/2.0);
+    l.setLength(l.length() / 2.0);
 
     axis = QLineF(l.p2(), l.p1());
-    axis.setAngle(axis.angle()+90);
+    axis.setAngle(axis.angle() + 90);
 
     QTest::newRow("Diagonal axis") << originPoint << axis << flipped << "a2";
 }
@@ -78,9 +83,9 @@ void TST_VPointF::TestFlip()
 
     const VPointF res = originPoint.Flip(axis, prefix);
 
-    const QString errorMsg = QString("The name doesn't contain the prefix '%1'.").arg(prefix);
+    // cppcheck-suppress unreadVariable
+    const QString errorMsg = u"The name doesn't contain the prefix '%1'."_s.arg(prefix);
     QVERIFY2(res.name().endsWith(prefix), qUtf8Printable(errorMsg));
 
     QCOMPARE(flipped.toPoint(), res.toQPointF().toPoint());
 }
-

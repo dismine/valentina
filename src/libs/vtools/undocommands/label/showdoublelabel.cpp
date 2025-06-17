@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -31,7 +31,6 @@
 #include <QDomElement>
 
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vmisc/logging.h"
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vtools/tools/drawTools/vdrawtool.h"
@@ -42,7 +41,7 @@ ShowDoubleLabel::ShowDoubleLabel(VAbstractPattern *doc, quint32 toolId, quint32 
     : VUndoCommand(QDomElement(), doc, parent),
       m_visible(visible),
       m_oldVisible(not visible),
-      m_scene(qApp->getCurrentScene()),
+      m_scene(VAbstractValApplication::VApp()->getCurrentScene()),
       m_type(type),
       m_idTool(toolId)
 {
@@ -58,16 +57,16 @@ ShowDoubleLabel::ShowDoubleLabel(VAbstractPattern *doc, quint32 toolId, quint32 
         setText(tr("togggle the second dart label"));
     }
 
-    const QDomElement domElement = doc->elementById(m_idTool, VAbstractPattern::TagPoint);
+    const QDomElement domElement = doc->FindElementById(m_idTool, VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
         if (type == ShowDoublePoint::FirstPoint)
         {
-            m_oldVisible = doc->GetParametrBool(domElement, AttrShowLabel1, trueStr);
+            m_oldVisible = VDomDocument::GetParametrBool(domElement, AttrShowLabel1, trueStr);
         }
         else
         {
-            m_oldVisible = doc->GetParametrBool(domElement, AttrShowLabel2, trueStr);
+            m_oldVisible = VDomDocument::GetParametrBool(domElement, AttrShowLabel2, trueStr);
         }
     }
     else
@@ -95,7 +94,7 @@ void ShowDoubleLabel::redo()
 //---------------------------------------------------------------------------------------------------------------------
 void ShowDoubleLabel::Do(bool visible)
 {
-    QDomElement domElement = doc->elementById(m_idTool, VAbstractPattern::TagPoint);
+    QDomElement domElement = doc->FindElementById(m_idTool, VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
         if (m_type == ShowDoublePoint::FirstPoint)
@@ -107,11 +106,11 @@ void ShowDoubleLabel::Do(bool visible)
             doc->SetAttribute<bool>(domElement, AttrShowLabel2, visible);
         }
 
-        if (VDrawTool *tool = qobject_cast<VDrawTool *>(VAbstractPattern::getTool(m_idTool)))
+        if (auto *tool = qobject_cast<VDrawTool *>(VAbstractPattern::getTool(m_idTool)))
         {
             tool->SetLabelVisible(nodeId, visible);
         }
-        VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView());
+        VMainGraphicsView::NewSceneRect(m_scene, VAbstractValApplication::VApp()->getSceneView());
     }
     else
     {

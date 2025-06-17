@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -38,7 +38,8 @@ class VTranslateVars;
 
 class TST_AbstractRegExp : public AbstractTest
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     TST_AbstractRegExp(const QString &locale, QObject *parent = nullptr);
     virtual ~TST_AbstractRegExp();
@@ -48,20 +49,20 @@ protected:
     QPointer<QTranslator> m_vTranslator;
     VTranslateVars *m_trMs;
 
-    virtual void        PrepareData()=0;
-    virtual QStringList AllNames()=0;
+    virtual void PrepareData() = 0;
+    virtual auto AllNames() -> QStringList = 0;
 
-    int  LoadVariables(const QString &checkedLocale);
+    auto LoadVariables(const QString &checkedLocale) -> int;
     void RemoveTrVariables(const QString &checkedLocale);
     void InitTrMs();
 
     void CallTestCheckNoEndLine();
     void CallTestCheckRegExpNames();
-    void CallTestCheckIsNamesUnique();
     void CallTestCheckNoOriginalNamesInTranslation();
+    void CallTestForValidCharacters();
 
 private:
-    Q_DISABLE_COPY(TST_AbstractRegExp)
+    Q_DISABLE_COPY_MOVE(TST_AbstractRegExp) // NOLINT
 };
 
 #endif // TST_ABSTRACTREGEXP_H

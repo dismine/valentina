@@ -1,2 +1,3 @@
 ?package(valentina): needs="X11" section="Applications/Graphics" title="Valentina" command="valentina"
 ?package(valentina): needs="X11" section="Applications/Data Management" title="Tape" command="tape" 
+?package(valentina): needs="X11" section="Applications/Data Management" title="Puzzle" command="puzzle" 

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -34,34 +34,33 @@
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/xml/vdomdocument.h"
-#include "../vmisc/logging.h"
-#include "../vmisc/def.h"
 #include "../tools/vdatatool.h"
-#include "vundocommand.h"
+#include "../vmisc/def.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "../vpatterndb/vpiecepath.h"
 #include "../vwidgets/vmaingraphicsview.h"
+#include "vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DeletePiece::DeletePiece(VAbstractPattern *doc, quint32 id, VContainer data, VMainGraphicsScene *scene,
+DeletePiece::DeletePiece(VAbstractPattern *doc, quint32 id, const VContainer &data, VMainGraphicsScene *scene,
                          QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent),
-      m_parentNode(),
-      m_siblingId(NULL_ID),
-      m_detail(data.GetPiece(id)),
-      m_data(data),
-      m_scene(scene),
-      m_tool(),
-      m_record(VAbstractTool::GetRecord(id, Tool::Piece, doc))
+  : VUndoCommand(QDomElement(), doc, parent),
+    m_parentNode(),
+    m_siblingId(NULL_ID),
+    m_detail(data.GetPiece(id)),
+    m_data(data),
+    m_scene(scene),
+    m_tool(),
+    m_record(VAbstractTool::GetRecord(id, Tool::Piece, doc))
 {
     setText(tr("delete tool"));
     nodeId = id;
-    QDomElement domElement = doc->elementById(id, VAbstractPattern::TagDetail);
+    QDomElement const domElement = doc->FindElementById(id, VAbstractPattern::TagDetail);
     if (domElement.isElement())
     {
         xml = domElement.cloneNode().toElement();
         m_parentNode = domElement.parentNode();
-        QDomNode previousDetail = domElement.previousSibling();
+        QDomNode const previousDetail = domElement.previousSibling();
         if (previousDetail.isNull())
         {
             m_siblingId = NULL_ID;
@@ -69,7 +68,9 @@ DeletePiece::DeletePiece(VAbstractPattern *doc, quint32 id, VContainer data, VMa
         else
         {
             // Better save id of previous detail instead of reference to node.
-            m_siblingId = doc->GetParametrUInt(previousDetail.toElement(), VDomDocument::AttrId, NULL_ID_STR);
+            m_siblingId = VAbstractPattern::GetParametrUInt(previousDetail.toElement(),
+                                                            VDomDocument::AttrId,
+                                                            NULL_ID_STR);
         }
     }
     else
@@ -81,10 +82,7 @@ DeletePiece::DeletePiece(VAbstractPattern *doc, quint32 id, VContainer data, VMa
 //---------------------------------------------------------------------------------------------------------------------
 DeletePiece::~DeletePiece()
 {
-    if (not m_tool.isNull())
-    {
-        delete m_tool;
-    }
+    delete m_tool.data();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -92,7 +90,7 @@ void DeletePiece::undo()
 {
     qCDebug(vUndo, "Undo.");
 
-    UndoDeleteAfterSibling(m_parentNode, m_siblingId);
+    UndoDeleteAfterSibling(m_parentNode, m_siblingId, VAbstractPattern::TagDetail);
 
     VAbstractPattern::AddTool(nodeId, m_tool);
     m_data.UpdatePiece(nodeId, m_detail);
@@ -103,7 +101,7 @@ void DeletePiece::undo()
     m_scene->addItem(m_tool);
     m_tool->ConnectOutsideSignals();
     m_tool->show();
-    VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView(), m_tool);
+    VMainGraphicsView::NewSceneRect(m_scene, VAbstractValApplication::VApp()->getSceneView(), m_tool);
     m_tool.clear();
     emit doc->UpdateInLayoutList();
 }
@@ -113,16 +111,17 @@ void DeletePiece::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagDetail);
+    QDomElement const domElement = doc->FindElementById(nodeId, VAbstractPattern::TagDetail);
     if (domElement.isElement())
     {
         m_parentNode.removeChild(domElement);
 
-        m_tool = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(nodeId));
+        m_tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId));
         SCASSERT(not m_tool.isNull());
         m_tool->DisconnectOutsideSignals();
         m_tool->EnableToolMove(true);
         m_tool->hide();
+        m_tool->CancelLabelRendering();
 
         m_scene->removeItem(m_tool);
 

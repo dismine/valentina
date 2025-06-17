@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,9 +29,6 @@
 #include "vnodespline.h"
 
 #include <QDomElement>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 
 #include "../ifc/xml/vdomdocument.h"
 #include "../ifc/ifcdef.h"
@@ -60,7 +57,7 @@ VNodeSpline::VNodeSpline(const VAbstractNodeInitData &initData, QObject *qoParen
  * @param initData init data.
  * @return pointer to node.
  */
-VNodeSpline *VNodeSpline::Create(const VAbstractNodeInitData &initData)
+auto VNodeSpline::Create(const VAbstractNodeInitData &initData) -> VNodeSpline *
 {
     VNodeSpline *spl = nullptr;
     if (initData.parse == Document::FullParse)
@@ -90,7 +87,7 @@ VNodeSpline *VNodeSpline::Create(const VAbstractNodeInitData &initData)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VNodeSpline::getTagName() const
+auto VNodeSpline::getTagName() const -> QString
 {
     return VAbstractPattern::TagSpline;
 }

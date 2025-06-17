@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef SAVETOOLOPTIONS_H
 #define SAVETOOLOPTIONS_H
 
-#include <qcompilerdetection.h>
 #include <QDomElement>
 #include <QMetaObject>
 #include <QObject>
@@ -40,50 +39,55 @@
 
 class SaveToolOptions : public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     SaveToolOptions(const QDomElement &oldXml, const QDomElement &newXml, const QList<quint32> &oldDependencies,
                     const QList<quint32> &newDependencies, VAbstractPattern *doc, const quint32 &id,
                     QUndoCommand *parent = nullptr);
-    virtual ~SaveToolOptions() = default;
-    virtual void undo() override;
-    virtual void redo() override;
-    virtual bool mergeWith(const QUndoCommand *command) override;
-    virtual int  id() const override;
+    ~SaveToolOptions() override = default;
 
-    QDomElement    getNewXml() const;
-    quint32        getToolId() const;
-    QList<quint32> NewDependencies() const;
+    void undo() override;
+    void redo() override;
+
+    auto mergeWith(const QUndoCommand *command) -> bool override;
+    auto id() const -> int override;
+
+    auto getNewXml() const -> QDomElement;
+    auto getToolId() const -> quint32;
+    auto NewDependencies() const -> QList<quint32>;
+
 private:
-    Q_DISABLE_COPY(SaveToolOptions)
-    const QDomElement    oldXml;
-    QDomElement          newXml;
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(SaveToolOptions) // NOLINT
+    const QDomElement oldXml;
+    QDomElement newXml;
     const QList<quint32> oldDependencies;
     const QList<quint32> newDependencies;
 
-    QVector<quint32> Missing(const QList<quint32> &list1, const QList<quint32> &list2) const;
+    auto Missing(const QList<quint32> &list1, const QList<quint32> &list2) const -> QVector<quint32>;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline int SaveToolOptions::id() const
+inline auto SaveToolOptions::id() const -> int
 {
     return static_cast<int>(UndoCommand::SaveToolOptions);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QDomElement SaveToolOptions::getNewXml() const
+inline auto SaveToolOptions::getNewXml() const -> QDomElement
 {
     return newXml;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline quint32 SaveToolOptions::getToolId() const
+inline auto SaveToolOptions::getToolId() const -> quint32
 {
     return nodeId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QList<quint32> SaveToolOptions::NewDependencies() const
+inline auto SaveToolOptions::NewDependencies() const -> QList<quint32>
 {
     return newDependencies;
 }

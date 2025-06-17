@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -27,12 +27,13 @@
  *************************************************************************/
 
 #include "vscenepoint.h"
-#include "../vmisc/def.h"
-#include "../vmisc/vabstractapplication.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/def.h"
+#include "../vmisc/theme/vscenestylesheet.h"
+#include "../vmisc/vabstractapplication.h"
 #include "global.h"
-#include "vgraphicssimpletextitem.h"
 #include "scalesceneitems.h"
+#include "vgraphicssimpletextitem.h"
 
 #include <QBrush>
 #include <QFont>
@@ -41,26 +42,26 @@
 #include <QStyle>
 #include <QStyleOptionGraphicsItem>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 9, 0)
+#include "../vmisc/backport/qpainterstateguard.h"
+#else
+#include <QPainterStateGuard>
+#endif
+
 //---------------------------------------------------------------------------------------------------------------------
-VScenePoint::VScenePoint(QGraphicsItem *parent)
-    : QGraphicsEllipseItem(parent),
-      m_namePoint(nullptr),
-      m_lineName(nullptr),
-      m_onlyPoint(false),
-      m_isHovered(false),
-      m_showLabel(true),
-      m_baseColor(Qt::black),
-      m_selectedFromChild(false)
+VScenePoint::VScenePoint(VColorRole role, QGraphicsItem *parent)
+  : QGraphicsEllipseItem(parent),
+    m_namePoint(new VGraphicsSimpleTextItem(VColorRole::DraftLabelColor, VColorRole::DraftLabelHoverColor, this)),
+    m_lineName(new VScaledLine(VColorRole::DraftLabelLineColor, this)),
+    m_role(role)
 {
-    m_namePoint = new VGraphicsSimpleTextItem(this);
-    m_lineName = new VScaledLine(this);
     m_lineName->SetBoldLine(false);
     m_lineName->setLine(QLineF(0, 0, 1, 0));
     m_lineName->setVisible(false);
 
-    this->setBrush(QBrush(Qt::NoBrush));
-    this->setAcceptHoverEvents(true);
-    this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
+    setBrush(QBrush(Qt::NoBrush));
+    setAcceptHoverEvents(true);
+    setFlag(QGraphicsItem::ItemIsFocusable, true); // For keyboard input focus
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -68,26 +69,34 @@ void VScenePoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 {
     const qreal scale = SceneScale(scene());
 
-    if (m_namePoint->BaseFontSize()*scale < minVisibleFontSize)
+    ScaleMainPenWidth(scale);
+    ScaleCircleSize(this, scale);
+
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+
+    if (settings->GetShowAccuracyRadius())
+    {
+        QPainterStateGuard const guard(painter);
+
+        QPen pen = painter->pen();
+        pen.setWidthF(accuracyPointOnLine / 15);
+        pen.setStyle(Qt::DashLine);
+        pen.setColor(VSceneStylesheet::ToolStyle().AccuracyRadiusColor());
+
+        painter->setPen(pen);
+        painter->drawEllipse(PointRect(accuracyPointOnLine));
+    }
+
+    if (settings->GetPatternLabelFontSize() * scale < minVisibleFontSize || settings->GetHideLabels())
     {
         m_namePoint->setVisible(false);
         m_lineName->setVisible(false);
     }
     else
     {
-        ScaleMainPenWidth(scale);
-        ScaleCircleSize(this, scale);
-
         if (not m_onlyPoint)
         {
             m_namePoint->setVisible(m_showLabel);
-
-            QPen lPen = m_lineName->pen();
-            QColor color = CorrectColor(m_lineName, Qt::black);
-            color.setAlpha(50);
-            lPen.setColor(color);
-            m_lineName->setPen(lPen);
-
             RefreshLine();
         }
     }
@@ -105,12 +114,29 @@ void VScenePoint::RefreshPointGeometry(const VPointF &point)
     m_showLabel = point.IsShowLabel();
 
     m_namePoint->blockSignals(true);
-    m_namePoint->setText(point.name());
-    m_namePoint->setPos(QPointF(point.mx(), point.my()));
-    m_namePoint->setVisible(m_showLabel);
+    m_namePoint->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
+    m_namePoint->SetRealPos(QPointF(point.mx(), point.my()));
+    m_namePoint->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     m_namePoint->blockSignals(false);
 
+    m_namePoint->setText(point.name());
+    m_namePoint->setVisible(m_showLabel);
+
     RefreshLine();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VScenePoint::boundingRect() const -> QRectF
+{
+    QRectF rect = QGraphicsEllipseItem::boundingRect();
+
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    if (settings->GetShowAccuracyRadius())
+    {
+        rect = rect.united(PointRect(accuracyPointOnLine));
+    }
+
+    return rect;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -122,7 +148,7 @@ void VScenePoint::SetOnlyPoint(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VScenePoint::IsOnlyPoint() const
+auto VScenePoint::IsOnlyPoint() const -> bool
 {
     return m_onlyPoint;
 }
@@ -145,7 +171,7 @@ void VScenePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 void VScenePoint::RefreshLine()
 {
     QRectF nRec = m_namePoint->sceneBoundingRect();
-    nRec.translate(- scenePos());
+    nRec.translate(-scenePos());
     if (not rect().intersects(nRec))
     {
         const QRectF nameRec = m_namePoint->sceneBoundingRect();
@@ -155,7 +181,7 @@ void VScenePoint::RefreshLine()
                                       QLineF(QPointF(), nameRec.center() - scenePos()), p1, p2);
         const QPointF pRec = VGObject::LineIntersectRect(nameRec, QLineF(scenePos(), nameRec.center()));
 
-        if (QLineF(p1, pRec - scenePos()).length() <= ToPixel(4/qMax(1.0, SceneScale(scene())), Unit::Mm))
+        if (QLineF(p1, pRec - scenePos()).length() <= ToPixel(4 / qMax(1.0, SceneScale(scene())), Unit::Mm))
         {
             m_lineName->setVisible(false);
         }
@@ -172,10 +198,53 @@ void VScenePoint::RefreshLine()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VScenePoint::GetLabelLineColorRole() const -> VColorRole
+{
+    return m_lineName->GetColorRole();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VScenePoint::SetLabelLineColorRole(VColorRole role)
+{
+    m_lineName->SetColorRole(role);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VScenePoint::GetLabelTextColorRole() const -> VColorRole
+{
+    return m_namePoint->GetTextColor();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VScenePoint::SetLabelTextColorRole(VColorRole role)
+{
+    m_namePoint->SetTextColor(role);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VScenePoint::GetLabelTextHoverColorRole() const -> VColorRole
+{
+    return m_namePoint->GetTextHoverColor();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VScenePoint::SetLabelTextHoverColorRole(VColorRole role)
+{
+    m_namePoint->SetTextHoverColor(role);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VScenePoint::ScaleMainPenWidth(qreal scale)
 {
-    const qreal width = ScaleWidth(m_isHovered ? qApp->Settings()->WidthMainLine() : qApp->Settings()->WidthHairLine(),
+    const qreal width = ScaleWidth(m_isHovered ? VAbstractApplication::VApp()->Settings()->WidthMainLine()
+                                               : VAbstractApplication::VApp()->Settings()->WidthHairLine(),
                                    scale);
 
-    setPen(QPen(CorrectColor(this, m_baseColor), width));
+    QPen pointPen = pen();
+    if (m_role != VColorRole::CustomColor)
+    {
+        pointPen.setColor(VSceneStylesheet::CorrectToolColor(this, VSceneStylesheet::Color(m_role)));
+    }
+    pointPen.setWidthF(width);
+    setPen(pointPen);
 }

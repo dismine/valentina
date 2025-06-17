@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -33,14 +33,23 @@
 
 #include "vexception.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VExceptionObjectError exception object error
  * @param what string with error
  * @param domElement dom element
  */
-VExceptionObjectError::VExceptionObjectError(const QString &what, const QDomElement &domElement)
-    :VException(what), tagText(QString()), tagName(QString()), lineNumber(-1)
+VExceptionObjectError::VExceptionObjectError(const QString &what, const QDomElement &domElement) V_NOEXCEPT_EXPR(true)
+  : VException(what),
+    tagText(QString()),
+    tagName(QString()),
+    lineNumber(-1)
 {
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
     QTextStream stream(&tagText);
@@ -50,23 +59,31 @@ VExceptionObjectError::VExceptionObjectError(const QString &what, const QDomElem
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionObjectError::VExceptionObjectError(const QString &what)
-    :VException(what), tagText(QString()), tagName(QString()), lineNumber(-1)
-{}
+VExceptionObjectError::VExceptionObjectError(const QString &what) V_NOEXCEPT_EXPR(true)
+  : VException(what),
+    tagText(QString()),
+    tagName(QString()),
+    lineNumber(-1)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VExceptionObjectError copy constructor
  * @param e exception
  */
-VExceptionObjectError::VExceptionObjectError(const VExceptionObjectError &e)
-    :VException(e), tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber())
-{}
+VExceptionObjectError::VExceptionObjectError(const VExceptionObjectError &e) V_NOEXCEPT_EXPR(true)
+  : VException(e),
+    tagText(e.TagText()),
+    tagName(e.TagName()),
+    lineNumber(e.LineNumber())
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionObjectError &VExceptionObjectError::operator=(const VExceptionObjectError &e)
+auto VExceptionObjectError::operator=(const VExceptionObjectError &e) V_NOEXCEPT_EXPR(true) -> VExceptionObjectError &
 {
-    if ( &e == this )
+    if (&e == this)
     {
         return *this;
     }
@@ -82,9 +99,9 @@ VExceptionObjectError &VExceptionObjectError::operator=(const VExceptionObjectEr
  * @brief ErrorMessage return main error message
  * @return main error message
  */
-QString VExceptionObjectError::ErrorMessage() const
+auto VExceptionObjectError::ErrorMessage() const -> QString
 {
-    return QString("ExceptionObjectError: %1").arg(error);
+    return u"ExceptionObjectError: %1"_s.arg(error);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -92,7 +109,7 @@ QString VExceptionObjectError::ErrorMessage() const
  * @brief DetailedInformation return detailed information about error
  * @return detailed information
  */
-QString VExceptionObjectError::DetailedInformation() const
+auto VExceptionObjectError::DetailedInformation() const -> QString
 {
-    return MoreInfo(QString("tag: %1 in line %2\n%3").arg(tagName).arg(lineNumber).arg(tagText));
+    return MoreInfo(u"tag: %1 in line %2\n%3"_s.arg(tagName).arg(lineNumber).arg(tagText));
 }

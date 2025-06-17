@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,8 +29,6 @@
 #ifndef VOBJENGINE_H
 #define VOBJENGINE_H
 
-#include <qcompilerdetection.h>
-#include <QMatrix>
 #include <QPaintEngine>
 #include <QPolygonF>
 #include <QRectF>
@@ -42,47 +40,49 @@
 
 class QTextStream;
 
-#define MAX_POINTS      512
+#define MAX_POINTS 512
 
-class VObjEngine : public QPaintEngine
+class VObjEngine final : public QPaintEngine
 {
 public:
-    VObjEngine();
-    virtual ~VObjEngine() override;
+    using QPaintEngine::drawPoints;
+    using QPaintEngine::drawPolygon;
 
-    virtual bool begin(QPaintDevice *pdev) override;
-    virtual bool end() override;
+    VObjEngine();
+    ~VObjEngine() override = default;
+
+    virtual auto begin(QPaintDevice *pdev) -> bool override;
+    virtual auto end() -> bool override;
     virtual void updateState(const QPaintEngineState &state) override;
     virtual void drawPath(const QPainterPath &path) override;
-    virtual Type type() const override;
+    virtual auto type() const -> Type override;
     virtual void drawPoints(const QPointF *points, int pointCount) override;
-    virtual void drawPoints(const QPoint *points, int pointCount) override;
     virtual void drawPixmap(const QRectF &r, const QPixmap &pm, const QRectF &sr) override;
     virtual void drawPolygon(const QPointF *points, int pointCount, PolygonDrawMode mode) override;
-    virtual void drawPolygon(const QPoint *points, int pointCount, PolygonDrawMode mode) override;
 
-    QSize getSize() const;
+    auto getSize() const -> QSize;
     void setSize(const QSize &value);
 
-    QIODevice *getOutputDevice() const;
+    auto getOutputDevice() const -> QIODevice *;
     void setOutputDevice(QIODevice *value);
 
-    int getResolution() const;
+    auto getResolution() const -> int;
     void setResolution(int value);
 
 private:
-    Q_DISABLE_COPY(VObjEngine)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VObjEngine) // NOLINT
     QSharedPointer<QTextStream> stream;
-    quint32     globalPointsCount;
+    quint32 globalPointsCount;
     QSharedPointer<QIODevice> outputDevice;
-    del_point2d_t    points[MAX_POINTS];
-    quint32     planeCount;
-    QSize            size;
-    int              resolution;
-    QMatrix          matrix;
+    del_point2d_t points[MAX_POINTS];
+    quint32 planeCount;
+    QSize size;
+    int resolution;
+    QTransform matrix;
 
-    QPolygonF  MakePointsUnique(const QPolygonF &polygon)const;
-    qint64     Square(const QPolygonF &poly)const;
+    auto MakePointsUnique(const QPolygonF &polygon) const -> QPolygonF;
+    auto Square(const QPolygonF &poly) const -> qint64;
 };
 
 #endif // VOBJENGINE_H

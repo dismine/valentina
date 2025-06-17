@@ -28,25 +28,29 @@
 ****************************************************************************/
 
 #include "fancytabbar.h"
+#include "../vmisc/compatibility.h"
 #include "stylehelper.h"
 
+#include <QColor>
 #include <QMouseEvent>
 #include <QPainter>
-#include <QColor>
 #include <QStackedLayout>
 #include <QToolTip>
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 9, 0)
+#include "../vmisc/backport/qpainterstateguard.h"
+#else
+#include <QPainterStateGuard>
+#endif
+
+using namespace Qt::Literals::StringLiterals;
 
 const int FancyTabBar::m_rounding = 22;
 
 //---------------------------------------------------------------------------------------------------------------------
-FancyTabBar::FancyTabBar(const TabBarPosition position, QWidget *parent)
-    : QWidget(parent),
-      m_position(position),
-      m_hoverRect(),
-      m_hoverIndex(-1),
-      m_currentIndex(-1),
-      m_attachedTabs(),
-      m_timerTriggerChangedSignal()
+FancyTabBar::FancyTabBar(TabBarPosition position, QWidget *parent)
+  : QWidget(parent),
+    m_position(position)
 {
     if (m_position == FancyTabBar::Above || m_position == FancyTabBar::Below)
     {
@@ -71,28 +75,28 @@ FancyTabBar::FancyTabBar(const TabBarPosition position, QWidget *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSize FancyTabBar::TabSizeHint(bool minimum) const
+auto FancyTabBar::TabSizeHint(bool minimum) const -> QSize
 {
     QFont boldFont(font());
     boldFont.setPointSizeF(StyleHelper::sidebarFontSize());
     boldFont.setBold(true);
-    QFontMetrics fm(boldFont);
-    int spacing = 8;
-    int width = 60 + spacing + 2;
+    QFontMetrics const fm(boldFont);
+    int const spacing = 8;
+
     int maxLabelwidth = 0;
-    for (int tab=0 ; tab<Count() ;++tab)
+    for (int tab = 0; tab < Count(); ++tab)
     {
-        QString tabText = TabText(tab).simplified();
-        const QStringList words = tabText.split(QLatin1Char(' '));
+        QString const tabText = TabText(tab).simplified();
+        const QStringList words = tabText.split(' '_L1);
 
         if (words.size() > 1)
         {
             QString sentence;
-            for (auto &word : words)
+            for (const auto &word : words)
             {
-                sentence = sentence.isEmpty() ? sentence = word : sentence + QLatin1Char(' ') + word;
+                sentence = sentence.isEmpty() ? sentence = word : sentence + ' '_L1 + word;
 
-                const int width = fm.width(sentence);
+                const int width = fm.horizontalAdvance(sentence);
                 if (maxLabelwidth < width)
                 {
                     maxLabelwidth = width;
@@ -102,26 +106,26 @@ QSize FancyTabBar::TabSizeHint(bool minimum) const
         }
         else
         {
-            const int width = fm.width(tabText);
+            const int width = fm.horizontalAdvance(tabText);
             if (width > maxLabelwidth)
             {
                 maxLabelwidth = width;
             }
         }
-
     }
-    int iconHeight = minimum ? 0 : 32;
+    int const width = 60 + spacing + 2;
+    int const iconHeight = minimum ? 0 : 32;
 
-    return QSize(qMax(width, maxLabelwidth + 4), iconHeight + spacing + fm.height());
+    return {qMax(width, maxLabelwidth + 4), iconHeight + spacing + fm.height()};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPoint FancyTabBar::GetCorner(const QRect& rect, const Corner corner) const
+auto FancyTabBar::GetCorner(const QRect &rect, Corner corner) const -> QPoint
 {
-    switch(m_position)
+    switch (m_position)
     {
         case Above:
-            switch(corner)
+            switch (corner)
             {
                 case OutsideBeginning:
                     return rect.topLeft();
@@ -136,7 +140,7 @@ QPoint FancyTabBar::GetCorner(const QRect& rect, const Corner corner) const
             }
             break;
         case Below:
-            switch(corner)
+            switch (corner)
             {
                 case OutsideBeginning:
                     return rect.bottomLeft();
@@ -151,7 +155,7 @@ QPoint FancyTabBar::GetCorner(const QRect& rect, const Corner corner) const
             }
             break;
         case Left:
-            switch(corner)
+            switch (corner)
             {
                 case OutsideBeginning:
                     return rect.topLeft();
@@ -166,7 +170,7 @@ QPoint FancyTabBar::GetCorner(const QRect& rect, const Corner corner) const
             }
             break;
         case Right:
-            switch(corner)
+            switch (corner)
             {
                 case OutsideBeginning:
                     return rect.topRight();
@@ -186,7 +190,7 @@ QPoint FancyTabBar::GetCorner(const QRect& rect, const Corner corner) const
 
     qFatal("that's impossible!");
 
-    return QPoint();
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -198,10 +202,10 @@ QPoint FancyTabBar::GetCorner(const QRect& rect, const Corner corner) const
 //  gives
 //
 //      QRect(-3, -1, 9, 13) // 9 by 13 rect, starting at -3/-1.
-QRect FancyTabBar::AdjustRect(const QRect& rect, const qint8 offsetOutside, const qint8 offsetInside,
-                              const qint8 offsetBeginning, const qint8 offsetEnd) const
+auto FancyTabBar::AdjustRect(const QRect &rect, qint8 offsetOutside, qint8 offsetInside, qint8 offsetBeginning,
+                             qint8 offsetEnd) const -> QRect
 {
-    switch(m_position)
+    switch (m_position)
     {
         case Above:
             return rect.adjusted(-offsetBeginning, -offsetOutside, offsetEnd, offsetInside);
@@ -216,15 +220,14 @@ QRect FancyTabBar::AdjustRect(const QRect& rect, const qint8 offsetOutside, cons
     }
 
     qFatal("that's impossible!");
-    return QRect();
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 // Same with a point: + means towards Outside/End, - means towards Inside/Beginning
-QPoint FancyTabBar::AdjustPoint(const QPoint& point, const qint8 offsetInsideOutside,
-                                const qint8 offsetBeginningEnd) const
+auto FancyTabBar::AdjustPoint(const QPoint &point, qint8 offsetInsideOutside, qint8 offsetBeginningEnd) const -> QPoint
 {
-    switch(m_position)
+    switch (m_position)
     {
         case Above:
             return point + QPoint(offsetBeginningEnd, -offsetInsideOutside);
@@ -239,7 +242,7 @@ QPoint FancyTabBar::AdjustPoint(const QPoint& point, const qint8 offsetInsideOut
     }
 
     qFatal("that's impossible!");
-    return QPoint();
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -249,7 +252,7 @@ void FancyTabBar::paintEvent(QPaintEvent *event)
     QPainter painter(this);
 
     // paint background
-    QRect rectangle = AdjustRect(rect(), 0, -1, 0, 0);
+    QRect const rectangle = AdjustRect(rect(), 0, -1, 0, 0);
     QLinearGradient lg;
 
     lg.setStart(GetCorner(rectangle, OutsideBeginning));
@@ -290,7 +293,7 @@ void FancyTabBar::mouseMoveEvent(QMouseEvent *e)
     int newHover = -1;
     for (int i = 0; i < Count(); ++i)
     {
-        QRect area = TabRect(i);
+        QRect const area = TabRect(i);
         if (area.contains(e->pos()))
         {
             newHover = i;
@@ -317,18 +320,15 @@ void FancyTabBar::mouseMoveEvent(QMouseEvent *e)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool FancyTabBar::event(QEvent *event)
+auto FancyTabBar::event(QEvent *event) -> bool
 {
-    if (event->type() == QEvent::ToolTip)
+    if (event->type() == QEvent::ToolTip && ValidIndex(m_hoverIndex))
     {
-        if (ValidIndex(m_hoverIndex))
+        QString const tt = TabToolTip(m_hoverIndex);
+        if (!tt.isEmpty())
         {
-            QString tt = TabToolTip(m_hoverIndex);
-            if (!tt.isEmpty())
-            {
-                QToolTip::showText(static_cast<QHelpEvent*>(event)->globalPos(), tt, this);
-                return true;
-            }
+            QToolTip::showText(static_cast<QHelpEvent *>(event)->globalPos(), tt, this);
+            return true;
         }
     }
     return QWidget::event(event);
@@ -336,7 +336,11 @@ bool FancyTabBar::event(QEvent *event)
 
 //---------------------------------------------------------------------------------------------------------------------
 // Resets hover animation on mouse enter
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+void FancyTabBar::enterEvent(QEnterEvent *e)
+#else
 void FancyTabBar::enterEvent(QEvent *e)
+#endif
 {
     Q_UNUSED(e)
     m_hoverRect = QRect();
@@ -350,80 +354,73 @@ void FancyTabBar::leaveEvent(QEvent *e)
     Q_UNUSED(e)
     m_hoverIndex = -1;
     m_hoverRect = QRect();
-    for (int i = 0 ; i < m_attachedTabs.count() ; ++i)
+    for (int i = 0; i < m_attachedTabs.count(); ++i)
     {
         m_attachedTabs[i]->fadeOut();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool FancyTabBar::ValidIndex(int index) const
+auto FancyTabBar::ValidIndex(int index) const -> bool
 {
     return index >= 0 && index < m_attachedTabs.count();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void FancyTabBar::SetOrientation(const FancyTabBar::TabBarPosition p)
+void FancyTabBar::SetOrientation(TabBarPosition p)
 {
     m_position = p;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSize FancyTabBar::sizeHint() const
+auto FancyTabBar::sizeHint() const -> QSize
 {
-    QSize sh = TabSizeHint();
+    QSize const sh = TabSizeHint();
     //    return QSize(sh.width(), sh.height() * mAttachedTabs.count());
 
     if (m_position == Above || m_position == Below)
     {
-        return QSize(sh.width() * m_attachedTabs.count(), sh.height());
+        return {sh.width() * static_cast<int>(m_attachedTabs.count()), sh.height()};
     }
-    else
-    {
-        return QSize(sh.width(), sh.height() * m_attachedTabs.count());
-    }
+
+    return {sh.width(), sh.height() * static_cast<int>(m_attachedTabs.count())};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSize FancyTabBar::minimumSizeHint() const
+auto FancyTabBar::minimumSizeHint() const -> QSize
 {
     const QSize sh = TabSizeHint(true);
-//    return QSize(sh.width(), sh.height() * mAttachedTabs.count());
+    //    return QSize(sh.width(), sh.height() * mAttachedTabs.count());
 
-    if(m_position == Above || m_position == Below)
+    if (m_position == Above || m_position == Below)
     {
-        return QSize(sh.width() * m_attachedTabs.count(), sh.height());
+        return {sh.width() * static_cast<int>(m_attachedTabs.count()), sh.height()};
     }
-    else
-    {
-        return QSize(sh.width(), sh.height() * m_attachedTabs.count());
-    }
+
+    return {sh.width(), sh.height() * static_cast<int>(m_attachedTabs.count())};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRect FancyTabBar::TabRect(int index) const
+auto FancyTabBar::TabRect(int index) const -> QRect
 {
     QSize sh = TabSizeHint();
 
-    if(m_position == Above || m_position == Below)
+    if (m_position == Above || m_position == Below)
     {
         if (sh.width() * m_attachedTabs.count() > width())
         {
-            sh.setWidth(width() / m_attachedTabs.count());
+            sh.setWidth(width() / static_cast<int>(m_attachedTabs.count()));
         }
 
-        return QRect(index * sh.width(), 0, sh.width(), sh.height());
+        return {index * sh.width(), 0, sh.width(), sh.height()};
     }
-    else
+
+    if (sh.height() * m_attachedTabs.count() > height())
     {
-        if (sh.height() * m_attachedTabs.count() > height())
-        {
-            sh.setHeight(height() / m_attachedTabs.count());
-        }
-
-        return QRect(0, index * sh.height(), sh.width(), sh.height());
+        sh.setHeight(height() / static_cast<int>(m_attachedTabs.count()));
     }
 
+    return {0, index * sh.height(), sh.width(), sh.height()};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -462,21 +459,21 @@ void FancyTabBar::PaintTab(QPainter *painter, int tabIndex) const
         qWarning("invalid index");
         return;
     }
-    painter->save();
+    QPainterStateGuard guard(painter);
 
-    QRect rect = TabRect(tabIndex);
-    bool selected = (tabIndex == m_currentIndex);
-    bool enabled = IsTabEnabled(tabIndex);
+    QRect const rect = TabRect(tabIndex);
+    bool const selected = (tabIndex == m_currentIndex);
+    bool const enabled = IsTabEnabled(tabIndex);
 
-    if(selected)
+    if (selected)
     {
         // background
-        painter->save();
+        guard.save();
         QLinearGradient grad(GetCorner(rect, OutsideBeginning), GetCorner(rect, InsideBeginning));
         grad.setColorAt(0, QColor(255, 255, 255, 140));
         grad.setColorAt(1, QColor(255, 255, 255, 210));
         painter->fillRect(AdjustRect(rect, 0, 0, 0, -1), grad);
-        painter->restore();
+        guard.restore();
 
         // shadows (the black lines immediately before/after (active && selected)-backgrounds)
         painter->setPen(QColor(0, 0, 0, 110));
@@ -507,7 +504,7 @@ void FancyTabBar::PaintTab(QPainter *painter, int tabIndex) const
                           AdjustPoint(GetCorner(rect, InsideEnd), 0, -1));
     }
 
-    QString tabText(this->TabText(tabIndex));
+    QString const tabText(this->TabText(tabIndex));
     QRect tabTextRect(rect);
     const bool drawIcon = rect.height() > 36;
     QRect tabIconRect(tabTextRect);
@@ -517,8 +514,8 @@ void FancyTabBar::PaintTab(QPainter *painter, int tabIndex) const
     boldFont.setBold(true);
     painter->setFont(boldFont);
     painter->setPen(selected ? QColor(255, 255, 255, 160) : QColor(0, 0, 0, 110));
-    const int textFlags = static_cast<int>(Qt::AlignCenter | (drawIcon ? Qt::AlignBottom : Qt::AlignVCenter)
-                                           | Qt::TextWordWrap);
+    const auto textFlags =
+        static_cast<int>(Qt::AlignCenter | (drawIcon ? Qt::AlignBottom : Qt::AlignVCenter) | Qt::TextWordWrap);
     if (enabled)
     {
         painter->drawText(tabTextRect, textFlags, tabText);
@@ -531,10 +528,10 @@ void FancyTabBar::PaintTab(QPainter *painter, int tabIndex) const
 
 #ifndef Q_OS_MAC
     // hover
-    if(!selected && enabled)
+    if (!selected && enabled)
     {
-        painter->save();
-        int fader = int(m_attachedTabs[tabIndex]->fader());
+        guard.save();
+        auto const fader = static_cast<int>(m_attachedTabs[tabIndex]->fader());
         QLinearGradient grad(GetCorner(rect, OutsideBeginning), GetCorner(rect, InsideBeginning));
 
         grad.setColorAt(0, Qt::transparent);
@@ -543,7 +540,7 @@ void FancyTabBar::PaintTab(QPainter *painter, int tabIndex) const
         painter->fillRect(rect, grad);
         painter->setPen(QPen(grad, 1.0));
 
-        if(m_position == Above || m_position == Below)
+        if (m_position == Above || m_position == Below)
         {
             painter->drawLine(rect.topLeft(), rect.bottomLeft());
             painter->drawLine(rect.topRight(), rect.bottomRight());
@@ -554,9 +551,9 @@ void FancyTabBar::PaintTab(QPainter *painter, int tabIndex) const
             painter->drawLine(rect.bottomLeft(), rect.bottomRight());
         }
 
-        painter->restore();
+        guard.restore();
     }
-#endif //#ifndef Q_OS_MAC
+#endif // #ifndef Q_OS_MAC
 
     if (!enabled)
     {
@@ -565,8 +562,8 @@ void FancyTabBar::PaintTab(QPainter *painter, int tabIndex) const
 
     if (drawIcon)
     {
-        int textHeight = painter->fontMetrics().boundingRect(QRect(0, 0, width(), height()), Qt::TextWordWrap,
-                                                             tabText).height();
+        int const textHeight =
+            painter->fontMetrics().boundingRect(QRect(0, 0, width(), height()), Qt::TextWordWrap, tabText).height();
         tabIconRect.adjust(0, 0, 0, -textHeight);
         StyleHelper::drawIconWithShadow(TabIcon(tabIndex), tabIconRect, painter,
                                         enabled ? QIcon::Normal : QIcon::Disabled);
@@ -574,7 +571,6 @@ void FancyTabBar::PaintTab(QPainter *painter, int tabIndex) const
 
     painter->translate(0, -1);
     painter->drawText(tabTextRect, textFlags, tabText);
-    painter->restore();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -589,45 +585,45 @@ void FancyTabBar::SetCurrentIndex(int index)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int FancyTabBar::CurrentIndex() const
+auto FancyTabBar::CurrentIndex() const -> int
 {
     return m_currentIndex;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void FancyTabBar::SetTabToolTip(int index, QString toolTip)
+void FancyTabBar::SetTabToolTip(int index, const QString &toolTip)
 {
     m_attachedTabs[index]->m_toolTip = toolTip;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString FancyTabBar::TabToolTip(int index) const
+auto FancyTabBar::TabToolTip(int index) const -> QString
 {
     return m_attachedTabs.at(index)->m_toolTip;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QIcon FancyTabBar::TabIcon(int index) const
+auto FancyTabBar::TabIcon(int index) const -> QIcon
 {
     return m_attachedTabs.at(index)->m_icon;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString FancyTabBar::TabText(int index) const
+auto FancyTabBar::TabText(int index) const -> QString
 {
     return m_attachedTabs.at(index)->m_text;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void FancyTabBar::SetTabText(int index, QString text)
+void FancyTabBar::SetTabText(int index, const QString &text)
 {
-    m_attachedTabs.at(index)->m_text=text;
+    m_attachedTabs.at(index)->m_text = text;
     setMaximumWidth(TabSizeHint(false).width());
     update();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int FancyTabBar::Count() const
+auto FancyTabBar::Count() const -> vsizetype
 {
     return m_attachedTabs.count();
 }
@@ -646,7 +642,7 @@ void FancyTabBar::SetTabEnabled(int index, bool enable)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool FancyTabBar::IsTabEnabled(int index) const
+auto FancyTabBar::IsTabEnabled(int index) const -> bool
 {
     Q_ASSERT(index < m_attachedTabs.size());
     Q_ASSERT(index >= 0);
@@ -662,7 +658,7 @@ bool FancyTabBar::IsTabEnabled(int index) const
 //---------------------------------------------------------------------------------------------------------------------
 void FancyTabBar::InsertTab(int index, const QIcon &icon, const QString &label)
 {
-    FancyTab *tab = new FancyTab(this);
+    auto *tab = new FancyTab(this);
     tab->m_icon = icon;
     tab->m_text = label;
     m_attachedTabs.insert(index, tab);

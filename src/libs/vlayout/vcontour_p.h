@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,10 +29,13 @@
 #ifndef VCONTOUR_P_H
 #define VCONTOUR_P_H
 
-#include <QSharedData>
+#include <QPainterPath>
 #include <QPointF>
+#include <QRectF>
+#include <QSharedData>
+#include <QVector>
 
-#include "../vmisc/diagnostic.h"
+#include "../vmisc/defglobal.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -41,36 +44,39 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VContourData : public QSharedData
 {
 public:
-    VContourData()
-        :globalContour(QVector<QPointF>()), paperHeight(0), paperWidth(0), shift(0)
-    {}
-
-    VContourData(int height, int width)
-        :globalContour(QVector<QPointF>()), paperHeight(height), paperWidth(width), shift(0)
-    {}
-
-    VContourData(const VContourData &contour)
-        :QSharedData(contour), globalContour(contour.globalContour), paperHeight(contour.paperHeight),
-          paperWidth(contour.paperWidth), shift(contour.shift)
-    {}
-
-    ~VContourData() {}
+    VContourData() = default;
+    VContourData(int height, int width, qreal layoutWidth);
+    VContourData(const VContourData &contour) = default;
+    ~VContourData() = default;
 
     /** @brief globalContour list of global points contour. */
-    QVector<QPointF> globalContour;
+    QVector<QPointF> globalContour{}; // NOLINT (misc-non-private-member-variables-in-classes)
 
     /** @brief paperHeight height of paper in pixels*/
-    int paperHeight;
+    int paperHeight{0}; // NOLINT (misc-non-private-member-variables-in-classes)
 
     /** @brief paperWidth width of paper in pixels*/
-    int paperWidth;
+    int paperWidth{0}; // NOLINT (misc-non-private-member-variables-in-classes)
 
-    quint32 shift;
+    qreal shift{0}; // NOLINT (misc-non-private-member-variables-in-classes)
+
+    qreal layoutWidth{0}; // NOLINT (misc-non-private-member-variables-in-classes)
+
+    vsizetype m_emptySheetEdgesCount{0}; // NOLINT (misc-non-private-member-variables-in-classes)
 
 private:
-    VContourData &operator=(const VContourData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN_MOVE(VContourData) // NOLINT
 };
 
+// cppcheck-suppress unknownMacro
 QT_WARNING_POP
+
+//---------------------------------------------------------------------------------------------------------------------
+inline VContourData::VContourData(int height, int width, qreal layoutWidth)
+  : paperHeight(height),
+    paperWidth(width),
+    layoutWidth(layoutWidth)
+{
+}
 
 #endif // VCONTOUR_P_H

@@ -16,6 +16,8 @@
 #include <string>
 #include <iostream>
 #include <QtGlobal>
+#include <memory>
+#include "../drw_base.h"
 //#include <iomanip>
 
 #define DRW_DBGSL(a) DRW_dbg::getInstance()->setLevel(a)
@@ -31,14 +33,21 @@ class print_none;
 
 class DRW_dbg {
 public:
-    enum LEVEL {
-        NONE,
-        DEBUG
+    enum class Level {
+        None,
+        Debug
     };
-    void setLevel(LEVEL lvl);
-    LEVEL getLevel() const;
-    static DRW_dbg *getInstance();
+    void setLevel(Level lvl);
+    /**
+     * Sets a custom debug printer to use when non-silent output
+     * is required.
+     */
+    void setCustomDebugPrinter(std::unique_ptr<DRW::DebugPrinter> printer);
+    auto getLevel() const -> Level;
+    static auto getInstance() -> DRW_dbg *;
     void print(const std::string &s);
+    void print(signed char i);
+    void print(unsigned char i);
     void print(int i);
     void print(unsigned int i);
     void print(long long int i);
@@ -51,13 +60,15 @@ public:
     void printPT(double x, double y, double z);
 
 private:
-    Q_DISABLE_COPY(DRW_dbg)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DRW_dbg) // NOLINT
     DRW_dbg();
     ~DRW_dbg();
     static DRW_dbg *instance;
-    LEVEL level;
-    std::ios_base::fmtflags flags;
-    print_none* prClass;
+    Level level{Level::None};
+    DRW::DebugPrinter silentDebug{};
+    std::unique_ptr< DRW::DebugPrinter > debugPrinter;
+    DRW::DebugPrinter* currentPrinter{nullptr};
 };
 
 

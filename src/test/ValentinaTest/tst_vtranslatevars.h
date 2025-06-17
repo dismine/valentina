@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,17 +29,19 @@
 #ifndef TST_VTRANSLATEVARS_H
 #define TST_VTRANSLATEVARS_H
 
-#include <QtCore/qglobal.h>
 #include <QLocale>
 #include <QObject>
+#include <QtCore/qglobal.h>
 
 class VTranslateVars;
 
 class TST_VTranslateVars : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     explicit TST_VTranslateVars(QObject *parent = nullptr);
+    ~TST_VTranslateVars() override;
 private slots:
     void initTestCase();
     void TestFormulaFromUser_data();
@@ -47,10 +49,13 @@ private slots:
     void TestFormulaToUser_data();
     void TestFormulaToUser();
     void cleanupTestCase();
+
 private:
-    Q_DISABLE_COPY(TST_VTranslateVars)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(TST_VTranslateVars) // NOLINT
     VTranslateVars *m_trMs;
     QLocale m_systemLocale;
+    bool m_translateFomula{true};
 
     void PrepareValFromUser(double d, const QLocale &locale);
     void PrepareValToUser(double d, const QLocale &locale);

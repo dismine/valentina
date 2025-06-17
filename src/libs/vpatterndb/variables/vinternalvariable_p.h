@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,41 +29,32 @@
 #ifndef VINTERNALVARIABLE_P_H
 #define VINTERNALVARIABLE_P_H
 
-#include <QSharedData>
 #include "../vmisc/def.h"
-#include "../vmisc/diagnostic.h"
+#include "../vmisc/defglobal.h"
+#include <QSharedData>
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
-class VInternalVariableData : public QSharedData
+class VInternalVariableData final : public QSharedData
 {
 public:
+    VInternalVariableData() = default;
+    VInternalVariableData(const VInternalVariableData &var) = default;
+    ~VInternalVariableData() = default;
 
-    VInternalVariableData()
-        :type(VarType::Unknown), value(0), name(QString())
-    {}
-
-    VInternalVariableData(const VInternalVariableData &var)
-        :QSharedData(var), type(var.type), value(var.value), name(var.name)
-    {}
-
-    virtual ~VInternalVariableData();
-
-    VarType type;
+    VarType type{VarType::Unknown}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief value variable's value */
-    qreal   value;
+    qreal value{0}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    QString name;
+    QString name{};  // NOLINT(misc-non-private-member-variables-in-classes)
+    QString alias{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
-    VInternalVariableData &operator=(const VInternalVariableData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN_MOVE(VInternalVariableData) // NOLINT
 };
-
-VInternalVariableData::~VInternalVariableData()
-{}
 
 QT_WARNING_POP
 

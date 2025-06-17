@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -32,8 +32,7 @@
 
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/ifcdef.h"
-#include "../vmisc/logging.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/def.h"
 #include "vundocommand.h"
 
@@ -50,11 +49,11 @@ MoveSPoint::MoveSPoint(VAbstractPattern *doc, const double &x, const double &y, 
     qCDebug(vUndo, "SPoint newY %f", newY);
 
     SCASSERT(scene != nullptr)
-    QDomElement domElement = doc->elementById(id, VAbstractPattern::TagPoint);
+    QDomElement const domElement = doc->FindElementById(id, VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
-        oldX = qApp->toPixel(doc->GetParametrDouble(domElement, AttrX, "0.0"));
-        oldY = qApp->toPixel(doc->GetParametrDouble(domElement, AttrY, "0.0"));
+        oldX = VAbstractValApplication::VApp()->toPixel(VDomDocument::GetParametrDouble(domElement, AttrX, "0.0"));
+        oldY = VAbstractValApplication::VApp()->toPixel(VDomDocument::GetParametrDouble(domElement, AttrY, "0.0"));
 
         qCDebug(vUndo, "SPoint oldX %f", oldX);
         qCDebug(vUndo, "SPoint oldY %f", oldY);
@@ -86,14 +85,14 @@ void MoveSPoint::redo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool MoveSPoint::mergeWith(const QUndoCommand *command)
+auto MoveSPoint::mergeWith(const QUndoCommand *command) -> bool
 {
-    const MoveSPoint *moveCommand = static_cast<const MoveSPoint *>(command);
+    const auto *moveCommand = static_cast<const MoveSPoint *>(command);
     SCASSERT(moveCommand != nullptr)
-    const quint32 id = moveCommand->getSPointId();
+    const quint32 sPointId = moveCommand->getSPointId();
 
     qCDebug(vUndo, "Mergin.");
-    if (id != nodeId)
+    if (sPointId != nodeId)
     {
         qCDebug(vUndo, "Merging canceled.");
         return false;
@@ -108,7 +107,7 @@ bool MoveSPoint::mergeWith(const QUndoCommand *command)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int MoveSPoint::id() const
+auto MoveSPoint::id() const -> int
 {
     return static_cast<int>(UndoCommand::MoveSPoint);
 }
@@ -119,11 +118,11 @@ void MoveSPoint::Do(double x, double y)
     qCDebug(vUndo, "Move to x %f", x);
     qCDebug(vUndo, "Move to y %f", y);
 
-    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagPoint);
+    QDomElement domElement = doc->FindElementById(nodeId, VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
-        doc->SetAttribute(domElement, AttrX, QString().setNum(qApp->fromPixel(x)));
-        doc->SetAttribute(domElement, AttrY, QString().setNum(qApp->fromPixel(y)));
+        doc->SetAttribute(domElement, AttrX, QString().setNum(VAbstractValApplication::VApp()->fromPixel(x)));
+        doc->SetAttribute(domElement, AttrY, QString().setNum(VAbstractValApplication::VApp()->fromPixel(y)));
 
         emit NeedLiteParsing(Document::LitePPParse);
     }

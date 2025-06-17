@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -36,13 +36,17 @@
 class VAbstractBezier : public VAbstractCurve
 {
 public:
-    VAbstractBezier(const GOType &type, const quint32 &idObject = NULL_ID, const Draw &mode = Draw::Calculation);
-    VAbstractBezier(const VAbstractBezier &curve);
-    VAbstractBezier& operator= (const VAbstractBezier &curve);
-    virtual ~VAbstractBezier();
+    explicit VAbstractBezier(const GOType &type, const quint32 &idObject = NULL_ID,
+                             const Draw &mode = Draw::Calculation);
+    VAbstractBezier(const VAbstractBezier &curve) = default;
+    auto operator=(const VAbstractBezier &curve) -> VAbstractBezier &;
+    ~VAbstractBezier() override = default;
 
-    virtual qreal GetC1Length() const =0;
-    virtual qreal GetC2Length() const =0;
+    VAbstractBezier(VAbstractBezier &&curve) noexcept = default;
+    auto operator=(VAbstractBezier &&curve) noexcept -> VAbstractBezier & = default;
+
+    virtual auto GetC1Length() const -> qreal = 0;
+    virtual auto GetC2Length() const -> qreal = 0;
 };
 
 #endif // VABSTRACTBEZIER_H

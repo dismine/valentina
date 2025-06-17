@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef VLINEANGLE_H
 #define VLINEANGLE_H
 
-#include <qcompilerdetection.h>
 #include <QSharedDataPointer>
 #include <QTypeInfo>
 #include <QtGlobal>
@@ -39,31 +38,30 @@
 class VLineAngleData;
 class VPointF;
 
-class VLineAngle :public VInternalVariable
+class VLineAngle final : public VInternalVariable
 {
 public:
     VLineAngle();
     VLineAngle(const VPointF *p1, const quint32 &p1Id, const VPointF *p2, const quint32 &p2Id);
     VLineAngle(const VLineAngle &var);
+    ~VLineAngle() override;
 
-    virtual ~VLineAngle() override;
+    auto operator=(const VLineAngle &var) -> VLineAngle &;
 
-    VLineAngle &operator=(const VLineAngle &var);
-#ifdef Q_COMPILER_RVALUE_REFS
-    VLineAngle &operator=(VLineAngle &&var) Q_DECL_NOTHROW { Swap(var); return *this; }
-#endif
+    VLineAngle(VLineAngle &&var) noexcept;
+    auto operator=(VLineAngle &&var) noexcept -> VLineAngle &;
 
-    inline void Swap(VLineAngle &var) Q_DECL_NOTHROW
-    { VInternalVariable::Swap(var); std::swap(d, var.d); }
+    auto Filter(quint32 id) -> bool override;
 
-    virtual bool Filter(quint32 id) override;
-    void         SetValue(const VPointF *p1, const VPointF *p2);
-    quint32      GetP1Id() const;
-    quint32      GetP2Id() const;
+    void SetValue(const VPointF *p1, const VPointF *p2);
+
+    auto GetP1Id() const -> quint32;
+    auto GetP2Id() const -> quint32;
+
 private:
     QSharedDataPointer<VLineAngleData> d;
 };
 
-Q_DECLARE_TYPEINFO(VLineAngle, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VLineAngle, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VLINEANGLE_H

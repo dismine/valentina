@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2018 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -33,10 +33,15 @@
 class VExceptionInvalidNotch : public VException
 {
 public:
-    explicit VExceptionInvalidNotch(const QString &error);
-    VExceptionInvalidNotch(const VExceptionInvalidNotch &e);
-    VExceptionInvalidNotch &operator=(const VExceptionInvalidNotch &e);
-    virtual ~VExceptionInvalidNotch() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
+    explicit VExceptionInvalidNotch(const QString &error) V_NOEXCEPT_EXPR (true);
+    VExceptionInvalidNotch(const VExceptionInvalidNotch &e) V_NOEXCEPT_EXPR (true);
+    auto operator=(const VExceptionInvalidNotch &e) V_NOEXCEPT_EXPR(true) -> VExceptionInvalidNotch &;
+    virtual ~VExceptionInvalidNotch() V_NOEXCEPT_EXPR (true) = default;
+
+    Q_NORETURN virtual void raise() const override { throw *this; }
+
+    Q_REQUIRED_RESULT virtual auto clone() const -> VExceptionInvalidNotch * override
+    { return new VExceptionInvalidNotch(*this); }
 };
 
 #endif // VEXCEPTIONINVALIDNOTCH_H

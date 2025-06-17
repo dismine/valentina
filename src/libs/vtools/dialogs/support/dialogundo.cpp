@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -31,38 +31,41 @@
 #include <QCloseEvent>
 #include <QLocale>
 #include <QPushButton>
-#include <Qt>
 
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "ui_dialogundo.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogUndo::DialogUndo(QWidget *parent)
-    :QDialog(parent), ui(new Ui::DialogUndo), result(UndoButton::Cancel)
+  : QDialog(parent),
+    ui(new Ui::DialogUndo),
+    result(UndoButton::Cancel)
 {
     ui->setupUi(this);
 
-    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+    VAbstractApplication::VApp()->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
-    bool opening = qApp->getOpeningPattern();
+    bool const opening = VAbstractValApplication::VApp()->getOpeningPattern();
     if (opening)
     {
         ui->pushButtonUndo->setDisabled(opening);
     }
     else
     {
-        connect(ui->pushButtonUndo, &QPushButton::clicked, this, [this]()
-        {
-            result = UndoButton::Undo;
-            accept();
-        });
+        connect(ui->pushButtonUndo, &QPushButton::clicked, this,
+                [this]()
+                {
+                    result = UndoButton::Undo;
+                    accept();
+                });
     }
-    connect(ui->pushButtonFix, &QPushButton::clicked, this, [this]()
-    {
-        result = UndoButton::Fix;
-        accept();
-    });
+    connect(ui->pushButtonFix, &QPushButton::clicked, this,
+            [this]()
+            {
+                result = UndoButton::Fix;
+                accept();
+            });
     connect(ui->pushButtonCancel, &QPushButton::clicked, this, &DialogUndo::Cancel);
 
     setCursor(Qt::ArrowCursor);

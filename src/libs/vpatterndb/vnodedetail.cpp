@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -27,11 +27,11 @@
  *************************************************************************/
 
 #include "vnodedetail.h"
+#include "../vgeometry/vpointf.h"
+#include "../vpatterndb/vcontainer.h"
 #include "vnodedetail_p.h"
 #include "vpiecenode.h"
 #include "vpiecepath.h"
-#include "../vgeometry/vpointf.h"
-#include "../vpatterndb/vcontainer.h"
 
 #include <QLineF>
 #include <QVector>
@@ -39,30 +39,27 @@
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
-bool IsOX(const QLineF &line)
+auto IsOX(const QLineF &line) -> bool
 {
-    return VFuzzyComparePossibleNulls(line.angle(), 0)
-            || VFuzzyComparePossibleNulls(line.angle(), 360)
-            || VFuzzyComparePossibleNulls(line.angle(), 180);
+    return VFuzzyComparePossibleNulls(line.angle(), 0) || VFuzzyComparePossibleNulls(line.angle(), 360) ||
+           VFuzzyComparePossibleNulls(line.angle(), 180);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool IsOY(const QLineF &line)
+auto IsOY(const QLineF &line) -> bool
 {
     return VFuzzyComparePossibleNulls(line.angle(), 90) || VFuzzyComparePossibleNulls(line.angle(), 270);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString LocalWidth(const QLineF &line, const QLineF &movedLine)
+auto LocalWidth(const QLineF &line, const QLineF &movedLine) -> QString
 {
     if (VFuzzyComparePossibleNulls(line.angle(), movedLine.angle()))
     {
         return QString().setNum(movedLine.length());
     }
-    else
-    {// different direction means value is negative
-        return QChar('0');
-    }
+    // different direction means value is negative
+    return QChar('0');
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -94,27 +91,27 @@ void ConvertAfter(VPieceNode &node, const QLineF &line, qreal mX, qreal mY)
         node.SetFormulaSAAfter(LocalWidth(line, movedLine));
     }
 }
-}//static functions
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VNodeDetail::VNodeDetail()
-    :d(new VNodeDetailData)
-{}
+  : d(new VNodeDetailData)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VNodeDetail::VNodeDetail(quint32 id, Tool typeTool, NodeDetail typeNode, qreal mx, qreal my, bool reverse)
-    :d(new VNodeDetailData(id, typeTool, typeNode, mx, my, reverse))
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VNodeDetail::VNodeDetail(const VNodeDetail &node)
-    :d (node.d)
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VNodeDetail &VNodeDetail::operator =(const VNodeDetail &node)
+  : d(new VNodeDetailData(id, typeTool, typeNode, mx, my, reverse))
 {
-    if ( &node == this )
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+COPY_CONSTRUCTOR_IMPL(VNodeDetail)
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VNodeDetail::operator=(const VNodeDetail &node) -> VNodeDetail &
+{
+    if (&node == this)
     {
         return *this;
     }
@@ -123,11 +120,23 @@ VNodeDetail &VNodeDetail::operator =(const VNodeDetail &node)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VNodeDetail::~VNodeDetail()
-{}
+VNodeDetail::VNodeDetail(VNodeDetail &&node) noexcept
+  : d(std::move(node.d))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VNodeDetail::getId() const
+auto VNodeDetail::operator=(VNodeDetail &&node) noexcept -> VNodeDetail &
+{
+    std::swap(d, node.d);
+    return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VNodeDetail::~VNodeDetail() = default;
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VNodeDetail::getId() const -> quint32
 {
     return d->id;
 }
@@ -139,7 +148,7 @@ void VNodeDetail::setId(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Tool VNodeDetail::getTypeTool() const
+auto VNodeDetail::getTypeTool() const -> Tool
 {
     return d->typeTool;
 }
@@ -152,7 +161,7 @@ void VNodeDetail::setTypeTool(const Tool &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-NodeDetail VNodeDetail::getTypeNode() const
+auto VNodeDetail::getTypeNode() const -> NodeDetail
 {
     return d->typeNode;
 }
@@ -165,7 +174,7 @@ void VNodeDetail::setTypeNode(const NodeDetail &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VNodeDetail::getMx() const
+auto VNodeDetail::getMx() const -> qreal
 {
     return d->mx;
 }
@@ -177,7 +186,7 @@ void VNodeDetail::setMx(const qreal &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VNodeDetail::getMy() const
+auto VNodeDetail::getMy() const -> qreal
 {
     return d->my;
 }
@@ -189,16 +198,13 @@ void VNodeDetail::setMy(const qreal &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VNodeDetail::getReverse() const
+auto VNodeDetail::getReverse() const -> bool
 {
     if (getTypeTool() == Tool::NodePoint)
     {
         return false;
     }
-    else
-    {
-        return d->reverse;
-    }
+    return d->reverse;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -215,8 +221,8 @@ void VNodeDetail::setReverse(bool reverse)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VPieceNode> VNodeDetail::Convert(const VContainer *data, const QVector<VNodeDetail> &nodes, qreal width,
-                                         bool closed)
+auto VNodeDetail::Convert(const VContainer *data, const QVector<VNodeDetail> &nodes, qreal width, bool closed)
+    -> QVector<VPieceNode>
 {
     if (width < 0)
     {
@@ -224,7 +230,7 @@ QVector<VPieceNode> VNodeDetail::Convert(const VContainer *data, const QVector<V
     }
 
     VPiecePath path;
-    for (auto &node : nodes)
+    for (const auto &node : nodes)
     {
         path.Append(VPieceNode(node.getId(), node.getTypeTool(), node.getReverse()));
     }
@@ -234,27 +240,25 @@ QVector<VPieceNode> VNodeDetail::Convert(const VContainer *data, const QVector<V
         for (int i = 0; i < nodes.size(); ++i)
         {
             const VNodeDetail &node = nodes.at(i);
-            if (node.getTypeTool() == Tool::NodePoint)
+            if (node.getTypeTool() == Tool::NodePoint &&
+                (not qFuzzyIsNull(node.getMx()) || not qFuzzyIsNull(node.getMy())))
             {
-                if (not qFuzzyIsNull(node.getMx()) || not qFuzzyIsNull(node.getMy()))
-                {
-                    const QPointF previosPoint = path.NodePreviousPoint(data, i);
-                    const QPointF nextPoint = path.NodeNextPoint(data, i);
+                const QPointF previosPoint = path.NodePreviousPoint(data, i);
+                const QPointF nextPoint = path.NodeNextPoint(data, i);
 
-                    const QPointF point = data->GeometricObject<VPointF>(node.getId())->toQPointF();
+                const QPointF point = data->GeometricObject<VPointF>(node.getId())->toQPointF();
 
-                    QLineF lineBefore(point, previosPoint);
-                    lineBefore.setAngle(lineBefore.angle()-90);
-                    lineBefore.setLength(width);
+                QLineF lineBefore(point, previosPoint);
+                lineBefore.setAngle(lineBefore.angle() - 90);
+                lineBefore.setLength(width);
 
-                    ConvertBefore(path[i], lineBefore, node.getMx(), node.getMy());
+                ConvertBefore(path[i], lineBefore, node.getMx(), node.getMy());
 
-                    QLineF lineAfter(point, nextPoint);
-                    lineAfter.setAngle(lineAfter.angle()+90);
-                    lineAfter.setLength(width);
+                QLineF lineAfter(point, nextPoint);
+                lineAfter.setAngle(lineAfter.angle() + 90);
+                lineAfter.setLength(width);
 
-                    ConvertAfter(path[i], lineAfter, node.getMx(), node.getMy());
-                }
+                ConvertAfter(path[i], lineAfter, node.getMx(), node.getMy());
             }
         }
     }
@@ -262,7 +266,7 @@ QVector<VPieceNode> VNodeDetail::Convert(const VContainer *data, const QVector<V
     if (not closed && path.CountNodes() > 1)
     {
         path[0].SetFormulaSABefore(QChar('0'));
-        path[path.CountNodes()-1].SetFormulaSAAfter(QChar('0'));
+        path[path.CountNodes() - 1].SetFormulaSAAfter(QChar('0'));
     }
 
     return path.GetNodes();

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -32,61 +32,82 @@
 #include <QLineF>
 #include <QPointF>
 #include <QSharedPointer>
-#include <Qt>
 #include <new>
 
 #include "../../tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofcontact.h"
-#include "../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"
-#include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
+#include "../vmisc/vmodifierkey.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/global.h"
 #include "visline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPointOfContact::VisToolPointOfContact(const VContainer *data, QGraphicsItem *parent)
-    :VisLine(data, parent), lineP2Id(NULL_ID), radiusId(NULL_ID), point(nullptr), lineP1(nullptr), lineP2(nullptr),
-      arc_point(nullptr), circle(nullptr), radius(0)
+  : VisLine(data, parent)
 {
-    arc_point = InitPoint(supportColor, this);
-    lineP1 = InitPoint(supportColor, this);
-    lineP2 = InitPoint(supportColor, this);
-    circle = InitItem<QGraphicsEllipseItem>(supportColor, this);
+    SetColorRole(VColorRole::VisSupportColor);
 
-    point = InitPoint(mainColor, this);
+    m_arcPoint = InitPoint(VColorRole::VisSupportColor, this);
+    m_lineP1 = InitPoint(VColorRole::VisSupportColor, this);
+    m_lineP2 = InitPoint(VColorRole::VisSupportColor, this);
+    m_circle = InitItem<VScaledEllipse>(VColorRole::VisSupportColor, this);
+    m_circle->SetPointMode(false);
+
+    m_point = InitPoint(VColorRole::VisMainColor, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolPointOfContact::RefreshGeometry()
 {
-    if (object1Id > NULL_ID)
+    if (m_lineP1Id > NULL_ID)
     {
-        const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(lineP1, static_cast<QPointF>(*first), supportColor);
+        const QSharedPointer<VPointF> first = GetData()->GeometricObject<VPointF>(m_lineP1Id);
+        DrawPoint(m_lineP1, static_cast<QPointF>(*first));
 
-        if (lineP2Id <= NULL_ID)
+        if (m_lineP2Id <= NULL_ID)
         {
-            DrawLine(this, QLineF(static_cast<QPointF>(*first), Visualization::scenePos), supportColor);
+            DrawLine(this, QLineF(static_cast<QPointF>(*first), ScenePos()));
         }
         else
         {
-            const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(lineP2Id);
-            DrawPoint(lineP2, static_cast<QPointF>(*second), supportColor);
-            DrawLine(this, QLineF(static_cast<QPointF>(*first), static_cast<QPointF>(*second)), supportColor);
+            const QSharedPointer<VPointF> second = GetData()->GeometricObject<VPointF>(m_lineP2Id);
+            DrawPoint(m_lineP2, static_cast<QPointF>(*second));
+            DrawLine(this, QLineF(static_cast<QPointF>(*first), static_cast<QPointF>(*second)));
 
-            if (radiusId > NULL_ID)
+            if (m_radiusId > NULL_ID)
             {
-                const QSharedPointer<VPointF> third = Visualization::data->GeometricObject<VPointF>(radiusId);
-                DrawPoint(arc_point, static_cast<QPointF>(*third), supportColor);
+                const QSharedPointer<VPointF> third = GetData()->GeometricObject<VPointF>(m_radiusId);
+                DrawPoint(m_arcPoint, static_cast<QPointF>(*third));
 
-                if (not qFuzzyIsNull(radius))
+                if (not qFuzzyIsNull(m_radius))
                 {
+                    QPointF fPoint;
+                    VToolPointOfContact::FindPoint(m_radius, static_cast<QPointF>(*third), static_cast<QPointF>(*first),
+                                                   static_cast<QPointF>(*second), &fPoint);
+                    DrawPoint(m_point, fPoint);
+
+                    m_circle->setRect(PointRect(m_radius));
+                    DrawPoint(m_circle, static_cast<QPointF>(*third), Qt::DashLine);
+                }
+                else if (GetMode() == Mode::Creation)
+                {
+                    QLineF const cursorLine(static_cast<QPointF>(*third), ScenePos());
+                    qreal const radius = cursorLine.length();
+
                     QPointF fPoint;
                     VToolPointOfContact::FindPoint(radius, static_cast<QPointF>(*third), static_cast<QPointF>(*first),
                                                    static_cast<QPointF>(*second), &fPoint);
-                    DrawPoint(point, fPoint, mainColor);
+                    DrawPoint(m_point, fPoint);
 
-                    circle->setRect(PointRect(radius));
-                    DrawPoint(circle, static_cast<QPointF>(*third), supportColor, Qt::DashLine);
+                    m_circle->setRect(PointRect(radius));
+                    DrawPoint(m_circle, static_cast<QPointF>(*third), Qt::DashLine);
+
+                    const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
+                    SetToolTip(tr("Radius = %1%2; "
+                                  "<b>Mouse click</b> - finish selecting the radius, "
+                                  "<b>%3</b> - skip")
+                                   .arg(LengthToUser(radius), prefix, VModifierKey::EnterKey()));
                 }
             }
         }
@@ -94,19 +115,14 @@ void VisToolPointOfContact::RefreshGeometry()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolPointOfContact::setLineP2Id(const quint32 &value)
+void VisToolPointOfContact::VisualMode(quint32 id)
 {
-    lineP2Id = value;
+    m_lineP1Id = id;
+    StartVisualMode();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolPointOfContact::setRadiusId(const quint32 &value)
+void VisToolPointOfContact::SetRadius(const QString &expression)
 {
-    radiusId = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolPointOfContact::setRadius(const QString &expression)
-{
-    radius = FindLengthFromUser(expression, Visualization::data->DataVariables());
+    m_radius = FindLengthFromUser(expression, GetData()->DataVariables());
 }

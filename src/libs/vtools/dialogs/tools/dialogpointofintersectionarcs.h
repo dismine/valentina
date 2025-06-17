@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef DIALOGPOINTOFINTERSECTIONARCS_H
 #define DIALOGPOINTOFINTERSECTIONARCS_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -41,43 +40,63 @@
 
 namespace Ui
 {
-    class DialogPointOfIntersectionArcs;
+class DialogPointOfIntersectionArcs;
 }
 
-class DialogPointOfIntersectionArcs : public DialogTool
+class DialogPointOfIntersectionArcs final : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
-    DialogPointOfIntersectionArcs(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual ~DialogPointOfIntersectionArcs() override;
+    DialogPointOfIntersectionArcs(const VContainer *data, VAbstractPattern *doc, quint32 toolId,
+                                  QWidget *parent = nullptr);
+    ~DialogPointOfIntersectionArcs() override;
 
-    void           SetPointName(const QString &value);
+    auto GetPointName() const -> QString;
+    void SetPointName(const QString &value);
 
-    quint32        GetFirstArcId() const;
-    void           SetFirstArcId(const quint32 &value);
+    auto GetFirstArcId() const -> quint32;
+    void SetFirstArcId(quint32 value);
 
-    quint32        GetSecondArcId() const;
-    void           SetSecondArcId(const quint32 &value);
+    auto GetSecondArcId() const -> quint32;
+    void SetSecondArcId(quint32 value);
 
-    CrossCirclesPoint GetCrossArcPoint() const;
-    void              SetCrossArcPoint(const CrossCirclesPoint &p);
+    auto GetCrossArcPoint() const -> CrossCirclesPoint;
+    void SetCrossArcPoint(CrossCirclesPoint p);
+
+    void SetNotes(const QString &notes);
+    auto GetNotes() const -> QString;
 
 public slots:
-    virtual void   ChosenObject(quint32 id, const SceneObject &type) override;
-    virtual void   ArcChanged();
+    void ChosenObject(quint32 id, const SceneObject &type) override;
+    void ArcChanged();
 
 protected:
-    virtual void   ShowVisualization() override;
+    void ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void   SaveData() override;
+    void SaveData() override;
+    auto IsValid() const -> bool override;
 
 private:
-    Q_DISABLE_COPY(DialogPointOfIntersectionArcs)
+    Q_DISABLE_COPY_MOVE(DialogPointOfIntersectionArcs) // NOLINT
 
     Ui::DialogPointOfIntersectionArcs *ui;
+
+    QString pointName;
+
+    bool flagName;
+    bool flagError;
+
+    /** @brief number number of handled objects */
+    qint32 number{0};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto DialogPointOfIntersectionArcs::IsValid() const -> bool
+{
+    return flagName && flagError;
+}
 
 #endif // DIALOGPOINTOFINTERSECTIONARCS_H

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef VTOOLUNIONDETAILS_H
 #define VTOOLUNIONDETAILS_H
 
-#include <qcompilerdetection.h>
 #include <QDomElement>
 #include <QDomNode>
 #include <QMetaObject>
@@ -39,34 +38,24 @@
 #include <QVector>
 #include <QtGlobal>
 
-#include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vmisc/def.h"
-#include "vabstracttool.h"
 #include "../vpatterndb/vpiece.h"
+#include "vabstracttool.h"
 
 class DialogTool;
 
-#define UNION_VERSSION 2
+constexpr int UNION_VERSSION = 2;
 
 struct VToolUnionDetailsInitData : VAbstractToolInitData
 {
-    VToolUnionDetailsInitData()
-        : VAbstractToolInitData(),
-          d1id(NULL_ID),
-          d2id(NULL_ID),
-          indexD1(NULL_ID),
-          indexD2(NULL_ID),
-          retainPieces(false),
-          version(UNION_VERSSION)
-    {}
+    VToolUnionDetailsInitData() = default;
 
-    quint32 d1id;
-    quint32 d2id;
-    quint32 indexD1;
-    quint32 indexD2;
-    bool retainPieces;
-    uint version;
+    quint32 d1id{NULL_ID};        // NOLINT(misc-non-private-member-variables-in-classes)
+    quint32 d2id{NULL_ID};        // NOLINT(misc-non-private-member-variables-in-classes)
+    quint32 indexD1{NULL_ID};     // NOLINT(misc-non-private-member-variables-in-classes)
+    quint32 indexD2{NULL_ID};     // NOLINT(misc-non-private-member-variables-in-classes)
+    bool retainPieces{false};     // NOLINT(misc-non-private-member-variables-in-classes)
+    uint version{UNION_VERSSION}; // NOLINT(misc-non-private-member-variables-in-classes)
 };
 
 /**
@@ -74,11 +63,13 @@ struct VToolUnionDetailsInitData : VAbstractToolInitData
  */
 class VToolUnionDetails : public VAbstractTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
-    static VToolUnionDetails *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
-                                     VAbstractPattern *doc, VContainer *data);
-    static VToolUnionDetails *Create(VToolUnionDetailsInitData initData);
+    ~VToolUnionDetails() override = default;
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolUnionDetails *;
+    static auto Create(VToolUnionDetailsInitData initData) -> VToolUnionDetails *;
 
     static const QString ToolType;
     static const QString TagDetail;
@@ -94,26 +85,29 @@ public:
 
     static const quint8 unionVersion;
 
-    virtual QString getTagName() const override;
-    virtual void ShowVisualization(bool show) override;
-    virtual void incrementReferens() override;
-    virtual void decrementReferens() override;
-    virtual void GroupVisibility(quint32 object, bool visible) override;
+    auto getTagName() const -> QString override;
+    void ShowVisualization(bool show) override;
+    void incrementReferens() override;
+    void decrementReferens() override;
+    void GroupVisibility(quint32 object, bool visible) override;
 
-    static QVector<QPair<bool, VPieceNode> > CalcUnitedPath(const VPiecePath &d1Path, const VPiecePath &d2Path,
-                                                            quint32 indexD2, quint32 pRotate);
+    static auto CalcUnitedPath(const VPiecePath &d1Path, const VPiecePath &d2Path, quint32 indexD2, quint32 pRotate)
+        -> QVector<QPair<bool, VPieceNode>>;
 public slots:
     /**
      * @brief FullUpdateFromFile update tool data form file.
      */
-    virtual void FullUpdateFromFile () override {}
-    virtual void AllowHover(bool) override {}
-    virtual void AllowSelecting(bool) override {}
+    void FullUpdateFromFile() override {}
+    void AllowHover(bool /*enabled*/) override {}
+    void AllowSelecting(bool /*enabled*/) override {}
+
 protected:
-    virtual void AddToFile() override;
-    virtual void SetVisualization() override {}
+    void AddToFile() override;
+    void SetVisualization() override {}
+
 private:
-    Q_DISABLE_COPY(VToolUnionDetails)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VToolUnionDetails) // NOLINT
     /** @brief d1 first detail id. */
     quint32 d1id;
 
@@ -128,12 +122,13 @@ private:
 
     uint version;
 
-    VToolUnionDetails(const VToolUnionDetailsInitData &initData, QObject *parent = nullptr);
+    explicit VToolUnionDetails(const VToolUnionDetailsInitData &initData, QObject *parent = nullptr);
 
-    void             AddDetail(QDomElement &domElement, const VPiece &d) const;
-    void             AddToModeling(const QDomElement &domElement);
-    QVector<quint32> GetReferenceObjects() const;
-    QVector<quint32> ReferenceObjects(const QDomElement &root, const QString &tag, const QString &attribute) const;
+    void AddDetail(QDomElement &domElement, const VPiece &d) const;
+    void AddToModeling(const QDomElement &domElement);
+    auto GetReferenceObjects() const -> QVector<quint32>;
+    static auto ReferenceObjects(const QDomElement &root, const QString &tag, const QString &attribute)
+        -> QVector<quint32>;
 };
 
 #endif // VTOOLUNIONDETAILS_H

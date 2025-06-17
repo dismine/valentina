@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef VISPATH_H
 #define VISPATH_H
 
-#include <qcompilerdetection.h>
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>
@@ -44,24 +43,38 @@ class VSimplePoint;
 
 class VisPath : public Visualization, public VCurvePathItem
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     explicit VisPath(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisPath() = default;
+    ~VisPath() override = default;
 
-    void setApproximationScale(qreal approximationScale);
+    void SetApproximationScale(qreal approximationScale);
 
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::Path)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Vis::Path)
+    };
+
 protected:
-    qreal m_approximationScale;
+    void InitPen() override;
+    void AddOnScene() override;
 
-    virtual void InitPen() override;
-    virtual void AddOnScene() override;
+    auto GetPoint(QVector<VSimplePoint *> &points, quint32 i, VColorRole role) -> VSimplePoint *;
 
-    VSimplePoint *GetPoint(QVector<VSimplePoint *> &points, quint32 i, const QColor &color);
+    auto ApproximationScale() const -> qreal;
+
 private:
-    Q_DISABLE_COPY(VisPath)
+    Q_DISABLE_COPY_MOVE(VisPath) // NOLINT
+
+    qreal m_approximationScale{0};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VisPath::ApproximationScale() const -> qreal
+{
+    return m_approximationScale;
+}
 
 #endif // VISPATH_H

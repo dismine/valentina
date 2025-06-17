@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -34,28 +34,26 @@
 #include <QGraphicsLineItem>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsSimpleTextItem>
+#include <QGraphicsView>
 #include <QLineF>
 #include <QPen>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
-#include <Qt>
 
-#include "global.h"
 #include "../vmisc/vabstractapplication.h"
+#include "global.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VMainGraphicsScene default constructor.
  */
 VMainGraphicsScene::VMainGraphicsScene(QObject *parent)
-    : QGraphicsScene(parent),
-      horScrollBar(0),
-      verScrollBar(0),
-      _transform(QTransform()),
-      scenePos(QPointF()),
-      origins()
-{}
+  : QGraphicsScene(parent),
+    horScrollBar(0),
+    verScrollBar(0),
+    _transform(QTransform()),
+    scenePos(QPointF()),
+    origins()
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -63,21 +61,22 @@ VMainGraphicsScene::VMainGraphicsScene(QObject *parent)
  * @param sceneRect scene rect.
  * @param parent parent object.
  */
-VMainGraphicsScene::VMainGraphicsScene(const QRectF & sceneRect, QObject * parent)
-    :QGraphicsScene ( sceneRect, parent ),
-      horScrollBar(0),
-      verScrollBar(0),
-      _transform(QTransform()),
-      scenePos(),
-      origins()
-{}
+VMainGraphicsScene::VMainGraphicsScene(const QRectF &sceneRect, QObject *parent)
+  : QGraphicsScene(sceneRect, parent),
+    horScrollBar(0),
+    verScrollBar(0),
+    _transform(QTransform()),
+    scenePos(),
+    origins()
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief mouseMoveEvent handle mouse move events.
  * @param event mouse move event.
  */
-void VMainGraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
+void VMainGraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
     scenePos = event->scenePos();
     emit mouseMove(event->scenePos());
@@ -94,13 +93,17 @@ void VMainGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
     if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
     {
         emit MouseLeftPressed();
+
+        QTransform deviceTransform;
+        auto *view = qobject_cast<QGraphicsView *>(event->widget());
+        if (view != nullptr)
+        {
+            deviceTransform = view->transform();
+        }
+        emit ItemByMousePress(itemAt(event->scenePos(), deviceTransform));
     }
 
     QGraphicsScene::mousePressEvent(event);
-
-    QTransform t;
-    QGraphicsItem* pItem = itemAt(event->scenePos(), t);
-    emit ItemClicked(pItem);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -109,8 +112,40 @@ void VMainGraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
     {
         emit MouseLeftReleased();
+
+        QTransform deviceTransform;
+        auto *view = qobject_cast<QGraphicsView *>(event->widget());
+        if (view != nullptr)
+        {
+            deviceTransform = view->transform();
+        }
+        emit ItemByMouseRelease(itemAt(event->scenePos(), deviceTransform));
     }
     QGraphicsScene::mouseReleaseEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::SetAcceptDrop(bool newAcceptDrop)
+{
+    m_acceptDrop = newAcceptDrop;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VMainGraphicsScene::AcceptDrop() const -> bool
+{
+    return m_acceptDrop;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VMainGraphicsScene::IsNonInteractive() const -> bool
+{
+    return m_nonInteractive;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::SetNonInteractive(bool nonInteractive)
+{
+    m_nonInteractive = nonInteractive;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -118,90 +153,90 @@ void VMainGraphicsScene::InitOrigins()
 {
     origins.clear();
 
-    QPen originsPen(Qt::green, (1.2 / 3.0) /*mm*/ / 25.4 * PrintDPI, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
-    QBrush axisTextBrush(Qt::green);
+    QPen const originsPen(Qt::green, MmToPixel(1.2 / 3.0), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+    QBrush const axisTextBrush(Qt::green);
     const qreal arrowAngle = 35.0;
     const qreal arrowLength = 12.0;
 
     {
         // X axis
         const QLineF lineX(QPointF(25, 0), QPointF(-5, 0));
-        QGraphicsLineItem *xLine1 = new QGraphicsLineItem(lineX);
+        auto *xLine1 = new QGraphicsLineItem(lineX);
         xLine1->setPen(originsPen);
         xLine1->setFlag(QGraphicsItem::ItemIgnoresTransformations);
-        xLine1->setZValue(-1.0);
+        xLine1->setZValue(-0.5);
         addItem(xLine1);
         origins.append(xLine1);
 
         // Arrow left side
         QLineF arrowLeftLine = lineX;
-        arrowLeftLine.setAngle(arrowLeftLine.angle()-arrowAngle);
+        arrowLeftLine.setAngle(arrowLeftLine.angle() - arrowAngle);
         arrowLeftLine.setLength(arrowLength);
-        QGraphicsLineItem *xLine2 = new QGraphicsLineItem(arrowLeftLine);
+        auto *xLine2 = new QGraphicsLineItem(arrowLeftLine);
         xLine2->setPen(originsPen);
         xLine2->setFlag(QGraphicsItem::ItemIgnoresTransformations);
-        xLine2->setZValue(-1.0);
+        xLine2->setZValue(-0.5);
         addItem(xLine2);
         origins.append(xLine2);
 
         // Arrow right side
         QLineF arrowRightLine = lineX;
-        arrowRightLine.setAngle(arrowRightLine.angle()+arrowAngle);
+        arrowRightLine.setAngle(arrowRightLine.angle() + arrowAngle);
         arrowRightLine.setLength(arrowLength);
-        QGraphicsLineItem *xLine3 = new QGraphicsLineItem(arrowRightLine);
+        auto *xLine3 = new QGraphicsLineItem(arrowRightLine);
         xLine3->setPen(originsPen);
         xLine3->setFlag(QGraphicsItem::ItemIgnoresTransformations);
-        xLine3->setZValue(-1.0);
+        xLine3->setZValue(-0.5);
         addItem(xLine3);
         origins.append(xLine3);
 
         // X axis text
-        QGraphicsSimpleTextItem *xOrigin = new QGraphicsSimpleTextItem(QStringLiteral("X"), xLine1);
+        auto *xOrigin = new QGraphicsSimpleTextItem(QStringLiteral("X"), xLine1);
         xOrigin->setBrush(axisTextBrush);
         xOrigin->setFlag(QGraphicsItem::ItemIgnoresTransformations);
-        xOrigin->setZValue(-1.0);
-        xOrigin->setPos(30, -(xOrigin->boundingRect().height()/2));
+        xOrigin->setZValue(-0.5);
+        xOrigin->setPos(30, -(xOrigin->boundingRect().height() / 2));
         origins.append(xOrigin);
     }
 
     {
         // Y axis
         const QLineF lineY(QPointF(0, 25), QPointF(0, -5));
-        QGraphicsLineItem *yLine1 = new QGraphicsLineItem(lineY);
+        auto *yLine1 = new QGraphicsLineItem(lineY);
         yLine1->setPen(originsPen);
         yLine1->setFlag(QGraphicsItem::ItemIgnoresTransformations);
-        yLine1->setZValue(-1.0);
+        yLine1->setZValue(-0.5);
         addItem(yLine1);
         origins.append(yLine1);
 
         // Arrow left side
         QLineF arrowLeftLine = lineY;
-        arrowLeftLine.setAngle(arrowLeftLine.angle()-arrowAngle);
+        arrowLeftLine.setAngle(arrowLeftLine.angle() - arrowAngle);
         arrowLeftLine.setLength(arrowLength);
-        QGraphicsLineItem *yLine2 = new QGraphicsLineItem(arrowLeftLine);
+        auto *yLine2 = new QGraphicsLineItem(arrowLeftLine);
         yLine2->setPen(originsPen);
         yLine2->setFlag(QGraphicsItem::ItemIgnoresTransformations);
-        yLine2->setZValue(-1.0);
+        yLine2->setZValue(-0.5);
         addItem(yLine2);
         origins.append(yLine2);
 
         // Arrow right side
         QLineF arrowRightLine = lineY;
-        arrowRightLine.setAngle(arrowRightLine.angle()+arrowAngle);
+        arrowRightLine.setAngle(arrowRightLine.angle() + arrowAngle);
         arrowRightLine.setLength(arrowLength);
-        QGraphicsLineItem *yLine3 = new QGraphicsLineItem(arrowRightLine);
+        auto *yLine3 = new QGraphicsLineItem(arrowRightLine);
         yLine3->setPen(originsPen);
         yLine3->setFlag(QGraphicsItem::ItemIgnoresTransformations);
-        yLine3->setZValue(-1.0);
+        yLine3->setZValue(-0.5);
         addItem(yLine3);
         origins.append(yLine3);
 
         // Y axis text
-        QGraphicsSimpleTextItem *yOrigin = new QGraphicsSimpleTextItem(QStringLiteral("Y"), yLine1);
+        auto *yOrigin = new QGraphicsSimpleTextItem(QStringLiteral("Y"), yLine1);
         yOrigin->setBrush(axisTextBrush);
         yOrigin->setFlag(QGraphicsItem::ItemIgnoresTransformations);
-        yOrigin->setZValue(-1.0);
-        yOrigin->setPos(-(yOrigin->boundingRect().width()/2), 30);
+        yOrigin->setZValue(-0.5);
+        yOrigin->setPos(-(yOrigin->boundingRect().width() / 2), 30);
         origins.append(yOrigin);
     }
 }
@@ -209,26 +244,29 @@ void VMainGraphicsScene::InitOrigins()
 //---------------------------------------------------------------------------------------------------------------------
 void VMainGraphicsScene::SetOriginsVisible(bool visible)
 {
-    for (auto item : qAsConst(origins))
+    for (auto *item : qAsConst(origins))
     {
-        item->setVisible(visible);
+        if (item != nullptr)
+        {
+            item->setVisible(visible);
+        }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VMainGraphicsScene::getScenePos() const
+auto VMainGraphicsScene::getScenePos() const -> QPointF
 {
     return scenePos;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VMainGraphicsScene::VisibleItemsBoundingRect() const
+auto VMainGraphicsScene::VisibleItemsBoundingRect() const -> QRectF
 {
     QRectF rect;
     const QList<QGraphicsItem *> qItems = items();
-    for (auto item : qItems)
+    for (auto *item : qItems)
     {
-        if(not item->isVisible())
+        if (not item->isVisible())
         {
             continue;
         }
@@ -242,7 +280,7 @@ QRectF VMainGraphicsScene::VisibleItemsBoundingRect() const
  * @brief transform return view transformation.
  * @return view transformation.
  */
-QTransform VMainGraphicsScene::transform() const
+auto VMainGraphicsScene::transform() const -> QTransform
 {
     return _transform;
 }
@@ -302,6 +340,12 @@ void VMainGraphicsScene::ItemsSelection(const SelectionType &type)
 void VMainGraphicsScene::HighlightItem(quint32 id)
 {
     emit HighlightDetail(id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::UpdatePiecePassmarks()
+{
+    emit UpdatePassmarks();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

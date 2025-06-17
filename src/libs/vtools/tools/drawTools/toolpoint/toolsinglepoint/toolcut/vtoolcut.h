@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,60 +29,82 @@
 #ifndef VTOOLCUT_H
 #define VTOOLCUT_H
 
-#include <qcompilerdetection.h>
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
 #include <QtGlobal>
 
+#include "../../../../../visualization/visualization.h"
+#include "../../../../vdatatool.h"
 #include "../../../toolcurve/vabstractspline.h"
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vtoolsinglepoint.h"
 #include "../vmisc/def.h"
-#include "../../../../vdatatool.h"
-#include "../../../../../visualization/visualization.h"
+#include "../vtoolsinglepoint.h"
 
 class VFormula;
 
+struct VToolCutInitData : VToolSinglePointInitData
+{
+    using VToolSinglePointInitData::VToolSinglePointInitData;
+
+    quint32 baseCurveId{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
+    QString formula{};            // NOLINT(misc-non-private-member-variables-in-classes)
+    QString aliasSuffix1{};       // NOLINT(misc-non-private-member-variables-in-classes)
+    QString aliasSuffix2{};       // NOLINT(misc-non-private-member-variables-in-classes)
+};
+
 class VToolCut : public VToolSinglePoint
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
-    VToolCut(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
-             const quint32 &curveCutId, QGraphicsItem * parent = nullptr);
-    virtual int   type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Tool::Cut)};
+    explicit VToolCut(const VToolCutInitData &initData, QGraphicsItem *parent = nullptr);
+    ~VToolCut() override = default;
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Tool::Cut)
+    };
 
-    VFormula GetFormula() const;
-    void     SetFormula(const VFormula &value);
+    auto GetFormulaLength() const -> VFormula;
+    void SetFormulaLength(const VFormula &value);
 
-    QString CurveName() const;
+    auto GetAliasSuffix1() const -> QString;
+    void SetAliasSuffix1(QString alias);
+
+    auto GetAliasSuffix2() const -> QString;
+    void SetAliasSuffix2(QString alias);
+
+    auto CurveName() const -> QString;
 
 public slots:
-    virtual void    Disable(bool disable, const QString &namePP) override;
-    virtual void    DetailsMode(bool mode) override;
-    virtual void    FullUpdateFromFile() override;
+    void SetDetailsMode(bool mode) override;
+    void FullUpdateFromFile() override;
+
 protected:
     /** @brief formula keep formula of length */
-    QString       formula;
+    QString formula;
 
-    quint32       curveCutId;
-    bool          detailsMode;
+    quint32 baseCurveId;
+    bool detailsMode;
 
-    void          RefreshGeometry();
-    virtual void  RemoveReferens() override;
+    QString m_aliasSuffix1{};
+    QString m_aliasSuffix2{};
 
-    template <typename T>
-    void ShowToolVisualization(bool show);
+    void RefreshGeometry();
+    void RemoveReferens() override;
+    void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    void ReadToolAttributes(const QDomElement &domElement) override;
+
+    template <typename T> void ShowToolVisualization(bool show);
 
 private:
-    Q_DISABLE_COPY(VToolCut)
+    Q_DISABLE_COPY_MOVE(VToolCut) // NOLINT
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-inline void VToolCut::ShowToolVisualization(bool show)
+template <typename T> inline void VToolCut::ShowToolVisualization(bool show)
 {
     if (show)
     {
@@ -101,11 +123,11 @@ inline void VToolCut::ShowToolVisualization(bool show)
     }
     else
     {
-        delete vis;
+        delete vis.data();
     }
 
-    VDataTool *parent = VAbstractPattern::getTool(VAbstractTool::data.GetGObject(curveCutId)->getIdTool());
-    if (VAbstractSpline *parentCurve = qobject_cast<VAbstractSpline *>(parent))
+    VDataTool *parent = VAbstractPattern::getTool(VAbstractTool::data.GetGObject(baseCurveId)->getIdTool());
+    if (auto *parentCurve = qobject_cast<VAbstractSpline *>(parent))
     {
         detailsMode ? parentCurve->ShowHandles(detailsMode) : parentCurve->ShowHandles(show);
     }

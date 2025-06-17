@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -32,31 +32,31 @@
 #include <QGuiApplication>
 #include <QPen>
 #include <QRectF>
+#include <QtMath>
 
-#include "../ifc/ifcdef.h"
 #include "../vgeometry/vgobject.h"
-#include "../vmisc/vabstractapplication.h"
-#include "../vmisc/vmath.h"
+#include "../vmisc/theme/themeDef.h"
 #include "../vpatterndb/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisLine::VisLine(const VContainer *data, QGraphicsItem *parent)
-    :Visualization(data), VScaledLine(parent)
+  : Visualization(data),
+    VScaledLine(VColorRole::VisMainColor, parent)
 {
-    this->setZValue(1);// Show on top real tool
-    InitPen();
+    this->setZValue(1); // Show on top of a real tool
+    VisLine::InitPen();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VisLine::CorrectAngle(const qreal &angle)
+auto VisLine::CorrectAngle(const qreal &angle) -> qreal
 {
     qreal ang = angle;
     if (angle > 360)
     {
-        ang = angle - 360.0 * qFloor(angle/360);
+        ang = angle - 360.0 * qFloor(angle / 360);
     }
 
-    switch (qFloor((qAbs(ang)+22.5)/45))
+    switch (qFloor((qAbs(ang) + 22.5) / 45))
     {
         case 1: // <67.5
             return 45;
@@ -72,29 +72,29 @@ qreal VisLine::CorrectAngle(const qreal &angle)
             return 270;
         case 7: // <337.5
             return 315;
-        case 0: // <22.5
+        case 0:  // <22.5
         default: // <360
             return 0;
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VisLine::Ray(const QPointF &firstPoint, const qreal &angle) const
+auto VisLine::Ray(const QPointF &firstPoint, const qreal &angle) const -> QPointF
 {
     if (this->scene() == nullptr)
     {
-        QLineF line = QLineF(firstPoint, Visualization::scenePos);
+        auto line = QLineF(firstPoint, ScenePos());
         line.setAngle(angle);
-        return line.p2();// We can't find ray because item doesn't have scene. We will return cursor position on scene.
+        return line.p2(); // We can't find ray because item doesn't have scene. We will return cursor position on scene.
     }
 
     QRectF scRect = this->scene()->sceneRect();
 
-    //Limit size of the scene rect. Axis that has same size as scene rect cause scene size growth.
-    QLineF line1 = QLineF(scRect.topLeft(), scRect.bottomRight());
+    // Limit size of the scene rect. Axis that has same size as scene rect cause scene size growth.
+    auto line1 = QLineF(scRect.topLeft(), scRect.bottomRight());
     line1.setLength(2);
 
-    QLineF line2 = QLineF(scRect.bottomRight(), scRect.topLeft());
+    auto line2 = QLineF(scRect.bottomRight(), scRect.topLeft());
     line2.setLength(2);
 
     scRect = QRectF(line1.p2(), line2.p2());
@@ -103,31 +103,27 @@ QPointF VisLine::Ray(const QPointF &firstPoint, const qreal &angle) const
     {
         return VGObject::BuildRay(firstPoint, CorrectAngle(angle), scRect);
     }
-    else
-    {
-        return VGObject::BuildRay(firstPoint, angle, scRect);
-    }
+
+    return VGObject::BuildRay(firstPoint, angle, scRect);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VisLine::Ray(const QPointF &firstPoint) const
+auto VisLine::Ray(const QPointF &firstPoint) const -> QPointF
 {
-    QLineF line = QLineF(firstPoint, Visualization::scenePos);
+    auto const line = QLineF(firstPoint, ScenePos());
     return Ray(firstPoint, line.angle());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QLineF VisLine::Axis(const QPointF &p, const qreal &angle) const
+auto VisLine::Axis(const QPointF &p, const qreal &angle) const -> QLineF
 {
-    QPointF endP1 = Ray(p, angle+180);
-    QPointF endP2 = Ray(p, angle);
-    return QLineF(endP1, endP2);
+    return {Ray(p, angle + 180), Ray(p, angle)};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QLineF VisLine::Axis(const QPointF &p1, const QPointF &p2) const
+auto VisLine::Axis(const QPointF &p1, const QPointF &p2) const -> QLineF
 {
-    QLineF line(p1, p2);
+    QLineF const line(p1, p2);
     return Axis(p1, line.angle());
 }
 
@@ -135,9 +131,7 @@ QLineF VisLine::Axis(const QPointF &p1, const QPointF &p2) const
 void VisLine::InitPen()
 {
     QPen visPen = pen();
-    visPen.setColor(mainColor);
-    visPen.setStyle(lineStyle);
-
+    visPen.setStyle(LineStyle());
     setPen(visPen);
 }
 
@@ -148,13 +142,12 @@ void VisLine::AddOnScene()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisLine::DrawRay(VScaledLine *lineItem, const QPointF &p, const QPointF &pTangent, const QColor &color,
-                      Qt::PenStyle style)
+void VisLine::DrawRay(VScaledLine *lineItem, const QPointF &p, const QPointF &pTangent, Qt::PenStyle style)
 {
-    SCASSERT (lineItem != nullptr)
+    SCASSERT(lineItem != nullptr)
 
     const qreal angle = QLineF(p, pTangent).angle();
     const QPointF endRay = Ray(p, angle);
     const QLineF tangent = VGObject::BuildLine(p, QLineF(p, endRay).length(), angle);
-    DrawLine(lineItem, tangent, color, style);
+    DrawLine(lineItem, tangent, style);
 }

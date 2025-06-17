@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -31,41 +31,35 @@
 
 #include <QSharedData>
 
-#include "../ifc/ifcdef.h"
-#include "../vmisc/diagnostic.h"
+#include "../vmisc/defglobal.h"
+#include "../vmisc/typedef.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
-class VLineAngleData : public QSharedData
+class VLineAngleData final : public QSharedData
 {
 public:
+    VLineAngleData() = default;
+    VLineAngleData(const quint32 &p1Id, const quint32 &p2Id);
+    VLineAngleData(const VLineAngleData &var) = default;
+    ~VLineAngleData() = default;
 
-    VLineAngleData()
-        :p1Id(NULL_ID), p2Id(NULL_ID)
-    {}
-
-    VLineAngleData(const quint32 &p1Id, const quint32 &p2Id)
-        :p1Id(p1Id), p2Id(p2Id)
-    {}
-
-    VLineAngleData(const VLineAngleData &var)
-        :QSharedData(var), p1Id(var.p1Id), p2Id(var.p2Id)
-    {}
-
-    virtual  ~VLineAngleData();
-
-    quint32 p1Id;
-    quint32 p2Id;
+    quint32 p1Id{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
+    quint32 p2Id{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
-    VLineAngleData &operator=(const VLineAngleData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN_MOVE(VLineAngleData) // NOLINT
 };
 
-VLineAngleData::~VLineAngleData()
-{}
-
 QT_WARNING_POP
+
+//---------------------------------------------------------------------------------------------------------------------
+inline VLineAngleData::VLineAngleData(const quint32 &p1Id, const quint32 &p2Id)
+  : p1Id(p1Id),
+    p2Id(p2Id)
+{
+}
 
 #endif // VLINEANGLE_P_H

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,18 +29,16 @@
 #ifndef VTOOLBASEPOINT_H
 #define VTOOLBASEPOINT_H
 
-#include <qcompilerdetection.h>
 #include <QDomElement>
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
 #include <QVariant>
-#include <Qt>
 #include <QtGlobal>
 
-#include "../vmisc/def.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/def.h"
 #include "vtoolsinglepoint.h"
 
 template <class T> class QSharedPointer;
@@ -48,11 +46,12 @@ template <class T> class QSharedPointer;
 struct VToolBasePointInitData : VToolSinglePointInitData
 {
     VToolBasePointInitData()
-        : VToolSinglePointInitData(),
-          nameActivPP(),
-          x(10),
-          y(10)
-    {}
+      : VToolSinglePointInitData(),
+        nameActivPP(),
+        x(labelMX),
+        y(labelMY)
+    {
+    }
 
     QString nameActivPP;
     qreal x;
@@ -65,48 +64,47 @@ struct VToolBasePointInitData : VToolSinglePointInitData
  */
 class VToolBasePoint : public VToolSinglePoint
 {
-    Q_OBJECT
-public:
-    virtual ~VToolBasePoint() =default;
-    virtual void setDialog() override;
-    static VToolBasePoint *Create(VToolBasePointInitData initData);
-    static const QString ToolType;
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Tool::BasePoint)};
-    virtual void ShowVisualization(bool show) override;
-    virtual void decrementReferens() override;
+    Q_OBJECT // NOLINT
 
-    QPointF GetBasePointPos() const;
-    void    SetBasePointPos(const QPointF &pos);
+public:
+    virtual ~VToolBasePoint() = default;
+    virtual void SetDialog() override;
+    static auto Create(VToolBasePointInitData initData) -> VToolBasePoint *;
+    static const QString ToolType;
+    virtual auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Tool::BasePoint)
+    };
+    virtual void ShowVisualization(bool show) override;
+
+    auto GetBasePointPos() const -> QPointF;
+    void SetBasePointPos(const QPointF &pos);
 public slots:
     virtual void FullUpdateFromFile() override;
     virtual void EnableToolMove(bool move) override;
-signals:
-    /**
-     * @brief FullUpdateTree handle if need update pattern file.
-     */
-    void         LiteUpdateTree();
+
 protected:
     virtual void AddToFile() override;
-    virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) override;
+    virtual auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
     virtual void DeleteToolWithConfirm(bool ask = true) override;
     virtual void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
                             QList<quint32> &newDependencies) override;
-    virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) override;
-    virtual void mousePressEvent( QGraphicsSceneMouseEvent * event ) override;
-    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) override;
+    virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+    virtual void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
-    virtual void ReadToolAttributes(const QDomElement &domElement) override;
     virtual void SetVisualization() override {}
-    virtual QString MakeToolTip() const override;
+    virtual auto MakeToolTip() const -> QString override;
 private slots:
-    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) override;
+
 private:
-    Q_DISABLE_COPY(VToolBasePoint)
+    Q_DISABLE_COPY_MOVE(VToolBasePoint) // NOLINT
 
     QString namePP;
 
-    VToolBasePoint (const VToolBasePointInitData &initData, QGraphicsItem * parent = nullptr );
+    VToolBasePoint(const VToolBasePointInitData &initData, QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLBASEPOINT_H

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef DIALOGSPLINEPATH_H
 #define DIALOGSPLINEPATH_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QSet>
@@ -43,33 +42,52 @@
 
 namespace Ui
 {
-    class DialogSplinePath;
+class DialogSplinePath;
 }
 
 /**
  * @brief The DialogSplinePath class dialog for ToolSplinePath. Help create spline path and edit option.
  */
-class DialogSplinePath : public DialogTool
+class DialogSplinePath final : public DialogTool
 {
-    Q_OBJECT
-public:
-    DialogSplinePath(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual ~DialogSplinePath() override;
+    Q_OBJECT // NOLINT
 
-    VSplinePath GetPath() const;
-    void        SetPath(const VSplinePath &value);
+public:
+    DialogSplinePath(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
+    ~DialogSplinePath() override;
+
+    auto GetPath() const -> VSplinePath;
+    void SetPath(const VSplinePath &value);
+
+    void SetNotes(const QString &notes);
+    auto GetNotes() const -> QString;
+
 public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type) override;
-    virtual void ShowDialog(bool click) override;
-    void         PathUpdated(const VSplinePath &path);
+    void ChosenObject(quint32 id, const SceneObject &type) override;
+    void ShowDialog(bool click) override;
+    void PathUpdated(const VSplinePath &path);
+
 protected:
-    virtual void ShowVisualization() override;
-    virtual void SaveData() override;
-    virtual void CheckState() final;
-    virtual void closeEvent(QCloseEvent *event) override;
+    void ShowVisualization() override;
+    void SaveData() override;
+    void closeEvent(QCloseEvent *event) override;
+    void changeEvent(QEvent *event) override;
+    auto IsValid() const -> bool override;
+    void showEvent(QShowEvent *event) override;
+    void resizeEvent(QResizeEvent *event) override;
+
 private slots:
     void PointChanged(int row);
     void currentPointChanged(int index);
+    void NewPointChanged();
+
+    void AddPoint();
+    void RemovePoint();
+
+    void MoveTop();
+    void MoveUp();
+    void MoveDown();
+    void MoveBottom();
 
     void DeployAngle1TextEdit();
     void DeployAngle2TextEdit();
@@ -85,41 +103,52 @@ private slots:
     void FXAngle2();
     void FXLength1();
     void FXLength2();
+
+    void ValidateAlias();
+
 private:
-    Q_DISABLE_COPY(DialogSplinePath)
+    Q_DISABLE_COPY_MOVE(DialogSplinePath) // NOLINT
 
     /** @brief ui keeps information about user interface */
     Ui::DialogSplinePath *ui;
 
     /** @brief path spline path */
-    VSplinePath path;
+    VSplinePath path{};
 
-    qint32 newDuplicate;
+    qint32 newDuplicate{-1};
 
     /** @brief formulaBaseHeight base height defined by dialogui */
-    int formulaBaseHeightAngle1;
-    int formulaBaseHeightAngle2;
-    int formulaBaseHeightLength1;
-    int formulaBaseHeightLength2;
+    int formulaBaseHeightAngle1{0};
+    int formulaBaseHeightAngle2{0};
+    int formulaBaseHeightLength1{0};
+    int formulaBaseHeightLength2{0};
 
     /** @brief flagAngle1 true if value of first angle is correct */
-    QVector<bool> flagAngle1;
-    QVector<bool> flagAngle2;
-    QVector<bool> flagLength1;
-    QVector<bool> flagLength2;
+    QVector<bool> flagAngle1{};
+    QVector<bool> flagAngle2{};
+    QVector<bool> flagLength1{};
+    QVector<bool> flagLength2{};
+    bool flagError{false};
+    bool flagAlias{true};
+
+    QString originAliasSuffix{};
 
     void EvalAngle1();
     void EvalAngle2();
     void EvalLength1();
     void EvalLength2();
 
-    void          NewItem(const VSplinePoint &point);
-    void          DataPoint(const VSplinePoint &p);
-    void          SavePath();
-    QSet<quint32> AllIds() const;
-    bool          IsPathValid() const;
-    VSplinePath   ExtractPath() const;
-    void          ShowPointIssue(const QString &pName);
+    void NewItem(const VSplinePoint &point);
+    void DataPoint(const VSplinePoint &p);
+    void SavePath();
+    auto AllIds() const -> QSet<quint32>;
+    auto IsPathValid() const -> bool;
+    auto ExtractPath() const -> VSplinePath;
+    void ShowPointIssue(const QString &pName);
+
+    void InitIcons();
+
+    void MoveControls();
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -127,7 +156,7 @@ private:
  * @brief GetPath return spline path
  * @return path
  */
-inline VSplinePath DialogSplinePath::GetPath() const
+inline auto DialogSplinePath::GetPath() const -> VSplinePath
 {
     return path;
 }

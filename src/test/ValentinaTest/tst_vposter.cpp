@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -35,8 +35,8 @@
 #include <QtTest>
 
 //---------------------------------------------------------------------------------------------------------------------
-TST_VPoster::TST_VPoster(QObject *parent) :
-    QObject(parent)
+TST_VPoster::TST_VPoster(QObject *parent)
+  : QObject(parent)
 {
 }
 
@@ -45,27 +45,21 @@ TST_VPoster::TST_VPoster(QObject *parent) :
 void TST_VPoster::BigPoster()
 {
     QPrinter printer;
-    printer.setResolution(96);// By default
-    printer.setPaperSize(QPrinter::A4);
+    printer.setResolution(static_cast<int>(PrintDPI)); // By default
+    printer.setPageSize(QPageSize(QPageSize::A4));
     printer.setFullPage(true);
     // We need to set full page because otherwise QPrinter->pageRect returns different values in Windows and Linux
 
-    //sets the margins to 0 to perform the test.
-    const qreal left = 0, top = 0, right = 0, bottom = 0;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 3, 0)
-    printer.setPageMargins(QMarginsF(left, top, right, bottom), QPageLayout::Millimeter);
-#else
-    printer.setPageMargins(left, top, right, bottom, QPrinter::Millimeter);
-#endif //QT_VERSION >= QT_VERSION_CHECK(5, 3, 0)
+    // sets the margins to 0 to perform the test.
+    printer.setPageMargins(QMarginsF(), QPageLayout::Millimeter);
 
-
-    const QRect image(0, 0, 2622, 3178); // Little bit bigger than A1
-    VPoster posterazor(&printer);
+    const QSize image(2622, 3178); // Little bit bigger than A1
+    VPoster const posterazor(&printer);
     const QVector<PosterData> poster = posterazor.Calc(image, 0, PageOrientation::Portrait);
 
     QCOMPARE(poster.size(), 12);
 
-    for (auto p : poster)
+    for (const auto &p : poster)
     {
         QCOMPARE(p.rect.size(), PageRect(printer).size());
     }
@@ -76,11 +70,11 @@ void TST_VPoster::BigPoster()
 void TST_VPoster::SmallPoster()
 {
     QPrinter printer;
-    printer.setResolution(96);// By default
-    printer.setPaperSize(QPrinter::A4);
+    printer.setResolution(96); // By default
+    printer.setPageSize(QPageSize(QPageSize::A4));
 
-    const QRect image(0, 0, 700, 1000); // Little bit less than A4
-    VPoster posterazor(&printer);
+    const QSize image(700, 1000); // Little bit less than A4
+    VPoster const posterazor(&printer);
     const QVector<PosterData> poster = posterazor.Calc(image, 0, PageOrientation::Portrait);
 
     QCOMPARE(poster.size(), 1);
@@ -89,19 +83,19 @@ void TST_VPoster::SmallPoster()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRect TST_VPoster::PageRect(const QPrinter &printer) const
+auto TST_VPoster::PageRect(const QPrinter &printer) const -> QRect
 {
     // Because the Point unit is defined to be 1/72th of an inch
     // we can't use method pageRect(QPrinter::Point). Our dpi different can be different.
     // We convert value yourself to pixels.
     const QRectF rect = printer.pageRect(QPrinter::Millimeter);
-    QRect pageRect(qFloor(ToPixel(rect.x())), qFloor(ToPixel(rect.y())),
-                   qFloor(ToPixel(rect.width())), qFloor(ToPixel(rect.height())));
+    QRect pageRect(qFloor(ToPixel(rect.x())), qFloor(ToPixel(rect.y())), qFloor(ToPixel(rect.width())),
+                   qFloor(ToPixel(rect.height())));
     return pageRect;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal TST_VPoster::ToPixel(qreal val) const
+auto TST_VPoster::ToPixel(qreal val) const -> qreal
 {
     return val / 25.4 * PrintDPI; // Mm to pixels with current dpi.
 }

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,26 +29,27 @@
 #ifndef VARCRADIUS_H
 #define VARCRADIUS_H
 
-#include <qcompilerdetection.h>
 #include <QtGlobal>
 
 #include "../vmisc/def.h"
-#include "../ifc/ifcdef.h"
 #include "vcurvevariable.h"
 
 class VArc;
 class VEllipticalArc;
 
-class VArcRadius :public VCurveVariable
+class VArcRadius final : public VCurveVariable
 {
 public:
     VArcRadius();
     VArcRadius(const quint32 &id, const quint32 &parentId, const VArc *arc, Unit patternUnit);
-    VArcRadius(const quint32 &id, const quint32 &parentId, const VEllipticalArc *elArc, const int numberRadius,
+    VArcRadius(const quint32 &id, const quint32 &parentId, const VEllipticalArc *elArc, int numberRadius,
                Unit patternUnit);
-    VArcRadius(const VArcRadius &var);
-    VArcRadius &operator=(const VArcRadius &var);
-    virtual ~VArcRadius() override;
+    VArcRadius(const VArcRadius &var) = default;
+    auto operator=(const VArcRadius &var) -> VArcRadius &;
+    ~VArcRadius() override = default;
+
+    VArcRadius(VArcRadius &&var) noexcept = default;
+    auto operator=(VArcRadius &&var) noexcept -> VArcRadius & = default;
 };
 
 #endif // VARCRADIUS_H

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,89 +29,78 @@
 #ifndef VCONTAINER_H
 #define VCONTAINER_H
 
-#include <qcompilerdetection.h>
 #include <QCoreApplication>
 #include <QHash>
 #include <QMap>
 #include <QMessageLogger>
 #include <QSet>
-#include <QSharedPointer>
 #include <QSharedData>
 #include <QSharedDataPointer>
+#include <QSharedPointer>
 #include <QString>
 #include <QStringList>
 #include <QTypeInfo>
 #include <QtGlobal>
 #include <new>
 
-#include "../vmisc/def.h"
 #include "../ifc/exception/vexceptionbadid.h"
-#include "../ifc/ifcdef.h"
 #include "../vgeometry/vabstractcubicbezierpath.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vgobject.h"
-#include "../vmisc/diagnostic.h"
-#include "variables.h"
+#include "../vmisc/def.h"
 #include "variables/vinternalvariable.h"
 #include "vpiece.h"
 #include "vpiecepath.h"
 #include "vtranslatevars.h"
 
 class VEllipticalArc;
+class VMeasurement;
+class VIncrement;
+class VLengthLine;
+class VCurveLength;
+class VCurveCLength;
+class VLineAngle;
+class VArcRadius;
+class VCurveAngle;
+class VPieceArea;
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 QT_WARNING_DISABLE_INTEL(2021)
 QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
-class VContainerData : public QSharedData //-V690
+class VContainerData final : public QSharedData //-V690
 {
 public:
-
-    VContainerData(const VTranslateVars *trVars, const Unit *patternUnit, const QString &nspace)
-        : calculationObjects(QHash<quint32, QSharedPointer<VGObject> >()),
-          modelingObjects(QSharedPointer<QHash<quint32, QSharedPointer<VGObject>>>::create()),
-          variables(QHash<QString, QSharedPointer<VInternalVariable> > ()),
-          pieces(QSharedPointer<QHash<quint32, VPiece>>::create()),
-          piecePaths(QSharedPointer<QHash<quint32, VPiecePath>>::create()),
-          trVars(trVars),
-          patternUnit(patternUnit),
-          nspace(nspace)
-    {}
-
-    VContainerData(const VContainerData &data)
-        : QSharedData(data),
-          calculationObjects(data.calculationObjects),
-          modelingObjects(data.modelingObjects),
-          variables(data.variables),
-          pieces(data.pieces),
-          piecePaths(data.piecePaths),
-          trVars(data.trVars),
-          patternUnit(data.patternUnit),
-          nspace(data.nspace)
-    {}
-
+    VContainerData(const VTranslateVars *trVars, const Unit *patternUnit, const QString &nspace);
+    VContainerData(const VContainerData &data) = default;
     virtual ~VContainerData();
 
-    QHash<quint32, QSharedPointer<VGObject> > calculationObjects;
-    QSharedPointer<QHash<quint32, QSharedPointer<VGObject>>> modelingObjects;
+    // NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
+    QHash<quint32, QSharedPointer<VGObject>> calculationObjects{};
+    // NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
+    QSharedPointer<QHash<quint32, QSharedPointer<VGObject>>> modelingObjects{
+        QSharedPointer<QHash<quint32, QSharedPointer<VGObject>>>::create()};
 
     /**
      * @brief variables container for measurements, increments, lines lengths, lines angles, arcs lengths, curve lengths
      */
-    QHash<QString, QSharedPointer<VInternalVariable>> variables;
+    // NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
+    QHash<QString, QSharedPointer<VInternalVariable>> variables{};
 
-    QSharedPointer<QHash<quint32, VPiece>> pieces;
-    QSharedPointer<QHash<quint32, VPiecePath>> piecePaths;
+    // NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
+    QSharedPointer<QHash<quint32, VPiece>> pieces{QSharedPointer<QHash<quint32, VPiece>>::create()};
+    // NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
+    QSharedPointer<QHash<quint32, VPiecePath>> piecePaths{QSharedPointer<QHash<quint32, VPiecePath>>::create()};
 
-    const VTranslateVars *trVars;
-    const Unit *patternUnit;
+    const VTranslateVars *trVars; // NOLINT(misc-non-private-member-variables-in-classes)
+    const Unit *patternUnit;      // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief nspace namespace for static variables */
-    QString nspace;
+    QString nspace; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
-    VContainerData &operator=(const VContainerData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN_MOVE(VContainerData) // NOLINT
 };
 
 QT_WARNING_POP
@@ -121,7 +110,8 @@ QT_WARNING_POP
  */
 class VContainer
 {
-    Q_DECLARE_TR_FUNCTIONS(VContainer)
+    Q_DECLARE_TR_FUNCTIONS(VContainer) // NOLINT
+
 public:
     VContainer(const VTranslateVars *trVars, const Unit *patternUnit, const QString &nspace);
     VContainer(const VContainer &data);
@@ -129,102 +119,94 @@ public:
 
     friend class VContainerData;
 
-    VContainer &operator=(const VContainer &data);
-#ifdef Q_COMPILER_RVALUE_REFS
-    VContainer &operator=(VContainer &&data) Q_DECL_NOTHROW { Swap(data); return *this; }
-#endif
+    auto operator=(const VContainer &data) -> VContainer &;
 
-    inline void Swap(VContainer &data) Q_DECL_NOTHROW
-    { std::swap(d, data.d); }
+    VContainer(VContainer &&data) noexcept;
+    auto operator=(VContainer &&data) noexcept -> VContainer &;
 
-    static QString UniqueNamespace();
+    static auto UniqueNamespace() -> QString;
 
-    template <typename T>
-    const QSharedPointer<T> GeometricObject(const quint32 &id) const;
-    const QSharedPointer<VGObject> GetGObject(quint32 id) const;
-    static const QSharedPointer<VGObject> GetFakeGObject(quint32 id);
-    VPiece             GetPiece(quint32 id) const;
-    VPiecePath         GetPiecePath(quint32 id) const;
-    quint32            GetPieceForPiecePath(quint32 id) const;
-    template <typename T>
-    QSharedPointer<T>  GetVariable(QString name) const;
-    quint32            getId() const;
-    quint32            getNextId() const;
-    void               UpdateId(quint32 newId) const;
-    static void        UpdateId(quint32 newId, const QString &nspace);
+    template <typename T> auto GeometricObject(const quint32 &id) const -> QSharedPointer<T>;
+    auto GetGObject(quint32 id) const -> QSharedPointer<VGObject>;
+    static auto GetFakeGObject(quint32 id) -> QSharedPointer<VGObject>;
+    auto GetPiece(quint32 id) const -> VPiece;
+    auto GetPiecePath(quint32 id) const -> VPiecePath;
+    auto GetPieceForPiecePath(quint32 id) const -> quint32;
+    template <typename T> auto GetVariable(const QString &name) const -> QSharedPointer<T>;
+    auto getId() const -> quint32;
+    auto getNextId() const -> quint32;
+    void UpdateId(quint32 newId) const;
+    static void UpdateId(quint32 newId, const QString &nspace);
 
-    quint32            AddGObject(VGObject *obj);
-    quint32            AddGObject(const QSharedPointer<VGObject> &obj);
-    quint32            AddPiece(const VPiece &detail);
-    quint32            AddPiecePath(const VPiecePath &path);
-    void               AddLine(const quint32 &firstPointId, const quint32 &secondPointId);
-    void               AddArc(const QSharedPointer<VAbstractCurve> &arc, const quint32 &id,
-                              const quint32 &parentId = NULL_ID);
-    void               AddSpline(const QSharedPointer<VAbstractBezier> &curve, quint32 id, quint32 parentId = NULL_ID);
-    void               AddCurveWithSegments(const QSharedPointer<VAbstractCubicBezierPath> &curve, const quint32 &id,
-                                            quint32 parentId = NULL_ID);
+    void RegisterUniqueName(VGObject *obj) const;
+    void RegisterUniqueName(const QSharedPointer<VGObject> &obj) const;
 
-    template <typename T>
-    void               AddVariable(const QString& name, T *var);
-    template <typename T>
-    void               AddVariable(const QString& name, const QSharedPointer<T> &var);
-    void               RemoveVariable(const QString& name);
-    void               RemovePiece(quint32 id);
+    auto AddGObject(VGObject *obj) -> quint32;
+    auto AddGObject(const QSharedPointer<VGObject> &obj) -> quint32;
+    auto AddPiece(const VPiece &detail) -> quint32;
+    auto AddPiecePath(const VPiecePath &path) -> quint32;
+    void AddLine(const quint32 &firstPointId, const quint32 &secondPointId);
+    void AddArc(const QSharedPointer<VAbstractCurve> &arc, const quint32 &id, const quint32 &parentId = NULL_ID);
+    void AddSpline(const QSharedPointer<VAbstractBezier> &curve, quint32 id, quint32 parentId = NULL_ID);
+    void AddCurveWithSegments(const QSharedPointer<VAbstractCubicBezierPath> &curve, const quint32 &id,
+                              quint32 parentId = NULL_ID);
 
-    template <class T>
-    void               UpdateGObject(quint32 id, T* obj);
-    template <class T>
-    void               UpdateGObject(quint32 id, const QSharedPointer<T> &obj);
-    void               UpdatePiece(quint32 id, const VPiece &detail);
-    void               UpdatePiecePath(quint32 id, const VPiecePath &path);
+    template <typename T> void AddUniqueVariable(T *var);
+    template <typename T> void AddUniqueVariable(const QSharedPointer<T> &var);
+    template <typename T> void AddVariable(T *var);
+    template <typename T> void AddVariable(const QSharedPointer<T> &var);
+    void RemoveVariable(const QString &name);
+    void RemovePiece(quint32 id);
 
-    void               Clear();
-    void               ClearForFullParse();
-    void               ClearGObjects();
-    void               ClearCalculationGObjects();
-    void               ClearVariables(const VarType &type = VarType::Unknown);
-    void               ClearVariables(const QVector<VarType> &types);
-    void               ClearUniqueNames() const;
-    void               ClearUniqueIncrementNames() const;
+    template <class T> void UpdateGObject(quint32 id, T *obj);
+    template <class T> void UpdateGObject(quint32 id, const QSharedPointer<T> &obj);
+    void UpdatePiece(quint32 id, const VPiece &detail);
+    void UpdatePiecePath(quint32 id, const VPiecePath &path);
 
-    void               SetSize(qreal size) const;
-    void               SetHeight(qreal height) const;
-    qreal              size() const;
-    static qreal       size(const QString &nspace);
-    qreal              height() const;
-    static qreal       height(const QString &nspace);
+    void Clear();
+    void ClearForFullParse();
+    void ClearGObjects();
+    void ClearCalculationGObjects();
+    void ClearVariables(const VarType &type = VarType::Unknown);
+    void ClearVariables(const QVector<VarType> &types);
+    void ClearUniqueNames() const;
+    void ClearUniqueIncrementNames() const;
+    void ClearExceptUniqueIncrementNames() const;
 
-    void               RemoveIncrement(const QString& name);
+    void RemoveIncrement(const QString &name);
 
-    const QHash<quint32, QSharedPointer<VGObject> >         *CalculationGObjects() const;
-    const QHash<quint32, VPiece>                            *DataPieces() const;
-    const QHash<QString, QSharedPointer<VInternalVariable>> *DataVariables() const;
+    void FillPiecesAreas(Unit unit);
 
-    const QMap<QString, QSharedPointer<VMeasurement> >  DataMeasurements() const;
-    const QMap<QString, QSharedPointer<VIncrement> >    DataIncrements() const;
-    const QMap<QString, QSharedPointer<VLengthLine> >   DataLengthLines() const;
-    const QMap<QString, QSharedPointer<VCurveLength> >  DataLengthCurves() const;
-    const QMap<QString, QSharedPointer<VCurveCLength> > DataCurvesCLength() const;
-    const QMap<QString, QSharedPointer<VLineAngle> >    DataAngleLines() const;
-    const QMap<QString, QSharedPointer<VArcRadius> >    DataRadiusesArcs() const;
-    const QMap<QString, QSharedPointer<VCurveAngle> >   DataAnglesCurves() const;
+    auto CalculationGObjects() const -> const QHash<quint32, QSharedPointer<VGObject>> *;
+    auto DataPieces() const -> QHash<quint32, VPiece> *;
+    auto DataVariables() const -> const QHash<QString, QSharedPointer<VInternalVariable>> *;
 
-    bool        IsUnique(const QString &name) const;
-    static bool IsUnique(const QString &name, const QString &nspace);
+    auto DataMeasurements() const -> QMap<QString, QSharedPointer<VMeasurement>>;
+    auto DataMeasurementsWithSeparators() const -> QMap<QString, QSharedPointer<VMeasurement>>;
+    auto DataIncrements() const -> QMap<QString, QSharedPointer<VIncrement>>;
+    auto DataIncrementsWithSeparators() const -> QMap<QString, QSharedPointer<VIncrement>>;
+    auto DataLengthLines() const -> QMap<QString, QSharedPointer<VLengthLine>>;
+    auto DataLengthCurves() const -> QMap<QString, QSharedPointer<VCurveLength>>;
+    auto DataCurvesCLength() const -> QMap<QString, QSharedPointer<VCurveCLength>>;
+    auto DataAngleLines() const -> QMap<QString, QSharedPointer<VLineAngle>>;
+    auto DataRadiusesArcs() const -> QMap<QString, QSharedPointer<VArcRadius>>;
+    auto DataAnglesCurves() const -> QMap<QString, QSharedPointer<VCurveAngle>>;
+    auto DataPieceArea() const -> QMap<QString, QSharedPointer<VPieceArea>>;
 
-    QStringList        AllUniqueNames() const;
-    static QStringList AllUniqueNames(const QString &nspace);
+    auto IsUnique(const QString &name) const -> bool;
+    static auto IsUnique(const QString &name, const QString &nspace) -> bool;
 
-    const Unit *GetPatternUnit() const;
-    const VTranslateVars *GetTrVars() const;
+    auto AllUniqueNames() const -> QStringList;
+    static auto AllUniqueNames(const QString &nspace) -> QStringList;
+
+    auto GetPatternUnit() const -> const Unit *;
+    auto GetTrVars() const -> const VTranslateVars *;
 
 private:
     /**
      * @brief _id current id. New object will have value +1. For empty class equal 0.
      */
     static QMap<QString, quint32> _id;
-    static QMap<QString, qreal>   _size;
-    static QMap<QString, qreal>   _height;
     static QMap<QString, QSet<QString>> uniqueNames;
     static QMap<QString, quint32> copyCounter;
 
@@ -232,27 +214,29 @@ private:
 
     void AddCurve(const QSharedPointer<VAbstractCurve> &curve, const quint32 &id, quint32 parentId = NULL_ID);
 
-    template <class T>
-    uint qHash( const QSharedPointer<T> &p );
+    template <typename T> void AddVariable(const QSharedPointer<T> &var, const QString &name);
 
-    template <typename T>
-    void UpdateObject(const quint32 &id, const QSharedPointer<T> &point);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    template <class T> auto qHash(const QSharedPointer<T> &p, uint seed = 0) -> uint;
+#else
+    template <class T> auto qHash(const QSharedPointer<T> &p, size_t seed = 0) -> size_t;
+#endif
 
-    template <typename T>
-    const QMap<QString, QSharedPointer<T> > DataVar(const VarType &type) const;
+    template <typename T> void UpdateObject(const quint32 &id, const QSharedPointer<T> &point);
+
+    template <typename T> auto DataVar(const VarType &type) const -> QMap<QString, QSharedPointer<T>>;
 
     static void ClearNamespace(const QString &nspace);
 };
 
-Q_DECLARE_TYPEINFO(VContainer, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VContainer, Q_MOVABLE_TYPE); // NOLINT
 
 /*
-*  Defintion of templated member functions of VContainer
-*/
+ *  Defintion of templated member functions of VContainer
+ */
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-const QSharedPointer<T> VContainer::GeometricObject(const quint32 &id) const
+template <typename T> auto VContainer::GeometricObject(const quint32 &id) const -> QSharedPointer<T>
 {
     if (id == NULL_ID)
     {
@@ -278,17 +262,15 @@ const QSharedPointer<T> VContainer::GeometricObject(const quint32 &id) const
     return obj;
 }
 
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
-* @brief GetVariable return varible by name
-* @param name variable's name
-* @return variable
-*/
-template <typename T>
-QSharedPointer<T> VContainer::GetVariable(QString name) const
+ * @brief GetVariable return varible by name
+ * @param name variable's name
+ * @return variable
+ */
+template <typename T> auto VContainer::GetVariable(const QString &name) const -> QSharedPointer<T>
 {
-    SCASSERT(name.isEmpty()==false)
+    SCASSERT(name.isEmpty() == false)
     if (d->variables.contains(name))
     {
         try
@@ -299,26 +281,58 @@ QSharedPointer<T> VContainer::GetVariable(QString name) const
         }
         catch (const std::bad_alloc &)
         {
-            throw VExceptionBadId(tr("Can't cast object"), name);
+            throw VExceptionBadId(QCoreApplication::translate("VContainer", "Can't cast object"), name);
         }
     }
     else
     {
-        throw VExceptionBadId(tr("Can't find object"), name);
+        throw VExceptionBadId(QCoreApplication::translate("VContainer", "Can't find object"), name);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-void VContainer::AddVariable(const QString& name, T *var)
+template <typename T> void VContainer::AddUniqueVariable(T *var)
 {
-    AddVariable(name, QSharedPointer<T>(var));
+    AddUniqueVariable(QSharedPointer<T>(var));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-void VContainer::AddVariable(const QString& name, const QSharedPointer<T> &var)
+template <typename T> void VContainer::AddUniqueVariable(const QSharedPointer<T> &var)
 {
+    AddVariable(var);
+
+    if (d->variables.contains(var->GetName()))
+    {
+        uniqueNames[d->nspace].insert(var->GetName());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T> void VContainer::AddVariable(T *var)
+{
+    AddVariable(QSharedPointer<T>(var));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T> void VContainer::AddVariable(const QSharedPointer<T> &var)
+{
+    SCASSERT(not var->GetName().isEmpty())
+    AddVariable(var, var->GetName());
+
+    if (not var->GetAlias().isEmpty())
+    {
+        AddVariable(var, var->GetAlias());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T> void VContainer::AddVariable(const QSharedPointer<T> &var, const QString &name)
+{
+    if (name.isEmpty())
+    {
+        return;
+    }
+
     if (d->variables.contains(name))
     {
         if (d->variables.value(name)->GetType() == var->GetType())
@@ -339,15 +353,16 @@ void VContainer::AddVariable(const QString& name, const QSharedPointer<T> &var)
     {
         d->variables.insert(name, var);
     }
-
-    uniqueNames[d->nspace].insert(name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <class T>
-uint VContainer::qHash( const QSharedPointer<T> &p )
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+template <class T> auto VContainer::qHash(const QSharedPointer<T> &p, uint seed) -> uint
+#else
+template <class T> auto VContainer::qHash(const QSharedPointer<T> &p, size_t seed) -> size_t
+#endif
 {
-    return qHash( p.data() );
+    return qHash(p.data(), seed);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -356,20 +371,18 @@ uint VContainer::qHash( const QSharedPointer<T> &p )
  * @param id id of existing GObject
  * @param obj object
  */
-template <class T>
-void VContainer::UpdateGObject(quint32 id, T* obj)
+template <class T> void VContainer::UpdateGObject(quint32 id, T *obj)
 {
     SCASSERT(obj != nullptr)
     UpdateGObject(id, QSharedPointer<T>(obj));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <class T>
-void VContainer::UpdateGObject(quint32 id, const QSharedPointer<T> &obj)
+template <class T> void VContainer::UpdateGObject(quint32 id, const QSharedPointer<T> &obj)
 {
     SCASSERT(not obj.isNull())
     UpdateObject(id, obj);
-    uniqueNames[d->nspace].insert(obj->name());
+    RegisterUniqueName(obj);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -378,8 +391,7 @@ void VContainer::UpdateGObject(quint32 id, const QSharedPointer<T> &obj)
  * @param id id of existing object
  * @param point object
  */
-template <typename T>
-void VContainer::UpdateObject(const quint32 &id, const QSharedPointer<T> &point)
+template <typename T> void VContainer::UpdateObject(const quint32 &id, const QSharedPointer<T> &point)
 {
     Q_ASSERT_X(id != NULL_ID, Q_FUNC_INFO, "id == 0"); //-V654 //-V712
     SCASSERT(point.isNull() == false)

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -36,40 +36,48 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractArc::VAbstractArc(const GOType &type, const quint32 &idObject, const Draw &mode)
-    : VAbstractCurve(type, idObject, mode), d (new VAbstractArcData())
-{}
+  : VAbstractCurve(type, idObject, mode),
+    d(new VAbstractArcData())
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractArc::VAbstractArc(const GOType &type, const VPointF &center, qreal f1, const QString &formulaF1, qreal f2,
                            const QString &formulaF2, quint32 idObject, Draw mode)
-    : VAbstractCurve(type, idObject, mode), d (new VAbstractArcData(center, f1, formulaF1, f2, formulaF2))
-{}
+  : VAbstractCurve(type, idObject, mode),
+    d(new VAbstractArcData(center, f1, formulaF1, f2, formulaF2))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractArc::VAbstractArc(const GOType &type, const VPointF &center, qreal f1, qreal f2, quint32 idObject, Draw mode)
-    : VAbstractCurve(type, idObject, mode), d (new VAbstractArcData(center, f1, f2))
-{}
+  : VAbstractCurve(type, idObject, mode),
+    d(new VAbstractArcData(center, f1, f2))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractArc::VAbstractArc(const GOType &type, const QString &formulaLength, const VPointF &center,
-                           qreal f1, const QString &formulaF1, quint32 idObject, Draw mode)
-    : VAbstractCurve(type, idObject, mode), d (new VAbstractArcData(formulaLength, center, f1, formulaF1))
-{}
+VAbstractArc::VAbstractArc(const GOType &type, const QString &formulaLength, const VPointF &center, qreal f1,
+                           const QString &formulaF1, quint32 idObject, Draw mode)
+  : VAbstractCurve(type, idObject, mode),
+    d(new VAbstractArcData(formulaLength, center, f1, formulaF1))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractArc::VAbstractArc(const GOType &type, const VPointF &center, qreal f1, quint32 idObject, Draw mode)
-    : VAbstractCurve(type, idObject, mode), d (new VAbstractArcData(center, f1))
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VAbstractArc::VAbstractArc(const VAbstractArc &arc)
-    : VAbstractCurve(arc), d (arc.d)
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VAbstractArc &VAbstractArc::operator=(const VAbstractArc &arc)
+  : VAbstractCurve(type, idObject, mode),
+    d(new VAbstractArcData(center, f1))
 {
-    if ( &arc == this )
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+COPY_CONSTRUCTOR_IMPL_2(VAbstractArc, VAbstractCurve)
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractArc::operator=(const VAbstractArc &arc) -> VAbstractArc &
+{
+    if (&arc == this)
     {
         return *this;
     }
@@ -79,11 +87,25 @@ VAbstractArc &VAbstractArc::operator=(const VAbstractArc &arc)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractArc::~VAbstractArc()
-{}
+VAbstractArc::VAbstractArc(VAbstractArc &&arc) noexcept
+  : VAbstractCurve(std::move(arc)),
+    d(std::move(arc.d)) // NOLINT(bugprone-use-after-move)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstractArc::GetFormulaF1() const
+auto VAbstractArc::operator=(VAbstractArc &&arc) noexcept -> VAbstractArc &
+{
+    VAbstractCurve::operator=(arc);
+    std::swap(d, arc.d);
+    return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VAbstractArc::~VAbstractArc() = default;
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractArc::GetFormulaF1() const -> QString
 {
     return d->formulaF1;
 }
@@ -96,13 +118,13 @@ void VAbstractArc::SetFormulaF1(const QString &formula, qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VAbstractArc::GetStartAngle() const
+auto VAbstractArc::GetStartAngle() const -> qreal
 {
     return d->f1;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstractArc::GetFormulaF2() const
+auto VAbstractArc::GetFormulaF2() const -> QString
 {
     return d->formulaF2;
 }
@@ -115,13 +137,13 @@ void VAbstractArc::SetFormulaF2(const QString &formula, qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VAbstractArc::GetEndAngle() const
+auto VAbstractArc::GetEndAngle() const -> qreal
 {
     return d->f2;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPointF VAbstractArc::GetCenter() const
+auto VAbstractArc::GetCenter() const -> VPointF
 {
     return d->center;
 }
@@ -133,7 +155,7 @@ void VAbstractArc::SetCenter(const VPointF &point)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstractArc::GetFormulaLength() const
+auto VAbstractArc::GetFormulaLength() const -> QString
 {
     return d->formulaLength;
 }
@@ -153,36 +175,44 @@ void VAbstractArc::setId(const quint32 &id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstractArc::NameForHistory(const QString &toolName) const
+auto VAbstractArc::NameForHistory(const QString &toolName) const -> QString
 {
-    QString name = toolName + QString(" %1").arg(GetCenter().name());
+    QString name = toolName + QStringLiteral(" %1").arg(GetCenter().name());
 
     if (VAbstractCurve::id() != NULL_ID)
     {
-        name += QString("_%1").arg(VAbstractCurve::id());
+        name += QStringLiteral("_%1").arg(VAbstractCurve::id());
     }
 
     if (GetDuplicate() > 0)
     {
-        name += QString("_%1").arg(GetDuplicate());
+        name += QStringLiteral("_%1").arg(GetDuplicate());
     }
-    return name;
+
+    QString alias;
+
+    if (not GetAliasSuffix().isEmpty())
+    {
+        alias = QStringLiteral("%1 %2").arg(toolName, GetAliasSuffix());
+    }
+
+    return not alias.isEmpty() ? QStringLiteral("%1 (%2)").arg(alias, name) : name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VAbstractArc::IsFlipped() const
+auto VAbstractArc::IsFlipped() const -> bool
 {
     return d->isFlipped;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VAbstractArc::AngleArc() const
+auto VAbstractArc::AngleArc() const -> qreal
 {
     {
         const qreal angleDiff = qAbs(GetStartAngle() - GetEndAngle());
         if (VFuzzyComparePossibleNulls(angleDiff, 0) || VFuzzyComparePossibleNulls(angleDiff, 360))
         {
-            return 360;
+            return !d->isAllowEmpty ? 360 : 0;
         }
     }
     QLineF l1(0, 0, 100, 0);
@@ -201,9 +231,35 @@ qreal VAbstractArc::AngleArc() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VAbstractArc::GetPath() const -> QPainterPath
+{
+    QPainterPath path;
+
+    if (const QVector<QPointF> points = GetPoints(); points.count() >= 2)
+    {
+        path.addPolygon(QPolygonF(points));
+    }
+    else
+    {
+        QPointF const center = GetCenter().toQPointF();
+        auto rec = QRectF(center.x(), center.y(), accuracyPointOnLine * 2, accuracyPointOnLine * 2);
+        rec.translate(-rec.center().x(), -rec.center().y());
+        path.addEllipse(rec);
+    }
+
+    return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractArc::SetFlipped(bool value)
 {
     d->isFlipped = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractArc::SetAllowEmpty(bool value)
+{
+    d->isAllowEmpty = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

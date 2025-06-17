@@ -9,7 +9,7 @@ Requires(postun): desktop-file-utils
 Conflicts: seamly2d
 
 %if 0%{?fedora_version} > 0 || 0%{?rhel_version} >= 700 || 0%{?centos_version} >= 700
-BuildRequires: qt5-qtbase-devel >= 5.2.0
+BuildRequires: qt5-qtbase-devel >= 5.4.0
 BuildRequires: pkgconfig(Qt5Svg)
 BuildRequires: pkgconfig(Qt5Core)
 BuildRequires: pkgconfig(Qt5Gui)
@@ -18,19 +18,21 @@ BuildRequires: pkgconfig(Qt5PrintSupport)
 BuildRequires: pkgconfig(Qt5Widgets)
 BuildRequires: pkgconfig(Qt5Xml)
 BuildRequires: pkgconfig(Qt5Concurrent)
-BuildRequires: pkgconfig(Qt5OpenGL)
 BuildRequires: pkgconfig(Qt5XmlPatterns)
-BuildRequires: qt5-qtxmlpatterns-devel  >= 5.2.0
-BuildRequires: qt5-qtsvg-devel >= 5.2.0
-BuildRequires: qt5-qttools-devel >= 5.2.0
+BuildRequires: qt5-qtxmlpatterns-devel  >= 5.4.0
+BuildRequires: qt5-qtsvg-devel >= 5.4.0
+BuildRequires: qt5-qttools-devel >= 5.4.0
 
-Requires:      qt5-qtsvg >= 5.2.0
-Requires:      qt5-qtbase-gui >= 5.2.0
-Requires:      qt5-qtxmlpatterns >= 5.2.0
+BuildRequires: desktop-file-utils
+BuildRequires: libappstream-glib
+
+Requires:      qt5-qtsvg >= 5.4.0
+Requires:      qt5-qtbase-gui >= 5.4.0
+Requires:      qt5-qtxmlpatterns >= 5.4.0
 %endif
 
 %if 0%{?mageia} > 0
-BuildRequires: libqt5-devel >= 5.2.0
+BuildRequires: libqt5-devel >= 5.4.0
 BuildRequires: pkgconfig(Qt5Svg)
 BuildRequires: pkgconfig(Qt5Core)
 BuildRequires: pkgconfig(Qt5Gui)
@@ -39,11 +41,12 @@ BuildRequires: pkgconfig(Qt5PrintSupport)
 BuildRequires: pkgconfig(Qt5Widgets)
 BuildRequires: pkgconfig(Qt5Xml)
 BuildRequires: pkgconfig(Qt5Concurrent)
-BuildRequires: pkgconfig(Qt5OpenGL)
 BuildRequires: pkgconfig(Qt5XmlPatterns)
 BuildRequires: libproxy-pacrunner
 BuildRequires: qttools5
-BuildRequires: qtbase5-common-devel >= 5.2.0
+BuildRequires: qtbase5-common-devel >= 5.4.0
+
+Requires:      qtimageformats5
 
 %if 0%{?mageia} == 6
 BuildRequires: pkgconfig(openssl)
@@ -60,8 +63,17 @@ BuildRequires: libqt5-qttools
 BuildRequires: libQt5Svg-devel
 BuildRequires: update-desktop-files
 
-%if 0%{?suse_version} == 1310
-BuildRequires: libQt5XmlPatterns-devel
+Suggests: libqt5-qtimageformats
+Suggests: poppler-tools
+
+%if 0%{?suse_version} > 1500
+BuildRequires: libqt5-linguist
+%endif
+
+%if 0%{?suse_version} == 1500
+%if 0%{?sle_version} >= 150400 && 0%{?is_opensuse}
+BuildRequires: libqt5-linguist
+%endif
 %endif
 
 %if 0%{?suse_version} >= 1315
@@ -69,19 +81,38 @@ BuildRequires: libqt5-linguist-devel
 BuildRequires: libqt5-qtxmlpatterns-devel
 %endif
 
-%endif # %if 0%{?suse_version} > 0
+%if 0%{?suse_version} == 1310
+BuildRequires: libQt5XmlPatterns-devel
+%endif
 
-Requires:   poppler-utils
+%endif
 
-Version:	0.6.1
+# CentOS 7.0 specifics
+%if 0%{?centos_version} >= 700 && 0%{?centos_version} < 800
+BuildRequires: llvm-private
+%endif
+
+# CentOS 8.0 specifics
+%if 0%{?centos_version} >= 800
+BuildRequires: clang-devel
+%endif
+
+%if 0%{?mageia} > 0
+Requires: poppler
+%endif
+
+%if 0%{?fedora_version} > 0 || 0%{?rhel_version} > 0 || 0%{?centos_version} > 0
+Requires: poppler-utils
+%endif
+
+Version:	0.7.53
 Release:	0
-URL:		https://bitbucket.org/dismine/valentina
+URL:		https://gitlab.com/smart-pattern/valentina
 License:	GPL-3.0+
 Source0:	%{name}-%{version}.tar.gz
 Group:		Graphics
 Summary:	Pattern Making Application
 BuildRoot:  %{_tmppath}/%{name}-%{version}-build 
-Packager:   Roman Telezhinskyi <dismine@gmail.com>   
 
 # Disables debug packages and stripping of binaries:
 %global _enable_debug_package 0
@@ -104,14 +135,14 @@ a unique pattern making tool.
 %setup -q -n %{name}-%{version}
 
 %build
-%if 0%{?suse_version} >= 1315
-qmake-qt5 PREFIX=%{_prefix} LRELEASE=lrelease-qt5 Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
+%if 0%{?suse_version} > 0
+qmake-qt5 PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols no_pch"
 %else
 
 %if 0%{?mageia} >= 6
-qmake PREFIX=%{_prefix} Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
+qmake PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols no_pch"
 %else
-qmake-qt5 PREFIX=%{_prefix} Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
+qmake-qt5 PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols no_pch"
 %endif
 
 %endif
@@ -129,6 +160,9 @@ gzip -9c dist/debian/%{name}.1 > dist/debian/%{name}.1.gz &&
 gzip -9c dist/debian/tape.1 > dist/debian/tape.1.gz &&
 %{__install} -Dm 644 dist/debian/tape.1.gz %{buildroot}%{_mandir}/man1/tape.1.gz
 
+gzip -9c dist/debian/puzzle.1 > dist/debian/puzzle.1.gz &&
+%{__install} -Dm 644 dist/debian/puzzle.1.gz %{buildroot}%{_mandir}/man1/puzzle.1.gz
+
 cp dist/debian/valentina.sharedmimeinfo dist/debian/%{name}.xml &&
 %{__install} -Dm 644 dist/debian/%{name}.xml %{buildroot}%{_datadir}/mime/packages/%{name}.xml
 
@@ -138,18 +172,31 @@ cp dist/debian/valentina.mime dist/debian/%{name} &&
 %if 0%{?suse_version} > 0
 %suse_update_desktop_file -r %{name} Graphics VectorGraphics 2DGraphics
 %suse_update_desktop_file -r tape Utility Applet
+%suse_update_desktop_file -r puzzle Utility Applet
 %endif
+
+%check
+appstream-util validate-relax --nonet "%{buildroot}%{_datadir}/metainfo/ua.com.smart-pattern.valentina.metainfo.xml"
+desktop-file-validate %{buildroot}%{_datadir}/applications/ua.com.smart-pattern.valentina.desktop
+desktop-file-validate %{buildroot}%{_datadir}/applications/ua.com.smart-pattern.tape.desktop
+desktop-file-validate %{buildroot}%{_datadir}/applications/ua.com.smart-pattern.puzzle.desktop
 
 %post 
 /sbin/ldconfig
-/usr/bin/update-desktop-database &> /dev/null || :
-/bin/touch --no-create %{_datadir}/mime/packages &>/dev/null || :
+update-desktop-database &> /dev/null ||:
+update-mime-database %{_datadir}/mime &> /dev/null || :
+touch --no-create %{_datadir}/icons/hicolor || :
+if [ -x %{_bindir}/gtk-update-icon-cache ]; then
+  %{_bindir}/gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
+fi
 
 %postun
 /sbin/ldconfig
-/usr/bin/update-desktop-database &> /dev/null || :
-if [ $1 -eq 0 ] ; then
-  /usr/bin/update-mime-database %{_datadir}/mime &> /dev/null || :
+update-desktop-database &> /dev/null ||:
+update-mime-database %{_datadir}/mime &> /dev/null || :
+touch --no-create %{_datadir}/icons/hicolor || :
+if [ -x %{_bindir}/gtk-update-icon-cache ]; then
+  %{_bindir}/gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
 fi
 
 %posttrans
@@ -162,42 +209,47 @@ fi
 
 %files
 %defattr(-,root,root,-)
-%doc README.txt LICENSE_GPL.txt 
+%doc README.txt 
+%license LICENSE_GPL.txt 
 %doc %{_mandir}/man1/%{name}.1*
 %doc %{_mandir}/man1/tape.1*
+%doc %{_mandir}/man1/puzzle.1*
 %{_bindir}/valentina
 %{_bindir}/tape
-%{_libdir}/libvpropertyexplorer.so
-%{_libdir}/libvpropertyexplorer.so.*
-%{_libdir}/libqmuparser.so
-%{_libdir}/libqmuparser.so.*
-%dir %{_libdir}/mime
-%dir %{_libdir}/mime/packages
+%{_bindir}/puzzle
+%{_libdir}/libvpropertyexplorer.so*
+%{_libdir}/libqmuparser.so*
+%dir %{_libdir}/mime/
+%dir %{_libdir}/mime/packages/
 %{_libdir}/mime/packages/%{name}
-%dir %{_datadir}/mime
-%dir %{_datadir}/mime/packages
+%dir %{_datadir}/mime/
+%dir %{_datadir}/mime/packages/
 %{_datadir}/mime/packages/%{name}.xml
-%{_datadir}/applications/%{name}.desktop
-%{_datadir}/applications/tape.desktop
-%{_datadir}/pixmaps/*
-%dir %{_datadir}/%{name}
+%{_datadir}/applications/ua.com.smart-pattern.valentina.desktop
+%{_datadir}/applications/ua.com.smart-pattern.tape.desktop
+%{_datadir}/applications/ua.com.smart-pattern.puzzle.desktop
+%{_datadir}/metainfo/ua.com.smart-pattern.valentina.metainfo.xml
+
+%{_datadir}/icons/hicolor
+
+%dir %{_datadir}/%{name}/
 %{_datadir}/%{name}/diagrams.rcc
-%dir %{_datadir}/%{name}/translations
+%dir %{_datadir}/%{name}/translations/
 %{_datadir}/%{name}/translations/*.qm
-%dir %{_datadir}/%{name}/tables
-%dir %{_datadir}/%{name}/tables/multisize
+%dir %{_datadir}/%{name}/tables/
+%dir %{_datadir}/%{name}/tables/multisize/
 %{_datadir}/%{name}/tables/multisize/*.vst
-%dir %{_datadir}/%{name}/tables/templates
+%dir %{_datadir}/%{name}/tables/templates/
 %{_datadir}/%{name}/tables/templates/*.vit
-%dir %{_datadir}/%{name}/labels
+%dir %{_datadir}/%{name}/labels/
 %{_datadir}/%{name}/labels/*.xml
 
 %clean
-rm -f dist/debian/%{name}.1.gz dist/debian/tape.1.gz dist/debian/%{name}.xml dist/debian/%{name}
+rm -f dist/debian/%{name}.1.gz dist/debian/tape.1.gz dist/debian/puzzle.1.gz dist/debian/%{name}.xml dist/debian/%{name}
 [ "%{buildroot}" != "/" ] && %{__rm} -rf %{buildroot}
 
 
 %changelog
-* Tue Oct 23 2018 Roman Telezhynskyi
+* Sat Oct 24 2020 Roman Telezhynskyi <dismine@gmail.com> 
  - Auto build
 

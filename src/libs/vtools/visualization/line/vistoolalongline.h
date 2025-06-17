@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 #ifndef VISTOOLALONGLINE_H
 #define VISTOOLALONGLINE_H
 
-#include <qcompilerdetection.h>
+
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>
@@ -39,28 +39,52 @@
 #include "../vmisc/def.h"
 #include "visline.h"
 
-class VisToolAlongLine :public VisLine
+class VisToolAlongLine final :public VisLine
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolAlongLine(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolAlongLine() = default;
+    ~VisToolAlongLine() override = default;
 
-    virtual void RefreshGeometry() override;
-    void         setObject2Id(const quint32 &value);
-    void         setLength(const QString &expression);
-    void         setMidPointMode(bool midPointMode);
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolAlongLine)};
+    void RefreshGeometry() override;
+    void VisualMode(quint32 id) override;
+
+    void SetPoint1Id(quint32 value);
+    void SetPoint2Id(quint32 value);
+    void SetLength(const QString &expression);
+    void SetMidPointMode(bool midPointMode);
+
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ToolAlongLine)};
 private:
-    Q_DISABLE_COPY(VisToolAlongLine)
-    quint32         object2Id;
-    VScaledEllipse *point;
-    VScaledEllipse *lineP1;
-    VScaledEllipse *lineP2;
-    VScaledLine    *line;
-    qreal           length;
-    bool            m_midPointMode;
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VisToolAlongLine) // NOLINT
+    quint32         m_point1Id{NULL_ID};
+    quint32         m_point2Id{NULL_ID};
+    VScaledEllipse *m_point{nullptr};
+    VScaledEllipse *m_lineP1{nullptr};
+    VScaledEllipse *m_lineP2{nullptr};
+    VScaledLine    *m_line{nullptr};
+    qreal           m_length{0};
+    bool            m_midPointMode{false};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolAlongLine::SetPoint1Id(quint32 value)
+{
+    m_point1Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolAlongLine::SetPoint2Id(quint32 value)
+{
+    m_point2Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolAlongLine::SetMidPointMode(bool midPointMode)
+{
+    m_midPointMode = midPointMode;
+}
 
 #endif // VISTOOLALONGLINE_H

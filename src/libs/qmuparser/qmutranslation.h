@@ -22,7 +22,7 @@
 #ifndef QMUTRANSLATION_H
 #define QMUTRANSLATION_H
 
-#include "../qmuparser/qmuparser_global.h"
+#include "qmuparser_global.h"
 #include <QString>
 
 namespace qmu
@@ -56,15 +56,16 @@ public:
     ~QmuTranslation(){}
     QmuTranslation(const QString &context, const QString &sourceText, const QString &disambiguation = QString(),
                    int n = -1);
-    QmuTranslation &operator=(const QmuTranslation &tr);
+    auto operator=(const QmuTranslation &tr) -> QmuTranslation &;
     QmuTranslation(const QmuTranslation &tr);
-    QString translate(const QString &locale) const;
-    static QmuTranslation translate(const char * context, const char * sourceText,
-                                    const char * disambiguation = nullptr, int n = -1);
-    QString getMcontext() const;
-    QString getMsourceText() const;
-    QString getMdisambiguation() const;
-    int     getN() const;
+    auto translate(const QString &locale) const -> QString;
+    static auto translate(const char *context, const char *sourceText, const char *disambiguation = nullptr, int n = -1)
+        -> QmuTranslation;
+    auto getMcontext() const -> QString;
+    auto getMsourceText() const -> QString;
+    auto getMdisambiguation() const -> QString;
+    auto getN() const -> int;
+
 private:
     QString mcontext;
     QString msourceText;
@@ -75,25 +76,25 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QString QmuTranslation::getMcontext() const
+inline auto QmuTranslation::getMcontext() const -> QString
 {
     return mcontext;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QString QmuTranslation::getMsourceText() const
+inline auto QmuTranslation::getMsourceText() const -> QString
 {
     return msourceText;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QString QmuTranslation::getMdisambiguation() const
+inline auto QmuTranslation::getMdisambiguation() const -> QString
 {
     return mdisambiguation;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline int QmuTranslation::getN() const
+inline auto QmuTranslation::getN() const -> int
 {
     return mn;
 }

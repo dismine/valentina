@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -36,24 +36,39 @@
 
 class VisToolFlippingByAxis : public VisOperation
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolFlippingByAxis(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolFlippingByAxis() = default;
+    ~VisToolFlippingByAxis() override = default;
 
-    virtual void RefreshGeometry() override;
+    void RefreshGeometry() override;
 
     void SetOriginPointId(quint32 value);
     void SetAxisType(AxisType value);
 
-    virtual int type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolFlippingByAxis)};
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ToolFlippingByAxis)};
 private:
-    Q_DISABLE_COPY(VisToolFlippingByAxis)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VisToolFlippingByAxis) // NOLINT
 
-    AxisType m_axisType;
+    AxisType m_axisType{AxisType::VerticalAxis};
 
-    VScaledEllipse *point1;
+    VScaledEllipse *m_point1{nullptr};
+
+    quint32 m_originPointId{NULL_ID};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolFlippingByAxis::SetOriginPointId(quint32 value)
+{
+    m_originPointId = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolFlippingByAxis::SetAxisType(AxisType value)
+{
+    m_axisType = value;
+}
 
 #endif // VISTOOLFLIPPINGBYAXIS_H

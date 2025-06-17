@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -33,37 +33,38 @@
 
 namespace Ui
 {
-    class DialogExportToCSV;
+class DialogExportToCSV;
 }
 
 class DialogExportToCSV : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit DialogExportToCSV(QWidget *parent = nullptr);
     virtual ~DialogExportToCSV();
 
-    bool IsWithHeader() const;
+    auto IsWithHeader() const -> bool;
     void SetWithHeader(bool value);
 
-    int  GetSelectedMib() const;
+    auto GetSelectedMib() const -> int;
     void SetSelectedMib(int value);
 
-    QChar GetSeparator() const;
-    void  SetSeparator(const QChar &separator);
+    auto GetSeparator() const -> QChar;
+    void SetSeparator(const QChar &separator);
 
     void ShowFilePreview(const QString &fileName);
 
-    static QString MakeHelpCodecsList();
-    static QString MakeHelpSeparatorList();
+    static auto MakeHelpCodecsList() -> QString;
+    static auto MakeHelpSeparatorList() -> QString;
 
 protected:
-    virtual void changeEvent(QEvent* event) override;
+    virtual void changeEvent(QEvent *event) override;
     virtual void showEvent(QShowEvent *event) override;
 
 private:
-    Q_DISABLE_COPY(DialogExportToCSV)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DialogExportToCSV) // NOLINT
     Ui::DialogExportToCSV *ui;
     bool isInitialized;
     QString m_fileName;

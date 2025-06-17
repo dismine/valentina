@@ -42,7 +42,7 @@ class VPropertySet;
 //! Class that displays the sub properties of a property using a form layout
 class VPROPERTYEXPLORERSHARED_EXPORT VPropertyFormWidget : public QGroupBox
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     //! Constructor
     VPropertyFormWidget(const QString& title, const QString& description, const QList<VProperty*>& properties,
@@ -56,7 +56,7 @@ public:
 
 
     //! Returns a list of all child property form widgets (note that indirect children will not be in the list)
-    QList<VPropertyFormWidget*> getChildPropertyFormWidgets() const;
+    auto getChildPropertyFormWidgets() const -> QList<VPropertyFormWidget *>;
 
 public slots:
     //! Rebuilds the whole form
@@ -91,16 +91,16 @@ protected:
                         const QString &description = QString());
 
     //! The protected data
-    VPropertyFormWidgetPrivate* d_ptr;
+    VPropertyFormWidgetPrivate *vproperty_d_ptr;
 
     //! Event filter for the editor widgets
-    bool eventFilter(QObject *object, QEvent *event);
+    auto eventFilter(QObject *object, QEvent *event) -> bool;
 
     //! Commits data of an editor
     void commitData(const QWidget* editor);
 
 private:
-    Q_DISABLE_COPY(VPropertyFormWidget)
+    Q_DISABLE_COPY_MOVE(VPropertyFormWidget) // NOLINT
 };
 
 }   // Namespace VPE

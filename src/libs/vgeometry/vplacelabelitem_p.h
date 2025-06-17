@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -28,68 +28,37 @@
 #ifndef VPLACELABELITEM_P_H
 #define VPLACELABELITEM_P_H
 
-#include <QSharedData>
 #include "vgeometrydef.h"
-#include "../ifc/ifcdef.h"
-#include "../vmisc/diagnostic.h"
+#include <QSharedData>
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
-class VPlaceLabelItemData : public QSharedData
+class VPlaceLabelItemData final : public QSharedData
 {
 public:
-    VPlaceLabelItemData()
-        : width(),
-          height(),
-          angle('0'),
-          visibilityTrigger('1'),
-          type(PlaceLabelType::Button),
-          centerPoint(0),
-          wValue(0),
-          hValue(0),
-          aValue(0),
-          correctionAngle(0),
-          isVisible(1)
-    {}
+    VPlaceLabelItemData() = default;
+    VPlaceLabelItemData(const VPlaceLabelItemData &item) = default;
+    ~VPlaceLabelItemData() = default;
 
-    VPlaceLabelItemData(const VPlaceLabelItemData &item)
-        : QSharedData(item),
-          width(item.width),
-          height(item.height),
-          angle(item.angle),
-          visibilityTrigger(item.visibilityTrigger),
-          type(item.type),
-          centerPoint(item.centerPoint),
-          wValue(item.wValue),
-          hValue(item.hValue),
-          aValue(item.aValue),
-          correctionAngle(item.correctionAngle),
-          isVisible(item.isVisible)
-    {}
+    QString width{};                             // NOLINT(misc-non-private-member-variables-in-classes)
+    QString height{};                            // NOLINT(misc-non-private-member-variables-in-classes)
+    QString angle{'0'};                          // NOLINT(misc-non-private-member-variables-in-classes)
+    QString visibilityTrigger{'1'};              // NOLINT(misc-non-private-member-variables-in-classes)
+    PlaceLabelType type{PlaceLabelType::Button}; // NOLINT(misc-non-private-member-variables-in-classes)
+    quint32 centerPoint{0};                      // NOLINT(misc-non-private-member-variables-in-classes)
 
-    virtual ~VPlaceLabelItemData();
-
-    QString width;
-    QString height;
-    QString angle;
-    QString visibilityTrigger;
-    PlaceLabelType type;
-    quint32 centerPoint;
-
-    qreal wValue;
-    qreal hValue;
-    qreal aValue;
-    qreal correctionAngle;
-    qreal isVisible;
+    qreal wValue{0};          // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal hValue{0};          // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal aValue{0};          // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal correctionAngle{0}; // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal isVisible{1};       // NOLINT(misc-non-private-member-variables-in-classes)
+    bool notMirrored{false};  // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
-    VPlaceLabelItemData &operator=(const VPlaceLabelItemData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN_MOVE(VPlaceLabelItemData) // NOLINT
 };
-
-VPlaceLabelItemData::~VPlaceLabelItemData()
-{}
 
 QT_WARNING_POP
 

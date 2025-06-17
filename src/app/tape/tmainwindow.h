@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,50 +29,57 @@
 #ifndef TMAINWINDOW_H
 #define TMAINWINDOW_H
 
+#include <QPointer>
 #include <QTableWidget>
+#include <QTemporaryFile>
 
-#include "../vmisc/def.h"
-#include "../vmisc/vlockguard.h"
 #include "../vformat/vmeasurements.h"
+#include "../vmisc/def.h"
+#include "../vmisc/vabstractshortcutmanager.h"
+#include "../vmisc/vlockguard.h"
 #include "../vmisc/vtablesearch.h"
 #include "../vwidgets/vabstractmainwindow.h"
 
 namespace Ui
 {
-    class TMainWindow;
-}
+class TMainWindow;
+} // namespace Ui
 
 class QLabel;
 class QxtCsvModel;
+class VMeasurement;
+class QAbstractButton;
+class QUuid;
+class VKnownMeasurements;
 
-class TMainWindow : public VAbstractMainWindow
+class TMainWindow final : public VAbstractMainWindow
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit TMainWindow(QWidget *parent = nullptr);
-    virtual ~TMainWindow() override;
+    ~TMainWindow() override;
 
-    QString CurrentFile() const;
+    auto CurrentFile() const -> QString;
 
-    void RetranslateTable();
-
-    void SetBaseMHeight(int height);
-    void SetBaseMSize(int size);
+    void SetDimensionABase(qreal base);
+    void SetDimensionBBase(qreal base);
+    void SetDimensionCBase(qreal base);
     void SetPUnit(Unit unit);
 
-    bool LoadFile(const QString &path);
+    auto LoadFile(const QString &path) -> bool;
+
+    void UpdateWindowTitle();
+
+    void SyncKnownMeasurements();
+
+    auto IsUntitled() const -> bool;
+
+    auto GetUntitledIndex() const -> int;
+    void SetUntitledIndex(int newUntitledIndex);
 
 public slots:
-    virtual void ShowToolTip(const QString &toolTip) override;
-
-protected:
-    virtual void closeEvent(QCloseEvent *event) override;
-    virtual void changeEvent(QEvent* event) override;
-    virtual void showEvent(QShowEvent *event) override;
-    virtual bool eventFilter(QObject *object, QEvent *event) override;
-    virtual void ExportToCSVData(const QString &fileName, bool withHeader, int mib,
-                                 const QChar &separator) final;
+    void ToolBarStyles();
 
 private slots:
     void FileNew();
@@ -80,11 +87,9 @@ private slots:
     void OpenMultisize();
     void OpenTemplate();
     void CreateFromExisting();
-    void Preferences();
-    void ToolBarStyles();
 
-    bool FileSave();
-    bool FileSaveAs();
+    bool FileSave();   // NOLINT(modernize-use-trailing-return-type)
+    bool FileSaveAs(); // NOLINT(modernize-use-trailing-return-type)
     void AboutToShowWindowMenu();
     void ShowWindow() const;
     void ImportDataFromCSV();
@@ -92,14 +97,14 @@ private slots:
 #if defined(Q_OS_MAC)
     void AboutToShowDockMenu();
     void OpenAt(QAction *where);
-#endif //defined(Q_OS_MAC)
+#endif // defined(Q_OS_MAC)
 
     void SaveCustomerName();
     void SaveEmail();
     void SaveGender(int index);
-    void SaveBirthDate(const QDate & date);
+    void SaveBirthDate(const QDate &date);
     void SaveNotes();
-    void SavePMSystem(int index);
+    void SaveKnownMeasurements(int index);
 
     void Remove();
     void MoveTop();
@@ -108,120 +113,212 @@ private slots:
     void MoveBottom();
     void Fx();
 
+    void AddImage();
+    void RemoveImage();
+    void SaveImage();
+    void ShowImage();
+
     void AddCustom();
     void AddKnown();
+    void AddSeparator();
     void ImportFromPattern();
 
-    void ChangedSize(const QString &text);
-    void ChangedHeight(const QString & text);
+    void DimensionABaseChanged();
+    void DimensionBBaseChanged();
+    void DimensionCBaseChanged();
+
+    void GradationChanged();
 
     void ShowMData();
 
     void DeployFormula();
 
     void SaveMName(const QString &text);
+    void SaveMValueAlias(const QString &text);
     void SaveMValue();
     void SaveMBaseValue(double value);
-    void SaveMSizeIncrease(double value);
-    void SaveMHeightIncrease(double value);
+    void SaveMShiftA(double value);
+    void SaveMShiftB(double value);
+    void SaveMShiftC(double value);
+    void SaveMCorrectionValue(double value);
     void SaveMDescription();
     void SaveMFullName();
+    void SaveMUnits();
+    void SaveMDimension();
 
-    void PatternUnitChanged(int index);
+    void FullCircumferenceChanged(bool checked);
+
+    void ExportToIndividual();
+
+    void RestrictFirstDimesion();
+    void RestrictSecondDimesion();
+    void RestrictThirdDimesion();
+
+    void EditDimensionLabels();
+    void DimensionCustomNames();
+
+    void AskDefaultSettings();
+
+    void UpdateShortcuts();
 
 private:
-    Q_DISABLE_COPY(TMainWindow)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(TMainWindow) // NOLINT
     Ui::TMainWindow *ui;
-    VMeasurements   *m;
-    VContainer      *data;
-    Unit             mUnit;
-    Unit             pUnit;
-    MeasurementsType mType;
-    qreal            currentSize;
-    qreal            currentHeight;
-    QString          curFile;
-    QComboBox       *gradationHeights;
-    QComboBox       *gradationSizes;
-    QComboBox       *comboBoxUnits;
-    int              formulaBaseHeight;
-    std::shared_ptr<VLockGuard<char>> lock;
-    QSharedPointer<VTableSearch> search;
-    QLabel *labelGradationHeights;
-    QLabel *labelGradationSizes;
-    QLabel *labelPatternUnit;
-    QAction *actionDockDiagram;
-    bool dockDiagramVisible;
-    bool isInitialized;
-    bool mIsReadOnly;
-    enum { MaxRecentFiles = 5 };
-    QAction            *recentFileActs[MaxRecentFiles];
-    QAction            *separatorAct;
-    QVector<QObject *> hackedWidgets;
+    VMeasurements *m_m{nullptr};
+    VContainer *m_data{nullptr};
+    Unit m_mUnit{Unit::Cm};
+    Unit m_pUnit{Unit::Cm};
+    MeasurementsType m_mType{MeasurementsType::Individual};
+    qreal m_currentDimensionA{0};
+    qreal m_currentDimensionB{0};
+    qreal m_currentDimensionC{0};
+    QString m_curFile{};
+    QComboBox *m_gradationDimensionA{nullptr};
+    QComboBox *m_gradationDimensionB{nullptr};
+    QComboBox *m_gradationDimensionC{nullptr};
+    QComboBox *m_comboBoxUnits{nullptr};
+    int m_formulaBaseHeight{0};
+    QSharedPointer<VLockGuard<char>> m_lock{nullptr};
+    QSharedPointer<VTableSearch> m_search{};
+    QLabel *m_labelGradationDimensionA{nullptr};
+    QLabel *m_labelGradationDimensionB{nullptr};
+    QLabel *m_labelGradationDimensionC{nullptr};
+    QLabel *m_labelPatternUnit{nullptr};
+    bool m_isInitialized{false};
+    bool m_mIsReadOnly{false};
+    QTimer *m_gradation;
+    QMenu *m_searchHistory;
+
+    QVector<QObject *> m_hackedWidgets{};
+
+    QPointer<QTemporaryFile> m_tmpImage{};
+
+    struct MultisizeMeasurement
+    {
+        MultisizeMeasurement() = default;
+
+        QString name{};           // NOLINT(misc-non-private-member-variables-in-classes)
+        qreal base{0};            // NOLINT(misc-non-private-member-variables-in-classes)
+        qreal shiftA{0};          // NOLINT(misc-non-private-member-variables-in-classes)
+        qreal shiftB{0};          // NOLINT(misc-non-private-member-variables-in-classes)
+        qreal shiftC{0};          // NOLINT(misc-non-private-member-variables-in-classes)
+        QString fullName{};       // NOLINT(misc-non-private-member-variables-in-classes)
+        QString description{};    // NOLINT(misc-non-private-member-variables-in-classes)
+        bool specialUnits{false}; // NOLINT(misc-non-private-member-variables-in-classes)
+    };
+
+    QMultiHash<VShortcutAction, QAction *> m_actionShortcuts{};
+    QMultiHash<VShortcutAction, QAbstractButton *> m_buttonShortcuts{};
+    QHash<QAbstractButton *, QString> m_serachButtonTooltips{};
+
+    int untitledIndex{0};
 
     void SetupMenu();
     void InitWindow();
+    void InitMenu();
+    void InitDimensionsBaseValue();
+    void InitDimensionGradation(int index, const MeasurementDimension_p &dimension, QComboBox *control);
+    void InitDimensionControls();
+    void InitDimesionShifts();
     void InitTable();
     void SetDecimals();
-    void InitUnits();
+    void InitPatternUnits();
     void InitComboBoxUnits();
-    void InitGender(QComboBox *gender);
+    void InitMeasurementUnits();
+    static void InitGender(QComboBox *gender);
+    void InitMeasurementDimension();
+    void InitSearch();
+
+    void InitSearchHistory();
+    void SaveSearchRequest();
+    void UpdateSearchControlsTooltips();
+
+    void RetranslateTableHeaders();
 
     void ShowNewMData(bool fresh);
     void ShowUnits();
-    void ShowHeaderUnits(QTableWidget *table, int column, const QString &unit);
-    void UpdateRecentFileActions();
+    static void ShowHeaderUnits(QTableWidget *table, int column, const QString &unit);
 
     void MeasurementsWereSaved(bool saved);
     void SetCurrentFile(const QString &fileName);
-    bool SaveMeasurements(const QString &fileName, QString &error);
+    auto SaveMeasurements(const QString &fileName, QString &error) -> bool;
 
-    bool MaybeSave();
+    auto MaybeSave() -> bool;
 
-    QTableWidgetItem *AddCell(const QString &text, int row, int column, int aligment, bool ok = true);
-
-    Q_REQUIRED_RESULT QComboBox *SetGradationList(QLabel *label, const QStringList &list);
-
-    void       SetDefaultHeight(int value);
-    void       SetDefaultSize(int value);
+    auto AddCell(const QString &text, int row, int column, int aligment, bool ok = true) -> QTableWidgetItem *;
+    auto AddSeparatorCell(const QString &text, int row, int column, int aligment, bool ok = true) -> QTableWidgetItem *;
 
     void RefreshData(bool freshCall = false);
     void RefreshTable(bool freshCall = false);
+    void RefreshMeasurementData(const QSharedPointer<VMeasurement> &meash, qint32 currentRow);
 
-    QString GetCustomName() const;
-    QString ClearCustomName(const QString &name) const;
+    auto GetCustomName() const -> QString;
+    static auto ClearCustomName(const QString &name) -> QString;
 
-    bool EvalFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label);
-    void ShowMDiagram(const QString &name);
+    auto EvalFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label, bool specialUnits) -> bool;
+    void ShowMDiagram(const QSharedPointer<VMeasurement> &m);
 
-    void Open(const QString &pathTo, const QString &filter);
+    auto Open(const QString &pathTo, const QString &filter) -> QString;
     void UpdatePadlock(bool ro);
     void MeasurementGUI();
     void Controls();
     void MFields(bool enabled);
-    void UpdateWindowTitle();
 
     void ReadSettings();
     void WriteSettings();
 
-    QStringList FilterMeasurements(const QStringList &mNew, const QStringList &mFilter);
+    static auto FilterMeasurements(const QStringList &mNew, const QStringList &mFilter) -> QStringList;
 
     void UpdatePatternUnit();
 
-    bool LoadFromExistingFile(const QString &path);
+    auto LoadFromExistingFile(const QString &path) -> bool;
 
     void CreateWindowMenu(QMenu *menu);
 
-    bool IgnoreLocking(int error, const QString &path);
+    template <class T> void HackWidget(T **widget);
+    void HackDimensionBaseValue();
+    void HackDimensionShifts();
 
-    template <class T>
-    void HackWidget(T **widget);
-
-    QString CheckMName(const QString &name, const QSet<QString> &importedNames) const;
+    auto CheckMName(const QString &name, const QSet<QString> &importedNames) const -> QString;
     void ShowError(const QString &text);
     void RefreshDataAfterImport();
 
-    void ImportIndividualMeasurements(const QxtCsvModel &csv);
-    void ImportMultisizeMeasurements(const QxtCsvModel &csv);
+    void ImportIndividualMeasurements(const QxtCsvModel &csv, const QVector<int> &map, bool withHeader);
+    void ImportMultisizeMeasurements(const QxtCsvModel &csv, const QVector<int> &map, bool withHeader);
+    auto ImportMultisizeMeasurement(const QxtCsvModel &csv, int i, const QVector<int> &map, vsizetype dimensionsCount,
+                                    QSet<QString> &importedNames) -> MultisizeMeasurement;
+
+    void SetCurrentPatternUnit();
+
+    void ShowDimensionControls();
+    void SetDimensionBases();
+    void SetCurrentDimensionValues();
+
+    auto DimensionRestrictedValues(int index, const MeasurementDimension_p &dimension) -> QVector<double>;
+
+    auto OrderedMeasurements() const -> QMap<int, QSharedPointer<VMeasurement>>;
+
+    void InitIcons();
+
+    static auto UnknownMeasurementImage() -> QString;
+
+    void RetranslateMDiagram();
+
+    void InitKnownMeasurements(QComboBox *combo);
+    void InitKnownMeasurementsDescription();
+
+    static auto KnownMeasurementsRegistred(const QUuid &id) -> bool;
+
+    auto CSVColumnHeader(int column) const -> QString;
+    void ExportRowToCSV(QxtCsvModel &csv, int row, const QSharedPointer<VMeasurement> &meash,
+                        const VKnownMeasurements &knownDB) const;
+
+    void closeEvent(QCloseEvent *event) override;
+    void changeEvent(QEvent *event) override;
+    auto eventFilter(QObject *object, QEvent *event) -> bool override;
+    void ExportToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator) override;
+    auto RecentFileList() const -> QStringList override;
 };
 
 #endif // TMAINWINDOW_H

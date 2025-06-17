@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef VISLINE_H
 #define VISLINE_H
 
-#include <qcompilerdetection.h>
 #include <QColor>
 #include <QGraphicsItem>
 #include <QGraphicsLineItem>
@@ -38,35 +37,41 @@
 #include <QObject>
 #include <QPointF>
 #include <QString>
-#include <Qt>
 #include <QtGlobal>
 
-#include "../vtools/visualization/visualization.h"
 #include "../vmisc/def.h"
+#include "../vtools/visualization/visualization.h"
 #include "../vwidgets/scalesceneitems.h"
 
-class VisLine: public Visualization, public VScaledLine
+class VisLine : public Visualization, public VScaledLine
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     explicit VisLine(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisLine() = default;
+    ~VisLine() override = default;
 
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::Line)};
-    static qreal CorrectAngle(const qreal &angle);
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Vis::Line)
+    };
+
+    static auto CorrectAngle(const qreal &angle) -> qreal;
+
 protected:
-    QPointF      Ray(const QPointF &firstPoint, const qreal &angle) const;
-    QPointF      Ray(const QPointF &firstPoint) const;
-    QLineF       Axis(const QPointF &p, const qreal &angle) const;
-    QLineF       Axis(const QPointF &p1, const QPointF &p2) const;
-    virtual void InitPen() override;
-    virtual void AddOnScene() override;
+    auto Ray(const QPointF &firstPoint, const qreal &angle) const -> QPointF;
+    auto Ray(const QPointF &firstPoint) const -> QPointF;
+    auto Axis(const QPointF &p, const qreal &angle) const -> QLineF;
+    auto Axis(const QPointF &p1, const QPointF &p2) const -> QLineF;
 
-    void         DrawRay(VScaledLine *lineItem, const QPointF &p, const QPointF &pTangent,
-                         const QColor &color, Qt::PenStyle style);
+    void InitPen() override;
+    void AddOnScene() override;
+
+    void DrawRay(VScaledLine *lineItem, const QPointF &p, const QPointF &pTangent, Qt::PenStyle style);
+
 private:
-    Q_DISABLE_COPY(VisLine)
+    Q_DISABLE_COPY_MOVE(VisLine) // NOLINT
 };
 
 #endif // VISLINE_H

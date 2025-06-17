@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,27 +29,42 @@
 #include "dialogexporttocsv.h"
 #include "ui_dialogexporttocsv.h"
 
-#include "../vcommonsettings.h"
 #include "../qxtcsvmodel.h"
 #include "../vabstractapplication.h"
+#include "../vcommonsettings.h"
 
+#include <QDebug>
 #include <QPushButton>
 #include <QShowEvent>
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include "../vtextcodec.h"
+#else
 #include <QTextCodec>
+#endif
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogExportToCSV::DialogExportToCSV(QWidget *parent)
-    : QDialog(parent),
-      ui(new Ui::DialogExportToCSV),
-      isInitialized(false),
-      m_fileName()
+  : QDialog(parent),
+    ui(new Ui::DialogExportToCSV),
+    isInitialized(false),
+    m_fileName()
 {
     ui->setupUi(this);
 
-    const QList<int> mibs = QTextCodec::availableMibs();
+    const QList<int> mibs = VTextCodec::availableMibs();
     for (auto mib : mibs)
     {
-        ui->comboBoxCodec->addItem(QTextCodec::codecForMib(mib)->name(), mib);
+        if (VTextCodec *codec = VTextCodec::codecForMib(mib))
+        {
+            ui->comboBoxCodec->addItem(codec->name(), mib);
+        }
     }
 
     ui->comboBoxCodec->setCurrentIndex(ui->comboBoxCodec->findData(VCommonSettings::GetDefCSVCodec()));
@@ -58,29 +73,34 @@ DialogExportToCSV::DialogExportToCSV(QWidget *parent)
 
     QPushButton *bDefaults = ui->buttonBox->button(QDialogButtonBox::RestoreDefaults);
     SCASSERT(bDefaults != nullptr)
-    connect(bDefaults, &QPushButton::clicked, this, [this]()
-    {
-        ui->comboBoxCodec->blockSignals(true);
-        ui->checkBoxWithHeader->blockSignals(true);
-        ui->buttonGroup->blockSignals(true);
+    connect(bDefaults, &QPushButton::clicked, this,
+            [this]()
+            {
+                ui->comboBoxCodec->blockSignals(true);
+                ui->checkBoxWithHeader->blockSignals(true);
+                ui->buttonGroup->blockSignals(true);
 
-        ui->checkBoxWithHeader->setChecked(qApp->Settings()->GetDefCSVWithHeader());
-        ui->comboBoxCodec->setCurrentIndex(ui->comboBoxCodec->findData(VCommonSettings::GetDefCSVCodec()));
+                ui->checkBoxWithHeader->setChecked(VCommonSettings::GetDefCSVWithHeader());
+                ui->comboBoxCodec->setCurrentIndex(ui->comboBoxCodec->findData(VCommonSettings::GetDefCSVCodec()));
 
-        SetSeparator(VCommonSettings::GetDefCSVSeparator());
+                SetSeparator(VCommonSettings::GetDefCSVSeparator());
 
-        ui->comboBoxCodec->blockSignals(false);
-        ui->checkBoxWithHeader->blockSignals(false);
-        ui->buttonGroup->blockSignals(false);
+                ui->comboBoxCodec->blockSignals(false);
+                ui->checkBoxWithHeader->blockSignals(false);
+                ui->buttonGroup->blockSignals(false);
 
-        ShowPreview();
-    });
+                ShowPreview();
+            });
 
     ui->groupBoxPreview->setVisible(false);
 
-    connect(ui->comboBoxCodec, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this](){ShowPreview();});
-    connect(ui->checkBoxWithHeader, &QCheckBox::stateChanged, this, [this](){ShowPreview();});
-    connect(ui->buttonGroup, QOverload<int>::of(&QButtonGroup::buttonClicked), this, [this](){ShowPreview();});
+    connect(ui->comboBoxCodec, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]() { ShowPreview(); });
+#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
+    connect(ui->checkBoxWithHeader, &QCheckBox::checkStateChanged, this, [this]() { ShowPreview(); });
+#else
+    connect(ui->checkBoxWithHeader, &QCheckBox::stateChanged, this, [this]() { ShowPreview(); });
+#endif
+    connect(ui->buttonGroup, &QButtonGroup::idClicked, this, [this]() { ShowPreview(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -90,7 +110,7 @@ DialogExportToCSV::~DialogExportToCSV()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogExportToCSV::IsWithHeader() const
+auto DialogExportToCSV::IsWithHeader() const -> bool
 {
     return ui->checkBoxWithHeader->isChecked();
 }
@@ -102,16 +122,14 @@ void DialogExportToCSV::SetWithHeader(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int DialogExportToCSV::GetSelectedMib() const
+auto DialogExportToCSV::GetSelectedMib() const -> int
 {
     if (ui->comboBoxCodec->currentIndex() != -1)
     {
         return ui->comboBoxCodec->currentData().toInt();
     }
-    else
-    {
-        return VCommonSettings::GetDefCSVCodec();
-    }
+
+    return VCommonSettings::GetDefCSVCodec();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -129,24 +147,24 @@ void DialogExportToCSV::SetSelectedMib(int value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QChar DialogExportToCSV::GetSeparator() const
+auto DialogExportToCSV::GetSeparator() const -> QChar
 {
     if (ui->radioButtonTab->isChecked())
     {
-        return QChar('\t');
+        return '\t'_L1;
     }
-    else if (ui->radioButtonSemicolon->isChecked())
+
+    if (ui->radioButtonSemicolon->isChecked())
     {
-        return QChar(';');
+        return ';'_L1;
     }
+
     else if (ui->radioButtonSpace->isChecked())
     {
-        return QChar(' ');
+        return ' '_L1;
     }
-    else
-    {
-        return VCommonSettings::GetDefCSVSeparator();
-    }
+
+    return VCommonSettings::GetDefCSVSeparator();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -165,8 +183,8 @@ void DialogExportToCSV::changeEvent(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogExportToCSV::showEvent(QShowEvent *event)
 {
-    QDialog::showEvent( event );
-    if ( event->spontaneous() )
+    QDialog::showEvent(event);
+    if (event->spontaneous())
     {
         return;
     }
@@ -189,7 +207,7 @@ void DialogExportToCSV::showEvent(QShowEvent *event)
         setMinimumSize(size());
     }
 
-    isInitialized = true;//first show windows are held
+    isInitialized = true; // first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -202,7 +220,8 @@ void DialogExportToCSV::ShowPreview()
 
     ui->groupBoxPreview->setVisible(true);
 
-    QxtCsvModel csv(m_fileName, nullptr, IsWithHeader(), GetSeparator(), QTextCodec::codecForMib(GetSelectedMib()));
+    QxtCsvModel const csv(m_fileName, nullptr, IsWithHeader(), GetSeparator(),
+                          VTextCodec::codecForMib(GetSelectedMib()));
 
     const int columns = csv.columnCount();
     const int rows = csv.rowCount();
@@ -214,19 +233,19 @@ void DialogExportToCSV::ShowPreview()
     ui->tableWidget->horizontalHeader()->setVisible(IsWithHeader());
     if (IsWithHeader())
     {
-        for(int column=0; column<columns; ++column)
+        for (int column = 0; column < columns; ++column)
         {
-            QTableWidgetItem *header = new QTableWidgetItem(csv.headerText(column));
+            auto *header = new QTableWidgetItem(csv.headerText(column));
             ui->tableWidget->setHorizontalHeaderItem(column, header);
         }
         ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
     }
 
-    for (int row=0; row < rows; ++row)
+    for (int row = 0; row < rows; ++row)
     {
-        for(int column=0; column<columns; ++column)
+        for (int column = 0; column < columns; ++column)
         {
-            QTableWidgetItem *item = new QTableWidgetItem(csv.text(row, column));
+            auto *item = new QTableWidgetItem(csv.text(row, column));
             item->setToolTip(csv.text(row, column));
 
             // set the item non-editable (view only), and non-selectable
@@ -245,7 +264,7 @@ void DialogExportToCSV::ShowPreview()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogExportToCSV::SetSeparator(const QChar &separator)
 {
-    switch(separator.toLatin1())
+    switch (separator.toLatin1())
     {
         case '\t':
             ui->radioButtonTab->setChecked(true);
@@ -270,32 +289,32 @@ void DialogExportToCSV::ShowFilePreview(const QString &fileName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogExportToCSV::MakeHelpCodecsList()
+auto DialogExportToCSV::MakeHelpCodecsList() -> QString
 {
-    QString out("\n");
-    const QList<int> list = QTextCodec::availableMibs();
+    auto out = QStringLiteral("\n");
+    const QList<int> list = VTextCodec::availableMibs();
     for (int i = 0; i < list.size(); ++i)
     {
-        out += QLatin1String("\t* ") + QTextCodec::codecForMib(list.at(i))->name();
-        if (i < list.size()-1)
+        if (VTextCodec *codec = VTextCodec::codecForMib(list.at(i)))
         {
-            out += QLatin1String(",\n");
+            out += QStringLiteral("\t* ") + codec->name();
+            out += i < list.size() - 1 ? ",\n"_L1 : ".\n"_L1;
         }
         else
         {
-            out += QLatin1String(".\n");
+            qDebug() << "Can't get codec for MIBenum " << i;
         }
     }
     return out;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogExportToCSV::MakeHelpSeparatorList()
+auto DialogExportToCSV::MakeHelpSeparatorList() -> QString
 {
-    QString out("\n");
-    out += QLatin1String("\t* 'Tab',\n");
-    out += QLatin1String("\t* ';',\n");
-    out += QLatin1String("\t* 'Space',\n");
-    out += QLatin1String("\t* ','.\n");
+    QString out = "\n"_L1;
+    out += "\t* 'Tab',\n"_L1;
+    out += "\t* ';',\n"_L1;
+    out += "\t* 'Space',\n"_L1;
+    out += "\t* ','.\n"_L1;
     return out;
 }

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -31,31 +31,34 @@
 
 #include <QDialog>
 
+#include "../vmisc/vabstractshortcutmanager.h"
 #include "../vmisc/vtablesearch.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../xml/vpattern.h"
 
 namespace Ui
 {
-    class DialogFinalMeasurements;
+class DialogFinalMeasurements;
 }
+
+class QAbstractButton;
 
 class DialogFinalMeasurements : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
-    DialogFinalMeasurements(VPattern *doc, QWidget *parent = nullptr);
-    virtual ~DialogFinalMeasurements();
+    explicit DialogFinalMeasurements(VPattern *doc, QWidget *parent = nullptr);
+    ~DialogFinalMeasurements() override;
 
-    QVector<VFinalMeasurement> FinalMeasurements() const;
+    auto FinalMeasurements() const -> QVector<VFinalMeasurement>;
 
 protected:
-    virtual void closeEvent ( QCloseEvent * event ) override;
-    virtual void changeEvent ( QEvent * event) override;
-    virtual bool eventFilter(QObject *object, QEvent *event) override;
-    virtual void showEvent( QShowEvent *event ) override;
-    virtual void resizeEvent(QResizeEvent *event) override;
+    void closeEvent(QCloseEvent *event) override;
+    void changeEvent(QEvent *event) override;
+    auto eventFilter(QObject *object, QEvent *event) -> bool override;
+    void showEvent(QShowEvent *event) override;
+    void resizeEvent(QResizeEvent *event) override;
 private slots:
     void ShowFinalMeasurementDetails();
     void Add();
@@ -68,33 +71,47 @@ private slots:
     void DeployFormula();
     void Fx();
     void FullUpdateFromFile();
+    void UpdateShortcuts();
+
 private:
-    Q_DISABLE_COPY(DialogFinalMeasurements)
+    Q_DISABLE_COPY_MOVE(DialogFinalMeasurements) // NOLINT
     Ui::DialogFinalMeasurements *ui;
     /** @brief doc dom document container */
-    VPattern                    *m_doc;
-    VContainer                   m_data;
-    QVector<VFinalMeasurement>   m_measurements;
-    QSharedPointer<VTableSearch> m_search;
-    int                          formulaBaseHeight;
-    bool                         m_isInitialized;
+    VPattern *m_doc;
+    VContainer m_data;
+    QVector<VFinalMeasurement> m_measurements;
+    QSharedPointer<VTableSearch> m_search{};
+    int formulaBaseHeight{0};
+    bool m_isInitialized{false};
+
+    QMenu *m_searchHistory;
+
+    QMultiHash<VShortcutAction, QAbstractButton *> m_shortcuts{};
+    QHash<QAbstractButton *, QString> m_serachButtonTooltips{};
 
     void FillFinalMeasurements(bool freshCall = false);
 
     void ShowUnits();
 
     void AddCell(const QString &text, int row, int column, int aligment, bool ok = true);
-    bool EvalUserFormula(const QString &formula, bool fromUser);
+    auto EvalUserFormula(const QString &formula, bool fromUser) -> bool;
     void Controls();
     void EnableDetails(bool enabled);
 
     void UpdateTree();
 
-    qreal EvalFormula(const QString &formula, bool &ok);
+    auto EvalFormula(const QString &formula, bool &ok) -> qreal;
+
+    void InitSearch();
+    void InitSearchHistory();
+    void SaveSearchRequest();
+    void UpdateSearchControlsTooltips();
+
+    void InitIcons();
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QVector<VFinalMeasurement> DialogFinalMeasurements::FinalMeasurements() const
+inline auto DialogFinalMeasurements::FinalMeasurements() const -> QVector<VFinalMeasurement>
 {
     return m_measurements;
 }

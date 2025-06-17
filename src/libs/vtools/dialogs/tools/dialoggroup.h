@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef DIALOGGROUP_H
 #define DIALOGGROUP_H
 
-#include <qcompilerdetection.h>
 #include <QMap>
 #include <QMetaObject>
 #include <QObject>
@@ -40,34 +39,49 @@
 
 namespace Ui
 {
-    class DialogGroup;
+class DialogGroup;
 }
 
-class DialogGroup : public DialogTool
+class DialogGroup final : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
-    explicit DialogGroup(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    ~DialogGroup();
+    explicit DialogGroup(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
+    ~DialogGroup() override;
 
-    void    SetName(const QString &name);
-    QString GetName() const;
+    void SetName(const QString &name);
+    auto GetName() const -> QString;
 
-    QMap<quint32, quint32> GetGroup() const;
+    void SetTags(const QStringList &tags);
+    auto GetTags() const -> QStringList;
 
-    virtual void ShowDialog(bool click) override;
+    void SetGroupCategories(const QStringList &categories) override;
+
+    auto GetGroup() const -> QMap<quint32, quint32>;
+
+    void ShowDialog(bool click) override;
 
 public slots:
-    virtual void SelectedObject(bool selected, quint32 object, quint32 tool) override;
+    void SelectedObject(bool selected, quint32 object, quint32 tool) override;
+
+protected:
+    auto IsValid() const -> bool override;
 
 private slots:
     void NameChanged();
 
 private:
-    Q_DISABLE_COPY(DialogGroup)
+    Q_DISABLE_COPY_MOVE(DialogGroup) // NOLINT
     Ui::DialogGroup *ui;
     QMap<quint32, quint32> group;
+    bool flagName;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto DialogGroup::IsValid() const -> bool
+{
+    return flagName;
+}
 
 #endif // DIALOGGROUP_H

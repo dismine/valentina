@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef CALCULATOR_H
 #define CALCULATOR_H
 
-#include <qcompilerdetection.h>
 #include <QHash>
 #include <QMap>
 #include <QString>
@@ -57,19 +56,21 @@ class VInternalVariable;
  *     result = cal->EvalFormula(data->PlainVariables(), formula);
  * }
  */
-class Calculator:public qmu::QmuFormulaBase
+class Calculator final : public qmu::QmuFormulaBase
 {
 public:
     Calculator();
-    virtual ~Calculator() Q_DECL_EQ_DEFAULT;
+    ~Calculator() override = default;
 
-    qreal EvalFormula(const QHash<QString, QSharedPointer<VInternalVariable> > *vars, const QString &formula);
-protected:
-    static qreal* VarFactory(const QString &a_szName, void *a_pUserData);
+    auto EvalFormula(const QHash<QString, QSharedPointer<VInternalVariable>> *vars, const QString &formula) -> qreal;
+
 private:
-    Q_DISABLE_COPY(Calculator)
-    QVector<QSharedPointer<qreal>> m_varsValues;
-    const QHash<QString, QSharedPointer<VInternalVariable> > *m_vars;
+    Q_DISABLE_COPY_MOVE(Calculator) // NOLINT
+    QVector<QSharedPointer<qreal>> m_varsValues{};
+    const QHash<QString, QSharedPointer<VInternalVariable>> *m_vars{nullptr};
+
+    static auto VarFactory(const QString &a_szName, void *a_pUserData) -> qreal *;
+    static auto Warning(const QString &warningMsg, qreal value) -> qreal;
 };
 
 #endif // CALCULATOR_H

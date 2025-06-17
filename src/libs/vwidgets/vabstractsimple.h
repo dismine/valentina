@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -34,29 +34,29 @@
 #include <QObject>
 #include <QPen>
 #include <QString>
-#include <Qt>
 #include <QtGlobal>
 
-#include "../ifc/ifcdef.h"
 #include "../vgeometry/vgeometrydef.h"
 #include "../vmisc/def.h"
+#include "../vmisc/typedef.h"
 
 class QGraphicsSceneContextMenuEvent;
 
 class VAbstractSimple : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     VAbstractSimple(quint32 id, QObject *parent = nullptr);
     virtual ~VAbstractSimple() = default;
 
     virtual void ToolSelectionType(const SelectionType &type);
 
-    GOType GetType() const;
-    void   SetType(const GOType &value);
+    auto GetType() const -> GOType;
+    void SetType(const GOType &value);
 
 signals:
-    void ShowContextMenu(QGraphicsSceneContextMenuEvent * event, quint32 id = NULL_ID);
+    void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID);
     void Delete();
 
 protected:
@@ -65,10 +65,10 @@ protected:
 
     SelectionType selectionType;
 
-    GOType  type;
+    GOType type;
 
 private:
-    Q_DISABLE_COPY(VAbstractSimple)
+    Q_DISABLE_COPY_MOVE(VAbstractSimple) // NOLINT
 };
 
 #endif // VABSTRACTSIMPLE_H

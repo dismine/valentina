@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -32,47 +32,29 @@
 #include <QSharedData>
 
 #include "../ifc/ifcdef.h"
-#include "../vmisc/diagnostic.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
-class VAbstractCurveData : public QSharedData
+class VAbstractCurveData final : public QSharedData
 {
 public:
-
-    VAbstractCurveData ()
-        : duplicate(0),
-          color(ColorBlack),
-          penStyle(TypeLineLine),
-          approximationScale(defCurveApproximationScale)
-    {}
-
-    VAbstractCurveData(const VAbstractCurveData &curve)
-        : QSharedData(curve),
-          duplicate(curve.duplicate),
-          color(curve.color),
-          penStyle(curve.penStyle),
-          approximationScale(curve.approximationScale)
-    {}
-
-    virtual ~VAbstractCurveData();
+    VAbstractCurveData() = default;
+    VAbstractCurveData(const VAbstractCurveData &curve) = default;
+    ~VAbstractCurveData() = default;
 
     /** @brief duplicate helps create unique name for curves that connects the same start and finish points. */
-    quint32 duplicate;
+    quint32 duplicate{0}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    QString color;
-    QString penStyle;
+    QString color{ColorBlack};      // NOLINT(misc-non-private-member-variables-in-classes)
+    QString penStyle{TypeLineLine}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    qreal approximationScale;
+    qreal approximationScale{defCurveApproximationScale}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
-    VAbstractCurveData &operator=(const VAbstractCurveData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN_MOVE(VAbstractCurveData) // NOLINT
 };
-
-VAbstractCurveData::~VAbstractCurveData()
-{}
 
 QT_WARNING_POP
 

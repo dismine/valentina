@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,33 +29,49 @@
 #ifndef VISTOOLCUTSPLINE_H
 #define VISTOOLCUTSPLINE_H
 
-#include <qcompilerdetection.h>
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
 #include <QtGlobal>
+#include <limits>
 
 #include "../vmisc/def.h"
 #include "vispath.h"
 
-class VisToolCutSpline : public VisPath
+class VisToolCutSpline final : public VisPath
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     explicit VisToolCutSpline(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolCutSpline() Q_DECL_EQ_DEFAULT;
+    ~VisToolCutSpline() override = default;
 
-    virtual void RefreshGeometry() override;
-    void         setLength(const QString &expression);
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolCutSpline)};
-protected:
-    Q_DISABLE_COPY(VisToolCutSpline)
-    VScaledEllipse *point;
-    VCurvePathItem *spl1;
-    VCurvePathItem *spl2;
-    qreal           length;
+    void RefreshGeometry() override;
+    void VisualMode(quint32 id) override;
+
+    void SetSplineId(quint32 id);
+    void SetLength(const QString &expression);
+
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Vis::ToolCutSpline)
+    };
+
+private:
+    Q_DISABLE_COPY_MOVE(VisToolCutSpline) // NOLINT
+    VScaledEllipse *m_point{nullptr};
+    VCurvePathItem *m_spl1{nullptr};
+    VCurvePathItem *m_spl2{nullptr};
+    qreal m_length{std::numeric_limits<qreal>::infinity()};
+    quint32 m_splineId{NULL_ID};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolCutSpline::SetSplineId(quint32 id)
+{
+    m_splineId = id;
+}
 
 #endif // VISTOOLCUTSPLINE_H

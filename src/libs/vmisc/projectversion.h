@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -31,40 +31,39 @@
 
 class QString;
 
-extern const int MAJOR_VERSION;
-extern const int MINOR_VERSION;
-extern const int DEBUG_VERSION;
+constexpr unsigned MAJOR_VERSION = 0;
+constexpr unsigned MINOR_VERSION = 7;
+constexpr unsigned DEBUG_VERSION = 53;
 
-extern const QString APP_VERSION_STR;
+auto AppVersionStr() -> const QString &;
 
-/*
-   APP_VERSION is (major << 16) + (minor << 8) + patch.
-*/
-#define APP_VERSION 0x000601
+constexpr auto FormatVersion(unsigned major, unsigned minor, unsigned patch) -> unsigned
+{
+    return ((major << 16u) | (minor << 8u) | patch);
+}
+
+constexpr auto AppVersion() -> unsigned
+{
+    return FormatVersion(MAJOR_VERSION, MINOR_VERSION, DEBUG_VERSION);
+}
 
 // Change version number in projectversion.cpp too.
 // Synchronize valentina.nsi
 
-#define VER_FILEVERSION             0,6,1,0
-#define VER_FILEVERSION_STR         "0.6.1.0\0"
+#define VER_FILEVERSION 0, 7, 53
+#define VER_FILEVERSION_STR "0.7.53\0"
 
-//#define V_PRERELEASE // Mark prerelease builds
+#define V_PRERELEASE // Mark prerelease builds
 
-#define VER_PRODUCTVERSION          VER_FILEVERSION
-#define VER_PRODUCTVERSION_STR      VER_FILEVERSION_STR
+#define VER_PRODUCTVERSION VER_FILEVERSION
+#define VER_PRODUCTVERSION_STR VER_FILEVERSION_STR
+#define VER_COMPANYNAME_STR "Valentina"
+#define VER_LEGALCOPYRIGHT_STR "Copyright © 2014-2024 Valentina Team"
+#define VER_LEGALTRADEMARKS1_STR "All Rights Reserved"
+#define VER_LEGALTRADEMARKS2_STR VER_LEGALTRADEMARKS1_STR
+#define VER_COMPANYDOMAIN_STR "smart-pattern.com.ua"
 
-#define VER_COMPANYNAME_STR         "ValentinaTeam"
-//#define VER_FILEDESCRIPTION_STR   "Patternmaking program." // Defined in program
-//#define VER_INTERNALNAME_STR      "Valentina" // Defined in program
-#define VER_LEGALCOPYRIGHT_STR      "Copyright © 2014-2018 Valentina Team"
-#define VER_LEGALTRADEMARKS1_STR    "All Rights Reserved"
-#define VER_LEGALTRADEMARKS2_STR    VER_LEGALTRADEMARKS1_STR
-//#define VER_ORIGINALFILENAME_STR  "valentina.exe" // Defined in program
-//#define VER_PRODUCTNAME_STR       "Valentina" // Defined in program
-
-#define VER_COMPANYDOMAIN_STR       "valentinaproject.bitbucket.io"
-
-QString compilerString();
-QString buildCompatibilityString();
+auto compilerString() -> QString;
+auto buildCompatibilityString() -> QString;
 
 #endif // PROJECTVERSION_H

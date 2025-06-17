@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef VUNDOCOMMAND_H
 #define VUNDOCOMMAND_H
 
-#include <qcompilerdetection.h>
 #include <QDomElement>
 #include <QMetaObject>
 #include <QObject>
@@ -39,61 +38,69 @@
 #include <QtGlobal>
 
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vmisc/logging.h"
 
 Q_DECLARE_LOGGING_CATEGORY(vUndo)
 
-enum class UndoCommand: char { AddPatternPiece,
-                               AddToCalc,
-                               MoveSpline,
-                               MoveSplinePath,
-                               MoveSPoint,
-                               SaveToolOptions,
-                               SaveDetailOptions,
-                               SavePieceOptions,
-                               SavePiecePathOptions,
-                               SavePlaceLabelOptions,
-                               MovePiece,
-                               DeleteTool,
-                               DeletePatternPiece,
-                               RenamePP,
-                               MoveLabel,
-                               MoveDoubleLabel,
-                               RotationMoveLabel
-                             };
+enum class UndoCommand : qint8
+{
+    AddPatternPiece,
+    AddToCalc,
+    MoveSpline,
+    MoveSplinePath,
+    MoveSPoint,
+    SaveToolOptions,
+    SaveDetailOptions,
+    SavePieceOptions,
+    SavePiecePathOptions,
+    SavePlaceLabelOptions,
+    MovePiece,
+    DeleteTool,
+    DeletePatternPiece,
+    RenamePP,
+    MoveLabel,
+    MoveDoubleLabel,
+    RotationMoveLabel,
+    MoveBackGroundImage,
+    ScaleBackGroundImage,
+    RotateBackGroundImage,
+    RenamePiece
+};
 
 class VPattern;
 
 class VUndoCommand : public QObject, public QUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     VUndoCommand(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
-    virtual ~VUndoCommand() =default;
+    virtual ~VUndoCommand() = default;
 signals:
     void ClearScene();
     void NeedFullParsing();
     void NeedLiteParsing(const Document &parse);
+
 protected:
-    QDomElement  xml;
+    QDomElement xml;
     VAbstractPattern *doc;
-    quint32      nodeId;
-    bool         redoFlag;
+    quint32 nodeId;
+    bool redoFlag;
     virtual void RedoFullParsing();
-    void         UndoDeleteAfterSibling(QDomNode &parentNode, const quint32 &siblingId) const;
+    void UndoDeleteAfterSibling(QDomNode &parentNode, quint32 siblingId, const QString &tagName = QString()) const;
 
-    void         IncrementReferences(const QVector<quint32> &nodes) const;
-    void         DecrementReferences(const QVector<quint32> &nodes) const;
+    void IncrementReferences(const QVector<quint32> &nodes) const;
+    void DecrementReferences(const QVector<quint32> &nodes) const;
 
-    void         IncrementReferences(const QVector<CustomSARecord> &nodes) const;
-    void         DecrementReferences(const QVector<CustomSARecord> &nodes) const;
+    void IncrementReferences(const QVector<CustomSARecord> &nodes) const;
+    void DecrementReferences(const QVector<CustomSARecord> &nodes) const;
 
-    void         IncrementReferences(const QVector<VPieceNode> &nodes) const;
-    void         DecrementReferences(const QVector<VPieceNode> &nodes) const;
+    void IncrementReferences(const QVector<VPieceNode> &nodes) const;
+    void DecrementReferences(const QVector<VPieceNode> &nodes) const;
 
-    QDomElement  GetDestinationObject(quint32 idTool, quint32 idPoint) const;
+    auto GetDestinationObject(quint32 idTool, quint32 idPoint) const -> QDomElement;
+
 private:
-    Q_DISABLE_COPY(VUndoCommand)
+    Q_DISABLE_COPY_MOVE(VUndoCommand) // NOLINT
 };
 
 #endif // VUNDOCOMMAND_H

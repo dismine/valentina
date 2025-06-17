@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -30,32 +30,32 @@
 #define DIALOGMDATABASE_H
 
 #include <QDialog>
+#include <QUuid>
 
 namespace Ui
 {
-    class DialogMDataBase;
+class DialogMDataBase;
 }
 
 class QTreeWidgetItem;
+struct VKnownMeasurement;
+class VPatternImage;
 
 class DialogMDataBase : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
-    explicit DialogMDataBase(const QStringList &list, QWidget *parent = nullptr);
-    explicit DialogMDataBase(QWidget *parent = nullptr);
-    virtual ~DialogMDataBase() override;
+    explicit DialogMDataBase(const QUuid &id, const QStringList &usedMeasurements, QWidget *parent = nullptr);
+    ~DialogMDataBase() override;
 
-    QStringList GetNewNames() const;
+    auto GetNewNames() const -> QStringList;
 
-    void RetranslateGroups();
-
-    static QString ImgTag(const QString &number);
+    static auto ImgTag(const VPatternImage &image) -> QString;
 
 protected:
-    virtual void changeEvent(QEvent* event) override;
-    virtual bool eventFilter(QObject *target, QEvent *event) override;
+    void changeEvent(QEvent *event) override;
+    auto eventFilter(QObject *target, QEvent *event) -> bool override;
 
 private slots:
     void UpdateChecks(QTreeWidgetItem *item, int column);
@@ -65,48 +65,32 @@ private slots:
     void FilterMeasurements(const QString &search);
 
 private:
-    Q_DISABLE_COPY(DialogMDataBase)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DialogMDataBase) // NOLINT
     Ui::DialogMDataBase *ui;
-    bool selectMode;
-    QStringList list;
+    bool m_selectMode;
+    QStringList m_usedMeasurements{};
 
-    QTreeWidgetItem *groupA;
-    QTreeWidgetItem *groupB;
-    QTreeWidgetItem *groupC;
-    QTreeWidgetItem *groupD;
-    QTreeWidgetItem *groupE;
-    QTreeWidgetItem *groupF;
-    QTreeWidgetItem *groupG;
-    QTreeWidgetItem *groupH;
-    QTreeWidgetItem *groupI;
-    QTreeWidgetItem *groupJ;
-    QTreeWidgetItem *groupK;
-    QTreeWidgetItem *groupL;
-    QTreeWidgetItem *groupM;
-    QTreeWidgetItem *groupN;
-    QTreeWidgetItem *groupO;
-    QTreeWidgetItem *groupP;
-    QTreeWidgetItem *groupQ;
+    QList<QTreeWidgetItem *> m_groups{};
+    QUuid m_knownId;
+    QTreeWidgetItem *m_generalGroup{nullptr};
 
-    void InitDataBase(const QStringList &list = QStringList());
-    void InitGroup(QTreeWidgetItem **group, const QString &groupName, const QStringList &mList,
-                   const QStringList &list = QStringList());
-    void FilterGroup(QTreeWidgetItem *group, const QString &search);
+    void InitDataBase(const QStringList &usedMeasurements = QStringList());
+    auto InitGroup(const QString &groupName, const QMap<int, VKnownMeasurement> &mlist,
+                   const QStringList &list = QStringList()) -> QTreeWidgetItem *;
+    void FilterGroup(QTreeWidgetItem *group, const QString &search) const;
 
-    Q_REQUIRED_RESULT QTreeWidgetItem *AddGroup(const QString &text);
+    Q_REQUIRED_RESULT auto AddGroup(const QString &text) -> QTreeWidgetItem *;
 
-    void AddMeasurement(QTreeWidgetItem *group, const QString &name, const QStringList &list);
+    void AddMeasurement(QTreeWidgetItem *group, const VKnownMeasurement &measurement, const QStringList &list);
 
     void ReadSettings();
     void WriteSettings();
 
-    QString ItemFullDescription(QTreeWidgetItem *item, bool showImage = true) const;
+    auto ItemFullDescription(QTreeWidgetItem *item, bool showImage = true) const -> QString;
 
-    void RetranslateGroup(QTreeWidgetItem *group, const QString &groupText, const QStringList &list);
-    void RetranslateMeasurement(QTreeWidgetItem *group, int index, const QString &name);
-
-    void ChangeCheckState(QTreeWidgetItem *group, Qt::CheckState check);
-    Qt::CheckState GlobalCheckState() const;
+    static void ChangeCheckState(QTreeWidgetItem *group, Qt::CheckState check);
+    auto GlobalCheckState() const -> Qt::CheckState;
 };
 
 #endif // DIALOGMDATABASE_H

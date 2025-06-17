@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef VTOOLDOUBLEPOINT_H
 #define VTOOLDOUBLEPOINT_H
 
-#include <qcompilerdetection.h>
 #include <QGraphicsItem>
 #include <QGraphicsPathItem>
 #include <QMetaObject>
@@ -43,65 +42,71 @@
 #include "../vmisc/def.h"
 
 class VSimplePoint;
-template <class T> class QSharedPointer;
 
-class VToolDoublePoint: public VAbstractPoint, public QGraphicsPathItem
+class VToolDoublePoint : public VAbstractPoint, public QGraphicsPathItem
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     VToolDoublePoint(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 p1id, quint32 p2id,
-                     QGraphicsItem * parent = nullptr);
-    virtual ~VToolDoublePoint() Q_DECL_EQ_DEFAULT;
+                     const QString &notes, QGraphicsItem *parent = nullptr);
+    ~VToolDoublePoint() override = default;
 
-    virtual int   type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Tool::DoublePoint)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Tool::DoublePoint)
+    };
 
-    QString nameP1() const;
-    void    setNameP1(const QString &name);
+    auto nameP1() const -> QString;
+    void setNameP1(const QString &name);
 
-    QString nameP2() const;
-    void    setNameP2(const QString &name);
+    auto nameP2() const -> QString;
+    void setNameP2(const QString &name);
 
-    virtual void GroupVisibility(quint32 object, bool visible) override;
-    virtual void ChangeLabelPosition(quint32 id, const QPointF &pos) override;
+    void SetNotes(const QString &notes) override;
 
-    virtual bool IsLabelVisible(quint32 id) const override;
-    virtual void SetLabelVisible(quint32 id, bool visible) override;
+    void GroupVisibility(quint32 object, bool visible) override;
+    void ChangeLabelPosition(quint32 id, const QPointF &pos) override;
+
+    auto IsLabelVisible(quint32 id) const -> bool override;
+    void SetLabelVisible(quint32 id, bool visible) override;
+
 public slots:
-    void         Label1ChangePosition(const QPointF &pos);
-    void         Label2ChangePosition(const QPointF &pos);
-    virtual void Disable(bool disable, const QString &namePP) override;
-    virtual void EnableToolMove(bool move) override;
-    void         Point1Choosed();
-    void         Point2Choosed();
-    void         Point1Selected(bool selected);
-    void         Point2Selected(bool selected);
-    virtual void FullUpdateFromFile() override;
-    virtual void AllowHover(bool enabled) override;
-    virtual void AllowSelecting(bool enabled) override;
-    void         AllowLabelHover(bool enabled);
-    void         AllowLabelSelecting(bool enabled);
+    void Label1ChangePosition(const QPointF &pos);
+    void Label2ChangePosition(const QPointF &pos);
+    void Disable(bool disable, const QString &namePP) override;
+    void EnableToolMove(bool move) override;
+    void Point1Choosed();
+    void Point2Choosed();
+    void Point1Selected(bool selected);
+    void Point2Selected(bool selected);
+    void FullUpdateFromFile() override;
+    void AllowHover(bool enabled) override;
+    void AllowSelecting(bool enabled) override;
+    void AllowLabelHover(bool enabled);
+    void AllowLabelSelecting(bool enabled);
     virtual void ToolSelectionType(const SelectionType &type) override;
 
 protected:
     VSimplePoint *firstPoint;
     VSimplePoint *secondPoint;
 
-    quint32      p1id;
-    quint32      p2id;
+    quint32 p1id;
+    quint32 p2id;
 
-    virtual void UpdateNamePosition(quint32 id, const QPointF &pos) override;
-    virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) override;
-    virtual void keyReleaseEvent(QKeyEvent * event) override;
-    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) override;
-    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
-    virtual void AddToFile() override;
-    virtual void ChangeLabelVisibility(quint32 id, bool visible) override;
+    void UpdateNamePosition(quint32 id, const QPointF &pos) override;
+    auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
+    void keyReleaseEvent(QKeyEvent *event) override;
+    void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
+    void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    void AddToFile() override;
+    void ChangeLabelVisibility(quint32 id, bool visible) override;
 
-    QString ComplexToolTip(quint32 itemId) const;
+    auto ComplexToolTip(quint32 itemId) const -> QString;
 
 private:
-    Q_DISABLE_COPY(VToolDoublePoint)
+    Q_DISABLE_COPY_MOVE(VToolDoublePoint) // NOLINT
 };
 
 #endif // VTOOLDOUBLEPOINT_H

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -32,9 +32,9 @@
 #include <QPointF>
 #include <QSharedData>
 
-#include "../vmisc/diagnostic.h"
+#include "../vmisc/defglobal.h"
+#include "../vmisc/typedef.h"
 #include "floatitemdef.h"
-#include "../ifc/ifcdef.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -43,45 +43,36 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VGrainlineDataPrivate : public QSharedData
 {
 public:
-    VGrainlineDataPrivate()
-        : m_qsLength(),
-          m_dRotation(),
-          m_eArrowType(ArrowType::atBoth),
-          m_centerPin(NULL_ID),
-          m_topPin(NULL_ID),
-          m_bottomPin(NULL_ID)
-    {}
-
-    VGrainlineDataPrivate(const VGrainlineDataPrivate &data)
-        : QSharedData(data),
-          m_qsLength(data.m_qsLength),
-          m_dRotation(data.m_dRotation),
-          m_eArrowType(data.m_eArrowType),
-          m_centerPin(data.m_centerPin),
-          m_topPin(data.m_topPin),
-          m_bottomPin(data.m_bottomPin)
-    {}
-
-    ~VGrainlineDataPrivate() Q_DECL_EQ_DEFAULT;
+    VGrainlineDataPrivate() = default;
+    VGrainlineDataPrivate(const VGrainlineDataPrivate &data) = default;
+    ~VGrainlineDataPrivate() = default;
 
     /** @brief m_dLength formula to calculate the length of grainline */
-    QString   m_qsLength;
+    QString m_qsLength{}; // NOLINT(misc-non-private-member-variables-in-classes)
+
     /** @brief m_dRotation formula to calculate the rotation of grainline in [degrees] */
-    QString   m_dRotation;
+    QString m_dRotation{}; // NOLINT(misc-non-private-member-variables-in-classes)
+
     /** @brief m_eArrowType type of arrow on the grainline */
-    ArrowType m_eArrowType;
+    // NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
+    GrainlineArrowDirection m_eArrowType{GrainlineArrowDirection::twoWaysUpDown};
+
     /** @brief m_centerPin center pin id */
-    quint32   m_centerPin;
+    quint32 m_centerPin{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
+
     /** @brief m_topPin top pin id */
-    quint32   m_topPin;
+    quint32 m_topPin{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
+
     /** @brief m_bottomPin bottom pin id */
-    quint32   m_bottomPin;
+    quint32 m_bottomPin{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
+
+    /** @brief m_visible visibility flag */
+    bool m_visible{true}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
-    VGrainlineDataPrivate &operator=(const VGrainlineDataPrivate &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN_MOVE(VGrainlineDataPrivate) // NOLINT
 };
 
 QT_WARNING_POP
 
 #endif // VGRAINLINEDATA_P_H
-

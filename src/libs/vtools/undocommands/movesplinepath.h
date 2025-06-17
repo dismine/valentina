@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef MOVESPLINEPATH_H
 #define MOVESPLINEPATH_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -42,33 +41,39 @@ class QGraphicsScene;
 
 class MoveSplinePath : public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     MoveSplinePath(VAbstractPattern *doc, const VSplinePath &oldSplPath, const VSplinePath &newSplPath,
                    const quint32 &id, QUndoCommand *parent = nullptr);
-    virtual ~MoveSplinePath() =default;
-    virtual void undo() override;
-    virtual void redo() override;
-    virtual bool mergeWith(const QUndoCommand *command) override;
-    virtual int  id() const override;
-    quint32      getSplinePathId() const;
-    VSplinePath  getNewSplinePath() const;
+    ~MoveSplinePath() = default;
+
+    void undo() override;
+    void redo() override;
+
+    auto mergeWith(const QUndoCommand *command) -> bool override;
+    auto id() const -> int override;
+
+    auto getSplinePathId() const -> quint32;
+    auto getNewSplinePath() const -> VSplinePath;
+
 private:
-    Q_DISABLE_COPY(MoveSplinePath)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(MoveSplinePath) // NOLINT
     VSplinePath oldSplinePath;
     VSplinePath newSplinePath;
     QGraphicsScene *scene;
-    void         Do(const VSplinePath &splPath);
+    void Do(const VSplinePath &splPath);
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline quint32 MoveSplinePath::getSplinePathId() const
+inline auto MoveSplinePath::getSplinePathId() const -> quint32
 {
     return nodeId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline VSplinePath MoveSplinePath::getNewSplinePath() const
+inline auto MoveSplinePath::getNewSplinePath() const -> VSplinePath
 {
     return newSplinePath;
 }

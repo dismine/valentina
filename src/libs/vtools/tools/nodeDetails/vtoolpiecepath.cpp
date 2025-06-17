@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -28,15 +28,18 @@
 
 #include "vtoolpiecepath.h"
 #include "../../dialogs/tools/piece/dialogpiecepath.h"
-#include "../vpatterndb/vpiecepath.h"
-#include "../vpatterndb/vpiecenode.h"
 #include "../../undocommands/savepieceoptions.h"
-#include "../vtoolseamallowance.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../vlayout/vabstractpiece.h"
+#include "../vmisc/theme/vscenestylesheet.h"
+#include "../vpatterndb/vpiecenode.h"
+#include "../vpatterndb/vpiecepath.h"
+#include "../vtoolseamallowance.h"
+#include "../vwidgets/global.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPiecePath *VToolPiecePath::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
-                                       VAbstractPattern *doc, VContainer *data)
+auto VToolPiecePath::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                            VContainer *data) -> VToolPiecePath *
 {
     SCASSERT(not dialog.isNull());
     const QPointer<DialogPiecePath> dialogTool = qobject_cast<DialogPiecePath *>(dialog);
@@ -58,7 +61,7 @@ VToolPiecePath *VToolPiecePath::Create(const QPointer<DialogTool> &dialog, VMain
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPiecePath *VToolPiecePath::Create(VToolPiecePathInitData initData)
+auto VToolPiecePath::Create(VToolPiecePathInitData initData) -> VToolPiecePath *
 {
     if (initData.typeCreation == Source::FromGui)
     {
@@ -76,25 +79,24 @@ VToolPiecePath *VToolPiecePath::Create(VToolPiecePathInitData initData)
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::PiecePath, initData.doc);
-        //TODO Need create garbage collector and remove all nodes, that we don't use.
-        //Better check garbage before each saving file. Check only modeling tags.
-        VToolPiecePath *pathTool = new VToolPiecePath(initData);
+        // TODO Need create garbage collector and remove all nodes, that we don't use.
+        // Better check garbage before each saving file. Check only modeling tags.
+        auto *pathTool = new VToolPiecePath(initData);
 
         VAbstractPattern::AddTool(initData.id, pathTool);
         if (initData.idTool != NULL_ID)
         {
-            //Some nodes we don't show on scene. Tool that create this nodes must free memory.
+            // Some nodes we don't show on scene. Tool that create this nodes must free memory.
             VDataTool *tool = VAbstractPattern::getTool(initData.idTool);
             SCASSERT(tool != nullptr);
-            pathTool->setParent(tool);// Adopted by a tool
+            pathTool->setParent(tool); // Adopted by a tool
         }
         else
         {
             if (initData.typeCreation == Source::FromGui && initData.path.GetType() == PiecePathType::InternalPath)
             { // Seam allowance tool already initializated and can't init the path
                 SCASSERT(initData.idObject > NULL_ID);
-                VToolSeamAllowance *saTool =
-                        qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(initData.idObject));
+                auto *saTool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(initData.idObject));
                 SCASSERT(saTool != nullptr);
                 pathTool->setParentItem(saTool);
                 pathTool->SetParentType(ParentType::Item);
@@ -102,8 +104,8 @@ VToolPiecePath *VToolPiecePath::Create(VToolPiecePathInitData initData)
             else
             {
                 // Try to prevent memory leak
-                initData.scene->addItem(pathTool);// First adopted by scene
-                pathTool->hide();// If no one will use node, it will stay hidden
+                initData.scene->addItem(pathTool); // First adopted by scene
+                pathTool->hide();                  // If no one will use node, it will stay hidden
                 pathTool->SetParentType(ParentType::Scene);
             }
         }
@@ -113,7 +115,7 @@ VToolPiecePath *VToolPiecePath::Create(VToolPiecePathInitData initData)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolPiecePath::getTagName() const
+auto VToolPiecePath::getTagName() const -> QString
 {
     return VAbstractPattern::TagPath;
 }
@@ -121,16 +123,17 @@ QString VToolPiecePath::getTagName() const
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPiecePath::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    qreal width = qApp->Settings()->WidthHairLine();
+    qreal width = VAbstractApplication::VApp()->Settings()->WidthHairLine();
 
     const qreal scale = SceneScale(scene());
     if (scale > 1)
     {
-        width = qMax(1., width/scale);
+        width = qMax(1., width / scale);
     }
 
     QPen toolPen = pen();
     toolPen.setWidthF(width);
+    toolPen.setColor(VSceneStylesheet::PatternPieceStyle().PieceColor());
 
     setPen(toolPen);
 
@@ -147,15 +150,14 @@ void VToolPiecePath::incrementReferens()
         {
             doc->IncrementReferens(idTool);
         }
-        else
-        {
-            IncrementNodes(VAbstractTool::data.GetPiecePath(m_id));
-        }
+
+        IncrementNodes(VAbstractTool::data.GetPiecePath(m_id));
+
         ShowNode();
-        QDomElement domElement = doc->elementById(m_id, getTagName());
+        QDomElement domElement = doc->FindElementById(m_id, getTagName());
         if (domElement.isElement())
         {
-            doc->SetParametrUsage(domElement, AttrInUse, NodeUsage::InUse);
+            VDomDocument::SetParametrUsage(domElement, AttrInUse, NodeUsage::InUse);
         }
     }
 }
@@ -170,15 +172,14 @@ void VToolPiecePath::decrementReferens()
         {
             doc->DecrementReferens(idTool);
         }
-        else
-        {
-            DecrementNodes(VAbstractTool::data.GetPiecePath(m_id));
-        }
+
+        DecrementNodes(VAbstractTool::data.GetPiecePath(m_id));
+
         HideNode();
-        QDomElement domElement = doc->elementById(m_id, getTagName());
+        QDomElement domElement = doc->FindElementById(m_id, getTagName());
         if (domElement.isElement())
         {
-            doc->SetParametrUsage(domElement, AttrInUse, NodeUsage::NotInUse);
+            VDomDocument::SetParametrUsage(domElement, AttrInUse, NodeUsage::NotInUse);
         }
     }
 }
@@ -195,8 +196,10 @@ void VToolPiecePath::AddAttributes(VAbstractPattern *doc, QDomElement &domElemen
     {
         doc->SetAttribute(domElement, VAbstractPattern::AttrVisible, path.GetVisibilityTrigger());
         doc->SetAttribute(domElement, AttrCut, path.IsCutPath());
-        doc->SetAttribute(domElement, AttrFirstToCountour, path.IsFirstToCuttingCountour());
-        doc->SetAttribute(domElement, AttrLastToCountour, path.IsLastToCuttingCountour());
+        doc->SetAttribute(domElement, AttrFirstToContour, path.IsFirstToCuttingContour());
+        doc->SetAttribute(domElement, AttrLastToContour, path.IsLastToCuttingContour());
+        doc->SetAttributeOrRemoveIf<bool>(domElement, AttrNotMirrored, path.IsNotMirrored(),
+                                          [](bool value) noexcept { return not value; });
     }
 }
 
@@ -256,7 +259,7 @@ void VToolPiecePath::AddToFile()
             incrementReferens(); // Manually increment reference since in this case a piece tool will not do this for us
         }
 
-        qApp->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, m_pieceId));
+        VAbstractApplication::VApp()->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, m_pieceId));
     }
 }
 
@@ -280,23 +283,22 @@ void VToolPiecePath::ToolCreation(const Source &typeCreation)
 {
     if (typeCreation == Source::FromGui || typeCreation == Source::FromTool)
     {
-        AddToFile();
+        VToolPiecePath::AddToFile();
     }
     else
     {
-        RefreshDataInFile();
+        VToolPiecePath::RefreshDataInFile();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolPiecePath::VToolPiecePath(const VToolPiecePathInitData &initData, QObject *qoParent, QGraphicsItem *parent)
-    :VAbstractNode(initData.doc, initData.data, initData.id, NULL_ID, initData.drawName, initData.idTool, qoParent),
-      QGraphicsPathItem(parent),
-      m_pieceId(initData.idObject)
+  : VAbstractNode(initData.doc, initData.data, initData.id, NULL_ID, initData.drawName, initData.idTool, qoParent),
+    QGraphicsPathItem(parent),
+    m_pieceId(initData.idObject)
 {
-    IncrementNodes(VAbstractTool::data.GetPiecePath(initData.id));
     RefreshGeometry();
-    ToolCreation(initData.typeCreation);
+    VToolPiecePath::ToolCreation(initData.typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -307,14 +309,31 @@ void VToolPiecePath::RefreshGeometry()
     {
         QVector<QPointF> cuttingPath;
         const quint32 pieceId = VAbstractTool::data.GetPieceForPiecePath(m_id);
+        bool showFullPiece = true;
+        QLineF mirrorLine;
         if (pieceId > NULL_ID)
         {
-            VPiece piece = VAbstractTool::data.GetPiece(pieceId);
+            VPiece const piece = VAbstractTool::data.GetPiece(pieceId);
             // We cannot use current VContainer because it doesn't have current seam allowance value
             const VContainer pData = VAbstractPattern::getTool(pieceId)->getData();
             cuttingPath = piece.CuttingPathPoints(&pData);
+
+            showFullPiece = piece.IsShowFullPiece();
+            mirrorLine = piece.SeamAllowanceMirrorLine(&pData);
         }
         QPainterPath p = path.PainterPath(this->getData(), cuttingPath);
+
+        if (!path.IsNotMirrored() && showFullPiece && !mirrorLine.isNull())
+        {
+            QVector<VLayoutPoint> points = path.PathPoints(this->getData(), cuttingPath);
+            const QTransform matrix = VGObject::FlippingMatrix(mirrorLine);
+            std::transform(points.begin(), points.end(), points.begin(),
+                           [&matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
+            QVector<QPointF> casted;
+            CastTo(points, casted);
+            p.addPath(VPiecePath::MakePainterPath(casted));
+        }
+
         p.setFillRule(Qt::OddEvenFill);
 
         this->setPath(p);

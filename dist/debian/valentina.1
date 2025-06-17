@@ -1,6 +1,6 @@
 .\" Manpage for valentina.
 .\" Contact dismine@gmail.com to correct errors.
-.TH valentina 1 "18 July, 2018" "valentina man page"
+.TH valentina 1 "2 April, 2025" "valentina man page"
 .SH NAME
 Valentina \- Pattern making program.
 .SH SYNOPSIS
@@ -23,6 +23,10 @@ Displays version information.
 The path to output destination folder. By default the directory at which the application was started. The path must exists and be reachable for the program.
 .IP "-m, --mfile <The measure file>"
 .RB "Path to custom measure file (" "export mode" ")."
+.IP "-n, --time <Time>"
+.RB "<Time> in minutes given for the algorithm to find best layout (" "export mode" "). Time must be in range from 1 minute to 60 minutes. Default value 1 minute."
+.IP "--coefficient <Coefficient>"
+.RB "Set layout efficiency coefficient (" "export mode" "). Layout efficiency coefficient is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. Coefficient must be in range from 0 to 100. Default value 0."
 .IP "-f, --format <Format number>" 
 .RB "Number corresponding to output format (default = 0, " "export mode" "):" 
 .RS 
@@ -71,47 +75,59 @@ The path to output destination folder. By default the directory at which the app
 .BR "*" " AutoCAD DXF 2013 (flat) files (*.dxf) = 14,"
 .RE
 .RS
-.BR "*" " AutoCAD DXF R10 AAMA files (*.dxf) = 15,"
+.BR "*" " AutoCAD DXF AAMA files (*.dxf) = 16,"
 .RE
 .RS
-.BR "*" " AutoCAD DXF R11/12 AAMA files (*.dxf) = 16,"
+.BR "*" " AutoCAD DXF ASTM файли (*.dxf) = 25,"
 .RE
 .RS
-.BR "*" " AutoCAD DXF R13 AAMA files (*.dxf) = 17,"
+.BR "*" " PDF tiled files (*.pdf) = 33,"
 .RE
 .RS
-.BR "*" " AutoCAD DXF R14 AAMA files (*.dxf) = 18,"
+.BR "*" " Raw Layout Data files (*.rld) = 35,"
 .RE
 .RS
-.BR "*" " AutoCAD DXF 2000 AAMA files (*.dxf) = 19,"
+.BR "*" " TIFF files (*.tif) = 36,"
 .RE
 .RS
-.BR "*" " AutoCAD DXF 2004 AAMA files (*.dxf) = 20,"
+.BR "*" " HP-GL files (*.hpgl) = 37,"
 .RE
 .RS
-.BR "*" " AutoCAD DXF 2007 AAMA files (*.dxf) = 21,"
-.RE
-.RS
-.BR "*" " AutoCAD DXF 2010 AAMA files (*.dxf) = 22,"
-.RE
-.RS
-.BR "*" " AutoCAD DXF 2013 AAMA files (*.dxf) = 23,"
-.RE
-.RS
-.BR "*" " PDF tiled files (*.pdf) = 33."
+.BR "*" " HP-GL/2 files (*.hpgl) = 38."
 .RE
 .IP "--bdxf"
 .RB "Export dxf in binary form."
+.IP "--dxfApparelComp <Mode number>" 
+.RB "Number corresponding to compatibility mode for DXF AAMA/ASTM format (default = 0, " "export mode" "):
+.RS 
+.BR "*" " By standard = 0,"
+.RE
+.RS 
+.BR "*" " Richpeace CAD V8 = 1,"
+.RE
+.RS 
+.BR "*" " Richpeace CAD V9 = 2,"
+.RE
+.RS 
+.BR "*" " Richpeace CAD V10 = 3,"
+.RE
+.RS 
+.BR "*" " Clo3D = 4."
+.RE
+.IP "--noGrainline"
+.RB "Show/hide grainline when export layout."
 .IP "--text2paths"
 .RB "Export text as paths."
 .IP "--exportOnlyDetails"
 .RB "Export only details. Export details as they positioned in the details mode. Any layout related options will be ignored."
 .IP "--exportSuchDetails <The name regex>"
 .RB "Export only details that match a piece name regex."
-.IP "-x, --gsize <The size value>"
-.RB "Set size value a pattern file, that was opened with multisize measurements " "(export mode)" ". Valid values: 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56cm."
-.IP "-e, --gheight <The height value>"
-.RB "Set height value a pattern file, that was opened with multisize measurements (" "export mode" "). Valid values: 92, 98, 104, 110, 116, 122, 128, 134, 140, 146, 152, 158, 164, 170, 176, 182, 188, 194, 200cm."
+.IP "--dimensionA <The dimension A base>"
+.RB "Set base for dimension A in the multisize measurements units " "(export mode)" "."
+.IP "--dimensionB <The dimension B base>"
+.RB "Set base for dimension B in the multisize measurements units " "(export mode)" "."
+.IP "--dimensionC <The dimension C base>"
+.RB "Set base for dimension C in the multisize measurements units " "(export mode)" "."
 .IP "--userMaterial <User material>"                      
 .RB "Use this option to override user material defined in pattern. The value must be in form <number>@<user matrial name>. The number should be in range from 1 to 20. For example, 1@Fabric2. The key can be used multiple times. Has no effect in GUI mode."
 .IP "-p, --pageformat <Template number>"
@@ -138,29 +154,34 @@ The path to output destination folder. By default the directory at which the app
 .BR "*" " Legal = 6,"
 .RE
 .RS
-.BR "*" " Roll 24in = 7,"
+.BR "*" " Tabloid = 7,"
 .RE
 .RS
-.BR "*" " Roll 30in = 8,"
+.BR "*" " Roll 24in = 8,"
 .RE
 .RS
-.BR "*" " Roll 36in = 9,"
+.BR "*" " Roll 30in = 9,"
 .RE
 .RS
-.BR "*" " Roll 42in = 10,"
+.BR "*" " Roll 36in = 10,"
 .RE
 .RS
-.BR "*" " Roll 44in = 11,"
+.BR "*" " Roll 42in = 11,"
 .RE
 .RS
-.BR "*" " Roll 48in = 12,"
+.BR "*" " Roll 44in = 12,"
 .RE
 .RS
-.BR "*" " Roll 62in = 13,"
+.BR "*" " Roll 48in = 13,"
 .RE
 .RS
-.BR "*" " Roll 72in = 14."
+.BR "*" " Roll 62in = 14,"
 .RE
+.RS
+.BR "*" " Roll 72in = 15."
+.RE
+.IP "--landscapeOrientation"
+.RB "Switch page template orientation to landscape (" "export mode" "). This option has effect only for one of predefined page templates."
 .IP "-W, --pagew <The page width>"
 .RB "Page width in current units like 12.0 (cannot be used with \*(lqpageformat\*(rq, " "export mode" ")."
 .IP "-H, --pageh <The page height>"
@@ -177,18 +198,30 @@ The path to output destination folder. By default the directory at which the app
 .RB "Page top margin in current units like 3.0 (" "export mode" "). If not set will be used value from default printer. Or 0 if none printers was found."
 .IP "-B, --bmargin <The bottom margin>"
 .RB "Page bottom margin in current units like 3.0 (" "export mode" "). If not set will be used value from default printer. Or 0 if none printers was found."
-.IP "-r, --rotate <Angle>"
-.RB "Rotation in degrees (one of predefined, " "export mode" "). Default value is " "180" ". 0 is no-rotate. Valid values: 0, 1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 18, 20, 24, 30, 36, 40, 45, 60, 72, 90, 180. Each value show how many times details will be rotated. For example 180 mean two times (360/180=2) by 180 degree."
+.IP "--xscale <Horizontal scale>"
+.RB "Set horizontal scale factor from 0.01 to 3.0 (default = 1.0, " "export mode" ")."
+.IP "--yscale <Vertical scale>"
+.RB "Set vertical scale factor from 0.01 to 3.0 (default = 1.0, " "export mode" ")."
+.IP "--followGrainline"
+.RB "Order detail to follow grainline direction (" "export mode" ")."
+.IP "--manualPriority"
+.RB "Follow manual priority over priority by square (" "export mode" ")."
+.IP "--nestQuantity"
+.RB "Nest quantity copies of each piece (" "export mode" ").
 .IP "-c, --crop"
 .RB "Auto crop unused length (" "export mode" ")."
+.IP "--cropWidth"
+.RB "Auto crop unused width (" "export mode" ")."
 .IP "-u, --unite"
 .RB "Unite pages if possible (" "export mode" "). Maximum value limited by QImage that supports only a maximum of " "32768x32768 px" " images."
+.IP "--preferOneSheetSolution"
+.RB "Prefer one sheet layout solution (" "export mode" ")."
+.IP "--boundaryTogetherWithNotches"
+.RB "Export boundary together with notches (" "export mode" ")."
 .IP "-S, --savelen"
 .RB "Save length of the sheet if set (" "export mode" "). The option tells the program to use as much as possible width of sheet. Quality of a layout can be worse when this option was used."
 .IP "-l, --layounits <The unit>"
 .RB "Layout units (as paper's one except px, " "export mode" ")."
-.IP "-s, --shiftlen <Shift length>"
-.RB "Shift layout length measured in layout units (" "export mode" "). The option show how many points along edge will be used in creating a layout."
 .IP "-G, --gapwidth <The gap width>"
 .RB "The layout gap width x2, measured in layout units (" "export mode" "). Set distance between details and a detail and a sheet."
 .IP "-g, --groups <Grouping type>"
@@ -585,7 +618,10 @@ The path to output destination folder. By default the directory at which the app
 .BR "*" " Letter = 5,"
 .RE
 .RS
-.BR "*" " Legal = 6."
+.BR "*" " Legal = 6,"
+.RE
+.RS
+.BR "*" " Tabloid = 7."
 .RE
 .IP "--tiledlmargin <The left margin>"               
 .RB "Tiled page left margin in current units like 3.0 (" "export mode" "). If not set will be used default value 1 cm."
@@ -600,6 +636,13 @@ The path to output destination folder. By default the directory at which the app
 .IP Arguments: 
 .I filename
 \- a pattern file.
+.SH EXAMPLE
+.IP "Export a layout to tiled PDF:" 
+.SB "valentina --basename test --destination /home/user/tiled --format 33 --mfile /home/user/measurements/m1.vit --pedantic"
+.IP "Export pieces to DXF AAMA bypassing the layout stage:"
+.SB "valentina --basename test --destination /home/user/aama --format 18 --mfile /home/user/measurements/m1.vit --exportOnlyDetails --pedantic --exportSuchDetails ." 
+.IP "Export a layout to tiled PDF with final measurements:" 
+.SB "valentina --basename test --destination /home/user/tiled --format 33 --mfile /home/user/measurements/m1.vit --pedantic --csvExportFM /home/user/tiled/test.csv"
 .SH AUTHOR
 .RI "This  manual  page  was  written  by Roman Telezhynskyi <" dismine@gmail.com ">"
 .SH "SEE ALSO"

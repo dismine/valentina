@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -34,40 +34,55 @@
 
 namespace Ui
 {
-    class DialogInsertNode;
+class DialogInsertNode;
 }
 
-class DialogInsertNode : public DialogTool
+class DialogInsertNode final : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
-    explicit DialogInsertNode(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    virtual ~DialogInsertNode();
+    explicit DialogInsertNode(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
+    ~DialogInsertNode() override;
 
-    virtual void SetPiecesList(const QVector<quint32> &list) override;
+    void SetPiecesList(const QVector<quint32> &list) override;
 
-    quint32 GetPieceId() const;
-    void    SetPieceId(quint32 id);
+    auto GetPieceId() const -> quint32;
+    void SetPieceId(quint32 id);
 
-    VPieceNode GetNode() const;
-    void       SetNode(const VPieceNode &node);
+    auto GetNodes() const -> QVector<VPieceNode>;
+
+    void ShowDialog(bool click) override;
 
 public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type) override;
+    void SelectedObject(bool selected, quint32 object, quint32 tool) override;
 
 protected:
-    virtual void CheckState() final;
+    auto IsValid() const -> bool override;
+
+private slots:
+    void ShowContextMenu(const QPoint &pos);
+    void NodeSelected();
+    void NodeNumberChanged(int val);
 
 private:
-    Q_DISABLE_COPY(DialogInsertNode)
+    Q_DISABLE_COPY_MOVE(DialogInsertNode) // NOLINT
     Ui::DialogInsertNode *ui;
 
-    VPieceNode m_node;
-    bool m_flagItem;
+    QVector<VPieceNode> m_nodes{};
+    bool m_flagNodes{false};
+    bool m_flagError{false};
+
+    QMap<quint32, int> nodeNumbers{};
 
     void CheckPieces();
-    void CheckItem();
+    void CheckNodes();
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto DialogInsertNode::IsValid() const -> bool
+{
+    return m_flagNodes && m_flagError;
+}
 
 #endif // DIALOGINSERTNODE_H

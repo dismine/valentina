@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -42,20 +42,17 @@ public:
 
     virtual ~VAbstractFloatItemData();
 
-    VAbstractFloatItemData &operator=(const VAbstractFloatItemData &data);
-#ifdef Q_COMPILER_RVALUE_REFS
-    VAbstractFloatItemData &operator=(VAbstractFloatItemData &&data) Q_DECL_NOTHROW { Swap(data); return *this; }
-#endif
+    auto operator=(const VAbstractFloatItemData &data) -> VAbstractFloatItemData &;
 
-    inline void Swap(VAbstractFloatItemData &data) Q_DECL_NOTHROW
-    { std::swap(d, data.d); }
+    VAbstractFloatItemData(VAbstractFloatItemData &&data) noexcept;
+    auto operator=(VAbstractFloatItemData &&data) noexcept -> VAbstractFloatItemData &;
 
     // methods, which set and return values of different parameters
-    QPointF GetPos() const;
-    void    SetPos(const QPointF& ptPos);
+    auto GetPos() const -> QPointF;
+    void SetPos(const QPointF &ptPos);
 
-    bool IsVisible() const;
-    void SetVisible(bool bVisible);
+    auto IsEnabled() const -> bool;
+    void SetEnabled(bool bEnabled);
 
 private:
     QSharedDataPointer<VAbstractFloatItemDataPrivate> d;

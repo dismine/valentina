@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -42,16 +42,22 @@ class VToolRecord
 public:
     VToolRecord();
     VToolRecord(const quint32 &id, const Tool &typeTool, const QString &nameDraw);
-    bool operator==(const VToolRecord &record) const;
-    VToolRecord &operator=(const VToolRecord &record);
+    auto operator==(const VToolRecord &record) const -> bool;
+    auto operator=(const VToolRecord &record) -> VToolRecord &;
     VToolRecord(const VToolRecord &record);
-    quint32 getId() const;
+    ~VToolRecord() = default;
+
+    auto getId() const -> quint32;
     void    setId(const quint32 &value);
-    Tool    getTypeTool() const;
+
+    auto getTypeTool() const -> Tool;
     void    setTypeTool(const Tool &value);
-    QString getNameDraw() const;
+
+    auto getNameDraw() const -> QString;
     void    setNameDraw(const QString &value);
-    ~VToolRecord() Q_DECL_EQ_DEFAULT;
+
+    auto IsMandatory() const -> bool;
+
 private:
     /** @brief id tool id. */
     quint32 id;
@@ -68,7 +74,7 @@ private:
  * @brief getId return tool id.
  * @return id.
  */
-inline quint32 VToolRecord::getId() const
+inline auto VToolRecord::getId() const -> quint32
 {
     return id;
 }
@@ -88,7 +94,7 @@ inline void VToolRecord::setId(const quint32 &value)
  * @brief getTypeTool return tool type.
  * @return tool type.
  */
-inline Tool VToolRecord::getTypeTool() const
+inline auto VToolRecord::getTypeTool() const -> Tool
 {
     return typeTool;
 }
@@ -108,7 +114,7 @@ inline void VToolRecord::setTypeTool(const Tool &value)
  * @brief getNameDraw return pattern peace name.
  * @return pattern peace name.
  */
-inline QString VToolRecord::getNameDraw() const
+inline auto VToolRecord::getNameDraw() const -> QString
 {
     return nameDraw;
 }
@@ -124,7 +130,7 @@ inline void VToolRecord::setNameDraw(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool VToolRecord::operator==(const VToolRecord &record) const
+inline auto VToolRecord::operator==(const VToolRecord &record) const -> bool
 {
     // Id should be enough
     return id == record.getId()/* && typeTool == record.getTypeTool() && nameDraw == record.getNameDraw()*/;

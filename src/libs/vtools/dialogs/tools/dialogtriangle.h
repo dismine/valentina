@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef DIALOGTRIANGLE_H
 #define DIALOGTRIANGLE_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -40,46 +39,69 @@
 
 namespace Ui
 {
-    class DialogTriangle;
+class DialogTriangle;
 }
 
 /**
  * @brief The DialogTriangle class dialog for ToolTriangle. Help create point and edit option.
  */
-class DialogTriangle : public DialogTool
+class DialogTriangle final : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
-    DialogTriangle(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual ~DialogTriangle() override;
+    DialogTriangle(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
+    ~DialogTriangle() override;
 
-    quint32        GetAxisP1Id() const;
-    void           SetAxisP1Id(const quint32 &value);
+    auto GetAxisP1Id() const -> quint32;
+    void SetAxisP1Id(const quint32 &value);
 
-    quint32        GetAxisP2Id() const;
-    void           SetAxisP2Id(const quint32 &value);
+    auto GetAxisP2Id() const -> quint32;
+    void SetAxisP2Id(const quint32 &value);
 
-    quint32        GetFirstPointId() const;
-    void           SetFirstPointId(const quint32 &value);
+    auto GetFirstPointId() const -> quint32;
+    void SetFirstPointId(const quint32 &value);
 
-    quint32        GetSecondPointId() const;
-    void           SetSecondPointId(const quint32 &value);
+    auto GetSecondPointId() const -> quint32;
+    void SetSecondPointId(const quint32 &value);
 
-    void           SetPointName(const QString &value);
+    auto GetPointName() const -> QString;
+    void SetPointName(const QString &value);
+
+    void SetNotes(const QString &notes);
+    auto GetNotes() const -> QString;
+
 public slots:
-    virtual void   ChosenObject(quint32 id, const SceneObject &type) override;
-    virtual void   PointNameChanged() override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
+    void PointNameChanged() override;
+
 protected:
-    virtual void   ShowVisualization() override;
+    void ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void   SaveData() override;
+    void SaveData() override;
+    auto IsValid() const -> bool override;
+
 private:
-    Q_DISABLE_COPY(DialogTriangle)
+    Q_DISABLE_COPY_MOVE(DialogTriangle) // NOLINT
 
     /** @brief ui keeps information about user interface */
     Ui::DialogTriangle *ui;
+
+    QString pointName;
+
+    bool flagName;
+    bool flagError;
+
+    /** @brief number number of handled objects */
+    qint32 number{0};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto DialogTriangle::IsValid() const -> bool
+{
+    return flagName && flagError;
+}
 
 #endif // DIALOGTRIANGLE_H

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,62 +29,67 @@
 #ifndef VPOINTF_P_H
 #define VPOINTF_P_H
 
-#include <QSharedData>
-#include "vgeometrydef.h"
-#include "../vmisc/diagnostic.h"
+#include "../vmisc/defglobal.h"
 #include <QPointF>
+#include <QSharedData>
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
-class VPointFData : public QSharedData
+class VPointFData final : public QSharedData
 {
 public:
-
-    VPointFData()
-        : _mx(0), _my(0), _x(0), _y(0), m_showLabel(true)
-    {}
-
-    VPointFData(const VPointFData &point)
-        :QSharedData(point), _mx(point._mx), _my(point._my), _x(point._x), _y(point._y), m_showLabel(point.m_showLabel)
-    {}
-
-    explicit VPointFData(const QPointF &point)
-        :_mx(0), _my(0), _x(point.x()), _y(point.y()), m_showLabel(true)
-    {}
-
-    VPointFData(qreal x, qreal y, qreal mx, qreal my)
-        :_mx(mx), _my(my), _x(x), _y(y), m_showLabel(true)
-    {}
-
-    VPointFData(const QPointF &point, qreal mx, qreal my)
-        :_mx(mx), _my(my), _x(point.x()), _y(point.y()), m_showLabel(true)
-    {}
-
-    virtual ~VPointFData();
+    VPointFData() = default;
+    VPointFData(const VPointFData &point) = default;
+    explicit VPointFData(const QPointF &point);
+    VPointFData(qreal x, qreal y, qreal mx, qreal my);
+    VPointFData(const QPointF &point, qreal mx, qreal my);
+    ~VPointFData() = default;
 
     /** @brief _mx offset name respect to x */
-    qreal   _mx;
+    qreal _mx{0}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief _my offset name respect to y */
-    qreal   _my;
+    qreal _my{0}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief _x x coordinate */
-    qreal   _x;
+    qreal _x{0}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief _y y coordinate */
-    qreal   _y;
+    qreal _y{0}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief m_hideLabel show or not label for this point */
-    bool m_showLabel;
+    bool m_showLabel{true}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
-    VPointFData &operator=(const VPointFData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN_MOVE(VPointFData) // NOLINT
 };
 
-VPointFData::~VPointFData()
-{}
+//---------------------------------------------------------------------------------------------------------------------
+inline VPointFData::VPointFData(const QPointF &point)
+  : _x(point.x()),
+    _y(point.y())
+{
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline VPointFData::VPointFData(qreal x, qreal y, qreal mx, qreal my)
+  : _mx(mx),
+    _my(my),
+    _x(x),
+    _y(y)
+{
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline VPointFData::VPointFData(const QPointF &point, qreal mx, qreal my)
+  : _mx(mx),
+    _my(my),
+    _x(point.x()),
+    _y(point.y())
+{
+}
 
 QT_WARNING_POP
 

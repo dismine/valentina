@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -33,14 +33,16 @@
 
 class TST_VToolUnionDetails : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     explicit TST_VToolUnionDetails(QObject *parent = nullptr);
 private slots:
     void TestUnitingMainPaths_data();
     void TestUnitingMainPaths();
+
 private:
-    Q_DISABLE_COPY(TST_VToolUnionDetails)
+    Q_DISABLE_COPY_MOVE(TST_VToolUnionDetails) // NOLINT
 };
 
 #endif // TST_VTOOLUNIONDETAILS_H

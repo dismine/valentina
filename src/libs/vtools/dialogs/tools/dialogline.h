@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef DIALOGLINE_H
 #define DIALOGLINE_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -40,44 +39,63 @@
 
 namespace Ui
 {
-    class DialogLine;
+class DialogLine;
 }
 
 /**
  * @brief The DialogLine class dialog for ToolLine. Help create line and edit option.
  */
-class DialogLine : public DialogTool
+class DialogLine final : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
-    DialogLine(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual ~DialogLine() override;
+    DialogLine(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
+    ~DialogLine() override;
 
-    quint32        GetFirstPoint() const;
-    void           SetFirstPoint(const quint32 &value);
+    auto GetFirstPoint() const -> quint32;
+    void SetFirstPoint(quint32 value);
 
-    quint32        GetSecondPoint() const;
-    void           SetSecondPoint(const quint32 &value);
+    auto GetSecondPoint() const -> quint32;
+    void SetSecondPoint(quint32 value);
 
-    QString        GetTypeLine() const;
-    void           SetTypeLine(const QString &value);
+    auto GetTypeLine() const -> QString;
+    void SetTypeLine(const QString &value);
 
-    QString        GetLineColor() const;
-    void           SetLineColor(const QString &value);
+    auto GetLineColor() const -> QString;
+    void SetLineColor(const QString &value);
+
+    void SetNotes(const QString &notes);
+    auto GetNotes() const -> QString;
+
 public slots:
-    virtual void   ChosenObject(quint32 id, const SceneObject &type) override;
-    virtual void   PointNameChanged() override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
+    void PointNameChanged() override;
+
 protected:
-    virtual void   ShowVisualization() override;
+    void ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void   SaveData() override;
+    void SaveData() override;
+    auto IsValid() const -> bool override;
+
 private:
-    Q_DISABLE_COPY(DialogLine)
+    Q_DISABLE_COPY_MOVE(DialogLine) // NOLINT
 
     /** @brief ui keeps information about user interface */
     Ui::DialogLine *ui;
+
+    bool flagError;
+
+    /** @brief number number of handled objects */
+    qint32 number{0};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto DialogLine::IsValid() const -> bool
+{
+    return flagError;
+}
 
 #endif // DIALOGLINE_H

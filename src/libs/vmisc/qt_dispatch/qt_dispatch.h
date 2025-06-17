@@ -6,87 +6,81 @@
 #ifndef THREAD_DISPATCHER_H
 #define THREAD_DISPATCHER_H
 
-#include <QThread>
-#include <QMetaObject>
-#include <QThread>
 #include <QCoreApplication>
+#include <QMetaObject>
 #include <QObject>
-
-#include <functional>
+#include <QThread>
 #include <cassert>
+#include <functional>
+#include <utility>
 
-#include "logging.h"
-
-#ifdef __GNUC__
-#define V_UNUSED __attribute__ ((unused))
-#else
-#define V_UNUSED
-#endif
-
-typedef std::function<void()> voidBlock;
+using voidBlock = std::function<void()>;
 
 class WorkerClass : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
-    WorkerClass(QThread *thread)
+    explicit WorkerClass(QThread *thread)
     {
         moveToThread(thread);
         connect(QThread::currentThread(), &QThread::finished, this, &WorkerClass::deleteLater);
     }
 public slots:
-    void DoWork(voidBlock block)
+    void DoWork(const voidBlock &block)
     {
         block();
         deleteLater();
     }
 };
 
-static inline void q_dispatch_async(QThread* thread, voidBlock block) V_UNUSED;
-static inline void q_dispatch_async(QThread* thread, voidBlock block)
+Q_DECL_UNUSED static inline void q_dispatch_async(QThread *thread, const voidBlock &block);
+static inline void q_dispatch_async(QThread *thread, const voidBlock &block)
 {
-  qRegisterMetaType<voidBlock>("voidBlock");
+    qRegisterMetaType<voidBlock>("voidBlock");
 
-  WorkerClass *worker = new WorkerClass(thread);
-  QMetaObject::invokeMethod(worker, "DoWork", Qt::QueuedConnection, Q_ARG(voidBlock, block));
+    auto *worker = new WorkerClass(thread);
+    QMetaObject::invokeMethod(worker, "DoWork", Qt::QueuedConnection, Q_ARG(voidBlock, block));
 }
 
-static inline void q_dispatch_async_main(voidBlock block) V_UNUSED;
-static inline void q_dispatch_async_main(voidBlock block)
+Q_DECL_UNUSED static inline void q_dispatch_async_main(const voidBlock &block);
+static inline void q_dispatch_async_main(const voidBlock &block)
 {
-  QThread *mainThread = QCoreApplication::instance()->thread();
-  q_dispatch_async(mainThread, block);
+    QThread *mainThread = QCoreApplication::instance()->thread();
+    q_dispatch_async(mainThread, block);
 }
 
-typedef std::function<void(QtMsgType, const QMessageLogContext &, const QString &)> msgHandlerBlock;
+using msgHandlerBlock = std::function<void(QtMsgType, const QMessageLogContext &, const QString &)>;
 
 class MsgHandlerWorkerClass : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
-    MsgHandlerWorkerClass(QThread *thread, QtMsgType type, const QMessageLogContext &context, const QString &msg)
-        : m_type(type),
-          m_msg(msg),
-          m_line(context.line),
-          m_file(context.file),
-          m_function(context.function),
-          m_category(context.category)
+    MsgHandlerWorkerClass(QThread *thread, QtMsgType type, const QMessageLogContext &context, QString msg)
+      : m_type(type),
+        m_msg(std::move(msg)),
+        m_line(context.line),
+        m_file(context.file),
+        m_function(context.function),
+        m_category(context.category)
     {
 #ifndef V_NO_ASSERT
-        assert(context.version == 2);
+        assert(context.version <= 3);
 #endif
         moveToThread(thread);
         connect(QThread::currentThread(), &QThread::finished, this, &WorkerClass::deleteLater);
     }
 public slots:
-    void DoWork(msgHandlerBlock block)
+    void DoWork(const msgHandlerBlock &block)
     {
-        block(m_type, QMessageLogContext(qUtf8Printable(m_file), m_line, qUtf8Printable(m_function),
-                                         qUtf8Printable(m_category)), m_msg);
+        block(
+            m_type,
+            QMessageLogContext(qUtf8Printable(m_file), m_line, qUtf8Printable(m_function), qUtf8Printable(m_category)),
+            m_msg);
         deleteLater();
     }
+
 private:
     QtMsgType m_type;
     QString m_msg;
@@ -98,26 +92,24 @@ private:
     QString m_category;
 };
 
-static inline void q_dispatch_async(QThread* thread, msgHandlerBlock block, QtMsgType type,
-                                    const QMessageLogContext &context, const QString &msg) V_UNUSED;
-static inline void q_dispatch_async(QThread* thread, msgHandlerBlock block, QtMsgType type,
+Q_DECL_UNUSED static inline void q_dispatch_async(QThread *thread, const msgHandlerBlock &block, QtMsgType type,
+                                                  const QMessageLogContext &context, const QString &msg);
+static inline void q_dispatch_async(QThread *thread, const msgHandlerBlock &block, QtMsgType type,
                                     const QMessageLogContext &context, const QString &msg)
 {
-  qRegisterMetaType<msgHandlerBlock>("msgHandlerBlock");
+    qRegisterMetaType<msgHandlerBlock>("msgHandlerBlock");
 
-  MsgHandlerWorkerClass *worker = new MsgHandlerWorkerClass(thread, type, context, msg);
-  QMetaObject::invokeMethod(worker, "DoWork", Qt::QueuedConnection, Q_ARG(msgHandlerBlock, block));
+    auto *worker = new MsgHandlerWorkerClass(thread, type, context, msg);
+    QMetaObject::invokeMethod(worker, "DoWork", Qt::QueuedConnection, Q_ARG(msgHandlerBlock, block));
 }
 
-static inline void q_dispatch_async_main(msgHandlerBlock block, QtMsgType type, const QMessageLogContext &context,
-                                         const QString &msg) V_UNUSED;
-static inline void q_dispatch_async_main(msgHandlerBlock block, QtMsgType type, const QMessageLogContext &context,
-                                         const QString &msg)
+Q_DECL_UNUSED static inline void q_dispatch_async_main(const msgHandlerBlock &block, QtMsgType type,
+                                                       const QMessageLogContext &context, const QString &msg);
+static inline void q_dispatch_async_main(const msgHandlerBlock &block, QtMsgType type,
+                                         const QMessageLogContext &context, const QString &msg)
 {
     QThread *mainThread = QCoreApplication::instance()->thread();
     q_dispatch_async(mainThread, block, type, context, msg);
 }
-
-#undef V_UNUSED
 
 #endif // THREAD_DISPATCHER_H

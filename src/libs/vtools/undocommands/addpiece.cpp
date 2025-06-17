@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -32,18 +32,15 @@
 #include "../vwidgets/vmaingraphicsview.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-AddPiece::AddPiece(const QDomElement &xml, VAbstractPattern *doc, VContainer data, VMainGraphicsScene *scene,
+AddPiece::AddPiece(const QDomElement &xml, VAbstractPattern *doc, const VContainer &data, VMainGraphicsScene *scene,
                    const QString &drawName, QUndoCommand *parent)
-    : VUndoCommand(xml, doc, parent),
-      m_detail(),
-      m_drawName(drawName),
-      m_tool(),
-      m_record(),
-      m_scene(scene),
-      m_data(data)
+  : VUndoCommand(xml, doc, parent),
+    m_drawName(drawName),
+    m_scene(scene),
+    m_data(data)
 {
     setText(tr("add detail"));
-    nodeId = doc->GetParametrId(xml);
+    nodeId = VAbstractPattern::GetParametrId(xml);
     m_detail = data.GetPiece(nodeId);
     m_record = VAbstractTool::GetRecord(nodeId, Tool::Piece, doc);
 }
@@ -51,10 +48,7 @@ AddPiece::AddPiece(const QDomElement &xml, VAbstractPattern *doc, VContainer dat
 //---------------------------------------------------------------------------------------------------------------------
 AddPiece::~AddPiece()
 {
-    if (not m_tool.isNull())
-    {
-        delete m_tool;
-    }
+    delete m_tool.data();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -65,7 +59,7 @@ void AddPiece::undo()
     QDomElement details = GetDetailsSection();
     if (not details.isNull())
     {
-        QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagDetail);
+        QDomElement const domElement = doc->FindElementById(nodeId, VAbstractPattern::TagDetail);
         if (domElement.isElement())
         {
             if (details.removeChild(domElement).isNull())
@@ -74,10 +68,11 @@ void AddPiece::undo()
                 return;
             }
 
-            m_tool = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(nodeId));
+            m_tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId));
             SCASSERT(not m_tool.isNull());
             m_tool->DisconnectOutsideSignals();
             m_tool->hide();
+            m_tool->CancelLabelRendering();
 
             m_scene->removeItem(m_tool);
 
@@ -127,7 +122,7 @@ void AddPiece::redo()
             m_scene->addItem(m_tool);
             m_tool->ConnectOutsideSignals();
             m_tool->show();
-            VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView(), m_tool);
+            VMainGraphicsView::NewSceneRect(m_scene, VAbstractValApplication::VApp()->getSceneView(), m_tool);
             m_tool.clear();
         }
 
@@ -140,7 +135,7 @@ void AddPiece::redo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement AddPiece::GetDetailsSection() const
+auto AddPiece::GetDetailsSection() const -> QDomElement
 {
     QDomElement details;
     if (m_drawName.isEmpty())

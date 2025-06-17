@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,43 +29,40 @@
 #ifndef VLINELENGTH_H
 #define VLINELENGTH_H
 
-#include <qcompilerdetection.h>
 #include <QSharedDataPointer>
 #include <QTypeInfo>
 #include <QtGlobal>
 
 #include "../vmisc/def.h"
-#include "../ifc/ifcdef.h"
 #include "vinternalvariable.h"
 
 class VLengthLineData;
 class VPointF;
 
-class VLengthLine :public VInternalVariable
+class VLengthLine final : public VInternalVariable
 {
 public:
     VLengthLine();
     VLengthLine(const VPointF *p1, const quint32 &p1Id, const VPointF *p2, const quint32 &p2Id, Unit patternUnit);
     VLengthLine(const VLengthLine &var);
+    ~VLengthLine() override;
 
-    virtual ~VLengthLine() override;
+    auto operator=(const VLengthLine &var) -> VLengthLine &;
 
-    VLengthLine &operator=(const VLengthLine &var);
-#ifdef Q_COMPILER_RVALUE_REFS
-    VLengthLine &operator=(VLengthLine &&var) Q_DECL_NOTHROW { Swap(var); return *this; }
-#endif
+    VLengthLine(VLengthLine &&var) noexcept;
+    auto operator=(VLengthLine &&var) noexcept -> VLengthLine &;
 
-    inline void Swap(VLengthLine &var) Q_DECL_NOTHROW
-    { VInternalVariable::Swap(var); std::swap(d, var.d); }
+    auto Filter(quint32 id) -> bool override;
 
-    virtual bool Filter(quint32 id) override;
-    void         SetValue(const VPointF *p1, const VPointF *p2);
-    quint32      GetP1Id() const;
-    quint32      GetP2Id() const;
+    void SetValue(const VPointF *p1, const VPointF *p2);
+
+    auto GetP1Id() const -> quint32;
+    auto GetP2Id() const -> quint32;
+
 private:
     QSharedDataPointer<VLengthLineData> d;
 };
 
-Q_DECLARE_TYPEINFO(VLengthLine, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VLengthLine, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VLINELENGTH_H

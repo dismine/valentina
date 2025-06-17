@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -34,19 +34,20 @@
 class VAbstractPattern;
 class VContainer;
 class VPiece;
+class QTableWidgetItem;
 
 namespace Ui
 {
-    class VWidgetDetails;
+class VWidgetDetails;
 }
 
 class VWidgetDetails : public QWidget
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit VWidgetDetails(VContainer *data, VAbstractPattern *doc, QWidget *parent = nullptr);
-    virtual ~VWidgetDetails();
+    ~VWidgetDetails() override;
 
 signals:
     void Highlight(quint32 id);
@@ -54,19 +55,32 @@ signals:
 public slots:
     void UpdateList();
     void SelectDetail(quint32 id);
+    void ToggledPiece(quint32 id);
+
+protected:
+    void changeEvent(QEvent *event) override;
 
 private slots:
     void InLayoutStateChanged(int row, int column);
+    void RenameDetail(int row, int column);
     void ShowContextMenu(const QPoint &pos);
 
+    void on_checkBoxHideNotInLayout_stateChanged();
+
 private:
-    Q_DISABLE_COPY(VWidgetDetails)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VWidgetDetails) // NOLINT
     Ui::VWidgetDetails *ui;
-    VAbstractPattern   *m_doc;
-    VContainer         *m_data;
+    VAbstractPattern *m_doc;
+    VContainer *m_data;
+    QTimer *m_updateListTimer;
 
     void FillTable(const QHash<quint32, VPiece> *details);
     void ToggleSectionDetails(bool select);
+    void ToggledPieceItem(QTableWidgetItem *item);
+
+    Q_REQUIRED_RESULT static auto PrepareInLayoutColumnCell(const VPiece &det, quint32 id) -> QTableWidgetItem *;
+    Q_REQUIRED_RESULT static auto PreparePieceNameColumnCell(const VPiece &det) -> QTableWidgetItem *;
 };
 
 #endif // VWIDGETDETAILS_H

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -38,40 +38,47 @@
 
 class VInternalVariableData;
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
+
 class VInternalVariable
 {
 public:
     VInternalVariable();
     VInternalVariable(const VInternalVariable &var);
-
     virtual ~VInternalVariable();
 
-    VInternalVariable &operator=(const VInternalVariable &var);
-#ifdef Q_COMPILER_RVALUE_REFS
-    VInternalVariable &operator=(VInternalVariable &&var) Q_DECL_NOTHROW { Swap(var); return *this; }
-#endif
+    auto operator=(const VInternalVariable &var) -> VInternalVariable &;
 
-    inline void Swap(VInternalVariable &var) Q_DECL_NOTHROW
-    { std::swap(d, var.d); }
+    VInternalVariable(VInternalVariable &&var) noexcept;
+    auto operator=(VInternalVariable &&var) noexcept -> VInternalVariable &;
 
-    virtual qreal  GetValue() const;
-    virtual qreal* GetValue();
+    virtual auto GetValue() const -> qreal;
+    virtual auto GetValue() -> qreal *;
 
-    QString      GetName() const;
-    void         SetName(const QString &name);
+    auto GetName() const -> QString;
+    void SetName(const QString &name);
 
-    VarType      GetType() const;
-    void         SetType(const VarType &type);
+    auto GetType() const -> VarType;
 
-    virtual bool Filter(quint32 id);
+    void SetAlias(const QString &alias);
+    auto GetAlias() const -> QString;
 
-    virtual bool IsNotUsed() const;
+    virtual auto Filter(quint32 id) -> bool;
+
+    virtual auto IsNotUsed() const -> bool;
+
 protected:
-    void SetValue(const qreal &value);
+    void StoreValue(qreal value);
+    void SetType(const VarType &type);
+
 private:
     QSharedDataPointer<VInternalVariableData> d;
 };
 
-Q_DECLARE_TYPEINFO(VInternalVariable, Q_MOVABLE_TYPE);
+QT_WARNING_POP
+
+Q_DECLARE_TYPEINFO(VInternalVariable, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VINTERNALVARIABLE_H

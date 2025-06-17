@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,25 +29,27 @@
 #ifndef TST_VELLIPTICALARC_H
 #define TST_VELLIPTICALARC_H
 
-#include <QObject>
+#include "../vtest/abstracttest.h"
 
-class TST_VEllipticalArc : public QObject
+class TST_VEllipticalArc : public AbstractTest
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     explicit TST_VEllipticalArc(QObject *parent = nullptr);
 
 private slots:
     void CompareTwoWays_data();
     void CompareTwoWays();
-    void NegativeArc();
+    void ArcByLength_data();
+    void ArcByLength();
     void TestGetPoints1_data();
-    void TestGetPoints2_data();
-    void TestGetPoints3_data();
-    void TestGetPoints4_data();
     void TestGetPoints1();
+    void TestGetPoints2_data();
     void TestGetPoints2();
+    void TestGetPoints3_data();
     void TestGetPoints3();
+    void TestGetPoints4_data();
     void TestGetPoints4();
     void TestGetPoints5_data();
     void TestGetPoints5();
@@ -55,9 +57,12 @@ private slots:
     void TestRotation();
     void TestFlip_data();
     void TestFlip();
+    void EmptyArc_data();
+    void EmptyArc();
 
 private:
-    Q_DISABLE_COPY(TST_VEllipticalArc)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(TST_VEllipticalArc) // NOLINT
     void TestData();
 };
 

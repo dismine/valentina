@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2018 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,62 +29,73 @@
 
 #include <QtTest>
 
-#include "../vmisc/logging.h"
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
 
-const QString TST_AbstractTranslation::TagName           = QStringLiteral("name");
-const QString TST_AbstractTranslation::TagMessage        = QStringLiteral("message");
-const QString TST_AbstractTranslation::TagSource         = QStringLiteral("source");
-const QString TST_AbstractTranslation::TagTranslation    = QStringLiteral("translation");
+using namespace Qt::Literals::StringLiterals;
 
-const QString TST_AbstractTranslation::AttrType          = QStringLiteral("type");
-const QString TST_AbstractTranslation::AttrValVanished   = QStringLiteral("vanished");
+const QString TST_AbstractTranslation::TagName = QStringLiteral("name");
+const QString TST_AbstractTranslation::TagMessage = QStringLiteral("message");
+const QString TST_AbstractTranslation::TagSource = QStringLiteral("source");
+const QString TST_AbstractTranslation::TagTranslation = QStringLiteral("translation");
+
+const QString TST_AbstractTranslation::AttrType = QStringLiteral("type");
+const QString TST_AbstractTranslation::AttrValVanished = QStringLiteral("vanished");
 const QString TST_AbstractTranslation::AttrValUnfinished = QStringLiteral("unfinished");
-const QString TST_AbstractTranslation::AttrValObsolete   = QStringLiteral("obsolete");
+const QString TST_AbstractTranslation::AttrValObsolete = QStringLiteral("obsolete");
 
 //---------------------------------------------------------------------------------------------------------------------
 TST_AbstractTranslation::TST_AbstractTranslation(QObject *parent)
-    : QObject(parent),
-      tsFile(),
-      tsXML()
-{}
+  : QObject(parent),
+    tsFile(),
+    tsXML()
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomNodeList TST_AbstractTranslation::LoadTSFile(const QString &filename)
+auto TST_AbstractTranslation::LoadTSFile(const QString &filename) -> QDomNodeList
 {
     tsFile.reset();
-    tsFile = QSharedPointer<QFile>(new QFile(QString("%1/%2").arg(TS_DIR, filename)));
+    tsFile = QSharedPointer<QFile>(new QFile(u"%1/%2"_s.arg(TS_DIR, filename)));
     if (not tsFile->exists())
     {
-        const QString message = QString("Can't find '%1'.\n%2.").arg(filename, tsFile->errorString());
-        QWARN(qUtf8Printable(message));
-        return QDomNodeList();
+        qWarning("Can't find '%s'.\n%s.", qUtf8Printable(filename), qUtf8Printable(tsFile->errorString()));
+        return {};
     }
 
     if (tsFile->open(QIODevice::ReadOnly) == false)
     {
-        const QString message = QString("Can't open file '%1'.\n%2.").arg(filename, tsFile->errorString());
-        QWARN(qUtf8Printable(message));
-        return QDomNodeList();
+        qWarning("Can't open file '%s'.\n%s.", qUtf8Printable(filename), qUtf8Printable(tsFile->errorString()));
+        return {};
     }
 
+    tsXML.reset();
+    tsXML = QSharedPointer<QDomDocument>(new QDomDocument());
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
+    if (const QDomDocument::ParseResult result = tsXML->setContent(tsFile.data()); !result)
+    {
+        qWarning("Parsing error file %s in line %d column %d.", qUtf8Printable(filename),
+                 static_cast<int>(result.errorLine), static_cast<int>(result.errorColumn));
+        return {};
+    }
+#else
     QString errorMsg;
     int errorLine = -1;
     int errorColumn = -1;
-    tsXML.reset();
-    tsXML = QSharedPointer<QDomDocument>(new QDomDocument());
-    if (tsXML->setContent(tsFile.data(), &errorMsg, &errorLine, &errorColumn) == false)
+    if (!tsXML->setContent(tsFile.data(), &errorMsg, &errorLine, &errorColumn))
     {
-        const QString message = QString("Parsing error file %1 in line %2 column %3.")
-                .arg(filename).arg(errorLine).arg(errorColumn);
-        QWARN(qUtf8Printable(message));
-        return QDomNodeList();
+        qWarning("Parsing error file %s in line %d column %d.", qUtf8Printable(filename), errorLine, errorColumn);
+        return {};
     }
+#endif
 
     const QDomNodeList messages = tsXML->elementsByTagName(TagMessage);
     if (messages.isEmpty())
     {
-        QWARN("File doesn't contain any messages.");
-        return QDomNodeList();
+        qWarning("File doesn't contain any messages.");
+        return {};
     }
 
     return messages;

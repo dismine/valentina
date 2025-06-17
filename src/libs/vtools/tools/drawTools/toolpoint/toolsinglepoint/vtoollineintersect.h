@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 #ifndef VTOOLLINEINTERSECT_H
 #define VTOOLLINEINTERSECT_H
 
-#include <qcompilerdetection.h>
+
 #include <QDomElement>
 #include <QGraphicsItem>
 #include <QMetaObject>
@@ -64,20 +64,20 @@ struct VToolLineIntersectInitData : VToolSinglePointInitData
  */
 class VToolLineIntersect:public VToolSinglePoint
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
-    virtual void setDialog() override;
-    static VToolLineIntersect *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
-                                      VAbstractPattern *doc, VContainer *data);
-    static VToolLineIntersect *Create(VToolLineIntersectInitData initData);
+    virtual void SetDialog() override;
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolLineIntersect *;
+    static auto Create(VToolLineIntersectInitData initData) -> VToolLineIntersect *;
     static const QString ToolType;
-    virtual int  type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::LineIntersect)};
 
-    QString Line1P1Name() const;
-    QString Line1P2Name() const;
-    QString Line2P1Name() const;
-    QString Line2P2Name() const;
+    auto Line1P1Name() const -> QString;
+    auto Line1P2Name() const -> QString;
+    auto Line2P1Name() const -> QString;
+    auto Line2P2Name() const -> QString;
 
     virtual void ShowVisualization(bool show) override;
 protected slots:
@@ -89,9 +89,10 @@ protected:
     virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     virtual void    ReadToolAttributes(const QDomElement &domElement) override;
     virtual void    SetVisualization() override;
-    virtual QString MakeToolTip() const override;
+    virtual auto MakeToolTip() const -> QString override;
+
 private:
-    Q_DISABLE_COPY(VToolLineIntersect)
+    Q_DISABLE_COPY_MOVE(VToolLineIntersect) // NOLINT
 
     /** @brief p1Line1 id first point first line. */
     quint32       p1Line1;

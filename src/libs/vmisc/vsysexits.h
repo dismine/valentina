@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -30,6 +30,8 @@
 #define VSYSEXITS_H
 
 #include <QTextStream>
+#include <QIODevice>
+#include <cstdio>
 
 #ifdef __GNUC__
 #define V_UNUSED __attribute__ ((unused))
@@ -80,18 +82,22 @@ static const auto V_UNUSED V_EX_CONFIG = 78;      /*Something was found in an un
 #undef V_UNUSED
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QTextStream& vStdErr()
+inline auto vStdErr() -> QTextStream &
 {
     static QTextStream ts(stderr, QIODevice::Unbuffered | QIODevice::WriteOnly);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     ts.setCodec("UTF-8");
+#endif
     return ts;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QTextStream& vStdOut()
+inline auto vStdOut() -> QTextStream &
 {
     static QTextStream ts(stdout, QIODevice::Unbuffered | QIODevice::WriteOnly);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     ts.setCodec("UTF-8");
+#endif
     return ts;
 }
 

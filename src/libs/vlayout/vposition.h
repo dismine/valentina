@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,93 +29,119 @@
 #ifndef VPOSITION_H
 #define VPOSITION_H
 
-#include <qcompilerdetection.h>
 #include <QRunnable>
 #include <QVector>
 #include <QtGlobal>
 #include <atomic>
+
+#ifdef LAYOUT_DEBUG
+#include <QMutex>
+#endif
 
 #include "vbestsquare.h"
 #include "vcontour.h"
 #include "vlayoutdef.h"
 #include "vlayoutpiece.h"
 
-class VPosition : public QRunnable
+struct VPositionData
+{
+    VContour gContour{};
+    VLayoutPiece detail{};
+    int i{-1};
+    int j{-1};
+    bool rotate{false};
+    int rotationNumber{0};
+    bool followGrainline{false};
+    QVector<VCachedPositions> positionsCache{};
+    bool isOriginPaperOrientationPortrait{true};
+#ifdef LAYOUT_DEBUG
+    QVector<VLayoutPiece> details{};
+    QMutex *mutex{nullptr};
+#endif
+};
+
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
+
+class VPosition
 {
 public:
-    VPosition(const VContour &gContour, int j, const VLayoutPiece &detail, int i, std::atomic_bool *stop, bool rotate,
-              int rotationIncrease, bool saveLength);
-    virtual ~VPosition() override{}
+    VPosition() = default;
+    VPosition(const VPositionData &data, std::atomic_bool *stop, bool saveLength);
+    VPosition(const VPosition &) = default;
+    auto operator=(const VPosition &) -> VPosition & = default;
 
-    quint32 getPaperIndex() const;
-    void setPaperIndex(const quint32 &value);
+    VPosition(VPosition &&) = default;
+    auto operator=(VPosition &&) -> VPosition & = default;
 
-    quint32 getFrame() const;
-    void setFrame(const quint32 &value);
+    ~VPosition() = default;
 
-    quint32 getDetailsCount() const;
-    void setDetailsCount(const quint32 &value);
+    void run();
 
-    void setDetails(const QVector<VLayoutPiece> &details);
+    auto getBestResult() const -> VBestSquare;
 
-    VBestSquare getBestResult() const;
+    static auto ArrangeDetail(const VPositionData &data, std::atomic_bool *stop, bool saveLength) -> VBestSquare;
 
-    static void DrawDebug(const VContour &contour, const VLayoutPiece &detail, int frame, quint32 paperIndex,
-                          int detailsCount, const QVector<VLayoutPiece> &details = QVector<VLayoutPiece>());
-
-    static int Bias(int length, int maxLength);
+#ifdef LAYOUT_DEBUG
+    static void DumpFrame(const VContour &contour, const VLayoutPiece &detail, QMutex *mutex,
+                          const QVector<VLayoutPiece> &details);
+#endif
 
 private:
-    Q_DISABLE_COPY(VPosition)
-    VBestSquare bestResult;
-    const VContour gContour;
-    const VLayoutPiece detail;
-    int i;
-    int j;
-    quint32 paperIndex;
-    quint32 frame;
-    quint32 detailsCount;
-    QVector<VLayoutPiece> details;
-    std::atomic_bool *stop;
-    bool rotate;
-    int rotationIncrease;
+    bool m_isValid{false};
+    VBestSquare m_bestResult{};
+    VPositionData m_data{};
+    std::atomic_bool *stop{nullptr};
     /**
      * @brief angle_between keep angle between global edge and detail edge. Need for optimization rotation.
      */
-    qreal angle_between;
+    qreal angle_between{0};
 
-    enum class CrossingType : char
+    enum class CrossingType : qint8
     {
         NoIntersection = 0,
         Intersection = 1,
         EdgeError = 2
     };
 
-    enum class InsideType : char
+    enum class InsideType : qint8
     {
         Outside = 0,
         Inside = 1,
         EdgeError = 2
     };
 
-    virtual void run() override;
-
     void SaveCandidate(VBestSquare &bestResult, const VLayoutPiece &detail, int globalI, int detJ, BestFrom type);
 
-    bool CheckCombineEdges(VLayoutPiece &detail, int j, int &dEdge);
-    bool CheckRotationEdges(VLayoutPiece &detail, int j, int dEdge, int angle) const;
+    auto CheckCombineEdges(VLayoutPiece &detail, int j, int &dEdge) -> bool;
+    auto CheckRotationEdges(VLayoutPiece &detail, int j, int dEdge, qreal angle) const -> bool;
 
-    CrossingType Crossing(const VLayoutPiece &detail) const;
-    bool         SheetContains(const QRectF &rect) const;
+    void RotateOnAngle(qreal angle);
 
-    void CombineEdges(VLayoutPiece &detail, const QLineF &globalEdge, const int &dEdge);
-    void RotateEdges(VLayoutPiece &detail, const QLineF &globalEdge, int dEdge, int angle) const;
+    auto Crossing(const VLayoutPiece &detail) const -> CrossingType;
+    auto SheetContains(const QRectF &rect) const -> bool;
 
-    static QPainterPath ShowDirection(const QLineF &edge);
-    static QPainterPath DrawContour(const QVector<QPointF> &points);
-    static QPainterPath DrawDetails(const QVector<VLayoutPiece> &details);
+    void CombineEdges(VLayoutPiece &detail, const QLineF &globalEdge, int dEdge);
+    static void RotateEdges(VLayoutPiece &detail, const QLineF &globalEdge, int dEdge, qreal angle);
 
-    void Rotate(int increase);
+    void Rotate(int number);
+    void FollowGrainline();
+
+    auto FabricGrainline() const -> QLineF;
+
+    void FindBestPosition();
 };
+
+QT_WARNING_POP
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VPosition::FabricGrainline return fabric gainline accoding to paper orientation
+ * @return fabric gainline line
+ */
+inline auto VPosition::FabricGrainline() const -> QLineF
+{
+    return m_data.isOriginPaperOrientationPortrait ? QLineF(10, 10, 10, -100) : QLineF(10, 10, -100, 10);
+}
 
 #endif // VPOSITION_H

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 #ifndef VMAINGRAPHICSSCENE_H
 #define VMAINGRAPHICSSCENE_H
 
-#include <qcompilerdetection.h>
+
 #include <QGraphicsScene>
 #include <QMetaObject>
 #include <QObject>
@@ -47,22 +47,29 @@
  */
 class VMainGraphicsScene : public QGraphicsScene
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VMainGraphicsScene(QObject *parent = nullptr);
     explicit VMainGraphicsScene(const QRectF & sceneRect, QObject * parent = nullptr);
-    qint32        getHorScrollBar() const;
+    auto getHorScrollBar() const -> qint32;
     void          setHorScrollBar(const qint32 &value);
-    qint32        getVerScrollBar() const;
+    auto getVerScrollBar() const -> qint32;
     void          setVerScrollBar(const qint32 &value);
-    QTransform    transform() const;
+    auto transform() const -> QTransform;
     void          setTransform(const QTransform &transform);
     void          SetDisableTools(bool disable, const QString &namePP);
-    QPointF       getScenePos() const;
+    auto getScenePos() const -> QPointF;
 
-    QRectF        VisibleItemsBoundingRect() const;
+    auto VisibleItemsBoundingRect() const -> QRectF;
     void          InitOrigins();
     void          SetOriginsVisible(bool visible);
+
+    auto IsNonInteractive() const -> bool;
+    void          SetNonInteractive(bool nonInteractive);
+
+    void SetAcceptDrop(bool newAcceptDrop);
+    auto AcceptDrop() const -> bool;
+
 public slots:
     void          ChoosedItem(quint32 id, const SceneObject &type);
     void          SelectedItem(bool selected, quint32 object, quint32 tool);
@@ -70,6 +77,7 @@ public slots:
     void          EnableDetailsMode(bool mode);
     void          ItemsSelection(const SelectionType &type);
     void          HighlightItem(quint32 id);
+    void          UpdatePiecePassmarks();
 
     void          ToggleLabelSelection(bool enabled);
     void          TogglePointSelection(bool enabled);
@@ -105,7 +113,9 @@ signals:
 
     void          MouseLeftPressed();
     void          MouseLeftReleased();
-    void          ItemClicked(QGraphicsItem* pItem);
+    void          ItemByMousePress(QGraphicsItem* pItem);
+    void          ItemByMouseRelease(QGraphicsItem* pItem);
+    void          AddBackgroundImage(const QPointF &pos, const QString &fileName);
 
     /**
      * @brief ChoosedObject send option choosed object.
@@ -119,6 +129,7 @@ signals:
     void          CurveDetailsMode(bool mode);
     void          ItemSelection(const SelectionType &type);
     void          HighlightDetail(quint32 id);
+    void          UpdatePassmarks();
 
     void          EnableLabelItemSelection(bool enable);
     void          EnablePointItemSelection(bool enable);
@@ -145,6 +156,7 @@ signals:
     void          LanguageChanged();
 
 private:
+    Q_DISABLE_COPY_MOVE(VMainGraphicsScene) // NOLINT
     /** @brief horScrollBar value horizontal scroll bar. */
     qint32        horScrollBar;
 
@@ -155,6 +167,11 @@ private:
     QTransform    _transform;
     QPointF       scenePos;
     QVector<QGraphicsItem *> origins;
+
+    /** @brief m_nonInteractive all item on scene in non interactive. */
+    bool          m_nonInteractive{false};
+
+    bool m_acceptDrop{false};
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -162,7 +179,7 @@ private:
  * @brief getHorScrollBar return scene horizontal scrollbar.
  * @return horizontal scrollbar.
  */
-inline qint32 VMainGraphicsScene::getHorScrollBar() const
+inline auto VMainGraphicsScene::getHorScrollBar() const -> qint32
 {
     return horScrollBar;
 }
@@ -182,7 +199,7 @@ inline void VMainGraphicsScene::setHorScrollBar(const qint32 &value)
  * @brief getVerScrollBar return scene vertical scrollbar.
  * @return vertical scrollbar.
  */
-inline qint32 VMainGraphicsScene::getVerScrollBar() const
+inline auto VMainGraphicsScene::getVerScrollBar() const -> qint32
 {
     return verScrollBar;
 }

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef VABSTRACTSPLINE_H
 #define VABSTRACTSPLINE_H
 
-#include <qcompilerdetection.h>
 #include <QDomElement>
 #include <QGraphicsItem>
 #include <QGraphicsPathItem>
@@ -42,11 +41,8 @@
 #include <QVector>
 #include <QtGlobal>
 
-#include "../../../visualization/line/visline.h"
 #include "../vdrawtool.h"
-#include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vgeometrydef.h"
-#include "../vmisc/vabstractapplication.h"
 #include "../vmisc/def.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vmaingraphicsview.h"
@@ -54,111 +50,115 @@
 class VControlPointSpline;
 template <class T> class QSharedPointer;
 
-struct VAbstractSplineInitData : VAbstractToolInitData
+struct VAbstractSplineInitData : VDrawToolInitData
 {
-    VAbstractSplineInitData()
-        : VAbstractToolInitData(),
-          color(ColorBlack),
-          penStyle(TypeLineLine),
-          approximationScale(defCurveApproximationScale)
-    {}
+    VAbstractSplineInitData() = default;
 
-    QString color;
-    QString penStyle;
-    qreal approximationScale;
+    QString color{ColorBlack};                            // NOLINT(misc-non-private-member-variables-in-classes)
+    QString penStyle{TypeLineLine};                       // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal approximationScale{defCurveApproximationScale}; // NOLINT(misc-non-private-member-variables-in-classes)
+    QString aliasSuffix{};                                // NOLINT(misc-non-private-member-variables-in-classes)
 };
 
-class VAbstractSpline:public VDrawTool, public QGraphicsPathItem
+class VAbstractSpline : public VDrawTool, public QGraphicsPathItem
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
-    VAbstractSpline(VAbstractPattern *doc, VContainer *data, quint32 id, QGraphicsItem * parent = nullptr);
-    virtual ~VAbstractSpline() Q_DECL_EQ_DEFAULT;
+    VAbstractSpline(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes,
+                    QGraphicsItem *parent = nullptr);
+    ~VAbstractSpline() override = default;
 
-    virtual QPainterPath shape() const override;
-    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
-    virtual int      type() const  override {return Type;}
-    enum { Type = UserType + static_cast<int>(Tool::AbstractSpline)};
-    virtual QString  getTagName() const override;
-    void             ShowHandles(bool show);
+    auto shape() const -> QPainterPath override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Tool::AbstractSpline)
+    };
+    auto getTagName() const -> QString override;
 
-    QString GetLineColor() const;
-    void    SetLineColor(const QString &value);
+    virtual void ShowHandles(bool show);
 
-    QString GetPenStyle() const;
-    void    SetPenStyle(const QString &value);
+    auto GetLineColor() const -> QString;
+    void SetLineColor(const QString &value);
 
-    QString name() const;
+    auto GetPenStyle() const -> QString;
+    void SetPenStyle(const QString &value);
 
-    virtual void GroupVisibility(quint32 object, bool visible) override;
+    auto name() const -> QString;
+
+    virtual auto GetApproximationScale() const -> qreal;
+
+    auto GetDuplicate() const -> quint32;
+
+    auto GetAliasSuffix() const -> QString;
+    void SetAliasSuffix(QString alias);
+
+    void GroupVisibility(quint32 object, bool visible) override;
+
 public slots:
-    virtual void    FullUpdateFromFile () override;
-    virtual void    Disable(bool disable, const QString &namePP) override;
-    virtual void    DetailsMode(bool mode) override;
-    virtual void    AllowHover(bool enabled) override;
-    virtual void    AllowSelecting(bool enabled) override;
+    void FullUpdateFromFile() override;
+    void Disable(bool disable, const QString &namePP) override;
+    void SetDetailsMode(bool mode) override;
+    void AllowHover(bool enabled) override;
+    void AllowSelecting(bool enabled) override;
+
 signals:
     /**
      * @brief setEnabledPoint disable control points.
      * @param enable enable or diasable points.
      */
-    void             setEnabledPoint(bool enable);
-protected slots:
-    void CurveSelected(bool selected);
+    void setEnabledPoint(bool enable);
+
 protected:
-    /**
-     * @brief controlPoints list pointers of control points.
-     */
-    QVector<VControlPointSpline *>   controlPoints;
-    SceneObject      sceneType;
-    bool             m_isHovered;
-    bool             detailsMode;
-    bool             m_acceptHoverEvents;
     /**
      * @brief RefreshGeometry  refresh item on scene.
      */
-    virtual void     RefreshGeometry();
-    virtual void     ShowTool(quint32 id, bool enable) override;
-    virtual void     hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) override;
-    virtual void     hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) override;
-    virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) override;
-    virtual void     keyReleaseEvent(QKeyEvent * event) override;
-    virtual void     mousePressEvent(QGraphicsSceneMouseEvent *event) override;
-    virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) override;
-    virtual void     ReadToolAttributes(const QDomElement &domElement) override;
-    virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
-    virtual void     RefreshCtrlPoints();
-    virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) override;
-    virtual QString  MakeToolTip() const override;
+    virtual void RefreshGeometry();
+    void ShowTool(quint32 id, bool enable) override;
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
+    auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
+    void keyReleaseEvent(QKeyEvent *event) override;
+    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+    void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    virtual void RefreshCtrlPoints();
+    void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
+    auto MakeToolTip() const -> QString override;
 
-    VSpline CorrectedSpline(const VSpline &spline, const SplinePointPosition &position, const QPointF &pos) const;
+    auto IsDetailsMode() const -> bool;
 
-    template <typename T>
-    void ShowToolVisualization(bool show);
+    auto GetAcceptHoverEvents() const -> bool;
+    void SetAcceptHoverEvents(bool newAcceptHoverEvents);
 
-    template <typename T>
-    static void InitSplineToolConnections(VMainGraphicsScene *scene, T *tool);
+    auto GetSceneType() const -> SceneObject;
+    void SetSceneType(SceneObject newSceneType);
 
-    template <typename T>
-    static void InitSplinePathToolConnections(VMainGraphicsScene *scene, T *tool);
+    static auto CorrectedSpline(const VSpline &spline, const SplinePointPosition &position, const QPointF &pos)
+        -> VSpline;
 
-    template <typename T>
-    static void InitArcToolConnections(VMainGraphicsScene *scene, T *tool);
+    template <typename T> void ShowToolVisualization(bool show);
 
-    template <typename T>
-    static void InitElArcToolConnections(VMainGraphicsScene *scene, T *tool);
+    template <typename T> static void InitSplineToolConnections(VMainGraphicsScene *scene, T *tool);
+    template <typename T> static void InitSplinePathToolConnections(VMainGraphicsScene *scene, T *tool);
+    template <typename T> static void InitArcToolConnections(VMainGraphicsScene *scene, T *tool);
+    template <typename T> static void InitElArcToolConnections(VMainGraphicsScene *scene, T *tool);
 
 private:
-    Q_DISABLE_COPY(VAbstractSpline)
+    Q_DISABLE_COPY_MOVE(VAbstractSpline) // NOLINT
 
-    bool m_parentRefresh;
+    bool m_isHovered{false};
+    bool m_detailsMode{false};
+    bool m_acceptHoverEvents{true};
+    SceneObject sceneType{SceneObject::Unknown};
 
     void InitDefShape();
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-inline void VAbstractSpline::ShowToolVisualization(bool show)
+template <typename T> inline void VAbstractSpline::ShowToolVisualization(bool show)
 {
     if (show)
     {
@@ -177,12 +177,12 @@ inline void VAbstractSpline::ShowToolVisualization(bool show)
     }
     else
     {
-        delete vis;
+        delete vis.data();
     }
 
-    if (detailsMode)
+    if (m_detailsMode)
     {
-        ShowHandles(detailsMode);
+        ShowHandles(m_detailsMode);
     }
     else
     {
@@ -191,13 +191,12 @@ inline void VAbstractSpline::ShowToolVisualization(bool show)
 
     if (QGraphicsScene *sc = scene())
     { // Showing/hiding control points require recalculation scene size.
-        VMainGraphicsView::NewSceneRect(sc, qApp->getSceneView(), this);
+        VMainGraphicsView::NewSceneRect(sc, VAbstractValApplication::VApp()->getSceneView(), this);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-void VAbstractSpline::InitSplineToolConnections(VMainGraphicsScene *scene, T *tool)
+template <typename T> inline void VAbstractSpline::InitSplineToolConnections(VMainGraphicsScene *scene, T *tool)
 {
     SCASSERT(scene != nullptr)
     SCASSERT(tool != nullptr)
@@ -208,8 +207,7 @@ void VAbstractSpline::InitSplineToolConnections(VMainGraphicsScene *scene, T *to
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-void VAbstractSpline::InitSplinePathToolConnections(VMainGraphicsScene *scene, T *tool)
+template <typename T> inline void VAbstractSpline::InitSplinePathToolConnections(VMainGraphicsScene *scene, T *tool)
 {
     SCASSERT(scene != nullptr)
     SCASSERT(tool != nullptr)
@@ -220,8 +218,7 @@ void VAbstractSpline::InitSplinePathToolConnections(VMainGraphicsScene *scene, T
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-void VAbstractSpline::InitArcToolConnections(VMainGraphicsScene *scene, T *tool)
+template <typename T> inline void VAbstractSpline::InitArcToolConnections(VMainGraphicsScene *scene, T *tool)
 {
     SCASSERT(scene != nullptr)
     SCASSERT(tool != nullptr)
@@ -232,8 +229,7 @@ void VAbstractSpline::InitArcToolConnections(VMainGraphicsScene *scene, T *tool)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-void VAbstractSpline::InitElArcToolConnections(VMainGraphicsScene *scene, T *tool)
+template <typename T> inline void VAbstractSpline::InitElArcToolConnections(VMainGraphicsScene *scene, T *tool)
 {
     SCASSERT(scene != nullptr)
     SCASSERT(tool != nullptr)
@@ -243,15 +239,49 @@ void VAbstractSpline::InitElArcToolConnections(VMainGraphicsScene *scene, T *too
     QObject::connect(scene, &VMainGraphicsScene::EnableElArcItemSelection, tool, &T::AllowSelecting);
 }
 
-class VToolAbstractArc:public VAbstractSpline
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VAbstractSpline::IsDetailsMode() const -> bool
 {
-public:
-    VToolAbstractArc(VAbstractPattern *doc, VContainer *data, quint32 id, QGraphicsItem *parent = nullptr);
-    virtual ~VToolAbstractArc() = default;
+    return m_detailsMode;
+}
 
-    QString CenterPointName() const;
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VAbstractSpline::GetAcceptHoverEvents() const -> bool
+{
+    return m_acceptHoverEvents;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VAbstractSpline::GetSceneType() const -> SceneObject
+{
+    return sceneType;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VAbstractSpline::SetSceneType(SceneObject newSceneType)
+{
+    sceneType = newSceneType;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VAbstractSpline::SetAcceptHoverEvents(bool newAcceptHoverEvents)
+{
+    m_acceptHoverEvents = newAcceptHoverEvents;
+}
+
+class VToolAbstractArc : public VAbstractSpline
+{
+    Q_OBJECT // NOLINT
+
+public:
+    VToolAbstractArc(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes,
+                     QGraphicsItem *parent = nullptr);
+    ~VToolAbstractArc() override = default;
+
+    auto CenterPointName() const -> QString;
+
 private:
-    Q_DISABLE_COPY(VToolAbstractArc)
+    Q_DISABLE_COPY_MOVE(VToolAbstractArc) // NOLINT
 };
 
 #endif // VABSTRACTSPLINE_H

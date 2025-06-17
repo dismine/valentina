@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,10 +29,9 @@
 #ifndef VLAYOUTDETAIL_H
 #define VLAYOUTDETAIL_H
 
-#include <qcompilerdetection.h>
+#include <QCoreApplication>
 #include <QDate>
 #include <QLineF>
-#include <QMatrix>
 #include <QPointF>
 #include <QRectF>
 #include <QSharedDataPointer>
@@ -41,125 +40,254 @@
 #include <QVector>
 #include <QtGlobal>
 
-#include "../ifc/xml/vabstractpattern.h"
-#include "../vpatterndb/floatItemData/vpatternlabeldata.h"
-#include "../vpatterndb/floatItemData/vpiecelabeldata.h"
-#include "../vpatterndb/vcontainer.h"
+#include "../vmisc/typedef.h"
+#include "../vwidgets/vpiecegrainline.h"
+#include "qpainterpath.h"
 #include "vabstractpiece.h"
-#include "../vgeometry/vgeometrydef.h"
+
+#include <optional>
+using EdgeIndex = std::optional<int>;
 
 class VLayoutPieceData;
 class VLayoutPiecePath;
 class QGraphicsItem;
 class QGraphicsPathItem;
 class VTextManager;
+class VPiece;
+class VPieceLabelData;
+class VAbstractPattern;
+class VPatternLabelData;
+class VLayoutPoint;
+class VFoldLine;
 
-class VLayoutPiece :public VAbstractPiece
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
+
+class VLayoutPiece : public VAbstractPiece
 {
-    Q_DECLARE_TR_FUNCTIONS(VLayoutPiece)
+    Q_DECLARE_TR_FUNCTIONS(VLayoutPiece) // NOLINT
+
 public:
     VLayoutPiece();
     VLayoutPiece(const VLayoutPiece &detail);
 
-    virtual ~VLayoutPiece() override;
+    ~VLayoutPiece() override;
 
-    VLayoutPiece &operator=(const VLayoutPiece &detail);
-#ifdef Q_COMPILER_RVALUE_REFS
-    VLayoutPiece &operator=(VLayoutPiece &&detail) Q_DECL_NOTHROW { Swap(detail); return *this; }
-#endif
+    auto operator=(const VLayoutPiece &detail) -> VLayoutPiece &;
 
-    inline void Swap(VLayoutPiece &detail) Q_DECL_NOTHROW
-    { VAbstractPiece::Swap(detail); std::swap(d, detail.d); }
+    VLayoutPiece(VLayoutPiece &&detail) noexcept;
+    auto operator=(VLayoutPiece &&detail) noexcept -> VLayoutPiece &;
 
-    static VLayoutPiece Create(const VPiece &piece, const VContainer *pattern);
+    static auto Create(const VPiece &piece, vidtype id, const VContainer *pattern) -> VLayoutPiece;
+    static auto ConvertPassmarks(const VPiece &piece, const VContainer *pattern) -> QVector<VLayoutPassmark>;
 
-    QVector<QPointF> GetContourPoints() const;
-    void SetCountourPoints(const QVector<QPointF> &points, bool hideMainPath = false);
+    auto GetUniqueID() const -> QString override;
 
-    QVector<QPointF> GetSeamAllowancePoints() const;
-    void SetSeamAllowancePoints(const QVector<QPointF> &points, bool seamAllowance = true,
+    auto GetMappedContourPoints() const -> QVector<VLayoutPoint>;
+    auto GetMappedFullContourPoints(bool togetherWithNotches = false,
+                                    bool drawMode = false,
+                                    bool layoutAllowance = false) const -> QVector<VLayoutPoint>;
+    auto GetFullContourPoints(bool togetherWithNotches = false,
+                              bool drawMode = false,
+                              bool layoutAllowance = false) const -> QVector<VLayoutPoint>;
+    auto GetContourPoints() const -> QVector<VLayoutPoint>;
+    void SetContourPoints(const QVector<VLayoutPoint> &points, bool hideMainPath = false);
+
+    auto GetMappedSeamAllowancePoints() const -> QVector<VLayoutPoint>;
+    auto GetMappedFullSeamAllowancePoints(bool togetherWithNotches = false,
+                                          bool drawMode = false,
+                                          bool layoutAllowance = false) const -> QVector<VLayoutPoint>;
+    auto GetFullSeamAllowancePoints(bool togetherWithNotches = false,
+                                    bool drawMode = false,
+                                    bool layoutAllowance = false) const -> QVector<VLayoutPoint>;
+    auto GetSeamAllowancePoints() const -> QVector<VLayoutPoint>;
+    void SetSeamAllowancePoints(const QVector<VLayoutPoint> &points, bool seamAllowance = true,
                                 bool seamAllowanceBuiltIn = false);
 
-    QVector<QPointF> GetLayoutAllowancePoints() const;
-    void SetLayoutAllowancePoints();
+    auto GetMappedLayoutAllowancePoints() const -> QVector<QPointF>;
+    auto GetLayoutAllowancePoints() const -> QVector<QPointF>;
+    void SetLayoutAllowancePoints(bool togetherWithNotches);
 
-    QVector<QLineF> GetPassmarks() const;
-    void SetPassmarks(const QVector<QLineF> &passmarks);
+    auto GetMappedExternalContourPoints() const -> QVector<VLayoutPoint>;
+    auto GetExternalContourPoints() const -> QVector<VLayoutPoint>;
 
-    QVector<VLayoutPlaceLabel> GetPlaceLabels() const;
+    auto GetMappedPassmarks() const -> QVector<VLayoutPassmark>;
+    auto GetPassmarks() const -> QVector<VLayoutPassmark>;
+    void SetPassmarks(const QVector<VLayoutPassmark> &passmarks);
+
+    auto GetPlaceLabels() const -> QVector<VLayoutPlaceLabel>;
     void SetPlaceLabels(const QVector<VLayoutPlaceLabel> &labels);
 
-    QVector<QVector<QPointF>> InternalPathsForCut(bool cut) const;
-    QVector<VLayoutPiecePath> GetInternalPaths() const;
+    auto MappedInternalPathsForCut(bool cut) const -> QVector<VLayoutPiecePath>;
+    auto GetInternalPaths() const -> QVector<VLayoutPiecePath>;
     void SetInternalPaths(const QVector<VLayoutPiecePath> &internalPaths);
 
-    QPointF GetPieceTextPosition() const;
-    QStringList GetPieceText() const;
-    void SetPieceText(const QString &qsName, const VPieceLabelData& data, const QFont& font, const VContainer *pattern);
+    auto GetPieceText() const -> QStringList;
+    void SetPieceText(const VAbstractPattern *pDoc, const QString &qsName, const VPieceLabelData &data,
+                      const QFont &font, const QString &SVGFontFamily, const VContainer *pattern);
 
-    QPointF GetPatternTextPosition() const;
-    QStringList GetPatternText() const;
-    void SetPatternInfo(VAbstractPattern *pDoc, const VPatternLabelData& geom, const QFont& font,
-                        const VContainer *pattern);
+    auto GetPatternText() const -> QStringList;
+    void SetPatternInfo(const VAbstractPattern *pDoc, const VPatternLabelData &geom, const QFont &font,
+                        const QString &SVGFontFamily, const VContainer *pattern);
 
-    void SetGrainline(const VGrainlineData& geom, const VContainer *pattern);
-    QVector<QPointF> GetGrainline() const;
+    void SetGrainline(const VGrainlineData &geom, const VContainer *pattern);
+    auto GetGrainline() const -> VPieceGrainline;
+    auto GetGrainline() -> VPieceGrainline &;
+    auto GetMappedGrainlineShape() const -> GrainlineShape;
+    auto GetGrainlineShape() const -> GrainlineShape;
+    auto GetMappedGrainlineMainLine() const -> QLineF;
+    auto GetGrainlineMainLine() const -> QLineF;
+    auto IsGrainlineEnabled() const -> bool;
+    auto IsGrainlineVisible() const -> bool;
 
-    QTransform GetMatrix() const;
-    void    SetMatrix(const QTransform &matrix);
+    auto GetMatrix() const -> QTransform;
+    void SetMatrix(const QTransform &matrix);
 
-    qreal GetLayoutWidth() const;
-    void  SetLayoutWidth(const qreal &value);
+    auto GetLayoutWidth() const -> qreal;
+    void SetLayoutWidth(qreal value);
 
-    bool IsMirror() const;
-    void SetMirror(bool value);
+    auto GetQuantity() const -> quint16;
+    void SetQuantity(quint16 value);
 
+    auto GetId() const -> vidtype;
+    void SetId(vidtype id);
+
+    auto IsVerticallyFlipped() const -> bool;
+    void SetVerticallyFlipped(bool value);
+
+    auto IsHorizontallyFlipped() const -> bool;
+    void SetHorizontallyFlipped(bool value);
+
+    void SetGradationId(const QString &id);
+    auto GetGradationId() const -> QString;
+
+    auto GetXScale() const -> qreal;
+    void SetXScale(qreal xs);
+
+    auto GetYScale() const -> qreal;
+    void SetYScale(qreal ys);
+
+    auto GetPieceLabelRect() const -> QVector<QPointF>;
+    void SetPieceLabelRect(const QVector<QPointF> &rect);
+
+    auto GetPieceLabelData() const -> VTextManager;
+    void SetPieceLabelData(const VTextManager &data);
+
+    auto GetPatternLabelRect() const -> QVector<QPointF>;
+    void SetPatternLabelRect(const QVector<QPointF> &rect);
+
+    auto GetPatternLabelData() const -> VTextManager;
+    void SetPatternLabelData(const VTextManager &data);
+
+    auto GetMappedCorrectedMirrorLine(bool togetherWithNotches = false) const -> QLineF;
+    auto GetCorrectedMirrorLine(bool togetherWithNotches = false) const -> QLineF;
+
+    auto GetMappedSeamMirrorLine() const -> QLineF;
+    auto GetSeamMirrorLine() const -> QLineF;
+    void SetSeamMirrorLine(const QLineF &line);
+
+    auto GetMappedSeamAllowanceMirrorLine() const -> QLineF;
+    auto GetSeamAllowanceMirrorLine() const -> QLineF;
+    void SetSeamAllowanceMirrorLine(const QLineF &line);
+
+    auto GetFoldLineHeight() const -> qreal;
+    void SetFoldLineHeight(qreal height);
+
+    auto GetFoldLineWidth() const -> qreal;
+    void SetFoldLineWidth(qreal width);
+
+    auto GetFoldLineCenterPosition() const -> qreal;
+    void SetFoldLineCenterPosition(qreal center);
+
+    auto GetFoldLineOutlineFont() const -> QFont;
+    void SetFoldLineOutlineFont(const QFont &font);
+
+    auto GetFoldLineSVGFontFamily() const -> QString;
+    void SetFoldLineSVGFontFamily(const QString &font);
+
+    void Translate(const QPointF &p);
     void Translate(qreal dx, qreal dy);
+    void Scale(qreal sx, qreal sy);
     void Rotate(const QPointF &originPoint, qreal degrees);
     void Mirror(const QLineF &edge);
     void Mirror();
 
-    int    DetailEdgesCount() const;
-    int    LayoutEdgesCount() const;
+    auto DetailEdgesCount() const -> vsizetype;
+    auto LayoutEdgesCount() const -> vsizetype;
 
-    QLineF DetailEdge(int i) const;
-    QLineF LayoutEdge(int i) const;
+    auto LayoutEdge(int i) const -> QLineF;
+    auto LayoutEdgeByPoint(const QPointF &p1) const -> EdgeIndex;
 
-    int    DetailEdgeByPoint(const QPointF &p1) const;
-    int    LayoutEdgeByPoint(const QPointF &p1) const;
+    auto MappedDetailBoundingRect() const -> QRectF;
+    auto DetailBoundingRect() const -> QRectF;
+    auto MappedLayoutBoundingRect() const -> QRectF;
+    auto Diagonal() const -> qreal;
 
-    QRectF DetailBoundingRect() const;
-    QRectF LayoutBoundingRect() const;
-    qreal  Diagonal() const;
+    auto FoldLine() const -> VFoldLine;
 
-    bool isNull() const;
-    qint64 Square() const;
-    QPainterPath ContourPath() const;
+    static auto BoundingRect(QVector<QPointF> points) -> QRectF;
 
-    QPainterPath LayoutAllowancePath() const;
-    Q_REQUIRED_RESULT QGraphicsItem *GetItem(bool textAsPaths) const;
+    static auto GrainlinePath(const GrainlineShape &shape) -> QPainterPath;
 
-    bool IsLayoutAllowanceValid() const;
+    auto isNull() const -> bool;
+    auto Square() const -> qint64;
+
+    auto MappedContourPath(bool togetherWithNotches, bool showLayoutAllowance) const -> QPainterPath;
+    auto ContourPath(bool togetherWithNotches, bool showLayoutAllowance) const -> QPainterPath;
+    auto MappedLayoutAllowancePath() const -> QPainterPath;
+
+    void DrawMiniature(QPainter &painter, bool togetherWithNotches) const;
+
+    Q_REQUIRED_RESULT auto GetItem(bool textAsPaths, bool togetherWithNotches, bool showLayoutAllowance) const
+        -> QGraphicsItem *;
+
+    auto IsLayoutAllowanceValid(bool togetherWithNotches) const -> bool;
+
+    auto BiggestEdge() const -> qreal;
+
+    friend auto operator<<(QDataStream &dataStream, const VLayoutPiece &piece) -> QDataStream &;
+    friend auto operator>>(QDataStream &dataStream, VLayoutPiece &piece) -> QDataStream &;
+
+    auto MapPlaceLabelShape(PlaceLabelImg shape) const -> PlaceLabelImg;
+
+    static auto MapPassmark(VLayoutPassmark passmark, const QTransform &matrix, bool mirror) -> VLayoutPassmark;
+
+    auto LineMatrix(const QPointF &topLeft, qreal angle, const QPointF &linePos, qreal maxLineWidth) const
+        -> QTransform;
+
+protected:
+    void SetGrainline(const VPieceGrainline &grainline);
 
 private:
     QSharedDataPointer<VLayoutPieceData> d;
 
-    QVector<QPointF> DetailPath() const;
+    auto DetailPath() const -> QVector<VLayoutPoint>;
 
-    Q_REQUIRED_RESULT QGraphicsPathItem *GetMainItem() const;
-    Q_REQUIRED_RESULT QGraphicsPathItem *GetMainPathItem() const;
+    Q_REQUIRED_RESULT auto GetMainItem(bool togetherWithNotches, bool showLayoutAllowance) const -> QGraphicsPathItem *;
+    Q_REQUIRED_RESULT auto GetExternalContourPathItem() const -> QGraphicsPathItem *;
+
+    void LabelStringsSVGFont(QGraphicsItem *parent, const QVector<QPointF> &labelShape, const VTextManager &tm,
+                             bool textAsPaths) const;
+    void LabelStringsOutlineFont(QGraphicsItem *parent, const QVector<QPointF> &labelShape, const VTextManager &tm,
+                                 bool textAsPaths) const;
 
     void CreateLabelStrings(QGraphicsItem *parent, const QVector<QPointF> &labelShape, const VTextManager &tm,
                             bool textAsPaths) const;
     void CreateGrainlineItem(QGraphicsItem *parent) const;
+    void CreateFoldLineItem(QGraphicsItem *parent, bool textAsPaths) const;
 
-    template <class T>
-    QVector<T> Map(const QVector<T> &points) const;
+    template <class T> auto Map(QVector<T> points) const -> QVector<T>;
+    auto Map(const GrainlineShape &shape) const -> GrainlineShape;
 
-    QLineF Edge(const QVector<QPointF> &path, int i) const;
-    int    EdgeByPoint(const QVector<QPointF> &path, const QPointF &p1) const;
+    auto Edge(const QVector<QPointF> &path, int i) const -> QLineF;
+    auto EdgeByPoint(const QVector<QPointF> &path, const QPointF &p1) const -> EdgeIndex;
+
+    auto CorrectSeamAllowanceMirrorLine() const -> QLineF;
 };
 
-Q_DECLARE_TYPEINFO(VLayoutPiece, Q_MOVABLE_TYPE);
+QT_WARNING_POP
+
+Q_DECLARE_TYPEINFO(VLayoutPiece, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VLAYOUTDETAIL_H

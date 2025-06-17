@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 #ifndef VTOOLCUTSPLINEPATH_H
 #define VTOOLCUTSPLINEPATH_H
 
-#include <qcompilerdetection.h>
+
 #include <QDomElement>
 #include <QGraphicsItem>
 #include <QMetaObject>
@@ -44,40 +44,27 @@
 class VSplinePath;
 template <class T> class QSharedPointer;
 
-struct VToolCutSplinePathInitData : VToolSinglePointInitData
-{
-    VToolCutSplinePathInitData()
-        : VToolSinglePointInitData(),
-          formula(),
-          splinePathId(NULL_ID)
-    {}
-
-    QString formula;
-    quint32 splinePathId;
-};
-
 /**
  * @brief The VToolCutSplinePath class for tool CutSplinePath. This tool find point on splinePath and cut splinePath on
  * two.
  */
 class VToolCutSplinePath : public VToolCut
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
-    virtual void setDialog() override;
-    static VToolCutSplinePath *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
-                                      VAbstractPattern *doc, VContainer *data);
-    static VToolCutSplinePath *Create(VToolCutSplinePathInitData &initData);
+    virtual void SetDialog() override;
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolCutSplinePath *;
+    static auto Create(VToolCutInitData &initData) -> VToolCutSplinePath *;
     static const QString ToolType;
     static const QString AttrSplinePath;
-    virtual int  type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::CutSplinePath)};
     virtual void  ShowVisualization(bool show) override;
 
-    Q_REQUIRED_RESULT static VPointF *CutSplinePath(qreal length,
-                                                    const QSharedPointer<VAbstractCubicBezierPath> &splPath,
-                                                    const QString &pName, VSplinePath **splPath1,
-                                                    VSplinePath **splPath2);
+    Q_REQUIRED_RESULT static auto CutSplinePath(qreal length, const QSharedPointer<VAbstractCubicBezierPath> &splPath,
+                                                const QString &pName, VSplinePath **splPath1, VSplinePath **splPath2)
+        -> VPointF *;
 protected slots:
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
 protected:
@@ -86,11 +73,12 @@ protected:
     virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     virtual void    ReadToolAttributes(const QDomElement &domElement) override;
     virtual void    SetVisualization() override;
-    virtual QString MakeToolTip() const override;
-private:
-    Q_DISABLE_COPY(VToolCutSplinePath)
+    virtual auto MakeToolTip() const -> QString override;
 
-    VToolCutSplinePath(const VToolCutSplinePathInitData &initData, QGraphicsItem *parent = nullptr);
+private:
+    Q_DISABLE_COPY_MOVE(VToolCutSplinePath) // NOLINT
+
+    VToolCutSplinePath(const VToolCutInitData &initData, QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLCUTSPLINEPATH_H

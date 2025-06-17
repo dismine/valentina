@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,57 +29,48 @@
 #ifndef VABSTRACTPOINT_H
 #define VABSTRACTPOINT_H
 
-#include <qcompilerdetection.h>
 #include <QColor>
 #include <QMetaObject>
 #include <QObject>
 #include <QPen>
 #include <QPointF>
 #include <QString>
-#include <Qt>
 #include <QtGlobal>
 
-#include "../vdrawtool.h"
-#include "../ifc/ifcdef.h"
-#include "../vgeometry/vpointf.h"
-#include "../vmisc/vabstractapplication.h"
-#include "../vpatterndb/vcontainer.h"
-#include "../vmisc/def.h"
-#include "../vwidgets/vmaingraphicsscene.h"
 #include "../../../visualization/visualization.h"
 #include "../../vabstracttool.h"
+#include "../vdrawtool.h"
+#include "../vmisc/def.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/vmaingraphicsscene.h"
 
-class VAbstractPoint: public VDrawTool
+class VAbstractPoint : public VDrawTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
-    VAbstractPoint(VAbstractPattern *doc, VContainer *data, quint32 id);
-    virtual ~VAbstractPoint() Q_DECL_EQ_DEFAULT;
+    VAbstractPoint(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes);
+    virtual ~VAbstractPoint() = default;
 
-    virtual QString      getTagName() const override;
+    virtual auto getTagName() const -> QString override;
 
-    template <typename T>
-    void ShowToolVisualization(bool show);
+    template <typename T> void ShowToolVisualization(bool show);
 
 public slots:
     virtual void ShowTool(quint32 id, bool enable) override;
-    void         DeleteFromLabel();
+    void DeleteFromLabel();
 
 protected:
     void SetPointName(quint32 id, const QString &name);
 
-    virtual void UpdateNamePosition(quint32 id, const QPointF &pos)=0;
-
-    template <typename T>
-    static void InitToolConnections(VMainGraphicsScene *scene, T *tool);
+    template <typename T> static void InitToolConnections(VMainGraphicsScene *scene, T *tool);
 
 private:
-    Q_DISABLE_COPY(VAbstractPoint)
+    Q_DISABLE_COPY_MOVE(VAbstractPoint) // NOLINT
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-void VAbstractPoint::ShowToolVisualization(bool show)
+template <typename T> void VAbstractPoint::ShowToolVisualization(bool show)
 {
     if (show)
     {
@@ -98,13 +89,12 @@ void VAbstractPoint::ShowToolVisualization(bool show)
     }
     else
     {
-        delete vis;
+        delete vis.data();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-void VAbstractPoint::InitToolConnections(VMainGraphicsScene *scene, T *tool)
+template <typename T> void VAbstractPoint::InitToolConnections(VMainGraphicsScene *scene, T *tool)
 {
     SCASSERT(scene != nullptr)
     SCASSERT(tool != nullptr)

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef DIALOGSHOULDERPOINT_H
 #define DIALOGSHOULDERPOINT_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -40,68 +39,102 @@
 
 namespace Ui
 {
-    class DialogShoulderPoint;
+class DialogShoulderPoint;
 }
 
 /**
  * @brief The DialogShoulderPoint class dialog for ToolShoulderPoint. Help create point and edit option.
  */
-class DialogShoulderPoint : public DialogTool
+class DialogShoulderPoint final : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
-    DialogShoulderPoint(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual ~DialogShoulderPoint() override;
+    DialogShoulderPoint(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
+    ~DialogShoulderPoint() override;
 
-    void           SetPointName(const QString &value);
+    auto GetPointName() const -> QString;
+    void SetPointName(const QString &value);
 
-    QString        GetTypeLine() const;
-    void           SetTypeLine(const QString &value);
+    auto GetTypeLine() const -> QString;
+    void SetTypeLine(const QString &value);
 
-    QString        GetFormula() const;
-    void           SetFormula(const QString &value);
+    auto GetFormula() const -> QString;
+    void SetFormula(const QString &value);
 
-    quint32        GetP1Line() const;
-    void           SetP1Line(const quint32 &value);
+    auto GetP1Line() const -> quint32;
+    void SetP1Line(const quint32 &value);
 
-    quint32        GetP2Line() const;
-    void           SetP2Line(const quint32 &value);
+    auto GetP2Line() const -> quint32;
+    void SetP2Line(const quint32 &value);
 
-    quint32        GetP3() const;
-    void           SetP3(const quint32 &value);
+    auto GetP3() const -> quint32;
+    void SetP3(const quint32 &value);
 
-    QString        GetLineColor() const;
-    void           SetLineColor(const QString &value);
+    auto GetLineColor() const -> QString;
+    void SetLineColor(const QString &value);
+
+    void SetNotes(const QString &notes);
+    auto GetNotes() const -> QString;
+
+    void ShowDialog(bool click) override;
+
 public slots:
-    virtual void   ChosenObject(quint32 id, const SceneObject &type) override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
     /**
      * @brief DeployFormulaTextEdit grow or shrink formula input
      */
-    void           DeployFormulaTextEdit();
-    /**
-     * @brief FormulaTextChanged when formula text changes for validation and calc
-     */
-    void           FormulaTextChanged();
-    virtual void   PointNameChanged() override;
-    void           FXLength();
+    void DeployFormulaTextEdit();
+    void PointNameChanged() override;
+    void FXLength();
+    void EvalFormula();
+
 protected:
-    virtual void   ShowVisualization() override;
+    void ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void   SaveData() override;
-    virtual void   closeEvent(QCloseEvent *event) override;
+    void SaveData() override;
+    void closeEvent(QCloseEvent *event) override;
+    void changeEvent(QEvent *event) override;
+    auto IsValid() const -> bool override;
+
 private:
-    Q_DISABLE_COPY(DialogShoulderPoint)
+    Q_DISABLE_COPY_MOVE(DialogShoulderPoint) // NOLINT
 
     /** @brief ui keeps information about user interface */
     Ui::DialogShoulderPoint *ui;
 
     /** @brief formula formula */
-    QString        formula;
+    QString m_formula{};
 
     /** @brief formulaBaseHeight base height defined by dialogui */
-    int             formulaBaseHeight;
+    int m_formulaBaseHeight{0};
+
+    QTimer *m_timerFormula;
+
+    QString m_pointName{};
+
+    bool m_flagFormula{false};
+    bool m_flagName{true};
+    bool m_flagError{true};
+
+    bool m_firstRelease{false};
+
+    /** @brief number number of handled objects */
+    qint32 m_number{0};
+
+    void ChosenThirdPoint(quint32 id);
+
+    void FinishCreating();
+
+    void InitIcons();
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto DialogShoulderPoint::IsValid() const -> bool
+{
+    return m_flagFormula && m_flagName && m_flagError;
+}
 
 #endif // DIALOGSHOULDERPOINT_H

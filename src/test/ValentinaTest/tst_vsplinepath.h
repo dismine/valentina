@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -33,16 +33,19 @@
 
 class TST_VSplinePath : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     explicit TST_VSplinePath(QObject *parent = nullptr);
+
 private slots:
     void TestRotation_data();
     void TestRotation();
     void TestFlip_data();
     void TestFlip();
+
 private:
-    Q_DISABLE_COPY(TST_VSplinePath)
+    Q_DISABLE_COPY_MOVE(TST_VSplinePath) // NOLINT
 };
 
 #endif // TST_VSPLINEPATH_H

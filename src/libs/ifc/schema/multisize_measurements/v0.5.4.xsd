@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:element name="vst">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="version" type="formatVersion"/>
+        <xs:element name="read-only" type="xs:boolean"/>
+        <xs:element name="notes" type="xs:string" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="unit" type="units"/>
+        <xs:element name="pm_system" type="psCode"/>
+        <xs:element name="dimensions">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="dimension" minOccurs="1" maxOccurs="3">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="labels" minOccurs="0" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="label" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:attribute name="value" type="dimesionValue" use="required"/>
+                              <xs:attribute name="label" type="xs:string" use="required"/>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="type" type="dimensionType" use="required"/>
+                  <xs:attribute name="base" type="dimesionValue" use="required"/>
+                  <xs:attribute name="min" type="dimesionValue" use="required"/>
+                  <xs:attribute name="max" type="dimesionValue" use="required"/>
+                  <xs:attribute name="step" type="dimensionStep" use="required"/>
+                  <xs:attribute name="measurement" type="xs:boolean"/>
+                  <xs:attribute name="customName" type="xs:string"/> 
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="fullCircumference" type="xs:boolean"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="restrictions">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="restriction" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:attribute name="coordinates" type="xs:string" use="required"/>
+                  <xs:attribute name="min" type="dimesionValue"/>
+                  <xs:attribute name="max" type="dimesionValue"/>
+                  <xs:attribute name="exclude" type="xs:string"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="body-measurements">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="m" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="corrections" minOccurs="0" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="correction" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:attribute name="coordinates" type="xs:string" use="required"/>
+                              <xs:attribute name="correction" type="xs:double" use="required"/> 
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="name" type="shortName" use="required"/>
+                  <xs:attribute name="base" type="xs:double"/>
+                  <xs:attribute name="shiftA" type="xs:double"/>
+                  <xs:attribute name="shiftB" type="xs:double"/>
+                  <xs:attribute name="shiftC" type="xs:double"/>
+                  <xs:attribute name="full_name" type="xs:string"/>
+                  <xs:attribute name="description" type="xs:string"/>
+                  <xs:attribute name="specialUnits" type="xs:boolean"/>
+                  <xs:attribute name="type" type="measurementType"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+    <xs:unique name="measurementName">
+      <xs:selector xpath="body-measurements/m"/>
+      <xs:field xpath="@name"/>
+    </xs:unique>
+  </xs:element>
+  <xs:simpleType name="shortName">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="([^\p{Nd}\p{Zs}*\\/&amp;|!&lt;&gt;^&#10;\()\-−+.,٫, ٬.’=?:;'\\&quot;]){1,1}([^\p{Zs}*\\/&amp;|!&lt;&gt;^&#10;\()\-−+.,٫, ٬.’=?:;\\&quot;]){0,}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="units">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="mm"/>
+      <xs:enumeration value="cm"/>
+      <xs:enumeration value="inch"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="formatVersion">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="psCode">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="(([0-9]|[1-4][0-9]|5[0-4])|998)"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="dimensionType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="x"/>
+      <xs:enumeration value="y"/>
+      <xs:enumeration value="w"/>
+      <xs:enumeration value="z"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="dimesionValue">
+    <xs:restriction base="xs:double">
+      <xs:minInclusive value="1"/>
+      <xs:maxInclusive value="2720"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="dimensionStep">
+    <xs:restriction base="xs:double">
+      <xs:minInclusive value="0"/>
+      <xs:maxInclusive value="80"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="measurementType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="measurement"/>
+      <xs:enumeration value="separator"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

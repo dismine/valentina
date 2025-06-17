@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -32,64 +32,85 @@
 #include <QGraphicsPathItem>
 #include <QPointF>
 #include <QSharedPointer>
-#include <Qt>
-#include <new>
 
 #include "../../tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutsplinepath.h"
-#include "../ifc/ifcdef.h"
 #include "../vgeometry/vabstractcubicbezierpath.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vsplinepath.h"
-#include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
+#include "../vmisc/vmodifierkey.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/scalesceneitems.h"
 #include "vispath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolCutSplinePath::VisToolCutSplinePath(const VContainer *data, QGraphicsItem *parent)
-    :VisPath(data, parent), point(nullptr), splPath1(nullptr), splPath2(nullptr), length(0)
+  : VisPath(data, parent)
 {
-    splPath1 = InitItem<VCurvePathItem>(Qt::darkGreen, this);
-    splPath1->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
-    splPath2 = InitItem<VCurvePathItem>(Qt::darkRed, this);
-    splPath2->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
+    SetColorRole(VColorRole::VisSupportColor);
 
-    point = InitPoint(mainColor, this);
-    point->setZValue(2);
-    point->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
+    m_splPath1 = InitItem<VCurvePathItem>(VColorRole::VisSupportColor2, this);
+    m_splPath1->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
+    m_splPath2 = InitItem<VCurvePathItem>(VColorRole::VisSupportColor4, this);
+    m_splPath2->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
+
+    m_point = InitPoint(VColorRole::VisMainColor, this);
+    m_point->setZValue(2);
+    m_point->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolCutSplinePath::RefreshGeometry()
 {
-    if (object1Id > NULL_ID)
+    if (m_splinePathId > NULL_ID)
     {
-        const auto splPath = Visualization::data->GeometricObject<VAbstractCubicBezierPath>(object1Id);
-        DrawPath(this, splPath->GetPath(), splPath->DirectionArrows(), supportColor, lineStyle, Qt::RoundCap);
+        const auto splPath = GetData()->GeometricObject<VAbstractCubicBezierPath>(m_splinePathId);
+        DrawPath(this, splPath->GetPath(), splPath->DirectionArrows(), LineStyle(), Qt::RoundCap);
 
-        if (not qFuzzyIsNull(length))
+        if (!qIsInf(m_length))
         {
             VSplinePath *spPath1 = nullptr;
             VSplinePath *spPath2 = nullptr;
-            VPointF *p = VToolCutSplinePath::CutSplinePath(length, splPath, "X", &spPath1, &spPath2);
+            VPointF *p = VToolCutSplinePath::CutSplinePath(m_length, splPath, QChar('X'), &spPath1, &spPath2);
             SCASSERT(p != nullptr)
             SCASSERT(spPath1 != nullptr)
             SCASSERT(spPath2 != nullptr)
 
-            DrawPoint(point, static_cast<QPointF>(*p), mainColor);
+            DrawPoint(m_point, static_cast<QPointF>(*p));
             delete p;
 
-            DrawPath(splPath1, spPath1->GetPath(), spPath1->DirectionArrows(), Qt::darkGreen, lineStyle, Qt::RoundCap);
-            DrawPath(splPath2, spPath2->GetPath(), spPath2->DirectionArrows(), Qt::darkRed, lineStyle, Qt::RoundCap);
+            DrawPath(m_splPath1, spPath1->GetPath(), spPath1->DirectionArrows(), LineStyle(), Qt::RoundCap);
+            DrawPath(m_splPath2, spPath2->GetPath(), spPath2->DirectionArrows(), LineStyle(), Qt::RoundCap);
 
             delete spPath1;
             delete spPath2;
+        }
+        else if (GetMode() == Mode::Creation)
+        {
+            QPointF const p = splPath->ClosestPoint(ScenePos());
+            qreal const length = splPath->GetLengthByPoint(p);
+
+            DrawPoint(m_point, p);
+
+            const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
+            SetToolTip(tr("Length = %1%2; "
+                          "<b>Mouse click</b> - finish selecting the length, "
+                          "<b>%3</b> - skip")
+                           .arg(LengthToUser(length), prefix, VModifierKey::EnterKey()));
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolCutSplinePath::setLength(const QString &expression)
+void VisToolCutSplinePath::VisualMode(quint32 id)
 {
-    length = FindLengthFromUser(expression, Visualization::data->DataVariables());
+    m_splinePathId = id;
+    StartVisualMode();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolCutSplinePath::SetLength(const QString &expression)
+{
+    m_length = FindLengthFromUser(expression, GetData()->DataVariables());
 }

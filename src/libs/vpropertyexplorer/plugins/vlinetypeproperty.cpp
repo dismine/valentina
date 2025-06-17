@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -32,28 +32,36 @@
 #include <QCoreApplication>
 #include <QLocale>
 #include <QSize>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <QWidget>
 
 #include "../vproperty_p.h"
 
 VPE::VLineTypeProperty::VLineTypeProperty(const QString &name)
-    : VProperty(name, QVariant::Int), styles(), indexList()
+  : VProperty(name,
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+              QMetaType::Int),
+#else
+              QVariant::Int),
+#endif
+    styles(),
+    indexList()
 {
-    VProperty::d_ptr->VariantValue = 0;
-    VProperty::d_ptr->VariantValue.convert(QVariant::Int);
+    VProperty::vproperty_d_ptr->VariantValue = 0;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    VProperty::vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::Int));
+#else
+    VProperty::vproperty_d_ptr->VariantValue.convert(QVariant::Int);
+#endif
 }
 
-QVariant VPE::VLineTypeProperty::data(int column, int role) const
+auto VPE::VLineTypeProperty::data(int column, int role) const -> QVariant
 {
     if (styles.empty())
     {
-        return QVariant();
+        return {};
     }
 
-    int tmpIndex = VProperty::d_ptr->VariantValue.toInt();
+    int tmpIndex = VProperty::vproperty_d_ptr->VariantValue.toInt();
 
     if (tmpIndex < 0 || tmpIndex >= indexList.count())
     {
@@ -64,22 +72,20 @@ QVariant VPE::VLineTypeProperty::data(int column, int role) const
     {
         return indexList.at(tmpIndex);
     }
-    else if (column == DPC_Data && Qt::EditRole == role)
+
+    if (column == DPC_Data && Qt::EditRole == role)
     {
         return tmpIndex;
     }
-    else
-    {
-        return VProperty::data(column, role);
-    }
+    return VProperty::data(column, role);
 }
 
-QWidget *VPE::VLineTypeProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
-                                         const QAbstractItemDelegate *delegate)
+auto VPE::VLineTypeProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
+                                          const QAbstractItemDelegate *delegate) -> QWidget *
 {
     Q_UNUSED(options)
     Q_UNUSED(delegate)
-    QComboBox* tmpEditor = new QComboBox(parent);
+    auto *tmpEditor = new QComboBox(parent);
     tmpEditor->clear();
     tmpEditor->setLocale(parent->locale());
     tmpEditor->setIconSize(QSize(80, 14));
@@ -93,23 +99,23 @@ QWidget *VPE::VLineTypeProperty::createEditor(QWidget *parent, const QStyleOptio
         ++i;
     }
 
-    tmpEditor->setCurrentIndex(VProperty::d_ptr->VariantValue.toInt());
+    tmpEditor->setCurrentIndex(VProperty::vproperty_d_ptr->VariantValue.toInt());
     connect(tmpEditor, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &VLineTypeProperty::currentIndexChanged);
 
-    VProperty::d_ptr->editor = tmpEditor;
-    return VProperty::d_ptr->editor;
+    VProperty::vproperty_d_ptr->editor = tmpEditor;
+    return VProperty::vproperty_d_ptr->editor;
 }
 
-QVariant VPE::VLineTypeProperty::getEditorData(const QWidget *editor) const
+auto VPE::VLineTypeProperty::getEditorData(const QWidget *editor) const -> QVariant
 {
-    const QComboBox* tmpEditor = qobject_cast<const QComboBox*>(editor);
+    const auto *tmpEditor = qobject_cast<const QComboBox *>(editor);
     if (tmpEditor)
     {
         return tmpEditor->currentIndex();
     }
 
-    return QVariant(0);
+    return {0};
 }
 
 void VPE::VLineTypeProperty::setStyles(const QMap<QString, QIcon> &styles)
@@ -125,7 +131,7 @@ void VPE::VLineTypeProperty::setStyles(const QMap<QString, QIcon> &styles)
 }
 
 // cppcheck-suppress unusedFunction
-QMap<QString, QIcon> VPE::VLineTypeProperty::getStyles() const
+auto VPE::VLineTypeProperty::getStyles() const -> QMap<QString, QIcon>
 {
     return styles;
 }
@@ -139,26 +145,30 @@ void VPE::VLineTypeProperty::setValue(const QVariant &value)
         tmpIndex = 0;
     }
 
-    VProperty::d_ptr->VariantValue = tmpIndex;
-    VProperty::d_ptr->VariantValue.convert(QVariant::Int);
+    VProperty::vproperty_d_ptr->VariantValue = tmpIndex;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    VProperty::vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::Int));
+#else
+    VProperty::vproperty_d_ptr->VariantValue.convert(QVariant::Int);
+#endif
 
-    if (VProperty::d_ptr->editor != nullptr)
+    if (VProperty::vproperty_d_ptr->editor != nullptr)
     {
-        setEditorData(VProperty::d_ptr->editor);
+        setEditorData(VProperty::vproperty_d_ptr->editor);
     }
 }
 
-QString VPE::VLineTypeProperty::type() const
+auto VPE::VLineTypeProperty::type() const -> QString
 {
     return QStringLiteral("lineType");
 }
 
-VPE::VProperty *VPE::VLineTypeProperty::clone(bool include_children, VProperty *container) const
+auto VPE::VLineTypeProperty::clone(bool include_children, VProperty *container) const -> VPE::VProperty *
 {
     return VProperty::clone(include_children, container ? container : new VLineTypeProperty(getName()));
 }
 
-int VPE::VLineTypeProperty::IndexOfStyle(const QMap<QString, QIcon> &styles, const QString &style)
+auto VPE::VLineTypeProperty::IndexOfStyle(const QMap<QString, QIcon> &styles, const QString &style) -> vpesizetype
 {
     QVector<QString> indexList;
     QMap<QString, QIcon>::const_iterator i = styles.constBegin();
@@ -173,6 +183,6 @@ int VPE::VLineTypeProperty::IndexOfStyle(const QMap<QString, QIcon> &styles, con
 void VPE::VLineTypeProperty::currentIndexChanged(int index)
 {
     Q_UNUSED(index)
-    UserChangeEvent *event = new UserChangeEvent();
-    QCoreApplication::postEvent ( VProperty::d_ptr->editor, event );
+    auto *event = new UserChangeEvent();
+    QCoreApplication::postEvent(VProperty::vproperty_d_ptr->editor, event);
 }

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -33,11 +33,11 @@
 SavePlaceLabelOptions::SavePlaceLabelOptions(quint32 pieceId, const VPlaceLabelItem &oldLabel,
                                              const VPlaceLabelItem &newLabel, VAbstractPattern *doc, VContainer *data,
                                              quint32 id, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent),
-      m_oldLabel(oldLabel),
-      m_newLabel(newLabel),
-      m_data(data),
-      m_pieceId(pieceId)
+  : VUndoCommand(QDomElement(), doc, parent),
+    m_oldLabel(oldLabel),
+    m_newLabel(newLabel),
+    m_data(data),
+    m_pieceId(pieceId)
 {
     setText(tr("save place label options"));
     nodeId = id;
@@ -48,7 +48,7 @@ void SavePlaceLabelOptions::undo()
 {
     qCDebug(vUndo, "Undo.");
 
-    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagPoint);
+    QDomElement domElement = doc->FindElementById(nodeId, VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
         VToolPlaceLabel::AddAttributes(doc, domElement, nodeId, m_oldLabel);
@@ -64,7 +64,7 @@ void SavePlaceLabelOptions::undo()
 
         if (m_pieceId != NULL_ID)
         {
-            if (VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(m_pieceId)))
+            if (auto *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(m_pieceId)))
             {
                 tool->RefreshGeometry();
             }
@@ -81,7 +81,7 @@ void SavePlaceLabelOptions::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagPoint);
+    QDomElement domElement = doc->FindElementById(nodeId, VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
         VToolPlaceLabel::AddAttributes(doc, domElement, nodeId, m_newLabel);
@@ -97,7 +97,7 @@ void SavePlaceLabelOptions::redo()
 
         if (m_pieceId != NULL_ID)
         {
-            if (VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(m_pieceId)))
+            if (auto *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(m_pieceId)))
             {
                 tool->RefreshGeometry();
             }
@@ -110,23 +110,14 @@ void SavePlaceLabelOptions::redo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool SavePlaceLabelOptions::mergeWith(const QUndoCommand *command)
+auto SavePlaceLabelOptions::mergeWith(const QUndoCommand *command) -> bool
 {
-    const SavePlaceLabelOptions *saveCommand = static_cast<const SavePlaceLabelOptions *>(command);
+    const auto *saveCommand = static_cast<const SavePlaceLabelOptions *>(command);
     SCASSERT(saveCommand != nullptr);
 
-    if (saveCommand->LabelId() != nodeId)
+    if (saveCommand->LabelId() != nodeId || m_newLabel.GetCenterPoint() != saveCommand->NewLabel().GetCenterPoint())
     {
         return false;
-    }
-    else
-    {
-        const VPlaceLabelItem candidate = saveCommand->NewLabel();
-
-        if (m_newLabel.GetCenterPoint() != candidate.GetCenterPoint())
-        {
-            return false;
-        }
     }
 
     m_newLabel = saveCommand->NewLabel();

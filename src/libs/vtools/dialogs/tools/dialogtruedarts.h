@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef DIALOGTRUEDARTS_H
 #define DIALOGTRUEDARTS_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -40,52 +39,57 @@
 
 namespace Ui
 {
-    class DialogTrueDarts;
+class DialogTrueDarts;
 }
 
-class DialogTrueDarts : public DialogTool
+class DialogTrueDarts final : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
-    DialogTrueDarts(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    ~DialogTrueDarts();
+    DialogTrueDarts(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
+    ~DialogTrueDarts() override;
 
-    QString            GetFirstNewDartPointName();
-    QString            GetSecondNewDartPointName();
-    void               SetNewDartPointNames(const QString &firstPoint, const QString &secondPoint);
+    auto GetFirstNewDartPointName() -> QString;
+    auto GetSecondNewDartPointName() -> QString;
+    void SetNewDartPointNames(const QString &firstPoint, const QString &secondPoint);
 
-    quint32            GetFirstBasePointId() const;
-    void               SetFirstBasePointId(const quint32 &value);
+    auto GetFirstBasePointId() const -> quint32;
+    void SetFirstBasePointId(const quint32 &value);
 
-    quint32            GetSecondBasePointId() const;
-    void               SetSecondBasePointId(const quint32 &value);
+    auto GetSecondBasePointId() const -> quint32;
+    void SetSecondBasePointId(const quint32 &value);
 
-    quint32            GetFirstDartPointId() const;
-    void               SetFirstDartPointId(const quint32 &value);
+    auto GetFirstDartPointId() const -> quint32;
+    void SetFirstDartPointId(const quint32 &value);
 
-    quint32            GetSecondDartPointId() const;
-    void               SetSecondDartPointId(const quint32 &value);
+    auto GetSecondDartPointId() const -> quint32;
+    void SetSecondDartPointId(const quint32 &value);
 
-    quint32            GetThirdDartPointId() const;
-    void               SetThirdDartPointId(const quint32 &value);
+    auto GetThirdDartPointId() const -> quint32;
+    void SetThirdDartPointId(const quint32 &value);
 
-    void               SetChildrenId(const quint32 &ch1, const quint32 &ch2);
+    void SetChildrenId(const quint32 &ch1, const quint32 &ch2);
+
+    void SetNotes(const QString &notes);
+    auto GetNotes() const -> QString;
+
 public slots:
-    virtual void       ChosenObject(quint32 id, const SceneObject &type) override;
-    virtual void       PointNameChanged() override;
-    void               NameDartPoint1Changed();
-    void               NameDartPoint2Changed();
+    void ChosenObject(quint32 id, const SceneObject &type) override;
+    void PointNameChanged() override;
+    void NameDartPoint1Changed();
+    void NameDartPoint2Changed();
+
 protected:
-    virtual void       ShowVisualization() override;
+    void ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void       SaveData() override;
-    virtual void       CheckState() final;
+    void SaveData() override;
+    auto IsValid() const -> bool override;
 
 private:
-    Q_DISABLE_COPY(DialogTrueDarts)
+    Q_DISABLE_COPY_MOVE(DialogTrueDarts) // NOLINT
     Ui::DialogTrueDarts *ui;
 
     QString d1PointName;
@@ -96,14 +100,24 @@ private:
 
     bool flagName1;
     bool flagName2;
+    bool flagError;
+
+    /** @brief number number of handled objects */
+    qint32 number{0};
 
     void NameChanged(QLabel *labelEditNamePoint, const QString &pointD1Name, const QString &pointD2Name,
                      QLineEdit *secondPointName, bool &flagName);
 
     void FillComboBoxs(const quint32 &ch1, const quint32 &ch2);
 
-    void CheckName(QLineEdit* edit, QLabel *labelEditNamePoint, const QString &pointD1Name, const QString &pointD2Name,
+    void CheckName(QLineEdit *edit, QLabel *labelEditNamePoint, const QString &pointD1Name, const QString &pointD2Name,
                    QLineEdit *secondPointName, bool &flagName);
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto DialogTrueDarts::IsValid() const -> bool
+{
+    return flagName1 && flagName2 && flagError;
+}
 
 #endif // DIALOGTRUEDARTS_H

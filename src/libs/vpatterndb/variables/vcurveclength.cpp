@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -31,15 +31,20 @@
 #include <QLatin1String>
 #include <QMessageLogger>
 
-#include "../vmisc/def.h"
 #include "../ifc/ifcdef.h"
-#include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vspline.h"
+#include "../vmisc/def.h"
 #include "vcurvevariable.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
 
 //---------------------------------------------------------------------------------------------------------------------
 VCurveCLength::VCurveCLength()
-    : VCurveVariable()
+  : VCurveVariable()
 {
     SetType(VarType::CurveCLength);
 }
@@ -47,50 +52,73 @@ VCurveCLength::VCurveCLength()
 //---------------------------------------------------------------------------------------------------------------------
 VCurveCLength::VCurveCLength(const quint32 &id, const quint32 &parentId, const VAbstractBezier *curve,
                              CurveCLength cType, Unit patternUnit)
-    : VCurveVariable(id, parentId)
+  : VCurveVariable(id, parentId)
 {
     SetType(VarType::CurveCLength);
     SCASSERT(curve != nullptr)
     if (cType == CurveCLength::C1)
     {
-        SetValue(FromPixel(curve->GetC1Length(), patternUnit));
+        StoreValue(FromPixel(curve->GetC1Length(), patternUnit));
         SetName(c1Length_V + curve->name());
+
+        if (not curve->GetAlias().isEmpty())
+        {
+            SetAlias(c1Length_V + curve->GetAlias());
+        }
     }
     else
     {
-        SetValue(FromPixel(curve->GetC2Length(), patternUnit));
+        StoreValue(FromPixel(curve->GetC2Length(), patternUnit));
         SetName(c2Length_V + curve->name());
+
+        if (not curve->GetAlias().isEmpty())
+        {
+            SetAlias(c2Length_V + curve->GetAlias());
+        }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VCurveCLength::VCurveCLength(const quint32 &id, const quint32 &parentId, const QString &baseCurveName,
+VCurveCLength::VCurveCLength(const quint32 &id, const quint32 &parentId, const VAbstractBezier *baseCurve,
                              const VSpline &spl, CurveCLength cType, Unit patternUnit, qint32 segment)
-    : VCurveVariable(id, parentId)
+  : VCurveVariable(id, parentId)
 {
+    // cppcheck-suppress unknownMacro
+    SCASSERT(baseCurve != nullptr)
+
     SetType(VarType::CurveCLength);
     if (cType == CurveCLength::C1)
     {
-        SetValue(FromPixel(spl.GetC1Length(), patternUnit));
-        SetName(c1Length_V + baseCurveName + QLatin1String("_") + seg_ + QString().setNum(segment));
+        StoreValue(FromPixel(spl.GetC1Length(), patternUnit));
+        SetName(c1Length_V + baseCurve->name() + '_'_L1 + seg_ + QString().setNum(segment));
+
+        if (not baseCurve->GetAlias().isEmpty())
+        {
+            SetAlias(c1Length_V + baseCurve->GetAlias() + '_'_L1 + seg_ + QString().setNum(segment));
+        }
     }
     else
     {
-        SetValue(FromPixel(spl.GetC2Length(), patternUnit));
-        SetName(c2Length_V + baseCurveName + QLatin1String("_") + seg_ + QString().setNum(segment));
+        StoreValue(FromPixel(spl.GetC2Length(), patternUnit));
+        SetName(c2Length_V + baseCurve->name() + '_'_L1 + seg_ + QString().setNum(segment));
+
+        if (not baseCurve->GetAlias().isEmpty())
+        {
+            SetAlias(c2Length_V + baseCurve->GetAlias() + '_'_L1 + seg_ + QString().setNum(segment));
+        }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VCurveCLength::VCurveCLength(const VCurveCLength &var)
-    : VCurveVariable(var)
+  : VCurveVariable(var)
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VCurveCLength &VCurveCLength::operator=(const VCurveCLength &var)
+auto VCurveCLength::operator=(const VCurveCLength &var) -> VCurveCLength &
 {
-    if ( &var == this )
+    if (&var == this)
     {
         return *this;
     }
@@ -102,4 +130,3 @@ VCurveCLength &VCurveCLength::operator=(const VCurveCLength &var)
 VCurveCLength::~VCurveCLength()
 {
 }
-

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -31,9 +31,10 @@
 
 #include <QPointF>
 #include <QSharedData>
+#include <QString>
 
-#include "../vmisc/diagnostic.h"
-#include "../ifc/ifcdef.h"
+#include "../vmisc/defglobal.h"
+#include "../vmisc/typedef.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -42,49 +43,29 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VPatternLabelDataPrivate : public QSharedData
 {
 public:
-    VPatternLabelDataPrivate()
-        : m_dLabelWidth(),
-          m_dLabelHeight(),
-          m_dLabelAngle(),
-          m_iFontSize(0),
-          m_centerPin(NULL_ID),
-          m_topLeftPin(NULL_ID),
-          m_bottomRightPin(NULL_ID)
-    {}
-
-    VPatternLabelDataPrivate(const VPatternLabelDataPrivate &data)
-        : QSharedData(data),
-          m_dLabelWidth(data.m_dLabelWidth),
-          m_dLabelHeight(data.m_dLabelHeight),
-          m_dLabelAngle(data.m_dLabelAngle),
-          m_iFontSize(data.m_iFontSize),
-          m_centerPin(data.m_centerPin),
-          m_topLeftPin(data.m_topLeftPin),
-          m_bottomRightPin(data.m_bottomRightPin)
-    {}
-
-    ~VPatternLabelDataPrivate() Q_DECL_EQ_DEFAULT;
+    VPatternLabelDataPrivate() = default;
+    VPatternLabelDataPrivate(const VPatternLabelDataPrivate &data) = default;
+    ~VPatternLabelDataPrivate() = default;
 
     /** @brief m_dLabelWidth formula to calculate the width of label */
-    QString m_dLabelWidth;
+    QString m_dLabelWidth{}; // NOLINT(misc-non-private-member-variables-in-classes)
     /** @brief m_dLabelHeight formula to calculate the height of label */
-    QString m_dLabelHeight;
+    QString m_dLabelHeight{}; // NOLINT(misc-non-private-member-variables-in-classes)
     /** @brief m_dLabelAngle formula to calculate the rotation angle of label */
-    QString m_dLabelAngle;
+    QString m_dLabelAngle{}; // NOLINT(misc-non-private-member-variables-in-classes)
     /** @brief m_iFontSize label text base font size */
-    int     m_iFontSize;
+    int m_iFontSize{0}; // NOLINT(misc-non-private-member-variables-in-classes)
     /** @brief m_centerPin center pin id */
-    quint32 m_centerPin;
+    quint32 m_centerPin{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
     /** @brief m_topLeftPin top left corner pin id */
-    quint32 m_topLeftPin;
+    quint32 m_topLeftPin{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
     /** @brief m_bottomRightPin bottom right corner pin id */
-    quint32 m_bottomRightPin;
+    quint32 m_bottomRightPin{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
-    VPatternLabelDataPrivate &operator=(const VPatternLabelDataPrivate &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN_MOVE(VPatternLabelDataPrivate) // NOLINT
 };
 
 QT_WARNING_POP
 
 #endif // VPATTERNLABELDATA_P_H
-

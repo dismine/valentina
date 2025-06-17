@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,10 +29,12 @@
 #ifndef VPIECENODE_P_H
 #define VPIECENODE_P_H
 
-#include <QSharedData>
+#include <QCoreApplication>
 #include <QDataStream>
+#include <QSharedData>
+
+#include "../ifc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
-#include "../vmisc/diagnostic.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -41,145 +43,135 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VPieceNodeData : public QSharedData
 {
 public:
-    VPieceNodeData()
-        : m_id(NULL_ID),
-          m_typeTool(Tool::NodePoint),
-          m_reverse(false),
-          m_excluded(false),
-          m_isPassmark(false),
-          m_isMainPathNode(true),
-          m_formulaWidthBefore(currentSeamAllowance),
-          m_formulaWidthAfter(currentSeamAllowance),
-          m_angleType(PieceNodeAngle::ByLength),
-          m_passmarkLineType(PassmarkLineType::OneLine),
-          m_passmarkAngleType(PassmarkAngleType::Straightforward),
-          m_isShowSecondPassmark(true),
-          m_checkUniqueness(true)
-    {}
+    VPieceNodeData() = default;
+    VPieceNodeData(quint32 id, Tool typeTool, bool reverse);
+    VPieceNodeData(const VPieceNodeData &node) = default;
+    ~VPieceNodeData() = default;
 
-    VPieceNodeData(quint32 id, Tool typeTool, bool reverse)
-        : m_id(id),
-          m_typeTool(typeTool),
-          m_reverse(reverse),
-          m_excluded(false),
-          m_isPassmark(false),
-          m_isMainPathNode(true),
-          m_formulaWidthBefore(currentSeamAllowance),
-          m_formulaWidthAfter(currentSeamAllowance),
-          m_angleType(PieceNodeAngle::ByLength),
-          m_passmarkLineType(PassmarkLineType::OneLine),
-          m_passmarkAngleType(PassmarkAngleType::Straightforward),
-          m_isShowSecondPassmark(true),
-          m_checkUniqueness(true)
-    {
-        if (m_typeTool == Tool::NodePoint)
-        {
-            m_reverse = false;
-        }
-    }
-
-    VPieceNodeData (const VPieceNodeData& node)
-        : QSharedData(node),
-          m_id(node.m_id),
-          m_typeTool(node.m_typeTool),
-          m_reverse(node.m_reverse),
-          m_excluded(node.m_excluded),
-          m_isPassmark(node.m_isPassmark),
-          m_isMainPathNode(node.m_isMainPathNode),
-          m_formulaWidthBefore(node.m_formulaWidthBefore),
-          m_formulaWidthAfter(node.m_formulaWidthAfter),
-          m_angleType(node.m_angleType),
-          m_passmarkLineType(node.m_passmarkLineType),
-          m_passmarkAngleType(node.m_passmarkAngleType),
-          m_isShowSecondPassmark(node.m_isShowSecondPassmark),
-          m_checkUniqueness(node.m_checkUniqueness)
-    {}
-
-    ~VPieceNodeData() Q_DECL_EQ_DEFAULT;
-
-    friend QDataStream& operator<<(QDataStream& out, const VPieceNodeData& p);
-    friend QDataStream& operator>>(QDataStream& in, VPieceNodeData& p);
+    friend auto operator<<(QDataStream &out, const VPieceNodeData &p) -> QDataStream &;
+    friend auto operator>>(QDataStream &in, VPieceNodeData &p) -> QDataStream &;
 
     /** @brief id object id. */
-    quint32 m_id;
+    quint32 m_id{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief typeTool type of tool */
-    Tool m_typeTool;
+    Tool m_typeTool{Tool::NodePoint}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief reverse true if need reverse points list for node. */
-    bool m_reverse;
+    bool m_reverse{false}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief m_excluded true if item excluded from main path. Excluded item is not visible and also will not has
      * affect on main path. Also include to exist path items automatically setted excluded. */
-    bool m_excluded;
+    bool m_excluded{false}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief m_isPassmark has sense only for points. If true to seam allowance should be added a passmark. */
-    bool m_isPassmark;
+    bool m_isPassmark{false}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief m_isMainPathNode need fin know if allowed for this passmakr to be double. */
-    bool m_isMainPathNode;
+    bool m_isMainPathNode{true}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    QString m_formulaWidthBefore;
-    QString m_formulaWidthAfter;
+    QString m_formulaWidthBefore{currentSeamAllowance}; // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_formulaWidthAfter{currentSeamAllowance};  // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_formulaPassmarkLength{};                  // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_formulaPassmarkWidth{};                   // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_formulaPassmarkAngle{};                   // NOLINT(misc-non-private-member-variables-in-classes)
 
-    PieceNodeAngle m_angleType;
+    PieceNodeAngle m_angleType{PieceNodeAngle::ByLength}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    PassmarkLineType  m_passmarkLineType;
-    PassmarkAngleType m_passmarkAngleType;
+    PassmarkLineType m_passmarkLineType{// NOLINT(misc-non-private-member-variables-in-classes)
+                                        PassmarkLineType::OneLine};
+    PassmarkAngleType m_passmarkAngleType{// NOLINT(misc-non-private-member-variables-in-classes)
+                                          PassmarkAngleType::Straightforward};
 
-    bool m_isShowSecondPassmark;
+    bool m_isShowSecondPassmark{true};        // NOLINT(misc-non-private-member-variables-in-classes)
+    bool m_isPassmarkClockwiseOpening{false}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief m_checkUniqueness need in cases where different points have the same coordinates, become one point.
      * By default the check enabled. Disable it only if in a path cannot be used just one point. For example if
      * gradation change a piece shape and the seond point should be remaind.*/
-    bool m_checkUniqueness;
+    bool m_checkUniqueness{true}; // NOLINT(misc-non-private-member-variables-in-classes)
+
+    bool m_manualPassmarkLength{false}; // NOLINT(misc-non-private-member-variables-in-classes)
+    bool m_manualPassmarkWidth{false};  // NOLINT(misc-non-private-member-variables-in-classes)
+    bool m_manualPassmarkAngle{false};  // NOLINT(misc-non-private-member-variables-in-classes)
+
+    bool m_turnPoint{true}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
-    VPieceNodeData &operator=(const VPieceNodeData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN_MOVE(VPieceNodeData) // NOLINT
+
+    static constexpr quint32 streamHeader = 0x2198CBC8; // CRC-32Q string "VPieceNodeData"
+    static constexpr quint16 classVersion = 3;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline VPieceNodeData::VPieceNodeData(quint32 id, Tool typeTool, bool reverse)
+  : m_id(id),
+    m_typeTool(typeTool),
+    m_reverse(reverse)
+{
+    if (m_typeTool == Tool::NodePoint)
+    {
+        m_reverse = false;
+    }
+}
 
 // Friend functions
 //---------------------------------------------------------------------------------------------------------------------
-QDataStream &operator<<(QDataStream &out, const VPieceNodeData &p)
+inline auto operator<<(QDataStream &out, const VPieceNodeData &p) -> QDataStream &
 {
-    out << p.m_id
-        << static_cast<int>(p.m_typeTool)
-        << p.m_reverse
-        << p.m_excluded
-        << p.m_isPassmark
-        << p.m_formulaWidthBefore
-        << p.m_formulaWidthAfter
-        << static_cast<int>(p.m_angleType)
-        << static_cast<int>(p.m_passmarkLineType)
-        << static_cast<int>(p.m_passmarkAngleType)
-        << p.m_isShowSecondPassmark;
+    out << VPieceNodeData::streamHeader << VPieceNodeData::classVersion;
+
+    out << p.m_id << p.m_typeTool << p.m_reverse << p.m_excluded << p.m_isPassmark << p.m_formulaWidthBefore
+        << p.m_formulaWidthAfter << p.m_formulaPassmarkLength << p.m_angleType << p.m_passmarkLineType
+        << p.m_passmarkAngleType << p.m_isShowSecondPassmark << p.m_checkUniqueness << p.m_manualPassmarkLength
+        << p.m_turnPoint << p.m_formulaPassmarkWidth << p.m_formulaPassmarkAngle << p.m_manualPassmarkWidth
+        << p.m_manualPassmarkAngle << p.m_isPassmarkClockwiseOpening;
+
     return out;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDataStream &operator>>(QDataStream &in, VPieceNodeData &p)
+inline auto operator>>(QDataStream &in, VPieceNodeData &p) -> QDataStream &
 {
-    int typeTool = 0;
-    int angleType = 0;
-    int passmarkLineType = 0;
-    int passmarkAngleType = 0;
+    quint32 actualStreamHeader = 0;
+    in >> actualStreamHeader;
 
-    in >> p.m_id
-       >> typeTool
-       >> p.m_reverse
-       >> p.m_excluded
-       >> p.m_isPassmark
-       >> p.m_formulaWidthBefore
-       >> p.m_formulaWidthAfter
-       >> angleType
-       >> passmarkLineType
-       >> passmarkAngleType
-       >> p.m_isShowSecondPassmark;
+    if (actualStreamHeader != VPieceNodeData::streamHeader)
+    {
+        QString const message = QCoreApplication::tr("VPieceNodeData prefix mismatch error: actualStreamHeader = 0x%1 "
+                                                     "and streamHeader = 0x%2")
+                                    .arg(actualStreamHeader, 8, 0x10, QChar('0'))
+                                    .arg(VPieceNodeData::streamHeader, 8, 0x10, QChar('0'));
+        throw VException(message);
+    }
 
-    p.m_typeTool = static_cast<Tool>(typeTool);
-    p.m_angleType = static_cast<PieceNodeAngle>(angleType);
-    p.m_passmarkLineType = static_cast<PassmarkLineType>(passmarkLineType);
-    p.m_passmarkAngleType = static_cast<PassmarkAngleType>(passmarkAngleType);
+    quint16 actualClassVersion = 0;
+    in >> actualClassVersion;
+
+    if (actualClassVersion > VPieceNodeData::classVersion)
+    {
+        QString const message = QCoreApplication::tr("VPieceNodeData compatibility error: actualClassVersion = %1 and "
+                                                     "classVersion = %2")
+                                    .arg(actualClassVersion)
+                                    .arg(VPieceNodeData::classVersion);
+        throw VException(message);
+    }
+
+    in >> p.m_id >> p.m_typeTool >> p.m_reverse >> p.m_excluded >> p.m_isPassmark >> p.m_formulaWidthBefore >>
+        p.m_formulaWidthAfter >> p.m_formulaPassmarkLength >> p.m_angleType >> p.m_passmarkLineType >>
+        p.m_passmarkAngleType >> p.m_isShowSecondPassmark >> p.m_checkUniqueness >> p.m_manualPassmarkLength;
+
+    if (actualClassVersion >= 2)
+    {
+        in >> p.m_turnPoint;
+    }
+
+    if (actualClassVersion >= 3)
+    {
+        in >> p.m_formulaPassmarkWidth >> p.m_formulaPassmarkAngle >> p.m_manualPassmarkWidth >>
+            p.m_manualPassmarkAngle >> p.m_isPassmarkClockwiseOpening;
+    }
 
     return in;
 }
@@ -187,4 +179,3 @@ QDataStream &operator>>(QDataStream &in, VPieceNodeData &p)
 QT_WARNING_POP
 
 #endif // VPIECENODE_P_H
-

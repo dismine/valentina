@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 #ifndef VISTOOLROTATION_H
 #define VISTOOLROTATION_H
 
-#include <qcompilerdetection.h>
+
 #include <QColor>
 #include <QGraphicsItem>
 #include <QMetaObject>
@@ -39,35 +39,42 @@
 #include <QVector>
 #include <QtGlobal>
 
-#include "../ifc/ifcdef.h"
 #include "../vmisc/def.h"
 #include "visoperation.h"
 
 class VisToolRotation : public VisOperation
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolRotation(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolRotation();
+    ~VisToolRotation() override = default;
 
-    virtual void   RefreshGeometry() override;
+    void RefreshGeometry() override;
 
     void SetOriginPointId(quint32 value);
 
-    QString Angle() const;
-    void    SetAngle(const QString &expression);
+    auto Angle() const -> QString;
+    void SetAngle(const QString &expression);
 
-    virtual int type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolRotation)};
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ToolRotation)};
 private:
-    Q_DISABLE_COPY(VisToolRotation)
-    qreal           angle;
-    VScaledEllipse *point;
-    VCurvePathItem *angleArc;
-    VScaledLine    *xAxis;
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VisToolRotation) // NOLINT
+    qreal           m_angle{INT_MIN};
+    VScaledEllipse *m_point{nullptr};
+    VCurvePathItem *m_angleArc{nullptr};
+    VScaledLine    *m_xAxis{nullptr};
+    quint32         m_originPointId{NULL_ID};
 
     template <class Item>
-    int AddCurve(qreal angle, const QPointF &origin, quint32 id, int i);
+    auto AddCurve(qreal angle, const QPointF &origin, quint32 id, int i) -> int;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolRotation::SetOriginPointId(quint32 value)
+{
+    m_originPointId = value;
+}
 
 #endif // VISTOOLROTATION_H

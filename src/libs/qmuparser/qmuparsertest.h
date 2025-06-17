@@ -22,19 +22,15 @@
 #ifndef QMUPARSERTEST_H
 #define QMUPARSERTEST_H
 
-#include <stdlib.h>
 #include <QMetaObject>
 #include <QObject>
+#include <QRandomGenerator>
 #include <QString>
 #include <QVector>
 #include <QtGlobal>
 #include <locale>
+#include <stdlib.h>
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
-#   include <QRandomGenerator>
-#endif
-
-#include "../qmuparser/qmuparser_global.h"
 #include "qmuparser.h"
 #include "qmuparser_global.h"
 #include "qmuparserdef.h"
@@ -45,12 +41,10 @@
  * @brief This file contains the parser test class.
  */
 
-namespace qmu
-{
 /**
  * @brief Namespace for test cases.
  */
-namespace Test
+namespace qmu::Test
 {
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -60,9 +54,10 @@ namespace Test
  */
 class QMUPARSERSHARED_EXPORT QmuParserTester : public QObject // final
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
-    typedef int ( QmuParserTester::*testfun_type ) ();
+    using testfun_type = int (QmuParserTester::*)();
 
     explicit QmuParserTester(QObject *parent = nullptr);
 
@@ -70,276 +65,170 @@ public slots:
     void Run();
 
 private:
-    Q_DISABLE_COPY(QmuParserTester)
+    Q_DISABLE_COPY_MOVE(QmuParserTester) // NOLINT
     QVector<testfun_type> m_vTestFun;
     static int c_iCount;
 
-    void AddTest ( testfun_type a_pFun );
+    void AddTest(testfun_type a_pFun);
 
     // Test Double Parser
-    static int EqnTest ( const QString &a_str, double a_fRes, bool a_fPass );
-    static int EqnTestWithVarChange (const QString &a_str, double a_fRes1, double a_fVar1, double a_fRes2,
-                                     double a_fVar2);
-    static int ThrowTest ( const QString &a_str, int a_iErrc, bool a_bFail = true );
+    static auto EqnTest(const QString &a_str, double a_fRes, bool a_fPass) -> int;
+    static auto EqnTestWithVarChange(const QString &a_str, double a_fRes1, double a_fVar1, double a_fRes2,
+                                     double a_fVar2) -> int;
+    static auto ThrowTest(const QString &a_str, int a_iErrc, bool a_bFail = true) -> int;
 
     // Test Bulkmode
-    static int EqnTestBulk(const QString &a_str, double a_fRes[4], bool a_fPass);
+    static auto EqnTestBulk(const QString &a_str, double a_fRes[4], bool a_fPass) -> int;
 
     // Multiarg callbacks
-    static qreal f1of1 ( qreal v )
-    {
-        return v;
-    }
+    static auto f1of1(qreal v) -> qreal { return v; }
 
-    static qreal f1of2 ( qreal v, qreal  )
-    {
-        return v;
-    }
+    static auto f1of2(qreal v, qreal) -> qreal { return v; }
 
-    static qreal f2of2 ( qreal, qreal v )
-    {
-        return v;
-    }
+    static auto f2of2(qreal, qreal v) -> qreal { return v; }
 
-    static qreal f1of3 ( qreal v, qreal, qreal  )
-    {
-        return v;
-    }
+    static auto f1of3(qreal v, qreal, qreal) -> qreal { return v; }
 
-    static qreal f2of3 ( qreal, qreal v, qreal  )
-    {
-        return v;
-    }
+    static auto f2of3(qreal, qreal v, qreal) -> qreal { return v; }
 
-    static qreal f3of3 ( qreal, qreal, qreal v )
-    {
-        return v;
-    }
+    static auto f3of3(qreal, qreal, qreal v) -> qreal { return v; }
 
-    static qreal f1of4 ( qreal v, qreal,   qreal, qreal  )
-    {
-        return v;
-    }
+    static auto f1of4(qreal v, qreal, qreal, qreal) -> qreal { return v; }
 
-    static qreal f2of4 ( qreal, qreal v, qreal, qreal  )
-    {
-        return v;
-    }
+    static auto f2of4(qreal, qreal v, qreal, qreal) -> qreal { return v; }
 
-    static qreal f3of4 ( qreal, qreal,   qreal v, qreal  )
-    {
-        return v;
-    }
+    static auto f3of4(qreal, qreal, qreal v, qreal) -> qreal { return v; }
 
-    static qreal f4of4 ( qreal, qreal,   qreal, qreal v )
-    {
-        return v;
-    }
+    static auto f4of4(qreal, qreal, qreal, qreal v) -> qreal { return v; }
 
-    static qreal f1of5 ( qreal v, qreal,   qreal, qreal, qreal  )
-    {
-        return v;
-    }
+    static auto f1of5(qreal v, qreal, qreal, qreal, qreal) -> qreal { return v; }
 
-    static qreal f2of5 ( qreal, qreal v, qreal, qreal, qreal  )
-    {
-        return v;
-    }
+    static auto f2of5(qreal, qreal v, qreal, qreal, qreal) -> qreal { return v; }
 
-    static qreal f3of5 ( qreal, qreal,   qreal v, qreal, qreal  )
-    {
-        return v;
-    }
+    static auto f3of5(qreal, qreal, qreal v, qreal, qreal) -> qreal { return v; }
 
-    static qreal f4of5 ( qreal, qreal,   qreal, qreal v, qreal  )
-    {
-        return v;
-    }
+    static auto f4of5(qreal, qreal, qreal, qreal v, qreal) -> qreal { return v; }
 
-    static qreal f5of5 ( qreal, qreal,   qreal, qreal, qreal v )
-    {
-        return v;
-    }
+    static auto f5of5(qreal, qreal, qreal, qreal, qreal v) -> qreal { return v; }
 
-    static qreal Min ( qreal a_fVal1, qreal a_fVal2 )
-    {
-        return ( a_fVal1 < a_fVal2 ) ? a_fVal1 : a_fVal2;
-    }
+    static auto Min(qreal a_fVal1, qreal a_fVal2) -> qreal { return (a_fVal1 < a_fVal2) ? a_fVal1 : a_fVal2; }
 
-    static qreal Max ( qreal a_fVal1, qreal a_fVal2 )
-    {
-        return ( a_fVal1 > a_fVal2 ) ? a_fVal1 : a_fVal2;
-    }
+    static auto Max(qreal a_fVal1, qreal a_fVal2) -> qreal { return (a_fVal1 > a_fVal2) ? a_fVal1 : a_fVal2; }
 
-    static qreal plus2 ( qreal v1 )
-    {
-        return v1 + 2;
-    }
+    static auto plus2(qreal v1) -> qreal { return v1 + 2; }
 
-    static qreal times3 ( qreal v1 )
-    {
-        return v1 * 3;
-    }
+    static auto times3(qreal v1) -> qreal { return v1 * 3; }
 
-    static qreal sqr ( qreal v1 )
-    {
-        return v1 * v1;
-    }
+    static auto sqr(qreal v1) -> qreal { return v1 * v1; }
 
-    static qreal sign ( qreal v )
-    {
-        return -v;
-    }
+    static auto sign(qreal v) -> qreal { return -v; }
 
-    static qreal add ( qreal v1, qreal v2 )
-    {
-        return v1 + v2;
-    }
+    static auto add(qreal v1, qreal v2) -> qreal { return v1 + v2; }
 
-    static qreal land ( qreal v1, qreal v2 )
-    {
-        return static_cast<int>( v1 ) & static_cast<int>( v2 );
-    }
+    static auto land(qreal v1, qreal v2) -> qreal { return static_cast<int>(v1) & static_cast<int>(v2); }
 
-    static qreal FirstArg ( const qreal* a_afArg, int a_iArgc )
+    static auto FirstArg(const qreal *a_afArg, qmusizetype a_iArgc) -> qreal
     {
-        if ( a_iArgc == 0)
+        if (a_iArgc == 0)
         {
-            throw QmuParserError ( "too few arguments for function FirstArg." );
+            throw QmuParserError("too few arguments for function FirstArg.");
         }
 
         return a_afArg[0];
     }
 
-    static qreal LastArg ( const qreal* a_afArg, int a_iArgc )
+    static auto LastArg(const qreal *a_afArg, qmusizetype a_iArgc) -> qreal
     {
-        if ( a_iArgc == 0)
+        if (a_iArgc == 0)
         {
-            throw QmuParserError ( "too few arguments for function LastArg." );
+            throw QmuParserError("too few arguments for function LastArg.");
         }
 
         return a_afArg[a_iArgc - 1];
     }
 
-    static qreal Sum ( const qreal* a_afArg, int a_iArgc )
+    static auto Sum(const qreal *a_afArg, qmusizetype a_iArgc) -> qreal
     {
-        if ( a_iArgc == 0)
+        if (a_iArgc == 0)
         {
-            throw QmuParserError ( "too few arguments for function sum." );
+            throw QmuParserError("too few arguments for function sum.");
         }
 
         qreal fRes = 0;
-        for ( int i = 0; i < a_iArgc; ++i )
+        for (int i = 0; i < a_iArgc; ++i)
         {
             fRes += a_afArg[i];
         }
         return fRes;
     }
 
-    static qreal Rnd ( qreal v )
+    static auto Rnd(qreal v) -> qreal
     {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
-        return static_cast<qreal>( ( 1 + ( v * QRandomGenerator().bounded(RAND_MAX) / ( RAND_MAX + 1.0 ) ) ) );
-#else
-        // cppcheck-suppress qrandCalled
-        return static_cast<qreal>( ( 1 + ( v * qrand() / ( RAND_MAX + 1.0 ) ) ) );
-#endif
+        return static_cast<qreal>(
+            (1 + (v * QRandomGenerator().bounded(static_cast<qreal>(RAND_MAX)) / (RAND_MAX + 1.0))));
     }
 
-    static qreal RndWithString ( const char_type* )
+    static auto RndWithString(const char_type *) -> qreal
     {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
-        return static_cast<qreal>( ( 1 + ( 1000.0f * QRandomGenerator().bounded(RAND_MAX) / ( RAND_MAX + 1.0 ) ) ) );
-#else
-        // cppcheck-suppress qrandCalled
-        return static_cast<qreal>( ( 1 + ( 1000.0f * static_cast<qreal>(qrand()) / ( RAND_MAX + 1.0 ) ) ) );
-#endif
+        return static_cast<qreal>(
+            (1 + (1000.0f * QRandomGenerator().bounded(static_cast<qreal>(RAND_MAX)) / (RAND_MAX + 1.0))));
     }
 
-    static qreal Ping()
-    {
-        return 10;
-    }
+    static auto Ping() -> qreal { return 10; }
 
-    static qreal ValueOf ( const QString & )
-    {
-        return 123;
-    }
+    static auto ValueOf(const QString &) -> qreal { return 123; }
 
-    static qreal StrFun1 ( const QString & v1 )
+    static auto StrFun1(const QString &v1) -> qreal
     {
-        int val = v1.toInt();
+        int const val = v1.toInt();
         return static_cast<qreal>(val);
     }
 
-    static qreal StrFun2 ( const QString & v1, qreal v2 )
+    static auto StrFun2(const QString &v1, qreal v2) -> qreal
     {
-        int val = v1.toInt();
-        return static_cast<qreal>( val + v2 );
+        int const val = v1.toInt();
+        return val + v2;
     }
 
-    static qreal StrFun3 ( const QString & v1, qreal v2, qreal v3 )
+    static auto StrFun3(const QString &v1, qreal v2, qreal v3) -> qreal
     {
-        int val = v1.toInt();
+        int const val = v1.toInt();
         return val + v2 + v3;
     }
 
-    static qreal StrToFloat ( const QString & a_szMsg )
+    static auto StrToFloat(const QString &a_szMsg) -> qreal
     {
-        qreal val = a_szMsg.toDouble();
+        qreal const val = a_szMsg.toDouble();
         return val;
     }
 
     // postfix operator callback
-    static qreal Mega ( qreal a_fVal )
-    {
-        return a_fVal * static_cast<qreal>( 1e6 );
-    }
+    static auto Mega(qreal a_fVal) -> qreal { return a_fVal * 1e6; }
 
-    static qreal Micro ( qreal a_fVal )
-    {
-        return a_fVal * static_cast<qreal>( 1e-6 );
-    }
+    static auto Micro(qreal a_fVal) -> qreal { return a_fVal * 1e-6; }
 
-    static qreal Milli ( qreal a_fVal )
-    {
-        return a_fVal / static_cast<qreal>( 1e3 );
-    }
+    static auto Milli(qreal a_fVal) -> qreal { return a_fVal / 1e3; }
 
     // Custom value recognition
-    static int IsHexVal (const QString &a_szExpr, int *a_iPos, qreal *a_fVal, const QLocale &locale,
-                         const QChar &decimal, const QChar &thousand);
+    static auto IsHexVal(const QString &a_szExpr, qmusizetype *a_iPos, qreal *a_fVal, const QLocale &locale,
+                         bool cNumbers, const QChar &decimal, const QChar &thousand) -> int;
 
-    // cppcheck-suppress functionStatic
-    int TestNames();
-    // cppcheck-suppress functionStatic
-    int TestSyntax();
-    // cppcheck-suppress functionStatic
-    int TestMultiArg();
-    // cppcheck-suppress functionStatic
-    int TestPostFix();
-    // cppcheck-suppress functionStatic
-    int TestExpression();
-    // cppcheck-suppress functionStatic
-    int TestInfixOprt();
-    // cppcheck-suppress functionStatic
-    int TestBinOprt();
-    // cppcheck-suppress functionStatic
-    int TestVarConst();
-    // cppcheck-suppress functionStatic
-    int TestInterface();
-    // cppcheck-suppress functionStatic
-    int TestException();
-    // cppcheck-suppress functionStatic
-    int TestStrArg();
-    // cppcheck-suppress functionStatic
-    int TestIfThenElse();
-    // cppcheck-suppress functionStatic
-    int TestBulkMode();
+    auto TestNames() -> int;
+    auto TestSyntax() -> int;
+    auto TestMultiArg() -> int;
+    auto TestPostFix() -> int;
+    auto TestExpression() -> int;
+    auto TestInfixOprt() -> int;
+    auto TestBinOprt() -> int;
+    auto TestVarConst() -> int;
+    auto TestInterface() -> int;
+    auto TestException() -> int;
+    auto TestStrArg() -> int;
+    auto TestIfThenElse() -> int;
+    auto TestBulkMode() -> int;
 
     static void Abort();
 };
-} // namespace Test
-} // namespace qmu
+} // namespace qmu::Test
 
 #endif

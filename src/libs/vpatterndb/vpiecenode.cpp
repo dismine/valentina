@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -27,63 +27,33 @@
  *************************************************************************/
 
 #include "vpiecenode.h"
-#include "vpiecenode_p.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "vcontainer.h"
-#include "calculator.h"
+#include "vformula.h"
+#include "vpiecenode_p.h"
 
 #include <QDataStream>
 #include <QtNumeric>
 
-namespace
-{
-//---------------------------------------------------------------------------------------------------------------------
-qreal EvalFormula(const VContainer *data, QString formula)
-{
-    if (formula.isEmpty())
-    {
-        return -1;
-    }
-    else
-    {
-        try
-        {
-            QScopedPointer<Calculator> cal(new Calculator());
-            const qreal result = cal->EvalFormula(data->DataVariables(), formula);
-
-            if (qIsInf(result) || qIsNaN(result))
-            {
-                return -1;
-            }
-            return result;
-        }
-        catch (qmu::QmuParserError &e)
-        {
-            Q_UNUSED(e)
-            return -1;
-        }
-    }
-}
-}
-
 //---------------------------------------------------------------------------------------------------------------------
 VPieceNode::VPieceNode()
-    : d(new VPieceNodeData)
-{}
+  : d(new VPieceNodeData)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VPieceNode::VPieceNode(quint32 id, Tool typeTool, bool reverse)
-    : d(new VPieceNodeData(id, typeTool, reverse))
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VPieceNode::VPieceNode(const VPieceNode &node)
-    : d (node.d)
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VPieceNode &VPieceNode::operator=(const VPieceNode &node)
+  : d(new VPieceNodeData(id, typeTool, reverse))
 {
-    if ( &node == this )
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+COPY_CONSTRUCTOR_IMPL(VPieceNode)
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPieceNode::operator=(const VPieceNode &node) -> VPieceNode &
+{
+    if (&node == this)
     {
         return *this;
     }
@@ -92,26 +62,38 @@ VPieceNode &VPieceNode::operator=(const VPieceNode &node)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceNode::~VPieceNode()
-{}
+VPieceNode::VPieceNode(VPieceNode &&node) noexcept
+  : d(std::move(node.d))
+{
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPieceNode::operator=(VPieceNode &&node) noexcept -> VPieceNode &
+{
+    std::swap(d, node.d);
+    return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPieceNode::~VPieceNode() = default;
 
 // Friend functions
 //---------------------------------------------------------------------------------------------------------------------
-QDataStream &operator<<(QDataStream &out, const VPieceNode &p)
+auto operator<<(QDataStream &out, const VPieceNode &p) -> QDataStream &
 {
-    out << p.d;
+    out << *p.d;
     return out;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDataStream &operator>>(QDataStream &in, VPieceNode &p)
+auto operator>>(QDataStream &in, VPieceNode &p) -> QDataStream &
 {
     in >> *p.d;
     return in;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VPieceNode::GetId() const
+auto VPieceNode::GetId() const -> quint32
 {
     return d->m_id;
 }
@@ -123,7 +105,7 @@ void VPieceNode::SetId(quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Tool VPieceNode::GetTypeTool() const
+auto VPieceNode::GetTypeTool() const -> Tool
 {
     return d->m_typeTool;
 }
@@ -135,7 +117,7 @@ void VPieceNode::SetTypeTool(Tool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPieceNode::GetReverse() const
+auto VPieceNode::GetReverse() const -> bool
 {
     return d->m_reverse;
 }
@@ -150,25 +132,68 @@ void VPieceNode::SetReverse(bool reverse)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPieceNode::GetSABefore(const VContainer *data) const
+auto VPieceNode::GetSABefore(const VContainer *data) const -> qreal
 {
     if (d->m_formulaWidthBefore == currentSeamAllowance)
     {
         return -1;
     }
 
-    return EvalFormula(data, d->m_formulaWidthBefore);
+    VFormula formula(d->m_formulaWidthBefore, data);
+    formula.Eval();
+
+    if (formula.error())
+    {
+        QString nodeName;
+        try
+        {
+            nodeName = data->GetGObject(d->m_id)->name();
+        }
+        catch (const VExceptionBadId &)
+        {
+        }
+
+        const QString errorMsg = QObject::tr("Cannot calculate seam allowance before for point '%1'. Reason: %2.")
+                                     .arg(nodeName, formula.Reason());
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(errorMsg)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        return -1;
+    }
+    return formula.getDoubleValue();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPieceNode::GetSABefore(const VContainer *data, Unit unit) const
+auto VPieceNode::GetSABefore(const VContainer *data, Unit unit) const -> qreal
 {
     if (d->m_formulaWidthBefore == currentSeamAllowance)
     {
         return -1;
     }
 
-    qreal value = EvalFormula(data, d->m_formulaWidthBefore);
+    VFormula formula(d->m_formulaWidthBefore, data);
+    formula.Eval();
+
+    if (formula.error())
+    {
+        QString nodeName;
+        try
+        {
+            nodeName = data->GetGObject(d->m_id)->name();
+        }
+        catch (const VExceptionBadId &)
+        {
+        }
+
+        const QString errorMsg = QObject::tr("Cannot calculate seam allowance before for point '%1'. Reason: %2.")
+                                     .arg(nodeName, formula.Reason());
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(errorMsg)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        return -1;
+    }
+
+    qreal value = formula.getDoubleValue();
     if (value >= 0)
     {
         value = ToPixel(value, unit);
@@ -177,7 +202,7 @@ qreal VPieceNode::GetSABefore(const VContainer *data, Unit unit) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPieceNode::GetFormulaSABefore() const
+auto VPieceNode::GetFormulaSABefore() const -> QString
 {
     return d->m_formulaWidthBefore;
 }
@@ -192,25 +217,70 @@ void VPieceNode::SetFormulaSABefore(const QString &formula)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPieceNode::GetSAAfter(const VContainer *data) const
+auto VPieceNode::GetSAAfter(const VContainer *data) const -> qreal
 {
     if (d->m_formulaWidthAfter == currentSeamAllowance)
     {
         return -1;
     }
 
-    return EvalFormula(data, d->m_formulaWidthAfter);
+    VFormula formula(d->m_formulaWidthAfter, data);
+    formula.Eval();
+
+    if (formula.error())
+    {
+        QString nodeName;
+        try
+        {
+            nodeName = data->GetGObject(d->m_id)->name();
+        }
+        catch (const VExceptionBadId &)
+        {
+        }
+
+        const QString errorMsg = QObject::tr("Cannot calculate seam allowance after for point '%1'. Reason: %2.")
+                                     .arg(nodeName, formula.Reason());
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(errorMsg)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        return -1;
+    }
+
+    return formula.getDoubleValue();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPieceNode::GetSAAfter(const VContainer *data, Unit unit) const
+auto VPieceNode::GetSAAfter(const VContainer *data, Unit unit) const -> qreal
 {
     if (d->m_formulaWidthAfter == currentSeamAllowance)
     {
         return -1;
     }
 
-    qreal value = EvalFormula(data, d->m_formulaWidthAfter);
+    VFormula formula(d->m_formulaWidthAfter, data);
+    formula.Eval();
+
+    if (formula.error())
+    {
+        QString nodeName;
+        try
+        {
+            nodeName = data->GetGObject(d->m_id)->name();
+        }
+        catch (const VExceptionBadId &)
+        {
+        }
+
+        const QString errorMsg = QObject::tr("Cannot calculate seam allowance after for point '%1'. Reason: %2.")
+                                     .arg(nodeName, formula.Reason());
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(errorMsg)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        return -1;
+    }
+
+    qreal value = formula.getDoubleValue();
+
     if (value >= 0)
     {
         value = ToPixel(value, unit);
@@ -219,7 +289,7 @@ qreal VPieceNode::GetSAAfter(const VContainer *data, Unit unit) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPieceNode::GetFormulaSAAfter() const
+auto VPieceNode::GetFormulaSAAfter() const -> QString
 {
     return d->m_formulaWidthAfter;
 }
@@ -234,7 +304,151 @@ void VPieceNode::SetFormulaSAAfter(const QString &formula)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PieceNodeAngle VPieceNode::GetAngleType() const
+auto VPieceNode::GetFormulaPassmarkLength() const -> QString
+{
+    return d->m_formulaPassmarkLength;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceNode::SetFormulaPassmarkLength(const QString &formula)
+{
+    if (d->m_typeTool == Tool::NodePoint)
+    {
+        d->m_formulaPassmarkLength = formula;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPieceNode::GetFormulaPassmarkWidth() const -> QString
+{
+    return d->m_formulaPassmarkWidth;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceNode::SetFormulaPassmarkWidth(const QString &formula)
+{
+    if (d->m_typeTool == Tool::NodePoint)
+    {
+        d->m_formulaPassmarkWidth = formula;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPieceNode::GetFormulaPassmarkAngle() const -> QString
+{
+    return d->m_formulaPassmarkAngle;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceNode::SetFormulaPassmarkAngle(const QString &formula)
+{
+    if (d->m_typeTool == Tool::NodePoint)
+    {
+        d->m_formulaPassmarkAngle = formula;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPieceNode::GetPassmarkLength(const VContainer *data, Unit unit) const -> qreal
+{
+    if (d->m_manualPassmarkLength)
+    {
+        VFormula formula(d->m_formulaPassmarkLength, data);
+        formula.setCheckZero(true);
+        formula.setCheckLessThanZero(true);
+        formula.Eval();
+
+        if (formula.error())
+        {
+            QString nodeName;
+            try
+            {
+                nodeName = data->GetGObject(d->m_id)->name();
+            }
+            catch (const VExceptionBadId &)
+            {
+            }
+
+            const QString errorMsg = QObject::tr("Cannot calculate passmark length for point '%1'. Reason: %2.")
+                                         .arg(nodeName, formula.Reason());
+            VAbstractApplication::VApp()->IsPedantic()
+                ? throw VException(errorMsg)
+                : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+            return VSAPoint::maxPassmarkLength;
+        }
+
+        return ToPixel(formula.getDoubleValue(), unit);
+    }
+    return -1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPieceNode::GetPassmarkWidth(const VContainer *data, Unit unit) const -> qreal
+{
+    if (d->m_manualPassmarkWidth)
+    {
+        VFormula formula(d->m_formulaPassmarkWidth, data);
+        formula.setCheckZero(true);
+        formula.Eval();
+
+        if (formula.error())
+        {
+            QString nodeName;
+            try
+            {
+                nodeName = data->GetGObject(d->m_id)->name();
+            }
+            catch (const VExceptionBadId &)
+            {
+            }
+
+            const QString errorMsg = QObject::tr("Cannot calculate passmark width for point '%1'. Reason: %2.")
+                                         .arg(nodeName, formula.Reason());
+            VAbstractApplication::VApp()->IsPedantic()
+                ? throw VException(errorMsg)
+                : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+            return 0;
+        }
+
+        return ToPixel(formula.getDoubleValue(), unit);
+    }
+    return -1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPieceNode::GetPassmarkAngle(const VContainer *data) const -> qreal
+{
+    if (d->m_manualPassmarkAngle)
+    {
+        VFormula formula(d->m_formulaPassmarkAngle, data);
+        formula.Eval();
+
+        if (formula.error())
+        {
+            QString nodeName;
+            try
+            {
+                nodeName = data->GetGObject(d->m_id)->name();
+            }
+            catch (const VExceptionBadId &)
+            {
+            }
+
+            const QString errorMsg = QObject::tr("Cannot calculate passmark angle for point '%1'. Reason: %2.")
+                                         .arg(nodeName, formula.Reason());
+            VAbstractApplication::VApp()->IsPedantic()
+                ? throw VException(errorMsg)
+                : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+            return 0;
+        }
+
+        return formula.getDoubleValue();
+    }
+    return 0;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPieceNode::GetAngleType() const -> PieceNodeAngle
 {
     return d->m_angleType;
 }
@@ -249,7 +463,7 @@ void VPieceNode::SetAngleType(PieceNodeAngle type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPieceNode::IsPassmark() const
+auto VPieceNode::IsPassmark() const -> bool
 {
     return d->m_isPassmark;
 }
@@ -264,7 +478,7 @@ void VPieceNode::SetPassmark(bool passmark)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPieceNode::IsMainPathNode() const
+auto VPieceNode::IsMainPathNode() const -> bool
 {
     return d->m_isMainPathNode;
 }
@@ -276,7 +490,7 @@ void VPieceNode::SetMainPathNode(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PassmarkLineType VPieceNode::GetPassmarkLineType() const
+auto VPieceNode::GetPassmarkLineType() const -> PassmarkLineType
 {
     return d->m_passmarkLineType;
 }
@@ -288,7 +502,7 @@ void VPieceNode::SetPassmarkLineType(PassmarkLineType lineType)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PassmarkAngleType VPieceNode::GetPassmarkAngleType() const
+auto VPieceNode::GetPassmarkAngleType() const -> PassmarkAngleType
 {
     return d->m_passmarkAngleType;
 }
@@ -300,7 +514,7 @@ void VPieceNode::SetPassmarkAngleType(PassmarkAngleType angleType)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPieceNode::IsShowSecondPassmark() const
+auto VPieceNode::IsShowSecondPassmark() const -> bool
 {
     return d->m_isShowSecondPassmark;
 }
@@ -312,7 +526,19 @@ void VPieceNode::SetShowSecondPassmark(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPieceNode::IsCheckUniqueness() const
+auto VPieceNode::IsPassmarkClockwiseOpening() const -> bool
+{
+    return d->m_isPassmarkClockwiseOpening;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceNode::SetPassmarkClockwiseOpening(bool value)
+{
+    d->m_isPassmarkClockwiseOpening = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPieceNode::IsCheckUniqueness() const -> bool
 {
     return d->m_checkUniqueness;
 }
@@ -324,7 +550,55 @@ void VPieceNode::SetCheckUniqueness(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPieceNode::IsExcluded() const
+auto VPieceNode::IsManualPassmarkLength() const -> bool
+{
+    return d->m_manualPassmarkLength;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceNode::SetManualPassmarkLength(bool value)
+{
+    d->m_manualPassmarkLength = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPieceNode::IsManualPassmarkWidth() const -> bool
+{
+    return d->m_manualPassmarkWidth;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceNode::SetManualPassmarkWidth(bool value)
+{
+    d->m_manualPassmarkWidth = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPieceNode::IsManualPassmarkAngle() const -> bool
+{
+    return d->m_manualPassmarkAngle;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceNode::SetManualPassmarkAngle(bool value)
+{
+    d->m_manualPassmarkAngle = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPieceNode::IsTurnPoint() const -> bool
+{
+    return d->m_typeTool == Tool::NodePoint ? d->m_turnPoint : false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceNode::SetTurnPoint(bool value)
+{
+    d->m_turnPoint = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPieceNode::IsExcluded() const -> bool
 {
     return d->m_excluded;
 }

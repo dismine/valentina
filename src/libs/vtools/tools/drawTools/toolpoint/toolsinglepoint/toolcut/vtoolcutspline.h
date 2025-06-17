@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 #ifndef VTOOLCUTSPLINE_H
 #define VTOOLCUTSPLINE_H
 
-#include <qcompilerdetection.h>
+
 #include <QDomElement>
 #include <QGraphicsItem>
 #include <QMetaObject>
@@ -43,47 +43,35 @@
 
 template <class T> class QSharedPointer;
 
-struct VToolCutSplineInitData : VToolSinglePointInitData
-{
-    VToolCutSplineInitData()
-        : VToolSinglePointInitData(),
-          formula(),
-          splineId(NULL_ID)
-    {}
-
-    QString formula;
-    quint32 splineId;
-};
-
 /**
  * @brief The VToolCutSpline class for tool CutSpline. This tool find point on spline and cut spline on two.
  */
 class VToolCutSpline : public VToolCut
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
-    virtual void setDialog() override;
-    static VToolCutSpline *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
-                                  VContainer *data);
-    static VToolCutSpline *Create(VToolCutSplineInitData &initData);
+    ~VToolCutSpline() override =default;
+    void SetDialog() override;
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolCutSpline *;
+    static auto Create(VToolCutInitData &initData) -> VToolCutSpline *;
     static const QString ToolType;
     static const QString AttrSpline;
-    virtual int  type() const override {return Type;}
+    auto type() const -> int override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::CutSpline)};
-    virtual void  ShowVisualization(bool show) override;
+    void  ShowVisualization(bool show) override;
 protected slots:
-    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
+    void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
 protected:
-    virtual void    SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                               QList<quint32> &newDependencies) override;
-    virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
-    virtual void    ReadToolAttributes(const QDomElement &domElement) override;
-    virtual void    SetVisualization() override;
-    virtual QString MakeToolTip() const override;
+    void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies) override;
+    void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    void ReadToolAttributes(const QDomElement &domElement) override;
+    void SetVisualization() override;
+    auto MakeToolTip() const -> QString override;
 private:
-    Q_DISABLE_COPY(VToolCutSpline)
+    Q_DISABLE_COPY_MOVE(VToolCutSpline) // NOLINT
 
-    VToolCutSpline(const VToolCutSplineInitData &initData, QGraphicsItem * parent = nullptr);
+    explicit VToolCutSpline(const VToolCutInitData &initData, QGraphicsItem * parent = nullptr);
 };
 
 #endif // VTOOLCUTSPLINE_H

@@ -33,30 +33,33 @@
 #include <QIcon>
 #include <QPropertyAnimation>
 
-class FancyTab : public QObject
+class FancyTab final : public QObject
 {
     friend class FancyTabBar;
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
     Q_PROPERTY(double fader READ fader WRITE setFader)
+
 public:
     explicit FancyTab(QWidget *tabbar);
+    ~FancyTab() override = default;
 
-    double fader();
-    void   setFader(double value);
+    auto fader() const -> double;
+    void setFader(double value);
 
     void fadeIn();
     void fadeOut();
 
 private:
-    Q_DISABLE_COPY(FancyTab)
-    QIcon              m_icon;
-    QString            m_text;
-    QString            m_toolTip;
-    bool               m_enabled;
-    QPropertyAnimation m_Animator;
-    QWidget           *m_TabBar;
-    double             m_Fader;
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(FancyTab) // NOLINT
+    QIcon m_icon{};
+    QString m_text{};
+    QString m_toolTip{};
+    bool m_enabled{false};
+    QPropertyAnimation m_Animator{};
+    QWidget *m_TabBar;
+    double m_Fader{0};
 };
 
 #endif // FANCYTAB_H

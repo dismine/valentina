@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,28 +29,31 @@
 #ifndef VCURVECLENGTH_H
 #define VCURVECLENGTH_H
 
-#include <qcompilerdetection.h>
 #include <QString>
 #include <QtGlobal>
 
 #include "vcurvevariable.h"
 
-enum class CurveCLength : char { C1, C2 };
+enum class CurveCLength : qint8
+{
+    C1,
+    C2
+};
 
 class VAbstractBezier;
 class VSpline;
 
-class VCurveCLength : public VCurveVariable
+class VCurveCLength final : public VCurveVariable
 {
 public:
     VCurveCLength();
     VCurveCLength(const quint32 &id, const quint32 &parentId, const VAbstractBezier *curve, CurveCLength cType,
                   Unit patternUnit);
-    VCurveCLength(const quint32 &id, const quint32 &parentId, const QString &baseCurveName, const VSpline &spl,
-                 CurveCLength cType, Unit patternUnit, qint32 segment);
+    VCurveCLength(const quint32 &id, const quint32 &parentId, const VAbstractBezier *baseCurve, const VSpline &spl,
+                  CurveCLength cType, Unit patternUnit, qint32 segment);
     VCurveCLength(const VCurveCLength &var);
-    VCurveCLength &operator=(const VCurveCLength &var);
-    virtual ~VCurveCLength() override;
+    auto operator=(const VCurveCLength &var) -> VCurveCLength &;
+    ~VCurveCLength() override;
 };
 
 #endif // VCURVECLENGTH_H

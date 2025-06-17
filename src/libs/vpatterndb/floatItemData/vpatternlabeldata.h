@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -44,37 +44,34 @@ public:
     VPatternLabelData();
     VPatternLabelData(const VPatternLabelData &data);
 
-    virtual ~VPatternLabelData();
+    ~VPatternLabelData() override;
 
-    VPatternLabelData &operator=(const VPatternLabelData &data);
-#ifdef Q_COMPILER_RVALUE_REFS
-    VPatternLabelData &operator=(VPatternLabelData &&data) Q_DECL_NOTHROW { Swap(data); return *this; }
-#endif
+    auto operator=(const VPatternLabelData &data) -> VPatternLabelData &;
 
-    inline void Swap(VPatternLabelData &data) Q_DECL_NOTHROW
-    { VAbstractFloatItemData::Swap(data); std::swap(d, data.d); }
+    VPatternLabelData(VPatternLabelData &&data) noexcept;
+    auto operator=(VPatternLabelData &&data) noexcept -> VPatternLabelData &;
 
     // methods, which set up label parameters
-    QString GetLabelWidth() const;
-    void    SetLabelWidth(const QString &dLabelW);
+    auto GetLabelWidth() const -> QString;
+    void SetLabelWidth(const QString &dLabelW);
 
-    QString GetLabelHeight() const;
-    void    SetLabelHeight(const QString &dLabelH);
+    auto GetLabelHeight() const -> QString;
+    void SetLabelHeight(const QString &dLabelH);
 
-    int   GetFontSize() const;
-    void  SetFontSize(int iSize);
+    auto GetFontSize() const -> int;
+    void SetFontSize(int iSize);
 
-    QString GetRotation() const;
-    void    SetRotation(const QString &dRot);
+    auto GetRotation() const -> QString;
+    void SetRotation(const QString &dRot);
 
-    quint32 CenterPin() const;
-    void    SetCenterPin(const quint32 &centerPin);
+    auto CenterPin() const -> quint32;
+    void SetCenterPin(const quint32 &centerPin);
 
-    quint32 TopLeftPin() const;
-    void    SetTopLeftPin(const quint32 &topLeftPin);
+    auto TopLeftPin() const -> quint32;
+    void SetTopLeftPin(const quint32 &topLeftPin);
 
-    quint32 BottomRightPin() const;
-    void    SetBottomRightPin(const quint32 &bottomRightPin);
+    auto BottomRightPin() const -> quint32;
+    void SetBottomRightPin(const quint32 &bottomRightPin);
 
 private:
     QSharedDataPointer<VPatternLabelDataPrivate> d;

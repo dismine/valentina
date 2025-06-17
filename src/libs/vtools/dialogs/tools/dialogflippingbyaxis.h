@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -31,7 +31,6 @@
 
 #include "dialogtool.h"
 
-#include <qcompilerdetection.h>
 #include <QList>
 #include <QMetaObject>
 #include <QObject>
@@ -39,63 +38,97 @@
 #include <QVector>
 #include <QtGlobal>
 
+#include "../../tools/toolsdef.h"
 #include "../vmisc/def.h"
 
 namespace Ui
 {
-    class DialogFlippingByAxis;
+class DialogFlippingByAxis;
 }
 
-class DialogFlippingByAxis : public DialogTool
+class DialogFlippingByAxis final : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
-    explicit DialogFlippingByAxis(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual ~DialogFlippingByAxis();
+    explicit DialogFlippingByAxis(const VContainer *data, VAbstractPattern *doc, quint32 toolId,
+                                  QWidget *parent = nullptr);
+    ~DialogFlippingByAxis() override;
 
-    quint32 GetOriginPointId() const;
-    void    SetOriginPointId(quint32 value);
+    auto GetOriginPointId() const -> quint32;
+    void SetOriginPointId(quint32 value);
 
-    AxisType GetAxisType() const;
-    void     SetAxisType(AxisType type);
+    auto GetAxisType() const -> AxisType;
+    void SetAxisType(AxisType type);
 
-    QString GetSuffix() const;
-    void    SetSuffix(const QString &value);
+    auto GetSuffix() const -> QString;
+    void SetSuffix(const QString &value);
 
-    QVector<quint32> GetObjects() const;
+    auto GetVisibilityGroupName() const -> QString;
+    void SetVisibilityGroupName(const QString &name);
 
-    virtual void ShowDialog(bool click) override;
+    auto HasLinkedVisibilityGroup() const -> bool;
+    void SetHasLinkedVisibilityGroup(bool linked);
+
+    void SetVisibilityGroupTags(const QStringList &tags);
+    auto GetVisibilityGroupTags() const -> QStringList;
+
+    void SetNotes(const QString &notes);
+    auto GetNotes() const -> QString;
+
+    void SetGroupCategories(const QStringList &categories) override;
+
+    void ShowDialog(bool click) override;
+
+    auto GetSourceObjects() const -> QVector<SourceItem>;
+    void SetSourceObjects(const QVector<SourceItem> &value);
 
 public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type) override;
-    virtual void SelectedObject(bool selected, quint32 object, quint32 tool) override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
+    void SelectedObject(bool selected, quint32 object, quint32 tool) override;
 
 private slots:
     void SuffixChanged();
+    void GroupNameChanged();
+    void ShowSourceDetails(int row);
+    void AliasChanged(const QString &text);
+    void PenStyleChanged();
+    void ColorChanged();
 
 protected:
-    virtual void CheckState() final;
-    virtual void ShowVisualization() override;
+    void ShowVisualization() override;
 
     /** @brief SaveData Put dialog data in local variables */
-    virtual void SaveData() override;
+    void SaveData() override;
+    auto IsValid() const -> bool override;
 
 private slots:
     void PointChanged();
 
 private:
-    Q_DISABLE_COPY(DialogFlippingByAxis)
+    Q_DISABLE_COPY_MOVE(DialogFlippingByAxis) // NOLINT
 
     Ui::DialogFlippingByAxis *ui;
 
-    QList<quint32> objects;
+    QVector<SourceItem> sourceObjects{};
 
     bool stage1;
 
     QString m_suffix;
 
+    bool flagName;
+    bool flagGroupName;
+    bool flagError;
+    bool flagAlias{true};
+
+    QStringList m_groupTags{};
+
     static void FillComboBoxAxisType(QComboBox *box);
+
+    void FillSourceList();
+
+    void ValidateSourceAliases();
+    void SetAliasValid(quint32 id, bool valid);
 };
 
 #endif // DIALOGFLIPPINGBYAXIS_H

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -36,55 +36,69 @@
 
 class VisOperation : public VisLine
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     explicit VisOperation(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisOperation();
+    ~VisOperation() override;
 
-    void SetObjects(QVector<quint32> objects);
+    void SetObjects(const QVector<quint32> &objects);
+    void VisualMode(quint32 id = NULL_ID) override;
 
-    virtual void VisualMode(const quint32 &pointId = NULL_ID) override;
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Vis::ToolRotation)
+    };
 
-    virtual int type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolRotation)};
 protected:
-    QVector<quint32> objects;
-    QColor           supportColor2;
-    QColor           supportColor3;
-
-    QVector<VScaledEllipse *> points;
-    QVector<VCurvePathItem *> curves;
-
-    VScaledEllipse *GetPoint(quint32 i, const QColor &color);
-    VCurvePathItem *GetCurve(quint32 i, const QColor &color);
+    auto GetPoint(quint32 i, VColorRole role) -> VScaledEllipse *;
+    auto GetCurve(quint32 i, VColorRole role) -> VCurvePathItem *;
 
     template <class Item>
-    int AddFlippedCurve(const QPointF &firstPoint, const QPointF &secondPoint, quint32 id, int i);
+    auto AddFlippedCurve(quint32 originPointId, const QPointF &firstPoint, const QPointF &secondPoint, quint32 id,
+                         int i) -> int;
 
-    void RefreshFlippedObjects(const QPointF &firstPoint, const QPointF &secondPoint);
+    void RefreshFlippedObjects(quint32 originPointId, const QPointF &firstPoint, const QPointF &secondPoint);
+
+    auto Objects() const -> const QVector<quint32> &;
+
 private:
-    Q_DISABLE_COPY(VisOperation)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VisOperation) // NOLINT
+
+    QVector<quint32> m_objects{};
+
+    QVector<VScaledEllipse *> m_points{};
+    QVector<VCurvePathItem *> m_curves{};
 };
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class Item>
-int VisOperation::AddFlippedCurve(const QPointF &firstPoint, const QPointF &secondPoint, quint32 id, int i)
+auto VisOperation::AddFlippedCurve(quint32 originPointId, const QPointF &firstPoint, const QPointF &secondPoint,
+                                   quint32 id, int i) -> int
 {
-    const QSharedPointer<Item> curve = Visualization::data->template GeometricObject<Item>(id);
+    const QSharedPointer<Item> curve = GetData()->template GeometricObject<Item>(id);
 
     ++i;
-    VCurvePathItem *path = GetCurve(static_cast<quint32>(i), supportColor2);
-    DrawPath(path, curve->GetPath(), curve->DirectionArrows(), supportColor2, Qt::SolidLine, Qt::RoundCap);
+    VCurvePathItem *path = GetCurve(static_cast<quint32>(i), VColorRole::VisSupportColor2);
+    DrawPath(path, curve->GetPath(), curve->DirectionArrows(), Qt::SolidLine, Qt::RoundCap);
 
     ++i;
-    path = GetCurve(static_cast<quint32>(i), supportColor);
-    if (object1Id != NULL_ID)
+    path = GetCurve(static_cast<quint32>(i), VColorRole::VisSupportColor);
+    if (originPointId != NULL_ID)
     {
         const Item flipped = curve->Flip(QLineF(firstPoint, secondPoint));
-        DrawPath(path, flipped.GetPath(), flipped.DirectionArrows(), supportColor, Qt::SolidLine, Qt::RoundCap);
+        DrawPath(path, flipped.GetPath(), flipped.DirectionArrows(), Qt::SolidLine, Qt::RoundCap);
     }
 
     return i;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VisOperation::Objects() const -> const QVector<quint32> &
+{
+    return m_objects;
 }
 
 #endif // VISOPERATION_H

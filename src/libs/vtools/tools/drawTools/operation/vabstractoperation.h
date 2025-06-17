@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,39 +29,37 @@
 #ifndef VABSTRACTOPERATION_H
 #define VABSTRACTOPERATION_H
 
-#include <QtGlobal>
-#include <qcompilerdetection.h>
+#include <QGraphicsLineItem>
 #include <QMap>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
 #include <QVector>
-#include <QGraphicsLineItem>
+#include <QtGlobal>
 
+#include "../../toolsdef.h"
 #include "../vdrawtool.h"
 #include "../vwidgets/vsimplecurve.h"
 #include "../vwidgets/vsimplepoint.h"
 
 struct DestinationItem
 {
-    quint32 id;
-    qreal mx;
-    qreal my;
-    bool showLabel;
+    quint32 id{NULL_ID};
+    qreal mx{1};
+    qreal my{1};
+    bool showLabel{true};
 };
 
-struct VAbstractOperationInitData : VAbstractToolInitData
+struct VAbstractOperationInitData : VDrawToolInitData
 {
-    VAbstractOperationInitData()
-        : VAbstractToolInitData(),
-          suffix(),
-          source(),
-          destination()
-    {}
+    using VDrawToolInitData::VDrawToolInitData;
 
-    QString suffix;
-    QVector<quint32> source;
-    QVector<DestinationItem> destination;
+    QString suffix{};
+    QVector<SourceItem> source{};
+    QVector<DestinationItem> destination{};
+    QString visibilityGroupName{};
+    QStringList visibilityGroupTags{};
+    bool hasLinkedVisibilityGroup{false};
 };
 
 // FIXME. I don't know how to use QGraphicsItem properly, so just took first available finished class.
@@ -69,100 +67,155 @@ struct VAbstractOperationInitData : VAbstractToolInitData
 // And i don't know how to fix it.
 class VAbstractOperation : public VDrawTool, public QGraphicsLineItem
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
     // Fix warning "Class implements the interface QGraphicsItem but does not list it
     // in Q_INTERFACES. qobject_cast to QGraphicsItem will not work!"
     Q_INTERFACES(QGraphicsItem)
+
 public:
-    virtual ~VAbstractOperation() Q_DECL_EQ_DEFAULT;
+    ~VAbstractOperation() override = default;
 
     static const QString TagItem;
     static const QString TagSource;
     static const QString TagDestination;
 
-    virtual QString getTagName() const override;
+    auto getTagName() const -> QString override;
 
-    QString Suffix() const;
-    void    SetSuffix(const QString &suffix);
+    auto Suffix() const -> QString;
+    void SetSuffix(const QString &suffix);
 
-    virtual void GroupVisibility(quint32 object, bool visible) override;
-    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
-    virtual void ChangeLabelPosition(quint32 id, const QPointF &pos) override;
+    void SetNotes(const QString &notes) override;
 
-    virtual bool IsLabelVisible(quint32 id) const override;
-    virtual void SetLabelVisible(quint32 id, bool visible) override;
+    auto SourceItems() const -> QVector<SourceItem>;
+
+    void GroupVisibility(quint32 object, bool visible) override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+    void ChangeLabelPosition(quint32 id, const QPointF &pos) override;
+
+    auto IsLabelVisible(quint32 id) const -> bool override;
+    void SetLabelVisible(quint32 id, bool visible) override;
 
     static void ExtractData(const QDomElement &domElement, VAbstractOperationInitData &initData);
+    static auto ExtractSourceData(const QDomElement &domElement) -> QVector<SourceItem>;
+    static auto ExtractDestinationData(const QDomElement &domElement) -> QVector<DestinationItem>;
+
+    static auto OperationColorsList() -> QMap<QString, QString>;
+
 public slots:
-    virtual void FullUpdateFromFile() override;
+    void FullUpdateFromFile() override;
 
-    virtual void AllowHover(bool enabled) override;
-    virtual void AllowSelecting(bool enabled) override;
-    virtual void EnableToolMove(bool move) override;
+    void AllowHover(bool enabled) override;
+    void AllowSelecting(bool enabled) override;
+    void EnableToolMove(bool move) override;
 
-    void         AllowPointHover(bool enabled);
-    void         AllowPointSelecting(bool enabled);
+    void AllowPointHover(bool enabled);
+    void AllowPointSelecting(bool enabled);
 
-    void         AllowPointLabelHover(bool enabled);
-    void         AllowPointLabelSelecting(bool enabled);
+    void AllowPointLabelHover(bool enabled);
+    void AllowPointLabelSelecting(bool enabled);
 
-    void         AllowSplineHover(bool enabled);
-    void         AllowSplineSelecting(bool enabled);
+    void AllowSplineHover(bool enabled);
+    void AllowSplineSelecting(bool enabled);
 
-    void         AllowSplinePathHover(bool enabled);
-    void         AllowSplinePathSelecting(bool enabled);
+    void AllowSplinePathHover(bool enabled);
+    void AllowSplinePathSelecting(bool enabled);
 
-    void         AllowArcHover(bool enabled);
-    void         AllowArcSelecting(bool enabled);
+    void AllowArcHover(bool enabled);
+    void AllowArcSelecting(bool enabled);
 
-    void         AllowElArcHover(bool enabled);
-    void         AllowElArcSelecting(bool enabled);
+    void AllowElArcHover(bool enabled);
+    void AllowElArcSelecting(bool enabled);
 
-    virtual void ToolSelectionType(const SelectionType &type) override;
-    virtual void Disable(bool disable, const QString &namePP) override;
-    void         ObjectSelected(bool selected, quint32 objId);
-    void         DeleteFromLabel();
-    void         LabelChangePosition(const QPointF &pos, quint32 labelId);
+    void ToolSelectionType(const SelectionType &type) override;
+    void Disable(bool disable, const QString &namePP) override;
+    void ObjectSelected(bool selected, quint32 objId);
+    void DeleteFromLabel();
+    void LabelChangePosition(const QPointF &pos, quint32 labelId);
+
 protected:
     QString suffix;
 
-    QVector<quint32> source;
+    QVector<SourceItem> source;
     QVector<DestinationItem> destination;
 
-    QMap<quint32, VAbstractSimple *> operatedObjects;
+    QMap<quint32, VAbstractSimple *> operatedObjects{};
 
-    VAbstractOperation(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &suffix,
-                       const QVector<quint32> &source, const QVector<DestinationItem> &destination,
-                       QGraphicsItem *parent = nullptr);
+    bool hasLinkedGroup{false};
+    QString groupName{};
+    QStringList groupTags{};
 
-    virtual void AddToFile() override;
-    virtual void ChangeLabelVisibility(quint32 id, bool visible) override;
+    explicit VAbstractOperation(const VAbstractOperationInitData &initData, QGraphicsItem *parent = nullptr);
 
-    void UpdateNamePosition(quint32 id, const QPointF &pos);
+    void AddToFile() override;
+    void ChangeLabelVisibility(quint32 id, bool visible) override;
+    void ApplyToolOptions(const QList<quint32> &oldDependencies, const QList<quint32> &newDependencies,
+                          const QDomElement &oldDomElement, const QDomElement &newDomElement) override;
+    void PerformDelete() override;
+    void ReadToolAttributes(const QDomElement &domElement) override;
+    void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+
+    void UpdateNamePosition(quint32 id, const QPointF &pos) override;
     void SaveSourceDestination(QDomElement &tag);
 
-    template <typename T>
-    void ShowToolVisualization(bool show);
+    template <typename T> void ShowToolVisualization(bool show);
+
+    template <typename T> void SetDialogVisibilityGroupData(QPointer<T> dialogTool);
+
+    template <typename T> void SaveVisibilityGroupData(QPointer<T> dialogTool);
 
     void InitCurve(quint32 id, VContainer *data, GOType curveType, SceneObject sceneType);
 
-    template <typename T>
-    static void InitOperationToolConnections(VMainGraphicsScene *scene, T *tool);
+    template <typename T> static void InitOperationToolConnections(VMainGraphicsScene *scene, T *tool);
 
     void InitOperatedObjects();
 
-    QString ComplexPointToolTip(quint32 itemId) const;
-    QString ComplexCurveToolTip(quint32 itemId) const;
+    auto ComplexPointToolTip(quint32 itemId) const -> QString;
+    auto ComplexCurveToolTip(quint32 itemId) const -> QString;
+    auto VisibilityGroupToolTip() const -> QString;
+
+    static void CreateVisibilityGroup(const VAbstractOperationInitData &initData);
+
 private:
-    Q_DISABLE_COPY(VAbstractOperation)
+    Q_DISABLE_COPY_MOVE(VAbstractOperation) // NOLINT
 
     void AllowCurveHover(bool enabled, GOType type);
     void AllowCurveSelecting(bool enabled, GOType type);
+
+    auto NeedUpdateVisibilityGroup() const -> bool;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-void VAbstractOperation::ShowToolVisualization(bool show)
+template <typename T> void VAbstractOperation::SetDialogVisibilityGroupData(QPointer<T> dialogTool)
+{
+    SCASSERT(not dialogTool.isNull())
+
+    vidtype const group = doc->GroupLinkedToTool(m_id);
+    dialogTool->SetGroupCategories(doc->GetGroupCategories());
+    if (group != null_id)
+    {
+        dialogTool->SetHasLinkedVisibilityGroup(true);
+        dialogTool->SetVisibilityGroupName(doc->GetGroupName(group));
+        dialogTool->SetVisibilityGroupTags(doc->GetGroupTags(group));
+    }
+    else
+    {
+        dialogTool->SetHasLinkedVisibilityGroup(false);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T> void VAbstractOperation::SaveVisibilityGroupData(QPointer<T> dialogTool)
+{
+    SCASSERT(not dialogTool.isNull())
+
+    // Save for later use.
+    hasLinkedGroup = dialogTool->HasLinkedVisibilityGroup();
+    groupName = dialogTool->GetVisibilityGroupName();
+    groupTags = dialogTool->GetVisibilityGroupTags();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T> void VAbstractOperation::ShowToolVisualization(bool show)
 {
     if (show)
     {
@@ -181,13 +234,12 @@ void VAbstractOperation::ShowToolVisualization(bool show)
     }
     else
     {
-        delete vis;
+        delete vis.data();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-void VAbstractOperation::InitOperationToolConnections(VMainGraphicsScene *scene, T *tool)
+template <typename T> void VAbstractOperation::InitOperationToolConnections(VMainGraphicsScene *scene, T *tool)
 {
     SCASSERT(scene != nullptr)
     SCASSERT(tool != nullptr)

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -28,84 +28,87 @@
 
 #include "vformulapropertyeditor.h"
 
-#include <QHBoxLayout>
-#include <QFileDialog>
-#include <QKeyEvent>
 #include <QApplication>
 #include <QColorDialog>
 #include <QDebug>
+#include <QFileDialog>
+#include <QHBoxLayout>
+#include <QKeyEvent>
 #include <QRegularExpression>
 #include <QSpacerItem>
 
+#include "../vmisc/theme/vtheme.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vpropertyexplorer/vproperty.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"
 
 // VFormulaPropertyEditor
 //---------------------------------------------------------------------------------------------------------------------
 VFormulaPropertyEditor::VFormulaPropertyEditor(QWidget *parent)
-    : QWidget(parent), formula(VFormula()), ToolButton(nullptr), TextLabel(nullptr)
+  : QWidget(parent)
 {
     setAutoFillBackground(true);
 
     // Create the tool button
-    ToolButton = new QToolButton(this);
-    ToolButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Minimum);
-    ToolButton->setText("...");
-    ToolButton->setIcon(QIcon("://icon/16x16/fx.png"));
-    ToolButton->setFixedWidth(20);
-    ToolButton->installEventFilter(this);
-    setFocusProxy(ToolButton);  // Make the ToolButton the focus proxy
-    setFocusPolicy(ToolButton->focusPolicy());
-    connect(ToolButton, &QToolButton::clicked, this, &VFormulaPropertyEditor::onToolButtonClicked);
+    m_ToolButton = new QToolButton(this);
+    m_ToolButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    m_ToolButton->setText(QStringLiteral("..."));
+    m_ToolButton->setIcon(VTheme::GetIconResource(QStringLiteral("icon"), QStringLiteral("16x16/fx.png")));
+    m_ToolButton->setIconSize(QSize(16, 16));
+    m_ToolButton->setFixedSize(24, 24);
+    m_ToolButton->installEventFilter(this);
+    setFocusProxy(m_ToolButton); // Make the ToolButton the focus proxy
+    setFocusPolicy(m_ToolButton->focusPolicy());
+    connect(m_ToolButton, &QToolButton::clicked, this, &VFormulaPropertyEditor::onToolButtonClicked);
 
     // Create the text label
-    TextLabel = new QLabel(this);
-    TextLabel->setText(formula.getStringValue());
+    m_TextLabel = new QLabel(this);
+    m_TextLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    m_TextLabel->setText(m_formula.getStringValue());
 
     // The layout (a horizontal layout)
-    QHBoxLayout* layout = new QHBoxLayout(this);
+    auto *layout = new QHBoxLayout(this);
     layout->setSpacing(3);
-    layout->setMargin(0);
-    layout->addWidget(TextLabel);
+    layout->setContentsMargins(0, 0, 0, 0);
+    layout->addWidget(m_TextLabel);
     // Spacer (this is needed for proper display of the label and button)
-    layout->addSpacerItem(new QSpacerItem(1000000000, 0, QSizePolicy::Expanding, QSizePolicy::Expanding));
-    layout->addWidget(ToolButton);
+    layout->addSpacerItem(new QSpacerItem(1000000000, 0, QSizePolicy::Expanding, QSizePolicy::Preferred));
+    layout->addWidget(m_ToolButton);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VFormulaPropertyEditor::SetFormula(const VFormula& formula)
+void VFormulaPropertyEditor::SetFormula(const VFormula &formula)
 {
-    if (this->formula != formula)
+    if (this->m_formula != formula)
     {
-        this->formula = formula;
-        TextLabel->setText(this->formula.getStringValue());
+        this->m_formula = formula;
+        m_TextLabel->setText(this->m_formula.getStringValue());
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VFormulaPropertyEditor::onToolButtonClicked()
 {
-    DialogEditWrongFormula* tmpWidget = new DialogEditWrongFormula(formula.getData(), formula.getToolId(),
-                                                                   qApp->getMainWindow());
-    tmpWidget->setCheckZero(formula.getCheckZero());
-    tmpWidget->setPostfix(formula.getPostfix());
-    tmpWidget->SetFormula(formula.GetFormula(FormulaType::FromUser));
+    QScopedPointer<DialogEditWrongFormula> const tmpWidget(new DialogEditWrongFormula(
+        m_formula.getData(), m_formula.getToolId(), VAbstractValApplication::VApp()->getMainWindow()));
+    tmpWidget->setCheckZero(m_formula.getCheckZero());
+    tmpWidget->setPostfix(m_formula.getPostfix());
+    tmpWidget->SetFormula(m_formula.GetFormula(FormulaType::FromUser));
 
     if (tmpWidget->exec() == QDialog::Accepted)
     {
-        formula.SetFormula(tmpWidget->GetFormula(), FormulaType::ToUser);
-        TextLabel->setText(formula.getStringValue());
-        delete tmpWidget;
-        emit dataChangedByUser(formula, this);
-        VPE::UserChangeEvent *event = new VPE::UserChangeEvent();
-        QCoreApplication::postEvent ( this, event );
+        m_formula.SetFormula(tmpWidget->GetFormula(), FormulaType::ToUser);
+        m_formula.Eval();
+        m_TextLabel->setText(m_formula.getStringValue());
+        emit dataChangedByUser(m_formula, this);
+        QCoreApplication::postEvent(this, new VPE::UserChangeEvent());
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VFormulaPropertyEditor::eventFilter(QObject *obj, QEvent *ev)
+auto VFormulaPropertyEditor::eventFilter(QObject *obj, QEvent *ev) -> bool
 {
-    if (obj == ToolButton && ev->type() == QEvent::KeyPress)
+    if (obj == m_ToolButton && ev->type() == QEvent::KeyPress)
     {
         // Ignore the event, so that eventually the delegate gets the event.
         ev->ignore();
@@ -116,7 +119,7 @@ bool VFormulaPropertyEditor::eventFilter(QObject *obj, QEvent *ev)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VFormulaPropertyEditor::GetFormula() const
+auto VFormulaPropertyEditor::GetFormula() const -> VFormula
 {
-    return formula;
+    return m_formula;
 }

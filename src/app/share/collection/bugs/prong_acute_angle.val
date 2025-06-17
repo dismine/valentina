@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pattern labelPrefix="uk">
+    <!--Pattern created with Valentina v0.7.53.25 (https://smart-pattern.com.ua/).-->
+    <version>0.9.7</version>
+    <unit>cm</unit>
+    <description/>
+    <notes/>
+    <measurements/>
+    <increments/>
+    <previewCalculations/>
+    <draw name="Pattern piece 1">
+        <calculation>
+            <point id="1" mx="0.264583" my="0.396875" name="А" showLabel="true" type="single" x="0.79375" y="1.05833"/>
+            <point angle="210.945" basePoint="1" id="2" length="11.3102" lineColor="black" mx="0.264583" my="0.396875" name="А1" showLabel="true" type="endLine" typeLine="hair"/>
+            <point angle="332.517" basePoint="1" id="3" length="11.4202" lineColor="black" mx="0.264583" my="0.396875" name="А2" showLabel="true" type="endLine" typeLine="hair"/>
+        </calculation>
+        <modeling>
+            <point id="4" idObject="2" inUse="true" mx="0.264583" my="0.396875" showLabel="true" type="modeling"/>
+            <point id="5" idObject="1" inUse="true" mx="0.264583" my="0.396875" showLabel="true" type="modeling"/>
+            <point id="6" idObject="3" inUse="true" mx="0.264583" my="0.396875" showLabel="true" type="modeling"/>
+        </modeling>
+        <details>
+            <detail followGrainline="false" forbidFlipping="false" forceFlipping="false" hideMainPath="false" id="7" mx="0" my="0" name="Detail" seamAllowance="true" sewLineOnDrawing="false" uuid="{f163ecdb-8d07-47ff-b3b4-35795cf26bdc}" version="2" width="1">
+                <data annotation="" foldPosition="" height="10" letter="" mx="0" my="0" onFold="false" orientation="" quantity="1" rotation="0" rotationWay="" tilt="" visible="false" width="10"/>
+                <patternInfo height="10" mx="0" my="0" rotation="0" visible="false" width="10"/>
+                <grainline arrows="0" enabled="false" length="10" mx="0" my="0" rotation="90" visible="true"/>
+                <nodes>
+                    <node idObject="4" type="NodePoint"/>
+                    <node after="CurrentSeamAllowance+2" idObject="5" type="NodePoint"/>
+                    <node before="CurrentSeamAllowance+2" idObject="6" type="NodePoint"/>
+                </nodes>
+                <mirrorLine type="2ArrowsTextAbove"/>
+            </detail>
+        </details>
+    </draw>
+</pattern>

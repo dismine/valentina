@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -28,32 +28,43 @@
 
 #include "vlayoutpiecepath.h"
 #include "vlayoutpiecepath_p.h"
-#include "vlayoutdef.h"
 
 #include <QPainterPath>
 
+// Friend functions
+//---------------------------------------------------------------------------------------------------------------------
+auto operator<<(QDataStream &dataStream, const VLayoutPiecePath &path) -> QDataStream &
+{
+    dataStream << *path.d;
+    return dataStream;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto operator>>(QDataStream &dataStream, VLayoutPiecePath &path) -> QDataStream &
+{
+    dataStream >> *path.d;
+    return dataStream;
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutPiecePath::VLayoutPiecePath()
-    : d(new VLayoutPiecePathData)
+  : d(new VLayoutPiecePathData)
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutPiecePath::VLayoutPiecePath(const QVector<QPointF> &points, bool cut, Qt::PenStyle penStyle)
-    : d(new VLayoutPiecePathData(points, cut, penStyle))
+VLayoutPiecePath::VLayoutPiecePath(const QVector<VLayoutPoint> &points)
+  : d(new VLayoutPiecePathData(points))
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutPiecePath::VLayoutPiecePath(const VLayoutPiecePath &path)
-    : d(path.d)
-{
-}
+COPY_CONSTRUCTOR_IMPL(VLayoutPiecePath)
 
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutPiecePath &VLayoutPiecePath::operator=(const VLayoutPiecePath &path)
+auto VLayoutPiecePath::operator=(const VLayoutPiecePath &path) -> VLayoutPiecePath &
 {
-    if ( &path == this )
+    if (&path == this)
     {
         return *this;
     }
@@ -62,36 +73,49 @@ VLayoutPiecePath &VLayoutPiecePath::operator=(const VLayoutPiecePath &path)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutPiecePath::~VLayoutPiecePath()
+VLayoutPiecePath::VLayoutPiecePath(VLayoutPiecePath &&path) noexcept
+  : d(std::move(path.d))
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VLayoutPiecePath::GetPainterPath() const
+auto VLayoutPiecePath::operator=(VLayoutPiecePath &&path) noexcept -> VLayoutPiecePath &
+{
+    std::swap(d, path.d);
+    return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VLayoutPiecePath::~VLayoutPiecePath() = default;
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiecePath::GetPainterPath() const -> QPainterPath
 {
     QPainterPath path;
     if (not d->m_points.isEmpty())
     {
-        path.addPolygon(QPolygonF(d->m_points));
+        QVector<QPointF> points;
+        CastTo(d->m_points, points);
+        path.addPolygon(QPolygonF(points));
         path.setFillRule(Qt::WindingFill);
     }
     return path;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VLayoutPiecePath::Points() const
+auto VLayoutPiecePath::Points() const -> QVector<VLayoutPoint>
 {
     return d->m_points;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutPiecePath::SetPoints(const QVector<QPointF> &points)
+void VLayoutPiecePath::SetPoints(const QVector<VLayoutPoint> &points)
 {
     d->m_points = points;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Qt::PenStyle VLayoutPiecePath::PenStyle() const
+auto VLayoutPiecePath::PenStyle() const -> Qt::PenStyle
 {
     return d->m_penStyle;
 }
@@ -103,7 +127,7 @@ void VLayoutPiecePath::SetPenStyle(const Qt::PenStyle &penStyle)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutPiecePath::IsCutPath() const
+auto VLayoutPiecePath::IsCutPath() const -> bool
 {
     return d->m_cut;
 }
@@ -112,4 +136,16 @@ bool VLayoutPiecePath::IsCutPath() const
 void VLayoutPiecePath::SetCutPath(bool cut)
 {
     d->m_cut = cut;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiecePath::IsNotMirrored() const -> bool
+{
+    return d->m_notMirrored;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiecePath::SetNotMirrored(bool value)
+{
+    d->m_notMirrored = value;
 }

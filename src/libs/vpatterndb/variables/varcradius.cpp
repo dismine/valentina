@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -37,57 +37,59 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VArcRadius::VArcRadius()
-    :VCurveVariable()
 {
     SetType(VarType::ArcRadius);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VArcRadius::VArcRadius(const quint32 &id, const quint32 &parentId, const VArc *arc, Unit patternUnit)
-    :VCurveVariable(id, parentId)
+  : VCurveVariable(id, parentId)
 {
+    // cppcheck-suppress unknownMacro
     SCASSERT(arc != nullptr)
 
     SetType(VarType::ArcRadius);
-    SetName(radius_V + QString("%1").arg(arc->name()));
-    SetValue(FromPixel(arc->GetRadius(), patternUnit));
+    SetName(radius_V + arc->name());
+
+    if (not arc->GetAlias().isEmpty())
+    {
+        SetAlias(radius_V + arc->GetAlias());
+    }
+    StoreValue(FromPixel(arc->GetRadius(), patternUnit));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VArcRadius::VArcRadius(const quint32 &id, const quint32 &parentId, const VEllipticalArc *elArc, const int numberRadius,
                        Unit patternUnit)
-    : VCurveVariable(id, parentId)
+  : VCurveVariable(id, parentId)
 {
     SCASSERT(elArc != nullptr)
 
     SetType(VarType::ArcRadius);
-    SetName(radius_V + QString("%1%2").arg(numberRadius).arg(elArc->name()));
+    SetName(radius_V + QStringLiteral("%1%2").arg(numberRadius).arg(elArc->name()));
+
+    if (not elArc->GetAlias().isEmpty())
+    {
+        SetAlias(radius_V + elArc->GetAlias());
+    }
+
     if (numberRadius == 1)
     {
-        SetValue(FromPixel(elArc->GetRadius1(), patternUnit));
+        StoreValue(FromPixel(elArc->GetRadius1(), patternUnit));
     }
     else
     {
-        SetValue(FromPixel(elArc->GetRadius2(), patternUnit));
+        StoreValue(FromPixel(elArc->GetRadius2(), patternUnit));
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VArcRadius::VArcRadius(const VArcRadius &var)
-    :VCurveVariable(var)
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VArcRadius &VArcRadius::operator=(const VArcRadius &var)
+auto VArcRadius::operator=(const VArcRadius &var) -> VArcRadius &
 {
-    if ( &var == this )
+    if (&var == this)
     {
         return *this;
     }
     VCurveVariable::operator=(var);
     return *this;
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-VArcRadius::~VArcRadius()
-{}

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -27,30 +27,52 @@
  *************************************************************************/
 
 #include "vwidgetdetails.h"
-#include "ui_vwidgetdetails.h"
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vpatterndb/vcontainer.h"
+#include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vtools/tools/vtoolseamallowance.h"
+#include "../vtools/undocommands/renamepiece.h"
 #include "../vtools/undocommands/togglepiecestate.h"
+#include "ui_vwidgetdetails.h"
 
 #include <QMenu>
+#include <QTimer>
 #include <QUndoStack>
+
+using namespace std::chrono_literals;
+
+namespace
+{
+enum PieceColumn
+{
+    InLayout = 0,
+    PieceName = 1
+};
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VWidgetDetails::VWidgetDetails(VContainer *data, VAbstractPattern *doc, QWidget *parent)
-    : QWidget(parent),
-      ui(new Ui::VWidgetDetails),
-      m_doc(doc),
-      m_data(data)
+  : QWidget(parent),
+    ui(new Ui::VWidgetDetails),
+    m_doc(doc),
+    m_data(data),
+    m_updateListTimer(new QTimer(this))
 {
     ui->setupUi(this);
+
+    ui->checkBoxHideNotInLayout->setChecked(false);
 
     FillTable(m_data->DataPieces());
 
     ui->tableWidget->setContextMenuPolicy(Qt::CustomContextMenu);
 
     connect(ui->tableWidget, &QTableWidget::cellClicked, this, &VWidgetDetails::InLayoutStateChanged);
+    connect(ui->tableWidget, &QTableWidget::cellChanged, this, &VWidgetDetails::RenameDetail);
     connect(ui->tableWidget, &QTableWidget::customContextMenuRequested, this, &VWidgetDetails::ShowContextMenu);
+
+    m_updateListTimer->setSingleShot(true);
+    connect(m_updateListTimer, &QTimer::timeout, this, [this]() { FillTable(m_data->DataPieces()); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -62,7 +84,10 @@ VWidgetDetails::~VWidgetDetails()
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetDetails::UpdateList()
 {
-    FillTable(m_data->DataPieces());
+    // The filling table is a very expensive operation. This optimization will postpone it.
+    // Each time a new request happen we will wait 800 ms before calling it. If at this time a new request will arrive
+    // we will wait 800 ms more. And so on, until nothing happens within 800ms.
+    m_updateListTimer->start(800ms);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -71,9 +96,8 @@ void VWidgetDetails::SelectDetail(quint32 id)
     const int rowCount = ui->tableWidget->rowCount();
     for (int row = 0; row < rowCount; ++row)
     {
-        QTableWidgetItem *item = ui->tableWidget->item(row, 0);
-
-        if (item->data(Qt::UserRole).toUInt() == id)
+        if (QTableWidgetItem *item = ui->tableWidget->item(row, PieceColumn::InLayout);
+            item->data(Qt::UserRole).toUInt() == id)
         {
             ui->tableWidget->setCurrentItem(item);
             return;
@@ -82,13 +106,40 @@ void VWidgetDetails::SelectDetail(quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VWidgetDetails::ToggledPiece(quint32 id)
+{
+    const int rowCount = ui->tableWidget->rowCount();
+    for (int row = 0; row < rowCount; ++row)
+    {
+        if (QTableWidgetItem *item = ui->tableWidget->item(row, PieceColumn::InLayout);
+            item && item->data(Qt::UserRole).toUInt() == id)
+        {
+            ToggledPieceItem(item);
+            return;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VWidgetDetails::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+
+    // remember to call base class implementation
+    QWidget::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VWidgetDetails::InLayoutStateChanged(int row, int column)
 {
-    QTableWidgetItem *item = ui->tableWidget->item(row, 0);
+    const QTableWidgetItem *item = ui->tableWidget->item(row, PieceColumn::InLayout);
     const quint32 id = item->data(Qt::UserRole).toUInt();
     emit Highlight(id);
 
-    if (column != 0)
+    if (column != PieceColumn::InLayout)
     {
         return;
     }
@@ -96,19 +147,40 @@ void VWidgetDetails::InLayoutStateChanged(int row, int column)
     const QHash<quint32, VPiece> *allDetails = m_data->DataPieces();
     const bool inLayout = not allDetails->value(id).IsInLayout();
 
-    TogglePieceInLayout *togglePrint = new TogglePieceInLayout(id, inLayout, m_data, m_doc);
-    connect(togglePrint, &TogglePieceInLayout::UpdateList, this, &VWidgetDetails::UpdateList);
-    qApp->getUndoStack()->push(togglePrint);
+    auto *togglePrint = new TogglePieceInLayout(id, inLayout, m_data, m_doc);
+    connect(togglePrint, &TogglePieceInLayout::Toggled, this, &VWidgetDetails::ToggledPiece);
+    VAbstractApplication::VApp()->getUndoStack()->push(togglePrint);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VWidgetDetails::RenameDetail(int row, int column)
+{
+    const QTableWidgetItem *item = ui->tableWidget->item(row, PieceColumn::InLayout);
+    const quint32 id = item->data(Qt::UserRole).toUInt();
+    emit Highlight(id);
+
+    if (column != PieceColumn::PieceName)
+    {
+        return;
+    }
+
+    const QString newName = ui->tableWidget->item(row, column)->text();
+
+    auto *renameDetail = new ::RenamePiece(m_doc, newName, id);
+    connect(renameDetail, &RenamePiece::UpdateList, this, &VWidgetDetails::UpdateList);
+    VAbstractApplication::VApp()->getUndoStack()->push(renameDetail);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetDetails::FillTable(const QHash<quint32, VPiece> *details)
 {
+    ui->tableWidget->blockSignals(true);
+
     const int selectedRow = ui->tableWidget->currentRow();
-    ui->tableWidget->clear();
+    ui->tableWidget->clearContents();
 
     ui->tableWidget->setColumnCount(2);
-    ui->tableWidget->setRowCount(details->size());
+    ui->tableWidget->setRowCount(static_cast<int>(details->size()));
     qint32 currentRow = -1;
     auto i = details->constBegin();
     while (i != details->constEnd())
@@ -116,86 +188,162 @@ void VWidgetDetails::FillTable(const QHash<quint32, VPiece> *details)
         ++currentRow;
         const VPiece det = i.value();
 
-        QTableWidgetItem *item = new QTableWidgetItem();
-        item->setTextAlignment(Qt::AlignHCenter);
-        if (det.IsInLayout())
-        {
-            item->setIcon(QIcon("://icon/16x16/allow_detail.png"));
-        }
-        else
-        {
-            item->setIcon(QIcon("://icon/16x16/forbid_detail.png"));
-        }
-        item->setData(Qt::UserRole, i.key());
-        // set the item non-editable (view only), and non-selectable
-        Qt::ItemFlags flags = item->flags();
-        flags &= ~(Qt::ItemIsEditable); // reset/clear the flag
-        item->setFlags(flags);
-
-        ui->tableWidget->setItem(currentRow, 0, item);
-
-        QString name = det.GetName();
-        if (name.isEmpty())
-        {
-            name = tr("Unnamed");
-        }
-
-        item = new QTableWidgetItem(name);
-        item->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-        flags = item->flags();
-        flags &= ~(Qt::ItemIsEditable); // reset/clear the flag
-        item->setFlags(flags);
-
-        ui->tableWidget->setItem(currentRow, 1, item);
+        ui->tableWidget->setItem(currentRow, PieceColumn::InLayout, PrepareInLayoutColumnCell(det, i.key()));
+        ui->tableWidget->setItem(currentRow, PieceColumn::PieceName, PreparePieceNameColumnCell(det));
         ++i;
     }
-    ui->tableWidget->sortItems(1, Qt::AscendingOrder);
+    ui->tableWidget->sortItems(PieceColumn::PieceName, Qt::AscendingOrder);
     ui->tableWidget->resizeColumnsToContents();
     ui->tableWidget->resizeRowsToContents();
 
     ui->tableWidget->setCurrentCell(selectedRow, 0);
+
+    on_checkBoxHideNotInLayout_stateChanged(); // Trigger hide for action from context menu
+
+    ui->tableWidget->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetDetails::ToggleSectionDetails(bool select)
 {
     const QHash<quint32, VPiece> *allDetails = m_data->DataPieces();
-    if (allDetails->count() == 0)
+    if (allDetails->isEmpty())
     {
         return;
     }
 
-    for (int i = 0; i<ui->tableWidget->rowCount(); ++i)
+    for (int i = 0; i < ui->tableWidget->rowCount(); ++i)
     {
-        QTableWidgetItem *item = ui->tableWidget->item(i, 0);
-        const quint32 id = item->data(Qt::UserRole).toUInt();
-        if (allDetails->contains(id))
+        const quint32 id = ui->tableWidget->item(i, PieceColumn::InLayout)->data(Qt::UserRole).toUInt();
+        if (allDetails->contains(id) && not(select == allDetails->value(id).IsInLayout()))
         {
-            if (not (select == allDetails->value(id).IsInLayout()))
-            {
-                TogglePieceInLayout *togglePrint = new TogglePieceInLayout(id, select, m_data, m_doc);
-                connect(togglePrint, &TogglePieceInLayout::UpdateList, this, &VWidgetDetails::UpdateList);
-                qApp->getUndoStack()->push(togglePrint);
-            }
+            auto *togglePrint = new TogglePieceInLayout(id, select, m_data, m_doc);
+            connect(togglePrint, &TogglePieceInLayout::Toggled, this, &VWidgetDetails::ToggledPiece);
+            VAbstractApplication::VApp()->getUndoStack()->push(togglePrint);
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VWidgetDetails::ToggledPieceItem(QTableWidgetItem *item)
+{
+    SCASSERT(item != nullptr)
+
+    quint32 const id = item->data(Qt::UserRole).toUInt();
+    const QHash<quint32, VPiece> *details = m_data->DataPieces();
+
+    if (details->contains(id))
+    {
+        const bool inLayout = details->value(id).IsInLayout();
+        if (inLayout)
+        {
+            item->setIcon(FromTheme(VThemeIcon::GtkOk,
+                                    VTheme::GetFallbackThemeIcon(QStringLiteral("16/actions/gtk-ok"), QSize(16, 16))));
+        }
+        else
+        {
+            item->setIcon(FromTheme(VThemeIcon::GtkNo,
+                                    VTheme::GetFallbackThemeIcon(QStringLiteral("16/actions/gtk-no"), QSize(16, 16))));
+        }
+
+        VToolSeamAllowance *tool = nullptr;
+        try
+        {
+            tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(id));
+            tool->setVisible(ui->checkBoxHideNotInLayout->isChecked() ? inLayout : true);
+        }
+        catch (VExceptionBadId &)
+        {
+            // do nothing
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VWidgetDetails::PrepareInLayoutColumnCell(const VPiece &det, quint32 id) -> QTableWidgetItem *
+{
+    auto *item = new QTableWidgetItem();
+    item->setTextAlignment(Qt::AlignHCenter);
+
+    if (det.IsInLayout())
+    {
+        item->setIcon(FromTheme(VThemeIcon::GtkOk,
+                                VTheme::GetFallbackThemeIcon(QStringLiteral("16/actions/gtk-ok"), QSize(16, 16))));
+    }
+    else
+    {
+        item->setIcon(FromTheme(VThemeIcon::GtkNo,
+                                VTheme::GetFallbackThemeIcon(QStringLiteral("16/actions/gtk-no"), QSize(16, 16))));
+    }
+
+    item->setData(Qt::UserRole, id);
+
+    // set the item non-editable (view only), and non-selectable
+    Qt::ItemFlags flags = item->flags();
+    flags &= ~(Qt::ItemIsEditable); // reset/clear the flag
+    item->setFlags(flags);
+    return item;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VWidgetDetails::PreparePieceNameColumnCell(const VPiece &det) -> QTableWidgetItem *
+{
+    QString name = det.GetName();
+    if (name.isEmpty())
+    {
+        name = tr("Unnamed");
+    }
+
+    auto *item = new QTableWidgetItem(name);
+    item->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+
+    return item;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VWidgetDetails::ShowContextMenu(const QPoint &pos)
 {
-    QScopedPointer<QMenu> menu(new QMenu());
+    QScopedPointer<QMenu> const menu(new QMenu());
     QAction *actionSelectAll = menu->addAction(tr("Select all"));
     QAction *actionSelectNone = menu->addAction(tr("Select none"));
 
-    QAction *actionSeparator = new QAction(this);
-    actionSeparator->setSeparator(true);
-    menu->addAction(actionSeparator);
+    menu->addSeparator();
 
     QAction *actionInvertSelection = menu->addAction(tr("Invert selection"));
 
+    bool pieceMode = false;
+    QAction *actionPieceOptions = nullptr;
+    QAction *actionDeletePiece = nullptr;
+    VToolSeamAllowance *toolPiece = nullptr;
+
+    if (QTableWidgetItem *selectedItem = ui->tableWidget->itemAt(pos); selectedItem)
+    {
+        QTableWidgetItem *item = ui->tableWidget->item(selectedItem->row(), PieceColumn::InLayout);
+        const quint32 id = item->data(Qt::UserRole).toUInt();
+
+        try
+        {
+            toolPiece = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(id));
+            if (toolPiece != nullptr)
+            {
+                pieceMode = true;
+                menu->addSeparator();
+
+                actionPieceOptions = menu->addAction(FromTheme(VThemeIcon::PreferencesOther), tr("Piece options"));
+
+                actionDeletePiece = menu->addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete piece"));
+                actionDeletePiece->setDisabled(toolPiece->referens() > 0);
+            }
+        }
+        catch (const VExceptionBadId &)
+        {
+            const QString errorMsg = tr("Cannot find piece by id '%1'").arg(id);
+            qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        }
+    }
+
     const QHash<quint32, VPiece> *allDetails = m_data->DataPieces();
-    if (allDetails->count() == 0)
+    if (allDetails->isEmpty())
     {
         return;
     }
@@ -205,7 +353,7 @@ void VWidgetDetails::ShowContextMenu(const QPoint &pos)
     auto iter = allDetails->constBegin();
     while (iter != allDetails->constEnd())
     {
-        if(iter.value().IsInLayout())
+        if (iter.value().IsInLayout())
         {
             selectedDetails++;
         }
@@ -227,35 +375,68 @@ void VWidgetDetails::ShowContextMenu(const QPoint &pos)
     if (selectedAction == actionSelectAll)
     {
         select = true;
-        qApp->getUndoStack()->beginMacro(tr("select all details"));
+        VAbstractApplication::VApp()->getUndoStack()->beginMacro(tr("select all details"));
         ToggleSectionDetails(select);
-        qApp->getUndoStack()->endMacro();
+        VAbstractApplication::VApp()->getUndoStack()->endMacro();
     }
     else if (selectedAction == actionSelectNone)
     {
         select = false;
-        qApp->getUndoStack()->beginMacro(tr("select none details"));
+        VAbstractApplication::VApp()->getUndoStack()->beginMacro(tr("select none details"));
         ToggleSectionDetails(select);
-        qApp->getUndoStack()->endMacro();
+        VAbstractApplication::VApp()->getUndoStack()->endMacro();
     }
     else if (selectedAction == actionInvertSelection)
     {
-        qApp->getUndoStack()->beginMacro(tr("invert selection"));
+        VAbstractApplication::VApp()->getUndoStack()->beginMacro(tr("invert selection"));
 
-        for (int i = 0; i<ui->tableWidget->rowCount(); ++i)
+        for (int i = 0; i < ui->tableWidget->rowCount(); ++i)
         {
-            QTableWidgetItem *item = ui->tableWidget->item(i, 0);
+            QTableWidgetItem *item = ui->tableWidget->item(i, PieceColumn::InLayout);
             const quint32 id = item->data(Qt::UserRole).toUInt();
             if (allDetails->contains(id))
             {
                 select = not allDetails->value(id).IsInLayout();
 
-                TogglePieceInLayout *togglePrint = new TogglePieceInLayout(id, select, m_data, m_doc);
-                connect(togglePrint, &TogglePieceInLayout::UpdateList, this, &VWidgetDetails::UpdateList);
-                qApp->getUndoStack()->push(togglePrint);
+                auto *togglePrint = new TogglePieceInLayout(id, select, m_data, m_doc);
+                connect(togglePrint, &TogglePieceInLayout::Toggled, this, &VWidgetDetails::ToggledPiece);
+                VAbstractApplication::VApp()->getUndoStack()->push(togglePrint);
             }
         }
 
-        qApp->getUndoStack()->endMacro();
+        VAbstractApplication::VApp()->getUndoStack()->endMacro();
+    }
+    else if (pieceMode && selectedAction == actionPieceOptions)
+    {
+        toolPiece->ShowOptions();
+    }
+    else if (pieceMode && selectedAction == actionDeletePiece)
+    {
+        try
+        {
+            toolPiece->DeleteFromMenu();
+        }
+        catch (const VExceptionToolWasDeleted &e)
+        {
+            Q_UNUSED(e);
+            return; // Leave this method immediately!!!
+        }
+        // Leave this method immediately after call!!!
+    }
+}
+
+//------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief
+ * enable "in layout" details visible or "not in layout" hidden
+ */
+void VWidgetDetails::on_checkBoxHideNotInLayout_stateChanged()
+{
+    for (int i = 0; i < ui->tableWidget->rowCount(); ++i)
+    {
+        if (QTableWidgetItem *item = ui->tableWidget->item(i, PieceColumn::InLayout))
+        {
+            ToggledPieceItem(item);
+        }
     }
 }

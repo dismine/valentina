@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef VABSTRACTMAINWINDOW_H
 #define VABSTRACTMAINWINDOW_H
 
-#include <qcompilerdetection.h>
 #include <QMainWindow>
 #include <QMetaObject>
 #include <QObject>
@@ -37,36 +36,57 @@
 
 struct VFinalMeasurement;
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
+
 class VAbstractMainWindow : public QMainWindow
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     explicit VAbstractMainWindow(QWidget *parent = nullptr);
-    virtual ~VAbstractMainWindow() Q_DECL_EQ_DEFAULT;
+    ~VAbstractMainWindow() override = default;
 
 public slots:
-    virtual void ShowToolTip(const QString &toolTip)=0;
+    virtual void ShowToolTip(const QString &toolTip);
     virtual void UpdateVisibilityGroups();
     virtual void UpdateDetailsList();
     virtual void ZoomFitBestCurrent();
+    void WindowsLocale();
 
 protected slots:
-    void WindowsLocale();
     void ExportDataToCSV();
+    void AlwaysOnTop(bool state);
 
 protected:
-    int     m_curFileFormatVersion;
+    unsigned m_curFileFormatVersion;
     QString m_curFileFormatVersionStr;
+    enum
+    {
+        MaxRecentFiles = 5
+    };
+    QVector<QAction *> m_recentFileActs{QVector<QAction *>(MaxRecentFiles)};
+    QAction *m_separatorAct{nullptr};
 
-    bool ContinueFormatRewrite(const QString &currentFormatVersion, const QString &maxFormatVersion);
-    void ToolBarStyle(QToolBar *bar);
+    auto ContinueFormatRewrite(const QString &currentFormatVersion, const QString &maxFormatVersion) -> bool;
+    virtual void ToolBarStyle(QToolBar *bar) const;
 
-    QString CSVFilePath();
+    auto CSVFilePath() -> QString;
 
-    virtual void ExportToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator)=0;
+    virtual void ExportToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator);
+
+    virtual auto RecentFileList() const -> QStringList = 0;
+    void UpdateRecentFileActions();
+
+    static auto CheckFilePermissions(const QString &path, QWidget *messageBoxParent = nullptr) -> bool;
+
+    auto IgnoreLocking(int error, const QString &path, bool guiMode) -> bool;
 
 private:
-    Q_DISABLE_COPY(VAbstractMainWindow)
+    Q_DISABLE_COPY_MOVE(VAbstractMainWindow) // NOLINT
 };
+
+QT_WARNING_POP
 
 #endif // VABSTRACTMAINWINDOW_H

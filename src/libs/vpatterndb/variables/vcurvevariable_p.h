@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -31,41 +31,35 @@
 
 #include <QSharedData>
 
-#include "../ifc/ifcdef.h"
-#include "../vmisc/diagnostic.h"
+#include "../vmisc/defglobal.h"
+#include "../vmisc/typedef.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
-class VCurveVariableData : public QSharedData
+class VCurveVariableData final : public QSharedData
 {
 public:
+    VCurveVariableData() = default;
+    VCurveVariableData(const quint32 &id, const quint32 &parentId);
+    VCurveVariableData(const VCurveVariableData &var) = default;
+    ~VCurveVariableData() = default;
 
-    VCurveVariableData()
-        :id(NULL_ID), parentId(NULL_ID)
-    {}
-
-    VCurveVariableData(const quint32 &id, const quint32 &parentId)
-        :id(id), parentId(parentId)
-    {}
-
-    VCurveVariableData(const VCurveVariableData &var)
-        :QSharedData(var), id(var.id), parentId(var.parentId)
-    {}
-
-    virtual  ~VCurveVariableData();
-
-    quint32 id;
-    quint32 parentId;
+    quint32 id{NULL_ID};       // NOLINT(misc-non-private-member-variables-in-classes)
+    quint32 parentId{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
-    VCurveVariableData &operator=(const VCurveVariableData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN_MOVE(VCurveVariableData) // NOLINT
 };
 
-VCurveVariableData::~VCurveVariableData()
-{}
-
 QT_WARNING_POP
+
+//---------------------------------------------------------------------------------------------------------------------
+inline VCurveVariableData::VCurveVariableData(const quint32 &id, const quint32 &parentId)
+  : id(id),
+    parentId(parentId)
+{
+}
 
 #endif // VCURVELENGTH_P_H

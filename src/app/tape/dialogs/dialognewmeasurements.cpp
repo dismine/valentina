@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,46 +29,18 @@
 #include "dialognewmeasurements.h"
 #include "ui_dialognewmeasurements.h"
 
-#include "../vpatterndb/variables/vmeasurement.h"
-#include "../vmisc/vtapesettings.h"
-#include "../mapplication.h"
-
 #include <QShowEvent>
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogNewMeasurements::DialogNewMeasurements(QWidget *parent)
-    :QDialog(parent),
-      ui(new Ui::DialogNewMeasurements),
-      isInitialized(false)
+  : QDialog(parent),
+    ui(new Ui::DialogNewMeasurements),
+    m_isInitialized(false)
 {
     ui->setupUi(this);
 
     InitMTypes();
-    InitUnits(MeasurementsType::Individual);
-    InitHeightsList();
-    InitSizesList();
-
-    const VTapeSettings *settings = qApp->TapeSettings();
-
-    const int height = static_cast<int>(UnitConvertor(settings->GetDefHeight(), Unit::Cm, MUnit()));
-    int index = ui->comboBoxBaseHeight->findText(QString().setNum(height));
-    if (index != -1)
-    {
-        ui->comboBoxBaseHeight->setCurrentIndex(index);
-    }
-
-    const int size = static_cast<int>(UnitConvertor(settings->GetDefSize(), Unit::Cm, MUnit()));
-    index = ui->comboBoxBaseSize->findText(QString().setNum(size));
-    if (index != -1)
-    {
-        ui->comboBoxBaseSize->setCurrentIndex(index);
-    }
-
-    connect(ui->comboBoxMType, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
-            &DialogNewMeasurements::CurrentTypeChanged);
-
-    connect(ui->comboBoxUnit, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
-            &DialogNewMeasurements::CurrentUnitChanged);
+    InitUnits();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -78,27 +50,15 @@ DialogNewMeasurements::~DialogNewMeasurements()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-MeasurementsType DialogNewMeasurements::Type() const
+auto DialogNewMeasurements::Type() const -> MeasurementsType
 {
     return static_cast<MeasurementsType>(ui->comboBoxMType->currentData().toInt());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Unit DialogNewMeasurements::MUnit() const
+auto DialogNewMeasurements::MUnit() const -> Unit
 {
     return static_cast<Unit>(ui->comboBoxUnit->currentData().toInt());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int DialogNewMeasurements::BaseSize() const
-{
-    return ui->comboBoxBaseSize->currentText().toInt();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int DialogNewMeasurements::BaseHeight() const
-{
-    return ui->comboBoxBaseHeight->currentText().toInt();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -109,7 +69,7 @@ void DialogNewMeasurements::changeEvent(QEvent *event)
         // retranslate designer form (single inheritance approach)
         ui->retranslateUi(this);
         InitMTypes();
-        InitUnits(static_cast<MeasurementsType>(ui->comboBoxMType->currentData().toInt()));
+        InitUnits();
     }
 
     // remember to call base class implementation
@@ -119,13 +79,13 @@ void DialogNewMeasurements::changeEvent(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogNewMeasurements::showEvent(QShowEvent *event)
 {
-    QDialog::showEvent( event );
-    if ( event->spontaneous() )
+    QDialog::showEvent(event);
+    if (event->spontaneous())
     {
         return;
     }
 
-    if (isInitialized)
+    if (m_isInitialized)
     {
         return;
     }
@@ -134,47 +94,13 @@ void DialogNewMeasurements::showEvent(QShowEvent *event)
     setMaximumSize(size());
     setMinimumSize(size());
 
-    isInitialized = true;//first show windows are held
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogNewMeasurements::CurrentTypeChanged(int index)
-{
-    const MeasurementsType type = static_cast<MeasurementsType>(ui->comboBoxMType->itemData(index).toInt());
-    if (type == MeasurementsType::Multisize)
-    {
-        ui->comboBoxBaseSize->setEnabled(true);
-        ui->comboBoxBaseHeight->setEnabled(true);
-    }
-    else
-    {
-        ui->comboBoxBaseSize->setEnabled(false);
-        ui->comboBoxBaseHeight->setEnabled(false);
-    }
-    InitUnits(type);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogNewMeasurements::CurrentUnitChanged(int index)
-{
-    Q_UNUSED(index)
-
-    if (MUnit() != Unit::Inch)
-    {
-        int i = ui->comboBoxBaseHeight->currentIndex();
-        InitHeightsList();
-        ui->comboBoxBaseHeight->setCurrentIndex(i);
-
-        i = ui->comboBoxBaseSize->currentIndex();
-        InitSizesList();
-        ui->comboBoxBaseSize->setCurrentIndex(i);
-    }
+    m_isInitialized = true; // first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogNewMeasurements::InitMTypes()
 {
-    int val = static_cast<int>(MeasurementsType::Unknown);
+    auto val = static_cast<int>(MeasurementsType::Unknown);
     if (ui->comboBoxMType->currentIndex() != -1)
     {
         val = ui->comboBoxMType->currentData().toInt();
@@ -186,7 +112,7 @@ void DialogNewMeasurements::InitMTypes()
     ui->comboBoxMType->addItem(tr("Multisize"), static_cast<int>(MeasurementsType::Multisize));
     ui->comboBoxMType->blockSignals(false);
 
-    int index = ui->comboBoxMType->findData(val);
+    int const index = ui->comboBoxMType->findData(val);
     if (index != -1)
     {
         ui->comboBoxMType->setCurrentIndex(index);
@@ -194,25 +120,9 @@ void DialogNewMeasurements::InitMTypes()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogNewMeasurements::InitHeightsList()
+void DialogNewMeasurements::InitUnits()
 {
-    const QStringList list = VMeasurement::WholeListHeights(MUnit());
-    ui->comboBoxBaseHeight->clear();
-    ui->comboBoxBaseHeight->addItems(list);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogNewMeasurements::InitSizesList()
-{
-    const QStringList list = VMeasurement::WholeListSizes(MUnit());
-    ui->comboBoxBaseSize->clear();
-    ui->comboBoxBaseSize->addItems(list);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogNewMeasurements::InitUnits(const MeasurementsType &type)
-{
-    int val = static_cast<int>(Unit::Cm);
+    auto val = static_cast<int>(Unit::Cm);
     if (ui->comboBoxUnit->currentIndex() != -1)
     {
         val = ui->comboBoxUnit->currentData().toInt();
@@ -220,12 +130,11 @@ void DialogNewMeasurements::InitUnits(const MeasurementsType &type)
 
     ui->comboBoxUnit->blockSignals(true);
     ui->comboBoxUnit->clear();
+
     ui->comboBoxUnit->addItem(tr("Centimeters"), static_cast<int>(Unit::Cm));
     ui->comboBoxUnit->addItem(tr("Millimiters"), static_cast<int>(Unit::Mm));
-    if (type == MeasurementsType::Individual)
-    {
-        ui->comboBoxUnit->addItem(tr("Inches"), static_cast<int>(Unit::Inch));
-    }
+    ui->comboBoxUnit->addItem(tr("Inches"), static_cast<int>(Unit::Inch));
+
     ui->comboBoxUnit->setCurrentIndex(-1);
     ui->comboBoxUnit->blockSignals(false);
 

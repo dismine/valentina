@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,19 +29,19 @@
 #include "dialogdatetimeformats.h"
 #include "ui_dialogdatetimeformats.h"
 
-#ifdef Q_CC_MSVC
-    #include <ciso646>
-#endif /* Q_CC_MSVC */
+// Header <ciso646> is removed in C++20.
+#if defined(Q_CC_MSVC) && __cplusplus <= 201703L
+#include <ciso646> // and, not, or
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogDateTimeFormats::DialogDateTimeFormats(const QDate &date, const QStringList &predefinedFormats,
                                              const QStringList &userDefinedFormats, QWidget *parent)
-    : QDialog(parent),
-      ui(new Ui::DialogDateTimeFormats),
-      m_dateMode(true),
-      m_date(date),
-      m_time(),
-      m_predefined(predefinedFormats)
+  : QDialog(parent),
+    ui(new Ui::DialogDateTimeFormats),
+    m_dateMode(true),
+    m_date(date),
+    m_predefined(predefinedFormats)
 {
     ui->setupUi(this);
 
@@ -51,12 +51,11 @@ DialogDateTimeFormats::DialogDateTimeFormats(const QDate &date, const QStringLis
 //---------------------------------------------------------------------------------------------------------------------
 DialogDateTimeFormats::DialogDateTimeFormats(const QTime &time, const QStringList &predefinedFormats,
                                              const QStringList &userDefinedFormats, QWidget *parent)
-    : QDialog(parent),
-      ui(new Ui::DialogDateTimeFormats),
-      m_dateMode(false),
-      m_date(),
-      m_time(time),
-      m_predefined(predefinedFormats)
+  : QDialog(parent),
+    ui(new Ui::DialogDateTimeFormats),
+    m_dateMode(false),
+    m_time(time),
+    m_predefined(predefinedFormats)
 {
     ui->setupUi(this);
 
@@ -70,11 +69,11 @@ DialogDateTimeFormats::~DialogDateTimeFormats()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList DialogDateTimeFormats::GetFormats() const
+auto DialogDateTimeFormats::GetFormats() const -> QStringList
 {
     QStringList formats;
 
-    for (int i=0; i<ui->listWidget->count(); ++i)
+    for (int i = 0; i < ui->listWidget->count(); ++i)
     {
         if (const QListWidgetItem *lineItem = ui->listWidget->item(i))
         {
@@ -165,12 +164,12 @@ void DialogDateTimeFormats::SetFormatLines(const QStringList &predefined, const 
 
     int row = -1;
 
-    for (auto &item : predefined)
+    for (const auto &item : predefined)
     {
         ui->listWidget->insertItem(++row, AddListLine(item));
     }
 
-    for (auto &item : userDefined)
+    for (const auto &item : userDefined)
     {
         ui->listWidget->insertItem(++row, AddListLine(item));
     }
@@ -213,10 +212,10 @@ void DialogDateTimeFormats::SetupControls()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QListWidgetItem *DialogDateTimeFormats::AddListLine(const QString &format)
+auto DialogDateTimeFormats::AddListLine(const QString &format) -> QListWidgetItem *
 {
     const QString preview = m_dateMode ? m_date.toString(format) : m_time.toString(format);
-    QListWidgetItem *item = new QListWidgetItem(preview);
+    auto *item = new QListWidgetItem(preview);
     item->setData(Qt::UserRole, format);
     return item;
 }

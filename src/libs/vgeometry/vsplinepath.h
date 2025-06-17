@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef VSPLINEPATH_H
 #define VSPLINEPATH_H
 
-#include <qcompilerdetection.h>
 #include <QCoreApplication>
 #include <QPainterPath>
 #include <QPointF>
@@ -50,56 +49,58 @@ class VSplinePathData;
 /**
  * @brief The VSplinePath class keep information about splinePath.
  */
-class VSplinePath :public VAbstractCubicBezierPath
+class VSplinePath final : public VAbstractCubicBezierPath
 {
-    Q_DECLARE_TR_FUNCTIONS(VSplinePath)
+    Q_DECLARE_TR_FUNCTIONS(VSplinePath) // NOLINT
+
 public:
     explicit VSplinePath(quint32 idObject = 0, Draw mode = Draw::Calculation);
-    VSplinePath(const QVector<VFSplinePoint> &points, qreal kCurve = 1, quint32 idObject = 0,
-                Draw mode = Draw::Calculation);
-    VSplinePath(const QVector<VSplinePoint> &points, quint32 idObject = 0, Draw mode = Draw::Calculation);
-    VSplinePath(const VSplinePath& splPath);
-    VSplinePath Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const;
-    VSplinePath Flip(const QLineF &axis, const QString &prefix = QString()) const;
-    VSplinePath Move(qreal length, qreal angle, const QString &prefix = QString()) const;
-    virtual ~VSplinePath() override;
+    explicit VSplinePath(const QVector<VFSplinePoint> &points, qreal kCurve = 1, quint32 idObject = 0,
+                         Draw mode = Draw::Calculation);
+    explicit VSplinePath(const QVector<VSplinePoint> &points, quint32 idObject = 0, Draw mode = Draw::Calculation);
+    VSplinePath(const VSplinePath &splPath);
+    auto Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const -> VSplinePath;
+    auto Flip(const QLineF &axis, const QString &prefix = QString()) const -> VSplinePath;
+    auto Move(qreal length, qreal angle, const QString &prefix = QString()) const -> VSplinePath;
+    ~VSplinePath() override;
 
-    VSplinePoint &operator[](int indx);
-    VSplinePath  &operator=(const VSplinePath &path);
-#ifdef Q_COMPILER_RVALUE_REFS
-    VSplinePath &operator=(VSplinePath &&path) Q_DECL_NOTHROW { Swap(path); return *this; }
-#endif
+    auto operator[](vsizetype indx) -> VSplinePoint &;
+    auto operator=(const VSplinePath &path) -> VSplinePath &;
 
-    inline void Swap(VSplinePath &path) Q_DECL_NOTHROW
-    { VAbstractCubicBezierPath::Swap(path); std::swap(d, path.d); }
+    VSplinePath(VSplinePath &&splPath) noexcept;
+    auto operator=(VSplinePath &&path) noexcept -> VSplinePath &;
 
-    void   append(const VSplinePoint &point);
+    void append(const VSplinePoint &point);
 
-    virtual qint32  CountSubSpl() const override;
-    virtual qint32  CountPoints() const override;
-    virtual void    Clear() override;
-    virtual VSpline GetSpline(qint32 index) const override;
+    auto CountSubSpl() const -> vsizetype override;
+    auto CountPoints() const -> vsizetype override;
+    void Clear() override;
+    auto GetSpline(vsizetype index) const -> VSpline override;
 
-    virtual QVector<VSplinePoint> GetSplinePath() const override;
-    QVector<VFSplinePoint> GetFSplinePath() const;
+    auto GetSplinePath() const -> QVector<VSplinePoint> override;
+    auto GetFSplinePath() const -> QVector<VFSplinePoint>;
 
-    virtual qreal GetStartAngle () const override;
-    virtual qreal GetEndAngle () const override;
+    auto GetStartAngle() const -> qreal override;
+    auto GetEndAngle() const -> qreal override;
 
-    virtual qreal GetC1Length() const override;
-    virtual qreal GetC2Length() const override;
+    auto GetC1Length() const -> qreal override;
+    auto GetC2Length() const -> qreal override;
 
-    void         UpdatePoint(qint32 indexSpline, const SplinePointPosition &pos, const VSplinePoint &point);
-    VSplinePoint GetSplinePoint(qint32 indexSpline, SplinePointPosition pos) const;
+    void UpdatePoint(qint32 indexSpline, const SplinePointPosition &pos, const VSplinePoint &point);
+    auto GetSplinePoint(qint32 indexSpline, SplinePointPosition pos) const -> VSplinePoint;
 
-    const VSplinePoint &at(int indx) const;
+    auto at(vsizetype indx) const -> const VSplinePoint &;
+
+    auto ToJson() const -> QJsonObject override;
+
 protected:
-    virtual VPointF FirstPoint() const  override;
-    virtual VPointF LastPoint() const  override;
+    auto FirstPoint() const -> VPointF override;
+    auto LastPoint() const -> VPointF override;
+
 private:
     QSharedDataPointer<VSplinePathData> d;
 };
 
-Q_DECLARE_TYPEINFO(VSplinePath, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VSplinePath, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VSPLINEPATH_H

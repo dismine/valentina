@@ -22,7 +22,6 @@
 #define VABSTRACTPROPERTYFACTORY_H
 
 #include "vpropertyexplorer_global.h"
-#include "../vmisc/diagnostic.h"
 #include <QObject>
 
 namespace VPE
@@ -36,18 +35,26 @@ QT_WARNING_DISABLE_CLANG("-Wweak-vtables")
 class VPROPERTYEXPLORERSHARED_EXPORT VAbstractPropertyFactory
 {
 public:
+    VAbstractPropertyFactory() = default;
+
     //! Empty virtual destructor
-    virtual ~VAbstractPropertyFactory() {}
+    virtual ~VAbstractPropertyFactory() = default;
+
+    VAbstractPropertyFactory(const VAbstractPropertyFactory &) = default;
+    auto operator=(const VAbstractPropertyFactory &) -> VAbstractPropertyFactory & = default;
+
+    VAbstractPropertyFactory(VAbstractPropertyFactory &&) = default;
+    auto operator=(VAbstractPropertyFactory &&) -> VAbstractPropertyFactory & = default;
 
     //! Creates a new property of a certain type and assigns a name and description (otionally)
     //! \param type The type of the property as string
     //! \param name The property's name
     //! \return Returns the created property or NULL if it couldn't be be created
-    virtual VProperty* createProperty(const QString& type, const QString &name) = 0;
+    virtual auto createProperty(const QString &type, const QString &name) -> VProperty * = 0;
 };
 
 QT_WARNING_POP
 
-}
+} // namespace VPE
 
 #endif // VABSTRACTPROPERTYFACTORY_H

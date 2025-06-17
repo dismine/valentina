@@ -15,9 +15,11 @@
 
 #include "drw_textcodec.h"
 
-class dxfReader {
+class dxfReader
+{
 public:
-    enum TYPE {
+    enum TYPE
+    {
         STRING,
         INT32,
         INT64,
@@ -25,89 +27,103 @@ public:
         BOOL,
         INVALID
     };
-    enum TYPE type;
+    TYPE type;
+
 public:
     explicit dxfReader(std::istream *stream)
-        : type(INVALID),
-          filestr(stream),
-          strData(),
-          doubleData(),
-          intData(),
-          int64(),
-          skip(),
-          decoder()
-    {}
+      : type(INVALID),
+        filestr(stream),
+        strData(),
+        doubleData(),
+        intData(),
+        int64(),
+        skip(),
+        decoder()
+    {
+    }
 
     virtual ~dxfReader() = default;
-    bool readRec(int *codeData);
+    auto readRec(int *codeData) -> bool;
 
-    std::string getString() const {return strData;}
-    int getHandleString();//Convert hex string to int
-    std::string toUtf8String(const std::string &t) {return decoder.toUtf8(t);}
-    std::string getUtf8String() {return decoder.toUtf8(strData);}
-    double getDouble() const {return doubleData;}
-    int getInt32() const {return intData;}
-    unsigned long long int getInt64() const {return int64;}
-    bool getBool() const { return (intData==0) ? false : true;}
-    int getVersion() const {return decoder.getVersion();}
-    void setVersion(std::string *v, bool dxfFormat){decoder.setVersion(v, dxfFormat);}
-    void setCodePage(std::string *c){decoder.setCodePage(c, true);}
-    std::string getCodePage() const { return decoder.getCodePage();}
+    auto getString() const -> std::string { return strData; }
+    auto getHandleString() -> int; // Convert hex string to int
+    auto toUtf8String(const std::string &t) -> std::string { return decoder.toUtf8(t); }
+    auto getUtf8String() -> std::string { return decoder.toUtf8(strData); }
+    auto getDouble() const -> double { return doubleData; }
+    auto getInt32() const -> int { return intData; }
+    auto getInt64() const -> unsigned long long int { return int64; }
+    auto getBool() const -> bool { return intData != 0; }
+    auto getVersion() const -> int { return decoder.getVersion(); }
+    void setVersion(const std::string &v, bool dxfFormat) { decoder.setVersion(v, dxfFormat); }
+    void setCodePage(const std::string &c) { decoder.setCodePage(c, true); }
+    auto getCodePage() const -> std::string { return decoder.getCodePage(); }
+    void setIgnoreComments(const bool bValue) { m_bIgnoreComments = bValue; }
 
 protected:
-    virtual bool readCode(int *code) = 0; //return true if sucesful (not EOF)
-    virtual bool readString(std::string *text) = 0;
-    virtual bool readString() = 0;
-    virtual bool readInt16() = 0;
-    virtual bool readInt32() = 0;
-    virtual bool readInt64() = 0;
-    virtual bool readDouble() = 0;
-    virtual bool readBool() = 0;
+    virtual auto readCode(int *code) -> bool = 0; // return true if successful (not EOF)
+    virtual auto readString(std::string *text) -> bool = 0;
+    virtual auto readString() -> bool = 0;
+    virtual auto readBinary() -> bool = 0;
+    virtual auto readInt16() -> bool = 0;
+    virtual auto readInt32() -> bool = 0;
+    virtual auto readInt64() -> bool = 0;
+    virtual auto readDouble() -> bool = 0;
+    virtual auto readBool() -> bool = 0;
 
 protected:
     std::istream *filestr;
     std::string strData;
     double doubleData;
-    signed int intData; //32 bits integer
-    unsigned long long int int64; //64 bits integer
-    bool skip; //set to true for ascii dxf, false for binary
+    signed int intData;           // 32 bits integer
+    unsigned long long int int64; // 64 bits integer
+    bool skip;                    // set to true for ascii dxf, false for binary
+
 private:
-    Q_DISABLE_COPY(dxfReader)
+    Q_DISABLE_COPY_MOVE(dxfReader) // NOLINT
     DRW_TextCodec decoder;
+    bool m_bIgnoreComments{false};
 };
 
-class dxfReaderBinary : public dxfReader {
+class dxfReaderBinary : public dxfReader
+{
 public:
     explicit dxfReaderBinary(std::istream *stream)
-        : dxfReader(stream)
-    {skip = false; }
+      : dxfReader(stream)
+    {
+        skip = false;
+    }
 
     virtual ~dxfReaderBinary() = default;
-    virtual bool readCode(int *code) override;
-    virtual bool readString(std::string *text) override;
-    virtual bool readString() override;
-    virtual bool readInt16() override;
-    virtual bool readInt32() override;
-    virtual bool readInt64() override;
-    virtual bool readDouble() override;
-    virtual bool readBool() override;
+    virtual auto readCode(int *code) -> bool override;
+    virtual auto readString(std::string *text) -> bool override;
+    virtual auto readString() -> bool override;
+    virtual auto readBinary() -> bool override;
+    virtual auto readInt16() -> bool override;
+    virtual auto readInt32() -> bool override;
+    virtual auto readInt64() -> bool override;
+    virtual auto readDouble() -> bool override;
+    virtual auto readBool() -> bool override;
 };
 
-class dxfReaderAscii : public dxfReader {
+class dxfReaderAscii final : public dxfReader
+{
 public:
     explicit dxfReaderAscii(std::istream *stream)
-        : dxfReader(stream)
-    {skip = true; }
+      : dxfReader(stream)
+    {
+        skip = true;
+    }
 
     virtual ~dxfReaderAscii() = default;
-    virtual bool readCode(int *code) override;
-    virtual bool readString(std::string *text) override;
-    virtual bool readString() override;
-    virtual bool readInt16() override;
-    virtual bool readDouble() override;
-    virtual bool readInt32() override;
-    virtual bool readInt64() override;
-    virtual bool readBool() override;
+    virtual auto readCode(int *code) -> bool override;
+    virtual auto readString(std::string *text) -> bool override;
+    virtual auto readString() -> bool override;
+    virtual auto readBinary() -> bool override;
+    virtual auto readInt16() -> bool override;
+    virtual auto readDouble() -> bool override;
+    virtual auto readInt32() -> bool override;
+    virtual auto readInt64() -> bool override;
+    virtual auto readBool() -> bool override;
 };
 
 #endif // DXFREADER_H

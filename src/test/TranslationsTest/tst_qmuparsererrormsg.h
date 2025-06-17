@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -37,7 +37,7 @@
 
 class TST_QmuParserErrorMsg : public AbstractTest
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit TST_QmuParserErrorMsg(const QString &locale, QObject *parent = nullptr);
     virtual ~TST_QmuParserErrorMsg() override;
@@ -49,14 +49,15 @@ private slots:
     void cleanupTestCase();
 
 private:
-    Q_DISABLE_COPY(TST_QmuParserErrorMsg)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(TST_QmuParserErrorMsg) // NOLINT
 
     QString m_locale;
     QPointer<QTranslator> appTranslator;
     qmu::QmuParserErrorMsg *msg;
 
     void AddCase(int code, bool tok, bool pos);
-    int  LoadTranslation(const QString &checkedLocale);
+    auto LoadTranslation(const QString &checkedLocale) -> int;
     void RemoveTranslation();
 };
 

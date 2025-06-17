@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -35,20 +35,25 @@
 #include <QPoint>
 #include <QPointF>
 #include <QSharedPointer>
-#include <Qt>
 #include <new>
 
-#include "../ifc/xml/vabstractpattern.h"
-#include "../ifc/xml/vdomdocument.h"
-#include "../ifc/ifcdef.h"
-#include "../vgeometry/vgobject.h"
-#include "../vgeometry/vpointf.h"
-#include "../vmisc/vabstractapplication.h"
-#include "../vpatterndb/vcontainer.h"
 #include "../../../../vabstracttool.h"
 #include "../../../vdrawtool.h"
+#include "../ifc/ifcdef.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../ifc/xml/vdomdocument.h"
+#include "../vgeometry/vgobject.h"
+#include "../vgeometry/vpointf.h"
+#include "../vmisc/theme/vscenestylesheet.h"
+#include "../vpatterndb/vcontainer.h"
 #include "../vtoolsinglepoint.h"
 #include "../vwidgets/scalesceneitems.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
 
 template <class T> class QSharedPointer;
 
@@ -67,17 +72,22 @@ template <class T> class QSharedPointer;
  */
 VToolLinePoint::VToolLinePoint(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
                                const QString &lineColor, const QString &formula, const quint32 &basePointId,
-                               const qreal &angle, QGraphicsItem *parent)
-    :VToolSinglePoint(doc, data, id, parent), formulaLength(formula), angle(angle), basePointId(basePointId),
-      mainLine(nullptr), lineColor(lineColor)
+                               const qreal &angle, const QString &notes, QGraphicsItem *parent)
+  : VToolSinglePoint(doc, data, id, notes, parent),
+    formulaLength(formula),
+    angle(angle),
+    basePointId(basePointId),
+    lineColor(lineColor)
 {
     this->m_lineType = typeLine;
     Q_ASSERT_X(basePointId != 0, Q_FUNC_INFO, "basePointId == 0"); //-V654 //-V712
-    QPointF point1 = static_cast<QPointF>(*data->GeometricObject<VPointF>(basePointId));
-    QPointF point2 = static_cast<QPointF>(*data->GeometricObject<VPointF>(id));
-    mainLine = new VScaledLine(QLineF(point1 - point2, QPointF()), this);
+    auto const point1 = static_cast<QPointF>(*data->GeometricObject<VPointF>(basePointId));
+    auto const point2 = static_cast<QPointF>(*data->GeometricObject<VPointF>(id));
+    QLineF const line(point1 - point2, QPointF());
+    mainLine = new VScaledLine(line, VColorRole::CustomColor, this);
     mainLine->SetBoldLine(false);
     mainLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
+    mainLine->setVisible(not line.isNull());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -90,7 +100,7 @@ VToolLinePoint::~VToolLinePoint()
 void VToolLinePoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     QPen mPen = mainLine->pen();
-    mPen.setColor(CorrectColor(this, lineColor));
+    mPen.setColor(VSceneStylesheet::CorrectToolColor(this, VSceneStylesheet::CorrectToolColorForDarkTheme(lineColor)));
     mPen.setStyle(LineStyleToPenStyle(m_lineType));
 
     mainLine->setPen(mPen);
@@ -105,9 +115,11 @@ void VToolLinePoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
 void VToolLinePoint::RefreshGeometry()
 {
     VToolSinglePoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<VPointF>(m_id));
-    QPointF point = static_cast<QPointF>(*VDrawTool::data.GeometricObject<VPointF>(m_id));
-    QPointF basePoint = static_cast<QPointF>(*VDrawTool::data.GeometricObject<VPointF>(basePointId));
-    mainLine->setLine(QLineF(basePoint - point, QPointF()));
+    auto const point = static_cast<QPointF>(*VDrawTool::data.GeometricObject<VPointF>(m_id));
+    auto const basePoint = static_cast<QPointF>(*VDrawTool::data.GeometricObject<VPointF>(basePointId));
+    QLineF const line(basePoint - point, QPointF());
+    mainLine->setLine(line);
+    mainLine->setVisible(not line.isNull());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -144,23 +156,22 @@ void VToolLinePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolLinePoint::MakeToolTip() const
+auto VToolLinePoint::MakeToolTip() const -> QString
 {
     const QSharedPointer<VPointF> first = VAbstractTool::data.GeometricObject<VPointF>(basePointId);
     const QSharedPointer<VPointF> second = VAbstractTool::data.GeometricObject<VPointF>(m_id);
 
     const QLineF line(static_cast<QPointF>(*first), static_cast<QPointF>(*second));
 
-    const QString toolTip = QString("<table>"
-                                    "<tr> <td><b>%6:</b> %7</td> </tr>"
-                                    "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
-                                    "<tr> <td><b>%4:</b> %5°</td> </tr>"
-                                    "</table>")
-            .arg(tr("Length"))
-            .arg(qApp->fromPixel(line.length()))
-            .arg(UnitsToStr(qApp->patternUnit(), true), tr("Angle"))
-            .arg(line.angle())
-            .arg(tr("Label"), second->name());
+    const QString toolTip = u"<table>"
+                            u"<tr> <td><b>%6:</b> %7</td> </tr>"
+                            u"<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                            u"<tr> <td><b>%4:</b> %5°</td> </tr>"
+                            u"</table>"_s.arg(tr("Length"))
+                                .arg(VAbstractValApplication::VApp()->fromPixel(line.length()))
+                                .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), tr("Angle"))
+                                .arg(line.angle())
+                                .arg(tr("Label"), second->name());
     return toolTip;
 }
 
@@ -183,7 +194,7 @@ void VToolLinePoint::FullUpdateFromFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VToolLinePoint::GetAngle() const
+auto VToolLinePoint::GetAngle() const -> qreal
 {
     return angle;
 }
@@ -197,7 +208,7 @@ void VToolLinePoint::SetAngle(const qreal &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolLinePoint::GetLineColor() const
+auto VToolLinePoint::GetLineColor() const -> QString
 {
     return lineColor;
 }
@@ -212,12 +223,11 @@ void VToolLinePoint::SetLineColor(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolLinePoint::GetFormulaLength() const
+auto VToolLinePoint::GetFormulaLength() const -> VFormula
 {
     VFormula fLength(formulaLength, this->getData());
-    fLength.setCheckZero(false);
     fLength.setToolId(m_id);
-    fLength.setPostfix(UnitsToStr(qApp->patternUnit()));
+    fLength.setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits()));
     fLength.Eval();
 
     return fLength;
@@ -226,7 +236,7 @@ VFormula VToolLinePoint::GetFormulaLength() const
 //---------------------------------------------------------------------------------------------------------------------
 void VToolLinePoint::SetFormulaLength(const VFormula &value)
 {
-    if (value.error() == false)
+    if (!value.error())
     {
         formulaLength = value.GetFormula(FormulaType::FromUser);
 
@@ -236,7 +246,7 @@ void VToolLinePoint::SetFormulaLength(const VFormula &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolLinePoint::BasePointName() const
+auto VToolLinePoint::BasePointName() const -> QString
 {
     return VAbstractTool::data.GetGObject(basePointId)->name();
 }

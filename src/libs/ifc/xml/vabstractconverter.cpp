@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -27,6 +27,15 @@
  *************************************************************************/
 
 #include "vabstractconverter.h"
+#include "vparsererrorhandler.h"
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include <xercesc/framework/MemBufInputSource.hpp>
+#include <xercesc/parsers/XercesDOMParser.hpp>
+#else
+#include <QXmlSchema>
+#include <QXmlSchemaValidator>
+#endif // QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 
 #include <QDir>
 #include <QDomElement>
@@ -38,28 +47,30 @@
 #include <QMap>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <QStringList>
+#include <QTextDocument>
+#include <QUrl>
 
 #include "../exception/vexception.h"
-#include "../exception/vexceptionwrongid.h"
 #include "vdomdocument.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractConverter::VAbstractConverter(const QString &fileName)
-    : VDomDocument(),
-      m_ver(0x0),
-      m_convertedFileName(fileName),
-      m_tmpFile()
+  : m_ver(0x0),
+    m_originalFileName(fileName),
+    m_convertedFileName(fileName)
 {
-    setXMLContent(m_convertedFileName);// Throw an exception on error
-    m_ver = GetVersion(GetVersionStr());
+    setXMLContent(m_convertedFileName); // Throw an exception on error
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstractConverter::Convert()
+auto VAbstractConverter::Convert() -> QString
 {
     if (m_ver == MaxVer())
     {
@@ -77,8 +88,7 @@ QString VAbstractConverter::Convert()
     }
     else
     {
-        const QString errorMsg(tr("Error openning a temp file: %1.").arg(m_tmpFile.errorString()));
-        throw VException(errorMsg);
+        throw VException(tr("Error opening a temp file: %1.").arg(m_tmpFile.errorString()));
     }
 
     m_ver < MaxVer() ? ApplyPatches() : DowngradeToCurrentMaxVersion();
@@ -87,108 +97,34 @@ QString VAbstractConverter::Convert()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VAbstractConverter::GetCurrentFormatVersion() const
+auto VAbstractConverter::GetCurrentFormatVersion() const -> unsigned
 {
     return m_ver;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstractConverter::GetVersionStr() const
-{
-    const QDomNodeList nodeList = this->elementsByTagName(TagVersion);
-    if (nodeList.isEmpty())
-    {
-        const QString errorMsg(tr("Couldn't get version information."));
-        throw VException(errorMsg);
-    }
-
-    if (nodeList.count() > 1)
-    {
-        const QString errorMsg(tr("Too many tags <%1> in file.").arg(TagVersion));
-        throw VException(errorMsg);
-    }
-
-    const QDomNode domNode = nodeList.at(0);
-    if (domNode.isNull() == false && domNode.isElement())
-    {
-        const QDomElement domElement = domNode.toElement();
-        if (domElement.isNull() == false)
-        {
-            return domElement.text();
-        }
-    }
-    return QString(QStringLiteral("0.0.0"));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int VAbstractConverter::GetVersion(const QString &version)
-{
-    ValidateVersion(version);
-
-    const QStringList ver = version.split(QChar('.'));
-
-    bool ok = false;
-    const int major = ver.at(0).toInt(&ok);
-    if (not ok)
-    {
-        return 0x0;
-    }
-
-    ok = false;
-    const int minor = ver.at(1).toInt(&ok);
-    if (not ok)
-    {
-        return 0x0;
-    }
-
-    ok = false;
-    const int patch = ver.at(2).toInt(&ok);
-    if (not ok)
-    {
-        return 0x0;
-    }
-
-    return (major<<16)|(minor<<8)|(patch);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractConverter::ValidateVersion(const QString &version)
-{
-    const QRegularExpression rx(QStringLiteral("^([0-9]|[1-9][0-9]|[1-2][0-5][0-5]).([0-9]|[1-9][0-9]|[1-2][0-5][0-5])"
-                                               ".([0-9]|[1-9][0-9]|[1-2][0-5][0-5])$"));
-
-    if (rx.match(version).hasMatch() == false)
-    {
-        const QString errorMsg(tr("Version \"%1\" invalid.").arg(version));
-        throw VException(errorMsg);
-    }
-
-    if (version == QLatin1String("0.0.0"))
-    {
-        const QString errorMsg(tr("Version \"0.0.0\" invalid."));
-        throw VException(errorMsg);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VAbstractConverter::ReserveFile() const
 {
-    //It's not possible in all cases make conversion without lose data.
-    //For such cases we will store old version in a reserve file.
+    // It's not possible in all cases make conversion without lose data.
+    // For such cases we will store old version in a reserve file.
     QString error;
-    QFileInfo info(m_convertedFileName);
-    const QString reserveFileName = QString("%1/%2(v%3).%4.bak")
-            .arg(info.absoluteDir().absolutePath(), info.baseName(), GetVersionStr(), info.completeSuffix());
+    QFileInfo const info(m_convertedFileName);
+#if defined(Q_OS_UNIX) || defined(Q_OS_MACOS)
+    const QString hidden = QChar('.');
+#else
+    const QString hidden;
+#endif
+    const QString reserveFileName = u"%1/%2%3(v%4).%5.bak"_s.arg(
+        info.absoluteDir().absolutePath(), hidden, info.baseName(), GetFormatVersionStr(), info.completeSuffix());
     if (not SafeCopy(m_convertedFileName, reserveFileName, error))
     {
-#ifdef Q_OS_WIN32
-        qt_ntfs_permission_lookup++; // turn checking on
-#endif /*Q_OS_WIN32*/
+        // #ifdef Q_OS_WIN32
+        //         qt_ntfs_permission_lookup++; // turn checking on
+        // #endif /*Q_OS_WIN32*/
         const bool isFileWritable = info.isWritable();
-#ifdef Q_OS_WIN32
-        qt_ntfs_permission_lookup--; // turn it off again
-#endif /*Q_OS_WIN32*/
-
+        // #ifdef Q_OS_WIN32
+        //         qt_ntfs_permission_lookup--; // turn it off again
+        // #endif /*Q_OS_WIN32*/
         if (not IsReadOnly() && isFileWritable)
         {
             const QString errorMsg(tr("Error creating a reserv copy: %1.").arg(error));
@@ -198,38 +134,39 @@ void VAbstractConverter::ReserveFile() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractConverter::Replace(QString &formula, const QString &newName, int position, const QString &token,
-                                 int &bias) const
+void VAbstractConverter::Replace(QString &formula, const QString &newName, vsizetype position, const QString &token,
+                                 vsizetype &bias) const
 {
     formula.replace(position, token.length(), newName);
     bias = token.length() - newName.length();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractConverter::CorrectionsPositions(int position, int bias, QMap<int, QString> &tokens) const
+void VAbstractConverter::CorrectionsPositions(vsizetype position, vsizetype bias,
+                                              QMap<vsizetype, QString> &tokens) const
 {
     if (bias == 0)
     {
-        return;// Nothing to correct;
+        return; // Nothing to correct;
     }
 
     BiasTokens(position, bias, tokens);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractConverter::BiasTokens(int position, int bias, QMap<int, QString> &tokens)
+void VAbstractConverter::BiasTokens(vsizetype position, vsizetype bias, QMap<vsizetype, QString> &tokens)
 {
-    QMap<int, QString> newTokens;
-    QMap<int, QString>::const_iterator i = tokens.constBegin();
+    QMap<vsizetype, QString> newTokens;
+    QMap<vsizetype, QString>::const_iterator i = tokens.constBegin();
     while (i != tokens.constEnd())
     {
-        if (i.key()<= position)
+        if (i.key() <= position)
         { // Tokens before position "position" did not change his positions.
             newTokens.insert(i.key(), i.value());
         }
         else
         {
-            newTokens.insert(i.key()-bias, i.value());
+            newTokens.insert(i.key() - bias, i.value());
         }
         ++i;
     }
@@ -237,22 +174,148 @@ void VAbstractConverter::BiasTokens(int position, int bias, QMap<int, QString> &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_NORETURN void VAbstractConverter::InvalidVersion(int ver) const
+/**
+ * @brief ValidateXML validate xml file by xsd schema.
+ * @param schema path to schema file.
+ */
+void VAbstractConverter::ValidateXML(const QString &schema) const
+{
+    qCDebug(vXML, "Validation xml file %s.", qUtf8Printable(m_convertedFileName));
+
+    QFile fileSchema(schema);
+    if (not fileSchema.open(QIODevice::ReadOnly))
+    {
+        const QString errorMsg(tr("Can't open schema file %1:\n%2.").arg(schema, fileSchema.errorString()));
+        throw VException(errorMsg);
+    }
+
+    VParserErrorHandler parserErrorHandler;
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    XERCES_CPP_NAMESPACE::XercesDOMParser domParser;
+    domParser.setCreateEntityReferenceNodes(true);
+    domParser.setDisableDefaultEntityResolution(true);
+    domParser.setErrorHandler(&parserErrorHandler);
+
+    QByteArray const data = fileSchema.readAll();
+    const char *schemaData = data.constData();
+    const auto schemaSize = static_cast<size_t>(data.size());
+
+    if (QScopedPointer<XERCES_CPP_NAMESPACE::InputSource> const grammarSource(
+            new XERCES_CPP_NAMESPACE::MemBufInputSource(reinterpret_cast<const XMLByte *>(schemaData), schemaSize,
+                                                        "schema"));
+        domParser.loadGrammar(*grammarSource, XERCES_CPP_NAMESPACE::Grammar::SchemaGrammarType, true) == nullptr)
+    {
+        VException e(parserErrorHandler.StatusMessage());
+        e.AddMoreInformation(tr("Could not load schema file '%1'.").arg(fileSchema.fileName()));
+        throw e;
+    }
+
+    qCDebug(vXML, "Schema loaded.");
+
+    if (parserErrorHandler.HasError())
+    {
+        VException e(parserErrorHandler.StatusMessage());
+        e.AddMoreInformation(tr("Schema file %3 invalid in line %1 column %2")
+                                 .arg(parserErrorHandler.Line())
+                                 .arg(parserErrorHandler.Column())
+                                 .arg(fileSchema.fileName()));
+        throw e;
+    }
+
+    domParser.setValidationScheme(XERCES_CPP_NAMESPACE::XercesDOMParser::Val_Always);
+    domParser.setDoNamespaces(true);
+    domParser.setDoSchema(true);
+    domParser.setValidationConstraintFatal(true);
+    domParser.setValidationSchemaFullChecking(true);
+    domParser.useCachedGrammarInParse(true);
+
+    QFile pattern(m_convertedFileName);
+    if (not pattern.open(QIODevice::ReadOnly))
+    {
+        const QString errorMsg(tr("Can't open file %1:\n%2.").arg(m_convertedFileName, pattern.errorString()));
+        throw VException(errorMsg);
+    }
+
+    QByteArray const patternFileData = pattern.readAll();
+    const char *patternData = patternFileData.constData();
+    const auto patternSize = static_cast<size_t>(patternFileData.size());
+
+    QScopedPointer<XERCES_CPP_NAMESPACE::InputSource> const patternSource(new XERCES_CPP_NAMESPACE::MemBufInputSource(
+        reinterpret_cast<const XMLByte *>(patternData), patternSize, "pattern"));
+
+    domParser.parse(*patternSource);
+
+    if (domParser.getErrorCount() > 0)
+    {
+        VException e(parserErrorHandler.StatusMessage());
+        e.AddMoreInformation(tr("Validation error file %3 in line %1 column %2")
+                                 .arg(parserErrorHandler.Line())
+                                 .arg(parserErrorHandler.Column())
+                                 .arg(m_originalFileName));
+        throw e;
+    }
+#else
+    QFile pattern(m_convertedFileName);
+    if (not pattern.open(QIODevice::ReadOnly))
+    {
+        const QString errorMsg(tr("Can't open file %1:\n%2.").arg(m_convertedFileName, pattern.errorString()));
+        throw VException(errorMsg);
+    }
+
+    QXmlSchema sch;
+    sch.setMessageHandler(&parserErrorHandler);
+    if (sch.load(&fileSchema, QUrl::fromLocalFile(fileSchema.fileName())) == false)
+    {
+        VException e(parserErrorHandler.StatusMessage());
+        e.AddMoreInformation(tr("Could not load schema file '%1'.").arg(fileSchema.fileName()));
+        throw e;
+    }
+    qCDebug(vXML, "Schema loaded.");
+
+    bool errorOccurred = false;
+    if (sch.isValid() == false)
+    {
+        errorOccurred = true;
+    }
+    else
+    {
+        QXmlSchemaValidator validator(sch);
+        if (validator.validate(&pattern, QUrl::fromLocalFile(pattern.fileName())) == false)
+        {
+            errorOccurred = true;
+        }
+    }
+
+    if (errorOccurred)
+    {
+        VException e(parserErrorHandler.StatusMessage());
+        e.AddMoreInformation(tr("Validation error file %3 in line %1 column %2")
+                                 .arg(parserErrorHandler.Line())
+                                 .arg(parserErrorHandler.Column())
+                                 .arg(m_originalFileName));
+        throw e;
+    }
+#endif // QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+Q_NORETURN void VAbstractConverter::InvalidVersion(unsigned ver) const
 {
     if (ver < MinVer())
     {
-        const QString errorMsg(tr("Invalid version. Minimum supported format version is %1").arg(MinVerStr()));
-        throw VException(errorMsg);
+        throw VException(
+            tr("This file was created with an outdated version of the app and cannot be opened. Please re-save it "
+               "using a newer version of the app that is compatible with this one."));
     }
 
     if (ver > MaxVer())
     {
-        const QString errorMsg(tr("Invalid version. Maximum supported format version is %1").arg(MaxVerStr()));
-        throw VException(errorMsg);
+        throw VException(tr("This file was created with a newer version of the app and cannot be opened. Please "
+                            "update your app to the latest version."));
     }
 
-    const QString errorMsg(tr("Unexpected version \"%1\".").arg(ver, 0, 16));
-    throw VException(errorMsg);
+    throw VException(tr("Unexpected version \"%1\".").arg(ver, 0, 16));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -263,19 +326,20 @@ void VAbstractConverter::ValidateInputFile(const QString &currentSchema) const
     {
         schema = XSDSchema(m_ver);
     }
-    catch(const VException &e)
+    catch (const VException &e)
     {
         if (m_ver < MinVer())
         { // Version less than minimally supported version. Can't do anything.
             throw;
         }
-        else if (m_ver > MaxVer())
+
+        if (m_ver > MaxVer())
         { // Version bigger than maximum supported version. We still have a chance to open the file.
             try
             { // Try to open like the current version.
-                ValidateXML(currentSchema, m_convertedFileName);
+                ValidateXML(currentSchema);
             }
-            catch(const VException &exp)
+            catch (const VException &exp)
             { // Nope, we can't.
                 Q_UNUSED(exp)
                 throw e;
@@ -289,33 +353,23 @@ void VAbstractConverter::ValidateInputFile(const QString &currentSchema) const
         return; // All is fine and we can try to convert to current max version.
     }
 
-    ValidateXML(schema, m_convertedFileName);
+    ValidateXML(schema);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractConverter::Save()
 {
-    try
-    {
-        TestUniqueId();
-    }
-    catch (const VExceptionWrongId &e)
-    {
-        Q_UNUSED(e)
-        VException ex(tr("Error no unique id."));
-        throw ex;
-    }
-
-    m_tmpFile.resize(0);//clear previous content
+    m_tmpFile.resize(0); // clear previous content
     const int indent = 4;
     QTextStream out(&m_tmpFile);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     out.setCodec("UTF-8");
+#endif
     save(out, indent);
 
     if (not m_tmpFile.flush())
     {
-        VException e(m_tmpFile.errorString());
-        throw e;
+        throw VException(m_tmpFile.errorString());
     }
 }
 
@@ -326,7 +380,18 @@ void VAbstractConverter::SetVersion(const QString &version)
 
     if (setTagText(TagVersion, version) == false)
     {
-        VException e(tr("Could not change version."));
+        VException const e(tr("Could not change version."));
         throw e;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractConverter::XSDSchema(unsigned int ver) const -> QString
+{
+    if (const QHash<unsigned, QString> schemas = Schemas(); schemas.contains(ver))
+    {
+        return schemas.value(ver);
+    }
+
+    InvalidVersion(ver);
 }

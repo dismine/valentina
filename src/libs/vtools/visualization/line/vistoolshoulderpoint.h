@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 #ifndef VISTOOLSHOULDERPOINT_H
 #define VISTOOLSHOULDERPOINT_H
 
-#include <qcompilerdetection.h>
+
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>
@@ -41,29 +41,53 @@
 
 class VisToolShoulderPoint : public VisLine
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolShoulderPoint(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolShoulderPoint() = default;
+    ~VisToolShoulderPoint() override = default;
 
-    virtual void RefreshGeometry() override;
-    void         setLineP1Id(const quint32 &value);
-    void         setLineP2Id(const quint32 &value);
-    void         setLength(const QString &expression);
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolShoulderPoint)};
+    void RefreshGeometry() override;
+    void VisualMode(quint32 id) override;
+
+    void SetPoint3Id(quint32 newPoint3Id);
+    void SetLineP1Id(quint32 value);
+    void SetLineP2Id(quint32 value);
+    void SetLength(const QString &expression);
+
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ToolShoulderPoint)};
 private:
-    Q_DISABLE_COPY(VisToolShoulderPoint)
-    quint32         lineP1Id;
-    quint32         lineP2Id;
-    VScaledEllipse *point;
-    VScaledEllipse *line1P1;
-    VScaledEllipse *line1P2;
-    VScaledLine    *line1;
-    VScaledEllipse *line2P2;
-    VScaledLine    *line2;
-    VScaledLine    *line3;
-    qreal           length;
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VisToolShoulderPoint) // NOLINT
+    quint32         m_lineP1Id{NULL_ID};
+    quint32         m_lineP2Id{NULL_ID};
+    VScaledEllipse *m_point{nullptr};
+    VScaledEllipse *m_line1P1{nullptr};
+    VScaledEllipse *m_line1P2{nullptr};
+    VScaledLine    *m_line1{nullptr};
+    VScaledEllipse *m_line2P2{nullptr};
+    VScaledLine    *m_line2{nullptr};
+    VScaledLine    *m_line3{nullptr};
+    qreal           m_length{0};
+    quint32         m_point3Id{NULL_ID};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolShoulderPoint::SetPoint3Id(quint32 newPoint3Id)
+{
+    m_point3Id = newPoint3Id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolShoulderPoint::SetLineP1Id(quint32 value)
+{
+    m_lineP1Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolShoulderPoint::SetLineP2Id(quint32 value)
+{
+    m_lineP2Id = value;
+}
 
 #endif // VISTOOLSHOULDERPOINT_H

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,14 +29,15 @@
 #include "dialogknownmaterials.h"
 #include "ui_dialogknownmaterials.h"
 
-#ifdef Q_CC_MSVC
-    #include <ciso646>
-#endif /* Q_CC_MSVC */
+// Header <ciso646> is removed in C++20.
+#if defined(Q_CC_MSVC) && __cplusplus <= 201703L
+#include <ciso646> // and, not, or
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogKnownMaterials::DialogKnownMaterials(QWidget *parent)
-    : QDialog(parent),
-      ui(new Ui::DialogKnownMaterials)
+  : QDialog(parent),
+    ui(new Ui::DialogKnownMaterials)
 {
     ui->setupUi(this);
 
@@ -62,7 +63,7 @@ void DialogKnownMaterials::SetList(const QStringList &list)
 
     int row = -1;
 
-    for (auto &m : list)
+    for (const auto &m : list)
     {
         if (not m.isEmpty())
         {
@@ -79,11 +80,11 @@ void DialogKnownMaterials::SetList(const QStringList &list)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList DialogKnownMaterials::GetList() const
+auto DialogKnownMaterials::GetList() const -> QStringList
 {
     QStringList list;
 
-    for (int i=0; i<ui->listWidget->count(); ++i)
+    for (int i = 0; i < ui->listWidget->count(); ++i)
     {
         if (const QListWidgetItem *item = ui->listWidget->item(i))
         {
@@ -127,10 +128,7 @@ void DialogKnownMaterials::Remove()
 {
     ui->listWidget->blockSignals(true);
     QListWidgetItem *curLine = ui->listWidget->takeItem(ui->listWidget->currentRow());
-    if (curLine)
-    {
-        delete curLine;
-    }
+    delete curLine;
     ui->listWidget->blockSignals(false);
     ShowDetails();
 }

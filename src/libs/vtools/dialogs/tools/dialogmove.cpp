@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -30,6 +30,7 @@
 
 #include <QColor>
 #include <QComboBox>
+#include <QCompleter>
 #include <QDialog>
 #include <QLabel>
 #include <QLineEdit>
@@ -44,18 +45,16 @@
 #include <QStringList>
 #include <QTimer>
 #include <QToolButton>
-#include <Qt>
-#include <new>
 
-#include "../../visualization/visualization.h"
 #include "../../visualization/line/operation/vistoolmove.h"
+#include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
-#include "../ifc/xml/vdomdocument.h"
 #include "../qmuparser/qmudef.h"
 #include "../support/dialogeditwrongformula.h"
-#include "../vgeometry/vpointf.h"
+#include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
+#include "../vmisc/vvalentinasettings.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vabstractmainwindow.h"
@@ -64,28 +63,31 @@
 #include "ui_dialogmove.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogMove::DialogMove(const VContainer *data, quint32 toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogMove),
-      flagAngle(false),
-      flagRotationAngle(false),
-      flagLength(false),
-      timerAngle(nullptr),
-      timerRotationAngle(nullptr),
-      timerLength(nullptr),
-      formulaAngle(),
-      formulaRotationAngle(),
-      formulaLength(),
-      formulaBaseHeightAngle(0),
-      formulaBaseHeightRotationAngle(0),
-      formulaBaseHeightLength(0),
-      objects(),
-      stage1(true),
-      stage2(false),
-      m_suffix(),
-      optionalRotationOrigin(false)
+DialogMove::DialogMove(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
+    ui(new Ui::DialogMove),
+    timerAngle(new QTimer(this)),
+    timerRotationAngle(new QTimer(this)),
+    timerLength(new QTimer(this)),
+    formulaAngle(),
+    formulaRotationAngle(),
+    formulaLength(),
+    formulaBaseHeightAngle(0),
+    formulaBaseHeightRotationAngle(0),
+    formulaBaseHeightLength(0),
+    stage1(true),
+    stage2(false),
+    m_suffix(),
+    optionalRotationOrigin(false),
+    flagAngle(false),
+    flagRotationAngle(false),
+    flagLength(false),
+    flagName(true),
+    flagGroupName(true)
 {
     ui->setupUi(this);
+
+    InitIcons();
 
     this->formulaBaseHeightAngle = ui->plainTextEditAngle->height();
     ui->plainTextEditAngle->installEventFilter(this);
@@ -96,60 +98,82 @@ DialogMove::DialogMove(const VContainer *data, quint32 toolId, QWidget *parent)
     this->formulaBaseHeightLength = ui->plainTextEditLength->height();
     ui->plainTextEditLength->installEventFilter(this);
 
-    ui->lineEditSuffix->setText(qApp->getCurrentDocument()->GenerateSuffix());
+    ui->lineEditSuffix->setText(VAbstractValApplication::VApp()->getCurrentDocument()->GenerateSuffix());
 
-    timerAngle = new QTimer(this);
+    timerAngle->setSingleShot(true);
     connect(timerAngle, &QTimer::timeout, this, &DialogMove::EvalAngle);
 
-    timerRotationAngle = new QTimer(this);
+    timerRotationAngle->setSingleShot(true);
     connect(timerRotationAngle, &QTimer::timeout, this, &DialogMove::EvalRotationAngle);
 
-    timerLength = new QTimer(this);
+    timerLength->setSingleShot(true);
     connect(timerLength, &QTimer::timeout, this, &DialogMove::EvalLength);
 
     InitOkCancelApply(ui);
 
+    FillComboBoxTypeLine(ui->comboBoxPenStyle,
+                         OperationLineStylesPics(ui->comboBoxPenStyle->palette().color(QPalette::Base),
+                                                 ui->comboBoxPenStyle->palette().color(QPalette::Text)),
+                         TypeLineDefault);
+    InitOperationColorPicker(ui->pushButtonColor,
+                             VAbstractValApplication::VApp()->ValentinaSettings()->GetUserToolColors());
+    ui->pushButtonColor->setUseNativeDialog(!VAbstractApplication::VApp()->Settings()->IsDontUseNativeDialog());
     FillComboBoxPoints(ui->comboBoxRotationOriginPoint);
 
     ui->comboBoxRotationOriginPoint->blockSignals(true);
     ui->comboBoxRotationOriginPoint->addItem(tr("Center point"), NULL_ID);
     ui->comboBoxRotationOriginPoint->blockSignals(false);
 
-    flagName = true;
-    CheckState();
-
     connect(ui->lineEditSuffix, &QLineEdit::textChanged, this, &DialogMove::SuffixChanged);
+    connect(ui->lineEditVisibilityGroup, &QLineEdit::textChanged, this, &DialogMove::GroupNameChanged);
     connect(ui->toolButtonExprAngle, &QPushButton::clicked, this, &DialogMove::FXAngle);
     connect(ui->toolButtonExprRotationAngle, &QPushButton::clicked, this, &DialogMove::FXRotationAngle);
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogMove::FXLength);
-    connect(ui->plainTextEditAngle, &QPlainTextEdit::textChanged, this, &DialogMove::AngleChanged);
-    connect(ui->plainTextEditRotationAngle, &QPlainTextEdit::textChanged, this, &DialogMove::RotationAngleChanged);
-    connect(ui->plainTextEditLength, &QPlainTextEdit::textChanged, this, &DialogMove::LengthChanged);
+    connect(ui->plainTextEditAngle, &QPlainTextEdit::textChanged, this,
+            [this]() { timerAngle->start(formulaTimerTimeout); });
+
+    connect(ui->plainTextEditRotationAngle, &QPlainTextEdit::textChanged, this,
+            [this]() { timerRotationAngle->start(formulaTimerTimeout); });
+
+    connect(ui->plainTextEditLength, &QPlainTextEdit::textChanged, this,
+            [this]() { timerLength->start(formulaTimerTimeout); });
+
     connect(ui->pushButtonGrowAngle, &QPushButton::clicked, this, &DialogMove::DeployAngleTextEdit);
     connect(ui->pushButtonGrowRotationAngle, &QPushButton::clicked, this, &DialogMove::DeployRotationAngleTextEdit);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogMove::DeployLengthTextEdit);
 
+    connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogMove::ShowSourceDetails);
+    connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogMove::AliasChanged);
+    connect(ui->comboBoxPenStyle, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            &DialogMove::PenStyleChanged);
+    connect(ui->pushButtonColor, &VPE::QtColorPicker::colorChanged, this, &DialogMove::ColorChanged);
+
     vis = new VisToolMove(data);
 
     SetRotationOrigPointId(NULL_ID);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogMove::~DialogMove()
 {
+    VAbstractValApplication::VApp()->ValentinaSettings()->SetUserToolColors(ui->pushButtonColor->CustomColors());
     delete ui;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogMove::GetAngle() const
+auto DialogMove::GetAngle() const -> QString
 {
-    return qApp->TrVars()->TryFormulaFromUser(formulaAngle, qApp->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(formulaAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::SetAngle(const QString &value)
 {
-    formulaAngle = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
+    formulaAngle = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formulaAngle.length() > 80)
     {
@@ -157,7 +181,7 @@ void DialogMove::SetAngle(const QString &value)
     }
     ui->plainTextEditAngle->setPlainText(formulaAngle);
 
-    VisToolMove *operation = qobject_cast<VisToolMove *>(vis);
+    auto *operation = qobject_cast<VisToolMove *>(vis);
     SCASSERT(operation != nullptr)
     operation->SetAngle(formulaAngle);
 
@@ -165,15 +189,17 @@ void DialogMove::SetAngle(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogMove::GetLength() const
+auto DialogMove::GetLength() const -> QString
 {
-    return qApp->TrVars()->TryFormulaFromUser(formulaLength, qApp->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(formulaLength,
+                                              VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::SetLength(const QString &value)
 {
-    formulaLength = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
+    formulaLength = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formulaLength.length() > 80)
     {
@@ -181,7 +207,7 @@ void DialogMove::SetLength(const QString &value)
     }
     ui->plainTextEditLength->setPlainText(formulaLength);
 
-    VisToolMove *operation = qobject_cast<VisToolMove *>(vis);
+    auto *operation = qobject_cast<VisToolMove *>(vis);
     SCASSERT(operation != nullptr)
     operation->SetLength(formulaLength);
 
@@ -189,15 +215,17 @@ void DialogMove::SetLength(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogMove::GetRotationAngle() const
+auto DialogMove::GetRotationAngle() const -> QString
 {
-    return qApp->TrVars()->TryFormulaFromUser(formulaRotationAngle, qApp->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(formulaRotationAngle,
+                                              VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::SetRotationAngle(const QString &value)
 {
-    formulaRotationAngle = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
+    formulaRotationAngle = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formulaRotationAngle.length() > 80)
     {
@@ -205,7 +233,7 @@ void DialogMove::SetRotationAngle(const QString &value)
     }
     ui->plainTextEditRotationAngle->setPlainText(formulaRotationAngle);
 
-    VisToolMove *operation = qobject_cast<VisToolMove *>(vis);
+    auto *operation = qobject_cast<VisToolMove *>(vis);
     SCASSERT(operation != nullptr)
     operation->SetRotationAngle(formulaRotationAngle);
 
@@ -213,7 +241,7 @@ void DialogMove::SetRotationAngle(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogMove::GetSuffix() const
+auto DialogMove::GetSuffix() const -> QString
 {
     return m_suffix;
 }
@@ -226,7 +254,7 @@ void DialogMove::SetSuffix(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogMove::GetRotationOrigPointId() const
+auto DialogMove::GetRotationOrigPointId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxRotationOriginPoint);
 }
@@ -235,15 +263,52 @@ quint32 DialogMove::GetRotationOrigPointId() const
 void DialogMove::SetRotationOrigPointId(const quint32 &value)
 {
     ChangeCurrentData(ui->comboBoxRotationOriginPoint, value);
-    VisToolMove *operation = qobject_cast<VisToolMove *>(vis);
+    auto *operation = qobject_cast<VisToolMove *>(vis);
     SCASSERT(operation != nullptr)
     operation->SetRotationOriginPointId(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<quint32> DialogMove::GetObjects() const
+auto DialogMove::GetVisibilityGroupName() const -> QString
 {
-    return objects.toVector();
+    return ui->lineEditVisibilityGroup->text();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::SetVisibilityGroupName(const QString &name)
+{
+    ui->lineEditVisibilityGroup->setText(name.isEmpty() ? tr("Rotation") : name);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogMove::HasLinkedVisibilityGroup() const -> bool
+{
+    return ui->groupBoxVisibilityGroup->isChecked();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::SetHasLinkedVisibilityGroup(bool linked)
+{
+    ui->groupBoxVisibilityGroup->setChecked(linked);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::SetVisibilityGroupTags(const QStringList &tags)
+{
+    ui->lineEditGroupTags->setText(tags.join(", "));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogMove::GetVisibilityGroupTags() const -> QStringList
+{
+    return ui->lineEditGroupTags->text().split(',');
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::SetGroupCategories(const QStringList &categories)
+{
+    m_groupTags = categories;
+    ui->lineEditGroupTags->SetCompletion(m_groupTags);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -251,7 +316,7 @@ void DialogMove::ShowDialog(bool click)
 {
     if (stage1 && not click)
     {
-        if (objects.isEmpty())
+        if (sourceObjects.isEmpty())
         {
             return;
         }
@@ -259,16 +324,16 @@ void DialogMove::ShowDialog(bool click)
         stage1 = false;
         prepare = true;
 
-        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+        auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
         SCASSERT(scene != nullptr)
         scene->clearSelection();
 
-        VisToolMove *operation = qobject_cast<VisToolMove *>(vis);
+        auto *operation = qobject_cast<VisToolMove *>(vis);
         SCASSERT(operation != nullptr)
-        operation->SetObjects(objects.toVector());
+        operation->SetObjects(SourceToObjects(sourceObjects));
         operation->VisualMode();
 
-        VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
+        auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
         SCASSERT(window != nullptr)
         connect(operation, &VisToolMove::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
 
@@ -282,17 +347,21 @@ void DialogMove::ShowDialog(bool click)
         scene->ToggleSplineHover(false);
         scene->ToggleSplinePathHover(false);
 
-        qApp->getSceneView()->AllowRubberBand(false);
+        VAbstractValApplication::VApp()->getSceneView()->AllowRubberBand(false);
+
+        FillSourceList();
     }
     else if (not stage2 && not stage1 && prepare && click)
     {
-        VisToolMove *operation = qobject_cast<VisToolMove *>(vis);
+        auto *operation = qobject_cast<VisToolMove *>(vis);
         SCASSERT(operation != nullptr)
 
         if (operation->LengthValue() > 0)
         {
-            formulaAngle = qApp->TrVars()->FormulaToUser(operation->Angle(), qApp->Settings()->GetOsSeparator());
-            formulaLength = qApp->TrVars()->FormulaToUser(operation->Length(), qApp->Settings()->GetOsSeparator());
+            formulaAngle = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+                operation->Angle(), VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+            formulaLength = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+                operation->Length(), VAbstractApplication::VApp()->Settings()->GetOsSeparator());
             operation->SetAngle(formulaAngle);
             operation->SetLength(formulaLength);
             operation->RefreshGeometry();
@@ -302,7 +371,7 @@ void DialogMove::ShowDialog(bool click)
     }
     else if (not stage1 && stage2 && prepare && click)
     {
-        VisToolMove *operation = qobject_cast<VisToolMove *>(vis);
+        auto *operation = qobject_cast<VisToolMove *>(vis);
         SCASSERT(operation != nullptr)
 
         if (QGuiApplication::keyboardModifiers() == Qt::ControlModifier)
@@ -317,8 +386,10 @@ void DialogMove::ShowDialog(bool click)
         }
         else
         {
-            SetAngle(qApp->TrVars()->FormulaFromUser(formulaAngle, qApp->Settings()->GetOsSeparator()));
-            SetLength(qApp->TrVars()->FormulaFromUser(formulaLength, qApp->Settings()->GetOsSeparator()));
+            SetAngle(VAbstractApplication::VApp()->TrVars()->FormulaFromUser(
+                formulaAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+            SetLength(VAbstractApplication::VApp()->TrVars()->FormulaFromUser(
+                formulaLength, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
             SetRotationAngle(operation->RotationAngle());
             setModal(true);
             emit ToolTip(QString());
@@ -333,20 +404,16 @@ void DialogMove::ShowDialog(bool click)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (not stage1 && stage2 && prepare)// After first choose we ignore all objects
+    if (not stage1 && stage2 && prepare && type == SceneObject::Point &&
+        QGuiApplication::keyboardModifiers() == Qt::ControlModifier &&
+        SetObject(id, ui->comboBoxRotationOriginPoint, QString())) // After first choose we ignore all objects
     {
-        if (type == SceneObject::Point && QGuiApplication::keyboardModifiers() == Qt::ControlModifier)
-        {
-            if (SetObject(id, ui->comboBoxRotationOriginPoint, QString()))
-            {
-                VisToolMove *operation = qobject_cast<VisToolMove *>(vis);
-                SCASSERT(operation != nullptr)
+        auto *operation = qobject_cast<VisToolMove *>(vis);
+        SCASSERT(operation != nullptr)
 
-                operation->SetRotationOriginPointId(id);
-                operation->RefreshGeometry();
-                optionalRotationOrigin = true;
-            }
-        }
+        operation->SetRotationOriginPointId(id);
+        operation->RefreshGeometry();
+        optionalRotationOrigin = true;
     }
 }
 
@@ -356,16 +423,23 @@ void DialogMove::SelectedObject(bool selected, quint32 object, quint32 tool)
     Q_UNUSED(tool)
     if (stage1)
     {
+        auto obj = std::find_if(sourceObjects.begin(), sourceObjects.end(),
+                                [object](const SourceItem &sItem) { return sItem.id == object; });
         if (selected)
         {
-            if (not objects.contains(object))
+            if (obj == sourceObjects.end())
             {
-                objects.append(object);
+                SourceItem item;
+                item.id = object;
+                sourceObjects.append(item);
             }
         }
         else
         {
-            objects.removeOne(object);
+            if (obj != sourceObjects.end())
+            {
+                sourceObjects.erase(obj);
+            }
         }
     }
 }
@@ -373,49 +447,26 @@ void DialogMove::SelectedObject(bool selected, quint32 object, quint32 tool)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::DeployAngleTextEdit()
 {
-    DeployFormula(ui->plainTextEditAngle, ui->pushButtonGrowAngle, formulaBaseHeightAngle);
+    DeployFormula(this, ui->plainTextEditAngle, ui->pushButtonGrowAngle, formulaBaseHeightAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::DeployRotationAngleTextEdit()
 {
-    DeployFormula(ui->plainTextEditRotationAngle, ui->pushButtonGrowRotationAngle, formulaBaseHeightRotationAngle);
+    DeployFormula(this, ui->plainTextEditRotationAngle, ui->pushButtonGrowRotationAngle,
+                  formulaBaseHeightRotationAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::DeployLengthTextEdit()
 {
-    DeployFormula(ui->plainTextEditLength, ui->pushButtonGrowLength, formulaBaseHeightLength);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogMove::AngleChanged()
-{
-    labelEditFormula = ui->labelEditAngle;
-    labelResultCalculation = ui->labelResultAngle;
-    ValFormulaChanged(flagAngle, ui->plainTextEditAngle, timerAngle, degreeSymbol);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogMove::RotationAngleChanged()
-{
-    labelEditFormula = ui->labelEditRotationAngle;
-    labelResultCalculation = ui->labelResultRotationAngle;
-    ValFormulaChanged(flagRotationAngle, ui->plainTextEditRotationAngle, timerRotationAngle, degreeSymbol);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogMove::LengthChanged()
-{
-    labelEditFormula = ui->labelEditLength;
-    labelResultCalculation = ui->labelResultLength;
-    ValFormulaChanged(flagLength, ui->plainTextEditLength, timerLength, degreeSymbol);
+    DeployFormula(this, ui->plainTextEditLength, ui->pushButtonGrowLength, formulaBaseHeightLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::FXAngle()
 {
-    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    auto *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit angle"));
     dialog->SetFormula(GetAngle());
     dialog->setPostfix(degreeSymbol);
@@ -429,7 +480,7 @@ void DialogMove::FXAngle()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::FXRotationAngle()
 {
-    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    auto *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit rotation angle"));
     dialog->SetFormula(GetRotationAngle());
     dialog->setPostfix(degreeSymbol);
@@ -443,10 +494,10 @@ void DialogMove::FXRotationAngle()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::FXLength()
 {
-    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    auto *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit length"));
     dialog->SetFormula(GetLength());
-    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetLength(dialog->GetFormula());
@@ -457,50 +508,199 @@ void DialogMove::FXLength()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::SuffixChanged()
 {
-    QLineEdit* edit = qobject_cast<QLineEdit*>(sender());
-    if (edit)
+    if (const auto *edit = qobject_cast<QLineEdit *>(sender()); edit)
     {
         const QString suffix = edit->text();
         if (suffix.isEmpty())
         {
             flagName = false;
-            ChangeColor(ui->labelSuffix, Qt::red);
+            ChangeColor(ui->labelSuffix, errorColor);
+            ui->labelStatus->setText(tr("Invalid suffix"));
             CheckState();
             return;
         }
-        else
+
+        if (m_suffix != suffix)
         {
-            if (m_suffix != suffix)
+            QRegularExpression const rx(NameRegExp());
+            const QStringList uniqueNames = data->AllUniqueNames();
+            for (const auto &uniqueName : uniqueNames)
             {
-                QRegularExpression rx(NameRegExp());
-                const QStringList uniqueNames = data->AllUniqueNames();
-                for (auto &uniqueName : uniqueNames)
+                const QString name = uniqueName + suffix;
+                if (not rx.match(name).hasMatch() || not data->IsUnique(name))
                 {
-                    const QString name = uniqueName + suffix;
-                    if (not rx.match(name).hasMatch() || not data->IsUnique(name))
-                    {
-                        flagName = false;
-                        ChangeColor(ui->labelSuffix, Qt::red);
-                        CheckState();
-                        return;
-                    }
+                    flagName = false;
+                    ChangeColor(ui->labelSuffix, errorColor);
+                    ui->labelStatus->setText(tr("Invalid suffix"));
+                    CheckState();
+                    return;
                 }
             }
         }
 
         flagName = true;
-        ChangeColor(ui->labelSuffix, okColor);
+        ChangeColor(ui->labelSuffix, OkColor(this));
     }
     CheckState();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogMove::CheckState()
+void DialogMove::GroupNameChanged()
 {
-    SCASSERT(bOk != nullptr)
-    bOk->setEnabled(flagAngle && flagRotationAngle && flagLength && flagName);
-    SCASSERT(bApply != nullptr)
-    bApply->setEnabled(bOk->isEnabled());
+    if (const auto *edit = qobject_cast<QLineEdit *>(sender()); edit)
+    {
+        const QString name = edit->text();
+        if (name.isEmpty())
+        {
+            flagGroupName = false;
+            ChangeColor(ui->labelGroupName, errorColor);
+            ui->labelStatus->setText(tr("Invalid group name"));
+            CheckState();
+            return;
+        }
+
+        flagGroupName = true;
+        ChangeColor(ui->labelGroupName, OkColor(this));
+    }
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::ShowSourceDetails(int row)
+{
+    ui->lineEditAlias->setDisabled(true);
+    ui->comboBoxPenStyle->setDisabled(true);
+    ui->pushButtonColor->setDisabled(true);
+
+    if (ui->listWidget->count() == 0)
+    {
+        return;
+    }
+
+    const auto sourceItem = qvariant_cast<SourceItem>(ui->listWidget->item(row)->data(Qt::UserRole));
+
+    const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
+
+    if (obj->getType() == GOType::Point)
+    {
+        ui->labelAlias->setText(tr("Label:"));
+
+        ui->comboBoxPenStyle->blockSignals(true);
+        ui->pushButtonColor->blockSignals(true);
+
+        ui->comboBoxPenStyle->setCurrentIndex(-1);
+        ui->pushButtonColor->setCurrentColor(QColor());
+
+        ui->comboBoxPenStyle->blockSignals(false);
+        ui->pushButtonColor->blockSignals(false);
+    }
+    else
+    {
+        ui->labelAlias->setText(tr("Alias:"));
+
+        auto SetValue = [](QComboBox *box, const QString &value, const QString &def)
+        {
+            box->blockSignals(true);
+
+            int index = box->findData(value);
+            if (index != -1)
+            {
+                box->setCurrentIndex(index);
+            }
+            else
+            {
+                index = box->findData(def);
+                box->setCurrentIndex(index);
+            }
+
+            box->blockSignals(false);
+        };
+
+        SetValue(ui->comboBoxPenStyle, sourceItem.penStyle, TypeLineDefault);
+
+        if (sourceItem.penStyle.isEmpty() || sourceItem.penStyle == TypeLineDefault)
+        {
+            const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(sourceItem.id);
+            int const index = ui->comboBoxPenStyle->currentIndex();
+            ui->comboBoxPenStyle->setItemText(index, '<' + tr("Default") + '>');
+        }
+
+        ui->pushButtonColor->blockSignals(true);
+
+        QColor const color(sourceItem.color);
+        ui->pushButtonColor->setCurrentColor(color.isValid() ? color : ColorDefault);
+
+        ui->pushButtonColor->blockSignals(false);
+
+        if (sourceItem.color.isEmpty() || sourceItem.color == ColorDefault)
+        {
+            const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(sourceItem.id);
+            ui->pushButtonColor->setDefaultColor(curve->GetColor());
+        }
+
+        ui->comboBoxPenStyle->setEnabled(true);
+        ui->pushButtonColor->setEnabled(true);
+    }
+
+    ui->lineEditAlias->blockSignals(true);
+    ui->lineEditAlias->setText(sourceItem.alias);
+    ui->lineEditAlias->setEnabled(true);
+    ui->lineEditAlias->blockSignals(false);
+
+    SetAliasValid(sourceItem.id,
+                  SourceAliasValid(sourceItem, obj, data, OriginAlias(sourceItem.id, sourceObjects, obj)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::AliasChanged(const QString &text)
+{
+    if (ui->listWidget->count() == 0)
+    {
+        return;
+    }
+
+    if (auto *item = ui->listWidget->currentItem())
+    {
+        auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
+        sourceItem.alias = text;
+
+        item->setData(Qt::UserRole, QVariant::fromValue(sourceItem));
+
+        ValidateSourceAliases();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::PenStyleChanged()
+{
+    if (ui->listWidget->count() == 0)
+    {
+        return;
+    }
+
+    if (auto *item = ui->listWidget->currentItem())
+    {
+        auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
+        sourceItem.penStyle = GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineDefault);
+        item->setData(Qt::UserRole, QVariant::fromValue(sourceItem));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::ColorChanged()
+{
+    if (ui->listWidget->count() == 0)
+    {
+        return;
+    }
+
+    if (auto *item = ui->listWidget->currentItem())
+    {
+        auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
+        QColor const color = ui->pushButtonColor->currentColor();
+        sourceItem.color = color.isValid() ? color.name() : ColorDefault;
+        item->setData(Qt::UserRole, QVariant::fromValue(sourceItem));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -517,15 +717,39 @@ void DialogMove::SaveData()
     formulaRotationAngle = ui->plainTextEditRotationAngle->toPlainText();
     formulaLength = ui->plainTextEditLength->toPlainText();
 
-    VisToolMove *operation = qobject_cast<VisToolMove *>(vis);
+    sourceObjects.clear();
+    sourceObjects.reserve(ui->listWidget->count());
+
+    for (int i = 0; i < ui->listWidget->count(); ++i)
+    {
+        if (const QListWidgetItem *item = ui->listWidget->item(i))
+        {
+            auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
+            sourceObjects.append(sourceItem);
+        }
+    }
+
+    auto *operation = qobject_cast<VisToolMove *>(vis);
     SCASSERT(operation != nullptr)
 
-    operation->SetObjects(objects.toVector());
+    operation->SetObjects(SourceToObjects(sourceObjects));
     operation->SetAngle(formulaAngle);
     operation->SetLength(formulaLength);
     operation->SetRotationAngle(formulaRotationAngle);
     operation->SetRotationOriginPointId(GetRotationOrigPointId());
     operation->RefreshGeometry();
+
+    QStringList groupTags = ui->lineEditGroupTags->text().split(',');
+    for (auto &tag : groupTags)
+    {
+        tag = tag.trimmed();
+        if (not m_groupTags.contains(tag))
+        {
+            m_groupTags.append(tag);
+        }
+    }
+
+    ui->lineEditGroupTags->SetCompletion(m_groupTags);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -538,24 +762,189 @@ void DialogMove::closeEvent(QCloseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto DialogMove::GetSourceObjects() const -> QVector<SourceItem>
+{
+    return sourceObjects;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::SetSourceObjects(const QVector<SourceItem> &value)
+{
+    sourceObjects = value;
+    FillSourceList();
+
+    auto *operation = qobject_cast<VisToolMove *>(vis);
+    SCASSERT(operation != nullptr)
+    operation->SetObjects(SourceToObjects(sourceObjects));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogMove::EvalAngle()
 {
-    labelEditFormula = ui->labelEditAngle;
-    Eval(ui->plainTextEditAngle->toPlainText(), flagAngle, ui->labelResultAngle, degreeSymbol, false);
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditAngle->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditAngle;
+    formulaData.labelResult = ui->labelResultAngle;
+    formulaData.postfix = degreeSymbol;
+
+    Eval(formulaData, flagAngle);
+
+    if (not flagAngle)
+    {
+        ui->labelStatus->setText(tr("Invalid angle formula"));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::EvalRotationAngle()
 {
-    labelEditFormula = ui->labelEditRotationAngle;
-    Eval(ui->plainTextEditRotationAngle->toPlainText(), flagRotationAngle, ui->labelResultRotationAngle, degreeSymbol,
-         false);
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditRotationAngle->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditRotationAngle;
+    formulaData.labelResult = ui->labelResultRotationAngle;
+    formulaData.postfix = degreeSymbol;
+
+    Eval(formulaData, flagRotationAngle);
+
+    if (not flagRotationAngle)
+    {
+        ui->labelStatus->setText(tr("Invalid rotation angle formula"));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::EvalLength()
 {
-    labelEditFormula = ui->labelEditLength;
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    Eval(ui->plainTextEditLength->toPlainText(), flagLength, ui->labelResultLength, postfix);
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditLength->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditLength;
+    formulaData.labelResult = ui->labelResultLength;
+    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
+
+    Eval(formulaData, flagLength);
+
+    if (not flagLength)
+    {
+        ui->labelStatus->setText(tr("Invalid length formula"));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::FillSourceList()
+{
+    ui->listWidget->blockSignals(true);
+
+    ui->listWidget->clear();
+
+    int row = -1;
+
+    for (auto &sourceItem : sourceObjects)
+    {
+        const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
+        bool const valid = SourceAliasValid(sourceItem, obj, data, OriginAlias(sourceItem.id, sourceObjects, obj));
+
+        auto *item = new QListWidgetItem(valid ? obj->ObjectName() : obj->ObjectName() + '*');
+        item->setToolTip(obj->ObjectName());
+        item->setData(Qt::UserRole, QVariant::fromValue(sourceItem));
+        ui->listWidget->insertItem(++row, item);
+    }
+
+    ui->listWidget->blockSignals(false);
+
+    if (ui->listWidget->count() > 0)
+    {
+        ui->listWidget->setCurrentRow(0);
+    }
+
+    ValidateSourceAliases();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::ValidateSourceAliases()
+{
+    for (int i = 0; i < ui->listWidget->count(); ++i)
+    {
+        if (const QListWidgetItem *item = ui->listWidget->item(i))
+        {
+            auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
+
+            const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
+
+            if (not SourceAliasValid(sourceItem, obj, data, OriginAlias(sourceItem.id, sourceObjects, obj)))
+            {
+                flagAlias = false;
+                ui->labelStatus->setText(obj->getType() == GOType::Point ? tr("Invalid label") : tr("Invalid alias"));
+                SetAliasValid(sourceItem.id, false);
+                CheckState();
+                return;
+            }
+
+            SetAliasValid(sourceItem.id, true);
+        }
+    }
+
+    flagAlias = true;
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::SetAliasValid(quint32 id, bool valid)
+{
+    if (ui->listWidget->currentRow() != -1)
+    {
+        auto *item = ui->listWidget->item(ui->listWidget->currentRow());
+        const auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
+
+        if (id == sourceItem.id)
+        {
+            const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
+            item->setText(valid ? obj->ObjectName() : obj->ObjectName() + '*');
+
+            ChangeColor(ui->labelAlias, valid ? OkColor(this) : errorColor);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::InitIcons()
+{
+    const auto resource = QStringLiteral("icon");
+
+    const auto fxIcon = QStringLiteral("24x24/fx.png");
+    ui->toolButtonExprAngle->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    ui->toolButtonExprLength->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    ui->toolButtonExprRotationAngle->setIcon(VTheme::GetIconResource(resource, fxIcon));
+
+    const auto equalIcon = QStringLiteral("24x24/equal.png");
+    ui->label_2->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    ui->label_3->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    ui->label_4->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogMove::GetNotes() const -> QString
+{
+    return ui->plainTextEditToolNotes->toPlainText();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogMove::IsValid() const -> bool
+{
+    bool const ready = flagAngle && flagRotationAngle && flagLength && flagName && flagGroupName && flagAlias;
+
+    if (ready)
+    {
+        ui->labelStatus->setText(tr("Ready"));
+    }
+
+    return ready;
 }

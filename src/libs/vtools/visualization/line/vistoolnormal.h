@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 #ifndef VISTOOLNORMAL_H
 #define VISTOOLNORMAL_H
 
-#include <qcompilerdetection.h>
+
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>
@@ -41,30 +41,46 @@
 
 class VisToolNormal : public VisLine
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolNormal(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolNormal() = default;
+    ~VisToolNormal() override = default;
 
-    virtual void RefreshGeometry() override;
+    void RefreshGeometry() override;
+    void VisualMode(quint32 id) override;
 
-    void         setObject2Id(const quint32 &value);
-    void         setLength(const QString &expression);
-    qreal        GetAngle() const;
-    void         SetAngle(const qreal &value);
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolNormal)};
+    void SetPoint1Id(quint32 value);
+    void SetPoint2Id(quint32 value);
+    void SetLength(const QString &expression);
+    auto GetAngle() const -> qreal;
+    void SetAngle(const qreal &value);
+
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ToolNormal)};
 
 private:
-    Q_DISABLE_COPY(VisToolNormal)
-    quint32              object2Id;
-    VScaledEllipse *point;
-    VScaledEllipse *lineP1;
-    VScaledEllipse *lineP2;
-    VScaledLine    *line;
-    qreal                length;
-    qreal                angle;
-
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VisToolNormal) // NOLINT
+    quint32         m_object1Id{NULL_ID};
+    quint32         m_object2Id{NULL_ID};
+    VScaledEllipse *m_point{nullptr};
+    VScaledEllipse *m_lineP1{nullptr};
+    VScaledEllipse *m_lineP2{nullptr};
+    VScaledLine    *m_line{nullptr};
+    qreal           m_length{0};
+    qreal           m_angle{0};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolNormal::SetPoint1Id(quint32 value)
+{
+    m_object1Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolNormal::SetPoint2Id(quint32 value)
+{
+    m_object2Id = value;
+}
 
 #endif // VISTOOLNORMAL_H

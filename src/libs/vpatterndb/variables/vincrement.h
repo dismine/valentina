@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef VINCREMENTTABLEROW_H
 #define VINCREMENTTABLEROW_H
 
-#include <qcompilerdetection.h>
 #include <QSharedDataPointer>
 #include <QString>
 #include <QTypeInfo>
@@ -43,36 +42,40 @@ class VContainer;
 /**
  * @brief The VIncrement class keep data row of increment table
  */
-class VIncrement :public VVariable
+class VIncrement : public VVariable
 {
 public:
     VIncrement();
-    VIncrement(VContainer *data, const QString &name, quint32 index, qreal base, const QString &formula, bool ok,
-               const QString &description = QString());
+    VIncrement(VContainer *data, const QString &name, IncrementType incrType = IncrementType::Increment);
     VIncrement(const VIncrement &incr);
 
-    virtual ~VIncrement() override;
+    ~VIncrement() override;
 
-    VIncrement &operator=(const VIncrement &incr);
-#ifdef Q_COMPILER_RVALUE_REFS
-    VIncrement &operator=(VIncrement &&incr) Q_DECL_NOTHROW { Swap(incr); return *this; }
-#endif
+    auto operator=(const VIncrement &incr) -> VIncrement &;
 
-    inline void Swap(VIncrement &incr) Q_DECL_NOTHROW
-    { VVariable::Swap(incr); std::swap(d, incr.d); }
+    VIncrement(VIncrement &&incr) noexcept;
+    auto operator=(VIncrement &&incr) noexcept -> VIncrement &;
 
-    quint32     getIndex() const;
-    QString     GetFormula() const;
-    bool        IsFormulaOk() const;
-    VContainer *GetData();
+    void SetFormula(qreal base, const QString &formula, bool ok);
+    auto GetFormula() const -> QString;
+    auto IsFormulaOk() const -> bool;
 
-    bool IsPreviewCalculation() const;
+    void SetIndex(quint32 index);
+    auto GetIndex() const -> quint32;
+
+    auto GetData() -> VContainer *;
+    auto GetIncrementType() const -> IncrementType;
+
+    auto IsPreviewCalculation() const -> bool;
     void SetPreviewCalculation(bool value);
+
+    auto IsSpecialUnits() const -> bool;
+    void SetSpecialUnits(bool special);
 
 private:
     QSharedDataPointer<VIncrementData> d;
 };
 
-Q_DECLARE_TYPEINFO(VIncrement, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VIncrement, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VINCREMENTTABLEROW_H

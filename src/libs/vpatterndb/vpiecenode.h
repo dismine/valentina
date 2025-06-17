@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,9 +29,9 @@
 #ifndef VPIECENODE_H
 #define VPIECENODE_H
 
-#include <QtGlobal>
-#include <QSharedDataPointer>
 #include <QMetaType>
+#include <QSharedDataPointer>
+#include <QtGlobal>
 
 #include "../vmisc/def.h"
 
@@ -47,66 +47,92 @@ public:
 
     ~VPieceNode();
 
-    VPieceNode &operator=(const VPieceNode &node);
-#ifdef Q_COMPILER_RVALUE_REFS
-    VPieceNode &operator=(VPieceNode &&node) Q_DECL_NOTHROW { Swap(node); return *this; }
-#endif
+    auto operator=(const VPieceNode &node) -> VPieceNode &;
 
-    inline void Swap(VPieceNode &node) Q_DECL_NOTHROW
-    { std::swap(d, node.d); }
+    VPieceNode(VPieceNode &&node) noexcept;
+    auto operator=(VPieceNode &&node) noexcept -> VPieceNode &;
 
-    friend QDataStream& operator<<(QDataStream& out, const VPieceNode& p);
-    friend QDataStream& operator>>(QDataStream& in, VPieceNode& p);
+    friend auto operator<<(QDataStream &out, const VPieceNode &p) -> QDataStream &;
+    friend auto operator>>(QDataStream &in, VPieceNode &p) -> QDataStream &;
 
-    quint32 GetId() const;
-    void    SetId(quint32 id);
+    auto GetId() const -> quint32;
+    void SetId(quint32 id);
 
-    Tool GetTypeTool() const;
+    auto GetTypeTool() const -> Tool;
     void SetTypeTool(Tool value);
 
-    bool GetReverse() const;
+    auto GetReverse() const -> bool;
     void SetReverse(bool reverse);
 
-    bool IsExcluded() const;
+    auto IsExcluded() const -> bool;
     void SetExcluded(bool exclude);
 
-    qreal GetSABefore(const VContainer *data) const;
-    qreal GetSABefore(const VContainer *data, Unit unit) const;
+    auto GetSABefore(const VContainer *data) const -> qreal;
+    auto GetSABefore(const VContainer *data, Unit unit) const -> qreal;
 
-    QString GetFormulaSABefore() const;
-    void    SetFormulaSABefore(const QString &formula);
+    auto GetFormulaSABefore() const -> QString;
+    void SetFormulaSABefore(const QString &formula);
 
-    qreal GetSAAfter(const VContainer *data) const;
-    qreal GetSAAfter(const VContainer *data, Unit unit) const;
+    auto GetSAAfter(const VContainer *data) const -> qreal;
+    auto GetSAAfter(const VContainer *data, Unit unit) const -> qreal;
 
-    QString GetFormulaSAAfter() const;
-    void    SetFormulaSAAfter(const QString &formula);
+    auto GetFormulaSAAfter() const -> QString;
+    void SetFormulaSAAfter(const QString &formula);
 
-    PieceNodeAngle GetAngleType() const;
-    void           SetAngleType(PieceNodeAngle type);
+    auto GetFormulaPassmarkLength() const -> QString;
+    void SetFormulaPassmarkLength(const QString &formula);
 
-    bool IsPassmark() const;
+    auto GetFormulaPassmarkWidth() const -> QString;
+    void SetFormulaPassmarkWidth(const QString &formula);
+
+    auto GetFormulaPassmarkAngle() const -> QString;
+    void SetFormulaPassmarkAngle(const QString &formula);
+
+    auto GetPassmarkLength(const VContainer *data, Unit unit) const -> qreal;
+    auto GetPassmarkWidth(const VContainer *data, Unit unit) const -> qreal;
+    auto GetPassmarkAngle(const VContainer *data) const -> qreal;
+
+    auto GetAngleType() const -> PieceNodeAngle;
+    void SetAngleType(PieceNodeAngle type);
+
+    auto IsPassmark() const -> bool;
     void SetPassmark(bool passmark);
 
-    bool IsMainPathNode() const;
+    auto IsMainPathNode() const -> bool;
     void SetMainPathNode(bool value);
 
-    PassmarkLineType GetPassmarkLineType() const;
-    void             SetPassmarkLineType(PassmarkLineType lineType);
+    auto GetPassmarkLineType() const -> PassmarkLineType;
+    void SetPassmarkLineType(PassmarkLineType lineType);
 
-    PassmarkAngleType GetPassmarkAngleType() const;
-    void              SetPassmarkAngleType(PassmarkAngleType angleType);
+    auto GetPassmarkAngleType() const -> PassmarkAngleType;
+    void SetPassmarkAngleType(PassmarkAngleType angleType);
 
-    bool IsShowSecondPassmark() const;
+    auto IsShowSecondPassmark() const -> bool;
     void SetShowSecondPassmark(bool value);
 
-    bool IsCheckUniqueness() const;
+    auto IsPassmarkClockwiseOpening() const -> bool;
+    void SetPassmarkClockwiseOpening(bool value);
+
+    auto IsCheckUniqueness() const -> bool;
     void SetCheckUniqueness(bool value);
+
+    auto IsManualPassmarkLength() const -> bool;
+    void SetManualPassmarkLength(bool value);
+
+    auto IsManualPassmarkWidth() const -> bool;
+    void SetManualPassmarkWidth(bool value);
+
+    auto IsManualPassmarkAngle() const -> bool;
+    void SetManualPassmarkAngle(bool value);
+
+    auto IsTurnPoint() const -> bool;
+    void SetTurnPoint(bool value);
+
 private:
     QSharedDataPointer<VPieceNodeData> d;
 };
 
-Q_DECLARE_METATYPE(VPieceNode)
-Q_DECLARE_TYPEINFO(VPieceNode, Q_MOVABLE_TYPE);
+Q_DECLARE_METATYPE(VPieceNode)                  // NOLINT
+Q_DECLARE_TYPEINFO(VPieceNode, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VPIECENODE_H

@@ -1,21 +1,70 @@
 language: cpp
-matrix:
+env:
+  global:
+  - secure: Zo+BbyV3sgNmKHwWvn7cCt3leXCLGbE9rSrAYoCrl22OEDZjPj7KeGzQ/59xLosE5v8PA5MV8KceH7aQB9GoIbDt6sHLw5mws13VXmy5HWtM7yhk2RpNnn1gTZIfEz33QGYuPG1geapTcZtZfaVKFU04PMkvk3f7zxA1HuS6zGRgzrNv1AmcpuOGH4LIGxbk3Z1S6xGcUMj/z9calyLlmPTOfbDLJWChU11FMVmvdTzyeDLE0oQZ5IkmsowluCfDHARfIijeRuPiuU8RzJptYEIzcWvpQ6gfDb4qDWndA9BgPDkN2aTmPL5/TA/S9zfs8BKjo07sg0TaVbTboPisyS/gGDf3SBYxlAS9B95KKdRzGGD41ZYe+cHod5tgWUt5gO/Obq2MPY/GltSwuq5KEsR+R/pKVLby/k7+R5oCO8avXJPL5HBgn46ZehEzpw0I8LFQ/ed+dLqykrxaSiA2/zHAkHSeVZptzegoCF5xeDf6T/rJFNqxr1BV3kVLPiXW90z0m63Hv2K6rz8LmBUNTQcR/mrLpkpdbQ8UQ/et30o7CE2GcJLLzUDNcjxYfA1fe66oR9L+euqyBtZc8dNuzy1iIaUOLazGWYkdlUpiYnGvWrxv6BUwzAJYpiXjWELtcTVUGMjMBpkvAmwV1FjZN45isX2iHGz5XhoVDrjbE5c=
+jobs:
   include:
-  - os: linux
-    dist: trusty
-    sudo: required
+  - stage: main test
+    os: linux
+    dist: xenial
     compiler: clang
-    env: 
+    env:
     - DEPLOY=false
     - CCACHE_CPP2=yes
+    - RUN_TESTS=true
     cache:
-    - ccache
-    directories:
-      - '$HOME/.sonar/cache'
+      ccache: true
+      directories:
+      - "$HOME/.sonar/cache"
+  - os: linux
+    dist: bionic
+    compiler: clang
+    env:
+    - DEPLOY=false
+    - CCACHE_CPP2=yes
+    - RUN_TESTS=true
+    cache:
+      ccache: true
+      directories:
+      - "$HOME/.sonar/cache"
   - os: osx
     compiler: clang
-    env: DEPLOY=true
-    osx_image: xcode9
+    env:
+    - DEPLOY=true
+    - LEGACY=false
+    - XCODE=xcode12_2
+    osx_image: xcode12.2
+    cache:
+      directories:
+      - "$HOME/Library/Caches/Homebrew"
+      - "/usr/local/Homebrew"
+  - os: osx
+    compiler: clang
+    env:
+    - DEPLOY=true
+    - LEGACY=false
+    - XCODE=xcode11
+    osx_image: xcode11
+    cache:
+      directories:
+      - "$HOME/Library/Caches/Homebrew"
+      - "/usr/local/Homebrew"
+  - os: osx
+    compiler: clang
+    env:
+    - DEPLOY=true
+    - LEGACY=true
+    - XCODE=xcode8
+    osx_image: xcode8
+    cache:
+      directories:
+      - "$HOME/Library/Caches/Homebrew"
+      - "/usr/local/Homebrew"
+before_cache:
+  - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then brew cleanup; fi
+# Credit https://discourse.brew.sh/t/best-practice-for-homebrew-on-travis-brew-update-is-5min-to-build-time/5215/9
+# Cache only .git files under "/usr/local/Homebrew" so "brew update" does not take 5min every build
+  - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then find /usr/local/Homebrew \! -regex ".+\.git.+" -delete; fi
 before_install:
 - |
   if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
@@ -37,9 +86,19 @@ before_install:
     wget https://launchpad.net/ubuntu/+archive/primary/+files/ccache_3.3.4-1_amd64.deb;
     sudo dpkg -i ccache_3.3.4-1_amd64.deb;
   else
-    brew update > /dev/null;
-    brew install qt5;
-    chmod -R 755 /usr/local/opt/qt5/*
+    if [[ "$LEGACY" = false ]]; then
+      brew update > /dev/null;
+      brew install qt5;
+      chmod -R 755 /usr/local/opt/qt5/*
+    else
+      unset SSL_CERT_FILE;
+      HOMEBREW_NO_AUTO_UPDATE=1 brew install https://gist.githubusercontent.com/dismine/c3ac01de38e12edcf22d9e05791adf82/raw/1218041ffba3ff4b64d109e64a9a867f8fe394c1/qt.rb;
+      brew link qt --force;
+      chmod -R 755 /usr/local/opt/qt/*;
+      HOMEBREW_NO_AUTO_UPDATE=1 brew install python3;
+    fi
+    python3 --version;
+    pip3 install dropbox;
   fi
 before_script:
 - |
@@ -59,48 +118,36 @@ before_script:
 - qmake --version
 - |
   if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-    qmake ../Valentina.pro -r -spec linux-clang CONFIG+=noDebugSymbols CONFIG+=checkWarnings;
+    if [[ "$RUN_TESTS" == "true" ]]; then
+      qmake ../Valentina.pro -r -spec linux-clang CONFIG+=noDebugSymbols CONFIG+=checkWarnings;
+    else
+      qmake ../Valentina.pro -r -spec linux-clang CONFIG+=noDebugSymbols CONFIG+=checkWarnings CONFIG+=noTests;
+    fi
   else
-    qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache CONFIG+=checkWarnings CONFIG+=noTests;
+    if [[ "$LEGACY" = false ]]; then
+      qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache CONFIG+=checkWarnings CONFIG+=noTests;
+    else
+      qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache CONFIG+=noTests;
+    fi
   fi
 script:
-- $CXX --version
+- "$CXX --version"
 - |
   if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-    build-wrapper-linux-x86-64 --out-dir ../bw-outputs make -j$(nproc);
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:"$TRAVIS_BUILD_DIR/build/src/libs/vpropertyexplorer/bin:$TRAVIS_BUILD_DIR/build/src/libs/qmuparser/bin";
-    xvfb-run -a make --silent check TESTARGS="-silent";
-    cd ..;
-    sonar-scanner;
+    make -j$(nproc);
+    if [[ "$RUN_TESTS" == "true" ]]; then
+      export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:"$TRAVIS_BUILD_DIR/build/src/libs/vpropertyexplorer/bin:$TRAVIS_BUILD_DIR/build/src/libs/qmuparser/bin";
+      xvfb-run -a make --silent check TESTARGS="-silent";
+    fi
   else
     make -j1;
-  fi  
+  fi
 notifications:
   email:
     recipients:
     - dismine@gmail.com
     on_success: change
     on_failure: always
-before_deploy:
-- |
-  if [[ "$DEPLOY" == "true" ]]; then
-    ../scripts/macfixqtdylibrpath.py $TRAVIS_BUILD_DIR/build/src/app/valentina/bin/Valentina.app;
-    tar -C $TRAVIS_BUILD_DIR/build/src/app/valentina/bin --exclude "*.DS_Store" -cvzf valentina-osx-${TRAVIS_COMMIT}.tar.gz Valentina.app/;
-  fi
-deploy:
-  edge:
-    branch: v1.8.47
-  provider: bintray
-  skip_cleanup: true
-  file: ../share/bintray.json
-  user: dismine
-  key:
-    secure: uffn23TzTrsW053VN7HbcURs6w16zRbM1RUUF579uRMOu+DxwiFQlOVcNifzK/CAARDSgi0xvNzGPlePXBXTkzA5r3KSWnHGbw0DJTllFIBNwkWPoDzCwAONK3ZtCq+FI3iJy+fLh2rhqXpJXD713O09PmO+TTiNBRdLCyO5BP1ndykLFdhdCR0knDpyaIYYLGvGS4SR4/LqtuHniDT9ydkhhkcmms/Bw+k8hcdrDhhk1v6jPv4qAm8QfydDeh+X9AVNrJjB0Oz2rtvYpBdY6hqVnrb77V1mdc4dU3WKxw+IkMYTTH1oq6ywdMv/Y+S9sch5h/af6O8su4ipGEp240cc7sVB+k4FE9fDVqXuOgl0LLFVqf2XbzRFAQbShmxIJ64XS43TM7s98qTCacAaiMfQvKPNSHCmCKRM3e5f5ASBcwn6UtFqdREZO/lsl+Bgdah3KCn8hw9PBTloLSnRpUQGheh/xnWwV5LTHVlSDu0FiyC6ncTI+xghNSDJWAhH2dZNX+yIjVolJ27/5qS5m3BG1x0yMGEP5Fok15sX2tP70s8FklqNtn2+xqUGEz+YJMGW0GbmFuFFhnCu2ls0BhyT68Pvz4YQWvG30SaO8EkZtYx7RNy3muuq1O2TXcctcK8xX7DNJTlFFCzCDSz6xqiO4IiQIQE1F2Td6Hru8cs=
-  dry-run: false
-  on:
-    all_branches: true
-    condition: $DEPLOY = true
-addons:
-  sonarqube:
-    token:
-      secure: Et0JMrRcVfmlNs+pwqUY1fJx49/SSwss0NMe46nSv8D6Tnv9zlPZyA8KPmOq3jIc9zsoa40dcrp3eXd3jBZrULSb2gD8KkAJAWuTFmBH7Hu18t8LGEnorh0puHK8S2jV5Ueowig67PF8hh20KjErDo7Wo0FDc14lLxCsm20Jt0WKzHU50aqWxAGY3f5f8po/o/6ClcuqPNfqXy4i93YIjgdsYsN2+PUoCSkm92yE7iA2Ggyx5Np93DajkEd75QtInhcbiP8OmNV0BMCMT41+evSnwgUhmyzzEgICrYwKwij0igsxPWkqiwI/jLC5qAOjp9KZqfK556c3FwsQY8hKEIdGKozXgcDMlBlIivQPF/zeo17LugifXjuie6lhC+e7stresxZSYmLhNFbrcKC98JF1GvBZj6xQnKoqp3+M+JAgP+LskyHVJABLHqbnYG+ubmIsTaTr6CsvRiq/9GoaODJIfkBATkPRb/WvLkPEuoJk3h+mW3oPlUbFVYs+6WPm9/+5WkKcEU7HS2nT1XM94TZh+7Adsd47vLzJ7KQ1vGK6pHChMcAK+MkZshSslvcn4H7is8sFkOSyZdMj/f+dnpTllpmU2AArPPVK6P2bQqGl8n16JY6lBw10KBkodpUd1D6JWXkNQIAyPUGGGjlqeqm1wetfad0hoHqrnQJ7HE0=
+after_success:
+- ../scripts/travis-deploy.sh
+

@@ -23,9 +23,8 @@
 
 // ONLY INCLUDE THIS IN .CPP FILES
 
-#include <QList>
 #include "vproperty.h"
-#include "../vmisc/diagnostic.h"
+#include <QList>
 
 namespace VPE
 {
@@ -39,16 +38,28 @@ public:
     //! Stores either another VPropertyFormWidget (then Editor is null) or an editor widget (then FormWidget is null)
     struct SEditorWidget
     {
-        SEditorWidget() : FormWidget(nullptr), Editor(nullptr) {}
-        explicit SEditorWidget(VPropertyFormWidget* form_widget) : FormWidget(form_widget), Editor(nullptr) {}
-        explicit SEditorWidget(QWidget* editor_widget) : FormWidget(nullptr), Editor(editor_widget) {}
+        SEditorWidget()
+          : FormWidget(nullptr),
+            Editor(nullptr)
+        {
+        }
+        explicit SEditorWidget(VPropertyFormWidget *form_widget)
+          : FormWidget(form_widget),
+            Editor(nullptr)
+        {
+        }
+        explicit SEditorWidget(QWidget *editor_widget)
+          : FormWidget(nullptr),
+            Editor(editor_widget)
+        {
+        }
 
-        VPropertyFormWidget* FormWidget;
-        QWidget* Editor;
+        VPropertyFormWidget *FormWidget;
+        QWidget *Editor;
     };
 
     //! The root property to use
-    QList<VProperty*> Properties;
+    QList<VProperty *> Properties;
 
     //! Binds the properties to their editors
     QList<SEditorWidget> EditorWidgets;
@@ -59,19 +70,25 @@ public:
 
     //! Default constructor
     VPropertyFormWidgetPrivate()
-        : Properties(QList<VProperty*>()), EditorWidgets(QList<SEditorWidget>()), UpdateEditors(true)
-    {}
+      : Properties(QList<VProperty *>()),
+        EditorWidgets(QList<SEditorWidget>()),
+        UpdateEditors(true)
+    {
+    }
 
     //! Constructor
-    explicit VPropertyFormWidgetPrivate(const QList<VProperty*>& properties)
-        : Properties(properties), EditorWidgets(QList<SEditorWidget>()), UpdateEditors(true)
-    {}
+    explicit VPropertyFormWidgetPrivate(const QList<VProperty *> &properties)
+      : Properties(properties),
+        EditorWidgets(QList<SEditorWidget>()),
+        UpdateEditors(true)
+    {
+    }
 
     virtual ~VPropertyFormWidgetPrivate() {}
 };
 
 QT_WARNING_POP
 
-}
+} // namespace VPE
 
 #endif // VPROPERTYFORMWIDGET_P_H

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,11 +29,11 @@
 #ifndef VGRAINLINEGEOMETRY_H
 #define VGRAINLINEGEOMETRY_H
 
-#include <QString>
 #include <QPointF>
+#include <QString>
 
-#include "vabstractfloatitemdata.h"
 #include "floatitemdef.h"
+#include "vabstractfloatitemdata.h"
 
 class VGrainlineDataPrivate;
 
@@ -47,38 +47,37 @@ public:
     VGrainlineData();
     VGrainlineData(const VGrainlineData &data);
 
-    virtual ~VGrainlineData();
+    ~VGrainlineData() override;
 
-    VGrainlineData &operator=(const VGrainlineData &data);
-#ifdef Q_COMPILER_RVALUE_REFS
-    VGrainlineData &operator=(VGrainlineData &&data) Q_DECL_NOTHROW { Swap(data); return *this; }
-#endif
+    auto operator=(const VGrainlineData &data) -> VGrainlineData &;
 
-    inline void Swap(VGrainlineData &data) Q_DECL_NOTHROW
-    { VAbstractFloatItemData::Swap(data); std::swap(d, data.d); }
+    VGrainlineData(VGrainlineData &&data) noexcept;
+    auto operator=(VGrainlineData &&data) noexcept -> VGrainlineData &;
 
     // methods, which set and return values of different parameters
-    QString GetLength() const;
-    void    SetLength(const QString& qsLen);
+    auto GetLength() const -> QString;
+    void SetLength(const QString &qsLen);
 
-    QString GetRotation() const;
-    void    SetRotation(const QString& qsRot);
+    auto GetRotation() const -> QString;
+    void SetRotation(const QString &qsRot);
 
-    ArrowType GetArrowType() const;
-    void      SetArrowType(ArrowType eAT);
+    auto GetArrowType() const -> GrainlineArrowDirection;
+    void SetArrowType(GrainlineArrowDirection eAT);
 
-    quint32 CenterPin() const;
-    void    SetCenterPin(quint32 centerPin);
+    auto CenterPin() const -> quint32;
+    void SetCenterPin(quint32 centerPin);
 
-    quint32 TopPin() const;
-    void    SetTopPin(quint32 topPin);
+    auto TopPin() const -> quint32;
+    void SetTopPin(quint32 topPin);
 
-    quint32 BottomPin() const;
-    void    SetBottomPin(quint32 bottomPin);
+    auto BottomPin() const -> quint32;
+    void SetBottomPin(quint32 bottomPin);
+
+    auto IsVisible() const -> bool;
+    void SetVisible(bool visible);
 
 private:
     QSharedDataPointer<VGrainlineDataPrivate> d;
 };
 
 #endif // VGRAINLINEGEOMETRY_H
-

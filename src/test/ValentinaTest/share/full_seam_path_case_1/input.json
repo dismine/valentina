@@ -1,0 +1,28 @@
+{
+    "vector": [
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": 30,
+            "y": 39.999874015748034
+        },
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": 785.9055118110236,
+            "y": 39.999874015748034
+        },
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": 785.9055118110236,
+            "y": 417.95262992125987
+        },
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": 29.9999999999999,
+            "y": 606.9290078740157
+        }
+    ]
+}

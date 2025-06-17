@@ -1,0 +1,33 @@
+<RCC>
+    <qresource prefix="/">
+        <file>puzzleicon/64x64/logo.png</file>
+        <file>puzzleicon/64x64/iconLayout.png</file>
+        <file>puzzleicon/64x64/iconLayers.png</file>
+        <file>puzzleicon/64x64/iconProperties.png</file>
+        <file>puzzleicon/svg/icon_scissors.svg</file>
+        <file>puzzleicon/svg/icon_scissors_vertical.svg</file>
+        <file>puzzleicon/svg/icon_scissors_horizontal.svg</file>
+        <file>puzzleicon/svg/watermark_placeholder.svg</file>
+        <file>puzzleicon/svg/watermark_placeholder_grayscale.svg</file>
+        <file>puzzleicon/light/64x64/iconCurrentPiece@2x.png</file>
+        <file>puzzleicon/light/64x64/iconCurrentPiece.png</file>
+        <file>puzzleicon/dark/64x64/iconCurrentPiece@2x.png</file>
+        <file>puzzleicon/dark/64x64/iconCurrentPiece.png</file>
+        <file>puzzleicon/light/64x64/iconTiles@2x.png</file>
+        <file>puzzleicon/light/64x64/iconTiles.png</file>
+        <file>puzzleicon/dark/64x64/iconTiles@2x.png</file>
+        <file>puzzleicon/dark/64x64/iconTiles.png</file>
+        <file>puzzleicon/svg/light/no_watermark_image.svg</file>
+        <file>puzzleicon/svg/dark/no_watermark_image.svg</file>
+        <file>puzzleicon/light/32x32/horizontal_grainline@2x.png</file>
+        <file>puzzleicon/light/32x32/horizontal_grainline.png</file>
+        <file>puzzleicon/light/32x32/vertical_grainline@2x.png</file>
+        <file>puzzleicon/light/32x32/vertical_grainline.png</file>
+        <file>puzzleicon/dark/32x32/vertical_grainline@2x.png</file>
+        <file>puzzleicon/dark/32x32/vertical_grainline.png</file>
+        <file>puzzleicon/dark/32x32/horizontal_grainline.png</file>
+        <file>puzzleicon/dark/32x32/horizontal_grainline@2x.png</file>
+        <file>puzzleicon/svg/icon_scissors_plotter_vertical.svg</file>
+        <file>puzzleicon/svg/icon_scissors_plotter_horizontal.svg</file>
+    </qresource>
+</RCC>

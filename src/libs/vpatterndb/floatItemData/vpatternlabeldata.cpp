@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -27,25 +27,23 @@
  *************************************************************************/
 
 #include "vpatternlabeldata.h"
+#include "../vmisc/def.h"
 #include "vpatternlabeldata_p.h"
-#include "../ifc/ifcdef.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VPatternLabelData::VPatternLabelData()
-    : VAbstractFloatItemData(),
-      d(new VPatternLabelDataPrivate())
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VPatternLabelData::VPatternLabelData(const VPatternLabelData &data)
-    : VAbstractFloatItemData(data),
-      d (data.d)
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VPatternLabelData &VPatternLabelData::operator=(const VPatternLabelData &data)
+  : VAbstractFloatItemData(),
+    d(new VPatternLabelDataPrivate())
 {
-    if ( &data == this )
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+COPY_CONSTRUCTOR_IMPL_2(VPatternLabelData, VAbstractFloatItemData)
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPatternLabelData::operator=(const VPatternLabelData &data) -> VPatternLabelData &
+{
+    if (&data == this)
     {
         return *this;
     }
@@ -55,11 +53,25 @@ VPatternLabelData &VPatternLabelData::operator=(const VPatternLabelData &data)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPatternLabelData::~VPatternLabelData()
-{}
+VPatternLabelData::VPatternLabelData(VPatternLabelData &&data) noexcept
+  : VAbstractFloatItemData(std::move(data)),
+    d(std::move(data.d)) // NOLINT(bugprone-use-after-move)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPatternLabelData::GetLabelWidth() const
+auto VPatternLabelData::operator=(VPatternLabelData &&data) noexcept -> VPatternLabelData &
+{
+    VAbstractFloatItemData::operator=(data);
+    std::swap(d, data.d);
+    return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPatternLabelData::~VPatternLabelData() = default;
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPatternLabelData::GetLabelWidth() const -> QString
 {
     return d->m_dLabelWidth;
 }
@@ -71,7 +83,7 @@ void VPatternLabelData::SetLabelWidth(const QString &dLabelW)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPatternLabelData::GetLabelHeight() const
+auto VPatternLabelData::GetLabelHeight() const -> QString
 {
     return d->m_dLabelHeight;
 }
@@ -83,7 +95,7 @@ void VPatternLabelData::SetLabelHeight(const QString &dLabelH)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VPatternLabelData::GetFontSize() const
+auto VPatternLabelData::GetFontSize() const -> int
 {
     return d->m_iFontSize;
 }
@@ -95,7 +107,7 @@ void VPatternLabelData::SetFontSize(int iSize)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPatternLabelData::GetRotation() const
+auto VPatternLabelData::GetRotation() const -> QString
 {
     return d->m_dLabelAngle;
 }
@@ -107,7 +119,7 @@ void VPatternLabelData::SetRotation(const QString &dRot)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VPatternLabelData::CenterPin() const
+auto VPatternLabelData::CenterPin() const -> quint32
 {
     return d->m_centerPin;
 }
@@ -119,7 +131,7 @@ void VPatternLabelData::SetCenterPin(const quint32 &centerPin)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VPatternLabelData::TopLeftPin() const
+auto VPatternLabelData::TopLeftPin() const -> quint32
 {
     return d->m_topLeftPin;
 }
@@ -131,7 +143,7 @@ void VPatternLabelData::SetTopLeftPin(const quint32 &topLeftPin)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VPatternLabelData::BottomRightPin() const
+auto VPatternLabelData::BottomRightPin() const -> quint32
 {
     return d->m_bottomRightPin;
 }

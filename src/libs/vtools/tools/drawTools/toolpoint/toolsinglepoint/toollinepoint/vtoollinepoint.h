@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,29 +29,24 @@
 #ifndef VTOOLLINEPOINT_H
 #define VTOOLLINEPOINT_H
 
-#include <qcompilerdetection.h>
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
 #include <QtGlobal>
 
+#include "../vmisc/def.h"
 #include "../vpatterndb/vformula.h"
 #include "../vtoolsinglepoint.h"
-#include "../vmisc/def.h"
 
 template <class T> class QSharedPointer;
 
 struct VToolLinePointInitData : VToolSinglePointInitData
 {
-    VToolLinePointInitData()
-        : VToolSinglePointInitData(),
-          typeLine(TypeLineLine),
-          lineColor(ColorBlack)
-    {}
+    using VToolSinglePointInitData::VToolSinglePointInitData;
 
-    QString typeLine;
-    QString lineColor;
+    QString typeLine{TypeLineLine};
+    QString lineColor{ColorBlack};
 };
 
 /**
@@ -59,56 +54,61 @@ struct VToolLinePointInitData : VToolSinglePointInitData
  */
 class VToolLinePoint : public VToolSinglePoint
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
-    VToolLinePoint(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine, const
-                   QString &lineColor, const QString &formula, const quint32 &basePointId, const qreal &angle,
-                   QGraphicsItem * parent = nullptr);
+    VToolLinePoint(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
+                   const QString &lineColor, const QString &formula, const quint32 &basePointId, const qreal &angle,
+                   const QString &notes, QGraphicsItem *parent = nullptr);
     virtual ~VToolLinePoint() override;
-    virtual int       type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Tool::LinePoint)};
+    virtual auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Tool::LinePoint)
+    };
 
-    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                         QWidget *widget = nullptr) override;
+    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 
-    VFormula GetFormulaLength() const;
-    void     SetFormulaLength(const VFormula &value);
+    auto GetFormulaLength() const -> VFormula;
+    void SetFormulaLength(const VFormula &value);
 
-    QString BasePointName() const;
+    auto BasePointName() const -> QString;
 
-    qreal   GetAngle() const;
-    void    SetAngle(const qreal &value);
+    auto GetAngle() const -> qreal;
+    void SetAngle(const qreal &value);
 
-    QString GetLineColor() const;
-    void    SetLineColor(const QString &value);
+    auto GetLineColor() const -> QString;
+    void SetLineColor(const QString &value);
 
 public slots:
-    virtual void      Disable(bool disable, const QString &namePP) override;
-    virtual void      FullUpdateFromFile() override;
+    virtual void Disable(bool disable, const QString &namePP) override;
+    virtual void FullUpdateFromFile() override;
+
 protected:
     /** @brief formula string with length formula. */
-    QString           formulaLength;
+    QString formulaLength;
 
     /** @brief angle line angle. */
-    qreal             angle;
+    qreal angle;
 
     /** @brief basePointId id base line point. */
-    quint32           basePointId;
+    quint32 basePointId;
 
     /** @brief mainLine line item. */
-    VScaledLine      *mainLine;
+    VScaledLine *mainLine{nullptr};
 
     /** @brief lineColor color of a line. */
-    QString           lineColor;
+    QString lineColor;
 
-    virtual void      RefreshGeometry();
-    virtual void      RemoveReferens() override;
-    virtual void      SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
-    virtual void      hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
-    virtual void      hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
-    virtual QString   MakeToolTip() const override;
+    virtual void RefreshGeometry();
+    virtual void RemoveReferens() override;
+    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+    virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
+    virtual auto MakeToolTip() const -> QString override;
+
 private:
-    Q_DISABLE_COPY(VToolLinePoint)
+    Q_DISABLE_COPY_MOVE(VToolLinePoint) // NOLINT
 };
 
 #endif // VTOOLLINEPOINT_H

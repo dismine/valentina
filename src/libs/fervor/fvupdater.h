@@ -25,6 +25,7 @@
 #include <QMetaObject>
 #include <QMutex>
 #include <QNetworkAccessManager>
+#include <QNetworkReply>
 #include <QObject>
 #include <QPointer>
 #include <QString>
@@ -35,37 +36,34 @@
 #include "fvavailableupdate.h"
 #include "fvupdatewindow.h"
 
-class FvUpdater : public QObject
+class FvUpdater final : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     // Singleton
-    static FvUpdater* sharedUpdater();
+    static auto sharedUpdater() -> FvUpdater *;
     static void drop();
-    static QString CurrentFeedURL();
-    static int CurrentVersion();
-    static bool IsTestBuild();
+    static auto CurrentFeedURL() -> QString;
+    static auto IsTestBuild() -> bool;
 
     // Set / get feed URL
     void SetFeedURL(const QUrl &feedURL);
     void SetFeedURL(const QString &feedURL);
-    QString GetFeedURL() const;
+    auto GetFeedURL() const -> QString;
 
-    bool IsDropOnFinnish() const;
+    void SetMainWindow(QWidget *mainWindow);
+
+    auto IsDropOnFinnish() const -> bool;
     void SetDropOnFinnish(bool value);
 
 public slots:
     // Check for updates
-    bool CheckForUpdates(bool silentAsMuchAsItCouldGet = true);
+    bool CheckForUpdates(bool silentAsMuchAsItCouldGet = true); // NOLINT(modernize-use-trailing-return-type)
 
     // Aliases
-    bool CheckForUpdatesSilent();
-    bool CheckForUpdatesNotSilent();
-
-protected:
-    friend class FvUpdateWindow; // Uses GetProposedUpdate() and others
-    QPointer<FvAvailableUpdate> GetProposedUpdate();
+    bool CheckForUpdatesSilent();    // NOLINT(modernize-use-trailing-return-type)
+    bool CheckForUpdatesNotSilent(); // NOLINT(modernize-use-trailing-return-type)
 
 protected slots:
     // Update window button slots
@@ -83,38 +81,39 @@ private:
     //
     // Singleton business
     //
-    Q_DISABLE_COPY(FvUpdater)
-    FvUpdater();		  // Hide main constructor
-    virtual ~FvUpdater(); // Hide main destructor
+    Q_DISABLE_COPY_MOVE(FvUpdater) // NOLINT
+    FvUpdater() = default;         // Hide main constructor
+    virtual ~FvUpdater();          // Hide main destructor
 
     static QPointer<FvUpdater> m_Instance; // Singleton instance
 
-    QPointer<FvUpdateWindow> m_updaterWindow; // Updater window (NULL if not shown)
+    QPointer<FvUpdateWindow> m_updaterWindow{nullptr}; // Updater window (NULL if not shown)
 
     // Available update (NULL if not fetched)
-    QPointer<FvAvailableUpdate> m_proposedUpdate;
+    QPointer<FvAvailableUpdate> m_proposedUpdate{nullptr};
 
     // If true, don't show the error dialogs and the "no updates." dialog
     // (silentAsMuchAsItCouldGet from CheckForUpdates() goes here)
     // Useful for automatic update checking upon application startup.
-    bool m_silentAsMuchAsItCouldGet;
+    bool m_silentAsMuchAsItCouldGet{true};
 
     //
     // HTTP feed fetcher infrastructure
     //
-    QUrl                    m_feedURL;		    // Feed URL that will be fetched
-    QNetworkAccessManager   m_qnam;
-    QPointer<QNetworkReply> m_reply;
-    bool                    m_httpRequestAborted;
-    bool                    m_dropOnFinnish;
+    QUrl m_feedURL{}; // Feed URL that will be fetched
+    QWidget *m_mainWindow{nullptr};
+    QNetworkAccessManager m_qnam{};
+    QPointer<QNetworkReply> m_reply{nullptr};
+    bool m_httpRequestAborted{false};
+    bool m_dropOnFinnish{true};
 
-    QXmlStreamReader m_xml;	// XML data collector and parser
+    QXmlStreamReader m_xml{}; // XML data collector and parser
 
-    void showUpdaterWindowUpdatedWithCurrentUpdateProposal();		// Show updater window
-    void hideUpdaterWindow();										// Hide + destroy m_updaterWindow
+    void showUpdaterWindowUpdatedWithCurrentUpdateProposal(); // Show updater window
+    void hideUpdaterWindow();                                 // Hide + destroy m_updaterWindow
 
     void startDownloadFeed(const QUrl &url); // Start downloading feed
-    void cancelDownloadFeed();			     // Stop downloading the current feed
+    void cancelDownloadFeed();               // Stop downloading the current feed
 
     // Dialogs (notifications)
     // Show an error message
@@ -122,15 +121,16 @@ private:
     // Show an informational message
     void showInformationDialog(const QString &message, bool showEvenInSilentMode = false);
 
+    auto xmlParseFeed() -> bool; // Parse feed in m_xml
+    auto searchDownloadedFeedForUpdates(const QString &xmlEnclosureUrl, const QString &xmlEnclosureVersion,
+                                        const QString &xmlEnclosurePlatform) -> bool;
 
-    bool xmlParseFeed();				// Parse feed in m_xml
-    bool searchDownloadedFeedForUpdates(const QString &xmlEnclosureUrl,
-                                        const QString &xmlEnclosureVersion,
-                                        const QString &xmlEnclosurePlatform);
-
-    static bool VersionIsIgnored(const QString &version);
+    static auto VersionIsIgnored(const QString &version) -> bool;
     static void IgnoreVersion(const QString &version);
-    static bool CurrentlyRunningOnPlatform(const QString &platform);
+    static auto CurrentlyRunningOnPlatform(const QString &platform) -> bool;
+
+    friend class FvUpdateWindow; // Uses GetProposedUpdate() and others
+    auto GetProposedUpdate() -> QPointer<FvAvailableUpdate>;
 };
 
 #endif // FVUPDATER_H

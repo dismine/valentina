@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -33,10 +33,10 @@
 #include <QDebug>
 
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vmisc/logging.h"
 #include "../tools/nodeDetails/vtoolpiecepath.h"
 #include "../tools/vtoolseamallowance.h"
 #include "../vpatterndb/vpiecenode.h"
+#include "../vmisc/compatibility.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 SavePiecePathOptions::SavePiecePathOptions(quint32 pieceId, const VPiecePath &oldPath, const VPiecePath &newPath,
@@ -57,11 +57,11 @@ void SavePiecePathOptions::undo()
 {
     qCDebug(vUndo, "Undo.");
 
-    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagPath);
+    QDomElement domElement = doc->FindElementById(nodeId, VAbstractPattern::TagPath);
     if (domElement.isElement())
     {
         VToolPiecePath::AddAttributes(doc, domElement, nodeId, m_oldPath);
-        doc->RemoveAllChildren(domElement);//Very important to clear before rewrite
+        VDomDocument::RemoveAllChildren(domElement); //Very important to clear before rewrite
         VToolPiecePath::AddNodes(doc, domElement, m_oldPath);
 
         DecrementReferences(m_newPath.MissingNodes(m_oldPath));
@@ -72,7 +72,7 @@ void SavePiecePathOptions::undo()
 
         if (m_pieceId != NULL_ID)
         {
-            if (VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(m_pieceId)))
+            if (auto *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(m_pieceId)))
             {
                 tool->RefreshGeometry();
             }
@@ -89,11 +89,11 @@ void SavePiecePathOptions::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagPath);
+    QDomElement domElement = doc->FindElementById(nodeId, VAbstractPattern::TagPath);
     if (domElement.isElement())
     {
         VToolPiecePath::AddAttributes(doc, domElement, nodeId, m_newPath);
-        doc->RemoveAllChildren(domElement);//Very important to clear before rewrite
+        VDomDocument::RemoveAllChildren(domElement); //Very important to clear before rewrite
         VToolPiecePath::AddNodes(doc, domElement, m_newPath);
 
         DecrementReferences(m_oldPath.MissingNodes(m_newPath));
@@ -104,7 +104,7 @@ void SavePiecePathOptions::redo()
 
         if (m_pieceId != NULL_ID)
         {
-            if (VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(m_pieceId)))
+            if (auto *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(m_pieceId)))
             {
                 tool->RefreshGeometry();
             }
@@ -117,9 +117,9 @@ void SavePiecePathOptions::redo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool SavePiecePathOptions::mergeWith(const QUndoCommand *command)
+auto SavePiecePathOptions::mergeWith(const QUndoCommand *command) -> bool
 {
-    const SavePiecePathOptions *saveCommand = static_cast<const SavePiecePathOptions *>(command);
+    const auto *saveCommand = static_cast<const SavePiecePathOptions *>(command);
     SCASSERT(saveCommand != nullptr);
 
     if (saveCommand->PathId() != nodeId)
@@ -128,12 +128,10 @@ bool SavePiecePathOptions::mergeWith(const QUndoCommand *command)
     }
     else
     {
-        const QSet<quint32> currentSet;
-        currentSet.fromList(m_newPath.Dependencies());
-
         const VPiecePath candidate = saveCommand->NewPath();
-        const QSet<quint32> candidateSet;
-        candidateSet.fromList(candidate.Dependencies());
+
+        auto currentSet = ConvertToSet(m_newPath.Dependencies());
+        auto candidateSet = ConvertToSet(candidate.Dependencies());
 
         if (currentSet != candidateSet)
         {

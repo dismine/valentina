@@ -37,7 +37,7 @@
        <property name="iconSize">
         <size>
          <width>96</width>
-         <height>84</height>
+         <height>96</height>
         </size>
        </property>
        <property name="textElideMode">
@@ -53,7 +53,7 @@
         <enum>QListView::IconMode</enum>
        </property>
        <property name="currentRow">
-        <number>0</number>
+        <number>-1</number>
        </property>
        <item>
         <property name="text">
@@ -82,7 +82,7 @@
           <normaloff>:/icon/path_config.png</normaloff>:/icon/path_config.png</iconset>
         </property>
         <property name="flags">
-         <set>ItemIsSelectable|ItemIsUserCheckable|ItemIsEnabled</set>
+         <set>ItemIsSelectable|ItemIsEnabled</set>
         </property>
        </item>
       </widget>

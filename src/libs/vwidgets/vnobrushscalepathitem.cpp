@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -28,15 +28,22 @@
 
 #include "vnobrushscalepathitem.h"
 #include "global.h"
+#include "../vmisc/vabstractapplication.h"
 
 #include <QBrush>
-#include <QMatrix>
 #include <QPainter>
 
 //---------------------------------------------------------------------------------------------------------------------
 VNoBrushScalePathItem::VNoBrushScalePathItem(QGraphicsItem *parent) :
-    QGraphicsPathItem(parent)
+    QGraphicsPathItem(parent),
+    m_defaultWidth(VAbstractApplication::VApp()->Settings()->WidthHairLine())
 {
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VNoBrushScalePathItem::SetWidth(qreal width)
+{
+    m_defaultWidth = width;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -55,7 +62,12 @@ void VNoBrushScalePathItem::paint(QPainter *painter, const QStyleOptionGraphicsI
      * opposite of the item.
      */
     QBrush brush = this->brush();
-    brush.setMatrix(painter->combinedMatrix().inverted());
+    brush.setTransform(painter->combinedTransform().inverted());
     this->setBrush(brush);
+
+    QPen toolPen = pen();
+    toolPen.setWidthF(ScaleWidth(m_defaultWidth, SceneScale(scene())));
+    setPen(toolPen);
+
     PaintWithFixItemHighlightSelected<QGraphicsPathItem>(this, painter, option, widget);
 }

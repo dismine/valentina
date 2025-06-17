@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -33,86 +33,82 @@
 #include <QLineF>
 #include <QPainterPath>
 #include <QSharedPointer>
-#include <Qt>
 #include <new>
 
 #include "../../tools/drawTools/toolpoint/toolsinglepoint/vtoolpointfromarcandtangent.h"
-#include "../ifc/ifcdef.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
-#include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
+#include "../vpatterndb/vcontainer.h"
 #include "visline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPointFromArcAndTangent::VisToolPointFromArcAndTangent(const VContainer *data, QGraphicsItem *parent)
-    : VisLine(data, parent), arcId(NULL_ID), crossPoint(CrossCirclesPoint::FirstPoint),
-      point(nullptr), tangent(nullptr), arcPath(nullptr), tangentLine2(nullptr)
+  : VisLine(data, parent)
 {
-    arcPath = InitItem<VCurvePathItem>(Qt::darkGreen, this);
-    point = InitPoint(mainColor, this);
-    tangent = InitPoint(supportColor, this);
-    tangentLine2 = InitItem<VScaledLine>(supportColor, this);
+    SetColorRole(VColorRole::VisSupportColor);
+
+    m_arcPath = InitItem<VCurvePathItem>(VColorRole::VisSupportColor2, this);
+    m_point = InitPoint(VColorRole::VisMainColor, this);
+    m_tangent = InitPoint(VColorRole::VisSupportColor, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolPointFromArcAndTangent::RefreshGeometry()
 {
-    if (object1Id > NULL_ID)// tangent point
+    if (m_pointId > NULL_ID) // tangent point
     {
-        const QSharedPointer<VPointF> tan = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(tangent, static_cast<QPointF>(*tan), supportColor);
+        const QSharedPointer<VPointF> tan = GetData()->GeometricObject<VPointF>(m_pointId);
+        DrawPoint(m_tangent, static_cast<QPointF>(*tan));
 
-        if (arcId > NULL_ID)// circle center
+        if (m_arcId > NULL_ID) // circle center
         {
-            const QSharedPointer<VArc> arc = Visualization::data->GeometricObject<VArc>(arcId);
-            DrawPath(arcPath, arc->GetPath(), arc->DirectionArrows(), Qt::darkGreen, Qt::SolidLine, Qt::RoundCap);
+            const QSharedPointer<VArc> arc = GetData()->GeometricObject<VArc>(m_arcId);
+            DrawPath(m_arcPath, arc->GetPath(), arc->DirectionArrows(), Qt::SolidLine, Qt::RoundCap);
 
             FindRays(static_cast<QPointF>(*tan), arc.data());
 
             QPointF fPoint;
-            VToolPointFromArcAndTangent::FindPoint(static_cast<QPointF>(*tan), arc.data(),  crossPoint, &fPoint);
-            DrawPoint(point, fPoint, mainColor);
+            VToolPointFromArcAndTangent::FindPoint(static_cast<QPointF>(*tan), arc.data(), m_crossPoint, &fPoint);
+            DrawPoint(m_point, fPoint);
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolPointFromArcAndTangent::setArcId(const quint32 &value)
+void VisToolPointFromArcAndTangent::VisualMode(quint32 id)
 {
-    arcId = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolPointFromArcAndTangent::setCrossPoint(const CrossCirclesPoint &value)
-{
-    crossPoint = value;
+    m_pointId = id;
+    StartVisualMode();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolPointFromArcAndTangent::FindRays(const QPointF &p, const VArc *arc)
 {
     QPointF p1, p2;
-    const QPointF center = static_cast<QPointF>(arc->GetCenter());
+    const auto center = static_cast<QPointF>(arc->GetCenter());
     const qreal radius = arc->GetRadius();
-    const int res = VGObject::ContactPoints (p, center, radius, p1, p2);
+    const int res = VGObject::ContactPoints(p, center, radius, p1, p2);
 
-    QLineF r1Arc(center, p1);
-    r1Arc.setLength(radius+10);
-
-    QLineF r2Arc(center, p2);
-    r2Arc.setLength(radius+10);
-
-    switch(res)
+    switch (res)
     {
         case 2:
         {
+            QLineF r1Arc(center, p1);
+            r1Arc.setLength(radius + 10);
+
+            QLineF r2Arc(center, p2);
+            r2Arc.setLength(radius + 10);
+
             int localRes = 0;
+            bool flagP1 = false;
+
             if (arc->IsIntersectLine(r1Arc))
             {
                 ++localRes;
+                flagP1 = true;
             }
 
             if (arc->IsIntersectLine(r2Arc))
@@ -120,34 +116,29 @@ void VisToolPointFromArcAndTangent::FindRays(const QPointF &p, const VArc *arc)
                 ++localRes;
             }
 
-            switch(localRes)
+            switch (localRes)
             {
                 case 2:
-                    DrawRay(this, p, p1, supportColor, Qt::DashLine);
-                    DrawRay(tangentLine2, p, p2, supportColor, Qt::DashLine);
+                    DrawRay(this, p, m_crossPoint == CrossCirclesPoint::FirstPoint ? p1 : p2, Qt::DashLine);
                     break;
                 case 1:
-                    DrawRay(this, p, p1, supportColor, Qt::DashLine);
-                    tangentLine2->setVisible(false);
+                    DrawRay(this, p, flagP1 ? p1 : p2, Qt::DashLine);
                     break;
                 case 0:
                 default:
                     this->setVisible(false);
-                    tangentLine2->setVisible(false);
                     break;
             }
 
             break;
         }
         case 1:
-            DrawRay(this, p, p1, supportColor, Qt::DashLine);
-            tangentLine2->setVisible(false);
+            DrawRay(this, p, p1, Qt::DashLine);
             break;
         case 3:
         case 0:
         default:
             this->setVisible(false);
-            tangentLine2->setVisible(false);
             break;
     }
 }

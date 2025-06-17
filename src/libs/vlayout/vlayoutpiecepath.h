@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,6 +29,8 @@
 #ifndef VLAYOUTPIECEPATH_H
 #define VLAYOUTPIECEPATH_H
 
+#include "vlayoutpoint.h"
+#include <QMetaType>
 #include <QPointF>
 #include <QSharedDataPointer>
 
@@ -39,34 +41,38 @@ class VLayoutPiecePath
 {
 public:
     VLayoutPiecePath();
-    VLayoutPiecePath(const QVector<QPointF> &points, bool cut, Qt::PenStyle penStyle = Qt::SolidLine);
+    explicit VLayoutPiecePath(const QVector<VLayoutPoint> &points);
     VLayoutPiecePath(const VLayoutPiecePath &path);
 
     virtual ~VLayoutPiecePath();
 
-    VLayoutPiecePath &operator=(const VLayoutPiecePath &path);
-#ifdef Q_COMPILER_RVALUE_REFS
-    VLayoutPiecePath &operator=(VLayoutPiecePath &&path) Q_DECL_NOTHROW { Swap(path); return *this; }
-#endif
+    auto operator=(const VLayoutPiecePath &path) -> VLayoutPiecePath &;
 
-    inline void Swap(VLayoutPiecePath &path) Q_DECL_NOTHROW
-    { std::swap(d, path.d); }
+    VLayoutPiecePath(VLayoutPiecePath &&path) noexcept;
+    auto operator=(VLayoutPiecePath &&path) noexcept -> VLayoutPiecePath &;
 
-    QPainterPath GetPainterPath() const;
+    auto GetPainterPath() const -> QPainterPath;
 
-    QVector<QPointF> Points() const;
-    void             SetPoints(const QVector<QPointF> &points);
+    auto Points() const -> QVector<VLayoutPoint>;
+    void SetPoints(const QVector<VLayoutPoint> &points);
 
-    Qt::PenStyle PenStyle() const;
-    void         SetPenStyle(const Qt::PenStyle &penStyle);
+    auto PenStyle() const -> Qt::PenStyle;
+    void SetPenStyle(const Qt::PenStyle &penStyle);
 
-    bool IsCutPath() const;
+    auto IsCutPath() const -> bool;
     void SetCutPath(bool cut);
+
+    auto IsNotMirrored() const -> bool;
+    void SetNotMirrored(bool value);
+
+    friend auto operator<<(QDataStream &dataStream, const VLayoutPiecePath &path) -> QDataStream &;
+    friend auto operator>>(QDataStream &dataStream, VLayoutPiecePath &path) -> QDataStream &;
 
 private:
     QSharedDataPointer<VLayoutPiecePathData> d;
 };
 
-Q_DECLARE_TYPEINFO(VLayoutPiecePath, Q_MOVABLE_TYPE);
+Q_DECLARE_METATYPE(VLayoutPiecePath)                  // NOLINT
+Q_DECLARE_TYPEINFO(VLayoutPiecePath, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VLAYOUTPIECEPATH_H

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -27,31 +27,34 @@
  *************************************************************************/
 
 #include "vabstractcubicbezierpath.h"
+#include "vsplinepoint.h"
 
 #include <QPainterPath>
+#include <QtDebug>
 
-#include "../vmisc/def.h"
-#include "../ifc/ifcdef.h"
 #include "../ifc/exception/vexception.h"
+#include "../ifc/ifcdef.h"
+#include "../vmisc/def.h"
+#include "vabstractapplication.h"
 #include "vpointf.h"
 #include "vspline.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractCubicBezierPath::VAbstractCubicBezierPath(const GOType &type, const quint32 &idObject, const Draw &mode)
-    : VAbstractBezier(type, idObject, mode)
+  : VAbstractBezier(type, idObject, mode)
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractCubicBezierPath::VAbstractCubicBezierPath(const VAbstractCubicBezierPath &curve)
-    : VAbstractBezier(curve)
+auto VAbstractCubicBezierPath::operator=(const VAbstractCubicBezierPath &curve) -> VAbstractCubicBezierPath &
 {
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VAbstractCubicBezierPath &VAbstractCubicBezierPath::operator=(const VAbstractCubicBezierPath &curve)
-{
-    if ( &curve == this )
+    if (&curve == this)
     {
         return *this;
     }
@@ -69,7 +72,7 @@ VAbstractCubicBezierPath::~VAbstractCubicBezierPath()
  * @brief GetPath return QPainterPath which reprezent spline path.
  * @return path.
  */
-QPainterPath VAbstractCubicBezierPath::GetPath() const
+auto VAbstractCubicBezierPath::GetPath() const -> QPainterPath
 {
     QPainterPath painterPath;
     for (qint32 i = 1; i <= CountSubSpl(); ++i)
@@ -84,7 +87,7 @@ QPainterPath VAbstractCubicBezierPath::GetPath() const
  * @brief GetPathPoints return list of points what located on path.
  * @return list.
  */
-QVector<QPointF> VAbstractCubicBezierPath::GetPoints() const
+auto VAbstractCubicBezierPath::GetPoints() const -> QVector<QPointF>
 {
     QVector<QPointF> pathPoints;
     for (qint32 i = 1; i <= CountSubSpl(); ++i)
@@ -104,7 +107,7 @@ QVector<QPointF> VAbstractCubicBezierPath::GetPoints() const
  * @brief GetLength return length of spline path.
  * @return length.
  */
-qreal VAbstractCubicBezierPath::GetLength() const
+auto VAbstractCubicBezierPath::GetLength() const -> qreal
 {
     qreal length = 0;
     for (qint32 i = 1; i <= CountSubSpl(); ++i)
@@ -115,7 +118,7 @@ qreal VAbstractCubicBezierPath::GetLength() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<DirectionArrow> VAbstractCubicBezierPath::DirectionArrows() const
+auto VAbstractCubicBezierPath::DirectionArrows() const -> QVector<DirectionArrow>
 {
     QVector<DirectionArrow> arrows;
     for (qint32 i = 1; i <= CountSubSpl(); ++i)
@@ -126,7 +129,7 @@ QVector<DirectionArrow> VAbstractCubicBezierPath::DirectionArrows() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VAbstractCubicBezierPath::Segment(const QPointF &p) const
+auto VAbstractCubicBezierPath::Segment(const QPointF &p) const -> int
 {
     int index = -1;
     for (qint32 i = 1; i <= CountSubSpl(); ++i)
@@ -152,8 +155,8 @@ int VAbstractCubicBezierPath::Segment(const QPointF &p) const
  *
  * VSplinePoint splP1 = splPath->at(p1);
  * VSplinePoint splP2 = splPath->at(p2);
- * VSpline spl1 = VSpline(splP1.P(), spl1p2, spl1p3, *p, splPath->GetKCurve());
- * VSpline spl2 = VSpline(*p, spl2p2, spl2p3, splP2.P(), splPath->GetKCurve());
+ * auto spl1 = VSpline(splP1.P(), spl1p2, spl1p3, *p, splPath->GetKCurve());
+ * auto spl2 = VSpline(*p, spl2p2, spl2p3, splP2.P(), splPath->GetKCurve());
  * @param length length first spline path.
  * @param p1 index first spline point in list.
  * @param p2 index second spline point in list.
@@ -161,37 +164,68 @@ int VAbstractCubicBezierPath::Segment(const QPointF &p) const
  * @param spl1p3 second control point first spline.
  * @param spl2p2 first control point second spline.
  * @param spl2p3 second control point second spline.
+ * @param pointName cutting point name.
  * @return cutting point.
  */
-QPointF VAbstractCubicBezierPath::CutSplinePath(qreal length, qint32 &p1, qint32 &p2, QPointF &spl1p2, QPointF &spl1p3,
-                                                QPointF &spl2p2, QPointF &spl2p3) const
+auto VAbstractCubicBezierPath::CutSplinePath(qreal length, qint32 &p1, qint32 &p2, QPointF &spl1p2, QPointF &spl1p3,
+                                             QPointF &spl2p2, QPointF &spl2p3, const QString &pointName) const
+    -> QPointF
 {
     if (CountSubSpl() < 1)
     {
         throw VException(tr("Can't cut this spline"));
     }
 
-    //Always need return two spline paths, so we must correct wrong length.
-    const qreal minLength = ToPixel(1, Unit::Mm);
+    // Always need return two spline paths, so we must correct wrong length.
     qreal fullLength = GetLength();
 
-    if (fullLength <= minLength)
+    if (qFuzzyIsNull(fullLength))
     {
-        p1 = p2 = -1;
         spl1p2 = spl1p3 = spl2p2 = spl2p3 = QPointF();
-        return QPointF();
+
+        return {};
     }
 
-    const qreal maxLength = fullLength - minLength;
+    if (length < 0)
+    {
+        length = fullLength + length;
+    }
 
-    if (length < minLength)
+    if (length < 0)
     {
-        length = minLength;
+        QString errorMsg;
+        if (not pointName.isEmpty())
+        {
+            errorMsg = tr("Curve '%1'. Length of a cut segment (%2) is too small. Optimize it to minimal value.")
+                           .arg(name(), pointName);
+        }
+        else
+        {
+            errorMsg =
+                tr("Curve '%1'. Length of a cut segment is too small. Optimize it to minimal value.").arg(name());
+        }
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(errorMsg)
+            : qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
     }
-    else if (length > maxLength)
+    else if (length > fullLength)
     {
-        length = maxLength;
+        QString errorMsg;
+        if (not pointName.isEmpty())
+        {
+            errorMsg = tr("Curve '%1'. Length of a cut segment (%2) is too big. Optimize it to maximal value.")
+                           .arg(name(), pointName);
+        }
+        else
+        {
+            errorMsg = tr("Curve '%1'. Length of a cut segment is too big. Optimize it to maximal value.").arg(name());
+        }
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(errorMsg)
+            : qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
     }
+
+    length = qBound(0.0, length, fullLength);
 
     fullLength = 0;
     for (qint32 i = 1; i <= CountSubSpl(); ++i)
@@ -199,16 +233,48 @@ QPointF VAbstractCubicBezierPath::CutSplinePath(qreal length, qint32 &p1, qint32
         const VSpline spl = GetSpline(i);
         const qreal splLength = spl.GetLength();
         fullLength += splLength;
-        if (fullLength > length)
+        if (fullLength >= length)
         {
-            p1 = i-1;
+            p1 = i - 1;
             p2 = i;
-            return spl.CutSpline(length - (fullLength - splLength), spl1p2, spl1p3, spl2p2, spl2p3);
+            const QPointF point =
+                spl.CutSpline(length - (fullLength - splLength), spl1p2, spl1p3, spl2p2, spl2p3, pointName);
+
+            const QVector<VSplinePoint> points = GetSplinePath();
+
+            if (p1 > 0)
+            {
+                const VSplinePoint &splP1 = points.at(p1);
+                QLineF const line(splP1.P().toQPointF(), spl1p2);
+                if (qFuzzyIsNull(line.length()))
+                {
+                    spl1p2.rx() += ToPixel(0.1, Unit::Mm);
+                    QLineF line(splP1.P().toQPointF(), spl1p2);
+                    line.setLength(ToPixel(0.1, Unit::Mm));
+                    line.setAngle(splP1.Angle1() + 180);
+                    spl1p2 = line.p2();
+                }
+            }
+
+            if (p2 < points.size() - 1)
+            {
+                const VSplinePoint &splP2 = points.at(p2);
+                QLineF const line(splP2.P().toQPointF(), spl2p3);
+                if (qFuzzyIsNull(line.length()))
+                {
+                    spl2p3.rx() += ToPixel(0.1, Unit::Mm);
+                    QLineF line(splP2.P().toQPointF(), spl2p3);
+                    line.setAngle(splP2.Angle2() + 180);
+                    spl2p3 = line.p2();
+                }
+            }
+
+            return point;
         }
     }
     p1 = p2 = -1;
     spl1p2 = spl1p3 = spl2p2 = spl2p3 = QPointF();
-    return QPointF();
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -217,23 +283,31 @@ QPointF VAbstractCubicBezierPath::CutSplinePath(qreal length, qint32 &p1, qint32
  * @param toolName first part of name. Like 'Spline path' or 'Cubic Bezier path'.
  * @return name of curve for history records.
  */
-QString VAbstractCubicBezierPath::NameForHistory(const QString &toolName) const
+auto VAbstractCubicBezierPath::NameForHistory(const QString &toolName) const -> QString
 {
     QString name = toolName;
     if (CountPoints() > 0)
     {
-        name += QString(" %1").arg(FirstPoint().name());
+        name += u" %1"_s.arg(FirstPoint().name());
         if (CountSubSpl() >= 1)
         {
-            name += QString("_%1").arg(LastPoint().name());
+            name += u"_%1"_s.arg(LastPoint().name());
         }
 
         if (GetDuplicate() > 0)
         {
-            name += QString("_%1").arg(GetDuplicate());
+            name += u"_%1"_s.arg(GetDuplicate());
         }
     }
-    return name;
+
+    QString alias;
+
+    if (not GetAliasSuffix().isEmpty())
+    {
+        alias = u"%1 %2"_s.arg(toolName, GetAliasSuffix());
+    }
+
+    return not alias.isEmpty() ? u"%1 (%2)"_s.arg(alias, name) : name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -243,16 +317,29 @@ void VAbstractCubicBezierPath::CreateName()
     if (CountPoints() > 0)
     {
         name = splPath;
-        name.append(QString("_%1").arg(FirstPoint().name()));
+        name.append(u"_%1"_s.arg(FirstPoint().name()));
         if (CountSubSpl() >= 1)
         {
-            name.append(QString("_%1").arg(LastPoint().name()));
+            name.append(u"_%1"_s.arg(LastPoint().name()));
 
             if (GetDuplicate() > 0)
             {
-                name += QString("_%1").arg(GetDuplicate());
+                name += u"_%1"_s.arg(GetDuplicate());
             }
         }
     }
     setName(name);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractCubicBezierPath::CreateAlias()
+{
+    const QString aliasSuffix = GetAliasSuffix();
+    if (aliasSuffix.isEmpty())
+    {
+        SetAlias(QString());
+        return;
+    }
+
+    SetAlias(splPath + '_'_L1 + aliasSuffix);
 }

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -31,18 +31,17 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VInternalVariable::VInternalVariable()
-    :d(new VInternalVariableData)
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VInternalVariable::VInternalVariable(const VInternalVariable &var)
-    :d(var.d)
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VInternalVariable &VInternalVariable::operator=(const VInternalVariable &var)
+  : d(new VInternalVariableData)
 {
-    if ( &var == this )
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+COPY_CONSTRUCTOR_IMPL(VInternalVariable)
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VInternalVariable::operator=(const VInternalVariable &var) -> VInternalVariable &
+{
+    if (&var == this)
     {
         return *this;
     }
@@ -51,42 +50,54 @@ VInternalVariable &VInternalVariable::operator=(const VInternalVariable &var)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VInternalVariable::~VInternalVariable()
-{}
+VInternalVariable::VInternalVariable(VInternalVariable &&var) noexcept
+  : d(std::move(var.d))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VInternalVariable::Filter(quint32 id)
+auto VInternalVariable::operator=(VInternalVariable &&var) noexcept -> VInternalVariable &
+{
+    std::swap(d, var.d);
+    return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VInternalVariable::~VInternalVariable() = default;
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VInternalVariable::Filter(quint32 id) -> bool
 {
     Q_UNUSED(id)
     return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VInternalVariable::IsNotUsed() const
+auto VInternalVariable::IsNotUsed() const -> bool
 {
     return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VInternalVariable::GetValue() const
+auto VInternalVariable::GetValue() const -> qreal
 {
     return d->value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal *VInternalVariable::GetValue()
+auto VInternalVariable::GetValue() -> qreal *
 {
     return &d->value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VInternalVariable::SetValue(const qreal &value)
+void VInternalVariable::StoreValue(qreal value)
 {
     d->value = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VInternalVariable::GetName() const
+auto VInternalVariable::GetName() const -> QString
 {
     return d->name;
 }
@@ -94,18 +105,29 @@ QString VInternalVariable::GetName() const
 //---------------------------------------------------------------------------------------------------------------------
 void VInternalVariable::SetName(const QString &name)
 {
-    d->name = name;
+    d->name = name.simplified();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VarType VInternalVariable::GetType() const
+auto VInternalVariable::GetType() const -> VarType
 {
     return d->type;
 }
-
 
 //---------------------------------------------------------------------------------------------------------------------
 void VInternalVariable::SetType(const VarType &type)
 {
     d->type = type;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VInternalVariable::SetAlias(const QString &alias)
+{
+    d->alias = alias;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VInternalVariable::GetAlias() const -> QString
+{
+    return d->alias;
 }

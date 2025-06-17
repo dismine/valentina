@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -31,13 +31,14 @@
 
 #include <QtTest>
 
-#ifdef Q_CC_MSVC
-    #include <ciso646>
-#endif /* Q_CC_MSVC */
+// Header <ciso646> is removed in C++20.
+#if defined(Q_CC_MSVC) && __cplusplus <= 201703L
+#include <ciso646> // and, not, or
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 TST_VLockGuard::TST_VLockGuard(QObject *parent)
-    :QObject(parent)
+  : QObject(parent)
 {
 }
 
@@ -45,9 +46,10 @@ TST_VLockGuard::TST_VLockGuard(QObject *parent)
 void TST_VLockGuard::TryLock() const
 {
     QString fileName(QCoreApplication::applicationDirPath() + "/lockFile.txt");
-    std::shared_ptr<VLockGuard<char>> lock;
+    QSharedPointer<VLockGuard<char>> lock;
     VlpCreateLock(lock, fileName);
 
+    // cppcheck-suppress nullPointer
     fileName = lock->GetLockFile();
     QVERIFY2(QFileInfo::exists(fileName), "Lock file doesn't exist!");
 

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 #ifndef VTOOLENDLINE_H
 #define VTOOLENDLINE_H
 
-#include <qcompilerdetection.h>
+
 #include <QDomElement>
 #include <QGraphicsItem>
 #include <QMetaObject>
@@ -63,18 +63,18 @@ struct VToolEndLineInitData : VToolLinePointInitData
  */
 class VToolEndLine : public VToolLinePoint
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
-    virtual ~VToolEndLine() Q_DECL_EQ_DEFAULT;
-    virtual void setDialog() override;
-    static VToolEndLine *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
-                                VContainer *data);
-    static VToolEndLine *Create(VToolEndLineInitData &initData);
+    virtual ~VToolEndLine() = default;
+    virtual void SetDialog() override;
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolEndLine *;
+    static auto Create(VToolEndLineInitData &initData) -> VToolEndLine *;
     static const QString ToolType;
-    virtual int  type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::EndLine)};
 
-    VFormula     GetFormulaAngle() const;
+    auto GetFormulaAngle() const -> VFormula;
     void         SetFormulaAngle(const VFormula &value);
     virtual void ShowVisualization(bool show) override;
 protected slots:
@@ -86,7 +86,7 @@ protected:
     virtual void ReadToolAttributes(const QDomElement &domElement) override;
     virtual void SetVisualization() override;
 private:
-    Q_DISABLE_COPY(VToolEndLine)
+    Q_DISABLE_COPY_MOVE(VToolEndLine) // NOLINT
 
     QString formulaAngle;
 

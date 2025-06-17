@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>375</width>
-    <height>276</height>
+    <width>370</width>
+    <height>293</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string notr="true">Paths</string>
+   <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
+  <layout class="QVBoxLayout" name="verticalLayout_3">
    <item>
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
-      <string>Paths that Valentina uses</string>
+      <string>Paths that Tape uses</string>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
+     <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
        <widget class="QTableWidget" name="pathTable">
         <property name="editTriggers">

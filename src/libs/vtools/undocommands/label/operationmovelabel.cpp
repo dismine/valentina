@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -33,7 +33,6 @@
 
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/ifcdef.h"
-#include "../vmisc/logging.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/def.h"
 #include "../vundocommand.h"
@@ -45,7 +44,7 @@ OperationMoveLabel::OperationMoveLabel(quint32 idTool, VAbstractPattern *doc, co
                                        QUndoCommand *parent)
     : MoveAbstractLabel(doc, idPoint, pos, parent),
       m_idTool(idTool),
-      m_scene(qApp->getCurrentScene())
+      m_scene(VAbstractValApplication::VApp()->getCurrentScene())
 {
     setText(tr("move point label"));
 
@@ -54,8 +53,8 @@ OperationMoveLabel::OperationMoveLabel(quint32 idTool, VAbstractPattern *doc, co
     const QDomElement element = GetDestinationObject(m_idTool, nodeId);
     if (element.isElement())
     {
-        m_oldPos.rx() = qApp->toPixel(doc->GetParametrDouble(element, AttrMx, "0.0"));
-        m_oldPos.ry() = qApp->toPixel(doc->GetParametrDouble(element, AttrMy, "0.0"));
+        m_oldPos.rx() = VAbstractValApplication::VApp()->toPixel(VDomDocument::GetParametrDouble(element, AttrMx, "0.0"));
+        m_oldPos.ry() = VAbstractValApplication::VApp()->toPixel(VDomDocument::GetParametrDouble(element, AttrMy, "0.0"));
 
         qCDebug(vUndo, "Label old Mx %f", m_oldPos.x());
         qCDebug(vUndo, "Label old My %f", m_oldPos.y());
@@ -67,9 +66,9 @@ OperationMoveLabel::OperationMoveLabel(quint32 idTool, VAbstractPattern *doc, co
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool OperationMoveLabel::mergeWith(const QUndoCommand *command)
+auto OperationMoveLabel::mergeWith(const QUndoCommand *command) -> bool
 {
-    const OperationMoveLabel *moveCommand = static_cast<const OperationMoveLabel *>(command);
+    const auto *moveCommand = static_cast<const OperationMoveLabel *>(command);
     SCASSERT(moveCommand != nullptr)
 
     if (moveCommand->GetToolId() != m_idTool && moveCommand->GetPointId() != nodeId)
@@ -85,7 +84,7 @@ bool OperationMoveLabel::mergeWith(const QUndoCommand *command)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int OperationMoveLabel::id() const
+auto OperationMoveLabel::id() const -> int
 {
     return static_cast<int>(UndoCommand::RotationMoveLabel);
 }
@@ -99,10 +98,10 @@ void OperationMoveLabel::Do(const QPointF &pos)
     QDomElement domElement = GetDestinationObject(m_idTool, nodeId);
     if (not domElement.isNull() && domElement.isElement())
     {
-        doc->SetAttribute(domElement, AttrMx, QString().setNum(qApp->fromPixel(pos.x())));
-        doc->SetAttribute(domElement, AttrMy, QString().setNum(qApp->fromPixel(pos.y())));
+        doc->SetAttribute(domElement, AttrMx, QString().setNum(VAbstractValApplication::VApp()->fromPixel(pos.x())));
+        doc->SetAttribute(domElement, AttrMy, QString().setNum(VAbstractValApplication::VApp()->fromPixel(pos.y())));
 
-        if (VDrawTool *tool = qobject_cast<VDrawTool *>(VAbstractPattern::getTool(m_idTool)))
+        if (auto *tool = qobject_cast<VDrawTool *>(VAbstractPattern::getTool(m_idTool)))
         {
             tool->ChangeLabelPosition(nodeId, pos);
         }

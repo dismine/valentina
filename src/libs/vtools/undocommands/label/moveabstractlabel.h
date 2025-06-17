@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef MOVEABSTRACTLABEL_H
 #define MOVEABSTRACTLABEL_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -41,32 +40,36 @@ class QGraphicsScene;
 
 class MoveAbstractLabel : public VUndoCommand
 {
+    Q_OBJECT // NOLINT
+
 public:
     MoveAbstractLabel(VAbstractPattern *doc, quint32 pointId, const QPointF &pos, QUndoCommand *parent = nullptr);
-    virtual ~MoveAbstractLabel()=default;
+    ~MoveAbstractLabel() = default;
 
-    virtual void undo() override;
-    virtual void redo() override;
+    void undo() override;
+    void redo() override;
 
-    quint32 GetPointId() const;
-    QPointF GetNewPos() const;
+    auto GetPointId() const -> quint32;
+    auto GetNewPos() const -> QPointF;
+
 protected:
     QPointF m_oldPos;
     QPointF m_newPos;
 
-    virtual void Do(const QPointF &pos)=0;
+    virtual void Do(const QPointF &pos) = 0;
+
 private:
-    Q_DISABLE_COPY(MoveAbstractLabel)
+    Q_DISABLE_COPY_MOVE(MoveAbstractLabel) // NOLINT
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline quint32 MoveAbstractLabel::GetPointId() const
+inline auto MoveAbstractLabel::GetPointId() const -> quint32
 {
     return nodeId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QPointF MoveAbstractLabel::GetNewPos() const
+inline auto MoveAbstractLabel::GetNewPos() const -> QPointF
 {
     return m_newPos;
 }

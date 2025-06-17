@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -27,21 +27,18 @@
  *************************************************************************/
 
 #include "vistoolpiecepath.h"
-#include "../vwidgets/vsimplepoint.h"
 #include "../vgeometry/vpointf.h"
+#include "../vlayout/vlayoutpoint.h"
 #include "../vwidgets/scalesceneitems.h"
+#include "../vwidgets/vsimplepoint.h"
 
 #include <QGraphicsSceneMouseEvent>
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPiecePath::VisToolPiecePath(const VContainer *data, QGraphicsItem *parent)
-    : VisPath(data, parent),
-      m_points(),
-      m_line(nullptr),
-      m_path(),
-      m_cuttingPath()
+  : VisPath(data, parent)
 {
-    m_line = InitItem<VScaledLine>(supportColor, this);
+    m_line = InitItem<VScaledLine>(VColorRole::VisSupportColor, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -51,40 +48,34 @@ void VisToolPiecePath::RefreshGeometry()
 
     if (m_path.CountNodes() > 0)
     {
-        DrawPath(this, m_path.PainterPath(Visualization::data, m_cuttingPath), mainColor, m_path.GetPenType(),
-                 Qt::RoundCap);
+        DrawPath(this, m_path.PainterPath(GetData(), m_cuttingPath), m_path.GetPenType(), Qt::RoundCap);
 
-        const QVector<VPointF> nodes = m_path.PathNodePoints(Visualization::data);
+        const QVector<VPointF> nodes = m_path.PathNodePoints(GetData());
 
         for (int i = 0; i < nodes.size(); ++i)
         {
-            VSimplePoint *point = GetPoint(static_cast<quint32>(i), supportColor);
+            VSimplePoint *point = GetPoint(static_cast<quint32>(i), VColorRole::VisSupportColor);
             point->RefreshPointGeometry(nodes.at(i)); // Keep first, you can hide only objects those have shape
-            point->SetOnlyPoint(mode == Mode::Creation);
+            point->SetOnlyPoint(GetMode() == Mode::Creation);
             point->setVisible(true);
         }
 
-        if (mode == Mode::Creation)
+        if (GetMode() == Mode::Creation)
         {
-            const QVector<QPointF> points = m_path.PathPoints(Visualization::data);
-            if (points.size() > 0)
+            const QVector<VLayoutPoint> points = m_path.PathPoints(GetData());
+            if (not points.empty())
             {
-                DrawLine(m_line, QLineF(points.last(), Visualization::scenePos), supportColor, Qt::DashLine);
+                DrawLine(m_line, QLineF(points.constLast(), ScenePos()), Qt::DashLine);
             }
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolPiecePath::SetPath(const VPiecePath &path)
+void VisToolPiecePath::VisualMode(quint32 id)
 {
-    m_path = path;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolPiecePath::SetCuttingPath(const QVector<QPointF> &cuttingPath)
-{
-    m_cuttingPath = cuttingPath;
+    Q_UNUSED(id)
+    StartVisualMode();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -94,9 +85,9 @@ void VisToolPiecePath::mousePressEvent(QGraphicsSceneMouseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSimplePoint *VisToolPiecePath::GetPoint(quint32 i, const QColor &color)
+auto VisToolPiecePath::GetPoint(quint32 i, VColorRole role) -> VSimplePoint *
 {
-    return VisPath::GetPoint(m_points, i, color);
+    return VisPath::GetPoint(m_points, i, role);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -107,7 +98,7 @@ void VisToolPiecePath::HideAllItems()
         m_line->setVisible(false);
     }
 
-    for (auto item : qAsConst(m_points))
+    for (auto *item : qAsConst(m_points))
     {
         if (item)
         {

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>436</width>
-    <height>627</height>
+    <width>420</width>
+    <height>647</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -110,6 +110,121 @@
         </widget>
        </item>
        <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_8">
+         <item>
+          <widget class="QToolButton" name="toolButtonReverse">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="toolTip">
+            <string>Reverse node direction</string>
+           </property>
+           <property name="text">
+            <string notr="true">...</string>
+           </property>
+           <property name="icon">
+            <iconset theme="list-remove"/>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="toolButtonExcluded">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="toolTip">
+            <string>Excluded node</string>
+           </property>
+           <property name="text">
+            <string notr="true">...</string>
+           </property>
+           <property name="icon">
+            <iconset theme="format-text-strikethrough"/>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="toolButtonTurnPoint">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="toolTip">
+            <string>Turn point</string>
+           </property>
+           <property name="text">
+            <string notr="true">...</string>
+           </property>
+           <property name="icon">
+            <iconset theme="snap-nodes-rotation-center"/>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="toolButtonCheckUniqness">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="toolTip">
+            <string>Check node uniqness</string>
+           </property>
+           <property name="text">
+            <string notr="true">...</string>
+           </property>
+           <property name="icon">
+            <iconset theme="draw-star"/>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="toolButtonPassmark">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="toolTip">
+            <string>Notch</string>
+           </property>
+           <property name="text">
+            <string notr="true">...</string>
+           </property>
+           <property name="icon">
+            <iconset theme="add-placemark"/>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="toolButtonDelete">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="toolTip">
+            <string>Delete node</string>
+           </property>
+           <property name="text">
+            <string notr="true">...</string>
+           </property>
+           <property name="icon">
+            <iconset theme="edit-delete"/>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
         <widget class="QListWidget" name="listWidget">
          <property name="dragDropMode">
           <enum>QAbstractItemView::InternalMove</enum>
@@ -127,7 +242,7 @@
             <string>Move on top</string>
            </property>
            <property name="text">
-            <string notr="true">...</string>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset theme="go-top">
@@ -144,7 +259,7 @@
             <string>Move up</string>
            </property>
            <property name="text">
-            <string notr="true">...</string>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset theme="go-up">
@@ -161,7 +276,7 @@
             <string>Move down</string>
            </property>
            <property name="text">
-            <string notr="true">...</string>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset theme="go-down">
@@ -178,7 +293,7 @@
             <string>Move on bottom</string>
            </property>
            <property name="text">
-            <string notr="true">...</string>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset theme="go-bottom">
@@ -208,6 +323,13 @@
          </property>
          <property name="text">
           <string>Cut on fabric</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="checkBoxNotMirrored">
+         <property name="text">
+          <string>Not Mirrored</string>
          </property>
         </widget>
        </item>
@@ -308,11 +430,11 @@
             <string>Formula wizard</string>
            </property>
            <property name="text">
-            <string notr="true">...</string>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset resource="../../../../vmisc/share/resources/icon.qrc">
-             <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
+             <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -325,10 +447,10 @@
          <item alignment="Qt::AlignRight">
           <widget class="QLabel" name="label_2">
            <property name="text">
-            <string/>
+            <string notr="true"/>
            </property>
            <property name="pixmap">
-            <pixmap resource="../../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
+            <pixmap resource="../../../../vmisc/share/resources/icon.qrc">:/icon/light/24x24/equal.png</pixmap>
            </property>
           </widget>
          </item>
@@ -404,8 +526,7 @@
             <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="go-down">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="go-down"/>
            </property>
            <property name="iconSize">
             <size>
@@ -544,11 +665,11 @@
                <string>Formula wizard</string>
               </property>
               <property name="text">
-               <string notr="true">...</string>
+               <string notr="true"/>
               </property>
               <property name="icon">
                <iconset resource="../../../../vmisc/share/resources/icon.qrc">
-                <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
+                <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -561,10 +682,10 @@
             <item alignment="Qt::AlignRight">
              <widget class="QLabel" name="label_6">
               <property name="text">
-               <string/>
+               <string notr="true"/>
               </property>
               <property name="pixmap">
-               <pixmap resource="../../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
+               <pixmap resource="../../../../vmisc/share/resources/icon.qrc">:/icon/light/24x24/equal.png</pixmap>
               </property>
              </widget>
             </item>
@@ -640,8 +761,7 @@
                <string notr="true"/>
               </property>
               <property name="icon">
-               <iconset theme="go-down">
-                <normaloff>.</normaloff>.</iconset>
+               <iconset theme="go-down"/>
               </property>
               <property name="iconSize">
                <size>
@@ -743,11 +863,11 @@
                <string>Formula wizard</string>
               </property>
               <property name="text">
-               <string notr="true">...</string>
+               <string notr="true"/>
               </property>
               <property name="icon">
                <iconset resource="../../../../vmisc/share/resources/icon.qrc">
-                <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
+                <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -760,10 +880,10 @@
             <item alignment="Qt::AlignRight">
              <widget class="QLabel" name="label_10">
               <property name="text">
-               <string/>
+               <string notr="true"/>
               </property>
               <property name="pixmap">
-               <pixmap resource="../../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
+               <pixmap resource="../../../../vmisc/share/resources/icon.qrc">:/icon/light/24x24/equal.png</pixmap>
               </property>
              </widget>
             </item>
@@ -839,8 +959,7 @@
                <string notr="true"/>
               </property>
               <property name="icon">
-               <iconset theme="go-down">
-                <normaloff>.</normaloff>.</iconset>
+               <iconset theme="go-down"/>
               </property>
               <property name="iconSize">
                <size>
@@ -908,7 +1027,7 @@
       <attribute name="title">
        <string>Passmarks</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_7">
+      <layout class="QVBoxLayout" name="verticalLayout_12">
        <item>
         <layout class="QFormLayout" name="formLayout_2">
          <property name="fieldGrowthPolicy">
@@ -927,217 +1046,979 @@
         </layout>
        </item>
        <item>
-        <widget class="QGroupBox" name="groupBoxMarkType">
-         <property name="enabled">
-          <bool>true</bool>
+        <widget class="QTabWidget" name="tabWidget_2">
+         <property name="currentIndex">
+          <number>0</number>
          </property>
-         <property name="title">
-          <string>Marks</string>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_6">
-          <item>
-           <widget class="QRadioButton" name="radioButtonOneLine">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>One line</string>
-            </property>
-            <attribute name="buttonGroup">
-             <string notr="true">buttonGroupMarkType</string>
-            </attribute>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="radioButtonTwoLines">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>Two lines</string>
-            </property>
-            <attribute name="buttonGroup">
-             <string notr="true">buttonGroupMarkType</string>
-            </attribute>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="radioButtonThreeLines">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>Three lines</string>
-            </property>
-            <attribute name="buttonGroup">
-             <string notr="true">buttonGroupMarkType</string>
-            </attribute>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="radioButtonTMark">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>T mark</string>
-            </property>
-            <attribute name="buttonGroup">
-             <string notr="true">buttonGroupMarkType</string>
-            </attribute>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="radioButtonVMark">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>V mark</string>
-            </property>
-            <attribute name="buttonGroup">
-             <string notr="true">buttonGroupMarkType</string>
-            </attribute>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="groupBoxAngleType">
-         <property name="title">
-          <string>Angle</string>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_5">
-          <item>
-           <widget class="QRadioButton" name="radioButtonStraightforward">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>Straightforward</string>
-            </property>
-            <attribute name="buttonGroup">
-             <string notr="true">buttonGroupAngleType</string>
-            </attribute>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="radioButtonBisector">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>Bisector</string>
-            </property>
-            <attribute name="buttonGroup">
-             <string notr="true">buttonGroupAngleType</string>
-            </attribute>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="radioButtonIntersection">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="toolTip">
-             <string>Select if need designate the corner point as a passmark</string>
-            </property>
-            <property name="text">
-             <string>Intersection</string>
-            </property>
-            <attribute name="buttonGroup">
-             <string notr="true">buttonGroupAngleType</string>
-            </attribute>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="radioButtonIntersectionOnlyLeft">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="toolTip">
-             <string>Select if need designate the corner point as a passmark. Show only left passmark.</string>
-            </property>
-            <property name="text">
-             <string>Intersection (only left)</string>
-            </property>
-            <attribute name="buttonGroup">
-             <string notr="true">buttonGroupAngleType</string>
-            </attribute>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="radioButtonIntersectionOnlyRight">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="toolTip">
-             <string>Select if need designate the corner point as a passmark. Show only right passmark.</string>
-            </property>
-            <property name="text">
-             <string>Intersection (only right)</string>
-            </property>
-            <attribute name="buttonGroup">
-             <string notr="true">buttonGroupAngleType</string>
-            </attribute>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="radioButtonIntersection2">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="toolTip">
-             <string>Select if need designate the corner point as a passmark</string>
-            </property>
-            <property name="text">
-             <string>Intersection 2</string>
-            </property>
-            <attribute name="buttonGroup">
-             <string notr="true">buttonGroupAngleType</string>
-            </attribute>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="radioButtonIntersection2OnlyLeft">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="toolTip">
-             <string>Select if need designate the corner point as a passmark. Show only left passmark.</string>
-            </property>
-            <property name="text">
-             <string>Intersection 2 (only left)</string>
-            </property>
-            <attribute name="buttonGroup">
-             <string notr="true">buttonGroupAngleType</string>
-            </attribute>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="radioButtonIntersection2OnlyRight">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="toolTip">
-             <string>Select if need designate the corner point as a passmark. Show only right passmark.</string>
-            </property>
-            <property name="text">
-             <string>Intersection 2 (only right)</string>
-            </property>
-            <attribute name="buttonGroup">
-             <string notr="true">buttonGroupAngleType</string>
-            </attribute>
-           </widget>
-          </item>
-         </layout>
+         <widget class="QWidget" name="tabType">
+          <attribute name="title">
+           <string>Type</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_7">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout">
+             <item>
+              <widget class="QGroupBox" name="groupBoxMarkType">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
+               <property name="title">
+                <string>Marks</string>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_6">
+                <item>
+                 <widget class="QRadioButton" name="radioButtonOneLine">
+                  <property name="enabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="text">
+                   <string>One line</string>
+                  </property>
+                  <attribute name="buttonGroup">
+                   <string notr="true">buttonGroupMarkType</string>
+                  </attribute>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QRadioButton" name="radioButtonTwoLines">
+                  <property name="enabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="text">
+                   <string>Two lines</string>
+                  </property>
+                  <attribute name="buttonGroup">
+                   <string notr="true">buttonGroupMarkType</string>
+                  </attribute>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QRadioButton" name="radioButtonThreeLines">
+                  <property name="enabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="text">
+                   <string>Three lines</string>
+                  </property>
+                  <attribute name="buttonGroup">
+                   <string notr="true">buttonGroupMarkType</string>
+                  </attribute>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QRadioButton" name="radioButtonTMark">
+                  <property name="enabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="text">
+                   <string>T mark</string>
+                  </property>
+                  <attribute name="buttonGroup">
+                   <string notr="true">buttonGroupMarkType</string>
+                  </attribute>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QRadioButton" name="radioButtonVMark">
+                  <property name="enabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="toolTip">
+                   <string>Acute angle that looks inside of piece</string>
+                  </property>
+                  <property name="text">
+                   <string>V mark</string>
+                  </property>
+                  <attribute name="buttonGroup">
+                   <string notr="true">buttonGroupMarkType</string>
+                  </attribute>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QRadioButton" name="radioButtonVMark2">
+                  <property name="enabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="toolTip">
+                   <string>Acute angle that looks outside of piece</string>
+                  </property>
+                  <property name="text">
+                   <string>V mark 2</string>
+                  </property>
+                  <attribute name="buttonGroup">
+                   <string notr="true">buttonGroupMarkType</string>
+                  </attribute>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QRadioButton" name="radioButtonUMark">
+                  <property name="text">
+                   <string>U mark</string>
+                  </property>
+                  <attribute name="buttonGroup">
+                   <string notr="true">buttonGroupMarkType</string>
+                  </attribute>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QRadioButton" name="radioButtonBoxMark">
+                  <property name="text">
+                   <string>Box mark</string>
+                  </property>
+                  <attribute name="buttonGroup">
+                   <string notr="true">buttonGroupMarkType</string>
+                  </attribute>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QRadioButton" name="radioButtonCheckMark">
+                  <property name="text">
+                   <string>Check mark</string>
+                  </property>
+                  <attribute name="buttonGroup">
+                   <string notr="true">buttonGroupMarkType</string>
+                  </attribute>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QGroupBox" name="groupBoxAngleType">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
+               <property name="title">
+                <string>Angle</string>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_5">
+                <item>
+                 <widget class="QRadioButton" name="radioButtonStraightforward">
+                  <property name="enabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="text">
+                   <string>Straightforward</string>
+                  </property>
+                  <attribute name="buttonGroup">
+                   <string notr="true">buttonGroupAngleType</string>
+                  </attribute>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QRadioButton" name="radioButtonBisector">
+                  <property name="enabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="text">
+                   <string>Bisector</string>
+                  </property>
+                  <attribute name="buttonGroup">
+                   <string notr="true">buttonGroupAngleType</string>
+                  </attribute>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QRadioButton" name="radioButtonIntersection">
+                  <property name="enabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="toolTip">
+                   <string>Select if need designate the corner point as a passmark</string>
+                  </property>
+                  <property name="text">
+                   <string>Intersection</string>
+                  </property>
+                  <attribute name="buttonGroup">
+                   <string notr="true">buttonGroupAngleType</string>
+                  </attribute>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QRadioButton" name="radioButtonIntersectionOnlyLeft">
+                  <property name="enabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="toolTip">
+                   <string>Select if need designate the corner point as a passmark. Show only left passmark.</string>
+                  </property>
+                  <property name="text">
+                   <string>Intersection (only left)</string>
+                  </property>
+                  <attribute name="buttonGroup">
+                   <string notr="true">buttonGroupAngleType</string>
+                  </attribute>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QRadioButton" name="radioButtonIntersectionOnlyRight">
+                  <property name="enabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="toolTip">
+                   <string>Select if need designate the corner point as a passmark. Show only right passmark.</string>
+                  </property>
+                  <property name="text">
+                   <string>Intersection (only right)</string>
+                  </property>
+                  <attribute name="buttonGroup">
+                   <string notr="true">buttonGroupAngleType</string>
+                  </attribute>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QRadioButton" name="radioButtonIntersection2">
+                  <property name="enabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="toolTip">
+                   <string>Select if need designate the corner point as a passmark</string>
+                  </property>
+                  <property name="text">
+                   <string>Intersection 2</string>
+                  </property>
+                  <attribute name="buttonGroup">
+                   <string notr="true">buttonGroupAngleType</string>
+                  </attribute>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QRadioButton" name="radioButtonIntersection2OnlyLeft">
+                  <property name="enabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="toolTip">
+                   <string>Select if need designate the corner point as a passmark. Show only left passmark.</string>
+                  </property>
+                  <property name="text">
+                   <string>Intersection 2 (only left)</string>
+                  </property>
+                  <attribute name="buttonGroup">
+                   <string notr="true">buttonGroupAngleType</string>
+                  </attribute>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QRadioButton" name="radioButtonIntersection2OnlyRight">
+                  <property name="enabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="toolTip">
+                   <string>Select if need designate the corner point as a passmark. Show only right passmark.</string>
+                  </property>
+                  <property name="text">
+                   <string>Intersection 2 (only right)</string>
+                  </property>
+                  <attribute name="buttonGroup">
+                   <string notr="true">buttonGroupAngleType</string>
+                  </attribute>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBoxClockwiseOpening">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>Clockwise opening</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="tabManualShape">
+          <attribute name="title">
+           <string>Manual shape</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_11">
+           <item>
+            <widget class="QGroupBox" name="groupBoxManualLength">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="title">
+              <string>Length</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_10">
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_19">
+                <item alignment="Qt::AlignLeft">
+                 <widget class="QLabel" name="labelEditPassmarkLength">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="palette">
+                   <palette>
+                    <active>
+                     <colorrole role="WindowText">
+                      <brush brushstyle="SolidPattern">
+                       <color alpha="255">
+                        <red>255</red>
+                        <green>0</green>
+                        <blue>0</blue>
+                       </color>
+                      </brush>
+                     </colorrole>
+                    </active>
+                    <inactive>
+                     <colorrole role="WindowText">
+                      <brush brushstyle="SolidPattern">
+                       <color alpha="255">
+                        <red>255</red>
+                        <green>0</green>
+                        <blue>0</blue>
+                       </color>
+                      </brush>
+                     </colorrole>
+                    </inactive>
+                    <disabled>
+                     <colorrole role="WindowText">
+                      <brush brushstyle="SolidPattern">
+                       <color alpha="255">
+                        <red>159</red>
+                        <green>158</green>
+                        <blue>158</blue>
+                       </color>
+                      </brush>
+                     </colorrole>
+                    </disabled>
+                   </palette>
+                  </property>
+                  <property name="text">
+                   <string comment="notch depth">Length:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_10">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item alignment="Qt::AlignRight">
+                 <widget class="QToolButton" name="toolButtonExprLength">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                  <property name="toolTip">
+                   <string>Formula wizard</string>
+                  </property>
+                  <property name="text">
+                   <string notr="true">f(x)</string>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../../../vmisc/share/resources/icon.qrc">
+                    <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>24</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item alignment="Qt::AlignRight">
+                 <widget class="QLabel" name="label_8">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <pointsize>36</pointsize>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string notr="true">=</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item alignment="Qt::AlignRight">
+                 <widget class="QLabel" name="labelResultPassmarkLength">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>87</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="toolTip">
+                   <string>Value</string>
+                  </property>
+                  <property name="whatsThis">
+                   <string notr="true"/>
+                  </property>
+                  <property name="text">
+                   <string notr="true">_</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_20">
+                <item>
+                 <widget class="VPlainTextEdit" name="plainTextEditPassmarkLength">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>28</height>
+                   </size>
+                  </property>
+                  <property name="toolTip">
+                   <string>Calculation</string>
+                  </property>
+                  <property name="tabChangesFocus">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButtonGrowPassmarkLength">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>18</width>
+                    <height>18</height>
+                   </size>
+                  </property>
+                  <property name="sizeIncrement">
+                   <size>
+                    <width>0</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="toolTip">
+                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  </property>
+                  <property name="text">
+                   <string notr="true"/>
+                  </property>
+                  <property name="icon">
+                   <iconset theme="go-down">
+                    <normaloff>../</normaloff>../</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>16</width>
+                    <height>16</height>
+                   </size>
+                  </property>
+                  <property name="flat">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBoxManualWidth">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="title">
+              <string>Width</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_9">
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_13">
+                <item alignment="Qt::AlignLeft">
+                 <widget class="QLabel" name="labelEditPassmarkWidth">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="palette">
+                   <palette>
+                    <active>
+                     <colorrole role="WindowText">
+                      <brush brushstyle="SolidPattern">
+                       <color alpha="255">
+                        <red>255</red>
+                        <green>0</green>
+                        <blue>0</blue>
+                       </color>
+                      </brush>
+                     </colorrole>
+                    </active>
+                    <inactive>
+                     <colorrole role="WindowText">
+                      <brush brushstyle="SolidPattern">
+                       <color alpha="255">
+                        <red>255</red>
+                        <green>0</green>
+                        <blue>0</blue>
+                       </color>
+                      </brush>
+                     </colorrole>
+                    </inactive>
+                    <disabled>
+                     <colorrole role="WindowText">
+                      <brush brushstyle="SolidPattern">
+                       <color alpha="255">
+                        <red>159</red>
+                        <green>158</green>
+                        <blue>158</blue>
+                       </color>
+                      </brush>
+                     </colorrole>
+                    </disabled>
+                   </palette>
+                  </property>
+                  <property name="text">
+                   <string comment="notch width">Width:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_9">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item alignment="Qt::AlignRight">
+                 <widget class="QToolButton" name="toolButtonExprWidth_2">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                  <property name="toolTip">
+                   <string>Formula wizard</string>
+                  </property>
+                  <property name="text">
+                   <string notr="true">f(x)</string>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../../../vmisc/share/resources/icon.qrc">
+                    <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>24</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item alignment="Qt::AlignRight">
+                 <widget class="QLabel" name="label_4">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <pointsize>36</pointsize>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string notr="true">=</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item alignment="Qt::AlignRight">
+                 <widget class="QLabel" name="labelResultPassmarkWidth">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>87</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="toolTip">
+                   <string>Value</string>
+                  </property>
+                  <property name="whatsThis">
+                   <string notr="true"/>
+                  </property>
+                  <property name="text">
+                   <string notr="true">_</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_18">
+                <item>
+                 <widget class="VPlainTextEdit" name="plainTextEditPassmarkWidth">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>28</height>
+                   </size>
+                  </property>
+                  <property name="toolTip">
+                   <string>Calculation</string>
+                  </property>
+                  <property name="tabChangesFocus">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButtonGrowPassmarkWidth">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>18</width>
+                    <height>18</height>
+                   </size>
+                  </property>
+                  <property name="sizeIncrement">
+                   <size>
+                    <width>0</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="toolTip">
+                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  </property>
+                  <property name="text">
+                   <string notr="true"/>
+                  </property>
+                  <property name="icon">
+                   <iconset theme="go-down">
+                    <normaloff>../</normaloff>../</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>16</width>
+                    <height>16</height>
+                   </size>
+                  </property>
+                  <property name="flat">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBoxManualAngle">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="title">
+              <string>Angle</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_8">
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_11">
+                <item alignment="Qt::AlignLeft">
+                 <widget class="QLabel" name="labelEditPassmarkAngle">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="palette">
+                   <palette>
+                    <active>
+                     <colorrole role="WindowText">
+                      <brush brushstyle="SolidPattern">
+                       <color alpha="255">
+                        <red>255</red>
+                        <green>0</green>
+                        <blue>0</blue>
+                       </color>
+                      </brush>
+                     </colorrole>
+                    </active>
+                    <inactive>
+                     <colorrole role="WindowText">
+                      <brush brushstyle="SolidPattern">
+                       <color alpha="255">
+                        <red>255</red>
+                        <green>0</green>
+                        <blue>0</blue>
+                       </color>
+                      </brush>
+                     </colorrole>
+                    </inactive>
+                    <disabled>
+                     <colorrole role="WindowText">
+                      <brush brushstyle="SolidPattern">
+                       <color alpha="255">
+                        <red>159</red>
+                        <green>158</green>
+                        <blue>158</blue>
+                       </color>
+                      </brush>
+                     </colorrole>
+                    </disabled>
+                   </palette>
+                  </property>
+                  <property name="text">
+                   <string comment="notch angle">Angle:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_8">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item alignment="Qt::AlignRight">
+                 <widget class="QToolButton" name="toolButtonExprAngle">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                  <property name="toolTip">
+                   <string>Formula wizard</string>
+                  </property>
+                  <property name="text">
+                   <string notr="true">f(x)</string>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../../../vmisc/share/resources/icon.qrc">
+                    <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>24</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item alignment="Qt::AlignRight">
+                 <widget class="QLabel" name="label_7">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <pointsize>36</pointsize>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string notr="true">=</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item alignment="Qt::AlignRight">
+                 <widget class="QLabel" name="labelResultPassmarkAngle">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>87</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="toolTip">
+                   <string>Value</string>
+                  </property>
+                  <property name="whatsThis">
+                   <string notr="true"/>
+                  </property>
+                  <property name="text">
+                   <string notr="true">_</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_12">
+                <item>
+                 <widget class="VPlainTextEdit" name="plainTextEditPassmarkAngle">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>28</height>
+                   </size>
+                  </property>
+                  <property name="toolTip">
+                   <string>Calculation</string>
+                  </property>
+                  <property name="tabChangesFocus">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButtonGrowPassmarkAngle">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>18</width>
+                    <height>18</height>
+                   </size>
+                  </property>
+                  <property name="sizeIncrement">
+                   <size>
+                    <width>0</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="toolTip">
+                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  </property>
+                  <property name="text">
+                   <string notr="true"/>
+                  </property>
+                  <property name="icon">
+                   <iconset theme="go-down">
+                    <normaloff>../</normaloff>../</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>16</width>
+                    <height>16</height>
+                   </size>
+                  </property>
+                  <property name="flat">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
         </widget>
        </item>
        <item>
         <widget class="QCheckBox" name="checkBoxShowSecondPassmark">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="toolTip">
           <string>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</string>
@@ -1241,11 +2122,11 @@
             <string>Formula wizard</string>
            </property>
            <property name="text">
-            <string notr="true">...</string>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset resource="../../../../vmisc/share/resources/icon.qrc">
-             <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
+             <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -1258,10 +2139,10 @@
          <item alignment="Qt::AlignRight">
           <widget class="QLabel" name="label_5">
            <property name="text">
-            <string/>
+            <string notr="true"/>
            </property>
            <property name="pixmap">
-            <pixmap resource="../../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
+            <pixmap resource="../../../../vmisc/share/resources/icon.qrc">:/icon/light/24x24/equal.png</pixmap>
            </property>
           </widget>
          </item>
@@ -1340,8 +2221,7 @@
             <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="go-down">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="go-down"/>
            </property>
            <property name="iconSize">
             <size>
@@ -1389,7 +2269,7 @@
   <customwidget>
    <class>VPlainTextEdit</class>
    <extends>QPlainTextEdit</extends>
-   <header location="global">vplaintextedit.h</header>
+   <header>../vwidgets/vplaintextedit.h</header>
   </customwidget>
  </customwidgets>
  <resources>
@@ -1403,8 +2283,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
+     <x>257</x>
+     <y>573</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -1419,8 +2299,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
+     <x>325</x>
+     <y>573</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>
@@ -1430,7 +2310,7 @@
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroupAngleType"/>
   <buttongroup name="buttonGroupMarkType"/>
+  <buttongroup name="buttonGroupAngleType"/>
  </buttongroups>
 </ui>

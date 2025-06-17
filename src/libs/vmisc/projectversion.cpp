@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -28,83 +28,90 @@
 
 #include "projectversion.h"
 
-#include <qcompilerdetection.h>
 #include <QCoreApplication>
 #include <QLatin1Char>
 #include <QLatin1String>
 #include <QObject>
-#include <QStaticStringData>
 #include <QString>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <QSysInfo>
 #include <QtGlobal>
 
-extern const int MAJOR_VERSION = 0;
-extern const int MINOR_VERSION = 6;
-extern const int DEBUG_VERSION = 1;
+#if !defined(LATEST_TAG_DISTANCE)
+#include <vcsRepoState.h>
+#define LATEST_TAG_DISTANCE VCS_REPO_STATE_DISTANCE
+#endif
 
-extern const QString APP_VERSION_STR(QStringLiteral("%1.%2.%3.%4").arg(MAJOR_VERSION).arg(MINOR_VERSION)
-                                 .arg(DEBUG_VERSION).arg(LATEST_TAG_DISTANCE));
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
 
 //---------------------------------------------------------------------------------------------------------------------
-QString compilerString()
+auto AppVersionStr() -> const QString &
+{
+    static const QString appVersionStr =
+        QStringLiteral("%1.%2.%3.%4").arg(MAJOR_VERSION).arg(MINOR_VERSION).arg(DEBUG_VERSION).arg(LATEST_TAG_DISTANCE);
+    return appVersionStr;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto compilerString() -> QString
 {
 #if defined(Q_CC_INTEL) // must be before GNU, Clang and MSVC because ICC/ICL claim to be them
     QString iccCompact;
 #ifdef __INTEL_CLANG_COMPILER
-    iccCompact = QLatin1String("Clang");
+    iccCompact = "Clang"_L1;
 #elif defined(__INTEL_MS_COMPAT_LEVEL)
-    iccCompact = QLatin1String("Microsoft");
+    iccCompact = "Microsoft"_L1;
 #elif defined(__GNUC__)
-    iccCompact = QLatin1String("GCC");
+    iccCompact = Q "GCC"_L1;
 #else
-    iccCompact = QLatin1String("no");
+    iccCompact = "no"_L1;
 #endif
     QString iccVersion;
     if (__INTEL_COMPILER >= 1300)
     {
-        iccVersion = QString::number(__INTEL_COMPILER/100);
+        iccVersion = QString::number(__INTEL_COMPILER / 100);
     }
     else
     {
         iccVersion = QLatin1String(__INTEL_COMPILER);
     }
 #ifdef __INTEL_COMPILER_UPDATE
-    return QLatin1String("Intel(R) C++ ") + iccVersion + QChar('.') + QLatin1String(__INTEL_COMPILER_UPDATE) +
-           QLatin1String(" build ") + QLatin1String(__INTEL_COMPILER_BUILD_DATE) + QLatin1String(" [") +
-           QLatin1String(iccCompact) + QLatin1String(" compatibility]");
+    return "Intel(R) C++ "_L1 + iccVersion + '.'_L1 + QLatin1String(__INTEL_COMPILER_UPDATE) + " build "_L1 +
+           QLatin1String(__INTEL_COMPILER_BUILD_DATE) + " ["_L1 + QLatin1String(iccCompact) + " compatibility]"_L1;
 #else
-    return QLatin1String("Intel(R) C++ ") + iccVersion + QLatin1String(" build ") +
-           QLatin1String(__INTEL_COMPILER_BUILD_DATE) + QLatin1String(" [") + iccCompact +
-           QLatin1String(" compatibility]");
+    return "Intel(R) C++ "_L1 + iccVersion + " build "_L1 + QLatin1String(__INTEL_COMPILER_BUILD_DATE) + " ["_L1 +
+           iccCompact + " compatibility]"_L1;
 #endif
-#elif defined(Q_CC_CLANG) // must be before GNU, because clang claims to be GNU too
-    QString isAppleString;
+#elif defined(Q_CC_CLANG)            // must be before GNU, because clang claims to be GNU too
+    // cppcheck-suppress unassignedVariable
+    QString isAppleString; // NOLINT(misc-const-correctness)
 #if defined(__apple_build_version__) // Apple clang has other version numbers
-    isAppleString = QLatin1String(" (Apple)");
+    isAppleString = " (Apple)"_L1;
 #endif
-    return QLatin1String("Clang " ) + QString::number(__clang_major__) + QLatin1Char('.')
-            + QString::number(__clang_minor__) + isAppleString;
+    return "Clang "_L1 + QString::number(__clang_major__) + '.'_L1 + QString::number(__clang_minor__) + isAppleString;
 #elif defined(Q_CC_GNU)
-    return QLatin1String("GCC " ) + QLatin1String(__VERSION__);
+    return "GCC "_L1 + QLatin1String(__VERSION__);
 #elif defined(Q_CC_MSVC)
     if (_MSC_VER >= 1800) // 1800: MSVC 2013 (yearly release cycle)
     {
-        return QLatin1String("MSVC ") + QString::number(2008 + ((_MSC_VER / 100) - 13));
+        return "MSVC "_L1 + QString::number(2008 + ((_MSC_VER / 100) - 13));
     }
     if (_MSC_VER >= 1500) // 1500: MSVC 2008, 1600: MSVC 2010, ... (2-year release cycle)
     {
-        return QLatin1String("MSVC ") + QString::number(2008 + 2 * ((_MSC_VER / 100) - 15));
+        return "MSVC "_L1 + QString::number(2008 + 2 * ((_MSC_VER / 100) - 15));
     }
+    return "MSVC <unknown version>"_L1;
 #else
     return QStringLiteral("<unknown compiler>");
 #endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString buildCompatibilityString()
+auto buildCompatibilityString() -> QString
 {
-    return QCoreApplication::tr("Based on Qt %1 (%2, %3 bit)").arg(QLatin1String(qVersion()), compilerString(),
-                                                                   QString::number(QSysInfo::WordSize));
+    return QCoreApplication::tr("Based on Qt %1 (%2, %3 bit)")
+        .arg(QLatin1String(qVersion()), compilerString(), QString::number(QSysInfo::WordSize));
 }

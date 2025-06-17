@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -32,93 +32,77 @@
 #include <QLineF>
 #include <QPointF>
 #include <QSharedPointer>
-#include <Qt>
 #include <new>
 
 #include "../../tools/drawTools/toolpoint/tooldoublepoint/vtooltruedarts.h"
-#include "../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"
-#include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
+#include "../vpatterndb/vcontainer.h"
 #include "visline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolTrueDarts::VisToolTrueDarts(const VContainer *data, QGraphicsItem *parent)
-    :VisLine(data, parent),
-      baseLineP2Id(NULL_ID),
-      dartP1Id(NULL_ID),
-      dartP2Id(NULL_ID),
-      dartP3Id(NULL_ID),
-      point1(nullptr),
-      point2(nullptr),
-      baseLineP1(nullptr),
-      baseLineP2(nullptr),
-      dartP1(nullptr),
-      dartP2(nullptr),
-      dartP3(nullptr),
-      lineblP1P1(nullptr),
-      lineblP2P2(nullptr),
-      p1d2(nullptr),
-      d2p2(nullptr)
+  : VisLine(data, parent)
 {
-    baseLineP1 = InitPoint(supportColor, this);
-    baseLineP2 = InitPoint(supportColor, this);
-    dartP1 = InitPoint(supportColor, this);
-    dartP2 = InitPoint(supportColor, this);
-    dartP3 = InitPoint(supportColor, this);
+    SetColorRole(VColorRole::VisSupportColor);
 
-    lineblP1P1 = InitItem<VScaledLine>(supportColor, this);
-    lineblP2P2 = InitItem<VScaledLine>(supportColor, this);
-    p1d2 = InitItem<VScaledLine>(supportColor, this);
-    d2p2 = InitItem<VScaledLine>(supportColor, this);
+    m_baseLineP1 = InitPoint(VColorRole::VisSupportColor, this);
+    m_baseLineP2 = InitPoint(VColorRole::VisSupportColor, this);
+    m_dartP1 = InitPoint(VColorRole::VisSupportColor, this);
+    m_dartP2 = InitPoint(VColorRole::VisSupportColor, this);
+    m_dartP3 = InitPoint(VColorRole::VisSupportColor, this);
 
-    point1 = InitPoint(mainColor, this);
-    point2 = InitPoint(mainColor, this); //-V656
+    m_lineblP1P1 = InitItem<VScaledLine>(VColorRole::VisSupportColor, this);
+    m_lineblP2P2 = InitItem<VScaledLine>(VColorRole::VisSupportColor, this);
+    m_p1d2 = InitItem<VScaledLine>(VColorRole::VisSupportColor, this);
+    m_d2p2 = InitItem<VScaledLine>(VColorRole::VisSupportColor, this);
+
+    m_point1 = InitPoint(VColorRole::VisMainColor, this);
+    m_point2 = InitPoint(VColorRole::VisMainColor, this); //-V656
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolTrueDarts::RefreshGeometry()
 {
-    if (object1Id > NULL_ID)
+    if (m_baseLineP1Id > NULL_ID)
     {
-        const QSharedPointer<VPointF> blP1 = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(baseLineP1, static_cast<QPointF>(*blP1), supportColor);
+        const QSharedPointer<VPointF> blP1 = GetData()->GeometricObject<VPointF>(m_baseLineP1Id);
+        DrawPoint(m_baseLineP1, static_cast<QPointF>(*blP1));
 
-        if (baseLineP2Id <= NULL_ID)
+        if (m_baseLineP2Id <= NULL_ID)
         {
-            DrawLine(this, QLineF(static_cast<QPointF>(*blP1), Visualization::scenePos), supportColor, Qt::DashLine);
+            DrawLine(this, QLineF(static_cast<QPointF>(*blP1), ScenePos()), Qt::DashLine);
         }
         else
         {
-            const QSharedPointer<VPointF> blP2 = Visualization::data->GeometricObject<VPointF>(baseLineP2Id);
-            DrawPoint(baseLineP2, static_cast<QPointF>(*blP2), supportColor);
-            DrawLine(this, QLineF(static_cast<QPointF>(*blP1), static_cast<QPointF>(*blP2)), supportColor,
-                     Qt::DashLine);
+            const QSharedPointer<VPointF> blP2 = GetData()->GeometricObject<VPointF>(m_baseLineP2Id);
+            DrawPoint(m_baseLineP2, static_cast<QPointF>(*blP2));
+            DrawLine(this, QLineF(static_cast<QPointF>(*blP1), static_cast<QPointF>(*blP2)), Qt::DashLine);
 
-            if (dartP1Id > NULL_ID)
+            if (m_dartP1Id > NULL_ID)
             {
-                const QSharedPointer<VPointF> d1 = Visualization::data->GeometricObject<VPointF>(dartP1Id);
-                DrawPoint(dartP1, static_cast<QPointF>(*d1), supportColor);
+                const QSharedPointer<VPointF> d1 = GetData()->GeometricObject<VPointF>(m_dartP1Id);
+                DrawPoint(m_dartP1, static_cast<QPointF>(*d1));
 
-                if (dartP2Id <= NULL_ID)
+                if (m_dartP2Id <= NULL_ID)
                 {
-                    DrawLine(p1d2, QLineF(static_cast<QPointF>(*d1), Visualization::scenePos), supportColor);
+                    DrawLine(m_p1d2, QLineF(static_cast<QPointF>(*d1), ScenePos()));
                 }
                 else
                 {
-                    const QSharedPointer<VPointF> d2 = Visualization::data->GeometricObject<VPointF>(dartP2Id);
-                    DrawPoint(dartP2, static_cast<QPointF>(*d2), supportColor);
-                    DrawLine(p1d2, QLineF(static_cast<QPointF>(*d1), static_cast<QPointF>(*d2)), supportColor);
+                    const QSharedPointer<VPointF> d2 = GetData()->GeometricObject<VPointF>(m_dartP2Id);
+                    DrawPoint(m_dartP2, static_cast<QPointF>(*d2));
+                    DrawLine(m_p1d2, QLineF(static_cast<QPointF>(*d1), static_cast<QPointF>(*d2)));
 
-                    if (dartP3Id <= NULL_ID)
+                    if (m_dartP3Id <= NULL_ID)
                     {
-                        DrawLine(d2p2, QLineF(static_cast<QPointF>(*d2), Visualization::scenePos), supportColor);
+                        DrawLine(m_d2p2, QLineF(static_cast<QPointF>(*d2), ScenePos()));
                     }
                     else
                     {
-                        const QSharedPointer<VPointF> d3 = Visualization::data->GeometricObject<VPointF>(dartP3Id);
-                        DrawPoint(dartP3, static_cast<QPointF>(*d3), supportColor);
-                        DrawLine(d2p2, QLineF(static_cast<QPointF>(*d2), static_cast<QPointF>(*d3)), supportColor);
+                        const QSharedPointer<VPointF> d3 = GetData()->GeometricObject<VPointF>(m_dartP3Id);
+                        DrawPoint(m_dartP3, static_cast<QPointF>(*d3));
+                        DrawLine(m_d2p2, QLineF(static_cast<QPointF>(*d2), static_cast<QPointF>(*d3)));
 
                         QPointF p1;
                         QPointF p2;
@@ -126,13 +110,13 @@ void VisToolTrueDarts::RefreshGeometry()
                                                   static_cast<QPointF>(*d1), static_cast<QPointF>(*d2),
                                                   static_cast<QPointF>(*d3), p1, p2);
 
-                        DrawLine(lineblP1P1, QLineF(static_cast<QPointF>(*blP1), p1), supportColor);
-                        DrawLine(lineblP2P2, QLineF(static_cast<QPointF>(*blP2), p2), supportColor);
-                        DrawLine(p1d2, QLineF(p1, static_cast<QPointF>(*d2)), supportColor);
-                        DrawLine(d2p2, QLineF(static_cast<QPointF>(*d2), p2), supportColor);
+                        DrawLine(m_lineblP1P1, QLineF(static_cast<QPointF>(*blP1), p1));
+                        DrawLine(m_lineblP2P2, QLineF(static_cast<QPointF>(*blP2), p2));
+                        DrawLine(m_p1d2, QLineF(p1, static_cast<QPointF>(*d2)));
+                        DrawLine(m_d2p2, QLineF(static_cast<QPointF>(*d2), p2));
 
-                        DrawPoint(point1, p1, mainColor);
-                        DrawPoint(point2, p2, mainColor);
+                        DrawPoint(m_point1, p1);
+                        DrawPoint(m_point2, p2);
                     }
                 }
             }
@@ -141,25 +125,8 @@ void VisToolTrueDarts::RefreshGeometry()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolTrueDarts::setObject2Id(const quint32 &value)
+void VisToolTrueDarts::VisualMode(quint32 id)
 {
-    baseLineP2Id = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolTrueDarts::setD1PointId(const quint32 &value)
-{
-    dartP1Id = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolTrueDarts::setD2PointId(const quint32 &value)
-{
-    dartP2Id = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolTrueDarts::setD3PointId(const quint32 &value)
-{
-    dartP3Id = value;
+    m_baseLineP1Id = id;
+    StartVisualMode();
 }

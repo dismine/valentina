@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef DIALOGCUBICBEZIERPATH_H
 #define DIALOGCUBICBEZIERPATH_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QSet>
@@ -43,31 +42,49 @@
 
 namespace Ui
 {
-    class DialogCubicBezierPath;
+class DialogCubicBezierPath;
 }
 
-class DialogCubicBezierPath : public DialogTool
+class DialogCubicBezierPath final : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
-    explicit DialogCubicBezierPath(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual ~DialogCubicBezierPath();
+    explicit DialogCubicBezierPath(const VContainer *data, VAbstractPattern *doc, quint32 toolId,
+                                   QWidget *parent = nullptr);
+    ~DialogCubicBezierPath() override;
 
-    VCubicBezierPath GetPath() const;
-    void             SetPath(const VCubicBezierPath &value);
+    auto GetPath() const -> VCubicBezierPath;
+    void SetPath(const VCubicBezierPath &value);
+
+    void SetNotes(const QString &notes);
+    auto GetNotes() const -> QString;
+
 public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type) override;
-    virtual void ShowDialog(bool click) override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
+    void ShowDialog(bool click) override;
+
 protected:
-    virtual void ShowVisualization() override;
-    virtual void SaveData() override;
+    void ShowVisualization() override;
+    void SaveData() override;
+    auto IsValid() const -> bool override;
+
 private slots:
     void PointChanged(int row);
     void currentPointChanged(int index);
+    void ValidateAlias();
+    void NewPointChanged();
+
+    void AddPoint();
+    void RemovePoint();
+
+    void MoveTop();
+    void MoveUp();
+    void MoveDown();
+    void MoveBottom();
 
 private:
-    Q_DISABLE_COPY(DialogCubicBezierPath)
+    Q_DISABLE_COPY_MOVE(DialogCubicBezierPath) // NOLINT
     Ui::DialogCubicBezierPath *ui;
 
     /** @brief path cubic bezier path */
@@ -75,12 +92,25 @@ private:
 
     qint32 newDuplicate;
 
-    void             NewItem(const VPointF &point);
-    void             DataPoint(const VPointF &p);
-    void             SavePath();
-    QSet<quint32>    AllPathBackboneIds() const;
-    bool             IsPathValid() const;
-    VCubicBezierPath ExtractPath() const;
+    bool flagError;
+    bool flagAlias{true};
+
+    QString originAliasSuffix{};
+
+    void NewItem(const VPointF &point);
+    void DataPoint(const VPointF &p);
+    void SavePath();
+    auto AllPathBackboneIds() const -> QSet<quint32>;
+    auto IsPathValid() const -> bool;
+    auto ExtractPath() const -> VCubicBezierPath;
+    void ValidatePath();
+    void MoveControls();
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto DialogCubicBezierPath::IsValid() const -> bool
+{
+    return flagError && flagAlias;
+}
 
 #endif // DIALOGCUBICBEZIERPATH_H

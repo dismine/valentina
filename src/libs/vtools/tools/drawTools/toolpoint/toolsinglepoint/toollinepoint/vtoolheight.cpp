@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,24 +29,27 @@
 #include "vtoolheight.h"
 
 #include <QSharedPointer>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <new>
 
 #include "../../../../../dialogs/tools/dialogheight.h"
 #include "../../../../../dialogs/tools/dialogtool.h"
-#include "../../../../../visualization/visualization.h"
 #include "../../../../../visualization/line/vistoolheight.h"
+#include "../../../../../visualization/visualization.h"
+#include "../../../../vabstracttool.h"
+#include "../../../vdrawtool.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "../../../../vabstracttool.h"
-#include "../../../vdrawtool.h"
 #include "vtoollinepoint.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
 
 template <class T> class QSharedPointer;
 
@@ -58,11 +61,11 @@ const QString VToolHeight::ToolType = QStringLiteral("height");
  * @param initData init data.
  * @param parent parent object.
  */
-VToolHeight::VToolHeight(const VToolHeightInitData &initData, QGraphicsItem * parent)
-    :VToolLinePoint(initData.doc, initData.data, initData.id, initData.typeLine, initData.lineColor, QString(),
-                    initData.basePointId, 0, parent),
-      p1LineId(initData.p1LineId),
-      p2LineId(initData.p2LineId)
+VToolHeight::VToolHeight(const VToolHeightInitData &initData, QGraphicsItem *parent)
+  : VToolLinePoint(initData.doc, initData.data, initData.id, initData.typeLine, initData.lineColor, QString(),
+                   initData.basePointId, 0, initData.notes, parent),
+    p1LineId(initData.p1LineId),
+    p2LineId(initData.p2LineId)
 {
     ToolCreation(initData.typeCreation);
 }
@@ -71,7 +74,7 @@ VToolHeight::VToolHeight(const VToolHeightInitData &initData, QGraphicsItem * pa
 /**
  * @brief setDialog set dialog when user want change tool option.
  */
-void VToolHeight::setDialog()
+void VToolHeight::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogHeight> dialogTool = qobject_cast<DialogHeight *>(m_dialog);
@@ -83,6 +86,7 @@ void VToolHeight::setDialog()
     dialogTool->SetP1LineId(p1LineId);
     dialogTool->SetP2LineId(p2LineId);
     dialogTool->SetPointName(p->name());
+    dialogTool->SetNotes(m_notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -94,8 +98,8 @@ void VToolHeight::setDialog()
  * @param data container with variables.
  * @return the created tool
  */
-VToolHeight* VToolHeight::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                 VContainer *data)
+auto VToolHeight::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                         VContainer *data) -> VToolHeight *
 {
     SCASSERT(not dialog.isNull())
     const QPointer<DialogHeight> dialogTool = qobject_cast<DialogHeight *>(dialog);
@@ -107,12 +111,13 @@ VToolHeight* VToolHeight::Create(const QPointer<DialogTool> &dialog, VMainGraphi
     initData.p2LineId = dialogTool->GetP2LineId();
     initData.typeLine = dialogTool->GetTypeLine();
     initData.lineColor = dialogTool->GetLineColor();
-    initData.name = dialogTool->getPointName();
+    initData.name = dialogTool->GetPointName();
     initData.scene = scene;
     initData.doc = doc;
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
     VToolHeight *point = Create(initData);
     if (point != nullptr)
@@ -127,16 +132,16 @@ VToolHeight* VToolHeight::Create(const QPointer<DialogTool> &dialog, VMainGraphi
  * @brief Create help create tool
  * @param initData init data.
  */
-VToolHeight* VToolHeight::Create(VToolHeightInitData initData)
+auto VToolHeight::Create(VToolHeightInitData initData) -> VToolHeight *
 {
     const QSharedPointer<VPointF> basePoint = initData.data->GeometricObject<VPointF>(initData.basePointId);
     const QSharedPointer<VPointF> p1Line = initData.data->GeometricObject<VPointF>(initData.p1LineId);
     const QSharedPointer<VPointF> p2Line = initData.data->GeometricObject<VPointF>(initData.p2LineId);
 
-    QPointF pHeight = FindPoint(QLineF(static_cast<QPointF>(*p1Line), static_cast<QPointF>(*p2Line)),
-                                static_cast<QPointF>(*basePoint));
+    QPointF const pHeight = FindPoint(QLineF(static_cast<QPointF>(*p1Line), static_cast<QPointF>(*p2Line)),
+                                      static_cast<QPointF>(*basePoint));
 
-    VPointF *p = new VPointF(pHeight, initData.name, initData.mx, initData.my);
+    auto *p = new VPointF(pHeight, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
 
     if (initData.typeCreation == Source::FromGui)
@@ -161,7 +166,7 @@ VToolHeight* VToolHeight::Create(VToolHeightInitData initData)
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::Height, initData.doc);
-        VToolHeight *point = new VToolHeight(initData);
+        auto *point = new VToolHeight(initData);
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
@@ -180,19 +185,19 @@ VToolHeight* VToolHeight::Create(VToolHeightInitData initData)
  * @param point base point.
  * @return point onto line.
  */
-QPointF VToolHeight::FindPoint(const QLineF &line, const QPointF &point)
+auto VToolHeight::FindPoint(const QLineF &line, const QPointF &point) -> QPointF
 {
     return VGObject::ClosestPoint(line, point);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolHeight::FirstLinePointName() const
+auto VToolHeight::FirstLinePointName() const -> QString
 {
     return VAbstractTool::data.GetGObject(p1LineId)->name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolHeight::SecondLinePointName() const
+auto VToolHeight::SecondLinePointName() const -> QString
 {
     return VAbstractTool::data.GetGObject(p2LineId)->name();
 }
@@ -201,8 +206,7 @@ QString VToolHeight::SecondLinePointName() const
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolHeight::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                             QList<quint32> &newDependencies)
+void VToolHeight::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogHeight> dialogTool = qobject_cast<DialogHeight *>(m_dialog);
@@ -215,12 +219,16 @@ void VToolHeight::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepende
     AddDependence(newDependencies, dialogTool->GetP1LineId());
     AddDependence(newDependencies, dialogTool->GetP2LineId());
 
-    doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
+    doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
     doc->SetAttribute(domElement, AttrBasePoint, QString().setNum(dialogTool->GetBasePointId()));
     doc->SetAttribute(domElement, AttrP1Line, QString().setNum(dialogTool->GetP1LineId()));
     doc->SetAttribute(domElement, AttrP2Line, QString().setNum(dialogTool->GetP2LineId()));
+
+    const QString notes = dialogTool->GetNotes();
+    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, notes,
+                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -237,11 +245,13 @@ void VToolHeight::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolHeight::ReadToolAttributes(const QDomElement &domElement)
 {
-    m_lineType = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
-    lineColor = doc->GetParametrString(domElement, AttrLineColor, ColorBlack);
-    basePointId = doc->GetParametrUInt(domElement, AttrBasePoint, NULL_ID_STR);
-    p1LineId = doc->GetParametrUInt(domElement, AttrP1Line, NULL_ID_STR);
-    p2LineId = doc->GetParametrUInt(domElement, AttrP2Line, NULL_ID_STR);
+    VToolLinePoint::ReadToolAttributes(domElement);
+
+    m_lineType = VDomDocument::GetParametrString(domElement, AttrTypeLine, TypeLineLine);
+    lineColor = VDomDocument::GetParametrString(domElement, AttrLineColor, ColorBlack);
+    basePointId = VAbstractPattern::GetParametrUInt(domElement, AttrBasePoint, NULL_ID_STR);
+    p1LineId = VAbstractPattern::GetParametrUInt(domElement, AttrP1Line, NULL_ID_STR);
+    p2LineId = VAbstractPattern::GetParametrUInt(domElement, AttrP2Line, NULL_ID_STR);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -249,19 +259,20 @@ void VToolHeight::SetVisualization()
 {
     if (not vis.isNull())
     {
-        VisToolHeight *visual = qobject_cast<VisToolHeight *>(vis);
+        auto *visual = qobject_cast<VisToolHeight *>(vis);
         SCASSERT(visual != nullptr)
 
-        visual->setObject1Id(basePointId);
-        visual->setLineP1Id(p1LineId);
-        visual->setLineP2Id(p2LineId);
-        visual->setLineStyle(LineStyleToPenStyle(m_lineType));
+        visual->SetBasePointId(basePointId);
+        visual->SetLineP1Id(p1LineId);
+        visual->SetLineP2Id(p2LineId);
+        visual->SetLineStyle(LineStyleToPenStyle(m_lineType));
+        visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolHeight::MakeToolTip() const
+auto VToolHeight::MakeToolTip() const -> QString
 {
     const QSharedPointer<VPointF> basePoint = VAbstractTool::data.GeometricObject<VPointF>(basePointId);
     const QSharedPointer<VPointF> p1Line = VAbstractTool::data.GeometricObject<VPointF>(p1LineId);
@@ -272,22 +283,21 @@ QString VToolHeight::MakeToolTip() const
     const QLineF p1ToCur(static_cast<QPointF>(*p1Line), static_cast<QPointF>(*current));
     const QLineF p2ToCur(static_cast<QPointF>(*p2Line), static_cast<QPointF>(*current));
 
-    const QString toolTip = QString("<table>"
-                                    "<tr> <td><b>%10:</b> %11</td> </tr>"
-                                    "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
-                                    "<tr> <td><b>%4:</b> %5°</td> </tr>"
-                                    "<tr> <td><b>%6:</b> %7 %3</td> </tr>"
-                                    "<tr> <td><b>%8:</b> %9 %3</td> </tr>"
-                                    "</table>")
-            .arg(tr("Length"))
-            .arg(qApp->fromPixel(curLine.length()))
-            .arg(UnitsToStr(qApp->patternUnit(), true), tr("Angle"))
-            .arg(curLine.angle())
-            .arg(QString("%1->%2").arg(p1Line->name(), current->name()))
-            .arg(qApp->fromPixel(p1ToCur.length()))
-            .arg(QString("%1->%2").arg(p2Line->name(), current->name()))
-            .arg(qApp->fromPixel(p2ToCur.length()))
-            .arg(tr("Label"), current->name());
+    const QString toolTip = u"<table>"
+                            u"<tr> <td><b>%10:</b> %11</td> </tr>"
+                            u"<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                            u"<tr> <td><b>%4:</b> %5°</td> </tr>"
+                            u"<tr> <td><b>%6:</b> %7 %3</td> </tr>"
+                            u"<tr> <td><b>%8:</b> %9 %3</td> </tr>"
+                            u"</table>"_s.arg(tr("Length"))
+                                .arg(VAbstractValApplication::VApp()->fromPixel(curLine.length()))
+                                .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), tr("Angle"))
+                                .arg(curLine.angle())
+                                .arg(u"%1->%2"_s.arg(p1Line->name(), current->name()))
+                                .arg(VAbstractValApplication::VApp()->fromPixel(p1ToCur.length()))
+                                .arg(u"%1->%2"_s.arg(p2Line->name(), current->name()))
+                                .arg(VAbstractValApplication::VApp()->fromPixel(p2ToCur.length()))
+                                .arg(tr("Label"), current->name());
     return toolTip;
 }
 
@@ -304,9 +314,9 @@ void VToolHeight::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32
     {
         ContextMenu<DialogHeight>(event, id);
     }
-    catch(const VExceptionToolWasDeleted &e)
+    catch (const VExceptionToolWasDeleted &e)
     {
         Q_UNUSED(e)
-        return;//Leave this method immediately!!!
+        return; // Leave this method immediately!!!
     }
 }

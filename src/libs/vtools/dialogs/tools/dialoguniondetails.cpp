@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -31,7 +31,6 @@
 #include <QCheckBox>
 #include <QVector>
 
-#include "../ifc/ifcdef.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vpiece.h"
 #include "../vpatterndb/vpiecenode.h"
@@ -44,9 +43,17 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogUnionDetails::DialogUnionDetails(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogUnionDetails), indexD1(0), indexD2(0), d1(NULL_ID), d2(NULL_ID),
-      numberD(0), numberP(0), p1(NULL_ID), p2(NULL_ID)
+DialogUnionDetails::DialogUnionDetails(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
+    ui(new Ui::DialogUnionDetails),
+    indexD1(0),
+    indexD2(0),
+    d1(NULL_ID),
+    d2(NULL_ID),
+    numberD(0),
+    numberP(0),
+    p1(NULL_ID),
+    p2(NULL_ID)
 {
     ui->setupUi(this);
     InitOkCancel(ui);
@@ -59,7 +66,7 @@ DialogUnionDetails::~DialogUnionDetails()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogUnionDetails::RetainPieces() const
+auto DialogUnionDetails::RetainPieces() const -> bool
 {
     return ui->checkBox->isChecked();
 }
@@ -78,6 +85,11 @@ void DialogUnionDetails::ChosenObject(quint32 id, const SceneObject &type)
     }
     else
     {
+        if (d1 == id)
+        {
+            emit ToolTip(tr("Select unique detail"));
+            return;
+        }
         ChoosedDetail(id, type, d2, indexD2);
     }
 }
@@ -89,7 +101,7 @@ void DialogUnionDetails::ChosenObject(quint32 id, const SceneObject &type)
  * @param idDetail detail id
  * @return true if contain
  */
-bool DialogUnionDetails::CheckObject(const quint32 &id, const quint32 &idDetail) const
+auto DialogUnionDetails::CheckObject(const quint32 &id, const quint32 &idDetail) const -> bool
 {
     if (idDetail == NULL_ID)
     {
@@ -100,21 +112,15 @@ bool DialogUnionDetails::CheckObject(const quint32 &id, const quint32 &idDetail)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogUnionDetails::CheckDetail(const quint32 &idDetail) const
+auto DialogUnionDetails::CheckDetail(const quint32 &idDetail) const -> bool
 {
     if (idDetail == NULL_ID)
     {
         return false;
     }
+
     const VPiece det = data->GetPiece(idDetail);
-    if (det.GetPath().CountNodes() >= 3 && det.GetPath().ListNodePoint().size() >= 2)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return det.GetPath().CountNodes() >= 3 && det.GetPath().ListNodePoint().size() >= 2;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -125,30 +131,26 @@ bool DialogUnionDetails::CheckDetail(const quint32 &idDetail) const
  * @param idDetail id detail
  * @param index index of edge
  */
-void DialogUnionDetails::ChoosedDetail(const quint32 &id, const SceneObject &type, quint32 &idDetail,
-                                       int &index)
+void DialogUnionDetails::ChoosedDetail(const quint32 &id, const SceneObject &type, quint32 &idDetail, vsizetype &index)
 {
-    if (idDetail == NULL_ID)
+    if (idDetail == NULL_ID && type == SceneObject::Detail)
     {
-        if (type == SceneObject::Detail)
+        if (CheckDetail(id))
         {
-            if (CheckDetail(id))
-            {
-                idDetail = id;
-                emit ToolTip(tr("Select a first point"));
-                return;
-            }
-            else
-            {
-                emit ToolTip(tr("Workpiece should have at least two points and three objects"));
-                return;
-            }
+            idDetail = id;
+            emit ToolTip(tr("Select a first point"));
+            return;
         }
+
+        emit ToolTip(tr("Workpiece should have at least two points and three objects"));
+        return;
     }
-    if (CheckObject(id, idDetail) == false)
+
+    if (not CheckObject(id, idDetail))
     {
         return;
     }
+
     if (type == SceneObject::Point)
     {
         if (numberP == 0)
@@ -158,6 +160,7 @@ void DialogUnionDetails::ChoosedDetail(const quint32 &id, const SceneObject &typ
             emit ToolTip(tr("Select a second point"));
             return;
         }
+
         if (numberP == 1)
         {
             if (id == p1)
@@ -165,6 +168,7 @@ void DialogUnionDetails::ChoosedDetail(const quint32 &id, const SceneObject &typ
                 emit ToolTip(tr("Select a unique point"));
                 return;
             }
+
             VPiece d = data->GetPiece(idDetail);
             if (d.GetPath().OnEdge(p1, id))
             {

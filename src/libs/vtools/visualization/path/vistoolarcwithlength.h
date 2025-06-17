@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef VISTOOLARCWITHLENGTH_H
 #define VISTOOLARCWITHLENGTH_H
 
-#include <qcompilerdetection.h>
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>
@@ -39,25 +38,44 @@
 #include "../vmisc/def.h"
 #include "vispath.h"
 
-class VisToolArcWithLength : public VisPath
+class VisToolArcWithLength final : public VisPath
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     explicit VisToolArcWithLength(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolArcWithLength() Q_DECL_EQ_DEFAULT;
+    ~VisToolArcWithLength() override = default;
 
-    virtual void RefreshGeometry() override;
-    void         setRadius(const QString &expression);
-    void         setF1(const QString &expression);
-    void         setLength(const QString &expression);
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolArcWithLength)};
+    void RefreshGeometry() override;
+    void VisualMode(quint32 id) override;
+
+    void SetCenterId(quint32 newCenterId);
+    void SetRadius(const QString &expression);
+    void SetF1(const QString &expression);
+    void SetLength(const QString &expression);
+
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Vis::ToolArcWithLength)
+    };
+
+    static auto CorrectAngle(qreal angle) -> qreal;
+
 private:
-    Q_DISABLE_COPY(VisToolArcWithLength)
-    VScaledEllipse *arcCenter;
-    qreal           radius;
-    qreal           f1;
-    qreal           length;
+    Q_DISABLE_COPY_MOVE(VisToolArcWithLength) // NOLINT
+    VScaledEllipse *m_arcCenter{nullptr};
+    VScaledEllipse *m_f1Point{nullptr};
+    qreal m_radius{0};
+    qreal m_f1{-1};
+    qreal m_length{0};
+    quint32 m_centerId{NULL_ID};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolArcWithLength::SetCenterId(quint32 newCenterId)
+{
+    m_centerId = newCenterId;
+}
 
 #endif // VISTOOLARCWITHLENGTH_H

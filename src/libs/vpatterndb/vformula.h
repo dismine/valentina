@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -31,57 +31,73 @@
 
 #include <QCoreApplication>
 #include <QMetaType>
+#include <QSharedDataPointer>
 #include <QString>
+#include <QTypeInfo>
 #include <QtGlobal>
 
-enum class FormulaType : char{ToUser, FromUser};
+enum class FormulaType : qint8
+{
+    ToUser = 0,
+    FromUser = 1,
+    ToSystem = FromUser,
+    FromSystem = ToUser
+};
 
 class VContainer;
+class VFormulaData;
 
 class VFormula
 {
-    Q_DECLARE_TR_FUNCTIONS(VFormula)
+    Q_DECLARE_TR_FUNCTIONS(VFormula) // NOLINT
+
 public:
     VFormula();
     VFormula(const QString &formula, const VContainer *container);
-    VFormula &operator=(const VFormula &formula);
+    auto operator=(const VFormula &formula) -> VFormula &;
     VFormula(const VFormula &formula);
-    bool operator==(const VFormula &formula) const;
-    bool operator!=(const VFormula &formula) const;
+    ~VFormula();
 
-    QString GetFormula(FormulaType type = FormulaType::ToUser) const;
-    void SetFormula(const QString &value, FormulaType type = FormulaType::ToUser);
+    auto operator==(const VFormula &formula) const -> bool;
 
-    QString getStringValue() const;
-    qreal   getDoubleValue() const;
+#if __cplusplus < 202002L
+    auto operator!=(const VFormula &formula) const -> bool;
+#endif
 
-    bool getCheckZero() const;
+    auto GetFormula(FormulaType type = FormulaType::ToUser) const -> QString;
+    void SetFormula(const QString &value, FormulaType type = FormulaType::FromSystem);
+
+    auto getStringValue() const -> QString;
+    auto getDoubleValue() const -> qreal;
+
+    auto getCheckZero() const -> bool;
     void setCheckZero(bool value);
 
-    const VContainer *getData() const;
+    auto getCheckLessThanZero() const -> bool;
+    void setCheckLessThanZero(bool value);
+
+    auto getData() const -> const VContainer *;
     void setData(const VContainer *value);
 
-    quint32 getToolId() const;
-    void setToolId(const quint32 &value);
+    auto getToolId() const -> quint32;
+    void setToolId(quint32 value);
 
-    QString getPostfix() const;
+    auto getPostfix() const -> QString;
     void setPostfix(const QString &value);
 
-    bool error() const;
+    auto error() const -> bool;
+    auto Reason() const -> QString;
 
-    static int FormulaTypeId();
+    static auto FormulaTypeId() -> int;
 
     void Eval();
+
 private:
-    QString formula;
-    QString value;
-    bool checkZero;
-    const VContainer *data;
-    quint32 toolId;
-    QString postfix;
-    bool _error;
-    qreal dValue;
+    QSharedDataPointer<VFormulaData> d;
+
+    void ResetState();
 };
-Q_DECLARE_METATYPE(VFormula)
+Q_DECLARE_METATYPE(VFormula)                  // NOLINT
+Q_DECLARE_TYPEINFO(VFormula, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VFORMULA_H

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -36,44 +36,64 @@
 #include "../vgeometry/vspline.h"
 #include "vcurvevariable.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 VCurveLength::VCurveLength()
-    :VCurveVariable()
+  : VCurveVariable()
 {
     SetType(VarType::CurveLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VCurveLength::VCurveLength(const quint32 &id, const quint32 &parentId, const VAbstractCurve *curve, Unit patternUnit)
-    :VCurveVariable(id, parentId)
+  : VCurveVariable(id, parentId)
 {
     SetType(VarType::CurveLength);
+    // cppcheck-suppress unknownMacro
     SCASSERT(curve != nullptr)
     SetName(curve->name());
-    SetValue(FromPixel(curve->GetLength(), patternUnit));
+
+    if (not curve->GetAlias().isEmpty())
+    {
+        SetAlias(curve->GetAlias());
+    }
+
+    StoreValue(FromPixel(curve->GetLength(), patternUnit));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VCurveLength::VCurveLength(const quint32 &id, const quint32 &parentId, const QString &baseCurveName, const VSpline &spl,
-                           Unit patternUnit, qint32 segment)
-    :VCurveVariable(id, parentId)
+VCurveLength::VCurveLength(const quint32 &id, const quint32 &parentId, const VAbstractCurve *baseCurve,
+                           const VSpline &spl, Unit patternUnit, qint32 segment)
+  : VCurveVariable(id, parentId)
 {
-    SCASSERT(not baseCurveName.isEmpty())
+    SCASSERT(baseCurve != nullptr)
 
     SetType(VarType::CurveLength);
-    SetName(baseCurveName + QLatin1String("_") + seg_ + QString().setNum(segment));
-    SetValue(FromPixel(spl.GetLength(), patternUnit));
+    SetName(baseCurve->name() + '_'_L1 + seg_ + QString().setNum(segment));
+
+    if (not baseCurve->GetAlias().isEmpty())
+    {
+        SetAlias(baseCurve->GetAlias() + '_'_L1 + seg_ + QString().setNum(segment));
+    }
+
+    StoreValue(FromPixel(spl.GetLength(), patternUnit));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VCurveLength::VCurveLength(const VCurveLength &var)
-    :VCurveVariable(var)
-{}
+  : VCurveVariable(var)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-VCurveLength &VCurveLength::operator=(const VCurveLength &var)
+auto VCurveLength::operator=(const VCurveLength &var) -> VCurveLength &
 {
-    if ( &var == this )
+    if (&var == this)
     {
         return *this;
     }
@@ -83,4 +103,5 @@ VCurveLength &VCurveLength::operator=(const VCurveLength &var)
 
 //---------------------------------------------------------------------------------------------------------------------
 VCurveLength::~VCurveLength()
-{}
+{
+}

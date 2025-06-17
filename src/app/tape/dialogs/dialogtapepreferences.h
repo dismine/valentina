@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@
 
 namespace Ui
 {
-    class DialogTapePreferences;
+class DialogTapePreferences;
 }
 
 class TapePreferencesConfigurationPage;
@@ -42,27 +42,30 @@ class QListWidgetItem;
 
 class DialogTapePreferences : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit DialogTapePreferences(QWidget *parent = nullptr);
-    virtual ~DialogTapePreferences();
+    ~DialogTapePreferences() override;
 signals:
     void UpdateProperties();
+
 protected:
-    virtual void showEvent(QShowEvent *event) override;
-    virtual void resizeEvent(QResizeEvent *event) override;
-    virtual void changeEvent(QEvent* event) override;
+    void showEvent(QShowEvent *event) override;
+    void resizeEvent(QResizeEvent *event) override;
+    void changeEvent(QEvent *event) override;
 private slots:
     void Apply();
     void Ok();
     void PageChanged(QListWidgetItem *current, QListWidgetItem *previous);
+
 private:
-    Q_DISABLE_COPY(DialogTapePreferences)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DialogTapePreferences) // NOLINT
     Ui::DialogTapePreferences *ui;
-    bool m_isInitialized;
+    bool m_isInitialized{false};
     TapePreferencesConfigurationPage *m_configurationPage;
-    TapePreferencesPathPage          *m_pathPage;
+    TapePreferencesPathPage *m_pathPage;
 };
 
 #endif // DIALOGTAPEPREFERENCES_H

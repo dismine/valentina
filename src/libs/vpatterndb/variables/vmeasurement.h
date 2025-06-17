@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,90 +29,115 @@
 #ifndef VMULTISIZETABLEROW_H
 #define VMULTISIZETABLEROW_H
 
-#include <qcompilerdetection.h>
 #include <QMap>
 #include <QSharedDataPointer>
 #include <QString>
 #include <QStringList>
 #include <QTypeInfo>
+#include <QUuid>
 #include <QtGlobal>
 
 #include "../vmisc/def.h"
-#include "../ifc/ifcdef.h"
 #include "vvariable.h"
 
 class VContainer;
 class VMeasurementData;
+class VPatternImage;
 
 /**
  * @brief The VMeasurement class keep data row of multisize table
  */
-class VMeasurement :public VVariable
+class VMeasurement final : public VVariable
 {
 public:
-    VMeasurement(quint32 index, const QString &name, qreal baseSize, qreal baseHeight, const qreal &base,
-                 const qreal &ksize, const qreal &kheight, const QString &gui_text = QString(),
-                 const QString &description = QString(), const QString &tagName = QString());
+    VMeasurement(quint32 index, const QString &name);
+    VMeasurement(quint32 index, const QString &name, qreal baseA, qreal baseB, qreal baseC, qreal base);
     VMeasurement(VContainer *data, quint32 index, const QString &name, const qreal &base, const QString &formula,
-                 bool ok, const QString &gui_text = QString(), const QString &description = QString(),
-                 const QString &tagName = QString());
+                 bool ok);
     VMeasurement(const VMeasurement &m);
 
-    virtual ~VMeasurement() override;
+    ~VMeasurement() override;
 
-    VMeasurement &operator=(const VMeasurement &m);
-#ifdef Q_COMPILER_RVALUE_REFS
-    VMeasurement &operator=(VMeasurement &&m) Q_DECL_NOTHROW { Swap(m); return *this; }
-#endif
+    auto operator=(const VMeasurement &m) -> VMeasurement &;
 
-    inline void Swap(VMeasurement &m) Q_DECL_NOTHROW
-    { VVariable::Swap(m); std::swap(d, m.d); }
+    VMeasurement(VMeasurement &&m) noexcept;
+    auto operator=(VMeasurement &&m) noexcept -> VMeasurement &;
 
-    QString GetGuiText() const;
+    auto GetKnownMeasurementsId() const -> QUuid;
+    void SetKnownMeasurementsId(const QUuid &id);
 
-    QString TagName() const;
-    void    setTagName(const QString &tagName);
+    auto GetGuiText() const -> QString;
+    void SetGuiText(const QString &guiText);
 
-    QString GetFormula() const;
+    auto GetFormula() const -> QString;
 
-    bool    IsCustom() const;
+    auto IsCustom() const -> bool;
 
-    int     Index() const;
-    bool    IsFormulaOk() const;
+    auto Index() const -> int;
+    auto IsFormulaOk() const -> bool;
 
-    virtual bool IsNotUsed() const override;
+    auto GetMeasurementType() const -> MeasurementType;
 
-    virtual qreal  GetValue() const override;
-    virtual qreal* GetValue() override;
+    auto IsNotUsed() const -> bool override;
 
-    VContainer *GetData();
+    auto GetValue() const -> qreal override;
+    auto GetValue() -> qreal * override;
 
-    void SetSize(qreal size);
-    void SetHeight(qreal height);
+    auto GetData() -> VContainer *;
 
-    void SetUnit(const Unit *unit);
+    void SetBaseA(qreal base);
+    void SetBaseB(qreal base);
+    void SetBaseC(qreal base);
 
-    qreal   GetBase() const;
-    void    SetBase(const qreal &value);
+    auto GetBase() const -> qreal;
+    void SetBase(qreal value);
 
-    qreal   GetKsize() const;
-    void    SetKsize(const qreal &value);
+    auto GetShiftA() const -> qreal;
+    void SetShiftA(qreal value);
 
-    qreal   GetKheight() const;
-    void    SetKheight(const qreal &value);
+    auto GetShiftB() const -> qreal;
+    void SetShiftB(qreal value);
 
-    static QStringList ListHeights(const QMap<GHeights, bool> &heights, Unit patternUnit);
-    static QStringList ListSizes(const QMap<GSizes, bool> &sizes, Unit patternUnit);
-    static QStringList WholeListHeights(Unit patternUnit);
-    static QStringList WholeListSizes(Unit patternUnit);
-    static bool IsGradationSizeValid(const QString &size);
-    static bool IsGradationHeightValid(const QString &height);
+    auto GetShiftC() const -> qreal;
+    void SetShiftC(qreal value);
+
+    auto GetStepA() const -> qreal;
+    void SetStepA(qreal value);
+
+    auto GetStepB() const -> qreal;
+    void SetStepB(qreal value);
+
+    auto GetStepC() const -> qreal;
+    void SetStepC(qreal value);
+
+    auto IsSpecialUnits() const -> bool;
+    void SetSpecialUnits(bool special);
+
+    auto GetDimension() const -> IMD;
+    void SetDimension(IMD type);
+
+    auto GetCorrection(qreal baseA, qreal baseB, qreal baseC) const -> qreal;
+
+    auto GetCorrections() const -> QMap<QString, VMeasurementCorrection>;
+    void SetCorrections(const QMap<QString, VMeasurementCorrection> &corrections);
+
+    auto GetImage() const -> VPatternImage;
+    void SetImage(const VPatternImage &image);
+
+    auto GetValueAlias(qreal baseA, qreal baseB, qreal baseC) const -> QString;
+
+    auto GetValueAlias() const -> QString;
+    void SetValueAlias(const QString &alias);
+
+    static auto CorrectionHash(qreal baseA, qreal baseB = 0, qreal baseC = 0) -> QString;
+
 private:
     QSharedDataPointer<VMeasurementData> d;
 
-    qreal CalcValue() const;
+    auto CalcValue() const -> qreal;
+    auto Correction() const -> qreal;
 };
 
-Q_DECLARE_TYPEINFO(VMeasurement, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VMeasurement, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VMULTISIZETABLEROW_H

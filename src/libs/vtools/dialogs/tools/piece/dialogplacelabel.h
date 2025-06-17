@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -32,62 +32,61 @@
 
 namespace Ui
 {
-    class DialogPlaceLabel;
+class DialogPlaceLabel;
 }
 
 class VPlaceLabelItem;
 
-class DialogPlaceLabel : public DialogTool
+class DialogPlaceLabel final : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
-    explicit DialogPlaceLabel(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    virtual ~DialogPlaceLabel();
+    explicit DialogPlaceLabel(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
+    ~DialogPlaceLabel() override;
 
     void EnbleShowMode(bool disable);
 
-    quint32 GetCenterPoint() const;
-    void    SetCenterPoint(quint32 id);
+    auto GetCenterPoint() const -> quint32;
+    void SetCenterPoint(quint32 id);
 
-    PlaceLabelType GetLabelType() const;
-    void           SetLabelType(PlaceLabelType type);
+    auto GetLabelType() const -> PlaceLabelType;
+    void SetLabelType(PlaceLabelType type);
 
-    QString GetWidth() const;
-    void    SetWidth(const QString &value);
+    auto GetWidth() const -> QString;
+    void SetWidth(const QString &value);
 
-    QString GetHeight() const;
-    void    SetHeight(const QString &value);
+    auto GetHeight() const -> QString;
+    void SetHeight(const QString &value);
 
-    QString GetAngle() const;
-    void    SetAngle(const QString &value);
+    auto GetAngle() const -> QString;
+    void SetAngle(const QString &value);
 
-    quint32 GetPieceId() const;
-    void    SetPieceId(quint32 id);
+    auto GetPieceId() const -> quint32;
+    void SetPieceId(quint32 id);
 
-    QString GetFormulaVisible() const;
-    void    SetFormulaVisible(const QString &formula);
+    auto GetFormulaVisible() const -> QString;
+    void SetFormulaVisible(const QString &formula);
 
-    virtual void SetPiecesList(const QVector<quint32> &list) override;
+    auto IsNotMirrored() const -> bool;
+    void SetNotMirrored(bool value);
+
+    void SetPiecesList(const QVector<quint32> &list) override;
 
 public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type) override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
 
 protected:
-    virtual void CheckState() final;
-    virtual void ShowVisualization() override;
-    virtual void closeEvent(QCloseEvent *event) override;
+    void ShowVisualization() override;
+    void closeEvent(QCloseEvent *event) override;
+    void changeEvent(QEvent *event) override;
+    auto IsValid() const -> bool override;
 
 private slots:
     void DeployFormulaWidthEdit();
     void DeployFormulaHeightEdit();
     void DeployFormulaAngleEdit();
     void DeployVisibleFormulaTextEdit();
-
-    void FormulaWidthChanged();
-    void FormulaHeightChanged();
-    void FormulaAngleChanged();
-    void VisibleChanged();
 
     void EvalWidth();
     void EvalHeight();
@@ -100,14 +99,9 @@ private slots:
     void FXVisible();
 
 private:
-    Q_DISABLE_COPY(DialogPlaceLabel)
+    Q_DISABLE_COPY_MOVE(DialogPlaceLabel) // NOLINT
     Ui::DialogPlaceLabel *ui;
     bool m_showMode;
-    bool m_flagPoint;
-    bool m_flagWidth;
-    bool m_flagHeight;
-    bool m_flagAngle;
-    bool m_flagFormulaVisible;
 
     /** @brief formulaBaseHeight base height defined by dialogui */
     int m_formulaBaseHeightWidth;
@@ -120,6 +114,13 @@ private:
     QTimer *timerHeight;
     QTimer *m_timerVisible;
 
+    bool m_flagPoint;
+    bool m_flagWidth;
+    bool m_flagHeight;
+    bool m_flagAngle;
+    bool m_flagFormulaVisible;
+    bool m_flagError;
+
     void InitPlaceLabelTab();
     void InitControlTab();
 
@@ -127,6 +128,14 @@ private:
 
     void CheckPieces();
     void CheckPoint();
+
+    void InitIcons();
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto DialogPlaceLabel::IsValid() const -> bool
+{
+    return m_flagPoint && m_flagError && m_flagWidth && m_flagHeight && m_flagAngle && m_flagFormulaVisible;
+}
 
 #endif // DIALOGPLACELABEL_H

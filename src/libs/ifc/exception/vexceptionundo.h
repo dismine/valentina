@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef VEXCEPTIONUNDO_H
 #define VEXCEPTIONUNDO_H
 
-#include <qcompilerdetection.h>
 #include <QString>
 
 #include "../ifcdef.h"
@@ -38,9 +37,16 @@
 class VExceptionUndo : public VException
 {
 public:
-    explicit VExceptionUndo(const QString &what);
-    VExceptionUndo(const VExceptionUndo &e);
-    virtual ~VExceptionUndo() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
+    explicit VExceptionUndo(const QString &what) V_NOEXCEPT_EXPR(true);
+    VExceptionUndo(const VExceptionUndo &e) V_NOEXCEPT_EXPR(true);
+    ~VExceptionUndo() V_NOEXCEPT_EXPR(true) override = default;
+
+    VExceptionUndo(VExceptionUndo &&) noexcept = default;
+    auto operator=(VExceptionUndo &&) noexcept -> VExceptionUndo & = default;
+
+    Q_NORETURN void raise() const override { throw *this; }
+
+    Q_REQUIRED_RESULT auto clone() const -> VExceptionUndo * override { return new VExceptionUndo(*this); }
 };
 
 #endif // VEXCEPTIONUNDO_H

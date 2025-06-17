@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,33 +29,33 @@
 #ifndef VFORMULAPROPERTYEDITOR_H
 #define VFORMULAPROPERTYEDITOR_H
 
-#include <QWidget>
-#include <QToolButton>
-#include <QLineEdit>
 #include <QLabel>
+#include <QLineEdit>
+#include <QToolButton>
+#include <QWidget>
 
 #include "../vpatterndb/vformula.h"
 
 class VFormulaPropertyEditor : public QWidget
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     //! Constructor taking a widget as parent
     explicit VFormulaPropertyEditor(QWidget *parent);
 
     //! Destructor
-    virtual ~VFormulaPropertyEditor() Q_DECL_EQ_DEFAULT;
+    ~VFormulaPropertyEditor() override = default;
 
     //! Returns the formula currently set
-    VFormula GetFormula() const;
+    auto GetFormula() const -> VFormula;
 
     //! Needed for proper event handling
-    virtual bool eventFilter(QObject *obj, QEvent *ev) override;
+    auto eventFilter(QObject *obj, QEvent *ev) -> bool override;
 
 signals:
     //! This is emitted, when the user changes the color
-    void dataChangedByUser(const VFormula &GetFormula, VFormulaPropertyEditor* editor);
+    void dataChangedByUser(const VFormula &GetFormula, VFormulaPropertyEditor *editor);
 
     void dataChanged();
 
@@ -67,11 +67,11 @@ private slots:
     void onToolButtonClicked();
 
 private:
-    Q_DISABLE_COPY(VFormulaPropertyEditor)
-    VFormula formula;
-    QToolButton* ToolButton;
-    QLabel* TextLabel;
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VFormulaPropertyEditor) // NOLINT
+    VFormula m_formula{};
+    QToolButton *m_ToolButton{nullptr};
+    QLabel *m_TextLabel{nullptr};
 };
-
 
 #endif // VFORMULAPROPERTYEDITOR_H

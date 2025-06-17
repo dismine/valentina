@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,14 +29,15 @@
 #include "vtoolplacelabel.h"
 #include "../../dialogs/tools/piece/dialogplacelabel.h"
 #include "../../undocommands/savepieceoptions.h"
-#include "../vtoolseamallowance.h"
-#include "../vgeometry/vpointf.h"
 #include "../vgeometry/vplacelabelitem.h"
+#include "../vgeometry/vpointf.h"
+#include "../vtoolseamallowance.h"
 
 const QString VToolPlaceLabel::ToolType = QStringLiteral("placeLabel");
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPlaceLabel *VToolPlaceLabel::Create(const QPointer<DialogTool> &dialog, VAbstractPattern *doc, VContainer *data)
+auto VToolPlaceLabel::Create(const QPointer<DialogTool> &dialog, VAbstractPattern *doc, VContainer *data)
+    -> VToolPlaceLabel *
 {
     SCASSERT(not dialog.isNull());
     const QPointer<DialogPlaceLabel> dialogTool = qobject_cast<DialogPlaceLabel *>(dialog);
@@ -47,6 +48,7 @@ VToolPlaceLabel *VToolPlaceLabel::Create(const QPointer<DialogTool> &dialog, VAb
     initData.height = dialogTool->GetHeight();
     initData.angle = dialogTool->GetAngle();
     initData.visibilityTrigger = dialogTool->GetFormulaVisible();
+    initData.notMirrored = dialogTool->IsNotMirrored();
     initData.type = dialogTool->GetLabelType();
     initData.centerPoint = dialogTool->GetCenterPoint();
     initData.idObject = dialogTool->GetPieceId();
@@ -59,24 +61,27 @@ VToolPlaceLabel *VToolPlaceLabel::Create(const QPointer<DialogTool> &dialog, VAb
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPlaceLabel *VToolPlaceLabel::Create(VToolPlaceLabelInitData &initData)
+auto VToolPlaceLabel::Create(VToolPlaceLabelInitData &initData) -> VToolPlaceLabel *
 {
-    const qreal w = qAbs(qApp->toPixel(CheckFormula(initData.id, initData.width, initData.data)));
-    const qreal h = qAbs(qApp->toPixel(CheckFormula(initData.id, initData.height, initData.data)));
+    const qreal w =
+        qAbs(VAbstractValApplication::VApp()->toPixel(CheckFormula(initData.id, initData.width, initData.data)));
+    const qreal h =
+        qAbs(VAbstractValApplication::VApp()->toPixel(CheckFormula(initData.id, initData.height, initData.data)));
     const qreal a = CheckFormula(initData.id, initData.angle, initData.data);
     const qreal v = CheckFormula(initData.id, initData.visibilityTrigger, initData.data);
 
-    QSharedPointer<VPlaceLabelItem> node(new VPlaceLabelItem());
+    QSharedPointer<VPlaceLabelItem> const node(new VPlaceLabelItem());
     node->SetWidth(w, initData.width);
     node->SetHeight(h, initData.height);
     node->SetAngle(a, initData.angle);
     node->SetVisibilityTrigger(v, initData.visibilityTrigger);
     node->SetLabelType(initData.type);
     node->SetCenterPoint(initData.centerPoint);
+    node->SetNotMirrored(initData.notMirrored);
 
     if (initData.typeCreation == Source::FromGui)
     {
-        //We can't use exist object. Need create new.
+        // We can't use exist object. Need create new.
         auto point = initData.data->GeometricObject<VPointF>(initData.centerPoint);
 
         node->setName(point->name());
@@ -97,7 +102,8 @@ VToolPlaceLabel *VToolPlaceLabel::Create(VToolPlaceLabelInitData &initData)
         catch (const VExceptionBadId &e)
         { // Possible case. Parent was deleted, but the node object is still here.
             Q_UNUSED(e)
-            return nullptr;// Just ignore
+            initData.data->UpdateId(initData.id);
+            return nullptr; // Just ignore
         }
         node->setName(point->name());
         node->setX(point->x());
@@ -107,7 +113,7 @@ VToolPlaceLabel *VToolPlaceLabel::Create(VToolPlaceLabelInitData &initData)
 
         if (initData.idTool != NULL_ID)
         {
-            QSharedPointer<VPlaceLabelItem> label = qSharedPointerDynamicCast<VPlaceLabelItem>(point);
+            QSharedPointer<VPlaceLabelItem> const label = qSharedPointerDynamicCast<VPlaceLabelItem>(point);
             SCASSERT(label.isNull() == false)
 
             node->SetCorrectionAngle(label->GetCorrectionAngle());
@@ -128,10 +134,10 @@ VToolPlaceLabel *VToolPlaceLabel::Create(VToolPlaceLabelInitData &initData)
         VAbstractPattern::AddTool(initData.id, point);
         if (initData.idTool != NULL_ID)
         {
-            //Some nodes we don't show on scene. Tool that creates this nodes must free memory.
+            // Some nodes we don't show on scene. Tool that creates this nodes must free memory.
             VDataTool *tool = VAbstractPattern::getTool(initData.idTool);
             SCASSERT(tool != nullptr)
-            point->setParent(tool);// Adopted by a tool
+            point->setParent(tool); // Adopted by a tool
         }
         else
         {
@@ -147,7 +153,7 @@ VToolPlaceLabel *VToolPlaceLabel::Create(VToolPlaceLabelInitData &initData)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolPlaceLabel::getTagName() const
+auto VToolPlaceLabel::getTagName() const -> QString
 {
     return VAbstractPattern::TagPoint;
 }
@@ -164,6 +170,8 @@ void VToolPlaceLabel::AddAttributes(VAbstractPattern *doc, QDomElement &domEleme
     doc->SetAttribute(domElement, AttrAngle, label.GetAngleFormula());
     doc->SetAttribute(domElement, VAbstractPattern::AttrVisible, label.GetVisibilityTrigger());
     doc->SetAttribute(domElement, AttrPlaceLabelType, static_cast<int>(label.GetLabelType()));
+    doc->SetAttributeOrRemoveIf<bool>(domElement, AttrNotMirrored, label.IsNotMirrored(),
+                                      [](bool value) noexcept { return not value; });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -202,15 +210,15 @@ void VToolPlaceLabel::AddToFile()
 
         newDet.GetPlaceLabels().append(m_id);
         incrementReferens(); // Manually increment reference since in this case a piece tool will not do this for us
-        qApp->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, m_pieceId));
+        VAbstractApplication::VApp()->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, m_pieceId));
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolPlaceLabel::VToolPlaceLabel(const VToolPlaceLabelInitData &initData, QObject *qoParent)
-    : VAbstractNode(initData.doc, initData.data, initData.id, initData.centerPoint, initData.drawName,
-                    initData.idTool, qoParent),
-      m_pieceId(initData.idObject)
+  : VAbstractNode(initData.doc, initData.data, initData.id, initData.centerPoint, initData.drawName, initData.idTool,
+                  qoParent),
+    m_pieceId(initData.idObject)
 {
     ToolCreation(initData.typeCreation);
 }

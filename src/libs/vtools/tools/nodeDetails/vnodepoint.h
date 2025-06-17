@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef VNODEPOINT_H
 #define VNODEPOINT_H
 
-#include <qcompilerdetection.h>
 #include <QGraphicsEllipseItem>
 #include <QGraphicsItem>
 #include <QMetaObject>
@@ -38,55 +37,76 @@
 #include <QString>
 #include <QtGlobal>
 
-#include "../ifc/xml/vabstractpattern.h"
 #include "../vmisc/def.h"
-#include "vabstractnode.h"
 #include "../vwidgets/vscenepoint.h"
+#include "vabstractnode.h"
 
 /**
  * @brief The VNodePoint class point detail node.
  */
-class VNodePoint: public VAbstractNode, public VScenePoint
+class VNodePoint : public VAbstractNode, public VScenePoint
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
+    ~VNodePoint() override = default;
+
     static void Create(const VAbstractNodeInitData &initData);
 
     static const QString ToolType;
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Tool::NodePoint)};
-    virtual QString getTagName() const override;
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Tool::NodePoint)
+    };
+    auto getTagName() const -> QString override;
 
-    virtual void ChangeLabelPosition(quint32 id, const QPointF &pos) override;
-    virtual void SetLabelVisible(quint32 id, bool visible) override;
+    void ChangeLabelPosition(quint32 id, const QPointF &pos) override;
+    void SetLabelVisible(quint32 id, bool visible) override;
 signals:
     void ShowOptions();
     void ToggleInLayout(bool checked);
     void ToggleForbidFlipping(bool checked);
     void ToggleForceFlipping(bool checked);
+    void ToggleShowFullPiece(bool checked);
     void Delete();
     void ToggleExcludeState(quint32 id);
-    void ToggleAngleType(quint32 id, PieceNodeAngle type);
+    void ToggleTurnPointState(quint32 id);
+    void ToggleSeamAllowanceAngleType(quint32 id, PieceNodeAngle type);
+    void TogglePassmark(quint32 id, bool toggle);
+    void TogglePassmarkAngleType(quint32 id, PassmarkAngleType type);
+    void TogglePassmarkLineType(quint32 id, PassmarkLineType type);
+    void ResetPieceLabelTemplate();
 public slots:
-    virtual void FullUpdateFromFile() override;
-    void         NameChangePosition(const QPointF &pos);
-    void         PointChoosed();
-    void         EnableToolMove(bool move);
-    virtual void AllowHover(bool enabled) override;
-    virtual void AllowSelecting(bool enabled) override;
-    void         AllowLabelHover(bool enabled);
-    void         AllowLabelSelecting(bool enabled);
-protected:
-    virtual void AddToFile() override;
-    virtual void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
-    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) override;
-    virtual void ShowNode() override;
-    virtual void HideNode() override;
-    virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
-private:
-    Q_DISABLE_COPY(VNodePoint)
+    void FullUpdateFromFile() override;
+    void NameChangePosition(const QPointF &pos);
+    void PointChoosed();
+    void EnableToolMove(bool move);
+    void AllowHover(bool enabled) override;
+    void AllowSelecting(bool enabled) override;
+    void AllowLabelHover(bool enabled);
+    void AllowLabelSelecting(bool enabled);
 
-    VNodePoint(const VAbstractNodeInitData &initData, QObject *qoParent = nullptr, QGraphicsItem *parent = nullptr);
+protected:
+    void AddToFile() override;
+    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+    void ShowNode() override;
+    void HideNode() override;
+    void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+
+private:
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VNodePoint) // NOLINT
+
+    explicit VNodePoint(const VAbstractNodeInitData &initData, QObject *qoParent = nullptr,
+                        QGraphicsItem *parent = nullptr);
+
+    auto InitContextMenu(QMenu *menu, vidtype pieceId, quint32 referens) -> QHash<int, QAction *>;
+    void InitPassmarkMenu(QMenu *menu, vidtype pieceId, QHash<int, QAction *> &contextMenu);
+    void InitAngleTypeMenu(QMenu *menu, vidtype pieceId, QHash<int, QAction *> &contextMenu);
+    void InitPassmarkAngleTypeMenu(QMenu *menu, vidtype pieceId, QHash<int, QAction *> &contextMenu);
 };
 
 #endif // VNODEPOINT_H

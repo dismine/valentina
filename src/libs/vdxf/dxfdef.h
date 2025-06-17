@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,28 +29,49 @@
 #ifndef DXFDEF_H
 #define DXFDEF_H
 
+#include <QtCore/qcontainerfwd.h>
 #include <QtGlobal>
 
-#ifdef Q_CC_MSVC
-    #include <ciso646>
-#endif /* Q_CC_MSVC */
+// Header <ciso646> is removed in C++20.
+#if defined(Q_CC_MSVC) && __cplusplus <= 201703L
+#include <ciso646> // and, not, or
+#endif
 
-enum class VarMeasurement : unsigned char { English=0, Metric=1 };
+enum class VarMeasurement : quint8
+{
+    English = 0,
+    Metric = 1
+};
 
-//Default drawing units for AutoCAD DesignCenter blocks:
-enum class VarInsunits : unsigned char { Inches=1, Millimeters=4, Centimeters=5 };
+// Default drawing units for AutoCAD DesignCenter blocks:
+enum class VarInsunits : quint8
+{
+    Inches = 1,
+    Millimeters = 4,
+    Centimeters = 5
+};
+
+enum class DXFApparelCompatibility : qint8
+{
+    STANDARD = 0, // According to specification AAMA/ASTM
+    RPCADV08 = 1, // Richpeace CAD V8
+    RPCADV09 = 2, // Richpeace CAD V9
+    RPCADV10 = 3, // Richpeace CAD V10
+    CLO3D = 4,    // Clo3D
+    COUNT = 5     // Use only for validation
+};
 
 // Helps mark end of string. See VDxfEngine::drawTextItem for more details
 extern const QString endStringPlaceholder;
 
-Q_REQUIRED_RESULT static inline bool DL_FuzzyComparePossibleNulls(double p1, double p2);
-static inline bool DL_FuzzyComparePossibleNulls(double p1, double p2)
+Q_REQUIRED_RESULT static inline auto DL_FuzzyComparePossibleNulls(double p1, double p2) -> bool;
+static inline auto DL_FuzzyComparePossibleNulls(double p1, double p2) -> bool
 {
-    if(qFuzzyIsNull(p1))
+    if (qFuzzyIsNull(p1))
     {
         return qFuzzyIsNull(p2);
     }
-    else if(qFuzzyIsNull(p2))
+    if (qFuzzyIsNull(p2))
     {
         return false;
     }
@@ -59,5 +80,7 @@ static inline bool DL_FuzzyComparePossibleNulls(double p1, double p2)
         return qFuzzyCompare(p1, p2);
     }
 }
+
+auto LocaleMap() -> QMap<QString, QString>;
 
 #endif // DXFDEF_H

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -26,19 +26,25 @@
  **
  *************************************************************************/
 #include "vplaintextedit.h"
+#include <QDebug>
+
+// Header <ciso646> is removed in C++20.
+#if defined(Q_CC_MSVC) && __cplusplus <= 201703L
+#include <ciso646> // and, not, or
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
-VPlainTextEdit::VPlainTextEdit(QWidget * parent)
-    : QPlainTextEdit(parent),
-      m_highlighter(document())
+VPlainTextEdit::VPlainTextEdit(QWidget *parent)
+  : QPlainTextEdit(parent),
+    m_highlighter(document())
 {
     connect(this, &QPlainTextEdit::cursorPositionChanged, this, &VPlainTextEdit::MatchParentheses);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPlainTextEdit::VPlainTextEdit(const QString & text, QWidget * parent)
-    : QPlainTextEdit(text, parent),
-      m_highlighter(document())
+VPlainTextEdit::VPlainTextEdit(const QString &text, QWidget *parent)
+  : QPlainTextEdit(text, parent),
+    m_highlighter(document())
 {
     connect(this, &QPlainTextEdit::cursorPositionChanged, this, &VPlainTextEdit::MatchParentheses);
 }
@@ -50,31 +56,77 @@ VPlainTextEdit::~VPlainTextEdit()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPlainTextEdit::SetFilter(const QString &filter)
+{
+    if (m_filter.isEmpty() && not filter.isEmpty())
+    {
+        QTextDocument *doc = document();
+        m_allLines.clear();
+        m_allLines.reserve(doc->lineCount());
+
+        for (int i = 0; i < doc->blockCount(); ++i)
+        {
+            m_allLines.append(doc->findBlockByNumber(i).text());
+        }
+    }
+
+    m_filter = filter;
+
+    Filter();
+
+    if (m_filter.isEmpty())
+    {
+        m_allLines.clear();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPlainTextEdit::appendFilteredText(const QString &text)
+{
+    if (m_filter.isEmpty())
+    {
+        QPlainTextEdit::appendPlainText(text);
+    }
+    else
+    {
+        m_allLines.append(text);
+        if (const vsizetype diff = m_allLines.size() - maximumBlockCount(); diff > 0)
+        {
+            m_allLines = m_allLines.mid(diff);
+        }
+        Filter();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPlainTextEdit::MatchParentheses()
 {
-    QList<QTextEdit::ExtraSelection> selections;
+    QList<QTextEdit::ExtraSelection> const selections;
     setExtraSelections(selections);
 
-    VTextBlockData *data = static_cast<VTextBlockData *>(textCursor().block().userData());
+    auto *data = static_cast<VTextBlockData *>(textCursor().block().userData());
 
     if (data)
     {
-        QVector<ParenthesisInfo *> infos = data->Parentheses();
+        QVector<ParenthesisInfo *> const infos = data->Parentheses();
 
-        int pos = textCursor().block().position();
+        int const pos = textCursor().block().position();
         for (int i = 0; i < infos.size(); ++i)
         {
             ParenthesisInfo *info = infos.at(i);
 
-            int curPos = textCursor().position() - textCursor().block().position();
+            int const curPos = textCursor().position() - textCursor().block().position();
             if ((info->position == curPos - 1 || info->position == curPos) && info->character == '(')
             {
-                CreateParenthesisSelection(pos + info->position, MatchLeftParenthesis(textCursor().block(), i + 1, 0));
+                CreateParenthesisSelection(pos + static_cast<int>(info->position),
+                                           MatchLeftParenthesis(textCursor().block(), i + 1, 0));
                 return;
             }
-            else if ((info->position == curPos - 1 || info->position == curPos) && info->character == ')')
+
+            if ((info->position == curPos - 1 || info->position == curPos) && info->character == ')')
             {
-                CreateParenthesisSelection(pos + info->position, MatchRightParenthesis(textCursor().block(), i - 1, 0));
+                CreateParenthesisSelection(pos + static_cast<int>(info->position),
+                                           MatchRightParenthesis(textCursor().block(), i - 1, 0));
                 return;
             }
         }
@@ -82,12 +134,12 @@ void VPlainTextEdit::MatchParentheses()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPlainTextEdit::MatchLeftParenthesis(QTextBlock currentBlock, int i, int numLeftParentheses)
+auto VPlainTextEdit::MatchLeftParenthesis(QTextBlock currentBlock, int i, int numLeftParentheses) -> bool
 {
-    VTextBlockData *data = static_cast<VTextBlockData *>(currentBlock.userData());
-    QVector<ParenthesisInfo *> infos = data->Parentheses();
+    auto *data = static_cast<VTextBlockData *>(currentBlock.userData());
+    QVector<ParenthesisInfo *> const infos = data->Parentheses();
 
-    int docPos = currentBlock.position();
+    int const docPos = currentBlock.position();
     for (; i < infos.size(); ++i)
     {
         ParenthesisInfo *info = infos.at(i);
@@ -100,13 +152,11 @@ bool VPlainTextEdit::MatchLeftParenthesis(QTextBlock currentBlock, int i, int nu
 
         if (info->character == ')' && numLeftParentheses == 0)
         {
-            CreateParenthesisSelection(docPos + info->position);
+            CreateParenthesisSelection(docPos + static_cast<int>(info->position));
             return true;
         }
-        else
-        {
-            --numLeftParentheses;
-        }
+
+        --numLeftParentheses;
     }
 
     currentBlock = currentBlock.next();
@@ -119,12 +169,12 @@ bool VPlainTextEdit::MatchLeftParenthesis(QTextBlock currentBlock, int i, int nu
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPlainTextEdit::MatchRightParenthesis(QTextBlock currentBlock, int i, int numRightParentheses)
+auto VPlainTextEdit::MatchRightParenthesis(QTextBlock currentBlock, int i, int numRightParentheses) -> bool
 {
-    VTextBlockData *data = static_cast<VTextBlockData *>(currentBlock.userData());
-    QVector<ParenthesisInfo *> parentheses = data->Parentheses();
+    auto *data = static_cast<VTextBlockData *>(currentBlock.userData());
+    QVector<ParenthesisInfo *> const parentheses = data->Parentheses();
 
-    int docPos = currentBlock.position();
+    int const docPos = currentBlock.position();
     for (; i > -1 && parentheses.size() > 0; --i)
     {
         ParenthesisInfo *info = parentheses.at(i);
@@ -136,13 +186,11 @@ bool VPlainTextEdit::MatchRightParenthesis(QTextBlock currentBlock, int i, int n
 
         if (info->character == '(' && numRightParentheses == 0)
         {
-            CreateParenthesisSelection(docPos + info->position);
+            CreateParenthesisSelection(docPos + static_cast<int>(info->position));
             return true;
         }
-        else
-        {
-            --numRightParentheses;
-        }
+
+        --numRightParentheses;
     }
 
     currentBlock = currentBlock.previous();
@@ -157,6 +205,12 @@ bool VPlainTextEdit::MatchRightParenthesis(QTextBlock currentBlock, int i, int n
 //---------------------------------------------------------------------------------------------------------------------
 void VPlainTextEdit::CreateParenthesisSelection(int pos, bool match)
 {
+    if (pos < 0 || pos >= toPlainText().length())
+    {
+        qDebug() << "String:" << toPlainText() << "Position '" << pos << "' out of range";
+        return;
+    }
+
     QList<QTextEdit::ExtraSelection> selections = extraSelections();
 
     QTextEdit::ExtraSelection selection;
@@ -181,4 +235,27 @@ void VPlainTextEdit::CreateParenthesisSelection(int pos, bool match)
     selections.append(selection);
 
     setExtraSelections(selections);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPlainTextEdit::Filter()
+{
+    clear();
+    if (not m_filter.isEmpty())
+    {
+        for (auto &line : m_allLines)
+        {
+            if (line.contains(m_filter))
+            {
+                QPlainTextEdit::appendPlainText(line);
+            }
+        }
+    }
+    else
+    {
+        for (auto &line : m_allLines)
+        {
+            QPlainTextEdit::appendPlainText(line);
+        }
+    }
 }

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef DIALOGCUBICBEZIER_H
 #define DIALOGCUBICBEZIER_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QSharedPointer>
@@ -40,34 +39,43 @@
 #include "../vmisc/def.h"
 #include "dialogtool.h"
 
-template <class T> class QSharedPointer;
-
 namespace Ui
 {
-    class DialogCubicBezier;
+class DialogCubicBezier;
 }
 
-class DialogCubicBezier : public DialogTool
+class DialogCubicBezier final : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
-    explicit DialogCubicBezier(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual ~DialogCubicBezier();
+    explicit DialogCubicBezier(const VContainer *data, VAbstractPattern *doc, quint32 toolId,
+                               QWidget *parent = nullptr);
+    ~DialogCubicBezier() override;
 
-    VCubicBezier GetSpline() const;
-    void         SetSpline(const VCubicBezier &spline);
+    auto GetSpline() const -> VCubicBezier;
+    void SetSpline(const VCubicBezier &spline);
+
+    void SetNotes(const QString &notes);
+    auto GetNotes() const -> QString;
+
 public slots:
-    virtual void  ChosenObject(quint32 id, const SceneObject &type) override;
-    virtual void  PointNameChanged() override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
+    void PointNameChanged() override;
+
 protected:
-    virtual void  ShowVisualization() override;
+    void ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void  SaveData() override;
+    void SaveData() override;
+    auto IsValid() const -> bool override;
+
+private slots:
+    void ValidateAlias();
+
 private:
-    Q_DISABLE_COPY(DialogCubicBezier)
+    Q_DISABLE_COPY_MOVE(DialogCubicBezier) // NOLINT
     Ui::DialogCubicBezier *ui;
 
     /** @brief spl spline */
@@ -75,10 +83,24 @@ private:
 
     qint32 newDuplicate;
 
-    const QSharedPointer<VPointF> GetP1() const;
-    const QSharedPointer<VPointF> GetP2() const;
-    const QSharedPointer<VPointF> GetP3() const;
-    const QSharedPointer<VPointF> GetP4() const;
+    bool flagError;
+    bool flagAlias{true};
+
+    QString originAliasSuffix{};
+
+    /** @brief number number of handled objects */
+    qint32 number{0};
+
+    auto GetP1() const -> QSharedPointer<VPointF>;
+    auto GetP2() const -> QSharedPointer<VPointF>;
+    auto GetP3() const -> QSharedPointer<VPointF>;
+    auto GetP4() const -> QSharedPointer<VPointF>;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto DialogCubicBezier::IsValid() const -> bool
+{
+    return flagError && flagAlias;
+}
 
 #endif // DIALOGCUBICBEZIER_H

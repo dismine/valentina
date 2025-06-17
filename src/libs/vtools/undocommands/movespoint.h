@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef MOVESPOINT_H
 #define MOVESPOINT_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -41,42 +40,49 @@ class QGraphicsScene;
 
 class MoveSPoint : public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     MoveSPoint(VAbstractPattern *doc, const double &x, const double &y, const quint32 &id, QGraphicsScene *scene,
                QUndoCommand *parent = nullptr);
-    virtual ~MoveSPoint() override;
-    virtual void undo() override;
-    virtual void redo() override;
-    virtual bool mergeWith(const QUndoCommand *command) override;
-    virtual int  id() const override;
-    quint32      getSPointId() const;
-    double       getNewX() const;
-    double       getNewY() const;
-    void         Do(double x, double y);
+    ~MoveSPoint() override;
+
+    void undo() override;
+    void redo() override;
+
+    auto mergeWith(const QUndoCommand *command) -> bool override;
+    auto id() const -> int override;
+
+    auto getSPointId() const -> quint32;
+    auto getNewX() const -> double;
+    auto getNewY() const -> double;
+
+    void Do(double x, double y);
+
 private:
-    Q_DISABLE_COPY(MoveSPoint)
-    double   oldX;
-    double   oldY;
-    double   newX;
-    double   newY;
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(MoveSPoint) // NOLINT
+    double oldX;
+    double oldY;
+    double newX;
+    double newY;
     QGraphicsScene *scene;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline quint32 MoveSPoint::getSPointId() const
+inline auto MoveSPoint::getSPointId() const -> quint32
 {
     return nodeId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline double MoveSPoint::getNewX() const
+inline auto MoveSPoint::getNewX() const -> double
 {
     return newX;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline double MoveSPoint::getNewY() const
+inline auto MoveSPoint::getNewY() const -> double
 {
     return newY;
 }

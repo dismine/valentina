@@ -28,28 +28,30 @@
 #include <QUrl>
 #include <QtGlobal>
 
-class FvAvailableUpdate : public QObject
+class FvAvailableUpdate final : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     explicit FvAvailableUpdate(QObject *parent = nullptr);
 
-    QUrl GetEnclosureUrl() const;
+    auto GetEnclosureUrl() const -> QUrl;
     void SetEnclosureUrl(const QUrl &enclosureUrl);
     void SetEnclosureUrl(const QString &enclosureUrl);
 
-    QString GetEnclosureVersion() const;
+    auto GetEnclosureVersion() const -> QString;
     void SetEnclosureVersion(const QString &enclosureVersion);
 
-    QString GetEnclosurePlatform() const;
+    auto GetEnclosurePlatform() const -> QString;
     void SetEnclosurePlatform(const QString &enclosurePlatform);
 
 private:
-    Q_DISABLE_COPY(FvAvailableUpdate)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(FvAvailableUpdate) // NOLINT
 
-    QUrl          m_enclosureUrl;
-    QString       m_enclosureVersion;
-    QString       m_enclosurePlatform;
+    QUrl m_enclosureUrl;
+    QString m_enclosureVersion;
+    QString m_enclosurePlatform;
 };
 
 #endif // FVAVAILABLEUPDATE_H

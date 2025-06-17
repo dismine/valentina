@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,52 +29,61 @@
 #ifndef VEXCEPTION_H
 #define VEXCEPTION_H
 
-#include <qcompilerdetection.h>
 #include <QCoreApplication>
 #include <QException>
 #include <QString>
 
 #include "../ifcdef.h"
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
+
 /**
  * @brief The VException class parent for all exception. Could be use for abstract exception
  */
 class VException : public QException
 {
-    Q_DECLARE_TR_FUNCTIONS(VException)
-public:
-    explicit VException(const QString &error);
-    VException(const VException &e);
-    VException &operator=(const VException &e);
-    virtual ~VException() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
+    Q_DECLARE_TR_FUNCTIONS(VException) // NOLINT
 
-    Q_NORETURN virtual void raise() const override;
+public:
+    explicit VException(const QString &error) V_NOEXCEPT_EXPR(true);
+    VException(const VException &e) V_NOEXCEPT_EXPR(true);
+    auto operator=(const VException &e) V_NOEXCEPT_EXPR(true) -> VException &;
+    ~VException() V_NOEXCEPT_EXPR(true) override = default;
+
+    VException(VException &&) noexcept = default;
+    auto operator=(VException &&) noexcept -> VException & = default;
+
+    Q_NORETURN void raise() const override;
 
     // cppcheck-suppress unusedFunction
-    Q_REQUIRED_RESULT virtual VException *clone() const override;
+    Q_REQUIRED_RESULT auto clone() const -> VException * override;
 
-    virtual QString ErrorMessage() const;
-    virtual QString DetailedInformation() const;
-    QString         WhatUtf8() const V_NOEXCEPT_EXPR (true);
-    void            AddMoreInformation(const QString &info);
-    QString         MoreInformation() const;
+    virtual auto ErrorMessage() const -> QString;
+    virtual auto DetailedInformation() const -> QString;
+    auto WhatUtf8() const V_NOEXCEPT_EXPR(true) -> QString;
+    void AddMoreInformation(const QString &info);
+    auto MoreInformation() const -> QString;
 
 protected:
     /** @brief error string with error */
-    QString         error;
+    QString error;
 
     /** @brief moreInfo more information about error */
-    QString         moreInfo;
+    QString moreInfo{};
 
-    QString         MoreInfo(const QString &detInfo) const;
+    auto MoreInfo(const QString &detInfo) const -> QString;
 };
+
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief What return string with error
  * @return string with error
  */
-inline QString VException::WhatUtf8() const V_NOEXCEPT_EXPR (true)
+inline auto VException::WhatUtf8() const V_NOEXCEPT_EXPR(true) -> QString
 {
     return error;
 }
@@ -84,7 +93,7 @@ inline QString VException::WhatUtf8() const V_NOEXCEPT_EXPR (true)
  * @brief MoreInformation return more information for error
  * @return information
  */
-inline QString VException::MoreInformation() const
+inline auto VException::MoreInformation() const -> QString
 {
     return moreInfo;
 }
@@ -92,16 +101,17 @@ inline QString VException::MoreInformation() const
 // Want have special exception for catching unhadled deleting a tool
 class VExceptionToolWasDeleted : public VException
 {
-    Q_DECLARE_TR_FUNCTIONS(VExceptionToolDeleted)
+    Q_DECLARE_TR_FUNCTIONS(VExceptionToolDeleted) // NOLINT
+
 public:
-    explicit VExceptionToolWasDeleted(const QString &error);
-    VExceptionToolWasDeleted(const VExceptionToolWasDeleted &e);
-    VExceptionToolWasDeleted &operator=(const VExceptionToolWasDeleted &e);
-    virtual ~VExceptionToolWasDeleted() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
+    explicit VExceptionToolWasDeleted(const QString &error) V_NOEXCEPT_EXPR(true);
+    VExceptionToolWasDeleted(const VExceptionToolWasDeleted &e) V_NOEXCEPT_EXPR(true);
+    auto operator=(const VExceptionToolWasDeleted &e) V_NOEXCEPT_EXPR(true) -> VExceptionToolWasDeleted &;
+    virtual ~VExceptionToolWasDeleted() V_NOEXCEPT_EXPR(true) = default;
 
     Q_NORETURN virtual void raise() const override;
     // cppcheck-suppress unusedFunction
-    virtual VExceptionToolWasDeleted *clone() const override;
+    virtual auto clone() const -> VExceptionToolWasDeleted * override;
 };
 
 #endif // VEXCEPTION_H

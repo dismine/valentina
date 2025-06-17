@@ -29,19 +29,21 @@
 
 #include "stylehelper.h"
 
-#include <QPixmapCache>
-#include <QWidget>
-#include <QRect>
-#include <QPainter>
 #include <QApplication>
-#include <QPalette>
-#include <QStyleOption>
 #include <QObject>
+#include <QPainter>
+#include <QPalette>
+#include <QPixmapCache>
+#include <QRect>
+#include <QStyleOption>
+#include <QWidget>
+#include <QtMath>
 
-#include "../vmisc/vmath.h"
+QColor StyleHelper::m_baseColor;          // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+QColor StyleHelper::m_requestedBaseColor; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal StyleHelper::sidebarFontSize()
+auto StyleHelper::sidebarFontSize() -> qreal
 {
 #if defined(Q_OS_MAC)
     return 10;
@@ -51,51 +53,40 @@ qreal StyleHelper::sidebarFontSize()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QColor StyleHelper::panelTextColor(bool lightColored)
+auto StyleHelper::panelTextColor(bool lightColored) -> QColor
 {
-    //qApp->palette().highlightedText().color();
+    // qApp->palette().highlightedText().color();
     if (!lightColored)
     {
         return Qt::white;
     }
-    else
-    {
-        return Qt::black;
-    }
+
+    return Qt::black;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-// Invalid by default, setBaseColor needs to be called at least once
-QColor StyleHelper::m_baseColor;
-QColor StyleHelper::m_requestedBaseColor;
-
-//---------------------------------------------------------------------------------------------------------------------
-QColor StyleHelper::baseColor(bool lightColored)
+auto StyleHelper::baseColor(bool lightColored) -> QColor
 {
     if (!lightColored)
     {
         return m_baseColor;
     }
-    else
-    {
-        return m_baseColor.lighter(230);
-    }
+
+    return m_baseColor.lighter(230);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QColor StyleHelper::borderColor(bool lightColored)
+auto StyleHelper::borderColor(bool lightColored) -> QColor
 {
     QColor result = baseColor(lightColored);
-    result.setHsv(result.hue(),
-                  result.saturation(),
-                  result.value() / 2);
+    result.setHsv(result.hue(), result.saturation(), result.value() / 2);
     return result;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QColor StyleHelper::sidebarHighlight()
+auto StyleHelper::sidebarHighlight() -> QColor
 {
-    return QColor(255, 255, 255, 40);
+    return {255, 255, 255, 40};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -107,15 +98,13 @@ void StyleHelper::setBaseColor(const QColor &newcolor)
     m_requestedBaseColor = newcolor;
 
     QColor color;
-    color.setHsv(newcolor.hue(),
-                 static_cast<int>(newcolor.saturation() * 0.7),
-                 64 + newcolor.value() / 3);
+    color.setHsv(newcolor.hue(), static_cast<int>(newcolor.saturation() * 0.7), 64 + newcolor.value() / 3);
 
     if (color.isValid() && color != m_baseColor)
     {
         m_baseColor = color;
         const QWidgetList widgets = QApplication::topLevelWidgets();
-        for (auto w : widgets)
+        for (auto *w : widgets)
         {
             w->update();
         }
@@ -128,9 +117,10 @@ void StyleHelper::drawIconWithShadow(const QIcon &icon, const QRect &rect, QPain
                                      int dipRadius, const QColor &color, const QPoint &dipOffset)
 {
     QPixmap cache;
-    QString pixmapName = QString::fromLatin1("icon %0 %1 %2").arg(icon.cacheKey()).arg(iconMode).arg(rect.height());
+    QString const pixmapName =
+        QString::fromLatin1("icon %0 %1 %2").arg(icon.cacheKey()).arg(iconMode).arg(rect.height());
 
-    if (!QPixmapCache::find(pixmapName, cache))
+    if (!QPixmapCache::find(pixmapName, &cache))
     {
         // High-dpi support: The in parameters (rect, radius, offset) are in
         // device-independent pixels. The call to QIcon::pixmap() below might
@@ -138,9 +128,9 @@ void StyleHelper::drawIconWithShadow(const QIcon &icon, const QRect &rect, QPain
         // different than 1. The shadow drawing caluculations are done in device
         // pixels.
         QPixmap px = icon.pixmap(rect.size());
-        int devicePixelRatio = qCeil(px.devicePixelRatio());
-        int radius = dipRadius * devicePixelRatio;
-        QPoint offset = dipOffset * devicePixelRatio;
+        int const devicePixelRatio = qCeil(px.devicePixelRatio());
+        int const radius = dipRadius * devicePixelRatio;
+        QPoint const offset = dipOffset * devicePixelRatio;
         cache = QPixmap(px.size() + QSize(radius * 2, radius * 2));
         cache.fill(Qt::transparent);
 
@@ -148,15 +138,16 @@ void StyleHelper::drawIconWithShadow(const QIcon &icon, const QRect &rect, QPain
         if (iconMode == QIcon::Disabled)
         {
             QImage im = px.toImage().convertToFormat(QImage::Format_ARGB32);
-            for (int y=0; y<im.height(); ++y)
+            for (int y = 0; y < im.height(); ++y)
             {
-                QRgb *scanLine = reinterpret_cast<QRgb *>(im.scanLine(y));
-                for (int x=0; x<im.width(); ++x)
+                // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+                auto *scanLine = reinterpret_cast<QRgb *>(im.scanLine(y));
+                for (int x = 0; x < im.width(); ++x)
                 {
-                    QRgb pixel = *scanLine;
-                    char intensity = static_cast<char>(qGray(pixel));
+                    QRgb const pixel = *scanLine;
+                    auto const intensity = static_cast<char>(qGray(pixel));
                     *scanLine = qRgba(intensity, intensity, intensity, qAlpha(pixel));
-                    ++scanLine;
+                    ++scanLine; // NOLINT(cppcoreguidelines-pro-bounds-pointer-arithmetic)
                 }
             }
             px = QPixmap::fromImage(im);

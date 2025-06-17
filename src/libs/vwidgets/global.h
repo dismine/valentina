@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,8 +29,8 @@
 #ifndef GLOBAL_H
 #define GLOBAL_H
 
-#include <QtGlobal>
 #include <QStyleOptionGraphicsItem>
+#include <QtGlobal>
 
 extern const qreal minVisibleFontSize;
 
@@ -44,18 +44,18 @@ class QPainterPath;
 class QPen;
 class QGraphicsSceneMouseEvent;
 
-bool IsSelectedByReleaseEvent(QGraphicsItem *item, QGraphicsSceneMouseEvent *event);
+auto IsSelectedByReleaseEvent(QGraphicsItem *item, QGraphicsSceneMouseEvent *event) -> bool;
 
-qreal SceneScale(QGraphicsScene *scene);
+auto SceneScale(QGraphicsScene *scene) -> qreal;
 
-QColor CorrectColor(const QGraphicsItem *item, const QColor &color);
+auto PointRect(qreal radius) -> QRectF;
+auto ScaledRadius(qreal scale) -> qreal;
+void ScaleCircleSize(QGraphicsEllipseItem *item, qreal scale);
+auto ScaleWidth(qreal width, qreal scale) -> qreal;
 
-QRectF PointRect(qreal radius);
-qreal  ScaledRadius(qreal scale);
-void   ScaleCircleSize(QGraphicsEllipseItem *item, qreal scale);
-qreal  ScaleWidth(qreal width, qreal scale);
+auto ItemShapeFromPath(const QPainterPath &path, const QPen &pen) -> QPainterPath;
 
-QPainterPath ItemShapeFromPath(const QPainterPath &path, const QPen &pen);
+auto PixmapToPainterPath(const QPixmap &pixmap) -> QPainterPath;
 
 void GraphicsItemHighlightSelected(const QRectF &boundingRect, qreal itemPenWidth, QPainter *painter,
                                    const QStyleOptionGraphicsItem *option);
@@ -64,7 +64,7 @@ void GraphicsItemHighlightSelected(const QRectF &boundingRect, qreal itemPenWidt
  * Unfortunatelly qt_graphicsItem_highlightSelected was designed in way that doesn't support custom QGraphicsItem
  * classes. Such classes always get pen width 1.0. This make imposible to draw selection rect around very small objects.
  */
-template<class Parent, class Item>
+template <class Parent, class Item>
 void PaintWithFixItemHighlightSelected(Item *item, QPainter *painter, const QStyleOptionGraphicsItem *option,
                                        QWidget *widget)
 {

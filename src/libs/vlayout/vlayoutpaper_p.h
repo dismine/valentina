@@ -9,7 +9,7 @@
 **  This source code is part of the Valentina project, a pattern making
 **  program, whose allow create and modeling patterns of clothing.
 **  Copyright (C) 2013-2015 Valentina project
-**  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+**  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
 **
 **  Valentina is free software: you can redistribute it and/or modify
 **  it under the terms of the GNU General Public License as published by
@@ -29,12 +29,12 @@
 #ifndef VLAYOUTPAPER_P_H
 #define VLAYOUTPAPER_P_H
 
+#include <QPointF>
 #include <QSharedData>
 #include <QVector>
-#include <QPointF>
 
-#include "vlayoutpiece.h"
 #include "vcontour.h"
+#include "vlayoutpiece.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -43,68 +43,40 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VLayoutPaperData : public QSharedData
 {
 public:
-    VLayoutPaperData()
-        : details(QVector<VLayoutPiece>()),
-          globalContour(VContour()),
-          paperIndex(0),
-          frame(0),
-          layoutWidth(0),
-          globalRotate(true),
-          localRotate(true),
-          globalRotationIncrease(180),
-          localRotationIncrease(180),
-          saveLength(false)
-    {}
-
-    VLayoutPaperData(int height,
-                     int width)
-        : details(QVector<VLayoutPiece>()),
-          globalContour(VContour(height, width)),
-          paperIndex(0),
-          frame(0),
-          layoutWidth(0),
-          globalRotate(true),
-          localRotate(true),
-          globalRotationIncrease(180),
-          localRotationIncrease(180),
-          saveLength(false)
-    {}
-
-    VLayoutPaperData(const VLayoutPaperData &paper)
-        : QSharedData(paper),
-          details(paper.details),
-          globalContour(paper.globalContour),
-          paperIndex(paper.paperIndex),
-          frame(paper.frame),
-          layoutWidth(paper.layoutWidth),
-          globalRotate(paper.globalRotate),
-          localRotate(paper.localRotate),
-          globalRotationIncrease(paper.globalRotationIncrease),
-          localRotationIncrease(paper.localRotationIncrease),
-          saveLength(paper.saveLength)
-    {}
-
-    ~VLayoutPaperData() {}
+    VLayoutPaperData() = default;
+    VLayoutPaperData(int height, int width, qreal layoutWidth);
+    VLayoutPaperData(const VLayoutPaperData &paper) = default;
+    ~VLayoutPaperData() = default;
 
     /** @brief details list of arranged details. */
-    QVector<VLayoutPiece> details;
+    QVector<VLayoutPiece> details{}; // NOLINT (misc-non-private-member-variables-in-classes)
+
+    QVector<VCachedPositions> positionsCache{}; // NOLINT (misc-non-private-member-variables-in-classes)
 
     /** @brief globalContour list of global points contour. */
-    VContour globalContour;
+    VContour globalContour{}; // NOLINT (misc-non-private-member-variables-in-classes)
 
-    quint32 paperIndex;
-    quint32 frame;
-    qreal layoutWidth;
-    bool globalRotate;
-    bool localRotate;
-    int globalRotationIncrease;
-    int localRotationIncrease;
-    bool saveLength;
+    quint32 paperIndex{0};             // NOLINT (misc-non-private-member-variables-in-classes)
+    qreal layoutWidth{0};              // NOLINT (misc-non-private-member-variables-in-classes)
+    bool globalRotate{true};           // NOLINT (misc-non-private-member-variables-in-classes)
+    bool localRotate{true};            // NOLINT (misc-non-private-member-variables-in-classes)
+    int globalRotationNumber{2};       // NOLINT (misc-non-private-member-variables-in-classes)
+    int localRotationNumber{2};        // NOLINT (misc-non-private-member-variables-in-classes)
+    bool saveLength{false};            // NOLINT (misc-non-private-member-variables-in-classes)
+    bool followGrainline{false};       // NOLINT (misc-non-private-member-variables-in-classes)
+    bool originPaperOrientation{true}; // NOLINT (misc-non-private-member-variables-in-classes)
 
 private:
-    VLayoutPaperData& operator=(const VLayoutPaperData&) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN_MOVE(VLayoutPaperData) // NOLINT
 };
 
 QT_WARNING_POP
+
+//---------------------------------------------------------------------------------------------------------------------
+inline VLayoutPaperData::VLayoutPaperData(int height, int width, qreal layoutWidth)
+  : globalContour(VContour(height, width, layoutWidth)),
+    layoutWidth(layoutWidth)
+{
+}
 
 #endif // VLAYOUTPAPER_P_H

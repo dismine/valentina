@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -26,18 +26,19 @@
  **
  *************************************************************************/
 #include "dialogduplicatedetail.h"
-#include "ui_dialogduplicatedetail.h"
-#include "../vwidgets/vabstractmainwindow.h"
+#include "../../../tools/vabstracttool.h"
 #include "../../../visualization/path/vistoolduplicatedetail.h"
+#include "ui_dialogduplicatedetail.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogDuplicateDetail::DialogDuplicateDetail(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogDuplicateDetail),
-      m_idDetail(NULL_ID),
-      m_mx(0),
-      m_my(0),
-      m_firstRelease(false)
+DialogDuplicateDetail::DialogDuplicateDetail(const VContainer *data, VAbstractPattern *doc, quint32 toolId,
+                                             QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
+    ui(new Ui::DialogDuplicateDetail),
+    m_idDetail(NULL_ID),
+    m_mx(0),
+    m_my(0),
+    m_firstRelease(false)
 {
     ui->setupUi(this);
     InitOkCancel(ui);
@@ -54,40 +55,44 @@ DialogDuplicateDetail::~DialogDuplicateDetail()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogDuplicateDetail::ShowDialog(bool click)
 {
-    if (prepare)
+    if (prepare && click)
     {
-        if (click)
+        // The check need to ignore first release of mouse button.
+        // User should have chance to place piece.
+        if (not m_firstRelease)
         {
-            // The check need to ignore first release of mouse button.
-            // User should have chance to place piece.
-            if (not m_firstRelease)
-            {
-                m_firstRelease = true;
-                return;
-            }
-
-            VisToolDuplicateDetail *piece = qobject_cast<VisToolDuplicateDetail *>(vis);
-            SCASSERT(piece != nullptr)
-
-            m_mx = piece->Mx();
-            m_my = piece->My();
-            emit ToolTip(QString());
-            DialogAccepted();
+            m_firstRelease = true;
+            return;
         }
+
+        auto *piece = qobject_cast<VisToolDuplicateDetail *>(vis);
+        SCASSERT(piece != nullptr)
+
+        m_mx = piece->Mx();
+        m_my = piece->My();
+        emit ToolTip(QString());
+        DialogAccepted();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogDuplicateDetail::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare == false)// After first choose we ignore all objects
+    if (prepare == false && type == SceneObject::Detail && id > NULL_ID) // After first choose we ignore all objects
     {
-        if (type == SceneObject::Detail && id > NULL_ID)
+        m_idDetail = id;
+
+        auto *tool = qobject_cast<VAbstractTool *>(VAbstractPattern::getTool(m_idDetail));
+        if (tool)
         {
-            m_idDetail = id;
-            emit ToolTip(tr("Click to place duplicate"));
-            vis->VisualMode(id);
-            prepare = true;
+            vis->SetData(tool->getData()); // Includes currentSeamAllowance variable we need
         }
+
+        emit ToolTip(tr("Click to place duplicate"));
+        if (vis != nullptr)
+        {
+            vis->VisualMode(id);
+        }
+        prepare = true;
     }
 }

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vit>
+    <!--Measurements created with Valentina v0.7.44.0 (https://valentinaproject.bitbucket.io/).-->
+    <version>0.5.1</version>
+    <read-only>false</read-only>
+    <notes>Nach Messung wegen Büste am 16.03.2021
+Brustumfang : 88 -&gt;  86
+Taille: 79 -&gt; 76
+Hüfte: 92 -&gt; 94
+Halsumfang: 39.5 -&gt; 37</notes>
+    <unit>cm</unit>
+    <pm_system>998</pm_system>
+    <personal>
+        <customer>Ronan</customer>
+        <birth-date>1987-04-03</birth-date>
+        <gender>male</gender>
+        <email/>
+    </personal>
+    <body-measurements>
+        <m name="waist_natural_circ" value="82"/>
+        <m name="waist_to_hip_b" value="21"/>
+        <m name="neck_back_to_waist_b" value="43"/>
+        <m name="across_chest_f" value="35"/>
+        <m name="across_back_b" value="35"/>
+        <m name="neck_back_to_bust_b" value="22.5"/>
+        <m name="hip_circ" value="94"/>
+        <m name="hand_circ" value="22"/>
+        <m name="leg_waist_side_to_floor" value="98.5"/>
+        <m name="leg_crotch_to_floor" value="77.5"/>
+        <m name="height_knee" value="48"/>
+        <m name="height_calf" value="30"/>
+        <m name="leg_knee_circ" value="35.5"/>
+        <m name="leg_calf_circ" value="34.5"/>
+        <m name="leg_knee_circ_bent" value="38.5"/>
+        <m name="leg_ankle_circ" value="25.5"/>
+        <m name="leg_ankle_diag_circ" value="32"/>
+        <m name="height" value="172"/>
+        <m name="neck_circ" value="37"/>
+        <m name="bust_circ" value="86"/>
+        <m name="waist_circ" value="76&#10;"/>
+        <m name="arm_shoulder_tip_to_wrist" value="58"/>
+        <m name="arm_wrist_circ" value="16"/>
+        <m name="head_circ" value="55"/>
+        <m name="arm_lower_circ" value="26"/>
+    </body-measurements>
+</vit>

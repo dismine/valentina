@@ -1,0 +1,52 @@
+{
+    "vector": [
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": 30.000000000000068,
+            "y": 101.31401574803158
+        },
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": 30,
+            "y": -1028.7647244094487
+        },
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": 1367.9527559055118,
+            "y": -1028.7647244094487
+        },
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": 1367.9527559055118,
+            "y": 101.31401574803158
+        },
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": 1367.9527559055118,
+            "y": 101.31401574803158
+        },
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": 1367.9527559055118,
+            "y": 1231.3927559055119
+        },
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": 30,
+            "y": 1231.3927559055119
+        },
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": 30.000000000000068,
+            "y": 101.31401574803158
+        }
+    ]
+}

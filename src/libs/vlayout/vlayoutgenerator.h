@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,126 +29,167 @@
 #ifndef VLAYOUTGENERATOR_H
 #define VLAYOUTGENERATOR_H
 
-#include <qcompilerdetection.h>
 #include <QList>
+#include <QMargins>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
 #include <QVector>
 #include <QtGlobal>
-#include <memory>
 #include <atomic>
+#include <memory>
 
 #include "vbank.h"
 #include "vlayoutdef.h"
-
-class QMarginsF;
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
-#   include "../vmisc/backport/qmarginsf.h"
-#else
-#   include <QMargins>
-#endif
+#include "vlayoutpaper.h"
 
 class QGraphicsItem;
-class VLayoutPaper;
+class QElapsedTimer;
 
-class VLayoutGenerator :public QObject
+class VLayoutGenerator : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     explicit VLayoutGenerator(QObject *parent = nullptr);
-    virtual ~VLayoutGenerator() override;
+    ~VLayoutGenerator() override;
 
     void SetDetails(const QVector<VLayoutPiece> &details);
     void SetLayoutWidth(qreal width);
     void SetCaseType(Cases caseType);
-    int DetailsCount();
+    auto DetailsCount() -> vsizetype;
 
-    qreal GetPaperHeight() const;
+    auto GetPaperHeight() const -> qreal;
     void SetPaperHeight(qreal value);
 
-    qreal GetPaperWidth() const;
+    auto GetPaperWidth() const -> qreal;
     void SetPaperWidth(qreal value);
 
-    bool IsUsePrinterFields() const;
-    QMarginsF GetPrinterFields() const;
+    auto GetNestingTime() const -> int;
+    auto GetNestingTimeMSecs() const -> int;
+    void SetNestingTime(int value);
+
+    auto GetEfficiencyCoefficient() const -> qreal;
+    void SetEfficiencyCoefficient(qreal coefficient);
+
+    auto IsUsePrinterFields() const -> bool;
+    auto GetPrinterFields() const -> QMarginsF;
     void SetPrinterFields(bool usePrinterFields, const QMarginsF &value);
 
-    quint32 GetShift() const;
-    void    SetShift(quint32 shift);
+    auto GetShift() const -> qreal;
+    void SetShift(qreal shift);
 
-    void Generate();
+    void Generate(const QElapsedTimer &timer, qint64 timeout, LayoutErrors previousState = LayoutErrors::NoError);
 
-    LayoutErrors State() const;
+    auto LayoutEfficiency() const -> qreal;
 
-    Q_REQUIRED_RESULT QList<QGraphicsItem *> GetPapersItems() const;
-    Q_REQUIRED_RESULT QList<QList<QGraphicsItem *>> GetAllDetailsItems() const;
+    auto State() const -> LayoutErrors;
 
-    QVector<QVector<VLayoutPiece>> GetAllDetails() const;
+    auto PapersCount() const -> vsizetype;
 
-    bool GetRotate() const;
+    Q_REQUIRED_RESULT auto GetPapersItems() const -> QList<QGraphicsItem *>;
+    Q_REQUIRED_RESULT auto GetGlobalContours() const -> QList<QGraphicsItem *>;
+    Q_REQUIRED_RESULT auto GetAllDetailsItems() const -> QList<QList<QGraphicsItem *>>;
+
+    auto GetAllDetails() const -> QVector<QVector<VLayoutPiece>>;
+
+    auto GetRotate() const -> bool;
     void SetRotate(bool value);
 
-    int GetRotationIncrease() const;
-    void SetRotationIncrease(int value);
+    auto GetFollowGrainline() const -> bool;
+    void SetFollowGrainline(bool value);
 
-    bool GetAutoCrop() const;
-    void SetAutoCrop(bool value);
+    auto GetManualPriority() const -> bool;
+    void SetManualPriority(bool value);
 
-    bool IsSaveLength() const;
+    auto IsNestQuantity() const -> bool;
+    void SetNestQuantity(bool value);
+
+    auto GetRotationNumber() const -> int;
+    void SetRotationNumber(int value);
+
+    auto GetAutoCropLength() const -> bool;
+    void SetAutoCropLength(bool value);
+
+    auto GetAutoCropWidth() const -> bool;
+    void SetAutoCropWidth(bool value);
+
+    auto IsSaveLength() const -> bool;
     void SetSaveLength(bool value);
 
-    bool IsUnitePages() const;
+    auto IsPreferOneSheetSolution() const -> bool;
+    void SetPreferOneSheetSolution(bool value);
+
+    auto IsUnitePages() const -> bool;
     void SetUnitePages(bool value);
 
-    quint8 GetMultiplier() const;
-    void   SetMultiplier(const quint8 &value);
+    auto GetMultiplier() const -> quint8;
+    void SetMultiplier(quint8 value);
 
-    bool IsStripOptimization() const;
+    auto IsStripOptimization() const -> bool;
     void SetStripOptimization(bool value);
 
-    bool IsTestAsPaths() const;
-    void SetTestAsPaths(bool value);
+    auto IsTestAsPaths() const -> bool;
+    void SetTextAsPaths(bool value);
 
-signals:
-    void Start();
-    void Arranged(int count);
-    void Error(const LayoutErrors &state);
-    void Finished();
+    auto IsBoundaryTogetherWithNotches() const -> bool;
+    void SetBoundaryTogetherWithNotches(bool value);
+
+    auto IsShowLayoutAllowance() const -> bool;
+    void SetShowLayoutAllowance(bool value);
+
+    auto IsRotationNeeded() const -> bool;
+
+    auto IsPortrait() const -> bool;
 
 public slots:
     void Abort();
+    void Timeout();
 
 private:
-    Q_DISABLE_COPY(VLayoutGenerator)
-    QVector<VLayoutPaper> papers;
-    VBank *bank;
-    qreal paperHeight;
-    qreal paperWidth;
-    QMarginsF margins;
-    bool usePrinterFields;
-    std::atomic_bool stopGeneration;
-    LayoutErrors state;
-    quint32 shift;
-    bool rotate;
-    int rotationIncrease;
-    bool autoCrop;
-    bool saveLength;
-    bool unitePages;
-    bool stripOptimizationEnabled;
-    quint8 multiplier;
-    bool stripOptimization;
-    bool textAsPaths;
+    Q_DISABLE_COPY_MOVE(VLayoutGenerator) // NOLINT
+    QVector<VLayoutPaper> papers{};
+    VBank *bank{new VBank()};
+    qreal paperHeight{0};
+    qreal paperWidth{0};
+    QMarginsF margins{};
+    bool usePrinterFields{true};
+    std::atomic_bool stopGeneration{
+#ifdef Q_CC_MSVC
+        ATOMIC_VAR_INIT(false)
+#else
+        false
+#endif
+    };
+    LayoutErrors state{LayoutErrors::NoError};
+    qreal shift{0};
+    bool rotate{true};
+    bool followGrainline{false};
+    int rotationNumber{2};
+    bool autoCropLength{false};
+    bool autoCropWidth{false};
+    bool saveLength{false};
+    bool preferOneSheetSolution{false};
+    bool unitePages{false};
+    bool stripOptimizationEnabled{false};
+    quint8 multiplier{1};
+    bool stripOptimization{false};
+    bool textAsPaths{false};
+    bool togetherWithNotches{false};
+    int nestingTime{1};
+    qreal efficiencyCoefficient{0.0};
+    bool showLayoutAllowance{false};
 
-    int PageHeight() const;
-    int PageWidth() const;
+    auto PageHeight() const -> int;
+    auto PageWidth() const -> int;
 
+    void OptimizeWidth();
     void GatherPages();
     void UnitePages();
-    void UniteDetails(int j, QList<QList<VLayoutPiece> > &nDetails, qreal length, int i);
+    void UniteDetails(int j, QList<QList<VLayoutPiece>> &nDetails, qreal length, int i) const;
     void UnitePapers(int j, QList<qreal> &papersLength, qreal length);
-    QList<VLayoutPiece> MoveDetails(qreal length, const QVector<VLayoutPiece> &details);
+    auto MoveDetails(qreal length, const QVector<VLayoutPiece> &details) const -> QList<VLayoutPiece>;
+    auto MasterPage() const -> VLayoutPaper;
 };
 
 #endif // VLAYOUTGENERATOR_H

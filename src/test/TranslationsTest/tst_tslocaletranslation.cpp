@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2018 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -26,24 +26,32 @@
  **
  *************************************************************************/
 #include "tst_tslocaletranslation.h"
+#include "qnamespace.h"
 
 #include <QtTest>
 
-#include "../vmisc/logging.h"
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
 
 //---------------------------------------------------------------------------------------------------------------------
 TST_TSLocaleTranslation::TST_TSLocaleTranslation(const QString &locale, QObject *parent)
-    : TST_AbstractTranslation(parent),
-      m_locale(locale)
-{}
+  : TST_AbstractTranslation(parent),
+    m_locale(locale)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void TST_TSLocaleTranslation::CheckPlaceMarkerExist_data()
 {
     QTest::addColumn<QString>("source");
     QTest::addColumn<QString>("translation");
+    QTest::addColumn<Qt::LayoutDirection>("direction");
 
-    const QString filename = QString("valentina_%1.ts").arg(m_locale);
+    const auto filename = QStringLiteral("valentina_%1.ts").arg(m_locale);
+    QLocale const locale(m_locale);
 
     const QDomNodeList messages = LoadTSFile(filename);
     if (messages.isEmpty())
@@ -54,7 +62,7 @@ void TST_TSLocaleTranslation::CheckPlaceMarkerExist_data()
     for (qint32 i = 0, num = messages.size(); i < num; ++i)
     {
         const QDomElement message = messages.at(i).toElement();
-        if (message.isNull() == false)
+        if (!message.isNull())
         {
             const QString source = message.firstChildElement(TagSource).text();
             if (source.isEmpty())
@@ -77,13 +85,14 @@ void TST_TSLocaleTranslation::CheckPlaceMarkerExist_data()
                 continue;
             }
 
-            const QString message = QString("File '%1'. Check place holder source message '%2'").arg(filename, source);
-            QTest::newRow(qUtf8Printable(message)) << source << translation;
+            const QString caseName =
+                QStringLiteral("File '%1'. Check place holder source message '%2'").arg(filename, source);
+            QTest::newRow(qUtf8Printable(caseName)) << source << translation << locale.textDirection();
         }
         else
         {
-            const QString message = QString("File '%2'. Message %1 is null.").arg(i).arg(filename);
-            QFAIL(qUtf8Printable(message));
+            const auto caseName = QStringLiteral("File '%2'. Message %1 is null.").arg(i).arg(filename);
+            QFAIL(qUtf8Printable(caseName));
         }
     }
 }
@@ -93,45 +102,45 @@ void TST_TSLocaleTranslation::CheckPlaceMarkerExist()
 {
     QFETCH(QString, source);
     QFETCH(QString, translation);
+    QFETCH(Qt::LayoutDirection, direction);
 
     int sourceMarkCount = 0;
     int translationMarkCount = 0;
+    const QChar per('%');
 
     for (int i = 1; i <= 99; ++i)
     {
-        const QString marker = QLatin1String("%") + QString().setNum(i);
-        const bool sourceMark = source.indexOf(marker) != -1;
-        if (sourceMark)
+        const QString number = QString::number(i);
+        const QString sourceMarker = per + number;
+        const QString translationMarker = direction == Qt::RightToLeft ? number + per : sourceMarker;
+        const bool sourceMarkerFlag = source.indexOf(sourceMarker) != -1;
+        if (sourceMarkerFlag)
         {
             ++sourceMarkCount;
             if (sourceMarkCount != i)
             {
-                const QString message = QString("In source string '%1' was missed place marker ")
-                        .arg(source) + QLatin1String("'%") + QString().setNum(sourceMarkCount) +
-                        QLatin1String("'.");
+                const QString message = u"In source string '%1' was missed place marker "_s.arg(source) + "'%"_L1 +
+                                        QString().setNum(sourceMarkCount) + "'."_L1;
                 QFAIL(qUtf8Printable(message));
             }
         }
 
-        const bool translationMark = translation.indexOf(marker) != -1;
-        if (translationMark)
+        const bool translationMarkerFlag = translation.indexOf(translationMarker) != -1;
+        if (translationMarkerFlag)
         {
             ++translationMarkCount;
             if (translationMarkCount != i)
             {
-                const QString message = QString("In translation string '%1' was missed place marker ")
-                        .arg(translation) + QLatin1String("'%") + QString().setNum(translationMarkCount) +
-                        QLatin1String("'.");
+                const QString message = u"In translation string '%1' was missed place marker "_s.arg(translation) +
+                                        "'%"_L1 + QString().setNum(translationMarkCount) + "'."_L1;
                 QFAIL(qUtf8Printable(message));
             }
         }
 
-        if (sourceMark != translationMark)
+        if (sourceMarkerFlag != translationMarkerFlag)
         {
             const QString message =
-                QString("Compare to source string in the translation string '%1' was missed place marker ")
-                    .arg(translation) + QLatin1String("'%") + QString().setNum(sourceMarkCount) +
-                    QLatin1String("'.");
+                u"String '%1'. Placemark '%%2' mismatch. "_s.arg(translation, QString().setNum(sourceMarkCount + 1));
             QFAIL(qUtf8Printable(message));
         }
     }
@@ -144,7 +153,7 @@ void TST_TSLocaleTranslation::TestPunctuation_data()
     QTest::addColumn<QString>("source");
     QTest::addColumn<QString>("translation");
 
-    const QString filename = QString("valentina_%1.ts").arg(m_locale);
+    const QString filename = u"valentina_%1.ts"_s.arg(m_locale);
 
     const QDomNodeList messages = LoadTSFile(filename);
     if (messages.isEmpty())
@@ -178,13 +187,13 @@ void TST_TSLocaleTranslation::TestPunctuation_data()
                 continue;
             }
 
-            const QString message = QString("File '%1'.").arg(filename);
-            QTest::newRow(qUtf8Printable(message)) << m_locale << source << translation;
+            const auto caseName = QStringLiteral("File '%1'.").arg(filename);
+            QTest::newRow(qUtf8Printable(caseName)) << m_locale << source << translation;
         }
         else
         {
-            const QString message = QString("File '%2'. Message %1 is null.").arg(i).arg(filename);
-            QFAIL(qUtf8Printable(message));
+            const auto caseName = QStringLiteral("File '%2'. Message %1 is null.").arg(i).arg(filename);
+            QFAIL(qUtf8Printable(caseName));
         }
     }
 }
@@ -197,27 +206,34 @@ void TST_TSLocaleTranslation::TestPunctuation()
     QFETCH(QString, translation);
 
     static const QStringList punctuation{
-        QChar('.'),
-        QChar(':'),
-        QChar(QChar::Space),
-        QChar('\n'),
-        QChar('!'),
-        QChar('?'),
-        QChar(';'),
-        QChar(0x2026)//…
+        QChar('.'),   QChar(':'), QChar(QChar::Space), QChar('\n'), QChar('!'), QChar('?'), QChar(';'),
+        QChar(0x2026) // …
     };
 
+    if (QLocale(locale).textDirection() != Qt::LeftToRight)
+    {
+        QSKIP("Not supported text direction");
+    }
+
     bool testFail = false;
-    const QChar cSource = source.at(source.length()-1);
+    const QChar cSource = source.at(source.length() - 1);
     QChar cPunctuation = cSource;
-    const QChar cTranslation = translation.at(translation.length()-1);
+    const QChar cTranslation = translation.at(translation.length() - 1);
     if (punctuation.contains(cSource))
     {
         if (not translation.endsWith(cSource))
         {
             testFail = true;
 
-            if (locale == QLatin1String("el_GR") && cSource == QLatin1Char('?') && cTranslation == QLatin1Char(';'))
+            if ((locale == "el_GR"_L1
+                 // Greek question mark
+                 // https://en.wikipedia.org/wiki/Question_mark#Greek_question_mark
+                 && (cSource == '?'_L1 && cTranslation == ';'_L1))
+                || ((locale == "zh_CN"_L1 || locale == "ja_JP"_L1)
+                    // Beside usage similar to that of English, the colon has other functions. Several
+                    // compatibility forms for Chinese and Japanese typography are encoded in Unicode.
+                    // https://en.wikipedia.org/wiki/Colon_(punctuation)#Usage_in_other_languages
+                    && (cSource == ':'_L1 && cTranslation == QStringLiteral("："))))
             {
                 testFail = false;
             }
@@ -231,12 +247,11 @@ void TST_TSLocaleTranslation::TestPunctuation()
             testFail = true;
         }
     }
-
     if (testFail)
     {
-        const QString message = QString("Translation string does not end with the same punctuation character '%1' or "
-                                        "vice versa. ").arg(cPunctuation) + QString("Original name:'%1'").arg(source) +
-                QString(", translated name:'%1'").arg(translation);
+        const QString message = u"Translation string does not end with the same punctuation character '%1' or "
+                                u"vice versa. "_s.arg(cPunctuation) +
+                                u"Original name:'%1'"_s.arg(source) + u", translated name:'%1'"_s.arg(translation);
         QFAIL(qUtf8Printable(message));
     }
 }
@@ -247,7 +262,7 @@ void TST_TSLocaleTranslation::TestHTMLTags_data()
     QTest::addColumn<QString>("source");
     QTest::addColumn<QString>("translation");
 
-    const QString filename = QString("valentina_%1.ts").arg(m_locale);
+    const QString filename = u"valentina_%1.ts"_s.arg(m_locale);
 
     const QDomNodeList messages = LoadTSFile(filename);
     if (messages.isEmpty())
@@ -258,7 +273,7 @@ void TST_TSLocaleTranslation::TestHTMLTags_data()
     for (qint32 i = 0, num = messages.size(); i < num; ++i)
     {
         const QDomElement message = messages.at(i).toElement();
-        if (message.isNull() == false)
+        if (!message.isNull())
         {
             const QString source = message.firstChildElement(TagSource).text();
             if (source.isEmpty())
@@ -281,13 +296,13 @@ void TST_TSLocaleTranslation::TestHTMLTags_data()
                 continue;
             }
 
-            const QString message = QString("File '%1'.").arg(filename);
-            QTest::newRow(qUtf8Printable(message)) << source << translation;
+            const auto caseName = QStringLiteral("File '%1'.").arg(filename);
+            QTest::newRow(qUtf8Printable(caseName)) << source << translation;
         }
         else
         {
-            const QString message = QString("File '%2'. Message %1 is null.").arg(i).arg(filename);
-            QFAIL(qUtf8Printable(message));
+            const auto caseName = QStringLiteral("File '%2'. Message %1 is null.").arg(i).arg(filename);
+            QFAIL(qUtf8Printable(caseName));
         }
     }
 }
@@ -298,26 +313,22 @@ void TST_TSLocaleTranslation::TestHTMLTags()
     QFETCH(QString, source);
     QFETCH(QString, translation);
 
-    static const QStringList tags = QStringList() << QLatin1String("p")
-                                                  << QLatin1String("html")
-                                                  << QLatin1String("body");
-    static const QString pattern("{1}.*>");
-    for (auto &tag : tags)
+    QRegularExpression::PatternOptions const patternOption = QRegularExpression::DotMatchesEverythingOption;
+    static const QVector<std::pair<QRegularExpression, QRegularExpression>> regexes{
+        std::make_pair(QRegularExpression(QStringLiteral("<p{1}.*>"), patternOption),
+                       QRegularExpression(QStringLiteral("</p{1}.*>"), patternOption)),
+        std::make_pair(QRegularExpression(QStringLiteral("<html{1}.*>"), patternOption),
+                       QRegularExpression(QStringLiteral("</html{1}.*>"), patternOption)),
+        std::make_pair(QRegularExpression(QStringLiteral("<body{1}.*>"), patternOption),
+                       QRegularExpression(QStringLiteral("</body{1}.*>"), patternOption))};
+
+    for (const auto &[start, end] : regexes)
     {
-        const QRegularExpression openRegex(QLatin1String("<") + tag + pattern,
-                                           QRegularExpression::DotMatchesEverythingOption);
-        if (source.contains(openRegex))
+        if (source.contains(start) && (not translation.contains(end) || translation.count(end) != source.count(start)))
         {
-            const int countOpenTag = source.count(openRegex);
-            const QRegularExpression closeRegex(QLatin1String("</") + tag + pattern,
-                                                QRegularExpression::DotMatchesEverythingOption);
-            const int countCloseTag = translation.count(closeRegex);
-            if (not translation.contains(closeRegex) || countCloseTag != countOpenTag)
-            {
-                const QString message = QString("Tag mismatch. Tag: '<%1>'. ").arg(tag) +
-                        QString("Original name:'%1'").arg(source) + QString(", translated name:'%1'").arg(translation);
-                QFAIL(qUtf8Printable(message));
-            }
+            const QString message = u"Tag mismatch. Pattern: '<%1>'. "_s.arg(start.pattern()) +
+                                    u"Original name:'%1'"_s.arg(source) + u", translated name:'%1'"_s.arg(translation);
+            QFAIL(qUtf8Printable(message));
         }
     }
 }

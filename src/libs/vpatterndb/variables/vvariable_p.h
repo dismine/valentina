@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -31,41 +31,33 @@
 
 #include <QSharedData>
 
-#include "../vmisc/diagnostic.h"
+#include "../vmisc/defglobal.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
-class VVariableData : public QSharedData
+class VVariableData final : public QSharedData
 {
 public:
-
-    VVariableData()
-        : description()
-    {}
-
-    explicit VVariableData(const QString &description)
-        : description(description)
-    {}
-
-    VVariableData(const VVariableData &var)
-        : QSharedData(var),
-          description(var.description)
-    {}
-
-    virtual ~VVariableData();
+    VVariableData() = default;
+    explicit VVariableData(const QString &description);
+    VVariableData(const VVariableData &var) = default;
+    ~VVariableData() = default;
 
     /** @brief description description of increment */
-    QString description;
+    QString description{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
-    VVariableData &operator=(const VVariableData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN_MOVE(VVariableData) // NOLINT
 };
 
-VVariableData::~VVariableData()
-{}
-
 QT_WARNING_POP
+
+//---------------------------------------------------------------------------------------------------------------------
+inline VVariableData::VVariableData(const QString &description)
+  : description(description)
+{
+}
 
 #endif // VVARIABLE_P_H

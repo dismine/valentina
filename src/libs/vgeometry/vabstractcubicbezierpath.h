@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef VABSTRACTCUBICBEZIERPATH_H
 #define VABSTRACTCUBICBEZIERPATH_H
 
-#include <qcompilerdetection.h>
 #include <QCoreApplication>
 #include <QPointF>
 #include <QString>
@@ -43,40 +42,51 @@ class VPointF;
 class VSpline;
 class VSplinePoint;
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
+
 class VAbstractCubicBezierPath : public VAbstractBezier
 {
-    Q_DECLARE_TR_FUNCTIONS(VAbstractCubicBezierPath)
+    Q_DECLARE_TR_FUNCTIONS(VAbstractCubicBezierPath) // NOLINT
+
 public:
-    VAbstractCubicBezierPath(const GOType &type, const quint32 &idObject = NULL_ID,
-                             const Draw &mode = Draw::Calculation);
-    VAbstractCubicBezierPath(const VAbstractCubicBezierPath &curve);
-    VAbstractCubicBezierPath& operator= (const VAbstractCubicBezierPath &curve);
-    virtual ~VAbstractCubicBezierPath();
+    explicit VAbstractCubicBezierPath(const GOType &type, const quint32 &idObject = NULL_ID,
+                                      const Draw &mode = Draw::Calculation);
+    VAbstractCubicBezierPath(const VAbstractCubicBezierPath &curve) = default;
+    auto operator=(const VAbstractCubicBezierPath &curve) -> VAbstractCubicBezierPath &;
+    ~VAbstractCubicBezierPath() override;
 
-    virtual qint32  CountSubSpl() const =0;
-    virtual qint32  CountPoints() const =0;
-    virtual void    Clear() =0;
-    virtual VSpline GetSpline(qint32 index) const =0;
-    virtual QVector<VSplinePoint> GetSplinePath() const =0;
+    VAbstractCubicBezierPath(VAbstractCubicBezierPath &&curve) noexcept = default;
+    auto operator=(VAbstractCubicBezierPath &&curve) noexcept -> VAbstractCubicBezierPath & = default;
 
-    virtual QPainterPath     GetPath() const override;
-    virtual QVector<QPointF> GetPoints() const override;
-    virtual qreal            GetLength() const override;
+    virtual auto CountSubSpl() const -> vsizetype = 0;
+    virtual auto CountPoints() const -> vsizetype = 0;
+    virtual void Clear() = 0;
+    virtual auto GetSpline(vsizetype index) const -> VSpline = 0;
+    virtual auto GetSplinePath() const -> QVector<VSplinePoint> = 0;
 
-    virtual QVector<DirectionArrow> DirectionArrows() const override;
+    auto GetPath() const -> QPainterPath override;
+    auto GetPoints() const -> QVector<QPointF> override;
+    auto GetLength() const -> qreal override;
 
-    int Segment(const QPointF &p) const;
+    auto DirectionArrows() const -> QVector<DirectionArrow> override;
 
-    QPointF CutSplinePath(qreal length, qint32 &p1, qint32 &p2, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2,
-                          QPointF &spl2p3) const;
+    auto Segment(const QPointF &p) const -> int;
 
-    virtual QString NameForHistory(const QString &toolName) const override;
+    auto CutSplinePath(qreal length, qint32 &p1, qint32 &p2, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2,
+                       QPointF &spl2p3, const QString &pointName) const -> QPointF;
+
+    auto NameForHistory(const QString &toolName) const -> QString override;
 
 protected:
-    virtual void CreateName() override;
+    void CreateName() override;
+    void CreateAlias() override;
 
-    virtual VPointF FirstPoint() const =0;
-    virtual VPointF LastPoint() const =0;
+    virtual auto FirstPoint() const -> VPointF = 0;
+    virtual auto LastPoint() const -> VPointF = 0;
 };
+
+QT_WARNING_POP
 
 #endif // VABSTRACTCUBICBEZIERPATH_H

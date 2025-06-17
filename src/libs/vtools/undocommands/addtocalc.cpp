@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -30,20 +30,20 @@
 
 #include <QDomNode>
 
-#include "../vwidgets/vmaingraphicsview.h"
 #include "../ifc/xml/vabstractpattern.h"
-#include "../ifc/ifcdef.h"
-#include "../vmisc/logging.h"
-#include "../vmisc/vabstractapplication.h"
 #include "../vmisc/customevents.h"
+#include "../vmisc/vabstractvalapplication.h"
+#include "../vwidgets/vmaingraphicsview.h"
 #include "vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 AddToCalc::AddToCalc(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent)
-    : VUndoCommand(xml, doc, parent), nameActivDraw(doc->GetNameActivPP()), cursor(doc->getCursor())
+  : VUndoCommand(xml, doc, parent),
+    nameActivDraw(doc->GetNameActivPP()),
+    cursor(doc->getCursor())
 {
     setText(tr("add object"));
-    nodeId = doc->GetParametrId(xml);
+    nodeId = VAbstractPattern::GetParametrId(xml);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -51,12 +51,12 @@ void AddToCalc::undo()
 {
     qCDebug(vUndo, "Undo.");
 
-    doc->ChangeActivPP(nameActivDraw);//Without this user will not see this change
+    doc->ChangeActivPP(nameActivDraw); // Without this user will not see this change
 
     QDomElement calcElement;
     if (doc->GetActivNodeElement(VAbstractPattern::TagCalculation, calcElement))
     {
-        QDomElement domElement = doc->elementById(nodeId);
+        QDomElement const domElement = doc->FindElementById(nodeId);
         if (domElement.isElement())
         {
             if (calcElement.removeChild(domElement).isNull())
@@ -77,10 +77,11 @@ void AddToCalc::undo()
         return;
     }
     emit NeedFullParsing();
-    VMainGraphicsView::NewSceneRect(qApp->getCurrentScene(), qApp->getSceneView());
-    if (qApp->GetDrawMode() == Draw::Calculation)
+    VMainGraphicsView::NewSceneRect(VAbstractValApplication::VApp()->getCurrentScene(),
+                                    VAbstractValApplication::VApp()->getSceneView());
+    if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
     {
-        emit doc->SetCurrentPP(nameActivDraw);//Return current pattern piece after undo
+        emit doc->SetCurrentPP(nameActivDraw); // Return current pattern piece after undo
     }
 }
 
@@ -89,7 +90,7 @@ void AddToCalc::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    doc->ChangeActivPP(nameActivDraw);//Without this user will not see this change
+    doc->ChangeActivPP(nameActivDraw); // Without this user will not see this change
     doc->setCursor(cursor);
 
     QDomElement calcElement;
@@ -101,7 +102,7 @@ void AddToCalc::redo()
         }
         else
         {
-            QDomElement refElement = doc->elementById(cursor);
+            QDomElement const refElement = doc->FindElementById(cursor);
             if (refElement.isElement())
             {
                 calcElement.insertAfter(xml, refElement);
@@ -119,7 +120,8 @@ void AddToCalc::redo()
         return;
     }
     RedoFullParsing();
-    VMainGraphicsView::NewSceneRect(qApp->getCurrentScene(), qApp->getSceneView());
+    VMainGraphicsView::NewSceneRect(VAbstractValApplication::VApp()->getCurrentScene(),
+                                    VAbstractValApplication::VApp()->getSceneView());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -128,9 +130,9 @@ void AddToCalc::RedoFullParsing()
     if (redoFlag)
     {
         emit NeedFullParsing();
-        if (qApp->GetDrawMode() == Draw::Calculation)
+        if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
         {
-            emit doc->SetCurrentPP(nameActivDraw);//Return current pattern piece after undo
+            emit doc->SetCurrentPP(nameActivDraw); // Return current pattern piece after undo
         }
     }
     else

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -33,89 +33,75 @@
 #include <QPainterPath>
 #include <QPointF>
 #include <QSharedPointer>
-#include <Qt>
 #include <new>
 
-#include "../ifc/ifcdef.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vcubicbezier.h"
 #include "../vgeometry/vpointf.h"
-#include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
-#include "vispath.h"
+#include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/scalesceneitems.h"
+#include "vispath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolCubicBezier::VisToolCubicBezier(const VContainer *data, QGraphicsItem *parent)
-    : VisPath(data, parent),
-      object2Id(NULL_ID),
-      object3Id(NULL_ID),
-      object4Id(NULL_ID),
-      point1(nullptr),
-      point2(nullptr),
-      point3(nullptr),
-      point4(nullptr),
-      helpLine1(nullptr),
-      helpLine2(nullptr)
+  : VisPath(data, parent)
 {
-    helpLine1 = InitItem<VScaledLine>(mainColor, this);
-    helpLine2 = InitItem<VScaledLine>(mainColor, this);
+    m_helpLine1 = InitItem<VScaledLine>(VColorRole::VisMainColor, this);
+    m_helpLine2 = InitItem<VScaledLine>(VColorRole::VisMainColor, this);
 
-    point1 = InitPoint(supportColor, this);
-    point2 = InitPoint(supportColor, this); //-V656
-    point3 = InitPoint(supportColor, this); //-V656
-    point4 = InitPoint(supportColor, this); //-V656
+    m_point1 = InitPoint(VColorRole::VisSupportColor, this);
+    m_point2 = InitPoint(VColorRole::VisSupportColor, this); //-V656
+    m_point3 = InitPoint(VColorRole::VisSupportColor, this); //-V656
+    m_point4 = InitPoint(VColorRole::VisSupportColor, this); //-V656
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolCubicBezier::RefreshGeometry()
 {
-    if (object1Id > NULL_ID)
+    if (m_point1Id > NULL_ID)
     {
-        const auto first = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(point1, static_cast<QPointF>(*first), Qt::DashLine);
+        const auto first = GetData()->GeometricObject<VPointF>(m_point1Id);
+        DrawPoint(m_point1, static_cast<QPointF>(*first), Qt::DashLine);
 
-        if (object2Id <= NULL_ID)
+        if (m_point2Id <= NULL_ID)
         {
-            DrawLine(helpLine1, QLineF(static_cast<QPointF>(*first), Visualization::scenePos), mainColor, Qt::DashLine);
+            DrawLine(m_helpLine1, QLineF(static_cast<QPointF>(*first), ScenePos()), Qt::DashLine);
         }
         else
         {
-            const auto second = Visualization::data->GeometricObject<VPointF>(object2Id);
-            DrawPoint(point2, static_cast<QPointF>(*second), supportColor);
-            DrawLine(helpLine1, QLineF(static_cast<QPointF>(*first), static_cast<QPointF>(*second)), mainColor,
-                     Qt::DashLine);
+            const auto second = GetData()->GeometricObject<VPointF>(m_point2Id);
+            DrawPoint(m_point2, static_cast<QPointF>(*second));
+            DrawLine(m_helpLine1, QLineF(static_cast<QPointF>(*first), static_cast<QPointF>(*second)), Qt::DashLine);
 
-            if (object3Id <= NULL_ID)
+            if (m_point3Id <= NULL_ID)
             {
-                VCubicBezier spline(*first, *second, VPointF(Visualization::scenePos),
-                                    VPointF(Visualization::scenePos));
-                spline.SetApproximationScale(m_approximationScale);
-                DrawPath(this, spline.GetPath(), mainColor, lineStyle, Qt::RoundCap);
+                VCubicBezier spline(*first, *second, VPointF(ScenePos()), VPointF(ScenePos()));
+                spline.SetApproximationScale(ApproximationScale());
+                DrawPath(this, spline.GetPath(), LineStyle(), Qt::RoundCap);
             }
             else
             {
-                const auto third = Visualization::data->GeometricObject<VPointF>(object3Id);
-                DrawPoint(point3, static_cast<QPointF>(*third), supportColor);
+                const auto third = GetData()->GeometricObject<VPointF>(m_point3Id);
+                DrawPoint(m_point3, static_cast<QPointF>(*third));
 
-                if (object4Id <= NULL_ID)
+                if (m_point4Id <= NULL_ID)
                 {
-                    VCubicBezier spline(*first, *second, *third,  VPointF(Visualization::scenePos));
-                    spline.SetApproximationScale(m_approximationScale);
-                    DrawPath(this, spline.GetPath(), mainColor, lineStyle, Qt::RoundCap);
-                    DrawLine(helpLine2, QLineF(static_cast<QPointF>(*third), Visualization::scenePos), mainColor,
-                             Qt::DashLine);
+                    VCubicBezier spline(*first, *second, *third, VPointF(ScenePos()));
+                    spline.SetApproximationScale(ApproximationScale());
+                    DrawPath(this, spline.GetPath(), LineStyle(), Qt::RoundCap);
+                    DrawLine(m_helpLine2, QLineF(static_cast<QPointF>(*third), ScenePos()), Qt::DashLine);
                 }
                 else
                 {
-                    const auto fourth = Visualization::data->GeometricObject<VPointF>(object4Id);
-                    DrawPoint(point4, static_cast<QPointF>(*fourth), supportColor);
-                    DrawLine(helpLine2, QLineF(static_cast<QPointF>(*fourth), static_cast<QPointF>(*third)), mainColor,
+                    const auto fourth = GetData()->GeometricObject<VPointF>(m_point4Id);
+                    DrawPoint(m_point4, static_cast<QPointF>(*fourth));
+                    DrawLine(m_helpLine2, QLineF(static_cast<QPointF>(*fourth), static_cast<QPointF>(*third)),
                              Qt::DashLine);
 
-                    VCubicBezier spline(*first, *second, *third,  *fourth);
-                    spline.SetApproximationScale(m_approximationScale);
-                    DrawPath(this, spline.GetPath(), spline.DirectionArrows(), mainColor, lineStyle, Qt::RoundCap);
+                    VCubicBezier spline(*first, *second, *third, *fourth);
+                    spline.SetApproximationScale(ApproximationScale());
+                    DrawPath(this, spline.GetPath(), spline.DirectionArrows(), LineStyle(), Qt::RoundCap);
                 }
             }
         }
@@ -123,19 +109,8 @@ void VisToolCubicBezier::RefreshGeometry()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolCubicBezier::setObject2Id(const quint32 &value)
+void VisToolCubicBezier::VisualMode(quint32 id)
 {
-    object2Id = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolCubicBezier::setObject3Id(const quint32 &value)
-{
-    object3Id = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolCubicBezier::setObject4Id(const quint32 &value)
-{
-    object4Id = value;
+    m_point1Id = id;
+    StartVisualMode();
 }

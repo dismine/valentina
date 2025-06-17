@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -30,8 +30,9 @@
 #define VNODEDETAIL_P_H
 
 #include <QSharedData>
-#include "../ifc/ifcdef.h"
-#include "../vmisc/diagnostic.h"
+
+#include "../vmisc/def.h"
+#include "../vmisc/typedef.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -40,50 +41,52 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VNodeDetailData : public QSharedData
 {
 public:
-  VNodeDetailData()
-    :id(NULL_ID), typeTool(Tool::NodePoint), typeNode(NodeDetail::Contour), mx(0), my(0), reverse(false)
-  {}
+    VNodeDetailData() = default;
+    VNodeDetailData(quint32 id, Tool typeTool, NodeDetail typeNode, qreal mx, qreal my, bool reverse);
+    VNodeDetailData(const VNodeDetailData &node) = default;
+    ~VNodeDetailData() = default;
 
-  VNodeDetailData(quint32 id, Tool typeTool, NodeDetail typeNode, qreal mx, qreal my, bool reverse)
-      :id(id), typeTool(typeTool), typeNode(typeNode), mx(mx), my(my), reverse(reverse)
-  {}
-
-  VNodeDetailData (const VNodeDetailData& node)
-      :QSharedData(node), id(node.id), typeTool(node.typeTool), typeNode(node.typeNode), mx(node.mx), my(node.my),
-        reverse(node.reverse)
-  {}
-
-  ~VNodeDetailData() {}
-
-  /**
-   * @brief id object id.
-   */
-  quint32     id;
-  /**
-   * @brief typeTool type of tool
-   */
-  Tool typeTool;
-  /**
-   * @brief typeNode node type.
-   */
-  NodeDetail typeNode;
-  /**
-   * @brief mx bias x axis.
-   */
-  qreal       mx;
-  /**
-   * @brief my bias y axis.
-   */
-  qreal       my;
-  /**
-   * @brief reverse true if need reverse points list for node.
-   */
-  bool        reverse;
+    /**
+     * @brief id object id.
+     */
+    quint32 id{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
+    /**
+     * @brief typeTool type of tool
+     */
+    Tool typeTool{Tool::NodePoint}; // NOLINT(misc-non-private-member-variables-in-classes)
+    /**
+     * @brief typeNode node type.
+     */
+    NodeDetail typeNode{NodeDetail::Contour}; // NOLINT(misc-non-private-member-variables-in-classes)
+    /**
+     * @brief mx bias x axis.
+     */
+    qreal mx{0}; // NOLINT(misc-non-private-member-variables-in-classes)
+    /**
+     * @brief my bias y axis.
+     */
+    qreal my{0}; // NOLINT(misc-non-private-member-variables-in-classes)
+    /**
+     * @brief reverse true if need reverse points list for node.
+     */
+    bool reverse{false}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
-    VNodeDetailData &operator=(const VNodeDetailData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN_MOVE(VNodeDetailData) // NOLINT
 };
 
 QT_WARNING_POP
+
+//---------------------------------------------------------------------------------------------------------------------
+inline VNodeDetailData::VNodeDetailData(quint32 id, Tool typeTool, NodeDetail typeNode, qreal mx, qreal my,
+                                        bool reverse)
+  : id(id),
+    typeTool(typeTool),
+    typeNode(typeNode),
+    mx(mx),
+    my(my),
+    reverse(reverse)
+{
+}
 
 #endif // VNODEDETAIL_P_H

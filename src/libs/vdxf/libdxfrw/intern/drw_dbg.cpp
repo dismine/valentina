@@ -12,122 +12,118 @@
 
 #include <iostream>
 #include <iomanip>
+#include "make_unique.h"
 #include "drw_dbg.h"
 
-DRW_dbg *DRW_dbg::instance= NULL;
+DRW_dbg *DRW_dbg::instance{nullptr};
 
-/*********private clases*************/
-class print_none {
-public:
-    virtual void printS(const std::string &s){(void)s;}
-    virtual void printI(long long int i){(void)i;}
-    virtual void printUI(long long unsigned int i){(void)i;}
-    virtual void printD(double d){(void)d;}
-    virtual void printH(long long int i){(void)i;}
-    virtual void printB(int i){(void)i;}
-    virtual void printHL(int c, int s, int h){(void)c;(void)s;(void)h;}
-    virtual void printPT(double x, double y, double z){(void)x;(void)y;(void)z;}
-    print_none(){}
-    virtual ~print_none(){}
-};
+/*********private classes*************/
 
-class print_debug : public print_none {
+class print_debug : public DRW::DebugPrinter {
 public:
-    virtual void printS(const std::string &s) override;
-    virtual void printI(long long int i) override;
-    virtual void printUI(long long unsigned int i) override;
-    virtual void printD(double d) override;
-    virtual void printH(long long int i) override;
-    virtual void printB(int i) override;
-    virtual void printHL(int c, int s, int h) override;
-    virtual void printPT(double x, double y, double z) override;
-    print_debug();
-    virtual ~print_debug() = default;
+    void printS(const std::string &s) override;
+    void printI(long long int i) override;
+    void printUI(long long unsigned int i) override;
+    void printD(double d) override;
+    void printH(long long int i) override;
+    void printB(int i) override;
+    void printHL(int c, int s, int h) override;
+    void printPT(double x, double y, double z) override;
+    print_debug()=default;
 private:
-    std::ios_base::fmtflags flags;
+    std::ios_base::fmtflags flags{std::cerr.flags()};
 };
 
 /********* debug class *************/
-DRW_dbg *DRW_dbg::getInstance(){
-    if (instance == NULL){
+auto DRW_dbg::getInstance() -> DRW_dbg *
+{
+    if (instance == nullptr){
         instance = new DRW_dbg;
     }
     return instance;
 }
 
-DRW_dbg::DRW_dbg()
-    : level(NONE),
-      flags(std::cerr.flags()),
-      prClass(new print_none)
-{}
-
-DRW_dbg::~DRW_dbg()
+DRW_dbg::DRW_dbg() :
+    debugPrinter(std::make_unique<print_debug>())
 {
-    delete prClass;
+    currentPrinter = &silentDebug;
 }
 
-void DRW_dbg::setLevel(LEVEL lvl){
-    level = lvl;
-    delete prClass;
-    switch (level){
-    case DEBUG:
-        prClass = new print_debug;
-        break;
-    default:
-        prClass = new print_none;
+void DRW_dbg::setCustomDebugPrinter(std::unique_ptr<DRW::DebugPrinter> printer)
+{
+    debugPrinter = std::move( printer );
+    if (level == Level::Debug){
+        currentPrinter = debugPrinter.get();
     }
 }
 
-DRW_dbg::LEVEL DRW_dbg::getLevel() const{
+void DRW_dbg::setLevel(Level lvl){
+    level = lvl;
+    switch (level){
+    case Level::Debug:
+        currentPrinter = debugPrinter.get();
+        break;
+    default:
+        currentPrinter = &silentDebug;
+        break;
+    }
+}
+
+auto DRW_dbg::getLevel() const -> DRW_dbg::Level
+{
     return level;
 }
 
 void DRW_dbg::print(const std::string &s){
-    prClass->printS(s);
+    currentPrinter->printS(s);
+}
+
+void DRW_dbg::print(signed char i){
+    currentPrinter->printI(i);
+}
+
+void DRW_dbg::print(unsigned char i){
+    currentPrinter->printUI(i);
 }
 
 void DRW_dbg::print(int i){
-    prClass->printI(i);
+    currentPrinter->printI(i);
 }
 
 void DRW_dbg::print(unsigned int i){
-    prClass->printUI(i);
+    currentPrinter->printUI(i);
 }
 
 void DRW_dbg::print(long long int i){
-    prClass->printI(i);
+    currentPrinter->printI(i);
 }
 
 void DRW_dbg::print(long unsigned int i){
-    prClass->printUI(i);
+    currentPrinter->printUI(i);
 }
 
 void DRW_dbg::print(long long unsigned int i){
-    prClass->printUI(i);
+    currentPrinter->printUI(i);
 }
 
 void DRW_dbg::print(double d){
-    prClass->printD(d);
+    currentPrinter->printD(d);
 }
 
 void DRW_dbg::printH(long long int i){
-    prClass->printH(i);
+    currentPrinter->printH(i);
 }
 
 void DRW_dbg::printB(int i){
-    prClass->printB(i);
+    currentPrinter->printB(i);
 }
 void DRW_dbg::printHL(int c, int s, int h){
-    prClass->printHL(c, s, h);
+    currentPrinter->printHL(c, s, h);
 }
 
 void DRW_dbg::printPT(double x, double y, double z){
-    prClass->printPT(x, y, z);
+    currentPrinter->printPT(x, y, z);
 }
-
-print_debug::print_debug()
-    : flags(std::cerr.flags())
-{}
 
 void print_debug::printS(const std::string &s){
     std::cerr << s;

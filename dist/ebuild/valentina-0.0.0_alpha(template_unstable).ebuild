@@ -7,7 +7,7 @@ EAPI=5
 inherit mercurial qmake-utils gnome2-utils fdo-mime
 
 DESCRIPTION="Cloth patternmaking software"
-HOMEPAGE="https://valentinaproject.bitbucket.io/"
+HOMEPAGE="https://smart-pattern.com.ua/"
 SRC_URI=""
 EHG_REPO_URI="https://bitbucket.org/dismine/valentina"
 EHG_REVISION="develop"
@@ -59,6 +59,7 @@ src_install() {
 
 	doman dist/debian/${PN}.1
 	doman dist/debian/tape.1
+    doman dist/debian/puzzle.1
 
 	cp dist/debian/valentina.sharedmimeinfo dist/debian/${PN}.xml || die
 	insinto /usr/share/mime/packages

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -33,26 +33,26 @@
 
 namespace Ui
 {
-    class DialogAboutApp;
+class DialogAboutApp;
 }
 
 class DialogAboutApp : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit DialogAboutApp(QWidget *parent = nullptr);
-    virtual ~DialogAboutApp();
+    ~DialogAboutApp() override;
 
 protected:
-    virtual void showEvent(QShowEvent *event) override;
+    void showEvent(QShowEvent *event) override;
 
 private:
     Ui::DialogAboutApp *ui;
-    bool isInitialized;
-    Q_DISABLE_COPY(DialogAboutApp)
+    bool m_isInitialized{false};
+    Q_DISABLE_COPY_MOVE(DialogAboutApp) // NOLINT
 
-    void FontPointSize(QWidget *w, int pointSize);
+    static void FontPointSize(QWidget *w, int pointSize);
 };
 
 #endif // DIALOGABOUTAPP_H

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -33,171 +33,260 @@
 
 #include "vdxfengine.h"
 
- //---------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 VDxfPaintDevice::VDxfPaintDevice()
-    :QPaintDevice(), engine(new VDxfEngine()), fileName()
+  : m_engine(new VDxfEngine())
 {
 }
 
- //---------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 VDxfPaintDevice::~VDxfPaintDevice()
 {
-    delete engine;
+    delete m_engine;
 }
 
- //---------------------------------------------------------------------------------------------------------------------
- // cppcheck-suppress unusedFunction
-QPaintEngine *VDxfPaintDevice::paintEngine() const
+//---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
+auto VDxfPaintDevice::paintEngine() const -> QPaintEngine *
 {
-    return engine;
+    return m_engine;
 }
 
- //---------------------------------------------------------------------------------------------------------------------
- // cppcheck-suppress unusedFunction
-QString VDxfPaintDevice::getFileName() const
+//---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
+auto VDxfPaintDevice::GetFileName() const -> QString
 {
-    return fileName;
+    return m_fileName;
 }
 
- //---------------------------------------------------------------------------------------------------------------------
-void VDxfPaintDevice::setFileName(const QString &value)
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfPaintDevice::SetFileName(const QString &value)
 {
-    if (engine->isActive())
+    if (m_engine->isActive())
     {
         qWarning("VDxfPaintDevice::setFileName(), cannot set file name while Dxf is being generated");
         return;
     }
 
-    fileName = value;
-    engine->setFileName(fileName);
+    m_fileName = value;
+    m_engine->SetFileName(m_fileName);
 }
 
- //---------------------------------------------------------------------------------------------------------------------
-QSize VDxfPaintDevice::getSize()
+//---------------------------------------------------------------------------------------------------------------------
+auto VDxfPaintDevice::GetSize() -> QSize
 {
-    return engine->getSize();
+    return m_engine->GetSize();
 }
 
- //---------------------------------------------------------------------------------------------------------------------
-void VDxfPaintDevice::setSize(const QSize &size)
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfPaintDevice::SetSize(const QSize &size)
 {
-    if (engine->isActive())
+    if (m_engine->isActive())
     {
         qWarning("VDxfPaintDevice::setSize(), cannot set size while Dxf is being generated");
         return;
     }
-    engine->setSize(size);
+    m_engine->SetSize(size);
 }
 
- //---------------------------------------------------------------------------------------------------------------------
-double VDxfPaintDevice::getResolution() const
+//---------------------------------------------------------------------------------------------------------------------
+auto VDxfPaintDevice::GetResolution() const -> double
 {
-    return engine->getResolution();
+    return m_engine->GetResolution();
 }
 
- //---------------------------------------------------------------------------------------------------------------------
-void VDxfPaintDevice::setResolution(double dpi)
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfPaintDevice::SetResolution(double dpi)
 {
-    if (engine->isActive())
+    if (m_engine->isActive())
     {
         qWarning("VDxfPaintDevice::setResolution(), cannot set dpi while Dxf is being generated");
         return;
     }
-    engine->setResolution(dpi);
+    m_engine->SetResolution(dpi);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-DRW::Version VDxfPaintDevice::GetVersion() const
+auto VDxfPaintDevice::GetVersion() const -> DRW::Version
 {
-    return engine->GetVersion();
+    return m_engine->GetVersion();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfPaintDevice::SetVersion(DRW::Version version)
 {
-    if (engine->isActive())
+    if (m_engine->isActive())
     {
         qWarning("VDxfPaintDevice::SetVersion(), cannot set version while Dxf is being generated");
         return;
     }
-    engine->SetVersion(version);
+    m_engine->SetVersion(version);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfPaintDevice::SetBinaryFormat(bool binary)
 {
-    if (engine->isActive())
+    if (m_engine->isActive())
     {
         qWarning("VDxfPaintDevice::SetBinaryFormat(), cannot set binary format while Dxf is being generated");
         return;
     }
-    engine->SetBinaryFormat(binary);
+    m_engine->SetBinaryFormat(binary);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VDxfPaintDevice::IsBinaryFromat() const
+auto VDxfPaintDevice::IsBinaryFromat() const -> bool
 {
-    return engine->IsBinaryFormat();
+    return m_engine->IsBinaryFormat();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDxfPaintDevice::setMeasurement(const VarMeasurement &var)
+void VDxfPaintDevice::SetMeasurement(const VarMeasurement &var)
 {
-    if (engine->isActive())
+    if (m_engine->isActive())
     {
         qWarning("VDxfPaintDevice::setMeasurement(), cannot set measurements while Dxf is being generated");
         return;
     }
-    engine->setMeasurement(var);
+    m_engine->SetMeasurement(var);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDxfPaintDevice::setInsunits(const VarInsunits &var)
+void VDxfPaintDevice::SetInsunits(const VarInsunits &var)
 {
-    if (engine->isActive())
+    if (m_engine->isActive())
     {
         qWarning("VDxfPaintDevice::setInsunits(), cannot set units while Dxf is being generated");
         return;
     }
-    engine->setInsunits(var);
+    m_engine->SetInsunits(var);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VDxfPaintDevice::ExportToAAMA(const QVector<VLayoutPiece> &details) const
+auto VDxfPaintDevice::GetXScale() const -> qreal
 {
-    engine->setActive(true);
-    const bool res = engine->ExportToAAMA(details);
-    engine->setActive(false);
+    return m_engine->GetYScale();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfPaintDevice::SetXScale(const qreal &xscale)
+{
+    if (m_engine->isActive())
+    {
+        qWarning("VDxfPaintDevice::SetXScale(), cannot set x scale while Dxf is being generated");
+        return;
+    }
+    m_engine->SetXScale(xscale);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VDxfPaintDevice::GetYScale() const -> qreal
+{
+    return m_engine->GetXScale();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfPaintDevice::SetYScale(const qreal &yscale)
+{
+    if (m_engine->isActive())
+    {
+        qWarning("VDxfPaintDevice::SetYScale(), cannot set y scale while Dxf is being generated");
+        return;
+    }
+    m_engine->SetYScale(yscale);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfPaintDevice::SetBoundaryTogetherWithNotches(bool value)
+{
+    if (m_engine->isActive())
+    {
+        qWarning("VDxfPaintDevice::SetBoundaryTogetherWithNotches(), cannot set boundary together with notches while "
+                 "Dxf is being generated");
+        return;
+    }
+    m_engine->SetBoundaryTogetherWithNotches(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VDxfPaintDevice::IsBoundaryTogetherWithNotches() const -> bool
+{
+    return m_engine->IsBoundaryTogetherWithNotches();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VDxfPaintDevice::DxfApparelCompatibility() const -> DXFApparelCompatibility
+{
+    return m_engine->DxfApparelCompatibility();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfPaintDevice::SetDxfApparelCompatibility(DXFApparelCompatibility mode)
+{
+    if (m_engine->isActive())
+    {
+        qWarning("VDxfPaintDevice::SetDxfApparelCompatibility(), cannot set compatibility mode while Dxf is being "
+                 "generated");
+        return;
+    }
+    m_engine->SetDxfApparelCompatibility(mode);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VDxfPaintDevice::ExportToAAMA(const QVector<VLayoutPiece> &details) const -> bool
+{
+    m_engine->setActive(true);
+    const bool res = m_engine->ExportToAAMA(details);
+    m_engine->setActive(false);
     return res;
 }
 
- //---------------------------------------------------------------------------------------------------------------------
-int VDxfPaintDevice::metric(QPaintDevice::PaintDeviceMetric metric) const
+//---------------------------------------------------------------------------------------------------------------------
+auto VDxfPaintDevice::ExportToASTM(const QVector<VLayoutPiece> &details) const -> bool
+{
+    m_engine->setActive(true);
+    const bool res = m_engine->ExportToASTM(details);
+    m_engine->setActive(false);
+    return res;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VDxfPaintDevice::ErrorString() const -> QString
+{
+    return m_engine->ErrorString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VDxfPaintDevice::metric(QPaintDevice::PaintDeviceMetric metric) const -> int
 {
     switch (metric)
     {
         case QPaintDevice::PdmDepth:
             return 32;
         case QPaintDevice::PdmWidth:
-            return engine->getSize().width();
+            return m_engine->GetSize().width();
         case QPaintDevice::PdmHeight:
-            return engine->getSize().height();
+            return m_engine->GetSize().height();
         case QPaintDevice::PdmHeightMM:
-            return qRound(engine->getSize().height() * 25.4 / engine->getResolution());
+            return qRound(m_engine->GetSize().height() * 25.4 / m_engine->GetResolution());
         case QPaintDevice::PdmWidthMM:
-            return qRound(engine->getSize().width() * 25.4 / engine->getResolution());
+            return qRound(m_engine->GetSize().width() * 25.4 / m_engine->GetResolution());
         case QPaintDevice::PdmNumColors:
             return static_cast<int>(0xffffffff);
         case QPaintDevice::PdmPhysicalDpiX:
         case QPaintDevice::PdmPhysicalDpiY:
         case QPaintDevice::PdmDpiX:
         case QPaintDevice::PdmDpiY:
-            return static_cast<int>(engine->getResolution());
+            return static_cast<int>(m_engine->GetResolution());
         case QPaintDevice::PdmDevicePixelRatio:
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
         case QPaintDevice::PdmDevicePixelRatioScaled:
-#endif
             return 1;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 8, 0)
+        case QPaintDevice::PdmDevicePixelRatioF_EncodedA:
+            return QPaintDevice::encodeMetricF(QPaintDevice::PdmDevicePixelRatioF_EncodedA, 1.0);
+        case QPaintDevice::PdmDevicePixelRatioF_EncodedB:
+            return QPaintDevice::encodeMetricF(QPaintDevice::PdmDevicePixelRatioF_EncodedB, 1.0);
+#endif
         default:
             qWarning("VDxfPaintDevice::metric(), unhandled metric %d\n", metric);
             break;

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -31,9 +31,9 @@
 #include "tst_tapecommandline.h"
 #include "tst_valentinacommandline.h"
 
-int main(int argc, char** argv)
+auto main(int argc, char **argv) -> int
 {
-    QApplication app( argc, argv );
+    QApplication const app(argc, argv);
 
     int status = 0;
     auto ASSERT_TEST = [&status, argc, argv](QObject* obj)

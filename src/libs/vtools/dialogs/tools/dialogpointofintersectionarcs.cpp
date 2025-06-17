@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -34,44 +34,58 @@
 #include <QLineEdit>
 #include <QPointer>
 
-#include "../../visualization/visualization.h"
 #include "../../visualization/line/vistoolpointofintersectionarcs.h"
-#include "../vmisc/vabstractapplication.h"
-#include "dialogs/tools/dialogtool.h"
+#include "../../visualization/visualization.h"
+#include "dialogtool.h"
 #include "ui_dialogpointofintersectionarcs.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogPointOfIntersectionArcs::DialogPointOfIntersectionArcs(const VContainer *data, const quint32 &toolId,
-                                                             QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogPointOfIntersectionArcs)
+DialogPointOfIntersectionArcs::DialogPointOfIntersectionArcs(const VContainer *data, VAbstractPattern *doc,
+                                                             quint32 toolId, QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
+    ui(new Ui::DialogPointOfIntersectionArcs),
+    pointName(),
+    flagName(true),
+    flagError(true)
 {
     ui->setupUi(this);
 
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
-    ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
-    labelEditNamePoint = ui->labelEditNamePoint;
+    ui->lineEditNamePoint->setText(
+        VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
 
     InitOkCancelApply(ui);
-    DialogTool::CheckState();
 
     FillComboBoxArcs(ui->comboBoxArc1);
     FillComboBoxArcs(ui->comboBoxArc2);
     FillComboBoxCrossCirclesPoints(ui->comboBoxResult);
 
-    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogPointOfIntersectionArcs::NamePointChanged);
-    connect(ui->comboBoxArc1, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
-            this, &DialogPointOfIntersectionArcs::ArcChanged);
-    connect(ui->comboBoxArc1, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
-            this, &DialogPointOfIntersectionArcs::ArcChanged);
+    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
+            [this]()
+            {
+                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
+                CheckState();
+            });
+    connect(ui->comboBoxArc1, &QComboBox::currentTextChanged, this, &DialogPointOfIntersectionArcs::ArcChanged);
+    connect(ui->comboBoxArc1, &QComboBox::currentTextChanged, this, &DialogPointOfIntersectionArcs::ArcChanged);
 
     vis = new VisToolPointOfIntersectionArcs(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogPointOfIntersectionArcs::~DialogPointOfIntersectionArcs()
 {
     delete ui;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogPointOfIntersectionArcs::GetPointName() const -> QString
+{
+    return pointName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -82,92 +96,86 @@ void DialogPointOfIntersectionArcs::SetPointName(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogPointOfIntersectionArcs::GetFirstArcId() const
+auto DialogPointOfIntersectionArcs::GetFirstArcId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxArc1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogPointOfIntersectionArcs::SetFirstArcId(const quint32 &value)
+void DialogPointOfIntersectionArcs::SetFirstArcId(quint32 value)
 {
     setCurrentArcId(ui->comboBoxArc1, value);
 
-    VisToolPointOfIntersectionArcs *point = qobject_cast<VisToolPointOfIntersectionArcs *>(vis);
+    auto *point = qobject_cast<VisToolPointOfIntersectionArcs *>(vis);
     SCASSERT(point != nullptr)
-    point->setArc1Id(value);
+    point->SetArc1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogPointOfIntersectionArcs::GetSecondArcId() const
+auto DialogPointOfIntersectionArcs::GetSecondArcId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxArc2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogPointOfIntersectionArcs::SetSecondArcId(const quint32 &value)
+void DialogPointOfIntersectionArcs::SetSecondArcId(quint32 value)
 {
     setCurrentArcId(ui->comboBoxArc2, value);
 
-    VisToolPointOfIntersectionArcs *point = qobject_cast<VisToolPointOfIntersectionArcs *>(vis);
+    auto *point = qobject_cast<VisToolPointOfIntersectionArcs *>(vis);
     SCASSERT(point != nullptr)
-    point->setArc2Id(value);
+    point->SetArc2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-CrossCirclesPoint DialogPointOfIntersectionArcs::GetCrossArcPoint() const
+auto DialogPointOfIntersectionArcs::GetCrossArcPoint() const -> CrossCirclesPoint
 {
     return getCurrentCrossPoint<CrossCirclesPoint>(ui->comboBoxResult);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogPointOfIntersectionArcs::SetCrossArcPoint(const CrossCirclesPoint &p)
+void DialogPointOfIntersectionArcs::SetCrossArcPoint(CrossCirclesPoint p)
 {
     const qint32 index = ui->comboBoxResult->findData(static_cast<int>(p));
     if (index != -1)
     {
         ui->comboBoxResult->setCurrentIndex(index);
 
-        VisToolPointOfIntersectionArcs *point = qobject_cast<VisToolPointOfIntersectionArcs *>(vis);
+        auto *point = qobject_cast<VisToolPointOfIntersectionArcs *>(vis);
         SCASSERT(point != nullptr)
-        point->setCrossPoint(p);
+        point->SetCrossPoint(p);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionArcs::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare == false)// After first choose we ignore all objects
+    if (prepare == false && type == SceneObject::Arc) // After first choose we ignore all objects
     {
-        if (type == SceneObject::Arc)
-        {
-            VisToolPointOfIntersectionArcs *point = qobject_cast<VisToolPointOfIntersectionArcs *>(vis);
-            SCASSERT(point != nullptr)
+        auto *point = qobject_cast<VisToolPointOfIntersectionArcs *>(vis);
+        SCASSERT(point != nullptr)
 
-            switch (number)
-            {
-                case 0:
-                    if (SetObject(id, ui->comboBoxArc1, tr("Select second an arc")))
-                    {
-                        number++;
-                        point->VisualMode(id);
-                    }
-                    break;
-                case 1:
-                    if (getCurrentObjectId(ui->comboBoxArc1) != id)
-                    {
-                        if (SetObject(id, ui->comboBoxArc2, QString()))
-                        {
-                            number = 0;
-                            point->setArc2Id(id);
-                            point->RefreshGeometry();
-                            prepare = true;
-                            DialogAccepted();
-                        }
-                    }
-                    break;
-                default:
-                    break;
-            }
+        switch (number)
+        {
+            case 0:
+                if (SetObject(id, ui->comboBoxArc1, tr("Select second an arc")))
+                {
+                    number++;
+                    point->VisualMode(id);
+                }
+                break;
+            case 1:
+                if (getCurrentObjectId(ui->comboBoxArc1) != id && SetObject(id, ui->comboBoxArc2, QString()))
+                {
+                    number = 0;
+                    point->SetArc2Id(id);
+                    point->RefreshGeometry();
+                    prepare = true;
+                    DialogAccepted();
+                }
+                break;
+            default:
+                break;
         }
     }
 }
@@ -175,7 +183,7 @@ void DialogPointOfIntersectionArcs::ChosenObject(quint32 id, const SceneObject &
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionArcs::ArcChanged()
 {
-    QColor color = okColor;
+    QColor color;
     if (getCurrentObjectId(ui->comboBoxArc1) == getCurrentObjectId(ui->comboBoxArc2))
     {
         flagError = false;
@@ -184,7 +192,7 @@ void DialogPointOfIntersectionArcs::ArcChanged()
     else
     {
         flagError = true;
-        color = okColor;
+        color = OkColor(this);
     }
     ChangeColor(ui->labelArc1, color);
     ChangeColor(ui->labelArc2, color);
@@ -202,11 +210,23 @@ void DialogPointOfIntersectionArcs::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
 
-    VisToolPointOfIntersectionArcs *point = qobject_cast<VisToolPointOfIntersectionArcs *>(vis);
+    auto *point = qobject_cast<VisToolPointOfIntersectionArcs *>(vis);
     SCASSERT(point != nullptr)
 
-    point->setArc1Id(GetFirstArcId());
-    point->setArc2Id(GetSecondArcId());
-    point->setCrossPoint(GetCrossArcPoint());
+    point->SetArc1Id(GetFirstArcId());
+    point->SetArc2Id(GetSecondArcId());
+    point->SetCrossPoint(GetCrossArcPoint());
     point->RefreshGeometry();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfIntersectionArcs::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogPointOfIntersectionArcs::GetNotes() const -> QString
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef VCUBICBEZIER_H
 #define VCUBICBEZIER_H
 
-#include <qcompilerdetection.h>
 #include <QPointF>
 #include <QSharedDataPointer>
 #include <QString>
@@ -38,59 +37,56 @@
 #include <QtGlobal>
 
 #include "vabstractcubicbezier.h"
-#include "vgeometrydef.h"
 #include "vpointf.h"
 
 class VCubicBezierData;
 
-class VCubicBezier : public VAbstractCubicBezier
+class VCubicBezier final : public VAbstractCubicBezier
 {
 public:
     VCubicBezier();
     VCubicBezier(const VCubicBezier &curve);
     VCubicBezier(const VPointF &p1, const VPointF &p2, const VPointF &p3, const VPointF &p4, quint32 idObject = 0,
                  Draw mode = Draw::Calculation);
-    VCubicBezier Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const;
-    VCubicBezier Flip(const QLineF &axis, const QString &prefix = QString()) const;
-    VCubicBezier Move(qreal length, qreal angle, const QString &prefix = QString()) const;
-    virtual ~VCubicBezier();
+    auto Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const -> VCubicBezier;
+    auto Flip(const QLineF &axis, const QString &prefix = QString()) const -> VCubicBezier;
+    auto Move(qreal length, qreal angle, const QString &prefix = QString()) const -> VCubicBezier;
+    ~VCubicBezier() override;
 
-    VCubicBezier &operator=(const VCubicBezier &curve);
-#ifdef Q_COMPILER_RVALUE_REFS
-    VCubicBezier &operator=(VCubicBezier &&curve) Q_DECL_NOTHROW { Swap(curve); return *this; }
-#endif
+    auto operator=(const VCubicBezier &curve) -> VCubicBezier &;
 
-    inline void Swap(VCubicBezier &curve) Q_DECL_NOTHROW
-    { VAbstractCubicBezier::Swap(curve); std::swap(d, curve.d); }
+    VCubicBezier(VCubicBezier &&curve) noexcept;
+    auto operator=(VCubicBezier &&curve) noexcept -> VCubicBezier &;
 
-    virtual VPointF GetP1() const override;
-    void            SetP1(const VPointF &p);
+    auto GetP1() const -> VPointF override;
+    void SetP1(const VPointF &p);
 
-    virtual VPointF GetP2() const override;
-    void    SetP2(const VPointF &p);
+    auto GetP2() const -> VPointF override;
+    void SetP2(const VPointF &p);
 
-    virtual VPointF GetP3() const override;
-    void    SetP3(const VPointF &p);
+    auto GetP3() const -> VPointF override;
+    void SetP3(const VPointF &p);
 
-    virtual VPointF GetP4() const override;
-    void            SetP4(const VPointF &p);
+    auto GetP4() const -> VPointF override;
+    void SetP4(const VPointF &p);
 
-    virtual qreal            GetStartAngle() const override;
-    virtual qreal            GetEndAngle() const override;
-    virtual qreal            GetLength() const override;
-    virtual QVector<QPointF> GetPoints() const override;
+    auto GetStartAngle() const -> qreal override;
+    auto GetEndAngle() const -> qreal override;
+    auto GetLength() const -> qreal override;
+    auto GetPoints() const -> QVector<QPointF> override;
 
-    virtual qreal GetC1Length() const override;
-    virtual qreal GetC2Length() const override;
+    auto GetC1Length() const -> qreal override;
+    auto GetC2Length() const -> qreal override;
 
 protected:
-    virtual QPointF GetControlPoint1() const override;
-    virtual QPointF GetControlPoint2() const override;
+    auto GetControlPoint1() const -> QPointF override;
+    auto GetControlPoint2() const -> QPointF override;
+    auto GetRealLength() const -> qreal override;
 
 private:
     QSharedDataPointer<VCubicBezierData> d;
 };
 
-Q_DECLARE_TYPEINFO(VCubicBezier, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VCubicBezier, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VCUBICBEZIER_H

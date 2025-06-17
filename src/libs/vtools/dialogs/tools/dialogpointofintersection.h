@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef DIALOGPOINTOFINTERSECTION_H
 #define DIALOGPOINTOFINTERSECTION_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -40,40 +39,63 @@
 
 namespace Ui
 {
-    class DialogPointOfIntersection;
+class DialogPointOfIntersection;
 }
 
 /**
  * @brief The DialogPointOfIntersection class dialog for ToolPointOfIntersection. Help create point and edit option.
  */
-class DialogPointOfIntersection : public DialogTool
+class DialogPointOfIntersection final : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
-    DialogPointOfIntersection(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual ~DialogPointOfIntersection() override;
+    DialogPointOfIntersection(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
+    ~DialogPointOfIntersection() override;
 
-    void           SetPointName(const QString &value);
+    auto GetPointName() const -> QString;
+    void SetPointName(const QString &value);
 
-    quint32        GetFirstPointId() const;
-    void           SetFirstPointId(const quint32 &value);
+    auto GetFirstPointId() const -> quint32;
+    void SetFirstPointId(quint32 value);
 
-    quint32        GetSecondPointId() const;
-    void           SetSecondPointId(const quint32 &value);
+    auto GetSecondPointId() const -> quint32;
+    void SetSecondPointId(quint32 value);
+
+    void SetNotes(const QString &notes);
+    auto GetNotes() const -> QString;
+
 public slots:
-    virtual void   ChosenObject(quint32 id, const SceneObject &type) override;
-    virtual void   PointNameChanged() override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
+    void PointNameChanged() override;
+
 protected:
-    virtual void   ShowVisualization() override;
+    void ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void   SaveData() override;
+    void SaveData() override;
+    auto IsValid() const -> bool override;
+
 private:
-    Q_DISABLE_COPY(DialogPointOfIntersection)
+    Q_DISABLE_COPY_MOVE(DialogPointOfIntersection) // NOLINT
 
     /** @brief ui keeps information about user interface */
     Ui::DialogPointOfIntersection *ui;
+
+    QString pointName;
+
+    bool flagName;
+    bool flagError;
+
+    /** @brief number number of handled objects */
+    qint32 number{0};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto DialogPointOfIntersection::IsValid() const -> bool
+{
+    return flagName && flagError;
+}
 
 #endif // DIALOGPOINTOFINTERSECTION_H

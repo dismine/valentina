@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,69 +29,64 @@
 #ifndef TESTVAPPLICATION_H
 #define TESTVAPPLICATION_H
 
-#include "vabstractapplication.h"
+#include "../vmisc/compatibility.h"
+#include "../vmisc/vcommonsettings.h"
 #include "projectversion.h"
+#include "vabstractvalapplication.h"
 
-#if defined(qApp)
-#undef qApp
-#endif
-#define qApp (static_cast<TestVApplication*>(QCoreApplication::instance()))
-
-class VTestSettings;
-
-class TestVApplication : public VAbstractApplication
+class VTestSettings : public VCommonSettings
 {
+    Q_OBJECT // NOLINT
+
 public:
-    TestVApplication(int &argc, char ** argv)
-        : VAbstractApplication(argc, argv),
-          m_trVars(nullptr)
+    VTestSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
+                  QObject *parent = nullptr)
+      : VCommonSettings(format, scope, organization, application, parent)
+    {
+        REGISTER_META_TYPE_STREAM_OPERATORS(QMarginsF);
+    }
+};
+
+class TestVApplication final : public VAbstractValApplication
+{
+    Q_OBJECT // NOLINT
+
+public:
+    TestVApplication(int &argc, char **argv)
+      : VAbstractValApplication(argc, argv),
+        m_trVars(nullptr)
     {
         setApplicationName("ValentinaTest");
         setOrganizationName(VER_COMPANYNAME_STR);
 
-        OpenSettings();
+        TestVApplication::OpenSettings();
     }
 
-    virtual ~TestVApplication() Q_DECL_EQ_DEFAULT;
+    virtual ~TestVApplication() = default;
 
-    virtual const VTranslateVars *TrVars() override
-    {
-        return m_trVars;
-    }
+    virtual auto TrVars() -> const VTranslateVars * override { return m_trVars; }
 
     virtual void OpenSettings() override
     {
-        settings = new VSettings(QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(),
-                                 QCoreApplication::applicationName(), this);
+        settings = new VTestSettings(QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(),
+                                     QCoreApplication::applicationName(), this);
+        connect(settings, &VTestSettings::SVGFontsPathChanged, this, &TestVApplication::SVGFontsPathChanged);
     }
 
-    virtual bool IsAppInGUIMode() const override
-    {
-        return false;
-    }
+    virtual auto IsAppInGUIMode() const -> bool override { return false; }
 
-    virtual void InitTrVars() override
-    {}
+    virtual void InitTrVars() override {}
 
-    void SetTrVars(VTranslateVars *trVars)
-    {
-        m_trVars = trVars;
-    }
+    void SetTrVars(VTranslateVars *trVars) { m_trVars = trVars; }
+
+    static auto VApp() -> TestVApplication * { return static_cast<TestVApplication *>(QCoreApplication::instance()); }
+
+protected slots:
+    virtual void AboutToQuit() override {}
+
 private:
-    Q_DISABLE_COPY(TestVApplication)
+    Q_DISABLE_COPY_MOVE(TestVApplication) // NOLINT
     VTranslateVars *m_trVars;
-};
-
-class VTestSettings : public VCommonSettings
-{
-    Q_OBJECT
-public:
-    VTestSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
-                  QObject *parent = nullptr)
-        : VCommonSettings(format, scope, organization, application, parent)
-    {
-        qRegisterMetaTypeStreamOperators<QMarginsF>("QMarginsF");
-    }
 };
 
 #endif // TESTVAPPLICATION_H

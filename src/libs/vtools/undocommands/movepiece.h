@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef MOVEDETAIL_H
 #define MOVEDETAIL_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -41,49 +40,52 @@ class QGraphicsScene;
 
 class MovePiece : public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     MovePiece(VAbstractPattern *doc, const double &x, const double &y, const quint32 &id, QGraphicsScene *scene,
-               QUndoCommand *parent = nullptr);
-    virtual ~MovePiece()=default;
+              QUndoCommand *parent = nullptr);
+    ~MovePiece() override = default;
 
-    virtual void undo() override;
-    virtual void redo() override;
+    void undo() override;
+    void redo() override;
     // cppcheck-suppress unusedFunction
-    virtual bool mergeWith(const QUndoCommand *command) override;
-    virtual int  id() const override;
+    auto mergeWith(const QUndoCommand *command) -> bool override;
+    auto id() const -> int override;
 
     void Do(qreal x, qreal y);
 
-    quint32      getDetId() const;
-    double       getNewX() const;
-    double       getNewY() const;
-private:
-    Q_DISABLE_COPY(MovePiece)
+    auto getDetId() const -> quint32;
+    auto getNewX() const -> double;
+    auto getNewY() const -> double;
 
-    double          m_oldX;
-    double          m_oldY;
-    double          m_newX;
-    double          m_newY;
+private:
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(MovePiece) // NOLINT
+
+    double m_oldX;
+    double m_oldY;
+    double m_newX;
+    double m_newY;
     QGraphicsScene *m_scene;
 
     void SaveCoordinates(QDomElement &domElement, double x, double y);
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline quint32 MovePiece::getDetId() const
+inline auto MovePiece::getDetId() const -> quint32
 {
     return nodeId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline double MovePiece::getNewX() const
+inline auto MovePiece::getNewX() const -> double
 {
     return m_newX;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline double MovePiece::getNewY() const
+inline auto MovePiece::getNewY() const -> double
 {
     return m_newY;
 }

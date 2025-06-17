@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -31,7 +31,8 @@
 
 #include <QSharedData>
 
-#include "../vmisc/diagnostic.h"
+#include "../vmisc/defglobal.h"
+#include "../vmisc/typedef.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -40,30 +41,23 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VArcRadiusData : public QSharedData
 {
 public:
+    VArcRadiusData() = default;
+    explicit VArcRadiusData(const quint32 &arcId);
+    VArcRadiusData(const VArcRadiusData &var) = default;
+    ~VArcRadiusData() = default;
 
-    VArcRadiusData()
-        :arcId(NULL_ID)
-    {}
-
-    VArcRadiusData(const quint32 &arcId)
-        :arcId(arcId)
-    {}
-
-    VArcRadiusData(const VArcRadiusData &var)
-        :QSharedData(var), arcId(var.arcId)
-    {}
-
-    virtual  ~VArcRadiusData() override;
-
-    quint32 arcId;
+    quint32 arcId{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
-    VArcRadiusData &operator=(const VArcRadiusData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN_MOVE(VArcRadiusData) // NOLINT
 };
 
-VArcRadiusData::~VArcRadiusData()
-{}
-
 QT_WARNING_POP
+
+//---------------------------------------------------------------------------------------------------------------------
+inline VArcRadiusData::VArcRadiusData(const quint32 &arcId)
+  : arcId(arcId)
+{
+}
 
 #endif // VARCRADIUSDATA_H

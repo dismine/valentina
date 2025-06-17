@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -32,7 +32,6 @@
 
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vmisc/logging.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/def.h"
 #include "../vundocommand.h"
@@ -45,7 +44,7 @@ MoveDoubleLabel::MoveDoubleLabel(VAbstractPattern *doc, const QPointF &pos, Move
     : MoveAbstractLabel(doc, pointId, pos, parent),
       m_type(type),
       m_idTool(toolId),
-      m_scene(qApp->getCurrentScene())
+      m_scene(VAbstractValApplication::VApp()->getCurrentScene())
 {
     if (type == MoveDoublePoint::FirstPoint)
     {
@@ -56,21 +55,25 @@ MoveDoubleLabel::MoveDoubleLabel(VAbstractPattern *doc, const QPointF &pos, Move
         setText(tr("move the second dart label"));
     }
 
-    const QDomElement domElement = doc->elementById(m_idTool, VAbstractPattern::TagPoint);
+    const QDomElement domElement = doc->FindElementById(m_idTool, VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
         if (type == MoveDoublePoint::FirstPoint)
         {
-            m_oldPos.rx() = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMx1, "0.0"));
-            m_oldPos.ry() = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMy1, "0.0"));
+            m_oldPos.rx() =
+                    VAbstractValApplication::VApp()->toPixel(VDomDocument::GetParametrDouble(domElement, AttrMx1, "0.0"));
+            m_oldPos.ry() =
+                    VAbstractValApplication::VApp()->toPixel(VDomDocument::GetParametrDouble(domElement, AttrMy1, "0.0"));
 
             qCDebug(vUndo, "Label old Mx1 %f", m_oldPos.x());
             qCDebug(vUndo, "Label old My1 %f", m_oldPos.y());
         }
         else
         {
-            m_oldPos.rx() = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMx2, "0.0"));
-            m_oldPos.ry() = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMy2, "0.0"));
+            m_oldPos.rx() =
+                    VAbstractValApplication::VApp()->toPixel(VDomDocument::GetParametrDouble(domElement, AttrMx2, "0.0"));
+            m_oldPos.ry() =
+                    VAbstractValApplication::VApp()->toPixel(VDomDocument::GetParametrDouble(domElement, AttrMy2, "0.0"));
 
             qCDebug(vUndo, "Label old Mx2 %f", m_oldPos.x());
             qCDebug(vUndo, "Label old My2 %f", m_oldPos.y());
@@ -83,9 +86,9 @@ MoveDoubleLabel::MoveDoubleLabel(VAbstractPattern *doc, const QPointF &pos, Move
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool MoveDoubleLabel::mergeWith(const QUndoCommand *command)
+auto MoveDoubleLabel::mergeWith(const QUndoCommand *command) -> bool
 {
-    const MoveDoubleLabel *moveCommand = static_cast<const MoveDoubleLabel *>(command);
+    const auto *moveCommand = static_cast<const MoveDoubleLabel *>(command);
     SCASSERT(moveCommand != nullptr)
 
     if (moveCommand->GetPointId() != nodeId ||
@@ -111,7 +114,7 @@ bool MoveDoubleLabel::mergeWith(const QUndoCommand *command)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int MoveDoubleLabel::id() const
+auto MoveDoubleLabel::id() const -> int
 {
     return static_cast<int>(UndoCommand::MoveDoubleLabel);
 }
@@ -130,21 +133,25 @@ void MoveDoubleLabel::Do(const QPointF &pos)
         qCDebug(vUndo, "New my2 %f", pos.y());
     }
 
-    QDomElement domElement = doc->elementById(m_idTool, VAbstractPattern::TagPoint);
+    QDomElement domElement = doc->FindElementById(m_idTool, VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
         if (m_type == MoveDoublePoint::FirstPoint)
         {
-            doc->SetAttribute(domElement, AttrMx1, QString().setNum(qApp->fromPixel(pos.x())));
-            doc->SetAttribute(domElement, AttrMy1, QString().setNum(qApp->fromPixel(pos.y())));
+            doc->SetAttribute(domElement, AttrMx1,
+                              QString().setNum(VAbstractValApplication::VApp()->fromPixel(pos.x())));
+            doc->SetAttribute(domElement, AttrMy1,
+                              QString().setNum(VAbstractValApplication::VApp()->fromPixel(pos.y())));
         }
         else
         {
-            doc->SetAttribute(domElement, AttrMx2, QString().setNum(qApp->fromPixel(pos.x())));
-            doc->SetAttribute(domElement, AttrMy2, QString().setNum(qApp->fromPixel(pos.y())));
+            doc->SetAttribute(domElement, AttrMx2,
+                              QString().setNum(VAbstractValApplication::VApp()->fromPixel(pos.x())));
+            doc->SetAttribute(domElement, AttrMy2,
+                              QString().setNum(VAbstractValApplication::VApp()->fromPixel(pos.y())));
         }
 
-        if (VDrawTool *tool = qobject_cast<VDrawTool *>(VAbstractPattern::getTool(m_idTool)))
+        if (auto *tool = qobject_cast<VDrawTool *>(VAbstractPattern::getTool(m_idTool)))
         {
             tool->ChangeLabelPosition(nodeId, pos);
         }

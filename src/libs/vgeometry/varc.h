@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef VARC_H
 #define VARC_H
 
-#include <qcompilerdetection.h>
 #include <QCoreApplication>
 #include <QPointF>
 #include <QSharedDataPointer>
@@ -39,7 +38,6 @@
 #include <QtGlobal>
 
 #include "vabstractarc.h"
-#include "vgeometrydef.h"
 #include "vpointf.h"
 
 class VArcData;
@@ -47,53 +45,59 @@ class VArcData;
 /**
  * @brief VArc class for anticlockwise arc.
  */
-class VArc: public VAbstractArc
+class VArc final : public VAbstractArc
 {
-    Q_DECLARE_TR_FUNCTIONS(VArc)
+    Q_DECLARE_TR_FUNCTIONS(VArc) // NOLINT
+
 public:
-    VArc ();
-    VArc (const VPointF &center, qreal radius, const QString &formulaRadius, qreal f1, const QString &formulaF1,
-          qreal f2, const QString &formulaF2, quint32 idObject = 0, Draw mode = Draw::Calculation);
-    VArc (const VPointF &center, qreal radius, qreal f1, qreal f2);
-    VArc (qreal length, const QString &formulaLength, const VPointF &center, qreal radius, const QString &formulaRadius,
-          qreal f1, const QString &formulaF1,  quint32 idObject = 0, Draw mode = Draw::Calculation);
-    VArc (qreal length, const VPointF &center, qreal radius, qreal f1);
+    VArc();
+    VArc(const VPointF &center, qreal radius, const QString &formulaRadius, qreal f1, const QString &formulaF1,
+         qreal f2, const QString &formulaF2, quint32 idObject = 0, Draw mode = Draw::Calculation);
+    VArc(const VPointF &center, qreal radius, qreal f1, qreal f2);
+    VArc(qreal length, const QString &formulaLength, const VPointF &center, qreal radius, const QString &formulaRadius,
+         qreal f1, const QString &formulaF1, quint32 idObject = 0, Draw mode = Draw::Calculation);
+    VArc(qreal length, const VPointF &center, qreal radius, qreal f1);
     VArc(const VArc &arc);
-    VArc Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const;
-    VArc Flip(const QLineF &axis, const QString &prefix = QString()) const;
-    VArc Move(qreal length, qreal angle, const QString &prefix = QString()) const;
-    virtual ~VArc() override;
+    auto Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const -> VArc;
+    auto Flip(const QLineF &axis, const QString &prefix = QString()) const -> VArc;
+    auto Move(qreal length, qreal angle, const QString &prefix = QString()) const -> VArc;
+    ~VArc() override;
 
-    VArc& operator= (const VArc &arc);
-#ifdef Q_COMPILER_RVALUE_REFS
-    VArc &operator=(VArc &&arc) Q_DECL_NOTHROW { Swap(arc); return *this; }
-#endif
+    auto operator=(const VArc &arc) -> VArc &;
 
-    inline void Swap(VArc &arc) Q_DECL_NOTHROW
-    { VAbstractArc::Swap(arc); std::swap(d, arc.d); }
+    VArc(VArc &&arc) noexcept;
+    auto operator=(VArc &&arc) noexcept -> VArc &;
 
-    QString GetFormulaRadius () const;
-    void    SetFormulaRadius (const QString &formula, qreal value);
-    qreal   GetRadius () const;
+    auto GetFormulaRadius() const -> QString;
+    void SetFormulaRadius(const QString &formula, qreal value);
+    auto GetRadius() const -> qreal;
 
-    virtual qreal GetLength () const override;
+    auto GetLength() const -> qreal override;
 
-    QPointF GetP1() const;
-    QPointF GetP2 () const;
+    auto GetP1() const -> QPointF;
+    auto GetP2() const -> QPointF;
 
-    virtual QVector<QPointF> GetPoints () const override;
+    auto GetPoints() const -> QVector<QPointF> override;
 
-    QPointF CutArc (const qreal &length, VArc &arc1, VArc &arc2) const;
-    QPointF CutArc (const qreal &length) const;
+    auto CutArc(qreal length, VArc &arc1, VArc &arc2, const QString &pointName) const -> QPointF;
+    auto CutArc(qreal length, const QString &pointName) const -> QPointF;
+
+    static auto OptimalApproximationScale(qreal radius, qreal f1, qreal f2, qreal tolerance) -> qreal;
+
 protected:
-    virtual void CreateName() override;
-    virtual void FindF2(qreal length) override;
+    void CreateName() override;
+    void CreateAlias() override;
+    void FindF2(qreal length) override;
+
 private:
     QSharedDataPointer<VArcData> d;
 
-    qreal MaxLength() const;
+    auto MaxLength() const -> qreal;
+
+    auto CutPoint(qreal length, qreal fullLength, const QString &pointName) const -> QLineF;
+    auto CutPointFlipped(qreal length, qreal fullLength, const QString &pointName) const -> QLineF;
 };
 
-Q_DECLARE_TYPEINFO(VArc, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VArc, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VARC_H

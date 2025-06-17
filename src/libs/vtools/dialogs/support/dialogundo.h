@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef DIALOGUNDO_H
 #define DIALOGUNDO_H
 
-#include <qcompilerdetection.h>
 #include <QDialog>
 #include <QMetaObject>
 #include <QObject>
@@ -38,29 +37,39 @@
 
 namespace Ui
 {
-    class DialogUndo;
+class DialogUndo;
 }
 
-enum class UndoButton {Undo, Fix, Cancel};
+enum class UndoButton
+{
+    Undo,
+    Fix,
+    Cancel
+};
 
 class DialogUndo : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     explicit DialogUndo(QWidget *parent = nullptr);
-    UndoButton Result() const;
-    virtual ~DialogUndo() override;
+    auto Result() const -> UndoButton;
+    ~DialogUndo() override;
+
 protected:
-    virtual void closeEvent ( QCloseEvent *event ) override;
+    void closeEvent(QCloseEvent *event) override;
+
 private slots:
     void Cancel();
+
 private:
-    Q_DISABLE_COPY(DialogUndo)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DialogUndo) // NOLINT
     Ui::DialogUndo *ui;
     UndoButton result;
 };
 
-inline UndoButton DialogUndo::Result() const
+inline auto DialogUndo::Result() const -> UndoButton
 {
     return result;
 }

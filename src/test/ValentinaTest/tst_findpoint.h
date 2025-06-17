@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,11 +29,11 @@
 #ifndef TST_FINDPOINT_H
 #define TST_FINDPOINT_H
 
-#include <QObject>
+#include "../vtest/abstracttest.h"
 
-class TST_FindPoint : public QObject
+class TST_FindPoint : public AbstractTest
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit TST_FindPoint(QObject *parent = nullptr);
 

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -33,17 +33,28 @@
 #include <QPlainTextEdit>
 #include <QPointer>
 #include <QPushButton>
+#include <QTimer>
 #include <QToolButton>
 
-#include "../vpatterndb/vtranslatevars.h"
 #include "../../visualization/path/vistoolcutarc.h"
 #include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
-#include "../ifc/xml/vdomdocument.h"
+#include "../qmuparser/qmudef.h"
 #include "../support/dialogeditwrongformula.h"
+#include "../vgeometry/varc.h"
+#include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vtranslatevars.h"
+#include "../vwidgets/vabstractmainwindow.h"
 #include "ui_dialogcutarc.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -51,51 +62,77 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogCutArc::DialogCutArc(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent), ui(new Ui::DialogCutArc), formula(QString()), formulaBaseHeight(0)
+DialogCutArc::DialogCutArc(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
+    ui(new Ui::DialogCutArc),
+    m_timerFormula(new QTimer(this))
 {
     ui->setupUi(this);
 
+    InitIcons();
+
+    m_timerFormula->setSingleShot(true);
+    connect(m_timerFormula, &QTimer::timeout, this, &DialogCutArc::EvalFormula);
+
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
-    InitFormulaUI(ui);
-    ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
-    labelEditNamePoint = ui->labelEditNamePoint;
-    this->formulaBaseHeight = ui->plainTextEditFormula->height();
+    ui->lineEditNamePoint->setText(
+        VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
+    m_formulaBaseHeight = ui->plainTextEditFormula->height();
     ui->plainTextEditFormula->installEventFilter(this);
 
     InitOkCancelApply(ui);
-    flagFormula = false;
-    DialogTool::CheckState();
 
     FillComboBoxArcs(ui->comboBoxArc);
 
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogCutArc::FXLength);
-    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogCutArc::NamePointChanged);
-    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogCutArc::FormulaTextChanged);
+    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
+            [this]()
+            {
+                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, m_pointName, this->data,
+                                m_flagName);
+                CheckState();
+            });
+    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this,
+            [this]() { m_timerFormula->start(formulaTimerTimeout); });
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogCutArc::DeployFormulaTextEdit);
 
-    vis = new VisToolCutArc(data);
-}
+    connect(ui->comboBoxArc, &QComboBox::currentTextChanged, this, &DialogCutArc::ArcChanged);
 
-//---------------------------------------------------------------------------------------------------------------------
-void DialogCutArc::FormulaTextChanged()
-{
-    this->FormulaChangedPlainText();
+    connect(ui->lineEditAlias1, &QLineEdit::textEdited, this, &DialogCutArc::ValidateAlias);
+    connect(ui->lineEditAlias2, &QLineEdit::textEdited, this, &DialogCutArc::ValidateAlias);
+
+    vis = new VisToolCutArc(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCutArc::FXLength()
 {
-    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    auto *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit length"));
     dialog->SetFormula(GetFormula());
-    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetFormula(dialog->GetFormula());
     }
     delete dialog;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutArc::EvalFormula()
+{
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditFormula->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditFormula;
+    formulaData.labelResult = ui->labelResultCalculation;
+    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
+
+    Eval(formulaData, m_flagFormula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -107,13 +144,19 @@ void DialogCutArc::ShowVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCutArc::DeployFormulaTextEdit()
 {
-    DeployFormula(ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeight);
+    DeployFormula(this, ui->plainTextEditFormula, ui->pushButtonGrowLength, m_formulaBaseHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogCutArc::~DialogCutArc()
 {
     delete ui;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogCutArc::GetPointName() const -> QString
+{
+    return m_pointName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -124,17 +167,40 @@ DialogCutArc::~DialogCutArc()
  */
 void DialogCutArc::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare == false)// After first choose we ignore all objects
+    if (prepare) // After first choose we ignore all objects
     {
-        if (type == SceneObject::Arc)
+        return;
+    }
+
+    if (type == SceneObject::Arc && SetObject(id, ui->comboBoxArc, QString()))
+    {
+        if (vis != nullptr)
         {
-            if (SetObject(id, ui->comboBoxArc, QString()))
-            {
-                vis->VisualMode(id);
-                prepare = true;
-                this->setModal(true);
-                this->show();
-            }
+            vis->VisualMode(id);
+        }
+        prepare = true;
+
+        auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
+        SCASSERT(window != nullptr)
+        connect(vis.data(), &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
+
+        if (m_buildStartPoint)
+        {
+            SetFormula("0"_L1);
+            FinishCreating();
+            return;
+        }
+
+        if (m_buildEndPoint)
+        {
+            SetFormula(currentLength);
+            FinishCreating();
+            return;
+        }
+
+        if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
+        {
+            FinishCreating();
         }
     }
 }
@@ -142,14 +208,14 @@ void DialogCutArc::ChosenObject(quint32 id, const SceneObject &type)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCutArc::SaveData()
 {
-    pointName = ui->lineEditNamePoint->text();
-    formula = ui->plainTextEditFormula->toPlainText();
+    m_pointName = ui->lineEditNamePoint->text();
+    m_formula = ui->plainTextEditFormula->toPlainText();
 
-    VisToolCutArc *path = qobject_cast<VisToolCutArc *>(vis);
+    auto *path = qobject_cast<VisToolCutArc *>(vis);
     SCASSERT(path != nullptr)
 
-    path->setObject1Id(getArcId());
-    path->setLength(formula);
+    path->SetArcId(getArcId());
+    path->SetLength(m_formula);
     path->RefreshGeometry();
 }
 
@@ -161,17 +227,102 @@ void DialogCutArc::closeEvent(QCloseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogCutArc::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+
+    if (event->type() == QEvent::PaletteChange)
+    {
+        InitIcons();
+        InitDialogButtonBoxIcons(ui->buttonBox);
+    }
+
+    // remember to call base class implementation
+    DialogTool::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutArc::ArcChanged()
+{
+    CurrentCurveLength(getArcId(), const_cast<VContainer *>(data));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutArc::ValidateAlias()
+{
+    QRegularExpression const rx(NameRegExp());
+
+    VArc arc1;
+    arc1.SetAliasSuffix(GetAliasSuffix1());
+
+    VArc arc2;
+    arc2.SetAliasSuffix(GetAliasSuffix2());
+
+    if (not GetAliasSuffix1().isEmpty() &&
+        (not rx.match(arc1.GetAlias()).hasMatch() ||
+         (m_originAliasSuffix1 != GetAliasSuffix1() && not data->IsUnique(arc1.GetAlias())) ||
+         arc1.GetAlias() == arc2.GetAlias()))
+    {
+        m_flagAlias1 = false;
+        ChangeColor(ui->labelAlias1, errorColor);
+    }
+    else
+    {
+        m_flagAlias1 = true;
+        ChangeColor(ui->labelAlias1, OkColor(this));
+    }
+
+    if (not GetAliasSuffix2().isEmpty() &&
+        (not rx.match(arc2.GetAlias()).hasMatch() ||
+         (m_originAliasSuffix2 != GetAliasSuffix2() && not data->IsUnique(arc2.GetAlias())) ||
+         arc1.GetAlias() == arc2.GetAlias()))
+    {
+        m_flagAlias2 = false;
+        ChangeColor(ui->labelAlias2, errorColor);
+    }
+    else
+    {
+        m_flagAlias2 = true;
+        ChangeColor(ui->labelAlias2, OkColor(this));
+    }
+
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutArc::FinishCreating()
+{
+    vis->SetMode(Mode::Show);
+    vis->RefreshGeometry();
+    emit ToolTip(QString());
+    setModal(true);
+    show();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutArc::InitIcons()
+{
+    auto const resource = QStringLiteral("icon");
+
+    ui->toolButtonExprLength->setIcon(VTheme::GetIconResource(resource, QStringLiteral("24x24/fx.png")));
+    ui->label_4->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/equal.png")));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setArcId set id of arc
  * @param value id
  */
-void DialogCutArc::setArcId(const quint32 &value)
+void DialogCutArc::setArcId(quint32 value)
 {
     setCurrentArcId(ui->comboBoxArc, value);
 
-    VisToolCutArc *path = qobject_cast<VisToolCutArc *>(vis);
+    auto *path = qobject_cast<VisToolCutArc *>(vis);
     SCASSERT(path != nullptr)
-    path->setObject1Id(value);
+    path->SetArcId(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -181,17 +332,18 @@ void DialogCutArc::setArcId(const quint32 &value)
  */
 void DialogCutArc::SetFormula(const QString &value)
 {
-    formula = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
+    m_formula = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
-    if (formula.length() > 80)
+    if (m_formula.length() > 80)
     {
         this->DeployFormulaTextEdit();
     }
-    ui->plainTextEditFormula->setPlainText(formula);
+    ui->plainTextEditFormula->setPlainText(m_formula);
 
-    VisToolCutArc *path = qobject_cast<VisToolCutArc *>(vis);
+    auto *path = qobject_cast<VisToolCutArc *>(vis);
     SCASSERT(path != nullptr)
-    path->setLength(formula);
+    path->SetLength(m_formula);
 
     MoveCursorToEnd(ui->plainTextEditFormula);
 }
@@ -203,8 +355,8 @@ void DialogCutArc::SetFormula(const QString &value)
  */
 void DialogCutArc::SetPointName(const QString &value)
 {
-    pointName = value;
-    ui->lineEditNamePoint->setText(pointName);
+    m_pointName = value;
+    ui->lineEditNamePoint->setText(m_pointName);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -212,9 +364,9 @@ void DialogCutArc::SetPointName(const QString &value)
  * @brief GetFormula return string with formula length
  * @return formula
  */
-QString DialogCutArc::GetFormula() const
+auto DialogCutArc::GetFormula() const -> QString
 {
-    return qApp->TrVars()->TryFormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(m_formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -222,7 +374,93 @@ QString DialogCutArc::GetFormula() const
  * @brief getArcId return id of arc
  * @return id
  */
-quint32 DialogCutArc::getArcId() const
+auto DialogCutArc::getArcId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxArc);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutArc::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogCutArc::GetNotes() const -> QString
+{
+    return ui->plainTextEditToolNotes->toPlainText();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutArc::SetAliasSuffix1(const QString &alias)
+{
+    m_originAliasSuffix1 = alias;
+    ui->lineEditAlias1->setText(m_originAliasSuffix1);
+    ValidateAlias();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogCutArc::GetAliasSuffix1() const -> QString
+{
+    return ui->lineEditAlias1->text();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutArc::SetAliasSuffix2(const QString &alias)
+{
+    m_originAliasSuffix2 = alias;
+    ui->lineEditAlias2->setText(m_originAliasSuffix2);
+    ValidateAlias();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogCutArc::GetAliasSuffix2() const -> QString
+{
+    return ui->lineEditAlias2->text();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutArc::Build(const Tool &type)
+{
+    if (type == Tool::ArcStart)
+    {
+        m_buildStartPoint = true;
+    }
+
+    if (type == Tool::ArcEnd)
+    {
+        m_buildEndPoint = true;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutArc::ShowDialog(bool click)
+{
+    if (not prepare)
+    {
+        return;
+    }
+
+    if (click)
+    {
+        // The check need to ignore first release of mouse button.
+        // User can select point by clicking on a label.
+        if (not m_firstRelease)
+        {
+            m_firstRelease = true;
+            return;
+        }
+
+        auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
+        SCASSERT(scene != nullptr)
+
+        const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(getArcId());
+        QPointF const p = arc->ClosestPoint(scene->getScenePos());
+        qreal len = arc->GetLengthByPoint(p);
+
+        len = !arc->IsFlipped() ? qBound(0.0, len, arc->GetLength()) : qBound(arc->GetLength(), -len, 0.0);
+        SetFormula(QString::number(FromPixel(len, *data->GetPatternUnit())));
+    }
+
+    FinishCreating();
 }

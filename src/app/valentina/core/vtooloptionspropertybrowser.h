@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,12 +29,12 @@
 #ifndef VTOOLOPTIONSPROPERTYBROWSER_H
 #define VTOOLOPTIONSPROPERTYBROWSER_H
 
-#include <QObject>
 #include <QMap>
+#include <QObject>
 
 #include "../vpropertyexplorer/vproperty.h"
-#include "../vpropertyexplorer/vpropertymodel.h"
 #include "../vpropertyexplorer/vpropertyformview.h"
+#include "../vpropertyexplorer/vpropertymodel.h"
 
 class QDockWidget;
 class QGraphicsItem;
@@ -43,96 +43,133 @@ class VFormula;
 
 class VToolOptionsPropertyBrowser : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     explicit VToolOptionsPropertyBrowser(QDockWidget *parent);
+    ~VToolOptionsPropertyBrowser() override = default;
+
     void ClearPropertyBrowser();
+
 public slots:
     void itemClicked(QGraphicsItem *item);
     void UpdateOptions();
     void RefreshOptions();
+
 private slots:
-    void userChangedData(VPE::VProperty* property);
+    void userChangedData(VPE::VProperty *property);
+
 private:
-    Q_DISABLE_COPY(VToolOptionsPropertyBrowser)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VToolOptionsPropertyBrowser) // NOLINT
 
-    VPE::VPropertyModel* PropertyModel;
-    VPE::VPropertyFormView* formView;
+    VPE::VPropertyModel *m_PropertyModel{nullptr};
+    VPE::VPropertyFormView *m_formView{nullptr};
 
-    QGraphicsItem *currentItem;
-    QMap<VPE::VProperty *, QString> propertyToId;
-    QMap<QString, VPE::VProperty *> idToProperty;
+    QGraphicsItem *m_currentItem{nullptr};
+    QMap<VPE::VProperty *, QString> m_propertyToId{};
+    QMap<QString, VPE::VProperty *> m_idToProperty{};
+
+    auto ComboBoxPalette() const -> QPalette;
 
     void AddProperty(VPE::VProperty *property, const QString &id);
     void ShowItemOptions(QGraphicsItem *item);
 
-    template<class Tool>
-    void SetPointName(const QString &name);
+    template <class Tool> void SetName(VPE::VProperty *property);
 
-    template<class Tool>
-    void SetPointName1(const QString &name);
+    template <class Tool> void SetHold(VPE::VProperty *property);
 
-    template<class Tool>
-    void SetPointName2(const QString &name);
+    template <class Tool> void SetVisible(VPE::VProperty *property);
 
-    template<class Tool>
-    void SetOperationSuffix(const QString &suffix);
+    template <class Tool> void SetOpacity(VPE::VProperty *property);
 
-    template<class Type>
-    Type GetCrossPoint(const QVariant &value);
+    template <class Tool> void SetPointName(VPE::VProperty *property);
 
-    template<class Tool>
-    void SetCrossCirclesPoint(const QVariant &value);
+    template <class Tool> void SetPointName1(VPE::VProperty *property);
 
-    template<class Tool>
-    void SetVCrossCurvesPoint(const QVariant &value);
+    template <class Tool> void SetPointName2(VPE::VProperty *property);
 
-    template<class Tool>
-    void SetHCrossCurvesPoint(const QVariant &value);
+    template <class Tool> void SetOperationSuffix(VPE::VProperty *property);
 
-    template<class Tool>
-    void SetAxisType(const QVariant &value);
+    template <class Type> auto GetCrossPoint(const QVariant &value) -> Type;
 
-    template<class Tool>
-    void AddPropertyObjectName(Tool *i, const QString &propertyName, bool readOnly = false);
+    template <class Tool> void SetCrossCirclesPoint(VPE::VProperty *property);
 
-    template<class Tool>
-    void AddPropertyPointName1(Tool *i, const QString &propertyName);
+    template <class Tool> void SetVCrossCurvesPoint(VPE::VProperty *property);
 
-    template<class Tool>
-    void AddPropertyPointName2(Tool *i, const QString &propertyName);
+    template <class Tool> void SetHCrossCurvesPoint(VPE::VProperty *property);
 
-    template<class Tool>
-    void AddPropertyOperationSuffix(Tool *i, const QString &propertyName, bool readOnly = false);
+    template <class Tool> void SetAxisType(VPE::VProperty *property);
 
-    template<class Tool>
-    void AddPropertyCrossPoint(Tool *i, const QString &propertyName);
+    template <class Tool> void SetNotes(VPE::VProperty *property);
 
-    template<class Tool>
-    void AddPropertyVCrossPoint(Tool *i, const QString &propertyName);
+    template <class Tool> void SetAlias(VPE::VProperty *property);
 
-    template<class Tool>
-    void AddPropertyHCrossPoint(Tool *i, const QString &propertyName);
+    template <class Tool> void SetAlias1(VPE::VProperty *property);
 
-    template<class Tool>
-    void AddPropertyAxisType(Tool *i, const QString &propertyName);
+    template <class Tool> void SetAlias2(VPE::VProperty *property);
 
-    template<class Tool>
+    template <class Tool> void SetLineType(VPE::VProperty *property);
+
+    template <class Tool> void SetLineColor(VPE::VProperty *property);
+
+    template <class Tool> void SetFormulaLength(VPE::VProperty *property);
+
+    template <class Tool> void SetFormulaAngle(VPE::VProperty *property);
+
+    template <class Tool> void SetFormulaRadius(VPE::VProperty *property);
+
+    template <class Tool> void SetFormulaF1(VPE::VProperty *property);
+
+    template <class Tool> void SetFormulaF2(VPE::VProperty *property);
+
+    template <class Tool> void SetPenStyle(VPE::VProperty *property);
+
+    template <class Tool> void SetFormulaRotationAngle(VPE::VProperty *property);
+
+    template <class Tool> void SetApproximationScale(VPE::VProperty *property);
+
+    template <class Tool> void AddPropertyObjectName(Tool *i, const QString &propertyName, bool readOnly = false);
+
+    template <class Tool> void AddPropertyAlias(Tool *i, const QString &propertyName);
+
+    template <class Tool> void AddPropertyAlias1(Tool *i, const QString &propertyName);
+
+    template <class Tool> void AddPropertyAlias2(Tool *i, const QString &propertyName);
+
+    template <class Tool> void AddPropertyPointName1(Tool *i, const QString &propertyName);
+
+    template <class Tool> void AddPropertyPointName2(Tool *i, const QString &propertyName);
+
+    template <class Tool> void AddPropertyOperationSuffix(Tool *i, const QString &propertyName, bool readOnly = false);
+
+    template <class Tool> void AddPropertyCrossPoint(Tool *i, const QString &propertyName);
+
+    template <class Tool> void AddPropertyVCrossPoint(Tool *i, const QString &propertyName);
+
+    template <class Tool> void AddPropertyHCrossPoint(Tool *i, const QString &propertyName);
+
+    template <class Tool> void AddPropertyAxisType(Tool *i, const QString &propertyName);
+
+    template <class Tool>
     void AddPropertyLineType(Tool *i, const QString &propertyName, const QMap<QString, QIcon> &styles);
 
-    template<class Tool>
+    template <class Tool>
     void AddPropertyCurvePenStyle(Tool *i, const QString &propertyName, const QMap<QString, QIcon> &styles);
 
-    template<class Tool>
+    template <class Tool>
     void AddPropertyLineColor(Tool *i, const QString &propertyName, const QMap<QString, QString> &colors,
                               const QString &id);
 
     void AddPropertyApproximationScale(const QString &propertyName, qreal aScale);
+    void AddPropertyOpacity(const QString &propertyName, int opacity);
     void AddPropertyFormula(const QString &propertyName, const VFormula &formula, const QString &attrName);
     void AddPropertyParentPointName(const QString &pointName, const QString &propertyName,
                                     const QString &propertyAttribure);
+    void AddPropertyText(const QString &propertyName, const QString &text, const QString &attrName);
+    void AddPropertyBool(const QString &propertyName, bool value, const QString &attrName);
 
-    QStringList PropertiesList() const;
+    static auto PropertiesList() -> QStringList;
 
     void ChangeDataToolSinglePoint(VPE::VProperty *property);
     void ChangeDataToolEndLine(VPE::VProperty *property);
@@ -168,6 +205,8 @@ private:
     void ChangeDataToolFlippingByLine(VPE::VProperty *property);
     void ChangeDataToolFlippingByAxis(VPE::VProperty *property);
     void ChangeDataToolEllipticalArc(VPE::VProperty *property);
+    void ChangeDataBackgroundPixmapItem(VPE::VProperty *property);
+    void ChangeDataBackgroundSVGItem(VPE::VProperty *property);
 
     void ShowOptionsToolSinglePoint(QGraphicsItem *item);
     void ShowOptionsToolEndLine(QGraphicsItem *item);
@@ -203,6 +242,8 @@ private:
     void ShowOptionsToolFlippingByLine(QGraphicsItem *item);
     void ShowOptionsToolFlippingByAxis(QGraphicsItem *item);
     void ShowOptionsToolEllipticalArc(QGraphicsItem *item);
+    void ShowOptionsBackgroundPixmapItem(QGraphicsItem *item);
+    void ShowOptionsBackgroundSVGItem(QGraphicsItem *item);
 
     void UpdateOptionsToolSinglePoint();
     void UpdateOptionsToolEndLine();
@@ -238,6 +279,8 @@ private:
     void UpdateOptionsToolFlippingByLine();
     void UpdateOptionsToolFlippingByAxis();
     void UpdateOptionsToolEllipticalArc();
+    void UpdateOptionsBackgroundPixmapItem();
+    void UpdateOptionsBackgroundSVGItem();
 };
 
 #endif // VTOOLOPTIONSPROPERTYBROWSER_H

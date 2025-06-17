@@ -31,17 +31,18 @@
 #define FANCYTABWIDGET_H
 
 #include <QIcon>
-#include <QWidget>
-#include <QTimer>
 #include <QPropertyAnimation>
+#include <QTimer>
+#include <QWidget>
+
+#include "../vmisc/defglobal.h"
+#include "fancytab.h"
 
 class QPainter;
 
-#include "fancytab.h"
-
 class FancyTabBar : public QWidget
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     enum TabBarPosition
@@ -52,73 +53,83 @@ public:
         Right
     };
 
-    FancyTabBar(const TabBarPosition position, QWidget *parent = nullptr);
-    virtual ~FancyTabBar() Q_DECL_EQ_DEFAULT;
+    explicit FancyTabBar(TabBarPosition position, QWidget *parent = nullptr);
+    ~FancyTabBar() override = default;
 
-    virtual QSize sizeHint() const override;
-    virtual QSize minimumSizeHint() const override;
+    auto sizeHint() const -> QSize override;
+    auto minimumSizeHint() const -> QSize override;
 
-    void SetOrientation(const TabBarPosition p);
+    void SetOrientation(TabBarPosition p);
 
     void SetTabEnabled(int index, bool enable);
-    bool IsTabEnabled(int index) const;
+    auto IsTabEnabled(int index) const -> bool;
 
     void InsertTab(int index, const QIcon &icon, const QString &label);
     void RemoveTab(int index);
 
     void SetCurrentIndex(int index);
-    int  CurrentIndex() const;
+    auto CurrentIndex() const -> int;
 
-    void    SetTabToolTip(int index, QString toolTip);
-    QString TabToolTip(int index) const;
+    void SetTabToolTip(int index, const QString &toolTip);
+    auto TabToolTip(int index) const -> QString;
 
-    QIcon TabIcon(int index) const;
+    auto TabIcon(int index) const -> QIcon;
 
-    QString TabText(int index) const;
-    void    SetTabText(int index, QString text);
+    auto TabText(int index) const -> QString;
+    void SetTabText(int index, const QString &text);
 
-    int   Count() const;
-    QRect TabRect(int index) const;
+    auto Count() const -> vsizetype;
+    auto TabRect(int index) const -> QRect;
 
 signals:
     void CurrentChanged(int);
 
 protected:
-    virtual bool event(QEvent *event) override;
-    virtual void paintEvent(QPaintEvent *event) override;
-    virtual void mousePressEvent(QMouseEvent *) override;
-    virtual void mouseMoveEvent(QMouseEvent *) override;
-    virtual void enterEvent(QEvent *) override;
-    virtual void leaveEvent(QEvent *) override;
+    auto event(QEvent *event) -> bool override;
+    void paintEvent(QPaintEvent *event) override;
+    void mousePressEvent(QMouseEvent *e) override;
+    void mouseMoveEvent(QMouseEvent *e) override;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    void enterEvent(QEnterEvent *e) override;
+#else
+    void enterEvent(QEvent *e) override;
+#endif
+    void leaveEvent(QEvent *e) override;
 
 private slots:
     void EmitCurrentIndex();
 
 private:
-    Q_DISABLE_COPY(FancyTabBar)
+    Q_DISABLE_COPY_MOVE(FancyTabBar) // NOLINT
 
-    enum Corner { OutsideBeginning, OutsideEnd, InsideBeginning, InsideEnd };
+    enum Corner
+    {
+        OutsideBeginning,
+        OutsideEnd,
+        InsideBeginning,
+        InsideEnd
+    };
 
     static const int m_rounding;
 
-    TabBarPosition   m_position;
-    QRect            m_hoverRect;
-    int              m_hoverIndex;
-    int              m_currentIndex;
-    QList<FancyTab*> m_attachedTabs;
-    QTimer           m_timerTriggerChangedSignal;
+    TabBarPosition m_position;
+    QRect m_hoverRect{};
+    int m_hoverIndex{-1};
+    int m_currentIndex{-1};
+    QList<FancyTab *> m_attachedTabs{};
+    QTimer m_timerTriggerChangedSignal{};
 
-    QPoint GetCorner(const QRect& rect, const Corner corner) const;
+    auto GetCorner(const QRect &rect, Corner corner) const -> QPoint;
 
-    QRect AdjustRect(const QRect& rect, const qint8 offsetOutside, const qint8 offsetInside,
-                     const qint8 offsetBeginning, const qint8 offsetEnd) const;
+    auto AdjustRect(const QRect &rect, qint8 offsetOutside, qint8 offsetInside, qint8 offsetBeginning,
+                    qint8 offsetEnd) const -> QRect;
 
     // Same with a point. + means towards Outside/End, - means towards Inside/Beginning
-    QPoint AdjustPoint(const QPoint& point, const qint8 offsetInsideOutside, const qint8 offsetBeginningEnd) const;
+    auto AdjustPoint(const QPoint &point, qint8 offsetInsideOutside, qint8 offsetBeginningEnd) const -> QPoint;
 
-    QSize TabSizeHint(bool minimum = false) const;
-    void  PaintTab(QPainter *painter, int tabIndex) const;
-    bool  ValidIndex(int index) const;
+    auto TabSizeHint(bool minimum = false) const -> QSize;
+    void PaintTab(QPainter *painter, int tabIndex) const;
+    auto ValidIndex(int index) const -> bool;
 };
 
 #endif // FANCYTABWIDGET_H

@@ -1,10 +1,13 @@
 debian/usr/share/pixmaps/valentina.png
 debian/usr/share/pixmaps/tape.png
+debian/usr/share/pixmaps/puzzle.png
 debian/usr/share/pixmaps/application-x-valentina-pattern.png
 debian/usr/share/pixmaps/application-x-valentina-i-measurements.png
 debian/usr/share/pixmaps/application-x-valentina-s-measurements.png
+debian/usr/share/pixmaps/application-x-valentina-layout.png
 debian/valentina/usr/bin/valentina
 debian/valentina/usr/bin/tape
+debian/valentina/usr/bin/puzzle
 debian/valentina/usr/share/valentina/diagrams.rcc
 debian/valentina/usr/share/valentina/translations/measurements_p0_cs_CZ.qm
 debian/valentina/usr/share/valentina/translations/measurements_p0_de_DE.qm

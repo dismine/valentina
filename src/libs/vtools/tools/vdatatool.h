@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,41 +29,43 @@
 #ifndef VDATATOOL_H
 #define VDATATOOL_H
 
-#include <qcompilerdetection.h>
+#include <QLoggingCategory>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
 #include <QtGlobal>
 
-#include "../vmisc/logging.h"
 #include "../vpatterndb/vcontainer.h"
 
 Q_DECLARE_LOGGING_CATEGORY(vTool)
 
-//We need QObject class because we use qobject_cast.
+// We need QObject class because we use qobject_cast.
 /**
  * @brief The VDataTool class need for getting access to data container of tool.
  */
 class VDataTool : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     explicit VDataTool(VContainer *data, QObject *parent = nullptr);
-    virtual ~VDataTool() Q_DECL_EQ_DEFAULT;
-    VContainer      getData() const;
-    void            setData(const VContainer *value);
-    virtual quint32 referens() const;
-    virtual void    incrementReferens();
-    virtual void    decrementReferens();
-    virtual void    GroupVisibility(quint32 object, bool visible)=0;
+    virtual ~VDataTool() = default;
+    auto getData() const -> VContainer;
+    void setData(const VContainer *value);
+    virtual auto referens() const -> quint32;
+    virtual void incrementReferens();
+    virtual void decrementReferens();
+    virtual void GroupVisibility(quint32 object, bool visible) = 0;
+
 protected:
     /** @brief data container with data */
-    VContainer            data;
+    VContainer data;
 
     /** @brief _referens keep count tools what use this tool. If value more than 1 you can't delete tool. */
-    quint32                _referens;
+    quint32 _referens;
+
 private:
-    Q_DISABLE_COPY(VDataTool)
+    Q_DISABLE_COPY_MOVE(VDataTool) // NOLINT
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -71,7 +73,7 @@ private:
  * @brief getData return data container.
  * @return container.
  */
-inline VContainer VDataTool::getData() const
+inline auto VDataTool::getData() const -> VContainer
 {
     return data;
 }
@@ -91,7 +93,7 @@ inline void VDataTool::setData(const VContainer *value)
  * @brief referens return count of referens.
  * @return count count of referens.
  */
-inline quint32 VDataTool::referens() const
+inline auto VDataTool::referens() const -> quint32
 {
     return _referens;
 }

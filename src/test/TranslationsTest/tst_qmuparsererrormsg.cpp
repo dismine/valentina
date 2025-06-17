@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -28,23 +28,28 @@
 
 #include "tst_qmuparsererrormsg.h"
 #include "../vmisc/def.h"
-#include "../vmisc/logging.h"
 
 #include <QtTest>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 TST_QmuParserErrorMsg::TST_QmuParserErrorMsg(const QString &locale, QObject *parent)
-    : AbstractTest(parent),
-      m_locale(locale),
-      appTranslator(nullptr),
-      msg(nullptr)
+  : AbstractTest(parent),
+    m_locale(locale),
+    appTranslator(nullptr),
+    msg(nullptr)
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 TST_QmuParserErrorMsg::~TST_QmuParserErrorMsg()
 {
-    delete appTranslator;
+    delete appTranslator.data();
     delete msg;
 }
 
@@ -63,13 +68,13 @@ void TST_QmuParserErrorMsg::initTestCase()
         QFAIL("Unsupported locale code.");
     }
 
-    QDir dir(TranslationsPath());
+    QDir const dir(TranslationsPath());
     const QStringList fileNames = dir.entryList(QStringList("valentina_*.qm"));
     QVERIFY2(locales.size() == fileNames.size(), "Unexpected count of files.");
 
     if (LoadTranslation(m_locale) != NoError)
     {
-        const QString message = QString("Couldn't load variables. Locale = %1").arg(m_locale);
+        const QString message = u"Couldn't load variables. Locale = %1"_s.arg(m_locale);
         QSKIP(qUtf8Printable(message));
     }
 }
@@ -127,10 +132,11 @@ void TST_QmuParserErrorMsg::TestEErrorCodes()
     QFETCH(bool, pos);
 
     const QString translated = (*msg)[code];
-    const QString message = QString("String: '%1'.").arg(translated);
+    // cppcheck-suppress unreadVariable
+    const auto message = QStringLiteral("String: '%1'.").arg(translated);
 
-    QVERIFY2((translated.indexOf(QLatin1String("$TOK$")) != -1) == tok, qUtf8Printable(message));
-    QVERIFY2((translated.indexOf(QLatin1String("$POS$")) != -1) == pos, qUtf8Printable(message));
+    QVERIFY2((translated.indexOf("$TOK$"_L1) != -1) == tok, qUtf8Printable(message));
+    QVERIFY2((translated.indexOf("$POS$"_L1) != -1) == pos, qUtf8Printable(message));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -142,22 +148,20 @@ void TST_QmuParserErrorMsg::cleanupTestCase()
 //---------------------------------------------------------------------------------------------------------------------
 void TST_QmuParserErrorMsg::AddCase(int code, bool tok, bool pos)
 {
-    const QString tag = QString("Check translation code=%1 in file valentina_%2.qm").arg(code).arg(m_locale);
+    const QString tag = u"Check translation code=%1 in file valentina_%2.qm"_s.arg(code).arg(m_locale);
     QTest::newRow(qUtf8Printable(tag)) << code << tok << pos;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int TST_QmuParserErrorMsg::LoadTranslation(const QString &checkedLocale)
+auto TST_QmuParserErrorMsg::LoadTranslation(const QString &checkedLocale) -> int
 {
     const QString path = TranslationsPath();
-    const QString file = QString("valentina_%1.qm").arg(checkedLocale);
+    const QString file = u"valentina_%1.qm"_s.arg(checkedLocale);
 
-    if (QFileInfo(path+QLatin1String("/")+file).size() <= 34)
+    if (QFileInfo(path + '/'_L1 + file).size() <= 34)
     {
-        const QString message = QString("Translation for locale = %1 is empty. \nFull path: %2/%3")
-                .arg(checkedLocale, path, file);
-        QWARN(qUtf8Printable(message));
-
+        qWarning("Translation for locale = %s is empty. \nFull path: %s/%s", qUtf8Printable(checkedLocale),
+                 qUtf8Printable(path), qUtf8Printable(file));
         return ErrorSize;
     }
 
@@ -165,28 +169,22 @@ int TST_QmuParserErrorMsg::LoadTranslation(const QString &checkedLocale)
 
     if (not appTranslator->load(file, path))
     {
-        const QString message = QString("Can't load translation for locale = %1. \nFull path: %2/%3")
-                .arg(checkedLocale, path, file);
-        QWARN(qUtf8Printable(message));
-
-        delete appTranslator;
-
+        qWarning("Can't load translation for locale = %s. \nFull path: %s/%s", qUtf8Printable(checkedLocale),
+                 qUtf8Printable(path), qUtf8Printable(file));
+        delete appTranslator.data();
         return ErrorLoad;
     }
 
     if (not QCoreApplication::installTranslator(appTranslator))
     {
-        const QString message = QString("Can't install translation for locale = %1. \nFull path: %2/%3")
-                .arg(checkedLocale, path, file);
-        QWARN(qUtf8Printable(message));
-
-        delete appTranslator;
-
+        qWarning("Can't install translation for locale = %s. \nFull path: %s/%s", qUtf8Printable(checkedLocale),
+                 qUtf8Printable(path), qUtf8Printable(file));
+        delete appTranslator.data();
         return ErrorInstall;
     }
 
     delete msg;
-    msg = new qmu::QmuParserErrorMsg();//Very important do it after load QM file.
+    msg = new qmu::QmuParserErrorMsg(); // Very important do it after load QM file.
 
     return NoError;
 }
@@ -200,9 +198,8 @@ void TST_QmuParserErrorMsg::RemoveTranslation()
 
         if (result == false)
         {
-            const QString message = QString("Can't remove translation for locale = %1").arg(m_locale);
-            QWARN(qUtf8Printable(message));
+            qWarning("Can't remove translation for locale = %s", qUtf8Printable(m_locale));
         }
-        delete appTranslator;
+        delete appTranslator.data();
     }
 }

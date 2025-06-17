@@ -22,9 +22,6 @@
 #include "qmutokenparser.h"
 
 #include <QMap>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 
 #include "qmuparsererror.h"
 
@@ -57,11 +54,12 @@ QmuTokenParser::QmuTokenParser()
  */
 QmuTokenParser::QmuTokenParser(const QString &formula, bool osSeparator,
                                bool fromUser, const QMap<QString, QString> &translatedFunctions)
-    :QmuFormulaBase()
 {
     InitCharSets();
     SetVarFactory(AddVariable, this);
     SetSepForTr(osSeparator, fromUser);
+
+    DefineFun(QStringLiteral("warning"), Warning);
 
     // Fix for issue #776. Valentina cannot recognize translated functions.
     QMap<QString, QString>::const_iterator i = translatedFunctions.constBegin();
@@ -92,12 +90,20 @@ QmuTokenParser::QmuTokenParser(const QString &formula, bool osSeparator,
  * @param formula expression for test
  * @return true if fomula has single number
  */
-bool QmuTokenParser::IsSingle(const QString &formula)
+auto QmuTokenParser::IsSingle(const QString &formula) -> bool
 {
-    QLocale c(QLocale::C);
+    QLocale const c(QLocale::C);
     bool ok = false;
     c.toDouble(formula, &ok);
     return ok;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto QmuTokenParser::Warning(const QString &warningMsg, qreal value) -> qreal
+{
+    Q_UNUSED(warningMsg);
+
+    return value;
 }
 
 }// namespace qmu

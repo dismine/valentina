@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -31,19 +31,18 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolFlippingByLine::VisToolFlippingByLine(const VContainer *data, QGraphicsItem *parent)
-    : VisOperation(data, parent),
-      object2Id(NULL_ID),
-      point1(nullptr),
-      point2(nullptr)
+  : VisOperation(data, parent)
 {
-    point1 = InitPoint(supportColor2, this);
-    point2 = InitPoint(supportColor2, this);
+    SetColorRole(VColorRole::VisSupportColor2);
+
+    m_point1 = InitPoint(VColorRole::VisSupportColor2, this);
+    m_point2 = InitPoint(VColorRole::VisSupportColor2, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolFlippingByLine::RefreshGeometry()
 {
-    if (objects.isEmpty())
+    if (Objects().isEmpty())
     {
         return;
     }
@@ -51,35 +50,23 @@ void VisToolFlippingByLine::RefreshGeometry()
     QPointF firstPoint;
     QPointF secondPoint;
 
-    if (object1Id != NULL_ID)
+    if (m_lineP1Id != NULL_ID)
     {
-        firstPoint = static_cast<QPointF>(*Visualization::data->GeometricObject<VPointF>(object1Id));
-        DrawPoint(point1, firstPoint, supportColor2);
+        firstPoint = static_cast<QPointF>(*GetData()->GeometricObject<VPointF>(m_lineP1Id));
+        DrawPoint(m_point1, firstPoint);
 
-        if (object2Id == NULL_ID)
+        if (m_lineP2Id == NULL_ID)
         {
-            secondPoint = Visualization::scenePos;
+            secondPoint = ScenePos();
         }
         else
         {
-            secondPoint = static_cast<QPointF>(*Visualization::data->GeometricObject<VPointF>(object2Id));
-            DrawPoint(point2, secondPoint, supportColor2);
+            secondPoint = static_cast<QPointF>(*GetData()->GeometricObject<VPointF>(m_lineP2Id));
+            DrawPoint(m_point2, secondPoint);
         }
 
-        DrawLine(this, QLineF(firstPoint, secondPoint), supportColor2, Qt::DashLine);
+        DrawLine(this, QLineF(firstPoint, secondPoint), Qt::DashLine);
     }
 
-    RefreshFlippedObjects(firstPoint, secondPoint);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolFlippingByLine::SetFirstLinePointId(quint32 value)
-{
-    object1Id = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolFlippingByLine::SetSecondLinePointId(quint32 value)
-{
-    object2Id = value;
+    RefreshFlippedObjects(m_lineP1Id, firstPoint, secondPoint);
 }

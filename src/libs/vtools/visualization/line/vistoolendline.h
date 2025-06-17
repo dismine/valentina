@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 #ifndef VISTOOLENDLINE_H
 #define VISTOOLENDLINE_H
 
-#include <qcompilerdetection.h>
+
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>
@@ -39,28 +39,39 @@
 #include "../vmisc/def.h"
 #include "visline.h"
 
-class VisToolEndLine : public VisLine
+class VisToolEndLine final : public VisLine
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolEndLine(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolEndLine() = default;
+    ~VisToolEndLine() override = default;
 
-    virtual void RefreshGeometry() override;
+    void RefreshGeometry() override;
+    void VisualMode(quint32 id) override;
 
-    QString      Angle() const;
-    void         SetAngle(const QString &expression);
+    auto Angle() const -> QString;
+    void SetAngle(const QString &expression);
 
-    QString      Length() const;
-    void         setLength(const QString &expression);
+    auto Length() const -> QString;
+    void SetLength(const QString &expression);
 
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolEndLine)};
+    void SetBasePointId(quint32 id);
+
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ToolEndLine)};
 private:
-    Q_DISABLE_COPY(VisToolEndLine)
-    qreal           length;
-    qreal           angle;
-    VScaledEllipse *point;
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VisToolEndLine) // NOLINT
+    qreal           m_length{0};
+    qreal           m_angle{0};
+    VScaledEllipse *m_point{nullptr};
+    quint32         m_basePointId{NULL_ID};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolEndLine::SetBasePointId(quint32 id)
+{
+    m_basePointId = id;
+}
 
 #endif // VISTOOLENDLINE_H

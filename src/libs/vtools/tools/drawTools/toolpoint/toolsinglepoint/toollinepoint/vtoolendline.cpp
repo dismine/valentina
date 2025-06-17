@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -31,15 +31,14 @@
 #include <QLineF>
 #include <QPointF>
 #include <QSharedPointer>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <new>
 
 #include "../../../../../dialogs/tools/dialogendline.h"
 #include "../../../../../dialogs/tools/dialogtool.h"
-#include "../../../../../visualization/visualization.h"
 #include "../../../../../visualization/line/vistoolendline.h"
+#include "../../../../../visualization/visualization.h"
+#include "../../../../vabstracttool.h"
+#include "../../../vdrawtool.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"
@@ -48,8 +47,6 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "../../../../vabstracttool.h"
-#include "../../../vdrawtool.h"
 #include "vtoollinepoint.h"
 
 template <class T> class QSharedPointer;
@@ -63,9 +60,9 @@ const QString VToolEndLine::ToolType = QStringLiteral("endLine");
  * @param parent parent object.
  */
 VToolEndLine::VToolEndLine(const VToolEndLineInitData &initData, QGraphicsItem *parent)
-    :VToolLinePoint(initData.doc, initData.data, initData.id, initData.typeLine, initData.lineColor,
-                    initData.formulaLength, initData.basePointId, 0, parent),
-      formulaAngle(initData.formulaAngle)
+  : VToolLinePoint(initData.doc, initData.data, initData.id, initData.typeLine, initData.lineColor,
+                   initData.formulaLength, initData.basePointId, 0, initData.notes, parent),
+    formulaAngle(initData.formulaAngle)
 {
     ToolCreation(initData.typeCreation);
 }
@@ -74,11 +71,11 @@ VToolEndLine::VToolEndLine(const VToolEndLineInitData &initData, QGraphicsItem *
 /**
  * @brief setDialog set dialog when user want change tool option.
  */
-void VToolEndLine::setDialog()
+void VToolEndLine::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     m_dialog->setModal(true);
-    QPointer<DialogEndLine> dialogTool = qobject_cast<DialogEndLine *>(m_dialog);
+    QPointer<DialogEndLine> const dialogTool = qobject_cast<DialogEndLine *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
     dialogTool->SetTypeLine(m_lineType);
@@ -87,6 +84,7 @@ void VToolEndLine::setDialog()
     dialogTool->SetAngle(formulaAngle);
     dialogTool->SetBasePointId(basePointId);
     dialogTool->SetPointName(p->name());
+    dialogTool->SetNotes(m_notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -98,8 +96,8 @@ void VToolEndLine::setDialog()
  * @param data container with variables.
  * @return the created tool
  */
-VToolEndLine* VToolEndLine::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                   VContainer *data)
+auto VToolEndLine::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                          VContainer *data) -> VToolEndLine *
 {
     SCASSERT(not dialog.isNull())
     const QPointer<DialogEndLine> dialogTool = qobject_cast<DialogEndLine *>(dialog);
@@ -111,12 +109,13 @@ VToolEndLine* VToolEndLine::Create(const QPointer<DialogTool> &dialog, VMainGrap
     initData.basePointId = dialogTool->GetBasePointId();
     initData.typeLine = dialogTool->GetTypeLine();
     initData.lineColor = dialogTool->GetLineColor();
-    initData.name = dialogTool->getPointName();
+    initData.name = dialogTool->GetPointName();
     initData.scene = scene;
     initData.doc = doc;
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
     VToolEndLine *point = Create(initData);
     if (point != nullptr)
@@ -131,15 +130,16 @@ VToolEndLine* VToolEndLine::Create(const QPointer<DialogTool> &dialog, VMainGrap
  * @brief Create help create tool.
  * @param initData init data.
  */
-VToolEndLine* VToolEndLine::Create(VToolEndLineInitData &initData)
+auto VToolEndLine::Create(VToolEndLineInitData &initData) -> VToolEndLine *
 {
     const QSharedPointer<VPointF> basePoint = initData.data->GeometricObject<VPointF>(initData.basePointId);
-    QLineF line = QLineF(static_cast<QPointF>(*basePoint), QPointF(basePoint->x()+100, basePoint->y()));
+    auto line = QLineF(static_cast<QPointF>(*basePoint), QPointF(basePoint->x() + 100, basePoint->y()));
 
-    line.setAngle(CheckFormula(initData.id, initData.formulaAngle, initData.data)); //First set angle.
-    line.setLength(qApp->toPixel(CheckFormula(initData.id, initData.formulaLength, initData.data)));
+    line.setAngle(CheckFormula(initData.id, initData.formulaAngle, initData.data)); // First set angle.
+    line.setLength(
+        VAbstractValApplication::VApp()->toPixel(CheckFormula(initData.id, initData.formulaLength, initData.data)));
 
-    VPointF *p = new VPointF(line.p2(), initData.name, initData.mx, initData.my);
+    auto *p = new VPointF(line.p2(), initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
 
     if (initData.typeCreation == Source::FromGui)
@@ -160,7 +160,7 @@ VToolEndLine* VToolEndLine::Create(VToolEndLineInitData &initData)
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::EndLine, initData.doc);
-        VToolEndLine *point = new VToolEndLine(initData);
+        auto *point = new VToolEndLine(initData);
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
@@ -174,8 +174,7 @@ VToolEndLine* VToolEndLine::Create(VToolEndLineInitData &initData)
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolEndLine::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                              QList<quint32> &newDependencies)
+void VToolEndLine::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogEndLine> dialogTool = qobject_cast<DialogEndLine *>(m_dialog);
@@ -184,12 +183,14 @@ void VToolEndLine::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepend
     AddDependence(oldDependencies, basePointId);
     AddDependence(newDependencies, dialogTool->GetBasePointId());
 
-    doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
+    doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrAngle, dialogTool->GetAngle());
     doc->SetAttribute(domElement, AttrBasePoint, QString().setNum(dialogTool->GetBasePointId()));
+    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
+                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -206,11 +207,13 @@ void VToolEndLine::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolEndLine::ReadToolAttributes(const QDomElement &domElement)
 {
-    m_lineType = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
-    lineColor = doc->GetParametrString(domElement, AttrLineColor, ColorBlack);
-    formulaLength = doc->GetParametrString(domElement, AttrLength, QString());
-    basePointId = doc->GetParametrUInt(domElement, AttrBasePoint, NULL_ID_STR);
-    formulaAngle = doc->GetParametrString(domElement, AttrAngle, QString());
+    VToolLinePoint::ReadToolAttributes(domElement);
+
+    m_lineType = VDomDocument::GetParametrString(domElement, AttrTypeLine, TypeLineLine);
+    lineColor = VDomDocument::GetParametrString(domElement, AttrLineColor, ColorBlack);
+    formulaLength = VDomDocument::GetParametrString(domElement, AttrLength, QString());
+    basePointId = VAbstractPattern::GetParametrUInt(domElement, AttrBasePoint, NULL_ID_STR);
+    formulaAngle = VDomDocument::GetParametrString(domElement, AttrAngle, QString());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -218,22 +221,25 @@ void VToolEndLine::SetVisualization()
 {
     if (not vis.isNull())
     {
-        VisToolEndLine *visual = qobject_cast<VisToolEndLine *>(vis);
+        auto *visual = qobject_cast<VisToolEndLine *>(vis);
         SCASSERT(visual != nullptr)
 
-        visual->setObject1Id(basePointId);
-        visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength, qApp->Settings()->GetOsSeparator()));
-        visual->SetAngle(qApp->TrVars()->FormulaToUser(formulaAngle, qApp->Settings()->GetOsSeparator()));
-        visual->setLineStyle(LineStyleToPenStyle(m_lineType));
+        const bool osSeparator = VAbstractApplication::VApp()->Settings()->GetOsSeparator();
+        const VTranslateVars *trVars = VAbstractApplication::VApp()->TrVars();
+
+        visual->SetBasePointId(basePointId);
+        visual->SetLength(trVars->FormulaToUser(formulaLength, osSeparator));
+        visual->SetAngle(trVars->FormulaToUser(formulaAngle, osSeparator));
+        visual->SetLineStyle(LineStyleToPenStyle(m_lineType));
+        visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolEndLine::GetFormulaAngle() const
+auto VToolEndLine::GetFormulaAngle() const -> VFormula
 {
     VFormula fAngle(formulaAngle, getData());
-    fAngle.setCheckZero(false);
     fAngle.setToolId(m_id);
     fAngle.setPostfix(degreeSymbol);
     fAngle.Eval();
@@ -265,9 +271,9 @@ void VToolEndLine::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint3
     {
         ContextMenu<DialogEndLine>(event, id);
     }
-    catch(const VExceptionToolWasDeleted &e)
+    catch (const VExceptionToolWasDeleted &e)
     {
         Q_UNUSED(e)
-        return;//Leave this method immediately!!!
+        return; // Leave this method immediately!!!
     }
 }

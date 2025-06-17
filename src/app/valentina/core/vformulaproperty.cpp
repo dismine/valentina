@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,23 +29,28 @@
 #include "vformulaproperty.h"
 #include "vformulapropertyeditor.h"
 
+#include "../vmisc/vabstractapplication.h"
+#include "../vpatterndb/vformula.h"
+#include "../vpropertyexplorer/plugins/vstringproperty.h"
 #include "../vpropertyexplorer/vproperty_p.h"
 #include "vformulapropertyeditor.h"
-#include "../vpropertyexplorer/vproperties.h"
-#include "../vpatterndb/vformula.h"
-#include "../vmisc/vabstractapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VFormulaProperty::VFormulaProperty(const QString &name)
-    : VProperty(name, static_cast<QVariant::Type>(VFormula::FormulaTypeId()))
+  : VProperty(name,
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+              static_cast<QMetaType::Type>(VFormula::FormulaTypeId()))
+#else
+              static_cast<QVariant::Type>(VFormula::FormulaTypeId()))
+#endif
 {
-    d_ptr->type = VPE::Property::Complex;
+    vproperty_d_ptr->type = VPE::Property::Complex;
 
-    VPE::VStringProperty* tmpFormula = new VPE::VStringProperty(tr("Formula"));
+    auto *tmpFormula = new VPE::VStringProperty(tr("Formula"));
     addChild(tmpFormula);
     tmpFormula->setClearButtonEnable(true);
     tmpFormula->setUpdateBehaviour(true, false);
-    tmpFormula->setOsSeparator(qApp->Settings()->GetOsSeparator());
+    tmpFormula->setOsSeparator(VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 
     // Cannot use virtual function setValue in constructor
     SetFormula(QVariant(0).value<VFormula>());
@@ -53,86 +58,82 @@ VFormulaProperty::VFormulaProperty(const QString &name)
 
 //---------------------------------------------------------------------------------------------------------------------
 //! Get the data how it should be displayed
-QVariant VFormulaProperty::data (int column, int role) const
+auto VFormulaProperty::data(int column, int role) const -> QVariant
 {
     if (column == DPC_Data && (Qt::DisplayRole == role || Qt::EditRole == role))
     {
         return getValue();
     }
-    else
-    {
-        return VProperty::data(column, role);
-    }
+
+    return VProperty::data(column, role);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Qt::ItemFlags VFormulaProperty::flags(int column) const
+auto VFormulaProperty::flags(int column) const -> Qt::ItemFlags
 {
     if (column == DPC_Name || column == DPC_Data)
     {
         return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
     }
-    else
-    {
-        return Qt::NoItemFlags;
-    }
+
+    return Qt::NoItemFlags;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 //! Returns an editor widget, or NULL if it doesn't supply one
-QWidget* VFormulaProperty::createEditor(QWidget* parent, const QStyleOptionViewItem& options,
-                                        const QAbstractItemDelegate* delegate)
+auto VFormulaProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
+                                    const QAbstractItemDelegate *delegate) -> QWidget *
 {
     Q_UNUSED(options)
     Q_UNUSED(delegate)
 
-    VFormula formula = VProperty::d_ptr->VariantValue.value<VFormula>();
-    VFormulaPropertyEditor* tmpEditor = new VFormulaPropertyEditor(parent);
+    auto formula = VProperty::vproperty_d_ptr->VariantValue.value<VFormula>();
+    auto *tmpEditor = new VFormulaPropertyEditor(parent);
     tmpEditor->setLocale(parent->locale());
     tmpEditor->SetFormula(formula);
-    VProperty::d_ptr->editor = tmpEditor;
-    return VProperty::d_ptr->editor;
+    VProperty::vproperty_d_ptr->editor = tmpEditor;
+    return VProperty::vproperty_d_ptr->editor;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 //! Sets the property's data to the editor (returns false, if the standard delegate should do that)
-bool VFormulaProperty::setEditorData(QWidget* editor)
+auto VFormulaProperty::setEditorData(QWidget *editor) -> bool
 {
-    VFormulaPropertyEditor* tmpWidget = qobject_cast<VFormulaPropertyEditor*>(editor);
-    if (tmpWidget)
+    if (auto *tmpWidget = qobject_cast<VFormulaPropertyEditor *>(editor); tmpWidget != nullptr)
     {
-        VFormula formula = VProperty::d_ptr->VariantValue.value<VFormula>();
+        auto formula = VProperty::vproperty_d_ptr->VariantValue.value<VFormula>();
         tmpWidget->SetFormula(formula);
     }
     else
+    {
         return false;
+    }
 
     return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 //! Gets the data from the widget
-QVariant VFormulaProperty::getEditorData(const QWidget *editor) const
+auto VFormulaProperty::getEditorData(const QWidget *editor) const -> QVariant
 {
-    const VFormulaPropertyEditor* tmpWidget = qobject_cast<const VFormulaPropertyEditor*>(editor);
-    if (tmpWidget)
+    if (const auto *tmpWidget = qobject_cast<const VFormulaPropertyEditor *>(editor); tmpWidget != nullptr)
     {
         QVariant value;
         value.setValue(tmpWidget->GetFormula());
         return value;
     }
 
-    return QVariant();
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VFormulaProperty::type() const
+auto VFormulaProperty::type() const -> QString
 {
-    return "formula";
+    return QStringLiteral("formula");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPE::VProperty *VFormulaProperty::clone(bool include_children, VProperty *container) const
+auto VFormulaProperty::clone(bool include_children, VProperty *container) const -> VPE::VProperty *
 {
     if (!container)
     {
@@ -140,8 +141,8 @@ VPE::VProperty *VFormulaProperty::clone(bool include_children, VProperty *contai
 
         if (!include_children)
         {
-            const QList<VProperty*> tmpChildren = container->getChildren();
-            for (auto tmpChild : tmpChildren)
+            const QList<VProperty *> tmpChildren = container->getChildren();
+            for (auto *tmpChild : tmpChildren)
             {
                 container->removeChild(tmpChild);
                 delete tmpChild;
@@ -149,53 +150,60 @@ VPE::VProperty *VFormulaProperty::clone(bool include_children, VProperty *contai
         }
     }
 
-    return VProperty::clone(false, container);  // Child
-
+    return VProperty::clone(false, container); // Child
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VFormulaProperty::setValue(const QVariant &value)
 {
-    VFormula tmpFormula = value.value<VFormula>();
+    auto tmpFormula = value.value<VFormula>();
     SetFormula(tmpFormula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVariant VFormulaProperty::getValue() const
+auto VFormulaProperty::getValue() const -> QVariant
 {
-    VFormula tmpFormula = GetFormula();
+    VFormula const tmpFormula = GetFormula();
     QVariant value;
     value.setValue(tmpFormula);
     return value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VFormulaProperty::GetFormula() const
+auto VFormulaProperty::GetFormula() const -> VFormula
 {
-    return VProperty::d_ptr->VariantValue.value<VFormula>();
+    return VProperty::vproperty_d_ptr->VariantValue.value<VFormula>();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VFormulaProperty::SetFormula(const VFormula &formula)
 {
-    if (d_ptr->Children.count() < 1)
+    if (vproperty_d_ptr->Children.count() < 1)
     {
         return;
     }
 
     QVariant value;
     value.setValue(formula);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    value.convert(QMetaType(VFormula::FormulaTypeId()));
+#else
     value.convert(VFormula::FormulaTypeId());
-    VProperty::d_ptr->VariantValue = value;
+#endif
+    VProperty::vproperty_d_ptr->VariantValue = value;
 
     QVariant tmpFormula(formula.GetFormula());
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    tmpFormula.convert(QMetaType(QMetaType::QString));
+#else
     tmpFormula.convert(QVariant::String);
+#endif
 
-    VProperty::d_ptr->Children.at(0)->setValue(tmpFormula);
+    VProperty::vproperty_d_ptr->Children.at(0)->setValue(tmpFormula);
 
-    if (VProperty::d_ptr->editor != nullptr)
+    if (VProperty::vproperty_d_ptr->editor != nullptr)
     {
-        setEditorData(VProperty::d_ptr->editor);
+        setEditorData(VProperty::vproperty_d_ptr->editor); // NOLINT(clang-analyzer-optin.cplusplus.VirtualCall)
     }
 }
 

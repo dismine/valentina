@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 #ifndef VTOOLNORMAL_H
 #define VTOOLNORMAL_H
 
-#include <qcompilerdetection.h>
+
 #include <QDomElement>
 #include <QGraphicsItem>
 #include <QMetaObject>
@@ -65,19 +65,19 @@ struct VToolNormalInitData : VToolLinePointInitData
  */
 class VToolNormal : public VToolLinePoint
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
-    virtual void   setDialog() override;
-    static VToolNormal* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
-                               VContainer *data);
-    static VToolNormal* Create(VToolNormalInitData initData);
-    static QPointF FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const qreal &length,
-                             const qreal &angle = 0);
+    virtual void   SetDialog() override;
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolNormal *;
+    static auto Create(VToolNormalInitData initData) -> VToolNormal *;
+    static auto FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, qreal length, qreal angle = 0)
+        -> QPointF;
     static const QString ToolType;
-    virtual int    type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::Normal)};
 
-    QString SecondPointName() const;
+    auto SecondPointName() const -> QString;
 
     virtual void   ShowVisualization(bool show) override;
 protected slots:
@@ -90,7 +90,7 @@ protected:
     virtual void   ReadToolAttributes(const QDomElement &domElement) override;
     virtual void   SetVisualization() override;
 private:
-    Q_DISABLE_COPY(VToolNormal)
+    Q_DISABLE_COPY_MOVE(VToolNormal) // NOLINT
 
     /** @brief secondPointId id second line point. */
     quint32        secondPointId;

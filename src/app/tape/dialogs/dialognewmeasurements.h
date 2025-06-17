@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -40,34 +40,27 @@ namespace Ui
 
 class DialogNewMeasurements : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit DialogNewMeasurements(QWidget *parent = nullptr);
-    ~DialogNewMeasurements();
+    ~DialogNewMeasurements() override;
 
-    MeasurementsType Type() const;
-    Unit MUnit() const;
-    int BaseSize() const;
-    int BaseHeight() const;
+    auto Type() const -> MeasurementsType;
+    auto MUnit() const -> Unit;
 
 protected:
-    virtual void changeEvent(QEvent* event) override;
-    virtual void showEvent(QShowEvent *event) override;
-
-private slots:
-    void CurrentTypeChanged(int index);
-    void CurrentUnitChanged(int index);
+    void changeEvent(QEvent* event) override;
+    void showEvent(QShowEvent *event) override;
 
 private:
-    Q_DISABLE_COPY(DialogNewMeasurements)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DialogNewMeasurements) // NOLINT
     Ui::DialogNewMeasurements *ui;
-    bool isInitialized;
+    bool m_isInitialized;
 
     void InitMTypes();
-    void InitHeightsList();
-    void InitSizesList();
-    void InitUnits(const MeasurementsType &type);
+    void InitUnits();
 };
 
 #endif // DIALOGNEWMEASUREMENTS_H

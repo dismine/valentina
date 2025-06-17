@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -27,38 +27,31 @@
  *************************************************************************/
 
 #include "dialogmdatabase.h"
-#include "ui_dialogmdatabase.h"
 #include "../mapplication.h"
-#include "../vpatterndb/measurements.h"
+#include "../vformat/knownmeasurements/vknownmeasurement.h"
+#include "../vformat/knownmeasurements/vknownmeasurements.h"
+#include "../vformat/knownmeasurements/vknownmeasurementsdatabase.h"
+#include "../vmisc/def.h"
+#include "ui_dialogmdatabase.h"
 
 #include <QKeyEvent>
 #include <QMenu>
 #include <QSvgRenderer>
 #include <QtSvg>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
-DialogMDataBase::DialogMDataBase(const QStringList &list, QWidget *parent)
-    :QDialog(parent),
-      ui(new Ui::DialogMDataBase),
-      selectMode(true),
-      list(list),
-      groupA(nullptr),
-      groupB(nullptr),
-      groupC(nullptr),
-      groupD(nullptr),
-      groupE(nullptr),
-      groupF(nullptr),
-      groupG(nullptr),
-      groupH(nullptr),
-      groupI(nullptr),
-      groupJ(nullptr),
-      groupK(nullptr),
-      groupL(nullptr),
-      groupM(nullptr),
-      groupN(nullptr),
-      groupO(nullptr),
-      groupP(nullptr),
-      groupQ(nullptr)
+DialogMDataBase::DialogMDataBase(const QUuid &id, const QStringList &usedMeasurements, QWidget *parent)
+  : QDialog(parent),
+    ui(new Ui::DialogMDataBase),
+    m_selectMode(true),
+    m_usedMeasurements(usedMeasurements),
+    m_knownId(id)
 {
     ui->setupUi(this);
 
@@ -66,56 +59,13 @@ DialogMDataBase::DialogMDataBase(const QStringList &list, QWidget *parent)
     setWindowFlags(Qt::Window);
 #endif
 
-    InitDataBase(list);
+    InitDataBase(m_usedMeasurements);
 
     ui->treeWidget->installEventFilter(this);
 
     connect(ui->treeWidget, &QTreeWidget::itemChanged, this, &DialogMDataBase::UpdateChecks);
     connect(ui->treeWidget, &QTreeWidget::itemClicked, this, &DialogMDataBase::ShowDescription);
     connect(ui->treeWidget, &QTreeWidget::customContextMenuRequested, this, &DialogMDataBase::TreeMenu);
-    connect(ui->lineEditSearch, &QLineEdit::textChanged, this, &DialogMDataBase::FilterMeasurements);
-
-    ReadSettings();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-DialogMDataBase::DialogMDataBase(QWidget *parent)
-    :QDialog(parent),
-      ui(new Ui::DialogMDataBase),
-      selectMode(false),
-      list(),
-      groupA(nullptr),
-      groupB(nullptr),
-      groupC(nullptr),
-      groupD(nullptr),
-      groupE(nullptr),
-      groupF(nullptr),
-      groupG(nullptr),
-      groupH(nullptr),
-      groupI(nullptr),
-      groupJ(nullptr),
-      groupK(nullptr),
-      groupL(nullptr),
-      groupM(nullptr),
-      groupN(nullptr),
-      groupO(nullptr),
-      groupP(nullptr),
-      groupQ(nullptr)
-
-{
-    ui->setupUi(this);
-
-#if defined(Q_OS_MAC)
-    setWindowFlags(Qt::Window);
-#endif
-
-    InitDataBase();
-
-    ui->treeWidget->installEventFilter(this);
-
-    connect(ui->treeWidget, &QTreeWidget::itemClicked, this, &DialogMDataBase::ShowDescription);
-    connect(ui->treeWidget, &QTreeWidget::customContextMenuRequested, this, &DialogMDataBase::TreeMenu);
-    connect(ui->treeWidget, &QTreeWidget::itemActivated, this, &DialogMDataBase::ShowDescription);
     connect(ui->lineEditSearch, &QLineEdit::textChanged, this, &DialogMDataBase::FilterMeasurements);
 
     ReadSettings();
@@ -129,17 +79,16 @@ DialogMDataBase::~DialogMDataBase()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList DialogMDataBase::GetNewNames() const
+auto DialogMDataBase::GetNewNames() const -> QStringList
 {
-    if (selectMode)
+    if (m_selectMode)
     {
         QStringList newNames;
         QTreeWidgetItemIterator it(ui->treeWidget,
-                                   QTreeWidgetItemIterator::NoChildren | QTreeWidgetItemIterator::Checked );
+                                   QTreeWidgetItemIterator::NoChildren | QTreeWidgetItemIterator::Checked);
         while (*it)
         {
-            const QString name = (*it)->data(0, Qt::UserRole).toString();
-            if (not list.contains(name))
+            if (const QString name = (*it)->data(0, Qt::UserRole).toString(); not m_usedMeasurements.contains(name))
             {
                 newNames.append(name);
             }
@@ -147,76 +96,49 @@ QStringList DialogMDataBase::GetNewNames() const
         }
         return newNames;
     }
-    else
-    {
-        return QStringList();
-    }
+
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogMDataBase::RetranslateGroups()
+auto DialogMDataBase::ImgTag(const VPatternImage &image) -> QString
 {
-    RetranslateGroup(groupA, "A. " + tr("Direct Height", "Measurement section"),              ListGroupA());
-    RetranslateGroup(groupB, "B. " + tr("Direct Width", "Measurement section"),               ListGroupB());
-    RetranslateGroup(groupC, "C. " + tr("Indentation", "Measurement section"),                ListGroupC());
-    RetranslateGroup(groupD, "D. " + tr("Hand", "Measurement section"),                       ListGroupD());
-    RetranslateGroup(groupE, "E. " + tr("Foot", "Measurement section"),                       ListGroupE());
-    RetranslateGroup(groupF, "F. " + tr("Head", "Measurement section"),                       ListGroupF());
-    RetranslateGroup(groupG, "G. " + tr("Circumference and Arc", "Measurement section"),      ListGroupG());
-    RetranslateGroup(groupH, "H. " + tr("Vertical", "Measurement section"),                   ListGroupH());
-    RetranslateGroup(groupI, "I. " + tr("Horizontal", "Measurement section"),                 ListGroupI());
-    RetranslateGroup(groupJ, "J. " + tr("Bust", "Measurement section"),                       ListGroupJ());
-    RetranslateGroup(groupK, "K. " + tr("Balance", "Measurement section"),                    ListGroupK());
-    RetranslateGroup(groupL, "L. " + tr("Arm", "Measurement section"),                        ListGroupL());
-    RetranslateGroup(groupM, "M. " + tr("Leg", "Measurement section"),                        ListGroupM());
-    RetranslateGroup(groupN, "N. " + tr("Crotch and Rise", "Measurement section"),            ListGroupN());
-    RetranslateGroup(groupO, "O. " + tr("Men & Tailoring", "Measurement section"),            ListGroupO());
-    RetranslateGroup(groupP, "P. " + tr("Historical & Specialty", "Measurement section"),     ListGroupP());
-    RetranslateGroup(groupQ, "Q. " + tr("Patternmaking measurements", "Measurement section"), ListGroupQ());
-
-    ShowDescription(ui->treeWidget->currentItem(), 0);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString DialogMDataBase::ImgTag(const QString &number)
-{
-    QString imgUrl("<img src=\"wrong.png\" align=\"center\"/>"); // In case of error
-    const QString filePath = QString("://diagrams/%1.svg").arg(MapDiagrams(qApp->TrVars(), number));
-    if (QFileInfo::exists(filePath))
+    if (!image.IsValid())
     {
-        // Load your SVG
-        QSvgRenderer renderer;
-        const bool ok = renderer.load(filePath);
-        if (ok)
-        {
-            const QScreen *screen = QGuiApplication::screens().at(0);
-            if (screen)
-            {
-                const QSize defSize = renderer.defaultSize();
-
-                // Prepare a QImage with desired characteritisc
-                QImage image(defSize, QImage::Format_RGB32);
-                image.fill(Qt::white);
-
-                const QRect geometry = screen->geometry();
-                const int baseHeight = 1440;
-                const int imgHeight = geometry.height() * defSize.height() / baseHeight;
-
-                QImage scaledImg = image.scaledToHeight(imgHeight);
-
-                // Get QPainter that paints to the image
-                QPainter painter(&scaledImg);
-                renderer.render(&painter);
-
-                QByteArray byteArray;
-                QBuffer buffer(&byteArray);
-                scaledImg.save(&buffer, "PNG");
-                imgUrl = QString("<img src=\"data:image/png;base64,") + byteArray.toBase64() + "\" align=\"center\"/>";
-            }
-        }
+        return QStringLiteral(R"(<img src="wrong.png" align="center" />)"); // In case of error
     }
 
-    return imgUrl;
+    // If scaling is not needed, use the original base64 data
+    if (VFuzzyComparePossibleNulls(image.GetSizeScale(), 100.0))
+    {
+        return QStringLiteral(R"(<img src="data:%1;base64,%2" align="center" />)")
+            .arg(image.ContentType(), QString::fromLatin1(image.ContentData()));
+    }
+
+    // Load the original image from base64
+    QImage originalImage;
+    originalImage.loadFromData(QByteArray::fromBase64(image.ContentData()));
+
+    if (originalImage.isNull())
+    {
+        return QStringLiteral(R"(<img src="wrong.png" align="center" />)");
+    }
+
+    // Scale the image manually
+    const qreal scaleFactor = image.GetSizeScale() / 100.0;
+    const QSize newSize(static_cast<int>(originalImage.width() * scaleFactor),
+                        static_cast<int>(originalImage.height() * scaleFactor));
+    const QImage scaledImage = originalImage.scaled(newSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
+    // Convert the scaled image to base64
+    QByteArray byteArray;
+    QBuffer buffer(&byteArray);
+    buffer.open(QIODevice::WriteOnly);
+    scaledImage.save(&buffer, image.ContentType().split("/").last().toUpper().toUtf8().constData());
+
+    const QString base64Data = QString::fromLatin1(byteArray.toBase64());
+
+    return QStringLiteral(R"(<img src="data:%1;base64,%2" align="center" />)").arg(image.ContentType(), base64Data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -226,6 +148,10 @@ void DialogMDataBase::changeEvent(QEvent *event)
     {
         // retranslate designer form (single inheritance approach)
         ui->retranslateUi(this);
+        if (m_generalGroup)
+        {
+            m_generalGroup->setText(0, tr("General", "Measurement section"));
+        }
     }
 
     // remember to call base class implementation
@@ -233,12 +159,13 @@ void DialogMDataBase::changeEvent(QEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogMDataBase::eventFilter(QObject *target, QEvent *event)
+auto DialogMDataBase::eventFilter(QObject *target, QEvent *event) -> bool
 {
     if (target == ui->treeWidget && event->type() == QEvent::KeyPress)
     {
-        QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
-        switch(keyEvent->key())
+        const auto *keyEvent = static_cast<QKeyEvent *>(
+            event); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
+        switch (keyEvent->key())
         {
             case Qt::Key_Up:
             {
@@ -273,16 +200,16 @@ void DialogMDataBase::UpdateChecks(QTreeWidgetItem *item, int column)
     if (item->childCount() != 0 && item->checkState(0) != Qt::PartiallyChecked && column != -1)
     {
         bool flag = false; // Check if we could change atleast one children
-        Qt::CheckState checkState = item->checkState(0);
+        Qt::CheckState const checkState = item->checkState(0);
         for (int i = 0; i < item->childCount(); ++i)
         {
-            if (not list.contains(item->child(i)->data(0, Qt::UserRole).toString()))
+            if (not m_usedMeasurements.contains(item->child(i)->data(0, Qt::UserRole).toString()))
             {
                 item->child(i)->setCheckState(0, checkState);
                 flag = true;
             }
 
-            if (flag == false) // All child in the list
+            if (not flag) // All child in the list
             {
                 item->setCheckState(0, Qt::Checked);
             }
@@ -297,8 +224,7 @@ void DialogMDataBase::UpdateChecks(QTreeWidgetItem *item, int column)
         }
         for (int j = 0; j < parent->childCount(); ++j)
         {
-            if (j != parent->indexOfChild(item)
-                    && item->checkState(0) != parent->child(j)->checkState(0))
+            if (j != parent->indexOfChild(item) && item->checkState(0) != parent->child(j)->checkState(0))
             {
                 diff = true;
             }
@@ -336,22 +262,22 @@ void DialogMDataBase::TreeMenu(const QPoint &pos)
     QTreeWidgetItem *item = ui->treeWidget->currentItem();
     ShowDescription(item, model.column());
 
-    QAction *actionCollapseAll = new QAction(tr("Collapse All"), this);
+    auto *actionCollapseAll = new QAction(tr("Collapse All"), this);
     connect(actionCollapseAll, &QAction::triggered, ui->treeWidget, &QTreeWidget::collapseAll);
 
-    QAction *actionExpandeAll = new QAction(tr("Expand All"), this);
+    auto *actionExpandeAll = new QAction(tr("Expand All"), this);
     connect(actionExpandeAll, &QAction::triggered, ui->treeWidget, &QTreeWidget::expandAll);
 
     QMenu menu(this);
     menu.addAction(actionCollapseAll);
     menu.addAction(actionExpandeAll);
 
-    if (selectMode)
+    if (m_selectMode)
     {
         QString actionName;
         GlobalCheckState() == Qt::Checked ? actionName = tr("Check all") : actionName = tr("Uncheck all");
 
-        QAction *actionRecheck = new QAction(actionName, this);
+        auto *actionRecheck = new QAction(actionName, this);
         connect(actionRecheck, &QAction::triggered, this, &DialogMDataBase::Recheck);
 
         menu.addAction(actionRecheck);
@@ -362,102 +288,86 @@ void DialogMDataBase::TreeMenu(const QPoint &pos)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::Recheck()
 {
-    if (selectMode)
+    if (m_selectMode)
     {
         const Qt::CheckState check = GlobalCheckState();
 
-        ChangeCheckState(groupA, check);
-        ChangeCheckState(groupB, check);
-        ChangeCheckState(groupC, check);
-        ChangeCheckState(groupD, check);
-        ChangeCheckState(groupE, check);
-        ChangeCheckState(groupF, check);
-        ChangeCheckState(groupG, check);
-        ChangeCheckState(groupH, check);
-        ChangeCheckState(groupI, check);
-        ChangeCheckState(groupJ, check);
-        ChangeCheckState(groupK, check);
-        ChangeCheckState(groupL, check);
-        ChangeCheckState(groupM, check);
-        ChangeCheckState(groupN, check);
-        ChangeCheckState(groupO, check);
-        ChangeCheckState(groupP, check);
-        ChangeCheckState(groupQ, check);
+        for (auto *group : m_groups)
+        {
+            ChangeCheckState(group, check);
+        }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::FilterMeasurements(const QString &search)
 {
-    FilterGroup(groupA, search);
-    FilterGroup(groupB, search);
-    FilterGroup(groupC, search);
-    FilterGroup(groupD, search);
-    FilterGroup(groupE, search);
-    FilterGroup(groupF, search);
-    FilterGroup(groupG, search);
-    FilterGroup(groupH, search);
-    FilterGroup(groupI, search);
-    FilterGroup(groupJ, search);
-    FilterGroup(groupK, search);
-    FilterGroup(groupL, search);
-    FilterGroup(groupM, search);
-    FilterGroup(groupN, search);
-    FilterGroup(groupO, search);
-    FilterGroup(groupP, search);
-    FilterGroup(groupQ, search);
+    for (auto *group : m_groups)
+    {
+        FilterGroup(group, search);
+    }
 
     const QList<QTreeWidgetItem *> list = ui->treeWidget->selectedItems();
-    list.isEmpty() ? ShowDescription(nullptr, -1) : ShowDescription(list.first(), 0);
+    list.isEmpty() ? ShowDescription(nullptr, -1) : ShowDescription(list.constFirst(), 0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogMDataBase::InitDataBase(const QStringList &list)
+void DialogMDataBase::InitDataBase(const QStringList &usedMeasurements)
 {
-    InitGroup(&groupA, "A. " + tr("Direct Height", "Measurement section"),              ListGroupA(), list);
-    InitGroup(&groupB, "B. " + tr("Direct Width", "Measurement section"),               ListGroupB(), list);
-    InitGroup(&groupC, "C. " + tr("Indentation", "Measurement section"),                ListGroupC(), list);
-    InitGroup(&groupD, "D. " + tr("Hand", "Measurement section"),                       ListGroupD(), list);
-    InitGroup(&groupE, "E. " + tr("Foot", "Measurement section"),                       ListGroupE(), list);
-    InitGroup(&groupF, "F. " + tr("Head", "Measurement section"),                       ListGroupF(), list);
-    InitGroup(&groupG, "G. " + tr("Circumference and Arc", "Measurement section"),      ListGroupG(), list);
-    InitGroup(&groupH, "H. " + tr("Vertical", "Measurement section"),                   ListGroupH(), list);
-    InitGroup(&groupI, "I. " + tr("Horizontal", "Measurement section"),                 ListGroupI(), list);
-    InitGroup(&groupJ, "J. " + tr("Bust", "Measurement section"),                       ListGroupJ(), list);
-    InitGroup(&groupK, "K. " + tr("Balance", "Measurement section"),                    ListGroupK(), list);
-    InitGroup(&groupL, "L. " + tr("Arm", "Measurement section"),                        ListGroupL(), list);
-    InitGroup(&groupM, "M. " + tr("Leg", "Measurement section"),                        ListGroupM(), list);
-    InitGroup(&groupN, "N. " + tr("Crotch and Rise", "Measurement section"),            ListGroupN(), list);
-    InitGroup(&groupO, "O. " + tr("Men & Tailoring", "Measurement section"),            ListGroupO(), list);
-    InitGroup(&groupP, "P. " + tr("Historical & Specialty", "Measurement section"),     ListGroupP(), list);
-    InitGroup(&groupQ, "Q. " + tr("Patternmaking measurements", "Measurement section"), ListGroupQ(), list);
-}
+    m_groups.clear();
 
-//---------------------------------------------------------------------------------------------------------------------
-void DialogMDataBase::InitGroup(QTreeWidgetItem **group, const QString &groupName, const QStringList &mList,
-                                const QStringList &list)
-{
-    *group = AddGroup(groupName);
-    for (auto &m : mList)
+    if (m_knownId.isNull())
     {
-        AddMeasurement(*group, m, list);
+        return;
+    }
+
+    VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
+    VKnownMeasurements const knownDB = db->KnownMeasurements(m_knownId);
+
+    if (QMap<int, VKnownMeasurement> const measurements = knownDB.OrderedGroupMeasurements(QString());
+        !measurements.isEmpty())
+    {
+        m_generalGroup = InitGroup(tr("General", "Measurement section"), measurements, usedMeasurements);
+        m_groups.append(m_generalGroup);
+    }
+
+    QStringList const groups = knownDB.Groups();
+    for (const auto &group : groups)
+    {
+        QMap<int, VKnownMeasurement> const groupMeasurements = knownDB.OrderedGroupMeasurements(group);
+        m_groups.append(InitGroup(group, groupMeasurements, usedMeasurements));
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogMDataBase::FilterGroup(QTreeWidgetItem *group, const QString &search)
+auto DialogMDataBase::InitGroup(const QString &groupName, const QMap<int, VKnownMeasurement> &mlist,
+                                const QStringList &list) -> QTreeWidgetItem *
+{
+    QTreeWidgetItem *group = AddGroup(groupName);
+    auto i = mlist.constBegin();
+    while (i != mlist.constEnd())
+    {
+        AddMeasurement(group, i.value(), list);
+        ++i;
+    }
+
+    return group;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMDataBase::FilterGroup(QTreeWidgetItem *group, const QString &search) const
 {
     SCASSERT(group != nullptr)
 
     bool match = false;
-    for (int i=0; i < group->childCount(); ++i)
+    for (int i = 0; i < group->childCount(); ++i)
     {
         QTreeWidgetItem *childItem = group->child(i);
-        const QString description = QTextDocumentFragment::fromHtml(ItemFullDescription(childItem, false))
-                .toPlainText();
+        const QString description =
+            QTextDocumentFragment::fromHtml(ItemFullDescription(childItem, false)).toPlainText();
 
-        const bool hidden = not childItem->text(0).contains(search, Qt::CaseInsensitive)
-                && not description.contains(search, Qt::CaseInsensitive);
+        const bool hidden = not childItem->text(0).contains(search, Qt::CaseInsensitive) &&
+                            not description.contains(search, Qt::CaseInsensitive);
 
         childItem->setHidden(hidden);
         if (not hidden)
@@ -470,13 +380,12 @@ void DialogMDataBase::FilterGroup(QTreeWidgetItem *group, const QString &search)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QTreeWidgetItem *DialogMDataBase::AddGroup(const QString &text)
+auto DialogMDataBase::AddGroup(const QString &text) -> QTreeWidgetItem *
 {
-    QTreeWidgetItem *group = new QTreeWidgetItem(ui->treeWidget);
+    auto *group = new QTreeWidgetItem(ui->treeWidget);
     group->setText(0, text);
-    group->setToolTip(0, text);
     group->setExpanded(true);
-    if (selectMode)
+    if (m_selectMode)
     {
         group->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
         group->setCheckState(0, Qt::Unchecked);
@@ -486,15 +395,16 @@ QTreeWidgetItem *DialogMDataBase::AddGroup(const QString &text)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogMDataBase::AddMeasurement(QTreeWidgetItem *group, const QString &name, const QStringList &list)
+void DialogMDataBase::AddMeasurement(QTreeWidgetItem *group, const VKnownMeasurement &measurement,
+                                     const QStringList &list)
 {
     SCASSERT(group != nullptr)
 
-    QTreeWidgetItem *m = new QTreeWidgetItem(group);
+    auto *m = new QTreeWidgetItem(group);
 
-    if (selectMode)
+    if (m_selectMode)
     {
-        if (list.contains(name))
+        if (list.contains(measurement.name))
         {
             m->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
             m->setCheckState(0, Qt::Checked);
@@ -508,75 +418,53 @@ void DialogMDataBase::AddMeasurement(QTreeWidgetItem *group, const QString &name
         UpdateChecks(m, 0);
     }
 
-    const QString text = qApp->TrVars()->MNumber(name) + ". " + qApp->TrVars()->MToUser(name);
-    m->setText(0, text);
-    m->setToolTip(0, text);
-    m->setData(0, Qt::UserRole, name);
+    m->setText(0, measurement.name);
+    m->setToolTip(0, measurement.fullName);
+    m->setData(0, Qt::UserRole, measurement.name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::ReadSettings()
 {
-    restoreGeometry(qApp->TapeSettings()->GetDataBaseGeometry());
+    restoreGeometry(MApplication::VApp()->TapeSettings()->GetDataBaseGeometry());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::WriteSettings()
 {
-    qApp->TapeSettings()->SetDataBaseGeometry(saveGeometry());
+    MApplication::VApp()->TapeSettings()->SetDataBaseGeometry(saveGeometry());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogMDataBase::ItemFullDescription(QTreeWidgetItem *item, bool showImage) const
+auto DialogMDataBase::ItemFullDescription(QTreeWidgetItem *item, bool showImage) const -> QString
 {
     if (item == nullptr || item->childCount() != 0)
     {
-        return QString();
+        return {};
     }
 
     const QString name = item->data(0, Qt::UserRole).toString();
     if (name.isEmpty())
     {
-        return QString();
+        return {};
     }
 
-    const QString number = qApp->TrVars()->MNumber(name);
+    VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
+    VKnownMeasurements const knownDB = db->KnownMeasurements(m_knownId);
+    VKnownMeasurement const known = knownDB.Measurement(name);
 
     QString imgTag;
     if (showImage)
     {
-        imgTag = ImgTag(number);
+        imgTag = ImgTag(knownDB.Image(known.diagram));
     }
 
-    const QString text = QString("<p align=\"center\" style=\"font-variant: normal; font-style: normal; font-weight: "
-                                 "normal\"> %1 <br clear=\"left\"><b>%2</b>. <i>%3</i></p>"
-                                 "<p align=\"left\" style=\"font-variant: normal; font-style: normal; font-weight: "
-                                 "normal\">%4</p>")
-            .arg(imgTag, number, qApp->TrVars()->GuiText(name), qApp->TrVars()->Description(name));
+    const QString text = u"<p align=\"center\" style=\"font-variant: normal; font-style: normal; font-weight: "
+                         u"normal\"> %1 <br clear=\"left\"><b>%2</b></p>"
+                         u"<p align=\"left\" style=\"font-variant: normal; font-style: normal; font-weight: "
+                         u"normal\">%3</p>"_s.arg(imgTag, known.fullName, known.description);
 
     return text;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogMDataBase::RetranslateGroup(QTreeWidgetItem *group, const QString &groupText, const QStringList &list)
-{
-    group->setText(0, groupText);
-    group->setToolTip(0, groupText);
-
-    for (int i=0; i<list.size(); ++i)
-    {
-        RetranslateMeasurement(group, i, list.at(i));
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogMDataBase::RetranslateMeasurement(QTreeWidgetItem *group, int index, const QString &name)
-{
-    const QString text = qApp->TrVars()->MNumber(name) + ". " + qApp->TrVars()->MToUser(name);
-
-    QTreeWidgetItem *m = group->child(index);
-    m->setText(0, text);
-    m->setToolTip(0, text);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -587,68 +475,34 @@ void DialogMDataBase::ChangeCheckState(QTreeWidgetItem *group, Qt::CheckState ch
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Qt::CheckState DialogMDataBase::GlobalCheckState() const
+auto DialogMDataBase::GlobalCheckState() const -> Qt::CheckState
 {
-    SCASSERT(groupA != nullptr)
-    SCASSERT(groupB != nullptr)
-    SCASSERT(groupC != nullptr)
-    SCASSERT(groupD != nullptr)
-    SCASSERT(groupE != nullptr)
-    SCASSERT(groupF != nullptr)
-    SCASSERT(groupG != nullptr)
-    SCASSERT(groupH != nullptr)
-    SCASSERT(groupI != nullptr)
-    SCASSERT(groupJ != nullptr)
-    SCASSERT(groupK != nullptr)
-    SCASSERT(groupL != nullptr)
-    SCASSERT(groupM != nullptr)
-    SCASSERT(groupN != nullptr)
-    SCASSERT(groupO != nullptr)
-    SCASSERT(groupP != nullptr)
-    SCASSERT(groupQ != nullptr)
-
-    if (selectMode)
+    if (m_selectMode)
     {
-        if (groupA->checkState(0) == Qt::Unchecked &&
-            groupB->checkState(0) == Qt::Unchecked &&
-            groupC->checkState(0) == Qt::Unchecked &&
-            groupD->checkState(0) == Qt::Unchecked &&
-            groupE->checkState(0) == Qt::Unchecked &&
-            groupF->checkState(0) == Qt::Unchecked &&
-            groupG->checkState(0) == Qt::Unchecked &&
-            groupH->checkState(0) == Qt::Unchecked &&
-            groupI->checkState(0) == Qt::Unchecked &&
-            groupJ->checkState(0) == Qt::Unchecked &&
-            groupK->checkState(0) == Qt::Unchecked &&
-            groupL->checkState(0) == Qt::Unchecked &&
-            groupM->checkState(0) == Qt::Unchecked &&
-            groupN->checkState(0) == Qt::Unchecked &&
-            groupO->checkState(0) == Qt::Unchecked &&
-            groupP->checkState(0) == Qt::Unchecked &&
-            groupQ->checkState(0) == Qt::Unchecked)
+        bool allUnchecked = true;
+        bool allChecked = true;
+
+        for (auto *group : m_groups)
+        {
+            if (group->checkState(0) == Qt::Checked)
+            {
+                allUnchecked = false;
+            }
+            if (group->checkState(0) != Qt::Checked)
+            {
+                allChecked = false;
+            }
+        }
+
+        if (allUnchecked)
         {
             return Qt::Checked;
         }
-        else if (groupA->checkState(0) == Qt::Checked &&
-                 groupB->checkState(0) == Qt::Checked &&
-                 groupC->checkState(0) == Qt::Checked &&
-                 groupD->checkState(0) == Qt::Checked &&
-                 groupE->checkState(0) == Qt::Checked &&
-                 groupF->checkState(0) == Qt::Checked &&
-                 groupG->checkState(0) == Qt::Checked &&
-                 groupH->checkState(0) == Qt::Checked &&
-                 groupI->checkState(0) == Qt::Checked &&
-                 groupJ->checkState(0) == Qt::Checked &&
-                 groupK->checkState(0) == Qt::Checked &&
-                 groupL->checkState(0) == Qt::Checked &&
-                 groupM->checkState(0) == Qt::Checked &&
-                 groupN->checkState(0) == Qt::Checked &&
-                 groupO->checkState(0) == Qt::Checked &&
-                 groupP->checkState(0) == Qt::Checked &&
-                 groupQ->checkState(0) == Qt::Checked)
+        else if (allChecked)
         {
             return Qt::Unchecked;
         }
+
         return Qt::Checked;
     }
 

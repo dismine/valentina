@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -28,7 +28,6 @@
 
 #include "vwidgetpopup.h"
 
-#include <QScreen>
 #include <QFont>
 #include <QGuiApplication>
 #include <QLabel>
@@ -36,16 +35,20 @@
 #include <QMessageLogger>
 #include <QPoint>
 #include <QRect>
+#include <QScreen>
 #include <QTimer>
 #include <QVBoxLayout>
 #include <QWidget>
-#include <Qt>
 
 #include "../vmisc/def.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VWidgetPopup::VWidgetPopup(QWidget *parent)
-    :QFrame(parent, Qt::Popup), mWidget(nullptr), mOwn(true), mOldParent(nullptr), lifeTime(-1)
+  : QFrame(parent, Qt::Popup),
+    mWidget(nullptr),
+    mOwn(true),
+    mOldParent(nullptr),
+    lifeTime(-1)
 {
     setAttribute(Qt::WA_WindowPropagation);
 
@@ -93,8 +96,8 @@ void VWidgetPopup::PopupMessage(QWidget *w, const QString &msg)
 {
     SCASSERT(w != nullptr)
 
-    VWidgetPopup *popup = new VWidgetPopup(w);
-    QLabel *label = new QLabel(msg);
+    auto *popup = new VWidgetPopup(w);
+    auto *label = new QLabel(msg);
     QFont f = label->font();
     f.setBold(true);
     f.setPixelSize(16);
@@ -111,7 +114,7 @@ void VWidgetPopup::Show(QPoint coord)
     QFrame::show();
 
     const QRect screen(QGuiApplication::primaryScreen()->availableGeometry());
-    coord.setX(coord.x() - width()/2);
+    coord.setX(coord.x() - width() / 2);
 
     if (coord.x() < screen.x())
     {
@@ -123,23 +126,19 @@ void VWidgetPopup::Show(QPoint coord)
         coord.setY(screen.y());
     }
 
-    if (coord.x() > (screen.right()-width()))
+    if (coord.x() > (screen.right() - width()))
     {
-        coord.setX(screen.right()-width());
+        coord.setX(screen.right() - width());
     }
 
-    if (coord.y() > (screen.bottom()-height()))
+    if (coord.y() > (screen.bottom() - height()))
     {
-        coord.setY(screen.bottom()-height());
+        coord.setY(screen.bottom() - height());
     }
     move(coord);
 
     if (lifeTime > 0)
     {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
         QTimer::singleShot(lifeTime, this, &QWidget::close);
-#else
-        QTimer::singleShot(lifeTime, this, SLOT(close()));
-#endif
     }
 }

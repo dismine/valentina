@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -38,7 +38,53 @@
 /* Add C++ includes here */
 
 #ifdef QT_CORE_LIB
-#include <QtCore>
+#   include <QtCore>
+#endif
+
+#ifdef QT_GUI_LIB
+#   include <QtGui>
+#endif
+
+#ifdef QT_XML_LIB
+#   include <QtXml>
+#endif
+
+#ifdef QT_TESTLIB_LIB
+#   include <QtTest>
+#endif
+
+#ifdef QT_WINEXTRAS_LIB
+#   include <QtWinExtras>
+#endif
+
+#ifdef QT_WIDGETS_LIB
+#   include <QtWidgets>
+#endif
+
+#ifdef QT_SVG_LIB
+#   include <QtSvg/QtSvg>
+#endif
+
+#ifdef QT_PRINTSUPPORT_LIB
+#   include <QtPrintSupport>
+#endif
+
+#ifdef QT_XMLPATTERNS_LIB
+#   include <QtXmlPatterns>
+#endif
+
+#ifdef QT_NETWORK_LIB
+#   include <QtNetwork>
+#endif
+
+#ifdef QT_CONCURRENT_LIB
+#   include <QtConcurrent>
+#endif
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#ifdef QT_OPENGLWIDGETS_LIB
+#   include <QOpenGLWidget>
+#endif
 #endif
 
 #endif

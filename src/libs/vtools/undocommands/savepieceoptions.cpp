@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -28,28 +28,24 @@
 
 #include "savepieceoptions.h"
 
+#include <QDebug>
 #include <QDomElement>
 #include <QPointF>
 #include <QUndoCommand>
-#include <QDebug>
 
 #include "../ifc/xml/vabstractpattern.h"
-#include "../ifc/ifcdef.h"
-#include "../vmisc/logging.h"
+#include "../tools/vtoolseamallowance.h"
+#include "../vmisc/compatibility.h"
 #include "../vmisc/def.h"
 #include "../vpatterndb/vpiecenode.h"
-#include "../vpatterndb/floatItemData/vpatternlabeldata.h"
-#include "../vpatterndb/floatItemData/vpiecelabeldata.h"
-#include "../vpatterndb/floatItemData/vgrainlinedata.h"
-#include "../tools/vtoolseamallowance.h"
 #include "vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 SavePieceOptions::SavePieceOptions(const VPiece &oldDet, const VPiece &newDet, VAbstractPattern *doc, quint32 id,
                                    QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent),
-      m_oldDet(oldDet),
-      m_newDet(newDet)
+  : VUndoCommand(QDomElement(), doc, parent),
+    m_oldDet(oldDet),
+    m_newDet(newDet)
 {
     setText(tr("save detail options"));
     nodeId = id;
@@ -60,11 +56,11 @@ void SavePieceOptions::undo()
 {
     qCDebug(vUndo, "Undo.");
 
-    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagDetail);
+    QDomElement domElement = doc->FindElementById(nodeId, VAbstractPattern::TagDetail);
     if (domElement.isElement())
     {
         VToolSeamAllowance::AddAttributes(doc, domElement, nodeId, m_oldDet);
-        doc->RemoveAllChildren(domElement);//Very important to clear before rewrite
+        VAbstractPattern::RemoveAllChildren(domElement); // Very important to clear before rewrite
         VToolSeamAllowance::AddPatternPieceData(doc, domElement, m_oldDet);
         VToolSeamAllowance::AddPatternInfo(doc, domElement, m_oldDet);
         VToolSeamAllowance::AddGrainline(doc, domElement, m_oldDet);
@@ -73,6 +69,7 @@ void SavePieceOptions::undo()
         VToolSeamAllowance::AddInternalPaths(doc, domElement, m_oldDet.GetInternalPaths());
         VToolSeamAllowance::AddPins(doc, domElement, m_oldDet.GetPins());
         VToolSeamAllowance::AddPlaceLabels(doc, domElement, m_oldDet.GetPlaceLabels());
+        VToolSeamAllowance::AddMirrorLine(doc, domElement, m_oldDet);
 
         DecrementReferences(m_newDet.MissingNodes(m_oldDet));
         IncrementReferences(m_oldDet.MissingNodes(m_newDet));
@@ -88,8 +85,8 @@ void SavePieceOptions::undo()
 
         DecrementReferences(m_newDet.MissingPlaceLabels(m_oldDet));
         IncrementReferences(m_oldDet.MissingPlaceLabels(m_newDet));
-        
-        if (VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId)))
+
+        if (auto *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId)))
         {
             tool->Update(m_oldDet);
         }
@@ -107,11 +104,11 @@ void SavePieceOptions::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagDetail);
+    QDomElement domElement = doc->FindElementById(nodeId, VAbstractPattern::TagDetail);
     if (domElement.isElement())
     {
         VToolSeamAllowance::AddAttributes(doc, domElement, nodeId, m_newDet);
-        doc->RemoveAllChildren(domElement);//Very important to clear before rewrite
+        VAbstractPattern::RemoveAllChildren(domElement); // Very important to clear before rewrite
         VToolSeamAllowance::AddPatternPieceData(doc, domElement, m_newDet);
         VToolSeamAllowance::AddPatternInfo(doc, domElement, m_newDet);
         VToolSeamAllowance::AddGrainline(doc, domElement, m_newDet);
@@ -120,6 +117,7 @@ void SavePieceOptions::redo()
         VToolSeamAllowance::AddInternalPaths(doc, domElement, m_newDet.GetInternalPaths());
         VToolSeamAllowance::AddPins(doc, domElement, m_newDet.GetPins());
         VToolSeamAllowance::AddPlaceLabels(doc, domElement, m_newDet.GetPlaceLabels());
+        VToolSeamAllowance::AddMirrorLine(doc, domElement, m_newDet);
 
         DecrementReferences(m_oldDet.MissingNodes(m_newDet));
         IncrementReferences(m_newDet.MissingNodes(m_oldDet));
@@ -136,7 +134,7 @@ void SavePieceOptions::redo()
         DecrementReferences(m_oldDet.MissingPlaceLabels(m_newDet));
         IncrementReferences(m_newDet.MissingPlaceLabels(m_oldDet));
 
-        if (VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId)))
+        if (auto *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId)))
         {
             tool->Update(m_newDet);
         }
@@ -150,44 +148,41 @@ void SavePieceOptions::redo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool SavePieceOptions::mergeWith(const QUndoCommand *command)
+auto SavePieceOptions::mergeWith(const QUndoCommand *command) -> bool
 {
-    const SavePieceOptions *saveCommand = static_cast<const SavePieceOptions *>(command);
+    const auto *saveCommand = static_cast<const SavePieceOptions *>(command);
     SCASSERT(saveCommand != nullptr);
 
     if (saveCommand->DetId() != nodeId)
     {
         return false;
     }
-    else
+
+    const VPiece candidate = saveCommand->NewDet();
+
+    auto currentSet = ConvertToSet(m_newDet.Dependencies());
+    auto candidateSet = ConvertToSet(candidate.Dependencies());
+
+    if (currentSet != candidateSet)
     {
-        const QSet<quint32> currentSet;
-        currentSet.fromList(m_newDet.Dependencies());
+        return false;
+    }
 
-        const VPiece candidate = saveCommand->NewDet();
-        const QSet<quint32> candidateSet;
-        candidateSet.fromList(candidate.Dependencies());
+    const QVector<VPieceNode> nodes = m_newDet.GetPath().GetNodes();
+    const QVector<VPieceNode> candidateNodes = candidate.GetPath().GetNodes();
 
-        if (currentSet != candidateSet)
+    if (nodes.size() != candidateNodes.size())
+    {
+        return false;
+    }
+
+    for (int i = 0; i < nodes.size(); ++i)
+    {
+        if (nodes.at(i).IsExcluded() != candidateNodes.at(i).IsExcluded() ||
+            nodes.at(i).IsCheckUniqueness() != candidateNodes.at(i).IsCheckUniqueness() ||
+            nodes.at(i).IsPassmark() != candidateNodes.at(i).IsPassmark())
         {
             return false;
-        }
-
-        const QVector<VPieceNode> nodes = m_newDet.GetPath().GetNodes();
-        const QVector<VPieceNode> candidateNodes = candidate.GetPath().GetNodes();
-
-        if (nodes.size() != candidateNodes.size())
-        {
-            return false;
-        }
-
-        for (int i = 0; i < nodes.size(); ++i)
-        {
-            if (nodes.at(i).IsExcluded() != candidateNodes.at(i).IsExcluded()
-                    || nodes.at(i).IsCheckUniqueness() != candidateNodes.at(i).IsCheckUniqueness())
-            {
-                return false;
-            }
         }
     }
 
@@ -196,7 +191,7 @@ bool SavePieceOptions::mergeWith(const QUndoCommand *command)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int SavePieceOptions::id() const
+auto SavePieceOptions::id() const -> int
 {
     return static_cast<int>(UndoCommand::SavePieceOptions);
 }

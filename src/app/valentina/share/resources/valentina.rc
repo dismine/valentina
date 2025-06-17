@@ -1,7 +1,8 @@
-IDI_ICON1               ICON    DISCARDABLE     "../../../../libs/vmisc/share/resources/icon/64x64/icon64x64.ico"
+IDI_ICON1               ICON    DISCARDABLE     "valentina.ico"
 
 #include <windows.h>
 #include "../../version.h"
+#include "../../../../libs/vmisc/projectversion.h"
 
 VS_VERSION_INFO VERSIONINFO
 FILEVERSION     VER_FILEVERSION

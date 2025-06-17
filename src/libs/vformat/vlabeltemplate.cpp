@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -42,23 +42,19 @@ void VLabelTemplate::CreateEmptyTemplate()
 {
     clear();
     QDomElement templateElement = this->createElement(TagTemplate);
-
-    QDomElement version = createElement(TagVersion);
-    QDomText newNodeText = createTextNode(VLabelTemplateConverter::LabelTemplateMaxVerStr);
-    version.appendChild(newNodeText);
-    templateElement.appendChild(version);
-
+    templateElement.appendChild(CreateElementWithText(TagVersion, VLabelTemplateConverter::LabelTemplateMaxVerStr));
     templateElement.appendChild(createElement(TagLines));
 
     this->appendChild(templateElement);
-    insertBefore(createProcessingInstruction("xml", "version=\"1.0\" encoding=\"UTF-8\""), this->firstChild());
+    insertBefore(createProcessingInstruction(QStringLiteral("xml"),
+                                             QStringLiteral("version=\"1.0\" encoding=\"UTF-8\"")), this->firstChild());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VLabelTemplate::AddLines(const QVector<VLabelTemplateLine> &lines)
 {
     const QDomNodeList listLines = elementsByTagName(TagLines);
-    if (listLines.size() == 0)
+    if (listLines.isEmpty())
     {
         return;
     }
@@ -68,10 +64,10 @@ void VLabelTemplate::AddLines(const QVector<VLabelTemplateLine> &lines)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VLabelTemplateLine> VLabelTemplate::ReadLines() const
+auto VLabelTemplate::ReadLines() const -> QVector<VLabelTemplateLine>
 {
     const QDomNodeList listLines = elementsByTagName(TagLines);
-    if (listLines.size() == 0)
+    if (listLines.isEmpty())
     {
         return QVector<VLabelTemplateLine>();
     }

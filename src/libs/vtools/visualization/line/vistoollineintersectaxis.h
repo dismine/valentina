@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 #ifndef VISTOOLLINEINTERSECTAXIS_H
 #define VISTOOLLINEINTERSECTAXIS_H
 
-#include <qcompilerdetection.h>
+
 #include <QGraphicsItem>
 #include <QLineF>
 #include <QMetaObject>
@@ -42,33 +42,56 @@
 
 class VisToolLineIntersectAxis : public VisLine
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolLineIntersectAxis(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolLineIntersectAxis() = default;
+    ~VisToolLineIntersectAxis() override = default;
 
-    virtual void RefreshGeometry() override;
+    void RefreshGeometry() override;
+    void VisualMode(quint32 id) override;
 
-    QString      Angle() const;
-    void         SetAngle(const QString &expression);
-    void         setPoint2Id(const quint32 &value);
-    void         setAxisPointId(const quint32 &value);
+    auto Angle() const -> QString;
+    void SetAngle(const QString &expression);
+    void SetPoint1Id(quint32 value);
+    void SetPoint2Id(quint32 value);
+    void SetAxisPointId(quint32 value);
 
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolLineIntersectAxis)};
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ToolLineIntersectAxis)};
 private:
-    Q_DISABLE_COPY(VisToolLineIntersectAxis)
-    quint32              point2Id;
-    quint32              axisPointId;
-    qreal                angle;
-    VScaledEllipse *point;
-    VScaledEllipse *lineP1;
-    VScaledEllipse *lineP2;
-    VScaledEllipse *basePoint;
-    VScaledLine    *baseLine;
-    VScaledLine    *axisLine;
-    VScaledLine    *line_intersection;
-    void          ShowIntersection(const QLineF &axis_line, const QLineF &base_line);
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VisToolLineIntersectAxis) // NOLINT
+    quint32         m_point1Id{NULL_ID};
+    quint32         m_point2Id{NULL_ID};
+    quint32         m_axisPointId{NULL_ID};
+    qreal           m_angle{-1};
+    VScaledEllipse *m_point{nullptr};
+    VScaledEllipse *m_lineP1{nullptr};
+    VScaledEllipse *m_lineP2{nullptr};
+    VScaledEllipse *m_basePoint{nullptr};
+    VScaledLine    *m_baseLine{nullptr};
+    VScaledLine    *m_axisLine{nullptr};
+    VScaledLine    *m_lineIntersection{nullptr};
+
+    void ShowIntersection(const QLineF &axis_line, const QLineF &base_line);
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolLineIntersectAxis::SetPoint1Id(quint32 value)
+{
+    m_point1Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolLineIntersectAxis::SetPoint2Id(quint32 value)
+{
+    m_point2Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolLineIntersectAxis::SetAxisPointId(quint32 value)
+{
+    m_axisPointId = value;
+}
 
 #endif // VISTOOLLINEINTERSECTAXIS_H

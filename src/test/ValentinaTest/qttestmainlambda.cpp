@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -26,46 +26,61 @@
  **
  *************************************************************************/
 
+#include <QScopeGuard>
 #include <QtTest>
 
-#include "tst_vposter.h"
-#include "tst_vabstractpiece.h"
-#include "tst_vspline.h"
-#include "tst_nameregexp.h"
-#include "tst_vlayoutdetail.h"
-#include "tst_varc.h"
-#include "tst_vellipticalarc.h"
-#include "tst_qmutokenparser.h"
-#include "tst_vmeasurements.h"
-#include "tst_vlockguard.h"
-#include "tst_misc.h"
-#include "tst_vcommandline.h"
-#include "tst_vpiece.h"
-#include "tst_findpoint.h"
-#include "tst_vabstractcurve.h"
-#include "tst_vcubicbezierpath.h"
-#include "tst_vgobject.h"
-#include "tst_vsplinepath.h"
-#include "tst_vpointf.h"
-#include "tst_readval.h"
-#include "tst_vtranslatevars.h"
-#include "tst_vtooluniondetails.h"
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include <xercesc/util/PlatformUtils.hpp>
+#endif
 
-#include "../vmisc/def.h"
-#include "../qmuparser/qmudef.h"
 #include "../vmisc/testvapplication.h"
+#include "tst_dxf.h"
+#include "tst_findpoint.h"
+#include "tst_misc.h"
+#include "tst_nameregexp.h"
+#include "tst_qmutokenparser.h"
+#include "tst_readval.h"
+#include "tst_svgfontwritingsystem.h"
+#include "tst_vabstractcurve.h"
+#include "tst_vabstractpiece.h"
+#include "tst_varc.h"
+#include "tst_vboundary.h"
+#include "tst_vcommandline.h"
+#include "tst_vcubicbezierpath.h"
+#include "tst_vellipticalarc.h"
+#include "tst_vgobject.h"
+#include "tst_vlayoutdetail.h"
+#include "tst_vlockguard.h"
+#include "tst_vmeasurements.h"
+#include "tst_vpiece.h"
+#include "tst_vpointf.h"
+#include "tst_vposter.h"
+#include "tst_vspline.h"
+#include "tst_vsplinepath.h"
+#include "tst_vsvgpathtokenizer.h"
+#include "tst_vtooluniondetails.h"
+#include "tst_vtranslatevars.h"
+#include "tst_xsdschema.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-int main(int argc, char** argv)
+auto main(int argc, char **argv) -> int
 {
-    Q_INIT_RESOURCE(schema);
+    Q_INIT_RESOURCE(schema); // NOLINT
 
-    TestVApplication app( argc, argv );// For QPrinter
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    XERCES_CPP_NAMESPACE::XMLPlatformUtils::Initialize();
+
+    auto Terminate = qScopeGuard([]() { XERCES_CPP_NAMESPACE::XMLPlatformUtils::Terminate(); });
+#endif
+
+    TestVApplication const app(argc, argv); // For QPrinter
+
+    QResource::registerResource(QCoreApplication::applicationDirPath() + QStringLiteral("/test_data.rcc"));
 
     int status = 0;
-    auto ASSERT_TEST = [&status, argc, argv](QObject* obj)
+    auto ASSERT_TEST = [&status, argc, argv](QObject *obj)
     {
-        status |= QTest::qExec(obj, argc, argv);
+        status |= QTest::qExec(obj, argc, argv); // NOLINT(hicpp-signed-bitwise)
         delete obj;
     };
 
@@ -91,6 +106,11 @@ int main(int argc, char** argv)
     ASSERT_TEST(new TST_ReadVal());
     ASSERT_TEST(new TST_VTranslateVars());
     ASSERT_TEST(new TST_VToolUnionDetails());
+    ASSERT_TEST(new TST_XSDShema());
+    ASSERT_TEST(new TST_VSVGPathTokenizer());
+    ASSERT_TEST(new TST_VBoundary());
+    ASSERT_TEST(new TST_DXF());
+    ASSERT_TEST(new TST_SVGFontWritingSystem());
 
     return status;
 }

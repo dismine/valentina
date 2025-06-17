@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,71 +29,72 @@
 #ifndef VPOINTF_H
 #define VPOINTF_H
 
-#include <qcompilerdetection.h>
 #include <QMetaType>
 #include <QSharedDataPointer>
 #include <QString>
 #include <QTypeInfo>
 #include <QtGlobal>
 
-#include "../vmisc/diagnostic.h"
-#include "vgeometrydef.h"
 #include "vgobject.h"
 
 class VPointFData;
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_INTEL(2304)
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
 
 /**
  * @brief The VPointF class keep data of point.
  */
-class VPointF:public VGObject
+class VPointF : public VGObject
 {
 public:
-    VPointF ();
-    VPointF (const VPointF &point );
-    explicit VPointF (const QPointF &point );
-    VPointF (qreal x, qreal y, const QString &name, qreal mx, qreal my, quint32 idObject = 0,
-             const Draw &mode = Draw::Calculation);
-    VPointF (const QPointF &point, const QString &name, qreal mx, qreal my, quint32 idObject = 0,
-             const Draw &mode = Draw::Calculation);
-    virtual ~VPointF() override;
+    VPointF();
+    VPointF(const VPointF &point);
+    explicit VPointF(const QPointF &point);
+    VPointF(qreal x, qreal y, const QString &name, qreal mx, qreal my, quint32 idObject = 0,
+            const Draw &mode = Draw::Calculation);
+    VPointF(const QPointF &point, const QString &name, qreal mx, qreal my, quint32 idObject = 0,
+            const Draw &mode = Draw::Calculation);
+    ~VPointF() override;
 
-    VPointF &operator=(const VPointF &point);
-#ifdef Q_COMPILER_RVALUE_REFS
-    VPointF &operator=(VPointF &&point) Q_DECL_NOTHROW { Swap(point); return *this; }
-#endif
+    auto operator=(const VPointF &point) -> VPointF &;
 
-    inline void Swap(VPointF &point) Q_DECL_NOTHROW
-    { VGObject::Swap(point); std::swap(d, point.d); }
+    VPointF(VPointF &&point) noexcept;
+    auto operator=(VPointF &&point) noexcept -> VPointF &;
 
     explicit operator QPointF() const;
-    VPointF Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const;
-    VPointF Flip(const QLineF &axis, const QString &prefix = QString()) const;
-    VPointF Move(qreal length, qreal angle, const QString &prefix = QString()) const;
-    qreal   mx() const;
-    qreal   my() const;
-    void    setMx(qreal mx);
-    void    setMy(qreal my);
-    QPointF toQPointF()const;
-    qreal   x() const;
-    void    setX(const qreal &value);
-    qreal   y() const;
-    void    setY(const qreal &value);
+    auto Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const -> VPointF;
+    auto Flip(const QLineF &axis, const QString &prefix = QString()) const -> VPointF;
+    auto Move(qreal length, qreal angle, const QString &prefix = QString()) const -> VPointF;
+    auto mx() const -> qreal;
+    auto my() const -> qreal;
+    void setMx(qreal mx);
+    void setMy(qreal my);
+    auto toQPointF() const -> QPointF;
+    auto x() const -> qreal;
+    void setX(const qreal &value);
+    auto y() const -> qreal;
+    void setY(const qreal &value);
 
-    bool IsShowLabel() const;
+    auto IsShowLabel() const -> bool;
     void SetShowLabel(bool hide);
 
-    static QPointF RotatePF(const QPointF &originPoint, const QPointF &point, qreal degrees);
-    static QPointF FlipPF(const QLineF &axis, const QPointF &point);
-    static QPointF MovePF(const QPointF &originPoint, qreal length, qreal angle);
+    auto ToJson() const -> QJsonObject override;
+
+    void SetAlias(const QString &alias) override;
+    void SetAliasSuffix(const QString &aliasSuffix) override;
+
+    static auto RotatePF(const QPointF &originPoint, const QPointF &point, qreal degrees) -> QPointF;
+    static auto FlipPF(const QLineF &axis, const QPointF &point) -> QPointF;
+    static auto MovePF(const QPointF &originPoint, qreal length, qreal angle) -> QPointF;
+
 private:
     QSharedDataPointer<VPointFData> d;
 };
 
-Q_DECLARE_METATYPE(VPointF)
-Q_DECLARE_TYPEINFO(VPointF, Q_MOVABLE_TYPE);
+Q_DECLARE_METATYPE(VPointF)                  // NOLINT
+Q_DECLARE_TYPEINFO(VPointF, Q_MOVABLE_TYPE); // NOLINT
 
 QT_WARNING_POP
 

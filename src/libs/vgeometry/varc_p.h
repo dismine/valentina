@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -30,61 +30,45 @@
 #define VARC_P_H
 
 #include <QSharedData>
-#include "vgeometrydef.h"
-#include "../vmisc/vabstractapplication.h"
-#include "../vmisc/diagnostic.h"
+
+#include "../vmisc/defglobal.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
-class VArcData : public QSharedData
+class VArcData final : public QSharedData
 {
 public:
-    VArcData();
+    VArcData() = default;
     VArcData(qreal radius, const QString &formulaRadius);
     explicit VArcData(qreal radius);
-    VArcData(const VArcData &arc);
-    virtual ~VArcData();
+    VArcData(const VArcData &arc) = default;
+    ~VArcData() = default;
 
     /** @brief radius arc radius. */
-    qreal              radius;
+    qreal radius{0}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief formulaRadius formula for arc radius. */
-    QString            formulaRadius;
+    QString formulaRadius{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
-    VArcData &operator=(const VArcData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN_MOVE(VArcData) // NOLINT
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-VArcData::VArcData()
-    : radius(0),
-      formulaRadius(QString())
-{}
+inline VArcData::VArcData(qreal radius, const QString &formulaRadius)
+  : radius(radius),
+    formulaRadius(formulaRadius)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-VArcData::VArcData(qreal radius, const QString &formulaRadius)
-    : radius(radius),
-      formulaRadius(formulaRadius)
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VArcData::VArcData(qreal radius)
-    : radius(radius),
-      formulaRadius(QString().number(qApp->fromPixel(radius)))
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VArcData::VArcData(const VArcData &arc)
-    : QSharedData(arc),
-      radius(arc.radius),
-      formulaRadius(arc.formulaRadius)
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VArcData::~VArcData()
-{}
+inline VArcData::VArcData(qreal radius)
+  : radius(radius),
+    formulaRadius(QString::number(radius))
+{
+}
 
 QT_WARNING_POP
 

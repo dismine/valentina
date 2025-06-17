@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -33,15 +33,21 @@
 
 #include "../ifcdef.h"
 
-//Q_LOGGING_CATEGORY(vExcep, "v.excep") //Commented because don't use now
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
+QT_WARNING_DISABLE_INTEL(1418)
+
+//Q_LOGGING_CATEGORY(vExcep, "v.excep") // NOLINT //Commented because don't use now
+
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VException constructor exception
  * @param error string with error
  */
-VException::VException(const QString &error)
-    :QException(), error(error), moreInfo(QString())
+VException::VException(const QString &error) V_NOEXCEPT_EXPR (true)
+    : error(error)
 {
     Q_ASSERT_X(not error.isEmpty(), Q_FUNC_INFO, "Error message is empty");
 }
@@ -51,11 +57,12 @@ VException::VException(const QString &error)
  * @brief VException copy constructor
  * @param e exception
  */
-VException::VException(const VException &e):error(e.WhatUtf8()), moreInfo(e.MoreInformation())
+VException::VException(const VException &e) V_NOEXCEPT_EXPR (true)
+    :error(e.WhatUtf8()), moreInfo(e.MoreInformation())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VException &VException::operator=(const VException &e)
+auto VException::operator=(const VException &e) V_NOEXCEPT_EXPR(true) -> VException &
 {
     if ( &e == this )
     {
@@ -71,7 +78,7 @@ VException &VException::operator=(const VException &e)
  * @brief ErrorMessage return main error message
  * @return error message
  */
-QString VException::ErrorMessage() const
+auto VException::ErrorMessage() const -> QString
 {
     return tr("Exception: %1").arg(error);
 }
@@ -87,20 +94,19 @@ void VException::AddMoreInformation(const QString &info)
     {
         return;
     }
-    moreInfo = QString("%1\n%2").arg(moreInfo, info);
+
+    moreInfo = QStringLiteral("%1\n%2").arg(moreInfo, info);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VException::MoreInfo(const QString &detInfo) const
+auto VException::MoreInfo(const QString &detInfo) const -> QString
 {
-    if (moreInfo.isEmpty() == false)
+    if (not moreInfo.isEmpty())
     {
-        return QString("%1\n%2").arg(moreInfo, detInfo);
+        return QStringLiteral("%1\n%2").arg(moreInfo, detInfo);
     }
-    else
-    {
-        return detInfo;
-    }
+
+    return detInfo;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -108,7 +114,7 @@ QString VException::MoreInfo(const QString &detInfo) const
  * @brief DetailedInformation return detailed information about error
  * @return detailed information
  */
-QString VException::DetailedInformation() const
+auto VException::DetailedInformation() const -> QString
 {
     return moreInfo;
 }
@@ -119,7 +125,7 @@ QString VException::DetailedInformation() const
  * @return new exception
  */
 // cppcheck-suppress unusedFunction
-VException *VException::clone() const
+auto VException::clone() const -> VException *
 {
     return new VException(*this);
 }
@@ -135,19 +141,20 @@ Q_NORETURN void VException::raise() const
 }
 
 //-----------------------------------------VExceptionToolWasDeleted----------------------------------------------------
-VExceptionToolWasDeleted::VExceptionToolWasDeleted(const QString &error)
+VExceptionToolWasDeleted::VExceptionToolWasDeleted(const QString &error) V_NOEXCEPT_EXPR (true)
     :VException(error)
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionToolWasDeleted::VExceptionToolWasDeleted(const VExceptionToolWasDeleted &e)
+VExceptionToolWasDeleted::VExceptionToolWasDeleted(const VExceptionToolWasDeleted &e) V_NOEXCEPT_EXPR (true)
     :VException(e)
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionToolWasDeleted &VExceptionToolWasDeleted::operator=(const VExceptionToolWasDeleted &e)
+auto VExceptionToolWasDeleted::operator=(const VExceptionToolWasDeleted &e) V_NOEXCEPT_EXPR(true)
+    -> VExceptionToolWasDeleted &
 {
     if ( &e == this )
     {
@@ -168,7 +175,7 @@ Q_NORETURN void VExceptionToolWasDeleted::raise() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionToolWasDeleted *VExceptionToolWasDeleted::clone() const
+auto VExceptionToolWasDeleted::clone() const -> VExceptionToolWasDeleted *
 {
     return new VExceptionToolWasDeleted(*this);
 }

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,122 +29,89 @@
 #ifndef VABSTRACTARC_P_H
 #define VABSTRACTARC_P_H
 
-#include <QSharedData>
-#include "vgeometrydef.h"
-#include "../vmisc/vabstractapplication.h"
-#include "../vmisc/diagnostic.h"
 #include "vpointf.h"
+#include <QSharedData>
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
-class VAbstractArcData : public QSharedData
+class VAbstractArcData final : public QSharedData
 {
 public:
-    VAbstractArcData();
+    VAbstractArcData() = default;
     VAbstractArcData(const VPointF &center, qreal f1, const QString &formulaF1, qreal f2, const QString &formulaF2);
     VAbstractArcData(const QString &formulaLength, const VPointF &center, qreal f1, const QString &formulaF1);
     VAbstractArcData(const VPointF &center, qreal f1);
     VAbstractArcData(const VPointF &center, qreal f1, qreal f2);
-    VAbstractArcData(const VAbstractArcData &arc);
-    virtual ~VAbstractArcData();
+    VAbstractArcData(const VAbstractArcData &arc) = default;
+    ~VAbstractArcData() = default;
 
     /** @brief f1 start angle in degree. */
-    qreal   f1;
+    qreal f1{0}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief formulaF1 formula for start angle. */
-    QString formulaF1;
+    QString formulaF1{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief f2 end angle in degree. */
-    qreal   f2;
+    qreal f2{0}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief formulaF2 formula for end angle. */
-    QString formulaF2;
+    QString formulaF2{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief center center point of arc. */
-    VPointF center;
+    VPointF center{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    bool    isFlipped;
+    bool isFlipped{false}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    QString formulaLength;
+    QString formulaLength{}; // NOLINT(misc-non-private-member-variables-in-classes)
+
+    bool isAllowEmpty{false}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
-    VAbstractArcData &operator=(const VAbstractArcData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN_MOVE(VAbstractArcData) // NOLINT
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractArcData::VAbstractArcData()
-    : f1(0),
-      formulaF1(),
-      f2(0),
-      formulaF2(),
-      center(),
-      isFlipped(false),
-      formulaLength()
-{}
+inline VAbstractArcData::VAbstractArcData(const VPointF &center, qreal f1, const QString &formulaF1, qreal f2,
+                                          const QString &formulaF2)
+  : f1(f1),
+    formulaF1(formulaF1),
+    f2(f2),
+    formulaF2(formulaF2),
+    center(center)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractArcData::VAbstractArcData(const VPointF &center, qreal f1, const QString &formulaF1, qreal f2,
-                                   const QString &formulaF2)
-    : f1(f1),
-      formulaF1(formulaF1),
-      f2(f2),
-      formulaF2(formulaF2),
-      center(center),
-      isFlipped(false),
-      formulaLength()
-{}
+inline VAbstractArcData::VAbstractArcData(const QString &formulaLength, const VPointF &center, qreal f1,
+                                          const QString &formulaF1)
+  : f1(f1),
+    formulaF1(formulaF1),
+    formulaF2('0'),
+    center(center),
+    formulaLength(formulaLength)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractArcData::VAbstractArcData(const QString &formulaLength, const VPointF &center, qreal f1,
-                                   const QString &formulaF1)
-    : f1(f1),
-      formulaF1(formulaF1),
-      f2(0),
-      formulaF2('0'),
-      center(center),
-      isFlipped(false),
-      formulaLength(formulaLength)
-{}
+inline VAbstractArcData::VAbstractArcData(const VPointF &center, qreal f1)
+  : f1(f1),
+    formulaF1(QString::number(f1)),
+    formulaF2('0'),
+    center(center)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractArcData::VAbstractArcData(const VPointF &center, qreal f1)
-    : f1(f1),
-      formulaF1(QString().number(f1)),
-      f2(0),
-      formulaF2('0'),
-      center(center),
-      isFlipped(false),
-      formulaLength()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VAbstractArcData::VAbstractArcData(const VPointF &center, qreal f1, qreal f2)
-    : f1(f1),
-      formulaF1(QString().number(f1)),
-      f2(f2),
-      formulaF2(QString().number(f2)),
-      center(center),
-      isFlipped(false),
-      formulaLength()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VAbstractArcData::VAbstractArcData(const VAbstractArcData &arc)
-    : QSharedData(arc),
-      f1(arc.f1),
-      formulaF1(arc.formulaF1),
-      f2(arc.f2),
-      formulaF2(arc.formulaF2),
-      center(arc.center),
-      isFlipped(arc.isFlipped),
-      formulaLength(arc.formulaLength)
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VAbstractArcData::~VAbstractArcData()
-{}
+inline VAbstractArcData::VAbstractArcData(const VPointF &center, qreal f1, qreal f2)
+  : f1(f1),
+    formulaF1(QString::number(f1)),
+    f2(f2),
+    formulaF2(QString::number(f2)),
+    center(center)
+{
+}
 
 QT_WARNING_POP
 

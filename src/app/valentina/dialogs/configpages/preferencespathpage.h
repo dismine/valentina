@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -33,28 +33,29 @@
 
 namespace Ui
 {
-    class PreferencesPathPage;
+class PreferencesPathPage;
 }
 
 class PreferencesPathPage : public QWidget
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit PreferencesPathPage(QWidget *parent = nullptr);
-    virtual ~PreferencesPathPage();
+    ~PreferencesPathPage() override;
 
-    QStringList Apply();
+    auto Apply() -> QStringList;
 
 protected:
-    virtual void changeEvent(QEvent* event) override;
+    void changeEvent(QEvent *event) override;
 
 private slots:
     void DefaultPath();
     void EditPath();
 
 private:
-    Q_DISABLE_COPY(PreferencesPathPage)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(PreferencesPathPage) // NOLINT
     Ui::PreferencesPathPage *ui;
 
     void InitTable();

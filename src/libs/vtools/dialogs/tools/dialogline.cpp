@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -36,10 +36,11 @@
 #include <QPointer>
 #include <QVariant>
 
-#include "../../visualization/visualization.h"
 #include "../../visualization/line/vistoolline.h"
+#include "../../visualization/visualization.h"
 #include "../ifc/ifcdef.h"
-#include "dialogs/tools/dialogtool.h"
+#include "../vmisc/vvalentinasettings.h"
+#include "dialogtool.h"
 #include "ui_dialogline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -48,33 +49,37 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogLine::DialogLine(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogLine)
+DialogLine::DialogLine(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
+    ui(new Ui::DialogLine),
+    flagError(true)
 {
     ui->setupUi(this);
     InitOkCancelApply(ui);
 
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);
-    FillComboBoxLineColors(ui->comboBoxLineColor);
+    InitColorPicker(ui->pushButtonLineColor, VAbstractValApplication::VApp()->ValentinaSettings()->GetUserToolColors());
+    ui->pushButtonLineColor->setUseNativeDialog(!VAbstractApplication::VApp()->Settings()->IsDontUseNativeDialog());
 
-    QMap<QString, QIcon> stylesPics = LineStylesPics();
-    stylesPics.remove(TypeLineNone);// Prevent hiding line
+    QMap<QString, QIcon> stylesPics = LineStylesPics(ui->comboBoxLineType->palette().color(QPalette::Base),
+                                                     ui->comboBoxLineType->palette().color(QPalette::Text));
+    stylesPics.remove(TypeLineNone); // Prevent hiding line
     FillComboBoxTypeLine(ui->comboBoxLineType, stylesPics);
 
-    number = 0;
-
-    connect(ui->comboBoxFirstPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
-            this, &DialogLine::PointNameChanged);
-    connect(ui->comboBoxSecondPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
-            this, &DialogLine::PointNameChanged);
+    connect(ui->comboBoxFirstPoint, &QComboBox::currentTextChanged, this, &DialogLine::PointNameChanged);
+    connect(ui->comboBoxSecondPoint, &QComboBox::currentTextChanged, this, &DialogLine::PointNameChanged);
 
     vis = new VisToolLine(data);
+
+    ui->tabWidget->setCurrentIndex(0);
+    SetTabStopDistance(ui->plainTextEditToolNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogLine::~DialogLine()
 {
+    VAbstractValApplication::VApp()->ValentinaSettings()->SetUserToolColors(ui->pushButtonLineColor->CustomColors());
     delete ui;
 }
 
@@ -83,13 +88,13 @@ DialogLine::~DialogLine()
  * @brief SetSecondPoint set id second point
  * @param value id
  */
-void DialogLine::SetSecondPoint(const quint32 &value)
+void DialogLine::SetSecondPoint(quint32 value)
 {
     setCurrentPointId(ui->comboBoxSecondPoint, value);
 
-    VisToolLine *line = qobject_cast<VisToolLine *>(vis);
+    auto *line = qobject_cast<VisToolLine *>(vis);
     SCASSERT(line != nullptr)
-    line->setPoint2Id(value);
+    line->SetPoint2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -100,19 +105,19 @@ void DialogLine::SetSecondPoint(const quint32 &value)
 void DialogLine::SetTypeLine(const QString &value)
 {
     ChangeCurrentData(ui->comboBoxLineType, value);
-    vis->setLineStyle(LineStyleToPenStyle(value));
+    vis->SetLineStyle(LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogLine::GetLineColor() const
+auto DialogLine::GetLineColor() const -> QString
 {
-    return GetComboBoxCurrentData(ui->comboBoxLineColor, ColorBlack);
+    return ui->pushButtonLineColor->currentColor().name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLine::SetLineColor(const QString &value)
 {
-    ChangeCurrentData(ui->comboBoxLineColor, value);
+    ui->pushButtonLineColor->setCurrentColor(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -120,19 +125,19 @@ void DialogLine::SetLineColor(const QString &value)
  * @brief SetFirstPoint set id first point
  * @param value id
  */
-void DialogLine::SetFirstPoint(const quint32 &value)
+void DialogLine::SetFirstPoint(quint32 value)
 {
     setCurrentPointId(ui->comboBoxFirstPoint, value);
 
-    VisToolLine *line = qobject_cast<VisToolLine *>(vis);
+    auto *line = qobject_cast<VisToolLine *>(vis);
     SCASSERT(line != nullptr)
-    line->setObject1Id(value);
+    line->SetPoint1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLine::PointNameChanged()
 {
-    QColor color = okColor;
+    QColor color;
     if (getCurrentObjectId(ui->comboBoxFirstPoint) == getCurrentObjectId(ui->comboBoxSecondPoint))
     {
         flagError = false;
@@ -141,7 +146,7 @@ void DialogLine::PointNameChanged()
     else
     {
         flagError = true;
-        color = okColor;
+        color = OkColor(this);
     }
     ChangeColor(ui->labelFirstPoint, color);
     ChangeColor(ui->labelSecondPoint, color);
@@ -157,12 +162,12 @@ void DialogLine::ShowVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLine::SaveData()
 {
-    VisToolLine *line = qobject_cast<VisToolLine *>(vis);
+    auto *line = qobject_cast<VisToolLine *>(vis);
     SCASSERT(line != nullptr)
 
-    line->setObject1Id(GetFirstPoint());
-    line->setPoint2Id(GetSecondPoint());
-    line->setLineStyle(LineStyleToPenStyle(GetTypeLine()));
+    line->SetPoint1Id(GetFirstPoint());
+    line->SetPoint2Id(GetSecondPoint());
+    line->SetLineStyle(LineStyleToPenStyle(GetTypeLine()));
     line->RefreshGeometry();
 }
 
@@ -174,36 +179,31 @@ void DialogLine::SaveData()
  */
 void DialogLine::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare == false)// After first choose we ignore all objects
+    if (prepare == false && type == SceneObject::Point) // After first choose we ignore all objects
     {
-        if (type == SceneObject::Point)
+        switch (number)
         {
-            switch (number)
-            {
-                case 0:
-                    if (SetObject(id, ui->comboBoxFirstPoint, tr("Select second point")))
+            case 0:
+                if (SetObject(id, ui->comboBoxFirstPoint, tr("Select second point")))
+                {
+                    number++;
+                    if (vis != nullptr)
                     {
-                        number++;
                         vis->VisualMode(id);
                     }
-                    break;
-                case 1:
-                    if (getCurrentObjectId(ui->comboBoxFirstPoint) != id)
-                    {
-                        if (SetObject(id, ui->comboBoxSecondPoint, QString()))
-                        {
-                            if (flagError)
-                            {
-                                number = 0;
-                                prepare = true;
-                                DialogAccepted();
-                            }
-                        }
-                    }
-                    break;
-                default:
-                    break;
-            }
+                }
+                break;
+            case 1:
+                if (getCurrentObjectId(ui->comboBoxFirstPoint) != id &&
+                    SetObject(id, ui->comboBoxSecondPoint, QString()) && flagError)
+                {
+                    number = 0;
+                    prepare = true;
+                    DialogAccepted();
+                }
+                break;
+            default:
+                break;
         }
     }
 }
@@ -213,7 +213,7 @@ void DialogLine::ChosenObject(quint32 id, const SceneObject &type)
  * @brief GetFirstPoint return id first point
  * @return id
  */
-quint32 DialogLine::GetFirstPoint() const
+auto DialogLine::GetFirstPoint() const -> quint32
 {
     return qvariant_cast<quint32>(ui->comboBoxFirstPoint->currentData());
 }
@@ -223,7 +223,7 @@ quint32 DialogLine::GetFirstPoint() const
  * @brief GetSecondPoint return id second point
  * @return id
  */
-quint32 DialogLine::GetSecondPoint() const
+auto DialogLine::GetSecondPoint() const -> quint32
 {
     return qvariant_cast<quint32>(ui->comboBoxSecondPoint->currentData());
 }
@@ -233,7 +233,19 @@ quint32 DialogLine::GetSecondPoint() const
  * @brief GetTypeLine return type of line
  * @return type
  */
-QString DialogLine::GetTypeLine() const
+auto DialogLine::GetTypeLine() const -> QString
 {
     return GetComboBoxCurrentData(ui->comboBoxLineType, TypeLineLine);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLine::SetNotes(const QString &notes)
+{
+    ui->plainTextEditToolNotes->setPlainText(notes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogLine::GetNotes() const -> QString
+{
+    return ui->plainTextEditToolNotes->toPlainText();
 }

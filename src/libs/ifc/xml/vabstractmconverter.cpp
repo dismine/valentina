@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,30 +29,40 @@
 #include "vabstractmconverter.h"
 
 #include <QDomElement>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 
 #include "vabstractconverter.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractMConverter::VAbstractMConverter(const QString &fileName)
-    :VAbstractConverter(fileName)
+  : VAbstractConverter(fileName)
 {
+    m_ver = GetFormatVersion(GetFormatVersionStr());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractMConverter::Units() const -> Unit
+{
+    Unit units = StrToUnits(UniqueTagText(TagUnit, unitCM));
+
+    if (units == Unit::Px)
+    {
+        units = Unit::Cm;
+    }
+
+    return units;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractMConverter::AddRootComment()
 {
-    const QString rootComment =
-            QStringLiteral("Measurements created with Valentina (https://valentinaproject.bitbucket.io/).");
+    const auto rootComment = QStringLiteral("Measurements created with Valentina (https://smart-pattern.com.ua/).");
 
     QDomElement rootElement = this->documentElement();
     rootElement.insertBefore(createComment(rootComment), rootElement.firstChild());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMultiMap<QString, QString> VAbstractMConverter::OldNamesToNewNames_InV0_3_0()
+auto VAbstractMConverter::OldNamesToNewNames_InV0_3_0() -> QMultiMap<QString, QString>
 {
     // new name, old name
     QMultiMap<QString, QString> names;
@@ -68,7 +78,7 @@ QMultiMap<QString, QString> VAbstractMConverter::OldNamesToNewNames_InV0_3_0()
     names.insert(QStringLiteral("height_waist_front"), QStringLiteral("front_waist_to_floor"));
     names.insert(QStringLiteral("height_bustpoint"), QStringLiteral("height_nipple_point"));
 
-    QString name = QStringLiteral("height_shoulder_tip");
+    auto name = QStringLiteral("height_shoulder_tip");
     names.insert(name, QStringLiteral("shoulder_height"));
     names.insert(name, QStringLiteral("height_shoulder_point"));
 
@@ -239,7 +249,7 @@ QMultiMap<QString, QString> VAbstractMConverter::OldNamesToNewNames_InV0_3_0()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMap<QString, QString> VAbstractMConverter::OldNamesToNewNames_InV0_3_3()
+auto VAbstractMConverter::OldNamesToNewNames_InV0_3_3() -> QMap<QString, QString>
 {
     // new name, old name
     QMap<QString, QString> names;

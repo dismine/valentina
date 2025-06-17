@@ -20,46 +20,57 @@
  ******************************************************************************************************/
 
 #include "qmutranslation.h"
-#include "qmuparserdef.h"
 
 #include <QByteArray>
 #include <QCoreApplication>
 #include <QLocale>
 
+// Header <ciso646> is removed in C++20.
+#if defined(Q_CC_MSVC) && __cplusplus <= 201703L
+#include <ciso646> // and, not, or
+#endif
+
 namespace qmu
 {
 
 //---------------------------------------------------------------------------------------------------------------------
-QmuTranslation QmuTranslation::translate(const char *context, const char *sourceText,
-                                         const char *disambiguation, int n)
+auto QmuTranslation::translate(const char *context, const char *sourceText, const char *disambiguation, int n)
+    -> QmuTranslation
 {
     if (n < 0)
     {
         n = -1;
     }
-    QmuTranslation t(context, sourceText, disambiguation, n);
-    return t;
+
+    return {context, sourceText, disambiguation, n};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QmuTranslation::QmuTranslation()
-    : mcontext(), msourceText(), mdisambiguation(), mn(-1), localeName(), cachedTranslation()
-{}
+  : mcontext(),
+    msourceText(),
+    mdisambiguation(),
+    mn(-1),
+    localeName(),
+    cachedTranslation()
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 QmuTranslation::QmuTranslation(const QString &context, const QString &sourceText, const QString &disambiguation, int n)
-    : mcontext(context),
-      msourceText(sourceText),
-      mdisambiguation(disambiguation),
-      mn(n),
-      localeName(),
-      cachedTranslation()
-{}
+  : mcontext(context),
+    msourceText(sourceText),
+    mdisambiguation(disambiguation),
+    mn(n),
+    localeName(),
+    cachedTranslation()
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-QmuTranslation &QmuTranslation::operator=(const QmuTranslation &tr)
+auto QmuTranslation::operator=(const QmuTranslation &tr) -> QmuTranslation &
 {
-    if ( &tr == this )
+    if (&tr == this)
     {
         return *this;
     }
@@ -74,16 +85,17 @@ QmuTranslation &QmuTranslation::operator=(const QmuTranslation &tr)
 
 //---------------------------------------------------------------------------------------------------------------------
 QmuTranslation::QmuTranslation(const QmuTranslation &tr)
-    : mcontext(tr.mcontext),
-      msourceText(tr.msourceText),
-      mdisambiguation(tr.mdisambiguation),
-      mn(tr.mn),
-      localeName(),
-      cachedTranslation()
-{}
+  : mcontext(tr.mcontext),
+    msourceText(tr.msourceText),
+    mdisambiguation(tr.mdisambiguation),
+    mn(tr.mn),
+    localeName(),
+    cachedTranslation()
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-QString QmuTranslation::translate(const QString &locale) const
+auto QmuTranslation::translate(const QString &locale) const -> QString
 {
     if (cachedTranslation.isEmpty() || locale.isEmpty() || localeName != locale)
     {

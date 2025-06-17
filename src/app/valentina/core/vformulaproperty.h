@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -35,56 +35,55 @@ class VFormula;
 
 class VFormulaProperty : public VPE::VProperty
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VFormulaProperty(const QString &name);
 
     //! Get the data how it should be displayed
-    virtual QVariant data (int column = DPC_Name, int role = Qt::DisplayRole) const override;
+    auto data (int column = DPC_Name, int role = Qt::DisplayRole) const -> QVariant override;
 
     //! Returns item flags
-    virtual Qt::ItemFlags flags(int column = DPC_Name) const override;
+    auto flags(int column = DPC_Name) const -> Qt::ItemFlags override;
 
     //! Returns an editor widget, or NULL if it doesn't supply one
     //! \param parent The widget to which the editor will be added as a child
     //! \options Render options
     //! \delegate A pointer to the QAbstractItemDelegate requesting the editor. This can be used to connect signals and
     //! slots.
-    virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& options,
-                                  const QAbstractItemDelegate* delegate) override;
+    auto createEditor(QWidget* parent, const QStyleOptionViewItem& options,
+                      const QAbstractItemDelegate* delegate) -> QWidget* override;
 
     //! Sets the property's data to the editor (returns false, if the standard delegate should do that)
-    virtual bool setEditorData(QWidget* editor) override;
+    auto setEditorData(QWidget* editor) -> bool override;
 
     //! Gets the data from the widget
-    virtual QVariant getEditorData(const QWidget* editor) const override;
+    auto getEditorData(const QWidget* editor) const -> QVariant override;
 
     //! Returns a string containing the type of the property
-    virtual QString type() const override;
+    auto type() const -> QString override;
 
     //! Clones this property
     //! \param include_children Indicates whether to also clone the children
     //! \param container If a property is being passed here, no new VProperty is being created but instead it is tried
     //! to fill all the data into container. This can also be used when subclassing this function.
     //! \return Returns the newly created property (or container, if it was not NULL)
-    Q_REQUIRED_RESULT virtual VProperty* clone(bool include_children = true,
-                                               VProperty* container = nullptr) const override;
+    Q_REQUIRED_RESULT auto clone(bool include_children = true,
+                                 VProperty* container = nullptr) const -> VProperty* override;
 
     //! Sets the value of the property
-    virtual void setValue(const QVariant& value) override;
+    void setValue(const QVariant& value) override;
 
     //! Returns the value of the property as a QVariant
-    virtual QVariant getValue() const override;
+    auto getValue() const -> QVariant override;
 
     //! Returns the formula
-    VFormula GetFormula() const;
+    auto GetFormula() const -> VFormula;
 
     //! Sets the formula
     void SetFormula(const VFormula &formula);
 
 public slots:
-    virtual void ValueChildChanged(const QVariant &value, int typeForParent) override;
-
+    void ValueChildChanged(const QVariant &value, int typeForParent) override;
 };
 
 #endif // VFORMULAPROPERTY_H

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -36,25 +36,24 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VVariable::VVariable()
-    :VInternalVariable(), d(new VVariableData)
-{}
+  : d(new VVariableData)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VVariable::VVariable(const QString &name, const QString &description)
-    :VInternalVariable(), d(new VVariableData(description))
+  : d(new VVariableData(description))
 {
     SetName(name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VVariable::VVariable(const VVariable &var)
-    :VInternalVariable(var), d(var.d)
-{}
+COPY_CONSTRUCTOR_IMPL_2(VVariable, VInternalVariable)
 
 //---------------------------------------------------------------------------------------------------------------------
-VVariable &VVariable::operator=(const VVariable &var)
+auto VVariable::operator=(const VVariable &var) -> VVariable &
 {
-    if ( &var == this )
+    if (&var == this)
     {
         return *this;
     }
@@ -64,15 +63,28 @@ VVariable &VVariable::operator=(const VVariable &var)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VVariable::~VVariable()
-{}
+VVariable::VVariable(VVariable &&var) noexcept
+  : VInternalVariable(std::move(var)),
+    d(std::move(var.d)) // NOLINT(bugprone-use-after-move)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VVariable::GetDescription() const
+auto VVariable::operator=(VVariable &&var) noexcept -> VVariable &
+{
+    VInternalVariable::operator=(var);
+    std::swap(d, var.d);
+    return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VVariable::~VVariable() = default;
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VVariable::GetDescription() const -> QString
 {
     return d->description;
 }
-
 
 //---------------------------------------------------------------------------------------------------------------------
 void VVariable::SetDescription(const QString &desc)

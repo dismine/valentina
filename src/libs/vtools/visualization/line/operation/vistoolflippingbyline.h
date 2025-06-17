@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -35,23 +35,37 @@
 
 class VisToolFlippingByLine : public VisOperation
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolFlippingByLine(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolFlippingByLine() = default;
+    ~VisToolFlippingByLine() override = default;
 
-    virtual void   RefreshGeometry() override;
+    void RefreshGeometry() override;
 
     void SetFirstLinePointId(quint32 value);
     void SetSecondLinePointId(quint32 value);
 
-    virtual int type() const override {return Type;}
+    auto type() const -> int override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolFlippingByLine)};
 private:
-    Q_DISABLE_COPY(VisToolFlippingByLine)
-    quint32         object2Id;
-    VScaledEllipse *point1;
-    VScaledEllipse *point2;
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VisToolFlippingByLine) // NOLINT
+    quint32         m_lineP1Id{NULL_ID};
+    quint32         m_lineP2Id{NULL_ID};
+    VScaledEllipse *m_point1{nullptr};
+    VScaledEllipse *m_point2{nullptr};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolFlippingByLine::SetFirstLinePointId(quint32 value)
+{
+    m_lineP1Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolFlippingByLine::SetSecondLinePointId(quint32 value)
+{
+    m_lineP2Id = value;
+}
 
 #endif // VISTOOLFLIPPINGBYLINE_H

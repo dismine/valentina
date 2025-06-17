@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -33,25 +33,23 @@
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vmisc/def.h"
-#include "../vmisc/logging.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
+#include "../vtools/tools/vabstracttool.h"
 #include "../vundocommand.h"
 #include "moveabstractlabel.h"
-#include "../vtools/tools/vabstracttool.h"
-#include "../vwidgets/vmaingraphicsview.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 MoveLabel::MoveLabel(VAbstractPattern *doc, const QPointF &pos, const quint32 &id, QUndoCommand *parent)
-    : MoveAbstractLabel(doc, id, pos, parent),
-      m_scene(qApp->getCurrentScene())
+  : MoveAbstractLabel(doc, id, pos, parent),
+    m_scene(VAbstractValApplication::VApp()->getCurrentScene())
 {
     setText(tr("move point label"));
 
-    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagPoint);
+    QDomElement const domElement = doc->FindElementById(nodeId, VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
-        m_oldPos.rx() = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMx, "0.0"));
-        m_oldPos.ry() = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMy, "0.0"));
+        m_oldPos.rx() = VAbstractValApplication::VApp()->toPixel(VDomDocument::GetParametrDouble(domElement, AttrMx, "0.0"));
+        m_oldPos.ry() = VAbstractValApplication::VApp()->toPixel(VDomDocument::GetParametrDouble(domElement, AttrMy, "0.0"));
 
         qCDebug(vUndo, "Label old Mx %f", m_oldPos.x());
         qCDebug(vUndo, "Label old My %f", m_oldPos.y());
@@ -63,9 +61,9 @@ MoveLabel::MoveLabel(VAbstractPattern *doc, const QPointF &pos, const quint32 &i
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool MoveLabel::mergeWith(const QUndoCommand *command)
+auto MoveLabel::mergeWith(const QUndoCommand *command) -> bool
 {
-    const MoveLabel *moveCommand = static_cast<const MoveLabel *>(command);
+    const auto *moveCommand = static_cast<const MoveLabel *>(command);
     SCASSERT(moveCommand != nullptr)
 
     if (moveCommand->GetPointId() != nodeId)
@@ -81,7 +79,7 @@ bool MoveLabel::mergeWith(const QUndoCommand *command)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int MoveLabel::id() const
+auto MoveLabel::id() const -> int
 {
     return static_cast<int>(UndoCommand::MoveLabel);
 }
@@ -92,13 +90,13 @@ void MoveLabel::Do(const QPointF &pos)
     qCDebug(vUndo, "New mx %f", pos.x());
     qCDebug(vUndo, "New my %f", pos.y());
 
-    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagPoint);
+    QDomElement domElement = doc->FindElementById(nodeId, VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
-        doc->SetAttribute(domElement, AttrMx, QString().setNum(qApp->fromPixel(pos.x())));
-        doc->SetAttribute(domElement, AttrMy, QString().setNum(qApp->fromPixel(pos.y())));
+        doc->SetAttribute(domElement, AttrMx, QString().setNum(VAbstractValApplication::VApp()->fromPixel(pos.x())));
+        doc->SetAttribute(domElement, AttrMy, QString().setNum(VAbstractValApplication::VApp()->fromPixel(pos.y())));
 
-        if (VAbstractTool *tool = qobject_cast<VAbstractTool *>(VAbstractPattern::getTool(nodeId)))
+        if (auto *tool = qobject_cast<VAbstractTool *>(VAbstractPattern::getTool(nodeId)))
         {
             tool->ChangeLabelPosition(nodeId, pos);
         }

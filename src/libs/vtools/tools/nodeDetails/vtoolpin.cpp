@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@
 const QString VToolPin::ToolType = QStringLiteral("pin");
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPin *VToolPin::Create(const QPointer<DialogTool> &dialog, VAbstractPattern *doc, VContainer *data)
+auto VToolPin::Create(const QPointer<DialogTool> &dialog, VAbstractPattern *doc, VContainer *data) -> VToolPin *
 {
     SCASSERT(not dialog.isNull());
     const QPointer<DialogPin> dialogTool = qobject_cast<DialogPin *>(dialog);
@@ -53,7 +53,7 @@ VToolPin *VToolPin::Create(const QPointer<DialogTool> &dialog, VAbstractPattern 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPin *VToolPin::Create(VToolPinInitData initData)
+auto VToolPin::Create(VToolPinInitData initData) -> VToolPin *
 {
     if (initData.typeCreation == Source::FromGui)
     {
@@ -69,9 +69,10 @@ VToolPin *VToolPin::Create(VToolPinInitData initData)
         catch (const VExceptionBadId &e)
         { // Possible case. Parent was deleted, but the node object is still here.
             Q_UNUSED(e)
+            initData.data->UpdateId(initData.id);
             return nullptr;// Just ignore
         }
-        VPointF *pinPoint = new VPointF(*point);
+        auto *pinPoint = new VPointF(*point);
         pinPoint->setIdObject(initData.pointId);
         pinPoint->setMode(Draw::Modeling);
         initData.data->UpdateGObject(initData.id, pinPoint);
@@ -108,7 +109,7 @@ VToolPin *VToolPin::Create(VToolPinInitData initData)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolPin::getTagName() const
+auto VToolPin::getTagName() const -> QString
 {
     return VAbstractPattern::TagPoint;
 }
@@ -150,7 +151,7 @@ void VToolPin::AddToFile()
         newDet.GetPins().append(m_id);
         incrementReferens(); // Manually increment reference since in this case a piece tool will not do this for us
 
-        qApp->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, m_pieceId));
+        VAbstractApplication::VApp()->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, m_pieceId));
     }
 }
 

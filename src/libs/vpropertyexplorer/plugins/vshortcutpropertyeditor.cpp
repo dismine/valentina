@@ -25,10 +25,11 @@
 #include <QKeyEvent>
 #include <QLineEdit>
 #include <QSizePolicy>
-#include <Qt>
 
 VPE::VShortcutEditWidget::VShortcutEditWidget(QWidget *parent)
-    : QWidget(parent), CurrentKeySequence(), LineEdit(nullptr)
+  : QWidget(parent),
+    CurrentKeySequence(),
+    LineEdit(nullptr)
 {
     // Create the line edit widget
     LineEdit = new QLineEdit(this);
@@ -39,51 +40,44 @@ VPE::VShortcutEditWidget::VShortcutEditWidget(QWidget *parent)
     connect(LineEdit, &QLineEdit::textEdited, this, &VShortcutEditWidget::onTextEdited);
 
     // The layout (a horizontal layout)
-    QHBoxLayout* layout = new QHBoxLayout(this);
+    auto *layout = new QHBoxLayout(this);
     layout->setSpacing(0);
-    layout->setMargin(0);
+    layout->setContentsMargins(0, 0, 0, 0);
     layout->addWidget(LineEdit);
 }
-
 
 VPE::VShortcutEditWidget::~VShortcutEditWidget()
 {
     // nothing needs to be done here
 }
 
-bool VPE::VShortcutEditWidget::eventFilter(QObject *obj, QEvent *event)
+auto VPE::VShortcutEditWidget::eventFilter(QObject *obj, QEvent *event) -> bool
 {
-    if (obj == LineEdit)
+    if (obj == LineEdit && event->type() == QEvent::KeyPress)
     {
-        if (event->type() == QEvent::KeyPress)
+        const auto *keyEvent = static_cast<QKeyEvent *>(event);
+
+        int keys = keyEvent->key();
+
+        if (keys != Qt::Key_Shift && keys != Qt::Key_Control && keys != Qt::Key_Meta && keys != Qt::Key_AltGr &&
+            keys != Qt::Key_Alt)
         {
-            QKeyEvent *keyEvent = static_cast<QKeyEvent*>(event);
-
-            int keys = keyEvent->key();
-
-            if (keys != Qt::Key_Shift &&
-               keys != Qt::Key_Control &&
-               keys != Qt::Key_Meta &&
-               keys != Qt::Key_AltGr &&
-               keys != Qt::Key_Alt)
-            {
-                keys += keyEvent->modifiers();
-                setShortcut(QKeySequence(keys), true);
-                return true;
-            }
+            keys += keyEvent->modifiers();
+            setShortcut(QKeySequence(keys), true);
+            return true;
         }
     }
 
     return QWidget::eventFilter(obj, event);
 }
 
-QString VPE::VShortcutEditWidget::getShortcutAsString() const
+auto VPE::VShortcutEditWidget::getShortcutAsString() const -> QString
 {
     return CurrentKeySequence.toString();
 }
 
 // cppcheck-suppress unusedFunction
-QKeySequence VPE::VShortcutEditWidget::getShortcut()
+auto VPE::VShortcutEditWidget::getShortcut() -> QKeySequence
 {
     return CurrentKeySequence;
 }

@@ -20,29 +20,33 @@
 
 #include "vemptyproperty.h"
 
-#include <stddef.h>
 #include <QBrush>
 #include <QColor>
 #include <QFlags>
 #include <QFont>
+#include <stddef.h>
 
 #include "../vproperty.h"
 
-namespace VPE {
+namespace VPE
+{
 class VPropertyPrivate;
-}  // namespace VPE
+} // namespace VPE
 
-VPE::VEmptyProperty::VEmptyProperty(const QString& name)
-    : VProperty(name, QVariant::Invalid)
+VPE::VEmptyProperty::VEmptyProperty(const QString &name)
+  : VProperty(name,
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+              QMetaType::UnknownType)
+#else
+              QVariant::Invalid)
+#endif
 {
 }
-
 
 VPE::VEmptyProperty::VEmptyProperty(VPropertyPrivate *d)
-    : VProperty(d)
+  : VProperty(d)
 {
 }
-
 
 VPE::VEmptyProperty::~VEmptyProperty()
 {
@@ -50,38 +54,41 @@ VPE::VEmptyProperty::~VEmptyProperty()
 }
 
 //! Get the data how it should be displayed
-QVariant VPE::VEmptyProperty::data (int column, int role) const
+auto VPE::VEmptyProperty::data(int column, int role) const -> QVariant
 {
     if (column == DPC_Data && (Qt::DisplayRole == role || Qt::EditRole == role))
     {
         return QVariant();
     }
-    else if (role == Qt::BackgroundRole)
+
+    if (role == Qt::BackgroundRole)
     {
         return QBrush(QColor(217, 217, 217));
     }
-    else if (role == Qt::FontRole)
+
+    if (role == Qt::FontRole)
     {
-        QFont tmpFont; tmpFont.setBold(true); return tmpFont;
+        QFont tmpFont;
+        tmpFont.setBold(true);
+        return tmpFont;
     }
-    else
-        return VProperty::data(column, role);
+
+    return VProperty::data(column, role);
 }
 
 //! Returns an editor widget, or NULL if it doesn't supply one
-QWidget* VPE::VEmptyProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options,
-                                           const QAbstractItemDelegate* delegate)
+auto VPE::VEmptyProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
+                                       const QAbstractItemDelegate *delegate) -> QWidget *
 {
     Q_UNUSED(options)
     Q_UNUSED(parent)
     Q_UNUSED(delegate)
 
-    return NULL;
+    return nullptr;
 }
 
-
 //! Gets the data from the widget
-QVariant VPE::VEmptyProperty::getEditorData(const QWidget *editor) const
+auto VPE::VEmptyProperty::getEditorData(const QWidget *editor) const -> QVariant
 {
     Q_UNUSED(editor)
 
@@ -89,19 +96,19 @@ QVariant VPE::VEmptyProperty::getEditorData(const QWidget *editor) const
 }
 
 //! Returns item flags
-Qt::ItemFlags VPE::VEmptyProperty::flags(int column) const
+auto VPE::VEmptyProperty::flags(int column) const -> Qt::ItemFlags
 {
     Q_UNUSED(column)
 
     return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
 }
 
-QString VPE::VEmptyProperty::type() const
+auto VPE::VEmptyProperty::type() const -> QString
 {
-    return "empty";
+    return QStringLiteral("empty");
 }
 
-VPE::VProperty* VPE::VEmptyProperty::clone(bool include_children, VProperty* container) const
+auto VPE::VEmptyProperty::clone(bool include_children, VProperty *container) const -> VPE::VProperty *
 {
     return VProperty::clone(include_children, container ? container : new VEmptyProperty(getName()));
 }

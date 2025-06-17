@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -33,54 +33,77 @@
 #include <QPainterPath>
 #include <QPointF>
 #include <QSharedPointer>
-#include <Qt>
 #include <new>
 
-#include "../ifc/ifcdef.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
-#include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
-#include "vispath.h"
+#include "../vmisc/theme/themeDef.h"
+#include "../vmisc/vmodifierkey.h"
+#include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/scalesceneitems.h"
+#include "vispath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolCutArc::VisToolCutArc(const VContainer *data, QGraphicsItem *parent)
-    :VisPath(data, parent), point(nullptr), arc1(nullptr), arc2(nullptr), length(0)
+  : VisPath(data, parent)
 {
-    arc1 = InitItem<VCurvePathItem>(Qt::darkGreen, this);
-    arc1->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
-    arc2 = InitItem<VCurvePathItem>(Qt::darkRed, this);
-    arc2->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
+    SetColorRole(VColorRole::VisSupportColor);
 
-    point = InitPoint(mainColor, this);
-    point->setZValue(2);
-    point->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
+    m_arc1 = InitItem<VCurvePathItem>(VColorRole::VisSupportColor2, this);
+    m_arc1->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
+    m_arc2 = InitItem<VCurvePathItem>(VColorRole::VisSupportColor4, this);
+    m_arc2->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
+
+    m_point = InitPoint(VColorRole::VisMainColor, this);
+    m_point->setZValue(2);
+    m_point->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolCutArc::RefreshGeometry()
 {
-    if (object1Id > NULL_ID)
+    if (m_arcId > NULL_ID)
     {
-        const QSharedPointer<VArc> arc = Visualization::data->GeometricObject<VArc>(object1Id);
-        DrawPath(this, arc->GetPath(), arc->DirectionArrows(), supportColor, lineStyle, Qt::RoundCap);
+        const QSharedPointer<VArc> arc = GetData()->GeometricObject<VArc>(m_arcId);
+        DrawPath(this, arc->GetPath(), arc->DirectionArrows(), LineStyle(), Qt::RoundCap);
 
-        if (not qFuzzyIsNull(length))
+        if (!qIsInf(m_length))
         {
             VArc ar1;
             VArc ar2;
-            QPointF p = arc->CutArc(length, ar1, ar2);
-            DrawPoint(point, p, mainColor);
+            QPointF const p = arc->CutArc(m_length, ar1, ar2, QString());
+            DrawPoint(m_point, p);
 
-            DrawPath(arc1, ar1.GetPath(), ar1.DirectionArrows(), Qt::darkGreen, lineStyle, Qt::RoundCap);
-            DrawPath(arc2, ar2.GetPath(), ar2.DirectionArrows(), Qt::darkRed, lineStyle, Qt::RoundCap);
+            DrawPath(m_arc1, ar1.GetPath(), ar1.DirectionArrows(), LineStyle(), Qt::RoundCap);
+            DrawPath(m_arc2, ar2.GetPath(), ar2.DirectionArrows(), LineStyle(), Qt::RoundCap);
+        }
+        else if (GetMode() == Mode::Creation)
+        {
+            QPointF const p = arc->ClosestPoint(ScenePos());
+            qreal length = arc->GetLengthByPoint(p);
+            length = !arc->IsFlipped() ? qBound(0.0, length, arc->GetLength()) : qBound(arc->GetLength(), -length, 0.0);
+
+            DrawPoint(m_point, p);
+
+            const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
+            SetToolTip(tr("Length = %1%2; "
+                          "<b>Mouse click</b> - finish selecting the length, "
+                          "<b>%3</b> - skip")
+                           .arg(LengthToUser(length), prefix, VModifierKey::EnterKey()));
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolCutArc::setLength(const QString &expression)
+void VisToolCutArc::SetLength(const QString &expression)
 {
-    length = FindLengthFromUser(expression, Visualization::data->DataVariables());
+    m_length = FindLengthFromUser(expression, GetData()->DataVariables());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolCutArc::VisualMode(quint32 id)
+{
+    m_arcId = id;
+    StartVisualMode();
 }

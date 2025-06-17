@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef VCURVEANGLE_H
 #define VCURVEANGLE_H
 
-#include <qcompilerdetection.h>
 #include <QString>
 #include <QtGlobal>
 
@@ -39,20 +38,25 @@ class VAbstractCurve;
 class VSpline;
 class VEllipticalArc;
 
-enum class CurveAngle : char { StartAngle, EndAngle };
+enum class CurveAngle : qint8
+{
+    StartAngle,
+    EndAngle
+};
 
 class VCurveAngle : public VCurveVariable
 {
 public:
     VCurveAngle();
     VCurveAngle(const quint32 &id, const quint32 &parentId, const VAbstractCurve *curve, CurveAngle angle);
-    VCurveAngle(const quint32 &id, const quint32 &parentId, const QString &baseCurveName, const VSpline &spl,
+    VCurveAngle(const quint32 &id, const quint32 &parentId, const VAbstractCurve *baseCurve, const VSpline &spl,
                 CurveAngle angle, qint32 segment);
+
 protected:
     VCurveAngle(const quint32 &id, const quint32 &parentId);
 };
 
-class VEllipticalArcRotation : public VCurveAngle
+class VEllipticalArcRotation final : public VCurveAngle
 {
 public:
     VEllipticalArcRotation();

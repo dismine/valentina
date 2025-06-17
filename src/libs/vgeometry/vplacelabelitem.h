@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -28,67 +28,69 @@
 #ifndef VPLACELABELITEM_H
 #define VPLACELABELITEM_H
 
+#include <QMetaType>
 #include <QSharedDataPointer>
 #include <QTypeInfo>
 #include <QtGlobal>
-#include <QMetaType>
 
 #include "vpointf.h"
 
 class VPlaceLabelItemData;
 class VContainer;
+class QPainterPath;
 
 class VPlaceLabelItem : public VPointF
 {
 public:
     VPlaceLabelItem();
     VPlaceLabelItem(const VPlaceLabelItem &item);
-    virtual ~VPlaceLabelItem() override;
+    ~VPlaceLabelItem() override;
 
-    VPlaceLabelItem &operator=(const VPlaceLabelItem &item);
-#ifdef Q_COMPILER_RVALUE_REFS
-    VPlaceLabelItem &operator=(VPlaceLabelItem &&item) Q_DECL_NOTHROW { Swap(item); return *this; }
-#endif
+    auto operator=(const VPlaceLabelItem &item) -> VPlaceLabelItem &;
 
-    inline void Swap(VPlaceLabelItem &item) Q_DECL_NOTHROW
-    { VPointF::Swap(item); std::swap(d, item.d); }
+    VPlaceLabelItem(VPlaceLabelItem &&item) noexcept;
+    auto operator=(VPlaceLabelItem &&item) noexcept -> VPlaceLabelItem &;
 
-    QString  GetWidthFormula() const;
-    QString& GetWidthFormula();
-    qreal    GetWidth() const;
-    void     SetWidth(qreal value, const QString &formula);
+    auto GetWidthFormula() const -> QString;
+    auto GetWidthFormula() -> QString &;
+    auto GetWidth() const -> qreal;
+    void SetWidth(qreal value, const QString &formula);
 
-    QString  GetHeightFormula() const;
-    QString& GetHeightFormula();
-    qreal    GetHeight() const;
-    void     SetHeight(qreal value, const QString &formula);
+    auto GetHeightFormula() const -> QString;
+    auto GetHeightFormula() -> QString &;
+    auto GetHeight() const -> qreal;
+    void SetHeight(qreal value, const QString &formula);
 
-    QString  GetAngleFormula() const;
-    QString& GetAngleFormula();
-    qreal    GetAngle() const;
-    void     SetAngle(qreal value, const QString &formula);
+    auto GetAngleFormula() const -> QString;
+    auto GetAngleFormula() -> QString &;
+    auto GetAngle() const -> qreal;
+    void SetAngle(qreal value, const QString &formula);
 
-    QString  GetVisibilityTrigger() const;
-    QString& GetVisibilityTrigger();
-    bool     IsVisible() const;
-    void     SetVisibilityTrigger(qreal visible, const QString &formula);
+    auto GetVisibilityTrigger() const -> QString;
+    auto GetVisibilityTrigger() -> QString &;
+    auto IsVisible() const -> bool;
+    void SetVisibilityTrigger(qreal visible, const QString &formula);
 
-    qreal    GetCorrectionAngle() const;
-    void     SetCorrectionAngle(qreal value);
+    auto GetCorrectionAngle() const -> qreal;
+    void SetCorrectionAngle(qreal value);
 
-    quint32 GetCenterPoint() const;
-    void    SetCenterPoint(quint32 id);
+    auto GetCenterPoint() const -> quint32;
+    void SetCenterPoint(quint32 id);
 
-    PlaceLabelType GetLabelType() const;
-    void           SetLabelType(PlaceLabelType type);
+    auto GetLabelType() const -> PlaceLabelType;
+    void SetLabelType(PlaceLabelType type);
 
-    PlaceLabelImg LabelShape() const;
+    auto IsNotMirrored() const -> bool;
+    void SetNotMirrored(bool value);
+
+    auto RotationMatrix() const -> QTransform;
+    auto Box() const -> QRectF;
 
 private:
     QSharedDataPointer<VPlaceLabelItemData> d;
 };
 
-Q_DECLARE_METATYPE(VPlaceLabelItem)
-Q_DECLARE_TYPEINFO(VPlaceLabelItem, Q_MOVABLE_TYPE);
+Q_DECLARE_METATYPE(VPlaceLabelItem)                  // NOLINT
+Q_DECLARE_TYPEINFO(VPlaceLabelItem, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VPLACELABELITEM_H

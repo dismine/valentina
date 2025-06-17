@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>579</width>
-    <height>500</height>
+    <width>550</width>
+    <height>534</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -28,15 +28,15 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>559</width>
-        <height>480</height>
+        <width>530</width>
+        <height>514</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
         <widget class="QTabWidget" name="tabWidget">
          <property name="currentIndex">
-          <number>0</number>
+          <number>2</number>
          </property>
          <widget class="QWidget" name="tabPieceLabelData">
           <attribute name="title">
@@ -96,7 +96,7 @@
               <item row="0" column="1">
                <widget class="VLineEdit" name="lineEditLetter">
                 <property name="maxLength">
-                 <number>3</number>
+                 <number>5</number>
                 </property>
                 <property name="placeholderText">
                  <string>Letter of pattern piece</string>
@@ -225,6 +225,207 @@
            </item>
           </layout>
          </widget>
+         <widget class="QWidget" name="tabPatternLabelData">
+          <attribute name="title">
+           <string>Pattern label data</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_5">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_31">
+             <item>
+              <widget class="QLabel" name="label_18">
+               <property name="text">
+                <string>Label template:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButtonEditPatternLabel">
+               <property name="toolTip">
+                <string>Edit pattern label</string>
+               </property>
+               <property name="text">
+                <string>Edit template</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_2">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_4">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>1</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="title">
+              <string>Label data</string>
+             </property>
+             <layout class="QFormLayout" name="formLayout_2">
+              <property name="fieldGrowthPolicy">
+               <enum>QFormLayout::ExpandingFieldsGrow</enum>
+              </property>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_8">
+                <property name="text">
+                 <string>Pattern name:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="VLineEdit" name="lineEditPatternName">
+                <property name="maxLength">
+                 <number>30</number>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_9">
+                <property name="text">
+                 <string>Pattern number:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="VLineEdit" name="lineEditPatternNumber">
+                <property name="maxLength">
+                 <number>30</number>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="label_10">
+                <property name="text">
+                 <string>Company/Designer name:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="VLineEdit" name="lineEditCompanyName">
+                <property name="maxLength">
+                 <number>30</number>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="label_11">
+                <property name="text">
+                 <string>Customer name:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="VLineEdit" name="lineEditCustomerName">
+                <property name="maxLength">
+                 <number>30</number>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="0">
+               <widget class="QLabel" name="label_12">
+                <property name="text">
+                 <string>Date format:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="1">
+               <widget class="QComboBox" name="comboBoxDateFormat"/>
+              </item>
+              <item row="7" column="0">
+               <widget class="QLabel" name="label_14">
+                <property name="text">
+                 <string>Time format:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="1">
+               <widget class="QComboBox" name="comboBoxTimeFormat"/>
+              </item>
+              <item row="4" column="0">
+               <widget class="QLabel" name="label_15">
+                <property name="text">
+                 <string>Customer birth date:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QDateEdit" name="dateEditCustomerBirthDate">
+                <property name="displayFormat">
+                 <string>yyyy-MM-dd</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="0">
+               <widget class="QLabel" name="label_16">
+                <property name="text">
+                 <string>Customer email:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="1">
+               <widget class="QLineEdit" name="lineEditCustomerEmail"/>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_2">
+             <property name="title">
+              <string>Materials</string>
+             </property>
+             <layout class="QFormLayout" name="formLayout_3">
+              <property name="fieldGrowthPolicy">
+               <enum>QFormLayout::ExpandingFieldsGrow</enum>
+              </property>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_17">
+                <property name="text">
+                 <string>Pattern materials:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QPushButton" name="pushButtonPatternMaterials">
+                <property name="toolTip">
+                 <string>Manage list of pattern materials</string>
+                </property>
+                <property name="text">
+                 <string>Manage</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>38000</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
          <widget class="QWidget" name="tabLabels">
           <attribute name="title">
            <string>Labels</string>
@@ -243,7 +444,7 @@
                <string>Options to control position a detail label. &lt;b&gt;Not available if a detail label template is empty&lt;/b&gt;.</string>
               </property>
               <property name="title">
-               <string>Detail label visible</string>
+               <string>Piece label visible</string>
               </property>
               <property name="flat">
                <bool>true</bool>
@@ -254,7 +455,28 @@
               <property name="checked">
                <bool>false</bool>
               </property>
-              <layout class="QVBoxLayout" name="verticalLayout_8">
+              <layout class="QVBoxLayout" name="verticalLayout_7">
+               <item>
+                <layout class="QFormLayout" name="formLayout_8">
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="label_19">
+                   <property name="text">
+                    <string>Font size:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QComboBox" name="comboBoxPieceLabelSize"/>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <widget class="Line" name="line_2">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                </widget>
+               </item>
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_18">
                  <item alignment="Qt::AlignLeft">
@@ -326,11 +548,11 @@
                     <string>Formula wizard</string>
                    </property>
                    <property name="text">
-                    <string notr="true">...</string>
+                    <string notr="true"/>
                    </property>
                    <property name="icon">
                     <iconset resource="../../../../../vmisc/share/resources/icon.qrc">
-                     <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
+                     <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
                    </property>
                    <property name="iconSize">
                     <size>
@@ -346,7 +568,7 @@
                     <string/>
                    </property>
                    <property name="pixmap">
-                    <pixmap resource="../../../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
+                    <pixmap resource="../../../../../vmisc/share/resources/icon.qrc">:/icon/light/24x24/equal.png</pixmap>
                    </property>
                   </widget>
                  </item>
@@ -445,19 +667,6 @@
                 </layout>
                </item>
                <item>
-                <spacer name="verticalSpacer_4">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_20">
                  <item alignment="Qt::AlignLeft">
                   <widget class="QLabel" name="labelEditDLHeight">
@@ -528,11 +737,11 @@
                     <string>Formula wizard</string>
                    </property>
                    <property name="text">
-                    <string notr="true">...</string>
+                    <string notr="true"/>
                    </property>
                    <property name="icon">
                     <iconset resource="../../../../../vmisc/share/resources/icon.qrc">
-                     <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
+                     <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
                    </property>
                    <property name="iconSize">
                     <size>
@@ -548,7 +757,7 @@
                     <string/>
                    </property>
                    <property name="pixmap">
-                    <pixmap resource="../../../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
+                    <pixmap resource="../../../../../vmisc/share/resources/icon.qrc">:/icon/light/24x24/equal.png</pixmap>
                    </property>
                   </widget>
                  </item>
@@ -647,19 +856,6 @@
                 </layout>
                </item>
                <item>
-                <spacer name="verticalSpacer_5">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
                 <layout class="QFormLayout" name="formLayout_9">
                  <property name="fieldGrowthPolicy">
                   <enum>QFormLayout::ExpandingFieldsGrow</enum>
@@ -675,19 +871,6 @@
                   <widget class="QComboBox" name="comboBoxDLCenterPin"/>
                  </item>
                 </layout>
-               </item>
-               <item>
-                <spacer name="verticalSpacer_10">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
                </item>
                <item>
                 <widget class="Line" name="line_3">
@@ -729,19 +912,6 @@
                   <enum>Qt::Horizontal</enum>
                  </property>
                 </widget>
-               </item>
-               <item>
-                <spacer name="verticalSpacer_11">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
                </item>
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_22">
@@ -814,11 +984,11 @@
                     <string>Formula wizard</string>
                    </property>
                    <property name="text">
-                    <string notr="true">...</string>
+                    <string notr="true"/>
                    </property>
                    <property name="icon">
                     <iconset resource="../../../../../vmisc/share/resources/icon.qrc">
-                     <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
+                     <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
                    </property>
                    <property name="iconSize">
                     <size>
@@ -834,11 +1004,11 @@
                     <string/>
                    </property>
                    <property name="pixmap">
-                    <pixmap resource="../../../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
+                    <pixmap resource="../../../../../vmisc/share/resources/icon.qrc">:/icon/light/24x24/equal.png</pixmap>
                    </property>
                   </widget>
                  </item>
-                 <item alignment="Qt::AlignRight">
+                 <item>
                   <widget class="QLabel" name="labelDLAngle">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -963,7 +1133,28 @@
               <property name="checked">
                <bool>false</bool>
               </property>
-              <layout class="QVBoxLayout" name="verticalLayout_14">
+              <layout class="QVBoxLayout" name="verticalLayout_6">
+               <item>
+                <layout class="QFormLayout" name="formLayout_13">
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="label_20">
+                   <property name="text">
+                    <string>Font size:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QComboBox" name="comboBoxPatternLabelSize"/>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <widget class="Line" name="line">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                </widget>
+               </item>
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_25">
                  <item alignment="Qt::AlignLeft">
@@ -1035,11 +1226,11 @@
                     <string>Formula wizard</string>
                    </property>
                    <property name="text">
-                    <string notr="true">...</string>
+                    <string notr="true"/>
                    </property>
                    <property name="icon">
                     <iconset resource="../../../../../vmisc/share/resources/icon.qrc">
-                     <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
+                     <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
                    </property>
                    <property name="iconSize">
                     <size>
@@ -1055,7 +1246,7 @@
                     <string/>
                    </property>
                    <property name="pixmap">
-                    <pixmap resource="../../../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
+                    <pixmap resource="../../../../../vmisc/share/resources/icon.qrc">:/icon/light/24x24/equal.png</pixmap>
                    </property>
                   </widget>
                  </item>
@@ -1154,19 +1345,6 @@
                 </layout>
                </item>
                <item>
-                <spacer name="verticalSpacer_6">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_24">
                  <item alignment="Qt::AlignLeft">
                   <widget class="QLabel" name="labelEditPLHeight">
@@ -1237,11 +1415,11 @@
                     <string>Formula wizard</string>
                    </property>
                    <property name="text">
-                    <string notr="true">...</string>
+                    <string notr="true"/>
                    </property>
                    <property name="icon">
                     <iconset resource="../../../../../vmisc/share/resources/icon.qrc">
-                     <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
+                     <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
                    </property>
                    <property name="iconSize">
                     <size>
@@ -1257,7 +1435,7 @@
                     <string/>
                    </property>
                    <property name="pixmap">
-                    <pixmap resource="../../../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
+                    <pixmap resource="../../../../../vmisc/share/resources/icon.qrc">:/icon/light/24x24/equal.png</pixmap>
                    </property>
                   </widget>
                  </item>
@@ -1356,19 +1534,6 @@
                 </layout>
                </item>
                <item>
-                <spacer name="verticalSpacer_7">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
                 <layout class="QFormLayout" name="formLayout_10">
                  <property name="fieldGrowthPolicy">
                   <enum>QFormLayout::ExpandingFieldsGrow</enum>
@@ -1384,19 +1549,6 @@
                   <widget class="QComboBox" name="comboBoxPLCenterPin"/>
                  </item>
                 </layout>
-               </item>
-               <item>
-                <spacer name="verticalSpacer_13">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
                </item>
                <item>
                 <widget class="Line" name="line_5">
@@ -1438,19 +1590,6 @@
                   <enum>Qt::Horizontal</enum>
                  </property>
                 </widget>
-               </item>
-               <item>
-                <spacer name="verticalSpacer_12">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
                </item>
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_29">
@@ -1523,11 +1662,11 @@
                     <string>Formula wizard</string>
                    </property>
                    <property name="text">
-                    <string notr="true">...</string>
+                    <string notr="true"/>
                    </property>
                    <property name="icon">
                     <iconset resource="../../../../../vmisc/share/resources/icon.qrc">
-                     <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
+                     <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
                    </property>
                    <property name="iconSize">
                     <size>
@@ -1543,7 +1682,7 @@
                     <string/>
                    </property>
                    <property name="pixmap">
-                    <pixmap resource="../../../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
+                    <pixmap resource="../../../../../vmisc/share/resources/icon.qrc">:/icon/light/24x24/equal.png</pixmap>
                    </property>
                   </widget>
                  </item>
@@ -1672,12 +1811,12 @@
   <customwidget>
    <class>VPlainTextEdit</class>
    <extends>QPlainTextEdit</extends>
-   <header location="global">vplaintextedit.h</header>
+   <header>../vwidgets/vplaintextedit.h</header>
   </customwidget>
   <customwidget>
    <class>VLineEdit</class>
    <extends>QLineEdit</extends>
-   <header>vlineedit.h</header>
+   <header>../vwidgets/vlineedit.h</header>
   </customwidget>
  </customwidgets>
  <resources>

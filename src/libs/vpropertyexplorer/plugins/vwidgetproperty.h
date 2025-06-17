@@ -21,7 +21,7 @@
 #ifndef VWIDGETROPERTY_H
 #define VWIDGETROPERTY_H
 
-#include <qcompilerdetection.h>
+
 #include <QPointer>
 #include <QString>
 
@@ -38,9 +38,12 @@ namespace VPE
 // todo: this way, this class doesn't really make sense. What we have to do is pass a widget factory instead of the
 // actual widget!
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+
 //! This property holds a QWidget and displays it, if the view supports that. If not, it will behave like an empty
 //! property
-class VPROPERTYEXPLORERSHARED_EXPORT VWidgetProperty : public VEmptyProperty
+class VPROPERTYEXPLORERSHARED_EXPORT VWidgetProperty: public VEmptyProperty
 {
 public:
     //! Constructor
@@ -50,22 +53,24 @@ public:
     virtual ~VWidgetProperty() override;
 
     //! Returns the widget held by this property
-    QWidget* getWidget() const;
+    auto getWidget() const -> QWidget *;
 
     //! Sets the widget for this property. If there is already an old one, it will be deleted.
     void setWidget(QWidget* widget);
 
     //! Returns a string containing the type of the property
-    virtual QString type() const override;
+    virtual auto type() const -> QString override;
 
     //! Clones this property
     //! \param include_children Indicates whether to also clone the children
     //! \param container If a property is being passed here, no new VProperty is being created but instead it is tried
     //! to fill all the data into container. This can also be used when subclassing this function.
     //! \return Returns the newly created property (or container, if it was not NULL)
-    Q_REQUIRED_RESULT virtual VProperty* clone(bool include_children = true,
-                                               VProperty* container = nullptr) const override;
+    Q_REQUIRED_RESULT virtual auto clone(bool include_children = true, VProperty *container = nullptr) const
+        -> VProperty * override;
 };
+
+QT_WARNING_POP
 
 }
 

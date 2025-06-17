@@ -1,0 +1,43 @@
+{
+    "data": {
+        "globalPassmarkLength": 0,
+        "globalPassmarkWidth": 0,
+        "id": 435,
+        "isMainPathNode": true,
+        "isShowSecondPassmark": true,
+        "nextSAPoint": {
+            "passmarkClockwiseOpening": false,
+            "saAfter": 37.795275590551185,
+            "saBefore": 37.795275590551185,
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": -814.7149606299213,
+            "y": -8.844283464566928
+        },
+        "nodeName": "А4",
+        "passmarkAngleType": 1,
+        "passmarkIndex": 0,
+        "passmarkLineType": 3,
+        "passmarkSAPoint": {
+            "passmarkClockwiseOpening": false,
+            "saAfter": 37.795275590551185,
+            "saBefore": 37.795275590551185,
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": -814.7149606299213,
+            "y": 331.31319685039375
+        },
+        "pieceName": "Test 2",
+        "previousSAPoint": {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 37.795275590551185,
+            "saBefore": 37.795275590551185,
+            "type": "VSAPoint",
+            "x": -813.9961742743959,
+            "y": 331.90352529002166
+        },
+        "saWidth": 37.795275590551185
+    }
+}

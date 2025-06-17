@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="100%" height="100%">
+	<rect id="sky" fill="#91BFF4" x="0" y="0" width="32" height="32"></rect>
+	<path id="mountain1" fill="#40915A" d="M26,32 L0,32 L0,26 L10,15 L26,32 Z"></path>
+	<path id="mountain2" fill="#4CAD6B" d="M32,20 L32,32 L4,32 L23,11 L32,20 Z"></path>
+	<rect id="sun" fill="#FFC90F" x="6" y="5" width="6" height="6" rx="3"></rect>
+</svg>

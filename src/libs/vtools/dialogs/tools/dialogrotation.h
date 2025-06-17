@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef DIALOGROTATION_H
 #define DIALOGROTATION_H
 
-#include <qcompilerdetection.h>
 #include <QList>
 #include <QMetaObject>
 #include <QObject>
@@ -37,73 +36,93 @@
 #include <QVector>
 #include <QtGlobal>
 
+#include "../../tools/toolsdef.h"
 #include "../vmisc/def.h"
 #include "dialogtool.h"
 
 namespace Ui
 {
-    class DialogRotation;
+class DialogRotation;
 }
 
-class DialogRotation : public DialogTool
+class DialogRotation final : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
-    explicit DialogRotation(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual ~DialogRotation();
+    explicit DialogRotation(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
+    ~DialogRotation() override;
 
-    quint32 GetOrigPointId() const;
-    void    SetOrigPointId(const quint32 &value);
+    auto GetOrigPointId() const -> quint32;
+    void SetOrigPointId(quint32 value);
 
-    QString GetAngle() const;
-    void    SetAngle(const QString &value);
+    auto GetAngle() const -> QString;
+    void SetAngle(const QString &value);
 
-    QString GetSuffix() const;
-    void    SetSuffix(const QString &value);
+    auto GetSuffix() const -> QString;
+    void SetSuffix(const QString &value);
 
-    QVector<quint32> GetObjects() const;
+    auto GetVisibilityGroupName() const -> QString;
+    void SetVisibilityGroupName(const QString &name);
 
-    virtual void ShowDialog(bool click) override;
+    auto HasLinkedVisibilityGroup() const -> bool;
+    void SetHasLinkedVisibilityGroup(bool linked);
+
+    void SetVisibilityGroupTags(const QStringList &tags);
+    auto GetVisibilityGroupTags() const -> QStringList;
+
+    void SetNotes(const QString &notes);
+    auto GetNotes() const -> QString;
+
+    void SetGroupCategories(const QStringList &categories) override;
+
+    void ShowDialog(bool click) override;
+
+    auto GetSourceObjects() const -> QVector<SourceItem>;
+    void SetSourceObjects(const QVector<SourceItem> &value);
 
 public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type) override;
-    virtual void SelectedObject(bool selected, quint32 object, quint32 tool) override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
+    void SelectedObject(bool selected, quint32 object, quint32 tool) override;
 
 private slots:
     /** @brief DeployAngleTextEdit grow or shrink formula input */
     void DeployAngleTextEdit();
-    void AngleChanged();
     void FXAngle();
     void SuffixChanged();
+    void GroupNameChanged();
+    void EvalAngle();
+    void ShowSourceDetails(int row);
+    void AliasChanged(const QString &text);
+    void PenStyleChanged();
+    void ColorChanged();
 
 protected:
-    virtual void CheckState() final;
-    virtual void ShowVisualization() override;
+    void ShowVisualization() override;
 
     /** @brief SaveData Put dialog data in local variables */
-    virtual void SaveData() override;
-    virtual void closeEvent(QCloseEvent *event) override;
+    void SaveData() override;
+    void closeEvent(QCloseEvent *event) override;
+    void changeEvent(QEvent *event) override;
+    auto IsValid() const -> bool override;
 
 private slots:
     void PointChanged();
 
 private:
-    Q_DISABLE_COPY(DialogRotation)
+    Q_DISABLE_COPY_MOVE(DialogRotation) // NOLINT
     Ui::DialogRotation *ui;
 
-    /** @brief flagAngle true if value of angle is correct */
-    bool    flagAngle;
-
     /** @brief timerAngle timer of check formula of angle */
-    QTimer  *timerAngle;
+    QTimer *timerAngle;
 
     /** @brief angle formula of angle */
     QString formulaAngle;
 
     /** @brief formulaBaseHeightAngle base height defined by dialogui */
-    int     formulaBaseHeightAngle;
+    int formulaBaseHeightAngle;
 
-    QList<quint32> objects;
+    QVector<SourceItem> sourceObjects{};
 
     bool stage1;
 
@@ -111,7 +130,21 @@ private:
 
     bool m_firstRelease;
 
-    void EvalAngle();
+    /** @brief flagAngle true if value of angle is correct */
+    bool flagAngle;
+    bool flagName;
+    bool flagGroupName;
+    bool flagError;
+    bool flagAlias{true};
+
+    QStringList m_groupTags{};
+
+    void FillSourceList();
+
+    void ValidateSourceAliases();
+    void SetAliasValid(quint32 id, bool valid);
+
+    void InitIcons();
 };
 
 #endif // DIALOGROTATION_H

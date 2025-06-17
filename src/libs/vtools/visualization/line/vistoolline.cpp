@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -34,50 +34,47 @@
 #include <QSharedPointer>
 #include <new>
 
-#include "../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"
-#include "../vmisc/vabstractapplication.h"
-#include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
-#include "visualization/line/visline.h"
+#include "../vpatterndb/vcontainer.h"
+#include "visline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolLine::VisToolLine(const VContainer *data, QGraphicsItem *parent)
-    :VisLine(data, parent), point2Id(NULL_ID)
+  : VisLine(data, parent)
 {
-    this->mainColor = Qt::red;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolLine::RefreshGeometry()
 {
     QLineF line;
-    const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
-    if (point2Id == NULL_ID)
+    const QSharedPointer<VPointF> first = GetData()->GeometricObject<VPointF>(m_point1Id);
+    if (m_point2Id == NULL_ID)
     {
-        line = QLineF(static_cast<QPointF>(*first), Visualization::scenePos);
+        line = QLineF(static_cast<QPointF>(*first), ScenePos());
     }
     else
     {
-        const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(point2Id);
+        const QSharedPointer<VPointF> second = GetData()->GeometricObject<VPointF>(m_point2Id);
         line = QLineF(static_cast<QPointF>(*first), static_cast<QPointF>(*second));
     }
-    DrawLine(this, line, mainColor, lineStyle);
+    DrawLine(this, line, LineStyle());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolLine::setPoint2Id(const quint32 &value)
+void VisToolLine::VisualMode(quint32 id)
 {
-    point2Id = value;
+    m_point1Id = id;
+    StartVisualMode();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolLine::DrawLine(VScaledLine *lineItem, const QLineF &line, const QColor &color, Qt::PenStyle style)
+void VisToolLine::DrawLine(VScaledLine *lineItem, const QLineF &line, Qt::PenStyle style)
 {
-    SCASSERT (lineItem != nullptr)
+    SCASSERT(lineItem != nullptr)
 
     QPen visPen = lineItem->pen();
-    visPen.setColor(color);
     visPen.setStyle(style);
 
     lineItem->setPen(visPen);

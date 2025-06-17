@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef DIALOGPOINTOFCONTACT_H
 #define DIALOGPOINTOFCONTACT_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -37,66 +36,97 @@
 
 #include "../vmisc/def.h"
 #include "dialogtool.h"
-#include "ui_dialogpointofcontact.h"
 
 namespace Ui
 {
-    class DialogPointOfContact;
+class DialogPointOfContact;
 }
 
 /**
  * @brief The DialogPointOfContact class dialog for ToolPointOfContact. Help create point and edit option.
  */
-class DialogPointOfContact : public DialogTool
+class DialogPointOfContact final : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
-    DialogPointOfContact(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual ~DialogPointOfContact() override;
+    DialogPointOfContact(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
+    ~DialogPointOfContact() override;
 
-    void           SetPointName(const QString &value);
+    auto GetPointName() const -> QString;
+    void SetPointName(const QString &value);
 
-    QString        getRadius() const;
-    void           setRadius(const QString &value);
+    auto GetRadius() const -> QString;
+    void SetRadius(const QString &value);
 
-    quint32        getCenter() const;
-    void           setCenter(const quint32 &value);
+    auto GetCenter() const -> quint32;
+    void SetCenter(quint32 value);
 
-    quint32        GetFirstPoint() const;
-    void           SetFirstPoint(const quint32 &value);
+    auto GetFirstPoint() const -> quint32;
+    void SetFirstPoint(quint32 value);
 
-    quint32        GetSecondPoint() const;
-    void           SetSecondPoint(const quint32 &value);
+    auto GetSecondPoint() const -> quint32;
+    void SetSecondPoint(quint32 value);
+
+    void SetNotes(const QString &notes);
+    auto GetNotes() const -> QString;
+
+    void ShowDialog(bool click) override;
+
 public slots:
-    virtual void   ChosenObject(quint32 id, const SceneObject &type) override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
     /**
      * @brief DeployFormulaTextEdit grow or shrink formula input
      */
-    void           DeployFormulaTextEdit();
-    /**
-     * @brief FormulaTextChanged when formula text changes for validation and calc
-     */
-    void           FormulaTextChanged();
-    virtual void   PointNameChanged() override;
-    void           FXRadius();
+    void DeployFormulaTextEdit();
+    void PointNameChanged() override;
+    void FXRadius();
+    void EvalFormula();
+
 protected:
-    virtual void   ShowVisualization() override;
+    void ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void   SaveData() override;
-    virtual void   closeEvent(QCloseEvent *event) override;
+    void SaveData() override;
+    void closeEvent(QCloseEvent *event) override;
+    void changeEvent(QEvent *event) override;
+    auto IsValid() const -> bool override;
+
 private:
-    Q_DISABLE_COPY(DialogPointOfContact)
+    Q_DISABLE_COPY_MOVE(DialogPointOfContact) // NOLINT
 
     /** @brief ui keeps information about user interface */
     Ui::DialogPointOfContact *ui;
 
     /** @brief radius radius of arc */
-    QString        radius;
+    QString m_radius{};
 
     /** @brief formulaBaseHeight base height defined by dialogui */
-    int             formulaBaseHeight;
+    int m_formulaBaseHeight{0};
+
+    QString m_pointName{};
+
+    QTimer *m_timerFormula;
+
+    bool m_flagFormula{false};
+    bool m_flagName{true};
+    bool m_flagError{true};
+
+    /** @brief number number of handled objects */
+    qint32 m_number{0};
+
+    bool m_firstRelease{false};
+
+    void FinishCreating();
+
+    void InitIcons();
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto DialogPointOfContact::IsValid() const -> bool
+{
+    return m_flagFormula && m_flagName && m_flagError;
+}
 
 #endif // DIALOGPOINTOFCONTACT_H

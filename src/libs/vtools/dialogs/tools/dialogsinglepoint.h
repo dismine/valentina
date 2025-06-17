@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef DIALOGSINGLEPOINT_H
 #define DIALOGSINGLEPOINT_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QPointF>
@@ -40,37 +39,56 @@
 
 namespace Ui
 {
-    class DialogSinglePoint;
+class DialogSinglePoint;
 }
 
 /**
  * @brief The DialogSinglePoint class dialog for ToolSinglePoint. Help create point and edit option.
  */
-class DialogSinglePoint : public DialogTool
+class DialogSinglePoint final : public DialogTool
 {
-    Q_OBJECT
-public:
-    DialogSinglePoint(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual ~DialogSinglePoint() override;
+    Q_OBJECT // NOLINT
 
-    void           SetData(const QString &name, const QPointF &point);
-    QPointF        GetPoint()const;
+public:
+    DialogSinglePoint(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
+    ~DialogSinglePoint() override;
+
+    void SetData(const QString &name, const QPointF &point);
+    auto GetPoint() const -> QPointF;
+
+    auto GetPointName() const -> QString;
+
+    void SetNotes(const QString &notes);
+    auto GetNotes() const -> QString;
 
 public slots:
-    void           mousePress(const QPointF &scenePos);
+    void mousePress(const QPointF &scenePos);
+
 protected:
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void   SaveData() override;
+    void SaveData() override;
+    auto IsValid() const -> bool override;
+
 private:
-    Q_DISABLE_COPY(DialogSinglePoint)
+    Q_DISABLE_COPY_MOVE(DialogSinglePoint) // NOLINT
 
     /** @brief ui keeps information about user interface */
     Ui::DialogSinglePoint *ui;
 
     /** @brief point data of point */
-    QPointF        point;
+    QPointF point;
+
+    QString pointName;
+
+    bool flagName;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto DialogSinglePoint::IsValid() const -> bool
+{
+    return flagName;
+}
 
 #endif // DIALOGSINGLEPOINT_H

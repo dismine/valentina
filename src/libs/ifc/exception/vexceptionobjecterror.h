@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 #ifndef VEXCEPTIONOBJECTERROR_H
 #define VEXCEPTIONOBJECTERROR_H
 
-#include <qcompilerdetection.h>
+
 #include <QString>
 #include <QtGlobal>
 
@@ -44,16 +44,25 @@ class QDomElement;
 class VExceptionObjectError : public VException
 {
 public:
-    VExceptionObjectError(const QString &what, const QDomElement &domElement);
-    explicit VExceptionObjectError(const QString &what);
-    VExceptionObjectError(const VExceptionObjectError &e);
-    VExceptionObjectError &operator=(const VExceptionObjectError &e);
-    virtual ~VExceptionObjectError() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
-    virtual QString ErrorMessage() const override;
-    virtual QString DetailedInformation() const override;
-    QString         TagText() const;
-    QString         TagName() const;
-    qint32          LineNumber() const;
+    VExceptionObjectError(const QString &what, const QDomElement &domElement) V_NOEXCEPT_EXPR (true);
+    explicit VExceptionObjectError(const QString &what) V_NOEXCEPT_EXPR (true);
+    VExceptionObjectError(const VExceptionObjectError &e) V_NOEXCEPT_EXPR (true);
+    auto operator=(const VExceptionObjectError &e) V_NOEXCEPT_EXPR(true) -> VExceptionObjectError &;
+    virtual ~VExceptionObjectError() V_NOEXCEPT_EXPR (true) = default;
+
+    Q_NORETURN virtual void raise() const override { throw *this; }
+
+    Q_REQUIRED_RESULT virtual auto clone() const -> VExceptionObjectError * override
+    {
+        return new VExceptionObjectError(*this);
+    }
+
+    virtual auto ErrorMessage() const -> QString override;
+    virtual auto DetailedInformation() const -> QString override;
+    auto TagText() const -> QString;
+    auto TagName() const -> QString;
+    auto LineNumber() const -> qint32;
+
 protected:
     /** @brief tagText tag text */
     QString         tagText;
@@ -70,7 +79,7 @@ protected:
  * @brief TagText return tag text
  * @return tag text
  */
-inline QString VExceptionObjectError::TagText() const
+inline auto VExceptionObjectError::TagText() const -> QString
 {
     return tagText;
 }
@@ -80,7 +89,7 @@ inline QString VExceptionObjectError::TagText() const
  * @brief TagName return tag name
  * @return tag name
  */
-inline QString VExceptionObjectError::TagName() const
+inline auto VExceptionObjectError::TagName() const -> QString
 {
     return tagName;
 }
@@ -90,7 +99,7 @@ inline QString VExceptionObjectError::TagName() const
  * @brief LineNumber return line number in file
  * @return line number
  */
-inline qint32 VExceptionObjectError::LineNumber() const
+inline auto VExceptionObjectError::LineNumber() const -> qint32
 {
     return lineNumber;
 }

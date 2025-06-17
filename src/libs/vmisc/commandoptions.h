@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -46,16 +46,19 @@ extern const QString SINGLE_OPTION_PAGETEMPLATE;
 extern const QString LONG_OPTION_EXP2FORMAT;
 extern const QString SINGLE_OPTION_EXP2FORMAT;
 
+extern const QString LONG_OPTION_DXF_APPAREL_COMP;
 extern const QString LONG_OPTION_BINARYDXF;
+extern const QString LONG_OPTION_NOGRAINLINE;
 extern const QString LONG_OPTION_TEXT2PATHS;
 extern const QString LONG_OPTION_EXPORTONLYDETAILS;
 extern const QString LONG_OPTION_EXPORTSUCHDETAILS;
+extern const QString LONG_OPTION_EXPXSCALE;
+extern const QString LONG_OPTION_EXPYSCALE;
 
-extern const QString LONG_OPTION_ROTATE;
-extern const QString SINGLE_OPTION_ROTATE;
+extern const QString LONG_OPTION_CROP_LENGTH;
+extern const QString SINGLE_OPTION_CROP_LENGTH;
 
-extern const QString LONG_OPTION_CROP;
-extern const QString SINGLE_OPTION_CROP;
+extern const QString LONG_OPTION_CROP_WIDTH;
 
 extern const QString LONG_OPTION_UNITE;
 extern const QString SINGLE_OPTION_UNITE;
@@ -72,9 +75,6 @@ extern const QString SINGLE_OPTION_PAGEUNITS;
 extern const QString LONG_OPTION_SAVELENGTH;
 extern const QString SINGLE_OPTION_SAVELENGTH;
 
-extern const QString LONG_OPTION_SHIFTLENGTH;
-extern const QString SINGLE_OPTION_SHIFTLENGTH;
-
 extern const QString LONG_OPTION_SHIFTUNITS;
 extern const QString SINGLE_OPTION_SHIFTUNITS;
 
@@ -89,11 +89,9 @@ extern const QString SINGLE_OPTION_TEST;
 
 extern const QString LONG_OPTION_PENDANTIC;
 
-extern const QString LONG_OPTION_GRADATIONSIZE;
-extern const QString SINGLE_OPTION_GRADATIONSIZE;
-
-extern const QString LONG_OPTION_GRADATIONHEIGHT;
-extern const QString SINGLE_OPTION_GRADATIONHEIGHT;
+extern const QString LONG_OPTION_DIMENSION_A;
+extern const QString LONG_OPTION_DIMENSION_B;
+extern const QString LONG_OPTION_DIMENSION_C;
 
 extern const QString LONG_OPTION_USER_MATERIAL;
 
@@ -112,6 +110,11 @@ extern const QString SINGLE_OPTION_TOP_MARGIN;
 extern const QString LONG_OPTION_BOTTOM_MARGIN;
 extern const QString SINGLE_OPTION_BOTTOM_MARGIN;
 
+extern const QString LONG_OPTION_NESTING_TIME;
+extern const QString SINGLE_OPTION_NESTING_TIME;
+
+extern const QString LONG_OPTION_EFFICIENCY_COEFFICIENT;
+
 extern const QString LONG_OPTION_CSVWITHHEADER;
 extern const QString LONG_OPTION_CSVCODEC;
 extern const QString LONG_OPTION_CSVSEPARATOR;
@@ -123,7 +126,13 @@ extern const QString LONG_OPTION_TILED_PDF_RIGHT_MARGIN;
 extern const QString LONG_OPTION_TILED_PDF_TOP_MARGIN;
 extern const QString LONG_OPTION_TILED_PDF_BOTTOM_MARGIN;
 extern const QString LONG_OPTION_TILED_PDF_LANDSCAPE;
+extern const QString LONG_OPTION_FOLLOW_GRAINLINE;
+extern const QString LONG_OPTION_MANUAL_PRIORITY;
+extern const QString LONG_OPTION_LANDSCAPE_ORIENTATION;
+extern const QString LONG_OPTION_NEST_QUANTITY;
+extern const QString LONG_OPTION_PREFER_ONE_SHEET_SOLUTION;
+extern const QString LONG_OPTION_BOUNDARY_TOGETHER_WITH_NOTCHES;
 
-QStringList AllKeys();
+auto AllKeys() -> QStringList;
 
 #endif // COMMANDOPTIONS_H

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -30,14 +30,24 @@
 
 #include "vexception.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VExceptionBadId exception bad id
  * @param error string with error
  * @param id id
  */
-VExceptionBadId::VExceptionBadId(const QString &error, const quint32 &id)
-    :VException(error), id(id), key(QString()){}
+VExceptionBadId::VExceptionBadId(const QString &error, const quint32 &id) V_NOEXCEPT_EXPR(true)
+  : VException(error),
+    id(id),
+    key(QString())
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -45,21 +55,29 @@ VExceptionBadId::VExceptionBadId(const QString &error, const quint32 &id)
  * @param error string with error
  * @param key string key
  */
-VExceptionBadId::VExceptionBadId(const QString &error, const QString &key)
-    :VException(error), id(NULL_ID), key(key){}
+VExceptionBadId::VExceptionBadId(const QString &error, const QString &key) V_NOEXCEPT_EXPR(true)
+  : VException(error),
+    id(NULL_ID),
+    key(key)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VExceptionBadId copy constructor
  * @param e exception
  */
-VExceptionBadId::VExceptionBadId(const VExceptionBadId &e)
-    :VException(e), id(e.BadId()), key(e.BadKey()){}
+VExceptionBadId::VExceptionBadId(const VExceptionBadId &e) V_NOEXCEPT_EXPR(true)
+  : VException(e),
+    id(e.BadId()),
+    key(e.BadKey())
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionBadId &VExceptionBadId::operator=(const VExceptionBadId &e)
+auto VExceptionBadId::operator=(const VExceptionBadId &e) V_NOEXCEPT_EXPR(true) -> VExceptionBadId &
 {
-    if ( &e == this )
+    if (&e == this)
     {
         return *this;
     }
@@ -74,16 +92,16 @@ VExceptionBadId &VExceptionBadId::operator=(const VExceptionBadId &e)
  * @brief ErrorMessage return main error message
  * @return main error message
  */
-QString VExceptionBadId::ErrorMessage() const
+auto VExceptionBadId::ErrorMessage() const -> QString
 {
     QString error;
     if (key.isEmpty())
     {
-        error = QString("ExceptionBadId: %1, id = %2").arg(this->error).arg(id);
+        error = u"ExceptionBadId: %1, id = %2"_s.arg(this->error).arg(id);
     }
     else
     {
-        error = QString("ExceptionBadId: %1, id = %2").arg(this->error, key);
+        error = u"ExceptionBadId: %1, id = %2"_s.arg(this->error, key);
     }
     return error;
 }

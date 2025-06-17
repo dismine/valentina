@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -40,63 +40,96 @@
 #include <QString>
 #include <QtGlobal>
 
-#include "vpieceitem.h"
 #include "../vlayout/vtextmanager.h"
+#include "vpieceitem.h"
+
+class VSvgFont;
 
 /**
  * @brief The VTextGraphicsItem class. This class implements text graphics item,
  * which can be dragged around, resized and rotated within the parent item. The text font
  * size will be automatically updated, so that the entire text will fit into the item.
  */
-class VTextGraphicsItem : public VPieceItem
+class VTextGraphicsItem final : public VPieceItem
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
-    explicit VTextGraphicsItem(QGraphicsItem* pParent = nullptr);
-    virtual ~VTextGraphicsItem() Q_DECL_EQ_DEFAULT;
+    enum ItemType
+    {
+        PatternLabel,
+        PieceLabel,
+        Unknown
+    };
 
-    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
-    virtual void Update() override;
+    explicit VTextGraphicsItem(ItemType type, QGraphicsItem *pParent = nullptr);
+    ~VTextGraphicsItem() override = default;
 
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::TextGraphicsItem)};
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+    void Update() override;
 
-    void SetFont(const QFont& fnt);
-    int  GetFontSize() const;
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Vis::TextGraphicsItem)
+    };
+
+    void SetFont(const QFont &fnt);
+    void SetSVGFontFamily(const QString &fntFamily);
+    void SetSVGFontPointSize(int pointSize);
+    auto GetFontSize() const -> int;
     void SetSize(qreal fW, qreal fH);
-    bool IsContained(QRectF rectBB, qreal dRot, qreal& dX, qreal& dY) const;
-    void UpdateData(const QString& qsName, const VPieceLabelData& data);
-    void UpdateData(VAbstractPattern* pDoc);
-    int  GetTextLines() const;
-
-protected:
-    virtual void mousePressEvent(QGraphicsSceneMouseEvent* pME) override;
-    virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* pME) override;
-    virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* pME) override;
-    virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *pME) override;
-    virtual void hoverMoveEvent(QGraphicsSceneHoverEvent* pHE) override;
-
-    void UpdateBox();
-    void CorrectLabel();
+    auto IsContained(QRectF rectBB, qreal dRot, qreal &dX, qreal &dY) const -> bool;
+    void UpdatePieceLabelData(const VPieceLabelInfo &info);
+    void UpdatePatternLabelData(const VPieceLabelInfo &info);
+    auto GetTextLines() const -> vsizetype;
+    void SetPieceName(const QString &name);
 
 signals:
-    void SignalResized(qreal iTW, int iFontSize);
+    void SignalResized(qreal iTW);
     void SignalRotated(qreal dAng);
     void SignalShrink();
 
 private:
-    Q_DISABLE_COPY(VTextGraphicsItem)
-    QPointF      m_ptStartPos;
-    QPointF      m_ptStart;
-    QSizeF       m_szStart;
-    double       m_dRotation;
-    double       m_dAngle;
-    QRectF       m_rectResize;
-    VTextManager m_tm;
+    Q_DISABLE_COPY_MOVE(VTextGraphicsItem) // NOLINT
+    QPointF m_ptStartPos{};
+    QPointF m_ptStart{};
+    QSizeF m_szStart{};
+    double m_dRotation{0};
+    double m_dAngle{0};
+    QRectF m_rectResize{};
+    VTextManager m_tm{};
+    QString m_pieceName{};
+    ItemType m_itemType{Unknown};
 
     void AllUserModifications(const QPointF &pos);
     void UserRotateAndMove();
     void UserMoveAndResize(const QPointF &pos);
+
+    void MoveLabel(QGraphicsSceneMouseEvent *pME);
+    void ResizeLabel(QGraphicsSceneMouseEvent *pME);
+    void RotateLabel(QGraphicsSceneMouseEvent *pME);
+
+    void PaintLabel(QPainter *painter);
+    void PaintLabelOutlineFont(QPainter *painter);
+    void PaintLabelSVGFont(QPainter *painter);
+
+    void NotEnoughSpace() const;
+
+    void mousePressEvent(QGraphicsSceneMouseEvent *pME) override;
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *pME) override;
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *pME) override;
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *pME) override;
+    void hoverMoveEvent(QGraphicsSceneHoverEvent *pHE) override;
+
+    void UpdateBox();
+    void CorrectLabel();
+
+    auto ProcessTextLine(
+        const TextLine &tl, QPainter *painter, const QRectF &boundingRect, qreal &iY, int iW, bool textAsPaths) const
+        -> bool;
+    void DrawTextAsPlain(
+        const TextLine &tl, const QFont &fnt, int iW, qreal lineHeight, QPainter *painter, qreal iY) const;
 };
 
 #endif // VTEXTGRAPHICSITEM_H

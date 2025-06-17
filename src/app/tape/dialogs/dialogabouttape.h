@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -30,30 +30,32 @@
 #define DIALOGABOUTTAPE_H
 
 #include <QDialog>
+#include <memory>
 
 namespace Ui
 {
-    class DialogAboutTape;
+class DialogAboutTape;
 }
 
 class DialogAboutTape : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit DialogAboutTape(QWidget *parent = nullptr);
-    virtual ~DialogAboutTape();
+    ~DialogAboutTape() override;
 
 protected:
-    virtual void changeEvent(QEvent* event) override;
-    virtual void showEvent(QShowEvent *event) override;
+    void changeEvent(QEvent *event) override;
+    void showEvent(QShowEvent *event) override;
 
 private:
-    Q_DISABLE_COPY(DialogAboutTape)
-    Ui::DialogAboutTape *ui;
-    bool isInitialized;
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DialogAboutTape) // NOLINT
+    std::unique_ptr<Ui::DialogAboutTape> ui;
+    bool m_isInitialized;
 
-    void FontPointSize(QWidget *w, int pointSize);
+    static void FontPointSize(QWidget *w, int pointSize);
 
     void RetranslateUi();
 };

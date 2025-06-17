@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -27,45 +27,74 @@
  *************************************************************************/
 
 #include "dialoglayoutprogress.h"
+#include "../vmisc/theme/vtheme.h"
+#include "../vmisc/vabstractvalapplication.h"
+#include "../vmisc/vvalentinasettings.h"
 #include "ui_dialoglayoutprogress.h"
-#include "../options.h"
-#include "../core/vapplication.h"
 
 #include <QMessageBox>
-#include <QPushButton>
 #include <QMovie>
+#include <QPushButton>
+#include <QShowEvent>
+#include <QTime>
 #include <QtDebug>
+#include <chrono>
+
+using namespace std::chrono_literals;
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogLayoutProgress::DialogLayoutProgress(int count, QWidget *parent)
-    :QDialog(parent), ui(new Ui::DialogLayoutProgress), maxCount(count), movie(nullptr), isInitialized(false)
+DialogLayoutProgress::DialogLayoutProgress(QElapsedTimer timer, qint64 timeout, QWidget *parent)
+  : QDialog(parent),
+    ui(new Ui::DialogLayoutProgress),
+    m_timer(timer),
+    m_timeout(timeout),
+    m_progressTimer(new QTimer(this))
 {
     ui->setupUi(this);
 
-    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+    VAbstractValApplication::VApp()->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale())
+                                                                           : setLocale(QLocale::c());
 
-    ui->progressBar->setMaximum(maxCount);
+    ui->progressBar->setMaximum(static_cast<int>(timeout / 1000));
     ui->progressBar->setValue(0);
 
-    ui->labelMessage->setText(tr("Arranged workpieces: %1 from %2").arg(0).arg(count));
-
-    movie = new QMovie("://icon/16x16/progress.gif");
-    ui->labelProgress->setMovie (movie);
-    movie->start ();
+    const QString scheme =
+        (VTheme::ColorSheme() == VColorSheme::Light ? QStringLiteral("light") : QStringLiteral("dark"));
+    m_movie = new QMovie(QStringLiteral("://icon/%1/16x16/progress.gif").arg(scheme));
+    ui->labelProgress->setMovie(m_movie);
+    m_movie->start();
 
     QPushButton *bCancel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     SCASSERT(bCancel != nullptr)
-    connect(bCancel, &QPushButton::clicked, this, [this](){emit Abort();});
+    connect(bCancel, &QPushButton::clicked, this, [this]() { emit Abort(); });
     setModal(true);
 
     this->setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::CustomizeWindowHint);
+
+    connect(m_progressTimer, &QTimer::timeout, this,
+            [this]()
+            {
+                const qint64 elapsed = m_timer.elapsed();
+                const auto timeout = static_cast<int>(m_timeout - elapsed);
+                QTime t(0, 0);
+                t = t.addMSecs(timeout);
+                ui->labelTimeLeft->setText(tr("Time left: %1").arg(t.toString()));
+                ui->progressBar->setValue(static_cast<int>(elapsed / 1000));
+
+                if (timeout <= 1000)
+                {
+                    emit Timeout();
+                    m_progressTimer->stop();
+                }
+            });
+    m_progressTimer->start(1s);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogLayoutProgress::~DialogLayoutProgress()
 {
+    delete m_movie;
     delete ui;
-    delete movie;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -75,50 +104,28 @@ void DialogLayoutProgress::Start()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogLayoutProgress::Arranged(int count)
-{
-    ui->progressBar->setValue(count);
-    ui->labelMessage->setText(tr("Arranged workpieces: %1 from %2").arg(count).arg(maxCount));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogLayoutProgress::Error(const LayoutErrors &state)
-{
-    switch (state)
-    {
-        case LayoutErrors::NoError:
-            return;
-        case LayoutErrors::PrepareLayoutError:
-            qCritical() << tr("Couldn't prepare data for creation layout");
-            break;
-        case LayoutErrors::EmptyPaperError:
-            qCritical() << tr("One or more pattern pieces are bigger than the paper format you selected. Please, "
-                              "select a bigger paper format.");
-            break;
-        case LayoutErrors::ProcessStoped:
-        default:
-            break;
-    }
-
-    done(QDialog::Rejected);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutProgress::Finished()
 {
+    m_progressTimer->stop();
     done(QDialog::Accepted);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLayoutProgress::Efficiency(qreal value)
+{
+    ui->labelMessage->setText(tr("Efficiency coefficient: %1%").arg(qRound(value * 10.) / 10.));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutProgress::showEvent(QShowEvent *event)
 {
-    QDialog::showEvent( event );
-    if ( event->spontaneous() )
+    QDialog::showEvent(event);
+    if (event->spontaneous())
     {
         return;
     }
 
-    if (isInitialized)
+    if (m_isInitialized)
     {
         return;
     }
@@ -127,5 +134,5 @@ void DialogLayoutProgress::showEvent(QShowEvent *event)
     setMaximumSize(size());
     setMinimumSize(size());
 
-    isInitialized = true;//first show windows are held
+    m_isInitialized = true; // first show windows are held
 }

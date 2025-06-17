@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,11 +29,11 @@
 #ifndef VPIECEPATH_H
 #define VPIECEPATH_H
 
-#include <QtGlobal>
 #include <QSharedDataPointer>
+#include <QtGlobal>
 
-#include "../vmisc/def.h"
 #include "../vgeometry/vabstractcurve.h"
+#include "../vmisc/def.h"
 
 class VPiecePathData;
 class VSAPoint;
@@ -42,6 +42,7 @@ class QPainterPath;
 class VPointF;
 class VPieceNode;
 class VInternalVariable;
+class VLayoutPoint;
 
 class VPiecePath
 {
@@ -52,98 +53,103 @@ public:
 
     ~VPiecePath();
 
-    VPiecePath &operator=(const VPiecePath &path);
-#ifdef Q_COMPILER_RVALUE_REFS
-    VPiecePath &operator=(VPiecePath &&path) Q_DECL_NOTHROW { Swap(path); return *this; }
-#endif
+    auto operator=(const VPiecePath &path) -> VPiecePath &;
 
-    inline void Swap(VPiecePath &path) Q_DECL_NOTHROW
-    { std::swap(d, path.d); }
+    VPiecePath(VPiecePath &&path) noexcept;
+    auto operator=(VPiecePath &&path) noexcept -> VPiecePath &;
 
-    void   Append(const VPieceNode &node);
-    void   Clear();
-    qint32 CountNodes() const;
+    void Append(const VPieceNode &node);
+    void Clear();
+    auto CountNodes() const -> vsizetype;
 
-    VPieceNode & operator[](int indx);
-    const VPieceNode & at ( int indx ) const;
+    auto operator[](vsizetype indx) -> VPieceNode &;
+    auto at(vsizetype indx) const -> const VPieceNode &;
 
-    QVector<VPieceNode> GetNodes() const;
-    void                SetNodes(const QVector<VPieceNode> &nodes);
+    auto GetNodes() const -> QVector<VPieceNode>;
+    void SetNodes(const QVector<VPieceNode> &nodes);
 
-    PiecePathType GetType() const;
-    void          SetType(PiecePathType type);
+    auto GetType() const -> PiecePathType;
+    void SetType(PiecePathType type);
 
-    QString GetName() const;
-    void    SetName(const QString &name);
+    auto GetName() const -> QString;
+    void SetName(const QString &name);
 
-    Qt::PenStyle GetPenType() const;
-    void         SetPenType(const Qt::PenStyle &type);
+    auto GetPenType() const -> Qt::PenStyle;
+    void SetPenType(const Qt::PenStyle &type);
 
-    bool IsCutPath() const;
+    auto IsCutPath() const -> bool;
     void SetCutPath(bool cut);
 
-    QString GetVisibilityTrigger() const;
-    void    SetVisibilityTrigger(const QString &formula);
+    auto GetVisibilityTrigger() const -> QString;
+    void SetVisibilityTrigger(const QString &formula);
 
-    void SetFirstToCuttingCountour(bool value);
-    bool IsFirstToCuttingCountour() const;
+    void SetFirstToCuttingContour(bool value);
+    auto IsFirstToCuttingContour() const -> bool;
 
-    void SetLastToCuttingCountour(bool value);
-    bool IsLastToCuttingCountour() const;
+    void SetLastToCuttingContour(bool value);
+    auto IsLastToCuttingContour() const -> bool;
 
-    QVector<QPointF>          PathPoints(const VContainer *data,
-                                         const QVector<QPointF> &cuttingPath = QVector<QPointF>()) const;
-    QVector<VPointF>          PathNodePoints(const VContainer *data, bool showExcluded = true) const;
-    QVector<QVector<QPointF> > PathCurvePoints(const VContainer *data) const;
-    QVector<VSAPoint>         SeamAllowancePoints(const VContainer *data, qreal width, bool reverse) const;
+    void SetNotMirrored(bool value);
+    auto IsNotMirrored() const -> bool;
 
-    QPainterPath          PainterPath(const VContainer *data, const QVector<QPointF> &cuttingPath) const;
-    QVector<QPainterPath> CurvesPainterPath(const VContainer *data) const;
+    auto PathPoints(const VContainer *data, const QVector<QPointF> &cuttingPath = QVector<QPointF>()) const
+        -> QVector<VLayoutPoint>;
+    auto PathNodePoints(const VContainer *data, bool showExcluded = true) const -> QVector<VPointF>;
+    auto PathCurvePoints(const VContainer *data) const -> QVector<QVector<QPointF>>;
+    auto SeamAllowancePoints(const VContainer *data, qreal width, bool reverse) const -> QVector<VSAPoint>;
 
-    QList<quint32> Dependencies() const;
-    QVector<quint32> MissingNodes(const VPiecePath &path) const;
+    auto PainterPath(const VContainer *data, const QVector<QPointF> &cuttingPath) const -> QPainterPath;
+    auto CurvesPainterPath(const VContainer *data) const -> QVector<QPainterPath>;
 
-    QString NodeName(int nodeIndex, const VContainer *data) const;
+    auto Dependencies() const -> QList<quint32>;
+    auto MissingNodes(const VPiecePath &path) const -> QVector<quint32>;
 
-    int  indexOfNode(quint32 id) const;
+    auto NodeName(int nodeIndex, const VContainer *data) const -> QString;
+
+    auto indexOfNode(quint32 id) const -> int;
     void NodeOnEdge(quint32 index, VPieceNode &p1, VPieceNode &p2) const;
-    bool Contains(quint32 id) const;
-    bool OnEdge(quint32 p1, quint32 p2) const;
-    int  Edge(quint32 p1, quint32 p2) const;
+    auto Contains(quint32 id) const -> bool;
+    auto OnEdge(quint32 p1, quint32 p2) const -> bool;
+    auto Edge(quint32 p1, quint32 p2) const -> vsizetype;
 
-    QVector<VPieceNode> ListNodePoint() const;
+    auto ListNodePoint() const -> QVector<VPieceNode>;
 
-    VPiecePath RemoveEdge(quint32 index) const;
+    auto RemoveEdge(quint32 index) const -> VPiecePath;
 
-    VSAPoint StartSegment(const VContainer *data, int i, bool reverse) const;
-    VSAPoint EndSegment(const VContainer *data, int i, bool reverse) const;
+    auto StartSegment(const VContainer *data, int i) const -> VSAPoint;
+    auto EndSegment(const VContainer *data, int i) const -> VSAPoint;
 
-    QPointF NodePreviousPoint(const VContainer *data, int i) const;
-    QPointF NodeNextPoint(const VContainer *data, int i) const;
+    auto NodePreviousPoint(const VContainer *data, int i) const -> QPointF;
+    auto NodeNextPoint(const VContainer *data, int i) const -> QPointF;
 
-    bool IsVisible(const QHash<QString, QSharedPointer<VInternalVariable> > *vars) const;
+    auto IsVisible(const QHash<QString, QSharedPointer<VInternalVariable>> *vars) const -> bool;
 
-    static int indexOfNode(const QVector<VPieceNode> &nodes, quint32 id);
+    static auto indexOfNode(const QVector<VPieceNode> &nodes, quint32 id) -> int;
 
-    static int FindInLoopNotExcludedUp(int start, const QVector<VPieceNode> &nodes);
-    static int FindInLoopNotExcludedDown(int start, const QVector<VPieceNode> &nodes);
+    static auto FindInLoopNotExcludedUp(vsizetype start, const QVector<VPieceNode> &nodes) -> vsizetype;
+    static auto FindInLoopNotExcludedDown(vsizetype start, const QVector<VPieceNode> &nodes) -> vsizetype;
 
-    static VSAPoint StartSegment(const VContainer *data, const QVector<VPieceNode> &nodes, int i, bool reverse);
-    static VSAPoint EndSegment(const VContainer *data, const QVector<VPieceNode> &nodes, int i, bool reverse);
+    static auto StartSegment(const VContainer *data, const QVector<VPieceNode> &nodes, vsizetype i) -> VSAPoint;
+    static auto EndSegment(const VContainer *data, const QVector<VPieceNode> &nodes, vsizetype i) -> VSAPoint;
 
-    static VSAPoint PreparePointEkv(const VPieceNode &node, const VContainer *data);
+    static auto PreparePointEkv(const VPieceNode &node, const VContainer *data) -> VSAPoint;
 
-    static QVector<VSAPoint> CurveSeamAllowanceSegment(const VContainer *data, const QVector<VPieceNode> &nodes,
-                                                       const QSharedPointer<VAbstractCurve> &curve,
-                                                       int i, bool reverse, qreal width);
+    static auto CurveSeamAllowanceSegment(const VContainer *data, const QVector<VPieceNode> &nodes,
+                                          const QSharedPointer<VAbstractCurve> &curve, vsizetype i, bool reverse,
+                                          qreal width, const QLineF &mirrorLine, const QString &piece = QString())
+        -> QVector<VSAPoint>;
 
-    static QString NodeName(const QVector<VPieceNode> &nodes, int nodeIndex, const VContainer *data);
+    static auto NodeName(const QVector<VPieceNode> &nodes, vsizetype nodeIndex, const VContainer *data) -> QString;
+
+    static auto NodesToPoints(const VContainer *data, const QVector<VPieceNode> &nodes,
+                              const QString &piece = QString()) -> QVector<VLayoutPoint>;
+    static auto MakePainterPath(const QVector<QPointF> &points) -> QPainterPath;
 
 private:
     QSharedDataPointer<VPiecePathData> d;
 };
 
-Q_DECLARE_TYPEINFO(VPiecePath, Q_MOVABLE_TYPE);
-Q_DECLARE_METATYPE(VPiecePath)
+Q_DECLARE_TYPEINFO(VPiecePath, Q_MOVABLE_TYPE); // NOLINT
+Q_DECLARE_METATYPE(VPiecePath)                  // NOLINT
 
 #endif // VPIECEPATH_H

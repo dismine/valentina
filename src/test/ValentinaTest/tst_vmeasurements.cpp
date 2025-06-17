@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -27,16 +27,22 @@
  *************************************************************************/
 
 #include "tst_vmeasurements.h"
-#include "../vformat/vmeasurements.h"
-#include "../ifc/xml/vvstconverter.h"
 #include "../ifc/xml/vvitconverter.h"
-#include "../vpatterndb/pmsystems.h"
+#include "../ifc/xml/vvstconverter.h"
+#include "../vformat/vmeasurements.h"
+#include "../vpatterndb/vcontainer.h"
 
 #include <QtTest>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
-TST_VMeasurements::TST_VMeasurements(QObject *parent) :
-    QObject(parent)
+TST_VMeasurements::TST_VMeasurements(QObject *parent)
+  : QObject(parent)
 {
 }
 
@@ -46,17 +52,19 @@ TST_VMeasurements::TST_VMeasurements(QObject *parent) :
  */
 void TST_VMeasurements::CreateEmptyMultisizeFile()
 {
-    Unit mUnit = Unit::Cm;
-    const int height = 176;
-    const int size = 50;
+    Unit const mUnit = Unit::Cm;
 
-    QSharedPointer<VContainer> data = QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit,
-                                                                                VContainer::UniqueNamespace()));
-    data->SetHeight(height);
-    data->SetSize(size);
+    auto const data = QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit, VContainer::UniqueNamespace()));
+    auto m_xDimension = QSharedPointer<VXMeasurementDimension>::create(mUnit, 50, 200, 6);
+    m_xDimension->SetBaseValue(176);
 
-    QSharedPointer<VMeasurements> m =
-            QSharedPointer<VMeasurements>(new VMeasurements(mUnit, size, height, data.data()));
+    auto m_yDimension = QSharedPointer<VYMeasurementDimension>::create(mUnit, 22, 72, 2);
+    m_yDimension->SetBaseValue(50);
+    m_yDimension->SetBodyMeasurement(true);
+
+    QVector<MeasurementDimension_p> const dimensions{m_xDimension, m_yDimension};
+
+    auto const m = QSharedPointer<VMeasurements>(new VMeasurements(mUnit, dimensions, data.data()));
 
     QTemporaryFile file;
     QString fileName;
@@ -80,7 +88,7 @@ void TST_VMeasurements::CreateEmptyMultisizeFile()
 
     try
     {
-        VDomDocument::ValidateXML(VVSTConverter::CurrentSchema, fileName);
+        VVSTConverter const converter(fileName);
     }
     catch (VException &e)
     {
@@ -94,13 +102,11 @@ void TST_VMeasurements::CreateEmptyMultisizeFile()
  */
 void TST_VMeasurements::CreateEmptyIndividualFile()
 {
-    Unit mUnit = Unit::Cm;
+    Unit const mUnit = Unit::Cm;
 
-    QSharedPointer<VContainer> data = QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit,
-                                                                                VContainer::UniqueNamespace()));
+    auto const data = QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit, VContainer::UniqueNamespace()));
 
-    QSharedPointer<VMeasurements> m =
-            QSharedPointer<VMeasurements>(new VMeasurements(mUnit, data.data()));
+    auto const m = QSharedPointer<VMeasurements>(new VMeasurements(mUnit, data.data()));
 
     QTemporaryFile file;
     QString fileName;
@@ -121,118 +127,10 @@ void TST_VMeasurements::CreateEmptyIndividualFile()
 
     try
     {
-        VDomDocument::ValidateXML(VVITConverter::CurrentSchema, fileName);
+        VVITConverter const converter(fileName);
     }
     catch (VException &e)
     {
         QFAIL(e.ErrorMessage().toUtf8().constData());
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ValidPMCodesMultisizeFile helps to check that all current pattern making systems match pattern inside XSD
- * scheme.
- */
-void TST_VMeasurements::ValidPMCodesMultisizeFile()
-{
-    Unit mUnit = Unit::Cm;
-    const int height = 176;
-    const int size = 50;
-
-    QSharedPointer<VContainer> data = QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit,
-                                                                                VContainer::UniqueNamespace()));
-    data->SetHeight(height);
-    data->SetSize(size);
-
-    QSharedPointer<VMeasurements> m =
-            QSharedPointer<VMeasurements>(new VMeasurements(mUnit, size, height, data.data()));
-
-    const QStringList listSystems = ListPMSystems();
-    for (int i = 0; i < listSystems.size(); ++i)
-    {
-        QString code = listSystems.at(i);
-        code.remove(0, 1); // remove 'p'
-        m->SetPMSystem(code);
-
-        QTemporaryFile file;
-        QString fileName;
-        if (file.open())
-        {
-            fileName = file.fileName();
-            file.close();
-            file.remove();
-            QString error;
-            const bool result = m->SaveDocument(fileName, error);
-
-            const QString message = QString("Error: %1 for code=%2").arg(error, listSystems.at(i));
-            QVERIFY2(result, qUtf8Printable(message));
-        }
-        else
-        {
-            QFAIL("Can't open temporary file.");
-        }
-
-        try
-        {
-            VDomDocument::ValidateXML(VVSTConverter::CurrentSchema, fileName);
-        }
-        catch (VException &e)
-        {
-            const QString message = QString("Error: %1 for code=%2").arg(e.ErrorMessage(), listSystems.at(i));
-            QFAIL(qUtf8Printable(message));
-        }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ValidPMCodesIndividualFile helps to check that all current pattern making systems match pattern inside XSD
- * scheme.
- */
-void TST_VMeasurements::ValidPMCodesIndividualFile()
-{
-    Unit mUnit = Unit::Cm;
-
-    QSharedPointer<VContainer> data = QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit,
-                                                                                VContainer::UniqueNamespace()));
-
-    QSharedPointer<VMeasurements> m =
-            QSharedPointer<VMeasurements>(new VMeasurements(mUnit, data.data()));
-
-    const QStringList listSystems = ListPMSystems();
-    for (int i = 0; i < listSystems.size(); ++i)
-    {
-        QString code = listSystems.at(i);
-        code.remove(0, 1); // remove 'p'
-        m->SetPMSystem(code);
-
-        QTemporaryFile file;
-        QString fileName;
-        if (file.open())
-        {
-            fileName = file.fileName();
-            file.close();
-            file.remove();
-            QString error;
-            const bool result = m->SaveDocument(fileName, error);
-
-            const QString message = QString("Error: %1 for code=%2").arg(error, listSystems.at(i));
-            QVERIFY2(result, qUtf8Printable(message));
-        }
-        else
-        {
-            QFAIL("Can't open temporary file.");
-        }
-
-        try
-        {
-            VDomDocument::ValidateXML(VVITConverter::CurrentSchema, fileName);
-        }
-        catch (VException &e)
-        {
-            const QString message = QString("Error: %1 for code=%2").arg(e.ErrorMessage(), listSystems.at(i));
-            QFAIL(qUtf8Printable(message));
-        }
     }
 }

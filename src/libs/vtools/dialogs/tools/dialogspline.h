@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef DIALOGSPLINE_H
 #define DIALOGSPLINE_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QSharedPointer>
@@ -40,69 +39,77 @@
 #include "../vmisc/def.h"
 #include "dialogtool.h"
 
-template <class T> class QSharedPointer;
-
 namespace Ui
 {
-    class DialogSpline;
+class DialogSpline;
 }
 
 /**
  * @brief The DialogSpline class dialog for ToolSpline. Help create spline and edit option.
  */
-class DialogSpline : public DialogTool
+class DialogSpline final : public DialogTool
 {
-    Q_OBJECT
-public:
-    DialogSpline(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual ~DialogSpline() override;
+    Q_OBJECT // NOLINT
 
-    VSpline GetSpline() const;
-    void    SetSpline(const VSpline &spline);
+public:
+    DialogSpline(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
+    ~DialogSpline() override;
+
+    auto GetSpline() const -> VSpline;
+    void SetSpline(const VSpline &spline);
+
+    void SetNotes(const QString &notes);
+    auto GetNotes() const -> QString;
 
 public slots:
-    virtual void  ChosenObject(quint32 id, const SceneObject &type) override;
-    virtual void  PointNameChanged() override;
-    virtual void  ShowDialog(bool click) override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
+    void PointNameChanged() override;
+    void ShowDialog(bool click) override;
+
 protected:
-    virtual void  CheckState() final;
-    virtual void  ShowVisualization() override;
+    void ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void  SaveData() override;
-    virtual void  closeEvent(QCloseEvent *event) override;
+    void SaveData() override;
+    void closeEvent(QCloseEvent *event) override;
+    void changeEvent(QEvent *event) override;
+    auto IsValid() const -> bool override;
+
 private slots:
     void DeployAngle1TextEdit();
     void DeployAngle2TextEdit();
     void DeployLength1TextEdit();
     void DeployLength2TextEdit();
 
-    void Angle1Changed();
-    void Angle2Changed();
-    void Length1Changed();
-    void Length2Changed();
-
     void FXAngle1();
     void FXAngle2();
     void FXLength1();
     void FXLength2();
+
+    void EvalAngle1();
+    void EvalAngle2();
+    void EvalLength1();
+    void EvalLength2();
+
+    void ValidateAlias();
+
 private:
-    Q_DISABLE_COPY(DialogSpline)
+    Q_DISABLE_COPY_MOVE(DialogSpline) // NOLINT
 
     /** @brief ui keeps information about user interface */
     Ui::DialogSpline *ui;
 
     /** @brief spl spline */
-    VSpline spl;
+    VSpline spl{};
 
-    qint32 newDuplicate;
+    qint32 newDuplicate{-1};
 
     /** @brief formulaBaseHeight base height defined by dialogui */
-    int formulaBaseHeightAngle1;
-    int formulaBaseHeightAngle2;
-    int formulaBaseHeightLength1;
-    int formulaBaseHeightLength2;
+    int formulaBaseHeightAngle1{0};
+    int formulaBaseHeightAngle2{0};
+    int formulaBaseHeightLength1{0};
+    int formulaBaseHeightLength2{0};
 
     /** @brief timerAngle1 timer of check first angle formula */
     QTimer *timerAngle1;
@@ -111,20 +118,30 @@ private:
     QTimer *timerLength2;
 
     /** @brief flagAngle1 true if value of first angle is correct */
-    bool flagAngle1;
-    bool flagAngle2;
-    bool flagLength1;
-    bool flagLength2;
+    bool flagAngle1{false};
+    bool flagAngle2{false};
+    bool flagLength1{false};
+    bool flagLength2{false};
+    bool flagError{false};
+    bool flagAlias{true};
 
-    const QSharedPointer<VPointF> GetP1() const;
-    const QSharedPointer<VPointF> GetP4() const;
+    QString originAliasSuffix{};
 
-    void EvalAngle1();
-    void EvalAngle2();
-    void EvalLength1();
-    void EvalLength2();
+    /** @brief number number of handled objects */
+    qint32 number{0};
 
-    VSpline CurrentSpline() const;
+    auto GetP1() const -> QSharedPointer<VPointF>;
+    auto GetP4() const -> QSharedPointer<VPointF>;
+
+    auto CurrentSpline() const -> VSpline;
+
+    void InitIcons();
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto DialogSpline::IsValid() const -> bool
+{
+    return flagAngle1 && flagAngle2 && flagLength1 && flagLength2 && flagError && flagAlias;
+}
 
 #endif // DIALOGSPLINE_H

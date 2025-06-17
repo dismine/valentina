@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 #ifndef VNODEARC_H
 #define VNODEARC_H
 
-#include <qcompilerdetection.h>
+
 #include <QGraphicsPathItem>
 #include <QMetaObject>
 #include <QObject>
@@ -45,12 +45,12 @@
  */
 class VNodeArc :public VAbstractNode
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     static void Create(const VAbstractNodeInitData &initData);
 
     static const QString ToolType;
-    virtual QString getTagName() const override;
+    virtual auto getTagName() const -> QString override;
 public slots:
     virtual void FullUpdateFromFile() override {}
     virtual void AllowHover(bool enabled) override;
@@ -60,9 +60,10 @@ protected:
     virtual void ShowNode() override {}
     virtual void HideNode() override {}
 private:
-    Q_DISABLE_COPY(VNodeArc)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VNodeArc) // NOLINT
 
-    VNodeArc(const VAbstractNodeInitData &initData, QObject *qoParent = nullptr);
+    explicit VNodeArc(const VAbstractNodeInitData &initData, QObject *qoParent = nullptr);
 };
 
 #endif // VNODEARC_H4

@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,84 +29,91 @@
 #ifndef VMEASUREMENTCONVERTER_H
 #define VMEASUREMENTCONVERTER_H
 
-#include <qcompilerdetection.h>
 #include <QCoreApplication>
 #include <QString>
 #include <QtGlobal>
 
+#include "../vmisc/projectversion.h"
 #include "vabstractmconverter.h"
-#include "vabstractconverter.h"
 
 class QDomElement;
 
-class VVSTConverter : public VAbstractMConverter
+class VVSTConverter final : public VAbstractMConverter
 {
-    Q_DECLARE_TR_FUNCTIONS(VVSTConverter)
+    Q_OBJECT // NOLINT
+
 public:
     explicit VVSTConverter(const QString &fileName);
-    virtual ~VVSTConverter() Q_DECL_EQ_DEFAULT;
+    ~VVSTConverter() override = default;
 
     static const QString MeasurementMaxVerStr;
     static const QString CurrentSchema;
-// GCC 4.6 doesn't allow constexpr and const together
-#if !defined(__INTEL_COMPILER) && !defined(__clang__) && defined(__GNUC__) && (__GNUC__ * 100 + __GNUC_MINOR__) <= 406
-    static Q_DECL_CONSTEXPR int MeasurementMinVer = FORMAT_VERSION(0, 3, 0);
-    static Q_DECL_CONSTEXPR int MeasurementMaxVer = FORMAT_VERSION(0, 4, 4);
-#else
-    static Q_DECL_CONSTEXPR const int MeasurementMinVer = FORMAT_VERSION(0, 3, 0);
-    static Q_DECL_CONSTEXPR const int MeasurementMaxVer = FORMAT_VERSION(0, 4, 4);
-#endif
+    static constexpr const unsigned MeasurementMinVer = FormatVersion(0, 3, 0);
+    static constexpr const unsigned MeasurementMaxVer = FormatVersion(0, 6, 2);
+
+    static auto XSDSchemas() -> QHash<unsigned, QString>;
 
 protected:
-    virtual int     MinVer() const override;
-    virtual int     MaxVer() const override;
+    auto MinVer() const -> unsigned override;
+    auto MaxVer() const -> unsigned override;
 
-    virtual QString MinVerStr() const override;
-    virtual QString MaxVerStr() const override;
+    auto MinVerStr() const -> QString override;
+    auto MaxVerStr() const -> QString override;
 
-    virtual QString XSDSchema(int ver) const override;
-    virtual void    ApplyPatches() override;
-    virtual void    DowngradeToCurrentMaxVersion() override;
-    virtual bool    IsReadOnly() const override;
+    void ApplyPatches() override;
+    void DowngradeToCurrentMaxVersion() override;
+    auto IsReadOnly() const -> bool override;
+
+    auto Schemas() const -> QHash<unsigned, QString> override;
 
 private:
-    Q_DISABLE_COPY(VVSTConverter)
+    Q_DISABLE_COPY_MOVE(VVSTConverter) // NOLINT
     static const QString MeasurementMinVerStr;
 
     void AddNewTagsForV0_4_0();
     void RemoveTagsForV0_4_0();
     void ConvertMeasurementsToV0_4_0();
-    QDomElement AddMV0_4_0(const QString &name, qreal value, qreal sizeIncrease, qreal heightIncrease);
+    auto AddMV0_4_0(const QString &name, qreal value, qreal sizeIncrease, qreal heightIncrease) -> QDomElement;
     void PM_SystemV0_4_1();
     void ConvertMeasurementsToV0_4_2();
+
+    void AddNewTagsForV0_5_0();
+    void RemoveTagsForV0_5_0();
+    void ConvertMeasurementsToV0_5_0();
+
+    void ConvertCircumferenceAttreibuteToV0_5_4();
+
+    void ConvertPMSystemToV0_6_1();
 
     void ToV0_4_0();
     void ToV0_4_1();
     void ToV0_4_2();
-    void ToV0_4_3();
-    void ToV0_4_4();
+    void ToV0_5_0();
+    void ToV0_5_4();
+    void ToV0_6_1();
+    void ToV0_6_2();
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline int VVSTConverter::MinVer() const
+inline auto VVSTConverter::MinVer() const -> unsigned
 {
     return MeasurementMinVer;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline int VVSTConverter::MaxVer() const
+inline auto VVSTConverter::MaxVer() const -> unsigned
 {
     return MeasurementMaxVer;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QString VVSTConverter::MinVerStr() const
+inline auto VVSTConverter::MinVerStr() const -> QString
 {
     return MeasurementMinVerStr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QString VVSTConverter::MaxVerStr() const
+inline auto VVSTConverter::MaxVerStr() const -> QString
 {
     return MeasurementMaxVerStr;
 }

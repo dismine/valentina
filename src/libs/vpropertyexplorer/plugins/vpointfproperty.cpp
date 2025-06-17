@@ -28,53 +28,60 @@
 #include "vnumberproperty.h"
 
 VPE::VPointFProperty::VPointFProperty(const QString &name)
-    : VProperty(name, QVariant::PointF)
+    : VProperty(name,
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                QMetaType::QPointF)
+#else
+                QVariant::PointF)
+#endif
 {
-    d_ptr->VariantValue.setValue(0);
-    d_ptr->VariantValue.convert(QVariant::PointF);
+    vproperty_d_ptr->VariantValue.setValue(0);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::QPointF));
+#else
+    vproperty_d_ptr->VariantValue.convert(QVariant::PointF);
+#endif
 
-    VDoubleProperty* tmpX = new VDoubleProperty("X");
+    auto *tmpX = new VDoubleProperty("X");
     addChild(tmpX);
     tmpX->setUpdateBehaviour(true, false);
 
-    VDoubleProperty* tmpY = new VDoubleProperty("Y");
+    auto *tmpY = new VDoubleProperty("Y");
     addChild(tmpY);
     tmpY->setUpdateBehaviour(true, false);
 
     setValue(QPointF());
 }
 
-QVariant VPE::VPointFProperty::data(int column, int role) const
+auto VPE::VPointFProperty::data(int column, int role) const -> QVariant
 {
     if (column == DPC_Data && Qt::DisplayRole == role)
     {
         return getPointF();
     }
-    else
-        return VProperty::data(column, role);
+    return VProperty::data(column, role);
 }
 
-Qt::ItemFlags VPE::VPointFProperty::flags(int column) const
+auto VPE::VPointFProperty::flags(int column) const -> Qt::ItemFlags
 {
     if (column == DPC_Name || column == DPC_Data)
     {
         return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
     }
-    else
-        return Qt::NoItemFlags;
+    return Qt::NoItemFlags;
 }
 
-QPointF VPE::VPointFProperty::getPointF() const
+auto VPE::VPointFProperty::getPointF() const -> QPointF
 {
     QPointF tmpValue;
 
-    if (d_ptr->Children.count() < 2)
+    if (vproperty_d_ptr->Children.count() < 2)
     {
         return tmpValue;
     }
 
-    tmpValue.setX(d_ptr->Children.at(0)->getValue().toDouble());
-    tmpValue.setY(d_ptr->Children.at(1)->getValue().toDouble());
+    tmpValue.setX(vproperty_d_ptr->Children.at(0)->getValue().toDouble());
+    tmpValue.setY(vproperty_d_ptr->Children.at(1)->getValue().toDouble());
 
     return tmpValue;
 }
@@ -86,27 +93,35 @@ void VPE::VPointFProperty::setPointF(const QPointF &point)
 
 void VPE::VPointFProperty::setPointF(qreal x, qreal y)
 {
-    if (d_ptr->Children.count() < 2)
+    if (vproperty_d_ptr->Children.count() < 2)
     {
         return;
     }
 
     QVariant tmpX(x);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    tmpX.convert(QMetaType(QMetaType::Double));
+#else
     tmpX.convert(QVariant::Double);
+#endif
 
     QVariant tmpY(y);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    tmpY.convert(QMetaType(QMetaType::Double));
+#else
     tmpY.convert(QVariant::Double);
+#endif
 
-    d_ptr->Children.at(0)->setValue(tmpX);
-    d_ptr->Children.at(1)->setValue(tmpY);
+    vproperty_d_ptr->Children.at(0)->setValue(tmpX);
+    vproperty_d_ptr->Children.at(1)->setValue(tmpY);
 }
 
-QString VPE::VPointFProperty::type() const
+auto VPE::VPointFProperty::type() const -> QString
 {
     return "pointF";
 }
 
-VPE::VProperty *VPE::VPointFProperty::clone(bool include_children, VProperty *container) const
+auto VPE::VPointFProperty::clone(bool include_children, VProperty *container) const -> VPE::VProperty *
 {
     if (!container)
     {
@@ -115,7 +130,7 @@ VPE::VProperty *VPE::VPointFProperty::clone(bool include_children, VProperty *co
         if (!include_children)
         {
             const QList<VProperty*> &tmpChildren = container->getChildren();
-            for(auto tmpChild : tmpChildren)
+            for (auto *tmpChild : tmpChildren)
             {
                 container->removeChild(tmpChild);
                 delete tmpChild;
@@ -128,12 +143,12 @@ VPE::VProperty *VPE::VPointFProperty::clone(bool include_children, VProperty *co
 
 void VPE::VPointFProperty::setValue(const QVariant &value)
 {
-    QPointF tmpPoint = value.toPointF();
+    QPointF const tmpPoint = value.toPointF();
     setPointF(tmpPoint);
 }
 
-QVariant VPE::VPointFProperty::getValue() const
+auto VPE::VPointFProperty::getValue() const -> QVariant
 {
-    QPointF tmpValue = getPointF();
+    QPointF const tmpValue = getPointF();
     return QString("%1,%2").arg(QString::number(tmpValue.x()), QString::number(tmpValue.y()));
 }

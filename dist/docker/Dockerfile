@@ -1,4 +1,4 @@
-FROM gcc
+FROM gcc:latest
 MAINTAINER Roman Telezhynskyi <dismine@gmail.com>
 
 RUN apt-get update && apt-get install -y \
@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y \
     libqt5xml5 \
     libqt5xmlpatterns5 \
     xpdf \
+    ccache \
     && rm -rf /var/lib/apt/lists/*
 
 # Whatever you need more than what is on the base image required by your project

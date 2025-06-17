@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -30,31 +30,48 @@
 #define TAPEPREFERENCESCONFIGURATIONPAGE_H
 
 #include <QWidget>
+#include <memory>
+
+class QComboBox;
 
 namespace Ui
 {
-    class TapePreferencesConfigurationPage;
+class TapePreferencesConfigurationPage;
 }
 
 class TapePreferencesConfigurationPage : public QWidget
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit TapePreferencesConfigurationPage(QWidget *parent = nullptr);
-    virtual ~TapePreferencesConfigurationPage();
+    ~TapePreferencesConfigurationPage() override;
 
-    void Apply();
+    auto Apply() -> QStringList;
+
 protected:
-    virtual void changeEvent(QEvent* event) override;
+    void changeEvent(QEvent *event) override;
+
+private slots:
+    void ShortcutCellDoubleClicked(int row, int column);
+
 private:
-    Q_DISABLE_COPY(TapePreferencesConfigurationPage)
-    Ui::TapePreferencesConfigurationPage *ui;
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(TapePreferencesConfigurationPage) // NOLINT
+    std::unique_ptr<Ui::TapePreferencesConfigurationPage> ui;
     bool m_langChanged;
     bool m_systemChanged;
-    bool m_defGradationChanged;
+    bool m_sendCrashReportsChanged{false};
+    bool m_crashUserEmailChanged{false};
+    QList<QStringList> m_transientShortcuts{};
 
     void RetranslateUi();
+    void SetThemeModeComboBox();
+    void InitShortcuts(bool defaults = false);
+    void UpdateShortcutsTable();
+    void RetranslateShortcutsTable();
+    static void InitKnownMeasurements(QComboBox *combo);
+    void InitKnownMeasurementsDescription();
 };
 
 #endif // TAPEPREFERENCESCONFIGURATIONPAGE_H

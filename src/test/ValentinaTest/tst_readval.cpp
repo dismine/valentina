@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -28,15 +28,17 @@
 
 #include "tst_readval.h"
 #include "../qmuparser/qmudef.h"
-#include "../vmisc/logging.h"
+#include "../vmisc/compatibility.h"
 
 #include <QtTest>
 #include <limits>
 
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 TST_ReadVal::TST_ReadVal(QObject *parent)
-    : QObject(parent),
-      m_systemLocale(QLocale::system())
+  : QObject(parent),
+    m_systemLocale(QLocale::system())
 {
 }
 
@@ -49,9 +51,14 @@ void TST_ReadVal::TestReadVal_data()
     QTest::addColumn<QLocale>("locale");
 
     const QList<QLocale> allLocales =
-            QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
-    for(auto &locale : allLocales)
+        QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
+    for (const auto &locale : allLocales)
     {
+        if (not SupportedLocale(locale))
+        {
+            continue;
+        }
+
         PrepareVal(1., locale);
         PrepareVal(1.0, locale);
         PrepareVal(-1.0, locale);
@@ -83,19 +90,19 @@ void TST_ReadVal::TestInvalidData_data()
     // Test invalid values
     const QLocale locale = QLocale::c();
     PrepareString(QString(), locale);
-    PrepareString(QString("-1.000.5"), locale);
-    PrepareString(QString("1.000.5"), locale);
-    PrepareString(QString("-1.000,5"), locale);
-    PrepareString(QString("1.000,5"), locale);
-    PrepareString(QString("-1.0.00,5"), locale);
-    PrepareString(QString("1.0.00,5"), locale);
-    PrepareString(QString("7,5"), locale);
-    PrepareString(QString("-7,5"), locale);
-    PrepareString(QString("- 7,5"), locale);
-    PrepareString(QString("- 7.5"), locale);
-    PrepareString(QString("1,0,00.5"), locale);
-    PrepareString(QString("1,,000.5"), locale);
-    PrepareString(QString(",5"), locale);
+    PrepareString(u"-1.000.5"_s, locale);
+    PrepareString(u"1.000.5"_s, locale);
+    PrepareString(u"-1.000,5"_s, locale);
+    PrepareString(u"1.000,5"_s, locale);
+    PrepareString(u"-1.0.00,5"_s, locale);
+    PrepareString(u"1.0.00,5"_s, locale);
+    PrepareString(u"7,5"_s, locale);
+    PrepareString(u"-7,5"_s, locale);
+    PrepareString(u"- 7,5"_s, locale);
+    PrepareString(u"- 7.5"_s, locale);
+    PrepareString(u"1,0,00.5"_s, locale);
+    PrepareString(u"1,,000.5"_s, locale);
+    PrepareString(u",5"_s, locale);
     PrepareString(QChar(','), locale);
     PrepareString(QChar('.'), locale);
 }
@@ -122,9 +129,9 @@ void TST_ReadVal::PrepareVal(qreal val, const QLocale &locale)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TST_ReadVal::PrepareString(const QString &str, const QLocale &locale, qreal val,  int count)
+void TST_ReadVal::PrepareString(const QString &str, const QLocale &locale, qreal val, vsizetype count)
 {
-    const QString tag = QString("%1. String '%2'").arg(locale.name(), str);
+    const auto tag = QStringLiteral("%1. String '%2'").arg(locale.name(), str);
     QTest::newRow(qUtf8Printable(tag)) << str << count << val << locale;
 }
 
@@ -139,14 +146,17 @@ void TST_ReadVal::TestVal()
     qreal resVal = 0;
     QLocale::setDefault(locale);
 
-    const int resCount = ReadVal(formula, resVal, locale, locale.decimalPoint(), locale.groupSeparator());
+    const vsizetype resCount =
+        ReadVal(formula, resVal, locale, LocaleDecimalPoint(locale), LocaleGroupSeparator(locale));
 
-    QString errorMsg = QString("Conversion failed. Locale: '%1'.").arg(locale.name());
+    // cppcheck-suppress unreadVariable
+    auto errorMsg = QStringLiteral("Conversion failed. Locale: '%1'.").arg(locale.name());
     QVERIFY2(resCount == expCount, qUtf8Printable(errorMsg));
 
     if (resCount != -1)
     {
-        QString errorMsg = QString("Unexpected result. Locale: '%1'.").arg(locale.name());
+        // cppcheck-suppress unreadVariable
+        errorMsg = QStringLiteral("Unexpected result. Locale: '%1'.").arg(locale.name());
         QVERIFY2(QmuFuzzyComparePossibleNulls(resVal, expVal), qUtf8Printable(errorMsg));
     }
 }

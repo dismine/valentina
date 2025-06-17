@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -40,7 +40,8 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VLengthLine::VLengthLine()
-    :VInternalVariable(), d(new VLengthLineData)
+  : VInternalVariable(),
+    d(new VLengthLineData)
 {
     SetType(VarType::LineLength);
 }
@@ -48,25 +49,25 @@ VLengthLine::VLengthLine()
 //---------------------------------------------------------------------------------------------------------------------
 VLengthLine::VLengthLine(const VPointF *p1, const quint32 &p1Id, const VPointF *p2, const quint32 &p2Id,
                          Unit patternUnit)
-    :VInternalVariable(), d(new VLengthLineData(p1Id, p2Id, patternUnit))
+  : VInternalVariable(),
+    d(new VLengthLineData(p1Id, p2Id, patternUnit))
 {
+    // cppcheck-suppress unknownMacro
     SCASSERT(p1 != nullptr)
     SCASSERT(p2 != nullptr)
 
     SetType(VarType::LineLength);
-    SetName(QString(line_+"%1_%2").arg(p1->name(), p2->name()));
+    SetName(QString(line_ + "%1_%2").arg(p1->name(), p2->name()));
     SetValue(p1, p2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLengthLine::VLengthLine(const VLengthLine &var)
-    :VInternalVariable(var), d(var.d)
-{}
+COPY_CONSTRUCTOR_IMPL_2(VLengthLine, VInternalVariable)
 
 //---------------------------------------------------------------------------------------------------------------------
-VLengthLine &VLengthLine::operator=(const VLengthLine &var)
+auto VLengthLine::operator=(const VLengthLine &var) -> VLengthLine &
 {
-    if ( &var == this )
+    if (&var == this)
     {
         return *this;
     }
@@ -76,11 +77,25 @@ VLengthLine &VLengthLine::operator=(const VLengthLine &var)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLengthLine::~VLengthLine()
-{}
+VLengthLine::VLengthLine(VLengthLine &&var) noexcept
+  : VInternalVariable(std::move(var)),
+    d(std::move(var.d)) // NOLINT(bugprone-use-after-move)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLengthLine::Filter(quint32 id)
+auto VLengthLine::operator=(VLengthLine &&var) noexcept -> VLengthLine &
+{
+    VInternalVariable::operator=(var);
+    std::swap(d, var.d);
+    return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VLengthLine::~VLengthLine() = default;
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLengthLine::Filter(quint32 id) -> bool
 {
     return id == d->p1Id || id == d->p2Id;
 }
@@ -91,18 +106,17 @@ void VLengthLine::SetValue(const VPointF *p1, const VPointF *p2)
     SCASSERT(p1 != nullptr)
     SCASSERT(p2 != nullptr)
 
-    VInternalVariable::SetValue(FromPixel(QLineF(static_cast<QPointF>(*p1), static_cast<QPointF>(*p2)).length(),
-                                          d->patternUnit));
+    StoreValue(FromPixel(QLineF(static_cast<QPointF>(*p1), static_cast<QPointF>(*p2)).length(), d->patternUnit));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VLengthLine::GetP1Id() const
+auto VLengthLine::GetP1Id() const -> quint32
 {
     return d->p1Id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VLengthLine::GetP2Id() const
+auto VLengthLine::GetP2Id() const -> quint32
 {
     return d->p2Id;
 }

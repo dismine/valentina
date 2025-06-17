@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -33,32 +33,59 @@
 #include <QtGlobal>
 
 #include "../vmisc/def.h"
+#include "../vmisc/theme/themeDef.h"
+
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
 
 class VCurvePathItem : public QGraphicsPathItem
 {
 public:
-    explicit VCurvePathItem(QGraphicsItem *parent = nullptr);
-    virtual ~VCurvePathItem() = default;
+    explicit VCurvePathItem(VColorRole role, QGraphicsItem *parent = nullptr);
+    ~VCurvePathItem() override = default;
 
-    virtual QPainterPath shape() const override;
+    auto shape() const -> QPainterPath override;
 
-    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                       QWidget *widget = nullptr) override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::CurvePathItem)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Vis::CurvePathItem)
+    };
 
     void SetDirectionArrows(const QVector<QPair<QLineF, QLineF>> &arrows);
     void SetPoints(const QVector<QPointF> &points);
     void SetWidth(qreal width);
+
 protected:
     virtual void ScalePenWidth();
-private:
-    Q_DISABLE_COPY(VCurvePathItem)
 
-    QVector<QPair<QLineF, QLineF>> m_directionArrows;
-    QVector<QPointF> m_points;
+    auto GetColorRole() const -> VColorRole;
+    void SetColorRole(VColorRole role);
+
+private:
+    Q_DISABLE_COPY_MOVE(VCurvePathItem) // NOLINT
+
+    QVector<QPair<QLineF, QLineF>> m_directionArrows{};
+    QVector<QPointF> m_points{};
     qreal m_defaultWidth;
+    VColorRole m_role;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VCurvePathItem::SetColorRole(VColorRole role)
+{
+    m_role = role;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VCurvePathItem::GetColorRole() const -> VColorRole
+{
+    return m_role;
+}
+
+QT_WARNING_POP
 
 #endif // VCURVEPATHITEM_H

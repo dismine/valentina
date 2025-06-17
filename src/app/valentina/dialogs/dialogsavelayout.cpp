@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -27,38 +27,46 @@
  *************************************************************************/
 
 #include "dialogsavelayout.h"
-#include "ui_dialogsavelayout.h"
-#include "../options.h"
 #include "../core/vapplication.h"
-#include "../vmisc/vsettings.h"
 #include "../ifc/exception/vexception.h"
+#include "../vlayout/vlayoutexporter.h"
+#include "../vmisc/vvalentinasettings.h"
+#include "ui_dialogsavelayout.h"
 
 #include <QDir>
 #include <QFileDialog>
+#include <QGlobalStatic>
 #include <QMessageBox>
 #include <QProcess>
-#include <QtDebug>
 #include <QRegularExpression>
 #include <QtDebug>
-#include <QGlobalStatic>
 
-#ifndef Q_OS_WIN
-    Q_GLOBAL_STATIC_WITH_ARGS(const QString, baseFilenameRegExp, (QLatin1String("^[^/]+$")))
-#else
-    Q_GLOBAL_STATIC_WITH_ARGS(const QString, baseFilenameRegExp, (QLatin1String("^[^\\:?\"*|/<>]+$")))
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
 #endif
 
-bool DialogSaveLayout::havePdf = false;
-bool DialogSaveLayout::tested  = false;
+using namespace Qt::Literals::StringLiterals;
+
+namespace
+{
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
+
+#ifndef Q_OS_WIN
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, baseFilenameRegExp, ("^[^\\/]+$"_L1)) // NOLINT
+#else
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, baseFilenameRegExp, ("^[^\\:?\"*|\\/<>]+$"_L1)) // NOLINT
+#endif
+
+QT_WARNING_POP
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName, QWidget *parent)
-    :  VAbstractLayoutDialog(parent),
-      ui(new Ui::DialogSaveLAyout),
-      count(count),
-      isInitialized(false),
-      m_mode(mode),
-      m_tiledExportMode(false)
+  : VAbstractLayoutDialog(parent),
+    ui(new Ui::DialogSaveLAyout),
+    m_count(count),
+    m_mode(mode)
 {
     ui->setupUi(this);
 
@@ -69,123 +77,92 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
     ui->lineEditPath->setClearButtonEnabled(true);
     ui->lineEditFileName->setClearButtonEnabled(true);
 
-    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+    VAbstractApplication::VApp()->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
     QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     SCASSERT(bOk != nullptr)
     bOk->setEnabled(false);
 
-    ui->lineEditFileName->setValidator( new QRegularExpressionValidator(QRegularExpression(*baseFilenameRegExp), this));
+    ui->lineEditFileName->setValidator(new QRegularExpressionValidator(QRegularExpression(*baseFilenameRegExp), this));
 
-    const QString mask = fileName+QLatin1String("_");
     if (VApplication::IsGUIMode())
     {
-        ui->lineEditFileName->setText(mask);
+        ui->lineEditFileName->setText(fileName);
     }
     else
     {
-        if (QRegularExpression(*baseFilenameRegExp).match(mask).hasMatch())
+        if (QRegularExpression(*baseFilenameRegExp).match(fileName).hasMatch())
         {
-            ui->lineEditFileName->setText(mask);
+            ui->lineEditFileName->setText(fileName);
         }
         else
         {
-            VException e(tr("The base filename does not match a regular expression."));
-            throw e;
+            throw VException(tr("The base filename does not match a regular expression."));
         }
     }
 
-    for (auto &v : InitFormats())
-    {
-        ui->comboBoxFormat->addItem(v.first, QVariant(static_cast<int>(v.second)));
-    }
-#ifdef V_NO_ASSERT // Temporarily unavailable
-    RemoveFormatFromList(LayoutExportFormats::OBJ);
-#endif
+    InitFileFormats();
+    connect(ui->comboBoxFormatType,
+            QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this,
+            &DialogSaveLayout::ShowExample);
+    connect(ui->comboBoxFormat,
+            QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this,
+            [this](int index)
+            {
+                if (index == -1)
+                {
+                    ui->comboBoxFormatType->clear();
+                    return;
+                }
 
-    if (m_mode != Draw::Layout)
-    {
-        RemoveFormatFromList(LayoutExportFormats::PDFTiled);
-    }
-    else
-    {
-        ui->checkBoxTextAsPaths->setVisible(false);
-    }
+                ui->comboBoxFormatType->blockSignals(true);
+                InitFileFormatTypes(static_cast<LayoutExportFileFormat>(ui->comboBoxFormat->currentData().toInt()));
+                ui->comboBoxFormatType->setCurrentIndex(-1);
+                ui->comboBoxFormatType->blockSignals(false);
+
+                ui->comboBoxFormatType->setCurrentIndex(0);
+            });
+
+    InitDxfCompatibility();
 
     connect(bOk, &QPushButton::clicked, this, &DialogSaveLayout::Save);
     connect(ui->lineEditFileName, &QLineEdit::textChanged, this, &DialogSaveLayout::ShowExample);
-    connect(ui->comboBoxFormat, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            this, &DialogSaveLayout::ShowExample);
-    connect(ui->pushButtonBrowse, &QPushButton::clicked, this, [this]()
-    {
-        const QString dirPath = qApp->ValentinaSettings()->GetPathLayout();
-        bool usedNotExistedDir = false;
-        QDir directory(dirPath);
-        if (not directory.exists())
-        {
-            usedNotExistedDir = directory.mkpath(QChar('.'));
-        }
+    connect(ui->pushButtonBrowse, &QPushButton::clicked, this,
+            [this]()
+            {
+                VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+                const QString dirPath = settings->GetPathLayoutExport();
 
-        const QString dir = QFileDialog::getExistingDirectory(this, tr("Select folder"), dirPath,
-                                                              QFileDialog::ShowDirsOnly
-                                                              | QFileDialog::DontResolveSymlinks
-#ifdef Q_OS_LINUX
-                                                              | QFileDialog::DontUseNativeDialog
-#endif
-                                                              );
-        if (not dir.isEmpty())
-        {// If paths equal the signal will not be called, we will do this manually
-            dir == ui->lineEditPath->text() ? PathChanged(dir) : ui->lineEditPath->setText(dir);
-        }
+                const QString dir = QFileDialog::getExistingDirectory(
+                    this, tr("Select folder"), dirPath,
+                    VAbstractApplication::VApp()->NativeFileDialog(QFileDialog::ShowDirsOnly |
+                                                                   QFileDialog::DontResolveSymlinks));
+                if (not dir.isEmpty())
+                { // If paths equal the signal will not be called, we will do this manually
+                    dir == ui->lineEditPath->text() ? PathChanged(dir) : ui->lineEditPath->setText(dir);
 
-        if (usedNotExistedDir)
-        {
-            QDir directory(dirPath);
-            directory.rmpath(QChar('.'));
-        }
-    });
+                    settings->SetPathLayoutExport(dir);
+                }
+            });
     connect(ui->lineEditPath, &QLineEdit::textChanged, this, &DialogSaveLayout::PathChanged);
 
-    ui->lineEditPath->setText(qApp->ValentinaSettings()->GetPathLayout());
+    ui->lineEditPath->setText(VAbstractValApplication::VApp()->ValentinaSettings()->GetPathLayoutExport());
 
-    InitTemplates(ui->comboBoxTemplates);
+    InitTileTemplates(ui->comboBoxTemplates);
+
+    connect(ui->toolButtonScaleConnected, &QToolButton::clicked, this, &DialogSaveLayout::ToggleScaleConnection);
+
+    connect(ui->doubleSpinBoxHorizontalScale, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &DialogSaveLayout::HorizontalScaleChanged);
+    connect(ui->doubleSpinBoxVerticalScale, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &DialogSaveLayout::VerticalScaleChanged);
 
     ReadSettings();
 
-    // connect for the template drop down box of the tiled pds
-    connect(ui->comboBoxTemplates, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            this, &DialogSaveLayout::WriteSettings);
-
-    // connects for the margins of the tiled pdf
-    connect(ui->doubleSpinBoxLeftField, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-            this, &DialogSaveLayout::WriteSettings);
-    connect(ui->doubleSpinBoxTopField, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-            this, &DialogSaveLayout::WriteSettings);
-    connect(ui->doubleSpinBoxRightField, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-            this, &DialogSaveLayout::WriteSettings);
-    connect(ui->doubleSpinBoxBottomField, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-            this, &DialogSaveLayout::WriteSettings);
-
-    // connects for the orientation buttons for the tiled pdf
-    connect(ui->toolButtonPortrait, &QToolButton::toggled, this, &DialogSaveLayout::WriteSettings);
-    connect(ui->toolButtonLandscape, &QToolButton::toggled, this, &DialogSaveLayout::WriteSettings);
-
-    ShowExample();//Show example for current format.
+    ShowExample(); // Show example for current format.
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogSaveLayout::InitTemplates(QComboBox *comboBoxTemplates)
-{
-    SCASSERT(comboBoxTemplates != nullptr)
-    VAbstractLayoutDialog::InitTemplates(comboBoxTemplates);
-
-    // remove unused formats
-    for (int i = static_cast<int>(PaperSizeTemplate::Roll24in); i <= static_cast<int>(PaperSizeTemplate::Custom); ++i)
-    {
-       comboBoxTemplates->removeItem(comboBoxTemplates->findData(i));
-    }
-}
-
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -193,23 +170,38 @@ void DialogSaveLayout::SelectFormat(LayoutExportFormats format)
 {
     if (static_cast<int>(format) < 0 || format >= LayoutExportFormats::COUNT)
     {
-        VException e(tr("Tried to use out of range format number."));
-        throw e;
+        throw VException(tr("Tried to use out of range file format type number."));
     }
 
-    const int i = ui->comboBoxFormat->findData(static_cast<int>(format));
+    const LayoutExportFileFormat fileFormat = VLayoutExporter::LayoutExportFileFormat(format);
+
+    int i = ui->comboBoxFormat->findData(static_cast<int>(fileFormat));
     if (i < 0)
     {
-        VException e(tr("Selected not present format."));
-        throw e;
+        throw VException(tr("Selected not present file format."));
     }
+
+    ui->comboBoxFormat->blockSignals(true);
     ui->comboBoxFormat->setCurrentIndex(i);
+    ui->comboBoxFormat->blockSignals(false);
+
+    ui->comboBoxFormatType->blockSignals(true);
+    InitFileFormatTypes(fileFormat);
+    ui->comboBoxFormatType->setCurrentIndex(-1);
+    ui->comboBoxFormatType->blockSignals(false);
+
+    i = ui->comboBoxFormatType->findData(static_cast<int>(format));
+    if (i < 0)
+    {
+        throw VException(tr("Selected not present file format type."));
+    }
+    ui->comboBoxFormatType->setCurrentIndex(i);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSaveLayout::SetBinaryDXFFormat(bool binary)
 {
-    switch(Format())
+    switch (Format())
     {
         case LayoutExportFormats::DXF_AC1006_Flat:
         case LayoutExportFormats::DXF_AC1009_Flat:
@@ -220,33 +212,10 @@ void DialogSaveLayout::SetBinaryDXFFormat(bool binary)
         case LayoutExportFormats::DXF_AC1021_Flat:
         case LayoutExportFormats::DXF_AC1024_Flat:
         case LayoutExportFormats::DXF_AC1027_Flat:
-        case LayoutExportFormats::DXF_AC1006_AAMA:
-        case LayoutExportFormats::DXF_AC1009_AAMA:
-        case LayoutExportFormats::DXF_AC1012_AAMA:
-        case LayoutExportFormats::DXF_AC1014_AAMA:
-        case LayoutExportFormats::DXF_AC1015_AAMA:
-        case LayoutExportFormats::DXF_AC1018_AAMA:
-        case LayoutExportFormats::DXF_AC1021_AAMA:
-        case LayoutExportFormats::DXF_AC1024_AAMA:
-        case LayoutExportFormats::DXF_AC1027_AAMA:
-        case LayoutExportFormats::DXF_AC1006_ASTM:
-        case LayoutExportFormats::DXF_AC1009_ASTM:
-        case LayoutExportFormats::DXF_AC1012_ASTM:
-        case LayoutExportFormats::DXF_AC1014_ASTM:
-        case LayoutExportFormats::DXF_AC1015_ASTM:
-        case LayoutExportFormats::DXF_AC1018_ASTM:
-        case LayoutExportFormats::DXF_AC1021_ASTM:
-        case LayoutExportFormats::DXF_AC1024_ASTM:
-        case LayoutExportFormats::DXF_AC1027_ASTM:
+        case LayoutExportFormats::DXF_AAMA:
+        case LayoutExportFormats::DXF_ASTM:
             ui->checkBoxBinaryDXF->setChecked(binary);
             break;
-        case LayoutExportFormats::SVG:
-        case LayoutExportFormats::PDF:
-        case LayoutExportFormats::PDFTiled:
-        case LayoutExportFormats::PNG:
-        case LayoutExportFormats::OBJ:
-        case LayoutExportFormats::PS:
-        case LayoutExportFormats::EPS:
         default:
             ui->checkBoxBinaryDXF->setChecked(false);
             break;
@@ -254,9 +223,9 @@ void DialogSaveLayout::SetBinaryDXFFormat(bool binary)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogSaveLayout::IsBinaryDXFFormat() const
+auto DialogSaveLayout::IsBinaryDXFFormat() const -> bool
 {
-    switch(Format())
+    switch (Format())
     {
         case LayoutExportFormats::DXF_AC1006_Flat:
         case LayoutExportFormats::DXF_AC1009_Flat:
@@ -267,57 +236,152 @@ bool DialogSaveLayout::IsBinaryDXFFormat() const
         case LayoutExportFormats::DXF_AC1021_Flat:
         case LayoutExportFormats::DXF_AC1024_Flat:
         case LayoutExportFormats::DXF_AC1027_Flat:
-        case LayoutExportFormats::DXF_AC1006_AAMA:
-        case LayoutExportFormats::DXF_AC1009_AAMA:
-        case LayoutExportFormats::DXF_AC1012_AAMA:
-        case LayoutExportFormats::DXF_AC1014_AAMA:
-        case LayoutExportFormats::DXF_AC1015_AAMA:
-        case LayoutExportFormats::DXF_AC1018_AAMA:
-        case LayoutExportFormats::DXF_AC1021_AAMA:
-        case LayoutExportFormats::DXF_AC1024_AAMA:
-        case LayoutExportFormats::DXF_AC1027_AAMA:
-        case LayoutExportFormats::DXF_AC1006_ASTM:
-        case LayoutExportFormats::DXF_AC1009_ASTM:
-        case LayoutExportFormats::DXF_AC1012_ASTM:
-        case LayoutExportFormats::DXF_AC1014_ASTM:
-        case LayoutExportFormats::DXF_AC1015_ASTM:
-        case LayoutExportFormats::DXF_AC1018_ASTM:
-        case LayoutExportFormats::DXF_AC1021_ASTM:
-        case LayoutExportFormats::DXF_AC1024_ASTM:
-        case LayoutExportFormats::DXF_AC1027_ASTM:
+        case LayoutExportFormats::DXF_AAMA:
+        case LayoutExportFormats::DXF_ASTM:
             return ui->checkBoxBinaryDXF->isChecked();
-        case LayoutExportFormats::SVG:
-        case LayoutExportFormats::PDF:
-        case LayoutExportFormats::PDFTiled:
-        case LayoutExportFormats::PNG:
-        case LayoutExportFormats::OBJ:
-        case LayoutExportFormats::PS:
-        case LayoutExportFormats::EPS:
         default:
             return false;
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogSaveLayout::MakeHelpFormatList()
+auto DialogSaveLayout::DxfCompatibility() const -> DXFApparelCompatibility
 {
-   QString out("\n");
-   const auto formats = InitFormats();
-   for(int i = 0; i < formats.size(); ++i)
-   {
-       out += QLatin1String("\t* ") + formats.at(i).first + QLatin1String(" = ")
-               + QString::number(static_cast<int>(formats.at(i).second));
+    switch (Format())
+    {
+        case LayoutExportFormats::DXF_AAMA:
+        case LayoutExportFormats::DXF_ASTM:
+            return static_cast<DXFApparelCompatibility>(ui->comboBoxDxfCompatibility->currentData().toInt());
+        default:
+            return DXFApparelCompatibility::STANDARD;
+    }
+}
 
-       if (i < formats.size() - 1)
-       {
-           out += QLatin1String(",\n");
-       }
-       else
-       {
-           out += QLatin1String(".\n");
-       }
-   }
-   return out;
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSaveLayout::SetDxfCompatibility(DXFApparelCompatibility type)
+{
+    switch (Format())
+    {
+        case LayoutExportFormats::DXF_AAMA:
+        case LayoutExportFormats::DXF_ASTM:
+        {
+            if (static_cast<int>(type) < 0 || type >= DXFApparelCompatibility::COUNT)
+            {
+                break;
+            }
+
+            const int i = ui->comboBoxDxfCompatibility->findData(static_cast<int>(type));
+            if (i < 0)
+            {
+                break;
+            }
+            ui->comboBoxDxfCompatibility->setCurrentIndex(i);
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSaveLayout::SetShowGrainline(bool show)
+{
+    switch (Format())
+    {
+        case LayoutExportFormats::DXF_AC1006_Flat:
+        case LayoutExportFormats::DXF_AC1009_Flat:
+        case LayoutExportFormats::DXF_AC1012_Flat:
+        case LayoutExportFormats::DXF_AC1014_Flat:
+        case LayoutExportFormats::DXF_AC1015_Flat:
+        case LayoutExportFormats::DXF_AC1018_Flat:
+        case LayoutExportFormats::DXF_AC1021_Flat:
+        case LayoutExportFormats::DXF_AC1024_Flat:
+        case LayoutExportFormats::DXF_AC1027_Flat:
+        case LayoutExportFormats::SVG:
+        case LayoutExportFormats::PDF:
+        case LayoutExportFormats::PDFTiled:
+        case LayoutExportFormats::PNG:
+        case LayoutExportFormats::PS:
+        case LayoutExportFormats::EPS:
+        case LayoutExportFormats::TIF:
+        case LayoutExportFormats::HPGL:
+        case LayoutExportFormats::HPGL2:
+        case LayoutExportFormats::HPGL_PLT:
+        case LayoutExportFormats::HPGL2_PLT:
+            ui->checkBoxShowGrainline->setChecked(show);
+            break;
+        default:
+            ui->checkBoxShowGrainline->setChecked(true);
+            break;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogSaveLayout::IsShowGrainline() const -> bool
+{
+    switch (Format())
+    {
+        case LayoutExportFormats::DXF_AC1006_Flat:
+        case LayoutExportFormats::DXF_AC1009_Flat:
+        case LayoutExportFormats::DXF_AC1012_Flat:
+        case LayoutExportFormats::DXF_AC1014_Flat:
+        case LayoutExportFormats::DXF_AC1015_Flat:
+        case LayoutExportFormats::DXF_AC1018_Flat:
+        case LayoutExportFormats::DXF_AC1021_Flat:
+        case LayoutExportFormats::DXF_AC1024_Flat:
+        case LayoutExportFormats::DXF_AC1027_Flat:
+        case LayoutExportFormats::SVG:
+        case LayoutExportFormats::PDF:
+        case LayoutExportFormats::PDFTiled:
+        case LayoutExportFormats::PNG:
+        case LayoutExportFormats::PS:
+        case LayoutExportFormats::EPS:
+        case LayoutExportFormats::TIF:
+        case LayoutExportFormats::HPGL:
+        case LayoutExportFormats::HPGL2:
+        case LayoutExportFormats::HPGL_PLT:
+        case LayoutExportFormats::HPGL2_PLT:
+            return ui->checkBoxShowGrainline->isChecked();
+        default:
+            return true;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogSaveLayout::MakeHelpFormatList() -> QString
+{
+    auto out = QStringLiteral("\n");
+    const auto formats = VLayoutExporter::AllLayoutExportFormats();
+    for (int i = 0; i < formats.size(); ++i)
+    {
+        out += "\t* "_L1 + VLayoutExporter::ExportFormatDescription(formats.at(i)) + " = "_L1
+               + QString::number(static_cast<int>(formats.at(i)));
+
+        if (i < formats.size() - 1)
+        {
+            out += ",\n"_L1;
+        }
+        else
+        {
+            out += ".\n"_L1;
+        }
+    }
+    return out;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogSaveLayout::MakeHelpDxfApparelCompatibilityList() -> QString
+{
+    QString out("\n"_L1);
+    out += QStringLiteral("\t* %1 = %2,\n")
+               .arg(tr("By standard"))
+               .arg(static_cast<int>(DXFApparelCompatibility::STANDARD));
+    out += QStringLiteral("\t* Richpeace CAD V8 = %1,\n").arg(static_cast<int>(DXFApparelCompatibility::RPCADV08));
+    out += QStringLiteral("\t* Richpeace CAD V9 = %1,\n").arg(static_cast<int>(DXFApparelCompatibility::RPCADV09));
+    out += QStringLiteral("\t* Richpeace CAD V10 = %1.\n").arg(static_cast<int>(DXFApparelCompatibility::RPCADV10));
+    out += QStringLiteral("\t* Clo3D = %1.\n").arg(static_cast<int>(DXFApparelCompatibility::CLO3D));
+
+    return out;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -337,8 +401,7 @@ void DialogSaveLayout::SetDestinationPath(const QString &cmdDestinationPath)
         QDir dir;
         if (not dir.cd(cmdDestinationPath))
         {
-            VException e(tr("The destination directory doesn't exists or is not readable."));
-            throw e;
+            throw VException(tr("The destination directory doesn't exists or is not readable."));
         }
         path = dir.absolutePath();
     }
@@ -348,142 +411,9 @@ void DialogSaveLayout::SetDestinationPath(const QString &cmdDestinationPath)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Draw DialogSaveLayout::Mode() const
+auto DialogSaveLayout::Mode() const -> Draw
 {
     return m_mode;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString DialogSaveLayout::ExportFormatDescription(LayoutExportFormats format)
-{
-    const QString dxfSuffix = QStringLiteral("(*.dxf)");
-    const QString dxfFlatFilesStr = tr("(flat) files");
-    const QString filesStr = tr("files");
-
-    switch(format)
-    {
-        case LayoutExportFormats::SVG:
-            return QString("Svg %1 (*.svg)").arg(filesStr);
-        case LayoutExportFormats::PDF:
-            return QString("PDF %1 (*.pdf)").arg(filesStr);
-        case LayoutExportFormats::PNG:
-            return tr("Image files") + QLatin1String(" (*.png)");
-        case LayoutExportFormats::OBJ:
-            return "Wavefront OBJ (*.obj)";
-        case LayoutExportFormats::PS:
-            return QString("PS %1 (*.ps)").arg(filesStr);
-        case LayoutExportFormats::EPS:
-            return QString("EPS %1 (*.eps)").arg(filesStr);
-        case LayoutExportFormats::DXF_AC1006_Flat:
-            return QString("AutoCAD DXF R10 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1009_Flat:
-            return QString("AutoCAD DXF R11/12 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1012_Flat:
-            return QString("AutoCAD DXF R13 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1014_Flat:
-            return QString("AutoCAD DXF R14 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1015_Flat:
-            return QString("AutoCAD DXF 2000 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1018_Flat:
-            return QString("AutoCAD DXF 2004 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1021_Flat:
-            return QString("AutoCAD DXF 2007 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1024_Flat:
-            return QString("AutoCAD DXF 2010 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1027_Flat:
-            return QString("AutoCAD DXF 2013 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1006_AAMA:
-            return QString("AutoCAD DXF R10 AAMA %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1009_AAMA:
-            return QString("AutoCAD DXF R11/12 AAMA %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1012_AAMA:
-            return QString("AutoCAD DXF R13 AAMA %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1014_AAMA:
-            return QString("AutoCAD DXF R14 AAMA %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1015_AAMA:
-            return QString("AutoCAD DXF 2000 AAMA %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1018_AAMA:
-            return QString("AutoCAD DXF 2004 AAMA %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1021_AAMA:
-            return QString("AutoCAD DXF 2007 AAMA %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1024_AAMA:
-            return QString("AutoCAD DXF 2010 AAMA %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1027_AAMA:
-            return QString("AutoCAD DXF 2013 AAMA %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1006_ASTM:
-            return QString("AutoCAD DXF R10 ASTM %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1009_ASTM:
-            return QString("AutoCAD DXF R11/12 ASTM %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1012_ASTM:
-            return QString("AutoCAD DXF R13 ASTM %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1014_ASTM:
-            return QString("AutoCAD DXF R14 ASTM %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1015_ASTM:
-            return QString("AutoCAD DXF 2000 ASTM %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1018_ASTM:
-            return QString("AutoCAD DXF 2004 ASTM %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1021_ASTM:
-            return QString("AutoCAD DXF 2007 ASTM %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1024_ASTM:
-            return QString("AutoCAD DXF 2010 ASTM %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1027_ASTM:
-            return QString("AutoCAD DXF 2013 ASTM %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::PDFTiled:
-            return QString("PDF tiled %1 (*.pdf)").arg(filesStr);
-        default:
-            return QString();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString DialogSaveLayout::ExportFromatSuffix(LayoutExportFormats format)
-{
-    switch(format)
-    {
-        case LayoutExportFormats::SVG:
-            return ".svg";
-        case LayoutExportFormats::PDF:
-        case LayoutExportFormats::PDFTiled:
-            return ".pdf";
-        case LayoutExportFormats::PNG:
-            return ".png";
-        case LayoutExportFormats::OBJ:
-            return ".obj";
-        case LayoutExportFormats::PS:
-            return ".ps";
-        case LayoutExportFormats::EPS:
-            return ".eps";
-        case LayoutExportFormats::DXF_AC1006_Flat:
-        case LayoutExportFormats::DXF_AC1009_Flat:
-        case LayoutExportFormats::DXF_AC1012_Flat:
-        case LayoutExportFormats::DXF_AC1014_Flat:
-        case LayoutExportFormats::DXF_AC1015_Flat:
-        case LayoutExportFormats::DXF_AC1018_Flat:
-        case LayoutExportFormats::DXF_AC1021_Flat:
-        case LayoutExportFormats::DXF_AC1024_Flat:
-        case LayoutExportFormats::DXF_AC1027_Flat:
-        case LayoutExportFormats::DXF_AC1006_AAMA:
-        case LayoutExportFormats::DXF_AC1009_AAMA:
-        case LayoutExportFormats::DXF_AC1012_AAMA:
-        case LayoutExportFormats::DXF_AC1014_AAMA:
-        case LayoutExportFormats::DXF_AC1015_AAMA:
-        case LayoutExportFormats::DXF_AC1018_AAMA:
-        case LayoutExportFormats::DXF_AC1021_AAMA:
-        case LayoutExportFormats::DXF_AC1024_AAMA:
-        case LayoutExportFormats::DXF_AC1027_AAMA:
-        case LayoutExportFormats::DXF_AC1006_ASTM:
-        case LayoutExportFormats::DXF_AC1009_ASTM:
-        case LayoutExportFormats::DXF_AC1012_ASTM:
-        case LayoutExportFormats::DXF_AC1014_ASTM:
-        case LayoutExportFormats::DXF_AC1015_ASTM:
-        case LayoutExportFormats::DXF_AC1018_ASTM:
-        case LayoutExportFormats::DXF_AC1021_ASTM:
-        case LayoutExportFormats::DXF_AC1024_ASTM:
-        case LayoutExportFormats::DXF_AC1027_ASTM:
-            return ".dxf";
-        default:
-            return QString();
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -493,45 +423,63 @@ DialogSaveLayout::~DialogSaveLayout()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogSaveLayout::Path() const
+auto DialogSaveLayout::Path() const -> QString
 {
     return ui->lineEditPath->text();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogSaveLayout::FileName() const
+auto DialogSaveLayout::FileName() const -> QString
 {
-    return ui->lineEditFileName->text();
+    const QString fileName = ui->lineEditFileName->text();
+    return m_count > 1 && Format() != LayoutExportFormats::PDFTiled ? fileName + '_'_L1 : fileName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-LayoutExportFormats DialogSaveLayout::Format() const
+auto DialogSaveLayout::Format() const -> LayoutExportFormats
 {
-    return static_cast<LayoutExportFormats>(ui->comboBoxFormat->currentData().toInt());
+    return static_cast<LayoutExportFormats>(ui->comboBoxFormatType->currentData().toInt());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSaveLayout::Save()
 {
-    for (int i=0; i < count; ++i)
+    WriteSettings();
+
+    for (int i = 0; i < m_count; ++i)
     {
-        const QString name = Path()+QLatin1Literal("/")+FileName()+QString::number(i+1)+ExportFromatSuffix(Format());
+        QString name;
+
+        if (m_count > 1)
+        {
+            name = Path() + '/' + FileName() + QString::number(i + 1) + VLayoutExporter::ExportFormatSuffix(Format());
+        }
+        else
+        {
+            name = Path() + '/' + FileName() + VLayoutExporter::ExportFormatSuffix(Format());
+        }
+
         if (QFile::exists(name))
         {
-            QMessageBox::StandardButton res = QMessageBox::question(this, tr("Name conflict"),
-                                  tr("Folder already contain file with name %1. Rewrite all conflict file names?")
-                                  .arg(name), QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
-            if (res == QMessageBox::No)
+            if (QMessageBox::StandardButton const res = QMessageBox::question(
+                    this, tr("Name conflict"),
+                    tr("Folder already contain file with name %1. Rewrite all conflict file names?").arg(name),
+                    QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+                res == QMessageBox::No)
             {
                 reject();
                 return;
             }
-            else
-            {
-                break;
-            }
+
+            break;
         }
     }
+
+    if (QFile::exists(Path()))
+    {
+        VAbstractValApplication::VApp()->ValentinaSettings()->SetPathLayoutExport(Path());
+    }
+
     accept();
 }
 
@@ -545,10 +493,10 @@ void DialogSaveLayout::PathChanged(const QString &text)
 
     QDir dir(text);
     dir.setPath(text);
-    if (dir.exists(text))
+    if (not text.isEmpty() && dir.exists(text))
     {
         bOk->setEnabled(true);
-        palette.setColor(ui->lineEditPath->foregroundRole(), Qt::black);
+        palette.setColor(ui->lineEditPath->foregroundRole(), palette.color(QPalette::Text));
     }
     else
     {
@@ -562,15 +510,91 @@ void DialogSaveLayout::PathChanged(const QString &text)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSaveLayout::ShowExample()
 {
-    const LayoutExportFormats currentFormat = Format();
-    ui->labelExample->setText(tr("Example:") + FileName() + QLatin1Char('1') + ExportFromatSuffix(currentFormat));
+    const bool hasValues = ui->comboBoxFormatType->currentIndex() != -1;
+    ui->groupBoxFormatOptions->setEnabled(hasValues);
+    ui->groupBoxScale->setEnabled(hasValues);
+    ui->groupBoxMargins->setEnabled(hasValues);
+    ui->groupBoxPaperFormat->setEnabled(hasValues);
 
-    ui->checkBoxBinaryDXF->setEnabled(false);
+    QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
+    SCASSERT(bOk != nullptr)
+    bOk->setEnabled(hasValues);
+
+    if (!hasValues)
+    {
+        return;
+    }
+
+    const LayoutExportFormats currentFormat = Format();
+    QString example;
+
+    if (m_count > 1 && currentFormat != LayoutExportFormats::PDFTiled)
+    {
+        example = tr("Example:") + FileName() + '1'_L1 + VLayoutExporter::ExportFormatSuffix(currentFormat);
+    }
+    else
+    {
+        example = tr("Example:") + FileName() + VLayoutExporter::ExportFormatSuffix(currentFormat);
+    }
+    ui->labelExample->setText(example);
+
     ui->groupBoxPaperFormat->setEnabled(false);
     ui->groupBoxMargins->setEnabled(false);
 
-    switch(currentFormat)
+    ui->labelOptionsNotAvailable->setVisible(false);
+    ui->checkBoxBinaryDXF->setVisible(false);
+    ui->checkBoxTextAsPaths->setVisible(false);
+    ui->checkBoxTextAsPaths->setEnabled(true);
+    ui->checkBoxShowGrainline->setVisible(false);
+    ui->checkBoxTogetherWithNotches->setVisible(false);
+    ui->labelDxfCompatibility->setVisible(false);
+    ui->comboBoxDxfCompatibility->setVisible(false);
+
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+
+    switch (currentFormat)
     {
+        case LayoutExportFormats::DXF_AAMA:
+        case LayoutExportFormats::DXF_ASTM:
+            ui->checkBoxBinaryDXF->setVisible(true);
+            ui->checkBoxTogetherWithNotches->setVisible(m_mode != Draw::Layout);
+            ui->labelDxfCompatibility->setVisible(true);
+            ui->comboBoxDxfCompatibility->setVisible(true);
+            break;
+        case LayoutExportFormats::PDFTiled:
+            ui->groupBoxPaperFormat->setEnabled(true);
+            ui->groupBoxMargins->setEnabled(true);
+            ui->checkBoxTextAsPaths->setVisible(true);
+            if (settings->GetSingleLineFonts() || settings->GetSingleStrokeOutlineFont())
+            {
+                ui->checkBoxTextAsPaths->setDisabled(true);
+                ui->checkBoxTextAsPaths->setChecked(true);
+            }
+            ui->checkBoxShowGrainline->setVisible(true);
+            ui->checkBoxTogetherWithNotches->setVisible(m_mode != Draw::Layout);
+            break;
+        case LayoutExportFormats::HPGL:
+        case LayoutExportFormats::HPGL2:
+        case LayoutExportFormats::HPGL_PLT:
+        case LayoutExportFormats::HPGL2_PLT:
+            ui->checkBoxShowGrainline->setVisible(true);
+            ui->checkBoxTogetherWithNotches->setVisible(true);
+            break;
+        case LayoutExportFormats::SVG:
+        case LayoutExportFormats::PDF:
+        case LayoutExportFormats::PS:
+        case LayoutExportFormats::EPS:
+        case LayoutExportFormats::PNG:
+        case LayoutExportFormats::TIF:
+            ui->checkBoxTextAsPaths->setVisible(true);
+            if (settings->GetSingleLineFonts() || settings->GetSingleStrokeOutlineFont())
+            {
+                ui->checkBoxTextAsPaths->setDisabled(true);
+                ui->checkBoxTextAsPaths->setChecked(true);
+            }
+            ui->checkBoxShowGrainline->setVisible(true);
+            ui->checkBoxTogetherWithNotches->setVisible(m_mode != Draw::Layout);
+            break;
         case LayoutExportFormats::DXF_AC1006_Flat:
         case LayoutExportFormats::DXF_AC1009_Flat:
         case LayoutExportFormats::DXF_AC1012_Flat:
@@ -580,43 +604,57 @@ void DialogSaveLayout::ShowExample()
         case LayoutExportFormats::DXF_AC1021_Flat:
         case LayoutExportFormats::DXF_AC1024_Flat:
         case LayoutExportFormats::DXF_AC1027_Flat:
-        case LayoutExportFormats::DXF_AC1006_AAMA:
-        case LayoutExportFormats::DXF_AC1009_AAMA:
-        case LayoutExportFormats::DXF_AC1012_AAMA:
-        case LayoutExportFormats::DXF_AC1014_AAMA:
-        case LayoutExportFormats::DXF_AC1015_AAMA:
-        case LayoutExportFormats::DXF_AC1018_AAMA:
-        case LayoutExportFormats::DXF_AC1021_AAMA:
-        case LayoutExportFormats::DXF_AC1024_AAMA:
-        case LayoutExportFormats::DXF_AC1027_AAMA:
-        case LayoutExportFormats::DXF_AC1006_ASTM:
-        case LayoutExportFormats::DXF_AC1009_ASTM:
-        case LayoutExportFormats::DXF_AC1012_ASTM:
-        case LayoutExportFormats::DXF_AC1014_ASTM:
-        case LayoutExportFormats::DXF_AC1015_ASTM:
-        case LayoutExportFormats::DXF_AC1018_ASTM:
-        case LayoutExportFormats::DXF_AC1021_ASTM:
-        case LayoutExportFormats::DXF_AC1024_ASTM:
-        case LayoutExportFormats::DXF_AC1027_ASTM:
-            ui->checkBoxBinaryDXF->setEnabled(true);
+            ui->checkBoxBinaryDXF->setVisible(true);
+            ui->checkBoxTextAsPaths->setVisible(true);
+            if (settings->GetSingleLineFonts() || settings->GetSingleStrokeOutlineFont())
+            {
+                ui->checkBoxTextAsPaths->setDisabled(true);
+                ui->checkBoxTextAsPaths->setChecked(true);
+            }
+            ui->checkBoxShowGrainline->setVisible(true);
+            ui->checkBoxTogetherWithNotches->setVisible(m_mode != Draw::Layout);
             break;
-        case LayoutExportFormats::PDFTiled:
-            ui->groupBoxPaperFormat->setEnabled(true);
-            ui->groupBoxMargins->setEnabled(true);
-            break;
-        case LayoutExportFormats::SVG:
-        case LayoutExportFormats::PDF:
-        case LayoutExportFormats::PNG:
-        case LayoutExportFormats::OBJ:
-        case LayoutExportFormats::PS:
-        case LayoutExportFormats::EPS:
         default:
+            ui->labelOptionsNotAvailable->setVisible(true);
             break;
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogSaveLayout::IsTextAsPaths() const
+void DialogSaveLayout::ToggleScaleConnection()
+{
+    m_scaleConnected = not m_scaleConnected;
+
+    QIcon icon;
+    icon.addFile(m_scaleConnected ? QStringLiteral(":/icon/32x32/link.png")
+                                  : QStringLiteral(":/icon/32x32/broken_link.png"));
+    ui->toolButtonScaleConnected->setIcon(icon);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSaveLayout::HorizontalScaleChanged(double d)
+{
+    if (m_scaleConnected)
+    {
+        ui->doubleSpinBoxVerticalScale->blockSignals(true);
+        ui->doubleSpinBoxVerticalScale->setValue(d);
+        ui->doubleSpinBoxVerticalScale->blockSignals(false);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSaveLayout::VerticalScaleChanged(double d)
+{
+    if (m_scaleConnected)
+    {
+        ui->doubleSpinBoxHorizontalScale->blockSignals(true);
+        ui->doubleSpinBoxHorizontalScale->setValue(d);
+        ui->doubleSpinBoxHorizontalScale->blockSignals(false);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogSaveLayout::IsTextAsPaths() const -> bool
 {
     return ui->checkBoxTextAsPaths->isChecked();
 }
@@ -624,14 +662,7 @@ bool DialogSaveLayout::IsTextAsPaths() const
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSaveLayout::SetTextAsPaths(bool textAsPaths)
 {
-    if (m_mode != Draw::Layout)
-    {
-        ui->checkBoxTextAsPaths->setChecked(textAsPaths);
-    }
-    else
-    {
-        ui->checkBoxTextAsPaths->setChecked(false);
-    }
+    ui->checkBoxTextAsPaths->setChecked(textAsPaths);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -644,7 +675,7 @@ void DialogSaveLayout::SetTiledExportMode(bool tiledExportMode)
 void DialogSaveLayout::SetTiledMargins(QMarginsF margins)
 {
     // read Margins top, right, bottom, left
-    margins = UnitConvertor(margins, Unit::Mm, qApp->patternUnit());
+    margins = UnitConvertor(margins, Unit::Mm, VAbstractValApplication::VApp()->patternUnits());
 
     ui->doubleSpinBoxLeftField->setValue(margins.left());
     ui->doubleSpinBoxTopField->setValue(margins.top());
@@ -653,22 +684,18 @@ void DialogSaveLayout::SetTiledMargins(QMarginsF margins)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMarginsF DialogSaveLayout::GetTiledMargins() const
+auto DialogSaveLayout::GetTiledMargins() const -> QMarginsF
 {
-    QMarginsF margins = QMarginsF(
-        ui->doubleSpinBoxLeftField->value(),
-        ui->doubleSpinBoxTopField->value(),
-        ui->doubleSpinBoxRightField->value(),
-        ui->doubleSpinBoxBottomField->value()
-    );
+    auto const margins = QMarginsF(ui->doubleSpinBoxLeftField->value(), ui->doubleSpinBoxTopField->value(),
+                                   ui->doubleSpinBoxRightField->value(), ui->doubleSpinBoxBottomField->value());
 
-    return UnitConvertor(margins, qApp->patternUnit(), Unit::Mm);
+    return UnitConvertor(margins, VAbstractValApplication::VApp()->patternUnits(), Unit::Mm);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSaveLayout::SetTiledPageFormat(PaperSizeTemplate format)
 {
-    int index = ui->comboBoxTemplates->findData(static_cast<int>(format));
+    int const index = ui->comboBoxTemplates->findData(static_cast<int>(format));
     if (index != -1)
     {
         ui->comboBoxTemplates->setCurrentIndex(index);
@@ -676,7 +703,7 @@ void DialogSaveLayout::SetTiledPageFormat(PaperSizeTemplate format)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractLayoutDialog::PaperSizeTemplate DialogSaveLayout::GetTiledPageFormat() const
+auto DialogSaveLayout::GetTiledPageFormat() const -> VAbstractLayoutDialog::PaperSizeTemplate
 {
     if (ui->comboBoxTemplates->currentIndex() != -1)
     {
@@ -688,7 +715,7 @@ VAbstractLayoutDialog::PaperSizeTemplate DialogSaveLayout::GetTiledPageFormat() 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSaveLayout::SetTiledPageOrientation(PageOrientation orientation)
 {
-    if(orientation == PageOrientation::Portrait)
+    if (orientation == PageOrientation::Portrait)
     {
         ui->toolButtonPortrait->setChecked(true);
     }
@@ -699,28 +726,62 @@ void DialogSaveLayout::SetTiledPageOrientation(PageOrientation orientation)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PageOrientation DialogSaveLayout::GetTiledPageOrientation() const
+auto DialogSaveLayout::GetTiledPageOrientation() const -> PageOrientation
 {
-    if(ui->toolButtonPortrait->isChecked())
+    if (ui->toolButtonPortrait->isChecked())
     {
         return PageOrientation::Portrait;
     }
-    else
-    {
-        return PageOrientation::Landscape;
-    }
+
+    return PageOrientation::Landscape;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSaveLayout::SetXScale(qreal scale)
+{
+    ui->doubleSpinBoxHorizontalScale->setValue(scale * 100.);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogSaveLayout::GetXScale() const -> qreal
+{
+    return ui->doubleSpinBoxHorizontalScale->value() / 100.;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSaveLayout::SetYScale(qreal scale)
+{
+    ui->doubleSpinBoxVerticalScale->setValue(scale * 100.);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogSaveLayout::GetYScale() const -> qreal
+{
+    return ui->doubleSpinBoxVerticalScale->value() / 100.;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSaveLayout::SetBoundaryTogetherWithNotches(bool value)
+{
+    ui->checkBoxTogetherWithNotches->setChecked(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogSaveLayout::IsBoundaryTogetherWithNotches() const -> bool
+{
+    return ui->checkBoxTogetherWithNotches->isChecked();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSaveLayout::showEvent(QShowEvent *event)
 {
-    QDialog::showEvent( event );
-    if ( event->spontaneous() )
+    QDialog::showEvent(event);
+    if (event->spontaneous())
     {
         return;
     }
 
-    if (isInitialized)
+    if (m_isInitialized)
     {
         return;
     }
@@ -728,103 +789,7 @@ void DialogSaveLayout::showEvent(QShowEvent *event)
 
     setFixedHeight(size().height());
 
-    isInitialized = true;//first show windows are held
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool DialogSaveLayout::SupportPSTest()
-{
-    if (!tested)
-    {
-        havePdf = TestPdf();
-        tested = true;
-    }
-    return havePdf;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool DialogSaveLayout::TestPdf()
-{
-    bool res = false;
-
-    QProcess proc;
-#if defined(Q_OS_WIN) || defined(Q_OS_OSX)
-    // Seek pdftops in app bundle or near valentin.exe
-    proc.start(qApp->applicationDirPath() + QLatin1String("/")+ PDFTOPS);
-#else
-    proc.start(PDFTOPS); // Seek pdftops in standard path
-#endif
-    if (proc.waitForStarted(15000) && (proc.waitForFinished(15000) || proc.state() == QProcess::NotRunning))
-    {
-        res = true;
-    }
-    else
-    {
-        qDebug()<<PDFTOPS<<"error"<<proc.error()<<proc.errorString();
-    }
-    return res;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QVector<std::pair<QString, LayoutExportFormats> > DialogSaveLayout::InitFormats()
-{
-    QVector<std::pair<QString, LayoutExportFormats>> list;
-
-    auto InitFormat = [&list](LayoutExportFormats format)
-    {
-        list.append(std::make_pair(ExportFormatDescription(format), format));
-    };
-
-    InitFormat(LayoutExportFormats::SVG);
-    InitFormat(LayoutExportFormats::PDF);
-    InitFormat(LayoutExportFormats::PNG);
-    InitFormat(LayoutExportFormats::OBJ);
-    if (SupportPSTest())
-    {
-        InitFormat(LayoutExportFormats::PS);
-        InitFormat(LayoutExportFormats::EPS);
-    }
-    InitFormat(LayoutExportFormats::DXF_AC1006_Flat);
-    InitFormat(LayoutExportFormats::DXF_AC1009_Flat);
-    InitFormat(LayoutExportFormats::DXF_AC1012_Flat);
-    InitFormat(LayoutExportFormats::DXF_AC1014_Flat);
-    InitFormat(LayoutExportFormats::DXF_AC1015_Flat);
-    InitFormat(LayoutExportFormats::DXF_AC1018_Flat);
-    InitFormat(LayoutExportFormats::DXF_AC1021_Flat);
-    InitFormat(LayoutExportFormats::DXF_AC1024_Flat);
-    InitFormat(LayoutExportFormats::DXF_AC1027_Flat);
-    InitFormat(LayoutExportFormats::DXF_AC1006_AAMA);
-    InitFormat(LayoutExportFormats::DXF_AC1009_AAMA);
-    InitFormat(LayoutExportFormats::DXF_AC1012_AAMA);
-    InitFormat(LayoutExportFormats::DXF_AC1014_AAMA);
-    InitFormat(LayoutExportFormats::DXF_AC1015_AAMA);
-    InitFormat(LayoutExportFormats::DXF_AC1018_AAMA);
-    InitFormat(LayoutExportFormats::DXF_AC1021_AAMA);
-    InitFormat(LayoutExportFormats::DXF_AC1024_AAMA);
-    InitFormat(LayoutExportFormats::DXF_AC1027_AAMA);
-    // We will support them anyway
-//    InitFormat(LayoutExportFormats::DXF_AC1006_ASTM);
-//    InitFormat(LayoutExportFormats::DXF_AC1009_ASTM);
-//    InitFormat(LayoutExportFormats::DXF_AC1012_ASTM);
-//    InitFormat(LayoutExportFormats::DXF_AC1014_ASTM);
-//    InitFormat(LayoutExportFormats::DXF_AC1015_ASTM);
-//    InitFormat(LayoutExportFormats::DXF_AC1018_ASTM);
-//    InitFormat(LayoutExportFormats::DXF_AC1021_ASTM);
-//    InitFormat(LayoutExportFormats::DXF_AC1024_ASTM);
-//    InitFormat(LayoutExportFormats::DXF_AC1027_ASTM);
-    InitFormat(LayoutExportFormats::PDFTiled); 
-
-    return list;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogSaveLayout::RemoveFormatFromList(LayoutExportFormats format)
-{
-    const int index = ui->comboBoxFormat->findData(static_cast<int>(format));
-    if (index != -1)
-    {
-        ui->comboBoxFormat->removeItem(index);
-    }
+    m_isInitialized = true; // first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -835,8 +800,8 @@ void DialogSaveLayout::RemoveFormatFromList(LayoutExportFormats format)
  */
 void DialogSaveLayout::ReadSettings()
 {
-    VSettings *settings = qApp->ValentinaSettings();
-    const Unit unit = qApp->patternUnit();
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    const Unit unit = VAbstractValApplication::VApp()->patternUnits();
 
     // read Margins top, right, bottom, left
     const QMarginsF margins = settings->GetTiledPDFMargins(unit);
@@ -852,10 +817,11 @@ void DialogSaveLayout::ReadSettings()
     ui->doubleSpinBoxBottomField->setSuffix(UnitsToStr(unit, true));
 
     // read Template
-    const QSizeF size = QSizeF(settings->GetTiledPDFPaperWidth(Unit::Mm), settings->GetTiledPDFPaperHeight(Unit::Mm));
+    const QSizeF size = VAbstractLayoutDialog::RoundTemplateSize(settings->GetTiledPDFPaperWidth(Unit::Mm),
+                                                                 settings->GetTiledPDFPaperHeight(Unit::Mm), Unit::Mm);
 
-    const int max = static_cast<int>(PaperSizeTemplate::Custom);
-    for (int i=0; i < max; ++i)
+    const auto max = static_cast<int>(PaperSizeTemplate::Custom);
+    for (int i = 0; i < max; ++i)
     {
 
         const QSizeF tmplSize = GetTemplateSize(static_cast<PaperSizeTemplate>(i), Unit::Mm);
@@ -867,7 +833,7 @@ void DialogSaveLayout::ReadSettings()
     }
 
     // read Orientation
-    if(settings->GetTiledPDFOrientation() == PageOrientation::Portrait)
+    if (settings->GetTiledPDFOrientation() == PageOrientation::Portrait)
     {
         ui->toolButtonPortrait->setChecked(true);
     }
@@ -875,6 +841,32 @@ void DialogSaveLayout::ReadSettings()
     {
         ui->toolButtonLandscape->setChecked(true);
     }
+
+    if (m_mode != Draw::Layout)
+    {
+        try
+        {
+            SelectFormat(static_cast<LayoutExportFormats>(settings->GetDetailExportFormat()));
+        }
+        catch (VException &e)
+        {
+            qDebug() << qUtf8Printable(e.ErrorMessage());
+        }
+    }
+    else
+    {
+        try
+        {
+            SelectFormat(static_cast<LayoutExportFormats>(settings->GetLayoutExportFormat()));
+        }
+        catch (VException &e)
+        {
+            qDebug() << qUtf8Printable(e.ErrorMessage());
+        }
+        SetShowGrainline(settings->GetShowGrainline());
+    }
+
+    SetDxfCompatibility(static_cast<DXFApparelCompatibility>(settings->GetDxfCompatibility()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -889,27 +881,23 @@ void DialogSaveLayout::WriteSettings() const
         return;
     }
 
-    VSettings *settings = qApp->ValentinaSettings();
-    const Unit unit = qApp->patternUnit();
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    const Unit unit = VAbstractValApplication::VApp()->patternUnits();
 
     // write Margins top, right, bottom, left
-    QMarginsF margins = QMarginsF(
-        ui->doubleSpinBoxLeftField->value(),
-        ui->doubleSpinBoxTopField->value(),
-        ui->doubleSpinBoxRightField->value(),
-        ui->doubleSpinBoxBottomField->value()
-    );
-    settings->SetTiledPDFMargins(margins,unit);
+    auto const margins = QMarginsF(ui->doubleSpinBoxLeftField->value(), ui->doubleSpinBoxTopField->value(),
+                                   ui->doubleSpinBoxRightField->value(), ui->doubleSpinBoxBottomField->value());
+    settings->SetTiledPDFMargins(margins, unit);
 
     // write Template
-    const PaperSizeTemplate temp = static_cast<PaperSizeTemplate>(ui->comboBoxTemplates->currentData().toInt());
+    const auto temp = static_cast<PaperSizeTemplate>(ui->comboBoxTemplates->currentData().toInt());
     const QSizeF size = GetTemplateSize(temp, Unit::Mm);
 
     settings->SetTiledPDFPaperHeight(size.height(), Unit::Mm);
     settings->SetTiledPDFPaperWidth(size.width(), Unit::Mm);
 
     // write Orientation
-    if(ui->toolButtonPortrait->isChecked())
+    if (ui->toolButtonPortrait->isChecked())
     {
         settings->SetTiledPDFOrientation(PageOrientation::Portrait);
     }
@@ -917,5 +905,90 @@ void DialogSaveLayout::WriteSettings() const
     {
         settings->SetTiledPDFOrientation(PageOrientation::Landscape);
     }
+
+    if (m_mode != Draw::Layout)
+    {
+        settings->SetDetailExportFormat(static_cast<qint8>(Format()));
+    }
+    else
+    {
+        settings->SetLayoutExportFormat(static_cast<qint8>(Format()));
+        settings->SetShowGrainline(IsShowGrainline());
+    }
+
+    settings->SetDxfCompatibility(static_cast<qint8>(DxfCompatibility()));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSaveLayout::InitDxfCompatibility()
+{
+    ui->comboBoxDxfCompatibility->addItem(tr("By standard"),
+                                          QVariant(static_cast<int>(DXFApparelCompatibility::STANDARD)));
+    ui->comboBoxDxfCompatibility->addItem("Richpeace CAD V8"_L1,
+                                          QVariant(static_cast<int>(DXFApparelCompatibility::RPCADV08)));
+    ui->comboBoxDxfCompatibility->addItem("Richpeace CAD V9"_L1,
+                                          QVariant(static_cast<int>(DXFApparelCompatibility::RPCADV09)));
+    ui->comboBoxDxfCompatibility->addItem("Richpeace CAD V10"_L1,
+                                          QVariant(static_cast<int>(DXFApparelCompatibility::RPCADV10)));
+    ui->comboBoxDxfCompatibility->addItem("Clo3D"_L1, QVariant(static_cast<int>(DXFApparelCompatibility::CLO3D)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSaveLayout::InitFileFormats()
+{
+    auto AddItem = [this](const QString &label, LayoutExportFileFormat format)
+    { ui->comboBoxFormat->addItem(label, QVariant(static_cast<int>(format))); };
+
+    Q_STATIC_ASSERT_X(static_cast<int>(LayoutExportFileFormat::COUNT) == 10, "Update to cover all cases.");
+
+    AddItem("PDF"_L1, LayoutExportFileFormat::PDF);
+    AddItem("SVG"_L1, LayoutExportFileFormat::SVG);
+    AddItem("PNG"_L1, LayoutExportFileFormat::PNG);
+    // AddItem("OBJ"_L1, LayoutExportFileFormat::OBJ); // Temporarily unavailable
+    AddItem("DXF"_L1, LayoutExportFileFormat::DXF);
+    // AddItem("NC"_L1, LayoutExportFileFormat::NC);// No support for now
+    if (m_mode != Draw::Layout)
+    {
+        AddItem("RLD"_L1, LayoutExportFileFormat::RLD);
+    }
+    AddItem("PLT"_L1, LayoutExportFileFormat::PLT);
+    AddItem("HPGL"_L1, LayoutExportFileFormat::HPGL);
+    AddItem("TIF"_L1, LayoutExportFileFormat::TIF);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSaveLayout::InitFileFormatTypes(LayoutExportFileFormat format)
+{
+    ui->comboBoxFormatType->clear();
+    const QVector<LayoutExportFormats> types = VLayoutExporter::MapLayoutExportFormats(format);
+
+    for (const auto &type : types)
+    {
+        ui->comboBoxFormatType->addItem(VLayoutExporter::ExportFormatDescription(type),
+                                        QVariant(static_cast<int>(type)));
+    }
+
+    auto RemoveFormatFromList = [this](LayoutExportFormats exportFormat)
+    {
+        const int index = ui->comboBoxFormatType->findData(static_cast<int>(exportFormat));
+        if (index != -1)
+        {
+            ui->comboBoxFormatType->removeItem(index);
+        }
+    };
+
+    //    RemoveFormatFromList(LayoutExportFormats::NC); // No support for now
+
+#ifdef V_NO_ASSERT // Temporarily unavailable
+    RemoveFormatFromList(LayoutExportFormats::OBJ);
+#endif
+
+    if (m_mode != Draw::Layout)
+    {
+        RemoveFormatFromList(LayoutExportFormats::PDFTiled);
+    }
+    else
+    {
+        RemoveFormatFromList(LayoutExportFormats::RLD);
+    }
+}

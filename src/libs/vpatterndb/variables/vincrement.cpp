@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,15 +29,16 @@
 #include "vincrement.h"
 
 #include "../vmisc/def.h"
-#include "vvariable.h"
 #include "vincrement_p.h"
+#include "vvariable.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VIncrement create enpty increment
  */
 VIncrement::VIncrement()
-    :VVariable(), d(new VIncrementData)
+  : VVariable(),
+    d(new VIncrementData)
 {
     SetType(VarType::Increment);
 }
@@ -46,26 +47,21 @@ VIncrement::VIncrement()
 /**
  * @brief VIncrementTableRow create increment
  * @param name increment's name
- * @param base value
- * @param description description of increment
  */
-VIncrement::VIncrement(VContainer *data, const QString &name, quint32 index, qreal base, const QString &formula,
-                       bool ok, const QString &description)
-    :VVariable(name, description), d(new VIncrementData(data, index, formula, ok))
+VIncrement::VIncrement(VContainer *data, const QString &name, IncrementType incrType)
+  : VVariable(name, QString()),
+    d(new VIncrementData(data, incrType))
 {
-    SetType(VarType::Increment);
-    VInternalVariable::SetValue(base);
+    incrType == IncrementType::Separator ? SetType(VarType::IncrementSeparator) : SetType(VarType::Increment);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VIncrement::VIncrement(const VIncrement &incr)
-    :VVariable(incr), d(incr.d)
-{}
+COPY_CONSTRUCTOR_IMPL_2(VIncrement, VVariable)
 
 //---------------------------------------------------------------------------------------------------------------------
-VIncrement &VIncrement::operator=(const VIncrement &incr)
+auto VIncrement::operator=(const VIncrement &incr) -> VIncrement &
 {
-    if ( &incr == this )
+    if (&incr == this)
     {
         return *this;
     }
@@ -75,8 +71,22 @@ VIncrement &VIncrement::operator=(const VIncrement &incr)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VIncrement::~VIncrement()
-{}
+VIncrement::VIncrement(VIncrement &&incr) noexcept
+  : VVariable(std::move(incr)),
+    d(std::move(incr.d)) // NOLINT(bugprone-use-after-move)
+{
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VIncrement::operator=(VIncrement &&incr) noexcept -> VIncrement &
+{
+    VVariable::operator=(incr);
+    std::swap(d, incr.d);
+    return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VIncrement::~VIncrement() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -84,31 +94,51 @@ VIncrement::~VIncrement()
  * using.
  * @return index
  */
-quint32 VIncrement::getIndex() const
+auto VIncrement::GetIndex() const -> quint32
 {
     return d->index;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VIncrement::GetFormula() const
+void VIncrement::SetFormula(qreal base, const QString &formula, bool ok)
+{
+    StoreValue(base);
+    d->formula = formula;
+    d->formulaOk = ok;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VIncrement::GetFormula() const -> QString
 {
     return d->formula;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VIncrement::IsFormulaOk() const
+auto VIncrement::IsFormulaOk() const -> bool
 {
     return d->formulaOk;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VContainer *VIncrement::GetData()
+void VIncrement::SetIndex(quint32 index)
+{
+    d->index = index;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VIncrement::GetData() -> VContainer *
 {
     return d->data.data();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VIncrement::IsPreviewCalculation() const
+auto VIncrement::GetIncrementType() const -> IncrementType
+{
+    return d->incrType;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VIncrement::IsPreviewCalculation() const -> bool
 {
     return d->previewCalculation;
 }
@@ -117,4 +147,16 @@ bool VIncrement::IsPreviewCalculation() const
 void VIncrement::SetPreviewCalculation(bool value)
 {
     d->previewCalculation = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VIncrement::IsSpecialUnits() const -> bool
+{
+    return d->specialUnits;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VIncrement::SetSpecialUnits(bool special)
+{
+    d->specialUnits = special;
 }

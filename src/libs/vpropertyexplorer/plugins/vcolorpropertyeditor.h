@@ -21,7 +21,6 @@
 #ifndef VCOLORPROPERTYEDITOR_H
 #define VCOLORPROPERTYEDITOR_H
 
-#include <qcompilerdetection.h>
 #include <QColor>
 #include <QLabel>
 #include <QLineEdit>
@@ -41,7 +40,7 @@ namespace VPE
 
 class VPROPERTYEXPLORERSHARED_EXPORT VColorPropertyEditor : public QWidget
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     //! Constructor taking a widget as parent
@@ -50,27 +49,26 @@ public:
     //! Destructor
     virtual ~VColorPropertyEditor() override;
 
-
     //! Returns the color currently set
-    QColor GetColor() const;
+    auto GetColor() const -> QColor;
 
     //! A little helper function generating an image to represent a color
     //! \param color The color to fill the image with
     //! \size The size of the generated pixmap
     //! \return Returns a QPixmap
-    static QPixmap GetColorPixmap(const QColor& color, quint32 size = 16);
+    static auto GetColorPixmap(const QColor &color, quint32 size = 16) -> QPixmap;
 
     //! A helper function to convert a color into a string.
     //! \param color The color to fill the image with
     //! \return The color as string, usually in the format [RRR, GGG, BBB] (AAA)
-    static QString GetColorString(const QColor& color);
+    static auto GetColorString(const QColor &color) -> QString;
 
     //! Needed for proper event handling
-    virtual bool eventFilter(QObject *obj, QEvent *ev) override;
+    virtual auto eventFilter(QObject *obj, QEvent *ev) -> bool override;
 
 signals:
     //! This is emitted, when the user changes the color
-    void dataChangedByUser(const QColor &GetColor, VColorPropertyEditor* editor);
+    void dataChangedByUser(const QColor &GetColor, VColorPropertyEditor *editor);
 
     void dataChanged();
 
@@ -82,14 +80,15 @@ private slots:
     void onToolButtonClicked();
 
 private:
-    Q_DISABLE_COPY(VColorPropertyEditor)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VColorPropertyEditor) // NOLINT
     QColor Color;
-    QToolButton* ToolButton;
-    QLabel* TextLabel;
-    QLabel* ColorLabel;
-    QSpacerItem* Spacer;
+    QToolButton *ToolButton;
+    QLabel *TextLabel;
+    QLabel *ColorLabel;
+    QSpacerItem *Spacer;
 };
 
-}
+} // namespace VPE
 
 #endif // QFILEPROPERTYEDITOR_H

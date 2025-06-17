@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef DIALOGPOINTOFINTERSECTIONCIRCLES_H
 #define DIALOGPOINTOFINTERSECTIONCIRCLES_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -41,75 +40,99 @@
 
 namespace Ui
 {
-    class DialogPointOfIntersectionCircles;
+class DialogPointOfIntersectionCircles;
 }
 
-class DialogPointOfIntersectionCircles : public DialogTool
+class DialogPointOfIntersectionCircles final : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
-    DialogPointOfIntersectionCircles(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual ~DialogPointOfIntersectionCircles() override;
+    DialogPointOfIntersectionCircles(const VContainer *data, VAbstractPattern *doc, quint32 toolId,
+                                     QWidget *parent = nullptr);
+    ~DialogPointOfIntersectionCircles() override;
 
-    void           SetPointName(const QString &value);
+    auto GetPointName() const -> QString;
+    void SetPointName(const QString &value);
 
-    quint32        GetFirstCircleCenterId() const;
-    void           SetFirstCircleCenterId(const quint32 &value);
+    auto GetFirstCircleCenterId() const -> quint32;
+    void SetFirstCircleCenterId(const quint32 &value);
 
-    quint32        GetSecondCircleCenterId() const;
-    void           SetSecondCircleCenterId(const quint32 &value);
+    auto GetSecondCircleCenterId() const -> quint32;
+    void SetSecondCircleCenterId(const quint32 &value);
 
-    QString        GetFirstCircleRadius() const;
-    void           SetFirstCircleRadius(const QString &value);
+    auto GetFirstCircleRadius() const -> QString;
+    void SetFirstCircleRadius(const QString &value);
 
-    QString        GetSecondCircleRadius() const;
-    void           SetSecondCircleRadius(const QString &value);
+    auto GetSecondCircleRadius() const -> QString;
+    void SetSecondCircleRadius(const QString &value);
 
-    CrossCirclesPoint GetCrossCirclesPoint() const;
-    void              SetCrossCirclesPoint(const CrossCirclesPoint &p);
+    auto GetCrossCirclesPoint() const -> CrossCirclesPoint;
+    void SetCrossCirclesPoint(const CrossCirclesPoint &p);
+
+    void SetNotes(const QString &notes);
+    auto GetNotes() const -> QString;
+
+    void ShowDialog(bool click) override;
 
 public slots:
-    virtual void   ChosenObject(quint32 id, const SceneObject &type) override;
-    void           PointChanged();
+    void ChosenObject(quint32 id, const SceneObject &type) override;
+    void PointChanged();
 
-    void           DeployCircle1RadiusTextEdit();
-    void           DeployCircle2RadiusTextEdit();
+    void DeployCircle1RadiusTextEdit();
+    void DeployCircle2RadiusTextEdit();
 
-    void           Circle1RadiusChanged();
-    void           Circle2RadiusChanged();
+    void FXCircle1Radius();
+    void FXCircle2Radius();
 
-    void           FXCircle1Radius();
-    void           FXCircle2Radius();
-
-    void           EvalCircle1Radius();
-    void           EvalCircle2Radius();
+    void EvalCircle1Radius();
+    void EvalCircle2Radius();
 
 protected:
-    virtual void   ShowVisualization() override;
+    void ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void   SaveData() override;
-    virtual void   closeEvent(QCloseEvent *event) override;
-    virtual void   CheckState() final;
+    void SaveData() override;
+    void closeEvent(QCloseEvent *event) override;
+    void changeEvent(QEvent *event) override;
+    auto IsValid() const -> bool override;
 
 private:
-    Q_DISABLE_COPY(DialogPointOfIntersectionCircles)
+    Q_DISABLE_COPY_MOVE(DialogPointOfIntersectionCircles) // NOLINT
 
     Ui::DialogPointOfIntersectionCircles *ui;
 
-    bool          flagCircle1Radius;
-    bool          flagCircle2Radius;
+    QTimer *m_timerCircle1Radius;
+    QTimer *m_timerCircle2Radius;
 
-    QTimer        *timerCircle1Radius;
-    QTimer        *timerCircle2Radius;
+    QString m_circle1Radius{};
+    QString m_circle2Radius{};
 
-    QString       circle1Radius;
-    QString       circle2Radius;
+    int m_formulaBaseHeightCircle1Radius{0};
+    int m_formulaBaseHeightCircle2Radius{0};
 
-    int           formulaBaseHeightCircle1Radius;
-    int           formulaBaseHeightCircle2Radius;
+    QString m_pointName{};
+
+    bool m_flagCircle1Radius{false};
+    bool m_flagCircle2Radius{false};
+    bool m_flagName{true};
+    bool m_flagError{true};
+
+    bool m_firstRelease{false};
+
+    /** @brief number number of handled objects */
+    qint32 m_stage{0};
+
+    void FinishCreating();
+
+    void InitIcons();
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto DialogPointOfIntersectionCircles::IsValid() const -> bool
+{
+    return m_flagCircle1Radius && m_flagCircle2Radius && m_flagName && m_flagError;
+}
 
 #endif // DIALOGPOINTOFINTERSECTIONCIRCLES_H

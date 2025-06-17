@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef VSIMPLECURVE_H
 #define VSIMPLECURVE_H
 
-#include <qcompilerdetection.h>
 #include <QColor>
 #include <QGraphicsItem>
 #include <QMetaObject>
@@ -48,13 +47,17 @@ template <class T> class QSharedPointer;
 
 class VSimpleCurve : public VAbstractSimple, public VCurvePathItem
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
     VSimpleCurve(quint32 id, const QSharedPointer<VAbstractCurve> &curve, QObject *parent = nullptr);
-    virtual ~VSimpleCurve() Q_DECL_EQ_DEFAULT;
+    ~VSimpleCurve() override = default;
 
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::SimpleCurve)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Vis::SimpleCurve)
+    };
 
     void RefreshGeometry(const QSharedPointer<VAbstractCurve> &curve);
 signals:
@@ -70,17 +73,17 @@ public slots:
     void CurveSelected(bool selected);
 
 protected:
-    virtual void     mousePressEvent( QGraphicsSceneMouseEvent * event ) override;
-    virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) override;
-    virtual void     hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) override;
-    virtual void     hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) override;
-    virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) override;
-    virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) override;
-    virtual void     keyReleaseEvent ( QKeyEvent * event ) override;
-    virtual void     ScalePenWidth() override;
+    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
+    auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
+    void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
+    void keyReleaseEvent(QKeyEvent *event) override;
+    void ScalePenWidth() override;
 
 private:
-    Q_DISABLE_COPY(VSimpleCurve)
+    Q_DISABLE_COPY_MOVE(VSimpleCurve) // NOLINT
 
     QSharedPointer<VAbstractCurve> m_curve;
     bool m_isHovered;

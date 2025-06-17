@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 #ifndef VTOOLALONGLINE_H
 #define VTOOLALONGLINE_H
 
-#include <qcompilerdetection.h>
+
 #include <QDomElement>
 #include <QGraphicsItem>
 #include <QMetaObject>
@@ -45,16 +45,11 @@ template <class T> class QSharedPointer;
 
 struct VToolAlongLineInitData : VToolLinePointInitData
 {
-    VToolAlongLineInitData()
-        : VToolLinePointInitData(),
-          formula("100.0"),
-          firstPointId(NULL_ID),
-          secondPointId(NULL_ID)
-    {}
+    VToolAlongLineInitData() = default;
 
-    QString formula;
-    quint32 firstPointId;
-    quint32 secondPointId;
+    QString formula{QStringLiteral("100.0")}; // NOLINT(misc-non-private-member-variables-in-classes)
+    quint32 firstPointId{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
+    quint32 secondPointId{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
 };
 
 /**
@@ -62,36 +57,37 @@ struct VToolAlongLineInitData : VToolLinePointInitData
  */
 class VToolAlongLine : public VToolLinePoint
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
-    virtual void setDialog() override;
-    static VToolAlongLine* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
-                                  VAbstractPattern *doc, VContainer *data);
-    static VToolAlongLine* Create(VToolAlongLineInitData &initData);
+    ~VToolAlongLine() override = default;
+    
+    void SetDialog() override;
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
+                       VAbstractPattern *doc, VContainer *data) -> VToolAlongLine*;
+    static auto Create(VToolAlongLineInitData &initData) -> VToolAlongLine*;
     static const QString ToolType;
-    virtual int  type() const override {return Type;}
+    auto type() const -> int override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::AlongLine)};
 
-    QString SecondPointName() const;
+    auto SecondPointName() const -> QString;
 
-    virtual void ShowVisualization(bool show) override;
+    void ShowVisualization(bool show) override;
 protected slots:
-    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
+    void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
 protected:
-    virtual void    RemoveReferens() override;
-    virtual void    SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                               QList<quint32> &newDependencies) override;
-    virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
-    virtual void    ReadToolAttributes(const QDomElement &domElement) override;
-    virtual void    SetVisualization() override;
-    virtual QString MakeToolTip() const override;
+    void RemoveReferens() override;
+    void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies) override;
+    void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    void ReadToolAttributes(const QDomElement &domElement) override;
+    void SetVisualization() override;
+    auto MakeToolTip() const -> QString override;
 private:
-    Q_DISABLE_COPY(VToolAlongLine)
+    Q_DISABLE_COPY_MOVE(VToolAlongLine) // NOLINT
 
     /** @brief secondPointId id second point of line. */
-    quint32       secondPointId;
+    quint32 m_secondPointId;
 
-    VToolAlongLine(const VToolAlongLineInitData &initData, QGraphicsItem *parent = nullptr);
+    explicit VToolAlongLine(const VToolAlongLineInitData &initData, QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLALONGLINE_H

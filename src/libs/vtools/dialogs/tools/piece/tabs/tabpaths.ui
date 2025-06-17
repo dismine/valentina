@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>426</width>
-    <height>637</height>
+    <width>573</width>
+    <height>662</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -28,8 +28,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>406</width>
-        <height>617</height>
+        <width>553</width>
+        <height>642</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
@@ -57,7 +57,7 @@
                 <string/>
                </property>
                <property name="pixmap">
-                <pixmap resource="../../../../../vmisc/share/resources/icon.qrc">:/icon/32x32/clockwise.png</pixmap>
+                <pixmap resource="../../../../../vmisc/share/resources/icon.qrc">:/icon/light/32x32/clockwise.png</pixmap>
                </property>
               </widget>
              </item>
@@ -74,21 +74,422 @@
             </layout>
            </item>
            <item>
-            <layout class="QHBoxLayout" name="horizontalLayout">
+            <widget class="QCheckBox" name="checkBoxHideMainPath">
+             <property name="toolTip">
+              <string>Hide the main path if the seam allowance is enabled</string>
+             </property>
+             <property name="text">
+              <string>Hide main path</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBoxOnDrawing">
+             <property name="toolTip">
+              <string>Export to DXF-AAMA sew line on Draw layer</string>
+             </property>
+             <property name="text">
+              <string>On drawing</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBoxShowFullPiece">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>Show full piece</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_4">
              <item>
-              <widget class="QLabel" name="labelEditName">
+              <widget class="QToolButton" name="toolButtonReverse">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="toolTip">
+                <string>Reverse node direction</string>
+               </property>
                <property name="text">
-                <string>Name of detail:</string>
+                <string notr="true">...</string>
+               </property>
+               <property name="icon">
+                <iconset theme="list-remove"/>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
                </property>
               </widget>
              </item>
              <item>
+              <widget class="QToolButton" name="toolButtonExcluded">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="toolTip">
+                <string>Excluded node</string>
+               </property>
+               <property name="text">
+                <string notr="true">...</string>
+               </property>
+               <property name="icon">
+                <iconset theme="format-text-strikethrough"/>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QToolButton" name="toolButtonTurnPoint">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="toolTip">
+                <string>Turn point</string>
+               </property>
+               <property name="text">
+                <string notr="true">...</string>
+               </property>
+               <property name="icon">
+                <iconset theme="snap-nodes-rotation-center"/>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QToolButton" name="toolButtonCheckUniqness">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="toolTip">
+                <string>Check node uniqness</string>
+               </property>
+               <property name="text">
+                <string notr="true">...</string>
+               </property>
+               <property name="icon">
+                <iconset theme="draw-star"/>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QToolButton" name="toolButtonPassmark">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="toolTip">
+                <string>Notch</string>
+               </property>
+               <property name="text">
+                <string notr="true">...</string>
+               </property>
+               <property name="icon">
+                <iconset theme="add-placemark"/>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QToolButton" name="toolButtonDuplicateNode">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="toolTip">
+                <string>Duplicate</string>
+               </property>
+               <property name="text">
+                <string notr="true">...</string>
+               </property>
+               <property name="icon">
+                <iconset theme="duplicate-node"/>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QToolButton" name="toolButtonDelete">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="toolTip">
+                <string>Delete node</string>
+               </property>
+               <property name="text">
+                <string notr="true">...</string>
+               </property>
+               <property name="icon">
+                <iconset theme="edit-delete"/>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QListWidget" name="listWidgetMainPath">
+             <property name="dragDropMode">
+              <enum>QAbstractItemView::InternalMove</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <item alignment="Qt::AlignLeft">
+              <widget class="QToolButton" name="toolButtonTop">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="toolTip">
+                <string>Move on top</string>
+               </property>
+               <property name="text">
+                <string notr="true"/>
+               </property>
+               <property name="icon">
+                <iconset theme="go-top">
+                 <normaloff>../../../../../../app/tape</normaloff>../../../../../../app/tape</iconset>
+               </property>
+              </widget>
+             </item>
+             <item alignment="Qt::AlignLeft">
+              <widget class="QToolButton" name="toolButtonUp">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="toolTip">
+                <string>Move up</string>
+               </property>
+               <property name="text">
+                <string notr="true"/>
+               </property>
+               <property name="icon">
+                <iconset theme="go-up">
+                 <normaloff>../../../../../../app/tape</normaloff>../../../../../../app/tape</iconset>
+               </property>
+              </widget>
+             </item>
+             <item alignment="Qt::AlignLeft">
+              <widget class="QToolButton" name="toolButtonDown">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="toolTip">
+                <string>Move down</string>
+               </property>
+               <property name="text">
+                <string notr="true"/>
+               </property>
+               <property name="icon">
+                <iconset theme="go-down">
+                 <normaloff>../../../../../../app/tape</normaloff>../../../../../../app/tape</iconset>
+               </property>
+              </widget>
+             </item>
+             <item alignment="Qt::AlignLeft">
+              <widget class="QToolButton" name="toolButtonBottom">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="toolTip">
+                <string>Move on bottom</string>
+               </property>
+               <property name="text">
+                <string notr="true"/>
+               </property>
+               <property name="icon">
+                <iconset theme="go-bottom">
+                 <normaloff>../../../../../../app/tape</normaloff>../../../../../../app/tape</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_2">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>5000</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBoxMirrorLine">
+             <property name="title">
+              <string>Mirror line</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_10">
+              <item>
+               <layout class="QFormLayout" name="formLayout">
+                <item row="0" column="0">
+                 <widget class="QLabel" name="labelMLStartPoint">
+                  <property name="text">
+                   <string>Start point:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QComboBox" name="comboBoxMLStartPoint"/>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLabel" name="labelMLEndPoint">
+                  <property name="text">
+                   <string>End point:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QComboBox" name="comboBoxMLEndPoint"/>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="checkBoxShowMirrorLine">
+                <property name="text">
+                 <string>Show mirror line</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="helpLabel">
+             <property name="text">
+              <string>Ready!</string>
+             </property>
+             <property name="textFormat">
+              <enum>Qt::RichText</enum>
+             </property>
+             <property name="scaledContents">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="tabPiece">
+          <attribute name="title">
+           <string>Piece</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_9">
+           <item>
+            <layout class="QGridLayout" name="gridLayout">
+             <item row="3" column="1">
+              <widget class="QLineEdit" name="lineEditUUID">
+               <property name="toolTip">
+                <string>Universally Unique IDentifier of piece. Used to identifier piece while updating manual layout. Left empty to generate new value.</string>
+               </property>
+               <property name="placeholderText">
+                <string notr="true">{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}</string>
+               </property>
+               <property name="clearButtonEnabled">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
               <widget class="VLineEdit" name="lineEditName">
                <property name="text">
                 <string>Detail</string>
                </property>
                <property name="placeholderText">
                 <string>Name can't be empty</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label">
+               <property name="text">
+                <string>Priority:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="labelEditName">
+               <property name="text">
+                <string>Name of detail:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="label_5">
+               <property name="text">
+                <string>Gradation label:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="labelEditUUID">
+               <property name="text">
+                <string notr="true">UUID:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QSpinBox" name="spinBoxPriority">
+               <property name="toolTip">
+                <string>Controls priority in layout. 0 - no priority.</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <layout class="QHBoxLayout" name="horizontalLayout">
+               <item>
+                <widget class="QLineEdit" name="lineEditGradationLabel">
+                 <property name="placeholderText">
+                  <string notr="true">%size%_%height%</string>
+                 </property>
+                 <property name="clearButtonEnabled">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButtonGradationPlaceholder">
+                 <property name="text">
+                  <string>Insert…</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_7">
+               <property name="text">
+                <string>Short name:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEditShortName">
+               <property name="toolTip">
+                <string>Name used to generate a variable</string>
+               </property>
+               <property name="maxLength">
+                <number>25</number>
                </property>
               </widget>
              </item>
@@ -115,119 +516,37 @@
             </widget>
            </item>
            <item>
-            <widget class="QCheckBox" name="checkBoxHideMainPath">
+            <widget class="QCheckBox" name="checkBoxSymmetricalCopy">
              <property name="toolTip">
-              <string>Hide the main path if the seam allowance is enabled</string>
+              <string>When the number of copies is greater than 1 and either 'Force Flipping' or 'Forbid Flipping' is selected, each even-numbered copy of the piece will be flipped vertically. The 'Force Flipping' or 'Forbid Flipping' setting will also toggle for each copy, applying the opposite of the initially selected option for each subsequent copy.</string>
              </property>
              <property name="text">
-              <string>Hide main path</string>
+              <string>Symmetrical copy</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QListWidget" name="listWidgetMainPath">
-             <property name="dragDropMode">
-              <enum>QAbstractItemView::InternalMove</enum>
+            <widget class="QCheckBox" name="checkBoxFollowGrainline">
+             <property name="toolTip">
+              <string>Force piece to always follow grainline direction regardless of layout settings.</string>
              </property>
-            </widget>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_3">
-             <item alignment="Qt::AlignLeft">
-              <widget class="QToolButton" name="toolButtonTop">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
-               <property name="toolTip">
-                <string>Move on top</string>
-               </property>
-               <property name="text">
-                <string notr="true">...</string>
-               </property>
-               <property name="icon">
-                <iconset theme="go-top">
-                 <normaloff>../../../../../../app/tape</normaloff>../../../../../../app/tape</iconset>
-               </property>
-              </widget>
-             </item>
-             <item alignment="Qt::AlignLeft">
-              <widget class="QToolButton" name="toolButtonUp">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
-               <property name="toolTip">
-                <string>Move up</string>
-               </property>
-               <property name="text">
-                <string notr="true">...</string>
-               </property>
-               <property name="icon">
-                <iconset theme="go-up">
-                 <normaloff>../../../../../../app/tape</normaloff>../../../../../../app/tape</iconset>
-               </property>
-              </widget>
-             </item>
-             <item alignment="Qt::AlignLeft">
-              <widget class="QToolButton" name="toolButtonDown">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
-               <property name="toolTip">
-                <string>Move down</string>
-               </property>
-               <property name="text">
-                <string notr="true">...</string>
-               </property>
-               <property name="icon">
-                <iconset theme="go-down">
-                 <normaloff>../../../../../../app/tape</normaloff>../../../../../../app/tape</iconset>
-               </property>
-              </widget>
-             </item>
-             <item alignment="Qt::AlignLeft">
-              <widget class="QToolButton" name="toolButtonBottom">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
-               <property name="toolTip">
-                <string>Move on bottom</string>
-               </property>
-               <property name="text">
-                <string notr="true">...</string>
-               </property>
-               <property name="icon">
-                <iconset theme="go-bottom">
-                 <normaloff>../../../../../../app/tape</normaloff>../../../../../../app/tape</iconset>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="horizontalSpacer_2">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>5000</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <widget class="QLabel" name="helpLabel">
              <property name="text">
-              <string>Ready!</string>
-             </property>
-             <property name="textFormat">
-              <enum>Qt::RichText</enum>
-             </property>
-             <property name="scaledContents">
-              <bool>false</bool>
+              <string>Follow grainline</string>
              </property>
             </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
            </item>
           </layout>
          </widget>
@@ -265,7 +584,7 @@
               <bool>false</bool>
              </property>
              <property name="title">
-              <string>Automatic</string>
+              <string comment="seam allowance">Automatic</string>
              </property>
              <property name="flat">
               <bool>false</bool>
@@ -348,11 +667,11 @@
                    <string>Formula wizard</string>
                   </property>
                   <property name="text">
-                   <string notr="true">...</string>
+                   <string notr="true"/>
                   </property>
                   <property name="icon">
                    <iconset resource="../../../../../vmisc/share/resources/icon.qrc">
-                    <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
+                    <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
                   </property>
                   <property name="iconSize">
                    <size>
@@ -368,7 +687,7 @@
                    <string/>
                   </property>
                   <property name="pixmap">
-                   <pixmap resource="../../../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
+                   <pixmap resource="../../../../../vmisc/share/resources/icon.qrc">:/icon/light/24x24/equal.png</pixmap>
                   </property>
                  </widget>
                 </item>
@@ -587,11 +906,11 @@
                       <string>Formula wizard</string>
                      </property>
                      <property name="text">
-                      <string notr="true">...</string>
+                      <string notr="true"/>
                      </property>
                      <property name="icon">
                       <iconset resource="../../../../../vmisc/share/resources/icon.qrc">
-                       <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
+                       <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
                      </property>
                      <property name="iconSize">
                       <size>
@@ -607,7 +926,7 @@
                       <string/>
                      </property>
                      <property name="pixmap">
-                      <pixmap resource="../../../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
+                      <pixmap resource="../../../../../vmisc/share/resources/icon.qrc">:/icon/light/24x24/equal.png</pixmap>
                      </property>
                     </widget>
                    </item>
@@ -777,11 +1096,11 @@
                       <string>Formula wizard</string>
                      </property>
                      <property name="text">
-                      <string notr="true">...</string>
+                      <string notr="true"/>
                      </property>
                      <property name="icon">
                       <iconset resource="../../../../../vmisc/share/resources/icon.qrc">
-                       <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
+                       <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
                      </property>
                      <property name="iconSize">
                       <size>
@@ -797,7 +1116,7 @@
                       <string/>
                      </property>
                      <property name="pixmap">
-                      <pixmap resource="../../../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
+                      <pixmap resource="../../../../../vmisc/share/resources/icon.qrc">:/icon/light/24x24/equal.png</pixmap>
                      </property>
                     </widget>
                    </item>
@@ -932,7 +1251,7 @@
               <bool>false</bool>
              </property>
              <property name="title">
-              <string>Custom</string>
+              <string comment="seam allowance">Custom</string>
              </property>
              <property name="flat">
               <bool>false</bool>
@@ -1015,6 +1334,9 @@
                    <height>0</height>
                   </size>
                  </property>
+                 <property name="dragDropMode">
+                  <enum>QAbstractItemView::InternalMove</enum>
+                 </property>
                 </widget>
                </widget>
               </item>
@@ -1045,12 +1367,12 @@
   <customwidget>
    <class>VPlainTextEdit</class>
    <extends>QPlainTextEdit</extends>
-   <header location="global">vplaintextedit.h</header>
+   <header>../vwidgets/vplaintextedit.h</header>
   </customwidget>
   <customwidget>
    <class>VLineEdit</class>
    <extends>QLineEdit</extends>
-   <header>vlineedit.h</header>
+   <header>../vwidgets/vlineedit.h</header>
   </customwidget>
  </customwidgets>
  <resources>

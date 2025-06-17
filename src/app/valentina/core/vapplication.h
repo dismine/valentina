@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,89 +29,92 @@
 #ifndef VAPPLICATION_H
 #define VAPPLICATION_H
 
-#include "../vmisc/vabstractapplication.h"
-#include "../options.h"
-#include "../vwidgets/vmaingraphicsview.h"
+#include "../vmisc/vabstractvalapplication.h"
+#include "../vmisc/vlockguard.h"
 #include "../vpatterndb/vtranslatevars.h"
-#include "vsettings.h"
 #include "vcmdexport.h"
 
-class VApplication;// use in define
-
-#if defined(qApp)
-#undef qApp
-#endif
-#define qApp (static_cast<VApplication*>(VAbstractApplication::instance()))
+class VApplication; // use in define
+class VKnownMeasurementsDatabase;
 
 /**
  * @brief The VApplication class reimplamentation QApplication class.
  */
-class VApplication : public VAbstractApplication
+class VApplication : public VAbstractValApplication
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
+
 public:
+    VApplication(int &argc, char **argv);
+    ~VApplication() override;
 
-    VApplication(int &argc, char ** argv);
-    virtual ~VApplication() override;
-    static void        NewValentina(const QString &fileName = QString());
-    virtual bool       notify(QObject * receiver, QEvent * event) override;
+    static void NewValentina(const QString &fileName = QString());
+    auto notify(QObject *receiver, QEvent *event) -> bool override;
 
-    void               InitOptions();
+    void InitOptions();
 
-    QString            TapeFilePath() const;
+    static void StartDetachedProcess(const QString &program, const QStringList &arguments);
 
-    QTimer             *getAutoSaveTimer() const;
-    void               setAutoSaveTimer(QTimer *value);
+    static auto TapeFilePath() -> QString;
+    static auto PuzzleFilePath() -> QString;
 
-    static QStringList LabelLanguages();
+    auto getAutoSaveTimer() const -> QTimer *;
+    void setAutoSaveTimer(QTimer *value);
 
-    void               StartLogging();
-    QTextStream       *LogFile();
+    static auto LabelLanguages() -> QStringList;
 
-    virtual const VTranslateVars *TrVars() override;
+    void StartLogging();
+    auto LogFile() -> QTextStream *;
 
-    bool static IsGUIMode();
-    virtual bool IsAppInGUIMode() const override;
-    virtual bool IsPedantic() const override;
+    auto KnownMeasurementsDatabase() -> VKnownMeasurementsDatabase * override;
+    void RestartKnownMeasurementsDatabaseWatcher();
 
-    virtual void OpenSettings() override;
-    VSettings *ValentinaSettings();
+    auto TrVars() -> const VTranslateVars * override;
+
+    auto static IsGUIMode() -> bool;
+    auto IsAppInGUIMode() const -> bool override;
+    auto IsPedantic() const -> bool override;
+
+    void OpenSettings() override;
+
+    static auto VApp() -> VApplication *;
+    static auto CommandLine() -> VCommandLinePtr;
 
 protected:
-    virtual void       InitTrVars() override;
-    virtual bool	   event(QEvent *e) override;
+    void InitTrVars() override;
+    auto event(QEvent *e) -> bool override;
+
+protected slots:
+    void AboutToQuit() override;
+    void RepopulateMeasurementsDatabase(const QString &path);
+    void KnownMeasurementsPathChanged(const QString &oldPath, const QString &newPath);
 
 private:
-    Q_DISABLE_COPY(VApplication)
-    VTranslateVars     *trVars;
-    QTimer             *autoSaveTimer;
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VApplication) // NOLINT
+    VTranslateVars *m_trVars{nullptr};
+    QTimer *m_autoSaveTimer{nullptr};
 
-    std::shared_ptr<VLockGuard<QFile>> lockLog;
-    std::shared_ptr<QTextStream> out;
+    QSharedPointer<VLockGuard<QFile>> m_lockLog{};
+    std::shared_ptr<QTextStream> m_out{nullptr};
 
-    QString            LogDirPath()const;
-    QString            LogPath()const;
-    bool               CreateLogDir()const;
-    void               BeginLogging();
-    void               ClearOldLogs()const;
+    VKnownMeasurementsDatabase *m_knownMeasurementsDatabase{nullptr};
+    QFileSystemWatcher *m_knownMeasurementsDatabaseWatcher{nullptr};
 
-public:
-    //moved to the end of class so merge should go
-    const VCommandLinePtr     CommandLine() const;
+    static auto LogPath() -> QString;
+    void BeginLogging();
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QTimer *VApplication::getAutoSaveTimer() const
+inline auto VApplication::getAutoSaveTimer() const -> QTimer *
 {
-    return autoSaveTimer;
+    return m_autoSaveTimer;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 inline void VApplication::setAutoSaveTimer(QTimer *value)
 {
-    autoSaveTimer = value;
+    m_autoSaveTimer = value;
 }
-//---------------------------------------------------------------------------------------------------------------------
-
 
 #endif // VAPPLICATION_H

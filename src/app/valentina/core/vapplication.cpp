@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -27,41 +27,169 @@
  *************************************************************************/
 
 #include "vapplication.h"
-#include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/exception/vexceptionbadid.h"
 #include "../ifc/exception/vexceptionconversionerror.h"
 #include "../ifc/exception/vexceptionemptyparameter.h"
-#include "../ifc/exception/vexceptionwrongid.h"
 #include "../ifc/exception/vexceptioninvalidnotch.h"
-#include "../vwidgets/vmaingraphicsview.h"
-#include "../version.h"
-#include "../vmisc/logging.h"
-#include "../vmisc/vmath.h"
-#include "../qmuparser/qmuparsererror.h"
+#include "../ifc/exception/vexceptionobjecterror.h"
+#include "../ifc/exception/vexceptionwrongid.h"
 #include "../mainwindow.h"
+#include "../qmuparser/qmuparsererror.h"
+#include "../version.h"
+#include "../vformat/knownmeasurements/vknownmeasurementsdatabase.h"
+#include "../vganalytics/vganalytics.h"
 #include "../vmisc/qt_dispatch/qt_dispatch.h"
+#include "../vmisc/theme/vtheme.h"
+#include "../vmisc/vsysexits.h"
+#include "../vmisc/vvalentinasettings.h"
+#include "vvalentinashortcutmanager.h"
 
-#include <QtDebug>
-#include <QDir>
-#include <QProcess>
-#include <QTemporaryFile>
-#include <QFile>
-#include <QStandardPaths>
-#include <QMessageBox>
-#include <QThread>
+#include "QtConcurrent/qtconcurrentrun.h"
+#include <vcsRepoState.h>
 #include <QDateTime>
-#include <QtXmlPatterns>
+#include <QDir>
+#include <QEvent>
+#include <QFile>
+#include <QFileSystemWatcher>
+#include <QFuture>
 #include <QIcon>
+#include <QLoggingCategory>
+#include <QMessageBox>
+#include <QObject>
+#include <QProcess>
+#include <QScopeGuard>
+#include <QStandardPaths>
+#include <QStyleFactory>
+#include <QTemporaryFile>
+#include <QThread>
+#include <QTimer>
+#include <QUuid>
+#include <QtDebug>
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#include <QtXmlPatterns>
+#endif
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+#if defined(APPIMAGE) && defined(Q_OS_LINUX)
+#include "../vmisc/appimage.h"
+#endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
+
+using namespace Qt::Literals::StringLiterals;
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
 QT_WARNING_DISABLE_INTEL(1418)
 
-Q_LOGGING_CATEGORY(vApp, "v.application")
+Q_LOGGING_CATEGORY(vApp, "v.application") // NOLINT
 
 QT_WARNING_POP
 
-Q_DECL_CONSTEXPR auto DAYS_TO_KEEP_LOGS = 3;
+namespace
+{
+auto AppFilePath(const QString &appName) -> QString
+{
+#ifdef Q_OS_WIN
+    const auto executableSuffix = QStringLiteral(".exe");
+#else
+    const QString executableSuffix;
+#endif
+
+#if defined(APPIMAGE) && defined(Q_OS_LINUX)
+    return AppImageRoot() + BINDIR + '/'_L1 + appName;
+#else
+    if (QFileInfo const canonicalFile(
+            QStringLiteral("%1/%2").arg(QCoreApplication::applicationDirPath(), appName + executableSuffix));
+        canonicalFile.exists())
+    {
+        return canonicalFile.absoluteFilePath();
+    }
+#endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
+
+#if defined(Q_OS_MACOS) && defined(MULTI_BUNDLE)
+    QFileInfo multiBundleFile(
+        QStringLiteral("%1/../../../%2.app/Contents/MacOS/%2").arg(QCoreApplication::applicationDirPath(), appName));
+    if (multiBundleFile.exists())
+    {
+        return multiBundleFile.absoluteFilePath();
+    }
+#endif
+
+#if !defined(Q_OS_MACOS)
+    return appName + executableSuffix;
+#else
+    return appName + QStringLiteral(".app");
+#endif
+}
+} // namespace
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void LogMessageDetails(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+{
+    QString debugdate = "["_L1 + QDateTime::currentDateTime().toString(QStringLiteral("yyyy.MM.dd hh:mm:ss"));
+    QString const file = VAbstractApplication::ReduceLogContextFilePath(context.file);
+    const bool isPatternMessage = VAbstractApplication::VApp()->IsWarningMessage(msg);
+
+    switch (type)
+    {
+        case QtDebugMsg:
+            debugdate += QStringLiteral(":DEBUG:%1(%2)] %3: %4: %5")
+                             .arg(file)
+                             .arg(context.line)
+                             .arg(context.function, context.category, msg);
+            vStdOut() << QApplication::translate("vNoisyHandler", "DEBUG:") << msg << "\n";
+            break;
+        case QtWarningMsg:
+            if (isPatternMessage)
+            {
+                VAbstractValApplication::VApp()->PostWarningMessage(msg, type);
+            }
+            debugdate += QStringLiteral(":WARNING:%1(%2)] %3: %4: %5")
+                             .arg(file)
+                             .arg(context.line)
+                             .arg(context.function, context.category, msg);
+            vStdErr() << QApplication::translate("vNoisyHandler", "WARNING:") << msg << "\n";
+            break;
+        case QtCriticalMsg:
+            if (isPatternMessage)
+            {
+                VAbstractValApplication::VApp()->PostWarningMessage(msg, type);
+            }
+            debugdate += QStringLiteral(":CRITICAL:%1(%2)] %3: %4: %5")
+                             .arg(file)
+                             .arg(context.line)
+                             .arg(context.function, context.category, msg);
+            vStdErr() << QApplication::translate("vNoisyHandler", "CRITICAL:") << msg << "\n";
+            break;
+        case QtFatalMsg:
+            debugdate += QStringLiteral(":FATAL:%1(%2)] %3: %4: %5")
+                             .arg(file)
+                             .arg(context.line)
+                             .arg(context.function, context.category, msg);
+            vStdErr() << QApplication::translate("vNoisyHandler", "FATAL:") << msg << "\n";
+            break;
+        case QtInfoMsg:
+            if (isPatternMessage)
+            {
+                VAbstractValApplication::VApp()->PostWarningMessage(msg, type);
+            }
+            debugdate += QStringLiteral(":INFO:%1(%2)] %3: %4: %5")
+                             .arg(file)
+                             .arg(context.line)
+                             .arg(context.function, context.category, msg);
+            vStdOut() << QApplication::translate("vNoisyHandler", "INFO:") << msg << "\n";
+            break;
+        default:
+            break;
+    }
+    vStdOut().flush();
+    vStdErr().flush();
+
+    (*VApplication::VApp()->LogFile()) << debugdate << Qt::endl;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
@@ -75,9 +203,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     if (not isGuiThread)
     {
         auto Handler = [](QtMsgType type, const QMessageLogContext &context, const QString &msg)
-        {
-            noisyFailureMsgHandler(type, context, msg);
-        };
+        { noisyFailureMsgHandler(type, context, msg); };
 
         q_dispatch_async_main(Handler, type, context, msg);
         return;
@@ -100,23 +226,11 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     {
         type = QtDebugMsg;
     }
-#endif //defined(V_NO_ASSERT)
+#endif // defined(V_NO_ASSERT)
 
 #if defined(Q_OS_MAC)
-#   if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0) && QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-        // Try hide very annoying, Qt related, warnings in Mac OS X
-        // QNSView mouseDragged: Internal mouse button tracking invalid (missing Qt::LeftButton)
-        // https://bugreports.qt.io/browse/QTBUG-42846
-        if ((type == QtWarningMsg) && msg.contains(QStringLiteral("QNSView")))
-        {
-            type = QtDebugMsg;
-        }
-#   endif
-
-    // Hide Qt bug 'Assertion when reading an icns file'
-    // https://bugreports.qt.io/browse/QTBUG-45537
-    // Remove after Qt fix will be released
-    if ((type == QtWarningMsg) && msg.contains(QStringLiteral("QICNSHandler::read()")))
+    // Hide anything that starts with QMacCGContext
+    if ((type == QtWarningMsg) && msg.contains(QStringLiteral("QMacCGContext::")))
     {
         type = QtDebugMsg;
     }
@@ -131,8 +245,8 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     // this is another one that doesn't make sense as just a debug message.  pretty serious
     // sign of a problem
     // http://www.developer.nokia.com/Community/Wiki/QPainter::begin:Paint_device_returned_engine_%3D%3D_0_(Known_Issue)
-    if ((type == QtDebugMsg) && msg.contains(QStringLiteral("QPainter::begin"))
-            && msg.contains(QStringLiteral("Paint device returned engine")))
+    if ((type == QtDebugMsg) && msg.contains(QStringLiteral("QPainter::begin")) &&
+        msg.contains(QStringLiteral("Paint device returned engine")))
     {
         type = QtWarningMsg;
     }
@@ -140,104 +254,75 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     // This qWarning about "Cowardly refusing to send clipboard message to hung application..."
     // is something that can easily happen if you are debugging and the application is paused.
     // As it is so common, not worth popping up a dialog.
-    if ((type == QtWarningMsg) && msg.contains(QStringLiteral("QClipboard::event"))
-            && msg.contains(QStringLiteral("Cowardly refusing")))
+    if ((type == QtWarningMsg) && msg.contains(QStringLiteral("QClipboard::event")) &&
+        msg.contains(QStringLiteral("Cowardly refusing")))
     {
         type = QtDebugMsg;
     }
 
+    // Annoying warning that we can ignore
+    if ((type == QtWarningMsg) && (msg.contains(QStringLiteral("OpenType support missing for")) ||
+                                   msg.contains(QStringLiteral("DirectWrite: CreateFontFaceFromHDC() failed (Indicates "
+                                                               "an error in an input file such as a font file.)"))))
     {
-        QString debugdate = "[" + QDateTime::currentDateTime().toString(QStringLiteral("yyyy.MM.dd hh:mm:ss"));
-
-        switch (type)
-        {
-            case QtDebugMsg:
-                debugdate += QString(":DEBUG:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
-                             .arg(context.function, context.category, msg);
-                vStdOut() << QApplication::translate("vNoisyHandler", "DEBUG:") << msg << "\n";
-                break;
-            case QtWarningMsg:
-                debugdate += QString(":WARNING:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
-                             .arg(context.function, context.category, msg);
-                vStdErr() << QApplication::translate("vNoisyHandler", "WARNING:") << msg << "\n";
-                break;
-            case QtCriticalMsg:
-                debugdate += QString(":CRITICAL:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
-                             .arg(context.function, context.category, msg);
-                vStdErr() << QApplication::translate("vNoisyHandler", "CRITICAL:") << msg << "\n";
-                break;
-            case QtFatalMsg:
-                debugdate += QString(":FATAL:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
-                             .arg(context.function, context.category, msg);
-                vStdErr() << QApplication::translate("vNoisyHandler", "FATAL:") << msg << "\n";
-                break;
-            #if QT_VERSION > QT_VERSION_CHECK(5, 4, 2)
-            case QtInfoMsg:
-                debugdate += QString(":INFO:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
-                             .arg(context.function, context.category, msg);
-                vStdOut() << QApplication::translate("vNoisyHandler", "INFO:") << msg << "\n";
-                break;
-            #endif
-            default:
-                break;
-        }
-        vStdOut().flush();
-        vStdErr().flush();
-
-        (*qApp->LogFile()) << debugdate <<  endl;
+        type = QtDebugMsg;
     }
+
+    QString logMsg = msg;
+    const bool isPatternMessage = VAbstractApplication::VApp()->IsWarningMessage(msg);
+    if (isPatternMessage)
+    {
+        logMsg = logMsg.remove(VAbstractValApplication::warningMessageSignature);
+    }
+
+    LogMessageDetails(type, context, msg);
 
     if (isGuiThread)
     {
-        //fixme: trying to make sure there are no save/load dialogs are opened, because error message during them will
-        //lead to crash
-        const bool topWinAllowsPop = (QApplication::activeModalWidget() == nullptr) ||
-                !QApplication::activeModalWidget()->inherits("QFileDialog");
-
-        QMessageBox messageBox;
-        switch (type)
+        if ((type == QtWarningMsg || type == QtCriticalMsg || type == QtFatalMsg) && VApplication::IsGUIMode())
         {
-            case QtWarningMsg:
-                messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Warning"));
-                messageBox.setIcon(QMessageBox::Warning);
-                break;
-            case QtCriticalMsg:
-                messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Critical error"));
-                messageBox.setIcon(QMessageBox::Critical);
-                break;
-            case QtFatalMsg:
-                messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Fatal error"));
-                messageBox.setIcon(QMessageBox::Critical);
-                break;
-            #if QT_VERSION > QT_VERSION_CHECK(5, 4, 2)
-            case QtInfoMsg:
-                messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Information"));
-                messageBox.setIcon(QMessageBox::Information);
-                break;
-            #endif
-            case QtDebugMsg:
-            default:
-                break;
-        }
+            // fixme: trying to make sure there are no save/load dialogs are opened, because error message during
+            //  them will lead to crash
+            const bool topWinAllowsPop = (QApplication::activeModalWidget() == nullptr) ||
+                                         !QApplication::activeModalWidget()->inherits("QFileDialog");
 
-        if (type == QtWarningMsg || type == QtCriticalMsg || type == QtFatalMsg)
-        {
-            if (VApplication::IsGUIMode())
+            if (topWinAllowsPop && (not isPatternMessage || (type == QtCriticalMsg || type == QtFatalMsg)))
             {
-                if (topWinAllowsPop)
+                QMessageBox messageBox;
+                switch (type)
                 {
-                    messageBox.setText(VAbstractApplication::ClearMessage(msg));
-                    messageBox.setStandardButtons(QMessageBox::Ok);
-                    messageBox.setWindowModality(Qt::ApplicationModal);
-                    messageBox.setModal(true);
-                #ifndef QT_NO_CURSOR
-                    QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
-                #endif
-                    messageBox.exec();
-                #ifndef QT_NO_CURSOR
-                    QGuiApplication::restoreOverrideCursor();
-                #endif
+                    case QtWarningMsg:
+                        messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Warning"));
+                        messageBox.setIcon(QMessageBox::Warning);
+                        break;
+                    case QtCriticalMsg:
+                        messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Critical error"));
+                        messageBox.setIcon(QMessageBox::Critical);
+                        break;
+                    case QtFatalMsg:
+                        messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Fatal error"));
+                        messageBox.setIcon(QMessageBox::Critical);
+                        break;
+                    case QtInfoMsg:
+                        messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Information"));
+                        messageBox.setIcon(QMessageBox::Information);
+                        break;
+                    case QtDebugMsg:
+                    default:
+                        break;
                 }
+
+                messageBox.setText(VAbstractValApplication::ClearMessage(logMsg));
+                messageBox.setStandardButtons(QMessageBox::Ok);
+                messageBox.setWindowModality(Qt::ApplicationModal);
+                messageBox.setModal(true);
+#ifndef QT_NO_CURSOR
+                QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
+#endif
+                messageBox.exec();
+#ifndef QT_NO_CURSOR
+                QGuiApplication::restoreOverrideCursor();
+#endif
             }
         }
 
@@ -255,8 +340,6 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     }
 }
 
-#define DefWidth 1.2//mm
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VApplication constructor.
@@ -264,30 +347,37 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
  * @param argv command line.
  */
 VApplication::VApplication(int &argc, char **argv)
-    : VAbstractApplication(argc, argv),
-      trVars(nullptr),
-      autoSaveTimer(nullptr),
-      lockLog(),
-      out(nullptr)
+  : VAbstractValApplication(argc, argv)
 {
-    setApplicationDisplayName(VER_PRODUCTNAME_STR);
-    setApplicationName(VER_INTERNALNAME_STR);
-    setOrganizationName(VER_COMPANYNAME_STR);
-    setOrganizationDomain(VER_COMPANYDOMAIN_STR);
+    setApplicationDisplayName(QStringLiteral(VER_PRODUCTNAME_STR));
+    setApplicationName(QStringLiteral(VER_INTERNALNAME_STR));
+    setOrganizationName(QStringLiteral(VER_COMPANYNAME_STR));
+    setOrganizationDomain(QStringLiteral(VER_COMPANYDOMAIN_STR));
     // Setting the Application version
-    setApplicationVersion(APP_VERSION_STR);
-
+    setApplicationVersion(AppVersionStr());
     // making sure will create new instance...just in case we will ever do 2 objects of VApplication
     VCommandLine::Reset();
-    VCommandLine::Get(*this);
+    VTheme::Instance()->StoreDefaultThemeName(QIcon::themeName());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VApplication::~VApplication()
 {
     qCDebug(vApp, "Application closing.");
+
+    if (IsGUIMode() && settings->IsCollectStatistic())
+    {
+        auto *statistic = VGAnalytics::Instance();
+
+        QString const clientID = settings->GetClientID();
+        if (!clientID.isEmpty())
+        {
+            statistic->SendAppCloseEvent(m_uptimeTimer.elapsed());
+        }
+    }
+
     qInstallMessageHandler(nullptr); // Resore the message handler
-    delete trVars;
+    delete m_trVars;
     VCommandLine::Reset();
 }
 
@@ -304,7 +394,7 @@ void VApplication::NewValentina(const QString &fileName)
         qCDebug(vApp, "New process without arguments. program = %s",
                 qUtf8Printable(QCoreApplication::applicationFilePath()));
         // Path can contain spaces.
-        if (QProcess::startDetached("\""+QCoreApplication::applicationFilePath()+"\""))
+        if (QProcess::startDetached(QCoreApplication::applicationFilePath(), QStringList()))
         {
             qCDebug(vApp, "The process was started successfully.");
         }
@@ -315,9 +405,9 @@ void VApplication::NewValentina(const QString &fileName)
     }
     else
     {
-        const QString run = QString("\"%1\" \"%2\"").arg(QCoreApplication::applicationFilePath(), fileName);
+        const auto run = QStringLiteral("\"%1\" \"%2\"").arg(QCoreApplication::applicationFilePath(), fileName);
         qCDebug(vApp, "New process with arguments. program = %s", qUtf8Printable(run));
-        if (QProcess::startDetached(run))
+        if (QProcess::startDetached(QCoreApplication::applicationFilePath(), QStringList{fileName}))
         {
             qCDebug(vApp, "The process was started successfully.");
         }
@@ -336,7 +426,7 @@ void VApplication::NewValentina(const QString &fileName)
  * @return value that is returned from the receiver's event handler.
  */
 // reimplemented from QApplication so we can throw exceptions in slots
-bool VApplication::notify(QObject *receiver, QEvent *event)
+auto VApplication::notify(QObject *receiver, QEvent *event) -> bool
 {
     try
     {
@@ -344,7 +434,8 @@ bool VApplication::notify(QObject *receiver, QEvent *event)
     }
     catch (const VExceptionObjectError &e)
     {
-        qCCritical(vApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file. Program will be terminated.")), //-V807
+        qCCritical(vApp, "%s\n\n%s\n\n%s",
+                   qUtf8Printable(tr("Error parsing file. Program will be terminated.")), //-V807
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         exit(V_EX_DATAERR);
     }
@@ -375,21 +466,26 @@ bool VApplication::notify(QObject *receiver, QEvent *event)
     catch (const VExceptionToolWasDeleted &e)
     {
         qCCritical(vApp, "%s\n\n%s\n\n%s",
-                   qUtf8Printable("Unhadled deleting tool. Continue use object after deleting"),
+                   qUtf8Printable(QStringLiteral("Unhadled deleting tool. Continue use object after deleting")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         exit(V_EX_DATAERR);
     }
-    catch(const VExceptionInvalidNotch &e)
+    catch (const VExceptionInvalidNotch &e)
     {
-        qCCritical(vApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Invalid notch.")),
-                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        qCCritical(vApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Invalid notch.")), qUtf8Printable(e.ErrorMessage()),
+                   qUtf8Printable(e.DetailedInformation()));
         exit(V_EX_DATAERR);
     }
     catch (const VException &e)
     {
-        qCCritical(vApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Something's wrong!!")),
-                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        qCCritical(vApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Something's wrong!!")), qUtf8Printable(e.ErrorMessage()),
+                   qUtf8Printable(e.DetailedInformation()));
         return true;
+    }
+    catch (const qmu::QmuParserWarning &e)
+    {
+        qCCritical(vApp, "%s", qUtf8Printable(tr("Formula warning: %1. Program will be terminated.").arg(e.GetMsg())));
+        exit(V_EX_DATAERR);
     }
     // These last two cases are special. I found that we can't show here a modal dialog with an error message.
     // Somehow program doesn't wait until an error dialog will be closed. But if ignore the exception the program will
@@ -399,7 +495,7 @@ bool VApplication::notify(QObject *receiver, QEvent *event)
         qCCritical(vApp, "%s", qUtf8Printable(tr("Parser error: %1. Program will be terminated.").arg(e.GetMsg())));
         exit(V_EX_DATAERR);
     }
-    catch (std::exception& e)
+    catch (std::exception &e)
     {
         qCCritical(vApp, "%s", qUtf8Printable(tr("Exception thrown: %1. Program will be terminated.").arg(e.what())));
         exit(V_EX_SOFTWARE);
@@ -408,99 +504,44 @@ bool VApplication::notify(QObject *receiver, QEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VApplication::TapeFilePath() const
+auto VApplication::TapeFilePath() -> QString
 {
-    const QString tape = QStringLiteral("tape");
-#ifdef Q_OS_WIN
-    QFileInfo tapeFile(QCoreApplication::applicationDirPath() + "/" + tape + ".exe");
-    if (tapeFile.exists())
-    {
-        return tapeFile.absoluteFilePath();
-    }
-    else
-    {
-        return QCoreApplication::applicationDirPath() + "/../../tape/bin/" + tape + ".exe";
-    }
-#elif defined(Q_OS_MAC)
-    QFileInfo tapeFile(QCoreApplication::applicationDirPath() + "/" + tape);
-    if (tapeFile.exists())
-    {
-        return tapeFile.absoluteFilePath();
-    }
-    else
-    {
-        QFileInfo file(QCoreApplication::applicationDirPath() + "/../../tape/bin/" + tape);
-        if (file.exists())
-        {
-            return file.absoluteFilePath();
-        }
-        else
-        {
-            return tape;
-        }
-    }
-#else // Unix
-    QFileInfo file(QCoreApplication::applicationDirPath() + "/../../tape/bin/" + tape);
-    if (file.exists())
-    {
-        return file.absoluteFilePath();
-    }
-    else
-    {
-        QFileInfo tapeFile(QCoreApplication::applicationDirPath() + "/" + tape);
-        if (tapeFile.exists())
-        {
-            return tapeFile.absoluteFilePath();
-        }
-        else
-        {
-            return tape;
-        }
-    }
-#endif
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VApplication::LogDirPath() const
-{
-#if defined(Q_OS_WIN) || defined(Q_OS_OSX)
-    const QString logDirPath = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString(),
-                                                      QStandardPaths::LocateDirectory) + "Valentina";
+#ifdef Q_OS_MACOS
+    const auto appName = QStringLiteral("Tape");
 #else
-    const QString logDirPath = QStandardPaths::locate(QStandardPaths::ConfigLocation, QString(),
-                                                      QStandardPaths::LocateDirectory)
-            + QCoreApplication::organizationName();
+    const auto appName = QStringLiteral("tape");
 #endif
-    return logDirPath;
+    return AppFilePath(appName);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VApplication::LogPath() const
+auto VApplication::PuzzleFilePath() -> QString
 {
-    return QString("%1/valentina-pid%2.log").arg(LogDirPath()).arg(applicationPid());
+#ifdef Q_OS_MACOS
+    const auto appName = QStringLiteral("Puzzle");
+#else
+    const auto appName = QStringLiteral("puzzle");
+#endif
+    return AppFilePath(appName);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VApplication::CreateLogDir() const
+auto VApplication::LogPath() -> QString
 {
-    QDir logDir(LogDirPath());
-    if (logDir.exists() == false)
-    {
-        return logDir.mkpath(QChar('.')); // Create directory for log if need
-    }
-    return true;
+    // Keep in sync with VCrashPaths::GetAttachmentPath
+    return QStringLiteral("%1/valentina-pid%2.log").arg(LogDirPath()).arg(applicationPid());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VApplication::BeginLogging()
 {
-    VlpCreateLock(lockLog, LogPath(), [this](){return new QFile(LogPath());});
+    VlpCreateLock(m_lockLog, LogPath(), []() { return new QFile(LogPath()); });
 
-    if (lockLog->IsLocked())
+    if (m_lockLog->IsLocked())
     {
-        if (lockLog->GetProtected()->open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
+        if (m_lockLog->GetProtected()->open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
         {
-            out.reset(new QTextStream(lockLog->GetProtected().get()));
+            m_out.reset(new QTextStream(m_lockLog->GetProtected().data()));
             qInstallMessageHandler(noisyFailureMsgHandler);
             qCDebug(vApp, "Log file %s was locked.", qUtf8Printable(LogPath()));
         }
@@ -517,98 +558,90 @@ void VApplication::BeginLogging()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VApplication::ClearOldLogs() const
-{
-    const QString workingDirectory = QDir::currentPath();// Save the app working directory
-    QDir logsDir(LogDirPath());
-    logsDir.setNameFilters(QStringList("*.log"));
-    logsDir.setCurrent(LogDirPath());
-
-    const QStringList allFiles = logsDir.entryList(QDir::NoDotAndDotDot | QDir::Files);
-    if (allFiles.isEmpty() == false)
-    {
-        qCDebug(vApp, "Clearing old logs");
-        for (auto &fn : allFiles)
-        {
-            QFileInfo info(fn);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
-            const QDateTime created = info.birthTime();
-#else
-            const QDateTime created = info.created();
-#endif
-            if (created.daysTo(QDateTime::currentDateTime()) >= DAYS_TO_KEEP_LOGS)
-            {
-                VLockGuard<QFile> tmp(info.absoluteFilePath(), [&fn](){return new QFile(fn);});
-                if (tmp.GetProtected() != nullptr)
-                {
-                    if (tmp.GetProtected()->remove())
-                    {
-                        qCDebug(vApp, "Deleted %s", qUtf8Printable(info.absoluteFilePath()));
-                    }
-                    else
-                    {
-                        qCDebug(vApp, "Could not delete %s", qUtf8Printable(info.absoluteFilePath()));
-                    }
-                }
-                else
-                {
-                    qCDebug(vApp, "Failed to lock %s", qUtf8Printable(info.absoluteFilePath()));
-                }
-            }
-        }
-    }
-    else
-    {
-        qCDebug(vApp, "There are no old logs.");
-    }
-
-    QDir::setCurrent(workingDirectory); // Restore working directory
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VApplication::InitOptions()
 {
     OpenSettings();
 
-    // Run creation log after sending crash report
     StartLogging();
 
-    qDebug()<<"Version:"<<APP_VERSION_STR;
-    qDebug()<<"Build revision:"<<BUILD_REVISION;
-    qDebug()<<buildCompatibilityString();
-    qDebug()<<"Built on"<<__DATE__<<"at"<<__TIME__;
-    qDebug()<<"Command-line arguments:"<<arguments();
-    qDebug()<<"Process ID:"<<applicationPid();
+    qDebug() << "Version:" << AppVersionStr();
+    qDebug() << "Build revision:" << VCS_REPO_STATE_REVISION;
+    qDebug() << buildCompatibilityString();
+    qDebug() << "Built on" << __DATE__ << "at" << __TIME__;
+    qDebug() << "Command-line arguments:" << arguments();
+    qDebug() << "Process ID:" << applicationPid();
 
-    LoadTranslation(QLocale().name());// By default the console version uses system locale
+    LoadTranslation(QString()); // By default the console version uses system locale
 
-    if (VApplication::IsGUIMode())// By default console version uses system locale
+    // Create command line parser after loading translations to show localized version.
+    VCommandLine::Get(*this);
+
+    CheckSystemLocale();
+
+    QTimer::singleShot(0, this,
+                       []()
+                       {
+                           QString const country = VGAnalytics::CountryCode();
+                           if (country == "ru"_L1 || country == "by"_L1 || country == "ir"_L1)
+                           {
+                               QCoreApplication::exit();
+                           }
+                       });
+
+    if (VApplication::IsGUIMode()) // By default console version uses system locale
     {
         LoadTranslation(ValentinaSettings()->GetLocale());
+
+        VTheme::InitApplicationStyle();
+        VTheme::SetIconTheme();
+        VTheme::InitThemeMode();
+
+        m_shortcutManager = new VValentinaShortcutManager(this);
     }
 
-    static const char * GENERIC_ICON_TO_CHECK = "document-open";
-    if (QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK) == false)
-    {
-        //If there is no default working icon theme then we should
-        //use an icon theme that we provide via a .qrc file
-        //This case happens under Windows and Mac OS X
-        //This does not happen under GNOME or KDE
-        QIcon::setThemeName("win.icon.theme");
-    }
+    VGAnalytics::Init(settings);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList VApplication::LabelLanguages()
+void VApplication::StartDetachedProcess(const QString &program, const QStringList &arguments)
 {
-    QStringList list = QStringList() << "de" // German
-                                     << "en" // English
-                                     << "fr" // French
-                                     << "ru" // Russian
-                                     << "uk" // Ukrainian
-                                     << "hr" // Croatian
-                                     << "sr" // Serbian
-                                     << "bs"; // Bosnian
+#if !defined(Q_OS_MACOS)
+    const QString workingDirectory = QFileInfo(program).absoluteDir().absolutePath();
+    QProcess::startDetached(program, arguments, workingDirectory);
+#else
+    if (not program.endsWith(".app"_L1))
+    {
+        const QString workingDirectory = QFileInfo(program).absoluteDir().absolutePath();
+        QProcess::startDetached(program, arguments, workingDirectory);
+    }
+    else
+    {
+        QStringList openArguments{"-n", QStringLiteral("/Applications/%1").arg(program)};
+        if (not arguments.isEmpty())
+        {
+            openArguments.append("--args"_L1);
+            openArguments += arguments;
+        }
+
+        QProcess::startDetached("open"_L1, openArguments);
+    }
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VApplication::LabelLanguages() -> QStringList
+{
+    QStringList list{
+        "de", // German
+        "en", // English
+        "fr", // French
+        "ru", // Russian
+        "uk", // Ukrainian
+        "hr", // Croatian
+        "sr", // Serbian
+        "bs", // Bosnian
+        "cs"  // Czech
+    };
     return list;
 }
 
@@ -623,58 +656,93 @@ void VApplication::StartLogging()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QTextStream *VApplication::LogFile()
+auto VApplication::LogFile() -> QTextStream *
 {
-    return out.get();
+    return m_out.get();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const VTranslateVars *VApplication::TrVars()
+auto VApplication::KnownMeasurementsDatabase() -> VKnownMeasurementsDatabase *
 {
-    return trVars;
+    if (m_knownMeasurementsDatabase == nullptr)
+    {
+        m_knownMeasurementsDatabase = new VKnownMeasurementsDatabase();
+
+        RestartKnownMeasurementsDatabaseWatcher();
+    }
+
+    if (!m_knownMeasurementsDatabase->IsPopulated())
+    {
+        m_knownMeasurementsDatabase->PopulateMeasurementsDatabase();
+    }
+
+    return m_knownMeasurementsDatabase;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VApplication::RestartKnownMeasurementsDatabaseWatcher()
+{
+    if (m_knownMeasurementsDatabase != nullptr)
+    {
+        delete m_knownMeasurementsDatabaseWatcher;
+        m_knownMeasurementsDatabaseWatcher = new QFileSystemWatcher({settings->GetPathKnownMeasurements()}, this);
+        connect(m_knownMeasurementsDatabaseWatcher, &QFileSystemWatcher::directoryChanged, this,
+                &VApplication::RepopulateMeasurementsDatabase);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VApplication::TrVars() -> const VTranslateVars *
+{
+    return m_trVars;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VApplication::InitTrVars()
 {
-    if (trVars == nullptr)
+    if (m_trVars != nullptr)
     {
-        trVars = new VTranslateVars();
+        m_trVars->Retranslate();
+    }
+    else
+    {
+        m_trVars = new VTranslateVars();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VApplication::event(QEvent *e)
+auto VApplication::event(QEvent *e) -> bool
 {
-    switch(e->type())
+    switch (e->type())
     {
         // In Mac OS X the QFileOpenEvent event is generated when user perform "Open With" from Finder (this event is
         // Mac specific).
         case QEvent::FileOpen:
         {
-            QFileOpenEvent *fileOpenEvent = static_cast<QFileOpenEvent *>(e);
-            const QString macFileOpen = fileOpenEvent->file();
-            if(not macFileOpen.isEmpty())
+            auto *fileOpenEvent = dynamic_cast<QFileOpenEvent *>(e);
+            if (const QString macFileOpen = fileOpenEvent->file(); not macFileOpen.isEmpty())
             {
-                MainWindow *window = qobject_cast<MainWindow*>(mainWindow);
-                if (window)
+                if (auto *window = qobject_cast<MainWindow *>(mainWindow); window != nullptr)
                 {
-                    window->LoadPattern(macFileOpen);  // open file in existing window
+                    window->LoadPattern(macFileOpen); // open file in existing window
                 }
                 return true;
             }
             break;
         }
 #if defined(Q_OS_MAC)
-        case QEvent::ApplicationActivate:
-        {
-            if (mainWindow && not mainWindow->isMinimized())
+        case QEvent::ApplicationStateChange:
+            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+            if (static_cast<QApplicationStateChangeEvent *>(e)->applicationState() == Qt::ApplicationActive)
             {
-                mainWindow->show();
+                if (mainWindow && not mainWindow->isMinimized())
+                {
+                    mainWindow->show();
+                }
+                return true;
             }
-            return true;
-        }
-#endif //defined(Q_OS_MAC)
+            break;
+#endif // defined(Q_OS_MAC)
         default:
             return VAbstractApplication::event(e);
     }
@@ -682,26 +750,37 @@ bool VApplication::event(QEvent *e)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief OpenSettings get acsses to application settings.
- *
- * Because we can create object in constructor we open file separately.
- */
-void VApplication::OpenSettings()
+void VApplication::AboutToQuit()
 {
-    settings = new VSettings(QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(),
-                             QCoreApplication::applicationName(), this);
+    // If try to use the method QApplication::exit program can't sync settings and show warning about QApplication
+    // instance. Solution is to call sync() before quit.
+    // Connect this slot with VApplication::aboutToQuit.
+    Settings()->sync();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSettings *VApplication::ValentinaSettings()
+void VApplication::RepopulateMeasurementsDatabase(const QString &path)
 {
-    SCASSERT(settings != nullptr)
-    return qobject_cast<VSettings *>(settings);
+    Q_UNUSED(path)
+    if (m_knownMeasurementsDatabase != nullptr)
+    {
+        QFuture<void> const future =
+            QtConcurrent::run([this]() { m_knownMeasurementsDatabase->PopulateMeasurementsDatabase(); });
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VApplication::IsGUIMode()
+void VApplication::KnownMeasurementsPathChanged(const QString &oldPath, const QString &newPath)
+{
+    if (oldPath != newPath && m_knownMeasurementsDatabase != nullptr)
+    {
+        RestartKnownMeasurementsDatabaseWatcher();
+        RepopulateMeasurementsDatabase(newPath);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VApplication::IsGUIMode() -> bool
 {
     return (VCommandLine::instance != nullptr) && VCommandLine::instance->IsGuiEnabled();
 }
@@ -710,19 +789,33 @@ bool VApplication::IsGUIMode()
 /**
  * @brief IsAppInGUIMode little hack that allow to have access to application state from VAbstractApplication class.
  */
-bool VApplication::IsAppInGUIMode() const
+auto VApplication::IsAppInGUIMode() const -> bool
 {
     return IsGUIMode();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VApplication::IsPedantic() const
+auto VApplication::IsPedantic() const -> bool
 {
     return (VCommandLine::instance != nullptr) && VCommandLine::instance->IsPedantic();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const VCommandLinePtr VApplication::CommandLine() const
+void VApplication::OpenSettings()
+{
+    VAbstractValApplication::OpenSettings();
+    connect(settings, &VValentinaSettings::KnownMeasurementsPathChanged, this,
+            &VApplication::KnownMeasurementsPathChanged);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VApplication::VApp() -> VApplication *
+{
+    return qobject_cast<VApplication *>(QCoreApplication::instance());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VApplication::CommandLine() -> VCommandLinePtr
 {
     return VCommandLine::instance;
 }

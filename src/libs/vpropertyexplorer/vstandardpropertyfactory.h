@@ -21,7 +21,7 @@
 #ifndef VASTANDARDPROPERTYFACTORY_H
 #define VASTANDARDPROPERTYFACTORY_H
 
-#include <qcompilerdetection.h>
+
 #include <QString>
 
 #include "vabstractpropertyfactory.h"
@@ -47,7 +47,7 @@ public:
     //! Creates a new property of a certain type and assigns a name and description (otionally)
     //! \param type The type of the property as string
     //! \return Returns the created property or NULL if it couldn't be be created
-    Q_REQUIRED_RESULT virtual VProperty* createProperty(const QString& type, const QString &name) override;
+    Q_REQUIRED_RESULT virtual auto createProperty(const QString &type, const QString &name) -> VProperty * override;
 };
 
 }

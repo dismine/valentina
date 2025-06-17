@@ -1,0 +1,50 @@
+{
+  "ToolStyle": {
+    "PatternColor": "#d9d9d9",
+    "DisabledColor": "#5a4949",
+    "ColorAdjustments": {
+      "black": "#d9d9d9"
+    },
+    "PointColor": "#d9d9d9",
+    "LabelColor": "#d9d9d9",
+    "LabelHoverColor": "#ffd900",
+    "LabelLineColor": [255, 217, 0, 32],
+    "AccuracyRadiusColor": "#ffd900",
+    "ControlLineColor": "#80ffd900",
+    "ControlPointColor": "#ffd900",
+    "VisMainColor": "#ffd900",
+    "VisSupportColor": "#b200b2",
+    "VisSupportColor2": "#5aad4b",
+    "VisSupportColor3": "#0057b7",
+    "VisSupportColor4": "#d73b31",
+    "BasePointColor": "#ffd900"
+  },
+  "PatternPieceStyle": {
+    "PieceColor": "#83aad1",
+    "PointColor": "#ffd900",
+    "NodeLabelColor": "#d9d9d9",
+    "NodeLabelHoverColor": "#ffd900",
+    "NodeLabelLineColor": [255, 217, 0, 32],
+    "LabelBackgroundColor": "#80ffd900",
+    "LabelTextColor": "#d9d9d9",
+    "LabelModeColor": "white"
+  },
+  "ManualLayoutStyle": {
+    "SheetBorderColor": "#808080",
+    "SheetFoldShadowColor": "#6699cc",
+    "SheetMarginColor": "#00b3ff",
+    "SheetGridColor": "#cccccc",
+    "SheetTileGridColor": "#80ff0000",
+    "SheetTileNumberColor": "#add8e6",
+    "PieceOkColor": "#78a0c8",
+    "PieceErrorColor": "#ff9696",
+    "PieceHoverColor": "#80c7f4f9",
+    "PieceHandleColor": "#add8e6",
+    "PieceHandleHoverColor": "#90ee90",
+    "PieceSelectionBrushColor": [255, 160, 160, 60],
+    "CarrouselPieceColor": "#78a0c8",
+    "CarrouselPieceSelectedColor": "#80ffa0a0",
+    "CarrouselPieceBackgroundColor": "#202020",
+    "CarrouselPieceForegroundColor": "#000050"
+  }
+}

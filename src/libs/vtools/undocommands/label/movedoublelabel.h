@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #ifndef MOVEDOUBLELABEL_H
 #define MOVEDOUBLELABEL_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -37,38 +36,47 @@
 
 #include "moveabstractlabel.h"
 
-enum class MoveDoublePoint: char { FirstPoint, SecondPoint };
+enum class MoveDoublePoint : qint8
+{
+    FirstPoint,
+    SecondPoint
+};
 
 class MoveDoubleLabel : public MoveAbstractLabel
 {
+    Q_OBJECT // NOLINT
+
 public:
-    MoveDoubleLabel(VAbstractPattern *doc, const QPointF &pos, MoveDoublePoint type,
-                    quint32 toolId, quint32 pointId, QUndoCommand *parent = nullptr);
-    virtual ~MoveDoubleLabel()=default;
+    MoveDoubleLabel(VAbstractPattern *doc, const QPointF &pos, MoveDoublePoint type, quint32 toolId, quint32 pointId,
+                    QUndoCommand *parent = nullptr);
+    ~MoveDoubleLabel() = default;
 
-    virtual bool mergeWith(const QUndoCommand *command) override;
-    virtual int  id() const override;
+    auto mergeWith(const QUndoCommand *command) -> bool override;
+    auto id() const -> int override;
 
-    quint32     GetToolId() const;
-    MoveDoublePoint GetPointType() const;
+    auto GetToolId() const -> quint32;
+    auto GetPointType() const -> MoveDoublePoint;
+
 protected:
-    virtual void Do(const QPointF &pos) override;
+    void Do(const QPointF &pos) override;
+
 private:
-    Q_DISABLE_COPY(MoveDoubleLabel)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(MoveDoubleLabel) // NOLINT
     MoveDoublePoint m_type;
     quint32 m_idTool;
-    //Need for resizing scene rect
+    // Need for resizing scene rect
     QGraphicsScene *m_scene;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline MoveDoublePoint MoveDoubleLabel::GetPointType() const
+inline auto MoveDoubleLabel::GetPointType() const -> MoveDoublePoint
 {
     return m_type;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline quint32 MoveDoubleLabel::GetToolId() const
+inline auto MoveDoubleLabel::GetToolId() const -> quint32
 {
     return m_idTool;
 }

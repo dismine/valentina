@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -27,31 +27,31 @@
  *************************************************************************/
 
 #include "preferencespathpage.h"
+#include "../vmisc/vabstractvalapplication.h"
+#include "../vmisc/vvalentinasettings.h"
 #include "ui_preferencespathpage.h"
-#include "../vmisc/vsettings.h"
-#include "../../options.h"
-#include "../../core/vapplication.h"
 
 #include <QDir>
 #include <QFileDialog>
 
 //---------------------------------------------------------------------------------------------------------------------
 PreferencesPathPage::PreferencesPathPage(QWidget *parent)
-    : QWidget(parent),
-      ui(new Ui::PreferencesPathPage)
+  : QWidget(parent),
+    ui(new Ui::PreferencesPathPage)
 {
     ui->setupUi(this);
 
     InitTable();
 
-    connect(ui->pathTable, &QTableWidget::itemSelectionChanged, this, [this]()
-    {
-        ui->defaultButton->setEnabled(not ui->pathTable->selectedItems().isEmpty());
-        ui->defaultButton->setDefault(false);
+    connect(ui->pathTable, &QTableWidget::itemSelectionChanged, this,
+            [this]()
+            {
+                ui->defaultButton->setEnabled(not ui->pathTable->selectedItems().isEmpty());
+                ui->defaultButton->setDefault(false);
 
-        ui->editButton->setEnabled(not ui->pathTable->selectedItems().isEmpty());
-        ui->editButton->setDefault(true);
-    });
+                ui->editButton->setEnabled(not ui->pathTable->selectedItems().isEmpty());
+                ui->editButton->setDefault(true);
+            });
 
     connect(ui->defaultButton, &QPushButton::clicked, this, &PreferencesPathPage::DefaultPath);
     connect(ui->editButton, &QPushButton::clicked, this, &PreferencesPathPage::EditPath);
@@ -64,17 +64,14 @@ PreferencesPathPage::~PreferencesPathPage()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList PreferencesPathPage::Apply()
+auto PreferencesPathPage::Apply() -> QStringList
 {
-    VSettings *settings = qApp->ValentinaSettings();
-    settings->SetPathIndividualMeasurements(ui->pathTable->item(0, 1)->text());
-    settings->SetPathMultisizeMeasurements(ui->pathTable->item(1, 1)->text());
-    settings->SetPathPattern(ui->pathTable->item(2, 1)->text());
-    settings->SetPathLayout(ui->pathTable->item(3, 1)->text());
-    settings->SetPathTemplate(ui->pathTable->item(4, 1)->text());
-    settings->SetPathLabelTemplate(ui->pathTable->item(5, 1)->text());
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    settings->SetPathSVGFonts(ui->pathTable->item(0, 1)->text());
+    settings->SetPathFontCorrections(ui->pathTable->item(1, 1)->text());
+    settings->SetPathKnownMeasurements(ui->pathTable->item(2, 1)->text());
 
-    return QStringList(); // No changes those require restart.
+    return {}; // No changes which require restart.
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -101,23 +98,14 @@ void PreferencesPathPage::DefaultPath()
 
     switch (row)
     {
-        case 1: // multisize measurements
-            path = VCommonSettings::GetDefPathMultisizeMeasurements();
+        case 0: // svg fonts
+            path = VCommonSettings::GetDefPathSVGFonts();
             break;
-        case 2: // pattern path
-            path = VSettings::GetDefPathPattern();
+        case 1: // font corrections
+            path = VCommonSettings::GetDefPathFontCorrections();
             break;
-        case 0: // individual measurements
-            path = VCommonSettings::GetDefPathIndividualMeasurements();
-            break;
-        case 3: // layout path
-            path = VSettings::GetDefPathLayout();
-            break;
-        case 4: // templates
-            path = VCommonSettings::GetDefPathTemplate();
-            break;
-        case 5: // label templates
-            path = VCommonSettings::GetDefPathLabelTemplate();
+        case 2: // known measurements
+            path = VCommonSettings::GetDefPathKnownMeasurements();
             break;
         default:
             break;
@@ -137,49 +125,33 @@ void PreferencesPathPage::EditPath()
     QString path;
     switch (row)
     {
-        case 0: // individual measurements
-            path = qApp->ValentinaSettings()->GetPathIndividualMeasurements();
+        case 0: // svg fonts
+            path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathSVGFonts();
             break;
-        case 1: // multisize measurements
-            path = qApp->ValentinaSettings()->GetPathMultisizeMeasurements();
-            path = VCommonSettings::PrepareMultisizeTables(path);
+        case 1: // font corrections
+            path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathFontCorrections();
             break;
-        case 2: // pattern path
-            path = qApp->ValentinaSettings()->GetPathPattern();
-            break;
-        case 3: // layout path
-            path = qApp->ValentinaSettings()->GetPathLayout();
-            break;
-        case 4: // templates
-            path = qApp->ValentinaSettings()->GetPathTemplate();
-            break;
-        case 5: // label templates
-            path = qApp->ValentinaSettings()->GetPathLabelTemplate();
+        case 2: // known measurements
+            path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathKnownMeasurements();
             break;
         default:
             break;
     }
 
     bool usedNotExistedDir = false;
-    QDir directory(path);
-    if (not directory.exists())
+    if (QDir const directory(path); not directory.exists())
     {
         usedNotExistedDir = directory.mkpath(QChar('.'));
     }
 
-    const QString dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"), path,
-                                                          QFileDialog::ShowDirsOnly
-                                                          | QFileDialog::DontResolveSymlinks
-#ifdef Q_OS_LINUX
-                                                          | QFileDialog::DontUseNativeDialog
-#endif
-                                                          );
+    const QString dir = QFileDialog::getExistingDirectory(
+        this, tr("Open Directory"), path,
+        VAbstractApplication::VApp()->NativeFileDialog(QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks));
     if (dir.isEmpty())
     {
         if (usedNotExistedDir)
         {
-            QDir directory(path);
-            directory.rmpath(QChar('.'));
+            QDir(path).rmpath(QChar('.'));
         }
         DefaultPath();
         return;
@@ -190,8 +162,7 @@ void PreferencesPathPage::EditPath()
 
     if (usedNotExistedDir)
     {
-        QDir directory(path);
-        directory.rmpath(QChar('.'));
+        QDir(path).rmpath(QChar('.'));
     }
 }
 
@@ -199,51 +170,30 @@ void PreferencesPathPage::EditPath()
 void PreferencesPathPage::InitTable()
 {
     ui->pathTable->clearContents();
-    ui->pathTable->setRowCount(6);
+    ui->pathTable->setRowCount(3);
     ui->pathTable->setColumnCount(2);
 
-    const VSettings *settings = qApp->ValentinaSettings();
+    const VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
 
     {
-        ui->pathTable->setItem(0, 0, new QTableWidgetItem(tr("My Individual Measurements")));
-        QTableWidgetItem *item = new QTableWidgetItem(settings->GetPathIndividualMeasurements());
-        item->setToolTip(settings->GetPathIndividualMeasurements());
+        ui->pathTable->setItem(0, 0, new QTableWidgetItem(tr("My SVG Fonts")));
+        auto *item = new QTableWidgetItem(settings->GetPathSVGFonts());
+        item->setToolTip(settings->GetPathSVGFonts());
         ui->pathTable->setItem(0, 1, item);
     }
 
     {
-        ui->pathTable->setItem(1, 0, new QTableWidgetItem(tr("My Multisize Measurements")));
-        QTableWidgetItem *item = new QTableWidgetItem(settings->GetPathMultisizeMeasurements());
-        item->setToolTip(settings->GetPathMultisizeMeasurements());
+        ui->pathTable->setItem(1, 0, new QTableWidgetItem(tr("My font corrections")));
+        auto *item = new QTableWidgetItem(settings->GetPathFontCorrections());
+        item->setToolTip(settings->GetPathFontCorrections());
         ui->pathTable->setItem(1, 1, item);
     }
 
     {
-        ui->pathTable->setItem(2, 0, new QTableWidgetItem(tr("My Patterns")));
-        QTableWidgetItem *item = new QTableWidgetItem(settings->GetPathPattern());
-        item->setToolTip(settings->GetPathPattern());
+        ui->pathTable->setItem(2, 0, new QTableWidgetItem(tr("My known measurements")));
+        auto *item = new QTableWidgetItem(settings->GetPathKnownMeasurements());
+        item->setToolTip(settings->GetPathKnownMeasurements());
         ui->pathTable->setItem(2, 1, item);
-    }
-
-    {
-        ui->pathTable->setItem(3, 0, new QTableWidgetItem(tr("My Layouts")));
-        QTableWidgetItem *item = new QTableWidgetItem(settings->GetPathLayout());
-        item->setToolTip(settings->GetPathLayout());
-        ui->pathTable->setItem(3, 1, item);
-    }
-
-    {
-        ui->pathTable->setItem(4, 0, new QTableWidgetItem(tr("My Templates")));
-        QTableWidgetItem *item = new QTableWidgetItem(settings->GetPathTemplate());
-        item->setToolTip(settings->GetPathTemplate());
-        ui->pathTable->setItem(4, 1, item);
-    }
-
-    {
-        ui->pathTable->setItem(5, 0, new QTableWidgetItem(tr("My label templates")));
-        QTableWidgetItem *item = new QTableWidgetItem(settings->GetPathLabelTemplate());
-        item->setToolTip(settings->GetPathLabelTemplate());
-        ui->pathTable->setItem(5, 1, item);
     }
 
     ui->pathTable->verticalHeader()->setDefaultSectionSize(20);

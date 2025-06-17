@@ -1,0 +1,47 @@
+{
+  "ToolStyle": {
+    "PatternColor": "black",
+    "DisabledColor": "lightgray",
+    "PointColor": "black",
+    "LabelColor": "black",
+    "LabelHoverColor": "green",
+    "LabelLineColor": [0, 0, 0, 16],
+    "AccuracyRadiusColor": "blue",
+    "ControlLineColor": [0, 0, 0],
+    "ControlPointColor": "red",
+    "VisMainColor": "red",
+    "VisSupportColor": "magenta",
+    "VisSupportColor2": "darkGreen",
+    "VisSupportColor3": "darkBlue",
+    "VisSupportColor4": "darkRed",
+    "BasePointColor": "red"
+  },
+  "PatternPieceStyle": {
+    "PieceColor": "black",
+    "PointColor": "black",
+    "NodeLabelColor": "black",
+    "NodeLabelHoverColor": "green",
+    "NodeLabelLineColor": [0, 0, 0, 16],
+    "LabelBackgroundColor": [251, 251, 175, 128],
+    "LabelTextColor": "black",
+    "LabelModeColor": "black"
+  },
+  "ManualLayoutStyle": {
+    "SheetBorderColor": "black",
+    "SheetFoldShadowColor": "lightGray",
+    "SheetMarginColor": [0, 179, 255],
+    "SheetGridColor": [204, 204, 204],
+    "SheetTileGridColor": [255, 0, 0, 127],
+    "SheetTileNumberColor": "black",
+    "PieceOkColor": "black",
+    "PieceErrorColor": "red",
+    "PieceHoverColor": [199, 244, 249, 60],
+    "PieceHandleColor": "black",
+    "PieceHandleHoverColor": "green",
+    "PieceSelectionBrushColor": [255, 160, 160, 60],
+    "CarrouselPieceColor": "black",
+    "CarrouselPieceSelectedColor": [255, 160, 160, 60],
+    "CarrouselPieceBackgroundColor": "white",
+    "CarrouselPieceForegroundColor": "white"
+  }
+}

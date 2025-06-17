@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -36,6 +36,7 @@
 
 class SavePiecePathOptions : public VUndoCommand
 {
+    Q_OBJECT // NOLINT
 public:
     SavePiecePathOptions(quint32 pieceId, const VPiecePath &oldPath, const VPiecePath &newPath, VAbstractPattern *doc,
                          VContainer *data, quint32 id, QUndoCommand *parent = nullptr);
@@ -43,12 +44,14 @@ public:
 
     virtual void undo() override;
     virtual void redo() override;
-    virtual bool mergeWith(const QUndoCommand *command) override;
-    virtual int  id() const override;
-    quint32      PathId() const;
-    VPiecePath   NewPath() const;
+    virtual auto mergeWith(const QUndoCommand *command) -> bool override;
+    virtual auto id() const -> int override;
+    auto PathId() const -> quint32;
+    auto NewPath() const -> VPiecePath;
+
 private:
-    Q_DISABLE_COPY(SavePiecePathOptions)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(SavePiecePathOptions) // NOLINT
 
     const VPiecePath m_oldPath;
     VPiecePath       m_newPath;
@@ -58,19 +61,19 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline int SavePiecePathOptions::id() const
+inline auto SavePiecePathOptions::id() const -> int
 {
     return static_cast<int>(UndoCommand::SavePiecePathOptions);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline quint32 SavePiecePathOptions::PathId() const
+inline auto SavePiecePathOptions::PathId() const -> quint32
 {
     return nodeId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline VPiecePath SavePiecePathOptions::NewPath() const
+inline auto SavePiecePathOptions::NewPath() const -> VPiecePath
 {
     return m_newPath;
 }

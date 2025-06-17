@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -31,20 +31,19 @@
 #include <QLineF>
 #include <QMessageLogger>
 #include <QSharedPointer>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <QtDebug>
 #include <new>
 
 #include "../../../../dialogs/tools/dialogpointofcontact.h"
 #include "../../../../dialogs/tools/dialogtool.h"
-#include "../../../../visualization/visualization.h"
 #include "../../../../visualization/line/vistoolpointofcontact.h"
+#include "../../../../visualization/visualization.h"
+#include "../../../vabstracttool.h"
+#include "../../vdrawtool.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
-#include "../ifc/xml/vdomdocument.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vdomdocument.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/vabstractapplication.h"
@@ -53,9 +52,13 @@
 #include "../vpatterndb/vformula.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "../../../vabstracttool.h"
-#include "../../vdrawtool.h"
 #include "vtoolsinglepoint.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
 
 template <class T> class QSharedPointer;
 
@@ -68,11 +71,11 @@ const QString VToolPointOfContact::ToolType = QStringLiteral("pointOfContact");
  * @param parent parent object.
  */
 VToolPointOfContact::VToolPointOfContact(const VToolPointOfContactInitData &initData, QGraphicsItem *parent)
-    : VToolSinglePoint(initData.doc, initData.data, initData.id, parent),
-      arcRadius(initData.radius),
-      center(initData.center),
-      firstPointId(initData.firstPointId),
-      secondPointId(initData.secondPointId)
+  : VToolSinglePoint(initData.doc, initData.data, initData.id, initData.notes, parent),
+    arcRadius(initData.radius),
+    center(initData.center),
+    firstPointId(initData.firstPointId),
+    secondPointId(initData.secondPointId)
 {
     ToolCreation(initData.typeCreation);
 }
@@ -81,17 +84,18 @@ VToolPointOfContact::VToolPointOfContact(const VToolPointOfContactInitData &init
 /**
  * @brief setDialog set dialog when user want change tool option.
  */
-void VToolPointOfContact::setDialog()
+void VToolPointOfContact::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogPointOfContact> dialogTool = qobject_cast<DialogPointOfContact *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
-    dialogTool->setRadius(arcRadius);
-    dialogTool->setCenter(center);
+    dialogTool->SetRadius(arcRadius);
+    dialogTool->SetCenter(center);
     dialogTool->SetFirstPoint(firstPointId);
     dialogTool->SetSecondPoint(secondPointId);
     dialogTool->SetPointName(p->name());
+    dialogTool->SetNotes(m_notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -104,13 +108,13 @@ void VToolPointOfContact::setDialog()
  * @param intersectionPoint point of intersection.
  * @return true if intersection exists.
  */
-bool VToolPointOfContact::FindPoint(qreal radius, const QPointF &center, const QPointF &firstPoint,
-                                    const QPointF &secondPoint, QPointF *intersectionPoint)
+auto VToolPointOfContact::FindPoint(qreal radius, const QPointF &center, const QPointF &firstPoint,
+                                    const QPointF &secondPoint, QPointF *intersectionPoint) -> bool
 {
     SCASSERT(intersectionPoint != nullptr)
 
     QPointF p1, p2;
-    qint32 res = VGObject::LineIntersectCircle(center, radius, QLineF(firstPoint, secondPoint), p1, p2);
+    qint32 const res = VGObject::LineIntersectCircle(center, qAbs(radius), QLineF(firstPoint, secondPoint), p1, p2);
     switch (res)
     {
         case 0:
@@ -120,10 +124,9 @@ bool VToolPointOfContact::FindPoint(qreal radius, const QPointF &center, const Q
             return true;
         case 2:
         {
-            const bool flagP1 = VGObject::IsPointOnLineSegment (p1, firstPoint, secondPoint);
-            const bool flagP2 = VGObject::IsPointOnLineSegment (p2, firstPoint, secondPoint);
-            if ((flagP1 == true && flagP2 == true) ||
-                (flagP1 == false && flagP2 == false)/*In case we have something wrong*/)
+            const bool flagP1 = VGObject::IsPointOnLineSegment(p1, firstPoint, secondPoint);
+            const bool flagP2 = VGObject::IsPointOnLineSegment(p2, firstPoint, secondPoint);
+            if ((flagP1 && flagP2) || (!flagP1 && !flagP2) /*In case we have something wrong*/)
             {
                 // We don't have options for choosing correct point. Use closest to segment first point.
                 if (QLineF(firstPoint, p1).length() <= QLineF(firstPoint, p2).length())
@@ -131,25 +134,20 @@ bool VToolPointOfContact::FindPoint(qreal radius, const QPointF &center, const Q
                     *intersectionPoint = p1;
                     return true;
                 }
-                else
-                {
-                    *intersectionPoint = p2;
-                    return true;
-                }
+
+                *intersectionPoint = p2;
+                return true;
             }
-            else
-            { // In this case we have one real and one theoretical intersection.
-                if (flagP1)
-                {
-                    *intersectionPoint = p1;
-                    return true;
-                }
-                else
-                {
-                    *intersectionPoint = p2;
-                    return true;
-                }
+
+            // In this case we have one real and one theoretical intersection.
+            if (flagP1)
+            {
+                *intersectionPoint = p1;
+                return true;
             }
+
+            *intersectionPoint = p2;
+            return true;
         }
         default:
             qDebug() << "Unxpected value" << res;
@@ -166,24 +164,25 @@ bool VToolPointOfContact::FindPoint(qreal radius, const QPointF &center, const Q
  * @param doc dom document container.
  * @param data container with variables.
  */
-VToolPointOfContact* VToolPointOfContact::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
-                                                 VAbstractPattern *doc, VContainer *data)
+auto VToolPointOfContact::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                                 VContainer *data) -> VToolPointOfContact *
 {
     SCASSERT(not dialog.isNull())
     const QPointer<DialogPointOfContact> dialogTool = qobject_cast<DialogPointOfContact *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
     VToolPointOfContactInitData initData;
-    initData.radius = dialogTool->getRadius();
-    initData.center = dialogTool->getCenter();
+    initData.radius = dialogTool->GetRadius();
+    initData.center = dialogTool->GetCenter();
     initData.firstPointId = dialogTool->GetFirstPoint();
     initData.secondPointId = dialogTool->GetSecondPoint();
-    initData.name = dialogTool->getPointName();
+    initData.name = dialogTool->GetPointName();
     initData.scene = scene;
     initData.doc = doc;
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.notes = dialogTool->GetNotes();
 
     VToolPointOfContact *point = Create(initData);
     if (point != nullptr)
@@ -198,7 +197,7 @@ VToolPointOfContact* VToolPointOfContact::Create(const QPointer<DialogTool> &dia
  * @brief Create help create tool.
  * @param initData init data.
  */
-VToolPointOfContact* VToolPointOfContact::Create(VToolPointOfContactInitData &initData)
+auto VToolPointOfContact::Create(VToolPointOfContactInitData &initData) -> VToolPointOfContact *
 {
     const QSharedPointer<VPointF> centerP = initData.data->GeometricObject<VPointF>(initData.center);
     const QSharedPointer<VPointF> firstP = initData.data->GeometricObject<VPointF>(initData.firstPointId);
@@ -207,19 +206,23 @@ VToolPointOfContact* VToolPointOfContact::Create(VToolPointOfContactInitData &in
     const qreal result = CheckFormula(initData.id, initData.radius, initData.data);
 
     QPointF fPoint;
-    const bool success = VToolPointOfContact::FindPoint(qApp->toPixel(result), static_cast<QPointF>(*centerP),
-                                                        static_cast<QPointF>(*firstP), static_cast<QPointF>(*secondP),
-                                                        &fPoint);
+    const bool success =
+        VToolPointOfContact::FindPoint(VAbstractValApplication::VApp()->toPixel(result), static_cast<QPointF>(*centerP),
+                                       static_cast<QPointF>(*firstP), static_cast<QPointF>(*secondP), &fPoint);
 
     if (not success)
     {
-        const QString errorMsg = tr("Error calculating point '%1'. Circle with center '%2' and radius '%3' doesn't have "
-                                    "intersection with line (%4;%5)")
-                .arg(initData.name, centerP->name()).arg(result).arg(firstP->name(), secondP->name());
-        qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) : qWarning() << errorMsg;
+        const QString errorMsg = tr("Error calculating point '%1'. Circle with center '%2' and radius '%3' doesn't "
+                                    "have intersection with line (%4;%5)")
+                                     .arg(initData.name, centerP->name())
+                                     .arg(result)
+                                     .arg(firstP->name(), secondP->name());
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VExceptionObjectError(errorMsg)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 
-    VPointF *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
+    auto *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
 
     if (initData.typeCreation == Source::FromGui)
@@ -244,7 +247,7 @@ VToolPointOfContact* VToolPointOfContact::Create(VToolPointOfContactInitData &in
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::PointOfContact, initData.doc);
-        VToolPointOfContact *point = new VToolPointOfContact(initData);
+        auto *point = new VToolPointOfContact(initData);
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
@@ -257,19 +260,19 @@ VToolPointOfContact* VToolPointOfContact::Create(VToolPointOfContactInitData &in
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolPointOfContact::ArcCenterPointName() const
+auto VToolPointOfContact::ArcCenterPointName() const -> QString
 {
     return VAbstractTool::data.GetGObject(center)->name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolPointOfContact::FirstPointName() const
+auto VToolPointOfContact::FirstPointName() const -> QString
 {
     return VAbstractTool::data.GetGObject(firstPointId)->name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolPointOfContact::SecondPointName() const
+auto VToolPointOfContact::SecondPointName() const -> QString
 {
     return VAbstractTool::data.GetGObject(secondPointId)->name();
 }
@@ -303,15 +306,17 @@ void VToolPointOfContact::SaveDialog(QDomElement &domElement, QList<quint32> &ol
     AddDependence(oldDependencies, center);
     AddDependence(oldDependencies, firstPointId);
     AddDependence(oldDependencies, secondPointId);
-    AddDependence(newDependencies, dialogTool->getCenter());
+    AddDependence(newDependencies, dialogTool->GetCenter());
     AddDependence(newDependencies, dialogTool->GetFirstPoint());
     AddDependence(newDependencies, dialogTool->GetSecondPoint());
 
-    doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
-    doc->SetAttribute(domElement, AttrRadius, dialogTool->getRadius());
-    doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->getCenter()));
+    doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
+    doc->SetAttribute(domElement, AttrRadius, dialogTool->GetRadius());
+    doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetCenter()));
     doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->GetFirstPoint()));
     doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->GetSecondPoint()));
+    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
+                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -329,10 +334,12 @@ void VToolPointOfContact::SaveOptions(QDomElement &tag, QSharedPointer<VGObject>
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfContact::ReadToolAttributes(const QDomElement &domElement)
 {
-    arcRadius = doc->GetParametrString(domElement, AttrRadius, QString());
-    center = doc->GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
-    firstPointId = doc->GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
-    secondPointId = doc->GetParametrUInt(domElement, AttrSecondPoint, NULL_ID_STR);
+    VToolSinglePoint::ReadToolAttributes(domElement);
+
+    arcRadius = VDomDocument::GetParametrString(domElement, AttrRadius, QString());
+    center = VAbstractPattern::GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
+    firstPointId = VAbstractPattern::GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
+    secondPointId = VAbstractPattern::GetParametrUInt(domElement, AttrSecondPoint, NULL_ID_STR);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -340,19 +347,21 @@ void VToolPointOfContact::SetVisualization()
 {
     if (not vis.isNull())
     {
-        VisToolPointOfContact *visual = qobject_cast<VisToolPointOfContact *>(vis);
+        auto *visual = qobject_cast<VisToolPointOfContact *>(vis);
         SCASSERT(visual != nullptr)
 
-        visual->setObject1Id(firstPointId);
-        visual->setLineP2Id(secondPointId);
-        visual->setRadiusId(center);
-        visual->setRadius(qApp->TrVars()->FormulaToUser(arcRadius, qApp->Settings()->GetOsSeparator()));
+        visual->SetLineP1Id(firstPointId);
+        visual->SetLineP2Id(secondPointId);
+        visual->SetRadiusId(center);
+        visual->SetRadius(VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+            arcRadius, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+        visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolPointOfContact::MakeToolTip() const
+auto VToolPointOfContact::MakeToolTip() const -> QString
 {
     const QSharedPointer<VPointF> p1 = VAbstractTool::data.GeometricObject<VPointF>(firstPointId);
     const QSharedPointer<VPointF> p2 = VAbstractTool::data.GeometricObject<VPointF>(secondPointId);
@@ -363,22 +372,22 @@ QString VToolPointOfContact::MakeToolTip() const
     const QLineF p2ToCur(static_cast<QPointF>(*p2), static_cast<QPointF>(*current));
     const QLineF centerToCur(static_cast<QPointF>(*centerP), static_cast<QPointF>(*current));
 
-    const QString toolTip = QString("<table>"
-                                    "<tr> <td><b>%10:</b> %11</td> </tr>"
-                                    "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
-                                    "<tr> <td><b>%4:</b> %5 %3</td> </tr>"
-                                    "<tr> <td><b>%6:</b> %7 %3</td> </tr>"
-                                    "<tr> <td><b>%8:</b> %9°</td> </tr>"
-                                    "</table>")
-            .arg(QString("%1->%2").arg(p1->name(), current->name()))
-            .arg(qApp->fromPixel(p1ToCur.length()))
-            .arg(UnitsToStr(qApp->patternUnit(), true), QString("%1->%2").arg(p2->name(), current->name()))
-            .arg(qApp->fromPixel(p2ToCur.length()))
-            .arg(QString("%1 %2->%3").arg(tr("Length"), centerP->name(), current->name()))
-            .arg(qApp->fromPixel(centerToCur.length()))
-            .arg(QString("%1 %2->%3").arg(tr("Angle"), centerP->name(), current->name()))
-            .arg(centerToCur.angle())
-            .arg(tr("Label"), current->name());
+    const QString toolTip = u"<table>"
+                            u"<tr> <td><b>%10:</b> %11</td> </tr>"
+                            u"<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                            u"<tr> <td><b>%4:</b> %5 %3</td> </tr>"
+                            u"<tr> <td><b>%6:</b> %7 %3</td> </tr>"
+                            u"<tr> <td><b>%8:</b> %9°</td> </tr>"
+                            u"</table>"_s.arg(u"%1->%2"_s.arg(p1->name(), current->name()))
+                                .arg(VAbstractValApplication::VApp()->fromPixel(p1ToCur.length()))
+                                .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+                                     u"%1->%2"_s.arg(p2->name(), current->name()))
+                                .arg(VAbstractValApplication::VApp()->fromPixel(p2ToCur.length()))
+                                .arg(u"%1 %2->%3"_s.arg(tr("Length"), centerP->name(), current->name()))
+                                .arg(VAbstractValApplication::VApp()->fromPixel(centerToCur.length()))
+                                .arg(u"%1 %2->%3"_s.arg(tr("Angle"), centerP->name(), current->name()))
+                                .arg(centerToCur.angle())
+                                .arg(tr("Label"), current->name());
     return toolTip;
 }
 
@@ -395,20 +404,19 @@ void VToolPointOfContact::ShowContextMenu(QGraphicsSceneContextMenuEvent *event,
     {
         ContextMenu<DialogPointOfContact>(event, id);
     }
-    catch(const VExceptionToolWasDeleted &e)
+    catch (const VExceptionToolWasDeleted &e)
     {
         Q_UNUSED(e)
-        return;//Leave this method immediately!!!
+        return; // Leave this method immediately!!!
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolPointOfContact::getArcRadius() const
+auto VToolPointOfContact::getArcRadius() const -> VFormula
 {
     VFormula radius(arcRadius, this->getData());
-    radius.setCheckZero(true);
     radius.setToolId(m_id);
-    radius.setPostfix(UnitsToStr(qApp->patternUnit()));
+    radius.setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits()));
     radius.Eval();
 
     return radius;

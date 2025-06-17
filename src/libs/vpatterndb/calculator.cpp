@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -28,14 +28,13 @@
 
 #include "calculator.h"
 
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
-#include <QStringList>
 #include <QSharedPointer>
+#include <QStringList>
+#include <QtDebug>
 
-#include "../vmisc/def.h"
 #include "../qmuparser/qmuparsererror.h"
+#include "../vmisc/def.h"
+#include "../vmisc/vabstractapplication.h"
 #include "variables/vinternalvariable.h"
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -46,16 +45,13 @@
  * Use this constuctor for evaluation formula. All formulas must be converted to internal look.
  * Example:
  *
- * const QString formula = qApp->FormulaFromUser(edit->text());
+ * const QString formula = VAbstractApplication::VApp()->FormulaFromUser(edit->text());
  * Calculator *cal = new Calculator(data, patternType);
  * const qreal result = cal->EvalFormula(data->PlainVariables(), formula);
  * delete cal;
  *
  */
 Calculator::Calculator()
-    : QmuFormulaBase(),
-      m_varsValues(),
-      m_vars(nullptr)
 {
     InitCharSets();
 
@@ -63,6 +59,8 @@ Calculator::Calculator()
     // set value to 0.
     SetVarFactory(VarFactory, this);
     SetSepForEval();
+
+    DefineFun(QStringLiteral("warning"), Warning);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -75,18 +73,19 @@ Calculator::Calculator()
  * @param formula string of formula.
  * @return value of formula.
  */
-qreal Calculator::EvalFormula(const QHash<QString, QSharedPointer<VInternalVariable>> *vars, const QString &formula)
+auto Calculator::EvalFormula(const QHash<QString, QSharedPointer<VInternalVariable>> *vars, const QString &formula)
+    -> qreal
 {
     // Converting with locale is much faster in case of single numerical value.
-    QLocale c(QLocale::C);
+    QLocale const c(QLocale::C);
     bool ok = false;
-    qreal result = c.toDouble(formula, &ok);
+    qreal const result = c.toDouble(formula, &ok);
     if (ok)
     {
         return result;
     }
 
-    SetSepForEval();//Reset separators options
+    SetSepForEval(); // Reset separators options
     m_vars = vars;
     SetExpr(formula);
 
@@ -95,24 +94,34 @@ qreal Calculator::EvalFormula(const QHash<QString, QSharedPointer<VInternalVaria
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal *Calculator::VarFactory(const QString &a_szName, void *a_pUserData)
+auto Calculator::VarFactory(const QString &a_szName, void *a_pUserData) -> qreal *
 {
     Q_UNUSED(a_szName)
-    Calculator *calc = static_cast<Calculator *>(a_pUserData);
+    auto *calc = static_cast<Calculator *>(a_pUserData);
 
     if (calc->m_vars != nullptr && calc->m_vars->contains(a_szName))
     {
-        QSharedPointer<qreal> val(new qreal(*calc->m_vars->value(a_szName)->GetValue()));
+        QSharedPointer<qreal> const val(new qreal(*calc->m_vars->value(a_szName)->GetValue()));
         calc->m_varsValues.append(val);
         return val.data();
     }
 
     if (a_szName.startsWith('#'))
     {
-        QSharedPointer<qreal> val(new qreal(0));
+        QSharedPointer<qreal> const val(new qreal(std::numeric_limits<qreal>::quiet_NaN()));
         calc->m_varsValues.append(val);
         return val.data();
     }
 
-    throw qmu::QmuParserError (qmu::ecUNASSIGNABLE_TOKEN);
+    throw qmu::QmuParserError(qmu::ecUNASSIGNABLE_TOKEN);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto Calculator::Warning(const QString &warningMsg, qreal value) -> qreal
+{
+    VAbstractApplication::VApp()->IsPedantic()
+        ? throw qmu::QmuParserWarning(warningMsg)
+        : qWarning() << VAbstractApplication::warningMessageSignature + warningMsg;
+
+    return value;
 }

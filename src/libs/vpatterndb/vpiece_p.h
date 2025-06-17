@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -32,13 +32,12 @@
 #include <QSharedData>
 #include <QVector>
 
-#include "../vmisc/diagnostic.h"
 #include "../vmisc/def.h"
-#include "vpiecenode.h"
-#include "vpiecepath.h"
-#include "floatItemData/vpiecelabeldata.h"
-#include "floatItemData/vpatternlabeldata.h"
+#include "../vmisc/typedef.h"
 #include "floatItemData/vgrainlinedata.h"
+#include "floatItemData/vpatternlabeldata.h"
+#include "floatItemData/vpiecelabeldata.h"
+#include "vpiecepath.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -47,67 +46,57 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VPieceData : public QSharedData
 {
 public:
-    explicit VPieceData(PiecePathType type)
-        : m_path(type),
-          m_inLayout(true),
-          m_united(false),
-          m_customSARecords(),
-          m_internalPaths(),
-          m_pins(),
-          m_placeLabels(),
-          m_ppData(),
-          m_piPatternInfo(),
-          m_glGrainline(),
-          m_formulaWidth('0')
-    {}
-
-    VPieceData(const VPieceData &detail)
-        : QSharedData(detail),
-          m_path(detail.m_path),
-          m_inLayout(detail.m_inLayout),
-          m_united(detail.m_united),
-          m_customSARecords(detail.m_customSARecords),
-          m_internalPaths(detail.m_internalPaths),
-          m_pins(detail.m_pins),
-          m_placeLabels(detail.m_placeLabels),
-          m_ppData(detail.m_ppData),
-          m_piPatternInfo(detail.m_piPatternInfo),
-          m_glGrainline(detail.m_glGrainline),
-          m_formulaWidth(detail.m_formulaWidth)
-    {}
-
-    ~VPieceData();
+    explicit VPieceData(PiecePathType type);
+    VPieceData(const VPieceData &detail) = default;
+    ~VPieceData() = default;
 
     /** @brief nodes list detail nodes. */
-    VPiecePath m_path;
+    VPiecePath m_path; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    bool m_inLayout;
-    bool m_united;
+    bool m_inLayout{true}; // NOLINT(misc-non-private-member-variables-in-classes)
+    bool m_united{false};  // NOLINT(misc-non-private-member-variables-in-classes)
 
-    QVector<CustomSARecord> m_customSARecords;
-    QVector<quint32>        m_internalPaths;
-    QVector<quint32>        m_pins;
-    QVector<quint32>        m_placeLabels;
+    QVector<CustomSARecord> m_customSARecords{}; // NOLINT(misc-non-private-member-variables-in-classes)
+    QVector<quint32> m_internalPaths{};          // NOLINT(misc-non-private-member-variables-in-classes)
+    QVector<quint32> m_pins{};                   // NOLINT(misc-non-private-member-variables-in-classes)
+    QVector<quint32> m_placeLabels{};            // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief Pattern piece data */
-    VPieceLabelData m_ppData;
+    VPieceLabelData m_ppData{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief Pattern info coordinates */
-    VPatternLabelData m_piPatternInfo;
+    VPatternLabelData m_piPatternInfo{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief m_glGrainline grainline geometry object*/
-    VGrainlineData m_glGrainline;
+    VGrainlineData m_glGrainline{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    QString m_formulaWidth;
+    QString m_formulaWidth{'0'}; // NOLINT(misc-non-private-member-variables-in-classes)
+
+    QString m_gradationLabel{}; // NOLINT(misc-non-private-member-variables-in-classes)
+
+    QString m_shortName{}; // NOLINT(misc-non-private-member-variables-in-classes)
+
+    quint32 m_mirrorLineStartPoint{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
+    quint32 m_mirrorLineEndPoint{NULL_ID};   // NOLINT(misc-non-private-member-variables-in-classes)
+
+    bool m_manualFoldHeight{false}; // NOLINT(misc-non-private-member-variables-in-classes)
+    bool m_manualFoldWidth{false};  // NOLINT(misc-non-private-member-variables-in-classes)
+    bool m_manualFoldCenter{false}; // NOLINT(misc-non-private-member-variables-in-classes)
+
+    QString m_formulaFoldHeight{}; // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_formulaFoldWidth{};  // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_formulaFoldCenter{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
-    VPieceData &operator=(const VPieceData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN_MOVE(VPieceData) // NOLINT
 };
-
-VPieceData::~VPieceData()
-{}
 
 QT_WARNING_POP
 
-#endif // VPIECE_P_H
+//---------------------------------------------------------------------------------------------------------------------
+inline VPieceData::VPieceData(PiecePathType type)
+  : m_path(type)
+{
+}
 
+#endif // VPIECE_P_H

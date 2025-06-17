@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -33,21 +33,30 @@
 
 class VPlainTextEdit : public QPlainTextEdit
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VPlainTextEdit(QWidget * parent = nullptr);
-    VPlainTextEdit(const QString & text, QWidget * parent = nullptr);
+    explicit VPlainTextEdit(const QString & text, QWidget * parent = nullptr);
     virtual ~VPlainTextEdit();
+
+    void SetMatchParenthesesEnabled(bool enabled);
+
+    void SetFilter(const QString &filter);
+
+    void appendFilteredText(const QString &text);
 
 private slots:
     void MatchParentheses();
 
 private:
     VHighlighter m_highlighter;
+    QString m_filter{};
+    QStringList m_allLines{};
 
-    bool MatchLeftParenthesis(QTextBlock currentBlock, int i, int numLeftParentheses);
-    bool MatchRightParenthesis(QTextBlock currentBlock, int i, int numRightParentheses);
+    auto MatchLeftParenthesis(QTextBlock currentBlock, int i, int numLeftParentheses) -> bool;
+    auto MatchRightParenthesis(QTextBlock currentBlock, int i, int numRightParentheses) -> bool;
     void CreateParenthesisSelection(int pos, bool match = true);
+    void Filter();
 };
 
 #endif // VPLAINTEXTEDIT_H

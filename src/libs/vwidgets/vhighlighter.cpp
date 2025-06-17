@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -26,16 +26,17 @@
  **
  *************************************************************************/
 #include "vhighlighter.h"
+#include <memory>
 
 //---------------------------------------------------------------------------------------------------------------------
 VTextBlockData::VTextBlockData()
-    : m_parentheses()
+  : m_parentheses()
 {
     // Nothing to do
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<ParenthesisInfo *> VTextBlockData::Parentheses()
+auto VTextBlockData::Parentheses() -> QVector<ParenthesisInfo *>
 {
     return m_parentheses;
 }
@@ -54,37 +55,37 @@ void VTextBlockData::insert(ParenthesisInfo *info)
 
 //---------------------------------------------------------------------------------------------------------------------
 VHighlighter::VHighlighter(QTextDocument *document)
-    : QSyntaxHighlighter(document)
+  : QSyntaxHighlighter(document)
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VHighlighter::highlightBlock(const QString &text)
 {
-    QScopedPointer<VTextBlockData> data(new VTextBlockData);
+    auto data = std::make_unique<VTextBlockData>();
 
-    int leftPos = text.indexOf('(');
+    vsizetype leftPos = text.indexOf('(');
     while (leftPos != -1)
     {
-        QScopedPointer<ParenthesisInfo> info(new ParenthesisInfo);
+        auto info = std::make_unique<ParenthesisInfo>();
         info->character = '(';
         info->position = leftPos;
 
-        data->insert(info.take());
+        data->insert(info.release());
         leftPos = text.indexOf('(', leftPos + 1);
     }
 
-    int rightPos = text.indexOf(')');
+    vsizetype rightPos = text.indexOf(')');
     while (rightPos != -1)
     {
-        QScopedPointer<ParenthesisInfo> info(new ParenthesisInfo);
+        auto info = std::make_unique<ParenthesisInfo>();
         info->character = ')';
         info->position = rightPos;
 
-        data->insert(info.take());
+        data->insert(info.release());
 
-        rightPos = text.indexOf(')', rightPos +1);
+        rightPos = text.indexOf(')', rightPos + 1);
     }
 
-    setCurrentBlockUserData(data.take());
+    setCurrentBlockUserData(data.release());
 }

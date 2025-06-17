@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -29,50 +29,77 @@
 #include "vlabelproperty.h"
 
 #include <QKeyEvent>
-#include <QLatin1String>
 #include <QLabel>
+#include <QLatin1String>
 #include <QSizePolicy>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 
 #include "../vproperty_p.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 VPE::VLabelProperty::VLabelProperty(const QString &name, const QMap<QString, QVariant> &settings)
-    : VProperty(name, QVariant::String),
-      typeForParent(0)
+  : VProperty(name,
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+              QMetaType::QString),
+#else
+              QVariant::String),
+#endif
+    typeForParent(0)
 {
     VProperty::setSettings(settings);
-    d_ptr->VariantValue.setValue(QString());
-    d_ptr->VariantValue.convert(QVariant::String);
+    vproperty_d_ptr->VariantValue.setValue(QString());
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::QString));
+#else
+    vproperty_d_ptr->VariantValue.convert(QVariant::String);
+#endif
 }
 
 VPE::VLabelProperty::VLabelProperty(const QString &name)
-    : VProperty(name),
-      typeForParent(0)
+  : VProperty(name),
+    typeForParent(0)
 {
-    d_ptr->VariantValue.setValue(QString());
-    d_ptr->VariantValue.convert(QVariant::String);
+    vproperty_d_ptr->VariantValue.setValue(QString());
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::QString));
+#else
+    vproperty_d_ptr->VariantValue.convert(QVariant::String);
+#endif
 }
 
-QWidget *VPE::VLabelProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
-                                           const QAbstractItemDelegate *delegate)
+auto VPE::VLabelProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
+                                       const QAbstractItemDelegate *delegate) -> QWidget *
 {
     Q_UNUSED(options)
     Q_UNUSED(delegate)
 
-    QLabel* tmpEditor = new QLabel(parent);
+    auto *tmpEditor = new QLabel(parent);
     tmpEditor->setLocale(parent->locale());
-    tmpEditor->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    tmpEditor->setText(d_ptr->VariantValue.toString());
+    tmpEditor->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    tmpEditor->setText(vproperty_d_ptr->VariantValue.toString());
 
-    d_ptr->editor = tmpEditor;
-    return d_ptr->editor;
+    vproperty_d_ptr->editor = tmpEditor;
+    return vproperty_d_ptr->editor;
 }
 
-QVariant VPE::VLabelProperty::getEditorData(const QWidget *editor) const
+auto VPE::VLabelProperty::setEditorData(QWidget *editor) -> bool
 {
-    const QLabel* tmpEditor = qobject_cast<const QLabel*>(editor);
+    if (auto *tmpWidget = qobject_cast<QLabel *>(editor))
+    {
+        tmpWidget->setText(vproperty_d_ptr->VariantValue.toString());
+        return true;
+    }
+
+    return false;
+}
+
+auto VPE::VLabelProperty::getEditorData(const QWidget *editor) const -> QVariant
+{
+    const auto *tmpEditor = qobject_cast<const QLabel *>(editor);
     if (tmpEditor)
     {
         return tmpEditor->text();
@@ -83,15 +110,15 @@ QVariant VPE::VLabelProperty::getEditorData(const QWidget *editor) const
 
 void VPE::VLabelProperty::setSetting(const QString &key, const QVariant &value)
 {
-    if (key == QLatin1String("TypeForParent"))
+    if (key == "TypeForParent"_L1)
     {
         setTypeForParent(value.toInt());
     }
 }
 
-QVariant VPE::VLabelProperty::getSetting(const QString &key) const
+auto VPE::VLabelProperty::getSetting(const QString &key) const -> QVariant
 {
-    if (key == QLatin1String("TypeForParent"))
+    if (key == "TypeForParent"_L1)
     {
         return typeForParent;
     }
@@ -99,19 +126,19 @@ QVariant VPE::VLabelProperty::getSetting(const QString &key) const
         return VProperty::getSetting(key);
 }
 
-QStringList VPE::VLabelProperty::getSettingKeys() const
+auto VPE::VLabelProperty::getSettingKeys() const -> QStringList
 {
     QStringList settings;
     settings << QStringLiteral("TypeForParent");
     return settings;
 }
 
-QString VPE::VLabelProperty::type() const
+auto VPE::VLabelProperty::type() const -> QString
 {
     return QStringLiteral("label");
 }
 
-VPE::VProperty *VPE::VLabelProperty::clone(bool include_children, VPE::VProperty *container) const
+auto VPE::VLabelProperty::clone(bool include_children, VPE::VProperty *container) const -> VPE::VProperty *
 {
     return VProperty::clone(include_children, container ? container : new VLabelProperty(getName(), getSettings()));
 }
@@ -121,7 +148,7 @@ void VPE::VLabelProperty::UpdateParent(const QVariant &value)
     emit childChanged(value, typeForParent);
 }
 
-int VPE::VLabelProperty::getTypeForParent() const
+auto VPE::VLabelProperty::getTypeForParent() const -> int
 {
     return typeForParent;
 }

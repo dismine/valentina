@@ -9,7 +9,7 @@
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
- **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
@@ -33,6 +33,7 @@
 
 class SavePlaceLabelOptions : public VUndoCommand
 {
+    Q_OBJECT // NOLINT
 public:
     SavePlaceLabelOptions(quint32 pieceId, const VPlaceLabelItem &oldLabel, const VPlaceLabelItem &newLabel,
                           VAbstractPattern *doc, VContainer *data, quint32 id, QUndoCommand *parent = nullptr);
@@ -40,13 +41,15 @@ public:
 
     virtual void undo() override;
     virtual void redo() override;
-    virtual bool mergeWith(const QUndoCommand *command) override;
-    virtual int  id() const override;
+    virtual auto mergeWith(const QUndoCommand *command) -> bool override;
+    virtual auto id() const -> int override;
 
-    quint32         LabelId() const;
-    VPlaceLabelItem NewLabel() const;
+    auto LabelId() const -> quint32;
+    auto NewLabel() const -> VPlaceLabelItem;
+
 private:
-    Q_DISABLE_COPY(SavePlaceLabelOptions)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(SavePlaceLabelOptions) // NOLINT
 
     const VPlaceLabelItem m_oldLabel;
     VPlaceLabelItem       m_newLabel;
@@ -56,19 +59,19 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline int SavePlaceLabelOptions::id() const
+inline auto SavePlaceLabelOptions::id() const -> int
 {
     return static_cast<int>(UndoCommand::SavePlaceLabelOptions);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline quint32 SavePlaceLabelOptions::LabelId() const
+inline auto SavePlaceLabelOptions::LabelId() const -> quint32
 {
     return nodeId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline VPlaceLabelItem SavePlaceLabelOptions::NewLabel() const
+inline auto SavePlaceLabelOptions::NewLabel() const -> VPlaceLabelItem
 {
     return m_newLabel;
 }
