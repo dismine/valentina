@@ -66,7 +66,7 @@ Module {
     property string libDirName: "lib"
 
     property string appTarget
-    property string projectVersion: "0.7.53"
+    property string projectVersion: "1.0.0"
 
     readonly property string installAppPath: {
         if (qbs.targetOS.contains("macos"))

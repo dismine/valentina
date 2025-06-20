@@ -1,4 +1,4 @@
-# Valentina 0.7.54 (unreleased)
+# Valentina 1.0.0 (unreleased)
 - Fix Puzzle app crash when application closing.
 - Dialog Table of variables. Added button Close.
 - Fix incorrect seam allowance.

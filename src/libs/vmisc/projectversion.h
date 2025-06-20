@@ -31,9 +31,9 @@
 
 class QString;
 
-constexpr unsigned MAJOR_VERSION = 0;
-constexpr unsigned MINOR_VERSION = 7;
-constexpr unsigned DEBUG_VERSION = 53;
+constexpr unsigned MAJOR_VERSION = 1;
+constexpr unsigned MINOR_VERSION = 0;
+constexpr unsigned DEBUG_VERSION = 0;
 
 auto AppVersionStr() -> const QString &;
 
@@ -48,17 +48,16 @@ constexpr auto AppVersion() -> unsigned
 }
 
 // Change version number in projectversion.cpp too.
-// Synchronize valentina.nsi
 
-#define VER_FILEVERSION 0, 7, 53
-#define VER_FILEVERSION_STR "0.7.53\0"
+#define VER_FILEVERSION 1, 0, 0
+#define VER_FILEVERSION_STR "1.0.0\0"
 
-#define V_PRERELEASE // Mark prerelease builds
+// #define V_PRERELEASE // Mark prerelease builds
 
 #define VER_PRODUCTVERSION VER_FILEVERSION
 #define VER_PRODUCTVERSION_STR VER_FILEVERSION_STR
 #define VER_COMPANYNAME_STR "Valentina"
-#define VER_LEGALCOPYRIGHT_STR "Copyright © 2014-2024 Valentina Team"
+#define VER_LEGALCOPYRIGHT_STR "Copyright © 2013-2025 Valentina Team"
 #define VER_LEGALTRADEMARKS1_STR "All Rights Reserved"
 #define VER_LEGALTRADEMARKS2_STR VER_LEGALTRADEMARKS1_STR
 #define VER_COMPANYDOMAIN_STR "smart-pattern.com.ua"

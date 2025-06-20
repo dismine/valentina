@@ -214,7 +214,7 @@ linux_task:
             QT_VERSION: Qt6
             ARCH: x86_64
             TARGET_PLATFORM: "Linux"
-            VALENTINA_VERSION: 0_7_53
+            VALENTINA_VERSION: 1_0_0
           container:
             cpu: 4 
             memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
@@ -418,7 +418,7 @@ macos_task:
     TARGET_PLATFORM: "macOS_12.4+"
     MACOS_DEPLOYMENT_TARGET: 12.0
     ENABLE_CCACHE: true
-    VALENTINA_VERSION: 0_7_53
+    VALENTINA_VERSION: 1_0_0
   matrix:
     - name: 'macOS Monterey 12 [signle bundle, no tests]'
       env:
