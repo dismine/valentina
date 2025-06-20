@@ -38,6 +38,7 @@ InnoSetup {
     }
 
     property string minVersion: {
+        // https://jrsoftware.org/ishelp/index.php?topic=winvernotes
         if (Utilities.versionCompare(Qt.core.version, "6.5") >= 0)
         {
             return "10.0.17763";
