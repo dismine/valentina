@@ -15758,26 +15758,26 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="915"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="929"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="956"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="970"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam path at %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="917"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="931"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="958"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="972"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam path.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="981"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1001"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1022"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1042"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam allowance path at %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="983"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1003"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1024"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1044"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam allowance path.</source>
         <translation type="unfinished"></translation>
     </message>
