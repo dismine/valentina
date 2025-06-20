@@ -18,7 +18,7 @@ defaults:
 
 env:
   SOURCE_DIR: ${{ github.workspace }}
-  QBS_VERSION: 2.4.2
+  QBS_VERSION: 2.6.1
   VALENTINA_VERSION: 1_0_0
   ACCESS_TOKEN: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
 
