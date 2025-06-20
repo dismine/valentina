@@ -206,7 +206,7 @@ VToolApp {
     Group {
         name: "MacOS assets"
         condition: qbs.targetOS.contains("macos") && buildconfig.enableMultiBundle
-        prefix: project.sourceDirectory + "/dist/macx/tape/"
+        prefix: project.sourceDirectory + "/dist/macos/tape/"
         files: [
             "Info.plist",
             "tape.xcassets"
@@ -216,7 +216,7 @@ VToolApp {
     Group {
         name: "ICNS"
         condition: qbs.targetOS.contains("macos") && buildconfig.enableMultiBundle
-        prefix: project.sourceDirectory + "/dist/macx/valentina-project.xcassets/"
+        prefix: project.sourceDirectory + "/dist/macos/valentina-project.xcassets/"
         files: [
             "i-measurements.iconset",
             "s-measurements.iconset",

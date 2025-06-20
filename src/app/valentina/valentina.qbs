@@ -324,7 +324,7 @@ VToolApp {
     Group {
         name: "MacOS assets"
         condition: qbs.targetOS.contains("macos")
-        prefix: project.sourceDirectory + "/dist/macx/valentina/"
+        prefix: project.sourceDirectory + "/dist/macos/valentina/"
         files: [
             "Info.plist",
             "valentina.xcassets"
@@ -334,7 +334,7 @@ VToolApp {
     Group {
         name: "ICNS"
         condition: qbs.targetOS.contains("macos")
-        prefix: project.sourceDirectory + "/dist/macx/valentina-project.xcassets/"
+        prefix: project.sourceDirectory + "/dist/macos/valentina-project.xcassets/"
         files: [
             "pattern.iconset",
             "layout.iconset",

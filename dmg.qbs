@@ -42,11 +42,11 @@ VAppleApplicationDiskImage {
     }
 
     files: {
-        var files = ["dist/macx/dmg/dmg.iconset"];
+        var files = ["dist/macos/dmg/dmg.iconset"];
 
         // Tested on 2.1.1. At least this version doesn't crash even if the feature still doesn't work
         if (Utilities.versionCompare(qbs.version, "2.1.1") >= 0)
-            files.push("dist/macx/dmg/en_US.lproj/LICENSE");
+            files.push("dist/macos/dmg/en_US.lproj/LICENSE");
 
         return files;
     }
@@ -75,9 +75,9 @@ VAppleApplicationDiskImage {
         condition: useImageBackground
         files: {
             if (buildconfig.enableMultiBundle)
-                return ["dist/macx/dmg/background_multibundle.tiff"]
+                return ["dist/macos/dmg/background_multibundle.tiff"]
 
-            return ["dist/macx/dmg/background.tiff"]
+            return ["dist/macos/dmg/background.tiff"]
         }
     }
 
