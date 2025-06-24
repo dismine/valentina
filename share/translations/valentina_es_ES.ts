@@ -211,7 +211,7 @@
     </message>
     <message>
         <source>Paths</source>
-        <translation type="vanished">Carpetas</translation>
+        <translation type="vanished">Rutas</translation>
     </message>
 </context>
 <context>
@@ -230,7 +230,7 @@
     </message>
     <message>
         <source>Auto-save modified pattern</source>
-        <translation type="vanished">Auto guardado en patrón modificado</translation>
+        <translation type="vanished">Auto-guardar patrón modificado</translation>
     </message>
     <message>
         <source>min</source>
@@ -306,19 +306,19 @@
     </message>
     <message>
         <source>GUI language:</source>
-        <translation type="vanished">Idioma de interfaz gráfica de usuario:</translation>
+        <translation type="vanished">Idioma del interfaz gráfica de usuario:</translation>
     </message>
     <message>
         <source>Decimal separator parts:</source>
-        <translation type="vanished">Partes separador decimal:</translation>
+        <translation type="vanished">Separador de partes decimales:</translation>
     </message>
     <message>
         <source>Default unit:</source>
-        <translation type="vanished">Unidad predeterminada</translation>
+        <translation type="vanished">Unidad predeterminada:</translation>
     </message>
     <message>
         <source>Label language:</source>
-        <translation type="vanished">Idioma de las etiquetas:</translation>
+        <translation type="vanished">Idioma de etiquetas:</translation>
     </message>
     <message>
         <source>Pattern making system</source>
@@ -346,7 +346,7 @@
     </message>
     <message>
         <source>The text appears under the icon (recommended for beginners).</source>
-        <translation type="vanished">El texto aparece bajo el icono (recomendado para principiantes).</translation>
+        <translation type="vanished">El texto aparece debajo del icono (recomendado para principiantes).</translation>
     </message>
     <message>
         <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
@@ -554,7 +554,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="201"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar cálculo total en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Muestra el calculo completo en cuadro de mensaje&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -566,7 +566,7 @@
     </message>
     <message>
         <source>First point of line</source>
-        <translation type="vanished">Primer punto de línea</translation>
+        <translation type="vanished">Primer punto de la línea</translation>
     </message>
     <message>
         <source>Second point</source>
@@ -582,7 +582,7 @@
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation type="vanished">Mostrar línea desde primer punto a este punto</translation>
+        <translation type="vanished">Mostrar línea desde primer punto hasta este punto</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.cpp" line="208"/>
@@ -606,12 +606,12 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="82"/>
         <source>Length:</source>
-        <translation>Largo:</translation>
+        <translation>Longitud:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="102"/>
         <source>Formula wizard</source>
-        <translation>Asistente de Fórmula</translation>
+        <translation>Asistente de formula</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="150"/>
@@ -621,7 +621,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="176"/>
         <source>Calculation</source>
-        <translation>Cálculo</translation>
+        <translation>Calculos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="230"/>
@@ -656,7 +656,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="315"/>
         <source>Line color:</source>
-        <translation>Color de la línea:</translation>
+        <translation>Color de línea:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="322"/>
@@ -688,18 +688,18 @@
     </message>
     <message>
         <source>Radius</source>
-        <translation type="vanished">Radios</translation>
+        <translation type="vanished">Radio</translation>
     </message>
     <message>
         <source>Value of radius</source>
-        <translation type="vanished">Valor de los radios</translation>
+        <translation type="vanished">Valor del radio</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="192"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="371"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="550"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar cálculo total en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Muestra el calculo completo en cuadro de mensaje&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>First angle</source>
@@ -731,7 +731,7 @@
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation type="vanished">Radio no puede ser negativo</translation>
+        <translation type="vanished">El radio no puede ser negativo</translation>
     </message>
     <message>
         <source>Angles equal</source>
@@ -749,12 +749,12 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="487"/>
         <source>Edit first angle</source>
-        <translation>Editar primer ángulo</translation>
+        <translation>Editar el primer ángulo</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="501"/>
         <source>Edit second angle</source>
-        <translation>Editar segundo ángulo</translation>
+        <translation>Editar el segundo ángulo</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="82"/>
@@ -766,7 +766,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="281"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="460"/>
         <source>Formula wizard</source>
-        <translation>Asistente de Fórmula</translation>
+        <translation>Asistente de formula</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="144"/>
@@ -789,7 +789,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="349"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="528"/>
         <source>Calculation</source>
-        <translation>Cálculo</translation>
+        <translation>Calculos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="440"/>
@@ -799,7 +799,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="585"/>
         <source>Center point:</source>
-        <translation>Punto central:</translation>
+        <translation>Punto centro:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="592"/>
@@ -847,11 +847,11 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="14"/>
         <source>Dialog</source>
-        <translation>Diálogo</translation>
+        <translation>Dialogo</translation>
     </message>
     <message>
         <source>Radius</source>
-        <translation type="vanished">Radios</translation>
+        <translation type="vanished">Radio</translation>
     </message>
     <message>
         <source>Value of radius</source>
@@ -862,7 +862,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="368"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="547"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar cálculo total en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Muestra el calculo completo en cuadro de mensaje&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>First angle</source>
@@ -913,7 +913,7 @@
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation type="vanished">Radio no puede ser negativo</translation>
+        <translation type="vanished">El radio no puede ser negativo</translation>
     </message>
     <message>
         <source>Length can&apos;t be equal 0</source>
@@ -929,7 +929,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="278"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="457"/>
         <source>Formula wizard</source>
-        <translation>Asistente de Fórmula</translation>
+        <translation>Asistente de formula</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="141"/>
@@ -943,7 +943,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="346"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="525"/>
         <source>Calculation</source>
-        <translation>Cálculo</translation>
+        <translation>Calculos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="258"/>
@@ -958,7 +958,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="582"/>
         <source>Center point:</source>
-        <translation>Punto central:</translation>
+        <translation>Punto centro:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="592"/>
@@ -1052,7 +1052,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="192"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar cálculo total en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Muestra el calculo completo en cuadro de mensaje&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -1103,7 +1103,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="14"/>
         <source>Point along bisector</source>
-        <translation>Punto a lo largo del bisector</translation>
+        <translation>Punto a lo largo de la bisectriz</translation>
     </message>
     <message>
         <source>Line color</source>
@@ -1122,7 +1122,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="99"/>
         <source>Formula wizard</source>
-        <translation>Asistente de Fórmula</translation>
+        <translation>Asistente de formula</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="141"/>
@@ -1132,7 +1132,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="170"/>
         <source>Calculation</source>
-        <translation>Cálculo</translation>
+        <translation>Calculos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="227"/>
@@ -1172,7 +1172,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="321"/>
         <source>Line color:</source>
-        <translation>Color de la línea:</translation>
+        <translation>Color de línea:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="28"/>
@@ -1378,7 +1378,7 @@
     <name>DialogCurveIntersectAxis</name>
     <message>
         <source>Angle</source>
-        <translation type="vanished">Ángulo</translation>
+        <translation type="vanished">Angulo</translation>
     </message>
     <message>
         <source>Value of angle</source>
@@ -1387,7 +1387,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="192"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar cálculo total en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Muestra el calculo completo en cuadro de mensaje&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Axis point</source>
@@ -1407,7 +1407,7 @@
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation type="vanished">Mostrar línea desde el primer punto hasta este punto</translation>
+        <translation type="vanished">Mostrar línea desde primer punto hasta este punto</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.cpp" line="268"/>
@@ -1430,17 +1430,17 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.cpp" line="323"/>
         <source>Edit angle</source>
-        <translation>Editar ángulo</translation>
+        <translation>Editar angulo</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="79"/>
         <source>Angle:</source>
-        <translation>Ángulo:</translation>
+        <translation>Angulo:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="99"/>
         <source>Formula wizard</source>
-        <translation>Asistente de Fórmula</translation>
+        <translation>Asistente de formula</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="141"/>
@@ -1450,7 +1450,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="173"/>
         <source>Calculation</source>
-        <translation>Cálculo</translation>
+        <translation>Calculos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="227"/>
@@ -1485,7 +1485,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="315"/>
         <source>Line color:</source>
-        <translation>Color de la línea:</translation>
+        <translation>Color de línea:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="28"/>
@@ -1521,7 +1521,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="192"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar cálculo total en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Muestra el calculo completo en cuadro de mensaje&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Arc</source>
@@ -1557,7 +1557,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="99"/>
         <source>Formula wizard</source>
-        <translation>Asistente de Fórmula</translation>
+        <translation>Asistente de formula</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="141"/>
@@ -1567,7 +1567,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="170"/>
         <source>Calculation</source>
-        <translation>Cálculo</translation>
+        <translation>Calculos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="228"/>
@@ -1627,7 +1627,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="192"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar cálculo total en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Muestra el calculo completo en cuadro de mensaje&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Curve</source>
@@ -1663,7 +1663,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="99"/>
         <source>Formula wizard</source>
-        <translation>Asistente de Fórmula</translation>
+        <translation>Asistente de formula</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="141"/>
@@ -1673,7 +1673,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="170"/>
         <source>Calculation</source>
-        <translation>Cálculo</translation>
+        <translation>Calculos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="228"/>
@@ -1733,7 +1733,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="192"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar cálculo total en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Muestra el calculo completo en cuadro de mensaje&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Curve</source>
@@ -1769,7 +1769,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="99"/>
         <source>Formula wizard</source>
-        <translation>Asistente de Fórmula</translation>
+        <translation>Asistente de formula</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="141"/>
@@ -1779,7 +1779,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="170"/>
         <source>Calculation</source>
-        <translation>Cálculo</translation>
+        <translation>Calculos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="228"/>
@@ -1901,11 +1901,11 @@
     </message>
     <message>
         <source>Seam allowance tool</source>
-        <translation type="vanished">Herramienta para margen de costura</translation>
+        <translation type="vanished">Herramienta margen de costura</translation>
     </message>
     <message>
         <source>All objects in path should follow in clockwise direction.</source>
-        <translation type="vanished">Todos los objetos en la ruta deben seguir en la direccion de las agujas del reloj.</translation>
+        <translation type="vanished">Todos los objetos en la ruta deberán seguir el sentido de las agujas del reloj.</translation>
     </message>
     <message>
         <source>Scroll down the list</source>
@@ -1937,7 +1937,7 @@
     </message>
     <message>
         <source>You have to choose points in a clockwise direction!</source>
-        <translation type="vanished">¡Tiene que elegir los puntos en una dirección en sentido horario!</translation>
+        <translation type="vanished">¡Tiene que elegir los puntos en una dirección en sentido del reloj!</translation>
     </message>
     <message>
         <source>Bias X:</source>
@@ -1953,7 +1953,7 @@
     </message>
     <message>
         <source>Width:</source>
-        <translation type="vanished">Anchura:</translation>
+        <translation type="vanished">Ancho:</translation>
     </message>
     <message>
         <source>First point cannot be equal to the last point!</source>
@@ -1965,7 +1965,7 @@
     </message>
     <message>
         <source>Pattern piece data</source>
-        <translation type="vanished">Datos de la pieza de patrón</translation>
+        <translation type="vanished">Datos de pieza de patrón</translation>
     </message>
     <message>
         <source>Material/Cut number/Placement</source>
@@ -2001,11 +2001,11 @@
     </message>
     <message>
         <source>Detail label visible</source>
-        <translation type="vanished">Etiqueta de Detalle visible</translation>
+        <translation type="vanished">Etiqueta de detalle visible</translation>
     </message>
     <message>
         <source>Pattern label visible</source>
-        <translation type="vanished">Etiqueta del Patrón visible</translation>
+        <translation type="vanished">Etiqueta del patrón visible</translation>
     </message>
     <message>
         <source>Fabric</source>
@@ -2045,7 +2045,7 @@
     </message>
     <message>
         <source>on Fold</source>
-        <translation type="vanished">sobre pliegue</translation>
+        <translation type="vanished">en Pliegue</translation>
     </message>
     <message>
         <source>You can choose one of the predefined materials or enter a new one</source>
@@ -2057,7 +2057,7 @@
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation type="vanished">Prohibir voltear</translation>
+        <translation type="vanished">Prohibir girar</translation>
     </message>
     <message>
         <source>Letter of pattern piece</source>
@@ -2069,11 +2069,11 @@
     </message>
     <message>
         <source>Grainline</source>
-        <translation type="vanished">Linea hilo de tela</translation>
+        <translation type="vanished">Línea hilo de tela</translation>
     </message>
     <message>
         <source>Grainline visible</source>
-        <translation type="vanished">Linea hilo de tela visible</translation>
+        <translation type="vanished">Línea hilo de tela visible</translation>
     </message>
     <message>
         <source>Rotation:</source>
@@ -2081,7 +2081,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="vanished">Asistente de fórmula</translation>
+        <translation type="vanished">Asistente de formula</translation>
     </message>
     <message>
         <source>Value</source>
@@ -2089,11 +2089,11 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="vanished">Cálculo</translation>
+        <translation type="vanished">Calculos</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar el cálculo completo en la caja de mensaje&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Muestra el calculo completo en cuadro de mensaje&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -2291,7 +2291,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="367"/>
         <source>Could not save file</source>
-        <translation>No se pudo guardar el archivo</translation>
+        <translation>No se pudo guardar archivo</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="381"/>
@@ -2663,7 +2663,7 @@
     </message>
     <message>
         <source>Formula</source>
-        <translation type="vanished">Fórmula</translation>
+        <translation type="vanished">Formula</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="95"/>
@@ -2676,7 +2676,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar cálculo total en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Muestra el calculo completo en cuadro de mensaje&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="191"/>
@@ -2704,7 +2704,7 @@
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation type="vanished">Longitud del arco</translation>
+        <translation type="vanished">Longitud de los arcos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="259"/>
@@ -2731,7 +2731,7 @@
     </message>
     <message>
         <source>Size</source>
-        <translation type="vanished">Tamaño</translation>
+        <translation type="vanished">Talla</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.cpp" line="213"/>
@@ -2783,7 +2783,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="75"/>
         <source>Formula:</source>
-        <translation>Fórmula:</translation>
+        <translation>Formula:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="137"/>
@@ -2793,7 +2793,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="168"/>
         <source>Calculation</source>
-        <translation>Cálculo</translation>
+        <translation>Calculos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="371"/>
@@ -2855,7 +2855,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="654"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="839"/>
         <source>Formula wizard</source>
-        <translation>Asistente de Fórmula</translation>
+        <translation>Asistente de formula</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="141"/>
@@ -2879,7 +2879,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="750"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="935"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar el cálculo completo en la caja de mensaje&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Muestra el calculo completo en cuadro de mensaje&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="264"/>
@@ -2896,7 +2896,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="728"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="913"/>
         <source>Calculation</source>
-        <translation>Cálculo</translation>
+        <translation>Calculos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="634"/>
@@ -2906,12 +2906,12 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="819"/>
         <source>Rotation angle:</source>
-        <translation>Ángulo de rotación:</translation>
+        <translation>Angulo de rotación:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="970"/>
         <source>Center point:</source>
-        <translation>Punto central:</translation>
+        <translation>Punto centro:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="977"/>
@@ -2998,11 +2998,11 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="216"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="410"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar cálculo total en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Muestra el calculo completo en cuadro de mensaje&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="vanished">Ángulo</translation>
+        <translation type="vanished">Angulo</translation>
     </message>
     <message>
         <source>Value of angle</source>
@@ -3014,7 +3014,7 @@
     </message>
     <message>
         <source>First point of line</source>
-        <translation type="vanished">Primer punto de línea</translation>
+        <translation type="vanished">Primer punto de la línea</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -3040,7 +3040,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.cpp" line="178"/>
         <source>Edit angle</source>
-        <translation>Editar ángulo</translation>
+        <translation>Editar angulo</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.cpp" line="192"/>
@@ -3056,7 +3056,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="117"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="311"/>
         <source>Formula wizard</source>
-        <translation>Asistente de Fórmula</translation>
+        <translation>Asistente de formula</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="165"/>
@@ -3068,12 +3068,12 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="197"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="391"/>
         <source>Calculation</source>
-        <translation>Cálculo</translation>
+        <translation>Calculos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="285"/>
         <source>Angle:</source>
-        <translation>Ángulo:</translation>
+        <translation>Angulo:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="445"/>
@@ -3103,7 +3103,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="519"/>
         <source>Line color:</source>
-        <translation>Color de la línea:</translation>
+        <translation>Color de línea:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="37"/>
@@ -3239,7 +3239,7 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="522"/>
         <source>Formula wizard</source>
-        <translation>Asistente de fórmula</translation>
+        <translation>Asistente de formula</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="544"/>
@@ -3374,7 +3374,7 @@
     <name>DialogFlippingByAxis</name>
     <message>
         <source>Dialog</source>
-        <translation type="vanished">Diálogo</translation>
+        <translation type="vanished">Dialogo</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="114"/>
@@ -3525,7 +3525,7 @@
     <name>DialogFlippingByLine</name>
     <message>
         <source>Dialog</source>
-        <translation type="vanished">Diálogo</translation>
+        <translation type="vanished">Dialogo</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="114"/>
@@ -3736,7 +3736,7 @@
     </message>
     <message>
         <source>First point of line</source>
-        <translation type="vanished">Primer punto de línea</translation>
+        <translation type="vanished">Primer punto de la línea</translation>
     </message>
     <message>
         <source>Second point of line</source>
@@ -3811,7 +3811,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="140"/>
         <source>Line color:</source>
-        <translation>Color de la línea:</translation>
+        <translation>Color de línea:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="31"/>
@@ -4177,29 +4177,29 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1395"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1398"/>
         <source>Lines angles</source>
-        <translation>Ángulos de las líneas</translation>
+        <translation>Ángulos de líneas</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1428"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1554"/>
         <source>Angle</source>
-        <translation>Ángulo</translation>
+        <translation>Angulo</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1437"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1440"/>
         <source>Lengths curves</source>
-        <translation>Longitud de las curvas</translation>
+        <translation>Longitudes de curvas</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1521"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1524"/>
         <source>Angles curves</source>
-        <translation>Ángulos de las curvas</translation>
+        <translation>Ángulos de curvas</translation>
     </message>
     <message>
         <source>Lengths arcs</source>
-        <translation type="vanished">Longitud del arco</translation>
+        <translation type="vanished">Longitudes de arcos</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1563"/>
@@ -4210,7 +4210,7 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1596"/>
         <source>Radius</source>
-        <translation>Radios</translation>
+        <translation>Radio</translation>
     </message>
     <message>
         <source>Angles arcs</source>
@@ -4220,7 +4220,7 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="360"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1020"/>
         <source>Formula</source>
-        <translation>Fórmula</translation>
+        <translation>Formula</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="372"/>
@@ -4258,13 +4258,13 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="525"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1178"/>
         <source>Formula:</source>
-        <translation>Fórmula:</translation>
+        <translation>Formula:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="577"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1230"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar cálculo total en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Muestra el calculo completo en cuadro de mensaje&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="628"/>
@@ -4329,13 +4329,13 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="549"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1202"/>
         <source>Calculation</source>
-        <translation>Cálculo</translation>
+        <translation>Calculos</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="606"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1259"/>
         <source>Formula wizard</source>
-        <translation>Asistente de Fórmula</translation>
+        <translation>Asistente de formula</translation>
     </message>
     <message>
         <source>Invalid value</source>
@@ -4343,7 +4343,7 @@
     </message>
     <message>
         <source>Find:</source>
-        <translation type="vanished">Buscar:</translation>
+        <translation type="vanished">Encontrar:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="82"/>
@@ -4765,7 +4765,7 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="147"/>
         <source>Width:</source>
-        <translation>Anchura:</translation>
+        <translation>Ancho:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="160"/>
@@ -4861,7 +4861,7 @@
     </message>
     <message>
         <source>Letter</source>
-        <translation type="vanished">Letter</translation>
+        <translation type="vanished">Carta</translation>
     </message>
     <message>
         <source>Legal</source>
@@ -4869,23 +4869,23 @@
     </message>
     <message>
         <source>Roll 24in</source>
-        <translation type="vanished">Roll 24in</translation>
+        <translation type="vanished">Rollo 24 pulg</translation>
     </message>
     <message>
         <source>Roll 30in</source>
-        <translation type="vanished">Roll 30in</translation>
+        <translation type="vanished">Rollo 30 pulg</translation>
     </message>
     <message>
         <source>Roll 36in</source>
-        <translation type="vanished">Roll 36in</translation>
+        <translation type="vanished">Rollo 36 pulg</translation>
     </message>
     <message>
         <source>Roll 42in</source>
-        <translation type="vanished">Roll 42in</translation>
+        <translation type="vanished">Rollo 42 pulg</translation>
     </message>
     <message>
         <source>Roll 44in</source>
-        <translation type="vanished">Roll 44in</translation>
+        <translation type="vanished">Rollo 44 pulg</translation>
     </message>
     <message>
         <source>
@@ -4921,16 +4921,16 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="283"/>
         <source>Top:</source>
-        <translation>Arriba:</translation>
+        <translation>Superior:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="297"/>
         <source>Bottom:</source>
-        <translation>Abajo:</translation>
+        <translation>Inferior:</translation>
     </message>
     <message>
         <source>Ignore fileds</source>
-        <translation type="vanished">Ignorar campos</translation>
+        <translation type="vanished">Ignorar valores</translation>
     </message>
     <message>
         <source>Custom</source>
@@ -4939,7 +4939,7 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.cpp" line="706"/>
         <source>Wrong fields.</source>
-        <translation>Campos erróneos.</translation>
+        <translation>Valores erróneos.</translation>
     </message>
     <message>
         <source>Fields go beyond printing. 
@@ -5144,7 +5144,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.cpp" line="187"/>
         <source>Select second point</source>
-        <translation>Selección segundo punto de línea</translation>
+        <translation>Selección segundo punto</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="17"/>
@@ -5173,7 +5173,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="145"/>
         <source>Line color:</source>
-        <translation>Color de la línea:</translation>
+        <translation>Color de línea:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="37"/>
@@ -5272,7 +5272,7 @@ Aplicar características de todos modos?</translation>
     <name>DialogLineIntersectAxis</name>
     <message>
         <source>Angle</source>
-        <translation type="vanished">Ángulo</translation>
+        <translation type="vanished">Angulo</translation>
     </message>
     <message>
         <source>Value of angle</source>
@@ -5281,7 +5281,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="192"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar cálculo total en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Muestra el calculo completo en cuadro de mensaje&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Axis point</source>
@@ -5290,15 +5290,15 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="254"/>
         <source>First point of line</source>
-        <translation>Primer punto de línea</translation>
+        <translation>Primer punto de la línea</translation>
     </message>
     <message>
         <source>First line point</source>
-        <translation type="vanished">Primer punto de línea</translation>
+        <translation type="vanished">Punto de primer linea</translation>
     </message>
     <message>
         <source>Second line point</source>
-        <translation type="vanished">Segundo punto de línea</translation>
+        <translation type="vanished">Punto segunda linea</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -5336,7 +5336,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="274"/>
         <source>Second point of line</source>
-        <translation>Segundo punto de la línea</translation>
+        <translation>Segundo punto de línea</translation>
     </message>
     <message>
         <source>Line color</source>
@@ -5345,17 +5345,17 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.cpp" line="385"/>
         <source>Edit angle</source>
-        <translation>Editar ángulo</translation>
+        <translation>Editar angulo</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="79"/>
         <source>Angle:</source>
-        <translation>Ángulo:</translation>
+        <translation>Angulo:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="99"/>
         <source>Formula wizard</source>
-        <translation>Asistente de Fórmula</translation>
+        <translation>Asistente de formula</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="141"/>
@@ -5365,7 +5365,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="173"/>
         <source>Calculation</source>
-        <translation>Cálculo</translation>
+        <translation>Calculos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="227"/>
@@ -5405,7 +5405,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="342"/>
         <source>Line color:</source>
-        <translation>Color de la línea:</translation>
+        <translation>Color de línea:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="28"/>
@@ -5678,12 +5678,12 @@ Aplicar características de todos modos?</translation>
     <name>DialogMove</name>
     <message>
         <source>Dialog</source>
-        <translation type="vanished">Diálogo</translation>
+        <translation type="vanished">Dialogo</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="164"/>
         <source>Angle:</source>
-        <translation>Ángulo:</translation>
+        <translation>Angulo:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="184"/>
@@ -5704,7 +5704,7 @@ Aplicar características de todos modos?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="453"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="632"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar el cálculo completo en la caja de mensaje&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Muestra el calculo completo en cuadro de mensaje&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="343"/>
@@ -5719,19 +5719,19 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="470"/>
         <source>Edit angle</source>
-        <translation>Editar ángulo</translation>
+        <translation>Editar angulo</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="498"/>
         <source>Edit length</source>
-        <translation>Editar longitud</translation>
+        <translation>Editar largo</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="252"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="431"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="610"/>
         <source>Calculation</source>
-        <translation>Cálculo</translation>
+        <translation>Calculos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="17"/>
@@ -5742,7 +5742,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="522"/>
         <source>Rotation angle:</source>
-        <translation>Ángulo de rotación:</translation>
+        <translation>Angulo de rotación:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="484"/>
@@ -6005,11 +6005,11 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="192"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar cálculo total en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Muestra el calculo completo en cuadro de mensaje&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Etiqueta de patrón</translation>
+        <translation type="vanished">Etiqueta de punto</translation>
     </message>
     <message>
         <source>First point</source>
@@ -6047,7 +6047,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Second point of line</source>
-        <translation type="vanished">Segundo punto de la línea</translation>
+        <translation type="vanished">Segundo punto de línea</translation>
     </message>
     <message>
         <source>Line color</source>
@@ -6066,7 +6066,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="102"/>
         <source>Formula wizard</source>
-        <translation>Asistente de Fórmula</translation>
+        <translation>Asistente de formula</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="144"/>
@@ -6076,7 +6076,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="170"/>
         <source>Calculation</source>
-        <translation>Cálculo</translation>
+        <translation>Calculos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="227"/>
@@ -6106,7 +6106,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="292"/>
         <source>Additional angle degrees:</source>
-        <translation>Grados del ángulo adicional:</translation>
+        <translation>Grados adicionales del ángulo:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="486"/>
@@ -6116,7 +6116,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="515"/>
         <source>Line color:</source>
-        <translation>Color de la línea:</translation>
+        <translation>Color de línea:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="31"/>
@@ -6185,7 +6185,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Default height and size</source>
-        <translation type="vanished">Altura y talla predeterminada</translation>
+        <translation type="vanished">Altura y talla predeterminado</translation>
     </message>
     <message>
         <source>From standard measurements</source>
@@ -6322,7 +6322,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="81"/>
         <source>File was not saved yet.</source>
-        <translation>El archivo no ha sido guardado aún.</translation>
+        <translation>Aun no se guardó el archivo.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="95"/>
@@ -6347,7 +6347,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Customer name:</source>
-        <translation type="vanished">Nombre del Cliente:</translation>
+        <translation type="vanished">Nombre del cliente:</translation>
     </message>
     <message>
         <source>Created:</source>
@@ -6664,7 +6664,7 @@ Aplicar características de todos modos?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1878"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2122"/>
         <source>Formula wizard</source>
-        <translation>Asistente de Fórmula</translation>
+        <translation>Asistente de formula</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="472"/>
@@ -6685,7 +6685,7 @@ Aplicar características de todos modos?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1739"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1964"/>
         <source>Calculation</source>
-        <translation>Cálculo</translation>
+        <translation>Calculos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="523"/>
@@ -6696,7 +6696,7 @@ Aplicar características de todos modos?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1989"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2218"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Muestra el cálculo completo en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Muestra el calculo completo en cuadro de mensaje&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="547"/>
@@ -6723,7 +6723,7 @@ Aplicar características de todos modos?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="655"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="853"/>
         <source>Default</source>
-        <translation>Pretedeterminado</translation>
+        <translation>Predeterminado</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="827"/>
@@ -6733,7 +6733,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="982"/>
         <source>Angle:</source>
-        <translation>Ángulo:</translation>
+        <translation>Angulo:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1028"/>
@@ -7139,7 +7139,7 @@ Aplicar características de todos modos?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="463"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="702"/>
         <source>Formula wizard</source>
-        <translation>Asistente de fórmula</translation>
+        <translation>Asistente de formula</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="141"/>
@@ -7379,12 +7379,12 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Radius</source>
-        <translation type="vanished">Radios</translation>
+        <translation type="vanished">Radio</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="189"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar cálculo total en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Muestra el calculo completo en cuadro de mensaje&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -7424,7 +7424,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="338"/>
         <source>Radius can&apos;t be negative</source>
-        <translation>Radio no puede ser negativo</translation>
+        <translation>El radio no puede ser negativo</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="79"/>
@@ -7434,7 +7434,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="99"/>
         <source>Formula wizard</source>
-        <translation>Asistente de Fórmula</translation>
+        <translation>Asistente de formula</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="141"/>
@@ -7444,7 +7444,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="167"/>
         <source>Calculation</source>
-        <translation>Cálculo</translation>
+        <translation>Calculos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="225"/>
@@ -7464,7 +7464,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="248"/>
         <source>Center of the circle:</source>
-        <translation>Centro del círculo:</translation>
+        <translation>Centro del circulo:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="277"/>
@@ -7491,7 +7491,7 @@ Aplicar características de todos modos?</translation>
     <name>DialogPointOfContact</name>
     <message>
         <source>Radius</source>
-        <translation type="vanished">Radios</translation>
+        <translation type="vanished">Radio</translation>
     </message>
     <message>
         <source>Value of radius</source>
@@ -7500,7 +7500,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="192"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar cálculo total en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Muestra el calculo completo en cuadro de mensaje&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -7546,7 +7546,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="102"/>
         <source>Formula wizard</source>
-        <translation>Asistente de Fórmula</translation>
+        <translation>Asistente de formula</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="144"/>
@@ -7556,7 +7556,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="170"/>
         <source>Calculation</source>
-        <translation>Cálculo</translation>
+        <translation>Calculos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="228"/>
@@ -7581,12 +7581,12 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="280"/>
         <source>Top of the line:</source>
-        <translation>Principio de la línea:</translation>
+        <translation>Parte superior de la línea:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="309"/>
         <source>End of the line:</source>
-        <translation>Final de la línea:</translation>
+        <translation>Parte inferior de la línea:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="31"/>
@@ -7671,7 +7671,7 @@ Aplicar características de todos modos?</translation>
     <name>DialogPointOfIntersectionArcs</name>
     <message>
         <source>Dialog</source>
-        <translation type="vanished">Diálogo</translation>
+        <translation type="vanished">Dialogo</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -7748,7 +7748,7 @@ Aplicar características de todos modos?</translation>
     <name>DialogPointOfIntersectionCircles</name>
     <message>
         <source>Dialog</source>
-        <translation type="vanished">Diálogo</translation>
+        <translation type="vanished">Dialogo</translation>
     </message>
     <message>
         <source>Radius of the first circle</source>
@@ -7758,7 +7758,7 @@ Aplicar características de todos modos?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="189"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="369"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar cálculo total en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Muestra el calculo completo en cuadro de mensaje&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Radius of the second circle</source>
@@ -7810,7 +7810,7 @@ Aplicar características de todos modos?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="432"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="455"/>
         <source>Radius can&apos;t be negative</source>
-        <translation>Radio no puede ser negativo</translation>
+        <translation>El radio no puede ser negativo</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="79"/>
@@ -7821,7 +7821,7 @@ Aplicar características de todos modos?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="99"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="279"/>
         <source>Formula wizard</source>
-        <translation>Asistente de Fórmula</translation>
+        <translation>Asistente de formula</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="141"/>
@@ -7833,7 +7833,7 @@ Aplicar características de todos modos?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="167"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="347"/>
         <source>Calculation</source>
-        <translation>Cálculo</translation>
+        <translation>Calculos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="259"/>
@@ -7858,12 +7858,12 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="428"/>
         <source>Center of the first circle:</source>
-        <translation>Centro del primer círculo:</translation>
+        <translation>Centro del primer circulo:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="457"/>
         <source>Center of the second circle:</source>
-        <translation>Centro del segundo círculo:</translation>
+        <translation>Centro del segundo circulo:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="480"/>
@@ -7921,12 +7921,12 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="101"/>
         <source>Vertical correction:</source>
-        <translation>Correccion vertical:</translation>
+        <translation>Corrección vertical:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="111"/>
         <source>Horizontal correction:</source>
-        <translation>Correccion horizontal:</translation>
+        <translation>Corrección horizontal:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.cpp" line="190"/>
@@ -8017,7 +8017,7 @@ Aplicar características de todos modos?</translation>
     <message numerus="yes">
         <location filename="../../src/app/puzzle/dialogs/dialogpuzzlepreferences.cpp" line="159"/>
         <source>Followed %n option(s) require restart to take effect: %1.</source>
-        <translation type="unfinished">
+        <translation>
             <numerusform>Para seguir %n opción(es) se requiere re-inicializar el programa: %1.</numerusform>
             <numerusform>Para seguir %n opción(es) se requiere re-inicializar el programa: %1.</numerusform>
         </translation>
@@ -8078,12 +8078,12 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="157"/>
         <source>Angle:</source>
-        <translation>Ángulo:</translation>
+        <translation>Angulo:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="177"/>
         <source>Formula wizard</source>
-        <translation>Asistente para Fórmulas</translation>
+        <translation>Asistente de formula</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="219"/>
@@ -8097,7 +8097,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="267"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostar el cálculo total en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Muestra el calculo completo en cuadro de mensaje&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="293"/>
@@ -8112,7 +8112,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="400"/>
         <source>Edit angle</source>
-        <translation>Editar ángulo</translation>
+        <translation>Editar angulo</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="263"/>
@@ -8126,7 +8126,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="245"/>
         <source>Calculation</source>
-        <translation>Cálculo</translation>
+        <translation>Calculos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="344"/>
@@ -8843,7 +8843,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3422"/>
         <source>You need more points!</source>
-        <translation>¡Necesitas más puntos!</translation>
+        <translation>¡Necesita más puntos!</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3429"/>
@@ -8922,7 +8922,7 @@ Aplicar características de todos modos?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2549"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2609"/>
         <source>Edit angle</source>
-        <translation>Editar ángulo</translation>
+        <translation>Editar angulo</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2537"/>
@@ -9498,7 +9498,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="192"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar cálculo total en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Muestra el calculo completo en cuadro de mensaje&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -9556,7 +9556,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="102"/>
         <source>Formula wizard</source>
-        <translation>Asistente de Fórmula</translation>
+        <translation>Asistente de formula</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="144"/>
@@ -9566,7 +9566,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="170"/>
         <source>Calculation</source>
-        <translation>Cálculo</translation>
+        <translation>Calculos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="227"/>
@@ -9606,7 +9606,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="372"/>
         <source>Line color:</source>
-        <translation>Color de la línea:</translation>
+        <translation>Color de línea:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="31"/>
@@ -9740,7 +9740,7 @@ Aplicar características de todos modos?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="300"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="696"/>
         <source>Angle:</source>
-        <translation>Ángulo:</translation>
+        <translation>Angulo:</translation>
     </message>
     <message>
         <source>Length ratio:</source>
@@ -9773,7 +9773,7 @@ Aplicar características de todos modos?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="537"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="716"/>
         <source>Formula wizard</source>
-        <translation>Asistente de Fórmula</translation>
+        <translation>Asistente de formula</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="183"/>
@@ -9793,7 +9793,7 @@ Aplicar características de todos modos?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="627"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="806"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar cálculo total en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Muestra el calculo completo en cuadro de mensaje&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="276"/>
@@ -9829,7 +9829,7 @@ Aplicar características de todos modos?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="605"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="784"/>
         <source>Calculation</source>
-        <translation>Cálculo</translation>
+        <translation>Calculos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="865"/>
@@ -9901,7 +9901,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="226"/>
         <source>Select point of curve path</source>
-        <translation>Seleccionar punto de trazado curvo</translation>
+        <translation>Seleccionar punto del trazado curvo</translation>
     </message>
     <message>
         <source>Color</source>
@@ -9935,7 +9935,7 @@ Aplicar características de todos modos?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="355"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="726"/>
         <source>Angle:</source>
-        <translation>Ángulo:</translation>
+        <translation>Angulo:</translation>
     </message>
     <message>
         <source>Length ratio:</source>
@@ -9968,7 +9968,7 @@ Aplicar características de todos modos?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="567"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="746"/>
         <source>Formula wizard</source>
-        <translation>Asistente de Fórmula</translation>
+        <translation>Asistente de formula</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="238"/>
@@ -9992,7 +9992,7 @@ Aplicar características de todos modos?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="657"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="836"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar cálculo total en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Muestra el calculo completo en cuadro de mensaje&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="445"/>
@@ -10033,7 +10033,7 @@ Aplicar características de todos modos?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="635"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="814"/>
         <source>Calculation</source>
-        <translation>Cálculo</translation>
+        <translation>Calculos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="881"/>
@@ -10280,12 +10280,12 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="69"/>
         <source>First point of axis:</source>
-        <translation>Primer punto del eje:</translation>
+        <translation>Primer punto de eje:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="85"/>
         <source>Second point of axis:</source>
-        <translation>Segundo punto del eje:</translation>
+        <translation>Segundo punto de eje:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="101"/>
@@ -10392,7 +10392,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="75"/>
         <source>First dart point:</source>
-        <translation>Primer punto de la pinza:</translation>
+        <translation>Primer punto de pinza:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="85"/>
@@ -10478,7 +10478,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoguniondetails.ui" line="17"/>
         <source>Union tool</source>
-        <translation>herramienta de unión</translation>
+        <translation>Herramienta de unión</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoguniondetails.cpp" line="90"/>
@@ -10733,7 +10733,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/app/tape/mapplication.cpp" line="1024"/>
         <source>The measurement file.</source>
-        <translation>Archivo de medidas.</translation>
+        <translation>El archivo de medidas.</translation>
     </message>
     <message>
         <source>The base height</source>
@@ -11424,7 +11424,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2738"/>
         <source>Could not save file</source>
-        <translation>No se ha guardado archivo</translation>
+        <translation>No se pudo guardar archivo</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2104"/>
@@ -11737,7 +11737,7 @@ Quiere guardar los cambios?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1213"/>
         <source>Print preview</source>
-        <translation>Previsualizar impresión</translation>
+        <translation>Vista previa de impresión</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1216"/>
@@ -11765,7 +11765,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Select point on tangent </source>
-        <translation type="vanished">Selecciona punto en tangente</translation>
+        <translation type="vanished">Seleccionar punto en tangente</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1718"/>
@@ -11851,7 +11851,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Create/Edit</source>
-        <translation type="vanished">Crear/Editar</translation>
+        <translation type="vanished">Crear/editar</translation>
     </message>
     <message>
         <source>Create/edit measurements</source>
@@ -12201,7 +12201,7 @@ el patrón.</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation type="vanished">Tamaño:</translation>
+        <translation type="vanished">Talla:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="7012"/>
@@ -12255,7 +12255,7 @@ el patrón.</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4226"/>
         <source>Could not save the file</source>
-        <translation>No pudo guardarse el archivo</translation>
+        <translation>No ha podido guardar el archivo</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="7582"/>
@@ -12316,7 +12316,7 @@ el patrón.</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1346"/>
         <source>Synchronize linked to the pattern measurements after change</source>
-        <translation>Sincroniza vinculado a las medidas del patrón después del cambio</translation>
+        <translation>Sincronización vinculado a las medidas del patrón después del cambio</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1360"/>
@@ -13070,7 +13070,7 @@ el patrón.</translation>
     </message>
     <message>
         <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
-        <translation type="vanished">El diseño no se actualizo desde la última modificación del patrón. ¿Desea continuar?</translation>
+        <translation type="vanished">El diseño no se actualizó desde la última modificación del patrón. ¿Desea continuar?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="463"/>
@@ -13083,7 +13083,7 @@ el patrón.</translation>
     </message>
     <message>
         <source>Can&apos;t open printer %1</source>
-        <translation type="vanished">No se puede abrir la impresora %1</translation>
+        <translation type="vanished">No se pudo abrir la impresora %1</translation>
     </message>
     <message>
         <source>Export error.</source>
@@ -13251,7 +13251,7 @@ Falta: %1
     <message>
         <location filename="../../src/libs/vtools/undocommands/label/movedoublelabel.cpp" line="51"/>
         <source>move the first dart label</source>
-        <translation>mover la primer etiqueta de la pinza</translation>
+        <translation>mover la primera etiqueta de la pinza</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/undocommands/label/movedoublelabel.cpp" line="55"/>
@@ -13264,7 +13264,7 @@ Falta: %1
     <message>
         <location filename="../../src/libs/vtools/undocommands/label/movelabel.cpp" line="46"/>
         <source>move point label</source>
-        <translation>mover etiqueta del punto</translation>
+        <translation>mover etiqueta de punto</translation>
     </message>
 </context>
 <context>
@@ -13319,7 +13319,7 @@ Falta: %1
     <name>PathPage</name>
     <message>
         <source>Open Directory</source>
-        <translation type="vanished">Abrir Directorio</translation>
+        <translation type="vanished">Directorio abierto</translation>
     </message>
     <message>
         <source>Path that use Valentina</source>
@@ -13327,7 +13327,7 @@ Falta: %1
     </message>
     <message>
         <source>Default</source>
-        <translation type="vanished">Pretedeterminado</translation>
+        <translation type="vanished">Predeterminado</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -13339,7 +13339,7 @@ Falta: %1
     </message>
     <message>
         <source>Path</source>
-        <translation type="vanished">Directorio</translation>
+        <translation type="vanished">Ruta</translation>
     </message>
     <message>
         <source>Individual measurements</source>
@@ -13374,7 +13374,7 @@ Falta: %1
     </message>
     <message>
         <source>Graphical output</source>
-        <translation type="vanished">Salida gráfica</translation>
+        <translation type="vanished">Salida grafica</translation>
     </message>
     <message>
         <source>Use antialiasing</source>
@@ -13394,7 +13394,7 @@ Falta: %1
     </message>
     <message>
         <source>Count steps (0 - no limit):</source>
-        <translation type="vanished">Contar los pasos (0 - sin limite):</translation>
+        <translation type="vanished">Contar pasos (0 - sin limite):</translation>
     </message>
     <message>
         <source>All user defined materials have been deleted!</source>
@@ -13410,11 +13410,11 @@ Falta: %1
     </message>
     <message>
         <source>Workpiece</source>
-        <translation type="vanished">Parte de trabajo</translation>
+        <translation type="vanished">Pieza de trabajo</translation>
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation type="vanished">Prohibir voltear</translation>
+        <translation type="vanished">Prohibir girar</translation>
     </message>
     <message>
         <source>By default forbid flipping for all workpieces</source>
@@ -13847,7 +13847,7 @@ Falta: %1
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.ui" line="72"/>
         <source>Default</source>
-        <translation>Pretedeterminado</translation>
+        <translation>Predeterminado</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.ui" line="101"/>
@@ -13905,7 +13905,7 @@ Falta: %1
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="193"/>
         <source>Forbid flipping</source>
-        <translation>Prohibir voltear</translation>
+        <translation>Prohibir girar</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="213"/>
@@ -14649,11 +14649,11 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     </message>
     <message>
         <source>Missing value after &apos;%1&apos;.</source>
-        <translation type="vanished">Falta un valor despues de &apos;%1&apos;.</translation>
+        <translation type="vanished">Falta un valor después de &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Unexpected value after &apos;%1&apos;.</source>
-        <translation type="vanished">Valor inesperado despues de &apos;%1&apos;.</translation>
+        <translation type="vanished">Valor inesperado después de &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>[options]</source>
@@ -14858,7 +14858,7 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="576"/>
         <source>Got empty parameter</source>
-        <translation>Parámetro vacío obtenido</translation>
+        <translation>Se obtuvo un parámetro vacío</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1122"/>
@@ -15306,26 +15306,26 @@ Esta opción surtirá efecto después de reiniciar.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="915"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="929"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="956"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="970"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam path at %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="917"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="931"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="958"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="972"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam path.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="981"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1001"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1022"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1042"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam allowance path at %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="983"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1003"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1024"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1044"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam allowance path.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -15646,7 +15646,7 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     <name>RotationMoveLabel</name>
     <message>
         <source>move point label</source>
-        <translation type="vanished">Mover etiqueta de punto</translation>
+        <translation type="vanished">mover etiqueta de punto</translation>
     </message>
 </context>
 <context>
@@ -16321,7 +16321,7 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     </message>
     <message>
         <source>Formula</source>
-        <translation type="vanished">Fórmula</translation>
+        <translation type="vanished">Formula</translation>
     </message>
     <message>
         <source>Base value</source>
@@ -16349,12 +16349,12 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="555"/>
         <source>Formula:</source>
-        <translation>Fórmula:</translation>
+        <translation>Formula:</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="601"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar cálculo total en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Muestra el calculo completo en cuadro de mensaje&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="649"/>
@@ -16663,11 +16663,11 @@ Esta opción surtirá efecto después de reiniciar.</translation>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1610"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="3882"/>
         <source>untitled</source>
-        <translation>Sin título</translation>
+        <translation>sin título</translation>
     </message>
     <message>
         <source>&lt;Empty&gt;</source>
-        <translation type="vanished">&lt;Vacio&gt;</translation>
+        <translation type="vanished">&lt;Empty&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="3526"/>
@@ -16714,7 +16714,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Find:</source>
-        <translation type="vanished">Buscar:</translation>
+        <translation type="vanished">Encontrar:</translation>
     </message>
     <message>
         <source>Find Previous</source>
@@ -16738,7 +16738,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Standard measurements (*.vst);;Individual measurements (*.vit);;All files (*.*)</source>
-        <translation type="vanished">Medidas estándar (*.vst);;Medidas indivuduales (*.vit);;Todos los archivos (*.*)</translation>
+        <translation type="vanished">Medidas estándar (*.vst);;Medidas individuales (*.vit);;Todos los archivos (*.*)</translation>
     </message>
     <message>
         <source>Measurements (*.vst *.vit);;All files (*.*)</source>
@@ -16747,12 +16747,12 @@ Quieres guardar los cambios?</translation>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1033"/>
         <source>Failed to lock. This file already opened in another window.</source>
-        <translation>Error al bloquear. Este archivo ya está abierto en otra ventana.</translation>
+        <translation>Error al cerrar. Este archivo ya está abierto en otra ventana.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1083"/>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
-        <translation>Error al bloquear. Este archivo ya está abierto en otra ventana. Posibles colisiones al abrir 2 copias del programa.</translation>
+        <translation>Error al cerrar. Este archivo ya está abierto en otra ventana. Posibles colisiones al abrir 2 copias del programa.</translation>
     </message>
     <message>
         <source>File contains invalid known measurement(s).</source>
@@ -16766,7 +16766,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Full name</source>
-        <translation type="vanished">Nombre completo</translation>
+        <translation type="vanished">Apellido</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="439"/>
@@ -16802,7 +16802,7 @@ Quieres guardar los cambios?</translation>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="2592"/>
         <source>The full name of known measurement forbidden to change.</source>
-        <translation>Es prohibido cambiar el nombre completo de una medida conocida.</translation>
+        <translation>Esta prohibido cambiar el nombre completo de las medidas conocidas.</translation>
     </message>
     <message>
         <source>Name in formula</source>
@@ -16849,7 +16849,7 @@ Quieres guardar los cambios?</translation>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1090"/>
         <source>Gender:</source>
-        <translation>Género:</translation>
+        <translation>Sexo:</translation>
     </message>
     <message>
         <source>PM system:</source>
@@ -16910,7 +16910,7 @@ Quieres guardar los cambios?</translation>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="528"/>
         <source>Measurement&apos;s name in a formula.</source>
-        <translation>Nombre de la medida en la fórmula.</translation>
+        <translation>Nombre de la medida en una fórmula.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="762"/>
@@ -16927,7 +16927,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Customer&apos;s email address.</source>
-        <translation type="vanished">correo electrónico del cliente.</translation>
+        <translation type="vanished">Correo electrónico del cliente.</translation>
     </message>
     <message>
         <source>Save...</source>
@@ -16940,7 +16940,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Locking file</source>
-        <translation type="vanished">Archivo de bloqueo</translation>
+        <translation type="vanished">Cerrando archivo</translation>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
@@ -17708,7 +17708,7 @@ Quieres guardar los cambios?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="116"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="305"/>
         <source>Formula wizard</source>
-        <translation>Asistente de fórmula</translation>
+        <translation>Asistente de formula</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="164"/>
@@ -17774,7 +17774,7 @@ Quieres guardar los cambios?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="102"/>
         <source>Letter of pattern piece</source>
-        <translation>Letra de pieza del patron</translation>
+        <translation>Letra de pieza de patron</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="129"/>
@@ -17800,7 +17800,7 @@ Quieres guardar los cambios?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1415"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1662"/>
         <source>Formula wizard</source>
-        <translation>Asistente de fórmula</translation>
+        <translation>Asistente de formula</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="596"/>
@@ -18043,7 +18043,7 @@ Quieres guardar los cambios?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="206"/>
         <source>Straightforward</source>
-        <translation>Directo</translation>
+        <translation>Recto</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="219"/>
@@ -18274,7 +18274,7 @@ Quieres guardar los cambios?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="504"/>
         <source>Forbid flipping</source>
-        <translation>Prohibir voltear</translation>
+        <translation>Prohibir girar</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="381"/>
@@ -18367,7 +18367,7 @@ Quieres guardar los cambios?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="906"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1096"/>
         <source>Formula wizard</source>
-        <translation>Asistente de fórmula</translation>
+        <translation>Asistente de formula</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="709"/>
@@ -18609,7 +18609,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Paths</source>
-        <translation type="vanished">Carpetas</translation>
+        <translation type="vanished">Rutas</translation>
     </message>
 </context>
 <context>
@@ -18624,7 +18624,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Pattern making system</source>
-        <translation type="vanished">Sistema de creación de patrones</translation>
+        <translation type="vanished">Sistema de patronaje</translation>
     </message>
     <message>
         <source>Author:</source>
@@ -18644,11 +18644,11 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>GUI language:</source>
-        <translation type="vanished">Idioma de interfaz gráfica de usuario:</translation>
+        <translation type="vanished">Idioma del interfaz gráfica de usuario:</translation>
     </message>
     <message>
         <source>Decimal separator parts:</source>
-        <translation type="vanished">Partes separador decimal:</translation>
+        <translation type="vanished">Separador de partes decimales:</translation>
     </message>
     <message>
         <source>Pattern making system:</source>
@@ -18671,7 +18671,7 @@ Quieres guardar los cambios?</translation>
     <name>TapePathPage</name>
     <message>
         <source>Open Directory</source>
-        <translation type="vanished">Abrir Directorio</translation>
+        <translation type="vanished">Directorio abierto</translation>
     </message>
     <message>
         <source>Path that use Valentina</source>
@@ -18691,7 +18691,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Path</source>
-        <translation type="vanished">Directorio</translation>
+        <translation type="vanished">Ruta</translation>
     </message>
     <message>
         <source>Individual measurements</source>
@@ -20331,7 +20331,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="vanished">Ángulo</translation>
+        <translation type="vanished">Angulo</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="725"/>
@@ -20468,11 +20468,11 @@ Quieres guardar los cambios?</translation>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="686"/>
         <source>Page height in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
-        <translation>El largo de página en las unidades actuales como 12.0 (no puede usarse con &quot;%1&quot;, modo de exportación).</translation>
+        <translation>La altura de página en las unidades actuales como 12.0 (no puede usarse con &quot;%1&quot;, modo de exportación).</translation>
     </message>
     <message>
         <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode): </source>
-        <translation type="vanished">Las unidades de ancho/largo de página (no pueden usarse con &quot;%1&quot;, modo de exportación):</translation>
+        <translation type="vanished">Las unidades de medida ancho/altura de página (no pueden usarse con &quot;%1&quot;, modo de exportación):</translation>
     </message>
     <message>
         <source>Invalid gradation size value.</source>
@@ -20552,7 +20552,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode). Valid values: %2.</source>
-        <translation type="vanished">Las unidades de ancho/largo de página (no pueden usarse con &quot;%1&quot;, modo de exportación). Valores válidos: %2.</translation>
+        <translation type="vanished">Las unidades de medida ancho/altura de página (no pueden usarse con &quot;%1&quot;, modo de exportación). Valores válidos: %2.</translation>
     </message>
     <message>
         <source>Ignore margins printing (export mode). Disable value keys: &quot;%1&quot;, &quot;%2&quot;, &quot;%3&quot;, &quot;%4&quot;. Set all margins to 0.</source>
@@ -21091,11 +21091,11 @@ Quieres guardar los cambios?</translation>
     <name>VDomDocument</name>
     <message>
         <source>Can&apos;t convert toUInt parameter</source>
-        <translation type="vanished">No se puede convertir el parámetro a UInt</translation>
+        <translation type="vanished">No se puede convertir a parámetro UInt</translation>
     </message>
     <message>
         <source>Can&apos;t convert toBool parameter</source>
-        <translation type="vanished">No se puede convertir el parámetro toBool</translation>
+        <translation type="vanished">No se puede convertir a parámetro Bool</translation>
     </message>
     <message>
         <source>Got empty parameter</source>
@@ -21103,7 +21103,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Can&apos;t convert toDouble parameter</source>
-        <translation type="vanished">No se puede convertir el parámetro toDouble</translation>
+        <translation type="vanished">No se puede convertir a parámetro Double</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="738"/>
@@ -21137,7 +21137,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
-        <translation type="vanished">Se obtuvo un identificador de parámetro incorrecto. Solo es necesario identificador &gt; 0.</translation>
+        <translation type="vanished">Id de parámetro obtenido equivocado. Necesita solo id &gt; 0.</translation>
     </message>
     <message>
         <source>This id is not unique.</source>
@@ -21205,7 +21205,7 @@ Quieres guardar los cambios?</translation>
     <name>VDrawTool</name>
     <message>
         <source>Edit wrong formula</source>
-        <translation type="vanished">Editar fórmula errónea</translation>
+        <translation type="vanished">Editar formula incorrecta</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.h" line="186"/>
@@ -21357,7 +21357,7 @@ Quieres guardar los cambios?</translation>
     <message>
         <location filename="../../src/app/valentina/core/vformulaproperty.cpp" line="49"/>
         <source>Formula</source>
-        <translation>Fórmula</translation>
+        <translation>Formula</translation>
     </message>
 </context>
 <context>
@@ -21573,7 +21573,7 @@ Quieres guardar los cambios?</translation>
     <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="345"/>
         <source>Forbid flipping</source>
-        <translation>Prohibir girado</translation>
+        <translation>Prohibir girar</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="470"/>
@@ -23184,7 +23184,7 @@ Quieres guardar los cambios?</translation>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="581"/>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="683"/>
         <source>Error wrong id.</source>
-        <translation>Error en la identificación.</translation>
+        <translation>Error identificación equivocada.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="595"/>
@@ -23224,7 +23224,7 @@ Quieres guardar los cambios?</translation>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1907"/>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1913"/>
         <source>Error creating or updating point of normal</source>
-        <translation>Error al crear o actualizar punto de normal</translation>
+        <translation>Error al crear o actualizar punto de la normal</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1952"/>
@@ -23345,7 +23345,7 @@ Quieres guardar los cambios?</translation>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2598"/>
         <source>Error creating or updating point of intersection circles</source>
-        <translation>Error creando o actualizando punto de intersección de circulos</translation>
+        <translation>Error creando o actualizando punto de intersección de círculos</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2680"/>
@@ -23367,7 +23367,7 @@ Quieres guardar los cambios?</translation>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="954"/>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1031"/>
         <source>Wrong tag name &apos;%1&apos;.</source>
-        <translation>Nombre de etiqueta incorrecto &apos;%1&apos;.</translation>
+        <translation>Nombre de etiqueta equivocado &apos;%1&apos;.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1568"/>
@@ -23876,11 +23876,11 @@ Error de compatibilidad de formato de diseño de piezas RAW: actualFileVersion =
     </message>
     <message>
         <source> on Fold</source>
-        <translation type="vanished">Sobre pliegue</translation>
+        <translation type="vanished">sobre pliegue</translation>
     </message>
     <message>
         <source>on Fold</source>
-        <translation type="vanished">sobre pliegue</translation>
+        <translation type="vanished">en Pliegue</translation>
     </message>
     <message>
         <source>Cut</source>
@@ -24093,27 +24093,27 @@ Error de compatibilidad de formato de diseño de piezas RAW: actualFileVersion =
     </message>
     <message>
         <source>move pattern piece label</source>
-        <translation type="vanished">mover marca de estampado</translation>
+        <translation type="vanished">mover etiqueta de pieza de patrón</translation>
     </message>
     <message>
         <source>resize pattern piece label</source>
-        <translation type="vanished">escalar marca de estampado</translation>
+        <translation type="vanished">redimensionar etiqueta de pieza del patrón</translation>
     </message>
     <message>
         <source>rotate pattern piece label</source>
-        <translation type="vanished">rotar marca de estampado</translation>
+        <translation type="vanished">rotar etiqueta de pieza del patrón</translation>
     </message>
     <message>
         <source>move pattern info label</source>
-        <translation type="vanished">mover marca de información de estampado</translation>
+        <translation type="vanished">mover etiqueta de información del patrón</translation>
     </message>
     <message>
         <source>resize pattern info label</source>
-        <translation type="vanished">escalar marca de información de estampado</translation>
+        <translation type="vanished">redimensionar etiqueta de información del patrón</translation>
     </message>
     <message>
         <source>rotate pattern info label</source>
-        <translation type="vanished">rotar marca de información de estampado</translation>
+        <translation type="vanished">rotar etiqueta de información del patrón</translation>
     </message>
     <message>
         <source>In layout</source>
@@ -24310,7 +24310,7 @@ Error de compatibilidad de formato de diseño de piezas RAW: actualFileVersion =
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolmove.cpp" line="524"/>
         <source>Angle</source>
-        <translation>Ángulo</translation>
+        <translation>Angulo</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolmove.cpp" line="531"/>
@@ -24353,7 +24353,7 @@ Error de compatibilidad de formato de diseño de piezas RAW: actualFileVersion =
     </message>
     <message>
         <source>Angle</source>
-        <translation type="vanished">Ángulo</translation>
+        <translation type="vanished">Angulo</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2758"/>
@@ -24367,7 +24367,7 @@ Error de compatibilidad de formato de diseño de piezas RAW: actualFileVersion =
     </message>
     <message>
         <source>Radius</source>
-        <translation type="vanished">Radios</translation>
+        <translation type="vanished">Radio</translation>
     </message>
     <message>
         <source>First angle</source>
@@ -24395,7 +24395,7 @@ Error de compatibilidad de formato de diseño de piezas RAW: actualFileVersion =
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2890"/>
         <source>Tool segment a pathed curve</source>
-        <translation>Herramienta de segmento de un trazado curvo</translation>
+        <translation>Herramienta segmento de un trazado curvo</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2905"/>
@@ -24539,7 +24539,7 @@ Error de compatibilidad de formato de diseño de piezas RAW: actualFileVersion =
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="718"/>
         <source>Highest point</source>
-        <translation>Punto mas alto</translation>
+        <translation>Punto más alto</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="718"/>
@@ -26323,32 +26323,32 @@ Error de compatibilidad de formato de diseño de piezas RAW: actualFileVersion =
     <message>
         <source>sin</source>
         <comment>sine function</comment>
-        <translation type="vanished">sin</translation>
+        <translation type="vanished">seno</translation>
     </message>
     <message>
         <source>cos</source>
         <comment>cosine function</comment>
-        <translation type="vanished">cos</translation>
+        <translation type="vanished">coseno</translation>
     </message>
     <message>
         <source>tan</source>
         <comment>tangens function</comment>
-        <translation type="vanished">tan</translation>
+        <translation type="vanished">tangente</translation>
     </message>
     <message>
         <source>asin</source>
         <comment>arcus sine function</comment>
-        <translation type="vanished">asin</translation>
+        <translation type="vanished">arcoseno</translation>
     </message>
     <message>
         <source>acos</source>
         <comment>arcus cosine function</comment>
-        <translation type="vanished">acos</translation>
+        <translation type="vanished">arcocoseno</translation>
     </message>
     <message>
         <source>atan</source>
         <comment>arcus tangens function</comment>
-        <translation type="vanished">atan</translation>
+        <translation type="vanished">arcotangente</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="148"/>
@@ -26577,7 +26577,7 @@ Error de compatibilidad de formato de diseño de piezas RAW: actualFileVersion =
     <message>
         <source>size</source>
         <comment>placeholder</comment>
-        <translation type="vanished">tamaño</translation>
+        <translation type="vanished">talla</translation>
     </message>
     <message>
         <source>height</source>
@@ -26666,13 +26666,13 @@ Error de compatibilidad de formato de diseño de piezas RAW: actualFileVersion =
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="175"/>
         <source>sinD</source>
         <comment>sine function working with degrees</comment>
-        <translation>SenoD</translation>
+        <translation>senoD</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="180"/>
         <source>cosD</source>
         <comment>cosine function working with degrees</comment>
-        <translation>CosenoD</translation>
+        <translation>cosenoD</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="185"/>
@@ -27244,7 +27244,7 @@ Error de compatibilidad de formato de diseño de piezas RAW: actualFileVersion =
     <name>VWidgetGroups</name>
     <message>
         <source>Form</source>
-        <translation type="vanished">Form</translation>
+        <translation type="vanished">Formulario</translation>
     </message>
     <message>
         <source>Rename</source>
@@ -27253,7 +27253,7 @@ Error de compatibilidad de formato de diseño de piezas RAW: actualFileVersion =
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetgroups.cpp" line="297"/>
         <source>Delete</source>
-        <translation>Eliminar</translation>
+        <translation>Borrar</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetgroups.cpp" line="293"/>

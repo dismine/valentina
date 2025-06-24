@@ -188,7 +188,7 @@
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="vanished">&amp; Anulare</translation>
+        <translation type="vanished">&amp;Anulare</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
@@ -196,7 +196,7 @@
     </message>
     <message>
         <source>Config Dialog</source>
-        <translation type="vanished">Configurare Dialog</translation>
+        <translation type="vanished">Config Dialog</translation>
     </message>
     <message>
         <source>Configuration</source>
@@ -279,7 +279,7 @@
     </message>
     <message>
         <source>Send crash reports</source>
-        <translation type="vanished">Trimite raport de blocare</translation>
+        <translation type="vanished">Trimite rapoarte de blocare</translation>
     </message>
     <message>
         <source>Send crash reports (recommended)</source>
@@ -367,7 +367,7 @@
     <message>
         <location filename="../../src/libs/vtools/undocommands/deltool.cpp" line="58"/>
         <source>delete tool</source>
-        <translation> instrument ștergere</translation>
+        <translation>instrument ștergere</translation>
     </message>
 </context>
 <context>
@@ -382,7 +382,7 @@
     <name>DeleteDetail</name>
     <message>
         <source>delete tool</source>
-        <translation type="vanished"> instrument ștergere</translation>
+        <translation type="vanished">instrument ștergere</translation>
     </message>
 </context>
 <context>
@@ -559,11 +559,11 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Etichetă Punct</translation>
+        <translation type="vanished">Etichetă punct</translation>
     </message>
     <message>
         <source>First point</source>
-        <translation type="vanished">Primul Punct</translation>
+        <translation type="vanished">Primul punct</translation>
     </message>
     <message>
         <source>First point of line</source>
@@ -579,7 +579,7 @@
     </message>
     <message>
         <source>Type of line</source>
-        <translation type="vanished">Tip de linie</translation>
+        <translation type="vanished">Tip linie</translation>
     </message>
     <message>
         <source>Show line from first point to this point</source>
@@ -602,7 +602,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.cpp" line="148"/>
         <source>Edit length</source>
-        <translation>Editează lungimea</translation>
+        <translation>Editare lungime</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="82"/>
@@ -685,7 +685,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="14"/>
         <source>Arc</source>
-        <translation>Curbura</translation>
+        <translation>Curbă</translation>
     </message>
     <message>
         <source>Radius</source>
@@ -1057,11 +1057,11 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Etichetă Punct</translation>
+        <translation type="vanished">Etichetă punct</translation>
     </message>
     <message>
         <source>First point</source>
-        <translation type="vanished">Primul Punct</translation>
+        <translation type="vanished">Primul punct</translation>
     </message>
     <message>
         <source>First point of angle</source>
@@ -1085,7 +1085,7 @@
     </message>
     <message>
         <source>Type of line</source>
-        <translation type="vanished">Tip de linie</translation>
+        <translation type="vanished">Tip linie</translation>
     </message>
     <message>
         <source>Show line from second point to this point</source>
@@ -1113,7 +1113,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.cpp" line="143"/>
         <source>Edit length</source>
-        <translation>Editează lungimea</translation>
+        <translation>Editare lungime</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="79"/>
@@ -1396,15 +1396,15 @@
     </message>
     <message>
         <source>Curve</source>
-        <translation type="vanished">Curbură</translation>
+        <translation type="vanished">Curbă</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Etichetă Punct</translation>
+        <translation type="vanished">Etichetă punct</translation>
     </message>
     <message>
         <source>Type of line</source>
-        <translation type="vanished">Tip de linie</translation>
+        <translation type="vanished">Tip linie</translation>
     </message>
     <message>
         <source>Show line from first point to this point</source>
@@ -1526,11 +1526,11 @@
     </message>
     <message>
         <source>Arc</source>
-        <translation type="vanished">Curbura</translation>
+        <translation type="vanished">Curbă</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Etichetă Punct</translation>
+        <translation type="vanished">Etichetă punct</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="14"/>
@@ -1632,7 +1632,7 @@
     </message>
     <message>
         <source>Curve</source>
-        <translation type="vanished">Curbură</translation>
+        <translation type="vanished">Curbă</translation>
     </message>
     <message>
         <source>Selected curve</source>
@@ -1640,7 +1640,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Etichetă Punct</translation>
+        <translation type="vanished">Etichetă punct</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="14"/>
@@ -1738,7 +1738,7 @@
     </message>
     <message>
         <source>Curve</source>
-        <translation type="vanished">Curbură</translation>
+        <translation type="vanished">Curbă</translation>
     </message>
     <message>
         <source>Selected curve path</source>
@@ -1746,7 +1746,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Etichetă Punct</translation>
+        <translation type="vanished">Etichetă punct</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="14"/>
@@ -2701,12 +2701,12 @@
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation type="vanished">Lungimea curburilor</translation>
+        <translation type="vanished">Lungimea arcuri</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="259"/>
         <source>Length of curves</source>
-        <translation>Lungime curbe</translation>
+        <translation>Lungime curburi</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="275"/>
@@ -3015,11 +3015,11 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Etichetă Punct</translation>
+        <translation type="vanished">Etichetă punct</translation>
     </message>
     <message>
         <source>Type of line</source>
-        <translation type="vanished">Tip de linie</translation>
+        <translation type="vanished">Tip linie</translation>
     </message>
     <message>
         <source>Show line from first point to this point</source>
@@ -3037,12 +3037,12 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.cpp" line="178"/>
         <source>Edit angle</source>
-        <translation>Editează unghiul</translation>
+        <translation>Editare unghi</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.cpp" line="192"/>
         <source>Edit length</source>
-        <translation>Editează lungimea</translation>
+        <translation>Editare lungime</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="88"/>
@@ -3200,7 +3200,7 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="332"/>
         <source>Formula</source>
-        <translation type="unfinished">Formula</translation>
+        <translation>Formula</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="344"/>
@@ -3370,6 +3370,10 @@
 <context>
     <name>DialogFlippingByAxis</name>
     <message>
+        <source>Dialog</source>
+        <translation type="vanished">Dialog</translation>
+    </message>
+    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="114"/>
         <source>Origin point:</source>
         <translation type="unfinished"></translation>
@@ -3516,6 +3520,10 @@
 </context>
 <context>
     <name>DialogFlippingByLine</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="vanished">Dialog</translation>
+    </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="114"/>
         <source>First line point:</source>
@@ -3713,7 +3721,7 @@
     <name>DialogHeight</name>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Etichetă Punct</translation>
+        <translation type="vanished">Etichetă punct</translation>
     </message>
     <message>
         <source>Base point</source>
@@ -3729,7 +3737,7 @@
     </message>
     <message>
         <source>Type of line</source>
-        <translation type="vanished">Tip de linie</translation>
+        <translation type="vanished">Tip linie</translation>
     </message>
     <message>
         <source>Show line from first point to our point</source>
@@ -3949,7 +3957,7 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="352"/>
         <source>Curve</source>
-        <translation type="unfinished">Curbură</translation>
+        <translation>Curbă</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="358"/>
@@ -3960,7 +3968,7 @@
         <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="364"/>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="370"/>
         <source>Arc</source>
-        <translation type="unfinished">Curbura</translation>
+        <translation>Curbă</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="370"/>
@@ -4142,12 +4150,12 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1507"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1549"/>
         <source>Curve</source>
-        <translation>Curbură</translation>
+        <translation>Curbă</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1591"/>
         <source>Arc</source>
-        <translation>Curbura</translation>
+        <translation>Curbă</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="20"/>
@@ -5013,7 +5021,7 @@ Apply settings anyway?</source>
     <name>DialogLine</name>
     <message>
         <source>First point</source>
-        <translation type="vanished">Primul Punct</translation>
+        <translation type="vanished">Primul punct</translation>
     </message>
     <message>
         <source>Second point</source>
@@ -5021,7 +5029,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Type of line</source>
-        <translation type="vanished">Tip de linie</translation>
+        <translation type="vanished">Tip linie</translation>
     </message>
     <message>
         <source>Show line from first point to this point</source>
@@ -5076,7 +5084,7 @@ Apply settings anyway?</source>
     <name>DialogLineIntersect</name>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Etichetă Punct</translation>
+        <translation type="vanished">Etichetă punct</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="64"/>
@@ -5085,7 +5093,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>First point</source>
-        <translation type="vanished">Primul Punct</translation>
+        <translation type="vanished">Primul punct</translation>
     </message>
     <message>
         <source>Second point</source>
@@ -5188,11 +5196,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Etichetă Punct</translation>
+        <translation type="vanished">Etichetă punct</translation>
     </message>
     <message>
         <source>Type of line</source>
-        <translation type="vanished">Tip de linie</translation>
+        <translation type="vanished">Tip linie</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="329"/>
@@ -5231,7 +5239,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.cpp" line="385"/>
         <source>Edit angle</source>
-        <translation>Editează unghiul</translation>
+        <translation>Editare unghi</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="79"/>
@@ -5478,9 +5486,13 @@ Apply settings anyway?</source>
 <context>
     <name>DialogMove</name>
     <message>
+        <source>Dialog</source>
+        <translation type="vanished">Dialog</translation>
+    </message>
+    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="164"/>
         <source>Angle:</source>
-        <translation type="unfinished">Unghi:</translation>
+        <translation>Unghi:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="184"/>
@@ -5516,12 +5528,12 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="470"/>
         <source>Edit angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Editare unghi</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="498"/>
         <source>Edit length</source>
-        <translation type="unfinished"></translation>
+        <translation>Editare lungime</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="252"/>
@@ -5794,11 +5806,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Etichetă Punct</translation>
+        <translation type="vanished">Etichetă punct</translation>
     </message>
     <message>
         <source>First point</source>
-        <translation type="vanished">Primul Punct</translation>
+        <translation type="vanished">Primul punct</translation>
     </message>
     <message>
         <source>Second point</source>
@@ -5810,7 +5822,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Type of line</source>
-        <translation type="vanished">Tip de linie</translation>
+        <translation type="vanished">Tip linie</translation>
     </message>
     <message>
         <source>Show line from first point to this point</source>
@@ -5841,7 +5853,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.cpp" line="148"/>
         <source>Edit length</source>
-        <translation>Editează lungimea</translation>
+        <translation>Editare lungime</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="82"/>
@@ -5919,7 +5931,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpatternmaterials.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished">Dialog</translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpatternmaterials.ui" line="48"/>
@@ -6094,7 +6106,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="28"/>
         <source>Pattern</source>
-        <translation type="unfinished">Model</translation>
+        <translation>Model</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="284"/>
@@ -6260,18 +6272,18 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="339"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2107"/>
         <source>Ready!</source>
-        <translation type="unfinished">Gata!</translation>
+        <translation>Gata!</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="356"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1966"/>
         <source>Seam allowance</source>
-        <translation type="unfinished">Adaos cusatură</translation>
+        <translation>Adaos cusatură</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="407"/>
         <source>Width:</source>
-        <translation type="unfinished">Lățime:</translation>
+        <translation>Lățime:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="430"/>
@@ -6351,7 +6363,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="982"/>
         <source>Angle:</source>
-        <translation type="unfinished">Unghi:</translation>
+        <translation>Unghi:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1028"/>
@@ -6391,7 +6403,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2051"/>
         <source>You need more points!</source>
-        <translation type="unfinished">Ai nevoie de mai multe puncte!</translation>
+        <translation>Ai nevoie de mai multe puncte!</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2060"/>
@@ -6401,7 +6413,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2068"/>
         <source>You have double points!</source>
-        <translation type="unfinished">Ai puncte duble!</translation>
+        <translation>Ai puncte duble!</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1028"/>
@@ -6433,7 +6445,7 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1192"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1795"/>
         <source>Angle</source>
-        <translation type="unfinished">Unghi</translation>
+        <translation>Unghi</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1201"/>
@@ -6749,7 +6761,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="79"/>
         <source>Width:</source>
-        <translation type="unfinished">Lățime:</translation>
+        <translation>Lățime:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="99"/>
@@ -6785,12 +6797,12 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="261"/>
         <source>Height:</source>
-        <translation type="unfinished">Înălțime:</translation>
+        <translation>Înălțime:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="443"/>
         <source>Angle:</source>
-        <translation type="unfinished">Unghi:</translation>
+        <translation>Unghi:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="540"/>
@@ -6821,7 +6833,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.cpp" line="413"/>
         <source>Edit angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Editare unghi</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.cpp" line="503"/>
@@ -6924,11 +6936,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Etichetă Punct</translation>
+        <translation type="vanished">Etichetă punct</translation>
     </message>
     <message>
         <source>Arc</source>
-        <translation type="vanished">Curbura</translation>
+        <translation type="vanished">Curbă</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
@@ -6998,7 +7010,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Etichetă Punct</translation>
+        <translation type="vanished">Etichetă punct</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
@@ -7102,7 +7114,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Etichetă Punct</translation>
+        <translation type="vanished">Etichetă punct</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.cpp" line="248"/>
@@ -7189,7 +7201,7 @@ Apply settings anyway?</source>
     <name>DialogPointOfIntersection</name>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Etichetă Punct</translation>
+        <translation type="vanished">Etichetă punct</translation>
     </message>
     <message>
         <source>First point of angle</source>
@@ -7253,7 +7265,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Etichetă Punct</translation>
+        <translation type="vanished">Etichetă punct</translation>
     </message>
     <message>
         <source>Selected arc</source>
@@ -7324,7 +7336,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Etichetă Punct</translation>
+        <translation type="vanished">Etichetă punct</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
@@ -7517,22 +7529,22 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpreferences.ui" line="14"/>
         <source>Preferences</source>
-        <translation type="unfinished">Preferințe</translation>
+        <translation>Preferințe</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpreferences.ui" line="60"/>
         <source>Configuration</source>
-        <translation type="unfinished">Configurație</translation>
+        <translation>Configurație</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpreferences.ui" line="75"/>
         <source>Pattern</source>
-        <translation type="unfinished">Model</translation>
+        <translation>Model</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpreferences.ui" line="90"/>
         <source>Paths</source>
-        <translation type="unfinished">Căi</translation>
+        <translation>Căi</translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/app/valentina/dialogs/dialogpreferences.cpp" line="158"/>
@@ -7626,7 +7638,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="157"/>
         <source>Angle:</source>
-        <translation type="unfinished">Unghi:</translation>
+        <translation>Unghi:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="177"/>
@@ -7660,7 +7672,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="400"/>
         <source>Edit angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Editare unghi</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="263"/>
@@ -7904,7 +7916,7 @@ Apply settings anyway?</source>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="447"/>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="470"/>
         <source>cm</source>
-        <translation type="unfinished">cm</translation>
+        <translation>cm</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="494"/>
@@ -8142,7 +8154,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="634"/>
         <source>Ready!</source>
-        <translation type="unfinished">Gata!</translation>
+        <translation>Gata!</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2102"/>
@@ -8174,7 +8186,7 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1231"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5495"/>
         <source>Reverse</source>
-        <translation type="unfinished">Înapoi</translation>
+        <translation>Înapoi</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2489"/>
@@ -8262,14 +8274,14 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1374"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5579"/>
         <source>Delete</source>
-        <translation type="unfinished">Șterge</translation>
+        <translation>Șterge</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1225"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1277"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1361"/>
         <source>Options</source>
-        <translation type="unfinished">Opțiuni</translation>
+        <translation>Opțiuni</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1792"/>
@@ -8331,22 +8343,22 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3422"/>
         <source>You need more points!</source>
-        <translation type="unfinished">Ai nevoie de mai multe puncte!</translation>
+        <translation>Ai nevoie de mai multe puncte!</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3429"/>
         <source>You have to choose points in a clockwise direction!</source>
-        <translation type="unfinished">Trebuie să alegi punctele în sensul acelor de ceasornic!</translation>
+        <translation>Trebuie să alegi punctele în sensul acelor de ceasornic!</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3437"/>
         <source>First point cannot be equal to the last point!</source>
-        <translation type="unfinished">Primul punct nu poate fi la fel cu ultimul punct!</translation>
+        <translation>Primul punct nu poate fi la fel cu ultimul punct!</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3445"/>
         <source>You have double points!</source>
-        <translation type="unfinished">Ai puncte duble!</translation>
+        <translation>Ai puncte duble!</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4149"/>
@@ -8403,14 +8415,14 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2486"/>
         <source>Edit length</source>
-        <translation type="unfinished"></translation>
+        <translation>Editare lungime</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2492"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2549"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2609"/>
         <source>Edit angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Editare unghi</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2537"/>
@@ -8428,7 +8440,7 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="621"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3767"/>
         <source>Paths</source>
-        <translation type="unfinished">Căi</translation>
+        <translation>Căi</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3460"/>
@@ -8990,11 +9002,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Etichetă Punct</translation>
+        <translation type="vanished">Etichetă punct</translation>
     </message>
     <message>
         <source>First point</source>
-        <translation type="vanished">Primul Punct</translation>
+        <translation type="vanished">Primul punct</translation>
     </message>
     <message>
         <source>Second point</source>
@@ -9006,7 +9018,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Type of line</source>
-        <translation type="vanished">Tip de linie</translation>
+        <translation type="vanished">Tip linie</translation>
     </message>
     <message>
         <source>Show line from first point to our point</source>
@@ -9034,7 +9046,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.cpp" line="142"/>
         <source>Edit length</source>
-        <translation>Editează lungimea</translation>
+        <translation>Editare lungime</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="82"/>
@@ -9117,12 +9129,12 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="79"/>
         <source>Coordinates on the sheet</source>
-        <translation>Coordinate pe foaie</translation>
+        <translation>Coordonate pe foaie</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="82"/>
         <source>Coordinates</source>
-        <translation>Coordinate</translation>
+        <translation>Coordonate</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="88"/>
@@ -9137,7 +9149,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="64"/>
         <source>Point label</source>
-        <translation>Etichetă Punct</translation>
+        <translation>Etichetă punct</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="45"/>
@@ -9164,7 +9176,7 @@ Apply settings anyway?</source>
     <name>DialogSpline</name>
     <message>
         <source>First point</source>
-        <translation type="vanished">Primul Punct</translation>
+        <translation type="vanished">Primul punct</translation>
     </message>
     <message>
         <source>Length ratio of the first control point</source>
@@ -9224,7 +9236,7 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="300"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="696"/>
         <source>Angle:</source>
-        <translation type="unfinished">Unghi:</translation>
+        <translation>Unghi:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="445"/>
@@ -9407,7 +9419,7 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="355"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="726"/>
         <source>Angle:</source>
-        <translation type="unfinished">Unghi:</translation>
+        <translation>Unghi:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="494"/>
@@ -9560,12 +9572,12 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogtapepreferences.ui" line="14"/>
         <source>Preferences</source>
-        <translation type="unfinished">Preferințe</translation>
+        <translation>Preferințe</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogtapepreferences.ui" line="60"/>
         <source>Configuration</source>
-        <translation type="unfinished">Configurație</translation>
+        <translation>Configurație</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogtapepreferences.ui" line="75"/>
@@ -9607,7 +9619,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="283"/>
         <source>First point</source>
-        <translation>Primul Punct</translation>
+        <translation>Primul punct</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="284"/>
@@ -9669,7 +9681,7 @@ Apply settings anyway?</source>
     <name>DialogTriangle</name>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Etichetă Punct</translation>
+        <translation type="vanished">Etichetă punct</translation>
     </message>
     <message>
         <source>First point of axis</source>
@@ -9685,7 +9697,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>First point</source>
-        <translation type="vanished">Primul Punct</translation>
+        <translation type="vanished">Primul punct</translation>
     </message>
     <message>
         <source>Second point</source>
@@ -9894,7 +9906,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogundo.ui" line="58"/>
         <source>&amp;Cancel</source>
-        <translation>&amp; Anulare</translation>
+        <translation>&amp;Anulare</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogundo.ui" line="32"/>
@@ -10320,11 +10332,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tools for creating curves.</source>
-        <translation type="vanished">Instrumente pentru crearea curbe.</translation>
+        <translation type="vanished">Instrumente pentru crearea de curbe.</translation>
     </message>
     <message>
         <source>Curve</source>
-        <translation type="vanished">Curbură</translation>
+        <translation type="vanished">Curbă</translation>
     </message>
     <message>
         <source>Tools for creating arcs.</source>
@@ -10333,7 +10345,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1847"/>
         <source>Arc</source>
-        <translation>Curbura</translation>
+        <translation>Curbă</translation>
     </message>
     <message>
         <source>Tools for creating details.</source>
@@ -10547,7 +10559,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="785"/>
         <source>Draw</source>
-        <translation>Trage</translation>
+        <translation>Desen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="809"/>
@@ -10654,7 +10666,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1088"/>
         <source>Zoom fit best</source>
-        <translation>Zoom se potrivesc cel mai bine</translation>
+        <translation>Zoom se potrivește cel mai bine</translation>
     </message>
     <message>
         <source>Stop</source>
@@ -11357,6 +11369,10 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Height:</source>
+        <translation type="vanished">Înălțime:</translation>
+    </message>
+    <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="7012"/>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location?</source>
         <translation type="unfinished"></translation>
@@ -11483,7 +11499,7 @@ Apply settings anyway?</source>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="7058"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="7072"/>
         <source>Individual measurements</source>
-        <translation type="unfinished">Măsuri individuale</translation>
+        <translation>Măsuri individuale</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2099"/>
@@ -11537,7 +11553,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1949"/>
         <source>Formula</source>
-        <translation type="unfinished">Formula</translation>
+        <translation>Formula</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3149"/>
@@ -12200,7 +12216,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1078"/>
         <source>Pattern</source>
-        <translation type="unfinished">Model</translation>
+        <translation>Model</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1230"/>
@@ -12242,7 +12258,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1232"/>
         <source>Description</source>
-        <translation type="unfinished">Descriere</translation>
+        <translation>Descriere</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1343"/>
@@ -12451,42 +12467,42 @@ Would you like to select another file?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="45"/>
         <source>Save</source>
-        <translation type="unfinished">Salvează</translation>
+        <translation>Salvează</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="51"/>
         <source>Auto-save modified pattern</source>
-        <translation type="unfinished">Auto salvarea modelului modificat</translation>
+        <translation>Auto salvarea modelului modificat</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="61"/>
         <source>Interval:</source>
-        <translation type="unfinished">Interval:</translation>
+        <translation>Interval:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="90"/>
         <source>Language</source>
-        <translation type="unfinished">Limba</translation>
+        <translation>Limba</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="99"/>
         <source>GUI language:</source>
-        <translation type="unfinished">Limbaj GUI:</translation>
+        <translation>Limbaj GUI:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="123"/>
         <source>Decimal separator parts:</source>
-        <translation type="unfinished">Piese separator decimal:</translation>
+        <translation>Piese separator decimal:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="140"/>
         <source>Default unit:</source>
-        <translation type="unfinished">Unitate standard:</translation>
+        <translation>Unitate standard:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="150"/>
         <source>Label language:</source>
-        <translation type="unfinished">Limbă etichetă:</translation>
+        <translation>Limbă etichetă:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="166"/>
@@ -12501,7 +12517,7 @@ Would you like to select another file?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="237"/>
         <source>Toolbar</source>
-        <translation type="unfinished">Bară de instrumente</translation>
+        <translation>Bară de instrumente</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="243"/>
@@ -12554,17 +12570,17 @@ Would you like to select another file?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="408"/>
         <source>Centimeters</source>
-        <translation type="unfinished">Centimetrii</translation>
+        <translation>Centimetrii</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="409"/>
         <source>Millimiters</source>
-        <translation type="unfinished">Milimetrii</translation>
+        <translation>Milimetrii</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="410"/>
         <source>Inches</source>
-        <translation type="unfinished">Inci</translation>
+        <translation>Inci</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="185"/>
@@ -12912,7 +12928,7 @@ Would you like to select another file?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="250"/>
         <source>Seam allowance</source>
-        <translation type="unfinished">Adaos cusatură</translation>
+        <translation>Adaos cusatură</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="210"/>
@@ -14216,26 +14232,26 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="915"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="929"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="956"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="970"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam path at %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="917"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="931"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="958"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="972"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam path.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="981"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1001"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1022"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1042"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam allowance path at %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="983"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1003"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1024"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1044"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam allowance path.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -15683,6 +15699,10 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Height:</source>
+        <translation type="vanished">Înălțime:</translation>
+    </message>
+    <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="649"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="665"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="681"/>
@@ -16465,7 +16485,7 @@ This option will take an affect after restart.</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="528"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1206"/>
         <source>Width:</source>
-        <translation type="unfinished">Lățime:</translation>
+        <translation>Lățime:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="548"/>
@@ -16511,7 +16531,7 @@ This option will take an affect after restart.</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="717"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1395"/>
         <source>Height:</source>
-        <translation type="unfinished">Înălțime:</translation>
+        <translation>Înălțime:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="866"/>
@@ -16535,7 +16555,7 @@ This option will take an affect after restart.</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="964"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1642"/>
         <source>Angle:</source>
-        <translation type="unfinished">Unghi:</translation>
+        <translation>Unghi:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1128"/>
@@ -16713,7 +16733,7 @@ This option will take an affect after restart.</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="197"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="803"/>
         <source>Angle</source>
-        <translation type="unfinished">Unghi</translation>
+        <translation>Unghi</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="206"/>
@@ -16939,7 +16959,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="67"/>
         <source>All objects in path should follow in clockwise direction.</source>
-        <translation type="unfinished">Toate obiectele de pe rută trebuie să urmeze în sensul acelor de ceasornic.</translation>
+        <translation>Toate obiectele de pe rută trebuie să urmeze în sensul acelor de ceasornic.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="501"/>
@@ -16954,7 +16974,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="381"/>
         <source>Ready!</source>
-        <translation type="unfinished">Gata!</translation>
+        <translation>Gata!</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="102"/>
@@ -17030,12 +17050,12 @@ This option will take an affect after restart.</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="555"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="561"/>
         <source>Seam allowance</source>
-        <translation type="unfinished">Adaos cusatură</translation>
+        <translation>Adaos cusatură</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="647"/>
         <source>Width:</source>
-        <translation type="unfinished">Lățime:</translation>
+        <translation>Lățime:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="667"/>
@@ -17100,7 +17120,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1213"/>
         <source>Angle:</source>
-        <translation type="unfinished">Unghi:</translation>
+        <translation>Unghi:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="346"/>
@@ -17258,7 +17278,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabplacelabels.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished">Dialog</translation>
+        <translation>Dialog</translation>
     </message>
 </context>
 <context>
@@ -17269,7 +17289,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="vanished">&amp; Anulare</translation>
+        <translation type="vanished">&amp;Anulare</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
@@ -17277,7 +17297,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Config Dialog</source>
-        <translation type="vanished">Configurare Dialog</translation>
+        <translation type="vanished">Config Dialog</translation>
     </message>
     <message>
         <source>Configuration</source>
@@ -17352,17 +17372,17 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="45"/>
         <source>Language</source>
-        <translation type="unfinished">Limba</translation>
+        <translation>Limba</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="54"/>
         <source>GUI language:</source>
-        <translation type="unfinished">Limbaj GUI:</translation>
+        <translation>Limbaj GUI:</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="64"/>
         <source>Decimal separator parts:</source>
-        <translation type="unfinished">Piese separator decimal:</translation>
+        <translation>Piese separator decimal:</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="84"/>
@@ -17397,7 +17417,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="148"/>
         <source>Toolbar</source>
-        <translation type="unfinished">Bară de instrumente</translation>
+        <translation>Bară de instrumente</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="154"/>
@@ -17981,7 +18001,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="955"/>
         <source>Length</source>
-        <translation type="unfinished">Lungime</translation>
+        <translation>Lungime</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="625"/>
@@ -18047,7 +18067,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/libs/vlayout/vabstractpiece_p.h" line="56"/>
         <source>Detail</source>
-        <translation type="unfinished">Detalii</translation>
+        <translation>Detalii</translation>
     </message>
 </context>
 <context>
@@ -18562,7 +18582,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vabstractspline.cpp" line="197"/>
         <source>Length</source>
-        <translation type="unfinished">Lungime</translation>
+        <translation>Lungime</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vabstractspline.cpp" line="199"/>
@@ -19939,7 +19959,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="336"/>
         <source>Options</source>
-        <translation type="unfinished">Opțiuni</translation>
+        <translation>Opțiuni</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="340"/>
@@ -19949,7 +19969,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="376"/>
         <source>Delete</source>
-        <translation type="unfinished">Șterge</translation>
+        <translation>Șterge</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="345"/>
@@ -21833,7 +21853,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1048"/>
         <source>Detail</source>
-        <translation type="unfinished">Detalii</translation>
+        <translation>Detalii</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4176"/>
@@ -22230,12 +22250,12 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolalongline.cpp" line="173"/>
         <source>Length</source>
-        <translation type="unfinished">Lungime</translation>
+        <translation>Lungime</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolalongline.cpp" line="175"/>
         <source>Angle</source>
-        <translation type="unfinished">Unghi</translation>
+        <translation>Unghi</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolalongline.cpp" line="180"/>
@@ -22248,12 +22268,12 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolarc.cpp" line="395"/>
         <source>Length</source>
-        <translation type="unfinished">Lungime</translation>
+        <translation>Lungime</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolarc.cpp" line="397"/>
         <source>Radius</source>
-        <translation type="unfinished">Rază</translation>
+        <translation>Rază</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolarc.cpp" line="399"/>
@@ -22276,12 +22296,12 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolarcwithlength.cpp" line="375"/>
         <source>Length</source>
-        <translation type="unfinished">Lungime</translation>
+        <translation>Lungime</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolarcwithlength.cpp" line="377"/>
         <source>Radius</source>
-        <translation type="unfinished">Rază</translation>
+        <translation>Rază</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolarcwithlength.cpp" line="379"/>
@@ -22345,7 +22365,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="296"/>
         <source>Arc</source>
-        <translation type="unfinished">Curbura</translation>
+        <translation>Curbă</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="297"/>
@@ -22378,7 +22398,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutspline.cpp" line="308"/>
         <source>Curve</source>
-        <translation type="unfinished">Curbură</translation>
+        <translation>Curbă</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutspline.cpp" line="309"/>
@@ -22397,7 +22417,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutsplinepath.cpp" line="399"/>
         <source>Curve</source>
-        <translation type="unfinished">Curbură</translation>
+        <translation>Curbă</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutsplinepath.cpp" line="400"/>
@@ -22435,13 +22455,13 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolellipticalarc.cpp" line="462"/>
         <source>Length</source>
-        <translation type="unfinished">Lungime</translation>
+        <translation>Lungime</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolellipticalarc.cpp" line="465"/>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolellipticalarc.cpp" line="467"/>
         <source>Radius</source>
-        <translation type="unfinished">Rază</translation>
+        <translation>Rază</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolellipticalarc.cpp" line="469"/>
@@ -22482,12 +22502,12 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/operation/flipping/vtoolflippingbyline.cpp" line="250"/>
         <source>First line point</source>
-        <translation type="unfinished">Primul punct de linie</translation>
+        <translation>Primul punct de linie</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/operation/flipping/vtoolflippingbyline.cpp" line="250"/>
         <source>Second line point</source>
-        <translation type="unfinished">Al doilea Punct de linie</translation>
+        <translation>Al doilea Punct de linie</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/operation/flipping/vtoolflippingbyline.cpp" line="125"/>
@@ -22500,12 +22520,12 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolheight.cpp" line="292"/>
         <source>Length</source>
-        <translation type="unfinished">Lungime</translation>
+        <translation>Lungime</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolheight.cpp" line="294"/>
         <source>Angle</source>
-        <translation type="unfinished">Unghi</translation>
+        <translation>Unghi</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolheight.cpp" line="300"/>
@@ -22518,12 +22538,12 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/vtoolline.cpp" line="453"/>
         <source>Length</source>
-        <translation type="unfinished">Lungime</translation>
+        <translation>Lungime</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/vtoolline.cpp" line="455"/>
         <source>Angle</source>
-        <translation type="unfinished">Unghi</translation>
+        <translation>Unghi</translation>
     </message>
 </context>
 <context>
@@ -22544,12 +22564,12 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoollineintersectaxis.cpp" line="350"/>
         <source>Length</source>
-        <translation type="unfinished">Lungime</translation>
+        <translation>Lungime</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoollineintersectaxis.cpp" line="352"/>
         <source>Angle</source>
-        <translation type="unfinished">Unghi</translation>
+        <translation>Unghi</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoollineintersectaxis.cpp" line="358"/>
@@ -22567,12 +22587,12 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoollinepoint.cpp" line="170"/>
         <source>Length</source>
-        <translation type="unfinished">Lungime</translation>
+        <translation>Lungime</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoollinepoint.cpp" line="172"/>
         <source>Angle</source>
-        <translation type="unfinished">Unghi</translation>
+        <translation>Unghi</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoollinepoint.cpp" line="174"/>
@@ -22590,7 +22610,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolmove.cpp" line="526"/>
         <source>Length</source>
-        <translation type="unfinished">Lungime</translation>
+        <translation>Lungime</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolmove.cpp" line="423"/>
@@ -22622,7 +22642,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Etichetă Punct</translation>
+        <translation type="vanished">Etichetă punct</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2739"/>
@@ -22645,7 +22665,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2777"/>
         <source>Arc</source>
-        <translation>Curbura</translation>
+        <translation>Curbă</translation>
     </message>
     <message>
         <source>Radius</source>
@@ -22749,7 +22769,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="708"/>
         <source>First point</source>
-        <translation>Primul Punct</translation>
+        <translation>Primul punct</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="708"/>
@@ -22883,7 +22903,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3233"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3253"/>
         <source>Point label:</source>
-        <translation type="unfinished">Denumire punct:</translation>
+        <translation>Denumire punct:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2727"/>
@@ -22920,7 +22940,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3239"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3258"/>
         <source>Line color:</source>
-        <translation type="unfinished">Culoarea liniei:</translation>
+        <translation>Culoarea liniei:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2748"/>
@@ -22943,7 +22963,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3272"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3284"/>
         <source>Angle:</source>
-        <translation type="unfinished">Unghi:</translation>
+        <translation>Unghi:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2763"/>
@@ -22981,7 +23001,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3326"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3327"/>
         <source>Radius:</source>
-        <translation type="unfinished">Rază:</translation>
+        <translation>Rază:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2784"/>
@@ -23053,14 +23073,14 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2863"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3077"/>
         <source>Arc:</source>
-        <translation type="unfinished">Arc:</translation>
+        <translation>Arc:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2878"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2893"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3255"/>
         <source>Curve:</source>
-        <translation type="unfinished">Curbă:</translation>
+        <translation>Curbă:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2911"/>
@@ -23247,7 +23267,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3234"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3254"/>
         <source>Axis point:</source>
-        <translation type="unfinished">Punct de axă:</translation>
+        <translation>Punct de axă:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3270"/>
@@ -23419,12 +23439,12 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofcontact.cpp" line="386"/>
         <source>Length</source>
-        <translation type="unfinished">Lungime</translation>
+        <translation>Lungime</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofcontact.cpp" line="388"/>
         <source>Angle</source>
-        <translation type="unfinished">Unghi</translation>
+        <translation>Unghi</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofcontact.cpp" line="390"/>
@@ -23560,7 +23580,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1691"/>
         <source>Options</source>
-        <translation type="unfinished">Opțiuni</translation>
+        <translation>Opțiuni</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1695"/>
@@ -23585,7 +23605,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1726"/>
         <source>Delete</source>
-        <translation type="unfinished">Șterge</translation>
+        <translation>Șterge</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1487"/>
@@ -23623,12 +23643,12 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolshoulderpoint.cpp" line="352"/>
         <source>Length</source>
-        <translation type="unfinished">Lungime</translation>
+        <translation>Lungime</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolshoulderpoint.cpp" line="354"/>
         <source>Angle</source>
-        <translation type="unfinished">Unghi</translation>
+        <translation>Unghi</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolshoulderpoint.cpp" line="358"/>
@@ -23906,7 +23926,12 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="165"/>
         <source>acosh</source>
         <comment>hyperbolic arcus cosine function</comment>
-        <translation type="unfinished">acosh</translation>
+        <translation>acosh</translation>
+    </message>
+    <message>
+        <source>height</source>
+        <comment>placeholder</comment>
+        <translation type="vanished">înălțimea</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="89"/>
@@ -23954,37 +23979,37 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="118"/>
         <source>sin</source>
         <comment>sine function working with radians</comment>
-        <translation type="unfinished">sin</translation>
+        <translation>sin</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="123"/>
         <source>cos</source>
         <comment>cosine function working with radians</comment>
-        <translation type="unfinished">cos</translation>
+        <translation>cos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="128"/>
         <source>tan</source>
         <comment>tangens function working with radians</comment>
-        <translation type="unfinished">tan</translation>
+        <translation>tan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="133"/>
         <source>asin</source>
         <comment>arcus sine function working with radians</comment>
-        <translation type="unfinished">asin</translation>
+        <translation>asin</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="138"/>
         <source>acos</source>
         <comment>arcus cosine function working with radians</comment>
-        <translation type="unfinished">acos</translation>
+        <translation>acos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="143"/>
         <source>atan</source>
         <comment>arcus tangens function working with radians</comment>
-        <translation type="unfinished">atan</translation>
+        <translation>atan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="175"/>
@@ -24547,7 +24572,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetgroups.cpp" line="297"/>
         <source>Delete</source>
-        <translation type="unfinished">Șterge</translation>
+        <translation>Șterge</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetgroups.cpp" line="293"/>
@@ -25171,7 +25196,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="148"/>
         <source>Light gray</source>
         <comment>color</comment>
-        <translation type="unfinished">Gri</translation>
+        <translation>Gri</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="409"/>
@@ -25240,13 +25265,13 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/app/puzzle/vpapplication.cpp" line="223"/>
         <location filename="../../src/app/tape/mapplication.cpp" line="260"/>
         <source>Warning</source>
-        <translation type="unfinished">Atenționare</translation>
+        <translation>Atenționare</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpapplication.cpp" line="227"/>
         <location filename="../../src/app/tape/mapplication.cpp" line="264"/>
         <source>Critical error</source>
-        <translation type="unfinished">Eroare critică</translation>
+        <translation>Eroare critică</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpapplication.cpp" line="231"/>

@@ -1981,7 +1981,7 @@
     </message>
     <message>
         <source>Placement:</source>
-        <translation type="vanished">Posicionamento:</translation>
+        <translation type="vanished">Colocação:</translation>
     </message>
     <message>
         <source>Add</source>
@@ -2755,7 +2755,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="288"/>
         <source>Radius of arcs</source>
-        <translation>Raio dos arcos</translation>
+        <translation>Raios dos arcos</translation>
     </message>
     <message>
         <source>Angles of arcs</source>
@@ -3120,7 +3120,7 @@
     <name>DialogExportToCSV</name>
     <message>
         <source>Export options</source>
-        <translation type="vanished">Opções export</translation>
+        <translation type="vanished">opções de exportação</translation>
     </message>
     <message>
         <source>Export</source>
@@ -4741,7 +4741,7 @@
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.cpp" line="807"/>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.cpp" line="824"/>
         <source>Centimeters</source>
-        <translation>Centimetros</translation>
+        <translation>Centímetros</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.cpp" line="808"/>
@@ -5717,7 +5717,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/tape/dialogs/dialognewmeasurements.cpp" line="134"/>
         <source>Centimeters</source>
-        <translation>Centimetros</translation>
+        <translation>Centímetros</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialognewmeasurements.cpp" line="135"/>
@@ -5745,7 +5745,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialognewpattern.cpp" line="115"/>
         <source>Centimeters</source>
-        <translation>Centimetros</translation>
+        <translation>Centímetros</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialognewpattern.cpp" line="116"/>
@@ -12424,7 +12424,7 @@ Would you like to select another file?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="408"/>
         <source>Centimeters</source>
-        <translation>Centimetros</translation>
+        <translation>Centímetros</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="409"/>
@@ -14086,26 +14086,26 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="915"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="929"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="956"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="970"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam path at %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="917"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="931"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="958"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="972"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam path.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="981"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1001"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1022"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1042"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam allowance path at %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="983"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1003"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1024"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1044"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam allowance path.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -23724,6 +23724,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <source>acosh</source>
         <comment>hyperbolic arcus cosine function</comment>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>height</source>
+        <comment>placeholder</comment>
+        <translation type="vanished">altura</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="89"/>

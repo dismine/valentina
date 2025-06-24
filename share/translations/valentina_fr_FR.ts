@@ -226,7 +226,7 @@
     </message>
     <message>
         <source>Save</source>
-        <translation type="vanished">Sauvegarder</translation>
+        <translation type="vanished">Enregistrer</translation>
     </message>
     <message>
         <source>Auto-save modified pattern</source>
@@ -549,7 +549,7 @@
     </message>
     <message>
         <source>Value of length</source>
-        <translation type="vanished">Longueur</translation>
+        <translation type="vanished">Valeur de Longueur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="201"/>
@@ -855,7 +855,7 @@
     </message>
     <message>
         <source>Value of radius</source>
-        <translation type="vanished">Valeur du rayon</translation>
+        <translation type="vanished">Valeur de rayon</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="189"/>
@@ -1047,7 +1047,7 @@
     </message>
     <message>
         <source>Value of length</source>
-        <translation type="vanished">Longueur</translation>
+        <translation type="vanished">Valeur de Longueur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="192"/>
@@ -1072,7 +1072,7 @@
     </message>
     <message>
         <source>Second point of angle</source>
-        <translation type="vanished">Deuxième point de l&apos;angle</translation>
+        <translation type="vanished">Second point de l&apos;angle</translation>
     </message>
     <message>
         <source>Third point</source>
@@ -1622,7 +1622,7 @@
     </message>
     <message>
         <source>Value of length</source>
-        <translation type="vanished">Longueur</translation>
+        <translation type="vanished">Valeur de Longueur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="192"/>
@@ -1728,7 +1728,7 @@
     </message>
     <message>
         <source>Value of length</source>
-        <translation type="vanished">Longueur</translation>
+        <translation type="vanished">Valeur de Longueur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="192"/>
@@ -1889,7 +1889,7 @@
     </message>
     <message>
         <source>Delete</source>
-        <translation type="vanished">Supprimer</translation>
+        <translation type="vanished">Effacer</translation>
     </message>
     <message>
         <source>Got wrong scene object. Ignore.</source>
@@ -1905,7 +1905,7 @@
     </message>
     <message>
         <source>All objects in path should follow in clockwise direction.</source>
-        <translation type="vanished">Tous les objets du chemin doivent se suivre dans le sens des aiguilles d&apos;une montre.</translation>
+        <translation type="vanished">Tous les objets du chemin doivent se suivre dans le sens horaire.</translation>
     </message>
     <message>
         <source>Scroll down the list</source>
@@ -2992,7 +2992,7 @@
     </message>
     <message>
         <source>Value of length</source>
-        <translation type="vanished">Longueur</translation>
+        <translation type="vanished">Valeur de Longueur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="216"/>
@@ -3696,7 +3696,7 @@
     </message>
     <message>
         <source>Unique pattern piece name</source>
-        <translation type="vanished">Nom unique d&apos;élément de patron</translation>
+        <translation type="vanished">Nom unique de l&apos;élément de patron</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggroup.ui" line="36"/>
@@ -4343,7 +4343,7 @@
     </message>
     <message>
         <source>Find:</source>
-        <translation type="vanished">Trouver :</translation>
+        <translation type="vanished">Trouver:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="82"/>
@@ -6001,7 +6001,7 @@ Appliquer quand même les réglages ?</translation>
     </message>
     <message>
         <source>Value of length</source>
-        <translation type="vanished">Longueur</translation>
+        <translation type="vanished">Valeur de Longueur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="192"/>
@@ -6202,7 +6202,7 @@ Appliquer quand même les réglages ?</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation type="vanished">Taille:</translation>
+        <translation type="vanished">Taille :</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="297"/>
@@ -6484,7 +6484,7 @@ Appliquer quand même les réglages ?</translation>
     </message>
     <message>
         <source>All pattern pieces</source>
-        <translation type="vanished">Toute les pièces du patron</translation>
+        <translation type="vanished">Tous les éléments du patron</translation>
     </message>
     <message>
         <source>No changes</source>
@@ -6564,7 +6564,7 @@ Appliquer quand même les réglages ?</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="vanished">Type :</translation>
+        <translation type="vanished">Type:</translation>
     </message>
 </context>
 <context>
@@ -7496,7 +7496,7 @@ Appliquer quand même les réglages ?</translation>
     </message>
     <message>
         <source>Value of radius</source>
-        <translation type="vanished">Rayon</translation>
+        <translation type="vanished">Valeur de rayon</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="192"/>
@@ -9494,7 +9494,7 @@ Appliquer quand même les réglages ?</translation>
     </message>
     <message>
         <source>Value of length</source>
-        <translation type="vanished">Longueur</translation>
+        <translation type="vanished">Valeur de Longueur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="192"/>
@@ -10330,7 +10330,7 @@ Appliquer quand même les réglages ?</translation>
     </message>
     <message>
         <source>Second point of angle</source>
-        <translation type="vanished">Deuxième point de l&apos;angle</translation>
+        <translation type="vanished">Second point de l&apos;angle</translation>
     </message>
     <message>
         <source>First dart point</source>
@@ -11257,11 +11257,11 @@ Appliquer quand même les réglages ?</translation>
     </message>
     <message>
         <source>Original zoom </source>
-        <translation type="vanished">Zoom par défaut</translation>
+        <translation type="vanished">Zoom 100 %</translation>
     </message>
     <message>
         <source>Original Zoom </source>
-        <translation type="vanished">Zoom par défaut</translation>
+        <translation type="vanished">Zoom 100 %</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1088"/>
@@ -11402,7 +11402,7 @@ Appliquer quand même les réglages ?</translation>
     </message>
     <message>
         <source>Size: </source>
-        <translation type="vanished">Taille :</translation>
+        <translation type="vanished">Taille:</translation>
     </message>
     <message>
         <source>Pattern Piece: </source>
@@ -11546,7 +11546,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Individual measurements (*.vit)</source>
-        <translation type="vanished">Mesures individuelles (*.vit)</translation>
+        <translation type="vanished">Mesures Individuelles (*.vit)</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1991"/>
@@ -11713,7 +11713,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save as tiled PDF</source>
-        <translation type="vanished">Enregistrer au format PDF empilé</translation>
+        <translation type="vanished">Enregistrer en tant que PDF en tuiles</translation>
     </message>
     <message>
         <source>Split and save a layout into smaller pages</source>
@@ -13322,7 +13322,7 @@ Voulez-vous charger un autre fichier de mesures ?</translation>
     </message>
     <message>
         <source>Path that use Valentina</source>
-        <translation type="vanished">Dossiers utilisés par Valentina</translation>
+        <translation type="vanished">Dossier de travail de Valentina</translation>
     </message>
     <message>
         <source>Default</source>
@@ -15303,26 +15303,26 @@ This option will take an affect after restart.</source>
         <translation>Inconnu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="915"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="929"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="956"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="970"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam path at %2.</source>
         <translation>Pièce &apos;%1&apos;. Impossible de générer le chemin complet de la ligne de couture en %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="917"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="931"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="958"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="972"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam path.</source>
         <translation>Pièce &apos;%1&apos;. Impossible de générer le chemin complet de la ligne de couture..</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="981"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1001"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1022"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1042"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam allowance path at %2.</source>
         <translation>Piece &apos;%1&apos;. Impossible de générer le chemin complet de la marge de couture en %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="983"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1003"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1024"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1044"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam allowance path.</source>
         <translation>Pièce &apos;%1&apos;. Impossible de générer le chemin complet de la marge de couture.</translation>
     </message>
@@ -20553,7 +20553,7 @@ Voulez-vous enregistrer vos changements ?</translation>
     </message>
     <message>
         <source>Ignore margins printing (export mode). Disable value keys: &quot;%1&quot;, &quot;%2&quot;, &quot;%3&quot;, &quot;%4&quot;. Set all margins to 0.</source>
-        <translation type="vanished">Ignorer les marges d&apos;impression (mode export). Inactive les clés de valeur : &quot;%1&quot;, &quot;%2&quot;, &quot;%3&quot;, &quot;%4&quot;. Règle les marge à 0.</translation>
+        <translation type="vanished">Ignorer les marges d&apos;impression (mode export). Inactive les clés de valeur : &quot;%1&quot;, &quot;%2&quot;, &quot;%3&quot;, &quot;%4&quot;. Règle toutes les marges à 0.</translation>
     </message>
     <message>
         <source>Page left margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
@@ -23506,7 +23506,7 @@ Voulez-vous enregistrer vos changements ?</translation>
     <name>VPatternConverter</name>
     <message>
         <source>Unexpected version &quot;%1&quot;.</source>
-        <translation type="vanished">Version &quot;%1&quot; inattendue. </translation>
+        <translation type="vanished">Version inattendue &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
@@ -24086,7 +24086,7 @@ Erreur de compatibilité du format .rld: actualFileVersion = %1 alors que fileVe
     </message>
     <message>
         <source>Delete</source>
-        <translation type="vanished">Supprimer</translation>
+        <translation type="vanished">Effacer</translation>
     </message>
     <message>
         <source>move pattern piece label</source>
@@ -26230,7 +26230,7 @@ Erreur de compatibilité du format .rld: actualFileVersion = %1 alors que fileVe
     <message>
         <source>Knowles/Women</source>
         <comment>System name</comment>
-        <translation type="vanished">Knowles / Femmes</translation>
+        <translation type="vanished">Pinces Réelles</translation>
     </message>
     <message>
         <source>Practical Guide to Patternmaking for Fashion Designers: Juniors, Misses, and Women</source>
@@ -26265,7 +26265,7 @@ Erreur de compatibilité du format .rld: actualFileVersion = %1 alors que fileVe
     <message>
         <source>AngleLine_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="vanished">Angleligne_</translation>
+        <translation type="vanished">AngleLine_</translation>
     </message>
     <message>
         <source>Arc_</source>
@@ -27012,7 +27012,7 @@ Erreur de compatibilité du format .rld: actualFileVersion = %1 alors que fileVe
     <name>VVITConverter</name>
     <message>
         <source>Unexpected version &quot;%1&quot;.</source>
-        <translation type="vanished">Version &quot;%1&quot; inattendue. </translation>
+        <translation type="vanished">Version inattendue &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
@@ -27023,7 +27023,7 @@ Erreur de compatibilité du format .rld: actualFileVersion = %1 alors que fileVe
     <name>VVSTConverter</name>
     <message>
         <source>Unexpected version &quot;%1&quot;.</source>
-        <translation type="vanished">Version &quot;%1&quot; inattendue. </translation>
+        <translation type="vanished">Version inattendue &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>

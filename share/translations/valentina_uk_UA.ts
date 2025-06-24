@@ -723,7 +723,7 @@
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation type="vanished">Виберіть точку центра дуги</translation>
+        <translation type="vanished">Виберіть точку центру дуги</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1683,7 +1683,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="244"/>
         <source>Point label:</source>
-        <translation>Мітка точки:</translation>
+        <translation>Ім&apos;я точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="251"/>
@@ -1789,7 +1789,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="244"/>
         <source>Point label:</source>
-        <translation>Мітка точки:</translation>
+        <translation>Ім&apos;я точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="251"/>
@@ -2668,7 +2668,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="95"/>
         <source>Insert variable into formula</source>
-        <translation>Вставити змінну у формулу</translation>
+        <translation>Вставте значення в формулу</translation>
     </message>
     <message>
         <source>Value of first angle</source>
@@ -4189,7 +4189,7 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1437"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1440"/>
         <source>Lengths curves</source>
-        <translation>Довжни кривих</translation>
+        <translation>Довжини кривих</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1521"/>
@@ -7435,7 +7435,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="99"/>
         <source>Formula wizard</source>
-        <translation>Мастер формул</translation>
+        <translation>Майстер формул</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="141"/>
@@ -7907,7 +7907,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="78"/>
         <source>Point label:</source>
-        <translation>Мітка:</translation>
+        <translation>Ім&apos;я точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="91"/>
@@ -13844,7 +13844,7 @@ Would you like to select another file?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.ui" line="50"/>
         <source>Path</source>
-        <translation>Контур</translation>
+        <translation>Шлях</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.ui" line="72"/>
@@ -17802,7 +17802,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1415"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1662"/>
         <source>Formula wizard</source>
-        <translation>Мастер формул</translation>
+        <translation>Майстер формул</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="596"/>
@@ -18693,7 +18693,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Path</source>
-        <translation type="vanished">Шлях</translation>
+        <translation type="vanished">Контур</translation>
     </message>
     <message>
         <source>Individual measurements</source>
@@ -26249,7 +26249,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>None</source>
         <comment>System name</comment>
-        <translation type="vanished">Жодної</translation>
+        <translation type="vanished">Жодного</translation>
     </message>
     <message>
         <source>Valentina team</source>

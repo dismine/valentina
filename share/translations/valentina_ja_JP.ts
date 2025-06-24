@@ -326,7 +326,7 @@
     <name>DeleteDetail</name>
     <message>
         <source>delete tool</source>
-        <translation type="vanished">ツールを削除</translation>
+        <translation type="vanished">削除ツール</translation>
     </message>
 </context>
 <context>
@@ -342,7 +342,7 @@
     <message>
         <location filename="../../src/libs/vtools/undocommands/deletepiece.cpp" line="56"/>
         <source>delete tool</source>
-        <translation>ツールを削除</translation>
+        <translation>削除ツール</translation>
     </message>
 </context>
 <context>
@@ -1287,7 +1287,7 @@
     </message>
     <message>
         <source>Color</source>
-        <translation type="vanished">イロ</translation>
+        <translation type="vanished">色</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.cpp" line="115"/>
@@ -1381,7 +1381,7 @@
     </message>
     <message>
         <source>Color</source>
-        <translation type="vanished">イロ</translation>
+        <translation type="vanished">色</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.cpp" line="313"/>
@@ -1475,7 +1475,7 @@
     </message>
     <message>
         <source>Color</source>
-        <translation type="vanished">イロ</translation>
+        <translation type="vanished">色</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.cpp" line="313"/>
@@ -1590,7 +1590,7 @@
     </message>
     <message>
         <source>Interfacing</source>
-        <translation type="vanished">接着芯</translation>
+        <translation type="vanished">芯地</translation>
     </message>
     <message>
         <source>Interlining</source>
@@ -8232,7 +8232,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Color</source>
-        <translation type="vanished">イロ</translation>
+        <translation type="vanished">色</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="844"/>
@@ -13040,26 +13040,26 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="915"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="929"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="956"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="970"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam path at %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="917"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="931"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="958"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="972"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam path.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="981"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1001"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1022"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1042"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam allowance path at %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="983"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1003"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1024"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1044"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam allowance path.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -16059,7 +16059,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Book:</source>
-        <translation type="vanished">本名</translation>
+        <translation type="vanished">書籍名</translation>
     </message>
     <message>
         <source>GUI language:</source>
@@ -21434,7 +21434,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Color</source>
-        <translation type="vanished">イロ</translation>
+        <translation type="vanished">色</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3249"/>
