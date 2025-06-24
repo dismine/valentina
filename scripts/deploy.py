@@ -140,22 +140,24 @@ def run_clean(refresh_token):
             sys.exit("ERROR: Invalid access token; try re-generating an "
                      "access token from the app console on the web.")
 
-        clean_folders = ["/1.0.x/MacOS", "/1.0.x/Windows", "/1.0.x/Linux"]
-        arhive_types = [r'^valentina-Windows10\+-mingw-x64-Qt.*-develop-[a-f0-9]{40}\.exe$',
-                        r'^valentina-Windows7\+-mingw-x86-Qt.*-develop-[a-f0-9]{40}\.exe$',
-                        r'^valentina-Windows10\+-msvc-x64-Qt.*-develop-[a-f0-9]{40}\.exe$',
-                        r'^valentina-Windows7\+-msvc-x86-Qt.*-develop-[a-f0-9]{40}\.exe$',
-                        r'^valentina-portable-Windows10\+-mingw-x64-Qt.*-develop-[a-f0-9]{40}\.7z$',
-                        r'^valentina-portable-Windows7\+-mingw-x86-Qt.*-develop-[a-f0-9]{40}\.7z$',
-                        r'^valentina-portable-Windows10\+-msvc-x64-Qt.*-develop-[a-f0-9]{40}\.7z$',
-                        r'^valentina-portable-Windows7\+-msvc-x86-Qt.*-develop-[a-f0-9]{40}\.7z$',
-                        r'^valentina-macOS_12.4\+-Qt.*-x64-develop-[a-f0-9]{40}\.dmg$',
-                        r'^valentina-macOS_12.4\+-Qt.*-x64-develop-multibundle-[a-f0-9]{40}\.dmg$',
-                        r'^valentina-macOS_13\+-Qt.*-x64-develop-[a-f0-9]{40}\.dmg$',
-                        r'^valentina-macOS_13\+-Qt.*-x64-develop-multibundle-[a-f0-9]{40}\.dmg$',
-                        r'^valentina-macOS.*\+-Qt.*-arm.*-develop-[a-f0-9]{40}\.dmg$',
-                        r'^valentina-macOS.*\+-Qt.*-arm.*-develop-multibundle-[a-f0-9]{40}\.dmg$',
-                        r'^valentina-Linux-x86_64-develop-[a-f0-9]{40}\.AppImage$']
+        clean_folders = ["/1.0.x/MacOS", "/1.0.x/Windows", "/1.0.x/Linux", "/1.1.x/MacOS", "/1.1.x/Windows", "/1.1.x/Linux"]
+        arhive_types = [r'^valentina-Windows10\+-mingw-x64-Qt.*-(?:develop|master)-[a-f0-9]{40}\.exe$',
+                        r'^valentina-Windows7\+-mingw-x86-Qt.*-(?:develop|master)-[a-f0-9]{40}\.exe$',
+                        r'^valentina-Windows10\+-msvc-x64-Qt.*-(?:develop|master)-[a-f0-9]{40}\.exe$',
+                        r'^valentina-Windows7\+-msvc-x86-Qt.*-(?:develop|master)-[a-f0-9]{40}\.exe$',
+                        r'^valentina-portable-Windows10\+-mingw-x64-Qt.*-(?:develop|master)-[a-f0-9]{40}\.7z$',
+                        r'^valentina-portable-Windows7\+-mingw-x86-Qt.*-(?:develop|master)-[a-f0-9]{40}\.7z$',
+                        r'^valentina-portable-Windows10\+-msvc-x64-Qt.*-(?:develop|master)-[a-f0-9]{40}\.7z$',
+                        r'^valentina-portable-Windows7\+-msvc-x86-Qt.*-(?:develop|master)-[a-f0-9]{40}\.7z$',
+                        r'^valentina-macOS_12.4\+-Qt.*-x64-(?:develop|master)-[a-f0-9]{40}\.dmg$',
+                        r'^valentina-macOS_12.4\+-Qt.*-x64-(?:develop|master)-multibundle-[a-f0-9]{40}\.dmg$',
+                        r'^valentina-macOS_12\+-Qt.*-x64-(?:develop|master)-[a-f0-9]{40}\.dmg$',
+                        r'^valentina-macOS_12\+-Qt.*-x64-(?:develop|master)-multibundle-[a-f0-9]{40}\.dmg$',
+                        r'^valentina-macOS_13\+-Qt.*-x64-(?:develop|master)-[a-f0-9]{40}\.dmg$',
+                        r'^valentina-macOS_13\+-Qt.*-x64-(?:develop|master)-multibundle-[a-f0-9]{40}\.dmg$',
+                        r'^valentina-macOS.*\+-Qt.*-arm.*-(?:develop|master)-[a-f0-9]{40}\.dmg$',
+                        r'^valentina-macOS.*\+-Qt.*-arm.*-(?:develop|master)-multibundle-[a-f0-9]{40}\.dmg$',
+                        r'^valentina-Linux-x86_64-(?:develop|master)-[a-f0-9]{40}\.AppImage$']
 
         item_types = {}
 
