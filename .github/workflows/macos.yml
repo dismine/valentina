@@ -34,7 +34,7 @@ env:
 
 jobs:
   build:
-    name: MacOS 13.5+ Qt ${{ matrix.qt.install }} (${{ matrix.bundle.label }})
+    name: MacOS 12+ Qt ${{ matrix.qt.install }} (${{ matrix.bundle.label }})
     runs-on: macos-13
 
     strategy:
@@ -168,7 +168,7 @@ jobs:
       - name: Install Qt and Qbs
         uses: tecolicom/actions-use-homebrew-tools@v1
         with:
-          tools: coreutils git openssl@3 pkgconf qt6 cmake ninja poppler xerces-c qbs
+          tools: coreutils git openssl@3 pkgconf cmake ninja poppler xerces-c qbs
 
       - name: Set path to Qt
         run: echo "QTDIR=$(brew --prefix qt6)" >> $GITHUB_ENV
