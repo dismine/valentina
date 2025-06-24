@@ -165,24 +165,8 @@ jobs:
       - name: Echo the identity
         run: security find-identity -v -p codesigning
 
-      - name: Install Valentina's dependencies
-        uses: tecolicom/actions-use-homebrew-tools@v1
-        with:
-          tools: coreutils cmake poppler xerces-c qbs
-      
-      # Annoying clang issue: clang++ does not respect -isystem flag
-      - name: Fix clang issue
-        run: rm /usr/local/include/xercesc || true
-
       - name: Set path to Qt
         run: echo "QTDIR=${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos" >> $GITHUB_ENV
-    
-      - name: Install Conan
-        run: |
-          mkdir ~/.venv
-          python3 -m venv ~/.venv
-          source ~/.venv/bin/activate
-          pip3 install --upgrade pip 'dropbox>=12.0.2' py7zr conan==1.66.0 requests
 
       - name: Build macdeployqt
         run: |
@@ -191,6 +175,22 @@ jobs:
           cmake ${HOME}/macdeployqt-main -GNinja -S ${HOME}/macdeployqt-main -B ${HOME}/macdeployqt-build-dir -DCMAKE_INSTALL_PREFIX=${HOME}/macdeployqt-install-dir -DCMAKE_PREFIX_PATH="${QT_DIR}" -DCMAKE_BUILD_TYPE=Release
           grep Qt6Core_VERSION_STRING ${HOME}/macdeployqt-build-dir/CMakeCache.txt || true
           cmake --build ${HOME}/macdeployqt-build-dir --target install
+
+      - name: Install Valentina's dependencies
+        uses: tecolicom/actions-use-homebrew-tools@v1
+        with:
+          tools: coreutils poppler xerces-c qbs
+      
+      # Annoying clang issue: clang++ does not respect -isystem flag
+      - name: Fix clang issue
+        run: rm /usr/local/include/xercesc || true
+    
+      - name: Install Conan
+        run: |
+          mkdir ~/.venv
+          python3 -m venv ~/.venv
+          source ~/.venv/bin/activate
+          pip3 install --upgrade pip 'dropbox>=12.0.2' py7zr conan==1.66.0 requests
 
       - name: Before build
         run: |
