@@ -185,7 +185,9 @@ jobs:
         run: |
           curl -LJ https://github.com/dismine/macdeployqt/archive/refs/heads/main.zip --output ${HOME}/macdeployqt-main.zip --silent
           unzip ${HOME}/macdeployqt-main.zip -d ${HOME}
-          cmake ${HOME}/macdeployqt-main -GNinja -S ${HOME}/macdeployqt-main -B ${HOME}/macdeployqt-build-dir -DCMAKE_INSTALL_PREFIX=${HOME}/macdeployqt-install-dir -DCMAKE_PREFIX_PATH="${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos" -DCMAKE_BUILD_TYPE=Release
+          echo "QTDIR=${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos" >> $GITHUB_ENV
+          cmake ${HOME}/macdeployqt-main -GNinja -S ${HOME}/macdeployqt-main -B ${HOME}/macdeployqt-build-dir -DCMAKE_INSTALL_PREFIX=${HOME}/macdeployqt-install-dir -DCMAKE_PREFIX_PATH="${QT_DIR}" -DCMAKE_BUILD_TYPE=Release
+          grep Qt6Core_VERSION_STRING ${HOME}/macdeployqt-build-dir/CMakeCache.txt || true
           cmake --build ${HOME}/macdeployqt-build-dir --target install
 
       - name: Before build
@@ -207,7 +209,7 @@ jobs:
           conan profile update settings.compiler.version=15 valentina
           qbs setup-toolchains --detect
           qbs config --list profiles
-          qbs setup-qt ${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos/bin/qmake qt6
+          qbs setup-qt ${QT_DIR}/bin/qmake qt6
           qbs config defaultProfile qt6
           qbs config profiles.qt6.baseProfile clang
 
@@ -227,7 +229,7 @@ jobs:
           profile:qt6 project.minimumMacosVersion:${{ matrix.qt.minimumMacosVersion }} 
           moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix xerces-c)/lib/pkgconfig,$(brew --prefix qt6)/lib/pkgconfig,$(brew --prefix openssl@3)/lib/pkgconfig 
           "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" 
-          modules.macdeployqt.libpath:${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos/lib,$(brew --prefix poppler)/lib 
+          modules.macdeployqt.libpath:${QT_DIR}/lib,$(brew --prefix poppler)/lib 
           modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir 
           project.enableConan:true 
           project.conanWithCrashReporting:true 
@@ -255,9 +257,9 @@ jobs:
           modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} 
           qbs.installRoot:${{ runner.temp }}/build/release/install-root 
           profile:qt6 project.minimumMacosVersion:${{ matrix.qt.minimumMacosVersion }}
-          moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix xerces-c)/lib/pkgconfig,${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos/lib/pkgconfig,$(brew --prefix openssl@3)/lib/pkgconfig 
+          moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix xerces-c)/lib/pkgconfig,${QT_DIR}/lib/pkgconfig,$(brew --prefix openssl@3)/lib/pkgconfig 
           "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" 
-          modules.macdeployqt.libpath:${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos/lib,$(brew --prefix poppler)/lib 
+          modules.macdeployqt.libpath:${QT_DIR}/lib,$(brew --prefix poppler)/lib 
           modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir 
           project.enableConan:true 
           project.conanWithCrashReporting:true 
