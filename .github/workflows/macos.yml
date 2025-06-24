@@ -240,8 +240,8 @@ jobs:
       - name: Deploy symbols
         if: env.WITH_CRASH_REPORTING == 'True'
         run: |
-          echo "CRASH_QT_VERSION=$($QTDIR/bin/qmake -query QT_VERSION | awk -F. '{print $1 "_" $2}')" >> $GITHUB_ENV
-          echo "CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)" >> $GITHUB_ENV
+          export CRASH_QT_VERSION=$($QTDIR/bin/qmake -query QT_VERSION | awk -F. '{print $1 "_" $2}')
+          export CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)
           curl --proto '=https' --tlsv1.2 -LsSf https://github.com/mozilla/dump_syms/releases/download/${{ env.DUMP_SYMS_VERSION }}/dump_syms-installer.sh | sh
           python3 scripts/symupload.py ${{ runner.temp }}/build/release/install-root $VALENTINA_VERSION g$CRASH_SHORT_SHA $CRASH_QT_VERSION --multibundle=$MULTI_BUNDLE --clean
 
