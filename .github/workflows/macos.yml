@@ -216,12 +216,12 @@ jobs:
         run: >
           echo "COMMON_QBS_ARGS=
           -f valentina.qbs 
-          -d ${{ runner.temp }}/build 
+          -d $GITHUB_WORKSPACE/build 
           --jobs $(nproc) 
           config:release 
           modules.buildconfig.enableUnitTests:false 
           modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} 
-          qbs.installRoot:${{ runner.temp }}/build/release/install-root 
+          qbs.installRoot:$GITHUB_WORKSPACE/build/release/install-root 
           profile:qt6 
           project.minimumMacosVersion:$MACOS_DEPLOYMENT_TARGET 
           moduleProviders.qbspkgconfig.extraPaths:${{ env.QTDIR }}/lib/pkgconfig 
@@ -243,7 +243,7 @@ jobs:
           export CRASH_QT_VERSION=$($QTDIR/bin/qmake -query QT_VERSION | awk -F. '{print $1 "_" $2}')
           export CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)
           curl --proto '=https' --tlsv1.2 -LsSf https://github.com/mozilla/dump_syms/releases/download/${{ env.DUMP_SYMS_VERSION }}/dump_syms-installer.sh | sh
-          python3 scripts/symupload.py ${{ runner.temp }}/build/release/install-root $VALENTINA_VERSION g$CRASH_SHORT_SHA $CRASH_QT_VERSION --multibundle=$MULTI_BUNDLE --clean
+          python3 scripts/symupload.py $GITHUB_WORKSPACE/build/release/install-root $VALENTINA_VERSION g$CRASH_SHORT_SHA $CRASH_QT_VERSION --multibundle=$MULTI_BUNDLE --clean
 
       - name: Create DMG
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
@@ -265,13 +265,13 @@ jobs:
       # you're curious
       - name: Notarization
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
-        run: xcrun notarytool submit "${{ runner.temp }}/build/release/install-root/share/valentina.dmg" --keychain-profile "notarytool-profile" --wait --timeout 5m || true
+        run: xcrun notarytool submit "$GITHUB_WORKSPACE/build/release/install-root/share/valentina.dmg" --keychain-profile "notarytool-profile" --wait --timeout 5m || true
 
       # Finally, we need to "attach the staple" to our executable, which will allow our app to be
       # validated by macOS even when an internet connection is not available.
       - name: Attach the staple
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
-        run: xcrun stapler staple ${{ runner.temp }}/build/release/install-root/share/valentina.dmg || true  
+        run: xcrun stapler staple $GITHUB_WORKSPACE/build/release/install-root/share/valentina.dmg || true  
 
       - name: Commit hash
         id: commit
@@ -281,7 +281,7 @@ jobs:
       - name: Deploy
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
         env:
-          VALENTINA_WORKING_DIR: ${{ runner.temp }}
+          VALENTINA_WORKING_DIR: $GITHUB_WORKSPACE
           CIRRUS_BRANCH: ${{ github.base_ref || github.ref_name }}
           CIRRUS_CHANGE_IN_REPO: ${{ steps.commit.outputs.hash }}
           TARGET_PLATFORM: ${{ matrix.qt.target }}
