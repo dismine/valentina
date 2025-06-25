@@ -59,25 +59,6 @@ jobs:
       MULTI_BUNDLE: ${{ matrix.bundle.multibundle }}
       DUMP_SYMS_VERSION: 'v2.3.5'
       MACOS_DEPLOYMENT_TARGET: ${{ matrix.qt.minimumMacosVersion }}
-      QTDIR: ${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos
-      INSTALL_ROOT: ${{ runner.temp }}/build/release/install-root
-      COMMON_QBS_ARGS: >
-        -f valentina.qbs 
-        -d ${{ runner.temp }}/build 
-        --jobs $(nproc) 
-        config:release 
-        modules.buildconfig.enableUnitTests:false 
-        modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} 
-        qbs.installRoot:${{ env.INSTALL_ROOT }} 
-        profile:qt6 
-        project.minimumMacosVersion:$MACOS_DEPLOYMENT_TARGET 
-        moduleProviders.qbspkgconfig.extraPaths:${{ env.QTDIR }}/lib/pkgconfig 
-        "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" 
-        modules.macdeployqt.libpath:${{ env.QTDIR }}/lib 
-        project.enableConan:true 
-        project.conanWithXerces:true 
-        project.conanWithCrashReporting:true 
-        project.conanProfiles:valentina
 
     steps:
       - name: Checkout repo
@@ -110,6 +91,9 @@ jobs:
           modules:      'qtimageformats'
           cache:        true
           setup-python: false
+
+      - name: Set path to Qt
+        run: echo "QTDIR=${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos" >> $GITHUB_ENV
 
       - name: Install Python dependencies
         run: |
@@ -227,6 +211,26 @@ jobs:
 
       - name: Build Conan dependencies
         run: conan install . -s os=Macos --build=missing -o with_crash_reporting=${{ env.WITH_CRASH_REPORTING }} -o with_xerces=True -pr=valentina
+
+      - name: Set up common Qbs args
+        run: >
+          echo "COMMON_QBS_ARGS=
+          -f valentina.qbs 
+          -d ${{ runner.temp }}/build 
+          --jobs $(nproc) 
+          config:release 
+          modules.buildconfig.enableUnitTests:false 
+          modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} 
+          qbs.installRoot:${{ runner.temp }}/build/release/install-root 
+          profile:qt6 
+          project.minimumMacosVersion:$MACOS_DEPLOYMENT_TARGET 
+          moduleProviders.qbspkgconfig.extraPaths:${{ env.QTDIR }}/lib/pkgconfig 
+          \"modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME\" 
+          modules.macdeployqt.libpath:${{ env.QTDIR }}/lib 
+          project.enableConan:true 
+          project.conanWithXerces:true 
+          project.conanWithCrashReporting:true 
+          project.conanProfiles:valentina" >> $GITHUB_ENV
 
       - name: Build Valentina
         run: >
