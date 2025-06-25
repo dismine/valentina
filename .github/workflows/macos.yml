@@ -58,6 +58,7 @@ jobs:
       WITH_CRASH_REPORTING: 'True'
       MULTI_BUNDLE: ${{ matrix.bundle.label }}
       DUMP_SYMS_VERSION: 'v2.3.5'
+      MACOS_DEPLOYMENT_TARGET: ${{ matrix.qt.minimumMacosVersion }}
 
     steps:
       - name: Checkout repo
@@ -168,22 +169,10 @@ jobs:
       - name: Set path to Qt
         run: echo "QTDIR=${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos" >> $GITHUB_ENV
 
-      - name: Build macdeployqt
-        run: |
-          curl -LJ https://github.com/dismine/macdeployqt/archive/refs/heads/main.zip --output ${HOME}/macdeployqt-main.zip --silent
-          unzip ${HOME}/macdeployqt-main.zip -d ${HOME}
-          cmake ${HOME}/macdeployqt-main -GNinja -S ${HOME}/macdeployqt-main -B ${HOME}/macdeployqt-build-dir -DCMAKE_INSTALL_PREFIX=${HOME}/macdeployqt-install-dir -DCMAKE_PREFIX_PATH="${QT_DIR}" -DCMAKE_BUILD_TYPE=Release
-          grep Qt6Core_VERSION_STRING ${HOME}/macdeployqt-build-dir/CMakeCache.txt || true
-          cmake --build ${HOME}/macdeployqt-build-dir --target install
-
       - name: Install Valentina's dependencies
         uses: tecolicom/actions-use-homebrew-tools@v1
         with:
-          tools: coreutils poppler xerces-c
-      
-      # Annoying clang issue: clang++ does not respect -isystem flag
-      - name: Fix clang issue
-        run: rm /usr/local/include/xercesc || true
+          tools: coreutils
     
       - name: Install Conan
         run: |
@@ -221,7 +210,7 @@ jobs:
           qbs config profiles.qt6.baseProfile clang
 
       - name: Build Conan dependencies
-        run: conan install . -s os=Macos --build=missing -o with_crash_reporting=${{ env.WITH_CRASH_REPORTING }} -pr=valentina
+        run: conan install . -s os=Macos --build=missing -o with_crash_reporting=${{ env.WITH_CRASH_REPORTING }} -o with_xerces=True -pr=valentina
 
       - name: Build Valentina
         run: >
@@ -233,12 +222,11 @@ jobs:
           modules.buildconfig.enableUnitTests:false 
           modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} 
           qbs.installRoot:${{ runner.temp }}/build/release/install-root 
-          profile:qt6 project.minimumMacosVersion:${{ matrix.qt.minimumMacosVersion }} 
-          moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix xerces-c)/lib/pkgconfig,$QTDIR/lib/pkgconfig,$(brew --prefix openssl@3)/lib/pkgconfig 
+          profile:qt6 project.minimumMacosVersion:$MACOS_DEPLOYMENT_TARGET
+          moduleProviders.qbspkgconfig.extraPaths:$QTDIR/lib/pkgconfig
           "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" 
-          modules.macdeployqt.libpath:$QTDIR/lib,$(brew --prefix poppler)/lib 
-          modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir 
-          project.enableConan:true 
+          project.enableConan:true
+          project.conanWithXerces:true 
           project.conanWithCrashReporting:true 
           project.conanProfiles:valentina
 
@@ -263,12 +251,12 @@ jobs:
           modules.buildconfig.enableUnitTests:false 
           modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} 
           qbs.installRoot:${{ runner.temp }}/build/release/install-root 
-          profile:qt6 project.minimumMacosVersion:${{ matrix.qt.minimumMacosVersion }}
-          moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix xerces-c)/lib/pkgconfig,$QTDIR/lib/pkgconfig,$(brew --prefix openssl@3)/lib/pkgconfig 
+          profile:qt6 project.minimumMacosVersion:$MACOS_DEPLOYMENT_TARGET
+          moduleProviders.qbspkgconfig.extraPaths:$QTDIR/lib/pkgconfig
           "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" 
-          modules.macdeployqt.libpath:$QTDIR/lib,$(brew --prefix poppler)/lib 
-          modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir 
-          project.enableConan:true 
+          modules.macdeployqt.libpath:$QTDIR/lib 
+          project.enableConan:true
+          project.conanWithXerces:true 
           project.conanWithCrashReporting:true 
           project.conanProfiles:valentina
 
