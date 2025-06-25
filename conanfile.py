@@ -19,9 +19,6 @@ class Recipe(ConanFile):
     if self.settings.os == "Linux":
       self.options["xerces-c"].shared = False
 
-    if self.settings.os == "Macos" and "MACOS_DEPLOYMENT_TARGET" in os.environ:
-      self.settings.os.version = os.environ["MACOS_DEPLOYMENT_TARGET"]
-
   def requirements(self):
     if not self.options.with_xerces:
       del self.requires["xerces-c"]
