@@ -59,6 +59,25 @@ jobs:
       MULTI_BUNDLE: ${{ matrix.bundle.multibundle }}
       DUMP_SYMS_VERSION: 'v2.3.5'
       MACOS_DEPLOYMENT_TARGET: ${{ matrix.qt.minimumMacosVersion }}
+      QTDIR: ${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos
+      INSTALL_ROOT: ${{ runner.temp }}/build/release/install-root
+      COMMON_QBS_ARGS: >
+        -f valentina.qbs 
+        -d ${{ runner.temp }}/build 
+        --jobs $(nproc) 
+        config:release 
+        modules.buildconfig.enableUnitTests:false 
+        modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} 
+        qbs.installRoot:${{ env.INSTALL_ROOT }} 
+        profile:qt6 
+        project.minimumMacosVersion:$MACOS_DEPLOYMENT_TARGET 
+        moduleProviders.qbspkgconfig.extraPaths:${{ env.QTDIR }}/lib/pkgconfig 
+        "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" 
+        modules.macdeployqt.libpath:${{ env.QTDIR }}/lib 
+        project.enableConan:true 
+        project.conanWithXerces:true 
+        project.conanWithCrashReporting:true 
+        project.conanProfiles:valentina
 
     steps:
       - name: Checkout repo
@@ -166,9 +185,6 @@ jobs:
       - name: Echo the identity
         run: security find-identity -v -p codesigning
 
-      - name: Set path to Qt
-        run: echo "QTDIR=${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos" >> $GITHUB_ENV
-
       - name: Install Valentina's dependencies
         uses: tecolicom/actions-use-homebrew-tools@v1
         with:
@@ -215,20 +231,7 @@ jobs:
       - name: Build Valentina
         run: >
           qbs build 
-          -f valentina.qbs 
-          -d ${{ runner.temp }}/build 
-          --jobs $(nproc) 
-          config:release 
-          modules.buildconfig.enableUnitTests:false 
-          modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} 
-          qbs.installRoot:${{ runner.temp }}/build/release/install-root 
-          profile:qt6 project.minimumMacosVersion:$MACOS_DEPLOYMENT_TARGET
-          moduleProviders.qbspkgconfig.extraPaths:$QTDIR/lib/pkgconfig
-          "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" 
-          project.enableConan:true
-          project.conanWithXerces:true 
-          project.conanWithCrashReporting:true 
-          project.conanProfiles:valentina
+          ${{ env.COMMON_QBS_ARGS }}
 
       - name: Deploy symbols
         if: env.WITH_CRASH_REPORTING == 'True'
@@ -242,23 +245,9 @@ jobs:
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
         run: >
           qbs build 
-          -f valentina.qbs 
-          -d ${{ runner.temp }}/build 
           -p 'Valentina DMG' 
           --force-probe-execution 
-          --jobs $(nproc) 
-          config:release 
-          modules.buildconfig.enableUnitTests:false 
-          modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} 
-          qbs.installRoot:${{ runner.temp }}/build/release/install-root 
-          profile:qt6 project.minimumMacosVersion:$MACOS_DEPLOYMENT_TARGET
-          moduleProviders.qbspkgconfig.extraPaths:$QTDIR/lib/pkgconfig
-          "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" 
-          modules.macdeployqt.libpath:$QTDIR/lib 
-          project.enableConan:true
-          project.conanWithXerces:true 
-          project.conanWithCrashReporting:true 
-          project.conanProfiles:valentina
+          ${{ env.COMMON_QBS_ARGS }}
 
       # Store the notarization credentials so that we can prevent a UI password dialog
       # from blocking the CI
