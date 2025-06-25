@@ -56,7 +56,7 @@ jobs:
     env:
       DEPLOY: ${{ matrix.qt.deploy }}
       WITH_CRASH_REPORTING: 'True'
-      MULTI_BUNDLE: ${{ matrix.bundle.label }}
+      MULTI_BUNDLE: ${{ matrix.bundle.multibundle }}
       DUMP_SYMS_VERSION: 'v2.3.5'
       MACOS_DEPLOYMENT_TARGET: ${{ matrix.qt.minimumMacosVersion }}
 
