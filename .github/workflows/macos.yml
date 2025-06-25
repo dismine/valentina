@@ -90,7 +90,6 @@ jobs:
           modules:      'qtimageformats'
           cache:        true
           setup-python: false
-          tools:        'tools_qtcreator,qt.tools.qtcreator'
 
       - name: Install Python dependencies
         run: |
@@ -192,6 +191,11 @@ jobs:
           python3 -m venv ~/.venv
           source ~/.venv/bin/activate
           pip3 install --upgrade pip 'dropbox>=12.0.2' py7zr conan==1.66.0 requests
+
+      - name: Install Qt Creator
+        uses: ./.github/actions/download-qtc
+        with:
+          version: '17.0.0'
 
       - name: Before build
         run: |
