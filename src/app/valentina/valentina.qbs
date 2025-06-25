@@ -15,7 +15,6 @@ VToolApp {
     Depends { name: "VFormatLib"; }
     Depends { name: "VMiscLib"; }
     Depends { name: "VGAnalyticsLib" }
-    Depends { name: "pdftops"; condition: qbs.targetOS.contains("macos") }
     Depends { name: "Tape"; condition: qbs.targetOS.contains("macos") && buildconfig.enableMultiBundle }
     Depends { name: "Puzzle"; condition: qbs.targetOS.contains("macos") && buildconfig.enableMultiBundle }
 
@@ -220,9 +219,6 @@ VToolApp {
             if (!buildconfig.enableMultiBundle)
                 apps.push("Tape", "Puzzle");
 
-            if (pdftops.pdftopsPresent)
-                apps.push("pdftops");
-
             if (buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled)
                 apps.push("crashpad_handler");
 
@@ -237,13 +233,6 @@ VToolApp {
         files: ["pdftops.exe"]
         qbs.install: true
         qbs.installDir: buildconfig.installBinaryPath
-    }
-
-    Group {
-        name: "pdftops MacOS"
-        condition: qbs.targetOS.contains("macos") && pdftops.pdftopsPresent
-        files: [pdftops.pdftopsPath]
-        fileTags: ["pdftops.in"]
     }
 
     Group {

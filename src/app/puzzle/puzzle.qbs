@@ -14,7 +14,6 @@ VToolApp {
     Depends { name: "FervorLib" }
     Depends { name: "multibundle"; }
     Depends { name: "VGAnalyticsLib" }
-    Depends { name: "pdftops"; condition: qbs.targetOS.contains("macos") }
 
     // Explicitly link to libcrypto and libssl to avoid error: Failed to load libssl/libcrypto.
     // Use moduleProviders.qbspkgconfig.extraPaths to define the missing dependency.
@@ -214,21 +213,11 @@ VToolApp {
         macdeployqt.targetApps: {
             var apps = [];
 
-            if (pdftops.pdftopsPresent)
-                apps.push("pdftops");
-
             if (buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled)
                 apps.push("crashpad_handler");
 
             return apps;
         }
-    }
-
-    Group {
-        condition: qbs.targetOS.contains("macos") && buildconfig.enableMultiBundle && pdftops.pdftopsPresent
-        name: "pdftops MacOS"
-        files: [pdftops.pdftopsPath]
-        fileTags: ["pdftops.in"]
     }
 
     freedesktop2.hicolorRoot: project.sourceDirectory + "/share/icons/"
