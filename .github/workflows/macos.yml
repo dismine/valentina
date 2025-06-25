@@ -282,7 +282,7 @@ jobs:
       - name: Deploy
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
         env:
-          VALENTINA_WORKING_DIR: $GITHUB_WORKSPACE
+          VALENTINA_WORKING_DIR: ${{ github.workspace }}
           CIRRUS_BRANCH: ${{ github.base_ref || github.ref_name }}
           CIRRUS_CHANGE_IN_REPO: ${{ steps.commit.outputs.hash }}
           TARGET_PLATFORM: ${{ matrix.qt.target }}

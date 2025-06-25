@@ -10,8 +10,8 @@ print_info() {
 
 check_failure() {
     if [ $? -ne 0 ] ; then
-        if [ -z $1 ] ; then
-            print_error $1
+        if [ -n "$1" ] ; then
+            print_error "$1"
         else
             print_error "Failure exit code is detected."
         fi
