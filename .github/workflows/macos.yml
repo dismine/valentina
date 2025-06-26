@@ -102,6 +102,7 @@ jobs:
           cmake ${HOME}/macdeployqt-main -GNinja -S ${HOME}/macdeployqt-main -B ${HOME}/macdeployqt-build-dir -DCMAKE_INSTALL_PREFIX=${HOME}/macdeployqt-install-dir -DCMAKE_PREFIX_PATH="${QT_DIR}" -DCMAKE_BUILD_TYPE=Release
           grep Qt6Core_VERSION_STRING ${HOME}/macdeployqt-build-dir/CMakeCache.txt || true
           cmake --build ${HOME}/macdeployqt-build-dir --target install
+          install_name_tool -add_rpath $QTDIR/lib ${HOME}/macdeployqt-install-dir/macdeployqt
 
       - name: Install Python dependencies
         run: |
