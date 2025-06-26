@@ -95,6 +95,14 @@ jobs:
       - name: Set path to Qt
         run: echo "QTDIR=${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos" >> $GITHUB_ENV
 
+      - name: Build macdeployqt
+        run: |
+          curl -LJ https://github.com/dismine/macdeployqt/archive/refs/heads/main.zip --output ${HOME}/macdeployqt-main.zip --silent
+          unzip ${HOME}/macdeployqt-main.zip -d ${HOME}
+          cmake ${HOME}/macdeployqt-main -GNinja -S ${HOME}/macdeployqt-main -B ${HOME}/macdeployqt-build-dir -DCMAKE_INSTALL_PREFIX=${HOME}/macdeployqt-install-dir -DCMAKE_PREFIX_PATH="${QT_DIR}" -DCMAKE_BUILD_TYPE=Release
+          grep Qt6Core_VERSION_STRING ${HOME}/macdeployqt-build-dir/CMakeCache.txt || true
+          cmake --build ${HOME}/macdeployqt-build-dir --target install
+
       - name: Install Python dependencies
         run: |
           python --version
@@ -225,9 +233,9 @@ jobs:
           qbs.installRoot:$GITHUB_WORKSPACE/build/release/install-root 
           profile:qt6 
           project.minimumMacosVersion:$MACOS_DEPLOYMENT_TARGET 
-          moduleProviders.qbspkgconfig.extraPaths:${{ env.QTDIR }}/lib/pkgconfig 
           \"modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME\" 
           modules.macdeployqt.libpath:${{ env.QTDIR }}/lib 
+          modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir 
           project.enableConan:true 
           project.conanWithXerces:true 
           project.conanWithCrashReporting:true 
