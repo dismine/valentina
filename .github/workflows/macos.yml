@@ -486,8 +486,8 @@ jobs:
           conan profile update settings.os=Macos valentina
           conan profile update settings.os_build=Macos valentina
           conan profile update settings.os.version=$MACOS_DEPLOYMENT_TARGET valentina
-          conan profile update settings.arch=x86_64 valentina
-          conan profile update settings.arch_build=x86_64 valentina
+          conan profile update settings.arch=armv8 valentina
+          conan profile update settings.arch_build=armv8 valentina
           conan profile update settings.compiler=apple-clang valentina
           conan profile update settings.compiler.cppstd=17 valentina
           conan profile update settings.compiler.libcxx=libc++ valentina
