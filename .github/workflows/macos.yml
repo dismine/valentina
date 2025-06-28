@@ -52,10 +52,10 @@ jobs:
             deploy: 'true'
           - install: 6.4.3
             label: Qt6_4
-            build_target: '10.14+'
+            build_target: '10.15+'
             xcode: '15.2'
-            target: 'MacOS_10_14+'
-            minimumMacosVersion: '10.14'
+            target: 'MacOS_10_15+'
+            minimumMacosVersion: '10.15'
             deploy: 'true'
         bundle:
           - label: multibundle
