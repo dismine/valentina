@@ -171,7 +171,6 @@ def run_clean(refresh_token):
                         item_types[archive_type].append(entry)
                         break
 
-        # Keep only the first two files of each type
         to_delete = []
         for items in item_types.values():
             # Separate files and folders
@@ -184,8 +183,8 @@ def run_clean(refresh_token):
             # Sort folders by last modified time on server
             folders = sorted(folders, key=lambda f: folder_mod_time(dbx, f))
 
-            # Keep only the first two items of each type
-            to_delete += files[:-2] + folders[:-2]
+            # Keep only the latest item of each type
+            to_delete += files[:-1] + folders[:-1]
 
         # Delete the remaining items
         for item in to_delete:
