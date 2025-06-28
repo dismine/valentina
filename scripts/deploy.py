@@ -149,14 +149,14 @@ def run_clean(refresh_token):
                         r'^valentina-portable-Windows7\+-mingw-x86-Qt.*-(?:develop|master)-[a-f0-9]{40}\.7z$',
                         r'^valentina-portable-Windows10\+-msvc-x64-Qt.*-(?:develop|master)-[a-f0-9]{40}\.7z$',
                         r'^valentina-portable-Windows7\+-msvc-x86-Qt.*-(?:develop|master)-[a-f0-9]{40}\.7z$',
-                        r'^valentina-macOS_12.4\+-Qt.*-x64-(?:develop|master)-[a-f0-9]{40}\.dmg$',
-                        r'^valentina-macOS_12.4\+-Qt.*-x64-(?:develop|master)-multibundle-[a-f0-9]{40}\.dmg$',
+                        r'^valentina-macOS_10_14\+-Qt.*-x64-(?:develop|master)-[a-f0-9]{40}\.dmg$',
+                        r'^valentina-macOS_10_14\+-Qt.*-x64-(?:develop|master)-multibundle-[a-f0-9]{40}\.dmg$',
                         r'^valentina-macOS_12\+-Qt.*-x64-(?:develop|master)-[a-f0-9]{40}\.dmg$',
                         r'^valentina-macOS_12\+-Qt.*-x64-(?:develop|master)-multibundle-[a-f0-9]{40}\.dmg$',
-                        r'^valentina-macOS_13\+-Qt.*-x64-(?:develop|master)-[a-f0-9]{40}\.dmg$',
-                        r'^valentina-macOS_13\+-Qt.*-x64-(?:develop|master)-multibundle-[a-f0-9]{40}\.dmg$',
-                        r'^valentina-macOS.*\+-Qt.*-arm.*-(?:develop|master)-[a-f0-9]{40}\.dmg$',
-                        r'^valentina-macOS.*\+-Qt.*-arm.*-(?:develop|master)-multibundle-[a-f0-9]{40}\.dmg$',
+                        r'^valentina-macOS_12\+-Qt.*-arm.*-(?:develop|master)-[a-f0-9]{40}\.dmg$',
+                        r'^valentina-macOS_12\+-Qt.*-arm.*-(?:develop|master)-multibundle-[a-f0-9]{40}\.dmg$',
+                        r'^valentina-macOS_11\+-Qt.*-arm.*-(?:develop|master)-[a-f0-9]{40}\.dmg$',
+                        r'^valentina-macOS_11\+-Qt.*-arm.*-(?:develop|master)-multibundle-[a-f0-9]{40}\.dmg$',
                         r'^valentina-Linux-x86_64-(?:develop|master)-[a-f0-9]{40}\.AppImage$']
 
         item_types = {}
