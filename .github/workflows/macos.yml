@@ -36,7 +36,7 @@ env:
 
 jobs:
   intel_build:
-    name: MacOS ${{ matrix.qt.build_target }} Qt ${{ matrix.qt.install }} (${{ matrix.bundle.label }})
+    name: MacOS ${{ matrix.qt.build_target }} intel Qt ${{ matrix.qt.install }} (${{ matrix.bundle.label }})
     runs-on: macos-13
 
     strategy:
@@ -307,7 +307,7 @@ jobs:
           QT_VERSION: ${{ matrix.qt.label }}
         run: ./scripts/cirrus-deploy.sh
   arm_build:
-    name: MacOS ${{ matrix.qt.build_target }} Qt ${{ matrix.qt.install }} (${{ matrix.bundle.label }})
+    name: MacOS ${{ matrix.qt.build_target }} arm Qt ${{ matrix.qt.install }} (${{ matrix.bundle.label }})
     runs-on: macos-14
 
     strategy:
