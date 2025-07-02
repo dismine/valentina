@@ -52,7 +52,7 @@ linux_qt6_task_template: &LINUX_QT6_TASK_TEMPLATE
 linux_qt6_sonar_task_template: &LINUX_QT6_TASK_SONAR_TEMPLATE
   << : *QBS_TASK_FILTER
   install_script:
-    - bash -c "$PACKAGE_MANAGER_INSTALL -y qt6-base-dev qt6-l10n-tools libqt6svg6-dev qt6-base-dev-tools qmake6 libxerces-c-dev poppler-utils libgl1-mesa-dev"
+    - bash -c "$PACKAGE_MANAGER_INSTALL -y qt6-base-dev qt6-l10n-tools libqt6svg6-dev qt6-base-dev-tools libxerces-c-dev poppler-utils libgl1-mesa-dev"
     - git fetch --tags
   build_script:
     - uname -a
@@ -119,12 +119,14 @@ appimage_task_template: &APPIMAGE_TASK_TEMPLATE
   conan_cache:
     folder: "~/.conan/data"
   install_script:
-    - bash -c "$PACKAGE_MANAGER_INSTALL qt515base qt515svg qt515tools qt515xmlpatterns qt515translations qt515doc qt515imageformats poppler-utils git xvfb ccache build-essential libgl1-mesa-dev libicu-dev python3-pip cmake"
+    - bash -c "$PACKAGE_MANAGER_INSTALL qt6-base-dev libqt6svg6-dev qt6-translations-l10n qt6-image-formats-plugins qt6-l10n-tools qt6-base-dev-tools libxerces-c-dev poppler-utils git xvfb ccache build-essential libgl1-mesa-dev libicu-dev cmake clang-15 llvm"
     - git fetch --tags
     - python3 --version
     - pip3 install --user --upgrade pip
     - export PATH="${PATH}:/root/.local/bin"
-    - pip3 install --user --upgrade 'dropbox>=12.0.2' py7zr 'pyzstd<=0.16.0' conan==1.65.0 requests
+    - pip3 install --user --upgrade 'dropbox>=12.0.2' py7zr 'pyzstd<=0.16.0' conan==1.66.0 requests
+    - update-alternatives --install /usr/bin/cc cc /usr/bin/clang 100
+    - update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++ 100
   build_script:
     - uname -a
     - mkdir -pm 0700 $XDG_RUNTIME_DIR
@@ -133,12 +135,12 @@ appimage_task_template: &APPIMAGE_TASK_TEMPLATE
     - ccache --set-config sloppiness=pch_defines,time_macros max_size="$CCACHE_SIZE"
     - export PATH="${PATH}:/root/.local/bin"
     - echo $PATH
-    - which qmake
+    - which qmake6
     - which qbs
     - pwd
     - ls -l /usr/bin/ | grep -E "${COMPILER_REGEX}"
     - ${COMPILER} --version
-    - qmake --version
+    - qmake6 --version
     - qbs --version
     - conan profile new valentina
     - conan profile update settings.build_type=Release valentina
@@ -147,17 +149,17 @@ appimage_task_template: &APPIMAGE_TASK_TEMPLATE
     - conan profile update settings.arch=x86_64 valentina
     - conan profile update settings.arch_build=x86_64 valentina
     - conan profile update settings.compiler=clang valentina
-    - conan profile update settings.compiler.libcxx=libstdc++11 valentina
-    - conan profile update settings.compiler.version=10 valentina
+    - conan profile update settings.compiler.libcxx=libstdc++17 valentina
+    - conan profile update settings.compiler.version=15 valentina
     - qbs setup-toolchains /usr/bin/${COMPILER} ${COMPILER}
-    - qbs setup-qt /opt/qt515/bin/qmake qt5
-    - qbs config defaultProfile qt5
-    - qbs config profiles.qt5.baseProfile ${COMPILER}
+    - qbs setup-qt /usr/bin/qmake6 qt6
+    - qbs config defaultProfile qt6
+    - qbs config profiles.qt6.baseProfile ${COMPILER}
     - conan install . -s os=Linux --build=missing -o with_crash_reporting=True -pr=valentina
     - echo $CIRRUS_WORKING_DIR
-    - qbs build -f valentina.qbs -d $CIRRUS_WORKING_DIR/build --jobs $(nproc) profile:qt5 config:release modules.buildconfig.enableCcache:${ENABLE_CCACHE} qbs.installRoot:$CIRRUS_WORKING_DIR/build/AppDir modules.buildconfig.enableAppImage:true modules.buildconfig.enableRPath:false project.conanWithCrashReporting:true project.enableConan:true project.conanProfiles:valentina
-    - qbs -p autotest-runner -d build profile:qt5 config:release
-    - export CRASH_QT_VERSION=$(/opt/qt515/bin/qmake -query QT_VERSION | awk -F. '{print $1 "_" $2}')
+    - qbs build -f valentina.qbs -d $CIRRUS_WORKING_DIR/build --jobs $(nproc) profile:qt6 config:release modules.buildconfig.enableCcache:${ENABLE_CCACHE} qbs.installRoot:$CIRRUS_WORKING_DIR/build/AppDir modules.buildconfig.enableAppImage:true modules.buildconfig.enableRPath:false project.conanWithCrashReporting:true project.enableConan:true project.conanProfiles:valentina
+    - qbs -p autotest-runner -d build profile:qt6 config:release
+    - export CRASH_QT_VERSION=$(/usr/bin/qmake6 -query QT_VERSION | awk -F. '{print $1 "_" $2}')
     - export CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)
     - python3 scripts/symupload.py $CIRRUS_WORKING_DIR/build/AppDir $VALENTINA_VERSION g$CRASH_SHORT_SHA $CRASH_QT_VERSION --clean
     - appimage-builder --recipe dist/AppImage/AppImageBuilder.yml --appdir $CIRRUS_WORKING_DIR/build/AppDir --skip-test
@@ -197,7 +199,7 @@ linux_task:
             cpu: 8
             memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
     - container:
-        image: dismine/appimage-builder:latest
+        image: dismine/valentina-appimage-builder:latest
       env:
         COMPILER: clang
         COMPILER_REGEX: clang
@@ -208,7 +210,6 @@ linux_task:
           env:
             ACCESS_TOKEN: ENCRYPTED[81e0b2381ffb628b73f5c94f834010e6631191e0ad03cdd0850d440fb2737a74b68131d842030f010c1bf73ab4cdc1ae]
             DEPLOY: "true"
-            QT_SELECT: "qt5"
             ENABLE_CCACHE: true
             VERSION: "continuous"
             QT_VERSION: Qt6

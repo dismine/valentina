@@ -13,19 +13,17 @@ AppDir:
     - amd64
     allow_unauthenticated: true
     sources:
-    - sourceline: deb http://us.archive.ubuntu.com/ubuntu/ focal main restricted
-    - sourceline: deb http://us.archive.ubuntu.com/ubuntu/ focal-updates main restricted
-    - sourceline: deb http://us.archive.ubuntu.com/ubuntu/ focal universe
-    - sourceline: deb http://us.archive.ubuntu.com/ubuntu/ focal-updates universe
-    - sourceline: deb http://us.archive.ubuntu.com/ubuntu/ focal multiverse
-    - sourceline: deb http://us.archive.ubuntu.com/ubuntu/ focal-updates multiverse
-    - sourceline: deb http://us.archive.ubuntu.com/ubuntu/ focal-backports main restricted
+    - sourceline: deb http://us.archive.ubuntu.com/ubuntu/ jammy main restricted
+    - sourceline: deb http://us.archive.ubuntu.com/ubuntu/ jammy-updates main restricted
+    - sourceline: deb http://us.archive.ubuntu.com/ubuntu/ jammy universe
+    - sourceline: deb http://us.archive.ubuntu.com/ubuntu/ jammy-updates universe
+    - sourceline: deb http://us.archive.ubuntu.com/ubuntu/ jammy multiverse
+    - sourceline: deb http://us.archive.ubuntu.com/ubuntu/ jammy-updates multiverse
+    - sourceline: deb http://us.archive.ubuntu.com/ubuntu/ jammy-backports main restricted
         universe multiverse
-    - sourceline: deb http://security.ubuntu.com/ubuntu focal-security main restricted
-    - sourceline: deb http://security.ubuntu.com/ubuntu focal-security universe
-    - sourceline: deb http://security.ubuntu.com/ubuntu focal-security multiverse
-    - sourceline: deb http://ppa.launchpad.net/beineri/opt-qt-5.15.4-focal/ubuntu
-        focal main
+    - sourceline: deb http://security.ubuntu.com/ubuntu jammy-security main restricted
+    - sourceline: deb http://security.ubuntu.com/ubuntu jammy-security universe
+    - sourceline: deb http://security.ubuntu.com/ubuntu jammy-security multiverse
     include:
     - xdg-desktop-portal-kde
     - libgtk-3-0
@@ -37,78 +35,29 @@ AppDir:
     - libgdk-pixbuf2.0-0
     - libgdk-pixbuf2.0-bin
     - libgdk-pixbuf2.0-common
-    - qt515base
-    - qt515imageformats
-    - qt515svg
-    - qt515xmlpatterns
-    - qt515translations
     - libpango-1.0-0
+    - libqt6concurrent6:amd64
+    - libqt6core6:amd64
+    - libqt6gui6:amd64
+    - libqt6network6:amd64
+    - libqt6svg6:amd64
+    - libqt6printsupport6:amd64
+    - libqt6concurrent6:amd64
+    - libqt6widgets6:amd64
+    - libqt6xml6:amd64
+    - qt6-image-formats-plugins:amd64
+    - qt6-translations-l10n
+    - libxerces-c3.2
   files:
     include: []
     exclude:
     - usr/share/man
-    - usr/share/doc/*/README.*
-    - usr/share/doc/*/changelog.*
-    - usr/share/doc/*/NEWS.*
-    - usr/share/doc/*/TODO.*
-    - usr/lib/x86_64-linux-gnu/libQt5*
-    - opt/qt515/include
-    - opt/qt515/bin/opt/qt515/bin/fixqt4headers.pl
-    - opt/qt515/bin/moc
-    - opt/qt515/bin/qdbuscpp2xml
-    - opt/qt515/bin/qdbusxml2cpp
-    - opt/qt515/bin/qlalr
-    - opt/qt515/bin/qmake
-    - opt/qt515/bin/qt.conf
-    - opt/qt515/bin/qt515-env.sh
-    - opt/qt515/bin/qvkgen
-    - opt/qt515/bin/rcc
-    - opt/qt515/bin/syncqt.pl
-    - opt/qt515/bin/uic
-    - opt/qt515/doc
-    - opt/qt515/examples
-    - opt/qt515/mkspecs
-    - opt/qt515/lib/cmake
-    - opt/qt515/lib/metatypes
-    - opt/qt515/lib/pkgconfig
-    - opt/qt515/lib/*.a
-    - opt/qt515/lib/*.la
-    - opt/qt515/lib/*.prl
-    - opt/qt515/lib/libQt5AccessibilitySupport.*
-    - opt/qt515/lib/libQt5Bootstrap.*
-    - opt/qt515/lib/libQt5DeviceDiscoverySupport.*
-    - opt/qt515/lib/libQt5EdidSupport.*
-    - opt/qt515/lib/libQt5EglFSDeviceIntegration.*
-    - opt/qt515/lib/libQt5EglSupport.*
-    - opt/qt515/lib/libQt5EventDispatcherSupport.*
-    - opt/qt515/lib/libQt5FbSupport.*
-    - opt/qt515/lib/libQt5InputSupport.*
-    - opt/qt515/lib/libQt5LinuxAccessibilitySupport.*
-    - opt/qt515/lib/libQt5PlatformCompositorSupport.*
-    - opt/qt515/lib/libQt5ServiceSupport.*
-    - opt/qt515/lib/libQt5VulkanSupport.*
-    - opt/qt515/plugins/egldeviceintegrations
-    - opt/qt515/plugins/platforminputcontexts
-    - opt/qt515/plugins/sqldrivers
-    - opt/qt515/translations/assistant*.qm
-    - opt/qt515/translations/designer*.qm
-    - opt/qt515/translations/linguist*.qm
-    - opt/qt515/translations/qt_help*.qm
-    - opt/qt515/translations/qtconnectivity*.qm
-    - opt/qt515/translations/qtdeclarative*.qm
-    - opt/qt515/translations/qtlocation*.qm
-    - opt/qt515/translations/qtmultimedia*.qm
-    - opt/qt515/translations/qtquickcontrols2*.qm
-    - opt/qt515/translations/qtquickcontrols*.qm
-    - opt/qt515/translations/qtscript*.qm
-    - opt/qt515/translations/qtserialport*.qm
-    - opt/qt515/translations/qtwebengine*.qm
-    - opt/qt515/translations/qtwebsockets*.qm
+    - usr/share/doc
   runtime:
     env:
-      APPDIR_LIBRARY_PATH: "$APPDIR:$APPDIR/runtime/compat/:$APPDIR/opt/qt515/lib:$APPDIR/usr/lib/x86_64-linux-gnu:$APPDIR/lib/x86_64-linux-gnu:$APPDIR/usr/lib:$APPDIR/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders:$APPDIR/usr/local/lib/valentina"
-      LD_LIBRARY_PATH: "$APPDIR:$APPDIR/runtime/compat/:$APPDIR/opt/qt515/lib:$APPDIR/usr/lib/x86_64-linux-gnu:$APPDIR/lib/x86_64-linux-gnu:$APPDIR/usr/lib:$APPDIR/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders:$APPDIR/usr/local/lib/valentina"
-      QT_PLUGIN_PATH: "$APPDIR/opt/qt515/plugins"
+      APPDIR_LIBRARY_PATH: "$APPDIR:$APPDIR/runtime/compat/:$APPDIR/usr/lib/x86_64-linux-gnu:$APPDIR/lib/x86_64-linux-gnu:$APPDIR/usr/lib:$APPDIR/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders:$APPDIR/usr/local/lib/valentina"
+      LD_LIBRARY_PATH: "$APPDIR:$APPDIR/runtime/compat/:$APPDIR/usr/lib/x86_64-linux-gnu:$APPDIR/lib/x86_64-linux-gnu:$APPDIR/usr/lib:$APPDIR/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders:$APPDIR/usr/local/lib/valentina"
+      QT_PLUGIN_PATH: "$APPDIR/usr/lib/x86_64-linux-gnu/qt6/plugins"
       QT_QPA_PLATFORMTHEME: xdgdesktopportal
       GDK_PIXBUF_MODULEDIR: $APPDIR/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
       GDK_PIXBUF_MODULE_FILE: $APPDIR/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders.cache
@@ -132,3 +81,4 @@ AppDir:
 AppImage:
   arch: x86_64
   update-information: guess
+  comp: zstd
