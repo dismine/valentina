@@ -4,7 +4,7 @@ from conan import ConanFile
 
 class Recipe(ConanFile):
   settings = "os"
-  requires = "xerces-c/[~3.2]", "sentry-crashpad/0.6.5"
+  requires = "xerces-c/[~3.3]", "sentry-crashpad/0.6.5"
   options = {
       "with_xerces": [True, False], 
       "with_crash_reporting": [True, False]
