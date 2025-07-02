@@ -141,9 +141,9 @@ Valentina welcomes contributions from the community, and your involvement can ma
 
 3. **Localization on Transifex:**
 
-   Help us make Valentina accessible to a global audience by contributing to localization efforts on [Transifex](https://explore.transifex.com/valentina/valentina-project/). Contribute translations, review existing ones, or suggest improvements to ensure that Valentina is available in multiple languages.  
+   Help us make Valentina accessible to a global audience by contributing to localization efforts on [Transifex](https://app.transifex.com/valentina/valentina-project/). Contribute translations, review existing ones, or suggest improvements to ensure that Valentina is available in multiple languages.  
      [![Translation](https://img.shields.io/badge/Translate-on_Transifex-green?logo=transifex)](
-   https://explore.transifex.com/valentina/valentina-project/)
+   https://app.transifex.com/valentina/valentina-project/)
 
 4. **Code Contributions:**
    If you're a developer and want to contribute code to Valentina, please follow our [Contribution Guidelines]. Your contributions can include bug fixes, new features, or improvements to the existing codebase.
