@@ -2621,27 +2621,27 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="748"/>
         <source>No data for the X dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sin datos para la dimension X.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="749"/>
         <source>No data for the Y dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>No hay datos para la dimension Y.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="750"/>
         <source>No data for the Z dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>No hay datos para la dimension Z.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="751"/>
         <source>No data for the W dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>No hay datos para la dimension W.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="561"/>
         <source>Area units</source>
-        <translation type="unfinished"></translation>
+        <translation>Unidades de area</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="679"/>
@@ -3322,7 +3322,7 @@
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="69"/>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.cpp" line="807"/>
         <source>0 results</source>
-        <translation type="unfinished"></translation>
+        <translation>0 resultados</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="96"/>
@@ -3483,12 +3483,12 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="325"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="341"/>
         <source>Invalid suffix</source>
-        <translation type="unfinished"></translation>
+        <translation>Sufijo invalido</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="364"/>
         <source>Invalid group name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre de grupo invalido</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="393"/>
@@ -3503,7 +3503,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="566"/>
         <source>Invalid point</source>
-        <translation type="unfinished"></translation>
+        <translation>Punto invalido</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="631"/>
@@ -3634,12 +3634,12 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="342"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="358"/>
         <source>Invalid suffix</source>
-        <translation type="unfinished"></translation>
+        <translation>Sufijo invalido</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="381"/>
         <source>Invalid group name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre de grupo invalido</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="410"/>
@@ -4069,7 +4069,7 @@
         <location filename="../../src/app/valentina/dialogs/dialoghistory.ui" line="74"/>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="693"/>
         <source>0 results</source>
-        <translation type="unfinished"></translation>
+        <translation>0 resultados</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.ui" line="101"/>
@@ -4413,7 +4413,7 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="967"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1001"/>
         <source>0 results</source>
-        <translation type="unfinished"></translation>
+        <translation>0 resultados</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="126"/>
@@ -5825,12 +5825,12 @@ Aplicar características de todos modos?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="518"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="534"/>
         <source>Invalid suffix</source>
-        <translation type="unfinished"></translation>
+        <translation>Sufijo invalido</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="557"/>
         <source>Invalid group name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre de grupo invalido</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="586"/>
@@ -8193,12 +8193,12 @@ Aplicar características de todos modos?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="420"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="436"/>
         <source>Invalid suffix</source>
-        <translation type="unfinished"></translation>
+        <translation>Sufijo invalido</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="459"/>
         <source>Invalid group name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre de grupo invalido</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="553"/>
@@ -9334,12 +9334,12 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectlanguage.ui" line="14"/>
         <source>Select language</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar idioma</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectlanguage.ui" line="24"/>
         <source>Select user interface language</source>
-        <translation type="unfinished"></translation>
+        <translation>idioma</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectlanguage.ui" line="33"/>
@@ -9426,7 +9426,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.cpp" line="453"/>
         <source>Please, select at least one dimension</source>
-        <translation type="unfinished"></translation>
+        <translation>Por favor, seleccione al menos una dimensión</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.cpp" line="457"/>
@@ -9444,7 +9444,7 @@ Aplicar características de todos modos?</translation>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.ui" line="321"/>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.ui" line="459"/>
         <source>Custom name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre del cliente</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.ui" line="54"/>
@@ -9475,7 +9475,7 @@ Aplicar características de todos modos?</translation>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.ui" line="434"/>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.ui" line="572"/>
         <source>Body Measurement</source>
-        <translation type="unfinished"></translation>
+        <translation>Medidas del cuerpo</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.ui" line="293"/>
@@ -10531,7 +10531,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vlayout/vfoldline.cpp" line="369"/>
         <source>Cut On Fold</source>
-        <translation type="unfinished"></translation>
+        <translation>Cortar en el doblez</translation>
     </message>
 </context>
 <context>
@@ -11114,12 +11114,12 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1681"/>
         <source>Interactive tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Herramientas interactivas</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1684"/>
         <source>Ctrl+D</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl-D</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1695"/>
@@ -13633,7 +13633,7 @@ Falta: %1
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="224"/>
         <source>Translate formula</source>
-        <translation type="unfinished"></translation>
+        <translation>Traducir fórmula</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="255"/>
@@ -13824,7 +13824,7 @@ Falta: %1
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="211"/>
         <source>Interactive tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Herramientas interactivas</translation>
     </message>
 </context>
 <context>
@@ -15227,25 +15227,25 @@ Esta opción surtirá efecto después de reiniciar.</translation>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="464"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="710"/>
         <source>No data for the X dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sin datos para la dimension X.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="465"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="711"/>
         <source>No data for the Y dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>No hay datos para la dimension Y.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="466"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="712"/>
         <source>No data for the Z dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>No hay datos para la dimension Z.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="467"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="713"/>
         <source>No data for the W dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>No hay datos para la dimension W.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/undocommands/vpundopiecezvaluemove.cpp" line="66"/>
@@ -15748,7 +15748,7 @@ Esta opción surtirá efecto después de reiniciar.</translation>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="109"/>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1952"/>
         <source>0 results</source>
-        <translation type="unfinished"></translation>
+        <translation>0 resultados</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="136"/>
@@ -17487,7 +17487,7 @@ Quieres guardar los cambios?</translation>
         <location filename="../../src/app/tape/tmainwindow.ui" line="115"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="5299"/>
         <source>0 results</source>
-        <translation type="unfinished"></translation>
+        <translation>0 resultados</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="142"/>
@@ -18751,7 +18751,7 @@ Quieres guardar los cambios?</translation>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="125"/>
         <source>Translate formula</source>
-        <translation type="unfinished"></translation>
+        <translation>Traducir fórmula</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="138"/>
@@ -21408,17 +21408,17 @@ Quieres guardar los cambios?</translation>
         <translation>No se puede guardar el fichero “%1”. Error: %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="539"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="519"/>
         <source>Cannot set printer page size</source>
         <translation>No se puede establecer el tamaño de página de la impresora</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="553"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="533"/>
         <source>Cannot set printer margins</source>
         <translation>No se pueden introducir márgenes de impresora</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="560"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="540"/>
         <source>Can&apos;t open file &apos;%1&apos;</source>
         <translation>No se puede abrir el archivo &apos;%1&apos;</translation>
     </message>
@@ -21428,7 +21428,7 @@ Quieres guardar los cambios?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="509"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="489"/>
         <source>Creating file &apos;%1&apos; failed! %2</source>
         <translation>¡La creación del archivo &apos;%1&apos; falló! %2</translation>
     </message>
@@ -21449,32 +21449,32 @@ Quieres guardar los cambios?</translation>
         <translation>No se puedre crear un fichero HP-GL.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="577"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="557"/>
         <source>(flat) files</source>
         <translation>archivos (planos)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="578"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="558"/>
         <source>files</source>
         <translation>archivos</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="587"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="567"/>
         <source>Image files</source>
         <translation>Archivos de imagen</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="617"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="597"/>
         <source>tiled</source>
         <translation>mosaicos</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="619"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="599"/>
         <source>Numerical control</source>
         <translation>Control numerico</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="621"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="601"/>
         <source>Raw Layout Data</source>
         <translation type="unfinished"></translation>
     </message>
