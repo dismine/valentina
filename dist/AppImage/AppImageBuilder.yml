@@ -45,6 +45,8 @@ AppDir:
     - libqt6concurrent6:amd64
     - libqt6widgets6:amd64
     - libqt6xml6:amd64
+    - libqt6openglwidgets6:amd64
+    - libqt6opengl6:amd64
     - qt6-image-formats-plugins:amd64
     - qt6-translations-l10n
     - libxerces-c3.2
