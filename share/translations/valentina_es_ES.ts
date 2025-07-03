@@ -2646,7 +2646,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="679"/>
         <source>Piece full area</source>
-        <translation type="unfinished"></translation>
+        <translation>Area completa de la pieza</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="680"/>
