@@ -147,7 +147,7 @@ appimage_task_template: &APPIMAGE_TASK_TEMPLATE
     - conan profile update settings.arch=x86_64 valentina
     - conan profile update settings.arch_build=x86_64 valentina
     - conan profile update settings.compiler=clang valentina
-    - conan profile update settings.compiler.libcxx=libstdc++17 valentina
+    - conan profile update settings.compiler.libcxx=libstdc++11 valentina
     - conan profile update settings.compiler.version=15 valentina
     - qbs setup-toolchains /usr/bin/${COMPILER} ${COMPILER}
     - qbs setup-qt /usr/bin/qmake6 qt6
