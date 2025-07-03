@@ -124,8 +124,6 @@ appimage_task_template: &APPIMAGE_TASK_TEMPLATE
     - python3 --version
     - export PATH="${PATH}:/root/.local/bin"
     - pip3 install --user --upgrade 'dropbox>=12.0.2' py7zr 'pyzstd<=0.16.0' conan==1.66.0 requests
-    - update-alternatives --install /usr/bin/cc cc /usr/bin/clang 100
-    - update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++ 100
   build_script:
     - uname -a
     - mkdir -pm 0700 $XDG_RUNTIME_DIR
