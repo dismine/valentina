@@ -30,10 +30,9 @@ jobs:
     strategy:
       matrix:
         qt:
+          # LTS release
           - install: 6.8.3
             label: Qt6_8
-          - install: 6.9.0
-            label: Qt6_9
 
     env:
       DEPLOY: 'true'
