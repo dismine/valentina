@@ -12,9 +12,6 @@ env:
 qbs_task_filter: &QBS_TASK_FILTER
   skip: "!changesInclude('.cirrus.yml', 'scripts/symupload.py', '**.{h,hpp,cpp,c,ts,ui,png,qbs,js}')"
 
-qmake_task_filter: &QMAKE_TASK_FILTER
-  skip: "!changesInclude('.cirrus.yml', '**.{h,hpp,cpp,c,pro,pri,ts,ui,png}')"
-
 sonar_task_filter: &SONAR_TASK_FILTER
   skip: "!changesInclude('**.{h,hpp,cpp,c}')"
 
@@ -65,6 +62,10 @@ linux_qt6_sonar_task_template: &LINUX_QT6_TASK_SONAR_TEMPLATE
     - which qbs
     - pwd
     - ls -l /usr/bin/ | grep -E "${COMPILER_REGEX}"
+    - sudo ln -s /usr/bin/clang-15 /usr/bin/clang
+    - sudo ln -s /usr/bin/clang++-15 /usr/bin/clang++
+    - sudo update-alternatives --install /usr/bin/cc cc /usr/bin/clang 100
+    - sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++ 100
     - ${COMPILER} --version
     - qmake6 --version
     - qbs --version
