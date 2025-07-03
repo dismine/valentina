@@ -62,10 +62,6 @@ linux_qt6_sonar_task_template: &LINUX_QT6_TASK_SONAR_TEMPLATE
     - which qbs
     - pwd
     - ls -l /usr/bin/ | grep -E "${COMPILER_REGEX}"
-    - sudo ln -s /usr/bin/clang-15 /usr/bin/clang
-    - sudo ln -s /usr/bin/clang++-15 /usr/bin/clang++
-    - sudo update-alternatives --install /usr/bin/cc cc /usr/bin/clang 100
-    - sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++ 100
     - ${COMPILER} --version
     - qmake6 --version
     - qbs --version
@@ -137,6 +133,10 @@ appimage_task_template: &APPIMAGE_TASK_TEMPLATE
     - which qbs
     - pwd
     - ls -l /usr/bin/ | grep -E "${COMPILER_REGEX}"
+    - sudo ln -s /usr/bin/clang-15 /usr/bin/clang
+    - sudo ln -s /usr/bin/clang++-15 /usr/bin/clang++
+    - sudo update-alternatives --install /usr/bin/cc cc /usr/bin/clang 100
+    - sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++ 100
     - ${COMPILER} --version
     - qmake6 --version
     - qbs --version
