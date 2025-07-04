@@ -1,8 +1,5 @@
 # appimage-builder recipe see https://appimage-builder.readthedocs.io for details
 version: 1
-script:
-  # Remove any previous build
-  - rm -rf $TARGET_APPDIR  || true
 
 AppDir:
   app_info:
@@ -139,6 +136,11 @@ AppDir:
   after_bundle: |
     # Provide a fallback /bin/sh
     ln -s bash $TARGET_APPDIR/bin/sh
+
+    # Strip only ELF executables and continue on error
+    while IFS= read -r file; do
+      file "$file" | grep -q ELF && strip --strip-unneeded "$file" 2>/dev/null || true
+    done < <(find "$TARGET_APPDIR" -type f -executable)
     
     # Strip .note.ABI-tag from Qt6 libraries
     find "$TARGET_APPDIR" -type f -name 'libQt6*.so*' -exec strip --remove-section=.note.ABI-tag {} + 2>/dev/null || true
