@@ -1,5 +1,9 @@
 # appimage-builder recipe see https://appimage-builder.readthedocs.io for details
 version: 1
+script:
+  # Remove any previous build
+  - rm -rf $TARGET_APPDIR  || true
+
 AppDir:
   app_info:
     id: ua.com.smart-pattern.valentina
@@ -25,7 +29,7 @@ AppDir:
     - sourceline: deb http://security.ubuntu.com/ubuntu jammy-security universe
     - sourceline: deb http://security.ubuntu.com/ubuntu jammy-security multiverse
     include:
-    - xdg-desktop-portal-kde
+    - bash
     - libgtk-3-0
     - libgtk-3-common
     - librsvg2-2
@@ -50,11 +54,50 @@ AppDir:
     - qt6-image-formats-plugins:amd64
     - qt6-translations-l10n
     - libxerces-c3.2
+    exclude:
+    - humanity-icon-theme
+    - hicolor-icon-theme
+    - adwaita-icon-theme
+    - ubuntu-mono
+    - perl
+    - libicu60
+    - gnupg
   files:
     include: []
     exclude:
+    - usr/lib/x86_64-linux-gnu/gconv
     - usr/share/man
     - usr/share/doc
+    - usr/share/bug
+    - usr/share/menu
+    - usr/include
+    - usr/share/bash-completion
+    - usr/lib/*/cmake
+    - usr/lib/*/qt6/mkspecs
+    - usr/lib/*/systemd
+    - usr/lib/*/girepository*
+    - '**/hooks/*'
+    - '**/clean-up-*'
+    - '**/init.d/*'
+    - '**/rc?.d/*'
+    - '**/*.prl'
+    - usr/share/qt6/translations/assistant_*
+    - usr/share/qt6/translations/designer_*
+    - usr/share/qt6/translations/linguist_*
+    - usr/share/qt6/translations/qt_help_*
+    - usr/share/qt6/translations/qtbase_*
+    - usr/share/qt6/translations/qtconnectivity_*
+    - usr/share/qt6/translations/qtdeclarative_*
+    - usr/share/qt6/translations/qtlocation_*
+    - usr/share/qt6/translations/qtmultimedia_*
+    - usr/share/qt6/translations/qtserialport_*
+    - usr/share/qt6/translations/qtwebengine_*
+    - usr/share/lintian/**
+    - usr/share/thumbnailers/**
+  after_bundle: |
+    ln -s bash $TARGET_APPDIR/bin/sh 
+
+    find $TARGET_APPDIR -type f -executable -exec strip --strip-unneeded {} + 2>/dev/null
   runtime:
     env:
       APPDIR_LIBRARY_PATH: "$APPDIR:$APPDIR/runtime/compat/:$APPDIR/usr/lib/x86_64-linux-gnu:$APPDIR/lib/x86_64-linux-gnu:$APPDIR/usr/lib:$APPDIR/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders:$APPDIR/usr/local/lib/valentina"
@@ -65,20 +108,8 @@ AppDir:
       GDK_PIXBUF_MODULE_FILE: $APPDIR/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders.cache
       GDK_BACKEND: x11
   test:
-    fedora-30:
-      image: appimagecrafters/tests-env:fedora-30
-      command: ./AppRun
-    debian-stable:
-      image: appimagecrafters/tests-env:debian-stable
-      command: ./AppRun
-    archlinux-latest:
-      image: appimagecrafters/tests-env:archlinux-latest
-      command: ./AppRun
-    centos-7:
-      image: appimagecrafters/tests-env:centos-7
-      command: ./AppRun
-    ubuntu-xenial:
-      image: appimagecrafters/tests-env:ubuntu-xenial
+    ubuntu-jammy:
+      image: appimagecrafters/tests-env:ubuntu-jammy
       command: ./AppRun
 AppImage:
   arch: x86_64
