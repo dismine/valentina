@@ -160,6 +160,7 @@ appimage_task_template: &APPIMAGE_TASK_TEMPLATE
     - export CRASH_QT_VERSION=$(/usr/bin/qmake6 -query QT_VERSION | awk -F. '{print $1 "_" $2}')
     - export CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)
     - python3 scripts/symupload.py $CIRRUS_WORKING_DIR/build/AppDir $VALENTINA_VERSION g$CRASH_SHORT_SHA $CRASH_QT_VERSION --clean
+    - $CIRRUS_WORKING_DIR/build/AppDir/usr/local/bin/crashpad_handler --version
     - appimage-builder --recipe dist/AppImage/AppImageBuilder.yml --appdir $CIRRUS_WORKING_DIR/build/AppDir --skip-test
     - ccache -s
   deploy_script:
