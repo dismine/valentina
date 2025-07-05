@@ -160,4 +160,4 @@ AppDir:
 AppImage:
   arch: x86_64
   update-information: guess
-  comp: xz
+  comp: gzip
