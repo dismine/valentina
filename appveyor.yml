@@ -142,7 +142,7 @@ for:
   clone_folder: c:\projects\valentina
 
   cache:
-    - C:\Users\appveyor\.conan\data -> conan-cache
+    - C:\Users\appveyor\.conan2\p -> conan-cache
   
   # scripts that are called at very beginning, before repo cloning
   init:
@@ -156,7 +156,7 @@ for:
     - set PATH=%QTDIR%\bin;%QTDIR%\include;C:\ProgramData\chocolatey\bin;C:\Qt\Tools\QtCreator\bin;C:\Tools\PsTools;C:\Program Files\Git\cmd;C:\Program Files\Git\usr\bin;C:\Program Files\Git LFS;C:\Tools\GitVersion;C:\Windows\system32;C:\Windows;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\CMake\bin;%PYTHON%;%PYTHON%\Scripts;C:\Program Files (x86)\Inno Setup 6
     # Set VC variables for the platform
     - ps: |
-        & choco install qbs -y --version=2.4.2
+        & choco install qbs -y --version=3.0.1
         if ($env:COMPILER -eq "msvc") {
           if ($env:APPVEYOR_BUILD_WORKER_IMAGE -eq "Visual Studio 2022") {
             if ($env:ARCH -eq "x64") {
@@ -195,8 +195,7 @@ for:
     - (python --version)
     # Install the build dependencies of the project.
     - (python -m pip install --upgrade pip)
-    - if "%DEPLOY%" == "true" (python -m pip install dropbox py7zr)
-    - python -m pip install conan==1.63.0 
+    - python -m pip install share/ci/requirements-ci.txt 
     - dir "C:\"
     - dir "C:\Qt"
     - dir "C:\Qt\Tools"
@@ -211,44 +210,25 @@ for:
     - qbs-setup-qt %QTDIR%\bin\%QMAKE% qt6
     - qbs-config defaultProfile qt6
     - dir "C:\Qt\Tools"
-    - conan config install https://gist.github.com/dismine/0abab496338183c36661e635c2aeab8d.git
-    - type C:\Users\appveyor\.conan\settings.yml
-    - conan profile new valentina
-    - conan profile update settings.build_type=Release valentina
-    - conan profile update settings.os=Windows valentina
     - ps: |
-        if ($env:ARCH -eq "x64") {
-          & conan profile update settings.arch=x86_64 valentina
-        } else {
-          & conan profile update settings.arch=x86 valentina
-        }
         if ($env:COMPILER -eq "msvc")
         {
           & qbs-setup-toolchains.exe --type msvc $env:MSVC_PATH\cl.exe $env:COMPILER
           & qbs-config.exe profiles.qt6.baseProfile $env:COMPILER
-          & conan profile update settings.compiler=msvc valentina
-          & conan profile update settings.compiler.cppstd=17 valentina
-          & conan profile update settings.compiler.runtime=dynamic valentina
-          & conan profile update settings.compiler.runtime_type=Release valentina
-          & conan profile update settings.compiler.version=192 valentina
         }
         else
         {
           & qbs-setup-toolchains.exe --type mingw $env:MINGW_PATH\g++.exe $env:COMPILER
           & qbs-config.exe  profiles.qt6.baseProfile $env:COMPILER
-          & conan profile update settings.compiler=gcc valentina
-          & conan profile update settings.compiler.cppstd=$env:COMPILER_CPPSTD valentina
-          & conan profile update settings.compiler.libcxx=$env:COMPILER_LIBCXX valentina
-          & conan profile update settings.compiler.version=$env:GCC_VERSION valentina
         }
     - qbs-config --list profiles
 
   build_script:
     - conan profile list
-    - conan install . -s os=Windows --build=missing -o with_crash_reporting=%WITH_CRASH_REPORTING% -o with_xerces=True -pr=valentina
+    - conan install . --build=missing -o '&:with_crash_reporting=%WITH_CRASH_REPORTING%' -o '&:with_xerces=True' -pr=share/ci/conan/profiles/windows_legacy 
     - set VALENTINA_BUILD_FOLDER=%APPVEYOR_BUILD_FOLDER%\build
     - echo %VALENTINA_BUILD_FOLDER%
-    - qbs build -f valentina.qbs -d %VALENTINA_BUILD_FOLDER% --jobs %NUMBER_OF_PROCESSORS% config:release qbs.installRoot:%VALENTINA_BUILD_FOLDER%\release\install-root\valentina profile:qt6 project.enableConan:true project.conanWithCrashReporting:%WITH_CRASH_REPORTING% project.conanWithXerces:true modules.buildconfig.enableCcache:false project.conanProfiles:valentina modules.buildconfig.enablePCH:%ENABLE_PCH% modules.windeployqt.windeployqtProgramBinPath:%WINDEPLOYQT_BIN_PATH% modules.windeployqt.compilerRuntime:%WINDEPLOYQT_COMPILER_RUNTIME% modules.windeployqt.noCompilerRuntime:%WINDEPLOYQT_NO_COMPILER_RUNTIME%
+    - qbs build -f valentina.qbs -d %VALENTINA_BUILD_FOLDER% --jobs %NUMBER_OF_PROCESSORS% config:release qbs.installRoot:%VALENTINA_BUILD_FOLDER%\release\install-root\valentina profile:qt6 project.enableConan:true project.conanWithCrashReporting:%WITH_CRASH_REPORTING% project.conanWithXerces:true modules.buildconfig.enableCcache:false project.conanProfiles:share/ci/conan/profiles/windows_legacy modules.buildconfig.enablePCH:%ENABLE_PCH% modules.windeployqt.windeployqtProgramBinPath:%WINDEPLOYQT_BIN_PATH% modules.windeployqt.compilerRuntime:%WINDEPLOYQT_COMPILER_RUNTIME% modules.windeployqt.noCompilerRuntime:%WINDEPLOYQT_NO_COMPILER_RUNTIME%
   
   test_script:
     - path
@@ -265,7 +245,7 @@ for:
         }
     - ps: scripts/install_dump_sysms.ps1
     - if "%WITH_CRASH_REPORTING%" == "True" (python scripts/symupload.py %VALENTINA_BUILD_FOLDER%\release\install-root\valentina %VALENTINA_VERSION% g%CRASH_SHORT_SHA% %CRASH_QT_VERSION% --clean)
-    - if "%DEPLOY%" == "true" (qbs build -f valentina.qbs -d %VALENTINA_BUILD_FOLDER% -p ValentinaSetup --jobs %NUMBER_OF_PROCESSORS% config:release qbs.installRoot:%VALENTINA_BUILD_FOLDER%\release\install-root\valentina profile:qt6 project.enableConan:true project.conanWithCrashReporting:%WITH_CRASH_REPORTING% project.conanWithXerces:true modules.buildconfig.enableCcache:false project.conanProfiles:valentina modules.buildconfig.enablePCH:%ENABLE_PCH% modules.windeployqt.windeployqtProgramBinPath:%WINDEPLOYQT_BIN_PATH% modules.windeployqt.compilerRuntime:%WINDEPLOYQT_COMPILER_RUNTIME% modules.windeployqt.noCompilerRuntime:%WINDEPLOYQT_NO_COMPILER_RUNTIME%)
+    - if "%DEPLOY%" == "true" (qbs build -f valentina.qbs -d %VALENTINA_BUILD_FOLDER% -p ValentinaSetup --jobs %NUMBER_OF_PROCESSORS% config:release qbs.installRoot:%VALENTINA_BUILD_FOLDER%\release\install-root\valentina profile:qt6 project.enableConan:true project.conanWithCrashReporting:%WITH_CRASH_REPORTING% project.conanWithXerces:true modules.buildconfig.enableCcache:false project.conanProfiles:share/ci/conan/profiles/windows_legacy modules.buildconfig.enablePCH:%ENABLE_PCH% modules.windeployqt.windeployqtProgramBinPath:%WINDEPLOYQT_BIN_PATH% modules.windeployqt.compilerRuntime:%WINDEPLOYQT_COMPILER_RUNTIME% modules.windeployqt.noCompilerRuntime:%WINDEPLOYQT_NO_COMPILER_RUNTIME%)
     - ps: scripts/appveyor-deploy.ps1
 
   on_finish:

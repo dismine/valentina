@@ -181,4 +181,11 @@ bw-output
 /deactivate_run.sh
 /environment_run.ps1.env
 /environment_run.sh.env
+/conanbuildenv.sh
+/conanbuild.sh
+/conanrun.sh
+/conanrunenv.sh
+/conan-qbs-deps
 /graph_info.json
+/deactivate_conanrun.sh
+/deactivate_conanbuild.sh

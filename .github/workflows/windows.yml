@@ -18,7 +18,7 @@ defaults:
 
 env:
   SOURCE_DIR: ${{ github.workspace }}
-  QBS_VERSION: 2.6.1
+  QBS_VERSION: 3.0.1
   VALENTINA_VERSION: 1_0_0
   ACCESS_TOKEN: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
 
@@ -136,16 +136,15 @@ jobs:
           echo "Found Cl at $clPath"
           echo "cl-path=$clPath" >> $env:GITHUB_OUTPUT
 
-      # To cache Conan 1.x packages in GitHub Actions, you can save the .conan/data directory for every OS like this:
       - name: Setup path to Conan home folder
-        run: echo "CONAN_USER_HOME=${{ runner.temp }}" >> $GITHUB_ENV
-      - name: Cache Conan packages
+        run: echo "CONAN_HOME=${{ runner.temp }}/.conan2" >> $GITHUB_ENV
+
+      - name: Cache Conan packages (Conan 2.x)
         uses: actions/cache@v4
         with:
-          path: ${{ env.CONAN_USER_HOME }}\.conan\data
-          key: conan-packages-${{ runner.os }}-v1-${{ hashFiles('**/conanfile.py') }}
-          restore-keys: conan-packages-${{ runner.os }}-
-      # For Conan 2.0 setting conan_home=./.conan2 in the .conanrc file and saving .conan2/p directory seems to work as well.
+          path: ${{ env.CONAN_HOME }}/p
+          key: conan2-packages-${{ runner.os }}-v1-${{ hashFiles('**/conanfile.py') }}
+          restore-keys: conan2-packages-${{ runner.os }}-
 
       - name: Before build
         run: |
@@ -155,22 +154,10 @@ jobs:
           qbs-config defaultProfile qt6
           qbs-setup-toolchains.exe --type msvc "${{ steps.cl-path.outputs.cl-path }}" msvc
           qbs-config.exe profiles.qt6.baseProfile msvc
-          conan config install https://gist.github.com/dismine/0abab496338183c36661e635c2aeab8d.git
-          type ${{ env.CONAN_USER_HOME }}\.conan\settings.yml
-          conan profile new valentina
-          conan profile update settings.build_type=Release valentina
-          conan profile update settings.os=Windows valentina
-          conan profile update settings.arch=x86_64 valentina
-          conan profile update settings.compiler=msvc valentina
-          conan profile update settings.compiler.cppstd=20 valentina
-          conan profile update settings.compiler.runtime=dynamic valentina
-          conan profile update settings.compiler.runtime_type=Release valentina
-          conan profile update settings.compiler.version=193 valentina
           qbs-config --list profiles
-          conan profile list
 
       - name: Build Conan dependencies
-        run: conan install . -s os=Windows --build=missing -o with_crash_reporting=${{ env.WITH_CRASH_REPORTING }} -o with_xerces=True -pr=valentina
+        run: conan install . --build=missing -o '&:with_crash_reporting=${{ env.WITH_CRASH_REPORTING }}' -o '&:with_xerces=True' -pr=share/ci/conan/profiles/windows
 
       - name: Build Valentina
         run: >
@@ -183,7 +170,7 @@ jobs:
           project.enableConan:true
           project.conanWithCrashReporting:${{ env.WITH_CRASH_REPORTING }}
           project.conanWithXerces:true
-          project.conanProfiles:valentina
+          project.conanProfiles:share/ci/conan/profiles/windows
           modules.buildconfig.enablePCH:true
           modules.windeployqt.compilerRuntime:true
           modules.windeployqt.noCompilerRuntime:false
@@ -219,7 +206,7 @@ jobs:
           project.enableConan:true
           project.conanWithCrashReporting:${{ env.WITH_CRASH_REPORTING }}
           project.conanWithXerces:true
-          project.conanProfiles:valentina
+          project.conanProfiles:share/ci/conan/profiles/windows
           modules.buildconfig.enablePCH:true
           modules.windeployqt.compilerRuntime:true
           modules.windeployqt.noCompilerRuntime:false

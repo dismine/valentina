@@ -33,16 +33,24 @@ VToolApp {
     targetName: buildconfig.appTarget
     multibundle.targetApps: ["Valentina"]
 
-    Properties {
+    Group {
+        name: "xerces-c library (MacOS)"
         condition: buildconfig.useConanPackages && buildconfig.conanXercesEnabled && qbs.targetOS.contains("macos") && buildconfig.enableMultiBundle
-        conan.XercesC.libInstallDir: qbs.installPrefix + "/" + buildconfig.installLibraryPath
-        conan.XercesC.installLib: true
+        prefix: XercesC.libraryPaths[0] + "/"
+        files: ["**/*" + cpp.dynamicLibrarySuffix]
+        qbs.install: true
+        qbs.installDir: buildconfig.installLibraryPath
+        qbs.installSourceBase: XercesC.libraryPaths[0] + "/"
     }
 
-    Properties {
+    Group {
+        name: "Crashpad handler"
         condition: buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled && qbs.targetOS.contains("macos") && buildconfig.enableMultiBundle
-        conan.crashpad.installBin: true
-        conan.crashpad.binInstallDir: qbs.installPrefix + "/" + buildconfig.installBinaryPath
+        prefix: crashpad.binDirs[0] + "/"
+        files: "crashpad_handler" + FileInfo.executableSuffix()
+        qbs.install: true
+        qbs.installDir: buildconfig.installBinaryPath
+        qbs.installSourceBase: crashpad.binDirs[0] + "/"
     }
 
     files: [

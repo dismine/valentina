@@ -120,7 +120,7 @@ appimage_task_template: &APPIMAGE_TASK_TEMPLATE
     - git fetch --tags
     - python3 --version
     - export PATH="${PATH}:/root/.local/bin"
-    - pip3 install --user --upgrade 'dropbox>=12.0.2' py7zr 'pyzstd<=0.16.0' conan==1.66.0 requests
+    - pip3 install --user --upgrade -r share/ci/requirements-ci.txt
   build_script:
     - uname -a
     - mkdir -pm 0700 $XDG_RUNTIME_DIR
@@ -140,27 +140,19 @@ appimage_task_template: &APPIMAGE_TASK_TEMPLATE
     - ${COMPILER} --version
     - qmake6 --version
     - qbs --version
-    - conan profile new valentina
-    - conan profile update settings.build_type=Release valentina
-    - conan profile update settings.os=Linux valentina
-    - conan profile update settings.os_build=Linux valentina
-    - conan profile update settings.arch=x86_64 valentina
-    - conan profile update settings.arch_build=x86_64 valentina
-    - conan profile update settings.compiler=clang valentina
-    - conan profile update settings.compiler.libcxx=libstdc++11 valentina
-    - conan profile update settings.compiler.version=15 valentina
     - qbs setup-toolchains /usr/bin/${COMPILER} ${COMPILER}
     - qbs setup-qt /usr/bin/qmake6 qt6
     - qbs config defaultProfile qt6
     - qbs config profiles.qt6.baseProfile ${COMPILER}
-    - conan install . -s os=Linux --build=missing -o with_crash_reporting=True -pr=valentina
+    - conan install . --build=missing -o '&:with_crash_reporting=True' -pr=share/ci/conan/profiles/appimage
     - echo $CIRRUS_WORKING_DIR
-    - qbs build -f valentina.qbs -d $CIRRUS_WORKING_DIR/build --jobs $(nproc) profile:qt6 config:release modules.buildconfig.enableCcache:${ENABLE_CCACHE} qbs.installRoot:$CIRRUS_WORKING_DIR/build/AppDir modules.buildconfig.enableAppImage:true modules.buildconfig.enableRPath:false project.conanWithCrashReporting:true project.enableConan:true project.conanProfiles:valentina
+    - qbs build -f valentina.qbs -d $CIRRUS_WORKING_DIR/build --jobs $(nproc) profile:qt6 config:release modules.buildconfig.enableCcache:${ENABLE_CCACHE} qbs.installRoot:$CIRRUS_WORKING_DIR/build/AppDir modules.buildconfig.enableAppImage:true modules.buildconfig.enableRPath:false project.conanWithCrashReporting:true project.enableConan:true project.conanProfiles:share/ci/conan/profiles/appimage
     - qbs -p autotest-runner -d build profile:qt6 config:release
     - export CRASH_QT_VERSION=$(/usr/bin/qmake6 -query QT_VERSION | awk -F. '{print $1 "_" $2}')
     - export CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)
     - python3 scripts/symupload.py $CIRRUS_WORKING_DIR/build/AppDir $VALENTINA_VERSION g$CRASH_SHORT_SHA $CRASH_QT_VERSION --clean
     - $CIRRUS_WORKING_DIR/build/AppDir/usr/local/bin/crashpad_handler --version
+    - du -h $CIRRUS_WORKING_DIR/build/AppDir/usr/local/bin/crashpad_handler
     - appimage-builder --recipe dist/AppImage/AppImageBuilder.yml --appdir $CIRRUS_WORKING_DIR/build/AppDir --skip-test
     - ccache -s
   deploy_script:

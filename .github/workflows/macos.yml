@@ -14,7 +14,6 @@ on:
 
 env:
   SOURCE_DIR: ${{ github.workspace }}
-  QBS_VERSION: 2.6.1
   VALENTINA_VERSION: 1_0_0
   ACCESS_TOKEN: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
   # Should contain the base64 of the certificate
@@ -118,17 +117,15 @@ jobs:
           python -m pip install --upgrade setuptools
           python -m pip install -r share/ci/requirements-ci.txt
 
-      # To cache Conan 1.x packages in GitHub Actions, you can save the .conan/data directory for every OS like this:
       - name: Setup path to Conan home folder
-        run: echo "CONAN_USER_HOME=${{ runner.temp }}" >> $GITHUB_ENV
+        run: echo "CONAN_HOME=${{ runner.temp }}/.conan2" >> $GITHUB_ENV
 
-      - name: Cache Conan packages
+      - name: Cache Conan packages (Conan 2.x)
         uses: actions/cache@v4
         with:
-          path: ${{ env.CONAN_USER_HOME }}\.conan\data
-          key: conan-packages-${{ runner.os }}-${{ matrix.qt.label }}-${{ matrix.bundle.label }}-v1-${{ hashFiles('**/conanfile.py') }}
-          restore-keys: conan-packages-${{ runner.os }}-${{ matrix.qt.label }}-${{ matrix.bundle.label }}-
-      # For Conan 2.0 setting conan_home=./.conan2 in the .conanrc file and saving .conan2/p directory seems to work as well.
+          path: ${{ env.CONAN_HOME }}/p
+          key: conan2-packages-${{ runner.os }}-v1-${{ hashFiles('**/conanfile.py') }}
+          restore-keys: conan2-packages-${{ runner.os }}-
 
       - name: Decode the environment variable into a regular .p12 file
         run: echo $MACOS_CERTIFICATE | base64 --decode > certificate.p12
@@ -196,7 +193,8 @@ jobs:
           mkdir ~/.venv
           python3 -m venv ~/.venv
           source ~/.venv/bin/activate
-          pip3 install --upgrade pip 'dropbox>=12.0.2' py7zr conan==1.66.0 requests
+          pip install --upgrade setuptools
+          pip3 install -r share/ci/requirements-ci.txt
 
       - name: Install Qt Creator
         uses: ./.github/actions/download-qtc
@@ -210,17 +208,6 @@ jobs:
           which qmake
           which qbs
           qbs --version
-          conan profile new valentina
-          conan profile update settings.build_type=Release valentina
-          conan profile update settings.os=Macos valentina
-          conan profile update settings.os_build=Macos valentina
-          conan profile update settings.os.version=$MACOS_DEPLOYMENT_TARGET valentina
-          conan profile update settings.arch=x86_64 valentina
-          conan profile update settings.arch_build=x86_64 valentina
-          conan profile update settings.compiler=apple-clang valentina
-          conan profile update settings.compiler.cppstd=17 valentina
-          conan profile update settings.compiler.libcxx=libc++ valentina
-          conan profile update settings.compiler.version=15 valentina
           qbs setup-toolchains --detect
           qbs config --list profiles
           qbs setup-qt "$QTDIR/bin/qmake" qt6
@@ -228,7 +215,7 @@ jobs:
           qbs config profiles.qt6.baseProfile clang
 
       - name: Build Conan dependencies
-        run: conan install . -s os=Macos --build=missing -o with_crash_reporting=${{ env.WITH_CRASH_REPORTING }} -o with_xerces=True -pr=valentina
+        run: conan install . --build=missing -o '&:with_crash_reporting=${{ env.WITH_CRASH_REPORTING }}' -o '&:with_xerces=True' -pr=share/ci/conan/profiles/macos
 
       - name: Set up common Qbs args
         run: >
@@ -248,7 +235,7 @@ jobs:
           project.enableConan:true 
           project.conanWithXerces:true 
           project.conanWithCrashReporting:true 
-          project.conanProfiles:valentina" >> $GITHUB_ENV
+          project.conanProfiles:share/ci/conan/profiles/macos" >> $GITHUB_ENV
 
       - name: Build Valentina
         run: >
@@ -389,17 +376,12 @@ jobs:
           python -m pip install --upgrade setuptools
           python -m pip install -r share/ci/requirements-ci.txt
 
-      # To cache Conan 1.x packages in GitHub Actions, you can save the .conan/data directory for every OS like this:
-      - name: Setup path to Conan home folder
-        run: echo "CONAN_USER_HOME=${{ runner.temp }}" >> $GITHUB_ENV
-
-      - name: Cache Conan packages
+      - name: Cache Conan packages (Conan 2.x)
         uses: actions/cache@v4
         with:
-          path: ${{ env.CONAN_USER_HOME }}\.conan\data
-          key: conan-packages-${{ runner.os }}-${{ matrix.qt.label }}-${{ matrix.bundle.label }}-v1-${{ hashFiles('**/conanfile.py') }}
-          restore-keys: conan-packages-${{ runner.os }}-${{ matrix.qt.label }}-${{ matrix.bundle.label }}-
-      # For Conan 2.0 setting conan_home=./.conan2 in the .conanrc file and saving .conan2/p directory seems to work as well.
+          path: ${{ env.CONAN_HOME }}/p
+          key: conan2-packages-${{ runner.os }}-v1-${{ hashFiles('**/conanfile.py') }}
+          restore-keys: conan2-packages-${{ runner.os }}-
 
       - name: Decode the environment variable into a regular .p12 file
         run: echo $MACOS_CERTIFICATE | base64 --decode > certificate.p12
@@ -481,17 +463,6 @@ jobs:
           which qmake
           which qbs
           qbs --version
-          conan profile new valentina
-          conan profile update settings.build_type=Release valentina
-          conan profile update settings.os=Macos valentina
-          conan profile update settings.os_build=Macos valentina
-          conan profile update settings.os.version=$MACOS_DEPLOYMENT_TARGET valentina
-          conan profile update settings.arch=armv8 valentina
-          conan profile update settings.arch_build=armv8 valentina
-          conan profile update settings.compiler=apple-clang valentina
-          conan profile update settings.compiler.cppstd=17 valentina
-          conan profile update settings.compiler.libcxx=libc++ valentina
-          conan profile update settings.compiler.version=15 valentina
           qbs setup-toolchains --detect
           qbs config --list profiles
           qbs setup-qt "$QTDIR/bin/qmake" qt6
@@ -499,7 +470,7 @@ jobs:
           qbs config profiles.qt6.baseProfile clang
 
       - name: Build Conan dependencies
-        run: conan install . -s os=Macos --build=missing -o with_crash_reporting=${{ env.WITH_CRASH_REPORTING }} -o with_xerces=True -pr=valentina
+        run: conan install . --build=missing -o '&:with_crash_reporting=${{ env.WITH_CRASH_REPORTING }}' -o '&:with_xerces=True' -pr=share/ci/conan/profiles/macos_arm
 
       - name: Set up common Qbs args
         run: >
@@ -519,7 +490,7 @@ jobs:
           project.enableConan:true 
           project.conanWithXerces:true 
           project.conanWithCrashReporting:true 
-          project.conanProfiles:valentina" >> $GITHUB_ENV
+          project.conanProfiles:share/ci/conan/profiles/macos_arm" >> $GITHUB_ENV
 
       - name: Build Valentina
         run: >

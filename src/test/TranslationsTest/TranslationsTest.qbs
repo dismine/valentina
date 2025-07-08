@@ -14,13 +14,13 @@ VTestApp {
     }
 
     Depends {
-        name: "conan.XercesC"
+        name: "XercesC"
         condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 && buildconfig.useConanPackages &&
                    buildconfig.conanXercesEnabled
     }
 
     Depends {
-        name: "conan.crashpad";
+        name: "crashpad";
         condition: buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled
     }
 

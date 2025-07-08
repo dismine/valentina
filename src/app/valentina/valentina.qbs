@@ -48,26 +48,36 @@ VToolApp {
     buildconfig.appTarget: qbs.targetOS.contains("macos") ? "Valentina" : "valentina"
     targetName: buildconfig.appTarget
 
-    Properties {
-        condition: buildconfig.useConanPackages && buildconfig.conanXercesEnabled && (qbs.targetOS.contains("windows") || qbs.targetOS.contains("macos"))
-        conan.XercesC.libInstallDir: qbs.installPrefix + "/" + buildconfig.installLibraryPath
-        conan.XercesC.binInstallDir: qbs.installPrefix + "/" + buildconfig.installBinaryPath
-        conan.XercesC.installLib: {
-            if (qbs.targetOS.contains("windows"))
-                return false
-            return true
-        }
-        conan.XercesC.installBin: {
-            if (qbs.targetOS.contains("windows"))
-                return true
-            return false
-        }
+    // On Windows .dll files are in bin folder
+    Group {
+        name: "xerces-c library (Windows)"
+        condition: buildconfig.useConanPackages && buildconfig.conanXercesEnabled && qbs.targetOS.contains("windows")
+        prefix: XercesC.binDirs[0] + "/"
+        files: ["**/*" + cpp.dynamicLibrarySuffix]
+        qbs.install: true
+        qbs.installDir: buildconfig.installLibraryPath
+        qbs.installSourceBase: XercesC.binDirs[0] + "/"
     }
 
-    Properties {
+    // On MacOS .so files are in lib folder
+    Group {
+        name: "xerces-c library (MacOS)"
+        condition: buildconfig.useConanPackages && buildconfig.conanXercesEnabled && qbs.targetOS.contains("macos")
+        prefix: XercesC.libraryPaths[0] + "/"
+        files: ["**/*" + cpp.dynamicLibrarySuffix]
+        qbs.install: true
+        qbs.installDir: buildconfig.installLibraryPath
+        qbs.installSourceBase: XercesC.libraryPaths[0] + "/"
+    }
+
+    Group {
+        name: "Crashpad handler"
         condition: buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled
-        conan.crashpad.installBin: true
-        conan.crashpad.binInstallDir: qbs.installPrefix + "/" + buildconfig.installBinaryPath
+        prefix: crashpad.binDirs[0] + "/"
+        files: "crashpad_handler" + FileInfo.executableSuffix()
+        qbs.install: true
+        qbs.installDir: buildconfig.installBinaryPath
+        qbs.installSourceBase: crashpad.binDirs[0] + "/"
     }
 
     files: [

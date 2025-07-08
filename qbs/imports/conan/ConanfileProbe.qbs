@@ -39,17 +39,16 @@ Probe {
     property stringList additionalArguments: []
     property path conanfilePath
     property path packageReference
-    property path executable: "conan"
-    property stringList generators: ["json"]
+    property path executable: "conan" + FileInfo.executableSuffix()
+    property stringList generators
     property var options
     property var settings
+    property string profileAll
     property bool verbose: false
-    property stringList profiles: []
-    property string remote
 
     // Output
-    property var dependencies
     property path generatedFilesPath
+    property var dependencies
     property var json
 
     // Internal
@@ -58,13 +57,7 @@ Probe {
     property int _conanfileLastModified: conanfilePath ? File.lastModified(conanfilePath) : 0
     property path _projectBuildDirectory: project.buildDirectory
 
-    // TODO: If minimal qbs version is 1.23 replace with FileInfo.executableSuffix()
-    readonly property string executableSuffix: project.qbs.targetOS.contains("windows") ? ".exe" : ""
-
     configure: {
-        if (executable === "conan")
-            executable = executable + executableSuffix;
-
         if (conanfilePath && packageReference)
             throw("conanfilePath and packageReference must not be defined at the same time.");
 
@@ -75,6 +68,14 @@ Probe {
         console.info("Probing '" + reference + "'. This might take a while...");
         if (conanfilePath && !File.exists(reference))
                 throw("The conanfile '" + reference + "' does not exist.");
+
+        function getConanVersion() {
+            var p = new Process();
+            p.exec(executable, ["--version"], true);
+            return p.readStdOut().trim().replace("Conan version", "").trim();
+        }
+
+        const isConan2 = Utilities.versionCompare(getConanVersion(), "2.0.0") >= 0;
 
         var args = [
             "install", reference,
@@ -98,7 +99,13 @@ Probe {
             });
         }
 
-        if (!generators.contains("json"))
+        if (generators === undefined) {
+            if (isConan2)
+                generators = ["QbsDeps"];
+            else
+                generators = ["json"];
+        }
+        if (!isConan2 && !generators.contains("json"))
             generators.push("json");
 
         for (var i = 0; i < generators.length; i++)
@@ -107,25 +114,42 @@ Probe {
         for (var i = 0; i < additionalArguments.length; i++)
             args.push(additionalArguments[i]);
 
-        for (var i = 0; i < profiles.length; i++) {
-            args = args.concat(["-pr", profiles[i]]);
-        }
-
         generatedFilesPath = FileInfo.cleanPath(_projectBuildDirectory +
                                                   "/genconan/" +
                                                   Utilities.getHash(args.join()));
 
-        args = args.concat(["-if", generatedFilesPath]);
-
-        if (remote) {
-            args = args.concat(["--remote", remote]);
+        const outputFolderOption = isConan2 ? "--output-folder" : "--install-folder";
+        args = args.concat([outputFolderOption, generatedFilesPath]);
+        var p = new Process();
+        p.start(executable, args);
+        while (!p.waitForFinished(500)) {
+            const output = p.readStdErr();
+            if (verbose && output) {
+                console.info(output);
+            }
+        }
+        while (!p.atEnd()) {
+            const output = p.readStdErr();
+            if (verbose && output) {
+                console.info(output);
+            }
+        }
+        if (p.exitCode()) {
+            const errorOutput = p.readStdErr();
+            p.close();
+            throw errorOutput;
+        }
+        else
+        {
+            const output = p.readStdErr();
+            if (verbose && output) {
+                console.info(output);
+            }
         }
 
-        var p = new Process();
-        console.info("Start conan: " + executable + " " + args.join(" "));
-        p.exec(executable, args, true);
+        p.close();
 
-        if (generators.contains("json")) {
+        if (!isConan2 && generators.contains("json")) {
             if (!File.exists(generatedFilesPath + "/conanbuildinfo.json"))
                 throw("No conanbuildinfo.json has been generated.");
 
