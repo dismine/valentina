@@ -54,6 +54,9 @@ QString AppImageRoot()
 //---------------------------------------------------------------------------------------------------------------------
 QString AppImageRoot(const QString &applicationDir, const QString &defaultAppDir)
 {
+    qDebug() << "Application directory:" << applicationDir;
+    qDebug() << "Default app directory:" << defaultAppDir;
+
     QStringList appSub = SplitFilePaths(applicationDir);
     QStringList defaultSub = SplitFilePaths(defaultAppDir);
 
