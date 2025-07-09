@@ -139,7 +139,7 @@ for:
       - job_group: 'Windows (qbs)'
 
   # clone directory
-  clone_folder: c:\projects\valentina
+  clone_folder: C:\projects\valentina
 
   cache:
     - C:\Users\appveyor\.conan2\p -> conan-cache
