@@ -192,9 +192,10 @@ for:
     # Path after
     - path
     # Check that we have the expected version for Python
-    - (python --version)
+    - python --version
     # Install the build dependencies of the project.
-    - (python -m pip install --upgrade pip)
+    - python -m pip install --upgrade pip
+    - dir %APPVEYOR_BUILD_FOLDER%\share\ci
     - python -m pip install -r %APPVEYOR_BUILD_FOLDER%\share\ci\requirements-ci.txt 
     - dir "C:\"
     - dir "C:\Qt"
