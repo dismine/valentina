@@ -191,15 +191,6 @@ for:
         }
     # Path after
     - path
-    # Check that we have the expected version for Python
-    - python --version
-    # Install the build dependencies of the project.
-    - python -m pip install --upgrade pip
-    - echo %APPVEYOR_BUILD_FOLDER%
-    - cd %APPVEYOR_BUILD_FOLDER%
-    - echo "Listing all files under build folder:"
-    - dir /s /b %APPVEYOR_BUILD_FOLDER%
-    - python -m pip install -r share\ci\requirements-ci.txt 
     - dir "C:\"
     - dir "C:\Qt"
     - dir "C:\Qt\Tools"
@@ -210,6 +201,13 @@ for:
   before_build:
     - echo %APPVEYOR_BUILD_FOLDER%
     - cd %APPVEYOR_BUILD_FOLDER%
+    - echo "Listing all files under build folder:"
+    - dir /s /b %APPVEYOR_BUILD_FOLDER%
+    # Check that we have the expected version for Python
+    - python --version
+    # Install the build dependencies of the project.
+    - python -m pip install --upgrade pip
+    - python -m pip install -r share\ci\requirements-ci.txt 
     - qbs-setup-toolchains --detect
     - qbs-setup-qt %QTDIR%\bin\%QMAKE% qt6
     - qbs-config defaultProfile qt6
