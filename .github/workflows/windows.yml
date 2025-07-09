@@ -157,7 +157,7 @@ jobs:
           qbs-config --list profiles
 
       - name: Build Conan dependencies
-        run: conan install . --build=missing -o '&:with_crash_reporting=${{ env.WITH_CRASH_REPORTING }}' -o '&:with_xerces=True' -pr=share/ci/conan/profiles/windows
+        run: conan install . --build=missing -o '&:with_crash_reporting=${{ env.WITH_CRASH_REPORTING }}' -o '&:with_xerces=True' -pr:a=share/ci/conan/profiles/windows
 
       - name: Build Valentina
         run: >

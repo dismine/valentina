@@ -215,7 +215,7 @@ jobs:
           qbs config profiles.qt6.baseProfile clang
 
       - name: Build Conan dependencies
-        run: conan install . --build=missing -o '&:with_crash_reporting=${{ env.WITH_CRASH_REPORTING }}' -o '&:with_xerces=True' -pr=share/ci/conan/profiles/macos
+        run: conan install . --build=missing -o '&:with_crash_reporting=${{ env.WITH_CRASH_REPORTING }}' -o '&:with_xerces=True' -pr:a=share/ci/conan/profiles/macos
 
       - name: Set up common Qbs args
         run: >
@@ -470,7 +470,7 @@ jobs:
           qbs config profiles.qt6.baseProfile clang
 
       - name: Build Conan dependencies
-        run: conan install . --build=missing -o '&:with_crash_reporting=${{ env.WITH_CRASH_REPORTING }}' -o '&:with_xerces=True' -pr=share/ci/conan/profiles/macos_arm
+        run: conan install . --build=missing -o '&:with_crash_reporting=${{ env.WITH_CRASH_REPORTING }}' -o '&:with_xerces=True' -pr:a=share/ci/conan/profiles/macos_arm
 
       - name: Set up common Qbs args
         run: >
