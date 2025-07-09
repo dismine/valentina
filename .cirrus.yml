@@ -146,7 +146,7 @@ appimage_task_template: &APPIMAGE_TASK_TEMPLATE
     - qbs config profiles.qt6.baseProfile ${COMPILER}
     - conan install . --build=missing -o '&:with_crash_reporting=True' -pr:a=share/ci/conan/profiles/appimage
     - echo $CIRRUS_WORKING_DIR
-    - qbs build -f valentina.qbs -d $CIRRUS_WORKING_DIR/build --jobs $(nproc) profile:qt6 config:release modules.buildconfig.enableCcache:${ENABLE_CCACHE} qbs.installRoot:$CIRRUS_WORKING_DIR/build/AppDir modules.buildconfig.enableAppImage:true modules.buildconfig.enableRPath:false project.conanWithCrashReporting:true project.enableConan:true project.conanProfiles:share/ci/conan/profiles/appimage
+    - qbs build -f valentina.qbs -d $CIRRUS_WORKING_DIR/build --jobs $(nproc) profile:qt6 config:release modules.buildconfig.enableCcache:${ENABLE_CCACHE} modules.cpp.linkerVariant:mold qbs.installRoot:$CIRRUS_WORKING_DIR/build/AppDir modules.buildconfig.enableAppImage:true modules.buildconfig.enableRPath:false project.conanWithCrashReporting:true project.enableConan:true project.conanProfiles:share/ci/conan/profiles/appimage
     - qbs -p autotest-runner -d build profile:qt6 config:release
     - export CRASH_QT_VERSION=$(/usr/bin/qmake6 -query QT_VERSION | awk -F. '{print $1 "_" $2}')
     - export CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)
