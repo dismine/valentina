@@ -152,10 +152,6 @@ function configure(installDirectory, moduleName, outputBaseDir, jsonProbe) {
     if (!File.exists(moduleFilePath))
         return [];
 
-    var reverseMapping = {}
-    for (var key in moduleMapping)
-        reverseMapping[moduleMapping[key]] = key
-
     console.info("Setting up Conan module '" + moduleName + "'");
 
     var moduleFileInfo = new TextFile(moduleFilePath, TextFile.ReadOnly);
@@ -211,9 +207,8 @@ function configure(installDirectory, moduleName, outputBaseDir, jsonProbe) {
 
     writeLine("    Depends { name: 'cpp' }");
 
-    moduleInfo.dependencies.forEach(function(dep) {
-        const realDepName = reverseMapping[dep.name] || dep.name;
-        writeLine("    Depends { name: " + ModUtils.toJSLiteral(realDepName)
+    moduleInfo.dependencies.reverse().forEach(function(dep) {
+        writeLine("    Depends { name: " + ModUtils.toJSLiteral(dep.name)
             + "; version: " + ModUtils.toJSLiteral(dep.version) + "}");
     });
 
