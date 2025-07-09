@@ -34,7 +34,7 @@ Project {
             var args = [];
 
             for (var i = 0; i < conanProfiles.length; i++) {
-                args.push("-pr=" + conanProfiles[i])
+                args.push("-pr:a=" + conanProfiles[i])
             }
 
             return args;
