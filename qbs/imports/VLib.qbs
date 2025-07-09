@@ -6,7 +6,15 @@ Library {
     Depends { name: "cpp" }
     Depends { name: "coverage"; required: false }
 
-    qbsModuleProviders: ["Qt", "conan", "qbspkgconfig"]
+    qbsModuleProviders: {
+        var providers = ["Qt"];
+
+        if (buildconfig.useConanPackages)
+            providers.push("conan");
+
+        providers.push("qbspkgconfig");
+        return providers;
+    }
 
     type: buildconfig.staticBuild ? "staticlibrary" : "dynamiclibrary"
 
