@@ -195,7 +195,7 @@ for:
     - (python --version)
     # Install the build dependencies of the project.
     - (python -m pip install --upgrade pip)
-    - python -m pip install -r share/ci/requirements-ci.txt 
+    - python -m pip install -r %APPVEYOR_BUILD_FOLDER%/share/ci/requirements-ci.txt 
     - dir "C:\"
     - dir "C:\Qt"
     - dir "C:\Qt\Tools"
