@@ -2479,7 +2479,8 @@ void TKMMainWindow::ShowMDiagram(const VPatternImage &image)
 {
     ui->labelDiagram->setResizedPixmap(QPixmap());
     ui->labelDiagram->setCursor(QCursor());
-    ui->labelDiagram->disconnect();
+
+    disconnect(ui->labelDiagram, &VAspectRatioPixmapLabel::clicked, this, &TKMMainWindow::ShowImage);
 
     if (image.IsValid())
     {
