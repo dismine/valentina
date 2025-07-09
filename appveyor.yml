@@ -197,6 +197,8 @@ for:
     - python -m pip install --upgrade pip
     - echo %APPVEYOR_BUILD_FOLDER%
     - cd %APPVEYOR_BUILD_FOLDER%
+    - echo "Listing all files under build folder:"
+    - dir /s /b %APPVEYOR_BUILD_FOLDER%
     - python -m pip install -r share\ci\requirements-ci.txt 
     - dir "C:\"
     - dir "C:\Qt"
