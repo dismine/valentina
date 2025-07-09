@@ -137,6 +137,7 @@ jobs:
           echo "cl-path=$clPath" >> $env:GITHUB_OUTPUT
 
       - name: Setup path to Conan home folder
+        shell: bash
         run: echo "CONAN_HOME=${{ runner.temp }}/.conan2" >> $GITHUB_ENV
 
       - name: Cache Conan packages (Conan 2.x)
@@ -157,6 +158,7 @@ jobs:
           qbs-config --list profiles
 
       - name: Build Conan dependencies
+        shell: bash
         run: conan install . --build=missing -o '&:with_crash_reporting=${{ env.WITH_CRASH_REPORTING }}' -o '&:with_xerces=True' -pr:a=share/ci/conan/profiles/windows
 
       - name: Build Valentina
