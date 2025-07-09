@@ -174,7 +174,7 @@ auto InitializeCrashpad(const QString &appName) -> bool
 
 // Get directory where the exe lives so we can pass a full path to handler, reportsDir and metricsDir
 #if defined(APPIMAGE) && defined(Q_OS_LINUX)
-    QString const exeDir = AppImageRoot(GetExecutableDir(), QString(BINDIR));
+    QString const exeDir = AppImageRoot(GetExecutableDir(), QString(BINDIR)) + QString(BINDIR);
 #else
     QString const exeDir = GetExecutableDir();
 #endif
