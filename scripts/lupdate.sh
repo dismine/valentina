@@ -19,7 +19,7 @@ wait
 cp -r ./share/translations/* ../share/translations
 rm -r ./share
 
-QMAKEPATH=$HOME/Qt6.7/6.9.0/gcc_64/bin/qmake
+QMAKEPATH=$HOME/Qt6.7/6.9.1/gcc_64/bin/qmake
 
 # Resolve any changes to config
 qbs resolve -d ../../build_translations -f ../valentina.qbs modules.i18n.update:true moduleProviders.Qt.qmakeFilePaths:${QMAKEPATH}
