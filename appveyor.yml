@@ -147,9 +147,10 @@ for:
     - path
     - set QTDIR=C:\%QT%
     - set QT_PLUGIN_PATH=%QTDIR%\plugins
-    - set PATH=%QTDIR%\bin;%QTDIR%\include;C:\ProgramData\chocolatey\bin;C:\Qt\Tools\QtCreator\bin;C:\Tools\PsTools;C:\Program Files\Git\cmd;C:\Program Files\Git\usr\bin;C:\Program Files\Git LFS;C:\Tools\GitVersion;C:\Windows\system32;C:\Windows;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\CMake\bin;%PYTHON%;%PYTHON%\Scripts;C:\Program Files (x86)\Inno Setup 6
+    - set PATH=%QTDIR%\bin;%QTDIR%\include;C:\ProgramData\chocolatey\bin;C:\Qt\Tools\QtCreator\bin;C:\Tools\PsTools;C:\Program Files\Git\cmd;C:\Program Files\Git\usr\bin;C:\Program Files\Git LFS;C:\Tools\GitVersion;C:\Windows\system32;C:\Windows;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\CMake\bin;%PYTHON%;%PYTHON%\Scripts
     # Set VC variables for the platform
     - ps: |
+        & choco install innosetup -y --version=6.4.0
         & choco install qbs -y --version=3.0.1
         if ($env:COMPILER -eq "msvc") {
           if ($env:APPVEYOR_BUILD_WORKER_IMAGE -eq "Visual Studio 2022") {

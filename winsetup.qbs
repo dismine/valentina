@@ -26,7 +26,7 @@ InnoSetup {
     property string arhitecture: {
         if (qbs.architecture == "x86_64")
         {
-            return "x64"
+            return "x64os"
         }
 
         if (qbs.architecture == "arm64")
