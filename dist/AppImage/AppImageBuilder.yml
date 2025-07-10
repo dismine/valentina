@@ -137,8 +137,6 @@ AppDir:
   after_bundle:
     # Provide a fallback /bin/sh
     - ln -s bash $TARGET_APPDIR/bin/sh
-    # Fix path to ld-linux
-    - ln -s /lib64/ld-linux-x86-64.so.2 $TARGET_APPDIR/lib64/ld-linux-x86-64.so.2
     # Strip .note.ABI-tag from Qt6 libraries
     - find "$TARGET_APPDIR" -type f -name 'libQt6*.so*' -exec strip --remove-section=.note.ABI-tag {} + 2>/dev/null || true
   runtime:
