@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# This wrapper script launches crashpad_handler using the AppImage’s
+# bundled dynamic loader (ld-linux-x86-64.so.2) and library paths.
+# 
+# Reason for this wrapper:
+# The crashpad_handler binary inside the AppImage depends on a specific
+# dynamic loader and libraries included within the AppImage. However,
+# the ELF interpreter path (PT_INTERP) in the binary is relative
+# and points to the loader runtime/compat/lib64/ld-linux-x86-64.so.2,
+# which is unreachanble when crashpad_handler starts.
+#
+# Because the kernel does not resolve the interpreter path relative
+# to the current working directory, we must explicitly invoke the
+# AppImage’s loader to ensure correct library loading.
+#
+# This script:
+# 1. Detects the root directory of the AppImage (APPDIRROOT).
+# 2. Executes crashpad_handler via the AppImage’s custom ld-linux,
+#    specifying the correct library paths to load bundled dependencies.
+
+echo "Launching crashpad_handler from wrapper"
+APPDIRROOT=${APPDIR:-$(readlink -f "$(dirname "$(readlink -f "$0")")/../../..")}
+
+"$APPDIRROOT/runtime/compat/lib64/ld-linux-x86-64.so.2" --library-path "$APPDIRROOT/usr/lib:$APPDIRROOT/lib" "$APPDIRROOT/usr/local/bin/crashpad_handler" "$@"

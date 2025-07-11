@@ -80,6 +80,15 @@ VToolApp {
         qbs.installSourceBase: crashpad.binDirs[0] + "/"
     }
 
+    Group {
+        name: "Crashpad handler wrapper"
+        condition: buildconfig.enableAppImage && qbs.targetOS.contains("unix") && !qbs.targetOS.contains("macos")
+        prefix: project.sourceDirectory + "/scripts/"
+        files: "crashpad_handler_wrapper"
+        qbs.install: true
+        qbs.installDir: buildconfig.installBinaryPath
+    }
+
     files: [
         "main.cpp",
         "mainwindow.cpp",
