@@ -85,8 +85,6 @@ auto VCrashPaths::GetHandlerPath() const -> QString
 {
 #if defined(Q_OS_WINDOWS)
     const auto handler = QStringLiteral("crashpad_handler.exe");
-#elif defined(APPIMAGE) && defined(Q_OS_LINUX)
-    const auto handler = QStringLiteral("crashpad_handler_wrapper");
 #elif defined(Q_OS_MAC) || defined(Q_OS_LINUX)
     const auto handler = QStringLiteral("crashpad_handler");
 #else
