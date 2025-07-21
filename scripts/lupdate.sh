@@ -6,8 +6,8 @@ start=$(date +%s)
 
 # Download all translations from transifex.com.
 
-# Empty means unstable branch
-VALENTINA_BRANCH=''    # for example 05x
+# Empty means edge branch
+VALENTINA_BRANCH='10x'    # for example 10x
 
 LANGUAGES="uk,de_DE,cs,he_IL,fr_FR,it_IT,nl,id,es,fi,ro_RO,zh_CN,pt_BR,el_GR,pl_PL,hr_HR,hu_HU,pt_PT,ja"
 
@@ -19,7 +19,7 @@ wait
 cp -r ./share/translations/* ../share/translations
 rm -r ./share
 
-QMAKEPATH=$HOME/Qt6.7/6.9.0/gcc_64/bin/qmake
+QMAKEPATH=$HOME/Qt6.7/6.9.1/gcc_64/bin/qmake
 
 # Resolve any changes to config
 qbs resolve -d ../../build_translations -f ../valentina.qbs modules.i18n.update:true moduleProviders.Qt.qmakeFilePaths:${QMAKEPATH}

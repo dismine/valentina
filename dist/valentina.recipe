@@ -1,3 +1,0 @@
-# bzr-builder format 0.3 deb-version {debupstream}+{revno}+{revno:packaging}+{time}
-lp:valentina
-merge packaging lp:~dismine/valentina/debian

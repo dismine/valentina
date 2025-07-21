@@ -6,6 +6,16 @@ Library {
     Depends { name: "cpp" }
     Depends { name: "coverage"; required: false }
 
+    qbsModuleProviders: {
+        var providers = ["Qt"];
+
+        if (buildconfig.useConanPackages)
+            providers.push("conan");
+
+        providers.push("qbspkgconfig");
+        return providers;
+    }
+
     type: buildconfig.staticBuild ? "staticlibrary" : "dynamiclibrary"
 
     buildconfig.appTarget: qbs.targetOS.contains("macos") ? "Valentina" : "valentina"
@@ -13,6 +23,11 @@ Library {
 
     // Allow MAC OS X to find library inside a bundle
     cpp.sonamePrefix: (!buildconfig.staticBuild && qbs.targetOS.contains("macos")) ? "@rpath" : undefined
+
+    Properties {
+        condition: buildconfig.useConanPackages
+        moduleProviders.conan.installDirectory: project.conanInstallPath
+    }
 
     Properties {
         condition: (!buildconfig.staticBuild && buildconfig.enableRPath)

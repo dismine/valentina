@@ -1,0 +1,15 @@
+name: 'Download Qt Creator'
+description: 'Downloads Qt Creator'
+inputs:
+  version:
+    description: 'Qt Creator version'
+    required: false
+    default: '11.0.3'
+runs:
+  using: "composite"
+  steps:
+    - name: Install Qt Creator
+      run: |
+        QTC_DIR=$(./scripts/install-qt.sh -d $HOME/Qt --version ${{ inputs.version }} qtcreator)
+        (cygpath -w ${QTC_DIR} 2>/dev/null || echo ${QTC_DIR}) >> ${GITHUB_PATH}
+      shell: bash

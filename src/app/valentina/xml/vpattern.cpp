@@ -896,7 +896,7 @@ void VPattern::ParseRootElement(const Document &parse, const QDomNode &node)
         case 2: // TagPreviewCalculations
             if (parse != Document::LiteParse)
             {
-                qCDebug(vXML, "Tag prewiew calculations.");
+                qCDebug(vXML, "Tag preview calculations.");
                 ParseIncrementsElement(domElement, parse);
             }
             break;

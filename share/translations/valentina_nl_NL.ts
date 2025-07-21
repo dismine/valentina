@@ -53,14 +53,7 @@
     <message>
         <location filename="../../src/libs/vtools/undocommands/addtocalc.cpp" line="45"/>
         <source>add object</source>
-        <translation>voeg object toe</translation>
-    </message>
-</context>
-<context>
-    <name>AddUnionDetails</name>
-    <message>
-        <source>add union details</source>
-        <translation type="vanished">voeg een samengevoegd detail toe</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -330,7 +323,7 @@
     </message>
     <message>
         <source>Author:</source>
-        <translation type="vanished">Auteursnaam:</translation>
+        <translation type="vanished">Auteur:</translation>
     </message>
     <message>
         <source>Book:</source>
@@ -366,7 +359,7 @@
     <message>
         <location filename="../../src/libs/vtools/undocommands/deltool.cpp" line="58"/>
         <source>delete tool</source>
-        <translation>verwijder gereedschap</translation>
+        <translation>Verwijder hulpmiddel</translation>
     </message>
 </context>
 <context>
@@ -381,7 +374,7 @@
     <name>DeleteDetail</name>
     <message>
         <source>delete tool</source>
-        <translation type="vanished">verwijder gereedschap</translation>
+        <translation type="vanished">Verwijder hulpmiddel</translation>
     </message>
 </context>
 <context>
@@ -443,7 +436,7 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.cpp" line="63"/>
         <source>Web site : %1</source>
-        <translation>Website: %1</translation>
+        <translation>Web site: %1</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.cpp" line="70"/>
@@ -554,7 +547,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="201"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -601,7 +594,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.cpp" line="148"/>
         <source>Edit length</source>
-        <translation>Verander lengte</translation>
+        <translation>Bewerk lengte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="82"/>
@@ -656,12 +649,12 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="315"/>
         <source>Line color:</source>
-        <translation>Lijnkleur:</translation>
+        <translation>Lijn kleur:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="322"/>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="325"/>
@@ -699,7 +692,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="371"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="550"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>First angle</source>
@@ -731,7 +724,7 @@
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation type="vanished">Straal kan niet negatief zijn</translation>
+        <translation type="vanished">Straal mag niet negatief zijn</translation>
     </message>
     <message>
         <source>Angles equal</source>
@@ -749,12 +742,12 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="487"/>
         <source>Edit first angle</source>
-        <translation>Verander eerste hoek</translation>
+        <translation>Bewerk eerste hoek</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="501"/>
         <source>Edit second angle</source>
-        <translation>Verander tweede hoek</translation>
+        <translation>Bewerk tweede hoek</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="82"/>
@@ -862,7 +855,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="368"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="547"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>First angle</source>
@@ -913,7 +906,7 @@
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation type="vanished">Straal kan niet negatief zijn</translation>
+        <translation type="vanished">Straal mag niet negatief zijn</translation>
     </message>
     <message>
         <source>Length can&apos;t be equal 0</source>
@@ -1052,7 +1045,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="192"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -1112,7 +1105,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.cpp" line="143"/>
         <source>Edit length</source>
-        <translation>Verander lengte</translation>
+        <translation>Bewerk lengte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="79"/>
@@ -1142,7 +1135,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="234"/>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="237"/>
@@ -1172,7 +1165,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="321"/>
         <source>Line color:</source>
-        <translation>Lijnkleur:</translation>
+        <translation>Lijn kleur:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="28"/>
@@ -1387,7 +1380,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="192"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Axis point</source>
@@ -1470,7 +1463,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="276"/>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="279"/>
@@ -1485,7 +1478,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="315"/>
         <source>Line color:</source>
-        <translation>Lijnkleur:</translation>
+        <translation>Lijn kleur:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="28"/>
@@ -1521,7 +1514,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="192"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Arc</source>
@@ -1547,7 +1540,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.cpp" line="115"/>
         <source>Edit length</source>
-        <translation>Verander de lengte</translation>
+        <translation>Bewerk lengte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="79"/>
@@ -1582,7 +1575,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="251"/>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="254"/>
@@ -1627,7 +1620,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="192"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Curve</source>
@@ -1653,7 +1646,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.cpp" line="313"/>
         <source>Edit length</source>
-        <translation>Verander de lengte</translation>
+        <translation>Bewerk lengte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="79"/>
@@ -1688,7 +1681,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="251"/>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="254"/>
@@ -1733,7 +1726,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="192"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Curve</source>
@@ -1759,7 +1752,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.cpp" line="313"/>
         <source>Edit length</source>
-        <translation>Verander de lengte</translation>
+        <translation>Bewerk lengte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="79"/>
@@ -1794,7 +1787,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="251"/>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="254"/>
@@ -1865,7 +1858,7 @@
     </message>
     <message>
         <source>Bias Y</source>
-        <translation type="vanished">Richting Y</translation>
+        <translation type="vanished">Inslag Y</translation>
     </message>
     <message>
         <source>Options</source>
@@ -1877,7 +1870,7 @@
     </message>
     <message>
         <source>Seam allowance</source>
-        <translation type="vanished">Naadtoeslag</translation>
+        <translation type="vanished">Naad toeslag</translation>
     </message>
     <message>
         <source>Width</source>
@@ -1897,7 +1890,7 @@
     </message>
     <message>
         <source>Reverse</source>
-        <translation type="vanished">Omgekeerde</translation>
+        <translation type="vanished">Keer om</translation>
     </message>
     <message>
         <source>Seam allowance tool</source>
@@ -1941,7 +1934,7 @@
     </message>
     <message>
         <source>Bias X:</source>
-        <translation type="vanished">Richting X:</translation>
+        <translation type="vanished">Inslag X:</translation>
     </message>
     <message>
         <source>Bias Y:</source>
@@ -1965,7 +1958,7 @@
     </message>
     <message>
         <source>Pattern piece data</source>
-        <translation type="vanished">Patroondeel data</translation>
+        <translation type="vanished">Gegevens van patroondeel</translation>
     </message>
     <message>
         <source>Material/Cut number/Placement</source>
@@ -2005,7 +1998,7 @@
     </message>
     <message>
         <source>Pattern label visible</source>
-        <translation type="vanished">Zichtbare patroon label</translation>
+        <translation type="vanished">Patroonlabel zichtbaar</translation>
     </message>
     <message>
         <source>Fabric</source>
@@ -2029,11 +2022,11 @@
     </message>
     <message>
         <source>Cut on fold</source>
-        <translation type="vanished">Knip op vouw</translation>
+        <translation type="vanished">Knip op de vouw</translation>
     </message>
     <message>
         <source>Cut %1 of %2%3</source>
-        <translation type="vanished">Knip %1 van %2%3</translation>
+        <translation type="vanished">Knip %1 of %2%3</translation>
     </message>
     <message>
         <source> on Fold</source>
@@ -2093,7 +2086,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Laat hele berekening zien in berichtenbox&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -2676,7 +2669,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="191"/>
@@ -2783,7 +2776,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="75"/>
         <source>Formula:</source>
-        <translation>Formule:</translation>
+        <translation>`Formule:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="137"/>
@@ -2879,7 +2872,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="750"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="935"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Laat hele berekening zien in berichtenbox&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="264"/>
@@ -2911,12 +2904,12 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="970"/>
         <source>Center point:</source>
-        <translation>Middelpunt:</translation>
+        <translation>Middelste punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="977"/>
         <source>Select center point of the arc</source>
-        <translation>Kies middelpunt van boog</translation>
+        <translation>Selecteer het middelste punt van de boog</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="984"/>
@@ -2998,7 +2991,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="216"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="410"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -3040,12 +3033,12 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.cpp" line="178"/>
         <source>Edit angle</source>
-        <translation>Verander de hoek</translation>
+        <translation>Bewerk hoek</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.cpp" line="192"/>
         <source>Edit length</source>
-        <translation>Verander de lengte</translation>
+        <translation>Bewerk lengte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="88"/>
@@ -3088,7 +3081,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="468"/>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="471"/>
@@ -3103,7 +3096,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="519"/>
         <source>Line color:</source>
-        <translation>Lijnkleur:</translation>
+        <translation>Lijn kleur:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="37"/>
@@ -3260,7 +3253,7 @@
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.cpp" line="271"/>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.cpp" line="350"/>
         <source>measurement</source>
-        <translation>Maten</translation>
+        <translation>maten</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.cpp" line="407"/>
@@ -3530,7 +3523,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="114"/>
         <source>First line point:</source>
-        <translation>Eerste punt van de lijn:</translation>
+        <translation>Eerste lijnpunt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="124"/>
@@ -3540,7 +3533,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="138"/>
         <source>Second line point:</source>
-        <translation>Tweede punt van de lijn:</translation>
+        <translation>Tweede lijnpunt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="228"/>
@@ -3781,7 +3774,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="53"/>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="56"/>
@@ -3811,7 +3804,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="140"/>
         <source>Line color:</source>
-        <translation>Lijnkleur:</translation>
+        <translation>Lijn kleur:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="31"/>
@@ -3875,7 +3868,7 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="344"/>
         <source>%5 - intersection of lines %1_%2 and %3_%4</source>
-        <translation>%5 - kruispunt van lijnen %1_%2 en %3_%4</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Curve %1_%2</source>
@@ -3958,7 +3951,7 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="457"/>
         <source>Correction the dart %1_%2_%3</source>
-        <translation>Correctie van de figuurnaad %1_%2_%3</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="447"/>
@@ -4135,7 +4128,7 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="355"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1015"/>
         <source>The calculated value</source>
-        <translation>Berekende waarde</translation>
+        <translation>De berekende waarde</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1353"/>
@@ -4258,13 +4251,13 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="525"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1178"/>
         <source>Formula:</source>
-        <translation>Formule:</translation>
+        <translation>`Formule:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="577"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1230"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="628"/>
@@ -4659,7 +4652,7 @@
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation type="vanished">Verscheidene werkstukken zijn niet geordend en geen daarvan past op een papierformaat</translation>
+        <translation type="vanished">Verscheidene werkstukken zijn niet geordend en geen enkele past op papier</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutprogress.ui" line="17"/>
@@ -4815,7 +4808,7 @@
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.cpp" line="806"/>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.cpp" line="825"/>
         <source>Millimiters</source>
-        <translation>Millimiters</translation>
+        <translation>Millimeters</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.cpp" line="807"/>
@@ -4869,23 +4862,23 @@
     </message>
     <message>
         <source>Roll 24in</source>
-        <translation type="vanished">Papierrol van 24 inches = 60,96 cm</translation>
+        <translation type="vanished">Roll 24Inch</translation>
     </message>
     <message>
         <source>Roll 30in</source>
-        <translation type="vanished">Papierrol van 30 inches = 76,20 cm</translation>
+        <translation type="vanished">Roll 30inch</translation>
     </message>
     <message>
         <source>Roll 36in</source>
-        <translation type="vanished">Papierrol 36 inches = 91,44 cm</translation>
+        <translation type="vanished">Roll 36inch</translation>
     </message>
     <message>
         <source>Roll 42in</source>
-        <translation type="vanished">Papierrol 42 inches = 106,68 cm</translation>
+        <translation type="vanished">Roll 42inch</translation>
     </message>
     <message>
         <source>Roll 44in</source>
-        <translation type="vanished">Papierrol 44 inches = 111,76 cm</translation>
+        <translation type="vanished">Roll 44inch</translation>
     </message>
     <message>
         <source>
@@ -4902,7 +4895,7 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="44"/>
         <source>Paper format</source>
-        <translation>Papier Formaat</translation>
+        <translation>Papier formaat</translation>
     </message>
     <message>
         <source>Fields</source>
@@ -5174,7 +5167,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="145"/>
         <source>Line color:</source>
-        <translation>Lijnkleur:</translation>
+        <translation>Lijn kleur:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="37"/>
@@ -5239,7 +5232,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="52"/>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="55"/>
@@ -5282,7 +5275,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="192"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Axis point</source>
@@ -5391,7 +5384,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="300"/>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="303"/>
@@ -5406,7 +5399,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="342"/>
         <source>Line color:</source>
-        <translation>Lijnkleur:</translation>
+        <translation>Lijn kleur:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="28"/>
@@ -5705,7 +5698,7 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="453"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="632"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Laat hele berekening zien in berichtenbox&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="343"/>
@@ -5720,12 +5713,12 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="470"/>
         <source>Edit angle</source>
-        <translation>Bewerk de hoek</translation>
+        <translation>Verander de hoek</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="498"/>
         <source>Edit length</source>
-        <translation>Bewerk de lengte</translation>
+        <translation>Bewerk lengte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="252"/>
@@ -6006,7 +5999,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="192"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -6040,7 +6033,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="14"/>
         <source>Point along perpendicular</source>
-        <translation>Punt langs haakse hoek</translation>
+        <translation>Loodlijn met punt</translation>
     </message>
     <message>
         <source>First point of line</source>
@@ -6057,7 +6050,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.cpp" line="148"/>
         <source>Edit length</source>
-        <translation>Verander de lengte</translation>
+        <translation>Bewerk lengte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="82"/>
@@ -6117,7 +6110,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="515"/>
         <source>Line color:</source>
-        <translation>Lijnkleur:</translation>
+        <translation>Lijn kleur:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="31"/>
@@ -6455,10 +6448,6 @@ Toch de instellingen aanpassen?</translation>
         <translation type="vanished">Verwijder een kenmerkende eigenschap</translation>
     </message>
     <message>
-        <source>Remove node</source>
-        <translation type="vanished">Verwijder knooppunt</translation>
-    </message>
-    <message>
         <source>Set</source>
         <translation type="vanished">Klaar</translation>
     </message>
@@ -6491,10 +6480,6 @@ Toch de instellingen aanpassen?</translation>
         <translation type="vanished">Geen veranderingen</translation>
     </message>
     <message>
-        <source>Cannot delete previously created node</source>
-        <translation type="vanished">Kan eerder aangemaakt knooppunt niet verwijderen</translation>
-    </message>
-    <message>
         <source>No changes left</source>
         <translation type="vanished">Geen veranderingen over</translation>
     </message>
@@ -6515,16 +6500,8 @@ Toch de instellingen aanpassen?</translation>
         <translation type="vanished">Kan eerder aangemaakt kenmerkende eigenschap niet verwijderen</translation>
     </message>
     <message>
-        <source>Node Name</source>
-        <translation type="vanished">Knooppunt naam</translation>
-    </message>
-    <message>
         <source>Name:</source>
         <translation type="vanished">Naam:</translation>
-    </message>
-    <message>
-        <source>Node Value (may be empty)</source>
-        <translation type="vanished">Knooppunt waarde ( mag leeg zijn)</translation>
     </message>
     <message>
         <source>Value:</source>
@@ -6545,10 +6522,6 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Root node</source>
         <translation type="vanished">Basis knooppunt</translation>
-    </message>
-    <message>
-        <source>Node</source>
-        <translation type="vanished">Knooppunt</translation>
     </message>
     <message>
         <source>Attribute</source>
@@ -6649,7 +6622,7 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="356"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1966"/>
         <source>Seam allowance</source>
-        <translation>Naadtoeslag</translation>
+        <translation>Naad toeslag</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="407"/>
@@ -6697,7 +6670,7 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1989"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2218"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Laat hele berekening zien in berichtenbox&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="547"/>
@@ -7114,7 +7087,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpin.ui" line="39"/>
         <source>Piece:</source>
-        <translation>Stuk:</translation>
+        <translation>Onderdeel:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpin.ui" line="14"/>
@@ -7338,7 +7311,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="50"/>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="53"/>
@@ -7385,7 +7358,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="189"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toon volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -7425,7 +7398,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="338"/>
         <source>Radius can&apos;t be negative</source>
-        <translation>Straal kan niet negatief zijn</translation>
+        <translation>Straal mag niet negatief zijn</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="79"/>
@@ -7455,7 +7428,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="232"/>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="235"/>
@@ -7501,7 +7474,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="192"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toon volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -7567,7 +7540,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="235"/>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="238"/>
@@ -7640,7 +7613,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="56"/>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="59"/>
@@ -7707,7 +7680,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="50"/>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="53"/>
@@ -7759,7 +7732,7 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="189"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="369"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toon volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Radius of the second circle</source>
@@ -7811,7 +7784,7 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="432"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="455"/>
         <source>Radius can&apos;t be negative</source>
-        <translation>Straal kan niet negatief zijn</translation>
+        <translation>Straal mag niet negatief zijn</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="79"/>
@@ -7849,7 +7822,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="412"/>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="415"/>
@@ -7912,7 +7885,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="91"/>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="94"/>
@@ -7977,7 +7950,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpreferences.ui" line="60"/>
         <source>Configuration</source>
-        <translation>Configuratie</translation>
+        <translation>Instellingen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpreferences.ui" line="75"/>
@@ -8018,7 +7991,7 @@ Toch de instellingen aanpassen?</translation>
     <message numerus="yes">
         <location filename="../../src/app/puzzle/dialogs/dialogpuzzlepreferences.cpp" line="159"/>
         <source>Followed %n option(s) require restart to take effect: %1.</source>
-        <translation type="unfinished">
+        <translation>
             <numerusform>Volgende optie vereist een herstart om geactiveerd te worden: %1.</numerusform>
             <numerusform>Volgende %n optie(s) vereisen een herstart om geactiveerd te worden: %1.</numerusform>
         </translation>
@@ -8098,7 +8071,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="267"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toon volledige berekening in berichten venster&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="293"/>
@@ -8911,7 +8884,7 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2207"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2290"/>
         <source>Error</source>
-        <translation>Fout</translation>
+        <translation>Error</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2486"/>
@@ -8923,7 +8896,7 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2549"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2609"/>
         <source>Edit angle</source>
-        <translation>Bewerk hoek</translation>
+        <translation>Verander de hoek</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2537"/>
@@ -9026,7 +8999,7 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2859"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2886"/>
         <source>&lt;Empty&gt;</source>
-        <translation>&lt;Leeg&gt;</translation>
+        <translation>&lt;Empty&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="541"/>
@@ -9499,7 +9472,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="192"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toon volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -9547,7 +9520,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.cpp" line="142"/>
         <source>Edit length</source>
-        <translation>Verander de lengte</translation>
+        <translation>Bewerk lengte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="82"/>
@@ -9577,7 +9550,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="234"/>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="237"/>
@@ -9607,7 +9580,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="372"/>
         <source>Line color:</source>
-        <translation>Lijnkleur:</translation>
+        <translation>Lijn kleur:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="31"/>
@@ -9655,7 +9628,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="45"/>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="51"/>
@@ -9794,7 +9767,7 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="627"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="806"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toon volledige berekening in berichten venster&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="276"/>
@@ -9818,7 +9791,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="vanished">Fout</translation>
+        <translation type="vanished">Error</translation>
     </message>
     <message>
         <source>Length can&apos;t be negative</source>
@@ -9893,7 +9866,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="869"/>
         <source>List of points</source>
-        <translation>Lijst van punten</translation>
+        <translation>Puntenlijst</translation>
     </message>
     <message>
         <source>Coefficient of curvature of the curve</source>
@@ -9993,7 +9966,7 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="657"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="836"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toon volledige berekening in berichten venster&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="445"/>
@@ -10017,7 +9990,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="vanished">Fout</translation>
+        <translation type="vanished">Error</translation>
     </message>
     <message>
         <source>Length can&apos;t be negative</source>
@@ -10102,7 +10075,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogtapepreferences.ui" line="60"/>
         <source>Configuration</source>
-        <translation>Configuratie</translation>
+        <translation>Instellingen</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogtapepreferences.ui" line="75"/>
@@ -10271,7 +10244,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="53"/>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="56"/>
@@ -10414,7 +10387,7 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="137"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="154"/>
         <source>Unique label</source>
-        <translation>Unieke label</translation>
+        <translation>Unieke labe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="140"/>
@@ -10607,7 +10580,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="vanished">Fout</translation>
+        <translation type="vanished">Error</translation>
     </message>
     <message>
         <source>Information</source>
@@ -10799,7 +10772,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/app/tape/mapplication.cpp" line="1049"/>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
-        <translation>Schakel hoog-dpi-schaling uit. Gebruik deze optie als je problemen hebt met schaalverandering (als default is ingeschakeld). Als alternatief kun je %1 omgevingsvariabele gebruiken.</translation>
+        <translation>Schakel hoog-dpi-schaling uit. Gebruik deze optie als je problemen hebt met schaalverandering (als default is uitgeschakeld). Als alternatief kun je %1 omgevingsvariabele gebruiken.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/mapplication.cpp" line="1028"/>
@@ -10968,7 +10941,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="100"/>
         <source>&amp;Pattern piece</source>
-        <translation>&amp;Patroondeel</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="131"/>
@@ -11451,13 +11424,13 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2875"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4647"/>
         <source>Error empty parameter.</source>
-        <translation>Fout. Lege parameter.</translation>
+        <translation>Fout lege parameter.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2846"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2882"/>
         <source>Error wrong id.</source>
-        <translation>Fout. Verkeerde id.</translation>
+        <translation>Fout verkeerde ID.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2896"/>
@@ -11682,7 +11655,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2279"/>
         <source>Point from circle and tangent</source>
-        <translation>Kruispunt van cirkel en raaklijn</translation>
+        <translation>Punt van cirkel en raaklijn</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2261"/>
@@ -13259,7 +13232,7 @@ Would you like to select another file?</source>
     <message>
         <location filename="../../src/libs/vtools/undocommands/label/movelabel.cpp" line="46"/>
         <source>move point label</source>
-        <translation>verplaats punt label</translation>
+        <translation>verzet punt label</translation>
     </message>
 </context>
 <context>
@@ -13307,14 +13280,14 @@ Would you like to select another file?</source>
     <message>
         <location filename="../../src/libs/vtools/undocommands/label/operationshowlabel.cpp" line="50"/>
         <source>toggle label</source>
-        <translation>schakel label</translation>
+        <translation>sluit label</translation>
     </message>
 </context>
 <context>
     <name>PathPage</name>
     <message>
         <source>Open Directory</source>
-        <translation type="vanished">Open Directory</translation>
+        <translation type="vanished">Open Map</translation>
     </message>
     <message>
         <source>Path that use Valentina</source>
@@ -13322,7 +13295,7 @@ Would you like to select another file?</source>
     </message>
     <message>
         <source>Default</source>
-        <translation type="vanished">Standaardwaarde</translation>
+        <translation type="vanished">Standaard</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -13474,7 +13447,7 @@ Would you like to select another file?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="51"/>
         <source>Auto-save modified pattern</source>
-        <translation>Automatisch opgeslagen van veranderd patroon</translation>
+        <translation>Automatisch opslaan na aanpassing patroon</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="61"/>
@@ -13842,7 +13815,7 @@ Would you like to select another file?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.ui" line="72"/>
         <source>Default</source>
-        <translation>Standaardwaarde</translation>
+        <translation>Standaard</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.ui" line="101"/>
@@ -14672,7 +14645,7 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/libs/vmisc/projectversion.cpp" line="115"/>
         <source>Based on Qt %1 (%2, %3 bit)</source>
-        <translation>Gebaseerd op Qt %1 (%2, %3 bit)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vgeometry/vgeometrydef.cpp" line="65"/>
@@ -14870,7 +14843,7 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/libs/vtools/tools/vtooluniondetails.cpp" line="1538"/>
         <source>United detail</source>
-        <translation>Samengevoegd detail</translation>
+        <translation>Samenvoegend detail</translation>
     </message>
     <message>
         <location filename="../../src/libs/vgeometry/vplacelabelitem.cpp" line="146"/>
@@ -15299,26 +15272,26 @@ Deze optie wordt actief na een herstart..</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="915"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="929"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="956"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="970"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam path at %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="917"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="931"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="958"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="972"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam path.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="981"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1001"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1022"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1042"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam allowance path at %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="983"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1003"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1024"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1044"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam allowance path.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -15639,14 +15612,14 @@ Deze optie wordt actief na een herstart..</translation>
     <name>RotationMoveLabel</name>
     <message>
         <source>move point label</source>
-        <translation type="vanished">verplaats punt label</translation>
+        <translation type="vanished">verzet punt label</translation>
     </message>
 </context>
 <context>
     <name>SaveDetailOptions</name>
     <message>
         <source>save detail option</source>
-        <translation type="vanished">sla details optie op</translation>
+        <translation type="vanished">bewaar opties van detail</translation>
     </message>
 </context>
 <context>
@@ -15790,21 +15763,21 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="320"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2709"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2710"/>
         <source>Name</source>
         <comment>measurement column</comment>
         <translation>Naam</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="325"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2711"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2712"/>
         <source>Full name</source>
         <comment>measurement column</comment>
         <translation>Volledige naam</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="330"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2713"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2714"/>
         <source>Group</source>
         <comment>measurement column</comment>
         <translation>Groep</translation>
@@ -16225,74 +16198,74 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2459"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2645"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2646"/>
         <source>Unnamed image %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2500"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2501"/>
         <source>Open file</source>
         <translation>Open bestand</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2619"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2620"/>
         <source>Length units</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2620"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2621"/>
         <source>Degrees</source>
         <translation>Graden</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2637"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2638"/>
         <source>None</source>
         <translation>Geen</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2682"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2683"/>
         <source>Measurement name is empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2687"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2688"/>
         <source>Imported file must not contain the same name twice.</source>
         <translation>Geïmporteerd bestand mag geen tweemaal dezelfde naam bevatten.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2692"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2693"/>
         <source>Measurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2697"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2698"/>
         <source>Measurement &apos;%1&apos; already used in the file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2715"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2716"/>
         <source>Formula</source>
         <comment>measurement column</comment>
         <translation>Formule</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2717"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2718"/>
         <source>Description</source>
         <comment>measurement column</comment>
         <translation>Beschrijving</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2741"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2742"/>
         <source>Error in row %1. The measurement name is empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2782"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2783"/>
         <source>Error in row %1. %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2795"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2796"/>
         <source>Individual measurements require at least 2 columns.</source>
         <translation>Individuele maten vereisen ten minste 2 kolommen.</translation>
     </message>
@@ -16342,12 +16315,12 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="555"/>
         <source>Formula:</source>
-        <translation>Formule:</translation>
+        <translation>`Formule:</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="601"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toon volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="649"/>
@@ -16380,7 +16353,7 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="538"/>
         <source>Calculated value:</source>
-        <translation>Bereken waarde:</translation>
+        <translation>Berekende waarde:</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="749"/>
@@ -16395,7 +16368,7 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="857"/>
         <source>Type:</source>
-        <translation>Soort:</translation>
+        <translation>Type:</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="864"/>
@@ -16493,7 +16466,7 @@ Deze optie wordt actief na een herstart..</translation>
         <translation type="vanished">Open individueel ...</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3535"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3536"/>
         <source>Save</source>
         <translation>Opslaan</translation>
     </message>
@@ -16557,7 +16530,7 @@ Deze optie wordt actief na een herstart..</translation>
         <translation>Voorkeuren</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3882"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3883"/>
         <source>untitled %1</source>
         <translation>naamloos %1</translation>
     </message>
@@ -16569,7 +16542,7 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="562"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1877"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4277"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4278"/>
         <source>File error.</source>
         <translation>Bestandsfout.</translation>
     </message>
@@ -16581,7 +16554,7 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="983"/>
         <source>measurements</source>
-        <translation>Maten</translation>
+        <translation>maten</translation>
     </message>
     <message>
         <source>Individual measurements (*.vit)</source>
@@ -16597,7 +16570,7 @@ Deze optie wordt actief na een herstart..</translation>
         <translation>Opslaan als</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4302"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4303"/>
         <source>&amp;New Window</source>
         <translation>&amp;Nieuw Venster</translation>
     </message>
@@ -16611,22 +16584,22 @@ Deze optie wordt actief na een herstart..</translation>
         <translation type="vanished">M_%1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2350"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4020"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4043"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4059"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2351"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4021"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4044"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4060"/>
         <source>Error</source>
         <translation>Fout</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2350"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4020"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2351"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4021"/>
         <source>Empty field.</source>
         <translation>Leeg veld.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4059"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4060"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4061"/>
         <source>Parser error: %1</source>
         <translation>Fout bij opsplitsen: %1</translation>
     </message>
@@ -16647,14 +16620,14 @@ Deze optie wordt actief na een herstart..</translation>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="664"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="772"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="987"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2670"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3075"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2671"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3076"/>
         <source>Individual measurements</source>
         <translation>Individuele maten</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1610"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3882"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3883"/>
         <source>untitled</source>
         <translation>naamloos</translation>
     </message>
@@ -16663,7 +16636,7 @@ Deze optie wordt actief na een herstart..</translation>
         <translation type="vanished">&lt;Leeg&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3526"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3527"/>
         <source>Unsaved changes</source>
         <translation>Niet opgeslagen veranderingen</translation>
     </message>
@@ -16674,17 +16647,17 @@ Do you want to save your changes?</source>
 Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4021"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4022"/>
         <source>Empty field</source>
         <translation>Leeg veld</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4054"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4055"/>
         <source>Value</source>
         <translation>Waarde</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4068"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4069"/>
         <source>Open file</source>
         <translation>Open bestand</translation>
     </message>
@@ -16701,7 +16674,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="796"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5138"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5139"/>
         <source>Pattern unit:</source>
         <translation>De patroon eenheid:</translation>
     </message>
@@ -16753,7 +16726,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="477"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4235"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4236"/>
         <source>File has unknown format.</source>
         <translation>Bestand heeft een onbekende indeling.</translation>
     </message>
@@ -16763,20 +16736,20 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="439"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4197"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4198"/>
         <source>File &apos;%1&apos; doesn&apos;t exist!</source>
         <translation>Bestand &apos;%1&apos; bestaat niet!</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2285"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2286"/>
         <source>The name of known measurement forbidden to change.</source>
         <translation>De naam van bekende maten is verboden om te veranderen.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1470"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2251"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2363"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2573"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2252"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2364"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2574"/>
         <source>Can&apos;t find measurement &apos;%1&apos;.</source>
         <translation>Kan maten &apos;%1&apos; niet vinden.</translation>
     </message>
@@ -16793,7 +16766,7 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="vanished">De hoogte van groter wordende waardes van bekende maten is verboden om te veranderen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2592"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2593"/>
         <source>The full name of known measurement forbidden to change.</source>
         <translation>De volledige naam van de bekende maten is verboden te veranderen.</translation>
     </message>
@@ -16822,19 +16795,19 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>Verwijder maten</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5214"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5215"/>
         <source>unknown</source>
         <comment>gender</comment>
         <translation>onbekend</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5215"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5216"/>
         <source>male</source>
         <comment>gender</comment>
         <translation>mannelijk</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5216"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5217"/>
         <source>female</source>
         <comment>gender</comment>
         <translation>vrouwelijk</translation>
@@ -16881,12 +16854,12 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=\&quot;center\&quot;&gt;Onbekende meting&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2998"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2999"/>
         <source>About Qt</source>
         <translation>Over Qt</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3475"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3476"/>
         <source>File was not saved yet.</source>
         <translation>Bestand was nog niet opgeslagen.</translation>
     </message>
@@ -16927,7 +16900,7 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="vanished">Sla op...</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3540"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3541"/>
         <source>Don&apos;t Save</source>
         <translation>Niet opslaan</translation>
     </message>
@@ -17010,12 +16983,12 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="957"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2716"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2717"/>
         <source>Could not save the file</source>
         <translation>Het bestand is niet bewaard</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3890"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3891"/>
         <source>read only</source>
         <translation>alleen lezen</translation>
     </message>
@@ -17024,17 +16997,17 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="664"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="763"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="992"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3025"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3026"/>
         <source>Multisize measurements</source>
         <translation>Multimaten maten</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4044"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4045"/>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
         <translation>Ongeldig resultaat. Waarde is oneindig of NaN. Controleer uw berekeningen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3474"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3475"/>
         <source>Empty</source>
         <translation>Leeg</translation>
     </message>
@@ -17054,7 +17027,7 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>Creer van bestaande …</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3535"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3536"/>
         <source>Save…</source>
         <translation>Opslaan…</translation>
     </message>
@@ -17066,22 +17039,22 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>Importeer van CSV</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4435"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4436"/>
         <source>Individual measurements require at least 2 columns.</source>
         <translation>Individuele maten vereisen ten minste 2 kolommen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4516"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4517"/>
         <source>Multisize measurements require at least 4 columns.</source>
         <translation>Multimaten maten vereisen tenminste 4 kolommen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4387"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4388"/>
         <source>Imported file must not contain the same name twice.</source>
         <translation>Geïmporteerd bestand mag geen tweemaal dezelfde naam bevatten.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4160"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4161"/>
         <source>Cannot save settings. Access denied.</source>
         <translation>Kan instellingen niet opslaan. Toegang geweigerd.</translation>
     </message>
@@ -17136,44 +17109,44 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>&amp;Nieuw</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4139"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4140"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation>Kan instellingen niet inlezen wegens een niet-conform .INI-bestand.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="326"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4932"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4948"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4933"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4949"/>
         <source>Name</source>
         <comment>measurement column</comment>
         <translation>Naam</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="331"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4934"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4953"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4935"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4954"/>
         <source>Full name</source>
         <comment>measurement column</comment>
         <translation>Volledige naam</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="336"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4936"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4958"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4937"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4959"/>
         <source>Calculated value</source>
         <comment>measurement column</comment>
         <translation>Berekende waarde</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="341"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4938"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4939"/>
         <source>Formula</source>
         <comment>measurement column</comment>
         <translation>Formule</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="346"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4963"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4964"/>
         <source>Base value</source>
         <comment>measurement column</comment>
         <translation>Basis waarde</translation>
@@ -17251,7 +17224,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1620"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2672"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2673"/>
         <source>Export to individual</source>
         <translation>Exporteer naar individueel</translation>
     </message>
@@ -17362,97 +17335,97 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2671"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2672"/>
         <source>measurements.vit</source>
         <translation>measurements.vit</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2981"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2982"/>
         <source>Unknown known measurements: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3397"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3398"/>
         <source>Shift (%1):</source>
         <translation>Shift (%1):</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3527"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3528"/>
         <source>Measurements have been modified. Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4829"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4830"/>
         <source>Unknown measurement</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4865"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4866"/>
         <source>None</source>
         <translation>Geen</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4874"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4875"/>
         <source>Invalid link</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4940"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4994"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4941"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4995"/>
         <source>Description</source>
         <comment>measurement column</comment>
         <translation>Beschrijving</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4974"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4983"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4989"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4975"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4984"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4990"/>
         <source>Shift</source>
         <comment>measurement column</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5382"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5383"/>
         <source>Empty</source>
         <comment>list</comment>
         <translation>Leeg</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5461"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5471"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5481"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5462"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5472"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5482"/>
         <source>%1 shift</source>
         <translation>%1 shift</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4606"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4607"/>
         <source>Cannot convert base value to double in column 2.</source>
         <translation>Kan de basiswaarde niet naar het dubbele omzetten in kolom 2.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4610"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4616"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4623"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4611"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4617"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4624"/>
         <source>Cannot convert shift value to double in column %1.</source>
         <translation>Kan de basiswaarde niet naar het dubbele omzetten in kolom %1.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5185"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5186"/>
         <source>Millimeters</source>
         <translation>Millimeters</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5188"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5189"/>
         <source>Inches</source>
         <translation>Inches</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5191"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5192"/>
         <source>Centimeters</source>
         <translation>Centimeters</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5200"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5201"/>
         <source>Degrees</source>
         <translation>Graden</translation>
     </message>
@@ -17478,7 +17451,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="115"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5299"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5300"/>
         <source>0 results</source>
         <translation type="unfinished"></translation>
     </message>
@@ -17538,33 +17511,33 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4382"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4383"/>
         <source>Measurement name is empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4392"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4393"/>
         <source>Measurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4397"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4398"/>
         <source>Measurement &apos;%1&apos; already used in the file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4450"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4451"/>
         <source>Error in row %1. The measurement name is empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4588"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4589"/>
         <source>The measurement name is empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4483"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4539"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4484"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4540"/>
         <source>Error in row %1. %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -17719,7 +17692,7 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="215"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="404"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;oont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="285"/>
@@ -17823,7 +17796,7 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1514"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1761"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toon volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="717"/>
@@ -18262,7 +18235,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="501"/>
         <source>Forbid piece be mirrored in a layout.</source>
-        <translation>Het stuk kan niet gespiegeld worden in de opmaak modus.</translation>
+        <translation>Het deel spiegelen is in de opmaak modus niet toegestaan.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="504"/>
@@ -18348,7 +18321,7 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="555"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="561"/>
         <source>Seam allowance</source>
-        <translation>Naadtoeslag</translation>
+        <translation>Naad toeslag</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="647"/>
@@ -18381,7 +18354,7 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="996"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1186"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toon volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="782"/>
@@ -18582,11 +18555,11 @@ Wil je deze veranderingen opslaan?</translation>
     <name>TapeConfigDialog</name>
     <message>
         <source>Apply</source>
-        <translation type="vanished">Pas toe</translation>
+        <translation type="vanished">Toepassen</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="vanished">&amp;Stop</translation>
+        <translation type="vanished">&amp;Annuleren</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
@@ -18594,11 +18567,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Config Dialog</source>
-        <translation type="vanished">Configureer dialoog</translation>
+        <translation type="vanished">Instellingen Dialoog</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation type="vanished">Configuratie</translation>
+        <translation type="vanished">Instellingen</translation>
     </message>
     <message>
         <source>Paths</source>
@@ -18629,11 +18602,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Decimal separator parts</source>
-        <translation type="vanished">Decimale gescheiden delen</translation>
+        <translation type="vanished">Decimaal scheidingsteken</translation>
     </message>
     <message>
         <source>With OS options (%1)</source>
-        <translation type="vanished">Met OS opties (%1)</translation>
+        <translation type="vanished">Volgens besturingssysteem (%1)</translation>
     </message>
     <message>
         <source>GUI language:</source>
@@ -18664,7 +18637,7 @@ Wil je deze veranderingen opslaan?</translation>
     <name>TapePathPage</name>
     <message>
         <source>Open Directory</source>
-        <translation type="vanished">Open Directory</translation>
+        <translation type="vanished">Open Map</translation>
     </message>
     <message>
         <source>Path that use Valentina</source>
@@ -18672,7 +18645,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="vanished">Standaardwaarde</translation>
+        <translation type="vanished">Standaard</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -18938,7 +18911,7 @@ Wil je deze veranderingen opslaan?</translation>
     <name>ToggleDetailInLayout</name>
     <message>
         <source>detail in layout list</source>
-        <translation type="vanished">detail in opmaak lijst</translation>
+        <translation type="vanished">detail in de opmaak-lijst</translation>
     </message>
 </context>
 <context>
@@ -19427,7 +19400,7 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2594"/>
         <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2670"/>
         <source>New group</source>
-        <translation>Nieuwe naam</translation>
+        <translation>Nieuwe groep</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="848"/>
@@ -20461,7 +20434,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="686"/>
         <source>Page height in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
-        <translation>Pagina breedte in huidige eenheden zoals 12.0 ( kan niet gebruikt worden met &quot;%1&quot;, export modus).</translation>
+        <translation>Pagina hoogte in huidige eenheden zoals 12.0 ( kan niet gebruikt worden met &quot;%1&quot;, export modus).</translation>
     </message>
     <message>
         <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode): </source>
@@ -20502,7 +20475,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="705"/>
         <source>Page top margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
-        <translation>Top pagina marge in huidige eenheden zoals 3.0 (export modus). Wanneer dat niet ingesteld is wordt de waarde gebruikt van de standaard printer. Of 0 als er geen printers gevonden zijn.</translation>
+        <translation>Bovenste pagina marge in huidige eenheden zoals 3.0 (export modus). Wanneer dat niet ingesteld is wordt de waarde gebruikt van de standaard printer. Of 0 als er geen printers gevonden zijn.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="709"/>
@@ -21084,19 +21057,19 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VDomDocument</name>
     <message>
         <source>Can&apos;t convert toUInt parameter</source>
-        <translation type="vanished">Kan niet omzetten naar UInt parameter</translation>
+        <translation type="vanished">Kan parameter toUlnt niet converteren</translation>
     </message>
     <message>
         <source>Can&apos;t convert toBool parameter</source>
-        <translation type="vanished">Kan niet omzetten naar toBool parameter</translation>
+        <translation type="vanished">Kan de parameter toBool niet converteren</translation>
     </message>
     <message>
         <source>Got empty parameter</source>
-        <translation type="vanished">Heeft een lege parameter</translation>
+        <translation type="vanished">Kreeg een lege parameter</translation>
     </message>
     <message>
         <source>Can&apos;t convert toDouble parameter</source>
-        <translation type="vanished">Kan niet omzetten naar toDouble parameter</translation>
+        <translation type="vanished">Kan niet naar toDouble parameter converteren</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="738"/>
@@ -21130,7 +21103,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
-        <translation type="vanished">Krijg de verkeerde parameter ID. Gebruik alleen ID &gt; 0.</translation>
+        <translation type="vanished">Kreeg de verkeerde parameter id. Alleen nodig id&gt;0.</translation>
     </message>
     <message>
         <source>This id is not unique.</source>
@@ -21198,7 +21171,7 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VDrawTool</name>
     <message>
         <source>Edit wrong formula</source>
-        <translation type="vanished">Verander verkeerde formule</translation>
+        <translation type="vanished">Wijzig verkeerde formule</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.h" line="186"/>
@@ -21208,7 +21181,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.h" line="247"/>
         <source>Delete</source>
-        <translation>Verwijderen</translation>
+        <translation>Verwijder</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.cpp" line="256"/>
@@ -21401,17 +21374,17 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>Kan bestand &apos;%1&apos; niet opslaan. Fout %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="539"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="519"/>
         <source>Cannot set printer page size</source>
         <translation>Kan paginagrootte op printer niet instellen</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="553"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="533"/>
         <source>Cannot set printer margins</source>
         <translation>Kan de printer marges niet bepalen</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="560"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="540"/>
         <source>Can&apos;t open file &apos;%1&apos;</source>
         <translation>Kan bestand &apos;%1&apos; niet openen</translation>
     </message>
@@ -21421,7 +21394,7 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="509"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="489"/>
         <source>Creating file &apos;%1&apos; failed! %2</source>
         <translation>Bestand &apos;%1&apos; maken heeft gefaald! %2</translation>
     </message>
@@ -21442,32 +21415,32 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="577"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="557"/>
         <source>(flat) files</source>
         <translation>(platte)bestanden</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="578"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="558"/>
         <source>files</source>
         <translation>bestanden</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="587"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="567"/>
         <source>Image files</source>
         <translation>Afbeelding bestanden</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="617"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="597"/>
         <source>tiled</source>
         <translation>gestapeld</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="619"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="599"/>
         <source>Numerical control</source>
         <translation>Numerieke controle</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="621"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="601"/>
         <source>Raw Layout Data</source>
         <translation type="unfinished"></translation>
     </message>
@@ -23165,7 +23138,7 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="567"/>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="661"/>
         <source>Error can&apos;t convert value.</source>
-        <translation>Fout kan waarde niet omzetten.</translation>
+        <translation>Fout. Kan waarde niet omzetten.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="574"/>
@@ -23785,10 +23758,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <source>This spline does not exist.</source>
         <translation>Deze vrijevormkromming bestaat niet.</translation>
     </message>
-    <message>
-        <source>Can&apos;t cut spline path with one point</source>
-        <translation type="vanished">Kan vrijevormkromming pad niet knippen met een punt</translation>
-    </message>
 </context>
 <context>
     <name>VSvgFontReader</name>
@@ -23876,7 +23845,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Cut</source>
-        <translation type="vanished">Knip</translation>
+        <translation type="vanished">Knippen</translation>
     </message>
     <message>
         <source>cut</source>
@@ -24081,7 +24050,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Delete</source>
-        <translation type="vanished">Verwijderen</translation>
+        <translation type="vanished">Verwijder</translation>
     </message>
     <message>
         <source>move pattern piece label</source>
@@ -24101,7 +24070,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>resize pattern info label</source>
-        <translation type="vanished">vergroot/verklein patroon informatie label</translation>
+        <translation type="vanished"> wijzig grootte patroon informatie label</translation>
     </message>
     <message>
         <source>rotate pattern info label</source>
@@ -24117,7 +24086,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>resize grainline</source>
-        <translation type="vanished">vergroot/verklein recht-van-draad</translation>
+        <translation type="vanished">wijzig grootte recht-van-draad</translation>
     </message>
     <message>
         <source>rotate grainline</source>
@@ -24333,7 +24302,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2739"/>
         <source>Point at distance and angle</source>
-        <translation>Punt  op afstand en hoek</translation>
+        <translation>Punt op afstand en hoek</translation>
     </message>
     <message>
         <source>Line type</source>
@@ -26447,13 +26416,13 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="272"/>
         <source>sum</source>
         <comment>sum of all arguments</comment>
-        <translation>som</translation>
+        <translation>sum</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="276"/>
         <source>avg</source>
         <comment>mean value of all arguments</comment>
-        <translation>gemiddeld</translation>
+        <translation>avg</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="280"/>
@@ -26498,7 +26467,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="70"/>
         <source>Spl_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation>Vvk_</translation>
+        <translation>Vvk__</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="71"/>
@@ -27948,7 +27917,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/app/puzzle/vpapplication.cpp" line="102"/>
         <location filename="../../src/app/tape/mapplication.cpp" line="139"/>
         <source>CRITICAL:</source>
-        <translation>KRITISCH:</translation>
+        <translation>KRITIEK:</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpapplication.cpp" line="109"/>
@@ -28018,7 +27987,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="165"/>
         <source>CRITICAL:</source>
-        <translation>KRITISCH:</translation>
+        <translation>KRITIEK:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="172"/>

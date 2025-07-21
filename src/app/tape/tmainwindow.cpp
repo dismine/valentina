@@ -2160,7 +2160,8 @@ void TMainWindow::ShowMDiagram(const QSharedPointer<VMeasurement> &m)
 {
     ui->labelDiagram->setResizedPixmap(QPixmap());
     ui->labelDiagram->setCursor(QCursor());
-    ui->labelDiagram->disconnect();
+
+    disconnect(ui->labelDiagram, &VAspectRatioPixmapLabel::clicked, this, &TMainWindow::ShowImage);
 
     if (m.isNull())
     {

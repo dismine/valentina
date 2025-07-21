@@ -9,15 +9,18 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "patch-ng (>=1.17.4,<2.0.0)",
-    "conan (>=1.66.0,<2.0.0)",
+    "conan (>=2.5.0,<3.0.0)",
     "dropbox (>=12.0.2,<13.0.0)",
-    "py7zr (>=0.22.0,<0.23.0)"
+    "py7zr (>=1.0.0,<2.0.0)"
 ]
 
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+package-mode = false
 
 [tool.poetry.requires-plugins]
 poetry-plugin-export = ">=1.9"

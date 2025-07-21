@@ -5,7 +5,7 @@ VLib {
     Depends { name: "buildconfig" }
 
     Depends {
-        name: "conan.crashpad";
+        name: "crashpad";
         condition: buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled
     }
 
@@ -230,7 +230,7 @@ VLib {
         Depends { name: "cpp" }
         Depends { name: "Qt"; submodules: ["printsupport", "widgets"] }
         Depends {
-            name: "conan.crashpad";
+            name: "crashpad";
             condition: buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled
         }
         cpp.includePaths: [exportingProduct.sourceDirectory]

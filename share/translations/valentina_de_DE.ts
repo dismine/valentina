@@ -172,7 +172,7 @@
     </message>
     <message>
         <source>User Name:</source>
-        <translation type="vanished">Username:</translation>
+        <translation type="vanished">Benutzername:</translation>
     </message>
     <message>
         <source>Password:</source>
@@ -222,7 +222,7 @@
     </message>
     <message>
         <source>Default unit updated and will be used the next pattern creation</source>
-        <translation type="vanished">Die Änderung der Standardmaßeinheit  wird erst für neu angelegte Schnittmuster-Dateien wirksam</translation>
+        <translation type="vanished">Die Änderung der Standardmaßeinheit  wird erst für neu angelegte Schnittmusterdateien wirksam</translation>
     </message>
     <message>
         <source>Save</source>
@@ -258,7 +258,7 @@
     </message>
     <message>
         <source>Default unit</source>
-        <translation type="vanished">Standard-Maßeinheit</translation>
+        <translation type="vanished">Standardmaßeinheit</translation>
     </message>
     <message>
         <source>Centimeters</source>
@@ -298,7 +298,7 @@
     </message>
     <message>
         <source>Toolbar</source>
-        <translation type="vanished">Symbolleiste</translation>
+        <translation type="vanished">Werkzeugliste</translation>
     </message>
     <message>
         <source>The text appears under the icon. (recommended for beginners.)</source>
@@ -306,7 +306,7 @@
     </message>
     <message>
         <source>GUI language:</source>
-        <translation type="vanished">Sprache der Benutzeroberfläche:</translation>
+        <translation type="vanished">Sprache Benutzeroberfläche:</translation>
     </message>
     <message>
         <source>Decimal separator parts:</source>
@@ -458,7 +458,7 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.cpp" line="56"/>
         <source>Built on %1 at %2</source>
-        <translation>Erstellt von %1 auf %2</translation>
+        <translation>Erstellt am %1 um %2</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="315"/>
@@ -554,7 +554,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="201"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ganze Berechnungsformel anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vollständige Berechnung im Meldungsfenster anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -582,7 +582,7 @@
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation type="vanished">Linie vom ersten zu diesem Punkt zeigen</translation>
+        <translation type="vanished">Verbindungslinie bis zum Schnittpunkt wird mit angegebenem Stil gezeichnet</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.cpp" line="208"/>
@@ -699,7 +699,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="371"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="550"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ganze Berechnungsformel anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vollständige Berechnung im Meldungsfenster anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>First angle</source>
@@ -766,7 +766,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="281"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="460"/>
         <source>Formula wizard</source>
-        <translation>Formelassistent</translation>
+        <translation>Formel-Assistent</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="144"/>
@@ -862,7 +862,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="368"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="547"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ganze Berechnungsformel anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vollständige Berechnung im Meldungsfenster anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>First angle</source>
@@ -929,7 +929,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="278"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="457"/>
         <source>Formula wizard</source>
-        <translation>Formelassistent</translation>
+        <translation>Formel-Assistent</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="141"/>
@@ -1047,12 +1047,12 @@
     </message>
     <message>
         <source>Value of length</source>
-        <translation type="vanished">Länge</translation>
+        <translation type="vanished">Wert der Länge</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="192"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ganze Berechnungsformel anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vollständige Berechnung im Meldungsfenster anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -1142,7 +1142,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="234"/>
         <source>Unique label</source>
-        <translation>Eindeutige Bezeichnung</translation>
+        <translation>eindeutige Bezeichnung</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="237"/>
@@ -1387,7 +1387,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="192"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ganze Berechnungsformel anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vollständige Berechnung im Meldungsfenster anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Axis point</source>
@@ -1470,7 +1470,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="276"/>
         <source>Unique label</source>
-        <translation>Eindeutige Bezeichnung</translation>
+        <translation>eindeutige Bezeichnung</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="279"/>
@@ -1516,12 +1516,12 @@
     </message>
     <message>
         <source>Value of length</source>
-        <translation type="vanished">Wert der LÃ¤nge</translation>
+        <translation type="vanished">Wert der Länge</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="192"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ganze Berechnungsformel anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vollständige Berechnung im Meldungsfenster anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Arc</source>
@@ -1582,7 +1582,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="251"/>
         <source>Unique label</source>
-        <translation>Eindeutige Bezeichnung</translation>
+        <translation>eindeutige Bezeichnung</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="254"/>
@@ -1622,12 +1622,12 @@
     </message>
     <message>
         <source>Value of length</source>
-        <translation type="vanished">Wert der LÃ¤nge</translation>
+        <translation type="vanished">Wert der Länge</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="192"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ganze Berechnungsformel anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vollständige Berechnung im Meldungsfenster anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Curve</source>
@@ -1688,7 +1688,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="251"/>
         <source>Unique label</source>
-        <translation>Eindeutige Bezeichnung</translation>
+        <translation>eindeutige Bezeichnung</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="254"/>
@@ -1728,12 +1728,12 @@
     </message>
     <message>
         <source>Value of length</source>
-        <translation type="vanished">Wert der LÃ¤nge</translation>
+        <translation type="vanished">Wert der Länge</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="192"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ganze Berechnungsformel anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vollständige Berechnung im Meldungsfenster anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Curve</source>
@@ -1794,7 +1794,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="251"/>
         <source>Unique label</source>
-        <translation>Eindeutige Bezeichnung</translation>
+        <translation>eindeutige Bezeichnung</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="254"/>
@@ -2353,7 +2353,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="710"/>
         <source>Piece letter</source>
-        <translation>Stückbuchstabe</translation>
+        <translation>Schnitteilbuchstabe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="711"/>
@@ -2676,7 +2676,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zeige die ganze Berechnung in der Nachrichtenbox&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vollständige Berechnung im Meldungsfenster anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="191"/>
@@ -2695,7 +2695,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="220"/>
         <source>Increments</source>
-        <translation>Weitere Maße</translation>
+        <translation>weitere Maße</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="243"/>
@@ -2992,13 +2992,13 @@
     </message>
     <message>
         <source>Value of length</source>
-        <translation type="vanished">Längenwert</translation>
+        <translation type="vanished">Wert der Länge</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="216"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="410"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ganze Berechnungsformel anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vollständige Berechnung im Meldungsfenster anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -3006,7 +3006,7 @@
     </message>
     <message>
         <source>Value of angle</source>
-        <translation type="vanished">Berechneter Winkel</translation>
+        <translation type="vanished">Wert des Winkels</translation>
     </message>
     <message>
         <source>Base point</source>
@@ -3026,7 +3026,7 @@
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation type="vanished">Linie vom ersten zu diesem Punkt zeigen</translation>
+        <translation type="vanished">Verbindungslinie bis zum Schnittpunkt wird mit angegebenem Stil gezeichnet</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="20"/>
@@ -3088,7 +3088,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="468"/>
         <source>Unique label</source>
-        <translation>Eindeutige Bezeichnung</translation>
+        <translation>eindeutige Bezeichnung</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="471"/>
@@ -3781,7 +3781,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="53"/>
         <source>Unique label</source>
-        <translation>Eindeutige Bezeichnung</translation>
+        <translation>eindeutige Bezeichnung</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="56"/>
@@ -4129,7 +4129,7 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="350"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1010"/>
         <source>Name</source>
-        <translation>Bezeichnung</translation>
+        <translation>Name</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="355"/>
@@ -4264,7 +4264,7 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="577"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1230"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ganze Berechnungsformel anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vollständige Berechnung im Meldungsfenster anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="628"/>
@@ -4896,7 +4896,8 @@
         <translation type="vanished">
 ⇥Drei Gruppen: groß, mittel, klein = 0
 ⇥Zwei Gruppen: groß, klein = 1
-⇥Absteigende Fläche = 2</translation>
+⇥Absteigende Fläche = 2
+</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="44"/>
@@ -5139,7 +5140,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation type="vanished">Linie vom ersten zu diesem Punkt zeigen</translation>
+        <translation type="vanished">Verbindungslinie bis zum Schnittpunkt wird mit angegebenem Stil gezeichnet</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.cpp" line="187"/>
@@ -5149,7 +5150,7 @@ Einstellungen trotzdem anwenden?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="17"/>
         <source>Line between points</source>
-        <translation>Linie zwischen Punkten</translation>
+        <translation>Verbindungslinie zwischen zwei Punkten</translation>
     </message>
     <message>
         <source>Line color</source>
@@ -5276,12 +5277,12 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Value of angle</source>
-        <translation type="vanished">Berechneter Winkel</translation>
+        <translation type="vanished">Wert des Winkels</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="192"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ganze Berechnungsformel anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vollständige Berechnung im Meldungsfenster anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Axis point</source>
@@ -6005,7 +6006,7 @@ Einstellungen trotzdem anwenden?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="192"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Die ganze Berechnung im Fenster anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vollständige Berechnung im Meldungsfenster anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -7384,7 +7385,7 @@ Einstellungen trotzdem anwenden?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="189"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ganze Berechnungsformel anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vollständige Berechnung im Meldungsfenster anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -7414,7 +7415,7 @@ Einstellungen trotzdem anwenden?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="311"/>
         <source>Edit radius</source>
-        <translation>Radius verändern</translation>
+        <translation>Radius bearbeiten</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="337"/>
@@ -7500,7 +7501,7 @@ Einstellungen trotzdem anwenden?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="192"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Die vollständige Berechnung im Fenster anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vollständige Berechnung im Meldungsfenster anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -7536,7 +7537,7 @@ Einstellungen trotzdem anwenden?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.cpp" line="150"/>
         <source>Edit radius</source>
-        <translation>Radius verändern</translation>
+        <translation>Radius bearbeiten</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="82"/>
@@ -7758,7 +7759,7 @@ Einstellungen trotzdem anwenden?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="189"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="369"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ganze Berechnungsformel anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vollständige Berechnung im Meldungsfenster anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Radius of the second circle</source>
@@ -7992,8 +7993,8 @@ Einstellungen trotzdem anwenden?</translation>
         <location filename="../../src/app/valentina/dialogs/dialogpreferences.cpp" line="158"/>
         <source>Followed %n option(s) require restart to take effect: %1.</source>
         <translation>
-            <numerusform>Folgende %n Option(en) erfordern einen Neustart um wirksam zu werden: %1.</numerusform>
-            <numerusform>Folgende %n Option(en) erfordern einen Neustart um wirksam zu werden: %1.</numerusform>
+            <numerusform>Folgende %n Option(en) erfordern einen Neustart, um wirksam zu werden: %1.</numerusform>
+            <numerusform>Folgende %n Option(en) erfordern einen Neustart, um wirksam zu werden: %1.</numerusform>
         </translation>
     </message>
 </context>
@@ -8097,7 +8098,7 @@ Einstellungen trotzdem anwenden?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="267"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ganze Berechnungsformel anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vollständige Berechnung im Meldungsfenster anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="293"/>
@@ -8818,7 +8819,7 @@ Einstellungen trotzdem anwenden?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2966"/>
         <source>Edit seam allowance width</source>
-        <translation>Breite der Nahtzugabe ändern</translation>
+        <translation>Breite der Nahtzugabe bearbeiten</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2980"/>
@@ -9493,12 +9494,12 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Value of length</source>
-        <translation type="vanished">Länge</translation>
+        <translation type="vanished">Wert der Länge</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="192"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ganze Berechnungsformel anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vollständige Berechnung im Meldungsfenster anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -9514,7 +9515,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Third point</source>
-        <translation type="vanished">Dritter Punkt</translation>
+        <translation type="vanished">Punkt der zweiten Scheitelgeraden</translation>
     </message>
     <message>
         <source>Type of line</source>
@@ -9759,7 +9760,7 @@ Einstellungen trotzdem anwenden?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="519"/>
         <source>Invalid spline</source>
-        <translation>Ungültige Spline/glatte Kurve</translation>
+        <translation>Ungültige Spline</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="121"/>
@@ -9793,7 +9794,7 @@ Einstellungen trotzdem anwenden?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="627"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="806"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ganze Berechnungsformel anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vollständige Berechnung im Meldungsfenster anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="276"/>
@@ -9992,7 +9993,7 @@ Einstellungen trotzdem anwenden?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="657"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="836"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ganze Berechnungsformel anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vollständige Berechnung im Meldungsfenster anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="445"/>
@@ -10478,7 +10479,7 @@ Einstellungen trotzdem anwenden?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoguniondetails.ui" line="17"/>
         <source>Union tool</source>
-        <translation>Vereinigen-Werkzeug</translation>
+        <translation>Vereinigung Werkzeug</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoguniondetails.cpp" line="90"/>
@@ -10718,7 +10719,7 @@ Einstellungen trotzdem anwenden?</translation>
     <message>
         <location filename="../../src/app/tape/mapplication.cpp" line="416"/>
         <source>Parser error: %1. Program will be terminated.</source>
-        <translation>Parser-Fehler: %1. Programm wird beendet.</translation>
+        <translation>Auswertungsfehler: %1. Programm wird beendet.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/mapplication.cpp" line="421"/>
@@ -10909,7 +10910,7 @@ Einstellungen trotzdem anwenden?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1937"/>
         <source>Point at distance along line</source>
-        <translation>Punkt in einer Distanz auf einer Linie</translation>
+        <translation>Punkt in Entfernung auf der Linie</translation>
     </message>
     <message>
         <source>Tools for creating lines.</source>
@@ -11313,7 +11314,7 @@ Einstellungen trotzdem anwenden?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1061"/>
         <source>Select first point</source>
-        <translation>Zweiten Punkt wählen</translation>
+        <translation>Ersten Punkt wählen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1115"/>
@@ -11393,7 +11394,7 @@ Einstellungen trotzdem anwenden?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="6164"/>
         <source>About Qt</source>
-        <translation>Über Qt</translation>
+        <translation>Über QT</translation>
     </message>
     <message>
         <source>Height: </source>
@@ -11414,12 +11415,12 @@ Einstellungen trotzdem anwenden?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4149"/>
         <source>pattern</source>
-        <translation>Schnittmuster</translation>
+        <translation>Modell</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4156"/>
         <source>Save as</source>
-        <translation>Speichern als</translation>
+        <translation>Speichern unter</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2738"/>
@@ -11585,12 +11586,12 @@ Sollen die Änderungen gespeichert werden?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2153"/>
         <source>Segmenting a simple curve</source>
-        <translation>Einfache Kurve unterteilen</translation>
+        <translation>Eine einfache Kurve unterteilen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1919"/>
         <source>Segment a curved path</source>
-        <translation>Gekrümmten Pfad unterteilen</translation>
+        <translation>Einen gekrümmten Pfad unterteilen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1865"/>
@@ -11613,7 +11614,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2459"/>
         <source>Union tool</source>
-        <translation>Vereinigen-Werkzeug</translation>
+        <translation>Vereinigung Werkzeug</translation>
     </message>
     <message>
         <source>toolBar</source>
@@ -11687,7 +11688,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2261"/>
         <source>Point from arc and tangent</source>
-        <translation> Schnittpunkt des Bogens und Tangente</translation>
+        <translation> Schnittpunkt des Bogens und der Tangente</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2225"/>
@@ -12054,11 +12055,11 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="vanished">DIe Sperrdatei konnte aufgrund fehlender Berechtigungen nicht erstellt werden. Ignorieren Sie diese Nachricht, wenn Sie fortfahren wollen (nicht empfohlen, kann zu Datenverust führen).</translation>
+        <translation type="vanished">DIe Sperrdatei konnte aufgrund fehlender Berechtigungen nicht erstellt werden. Ignorieren Sie diese Nachricht, wenn Sie fortfahren wollen (nicht empfohlen, kann zu Datenverlust führen).</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="vanished">Ein unbekannter Fehler ist aufgetreten, zum Beispiel hat eine volle Festplatten-Partition verhindert, dass die Sperrdatei geschrieben werden konnte. Ignorieren Sie diese Nachricht, wenn Sie fortfahren wollen (nicht empfohlen, kann zu Datenverlust führen).</translation>
+        <translation type="vanished">Ein unbekannter Fehler ist aufgetreten, zum Beispiel hat eine volle Festplattenpartition verhindert, dass die Sperrdatei geschrieben werden konnte. Ignorieren Sie diese Nachricht, wenn Sie fortfahren wollen (nicht empfohlen, kann zu Datenverlust führen).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions.</source>
@@ -12066,7 +12067,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
-        <translation type="vanished">Ein unbekannter Fehler ist aufgetreten, zum Beispiel hat eine volle Festplatten-Partition verhindert, dass die Sperrdatei geschrieben werden konnte.</translation>
+        <translation type="vanished">Ein unbekannter Fehler ist aufgetreten, zum Beispiel hat eine volle Festplattenpartition verhindert, dass die Sperrdatei geschrieben werden konnte.</translation>
     </message>
     <message>
         <source>Report Bug...</source>
@@ -13102,7 +13103,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Pages will be cropped because they do not fit printer paper size.</source>
-        <translation type="vanished">Seiten werden zugeschnitten, da sie nicht mit der Papiergröße des Drucker übereinstimmen.</translation>
+        <translation type="vanished">Seiten werden zugeschnitten weil sie nicht mit der Papiergröße des Druckers übereinstimmen.</translation>
     </message>
     <message>
         <source>Can&apos;t create path</source>
@@ -15299,26 +15300,26 @@ Diese Option wird nach einem Neustart aktiv.</translation>
         <translation>Unbekannt</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="915"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="929"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="956"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="970"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam path at %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="917"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="931"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="958"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="972"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam path.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="981"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1001"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1022"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1042"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam allowance path at %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="983"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1003"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1024"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1044"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam allowance path.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -15790,21 +15791,21 @@ Diese Option wird nach einem Neustart aktiv.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="320"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2709"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2710"/>
         <source>Name</source>
         <comment>measurement column</comment>
         <translation>Name</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="325"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2711"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2712"/>
         <source>Full name</source>
         <comment>measurement column</comment>
         <translation>Vollständiger Name</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="330"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2713"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2714"/>
         <source>Group</source>
         <comment>measurement column</comment>
         <translation>Gruppe</translation>
@@ -16225,74 +16226,74 @@ Diese Option wird nach einem Neustart aktiv.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2459"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2645"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2646"/>
         <source>Unnamed image %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2500"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2501"/>
         <source>Open file</source>
         <translation>Datei öffnen</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2619"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2620"/>
         <source>Length units</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2620"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2621"/>
         <source>Degrees</source>
         <translation>Grad</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2637"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2638"/>
         <source>None</source>
         <translation>Keine</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2682"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2683"/>
         <source>Measurement name is empty.</source>
         <translation>Name der Messung ist leer.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2687"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2688"/>
         <source>Imported file must not contain the same name twice.</source>
         <translation>Importierte Datei darf die selbe Bezeichnung nicht zweimal enthalten.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2692"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2693"/>
         <source>Measurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
         <translation>Die Messung &apos;%1&apos; entspricht nicht dem Regex Muster.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2697"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2698"/>
         <source>Measurement &apos;%1&apos; already used in the file.</source>
         <translation>Maß &apos;%1&apos; wird bereits in der Datei verwendet.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2715"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2716"/>
         <source>Formula</source>
         <comment>measurement column</comment>
         <translation>Formel</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2717"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2718"/>
         <source>Description</source>
         <comment>measurement column</comment>
         <translation>Beschreibung</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2741"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2742"/>
         <source>Error in row %1. The measurement name is empty.</source>
         <translation>Fehler in Zeile %1. Name des Maßes.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2782"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2783"/>
         <source>Error in row %1. %2</source>
         <translation>Fehler in Zeile %1. %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2795"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2796"/>
         <source>Individual measurements require at least 2 columns.</source>
         <translation>Individuelle Maße erfordern mindestens 2 Spalten.</translation>
     </message>
@@ -16305,7 +16306,7 @@ Diese Option wird nach einem Neustart aktiv.</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="vanished">Bezeichnung</translation>
+        <translation type="vanished">Name</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="545"/>
@@ -16326,7 +16327,7 @@ Diese Option wird nach einem Neustart aktiv.</translation>
     </message>
     <message>
         <source>In heights</source>
-        <translation type="vanished">In Körpergrößen</translation>
+        <translation type="vanished">In Längen</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="381"/>
@@ -16347,7 +16348,7 @@ Diese Option wird nach einem Neustart aktiv.</translation>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="601"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ganze Berechnungsformel anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vollständige Berechnung im Meldungsfenster anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="649"/>
@@ -16493,7 +16494,7 @@ Diese Option wird nach einem Neustart aktiv.</translation>
         <translation type="vanished">Individuelle Maße öffnen...</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3535"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3536"/>
         <source>Save</source>
         <translation>Speichern</translation>
     </message>
@@ -16557,7 +16558,7 @@ Diese Option wird nach einem Neustart aktiv.</translation>
         <translation>Einstellungen</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3882"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3883"/>
         <source>untitled %1</source>
         <translation>unbenannt %1</translation>
     </message>
@@ -16569,7 +16570,7 @@ Diese Option wird nach einem Neustart aktiv.</translation>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="562"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1877"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4277"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4278"/>
         <source>File error.</source>
         <translation>Dateifehler.</translation>
     </message>
@@ -16597,7 +16598,7 @@ Diese Option wird nach einem Neustart aktiv.</translation>
         <translation>Speichern unter</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4302"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4303"/>
         <source>&amp;New Window</source>
         <translation>&amp;Neues Fenster</translation>
     </message>
@@ -16611,22 +16612,22 @@ Diese Option wird nach einem Neustart aktiv.</translation>
         <translation type="vanished">M_%1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2350"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4020"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4043"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4059"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2351"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4021"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4044"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4060"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2350"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4020"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2351"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4021"/>
         <source>Empty field.</source>
         <translation>Leeres Eingabefeld.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4059"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4060"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4061"/>
         <source>Parser error: %1</source>
         <translation>Auswertungsfehler: %1</translation>
     </message>
@@ -16647,23 +16648,23 @@ Diese Option wird nach einem Neustart aktiv.</translation>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="664"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="772"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="987"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2670"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3075"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2671"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3076"/>
         <source>Individual measurements</source>
         <translation>Individuelle Maße</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1610"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3882"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3883"/>
         <source>untitled</source>
-        <translation>ohne Titel</translation>
+        <translation>unbenannt</translation>
     </message>
     <message>
         <source>&lt;Empty&gt;</source>
         <translation type="vanished">&lt;leer&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3526"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3527"/>
         <source>Unsaved changes</source>
         <translation>Ungespeicherte Änderungen</translation>
     </message>
@@ -16673,17 +16674,17 @@ Do you want to save your changes?</source>
         <translation type="vanished">Maße wurde geändert. Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4021"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4022"/>
         <source>Empty field</source>
         <translation>Leeres Eingabefeld</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4054"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4055"/>
         <source>Value</source>
         <translation>Wert</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4068"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4069"/>
         <source>Open file</source>
         <translation>Datei öffnen</translation>
     </message>
@@ -16696,11 +16697,11 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1832"/>
         <source>Pattern files (*.val)</source>
-        <translation>Schnittmuster-Dateien (*.val)</translation>
+        <translation>Schnittmusterdateien (*.val)</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="796"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5138"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5139"/>
         <source>Pattern unit:</source>
         <translation>Schnittteil-Einheit:</translation>
     </message>
@@ -16752,7 +16753,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="477"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4235"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4236"/>
         <source>File has unknown format.</source>
         <translation>Unbekanntes Dateiformat.</translation>
     </message>
@@ -16762,20 +16763,20 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="439"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4197"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4198"/>
         <source>File &apos;%1&apos; doesn&apos;t exist!</source>
         <translation>Datei &apos;%1&apos; existiert nicht!</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2285"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2286"/>
         <source>The name of known measurement forbidden to change.</source>
         <translation>Der Name eines bekannten Maßes kann nicht geändert werden.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1470"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2251"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2363"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2573"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2252"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2364"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2574"/>
         <source>Can&apos;t find measurement &apos;%1&apos;.</source>
         <translation>Maß &apos;%1&apos; kann nicht gefunden werden.</translation>
     </message>
@@ -16792,7 +16793,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Die Längenzunahme eines bekannten Maßes kann nicht geändert werden. </translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2592"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2593"/>
         <source>The full name of known measurement forbidden to change.</source>
         <translation>Der vollständige Name des bekannten Maßes kann nicht geändert werden.</translation>
     </message>
@@ -16821,19 +16822,19 @@ Do you want to save your changes?</source>
         <translation>Maß löschen</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5214"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5215"/>
         <source>unknown</source>
         <comment>gender</comment>
         <translation>unbekannt</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5215"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5216"/>
         <source>male</source>
         <comment>gender</comment>
         <translation>männlich</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5216"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5217"/>
         <source>female</source>
         <comment>gender</comment>
         <translation>weiblich</translation>
@@ -16880,14 +16881,14 @@ Do you want to save your changes?</source>
         <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Unbekanntes Maß&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2998"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2999"/>
         <source>About Qt</source>
         <translation>Über QT</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3475"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3476"/>
         <source>File was not saved yet.</source>
-        <translation>Datei konnte nicht gespeichert werden.</translation>
+        <translation>Die Datei wurde noch nicht gespeichert.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="98"/>
@@ -16926,7 +16927,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Speichern...</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3540"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3541"/>
         <source>Don&apos;t Save</source>
         <translation>Nicht speichern</translation>
     </message>
@@ -16980,11 +16981,11 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1038"/>
         <source>Customer&apos;s name</source>
-        <translation>Kunden-Name</translation>
+        <translation>Kunden Vorname</translation>
     </message>
     <message>
         <source>Customer&apos;s family name</source>
-        <translation type="vanished">Kunden-Nachname</translation>
+        <translation type="vanished">Kunden Nachname</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1126"/>
@@ -17009,12 +17010,12 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="957"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2716"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2717"/>
         <source>Could not save the file</source>
         <translation>Datei konnte nicht gespeichert werden</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3890"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3891"/>
         <source>read only</source>
         <translation>schreibgeschützt</translation>
     </message>
@@ -17023,17 +17024,17 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="664"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="763"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="992"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3025"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3026"/>
         <source>Multisize measurements</source>
         <translation>MultiMaß Maße</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4044"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4045"/>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
         <translation>Ungültiges Ergebnis. Wert ist unendlich oder keine Zahl (NaN). Bitte prüfen Sie Ihre Berechnungen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3474"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3475"/>
         <source>Empty</source>
         <translation>Leer</translation>
     </message>
@@ -17053,7 +17054,7 @@ Do you want to save your changes?</source>
         <translation>Erstellen aus Vorhandenem …</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3535"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3536"/>
         <source>Save…</source>
         <translation>Speichern…</translation>
     </message>
@@ -17065,22 +17066,22 @@ Do you want to save your changes?</source>
         <translation>Aus CSV importieren</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4435"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4436"/>
         <source>Individual measurements require at least 2 columns.</source>
         <translation>Individuelle Maße erfordern mindestens 2 Spalten.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4516"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4517"/>
         <source>Multisize measurements require at least 4 columns.</source>
         <translation>MultiMaß Maße erfordern mindestens 4 Spalten.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4387"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4388"/>
         <source>Imported file must not contain the same name twice.</source>
         <translation>Importierte Datei darf die selbe Bezeichnung nicht zweimal enthalten.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4160"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4161"/>
         <source>Cannot save settings. Access denied.</source>
         <translation>Kann Einstellungen nicht speichern. Zugriff verwehrt.</translation>
     </message>
@@ -17135,44 +17136,44 @@ Do you want to save your changes?</source>
         <translation>&amp;Neu</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4139"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4140"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation>Kann Einstellungen nicht aus fehlerhafter .INI Datei lesen.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="326"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4932"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4948"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4933"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4949"/>
         <source>Name</source>
         <comment>measurement column</comment>
         <translation>Name</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="331"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4934"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4953"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4935"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4954"/>
         <source>Full name</source>
         <comment>measurement column</comment>
         <translation>Vollständiger Name</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="336"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4936"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4958"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4937"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4959"/>
         <source>Calculated value</source>
         <comment>measurement column</comment>
         <translation>Berechneter Wert</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="341"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4938"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4939"/>
         <source>Formula</source>
         <comment>measurement column</comment>
         <translation>Formel</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="346"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4963"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4964"/>
         <source>Base value</source>
         <comment>measurement column</comment>
         <translation>Basiswert</translation>
@@ -17250,7 +17251,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1620"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2672"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2673"/>
         <source>Export to individual</source>
         <translation>Exportieren in Individuelle</translation>
     </message>
@@ -17361,97 +17362,97 @@ Do you want to save your changes?</source>
         <translation>Das Bild kann nicht angezeigt werden. Fehler: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2671"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2672"/>
         <source>measurements.vit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2981"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2982"/>
         <source>Unknown known measurements: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3397"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3398"/>
         <source>Shift (%1):</source>
         <translation>Verschieben (%1)*:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3527"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3528"/>
         <source>Measurements have been modified. Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4829"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4830"/>
         <source>Unknown measurement</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4865"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4866"/>
         <source>None</source>
         <translation>Keine</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4874"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4875"/>
         <source>Invalid link</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4940"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4994"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4941"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4995"/>
         <source>Description</source>
         <comment>measurement column</comment>
         <translation>Beschreibung</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4974"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4983"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4989"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4975"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4984"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4990"/>
         <source>Shift</source>
         <comment>measurement column</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5382"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5383"/>
         <source>Empty</source>
         <comment>list</comment>
         <translation>Leer</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5461"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5471"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5481"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5462"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5472"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5482"/>
         <source>%1 shift</source>
         <translation>%1 Verschiebung</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4606"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4607"/>
         <source>Cannot convert base value to double in column 2.</source>
         <translation>In Spalte 2 kann der Basiswert nicht in einen Doppelwert umgewandelt werden.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4610"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4616"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4623"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4611"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4617"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4624"/>
         <source>Cannot convert shift value to double in column %1.</source>
         <translation>Verschiebungswert in Spalte %1 kann nicht in Doppelwert umgewandelt werden.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5185"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5186"/>
         <source>Millimeters</source>
         <translation>Millimeter</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5188"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5189"/>
         <source>Inches</source>
         <translation>Inch</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5191"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5192"/>
         <source>Centimeters</source>
         <translation>Zentimeter</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5200"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5201"/>
         <source>Degrees</source>
         <translation>Grad</translation>
     </message>
@@ -17477,7 +17478,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="115"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5299"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5300"/>
         <source>0 results</source>
         <translation>0 Ergebnisse</translation>
     </message>
@@ -17537,33 +17538,33 @@ Do you want to save your changes?</source>
         <translation>Benutzerdefinierter Name der Maßbezeichnungen</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4382"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4383"/>
         <source>Measurement name is empty.</source>
         <translation>Name der Messung ist leer.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4392"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4393"/>
         <source>Measurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
         <translation>Die Messung &apos;%1&apos; entspricht nicht dem Regex Muster.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4397"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4398"/>
         <source>Measurement &apos;%1&apos; already used in the file.</source>
         <translation>Maß &apos;%1&apos; wird bereits in der Datei verwendet.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4450"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4451"/>
         <source>Error in row %1. The measurement name is empty.</source>
         <translation>Fehler in Zeile %1. Name des Maßes.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4588"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4589"/>
         <source>The measurement name is empty.</source>
         <translation>Name des Maßes ist leer.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4483"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4539"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4484"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4540"/>
         <source>Error in row %1. %2</source>
         <translation>Fehler in Zeile %1. %2</translation>
     </message>
@@ -17761,7 +17762,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="92"/>
         <source>Letter:</source>
-        <translation>Letter:</translation>
+        <translation>Buchstabe:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="102"/>
@@ -18589,7 +18590,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation type="vanished">&amp;OK</translation>
+        <translation type="vanished">&amp;Okay</translation>
     </message>
     <message>
         <source>Config Dialog</source>
@@ -18636,7 +18637,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>GUI language:</source>
-        <translation type="vanished">Sprache der Benutzeroberfläche:</translation>
+        <translation type="vanished">Sprache Benutzeroberfläche:</translation>
     </message>
     <message>
         <source>Decimal separator parts:</source>
@@ -19115,7 +19116,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="130"/>
         <source>Error creating a reserv copy: %1.</source>
-        <translation>Fehler bei der Erstellung einer reservierten Kopie : %1.</translation>
+        <translation>Fehler Erstellung reservierte Kopie : %1.</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="308"/>
@@ -20708,7 +20709,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="674"/>
         <source>Number corresponding to layout page template (default = 0, export mode):</source>
-        <translation>Nummer entsprechend der Layoutseitenvorlage (Standard = 0, Exportmodus):</translation>
+        <translation>Nummer entsprechend der Seitenlayoutvorlage (Standard = 0, Exportmodus):</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="793"/>
@@ -21398,17 +21399,17 @@ Do you want to save your changes?</source>
         <translation>Die Datei &apos;%1&apos; kann nicht gespeichert werden. Fehler: %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="539"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="519"/>
         <source>Cannot set printer page size</source>
         <translation>Kann die Seitengröße für den Druck nicht einstellen</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="553"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="533"/>
         <source>Cannot set printer margins</source>
         <translation>Kann Druckränder nicht setzen</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="560"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="540"/>
         <source>Can&apos;t open file &apos;%1&apos;</source>
         <translation>Datei &apos;%1&apos; kann nicht geöffnet werden</translation>
     </message>
@@ -21418,7 +21419,7 @@ Do you want to save your changes?</source>
         <translation>Export von Layout-Rohdaten fehlgeschlagen. %1.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="509"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="489"/>
         <source>Creating file &apos;%1&apos; failed! %2</source>
         <translation>Fehler beim Erstellen der Datei &apos;%1&apos;! %2</translation>
     </message>
@@ -21439,32 +21440,32 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="577"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="557"/>
         <source>(flat) files</source>
         <translation>(flache) Dateien</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="578"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="558"/>
         <source>files</source>
         <translation>Dateien</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="587"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="567"/>
         <source>Image files</source>
         <translation>Bilddateien</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="617"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="597"/>
         <source>tiled</source>
         <translation>unterteilt</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="619"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="599"/>
         <source>Numerical control</source>
         <translation>Numerische Steuerung</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="621"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="601"/>
         <source>Raw Layout Data</source>
         <translation>Rohdaten Layout</translation>
     </message>
@@ -23168,13 +23169,13 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="574"/>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="672"/>
         <source>Error empty parameter.</source>
-        <translation>Fehler: leerer Parameter.</translation>
+        <translation>Fehler: Leerer Parameter.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="581"/>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="683"/>
         <source>Error wrong id.</source>
-        <translation>Fehler: falsche ID.</translation>
+        <translation>Fehler: Falsche ID.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="595"/>
@@ -23423,7 +23424,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3572"/>
         <source>Error creating or updating operation of flipping by line</source>
-        <translation>Fehler bei der Erstellung oder Aktualisierung beim Spiegel über eine Linie</translation>
+        <translation>Fehler bei der Erstellung oder Aktualisierung beim Spiegel über die Linie</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3604"/>
@@ -24082,11 +24083,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>move pattern piece label</source>
-        <translation type="vanished">verschiebe Schnittmuster Beschriftung</translation>
+        <translation type="vanished">verschiebe Schnittmuster-Beschriftung</translation>
     </message>
     <message>
         <source>resize pattern piece label</source>
-        <translation type="vanished">Größe der Beschriftung ändern</translation>
+        <translation type="vanished">Größe der Schnittteil-Beschriftung ändern</translation>
     </message>
     <message>
         <source>rotate pattern piece label</source>
@@ -24094,11 +24095,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>move pattern info label</source>
-        <translation type="vanished">Informations-Beschriftung des Schnittteils drehen</translation>
+        <translation type="vanished">Schnittteil-Beschriftung bewegen</translation>
     </message>
     <message>
         <source>resize pattern info label</source>
-        <translation type="vanished">Größe der Informations-Beschriftung des Schnittteils ändern</translation>
+        <translation type="vanished">Größe der Schnittteil-Beschriftung ändern</translation>
     </message>
     <message>
         <source>rotate pattern info label</source>
@@ -24284,7 +24285,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolmove.cpp" line="529"/>
         <source>Rotation angle</source>
-        <translation>Rotationswinkel</translation>
+        <translation>Drehwinkel</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolmove.cpp" line="526"/>
@@ -24317,7 +24318,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2723"/>
         <source>Base point</source>
-        <translation>Ausgangspunkt</translation>
+        <translation>Startpunkt</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -24347,7 +24348,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2758"/>
         <source>Point at distance along line</source>
-        <translation>Punkt auf einer Linie</translation>
+        <translation>Punkt in Entfernung auf der Linie</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2777"/>
@@ -24389,7 +24390,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2905"/>
         <source>Perpendicular point along line</source>
-        <translation>Loftfußpunkt auf einer Linie</translation>
+        <translation>Lotfußpunkt auf einer Linie</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2924"/>
@@ -24399,7 +24400,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2943"/>
         <source>Point at line intersection</source>
-        <translation>Schnittpunkt zweier Linien</translation>
+        <translation>Linienschnittpunkt</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2958"/>
@@ -25229,7 +25230,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.cpp" line="150"/>
         <source>Error calculating point &apos;%1&apos;. Curves &apos;%2&apos; and &apos;%3&apos; have no point of intersection</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler bei der Berechnung des Punktes &apos;%1&apos;. Kurven &apos;%2&apos; und &apos;%3&apos; haben keinen Schnittpunkt</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.cpp" line="496"/>
@@ -25286,7 +25287,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1277"/>
         <source>move pattern piece label</source>
-        <translation>verschiebe Schnittmuster Beschriftung</translation>
+        <translation>verschiebe Schnittmuster-Beschriftung</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1296"/>
@@ -26561,7 +26562,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="165"/>
         <source>acosh</source>
         <comment>hyperbolic arcus cosine function</comment>
-        <translation type="unfinished">acosh</translation>
+        <translation>acosh</translation>
     </message>
     <message>
         <source>size</source>

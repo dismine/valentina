@@ -66,7 +66,7 @@ Module {
     property string libDirName: "lib"
 
     property string appTarget
-    property string projectVersion: "0.7.53"
+    property string projectVersion: "1.0.0"
 
     readonly property string installAppPath: {
         if (qbs.targetOS.contains("macos"))
@@ -168,8 +168,12 @@ Module {
         if (project.minimumMacosVersion !== undefined)
             return project.minimumMacosVersion;
 
-        // Check which minimal OSX version supports current Qt version
+        // Check which minimal MacOS version supports current Qt version
         if (Qt.core.versionMajor >= 6) {
+            // For Qt 6.10 https://doc-snapshots.qt.io/qt6-6.10/supported-platforms.html
+            if (Qt.core.versionMinor >= 10) // Qt 6.10
+                return "13.0";
+
             // For Qt 6.8 https://doc-snapshots.qt.io/qt6-6.8/supported-platforms.html
             if (Qt.core.versionMinor >= 8) // Qt 6.8
                 return "12.0";

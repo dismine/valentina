@@ -26,7 +26,7 @@ InnoSetup {
     property string arhitecture: {
         if (qbs.architecture == "x86_64")
         {
-            return "x64"
+            return "x64os"
         }
 
         if (qbs.architecture == "arm64")
@@ -38,6 +38,7 @@ InnoSetup {
     }
 
     property string minVersion: {
+        // https://jrsoftware.org/ishelp/index.php?topic=winvernotes
         if (Utilities.versionCompare(Qt.core.version, "6.5") >= 0)
         {
             return "10.0.17763";

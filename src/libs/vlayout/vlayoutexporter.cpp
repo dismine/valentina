@@ -451,15 +451,7 @@ auto VLayoutExporter::SupportPDFConversion() -> bool
         return false;
     };
 
-#if defined(Q_OS_OSX)
-    // Seek pdftops in app bundle
-    bool found = Test(qApp->applicationDirPath() + '/'_L1 + *PDFTOPS);
-    if (not found)
-    {
-        found = Test(*PDFTOPS);
-    }
-    return found;
-#elif defined(Q_OS_WIN)
+#if defined(Q_OS_WIN)
     return Test(qApp->applicationDirPath() + '/'_L1 + *PDFTOPS);
 #else
     return Test(*PDFTOPS);
@@ -480,18 +472,7 @@ void VLayoutExporter::PdfToPs(const QStringList &params)
 #endif
 
     QProcess proc;
-#if defined(Q_OS_MAC)
-    if (QFileInfo::exists(qApp->applicationDirPath() + '/'_L1 + *PDFTOPS))
-    {
-        proc.start(qApp->applicationDirPath() + '/'_L1 + *PDFTOPS, params);
-    }
-    else
-    {
-        proc.start(*PDFTOPS, params);
-    }
-#else
     proc.start(*PDFTOPS, params);
-#endif
 
     const int timeout = 15000;
     if (proc.waitForStarted(timeout))
@@ -503,8 +484,7 @@ void VLayoutExporter::PdfToPs(const QStringList &params)
     QGuiApplication::restoreOverrideCursor();
 #endif
 
-    QFile const f(params.constLast());
-    if (not f.exists())
+    if (QFile const f(params.constLast()); not f.exists())
     {
         qCritical() << qUtf8Printable(tr("Creating file '%1' failed! %2").arg(params.constLast(), proc.errorString()));
     }

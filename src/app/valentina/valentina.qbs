@@ -15,7 +15,6 @@ VToolApp {
     Depends { name: "VFormatLib"; }
     Depends { name: "VMiscLib"; }
     Depends { name: "VGAnalyticsLib" }
-    Depends { name: "pdftops"; condition: qbs.targetOS.contains("macos") }
     Depends { name: "Tape"; condition: qbs.targetOS.contains("macos") && buildconfig.enableMultiBundle }
     Depends { name: "Puzzle"; condition: qbs.targetOS.contains("macos") && buildconfig.enableMultiBundle }
 
@@ -49,26 +48,36 @@ VToolApp {
     buildconfig.appTarget: qbs.targetOS.contains("macos") ? "Valentina" : "valentina"
     targetName: buildconfig.appTarget
 
-    Properties {
-        condition: buildconfig.useConanPackages && buildconfig.conanXercesEnabled && (qbs.targetOS.contains("windows") || qbs.targetOS.contains("macos"))
-        conan.XercesC.libInstallDir: qbs.installPrefix + "/" + buildconfig.installLibraryPath
-        conan.XercesC.binInstallDir: qbs.installPrefix + "/" + buildconfig.installBinaryPath
-        conan.XercesC.installLib: {
-            if (qbs.targetOS.contains("windows"))
-                return false
-            return true
-        }
-        conan.XercesC.installBin: {
-            if (qbs.targetOS.contains("windows"))
-                return true
-            return false
-        }
+    // On Windows .dll files are in bin folder
+    Group {
+        name: "xerces-c library (Windows)"
+        condition: buildconfig.useConanPackages && buildconfig.conanXercesEnabled && qbs.targetOS.contains("windows")
+        prefix: XercesC.binDirs[0] + "/"
+        files: ["**/*" + cpp.dynamicLibrarySuffix]
+        qbs.install: true
+        qbs.installDir: buildconfig.installLibraryPath
+        qbs.installSourceBase: XercesC.binDirs[0] + "/"
     }
 
-    Properties {
+    // On MacOS .so files are in lib folder
+    Group {
+        name: "xerces-c library (MacOS)"
+        condition: buildconfig.useConanPackages && buildconfig.conanXercesEnabled && qbs.targetOS.contains("macos")
+        prefix: XercesC.libraryPaths[0] + "/"
+        files: ["**/*" + cpp.dynamicLibrarySuffix]
+        qbs.install: true
+        qbs.installDir: buildconfig.installLibraryPath
+        qbs.installSourceBase: XercesC.libraryPaths[0] + "/"
+    }
+
+    Group {
+        name: "Crashpad handler"
         condition: buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled
-        conan.crashpad.installBin: true
-        conan.crashpad.binInstallDir: qbs.installPrefix + "/" + buildconfig.installBinaryPath
+        prefix: crashpad.binDirs[0] + "/"
+        files: "crashpad_handler" + FileInfo.executableSuffix()
+        qbs.install: true
+        qbs.installDir: buildconfig.installBinaryPath
+        qbs.installSourceBase: crashpad.binDirs[0] + "/"
     }
 
     files: [
@@ -220,9 +229,6 @@ VToolApp {
             if (!buildconfig.enableMultiBundle)
                 apps.push("Tape", "Puzzle");
 
-            if (pdftops.pdftopsPresent)
-                apps.push("pdftops");
-
             if (buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled)
                 apps.push("crashpad_handler");
 
@@ -237,13 +243,6 @@ VToolApp {
         files: ["pdftops.exe"]
         qbs.install: true
         qbs.installDir: buildconfig.installBinaryPath
-    }
-
-    Group {
-        name: "pdftops MacOS"
-        condition: qbs.targetOS.contains("macos") && pdftops.pdftopsPresent
-        files: [pdftops.pdftopsPath]
-        fileTags: ["pdftops.in"]
     }
 
     Group {
@@ -324,7 +323,7 @@ VToolApp {
     Group {
         name: "MacOS assets"
         condition: qbs.targetOS.contains("macos")
-        prefix: project.sourceDirectory + "/dist/macx/valentina/"
+        prefix: project.sourceDirectory + "/dist/macos/valentina/"
         files: [
             "Info.plist",
             "valentina.xcassets"
@@ -334,7 +333,7 @@ VToolApp {
     Group {
         name: "ICNS"
         condition: qbs.targetOS.contains("macos")
-        prefix: project.sourceDirectory + "/dist/macx/valentina-project.xcassets/"
+        prefix: project.sourceDirectory + "/dist/macos/valentina-project.xcassets/"
         files: [
             "pattern.iconset",
             "layout.iconset",

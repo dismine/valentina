@@ -1,0 +1,17 @@
+[settings]
+build_type=Release
+os=Windows
+arch={{ "x86_64" if os.getenv("ARCH") == "x64" else "x86" }}
+
+{% if os.getenv("COMPILER") == "msvc" %}
+compiler=msvc
+compiler.cppstd=17
+compiler.runtime=dynamic
+compiler.runtime_type=Release
+compiler.version=192
+{% else %}
+compiler=gcc
+compiler.cppstd={{ os.getenv("COMPILER_CPPSTD") }}
+compiler.libcxx={{ os.getenv("COMPILER_LIBCXX") }}
+compiler.version={{ os.getenv("GCC_VERSION") }}
+{% endif %}

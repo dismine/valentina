@@ -1,0 +1,551 @@
+name: MacOS builds
+
+on:
+  push:
+    branches:
+      - 'master'
+      - 'develop'
+    tags:
+      - 'v*'
+  pull_request:
+    branches:
+      - 'master'
+      - 'develop'
+
+env:
+  SOURCE_DIR: ${{ github.workspace }}
+  VALENTINA_VERSION: 1_0_0
+  ACCESS_TOKEN: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
+  # Should contain the base64 of the certificate
+  MACOS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE }}
+  # Should contain the full certificate name, such as Developer ID Application: Your Name (K1234567)
+  MACOS_CERTIFICATE_NAME: ${{ secrets.MACOS_CERTIFICATE_NAME }}
+  # Should contain the password you chose when exported the certificate from the Keychain Access app
+  MACOS_CERTIFICATE_PWD: ${{ secrets.MACOS_CERTIFICATE_PWD }}
+  # Should contain apple developer email, the same used the Apple Developer subscription
+  MACOS_NOTARIZATION_APPLE_ID: ${{ secrets.MACOS_NOTARIZATION_APPLE_ID }}
+  # Should contain the app-specific password
+  MACOS_NOTARIZATION_PWD: ${{ secrets.MACOS_NOTARIZATION_PWD }}
+  # Should contain the Team ID
+  MACOS_NOTARIZATION_TEAM_ID: ${{ secrets.MACOS_NOTARIZATION_TEAM_ID }}
+  # Should contain a strong, randomly generated password
+  MACOS_CI_KEYCHAIN_PWD:  ${{ secrets.MACOS_CI_KEYCHAIN_PWD }}
+  DUMP_SYMS_VERSION: 'v2.3.5'
+  WITH_CRASH_REPORTING: 'True'
+
+jobs:
+  intel_build:
+    name: MacOS ${{ matrix.qt.build_target }} intel Qt ${{ matrix.qt.install }} (${{ matrix.bundle.label }})
+    runs-on: macos-13
+
+    strategy:
+      matrix:
+        qt:
+          # LTS release
+          - install: 6.8.3
+            label: Qt6_8
+            build_target: '12+'
+            xcode: '15.2'
+            target: 'MacOS_12+'
+            minimumMacosVersion: '12.0'
+            deploy: 'true'
+          - install: 6.4.3
+            label: Qt6_4
+            build_target: '10.15+'
+            xcode: '15.2'
+            target: 'MacOS_10_15+'
+            minimumMacosVersion: '10.15'
+            deploy: 'true'
+        bundle:
+          - label: multibundle
+            multibundle: true
+          - label: singlebundle
+            multibundle: false
+
+    env:
+      DEPLOY: ${{ matrix.qt.deploy }}
+      MULTI_BUNDLE: ${{ matrix.bundle.multibundle }}
+      MACOS_DEPLOYMENT_TARGET: ${{ matrix.qt.minimumMacosVersion }}
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Fetch tags
+        run: git fetch --prune --unshallow --tags
+
+      - name: Install XCode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: ${{ matrix.qt.xcode }}
+
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+          architecture: "x64"
+          cache: 'pip'
+          cache-dependency-path: 'share/ci/requirements-ci.txt'
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v4
+        with:
+          version:      ${{ matrix.qt.install }}
+          host:         'mac'
+          target:       'desktop'
+          arch:         'clang_64'
+          dir:          ${{ runner.temp }}
+          modules:      'qtimageformats'
+          cache:        true
+          setup-python: false
+
+      - name: Set path to Qt
+        run: echo "QTDIR=${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos" >> $GITHUB_ENV
+
+      - name: Build macdeployqt
+        run: |
+          curl -LJ https://github.com/dismine/macdeployqt/archive/refs/heads/main.zip --output ${HOME}/macdeployqt-main.zip --silent
+          unzip ${HOME}/macdeployqt-main.zip -d ${HOME}
+          cmake ${HOME}/macdeployqt-main -GNinja -S ${HOME}/macdeployqt-main -B ${HOME}/macdeployqt-build-dir -DCMAKE_INSTALL_PREFIX=${HOME}/macdeployqt-install-dir -DCMAKE_PREFIX_PATH="${QT_DIR}" -DCMAKE_BUILD_TYPE=Release
+          grep Qt6Core_VERSION_STRING ${HOME}/macdeployqt-build-dir/CMakeCache.txt || true
+          cmake --build ${HOME}/macdeployqt-build-dir --target install
+          install_name_tool -add_rpath $QTDIR/lib ${HOME}/macdeployqt-install-dir/macdeployqt
+
+      - name: Install Python dependencies
+        run: |
+          python --version
+          python -m pip install --upgrade setuptools
+          python -m pip install -r share/ci/requirements-ci.txt
+
+      - name: Setup path to Conan home folder
+        run: echo "CONAN_HOME=${{ runner.temp }}/.conan2" >> $GITHUB_ENV
+
+      - name: Cache Conan packages (Conan 2.x)
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.CONAN_HOME }}/p
+          key: conan2-packages-${{ runner.os }}-v1-${{ hashFiles('**/conanfile.py') }}
+          restore-keys: conan2-packages-${{ runner.os }}-
+
+      - name: Decode the environment variable into a regular .p12 file
+        run: echo $MACOS_CERTIFICATE | base64 --decode > certificate.p12
+    
+      # We need to create a new keychain, otherwise using the certificate will prompt
+      # with a UI dialog asking for the certificate password, which we can't
+      # use in a headless CI environment
+      # Create the keychain with a password ($MACOS_CI_KEYCHAIN_PWD)
+      - name: Create the keychain with a password
+        run: security create-keychain -p "$MACOS_CI_KEYCHAIN_PWD" $HOME/Library/Keychains/build.keychain
+
+      - name: Make the custom keychain default, so xcodebuild will use it for signing
+        run: security default-keychain -s $HOME/Library/Keychains/build.keychain
+
+      - name: Unlock the keychain
+        run: |
+          security unlock-keychain -p "$MACOS_CI_KEYCHAIN_PWD" $HOME/Library/Keychains/build.keychain
+          security set-keychain-settings $HOME/Library/Keychains/build.keychain
+
+      # Check if System.keychain is not cluttered.
+      # good: 60K
+      # bad: 25MB
+      - name: Check if System.keychain is not cluttered
+        run: du -h /Library/Keychains/System.keychain
+
+      # Add certificates to keychain and allow codesign to access them
+      # 1) Apple Worldwide Developer Relations Certification Authority
+      - name: Add Apple Worldwide Developer Relations Certification Authority
+        run: |
+          curl https://www.apple.com/certificateauthority/AppleWWDRCAG3.cer --output $HOME/AppleWWDRCAG3.cer --silent
+          sudo security import $HOME/AppleWWDRCAG3.cer -k /Library/Keychains/System.keychain -T /usr/bin/codesign || true
+
+      # 2) Developer Authentication Certification Authority
+      - name: Add Developer Authentication Certification Authority
+        run: |
+          curl https://www.apple.com/certificateauthority/DeveloperIDG2CA.cer --output $HOME/DeveloperIDG2CA.cer --silent
+          sudo security import $HOME/DeveloperIDG2CA.cer -k /Library/Keychains/System.keychain -T /usr/bin/codesign || true
+
+      # 3) Developer ID
+      - name: Add Developer ID
+        run: security import certificate.p12 -k $HOME/Library/Keychains/build.keychain -P "$MACOS_CERTIFICATE_PWD" -T /usr/bin/codesign
+
+      - name: Delete the files, we no longer need them
+        run: |
+          rm $HOME/AppleWWDRCAG3.cer
+          rm $HOME/DeveloperIDG2CA.cer
+          rm certificate.p12
+
+      # Set the partition list (sort of like an access control list)
+      - name: Set the partition list
+        run: security set-key-partition-list -S "apple-tool:,apple:,codesign:" -s -k "$MACOS_CI_KEYCHAIN_PWD" $HOME/Library/Keychains/build.keychain
+
+      # Echo the identity, just so that we know it worked.
+      # This won't display anything secret.
+      - name: Echo the identity
+        run: security find-identity -v -p codesigning
+
+      - name: Install Valentina's dependencies
+        uses: tecolicom/actions-use-homebrew-tools@v1
+        with:
+          tools: coreutils
+    
+      - name: Install Conan
+        run: |
+          mkdir ~/.venv
+          python3 -m venv ~/.venv
+          source ~/.venv/bin/activate
+          pip install --upgrade setuptools
+          pip3 install -r share/ci/requirements-ci.txt
+
+      - name: Install Qt Creator
+        uses: ./.github/actions/download-qtc
+        with:
+          version: '17.0.0'
+
+      - name: Before build
+        run: |
+          sudo xcode-select -p
+          qmake --version
+          which qmake
+          which qbs
+          qbs --version
+          qbs setup-toolchains --detect
+          qbs config --list profiles
+          qbs setup-qt "$QTDIR/bin/qmake" qt6
+          qbs config defaultProfile qt6
+          qbs config profiles.qt6.baseProfile clang
+
+      - name: Build Conan dependencies
+        run: conan install . --build=missing -o '&:with_crash_reporting=${{ env.WITH_CRASH_REPORTING }}' -o '&:with_xerces=True' -pr:a=share/ci/conan/profiles/macos
+
+      - name: Set up common Qbs args
+        run: >
+          echo "COMMON_QBS_ARGS=
+          -f valentina.qbs 
+          -d $GITHUB_WORKSPACE/build 
+          --jobs $(nproc) 
+          config:release 
+          modules.buildconfig.enableUnitTests:false 
+          modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} 
+          qbs.installRoot:$GITHUB_WORKSPACE/build/release/install-root 
+          profile:qt6 
+          project.minimumMacosVersion:$MACOS_DEPLOYMENT_TARGET 
+          \"modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME\" 
+          modules.macdeployqt.libpath:${{ env.QTDIR }}/lib 
+          modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir 
+          project.enableConan:true 
+          project.conanWithXerces:true 
+          project.conanWithCrashReporting:true 
+          project.conanProfiles:share/ci/conan/profiles/macos" >> $GITHUB_ENV
+
+      - name: Build Valentina
+        run: >
+          qbs build 
+          ${{ env.COMMON_QBS_ARGS }}
+
+      - name: Deploy symbols
+        if: env.WITH_CRASH_REPORTING == 'True'
+        run: |
+          export CRASH_QT_VERSION=$($QTDIR/bin/qmake -query QT_VERSION | awk -F. '{print $1 "_" $2}')
+          export CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)
+          curl --proto '=https' --tlsv1.2 -LsSf https://github.com/mozilla/dump_syms/releases/download/${{ env.DUMP_SYMS_VERSION }}/dump_syms-installer.sh | sh
+          python3 scripts/symupload.py $GITHUB_WORKSPACE/build/release/install-root $VALENTINA_VERSION g$CRASH_SHORT_SHA $CRASH_QT_VERSION --multibundle=$MULTI_BUNDLE --clean
+
+      - name: Create DMG
+        if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
+        run: >
+          qbs build 
+          -p 'Valentina DMG' 
+          --force-probe-execution 
+          ${{ env.COMMON_QBS_ARGS }}
+
+      # Store the notarization credentials so that we can prevent a UI password dialog
+      # from blocking the CI
+      - name: Store the notarization credentials
+        if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
+        run: xcrun notarytool store-credentials "notarytool-profile" --apple-id "$MACOS_NOTARIZATION_APPLE_ID" --team-id "$MACOS_NOTARIZATION_TEAM_ID" --password "$MACOS_NOTARIZATION_PWD"
+
+      # Here we send the notarization request to the Apple's Notarization service, waiting for the result.
+      # This typically takes a few seconds inside a CI environment, but it might take more depending on the App
+      # characteristics. Visit the Notarization docs for more information and strategies on how to optimize it if
+      # you're curious
+      - name: Notarization
+        if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
+        run: xcrun notarytool submit "$GITHUB_WORKSPACE/build/release/install-root/share/valentina.dmg" --keychain-profile "notarytool-profile" --wait --timeout 5m || true
+
+      # Finally, we need to "attach the staple" to our executable, which will allow our app to be
+      # validated by macOS even when an internet connection is not available.
+      - name: Attach the staple
+        if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
+        run: xcrun stapler staple $GITHUB_WORKSPACE/build/release/install-root/share/valentina.dmg || true  
+
+      - name: Commit hash
+        id: commit
+        if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
+        uses: prompt/actions-commit-hash@v3
+
+      - name: Deploy
+        if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
+        env:
+          VALENTINA_WORKING_DIR: ${{ github.workspace }}
+          CIRRUS_BRANCH: ${{ github.base_ref || github.ref_name }}
+          CIRRUS_CHANGE_IN_REPO: ${{ steps.commit.outputs.hash }}
+          TARGET_PLATFORM: ${{ matrix.qt.target }}
+          ARCH: x64
+          QT_VERSION: ${{ matrix.qt.label }}
+        run: ./scripts/cirrus-deploy.sh
+  arm_build:
+    name: MacOS ${{ matrix.qt.build_target }} arm Qt ${{ matrix.qt.install }} (${{ matrix.bundle.label }})
+    runs-on: macos-14
+
+    strategy:
+      matrix:
+        qt:
+          # LTS release
+          - install: 6.8.3
+            label: Qt6_8
+            build_target: '12+'
+            xcode: '15.2'
+            target: 'MacOS_12+'
+            minimumMacosVersion: '12.0'
+            deploy: 'true'
+          - install: 6.7.3
+            label: Qt6_7
+            build_target: '11+'
+            xcode: '15.2'
+            target: 'MacOS_11+'
+            minimumMacosVersion: '11.0'
+            deploy: 'true'
+        bundle:
+          - label: multibundle
+            multibundle: true
+          - label: singlebundle
+            multibundle: false
+
+    env:
+      DEPLOY: ${{ matrix.qt.deploy }}
+      MULTI_BUNDLE: ${{ matrix.bundle.multibundle }}
+      MACOS_DEPLOYMENT_TARGET: ${{ matrix.qt.minimumMacosVersion }}
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Fetch tags
+        run: git fetch --prune --unshallow --tags
+
+      - name: Install XCode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: ${{ matrix.qt.xcode }}
+
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+          architecture: "x64"
+          cache: 'pip'
+          cache-dependency-path: 'share/ci/requirements-ci.txt'
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v4
+        with:
+          version:      ${{ matrix.qt.install }}
+          host:         'mac'
+          target:       'desktop'
+          arch:         'clang_64'
+          dir:          ${{ runner.temp }}
+          modules:      'qtimageformats'
+          cache:        true
+          setup-python: false
+
+      - name: Set path to Qt
+        run: echo "QTDIR=${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos" >> $GITHUB_ENV
+
+      - name: Build macdeployqt
+        run: |
+          curl -LJ https://github.com/dismine/macdeployqt/archive/refs/heads/main.zip --output ${HOME}/macdeployqt-main.zip --silent
+          unzip ${HOME}/macdeployqt-main.zip -d ${HOME}
+          cmake ${HOME}/macdeployqt-main -GNinja -S ${HOME}/macdeployqt-main -B ${HOME}/macdeployqt-build-dir -DCMAKE_INSTALL_PREFIX=${HOME}/macdeployqt-install-dir -DCMAKE_PREFIX_PATH="${QT_DIR}" -DCMAKE_BUILD_TYPE=Release
+          grep Qt6Core_VERSION_STRING ${HOME}/macdeployqt-build-dir/CMakeCache.txt || true
+          cmake --build ${HOME}/macdeployqt-build-dir --target install
+          install_name_tool -add_rpath $QTDIR/lib ${HOME}/macdeployqt-install-dir/macdeployqt
+
+      - name: Install Python dependencies
+        run: |
+          python --version
+          python -m pip install --upgrade setuptools
+          python -m pip install -r share/ci/requirements-ci.txt
+
+      - name: Cache Conan packages (Conan 2.x)
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.CONAN_HOME }}/p
+          key: conan2-packages-${{ runner.os }}-v1-${{ hashFiles('**/conanfile.py') }}
+          restore-keys: conan2-packages-${{ runner.os }}-
+
+      - name: Decode the environment variable into a regular .p12 file
+        run: echo $MACOS_CERTIFICATE | base64 --decode > certificate.p12
+    
+      # We need to create a new keychain, otherwise using the certificate will prompt
+      # with a UI dialog asking for the certificate password, which we can't
+      # use in a headless CI environment
+      # Create the keychain with a password ($MACOS_CI_KEYCHAIN_PWD)
+      - name: Create the keychain with a password
+        run: security create-keychain -p "$MACOS_CI_KEYCHAIN_PWD" $HOME/Library/Keychains/build.keychain
+
+      - name: Make the custom keychain default, so xcodebuild will use it for signing
+        run: security default-keychain -s $HOME/Library/Keychains/build.keychain
+
+      - name: Unlock the keychain
+        run: |
+          security unlock-keychain -p "$MACOS_CI_KEYCHAIN_PWD" $HOME/Library/Keychains/build.keychain
+          security set-keychain-settings $HOME/Library/Keychains/build.keychain
+
+      # Check if System.keychain is not cluttered.
+      # good: 60K
+      # bad: 25MB
+      - name: Check if System.keychain is not cluttered
+        run: du -h /Library/Keychains/System.keychain
+
+      # Add certificates to keychain and allow codesign to access them
+      # 1) Apple Worldwide Developer Relations Certification Authority
+      - name: Add Apple Worldwide Developer Relations Certification Authority
+        run: |
+          curl https://www.apple.com/certificateauthority/AppleWWDRCAG3.cer --output $HOME/AppleWWDRCAG3.cer --silent
+          sudo security import $HOME/AppleWWDRCAG3.cer -k /Library/Keychains/System.keychain -T /usr/bin/codesign || true
+
+      # 2) Developer Authentication Certification Authority
+      - name: Add Developer Authentication Certification Authority
+        run: |
+          curl https://www.apple.com/certificateauthority/DeveloperIDG2CA.cer --output $HOME/DeveloperIDG2CA.cer --silent
+          sudo security import $HOME/DeveloperIDG2CA.cer -k /Library/Keychains/System.keychain -T /usr/bin/codesign || true
+
+      # 3) Developer ID
+      - name: Add Developer ID
+        run: security import certificate.p12 -k $HOME/Library/Keychains/build.keychain -P "$MACOS_CERTIFICATE_PWD" -T /usr/bin/codesign
+
+      - name: Delete the files, we no longer need them
+        run: |
+          rm $HOME/AppleWWDRCAG3.cer
+          rm $HOME/DeveloperIDG2CA.cer
+          rm certificate.p12
+
+      # Set the partition list (sort of like an access control list)
+      - name: Set the partition list
+        run: security set-key-partition-list -S "apple-tool:,apple:,codesign:" -s -k "$MACOS_CI_KEYCHAIN_PWD" $HOME/Library/Keychains/build.keychain
+
+      # Echo the identity, just so that we know it worked.
+      # This won't display anything secret.
+      - name: Echo the identity
+        run: security find-identity -v -p codesigning
+
+      - name: Install Valentina's dependencies
+        uses: tecolicom/actions-use-homebrew-tools@v1
+        with:
+          tools: coreutils
+    
+      - name: Install Conan
+        run: |
+          mkdir ~/.venv
+          python3 -m venv ~/.venv
+          source ~/.venv/bin/activate
+          pip3 install --upgrade pip 'dropbox>=12.0.2' py7zr conan==1.66.0 requests
+
+      - name: Install Qt Creator
+        uses: ./.github/actions/download-qtc
+        with:
+          version: '17.0.0'
+
+      - name: Before build
+        run: |
+          sudo xcode-select -p
+          qmake --version
+          which qmake
+          which qbs
+          qbs --version
+          qbs setup-toolchains --detect
+          qbs config --list profiles
+          qbs setup-qt "$QTDIR/bin/qmake" qt6
+          qbs config defaultProfile qt6
+          qbs config profiles.qt6.baseProfile clang
+
+      - name: Build Conan dependencies
+        run: conan install . --build=missing -o '&:with_crash_reporting=${{ env.WITH_CRASH_REPORTING }}' -o '&:with_xerces=True' -pr:a=share/ci/conan/profiles/macos_arm
+
+      - name: Set up common Qbs args
+        run: >
+          echo "COMMON_QBS_ARGS=
+          -f valentina.qbs 
+          -d $GITHUB_WORKSPACE/build 
+          --jobs $(nproc) 
+          config:release 
+          modules.buildconfig.enableUnitTests:false 
+          modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} 
+          qbs.installRoot:$GITHUB_WORKSPACE/build/release/install-root 
+          profile:qt6 
+          project.minimumMacosVersion:$MACOS_DEPLOYMENT_TARGET 
+          \"modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME\" 
+          modules.macdeployqt.libpath:${{ env.QTDIR }}/lib 
+          modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir 
+          project.enableConan:true 
+          project.conanWithXerces:true 
+          project.conanWithCrashReporting:true 
+          project.conanProfiles:share/ci/conan/profiles/macos_arm" >> $GITHUB_ENV
+
+      - name: Build Valentina
+        run: >
+          qbs build 
+          ${{ env.COMMON_QBS_ARGS }}
+
+      - name: Deploy symbols
+        if: env.WITH_CRASH_REPORTING == 'True'
+        run: |
+          export CRASH_QT_VERSION=$($QTDIR/bin/qmake -query QT_VERSION | awk -F. '{print $1 "_" $2}')
+          export CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)
+          curl --proto '=https' --tlsv1.2 -LsSf https://github.com/mozilla/dump_syms/releases/download/${{ env.DUMP_SYMS_VERSION }}/dump_syms-installer.sh | sh
+          python3 scripts/symupload.py $GITHUB_WORKSPACE/build/release/install-root $VALENTINA_VERSION g$CRASH_SHORT_SHA $CRASH_QT_VERSION --multibundle=$MULTI_BUNDLE --clean
+
+      - name: Create DMG
+        if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
+        run: >
+          qbs build 
+          -p 'Valentina DMG' 
+          --force-probe-execution 
+          ${{ env.COMMON_QBS_ARGS }}
+
+      # Store the notarization credentials so that we can prevent a UI password dialog
+      # from blocking the CI
+      - name: Store the notarization credentials
+        if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
+        run: xcrun notarytool store-credentials "notarytool-profile" --apple-id "$MACOS_NOTARIZATION_APPLE_ID" --team-id "$MACOS_NOTARIZATION_TEAM_ID" --password "$MACOS_NOTARIZATION_PWD"
+
+      # Here we send the notarization request to the Apple's Notarization service, waiting for the result.
+      # This typically takes a few seconds inside a CI environment, but it might take more depending on the App
+      # characteristics. Visit the Notarization docs for more information and strategies on how to optimize it if
+      # you're curious
+      - name: Notarization
+        if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
+        run: xcrun notarytool submit "$GITHUB_WORKSPACE/build/release/install-root/share/valentina.dmg" --keychain-profile "notarytool-profile" --wait --timeout 5m || true
+
+      # Finally, we need to "attach the staple" to our executable, which will allow our app to be
+      # validated by macOS even when an internet connection is not available.
+      - name: Attach the staple
+        if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
+        run: xcrun stapler staple $GITHUB_WORKSPACE/build/release/install-root/share/valentina.dmg || true  
+
+      - name: Commit hash
+        id: commit
+        if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
+        uses: prompt/actions-commit-hash@v3
+
+      - name: Deploy
+        if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
+        env:
+          VALENTINA_WORKING_DIR: ${{ github.workspace }}
+          CIRRUS_BRANCH: ${{ github.base_ref || github.ref_name }}
+          CIRRUS_CHANGE_IN_REPO: ${{ steps.commit.outputs.hash }}
+          TARGET_PLATFORM: ${{ matrix.qt.target }}
+          ARCH: armv8
+          QT_VERSION: ${{ matrix.qt.label }}
+        run: ./scripts/cirrus-deploy.sh
+

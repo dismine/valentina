@@ -14,7 +14,6 @@ VToolApp {
     Depends { name: "FervorLib" }
     Depends { name: "multibundle"; }
     Depends { name: "VGAnalyticsLib" }
-    Depends { name: "pdftops"; condition: qbs.targetOS.contains("macos") }
 
     // Explicitly link to libcrypto and libssl to avoid error: Failed to load libssl/libcrypto.
     // Use moduleProviders.qbspkgconfig.extraPaths to define the missing dependency.
@@ -34,16 +33,24 @@ VToolApp {
     targetName: buildconfig.appTarget
     multibundle.targetApps: ["Valentina"]
 
-    Properties {
+    Group {
+        name: "xerces-c library (MacOS)"
         condition: buildconfig.useConanPackages && buildconfig.conanXercesEnabled && qbs.targetOS.contains("macos") && buildconfig.enableMultiBundle
-        conan.XercesC.libInstallDir: qbs.installPrefix + "/" + buildconfig.installLibraryPath
-        conan.XercesC.installLib: true
+        prefix: XercesC.libraryPaths[0] + "/"
+        files: ["**/*" + cpp.dynamicLibrarySuffix]
+        qbs.install: true
+        qbs.installDir: buildconfig.installLibraryPath
+        qbs.installSourceBase: XercesC.libraryPaths[0] + "/"
     }
 
-    Properties {
+    Group {
+        name: "Crashpad handler"
         condition: buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled && qbs.targetOS.contains("macos") && buildconfig.enableMultiBundle
-        conan.crashpad.installBin: true
-        conan.crashpad.binInstallDir: qbs.installPrefix + "/" + buildconfig.installBinaryPath
+        prefix: crashpad.binDirs[0] + "/"
+        files: "crashpad_handler" + FileInfo.executableSuffix()
+        qbs.install: true
+        qbs.installDir: buildconfig.installBinaryPath
+        qbs.installSourceBase: crashpad.binDirs[0] + "/"
     }
 
     files: [
@@ -214,21 +221,11 @@ VToolApp {
         macdeployqt.targetApps: {
             var apps = [];
 
-            if (pdftops.pdftopsPresent)
-                apps.push("pdftops");
-
             if (buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled)
                 apps.push("crashpad_handler");
 
             return apps;
         }
-    }
-
-    Group {
-        condition: qbs.targetOS.contains("macos") && buildconfig.enableMultiBundle && pdftops.pdftopsPresent
-        name: "pdftops MacOS"
-        files: [pdftops.pdftopsPath]
-        fileTags: ["pdftops.in"]
     }
 
     freedesktop2.hicolorRoot: project.sourceDirectory + "/share/icons/"
@@ -272,7 +269,7 @@ VToolApp {
     Group {
         name: "MacOS assets"
         condition: qbs.targetOS.contains("macos") && buildconfig.enableMultiBundle
-        prefix: project.sourceDirectory + "/dist/macx/puzzle/"
+        prefix: project.sourceDirectory + "/dist/macos/puzzle/"
         files: [
             "Info.plist",
             "puzzle.xcassets"
@@ -282,7 +279,7 @@ VToolApp {
     Group {
         name: "ICNS"
         condition: qbs.targetOS.contains("macos") && buildconfig.enableMultiBundle
-        prefix: project.sourceDirectory + "/dist/macx/valentina-project.xcassets/"
+        prefix: project.sourceDirectory + "/dist/macos/valentina-project.xcassets/"
         files: "layout.iconset"
     }
 

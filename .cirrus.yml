@@ -12,9 +12,6 @@ env:
 qbs_task_filter: &QBS_TASK_FILTER
   skip: "!changesInclude('.cirrus.yml', 'scripts/symupload.py', '**.{h,hpp,cpp,c,ts,ui,png,qbs,js}')"
 
-qmake_task_filter: &QMAKE_TASK_FILTER
-  skip: "!changesInclude('.cirrus.yml', '**.{h,hpp,cpp,c,pro,pri,ts,ui,png}')"
-
 sonar_task_filter: &SONAR_TASK_FILTER
   skip: "!changesInclude('**.{h,hpp,cpp,c}')"
 
@@ -52,7 +49,7 @@ linux_qt6_task_template: &LINUX_QT6_TASK_TEMPLATE
 linux_qt6_sonar_task_template: &LINUX_QT6_TASK_SONAR_TEMPLATE
   << : *QBS_TASK_FILTER
   install_script:
-    - bash -c "$PACKAGE_MANAGER_INSTALL -y qt6-base-dev qt6-l10n-tools libqt6svg6-dev qt6-base-dev-tools qmake6 libxerces-c-dev poppler-utils libgl1-mesa-dev"
+    - bash -c "$PACKAGE_MANAGER_INSTALL -y qt6-base-dev qt6-l10n-tools libqt6svg6-dev qt6-base-dev-tools libxerces-c-dev poppler-utils libgl1-mesa-dev"
     - git fetch --tags
   build_script:
     - uname -a
@@ -119,12 +116,11 @@ appimage_task_template: &APPIMAGE_TASK_TEMPLATE
   conan_cache:
     folder: "~/.conan/data"
   install_script:
-    - bash -c "$PACKAGE_MANAGER_INSTALL qt515base qt515svg qt515tools qt515xmlpatterns qt515translations qt515doc qt515imageformats poppler-utils git xvfb ccache build-essential libgl1-mesa-dev libicu-dev python3-pip cmake"
+    - bash -c "$PACKAGE_MANAGER_INSTALL qt6-base-dev libqt6svg6-dev qt6-translations-l10n qt6-image-formats-plugins qt6-l10n-tools qt6-base-dev-tools libxerces-c-dev poppler-utils git xvfb ccache build-essential libgl1-mesa-dev libicu-dev cmake clang-15 llvm python3-pip help2man texinfo"
     - git fetch --tags
     - python3 --version
-    - pip3 install --user --upgrade pip
     - export PATH="${PATH}:/root/.local/bin"
-    - pip3 install --user --upgrade 'dropbox>=12.0.2' py7zr 'pyzstd<=0.16.0' conan==1.65.0 requests
+    - pip3 install --user --upgrade -r share/ci/requirements-ci.txt
   build_script:
     - uname -a
     - mkdir -pm 0700 $XDG_RUNTIME_DIR
@@ -133,33 +129,30 @@ appimage_task_template: &APPIMAGE_TASK_TEMPLATE
     - ccache --set-config sloppiness=pch_defines,time_macros max_size="$CCACHE_SIZE"
     - export PATH="${PATH}:/root/.local/bin"
     - echo $PATH
-    - which qmake
+    - which qmake6
     - which qbs
     - pwd
     - ls -l /usr/bin/ | grep -E "${COMPILER_REGEX}"
+    - ln -s /usr/bin/clang-15 /usr/bin/clang
+    - ln -s /usr/bin/clang++-15 /usr/bin/clang++
+    - update-alternatives --install /usr/bin/cc cc /usr/bin/clang 100
+    - update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++ 100
     - ${COMPILER} --version
-    - qmake --version
+    - qmake6 --version
     - qbs --version
-    - conan profile new valentina
-    - conan profile update settings.build_type=Release valentina
-    - conan profile update settings.os=Linux valentina
-    - conan profile update settings.os_build=Linux valentina
-    - conan profile update settings.arch=x86_64 valentina
-    - conan profile update settings.arch_build=x86_64 valentina
-    - conan profile update settings.compiler=clang valentina
-    - conan profile update settings.compiler.libcxx=libstdc++11 valentina
-    - conan profile update settings.compiler.version=10 valentina
     - qbs setup-toolchains /usr/bin/${COMPILER} ${COMPILER}
-    - qbs setup-qt /opt/qt515/bin/qmake qt5
-    - qbs config defaultProfile qt5
-    - qbs config profiles.qt5.baseProfile ${COMPILER}
-    - conan install . -s os=Linux --build=missing -o with_crash_reporting=True -pr=valentina
+    - qbs setup-qt /usr/bin/qmake6 qt6
+    - qbs config defaultProfile qt6
+    - qbs config profiles.qt6.baseProfile ${COMPILER}
+    - conan install . --build=missing -o '&:with_crash_reporting=True' -pr:a=share/ci/conan/profiles/appimage
     - echo $CIRRUS_WORKING_DIR
-    - qbs build -f valentina.qbs -d $CIRRUS_WORKING_DIR/build --jobs $(nproc) profile:qt5 config:release modules.buildconfig.enableCcache:${ENABLE_CCACHE} qbs.installRoot:$CIRRUS_WORKING_DIR/build/AppDir modules.buildconfig.enableAppImage:true modules.buildconfig.enableRPath:false project.conanWithCrashReporting:true project.enableConan:true project.conanProfiles:valentina
-    - qbs -p autotest-runner -d build profile:qt5 config:release
-    - export CRASH_QT_VERSION=$(/opt/qt515/bin/qmake -query QT_VERSION | awk -F. '{print $1 "_" $2}')
+    - qbs build -f valentina.qbs -d $CIRRUS_WORKING_DIR/build --jobs $(nproc) profile:qt6 config:release modules.buildconfig.enableCcache:${ENABLE_CCACHE} modules.cpp.linkerVariant:mold qbs.installRoot:$CIRRUS_WORKING_DIR/build/AppDir modules.buildconfig.enableAppImage:true modules.buildconfig.enableRPath:false project.conanWithCrashReporting:true project.enableConan:true project.conanProfiles:share/ci/conan/profiles/appimage
+    - qbs -p autotest-runner -d build profile:qt6 config:release
+    - export CRASH_QT_VERSION=$(/usr/bin/qmake6 -query QT_VERSION | awk -F. '{print $1 "_" $2}')
     - export CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)
     - python3 scripts/symupload.py $CIRRUS_WORKING_DIR/build/AppDir $VALENTINA_VERSION g$CRASH_SHORT_SHA $CRASH_QT_VERSION --clean
+    - $CIRRUS_WORKING_DIR/build/AppDir/usr/local/bin/crashpad_handler --version
+    - du -h $CIRRUS_WORKING_DIR/build/AppDir/usr/local/bin/crashpad_handler
     - appimage-builder --recipe dist/AppImage/AppImageBuilder.yml --appdir $CIRRUS_WORKING_DIR/build/AppDir --skip-test
     - ccache -s
   deploy_script:
@@ -197,7 +190,7 @@ linux_task:
             cpu: 8
             memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
     - container:
-        image: dismine/appimage-builder:latest
+        image: dismine/valentina-appimage-builder:latest
       env:
         COMPILER: clang
         COMPILER_REGEX: clang
@@ -208,13 +201,12 @@ linux_task:
           env:
             ACCESS_TOKEN: ENCRYPTED[81e0b2381ffb628b73f5c94f834010e6631191e0ad03cdd0850d440fb2737a74b68131d842030f010c1bf73ab4cdc1ae]
             DEPLOY: "true"
-            QT_SELECT: "qt5"
             ENABLE_CCACHE: true
             VERSION: "continuous"
             QT_VERSION: Qt6
             ARCH: x86_64
             TARGET_PLATFORM: "Linux"
-            VALENTINA_VERSION: 0_7_53
+            VALENTINA_VERSION: 1_0_0
           container:
             cpu: 4 
             memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
@@ -251,178 +243,3 @@ linux_task:
             memory: 10G  # Set to 10GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
           sonar_cache:
             folder: "${HOME}/.sonar/cache"
-
-macos_task_template: &MACOS_TASK_TEMPLATE
-  << : *QBS_TASK_FILTER
-  << : *REGULER_TASK_TEMPLATE
-  timeout_in: 120m
-  env:
-    ACCESS_TOKEN: ENCRYPTED[81e0b2381ffb628b73f5c94f834010e6631191e0ad03cdd0850d440fb2737a74b68131d842030f010c1bf73ab4cdc1ae]
-    # Should contain the base64 of the certificate
-    MACOS_CERTIFICATE: ENCRYPTED[6600e8c131eaa3ca1d8e4d61a266bfbbf072d557ba89d34e5fb044f8d07af857ea163543824a4a664636a50c1d6d9456]
-    # Should contain the full certificate name, such as Developer ID Application: Your Name (K1234567)
-    MACOS_CERTIFICATE_NAME: ENCRYPTED[9b9e4b0b596a19690a97abfaa8ec90176d8c9567c0c807757ee5dda02672a7426cd25fea3bb7652958abc970912b2138]
-    # Should contain the password you chose when exported the certificate from the Keychain Access app
-    MACOS_CERTIFICATE_PWD: ENCRYPTED[ad78a1c7b5b17ef56c833664cd6a71563b7ea4157ad2daa8e89d88988bdc3f7a669b9d2ee3e47b911707c37f6d84153e]
-    # Should contain apple developer email, the same used the Apple Developer subscription
-    MACOS_NOTARIZATION_APPLE_ID: ENCRYPTED[38dc4848b24abb90c25a0a1156de39af8c88aea6267e934e59cc5fb17dc528e3c1a93d8a9695fe937f4894d10eac707e]
-    # Should contain the app-specific password
-    MACOS_NOTARIZATION_PWD: ENCRYPTED[1df7f3455fb6837adf9ccf2913b5609c0a5125dca3147ece0a51001cf322234c5382977f28a783222f974525a1794cf4]
-    # Should contain the Team ID
-    MACOS_NOTARIZATION_TEAM_ID: ENCRYPTED[8499d687ffd7f6eacda48bd3692bfb22ea6a25eb4a59637b9ff10caa3c8a2df681a790e99b976e7a419d8e5fad2ad35c]
-    # Should contain a strong, randomly generated password
-    MACOS_CI_KEYCHAIN_PWD: ENCRYPTED[7f08698aea44fb7c900267c439c1dfe54e218082e5d6b2354cecc00e21bc640058a55036fd027a1fb5a3d72356abb9ea]
-    QTDIR: "/opt/homebrew/opt/qt6"
-    PATH: $QTDIR/bin:${PATH}
-    # ^  add user paths
-    PIP_CACHE_DIR: ${HOME}/.cache/pip
-    LDFLAGS: "-L$QTDIR/lib"
-    CPPFLAGS: "-I$QTDIR/include"
-    HOMEBREW_NO_AUTO_UPDATE: ""
-  local_homebrew_cache:
-    folder: "$HOME/Library/Caches/Homebrew"
-  global_conan_cache:
-    folder: "$HOME/Library/Caches/Conan"
-  local_conan_cache:
-    folder: "~/.conan/data"
-  pip_cache:
-    folder: ${PIP_CACHE_DIR}
-  install_script:
-    - git fetch --tags
-    - clang --version
-    - find /Applications -maxdepth 1 -type d -name 'Xcode*.app'
-    - sudo xcode-select -p
-    - xcrun --show-sdk-path -sdk macosx
-    # Decode the environment variable into a regular .p12 file
-    - echo $MACOS_CERTIFICATE | base64 --decode > certificate.p12
-    # We need to create a new keychain, otherwise using the certificate will prompt
-    # with a UI dialog asking for the certificate password, which we can't
-    # use in a headless CI environment
-    # Create the keychain with a password ($MACOS_CI_KEYCHAIN_PWD)
-    - security create-keychain -p "$MACOS_CI_KEYCHAIN_PWD" $HOME/Library/Keychains/build.keychain
-    # Make the custom keychain default, so xcodebuild will use it for signing
-    - security default-keychain -s $HOME/Library/Keychains/build.keychain
-    # Unlock the keychain
-    - security unlock-keychain -p "$MACOS_CI_KEYCHAIN_PWD" $HOME/Library/Keychains/build.keychain
-    - security set-keychain-settings $HOME/Library/Keychains/build.keychain
-    # Check if System.keychain is not cluttered
-    # good: 60K
-    # bad: 25MB
-    - du -h /Library/Keychains/System.keychain
-    # Add certificates to keychain and allow codesign to access them
-    # 1) Apple Worldwide Developer Relations Certification Authority
-    - curl https://www.apple.com/certificateauthority/AppleWWDRCAG3.cer --output $HOME/AppleWWDRCAG3.cer --silent
-    - sudo security import $HOME/AppleWWDRCAG3.cer -k /Library/Keychains/System.keychain -T /usr/bin/codesign || true
-    # 2) Developer Authentication Certification Authority
-    - curl https://www.apple.com/certificateauthority/DeveloperIDG2CA.cer --output $HOME/DeveloperIDG2CA.cer --silent
-    - sudo security import $HOME/DeveloperIDG2CA.cer -k /Library/Keychains/System.keychain -T /usr/bin/codesign || true
-    # 3) Developer ID
-    - security import certificate.p12 -k $HOME/Library/Keychains/build.keychain -P "$MACOS_CERTIFICATE_PWD" -T /usr/bin/codesign
-    # Delete the files, we no longer need them
-    - rm $HOME/AppleWWDRCAG3.cer
-    - rm $HOME/DeveloperIDG2CA.cer
-    - rm certificate.p12
-    # Set the partition list (sort of like an access control list)
-    - security set-key-partition-list -S "apple-tool:,apple:,codesign:" -s -k "$MACOS_CI_KEYCHAIN_PWD" $HOME/Library/Keychains/build.keychain
-    # Echo the identity, just so that we know it worked.
-    # This won't display anything secret.
-    - security find-identity -v -p codesigning
-    - brew unpin qbs
-    - brew update > /dev/null
-    - brew install qt6 coreutils ccache cmake ninja git openssl@3 pkgconf poppler xerces-c qbs
-    - brew outdated
-    - brew upgrade qt6
-    - echo $PATH
-    - export PATH="${HOME}/.local/bin:`python3 -m site --user-base`/bin:$PATH"
-    - echo $PATH
-    - python3 --version
-    - PIP_BREAK_SYSTEM_PACKAGES=1 pip3 install --user --upgrade pip 'dropbox>=12.0.2' py7zr conan==1.65.0 requests setuptools
-    - ccache --set-config sloppiness=pch_defines,time_macros max_size="$CCACHE_SIZE"
-    - qmake --version
-    - which qmake
-    - qbs --version
-  build_script:
-    - echo $PATH
-    - export PATH="${HOME}/.local/bin:`python3 -m site --user-base`/bin:$HOME/.cargo/bin:$PATH"
-    - echo $PATH
-    - whereis python3
-    - sudo mkdir -p /usr/local/bin
-    - sudo ln -s -f /usr/bin/python3 /usr/local/bin/python
-    - sudo ln -s /Library/Developer/CommandLineTools/usr/bin/python3 /Library/Developer/CommandLineTools/usr/bin/python
-    - whereis python
-    - pwd
-    - curl -LJ https://github.com/dismine/macdeployqt/archive/refs/heads/main.zip --output ${HOME}/macdeployqt-main.zip --silent
-    - unzip ${HOME}/macdeployqt-main.zip -d ${HOME}
-    - cmake ${HOME}/macdeployqt-main -GNinja -S ${HOME}/macdeployqt-main -B ${HOME}/macdeployqt-build-dir -DCMAKE_INSTALL_PREFIX=${HOME}/macdeployqt-install-dir -DCMAKE_BUILD_TYPE=Release
-    - cmake --build ${HOME}/macdeployqt-build-dir --target install
-    - conan profile new valentina
-    - conan profile update settings.build_type=Release valentina
-    - conan profile update settings.os=Macos valentina
-    - conan profile update settings.os_build=Macos valentina
-    - conan profile update settings.arch=armv8 valentina
-    - conan profile update settings.arch_build=armv8 valentina
-    - conan profile update settings.compiler=apple-clang valentina
-    - conan profile update settings.compiler.cppstd=17 valentina
-    - conan profile update settings.compiler.libcxx=libc++ valentina
-    - conan profile update settings.compiler.version=15 valentina
-    - qbs setup-toolchains --detect
-    - qbs config --list profiles
-    - qbs setup-qt /opt/homebrew/opt/qt6/bin/qmake qt6
-    - qbs config defaultProfile qt6
-    - qbs config profiles.qt6.baseProfile clang
-    - conan install . -s os=Macos --build=missing -o with_crash_reporting=True -pr=valentina
-    - echo $CIRRUS_WORKING_DIR
-    - export VALENTINA_WORKING_DIR=/private${CIRRUS_WORKING_DIR}
-    - echo $VALENTINA_WORKING_DIR
-    - qbs build -f valentina.qbs -d $VALENTINA_WORKING_DIR/build --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:$VALENTINA_WORKING_DIR/build/release/install-root profile:qt6 project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:${ENABLE_CCACHE} moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix xerces-c)/lib/pkgconfig,$(brew --prefix qt6)/lib/pkgconfig,$(brew --prefix openssl@3)/lib/pkgconfig "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:$(brew --prefix qt6)/lib,$(brew --prefix poppler)/lib modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir project.enableConan:true project.conanWithCrashReporting:true project.conanProfiles:valentina
-    - export CRASH_QT_VERSION=$(/opt/homebrew/opt/qt6/bin/qmake -query QT_VERSION | awk -F. '{print $1 "_" $2}')
-    - export CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)
-    - curl --proto '=https' --tlsv1.2 -LsSf https://github.com/mozilla/dump_syms/releases/download/v2.3.3/dump_syms-installer.sh | sh
-    - python3 scripts/symupload.py $VALENTINA_WORKING_DIR/build/release/install-root $VALENTINA_VERSION g$CRASH_SHORT_SHA $CRASH_QT_VERSION --multibundle=$MULTI_BUNDLE --clean
-    - qbs build -f valentina.qbs -d $VALENTINA_WORKING_DIR/build -p 'Valentina DMG' --force-probe-execution --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:$VALENTINA_WORKING_DIR/build/release/install-root profile:qt6 project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:${ENABLE_CCACHE} moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix xerces-c)/lib/pkgconfig,$(brew --prefix qt6)/lib/pkgconfig,$(brew --prefix openssl@3)/lib/pkgconfig "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:$(brew --prefix qt6)/lib,$(brew --prefix poppler)/lib modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir project.enableConan:true project.conanWithCrashReporting:true project.conanProfiles:valentina
-    - |
-      if [ "$DEPLOY" = "true" ]; then
-        # Store the notarization credentials so that we can prevent a UI password dialog
-        # from blocking the CI
-        echo "Create keychain profile"
-        xcrun notarytool store-credentials "notarytool-profile" --apple-id "$MACOS_NOTARIZATION_APPLE_ID" --team-id "$MACOS_NOTARIZATION_TEAM_ID" --password "$MACOS_NOTARIZATION_PWD"
-        # Here we send the notarization request to the Apple's Notarization service, waiting for the result.
-        # This typically takes a few seconds inside a CI environment, but it might take more depending on the App
-        # characteristics. Visit the Notarization docs for more information and strategies on how to optimize it if
-        # you're curious
-        echo "Notarize app"
-        xcrun notarytool submit "$VALENTINA_WORKING_DIR/build/release/install-root/share/valentina.dmg" --keychain-profile "notarytool-profile" --wait --timeout 5m || true
-        # Finally, we need to "attach the staple" to our executable, which will allow our app to be
-        # validated by macOS even when an internet connection is not available.
-        echo "Attach staple"
-        xcrun stapler staple $VALENTINA_WORKING_DIR/build/release/install-root/share/valentina.dmg || true
-      fi
-    - ccache -s
-  deploy_script:
-    - pwd
-    - echo $CIRRUS_WORKING_DIR
-    - export VALENTINA_WORKING_DIR=/private${CIRRUS_WORKING_DIR}
-    - echo $VALENTINA_WORKING_DIR
-    - $VALENTINA_WORKING_DIR/scripts/cirrus-deploy.sh
-  before_cache_script:
-    - brew cleanup
-
-macos_task:
-  macos_instance:
-    image: ghcr.io/cirruslabs/macos-sonoma:latest
-  << : *MACOS_TASK_TEMPLATE
-  env:
-    DEPLOY: "true"
-    QT_VERSION: Qt6
-    ARCH: armv8
-    TARGET_PLATFORM: "macOS_12.4+"
-    MACOS_DEPLOYMENT_TARGET: 12.0
-    ENABLE_CCACHE: true
-    VALENTINA_VERSION: 0_7_53
-  matrix:
-    - name: 'macOS Monterey 12 [signle bundle, no tests]'
-      env:
-        MULTI_BUNDLE: false
-    - name: 'macOS Monterey 12 [multi bundle, no tests]'
-      env:
-        MULTI_BUNDLE: true

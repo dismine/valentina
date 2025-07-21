@@ -4,8 +4,7 @@
 [![Maintainer](https://img.shields.io/badge/Maintainer-Roman_Telezhynskyi-blue)]()
 [![GitLab Last Commit](https://img.shields.io/gitlab/last-commit/smart-pattern%2Fvalentina?style=flat)]()
 [![Discord](https://img.shields.io/discord/1209739539816517692?logo=discord&logoColor=white)](https://discord.gg/XUxKFQuQ)
-[![Stable version](https://img.shields.io/badge/Stable-v0.6.1-blue)](https://smart-pattern.com.ua/valentina/version/0.6.1/)
-[![Dev version](https://img.shields.io/badge/Dev-v0.7.53-yellow)](https://smart-pattern.com.ua/valentina/version/0.7.53/)
+[![Stable version](https://img.shields.io/badge/Stable-v1.0.0-blue)](https://smart-pattern.com.ua/valentina/version/1.0.0/)
 [![Build Status](https://api.cirrus-ci.com/github/dismine/valentina.svg)](https://cirrus-ci.com/github/dismine/valentina)
 [![Build status](https://ci.appveyor.com/api/projects/status/m505f1pfs19j81nt/branch/develop?svg=true)](https://ci.appveyor.com/project/dismi_/valentina)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dismine_valentina&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=dismine_valentina)
@@ -142,9 +141,9 @@ Valentina welcomes contributions from the community, and your involvement can ma
 
 3. **Localization on Transifex:**
 
-   Help us make Valentina accessible to a global audience by contributing to localization efforts on [Transifex](https://explore.transifex.com/valentina/valentina-project/). Contribute translations, review existing ones, or suggest improvements to ensure that Valentina is available in multiple languages.  
+   Help us make Valentina accessible to a global audience by contributing to localization efforts on [Transifex](https://app.transifex.com/valentina/valentina-project/). Contribute translations, review existing ones, or suggest improvements to ensure that Valentina is available in multiple languages.  
      [![Translation](https://img.shields.io/badge/Translate-on_Transifex-green?logo=transifex)](
-   https://explore.transifex.com/valentina/valentina-project/)
+   https://app.transifex.com/valentina/valentina-project/)
 
 4. **Code Contributions:**
    If you're a developer and want to contribute code to Valentina, please follow our [Contribution Guidelines]. Your contributions can include bug fixes, new features, or improvements to the existing codebase.

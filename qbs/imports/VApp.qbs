@@ -6,6 +6,21 @@ CppApplication {
     Depends { name: "bundle"; condition: qbs.targetOS.contains("macos") }
     Depends { name: "macdeployqt"; condition: qbs.targetOS.contains("macos") }
 
+    qbsModuleProviders: {
+        var providers = ["Qt"];
+
+        if (buildconfig.useConanPackages)
+            providers.push("conan");
+
+        providers.push("qbspkgconfig");
+        return providers;
+    }
+
+    Properties {
+        condition: buildconfig.useConanPackages
+        moduleProviders.conan.installDirectory: project.conanInstallPath
+    }
+
     Properties {
         condition: qbs.targetOS.contains("macos")
         cpp.minimumMacosVersion: buildconfig.minimumMacosVersion
