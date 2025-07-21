@@ -1,3 +1,6 @@
+# Valentina 1.1.0 (unreleased)
+- No changes yet.
+
 # Valentina 1.0.0 July 21, 2025
 - Fix Puzzle app crash when application closing.
 - Dialog Table of variables. Added button Close.

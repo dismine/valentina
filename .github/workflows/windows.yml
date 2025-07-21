@@ -19,7 +19,7 @@ defaults:
 env:
   SOURCE_DIR: ${{ github.workspace }}
   QBS_VERSION: 3.0.1
-  VALENTINA_VERSION: 1_0_0
+  VALENTINA_VERSION: 1_1_0
   ACCESS_TOKEN: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
 
 jobs:
@@ -31,8 +31,8 @@ jobs:
       matrix:
         qt:
           # LTS release
-          - install: 6.8.3
-            label: Qt6_8
+          - install: 6.9.1
+            label: Qt6_9
 
     env:
       DEPLOY: 'true'

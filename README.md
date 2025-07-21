@@ -5,6 +5,7 @@
 [![GitLab Last Commit](https://img.shields.io/gitlab/last-commit/smart-pattern%2Fvalentina?style=flat)]()
 [![Discord](https://img.shields.io/discord/1209739539816517692?logo=discord&logoColor=white)](https://discord.gg/XUxKFQuQ)
 [![Stable version](https://img.shields.io/badge/Stable-v1.0.0-blue)](https://smart-pattern.com.ua/valentina/version/1.0.0/)
+[![Edge version](https://img.shields.io/badge/Dev-v1.1.0-yellow)](https://smart-pattern.com.ua/valentina/version/1.1.0/)
 [![Build Status](https://api.cirrus-ci.com/github/dismine/valentina.svg)](https://cirrus-ci.com/github/dismine/valentina)
 [![Build status](https://ci.appveyor.com/api/projects/status/m505f1pfs19j81nt/branch/develop?svg=true)](https://ci.appveyor.com/project/dismi_/valentina)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dismine_valentina&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=dismine_valentina)
@@ -37,11 +38,11 @@ Key features:
 To install Valentina, please visit our website [Valentina Website] and download the version that best suits your needs. Valentina supports two branches: `stable` and `dev`. Version numbers follow a specific pattern to indicate stability and development status:
 
 - **Stable Version:**
-  - Version numbers with even digits (e.g., 0.6) are reserved for stable releases.
+  - Version numbers with even digits (e.g., 1.0) are reserved for stable releases.
   - Stable versions receive bug fixes to ensure a reliable and stable user experience.
 
-- **Dev Version:**
-  - Version numbers with odd digits (e.g., 0.7) represent the development branch.
+- **Edge Version:**
+  - Version numbers with odd digits (e.g., 1.1) represent the development branch.
   - The dev version is actively developed and receives bug fixes and new features, providing a more feature-rich experience.
   - While stable versions are suitable for initial checks, we recommend the dev branch for professional use due to its more advanced functionality.
 

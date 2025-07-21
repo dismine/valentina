@@ -2,7 +2,7 @@
 host     = https://www.transifex.com
 lang_map = es: es_ES, id: id_ID, uk: uk_UA, cs: cs_CZ, nl: nl_NL, fi: fi_FI, ja: ja_JP
 
-[o:valentina:p:valentina-project:r:valentina_10xts]
+[o:valentina:p:valentina-project:r:valentina_ts]
 file_filter  = share/translations/valentina_<lang>.ts
 source_file  = share/translations/valentina.ts
 source_lang  = en

@@ -32,7 +32,7 @@
 class QString;
 
 constexpr unsigned MAJOR_VERSION = 1;
-constexpr unsigned MINOR_VERSION = 0;
+constexpr unsigned MINOR_VERSION = 1;
 constexpr unsigned DEBUG_VERSION = 0;
 
 auto AppVersionStr() -> const QString &;
@@ -49,8 +49,8 @@ constexpr auto AppVersion() -> unsigned
 
 // Change version number in projectversion.cpp too.
 
-#define VER_FILEVERSION 1, 0, 0
-#define VER_FILEVERSION_STR "1.0.0\0"
+#define VER_FILEVERSION 1, 1, 0
+#define VER_FILEVERSION_STR "1.1.0\0"
 
 // #define V_PRERELEASE // Mark prerelease builds
 

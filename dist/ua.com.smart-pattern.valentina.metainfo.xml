@@ -29,6 +29,16 @@
  <update_contact>contact@smart-pattern.com.ua</update_contact>
  <content_rating type="oars-1.1" />
  <releases>
+  <release version="1.1.0" type="development">
+    <description>
+      <p>
+        This is a edge release in the 1.1 series.
+      </p>
+    </description>
+    <issues>
+      <issue url="https://gitlab.com/smart-pattern/valentina/-/issues/223">valentina#223</issue>
+    </issues>
+  </release>
   <release version="1.0.0" type="stable">
     <description>
       <p>

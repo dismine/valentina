@@ -206,7 +206,7 @@ linux_task:
             QT_VERSION: Qt6
             ARCH: x86_64
             TARGET_PLATFORM: "Linux"
-            VALENTINA_VERSION: 1_0_0
+            VALENTINA_VERSION: 1_1_0
           container:
             cpu: 4 
             memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container

@@ -14,7 +14,7 @@ on:
 
 env:
   SOURCE_DIR: ${{ github.workspace }}
-  VALENTINA_VERSION: 1_0_0
+  VALENTINA_VERSION: 1_1_0
   ACCESS_TOKEN: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
   # Should contain the base64 of the certificate
   MACOS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE }}
@@ -41,9 +41,8 @@ jobs:
     strategy:
       matrix:
         qt:
-          # LTS release
-          - install: 6.8.3
-            label: Qt6_8
+          - install: 6.9.1
+            label: Qt6_9
             build_target: '12+'
             xcode: '15.2'
             target: 'MacOS_12+'
@@ -301,8 +300,8 @@ jobs:
       matrix:
         qt:
           # LTS release
-          - install: 6.8.3
-            label: Qt6_8
+          - install: 6.9.1
+            label: Qt6_9
             build_target: '12+'
             xcode: '15.2'
             target: 'MacOS_12+'
