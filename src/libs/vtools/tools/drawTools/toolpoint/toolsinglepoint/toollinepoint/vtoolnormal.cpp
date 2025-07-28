@@ -131,7 +131,7 @@ auto VToolNormal::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene 
  * @brief Create help create tool.
  * @param initData init data.
  */
-auto VToolNormal::Create(VToolNormalInitData initData) -> VToolNormal *
+auto VToolNormal::Create(VToolNormalInitData &initData) -> VToolNormal *
 {
     const QSharedPointer<VPointF> firstPoint = initData.data->GeometricObject<VPointF>(initData.firstPointId);
     const QSharedPointer<VPointF> secondPoint = initData.data->GeometricObject<VPointF>(initData.secondPointId);

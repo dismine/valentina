@@ -70,7 +70,7 @@ public:
     virtual void   SetDialog() override;
     static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                        VContainer *data) -> VToolNormal *;
-    static auto Create(VToolNormalInitData initData) -> VToolNormal *;
+    static auto Create(VToolNormalInitData &initData) -> VToolNormal *;
     static auto FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, qreal length, qreal angle = 0)
         -> QPointF;
     static const QString ToolType;
