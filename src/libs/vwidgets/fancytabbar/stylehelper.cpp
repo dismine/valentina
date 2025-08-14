@@ -116,9 +116,15 @@ void StyleHelper::setBaseColor(const QColor &newcolor)
 void StyleHelper::drawIconWithShadow(const QIcon &icon, const QRect &rect, QPainter *p, QIcon::Mode iconMode,
                                      int dipRadius, const QColor &color, const QPoint &dipOffset)
 {
+    qDebug("StyleHelper::drawIconWithShadow: drawing icon with shadow");
+    qDebug() << " rect:" << rect << " iconMode:" << iconMode << " dipRadius:" << dipRadius << " color:" << color
+             << " dipOffset:" << dipOffset;
+
     QPixmap cache;
     QString const pixmapName =
         QString::fromLatin1("icon %0 %1 %2").arg(icon.cacheKey()).arg(iconMode).arg(rect.height());
+
+    qDebug() << " pixmapName:" << pixmapName;
 
     if (!QPixmapCache::find(pixmapName, &cache))
     {
@@ -128,16 +134,23 @@ void StyleHelper::drawIconWithShadow(const QIcon &icon, const QRect &rect, QPain
         // different than 1. The shadow drawing caluculations are done in device
         // pixels.
         QPixmap px = icon.pixmap(rect.size());
+        qDebug() << " px size:" << px.size() << " DPR:" << px.devicePixelRatio();
         int const devicePixelRatio = qCeil(px.devicePixelRatio());
         int const radius = dipRadius * devicePixelRatio;
         QPoint const offset = dipOffset * devicePixelRatio;
         cache = QPixmap(px.size() + QSize(radius * 2, radius * 2));
         cache.fill(Qt::transparent);
 
+        qDebug() << " cache size:" << cache.size();
+
         QPainter cachePainter(&cache);
+        qDebug() << " cachePainter active? " << cachePainter.isActive();
+
         if (iconMode == QIcon::Disabled)
         {
             QImage im = px.toImage().convertToFormat(QImage::Format_ARGB32);
+            qDebug() << " Disabled mode: im size:" << im.size();
+
             for (int y = 0; y < im.height(); ++y)
             {
                 // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
@@ -156,8 +169,10 @@ void StyleHelper::drawIconWithShadow(const QIcon &icon, const QRect &rect, QPain
         // Draw shadow
         QImage tmp(px.size() + QSize(radius * 2, radius * 2 + 1), QImage::Format_ARGB32_Premultiplied);
         tmp.fill(Qt::transparent);
+        qDebug() << " tmp QImage size:" << tmp.size();
 
         QPainter tmpPainter(&tmp);
+        qDebug() << " tmpPainter active? " << tmpPainter.isActive();
         tmpPainter.setCompositionMode(QPainter::CompositionMode_Source);
         tmpPainter.drawPixmap(QRect(radius, radius, px.width(), px.height()), px);
         tmpPainter.end();
@@ -165,19 +180,24 @@ void StyleHelper::drawIconWithShadow(const QIcon &icon, const QRect &rect, QPain
         // blur the alpha channel
         QImage blurred(tmp.size(), QImage::Format_ARGB32_Premultiplied);
         blurred.fill(Qt::transparent);
+        qDebug() << " blurred QImage size:" << blurred.size();
+
         QPainter blurPainter(&blurred);
+        qDebug() << " blurPainter active? " << blurPainter.isActive();
         qt_blurImage(&blurPainter, tmp, radius, false, true);
         blurPainter.end();
 
         tmp = blurred;
 
         // blacken the image...
-        tmpPainter.begin(&tmp);
+        bool ok = tmpPainter.begin(&tmp);
+        qDebug() << " tmpPainter.begin() returned" << ok << " tmp size:" << tmp.size();
         tmpPainter.setCompositionMode(QPainter::CompositionMode_SourceIn);
         tmpPainter.fillRect(tmp.rect(), color);
         tmpPainter.end();
 
-        tmpPainter.begin(&tmp);
+        ok = tmpPainter.begin(&tmp);
+        qDebug() << " tmpPainter.begin() returned" << ok << " tmp size:" << tmp.size();
         tmpPainter.setCompositionMode(QPainter::CompositionMode_SourceIn);
         tmpPainter.fillRect(tmp.rect(), color);
         tmpPainter.end();
@@ -194,5 +214,7 @@ void StyleHelper::drawIconWithShadow(const QIcon &icon, const QRect &rect, QPain
     QRect targetRect = cache.rect();
     targetRect.setSize(targetRect.size() / cache.devicePixelRatio());
     targetRect.moveCenter(rect.center() - dipOffset);
+    qDebug() << " targetRect:" << targetRect;
     p->drawPixmap(targetRect, cache);
+    qDebug() << "drawIconWithShadow end";
 }

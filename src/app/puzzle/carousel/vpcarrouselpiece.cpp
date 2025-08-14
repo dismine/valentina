@@ -84,6 +84,8 @@ void VPCarrouselPiece::RefreshPieceIcon()
 //---------------------------------------------------------------------------------------------------------------------
 auto VPCarrouselPiece::CreatePieceIcon(const QSize &size, bool isDragIcon) const -> QIcon
 {
+    qCDebug(pCarrouselPiece, "VPCarrouselPiece::CreatePieceIcon: Creating piece icon");
+
     VPPiecePtr const piece = GetPiece();
     if (piece.isNull())
     {

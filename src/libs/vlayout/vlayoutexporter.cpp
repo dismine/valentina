@@ -159,6 +159,8 @@ void VLayoutExporter::SetShowGrainline(bool show)
 //---------------------------------------------------------------------------------------------------------------------
 void VLayoutExporter::ExportToSVG(QGraphicsScene *scene, const QList<QGraphicsItem *> &details) const
 {
+    qDebug("VLayoutExporter::ExportToSVG: Exporting to SVG");
+
     PrepareGrainlineForExport(details, m_showGrainline);
 
     QSvgGenerator generator;
@@ -264,6 +266,8 @@ void VLayoutExporter::ExportToPDF(QGraphicsScene *scene, const QList<QGraphicsIt
 //---------------------------------------------------------------------------------------------------------------------
 void VLayoutExporter::ExportToOBJ(QGraphicsScene *scene) const
 {
+    qDebug("VLayoutExporter::ExportToOBJ: Exporting to OBJ");
+
     VObjPaintDevice generator;
     generator.setFileName(m_fileName);
     generator.setSize(m_imageRect.size().toSize());
@@ -302,6 +306,8 @@ void VLayoutExporter::ExportToEPS(QGraphicsScene *scene, const QList<QGraphicsIt
 //---------------------------------------------------------------------------------------------------------------------
 void VLayoutExporter::ExportToFlatDXF(QGraphicsScene *scene, const QList<QGraphicsItem *> &details) const
 {
+    qDebug("VLayoutExporter::ExportToFlatDXF: Exporting to flat DXF");
+
     PrepareDetailsForDXF(endStringPlaceholder, details);
     PrepareGrainlineForExport(details, m_showGrainline);
 
@@ -495,6 +501,8 @@ void VLayoutExporter::ExportToPDF(QGraphicsScene *scene,
                                   const QList<QGraphicsItem *> &details,
                                   const QString &filename) const
 {
+    qDebug("VLayoutExporter::ExportToPDF: Exporting to PDF");
+
     PrepareGrainlineForExport(details, m_showGrainline);
 
     QPrinter printer;
