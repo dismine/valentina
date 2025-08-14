@@ -142,7 +142,7 @@ auto VAbstartMeasurementDimension::ValidSteps() const -> QVector<qreal>
         }
         else if (m_units == Unit::Inch)
         {
-            step = 0.03937;
+            step = 1.0 / 16.0; // 0.0625"
         }
 
         const int stepsCount = qRound(diff / step);
