@@ -2694,6 +2694,8 @@ void VPMainWindow::ExportUnifiedPdfFile(const VPExportData &data)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::GenerateUnifiedPdfFile(const VPExportData &data, const QString &name)
 {
+    qCDebug(pWindow, "VPMainWindow::GenerateUnifiedPdfFile: Creating unified PDF file");
+
     QSharedPointer<QPrinter> const printer(new QPrinter());
     printer->setCreator(QGuiApplication::applicationDisplayName() + QChar(QChar::Space) +
                         QCoreApplication::applicationVersion());
@@ -2812,6 +2814,8 @@ auto VPMainWindow::GeneratePdfTiledFile(const VPSheetPtr &sheet,
     SCASSERT(not sheet.isNull())
     SCASSERT(painter != nullptr)
     SCASSERT(not printer.isNull())
+
+    qCDebug(pWindow, "VPMainWindow::GeneratePdfTiledFile: Creating tiled PDF file");
 
     sheet->SceneData()->PrepareForExport(data.format); // Go first because recreates pieces
     VLayoutExporter::PrepareGrainlineForExport(sheet->SceneData()->GraphicsPiecesAsItems(), data.showGrainline);
@@ -3163,6 +3167,8 @@ void VPMainWindow::PrintLayoutSheets(QPrinter *printer, const QList<VPSheetPtr> 
 {
     SCASSERT(printer != nullptr)
 
+    qCDebug(pWindow, "VPMainWindow::PrintLayoutSheets: Printing layout sheets");
+
     // Handle the fromPage(), toPage(), supportsMultipleCopies(), and numCopies() values from QPrinter.
     int firstPageNumber = printer->fromPage() - 1;
     if (firstPageNumber >= sheets.count())
@@ -3347,6 +3353,8 @@ auto VPMainWindow::PrepareLayoutTilePages(const QList<VPSheetPtr> &sheets) -> QV
 auto VPMainWindow::PrintLayoutTiledSheetPage(QPrinter *printer, QPainter &painter, const VPLayoutPrinterPage &page,
                                              bool firstPage) -> bool
 {
+    qCDebug(pWindow, "VPMainWindow::PrintLayoutTiledSheetPage: Printing layout tiled sheets page");
+
     page.sheet->SceneData()->PrepareForExport(LayoutExportFormats::PDFTiled);
 
     const VCommonSettings *settings = VAbstractApplication::VApp()->Settings();

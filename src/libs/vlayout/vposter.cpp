@@ -82,6 +82,8 @@ auto Grayscale(QImage image) -> QImage
 auto WatermarkImageFromCache(const VWatermarkData &watermarkData, const QString &watermarkPath, QString &error)
     -> QPixmap
 {
+    qDebug("WatermarkImageFromCache: Preparing a watermark image");
+
     QPixmap pixmap;
     QString const imagePath = AbsoluteMPath(watermarkPath, watermarkData.path);
 
