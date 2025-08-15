@@ -189,7 +189,9 @@ void DialogDimensionLabels::InitTable()
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogDimensionLabels::DimensionValue(const MeasurementDimension_p &dimension, qreal value) const -> QString
 {
-    if (dimension->IsBodyMeasurement())
+    if ((dimension->Type() == MeasurementDimension::Y || dimension->Type() == MeasurementDimension::W
+         || dimension->Type() == MeasurementDimension::Z)
+        && dimension->IsBodyMeasurement())
     {
         return QString::number(m_fullCircumference ? value * 2 : value);
     }
