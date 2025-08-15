@@ -425,8 +425,8 @@ void DialogRestrictDimension::CellContextMenu(QPoint pos)
         actionExclude->setEnabled(columnValue >= min && columnValue <= max);
     }
 
-    QAction *selectedAction = menu->exec(ui->tableWidget->viewport()->mapToGlobal(pos));
-    if (selectedAction == actionExclude)
+    if (const QAction *selectedAction = menu->exec(ui->tableWidget->viewport()->mapToGlobal(pos));
+        selectedAction == actionExclude)
     {
         QSet<qreal> list = restriction.GetExcludeValues();
         if (exclude)
@@ -749,7 +749,8 @@ void DialogRestrictDimension::FillBase(double base, const MeasurementDimension_p
         QString const item = useLabel ? label : QStringLiteral("%1 %2").arg(base).arg(units);
         control->addItem(item, base);
     }
-    else if (dimension->Type() == MeasurementDimension::Y)
+    else if (dimension->Type() == MeasurementDimension::Y || dimension->Type() == MeasurementDimension::W
+             || dimension->Type() == MeasurementDimension::Z)
     {
         if (useLabel)
         {
@@ -762,12 +763,6 @@ void DialogRestrictDimension::FillBase(double base, const MeasurementDimension_p
                                      : QString::number(base);
             control->addItem(item, base);
         }
-    }
-    else if (dimension->Type() == MeasurementDimension::W || dimension->Type() == MeasurementDimension::Z)
-    {
-        QString const item =
-            useLabel ? label : QStringLiteral("%1 %2").arg(m_fullCircumference ? base * 2 : base).arg(units);
-        control->addItem(item, base);
     }
 }
 
