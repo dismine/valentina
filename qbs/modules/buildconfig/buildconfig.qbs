@@ -68,6 +68,13 @@ Module {
     property string appTarget
     property string projectVersion: "1.0.0"
 
+    readonly property bool isEdgeBuild: {
+        var parts = projectVersion.split(".")
+        var major = parseInt(parts[0])
+        var minor = parseInt(parts.length > 1 ? parts[1] : 0)
+        return ((major * 1000 + minor) % 2) !== 0
+    }
+
     readonly property string installAppPath: {
         if (qbs.targetOS.contains("macos"))
             return "Applications";

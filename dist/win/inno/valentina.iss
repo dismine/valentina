@@ -8,6 +8,8 @@
 ; #define MyAppMinWinVersion
 ; #define buildDirectory
 ; #define DependencyVCRedist
+; #define MyAppStatus
+; #define MyAppId
 
 #include "CodeDependencies.iss"
 
@@ -15,18 +17,12 @@
 #define MyAppPublisher "Roman Telezhynskyi"
 #define MyAppURL "https://smart-pattern.com.ua/"
 #define MyDateTimeString GetDateTimeString('yyyymmddhhnnss', '', '');
-; Appstatus: "" = release, " Dev" = development branch
-; this only modifies the resulting exe name of the installer package ;-)
-#define MyAppStatus " Dev"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-; Stable branch
-;AppId={{7081AEC7-38FC-479F-B712-DB073BB76512}
-; Dev branch
-AppId={{059E7A7D-CB48-4218-B5E0-8824D2953CEC}
+AppId={#MyAppId}
 AppName={#MyAppName}{#MyAppStatus}
 AppVersion={#MyAppVersion}
 AppVerName={#MyAppName}{#MyAppStatus} {#MyAppVersion}
