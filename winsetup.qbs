@@ -6,10 +6,12 @@ InnoSetup {
     Depends { name: "buildconfig" }
 
     property bool _test: {
-        var present = qbs.targetOS.contains("windows") && innosetup.present;
-        console.info("has innosetup: " + present);
-        if (present) {
-            console.info("innosetup version " + innosetup.version);
+        if (qbs.targetOS.contains("windows")) {
+            var present = innosetup.present;
+            console.info("has innosetup: " + present);
+            if (present) {
+                console.info("innosetup version " + innosetup.version);
+            }
         }
     }
 
@@ -72,9 +74,31 @@ InnoSetup {
         return "false";
     }
 
+    readonly property string appStatus: {
+        // Appstatus: "" = stable version, " Dev" = edge version
+        // this only modifies the resulting exe name of the installer package ;-)
+        if (buildconfig.isEdgeBuild)
+        {
+            return " Dev" // Edge version
+        }
+
+        return ""; // Stable version
+    }
+
+    readonly property string appId: {
+        if (buildconfig.isEdgeBuild)
+        {
+            return "{{059E7A7D-CB48-4218-B5E0-8824D2953CEC}" // Edge version
+        }
+
+        return "{{7081AEC7-38FC-479F-B712-DB073BB76512}"; // Stable version
+    }
+
     innosetup.verboseOutput: true
     innosetup.defines: [
         "MyAppVersion=" + version,
+        "MyAppStatus=" + appStatus,
+        "MyAppId=" + appId,
         "MyAppCopyright=" + buildconfig.valentina_copyright_string,
         "MyAppArchitecture=" + arhitecture,
         "MyAppMinWinVersion=" + minVersion,

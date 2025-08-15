@@ -5,6 +5,7 @@
 - Tool Normal. Fixed formula values were not saved.
 - Tape app. Corrected support for multisize tables when using inch units.
 - Tape app. Corrected showing of full circumference dimension values.
+- Correct application status of Windows installer.
 
 # Valentina 1.0.0 July 21, 2025
 - Fix Puzzle app crash when application closing.
