@@ -404,6 +404,7 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
 
     InitFold(piece);
 
+    uiTabPaths->checkBoxTrueZeroWidth->setChecked(piece.IsTrueZeroWidth());
     uiTabPaths->plainTextEditFormulaWidth->setPlainText(VAbstractApplication::VApp()->TrVars()->FormulaToUser(
         piece.GetFormulaSAWidth(), VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
     m_saWidth = piece.GetSAWidth();
@@ -3278,6 +3279,7 @@ auto DialogSeamAllowance::CreatePiece() const -> VPiece
     piece.SetShortName(uiTabPaths->lineEditShortName->text());
     piece.SetGradationLabel(uiTabPaths->lineEditGradationLabel->text());
     piece.SetPriority(static_cast<uint>(uiTabPaths->spinBoxPriority->value()));
+    piece.SetTrueZeroWidth(uiTabPaths->checkBoxTrueZeroWidth->isChecked());
     piece.SetFormulaSAWidth(GetFormulaFromUser(uiTabPaths->plainTextEditFormulaWidth), m_saWidth);
     piece.GetPieceLabelData().SetLetter(uiTabLabels->lineEditLetter->text());
     piece.GetPieceLabelData().SetAnnotation(uiTabLabels->lineEditAnnotation->text());

@@ -1563,7 +1563,7 @@ void VLayoutPiece::SetLayoutAllowancePoints(bool togetherWithNotches)
 
         QVector<VSAPoint> pieceBoundaryPoints;
         CastTo(pieceBoundary, pieceBoundaryPoints);
-        CastTo(Equidistant(pieceBoundaryPoints, d->m_layoutWidth, GetName()), d->m_layoutAllowance);
+        CastTo(Equidistant(pieceBoundaryPoints, d->m_layoutWidth, false, GetName()), d->m_layoutAllowance);
         if (not d->m_layoutAllowance.isEmpty())
         {
             d->m_layoutAllowance.removeLast();

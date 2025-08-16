@@ -47,235 +47,322 @@ TST_VAbstractPiece::TST_VAbstractPiece(QObject *parent)
 void TST_VAbstractPiece::EquidistantRemoveLoop_data()
 {
     QTest::addColumn<QVector<VSAPoint>>("points");
+    QTest::addColumn<bool>("trueZeroWidth");
     QTest::addColumn<qreal>("width");
     QTest::addColumn<QVector<QPointF>>("ekvOrig");
 
-    auto ASSERT_TEST_CASE = [](const char *title, const QString &input, const QString &output, qreal width)
+    auto ASSERT_TEST_CASE =
+        [](const char *title, const QString &input, const QString &output, qreal width, bool trueZeroWidth)
     {
         QVector<VSAPoint> const inputPoints = AbstractTest::VectorFromJson<VSAPoint>(input);
         QVector<QPointF> const outputPoints = AbstractTest::VectorFromJson<QPointF>(output);
-        QTest::newRow(title) << inputPoints << width << outputPoints;
+        QTest::newRow(title) << inputPoints << trueZeroWidth << width << outputPoints;
     };
 
     // See file src/app/share/collection/test/seamtest1.val
-    ASSERT_TEST_CASE("Seam test 1. Piece. By angle.", QStringLiteral("://seamtest1_by_angle/input.json"),
+    ASSERT_TEST_CASE("Seam test 1. Piece. By angle.",
+                     QStringLiteral("://seamtest1_by_angle/input.json"),
                      QStringLiteral("://seamtest1_by_angle/output.json"),
-                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+                     37.795275590551185, /*seam allowance width (1.0 cm)*/
+                     false);
 
     // See file src/app/share/collection/test/seamtest1.val
-    ASSERT_TEST_CASE("Seam test 1. Piece. By angle 2.", QStringLiteral("://seamtest1_by_angle_2/input.json"),
+    ASSERT_TEST_CASE("Seam test 1. Piece. By angle 2.",
+                     QStringLiteral("://seamtest1_by_angle_2/input.json"),
                      QStringLiteral("://seamtest1_by_angle_2/output.json"),
-                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+                     37.795275590551185, /*seam allowance width (1.0 cm)*/
+                     false);
 
     // See file src/app/share/collection/test/seamtest1.val
-    ASSERT_TEST_CASE("Seam test 1. Piece. By intersection.", QStringLiteral("://seamtest1_by_intersection/input.json"),
+    ASSERT_TEST_CASE("Seam test 1. Piece. By intersection.",
+                     QStringLiteral("://seamtest1_by_intersection/input.json"),
                      QStringLiteral("://seamtest1_by_intersection/output.json"),
-                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+                     37.795275590551185, /*seam allowance width (1.0 cm)*/
+                     false);
 
     // See file src/app/share/collection/test/seamtest1.val
     ASSERT_TEST_CASE("Seam test 1. Piece. By first edge symmetry.",
                      QStringLiteral("://seamtest1_by_first_edge_symmetry/input.json"),
                      QStringLiteral("://seamtest1_by_first_edge_symmetry/output.json"),
-                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+                     37.795275590551185, /*seam allowance width (1.0 cm)*/
+                     false);
 
     // See file src/app/share/collection/test/seamtest1.val
     ASSERT_TEST_CASE("Seam test 1. Piece. By second edge symmetry.",
                      QStringLiteral("://seamtest1_by_second_edge_symmetry/input.json"),
                      QStringLiteral("://seamtest1_by_second_edge_symmetry/output.json"),
-                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+                     37.795275590551185, /*seam allowance width (1.0 cm)*/
+                     false);
 
     // See file src/app/share/collection/test/seamtest1.val
     ASSERT_TEST_CASE("Seam test 1. Piece. By first right angle.",
                      QStringLiteral("://seamtest1_by_first_right_angle/input.json"),
                      QStringLiteral("://seamtest1_by_first_right_angle/output.json"),
-                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+                     37.795275590551185, /*seam allowance width (1.0 cm)*/
+                     false);
 
     // See file src/app/share/collection/test/seamtest1.val
     ASSERT_TEST_CASE("Seam test 1. Piece. By second right angle.",
                      QStringLiteral("://seamtest1_by_second_right_angle/input.json"),
                      QStringLiteral("://seamtest1_by_second_right_angle/output.json"),
-                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+                     37.795275590551185, /*seam allowance width (1.0 cm)*/
+                     false);
 
     // See file src/app/share/collection/test/seamtest2.val
-    ASSERT_TEST_CASE("Seam test 2", QStringLiteral("://seamtest2/input.json"),
-                     QStringLiteral("://seamtest2/output.json"), 37.795275590551185 /*seam allowance width (1.0 cm)*/);
+    ASSERT_TEST_CASE("Seam test 2",
+                     QStringLiteral("://seamtest2/input.json"),
+                     QStringLiteral("://seamtest2/output.json"),
+                     37.795275590551185, /*seam allowance width (1.0 cm)*/
+                     false);
 
     // See file src/app/share/collection/test/seamtest3.val
-    ASSERT_TEST_CASE("Seam test 3", QStringLiteral("://seamtest3/input.json"),
-                     QStringLiteral("://seamtest3/output.json"), 37.795275590551185 /*seam allowance width (1.0 cm)*/);
+    ASSERT_TEST_CASE("Seam test 3",
+                     QStringLiteral("://seamtest3/input.json"),
+                     QStringLiteral("://seamtest3/output.json"),
+                     37.795275590551185, /*seam allowance width (1.0 cm)*/
+                     false);
 
     // These are two real cases where equdistant has loop.
     // See issue #298. Segmented Curve isn't selected in Seam Allowance tool.
     // https://bitbucket.org/dismine/valentina/issue/298/segmented-curve-isnt-selected-in-seam
     // See file src/app/share/collection/TestPuzzle.val
     // Code should clean loops in path.
-    ASSERT_TEST_CASE("Issue 298. Case1", QStringLiteral("://Issue_298_case1/input.json"),
-                     QStringLiteral("://Issue_298_case1/output.json"), 75.59055118110237 /*seam allowance width*/);
+    ASSERT_TEST_CASE("Issue 298. Case1",
+                     QStringLiteral("://Issue_298_case1/input.json"),
+                     QStringLiteral("://Issue_298_case1/output.json"),
+                     75.59055118110237, /*seam allowance width*/
+                     false);
 
-    ASSERT_TEST_CASE("Issue 298. Case2", QStringLiteral("://Issue_298_case2/input.json"),
-                     QStringLiteral("://Issue_298_case2/output.json"), 37.795275590551185 /*seam allowance width*/);
+    ASSERT_TEST_CASE("Issue 298. Case2",
+                     QStringLiteral("://Issue_298_case2/input.json"),
+                     QStringLiteral("://Issue_298_case2/output.json"),
+                     37.795275590551185, /*seam allowance width*/
+                     false);
 
     // See issue #548. Bug Detail tool. Case when seam allowance is wrong.
     // https://bitbucket.org/dismine/valentina/issues/548/bug-detail-tool-case-when-seam-allowance
     // Files: Steampunk_trousers.val and marie.vit
     // Actually buggy detail see in file src/app/share/collection/bugs/Steampunk_trousers_issue_#548.val
     // Code should clean loops in path.
-    ASSERT_TEST_CASE("Issue 548. Case1", QStringLiteral("://Issue_548_case1/input.json"),
+    ASSERT_TEST_CASE("Issue 548. Case1",
+                     QStringLiteral("://Issue_548_case1/input.json"),
                      QStringLiteral("://Issue_548_case1/output.json"),
-                     11.338582677165354 /*seam allowance width (0.3 cm)*/);
+                     11.338582677165354, /*seam allowance width (0.3 cm)*/
+                     false);
 
-    ASSERT_TEST_CASE("Issue 548. Case2", QStringLiteral("://Issue_548_case2/input.json"),
+    ASSERT_TEST_CASE("Issue 548. Case2",
+                     QStringLiteral("://Issue_548_case2/input.json"),
                      QStringLiteral("://Issue_548_case2/output.json"),
-                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+                     37.795275590551185, /*seam allowance width (1.0 cm)*/
+                     false);
 
-    ASSERT_TEST_CASE("Issue 548. Case3", QStringLiteral("://Issue_548_case3/input.json"),
+    ASSERT_TEST_CASE("Issue 548. Case3",
+                     QStringLiteral("://Issue_548_case3/input.json"),
                      QStringLiteral("://Issue_548_case3/output.json"),
-                     75.59055118110237 /*seam allowance width (2.0 cm)*/);
+                     75.59055118110237, /*seam allowance width (2.0 cm)*/
+                     false);
 
     // See file src/app/share/collection/bugs/Issue_#646.val
-    ASSERT_TEST_CASE("Issue 646.", QStringLiteral("://Issue_646/input.json"),
-                     QStringLiteral("://Issue_646/output.json"), 37.795275590551185 /*seam allowance width (1.0 cm)*/);
+    ASSERT_TEST_CASE("Issue 646.",
+                     QStringLiteral("://Issue_646/input.json"),
+                     QStringLiteral("://Issue_646/output.json"),
+                     37.795275590551185, /*seam allowance width (1.0 cm)*/
+                     false);
 
     // See file src/app/share/collection/bugs/Issue_#923.val
-    ASSERT_TEST_CASE("Issue 923. Test 1", QStringLiteral("://Issue_923_test1/input.json"),
+    ASSERT_TEST_CASE("Issue 923. Test 1",
+                     QStringLiteral("://Issue_923_test1/input.json"),
                      QStringLiteral("://Issue_923_test1/output.json"),
-                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+                     37.795275590551185, /*seam allowance width (1.0 cm)*/
+                     false);
 
     // See file src/app/share/collection/bugs/Issue_#923.val
-    ASSERT_TEST_CASE("Issue 923. Test 2", QStringLiteral("://Issue_923_test2/input.json"),
+    ASSERT_TEST_CASE("Issue 923. Test 2",
+                     QStringLiteral("://Issue_923_test2/input.json"),
                      QStringLiteral("://Issue_923_test2/output.json"),
-                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+                     37.795275590551185, /*seam allowance width (1.0 cm)*/
+                     false);
 
     // See file src/app/share/collection/bugs/Issue_#923.val
-    ASSERT_TEST_CASE("Issue 923. Test 3", QStringLiteral("://Issue_923_test3/input.json"),
+    ASSERT_TEST_CASE("Issue 923. Test 3",
+                     QStringLiteral("://Issue_923_test3/input.json"),
                      QStringLiteral("://Issue_923_test3/output.json"),
-                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+                     37.795275590551185, /*seam allowance width (1.0 cm)*/
+                     false);
 
     // See file src/app/share/collection/bugs/Issue_#923.val
-    ASSERT_TEST_CASE("Issue 923. Test 4", QStringLiteral("://Issue_923_test4/input.json"),
+    ASSERT_TEST_CASE("Issue 923. Test 4",
+                     QStringLiteral("://Issue_923_test4/input.json"),
                      QStringLiteral("://Issue_923_test4/output.json"),
-                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+                     37.795275590551185, /*seam allowance width (1.0 cm)*/
+                     false);
 
     // See file src/app/share/collection/bugs/Issue_#923.val
-    ASSERT_TEST_CASE("Issue 923. Test 5", QStringLiteral("://Issue_923_test5/input.json"),
+    ASSERT_TEST_CASE("Issue 923. Test 5",
+                     QStringLiteral("://Issue_923_test5/input.json"),
                      QStringLiteral("://Issue_923_test5/output.json"),
-                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+                     37.795275590551185, /*seam allowance width (1.0 cm)*/
+                     false);
 
     // See file src/app/share/collection/bugs/Issue_#923.val
-    ASSERT_TEST_CASE("Issue 923. Test 6", QStringLiteral("://Issue_923_test6/input.json"),
+    ASSERT_TEST_CASE("Issue 923. Test 6",
+                     QStringLiteral("://Issue_923_test6/input.json"),
                      QStringLiteral("://Issue_923_test6/output.json"),
-                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+                     37.795275590551185, /*seam allowance width (1.0 cm)*/
+                     false);
 
     // See file src/app/share/collection/bugs/Issue_#923.val
-    ASSERT_TEST_CASE("Issue 923. Test 1.1", QStringLiteral("://Issue_923_test1_1/input.json"),
+    ASSERT_TEST_CASE("Issue 923. Test 1.1",
+                     QStringLiteral("://Issue_923_test1_1/input.json"),
                      QStringLiteral("://Issue_923_test1_1/output.json"),
-                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+                     37.795275590551185, /*seam allowance width (1.0 cm)*/
+                     false);
 
     // See file src/app/share/collection/bugs/Issue_#923.val
-    ASSERT_TEST_CASE("Issue 923. Test 2.2", QStringLiteral("://Issue_923_test2_2/input.json"),
+    ASSERT_TEST_CASE("Issue 923. Test 2.2",
+                     QStringLiteral("://Issue_923_test2_2/input.json"),
                      QStringLiteral("://Issue_923_test2_2/output.json"),
-                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+                     37.795275590551185, /*seam allowance width (1.0 cm)*/
+                     false);
 
     // See file src/app/share/collection/bugs/Issue_#923.val
-    ASSERT_TEST_CASE("Issue 923. Test 3.3", QStringLiteral("://Issue_923_test3_3/input.json"),
+    ASSERT_TEST_CASE("Issue 923. Test 3.3",
+                     QStringLiteral("://Issue_923_test3_3/input.json"),
                      QStringLiteral("://Issue_923_test3_3/output.json"),
-                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+                     37.795275590551185, /*seam allowance width (1.0 cm)*/
+                     false);
 
     // See file src/app/share/collection/bugs/Issue_#923.val
-    ASSERT_TEST_CASE("Issue 923. Test 4.4", QStringLiteral("://Issue_923_test4_4/input.json"),
+    ASSERT_TEST_CASE("Issue 923. Test 4.4",
+                     QStringLiteral("://Issue_923_test4_4/input.json"),
                      QStringLiteral("://Issue_923_test4_4/output.json"),
-                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+                     37.795275590551185, /*seam allowance width (1.0 cm)*/
+                     false);
 
     // See file src/app/share/collection/bugs/Issue_#923.val
-    ASSERT_TEST_CASE("Issue 923. Test 5.5", QStringLiteral("://Issue_923_test5_5/input.json"),
+    ASSERT_TEST_CASE("Issue 923. Test 5.5",
+                     QStringLiteral("://Issue_923_test5_5/input.json"),
                      QStringLiteral("://Issue_923_test5_5/output.json"),
-                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+                     37.795275590551185, /*seam allowance width (1.0 cm)*/
+                     false);
 
     // See file src/app/share/collection/bugs/Issue_#923.val
-    ASSERT_TEST_CASE("Issue 923. Test 6.6", QStringLiteral("://Issue_923_test6_6/input.json"),
+    ASSERT_TEST_CASE("Issue 923. Test 6.6",
+                     QStringLiteral("://Issue_923_test6_6/input.json"),
                      QStringLiteral("://Issue_923_test6_6/output.json"),
-                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+                     37.795275590551185, /*seam allowance width (1.0 cm)*/
+                     false);
 
     // See file src/app/share/collection/bugs/Issue_#923_test7.val
-    ASSERT_TEST_CASE("Issue 923. Test 7.1", QStringLiteral("://Issue_923_test7_1/input.json"),
+    ASSERT_TEST_CASE("Issue 923. Test 7.1",
+                     QStringLiteral("://Issue_923_test7_1/input.json"),
                      QStringLiteral("://Issue_923_test7_1/output.json"),
-                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+                     37.795275590551185, /*seam allowance width (1.0 cm)*/
+                     false);
 
     // See file src/app/share/collection/bugs/Issue_#923_test7.val
-    ASSERT_TEST_CASE("Issue 923. Test 7.2", QStringLiteral("://Issue_923_test7_2/input.json"),
+    ASSERT_TEST_CASE("Issue 923. Test 7.2",
+                     QStringLiteral("://Issue_923_test7_2/input.json"),
                      QStringLiteral("://Issue_923_test7_2/output.json"),
-                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+                     37.795275590551185, /*seam allowance width (1.0 cm)*/
+                     false);
 
     // See file src/app/share/collection/bugs/Issue_#923_test7.val
-    ASSERT_TEST_CASE("Issue 923. Test 7.3", QStringLiteral("://Issue_923_test7_3/input.json"),
+    ASSERT_TEST_CASE("Issue 923. Test 7.3",
+                     QStringLiteral("://Issue_923_test7_3/input.json"),
                      QStringLiteral("://Issue_923_test7_3/output.json"),
-                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+                     37.795275590551185, /*seam allowance width (1.0 cm)*/
+                     false);
 
     // See file src/app/share/collection/bugs/loop_by_intersection.val
-    ASSERT_TEST_CASE("Loop for angle by intersection", QStringLiteral("://loop_by_intersection/input.json"),
+    ASSERT_TEST_CASE("Loop for angle by intersection",
+                     QStringLiteral("://loop_by_intersection/input.json"),
                      QStringLiteral("://loop_by_intersection/output.json"),
-                     39.685039370078741 /*seam allowance width (1.05 cm)*/);
+                     39.685039370078741, /*seam allowance width (1.05 cm)*/
+                     false);
 
     // See file valentina_private_collection/bugs/loop_start_point_on_line/loop_start_point_on_line.val
     // (private collection)
-    ASSERT_TEST_CASE("Loop for start point on line", QStringLiteral("://loop_start_point_on_line/input.json"),
+    ASSERT_TEST_CASE("Loop for start point on line",
+                     QStringLiteral("://loop_start_point_on_line/input.json"),
                      QStringLiteral("://loop_start_point_on_line/output.json"),
-                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+                     37.795275590551185, /*seam allowance width (1.0 cm)*/
+                     false);
 
     // See file valentina_private_collection/bugs/DP_6_hem/DP_6_hem.val
-    ASSERT_TEST_CASE("By length", QStringLiteral("://DP_6_hem_by_length/input.json"),
+    ASSERT_TEST_CASE("By length",
+                     QStringLiteral("://DP_6_hem_by_length/input.json"),
                      QStringLiteral("://DP_6_hem_by_length/output.json"),
-                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+                     37.795275590551185, /*seam allowance width (1.0 cm)*/
+                     false);
 
     // See file valentina_private_collection/bugs/DP_6_hem/DP_6_hem.val
-    ASSERT_TEST_CASE("By intersection", QStringLiteral("://DP_6_hem_by_intersection/input.json"),
+    ASSERT_TEST_CASE("By intersection",
+                     QStringLiteral("://DP_6_hem_by_intersection/input.json"),
                      QStringLiteral("://DP_6_hem_by_intersection/output.json"),
-                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+                     37.795275590551185, /*seam allowance width (1.0 cm)*/
+                     false);
 
     // See file valentina_private_collection/bugs/DP_6_hem/DP_6_hem.val
-    ASSERT_TEST_CASE("By first edge symmetry", QStringLiteral("://DP_6_hem_by_first_edge_symmetry/input.json"),
+    ASSERT_TEST_CASE("By first edge symmetry",
+                     QStringLiteral("://DP_6_hem_by_first_edge_symmetry/input.json"),
                      QStringLiteral("://DP_6_hem_by_first_edge_symmetry/output.json"),
-                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+                     37.795275590551185, /*seam allowance width (1.0 cm)*/
+                     false);
 
     // See file valentina_private_collection/bugs/DP_6_hem/DP_6_hem.val
-    ASSERT_TEST_CASE("By second edge symmetry", QStringLiteral("://DP_6_hem_by_second_edge_symmetry/input.json"),
+    ASSERT_TEST_CASE("By second edge symmetry",
+                     QStringLiteral("://DP_6_hem_by_second_edge_symmetry/input.json"),
                      QStringLiteral("://DP_6_hem_by_second_edge_symmetry/output.json"),
-                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+                     37.795275590551185, /*seam allowance width (1.0 cm)*/
+                     false);
 
     // See file valentina_private_collection/bugs/DP_6_hem/DP_6_hem.val
-    ASSERT_TEST_CASE("By first edge right angle", QStringLiteral("://DP_6_hem_by_first_edge_right_angle/input.json"),
+    ASSERT_TEST_CASE("By first edge right angle",
+                     QStringLiteral("://DP_6_hem_by_first_edge_right_angle/input.json"),
                      QStringLiteral("://DP_6_hem_by_first_edge_right_angle/output.json"),
-                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+                     37.795275590551185, /*seam allowance width (1.0 cm)*/
+                     false);
 
     // See file valentina_private_collection/bugs/DP_6_hem/DP_6_hem.val
-    ASSERT_TEST_CASE("By second edge right angle", QStringLiteral("://DP_6_hem_by_second_edge_right_angle/input.json"),
+    ASSERT_TEST_CASE("By second edge right angle",
+                     QStringLiteral("://DP_6_hem_by_second_edge_right_angle/input.json"),
                      QStringLiteral("://DP_6_hem_by_second_edge_right_angle/output.json"),
-                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+                     37.795275590551185, /*seam allowance width (1.0 cm)*/
+                     false);
 
     // See file valentina_private_collection/bugs/DP_6/DP_6.val
-    ASSERT_TEST_CASE("Hem by seam allowance", QStringLiteral("://DP_6/input.json"),
-                     QStringLiteral("://DP_6/output.json"), 37.795275590551185 /*seam allowance width (1.0 cm)*/);
+    ASSERT_TEST_CASE("Hem by seam allowance",
+                     QStringLiteral("://DP_6/input.json"),
+                     QStringLiteral("://DP_6/output.json"),
+                     37.795275590551185, /*seam allowance width (1.0 cm)*/
+                     false);
 
     // See file src/app/share/collection/bugs/smart_pattern_#36.val
-    ASSERT_TEST_CASE("Incorrect position of a notch", QStringLiteral("://smart_pattern_#36/input.json"),
+    ASSERT_TEST_CASE("Incorrect position of a notch",
+                     QStringLiteral("://smart_pattern_#36/input.json"),
                      QStringLiteral("://smart_pattern_#36/output.json"),
-                     30.236220472440944 /*seam allowance width (0.8 cm)*/);
+                     30.236220472440944, /*seam allowance width (0.8 cm)*/
+                     false);
 
     // See file valentina_private_collection/bugs/winter_coat/winter_coat.val
-    ASSERT_TEST_CASE("Incorrect seam allowance", QStringLiteral("://winter_coat/input.json"),
+    ASSERT_TEST_CASE("Incorrect seam allowance",
+                     QStringLiteral("://winter_coat/input.json"),
                      QStringLiteral("://winter_coat/output.json"),
-                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+                     37.795275590551185, /*seam allowance width (1.0 cm)*/
+                     false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VAbstractPiece::EquidistantRemoveLoop() const
 {
     QFETCH(QVector<VSAPoint>, points);
+    QFETCH(bool, trueZeroWidth);
     QFETCH(qreal, width);
     QFETCH(QVector<QPointF>, ekvOrig);
 
     QVector<QPointF> ekv;
-    CastTo(VAbstractPiece::Equidistant(points, width, QString()), ekv);
+    CastTo(VAbstractPiece::Equidistant(points, width, trueZeroWidth, QString()), ekv);
 
     // Begin comparison
     ComparePaths(ekv, ekvOrig);
@@ -285,43 +372,57 @@ void TST_VAbstractPiece::EquidistantRemoveLoop() const
 void TST_VAbstractPiece::LayoutAllowanceRemoveLoop_data()
 {
     QTest::addColumn<QVector<VSAPoint>>("points");
+    QTest::addColumn<bool>("trueZeroWidth");
     QTest::addColumn<qreal>("width");
     QTest::addColumn<QVector<QPointF>>("ekvOrig");
 
-    auto ASSERT_TEST_CASE = [](const char *title, const QString &input, const QString &output, qreal width)
+    auto ASSERT_TEST_CASE =
+        [](const char *title, const QString &input, const QString &output, qreal width, bool trueZeroWidth)
     {
         QVector<VSAPoint> const inputPoints = AbstractTest::VectorFromJson<VSAPoint>(input);
         QVector<QPointF> const outputPoints = AbstractTest::VectorFromJson<QPointF>(output);
-        QTest::newRow(title) << inputPoints << width << outputPoints;
+        QTest::newRow(title) << inputPoints << trueZeroWidth << width << outputPoints;
     };
 
     // See file valentina_private_collection/bugs/smart_pattern_#58/smart_pattern_#58.val
-    ASSERT_TEST_CASE("Loop in layout allowance", QStringLiteral("://smart_pattern_#58/input.json"),
+    ASSERT_TEST_CASE("Loop in layout allowance",
+                     QStringLiteral("://smart_pattern_#58/input.json"),
                      QStringLiteral("://smart_pattern_#58/output.json"),
-                     18.897637795275593 /*seam allowance width (0.5 cm)*/);
+                     18.897637795275593, /*seam allowance width (0.5 cm)*/
+                     false);
 
     // See file src/app/share/collection/bugs/smart_pattern_#99.val
-    ASSERT_TEST_CASE("Incorrect fix of distortion", QStringLiteral("://smart_pattern_#99/input.json"),
-                     QStringLiteral("://smart_pattern_#99/output.json"), 28.346456692913389 /*seam allowance width*/);
+    ASSERT_TEST_CASE("Incorrect fix of distortion",
+                     QStringLiteral("://smart_pattern_#99/input.json"),
+                     QStringLiteral("://smart_pattern_#99/output.json"),
+                     28.346456692913389, /*seam allowance width*/
+                     false);
 
     // See file valentina_private_collection/test/smart_pattern_#120/smart_pattern_#120.val
-    ASSERT_TEST_CASE("Piece 1", QStringLiteral("://smart_pattern_#120_piece_1/input.json"),
-                     QStringLiteral("://smart_pattern_#120_piece_1/output.json"), 37.795275590551185);
+    ASSERT_TEST_CASE("Piece 1",
+                     QStringLiteral("://smart_pattern_#120_piece_1/input.json"),
+                     QStringLiteral("://smart_pattern_#120_piece_1/output.json"),
+                     37.795275590551185,
+                     false);
 
     // See file valentina_private_collection/test/smart_pattern_#120/smart_pattern_#120.val
-    ASSERT_TEST_CASE("Piece 2", QStringLiteral("://smart_pattern_#120_piece_2/input.json"),
-                     QStringLiteral("://smart_pattern_#120_piece_2/output.json"), 37.795275590551185);
+    ASSERT_TEST_CASE("Piece 2",
+                     QStringLiteral("://smart_pattern_#120_piece_2/input.json"),
+                     QStringLiteral("://smart_pattern_#120_piece_2/output.json"),
+                     37.795275590551185,
+                     false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VAbstractPiece::LayoutAllowanceRemoveLoop() const
 {
     QFETCH(QVector<VSAPoint>, points);
+    QFETCH(bool, trueZeroWidth);
     QFETCH(qreal, width);
     QFETCH(QVector<QPointF>, ekvOrig);
 
     QVector<QPointF> ekv;
-    CastTo(VAbstractPiece::Equidistant(points, width, QString()), ekv);
+    CastTo(VAbstractPiece::Equidistant(points, width, trueZeroWidth, QString()), ekv);
 
     // Begin comparison
     ComparePaths(ekv, ekvOrig);
@@ -874,115 +975,166 @@ void TST_VAbstractPiece::PathLoopsCase() const
 void TST_VAbstractPiece::BrokenDetailEquidistant_data()
 {
     QTest::addColumn<QVector<VSAPoint>>("points");
+    QTest::addColumn<bool>("trueZeroWidth");
     QTest::addColumn<qreal>("width");
     QTest::addColumn<QVector<QPointF>>("ekvOrig");
 
-    auto ASSERT_TEST_CASE = [](const char *title, const QString &input, const QString &output, qreal width)
+    auto ASSERT_TEST_CASE =
+        [](const char *title, const QString &input, const QString &output, qreal width, bool trueZeroWidth)
     {
         QVector<VSAPoint> const inputPoints = AbstractTest::VectorFromJson<VSAPoint>(input);
         QVector<QPointF> const outputPoints = AbstractTest::VectorFromJson<QPointF>(output);
-        QTest::newRow(title) << inputPoints << width << outputPoints;
+        QTest::newRow(title) << inputPoints << trueZeroWidth << width << outputPoints;
     };
 
     // See the file "collection/bugs/Issue_#604.val" (since 0.5.0)
-    ASSERT_TEST_CASE("Issue #604.", QStringLiteral("://Issue_604/input.json"),
-                     QStringLiteral("://Issue_604/output.json"), 11.338582677165354 /*seam allowance width*/);
+    ASSERT_TEST_CASE("Issue #604.",
+                     QStringLiteral("://Issue_604/input.json"),
+                     QStringLiteral("://Issue_604/output.json"),
+                     11.338582677165354, /*seam allowance width*/
+                     false);
 
     // See the file "collection/bugs/Issue_#627.val"
-    ASSERT_TEST_CASE("Issue #627.", QStringLiteral("://Issue_627/input.json"),
-                     QStringLiteral("://Issue_627/output.json"), 56.692913385826778 /*seam allowance width*/);
+    ASSERT_TEST_CASE("Issue #627.",
+                     QStringLiteral("://Issue_627/input.json"),
+                     QStringLiteral("://Issue_627/output.json"),
+                     56.692913385826778, /*seam allowance width*/
+                     false);
 
     // See the file "collection/bugs/Issue_#687.val"
-    ASSERT_TEST_CASE("Issue #687.", QStringLiteral("://Issue_687/input.json"),
-                     QStringLiteral("://Issue_687/output.json"), 37.795275590551185 /*seam allowance width*/);
+    ASSERT_TEST_CASE("Issue #687.",
+                     QStringLiteral("://Issue_687/input.json"),
+                     QStringLiteral("://Issue_687/output.json"),
+                     37.795275590551185, /*seam allowance width*/
+                     false);
 
     // See private test cases in file jacket_issue_#767.val, piece "Fabric_TopCollar"
     // Curve approximation scale 0.5
-    ASSERT_TEST_CASE("Issue #767. Fabric_TopCollar.", QStringLiteral("://Issue_767_Fabric_TopCollar/input.json"),
+    ASSERT_TEST_CASE("Issue #767. Fabric_TopCollar.",
+                     QStringLiteral("://Issue_767_Fabric_TopCollar/input.json"),
                      QStringLiteral("://Issue_767_Fabric_TopCollar/output.json"),
-                     37.795275590551185 /*seam allowance width*/);
+                     37.795275590551185, /*seam allowance width*/
+                     false);
 
     // See private test cases in file jacket_issue_#767.val, piece "SkinFusing_TopCollar_Notch"
     // Curve approximation scale 0.5
     ASSERT_TEST_CASE("Issue #767. SkinFusing_TopCollar_Notch.",
                      QStringLiteral("://Issue_767_Fabric_SkinFusing_TopCollar_Notch/input.json"),
                      QStringLiteral("://Issue_767_Fabric_SkinFusing_TopCollar_Notch/output.json"),
-                     37.795275590551185 /*seam allowance width*/);
+                     37.795275590551185, /*seam allowance width*/
+                     false);
 
     // See private test cases in file collection/bugs/Issue_#883_case1.val, piece "ledge"
-    ASSERT_TEST_CASE("Issue #883. Piece 'ledge'", QStringLiteral("://Issue_883_ledge/input.json"),
-                     QStringLiteral("://Issue_883_ledge/output.json"), 37.795275590551185 /*seam allowance width*/);
+    ASSERT_TEST_CASE("Issue #883. Piece 'ledge'",
+                     QStringLiteral("://Issue_883_ledge/input.json"),
+                     QStringLiteral("://Issue_883_ledge/output.json"),
+                     37.795275590551185, /*seam allowance width*/
+                     false);
 
     // See private test cases in file collection/bugs/Issue_#883_case1.val, piece "prong"
-    ASSERT_TEST_CASE("Issue #883. Piece 'prong'", QStringLiteral("://Issue_883_prong/input.json"),
-                     QStringLiteral("://Issue_883_prong/output.json"), 37.795275590551185 /*seam allowance width*/);
+    ASSERT_TEST_CASE("Issue #883. Piece 'prong'",
+                     QStringLiteral("://Issue_883_prong/input.json"),
+                     QStringLiteral("://Issue_883_prong/output.json"),
+                     37.795275590551185, /*seam allowance width*/
+                     false);
 
     // See the file "collection/bugs/smart_pattern_#145.val"
-    ASSERT_TEST_CASE("Issue #145", QStringLiteral("://smart_pattern_#145/input.json"),
-                     QStringLiteral("://smart_pattern_#145/output.json"), 37.795275590551185 /*seam allowance width*/);
+    ASSERT_TEST_CASE("Issue #145",
+                     QStringLiteral("://smart_pattern_#145/input.json"),
+                     QStringLiteral("://smart_pattern_#145/output.json"),
+                     37.795275590551185, /*seam allowance width*/
+                     false);
 
     // See private test cases in file valentina_private_collection/bugs/women_jacket/women_jacket.val
     // Point A38, size 32
-    ASSERT_TEST_CASE("women_jacket_A38", QStringLiteral("://women_jacket/input.json"),
-                     QStringLiteral("://women_jacket/output.json"), 37.795275590551185 /*seam allowance width*/);
+    ASSERT_TEST_CASE("women_jacket_A38",
+                     QStringLiteral("://women_jacket/input.json"),
+                     QStringLiteral("://women_jacket/output.json"),
+                     37.795275590551185, /*seam allowance width*/
+                     false);
 
     // See private test cases in file valentina_private_collection/bugs/hood_1/hood_1.val
-    ASSERT_TEST_CASE("hood_1", QStringLiteral("://hood_1/input.json"), QStringLiteral("://hood_1/output.json"),
-                     37.795275590551185 /*seam allowance width*/);
+    ASSERT_TEST_CASE("hood_1",
+                     QStringLiteral("://hood_1/input.json"),
+                     QStringLiteral("://hood_1/output.json"),
+                     37.795275590551185, /*seam allowance width*/
+                     false);
 
     // See private test cases in file valentina_private_collection/bugs/hood_2/hood_2.val
-    ASSERT_TEST_CASE("hood_2", QStringLiteral("://hood_2/input.json"), QStringLiteral("://hood_2/output.json"),
-                     37.795275590551185 /*seam allowance width*/);
+    ASSERT_TEST_CASE("hood_2",
+                     QStringLiteral("://hood_2/input.json"),
+                     QStringLiteral("://hood_2/output.json"),
+                     37.795275590551185, /*seam allowance width*/
+                     false);
 
     // See the file "collection/bugs/smart_pattern_#184_case1.val"
-    ASSERT_TEST_CASE("Issue #184 case 1", QStringLiteral("://smart_pattern_#184_case1/input.json"),
+    ASSERT_TEST_CASE("Issue #184 case 1",
+                     QStringLiteral("://smart_pattern_#184_case1/input.json"),
                      QStringLiteral("://smart_pattern_#184_case1/output.json"),
-                     0.88157480314960635 /*seam allowance width*/);
+                     0.88157480314960635, /*seam allowance width*/
+                     false);
 
     // See the file "collection/bugs/smart_pattern_#184_case2.val"
-    ASSERT_TEST_CASE("Issue #184 case 2", QStringLiteral("://smart_pattern_#184_case2/input.json"),
+    ASSERT_TEST_CASE("Issue #184 case 2",
+                     QStringLiteral("://smart_pattern_#184_case2/input.json"),
                      QStringLiteral("://smart_pattern_#184_case2/output.json"),
-                     37.795275590551185 /*seam allowance width*/);
+                     37.795275590551185, /*seam allowance width*/
+                     false);
 
     // See the file "valentina_private_collection/bugs/custom_seam_allwance_exclude/custom_seam_allwance_exclude.val"
-    ASSERT_TEST_CASE("Piece 1. CSA Exclude", QStringLiteral("://custom_seam_allwance_exclude_p1/input.json"),
+    ASSERT_TEST_CASE("Piece 1. CSA Exclude",
+                     QStringLiteral("://custom_seam_allwance_exclude_p1/input.json"),
                      QStringLiteral("://custom_seam_allwance_exclude_p1/output.json"),
-                     37.795275590551185 /*seam allowance width 1 cm*/);
+                     37.795275590551185, /*seam allowance width 1 cm*/
+                     false);
 
     // See the file "valentina_private_collection/bugs/custom_seam_allwance_exclude/custom_seam_allwance_exclude.val"
-    ASSERT_TEST_CASE("Piece 2. CSA Exclude", QStringLiteral("://custom_seam_allwance_exclude_p2/input.json"),
+    ASSERT_TEST_CASE("Piece 2. CSA Exclude",
+                     QStringLiteral("://custom_seam_allwance_exclude_p2/input.json"),
                      QStringLiteral("://custom_seam_allwance_exclude_p2/output.json"),
-                     37.795275590551185 /*seam allowance width 1 cm*/);
+                     37.795275590551185, /*seam allowance width 1 cm*/
+                     false);
 
     // See the file "valentina_private_collection/bugs/25L Knitting Bag.val"
-    ASSERT_TEST_CASE("Base", QStringLiteral("://25L_Knitting_Bag/input.json"),
-                     QStringLiteral("://25L_Knitting_Bag/output.json"), 36 /*seam allowance width*/);
+    ASSERT_TEST_CASE("Base",
+                     QStringLiteral("://25L_Knitting_Bag/input.json"),
+                     QStringLiteral("://25L_Knitting_Bag/output.json"),
+                     36, /*seam allowance width*/
+                     false);
 
     // See the file "valentina_private_collection/bugs/prong/650b.val"
-    ASSERT_TEST_CASE("Coat", QStringLiteral("://prong/input.json"), QStringLiteral("://prong/output.json"),
-                     37.795275590551185 /*seam allowance width*/);
+    ASSERT_TEST_CASE("Coat",
+                     QStringLiteral("://prong/input.json"),
+                     QStringLiteral("://prong/output.json"),
+                     37.795275590551185, /*seam allowance width*/
+                     false);
 
     // See the file "collection/bugs/prong_acute_angle.val"
-    ASSERT_TEST_CASE("Coat", QStringLiteral("://prong_acute_angle/input.json"),
-                     QStringLiteral("://prong_acute_angle/output.json"), 37.795275590551185 /*seam allowance width*/);
+    ASSERT_TEST_CASE("Coat",
+                     QStringLiteral("://prong_acute_angle/input.json"),
+                     QStringLiteral("://prong_acute_angle/output.json"),
+                     37.795275590551185, /*seam allowance width*/
+                     false);
 
     // See the file "valentina_private_collection/bugs/Trousers Block/1.228 Men's Trousers Block.val"
     // X:B180 Y:B6
     ASSERT_TEST_CASE("Big Poc interfac",
                      QStringLiteral("://trousers_block/input.json"),
                      QStringLiteral("://trousers_block/output.json"),
-                     37.795275590551185 /*seam allowance width*/);
+                     37.795275590551185, /*seam allowance width*/
+                     false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VAbstractPiece::BrokenDetailEquidistant() const
 {
     QFETCH(QVector<VSAPoint>, points);
+    QFETCH(bool, trueZeroWidth);
     QFETCH(qreal, width);
     QFETCH(QVector<QPointF>, ekvOrig);
 
     QVector<QPointF> ekv;
-    CastTo(VAbstractPiece::Equidistant(points, width, QString()), ekv); // Take result
+    CastTo(VAbstractPiece::Equidistant(points, width, trueZeroWidth, QString()), ekv); // Take result
 
     // Begin comparison
     ComparePaths(ekv, ekvOrig);
@@ -992,86 +1144,134 @@ void TST_VAbstractPiece::BrokenDetailEquidistant() const
 void TST_VAbstractPiece::EquidistantAngleType_data()
 {
     QTest::addColumn<QVector<VSAPoint>>("points");
+    QTest::addColumn<bool>("trueZeroWidth");
     QTest::addColumn<qreal>("width");
     QTest::addColumn<QVector<QPointF>>("ekvOrig");
 
-    auto ASSERT_TEST_CASE = [](const char *title, const QString &input, const QString &output, qreal width)
+    auto ASSERT_TEST_CASE =
+        [](const char *title, const QString &input, const QString &output, qreal width, bool trueZeroWidth)
     {
         QVector<VSAPoint> const inputPoints = AbstractTest::VectorFromJson<VSAPoint>(input);
         QVector<QPointF> const outputPoints = AbstractTest::VectorFromJson<QPointF>(output);
-        QTest::newRow(title) << inputPoints << width << outputPoints;
+        QTest::newRow(title) << inputPoints << trueZeroWidth << width << outputPoints;
     };
 
     // See the file "collection/bugs/Issue_#880.val"
-    ASSERT_TEST_CASE("Issue #880. Piece: Detail.", QStringLiteral("://Issue_880_Detail/input.json"),
-                     QStringLiteral("://Issue_880_Detail/output.json"), 37.795275590551185 /*seam allowance width*/);
+    ASSERT_TEST_CASE("Issue #880. Piece: Detail.",
+                     QStringLiteral("://Issue_880_Detail/input.json"),
+                     QStringLiteral("://Issue_880_Detail/output.json"),
+                     37.795275590551185, /*seam allowance width*/
+                     false);
 
     // See the file "collection/bugs/Issue_#880.val"
-    ASSERT_TEST_CASE("Issue #880. Piece: Detail_1.", QStringLiteral("://Issue_880_Detail_1/input.json"),
-                     QStringLiteral("://Issue_880_Detail_1/output.json"), 75.59055118110237 /*seam allowance width*/);
+    ASSERT_TEST_CASE("Issue #880. Piece: Detail_1.",
+                     QStringLiteral("://Issue_880_Detail_1/input.json"),
+                     QStringLiteral("://Issue_880_Detail_1/output.json"),
+                     75.59055118110237, /*seam allowance width*/
+                     false);
 
     // See file src/app/share/collection/bugs/Issue_#937.val
-    ASSERT_TEST_CASE("Issue 937. Case1", QStringLiteral("://Issue_937_case_1/input.json"),
-                     QStringLiteral("://Issue_937_case_1/output.json"), 37.795275590551185 /*seam allowance width*/);
+    ASSERT_TEST_CASE("Issue 937. Case1",
+                     QStringLiteral("://Issue_937_case_1/input.json"),
+                     QStringLiteral("://Issue_937_case_1/output.json"),
+                     37.795275590551185, /*seam allowance width*/
+                     false);
 
     // See file src/app/share/collection/bugs/Issue_#937a.val
-    ASSERT_TEST_CASE("Issue 937. Case1a", QStringLiteral("://Issue_937_case_1a/input.json"),
-                     QStringLiteral("://Issue_937_case_1a/output.json"), 37.795275590551185 /*seam allowance width*/);
+    ASSERT_TEST_CASE("Issue 937. Case1a",
+                     QStringLiteral("://Issue_937_case_1a/input.json"),
+                     QStringLiteral("://Issue_937_case_1a/output.json"),
+                     37.795275590551185, /*seam allowance width*/
+                     false);
 
     // See file src/app/share/collection/bugs/Issue_#937.val
-    ASSERT_TEST_CASE("Issue 937. Case2", QStringLiteral("://Issue_937_case_2/input.json"),
-                     QStringLiteral("://Issue_937_case_2/output.json"), 37.795275590551185 /*seam allowance width*/);
+    ASSERT_TEST_CASE("Issue 937. Case2",
+                     QStringLiteral("://Issue_937_case_2/input.json"),
+                     QStringLiteral("://Issue_937_case_2/output.json"),
+                     37.795275590551185, /*seam allowance width*/
+                     false);
 
     // See file src/app/share/collection/bugs/Issue_#937.val
-    ASSERT_TEST_CASE("Issue 937. Case3", QStringLiteral("://Issue_937_case_3/input.json"),
-                     QStringLiteral("://Issue_937_case_3/output.json"), 37.795275590551185 /*seam allowance width*/);
+    ASSERT_TEST_CASE("Issue 937. Case3",
+                     QStringLiteral("://Issue_937_case_3/input.json"),
+                     QStringLiteral("://Issue_937_case_3/output.json"),
+                     37.795275590551185, /*seam allowance width*/
+                     false);
 
     // See file src/app/share/collection/bugs/Issue_#937.val
-    ASSERT_TEST_CASE("Issue 937. Case4", QStringLiteral("://Issue_937_case_4/input.json"),
-                     QStringLiteral("://Issue_937_case_4/output.json"), 37.795275590551185 /*seam allowance width*/);
+    ASSERT_TEST_CASE("Issue 937. Case4",
+                     QStringLiteral("://Issue_937_case_4/input.json"),
+                     QStringLiteral("://Issue_937_case_4/output.json"),
+                     37.795275590551185, /*seam allowance width*/
+                     false);
 
     // See file src/app/share/collection/bugs/Issue_#937_case5.val
-    ASSERT_TEST_CASE("Issue 937. Case5", QStringLiteral("://Issue_937_case_5/input.json"),
-                     QStringLiteral("://Issue_937_case_5/output.json"), 37.795275590551185 /*seam allowance width*/);
+    ASSERT_TEST_CASE("Issue 937. Case5",
+                     QStringLiteral("://Issue_937_case_5/input.json"),
+                     QStringLiteral("://Issue_937_case_5/output.json"),
+                     37.795275590551185, /*seam allowance width*/
+                     false);
 
     // See file valentina_private_collection/bugs/busty/busty.val
-    ASSERT_TEST_CASE("Busty", QStringLiteral("://busty/input.json"), QStringLiteral("://busty/output.json"),
-                     0 /*seam allowance width*/);
+    ASSERT_TEST_CASE("Busty",
+                     QStringLiteral("://busty/input.json"),
+                     QStringLiteral("://busty/output.json"),
+                     0, /*seam allowance width*/
+                     false);
 
     // See file valentina_private_collection/bugs/panties/panties.val
-    ASSERT_TEST_CASE("Panties. Piece Case 1", QStringLiteral("://panties_case1/input.json"),
-                     QStringLiteral("://panties_case1/output.json"), 26.45669291338583 /*seam allowance width*/);
+    ASSERT_TEST_CASE("Panties. Piece Case 1",
+                     QStringLiteral("://panties_case1/input.json"),
+                     QStringLiteral("://panties_case1/output.json"),
+                     26.45669291338583, /*seam allowance width*/
+                     false);
 
     // See file valentina_private_collection/bugs/panties/panties.val
-    ASSERT_TEST_CASE("Panties. Piece Case 2", QStringLiteral("://panties_case2/input.json"),
-                     QStringLiteral("://panties_case2/output.json"), 26.45669291338583 /*seam allowance width*/);
+    ASSERT_TEST_CASE("Panties. Piece Case 2",
+                     QStringLiteral("://panties_case2/input.json"),
+                     QStringLiteral("://panties_case2/output.json"),
+                     26.45669291338583, /*seam allowance width*/
+                     false);
 
     // See file valentina_private_collection/bugs/smart_pattern_#113/smart_pattern_#113.val
-    ASSERT_TEST_CASE("Эдит 6", QStringLiteral("://smart_pattern_#113/input.json"),
-                     QStringLiteral("://smart_pattern_#113/output.json"), 0.56692913385826771 /*seam allowance width*/);
+    ASSERT_TEST_CASE("Эдит 6",
+                     QStringLiteral("://smart_pattern_#113/input.json"),
+                     QStringLiteral("://smart_pattern_#113/output.json"),
+                     0.56692913385826771, /*seam allowance width*/
+                     false);
 
     // See file valentina_private_collection/bugs/smart_pattern_#118/smart_pattern_#118.val
-    ASSERT_TEST_CASE("Ретро стринги 3", QStringLiteral("://smart_pattern_#118/input.json"),
-                     QStringLiteral("://smart_pattern_#118/output.json"), 26.45669291338583 /*seam allowance width*/);
+    ASSERT_TEST_CASE("Ретро стринги 3",
+                     QStringLiteral("://smart_pattern_#118/input.json"),
+                     QStringLiteral("://smart_pattern_#118/output.json"),
+                     26.45669291338583, /*seam allowance width*/
+                     false);
 
     // See file valentina_private_collection/bugs/smart_pattern_#133/smart_pattern_#133.val
-    ASSERT_TEST_CASE("Эдит 1", QStringLiteral("://smart_pattern_#133/input.json"),
-                     QStringLiteral("://smart_pattern_#133/output.json"), 26.45669291338583 /*seam allowance width*/);
+    ASSERT_TEST_CASE("Эдит 1",
+                     QStringLiteral("://smart_pattern_#133/input.json"),
+                     QStringLiteral("://smart_pattern_#133/output.json"),
+                     26.45669291338583, /*seam allowance width*/
+                     false);
 
     // See file valentina_private_collection/bugs/hat/hat.val
-    ASSERT_TEST_CASE("hat", QStringLiteral("://hat/input.json"), QStringLiteral("://hat/output.json"),
-                     26.45669291338583 /*seam allowance width*/);
+    ASSERT_TEST_CASE("hat",
+                     QStringLiteral("://hat/input.json"),
+                     QStringLiteral("://hat/output.json"),
+                     26.45669291338583, /*seam allowance width*/
+                     false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VAbstractPiece::EquidistantAngleType() const
 {
     QFETCH(QVector<VSAPoint>, points);
+    QFETCH(bool, trueZeroWidth);
     QFETCH(qreal, width);
     QFETCH(QVector<QPointF>, ekvOrig);
 
     QVector<QPointF> ekv;
-    CastTo(VAbstractPiece::Equidistant(points, width, QString()), ekv); // Take result
+    CastTo(VAbstractPiece::Equidistant(points, width, trueZeroWidth, QString()), ekv); // Take result
 
     // Begin comparison
     ComparePaths(ekv, ekvOrig);
@@ -1457,10 +1657,12 @@ void TST_VAbstractPiece::TestFullSeamAllowancePath() const
 void TST_VAbstractPiece::TestSeamLineTurnPoints_data() const
 {
     QTest::addColumn<QVector<VSAPoint>>("points");
+    QTest::addColumn<bool>("trueZeroWidth");
     QTest::addColumn<qreal>("width");
     QTest::addColumn<QVector<QPointF>>("turnPoints");
 
-    auto ASSERT_TEST_CASE = [](const char *title, const QString &input, const QString &output, qreal width)
+    auto ASSERT_TEST_CASE =
+        [](const char *title, const QString &input, const QString &output, qreal width, bool trueZeroWidth)
     {
         try
         {
@@ -1468,7 +1670,7 @@ void TST_VAbstractPiece::TestSeamLineTurnPoints_data() const
             QVector<VLayoutPoint> const turnPoints = AbstractTest::VectorFromJson<VLayoutPoint>(output);
             QVector<QPointF> outputPoints;
             CastTo(turnPoints, outputPoints);
-            QTest::newRow(title) << inputPoints << width << outputPoints;
+            QTest::newRow(title) << inputPoints << trueZeroWidth << width << outputPoints;
         }
         catch (const VException &e)
         {
@@ -1477,24 +1679,66 @@ void TST_VAbstractPiece::TestSeamLineTurnPoints_data() const
     };
 
     // See file valentina_private_collection/bugs/shirtv2/shirtv2.val
-    ASSERT_TEST_CASE("fabric_cuff_L", QStringLiteral("://shirtv2_seam_allowance_line/input.json"),
+    ASSERT_TEST_CASE("fabric_cuff_L",
+                     QStringLiteral("://shirtv2_seam_allowance_line/input.json"),
                      QStringLiteral("://shirtv2_seam_allowance_line/output.json"),
-                     37.795275590551185 /*seam allowance width*/);
+                     37.795275590551185, /*seam allowance width*/
+                     false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VAbstractPiece::TestSeamLineTurnPoints() const
 {
     QFETCH(QVector<VSAPoint>, points);
+    QFETCH(bool, trueZeroWidth);
     QFETCH(qreal, width);
     QFETCH(QVector<QPointF>, turnPoints);
 
-    QVector<VLayoutPoint> const ekv = VAbstractPiece::Equidistant(points, width, QString());
+    QVector<VLayoutPoint> const ekv = VAbstractPiece::Equidistant(points, width, trueZeroWidth, QString());
     QVector<QPointF> tPoints;
     CastTo(TurnPointList(ekv), tPoints); // Take result
 
     // Begin comparison
     ComparePaths(tPoints, turnPoints);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractPiece::TestTrueZeroSeamAllowanceWidth_data() const
+{
+    QTest::addColumn<QVector<VSAPoint>>("points");
+    QTest::addColumn<bool>("trueZeroWidth");
+    QTest::addColumn<qreal>("width");
+    QTest::addColumn<QVector<QPointF>>("ekvOrig");
+
+    auto ASSERT_TEST_CASE =
+        [](const char *title, const QString &input, const QString &output, qreal width, bool trueZeroWidth)
+    {
+        QVector<VSAPoint> const inputPoints = AbstractTest::VectorFromJson<VSAPoint>(input);
+        QVector<QPointF> const outputPoints = AbstractTest::VectorFromJson<QPointF>(output);
+        QTest::newRow(title) << inputPoints << trueZeroWidth << width << outputPoints;
+    };
+
+    // See file valentina_private_collection/bugs/jacketv8/jacketv8.val
+    ASSERT_TEST_CASE("Detail_2",
+                     QStringLiteral("://jacketv8/input.json"),
+                     QStringLiteral("://jacketv8/output.json"),
+                     37.795275590551185, /*seam allowance width (1.0 cm)*/
+                     true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractPiece::TestTrueZeroSeamAllowanceWidth() const
+{
+    QFETCH(QVector<VSAPoint>, points);
+    QFETCH(bool, trueZeroWidth);
+    QFETCH(qreal, width);
+    QFETCH(QVector<QPointF>, ekvOrig);
+
+    QVector<QPointF> ekv;
+    CastTo(VAbstractPiece::Equidistant(points, width, trueZeroWidth, QString()), ekv);
+
+    // Begin comparison
+    ComparePaths(ekv, ekvOrig);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

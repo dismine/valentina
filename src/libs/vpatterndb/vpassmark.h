@@ -51,6 +51,7 @@ struct VPiecePassmarkData
     VSAPoint previousSAPoint{}; // NOLINT(misc-non-private-member-variables-in-classes)
     VSAPoint passmarkSAPoint{}; // NOLINT(misc-non-private-member-variables-in-classes)
     VSAPoint nextSAPoint{};     // NOLINT(misc-non-private-member-variables-in-classes)
+    bool trueZeroWidth{false};  // NOLINT(misc-non-private-member-variables-in-classes)
     qreal saWidth{0};           // NOLINT(misc-non-private-member-variables-in-classes)
     QString nodeName{};         // NOLINT(misc-non-private-member-variables-in-classes)
     QString pieceName{};        // NOLINT(misc-non-private-member-variables-in-classes)

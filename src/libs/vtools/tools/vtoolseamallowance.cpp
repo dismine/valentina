@@ -760,6 +760,10 @@ void VToolSeamAllowance::AddAttributes(VAbstractPattern *doc, QDomElement &domEl
                                       [](bool builtin) noexcept { return not builtin; });
     doc->SetAttributeOrRemoveIf<bool>(domElement, AttrShowFullPiece, piece.IsShowFullPiece(),
                                       [](bool show) noexcept { return show; });
+    doc->SetAttributeOrRemoveIf<bool>(domElement,
+                                      AttrTrueZeroWidth,
+                                      piece.IsTrueZeroWidth(),
+                                      [](bool value) noexcept { return !value; });
     doc->SetAttribute(domElement, AttrWidth, piece.GetFormulaSAWidth());
     doc->SetAttributeOrRemoveIf<bool>(domElement, AttrUnited, piece.IsUnited(),
                                       [](bool united) noexcept { return not united; });
@@ -788,7 +792,7 @@ void VToolSeamAllowance::AddCSARecords(VAbstractPattern *doc, QDomElement &domEl
     if (not records.empty())
     {
         QDomElement csaRecordsElement = doc->createElement(VToolSeamAllowance::TagCSA);
-        for (auto record : records)
+        for (const auto &record : records)
         {
             AddCSARecord(doc, csaRecordsElement, record);
         }

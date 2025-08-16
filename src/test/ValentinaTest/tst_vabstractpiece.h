@@ -72,6 +72,8 @@ private slots:
     void TestFullSeamAllowancePath() const;
     void TestSeamLineTurnPoints_data() const;
     void TestSeamLineTurnPoints() const;
+    void TestTrueZeroSeamAllowanceWidth_data() const;
+    void TestTrueZeroSeamAllowanceWidth() const;
 
 private:
     auto InputPointsCase3() const -> QVector<VSAPoint>;

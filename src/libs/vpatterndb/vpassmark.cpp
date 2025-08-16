@@ -54,8 +54,13 @@ auto GetSeamPassmarkSAPoint(const VPiecePassmarkData &passmarkData, const QVecto
 {
     bool needRollback = false; // no need for rollback
     QVector<VRawSAPoint> ekvPoints;
-    ekvPoints = VAbstractPiece::EkvPoint(ekvPoints, passmarkData.previousSAPoint, passmarkData.passmarkSAPoint,
-                                         passmarkData.nextSAPoint, passmarkData.passmarkSAPoint, passmarkData.saWidth,
+    ekvPoints = VAbstractPiece::EkvPoint(ekvPoints,
+                                         passmarkData.previousSAPoint,
+                                         passmarkData.passmarkSAPoint,
+                                         passmarkData.nextSAPoint,
+                                         passmarkData.passmarkSAPoint,
+                                         passmarkData.saWidth,
+                                         passmarkData.trueZeroWidth,
                                          &needRollback);
 
     if (needRollback && not seamAllowance.isEmpty())
@@ -608,6 +613,7 @@ auto VPiecePassmarkData::toJson() const -> QJsonObject
         {"previousSAPoint", previousSAPoint.toJson()},
         {"passmarkSAPoint", passmarkSAPoint.toJson()},
         {"nextSAPoint", nextSAPoint.toJson()},
+        {"trueZeroWidth", trueZeroWidth},
         {"saWidth", saWidth},
         {"nodeName", nodeName},
         {"pieceName", pieceName},
@@ -796,7 +802,9 @@ auto VPassmark::PassmarkIntersection(const QVector<QPointF> &path, QLineF line, 
 auto VPassmark::PassmarkStraightforwardBaseLine(const QPointF &seamPassmarkSAPoint) const -> QVector<QLineF>
 {
     bool ok = false;
-    const qreal length = PassmarkLength(m_data, m_data.passmarkSAPoint.MaxLocalSA(m_data.saWidth), ok);
+    const qreal length = PassmarkLength(m_data,
+                                        m_data.passmarkSAPoint.MaxLocalSA(m_data.saWidth, m_data.trueZeroWidth),
+                                        ok);
 
     if (not ok)
     {
@@ -824,10 +832,14 @@ auto VPassmark::PassmarkBisectorBaseLine(PassmarkStatus seamPassmarkType, const 
         }
         else
         {
-            const QLineF bigLine1 =
-                VAbstractPiece::ParallelLine(m_data.previousSAPoint, m_data.passmarkSAPoint, m_data.saWidth);
-            const QLineF bigLine2 =
-                VAbstractPiece::ParallelLine(m_data.passmarkSAPoint, m_data.nextSAPoint, m_data.saWidth);
+            const QLineF bigLine1 = VAbstractPiece::ParallelLine(m_data.previousSAPoint,
+                                                                 m_data.passmarkSAPoint,
+                                                                 m_data.saWidth,
+                                                                 m_data.trueZeroWidth);
+            const QLineF bigLine2 = VAbstractPiece::ParallelLine(m_data.passmarkSAPoint,
+                                                                 m_data.nextSAPoint,
+                                                                 m_data.saWidth,
+                                                                 m_data.trueZeroWidth);
 
             edge1 = QLineF(seamPassmarkSAPoint, bigLine1.p1());
             edge2 = QLineF(seamPassmarkSAPoint, bigLine2.p2());
@@ -844,7 +856,9 @@ auto VPassmark::PassmarkBisectorBaseLine(PassmarkStatus seamPassmarkType, const 
     }
 
     bool ok = false;
-    const qreal length = PassmarkLength(m_data, m_data.passmarkSAPoint.MaxLocalSA(m_data.saWidth), ok);
+    const qreal length = PassmarkLength(m_data,
+                                        m_data.passmarkSAPoint.MaxLocalSA(m_data.saWidth, m_data.trueZeroWidth),
+                                        ok);
     if (not ok)
     {
         return {};
@@ -867,7 +881,8 @@ auto VPassmark::PassmarkIntersectionBaseLine(const QVector<QPointF> &path, Passm
         // first passmark
         if (QLineF const intersection = PassmarkIntersection(path,
                                                              QLineF(m_data.nextSAPoint, m_data.passmarkSAPoint),
-                                                             m_data.passmarkSAPoint.GetSABefore(m_data.saWidth));
+                                                             m_data.passmarkSAPoint.GetSABefore(m_data.saWidth,
+                                                                                                m_data.trueZeroWidth));
             !intersection.isNull())
         {
             lines += intersection;
@@ -881,7 +896,8 @@ auto VPassmark::PassmarkIntersectionBaseLine(const QVector<QPointF> &path, Passm
         // second passmark
         if (QLineF const intersection = PassmarkIntersection(path,
                                                              QLineF(m_data.previousSAPoint, m_data.passmarkSAPoint),
-                                                             m_data.passmarkSAPoint.GetSAAfter(m_data.saWidth));
+                                                             m_data.passmarkSAPoint.GetSAAfter(m_data.saWidth,
+                                                                                               m_data.trueZeroWidth));
             !intersection.isNull())
         {
             lines += intersection;
@@ -905,7 +921,8 @@ auto VPassmark::PassmarkIntersection2BaseLine(const QVector<QPointF> &path, Pass
 
         if (QLineF const intersection = PassmarkIntersection(path,
                                                              line,
-                                                             m_data.passmarkSAPoint.GetSABefore(m_data.saWidth));
+                                                             m_data.passmarkSAPoint.GetSABefore(m_data.saWidth,
+                                                                                                m_data.trueZeroWidth));
             !intersection.isNull())
         {
             lines += intersection;
@@ -919,9 +936,8 @@ auto VPassmark::PassmarkIntersection2BaseLine(const QVector<QPointF> &path, Pass
         // second passmark
         QLineF line(m_data.passmarkSAPoint, m_data.nextSAPoint);
         line.setAngle(line.angle() + 90);
-        if (QLineF const intersection = PassmarkIntersection(path,
-                                                             line,
-                                                             m_data.passmarkSAPoint.GetSAAfter(m_data.saWidth));
+        if (QLineF const intersection
+            = PassmarkIntersection(path, line, m_data.passmarkSAPoint.GetSAAfter(m_data.saWidth, m_data.trueZeroWidth));
             !intersection.isNull())
         {
             lines += intersection;
@@ -959,7 +975,7 @@ auto VPassmark::CalculatePassmarkLength(const VPiece &piece) const -> qreal
     if (!piece.IsSeamAllowanceBuiltIn())
     {
         bool ok = false;
-        length = PassmarkLength(m_data, m_data.passmarkSAPoint.MaxLocalSA(m_data.saWidth), ok);
+        length = PassmarkLength(m_data, m_data.passmarkSAPoint.MaxLocalSA(m_data.saWidth, m_data.trueZeroWidth), ok);
         if (!ok)
         {
             return 0;

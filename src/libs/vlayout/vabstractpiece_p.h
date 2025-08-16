@@ -62,6 +62,7 @@ public:
     bool m_seamAllowance{false};                             // NOLINT (misc-non-private-member-variables-in-classes)
     bool m_seamAllowanceBuiltIn{false};                      // NOLINT (misc-non-private-member-variables-in-classes)
     bool m_hideMainPath{false};                              // NOLINT (misc-non-private-member-variables-in-classes)
+    bool m_trueZeroWidth{false};                             // NOLINT (misc-non-private-member-variables-in-classes)
     qreal m_width{0};                                        // NOLINT (misc-non-private-member-variables-in-classes)
     qreal m_mx{0};                                           // NOLINT (misc-non-private-member-variables-in-classes)
     qreal m_my{0};                                           // NOLINT (misc-non-private-member-variables-in-classes)
@@ -83,7 +84,7 @@ private:
     Q_DISABLE_ASSIGN_MOVE(VAbstractPieceData) // NOLINT
 
     static constexpr quint32 streamHeader = 0x05CDD73A; // CRC-32Q string "VAbstractPieceData"
-    static constexpr quint16 classVersion = 8;
+    static constexpr quint16 classVersion = 9;
 };
 
 QT_WARNING_POP
@@ -131,6 +132,9 @@ inline auto operator<<(QDataStream &dataStream, const VAbstractPieceData &piece)
 
     // Added in classVersion = 8
     dataStream << piece.m_symmetricalCopy;
+
+    // Added in classVersion = 9
+    dataStream << piece.m_trueZeroWidth;
 
     return dataStream;
 }
@@ -213,6 +217,11 @@ inline auto operator>>(QDataStream &dataStream, VAbstractPieceData &piece) -> QD
     if (actualClassVersion >= 8)
     {
         dataStream >> piece.m_symmetricalCopy;
+    }
+
+    if (actualClassVersion >= 9)
+    {
+        dataStream >> piece.m_trueZeroWidth;
     }
 
     return dataStream;

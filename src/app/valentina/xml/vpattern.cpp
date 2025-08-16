@@ -1074,6 +1074,7 @@ void VPattern::ParseDetailElement(QDomElement &domElement, const Document &parse
         initData.detail.SetInLayout(GetParametrBool(domElement, AttrInLayout, trueStr));
         initData.detail.SetUnited(GetParametrBool(domElement, VToolSeamAllowance::AttrUnited, falseStr));
         initData.detail.SetPriority(GetParametrUInt(domElement, VToolSeamAllowance::AttrPiecePriority, QChar('0')));
+        initData.detail.SetTrueZeroWidth(GetParametrBool(domElement, AttrTrueZeroWidth, falseStr));
 
         initData.width = GetParametrString(domElement, AttrWidth, QStringLiteral("0.0"));
         const QString w = initData.width; // need for saving fixed formula;
@@ -1086,8 +1087,7 @@ void VPattern::ParseDetailElement(QDomElement &domElement, const Document &parse
         initData.parse = parse;
         initData.typeCreation = Source::FromFile;
 
-        VToolSeamAllowance *piece = VToolSeamAllowance::Create(initData);
-        if (parse == Document::FullParse)
+        if (const VToolSeamAllowance *piece = VToolSeamAllowance::Create(initData); parse == Document::FullParse)
         {
             updatePieces.append(piece->getId());
         }

@@ -857,7 +857,7 @@ auto VPiece::SeamAllowancePointsWithRotation(const VContainer *data, vsizetype m
         }
     }
 
-    return Equidistant(pointsEkv, width, GetName());
+    return Equidistant(pointsEkv, width, IsTrueZeroWidth(), GetName());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1346,6 +1346,7 @@ auto VPiece::CreatePassmark(const QVector<VPieceNode> &path, vsizetype previousI
     passmarkData.previousSAPoint = previousSAPoint;
     passmarkData.passmarkSAPoint = passmarkSAPoint;
     passmarkData.nextSAPoint = nextSAPoint;
+    passmarkData.trueZeroWidth = IsTrueZeroWidth();
     passmarkData.saWidth = ToPixel(GetSAWidth(), *data->GetPatternUnit());
     passmarkData.nodeName = VPiecePath::NodeName(path, passmarkIndex, data);
     passmarkData.pieceName = GetName();
@@ -1487,6 +1488,7 @@ auto VPiece::MainPathToJson() const -> QJsonObject
 {
     QJsonObject pieceObject{
         {"seamAllowance", IsSeamAllowance()},
+        {"trueZeroWidth", IsTrueZeroWidth()},
         {"saWidth", GetSAWidth()},
     };
 

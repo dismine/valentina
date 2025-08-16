@@ -232,5 +232,7 @@
         <file>trousers_block/output.json</file>
         <file>svg_font_writing_system/simplified_chinese_writing_system.json</file>
         <file>svg_font_writing_system/traditional_chinese_writing_system.json</file>
+        <file>jacketv8/input.json</file>
+        <file>jacketv8/output.json</file>
     </qresource>
 </RCC>

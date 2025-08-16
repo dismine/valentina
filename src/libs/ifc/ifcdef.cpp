@@ -135,6 +135,7 @@ const QString AttrShowLabel = QStringLiteral("showLabel");
 const QString AttrShowLabel1 = QStringLiteral("showLabel1");
 const QString AttrShowLabel2 = QStringLiteral("showLabel2");
 const QString AttrWidth = QStringLiteral("width");
+const QString AttrTrueZeroWidth = QStringLiteral("trueZeroWidth");
 const QString AttrHeight = QStringLiteral("height");
 const QString AttrPlaceLabelType = QStringLiteral("placeLabelType");
 const QString AttrVersion = QStringLiteral("version");
