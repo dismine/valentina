@@ -15131,7 +15131,7 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="222"/>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="270"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3238"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3244"/>
         <source>Cannot set printer margins</source>
         <translation>Kan de printer marges niet bepalen</translation>
     </message>
@@ -21369,83 +21369,83 @@ Wil je deze veranderingen opslaan?</translation>
 <context>
     <name>VLayoutExporter</name>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="250"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="252"/>
         <source>Can&apos;t save file &apos;%1&apos;. Error: %2.</source>
         <translation>Kan bestand &apos;%1&apos; niet opslaan. Fout %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="519"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="527"/>
         <source>Cannot set printer page size</source>
         <translation>Kan paginagrootte op printer niet instellen</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="533"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="541"/>
         <source>Cannot set printer margins</source>
         <translation>Kan de printer marges niet bepalen</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="540"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="548"/>
         <source>Can&apos;t open file &apos;%1&apos;</source>
         <translation>Kan bestand &apos;%1&apos; niet openen</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="389"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="395"/>
         <source>Export raw layout data failed. %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="489"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="495"/>
         <source>Creating file &apos;%1&apos; failed! %2</source>
         <translation>Bestand &apos;%1&apos; maken heeft gefaald! %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="347"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="353"/>
         <source>Can&apos;t create an AAMA dxf file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="367"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="373"/>
         <source>Can&apos;t create an ASTM dxf file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="409"/>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="428"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="415"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="434"/>
         <source>Can&apos;t create an HP-GL file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="557"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="565"/>
         <source>(flat) files</source>
         <translation>(platte)bestanden</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="558"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="566"/>
         <source>files</source>
         <translation>bestanden</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="567"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="575"/>
         <source>Image files</source>
         <translation>Afbeelding bestanden</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="597"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="605"/>
         <source>tiled</source>
         <translation>gestapeld</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="599"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="607"/>
         <source>Numerical control</source>
         <translation>Numerieke controle</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="601"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="609"/>
         <source>Raw Layout Data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="323"/>
+        <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="329"/>
         <source>Can&apos;t create a flat dxf file.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -22378,7 +22378,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2303"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="5172"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="5180"/>
         <source>Preferences</source>
         <translation>Voorkeuren</translation>
     </message>
@@ -22400,7 +22400,7 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3464"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3472"/>
         <source>Could not extract data from file &apos;%1&apos;. %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -22453,9 +22453,9 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>Kan instellingen niet opslaan. Toegang geweigerd.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2842"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3194"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3375"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2846"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3200"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3383"/>
         <source>Failed to open file, is it writable?</source>
         <translation>Kan bestand niet openen. Is het beschrijfbaar?</translation>
     </message>
@@ -22470,55 +22470,55 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3802"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3864"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3810"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3872"/>
         <source>Layout files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3806"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3954"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4903"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3814"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3962"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4911"/>
         <source>Open file</source>
         <translation>Open bestand</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3847"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3855"/>
         <source>Could not save the file</source>
         <translation>Het bestand is niet bewaard</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3866"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3874"/>
         <source>layout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3878"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3886"/>
         <source>Save as</source>
         <translation>Opslaan als</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3908"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3916"/>
         <source>Failed to lock. This file already opened in another window.</source>
         <translation>Afsluiten is mislukt. Dit bestand is al geopend in een ander venster.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3918"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3926"/>
         <source>Could not save file</source>
         <translation>Kon bestand niet opslaan</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3939"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3947"/>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
         <translation>Afsluiten is mislukt. Dit bestand is al geopend in een ander venster. Verwacht een conflict als 2 kopieën van het programma gaan lopen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3949"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3957"/>
         <source>Raw Layout files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3967"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3975"/>
         <source>About Qt</source>
         <translation>Over Qt</translation>
     </message>
@@ -22794,13 +22794,13 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="743"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3770"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3778"/>
         <source>&amp;Undo</source>
         <translation>&amp;Ongedaan maken</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="749"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3771"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3779"/>
         <source>&amp;Redo</source>
         <translation>&amp;Opnieuw</translation>
     </message>
@@ -22837,103 +22837,103 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>Kan geen pad maken</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2722"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2724"/>
         <source>Can&apos;t open file &apos;%1&apos;</source>
         <translation>Kan bestand &apos;%1&apos; niet openen</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2736"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3244"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2738"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3250"/>
         <source>Failed in flushing page to disk, disk full?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3084"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3111"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3140"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3088"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3115"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3144"/>
         <source>The layout is invalid.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3085"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3089"/>
         <source>The layout is invalid. Piece out of bound. Do you want to continue export?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3112"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3116"/>
         <source>The layout is invalid. Pieces superposition. Do you want to continue export?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3141"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3145"/>
         <source>The layout is invalid. One or several pieces are closer than minimally allowed. Do you want to continue export?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4237"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4245"/>
         <source>Sheet %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3540"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3548"/>
         <source>translate pieces</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3657"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3665"/>
         <source>rotate pieces</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4441"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4449"/>
         <source>untitled %1</source>
         <translation>naamloos %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4441"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4449"/>
         <source>untitled</source>
         <translation>naamloos</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4532"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4583"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4540"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4591"/>
         <source>For printing multipages document all sheet should have the same size.</source>
         <translation>Voor het afdrukken van multipagina&apos;s document, moeten alle bladen dezelfde maat hebben.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4544"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4595"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4630"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4668"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4723"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4767"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4800"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4836"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4552"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4603"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4638"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4676"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4731"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4775"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4808"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4844"/>
         <source>Print error</source>
         <translation>Afdruk fout</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4545"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4596"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4631"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4669"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4724"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4768"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4801"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4837"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4553"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4604"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4639"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4677"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4732"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4776"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4809"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4845"/>
         <source>Cannot proceed because there are no available printers in your system.</source>
         <translation>Kan niet verder gaan omdat er geen beschikbare printers in het systeem zijn.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4900"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4908"/>
         <source>Watermark files</source>
         <translation>Watermerk bestanden</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4556"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4607"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4642"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4680"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4564"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4615"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4650"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4688"/>
         <source>Unable to get sheet page settings</source>
         <translation type="unfinished"></translation>
     </message>
@@ -22973,12 +22973,12 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4494"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4502"/>
         <source>sheet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3486"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3494"/>
         <source>Piece %1 invalid. %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -23579,38 +23579,38 @@ Wil je deze veranderingen opslaan?</translation>
 <context>
     <name>VPoster</name>
     <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="248"/>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="250"/>
         <source>Grid ( %1 , %2 )</source>
         <translation>Raster ( %1 , %2 )</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="249"/>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="251"/>
         <source>Page %1 of %2</source>
         <translation>Pagina %1 van %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="256"/>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="258"/>
         <source>Sheet %1 of %2</source>
         <translation>Blad %1 van %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="321"/>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="323"/>
         <source>Cannot open the watermark image.</source>
         <translation>Kan de watermerk afbeelding niet openen.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="333"/>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="335"/>
         <source>Not supported file suffix &apos;%1&apos;</source>
         <translation>Niet-ondersteunde bestandsextentie &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="491"/>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="493"/>
         <source>cm</source>
         <comment>unit</comment>
         <translation>cm</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="492"/>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="494"/>
         <source>in</source>
         <comment>unit</comment>
         <translation>in</translation>
