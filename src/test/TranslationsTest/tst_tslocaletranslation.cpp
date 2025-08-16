@@ -104,43 +104,68 @@ void TST_TSLocaleTranslation::CheckPlaceMarkerExist()
     QFETCH(QString, translation);
     QFETCH(Qt::LayoutDirection, direction);
 
-    int sourceMarkCount = 0;
-    int translationMarkCount = 0;
     const QChar per('%');
+
+    auto hasMarker = [](const QString &text, const QString &marker) { return text.contains(marker); };
+
+    // --- %n check ---
+    const QString sourceN = "%n"_L1;
+    const QString translationN = (direction == Qt::RightToLeft ? "n%"_L1 : "%n"_L1);
+
+    const bool sourceHasN = hasMarker(source, sourceN);
+    const bool translationHasN = hasMarker(translation, translationN);
+
+    if (sourceHasN != translationHasN)
+    {
+        const QString message = u"String '%1'. Placemark '%n' mismatch."_s.arg(sourceHasN ? source : translation);
+        QFAIL(qUtf8Printable(message));
+    }
+
+    // --- %1..%99 check ---
+    int maxSourceIndex = 0;
+    int maxTranslationIndex = 0;
 
     for (int i = 1; i <= 99; ++i)
     {
-        const QString number = QString::number(i);
-        const QString sourceMarker = per + number;
-        const QString translationMarker = direction == Qt::RightToLeft ? number + per : sourceMarker;
-        const bool sourceMarkerFlag = source.indexOf(sourceMarker) != -1;
-        if (sourceMarkerFlag)
+        const QString marker = per + QString::number(i);
+        const QString tMarker = (direction == Qt::RightToLeft ? QString::number(i) + per : marker);
+
+        const bool sourceHas = hasMarker(source, marker);
+        const bool translationHas = hasMarker(translation, tMarker);
+
+        if (sourceHas)
         {
-            ++sourceMarkCount;
-            if (sourceMarkCount != i)
-            {
-                const QString message = u"In source string '%1' was missed place marker "_s.arg(source) + "'%"_L1 +
-                                        QString().setNum(sourceMarkCount) + "'."_L1;
-                QFAIL(qUtf8Printable(message));
-            }
+            maxSourceIndex = i;
+        }
+        if (translationHas)
+        {
+            maxTranslationIndex = i;
         }
 
-        const bool translationMarkerFlag = translation.indexOf(translationMarker) != -1;
-        if (translationMarkerFlag)
+        if (sourceHas != translationHas)
         {
-            ++translationMarkCount;
-            if (translationMarkCount != i)
-            {
-                const QString message = u"In translation string '%1' was missed place marker "_s.arg(translation) +
-                                        "'%"_L1 + QString().setNum(translationMarkCount) + "'."_L1;
-                QFAIL(qUtf8Printable(message));
-            }
+            const QString message = u"String '%1'. Placemark '%2' mismatch."_s.arg(translation, marker);
+            QFAIL(qUtf8Printable(message));
         }
+    }
 
-        if (sourceMarkerFlag != translationMarkerFlag)
+    // --- continuity check ---
+    for (int i = 1; i <= maxSourceIndex; ++i)
+    {
+        if (const QString marker = per + QString::number(i); !source.contains(marker))
         {
-            const QString message =
-                u"String '%1'. Placemark '%%2' mismatch. "_s.arg(translation, QString().setNum(sourceMarkCount + 1));
+            const QString message = u"In source string '%1' was missed place marker '%2'."_s.arg(source, marker);
+            QFAIL(qUtf8Printable(message));
+        }
+    }
+
+    for (int i = 1; i <= maxTranslationIndex; ++i)
+    {
+        if (const QString marker = (direction == Qt::RightToLeft ? QString::number(i) + per : per + QString::number(i));
+            !translation.contains(marker))
+        {
+            const QString message = u"In translation string '%1' was missed place marker '%2'."_s.arg(translation,
+                                                                                                      marker);
             QFAIL(qUtf8Printable(message));
         }
     }
