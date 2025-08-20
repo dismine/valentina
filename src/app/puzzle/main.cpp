@@ -120,7 +120,7 @@ auto main(int argc, char *argv[]) -> int
 
     QT_REQUIRE_VERSION(argc, argv, "5.15.0") // clazy:exclude=qstring-arg,qstring-allocations NOLINT
 
-    VPApplication::setDesktopFileName(QStringLiteral("ua.com.smart-pattern.puzzle.desktop"));
+    VPApplication::setDesktopFileName(QStringLiteral("ua.com.smart-pattern.puzzle"));
 
     QTimer::singleShot(0, &app, &VPApplication::ProcessCMD);
 

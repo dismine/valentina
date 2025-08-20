@@ -119,7 +119,7 @@ auto main(int argc, char *argv[]) -> int
 
     QT_REQUIRE_VERSION(argc, argv, "5.15.0"); // clazy:exclude=qstring-arg,qstring-allocations NOLINT
 
-    MApplication::setDesktopFileName(QStringLiteral("ua.com.smart-pattern.tape.desktop"));
+    MApplication::setDesktopFileName(QStringLiteral("ua.com.smart-pattern.tape"));
 
     QTimer::singleShot(0, &app, &MApplication::ProcessCMD);
 
