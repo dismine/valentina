@@ -1734,6 +1734,10 @@ void TST_VAbstractPiece::TestTrueZeroSeamAllowanceWidth() const
     QFETCH(qreal, width);
     QFETCH(QVector<QPointF>, ekvOrig);
 
+#if defined(Q_OS_WINDOWS) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    QSKIP(qUtf8Printable(QStringLiteral("Skip for legacy versions.")));
+#endif
+
     QVector<QPointF> ekv;
     CastTo(VAbstractPiece::Equidistant(points, width, trueZeroWidth, QString()), ekv);
 
