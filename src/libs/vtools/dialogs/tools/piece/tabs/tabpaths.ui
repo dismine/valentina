@@ -602,7 +602,7 @@
                  <string>Activates true zero seam allowance width. This also disables intersection checks between the seam line and seam allowance.</string>
                 </property>
                 <property name="text">
-                 <string>True zero width </string>
+                 <string>True zero width</string>
                 </property>
                </widget>
               </item>
