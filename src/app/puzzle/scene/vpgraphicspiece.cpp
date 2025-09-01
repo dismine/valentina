@@ -875,7 +875,7 @@ void VPGraphicsPiece::PaintStickyPath(QPainter *painter)
 void VPGraphicsPiece::PaintMirrorLine(QPainter *painter, const VPPiecePtr &piece)
 {
     VPLayoutPtr const layout = piece->Layout();
-    if (layout.isNull() || !piece->IsShowFullPiece())
+    if (layout.isNull() || !piece->IsShowFullPiece() || !piece->IsShowMirrorLine())
     {
         return;
     }
