@@ -998,6 +998,344 @@ auto FoundProng(const QLineF &bigLine1,
     }
     return false;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+auto HandleEqualBigLines(QVector<VRawSAPoint> &points,
+                         const QLineF &bigLine1,
+                         const QLineF &bigLine2,
+                         const VSAPoint &p2Line1) -> bool
+{
+    if (VFuzzyComparePoints(bigLine1.p2(), bigLine2.p1()))
+    {
+        points.append(VRawSAPoint(bigLine1.p2(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
+        return true;
+    }
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto HandleNearStraight(QVector<VRawSAPoint> &points,
+                        qreal angle,
+                        const QLineF &bigLine1,
+                        const QLineF &bigLine2,
+                        const VSAPoint &p2Line1,
+                        QLineF ray,
+                        qreal width,
+                        bool trueZeroWidth) -> bool
+{
+    if (angle >= 175 && angle <= 185
+        && !VFuzzyComparePossibleNulls(p2Line1.GetSABefore(width, trueZeroWidth),
+                                       p2Line1.GetSAAfter(width, trueZeroWidth)))
+    {
+        ray.setAngle(ray.angle() - angle / 2);
+        ray.setLength(width * 2);
+
+        QPointF cross;
+
+        if (ray.intersects(bigLine1, &cross) != QLineF::NoIntersection)
+        {
+            points.append(VRawSAPoint(cross, p2Line1.CurvePoint(), p2Line1.TurnPoint()));
+        }
+
+        if (ray.intersects(bigLine2, &cross) != QLineF::NoIntersection)
+        {
+            points.append(VRawSAPoint(cross, p2Line1.CurvePoint(), p2Line1.TurnPoint()));
+        }
+
+        return true;
+    }
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto HandleFullCircle(QVector<VRawSAPoint> &points,
+                      qreal angle,
+                      const QLineF &bigLine1,
+                      const QLineF &bigLine2,
+                      const VSAPoint &p2Line1,
+                      const VSAPoint &p2Line2,
+                      qreal width,
+                      bool trueZeroWidth) -> bool
+{
+    if (VFuzzyComparePossibleNulls(angle, 360))
+    {
+        QLineF ext1 = bigLine1;
+        ext1.setLength(ext1.length() + p2Line1.GetSABefore(width, trueZeroWidth));
+        points.append(VRawSAPoint(ext1.p2(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
+
+        QLineF ext2(bigLine2.p2(), bigLine2.p1());
+        ext2.setLength(ext2.length() + p2Line2.GetSAAfter(width, trueZeroWidth));
+        points.append(VRawSAPoint(ext2.p2(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
+        return true;
+    }
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DispatchAngleType(QVector<VRawSAPoint> &points,
+                       const VSAPoint &p1Line1,
+                       const VSAPoint &p2Line1,
+                       const VSAPoint &p1Line2,
+                       const QLineF &bigLine1,
+                       const QPointF &crosPoint,
+                       const QLineF &bigLine2,
+                       qreal width,
+                       bool trueZeroWidth,
+                       bool *needRollback) -> bool
+{
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wswitch-default")
+    QT_WARNING_DISABLE_CLANG("-Wswitch-default")
+
+    // This check helps to find missed angle types in the switch
+    Q_STATIC_ASSERT_X(static_cast<int>(PieceNodeAngle::LAST_ONE_DO_NOT_USE) == 7, "Not all types were handled.");
+    switch (p2Line1.GetAngleType())
+    {
+        case PieceNodeAngle::LAST_ONE_DO_NOT_USE:
+            Q_UNREACHABLE(); //-V501
+            break;
+        case PieceNodeAngle::ByLength:
+        case PieceNodeAngle::ByLengthCurve:
+            points = AngleByLength(points,
+                                   p1Line1.ToQPointF(),
+                                   p2Line1.ToQPointF(),
+                                   p1Line2.ToQPointF(),
+                                   bigLine1,
+                                   crosPoint,
+                                   bigLine2,
+                                   p2Line1,
+                                   width,
+                                   trueZeroWidth,
+                                   needRollback);
+            return true;
+        case PieceNodeAngle::ByPointsIntersection:
+            points = AngleByIntersection(points,
+                                         p1Line1.ToQPointF(),
+                                         p2Line1.ToQPointF(),
+                                         p1Line2.ToQPointF(),
+                                         bigLine1,
+                                         crosPoint,
+                                         bigLine2,
+                                         p2Line1,
+                                         width,
+                                         trueZeroWidth,
+                                         needRollback);
+            return true;
+        case PieceNodeAngle::ByFirstEdgeSymmetry:
+            points = AngleByFirstSymmetry(points,
+                                          p1Line1.ToQPointF(),
+                                          p2Line1.ToQPointF(),
+                                          p1Line2.ToQPointF(),
+                                          bigLine1,
+                                          crosPoint,
+                                          bigLine2,
+                                          p2Line1,
+                                          width,
+                                          trueZeroWidth,
+                                          needRollback);
+            return true;
+        case PieceNodeAngle::BySecondEdgeSymmetry:
+            points = AngleBySecondSymmetry(points,
+                                           p1Line1.ToQPointF(),
+                                           p2Line1.ToQPointF(),
+                                           p1Line2.ToQPointF(),
+                                           bigLine1,
+                                           crosPoint,
+                                           bigLine2,
+                                           p2Line1,
+                                           width,
+                                           trueZeroWidth,
+                                           needRollback);
+            return true;
+        case PieceNodeAngle::ByFirstEdgeRightAngle:
+            points = AngleByFirstRightAngle(points,
+                                            p1Line1.ToQPointF(),
+                                            p2Line1.ToQPointF(),
+                                            p1Line2.ToQPointF(),
+                                            bigLine1,
+                                            crosPoint,
+                                            bigLine2,
+                                            p2Line1,
+                                            width,
+                                            trueZeroWidth,
+                                            needRollback);
+            return true;
+        case PieceNodeAngle::BySecondEdgeRightAngle:
+            points = AngleBySecondRightAngle(points,
+                                             p1Line1.ToQPointF(),
+                                             p2Line1.ToQPointF(),
+                                             p1Line2.ToQPointF(),
+                                             bigLine1,
+                                             crosPoint,
+                                             bigLine2,
+                                             p2Line1,
+                                             width,
+                                             trueZeroWidth,
+                                             needRollback);
+            return true;
+    }
+
+    QT_WARNING_POP
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto HandleAcuteOrDart(QVector<VRawSAPoint> &points,
+                       const VSAPoint &p1Line1,
+                       const VSAPoint &p2Line1,
+                       const VSAPoint &p1Line2,
+                       const VSAPoint &p2Line2,
+                       const QLineF &bigLine1,
+                       const QLineF &bigLine2,
+                       qreal localWidth,
+                       bool trueZeroWidth,
+                       QLineF &line,
+                       const QPointF &crosPoint) -> bool
+{
+    const QLineF b1 = BisectorLine(p1Line1, p2Line1, p1Line2);
+    QLineF bisector(p2Line1, p1Line1);
+    bisector.setAngle(b1.angle());
+
+    qreal result1 = PointPosition(bisector.p2(), QLineF(p1Line1, p2Line1));
+    qreal result2 = PointPosition(bisector.p2(), QLineF(p2Line2, p1Line2));
+
+    if ((result1 < 0 || qFuzzyIsNull(result1)) && (result2 < 0 || qFuzzyIsNull(result2)))
+    { // Dart case. A bisector watches outside.
+        QLineF const bisectorEdge1(p1Line1, p2Line1);
+        QLineF const bisectorEdge2(p1Line2, p2Line2);
+
+        if (qAbs(bisectorEdge1.length() - bisectorEdge2.length())
+            <= qMax(bisectorEdge1.length(), bisectorEdge2.length()) * 0.2)
+        {
+            // Classic dart must be symmetrical.
+            // In some cases a point still valid, but ignore if going outside of an equdistant.
+
+            const QLineF bigEdge = VAbstractPiece::ParallelLine(p1Line1, p1Line2, localWidth, trueZeroWidth);
+            QPointF px;
+            if (const QLineF::IntersectType type = bigEdge.intersects(line, &px);
+                type != QLineF::BoundedIntersection && line.length() < QLineF(p2Line1, px).length())
+            {
+                points.append(VRawSAPoint(crosPoint, p2Line1.CurvePoint(), p2Line1.TurnPoint()));
+                return true;
+            }
+        }
+        else
+        { // Just an acute angle with big seam allowance
+            if (IsSameDirection(bigLine2.p1(), bigLine2.p2(), crosPoint))
+            {
+                points.append(VRawSAPoint(bigLine1.p2(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
+                points.append(VRawSAPoint(bigLine2.p1(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
+
+                QLineF loop(crosPoint, bigLine2.p1());
+                loop.setAngle(loop.angle() + 180);
+                loop.setLength(accuracyPointOnLine * 2.);
+                points.append(VRawSAPoint(loop.p2(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
+            }
+
+            return true;
+        }
+    }
+    else
+    { // New subcase. This is not a dart. An angle is acute and bisector watch inside.
+        result1 = PointPosition(crosPoint, QLineF(p1Line1, p2Line1));
+
+        if (result2 = PointPosition(crosPoint, QLineF(p2Line2, p1Line2));
+            (result1 < 0 || qFuzzyIsNull(result1)) && (result2 < 0 || qFuzzyIsNull(result2)))
+        { // The cross point is still outside of a piece
+            if (line.length() >= localWidth)
+            {
+                points.append(VRawSAPoint(crosPoint, p2Line1.CurvePoint(), p2Line1.TurnPoint()));
+                return true;
+            }
+
+            // but not enough far, fix it
+            line.setLength(localWidth);
+            points.append(VRawSAPoint(line.p2(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
+            return true;
+        }
+
+        // Wrong cross point, probably inside of a piece. Manually creating correct seam allowance
+        const QLineF bigEdge = SimpleParallelLine(bigLine1.p2(), bigLine2.p1(), localWidth);
+        points.append(VRawSAPoint(bigEdge.p1(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
+        points.append(VRawSAPoint(bigEdge.p2(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
+        return true;
+    }
+
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto HandleUnbounded(QVector<VRawSAPoint> &points,
+                     const VSAPoint &p1Line1,
+                     const VSAPoint &p2Line1,
+                     const VSAPoint &p1Line2,
+                     const VSAPoint &p2Line2,
+                     const QLineF &bigLine1,
+                     const QLineF &bigLine2,
+                     qreal width,
+                     bool trueZeroWidth,
+                     qreal angle,
+                     const QPointF &crosPoint,
+                     bool *needRollback) -> bool
+{
+    /* Case when a path has point on line (both segments lie on the same line) and seam allowance creates
+             * prong. */
+    if (FoundProng(bigLine1, bigLine2, p2Line1, width, trueZeroWidth, angle, crosPoint, points))
+    {
+        return true;
+    }
+
+    const qreal localWidth = p2Line1.MaxLocalSA(width, trueZeroWidth);
+    QLineF line(p2Line1, crosPoint);
+
+    // Checking two subcases
+    const QLineF b1 = BisectorLine(p1Line1, p2Line1, p1Line2);
+    const QLineF b2 = BisectorLine(bigLine1.p1(), crosPoint, bigLine2.p2());
+
+    // Comparison bisector angles helps to find direction
+    if (const qreal angle = AngleBetweenBisectors(b1, b2);
+        angle < 135 || VFuzzyComparePossibleNulls(angle, 135.0)) // Go in a same direction
+    {                                                            // Regular equdistant case
+        if (DispatchAngleType(
+                points, p1Line1, p2Line1, p1Line2, bigLine1, crosPoint, bigLine2, width, trueZeroWidth, needRollback))
+        {
+            return true;
+        }
+    }
+
+    // Different directions
+    return HandleAcuteOrDart(
+        points, p1Line1, p2Line1, p1Line2, p2Line2, bigLine1, bigLine2, localWidth, trueZeroWidth, line, crosPoint);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto HandleLargeAngle(QVector<VRawSAPoint> &points,
+                      qreal angle,
+                      const QLineF &bigLine1,
+                      const QLineF &bigLine2,
+                      const VSAPoint &p2Line1) -> bool
+{
+    if (angle > 345)
+    {
+        points.append(VRawSAPoint(bigLine1.p2(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
+        points.append(VRawSAPoint(bigLine2.p1(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
+        return true;
+    }
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto HandleParallel(QVector<VRawSAPoint> &points,
+                    const QLineF &bigLine1,
+                    const QLineF &bigLine2,
+                    const VSAPoint &p2Line1) -> QVector<VRawSAPoint>
+{
+    /*If we have correct lines this means lines lie on a line or parallel.*/
+    points.append(VRawSAPoint(bigLine1.p2(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
+    // Second point for parallel line
+    points.append(VRawSAPoint(bigLine2.p1(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
+    return points;
+}
 } // namespace
 
 // Friend functions
@@ -1363,7 +1701,7 @@ auto VAbstractPiece::SumTrapezoids(const QVector<QPointF> &points) -> qreal
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief EkvPoint return seam aloowance points in place of intersection two edges. Last points of two edges should be
+ * @brief EkvPoint return seam allowance points in place of intersection two edges. Last points of two edges should be
  * equal.
  * @param width global seam allowance width.
  * @return seam aloowance points.
@@ -1396,54 +1734,27 @@ auto VAbstractPiece::EkvPoint(QVector<VRawSAPoint> points,
     const QLineF bigLine1 = ParallelLine(p1Line1, p2Line1, width, trueZeroWidth);
     const QLineF bigLine2 = ParallelLine(p2Line2, p1Line2, width, trueZeroWidth);
 
-    if (VFuzzyComparePoints(bigLine1.p2(), bigLine2.p1()))
+    if (HandleEqualBigLines(points, bigLine1, bigLine2, p2Line1))
     {
-        points.append(VRawSAPoint(bigLine1.p2(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
         return points;
     }
 
     QLineF const edge1(p2Line2, p1Line2);
     QLineF const edge2(p2Line1, p1Line1);
-    qreal const a = edge2.angleTo(edge1);
+    qreal const angle = edge2.angleTo(edge1);
 
-    if (a >= 175 && a <= 185
-        && not VFuzzyComparePossibleNulls(p2Line1.GetSABefore(width, trueZeroWidth),
-                                          p2Line1.GetSAAfter(width, trueZeroWidth)))
+    if (HandleNearStraight(points, angle, bigLine1, bigLine2, p2Line1, edge2, width, trueZeroWidth))
     {
-        QLineF ray = edge2;
-        ray.setAngle(ray.angle() - a / 2);
-        ray.setLength(width * 2);
-
-        QPointF crosPoint;
-        QLineF::IntersectType type = ray.intersects(bigLine1, &crosPoint);
-        if (type != QLineF::NoIntersection)
-        {
-            points.append(VRawSAPoint(crosPoint, p2Line1.CurvePoint(), p2Line1.TurnPoint()));
-        }
-
-        type = ray.intersects(bigLine2, &crosPoint);
-        if (type != QLineF::NoIntersection)
-        {
-            points.append(VRawSAPoint(crosPoint, p2Line1.CurvePoint(), p2Line1.TurnPoint()));
-        }
         return points;
     }
-    else if (VFuzzyComparePossibleNulls(a, 360))
+
+    if (HandleFullCircle(points, angle, bigLine1, bigLine2, p2Line1, p2Line2, width, trueZeroWidth))
     {
-        QLineF ext1 = bigLine1;
-        ext1.setLength(ext1.length() + p2Line1.GetSABefore(width, trueZeroWidth));
-        points.append(VRawSAPoint(ext1.p2(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
-
-        QLineF ext2(bigLine2.p2(), bigLine2.p1());
-        ext2.setLength(ext2.length() + p2Line2.GetSAAfter(width, trueZeroWidth));
-        points.append(VRawSAPoint(ext2.p2(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
-
         return points;
     }
-    else if (a > 345)
+
+    if (HandleLargeAngle(points, angle, bigLine1, bigLine2, p2Line1))
     {
-        points.append(VRawSAPoint(bigLine1.p2(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
-        points.append(VRawSAPoint(bigLine2.p1(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
         return points;
     }
 
@@ -1456,192 +1767,25 @@ auto VAbstractPiece::EkvPoint(QVector<VRawSAPoint> points,
             points.append(VRawSAPoint(crosPoint, p2Line1.CurvePoint(), p2Line1.TurnPoint()));
             return points;
         case (QLineF::UnboundedIntersection):
-        { // Most common case
-            /* Case when a path has point on line (both segments lie on the same line) and seam allowance creates
-             * prong. */
-            if (FoundProng(bigLine1, bigLine2, p2Line1, width, trueZeroWidth, a, crosPoint, points))
+            // Most common case
+            if (HandleUnbounded(points,
+                                p1Line1,
+                                p2Line1,
+                                p1Line2,
+                                p2Line2,
+                                bigLine1,
+                                bigLine2,
+                                width,
+                                trueZeroWidth,
+                                angle,
+                                crosPoint,
+                                needRollback))
             {
                 return points;
             }
-
-            const qreal localWidth = p2Line1.MaxLocalSA(width, trueZeroWidth);
-            QLineF line(p2Line1, crosPoint);
-
-            // Checking two subcases
-            const QLineF b1 = BisectorLine(p1Line1, p2Line1, p1Line2);
-            const QLineF b2 = BisectorLine(bigLine1.p1(), crosPoint, bigLine2.p2());
-
-            // Comparison bisector angles helps to find direction
-            if (const qreal angle = AngleBetweenBisectors(b1, b2);
-                angle < 135 || VFuzzyComparePossibleNulls(angle, 135.0)) // Go in a same direction
-            {                                                            // Regular equdistant case
-                QT_WARNING_PUSH
-                QT_WARNING_DISABLE_GCC("-Wswitch-default")
-                QT_WARNING_DISABLE_CLANG("-Wswitch-default")
-
-                // This check helps to find missed angle types in the switch
-                Q_STATIC_ASSERT_X(static_cast<int>(PieceNodeAngle::LAST_ONE_DO_NOT_USE) == 7,
-                                  "Not all types were handled.");
-                switch (p2Line1.GetAngleType())
-                {
-                    case PieceNodeAngle::LAST_ONE_DO_NOT_USE:
-                        Q_UNREACHABLE(); //-V501
-                        break;
-                    case PieceNodeAngle::ByLength:
-                    case PieceNodeAngle::ByLengthCurve:
-                        return AngleByLength(points,
-                                             p1Line1.ToQPointF(),
-                                             p2Line1.ToQPointF(),
-                                             p1Line2.ToQPointF(),
-                                             bigLine1,
-                                             crosPoint,
-                                             bigLine2,
-                                             p2Line1,
-                                             width,
-                                             trueZeroWidth,
-                                             needRollback);
-                    case PieceNodeAngle::ByPointsIntersection:
-                        return AngleByIntersection(points,
-                                                   p1Line1.ToQPointF(),
-                                                   p2Line1.ToQPointF(),
-                                                   p1Line2.ToQPointF(),
-                                                   bigLine1,
-                                                   crosPoint,
-                                                   bigLine2,
-                                                   p2Line1,
-                                                   width,
-                                                   trueZeroWidth,
-                                                   needRollback);
-                    case PieceNodeAngle::ByFirstEdgeSymmetry:
-                        return AngleByFirstSymmetry(points,
-                                                    p1Line1.ToQPointF(),
-                                                    p2Line1.ToQPointF(),
-                                                    p1Line2.ToQPointF(),
-                                                    bigLine1,
-                                                    crosPoint,
-                                                    bigLine2,
-                                                    p2Line1,
-                                                    width,
-                                                    trueZeroWidth,
-                                                    needRollback);
-                    case PieceNodeAngle::BySecondEdgeSymmetry:
-                        return AngleBySecondSymmetry(points,
-                                                     p1Line1.ToQPointF(),
-                                                     p2Line1.ToQPointF(),
-                                                     p1Line2.ToQPointF(),
-                                                     bigLine1,
-                                                     crosPoint,
-                                                     bigLine2,
-                                                     p2Line1,
-                                                     width,
-                                                     trueZeroWidth,
-                                                     needRollback);
-                    case PieceNodeAngle::ByFirstEdgeRightAngle:
-                        return AngleByFirstRightAngle(points,
-                                                      p1Line1.ToQPointF(),
-                                                      p2Line1.ToQPointF(),
-                                                      p1Line2.ToQPointF(),
-                                                      bigLine1,
-                                                      crosPoint,
-                                                      bigLine2,
-                                                      p2Line1,
-                                                      width,
-                                                      trueZeroWidth,
-                                                      needRollback);
-                    case PieceNodeAngle::BySecondEdgeRightAngle:
-                        return AngleBySecondRightAngle(points,
-                                                       p1Line1.ToQPointF(),
-                                                       p2Line1.ToQPointF(),
-                                                       p1Line2.ToQPointF(),
-                                                       bigLine1,
-                                                       crosPoint,
-                                                       bigLine2,
-                                                       p2Line1,
-                                                       width,
-                                                       trueZeroWidth,
-                                                       needRollback);
-                }
-
-                QT_WARNING_POP
-            }
-            else
-            { // Different directions
-                QLineF bisector(p2Line1, p1Line1);
-                bisector.setAngle(b1.angle());
-
-                qreal result1 = PointPosition(bisector.p2(), QLineF(p1Line1, p2Line1));
-                qreal result2 = PointPosition(bisector.p2(), QLineF(p2Line2, p1Line2));
-
-                if ((result1 < 0 || qFuzzyIsNull(result1)) && (result2 < 0 || qFuzzyIsNull(result2)))
-                { // Dart case. A bisector watches outside.
-                    QLineF const bisectorEdge1(p1Line1, p2Line1);
-                    QLineF const bisectorEdge2(p1Line2, p2Line2);
-
-                    if (qAbs(bisectorEdge1.length() - bisectorEdge2.length()) <=
-                        qMax(bisectorEdge1.length(), bisectorEdge2.length()) * 0.2)
-                    {
-                        // Classic dart must be symmetrical.
-                        // In some cases a point still valid, but ignore if going outside of an equdistant.
-
-                        const QLineF bigEdge = ParallelLine(p1Line1, p1Line2, localWidth, trueZeroWidth);
-                        QPointF px;
-                        const QLineF::IntersectType type = bigEdge.intersects(line, &px);
-                        if (type != QLineF::BoundedIntersection && line.length() < QLineF(p2Line1, px).length())
-                        {
-                            points.append(VRawSAPoint(crosPoint, p2Line1.CurvePoint(), p2Line1.TurnPoint()));
-                            return points;
-                        }
-                    }
-                    else
-                    { // Just an acute angle with big seam allowance
-                        if (IsSameDirection(bigLine2.p1(), bigLine2.p2(), crosPoint))
-                        {
-                            points.append(VRawSAPoint(bigLine1.p2(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
-                            points.append(VRawSAPoint(bigLine2.p1(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
-
-                            QLineF loop(crosPoint, bigLine2.p1());
-                            loop.setAngle(loop.angle() + 180);
-                            loop.setLength(accuracyPointOnLine * 2.);
-                            points.append(VRawSAPoint(loop.p2(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
-                        }
-
-                        return points;
-                    }
-                }
-                else
-                { // New subcase. This is not a dart. An angle is acute and bisector watch inside.
-                    result1 = PointPosition(crosPoint, QLineF(p1Line1, p2Line1));
-
-                    if (result2 = PointPosition(crosPoint, QLineF(p2Line2, p1Line2));
-                        (result1 < 0 || qFuzzyIsNull(result1)) && (result2 < 0 || qFuzzyIsNull(result2)))
-                    { // The cross point is still outside of a piece
-                        if (line.length() >= localWidth)
-                        {
-                            points.append(VRawSAPoint(crosPoint, p2Line1.CurvePoint(), p2Line1.TurnPoint()));
-                            return points;
-                        }
-
-                        // but not enough far, fix it
-                        line.setLength(localWidth);
-                        points.append(VRawSAPoint(line.p2(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
-                        return points;
-                    }
-
-                    // Wrong cross point, probably inside of a piece. Manually creating correct seam allowance
-                    const QLineF bigEdge = SimpleParallelLine(bigLine1.p2(), bigLine2.p1(), localWidth);
-                    points.append(VRawSAPoint(bigEdge.p1(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
-                    points.append(VRawSAPoint(bigEdge.p2(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
-                    return points;
-                }
-            }
             break;
-        }
         case (QLineF::NoIntersection):
-            /*If we have correct lines this means lines lie on a line or parallel.*/
-            points.append(VRawSAPoint(bigLine1.p2(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
-            // Second point for parallel line
-            points.append(VRawSAPoint(bigLine2.p1(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
-            return points;
+            return HandleParallel(points, bigLine1, bigLine2, p2Line1);
         default:
             break;
     }
