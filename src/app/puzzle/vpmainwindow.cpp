@@ -830,11 +830,10 @@ void VPMainWindow::ShowFullPieceToggled(bool checked)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::ShowMirrorLineToggled(bool checked)
 {
-    QList<VPPiecePtr> const selectedPieces = SelectedPieces();
-    if (selectedPieces.size() == 1)
+    if (QList<VPPiecePtr> const selectedPieces = SelectedPieces(); selectedPieces.size() == 1)
     {
-        const VPPiecePtr &selectedPiece = selectedPieces.constFirst();
-        if (not selectedPiece.isNull() && selectedPiece->IsShowMirrorLine() != checked)
+        if (const VPPiecePtr &selectedPiece = selectedPieces.constFirst();
+            not selectedPiece.isNull() && selectedPiece->IsShowMirrorLine() != checked)
         {
             selectedPiece->SetShowMirrorLine(checked);
             LayoutWasSaved(false);
