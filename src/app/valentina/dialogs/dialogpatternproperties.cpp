@@ -325,20 +325,19 @@ void DialogPatternProperties::SaveReadOnlyState()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::ValidatePassmarkLength() const
 {
-    const QString text = ui->lineEditPassmarkLength->text();
     QPalette palette = ui->lineEditPassmarkLength->palette();
-    const QPalette::ColorRole foregroundRole = ui->lineEditPassmarkLength->foregroundRole();
+    const QPalette defaultPalette = QApplication::palette(ui->lineEditPassmarkLength);
 
-    if (not text.isEmpty())
+    if (const QString text = ui->lineEditPassmarkLength->text(); not text.isEmpty())
     {
         QRegularExpression const rx(NameRegExp());
-        palette.setColor(foregroundRole, rx.match(text).hasMatch() && m_variables.contains(text)
-                                             ? palette.color(QPalette::Text)
-                                             : Qt::red);
+        palette.setColor(ui->lineEditPassmarkLength->foregroundRole(),
+                         rx.match(text).hasMatch() && m_variables.contains(text) ? defaultPalette.color(QPalette::Text)
+                                                                                 : Qt::red);
     }
     else
     {
-        palette.setColor(foregroundRole, palette.color(QPalette::Text));
+        palette.setColor(ui->lineEditPassmarkLength->foregroundRole(), defaultPalette.color(QPalette::Text));
     }
 
     ui->lineEditPassmarkLength->setPalette(palette);
@@ -347,20 +346,19 @@ void DialogPatternProperties::ValidatePassmarkLength() const
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::ValidatePassmarkWidth() const
 {
-    const QString text = ui->lineEditPassmarkWidth->text();
     QPalette palette = ui->lineEditPassmarkWidth->palette();
-    const QPalette::ColorRole foregroundRole = ui->lineEditPassmarkWidth->foregroundRole();
+    const QPalette defaultPalette = QApplication::palette(ui->lineEditPassmarkWidth);
 
-    if (not text.isEmpty())
+    if (const QString text = ui->lineEditPassmarkWidth->text(); not text.isEmpty())
     {
         QRegularExpression const rx(NameRegExp());
-        palette.setColor(foregroundRole, rx.match(text).hasMatch() && m_variables.contains(text)
-                                             ? palette.color(QPalette::Text)
-                                             : Qt::red);
+        palette.setColor(ui->lineEditPassmarkWidth->foregroundRole(),
+                         rx.match(text).hasMatch() && m_variables.contains(text) ? defaultPalette.color(QPalette::Text)
+                                                                                 : Qt::red);
     }
     else
     {
-        palette.setColor(foregroundRole, palette.color(QPalette::Text));
+        palette.setColor(ui->lineEditPassmarkWidth->foregroundRole(), defaultPalette.color(QPalette::Text));
     }
 
     ui->lineEditPassmarkWidth->setPalette(palette);
@@ -556,8 +554,9 @@ void DialogPatternProperties::BrowseLabelPath()
 void DialogPatternProperties::LabelPathChanged(const QString &text)
 {
     QPalette palette = ui->lineEditPieceLabelPath->palette();
+    const QPalette defaultPalette = QApplication::palette(ui->lineEditPieceLabelPath);
     palette.setColor(ui->lineEditPieceLabelPath->foregroundRole(),
-                     text.isEmpty() || QFileInfo::exists(text) ? palette.color(QPalette::Text) : Qt::red);
+                     text.isEmpty() || QFileInfo::exists(text) ? defaultPalette.color(QPalette::Text) : Qt::red);
     ui->lineEditPieceLabelPath->setPalette(palette);
     m_descriptionChanged = true;
 }

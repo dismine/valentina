@@ -548,7 +548,8 @@ void DialogSaveManualLayout::PathChanged(const QString &text)
     if (not text.isEmpty() && dir.exists(text))
     {
         bOk->setEnabled(true);
-        palette.setColor(ui->lineEditPath->foregroundRole(), palette.color(QPalette::Text));
+        const QPalette defaultPalette = QApplication::palette(ui->lineEditPath);
+        palette.setColor(ui->lineEditPath->foregroundRole(), defaultPalette.color(QPalette::Text));
     }
     else
     {
