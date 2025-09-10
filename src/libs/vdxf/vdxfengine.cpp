@@ -49,7 +49,7 @@
 #include <memory>
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-#include "../vmisc/vtextcodec.h"
+#include "../vmisc/codecs/qtextcodec.h"
 #else
 #include <QTextCodec>
 #endif

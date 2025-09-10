@@ -38,7 +38,7 @@
 #include <QShowEvent>
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-#include "../vtextcodec.h"
+#include "../codecs/qtextcodec.h"
 #else
 #include <QTextCodec>
 #endif
@@ -58,10 +58,10 @@ DialogExportToCSV::DialogExportToCSV(QWidget *parent)
 {
     ui->setupUi(this);
 
-    const QList<int> mibs = VTextCodec::availableMibs();
+    const QList<int> mibs = QTextCodec::availableMibs();
     for (auto mib : mibs)
     {
-        if (VTextCodec *codec = VTextCodec::codecForMib(mib))
+        if (QTextCodec *codec = QTextCodec::codecForMib(mib))
         {
             ui->comboBoxCodec->addItem(codec->name(), mib);
         }
@@ -220,8 +220,7 @@ void DialogExportToCSV::ShowPreview()
 
     ui->groupBoxPreview->setVisible(true);
 
-    QxtCsvModel const csv(m_fileName, nullptr, IsWithHeader(), GetSeparator(),
-                          VTextCodec::codecForMib(GetSelectedMib()));
+    QxtCsvModel const csv(m_fileName, nullptr, IsWithHeader(), GetSeparator(), QTextCodec::codecForMib(GetSelectedMib()));
 
     const int columns = csv.columnCount();
     const int rows = csv.rowCount();
@@ -292,10 +291,10 @@ void DialogExportToCSV::ShowFilePreview(const QString &fileName)
 auto DialogExportToCSV::MakeHelpCodecsList() -> QString
 {
     auto out = QStringLiteral("\n");
-    const QList<int> list = VTextCodec::availableMibs();
+    const QList<int> list = QTextCodec::availableMibs();
     for (int i = 0; i < list.size(); ++i)
     {
-        if (VTextCodec *codec = VTextCodec::codecForMib(list.at(i)))
+        if (QTextCodec *codec = QTextCodec::codecForMib(list.at(i)))
         {
             out += QStringLiteral("\t* ") + codec->name();
             out += i < list.size() - 1 ? ",\n"_L1 : ".\n"_L1;

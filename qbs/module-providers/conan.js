@@ -142,7 +142,8 @@ function configure(installDirectory, moduleName, outputBaseDir, jsonProbe) {
     const moduleMapping = {
         "protobuflib": "protobuf",
         "crashpad": "sentry-crashpad",
-        "XercesC": "xerces-c"
+        "XercesC": "xerces-c",
+        "icudata": "icu-data",
     }
 
     const realModuleName = moduleMapping[moduleName] || moduleName;

@@ -69,7 +69,7 @@
 #include "vtapesettings.h"
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-#include "../vmisc/vtextcodec.h"
+#include "../vmisc/codecs/qtextcodec.h"
 #else
 #include <QTextCodec>
 #endif
@@ -916,7 +916,7 @@ void TMainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int 
     }
 
     QString error;
-    csv.toCSV(fileName, error, withHeader, separator, VTextCodec::codecForMib(mib));
+    csv.toCSV(fileName, error, withHeader, separator, QTextCodec::codecForMib(mib));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1158,12 +1158,15 @@ void TMainWindow::ImportDataFromCSV()
         }
         columns->SetWithHeader(dialog.IsWithHeader());
         columns->SetSeparator(dialog.GetSeparator());
-        columns->SetCodec(VTextCodec::codecForMib(dialog.GetSelectedMib()));
+        columns->SetCodec(QTextCodec::codecForMib(dialog.GetSelectedMib()));
 
         if (columns->exec() == QDialog::Accepted)
         {
-            QxtCsvModel const csv(fileName, nullptr, dialog.IsWithHeader(), dialog.GetSeparator(),
-                                  VTextCodec::codecForMib(dialog.GetSelectedMib()));
+            QxtCsvModel const csv(fileName,
+                                  nullptr,
+                                  dialog.IsWithHeader(),
+                                  dialog.GetSeparator(),
+                                  QTextCodec::codecForMib(dialog.GetSelectedMib()));
             const QVector<int> map = columns->ColumnsMap();
 
             if (m_m->Type() == MeasurementsType::Individual)

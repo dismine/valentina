@@ -62,6 +62,21 @@
 #include "tst_vtranslatevars.h"
 #include "tst_xsdschema.h"
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#ifdef WITH_TEXTCODEC
+#include "tst_qstringiterator.h"
+#include "tst_qtextcodec.h"
+#include "tst_utf8.h"
+#endif
+
+#include "tst_vtextstream.h"
+
+#include <QDir>
+#if defined(SHARED_ICU_DATA)
+#include <unicode/putil.h>
+#endif
+#endif
+
 //---------------------------------------------------------------------------------------------------------------------
 auto main(int argc, char **argv) -> int
 {
@@ -76,6 +91,19 @@ auto main(int argc, char **argv) -> int
     TestVApplication const app(argc, argv); // For QPrinter
 
     QResource::registerResource(QCoreApplication::applicationDirPath() + QStringLiteral("/test_data.rcc"));
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#if defined(SHARED_ICU_DATA)
+#if defined(Q_OS_WIN)
+    QString icuDataPath = QCoreApplication::applicationDirPath() + QStringLiteral("/icu");
+    icuDataPath = QDir::toNativeSeparators(icuDataPath);
+    u_setDataDirectory(icuDataPath.toUtf8().constData());
+#elif defined(Q_OS_MACOS)
+    const QString icuDataPath = QCoreApplication::applicationDirPath() + "/../Resources/icu"_L1;
+    u_setDataDirectory(icuDataPath.toUtf8().constData());
+#endif
+#endif // defined(SHARED_ICU_DATA)
+#endif // QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 
     int status = 0;
     auto ASSERT_TEST = [&status, argc, argv](QObject *obj)
@@ -111,6 +139,14 @@ auto main(int argc, char **argv) -> int
     ASSERT_TEST(new TST_VBoundary());
     ASSERT_TEST(new TST_DXF());
     ASSERT_TEST(new TST_SVGFontWritingSystem());
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#ifdef WITH_TEXTCODEC
+    ASSERT_TEST(new TST_Utf8());
+    ASSERT_TEST(new TST_QTextCodec());
+    ASSERT_TEST(new TST_QStringIterator());
+#endif
+    ASSERT_TEST(new TST_VTextStream());
+#endif // QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 
     return status;
 }

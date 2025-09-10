@@ -51,12 +51,24 @@ Module {
         if (qbs.targetOS.contains("windows")) {
             if (qbs.toolchain.contains("msvc")) {
                 return project.conanWithCrashReporting;
-            } else {
-                return false;
             }
-        } else {
-            return project.conanWithCrashReporting;
+            return false;
         }
+        return project.conanWithCrashReporting;
+    }
+    readonly property bool conanWithICONVEnabled : {
+        if (Utilities.versionCompare(Qt.core.version, "6") >= 0 &&
+                project.withTextCodec && !project.withICUCodecs && project.withICONVCodecs) {
+            return project.conanWithICONV;
+        }
+        return false;
+    }
+    readonly property bool conanWithICUEnabled : {
+        if (Utilities.versionCompare(Qt.core.version, "6") >= 0 &&
+                project.withTextCodec && project.withICUCodecs) {
+            return project.conanWithICU;
+        }
+        return false;
     }
 
     readonly property bool enableCodeSigning: project.enableSigning
@@ -165,6 +177,28 @@ Module {
 
         if (useConanPackages && conanCrashReportingEnabled)
             defines.push('CRASH_REPORTING');
+
+        if (project.withTextCodec)
+            defines.push('WITH_TEXTCODEC');
+
+        if (project.withTextCodec && project.withICUCodecs)
+            defines.push('WITH_ICU_CODECS');
+
+        if (project.withTextCodec && !project.withICUCodecs && project.withICONVCodecs)
+            defines.push('WITH_ICONV_CODECS');
+
+        if (project.withTextCodec && project.withBasicCodecs)
+            defines.push('WITH_BASIC_CODECS');
+
+        if (project.withTextCodec && !project.withICUCodecs && project.withBigCodecs)
+            defines.push('WITH_BIG_CODECS');
+
+        if (useConanPackages &&
+                conanWithICUEnabled &&
+                qbs.targetOS.contains("windows") &&
+                qbs.targetOS.contains("macos")) {
+            defines.push('SHARED_ICU_DATA');
+        }
 
         return defines;
     }

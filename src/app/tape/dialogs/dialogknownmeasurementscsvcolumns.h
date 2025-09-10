@@ -33,13 +33,7 @@
 
 class QxtCsvModel;
 class QComboBox;
-
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-class VTextCodec;
-#else
 class QTextCodec;
-using VTextCodec = QTextCodec;
-#endif
 
 enum class KnownMeasurementsColumns : qint8
 {
@@ -68,7 +62,7 @@ public:
 
     void SetWithHeader(bool withHeader);
     void SetSeparator(const QChar &separator);
-    void SetCodec(VTextCodec *codec);
+    void SetCodec(QTextCodec *codec);
 
 protected:
     void changeEvent(QEvent *event) override;
@@ -85,7 +79,7 @@ private:
     QString m_fileName;
     bool m_withHeader{false};
     QChar m_separator{','};
-    VTextCodec *m_codec{nullptr};
+    QTextCodec *m_codec{nullptr};
     QVector<int> m_columnsMap{};
 
     auto ColumnMandatory(int column) const -> bool;

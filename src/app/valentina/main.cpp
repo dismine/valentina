@@ -45,6 +45,13 @@
 #include "version.h"
 #endif
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include <QDir>
+#if defined(SHARED_ICU_DATA)
+#include <unicode/putil.h>
+#endif
+#endif
+
 // Fix bug in Qt. Deprecation warning in QMessageBox::critical.
 #if QT_VERSION >= QT_VERSION_CHECK(6, 2, 0) && QT_VERSION < QT_VERSION_CHECK(6, 6, 0)
 #undef QT_REQUIRE_VERSION
@@ -103,6 +110,19 @@ auto main(int argc, char *argv[]) -> int
 #if defined(Q_OS_WIN)
     VAbstractApplication::WinAttachConsole();
 #endif
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#if defined(SHARED_ICU_DATA)
+#if defined(Q_OS_WIN)
+    QString icuDataPath = QCoreApplication::applicationDirPath() + QStringLiteral("/icu");
+    icuDataPath = QDir::toNativeSeparators(icuDataPath);
+    u_setDataDirectory(icuDataPath.toUtf8().constData());
+#elif defined(Q_OS_MACOS)
+    const QString icuDataPath = QCoreApplication::applicationDirPath() + "/../Resources/icu"_L1;
+    u_setDataDirectory(icuDataPath.toUtf8().constData());
+#endif
+#endif // defined(SHARED_ICU_DATA)
+#endif // QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 
     // Need to internally move a node inside a piece main path
     REGISTER_META_TYPE_STREAM_OPERATORS(VPieceNode);

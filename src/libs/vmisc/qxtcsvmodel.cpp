@@ -38,12 +38,13 @@
 #include <QFile>
 #include <QIODevice>
 #include <QList>
-#include <QTextStream>
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-#include "../vmisc/vtextcodec.h"
+#include "codecs/qtextcodec.h"
+#include "vtextstream.h"
 #else
 #include <QTextCodec>
+#include <QTextStream>
 #endif
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
@@ -91,7 +92,7 @@ QxtCsvModel::QxtCsvModel(QObject *parent)
 
       \sa setSource
       */
-    QxtCsvModel::QxtCsvModel(QIODevice * file, QObject * parent, bool withHeader, QChar separator, VTextCodec *codec)
+    QxtCsvModel::QxtCsvModel(QIODevice * file, QObject * parent, bool withHeader, QChar separator, QTextCodec *codec)
   : QAbstractTableModel(parent)
 {
     QXT_INIT_PRIVATE(QxtCsvModel)
@@ -108,7 +109,7 @@ QxtCsvModel::QxtCsvModel(QObject *parent)
 
   \sa setSource
   */
-QxtCsvModel::QxtCsvModel(const QString &filename, QObject *parent, bool withHeader, QChar separator, VTextCodec *codec)
+QxtCsvModel::QxtCsvModel(const QString &filename, QObject *parent, bool withHeader, QChar separator, QTextCodec *codec)
   : QAbstractTableModel(parent)
 {
     QXT_INIT_PRIVATE(QxtCsvModel)
@@ -186,7 +187,7 @@ auto QxtCsvModel::headerData(int section, Qt::Orientation orientation, int role)
 
   Reads in a CSV file from the provided \a file using \a codec.
   */
-void QxtCsvModel::setSource(const QString &filename, bool withHeader, QChar separator, VTextCodec *codec)
+void QxtCsvModel::setSource(const QString &filename, bool withHeader, QChar separator, QTextCodec *codec)
 {
     QFile src(filename);
     setSource(&src, withHeader, separator, codec);
@@ -201,34 +202,33 @@ void QxtCsvModel::setSource(const QString &filename, bool withHeader, QChar sepa
 
   \sa quoteMode
   */
-void QxtCsvModel::setSource(QIODevice *file, bool withHeader, QChar separator, VTextCodec *codec)
+void QxtCsvModel::setSource(QIODevice *file, bool withHeader, QChar separator, QTextCodec *codec)
 {
-    QxtCsvModelPrivate *d_ptr = &qxt_d();
-    bool headerSet = !withHeader;
     if (not file->isOpen())
     {
         file->open(QIODevice::ReadOnly);
     }
-    if (withHeader)
-    {
-        d_ptr->maxColumn = 0;
-    }
-    else
-    {
-        d_ptr->maxColumn = d_ptr->header.size();
-    }
+
+    QxtCsvModelPrivate *d_ptr = &qxt_d();
+    d_ptr->maxColumn = withHeader ? 0 : d_ptr->header.size();
     d_ptr->csvData.clear();
+
     QStringList row;
     QString field;
     QChar quote;
     QChar ch, buffer(0);
     bool readCR = false;
-    QTextStream stream(file);
+
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    codec ? stream.setEncoding(codec->Encoding()) : stream.setAutoDetectUnicode(true);
+    VTextStream stream(file);
 #else
-    codec ? stream.setCodec(codec) : stream.setAutoDetectUnicode(true);
+    QTextStream stream(file);
 #endif
+
+    codec ? stream.setCodec(codec) : stream.setAutoDetectUnicode(true);
+
+    bool headerSet = !withHeader;
+
     while (not stream.atEnd())
     {
         if (buffer != QChar(0))
@@ -592,70 +592,75 @@ static auto qxt_addCsvQuotes(QxtCsvModel::QuoteMode mode, QString field) -> QStr
 }
 
 /*!
-  Outputs the content of the model as a CSV file to the device \a dest using \a codec.
+  Outputs the content of the model as a CSV file to the device \a file using \a codec.
 
   Fields in the output file will be separated by \a separator. Set \a withHeader to true
   to output a row of headers at the top of the file.
  */
-auto QxtCsvModel::toCSV(QIODevice *dest, QString &error, bool withHeader, QChar separator, VTextCodec *codec) const
+auto QxtCsvModel::toCSV(QIODevice *file, QString &error, bool withHeader, QChar separator, QTextCodec *codec) const
     -> bool
 {
+    if (not file->isOpen() && not file->open(QIODevice::WriteOnly | QIODevice::Truncate))
+    {
+        error = file->errorString();
+        return false;
+    }
+
+    QScopedPointer<QTextEncoder> encoderWithoutBom;
+    if (codec)
+    {
+        encoderWithoutBom.reset(codec->makeEncoder(QTextCodec::IgnoreHeader));
+    }
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    VTextStream stream(file);
+#else
+    QTextStream stream(dest);
+#endif
+    if (codec)
+    {
+        stream.setCodec(codec);
+    }
+
+    auto WriteString = [&stream](const QString &str)
+    {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        stream << str << Val::endl;
+#else
+        stream << str << Qt::endl;
+#endif
+    };
+
     const QxtCsvModelPrivate &d_ptr = qxt_d();
     int rows = rowCount();
     int cols = columnCount();
-    QString data;
-    if (not dest->isOpen() && not dest->open(QIODevice::WriteOnly | QIODevice::Truncate))
-    {
-        error = dest->errorString();
-        return false;
-    }
-    QTextStream stream(dest);
 
-    if (codec)
-    {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        stream.setEncoding(codec->Encoding());
-#else
-        stream.setCodec(codec);
-#endif
-    }
-
+    // Write header
     if (withHeader)
     {
-        data = QString();
+        QStringList headerList;
+        headerList.reserve(cols);
         for (int col = 0; col < cols; ++col)
         {
-            if (col > 0)
-            {
-                data += separator;
-            }
-            data += qxt_addCsvQuotes(d_ptr.quoteMode, d_ptr.header.at(col));
+            headerList << qxt_addCsvQuotes(d_ptr.quoteMode, d_ptr.header.at(col));
         }
-        stream << data << Qt::endl;
+        WriteString(headerList.join(separator));
     }
+
+    // Write rows
     for (int row = 0; row < rows; ++row)
     {
         const QStringList &rowData = d_ptr.csvData[row];
-        data = QString();
+        QStringList rowList;
         for (int col = 0; col < cols; ++col)
         {
-            if (col > 0)
-            {
-                data += separator;
-            }
-            if (col < rowData.length())
-            {
-                data += qxt_addCsvQuotes(d_ptr.quoteMode, rowData.at(col));
-            }
-            else
-            {
-                data += qxt_addCsvQuotes(d_ptr.quoteMode, QString());
-            }
+            col < rowData.length() ? rowList << qxt_addCsvQuotes(d_ptr.quoteMode, rowData.at(col))
+                                   : rowList << qxt_addCsvQuotes(d_ptr.quoteMode, QString());
         }
-        stream << data << Qt::endl;
+        WriteString(rowList.join(separator));
     }
-    stream << Qt::flush;
-    dest->close();
+    stream.flush();
+    file->close();
     return true;
 }
 
@@ -667,8 +672,8 @@ auto QxtCsvModel::toCSV(QIODevice *dest, QString &error, bool withHeader, QChar 
   Fields in the output file will be separated by \a separator. Set \a withHeader to true
   to output a row of headers at the top of the file.
  */
-auto QxtCsvModel::toCSV(const QString &filename, QString &error, bool withHeader, QChar separator,
-                        VTextCodec *codec) const -> bool
+auto QxtCsvModel::toCSV(
+    const QString &filename, QString &error, bool withHeader, QChar separator, QTextCodec *codec) const -> bool
 {
     QFile dest(filename);
     return toCSV(&dest, error, withHeader, separator, codec);

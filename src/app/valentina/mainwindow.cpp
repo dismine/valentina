@@ -198,7 +198,7 @@
 #include "vsinglelineoutlinechar.h"
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-#include "../vmisc/vtextcodec.h"
+#include "../vmisc/codecs/qtextcodec.h"
 #else
 #include <QTextCodec>
 #endif
@@ -1988,7 +1988,7 @@ void MainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int m
     SavePreviewCalculation(true);
 
     QString error;
-    csv.toCSV(fileName, error, withHeader, separator, VTextCodec::codecForMib(mib));
+    csv.toCSV(fileName, error, withHeader, separator, QTextCodec::codecForMib(mib));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -7305,10 +7305,10 @@ auto MainWindow::DoFMExport(const VCommandLinePtr &expParams) -> bool
     }
 
     const QString codecName = expParams->OptCSVCodecName();
-    int mib = VTextCodec::codecForLocale()->mibEnum();
+    int mib = QTextCodec::codecForLocale()->mibEnum();
     if (not codecName.isEmpty())
     {
-        if (VTextCodec *codec = VTextCodec::codecForName(codecName.toLatin1()))
+        if (QTextCodec *codec = QTextCodec::codecForName(codecName.toLatin1()))
         {
             mib = codec->mibEnum();
         }

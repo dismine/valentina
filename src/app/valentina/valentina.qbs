@@ -43,6 +43,20 @@ VToolApp {
         condition: qbs.targetOS.contains("macos") && Utilities.versionCompare(Qt.core.version, "6") >= 0
     }
 
+    Depends {
+        name: "icu";
+        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 &&
+                   project.withTextCodec && project.withICUCodecs &&
+                   buildconfig.useConanPackages && buildconfig.conanWithICUEnabled
+    }
+
+    Depends {
+        name: "icudata"
+        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 &&
+                   project.withTextCodec && project.withICUCodecs &&
+                   buildconfig.useConanPackages && buildconfig.conanWithICUEnabled
+    }
+
     primaryApp: true
     name: "Valentina"
     buildconfig.appTarget: qbs.targetOS.contains("macos") ? "Valentina" : "valentina"
@@ -78,6 +92,17 @@ VToolApp {
         qbs.install: true
         qbs.installDir: buildconfig.installBinaryPath
         qbs.installSourceBase: crashpad.binDirs[0] + "/"
+    }
+
+    Group {
+        name: "ICU data"
+        condition: buildconfig.useConanPackages &&
+                   buildconfig.conanWithICUEnabled &&
+                   (qbs.targetOS.contains("windows") || qbs.targetOS.contains("macos"))
+        prefix: icudata.resources[0] + "/"
+        files: ["**/*.dat"]
+        qbs.install: true
+        qbs.installDir: buildconfig.installDataPath + "/icu"
     }
 
     files: [

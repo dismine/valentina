@@ -28,6 +28,20 @@ VToolApp {
                    buildconfig.conanXercesEnabled
     }
 
+    Depends {
+        name: "icu";
+        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 &&
+                   project.withTextCodec && project.withICUCodecs &&
+                   buildconfig.useConanPackages && buildconfig.conanWithICUEnabled
+    }
+
+    Depends {
+        name: "icudata"
+        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 &&
+                   project.withTextCodec && project.withICUCodecs &&
+                   buildconfig.useConanPackages && buildconfig.conanWithICUEnabled
+    }
+
     // Explicitly link to libcrypto and libssl to avoid error: Failed to load libssl/libcrypto.
     // Use moduleProviders.qbspkgconfig.extraPaths to define the missing dependency.
     // Explicit linking will help macdeployqt undertsand that we want to see them inside the bundle.
@@ -64,6 +78,15 @@ VToolApp {
         qbs.install: true
         qbs.installDir: buildconfig.installBinaryPath
         qbs.installSourceBase: crashpad.binDirs[0] + "/"
+    }
+
+    Group {
+        name: "ICU data (MacOS)"
+        condition: buildconfig.useConanPackages && buildconfig.conanWithICUEnabled && qbs.targetOS.contains("macos") && buildconfig.enableMultiBundle
+        prefix: icudata.resources[0] + "/"
+        files: ["**/*.dat"]
+        qbs.install: true
+        qbs.installDir: buildconfig.installDataPath + "/icu"
     }
 
     Properties {

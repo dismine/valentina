@@ -32,10 +32,9 @@
 #include "../vtools/dialogs/dialogtoolbox.h"
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-#include "../vmisc/vtextcodec.h"
+#include "../vmisc/codecs/qtextcodec.h"
 #else
 #include <QTextCodec>
-using VTextCodec = QTextCodec;
 #endif
 
 #include <QPushButton>
@@ -555,7 +554,7 @@ template <class T> void DialogKnownMeasurementsCSVColumns::SaveColum(QComboBox *
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogKnownMeasurementsCSVColumns::SetCodec(VTextCodec *codec)
+void DialogKnownMeasurementsCSVColumns::SetCodec(QTextCodec *codec)
 {
     m_codec = codec;
 }

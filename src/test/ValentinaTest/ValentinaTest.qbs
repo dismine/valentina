@@ -18,6 +18,35 @@ VTestApp {
         condition: Utilities.versionCompare(Qt.core.version, "6") < 0
     }
 
+    Depends {
+        name: "EchoHelper"
+        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 &&
+                   project.withTextCodec &&
+                   qbs.targetOS.contains("unix")
+    }
+
+    Depends {
+        name: "icu";
+        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 &&
+                   project.withTextCodec && project.withICUCodecs &&
+                   buildconfig.useConanPackages && buildconfig.conanWithICUEnabled
+    }
+
+    Depends {
+        name: "stdinProcess"
+        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0
+    }
+
+    Depends {
+        name: "readLineStdinProcess"
+        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0
+    }
+
+    Depends {
+        name: "readAllStdinProcess"
+        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0
+    }
+
     name: "ValentinaTest"
     buildconfig.appTarget: qbs.targetOS.contains("macos") ? "ValentinaTest" : "valentinaTest"
     targetName: buildconfig.appTarget
@@ -53,6 +82,8 @@ VTestApp {
         "tst_readval.cpp",
         "tst_vsvgpathtokenizer.cpp",
         "tst_vsvgpathtokenizer.h",
+        "tst_vtextstream.cpp",
+        "tst_vtextstream.h",
         "tst_vtranslatevars.cpp",
         "tst_vabstractpiece.cpp",
         "tst_vtooluniondetails.cpp",
@@ -86,5 +117,35 @@ VTestApp {
         name: "Test data"
         files: "share/test_data.qrc"
         fileTags: "ebr.external_qrc"
+    }
+
+    Group {
+        name: "VTextStream test data"
+        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0
+        prefix: "vtextstream/"
+        files: ["*.txt"]
+        fileTags: []
+    }
+
+    Group {
+        Depends { name: "Qt.core" }
+        name: "Text codec tests"
+        condition: project.withTextCodec
+        files: [
+            "tst_qstringiterator.cpp",
+            "tst_qstringiterator.h",
+            "tst_utf8.cpp",
+            "tst_utf8.h",
+            "tst_qtextcodec.cpp",
+            "tst_qtextcodec.h",
+        ]
+    }
+
+    Group {
+        name: "Codecs test data"
+        condition: project.withTextCodec
+        prefix: "codecs/"
+        files: ["*.txt"]
+        fileTags: []
     }
 }

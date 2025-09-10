@@ -9,15 +9,34 @@ Project {
     property bool enableConan: false
     property bool conanWithXerces: false
     property bool conanWithCrashReporting: false
+    property bool conanWithICU: false
+    property bool conanWithICONV: false
     property string minimumMacosVersion: undefined
     property string minimumQtVersion: "5.15"
     property stringList conanProfiles: []
     property bool enableSigning: true
 
+    // Enable the QTextCodec API and support for character encodings.
+    // Required for any text codec functionality.
+    property bool withTextCodec: true
+    // Include minimal, common built-in codecs (UTF-8, UTF-16, Latin-1, local 8-bit encodings).
+    // Lightweight, always sufficient for standard text conversions.
+    property bool withBasicCodecs: true
+    // Include extended or “large” built-in codecs (rare legacy encodings, extra code pages).
+    // Optional; increases binary size.
+    property bool withBigCodecs: false
+    // Use ICU library for Unicode conversion and extended codec support.
+    // Provides widest coverage; optional if you have ICU.
+    property bool withICUCodecs: false
+    // Use system iconv library for encoding conversions.
+    // Alternative to ICU; optional depending on platform.
+    property bool withICONVCodecs: false
+
+
     property string conanInstallPath: conanProbe.generatedFilesPath
     ConanfileProbe {
         id: conanProbe
-        condition: enableConan && (conanWithXerces || conanWithCrashReporting)
+        condition: enableConan && (conanWithXerces || conanWithCrashReporting || conanWithICU || conanWithICONV)
         conanfilePath: project.sourceDirectory + "/conanfile.py"
         verbose: true
         generators: []
@@ -28,6 +47,12 @@ Project {
 
             if (conanWithCrashReporting)
                 o['&:with_crash_reporting'] = "True";
+
+            if (conanWithICU)
+                o['&:with_icu'] = "True";
+            else if (conanWithICONV)
+                o['&:with_iconv'] = "True";
+
             return o;
         }
         additionalArguments: {

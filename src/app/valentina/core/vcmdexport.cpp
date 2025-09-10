@@ -38,7 +38,7 @@
 #include <QDebug>
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-#include "../vmisc/vtextcodec.h"
+#include "../vmisc/codecs/qtextcodec.h"
 #else
 #include <QTextCodec>
 #endif
@@ -611,42 +611,48 @@ void VCommandLine::InitCommandLineOptions()
          translate("VCommandLine", "The base filename of exported layout files. Use it to enable console export mode."),
          translate("VCommandLine", "The base filename of layout files")},
         {{SINGLE_OPTION_DESTINATION, LONG_OPTION_DESTINATION},
-         translate("VCommandLine", "The path to output destination folder. By default the directory at which the "
-                                   "application was started."),
+         translate("VCommandLine",
+                   "The path to output destination folder. By default the directory at which the "
+                   "application was started."),
          translate("VCommandLine", "The destination folder")},
         {{SINGLE_OPTION_MEASUREFILE, LONG_OPTION_MEASUREFILE},
          translate("VCommandLine", "Path to custom measure file (export mode)."),
          translate("VCommandLine", "The measure file")},
         {{SINGLE_OPTION_NESTING_TIME, LONG_OPTION_NESTING_TIME},
-         translate("VCommandLine", "<Time> in minutes given for the algorithm to find best layout. Time must be in "
-                                   "range from 1 minute to 60 minutes. Default value 1 minute."),
+         translate("VCommandLine",
+                   "<Time> in minutes given for the algorithm to find best layout. Time must be in "
+                   "range from 1 minute to 60 minutes. Default value 1 minute."),
          translate("VCommandLine", "Time")},
         {LONG_OPTION_EFFICIENCY_COEFFICIENT,
-         translate("VCommandLine", "Set layout efficiency <coefficient>. Layout efficiency coefficient is the ratio of "
-                                   "the area occupied by the pieces to the bounding rect of all pieces. If nesting "
-                                   "reaches required level "
-                                   "the "
-                                   "process stops. If value is 0 no check will be made. Coefficient must be in range "
-                                   "from 0 to 100. Default "
-                                   "value 0."),
+         translate("VCommandLine",
+                   "Set layout efficiency <coefficient>. Layout efficiency coefficient is the ratio of "
+                   "the area occupied by the pieces to the bounding rect of all pieces. If nesting "
+                   "reaches required level "
+                   "the "
+                   "process stops. If value is 0 no check will be made. Coefficient must be in range "
+                   "from 0 to 100. Default "
+                   "value 0."),
          translate("VCommandLine", "Coefficient")},
         {{SINGLE_OPTION_EXP2FORMAT, LONG_OPTION_EXP2FORMAT},
-         translate("VCommandLine", "Number corresponding to output format (default = 0, export mode):") +
-             DialogSaveLayout::MakeHelpFormatList(),
+         translate("VCommandLine", "Number corresponding to output format (default = 0, export mode):")
+             + DialogSaveLayout::MakeHelpFormatList(),
          translate("VCommandLine", "Format number"),
          QChar('0')},
         {LONG_OPTION_BINARYDXF, translate("VCommandLine", "Export dxf in binary form.")},
         {LONG_OPTION_DXF_APPAREL_COMP,
          translate("VCommandLine",
-                   "Number corresponding to compatibility mode for DXF AAMA/ASTM format (default = 0, export mode):") +
-             DialogSaveLayout::MakeHelpDxfApparelCompatibilityList(),
-         translate("VCommandLine", "Mode number"), QChar('0')},
+                   "Number corresponding to compatibility mode for DXF AAMA/ASTM format (default = 0, export mode):")
+             + DialogSaveLayout::MakeHelpDxfApparelCompatibilityList(),
+         translate("VCommandLine", "Mode number"),
+         QChar('0')},
         {LONG_OPTION_NOGRAINLINE, translate("VCommandLine", "Show/hide grainline when export layout.")},
         {LONG_OPTION_TEXT2PATHS, translate("VCommandLine", "Export text as paths.")},
         {LONG_OPTION_EXPORTONLYDETAILS,
-         translate("VCommandLine", "Export only details. Export details as they positioned in the details mode. Any "
-                                   "layout related options will be ignored.")},
-        {LONG_OPTION_EXPORTSUCHDETAILS, translate("VCommandLine", "Export only details that match a piece name regex."),
+         translate("VCommandLine",
+                   "Export only details. Export details as they positioned in the details mode. Any "
+                   "layout related options will be ignored.")},
+        {LONG_OPTION_EXPORTSUCHDETAILS,
+         translate("VCommandLine", "Export only details that match a piece name regex."),
          translate("VCommandLine", "The name regex")},
 
         {LONG_OPTION_DIMENSION_A,
@@ -662,22 +668,24 @@ void VCommandLine::InitCommandLineOptions()
          translate("VCommandLine", "The dimension C base")},
 
         {LONG_OPTION_USER_MATERIAL,
-         translate("VCommandLine", "Use this option to override user material defined in pattern. The value must be in "
-                                   "form <number>@<user matrial name>. The number should be in range from 1 to %1. For "
-                                   "example, "
-                                   "1@Fabric2. The "
-                                   "key can be used multiple times. Has no effect in GUI mode.")
+         translate("VCommandLine",
+                   "Use this option to override user material defined in pattern. The value must be in "
+                   "form <number>@<user matrial name>. The number should be in range from 1 to %1. For "
+                   "example, "
+                   "1@Fabric2. The "
+                   "key can be used multiple times. Has no effect in GUI mode.")
              .arg(userMaterialPlaceholdersQuantity),
          translate("VCommandLine", "User material")},
         //==============================================================================================================
         {{SINGLE_OPTION_PAGETEMPLATE, LONG_OPTION_PAGETEMPLATE},
-         translate("VCommandLine", "Number corresponding to layout page template (default = 0, export mode):") +
-             DialogLayoutSettings::MakeHelpTemplateList(),
+         translate("VCommandLine", "Number corresponding to layout page template (default = 0, export mode):")
+             + DialogLayoutSettings::MakeHelpTemplateList(),
          translate("VCommandLine", "Template number"),
          QChar('0')},
         {LONG_OPTION_LANDSCAPE_ORIENTATION,
-         translate("VCommandLine", "Switch page template orientation to landscape (export mode). This option has "
-                                   "effect only for one of predefined page templates.")},
+         translate("VCommandLine",
+                   "Switch page template orientation to landscape (export mode). This option has "
+                   "effect only for one of predefined page templates.")},
         {{SINGLE_OPTION_PAGEW, LONG_OPTION_PAGEW},
          translate("VCommandLine", "Page width in current units like 12.0 (cannot be used with \"%1\", export mode).")
              .arg(LONG_OPTION_PAGETEMPLATE),
@@ -691,23 +699,28 @@ void VCommandLine::InitCommandLineOptions()
              .arg(VDomDocument::UnitsHelpString()),
          translate("VCommandLine", "The measure unit")},
         {{SINGLE_OPTION_IGNORE_MARGINS, LONG_OPTION_IGNORE_MARGINS},
-         translate("VCommandLine", "Ignore printer margins (export mode). Use if need full paper space. In case of "
-                                   "later printing you must account for the margins themselves.")},
+         translate("VCommandLine",
+                   "Ignore printer margins (export mode). Use if need full paper space. In case of "
+                   "later printing you must account for the margins themselves.")},
         {{SINGLE_OPTION_LEFT_MARGIN, LONG_OPTION_LEFT_MARGIN},
-         translate("VCommandLine", "Page left margin in current units like 3.0 (export mode). If not set will be used "
-                                   "value from default printer. Or 0 if none printers was found."),
+         translate("VCommandLine",
+                   "Page left margin in current units like 3.0 (export mode). If not set will be used "
+                   "value from default printer. Or 0 if none printers was found."),
          translate("VCommandLine", "The left margin")},
         {{SINGLE_OPTION_RIGHT_MARGIN, LONG_OPTION_RIGHT_MARGIN},
-         translate("VCommandLine", "Page right margin in current units like 3.0 (export mode). If not set will be used "
-                                   "value from default printer. Or 0 if none printers was found."),
+         translate("VCommandLine",
+                   "Page right margin in current units like 3.0 (export mode). If not set will be used "
+                   "value from default printer. Or 0 if none printers was found."),
          translate("VCommandLine", "The right margin")},
         {{SINGLE_OPTION_TOP_MARGIN, LONG_OPTION_TOP_MARGIN},
-         translate("VCommandLine", "Page top margin in current units like 3.0 (export mode). If not set will be used "
-                                   "value from default printer. Or 0 if none printers was found."),
+         translate("VCommandLine",
+                   "Page top margin in current units like 3.0 (export mode). If not set will be used "
+                   "value from default printer. Or 0 if none printers was found."),
          translate("VCommandLine", "The top margin")},
         {{SINGLE_OPTION_BOTTOM_MARGIN, LONG_OPTION_BOTTOM_MARGIN},
-         translate("VCommandLine", "Page bottom margin in current units like 3.0 (export mode). If not set will be "
-                                   "used value from default printer. Or 0 if none printers was found."),
+         translate("VCommandLine",
+                   "Page bottom margin in current units like 3.0 (export mode). If not set will be "
+                   "used value from default printer. Or 0 if none printers was found."),
          translate("VCommandLine", "The bottom margin")},
         {LONG_OPTION_EXPXSCALE,
          translate("VCommandLine", "Set horizontal scale factor from 0.01 to 3.0 (default = 1.0, export mode)."),
@@ -725,23 +738,26 @@ void VCommandLine::InitCommandLineOptions()
          translate("VCommandLine", "Auto crop unused length (export mode).")},
         {LONG_OPTION_CROP_WIDTH, translate("VCommandLine", "Auto crop unused width (export mode).")},
         {{SINGLE_OPTION_UNITE, LONG_OPTION_UNITE},
-         translate("VCommandLine", "Unite pages if possible (export mode). Maximum value limited by QImage that "
-                                   "supports only a maximum of 32768x32768 px images.")},
+         translate("VCommandLine",
+                   "Unite pages if possible (export mode). Maximum value limited by QImage that "
+                   "supports only a maximum of 32768x32768 px images.")},
         {LONG_OPTION_PREFER_ONE_SHEET_SOLUTION,
          translate("VCommandLine", "Prefer one sheet layout solution (export mode).")},
         {LONG_OPTION_BOUNDARY_TOGETHER_WITH_NOTCHES,
          translate("VCommandLine", "Export boundary together with notches (export mode).")},
         //==============================================================================================================
         {{SINGLE_OPTION_SAVELENGTH, LONG_OPTION_SAVELENGTH},
-         translate("VCommandLine", "Save length of the sheet if set (export mode). The option tells the program to use "
-                                   "as much as possible width of sheet. Quality of a layout can be worse when this "
-                                   "option was used.")},
+         translate("VCommandLine",
+                   "Save length of the sheet if set (export mode). The option tells the program to use "
+                   "as much as possible width of sheet. Quality of a layout can be worse when this "
+                   "option was used.")},
         {{SINGLE_OPTION_SHIFTUNITS, LONG_OPTION_SHIFTUNITS},
          translate("VCommandLine", "Layout units (as paper's one except px, export mode). Default units cm."),
          translate("VCommandLine", "The unit")},
         {{SINGLE_OPTION_GAPWIDTH, LONG_OPTION_GAPWIDTH},
-         translate("VCommandLine", "The layout gap width x2, measured in layout units (export mode). Set distance "
-                                   "between details and a detail and a sheet."),
+         translate("VCommandLine",
+                   "The layout gap width x2, measured in layout units (export mode). Set distance "
+                   "between details and a detail and a sheet."),
          translate("VCommandLine", "The gap width")},
         {{SINGLE_OPTION_GROUPPING, LONG_OPTION_GROUPPING},
          translate("VCommandLine", "Sets layout groupping cases (export mode): %1.")
@@ -749,35 +765,40 @@ void VCommandLine::InitCommandLineOptions()
          translate("VCommandLine", "Grouping type"),
          QChar('2')},
         {{SINGLE_OPTION_TEST, LONG_OPTION_TEST},
-         translate("VCommandLine", "Run the program in a test mode. The program in this mode loads a single pattern "
-                                   "file and silently quit without showing the main window. The key have priority "
-                                   "before key '%1'.")
+         translate("VCommandLine",
+                   "Run the program in a test mode. The program in this mode loads a single pattern "
+                   "file and silently quit without showing the main window. The key have priority "
+                   "before key '%1'.")
              .arg(LONG_OPTION_BASENAME)},
         {LONG_OPTION_PENDANTIC,
          translate("VCommandLine",
                    "Make all parsing warnings into errors. Have effect only in console mode. Use to "
                    "force Valentina to immediately terminate if a pattern contains a parsing warning.")},
         {LONG_OPTION_NO_HDPI_SCALING,
-         translate("VCommandLine", "Disable high dpi scaling. Call this option if has problem with scaling (by default "
-                                   "scaling enabled). Alternatively you can use the %1 environment variable.")
+         translate("VCommandLine",
+                   "Disable high dpi scaling. Call this option if has problem with scaling (by default "
+                   "scaling enabled). Alternatively you can use the %1 environment variable.")
              .arg(QStringLiteral("QT_AUTO_SCREEN_SCALE_FACTOR=0"))},
         //==============================================================================================================
         {LONG_OPTION_CSVWITHHEADER, translate("VCommandLine", "Export to csv with header. By default disabled.")},
         {LONG_OPTION_CSVCODEC,
-         translate("VCommandLine", "Specify codec that will be used to save data. List of supported codecs provided by "
-                                   "Qt. Default value depend from system. On Windows, the codec will be based on a "
-                                   "system locale. On Unix "
-                                   "systems, the codec will might fall back to using the iconv library if no builtin "
-                                   "codec for the locale "
-                                   "can be "
-                                   "found. Valid values for this installation:") +
-             DialogExportToCSV::MakeHelpCodecsList(),
-         translate("VCommandLine", "Codec name"), QString(VTextCodec::codecForLocale()->name())},
+         translate("VCommandLine",
+                   "Specify codec that will be used to save data. List of supported codecs provided by "
+                   "Qt. Default value depend from system. On Windows, the codec will be based on a "
+                   "system locale. On Unix "
+                   "systems, the codec will might fall back to using the iconv library if no builtin "
+                   "codec for the locale "
+                   "can be "
+                   "found. Valid values for this installation:")
+             + DialogExportToCSV::MakeHelpCodecsList(),
+         translate("VCommandLine", "Codec name"),
+         QString(QTextCodec::codecForLocale()->name())},
         {LONG_OPTION_CSVSEPARATOR,
          translate("VCommandLine", "Specify csv separator character. Default value is '%1'. Valid characters:")
-                 .arg(VCommonSettings::GetDefCSVSeparator()) +
-             DialogExportToCSV::MakeHelpSeparatorList(),
-         translate("VCommandLine", "Separator character"), QString(VCommonSettings::GetDefCSVSeparator())},
+                 .arg(VCommonSettings::GetDefCSVSeparator())
+             + DialogExportToCSV::MakeHelpSeparatorList(),
+         translate("VCommandLine", "Separator character"),
+         QString(VCommonSettings::GetDefCSVSeparator())},
         {LONG_OPTION_CSVEXPORTFM,
          translate("VCommandLine",
                    "Calling this command enable exporting final measurements. Specify path to csv file "
@@ -790,29 +811,36 @@ void VCommandLine::InitCommandLineOptions()
          translate("VCommandLine", "Path to csv file")},
         //==============================================================================================================
         {LONG_OPTION_TILED_PDF_PAGE_TEMPLATE,
-         translate("VCommandLine", "Number corresponding to tiled pdf page template (default = 0, export mode with "
-                                   "tiled pdf format):") +
-             DialogLayoutSettings::MakeHelpTiledPdfTemplateList(),
-         translate("VCommandLine", "Template number"), QChar('0')},
+         translate("VCommandLine",
+                   "Number corresponding to tiled pdf page template (default = 0, export mode with "
+                   "tiled pdf format):")
+             + DialogLayoutSettings::MakeHelpTiledPdfTemplateList(),
+         translate("VCommandLine", "Template number"),
+         QChar('0')},
         {LONG_OPTION_TILED_PDF_LEFT_MARGIN,
-         translate("VCommandLine", "Tiled page left margin in current units like 3.0 (export mode). If not set will be "
-                                   "used default value 1 cm."),
+         translate("VCommandLine",
+                   "Tiled page left margin in current units like 3.0 (export mode). If not set will be "
+                   "used default value 1 cm."),
          translate("VCommandLine", "The left margin")},
         {LONG_OPTION_TILED_PDF_RIGHT_MARGIN,
-         translate("VCommandLine", "Tiled page right margin in current units like 3.0 (export mode). If not set will "
-                                   "be used default value 1 cm."),
+         translate("VCommandLine",
+                   "Tiled page right margin in current units like 3.0 (export mode). If not set will "
+                   "be used default value 1 cm."),
          translate("VCommandLine", "The right margin")},
         {LONG_OPTION_TILED_PDF_TOP_MARGIN,
-         translate("VCommandLine", "Tiled page top margin in current units like 3.0 (export mode). If not set will be "
-                                   "used value default value 1 cm."),
+         translate("VCommandLine",
+                   "Tiled page top margin in current units like 3.0 (export mode). If not set will be "
+                   "used value default value 1 cm."),
          translate("VCommandLine", "The top margin")},
         {LONG_OPTION_TILED_PDF_BOTTOM_MARGIN,
-         translate("VCommandLine", "Tiled page bottom margin in current units like 3.0 (export mode). If not set will "
-                                   "be used value default value 1 cm."),
+         translate("VCommandLine",
+                   "Tiled page bottom margin in current units like 3.0 (export mode). If not set will "
+                   "be used value default value 1 cm."),
          translate("VCommandLine", "The bottom margin")},
         {LONG_OPTION_TILED_PDF_LANDSCAPE,
-         translate("VCommandLine", "Set tiled page orienatation to landscape (export mode). Default value if not set "
-                                   "portrait.")},
+         translate("VCommandLine",
+                   "Set tiled page orienatation to landscape (export mode). Default value if not set "
+                   "portrait.")},
     });
 }
 

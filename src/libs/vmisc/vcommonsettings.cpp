@@ -43,7 +43,7 @@
 #include <QtDebug>
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-#include "vtextcodec.h"
+#include "codecs/qtextcodec.h"
 #else
 #include <QTextCodec>
 #endif
@@ -1040,7 +1040,7 @@ auto VCommonSettings::GetCSVCodec() const -> int
 //---------------------------------------------------------------------------------------------------------------------
 auto VCommonSettings::GetDefCSVCodec() -> int
 {
-    return VTextCodec::codecForLocale()->mibEnum();
+    return QTextCodec::codecForLocale()->mibEnum();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
