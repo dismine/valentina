@@ -354,6 +354,14 @@
     </message>
 </context>
 <context>
+    <name>DRW_TextCodec</name>
+    <message>
+        <location filename="../../src/libs/vdxf/libdxfrw/intern/drw_textcodec.cpp" line="106"/>
+        <source>No available codec for code page &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DelGroup</name>
     <message>
         <location filename="../../src/libs/vtools/undocommands/undogroup.cpp" line="517"/>
@@ -4586,67 +4594,67 @@
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.ui" line="136"/>
-        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="516"/>
+        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="515"/>
         <source>Ready</source>
         <translation>Fertig</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="164"/>
+        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="163"/>
         <source>Name</source>
         <comment>measurement column</comment>
         <translation>Name</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="166"/>
+        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="165"/>
         <source>Group</source>
         <comment>measurement column</comment>
         <translation>Gruppe</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="168"/>
+        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="167"/>
         <source>Full name</source>
         <comment>measurement column</comment>
         <translation>Vollständiger Name</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="170"/>
+        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="169"/>
         <source>Formula</source>
         <comment>measurement column</comment>
         <translation>Formel</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="172"/>
+        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="171"/>
         <source>Description</source>
         <comment>measurement column</comment>
         <translation>Beschreibung</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="286"/>
+        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="285"/>
         <source>Skip</source>
         <translation>Überspringen</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="446"/>
+        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="445"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="485"/>
+        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="484"/>
         <source>File path is empty</source>
         <translation>Der Dateipfad ist leer</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="495"/>
+        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="494"/>
         <source>Not enough columns</source>
         <translation>Zu wenig Spalten</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="503"/>
+        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="502"/>
         <source>Not enough data to import</source>
         <translation>Nicht genug Daten zum Importieren</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="510"/>
+        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="509"/>
         <source>Please, select unique number for each column</source>
         <translation>Bitte wählen Sie für jede Spalte eine eindeutige Nummer</translation>
     </message>
@@ -5597,79 +5605,79 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.ui" line="151"/>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="858"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="857"/>
         <source>Ready</source>
         <translation>Fertig</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="243"/>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="261"/>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="727"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="242"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="260"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="726"/>
         <source>Name</source>
         <comment>measurement column</comment>
         <translation>Name</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="245"/>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="733"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="244"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="732"/>
         <source>Value</source>
         <comment>measurement column</comment>
         <translation>Wert</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="247"/>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="298"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="246"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="297"/>
         <source>Full name</source>
         <comment>measurement column</comment>
         <translation>Vollständiger Name</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="249"/>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="300"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="248"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="299"/>
         <source>Description</source>
         <comment>measurement column</comment>
         <translation>Beschreibung</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="263"/>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="738"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="262"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="737"/>
         <source>Base value</source>
         <comment>measurement column</comment>
         <translation>Basiswert</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="268"/>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="279"/>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="290"/>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="746"/>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="754"/>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="762"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="267"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="278"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="289"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="745"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="753"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="761"/>
         <source>Shift</source>
         <comment>measurement column</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="501"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="500"/>
         <source>Skip</source>
         <translation>Überspringen</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="828"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="827"/>
         <source>File path is empty</source>
         <translation>Der Dateipfad ist leer</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="837"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="836"/>
         <source>Not enough columns</source>
         <translation>Zu wenig Spalten</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="845"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="844"/>
         <source>Not enough data to import</source>
         <translation>Nicht genug Daten zum Importieren</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="852"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="851"/>
         <source>Please, select unique number for each column</source>
         <translation>Bitte wählen Sie für jede Spalte eine eindeutige Nummer</translation>
     </message>
@@ -6255,34 +6263,34 @@ Einstellungen trotzdem anwenden?</translation>
         <translation>Kein Bild</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="386"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="384"/>
         <source>Delete image</source>
         <translation>Bild löschen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="387"/>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="395"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="385"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="393"/>
         <source>Change image</source>
         <translation>Bild ändern</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="388"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="386"/>
         <source>Save image to file</source>
         <translation>Bild als Datei speichern</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="389"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="387"/>
         <source>Show image</source>
         <translation>Bild anzeigen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="426"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="424"/>
         <source>Image for pattern</source>
         <translation>Bild für Schnittmuster</translation>
     </message>
     <message>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="540"/>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="542"/>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="544"/>
         <source>Label template</source>
         <translation>Bezeichnungsvorlage</translation>
     </message>
@@ -6299,7 +6307,7 @@ Einstellungen trotzdem anwenden?</translation>
         <translation type="vanished">Datei speichern</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="469"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="467"/>
         <source>untitled</source>
         <translation>unbenannt</translation>
     </message>
@@ -6398,23 +6406,23 @@ Einstellungen trotzdem anwenden?</translation>
         <translation>Passmarken Länge:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="439"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="437"/>
         <source>Invalid image. Error: %1</source>
         <translation>Ungültiges Bild. Fehler: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="462"/>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="493"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="460"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="491"/>
         <source>Unable to save image. Error: %1</source>
         <translation>Bild kann nicht gespeichert werden. Fehler: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="477"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="475"/>
         <source>Save Image</source>
         <translation>Bild speichern</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="505"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="503"/>
         <source>Unable to show image. Error: %1</source>
         <translation>Das Bild kann nicht angezeigt werden. Fehler: %1</translation>
     </message>
@@ -8428,7 +8436,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="377"/>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="925"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="926"/>
         <source>By standard</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8443,8 +8451,8 @@ Einstellungen trotzdem anwenden?</translation>
         <translation>Der Ordner enthält bereits eine Datei namens %1. Datei überschreiben?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="533"/>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="537"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="534"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="538"/>
         <source>Example:</source>
         <translation>Beispiel:</translation>
     </message>
@@ -8633,13 +8641,13 @@ Einstellungen trotzdem anwenden?</translation>
         <translation>Der Ordner enthält bereits eine Datei namens %1. Datei überschreiben?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="582"/>
-        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="586"/>
+        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="583"/>
+        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="587"/>
         <source>Example:</source>
         <translation>Beispiel:</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="696"/>
+        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="697"/>
         <source>By standard</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14610,16 +14618,16 @@ Diese Option wird nach einem Neustart aktiv.</translation>
         <translation type="vanished">Der Pfad zu den Maßen ist schon absolut.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/main.cpp" line="61"/>
-        <location filename="../../src/app/tape/main.cpp" line="62"/>
-        <location filename="../../src/app/valentina/main.cpp" line="66"/>
+        <location filename="../../src/app/puzzle/main.cpp" line="68"/>
+        <location filename="../../src/app/tape/main.cpp" line="69"/>
+        <location filename="../../src/app/valentina/main.cpp" line="73"/>
         <source>Executable &apos;%1&apos; requires Qt %2, found Qt %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/main.cpp" line="66"/>
-        <location filename="../../src/app/tape/main.cpp" line="67"/>
-        <location filename="../../src/app/valentina/main.cpp" line="71"/>
+        <location filename="../../src/app/puzzle/main.cpp" line="73"/>
+        <location filename="../../src/app/tape/main.cpp" line="74"/>
+        <location filename="../../src/app/valentina/main.cpp" line="78"/>
         <source>Incompatible Qt Library Error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -15739,7 +15747,7 @@ Diese Option wird nach einem Neustart aktiv.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="109"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1952"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1955"/>
         <source>0 results</source>
         <translation>0 Ergebnisse</translation>
     </message>
@@ -15790,21 +15798,21 @@ Diese Option wird nach einem Neustart aktiv.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="320"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2710"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2713"/>
         <source>Name</source>
         <comment>measurement column</comment>
         <translation>Name</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="325"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2712"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2715"/>
         <source>Full name</source>
         <comment>measurement column</comment>
         <translation>Vollständiger Name</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="330"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2714"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2717"/>
         <source>Group</source>
         <comment>measurement column</comment>
         <translation>Gruppe</translation>
@@ -16076,7 +16084,7 @@ Diese Option wird nach einem Neustart aktiv.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="303"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1113"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1116"/>
         <source>untitled</source>
         <translation>unbenannt</translation>
     </message>
@@ -16137,162 +16145,162 @@ Diese Option wird nach einem Neustart aktiv.</translation>
         <translation>Ungültiges Bild. Fehler: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1036"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1039"/>
         <source>Measurement images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1102"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1139"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1105"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1142"/>
         <source>Unable to save image. Error: %1</source>
         <translation>Bild kann nicht gespeichert werden. Fehler: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1123"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1126"/>
         <source>Save Image</source>
         <translation>Bild speichern</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1187"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1190"/>
         <source>Unable to show image. Error: %1</source>
         <translation>Das Bild kann nicht angezeigt werden. Fehler: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1800"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1803"/>
         <source>About Qt</source>
         <translation>Über QT</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2040"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2043"/>
         <source>Empty</source>
         <translation>Leer</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2041"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2044"/>
         <source>File was not saved yet.</source>
         <translation>Die Datei wurde noch nicht gespeichert.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2092"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2095"/>
         <source>Unsaved changes</source>
         <translation>Ungespeicherte Änderungen</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2093"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2096"/>
         <source>Measurements have been modified. Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2101"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2104"/>
         <source>Save…</source>
         <translation>Speichern…</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2101"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2104"/>
         <source>Save</source>
         <translation>Speichern</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2106"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2109"/>
         <source>Don&apos;t Save</source>
         <translation>Nicht speichern</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2185"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2188"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation>Kann Einstellungen nicht aus fehlerhafter .INI Datei lesen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2206"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2209"/>
         <source>Cannot save settings. Access denied.</source>
         <translation>Kann Einstellungen nicht speichern. Zugriff verwehrt.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2235"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2238"/>
         <source>Empty</source>
         <comment>list</comment>
         <translation>Leer</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2308"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2311"/>
         <source>Unknown measurement</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2316"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2319"/>
         <source>&amp;New Window</source>
         <translation>&amp;Neues Fenster</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2459"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2646"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2462"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2649"/>
         <source>Unnamed image %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2501"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2504"/>
         <source>Open file</source>
         <translation>Datei öffnen</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2620"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2623"/>
         <source>Length units</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2621"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2624"/>
         <source>Degrees</source>
         <translation>Grad</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2638"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2641"/>
         <source>None</source>
         <translation>Keine</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2683"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2686"/>
         <source>Measurement name is empty.</source>
         <translation>Name der Messung ist leer.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2688"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2691"/>
         <source>Imported file must not contain the same name twice.</source>
         <translation>Importierte Datei darf die selbe Bezeichnung nicht zweimal enthalten.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2693"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2696"/>
         <source>Measurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
         <translation>Die Messung &apos;%1&apos; entspricht nicht dem Regex Muster.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2698"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2701"/>
         <source>Measurement &apos;%1&apos; already used in the file.</source>
         <translation>Maß &apos;%1&apos; wird bereits in der Datei verwendet.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2716"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2719"/>
         <source>Formula</source>
         <comment>measurement column</comment>
         <translation>Formel</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2718"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2721"/>
         <source>Description</source>
         <comment>measurement column</comment>
         <translation>Beschreibung</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2742"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2745"/>
         <source>Error in row %1. The measurement name is empty.</source>
         <translation>Fehler in Zeile %1. Name des Maßes.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2783"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2786"/>
         <source>Error in row %1. %2</source>
         <translation>Fehler in Zeile %1. %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2796"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2799"/>
         <source>Individual measurements require at least 2 columns.</source>
         <translation>Individuelle Maße erfordern mindestens 2 Spalten.</translation>
     </message>
@@ -16493,7 +16501,7 @@ Diese Option wird nach einem Neustart aktiv.</translation>
         <translation type="vanished">Individuelle Maße öffnen...</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3536"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3539"/>
         <source>Save</source>
         <translation>Speichern</translation>
     </message>
@@ -16552,24 +16560,24 @@ Diese Option wird nach einem Neustart aktiv.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1538"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1198"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1201"/>
         <source>Preferences</source>
         <translation>Einstellungen</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3883"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3886"/>
         <source>untitled %1</source>
         <translation>unbenannt %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1845"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1848"/>
         <source>This file already opened in another window.</source>
         <translation>Diese Datei ist bereits geöffnet.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="562"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1877"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4278"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1880"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4281"/>
         <source>File error.</source>
         <translation>Dateifehler.</translation>
     </message>
@@ -16597,12 +16605,12 @@ Diese Option wird nach einem Neustart aktiv.</translation>
         <translation>Speichern unter</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4303"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4306"/>
         <source>&amp;New Window</source>
         <translation>&amp;Neues Fenster</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1476"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1479"/>
         <source>Edit measurement</source>
         <translation>Maß bearbeiten</translation>
     </message>
@@ -16611,22 +16619,22 @@ Diese Option wird nach einem Neustart aktiv.</translation>
         <translation type="vanished">M_%1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2351"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4021"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4044"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4060"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2354"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4024"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4047"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4063"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2351"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4021"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2354"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4024"/>
         <source>Empty field.</source>
         <translation>Leeres Eingabefeld.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4060"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4061"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4063"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4064"/>
         <source>Parser error: %1</source>
         <translation>Auswertungsfehler: %1</translation>
     </message>
@@ -16647,14 +16655,14 @@ Diese Option wird nach einem Neustart aktiv.</translation>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="664"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="772"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="987"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2671"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3076"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2674"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3079"/>
         <source>Individual measurements</source>
         <translation>Individuelle Maße</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1610"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3883"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1613"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3886"/>
         <source>untitled</source>
         <translation>ohne Titel</translation>
     </message>
@@ -16663,7 +16671,7 @@ Diese Option wird nach einem Neustart aktiv.</translation>
         <translation type="vanished">&lt;leer&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3527"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3530"/>
         <source>Unsaved changes</source>
         <translation>Ungespeicherte Änderungen</translation>
     </message>
@@ -16673,34 +16681,34 @@ Do you want to save your changes?</source>
         <translation type="vanished">Maße wurde geändert. Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4022"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4025"/>
         <source>Empty field</source>
         <translation>Leeres Eingabefeld</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4055"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4058"/>
         <source>Value</source>
         <translation>Wert</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4069"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4072"/>
         <source>Open file</source>
         <translation>Datei öffnen</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1549"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1836"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1839"/>
         <source>Import from a pattern</source>
         <translation>Importieren von einem Schnittteil</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1832"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1835"/>
         <source>Pattern files (*.val)</source>
         <translation>Schnittmuster-Dateien (*.val)</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="796"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5139"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5142"/>
         <source>Pattern unit:</source>
         <translation>Schnittteil-Einheit:</translation>
     </message>
@@ -16752,7 +16760,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="477"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4236"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4239"/>
         <source>File has unknown format.</source>
         <translation>Unbekanntes Dateiformat.</translation>
     </message>
@@ -16762,20 +16770,20 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="439"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4198"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4201"/>
         <source>File &apos;%1&apos; doesn&apos;t exist!</source>
         <translation>Datei &apos;%1&apos; existiert nicht!</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2286"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2289"/>
         <source>The name of known measurement forbidden to change.</source>
         <translation>Der Name eines bekannten Maßes kann nicht geändert werden.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1470"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2252"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2364"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2574"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1473"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2255"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2367"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2577"/>
         <source>Can&apos;t find measurement &apos;%1&apos;.</source>
         <translation>Maß &apos;%1&apos; kann nicht gefunden werden.</translation>
     </message>
@@ -16792,7 +16800,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Die Längenzunahme eines bekannten Maßes kann nicht geändert werden. </translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2593"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2596"/>
         <source>The full name of known measurement forbidden to change.</source>
         <translation>Der vollständige Name des bekannten Maßes kann nicht geändert werden.</translation>
     </message>
@@ -16821,19 +16829,19 @@ Do you want to save your changes?</source>
         <translation>Maß löschen</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5215"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5218"/>
         <source>unknown</source>
         <comment>gender</comment>
         <translation>unbekannt</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5216"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5219"/>
         <source>male</source>
         <comment>gender</comment>
         <translation>männlich</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5217"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5220"/>
         <source>female</source>
         <comment>gender</comment>
         <translation>weiblich</translation>
@@ -16880,12 +16888,12 @@ Do you want to save your changes?</source>
         <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Unbekanntes Maß&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2999"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3002"/>
         <source>About Qt</source>
         <translation>Über QT</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3476"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3479"/>
         <source>File was not saved yet.</source>
         <translation>Datei konnte nicht gespeichert werden.</translation>
     </message>
@@ -16926,7 +16934,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Speichern...</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3541"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3544"/>
         <source>Don&apos;t Save</source>
         <translation>Nicht speichern</translation>
     </message>
@@ -17009,12 +17017,12 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="957"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2717"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2720"/>
         <source>Could not save the file</source>
         <translation>Datei konnte nicht gespeichert werden</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3891"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3894"/>
         <source>read only</source>
         <translation>schreibgeschützt</translation>
     </message>
@@ -17023,17 +17031,17 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="664"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="763"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="992"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3026"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3029"/>
         <source>Multisize measurements</source>
         <translation>MultiMaß Maße</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4045"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4048"/>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
         <translation>Ungültiges Ergebnis. Wert ist unendlich oder keine Zahl (NaN). Bitte prüfen Sie Ihre Berechnungen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3475"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3478"/>
         <source>Empty</source>
         <translation>Leer</translation>
     </message>
@@ -17053,7 +17061,7 @@ Do you want to save your changes?</source>
         <translation>Erstellen aus Vorhandenem …</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3536"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3539"/>
         <source>Save…</source>
         <translation>Speichern…</translation>
     </message>
@@ -17065,22 +17073,22 @@ Do you want to save your changes?</source>
         <translation>Aus CSV importieren</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4436"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4439"/>
         <source>Individual measurements require at least 2 columns.</source>
         <translation>Individuelle Maße erfordern mindestens 2 Spalten.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4517"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4520"/>
         <source>Multisize measurements require at least 4 columns.</source>
         <translation>MultiMaß Maße erfordern mindestens 4 Spalten.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4388"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4391"/>
         <source>Imported file must not contain the same name twice.</source>
         <translation>Importierte Datei darf die selbe Bezeichnung nicht zweimal enthalten.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4161"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4164"/>
         <source>Cannot save settings. Access denied.</source>
         <translation>Kann Einstellungen nicht speichern. Zugriff verwehrt.</translation>
     </message>
@@ -17135,44 +17143,44 @@ Do you want to save your changes?</source>
         <translation>&amp;Neu</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4140"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4143"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation>Kann Einstellungen nicht aus fehlerhafter .INI Datei lesen.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="326"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4933"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4949"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4936"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4952"/>
         <source>Name</source>
         <comment>measurement column</comment>
         <translation>Name</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="331"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4935"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4954"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4938"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4957"/>
         <source>Full name</source>
         <comment>measurement column</comment>
         <translation>Vollständiger Name</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="336"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4937"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4959"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4940"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4962"/>
         <source>Calculated value</source>
         <comment>measurement column</comment>
         <translation>Berechneter Wert</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="341"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4939"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4942"/>
         <source>Formula</source>
         <comment>measurement column</comment>
         <translation>Formel</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="346"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4964"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4967"/>
         <source>Base value</source>
         <comment>measurement column</comment>
         <translation>Basiswert</translation>
@@ -17250,7 +17258,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1620"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2673"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2676"/>
         <source>Export to individual</source>
         <translation>Exportieren in Individuelle</translation>
     </message>
@@ -17335,123 +17343,123 @@ Do you want to save your changes?</source>
         <translation>Unzulässiger Basiswert für Dimension B</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1514"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1517"/>
         <source>Measurement image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1528"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1531"/>
         <source>Invalid image. Error: %1</source>
         <translation>Ungültiges Bild. Fehler: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1603"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1634"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1606"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1637"/>
         <source>Unable to save image. Error: %1</source>
         <translation>Bild kann nicht gespeichert werden. Fehler: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1618"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1621"/>
         <source>Save Image</source>
         <translation>Bild speichern</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1667"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1670"/>
         <source>Unable to show image. Error: %1</source>
         <translation>Das Bild kann nicht angezeigt werden. Fehler: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2672"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2675"/>
         <source>measurements.vit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2982"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2985"/>
         <source>Unknown known measurements: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3398"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3401"/>
         <source>Shift (%1):</source>
         <translation>Verschieben (%1)*:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3528"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3531"/>
         <source>Measurements have been modified. Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4830"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4833"/>
         <source>Unknown measurement</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4866"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4869"/>
         <source>None</source>
         <translation>Keine</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4875"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4878"/>
         <source>Invalid link</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4941"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4995"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4944"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4998"/>
         <source>Description</source>
         <comment>measurement column</comment>
         <translation>Beschreibung</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4975"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4984"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4990"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4978"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4987"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4993"/>
         <source>Shift</source>
         <comment>measurement column</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5383"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5386"/>
         <source>Empty</source>
         <comment>list</comment>
         <translation>Leer</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5462"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5472"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5482"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5465"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5475"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5485"/>
         <source>%1 shift</source>
         <translation>%1 Verschiebung</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4607"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4610"/>
         <source>Cannot convert base value to double in column 2.</source>
         <translation>In Spalte 2 kann der Basiswert nicht in einen Doppelwert umgewandelt werden.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4611"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4617"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4624"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4614"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4620"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4627"/>
         <source>Cannot convert shift value to double in column %1.</source>
         <translation>Verschiebungswert in Spalte %1 kann nicht in Doppelwert umgewandelt werden.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5186"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5189"/>
         <source>Millimeters</source>
         <translation>Millimeter</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5189"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5192"/>
         <source>Inches</source>
         <translation>Inch</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5192"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5195"/>
         <source>Centimeters</source>
         <translation>Zentimeter</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5201"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5204"/>
         <source>Degrees</source>
         <translation>Grad</translation>
     </message>
@@ -17477,7 +17485,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="115"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5300"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5303"/>
         <source>0 results</source>
         <translation>0 Ergebnisse</translation>
     </message>
@@ -17537,33 +17545,33 @@ Do you want to save your changes?</source>
         <translation>Benutzerdefinierter Name der Maßbezeichnungen</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4383"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4386"/>
         <source>Measurement name is empty.</source>
         <translation>Name der Messung ist leer.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4393"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4396"/>
         <source>Measurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
         <translation>Die Messung &apos;%1&apos; entspricht nicht dem Regex Muster.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4398"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4401"/>
         <source>Measurement &apos;%1&apos; already used in the file.</source>
         <translation>Maß &apos;%1&apos; wird bereits in der Datei verwendet.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4451"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4454"/>
         <source>Error in row %1. The measurement name is empty.</source>
         <translation>Fehler in Zeile %1. Name des Maßes.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4589"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4592"/>
         <source>The measurement name is empty.</source>
         <translation>Name des Maßes ist leer.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4484"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4540"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4487"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4543"/>
         <source>Error in row %1. %2</source>
         <translation>Fehler in Zeile %1. %2</translation>
     </message>
@@ -20288,12 +20296,12 @@ Do you want to save your changes?</source>
 <context>
     <name>VCommandLine</name>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="618"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="619"/>
         <source>Path to custom measure file (export mode).</source>
         <translation>Pfad zur individuellen Maßdatei (Exportmodus).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="619"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="620"/>
         <source>The measure file</source>
         <translation>Die Maßsatzdatei</translation>
     </message>
@@ -20302,7 +20310,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Anzahl entspricht Ausgabeformat (default = 0 , Export -Modus):</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="636"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="639"/>
         <source>Format number</source>
         <translation>Format Nummer</translation>
     </message>
@@ -20311,18 +20319,18 @@ Do you want to save your changes?</source>
         <translation type="vanished">Anzahl entsprechend Seitenvorlage (Standard = 0, Exportmodus):</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="676"/>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="796"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="683"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="818"/>
         <source>Template number</source>
         <translation>Vorlagennummer</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="684"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="692"/>
         <source>The page width</source>
         <translation>Die Seitenbreite</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="692"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="700"/>
         <source>The measure unit</source>
         <translation>Die Maßeinheit</translation>
     </message>
@@ -20335,7 +20343,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Winkel</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="725"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="738"/>
         <source>Auto crop unused length (export mode).</source>
         <translation>Automatisches Zuschneiden der ungenutzten Länge (Exportmodus).</translation>
     </message>
@@ -20352,7 +20360,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Layout -Einheiten (eines Papiers mit Ausnahme von px, Export-Modus).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="741"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="756"/>
         <source>The unit</source>
         <translation>Die Einheit</translation>
     </message>
@@ -20369,7 +20377,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Spaltbreite x2, gemessen in Layout-Einheiten. (Export-Modus).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="745"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="761"/>
         <source>The gap width</source>
         <translation>Die Spaltenbreite</translation>
     </message>
@@ -20378,7 +20386,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Layout-Gruppen festlegen (Export -Modus):</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="749"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="765"/>
         <source>Grouping type</source>
         <translation>Gruppentyp</translation>
     </message>
@@ -20387,7 +20395,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Seitenformat und explizite Größe/Einheiten der Seite können nicht zusammen verwendet werden.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="892"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="920"/>
         <source>Page height, width, units must be used all 3 at once.</source>
         <translation>Höhe, Breite und Einheiten der Seite müssen alle 3 auf einmal benutzt werden.</translation>
     </message>
@@ -20441,7 +20449,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Der Pfad zum Zielordner</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="616"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="617"/>
         <source>The destination folder</source>
         <translation>Der Zielordner</translation>
     </message>
@@ -20462,12 +20470,12 @@ Do you want to save your changes?</source>
         <translation type="vanished">Die Basishöhe</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="682"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="690"/>
         <source>Page width in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
         <translation>Seitenbreite in der derzeitigen Einheit wie 12.0 (kann nicht mit &quot;%1&quot; benutzt werden, Exportmodus).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="686"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="694"/>
         <source>Page height in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
         <translation>Seitenhöhe in der derzeitigen Einheit wie 12.0 (kann nicht mit &quot;%1&quot; benutzt werden, Exportmodus).</translation>
     </message>
@@ -20498,22 +20506,22 @@ Do you want to save your changes?</source>
         <translation type="vanished">Ignorieren der Seitenränder zum Druck (Export-Modus). Setzen Sie alle Seitenränder auf 0.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="697"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="706"/>
         <source>Page left margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
         <translation>Linker Seitenrand in der derzeitigen Größe wie 3.0 (Exportmodus). Wenn kein Wert eingegeben wird, wird die Einstellung des Standarddruckers verwendet. Oder 0, falls kein Drucker gefunden werden kann.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="701"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="711"/>
         <source>Page right margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
         <translation>Rechter Seitenrand in der derzeitigen Größe wie 3.0 (Exportmodus). Wenn kein Wert eingegeben wird, wird die Einstellung des Standarddruckers verwendet. Oder 0, falls kein Drucker gefunden werden kann.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="705"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="716"/>
         <source>Page top margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
         <translation>Oberer Seitenrand in der derzeitigen Größe wie 3.0 (Exportmodus). Wenn kein Wert eingegeben wird, wird die Einstellung des Standarddruckers verwendet. Oder 0, falls kein Drucker gefunden werden kann.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="709"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="721"/>
         <source>Page bottom margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
         <translation>Unterer Seitenrand in der derzeitigen Größe wie 3.0 (Exportmodus). Wenn kein Wert eingegeben wird, wird die Einstellung des Standarddruckers verwendet. Oder 0, falls kein Drucker gefunden werden kann.</translation>
     </message>
@@ -20522,27 +20530,27 @@ Do you want to save your changes?</source>
         <translation type="vanished">Die Verschiebungslänge muss zusammen mit Verschiebungseinheiten genutzt werden.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="905"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="933"/>
         <source>Gap width must be used together with shift units.</source>
         <translation>Die Spaltenbreite muss zusammen mit Verschiebungseinheiten genutzt werden.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="928"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="956"/>
         <source>Left margin must be used together with page units.</source>
         <translation>Der linke Rand muss zusammen mit Seiteneinheiten genutzt werden.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="930"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="958"/>
         <source>Right margin must be used together with page units.</source>
         <translation>Der rechte Rand muss zusammen mit Seiteneinheiten genutzt werden.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="932"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="960"/>
         <source>Top margin must be used together with page units.</source>
         <translation>Der obere Rand muss zusammen mit Seiteneinheiten genutzt werden.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="934"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="962"/>
         <source>Bottom margin must be used together with page units.</source>
         <translation>Der untere Rand muss zusammen mit Seiteneinheiten genutzt werden.</translation>
     </message>
@@ -20580,12 +20588,12 @@ Do you want to save your changes?</source>
         <translation type="vanished">Drehung in Grad (um einen vordefinierten Winkel, Exportmodus). Standardwert ist 180. 0 bedeutet keine Drehung. Gültige Werte: %1. Jeder Wert gibt an, wie oft Details gedreht werden sollen. Zum Beispiel bedeutet 180, dass das Detail zweimal um 180 Grad gedreht wird (360/180=2).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="728"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="741"/>
         <source>Unite pages if possible (export mode). Maximum value limited by QImage that supports only a maximum of 32768x32768 px images.</source>
         <translation>Seiten verbinden, falls möglich (Exportmodus). Maximaler Wert wird durch QImage limitiert, das nur Bilder mit bis zu 32768 x 32768 Pixeln unterstützt.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="736"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="750"/>
         <source>Save length of the sheet if set (export mode). The option tells the program to use as much as possible width of sheet. Quality of a layout can be worse when this option was used.</source>
         <translation>Speichern der Blattlänge, falls gesetzt (Export-Modus). Diese Einstellung sagt dem Programm, möglichst viel der Breite eines Blattes zu benutzen. Die Qualität der Anordnung kann sich verschlechtern, wenn diese Einstellung benutzt wurde.</translation>
     </message>
@@ -20594,17 +20602,17 @@ Do you want to save your changes?</source>
         <translation type="vanished">Verschieben der gemessenen Layoutlängen in Layouteinheiten (Exportmodus). Die Option zeigt, wie viele Punkte entlang der Kante verwendet werden, um ein Layout zu erstellen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="743"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="758"/>
         <source>The layout gap width x2, measured in layout units (export mode). Set distance between details and a detail and a sheet.</source>
         <translation>Die Layout-Spaltbreite x2, gemessen in Layout-Einheiten. (Export-Modus). Legt den Abstand zwischen Details und einem Detail und einem Blatt fest.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="747"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="763"/>
         <source>Sets layout groupping cases (export mode): %1.</source>
         <translation>Legt Layoutgruppierungsfälle fest (Export-Modus): %1.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="752"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="768"/>
         <source>Run the program in a test mode. The program in this mode loads a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
         <translation>Das Programm in einem Testmodus laufen lassen. In diesem Modus lädt das Programm eine einzelne Schnittmuster-Datei und schließt still, ohne das Hauptfenster zu zeigen. Der Schlüssel hat Vorrang vor dem Schlüssel &apos;%1&apos;.</translation>
     </message>
@@ -20621,7 +20629,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Die Verschiebungs-/Ausgleichslänge muss zusammen mit Verschiebungseinheiten genutzt werden.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="634"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="637"/>
         <source>Number corresponding to output format (default = 0, export mode):</source>
         <translation>Zahl entspricht Ausgabeformat (default = 0 , Exportmodus):</translation>
     </message>
@@ -20631,191 +20639,191 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpcommandline.cpp" line="108"/>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="761"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="778"/>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
         <translation>Skalierung für hochauflösende Bildschirme ausschalten. Wählen Sie diese Option wenn Sie Probleme mit der Skalierung haben (standardmäßig ist die Skalierung eingeschaltet). Alternativ können Sie die Umgebungsvariable %1 nutzen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="638"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="641"/>
         <source>Export dxf in binary form.</source>
         <translation>Export in DXF Binär Format.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="640"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="643"/>
         <source>Number corresponding to compatibility mode for DXF AAMA/ASTM format (default = 0, export mode):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="643"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="646"/>
         <source>Mode number</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="644"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="648"/>
         <source>Show/hide grainline when export layout.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="645"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="649"/>
         <source>Export text as paths.</source>
         <translation>Text als Pfade exportieren.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="647"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="651"/>
         <source>Export only details. Export details as they positioned in the details mode. Any layout related options will be ignored.</source>
         <translation>Exportiere ausschließlich Details. Exportiere Details wie sie im Detailsmodus positioniert wurden. Alle mit dem Zuschnittsplan zusammenhängenden Möglichkeiten werden ignoriert.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="649"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="655"/>
         <source>Export only details that match a piece name regex.</source>
         <translation>Exportiere ausschließlich Details die einem Schnittteil RegEx entsprechen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="650"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="656"/>
         <source>The name regex</source>
         <translation>Der RegEx für die Bezeichnung</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="733"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="747"/>
         <source>Export boundary together with notches (export mode).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="765"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="783"/>
         <source>Export to csv with header. By default disabled.</source>
         <translation>Exportiere als CSV mit Kopfzeile. Im Standard deaktiviert.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="767"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="785"/>
         <source>Specify codec that will be used to save data. List of supported codecs provided by Qt. Default value depend from system. On Windows, the codec will be based on a system locale. On Unix systems, the codec will might fall back to using the iconv library if no builtin codec for the locale can be found. Valid values for this installation:</source>
         <translation>Angabe zum Zeichensatz der verwendet wird um die Daten zu speichern. Die Liste der unterstützten Zeichensätze wird von Qt zur Verfügung gestellt. Der Standard Wert hängt vom System ab. Unter Windows, entspricht der Zeichensatz der Systemeinstellung. Auf Unix Systemen, kann der Zeichensatz auf die iConv Bibliothek zurückgreifen, falls kein vorhandener Zeichensatz für die Systemeinstellung gefunden wird. Gültige Werte für diese Installation:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="775"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="794"/>
         <source>Codec name</source>
         <translation>Zeichensatz</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="777"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="797"/>
         <source>Specify csv separator character. Default value is &apos;%1&apos;. Valid characters:</source>
         <translation>Angabe des CSV Trennzeichens. Standard Wert ist &apos;%1&apos;. Gültige Zeichen:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="780"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="800"/>
         <source>Separator character</source>
         <translation>Trennzeichen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="782"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="803"/>
         <source>Calling this command enable exporting final measurements. Specify path to csv file with final measurements. The path must contain path to directory and name of file. It can be absolute or relatetive. In case of relative path will be used current working directory to calc a destination path.</source>
         <translation>Der Aufruf dieses Befehls ermöglicht den Export der endgültigen Maße. Gib das Verzeichnisangabe die CSV Datei mit den endgültigen Maßen an. Die Verzeichnisangabe muss das Verzeichnis und den Dateinamen enthalten. Es kann absolut oder relativ angegeben werden. Im Fall einer relativen Verzeichnisangabe wird der Zielpfad ausgehende vom aktuellen Arbeitsverzeichnis ermittelt.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="790"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="811"/>
         <source>Path to csv file</source>
         <translation>Pfad zur CSV-Datei</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="674"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="681"/>
         <source>Number corresponding to layout page template (default = 0, export mode):</source>
         <translation>Nummer entsprechend der Layoutseitenvorlage (Standard = 0, Exportmodus):</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="793"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="814"/>
         <source>Number corresponding to tiled pdf page template (default = 0, export mode with tiled pdf format):</source>
         <translation>Nummer entsprechend der gekachelten PDF-Seitenvorlage (Standard = 0, Exportmodus mit gekacheltem PDF-Format):</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="798"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="821"/>
         <source>Tiled page left margin in current units like 3.0 (export mode). If not set will be used default value 1 cm.</source>
         <translation>Linker Seitenrand in der derzeitigen Größe wie 3.0 (Exportmodus). Wenn kein Wert eingegeben wird, wird die Einstellung 1 cm verwendet.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="699"/>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="800"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="709"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="824"/>
         <source>The left margin</source>
         <translation>Der linke Rand</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="802"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="826"/>
         <source>Tiled page right margin in current units like 3.0 (export mode). If not set will be used default value 1 cm.</source>
         <translation>Rechter Seitenrand in der derzeitigen Größe wie 3.0 (Exportmodus). Wenn nicht gesetzt, wird der Standardwert 1 cm verwendet.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="703"/>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="804"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="714"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="829"/>
         <source>The right margin</source>
         <translation>Der rechte Rand</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="806"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="831"/>
         <source>Tiled page top margin in current units like 3.0 (export mode). If not set will be used value default value 1 cm.</source>
         <translation>Oberer Seitenrand in der derzeitigen Größe wie 3.0 (Exportmodus). Wenn nicht gesetzt, wird der Standardwert 1 cm verwendet.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="707"/>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="808"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="719"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="834"/>
         <source>The top margin</source>
         <translation>Der obere Rand</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="810"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="836"/>
         <source>Tiled page bottom margin in current units like 3.0 (export mode). If not set will be used value default value 1 cm.</source>
         <translation>Unterer Seitenrand in der derzeitigen Größe wie 3.0 (Exportmodus). Wenn nicht gesetzt, wird der Standardwert 1 cm verwendet.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="711"/>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="812"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="724"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="839"/>
         <source>The bottom margin</source>
         <translation>Der untere Rand</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="814"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="841"/>
         <source>Set tiled page orienatation to landscape (export mode). Default value if not set portrait.</source>
         <translation>Stellen Sie die Ausrichtung der gekachelten Seiten auf das Querformat (Exportmodus) ein. Standardwert, wenn nicht Hochformat eingestellt.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="886"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="914"/>
         <source>Cannot use pageformat and page explicit size together.</source>
         <translation>Seitenformat und explizite Seitengröße können nicht zusammen verwendet werden.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="940"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="968"/>
         <source>Tiled left margin must be used together with page units.</source>
         <translation>Der gekachelte linke Rand muss zusammen mit den Seiteneinheiten verwendet werden.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="942"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="970"/>
         <source>Tiled right margin must be used together with page units.</source>
         <translation>Der gekachelte rechte Rand muss zusammen mit Seiteneinheiten verwendet werden.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="944"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="972"/>
         <source>Tiled top margin must be used together with page units.</source>
         <translation>Der gekachelte obere Rand muss zusammen mit Seiteneinheiten verwendet werden.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="946"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="974"/>
         <source>Tiled bottom margin must be used together with page units.</source>
         <translation>Der gekachelte untere Rand muss zusammen mit Seiteneinheiten verwendet werden.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="690"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="698"/>
         <source>Page measure units (export mode). Valid values: %1.</source>
         <translation>Maßeinheiten der Seite (Exportmodus). Gültige Werte: %1.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="665"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="671"/>
         <source>Use this option to override user material defined in pattern. The value must be in form &lt;number&gt;@&lt;user matrial name&gt;. The number should be in range from 1 to %1. For example, 1@Fabric2. The key can be used multiple times. Has no effect in GUI mode.</source>
         <translation>Verwenden Sie diese Option, um das definierte Material zu überschreiben. Der Wert muss die Form &lt;number&gt;@ &lt;user matrial name&gt;haben. Die Zahl sollte im Bereich von 1 bis %1 liegen. Beispiel: 1@Stoff2. Der Schlüssel kann mehrfach verwendet werden. Hat keine Auswirkung im GUI-Modus.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="671"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="678"/>
         <source>User material</source>
         <translation>Benutzermaterial</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="757"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="774"/>
         <source>Make all parsing warnings into errors. Have effect only in console mode. Use to force Valentina to immediately terminate if a pattern contains a parsing warning.</source>
         <translation>Macht alle Parser-Warnungen zu Fehlern. Wirkt sich nur im Konsolenmodus aus. Verwende diese Option, um Valentina zu zwingen, sofort zu beenden, wenn ein Schnittmuster eine Parser-Warnung enthält.</translation>
     </message>
@@ -20830,87 +20838,87 @@ Do you want to save your changes?</source>
         <translation>Ungültiges Material des Benutzers &apos;%1&apos;. Falsche Materialnummer.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="679"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="686"/>
         <source>Switch page template orientation to landscape (export mode). This option has effect only for one of predefined page templates.</source>
         <translation>Ausrichtung der Seitenvorlage auf Querformat umstellen (Exportmodus). Diese Option ist nur für eine der vordefinierten Seitenvorlagen wirksam.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="688"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="696"/>
         <source>The page height</source>
         <translation>Die Seitenhöhe</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="720"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="733"/>
         <source>Order detail to follow grainline direction (export mode).</source>
         <translation>Sortierung folgt der Fadenlaufrichtung (Exportmodus).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="621"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="622"/>
         <source>&lt;Time&gt; in minutes given for the algorithm to find best layout. Time must be in range from 1 minute to 60 minutes. Default value 1 minute.</source>
         <translation>&lt;Time&gt; in Minuten, die der Algorithmus benötigt, um das beste Layout zu finden. Die Zeit muss im Bereich von 1 Minute bis 60 Minuten liegen. Standardwert 1 Minute.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="623"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="625"/>
         <source>Time</source>
         <translation>Uhrzeit</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="632"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="635"/>
         <source>Coefficient</source>
         <translation>Koeffizient</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="848"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="876"/>
         <source>Time must be in range from 1 minute to 60 minutes.</source>
         <translation>Die Zeit muss zwischen 1 Minute und 60 Minuten liegen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="722"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="735"/>
         <source>Follow manual priority over priority by square (export mode).</source>
         <translation>Befolge der manuelle Priorität gegenüber der Priorität nach dem Quadrat (Exportmodus).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="723"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="736"/>
         <source>Nest quantity copies of each piece (export mode).</source>
         <translation>Verschachtelung der Kopien von jedem Teil (Exportmodus).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="625"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="627"/>
         <source>Set layout efficiency &lt;coefficient&gt;. Layout efficiency coefficient is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. Coefficient must be in range from 0 to 100. Default value 0.</source>
         <translation>Effizienz des Layouts festlegen &lt;coefficient&gt;. Der Layout-Effizienzkoeffizient ist das Verhältnis zwischen der von den Teilen belegten Fläche und dem Begrenzungsrechteck aller Teile. Wenn die Verschachtelung das erforderliche Niveau erreicht, wird der Prozess angehalten. Wenn der Wert 0 ist, wird keine Prüfung durchgeführt. Der Koeffizient muss im Bereich von 0 bis 100 liegen. Standardwert 0.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="867"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="895"/>
         <source>Coefficient must be in range from 0 to 100.</source>
         <translation>Der Koeffizient muss im Bereich von 0 bis 100 liegen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="726"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="739"/>
         <source>Auto crop unused width (export mode).</source>
         <translation>Automatisches Zuschneiden unbenutzter Breite (Exportmodus).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="713"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="726"/>
         <source>Set horizontal scale factor from 0.01 to 3.0 (default = 1.0, export mode).</source>
         <translation>Stellen Sie den horizontalen Skalierungsfaktor von 0,01 bis 3,0 ein (Standard = 1,0, Exportmodus).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="714"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="727"/>
         <source>Horizontal scale</source>
         <translation>Horizontale Skalierung</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="716"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="729"/>
         <source>Set vertical scale factor from 0.01 to 3.0 (default = 1.0, export mode).</source>
         <translation>Einstellung des vertikalen Skalierungsfaktors von 0,01 bis 3,0 (Standard = 1,0, Exportmodus).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="717"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="730"/>
         <source>Vertical scale</source>
         <translation>Vertikale Skalierung</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="731"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="745"/>
         <source>Prefer one sheet layout solution (export mode).</source>
         <translation>Bevorzugen Sie eine Ein-Blatt-Layout-Lösung (Exportmodus).</translation>
     </message>
@@ -20930,32 +20938,32 @@ Do you want to save your changes?</source>
         <translation>Ungültiger Wert für Dimension C.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="653"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="659"/>
         <source>Set base for dimension A in the multisize measurements units (export mode).</source>
         <translation>Legen Sie die Basis für das Maß A in den Maßeinheiten für mehrere Größen fest (Exportmodus).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="654"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="660"/>
         <source>The dimension A base</source>
         <translation>Die Dimension A Basis</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="657"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="663"/>
         <source>Set base for dimension B in the multisize measurements units (export mode).</source>
         <translation>Legen Sie die Basis für das Maß B in den Maßeinheiten für mehrere Größen fest (Exportmodus).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="658"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="664"/>
         <source>The dimension B base</source>
         <translation>Die Dimension B Basis</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="661"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="667"/>
         <source>Set base for dimension C in the multisize measurements units (export mode).</source>
         <translation>Legen Sie die Basis für das Maß C in den Maßeinheiten für mehrere Größen fest (Exportmodus).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="662"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="668"/>
         <source>The dimension C base</source>
         <translation>Die Dimension C Basis</translation>
     </message>
@@ -20980,22 +20988,22 @@ Do you want to save your changes?</source>
         <translation>Unzulässige Lückenbreite.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="961"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="989"/>
         <source>Invalid layout page left margin.</source>
         <translation>Ungültiger linker Seitenrand.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="973"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="1001"/>
         <source>Invalid layout page right margin.</source>
         <translation>Ungültiger rechter Seitenrand.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="985"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="1013"/>
         <source>Invalid layout page top margin.</source>
         <translation>Ungültiger oberer Seitenrand.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="997"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="1025"/>
         <source>Invalid layout page bottom margin.</source>
         <translation>Ungültiger unterer Seitenrand.</translation>
     </message>
@@ -21020,7 +21028,7 @@ Do you want to save your changes?</source>
         <translation>Ungültiger untrer Rand der gekachelten Seite.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="740"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="755"/>
         <source>Layout units (as paper&apos;s one except px, export mode). Default units cm.</source>
         <translation>Layout-Einheiten (für das Papier, ausgenommen px, Exportmodus). Standardeinheiten ist cm.</translation>
     </message>
@@ -21030,7 +21038,7 @@ Do you want to save your changes?</source>
         <translation>Schnittmuster-Teile aus der Rohdaten-Datei laden.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="694"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="702"/>
         <source>Ignore printer margins (export mode). Use if need full paper space. In case of later printing you must account for the margins themselves.</source>
         <translation>Druckerränder ignorieren (Exportmodus). Verwenden Sie dies, wenn Sie den vollen Platz auf dem Papier benötigen. Bei einem späteren Druck müssen Sie die Ränder selbst einstellen.</translation>
     </message>
