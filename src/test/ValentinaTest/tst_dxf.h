@@ -39,8 +39,6 @@ public:
     ~TST_DXF() override = default;
 
 private slots:
-    void TestDecode_data();
-    void TestDecode();
 
 private:
     Q_DISABLE_COPY_MOVE(TST_DXF) // NOLINT

@@ -23,8 +23,6 @@ class QTextCodec : public QStringConverterBase
     Q_DISABLE_COPY_MOVE(QTextCodec)
 
 public:
-    virtual ~QTextCodec();
-
     using ConversionFlags = QStringConverterBase::Flags;
     using ConverterState = QStringConverterBase::State;
 
@@ -84,6 +82,7 @@ public:
     virtual int mibEnum() const = 0;
 
 protected:
+    virtual ~QTextCodec();
     virtual QString convertToUnicode(const char *in, int length, ConverterState *state) const = 0;
     virtual QByteArray convertFromUnicode(const QChar *in, int length, ConverterState *state) const = 0;
 

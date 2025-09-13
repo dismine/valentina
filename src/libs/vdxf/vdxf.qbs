@@ -21,11 +21,6 @@ VLib {
         prefix: "libdxfrw/"
         files: [
             "drw_base.cpp",
-            "intern/drw_cptable932.h",
-            "intern/drw_cptable936.h",
-            "intern/drw_cptable949.h",
-            "intern/drw_cptable950.h",
-            "intern/drw_cptables.h",
             "intern/drw_dbg.cpp",
             "intern/drw_textcodec.cpp",
             "intern/dxfreader.cpp",
