@@ -173,6 +173,7 @@ jobs:
           project.conanWithCrashReporting:${{ env.WITH_CRASH_REPORTING }}
           project.conanWithXerces:true
           project.conanProfiles:share/ci/conan/profiles/windows
+          project.withICUCodecs:true
           modules.buildconfig.enablePCH:true
           modules.windeployqt.compilerRuntime:true
           modules.windeployqt.noCompilerRuntime:false
@@ -209,6 +210,7 @@ jobs:
           project.conanWithCrashReporting:${{ env.WITH_CRASH_REPORTING }}
           project.conanWithXerces:true
           project.conanProfiles:share/ci/conan/profiles/windows
+          project.withICUCodecs:true
           modules.buildconfig.enablePCH:true
           modules.windeployqt.compilerRuntime:true
           modules.windeployqt.noCompilerRuntime:false

@@ -231,6 +231,7 @@ jobs:
           \"modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME\" 
           modules.macdeployqt.libpath:${{ env.QTDIR }}/lib 
           modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir 
+          project.withICUCodecs:true 
           project.enableConan:true 
           project.conanWithXerces:true 
           project.conanWithCrashReporting:true 
@@ -486,6 +487,7 @@ jobs:
           \"modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME\" 
           modules.macdeployqt.libpath:${{ env.QTDIR }}/lib 
           modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir 
+          project.withICUCodecs:true 
           project.enableConan:true 
           project.conanWithXerces:true 
           project.conanWithCrashReporting:true 

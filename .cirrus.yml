@@ -42,7 +42,7 @@ linux_qt6_task_template: &LINUX_QT6_TASK_TEMPLATE
     - qbs setup-qt /usr/bin/qmake6 qt6
     - qbs config profiles.qt6.baseProfile ${COMPILER}
     - qbs config defaultProfile qt6
-    - qbs build -f valentina.qbs -d build --jobs $(nproc) profile:qt6 config:release modules.buildconfig.enableCcache:${ENABLE_CCACHE} modules.cpp.linkerVariant:mold --force-probe-execution
+    - qbs build -f valentina.qbs -d build --jobs $(nproc) profile:qt6 config:release modules.buildconfig.enableCcache:${ENABLE_CCACHE} project.withICUCodecs:true modules.cpp.linkerVariant:mold --force-probe-execution
     - qbs -p autotest-runner -d build profile:qt6 config:release
     - ccache -s
 
@@ -69,7 +69,7 @@ linux_qt6_sonar_task_template: &LINUX_QT6_TASK_SONAR_TEMPLATE
     - qbs setup-qt /usr/bin/qmake6 qt6
     - qbs config profiles.qt6.baseProfile ${COMPILER}
     - qbs config defaultProfile qt6
-    - build-wrapper-linux-x86-64 --out-dir ${CIRRUS_WORKING_DIR}/bw-output qbs build --no-install -f valentina.qbs -d ${CIRRUS_WORKING_DIR}/build --jobs $(nproc) profile:qt6 config:debug modules.buildconfig.enableCcache:true modules.cpp.linkerVariant:mold modules.buildconfig.enableTestCoverage:true modules.buildconfig.enablePCH:false
+    - build-wrapper-linux-x86-64 --out-dir ${CIRRUS_WORKING_DIR}/bw-output qbs build --no-install -f valentina.qbs -d ${CIRRUS_WORKING_DIR}/build --jobs $(nproc) profile:qt6 config:debug modules.buildconfig.enableCcache:true modules.cpp.linkerVariant:mold modules.buildconfig.enableTestCoverage:true modules.buildconfig.enablePCH:false project.withICUCodecs:true
     # Execute the tests to generate the coverage statistics
     - qbs -p autotest-runner -d build profile:qt6 config:debug
     # Run gcov to translate `.gcda` files into `.gcov` readable by humans and SonarCloud
@@ -146,7 +146,7 @@ appimage_task_template: &APPIMAGE_TASK_TEMPLATE
     - qbs config profiles.qt6.baseProfile ${COMPILER}
     - conan install . --build=missing -o '&:with_crash_reporting=True' -pr:a=share/ci/conan/profiles/appimage
     - echo $CIRRUS_WORKING_DIR
-    - qbs build -f valentina.qbs -d $CIRRUS_WORKING_DIR/build --jobs $(nproc) profile:qt6 config:release modules.buildconfig.enableCcache:${ENABLE_CCACHE} modules.cpp.linkerVariant:mold qbs.installRoot:$CIRRUS_WORKING_DIR/build/AppDir modules.buildconfig.enableAppImage:true modules.buildconfig.enableRPath:false project.conanWithCrashReporting:true project.enableConan:true project.conanProfiles:share/ci/conan/profiles/appimage
+    - qbs build -f valentina.qbs -d $CIRRUS_WORKING_DIR/build --jobs $(nproc) profile:qt6 config:release modules.buildconfig.enableCcache:${ENABLE_CCACHE} modules.cpp.linkerVariant:mold qbs.installRoot:$CIRRUS_WORKING_DIR/build/AppDir modules.buildconfig.enableAppImage:true modules.buildconfig.enableRPath:false project.conanWithCrashReporting:true project.withICUCodecs:true project.enableConan:true project.conanProfiles:share/ci/conan/profiles/appimage
     - qbs -p autotest-runner -d build profile:qt6 config:release
     - export CRASH_QT_VERSION=$(/usr/bin/qmake6 -query QT_VERSION | awk -F. '{print $1 "_" $2}')
     - export CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)
