@@ -222,8 +222,7 @@ private slots:
     void ClosedDialogPlaceLabel(int result);
     void ClosedDialogInsertNode(int result);
 
-    void LoadIndividual();
-    void LoadMultisize();
+    void ConnectMeasurements();
     void UnloadMeasurements();
     void ShowMeasurements();
     void MeasurementsChanged(const QString &path);
@@ -399,6 +398,7 @@ private:
 
     auto MaybeSave() -> bool;
     void CreateMenus();
+    //---------------------------------------------------------------------------------------------------------------------
     void CreateActions();
     void InitAutoSave();
     auto PatternPieceName(QString &name) -> bool;

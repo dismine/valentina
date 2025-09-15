@@ -227,5 +227,7 @@
         <file>icon/dark/32x32/expand1-disabled.png</file>
         <file>icon/dark/32x32/expand1@2x.png</file>
         <file>icon/dark/32x32/expand1.png</file>
+        <file>icon/multisize_measurements.png</file>
+        <file>icon/individual_measurements.png</file>
     </qresource>
 </RCC>

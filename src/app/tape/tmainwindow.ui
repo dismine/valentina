@@ -1174,8 +1174,7 @@
     </property>
     <addaction name="actionNew"/>
     <addaction name="separator"/>
-    <addaction name="actionOpenIndividual"/>
-    <addaction name="actionOpenMultisize"/>
+    <addaction name="actionOpen"/>
     <addaction name="actionOpenTemplate"/>
     <addaction name="actionCreateFromExisting"/>
     <addaction name="separator"/>
@@ -1248,7 +1247,7 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionNew"/>
-   <addaction name="actionOpenIndividual"/>
+   <addaction name="actionOpen"/>
    <addaction name="actionSave"/>
    <addaction name="actionAddKnown"/>
    <addaction name="actionAddCustom"/>
@@ -1383,12 +1382,12 @@
     </layout>
    </widget>
   </widget>
-  <action name="actionOpenIndividual">
+  <action name="actionOpen">
    <property name="icon">
     <iconset theme="document-open"/>
    </property>
    <property name="text">
-    <string>&amp;Open individual …</string>
+    <string>&amp;Open</string>
    </property>
    <property name="menuRole">
     <enum>QAction::MenuRole::NoRole</enum>
@@ -1506,17 +1505,6 @@
    </property>
    <property name="text">
     <string>Read only</string>
-   </property>
-   <property name="menuRole">
-    <enum>QAction::MenuRole::NoRole</enum>
-   </property>
-  </action>
-  <action name="actionOpenMultisize">
-   <property name="icon">
-    <iconset theme="document-open"/>
-   </property>
-   <property name="text">
-    <string>Open multisize …</string>
    </property>
    <property name="menuRole">
     <enum>QAction::MenuRole::NoRole</enum>

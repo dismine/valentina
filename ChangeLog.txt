@@ -1,6 +1,7 @@
 # Valentina 1.1.0 (unreleased)
 - Tool Normal. Fixed formula values were not saved.
 - New feature. True zero seam allowance width.
+- UI. Simplified measurement loading workflow.
 
 # Valentina 1.0.1 (unreleased)
 - Tool Normal. Fixed formula values were not saved.

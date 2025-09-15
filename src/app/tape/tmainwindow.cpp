@@ -43,6 +43,7 @@
 #include "../vmisc/dialogs/dialogaskcollectstatistic.h"
 #include "../vmisc/dialogs/dialogexporttocsv.h"
 #include "../vmisc/dialogs/dialogselectlanguage.h"
+#include "../vmisc/dialogs/dialogselectmeasurementstype.h"
 #include "../vmisc/literals.h"
 #include "../vmisc/qxtcsvmodel.h"
 #include "../vmisc/theme/themeDef.h"
@@ -648,34 +649,39 @@ void TMainWindow::FileNew()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::OpenIndividual()
+void TMainWindow::OpenMeasurements()
 {
-    const QString filter = tr("Individual measurements") + " (*.vit);;"_L1 + tr("Multisize measurements") +
-                           " (*.vst);;"_L1 + tr("All files") + " (*.*)"_L1;
-    // Use standard path to individual measurements
-    QString pathTo = MApplication::VApp()->TapeSettings()->GetPathIndividualMeasurements();
-
-    pathTo = Open(pathTo, filter);
-
-    if (!pathTo.isEmpty())
+    DialogSelectMeasurementsType selector(this);
+    if (selector.exec() != QDialog::Accepted)
     {
-        MApplication::VApp()->TapeSettings()->SetPathIndividualMeasurements(pathTo);
+        return;
     }
-}
 
-//---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::OpenMultisize()
-{
-    const QString filter = tr("Multisize measurements") + QStringLiteral(" (*.vst);;") + tr("Individual measurements") +
-                           QStringLiteral(" (*.vit);;") + tr("All files") + QStringLiteral(" (*.*)");
-    // Use standard path to multisize measurements
-    QString pathTo = MApplication::VApp()->TapeSettings()->GetPathMultisizeMeasurements();
-
-    pathTo = Open(pathTo, filter);
-
-    if (!pathTo.isEmpty())
+    if (MeasurementsType const type = selector.Type(); type == MeasurementsType::Individual)
     {
-        MApplication::VApp()->TapeSettings()->SetPathMultisizeMeasurements(pathTo);
+        const QString filter = tr("Individual measurements") + " (*.vit);;"_L1 + tr("All files") + " (*.*)"_L1;
+        // Use standard path to individual measurements
+        QString pathTo = MApplication::VApp()->TapeSettings()->GetPathIndividualMeasurements();
+
+        pathTo = Open(pathTo, filter);
+
+        if (!pathTo.isEmpty())
+        {
+            MApplication::VApp()->TapeSettings()->SetPathIndividualMeasurements(pathTo);
+        }
+    }
+    else if (type == MeasurementsType::Multisize)
+    {
+        const QString filter = tr("Multisize measurements") + " (*.vst);;"_L1 + tr("All files") + " (*.*)"_L1;
+        // Use standard path to multisize measurements
+        QString pathTo = MApplication::VApp()->TapeSettings()->GetPathMultisizeMeasurements();
+
+        pathTo = Open(pathTo, filter);
+
+        if (!pathTo.isEmpty())
+        {
+            MApplication::VApp()->TapeSettings()->SetPathMultisizeMeasurements(pathTo);
+        }
     }
 }
 
@@ -2902,8 +2908,7 @@ void TMainWindow::SetupMenu()
     connect(ui->actionNew, &QAction::triggered, this, &TMainWindow::FileNew);
     m_actionShortcuts.insert(VShortcutAction::New, ui->actionNew);
 
-    connect(ui->actionOpenIndividual, &QAction::triggered, this, &TMainWindow::OpenIndividual);
-    connect(ui->actionOpenMultisize, &QAction::triggered, this, &TMainWindow::OpenMultisize);
+    connect(ui->actionOpen, &QAction::triggered, this, &TMainWindow::OpenMeasurements);
     connect(ui->actionOpenTemplate, &QAction::triggered, this, &TMainWindow::OpenTemplate);
     connect(ui->actionCreateFromExisting, &QAction::triggered, this, &TMainWindow::CreateFromExisting);
 

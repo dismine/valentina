@@ -84,6 +84,7 @@
 #include "../vmisc/vmodifierkey.h"
 #include "../vmisc/vsysexits.h"
 #include "../vmisc/vvalentinasettings.h"
+#include "../vmisc/dialogs/dialogselectmeasurementstype.h"
 #include "../vpatterndb/variables/vincrement.h"
 #include "../vpatterndb/variables/vmeasurement.h"
 #include "../vtools/dialogs/support/dialogeditlabel.h"
@@ -2098,50 +2099,43 @@ void MainWindow::ScaleChanged(qreal scale)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::LoadIndividual()
+void MainWindow::ConnectMeasurements()
 {
-    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
-    const QString filter = tr("Individual measurements") + QStringLiteral(" (*.vit);;") + tr("Multisize measurements") +
-                           QStringLiteral(" (*.vst)");
-    // Use standard path to individual measurements
-    const QString path = settings->GetPathIndividualMeasurements();
-
-    QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter, nullptr,
-                                                       VAbstractApplication::VApp()->NativeFileDialog());
-
-    if (not mPath.isEmpty())
+    DialogSelectMeasurementsType selector(this);
+    if (selector.exec() != QDialog::Accepted)
     {
-      if (const QString patternPath = VAbstractValApplication::VApp()->GetPatternPath();
-          LoadMeasurements(patternPath, mPath))
-      {
-          if (not doc->MPath().isEmpty())
-          {
-              m_watcher->removePath(AbsoluteMPath(patternPath, doc->MPath()));
-          }
-          ui->actionUnloadMeasurements->setEnabled(true);
-          doc->SetMPath(RelativeMPath(patternPath, mPath));
-          m_watcher->addPath(mPath);
-          PatternChangesWereSaved(false);
-          ui->actionEditCurrent->setEnabled(true);
-          statusBar()->showMessage(tr("Measurements loaded"), 5000);
-          doc->LiteParseTree(Document::FullLiteParse);
-
-          UpdateWindowTitle();
-      }
-
-      settings->SetPathIndividualMeasurements(QFileInfo(mPath).absolutePath());
+        return;
     }
-}
 
-//---------------------------------------------------------------------------------------------------------------------
-void MainWindow::LoadMultisize()
-{
-    const QString filter = tr("Multisize measurements") + QStringLiteral(" (*.vst);;") + tr("Individual measurements") +
-                           QStringLiteral("(*.vit)");
-    // Use standard path to multisize measurements
-    QString const path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathMultisizeMeasurements();
-    QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter, nullptr,
-                                                       VAbstractApplication::VApp()->NativeFileDialog());
+    const MeasurementsType type = selector.Type();
+
+    QString filter;
+    QString defaultPath;
+    bool updateIndividualPath = false;
+
+    if (type == MeasurementsType::Individual)
+    {
+        filter = tr("Individual measurements") + " (*.vit);;"_L1 + tr("All files") + " (*.*)"_L1;
+        defaultPath = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathIndividualMeasurements();
+        updateIndividualPath = true;
+    }
+    else if (type == MeasurementsType::Multisize)
+    {
+        filter = tr("Multisize measurements") + " (*.vst);;"_L1 + tr("All files") + " (*.*)"_L1;
+        defaultPath = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathMultisizeMeasurements();
+    }
+    else
+    {
+        return; // unknown type
+    }
+
+    QString mPath = QFileDialog::getOpenFileName(
+        this,
+        tr("Open file"),
+        defaultPath,
+        filter,
+        nullptr,
+        VAbstractApplication::VApp()->NativeFileDialog());
 
     if (mPath.isEmpty())
     {
@@ -2154,7 +2148,7 @@ void MainWindow::LoadMultisize()
         return;
     }
 
-    if (not doc->MPath().isEmpty())
+    if (!doc->MPath().isEmpty())
     {
         m_watcher->removePath(AbsoluteMPath(patternPath, doc->MPath()));
     }
@@ -2165,8 +2159,13 @@ void MainWindow::LoadMultisize()
     ui->actionEditCurrent->setEnabled(true);
     statusBar()->showMessage(tr("Measurements loaded"), 5000);
     doc->LiteParseTree(Document::FullLiteParse);
-
     UpdateWindowTitle();
+
+    if (updateIndividualPath)
+    {
+        VAbstractValApplication::VApp()->ValentinaSettings()
+            ->SetPathIndividualMeasurements(QFileInfo(mPath).absolutePath());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -4517,8 +4516,7 @@ void MainWindow::Clear()
     ui->actionShowAccuracyRadius->setEnabled(false);
     ui->actionShowMainPath->setEnabled(false);
     ui->actionBoundaryTogetherWithNotches->setEnabled(false);
-    ui->actionLoadIndividual->setEnabled(false);
-    ui->actionLoadMultisize->setEnabled(false);
+    ui->actionConnectMeasurements->setEnabled(false);
     ui->actionUnloadMeasurements->setEnabled(false);
     ui->actionEditCurrent->setEnabled(false);
     ui->actionPreviousPatternPiece->setEnabled(false);
@@ -4769,8 +4767,7 @@ void MainWindow::SetEnableWidgets(bool enable)
     ui->actionShowAccuracyRadius->setEnabled(enableOnDesignStage);
     ui->actionShowMainPath->setEnabled(enableOnDetailsStage);
     ui->actionBoundaryTogetherWithNotches->setEnabled(enableOnDetailsStage);
-    ui->actionLoadIndividual->setEnabled(enableOnDesignStage);
-    ui->actionLoadMultisize->setEnabled(enableOnDesignStage);
+    ui->actionConnectMeasurements->setEnabled(enableOnDesignStage);
     ui->actionUnloadMeasurements->setEnabled(enableOnDesignStage);
     ui->actionPreviousPatternPiece->setEnabled(enableOnDrawStage);
     ui->actionNextPatternPiece->setEnabled(enableOnDrawStage);
@@ -6149,7 +6146,6 @@ auto MainWindow::OpenNewValentina(const QString &fileName) const -> bool
     return false;
 }
 
-//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::CreateActions()
 {
     ui->setupUi(this);
@@ -6251,8 +6247,7 @@ void MainWindow::CreateActions()
     connect(ui->actionBoundaryTogetherWithNotches, &QAction::triggered, this,
             &MainWindow::ActionBoundaryTogetherWithNotches_triggered);
 
-    connect(ui->actionLoadIndividual, &QAction::triggered, this, &MainWindow::LoadIndividual);
-    connect(ui->actionLoadMultisize, &QAction::triggered, this, &MainWindow::LoadMultisize);
+    connect(ui->actionConnectMeasurements, &QAction::triggered, this, &MainWindow::ConnectMeasurements);
     connect(ui->actionOpenTape, &QAction::triggered, this, &MainWindow::ActionOpenTape_triggered);
     connect(ui->actionEditCurrent, &QAction::triggered, this, &MainWindow::ShowMeasurements);
     connect(ui->actionExportAs, &QAction::triggered, this, &MainWindow::ExportLayoutAs);

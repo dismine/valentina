@@ -83,8 +83,7 @@ public slots:
 
 private slots:
     void FileNew();
-    void OpenIndividual();
-    void OpenMultisize();
+    void OpenMeasurements();
     void OpenTemplate();
     void CreateFromExisting();
 
