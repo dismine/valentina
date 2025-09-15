@@ -38,10 +38,15 @@
 #include <QDebug>
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#ifdef WITH_TEXTCODEC
 #include "../vmisc/codecs/qtextcodec.h"
 #else
+#include "../vmisc/vtextcodec.h"
+using QTextCodec = VTextCodec;
+#endif // WITH_TEXTCODEC
+#else
 #include <QTextCodec>
-#endif
+#endif // QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 
 VCommandLinePtr VCommandLine::instance = nullptr; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 

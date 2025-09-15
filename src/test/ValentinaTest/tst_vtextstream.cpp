@@ -26,10 +26,14 @@
  **
  *************************************************************************/
 #include "tst_vtextstream.h"
+#include <qtestcase.h>
 
 #include <QtTest/QtTest>
 
+#ifdef WITH_TEXTCODEC
 #include "../vmisc/codecs/qtextcodec.h"
+#endif
+
 #include "../vmisc/vtextstream.h"
 #include <qobject.h>
 #include <qstringliteral.h>
@@ -66,6 +70,7 @@ void TST_VTextStream::getSetCheck()
 {
     // Initialize codecs
     VTextStream obj1;
+#ifdef WITH_TEXTCODEC
     // QTextCodec * VTextStream::codec()
     // void VTextStream::setCodec(QTextCodec *)
     QTextCodec *var1 = QTextCodec::codecForName("en");
@@ -87,6 +92,7 @@ void TST_VTextStream::getSetCheck()
     QCOMPARE(false, obj1.generateByteOrderMark());
     obj1.setGenerateByteOrderMark(true);
     QCOMPARE(true, obj1.generateByteOrderMark());
+#endif
 
     // QIODevice * VTextStream::device()
     // void VTextStream::setDevice(QIODevice *)
@@ -192,7 +198,9 @@ void TST_VTextStream::cleanupTestCase()
 void TST_VTextStream::construction()
 {
     VTextStream stream;
+#ifdef WITH_TEXTCODEC
     QCOMPARE(stream.codec(), QTextCodec::codecForLocale());
+#endif
     QCOMPARE(stream.device(), static_cast<QIODevice *>(0));
     QCOMPARE(stream.string(), static_cast<QString *>(0));
 
@@ -229,6 +237,7 @@ void TST_VTextStream::generateLineData(bool for_QString)
 
     if (!for_QString)
     {
+#ifdef WITH_TEXTCODEC
         // utf-8
         QTest::newRow("utf8/twolines") << QByteArray("\xef\xbb\xbf"
                                                      "\x66\x67\x65\x0a"
@@ -296,14 +305,19 @@ void TST_VTextStream::generateLineData(bool for_QString)
                           "\xe5\x00\x00\x00\x67\x00\x00\x00\x65\x00\x00\x00\x0a\x00\x00\x00",
                           36)
             << (QStringList() << QLatin1String("\345ge") << QLatin1String("\345ge"));
+#endif
     }
 
     // partials
     QTest::newRow("cr") << QByteArray("\r") << (QStringList() << "");
     QTest::newRow("oneline/cr") << QByteArray("ole\r") << (QStringList() << "ole");
     if (!for_QString)
+    {
+#ifdef WITH_TEXTCODEC
         QTest::newRow("utf16-BE/cr") << QByteArray("\xfe\xff\x00\xe5\x00\x67\x00\x65\x00\x0d", 10)
                                      << (QStringList() << QLatin1String("\345ge"));
+#endif
+    }
 }
 
 // ------------------------------------------------------------------------------
@@ -345,11 +359,13 @@ void TST_VTextStream::readLineMaxlen_data()
     QTest::newRow("Helo\\nWorlds") << QString("Helo\nWorlds") << (QStringList() << QString("Helo") << QString("World"));
     QTest::newRow("AAAAA etc.") << QString(16385, QLatin1Char('A'))
                                 << (QStringList() << QString("AAAAA") << QString("AAAAA"));
+#ifdef WITH_TEXTCODEC
     QTest::newRow("multibyte string") << QString::fromUtf8(
         "\341\233\222\341\233\226\341\232\251\341\232\271\341\232\242\341\233\232\341\232\240\n")
                                       << (QStringList() << QString::fromUtf8(
                                               "\341\233\222\341\233\226\341\232\251\341\232\271\341\232\242")
                                                         << QString::fromUtf8("\341\233\232\341\232\240"));
+#endif
 }
 
 // ------------------------------------------------------------------------------
@@ -369,7 +385,9 @@ void TST_VTextStream::readLineMaxlen()
             file.write(input.toUtf8());
             file.seek(0);
             stream.setDevice(&file);
+#ifdef WITH_TEXTCODEC
             stream.setCodec("utf-8");
+#endif
         }
         else
         {
@@ -594,6 +612,7 @@ void TST_VTextStream::generateAllData(bool for_QString)
     // utf-16
     if (!for_QString)
     {
+#ifdef WITH_TEXTCODEC
         // one line
         QTest::newRow("utf16-BE/nothing") << QByteArray("\xfe\xff"
                                                         "\x00\xe5\x00\x67\x00\x65",
@@ -645,6 +664,7 @@ void TST_VTextStream::generateAllData(bool for_QString)
                                                            "\xe5\x00\x67\x00\x65\x00\x0a\x00",
                                                            26)
                                              << QString::fromLatin1("\345ge\n\345ge\n\345ge\n");
+#endif
     }
 }
 
@@ -715,6 +735,7 @@ void TST_VTextStream::skipWhiteSpace_data()
     QTest::newRow("\\n one") << QByteArray("\n one") << QChar('o');
     QTest::newRow(" \\r\\n one") << QByteArray(" \r\n one") << QChar('o');
 
+#ifdef WITH_TEXTCODEC
     // utf-16
     QTest::newRow("utf16-BE (empty)") << QByteArray("\xfe\xff", 2) << QChar('\0');
     QTest::newRow("utf16-BE ( one)") << QByteArray("\xfe\xff\x00 \x00o\x00n\x00e", 10) << QChar('o');
@@ -729,6 +750,7 @@ void TST_VTextStream::skipWhiteSpace_data()
     QTest::newRow("utf16-LE (\\n one)") << QByteArray("\xff\xfe\n\x00 \x00o\x00n\x00e\x00", 12) << QChar('o');
     QTest::newRow("utf16-LE ( \\r\\n one)")
         << QByteArray("\xff\xfe \x00\r\x00\n\x00 \x00o\x00n\x00e\x00", 16) << QChar('o');
+#endif
 }
 
 // ------------------------------------------------------------------------------
@@ -1180,6 +1202,7 @@ void TST_VTextStream::pos()
         QCOMPARE(stream.pos(), qint64(2607));
         QCOMPARE(strtmp, QString("locations"));
     }
+#ifdef WITH_TEXTCODEC
     {
         // Shift-JIS device
         for (int i = 0; i < 2; ++i)
@@ -1191,6 +1214,7 @@ void TST_VTextStream::pos()
                 QVERIFY(file.open(QIODevice::ReadOnly | QIODevice::Text));
 
             VTextStream stream(&file);
+
             stream.setCodec("Shift-JIS");
             QVERIFY(stream.codec());
 
@@ -1223,6 +1247,7 @@ void TST_VTextStream::pos()
             QCOMPARE(stream.pos(), qint64(43349));
         }
     }
+#endif
 }
 
 // ------------------------------------------------------------------------------
@@ -1332,7 +1357,9 @@ void TST_VTextStream::readAllFromStdin()
     stdinProcess.setReadChannel(QProcess::StandardError);
 
     VTextStream stream(&stdinProcess);
+#ifdef WITH_TEXTCODEC
     stream.setCodec("ISO-8859-1");
+#endif
     stream << "hello world" << Val::flush;
 
     stdinProcess.closeWriteChannel();
@@ -1693,6 +1720,10 @@ void TST_VTextStream::utf8IncompleteAtBufferBoundary()
     QFile::remove(testFileName);
     QFile data(testFileName);
 
+#ifndef WITH_TEXTCODEC
+    QSKIP("QTextCodec disabled");
+#else
+
     QTextCodec *utf8Codec = QTextCodec::codecForMib(106);
     QString lineContents = QString::fromUtf8("\342\200\223" // U+2013 EN DASH
                                              "\342\200\223"
@@ -1730,6 +1761,7 @@ void TST_VTextStream::utf8IncompleteAtBufferBoundary()
         ++i;
         QVERIFY2(line.endsWith(lineContents), QString("Line %1: %2").arg(i).arg(line).toLocal8Bit());
     } while (!in.atEnd());
+#endif
 }
 
 // ------------------------------------------------------------------------------
@@ -1763,6 +1795,7 @@ void TST_VTextStream::writeSeekWriteNoBOM()
     // Check buffer is still OK
     QCOMPARE(out.buffer().constData(), "Size=0000000042\nVersion=14\nblah blah blah\n");
 
+#ifdef WITH_TEXTCODEC
     //Then UTF-16
 
     QBuffer out16;
@@ -1781,6 +1814,7 @@ void TST_VTextStream::writeSeekWriteNoBOM()
     stream16.flush();
 
     QCOMPARE(out16.buffer(), first);
+#endif
 }
 
 // ------------------------------------------------------------------------------
@@ -1800,10 +1834,12 @@ void TST_VTextStream::generateOperatorCharData(bool for_QString)
 
     if (!for_QString)
     {
+#ifdef WITH_TEXTCODEC
         QTest::newRow("utf16-BE (empty)") << QByteArray("\xff\xfe", 2) << QChar('\0') << '\0' << QByteArray("\0", 1);
         QTest::newRow("utf16-BE (a)") << QByteArray("\xff\xfe\x61\x00", 4) << QChar('a') << 'a' << QByteArray("a");
         QTest::newRow("utf16-LE (empty)") << QByteArray("\xfe\xff", 2) << QChar('\0') << '\0' << QByteArray("\0", 1);
         QTest::newRow("utf16-LE (a)") << QByteArray("\xfe\xff\x00\x61", 4) << QChar('a') << 'a' << QByteArray("a");
+#endif
     }
 }
 
@@ -1823,7 +1859,9 @@ void TST_VTextStream::QChar_operators_FromDevice()
     QBuffer buf(&input);
     buf.open(QBuffer::ReadOnly);
     VTextStream stream(&buf);
+#ifdef WITH_TEXTCODEC
     stream.setCodec(QTextCodec::codecForName("ISO-8859-1"));
+#endif
     QChar tmp;
     stream >> tmp;
     QCOMPARE(tmp, qchar_output);
@@ -1832,7 +1870,9 @@ void TST_VTextStream::QChar_operators_FromDevice()
     writeBuf.open(QBuffer::WriteOnly);
 
     VTextStream writeStream(&writeBuf);
+#ifdef WITH_TEXTCODEC
     writeStream.setCodec(QTextCodec::codecForName("ISO-8859-1"));
+#endif
     writeStream << qchar_output;
     writeStream.flush();
 
@@ -1856,7 +1896,9 @@ void TST_VTextStream::char_operators_FromDevice()
     QBuffer buf(&input);
     buf.open(QBuffer::ReadOnly);
     VTextStream stream(&buf);
+#ifdef WITH_TEXTCODEC
     stream.setCodec(QTextCodec::codecForName("ISO-8859-1"));
+#endif
     char tmp;
     stream >> tmp;
     QCOMPARE(tmp, char_output);
@@ -1865,7 +1907,9 @@ void TST_VTextStream::char_operators_FromDevice()
     writeBuf.open(QBuffer::WriteOnly);
 
     VTextStream writeStream(&writeBuf);
+#ifdef WITH_TEXTCODEC
     writeStream.setCodec(QTextCodec::codecForName("ISO-8859-1"));
+#endif
     writeStream << char_output;
     writeStream.flush();
 
@@ -1957,6 +2001,7 @@ void TST_VTextStream::generateNaturalNumbersData(bool for_QString)
     // utf-16 tests
     if (!for_QString)
     {
+#ifdef WITH_TEXTCODEC
         QTest::newRow("utf16-BE (empty)") << QByteArray("\xfe\xff", 2) << qulonglong(0);
         QTest::newRow("utf16-BE (0xdeadbeef)")
             << QByteArray("\xfe\xff"
@@ -1969,6 +2014,7 @@ void TST_VTextStream::generateNaturalNumbersData(bool for_QString)
                           "\x30\x00\x78\x00\x64\x00\x65\x00\x61\x00\x64\x00\x62\x00\x65\x00\x65\x00\x66\x00",
                           22)
             << Q_UINT64_C(3735928559);
+#endif
     }
 }
 
@@ -2058,12 +2104,14 @@ void TST_VTextStream::generateStringData(bool for_QString)
 
     if (!for_QString)
     {
+#ifdef WITH_TEXTCODEC
         QTest::newRow("utf16-BE (empty)") << QByteArray("\xff\xfe", 2) << QByteArray() << QString();
         QTest::newRow("utf16-BE (corrupt)")
             << QByteArray("\xff", 1) << QByteArray("\xff") << QString::fromLatin1("\xff");
         QTest::newRow("utf16-LE (empty)") << QByteArray("\xfe\xff", 2) << QByteArray() << QString();
         QTest::newRow("utf16-LE (corrupt)")
             << QByteArray("\xfe", 1) << QByteArray("\xfe") << QString::fromLatin1("\xfe");
+#endif
     }
 }
 
@@ -2082,8 +2130,10 @@ void TST_VTextStream::charPtr_read_operator_FromDevice()
     QBuffer buffer(&input);
     buffer.open(QBuffer::ReadOnly);
     VTextStream stream(&buffer);
+#ifdef WITH_TEXTCODEC
     stream.setCodec(QTextCodec::codecForName("ISO-8859-1"));
     stream.setAutoDetectUnicode(true);
+#endif
 
     char buf[1024];
     stream >> buf;
@@ -2106,8 +2156,10 @@ void TST_VTextStream::stringRef_read_operator_FromDevice()
     QBuffer buffer(&input);
     buffer.open(QBuffer::ReadOnly);
     VTextStream stream(&buffer);
+#ifdef WITH_TEXTCODEC
     stream.setCodec(QTextCodec::codecForName("ISO-8859-1"));
     stream.setAutoDetectUnicode(true);
+#endif
 
     QString tmp;
     stream >> tmp;
@@ -2130,8 +2182,10 @@ void TST_VTextStream::byteArray_read_operator_FromDevice()
     QBuffer buffer(&input);
     buffer.open(QBuffer::ReadOnly);
     VTextStream stream(&buffer);
+#ifdef WITH_TEXTCODEC
     stream.setCodec(QTextCodec::codecForName("ISO-8859-1"));
     stream.setAutoDetectUnicode(true);
+#endif
 
     QByteArray array;
     stream >> array;
@@ -2413,8 +2467,10 @@ void TST_VTextStream::string_write_operator_ToDevice()
         QBuffer buf;
         buf.open(QBuffer::WriteOnly);
         VTextStream stream(&buf);
+#ifdef WITH_TEXTCODEC
         stream.setCodec(QTextCodec::codecForName("ISO-8859-1"));
         stream.setAutoDetectUnicode(true);
+#endif
 
         stream << bytedata.constData();
         stream.flush();
@@ -2425,8 +2481,10 @@ void TST_VTextStream::string_write_operator_ToDevice()
         QBuffer buf;
         buf.open(QBuffer::WriteOnly);
         VTextStream stream(&buf);
+#ifdef WITH_TEXTCODEC
         stream.setCodec(QTextCodec::codecForName("ISO-8859-1"));
         stream.setAutoDetectUnicode(true);
+#endif
 
         stream << bytedata;
         stream.flush();
@@ -2437,8 +2495,10 @@ void TST_VTextStream::string_write_operator_ToDevice()
         QBuffer buf;
         buf.open(QBuffer::WriteOnly);
         VTextStream stream(&buf);
+#ifdef WITH_TEXTCODEC
         stream.setCodec(QTextCodec::codecForName("ISO-8859-1"));
         stream.setAutoDetectUnicode(true);
+#endif
 
         stream << stringdata;
         stream.flush();
@@ -2451,8 +2511,10 @@ void TST_VTextStream::latin1String_write_operator_ToDevice()
     QBuffer buf;
     buf.open(QBuffer::WriteOnly);
     VTextStream stream(&buf);
+#ifdef WITH_TEXTCODEC
     stream.setCodec(QTextCodec::codecForName("ISO-8859-1"));
     stream.setAutoDetectUnicode(true);
+#endif
 
     stream << QLatin1String("No explicit length");
     stream << QLatin1String("Explicit length - ignore this part", 15);
@@ -2480,8 +2542,10 @@ void TST_VTextStream::useCase1()
 
     {
         VTextStream stream(&file);
+#ifdef WITH_TEXTCODEC
         stream.setCodec(QTextCodec::codecForName("ISO-8859-1"));
         stream.setAutoDetectUnicode(true);
+#endif
 
         stream << 4.15 << ' ' << QByteArray("abc") << ' ' << QString("ole");
     }
@@ -2495,8 +2559,10 @@ void TST_VTextStream::useCase1()
         QByteArray a;
         QString s;
         VTextStream stream(&file);
+#ifdef WITH_TEXTCODEC
         stream.setCodec(QTextCodec::codecForName("ISO-8859-1"));
         stream.setAutoDetectUnicode(true);
+#endif
 
         stream >> d;
         stream >> a;
@@ -2516,8 +2582,10 @@ void TST_VTextStream::useCase2()
     QVERIFY(file.open(QFile::ReadWrite));
 
     VTextStream stream(&file);
+#ifdef WITH_TEXTCODEC
     stream.setCodec(QTextCodec::codecForName("ISO-8859-1"));
     stream.setAutoDetectUnicode(true);
+#endif
 
     stream << 4.15 << ' ' << QByteArray("abc") << ' ' << QString("ole");
 
@@ -2533,8 +2601,10 @@ void TST_VTextStream::useCase2()
     QByteArray a;
     QString s;
     VTextStream stream2(&file);
+#ifdef WITH_TEXTCODEC
     stream2.setCodec(QTextCodec::codecForName("ISO-8859-1"));
     stream2.setAutoDetectUnicode(true);
+#endif
 
     stream2 >> d;
     stream2 >> a;
@@ -2589,8 +2659,10 @@ void TST_VTextStream::manipulators()
     buffer.open(QBuffer::WriteOnly);
 
     VTextStream stream(&buffer);
+#ifdef WITH_TEXTCODEC
     stream.setCodec(QTextCodec::codecForName("ISO-8859-1"));
     stream.setAutoDetectUnicode(true);
+#endif
 
     stream.setIntegerBase(base);
     stream.setFieldAlignment(VTextStream::FieldAlignment(alignFlag));
@@ -2606,6 +2678,7 @@ void TST_VTextStream::manipulators()
 
 void TST_VTextStream::generateBOM()
 {
+#ifdef WITH_TEXTCODEC
     QFile::remove("bom.txt");
     {
         QFile file("bom.txt");
@@ -2633,10 +2706,14 @@ void TST_VTextStream::generateBOM()
         QVERIFY(file.open(QFile::ReadOnly));
         QCOMPARE(file.readAll(), QByteArray("\xff\xfe\x48\x00\x65\00\x6c\00\x6c\00\x6f\x00\x0a\x00", 14));
     }
+#else
+    QSKIP("QTextCodec disabled");
+#endif
 }
 
 void TST_VTextStream::readBomSeekBackReadBomAgain()
 {
+#ifdef WITH_TEXTCODEC
     QFile::remove("utf8bom");
     QFile file("utf8bom");
     QVERIFY(file.open(QFile::ReadWrite));
@@ -2653,6 +2730,9 @@ void TST_VTextStream::readBomSeekBackReadBomAgain()
     stream.seek(0);
     stream >> Andreas;
     QCOMPARE(Andreas, QString("Andreas"));
+#else
+    QSKIP("QTextCodec disabled");
+#endif
 }
 
 // ------------------------------------------------------------------------------
@@ -2744,7 +2824,9 @@ void TST_VTextStream::status_write_error()
     FakeBuffer fb(false);
     QVERIFY(fb.open(QBuffer::ReadWrite));
     VTextStream fs(&fb);
+#ifdef WITH_TEXTCODEC
     fs.setCodec(QTextCodec::codecForName("latin1"));
+#endif
     /* first write some initial content */
     fs << "hello";
     fs.flush();
@@ -2809,6 +2891,7 @@ void TST_VTextStream::alignAccountingStyle()
 
 void TST_VTextStream::setCodec()
 {
+#ifdef WITH_TEXTCODEC
     QByteArray ba("\xe5 v\xe6r\n\xc3\xa5 v\xc3\xa6r\n");
     QString res = QLatin1String("\xe5 v\xe6r");
 
@@ -2817,6 +2900,9 @@ void TST_VTextStream::setCodec()
     QCOMPARE(stream.readLine(), res);
     stream.setCodec("UTF-8");
     QCOMPARE(stream.readLine(), res);
+#else
+    QSKIP("QTextCodec disabled");
+#endif
 }
 
 void TST_VTextStream::double_write_with_flags_data()

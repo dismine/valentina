@@ -34,18 +34,31 @@
  */
 
 #include "qxtcsvmodel.h"
+#include <qtpreprocessorsupport.h>
 
 #include <QFile>
 #include <QIODevice>
 #include <QList>
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#ifdef WITH_TEXTCODEC
 #include "codecs/qtextcodec.h"
 #include "vtextstream.h"
 #else
-#include <QTextCodec>
+
 #include <QTextStream>
-#endif
+using VTextStream = QTextStream;
+
+#include "vtextcodec.h"
+using QTextCodec = VTextCodec;
+
+#endif // WITH_TEXTCODEC
+#else
+#include <QTextCodec>
+
+#include <QTextStream>
+using VTextStream = QTextStream;
+#endif // QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "compatibility.h"
@@ -219,13 +232,16 @@ void QxtCsvModel::setSource(QIODevice *file, bool withHeader, QChar separator, Q
     QChar ch, buffer(0);
     bool readCR = false;
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     VTextStream stream(file);
-#else
-    QTextStream stream(file);
-#endif
-
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#ifdef WITH_TEXTCODEC
     codec ? stream.setCodec(codec) : stream.setAutoDetectUnicode(true);
+#else
+    codec ? stream.setEncoding(codec->Encoding()) : stream.setAutoDetectUnicode(true);
+#endif
+#else
+    codec ? stream.setCodec(codec) : stream.setAutoDetectUnicode(true);
+#endif
 
     bool headerSet = !withHeader;
 
@@ -606,26 +622,28 @@ auto QxtCsvModel::toCSV(QIODevice *file, QString &error, bool withHeader, QChar 
         return false;
     }
 
-    QScopedPointer<QTextEncoder> encoderWithoutBom;
-    if (codec)
-    {
-        encoderWithoutBom.reset(codec->makeEncoder(QTextCodec::IgnoreHeader));
-    }
-
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     VTextStream stream(file);
-#else
-    QTextStream stream(dest);
-#endif
-    if (codec)
+    if (codec != nullptr)
     {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#ifdef WITH_TEXTCODEC
         stream.setCodec(codec);
+#else
+        stream.setEncoding(codec->Encoding());
+#endif
+#else
+        stream.setCodec(codec);
+#endif
     }
 
     auto WriteString = [&stream](const QString &str)
     {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#ifdef WITH_TEXTCODEC
         stream << str << Val::endl;
+#else
+        stream << str << Qt::endl;
+#endif
 #else
         stream << str << Qt::endl;
 #endif

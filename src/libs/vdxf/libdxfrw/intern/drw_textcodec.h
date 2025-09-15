@@ -4,18 +4,22 @@
 #include "../drw_base.h"
 #include <QtCore/qcontainerfwd.h>
 #include <QtGlobal>
-#include <memory>
 #include <string>
-
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-#include "../vmisc/codecs/qtextcodec.h"
-#else
-#include <QTextCodec>
-#endif
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 class QStringList;
 #endif
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#ifdef WITH_TEXTCODEC
+class QTextCodec;
+#else
+class VTextCodec;
+using QTextCodec = VTextCodec;
+#endif // WITH_TEXTCODEC
+#else
+class QTextCodec;
+#endif // QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 
 class DRW_TextCodec
 {

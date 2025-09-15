@@ -1,10 +1,22 @@
 #include "drw_textcodec.h"
 #include "../drw_base.h"
 #include <cstring>
+#include <qtpreprocessorsupport.h>
 #include <QCoreApplication>
 #include <QDebug>
 #include <QSet>
 #include <QString>
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#ifdef WITH_TEXTCODEC
+#include "../vmisc/codecs/qtextcodec.h"
+#else
+#include "vtextcodec.h"
+using QTextCodec = VTextCodec;
+#endif // WITH_TEXTCODEC
+#else
+#include <QTextCodec>
+#endif // QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 
 #include "../ifc/exception/vexception.h"
 #include "../vmisc/vabstractapplication.h"
@@ -209,7 +221,7 @@ auto DRW_TextCodec::toUtf8(const std::string &s) -> std::string
     }
 
     const QString encodedString = conv->toUnicode(s.c_str());
-    return encodedString.toStdString();
+    return encodedString.toUtf8().toStdString();
 }
 
 auto DRW_TextCodec::fromUtf8(const std::string &s) -> std::string
@@ -220,7 +232,7 @@ auto DRW_TextCodec::fromUtf8(const std::string &s) -> std::string
     }
 
     const QByteArray encodedString = conv->fromUnicode(QString::fromStdString(s));
-    return {encodedString.constData()};
+    return {encodedString.constData(), static_cast<size_t>(encodedString.size())};
 }
 
 auto DRW_TextCodec::correctCodePage(const std::string &s) -> std::string

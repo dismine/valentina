@@ -53,6 +53,10 @@
 #include "literals.h"
 #endif
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0) && !defined(WITH_TEXTCODEC)
+#include "vtextcodec.h"
+#endif
+
 #ifdef Q_OS_UNIX
 #include <unistd.h>
 #endif
@@ -162,6 +166,14 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractApplication::~VAbstractApplication()
 {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0) && !defined(WITH_TEXTCODEC)
+    QHashIterator i(m_codecs);
+    while (i.hasNext())
+    {
+        i.next();
+        delete i.value();
+    }
+#endif
     delete m_svgFontDatabase;
 }
 
@@ -517,6 +529,28 @@ auto VAbstractApplication::GetPlaceholderTranslator() -> QSharedPointer<VTransla
 
     return QSharedPointer<VTranslator>(new VTranslator);
 }
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0) && !defined(WITH_TEXTCODEC)
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractApplication::TextCodecCache(QStringConverter::Encoding encoding) const -> VTextCodec *
+{
+    if (m_codecs.contains(encoding))
+    {
+        return m_codecs.value(encoding);
+    }
+
+    return nullptr;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractApplication::CacheTextCodec(QStringConverter::Encoding encoding, VTextCodec *codec)
+{
+    if (not m_codecs.contains(encoding))
+    {
+        m_codecs.insert(encoding, codec);
+    }
+}
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractApplication::CheckSystemLocale()

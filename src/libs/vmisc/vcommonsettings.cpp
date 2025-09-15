@@ -43,10 +43,15 @@
 #include <QtDebug>
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#ifdef WITH_TEXTCODEC
 #include "codecs/qtextcodec.h"
 #else
+#include "vtextcodec.h"
+using QTextCodec = VTextCodec;
+#endif // WITH_TEXTCODEC
+#else
 #include <QTextCodec>
-#endif
+#endif // QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 
 #include "compatibility.h"
 #include "def.h"
@@ -1101,7 +1106,7 @@ void VCommonSettings::SetDefaultSeamAllowance(double value)
  */
 auto VCommonSettings::GetDefaultSeamAllowance() -> double
 {
-    double defaultValue;
+    double defaultValue = 1;
 
     const Unit globalUnit = StrToUnits(GetUnit());
 

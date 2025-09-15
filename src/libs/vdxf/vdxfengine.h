@@ -55,13 +55,6 @@ struct VLayoutPassmark;
 class DRW_ATTDEF;
 class DRW_Circle;
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-class VTextCodec;
-#else
-class QTextCodec;
-using VTextCodec = QTextCodec;
-#endif
-
 class VDxfEngine final : public QPaintEngine
 {
     friend class VDxfPaintDevice;

@@ -54,6 +54,10 @@ class VAbstractShortcutManager;
 class VKnownMeasurementsDatabase;
 class VTranslator;
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0) && !defined(WITH_TEXTCODEC)
+class VTextCodec;
+#endif
+
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
 QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
@@ -91,6 +95,11 @@ public:
     auto IsWarningMessage(const QString &message) const -> bool;
 
     auto NativeFileDialog(QFileDialog::Options options = QFileDialog::Options()) const -> QFileDialog::Options;
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0) && !defined(WITH_TEXTCODEC)
+    auto TextCodecCache(QStringConverter::Encoding encoding) const -> VTextCodec *;
+    void CacheTextCodec(QStringConverter::Encoding encoding, VTextCodec *codec);
+#endif
 
 #if defined(Q_OS_WIN)
     static void WinAttachConsole();
@@ -151,6 +160,10 @@ private slots:
 
 private:
     Q_DISABLE_COPY_MOVE(VAbstractApplication) // NOLINT
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0) && !defined(WITH_TEXTCODEC)
+    QHash<QStringConverter::Encoding, VTextCodec *> m_codecs{};
+#endif
 
     VSvgFontDatabase *m_svgFontDatabase{nullptr};
     QFileSystemWatcher *m_svgFontDatabaseWatcher{nullptr};

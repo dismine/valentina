@@ -38,10 +38,15 @@
 #include <QShowEvent>
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#ifdef WITH_TEXTCODEC
 #include "../codecs/qtextcodec.h"
 #else
+#include "../vtextcodec.h"
+using QTextCodec = VTextCodec;
+#endif // WITH_TEXTCODEC
+#else
 #include <QTextCodec>
-#endif
+#endif // QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../compatibility.h"
@@ -159,7 +164,7 @@ auto DialogExportToCSV::GetSeparator() const -> QChar
         return ';'_L1;
     }
 
-    else if (ui->radioButtonSpace->isChecked())
+    if (ui->radioButtonSpace->isChecked())
     {
         return ' '_L1;
     }

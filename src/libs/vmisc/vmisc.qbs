@@ -228,6 +228,15 @@ VLib {
     }
 
     Group {
+        name: "Codecs: Text codec (internal)"
+        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 && !project.withTextCodec
+        files: [
+            "vtextcodec.cpp",
+            "vtextcodec.h"
+        ]
+    }
+
+    Group {
         name: "Codecs: Basic codecs"
         condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 && project.withTextCodec && project.withBasicCodecs
         prefix: "codecs/"
