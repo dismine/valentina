@@ -7,7 +7,10 @@
 #include "qtextcodec.h"
 #include "qtextcodec_p.h"
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
 #include <qtclasshelpermacros.h>
+#endif
+
 #include <QByteArrayMatcher>
 #include <QFile>
 #include <QList>

@@ -4,9 +4,12 @@
 #ifndef QTEXTCODEC_H
 #define QTEXTCODEC_H
 
-#include <qtclasshelpermacros.h>
 #include <QtCore/qlist.h>
 #include <QtCore/qstringconverter.h>
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
+#include <qtclasshelpermacros.h>
+#endif
 
 #ifndef WITH_TEXTCODEC
 #error \

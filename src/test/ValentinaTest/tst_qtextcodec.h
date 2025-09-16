@@ -33,7 +33,10 @@
 #define TST_QTEXTCODEC_H
 
 #include "../vtest/abstracttest.h"
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
 #include <qtclasshelpermacros.h>
+#endif
 
 class TST_QTextCodec : public AbstractTest
 {

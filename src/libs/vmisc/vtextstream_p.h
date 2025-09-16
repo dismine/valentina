@@ -53,7 +53,11 @@
 //
 
 #include "vtextstream.h"
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
 #include <qtypes.h>
+#endif
+
 #if defined(WITH_TEXTCODEC)
 #include "codecs/qtextcodec.h"
 #endif

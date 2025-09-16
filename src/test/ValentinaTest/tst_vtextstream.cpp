@@ -37,7 +37,10 @@
 #include "../vmisc/vtextstream.h"
 #include <qobject.h>
 #include <qstringliteral.h>
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
 #include <qtypes.h>
+#endif
 
 TST_VTextStream::TST_VTextStream(QObject *parent)
   : QObject{parent},

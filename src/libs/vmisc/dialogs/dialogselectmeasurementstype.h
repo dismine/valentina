@@ -28,8 +28,11 @@
 #ifndef DIALOGSELECTMEASUREMENTSTYPE_H
 #define DIALOGSELECTMEASUREMENTSTYPE_H
 
-#include <qtclasshelpermacros.h>
 #include <QDialog>
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
+#include <qtclasshelpermacros.h>
+#endif
 
 #include "../def.h"
 

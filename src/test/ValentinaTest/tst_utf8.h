@@ -28,8 +28,11 @@
 #ifndef TST_UTF8_H
 #define TST_UTF8_H
 
-#include <qtclasshelpermacros.h>
 #include <QObject>
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
+#include <qtclasshelpermacros.h>
+#endif
 
 class QTextCodec;
 

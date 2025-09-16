@@ -39,7 +39,13 @@
 ****************************************************************************/
 
 //#define VTEXTSTREAM_DEBUG
+
+#include <QtGlobal>
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
 #include <qtypes.h>
+#endif
+
 static const int QTEXTSTREAM_BUFFERSIZE = 16384;
 
 /*!

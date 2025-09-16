@@ -28,8 +28,11 @@
 #ifndef TST_QSTRINGITERATOR_H
 #define TST_QSTRINGITERATOR_H
 
-#include <qtclasshelpermacros.h>
 #include <QObject>
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
+#include <qtclasshelpermacros.h>
+#endif
 
 class TST_QStringIterator : public QObject
 {
