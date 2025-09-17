@@ -15,10 +15,6 @@
 // We mean it.
 //
 
-#include <qtconfigmacros.h>
-
-QT_BEGIN_NAMESPACE
-
 #define InRange(c, lower, upper) (((c) >= (lower)) && ((c) <= (upper)))
 #define IsLatin(c) ((c) <= 0x7F)
 #define IsByteInGb2312(c) (InRange((c), 0xA1, 0xFE))
@@ -57,7 +53,5 @@ QT_BEGIN_NAMESPACE
 #define IsUserDefinedChar1(c) (((c) >= 0xf0) && ((c) <= 0xfc))
 
 #define IsTSCIIChar(c) (((c) >= 0x80) && ((c) <= 0xfd))
-
-QT_END_NAMESPACE
 
 #endif // QCODECMACROS_P_H

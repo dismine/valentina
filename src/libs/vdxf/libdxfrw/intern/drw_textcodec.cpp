@@ -1,11 +1,14 @@
 #include "drw_textcodec.h"
 #include "../drw_base.h"
 #include <cstring>
-#include <qtpreprocessorsupport.h>
 #include <QCoreApplication>
 #include <QDebug>
 #include <QSet>
 #include <QString>
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
+#include <qtpreprocessorsupport.h>
+#endif
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #ifdef WITH_TEXTCODEC

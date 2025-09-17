@@ -34,7 +34,10 @@
  */
 
 #include "qxtcsvmodel.h"
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
 #include <qtpreprocessorsupport.h>
+#endif
 
 #include <QFile>
 #include <QIODevice>
