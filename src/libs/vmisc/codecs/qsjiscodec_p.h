@@ -48,6 +48,7 @@
 
 #include "qjpunicode_p.h"
 #include "qtextcodec.h"
+#include <qtclasshelpermacros.h>
 
 #ifndef WITH_BIG_CODECS
 #error \
@@ -70,10 +71,13 @@ public:
     QByteArray convertFromUnicode(const QChar *uc, int len, ConverterState *state) const override;
 
     QSjisCodec();
-    virtual ~QSjisCodec();
+    ~QSjisCodec() override;
 
 protected:
     const QJpUnicodeConv *conv;
+
+private:
+    Q_DISABLE_COPY_MOVE(QSjisCodec)
 };
 
 QT_END_NAMESPACE

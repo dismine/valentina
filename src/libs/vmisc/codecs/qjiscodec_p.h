@@ -74,6 +74,9 @@ public:
 
 protected:
     const QJpUnicodeConv *conv;
+
+private:
+    Q_DISABLE_COPY_MOVE(QJisCodec)
 };
 
 QT_END_NAMESPACE

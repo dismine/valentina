@@ -194,6 +194,9 @@ QString QEucJpCodec::convertToUnicode(const char* chars, int len, ConverterState
                 ++invalid;
             }
             nbuf = 0;
+            break;
+        default:
+            break;
         }
     }
     if (state) {

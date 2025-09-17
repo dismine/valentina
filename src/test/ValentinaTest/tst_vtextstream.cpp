@@ -1193,7 +1193,7 @@ void TST_VTextStream::pos()
         QCOMPARE(stream.pos(), qint64(2607));
         QCOMPARE(strtmp, QString("locations"));
     }
-#ifdef WITH_TEXTCODEC
+#if defined(WITH_ICU_CODECS) || (defined(WITH_BIG_CODECS) && !defined(Q_OS_INTEGRITY))
     {
         // Shift-JIS device
         for (int i = 0; i < 2; ++i)

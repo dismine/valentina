@@ -103,10 +103,10 @@ QString QGb18030Codec::convertToUnicode(const char* chars, int len, ConverterSta
         if (state->flags & ConvertInvalidToNull)
             replacement = QChar::Null;
         nbuf = state->remainingChars;
-        buf[0] = (state->state_data[0] >> 24) & 0xff;
-        buf[1] = (state->state_data[0] >> 16) & 0xff;
-        buf[2] = (state->state_data[0] >>  8) & 0xff;
-        buf[3] = (state->state_data[0] >>  0) & 0xff;
+        buf[0] = static_cast<uchar>((state->state_data[0] >> 24) & 0xff);
+        buf[1] = static_cast<uchar>((state->state_data[0] >> 16) & 0xff);
+        buf[2] = static_cast<uchar>((state->state_data[0] >>  8) & 0xff);
+        buf[3] = static_cast<uchar>((state->state_data[0] >>  0) & 0xff);
     }
     int invalid = 0;
 
@@ -192,6 +192,8 @@ QString QGb18030Codec::convertToUnicode(const char* chars, int len, ConverterSta
                 ++invalid;
             }
             nbuf = 0;
+            break;
+        default:
             break;
         }
     }
@@ -316,6 +318,8 @@ QString QGbkCodec::convertToUnicode(const char* chars, int len, ConverterState *
                 nbuf = 0;
             }
             break;
+        default:
+            break;
         }
     }
     result.resize(unicodeLen);
@@ -356,7 +360,7 @@ QByteArray QGbkCodec::convertFromUnicode(const QChar *uc, int len, ConverterStat
             *cursor++ = buf[1];
         } else {
             // Error
-            *cursor += replacement;
+            *cursor += static_cast<uchar>(replacement);
             ++invalid;
         }
     }
@@ -464,6 +468,8 @@ QString QGb2312Codec::convertToUnicode(const char* chars, int len, ConverterStat
                 ++invalid;
                 nbuf = 0;
             }
+            break;
+        default:
             break;
         }
     }
@@ -8801,9 +8807,9 @@ static quint16 const gb18030_4byte_to_ucs[6793] = {
 static inline uint gb4lin_to_gb(uint gb4lin) {
     uchar   a, b, c, d;
     a = static_cast<uchar>(0x81 + gb4lin / 12600);
-    b = 0x30 + (gb4lin / 1260) % 10;
-    c = 0x81 + (gb4lin / 10) % 126;
-    d = 0x30 + gb4lin % 10;
+    b = static_cast<uchar>(0x30 + (gb4lin / 1260) % 10);
+    c = static_cast<uchar>(0x81 + (gb4lin / 10) % 126);
+    d = static_cast<uchar>(0x30 + gb4lin % 10);
     return static_cast<uint>((a << 24) | (b << 16) | (c << 8) | d);
 }
 

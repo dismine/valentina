@@ -149,7 +149,7 @@ QString QJisCodec::convertToUnicode(const char* chars, int len, ConverterState *
         if (cs->flags & ConvertInvalidToNull)
             replacement = QChar::Null;
         nbuf = cs->remainingChars;
-        buf[0] = (cs->state_data[0] >> 24) & 0xff;
+        buf[0] = static_cast<uchar>((cs->state_data[0] >> 24) & 0xff);
         buf[1] = (cs->state_data[0] >> 16) & 0xff;
         buf[2] = (cs->state_data[0] >>  8) & 0xff;
         buf[3] = (cs->state_data[0] >>  0) & 0xff;
@@ -186,6 +186,8 @@ QString QJisCodec::convertToUnicode(const char* chars, int len, ConverterState *
                         case 'B':
                             state = JISX0208_1983;        // Esc $ B
                             break;
+                        default:
+                            break;
                         }
                         nbuf = 0;
                         esc = false;
@@ -202,6 +204,8 @@ QString QJisCodec::convertToUnicode(const char* chars, int len, ConverterState *
                         case 'J':
                             state = JISX0201_Latin;        // Esc (J
                             break;
+                        default:
+                            break;
                         }
                     }
                     nbuf = 0;
@@ -214,10 +218,14 @@ QString QJisCodec::convertToUnicode(const char* chars, int len, ConverterState *
                     case 'D':
                         state = JISX0212;        // Esc $ (D
                         break;
+                    default:
+                        break;
                     }
                 }
                 nbuf = 0;
                 esc = false;
+                break;
+            default:
                 break;
             }
         } else {
@@ -284,6 +292,8 @@ QString QJisCodec::convertToUnicode(const char* chars, int len, ConverterState *
                         break;
                     }
                     nbuf = 0;
+                    break;
+                default:
                     break;
                 }
             }

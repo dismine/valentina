@@ -1650,8 +1650,8 @@ static int qt_UnicodeToBig5(ushort ch, uchar *buf)
         while (start <= end) {
             int middle = (end + start + 1)/2;
             if (b5_map_table[i].table[middle].y == ch) {
-                buf[0] = b5_map_table[i].table[middle].x >> 8;
-                buf[1] = b5_map_table[i].table[middle].x & 0xff;
+                buf[0] = static_cast<uchar>(b5_map_table[i].table[middle].x >> 8);
+                buf[1] = static_cast<uchar>(b5_map_table[i].table[middle].x & 0xff);
                 return 2;
             } else if (b5_map_table[i].table[middle].y > ch) {
                 end = middle - 1;
@@ -1714,6 +1714,8 @@ QString QBig5Codec::convertToUnicode(const char* chars, int len, ConverterState 
                 ++invalid;
             }
             nbuf = 0;
+            break;
+        default:
             break;
         }
     }
@@ -1834,6 +1836,8 @@ QString QBig5hkscsCodec::convertToUnicode(const char* chars, int len, ConverterS
                 ++invalid;
             }
             nbuf = 0;
+            break;
+        default:
             break;
         }
     }
@@ -12594,7 +12598,7 @@ int qt_UnicodeToBig5hkscs (uint wc, uchar *r)
         if (used & (static_cast<ushort>(1) << i)) {
             const uchar *c;
             /* Keep in `used' only the bits 0..i-1. */
-            used &= (static_cast<ushort>(1) << i) - 1;
+            used &= static_cast<ushort>((1 << i) - 1);
             /* Add `summary->index' and the number of bits set in `used'. */
             used = (used & 0x5555) + ((used & 0xaaaa) >> 1);
             used = (used & 0x3333) + ((used & 0xcccc) >> 2);

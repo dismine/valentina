@@ -144,6 +144,8 @@ QString QSjisCodec::convertToUnicode(const char* chars, int len, ConverterState 
             }
             nbuf = 0;
             break;
+        default:
+            break;
         }
     }
 

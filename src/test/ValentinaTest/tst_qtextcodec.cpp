@@ -2970,10 +2970,12 @@ void TST_QTextCodec::nullInputZeroOrNegativeLength_data()
     QTest::newRow("UTF-32BE") << "UTF-32BE" << 1018;
     QTest::newRow("UTF-32LE") << "UTF-32LE" << 1019;
 #ifdef Q_OS_WIN
+#if defined(WITH_ICU_CODECS) || (defined(WITH_BIG_CODECS) && !defined(Q_OS_INTEGRITY))
     QTest::newRow("EUC-KR") << "EUC-KR" << 38;
     QTest::newRow("windows-949") << "windows-949" << -949;
     QTest::newRow("GBK") << "GBK" << 113;
     QTest::newRow("GB2312") << "GB2312" << 2025;
+#endif
     QTest::newRow("ISO-8859-6") << "ISO-8859-6" << 82;
     QTest::newRow("ISO-8859-7") << "ISO-8859-7" << 10;
     QTest::newRow("ISO-8859-8") << "ISO-8859-8" << 85;
