@@ -25,10 +25,11 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
+#include <utility>
 #include <QCoreApplication>
+#include <QDebug>
 #include <QDir>
 #include <QStandardPaths>
-#include <utility>
 
 #include "../projectversion.h"
 #include "vcrashpaths.h"

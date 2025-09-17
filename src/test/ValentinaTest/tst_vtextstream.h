@@ -41,7 +41,6 @@ public:
 public slots:
     void initTestCase();
     void cleanup();
-    void cleanupTestCase();
 
 private slots:
     void getSetCheck();
@@ -213,9 +212,6 @@ private:
 
     QTemporaryDir tempDir;
     QString testFileName;
-#ifdef BUILTIN_TESTDATA
-    QSharedPointer<QTemporaryDir> m_dataDir;
-#endif
     const QString m_rfc3261FilePath;
     const QString m_shiftJisFilePath;
 };

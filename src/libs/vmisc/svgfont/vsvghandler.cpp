@@ -33,6 +33,7 @@
 #include <QtDebug>
 
 #include "vsvgpathtokenizer.h"
+#include <qmath.h>
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../compatibility.h"

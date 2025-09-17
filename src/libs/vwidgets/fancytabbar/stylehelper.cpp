@@ -30,6 +30,7 @@
 #include "stylehelper.h"
 
 #include <QApplication>
+#include <QDebug>
 #include <QObject>
 #include <QPainter>
 #include <QPalette>

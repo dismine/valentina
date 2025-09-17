@@ -58,14 +58,9 @@ void TST_VTextStream::initTestCase()
 
     testFileName = tempDir.path() + QLatin1String("/testfile");
 
-#ifdef BUILTIN_TESTDATA
-    m_dataDir = QEXTRACTTESTDATA("/");
-    QVERIFY2(QDir::setCurrent(m_dataDir->path()), qPrintable("Could not chdir to " + m_dataDir->path()));
-#else
     // chdir into the testdata dir and refer to our helper apps with relative paths
     QString const testdata_dir = QFileInfo(QStringLiteral(STDIN_PROCESS_BUILDDIR)).absolutePath();
     QVERIFY2(QDir::setCurrent(testdata_dir), qPrintable("Could not chdir to " + testdata_dir));
-#endif
 }
 
 // Testing get/set functions
@@ -188,13 +183,6 @@ void TST_VTextStream::getSetCheck()
 void TST_VTextStream::cleanup()
 {
     QCoreApplication::instance()->processEvents();
-}
-
-void TST_VTextStream::cleanupTestCase()
-{
-#ifdef BUILTIN_TESTDATA
-    QDir::setCurrent(QCoreApplication::applicationDirPath());
-#endif
 }
 
 // ------------------------------------------------------------------------------

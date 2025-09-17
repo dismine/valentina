@@ -82,8 +82,6 @@ VTestApp {
         "tst_readval.cpp",
         "tst_vsvgpathtokenizer.cpp",
         "tst_vsvgpathtokenizer.h",
-        "tst_vtextstream.cpp",
-        "tst_vtextstream.h",
         "tst_vtranslatevars.cpp",
         "tst_vabstractpiece.cpp",
         "tst_vtooluniondetails.cpp",
@@ -120,6 +118,15 @@ VTestApp {
     }
 
     Group {
+        name: "VTextStream"
+        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0
+        files: [
+            "tst_vtextstream.cpp",
+            "tst_vtextstream.h"
+        ]
+    }
+
+    Group {
         name: "VTextStream test data"
         condition: Utilities.versionCompare(Qt.core.version, "6") >= 0
         prefix: "vtextstream/"
@@ -130,7 +137,7 @@ VTestApp {
     Group {
         Depends { name: "Qt.core" }
         name: "Text codec tests"
-        condition: project.withTextCodec
+        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 && project.withTextCodec
         files: [
             "tst_qstringiterator.cpp",
             "tst_qstringiterator.h",
