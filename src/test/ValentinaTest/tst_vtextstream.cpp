@@ -1221,21 +1221,52 @@ void TST_VTextStream::pos()
                 QCOMPARE(stream.pos(), qint64(j));
             }
 
-            stream.seek(2089);
-            QString strtmp;
-            stream >> strtmp;
-            QCOMPARE(strtmp, QString("AUnicode"));
-            QCOMPARE(stream.pos(), qint64(2097));
+            uchar *ptr = file.map(0, file.size());
+            QVERIFY(ptr);
 
-            stream.seek(43325);
-            stream >> strtmp;
-            QCOMPARE(strtmp, QString("Shift-JIS"));
-            stream >> strtmp;
-            QCOMPARE(strtmp, QString::fromUtf8("\343\201\247\346\233\270\343\201\213\343\202\214\343\201\237"));
-            QCOMPARE(stream.pos(), qint64(43345));
-            stream >> strtmp;
-            QCOMPARE(strtmp, QString("POD"));
-            QCOMPARE(stream.pos(), qint64(43349));
+            QByteArray const data(reinterpret_cast<const char *>(ptr), file.size());
+
+            // --- AUnicode ---
+            {
+                const QByteArray marker = stream.codec()->fromUnicode(QStringLiteral("AUnicode"));
+                const qint64 offset = data.indexOf(marker);
+                QVERIFY(offset >= 0);
+
+                QVERIFY(stream.seek(offset));
+                QCOMPARE(stream.pos(), offset);
+
+                QString strtmp;
+                stream >> strtmp;
+                QCOMPARE(strtmp, QStringLiteral("AUnicode"));
+                QCOMPARE(stream.pos(), offset + marker.size());
+            }
+
+            // --- Shift-JIS ---
+            {
+                const QByteArray marker = stream.codec()->fromUnicode(QStringLiteral("Shift-JIS"));
+                qint64 offset = data.lastIndexOf(marker);
+                QVERIFY(offset >= 0);
+
+                QVERIFY(stream.seek(offset));
+                QCOMPARE(stream.pos(), offset);
+
+                QString strtmp;
+                stream >> strtmp;
+                QCOMPARE(strtmp, QStringLiteral("Shift-JIS"));
+                offset += marker.size();
+                QCOMPARE(stream.pos(), offset);
+
+                stream >> strtmp;
+                const QString str = QString::fromUtf8("\343\201\247\346\233\270\343\201\213\343\202\214\343\201\237");
+                QCOMPARE(strtmp, str);
+                offset += stream.codec()->fromUnicode(str).size() + 1;
+                QCOMPARE(stream.pos(), offset);
+
+                stream >> strtmp;
+                QCOMPARE(strtmp, QStringLiteral("POD"));
+                offset += stream.codec()->fromUnicode(QStringLiteral("POD")).size() + 1;
+                QCOMPARE(stream.pos(), offset);
+            }
         }
     }
 #endif

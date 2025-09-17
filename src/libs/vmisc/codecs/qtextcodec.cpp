@@ -619,10 +619,10 @@ QTextCodec *QTextCodec::codecForName(const QByteArray &name)
 
 #if !defined(WITH_ICU_CODECS)
     QTextCodecCache *cache = &globalData->codecCache;
-    QTextCodec *codec;
-    codec = cache->value(name);
-    if (codec)
+    if (QTextCodec *codec = cache->value(name))
+    {
         return codec;
+    }
 
     for (TextCodecListConstIt it = globalData->allCodecs.constBegin(), cend = globalData->allCodecs.constEnd(); it != cend; ++it) {
         QTextCodec *cursor = *it;

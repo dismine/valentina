@@ -262,7 +262,7 @@ QString QJisCodec::convertToUnicode(const char* chars, int len, ConverterState *
                         result += QValidChar(u);
                         break;
                     case JISX0201_Kana:
-                        u = conv->jisx0201ToUnicode(ch | 0x80);
+                        u = conv->jisx0201ToUnicode(static_cast<uchar>(ch | 0x80));
                         result += QValidChar(u);
                         break;
                     case JISX0208_1978:
@@ -279,11 +279,11 @@ QString QJisCodec::convertToUnicode(const char* chars, int len, ConverterState *
                     switch (state) {
                     case JISX0208_1978:
                     case JISX0208_1983:
-                        u = conv->jisx0208ToUnicode(buf[0] & 0x7f, ch & 0x7f);
+                        u = conv->jisx0208ToUnicode(static_cast<uchar>(buf[0] & 0x7f), static_cast<uchar>(ch & 0x7f));
                         result += QValidChar(u);
                         break;
                     case JISX0212:
-                        u = conv->jisx0212ToUnicode(buf[0] & 0x7f, ch & 0x7f);
+                        u = conv->jisx0212ToUnicode(static_cast<uchar>(buf[0] & 0x7f), static_cast<uchar>(ch & 0x7f));
                         result += QValidChar(u);
                         break;
                     default:

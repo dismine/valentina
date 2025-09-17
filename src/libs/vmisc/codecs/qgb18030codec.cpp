@@ -8829,18 +8829,18 @@ static uint qt_Gb18030ToUnicode(const uchar *gbstr, int& len) {
             len = 2;
 
             if (IsUDA1(first, second))
-                uni = 0xE000 + (first - 0xAA) * 94 + (second - 0xA1);
+                uni = static_cast<uint>(0xE000 + (first - 0xAA) * 94 + (second - 0xA1));
             else if (IsUDA2(first, second))
-                uni = 0xE234 + (first - 0xF8) * 94 + (second - 0xA1);
+                uni = static_cast<uint>(0xE234 + (first - 0xF8) * 94 + (second - 0xA1));
             else if (IsUDA3(first, second))
-                uni = 0xE4C6 + (first - 0xA1) * 96 + (second - 0x40)
-                             - ((second >= 0x80) ? 1 : 0);
+                uni =static_cast<uint>( 0xE4C6 + (first - 0xA1) * 96 + (second - 0x40)
+                             - ((second >= 0x80) ? 1 : 0));
             else {
                 // Use the mapping table
                 uint i;
 
-                i = (first - 0x81) * 190 + (second - 0x40)
-                                         - ((second >= 0x80) ? 1 : 0);
+                i = static_cast<uint>((first - 0x81) * 190 + (second - 0x40)
+                                         - ((second >= 0x80) ? 1 : 0));
 
                 if (InRange(first, 0xA1, 0xA7))
                     i -= (first - 0xA0) * 96;
@@ -8865,8 +8865,8 @@ static uint qt_Gb18030ToUnicode(const uchar *gbstr, int& len) {
                 uint            gb4lin;
                 indexTbl_t  g2u;
 
-                gb4lin = (first - 0x81) * 12600 + (second - 0x30) * 1260
-                          + (third - 0x81) * 10 + (fourth - 0x30);
+                gb4lin = static_cast<uint>((first - 0x81) * 12600 + (second - 0x30) * 1260
+                          + (third - 0x81) * 10 + (fourth - 0x30));
 
                 len = 4;
                 if (gb4lin <= 0x99FB) {

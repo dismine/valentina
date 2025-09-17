@@ -58,7 +58,7 @@ QEucJpCodec::QEucJpCodec() : conv(QJpUnicodeConv::newConverter(QJpUnicodeConv::D
 QEucJpCodec::~QEucJpCodec()
 {
     delete conv;
-    conv = 0;
+    conv = nullptr;
 }
 
 QByteArray QEucJpCodec::convertFromUnicode(const QChar *uc, int len, ConverterState *state) const
@@ -174,7 +174,7 @@ QString QEucJpCodec::convertToUnicode(const char* chars, int len, ConverterState
             } else {
                 // JIS X 0208-1990
                 if (IsEucChar(ch)) {
-                    uint u = conv->jisx0208ToUnicode(buf[0] & 0x7f, ch & 0x7f);
+                    uint u = conv->jisx0208ToUnicode(static_cast<uint>(buf[0] & 0x7f), static_cast<uint>(ch & 0x7f));
                     result += QValidChar(u);
                 } else {
                     // Error
@@ -187,7 +187,7 @@ QString QEucJpCodec::convertToUnicode(const char* chars, int len, ConverterState
         case 2:
             // JIS X 0212
             if (IsEucChar(ch)) {
-                uint u = conv->jisx0212ToUnicode(buf[1] & 0x7f, ch & 0x7f);
+                uint u = conv->jisx0212ToUnicode(static_cast<uint>(buf[1] & 0x7f), static_cast<uint>(ch & 0x7f));
                 result += QValidChar(u);
             } else {
                 result += replacement;
