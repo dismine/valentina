@@ -32,8 +32,11 @@
 #include "tst_qtextcodec.h"
 #include "../vmisc/codecs/qtextcodec.h"
 #include "defglobal.h"
-#include <qtclasshelpermacros.h>
 #include <qtestcase.h>
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
+#include <qtclasshelpermacros.h>
+#endif
 
 #include <QThreadPool>
 #include <QtTest/QtTest>
