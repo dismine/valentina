@@ -650,7 +650,7 @@ QByteArray QSimpleTextCodec::convertFromUnicode(const QChar *in, int len, Conver
         if (u < 128) {
             *rp = static_cast<unsigned char>(u);
         } else {
-            *rp = ((u < rmsize) ? (*(rmp+u)) : 0);
+            *rp =  static_cast<unsigned char>(((u < rmsize) ? (*(rmp+u)) : 0));
             if (*rp == 0) {
                 *rp = static_cast<unsigned char>(replacement);
                 ++invalid;

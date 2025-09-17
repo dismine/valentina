@@ -58,7 +58,7 @@ QString QWindowsLocalCodec::convertToUnicode(const char *chars, int length, Conv
     while (
         !(len = MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED | MB_ERR_INVALID_CHARS, mb, mblen, wc.data(), wc.length())))
     {
-        int r = GetLastError();
+        auto const r = static_cast<int>(GetLastError());
         if (r == ERROR_INSUFFICIENT_BUFFER)
         {
             const int wclen = MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, mb, mblen, 0, 0);
@@ -94,7 +94,7 @@ QString QWindowsLocalCodec::convertToUnicode(const char *chars, int length, Conv
     //save the new state information
     if (state)
     {
-        state->state_data[0] = (char) state_data;
+        state->state_data[0] = static_cast<uint>(state_data);
         state->remainingChars = remainingChars;
     }
     QString s((QChar *) wc.data(), len);
@@ -107,6 +107,8 @@ QString QWindowsLocalCodec::convertToUnicode(const char *chars, int length, Conv
 
 QByteArray QWindowsLocalCodec::convertFromUnicode(const QChar *ch, int uclen, ConverterState *state) const
 {
+    Q_UNUSED(state);
+
     if (!ch)
         return QByteArray();
     if (uclen == 0)
@@ -116,7 +118,7 @@ QByteArray QWindowsLocalCodec::convertFromUnicode(const QChar *ch, int uclen, Co
     int len;
     while (!(len = WideCharToMultiByte(CP_ACP, 0, (const wchar_t *) ch, uclen, mb.data(), mb.size() - 1, 0, &used_def)))
     {
-        int r = GetLastError();
+        auto const r = static_cast<int>(GetLastError());
         if (r == ERROR_INSUFFICIENT_BUFFER)
         {
             mb.resize(1 + WideCharToMultiByte(CP_ACP, 0, (const wchar_t *) ch, uclen, 0, 0, 0, &used_def));
@@ -187,7 +189,7 @@ QString QWindowsLocalCodec::convertToUnicodeCharByChar(const char *chars, int le
     while (
         !(len = MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED | MB_ERR_INVALID_CHARS, mb, mblen, wc.data(), wc.length())))
     {
-        int r = GetLastError();
+        auto const r = static_cast<int>(GetLastError());
         if (r == ERROR_INSUFFICIENT_BUFFER)
         {
             const int wclen = MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, mb, mblen, 0, 0);
@@ -223,7 +225,7 @@ QString QWindowsLocalCodec::convertToUnicodeCharByChar(const char *chars, int le
     //save the new state information
     if (state)
     {
-        state->state_data[0] = (char) state_data;
+        state->state_data[0] = static_cast<uint>(state_data);
         state->remainingChars = remainingChars;
     }
     QString s((QChar *) wc.data(), len);

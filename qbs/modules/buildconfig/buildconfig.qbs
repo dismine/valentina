@@ -860,7 +860,8 @@ Module {
                 "-wd4456", // declaration of 'X' hides previous local declaration
                 "-wd4459", // declaration of 'X' hides global declaration
                 "-wd4457", // declaration of 'X' hides function parameter
-                "-wd4125"  // decimal digit terminates octal escape sequence
+                "-wd4125", // decimal digit terminates octal escape sequence
+                "-wd4310"  // cast truncates constant value
             )
         }
         return debugFlags;

@@ -150,7 +150,7 @@ static inline bool simdDecodeAscii(ushort *&dst, const uchar *&nextAscii, const 
     if (end - src >= 8)
     {
         __m128i data = _mm_loadl_epi64(reinterpret_cast<const __m128i *>(src));
-        uint n = _mm_movemask_epi8(data) & 0xff;
+        auto n = static_cast<uint>(_mm_movemask_epi8(data) & 0xff);
         if (!n)
         {
             // unpack and store

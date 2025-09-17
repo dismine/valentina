@@ -86,7 +86,7 @@ inline int toUtf8(ushort u, OutputPtr &dst, InputPtr &src, InputPtr end)
     {
         // U+0080 to U+07FF - two bytes
         // first of two bytes
-        Traits::appendByte(dst, 0xc0 | uchar(u >> 6));
+        Traits::appendByte(dst, static_cast<uchar>(0xc0 | uchar(u >> 6)));
     }
     else
     {
@@ -97,7 +97,7 @@ inline int toUtf8(ushort u, OutputPtr &dst, InputPtr &src, InputPtr end)
                 return Traits::Error;
 
             // first of three bytes
-            Traits::appendByte(dst, 0xe0 | uchar(u >> 12));
+            Traits::appendByte(dst, static_cast<uchar>(0xe0 | uchar(u >> 12)));
         }
         else
         {
@@ -119,17 +119,17 @@ inline int toUtf8(ushort u, OutputPtr &dst, InputPtr &src, InputPtr end)
                 return Traits::Error;
 
             // first byte
-            Traits::appendByte(dst, 0xf0 | (uchar(ucs4 >> 18) & 0xf));
+            Traits::appendByte(dst, static_cast<uchar>(0xf0 | (uchar(ucs4 >> 18) & 0xf)));
 
             // second of four bytes
-            Traits::appendByte(dst, 0x80 | (uchar(ucs4 >> 12) & 0x3f));
+            Traits::appendByte(dst, static_cast<uchar>(0x80 | (uchar(ucs4 >> 12) & 0x3f)));
 
             // for the rest of the bytes
             u = ushort(ucs4);
         }
 
         // second to last byte
-        Traits::appendByte(dst, 0x80 | (uchar(u >> 6) & 0x3f));
+        Traits::appendByte(dst, static_cast<uchar>(0x80 | (uchar(u >> 6) & 0x3f)));
     }
 
     // last byte
@@ -168,19 +168,19 @@ inline int fromUtf8(uchar b, OutputPtr &dst, InputPtr &src, InputPtr end)
     {
         charsNeeded = 2;
         min_uc = 0x80;
-        uc = b & 0x1f;
+        uc = static_cast<uint>(b & 0x1f);
     }
     else if (b < 0xf0)
     {
         charsNeeded = 3;
         min_uc = 0x800;
-        uc = b & 0x0f;
+        uc = static_cast<uint>(b & 0x0f);
     }
     else if (b < 0xf5)
     {
         charsNeeded = 4;
         min_uc = 0x10000;
-        uc = b & 0x07;
+        uc = static_cast<uint>(b & 0x07);
     }
     else
     {
