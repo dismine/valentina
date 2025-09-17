@@ -38,10 +38,10 @@
 #include <QtConcurrent>
 #include <memory>
 
-#include "../ifc/exception/vexception.h"
 #include "../ifc/xml/vwatermarkconverter.h"
 #include "../vformat/vwatermark.h"
 #include "../vmisc/def.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpropertyexplorer/checkablemessagebox.h"
 #include "../vwidgets/vmousewheelwidgetadjustmentguard.h"

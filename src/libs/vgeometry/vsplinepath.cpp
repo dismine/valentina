@@ -32,7 +32,7 @@
 #include <QJsonObject>
 #include <QPoint>
 
-#include "../ifc/exception/vexception.h"
+#include "../vmisc/exception/vexception.h"
 #include "vabstractcurve.h"
 #include "vsplinepath_p.h"
 

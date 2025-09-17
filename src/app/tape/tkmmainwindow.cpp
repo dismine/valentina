@@ -26,7 +26,6 @@
  **
  *************************************************************************/
 #include "tkmmainwindow.h"
-#include "../ifc/exception/vexception.h"
 #include "../ifc/xml/utils.h"
 #include "../ifc/xml/vknownmeasurementsconverter.h"
 #include "../vformat/knownmeasurements/vknownmeasurement.h"
@@ -37,6 +36,7 @@
 #include "../vmisc/dialogs/dialogaskcollectstatistic.h"
 #include "../vmisc/dialogs/dialogexporttocsv.h"
 #include "../vmisc/dialogs/dialogselectlanguage.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vmisc/qxtcsvmodel.h"
 #include "../vmisc/theme/themeDef.h"
 #include "../vmisc/theme/vtheme.h"
@@ -46,8 +46,8 @@
 #include "knownmeasurements/vknownmeasurements.h"
 #include "mapplication.h" // Should be last because of definning qApp
 #include "ui_tkmmainwindow.h"
-#include <qmimedata.h>
 
+#include <qmimedata.h>
 #include <QAbstractButton>
 #include <QCloseEvent>
 #include <QCompleter>

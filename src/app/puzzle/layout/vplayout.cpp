@@ -27,9 +27,9 @@
  *************************************************************************/
 
 #include "vplayout.h"
-#include "../ifc/exception/vexception.h"
 #include "../ifc/xml/vwatermarkconverter.h"
 #include "../vformat/vwatermark.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vpapplication.h"
 #include "../vptilefactory.h"
 #include "vppiece.h"

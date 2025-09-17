@@ -38,7 +38,7 @@
 #include "../../../visualization/path/vistoolcubicbezierpath.h"
 #include "../../../visualization/visualization.h"
 #include "../../vabstracttool.h"
-#include "../ifc/exception/vexception.h"
+#include "../vmisc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vdomdocument.h"
 #include "../vdrawtool.h"

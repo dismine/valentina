@@ -370,7 +370,7 @@ QList<QByteArray> QIcuCodec::availableCodecs()
             continue;
         for (int j = 0; j < ac; ++j) {
             error = U_ZERO_ERROR;
-            const char *alias = ucnv_getAlias(standardName, j, &error);
+            const char *alias = ucnv_getAlias(standardName, static_cast<uint16_t>(j), &error);
             if (!U_SUCCESS(error))
                 continue;
             codecs += alias;
@@ -684,7 +684,7 @@ QList<QByteArray> QIcuCodec::aliases() const
 
     QList<QByteArray> aliases;
     for (int i = 0; i < n; ++i) {
-        const char *a = ucnv_getAlias(m_name, i, &error);
+        const char *a = ucnv_getAlias(m_name, static_cast<uint16_t>(i), &error);
         // skip the canonical name
         if (!a || !qstrcmp(a, m_name))
             continue;

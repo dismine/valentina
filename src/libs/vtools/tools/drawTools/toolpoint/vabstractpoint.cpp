@@ -30,7 +30,7 @@
 
 #include <QSharedPointer>
 
-#include "../ifc/exception/vexception.h"
+#include "../vmisc/exception/vexception.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vgeometry/vgobject.h"
 #include "../vdrawtool.h"

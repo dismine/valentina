@@ -211,7 +211,7 @@ private:
     void generateRealNumbersDataWrite();
 
     QTemporaryDir tempDir;
-    QString testFileName;
+    QString testFileName{};
     const QString m_rfc3261FilePath;
     const QString m_shiftJisFilePath;
 };

@@ -31,8 +31,8 @@
 #include <QLoggingCategory>
 #include <climits>
 
-#include "../ifc/exception/vexception.h"
 #include "../vmisc/compatibility.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "vlayoutdef.h"
 

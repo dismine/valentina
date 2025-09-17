@@ -357,6 +357,15 @@ VLib {
         condition: Utilities.versionCompare(Qt.core.version, "6.9") < 0
     }
 
+    Group {
+        name: "exception"
+        prefix: "exception/"
+        files: [
+            "vexception.h",
+            "vexception.cpp"
+        ]
+    }
+
     Export {
         Depends { name: "cpp" }
         Depends { name: "Qt"; submodules: ["printsupport", "widgets"] }

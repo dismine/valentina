@@ -26,8 +26,8 @@
  **
  *************************************************************************/
 #include "vsvgfontreader.h"
-#include "../../ifc/exception/vexception.h"
 #include "../def.h"
+#include "../exception/vexception.h"
 #include "qpainterpath.h"
 #include "svgdef.h"
 #include "vsvgfont.h"
@@ -74,7 +74,7 @@ auto ParseFontWeight(const QString &fontWeight) -> SVGFontWeight
         return SVGFontWeight::Normal;
     }
 
-    bool ok;
+    bool ok = false;
     int const parsedWeight = fontWeight.toInt(&ok);
 
     if (ok)

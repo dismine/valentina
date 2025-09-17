@@ -26,10 +26,10 @@
  **
  *************************************************************************/
 #include "vknownmeasurementsdatabase.h"
-#include "../ifc/exception/vexception.h"
 #include "../ifc/xml/vknownmeasurementsconverter.h"
 #include "../vformat/knownmeasurements/vknownmeasurements.h"
 #include "../vformat/knownmeasurements/vknownmeasurementsdocument.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 

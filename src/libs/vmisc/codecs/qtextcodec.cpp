@@ -70,26 +70,23 @@ QT_BEGIN_NAMESPACE
 // in qstring.cpp:
 void qt_from_latin1(char16_t *dst, const char *str, size_t size) noexcept;
 
-typedef QList<QTextCodec*>::ConstIterator TextCodecListConstIt;
-typedef QList<QByteArray>::ConstIterator ByteArrayListConstIt;
+using TextCodecListConstIt = QList<QTextCodec *>::ConstIterator;
+using ByteArrayListConstIt = QList<QByteArray>::ConstIterator;
 
-Q_GLOBAL_STATIC(QRecursiveMutex, textCodecsMutex)
+Q_GLOBAL_STATIC(QRecursiveMutex, textCodecsMutex) // NOLINT
 
-Q_GLOBAL_STATIC(QTextCodecData, textCodecData)
-
-QTextCodecData::QTextCodecData()
-    : codecForLocale(nullptr)
-{
-}
+Q_GLOBAL_STATIC(QTextCodecData, textCodecData) // NOLINT
 
 QTextCodecData::~QTextCodecData()
 {
     codecForLocale.storeRelease(nullptr);
-    QList<QTextCodec *> tmp = allCodecs;
+    QList<QTextCodec *> const tmp = allCodecs;
     allCodecs.clear();
     codecCache.clear();
     for (QList<QTextCodec *>::const_iterator it = tmp.constBegin(); it != tmp.constEnd(); ++it)
+    {
         delete *it;
+    }
 }
 
 QTextCodecData *QTextCodecData::instance()
@@ -134,7 +131,7 @@ public:
 private:
     Q_DISABLE_COPY_MOVE(TextCodecsMutexLocker)
     QRecursiveMutex *m_mutex = nullptr;
-    std::optional<std::unique_lock<QRecursiveMutex>> m_lock;
+    std::optional<std::unique_lock<QRecursiveMutex>> m_lock{};
 };
 
 #if !defined(WITH_ICU_CODECS)

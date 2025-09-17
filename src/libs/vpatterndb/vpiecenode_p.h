@@ -33,8 +33,8 @@
 #include <QDataStream>
 #include <QSharedData>
 
-#include "../ifc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
+#include "../vmisc/exception/vexception.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")

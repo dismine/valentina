@@ -65,4 +65,19 @@ using VTextCodec = QTextCodec;
 #define Q_DECL_CONSTEVAL constexpr
 #endif
 
+// Detect whether the compiler supports C++11 noexcept exception specifications.
+#if defined(__clang__)
+#if __has_feature(cxx_noexcept)
+#define V_NOEXCEPT_EXPR(x) noexcept(x) // Clang 3.0 and above have noexcept
+#endif
+#elif defined(__GNUC__)
+#if (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6)) && defined(__GXX_EXPERIMENTAL_CXX0X__)
+#define V_NOEXCEPT_EXPR(x) noexcept(x) // GCC 4.7 and following have noexcept
+#endif
+#elif defined(_MSC_FULL_VER) && _MSC_FULL_VER >= 190023026
+#define V_NOEXCEPT_EXPR(x) noexcept(x) // Visual Studio 2015 and following have noexcept
+#else
+#define V_NOEXCEPT_EXPR(x)
+#endif
+
 #endif // DEFGLOBAL_H

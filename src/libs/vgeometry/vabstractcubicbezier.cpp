@@ -35,9 +35,10 @@
 #include <QtConcurrent>
 #include <QtDebug>
 
-#include "../ifc/exception/vexception.h"
+#include "../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/def.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vmath.h"
 

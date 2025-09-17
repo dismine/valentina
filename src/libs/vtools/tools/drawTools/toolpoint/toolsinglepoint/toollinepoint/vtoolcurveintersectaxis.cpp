@@ -40,7 +40,7 @@
 #include "../../../../../dialogs/tools/dialogtool.h"
 #include "../../../../vabstracttool.h"
 #include "../../../vdrawtool.h"
-#include "../ifc/exception/vexception.h"
+#include "../vmisc/exception/vexception.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/ifcdef.h"
 #include "../toolcut/vtoolcutsplinepath.h"

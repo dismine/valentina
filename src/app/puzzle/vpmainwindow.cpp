@@ -45,7 +45,6 @@
 #include <thread>
 #include <utility>
 
-#include "../ifc/exception/vexception.h"
 #include "../ifc/xml/vlayoutconverter.h"
 #include "../vdxf/libdxfrw/drw_base.h"
 #include "../vganalytics/vganalytics.h"
@@ -55,6 +54,7 @@
 #include "../vlayout/vrawlayout.h"
 #include "../vmisc/dialogs/dialogaskcollectstatistic.h"
 #include "../vmisc/dialogs/dialogselectlanguage.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vmisc/lambdaconstants.h"
 #include "../vmisc/projectversion.h"
 #include "../vmisc/theme/themeDef.h"

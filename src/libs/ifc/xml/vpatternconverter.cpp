@@ -39,11 +39,11 @@
 #include <QList>
 #include <QUuid>
 
-#include "../exception/vexception.h"
 #include "../exception/vexceptionemptyparameter.h"
 #include "../exception/vexceptionwrongid.h"
 #include "../qmuparser/qmutokenparser.h"
 #include "../vmisc/def.h"
+#include "../vmisc/exception/vexception.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"

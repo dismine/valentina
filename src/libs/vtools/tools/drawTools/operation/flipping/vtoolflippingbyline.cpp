@@ -46,7 +46,7 @@
 #include "../../../vabstracttool.h"
 #include "../../../vdatatool.h"
 #include "../../vdrawtool.h"
-#include "../ifc/exception/vexception.h"
+#include "../vmisc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/vabstractapplication.h"

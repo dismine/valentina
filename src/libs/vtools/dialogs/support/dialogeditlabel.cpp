@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "dialogeditlabel.h"
-#include "../ifc/exception/vexception.h"
+#include "../vmisc/exception/vexception.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/xml/vlabeltemplateconverter.h"
 #include "../tools/dialogtool.h"

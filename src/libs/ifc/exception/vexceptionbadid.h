@@ -32,8 +32,7 @@
 #include <QString>
 #include <QtGlobal>
 
-#include "../ifcdef.h"
-#include "vexception.h"
+#include "../vmisc/exception/vexception.h"
 
 /**
  * @brief The VExceptionBadId class for exception bad id

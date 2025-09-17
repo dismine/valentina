@@ -28,7 +28,8 @@
 
 #include "vexceptionbadid.h"
 
-#include "vexception.h"
+#include "../vmisc/exception/vexception.h"
+#include "../vmisc/typedef.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"

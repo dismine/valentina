@@ -34,8 +34,8 @@
 #include <QString>
 #include <QUuid>
 
-#include "../ifc/exception/vexception.h"
 #include "../vmisc/defglobal.h"
+#include "../vmisc/exception/vexception.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")

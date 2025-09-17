@@ -49,7 +49,7 @@
 
 #include "../dialogs/support/dialogeditwrongformula.h"
 #include "../dialogs/support/dialogundo.h"
-#include "../ifc/exception/vexception.h"
+#include "../vmisc/exception/vexception.h"
 #include "../ifc/exception/vexceptionundo.h"
 #include "../ifc/xml/vtoolrecord.h"
 #include "../undocommands/deltool.h"

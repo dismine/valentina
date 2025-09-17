@@ -53,6 +53,7 @@
 //
 
 #include "vtextstream.h"
+#include <qtclasshelpermacros.h>
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
 #include <qtypes.h>
@@ -71,8 +72,8 @@ class QDeviceClosedNotifier : public QObject
 {
     Q_OBJECT
 public:
-    inline QDeviceClosedNotifier()
-    { }
+    QDeviceClosedNotifier() = default;
+    ~QDeviceClosedNotifier() override = default;
 
     inline void setupDevice(VTextStream *stream, QIODevice *device)
     {
@@ -86,7 +87,8 @@ public Q_SLOTS:
     inline void flushStream() { stream->flush(); }
 
 private:
-    VTextStream *stream;
+    Q_DISABLE_COPY_MOVE(QDeviceClosedNotifier)
+    VTextStream *stream{nullptr};
 };
 #endif
 
@@ -101,59 +103,61 @@ public:
     public:
         void reset();
 
-        int realNumberPrecision;
-        int integerBase;
-        qsizetype fieldWidth;
-        QChar padChar;
-        VTextStream::FieldAlignment fieldAlignment;
-        VTextStream::RealNumberNotation realNumberNotation;
-        VTextStream::NumberFlags numberFlags;
+        int realNumberPrecision{6};
+        int integerBase{0};
+        qsizetype fieldWidth{0};
+        QChar padChar{QLatin1Char(' ')};
+        VTextStream::FieldAlignment fieldAlignment{VTextStream::AlignRight};
+        VTextStream::RealNumberNotation realNumberNotation{VTextStream::SmartNotation};
+        VTextStream::NumberFlags numberFlags{};
     };
 
-    VTextStreamPrivate(VTextStream *q_ptr);
+    explicit VTextStreamPrivate(VTextStream *q_ptr);
     ~VTextStreamPrivate();
     void reset();
 
     // device
-    QIODevice *device;
+    QIODevice *device{nullptr};
 #ifndef QT_NO_QOBJECT
-    QDeviceClosedNotifier deviceClosedNotifier;
+    QDeviceClosedNotifier deviceClosedNotifier{};
 #endif
 
     // string
-    QString *string;
-    qsizetype stringOffset;
-    QIODevice::OpenMode stringOpenMode;
+    QString *string{nullptr};
+    qsizetype stringOffset{0};
+    QIODevice::OpenMode stringOpenMode{QIODevice::NotOpen};
 
 #if defined(WITH_TEXTCODEC)
     // codec
-    QTextCodec *codec;
-    QTextCodec::ConverterState readConverterState;
-    QTextCodec::ConverterState writeConverterState;
-    QTextCodec::ConverterState *readConverterSavedState;
+    QTextCodec *codec{QTextCodec::codecForLocale()};
+    QTextCodec::ConverterState readConverterState{};
+    QTextCodec::ConverterState writeConverterState{};
+    QTextCodec::ConverterState *readConverterSavedState{nullptr};
 #endif
 
-    QString writeBuffer;
-    QString readBuffer;
-    qsizetype readBufferOffset;
-    qsizetype readConverterSavedStateOffset; //the offset between readBufferStartDevicePos and that start of the buffer
-    qint64 readBufferStartDevicePos;
+    QString writeBuffer{};
+    QString readBuffer{};
+    qsizetype readBufferOffset{0};
+    //the offset between readBufferStartDevicePos and that start of the buffer
+    qsizetype readConverterSavedStateOffset{0};
+    qint64 readBufferStartDevicePos{0};
 
-    Params params;
+    Params params{};
 
     // status
-    VTextStream::Status status;
-    QLocale locale;
+    VTextStream::Status status{};
+    QLocale locale{QLocale::c()};
     VTextStream *q_ptr;
 
-    qsizetype lastTokenSize;
-    bool deleteDevice;
+    qsizetype lastTokenSize{0};
+    bool deleteDevice{false};
 #if defined(WITH_TEXTCODEC)
-    bool autoDetectUnicode;
+    bool autoDetectUnicode{true};
 #endif
 
     // i/o
-    enum TokenDelimiter {
+    enum TokenDelimiter : quint8
+    {
         Space,
         NotSpace,
         EndOfLine
@@ -169,7 +173,8 @@ public:
     void restoreToSavedConverterState();
 
     // Return value type for getNumber()
-    enum NumberParsingStatus {
+    enum NumberParsingStatus : quint8
+    {
         npsOk,
         npsMissingDigit,
         npsInvalidPrefix
@@ -200,6 +205,9 @@ public:
     bool fillReadBuffer(qint64 maxBytes = -1);
     void resetReadBuffer();
     void flushWriteBuffer();
+
+private:
+    Q_DISABLE_COPY_MOVE(VTextStreamPrivate)
 };
 
 #endif // VTEXTSTREAM_P_H

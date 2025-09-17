@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vlayoutpiecepath.h"
+#include "../vmisc/def.h"
 #include "vlayoutpiecepath_p.h"
 
 #include <QPainterPath>

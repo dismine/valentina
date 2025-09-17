@@ -31,8 +31,6 @@
 #include <QByteArray>
 #include <QtGlobal>
 
-#include "../ifcdef.h"
-
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
 QT_WARNING_DISABLE_INTEL(1418)

@@ -28,7 +28,7 @@
 
 #include "vgeometrydef.h"
 
-#include "../ifc/exception/vexception.h"
+#include "../vmisc/exception/vexception.h"
 
 #include <QCoreApplication>
 #include <QJsonArray>

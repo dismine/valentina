@@ -27,7 +27,6 @@
  ** *************************************************************************/
 
 #include "vplayoutfilereader.h"
-#include "../ifc/exception/vexception.h"
 #include "../ifc/exception/vexceptionconversionerror.h"
 #include "../layout/vplayout.h"
 #include "../layout/vppiece.h"
@@ -37,10 +36,12 @@
 #include "../vlayout/vlayoutpiecepath.h"
 #include "../vlayout/vtextmanager.h"
 #include "../vmisc/compatibility.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vpatterndb/floatItemData/floatitemdef.h"
 #include "../vwidgets/vpiecegrainline.h"
 #include "vplayoutliterals.h"
+
 #include <QFont>
 #include <QXmlStreamAttributes>
 

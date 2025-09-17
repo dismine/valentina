@@ -28,7 +28,7 @@
 #ifndef VEXCEPTIONTERMINATEDPOSITION_H
 #define VEXCEPTIONTERMINATEDPOSITION_H
 
-#include "vexception.h"
+#include "../vmisc/exception/vexception.h"
 
 class VExceptionTerminatedPosition : public VException
 {

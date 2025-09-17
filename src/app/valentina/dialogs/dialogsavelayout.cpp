@@ -28,7 +28,7 @@
 
 #include "dialogsavelayout.h"
 #include "../core/vapplication.h"
-#include "../ifc/exception/vexception.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vlayout/vlayoutexporter.h"
 #include "../vmisc/vvalentinasettings.h"
 #include "ui_dialogsavelayout.h"

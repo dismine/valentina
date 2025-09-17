@@ -31,12 +31,12 @@
 #include <QSaveFile>
 #include <qdom.h>
 
-#include "../exception/vexception.h"
 #include "../exception/vexceptionbadid.h"
 #include "../exception/vexceptionconversionerror.h"
 #include "../exception/vexceptionemptyparameter.h"
 #include "../exception/vexceptionwrongid.h"
 #include "../ifcdef.h"
+#include "../vmisc/exception/vexception.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <QAbstractMessageHandler>

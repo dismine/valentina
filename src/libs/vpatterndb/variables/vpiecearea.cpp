@@ -26,6 +26,7 @@
  **
  *************************************************************************/
 #include "vpiecearea.h"
+#include "../ifc/ifcdef.h"
 #include "../vcontainer.h"
 #include "../vpiece.h"
 #include "vincrement.h"

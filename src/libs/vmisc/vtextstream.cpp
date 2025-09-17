@@ -349,14 +349,8 @@ static QByteArray qt_prettyDebug(const char *data, int len, int maxSize)
     \internal
 */
 VTextStreamPrivate::VTextStreamPrivate(VTextStream *q_ptr)
-  :
-#if defined(WITH_TEXTCODEC)
-    readConverterSavedState(nullptr),
-#endif
-    readConverterSavedStateOffset(0),
-    locale(QLocale::c())
+  : q_ptr(q_ptr)
 {
-    this->q_ptr = q_ptr;
     reset();
 }
 

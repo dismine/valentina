@@ -51,7 +51,7 @@
 #include <QTextDocument>
 #include <QUrl>
 
-#include "../exception/vexception.h"
+#include "../vmisc/exception/vexception.h"
 #include "vdomdocument.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)

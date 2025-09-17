@@ -46,9 +46,9 @@
 #include <QtConcurrent>
 #include <functional>
 
-#include "../ifc/exception/vexception.h"
 #include "../vlayout/vlayoutpoint.h"
 #include "../vmisc/def.h"
+#include "../vmisc/exception/vexception.h"
 #include "vpiecegrainline.h"
 
 #ifdef LAYOUT_DEBUG

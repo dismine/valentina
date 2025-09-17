@@ -25,9 +25,10 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
+
 #include "dialogsavemanuallayout.h"
-#include "../ifc/exception/vexception.h"
 #include "../vlayout/vlayoutexporter.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vpapplication.h"
 #include "ui_dialogsavemanuallayout.h"
 

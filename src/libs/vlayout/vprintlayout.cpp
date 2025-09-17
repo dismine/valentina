@@ -43,9 +43,9 @@
 #include <QSpacerItem>
 #include <QtMath>
 
-#include "../ifc/exception/vexception.h"
 #include "../ifc/xml/vwatermarkconverter.h"
 #include "../vformat/vwatermark.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vpropertyexplorer/checkablemessagebox.h"
 #include "dialogs/dialoglayoutscale.h"

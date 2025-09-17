@@ -32,6 +32,7 @@
 #include "tst_qtextcodec.h"
 #include "../vmisc/codecs/qtextcodec.h"
 #include "defglobal.h"
+#include <qtclasshelpermacros.h>
 #include <qtestcase.h>
 
 #include <QThreadPool>
@@ -61,6 +62,9 @@ public:
         c->toUnicode(b);
         *target = codecName;
     }
+
+private:
+    Q_DISABLE_COPY_MOVE(LoadAndConvert)
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -87,6 +91,9 @@ public:
         c->toUnicode(b);
         *target = mib;
     }
+
+private:
+    Q_DISABLE_COPY_MOVE(LoadAndConvertMIB)
 };
 
 //---------------------------------------------------------------------------------------------------------------------

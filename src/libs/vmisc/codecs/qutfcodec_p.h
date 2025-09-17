@@ -133,7 +133,7 @@ inline int toUtf8(ushort u, OutputPtr &dst, InputPtr &src, InputPtr end)
     }
 
     // last byte
-    Traits::appendByte(dst, 0x80 | (u & 0x3f));
+    Traits::appendByte(dst, static_cast<uchar>(0x80 | (u & 0x3f)));
     return 0;
 }
 

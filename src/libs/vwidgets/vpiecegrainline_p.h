@@ -28,9 +28,10 @@
 #ifndef VPIECEGRAINLINE_P_H
 #define VPIECEGRAINLINE_P_H
 
-#include "../ifc/exception/vexception.h"
 #include "../vmisc/defglobal.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vpatterndb/floatItemData/floatitemdef.h"
+
 #include <QLineF>
 #include <QSharedData>
 

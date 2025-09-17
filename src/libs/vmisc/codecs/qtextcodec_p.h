@@ -18,12 +18,9 @@
 #include <QtCore/qhash.h>
 #include <QtCore/qstring.h>
 
-// #include <QtCore5Compat/qtcore5compat-config.h>
 #if defined(WITH_TEXTCODEC)
 #include "qtextcodec.h"
 #endif
-
-// #include <private/qtcore5compat-config_p.h>
 
 #include "qcodecmacros_p.h"
 
@@ -41,12 +38,12 @@ typedef QHash<QByteArray, QTextCodec *> QTextCodecCache;
 
 struct QTextCodecData
 {
-    QTextCodecData();
+    QTextCodecData() = default;
     ~QTextCodecData();
 
-    QList<QTextCodec *> allCodecs;
-    QAtomicPointer<QTextCodec> codecForLocale;
-    QTextCodecCache codecCache;
+    QList<QTextCodec *> allCodecs{};
+    QAtomicPointer<QTextCodec> codecForLocale{nullptr};
+    QTextCodecCache codecCache{};
 
     static QTextCodecData *instance();
 };

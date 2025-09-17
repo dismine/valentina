@@ -28,7 +28,7 @@
 #ifndef VEXCEPTIONINVALIDNOTCH_H
 #define VEXCEPTIONINVALIDNOTCH_H
 
-#include "vexception.h"
+#include "../vmisc/exception/vexception.h"
 
 class VExceptionInvalidNotch : public VException
 {

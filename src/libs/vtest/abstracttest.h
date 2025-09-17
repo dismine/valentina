@@ -39,10 +39,11 @@
 #include <qtestcase.h>
 #include <typeinfo>
 
-#include "../ifc/exception/vexception.h"
 #include "../vgeometry/vpointf.h"
 #include "../vlayout/vrawsapoint.h"
 #include "../vlayout/vsapoint.h"
+#include "../vmisc/exception/vexception.h"
+#include "../vmisc/typedef.h"
 
 // Header <ciso646> is removed in C++20.
 #if defined(Q_CC_MSVC) && __cplusplus <= 201703L

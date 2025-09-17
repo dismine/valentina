@@ -26,11 +26,11 @@
  **
  *************************************************************************/
 #include "vfoldline.h"
-#include "../ifc/exception/vexception.h"
 #include "../vformat/vsinglelineoutlinechar.h"
 #include "../vgeometry/vgeometrydef.h"
 #include "../vmisc/compatibility.h"
 #include "../vmisc/def.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vmisc/svgfont/svgdef.h"
 #include "../vmisc/svgfont/vsvgfont.h"
 #include "../vmisc/svgfont/vsvgfontdatabase.h"

@@ -32,9 +32,9 @@
 #include <QPainterPath>
 #include <QtDebug>
 
-#include "../ifc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
 #include "../vmisc/def.h"
+#include "../vmisc/exception/vexception.h"
 #include "vabstractapplication.h"
 #include "vpointf.h"
 #include "vspline.h"

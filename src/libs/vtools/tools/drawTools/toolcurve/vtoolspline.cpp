@@ -49,7 +49,7 @@
 #include "../../../visualization/path/vistoolspline.h"
 #include "../../../visualization/visualization.h"
 #include "../../vabstracttool.h"
-#include "../ifc/exception/vexception.h"
+#include "../vmisc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
 #include "../qmuparser/qmutokenparser.h"
 #include "../vdrawtool.h"

@@ -33,17 +33,17 @@
 #include <new>
 
 #include "../../../../dialogs/tools/dialogpointofintersection.h"
-#include "../../../../visualization/line/vistoolpointofintersection.h"
-#include "../ifc/exception/vexception.h"
-#include "../ifc/ifcdef.h"
-#include "../vgeometry/vgobject.h"
-#include "../vgeometry/vpointf.h"
-#include "../vpatterndb/vcontainer.h"
-#include "../vwidgets/vmaingraphicsscene.h"
 #include "../../../../dialogs/tools/dialogtool.h"
+#include "../../../../visualization/line/vistoolpointofintersection.h"
 #include "../../../../visualization/visualization.h"
 #include "../../../vabstracttool.h"
 #include "../../vdrawtool.h"
+#include "../ifc/ifcdef.h"
+#include "../vgeometry/vgobject.h"
+#include "../vgeometry/vpointf.h"
+#include "../vmisc/exception/vexception.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/vmaingraphicsscene.h"
 #include "vtoolsinglepoint.h"
 
 template <class T> class QSharedPointer;

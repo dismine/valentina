@@ -28,7 +28,7 @@
 #ifndef VEXCEPTIONINVALIDHISTORY_H
 #define VEXCEPTIONINVALIDHISTORY_H
 
-#include "vexception.h"
+#include "../vmisc/exception/vexception.h"
 
 class VExceptionInvalidHistory : public VException
 {
@@ -36,11 +36,11 @@ public:
     explicit VExceptionInvalidHistory(const QString &error) V_NOEXCEPT_EXPR (true);
     VExceptionInvalidHistory(const VExceptionInvalidHistory &e) V_NOEXCEPT_EXPR (true);
     auto operator=(const VExceptionInvalidHistory &e) V_NOEXCEPT_EXPR(true) -> VExceptionInvalidHistory &;
-    virtual ~VExceptionInvalidHistory() V_NOEXCEPT_EXPR (true) = default;
+    ~VExceptionInvalidHistory() V_NOEXCEPT_EXPR(true) override = default;
 
-    Q_NORETURN virtual void raise() const override { throw *this; }
+    Q_NORETURN void raise() const override { throw *this; }
 
-    Q_REQUIRED_RESULT virtual auto clone() const -> VExceptionInvalidHistory * override
+    Q_REQUIRED_RESULT auto clone() const -> VExceptionInvalidHistory * override
     { return new VExceptionInvalidHistory(*this); }
 };
 

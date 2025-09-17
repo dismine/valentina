@@ -38,7 +38,7 @@
 #include "../../../visualization/path/vistoolcubicbezier.h"
 #include "../../../visualization/visualization.h"
 #include "../../vabstracttool.h"
-#include "../ifc/exception/vexception.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vdrawtool.h"
 #include "../vgeometry/../ifc/ifcdef.h"
 #include "../vgeometry/vabstractcurve.h"

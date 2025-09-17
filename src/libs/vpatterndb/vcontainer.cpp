@@ -34,7 +34,6 @@
 #include <QtDebug>
 #include <climits>
 
-#include "../ifc/exception/vexception.h"
 #include "../vgeometry/vabstractcubicbezierpath.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
@@ -43,6 +42,7 @@
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vmisc/literals.h"
 #include "variables/varcradius.h"
 #include "variables/vcurveangle.h"

@@ -33,7 +33,7 @@
 #include <QException>
 #include <QString>
 
-#include "../ifcdef.h"
+#include "../defglobal.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")

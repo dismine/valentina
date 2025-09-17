@@ -40,7 +40,7 @@
 
 #include "../../../visualization/line/visline.h"
 #include "../../vabstracttool.h"
-#include "../ifc/exception/vexception.h"
+#include "../vmisc/exception/vexception.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../qmuparser/qmudef.h"
 #include "../qmuparser/qmutokenparser.h"
