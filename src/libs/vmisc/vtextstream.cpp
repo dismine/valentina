@@ -307,6 +307,9 @@ static QByteArray qt_prettyDebug(const char *data, int len, int maxSize)
         Q_D(VTextStream); \
         CHECK_VALID_STREAM(*this); \
         qulonglong tmp; \
+        QT_WARNING_PUSH \
+        QT_WARNING_DISABLE_GCC("-Wswitch-default") \
+        QT_WARNING_DISABLE_CLANG("-Wswitch-default") \
         switch (d->getNumber(&tmp)) \
         { \
             case VTextStreamPrivate::npsOk: \
@@ -318,6 +321,7 @@ static QByteArray qt_prettyDebug(const char *data, int len, int maxSize)
                 setStatus(atEnd() ? VTextStream::ReadPastEnd : VTextStream::ReadCorruptData); \
                 break; \
         } \
+        QT_WARNING_POP \
         return *this; \
     } while (0)
 
@@ -685,28 +689,38 @@ bool VTextStreamPrivate::scan(const QChar **ptr, int *length, int maxlen, TokenD
             const QChar ch = *chPtr++;
             ++totalSize;
 
-            switch (delimiter) {
-            case Space:
-                if (ch.isSpace()) {
-                    foundToken = true;
-                    delimSize = 1;
-                }
-                break;
-            case NotSpace:
-                if (!ch.isSpace()) {
-                    foundToken = true;
-                    delimSize = 1;
-                }
-                break;
-            case EndOfLine:
-                if (ch == QLatin1Char('\n')) {
-                    foundToken = true;
-                    delimSize = (lastChar == QLatin1Char('\r')) ? 2 : 1;
-                    consumeDelimiter = true;
-                }
-                lastChar = ch;
-                break;
+            QT_WARNING_PUSH
+            QT_WARNING_DISABLE_GCC("-Wswitch-default")
+            QT_WARNING_DISABLE_CLANG("-Wswitch-default")
+
+            switch (delimiter)
+            {
+                case Space:
+                    if (ch.isSpace())
+                    {
+                        foundToken = true;
+                        delimSize = 1;
+                    }
+                    break;
+                case NotSpace:
+                    if (!ch.isSpace())
+                    {
+                        foundToken = true;
+                        delimSize = 1;
+                    }
+                    break;
+                case EndOfLine:
+                    if (ch == QLatin1Char('\n'))
+                    {
+                        foundToken = true;
+                        delimSize = (lastChar == QLatin1Char('\r')) ? 2 : 1;
+                        consumeDelimiter = true;
+                    }
+                    lastChar = ch;
+                    break;
             }
+
+            QT_WARNING_POP
         }
     } while (!foundToken
              && (!maxlen || totalSize < maxlen)
@@ -963,6 +977,10 @@ VTextStreamPrivate::PaddingResult VTextStreamPrivate::padding(qsizetype len) con
 
     const qsizetype padSize = params.fieldWidth - len;
 
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wswitch-default")
+    QT_WARNING_DISABLE_CLANG("-Wswitch-default")
+
     switch (params.fieldAlignment) {
         case VTextStream::AlignLeft:
             right = padSize;
@@ -976,6 +994,8 @@ VTextStreamPrivate::PaddingResult VTextStreamPrivate::padding(qsizetype len) con
             right = padSize - padSize / 2;
             break;
     }
+
+    QT_WARNING_POP
     return { left, right };
 }
 
@@ -2561,6 +2581,10 @@ VTextStream &VTextStream::operator<<(double f)
     Q_D(VTextStream);
     CHECK_VALID_STREAM(*this);
 
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wswitch-default")
+    QT_WARNING_DISABLE_CLANG("-Wswitch-default")
+
     char formatChar = 'g';
     switch (realNumberNotation())
     {
@@ -2574,6 +2598,8 @@ VTextStream &VTextStream::operator<<(double f)
             formatChar = 'g';
             break;
     }
+
+    QT_WARNING_POP
 
     QLocale loc = locale();
 
