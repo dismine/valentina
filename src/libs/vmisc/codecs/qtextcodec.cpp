@@ -1178,7 +1178,12 @@ QTextCodec *QTextCodec::codecForHtml(const QByteArray &ba, QTextCodec *defaultCo
     if (!c) {
         static Q_RELAXED_CONSTEXPR auto matcher = qMakeStaticByteArrayMatcher("meta ");
         QByteArray header = ba.left(1024).toLower();
+#if QT_VERSION >= QT_VERSION_CHECK(6, 3, 0)
         qsizetype pos = matcher.indexIn(header);
+#else
+        int pos = matcher.indexIn(header);
+#endif
+
         if (pos != -1) {
             static Q_RELAXED_CONSTEXPR auto matcher = qMakeStaticByteArrayMatcher("charset=");
             pos = matcher.indexIn(header, pos);
