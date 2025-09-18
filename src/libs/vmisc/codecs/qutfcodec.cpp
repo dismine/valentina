@@ -269,7 +269,7 @@ static inline bool simdEncodeAscii(uchar *&dst, const ushort *&nextAscii, const 
             // characters still coming
             nextAscii = src + qBitScanReverse(nonAscii) + 1;
 
-            nonAscii = qCountTrailingZeroBits(nonAscii);
+            nonAscii = static_cast<uint16_t>(qCountTrailingZeroBits(nonAscii));
             dst += nonAscii;
             src += nonAscii;
             return false;
@@ -304,7 +304,7 @@ static inline bool simdDecodeAscii(ushort *&dst, const uchar *&nextAscii, const 
         // find the next probable ASCII character
         // we don't want to load 16 bytes again in this loop if we know there are non-ASCII
         // characters still coming
-        n = qBitScanReverse(n);
+        n = static_cast<uint8_t>(qBitScanReverse(n));
         nextAscii = src + n + 1;
         return false;
     }
