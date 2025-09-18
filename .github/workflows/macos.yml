@@ -319,6 +319,7 @@ jobs:
       DEPLOY: ${{ matrix.qt.deploy }}
       MULTI_BUNDLE: ${{ matrix.bundle.multibundle }}
       MACOS_DEPLOYMENT_TARGET: ${{ matrix.qt.minimumMacosVersion }}
+      WITH_ICU: 'True'
 
     steps:
       - name: Checkout repo
