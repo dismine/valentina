@@ -1270,7 +1270,7 @@
     <string>Load Measurements</string>
    </property>
    <property name="toolTip">
-    <string>Connect measurements file to pattern </string>
+    <string>Connect measurements file to pattern</string>
    </property>
    <property name="shortcut">
     <string notr="true"/>

@@ -356,9 +356,9 @@
 <context>
     <name>DRW_TextCodec</name>
     <message>
-        <location filename="../../src/libs/vdxf/libdxfrw/intern/drw_textcodec.cpp" line="118"/>
+        <location filename="../../src/libs/vdxf/libdxfrw/intern/drw_textcodec.cpp" line="121"/>
         <source>No available codec for code page &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Для кодової сторінки &apos;%1&apos; немає доступних кодеків.</translation>
     </message>
 </context>
 <context>
@@ -8604,53 +8604,53 @@ Apply settings anyway?</source>
         <translation>Базова назва файлу</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="100"/>
+        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="101"/>
         <source>The base filename does not match a regular expression.</source>
         <translation>Базова назва файлу не відповідає регулярному виразу.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="143"/>
+        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="144"/>
         <source>Select folder</source>
         <translation>Вибрати теку</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="188"/>
+        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="189"/>
         <source>Tried to use out of range file format type number.</source>
         <translation>Спроба використати номер типу формату файлу поза діапазоном.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="196"/>
+        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="197"/>
         <source>Selected not present file format.</source>
         <translation>Вибрано неіснуючий формат файлу.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="211"/>
+        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="212"/>
         <source>Selected not present file format type.</source>
         <translation>Вибрано неіснуючий тип формату файлу.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="384"/>
+        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="385"/>
         <source>The destination directory doesn&apos;t exists or is not readable.</source>
         <translation>Каталог призначення не існує або не читається.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="523"/>
+        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="524"/>
         <source>Name conflict</source>
         <translation>Конфлікт назви</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="524"/>
+        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="525"/>
         <source>Folder already contain file with name %1. Rewrite all conflict file names?</source>
         <translation>У теці вже є файл з назвою %1. Бажаєте його перезаписати?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="583"/>
-        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="587"/>
+        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="584"/>
+        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="588"/>
         <source>Example:</source>
         <translation>Приклад:</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="697"/>
+        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="698"/>
         <source>By standard</source>
         <translation>Згідно зі стандартом</translation>
     </message>
@@ -9364,19 +9364,19 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectmeasurementstype.ui" line="14"/>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectmeasurementstype.ui" line="35"/>
         <source>Select measurements type</source>
-        <translation type="unfinished"></translation>
+        <translation>Виберіть тип мірок</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectmeasurementstype.ui" line="52"/>
         <source>Individual</source>
         <comment>measurements type</comment>
-        <translation type="unfinished">Індивідуальні</translation>
+        <translation>Індивідуальні</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectmeasurementstype.ui" line="72"/>
         <source>Multisize</source>
         <comment>measurements type</comment>
-        <translation type="unfinished">Багаторозмірні</translation>
+        <translation>Багаторозмірні</translation>
     </message>
 </context>
 <context>
@@ -11147,12 +11147,11 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1270"/>
         <source>Load Measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Завантажити мірки</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.ui" line="1273"/>
         <source>Connect measurements file to pattern </source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Під&apos;єднати файл вимірювань до викрійки </translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1660"/>
@@ -12312,20 +12311,9 @@ Do you want to save your changes?</source>
         <translation>Містить інформацію про прибавки та внутрішні змінні</translation>
     </message>
     <message>
-        <source>Load Individual</source>
-        <translation type="vanished">Завантажити індивідуальні</translation>
-    </message>
-    <message>
-        <source>Load Individual measurements file</source>
-        <translation type="vanished">Завантажити файл індивідуальних мірок</translation>
-    </message>
-    <message>
-        <source>Load Multisize</source>
-        <translation type="vanished">Завантажити стандартні</translation>
-    </message>
-    <message>
-        <source>Load multisize measurements file</source>
-        <translation type="vanished">Завантажити файл стандартних мірок</translation>
+        <location filename="../../src/app/valentina/mainwindow.ui" line="1273"/>
+        <source>Connect measurements file to pattern</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1284"/>
@@ -14814,12 +14802,12 @@ This option will take an affect after restart.</source>
         <translation>Помилка сумісності VLayoutPieceData: actualClassVersion = %1 and classVersion = %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vwidgets/vpiecegrainline_p.h" line="103"/>
+        <location filename="../../src/libs/vwidgets/vpiecegrainline_p.h" line="104"/>
         <source>VPieceGrainlinePrivate prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
         <translation>Помилка невідповідності префікса VPieceGrainlinePrivate: actualStreamHeader = 0x%1 and streamHeader = 0x%2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vwidgets/vpiecegrainline_p.h" line="116"/>
+        <location filename="../../src/libs/vwidgets/vpiecegrainline_p.h" line="117"/>
         <source>VPieceGrainlinePrivate compatibility error: actualClassVersion = %1 and classVersion = %2</source>
         <translation>Помилка сумісності VPieceGrainlinePrivate: actualClassVersion = %1 and classVersion = %2</translation>
     </message>
@@ -14877,14 +14865,14 @@ This option will take an affect after restart.</source>
         <translation type="vanished">Зміни застосовано.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1148"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1149"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="454"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="459"/>
         <source>Can&apos;t convert toUInt parameter</source>
         <translation>Не можу конвертувати toUInt параметр</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1085"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1086"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="505"/>
         <source>Can&apos;t convert toBool parameter</source>
         <translation>Не вдається перетворити параметр toBool</translation>
@@ -14895,7 +14883,7 @@ This option will take an affect after restart.</source>
         <translation>Отримано порожній параметр</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1122"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1123"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="613"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="618"/>
         <source>Can&apos;t convert toDouble parameter</source>
@@ -15034,7 +15022,7 @@ This option will take an affect after restart.</source>
         <translation>Недійсна формула &quot;%1&quot; для інструмента з ідентифікатором &quot;%2&quot;. %3.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1174"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1175"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="483"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="488"/>
         <source>Can&apos;t convert toInt parameter</source>
@@ -15204,13 +15192,13 @@ This option will take an affect after restart.</source>
         <translation>Не вдалося встановити поля принтера</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="383"/>
+        <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="384"/>
         <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="852"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too small. Optimize it to minimal value.</source>
         <translation>Крива &quot;%1&quot;. Довжина відрізка замала. Оптимізуйте його до мінімального значення.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="400"/>
+        <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="401"/>
         <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="870"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too big. Optimize it to maximal value.</source>
         <translation>Крива &quot;%1&quot;. Завелика довжина відрізка. Оптимізуйте його до максимального значення.</translation>
@@ -15292,13 +15280,13 @@ This option will take an affect after restart.</source>
         <translation>змінити значення глибини деталей</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="377"/>
+        <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="378"/>
         <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="846"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too small. Optimize it to minimal value.</source>
         <translation>Крива &quot;%1&quot;. Довжина сегмента для вирізання (%2) замала. Оптимізуйте його до мінімального значення.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="395"/>
+        <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="396"/>
         <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="865"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
         <translation>Крива &quot;%1&quot;. Довжина сегмента для вирізання (%2) завелика. Оптимізуйте його до мінімального значення.</translation>
@@ -15334,7 +15322,7 @@ This option will take an affect after restart.</source>
         <translation>Помилка у внутрішньому шляху &quot;%1&quot;. Немає перетину останньої точки з контуром розрізу</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/variables/vpiecearea.cpp" line="133"/>
+        <location filename="../../src/libs/vpatterndb/variables/vpiecearea.cpp" line="134"/>
         <source>Unknown</source>
         <comment>piece area</comment>
         <translation>Невідома</translation>
@@ -17083,10 +17071,6 @@ Do you want to save your changes?</source>
         <translation>Ім&apos;я клієнта:</translation>
     </message>
     <message>
-        <source>Open multisize …</source>
-        <translation type="vanished">Відкрити багаторозмірні…</translation>
-    </message>
-    <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1545"/>
         <source>Create from existing …</source>
         <translation>Створити з наявного…</translation>
@@ -17142,10 +17126,6 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1208"/>
         <source>&amp;Measurements</source>
         <translation>&amp;Мірки</translation>
-    </message>
-    <message>
-        <source>&amp;Open individual …</source>
-        <translation type="vanished">Відкрити &amp;індивідуальні …</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1404"/>
@@ -17289,7 +17269,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1390"/>
         <source>&amp;Open</source>
-        <translation type="unfinished">&amp;Відкрити</translation>
+        <translation>&amp;Відкрити</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1608"/>
@@ -20183,26 +20163,26 @@ Do you want to save your changes?</source>
 <context>
     <name>VArc</name>
     <message>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="512"/>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="566"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="511"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="565"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too small. Optimize it to minimal value.</source>
         <translation>Крива &quot;%1&quot;. Довжина сегмента для вирізання (%2) замала. Оптимізуйте його до мінімального значення.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="518"/>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="572"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="517"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="571"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too small. Optimize it to minimal value.</source>
         <translation>Крива &quot;%1&quot;. Довжина відрізка замала. Оптимізуйте його до мінімального значення.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="529"/>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="583"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="528"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="582"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
         <translation>Крива &quot;%1&quot;. Довжина сегмента для вирізання (%2) завелика. Оптимізуйте його до мінімального значення.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="534"/>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="588"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="533"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="587"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too big. Optimize it to maximal value.</source>
         <translation>Крива &quot;%1&quot;. Завелика довжина відрізка. Оптимізуйте його до максимального значення.</translation>
     </message>
@@ -21313,7 +21293,7 @@ Do you want to save your changes?</source>
 <context>
     <name>VException</name>
     <message>
-        <location filename="../../src/libs/ifc/exception/vexception.cpp" line="83"/>
+        <location filename="../../src/libs/vmisc/exception/vexception.cpp" line="81"/>
         <source>Exception: %1</source>
         <translation>Виняток: %1</translation>
     </message>
@@ -22093,37 +22073,37 @@ Do you want to save your changes?</source>
 <context>
     <name>VPLayoutFileReader</name>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="500"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="501"/>
         <source>Piece</source>
         <translation>Деталь</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="658"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="659"/>
         <source>Error in line %1. Grainline main line is empty.</source>
         <translation>Помилка в рядку %1. Рядок нитки основи порожній.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1065"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1066"/>
         <source>Got empty attribute &apos;%1&apos;</source>
         <translation>Отримано порожній атрибут &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="631"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="632"/>
         <source>Error in line %1. Seam allowance is empty.</source>
         <translation>Помилка в рядку %1. Припуск на шви порожній.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="753"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="754"/>
         <source>Error in line %1. Internal path shape is empty.</source>
         <translation>Помилка в рядку %1. Внутрішній контур порожній.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1052"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1053"/>
         <source>Unexpected tag %1 in line %2</source>
         <translation>Неочікуваний тег %1 у рядку %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="480"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="481"/>
         <source>Piece %1 invalid. %2</source>
         <translation>Деталь %1 недійсна. %2</translation>
     </message>
@@ -23657,38 +23637,38 @@ Do you want to save your changes?</source>
 <context>
     <name>VPoster</name>
     <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="250"/>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="251"/>
         <source>Grid ( %1 , %2 )</source>
         <translation>Сітка ( %1 , %2 )</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="251"/>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="252"/>
         <source>Page %1 of %2</source>
         <translation>Сторінка %1 з %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="258"/>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="259"/>
         <source>Sheet %1 of %2</source>
         <translation>Аркуш %1 з %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="323"/>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="324"/>
         <source>Cannot open the watermark image.</source>
         <translation>Не вдається відкрити зображення водяного знака.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="335"/>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="336"/>
         <source>Not supported file suffix &apos;%1&apos;</source>
         <translation>Суфікс файлу &quot;%1&quot; не підтримується</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="493"/>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="494"/>
         <source>cm</source>
         <comment>unit</comment>
         <translation>см</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="494"/>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="495"/>
         <source>in</source>
         <comment>unit</comment>
         <translation>дюйм</translation>

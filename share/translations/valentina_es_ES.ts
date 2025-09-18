@@ -356,7 +356,7 @@
 <context>
     <name>DRW_TextCodec</name>
     <message>
-        <location filename="../../src/libs/vdxf/libdxfrw/intern/drw_textcodec.cpp" line="118"/>
+        <location filename="../../src/libs/vdxf/libdxfrw/intern/drw_textcodec.cpp" line="121"/>
         <source>No available codec for code page &apos;%1&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8601,53 +8601,53 @@ Aplicar características de todos modos?</translation>
         <translation>Nombre base del archivo</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="100"/>
+        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="101"/>
         <source>The base filename does not match a regular expression.</source>
         <translation>El nombre de archivo base no coincide con la expresión regular.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="143"/>
+        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="144"/>
         <source>Select folder</source>
         <translation>Selecciona carpeta</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="188"/>
+        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="189"/>
         <source>Tried to use out of range file format type number.</source>
         <translation>Se ha intentado utilizar un número de tipo de formato de archivo fuera de rango.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="196"/>
+        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="197"/>
         <source>Selected not present file format.</source>
         <translation>Formato de fichero seleccionado no presente.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="211"/>
+        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="212"/>
         <source>Selected not present file format type.</source>
         <translation>Seleccionado tipo de formato de archivo no presente.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="384"/>
+        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="385"/>
         <source>The destination directory doesn&apos;t exists or is not readable.</source>
         <translation>El directorio de destino no existe o no es legible.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="523"/>
+        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="524"/>
         <source>Name conflict</source>
         <translation>Conflicto en nombre</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="524"/>
+        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="525"/>
         <source>Folder already contain file with name %1. Rewrite all conflict file names?</source>
         <translation>La carpeta ya contiene un archivo con el nombre %1. ¿Reescribir todos los archivos con nombres en conflicto?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="583"/>
-        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="587"/>
+        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="584"/>
+        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="588"/>
         <source>Example:</source>
         <translation>Ejemplo:</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="697"/>
+        <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="698"/>
         <source>By standard</source>
         <translation>Por estándar</translation>
     </message>
@@ -11146,11 +11146,6 @@ Aplicar características de todos modos?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.ui" line="1273"/>
-        <source>Connect measurements file to pattern </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1660"/>
         <source>Interactive tools</source>
         <translation>Herramientas interactivas</translation>
@@ -12310,20 +12305,9 @@ el patrón.</translation>
         <translation>Contiene información acerca de incrementos y variables internas</translation>
     </message>
     <message>
-        <source>Load Individual</source>
-        <translation type="vanished">Cargar Individual</translation>
-    </message>
-    <message>
-        <source>Load Individual measurements file</source>
-        <translation type="vanished">Cargar archivo de medidas Individual</translation>
-    </message>
-    <message>
-        <source>Load Multisize</source>
-        <translation type="vanished">Cargar Multitalla</translation>
-    </message>
-    <message>
-        <source>Load multisize measurements file</source>
-        <translation type="vanished">Cargar archivo de medidas multitalla</translation>
+        <location filename="../../src/app/valentina/mainwindow.ui" line="1273"/>
+        <source>Connect measurements file to pattern</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1284"/>
@@ -14812,12 +14796,12 @@ Esta opción surtirá efecto después de reiniciar.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vwidgets/vpiecegrainline_p.h" line="103"/>
+        <location filename="../../src/libs/vwidgets/vpiecegrainline_p.h" line="104"/>
         <source>VPieceGrainlinePrivate prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vwidgets/vpiecegrainline_p.h" line="116"/>
+        <location filename="../../src/libs/vwidgets/vpiecegrainline_p.h" line="117"/>
         <source>VPieceGrainlinePrivate compatibility error: actualClassVersion = %1 and classVersion = %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14875,14 +14859,14 @@ Esta opción surtirá efecto después de reiniciar.</translation>
         <translation type="vanished">Cambios aplicados.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1148"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1149"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="454"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="459"/>
         <source>Can&apos;t convert toUInt parameter</source>
         <translation>No se puede convertir a parámetro UInt</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1085"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1086"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="505"/>
         <source>Can&apos;t convert toBool parameter</source>
         <translation>No se puede convertir a parámetro Bool</translation>
@@ -14893,7 +14877,7 @@ Esta opción surtirá efecto después de reiniciar.</translation>
         <translation>Parámetro vacío obtenido</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1122"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1123"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="613"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="618"/>
         <source>Can&apos;t convert toDouble parameter</source>
@@ -15032,7 +15016,7 @@ Esta opción surtirá efecto después de reiniciar.</translation>
         <translation>Formula inválida &apos;%1&apos; para herramienta con id &apos;%2&apos;. %3.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1174"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1175"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="483"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="488"/>
         <source>Can&apos;t convert toInt parameter</source>
@@ -15202,13 +15186,13 @@ Esta opción surtirá efecto después de reiniciar.</translation>
         <translation>No se pueden introducir márgenes de impresora</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="383"/>
+        <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="384"/>
         <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="852"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too small. Optimize it to minimal value.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="400"/>
+        <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="401"/>
         <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="870"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too big. Optimize it to maximal value.</source>
         <translation type="unfinished"></translation>
@@ -15290,13 +15274,13 @@ Esta opción surtirá efecto después de reiniciar.</translation>
         <translation>mover piezas valor z</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="377"/>
+        <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="378"/>
         <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="846"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too small. Optimize it to minimal value.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="395"/>
+        <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="396"/>
         <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="865"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
         <translation type="unfinished"></translation>
@@ -15332,7 +15316,7 @@ Esta opción surtirá efecto después de reiniciar.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/variables/vpiecearea.cpp" line="133"/>
+        <location filename="../../src/libs/vpatterndb/variables/vpiecearea.cpp" line="134"/>
         <source>Unknown</source>
         <comment>piece area</comment>
         <translation type="unfinished"></translation>
@@ -17081,10 +17065,6 @@ Quieres guardar los cambios?</translation>
         <translation>Nombre del cliente:</translation>
     </message>
     <message>
-        <source>Open multisize …</source>
-        <translation type="vanished">Abrir multitalla …</translation>
-    </message>
-    <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1545"/>
         <source>Create from existing …</source>
         <translation>Crear de existente …</translation>
@@ -17140,10 +17120,6 @@ Quieres guardar los cambios?</translation>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1208"/>
         <source>&amp;Measurements</source>
         <translation>&amp;Medidas</translation>
-    </message>
-    <message>
-        <source>&amp;Open individual …</source>
-        <translation type="vanished">&amp;Abrir Individual …</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1404"/>
@@ -20182,26 +20158,26 @@ Quieres guardar los cambios?</translation>
 <context>
     <name>VArc</name>
     <message>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="512"/>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="566"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="511"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="565"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too small. Optimize it to minimal value.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="518"/>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="572"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="517"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="571"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too small. Optimize it to minimal value.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="529"/>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="583"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="528"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="582"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="534"/>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="588"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="533"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="587"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too big. Optimize it to maximal value.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -21312,7 +21288,7 @@ Quieres guardar los cambios?</translation>
 <context>
     <name>VException</name>
     <message>
-        <location filename="../../src/libs/ifc/exception/vexception.cpp" line="83"/>
+        <location filename="../../src/libs/vmisc/exception/vexception.cpp" line="81"/>
         <source>Exception: %1</source>
         <translation>Excepción: %1</translation>
     </message>
@@ -22092,37 +22068,37 @@ Quieres guardar los cambios?</translation>
 <context>
     <name>VPLayoutFileReader</name>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="500"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="501"/>
         <source>Piece</source>
         <translation>Pieza</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="658"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="659"/>
         <source>Error in line %1. Grainline main line is empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1065"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1066"/>
         <source>Got empty attribute &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="631"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="632"/>
         <source>Error in line %1. Seam allowance is empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="753"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="754"/>
         <source>Error in line %1. Internal path shape is empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1052"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1053"/>
         <source>Unexpected tag %1 in line %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="480"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="481"/>
         <source>Piece %1 invalid. %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -23656,38 +23632,38 @@ Quieres guardar los cambios?</translation>
 <context>
     <name>VPoster</name>
     <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="250"/>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="251"/>
         <source>Grid ( %1 , %2 )</source>
         <translation>Cuadricula ( %1 , %2 )</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="251"/>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="252"/>
         <source>Page %1 of %2</source>
         <translation>Pagina %1 de %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="258"/>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="259"/>
         <source>Sheet %1 of %2</source>
         <translation>Hoja %1 de %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="323"/>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="324"/>
         <source>Cannot open the watermark image.</source>
         <translation>No se puede abrir la imagen de marca de agua.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="335"/>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="336"/>
         <source>Not supported file suffix &apos;%1&apos;</source>
         <translation>No soporta el archivo con sufijo &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="493"/>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="494"/>
         <source>cm</source>
         <comment>unit</comment>
         <translation>cm</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="494"/>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="495"/>
         <source>in</source>
         <comment>unit</comment>
         <translation>in</translation>
