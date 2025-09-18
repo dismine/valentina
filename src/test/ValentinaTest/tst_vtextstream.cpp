@@ -1115,7 +1115,7 @@ void TST_VTextStream::seek()
     {
         QString const wordTelephone = QStringLiteral("telephone");
 
-        const qint64 offset = data.indexOf(wordTelephone.toLatin1(), 388000);
+        const qint64 offset = data.indexOf(wordTelephone.toLatin1() + ' ', 388000);
         QVERIFY(offset >= 0);
 
         stream.seek(offset);
