@@ -3,10 +3,13 @@
 // SPDX-License-Identifier: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
 
 #include "qutfcodec_p.h"
-#include <emmintrin.h>
 #include <QChar>
 #include <QList>
 #include <QtEndian>
+
+#if defined(__i386__) || defined(__x86_64__)
+#include <emmintrin.h>
+#endif
 
 #include "qstringiterator_p.h"
 
