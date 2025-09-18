@@ -1068,29 +1068,60 @@ void TST_VTextStream::seek()
 
     VTextStream stream(&file);
     QString tmp;
-    stream >> tmp;
-    QCOMPARE(tmp, QString::fromLatin1("Network"));
 
-    // VTextStream::seek(0) should both clear its internal read/write buffers
-    // and seek the device.
-    for (int i = 0; i < 4; ++i)
+    uchar *ptr = file.map(0, file.size());
+    QVERIFY(ptr);
+
+    QByteArray const data(reinterpret_cast<const char *>(ptr), file.size());
+
+    // Word: Network
     {
-        stream.seek(12 + i);
+        QString const wordNetwork = QStringLiteral("Network");
         stream >> tmp;
-        QCOMPARE(tmp, QString("Network").mid(i));
+        QCOMPARE(tmp, wordNetwork);
+
+        const qint64 offset = data.indexOf(wordNetwork.toLatin1());
+        QVERIFY(offset >= 0);
+
+        // VTextStream::seek(0) should both clear its internal read/write buffers
+        // and seek the device.
+        for (int i = 0; i < 4; ++i)
+        {
+            stream.seek(offset + i);
+            stream >> tmp;
+            QCOMPARE(tmp, wordNetwork.mid(i));
+        }
+        for (int i = 0; i < 4; ++i)
+        {
+            stream.seek(offset + wordNetwork.size() - 1 - i);
+            stream >> tmp;
+            QCOMPARE(tmp, wordNetwork.mid(wordNetwork.size() - 1 - i));
+        }
     }
-    for (int i = 0; i < 4; ++i)
+
+    // Word: information
     {
-        stream.seek(16 - i);
+        QString const wordInformation = QStringLiteral("information");
+
+        const qint64 offset = data.indexOf(wordInformation.toLatin1(), 139000);
+        QVERIFY(offset >= 0);
+
+        stream.seek(offset);
         stream >> tmp;
-        QCOMPARE(tmp, QString("Network").mid(4 - i));
+        QCOMPARE(tmp, wordInformation);
     }
-    stream.seek(139181);
-    stream >> tmp;
-    QCOMPARE(tmp, QString("information"));
-    stream.seek(388683);
-    stream >> tmp;
-    QCOMPARE(tmp, QString("telephone"));
+
+    // Word: telephone
+    {
+        QString const wordTelephone = QStringLiteral("telephone");
+
+        const qint64 offset = data.indexOf(wordTelephone.toLatin1(), 388000);
+        QVERIFY(offset >= 0);
+
+        stream.seek(offset);
+        stream >> tmp;
+        QCOMPARE(tmp, wordTelephone);
+    }
 
     // Also test this with a string
     QString words = QLatin1String("thisisa");
@@ -1182,16 +1213,31 @@ void TST_VTextStream::pos()
 
         stream.seek(0);
 
+        uchar *ptr = file.map(0, file.size());
+        QVERIFY(ptr);
+
+        QByteArray const data(reinterpret_cast<const char *>(ptr), file.size());
+
+        QString const wordNetwork = QStringLiteral("Network");
+
+        qint64 offset = data.indexOf(wordNetwork.toLatin1());
+        QVERIFY(offset >= 0);
+
         QString strtmp;
         stream >> strtmp;
-        QCOMPARE(strtmp, QString("Network"));
-        QCOMPARE(stream.pos(), qint64(19));
+        QCOMPARE(strtmp, wordNetwork);
+        QCOMPARE(stream.pos(), offset + wordNetwork.size());
 
-        stream.seek(2598);
-        QCOMPARE(stream.pos(), qint64(2598));
+        QString const wordLocations = QStringLiteral("locations");
+
+        offset = data.indexOf(wordLocations.toLatin1(), 2500);
+        QVERIFY(offset >= 0);
+
+        stream.seek(offset);
+        QCOMPARE(stream.pos(), offset);
         stream >> strtmp;
-        QCOMPARE(stream.pos(), qint64(2607));
-        QCOMPARE(strtmp, QString("locations"));
+        QCOMPARE(strtmp, wordLocations);
+        QCOMPARE(stream.pos(), offset + wordLocations.size());
     }
 #if defined(WITH_ICU_CODECS) || (defined(WITH_BIG_CODECS) && !defined(Q_OS_INTEGRITY))
     {

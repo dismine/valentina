@@ -2271,8 +2271,8 @@ VTextStream &VTextStream::operator>>(QString &str)
     d->scan(nullptr, nullptr, 0, VTextStreamPrivate::NotSpace);
     d->consumeLastToken();
 
-    const QChar *ptr;
-    int length;
+    const QChar *ptr = nullptr;
+    int length = 0;
     if (!d->scan(&ptr, &length, 0, VTextStreamPrivate::Space))
     {
         setStatus(ReadPastEnd);
