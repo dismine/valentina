@@ -1203,8 +1203,7 @@ void TMainWindow::AboutToShowDockMenu()
 
         menu->addSeparator();
 
-        menu->addAction(ui->actionOpenIndividual);
-        menu->addAction(ui->actionOpenMultisize);
+        menu->addAction(ui->actionOpen);
         menu->addAction(ui->actionOpenTemplate);
 
         menu->addSeparator();
