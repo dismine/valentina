@@ -38,6 +38,7 @@ jobs:
       DEPLOY: 'true'
       RUN_TESTS: 'true'
       WITH_CRASH_REPORTING: 'True'
+      WITH_ICU: 'True'
       INSTALL_QT: ${{ matrix.qt.install }}
       QT_VERSION: ${{ matrix.qt.label }}
 
@@ -159,7 +160,7 @@ jobs:
 
       - name: Build Conan dependencies
         shell: bash
-        run: conan install . --build=missing -o '&:with_crash_reporting=${{ env.WITH_CRASH_REPORTING }}' -o '&:with_xerces=True' -pr:a=share/ci/conan/profiles/windows
+        run: conan install . --build=missing -o '&:with_crash_reporting=${{ env.WITH_CRASH_REPORTING }}' -o '&:with_xerces=True' -o '&:with_icu=${{ env.WITH_ICU }}' -pr:a=share/ci/conan/profiles/windows
 
       - name: Build Valentina
         run: >
@@ -172,8 +173,9 @@ jobs:
           project.enableConan:true
           project.conanWithCrashReporting:${{ env.WITH_CRASH_REPORTING }}
           project.conanWithXerces:true
+          project.conanWithICU:${{ env.WITH_ICU }}
           project.conanProfiles:share/ci/conan/profiles/windows
-          project.withICUCodecs:true
+          project.withICUCodecs:${{ env.WITH_ICU }}
           modules.buildconfig.enablePCH:true
           modules.windeployqt.compilerRuntime:true
           modules.windeployqt.noCompilerRuntime:false
@@ -209,8 +211,9 @@ jobs:
           project.enableConan:true
           project.conanWithCrashReporting:${{ env.WITH_CRASH_REPORTING }}
           project.conanWithXerces:true
+          project.conanWithICU:${{ env.WITH_ICU }}
           project.conanProfiles:share/ci/conan/profiles/windows
-          project.withICUCodecs:true
+          project.withICUCodecs:${{ env.WITH_ICU }}
           modules.buildconfig.enablePCH:true
           modules.windeployqt.compilerRuntime:true
           modules.windeployqt.noCompilerRuntime:false

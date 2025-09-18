@@ -65,6 +65,7 @@ jobs:
       DEPLOY: ${{ matrix.qt.deploy }}
       MULTI_BUNDLE: ${{ matrix.bundle.multibundle }}
       MACOS_DEPLOYMENT_TARGET: ${{ matrix.qt.minimumMacosVersion }}
+      WITH_ICU: 'True'
 
     steps:
       - name: Checkout repo
@@ -113,6 +114,9 @@ jobs:
       - name: Install Python dependencies
         run: |
           python --version
+          mkdir ~/.venv
+          python3 -m venv ~/.venv
+          source ~/.venv/bin/activate
           python -m pip install --upgrade setuptools
           python -m pip install -r share/ci/requirements-ci.txt
 
@@ -186,14 +190,6 @@ jobs:
         uses: tecolicom/actions-use-homebrew-tools@v1
         with:
           tools: coreutils
-    
-      - name: Install Conan
-        run: |
-          mkdir ~/.venv
-          python3 -m venv ~/.venv
-          source ~/.venv/bin/activate
-          pip install --upgrade setuptools
-          pip3 install -r share/ci/requirements-ci.txt
 
       - name: Install Qt Creator
         uses: ./.github/actions/download-qtc
@@ -214,7 +210,7 @@ jobs:
           qbs config profiles.qt6.baseProfile clang
 
       - name: Build Conan dependencies
-        run: conan install . --build=missing -o '&:with_crash_reporting=${{ env.WITH_CRASH_REPORTING }}' -o '&:with_xerces=True' -pr:a=share/ci/conan/profiles/macos
+        run: conan install . --build=missing -o '&:with_crash_reporting=${{ env.WITH_CRASH_REPORTING }}' -o '&:with_xerces=True' -o '&:with_icu=${{ env.WITH_ICU }}' -pr:a=share/ci/conan/profiles/macos
 
       - name: Set up common Qbs args
         run: >
@@ -231,10 +227,11 @@ jobs:
           \"modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME\" 
           modules.macdeployqt.libpath:${{ env.QTDIR }}/lib 
           modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir 
-          project.withICUCodecs:true 
+          project.withICUCodecs:${{ env.WITH_ICU }}
           project.enableConan:true 
           project.conanWithXerces:true 
           project.conanWithCrashReporting:true 
+          project.conanWithICU:${{ env.WITH_ICU }} 
           project.conanProfiles:share/ci/conan/profiles/macos" >> $GITHUB_ENV
 
       - name: Build Valentina
@@ -373,6 +370,9 @@ jobs:
       - name: Install Python dependencies
         run: |
           python --version
+          mkdir ~/.venv
+          python3 -m venv ~/.venv
+          source ~/.venv/bin/activate
           python -m pip install --upgrade setuptools
           python -m pip install -r share/ci/requirements-ci.txt
 
@@ -443,13 +443,6 @@ jobs:
         uses: tecolicom/actions-use-homebrew-tools@v1
         with:
           tools: coreutils
-    
-      - name: Install Conan
-        run: |
-          mkdir ~/.venv
-          python3 -m venv ~/.venv
-          source ~/.venv/bin/activate
-          pip3 install --upgrade pip 'dropbox>=12.0.2' py7zr conan==1.66.0 requests
 
       - name: Install Qt Creator
         uses: ./.github/actions/download-qtc
@@ -470,7 +463,7 @@ jobs:
           qbs config profiles.qt6.baseProfile clang
 
       - name: Build Conan dependencies
-        run: conan install . --build=missing -o '&:with_crash_reporting=${{ env.WITH_CRASH_REPORTING }}' -o '&:with_xerces=True' -pr:a=share/ci/conan/profiles/macos_arm
+        run: conan install . --build=missing -o '&:with_crash_reporting=${{ env.WITH_CRASH_REPORTING }}' -o '&:with_xerces=True' -o '&:with_icu=${{ env.WITH_ICU }}' -pr:a=share/ci/conan/profiles/macos_arm
 
       - name: Set up common Qbs args
         run: >
@@ -487,10 +480,11 @@ jobs:
           \"modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME\" 
           modules.macdeployqt.libpath:${{ env.QTDIR }}/lib 
           modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir 
-          project.withICUCodecs:true 
+          project.withICUCodecs:${{ env.WITH_ICU }} 
           project.enableConan:true 
           project.conanWithXerces:true 
           project.conanWithCrashReporting:true 
+          project.conanWithICU:${{ env.WITH_ICU }} 
           project.conanProfiles:share/ci/conan/profiles/macos_arm" >> $GITHUB_ENV
 
       - name: Build Valentina
