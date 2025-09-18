@@ -1103,7 +1103,7 @@ void TST_VTextStream::seek()
     {
         QString const wordInformation = QStringLiteral("information");
 
-        const qint64 offset = data.indexOf(wordInformation.toLatin1(), 139000);
+        const qint64 offset = data.indexOf(wordInformation.toLatin1() + ' ', 139000);
         QVERIFY(offset >= 0);
 
         stream.seek(offset);
