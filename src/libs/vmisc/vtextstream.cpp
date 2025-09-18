@@ -2623,6 +2623,15 @@ VTextStream &VTextStream::operator<<(double f)
             num = num.toUpper();
         }
     }
+    else
+    {
+        num.replace('E', 'e');
+        if (num.compare("INF"_L1, Qt::CaseInsensitive) == 0 || num.compare("+INF"_L1, Qt::CaseInsensitive) == 0
+            || num.compare("-INF"_L1, Qt::CaseInsensitive) == 0 || num.compare("NAN"_L1, Qt::CaseInsensitive) == 0)
+        {
+            num = num.toLower();
+        }
+    }
 
     d->putString(num, true);
     return *this;

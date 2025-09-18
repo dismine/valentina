@@ -2441,7 +2441,7 @@ void TST_VTextStream::generateRealNumbersDataWrite()
         buffer.open(QBuffer::WriteOnly); \
         VTextStream stream(&buffer); \
         stream.setLocale(QLocale::c()); \
-        float f = static_cast<float>(number); \
+        auto const f = static_cast<type>(number); \
         stream << f; \
         stream.flush(); \
         QCOMPARE(buffer.data().constData(), data.constData()); \
