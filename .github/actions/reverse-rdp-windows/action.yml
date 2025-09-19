@@ -2,7 +2,7 @@ name: 'Reverse RDP via ngrok'
 description: 'Reverse RDP via ngrok'
 inputs:
   ngrok_download_url:
-    description: 'Past the ngrok Windows (amd64) ZIP direct download link here'
+    description: 'Paste the ngrok Windows (amd64) ZIP direct download link here'
     required: true
     default: 'https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip'
   ngrok-token:
@@ -13,16 +13,18 @@ inputs:
     description: 'Local admin password to set for created user (recommended to pass via secrets)'
     required: false
     default: 'W1nd0ws-P4ssw0rd'
+
 runs:
   using: "composite"
   steps:
     - name: Download and Extract ngrok
-        shell: pwsh
-        run: |
-          Invoke-WebRequest -Uri "${{ inputs.ngrok_download_url }}" -OutFile ngrok.zip
-          Expand-Archive ngrok.zip
- 
+      shell: pwsh
+      run: |
+        Invoke-WebRequest -Uri "${{ inputs.ngrok_download_url }}" -OutFile ngrok.zip
+        Expand-Archive ngrok.zip
+
     - name: Authenticate ngrok
+      shell: pwsh
       env:
         NGROK_AUTH_TOKEN: ${{ inputs.ngrok-token }}
       run: .\ngrok\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN
