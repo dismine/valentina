@@ -36,9 +36,21 @@ runs:
         Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
 
         $plainPass = '${{ inputs.password }}'
-        New-LocalUser "runneradmin" -Password (ConvertTo-SecureString -AsPlainText $plainPass -Force) -FullName "runneradmin user"
-        Add-LocalGroupMember -Group "Remote Desktop Users" -Member "runneradmin"
-        Add-LocalGroupMember -Group "Administrators" -Member "runneradmin"
+        $securePass = ConvertTo-SecureString -AsPlainText $plainPass -Force
+        $username = "runneradmin"
+
+        $user = Get-LocalUser -Name $username -ErrorAction SilentlyContinue
+        if ($user) {
+          Write-Host "User $username already exists — resetting password and updating groups."
+          Set-LocalUser -Name $username -Password $securePass
+        } else {
+          Write-Host "Creating user $username."
+          New-LocalUser -Name $username -Password $securePass -FullName "runneradmin user"
+        }
+
+        Add-LocalGroupMember -Group "Remote Desktop Users" -Member $username -ErrorAction SilentlyContinue
+        Add-LocalGroupMember -Group "Administrators" -Member $username -ErrorAction SilentlyContinue
+
         Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
 
     - name: Start RDP Tunnel
