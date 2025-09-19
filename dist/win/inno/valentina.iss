@@ -246,7 +246,6 @@ Source: "{#buildDirectory}\*.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#buildDirectory}\*.rcc"; DestDir: "{app}"; Flags: ignoreversion skipifsourcedoesntexist
 Source: "{#buildDirectory}\*.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#buildDirectory}\*.ini"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#buildDirectory}\icu\*.dat"; DestDir: "{app}\icu"; Flags: ignoreversion skipifsourcedoesntexist
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 ; DLL used to check if the target program is running at install time
 

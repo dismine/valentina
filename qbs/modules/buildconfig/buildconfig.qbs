@@ -193,10 +193,7 @@ Module {
         if (project.withTextCodec && !project.withICUCodecs && project.withBigCodecs)
             defines.push('WITH_BIG_CODECS');
 
-        if (useConanPackages &&
-                conanWithICUEnabled &&
-                qbs.targetOS.contains("windows") &&
-                qbs.targetOS.contains("macos")) {
+        if (useConanPackages && conanWithICUEnabled && qbs.targetOS.contains("macos")) {
             defines.push('SHARED_ICU_DATA');
         }
 

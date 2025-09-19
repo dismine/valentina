@@ -75,7 +75,7 @@
 #if defined(SHARED_ICU_DATA)
 #include <unicode/putil.h>
 #endif
-#endif
+#endif // QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 
 //---------------------------------------------------------------------------------------------------------------------
 auto main(int argc, char **argv) -> int
@@ -94,11 +94,7 @@ auto main(int argc, char **argv) -> int
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #if defined(SHARED_ICU_DATA)
-#if defined(Q_OS_WIN)
-    QString icuDataPath = QCoreApplication::applicationDirPath() + QStringLiteral("/icu");
-    icuDataPath = QDir::toNativeSeparators(icuDataPath);
-    u_setDataDirectory(icuDataPath.toUtf8().constData());
-#elif defined(Q_OS_MACOS)
+#if defined(Q_OS_MACOS)
     const QString icuDataPath = QCoreApplication::applicationDirPath() + "/../Resources/icu"_L1;
     u_setDataDirectory(icuDataPath.toUtf8().constData());
 #endif
