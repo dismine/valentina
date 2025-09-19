@@ -182,9 +182,7 @@ jobs:
 
       - name: Tests
         if: env.RUN_TESTS == 'true'
-        run: |
-          set QT_QPA_PLATFORM_PLUGIN_PATH=%QT_PLUGIN_PATH%\platforms
-          qbs -p autotest-runner -d ${{ runner.temp }}\build profile:qt6 config:release
+        run: qbs -p autotest-runner -d ${{ runner.temp }}\build profile:qt6 config:release
 
       - name: Deploy symbols
         if: env.WITH_CRASH_REPORTING == 'True'
