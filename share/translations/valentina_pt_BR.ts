@@ -2844,7 +2844,7 @@
         <translation>Comprimento para ponto de controle</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.cpp" line="842"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.cpp" line="858"/>
         <source>Area of piece</source>
         <translation>Área da peça</translation>
     </message>
@@ -11150,10 +11150,6 @@ Aplicar configurações de qualquer forma?</translation>
         <translation>Carregar medidas</translation>
     </message>
     <message>
-        <source>Connect measurements file to pattern </source>
-        <translation type="vanished">Associar arquivo de medidas ao molde</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1660"/>
         <source>Interactive tools</source>
         <translation>Ferramentas interativas</translation>
@@ -16524,7 +16520,7 @@ O significado das classes de caracteres \w, \d, etc., bem como o significado de 
         <translation type="vanished">Abrir individual ...</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3549"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3548"/>
         <source>Save</source>
         <translation>Salvar</translation>
     </message>
@@ -16583,24 +16579,24 @@ O significado das classes de caracteres \w, \d, etc., bem como o significado de 
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1526"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1212"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1211"/>
         <source>Preferences</source>
         <translation>Preferências</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3896"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3895"/>
         <source>untitled %1</source>
         <translation>sem título %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1859"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1858"/>
         <source>This file already opened in another window.</source>
         <translation>Este arquivo já foi aberto em outra janela.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="568"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1891"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4291"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1890"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4290"/>
         <source>File error.</source>
         <translation>Erro de arquivo.</translation>
     </message>
@@ -16628,12 +16624,12 @@ O significado das classes de caracteres \w, \d, etc., bem como o significado de 
         <translation>Salvar como</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4316"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4315"/>
         <source>&amp;New Window</source>
         <translation>&amp;Nova Janela</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1490"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1489"/>
         <source>Edit measurement</source>
         <translation>Editar medida</translation>
     </message>
@@ -16642,22 +16638,22 @@ O significado das classes de caracteres \w, \d, etc., bem como o significado de 
         <translation type="vanished">M_%1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2365"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4034"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4057"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4073"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2364"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4033"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4056"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4072"/>
         <source>Error</source>
         <translation>Erro</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2365"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4034"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2364"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4033"/>
         <source>Empty field.</source>
         <translation>Campo vazio.</translation>
     </message>
     <message>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4072"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4073"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4074"/>
         <source>Parser error: %1</source>
         <translation>Erro de análise: %1</translation>
     </message>
@@ -16677,14 +16673,14 @@ O significado das classes de caracteres \w, \d, etc., bem como o significado de 
         <location filename="../../src/app/tape/tmainwindow.cpp" line="662"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="783"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="998"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2685"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3089"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2684"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3088"/>
         <source>Individual measurements</source>
         <translation>Medidas individuais</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1624"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3896"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1623"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3895"/>
         <source>untitled</source>
         <translation>sem título</translation>
     </message>
@@ -16693,7 +16689,7 @@ O significado das classes de caracteres \w, \d, etc., bem como o significado de 
         <translation type="vanished">&lt;Empty&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3540"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3539"/>
         <source>Unsaved changes</source>
         <translation>Alterações não salvas</translation>
     </message>
@@ -16704,34 +16700,34 @@ Do you want to save your changes?</source>
 Deseja salvar suas mudanças?</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4035"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4034"/>
         <source>Empty field</source>
         <translation>Campo vazio</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4068"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4067"/>
         <source>Value</source>
         <translation>Valor</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4082"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4081"/>
         <source>Open file</source>
         <translation>Abrir arquivo</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1537"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1850"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1849"/>
         <source>Import from a pattern</source>
         <translation>Importar do molde</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1846"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1845"/>
         <source>Pattern files (*.val)</source>
         <translation>Arquivo de molde (*.val)</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="807"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5152"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5151"/>
         <source>Pattern unit:</source>
         <translation>Unidade do molde:</translation>
     </message>
@@ -16783,7 +16779,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="483"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4249"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4248"/>
         <source>File has unknown format.</source>
         <translation>Formato de arquivo desconhecido.</translation>
     </message>
@@ -16793,20 +16789,20 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="445"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4211"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4210"/>
         <source>File &apos;%1&apos; doesn&apos;t exist!</source>
         <translation>O arquivo &apos;%1&apos; não existe!</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2300"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2299"/>
         <source>The name of known measurement forbidden to change.</source>
         <translation>Proibido alterar o nome da medida conhecida.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1484"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2266"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2378"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2588"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1483"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2265"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2377"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2587"/>
         <source>Can&apos;t find measurement &apos;%1&apos;.</source>
         <translation>Não foi possível encontrar a medida &apos;%1&apos;.</translation>
     </message>
@@ -16823,7 +16819,7 @@ Deseja salvar suas mudanças?</translation>
         <translation type="vanished">O valor do incremento da altura da medida conhecida proibida de mudar.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2607"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2606"/>
         <source>The full name of known measurement forbidden to change.</source>
         <translation>O nome completo da medida conhecida proibida de mudar.</translation>
     </message>
@@ -16852,19 +16848,19 @@ Deseja salvar suas mudanças?</translation>
         <translation>Excluir medida</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5228"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5227"/>
         <source>unknown</source>
         <comment>gender</comment>
         <translation>desconhecido</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5229"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5228"/>
         <source>male</source>
         <comment>gender</comment>
         <translation>masculino</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5230"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5229"/>
         <source>female</source>
         <comment>gender</comment>
         <translation>feminino</translation>
@@ -16911,12 +16907,12 @@ Deseja salvar suas mudanças?</translation>
         <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Medida desconhecida&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3012"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3011"/>
         <source>About Qt</source>
         <translation>Sobre Qt</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3489"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3488"/>
         <source>File was not saved yet.</source>
         <translation>O arquivo não foi salvo.</translation>
     </message>
@@ -16957,7 +16953,7 @@ Deseja salvar suas mudanças?</translation>
         <translation type="vanished">Salvar...</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3554"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3553"/>
         <source>Don&apos;t Save</source>
         <translation>Não salvar</translation>
     </message>
@@ -17040,12 +17036,12 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="968"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2731"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2730"/>
         <source>Could not save the file</source>
         <translation>Não foi possível salvar o arquivo</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3904"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3903"/>
         <source>read only</source>
         <translation>somente leitura</translation>
     </message>
@@ -17053,17 +17049,17 @@ Deseja salvar suas mudanças?</translation>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="675"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="774"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1003"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3039"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3038"/>
         <source>Multisize measurements</source>
         <translation>Medidas tamanhos múltiplos</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4058"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4057"/>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
         <translation>Resultado inválido. O valor é infinito ou não é um valor numérico. Verifique seus cálculos.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3488"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3487"/>
         <source>Empty</source>
         <translation>Vazio</translation>
     </message>
@@ -17078,7 +17074,7 @@ Deseja salvar suas mudanças?</translation>
         <translation>Criar a partir de …</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3549"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3548"/>
         <source>Save…</source>
         <translation>Salvar…</translation>
     </message>
@@ -17090,22 +17086,22 @@ Deseja salvar suas mudanças?</translation>
         <translation>Importar de CSV</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4449"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4448"/>
         <source>Individual measurements require at least 2 columns.</source>
         <translation>Pelo menos 2 colunas devem ser preenchidas para medidas individuais.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4530"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4529"/>
         <source>Multisize measurements require at least 4 columns.</source>
         <translation>Pelo menos 4 colunas devem ser preenchidas para medidas de tamanhos múltiplos.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4401"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4400"/>
         <source>Imported file must not contain the same name twice.</source>
         <translation>O arquivo importado não pode conter duas vezes o mesmo nome.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4174"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4173"/>
         <source>Cannot save settings. Access denied.</source>
         <translation>Acesso negado. Configuração não pode ser salva.</translation>
     </message>
@@ -17155,44 +17151,44 @@ Deseja salvar suas mudanças?</translation>
         <translation>&amp;Novo</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4153"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4152"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation>As configurações não podem ser lidas, arquivo .INI inválido.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="326"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4946"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4962"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4945"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4961"/>
         <source>Name</source>
         <comment>measurement column</comment>
         <translation>Nome</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="331"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4948"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4967"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4947"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4966"/>
         <source>Full name</source>
         <comment>measurement column</comment>
         <translation>Nome completo</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="336"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4950"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4972"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4949"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4971"/>
         <source>Calculated value</source>
         <comment>measurement column</comment>
         <translation>Valor calculado</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="341"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4952"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4951"/>
         <source>Formula</source>
         <comment>measurement column</comment>
         <translation>Fórmula</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="346"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4977"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4976"/>
         <source>Base value</source>
         <comment>measurement column</comment>
         <translation>Valor base</translation>
@@ -17275,7 +17271,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1608"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2687"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2686"/>
         <source>Export to individual</source>
         <translation>Exportar para individual</translation>
     </message>
@@ -17360,123 +17356,123 @@ Deseja salvar suas mudanças?</translation>
         <translation>Valor base inválido para a dimensão C</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1528"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1527"/>
         <source>Measurement image</source>
         <translation>Imagem da medida</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1542"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1541"/>
         <source>Invalid image. Error: %1</source>
         <translation>Imagem inválida. Erro: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1617"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1648"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1616"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1647"/>
         <source>Unable to save image. Error: %1</source>
         <translation>Não foi possível salvar a imagem. Erro: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1632"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1631"/>
         <source>Save Image</source>
         <translation>Salvar imagem</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1681"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1680"/>
         <source>Unable to show image. Error: %1</source>
         <translation>Não foi possível mostrar a imagem. Erro: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2686"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2685"/>
         <source>measurements.vit</source>
         <translation>medidas.vit</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2995"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2994"/>
         <source>Unknown known measurements: %1</source>
         <translation>Medidas Conhecidas desconhecidas: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3411"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3410"/>
         <source>Shift (%1):</source>
         <translation>Shift (%1):</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3541"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3540"/>
         <source>Measurements have been modified. Do you want to save your changes?</source>
         <translation>As medidas foram modificadas. Salvar alterações?</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4843"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4842"/>
         <source>Unknown measurement</source>
         <translation>Medida desconhecida</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4879"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4878"/>
         <source>None</source>
         <translation>nenhum</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4888"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4887"/>
         <source>Invalid link</source>
         <translation>Link inválido</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4954"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5008"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4953"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5007"/>
         <source>Description</source>
         <comment>measurement column</comment>
         <translation>Descrição</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4988"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4997"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5003"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4987"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4996"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5002"/>
         <source>Shift</source>
         <comment>measurement column</comment>
         <translation>Incremento</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5396"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5395"/>
         <source>Empty</source>
         <comment>list</comment>
         <translation>Vazio</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5475"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5485"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5495"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5474"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5484"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5494"/>
         <source>%1 shift</source>
         <translation>%1 incremento</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4620"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4619"/>
         <source>Cannot convert base value to double in column 2.</source>
         <translation>Impossível converter o valor da base para duplo na coluna 2.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4624"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4630"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4637"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4623"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4629"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4636"/>
         <source>Cannot convert shift value to double in column %1.</source>
         <translation>Impossível converter o valor do deslocamento para duplo na coluna %1.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5199"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5198"/>
         <source>Millimeters</source>
         <translation>Milímetros</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5202"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5201"/>
         <source>Inches</source>
         <translation>Polegadas</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5205"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5204"/>
         <source>Centimeters</source>
         <translation>Centímetros</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5214"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5213"/>
         <source>Degrees</source>
         <translation>Graus</translation>
     </message>
@@ -17502,7 +17498,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="115"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5313"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5312"/>
         <source>0 results</source>
         <translation>0 resultados</translation>
     </message>
@@ -17563,33 +17559,33 @@ O significado das classes de caracteres \w, \d, etc., bem como o significado de 
         <translation>Nomes de dimensão personalizados</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4396"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4395"/>
         <source>Measurement name is empty.</source>
         <translation>O nome da medida está vazio.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4406"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4405"/>
         <source>Measurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
         <translation>Medida &apos;%1&apos; não corresponde ao padrão regex.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4411"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4410"/>
         <source>Measurement &apos;%1&apos; already used in the file.</source>
         <translation>Medida &apos;%1&apos; já utilizada no arquivo.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4464"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4463"/>
         <source>Error in row %1. The measurement name is empty.</source>
         <translation>Erro na linha %1. O nome da medida está vazio.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4602"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4601"/>
         <source>The measurement name is empty.</source>
         <translation>O nome da medida está vazio.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4497"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4553"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4496"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4552"/>
         <source>Error in row %1. %2</source>
         <translation>Erro na linha %1. %2</translation>
     </message>
