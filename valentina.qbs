@@ -77,7 +77,7 @@ Project {
     AutotestRunner {
         Depends { name: "buildconfig" }
 
-        arguments: ["-silent"]
+        // arguments: ["-silent"]
 
         environment: {
             var env = base;
