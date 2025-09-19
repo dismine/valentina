@@ -44,6 +44,12 @@
 #include <QDir>
 #if defined(SHARED_ICU_DATA)
 #include <unicode/putil.h>
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
 #endif
 #endif
 
