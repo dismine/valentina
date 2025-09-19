@@ -41,7 +41,7 @@ jobs:
     strategy:
       matrix:
         qt:
-          - install: 6.9.1
+          - install: 6.9.2
             label: Qt6_9
             build_target: '12+'
             xcode: '15.2'
@@ -295,7 +295,7 @@ jobs:
       matrix:
         qt:
           # LTS release
-          - install: 6.9.1
+          - install: 6.9.2
             label: Qt6_9
             build_target: '12+'
             xcode: '15.2'

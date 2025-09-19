@@ -31,7 +31,7 @@ jobs:
       matrix:
         qt:
           # LTS release
-          - install: 6.9.1
+          - install: 6.9.2
             label: Qt6_9
 
     env:
