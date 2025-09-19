@@ -188,11 +188,10 @@ jobs:
 
       - name: Enable Reverse RDP via ngrok (for debugging)
         if: failure() # only run when earlier steps failed
-        uses: NyaMisty/reverse-rdp-windows-github-actions-ng@master
+        uses: ./.github/actions/reverse-rdp-windows
         with:
           ngrok-token: ${{ secrets.NGROK_AUTH_TOKEN }}
           password: ${{ secrets.RDP_PASSWORD }}
-          foreground: true
 
       - name: Deploy symbols
         if: env.WITH_CRASH_REPORTING == 'True'

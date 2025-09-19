@@ -1,0 +1,53 @@
+name: 'Reverse RDP via ngrok'
+description: 'Reverse RDP via ngrok'
+inputs:
+  ngrok_download_url:
+    description: 'Past the ngrok Windows (amd64) ZIP direct download link here'
+    required: true
+    default: 'https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip'
+  ngrok-token:
+    description: 'ngrok auth token (recommended to pass via secrets)'
+    required: false
+    default: ''
+  password:
+    description: 'Local admin password to set for created user (recommended to pass via secrets)'
+    required: false
+    default: 'W1nd0ws-P4ssw0rd'
+runs:
+  using: "composite"
+  steps:
+    - name: Download and Extract ngrok
+        shell: pwsh
+        run: |
+          Invoke-WebRequest -Uri "${{ inputs.ngrok_download_url }}" -OutFile ngrok.zip
+          Expand-Archive ngrok.zip
+ 
+    - name: Authenticate ngrok
+      env:
+        NGROK_AUTH_TOKEN: ${{ inputs.ngrok-token }}
+      run: .\ngrok\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN
+
+    - name: Configure RDP and Create Admin User
+      shell: pwsh
+      run: |
+        Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -name "fDenyTSConnections" -Value 0
+        Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+
+        $plainPass = '${{ inputs.password }}'
+        New-LocalUser "runneradmin" -Password (ConvertTo-SecureString -AsPlainText $plainPass -Force) -FullName "runneradmin user"
+        Add-LocalGroupMember -Group "Remote Desktop Users" -Member "runneradmin"
+        Add-LocalGroupMember -Group "Administrators" -Member "runneradmin"
+        Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
+
+    - name: Start RDP Tunnel
+      shell: pwsh
+      run: |
+        Write-Host "======================================================================"
+        Write-Host "                    RDP Connection Details"
+        Write-Host "======================================================================"
+        Write-Host "Username:    runneradmin (Administrator)"
+        Write-Host ("Password:   {0}" -f '${{ inputs.password }}')
+        Write-Host "Please find the RDP Address in the ngrok logs below."
+        Write-Host "======================================================================"
+        .\ngrok\ngrok.exe tcp 3389 --log=stdout
+
