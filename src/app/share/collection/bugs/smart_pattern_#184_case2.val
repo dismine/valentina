@@ -31,7 +31,7 @@ Hosenschlitzuntertritt gerade an der oberen Kante</notes>
         <finalMeasurment description="Mehrweite des kompletten Umfangs" formula="(Line_A86_A87+Line_A86_A88)-leg_calf_circ" name="Kontrolle_Mehrweite_Waden"/>
         <finalMeasurment description="Soll &gt; 0 für Bewebungsfreiheit" formula="#Kw - leg_knee_circ_bent" name="Kontrolle_Knie_gebeugt"/>
     </finalMeasurements>
-    <measurements path="../../../../../../../../Стільниця/Помилки/Ronan Le Tiec/Masse_Ronan_v3.vit"/>
+    <measurements path="smart_pattern_#184_case2.vit"/>
     <increments>
         <increment description="Bundumfang&#10;14.01.2022 von +0.5 zu +1 gewechselt, da bei der letzten Hose etwas zu eng" formula="waist_natural_circ+1" name="#Bu"/>
         <increment description="Hüftumfang&#10;&#10;am 08.05.2021 -1 entfernt  (vorher 93 cm dann 94)" formula="hip_circ" name="#Hu"/>
