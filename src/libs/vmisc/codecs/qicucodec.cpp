@@ -346,6 +346,17 @@ QTextCodec *QIcuCodec::codecForNameUnlocked(const char *name)
         || !qstrcmp(name, "ISO 8859-11"))
         name = "TIS-620";
 
+#if !defined(Q_OS_WIN)
+    if (qstrcmp(name, "System") == 0)
+    {
+#if defined(QT_LOCALE_IS_UTF8)
+        name = "UTF-8";
+#else
+        name = ucnv_getDefaultName();
+#endif
+    }
+#endif
+
     UErrorCode error = U_ZERO_ERROR;
     // MIME gives better default names
     const char *standardName = ucnv_getStandardName(name, "MIME", &error);
