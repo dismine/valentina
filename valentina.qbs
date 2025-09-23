@@ -62,6 +62,19 @@ Project {
                 args.push("-pr:a=" + conanProfiles[i])
             }
 
+            // Conan dependencies are usually built in Release mode for consistency.
+            // However, ICU enforces a strict check on build type, so we must provide
+            // matching Debug/RelWithDebInfo builds when needed on Windows.
+            // - Debug Qbs build  -> use Conan Debug package
+            // - Profiling Qbs build -> use Conan RelWithDebInfo package
+            if (qbs.targetOS.contains("windows") && conanWithICU) {
+                if (qbs.buildVariant === "debug") {
+                    args.push("-s=build_type=Debug");
+                } else if (qbs.buildVariant === "profiling") {
+                    args.push("-s=build_type=RelWithDebInfo");
+                }
+            }
+
             return args;
         }
     }
