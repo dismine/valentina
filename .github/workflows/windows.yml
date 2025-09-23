@@ -182,9 +182,8 @@ jobs:
 
       - name: Tests
         if: env.RUN_TESTS == 'true'
-        run: |
-          set QT_DEBUG_PLUGINS=1
-          qbs -p autotest-runner -d ${{ runner.temp }}\build profile:qt6 config:release
+        shell: bash
+        run: qbs -p autotest-runner -d ${{ runner.temp }}\build profile:qt6 config:release
 
       - name: Enable Reverse RDP via ngrok (for debugging)
         if: failure() # only run when earlier steps failed
