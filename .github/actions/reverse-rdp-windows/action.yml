@@ -56,6 +56,21 @@ runs:
     - name: Start RDP Tunnel
       shell: pwsh
       run: |
+        $desktop = "C:\Users\runneradmin\Desktop"
+        if (-not (Test-Path $desktop)) {
+          Write-Host "Desktop folder not found at $desktop — using Public Desktop."
+          $desktop = "C:\Users\Public\Desktop"
+        }
+
+        $file = Join-Path $desktop 'Delete-This-File-To-Continue.txt'
+        $content = @"
+        This file was created by the Reverse RDP via ngrok GitHub Action.
+        Delete this file to close the tunnel and allow the workflow to finish.
+        "@
+        Set-Content -Path $file -Value $content -Encoding UTF8
+        Write-Host "Created: $file"
+        Write-Host "Delete this file when you are done with the RDP session."
+
         Write-Host "======================================================================"
         Write-Host "                    RDP Connection Details"
         Write-Host "======================================================================"
@@ -63,5 +78,17 @@ runs:
         Write-Host ("Password:   {0}" -f '${{ inputs.password }}')
         Write-Host "Please find the RDP Address in the ngrok logs below."
         Write-Host "======================================================================"
-        .\ngrok\ngrok.exe tcp 3389 --log=stdout
+
+        # Start ngrok in background job
+        Start-Job { .\ngrok\ngrok.exe tcp 3389 --log=stdout }
+
+        # Poll for file deletion
+        while (Test-Path $file) {
+          Start-Sleep -Seconds 5
+          Write-Host "Waiting for Delete-This-File-To-Continue.txt to be removed from Desktop..."
+        }
+
+        Write-Host "File deleted — stopping tunnel."
+        Get-Job | Stop-Job -Force
+        Get-Job | Remove-Job
 
