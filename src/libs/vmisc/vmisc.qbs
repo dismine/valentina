@@ -273,7 +273,7 @@ VLib {
 
     Group {
         name: "Codecs: Windows codecs"
-        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 && project.withTextCodec && !project.withICUCodecs && qbs.targetOS.contains("windows")
+        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 && project.withTextCodec && qbs.targetOS.contains("windows")
         prefix: "codecs/"
         files: [
             "qwindowscodec.cpp",

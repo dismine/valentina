@@ -16,6 +16,18 @@
 #include "qisciicodec_p.h"
 #endif
 
+#if defined(Q_OS_WIN)
+#include "qwindowscodec_p.h"
+#endif
+
+#include "../defglobal.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 QT_BEGIN_NAMESPACE
 
 typedef QList<QTextCodec*>::ConstIterator TextCodecListConstIt;
@@ -86,236 +98,127 @@ int main(int argc, char **argv)
 }
 */
 
-struct MibToName {
-    short mib;
-    short index;
+struct MibEntry
+{
+    int mib;
+    QLatin1String name;
 };
 
-static const MibToName mibToName[] = {
-    { 3, 0 },
-    { 4, 9 },
-    { 5, 20 },
-    { 6, 31 },
-    { 7, 42 },
-    { 8, 53 },
-    { 9, 64 },
-    { 10, 75 },
-    { 11, 86 },
-    { 12, 97 },
-    { 13, 108 },
-    { 16, 120 },
-    { 17, 134 },
-    { 18, 144 },
-    { 30, 151 },
-    { 36, 160 },
-    { 37, 167 },
-    { 38, 179 },
-    { 39, 186 },
-    { 40, 198 },
-    { 57, 212 },
-    { 81, 223 },
-    { 82, 234 },
-    { 84, 245 },
-    { 85, 256 },
-    { 104, 267 },
-    { 105, 279 },
-    { 106, 295 },
-    { 109, 301 },
-    { 110, 313 },
-    { 111, 325 },
-    { 113, 337 },
-    { 114, 341 },
-    { 1000, 349 },
-    { 1001, 356 },
-    { 1011, 363 },
-    { 1012, 368 },
-    { 1013, 374 },
-    { 1014, 383 },
-    { 1015, 392 },
-    { 1016, 399 },
-    { 1017, 406 },
-    { 1018, 413 },
-    { 1019, 422 },
-    { 1020, 431 },
-    { 2004, 438 },
-    { 2005, 448 },
-    { 2009, 472 },
-    { 2013, 479 },
-    { 2016, 486 },
-    { 2024, 495 },
-    { 2025, 505 },
-    { 2026, 512 },
-    { 2027, 517 },
-    { 2028, 527 },
-    { 2030, 534 },
-    { 2033, 541 },
-    { 2034, 548 },
-    { 2035, 555 },
-    { 2037, 562 },
-    { 2038, 569 },
-    { 2039, 576 },
-    { 2040, 583 },
-    { 2041, 590 },
-    { 2043, 597 },
-    { 2011, 604 },
-    { 2044, 611 },
-    { 2045, 618 },
-    { 2010, 624 },
-    { 2046, 631 },
-    { 2047, 638 },
-    { 2048, 645 },
-    { 2049, 652 },
-    { 2050, 659 },
-    { 2051, 666 },
-    { 2052, 673 },
-    { 2053, 680 },
-    { 2054, 687 },
-    { 2055, 694 },
-    { 2056, 701 },
-    { 2062, 708 },
-    { 2063, 715 },
-    { 2084, 723 },
-    { 2085, 730 },
-    { 2086, 741 },
-    { 2087, 748 },
-    { 2088, 755 },
-    { 2089, 762 },
-    { 2091, 771 },
-    { 2092, 780 },
-    { 2093, 789 },
-    { 2094, 798 },
-    { 2095, 807 },
-    { 2096, 816 },
-    { 2097, 825 },
-    { 2098, 834 },
-    { 2099, 843 },
-    { 2100, 852 },
-    { 2101, 861 },
-    { 2102, 872 },
-    { 2250, 880 },
-    { 2251, 893 },
-    { 2252, 906 },
-    { 2253, 919 },
-    { 2254, 932 },
-    { 2255, 945 },
-    { 2256, 958 },
-    { 2257, 971 },
-    { 2258, 984 },
-    { 2259, 997 },
-};
-static int mibToNameSize = sizeof(mibToName) / sizeof(MibToName);
-
-static const char mibToNameTable[] =
-    "US-ASCII\0"
-    "ISO-8859-1\0"
-    "ISO-8859-2\0"
-    "ISO-8859-3\0"
-    "ISO-8859-4\0"
-    "ISO-8859-5\0"
-    "ISO-8859-6\0"
-    "ISO-8859-7\0"
-    "ISO-8859-8\0"
-    "ISO-8859-9\0"
-    "ISO-8859-10\0"
-    "ISO-2022-JP-1\0"
-    "Shift_JIS\0"
-    "EUC-JP\0"
-    "US-ASCII\0"
-    "EUC-KR\0"
-    "ISO-2022-KR\0"
-    "EUC-KR\0"
-    "ISO-2022-JP\0"
-    "ISO-2022-JP-2\0"
-    "GB_2312-80\0"
-    "ISO-8859-6\0"
-    "ISO-8859-6\0"
-    "ISO-8859-8\0"
-    "ISO-8859-8\0"
-    "ISO-2022-CN\0"
-    "ISO-2022-CN-EXT\0"
-    "UTF-8\0"
-    "ISO-8859-13\0"
-    "ISO-8859-14\0"
-    "ISO-8859-15\0"
-    "GBK\0"
-    "GB18030\0"
-    "UTF-16\0"
-    "UTF-32\0"
-    "SCSU\0"
-    "UTF-7\0"
-    "UTF-16BE\0"
-    "UTF-16LE\0"
-    "UTF-16\0"
-    "CESU-8\0"
-    "UTF-32\0"
-    "UTF-32BE\0"
-    "UTF-32LE\0"
-    "BOCU-1\0"
-    "hp-roman8\0"
-    "Adobe-Standard-Encoding\0"
-    "IBM850\0"
-    "IBM862\0"
-    "IBM-Thai\0"
-    "Shift_JIS\0"
-    "GB2312\0"
-    "Big5\0"
-    "macintosh\0"
-    "IBM037\0"
-    "IBM273\0"
-    "IBM277\0"
-    "IBM278\0"
-    "IBM280\0"
-    "IBM284\0"
-    "IBM285\0"
-    "IBM290\0"
-    "IBM297\0"
-    "IBM420\0"
-    "IBM424\0"
-    "IBM437\0"
-    "IBM500\0"
-    "cp851\0"
-    "IBM852\0"
-    "IBM855\0"
-    "IBM857\0"
-    "IBM860\0"
-    "IBM861\0"
-    "IBM863\0"
-    "IBM864\0"
-    "IBM865\0"
-    "IBM868\0"
-    "IBM869\0"
-    "IBM870\0"
-    "IBM871\0"
-    "IBM918\0"
-    "IBM1026\0"
-    "KOI8-R\0"
-    "HZ-GB-2312\0"
-    "IBM866\0"
-    "IBM775\0"
-    "KOI8-U\0"
-    "IBM00858\0"
-    "IBM01140\0"
-    "IBM01141\0"
-    "IBM01142\0"
-    "IBM01143\0"
-    "IBM01144\0"
-    "IBM01145\0"
-    "IBM01146\0"
-    "IBM01147\0"
-    "IBM01148\0"
-    "IBM01149\0"
-    "Big5-HKSCS\0"
-    "IBM1047\0"
-    "windows-1250\0"
-    "windows-1251\0"
-    "windows-1252\0"
-    "windows-1253\0"
-    "windows-1254\0"
-    "windows-1255\0"
-    "windows-1256\0"
-    "windows-1257\0"
-    "windows-1258\0"
-    "TIS-620\0";
+constexpr std::array<MibEntry, 113> mibToName = {{
+    {3, "US-ASCII"_L1},
+    {4, "ISO-8859-1"_L1},
+    {5, "ISO-8859-2"_L1},
+    {6, "ISO-8859-3"_L1},
+    {7, "ISO-8859-4"_L1},
+    {8, "ISO-8859-5"_L1},
+    {9, "ISO-8859-6"_L1},
+    {10, "ISO-8859-7"_L1},
+    {11, "ISO-8859-8"_L1},
+    {12, "ISO-8859-9"_L1},
+    {13, "ISO-8859-10"_L1},
+    {16, "ISO-2022-JP-1"_L1},
+    {17, "Shift_JIS"_L1},
+    {18, "EUC-JP"_L1},
+    {36, "KSC_5601"_L1},
+    {37, "ISO-2022-KR"_L1},
+    {38, "EUC-KR"_L1},
+    {39, "ISO-2022-JP"_L1},
+    {40, "ISO-2022-JP-2"_L1},
+    {57, "GB_2312-80"_L1},
+    {81, "ISO-8859-6-E"_L1},
+    {82, "ISO-8859-6-I"_L1},
+    {84, "ISO-8859-8-E"_L1},
+    {85, "ISO-8859-8-I"_L1},
+    {103, "UNICODE-1-1-UTF-7"_L1},
+    {104, "ISO-2022-CN"_L1},
+    {105, "ISO-2022-CN-EXT"_L1},
+    {106, "UTF-8"_L1},
+    {109, "ISO-8859-13"_L1},
+    {110, "ISO-8859-14"_L1},
+    {111, "ISO-8859-15"_L1},
+    {112, "ISO-8859-16"_L1},
+    {113, "GBK"_L1},
+    {114, "GB18030"_L1},
+    {1000, "ISO-10646-UCS-2"_L1},
+    {1001, "ISO-10646-UCS-4"_L1},
+    {1011, "SCSU"_L1},
+    {1012, "UTF-7"_L1},
+    {1013, "UTF-16BE"_L1},
+    {1014, "UTF-16LE"_L1},
+    {1015, "UTF-16"_L1},
+    {1016, "CESU-8"_L1},
+    {1017, "UTF-32"_L1},
+    {1018, "UTF-32BE"_L1},
+    {1019, "UTF-32LE"_L1},
+    {1020, "BOCU-1"_L1},
+    {2004, "hp-roman8"_L1},
+    {2005, "Adobe-Standard-Encoding"_L1},
+    {2009, "IBM850"_L1},
+    {2010, "IBM852"_L1},
+    {2011, "IBM437"_L1},
+    {2013, "IBM862"_L1},
+    {2016, "IBM-Thai"_L1},
+    {2024, "Windows-31J"_L1},
+    {2025, "GB2312"_L1},
+    {2026, "Big5"_L1},
+    {2027, "macintosh"_L1},
+    {2028, "IBM037"_L1},
+    {2030, "IBM273"_L1},
+    {2033, "IBM277"_L1},
+    {2034, "IBM278"_L1},
+    {2035, "IBM280"_L1},
+    {2037, "IBM284"_L1},
+    {2038, "IBM285"_L1},
+    {2039, "IBM290"_L1},
+    {2040, "IBM297"_L1},
+    {2041, "IBM420"_L1},
+    {2043, "IBM424"_L1},
+    {2044, "IBM500"_L1},
+    {2045, "cp851"_L1},
+    {2046, "IBM855"_L1},
+    {2047, "IBM857"_L1},
+    {2048, "IBM860"_L1},
+    {2049, "IBM861"_L1},
+    {2050, "IBM863"_L1},
+    {2051, "IBM864"_L1},
+    {2052, "IBM865"_L1},
+    {2053, "IBM868"_L1},
+    {2054, "IBM869"_L1},
+    {2055, "IBM870"_L1},
+    {2056, "IBM871"_L1},
+    {2062, "IBM918"_L1},
+    {2063, "IBM1026"_L1},
+    {2084, "KOI8-R"_L1},
+    {2085, "HZ-GB-2312"_L1},
+    {2086, "IBM866"_L1},
+    {2087, "IBM775"_L1},
+    {2088, "KOI8-U"_L1},
+    {2089, "IBM00858"_L1},
+    {2091, "IBM01140"_L1},
+    {2092, "IBM01141"_L1},
+    {2093, "IBM01142"_L1},
+    {2094, "IBM01143"_L1},
+    {2095, "IBM01144"_L1},
+    {2096, "IBM01145"_L1},
+    {2097, "IBM01146"_L1},
+    {2098, "IBM01147"_L1},
+    {2099, "IBM01148"_L1},
+    {2100, "IBM01149"_L1},
+    {2101, "Big5-HKSCS"_L1},
+    {2102, "IBM1047"_L1},
+    {2109, "windows-874"_L1},
+    {2250, "windows-1250"_L1},
+    {2251, "windows-1251"_L1},
+    {2252, "windows-1252"_L1},
+    {2253, "windows-1253"_L1},
+    {2254, "windows-1254"_L1},
+    {2255, "windows-1255"_L1},
+    {2256, "windows-1256"_L1},
+    {2257, "windows-1257"_L1},
+    {2258, "windows-1258"_L1},
+    {2259, "TIS-620"_L1},
+    {-949, "windows-949"_L1},
+}};
 
 static QTextCodec *loadQtCodec(const char *name)
 {
@@ -342,6 +245,10 @@ static QTextCodec *loadQtCodec(const char *name)
         return new QTsciiCodec;
     if (!qstrnicmp(name, "iscii", 5))
         return QIsciiCodec::create(name);
+#endif
+#if defined(Q_OS_WIN)
+    if (!strcmp(name, "System"))
+        return new QWindowsLocalCodec;
 #endif
 
     return nullptr;
@@ -389,9 +296,12 @@ QList<QByteArray> QIcuCodec::availableCodecs()
 QList<int> QIcuCodec::availableMibs()
 {
     QList<int> mibs;
-    mibs.reserve(mibToNameSize + 1);
-    for (int i = 0; i < mibToNameSize; ++i)
-        mibs += mibToName[i].mib;
+    mibs.reserve(static_cast<vsizetype>(mibToName.size()) + 1);
+
+    std::transform(mibToName.begin(),
+                   mibToName.end(),
+                   std::back_inserter(mibs),
+                   [](const auto &entry) { return entry.mib; });
 
 #if defined(WITH_BASIC_CODECS)
     // handled by Qt and not in ICU:
@@ -511,14 +421,19 @@ QTextCodec *QIcuCodec::codecForNameUnlocked(const char *name)
 
 QTextCodec *QIcuCodec::codecForMibUnlocked(int mib)
 {
-    for (int i = 0; i < mibToNameSize; ++i) {
-        if (mibToName[i].mib == mib)
-            return codecForNameUnlocked(mibToNameTable + mibToName[i].index);
+    if (auto it = std::find_if(mibToName.begin(),
+                               mibToName.end(),
+                               [mib](const auto &entry) { return entry.mib == mib; });
+        it != mibToName.end())
+    {
+        return codecForNameUnlocked(it->name.data());
     }
 
 #if defined(WITH_BASIC_CODECS)
     if (mib == 2107)
+    {
         return codecForNameUnlocked("TSCII");
+    }
 #endif
 
     return nullptr;
@@ -680,14 +595,17 @@ QList<QByteArray> QIcuCodec::aliases() const
 {
     UErrorCode error = U_ZERO_ERROR;
 
-    int n = ucnv_countAliases(m_name, &error);
+    int const n = ucnv_countAliases(m_name, &error);
 
     QList<QByteArray> aliases;
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i < n; ++i)
+    {
         const char *a = ucnv_getAlias(m_name, static_cast<uint16_t>(i), &error);
         // skip the canonical name
         if (!a || !qstrcmp(a, m_name))
+        {
             continue;
+        }
         aliases += a;
     }
 
@@ -697,9 +615,13 @@ QList<QByteArray> QIcuCodec::aliases() const
 
 int QIcuCodec::mibEnum() const
 {
-    for (int i = 0; i < mibToNameSize; ++i) {
-        if (qTextCodecNameMatch(m_name, (mibToNameTable + mibToName[i].index)))
-            return mibToName[i].mib;
+    if (const auto *it = std::find_if(mibToName.begin(),
+                                      mibToName.end(),
+                                      [this](const auto &entry)
+                                      { return qTextCodecNameMatch(m_name, entry.name.data()); });
+        it != mibToName.end())
+    {
+        return it->mib;
     }
 
     return 0;

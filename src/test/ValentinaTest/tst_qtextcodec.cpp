@@ -2980,7 +2980,9 @@ void TST_QTextCodec::nullInputZeroOrNegativeLength_data()
     QTest::newRow("ISO-8859-7") << "ISO-8859-7" << 10;
     QTest::newRow("ISO-8859-8") << "ISO-8859-8" << 85;
     QTest::newRow("IBM874") << "IBM874" << -874;
+#if !defined(WITH_ICU_CODECS)
     QTest::newRow("WINSAMI2") << "WINSAMI2" << -165;
+#endif
     QTest::newRow("System") << "System" << 0;
 #endif
 }
