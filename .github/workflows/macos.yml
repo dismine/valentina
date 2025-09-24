@@ -63,6 +63,7 @@ jobs:
 
     env:
       DEPLOY: ${{ matrix.qt.deploy }}
+      RUN_TESTS: 'true'
       MULTI_BUNDLE: ${{ matrix.bundle.multibundle }}
       MACOS_DEPLOYMENT_TARGET: ${{ matrix.qt.minimumMacosVersion }}
       WITH_ICU: 'True'

@@ -35,6 +35,11 @@ CppApplication {
       cpp.compilerWrapper: "ccache"
   }
 
+  Properties {
+      condition: qbs.targetOS.contains("macos")
+      bundle.isBundle: false
+  }
+
   cpp.cxxLanguageVersion: {
       if (Qt.core.versionMajor >= 6) // Start building with C++20 since Qt 6.0
           return "c++20";

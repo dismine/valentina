@@ -62,6 +62,20 @@ VTestApp {
         ]
     }
 
+    Properties {
+        condition: product.buildconfig.useConanPackages && product.buildconfig.conanWithICUEnabled && qbs.targetOS.contains("macos")
+        cpp.defines: {
+            var defines = [];
+
+            var path = FileInfo.joinPaths(product.qbs.installRoot + product.qbs.installPrefix,
+                                          product.buildconfig.installAppPath,
+                                          "Valentina.app/Contents/Resources/icu");
+
+            defines.push('ICU_DATA_PATH="' + path +'"');
+            return defines;
+        }
+    }
+
     files: [
         "qttestmainlambda.cpp",
         "tst_dxf.cpp",

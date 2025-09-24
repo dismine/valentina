@@ -72,15 +72,6 @@
 #include "tst_vtextstream.h"
 
 #include <QDir>
-#if defined(SHARED_ICU_DATA)
-#include <unicode/putil.h>
-
-#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
-#include "../vmisc/compatibility.h"
-#endif
-
-using namespace Qt::Literals::StringLiterals;
-#endif
 #endif // QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -101,8 +92,7 @@ auto main(int argc, char **argv) -> int
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #if defined(SHARED_ICU_DATA)
 #if defined(Q_OS_MACOS)
-    const QString icuDataPath = QCoreApplication::applicationDirPath() + "/../Resources/icu"_L1;
-    u_setDataDirectory(icuDataPath.toUtf8().constData());
+    u_setDataDirectory(ICU_DATA_PATH);
 #endif
 #endif // defined(SHARED_ICU_DATA)
 #endif // QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
