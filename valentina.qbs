@@ -90,7 +90,12 @@ Project {
     AutotestRunner {
         Depends { name: "buildconfig" }
 
-        // arguments: ["-silent"]
+        arguments: ["-silent"]
+
+        Properties {
+            condition: qbs.targetOS.contains("macos")
+            bundle.isBundle: false
+        }
 
         environment: {
             var env = base;
