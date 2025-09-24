@@ -239,7 +239,7 @@ jobs:
 
       - name: Tests
         if: env.RUN_TESTS == 'true'
-        run: qbs -p autotest-runner -d $GITHUB_WORKSPACE/build  profile:qt6 config:release
+        run: qbs -f valentina.qbs -p autotest-runner -d $GITHUB_WORKSPACE/build  profile:qt6 config:release
 
       - name: Deploy symbols
         if: env.WITH_CRASH_REPORTING == 'True'
@@ -469,7 +469,7 @@ jobs:
       - name: Set up common Qbs args
         run: >
           echo "COMMON_QBS_ARGS=
-          -f valentina.qbs 
+          -f valentina.qbs
           -d $GITHUB_WORKSPACE/build 
           --jobs $(nproc) 
           config:release 
@@ -495,7 +495,7 @@ jobs:
 
       - name: Tests
         if: env.RUN_TESTS == 'true'
-        run: qbs -p autotest-runner -d $GITHUB_WORKSPACE/build  profile:qt6 config:release
+        run: qbs -f valentina.qbs -p autotest-runner -d $GITHUB_WORKSPACE/build  profile:qt6 config:release
 
       - name: Deploy symbols
         if: env.WITH_CRASH_REPORTING == 'True'
@@ -508,7 +508,7 @@ jobs:
       - name: Create DMG
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
         run: >
-          qbs build 
+          qbs build
           -p 'Valentina DMG' 
           --force-probe-execution 
           ${{ env.COMMON_QBS_ARGS }}
