@@ -1,4 +1,5 @@
 import qbs.Utilities
+import qbs.FileInfo
 
 VTestApp {
     Depends { name: "buildconfig" }
@@ -52,6 +53,14 @@ VTestApp {
     targetName: buildconfig.appTarget
 
     autotest.workingDir: product.buildDirectory
+
+    Properties {
+        condition: qbs.targetOS.contains("macos")
+        cpp.rpaths: [
+            FileInfo.joinPaths(cpp.rpathOrigin, "..", "install-root", product.qbs.installPrefix,  product.buildconfig.installAppPath + "/Valentina.app/Contents/Frameworks"),
+            Qt.core.libPath
+        ]
+    }
 
     files: [
         "qttestmainlambda.cpp",

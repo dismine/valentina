@@ -236,6 +236,10 @@ jobs:
           qbs build 
           ${{ env.COMMON_QBS_ARGS }}
 
+      - name: Tests
+        if: env.RUN_TESTS == 'true'
+        run: qbs -p autotest-runner -d $GITHUB_WORKSPACE/build  profile:qt6 config:release
+
       - name: Deploy symbols
         if: env.WITH_CRASH_REPORTING == 'True'
         run: |
@@ -317,6 +321,7 @@ jobs:
 
     env:
       DEPLOY: ${{ matrix.qt.deploy }}
+      RUN_TESTS: 'true'
       MULTI_BUNDLE: ${{ matrix.bundle.multibundle }}
       MACOS_DEPLOYMENT_TARGET: ${{ matrix.qt.minimumMacosVersion }}
       WITH_ICU: 'True'
@@ -486,6 +491,10 @@ jobs:
         run: >
           qbs build 
           ${{ env.COMMON_QBS_ARGS }}
+
+      - name: Tests
+        if: env.RUN_TESTS == 'true'
+        run: qbs -p autotest-runner -d $GITHUB_WORKSPACE/build  profile:qt6 config:release
 
       - name: Deploy symbols
         if: env.WITH_CRASH_REPORTING == 'True'

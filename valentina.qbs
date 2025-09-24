@@ -97,8 +97,7 @@ Project {
 
             if (qbs.targetOS.contains("unix") && !qbs.targetOS.contains("macos")) {
                 env.push("LD_LIBRARY_PATH=" + qbs.installRoot + qbs.installPrefix + "/" + buildconfig.libDirName + "/valentina");
-            }
-            else if (qbs.targetOS.contains("windows")) {
+            } else if (qbs.targetOS.contains("windows")) {
                 // PATH
                 var path = "";
                 for (var i = 0; i < env.length; ++i) {
