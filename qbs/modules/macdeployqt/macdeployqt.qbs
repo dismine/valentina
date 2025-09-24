@@ -109,7 +109,7 @@ Module {
 
                 var cmd = new Command(macdeployqtProgramBinPath + "/" + macdeployqtProgram, cmdArgs);
                 cmd.jobPool = "macdeployqt";
-                cmd.description = "invoking '" + macdeployqtProgram;
+                cmd.description = "invoking '" + macdeployqtProgram + "' program";
                 cmd.stdoutFilePath = product.buildDirectory + "/" + product.macdeployqt.macdeployqtArtifact;
             }
             cmd.workingDirectory = product.qbs.installRoot;
