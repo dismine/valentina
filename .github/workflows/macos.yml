@@ -217,7 +217,7 @@ jobs:
           -d $GITHUB_WORKSPACE/build 
           --jobs $(nproc) 
           config:release 
-          modules.buildconfig.enableUnitTests:false 
+          modules.buildconfig.enableUnitTests:${{ env.RUN_TESTS }} 
           modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} 
           qbs.installRoot:$GITHUB_WORKSPACE/build/release/install-root 
           profile:qt6 
@@ -473,7 +473,7 @@ jobs:
           -d $GITHUB_WORKSPACE/build 
           --jobs $(nproc) 
           config:release 
-          modules.buildconfig.enableUnitTests:false 
+          modules.buildconfig.enableUnitTests:${{ env.RUN_TESTS }}
           modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} 
           qbs.installRoot:$GITHUB_WORKSPACE/build/release/install-root 
           profile:qt6 
