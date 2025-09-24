@@ -303,7 +303,7 @@ jobs:
           qbs-setup-toolchains --detect
           qbs-setup-qt %QT_ROOT_DIR%\bin\qmake.exe qt5
           qbs-config defaultProfile qt5
-          qbs-setup-toolchains.exe --type ${{ env.COMPILER }} ${{ $env:IQTA_TOOLS }}\${{ matrix.qt.arch }}\bin\g++.exe ${{ env.COMPILER }}
+          qbs-setup-toolchains.exe --type ${{ env.COMPILER }} ${{ env:IQTA_TOOLS }}\${{ matrix.qt.arch }}\bin\g++.exe ${{ env.COMPILER }}
           qbs-config.exe profiles.qt5.baseProfile ${{ env.COMPILER }}
           qbs-config --list profiles
 
