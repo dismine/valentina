@@ -163,25 +163,30 @@ jobs:
         run: conan install . --build=missing -o '&:with_crash_reporting=${{ env.WITH_CRASH_REPORTING }}' -o '&:with_xerces=True' -o '&:with_icu=${{ env.WITH_ICU }}' -pr:a=share/ci/conan/profiles/windows
         
       - name: Set up common Qbs args
-        run: >
-          echo "COMMON_QBS_ARGS=
-          -f valentina.qbs 
-          -d ${{ runner.temp }}\build
-          --jobs $(nproc) 
-          config:release 
-          qbs.installRoot:${{ runner.temp }}\build\release\install-root\valentina
-          profile:qt6 
-          project.enableConan:true
-          project.conanWithCrashReporting:${{ env.WITH_CRASH_REPORTING }}
-          project.conanWithXerces:true
-          project.conanWithICU:${{ env.WITH_ICU }}
-          project.conanProfiles:share/ci/conan/profiles/windows
-          project.withICUCodecs:${{ env.WITH_ICU }}
-          modules.buildconfig.enablePCH:true
-          modules.windeployqt.compilerRuntime:true
-          modules.windeployqt.noCompilerRuntime:false" >> $GITHUB_ENV  
+        shell: bash
+        run: |
+          {
+            echo 'COMMON_QBS_ARGS<<EOF'
+            echo "-f valentina.qbs"
+            echo "-d ${{ runner.temp }}/build"
+            echo "--jobs ${{ env.NUMBER_OF_PROCESSORS }}"
+            echo "config:release"
+            echo "qbs.installRoot:${{ runner.temp }}/build/release/install-root/valentina"
+            echo "profile:qt6"
+            echo "project.enableConan:true"
+            echo "project.conanWithCrashReporting:${{ env.WITH_CRASH_REPORTING }}"
+            echo "project.conanWithXerces:true"
+            echo "project.conanWithICU:${{ env.WITH_ICU }}"
+            echo "project.conanProfiles:share/ci/conan/profiles/windows"
+            echo "project.withICUCodecs:${{ env.WITH_ICU }}"
+            echo "modules.buildconfig.enablePCH:true"
+            echo "modules.windeployqt.compilerRuntime:true"
+            echo "modules.windeployqt.noCompilerRuntime:false"
+            echo EOF
+          } >> $GITHUB_ENV
 
       - name: Build Valentina
+        shell: bash
         run: >
           qbs build
           ${{ env.COMMON_QBS_ARGS }}
@@ -207,6 +212,7 @@ jobs:
 
       - name: Create installer
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
+        shell: bash
         run: >
           qbs build
           -p ValentinaSetup
@@ -308,19 +314,24 @@ jobs:
           qbs-config --list profiles
 
       - name: Set up common Qbs args
-        run: >
-          echo "COMMON_QBS_ARGS=
-          -f valentina.qbs 
-          -d ${{ runner.temp }}\build
-          --jobs $(nproc) 
-          config:release 
-          qbs.installRoot:${{ runner.temp }}\build\release\install-root\valentina
-          profile:qt5 
-          modules.buildconfig.enablePCH:true
-          modules.windeployqt.compilerRuntime:true
-          modules.windeployqt.noCompilerRuntime:false" >> $GITHUB_ENV
+        shell: bash
+        run: |
+          {
+            echo 'COMMON_QBS_ARGS<<EOF'
+            echo "-f valentina.qbs"
+            echo "-d ${{ runner.temp }}/build"
+            echo "--jobs ${{ env.NUMBER_OF_PROCESSORS }}"
+            echo "config:release"
+            echo "qbs.installRoot:${{ runner.temp }}/build/release/install-root/valentina"
+            echo "profile:qt5"
+            echo "modules.buildconfig.enablePCH:true"
+            echo "modules.windeployqt.compilerRuntime:true"
+            echo "modules.windeployqt.noCompilerRuntime:false"
+            echo EOF
+          } >> $GITHUB_ENV
 
       - name: Build Valentina
+        shell: bash
         run: >
           qbs build
           ${{ env.COMMON_QBS_ARGS }}
@@ -332,6 +343,7 @@ jobs:
 
       - name: Create installer
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
+        shell: bash
         run: >
           qbs build
           -p ValentinaSetup
