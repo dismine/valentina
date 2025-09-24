@@ -72,6 +72,9 @@
 #include "tst_vtextstream.h"
 
 #include <QDir>
+#if defined(SHARED_ICU_DATA)
+#include <unicode/putil.h>
+#endif
 #endif // QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 
 //---------------------------------------------------------------------------------------------------------------------
