@@ -432,7 +432,7 @@ QTextCodec *QIcuCodec::codecForNameUnlocked(const char *name)
 
 QTextCodec *QIcuCodec::codecForMibUnlocked(int mib)
 {
-    if (auto it = std::find_if(mibToName.begin(),
+    if (auto it = std::find_if(mibToName.begin(), // NOLINT(readability-qualified-auto)
                                mibToName.end(),
                                [mib](const auto &entry) { return entry.mib == mib; });
         it != mibToName.end())
@@ -626,10 +626,9 @@ QList<QByteArray> QIcuCodec::aliases() const
 
 int QIcuCodec::mibEnum() const
 {
-    if (const auto *it = std::find_if(mibToName.begin(),
-                                      mibToName.end(),
-                                      [this](const auto &entry)
-                                      { return qTextCodecNameMatch(m_name, entry.name.data()); });
+    if (auto it = std::find_if(mibToName.begin(), // NOLINT(readability-qualified-auto)
+                               mibToName.end(),
+                               [this](const auto &entry) { return qTextCodecNameMatch(m_name, entry.name.data()); });
         it != mibToName.end())
     {
         return it->mib;
