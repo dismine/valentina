@@ -2971,15 +2971,19 @@ void TST_QTextCodec::nullInputZeroOrNegativeLength_data()
     QTest::newRow("UTF-32LE") << "UTF-32LE" << 1019;
 #ifdef Q_OS_WIN
 #if defined(WITH_ICU_CODECS) || (defined(WITH_BIG_CODECS) && !defined(Q_OS_INTEGRITY))
-    QTest::newRow("EUC-KR") << "EUC-KR" << 38;
+    // correct some issues where the ICU data set contains duplicated entries.
+    // Where this happens it's because one data set is a subset of another. We
+    // always use the larger data set.
+    QTest::newRow("EUC-KR") << "EUC-KR" << -949; // Should be same as windows-949
     QTest::newRow("windows-949") << "windows-949" << -949;
     QTest::newRow("GBK") << "GBK" << 113;
-    QTest::newRow("GB2312") << "GB2312" << 2025;
+    QTest::newRow("GB2312") << "GB2312" << 113; // Should be same as  GBK
 #endif
-    QTest::newRow("ISO-8859-6") << "ISO-8859-6" << 82;
+    QTest::newRow("ISO-8859-6") << "ISO-8859-6" << 9;
     QTest::newRow("ISO-8859-7") << "ISO-8859-7" << 10;
-    QTest::newRow("ISO-8859-8") << "ISO-8859-8" << 85;
-    QTest::newRow("IBM874") << "IBM874" << -874;
+    QTest::newRow("ISO-8859-8") << "ISO-8859-8" << 11;
+    // these are broken data in ICU 4.4, and can't be resolved even though they are aliases to tis-620
+    QTest::newRow("IBM874") << "IBM874" << 2259;
 #if !defined(WITH_ICU_CODECS)
     QTest::newRow("WINSAMI2") << "WINSAMI2" << -165;
 #endif
