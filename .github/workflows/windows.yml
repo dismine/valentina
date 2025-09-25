@@ -177,7 +177,7 @@ jobs:
           project.conanWithCrashReporting:${{ env.WITH_CRASH_REPORTING }}
           project.conanWithXerces:true
           project.conanWithICU:${{ env.WITH_ICU }}
-          project.conanProfiles:share\\ci\\conan\\profiles/windows
+          project.conanProfiles:share\\ci\\conan\\profiles\\windows
           project.withICUCodecs:${{ env.WITH_ICU }}
           modules.buildconfig.enablePCH:true
           modules.windeployqt.compilerRuntime:true
