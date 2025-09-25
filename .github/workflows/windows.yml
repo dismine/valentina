@@ -193,6 +193,13 @@ jobs:
         shell: bash
         run: qbs -p autotest-runner ${{ env.COMMON_QBS_ARGS }}
 
+      - name: Reverse RDP via ngrok
+        if: failure() # only run when earlier steps failed
+        uses: ./.github/actions/reverse-rdp-windows
+        with:
+          ngrok-token: ${{ secrets.NGROK_AUTH_TOKEN }}
+          password: ${{ secrets.RDP_PASSWORD }}
+
       - name: Deploy symbols
         if: env.WITH_CRASH_REPORTING == 'True'
         shell: pwsh
