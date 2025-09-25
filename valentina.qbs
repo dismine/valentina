@@ -41,6 +41,12 @@ Project {
         verbose: true
         generators: []
         options: {
+            console.info("Conan options:");
+            console.info("* xerces: " + conanWithXerces);
+            console.info("* crash reporting: " + conanWithCrashReporting);
+            console.info("* ICU: " + conanWithICU);
+            console.info("* ICONV: " + conanWithICONV);
+
             var o = {};
             if (conanWithXerces)
                 o['&:with_xerces'] = "True";
