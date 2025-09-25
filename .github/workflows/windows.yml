@@ -246,7 +246,7 @@ jobs:
       matrix:
         qt:
           - install: 5.15.2
-            label: Qt5.15
+            label: Qt5_15
             compiler: mingw
             arch: 'win32_mingw81'
             tools: 'tools_mingw81,qt.tools.win32_mingw810'

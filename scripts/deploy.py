@@ -64,7 +64,7 @@ def run_pack(source, destination):
             shutil.make_archive(name, format, archive_from, archive_to)
         shutil.move(f'{name}{suffix}', destination)
     else:
-        print("Unsupported archive format.")
+        print(f"Unsupported archive format for path: '{destination}'.")
 
 
 def run_upload(refresh_token, file, path):
