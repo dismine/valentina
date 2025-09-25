@@ -170,7 +170,6 @@ jobs:
           echo "COMMON_QBS_ARGS=
           -f valentina.qbs
           -d ${{ runner.temp }}/build
-          --jobs ${{ env.NUMBER_OF_PROCESSORS }}
           config:release
           qbs.installRoot:${{ runner.temp }}/build/release/install-root/valentina
           profile:qt6
@@ -318,7 +317,6 @@ jobs:
           echo "COMMON_QBS_ARGS=
           -f valentina.qbs
           -d ${{ runner.temp }}/build
-          --jobs ${{ env.NUMBER_OF_PROCESSORS }}
           config:release
           qbs.installRoot:${{ runner.temp }}/build/release/install-root/valentina
           profile:qt5
