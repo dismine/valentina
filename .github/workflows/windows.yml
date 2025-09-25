@@ -290,9 +290,9 @@ jobs:
 
       - name: Install Python dependencies
         run: |
-          python --version
-          python -m pip install --upgrade setuptools
-          python -m pip install -r share/ci/requirements-ci.txt
+          python3 --version
+          python3 -m pip install --upgrade setuptools
+          python3 -m pip install -r share/ci/requirements-ci.txt
 
       - name: Cache Chocolatey
         uses: actions/cache@v4
