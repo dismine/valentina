@@ -169,15 +169,15 @@ jobs:
         run: >
           echo "COMMON_QBS_ARGS=
           -f valentina.qbs
-          -d ${{ runner.temp }}\\build
+          -d $RUNNER_TEMP/build
           config:release
-          qbs.installRoot:${{ runner.temp }}\\build\\release\\install-root\\valentina
+          qbs.installRoot:${{ runner.temp }}/build/release/install-root/valentina
           profile:qt6
           project.enableConan:true
           project.conanWithCrashReporting:${{ env.WITH_CRASH_REPORTING }}
           project.conanWithXerces:true
           project.conanWithICU:${{ env.WITH_ICU }}
-          project.conanProfiles:share\\ci\\conan\\profiles\\windows
+          project.conanProfiles:share/ci/conan/profiles/windows
           project.withICUCodecs:${{ env.WITH_ICU }}
           modules.buildconfig.enablePCH:true
           modules.windeployqt.compilerRuntime:true
@@ -323,9 +323,9 @@ jobs:
         run: >
           echo "COMMON_QBS_ARGS=
           -f valentina.qbs
-          -d ${{ runner.temp }}\\build
+          -d $RUNNER_TEMP/build
           config:release
-          qbs.installRoot:${{ runner.temp }}\\build\\release\\install-root\\valentina
+          qbs.installRoot:${{ runner.temp }}/build/release/install-root/valentina
           profile:qt5
           modules.buildconfig.enablePCH:true
           modules.windeployqt.compilerRuntime:true
