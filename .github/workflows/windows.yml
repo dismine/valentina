@@ -192,7 +192,7 @@ jobs:
       - name: Tests
         if: env.RUN_TESTS == 'true'
         shell: bash
-        run: qbs -f valentina.qbs -p autotest-runner -d ${{ runner.temp }}\build profile:qt6 config:release
+        run: qbs -p autotest-runner ${{ env.COMMON_QBS_ARGS }}
 
       - name: Deploy symbols
         if: env.WITH_CRASH_REPORTING == 'True'
@@ -317,7 +317,7 @@ jobs:
         run: >
           echo "COMMON_QBS_ARGS=
           -f valentina.qbs
-          -d ${{ runner.temp }}/build"
+          -d ${{ runner.temp }}/build
           --jobs ${{ env.NUMBER_OF_PROCESSORS }}
           config:release
           qbs.installRoot:${{ runner.temp }}/build/release/install-root/valentina
@@ -334,7 +334,7 @@ jobs:
       - name: Tests
         if: env.RUN_TESTS == 'true'
         shell: bash
-        run: qbs -f valentina.qbs -p autotest-runner -d ${{ runner.temp }}\build profile:qt5 config:release
+        run: qbs -p autotest-runner ${{ env.COMMON_QBS_ARGS }}
 
       - name: Create installer
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
