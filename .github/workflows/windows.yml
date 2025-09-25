@@ -239,7 +239,7 @@ jobs:
           COMPILER: msvc
         run: ./scripts/appveyor-deploy.ps1
   legacy_build:
-    name: Windows Qt ${{ matrix.qt.install }} (MSVC x64)
+    name: Windows Qt ${{ matrix.qt.install }} (GCC ${{ matrix.qt.build_arch }})
     runs-on: windows-latest
 
     strategy:
@@ -249,6 +249,7 @@ jobs:
             label: Qt5.15
             compiler: mingw
             arch: 'win32_mingw81'
+            tools: 'tools_mingw81,qt.tools.win32_mingw810'
             build_arch: 'x86'
             deploy: 'true'
 
@@ -283,6 +284,7 @@ jobs:
           target:       'desktop'
           arch:         ${{ matrix.qt.arch }}
           dir:          ${{ runner.temp }}
+          tools:        ${{ matrix.qt.tools }}
           cache:        true
           setup-python: false
 
@@ -312,7 +314,7 @@ jobs:
           qbs-setup-toolchains --detect
           qbs-setup-qt %QT_ROOT_DIR%\bin\qmake.exe qt5
           qbs-config defaultProfile qt5
-          qbs-setup-toolchains.exe --type ${{ env.COMPILER }} ${{ env.IQTA_TOOLS }}\${{ matrix.qt.arch }}\bin\g++.exe ${{ env.COMPILER }}
+          qbs-setup-toolchains.exe --type ${{ env.COMPILER }} ${{ env.IQTA_TOOLS }}\mingw810_32\bin\g++.exe ${{ env.COMPILER }}
           qbs-config.exe profiles.qt5.baseProfile ${{ env.COMPILER }}
           qbs-config --list profiles
 
