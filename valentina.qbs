@@ -96,7 +96,7 @@ Project {
     AutotestRunner {
         Depends { name: "buildconfig" }
 
-        arguments: ["-silent"]
+        arguments: ["-silent", "-o", "-,txt"]
 
         Properties {
             condition: qbs.targetOS.contains("macos")
