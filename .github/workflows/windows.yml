@@ -34,12 +34,26 @@ jobs:
           # LTS release
           - install: 6.9.2
             label: Qt6_9
+            run_tests: 'true'
+            with_icu: 'True'
+            with_iconv: 'False'
+            withBigCodecs: 'False'
+            deploy: 'true'
+          - install: 6.9.2
+            label: Qt6_9
+            run_tests: 'true'
+            with_icu: 'False'
+            with_iconv: 'True'
+            with_big_codecs: 'True'
+            deploy: 'false'
 
     env:
-      DEPLOY: 'true'
-      RUN_TESTS: 'true'
+      DEPLOY: ${{ matrix.qt.deploy }}
+      RUN_TESTS: ${{ matrix.qt.run_tests }}
       WITH_CRASH_REPORTING: 'True'
-      WITH_ICU: 'True'
+      WITH_ICU: ${{ matrix.qt.with_icu }}
+      WITH_ICONV: ${{ matrix.qt.with_iconv }}
+      WITH_BIG_CODECS: ${{ matrix.qt.with_big_codecs }}
       INSTALL_QT: ${{ matrix.qt.install }}
       QT_VERSION: ${{ matrix.qt.label }}
 
@@ -162,7 +176,7 @@ jobs:
 
       - name: Build Conan dependencies
         shell: bash
-        run: conan install . --build=missing -o '&:with_crash_reporting=${{ env.WITH_CRASH_REPORTING }}' -o '&:with_xerces=True' -o '&:with_icu=${{ env.WITH_ICU }}' -pr:a=share/ci/conan/profiles/windows
+        run: conan install . --build=missing -o '&:with_crash_reporting=${{ env.WITH_CRASH_REPORTING }}' -o '&:with_xerces=True' -o '&:with_icu=${{ env.WITH_ICU }}' -o '&:with_iconv=${{ env.WITH_ICONV }}' -pr:a=share/ci/conan/profiles/windows
         
       - name: Set up common Qbs args
         shell: bash
@@ -177,8 +191,11 @@ jobs:
           project.conanWithCrashReporting:${{ env.WITH_CRASH_REPORTING }}
           project.conanWithXerces:true
           project.conanWithICU:${{ env.WITH_ICU }}
+          project.conanWithICONV:${{ env.WITH_ICONV }}
           project.conanProfiles:share/ci/conan/profiles/windows
           project.withICUCodecs:${{ env.WITH_ICU }}
+          project.withICONVCodecs:${{ env.WITH_ICONV }}
+          project.withBigCodecs:${{ env.WITH_BIG_CODECS }}
           modules.buildconfig.enablePCH:true
           modules.windeployqt.compilerRuntime:true
           modules.windeployqt.noCompilerRuntime:false" >> $GITHUB_ENV

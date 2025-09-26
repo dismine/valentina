@@ -47,6 +47,32 @@ jobs:
             xcode: '15.2'
             target: 'MacOS_12+'
             minimumMacosVersion: '12.0'
+            run_tests: 'true'
+            with_icu: 'True'
+            with_iconv: 'False'
+            withBigCodecs: 'False'
+            deploy: 'true'
+          - install: 6.9.2
+            label: Qt6_9
+            build_target: '12+'
+            xcode: '15.2'
+            target: 'MacOS_12+'
+            minimumMacosVersion: '12.0'
+            run_tests: 'true'
+            with_icu: 'False'
+            with_iconv: 'True'
+            with_big_codecs: 'True'
+            deploy: 'false'
+          - install: 6.4.3
+            label: Qt6_4
+            build_target: '10.15+'
+            xcode: '15.2'
+            target: 'MacOS_10_15+'
+            minimumMacosVersion: '10.15'
+            run_tests: 'true'
+            with_icu: 'True'
+            with_iconv: 'False'
+            withBigCodecs: 'False'
             deploy: 'true'
           - install: 6.4.3
             label: Qt6_4
@@ -54,7 +80,11 @@ jobs:
             xcode: '15.2'
             target: 'MacOS_10_15+'
             minimumMacosVersion: '10.15'
-            deploy: 'true'
+            run_tests: 'true'
+            with_icu: 'False'
+            with_iconv: 'True'
+            with_big_codecs: 'True'
+            deploy: 'false'
         bundle:
           - label: multibundle
             multibundle: true
@@ -63,10 +93,12 @@ jobs:
 
     env:
       DEPLOY: ${{ matrix.qt.deploy }}
-      RUN_TESTS: 'true'
+      RUN_TESTS: ${{ matrix.qt.run_tests }}
       MULTI_BUNDLE: ${{ matrix.bundle.multibundle }}
       MACOS_DEPLOYMENT_TARGET: ${{ matrix.qt.minimumMacosVersion }}
-      WITH_ICU: 'True'
+      WITH_ICU: ${{ matrix.qt.with_icu }}
+      WITH_ICONV: ${{ matrix.qt.with_iconv }}
+      WITH_BIG_CODECS: ${{ matrix.qt.with_big_codecs }}
 
     steps:
       - name: Checkout repo
@@ -208,7 +240,7 @@ jobs:
           qbs config profiles.qt6.baseProfile clang
 
       - name: Build Conan dependencies
-        run: conan install . --build=missing -o '&:with_crash_reporting=${{ env.WITH_CRASH_REPORTING }}' -o '&:with_xerces=True' -o '&:with_icu=${{ env.WITH_ICU }}' -pr:a=share/ci/conan/profiles/macos
+        run: conan install . --build=missing -o '&:with_crash_reporting=${{ env.WITH_CRASH_REPORTING }}' -o '&:with_xerces=True' -o '&:with_icu=${{ env.WITH_ICU }}' -o '&:with_iconv=${{ env.WITH_ICONV }}' -pr:a=share/ci/conan/profiles/macos
 
       - name: Set up common Qbs args
         run: >
@@ -226,10 +258,13 @@ jobs:
           modules.macdeployqt.libpath:${{ env.QTDIR }}/lib 
           modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir 
           project.withICUCodecs:${{ env.WITH_ICU }}
+          project.withICONVCodecs:${{ env.WITH_ICONV }}
+          project.withBigCodecs:${{ env.WITH_BIG_CODECS }}
           project.enableConan:true 
           project.conanWithXerces:true 
           project.conanWithCrashReporting:true 
-          project.conanWithICU:${{ env.WITH_ICU }} 
+          project.conanWithICU:${{ env.WITH_ICU }}
+          project.conanWithICONV:${{ env.WITH_ICONV }}
           project.conanProfiles:share/ci/conan/profiles/macos" >> $GITHUB_ENV
 
       - name: Build Valentina
@@ -306,6 +341,32 @@ jobs:
             xcode: '15.2'
             target: 'MacOS_12+'
             minimumMacosVersion: '12.0'
+            run_tests: 'true'
+            with_icu: 'True'
+            with_iconv: 'False'
+            withBigCodecs: 'False'
+            deploy: 'true'
+          - install: 6.9.2
+            label: Qt6_9
+            build_target: '12+'
+            xcode: '15.2'
+            target: 'MacOS_12+'
+            minimumMacosVersion: '12.0'
+            run_tests: 'true'
+            with_icu: 'False'
+            with_iconv: 'True'
+            with_big_codecs: 'True'
+            deploy: 'false'
+          - install: 6.7.3
+            label: Qt6_7
+            build_target: '11+'
+            xcode: '15.2'
+            target: 'MacOS_11+'
+            minimumMacosVersion: '11.0'
+            run_tests: 'true'
+            with_icu: 'True'
+            with_iconv: 'False'
+            withBigCodecs: 'False'
             deploy: 'true'
           - install: 6.7.3
             label: Qt6_7
@@ -313,7 +374,11 @@ jobs:
             xcode: '15.2'
             target: 'MacOS_11+'
             minimumMacosVersion: '11.0'
-            deploy: 'true'
+            run_tests: 'true'
+            with_icu: 'False'
+            with_iconv: 'True'
+            with_big_codecs: 'True'
+            deploy: 'false'
         bundle:
           - label: multibundle
             multibundle: true
@@ -322,10 +387,12 @@ jobs:
 
     env:
       DEPLOY: ${{ matrix.qt.deploy }}
-      RUN_TESTS: 'true'
+      RUN_TESTS: ${{ matrix.qt.run_tests }}
       MULTI_BUNDLE: ${{ matrix.bundle.multibundle }}
       MACOS_DEPLOYMENT_TARGET: ${{ matrix.qt.minimumMacosVersion }}
-      WITH_ICU: 'True'
+      WITH_ICU: ${{ matrix.qt.with_icu }}
+      WITH_ICONV: ${{ matrix.qt.with_iconv }}
+      WITH_BIG_CODECS: ${{ matrix.qt.with_big_codecs }}
 
     steps:
       - name: Checkout repo
@@ -464,7 +531,7 @@ jobs:
           qbs config profiles.qt6.baseProfile clang
 
       - name: Build Conan dependencies
-        run: conan install . --build=missing -o '&:with_crash_reporting=${{ env.WITH_CRASH_REPORTING }}' -o '&:with_xerces=True' -o '&:with_icu=${{ env.WITH_ICU }}' -pr:a=share/ci/conan/profiles/macos_arm
+        run: conan install . --build=missing -o '&:with_crash_reporting=${{ env.WITH_CRASH_REPORTING }}' -o '&:with_xerces=True' -o '&:with_icu=${{ env.WITH_ICU }}' -o '&:with_iconv=${{ env.WITH_ICONV }}' -pr:a=share/ci/conan/profiles/macos_arm
 
       - name: Set up common Qbs args
         run: >
@@ -481,11 +548,14 @@ jobs:
           \"modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME\" 
           modules.macdeployqt.libpath:${{ env.QTDIR }}/lib 
           modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir 
-          project.withICUCodecs:${{ env.WITH_ICU }} 
+          project.withICUCodecs:${{ env.WITH_ICU }}
+          project.withICONVCodecs:${{ env.WITH_ICONV }}
+          project.withBigCodecs:${{ env.WITH_BIG_CODECS }} 
           project.enableConan:true 
           project.conanWithXerces:true 
           project.conanWithCrashReporting:true 
-          project.conanWithICU:${{ env.WITH_ICU }} 
+          project.conanWithICU:${{ env.WITH_ICU }}
+          project.conanWithICONV:${{ env.WITH_ICONV }}
           project.conanProfiles:share/ci/conan/profiles/macos_arm" >> $GITHUB_ENV
 
       - name: Build Valentina
