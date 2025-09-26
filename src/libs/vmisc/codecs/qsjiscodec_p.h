@@ -48,7 +48,10 @@
 
 #include "qjpunicode_p.h"
 #include "qtextcodec.h"
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
 #include <qtclasshelpermacros.h>
+#endif
 
 #ifndef WITH_BIG_CODECS
 #error \
