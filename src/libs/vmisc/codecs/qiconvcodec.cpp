@@ -10,10 +10,12 @@
 #include <QDebug>
 #include <QThreadStorage>
 
+#ifdef Q_OS_UNIX
 // unistd.h is needed for the _XOPEN_UNIX macro
 #include <unistd.h>
 #if defined(_XOPEN_UNIX) && !defined(Q_OS_QNX)
-#  include <langinfo.h>
+#include <langinfo.h>
+#endif
 #endif
 
 #if defined(Q_OS_HPUX)
