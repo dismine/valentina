@@ -99,6 +99,11 @@ auto operator>>(QDataStream &dataStream, VLayoutPassmark &data) -> QDataStream &
 //---------------------------------------------------------------------------------------------------------------------
 auto SingleParallelPoint(const QPointF &p1, const QPointF &p2, qreal angle, qreal width) -> QPointF
 {
+    if (qFuzzyIsNull(width))
+    {
+        return p1;
+    }
+
     QLineF pLine(p1, p2);
     pLine.setAngle(pLine.angle() + angle);
     pLine.setLength(width);

@@ -956,7 +956,8 @@ auto FoundProng(const QLineF &bigLine1,
             points.append(VRawSAPoint(bigLine2.p1(), ekvPoint.CurvePoint(), ekvPoint.TurnPoint()));
             return true;
         }
-        else if (caseAngle > 180 && caseAngle <= 225)
+
+        if (caseAngle > 180 && caseAngle <= 225)
         {
             QPointF intersectPoint;
             QLineF::IntersectType type = bigLine1.intersects(QLineF(ekvPoint, bigLine2.p1()), &intersectPoint);
