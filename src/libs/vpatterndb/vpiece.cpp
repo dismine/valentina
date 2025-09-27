@@ -438,7 +438,7 @@ auto VPiece::PlaceLabelPath(const VContainer *data) const -> QPainterPath
 //---------------------------------------------------------------------------------------------------------------------
 auto VPiece::IsSeamAllowanceValid(const VContainer *data) const -> bool
 {
-    if (IsSeamAllowance() && not IsSeamAllowanceBuiltIn())
+    if (IsSeamAllowance() && not IsSeamAllowanceBuiltIn() && !IsTrueZeroWidth())
     {
         QVector<QPointF> mainPathPoints;
         CastTo<QPointF>(UniteMainPathPoints(data), mainPathPoints);
