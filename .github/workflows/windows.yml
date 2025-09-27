@@ -202,8 +202,7 @@ jobs:
 
       - name: Build Valentina
         shell: bash
-        run: >
-          qbs build ${{ env.COMMON_QBS_ARGS }}
+        run: qbs build ${{ env.COMMON_QBS_ARGS }}
 
       - name: Tests
         if: env.RUN_TESTS == 'true'
@@ -227,8 +226,7 @@ jobs:
       - name: Create installer
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
         shell: bash
-        run: >
-          qbs build -p ValentinaSetup ${{ env.COMMON_QBS_ARGS }}
+        run: qbs build -p ValentinaSetup ${{ env.COMMON_QBS_ARGS }}
 
       - name: Commit hash
         id: commit
@@ -343,8 +341,7 @@ jobs:
 
       - name: Build Valentina
         shell: bash
-        run: >
-          qbs build ${{ env.COMMON_QBS_ARGS }}
+        run: qbs build ${{ env.COMMON_QBS_ARGS }}
   
       - name: Tests
         if: env.RUN_TESTS == 'true'
@@ -354,8 +351,7 @@ jobs:
       - name: Create installer
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
         shell: bash
-        run: >
-          qbs build -p ValentinaSetup ${{ env.COMMON_QBS_ARGS }}
+        run: qbs build -p ValentinaSetup ${{ env.COMMON_QBS_ARGS }}
 
       - name: Commit hash
         id: commit
