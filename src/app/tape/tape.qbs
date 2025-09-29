@@ -156,7 +156,7 @@ VToolApp {
             var defines = [];
 
             if (qbs.targetOS.contains("macos")) {
-                var appTarget = product.buildconfig.enableMultiBundle ? "Valentina" : exportingProduct.targetName;
+                var appTarget = product.buildconfig.enableMultiBundle ? exportingProduct.targetName : "Valentina";
                 var installBinaryPath = FileInfo.joinPaths(product.buildconfig.installAppPath,
                                                            appTarget + ".app/Contents/MacOS")
                 var path = FileInfo.joinPaths(product.qbs.installRoot + product.qbs.installPrefix,
