@@ -239,6 +239,11 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
         type = QtDebugMsg;
     }
 
+    if (msg.contains("GOAWAY invalid stream"_L1, Qt::CaseInsensitive))
+    {
+        type = QtDebugMsg;
+    }
+
     QString logMsg = msg;
     if (const bool isWarningMessage = VAbstractApplication::VApp()->IsWarningMessage(msg); isWarningMessage)
     {
