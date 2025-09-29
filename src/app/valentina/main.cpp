@@ -36,6 +36,10 @@
 #include <QScopeGuard>
 #include <QTimer>
 
+#ifdef Q_OS_WIN
+#include <clocale>
+#endif
+
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <xercesc/util/PlatformUtils.hpp>
 #endif
@@ -93,6 +97,10 @@ using namespace Qt::Literals::StringLiterals;
 //---------------------------------------------------------------------------------------------------------------------
 auto main(int argc, char *argv[]) -> int
 {
+#ifdef Q_OS_WIN
+    std::setlocale(LC_ALL, ".UTF8");
+#endif
+
     Q_INIT_RESOURCE(cursor);     // NOLINT
     Q_INIT_RESOURCE(toolcursor); // NOLINT
     Q_INIT_RESOURCE(icon);       // NOLINT
