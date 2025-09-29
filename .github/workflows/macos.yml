@@ -216,12 +216,12 @@ jobs:
         run: >
           echo "COMMON_QBS_ARGS=
           -f valentina.qbs 
-          -d $GITHUB_WORKSPACE/build 
-          --jobs $(nproc) 
+          -d \"$GITHUB_WORKSPACE/build\"
+          --jobs $(nproc)
           config:release 
           modules.buildconfig.enableUnitTests:${{ env.RUN_TESTS }}  
           modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} 
-          qbs.installRoot:$GITHUB_WORKSPACE/build/release/install-root 
+          qbs.installRoot:\"$GITHUB_WORKSPACE/build/release/install-root\"
           profile:qt6 
           project.minimumMacosVersion:$MACOS_DEPLOYMENT_TARGET 
           \"modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME\" 
@@ -233,13 +233,11 @@ jobs:
           project.conanProfiles:share/ci/conan/profiles/macos" >> $GITHUB_ENV
 
       - name: Build Valentina
-        run: >
-          qbs build 
-          ${{ env.COMMON_QBS_ARGS }}
+        run: qbs build ${{ env.COMMON_QBS_ARGS }}
 
       - name: Tests
         if: env.RUN_TESTS == 'true'
-        run: qbs -f valentina.qbs -p autotest-runner -d $GITHUB_WORKSPACE/build  profile:qt6 config:release
+        run: qbs -p autotest-runner ${{ env.COMMON_QBS_ARGS }}
 
       - name: Deploy symbols
         if: env.WITH_CRASH_REPORTING == 'True'
@@ -471,12 +469,12 @@ jobs:
         run: >
           echo "COMMON_QBS_ARGS=
           -f valentina.qbs
-          -d $GITHUB_WORKSPACE/build 
+          -d \"$GITHUB_WORKSPACE/build\"
           --jobs $(nproc) 
           config:release 
           modules.buildconfig.enableUnitTests:${{ env.RUN_TESTS }}
           modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} 
-          qbs.installRoot:$GITHUB_WORKSPACE/build/release/install-root 
+          qbs.installRoot:\"$GITHUB_WORKSPACE/build/release/install-root\"
           profile:qt6 
           project.minimumMacosVersion:$MACOS_DEPLOYMENT_TARGET 
           \"modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME\" 
@@ -488,13 +486,11 @@ jobs:
           project.conanProfiles:share/ci/conan/profiles/macos_arm" >> $GITHUB_ENV
 
       - name: Build Valentina
-        run: >
-          qbs build 
-          ${{ env.COMMON_QBS_ARGS }}
+        run: qbs build ${{ env.COMMON_QBS_ARGS }}
 
       - name: Tests
         if: env.RUN_TESTS == 'true'
-        run: qbs -f valentina.qbs -p autotest-runner -d $GITHUB_WORKSPACE/build  profile:qt6 config:release
+        run: qbs -p autotest-runner ${{ env.COMMON_QBS_ARGS }}
 
       - name: Deploy symbols
         if: env.WITH_CRASH_REPORTING == 'True'
