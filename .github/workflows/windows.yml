@@ -177,12 +177,7 @@ jobs:
           project.enableConan:true
           project.conanWithCrashReporting:${{ env.WITH_CRASH_REPORTING }}
           project.conanWithXerces:true
-          project.conanWithICU:${{ env.WITH_ICU }}
-          project.conanWithICONV:${{ env.WITH_ICONV }}
           project.conanProfiles:share/ci/conan/profiles/windows
-          project.withICUCodecs:${{ env.WITH_ICU }}
-          project.withICONVCodecs:${{ env.WITH_ICONV }}
-          project.withBigCodecs:${{ env.WITH_BIG_CODECS }}
           modules.buildconfig.enablePCH:true
           modules.windeployqt.compilerRuntime:true
           modules.windeployqt.noCompilerRuntime:false" >> $GITHUB_ENV
