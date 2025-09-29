@@ -2970,7 +2970,7 @@ void TST_QTextCodec::nullInputZeroOrNegativeLength_data()
     QTest::newRow("UTF-32BE") << "UTF-32BE" << 1018;
     QTest::newRow("UTF-32LE") << "UTF-32LE" << 1019;
 #ifdef Q_OS_WIN
-#if defined(WITH_ICU_CODECS) || (defined(WITH_BIG_CODECS) && !defined(Q_OS_INTEGRITY))
+#if defined(WITH_ICU_CODECS)
     // correct some issues where the ICU data set contains duplicated entries.
     // Where this happens it's because one data set is a subset of another. We
     // always use the larger data set.
@@ -2978,6 +2978,11 @@ void TST_QTextCodec::nullInputZeroOrNegativeLength_data()
     QTest::newRow("windows-949") << "windows-949" << -949;
     QTest::newRow("GBK") << "GBK" << 113;
     QTest::newRow("GB2312") << "GB2312" << 113; // Should be same as  GBK
+#elif defined(WITH_BIG_CODECS) && !defined(Q_OS_INTEGRITY)
+    QTest::newRow("EUC-KR") << "EUC-KR" << 38;
+    QTest::newRow("windows-949") << "windows-949" << -949;
+    QTest::newRow("GBK") << "GBK" << 113;
+    QTest::newRow("GB2312") << "GB2312" << 2025; // Should be same as  GBK
 #endif
     QTest::newRow("ISO-8859-6") << "ISO-8859-6" << 9;
     QTest::newRow("ISO-8859-7") << "ISO-8859-7" << 10;
