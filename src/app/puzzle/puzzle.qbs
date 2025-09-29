@@ -199,9 +199,20 @@ VToolApp {
         Depends { name: "cpp" }
         cpp.defines: {
             var defines = [];
-            // TODO: If minimal qbs version is 1.23 replace with FileInfo.executableSuffix()
-            var extension = qbs.targetOS.contains("windows") ? ".exe" : "";
-            defines.push('PUZZLE_BUILDDIR="' + FileInfo.joinPaths(exportingProduct.buildDirectory, exportingProduct.targetName + extension) +'"');
+
+            if (qbs.targetOS.contains("macos")) {
+                var appTarget = product.buildconfig.enableMultiBundle ? "Valentina" : exportingProduct.targetName;
+                var installBinaryPath = FileInfo.joinPaths(product.buildconfig.installAppPath,
+                                                           appTarget + ".app/Contents/MacOS")
+                var path = FileInfo.joinPaths(product.qbs.installRoot + product.qbs.installPrefix,
+                                              installBinaryPath,
+                                              exportingProduct.targetName);
+            } else {
+                var path = FileInfo.joinPaths(exportingProduct.buildDirectory,
+                                              exportingProduct.targetName + FileInfo.executableSuffix());
+            }
+
+            defines.push('PUZZLE_PATH="' + path +'"');
             return defines;
         }
     }

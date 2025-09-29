@@ -48,6 +48,7 @@ jobs:
             xcode: '15.2'
             target: 'MacOS_12+'
             minimumMacosVersion: '12.0'
+            run_tests: 'true'
             deploy: 'true'
           - install: 6.4.3
             label: Qt6_4
@@ -55,6 +56,7 @@ jobs:
             xcode: '15.2'
             target: 'MacOS_10_15+'
             minimumMacosVersion: '10.15'
+            run_tests: 'true'
             deploy: 'true'
         bundle:
           - label: multibundle
@@ -64,6 +66,7 @@ jobs:
 
     env:
       DEPLOY: ${{ matrix.qt.deploy }}
+      RUN_TESTS: ${{ matrix.qt.run_tests }}
       MULTI_BUNDLE: ${{ matrix.bundle.multibundle }}
       MACOS_DEPLOYMENT_TARGET: ${{ matrix.qt.minimumMacosVersion }}
 
@@ -187,14 +190,6 @@ jobs:
         uses: tecolicom/actions-use-homebrew-tools@v1
         with:
           tools: coreutils
-    
-      - name: Install Conan
-        run: |
-          mkdir ~/.venv
-          python3 -m venv ~/.venv
-          source ~/.venv/bin/activate
-          pip install --upgrade setuptools
-          pip3 install -r share/ci/requirements-ci.txt
 
       - name: Install Qt Creator
         uses: ./.github/actions/download-qtc
@@ -224,7 +219,7 @@ jobs:
           -d $GITHUB_WORKSPACE/build 
           --jobs $(nproc) 
           config:release 
-          modules.buildconfig.enableUnitTests:false 
+          modules.buildconfig.enableUnitTests:${{ env.RUN_TESTS }}  
           modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} 
           qbs.installRoot:$GITHUB_WORKSPACE/build/release/install-root 
           profile:qt6 
@@ -241,6 +236,10 @@ jobs:
         run: >
           qbs build 
           ${{ env.COMMON_QBS_ARGS }}
+
+      - name: Tests
+        if: env.RUN_TESTS == 'true'
+        run: qbs -f valentina.qbs -p autotest-runner -d $GITHUB_WORKSPACE/build  profile:qt6 config:release
 
       - name: Deploy symbols
         if: env.WITH_CRASH_REPORTING == 'True'
@@ -307,6 +306,7 @@ jobs:
             xcode: '15.2'
             target: 'MacOS_12+'
             minimumMacosVersion: '12.0'
+            run_tests: 'true'
             deploy: 'true'
           - install: 6.7.3
             label: Qt6_7
@@ -314,6 +314,7 @@ jobs:
             xcode: '15.2'
             target: 'MacOS_11+'
             minimumMacosVersion: '11.0'
+            run_tests: 'true'
             deploy: 'true'
         bundle:
           - label: multibundle
@@ -323,6 +324,7 @@ jobs:
 
     env:
       DEPLOY: ${{ matrix.qt.deploy }}
+      RUN_TESTS: ${{ matrix.qt.run_tests }}
       MULTI_BUNDLE: ${{ matrix.bundle.multibundle }}
       MACOS_DEPLOYMENT_TARGET: ${{ matrix.qt.minimumMacosVersion }}
 
@@ -443,13 +445,6 @@ jobs:
         uses: tecolicom/actions-use-homebrew-tools@v1
         with:
           tools: coreutils
-    
-      - name: Install Conan
-        run: |
-          mkdir ~/.venv
-          python3 -m venv ~/.venv
-          source ~/.venv/bin/activate
-          pip3 install --upgrade pip 'dropbox>=12.0.2' py7zr conan==1.66.0 requests
 
       - name: Install Qt Creator
         uses: ./.github/actions/download-qtc
@@ -475,11 +470,11 @@ jobs:
       - name: Set up common Qbs args
         run: >
           echo "COMMON_QBS_ARGS=
-          -f valentina.qbs 
+          -f valentina.qbs
           -d $GITHUB_WORKSPACE/build 
           --jobs $(nproc) 
           config:release 
-          modules.buildconfig.enableUnitTests:false 
+          modules.buildconfig.enableUnitTests:${{ env.RUN_TESTS }}
           modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} 
           qbs.installRoot:$GITHUB_WORKSPACE/build/release/install-root 
           profile:qt6 
@@ -497,6 +492,10 @@ jobs:
           qbs build 
           ${{ env.COMMON_QBS_ARGS }}
 
+      - name: Tests
+        if: env.RUN_TESTS == 'true'
+        run: qbs -f valentina.qbs -p autotest-runner -d $GITHUB_WORKSPACE/build  profile:qt6 config:release
+
       - name: Deploy symbols
         if: env.WITH_CRASH_REPORTING == 'True'
         run: |
@@ -508,7 +507,7 @@ jobs:
       - name: Create DMG
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
         run: >
-          qbs build 
+          qbs build
           -p 'Valentina DMG' 
           --force-probe-execution 
           ${{ env.COMMON_QBS_ARGS }}

@@ -340,21 +340,21 @@ void AbstractTest::CompareLinesDistance(const QVector<QLineF> &result, const QVe
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto AbstractTest::PuzzlePath() const -> QString
+auto AbstractTest::PuzzlePath() -> QString
 {
-    return QStringLiteral(PUZZLE_BUILDDIR);
+    return QStringLiteral(PUZZLE_PATH);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto AbstractTest::ValentinaPath() const -> QString
+auto AbstractTest::ValentinaPath() -> QString
 {
-    return QStringLiteral(VALENTINA_BUILDDIR);
+    return QStringLiteral(VALENTINA_PATH);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto AbstractTest::TapePath() const -> QString
+auto AbstractTest::TapePath() -> QString
 {
-    return QStringLiteral(TAPE_BUILDDIR);
+    return QStringLiteral(TAPE_PATH);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
