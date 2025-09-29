@@ -115,6 +115,13 @@ void TST_VPiece::TestSAPassmark_data()
                      QStringLiteral("://incorrect_notch/seamAllowance.json"),
                      QStringLiteral("://incorrect_notch/rotatedSeamAllowance.json"),
                      QStringLiteral("://incorrect_notch/passmarkShape.json"));
+
+    // See file src/app/share/collection/truezerobug.val
+    ASSERT_TEST_CASE("Detail 2",
+                     QStringLiteral("://true_zero_width_notches/passmarkData.json"),
+                     QStringLiteral("://true_zero_width_notches/seamAllowance.json"),
+                     QStringLiteral("://true_zero_width_notches/rotatedSeamAllowance.json"),
+                     QStringLiteral("://true_zero_width_notches/passmarkShape.json"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

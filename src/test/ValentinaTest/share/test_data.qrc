@@ -234,5 +234,9 @@
         <file>svg_font_writing_system/traditional_chinese_writing_system.json</file>
         <file>jacketv8/input.json</file>
         <file>jacketv8/output.json</file>
+        <file>true_zero_width_notches/passmarkData.json</file>
+        <file>true_zero_width_notches/passmarkShape.json</file>
+        <file>true_zero_width_notches/rotatedSeamAllowance.json</file>
+        <file>true_zero_width_notches/seamAllowance.json</file>
     </qresource>
 </RCC>

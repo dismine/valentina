@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pattern labelPrefix="en" passmarkLength="#Increment_1">
+    <!--Pattern created with Valentina v1.1.0.79 (https://smart-pattern.com.ua/).-->
+    <version>0.9.9</version>
+    <unit>cm</unit>
+    <description/>
+    <notes/>
+    <pieceLabel/>
+    <measurements/>
+    <increments>
+        <increment formula="1" name="#Increment_1"/>
+    </increments>
+    <previewCalculations/>
+    <draw name="Pattern piece 1">
+        <calculation>
+            <point id="1" mx="0.264583" my="0.396875" name="A" showLabel="true" type="single" x="0.79375" y="1.05833"/>
+            <point angle="90" basePoint="1" id="2" length="10" lineColor="#000000" mx="0.264583" my="0.396875" name="A1" showLabel="true" type="endLine" typeLine="hair"/>
+            <point angle="180" basePoint="2" id="3" length="10" lineColor="#000000" mx="0.264583" my="0.396875" name="A2" showLabel="true" type="endLine" typeLine="hair"/>
+            <point firstPoint="3" id="4" mx="0.264583" my="0.396875" name="A3" secondPoint="1" showLabel="true" type="pointOfIntersection"/>
+            <line firstPoint="1" id="5" lineColor="#000000" secondPoint="4" typeLine="hair"/>
+            <line firstPoint="4" id="6" lineColor="#000000" secondPoint="3" typeLine="hair"/>
+            <point firstPoint="4" id="12" length="CurrentLength/2" lineColor="#000000" mx="0.264583" my="0.396875" name="A4" secondPoint="3" showLabel="true" type="alongLine" typeLine="none"/>
+        </calculation>
+        <modeling>
+            <point id="14" idObject="3" inUse="false" mx="0.264583" my="0.396875" showLabel="true" type="modeling"/>
+            <point id="15" idObject="2" inUse="false" mx="0.264583" my="0.396875" showLabel="true" type="modeling"/>
+            <point id="16" idObject="1" inUse="false" mx="0.264583" my="0.396875" showLabel="true" type="modeling"/>
+            <point id="17" idObject="4" inUse="false" mx="0.264583" my="0.396875" showLabel="true" type="modeling"/>
+            <point id="18" idObject="12" inUse="false" mx="0.264583" my="0.396875" showLabel="true" type="modeling"/>
+        </modeling>
+        <details>
+            <detail followGrainline="false" forbidFlipping="true" forceFlipping="false" hideMainPath="false" id="19" mx="12.2029" my="0.115139" name="Detail 2" seamAllowance="true" sewLineOnDrawing="false" trueZeroWidth="true" uuid="{81afc74b-9d2d-43e5-93f6-64d1fb9d1270}" version="2" width="1">
+                <data annotation="" foldPosition="" height="10" letter="" mx="0" my="0" onFold="false" orientation="" quantity="1" rotation="0" rotationWay="" tilt="" visible="false" width="10"/>
+                <patternInfo height="10" mx="0" my="0" rotation="0" visible="false" width="10"/>
+                <grainline arrows="0" enabled="false" length="10" mx="0" my="0" rotation="90" visible="true"/>
+                <nodes>
+                    <node after="0" before="0" idObject="16" manualPassmarkAngle="true" passmark="true" passmarkAngle="straightforward" passmarkAngleFormula="315" passmarkLine="one" showSecondPassmark="false" type="NodePoint"/>
+                    <node after="0" before="0" idObject="17" manualPassmarkAngle="true" passmark="true" passmarkAngle="straightforward" passmarkAngleFormula="225" passmarkLine="one" showSecondPassmark="false" type="NodePoint"/>
+                    <node after="0" before="0" idObject="18" manualPassmarkAngle="true" passmark="true" passmarkAngle="straightforward" passmarkAngleFormula="180" passmarkLine="one" showSecondPassmark="false" type="NodePoint"/>
+                    <node before="0" idObject="14" passmark="true" passmarkAngle="straightforward" passmarkLine="two" showSecondPassmark="false" type="NodePoint"/>
+                    <node after="0" idObject="15" passmark="true" passmarkAngle="straightforward" passmarkLine="two" showSecondPassmark="false" type="NodePoint"/>
+                </nodes>
+                <mirrorLine type="2ArrowsTextAbove"/>
+            </detail>
+        </details>
+        <groups/>
+    </draw>
+</pattern>

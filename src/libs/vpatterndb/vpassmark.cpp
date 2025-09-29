@@ -812,6 +812,28 @@ auto VPassmark::PassmarkStraightforwardBaseLine(const QPointF &seamPassmarkSAPoi
     }
 
     auto line = QLineF(seamPassmarkSAPoint, m_data.passmarkSAPoint);
+
+    if (line.isNull())
+    {
+        if (m_data.passmarkSAPoint.IsManualPasskmarkAngle())
+        {
+            line = QLineF(m_data.passmarkSAPoint.x(),
+                          m_data.passmarkSAPoint.y(),
+                          m_data.passmarkSAPoint.x() + 100,
+                          m_data.passmarkSAPoint.y());
+            line.setAngle(m_data.passmarkSAPoint.GetPasskmarkAngle() + 180);
+        }
+        else
+        {
+            const QString errorMsg = QObject::tr(
+                                         "Piece '%1'. Notch collapse for point '%2'. Provide a manual angle value.")
+                                         .arg(m_data.pieceName, m_data.nodeName);
+            VAbstractApplication::VApp()->IsPedantic()
+                ? throw VException(errorMsg)
+                : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        }
+    }
+
     line.setLength(length);
     return {line};
 }

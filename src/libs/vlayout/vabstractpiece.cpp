@@ -38,6 +38,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vpiecegrainline.h"
 #include "vabstractpiece_p.h"
+#include "vgobject.h"
 #include "vlayoutpiecepath.h"
 #include "vrawsapoint.h"
 
@@ -178,7 +179,12 @@ auto AngleByLength(QVector<VRawSAPoint> points,
         {
             if (not IsOutsidePoint(bigLine1.p1(), bigLine1.p2(), sp2))
             {
-                if (p.GetAngleType() != PieceNodeAngle::ByLengthCurve)
+                if (VGObject::IsPointOnLineSegment(sp2, bigLine1.p1(), bigLine1.p2())
+                    || p.GetAngleType() == PieceNodeAngle::ByLengthCurve)
+                {
+                    points.append(VRawSAPoint(sp2, p.CurvePoint(), p.TurnPoint()));
+                }
+                else if (p.GetAngleType() != PieceNodeAngle::ByLengthCurve)
                 {
                     bool success = false;
                     QVector<VRawSAPoint> temp = points;
@@ -194,10 +200,6 @@ auto AngleByLength(QVector<VRawSAPoint> points,
                     {
                         *needRollback = not success;
                     }
-                }
-                else
-                {
-                    points.append(VRawSAPoint(sp2, p.CurvePoint(), p.TurnPoint()));
                 }
             }
             else
@@ -976,7 +978,7 @@ auto FoundProng(const QLineF &bigLine1,
                 return true;
             }
         }
-        else
+        else if (caseAngle >= 125)
         {
             QPointF intersectPoint;
             QLineF::IntersectType type =

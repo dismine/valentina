@@ -1,0 +1,46 @@
+{
+    "data": {
+        "globalPassmarkLength": 37.795275590551185,
+        "globalPassmarkWidth": 0,
+        "id": 16,
+        "isMainPathNode": true,
+        "isShowSecondPassmark": false,
+        "nextSAPoint": {
+            "manualPassmarkAngle": true,
+            "passmarkAngle": 225,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 0,
+            "saBefore": 0,
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": -347.9527559055118,
+            "y": 39.999874015748034
+        },
+        "nodeName": "A",
+        "passmarkAngleType": 0,
+        "passmarkIndex": 0,
+        "passmarkLineType": 0,
+        "passmarkSAPoint": {
+            "manualPassmarkAngle": true,
+            "passmarkAngle": 315,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 0,
+            "saBefore": 0,
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": 30,
+            "y": 39.999874015748034
+        },
+        "pieceName": "Detail 2",
+        "previousSAPoint": {
+            "passmarkClockwiseOpening": false,
+            "saAfter": 0,
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": 30.00000000000003,
+            "y": -337.9528818897638
+        },
+        "saWidth": 37.795275590551185,
+        "trueZeroWidth": true
+    }
+}

@@ -1103,14 +1103,14 @@ void TST_VAbstractPiece::BrokenDetailEquidistant_data()
                      false);
 
     // See the file "valentina_private_collection/bugs/prong/650b.val"
-    ASSERT_TEST_CASE("Coat",
+    ASSERT_TEST_CASE("Coat 1",
                      QStringLiteral("://prong/input.json"),
                      QStringLiteral("://prong/output.json"),
                      37.795275590551185, /*seam allowance width*/
                      false);
 
     // See the file "collection/bugs/prong_acute_angle.val"
-    ASSERT_TEST_CASE("Coat",
+    ASSERT_TEST_CASE("Coat 2",
                      QStringLiteral("://prong_acute_angle/input.json"),
                      QStringLiteral("://prong_acute_angle/output.json"),
                      37.795275590551185, /*seam allowance width*/
