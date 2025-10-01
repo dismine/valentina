@@ -1315,53 +1315,25 @@ auto VAbstractPattern::GetPatternWasChanged() const -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractPattern::GetPassmarkLengthVariable() const -> QString
 {
-    const QDomElement pattern = documentElement();
-
-    if (pattern.isNull())
-    {
-        return {};
-    }
-
-    return GetParametrEmptyString(pattern, AttrPassmarkLength);
+    return GetPatternVariable(AttrPassmarkLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractPattern::SetPassmarkLengthVariable(const QString &name)
 {
-    QDomElement pattern = documentElement();
-
-    if (not pattern.isNull())
-    {
-        SetAttributeOrRemoveIf<QString>(pattern, AttrPassmarkLength, name,
-                                        [](const QString &name) noexcept { return name.isEmpty(); });
-        modified = true;
-    }
+    SePatternVariable(AttrPassmarkLength, name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractPattern::GetPassmarkWidthVariable() const -> QString
 {
-    const QDomElement pattern = documentElement();
-
-    if (pattern.isNull())
-    {
-        return {};
-    }
-
-    return GetParametrEmptyString(pattern, AttrPassmarkWidth);
+    return GetPatternVariable(AttrPassmarkWidth);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractPattern::SetPassmarkWidthVariable(const QString &name)
 {
-    QDomElement pattern = documentElement();
-
-    if (not pattern.isNull())
-    {
-        SetAttributeOrRemoveIf<QString>(pattern, AttrPassmarkWidth, name,
-                                        [](const QString &name) noexcept { return name.isEmpty(); });
-        modified = true;
-    }
+    SePatternVariable(AttrPassmarkWidth, name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2298,6 +2270,32 @@ void VAbstractPattern::WriteBackgroundImage(QDomElement &element, const VBackgro
     SetAttributeOrRemoveIf<bool>(element, AttrVisible, image.Visible(), [](bool visible) noexcept { return visible; });
     SetAttributeOrRemoveIf<qreal>(element, AttrOpacity, image.Opacity(),
                                   [](qreal o) noexcept { return VFuzzyComparePossibleNulls(o, 1); });
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractPattern::GetPatternVariable(const QString &attribute) const -> QString
+{
+    const QDomElement pattern = documentElement();
+
+    if (pattern.isNull())
+    {
+        return {};
+    }
+
+    return GetParametrEmptyString(pattern, attribute);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::SePatternVariable(const QString &attribute, const QString &name)
+{
+    if (QDomElement pattern = documentElement(); not pattern.isNull())
+    {
+        SetAttributeOrRemoveIf<QString>(pattern,
+                                        attribute,
+                                        name,
+                                        [](const QString &name) noexcept { return name.isEmpty(); });
+        modified = true;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -574,6 +574,9 @@ private:
     auto GetBackgroundPatternImage(const QDomElement &element) const -> VBackgroundPatternImage;
     auto GetBackgroundImageElement(const QUuid &id) const -> QDomElement;
     void WriteBackgroundImage(QDomElement &element, const VBackgroundPatternImage &image);
+
+    auto GetPatternVariable(const QString &attribute) const -> QString;
+    void SePatternVariable(const QString &attribute, const QString &name);
 };
 
 QT_WARNING_POP
