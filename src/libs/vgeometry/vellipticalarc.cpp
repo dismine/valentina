@@ -189,7 +189,7 @@ auto EllipticArcPoints(QPointF c, qreal radius1, qreal radius2, qreal astart, qr
 
     if (approximationScale < minCurveApproximationScale || approximationScale > maxCurveApproximationScale)
     {
-        approximationScale = VAbstractApplication::VApp()->Settings()->GetCurveApproximationScale();
+        approximationScale = VAbstractApplication::VApp()->GlobalCurveApproximationScale();
     }
 
     fpm::fixed_16_16 const flatness{maxCurveApproximationScale / approximationScale * tolerance};

@@ -74,6 +74,7 @@ public:
     auto static IsGUIMode() -> bool;
     auto IsAppInGUIMode() const -> bool override;
     auto IsPedantic() const -> bool override;
+    auto GlobalCurveApproximationScale() -> qreal override;
 
     void OpenSettings() override;
 

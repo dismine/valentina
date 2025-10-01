@@ -27,12 +27,13 @@
  *************************************************************************/
 
 #include "preferencespatternpage.h"
+#include "../../core/vapplication.h"
 #include "../dialogdatetimeformats.h"
 #include "../dialogknownmaterials.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vformat/vsinglelineoutlinechar.h"
 #include "../vmisc/svgfont/vsvgfontdatabase.h"
-#include "../vmisc/vabstractvalapplication.h"
+#include "../vmisc/theme/themeDef.h"
 #include "../vmisc/vvalentinasettings.h"
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../vwidgets/vmousewheelwidgetadjustmentguard.h"
@@ -40,7 +41,6 @@
 #include "svgfont/vsvgfont.h"
 #include "svgfont/vsvgfontengine.h"
 #include "ui_preferencespatternpage.h"
-#include "vabstractapplication.h"
 
 #include <QCompleter>
 #include <QDate>
@@ -95,6 +95,22 @@ PreferencesPatternPage::PreferencesPatternPage(QWidget *parent)
     ui->doubleSpinBoxCurveApproximation->setMinimum(minCurveApproximationScale);
     ui->doubleSpinBoxCurveApproximation->setMaximum(maxCurveApproximationScale);
     ui->undoCount->setValue(settings->GetUndoCount());
+
+    {
+        const QIcon warningIcon = FromTheme(VThemeIcon::DialogWarning);
+        const int size = qRound(16. * ui->labelCurveApproximationScaleWarning->devicePixelRatio());
+        ui->labelCurveApproximationScaleWarning->setPixmap(warningIcon.pixmap(size, size));
+
+        bool warningVisible = false;
+        if (VCommandLinePtr const commandLine = VApplication::CommandLine(); commandLine != nullptr)
+        {
+            if (!qFuzzyIsNull(commandLine->CurveApproximationScale()))
+            {
+                warningVisible = true;
+            }
+        }
+        ui->labelCurveApproximationScaleWarning->setVisible(warningVisible);
+    }
 
     //----------------------- Unit setup
     // set default unit

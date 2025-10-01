@@ -88,6 +88,7 @@ public:
 
     virtual auto IsAppInGUIMode() const -> bool = 0;
     virtual auto IsPedantic() const -> bool;
+    virtual auto GlobalCurveApproximationScale() -> qreal;
 
     static auto ClearMessage(QString msg) -> QString;
 

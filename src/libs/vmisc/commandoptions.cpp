@@ -94,6 +94,7 @@ const QString LONG_OPTION_DIMENSION_B = QStringLiteral("dimensionB");
 const QString LONG_OPTION_DIMENSION_C = QStringLiteral("dimensionC");
 
 const QString LONG_OPTION_USER_MATERIAL = QStringLiteral("userMaterial");
+const QString LONG_OPTION_CURVE_APPROXIMATION_SCALE = QStringLiteral("curveApproximationScale");
 
 const QString LONG_OPTION_IGNORE_MARGINS = QStringLiteral("ignoremargins");
 const QString SINGLE_OPTION_IGNORE_MARGINS = QStringLiteral("i");
@@ -161,6 +162,7 @@ auto AllKeys() -> QStringList
                        LONG_OPTION_EXPORTSUCHDETAILS,
                        LONG_OPTION_EXPXSCALE,
                        LONG_OPTION_EXPYSCALE,
+                       LONG_OPTION_CURVE_APPROXIMATION_SCALE,
                        LONG_OPTION_CROP_LENGTH,
                        SINGLE_OPTION_CROP_LENGTH,
                        LONG_OPTION_CROP_WIDTH,

@@ -93,6 +93,8 @@ public:
     auto ExportXScale() const -> qreal;
     auto ExportYScale() const -> qreal;
 
+    auto CurveApproximationScale() const -> qreal;
+
     //@brief returns the piece name regex or empty string if not set
     auto OptExportSuchDetails() const -> QString;
 

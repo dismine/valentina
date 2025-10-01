@@ -94,6 +94,7 @@ extern const QString LONG_OPTION_DIMENSION_B;
 extern const QString LONG_OPTION_DIMENSION_C;
 
 extern const QString LONG_OPTION_USER_MATERIAL;
+extern const QString LONG_OPTION_CURVE_APPROXIMATION_SCALE;
 
 extern const QString LONG_OPTION_IGNORE_MARGINS;
 extern const QString SINGLE_OPTION_IGNORE_MARGINS;

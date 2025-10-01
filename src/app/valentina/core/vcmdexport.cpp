@@ -388,6 +388,19 @@ auto VCommandLine::ExportYScale() const -> qreal
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VCommandLine::CurveApproximationScale() const -> qreal
+{
+    qreal scale = 0;
+    if (IsOptionSet(LONG_OPTION_CURVE_APPROXIMATION_SCALE))
+    {
+        scale = qBound(minCurveApproximationScale,
+                       OptionValue(LONG_OPTION_CURVE_APPROXIMATION_SCALE).toDouble(),
+                       maxCurveApproximationScale);
+    }
+    return scale;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VCommandLine::OptExportSuchDetails() const -> QString
 {
     QString path;
@@ -681,6 +694,13 @@ void VCommandLine::InitCommandLineOptions()
                    "key can be used multiple times. Has no effect in GUI mode.")
              .arg(userMaterialPlaceholdersQuantity),
          translate("VCommandLine", "User material")},
+        {LONG_OPTION_CURVE_APPROXIMATION_SCALE,
+         translate("VCommandLine",
+                   "Override the global curve approximation scale setting from the application preferences. "
+                   "The value must be between %1 and %2.")
+             .arg(minCurveApproximationScale)
+             .arg(maxCurveApproximationScale),
+         translate("VCommandLine", "Curve approximation")},
         //==============================================================================================================
         {{SINGLE_OPTION_PAGETEMPLATE, LONG_OPTION_PAGETEMPLATE},
          translate("VCommandLine", "Number corresponding to layout page template (default = 0, export mode):")

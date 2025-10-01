@@ -308,6 +308,12 @@ auto VAbstractApplication::IsPedantic() const -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VAbstractApplication::GlobalCurveApproximationScale() -> qreal
+{
+    return Settings()->GetCurveApproximationScale();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 #if defined(Q_OS_WIN)
 void VAbstractApplication::WinAttachConsole()
 {

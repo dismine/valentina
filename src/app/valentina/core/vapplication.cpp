@@ -806,6 +806,19 @@ auto VApplication::IsPedantic() const -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VApplication::GlobalCurveApproximationScale() -> qreal
+{
+    if (VCommandLine::instance != nullptr)
+    {
+        if (qreal const scale = VCommandLine::instance->CurveApproximationScale(); !qFuzzyIsNull(scale))
+        {
+            return scale;
+        }
+    }
+    return Settings()->GetCurveApproximationScale();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VApplication::OpenSettings()
 {
     VAbstractValApplication::OpenSettings();

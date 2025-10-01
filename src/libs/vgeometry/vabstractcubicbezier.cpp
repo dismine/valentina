@@ -535,7 +535,7 @@ auto VAbstractCubicBezier::GetCubicBezierPoints(const QPointF &p1, const QPointF
 {
     if (approximationScale < minCurveApproximationScale || approximationScale > maxCurveApproximationScale)
     {
-        approximationScale = VAbstractApplication::VApp()->Settings()->GetCurveApproximationScale();
+        approximationScale = VAbstractApplication::VApp()->GlobalCurveApproximationScale();
     }
 
     QVector<QPointF> pvector;
