@@ -2844,7 +2844,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.cpp" line="858"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.cpp" line="842"/>
         <source>Area of piece</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10715,52 +10715,52 @@ Aplicar características de todos modos?</translation>
 <context>
     <name>MApplication</name>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="366"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="371"/>
         <source>Error parsing file. Program will be terminated.</source>
         <translation>Error al procesar el archivo. El programa se terminará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="372"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="377"/>
         <source>Error bad id. Program will be terminated.</source>
         <translation>Error de identificación. El programa se cerrará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="378"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="383"/>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
         <translation>Error al convertir valor. El programa se cerrará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="384"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="389"/>
         <source>Error empty parameter. Program will be terminated.</source>
         <translation>Error de parámetro vacío. El programa se cerrará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="390"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="395"/>
         <source>Error wrong id. Program will be terminated.</source>
         <translation>Error de identidad equivocada. El programa se cerrará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="403"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="408"/>
         <source>Something&apos;s wrong!!</source>
         <translation>¡¡Algo ha fallado!!</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="416"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="421"/>
         <source>Parser error: %1. Program will be terminated.</source>
         <translation>Error al procesar: %1. El programa se terminará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="421"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="426"/>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation>Se ha lanzado una excepción: %1. El programa se terminará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="635"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="640"/>
         <source>Valentina&apos;s measurements editor.</source>
         <translation>Editor de medidas de Valentina.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1024"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1029"/>
         <source>The measurement file.</source>
         <translation>Archivo de medidas.</translation>
     </message>
@@ -10785,12 +10785,12 @@ Aplicar características de todos modos?</translation>
         <translation type="vanished">Utilizado para pruebas unitarias. Ejecuta el programa y abre un archivo sin mostrar una ventana.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1274"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1279"/>
         <source>Invalid base size argument. Must be cm, mm or inch.</source>
         <translation>Argumento de talla base inválida. Deben ser cm, mm o pulg.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1070"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1075"/>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
         <translation>No se puede comenzar a escuchar por conexiones entrantes en el nombre &apos;%1&apos;</translation>
     </message>
@@ -10799,7 +10799,7 @@ Aplicar características de todos modos?</translation>
         <translation type="vanished">El modo de prueba no soporta abrir varios archivos.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1190"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1195"/>
         <source>Please, provide one input file.</source>
         <translation>Por favor, proporcione un archivo de entrada.</translation>
     </message>
@@ -10820,82 +10820,82 @@ Aplicar características de todos modos?</translation>
         <translation type="vanished">Abrir con la altura base. Valores válidos: %1cm.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1046"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1051"/>
         <source>Use for unit testing. Run the program and open a file without showing the main window.</source>
         <translation>Utilizado para pruebas unitarias. Ejecuta el programa y abre un archivo sin mostrar la ventana principal.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1049"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1054"/>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
         <translation>Deshabilitar escala de alto dpi. Llamar esta opción si tiene problemas con la escala ( predeterminado la escala esta habilitada). Alternativamente usted pude usar el %1 medio variable.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1028"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1033"/>
         <source>Set base for dimension A in the table units.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1029"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1034"/>
         <source>The dimension A base</source>
         <translation>La base de dimensión A</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1032"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1037"/>
         <source>Set base for dimension B in the table units.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1033"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1038"/>
         <source>The dimension B base</source>
         <translation>La base de dimensión B</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1036"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1041"/>
         <source>Set base for dimension C in the table units.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1037"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1042"/>
         <source>The dimension C base</source>
         <translation>La base de la dimensión C</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1040"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1045"/>
         <source>Set pattern file units: cm, mm, inch.</source>
         <translation>Establecer las unidades del archivo de patrón: cm, mm, pulgadas.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1041"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1046"/>
         <source>The pattern units</source>
         <translation>Las unidades del patrón</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1043"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1048"/>
         <source>Activate known measurements mode.</source>
         <translation>Activar el modo de medidas conocidas.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1213"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1218"/>
         <source>Invalid dimension A base value.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1234"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1239"/>
         <source>Invalid dimension B base value.</source>
         <translation>Valor base de dimensión B no válido.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1255"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1260"/>
         <source>Invalid dimension C base value.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="409"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="414"/>
         <source>Formula warning: %1. Program will be terminated.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1088"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1093"/>
         <source>Test mode doesn&apos;t support opening several files.</source>
         <translation>El modo de prueba no permite abrir varios archivos.</translation>
     </message>
@@ -13904,173 +13904,178 @@ Falta: %1
         <translation>Usar suavizado</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="162"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="178"/>
         <source>Undo</source>
         <translation>Deshacer</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="171"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="187"/>
         <source>Count steps (0 - no limit):</source>
         <translation>Contar pasos (0 - sin limite):</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="184"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="200"/>
         <source>Workpiece</source>
         <translation>Pieza de trabajo</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="193"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="209"/>
         <source>Forbid flipping</source>
         <translation>Prohibir voltear</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="213"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="229"/>
         <source>Show second passmark on seam line</source>
         <translation>Muestra un segundo pique en la línea de costura</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="190"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="206"/>
         <source>By default forbid flipping for all new created workpieces</source>
         <translation>Predeterminado se prohibe voltear todas los nuevas piezas de trabajo</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="220"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="236"/>
         <source>By default hide the main path if the seam allowance was enabled</source>
         <translation>Predeterminado ocultar la ruta principal si el margen de costura fue habilitado</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="223"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="239"/>
         <source>Hide main path</source>
         <translation>Ocultar ruta principal</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="296"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="312"/>
         <source>Size:</source>
         <translation>Talla:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="250"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="266"/>
         <source>Seam allowance</source>
         <translation>Margen de costura</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="210"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="82"/>
+        <source>This setting has no effect since the value is overridden by the command-line option</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="226"/>
         <source>Show a notch both in the seam allowance and on the seam line. If you want to see a notch on a piece without seam allowance, enable built-in seam allowance and set the length of a notch manually.</source>
         <translation>Mostrar un piquete tanto en el margen de costura como en la línea de costura. Si desea ver una piquete en una pieza sin margen de costura, active el margen de costura incorporado y defina manualmente la longitud del piquete.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="256"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="272"/>
         <source>Default value:</source>
         <translation>Valor predeterminado:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="282"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="298"/>
         <source>Font</source>
         <translation>Fuente</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="316"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="332"/>
         <source>Outline font:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="336"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="352"/>
         <source>Single-line font:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="352"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="368"/>
         <source>Allow single stroke outline fonts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="359"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="375"/>
         <source>When this option is activated, the application will utilize SVG Fonts present in your system to render piece label text, instead of using outline fonts.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="362"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="378"/>
         <source>Use single-line fonts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="372"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="388"/>
         <source>Label data/time format</source>
         <translation>Etiqueta de datos/formato hora</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="381"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="397"/>
         <source>Date:</source>
         <translation>Fecha:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="393"/>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="414"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="409"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="430"/>
         <source>Edit formats</source>
         <translation>Editar formatos</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="402"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="418"/>
         <source>Time:</source>
         <translation>Hora:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="426"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="442"/>
         <source>Materials</source>
         <translation>Materiales</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="434"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="450"/>
         <source>Known materials:</source>
         <translation>Materiales conocidos:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="447"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="463"/>
         <source>Manage list of known materials</source>
         <translation>Administrar lista de materiales conocidos</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="450"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="466"/>
         <source>Manage</source>
         <translation>Administrar</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="472"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="488"/>
         <source>When manage pattern materials save them to known materials list</source>
         <translation>Cuando administre los materiales del patron guardelos en la lista de materiales conocidos</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="475"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="491"/>
         <source>Remeber pattern materials</source>
         <translation>Recordar materiales de patron</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="82"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="98"/>
         <source>Curve approximation:</source>
         <translation>Aproximación de curva:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="95"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="111"/>
         <source>Set default curve approximation scale</source>
         <translation>Establecer escala aproximada de curva predeterminada</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="118"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="134"/>
         <source>Bold line width</source>
         <translation>Ancho línea negrita</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="121"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="137"/>
         <source>Line width:</source>
         <translation>Ancho línea:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.cpp" line="426"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.cpp" line="442"/>
         <source>Millimiters</source>
         <translation>Milímetros</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.cpp" line="427"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.cpp" line="443"/>
         <source>Inches</source>
         <translation>Pulgadas</translation>
     </message>
@@ -14087,37 +14092,37 @@ Esta opción surtirá efecto después de reiniciar.</translation>
         <translation>Use OpenGL para retratar</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.cpp" line="182"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.cpp" line="198"/>
         <source>antialiasing</source>
         <translation>antialiasing</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.cpp" line="190"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.cpp" line="206"/>
         <source>scene render</source>
         <translation>retratar una escena</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="488"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="504"/>
         <source>Background image</source>
         <translation>Imagen de fondo</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="494"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="510"/>
         <source>Opacity:</source>
         <translation>Opacidad:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="501"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="517"/>
         <source>Opacity value by default</source>
         <translation>Valor de opacidad por defecto</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="200"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="216"/>
         <source>By default export to DXF-AAMA sew line on Draw layer for all new created workpieces</source>
         <translation>Por defecto exportar a DXF-AAMA línea de costura en la capa de Dibujo para todas las nuevas piezas de trabajo creadas</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="203"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="219"/>
         <source>Sew line on drawing</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14631,16 +14636,16 @@ Esta opción surtirá efecto después de reiniciar.</translation>
         <translation type="vanished">La ruta a las medidas ya es absoluta.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/main.cpp" line="68"/>
-        <location filename="../../src/app/tape/main.cpp" line="69"/>
-        <location filename="../../src/app/valentina/main.cpp" line="73"/>
+        <location filename="../../src/app/puzzle/main.cpp" line="78"/>
+        <location filename="../../src/app/tape/main.cpp" line="79"/>
+        <location filename="../../src/app/valentina/main.cpp" line="83"/>
         <source>Executable &apos;%1&apos; requires Qt %2, found Qt %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/main.cpp" line="73"/>
-        <location filename="../../src/app/tape/main.cpp" line="74"/>
-        <location filename="../../src/app/valentina/main.cpp" line="78"/>
+        <location filename="../../src/app/puzzle/main.cpp" line="83"/>
+        <location filename="../../src/app/tape/main.cpp" line="84"/>
+        <location filename="../../src/app/valentina/main.cpp" line="88"/>
         <source>Incompatible Qt Library Error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14908,6 +14913,11 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     <message>
         <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="185"/>
         <source>Error: notch for point &apos;%1&apos; in piece &apos;%2&apos;. Width is less than minimal allowed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="828"/>
+        <source>Piece &apos;%1&apos;. Notch collapse for point &apos;%2&apos;. Provide a manual angle value.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -19434,24 +19444,24 @@ Quieres guardar los cambios?</translation>
 <context>
     <name>VAbstractPattern</name>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="1580"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="1552"/>
         <source>Can&apos;t find tool in table.</source>
         <translation>No se encuentra herramienta en la tabla.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2109"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2081"/>
         <source>Error creating or updating group</source>
         <translation>Error al crear o actualizar el grupo</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2177"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2149"/>
         <source>measurement</source>
         <translation>medida</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2427"/>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2594"/>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2670"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2425"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2592"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2668"/>
         <source>New group</source>
         <translation>Nuevo grupo</translation>
     </message>
@@ -19464,7 +19474,7 @@ Quieres guardar los cambios?</translation>
 <context>
     <name>VAbstractPiece</name>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.cpp" line="1570"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.cpp" line="1573"/>
         <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
         <translation>Pieza &apos;%1&apos;. No hay suficientes puntos para construir margen de costura.</translation>
     </message>
@@ -20105,52 +20115,52 @@ Quieres guardar los cambios?</translation>
 <context>
     <name>VApplication</name>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="438"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="443"/>
         <source>Error parsing file. Program will be terminated.</source>
         <translation>Error al procesar el archivo. El programa se terminará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="444"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="449"/>
         <source>Error bad id. Program will be terminated.</source>
         <translation>Error de identificación. El programa se cerrará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="450"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="455"/>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
         <translation>Error al convertir valor. El programa se cerrará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="456"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="461"/>
         <source>Error empty parameter. Program will be terminated.</source>
         <translation>Error de parámetro vacío. El programa se cerrará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="462"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="467"/>
         <source>Error wrong id. Program will be terminated.</source>
         <translation>Error de identidad equivocada. El programa se cerrará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="481"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="486"/>
         <source>Something&apos;s wrong!!</source>
         <translation>¡¡Algo ha fallado!!</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="495"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="500"/>
         <source>Parser error: %1. Program will be terminated.</source>
         <translation>Error al procesar: %1. El programa se terminará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="500"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="505"/>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation>Se ha lanzado una excepción: %1. El programa se terminará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="475"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="480"/>
         <source>Invalid notch.</source>
         <translation>Pique invalido.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="487"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="492"/>
         <source>Formula warning: %1. Program will be terminated.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -20306,12 +20316,12 @@ Quieres guardar los cambios?</translation>
 <context>
     <name>VCommandLine</name>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="624"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="637"/>
         <source>Path to custom measure file (export mode).</source>
         <translation>Ruta al archivo de medidas personalizado (modo de exportación).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="625"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="638"/>
         <source>The measure file</source>
         <translation>El archivo de medidas</translation>
     </message>
@@ -20320,7 +20330,7 @@ Quieres guardar los cambios?</translation>
         <translation type="vanished">Número correspondiente al formato de salida (predeterminado = 0, modo de exportación):</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="644"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="657"/>
         <source>Format number</source>
         <translation>Formato numérico</translation>
     </message>
@@ -20329,18 +20339,18 @@ Quieres guardar los cambios?</translation>
         <translation type="vanished">Número correspondiente a la plantilla de página (predeterminado = 0, modo de exportación):</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="688"/>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="823"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="708"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="843"/>
         <source>Template number</source>
         <translation>Plantilla numérica</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="697"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="717"/>
         <source>The page width</source>
         <translation>El ancho de página</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="705"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="725"/>
         <source>The measure unit</source>
         <translation>La unidad de medida</translation>
     </message>
@@ -20353,7 +20363,7 @@ Quieres guardar los cambios?</translation>
         <translation type="vanished">Ángulo</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="743"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="763"/>
         <source>Auto crop unused length (export mode).</source>
         <translation>Recorte automático del largo no usado (modo de exportación).</translation>
     </message>
@@ -20370,7 +20380,7 @@ Quieres guardar los cambios?</translation>
         <translation type="vanished">Unidades del diseño (como uno de papel, excepto px, modo de exportación).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="761"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="781"/>
         <source>The unit</source>
         <translation>La unidad</translation>
     </message>
@@ -20387,7 +20397,7 @@ Quieres guardar los cambios?</translation>
         <translation type="vanished">Ancho del salto x2, medido en las unidades del diseño. (modo de exportación).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="766"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="786"/>
         <source>The gap width</source>
         <translation>Ancho de abertura</translation>
     </message>
@@ -20396,7 +20406,7 @@ Quieres guardar los cambios?</translation>
         <translation type="vanished">Establece agrupación de diseño (modo de exportación):</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="770"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="790"/>
         <source>Grouping type</source>
         <translation>Tipo de agrupamiento</translation>
     </message>
@@ -20405,7 +20415,7 @@ Quieres guardar los cambios?</translation>
         <translation type="vanished">No se puede usar formato de pagina y tamaño/unidades de pagina explícitos en conjunto.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="925"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="945"/>
         <source>Page height, width, units must be used all 3 at once.</source>
         <translation>Unidades de altura y anchura de página deben usarse en los 3 a la vez.</translation>
     </message>
@@ -20420,7 +20430,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="117"/>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="540"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="553"/>
         <source>Unsupported paper units.</source>
         <translation>Medidas de papel no soportadas.</translation>
     </message>
@@ -20445,12 +20455,12 @@ Quieres guardar los cambios?</translation>
         <translation>La opción de prueba solo puede usarse con un solo archivo de entrada.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="616"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="629"/>
         <source>The base filename of exported layout files. Use it to enable console export mode.</source>
         <translation>El nombre base de los archivos de diseño exportados. Úselo para habilitar el modo de exportación de la consola.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="617"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="630"/>
         <source>The base filename of layout files</source>
         <translation>El nombre de archivo base de los archivos de diseño</translation>
     </message>
@@ -20459,7 +20469,7 @@ Quieres guardar los cambios?</translation>
         <translation type="vanished">La ruta a la carpeta de destino.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="622"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="635"/>
         <source>The destination folder</source>
         <translation>La carpeta de destino</translation>
     </message>
@@ -20480,12 +20490,12 @@ Quieres guardar los cambios?</translation>
         <translation type="vanished">El valor de la altura</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="695"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="715"/>
         <source>Page width in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
         <translation>El ancho de página en las unidades actuales como 12.0 (no puede usarse con &quot;%1&quot;, modo de exportación).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="699"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="719"/>
         <source>Page height in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
         <translation>El largo de página en las unidades actuales como 12.0 (no puede usarse con &quot;%1&quot;, modo de exportación).</translation>
     </message>
@@ -20516,22 +20526,22 @@ Quieres guardar los cambios?</translation>
         <translation type="vanished">Ignorar margenes de impresión (modo de exportación) Establece todos los margenes a 0.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="711"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="731"/>
         <source>Page left margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
         <translation>Margen izquierdo de página en las unidades actuales como 3.0 (modo de exportación). Si no se establece se usara el valor de una impresora predeterminada. O 0 si no se encuentra ninguna impresora.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="716"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="736"/>
         <source>Page right margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
         <translation>Margen derecho de página en las unidades actuales como 3.0 (modo de exportación). Si no se establece se usara el valor de una impresora predeterminada. O 0 si no se encuentra ninguna impresora.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="721"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="741"/>
         <source>Page top margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
         <translation>Margen superior de página en las unidades actuales como 3.0 (modo de exportación). Si no se establece se usara el valor de una impresora predeterminada. O 0 si no se encuentra ninguna impresora.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="726"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="746"/>
         <source>Page bottom margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
         <translation>Margen inferior de página en las unidades actuales como 3.0 (modo de exportación). Si no se establece se usara el valor de una impresora predeterminada. O 0 si no se encuentra ninguna impresora.</translation>
     </message>
@@ -20540,32 +20550,32 @@ Quieres guardar los cambios?</translation>
         <translation type="vanished">La longitud del desplazamiento deba usarse en conjunto con las unidades del desplazamiento.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="938"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="958"/>
         <source>Gap width must be used together with shift units.</source>
         <translation>El ancho del salto debe usarse en conjunto con las unidades de desplazamiento.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="961"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="981"/>
         <source>Left margin must be used together with page units.</source>
         <translation>El margen izquierdo debe usarse en conjunto con las unidades de página.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="963"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="983"/>
         <source>Right margin must be used together with page units.</source>
         <translation>El margen derecho debe usarse en conjunto con las unidades de página.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="965"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="985"/>
         <source>Top margin must be used together with page units.</source>
         <translation>El margen superior debe usarse en conjunto con las unidades de página.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="967"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="987"/>
         <source>Bottom margin must be used together with page units.</source>
         <translation>El margen inferior debe usarse en conjunto con las unidades de página.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="619"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="632"/>
         <source>The path to output destination folder. By default the directory at which the application was started.</source>
         <translation>La ruta a la carpeta de destino de la salida. De forma predeterminada el directorio en donde se inició la aplicación.</translation>
     </message>
@@ -20598,12 +20608,12 @@ Quieres guardar los cambios?</translation>
         <translation type="vanished">Rotacion en grados (uno de los predefinidos, modo de exportación) El valor predeterminado es 180. 0 significa no rotar. Valores validos: %1. Cada valor muestra cuantas veces los detalles seran rotados. Por ejemplo  180 significar dos veces (360/180=2) por 180 grados.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="746"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="766"/>
         <source>Unite pages if possible (export mode). Maximum value limited by QImage that supports only a maximum of 32768x32768 px images.</source>
         <translation>Unir las páginas si es posible (modo de exportación). Valor máximo limitado por QImage que soporta solo un máximo de 32768x32768 píxeles de imagen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="755"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="775"/>
         <source>Save length of the sheet if set (export mode). The option tells the program to use as much as possible width of sheet. Quality of a layout can be worse when this option was used.</source>
         <translation>Guardar el largo de la hoja si está establecido (modo de exportación). Esta opción le indica al programa que use el ancho de la hoja tanto como sea posible. La calidad del diseño puede ser peor cuando se usa esta opción.</translation>
     </message>
@@ -20612,17 +20622,17 @@ Quieres guardar los cambios?</translation>
         <translation type="vanished">Longitud del desplazamiento del diseño medido en unidades del diseño (modo de exportación). La opción muestra cuantos puntos a lo largo del límite serán usados para crear un diseño.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="763"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="783"/>
         <source>The layout gap width x2, measured in layout units (export mode). Set distance between details and a detail and a sheet.</source>
         <translation>Ancho del salto del diseño x2, medido en las unidades del diseño. (modo de exportación). Establece la distancia entre los detalles y entre un detalle y la hoja.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="768"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="788"/>
         <source>Sets layout groupping cases (export mode): %1.</source>
         <translation>Establece casos de agrupación de diseño (modo de exportación): %1.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="773"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="793"/>
         <source>Run the program in a test mode. The program in this mode loads a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
         <translation>Ejecuta el programa en modo de prueba. El programa en este modo carga un solo archivo de patrón y sale silenciosamente sin mostrar la ventana principal. La clave tiene prioridad antes que la clave &apos;%1&apos;.</translation>
     </message>
@@ -20639,7 +20649,7 @@ Quieres guardar los cambios?</translation>
         <translation type="vanished">La longitud de compensación/desplazamiento debe usarse en conjunto con las unidades del desplazamiento.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="642"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="655"/>
         <source>Number corresponding to output format (default = 0, export mode):</source>
         <translation>Número correspondiente a formato de salida (predeterminado = 0, modo de exportación):</translation>
     </message>
@@ -20649,331 +20659,341 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpcommandline.cpp" line="108"/>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="783"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="803"/>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
         <translation>Deshabilitar escala de alto dpi. Llamar esta opción si tiene problemas con la escala ( predeterminado la escala esta habilitada). Alternativamente usted pude usar el %1 medio variable.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="646"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="659"/>
         <source>Export dxf in binary form.</source>
         <translation>Exportar dxf en forma binaria.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="648"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="661"/>
         <source>Number corresponding to compatibility mode for DXF AAMA/ASTM format (default = 0, export mode):</source>
         <translation>Número correspondiente al modo de compatibilidad para el formato DXF AAMA/ASTM (por defecto = 0, modo de exportación):</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="651"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="664"/>
         <source>Mode number</source>
         <translation>Número de modo</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="653"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="666"/>
         <source>Show/hide grainline when export layout.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="654"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="667"/>
         <source>Export text as paths.</source>
         <translation>Exportar texto como rutas.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="656"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="669"/>
         <source>Export only details. Export details as they positioned in the details mode. Any layout related options will be ignored.</source>
         <translation>Exportar detalles solamente. Exportar detalles como ellos fueron posicionados en el modo detalles. Cualquier diseño de opciones relacionado será ignorado.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="660"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="673"/>
         <source>Export only details that match a piece name regex.</source>
         <translation>Exportar solamente detalles que coincidan con una expresión regular del nombre de la pieza.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="661"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="674"/>
         <source>The name regex</source>
         <translation>El nombre expresión regular</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="752"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="698"/>
+        <source>Override the global curve approximation scale setting from the application preferences. The value must be between %1 and %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="703"/>
+        <source>Curve approximation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="772"/>
         <source>Export boundary together with notches (export mode).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="788"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="808"/>
         <source>Export to csv with header. By default disabled.</source>
         <translation>Exportar a CSV con encabezado. Predeterminado deshabilitado.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="790"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="810"/>
         <source>Specify codec that will be used to save data. List of supported codecs provided by Qt. Default value depend from system. On Windows, the codec will be based on a system locale. On Unix systems, the codec will might fall back to using the iconv library if no builtin codec for the locale can be found. Valid values for this installation:</source>
         <translation>Especificar los códec que serán usados para guardar los datos. La lista de codecs soportados son provistos por QT. El valor predeterminado dependera del sistema. En Windows, los codecs estaran basados en un sistema local. En sistemas Unix, los codec podrian caer al usar librería iconv si no se construyen códec para local que puedan ser encontrados. Valores validos para esta instalación:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="799"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="819"/>
         <source>Codec name</source>
         <translation>Nombre del codec</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="802"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="822"/>
         <source>Specify csv separator character. Default value is &apos;%1&apos;. Valid characters:</source>
         <translation>Especificar caracter separador csv. Predeterminado este valor es  &apos;%1&apos;. Caracteres validos:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="805"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="825"/>
         <source>Separator character</source>
         <translation>Carácter separador</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="808"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="828"/>
         <source>Calling this command enable exporting final measurements. Specify path to csv file with final measurements. The path must contain path to directory and name of file. It can be absolute or relatetive. In case of relative path will be used current working directory to calc a destination path.</source>
         <translation>Llamando este comando permite exportar las medidas finales. Especifique la ruta al archivo csv con las medidas finales. La ruta debe contener el camino al directorio y el nombre del archivo. Puede ser absoluto o relativo. En caso de ser ruta relativa será usado el directorio de trabajo actual para calcular la ruta de destino.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="816"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="836"/>
         <source>Path to csv file</source>
         <translation>Ruta al archivo csv</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="686"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="706"/>
         <source>Number corresponding to layout page template (default = 0, export mode):</source>
         <translation>Numero correspondiente a la plantilla de la pagina de diseño (predeterminado = 0, modo exportación):</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="819"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="839"/>
         <source>Number corresponding to tiled pdf page template (default = 0, export mode with tiled pdf format):</source>
         <translation>Numero correspondiente a la plantilla de la pagina de mosaico pdf ( predeterminado = 0, modo exportacion con formato mosaico pdf):</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="826"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="846"/>
         <source>Tiled page left margin in current units like 3.0 (export mode). If not set will be used default value 1 cm.</source>
         <translation>Margen izquierdo en pagina mosaico unidades actuales igual a 3.0 (modo exportacion). Si no se establece sera usado como predeterminado el valor 1 cm.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="714"/>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="829"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="734"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="849"/>
         <source>The left margin</source>
         <translation>El margen izquierdo</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="831"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="851"/>
         <source>Tiled page right margin in current units like 3.0 (export mode). If not set will be used default value 1 cm.</source>
         <translation>Margen derecho en paginas mosaico en unidades actuales igual a 3.0 (modo exportacion). Si no se establece sera usad como predeterminado el valor 1 cm.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="719"/>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="834"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="739"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="854"/>
         <source>The right margin</source>
         <translation>El margen derecho</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="836"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="856"/>
         <source>Tiled page top margin in current units like 3.0 (export mode). If not set will be used value default value 1 cm.</source>
         <translation>Margen superior en pagina mosaico unidades actuales igual a 3.0 (modo exportacion). Si no se establece sera usado como predeterminado el valor 1 cm.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="724"/>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="839"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="744"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="859"/>
         <source>The top margin</source>
         <translation>El margen superior</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="841"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="861"/>
         <source>Tiled page bottom margin in current units like 3.0 (export mode). If not set will be used value default value 1 cm.</source>
         <translation>Margen inferior en pagina mosaico unidades actuales igual a 3.0 (modo exportacion). Si no se establece sera usado como predeterminado el valor 1 cm.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="729"/>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="844"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="749"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="864"/>
         <source>The bottom margin</source>
         <translation>El margen inferior</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="846"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="866"/>
         <source>Set tiled page orienatation to landscape (export mode). Default value if not set portrait.</source>
         <translation>Ajustar la orientación de pagina mosaico a horizontal (modo exportación). El valor predeterminado si no se ajusta es vertical.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="919"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="939"/>
         <source>Cannot use pageformat and page explicit size together.</source>
         <translation>No puede usar el formato de pagina y pagina talla explicita al mismo tiempo.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="973"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="993"/>
         <source>Tiled left margin must be used together with page units.</source>
         <translation>El margen izquierdo en mosaico deberá ser usado junto con las unidades de las paginas.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="975"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="995"/>
         <source>Tiled right margin must be used together with page units.</source>
         <translation>El margen derecho en mosaico deberá ser usado junto con las unidades de las paginas.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="977"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="997"/>
         <source>Tiled top margin must be used together with page units.</source>
         <translation>El margen superior en mosaico deberá ser usado junto con las unidades de las paginas.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="979"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="999"/>
         <source>Tiled bottom margin must be used together with page units.</source>
         <translation>El margen inferior en mosaico deberá ser usado junto con las unidades de las paginas.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="703"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="723"/>
         <source>Page measure units (export mode). Valid values: %1.</source>
         <translation>Unidades de medida de paginas (modo exportación). Valores validos: %1.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="676"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="689"/>
         <source>Use this option to override user material defined in pattern. The value must be in form &lt;number&gt;@&lt;user matrial name&gt;. The number should be in range from 1 to %1. For example, 1@Fabric2. The key can be used multiple times. Has no effect in GUI mode.</source>
         <translation>Use esta opción para anular el material del usuario definido en el patrón. El valor deberá estar en forma &lt;number&gt;@&lt;user matrial name&gt;. El numero deberá estar en un rango desde 1 a %1. Por ejemplo, 1@Tela2. La clave puede ser usada múltiples veces. No tiene efecto en el modo interfaz grafica de usuario.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="683"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="696"/>
         <source>User material</source>
         <translation>Material del usuario</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="779"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="799"/>
         <source>Make all parsing warnings into errors. Have effect only in console mode. Use to force Valentina to immediately terminate if a pattern contains a parsing warning.</source>
         <translation>Hacer todos las advertencias de analisis en los errores. Tiene efecto solo en el modo consola. Uselo para forzar a Valentina a terminar inmediatamente si un patron contiene una advertencia de error.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="431"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="444"/>
         <source>Invalid user material &apos;%1&apos;. Separator is missing.</source>
         <translation>Material de usuario invalido &apos;%1&apos;. Falta el separador.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="441"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="454"/>
         <source>Invalid user material &apos;%1&apos;. Wrong material number.</source>
         <translation>Material de usuario invalido &apos;%1&apos;. Numero de material equivocado.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="691"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="711"/>
         <source>Switch page template orientation to landscape (export mode). This option has effect only for one of predefined page templates.</source>
         <translation>Cambie la orientación de la plantilla de página a horizontal (modo de exportación). Esta opción solo tiene efecto para una de las plantillas de página predefinidas.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="701"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="721"/>
         <source>The page height</source>
         <translation>La altura de la pagina</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="738"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="758"/>
         <source>Order detail to follow grainline direction (export mode).</source>
         <translation>Ordene el detalle para seguir la dirección del hilo de la tela (modo de exportación).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="627"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="640"/>
         <source>&lt;Time&gt; in minutes given for the algorithm to find best layout. Time must be in range from 1 minute to 60 minutes. Default value 1 minute.</source>
         <translation>&lt;Time&gt; minutos dados para que el algoritmo encuentre el mejor diseño. El tiempo debe estar en el rango de 1 minuto a 60 minutos. Valor predeterminado 1 minuto.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="630"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="643"/>
         <source>Time</source>
         <translation>Hora</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="640"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="653"/>
         <source>Coefficient</source>
         <translation>Coeficiente</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="881"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="901"/>
         <source>Time must be in range from 1 minute to 60 minutes.</source>
         <translation>El tiempo debe estar en el rango de 1 minuto a 60 minutos.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="740"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="760"/>
         <source>Follow manual priority over priority by square (export mode).</source>
         <translation>Siga la prioridad manual sobre la prioridad por cuadro (modo de exportación).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="741"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="761"/>
         <source>Nest quantity copies of each piece (export mode).</source>
         <translation>Anidar copias de cantidad de cada pieza (modo de exportación).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="632"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="645"/>
         <source>Set layout efficiency &lt;coefficient&gt;. Layout efficiency coefficient is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. Coefficient must be in range from 0 to 100. Default value 0.</source>
         <translation>Establecer coeficiente de eficiencia del diseño &lt;coefficient&gt;. El coeficiente de eficiencia del diseño es el radio del área ocupada por las piezas al limite rectangular de todas las piezas. Si el anidamiento alcanza el nivel requerido, el proceso se detiene. Si el valor es 0 no se realizará ninguna comprobación. El coeficiente debe estar en el rango de 0 a 100. Valor predeterminado 0.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="900"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="920"/>
         <source>Coefficient must be in range from 0 to 100.</source>
         <translation>El coeficiente debe estar en el rango de 0 a 100.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="744"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="764"/>
         <source>Auto crop unused width (export mode).</source>
         <translation>Recorte automático del ancho no usado (modo de exportación).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="731"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="751"/>
         <source>Set horizontal scale factor from 0.01 to 3.0 (default = 1.0, export mode).</source>
         <translation>Establecer factor de escala horizontal desde 0.01 hasta 3.0 (predeterminado = 1.0, modo exportación).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="732"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="752"/>
         <source>Horizontal scale</source>
         <translation>Escala horizontal</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="734"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="754"/>
         <source>Set vertical scale factor from 0.01 to 3.0 (default = 1.0, export mode).</source>
         <translation>Establecer escala vertical desde 0.01 hasta 3.0 ( Predeterminado = 1.0, modo exportación).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="735"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="755"/>
         <source>Vertical scale</source>
         <translation>Escala vertical</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="750"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="770"/>
         <source>Prefer one sheet layout solution (export mode).</source>
         <translation>Prefiere una solución de diseño de hoja (modo de exportación).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="493"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="506"/>
         <source>Invalid dimension A value.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="508"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="521"/>
         <source>Invalid dimension B value.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="523"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="536"/>
         <source>Invalid dimension C value.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="664"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="677"/>
         <source>Set base for dimension A in the multisize measurements units (export mode).</source>
         <translation>Establecer base para la dimensión A en las unidades de medida multitalla (modo exportación).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="665"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="678"/>
         <source>The dimension A base</source>
         <translation>La dimensión base A</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="668"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="681"/>
         <source>Set base for dimension B in the multisize measurements units (export mode).</source>
         <translation>Establecer base para la dimensión B en las unidades de medidas multitalla (modo exportación).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="669"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="682"/>
         <source>The dimension B base</source>
         <translation>La base de dimensión B</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="672"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="685"/>
         <source>Set base for dimension C in the multisize measurements units (export mode).</source>
         <translation>Establecer base para la dimensión C en las unidades de medidas multitalla (modo exportación).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="673"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="686"/>
         <source>The dimension C base</source>
         <translation>La base de la dimensión C</translation>
     </message>
@@ -20998,47 +21018,47 @@ Quieres guardar los cambios?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="994"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="1014"/>
         <source>Invalid layout page left margin.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="1006"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="1026"/>
         <source>Invalid layout page right margin.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="1018"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="1038"/>
         <source>Invalid layout page top margin.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="1030"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="1050"/>
         <source>Invalid layout page bottom margin.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="552"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="565"/>
         <source>Invalid tiled page left margin.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="564"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="577"/>
         <source>Invalid tiled page right margin.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="576"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="589"/>
         <source>Invalid tiled page top margin.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="588"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="601"/>
         <source>Invalid tiled page bottom margin.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="760"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="780"/>
         <source>Layout units (as paper&apos;s one except px, export mode). Default units cm.</source>
         <translation>Unidades de distribución de piezas (como la del papel excepto px, modo exportación). Unidades por defecto cm.</translation>
     </message>
@@ -21048,7 +21068,7 @@ Quieres guardar los cambios?</translation>
         <translation>Cargar piezas de patrón desde el archivo de datos de disposición sin procesar.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="707"/>
+        <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="727"/>
         <source>Ignore printer margins (export mode). Use if need full paper space. In case of later printing you must account for the margins themselves.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -21763,52 +21783,52 @@ Quieres guardar los cambios?</translation>
 <context>
     <name>VPApplication</name>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="324"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="329"/>
         <source>Error parsing file. Program will be terminated.</source>
         <translation>Error al procesar el archivo. El programa se terminará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="330"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="335"/>
         <source>Error bad id. Program will be terminated.</source>
         <translation>Error de identificación. El programa se cerrará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="336"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="341"/>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
         <translation>Error al convertir valor. El programa se cerrará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="342"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="347"/>
         <source>Error empty parameter. Program will be terminated.</source>
         <translation>Error de parámetro vacío. El programa se cerrará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="348"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="353"/>
         <source>Error wrong id. Program will be terminated.</source>
         <translation>Error de identidad equivocada. El programa se cerrará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="361"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="366"/>
         <source>Something&apos;s wrong!!</source>
         <translation>¡¡Algo ha fallado!!</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="367"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="372"/>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation>Se ha lanzado una excepción: %1. El programa se terminará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="709"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="714"/>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
         <translation>No se puede comenzar a escuchar por conexiones entrantes en el nombre &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="728"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="733"/>
         <source>Export mode doesn&apos;t support opening several files.</source>
         <translation>El modo de exportación no permite abrir varios archivos.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="735"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="740"/>
         <source>Import raw layout data does not support opening several layout files.</source>
         <translation>La importación de datos de disposición de piezas sin procesar no permite abrir varios archivos de disposición de piezas.</translation>
     </message>
@@ -23153,22 +23173,22 @@ Quieres guardar los cambios?</translation>
         <translation>No se puede calcular un pique para el punto &apos;%1&apos; en pieza &apos;%2&apos;. No se puede encontrar interseccion.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="995"/>
+        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="1017"/>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos; with built-in seam allowance. User must manually provide length.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="1112"/>
+        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="1134"/>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Seam allowance is empty.</source>
         <translation>No se puede calcular un pique para un punto &apos;%1&apos; en pieza &apos;%2&apos;. Margen de costura esta vacío.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="1126"/>
+        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="1148"/>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find position for a notch.</source>
         <translation>No se puede calcular un pique para un punto &apos;%1&apos; en pieza &apos;%2&apos;. No se puede encontrar posición para un pique.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="1144"/>
+        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="1166"/>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Unable to fix a notch position.</source>
         <translation>No se puede calcular un pique para un punto &apos;%1&apos; en pieza &apos;%2&apos;. Imposible reparar una posición de pique.</translation>
     </message>
@@ -28006,26 +28026,26 @@ Error de compatibilidad de formato de diseño de piezas RAW: actualFileVersion =
         <translation type="vanished">Información.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="223"/>
-        <location filename="../../src/app/tape/mapplication.cpp" line="260"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="228"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="265"/>
         <source>Warning</source>
         <translation>Advertencia</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="227"/>
-        <location filename="../../src/app/tape/mapplication.cpp" line="264"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="232"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="269"/>
         <source>Critical error</source>
         <translation>Error crítico</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="231"/>
-        <location filename="../../src/app/tape/mapplication.cpp" line="268"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="236"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="273"/>
         <source>Fatal error</source>
         <translation>Error fatal</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="235"/>
-        <location filename="../../src/app/tape/mapplication.cpp" line="272"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="240"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="277"/>
         <source>Information</source>
         <translation>Información</translation>
     </message>
@@ -28074,22 +28094,22 @@ Error de compatibilidad de formato de diseño de piezas RAW: actualFileVersion =
         <translation type="vanished">Información.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="295"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="300"/>
         <source>Warning</source>
         <translation>Advertencia</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="299"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="304"/>
         <source>Critical error</source>
         <translation>Error crítico</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="303"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="308"/>
         <source>Fatal error</source>
         <translation>Error fatal</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="307"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="312"/>
         <source>Information</source>
         <translation>Información</translation>
     </message>
