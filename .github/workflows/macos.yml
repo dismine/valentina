@@ -36,7 +36,7 @@ env:
 jobs:
   intel_build:
     name: MacOS ${{ matrix.qt.build_target }} intel Qt ${{ matrix.qt.install }} (${{ matrix.bundle.label }})
-    runs-on: macos-13
+    runs-on: macos-15-intel
 
     strategy:
       matrix:
