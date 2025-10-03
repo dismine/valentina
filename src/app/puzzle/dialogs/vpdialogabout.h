@@ -29,13 +29,16 @@
 #ifndef VPDIALOGABOUT_H
 #define VPDIALOGABOUT_H
 
-#include <QDialog>
 #include <memory>
+#include <QDialog>
+#include <QPointer>
 
 namespace Ui
 {
 class VPDialogAbout;
 }
+
+class DialogCredits;
 
 class VPDialogAbout : public QDialog
 {
@@ -54,6 +57,7 @@ private:
     Q_DISABLE_COPY_MOVE(VPDialogAbout) // NOLINT
     std::unique_ptr<Ui::VPDialogAbout> ui;
     bool m_isInitialized;
+    QPointer<DialogCredits> m_dialogCredits{nullptr};
 
     static void FontPointSize(QWidget *w, int pointSize);
 

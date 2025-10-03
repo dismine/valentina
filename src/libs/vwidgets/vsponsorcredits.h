@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   dialogabouttape.h
+ **  @file   vsponsorcredits.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   12 7, 2015
+ **  @date   2 10, 2025
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2015 Valentina project
+ **  Copyright (C) 2025 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -25,43 +25,38 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
+#ifndef VSPONSORCREDITS_H
+#define VSPONSORCREDITS_H
 
-#ifndef DIALOGABOUTTAPE_H
-#define DIALOGABOUTTAPE_H
+#include <QLabel>
 
-#include <memory>
-#include <QDialog>
-#include <QPointer>
+#include "../vmisc/defglobal.h"
 
-namespace Ui
+class QGraphicsOpacityEffect;
+
+class VSponsorCredits : public QLabel
 {
-class DialogAboutTape;
-}
-
-class DialogCredits;
-
-class DialogAboutTape : public QDialog
-{
-    Q_OBJECT // NOLINT
+    Q_OBJECT
+    Q_PROPERTY(qreal LetterSpacing READ LetterSpacing WRITE SetLetterSpacing) // clazy:exclude=qproperty-without-notify
 
 public:
-    explicit DialogAboutTape(QWidget *parent = nullptr);
-    ~DialogAboutTape() override;
+    explicit VSponsorCredits(QWidget *parent = nullptr);
 
-protected:
-    void changeEvent(QEvent *event) override;
-    void showEvent(QShowEvent *event) override;
+    auto LetterSpacing() const -> qreal;
+    void SetLetterSpacing(qreal spacing);
+
+private slots:
+    void NextSponsor();
+    void StartSpreadAndFade();
 
 private:
-    // cppcheck-suppress unknownMacro
-    Q_DISABLE_COPY_MOVE(DialogAboutTape) // NOLINT
-    std::unique_ptr<Ui::DialogAboutTape> ui;
-    bool m_isInitialized;
-    QPointer<DialogCredits> m_dialogCredits{nullptr};
+    QStringList sponsorsList;
+    vsizetype index{0};
+    QGraphicsOpacityEffect *effect;
+    int decodeStep{0};
+    QString decodeDisplay{};
 
-    static void FontPointSize(QWidget *w, int pointSize);
-
-    void RetranslateUi();
+    void StartDecodingEffect(const QString &name);
 };
 
-#endif // DIALOGABOUTTAPE_H
+#endif // VSPONSORCREDITS_H

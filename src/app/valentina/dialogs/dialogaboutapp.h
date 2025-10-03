@@ -30,11 +30,14 @@
 #define DIALOGABOUTAPP_H
 
 #include <QDialog>
+#include <QPointer>
 
 namespace Ui
 {
 class DialogAboutApp;
 }
+
+class DialogCredits;
 
 class DialogAboutApp : public QDialog
 {
@@ -50,6 +53,7 @@ protected:
 private:
     Ui::DialogAboutApp *ui;
     bool m_isInitialized{false};
+    QPointer<DialogCredits> m_dialogCredits{nullptr};
     Q_DISABLE_COPY_MOVE(DialogAboutApp) // NOLINT
 
     static void FontPointSize(QWidget *w, int pointSize);

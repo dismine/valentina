@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   dialogabouttape.h
+ **  @file   dialogcredits.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   12 7, 2015
+ **  @date   3 10, 2025
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2015 Valentina project
+ **  Copyright (C) 2025 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -25,43 +25,29 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
+#ifndef DIALOGCREDITS_H
+#define DIALOGCREDITS_H
 
-#ifndef DIALOGABOUTTAPE_H
-#define DIALOGABOUTTAPE_H
-
-#include <memory>
 #include <QDialog>
-#include <QPointer>
 
 namespace Ui
 {
-class DialogAboutTape;
+class DialogCredits;
 }
 
-class DialogCredits;
-
-class DialogAboutTape : public QDialog
+class DialogCredits : public QDialog
 {
     Q_OBJECT // NOLINT
 
 public:
-    explicit DialogAboutTape(QWidget *parent = nullptr);
-    ~DialogAboutTape() override;
+    explicit DialogCredits(QWidget *parent = nullptr);
+    ~DialogCredits() override;
 
-protected:
-    void changeEvent(QEvent *event) override;
-    void showEvent(QShowEvent *event) override;
+    static const QString sponsors;
 
 private:
-    // cppcheck-suppress unknownMacro
-    Q_DISABLE_COPY_MOVE(DialogAboutTape) // NOLINT
-    std::unique_ptr<Ui::DialogAboutTape> ui;
-    bool m_isInitialized;
-    QPointer<DialogCredits> m_dialogCredits{nullptr};
-
-    static void FontPointSize(QWidget *w, int pointSize);
-
-    void RetranslateUi();
+    Q_DISABLE_COPY_MOVE(DialogCredits)
+    Ui::DialogCredits *ui;
 };
 
-#endif // DIALOGABOUTTAPE_H
+#endif // DIALOGCREDITS_H
