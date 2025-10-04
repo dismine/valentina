@@ -435,41 +435,50 @@
         <translation>Про Valentina</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="84"/>
+        <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="109"/>
         <source>Valentina version</source>
         <translation>Версія Valentina</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="183"/>
+        <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="266"/>
+        <source>Special thanks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="308"/>
+        <source>Credits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Contributors</source>
-        <translation>Автори</translation>
+        <translation type="vanished">Автори</translation>
     </message>
     <message>
         <source>Built on %3 at %4</source>
         <translation type="vanished">Зібрано %3 в %4</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogaboutapp.cpp" line="63"/>
+        <location filename="../../src/app/valentina/dialogs/dialogaboutapp.cpp" line="66"/>
         <source>Web site : %1</source>
         <translation>Вебсайт : %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogaboutapp.cpp" line="70"/>
+        <location filename="../../src/app/valentina/dialogs/dialogaboutapp.cpp" line="73"/>
         <source>Cannot open your default browser</source>
         <translation>Не можу відкрити браузер за замовчуванням</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="103"/>
+        <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="127"/>
         <source>Build revision:</source>
         <translation>Ревізія:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogaboutapp.cpp" line="56"/>
+        <location filename="../../src/app/valentina/dialogs/dialogaboutapp.cpp" line="59"/>
         <source>Built on %1 at %2</source>
         <translation>Зібрано %1 в %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="315"/>
+        <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="301"/>
         <source>Check For Updates</source>
         <translation>Перевірити наявність оновлень</translation>
     </message>
@@ -482,22 +491,32 @@
         <translation>Про Tape</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="75"/>
+        <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="100"/>
         <source>Tape version</source>
         <translation>Версія Tape</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="94"/>
+        <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="118"/>
         <source>Build revision:</source>
         <translation>Ревізія:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="104"/>
+        <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="131"/>
         <source>This program is part of Valentina project.</source>
         <translation>Ця програма є частиною проекту Valentina.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogabouttape.cpp" line="130"/>
+        <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="273"/>
+        <source>Special thanks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="321"/>
+        <source>Credits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/dialogabouttape.cpp" line="144"/>
         <source>Build revision: %1</source>
         <translation>Ревізія: %1</translation>
     </message>
@@ -506,22 +525,22 @@
         <translation type="vanished">Зібрано %3 в %4</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogabouttape.cpp" line="141"/>
+        <location filename="../../src/app/tape/dialogs/dialogabouttape.cpp" line="155"/>
         <source>Web site : %1</source>
         <translation>Вебсайт : %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogabouttape.cpp" line="60"/>
+        <location filename="../../src/app/tape/dialogs/dialogabouttape.cpp" line="61"/>
         <source>Cannot open your default browser</source>
         <translation>Не можу відкрити браузер за замовчуванням</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogabouttape.cpp" line="134"/>
+        <location filename="../../src/app/tape/dialogs/dialogabouttape.cpp" line="148"/>
         <source>Built on %1 at %2</source>
         <translation>Зібрано %1 в %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="267"/>
+        <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="314"/>
         <source>Check For Updates</source>
         <translation>Перевірити наявність оновлень</translation>
     </message>
@@ -1191,6 +1210,24 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="351"/>
         <source>Notes</source>
         <translation>Примітки</translation>
+    </message>
+</context>
+<context>
+    <name>DialogCredits</name>
+    <message>
+        <location filename="../../src/libs/vmisc/dialogs/dialogcredits.ui" line="14"/>
+        <source>Credits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vmisc/dialogs/dialogcredits.ui" line="28"/>
+        <source>Sponsors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vmisc/dialogs/dialogcredits.ui" line="42"/>
+        <source>Authors</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10709,9 +10746,9 @@ Apply settings anyway?</source>
 <context>
     <name>InternalStrings</name>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/vpdialogabout.cpp" line="141"/>
-        <location filename="../../src/app/tape/dialogs/dialogabouttape.cpp" line="136"/>
-        <location filename="../../src/app/valentina/dialogs/dialogaboutapp.cpp" line="58"/>
+        <location filename="../../src/app/puzzle/dialogs/vpdialogabout.cpp" line="157"/>
+        <location filename="../../src/app/tape/dialogs/dialogabouttape.cpp" line="150"/>
+        <location filename="../../src/app/valentina/dialogs/dialogaboutapp.cpp" line="61"/>
         <source>The program is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</source>
         <translation>Програма надається ЯК Є без ГАРАНТІЙ БУДЬ-ЯКОГО РОДУ, ВКЛЮЧАЮЧИ ГАРАНТІЙ ДИЗАЙНУ, КОМЕРЦІЙНОЇ ЦІННОСТІ І ПРИДАТНОСТІ ДЛЯ КОНКРЕТНИХ ЦІЛЕЙ.</translation>
     </message>
@@ -12309,7 +12346,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1273"/>
         <source>Connect measurements file to pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Підключити файл мірок до викрійки</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1284"/>
@@ -13958,7 +13995,7 @@ Would you like to select another file?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="82"/>
         <source>This setting has no effect since the value is overridden by the command-line option</source>
-        <translation type="unfinished"></translation>
+        <translation>Це налаштування не має ефекту, оскільки значення перевизначено опцією командного рядка</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="226"/>
@@ -14920,7 +14957,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="828"/>
         <source>Piece &apos;%1&apos;. Notch collapse for point &apos;%2&apos;. Provide a manual angle value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Деталь «%1». Колапс надсічки точки «%2». Вкажіть значення кута вручну.</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="224"/>
@@ -20707,12 +20744,12 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="698"/>
         <source>Override the global curve approximation scale setting from the application preferences. The value must be between %1 and %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Перевизначить глобальне налаштування масштабу апроксимації кривої в налаштуваннях програми. Значення повинно бути в межах від %1 до %2.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="703"/>
         <source>Curve approximation</source>
-        <translation type="unfinished"></translation>
+        <translation>Апроксимація кривої</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="772"/>
@@ -21880,42 +21917,52 @@ Do you want to save your changes?</source>
         <translation>Про Puzzle</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="78"/>
+        <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="100"/>
         <source>Puzzle version</source>
         <translation>Версія Puzzle</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="97"/>
+        <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="118"/>
         <source>Build revision:</source>
         <translation>Версія збірки:</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="107"/>
+        <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="131"/>
         <source>This program is part of Valentina project.</source>
         <translation>Ця програма є частиною проєкту Valentina.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="273"/>
+        <source>Special thanks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="317"/>
         <source>Check For Updates</source>
         <translation>Перевірити наявність оновлень</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/vpdialogabout.cpp" line="65"/>
+        <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="324"/>
+        <source>Credits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/puzzle/dialogs/vpdialogabout.cpp" line="66"/>
         <source>Cannot open your default browser</source>
         <translation>Не можу відкрити браузер по замовчуванню</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/vpdialogabout.cpp" line="135"/>
+        <location filename="../../src/app/puzzle/dialogs/vpdialogabout.cpp" line="151"/>
         <source>Build revision: %1</source>
         <translation>Версія збірки: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/vpdialogabout.cpp" line="139"/>
+        <location filename="../../src/app/puzzle/dialogs/vpdialogabout.cpp" line="155"/>
         <source>Built on %1 at %2</source>
         <translation>Зібрано %1 в %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/vpdialogabout.cpp" line="146"/>
+        <location filename="../../src/app/puzzle/dialogs/vpdialogabout.cpp" line="162"/>
         <source>Web site : %1</source>
         <translation>Вебсайт : %1</translation>
     </message>

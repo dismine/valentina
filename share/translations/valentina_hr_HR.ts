@@ -435,41 +435,50 @@
         <translation>O programu Valentina</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="84"/>
+        <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="109"/>
         <source>Valentina version</source>
         <translation>Verzija Valentine</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="183"/>
+        <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="266"/>
+        <source>Special thanks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="308"/>
+        <source>Credits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Contributors</source>
-        <translation>Suradnici</translation>
+        <translation type="vanished">Suradnici</translation>
     </message>
     <message>
         <source>Built on %3 at %4</source>
         <translation type="vanished">Sagrađeno na %3 u %4</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogaboutapp.cpp" line="63"/>
+        <location filename="../../src/app/valentina/dialogs/dialogaboutapp.cpp" line="66"/>
         <source>Web site : %1</source>
         <translation>Web stranica: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogaboutapp.cpp" line="70"/>
+        <location filename="../../src/app/valentina/dialogs/dialogaboutapp.cpp" line="73"/>
         <source>Cannot open your default browser</source>
         <translation>Ne mogu otvoriti zadani preglednik</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="103"/>
+        <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="127"/>
         <source>Build revision:</source>
         <translation>Izgradnja revizije:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogaboutapp.cpp" line="56"/>
+        <location filename="../../src/app/valentina/dialogs/dialogaboutapp.cpp" line="59"/>
         <source>Built on %1 at %2</source>
         <translation>Izgrađeno na %1 u %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="315"/>
+        <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="301"/>
         <source>Check For Updates</source>
         <translation>Provjeri ažuriranja</translation>
     </message>
@@ -482,22 +491,32 @@
         <translation>O Tape</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="75"/>
+        <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="100"/>
         <source>Tape version</source>
         <translation>Verzija Tape</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="94"/>
+        <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="118"/>
         <source>Build revision:</source>
         <translation>Izgradnja revizije:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="104"/>
+        <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="131"/>
         <source>This program is part of Valentina project.</source>
         <translation>Ovaj program je dio Valentina projekta.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogabouttape.cpp" line="130"/>
+        <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="273"/>
+        <source>Special thanks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="321"/>
+        <source>Credits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/dialogabouttape.cpp" line="144"/>
         <source>Build revision: %1</source>
         <translation>Izgradnja revizije: %1</translation>
     </message>
@@ -506,22 +525,22 @@
         <translation type="vanished">Sagrađeno na %3 u %4</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogabouttape.cpp" line="141"/>
+        <location filename="../../src/app/tape/dialogs/dialogabouttape.cpp" line="155"/>
         <source>Web site : %1</source>
         <translation>Web stranica: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogabouttape.cpp" line="60"/>
+        <location filename="../../src/app/tape/dialogs/dialogabouttape.cpp" line="61"/>
         <source>Cannot open your default browser</source>
         <translation>Ne mogu otvoriti zadani preglednik</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogabouttape.cpp" line="134"/>
+        <location filename="../../src/app/tape/dialogs/dialogabouttape.cpp" line="148"/>
         <source>Built on %1 at %2</source>
         <translation>Izgrađeno na %1 u %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="267"/>
+        <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="314"/>
         <source>Check For Updates</source>
         <translation>Provjeri ažuriranja</translation>
     </message>
@@ -1191,6 +1210,24 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="351"/>
         <source>Notes</source>
         <translation>Bilješke</translation>
+    </message>
+</context>
+<context>
+    <name>DialogCredits</name>
+    <message>
+        <location filename="../../src/libs/vmisc/dialogs/dialogcredits.ui" line="14"/>
+        <source>Credits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vmisc/dialogs/dialogcredits.ui" line="28"/>
+        <source>Sponsors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vmisc/dialogs/dialogcredits.ui" line="42"/>
+        <source>Authors</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10709,9 +10746,9 @@ Svejedno primijeniti postavke?</translation>
 <context>
     <name>InternalStrings</name>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/vpdialogabout.cpp" line="141"/>
-        <location filename="../../src/app/tape/dialogs/dialogabouttape.cpp" line="136"/>
-        <location filename="../../src/app/valentina/dialogs/dialogaboutapp.cpp" line="58"/>
+        <location filename="../../src/app/puzzle/dialogs/vpdialogabout.cpp" line="157"/>
+        <location filename="../../src/app/tape/dialogs/dialogabouttape.cpp" line="150"/>
+        <location filename="../../src/app/valentina/dialogs/dialogaboutapp.cpp" line="61"/>
         <source>The program is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</source>
         <translation>Program se daje KAKAV JEST, bez IKAKVIH JAMSTAVA, UKLJUČUJUĆI JAMSTVO ZA DIZAJN, PRIKLADNOST ZA PRODAJU I PRIKLADNOST ZA ODREĐENU NAMJENU.</translation>
     </message>
@@ -21881,42 +21918,52 @@ Do you want to save your changes?</source>
         <translation>O programu Puzzle</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="78"/>
+        <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="100"/>
         <source>Puzzle version</source>
         <translation>Verzija Puzzle</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="97"/>
+        <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="118"/>
         <source>Build revision:</source>
         <translation>Izgradnja revizije:</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="107"/>
+        <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="131"/>
         <source>This program is part of Valentina project.</source>
         <translation>Ovaj program je dio Valentina projekta.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="273"/>
+        <source>Special thanks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="317"/>
         <source>Check For Updates</source>
         <translation>Provjeri ažuriranja</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/vpdialogabout.cpp" line="65"/>
+        <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="324"/>
+        <source>Credits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/puzzle/dialogs/vpdialogabout.cpp" line="66"/>
         <source>Cannot open your default browser</source>
         <translation>Ne mogu otvoriti zadani preglednik</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/vpdialogabout.cpp" line="135"/>
+        <location filename="../../src/app/puzzle/dialogs/vpdialogabout.cpp" line="151"/>
         <source>Build revision: %1</source>
         <translation>Izgradnja revizije: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/vpdialogabout.cpp" line="139"/>
+        <location filename="../../src/app/puzzle/dialogs/vpdialogabout.cpp" line="155"/>
         <source>Built on %1 at %2</source>
         <translation>Izgrađeno na %1 u %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/vpdialogabout.cpp" line="146"/>
+        <location filename="../../src/app/puzzle/dialogs/vpdialogabout.cpp" line="162"/>
         <source>Web site : %1</source>
         <translation>Web stranica: %1</translation>
     </message>
