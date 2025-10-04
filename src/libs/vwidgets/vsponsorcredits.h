@@ -41,6 +41,7 @@ class VSponsorCredits : public QLabel
 
 public:
     explicit VSponsorCredits(QWidget *parent = nullptr);
+    ~VSponsorCredits() override = default;
 
     auto LetterSpacing() const -> qreal;
     void SetLetterSpacing(qreal spacing);
@@ -50,6 +51,7 @@ private slots:
     void StartSpreadAndFade();
 
 private:
+    Q_DISABLE_COPY_MOVE(VSponsorCredits)
     QStringList sponsorsList;
     vsizetype index{0};
     QGraphicsOpacityEffect *effect;

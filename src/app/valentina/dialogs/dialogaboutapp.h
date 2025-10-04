@@ -53,7 +53,7 @@ protected:
 private:
     Ui::DialogAboutApp *ui;
     bool m_isInitialized{false};
-    QPointer<DialogCredits> m_dialogCredits{nullptr};
+    QPointer<DialogCredits> m_dialogCredits{};
     Q_DISABLE_COPY_MOVE(DialogAboutApp) // NOLINT
 
     static void FontPointSize(QWidget *w, int pointSize);

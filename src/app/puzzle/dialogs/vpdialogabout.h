@@ -57,7 +57,7 @@ private:
     Q_DISABLE_COPY_MOVE(VPDialogAbout) // NOLINT
     std::unique_ptr<Ui::VPDialogAbout> ui;
     bool m_isInitialized;
-    QPointer<DialogCredits> m_dialogCredits{nullptr};
+    QPointer<DialogCredits> m_dialogCredits{};
 
     static void FontPointSize(QWidget *w, int pointSize);
 
