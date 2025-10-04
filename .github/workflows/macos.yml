@@ -45,7 +45,7 @@ jobs:
           - install: 6.8.3
             label: Qt6_8
             build_target: '12+'
-            xcode: '15.2'
+            xcode: '16.4'
             target: 'MacOS_12+'
             minimumMacosVersion: '12.0'
             run_tests: 'true'
@@ -53,7 +53,7 @@ jobs:
           - install: 6.4.3
             label: Qt6_4
             build_target: '10.15+'
-            xcode: '15.2'
+            xcode: '16.4'
             target: 'MacOS_10_15+'
             minimumMacosVersion: '10.15'
             run_tests: 'true'
@@ -301,7 +301,7 @@ jobs:
           - install: 6.8.3
             label: Qt6_8
             build_target: '12+'
-            xcode: '15.2'
+            xcode: '16.2'
             target: 'MacOS_12+'
             minimumMacosVersion: '12.0'
             run_tests: 'true'
@@ -309,7 +309,7 @@ jobs:
           - install: 6.7.3
             label: Qt6_7
             build_target: '11+'
-            xcode: '15.2'
+            xcode: '16.2'
             target: 'MacOS_11+'
             minimumMacosVersion: '11.0'
             run_tests: 'true'
