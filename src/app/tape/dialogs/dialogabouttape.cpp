@@ -29,6 +29,7 @@
 #include "dialogabouttape.h"
 #include "../fervor/fvupdater.h"
 #include "../vmisc/def.h"
+#include "../vmisc/dialogs/dialogcredits.h"
 #include "../vmisc/projectversion.h"
 #include "ui_dialogabouttape.h"
 
@@ -68,11 +69,24 @@ DialogAboutTape::DialogAboutTape(QWidget *parent)
                 FvUpdater::sharedUpdater()->SetFeedURL(FvUpdater::CurrentFeedURL());
                 FvUpdater::sharedUpdater()->CheckForUpdatesNotSilent();
             });
+    connect(ui->pushButtonCredits,
+            &QPushButton::clicked,
+            this,
+            [this]()
+            {
+                if (m_dialogCredits.isNull())
+                {
+                    m_dialogCredits = new DialogCredits(this);
+                    m_dialogCredits->setAttribute(Qt::WA_DeleteOnClose);
+                }
+                m_dialogCredits->show();
+            });
 
     // By default on Windows font point size 8 points we need 11 like on Linux.
     FontPointSize(ui->label_Legal_Stuff, 11);
     FontPointSize(ui->label_Tape_Built, 11);
     FontPointSize(ui->label_QT_Version, 11);
+    FontPointSize(ui->labelSponsors, 11);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

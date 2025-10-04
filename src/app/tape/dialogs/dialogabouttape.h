@@ -29,13 +29,16 @@
 #ifndef DIALOGABOUTTAPE_H
 #define DIALOGABOUTTAPE_H
 
-#include <QDialog>
 #include <memory>
+#include <QDialog>
+#include <QPointer>
 
 namespace Ui
 {
 class DialogAboutTape;
 }
+
+class DialogCredits;
 
 class DialogAboutTape : public QDialog
 {
@@ -54,6 +57,7 @@ private:
     Q_DISABLE_COPY_MOVE(DialogAboutTape) // NOLINT
     std::unique_ptr<Ui::DialogAboutTape> ui;
     bool m_isInitialized;
+    QPointer<DialogCredits> m_dialogCredits{};
 
     static void FontPointSize(QWidget *w, int pointSize);
 

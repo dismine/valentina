@@ -229,5 +229,8 @@
         <file>icon/dark/32x32/expand1.png</file>
         <file>icon/multisize_measurements.png</file>
         <file>icon/individual_measurements.png</file>
+        <file>icon/svg/valentina.svg</file>
+        <file>icon/svg/tape.svg</file>
+        <file>icon/svg/puzzle.svg</file>
     </qresource>
 </RCC>
