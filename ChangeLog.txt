@@ -13,6 +13,7 @@
 - Fixed incorrect reseting foreground color of text fields.
 - Hide error: GOAWAY invalid stream.
 - Fix incorrect codepage when export DXF files on Windows.
+- Fixed crash while export a font corrections.
 
 # Valentina 1.0.0 July 21, 2025
 - Fix Puzzle app crash when application closing.
