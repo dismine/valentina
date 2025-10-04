@@ -118,15 +118,15 @@ void VSingleLineOutlineChar::ExportCorrections(const QString &dirPath) const
     QRawFont const rawFont = QRawFont::fromFont(m_font);
     QJsonObject correctionsObject;
 
-    for (uint unicode = 0; unicode <= 0x10FFFF; ++unicode)
+    for (char32_t unicode = 0; unicode <= 0x10FFFF; ++unicode)
     {
         // Check if the glyph is available for the font
         if (rawFont.supportsCharacter(unicode))
         {
-            QChar const character(unicode);
+            QString const str = QString::fromUcs4(&unicode, 1);
 
             QPainterPath path;
-            path.addText(0, 0, m_font, character);
+            path.addText(0, 0, m_font, str);
 
             const QList<QPolygonF> subpaths = path.toSubpathPolygons();
             if (subpaths.isEmpty())
@@ -140,7 +140,7 @@ void VSingleLineOutlineChar::ExportCorrections(const QString &dirPath) const
                 segments[QString::number(i)] = true;
             }
 
-            correctionsObject[character] = segments;
+            correctionsObject[str] = segments;
         }
     }
 
