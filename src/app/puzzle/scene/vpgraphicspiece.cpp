@@ -801,13 +801,13 @@ void VPGraphicsPiece::PaintPassmarks(QPainter *painter, const VPPiecePtr &piece)
             const QTransform matrix = VGObject::FlippingMatrix(seamAllowanceMirrorLine);
             m_passmarks.addPath(matrix.map(mirroredPassmaksPath));
         }
+    }
 
-        if (painter != nullptr)
-        {
-            QPainterStateGuard const guard(painter);
-            painter->setBrush(NoBrush());
-            painter->drawPath(m_passmarks);
-        }
+    if (painter != nullptr)
+    {
+        QPainterStateGuard const guard(painter);
+        painter->setBrush(NoBrush());
+        painter->drawPath(m_passmarks);
     }
 }
 
