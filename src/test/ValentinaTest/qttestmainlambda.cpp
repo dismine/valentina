@@ -58,6 +58,7 @@
 #include "tst_vspline.h"
 #include "tst_vsplinepath.h"
 #include "tst_vsvgpathtokenizer.h"
+#include "tst_vtheme.h"
 #include "tst_vtooluniondetails.h"
 #include "tst_vtranslatevars.h"
 #include "tst_xsdschema.h"
@@ -81,6 +82,14 @@
 auto main(int argc, char **argv) -> int
 {
     Q_INIT_RESOURCE(schema); // NOLINT
+
+#if defined(Q_OS_MACX)
+    Q_INIT_RESOURCE(mac_light_theme); // NOLINT
+    Q_INIT_RESOURCE(mac_dark_theme);  // NOLINT
+#else
+    Q_INIT_RESOURCE(win_light_theme); // NOLINT
+    Q_INIT_RESOURCE(win_dark_theme);  // NOLINT
+#endif
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     XERCES_CPP_NAMESPACE::XMLPlatformUtils::Initialize();
@@ -142,6 +151,7 @@ auto main(int argc, char **argv) -> int
 #endif
     ASSERT_TEST(new TST_VTextStream());
 #endif // QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	ASSERT_TEST(new TST_VTheme());
 
     return status;
 }
