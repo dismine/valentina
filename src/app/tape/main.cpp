@@ -92,9 +92,10 @@ auto main(int argc, char *argv[]) -> int
 #if defined(Q_OS_MACX)
     Q_INIT_RESOURCE(mac_light_theme); // NOLINT
     Q_INIT_RESOURCE(mac_dark_theme);  // NOLINT
-#endif
+#else
     Q_INIT_RESOURCE(win_light_theme); // NOLINT
     Q_INIT_RESOURCE(win_dark_theme);  // NOLINT
+#endif
 
 #ifdef CRASH_REPORTING
     InitializeCrashpad(QStringLiteral(VER_PRODUCTNAME_STR));

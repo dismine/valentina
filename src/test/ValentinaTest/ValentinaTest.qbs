@@ -62,6 +62,8 @@ VTestApp {
         "tst_readval.cpp",
         "tst_vsvgpathtokenizer.cpp",
         "tst_vsvgpathtokenizer.h",
+        "tst_vtheme.cpp",
+        "tst_vtheme.h",
         "tst_vtranslatevars.cpp",
         "tst_vabstractpiece.cpp",
         "tst_vtooluniondetails.cpp",
