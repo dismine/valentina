@@ -41,6 +41,8 @@ public:
     auto GetToolGroupTooltip() const -> QString;
     void SetToolGroupTooltip(const QString &toolGroupTooltip);
 
+    void AssignMenu(QMenu *menu);
+
 protected:
     auto event(QEvent *event) -> bool override;
 

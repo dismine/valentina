@@ -327,7 +327,6 @@ MApplication::MApplication(int &argc, char **argv)
     // The first inside own bundle where info.plist is works fine, but the second,
     // when we run inside Valentina's bundle, require direct setting the icon.
     setWindowIcon(QIcon(":/tapeicon/64x64/logo.png"));
-    VTheme::Instance()->StoreDefaultThemeName(QIcon::themeName());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

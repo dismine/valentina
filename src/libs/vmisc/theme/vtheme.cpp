@@ -156,42 +156,18 @@ void ActivateDefaultThemeWin()
     qApp->setStyleSheet(QString()); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
 #endif
 #else
-    if (VTheme::IsInDarkTheme())
-    {
-        ActivateCustomDarkTheme();
-    }
-    else
-    {
-        qApp->setStyleSheet(QString()); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
-    }
+    qApp->setStyleSheet(QString()); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
 #endif // QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
 }
 #endif // defined(Q_OS_WIN)
-
-//---------------------------------------------------------------------------------------------------------------------
-#if defined(Q_OS_MACX)
-void ActivateDefaultThemeMac()
-{
-    qApp->setStyleSheet(QString()); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
-}
-#endif // defined(Q_OS_MACX)
 
 //---------------------------------------------------------------------------------------------------------------------
 void ActivateDefaultTheme()
 {
 #if defined(Q_OS_WIN)
     ActivateDefaultThemeWin();
-#elif defined(Q_OS_MACX)
-    ActivateDefaultThemeMac();
 #else
-    if (VTheme::IsInDarkTheme())
-    {
-        ActivateCustomDarkTheme();
-    }
-    else
-    {
-        qApp->setStyleSheet(QString()); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
-    }
+    qApp->setStyleSheet(QString()); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
 #endif
 }
 
@@ -221,12 +197,6 @@ auto VTheme::Instance() -> VTheme *
     }
 
     return instance;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VTheme::StoreDefaultThemeName(const QString &themeName)
-{
-    m_defaultThemeName = themeName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -341,8 +311,7 @@ void VTheme::InitApplicationStyle()
         return;
     }
 
-#if defined(Q_OS_WIN)
-#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
+#if defined(Q_OS_WIN) && QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
     if (NativeDarkThemeAvailable())
     {
         if (QGuiApplication::styleHints()->colorScheme() == Qt::ColorScheme::Dark)
@@ -350,7 +319,6 @@ void VTheme::InitApplicationStyle()
             QApplication::setStyle(QStyleFactory::create(QStringLiteral("fusion")));
         }
     }
-#endif
 #endif
 }
 
@@ -369,14 +337,14 @@ void VTheme::SetIconTheme()
     {
         VThemeMode const themeMode = VAbstractApplication::VApp()->Settings()->GetThemeMode();
 
-        if ((themeMode == VThemeMode::Dark && !ShouldApplyDarkTheme()) ||
-            (themeMode == VThemeMode::Light && ShouldApplyDarkTheme()))
+        if ((themeMode == VThemeMode::Dark && !ShouldApplyDarkTheme())
+            || (themeMode == VThemeMode::Light && ShouldApplyDarkTheme()))
         {
             QIcon::setThemeName(DefaultThemeName());
         }
         else
         {
-            QIcon::setFallbackThemeName(VTheme::DefaultThemeName());
+            QIcon::setFallbackThemeName(DefaultThemeName());
         }
     }
 }
@@ -394,7 +362,6 @@ void VTheme::SetToAutoTheme() const
 #else
     qApp->setStyleSheet(QString()); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
 #endif
-    QIcon::setThemeName(m_defaultThemeName);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

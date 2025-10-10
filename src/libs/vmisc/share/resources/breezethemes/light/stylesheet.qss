@@ -814,7 +814,18 @@ QToolBar QToolButton
     font-weight: bold;
     border: 0.04em transparent black;
     padding-left: 0.2em;
-    padding-right: 0.3em;
+    padding-right: 0.2em;
+}
+
+QToolBar QToolButton[hasMenu="true"]
+{
+    padding-right: 1.4em;
+}
+
+QToolBar QToolButton::menu-button 
+{
+    border-left: 0.04em solid black;
+    width: 0.6em;
 }
 
 QToolBar QToolButton:hover
@@ -822,12 +833,17 @@ QToolBar QToolButton:hover
     border: 0.04em solid rgba(51, 164, 223, 0.5);
 }
 
+QToolBar QToolButton[hasMenu="true"]:pressed
+{
+    padding-right: 1.4em;
+}
+
 QToolBar QToolButton:pressed
 {
     border: 0.04em solid rgba(51, 164, 223, 0.5);
     /* The padding doesn't inherit from `QToolBar QToolButton`, so leave it in. */
     padding-left: 0.2em;
-    padding-right: 0.3em;
+    padding-right: 0.2em;
 }
 
 /**
@@ -858,7 +874,6 @@ QPushButton
     padding: 0.23em;
     border-radius: 0.09em;
     outline: none;
-    min-height: 1.1em;
 }
 
 QPushButton:flat,
@@ -2092,9 +2107,24 @@ QToolButton[autoRaise="true"]
     border: 0.04em solid transparent;
 }
 
+QDialog QToolButton[hasMenu="true"]
+{
+    width: 1em;
+    padding-right: 1.1em;
+}
+
+QDialog QToolButton::menu-button 
+{
+    border-left: 0.04em solid black;
+    width: 0.6em;
+}
+
+QDialog QToolButton[autoRaise="false"][text]
+{
+    width: 1.2em;
+}
+
 /* Add selectors for the QDialog if a menu is explicitly requested. */
-QToolButton[hasMenu="true"],
-QToolButton[autoRaise="false"][text],
 QDialog QToolBar QToolButton[hasMenu="true"][popupMode="0"],
 QDialog QToolBar QToolButton[hasMenu="true"][popupMode="1"],
 QDialog QToolBar QToolButton[hasMenu="true"][popupMode="2"]

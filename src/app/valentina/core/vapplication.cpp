@@ -362,7 +362,6 @@ VApplication::VApplication(int &argc, char **argv)
     setApplicationVersion(AppVersionStr());
     // making sure will create new instance...just in case we will ever do 2 objects of VApplication
     VCommandLine::Reset();
-    VTheme::Instance()->StoreDefaultThemeName(QIcon::themeName());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -29,6 +29,7 @@
 
 #include <QAction>
 #include <QEvent>
+#include <QStyle>
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolButtonPopup::VToolButtonPopup(QWidget *parent)
@@ -43,6 +44,38 @@ void VToolButtonPopup::SetToolGroupTooltip(const QString &toolGroupTooltip)
 {
     m_toolGroupTooltip = toolGroupTooltip;
     CorrectToolTip();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolButtonPopup::AssignMenu(QMenu *menu)
+{
+    // Attach the menu normally.
+    QToolButton::setMenu(menu);
+
+    // --- WHY WE SET THIS PROPERTY ---
+    // Qt's QSS system cannot detect whether a QToolButton has a menu.
+    // The `hasMenu` property is NOT a built-in Qt property.
+    // We create it manually so that stylesheet selectors like
+    //     QToolButton[hasMenu="true"]
+    // can match and apply custom styles (for example, extra padding or width).
+    //
+    // Without this, rules like [hasMenu="true"] will never match.
+    setProperty("hasMenu", menu != nullptr);
+
+    // --- WHY WE CALL unpolish()/polish() ---
+    // Setting a dynamic property does NOT automatically reapply layout-related
+    // QSS rules (like width, padding, margin). Qt only updates the style when
+    // a widget is "polished" — i.e. when the style is (re)applied to the widget.
+    //
+    // To force Qt to re-evaluate and apply the QSS rules that depend on
+    // `hasMenu`, we unpolish (remove) and then polish (reapply) the style.
+    style()->unpolish(this);
+    style()->polish(this);
+
+    // --- WHY WE CALL updateGeometry() ---
+    // Some geometry-related properties (width, margins, etc.) may affect layout.
+    // Calling updateGeometry() notifies the layout system to recompute the size.
+    updateGeometry();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

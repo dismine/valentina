@@ -148,7 +148,14 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     connect(ui->tableWidgetPC, &QTableWidget::itemSelectionChanged, this, &DialogIncrements::ShowIncrementDetails);
 
     ui->toolButtonAdd->setMenu(InitVarTypeMenu(ui->toolButtonAdd->menu(), true /*increments tab*/));
+    ui->toolButtonAdd->setProperty("hasMenu", true);
+    ui->toolButtonAdd->style()->unpolish(ui->toolButtonAdd);
+    ui->toolButtonAdd->style()->polish(ui->toolButtonAdd);
+
     ui->toolButtonAddPC->setMenu(InitVarTypeMenu(ui->toolButtonAddPC->menu(), false /*preview calculations tab*/));
+    ui->toolButtonAddPC->setProperty("hasMenu", true);
+    ui->toolButtonAddPC->style()->unpolish(ui->toolButtonAddPC);
+    ui->toolButtonAddPC->style()->polish(ui->toolButtonAddPC);
 
     connect(ui->toolButtonAdd, &QToolButton::clicked, this, &DialogIncrements::AddIncrement);
     connect(ui->toolButtonAddPC, &QToolButton::clicked, this, &DialogIncrements::AddIncrement);
@@ -1124,7 +1131,14 @@ void DialogIncrements::InitSearch()
     InitPreviewCalculationsSearchHistory();
 
     ui->pushButtonSearch->setMenu(m_searchHistory);
+    ui->pushButtonSearch->setProperty("hasMenu", true);
+    ui->pushButtonSearch->style()->unpolish(ui->pushButtonSearch);
+    ui->pushButtonSearch->style()->polish(ui->pushButtonSearch);
+
     ui->pushButtonSearchPC->setMenu(m_searchHistoryPC);
+    ui->pushButtonSearchPC->setProperty("hasMenu", true);
+    ui->pushButtonSearchPC->style()->unpolish(ui->pushButtonSearchPC);
+    ui->pushButtonSearchPC->style()->polish(ui->pushButtonSearchPC);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2005,7 +2019,14 @@ void DialogIncrements::changeEvent(QEvent *event)
         ui->retranslateUi(this);
 
         ui->toolButtonAdd->setMenu(InitVarTypeMenu(ui->toolButtonAdd->menu(), true /*increments tab*/));
+        ui->toolButtonAdd->setProperty("hasMenu", true);
+        ui->toolButtonAdd->style()->unpolish(ui->toolButtonAdd);
+        ui->toolButtonAdd->style()->polish(ui->toolButtonAdd);
+
         ui->toolButtonAddPC->setMenu(InitVarTypeMenu(ui->toolButtonAddPC->menu(), false /*preview calculations tab*/));
+        ui->toolButtonAddPC->setProperty("hasMenu", true);
+        ui->toolButtonAddPC->style()->unpolish(ui->toolButtonAddPC);
+        ui->toolButtonAddPC->style()->polish(ui->toolButtonAddPC);
 
         ui->lineEditFind->setPlaceholderText(m_search->SearchPlaceholder());
         ui->lineEditFindPC->setPlaceholderText(m_searchPC->SearchPlaceholder());

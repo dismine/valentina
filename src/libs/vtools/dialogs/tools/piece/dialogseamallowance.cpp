@@ -4040,6 +4040,9 @@ void DialogSeamAllowance::InitPieceTab()
 
     m_placeholdersMenu->setStyleSheet(QStringLiteral("QMenu { menu-scrollable: 1; }"));
     uiTabPaths->pushButtonGradationPlaceholder->setMenu(m_placeholdersMenu);
+    uiTabPaths->pushButtonGradationPlaceholder->setProperty("hasMenu", true);
+    uiTabPaths->pushButtonGradationPlaceholder->style()->unpolish(uiTabPaths->pushButtonGradationPlaceholder);
+    uiTabPaths->pushButtonGradationPlaceholder->style()->polish(uiTabPaths->pushButtonGradationPlaceholder);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
