@@ -48,8 +48,6 @@ public:
 
     static auto Instance() -> VTheme *;
 
-    void StoreDefaultThemeName(const QString &themeName);
-
     void SetToAutoTheme() const;
     void ResetThemeSettings() const;
 
@@ -79,7 +77,6 @@ private:
 
     explicit VTheme(QObject *parent = nullptr);
 
-    QString m_defaultThemeName{};
     bool m_isProcessingColorSchemeChange{false};
     bool m_darkTheme;
 };

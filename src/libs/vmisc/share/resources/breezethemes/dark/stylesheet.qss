@@ -816,12 +816,28 @@ QToolBar::separator:vertical
     border-image: url(:/dark/vseptoolbar.svg);
 }
 
+QToolBar QLabel
+{
+    background: 0.09em solid #272729;
+}
+
 QToolBar QToolButton
 {
     font-weight: bold;
     border: 0.04em transparent black;
     padding-left: 0.2em;
-    padding-right: 0.3em;
+    padding-right: 0.2em;
+}
+
+QToolBar QToolButton[hasMenu="true"]
+{
+    padding-right: 1.4em;
+}
+
+QToolBar QToolButton::menu-button 
+{
+    border-left: 0.04em solid #555;
+    width: 0.6em;
 }
 
 QToolBar QToolButton:hover
@@ -829,12 +845,17 @@ QToolBar QToolButton:hover
     border: 0.04em solid #3d3d42;
 }
 
+QToolBar QToolButton[hasMenu="true"]:pressed
+{
+    padding-right: 1.4em;
+}
+
 QToolBar QToolButton:pressed
 {
     border: 0.04em solid #3d3d42;
     /* The padding doesn't inherit from `QToolBar QToolButton`, so leave it in. */
     padding-left: 0.2em;
-    padding-right: 0.3em;
+    padding-right: 0.2em;
 }
 
 /**
@@ -865,7 +886,6 @@ QPushButton
     padding: 0.23em;
     border-radius: 0.09em;
     outline: none;
-    min-height: 1.1em;
 }
 
 QPushButton:flat,
@@ -950,6 +970,12 @@ QPushButton:checked:hover
 }
 
 QComboBox:hover,
+QComboBox:focus
+{
+    background-color: #3b51b3;
+}
+
+QComboBox:hover,
 QComboBox:focus,
 QAbstractSpinBox:hover,
 QAbstractSpinBox:focus,
@@ -963,7 +989,7 @@ QAbstractView:hover,
 QTreeView:hover,
 QTreeView:focus
 {
-    border: 0.04em solid #3d3d42;
+    border: 0.04em solid #4f76e2;
     color: #eff0f1;
 }
 
@@ -2099,9 +2125,24 @@ QToolButton[autoRaise="true"]
     border: 0.04em solid transparent;
 }
 
+QDialog QToolButton[hasMenu="true"]
+{
+    width: 1em;
+    padding-right: 1.1em;
+}
+
+QDialog QToolButton::menu-button 
+{
+    border-left: 0.04em solid #555;
+    width: 0.6em;
+}
+
+QDialog QToolButton[autoRaise="false"][text]
+{
+    width: 1.2em;
+}
+
 /* Add selectors for the QDialog if a menu is explicitly requested. */
-QDialog QToolButton[hasMenu="true"],
-QDialog QToolButton[autoRaise="false"][text],
 QDialog QToolBar QToolButton[hasMenu="true"][popupMode="0"],
 QDialog QToolBar QToolButton[hasMenu="true"][popupMode="1"],
 QDialog QToolBar QToolButton[hasMenu="true"][popupMode="2"]
@@ -2120,14 +2161,16 @@ QToolBar QToolButton[enabled="false"] {
 
 QToolButton:hover
 {
-    border: 0.04em solid #3d3d42;
+    border: 0.04em solid #4f76e2;
+    background-color: #3b51b3;
 }
 
 QToolButton:checked,
 QToolButton:pressed
 {
-    border: 0.04em solid #3d3d42;
-    background-color: #3d3d42;
+    border: 0.04em solid #3a5fc0;
+    background-color: #2a3e8f;
+    color: #eff0f1;
 }
 
 QToolButton::right-arrow,

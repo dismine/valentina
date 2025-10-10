@@ -2030,6 +2030,9 @@ void TKMMainWindow::InitSearch()
     m_searchHistory->setStyleSheet(QStringLiteral("QMenu { menu-scrollable: 1; }"));
     InitSearchHistory();
     ui->pushButtonSearch->setMenu(m_searchHistory);
+    ui->pushButtonSearch->setProperty("hasMenu", true);
+    ui->pushButtonSearch->style()->unpolish(ui->pushButtonSearch);
+    ui->pushButtonSearch->style()->polish(ui->pushButtonSearch);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

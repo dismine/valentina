@@ -123,6 +123,9 @@ DialogEditLabel::DialogEditLabel(const VAbstractPattern *doc, const VContainer *
     m_placeholdersMenu->setStyleSheet(QStringLiteral("QMenu { menu-scrollable: 1; }"));
     m_placeholdersMenu->setToolTipsVisible(true);
     ui->pushButtonInsert->setMenu(m_placeholdersMenu);
+    ui->pushButtonInsert->setProperty("hasMenu", true);
+    ui->pushButtonInsert->style()->unpolish(ui->pushButtonInsert);
+    ui->pushButtonInsert->style()->polish(ui->pushButtonInsert);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
