@@ -229,6 +229,8 @@ enum class VThemeIcon
     // WeatherStorm,
 
     // Not supported by Qt
+    DocumentImport,
+    DocumentExport,
     PreferencesOther,
     GtkOk,
     GtkNo,

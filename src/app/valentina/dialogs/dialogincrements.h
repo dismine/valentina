@@ -37,6 +37,7 @@
 #include <QPair>
 
 class VIndividualMeasurements;
+class QxtCsvModel;
 
 namespace Ui
 {
@@ -84,6 +85,8 @@ private slots:
     void Fx();
     void RefreshPattern();
     void UpdateShortcuts();
+    void ImportIncrements();
+    void ExportIncrements();
 
 private:
     // cppcheck-suppress unknownMacro
@@ -168,6 +171,15 @@ private:
     static void InitIncrementUnits(QComboBox *combo);
 
     void InitIcons();
+
+    auto CheckIncrementName(const QString &name, const QSet<QString> &importedNames) const -> QString;
+    void ShowError(const QString &text);
+
+    auto IncrementsCSVColumnHeader(int column) const -> QString;
+
+    void ImportCSVIncrements(bool previewCalculation, const QxtCsvModel &csv, const QVector<int> &map, bool withHeader);
+    void ExportCSVIncrements(
+        bool incrementMode, const QString &fileName, bool withHeader, int mib, const QChar &separator);
 };
 
 #endif // DIALOGINCREMENTS_H

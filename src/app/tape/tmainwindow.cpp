@@ -901,15 +901,14 @@ void TMainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int 
         }
     }
 
-    int colCount = 0;
-    for (int column = 0; column <= columns; ++column)
+    for (int column = 0; column < columns; ++column)
     {
-        csv.insertSingleColumn(colCount++);
+        csv.insertSingleColumn(column);
     }
 
     if (withHeader)
     {
-        for (int column = 0; column <= columns; ++column)
+        for (int column = 0; column < columns; ++column)
         {
             csv.setHeaderText(column, CSVColumnHeader(column));
         }
@@ -1151,44 +1150,48 @@ void TMainWindow::ImportDataFromCSV()
     dialog.SetSeparator(VAbstractApplication::VApp()->Settings()->GetCSVSeparator());
     dialog.ShowFilePreview(fileName);
 
-    if (dialog.exec() == QDialog::Accepted)
+    if (dialog.exec() != QDialog::Accepted)
     {
-        VAbstractApplication::VApp()->Settings()->SetCSVSeparator(dialog.GetSeparator());
-        VAbstractApplication::VApp()->Settings()->SetCSVCodec(dialog.GetSelectedMib());
-        VAbstractApplication::VApp()->Settings()->SetCSVWithHeader(dialog.IsWithHeader());
+        return;
+    }
 
-        QSharedPointer<DialogMeasurementsCSVColumns> columns;
-        if (m_m->Type() == MeasurementsType::Multisize)
-        {
-            const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values();
-            columns = QSharedPointer<DialogMeasurementsCSVColumns>::create(fileName, m_m->Type(), dimensions, this);
-        }
-        else
-        {
-            columns = QSharedPointer<DialogMeasurementsCSVColumns>::create(fileName, m_m->Type(), this);
-        }
-        columns->SetWithHeader(dialog.IsWithHeader());
-        columns->SetSeparator(dialog.GetSeparator());
-        columns->SetCodec(QTextCodec::codecForMib(dialog.GetSelectedMib()));
+    VAbstractApplication::VApp()->Settings()->SetCSVSeparator(dialog.GetSeparator());
+    VAbstractApplication::VApp()->Settings()->SetCSVCodec(dialog.GetSelectedMib());
+    VAbstractApplication::VApp()->Settings()->SetCSVWithHeader(dialog.IsWithHeader());
 
-        if (columns->exec() == QDialog::Accepted)
-        {
-            QxtCsvModel const csv(fileName,
-                                  nullptr,
-                                  dialog.IsWithHeader(),
-                                  dialog.GetSeparator(),
-                                  QTextCodec::codecForMib(dialog.GetSelectedMib()));
-            const QVector<int> map = columns->ColumnsMap();
+    QSharedPointer<DialogMeasurementsCSVColumns> columns;
+    if (m_m->Type() == MeasurementsType::Multisize)
+    {
+        const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values();
+        columns = QSharedPointer<DialogMeasurementsCSVColumns>::create(fileName, m_m->Type(), dimensions, this);
+    }
+    else
+    {
+        columns = QSharedPointer<DialogMeasurementsCSVColumns>::create(fileName, m_m->Type(), this);
+    }
+    columns->SetWithHeader(dialog.IsWithHeader());
+    columns->SetSeparator(dialog.GetSeparator());
+    columns->SetCodec(QTextCodec::codecForMib(dialog.GetSelectedMib()));
 
-            if (m_m->Type() == MeasurementsType::Individual)
-            {
-                ImportIndividualMeasurements(csv, map, dialog.IsWithHeader());
-            }
-            else
-            {
-                ImportMultisizeMeasurements(csv, map, dialog.IsWithHeader());
-            }
-        }
+    if (columns->exec() != QDialog::Accepted)
+    {
+        return;
+    }
+
+    QxtCsvModel const csv(fileName,
+                          nullptr,
+                          dialog.IsWithHeader(),
+                          dialog.GetSeparator(),
+                          QTextCodec::codecForMib(dialog.GetSelectedMib()));
+    const QVector<int> map = columns->ColumnsMap();
+
+    if (m_m->Type() == MeasurementsType::Individual)
+    {
+        ImportIndividualMeasurements(csv, map, dialog.IsWithHeader());
+    }
+    else
+    {
+        ImportMultisizeMeasurements(csv, map, dialog.IsWithHeader());
     }
 }
 
@@ -4407,7 +4410,7 @@ auto TMainWindow::CheckMName(const QString &name, const QSet<QString> &importedN
 
     if (not m_data->IsUnique(name))
     {
-        throw VException(tr("Measurement '%1' already used in the file.").arg(name));
+        throw VException(tr("Measurement '%1' already present in the file.").arg(name));
     }
 
     return name;
@@ -4451,6 +4454,8 @@ void TMainWindow::ImportIndividualMeasurements(const QxtCsvModel &csv, const QVe
 
     QVector<IndividualMeasurement> measurements;
     QSet<QString> importedNames;
+
+    measurements.reserve(rows);
 
     for (int i = 0; i < rows; ++i)
     {

@@ -138,7 +138,6 @@
     <addaction name="actionSyncMeasurements"/>
     <addaction name="separator"/>
     <addaction name="actionTable"/>
-    <addaction name="actionExportIncrementsToCSV"/>
     <addaction name="separator"/>
     <addaction name="actionFinalMeasurements"/>
     <addaction name="actionExportFinalMeasurementsToCSV"/>
@@ -1343,17 +1342,6 @@
    </property>
    <property name="shortcut">
     <string notr="true"/>
-   </property>
-   <property name="menuRole">
-    <enum>QAction::MenuRole::NoRole</enum>
-   </property>
-  </action>
-  <action name="actionExportIncrementsToCSV">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="text">
-    <string>Export increments to CSV</string>
    </property>
    <property name="menuRole">
     <enum>QAction::MenuRole::NoRole</enum>

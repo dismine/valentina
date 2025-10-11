@@ -120,7 +120,6 @@ protected:
     void customEvent(QEvent *event) override;
     void CleanLayout() override;
     void PrepareSceneList(PreviewQuatilty quality) override;
-    void ExportToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator) override;
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dragMoveEvent(QDragMoveEvent *event) override;
     void dragLeaveEvent(QDragLeaveEvent *event) override;

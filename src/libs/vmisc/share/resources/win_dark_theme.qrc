@@ -180,8 +180,8 @@
         <!-- <file>icons/Eleven-Dark/16/actions/document-edit-sign.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/document-edit.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/document-encrypted.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/16/actions/document-export.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/16/actions/document-import.svg</file> -->
+        <file>icons/Eleven-Dark/16/actions/document-export.svg</file>
+        <file>icons/Eleven-Dark/16/actions/document-import.svg</file>
         <!-- <file>icons/Eleven-Dark/16/actions/document-metadata.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/document-new-from-template.svg</file> -->
         <file>icons/Eleven-Dark/16/actions/document-new.svg</file>
@@ -2514,8 +2514,8 @@
         <!-- <file>icons/Eleven-Dark/22/actions/document-edit-sign.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22/actions/document-edit.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22/actions/document-encrypted.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/22/actions/document-export.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/22/actions/document-import.svg</file> -->
+        <file>icons/Eleven-Dark/22/actions/document-export.svg</file>
+        <file>icons/Eleven-Dark/22/actions/document-import.svg</file>
         <!-- <file>icons/Eleven-Dark/22/actions/document-new-from-template.svg</file> -->
         <file>icons/Eleven-Dark/22/actions/document-new.svg</file>
         <!-- <file>icons/Eleven-Dark/22/actions/document-open-recent.svg</file> -->
@@ -4858,8 +4858,8 @@
         <!-- <file>icons/Eleven-Dark/24/actions/document-edit-sign.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24/actions/document-edit.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24/actions/document-encrypted.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/24/actions/document-export.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/24/actions/document-import.svg</file> -->
+        <file>icons/Eleven-Dark/24/actions/document-export.svg</file>
+        <file>icons/Eleven-Dark/24/actions/document-import.svg</file>
         <!-- <file>icons/Eleven-Dark/24/actions/document-new-from-template.svg</file> -->
         <file>icons/Eleven-Dark/24/actions/document-new.svg</file>
         <!-- <file>icons/Eleven-Dark/24/actions/document-open-recent.svg</file> -->
@@ -7051,8 +7051,8 @@
         <!-- <file>icons/Eleven-Dark/32/actions/document-edit-sign.svg</file> -->
         <!-- <file>icons/Eleven-Dark/32/actions/document-edit.svg</file> -->
         <!-- <file>icons/Eleven-Dark/32/actions/document-encrypted.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/32/actions/document-export.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/32/actions/document-import.svg</file> -->
+        <file>icons/Eleven-Dark/32/actions/document-export.svg</file>
+        <file>icons/Eleven-Dark/32/actions/document-import.svg</file>
         <!-- <file>icons/Eleven-Dark/32/actions/document-new-from-template.svg</file> -->
         <file>icons/Eleven-Dark/32/actions/document-new.svg</file>
         <!-- <file>icons/Eleven-Dark/32/actions/document-open-remote.svg</file> -->
@@ -8115,8 +8115,8 @@
         <!-- <file>icons/Eleven-Dark/16@2x/actions/document-edit-sign.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/document-edit.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/document-encrypted.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/16@2x/actions/document-export.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/16@2x/actions/document-import.svg</file> -->
+        <file>icons/Eleven-Dark/16@2x/actions/document-export.svg</file>
+        <file>icons/Eleven-Dark/16@2x/actions/document-import.svg</file>
         <!-- <file>icons/Eleven-Dark/16@2x/actions/document-metadata.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/document-new-from-template.svg</file> -->
         <file>icons/Eleven-Dark/16@2x/actions/document-new.svg</file>
@@ -10449,8 +10449,8 @@
         <!-- <file>icons/Eleven-Dark/22@2x/actions/document-edit-sign.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22@2x/actions/document-edit.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22@2x/actions/document-encrypted.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/22@2x/actions/document-export.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/22@2x/actions/document-import.svg</file> -->
+        <file>icons/Eleven-Dark/22@2x/actions/document-export.svg</file>
+        <file>icons/Eleven-Dark/22@2x/actions/document-import.svg</file>
         <!-- <file>icons/Eleven-Dark/22@2x/actions/document-new-from-template.svg</file> -->
         <file>icons/Eleven-Dark/22@2x/actions/document-new.svg</file>
         <!-- <file>icons/Eleven-Dark/22@2x/actions/document-open-recent.svg</file> -->
@@ -12793,8 +12793,8 @@
         <!-- <file>icons/Eleven-Dark/24@2x/actions/document-edit-sign.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24@2x/actions/document-edit.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24@2x/actions/document-encrypted.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/24@2x/actions/document-export.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/24@2x/actions/document-import.svg</file> -->
+        <file>icons/Eleven-Dark/24@2x/actions/document-export.svg</file>
+        <file>icons/Eleven-Dark/24@2x/actions/document-import.svg</file>
         <!-- <file>icons/Eleven-Dark/24@2x/actions/document-new-from-template.svg</file> -->
         <file>icons/Eleven-Dark/24@2x/actions/document-new.svg</file>
         <!-- <file>icons/Eleven-Dark/24@2x/actions/document-open-recent.svg</file> -->
@@ -14986,8 +14986,8 @@
         <!-- <file>icons/Eleven-Dark/32@2x/actions/document-edit-sign.svg</file> -->
         <!-- <file>icons/Eleven-Dark/32@2x/actions/document-edit.svg</file> -->
         <!-- <file>icons/Eleven-Dark/32@2x/actions/document-encrypted.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/32@2x/actions/document-export.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/32@2x/actions/document-import.svg</file> -->
+        <file>icons/Eleven-Dark/32@2x/actions/document-export.svg</file>
+        <file>icons/Eleven-Dark/32@2x/actions/document-import.svg</file>
         <!-- <file>icons/Eleven-Dark/32@2x/actions/document-new-from-template.svg</file> -->
         <file>icons/Eleven-Dark/32@2x/actions/document-new.svg</file>
         <!-- <file>icons/Eleven-Dark/32@2x/actions/document-open-remote.svg</file> -->

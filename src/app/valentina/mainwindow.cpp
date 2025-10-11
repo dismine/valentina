@@ -1940,64 +1940,6 @@ void MainWindow::PrepareSceneList(PreviewQuatilty quality)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator)
-{
-    QxtCsvModel csv;
-
-    csv.insertSingleColumn(0);
-    csv.insertSingleColumn(1);
-    csv.insertSingleColumn(2);
-
-    if (withHeader)
-    {
-        csv.setHeaderText(0, tr("Name"));
-        csv.setHeaderText(1, tr("The calculated value"));
-        csv.setHeaderText(2, tr("Formula"));
-    }
-
-    const QMap<QString, QSharedPointer<VIncrement>> increments = pattern->DataIncrements();
-
-    qint32 currentRow = -1;
-
-    auto SavePreviewCalculation = [&currentRow, &csv, increments](bool save)
-    {
-        QMap<quint32, QString> map;
-        // Sorting QHash by id
-        for (auto i = increments.constBegin(); i != increments.constEnd(); ++i)
-        {
-            const QSharedPointer<VIncrement> &incr = i.value();
-            if (incr->IsPreviewCalculation() == save)
-            {
-                map.insert(incr->GetIndex(), i.key());
-            }
-        }
-
-        QMapIterator iMap(map);
-        while (iMap.hasNext())
-        {
-            iMap.next();
-            QSharedPointer<VIncrement> const incr = increments.value(iMap.value());
-            currentRow++;
-
-            csv.insertSingleRow(currentRow);
-            csv.setText(currentRow, 0, incr->GetName()); // name
-            csv.setText(currentRow, 1,
-                        VAbstractApplication::VApp()->LocaleToString(*incr->GetValue())); // calculated value
-
-            QString const formula = VTranslateVars::TryFormulaToUser(
-                incr->GetFormula(), VAbstractApplication::VApp()->Settings()->GetOsSeparator());
-            csv.setText(currentRow, 2, formula); // formula
-        }
-    };
-
-    SavePreviewCalculation(false);
-    SavePreviewCalculation(true);
-
-    QString error;
-    csv.toCSV(fileName, error, withHeader, separator, QTextCodec::codecForMib(mib));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::dragEnterEvent(QDragEnterEvent* event)
 {
     if (const QMimeData *mime = event->mimeData(); mime != nullptr && mime->hasText())
@@ -4508,7 +4450,6 @@ void MainWindow::Clear()
     ui->actionHistory->setEnabled(false);
     ui->actionExportRecipe->setEnabled(false);
     ui->actionTable->setEnabled(false);
-    ui->actionExportIncrementsToCSV->setEnabled(false);
     ui->actionExportFinalMeasurementsToCSV->setEnabled(false);
     ui->actionFinalMeasurements->setEnabled(false);
     ui->actionLast_tool->setEnabled(false);
@@ -4757,7 +4698,6 @@ void MainWindow::SetEnableWidgets(bool enable)
     ui->actionDetails->setEnabled(enable);
     ui->actionLayout->setEnabled(enable);
     ui->actionTable->setEnabled(enableOnDesignStage);
-    ui->actionExportIncrementsToCSV->setEnabled(enable);
     ui->actionExportFinalMeasurementsToCSV->setEnabled(enable);
     ui->actionFinalMeasurements->setEnabled(enable);
     ui->actionZoomFitBest->setEnabled(enable);
@@ -6157,7 +6097,6 @@ void MainWindow::CreateActions()
     connect(ui->actionHistory, &QAction::triggered, this, &MainWindow::ActionHistory_triggered);
     connect(ui->actionExportRecipe, &QAction::triggered, this, &MainWindow::ActionExportRecipe_triggered);
     connect(ui->actionNewDraw, &QAction::triggered, this, &MainWindow::ActionNewDraw_triggered);
-    connect(ui->actionExportIncrementsToCSV, &QAction::triggered, this, &MainWindow::ExportDataToCSV);
     connect(ui->actionExportFinalMeasurementsToCSV, &QAction::triggered, this, &MainWindow::ExportFMeasurementsToCSV);
     connect(ui->actionTable, &QAction::triggered, this, &MainWindow::ActionTable_triggered);
     connect(ui->actionFinalMeasurements, &QAction::triggered, this, &MainWindow::ActionFinalMeasurements_triggered);

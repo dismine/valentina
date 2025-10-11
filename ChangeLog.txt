@@ -3,6 +3,7 @@
 - New feature. True zero seam allowance width.
 - UI. Simplified measurement loading workflow.
 - Valentina app. New option "curveApproximationScale" to override the global curve approximation scale setting from the application preferences.
+- Added import/export increments from Table of variables.
 
 # Valentina 1.0.1 (unreleased)
 - Tool Normal. Fixed formula values were not saved.

@@ -2,6 +2,8 @@
     <qresource prefix="/">
         <file>icons/Eleven-Light/16/actions/application-exit.svg</file>
         <file>icons/Eleven-Light/16/actions/dialog-warning.svg</file>
+        <file>icons/Eleven-Light/16/actions/document-export.svg</file>
+        <file>icons/Eleven-Light/16/actions/document-import.svg</file>
         <file>icons/Eleven-Light/16/actions/document-new.svg</file>
         <file>icons/Eleven-Light/16/actions/document-open.svg</file>
         <file>icons/Eleven-Light/16/actions/document-print.svg</file>
@@ -45,6 +47,8 @@
         <file>icons/Eleven-Light/16/emblems/emblem-system.svg</file>
         <file>icons/Eleven-Light/16/status/dialog-warning.svg</file>
         <file>icons/Eleven-Light/22/actions/application-exit.svg</file>
+        <file>icons/Eleven-Light/22/actions/document-export.svg</file>
+        <file>icons/Eleven-Light/22/actions/document-import.svg</file>
         <file>icons/Eleven-Light/22/actions/document-new.svg</file>
         <file>icons/Eleven-Light/22/actions/document-open.svg</file>
         <file>icons/Eleven-Light/22/actions/document-print.svg</file>
@@ -84,6 +88,8 @@
         <file>icons/Eleven-Light/22/emblems/emblem-system.svg</file>
         <file>icons/Eleven-Light/22/status/dialog-warning.svg</file>
         <file>icons/Eleven-Light/24/actions/application-exit.svg</file>
+        <file>icons/Eleven-Light/24/actions/document-export.svg</file>
+        <file>icons/Eleven-Light/24/actions/document-import.svg</file>
         <file>icons/Eleven-Light/24/actions/document-new.svg</file>
         <file>icons/Eleven-Light/24/actions/document-open.svg</file>
         <file>icons/Eleven-Light/24/actions/document-print.svg</file>
@@ -125,6 +131,8 @@
         <file>icons/Eleven-Light/index.theme</file>
         <file>icons/Eleven-Light/16@2x/actions/application-exit.svg</file>
         <file>icons/Eleven-Light/16@2x/actions/dialog-warning.svg</file>
+        <file>icons/Eleven-Light/16@2x/actions/document-export.svg</file>
+        <file>icons/Eleven-Light/16@2x/actions/document-import.svg</file>
         <file>icons/Eleven-Light/16@2x/actions/document-new.svg</file>
         <file>icons/Eleven-Light/16@2x/actions/document-open.svg</file>
         <file>icons/Eleven-Light/16@2x/actions/document-print.svg</file>
@@ -168,6 +176,8 @@
         <file>icons/Eleven-Light/16@2x/emblems/emblem-system.svg</file>
         <file>icons/Eleven-Light/16@2x/status/dialog-warning.svg</file>
         <file>icons/Eleven-Light/22@2x/actions/application-exit.svg</file>
+        <file>icons/Eleven-Light/22@2x/actions/document-export.svg</file>
+        <file>icons/Eleven-Light/22@2x/actions/document-import.svg</file>
         <file>icons/Eleven-Light/22@2x/actions/document-new.svg</file>
         <file>icons/Eleven-Light/22@2x/actions/document-open.svg</file>
         <file>icons/Eleven-Light/22@2x/actions/document-print.svg</file>
@@ -207,6 +217,8 @@
         <file>icons/Eleven-Light/22@2x/emblems/emblem-system.svg</file>
         <file>icons/Eleven-Light/22@2x/status/dialog-warning.svg</file>
         <file>icons/Eleven-Light/24@2x/actions/application-exit.svg</file>
+        <file>icons/Eleven-Light/24@2x/actions/document-export.svg</file>
+        <file>icons/Eleven-Light/24@2x/actions/document-import.svg</file>
         <file>icons/Eleven-Light/24@2x/actions/document-new.svg</file>
         <file>icons/Eleven-Light/24@2x/actions/document-open.svg</file>
         <file>icons/Eleven-Light/24@2x/actions/document-print.svg</file>
@@ -246,6 +258,8 @@
         <file>icons/Eleven-Light/24@2x/emblems/emblem-system.svg</file>
         <file>icons/Eleven-Light/24@2x/status/dialog-warning.svg</file>
         <file>icons/Eleven-Light/32/actions/application-exit.svg</file>
+        <file>icons/Eleven-Light/32/actions/document-export.svg</file>
+        <file>icons/Eleven-Light/32/actions/document-import.svg</file>
         <file>icons/Eleven-Light/32/actions/document-new.svg</file>
         <file>icons/Eleven-Light/32/actions/document-open.svg</file>
         <file>icons/Eleven-Light/32/actions/document-print.svg</file>
@@ -268,6 +282,8 @@
         <file>icons/Eleven-Light/32/actions/gtk-ok.svg</file>
         <file>icons/Eleven-Light/32/status/dialog-warning.svg</file>
         <file>icons/Eleven-Light/32@2x/actions/application-exit.svg</file>
+        <file>icons/Eleven-Light/32@2x/actions/document-export.svg</file>
+        <file>icons/Eleven-Light/32@2x/actions/document-import.svg</file>
         <file>icons/Eleven-Light/32@2x/actions/document-new.svg</file>
         <file>icons/Eleven-Light/32@2x/actions/document-open.svg</file>
         <file>icons/Eleven-Light/32@2x/actions/document-print.svg</file>

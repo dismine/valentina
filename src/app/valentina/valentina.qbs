@@ -120,6 +120,9 @@ VToolApp {
         prefix: "dialogs/"
         files: [
             "dialogaddbackgroundimage.h",
+            "dialogincrementscsvcolumns.cpp",
+            "dialogincrementscsvcolumns.h",
+            "dialogincrementscsvcolumns.ui",
             "dialogs.h",
             "dialogincrements.h",
             "dialoghistory.h",
@@ -139,7 +142,6 @@ VToolApp {
             "dialogdatetimeformats.h",
             "dialogknownmaterials.h",
             "dialogfinalmeasurements.h",
-
             "dialogaddbackgroundimage.cpp",
             "dialogincrements.cpp",
             "dialoghistory.cpp",
@@ -159,7 +161,6 @@ VToolApp {
             "dialogdatetimeformats.cpp",
             "dialogknownmaterials.cpp",
             "dialogfinalmeasurements.cpp",
-
             "dialogaddbackgroundimage.ui",
             "dialogincrements.ui",
             "dialoghistory.ui",
@@ -178,7 +179,7 @@ VToolApp {
             "configpages/preferencespathpage.ui",
             "dialogdatetimeformats.ui",
             "dialogknownmaterials.ui",
-            "dialogfinalmeasurements.ui"
+            "dialogfinalmeasurements.ui",
         ]
     }
 

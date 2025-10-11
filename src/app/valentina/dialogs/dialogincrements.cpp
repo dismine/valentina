@@ -29,6 +29,8 @@
 #include "dialogincrements.h"
 #include "../qmuparser/qmudef.h"
 #include "../qmuparser/qmutokenparser.h"
+#include "../vmisc/dialogs/dialogexporttocsv.h"
+#include "../vmisc/qxtcsvmodel.h"
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vvalentinasettings.h"
 #include "../vpatterndb/calculator.h"
@@ -41,6 +43,7 @@
 #include "../vpatterndb/variables/vlinelength.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"
+#include "dialogincrementscsvcolumns.h"
 #include "ui_dialogincrements.h"
 
 #include <QCloseEvent>
@@ -57,6 +60,17 @@
 #include "../vmisc/compatibility.h"
 #endif
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#ifdef WITH_TEXTCODEC
+#include "../vmisc/codecs/qtextcodec.h"
+#else
+#include "../vmisc/vtextcodec.h"
+using QTextCodec = VTextCodec;
+#endif // WITH_TEXTCODEC
+#else
+#include <QTextCodec>
+#endif // QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+
 using namespace Qt::Literals::StringLiterals;
 
 constexpr int DIALOG_MAX_FORMULA_HEIGHT = 64;
@@ -68,6 +82,29 @@ enum class IncrUnits : qint8
     Pattern,
     Degrees
 };
+
+struct IncrementData
+{
+    IncrementData() = default;
+
+    QString name{};           // NOLINT(misc-non-private-member-variables-in-classes)
+    QString value{'0'};       // NOLINT(misc-non-private-member-variables-in-classes)
+    QString description{};    // NOLINT(misc-non-private-member-variables-in-classes)
+    bool specialUnits{false}; // NOLINT(misc-non-private-member-variables-in-classes)
+};
+
+//---------------------------------------------------------------------------------------------------------------------
+void SetIncrementDescription(int i, const QxtCsvModel &csv, const QVector<int> &map, IncrementData &measurement)
+{
+    if (csv.columnCount() > 2)
+    {
+        if (const int descriptionColumn = map.at(static_cast<int>(IncrementsColumns::Description));
+            descriptionColumn >= 0)
+        {
+            measurement.description = csv.text(i, descriptionColumn).simplified();
+        }
+    }
+}
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -93,6 +130,12 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
 #endif
 
     InitIcons();
+
+    ui->toolButtonImportIncrementsCSV->setIcon(FromTheme(VThemeIcon::DocumentImport));
+    ui->toolButtonExportIncrementsCSV->setIcon(FromTheme(VThemeIcon::DocumentExport));
+
+    ui->toolButtonImportIncrementsCSVPC->setIcon(FromTheme(VThemeIcon::DocumentImport));
+    ui->toolButtonExportIncrementsCSVPC->setIcon(FromTheme(VThemeIcon::DocumentExport));
 
     ui->lineEditName->setClearButtonEnabled(true);
     ui->lineEditNamePC->setClearButtonEnabled(true);
@@ -177,6 +220,10 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     connect(ui->plainTextEditFormulaPC, &QPlainTextEdit::textChanged, this, &DialogIncrements::SaveIncrFormula);
     connect(ui->pushButtonRefresh, &QPushButton::clicked, this, &DialogIncrements::RefreshPattern);
     connect(ui->pushButtonRefreshPC, &QPushButton::clicked, this, &DialogIncrements::RefreshPattern);
+    connect(ui->toolButtonImportIncrementsCSV, &QToolButton::clicked, this, &DialogIncrements::ImportIncrements);
+    connect(ui->toolButtonImportIncrementsCSVPC, &QToolButton::clicked, this, &DialogIncrements::ImportIncrements);
+    connect(ui->toolButtonExportIncrementsCSV, &QToolButton::clicked, this, &DialogIncrements::ExportIncrements);
+    connect(ui->toolButtonExportIncrementsCSVPC, &QToolButton::clicked, this, &DialogIncrements::ExportIncrements);
 
     InitSearch();
 
@@ -881,7 +928,7 @@ void DialogIncrements::AddNewIncrement(IncrementType type)
     LocalUpdateTree();
 
     table->selectRow(currentRow);
-    table->repaint(); // Force repain to fix paint artifacts on Mac OS X
+    table->repaint(); // Force repain to fix paint artifacts on Mac OS
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1333,6 +1380,221 @@ void DialogIncrements::InitIcons()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto DialogIncrements::CheckIncrementName(const QString &name, const QSet<QString> &importedNames) const -> QString
+{
+    if (name.isEmpty())
+    {
+        throw VException(tr("Increment name is empty."));
+    }
+
+    if (importedNames.contains(name))
+    {
+        throw VException(tr("Imported file must not contain the same name twice."));
+    }
+
+    if (QRegularExpression const rx(NameRegExp()); not rx.match(name).hasMatch())
+    {
+        throw VException(tr("Increment '%1' doesn't match regex pattern.").arg(name));
+    }
+
+    if (not m_data->IsUnique(name))
+    {
+        throw VException(tr("Increment '%1' already present in the file.").arg(name));
+    }
+
+    return name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::ShowError(const QString &text)
+{
+    QMessageBox messageBox(this);
+    messageBox.setIcon(QMessageBox::Critical);
+    messageBox.setText(text);
+    messageBox.setStandardButtons(QMessageBox::Ok);
+    messageBox.setDefaultButton(QMessageBox::Ok);
+    messageBox.exec();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogIncrements::IncrementsCSVColumnHeader(int column) const -> QString
+{
+    switch (column)
+    {
+        case 0: // name
+            return tr("Name", "increment column");
+        case 1: // calculated value
+            return tr("Calculated value", "increment column");
+        case 2: // formula
+            return tr("Formula", "increment column");
+        case 3: // description
+            return tr("Description", "increment column");
+        default:
+            return {};
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::ImportCSVIncrements(bool incrementMode,
+                                           const QxtCsvModel &csv,
+                                           const QVector<int> &map,
+                                           bool withHeader)
+{
+    const int columns = csv.columnCount();
+    const int rows = csv.rowCount();
+
+    if (columns < 2)
+    {
+        ShowError(tr("Increments require at least 2 columns."));
+        return;
+    }
+
+    QVector<IncrementData> increments;
+    QSet<QString> importedNames;
+
+    increments.reserve(rows);
+
+    for (int i = 0; i < rows; ++i)
+    {
+        try
+        {
+            const int nameColumn = map.at(static_cast<int>(IncrementsColumns::Name));
+            QString name = csv.text(i, nameColumn).simplified();
+            if (name.isEmpty())
+            {
+                ShowError(tr("Error in row %1. The increment name is empty.").arg(i));
+                continue;
+            }
+
+            if (!name.startsWith(CustomIncrSign))
+            {
+                name.prepend(CustomIncrSign);
+            }
+
+            IncrementData increment;
+            const QString iName = CheckIncrementName(name, importedNames);
+            importedNames.insert(iName);
+            increment.name = iName;
+
+            const int valueColumn = map.at(static_cast<int>(IncrementsColumns::Value));
+            QString rawValue = csv.text(i, valueColumn);
+
+            if (rawValue.endsWith(degreeSymbol))
+            {
+                increment.specialUnits = true;
+                RemoveLast(rawValue);
+            }
+
+            increment.value
+                = VTranslateVars::TryFormulaFromUser(rawValue,
+                                                     VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+
+            SetIncrementDescription(i, csv, map, increment);
+
+            increments.append(increment);
+        }
+        catch (VException &e)
+        {
+            int rowIndex = i + 1;
+            if (withHeader)
+            {
+                ++rowIndex;
+            }
+            ShowError(tr("Error in row %1. %2").arg(rowIndex).arg(e.ErrorMessage()));
+            return;
+        }
+    }
+
+    QTableWidget *table = incrementMode ? ui->tableWidgetIncrement : ui->tableWidgetPC;
+    qint32 const currentRow = table->rowCount();
+
+    for (const auto &icr : qAsConst(increments))
+    {
+        incrementMode ? m_patternDoc->AddEmptyIncrement(icr.name, IncrementType::Increment)
+                      : m_patternDoc->AddEmptyPreviewCalculation(icr.name, IncrementType::Increment);
+
+        m_patternDoc->SetIncrementFormula(icr.name, icr.value);
+
+        if (icr.specialUnits)
+        {
+            m_patternDoc->SetIncrementSpecialUnits(icr.name, icr.specialUnits);
+        }
+
+        if (not icr.description.isEmpty())
+        {
+            m_patternDoc->SetIncrementDescription(icr.name, icr.description);
+        }
+    }
+
+    m_hasChanges = true;
+    LocalUpdateTree();
+
+    table->selectRow(currentRow);
+    table->repaint(); // Force repain to fix paint artifacts on Mac OS
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::ExportCSVIncrements(
+    bool incrementMode, const QString &fileName, bool withHeader, int mib, const QChar &separator)
+{
+    QxtCsvModel csv;
+    int const columns = 4;
+
+    for (int column = 0; column < columns; ++column)
+    {
+        csv.insertSingleColumn(column);
+    }
+
+    if (withHeader)
+    {
+        for (int column = 0; column < columns; ++column)
+        {
+            csv.setHeaderText(column, IncrementsCSVColumnHeader(column));
+        }
+    }
+
+    QMap<QString, QSharedPointer<VIncrement>> const increments = m_data->DataIncrements();
+    QMap<quint32, QString> map;
+    // Sorting QHash by id
+    for (auto i = increments.constBegin(); i != increments.constEnd(); ++i)
+    {
+        if (const QSharedPointer<VIncrement> &incr = i.value(); incrementMode != incr->IsPreviewCalculation())
+        {
+            map.insert(incr->GetIndex(), i.key());
+        }
+    }
+
+    int row = 0;
+    for (auto iMap = map.constBegin(); iMap != map.constEnd(); ++iMap)
+    {
+        const QSharedPointer<VIncrement> &incr = increments.value(iMap.value());
+
+        csv.insertSingleRow(row);
+
+        csv.setText(row, 0, incr->GetName());
+
+        QString calculatedValue = locale().toString(*incr->GetValue());
+        if (incr->IsSpecialUnits())
+        {
+            calculatedValue = calculatedValue + degreeSymbol;
+        }
+        csv.setText(row, 1, calculatedValue);
+
+        QString const formula
+            = VTranslateVars::TryFormulaToUser(incr->GetFormula(),
+                                               VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+        csv.setText(row, 2, formula);
+
+        csv.setText(row, 3, incr->GetDescription());
+
+        ++row;
+    }
+
+    QString error;
+    csv.toCSV(fileName, error, withHeader, separator, QTextCodec::codecForMib(mib));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief FullUpdateFromFile update information in tables form file
  */
@@ -1404,6 +1666,121 @@ void DialogIncrements::UpdateShortcuts()
         manager->UpdateButtonShortcut(m_shortcuts);
         UpdateSearchControlsTooltips();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::ImportIncrements()
+{
+    const QString filters = tr("Comma-Separated Values") + QStringLiteral(" (*.csv)");
+    const auto suffix = QStringLiteral("csv");
+
+    QString fileName = QFileDialog::getOpenFileName(this,
+                                                    tr("Import from CSV"),
+                                                    QDir::homePath(),
+                                                    filters,
+                                                    nullptr,
+                                                    VAbstractApplication::VApp()->NativeFileDialog());
+
+    if (fileName.isEmpty())
+    {
+        return;
+    }
+
+    if (QFileInfo const f(fileName); f.suffix().isEmpty() && f.suffix() != suffix)
+    {
+        fileName += '.'_L1 + suffix;
+    }
+
+    DialogExportToCSV dialog(this);
+    dialog.SetWithHeader(VAbstractApplication::VApp()->Settings()->GetCSVWithHeader());
+    dialog.SetSelectedMib(VAbstractApplication::VApp()->Settings()->GetCSVCodec());
+    dialog.SetSeparator(VAbstractApplication::VApp()->Settings()->GetCSVSeparator());
+    dialog.ShowFilePreview(fileName);
+
+    if (dialog.exec() != QDialog::Accepted)
+    {
+        return;
+    }
+
+    VAbstractApplication::VApp()->Settings()->SetCSVSeparator(dialog.GetSeparator());
+    VAbstractApplication::VApp()->Settings()->SetCSVCodec(dialog.GetSelectedMib());
+    VAbstractApplication::VApp()->Settings()->SetCSVWithHeader(dialog.IsWithHeader());
+
+    DialogIncrementsCSVColumns columns(fileName, this);
+    columns.SetWithHeader(dialog.IsWithHeader());
+    columns.SetSeparator(dialog.GetSeparator());
+    columns.SetCodec(QTextCodec::codecForMib(dialog.GetSelectedMib()));
+
+    if (columns.exec() != QDialog::Accepted)
+    {
+        return;
+    }
+
+    QxtCsvModel const csv(fileName,
+                          nullptr,
+                          dialog.IsWithHeader(),
+                          dialog.GetSeparator(),
+                          QTextCodec::codecForMib(dialog.GetSelectedMib()));
+    const QVector<int> map = columns.ColumnsMap();
+
+    if (auto *button = qobject_cast<QToolButton *>(sender()); button == ui->toolButtonImportIncrementsCSV)
+    {
+        ImportCSVIncrements(true, csv, map, dialog.IsWithHeader());
+    }
+    else if (button == ui->toolButtonImportIncrementsCSVPC)
+    {
+        ImportCSVIncrements(false, csv, map, dialog.IsWithHeader());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::ExportIncrements()
+{
+    const QString filters = tr("Comma-Separated Values") + " (*.csv)"_L1;
+    const QString suffix("csv"_L1);
+    const QString path = QDir::homePath() + '/'_L1 + tr("values") + '.'_L1 + suffix;
+
+    QString fileName = QFileDialog::getSaveFileName(this,
+                                                    tr("Export to CSV"),
+                                                    path,
+                                                    filters,
+                                                    nullptr,
+                                                    VAbstractApplication::VApp()->NativeFileDialog());
+
+    if (fileName.isEmpty())
+    {
+        return;
+    }
+
+    if (QFileInfo const f(fileName); f.suffix().isEmpty() && f.suffix() != suffix)
+    {
+        fileName += '.'_L1 + suffix;
+    }
+
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+
+    DialogExportToCSV dialog(this);
+    dialog.SetWithHeader(settings->GetCSVWithHeader());
+    dialog.SetSelectedMib(settings->GetCSVCodec());
+    dialog.SetSeparator(settings->GetCSVSeparator());
+
+    if (dialog.exec() != QDialog::Accepted)
+    {
+        return;
+    }
+
+    if (auto *button = qobject_cast<QToolButton *>(sender()); button == ui->toolButtonExportIncrementsCSV)
+    {
+        ExportCSVIncrements(true, fileName, dialog.IsWithHeader(), dialog.GetSelectedMib(), dialog.GetSeparator());
+    }
+    else if (button == ui->toolButtonExportIncrementsCSVPC)
+    {
+        ExportCSVIncrements(false, fileName, dialog.IsWithHeader(), dialog.GetSelectedMib(), dialog.GetSeparator());
+    }
+
+    settings->SetCSVSeparator(dialog.GetSeparator());
+    settings->SetCSVCodec(dialog.GetSelectedMib());
+    settings->SetCSVWithHeader(dialog.IsWithHeader());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -36,7 +36,7 @@
       </sizepolicy>
      </property>
      <property name="tabPosition">
-      <enum>QTabWidget::North</enum>
+      <enum>QTabWidget::TabPosition::North</enum>
      </property>
      <property name="currentIndex">
       <number>0</number>
@@ -89,7 +89,7 @@
          <item>
           <widget class="Line" name="line_3">
            <property name="orientation">
-            <enum>Qt::Vertical</enum>
+            <enum>Qt::Orientation::Vertical</enum>
            </property>
           </widget>
          </item>
@@ -103,7 +103,7 @@
          <item>
           <widget class="Line" name="line_2">
            <property name="orientation">
-            <enum>Qt::Vertical</enum>
+            <enum>Qt::Orientation::Vertical</enum>
            </property>
           </widget>
          </item>
@@ -235,7 +235,7 @@
          <item>
           <widget class="Line" name="line">
            <property name="orientation">
-            <enum>Qt::Vertical</enum>
+            <enum>Qt::Orientation::Vertical</enum>
            </property>
           </widget>
          </item>
@@ -285,7 +285,7 @@
        <item>
         <widget class="QSplitter" name="splitter">
          <property name="orientation">
-          <enum>Qt::Vertical</enum>
+          <enum>Qt::Orientation::Vertical</enum>
          </property>
          <widget class="QTableWidget" name="tableWidgetIncrement">
           <property name="sizePolicy">
@@ -304,10 +304,10 @@
            <bool>true</bool>
           </property>
           <property name="selectionMode">
-           <enum>QAbstractItemView::SingleSelection</enum>
+           <enum>QAbstractItemView::SelectionMode::SingleSelection</enum>
           </property>
           <property name="selectionBehavior">
-           <enum>QAbstractItemView::SelectRows</enum>
+           <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
           </property>
           <property name="sortingEnabled">
            <bool>false</bool>
@@ -376,11 +376,11 @@
           </property>
           <layout class="QFormLayout" name="formLayout">
            <property name="fieldGrowthPolicy">
-            <enum>QFormLayout::ExpandingFieldsGrow</enum>
+            <enum>QFormLayout::FieldGrowthPolicy::ExpandingFieldsGrow</enum>
            </property>
            <item row="0" column="0">
             <layout class="QHBoxLayout" name="horizontalLayout">
-             <item alignment="Qt::AlignLeft">
+             <item alignment="Qt::AlignmentFlag::AlignLeft">
               <widget class="QToolButton" name="toolButtonUp">
                <property name="enabled">
                 <bool>false</bool>
@@ -397,7 +397,7 @@
                </property>
               </widget>
              </item>
-             <item alignment="Qt::AlignLeft">
+             <item alignment="Qt::AlignmentFlag::AlignLeft">
               <widget class="QToolButton" name="toolButtonDown">
                <property name="enabled">
                 <bool>false</bool>
@@ -417,7 +417,7 @@
              <item>
               <spacer name="horizontalSpacer_2">
                <property name="orientation">
-                <enum>Qt::Horizontal</enum>
+                <enum>Qt::Orientation::Horizontal</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -437,7 +437,7 @@
              <item>
               <spacer name="horizontalSpacer">
                <property name="orientation">
-                <enum>Qt::Horizontal</enum>
+                <enum>Qt::Orientation::Horizontal</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -447,7 +447,46 @@
                </property>
               </spacer>
              </item>
-             <item alignment="Qt::AlignRight">
+             <item>
+              <widget class="QToolButton" name="toolButtonExportIncrementsCSV">
+               <property name="maximumSize">
+                <size>
+                 <width>24</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="toolTip">
+                <string>Export to CSV</string>
+               </property>
+               <property name="text">
+                <string notr="true">...</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QToolButton" name="toolButtonImportIncrementsCSV">
+               <property name="maximumSize">
+                <size>
+                 <width>24</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="toolTip">
+                <string>Import from CSV</string>
+               </property>
+               <property name="text">
+                <string notr="true">...</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="Line" name="line_7">
+               <property name="orientation">
+                <enum>Qt::Orientation::Vertical</enum>
+               </property>
+              </widget>
+             </item>
+             <item alignment="Qt::AlignmentFlag::AlignRight">
               <widget class="QToolButton" name="toolButtonAdd">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -462,11 +501,11 @@
                 <iconset theme="list-add"/>
                </property>
                <property name="popupMode">
-                <enum>QToolButton::MenuButtonPopup</enum>
+                <enum>QToolButton::ToolButtonPopupMode::MenuButtonPopup</enum>
                </property>
               </widget>
              </item>
-             <item alignment="Qt::AlignLeft">
+             <item alignment="Qt::AlignmentFlag::AlignLeft">
               <widget class="QToolButton" name="toolButtonRemove">
                <property name="enabled">
                 <bool>false</bool>
@@ -571,7 +610,7 @@
                 </size>
                </property>
                <property name="focusPolicy">
-                <enum>Qt::StrongFocus</enum>
+                <enum>Qt::FocusPolicy::StrongFocus</enum>
                </property>
                <property name="toolTip">
                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -666,7 +705,7 @@
              <item>
               <spacer name="horizontalSpacer_3">
                <property name="orientation">
-                <enum>Qt::Horizontal</enum>
+                <enum>Qt::Orientation::Horizontal</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -679,7 +718,7 @@
              <item>
               <widget class="QDialogButtonBox" name="buttonBox">
                <property name="standardButtons">
-                <set>QDialogButtonBox::Close</set>
+                <set>QDialogButtonBox::StandardButton::Close</set>
                </property>
               </widget>
              </item>
@@ -690,8 +729,17 @@
              <property name="enabled">
               <bool>false</bool>
              </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="editable">
               <bool>false</bool>
+             </property>
+             <property name="sizeAdjustPolicy">
+              <enum>QComboBox::SizeAdjustPolicy::AdjustToContents</enum>
              </property>
             </widget>
            </item>
@@ -749,7 +797,7 @@
          <item>
           <widget class="Line" name="line_4">
            <property name="orientation">
-            <enum>Qt::Vertical</enum>
+            <enum>Qt::Orientation::Vertical</enum>
            </property>
           </widget>
          </item>
@@ -763,7 +811,7 @@
          <item>
           <widget class="Line" name="line_5">
            <property name="orientation">
-            <enum>Qt::Vertical</enum>
+            <enum>Qt::Orientation::Vertical</enum>
            </property>
           </widget>
          </item>
@@ -895,7 +943,7 @@
          <item>
           <widget class="Line" name="line_6">
            <property name="orientation">
-            <enum>Qt::Vertical</enum>
+            <enum>Qt::Orientation::Vertical</enum>
            </property>
           </widget>
          </item>
@@ -945,7 +993,7 @@
        <item>
         <widget class="QSplitter" name="splitter_2">
          <property name="orientation">
-          <enum>Qt::Vertical</enum>
+          <enum>Qt::Orientation::Vertical</enum>
          </property>
          <widget class="QTableWidget" name="tableWidgetPC">
           <property name="sizePolicy">
@@ -964,10 +1012,10 @@
            <bool>true</bool>
           </property>
           <property name="selectionMode">
-           <enum>QAbstractItemView::SingleSelection</enum>
+           <enum>QAbstractItemView::SelectionMode::SingleSelection</enum>
           </property>
           <property name="selectionBehavior">
-           <enum>QAbstractItemView::SelectRows</enum>
+           <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
           </property>
           <property name="sortingEnabled">
            <bool>false</bool>
@@ -1036,11 +1084,11 @@
           </property>
           <layout class="QFormLayout" name="formLayout_2">
            <property name="fieldGrowthPolicy">
-            <enum>QFormLayout::ExpandingFieldsGrow</enum>
+            <enum>QFormLayout::FieldGrowthPolicy::ExpandingFieldsGrow</enum>
            </property>
            <item row="0" column="0">
             <layout class="QHBoxLayout" name="horizontalLayout_2">
-             <item alignment="Qt::AlignLeft">
+             <item alignment="Qt::AlignmentFlag::AlignLeft">
               <widget class="QToolButton" name="toolButtonUpPC">
                <property name="enabled">
                 <bool>false</bool>
@@ -1057,7 +1105,7 @@
                </property>
               </widget>
              </item>
-             <item alignment="Qt::AlignLeft">
+             <item alignment="Qt::AlignmentFlag::AlignLeft">
               <widget class="QToolButton" name="toolButtonDownPC">
                <property name="enabled">
                 <bool>false</bool>
@@ -1077,7 +1125,7 @@
              <item>
               <spacer name="horizontalSpacer_4">
                <property name="orientation">
-                <enum>Qt::Horizontal</enum>
+                <enum>Qt::Orientation::Horizontal</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -1097,7 +1145,7 @@
              <item>
               <spacer name="horizontalSpacer_5">
                <property name="orientation">
-                <enum>Qt::Horizontal</enum>
+                <enum>Qt::Orientation::Horizontal</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -1107,7 +1155,40 @@
                </property>
               </spacer>
              </item>
-             <item alignment="Qt::AlignRight">
+             <item>
+              <widget class="QToolButton" name="toolButtonExportIncrementsCSVPC">
+               <property name="maximumSize">
+                <size>
+                 <width>24</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="toolTip">
+                <string>Export to CSV</string>
+               </property>
+               <property name="text">
+                <string>...</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QToolButton" name="toolButtonImportIncrementsCSVPC">
+               <property name="toolTip">
+                <string>Import from CSV</string>
+               </property>
+               <property name="text">
+                <string>...</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="Line" name="line_8">
+               <property name="orientation">
+                <enum>Qt::Orientation::Vertical</enum>
+               </property>
+              </widget>
+             </item>
+             <item alignment="Qt::AlignmentFlag::AlignRight">
               <widget class="QToolButton" name="toolButtonAddPC">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -1122,11 +1203,11 @@
                 <iconset theme="list-add"/>
                </property>
                <property name="popupMode">
-                <enum>QToolButton::MenuButtonPopup</enum>
+                <enum>QToolButton::ToolButtonPopupMode::MenuButtonPopup</enum>
                </property>
               </widget>
              </item>
-             <item alignment="Qt::AlignLeft">
+             <item alignment="Qt::AlignmentFlag::AlignLeft">
               <widget class="QToolButton" name="toolButtonRemovePC">
                <property name="enabled">
                 <bool>false</bool>
@@ -1224,7 +1305,7 @@
                 </size>
                </property>
                <property name="focusPolicy">
-                <enum>Qt::StrongFocus</enum>
+                <enum>Qt::FocusPolicy::StrongFocus</enum>
                </property>
                <property name="toolTip">
                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -1306,7 +1387,7 @@
              <item>
               <spacer name="horizontalSpacer_6">
                <property name="orientation">
-                <enum>Qt::Horizontal</enum>
+                <enum>Qt::Orientation::Horizontal</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -1359,7 +1440,7 @@
        <item row="0" column="0">
         <widget class="QTableWidget" name="tableWidgetLines">
          <property name="editTriggers">
-          <set>QAbstractItemView::NoEditTriggers</set>
+          <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
          </property>
          <property name="alternatingRowColors">
           <bool>true</bool>
@@ -1401,7 +1482,7 @@
        <item row="0" column="0">
         <widget class="QTableWidget" name="tableWidgetLinesAngles">
          <property name="editTriggers">
-          <set>QAbstractItemView::NoEditTriggers</set>
+          <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
          </property>
          <property name="alternatingRowColors">
           <bool>true</bool>
@@ -1443,7 +1524,7 @@
        <item row="0" column="0">
         <widget class="QTableWidget" name="tableWidgetSplines">
          <property name="editTriggers">
-          <set>QAbstractItemView::NoEditTriggers</set>
+          <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
          </property>
          <property name="alternatingRowColors">
           <bool>true</bool>
@@ -1485,7 +1566,7 @@
        <item>
         <widget class="QTableWidget" name="tableWidgetCLength">
          <property name="editTriggers">
-          <set>QAbstractItemView::NoEditTriggers</set>
+          <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
          </property>
          <property name="alternatingRowColors">
           <bool>true</bool>
@@ -1527,7 +1608,7 @@
        <item row="0" column="0">
         <widget class="QTableWidget" name="tableWidgetAnglesCurves">
          <property name="editTriggers">
-          <set>QAbstractItemView::NoEditTriggers</set>
+          <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
          </property>
          <property name="alternatingRowColors">
           <bool>true</bool>
@@ -1569,7 +1650,7 @@
        <item row="0" column="0">
         <widget class="QTableWidget" name="tableWidgetRadiusesArcs">
          <property name="editTriggers">
-          <set>QAbstractItemView::NoEditTriggers</set>
+          <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
          </property>
          <property name="alternatingRowColors">
           <bool>true</bool>

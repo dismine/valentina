@@ -346,8 +346,8 @@
         <!-- <file>icons/La-Sierra-Light/actions/22x22/document-edit-sign-encrypt.svg</file> -->
         <!-- <file>icons/La-Sierra-Light/actions/22x22/document-edit.svg</file> -->
         <!-- <file>icons/La-Sierra-Light/actions/22x22/document-encrypted.svg</file> -->
-        <!-- <file>icons/La-Sierra-Light/actions/22x22/document-export.svg</file> -->
-        <!-- <file>icons/La-Sierra-Light/actions/22x22/document-import.svg</file> -->
+        <file>icons/La-Sierra-Light/actions/22x22/document-export.svg</file>
+        <file>icons/La-Sierra-Light/actions/22x22/document-import.svg</file>
         <!-- <file>icons/La-Sierra-Light/actions/22x22/document-multiple.svg</file> -->
         <!-- <file>icons/La-Sierra-Light/actions/22x22/document-new-from-template.svg</file> -->
         <file>icons/La-Sierra-Light/actions/22x22/document-new.svg</file>
@@ -1854,8 +1854,8 @@
         <!-- <file>icons/La-Sierra-Light/actions/22x22@2x/document-edit-sign-encrypt.svg</file> -->
         <!-- <file>icons/La-Sierra-Light/actions/22x22@2x/document-edit.svg</file> -->
         <!-- <file>icons/La-Sierra-Light/actions/22x22@2x/document-encrypted.svg</file> -->
-        <!-- <file>icons/La-Sierra-Light/actions/22x22@2x/document-export.svg</file> -->
-        <!-- <file>icons/La-Sierra-Light/actions/22x22@2x/document-import.svg</file> -->
+        <file>icons/La-Sierra-Light/actions/22x22@2x/document-export.svg</file>
+        <file>icons/La-Sierra-Light/actions/22x22@2x/document-import.svg</file>
         <!-- <file>icons/La-Sierra-Light/actions/22x22@2x/document-multiple.svg</file> -->
         <!-- <file>icons/La-Sierra-Light/actions/22x22@2x/document-new-from-template.svg</file> -->
         <file>icons/La-Sierra-Light/actions/22x22@2x/document-new.svg</file>
