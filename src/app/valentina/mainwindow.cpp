@@ -515,6 +515,9 @@ MainWindow::MainWindow(QWidget *parent)
         QTimer::singleShot(1s, this, &MainWindow::AskDefaultSettings);
     }
 
+    ui->actionExportFinalMeasurementsToCSV->setIcon(FromTheme(VThemeIcon::DocumentExport));
+    ui->actionExportFontCorrections->setIcon(FromTheme(VThemeIcon::DocumentExport));
+
     ui->actionExportFontCorrections->setEnabled(settings->GetSingleStrokeOutlineFont());
 
     if (VAbstractShortcutManager *manager = VAbstractValApplication::VApp()->GetShortcutManager())

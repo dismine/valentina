@@ -448,6 +448,8 @@ VPMainWindow::VPMainWindow(VPCommandLinePtr cmd, QWidget *parent)
         connect(manager, &VAbstractShortcutManager::ShortcutsUpdated, this, &VPMainWindow::UpdateShortcuts);
         UpdateShortcuts();
     }
+
+    ui->actionImportRawLayout->setIcon(FromTheme(VThemeIcon::DocumentImport));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -269,6 +269,9 @@ TMainWindow::TMainWindow(QWidget *parent)
 
     VAbstractApplication::VApp()->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
+    ui->actionImportFromCSV->setIcon(FromTheme(VThemeIcon::DocumentImport));
+    ui->actionExportToCSV->setIcon(FromTheme(VThemeIcon::DocumentExport));
+
     ui->labelDiagram->setText(UnknownMeasurementImage());
 
     ui->lineEditFind->installEventFilter(this);
