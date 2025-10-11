@@ -4283,10 +4283,8 @@
         <translation>The calculated value</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1170"/>
-        <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1180"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation type="obsolete">...</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1434"/>

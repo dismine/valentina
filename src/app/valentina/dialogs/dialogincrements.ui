@@ -1167,7 +1167,7 @@
                 <string>Export to CSV</string>
                </property>
                <property name="text">
-                <string>...</string>
+                <string notr="true">...</string>
                </property>
               </widget>
              </item>
@@ -1177,7 +1177,7 @@
                 <string>Import from CSV</string>
                </property>
                <property name="text">
-                <string>...</string>
+                <string notr="true">...</string>
                </property>
               </widget>
              </item>

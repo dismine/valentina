@@ -3828,12 +3828,6 @@
         <translation>הערך המחושב</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1170"/>
-        <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1180"/>
-        <source>...</source>
-        <translation type="unfinished">...</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1434"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1437"/>
         <source>Lines</source>

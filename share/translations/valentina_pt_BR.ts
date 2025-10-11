@@ -4185,12 +4185,6 @@ O significado das classes de caracteres \w, \d, etc., bem como o significado de 
         <translation>Valor calculado</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1170"/>
-        <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1180"/>
-        <source>...</source>
-        <translation type="unfinished">...</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1434"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1437"/>
         <source>Lines</source>
@@ -20923,7 +20917,7 @@ Ao salvar o arquivo com a versão atual, não será mais possível abri-lo em um
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="698"/>
         <source>Override the global curve approximation scale setting from the application preferences. The value must be between %1 and %2.</source>
-        <translation>Substitua a configuração da escala de aproximação da curva global a partir das preferências do aplicativo. O valor deve estar entre %1 e %2</translation>
+        <translation>Substitua a configuração da escala de aproximação da curva global a partir das preferências do aplicativo. O valor deve estar entre %1 e %2.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="703"/>
