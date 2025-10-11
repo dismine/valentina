@@ -137,7 +137,7 @@
         <!-- <file>icons/La-Sierra-Dark/actions/22x22/document-page-setup.svg</file> -->
         <file>icons/La-Sierra-Dark/actions/22x22/document-print-preview.svg</file>
         <file>icons/La-Sierra-Dark/actions/22x22/document-print.svg</file>
-        <!-- <file>icons/La-Sierra-Dark/actions/22x22/document-properties.svg</file> -->
+        <file>icons/La-Sierra-Dark/actions/22x22/document-properties.svg</file>
         <!-- <file>icons/La-Sierra-Dark/actions/22x22/document-revert.svg</file> -->
         <file>icons/La-Sierra-Dark/actions/22x22/document-save.svg</file>
         <!-- <file>icons/La-Sierra-Dark/actions/22x22/document-share.svg</file> -->
@@ -1645,7 +1645,7 @@
         <!-- <file>icons/La-Sierra-Dark/actions/22x22@2x/document-page-setup.svg</file> -->
         <file>icons/La-Sierra-Dark/actions/22x22@2x/document-print-preview.svg</file>
         <file>icons/La-Sierra-Dark/actions/22x22@2x/document-print.svg</file>
-        <!-- <file>icons/La-Sierra-Dark/actions/22x22@2x/document-properties.svg</file> -->
+        <file>icons/La-Sierra-Dark/actions/22x22@2x/document-properties.svg</file>
         <!-- <file>icons/La-Sierra-Dark/actions/22x22@2x/document-revert.svg</file> -->
         <file>icons/La-Sierra-Dark/actions/22x22@2x/document-save.svg</file>
         <!-- <file>icons/La-Sierra-Dark/actions/22x22@2x/document-share.svg</file> -->

@@ -191,7 +191,7 @@
         <!-- <file>icons/Eleven-Dark/16/actions/document-preview-archive.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/document-print-direct.svg</file> -->
         <file>icons/Eleven-Dark/16/actions/document-print.svg</file>
-        <!-- <file>icons/Eleven-Dark/16/actions/document-properties.svg</file> -->
+        <file>icons/Eleven-Dark/16/actions/document-properties.svg</file>
         <!-- <file>icons/Eleven-Dark/16/actions/document-replace.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/document-revert-rtl.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/document-revert.svg</file> -->
@@ -2524,7 +2524,7 @@
         <!-- <file>icons/Eleven-Dark/22/actions/document-preview-archive.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22/actions/document-print-direct.svg</file> -->
         <file>icons/Eleven-Dark/22/actions/document-print.svg</file>
-        <!-- <file>icons/Eleven-Dark/22/actions/document-properties.svg</file> -->
+        <file>icons/Eleven-Dark/22/actions/document-properties.svg</file>
         <!-- <file>icons/Eleven-Dark/22/actions/document-replace.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22/actions/document-revert-rtl.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22/actions/document-revert.svg</file> -->
@@ -4868,7 +4868,7 @@
         <!-- <file>icons/Eleven-Dark/24/actions/document-preview-archive.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24/actions/document-print-direct.svg</file> -->
         <file>icons/Eleven-Dark/24/actions/document-print.svg</file>
-        <!-- <file>icons/Eleven-Dark/24/actions/document-properties.svg</file> -->
+        <file>icons/Eleven-Dark/24/actions/document-properties.svg</file>
         <!-- <file>icons/Eleven-Dark/24/actions/document-replace.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24/actions/document-revert.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24/actions/document-save-all.svg</file> -->
@@ -7060,7 +7060,7 @@
         <!-- <file>icons/Eleven-Dark/32/actions/document-preview-archive.svg</file> -->
         <!-- <file>icons/Eleven-Dark/32/actions/document-print-direct.svg</file> -->
         <file>icons/Eleven-Dark/32/actions/document-print.svg</file>
-        <!-- <file>icons/Eleven-Dark/32/actions/document-properties.svg</file> -->
+        <file>icons/Eleven-Dark/32/actions/document-properties.svg</file>
         <!-- <file>icons/Eleven-Dark/32/actions/document-replace.svg</file> -->
         <!-- <file>icons/Eleven-Dark/32/actions/document-revert.svg</file> -->
         <!-- <file>icons/Eleven-Dark/32/actions/document-save-all.svg</file> -->
@@ -8126,7 +8126,7 @@
         <!-- <file>icons/Eleven-Dark/16@2x/actions/document-preview-archive.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/document-print-direct.svg</file> -->
         <file>icons/Eleven-Dark/16@2x/actions/document-print.svg</file>
-        <!-- <file>icons/Eleven-Dark/16@2x/actions/document-properties.svg</file> -->
+        <file>icons/Eleven-Dark/16@2x/actions/document-properties.svg</file>
         <!-- <file>icons/Eleven-Dark/16@2x/actions/document-replace.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/document-revert-rtl.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/document-revert.svg</file> -->
@@ -10459,7 +10459,7 @@
         <!-- <file>icons/Eleven-Dark/22@2x/actions/document-preview-archive.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22@2x/actions/document-print-direct.svg</file> -->
         <file>icons/Eleven-Dark/22@2x/actions/document-print.svg</file>
-        <!-- <file>icons/Eleven-Dark/22@2x/actions/document-properties.svg</file> -->
+        <file>icons/Eleven-Dark/22@2x/actions/document-properties.svg</file>
         <!-- <file>icons/Eleven-Dark/22@2x/actions/document-replace.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22@2x/actions/document-revert-rtl.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22@2x/actions/document-revert.svg</file> -->
@@ -12803,7 +12803,7 @@
         <!-- <file>icons/Eleven-Dark/24@2x/actions/document-preview-archive.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24@2x/actions/document-print-direct.svg</file> -->
         <file>icons/Eleven-Dark/24@2x/actions/document-print.svg</file>
-        <!-- <file>icons/Eleven-Dark/24@2x/actions/document-properties.svg</file> -->
+        <file>icons/Eleven-Dark/24@2x/actions/document-properties.svg</file>
         <!-- <file>icons/Eleven-Dark/24@2x/actions/document-replace.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24@2x/actions/document-revert.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24@2x/actions/document-save-all.svg</file> -->
@@ -14995,7 +14995,7 @@
         <!-- <file>icons/Eleven-Dark/32@2x/actions/document-preview-archive.svg</file> -->
         <!-- <file>icons/Eleven-Dark/32@2x/actions/document-print-direct.svg</file> -->
         <file>icons/Eleven-Dark/32@2x/actions/document-print.svg</file>
-        <!-- <file>icons/Eleven-Dark/32@2x/actions/document-properties.svg</file> -->
+        <file>icons/Eleven-Dark/32@2x/actions/document-properties.svg</file>
         <!-- <file>icons/Eleven-Dark/32@2x/actions/document-replace.svg</file> -->
         <!-- <file>icons/Eleven-Dark/32@2x/actions/document-revert.svg</file> -->
         <!-- <file>icons/Eleven-Dark/32@2x/actions/document-save-all.svg</file> -->

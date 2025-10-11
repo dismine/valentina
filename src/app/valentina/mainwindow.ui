@@ -1005,6 +1005,9 @@
    </property>
   </action>
   <action name="actionPattern_properties">
+   <property name="icon">
+    <iconset theme="QIcon::ThemeIcon::DocumentProperties"/>
+   </property>
    <property name="text">
     <string>Pattern properties</string>
    </property>

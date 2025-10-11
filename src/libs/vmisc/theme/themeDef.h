@@ -87,7 +87,7 @@ enum class VThemeIcon
     // DocumentPageSetup,
     DocumentPrint,
     DocumentPrintPreview,
-    // DocumentProperties,
+    DocumentProperties,
     // DocumentRevert,
     DocumentSave,
     DocumentSaveAs,
