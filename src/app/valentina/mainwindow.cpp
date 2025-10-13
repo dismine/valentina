@@ -193,7 +193,6 @@
 #include "dialogs/vwidgetbackgroundimages.h"
 #include "dialogs/vwidgetdetails.h"
 #include "dialogs/vwidgetgroups.h"
-#include "ui_mainwindow.h"
 #include "vabstractapplication.h"
 #include "vabstractshortcutmanager.h"
 #include "vsinglelineoutlinechar.h"
@@ -226,6 +225,22 @@ using QTextCodec = VTextCodec;
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
 #endif
+
+// On Windows, <windows.h> (included indirectly by some Qt headers or libraries)
+// defines a macro named 'DocumentProperties' (and 'DocumentPropertiesW').
+// This conflicts with the Qt enum value QIcon::ThemeIcon::DocumentProperties,
+// causing a compiler error like:
+//   error C2838: 'DocumentPropertiesW': illegal qualified name in member declaration
+//
+// To fix this, we undefine the conflicting macro before including UI header.
+
+#ifdef Q_OS_WIN
+#ifdef DocumentProperties
+#  undef DocumentProperties
+#endif
+#endif
+
+#include "ui_mainwindow.h"
 
 using namespace std::chrono_literals;
 using namespace Qt::Literals::StringLiterals;
