@@ -382,6 +382,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->actionAddBackgroundImage, &QAction::triggered, this, &MainWindow::ActionAddBackgroundImage);
     connect(ui->actionExportFontCorrections, &QAction::triggered, this, &MainWindow::ActionExportFontCorrections);
+    connect(ui->actionReloadLabels, &QAction::triggered, this, &MainWindow::ActionReloadLabels);
 
     m_progressBar->setVisible(false);
 #if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -3437,6 +3438,7 @@ void MainWindow::InitActionShortcuts()
     m_shortcutActions.insert(VShortcutAction::LastTool, ui->actionLast_tool);
     m_shortcutActions.insert(VShortcutAction::CurveDetails, ui->actionShowCurveDetails);
     m_shortcutActions.insert(VShortcutAction::FinalMeasurements, ui->actionFinalMeasurements);
+    m_shortcutActions.insert(VShortcutAction::ReloadPieceLabels, ui->actionReloadLabels);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -4409,6 +4411,16 @@ void MainWindow::ActionExportFontCorrections()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ActionReloadLabels()
+{
+    VSingleLineOutlineChar corrector(VApplication::VApp()->ValentinaSettings()->GetLabelFont());
+    corrector.ClearCorrectionsCache();
+
+    emit doc->UpdatePatternLabel();
+    emit doc->UpdatePatternLabel();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Clear reset to default window.
  */
@@ -4466,6 +4478,7 @@ void MainWindow::Clear()
     ui->actionPreviousPatternPiece->setEnabled(false);
     ui->actionNextPatternPiece->setEnabled(false);
     ui->actionAddBackgroundImage->setEnabled(false);
+    ui->actionReloadLabels->setEnabled(false);
     SetEnableTool(false);
     VAbstractValApplication::VApp()->SetPatternUnits(Unit::Cm);
     VAbstractValApplication::VApp()->SetMeasurementsType(MeasurementsType::Unknown);
@@ -4715,6 +4728,7 @@ void MainWindow::SetEnableWidgets(bool enable)
     ui->actionPreviousPatternPiece->setEnabled(enableOnDrawStage);
     ui->actionNextPatternPiece->setEnabled(enableOnDrawStage);
     ui->actionAddBackgroundImage->setEnabled(enableOnDrawStage);
+    ui->actionReloadLabels->setEnabled(enableOnDetailsStage);
     ui->actionIncreaseLabelFont->setEnabled(enable);
     ui->actionDecreaseLabelFont->setEnabled(enable);
     ui->actionOriginalLabelFont->setEnabled(enable);

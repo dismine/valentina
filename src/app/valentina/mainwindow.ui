@@ -125,6 +125,7 @@
     <addaction name="actionAddBackgroundImage"/>
     <addaction name="separator"/>
     <addaction name="actionExportFontCorrections"/>
+    <addaction name="actionReloadLabels"/>
    </widget>
    <widget class="QMenu" name="menuMeasurements">
     <property name="title">
@@ -2596,6 +2597,17 @@
    </property>
    <property name="menuRole">
     <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionReloadLabels">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Reload labels</string>
+   </property>
+   <property name="toolTip">
+    <string>Reload piece labels</string>
    </property>
   </action>
  </widget>

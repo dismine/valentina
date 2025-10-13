@@ -107,7 +107,7 @@ auto VAbstractShortcutManager::GetShortcutsList() const -> QList<VAbstractShortc
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractShortcutManager::ShortcutActionToString(VShortcutAction type) -> QString
 {
-    Q_STATIC_ASSERT_X(static_cast<int>(VShortcutAction::LAST_ONE_DO_NOT_USE) == 84, "Convert all actions.");
+    Q_STATIC_ASSERT_X(static_cast<int>(VShortcutAction::LAST_ONE_DO_NOT_USE) == 85, "Convert all actions.");
 
     switch (type)
     {
@@ -167,6 +167,8 @@ auto VAbstractShortcutManager::ShortcutActionToString(VShortcutAction type) -> Q
             return "curvedetails"_L1;
         case VShortcutAction::FinalMeasurements:
             return "finalmeasurements"_L1;
+        case VShortcutAction::ReloadPieceLabels:
+            return "reloadpiecelabels"_L1;
         case VShortcutAction::CaseSensitiveMatch:
             return "casesensitivematch"_L1;
         case VShortcutAction::WholeWordMatch:
@@ -291,7 +293,7 @@ auto VAbstractShortcutManager::ShortcutActionToString(VShortcutAction type) -> Q
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractShortcutManager::ReadableName(VShortcutAction type) -> QString
 {
-    Q_STATIC_ASSERT_X(static_cast<int>(VShortcutAction::LAST_ONE_DO_NOT_USE) == 84, "Translate all actions.");
+    Q_STATIC_ASSERT_X(static_cast<int>(VShortcutAction::LAST_ONE_DO_NOT_USE) == 85, "Translate all actions.");
 
     switch (type)
     {
@@ -351,6 +353,8 @@ auto VAbstractShortcutManager::ReadableName(VShortcutAction type) -> QString
             return tr("Show curve details", "shortcut for action");
         case VShortcutAction::FinalMeasurements:
             return tr("Open final measurements dialog", "shortcut for action");
+        case VShortcutAction::ReloadPieceLabels:
+            return tr("Reload piece labels", "shortcut for action");
         case VShortcutAction::CaseSensitiveMatch:
             return tr("Case sensitive match", "shortcut for action");
         case VShortcutAction::WholeWordMatch:

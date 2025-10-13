@@ -102,6 +102,7 @@ VValentinaShortcutManager::VValentinaShortcutManager(QObject *parent)
     AddShortcut({VShortcutAction::FinalMeasurements,
                  {QKeySequence(Qt::ControlModifier QKEY_SEQUENCE_OP Qt::Key_I).toString()},
                  {}});
+    AddShortcut({VShortcutAction::ReloadPieceLabels, {QKeySequence(Qt::Key_F9).toString()}, {}});
 
     AddShortcut({VShortcutAction::CaseSensitiveMatch,
                  {QKeySequence(Qt::AltModifier QKEY_SEQUENCE_OP Qt::Key_C).toString()},

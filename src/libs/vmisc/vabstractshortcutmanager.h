@@ -71,6 +71,7 @@ enum class VShortcutAction
     LastTool,
     CurveDetails,
     FinalMeasurements,
+    ReloadPieceLabels,
     CaseSensitiveMatch,
     WholeWordMatch,
     RegexMatch,

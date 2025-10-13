@@ -212,6 +212,7 @@ private slots:
     void ActionAddBackgroundImage();
 
     void ActionExportFontCorrections();
+    void ActionReloadLabels();
 
     void ClosedDialogUnionDetails(int result);
     void ClosedDialogDuplicateDetail(int result);
