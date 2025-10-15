@@ -33,14 +33,14 @@ jobs:
         qt:
           # LTS release
           - install: 6.10.0
-            label: Qt6_9
+            label: Qt6_10
             run_tests: 'true'
             with_icu: 'True'
             with_iconv: 'False'
             withBigCodecs: 'False'
             deploy: 'true'
           - install: 6.10.0
-            label: Qt6_9
+            label: Qt6_10
             run_tests: 'true'
             with_icu: 'False'
             with_iconv: 'True'
