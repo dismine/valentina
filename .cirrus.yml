@@ -10,7 +10,7 @@ env:
 
 # https://cirrus-ci.org/guide/writing-tasks/#supported-functions
 qbs_task_filter: &QBS_TASK_FILTER
-  skip: "!changesInclude('.cirrus.yml', 'scripts/symupload.py', '**.{h,hpp,cpp,c,ts,ui,png,qbs,js}')"
+  skip: "!changesInclude('.cirrus.yml', 'scripts/symupload.py', '**.{h,hpp,cpp,c,ts,ui,png,qbs,js,svg}')"
 
 sonar_task_filter: &SONAR_TASK_FILTER
   skip: "!changesInclude('**.{h,hpp,cpp,c}')"
