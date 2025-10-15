@@ -522,7 +522,7 @@ void VTheme::ResetThemeSettings() const
 //---------------------------------------------------------------------------------------------------------------------
 auto VTheme::GetFallbackThemeIcon(const QString &iconName, QSize iconSize) -> QIcon
 {
-    const auto filePath = QStringLiteral(":icons/%1/%2.svg").arg(DefaultThemeName(), iconName);
+    const auto filePath = QStringLiteral(":/icons/%1/%2.svg").arg(DefaultThemeName(), iconName);
 
     QIcon icon;
     icon.addFile(filePath, iconSize, QIcon::Normal, QIcon::On);
