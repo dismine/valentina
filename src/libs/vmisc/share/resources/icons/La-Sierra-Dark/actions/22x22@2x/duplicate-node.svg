@@ -6,7 +6,7 @@
    version="1.1"
    id="svg1"
    sodipodi:docname="duplicate-node.svg"
-   inkscape:version="1.4 (1:1.4+202410161351+e7c3feb100)"
+   inkscape:version="1.4.2 (1:1.4.2+202505120738+ebf0e940d0)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -23,8 +23,8 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="53.045455"
-     inkscape:cx="11"
-     inkscape:cy="11"
+     inkscape:cx="11.018852"
+     inkscape:cy="11.018852"
      inkscape:window-width="2560"
      inkscape:window-height="1372"
      inkscape:window-x="1920"
@@ -59,17 +59,11 @@
        sodipodi:open="true"
        sodipodi:arc-type="arc"
        d="M 19.702511,10.408138 A 6.6479883,6.6453753 0 0 1 18.05764,19.661032 6.6479883,6.6453753 0 0 1 8.801061,18.017069 6.6479883,6.6453753 0 0 1 10.445408,8.7640817 6.6479883,6.6453753 0 0 1 19.702081,10.407521" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.558px;line-height:1000;font-family:Dyuthi;-inkscape-font-specification:'Dyuthi, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke-width:0.488954"
-       x="7.6988158"
-       y="19.911295"
+    <path
+       d="m 14.928018,13.637073 h 3.132336 q 0.343793,0 0.563439,0.248295 0.248295,0.248295 0.238745,0.553889 v 0.0382 q 0,0.334243 -0.238745,0.563438 -0.248295,0.238746 -0.563439,0.238746 h -3.132336 v 2.960439 q 0,0.381992 -0.276944,0.658937 -0.276945,0.276944 -0.630287,0.267394 h -0.0382 q -0.381992,0.0191 -0.649386,-0.257845 -0.257845,-0.286494 -0.257845,-0.668486 V 15.27964 H 9.94302 q -0.343793,0 -0.5729883,-0.248295 Q 9.1408364,14.78305 9.1408364,14.477456 v -0.0382 q 0,-0.343793 0.2291953,-0.553889 0.2482949,-0.248295 0.5729883,-0.248295 h 3.132336 v -2.93179 q 0,-0.381992 0.267395,-0.639837 0.257844,-0.2578447 0.639836,-0.2578447 h 0.0382 q 0.381992,0 0.630287,0.2769447 0.276944,0.276944 0.276944,0.620737 z"
        id="text4"
-       transform="scale(1.0158675,0.98438031)"><tspan
-         sodipodi:role="line"
-         id="tspan4"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.558px;font-family:Dyuthi;-inkscape-font-specification:'Dyuthi, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke-width:0.488954"
-         x="7.6988158"
-         y="19.911295">+</tspan></text>
+       style="font-size:19.558px;line-height:1000;font-family:Dyuthi;-inkscape-font-specification:'Dyuthi, Normal';letter-spacing:0px;word-spacing:0px;fill:#ffffff;stroke-width:0.488954"
+       transform="scale(1.0158675,0.98438033)"
+       aria-label="+" />
   </g>
 </svg>
