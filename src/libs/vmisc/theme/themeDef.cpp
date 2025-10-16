@@ -369,6 +369,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const ThemeIconStringHash,
                               {VThemeIcon::DrawStar, "draw-star"_L1},
                               {VThemeIcon::AddPlacemark, "add-placemark"_L1},
                               {VThemeIcon::DuplicateNode, "duplicate-node"_L1},
+                              {VThemeIcon::ListAddFont, "list-add-font"_L1},
                           }))
 QT_WARNING_POP
 } // namespace

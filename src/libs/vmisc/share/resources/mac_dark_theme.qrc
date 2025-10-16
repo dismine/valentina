@@ -398,7 +398,7 @@
         <!-- <file>icons/La-Sierra-Dark/actions/22x22/lensautofix.svg</file> -->
         <!-- <file>icons/La-Sierra-Dark/actions/22x22/lensdistortion.svg</file> -->
         <!-- <file>icons/La-Sierra-Dark/actions/22x22/lighttable.svg</file> -->
-        <!-- <file>icons/La-Sierra-Dark/actions/22x22/list-add-font.svg</file> -->
+        <file>icons/La-Sierra-Dark/actions/22x22/list-add-font.svg</file>
         <!-- <file>icons/La-Sierra-Dark/actions/22x22/list-remove-user.svg</file> -->
         <file>icons/La-Sierra-Dark/actions/22x22/list-remove.svg</file>
         <!-- <file>icons/La-Sierra-Dark/actions/22x22/love-amarok.svg</file> -->
@@ -1906,7 +1906,7 @@
         <!-- <file>icons/La-Sierra-Dark/actions/22x22@2x/lensautofix.svg</file> -->
         <!-- <file>icons/La-Sierra-Dark/actions/22x22@2x/lensdistortion.svg</file> -->
         <!-- <file>icons/La-Sierra-Dark/actions/22x22@2x/lighttable.svg</file> -->
-        <!-- <file>icons/La-Sierra-Dark/actions/22x22@2x/list-add-font.svg</file> -->
+        <file>icons/La-Sierra-Dark/actions/22x22@2x/list-add-font.svg</file>
         <!-- <file>icons/La-Sierra-Dark/actions/22x22@2x/list-remove-user.svg</file> -->
         <file>icons/La-Sierra-Dark/actions/22x22@2x/list-remove.svg</file>
         <!-- <file>icons/La-Sierra-Dark/actions/22x22@2x/love-amarok.svg</file> -->

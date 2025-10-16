@@ -237,7 +237,8 @@ enum class VThemeIcon
     SnapNodesRotationCenter,
     DrawStar,
     AddPlacemark,
-    DuplicateNode
+    DuplicateNode,
+    ListAddFont
 };
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)

@@ -28,6 +28,7 @@
         <file>icons/Eleven-Light/16/actions/go-top.svg</file>
         <file>icons/Eleven-Light/16/actions/go-up.svg</file>
         <file>icons/Eleven-Light/16/actions/help-about.svg</file>
+        <file>icons/Eleven-Light/16/actions/list-add-font.svg</file>
         <file>icons/Eleven-Light/16/actions/list-add.svg</file>
         <file>icons/Eleven-Light/16/actions/list-remove.svg</file>
         <file>icons/Eleven-Light/16/actions/object-rotate-left.svg</file>
@@ -72,6 +73,7 @@
         <file>icons/Eleven-Light/22/actions/go-top.svg</file>
         <file>icons/Eleven-Light/22/actions/go-up.svg</file>
         <file>icons/Eleven-Light/22/actions/help-about.svg</file>
+        <file>icons/Eleven-Light/22/actions/list-add-font.svg</file>
         <file>icons/Eleven-Light/22/actions/list-add.svg</file>
         <file>icons/Eleven-Light/22/actions/list-remove.svg</file>
         <file>icons/Eleven-Light/22/actions/object-rotate-left.svg</file>
@@ -114,6 +116,7 @@
         <file>icons/Eleven-Light/24/actions/go-top.svg</file>
         <file>icons/Eleven-Light/24/actions/go-up.svg</file>
         <file>icons/Eleven-Light/24/actions/help-about.svg</file>
+        <file>icons/Eleven-Light/24/actions/list-add-font.svg</file>
         <file>icons/Eleven-Light/24/actions/list-add.svg</file>
         <file>icons/Eleven-Light/24/actions/list-remove.svg</file>
         <file>icons/Eleven-Light/24/actions/object-rotate-left.svg</file>
@@ -160,6 +163,7 @@
         <file>icons/Eleven-Light/16@2x/actions/go-top.svg</file>
         <file>icons/Eleven-Light/16@2x/actions/go-up.svg</file>
         <file>icons/Eleven-Light/16@2x/actions/help-about.svg</file>
+        <file>icons/Eleven-Light/16@2x/actions/list-add-font.svg</file>
         <file>icons/Eleven-Light/16@2x/actions/list-add.svg</file>
         <file>icons/Eleven-Light/16@2x/actions/list-remove.svg</file>
         <file>icons/Eleven-Light/16@2x/actions/object-rotate-left.svg</file>
@@ -204,6 +208,7 @@
         <file>icons/Eleven-Light/22@2x/actions/go-top.svg</file>
         <file>icons/Eleven-Light/22@2x/actions/go-up.svg</file>
         <file>icons/Eleven-Light/22@2x/actions/help-about.svg</file>
+        <file>icons/Eleven-Light/22@2x/actions/list-add-font.svg</file>
         <file>icons/Eleven-Light/22@2x/actions/list-add.svg</file>
         <file>icons/Eleven-Light/22@2x/actions/list-remove.svg</file>
         <file>icons/Eleven-Light/22@2x/actions/object-rotate-left.svg</file>
@@ -246,6 +251,7 @@
         <file>icons/Eleven-Light/24@2x/actions/go-top.svg</file>
         <file>icons/Eleven-Light/24@2x/actions/go-up.svg</file>
         <file>icons/Eleven-Light/24@2x/actions/help-about.svg</file>
+        <file>icons/Eleven-Light/24@2x/actions/list-add-font.svg</file>
         <file>icons/Eleven-Light/24@2x/actions/list-add.svg</file>
         <file>icons/Eleven-Light/24@2x/actions/list-remove.svg</file>
         <file>icons/Eleven-Light/24@2x/actions/object-rotate-left.svg</file>

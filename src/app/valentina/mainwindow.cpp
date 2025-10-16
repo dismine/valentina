@@ -84,6 +84,7 @@
 #include "../vmisc/vmodifierkey.h"
 #include "../vmisc/vsysexits.h"
 #include "../vmisc/vvalentinasettings.h"
+#include "../vmisc/vfontinstaller.h"
 #include "../vmisc/dialogs/dialogselectmeasurementstype.h"
 #include "../vpatterndb/variables/vincrement.h"
 #include "../vpatterndb/variables/vmeasurement.h"
@@ -397,6 +398,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->actionAddBackgroundImage, &QAction::triggered, this, &MainWindow::ActionAddBackgroundImage);
     connect(ui->actionExportFontCorrections, &QAction::triggered, this, &MainWindow::ActionExportFontCorrections);
+    connect(ui->actionInstallSingleLineFont, &QAction::triggered, this, &MainWindow::ActionInstallSingleLineFont);
     connect(ui->actionReloadLabels, &QAction::triggered, this, &MainWindow::ActionReloadLabels);
 
     m_progressBar->setVisible(false);
@@ -533,6 +535,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->actionExportFinalMeasurementsToCSV->setIcon(FromTheme(VThemeIcon::DocumentExport));
     ui->actionExportFontCorrections->setIcon(FromTheme(VThemeIcon::DocumentExport));
+    ui->actionInstallSingleLineFont->setIcon(FromTheme(VThemeIcon::ListAddFont));
 
     ui->actionExportFontCorrections->setEnabled(settings->GetSingleStrokeOutlineFont());
 
@@ -4433,6 +4436,75 @@ void MainWindow::ActionReloadLabels()
 
     emit doc->UpdatePatternLabel();
     emit doc->UpdatePatternLabel();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Handles selecting multiple font files and installing them one by one.
+ * Uses QFileDialog with specific filters for common font types.
+ */
+void MainWindow::ActionInstallSingleLineFont()
+{
+    QStringList const filters{
+        tr("All Single-Line Fonts") + " (*.ttf *.otf *.svg)"_L1,
+        tr("TrueType Fonts") + " (*.ttf)"_L1,
+        tr("OpenType Fonts") + " (*.otf)"_L1,
+        tr("SVG Fonts") + " (*.svg)"_L1,
+        tr("All Files") + " (*)"_L1,
+    };
+
+    // 1. Open file dialog to select several font files
+    QStringList const selectedFiles = QFileDialog::getOpenFileNames(this,
+                                                                    tr("Select Font Files to Install"),
+                                                                    QDir::homePath(), // Start in a common location
+                                                                    filters.join(";;"_L1),
+                                                                    nullptr,
+                                                                    VAbstractApplication::VApp()->NativeFileDialog());
+
+    if (selectedFiles.isEmpty())
+    {
+        qDebug() << "Font installation cancelled by user.";
+        return;
+    }
+
+    // 2. Initialize installer and counters
+    VFontInstaller installer(this);
+    int successCount = 0;
+    int failCount = 0;
+
+    // 3. Loop through the list of selected files to install each one
+    for (const QString &filePath : selectedFiles)
+    {
+        // Install the font using the FontInstaller class logic
+        if (VFontInstaller::InstallError result = installer.InstallFont(filePath);
+            result == VFontInstaller::InstallError::NoError)
+        {
+            successCount++;
+            qCInfo(vMainWindow) << "Successfully installed font:" << filePath;
+        }
+        else
+        {
+            failCount++;
+            qCWarning(vMainWindow) << tr("Failed to install font file: %1\n\nReason: %2")
+                                      .arg(QFileInfo(filePath).fileName(), installer.ErrorMessage());
+        }
+    }
+
+    // 4. Provide final summary to the user
+    QString const finalMessage = tr("Font Installation Summary:\n\n"
+                                    "Successful Installations: %1\n"
+                                    "Failed Installations: %2")
+                                     .arg(successCount)
+                                     .arg(failCount);
+
+    if (failCount > 0)
+    {
+        QMessageBox::warning(this, tr("Installation Complete with Errors"), finalMessage);
+    }
+    else
+    {
+        QMessageBox::information(this, tr("Installation Successful"), finalMessage);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

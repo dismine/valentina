@@ -67,6 +67,8 @@ VLib {
         "vabstractapplication.cpp",
         "projectversion.cpp",
         "vcommonsettings.cpp",
+        "vfontinstaller.cpp",
+        "vfontinstaller.h",
         "vvalentinasettings.cpp",
         "commandoptions.cpp",
         "qxtcsvmodel.cpp",

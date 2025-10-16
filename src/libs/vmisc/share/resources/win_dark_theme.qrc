@@ -587,7 +587,7 @@
         <!-- <file>icons/Eleven-Dark/16/actions/lighttable.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/lines-connector.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/link.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/16/actions/list-add-font.svg</file> -->
+        <file>icons/Eleven-Dark/16/actions/list-add-font.svg</file>
         <!-- <file>icons/Eleven-Dark/16/actions/list-add-user.svg</file> -->
         <file>icons/Eleven-Dark/16/actions/list-add.svg</file>
         <!-- <file>icons/Eleven-Dark/16/actions/list-remove-user.svg</file> -->
@@ -2984,7 +2984,7 @@
         <!-- <file>icons/Eleven-Dark/22/actions/linear.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22/actions/lines-connector.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22/actions/link.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/22/actions/list-add-font.svg</file> -->
+        <file>icons/Eleven-Dark/22/actions/list-add-font.svg</file>
         <!-- <file>icons/Eleven-Dark/22/actions/list-add-user.svg</file> -->
         <file>icons/Eleven-Dark/22/actions/list-add.svg</file>
         <!-- <file>icons/Eleven-Dark/22/actions/list-remove-user.svg</file> -->
@@ -5303,7 +5303,7 @@
         <!-- <file>icons/Eleven-Dark/24/actions/linear.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24/actions/lines-connector.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24/actions/link.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/24/actions/list-add-font.svg</file> -->
+        <file>icons/Eleven-Dark/24/actions/list-add-font.svg</file>
         <!-- <file>icons/Eleven-Dark/24/actions/list-add-user.svg</file> -->
         <file>icons/Eleven-Dark/24/actions/list-add.svg</file>
         <!-- <file>icons/Eleven-Dark/24/actions/list-remove-user.svg</file> -->
@@ -8522,7 +8522,7 @@
         <!-- <file>icons/Eleven-Dark/16@2x/actions/lighttable.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/lines-connector.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/link.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/16@2x/actions/list-add-font.svg</file> -->
+        <file>icons/Eleven-Dark/16@2x/actions/list-add-font.svg</file>
         <!-- <file>icons/Eleven-Dark/16@2x/actions/list-add-user.svg</file> -->
         <file>icons/Eleven-Dark/16@2x/actions/list-add.svg</file>
         <!-- <file>icons/Eleven-Dark/16@2x/actions/list-remove-user.svg</file> -->
@@ -10919,7 +10919,7 @@
         <!-- <file>icons/Eleven-Dark/22@2x/actions/linear.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22@2x/actions/lines-connector.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22@2x/actions/link.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/22@2x/actions/list-add-font.svg</file> -->
+        <file>icons/Eleven-Dark/22@2x/actions/list-add-font.svg</file>
         <!-- <file>icons/Eleven-Dark/22@2x/actions/list-add-user.svg</file> -->
         <file>icons/Eleven-Dark/22@2x/actions/list-add.svg</file>
         <!-- <file>icons/Eleven-Dark/22@2x/actions/list-remove-user.svg</file> -->
@@ -13238,7 +13238,7 @@
         <!-- <file>icons/Eleven-Dark/24@2x/actions/linear.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24@2x/actions/lines-connector.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24@2x/actions/link.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/24@2x/actions/list-add-font.svg</file> -->
+        <file>icons/Eleven-Dark/24@2x/actions/list-add-font.svg</file>
         <!-- <file>icons/Eleven-Dark/24@2x/actions/list-add-user.svg</file> -->
         <file>icons/Eleven-Dark/24@2x/actions/list-add.svg</file>
         <!-- <file>icons/Eleven-Dark/24@2x/actions/list-remove-user.svg</file> -->

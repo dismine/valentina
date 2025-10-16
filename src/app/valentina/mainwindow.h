@@ -214,6 +214,13 @@ private slots:
     void ActionExportFontCorrections();
     void ActionReloadLabels();
 
+    /**
+     * @brief Opens a file dialog to allow the user to select one or more
+     * single-line font files for installation.
+     * It supports TrueType (.ttf), OpenType (.otf), and SVG (.svg) font formats.
+     */
+    void ActionInstallSingleLineFont();
+
     void ClosedDialogUnionDetails(int result);
     void ClosedDialogDuplicateDetail(int result);
     void ClosedDialogGroup(int result);

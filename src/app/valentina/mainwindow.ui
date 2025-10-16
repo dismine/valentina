@@ -83,6 +83,9 @@
     <addaction name="separator"/>
     <addaction name="actionLabelTemplateEditor"/>
     <addaction name="separator"/>
+    <addaction name="actionInstallSingleLineFont"/>
+    <addaction name="actionExportFontCorrections"/>
+    <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
@@ -124,7 +127,6 @@
     <addaction name="separator"/>
     <addaction name="actionAddBackgroundImage"/>
     <addaction name="separator"/>
-    <addaction name="actionExportFontCorrections"/>
     <addaction name="actionReloadLabels"/>
    </widget>
    <widget class="QMenu" name="menuMeasurements">
@@ -2608,6 +2610,14 @@
    </property>
    <property name="toolTip">
     <string>Reload piece labels</string>
+   </property>
+  </action>
+  <action name="actionInstallSingleLineFont">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Install single line font</string>
    </property>
   </action>
  </widget>
