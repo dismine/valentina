@@ -101,12 +101,9 @@ auto RegisterFontInRegistry(const QString &fontFileName, const QString &destinat
     // 2. Broadcast the change to running applications (WM_FONTCHANGE)
     qInfo() << "Broadcasting WM_FONTCHANGE message...";
 
-    // Define the Windows message constant
-    const UINT WM_FONTCHANGE = 0x001D;
-
     // Send a broadcast message to all top-level windows to notify them of the font change.
     DWORD_PTR result;
-    LRESULT lresult = SendMessageTimeoutW(HWND_BROADCAS,
+    LRESULT lresult = SendMessageTimeoutW(HWND_BROADCAST,
                                           WM_FONTCHANGE,
                                           0,
                                           0,

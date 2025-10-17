@@ -28,9 +28,12 @@
 #ifndef VFONTINSTALLER_H
 #define VFONTINSTALLER_H
 
-#include <qtclasshelpermacros.h>
 #include <QObject>
 #include <QtGlobal>
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
+#include <qtclasshelpermacros.h>
+#endif
 
 class QString;
 class QDir;

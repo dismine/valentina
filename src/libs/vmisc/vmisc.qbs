@@ -59,6 +59,11 @@ VLib {
         cpp.dynamicLibraries: ["icuuc", "icui18n", "icudata"]
     }
 
+    Properties {
+        condition: qbs.targetOS.contains("windows")
+        cpp.staticLibraries: ["User32"]
+    }
+
     name: "VMiscLib"
     files: [
         "def.cpp",
