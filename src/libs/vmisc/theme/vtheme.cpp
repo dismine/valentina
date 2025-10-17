@@ -339,9 +339,11 @@ void VTheme::SetIconTheme()
             || (themeMode == VThemeMode::Light && ShouldApplyDarkTheme()))
         {
             QIcon::setThemeName(DefaultThemeName());
+            QIcon::setFallbackThemeName(QString());
         }
         else
         {
+            QIcon::setThemeName(QString());
             QIcon::setFallbackThemeName(DefaultThemeName());
         }
     }
