@@ -27,6 +27,9 @@
  *************************************************************************/
 #include "vpmainwindow.h"
 
+#include <chrono>
+#include <thread>
+#include <utility>
 #include <QCloseEvent>
 #include <QFileDialog>
 #include <QFileInfo>
@@ -41,9 +44,6 @@
 #include <QTimer>
 #include <QUndoStack>
 #include <QtMath>
-#include <chrono>
-#include <thread>
-#include <utility>
 
 #include "../ifc/xml/vlayoutconverter.h"
 #include "../vdxf/libdxfrw/drw_base.h"
@@ -3706,8 +3706,7 @@ void VPMainWindow::InitIcons()
 
     auto SetTabIcon = [resource, this](QWidget *tab, const QString &iconName)
     {
-        const int index = ui->tabWidgetProperties->indexOf(tab);
-        if (index != -1)
+        if (const int index = ui->tabWidgetProperties->indexOf(tab); index != -1)
         {
             ui->tabWidgetProperties->setTabIcon(index, VTheme::GetIconResource(resource, iconName));
         }

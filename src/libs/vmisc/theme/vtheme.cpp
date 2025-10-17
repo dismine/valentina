@@ -298,9 +298,8 @@ auto VTheme::DefaultThemeName() -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VTheme::InitApplicationStyle()
 {
-    VThemeMode const themeMode = VAbstractApplication::VApp()->Settings()->GetThemeMode();
-
-    if (themeMode == VThemeMode::Light || themeMode == VThemeMode::Dark)
+    if (VThemeMode const themeMode = VAbstractApplication::VApp()->Settings()->GetThemeMode();
+        themeMode == VThemeMode::Light || themeMode == VThemeMode::Dark)
     {
         if (QStyle *style = QStyleFactory::create(QStringLiteral("fusion")); style != nullptr)
         {
@@ -335,9 +334,8 @@ void VTheme::SetIconTheme()
     }
     else
     {
-        VThemeMode const themeMode = VAbstractApplication::VApp()->Settings()->GetThemeMode();
-
-        if ((themeMode == VThemeMode::Dark && !ShouldApplyDarkTheme())
+        if (VThemeMode const themeMode = VAbstractApplication::VApp()->Settings()->GetThemeMode();
+            (themeMode == VThemeMode::Dark && !ShouldApplyDarkTheme())
             || (themeMode == VThemeMode::Light && ShouldApplyDarkTheme()))
         {
             QIcon::setThemeName(DefaultThemeName());
