@@ -1,3 +1,4 @@
+import qbs.FileInfo
 import "rcc.js" as Rcc
 
 Module {
@@ -8,6 +9,12 @@ Module {
     property int thresholdLevel: 70
     property string compressAlgorithm: "zstd"
     property int compressLevel: -1
+
+    Scanner {
+        inputs: ["ebr.external_qrc"]
+        searchPaths: [FileInfo.path(input.filePath)]
+        scan: Rcc.scanQrc(product, input.filePath)
+    }
 
     Rule {
         inputs: ["ebr.external_qrc"]
