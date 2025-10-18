@@ -1,7 +1,6 @@
 {
     "vector": [
         {
-            "curvePoint": true,
             "turnPoint": true,
             "type": "VLayoutPoint",
             "x": 36.9137007874006,
@@ -11,8 +10,21 @@
             "curvePoint": true,
             "turnPoint": true,
             "type": "VLayoutPoint",
-            "x": 36.9137007874016,
-            "y": 605.2736038347447
+            "x": 36.91370078740158,
+            "y": 654.0840001923108
+        },
+        {
+            "curvePoint": true,
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": 13.275570526734356,
+            "y": 626.35586205307
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 23.05245060320142,
+            "y": 618.021109693214
         },
         {
             "curvePoint": true,
@@ -216,17 +228,47 @@
         },
         {
             "curvePoint": true,
-            "turnPoint": true,
             "type": "VLayoutPoint",
-            "x": 432.5866982659403,
-            "y": 1102.9819301312384
+            "x": 432.60331647269453,
+            "y": 1103.158713369561
         },
         {
             "curvePoint": true,
             "turnPoint": true,
             "type": "VLayoutPoint",
-            "x": 940.3811512782529,
-            "y": 4563.745989933869
+            "x": 434.29514497078316,
+            "y": 1115.4944116167924
+        },
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": 496.79645165740754,
+            "y": 1541.3400064553684
+        },
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": 524.2377672049647,
+            "y": 1728.3133885854518
+        },
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": 554.4232143072776,
+            "y": 1933.984108928544
+        },
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": 620.2823716214148,
+            "y": 2382.720226040745
+        },
+        {
+            "curvePoint": true,
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": 940.3825496976897,
+            "y": 4563.745827869219
         },
         {
             "curvePoint": true,
