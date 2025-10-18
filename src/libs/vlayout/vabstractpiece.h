@@ -850,7 +850,10 @@ inline auto VAbstractPiece::SubdividePath(const QVector<T> &boundary, const QPoi
             continue;
         }
 
-        if (!VGObject::IsPointOnLineSegment(p, boundary.at(i).ToQPointF(), boundary.at(i + 1).ToQPointF()))
+        if (!VGObject::IsPointOnLineSegment(p,
+                                            boundary.at(i).ToQPointF(),
+                                            boundary.at(i + 1).ToQPointF(),
+                                            MmToPixel(0.5)))
         {
             sub1.append(boundary.at(i));
             continue;
@@ -861,8 +864,12 @@ inline auto VAbstractPiece::SubdividePath(const QVector<T> &boundary, const QPoi
             sub1.append(boundary.at(i));
         }
 
-        sub1.append(MakeTurnPoint<T>(p));
-        sub2.append(MakeTurnPoint<T>(p));
+        QPointF const correctedPoint = VGObject::ClosestPoint(QLineF(boundary.at(i).ToQPointF(),
+                                                                     boundary.at(i + 1).ToQPointF()),
+                                                              p);
+
+        sub1.append(MakeTurnPoint<T>(correctedPoint));
+        sub2.append(MakeTurnPoint<T>(correctedPoint));
 
         if (i + 1 == boundary.count() - 1 && not VFuzzyComparePoints(boundary.at(i + 1), p))
         {

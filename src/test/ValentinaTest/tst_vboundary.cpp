@@ -80,6 +80,16 @@ void TST_VBoundary::CombineSeamAllowance_data() const
                      QLineF({30.000000000000167, -791.4961889763781}, {29.999999999999943, 115.59042519685045}),
                      QStringLiteral("://mirror_notch_case2/passmarks.json"),
                      QStringLiteral("://mirror_notch_case2/boundary.json"));
+
+    // See file valentina_private_collection/bugs/notch/ТЗ1.val
+    // (private collection)
+    ASSERT_TEST_CASE("Notch on seam line. Point A24a15. Notch together with boundaries",
+                     QStringLiteral("://notch/points.json"),
+                     "Piece",
+                     true,
+                     QLineF(),
+                     QStringLiteral("://notch/passmarks.json"),
+                     QStringLiteral("://notch/boundary.json"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
