@@ -566,7 +566,7 @@ auto VGObject::IsPointOnLineSegment(const QPointF &t, const QPointF &p1, const Q
     QLineF edge(p1, p2);
     edge.setAngle(edge.angle() + 90);
     edge.setLength(accuracy);
-    QPointF offset = edge.p2() - p1; // Store the perpendicular offset vector
+    QPointF const offset = edge.p2() - p1; // Store the perpendicular offset vector
 
     // Define the expanded bounding rectangle
     const QPointF sP1 = p1 + offset;
@@ -589,13 +589,8 @@ auto VGObject::IsPointOnLineSegment(const QPointF &t, const QPointF &p1, const Q
     auto CrossProduct = [](QPointF a, QPointF b, QPointF c)
     { return (b.x() - a.x()) * (c.y() - a.y()) - (b.y() - a.y()) * (c.x() - a.x()); };
 
-    if (CrossProduct(sP1, sP2, t) < 0 || CrossProduct(sP2, sP3, t) < 0 || CrossProduct(sP3, sP4, t) < 0
-        || CrossProduct(sP4, sP1, t) < 0)
-    {
-        return false;
-    }
-
-    return true;
+    return !(CrossProduct(sP1, sP2, t) < 0 || CrossProduct(sP2, sP3, t) < 0 || CrossProduct(sP3, sP4, t) < 0
+             || CrossProduct(sP4, sP1, t) < 0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
