@@ -235,16 +235,7 @@ void VWidgetDetails::ToggledPieceItem(QTableWidgetItem *item)
     if (details->contains(id))
     {
         const bool inLayout = details->value(id).IsInLayout();
-        if (inLayout)
-        {
-            item->setIcon(FromTheme(VThemeIcon::GtkOk,
-                                    VTheme::GetFallbackThemeIcon(QStringLiteral("16/actions/gtk-ok"), QSize(16, 16))));
-        }
-        else
-        {
-            item->setIcon(FromTheme(VThemeIcon::GtkNo,
-                                    VTheme::GetFallbackThemeIcon(QStringLiteral("16/actions/gtk-no"), QSize(16, 16))));
-        }
+        item->setIcon(FromTheme(inLayout ? VThemeIcon::GtkOk : VThemeIcon::GtkNo));
 
         VToolSeamAllowance *tool = nullptr;
         try
@@ -264,18 +255,7 @@ auto VWidgetDetails::PrepareInLayoutColumnCell(const VPiece &det, quint32 id) ->
 {
     auto *item = new QTableWidgetItem();
     item->setTextAlignment(Qt::AlignHCenter);
-
-    if (det.IsInLayout())
-    {
-        item->setIcon(FromTheme(VThemeIcon::GtkOk,
-                                VTheme::GetFallbackThemeIcon(QStringLiteral("16/actions/gtk-ok"), QSize(16, 16))));
-    }
-    else
-    {
-        item->setIcon(FromTheme(VThemeIcon::GtkNo,
-                                VTheme::GetFallbackThemeIcon(QStringLiteral("16/actions/gtk-no"), QSize(16, 16))));
-    }
-
+    item->setIcon(FromTheme(det.IsInLayout() ? VThemeIcon::GtkOk : VThemeIcon::GtkNo));
     item->setData(Qt::UserRole, id);
 
     // set the item non-editable (view only), and non-selectable
