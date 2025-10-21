@@ -12,7 +12,7 @@
 ; two periods being displayed).
 
 [LangOptions]
-; The following three entries are very important. Be sure to read and
+; The following three entries are very important. Be sure to read and 
 ; understand the '[LangOptions] section' topic in the help file.
 LanguageName=Hrvatski
 LanguageID=$041a
@@ -257,7 +257,7 @@ FinishedRestartLabel=Za završavanje instaliranja programa [name], instalacija m
 FinishedRestartMessage=Za završavanje instaliranja programa [name], instalacija mora ponovo pokrenuti računalo.%n%nŽeliš li sada ponovo pokrenuti računalo?
 ShowReadmeCheck=Da, želim pročitati README datoteku
 YesRadio=&Da, sada ponovo pokrenuti računalo
-NoRadio=&Ne, računalo ću kasnije ponovo pokrenuti
+NoRadio=&Ne, računalo ću kasnije ponovo pokrenuti 
 ; used for example as 'Run MyProg.exe'
 RunEntryExec=Pokreni %1
 ; used for example as 'View Readme.txt'
