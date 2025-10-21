@@ -160,7 +160,6 @@ VTestApp {
     }
 
     Group {
-        Depends { name: "Qt.core" }
         name: "Text codec tests"
         condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 && project.withTextCodec
         files: [
