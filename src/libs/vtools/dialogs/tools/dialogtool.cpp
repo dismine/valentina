@@ -192,6 +192,46 @@ void DialogTool::FillComboBoxArcs(QComboBox *box, FillComboBox rule, quint32 ch1
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogTool::FillComboBoxArcCurves(QComboBox *box, FillComboBox rule, quint32 ch1, quint32 ch2) const
+{
+    SCASSERT(box != nullptr)
+    box->blockSignals(true);
+
+    const QHash<quint32, QSharedPointer<VGObject>> *objs = data->CalculationGObjects();
+    QMap<QString, quint32> list;
+    for (auto i = objs->constBegin(); i != objs->constEnd(); ++i)
+    {
+        if (rule == FillComboBox::NoChildren)
+        {
+            if (i.key() != toolId && i.value()->getIdTool() != toolId && i.key() != ch1 && i.key() != ch2)
+            {
+                const QSharedPointer<VGObject> &obj = i.value();
+                if (obj->getType() == GOType::Arc || obj->getType() == GOType::EllipticalArc)
+                {
+                    PrepareList<VAbstractCurve>(list, i.key());
+                }
+            }
+        }
+        else
+        {
+            if (i.key() != toolId && i.value()->getIdTool() != toolId)
+            {
+                const QSharedPointer<VGObject> &obj = i.value();
+                if ((obj->getType() == GOType::Arc || obj->getType() == GOType::EllipticalArc)
+                    && obj->getMode() == Draw::Calculation)
+                {
+                    PrepareList<VAbstractCurve>(list, i.key());
+                }
+            }
+        }
+    }
+
+    FillList(box, list);
+    box->setCurrentIndex(-1); // force to select
+    box->blockSignals(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::FillComboBoxSplines(QComboBox *box) const
 {
     SCASSERT(box != nullptr)
@@ -524,6 +564,15 @@ void DialogTool::setCurrentArcId(QComboBox *box, const quint32 &value, FillCombo
 {
     SCASSERT(box != nullptr)
     FillComboBoxArcs(box, rule, ch1, ch2);
+    ChangeCurrentData(box, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogTool::setCurrentArcCurveId(
+    QComboBox *box, const quint32 &value, FillComboBox rule, const quint32 &ch1, const quint32 &ch2) const
+{
+    SCASSERT(box != nullptr)
+    FillComboBoxArcCurves(box, rule, ch1, ch2);
     ChangeCurrentData(box, value);
 }
 

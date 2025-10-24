@@ -30,18 +30,18 @@
 
 #include <QPointF>
 #include <QSharedPointer>
-#include <new>
 
 #include "../../../../../dialogs/tools/dialogcutarc.h"
 #include "../../../../../dialogs/tools/dialogtool.h"
 #include "../../../../../visualization/path/vistoolcutarc.h"
 #include "../../../../../visualization/visualization.h"
 #include "../../../../vabstracttool.h"
-#include "../../../vdrawtool.h"
-#include "../vmisc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
+#include "../vgeometry/vabstractarc.h"
 #include "../vgeometry/varc.h"
+#include "../vgeometry/vellipticalarc.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vpatterndb/variables/vcurvelength.h"
@@ -133,7 +133,7 @@ auto VToolCutArc::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene 
  */
 auto VToolCutArc::Create(VToolCutInitData &initData) -> VToolCutArc *
 {
-    const QSharedPointer<VArc> arc = initData.data->GeometricObject<VArc>(initData.baseCurveId);
+    const QSharedPointer<VAbstractArc> arc = initData.data->GeometricObject<VAbstractArc>(initData.baseCurveId);
 
     // Declare special variable "CurrentLength"
     auto *length =
@@ -143,18 +143,38 @@ auto VToolCutArc::Create(VToolCutInitData &initData) -> VToolCutArc *
 
     const qreal result = CheckFormula(initData.id, initData.formula, initData.data);
 
-    VArc arc1;
-    VArc arc2;
-    QPointF const point = arc->CutArc(VAbstractValApplication::VApp()->toPixel(result), arc1, arc2, initData.name);
+    QPointF cutPoint;
+    QSharedPointer<VAbstractArc> a1;
+    QSharedPointer<VAbstractArc> a2;
 
-    arc1.SetAliasSuffix(initData.aliasSuffix1);
-    arc2.SetAliasSuffix(initData.aliasSuffix2);
+    if (arc->getType() == GOType::Arc)
+    {
+        VArc arc1;
+        VArc arc2;
+        cutPoint = arc->CutArc(VAbstractValApplication::VApp()->toPixel(result), &arc1, &arc2, initData.name);
 
-    auto *p = new VPointF(point, initData.name, initData.mx, initData.my);
+        arc1.SetAliasSuffix(initData.aliasSuffix1);
+        arc2.SetAliasSuffix(initData.aliasSuffix2);
+
+        a1 = QSharedPointer<VArc>(new VArc(arc1));
+        a2 = QSharedPointer<VArc>(new VArc(arc2));
+    }
+    else if (arc->getType() == GOType::EllipticalArc)
+    {
+        VEllipticalArc arc1;
+        VEllipticalArc arc2;
+        cutPoint = arc->CutArc(VAbstractValApplication::VApp()->toPixel(result), &arc1, &arc2, initData.name);
+
+        arc1.SetAliasSuffix(initData.aliasSuffix1);
+        arc2.SetAliasSuffix(initData.aliasSuffix2);
+
+        a1 = QSharedPointer<VEllipticalArc>(new VEllipticalArc(arc1));
+        a2 = QSharedPointer<VEllipticalArc>(new VEllipticalArc(arc2));
+    }
+
+    auto *p = new VPointF(cutPoint, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
 
-    auto a1 = QSharedPointer<VArc>(new VArc(arc1));
-    auto a2 = QSharedPointer<VArc>(new VArc(arc2));
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(p);
@@ -287,52 +307,108 @@ void VToolCutArc::SetVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 auto VToolCutArc::MakeToolTip() const -> QString
 {
-    const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(baseCurveId);
+    const QSharedPointer<VAbstractArc> arc = VAbstractTool::data.GeometricObject<VAbstractArc>(baseCurveId);
 
     const QString expression = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
         formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     const qreal length = Visualization::FindValFromUser(expression, VAbstractTool::data.DataVariables());
 
     const QString arcStr = QCoreApplication::translate("VToolCutArc", "Arc");
+    const QString elArcStr = QCoreApplication::translate("VToolCutArc", "Elliptical arc");
     const QString lengthStr = QCoreApplication::translate("VToolCutArc", "length");
     const QString startAngleStr = QCoreApplication::translate("VToolCutArc", "start angle");
     const QString endAngleStr = QCoreApplication::translate("VToolCutArc", "end angle");
     const QString radiusStr = QCoreApplication::translate("VToolCutArc", "radius");
+    const QString labelStr = QCoreApplication::translate("VToolCutArc", "label");
+    const QString radius1Str = QCoreApplication::translate("VToolCutArc", "radius1");
+    const QString radius2Str = QCoreApplication::translate("VToolCutArc", "radius2");
 
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(m_id);
 
-    VArc ar1;
-    VArc ar2;
-    arc->CutArc(VAbstractValApplication::VApp()->toPixel(length), ar1, ar2, point->name());
-
-    ar1.setId(m_id + 1);
-    ar1.SetAliasSuffix(m_aliasSuffix1);
-
-    ar2.setId(m_id + 2);
-    ar2.SetAliasSuffix(m_aliasSuffix2);
-
-    auto ArcToolTip = [arcStr, lengthStr, startAngleStr, endAngleStr, radiusStr](QString toolTip, const VArc &arc,
-                                                                                 const QString &arcNumber)
+    if (arc->getType() == GOType::Arc)
     {
-        toolTip +=
-            u"<tr> <td><b>%10:</b> %11</td> </tr>"
-            u"<tr> <td><b>%1:</b> %2 %3</td> </tr>"
-            u"<tr> <td><b>%4:</b> %5 %3</td> </tr>"
-            u"<tr> <td><b>%6:</b> %7°</td> </tr>"
-            u"<tr> <td><b>%8:</b> %9°</td> </tr>"_s.arg(arcStr + arcNumber + QChar(QChar::Space) + lengthStr)
-                .arg(VAbstractValApplication::VApp()->fromPixel(arc.GetLength()))
-                .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
-                     arcStr + arcNumber + QChar(QChar::Space) + radiusStr)
-                .arg(VAbstractValApplication::VApp()->fromPixel(arc.GetRadius()))
-                .arg(arcStr + arcNumber + QChar(QChar::Space) + startAngleStr)
-                .arg(arc.GetStartAngle())
-                .arg(arcStr + arcNumber + QChar(QChar::Space) + endAngleStr)
-                .arg(arc.GetEndAngle())
-                .arg(arcStr + arcNumber + QChar(QChar::Space) + QCoreApplication::translate("VToolCutArc", "label"),
-                     arc.ObjectName());
-        return toolTip;
-    };
+        auto ArcToolTip = [arcStr, lengthStr, startAngleStr, endAngleStr, radiusStr, labelStr](QString toolTip,
+                                                                                               const VArc &arc,
+                                                                                               const QString &arcNumber)
+        {
+            toolTip += u"<tr> <td><b>%10:</b> %11</td> </tr>"
+                       u"<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                       u"<tr> <td><b>%4:</b> %5 %3</td> </tr>"
+                       u"<tr> <td><b>%6:</b> %7°</td> </tr>"
+                       u"<tr> <td><b>%8:</b> %9°</td> </tr>"_s
+                           .arg(arcStr + arcNumber + QChar(QChar::Space) + lengthStr)              // %1
+                           .arg(VAbstractValApplication::VApp()->fromPixel(arc.GetLength()))       // %2
+                           .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), // %3
+                                arcStr + arcNumber + QChar(QChar::Space) + radiusStr)              // %4
+                           .arg(arc.GetRadius())                                                   // %5
+                           .arg(arcStr + arcNumber + QChar(QChar::Space) + startAngleStr)          // %6
+                           .arg(arc.GetStartAngle())                                               // %7
+                           .arg(arcStr + arcNumber + QChar(QChar::Space) + endAngleStr)            // %8
+                           .arg(arc.GetEndAngle())                                                 // %9
+                           .arg(arcStr + arcNumber + QChar(QChar::Space) + labelStr,               // %10
+                                arc.ObjectName());                                                 // %11
+            return toolTip;
+        };
 
-    return ArcToolTip(ArcToolTip(QStringLiteral("<table>"), ar1, QChar('1')), ar2, QChar('2')) +
-           QStringLiteral("</table>");
+        VArc ar1;
+        VArc ar2;
+        arc->CutArc(VAbstractValApplication::VApp()->toPixel(length), &ar1, &ar2, point->name());
+
+        ar1.setId(m_id + 1);
+        ar1.SetAliasSuffix(m_aliasSuffix1);
+
+        ar2.setId(m_id + 2);
+        ar2.SetAliasSuffix(m_aliasSuffix2);
+
+        return ArcToolTip(ArcToolTip(QStringLiteral("<table>"), ar1, QChar('1')), ar2, QChar('2'))
+               + QStringLiteral("</table>");
+    }
+
+    if (arc->getType() == GOType::EllipticalArc)
+    {
+        auto ElArcToolTip = [elArcStr,
+                             lengthStr,
+                             startAngleStr,
+                             endAngleStr,
+                             radius1Str,
+                             radius2Str,
+                             labelStr](QString toolTip, const VEllipticalArc &arc, const QString &arcNumber)
+        {
+            toolTip += u"<tr> <td><b>%12:</b> %13</td> </tr>"
+                       u"<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                       u"<tr> <td><b>%4:</b> %5 %3</td> </tr>"
+                       u"<tr> <td><b>%6:</b> %7 %3</td> </tr>"
+                       u"<tr> <td><b>%8:</b> %9°</td> </tr>"
+                       u"<tr> <td><b>%10:</b> %11°</td> </tr>"_s
+                           .arg(elArcStr + arcNumber + QChar(QChar::Space) + lengthStr)            // %1
+                           .arg(VAbstractValApplication::VApp()->fromPixel(arc.GetLength()))       // %2
+                           .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), // %3
+                                elArcStr + arcNumber + QChar(QChar::Space) + radius1Str)           // %4
+                           .arg(VAbstractValApplication::VApp()->fromPixel(arc.GetRadius1()))      // %5
+                           .arg(elArcStr + arcNumber + QChar(QChar::Space) + radius2Str)           // %6
+                           .arg(VAbstractValApplication::VApp()->fromPixel(arc.GetRadius2()))      // %7
+                           .arg(elArcStr + arcNumber + QChar(QChar::Space) + startAngleStr)        // %8
+                           .arg(arc.GetStartAngle())                                               // %9
+                           .arg(elArcStr + arcNumber + QChar(QChar::Space) + endAngleStr)          // %10
+                           .arg(arc.GetEndAngle())                                                 // %11
+                           .arg(elArcStr + arcNumber + QChar(QChar::Space) + labelStr,             // %12
+                                arc.ObjectName());                                                 // %13
+            return toolTip;
+        };
+
+        VEllipticalArc ar1;
+        VEllipticalArc ar2;
+        arc->CutArc(VAbstractValApplication::VApp()->toPixel(length), &ar1, &ar2, point->name());
+
+        ar1.setId(m_id + 1);
+        ar1.SetAliasSuffix(m_aliasSuffix1);
+
+        ar2.setId(m_id + 2);
+        ar2.SetAliasSuffix(m_aliasSuffix2);
+
+        return ElArcToolTip(ElArcToolTip(QStringLiteral("<table>"), ar1, QChar('1')), ar2, QChar('2'))
+               + QStringLiteral("</table>");
+    }
+
+    return {};
 }

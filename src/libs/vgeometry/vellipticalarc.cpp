@@ -235,6 +235,81 @@ auto IsBoundedIntersection(QLineF::IntersectType type, QPointF p, const QLineF &
            (type == QLineF::UnboundedIntersection && VGObject::IsPointOnLineSegment(p, segment1.p1(), segment2.p1()) &&
             VGObject::IsPointOnLineSegment(p, segment2.p1(), segment2.p2()));
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+auto FindBoundedIntersection(const QLineF &boundary, const QLineF &edge) -> std::optional<QPointF>
+{
+    QPointF p;
+    // IsBoundedIntersection contains the logic for edge-case accuracy fixes
+    if (QLineF::IntersectType const type = boundary.intersects(edge, &p); IsBoundedIntersection(type, p, edge, boundary))
+    {
+        return p;
+    }
+    return std::nullopt;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto NormalizeArcPointOrder(QVector<QPointF> &points, const QLineF &start, const QLineF &end, bool &begin)
+    -> std::optional<QVector<QPointF>>
+{
+    for (int i = 0; i < points.size() - 1; ++i)
+    {
+        if (QLineF const edge(points.at(i), points.at(i + 1)); auto p_opt = FindBoundedIntersection(start, edge))
+        {
+            QPointF const p = *p_opt;
+
+            QVector<QPointF> const head = points.mid(0, i + 1);
+            QVector<QPointF> tail = points.mid(i + 1, -1);
+
+            tail = JoinVectors({p}, tail);
+            points = JoinVectors(tail, head);
+            points = JoinVectors(points, {p});
+
+            if (VFuzzyComparePossibleNulls(start.angle(), end.angle()))
+            {
+                return points;
+            }
+
+            begin = false;
+            break;
+        }
+    }
+
+    return std::nullopt;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto BuildArcSegment(const QVector<QPointF> &points, const QLineF &start, const QLineF &end, bool begin)
+    -> QVector<QPointF>
+{
+    QVector<QPointF> arc;
+    arc.reserve(points.size());
+
+    for (int i = 0; i < points.size() - 1; ++i)
+    {
+        if (QLineF const edge(points.at(i), points.at(i + 1)); begin)
+        {
+            if (auto p_opt = FindBoundedIntersection(start, edge))
+            {
+                arc.append(*p_opt);
+                begin = false;
+            }
+        }
+        else
+        {
+            if (auto p_opt = FindBoundedIntersection(end, edge))
+            {
+                arc.append(points.at(i));
+                arc.append(*p_opt);
+                break;
+            }
+
+            arc.append(points.at(i));
+        }
+    }
+
+    return arc;
+}
 } // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -534,82 +609,6 @@ auto VEllipticalArc::GetEndAngle() const -> qreal
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief CutArc cut arc into two arcs.
- * @param length length first arc.
- * @param arc1 first arc.
- * @param arc2 second arc.
- * @return point cutting
- */
-auto VEllipticalArc::CutArc(qreal length, VEllipticalArc &arc1, VEllipticalArc &arc2, const QString &pointName) const
-    -> QPointF
-{
-    const qreal fullLength = GetLength();
-
-    if (qFuzzyIsNull(fullLength) || (qFuzzyIsNull(d->radius1) && qFuzzyIsNull(d->radius2)))
-    {
-        arc1 = *this;
-        arc2 = *this;
-        return GetCenter().toQPointF();
-    }
-
-    if (qFuzzyIsNull(length) || qFuzzyIsNull(length + fullLength))
-    {
-        arc1 = VEllipticalArc(GetCenter(), d->radius1, d->radius2, d->formulaRadius1, d->formulaRadius2,
-                              GetStartAngle(), GetFormulaF1(), GetStartAngle(), GetFormulaF1(), d->rotationAngle,
-                              GetFormulaRotationAngle(), getIdObject(), getMode());
-        arc1.SetApproximationScale(GetApproximationScale());
-        arc1.SetFlipped(IsFlipped());
-        arc1.SetAllowEmpty(true);
-
-        arc2 = *this;
-
-        return GetP1();
-    }
-
-    if (VFuzzyComparePossibleNulls(length, fullLength))
-    {
-        arc1 = *this;
-
-        arc2 = VEllipticalArc(GetCenter(), d->radius1, d->radius2, d->formulaRadius1, d->formulaRadius2, GetEndAngle(),
-                              GetFormulaF2(), GetEndAngle(), GetFormulaF2(), d->rotationAngle,
-                              GetFormulaRotationAngle(), getIdObject(), getMode());
-        arc2.SetApproximationScale(GetApproximationScale());
-        arc2.SetFlipped(IsFlipped());
-        arc2.SetAllowEmpty(true);
-
-        return GetP2();
-    }
-
-    qreal const len = CorrectCutLength(length, fullLength, pointName);
-
-    // the first arc has given length and startAngle just like in the origin arc
-    arc1 = VEllipticalArc(len, QString().setNum(length), GetCenter(), d->radius1, d->radius2, d->formulaRadius1,
-                          d->formulaRadius2, GetStartAngle(), GetFormulaF1(), d->rotationAngle,
-                          GetFormulaRotationAngle(), getIdObject(), getMode());
-    arc1.SetApproximationScale(GetApproximationScale());
-    arc1.SetFlipped(IsFlipped());
-
-    // the second arc has startAngle just like endAngle of the first arc
-    // and it has endAngle just like endAngle of the origin arc
-    arc2 = VEllipticalArc(GetCenter(), d->radius1, d->radius2, d->formulaRadius1, d->formulaRadius2, arc1.GetEndAngle(),
-                          arc1.GetFormulaF2(), GetEndAngle(), GetFormulaF2(), d->rotationAngle,
-                          GetFormulaRotationAngle(), getIdObject(), getMode());
-    arc2.SetApproximationScale(GetApproximationScale());
-    arc2.SetFlipped(IsFlipped());
-
-    return arc1.GetP2();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VEllipticalArc::CutArc(qreal length, const QString &pointName) const -> QPointF
-{
-    VEllipticalArc arc1;
-    VEllipticalArc arc2;
-    return CutArc(length, arc1, arc2, pointName);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VEllipticalArc::CreateName()
 {
     QString name = ELARC_ + this->GetCenter().name();
@@ -699,6 +698,133 @@ void VEllipticalArc::FindF2(qreal length)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VEllipticalArc::DoCutArc(qreal length, VAbstractArc *arc1, VAbstractArc *arc2, const QString &pointName) const
+    -> QPointF
+{
+    auto *vArc1Ptr = dynamic_cast<VEllipticalArc *>(arc1);
+    auto *vArc2Ptr = dynamic_cast<VEllipticalArc *>(arc2);
+
+    // Check if the cast succeeded for both.
+    if ((vArc1Ptr == nullptr) || (vArc2Ptr == nullptr))
+    {
+        // Handle error case (e.g., trying to cut a VArc into VEllipticalArc objects)
+        qWarning() << "VEllipticalArc::DoCutArc received VAbstractArc references that are not VEllipticalArc objects.";
+        return {};
+    }
+
+    const qreal fullLength = GetLength();
+
+    if (qFuzzyIsNull(fullLength) || (qFuzzyIsNull(d->radius1) && qFuzzyIsNull(d->radius2)))
+    {
+        *vArc1Ptr = *this;
+        *vArc2Ptr = *this;
+        return GetCenter().toQPointF();
+    }
+
+    if (qFuzzyIsNull(length) || qFuzzyIsNull(length + fullLength))
+    {
+        VEllipticalArc newArc1(GetCenter(),
+                               d->radius1,
+                               d->radius2,
+                               d->formulaRadius1,
+                               d->formulaRadius2,
+                               GetStartAngle(),
+                               GetFormulaF1(),
+                               GetStartAngle(),
+                               GetFormulaF1(),
+                               d->rotationAngle,
+                               GetFormulaRotationAngle(),
+                               getIdObject(),
+                               getMode());
+        newArc1.SetApproximationScale(GetApproximationScale());
+        newArc1.SetFlipped(IsFlipped());
+        newArc1.SetAllowEmpty(true);
+
+        *vArc1Ptr = newArc1;
+        *vArc2Ptr = *this;
+
+        return GetP1();
+    }
+
+    if (VFuzzyComparePossibleNulls(length, fullLength))
+    {
+        *vArc1Ptr = *this;
+
+        VEllipticalArc newArc2(GetCenter(),
+                               d->radius1,
+                               d->radius2,
+                               d->formulaRadius1,
+                               d->formulaRadius2,
+                               GetEndAngle(),
+                               GetFormulaF2(),
+                               GetEndAngle(),
+                               GetFormulaF2(),
+                               d->rotationAngle,
+                               GetFormulaRotationAngle(),
+                               getIdObject(),
+                               getMode());
+        newArc2.SetApproximationScale(GetApproximationScale());
+        newArc2.SetFlipped(IsFlipped());
+        newArc2.SetAllowEmpty(true);
+
+        *vArc2Ptr = newArc2;
+
+        return GetP2();
+    }
+
+    qreal const len = CorrectCutLength(length, fullLength, pointName);
+
+    // the first arc has given length and startAngle just like in the origin arc
+    VEllipticalArc newArc1(len,
+                           QString().setNum(length),
+                           GetCenter(),
+                           d->radius1,
+                           d->radius2,
+                           d->formulaRadius1,
+                           d->formulaRadius2,
+                           GetStartAngle(),
+                           GetFormulaF1(),
+                           d->rotationAngle,
+                           GetFormulaRotationAngle(),
+                           getIdObject(),
+                           getMode());
+    newArc1.SetApproximationScale(GetApproximationScale());
+    newArc1.SetFlipped(IsFlipped());
+
+    *vArc1Ptr = newArc1;
+
+    // the second arc has startAngle just like endAngle of the first arc
+    // and it has endAngle just like endAngle of the origin arc
+    VEllipticalArc newArc2(GetCenter(),
+                           d->radius1,
+                           d->radius2,
+                           d->formulaRadius1,
+                           d->formulaRadius2,
+                           vArc1Ptr->GetEndAngle(),
+                           vArc1Ptr->GetFormulaF2(),
+                           GetEndAngle(),
+                           GetFormulaF2(),
+                           d->rotationAngle,
+                           GetFormulaRotationAngle(),
+                           getIdObject(),
+                           getMode());
+    newArc2.SetApproximationScale(GetApproximationScale());
+    newArc2.SetFlipped(IsFlipped());
+
+    *vArc2Ptr = newArc2;
+
+    return vArc1Ptr->GetP2();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VEllipticalArc::DoCutArcByLength(qreal length, const QString &pointName) const -> QPointF
+{
+    VEllipticalArc arc1;
+    VEllipticalArc arc2;
+    return VAbstractArc::CutArc(length, &arc1, &arc2, pointName);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VEllipticalArc::MaxLength() const -> qreal
 {
     const qreal h = qPow(qAbs(d->radius1) - qAbs(d->radius2), 2) / qPow(qAbs(d->radius1) + qAbs(d->radius2), 2);
@@ -749,6 +875,12 @@ auto VEllipticalArc::ArcPoints(QVector<QPointF> points) const -> QVector<QPointF
         return points;
     }
 
+    if (const qreal angleDiff = qAbs(GetStartAngle() - GetEndAngle());
+        (VFuzzyComparePossibleNulls(angleDiff, 0) || VFuzzyComparePossibleNulls(angleDiff, 360)) && IsAllowEmpty())
+    {
+        return {GetP1()};
+    }
+
     QPointF const center = VAbstractArc::GetCenter().toQPointF();
     qreal const radius = qMax(qAbs(d->radius1), qAbs(d->radius2)) * 2;
 
@@ -762,75 +894,14 @@ auto VEllipticalArc::ArcPoints(QVector<QPointF> points) const -> QVector<QPointF
 
     if (start.angle() >= end.angle())
     {
-        for (int i = 0; i < points.size() - 1; ++i)
+        if (auto reordered = NormalizeArcPointOrder(points, start, end, begin))
         {
-            QLineF const edge(points.at(i), points.at(i + 1));
-
-            QPointF p;
-            QLineF::IntersectType const type = start.intersects(edge, &p);
-
-            // QLineF::intersects not always accurate on edge cases
-            if (IsBoundedIntersection(type, p, edge, start))
-            {
-                QVector<QPointF> const head = points.mid(0, i + 1);
-                QVector<QPointF> tail = points.mid(i + 1, -1);
-
-                tail = JoinVectors({p}, tail);
-                points = JoinVectors(tail, head);
-                points = JoinVectors(points, {p});
-
-                if (VFuzzyComparePossibleNulls(start.angle(), end.angle()))
-                {
-                    return points;
-                }
-
-                begin = false;
-                break;
-            }
+            return *reordered;
         }
     }
 
-    QVector<QPointF> arc;
-    arc.reserve(points.size());
-
-    for (int i = 0; i < points.size() - 1; ++i)
-    {
-        QLineF const edge(points.at(i), points.at(i + 1));
-
-        if (begin)
-        {
-            QPointF p;
-            QLineF::IntersectType const type = start.intersects(edge, &p);
-
-            // QLineF::intersects not always accurate on edge cases
-            if (IsBoundedIntersection(type, p, edge, start))
-            {
-                arc.append(p);
-                begin = false;
-            }
-        }
-        else
-        {
-            QPointF p;
-
-            // QLineF::intersects not always accurate on edge cases
-            if (QLineF::IntersectType const type = end.intersects(edge, &p); IsBoundedIntersection(type, p, edge, end))
-            {
-                arc.append(points.at(i));
-                arc.append(p);
-                break;
-            }
-
-            arc.append(points.at(i));
-        }
-    }
-
-    if (arc.isEmpty())
-    {
-        return points;
-    }
-
-    return arc;
+    QVector<QPointF> const arc = BuildArcSegment(points, start, end, begin);
+    return arc.isEmpty() ? points : arc;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

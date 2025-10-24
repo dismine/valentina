@@ -100,15 +100,15 @@ public:
     auto GetStartAngle() const -> qreal override;
     auto GetEndAngle() const -> qreal override;
 
-    auto CutArc(qreal length, VEllipticalArc &arc1, VEllipticalArc &arc2, const QString &pointName) const -> QPointF;
-    auto CutArc(qreal length, const QString &pointName) const -> QPointF;
-
     static auto OptimizeAngle(qreal angle) -> qreal;
 
 protected:
     void CreateName() override;
     void CreateAlias() override;
     void FindF2(qreal length) override;
+    auto DoCutArc(qreal length, VAbstractArc *arc1, VAbstractArc *arc2, const QString &pointName) const
+        -> QPointF override;
+    auto DoCutArcByLength(qreal length, const QString &pointName) const -> QPointF override;
 
 private:
     QSharedDataPointer<VEllipticalArcData> d;

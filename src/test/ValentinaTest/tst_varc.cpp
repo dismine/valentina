@@ -531,7 +531,7 @@ void TST_VArc::TestCutArcByLength()
 
     VArc arc1;
     VArc arc2;
-    QPointF const point = arc.CutArc(cutLength, arc1, arc2, QString());
+    QPointF const point = arc.CutArc(cutLength, &arc1, &arc2, QString());
 
     QCOMPARE(point, cutPoint);
 

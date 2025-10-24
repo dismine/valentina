@@ -251,6 +251,19 @@ auto VAbstractArc::GetPath() const -> QPainterPath
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VAbstractArc::CutArc(qreal length, VAbstractArc *arc1, VAbstractArc *arc2, const QString &pointName) const
+    -> QPointF
+{
+    return DoCutArc(length, arc1, arc2, pointName);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractArc::CutArc(qreal length, const QString &pointName) const -> QPointF
+{
+    return DoCutArcByLength(length, pointName);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractArc::SetFlipped(bool value)
 {
     d->isFlipped = value;
@@ -260,6 +273,12 @@ void VAbstractArc::SetFlipped(bool value)
 void VAbstractArc::SetAllowEmpty(bool value)
 {
     d->isAllowEmpty = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractArc::IsAllowEmpty() const -> bool
+{
+    return d->isAllowEmpty;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

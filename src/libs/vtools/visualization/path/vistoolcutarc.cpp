@@ -33,10 +33,9 @@
 #include <QPainterPath>
 #include <QPointF>
 #include <QSharedPointer>
-#include <new>
 
-#include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
+#include "../vgeometry/vellipticalarc.h"
 #include "../visualization.h"
 #include "../vmisc/theme/themeDef.h"
 #include "../vmisc/vmodifierkey.h"
@@ -65,18 +64,33 @@ void VisToolCutArc::RefreshGeometry()
 {
     if (m_arcId > NULL_ID)
     {
-        const QSharedPointer<VArc> arc = GetData()->GeometricObject<VArc>(m_arcId);
+        const QSharedPointer<VAbstractArc> arc = GetData()->GeometricObject<VAbstractArc>(m_arcId);
         DrawPath(this, arc->GetPath(), arc->DirectionArrows(), LineStyle(), Qt::RoundCap);
 
         if (!qIsInf(m_length))
         {
-            VArc ar1;
-            VArc ar2;
-            QPointF const p = arc->CutArc(m_length, ar1, ar2, QString());
-            DrawPoint(m_point, p);
+            if (arc->getType() == GOType::Arc)
+            {
+                VArc ar1;
+                VArc ar2;
 
-            DrawPath(m_arc1, ar1.GetPath(), ar1.DirectionArrows(), LineStyle(), Qt::RoundCap);
-            DrawPath(m_arc2, ar2.GetPath(), ar2.DirectionArrows(), LineStyle(), Qt::RoundCap);
+                QPointF const p = arc->CutArc(m_length, &ar1, &ar2, QString());
+                DrawPoint(m_point, p);
+
+                DrawPath(m_arc1, ar1.GetPath(), ar1.DirectionArrows(), LineStyle(), Qt::RoundCap);
+                DrawPath(m_arc2, ar2.GetPath(), ar2.DirectionArrows(), LineStyle(), Qt::RoundCap);
+            }
+            else if (arc->getType() == GOType::EllipticalArc)
+            {
+                VEllipticalArc ar1;
+                VEllipticalArc ar2;
+
+                QPointF const p = arc->CutArc(m_length, &ar1, &ar2, QString());
+                DrawPoint(m_point, p);
+
+                DrawPath(m_arc1, ar1.GetPath(), ar1.DirectionArrows(), LineStyle(), Qt::RoundCap);
+                DrawPath(m_arc2, ar2.GetPath(), ar2.DirectionArrows(), LineStyle(), Qt::RoundCap);
+            }
         }
         else if (GetMode() == Mode::Creation)
         {

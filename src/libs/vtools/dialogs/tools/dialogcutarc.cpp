@@ -83,7 +83,7 @@ DialogCutArc::DialogCutArc(const VContainer *data, VAbstractPattern *doc, quint3
 
     InitOkCancelApply(ui);
 
-    FillComboBoxArcs(ui->comboBoxArc);
+    FillComboBoxArcCurves(ui->comboBoxArc);
 
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogCutArc::FXLength);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
@@ -172,7 +172,7 @@ void DialogCutArc::ChosenObject(quint32 id, const SceneObject &type)
         return;
     }
 
-    if (type == SceneObject::Arc && SetObject(id, ui->comboBoxArc, QString()))
+    if ((type == SceneObject::Arc || type == SceneObject::ElArc) && SetObject(id, ui->comboBoxArc, QString()))
     {
         if (vis != nullptr)
         {
@@ -318,7 +318,7 @@ void DialogCutArc::InitIcons()
  */
 void DialogCutArc::setArcId(quint32 value)
 {
-    setCurrentArcId(ui->comboBoxArc, value);
+    setCurrentArcCurveId(ui->comboBoxArc, value);
 
     auto *path = qobject_cast<VisToolCutArc *>(vis);
     SCASSERT(path != nullptr)
@@ -454,7 +454,7 @@ void DialogCutArc::ShowDialog(bool click)
         auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
         SCASSERT(scene != nullptr)
 
-        const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(getArcId());
+        const QSharedPointer<VAbstractArc> arc = data->GeometricObject<VAbstractArc>(getArcId());
         QPointF const p = arc->ClosestPoint(scene->getScenePos());
         qreal len = arc->GetLengthByPoint(p);
 

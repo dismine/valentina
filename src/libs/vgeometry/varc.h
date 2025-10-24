@@ -79,15 +79,15 @@ public:
 
     auto GetPoints() const -> QVector<QPointF> override;
 
-    auto CutArc(qreal length, VArc &arc1, VArc &arc2, const QString &pointName) const -> QPointF;
-    auto CutArc(qreal length, const QString &pointName) const -> QPointF;
-
     static auto OptimalApproximationScale(qreal radius, qreal f1, qreal f2, qreal tolerance) -> qreal;
 
 protected:
     void CreateName() override;
     void CreateAlias() override;
     void FindF2(qreal length) override;
+    auto DoCutArc(qreal length, VAbstractArc *arc1, VAbstractArc *arc2, const QString &pointName) const
+        -> QPointF override;
+    auto DoCutArcByLength(qreal length, const QString &pointName) const -> QPointF override;
 
 private:
     QSharedDataPointer<VArcData> d;

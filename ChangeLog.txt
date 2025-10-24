@@ -6,6 +6,7 @@
 - Added import/export increments from Table of variables.
 - Valentina app. New action Reload labels.
 - Valentina app. New action Install single line font.
+- Valentina app. Tool Segment Arc now supports an elliptical arc.
 
 # Valentina 1.0.1 (unreleased)
 - Tool Normal. Fixed formula values were not saved.

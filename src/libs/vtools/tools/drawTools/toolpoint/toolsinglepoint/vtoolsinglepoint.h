@@ -129,11 +129,11 @@ inline auto VToolSinglePoint::InitArc(VContainer *data, qreal segLength, const V
 
     if (not VFuzzyComparePossibleNulls(segLength, -1))
     {
-        arc->CutArc(segLength, arc1, arc2, p->name());
+        arc->CutArc(segLength, &arc1, &arc2, p->name());
     }
     else
     {
-        arc->CutArc(0, arc1, arc2, p->name());
+        arc->CutArc(0, &arc1, &arc2, p->name());
     }
 
     // Arc highly depend on id. Need for creating the name.

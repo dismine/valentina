@@ -84,11 +84,21 @@ public:
 
     auto GetPath() const -> QPainterPath override;
 
+    auto CutArc(qreal length, VAbstractArc *arc1, VAbstractArc *arc2, const QString &pointName) const -> QPointF;
+    auto CutArc(qreal length, const QString &pointName) const -> QPointF;
+
 protected:
     void SetFlipped(bool value);
     void SetAllowEmpty(bool value);
+    auto IsAllowEmpty() const -> bool;
+
     virtual void FindF2(qreal length) = 0;
     void SetFormulaLength(const QString &formula);
+
+    virtual auto DoCutArc(qreal length, VAbstractArc *arc1, VAbstractArc *arc2, const QString &pointName) const
+        -> QPointF
+        = 0;
+    virtual auto DoCutArcByLength(qreal length, const QString &pointName) const -> QPointF = 0;
 
 private:
     QSharedDataPointer<VAbstractArcData> d;
