@@ -28,6 +28,7 @@
 
 #include "vellipticalarc.h"
 
+#include <optional>
 #include <QLineF>
 #include <QPainterPath>
 #include <QPoint>
