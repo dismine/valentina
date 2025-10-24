@@ -4183,10 +4183,6 @@
         <translation>Vypočítaná hodnota</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1434"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1437"/>
         <source>Lines</source>
@@ -10382,32 +10378,32 @@ Přesto použít nastavení?</translation>
         <translation type="vanished">Chyba zpracování: %1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="283"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="323"/>
         <source>First point</source>
         <translation>První bod</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="284"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="324"/>
         <source>Second point</source>
         <translation>Druhý bod</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="292"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="332"/>
         <source>Highest point</source>
         <translation>Nejvyšší bod</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="293"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="333"/>
         <source>Lowest point</source>
         <translation>Nejnižší bod</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="301"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="341"/>
         <source>Leftmost point</source>
         <translation>Bod nejvíce vlevo</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="302"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="342"/>
         <source>Rightmost point</source>
         <translation>Bod nejvíce vpravo</translation>
     </message>
@@ -10416,32 +10412,32 @@ Přesto použít nastavení?</translation>
         <translation type="vanished">Neplatná hodnota</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="411"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="451"/>
         <source>by length</source>
         <translation>Podle délky</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="412"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="452"/>
         <source>by points intersetions</source>
         <translation>Podle průsečíků</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="413"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="453"/>
         <source>by first edge symmetry</source>
         <translation>Podle souměrnosti prvního okraje</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="414"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="454"/>
         <source>by second edge symmetry</source>
         <translation>Podle souměrnosti druhého okraje</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="415"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="455"/>
         <source>by first edge right angle</source>
         <translation>Podle pravého úhlu prvního okraje</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="416"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="456"/>
         <source>by second edge right angle</source>
         <translation>Podle pravého úhlu druhého okraje</translation>
     </message>
@@ -15459,13 +15455,13 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="384"/>
-        <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="852"/>
+        <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="923"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too small. Optimize it to minimal value.</source>
         <translation>Křivka &apos;%1&apos;. Délka vyjmuté části je příliš malá. Vylaďte ji na nejmenší hodnotu.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="401"/>
-        <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="870"/>
+        <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="941"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too big. Optimize it to maximal value.</source>
         <translation>Křivka &apos;%1&apos;. Délka vyjmuté části je příliš velká. Vylaďte ji na největší hodnotu.</translation>
     </message>
@@ -15547,13 +15543,13 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="378"/>
-        <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="846"/>
+        <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="917"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too small. Optimize it to minimal value.</source>
         <translation>Křivka &apos;%1&apos;. Délka vyjmuté části (%2) je příliš malá. Vylaďte ji na nejmenší hodnotu.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="396"/>
-        <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="865"/>
+        <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="936"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
         <translation>Křivka &apos;%1&apos;. Délka vyjmuté části (%2) je příliš velká. Vylaďte ji na největší hodnotu.</translation>
     </message>
@@ -15594,26 +15590,26 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Neznámý</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="965"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="979"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="972"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="986"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam path at %2.</source>
         <translation>Díl &apos;%1&apos;. Nelze se vytvořit úplnou cestu švu na %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="967"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="981"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="974"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="988"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam path.</source>
         <translation>Díl &apos;%1&apos;. Nelze vytvořit úplnou cestu švu.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1031"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1051"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1038"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1058"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam allowance path at %2.</source>
         <translation>Díl &apos;%1&apos;. Nelze se vytvořit úplnou cestu švové záložky na %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1033"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1053"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1040"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1060"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam allowance path.</source>
         <translation>Díl &apos;%1&apos;. Nelze se vytvořit úplnou cestu švové záložky.</translation>
     </message>
@@ -20436,26 +20432,26 @@ Chcete uložit změny?</translation>
 <context>
     <name>VArc</name>
     <message>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="511"/>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="565"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="551"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="605"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too small. Optimize it to minimal value.</source>
         <translation>Křivka &apos;%1&apos;. Délka vyjmuté části (%2) je příliš malá. Vylaďte ji na nejmenší hodnotu.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="517"/>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="571"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="557"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="611"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too small. Optimize it to minimal value.</source>
         <translation>Křivka &apos;%1&apos;. Délka vyjmuté části je příliš malá. Vylaďte ji na nejmenší hodnotu.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="528"/>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="582"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="568"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="622"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
         <translation>Křivka &apos;%1&apos;. Délka vyjmuté části (%2) je příliš velká. Vylaďte ji na největší hodnotu.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="533"/>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="587"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="573"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="627"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too big. Optimize it to maximal value.</source>
         <translation>Křivka &apos;%1&apos;. Délka vyjmuté části je příliš velká. Vylaďte ji na největší hodnotu.</translation>
     </message>
@@ -21592,55 +21588,55 @@ Chcete uložit změny?</translation>
 <context>
     <name>VFontInstaller</name>
     <message>
-        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="264"/>
-        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="355"/>
+        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="261"/>
+        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="352"/>
         <source>Could not determine the system font installation path.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="271"/>
-        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="362"/>
+        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="268"/>
+        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="359"/>
         <source>Failed to create destination directory: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="287"/>
+        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="284"/>
         <source>Font file already exists at destination: %1. Continuing with registration.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="293"/>
-        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="384"/>
+        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="290"/>
+        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="381"/>
         <source>Failed to copy file from %1 to %2. Possible reasons: permission denied, file locked, or general I/O error.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="308"/>
+        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="305"/>
         <source>Font copy succeeded, but Linux font cache rebuild failed. Font may not be immediately visible.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="316"/>
+        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="313"/>
         <source>Font copy succeeded, but Windows Registry registration failed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="378"/>
+        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="375"/>
         <source>Font file already exists at destination: %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="424"/>
+        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="421"/>
         <source>Font loaded, but could not determine font family name to install font corrections.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="450"/>
+        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="447"/>
         <source>Font correction file already exists at destination: %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="455"/>
+        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="452"/>
         <source>Failed to copy font correction file from %1 to %2. Possible reasons: permission denied, file locked, or general I/O error.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -22785,7 +22781,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2303"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="5181"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="5180"/>
         <source>Preferences</source>
         <translation>Nastavení</translation>
     </message>
@@ -22877,55 +22873,55 @@ Chcete uložit změny?</translation>
         <translation>Rozvržení bylo změněno. Chcete uložit své změny?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3811"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3873"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3810"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3872"/>
         <source>Layout files</source>
         <translation>Soubory rozvržení</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3815"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3963"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4912"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3814"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3962"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4911"/>
         <source>Open file</source>
         <translation>Otevřít soubor</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3856"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3855"/>
         <source>Could not save the file</source>
         <translation>Nepodařilo se uložit soubor</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3875"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3874"/>
         <source>layout</source>
         <translation>Rozvržení</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3887"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3886"/>
         <source>Save as</source>
         <translation>Uložit jako</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3917"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3916"/>
         <source>Failed to lock. This file already opened in another window.</source>
         <translation>Nepodařilo se uzamknout. Tento soubor je již otevřen v jiném okně.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3927"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3926"/>
         <source>Could not save file</source>
         <translation>Nepodařilo se uložit soubor</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3948"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3947"/>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
         <translation>Nepodařilo se uzamknout. Tento soubor je již otevřen v jiném okně. Při zdvojeném vykonávání (2 kopie programu) může dojít ke střetům.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3958"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3957"/>
         <source>Raw Layout files</source>
         <translation>Soubory s nezpracovaným rozvržením</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3976"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3975"/>
         <source>About Qt</source>
         <translation>O Qt</translation>
     </message>
@@ -23201,13 +23197,13 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="745"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3779"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3778"/>
         <source>&amp;Undo</source>
         <translation>&amp;Zpět</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="751"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3780"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3779"/>
         <source>&amp;Redo</source>
         <translation>&amp;Znovu</translation>
     </message>
@@ -23277,7 +23273,7 @@ Chcete uložit změny?</translation>
         <translation>Rozvržení je neplatné. Jeden nebo více dílů je blíže, než je nejméně povoleno. Chcete pokračovat ve vyvádění?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4246"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4245"/>
         <source>Sheet %1</source>
         <translation>List %1</translation>
     </message>
@@ -23292,20 +23288,32 @@ Chcete uložit změny?</translation>
         <translation>Otočit díly</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4450"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4449"/>
         <source>untitled %1</source>
         <translation>bez názvu %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4450"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4449"/>
         <source>untitled</source>
         <translation>bez názvu</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4541"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4592"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4540"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4591"/>
         <source>For printing multipages document all sheet should have the same size.</source>
         <translation>Pro tisk vícestránkového dokumentu musí mít všechny listy stejnou velikost.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4552"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4603"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4638"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4676"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4731"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4775"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4808"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4844"/>
+        <source>Print error</source>
+        <translation>Chyba při tisku</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4553"/>
@@ -23316,31 +23324,19 @@ Chcete uložit změny?</translation>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4776"/>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4809"/>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4845"/>
-        <source>Print error</source>
-        <translation>Chyba při tisku</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4554"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4605"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4640"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4678"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4733"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4777"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4810"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4846"/>
         <source>Cannot proceed because there are no available printers in your system.</source>
         <translation>Nelze pokračovat, protože ve vašem systému nejsou dostupné žádné tiskárny.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4909"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4908"/>
         <source>Watermark files</source>
         <translation>Soubory vodoznaku</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4565"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4616"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4651"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4689"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4564"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4615"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4650"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4688"/>
         <source>Unable to get sheet page settings</source>
         <translation>Nelze získat nastavení strany listu</translation>
     </message>
@@ -23380,7 +23376,7 @@ Chcete uložit změny?</translation>
         <translation>Působí pouze při tisku v aplikaci. Pro vyvedení se schématem dlaždic použijte samostatné nastavení</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4503"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4502"/>
         <source>sheet</source>
         <translation>list</translation>
     </message>
@@ -24386,34 +24382,49 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
 <context>
     <name>VToolCutArc</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="296"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="316"/>
         <source>Arc</source>
         <translation>Oblouk</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="297"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="317"/>
+        <source>Elliptical arc</source>
+        <translation type="unfinished">Elipsovitý oblouk</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="318"/>
         <source>length</source>
         <translation>Délka</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="298"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="319"/>
         <source>start angle</source>
         <translation>Počáteční úhel</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="299"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="320"/>
         <source>end angle</source>
         <translation>Koncový úhel</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="300"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="321"/>
         <source>radius</source>
         <translation>Poloměr</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="331"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="322"/>
         <source>label</source>
         <translation>Popis</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="323"/>
+        <source>radius1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="324"/>
+        <source>radius2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -27558,37 +27569,37 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
         <translation>Formulář</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="294"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="274"/>
         <source>Unnamed</source>
         <translation>Bez názvu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="307"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="287"/>
         <source>Select all</source>
         <translation>Vybrat vše</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="308"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="288"/>
         <source>Select none</source>
         <translation>Žádný výběr</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="378"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="358"/>
         <source>select all details</source>
         <translation>Vybrat všechny jednotlivosti (díly střihu)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="385"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="365"/>
         <source>select none details</source>
         <translation>Nevybrat žádné jednotlivosti (díly střihu)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="312"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="292"/>
         <source>Invert selection</source>
         <translation>Obrátit výběr</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="391"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="371"/>
         <source>invert selection</source>
         <translation>Obrátit výběr</translation>
     </message>
@@ -27598,17 +27609,17 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
         <translation>Skrýt ne v rozvržení</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="332"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="312"/>
         <source>Piece options</source>
         <translation>Volby pro díl</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="334"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="314"/>
         <source>Delete piece</source>
         <translation>Smazat díl</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="340"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="320"/>
         <source>Cannot find piece by id &apos;%1&apos;</source>
         <translation>Nelze najít díl podle ID &apos;%1&apos;</translation>
     </message>
@@ -27763,7 +27774,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
 <context>
     <name>VisToolCutArc</name>
     <message>
-        <location filename="../../src/libs/vtools/visualization/path/vistoolcutarc.cpp" line="90"/>
+        <location filename="../../src/libs/vtools/visualization/path/vistoolcutarc.cpp" line="104"/>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
         <translation>Délka = %1%2; &lt;b&gt;Klepněte tlačítkem myši&lt;/b&gt; - potvrďte délku, &lt;b&gt;%3&lt;/b&gt; - dokončeno</translation>
     </message>

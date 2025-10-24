@@ -10374,32 +10374,32 @@ Einstellungen trotzdem anwenden?</translation>
         <translation type="vanished">Auswertungsfehler: %1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="283"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="323"/>
         <source>First point</source>
         <translation>Erster Punkt</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="284"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="324"/>
         <source>Second point</source>
         <translation>Zweiter Punkt</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="292"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="332"/>
         <source>Highest point</source>
         <translation>Höchster Punkt</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="293"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="333"/>
         <source>Lowest point</source>
         <translation>Unterster Punkt</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="301"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="341"/>
         <source>Leftmost point</source>
         <translation>Punkt ganz links</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="302"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="342"/>
         <source>Rightmost point</source>
         <translation>Punkt ganz rechts</translation>
     </message>
@@ -10408,32 +10408,32 @@ Einstellungen trotzdem anwenden?</translation>
         <translation type="vanished">Ungültiger Wert</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="411"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="451"/>
         <source>by length</source>
         <translation>nach Länge</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="412"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="452"/>
         <source>by points intersetions</source>
         <translation>nach Punktüberschneidungen</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="413"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="453"/>
         <source>by first edge symmetry</source>
         <translation>nach Symmetrie der ersten Kante</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="414"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="454"/>
         <source>by second edge symmetry</source>
         <translation>nach Symmetrie der zweiten Kante</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="415"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="455"/>
         <source>by first edge right angle</source>
         <translation>nach rechtem Winkel der ersten Kante</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="416"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="456"/>
         <source>by second edge right angle</source>
         <translation>nach rechtem Winkel der zweiten Kante</translation>
     </message>
@@ -15445,13 +15445,13 @@ Diese Option wird nach einem Neustart aktiv.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="384"/>
-        <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="852"/>
+        <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="923"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too small. Optimize it to minimal value.</source>
         <translation>Kurve &apos;%1&apos;. Die Länge eines geschnittenen Segments ist zu klein. Optimieren Sie es auf den minimalen Wert.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="401"/>
-        <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="870"/>
+        <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="941"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too big. Optimize it to maximal value.</source>
         <translation>Kurve &apos;%1&apos;. Die Länge eines geschnittenen Segments ist zu groß. Optimieren Sie es auf den maximalen Wert.</translation>
     </message>
@@ -15533,13 +15533,13 @@ Diese Option wird nach einem Neustart aktiv.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="378"/>
-        <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="846"/>
+        <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="917"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too small. Optimize it to minimal value.</source>
         <translation>Kurve &apos;%1&apos;. Die Länge eines Schnittsegments (%2) ist zu klein. Optimieren Sie es auf den minimalen Wert.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="396"/>
-        <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="865"/>
+        <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="936"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
         <translation>Kurve &apos;%1&apos;. Die Länge eines Schnittsegments (%2) ist zu groß. Optimieren Sie es auf den maximalen Wert.</translation>
     </message>
@@ -15580,26 +15580,26 @@ Diese Option wird nach einem Neustart aktiv.</translation>
         <translation>Unbekannt</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="965"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="979"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="972"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="986"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam path at %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="967"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="981"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="974"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="988"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam path.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1031"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1051"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1038"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1058"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam allowance path at %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1033"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1053"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1040"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1060"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam allowance path.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -20420,26 +20420,26 @@ Do you want to save your changes?</source>
 <context>
     <name>VArc</name>
     <message>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="511"/>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="565"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="551"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="605"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too small. Optimize it to minimal value.</source>
         <translation>Kurve &apos;%1&apos;. Die Länge eines Schnittsegments (%2) ist zu klein. Optimieren Sie es auf den minimalen Wert.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="517"/>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="571"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="557"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="611"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too small. Optimize it to minimal value.</source>
         <translation>Kurve &apos;%1&apos;. Die Länge eines geschnittenen Segments ist zu klein. Optimieren Sie es auf den minimalen Wert.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="528"/>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="582"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="568"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="622"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
         <translation>Kurve &apos;%1&apos;. Die Länge eines Schnittsegments (%2) ist zu groß. Optimieren Sie es auf den maximalen Wert.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="533"/>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="587"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="573"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="627"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too big. Optimize it to maximal value.</source>
         <translation>Kurve &apos;%1&apos;. Die Länge eines geschnittenen Segments ist zu groß. Optimieren Sie es auf den maximalen Wert.</translation>
     </message>
@@ -21575,55 +21575,55 @@ Do you want to save your changes?</source>
 <context>
     <name>VFontInstaller</name>
     <message>
-        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="264"/>
-        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="355"/>
+        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="261"/>
+        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="352"/>
         <source>Could not determine the system font installation path.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="271"/>
-        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="362"/>
+        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="268"/>
+        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="359"/>
         <source>Failed to create destination directory: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="287"/>
+        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="284"/>
         <source>Font file already exists at destination: %1. Continuing with registration.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="293"/>
-        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="384"/>
+        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="290"/>
+        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="381"/>
         <source>Failed to copy file from %1 to %2. Possible reasons: permission denied, file locked, or general I/O error.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="308"/>
+        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="305"/>
         <source>Font copy succeeded, but Linux font cache rebuild failed. Font may not be immediately visible.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="316"/>
+        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="313"/>
         <source>Font copy succeeded, but Windows Registry registration failed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="378"/>
+        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="375"/>
         <source>Font file already exists at destination: %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="424"/>
+        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="421"/>
         <source>Font loaded, but could not determine font family name to install font corrections.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="450"/>
+        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="447"/>
         <source>Font correction file already exists at destination: %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="455"/>
+        <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="452"/>
         <source>Failed to copy font correction file from %1 to %2. Possible reasons: permission denied, file locked, or general I/O error.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -22768,7 +22768,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2303"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="5181"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="5180"/>
         <source>Preferences</source>
         <translation>Einstellungen</translation>
     </message>
@@ -22860,55 +22860,55 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3811"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3873"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3810"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3872"/>
         <source>Layout files</source>
         <translation>Layout-Dateien</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3815"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3963"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4912"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3814"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3962"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4911"/>
         <source>Open file</source>
         <translation>Datei öffnen</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3856"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3855"/>
         <source>Could not save the file</source>
         <translation>Datei konnte nicht gespeichert werden</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3875"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3874"/>
         <source>layout</source>
         <translation>Layout</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3887"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3886"/>
         <source>Save as</source>
         <translation>Speichern unter</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3917"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3916"/>
         <source>Failed to lock. This file already opened in another window.</source>
         <translation>Fehler beim Sperren. Diese Datei ist bereits in einem anderen Fenster geöffnet.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3927"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3926"/>
         <source>Could not save file</source>
         <translation>Konnte Datei nicht speichern</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3948"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3947"/>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
         <translation>Fehler beim Sperren. Diese Datei ist bereits in einem anderen Fenster geöffnet. Bei zweifachem Ausführen kann es zu Konflikten kommen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3958"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3957"/>
         <source>Raw Layout files</source>
         <translation>Rohe Layout-Dateien</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3976"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3975"/>
         <source>About Qt</source>
         <translation>Über QT</translation>
     </message>
@@ -23184,13 +23184,13 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="745"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3779"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3778"/>
         <source>&amp;Undo</source>
         <translation>&amp;Rückgängig</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="751"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3780"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3779"/>
         <source>&amp;Redo</source>
         <translation>&amp;Wiederholen</translation>
     </message>
@@ -23260,7 +23260,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4246"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4245"/>
         <source>Sheet %1</source>
         <translation>Blatt %1</translation>
     </message>
@@ -23275,20 +23275,32 @@ Do you want to save your changes?</source>
         <translation>Teil drehen</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4450"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4449"/>
         <source>untitled %1</source>
         <translation>unbenannt %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4450"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4449"/>
         <source>untitled</source>
         <translation>unbenannt</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4541"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4592"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4540"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4591"/>
         <source>For printing multipages document all sheet should have the same size.</source>
         <translation>Zum Drucken eines mehrseitigen Dokuments müssen alle Blätter die gleiche Größe haben.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4552"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4603"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4638"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4676"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4731"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4775"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4808"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4844"/>
+        <source>Print error</source>
+        <translation>Druckfehler</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4553"/>
@@ -23299,31 +23311,19 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4776"/>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4809"/>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4845"/>
-        <source>Print error</source>
-        <translation>Druckfehler</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4554"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4605"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4640"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4678"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4733"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4777"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4810"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4846"/>
         <source>Cannot proceed because there are no available printers in your system.</source>
         <translation>Prozess kann nicht fortgesetzt werden, da keine verfügbaren Drucker in Ihrem System vorhanden sind.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4909"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4908"/>
         <source>Watermark files</source>
         <translation>Wasserzeichen Dateien</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4565"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4616"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4651"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4689"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4564"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4615"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4650"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4688"/>
         <source>Unable to get sheet page settings</source>
         <translation>Einstellungen der Eigenschaften des Blattes können nicht abgerufen werden</translation>
     </message>
@@ -23363,7 +23363,7 @@ Do you want to save your changes?</source>
         <translation>Wirkt sich nur beim Drucken in der Anwendung aus. Für den Export mit Kachelschema separate Einstellung verwenden</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4503"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4502"/>
         <source>sheet</source>
         <translation>Blatt</translation>
     </message>
@@ -24368,34 +24368,49 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
 <context>
     <name>VToolCutArc</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="296"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="316"/>
         <source>Arc</source>
         <translation>Bogen</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="297"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="317"/>
+        <source>Elliptical arc</source>
+        <translation type="unfinished">Elliptischer Bogen</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="318"/>
         <source>length</source>
         <translation>Länge</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="298"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="319"/>
         <source>start angle</source>
         <translation>Startwinkel</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="299"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="320"/>
         <source>end angle</source>
         <translation>Endwinkel</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="300"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="321"/>
         <source>radius</source>
         <translation>Radius</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="331"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="322"/>
         <source>label</source>
         <translation>Beschriftung</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="323"/>
+        <source>radius1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="324"/>
+        <source>radius2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -27540,37 +27555,37 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation>Form</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="294"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="274"/>
         <source>Unnamed</source>
         <translation>Unbenannt</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="307"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="287"/>
         <source>Select all</source>
         <translation>Alles auswählen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="308"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="288"/>
         <source>Select none</source>
         <translation>Nichts auswählen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="378"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="358"/>
         <source>select all details</source>
         <translation>alle Details auswählen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="385"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="365"/>
         <source>select none details</source>
         <translation>Keine Details auswählen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="312"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="292"/>
         <source>Invert selection</source>
         <translation>Auswahl umkehren</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="391"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="371"/>
         <source>invert selection</source>
         <translation>Auswahl umkehren</translation>
     </message>
@@ -27580,17 +27595,17 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation>Nicht im Layout ausblenden</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="332"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="312"/>
         <source>Piece options</source>
         <translation>Teil Optionen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="334"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="314"/>
         <source>Delete piece</source>
         <translation>Teil löschen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="340"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="320"/>
         <source>Cannot find piece by id &apos;%1&apos;</source>
         <translation>Teil mit der Bezeichnung &apos;%1&apos; kann nicht gefunden werden</translation>
     </message>
@@ -27745,7 +27760,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
 <context>
     <name>VisToolCutArc</name>
     <message>
-        <location filename="../../src/libs/vtools/visualization/path/vistoolcutarc.cpp" line="90"/>
+        <location filename="../../src/libs/vtools/visualization/path/vistoolcutarc.cpp" line="104"/>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
         <translation>Länge = %1%2; &lt;b&gt;Mausklick&lt;/b&gt; - Auswahl der Länge beenden, &lt;b&gt;%3&lt;/b&gt; - überspringen</translation>
     </message>
