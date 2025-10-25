@@ -294,28 +294,6 @@ void DialogTool::FillComboBoxCurves(QComboBox *box) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief FillComboBoxTypeLine fill comboBox list of type lines
- * @param box comboBox
- */
-void DialogTool::FillComboBoxTypeLine(QComboBox *box, const QMap<QString, QIcon> &stylesPics, const QString &def) const
-{
-    SCASSERT(box != nullptr)
-    QMap<QString, QIcon>::const_iterator i = stylesPics.constBegin();
-    while (i != stylesPics.constEnd())
-    {
-        box->addItem(i.value(), QString(), QVariant(i.key()));
-        ++i;
-    }
-
-    const int index = box->findData(QVariant(def));
-    if (index != -1)
-    {
-        box->setCurrentIndex(index);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::FillComboBoxCrossCirclesPoints(QComboBox *box) const
 {
     SCASSERT(box != nullptr)
@@ -340,36 +318,6 @@ void DialogTool::FillComboBoxHCrossCurvesPoint(QComboBox *box) const
 
     box->addItem(tr("Leftmost point"), QVariant(static_cast<int>(HCrossCurvesPoint::LeftmostPoint)));
     box->addItem(tr("Rightmost point"), QVariant(static_cast<int>(HCrossCurvesPoint::RightmostPoint)));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto DialogTool::GetComboBoxCurrentData(const QComboBox *box, const QString &def) const -> QString
-{
-    SCASSERT(box != nullptr)
-    QString value;
-    value = box->currentData().toString();
-
-    if (value.isEmpty())
-    {
-        value = def;
-    }
-    return value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ChangeCurrentData select item in combobox by id
- * @param box combobox
- * @param value id of item
- */
-void DialogTool::ChangeCurrentData(QComboBox *box, const QVariant &value) const
-{
-    SCASSERT(box != nullptr)
-    const qint32 index = box->findData(value);
-    if (index != -1)
-    {
-        box->setCurrentIndex(index);
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

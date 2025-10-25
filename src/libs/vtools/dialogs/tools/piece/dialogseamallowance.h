@@ -67,6 +67,8 @@ public:
 
     auto UndoStack() -> QVector<QPointer<VUndoCommand>> &;
 
+    void SetPatternDoc(VAbstractPattern *doc) override;
+
 public slots:
     void ChosenObject(quint32 id, const SceneObject &type) override;
     void ShowDialog(bool click) override;
@@ -394,7 +396,6 @@ private:
     void resizeEvent(QResizeEvent *event) override;
     void changeEvent(QEvent *event) override;
     auto IsValid() const -> bool override;
-    void SetPatternDoc(VAbstractPattern *doc) override;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -33,6 +33,7 @@
 #include <QtGlobal>
 #include <chrono>
 
+#include "../ifc/ifcdef.h"
 #include "../vgeometry/vgeometrydef.h"
 #include "../vmisc/typedef.h"
 #include "../vpatterndb/variables/vinternalvariable.h"
@@ -106,5 +107,8 @@ void InitDialogButtonBoxIcons(QDialogButtonBox *buttonBox);
 auto MirrorLinePointsNeighbors(QListWidget *listWidget, quint32 startPoint, quint32 endPoint) -> bool;
 void InitColorPicker(VPE::QtColorPicker *button, const QVector<QColor> &customColor = QVector<QColor>());
 void InitOperationColorPicker(VPE::QtColorPicker *button, const QVector<QColor> &customColor = QVector<QColor>());
+void FillComboBoxTypeLine(QComboBox *box, const QMap<QString, QIcon> &stylesPics, const QString &def = TypeLineLine);
+void ChangeCurrentData(QComboBox *box, const QVariant &value);
+auto GetComboBoxCurrentData(const QComboBox *box, const QString &def) -> QString;
 
 #endif // DIALOGTOOLBOX_H

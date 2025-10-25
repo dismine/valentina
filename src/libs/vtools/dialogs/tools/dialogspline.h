@@ -61,6 +61,9 @@ public:
     void SetNotes(const QString &notes);
     auto GetNotes() const -> QString;
 
+    void SetDefPenStyle(const QString &value);
+    void SetDefColor(const QString &value);
+
 public slots:
     void ChosenObject(quint32 id, const SceneObject &type) override;
     void PointNameChanged() override;

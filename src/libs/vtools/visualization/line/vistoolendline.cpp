@@ -33,7 +33,6 @@
 #include <QLineF>
 #include <QPointF>
 #include <QSharedPointer>
-#include <new>
 
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"

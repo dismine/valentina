@@ -57,6 +57,7 @@
 #include <memory>
 #include <thread>
 
+#include "../vpropertyexplorer/qtcolorpicker.h"
 #include "../ifc/exception/vexceptionconversionerror.h"
 #include "../ifc/exception/vexceptionemptyparameter.h"
 #include "../ifc/exception/vexceptioninvalidhistory.h"
@@ -75,7 +76,9 @@
 #include "../vlayout/dialogs/watermarkwindow.h"
 #include "../vlayout/vlayoutexporter.h"
 #include "../vmisc/customevents.h"
+#include "../vtools/dialogs/dialogtoolbox.h"
 #include "../vmisc/def.h"
+#include "../vmisc/defglobal.h"
 #include "../vmisc/dialogs/dialogaskcollectstatistic.h"
 #include "../vmisc/dialogs/dialogselectlanguage.h"
 #include "../vmisc/qxtcsvmodel.h"
@@ -391,6 +394,7 @@ MainWindow::MainWindow(QWidget *parent)
     InitDocksContain();
     CreateMenus();
     ToolBarDraws();
+    ToolBarPenOptions();
     ToolBarStages();
     ToolBarDrawTools();
     InitToolButtons();
@@ -457,6 +461,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->toolBarOption->setIconSize(QSize(24, 24));
     ui->toolBarStages->setIconSize(QSize(24, 24));
     ui->toolBarTools->setIconSize(QSize(24, 24));
+    ui->toolBarPenOptions->setIconSize(QSize(24, 24));
 
     setUnifiedTitleAndToolBarOnMac(true);
 
@@ -881,7 +886,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
 
         m_statusLabel->setText(toolTip);
         ui->view->setShowToolOptions(false);
-        m_dialogTool = new Dialog(pattern, doc, 0, this);
+        auto *dialogTool = new Dialog(pattern, doc, 0, this);
 
         // This check helps to find missed tools in the switch
         Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 61, "Check if need to extend.");
@@ -891,30 +896,58 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
             case Tool::ArcStart:
             case Tool::ArcEnd:
             case Tool::Midpoint:
-                m_dialogTool->Build(t);
+                dialogTool->Build(t);
                 break;
             case Tool::PiecePath:
             case Tool::Pin:
             case Tool::InsertNode:
             case Tool::PlaceLabel:
-                m_dialogTool->SetPiecesList(doc->GetActivePPPieces());
+                dialogTool->SetPiecesList(doc->GetActivePPPieces());
                 break;
             case Tool::Rotation:
             case Tool::Move:
             case Tool::FlippingByAxis:
             case Tool::FlippingByLine:
             case Tool::Group:
-                m_dialogTool->SetGroupCategories(doc->GetGroupCategories());
+                dialogTool->SetGroupCategories(doc->GetGroupCategories());
                 break;
             case Tool::Piece:
-                m_dialogTool->SetPatternDoc(doc);
+                dialogTool->SetPatternDoc(doc);
                 break;
             default:
                 break;
         }
 
+        VValentinaSettings *settings = VApplication::VApp()->ValentinaSettings();
+
+        if constexpr (std::is_same_v<Dialog,DialogEndLine> || std::is_same_v<Dialog,DialogAlongLine> ||
+                      std::is_same_v<Dialog,DialogBisector> || std::is_same_v<Dialog,DialogCurveIntersectAxis> ||
+                      std::is_same_v<Dialog,DialogHeight> || std::is_same_v<Dialog,DialogLine> ||
+                      std::is_same_v<Dialog,DialogLineIntersectAxis> || std::is_same_v<Dialog,DialogNormal> ||
+                      std::is_same_v<Dialog,DialogShoulderPoint>)
+        {
+            dialogTool->SetTypeLine(settings->GetGlobalPenStyle());
+            dialogTool->SetLineColor(settings->GetGlobalToolColor());
+        }
+
+        if constexpr (std::is_same_v<Dialog,DialogArc> || std::is_same_v<Dialog,DialogArcWithLength> ||
+                      std::is_same_v<Dialog,DialogEllipticalArc>)
+        {
+            dialogTool->SetPenStyle(settings->GetGlobalPenStyle());
+            dialogTool->SetColor(settings->GetGlobalToolColor());
+        }
+
+        if constexpr (std::is_same_v<Dialog,DialogCubicBezier> || std::is_same_v<Dialog,DialogCubicBezierPath> ||
+                      std::is_same_v<Dialog,DialogSpline> || std::is_same_v<Dialog,DialogSplinePath>)
+        {
+            dialogTool->SetDefPenStyle(settings->GetGlobalPenStyle());
+            dialogTool->SetDefColor(settings->GetGlobalToolColor());
+        }
+
         auto *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
         SCASSERT(scene != nullptr)
+
+        m_dialogTool = dialogTool;
 
         connect(scene, &VMainGraphicsScene::ChoosedObject, m_dialogTool.data(), &DialogTool::ChosenObject);
         connect(scene, &VMainGraphicsScene::SelectedObject, m_dialogTool.data(), &DialogTool::SelectedObject);
@@ -1880,6 +1913,21 @@ void MainWindow::changeEvent(QEvent *event)
 
         UpdateWindowTitle();
         emit m_sceneDetails->LanguageChanged();
+
+        m_globalPenStyleLabel->setText(tr("Pen style:"));
+        m_globalColorLabel->setText(tr("Color:"));
+
+        const QMap<QString, QString> defaultColors = VAbstractTool::ColorsList();
+        auto i = defaultColors.constBegin();
+        while (i != defaultColors.constEnd())
+        {
+            m_pushButtonColor->insertColor(QColor(i.key()), i.value());
+            if (QColor(i.key()) == m_pushButtonColor->currentColor())
+            {
+                m_pushButtonColor->setText(i.value());
+            }
+            ++i;
+        }
     }
 
     if (event->type() == QEvent::PaletteChange)
@@ -1890,6 +1938,16 @@ void MainWindow::changeEvent(QEvent *event)
     if (event->type() == QEvent::ThemeChange)
     {
         VTheme::Instance()->ResetColorScheme();
+
+        m_comboBoxPenStyle->blockSignals(true);
+        m_comboBoxPenStyle->clear();
+        FillComboBoxTypeLine(m_comboBoxPenStyle,
+                             LineStylesPics(m_comboBoxPenStyle->palette().color(QPalette::Base),
+                                            m_comboBoxPenStyle->palette().color(QPalette::Text)));
+        ChangeCurrentData(m_comboBoxPenStyle, VApplication::VApp()->ValentinaSettings()->GetGlobalPenStyle());
+        m_comboBoxPenStyle->blockSignals(false);
+
+        m_pushButtonColor->makeDirty();
     }
 
     // remember to call base class implementation
@@ -2975,6 +3033,63 @@ void MainWindow::ToolBarDraws()
                 }
                 VAbstractApplication::VApp()->getUndoStack()->push(new RenamePP(doc, draw, m_comboBoxDraws));
             });
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolBarPenOptions()
+{
+    // Pen style
+    m_globalPenStyleLabel = new QLabel(tr("Pen style:"));
+    ui->toolBarPenOptions->addWidget(m_globalPenStyleLabel);
+
+    // By using Qt UI Designer we can't add QComboBox to toolbar
+    m_comboBoxPenStyle = new QComboBox;
+    m_comboBoxPenStyle->setToolTip(tr("Sets the <b>default pen style</b> for all newly created objects. This style is "
+                                      "applied the first time an object is drawn."));
+    ui->toolBarPenOptions->addWidget(m_comboBoxPenStyle);
+    m_comboBoxPenStyle->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+    m_comboBoxPenStyle->setMinimumSize(QSize(80, 0));
+    m_comboBoxPenStyle->setIconSize(QSize(80, 14));
+    FillComboBoxTypeLine(m_comboBoxPenStyle,
+                         LineStylesPics(m_comboBoxPenStyle->palette().color(QPalette::Base),
+                                        m_comboBoxPenStyle->palette().color(QPalette::Text)));
+    ChangeCurrentData(m_comboBoxPenStyle, VApplication::VApp()->ValentinaSettings()->GetGlobalPenStyle());
+
+    connect(m_comboBoxPenStyle, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            [this]()
+    {
+        VValentinaSettings *settings = VApplication::VApp()->ValentinaSettings();
+        settings->SetGlobalPenStyle(GetComboBoxCurrentData(m_comboBoxPenStyle, TypeLineLine));
+    });
+
+    // Color
+    m_globalColorLabel = new QLabel(tr("Color:"));
+    ui->toolBarPenOptions->addWidget(m_globalColorLabel);
+
+    m_pushButtonColor = new VPE::QtColorPicker(this);
+    m_pushButtonColor->setToolTip(tr("Defines the <b>global object color property</b>. This color is applied "
+                                     "automatically the first time a new object is drawn."));
+    VValentinaSettings const *settings = VApplication::VApp()->ValentinaSettings();
+    InitColorPicker(m_pushButtonColor, settings->GetUserToolColors());
+    m_pushButtonColor->setUseNativeDialog(!settings->IsDontUseNativeDialog());
+    m_pushButtonColor->setCurrentColor(settings->GetGlobalToolColor());
+    ui->toolBarPenOptions->addWidget(m_pushButtonColor);
+
+    connect(m_pushButtonColor, &VPE::QtColorPicker::colorChanged, this, [this]()
+    {
+        VValentinaSettings *settings = VApplication::VApp()->ValentinaSettings();
+        settings->SetGlobalToolColor(m_pushButtonColor->currentColor().name());
+        settings->SetUserToolColors(m_pushButtonColor->CustomColors());
+    });
+
+    connect(settings, &VValentinaSettings::UserToolColorsChanged, this, [this]()
+    {
+        QVector<QColor> const colors = VApplication::VApp()->ValentinaSettings()->GetUserToolColors();
+        for (const auto &color : colors)
+        {
+            m_pushButtonColor->insertCustomColor(color);
+        }
+    });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

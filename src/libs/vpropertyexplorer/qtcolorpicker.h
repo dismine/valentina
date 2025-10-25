@@ -96,6 +96,8 @@ public:
 
     void setDefaultColor(const QColor &color) const;
 
+    void makeDirty();
+
 public slots:
     void setCurrentColor(const QColor &color);
 

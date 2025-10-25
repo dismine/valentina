@@ -50,6 +50,7 @@
 #include <QColorDialog>
 #include <QFocusEvent>
 #include <QGridLayout>
+#include <QGuiApplication>
 #include <QHideEvent>
 #include <QKeyEvent>
 #include <QLabel>
@@ -61,6 +62,7 @@
 #include <QPushButton>
 #include <QShowEvent>
 #include <QStyle>
+#include <QTimer>
 #include <QToolTip>
 #include <QtCore/QMap>
 
@@ -90,8 +92,7 @@
     available by using setColorDialogEnabled().
 
     When a color is selected, the QtColorPicker widget shows the color
-    and its name. If the name cannot be determined, the translatable
-    name "Custom" is used.
+    and its name.
 
     The QtColorPicker object is optionally initialized with the number
     of columns in the color grid. Colors are then added left to right,
@@ -172,6 +173,8 @@ public:
     ~ColorPickerItem() override = default;
 
     auto color() const -> QColor;
+
+    void setText(const QString &text);
     auto text() const -> QString;
 
     void setSelected(bool selected);
@@ -327,44 +330,59 @@ void VPE::QtColorPicker::buttonPressed(bool toggled)
         return;
     }
 
-    const QRect desktop = this->parentWidget()->geometry();
-    // Make sure the popup is inside the desktop.
-    QPoint pos = rect().bottomLeft();
-    if (pos.x() < desktop.left())
-    {
-        pos.setX(desktop.left());
-    }
-    if (pos.y() < desktop.top())
-    {
-        pos.setY(desktop.top());
-    }
+    // base position: just below the button, left aligned
+    QPoint desired = mapToGlobal(QPoint(0, height()));
 
-    if ((pos.x() + popup->sizeHint().width()) > desktop.width())
+    // Ensure popup has a reasonable size
+    popup->adjustSize();
+    QSize psize = popup->sizeHint();
+    if (psize.isEmpty())
     {
-        pos.setX(desktop.width() - popup->sizeHint().width());
-    }
-    if ((pos.y() + popup->sizeHint().height()) > desktop.bottom())
-    {
-        pos.setY(desktop.bottom() - popup->sizeHint().height());
-    }
-    popup->move(mapToGlobal(pos));
-
-    if (ColorPickerItem *item = popup->find(col))
-    {
-        item->setSelected(true);
+        popup->resize(200, 150); // fallback sensible default
+        psize = popup->size();
     }
 
-    // Remove focus from this widget, preventing the focus rect
-    // from showing when the popup is shown. Order an update to
-    // make sure the focus rect is cleared.
-    clearFocus();
-    update();
+    // Find the screen that contains the button
+    QScreen *screen = this->screen();
+    if (screen == nullptr)
+    {
+        screen = QGuiApplication::primaryScreen();
+    }
 
-    // Allow keyboard navigation as soon as the popup shows.
-    popup->setFocus();
+    QRect const avail = screen->availableGeometry();
 
-    // Execute the popup. The popup will enter the event loop.
-    popup->show();
+    // adjust if it'll go off-screen to the right/bottom
+    if (desired.x() + psize.width() > avail.right())
+    {
+        desired.setX(avail.right() - psize.width());
+    }
+    if (desired.y() + psize.height() > avail.bottom())
+    {
+        desired.setY(desired.y() - psize.height() - height()); // try above the button
+    }
+
+    // make sure coordinates are valid
+    if (desired.x() < avail.left())
+    {
+        desired.setX(avail.left());
+    }
+    if (desired.y() < avail.top())
+    {
+        desired.setY(avail.top());
+    }
+
+    popup->move(desired);
+
+    // Show popup after current event finishes to avoid immediate close by popup mouse-grab logic
+    QTimer::singleShot(0,
+                       popup,
+                       [this]()
+                       {
+                           popup->show();
+                           popup->raise();
+                           popup->activateWindow();
+                           popup->setFocus(Qt::PopupFocusReason);
+                       });
 }
 
 /*!
@@ -442,6 +460,11 @@ void VPE::QtColorPicker::setDefaultColor(const QColor &color) const
     popup->setDefaultColor(color);
 }
 
+void VPE::QtColorPicker::makeDirty()
+{
+    dirty = true;
+}
+
 /*!
     Returns the currently selected color.
 
@@ -510,7 +533,7 @@ auto VPE::QtColorPicker::CustomColors() const -> QVector<QColor>
 
 /*!
     Makes \a color current. If \a color is not already in the color grid, it
-    is inserted with the text "Custom".
+    is inserted.
 
     This function emits the colorChanged() signal if the new color is
     different from the old one.
@@ -571,11 +594,11 @@ void VPE::QtColorPicker::insertColor(const QColor &color, const QString &text, i
 */
 void VPE::QtColorPicker::insertCustomColor(const QColor &color, int index)
 {
-    popup->insertColor(color, tr("Custom", "color"), index, true);
+    popup->insertColor(color, color.name(), index, true);
     if (!firstInserted)
     {
         col = color;
-        setText(tr("Custom", "color"));
+        setText(color.name());
         firstInserted = true;
     }
 }
@@ -706,6 +729,7 @@ void ColorPickerPopup::insertColor(const QColor &col, const QString &text, vsize
         {
             lastSelectedItem->setSelected(false);
         }
+        existingItem->setText(text);
         existingItem->setFocus();
         existingItem->setSelected(true);
         return;
@@ -1223,7 +1247,7 @@ void ColorPickerPopup::getColorFromDialog()
         return;
     }
 
-    insertColor(col, tr("Custom", "color"), -1, true);
+    insertColor(col, col.name(), -1, true);
     lastSel = col;
     emit selected(col);
 }
@@ -1250,6 +1274,12 @@ ColorPickerItem::ColorPickerItem(const QColor &color, QString text, QWidget *par
 auto ColorPickerItem::color() const -> QColor
 {
     return c;
+}
+
+void ColorPickerItem::setText(const QString &text)
+{
+    t = text;
+    setToolTip(t);
 }
 
 /*!
@@ -1285,8 +1315,7 @@ void ColorPickerItem::setSelected(bool selected)
 void ColorPickerItem::setColor(const QColor &color, const QString &text)
 {
     c = color;
-    t = text;
-    setToolTip(t);
+    setText(text);
     update();
 }
 

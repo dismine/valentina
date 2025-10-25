@@ -1052,3 +1052,51 @@ void InitOperationColorPicker(VPE::QtColorPicker *button, const QVector<QColor> 
 
     button->setCurrentColor(QColor());
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void FillComboBoxTypeLine(QComboBox *box, const QMap<QString, QIcon> &stylesPics, const QString &def)
+{
+    SCASSERT(box != nullptr)
+    QMap<QString, QIcon>::const_iterator i = stylesPics.constBegin();
+    while (i != stylesPics.constEnd())
+    {
+        box->addItem(i.value(), QString(), QVariant(i.key()));
+        ++i;
+    }
+
+    const int index = box->findData(QVariant(def));
+    if (index != -1)
+    {
+        box->setCurrentIndex(index);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ChangeCurrentData select item in combobox by id
+ * @param box combobox
+ * @param value id of item
+ */
+void ChangeCurrentData(QComboBox *box, const QVariant &value)
+{
+    SCASSERT(box != nullptr)
+    const qint32 index = box->findData(value);
+    if (index != -1)
+    {
+        box->setCurrentIndex(index);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto GetComboBoxCurrentData(const QComboBox *box, const QString &def) -> QString
+{
+    SCASSERT(box != nullptr)
+    QString value;
+    value = box->currentData().toString();
+
+    if (value.isEmpty())
+    {
+        value = def;
+    }
+    return value;
+}

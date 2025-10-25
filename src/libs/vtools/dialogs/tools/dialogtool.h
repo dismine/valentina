@@ -177,14 +177,10 @@ protected:
     void FillComboBoxSplines(QComboBox *box) const;
     void FillComboBoxSplinesPath(QComboBox *box) const;
     void FillComboBoxCurves(QComboBox *box) const;
-    void FillComboBoxTypeLine(QComboBox *box, const QMap<QString, QIcon> &stylesPics,
-                              const QString &def = TypeLineLine) const;
     void FillComboBoxCrossCirclesPoints(QComboBox *box) const;
     void FillComboBoxVCrossCurvesPoint(QComboBox *box) const;
     void FillComboBoxHCrossCurvesPoint(QComboBox *box) const;
 
-    auto GetComboBoxCurrentData(const QComboBox *box, const QString &def) const -> QString;
-    void ChangeCurrentData(QComboBox *box, const QVariant &value) const;
     auto Eval(const FormulaData &formulaData, bool &flag) -> qreal;
 
     void setCurrentPointId(QComboBox *box, const quint32 &value, FillComboBox rule = FillComboBox::NoChildren,

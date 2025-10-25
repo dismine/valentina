@@ -657,3 +657,15 @@ auto DialogSpline::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSpline::SetDefPenStyle(const QString &value)
+{
+    ChangeCurrentData(ui->comboBoxPenStyle, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSpline::SetDefColor(const QString &value)
+{
+    ui->pushButtonColor->setCurrentColor(value);
+}

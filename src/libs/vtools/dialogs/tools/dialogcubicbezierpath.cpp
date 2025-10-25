@@ -522,3 +522,15 @@ auto DialogCubicBezierPath::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCubicBezierPath::SetDefPenStyle(const QString &value)
+{
+    ChangeCurrentData(ui->comboBoxPenStyle, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCubicBezierPath::SetDefColor(const QString &value)
+{
+    ui->pushButtonColor->setCurrentColor(value);
+}

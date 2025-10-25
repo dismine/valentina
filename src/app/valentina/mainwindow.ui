@@ -685,6 +685,22 @@
    <addaction name="actionLayoutSettings"/>
    <addaction name="actionLayoutExportAs"/>
   </widget>
+  <widget class="QToolBar" name="toolBarPenOptions">
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="windowTitle">
+    <string>Pen options</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
   <action name="actionNew">
    <property name="icon">
     <iconset theme="document-new"/>

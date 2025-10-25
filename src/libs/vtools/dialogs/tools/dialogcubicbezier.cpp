@@ -314,3 +314,15 @@ auto DialogCubicBezier::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCubicBezier::SetDefPenStyle(const QString &value)
+{
+    ChangeCurrentData(ui->comboBoxPenStyle, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCubicBezier::SetDefColor(const QString &value)
+{
+    ui->pushButtonColor->setCurrentColor(value);
+}

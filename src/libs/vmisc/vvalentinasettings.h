@@ -260,6 +260,15 @@ public:
     auto GetUserToolColors() const -> QVector<QColor>;
     void SetUserToolColors(const QVector<QColor> &colors);
 
+    auto GetGlobalPenStyle() const -> QString;
+    void SetGlobalPenStyle(const QString &value);
+
+    auto GetGlobalToolColor() const -> QString;
+    void SetGlobalToolColor(const QString &value);
+
+signals:
+    void UserToolColorsChanged();
+
 private:
     Q_DISABLE_COPY_MOVE(VValentinaSettings) // NOLINT
 

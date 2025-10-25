@@ -200,7 +200,7 @@ inline void Visualization::SetToolTip(const QString &tooltip)
 //---------------------------------------------------------------------------------------------------------------------
 inline auto Visualization::LineStyle() const -> Qt::PenStyle
 {
-    return m_lineStyle;
+    return GetMode() == Mode::Creation && m_lineStyle == Qt::NoPen ? Qt::SolidLine : m_lineStyle;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

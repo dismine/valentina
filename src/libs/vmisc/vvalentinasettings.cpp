@@ -38,10 +38,10 @@
 #include <QSharedPointer>
 #include <QVariant>
 #include <QtDebug>
+#include <QtGlobal>
 
 #include "compatibility.h"
 #include "def.h"
-#include "qglobal.h"
 
 using namespace Qt::Literals::StringLiterals;
 
@@ -76,7 +76,9 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternBackgroundImageDefOpacity
 // NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternBoundaryTogetherWithNotches,
                           ("pattern/boundaryTogetherWithNotches"_L1))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternUserToolColors, ("pattern/userToolColors"_L1))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternUserToolColors, ("pattern/userToolColors"_L1))   // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternGlobalPenStyle, ("pattern/globalPenStyle"_L1))   // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternGlobalToolColor, ("pattern/globalToolColor"_L1)) // NOLINT
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutWidth, ("layout/width"_L1))             // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSorting, ("layout/sorting"_L1))         // NOLINT
@@ -1105,6 +1107,32 @@ void VValentinaSettings::SetUserToolColors(const QVector<QColor> &colors)
         colorList.append(color.name()); // Serialize QColor to string
     }
     setValue(*settingPatternUserToolColors, colorList);
+
+    emit UserToolColorsChanged();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::GetGlobalPenStyle() const -> QString
+{
+    return value(*settingPatternGlobalPenStyle, QString()).toString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetGlobalPenStyle(const QString &value)
+{
+    setValue(*settingPatternGlobalPenStyle, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::GetGlobalToolColor() const -> QString
+{
+    return value(*settingPatternGlobalToolColor, QColor(Qt::black).name()).toString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetGlobalToolColor(const QString &value)
+{
+    setValue(*settingPatternGlobalToolColor, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
