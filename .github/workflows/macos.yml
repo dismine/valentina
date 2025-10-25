@@ -41,8 +41,8 @@ jobs:
     strategy:
       matrix:
         qt:
-          - install: 6.9.2
-            label: Qt6_9
+          - install: 6.10.0
+            label: Qt6_10
             build_target: '12+'
             xcode: '16.4'
             target: 'MacOS_12+'
@@ -52,7 +52,7 @@ jobs:
             with_iconv: 'False'
             withBigCodecs: 'False'
             deploy: 'true'
-          - install: 6.9.2
+          - install: 6.10.0
             label: Qt6_9
             build_target: '12+'
             xcode: '16.4'
