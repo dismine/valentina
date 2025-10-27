@@ -11,6 +11,7 @@
 - Puzzle app. Fixed duplication of notches.
 - Improved custom Dark/Light theme styles.
 - Fix calculation notch on seam allowance.
+- Valentina app. Added missing pen style control in property browser for elliptical arc.
 
 # Valentina 1.0.0 July 21, 2025
 - Fix Puzzle app crash when application closing.
