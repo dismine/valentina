@@ -2592,7 +2592,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolEllipticalArc(VPE::VProperty *pr
 
     const QString id = m_propertyToId[property];
 
-    auto SetFormulaRadius1 = [this](VPE::VProperty *property)
+    auto SetFormulaRadius1 = [this](const VPE::VProperty *property)
     {
         if (auto *i = qgraphicsitem_cast<VToolEllipticalArc *>(m_currentItem))
         {
@@ -2610,7 +2610,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolEllipticalArc(VPE::VProperty *pr
         }
     };
 
-    auto SetFormulaRadius2 = [this](VPE::VProperty *property)
+    auto SetFormulaRadius2 = [this](const VPE::VProperty *property)
     {
         if (auto *i = qgraphicsitem_cast<VToolEllipticalArc *>(m_currentItem))
         {
@@ -3417,6 +3417,8 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolEllipticalArc(QGraphicsItem *it
     i->ShowVisualization(true);
     m_formView->setTitle(tr("Elliptical arc"));
 
+    QPalette const comboBoxPalette = ComboBoxPalette();
+
     AddPropertyObjectName(i, tr("Name:"), true);
     AddPropertyParentPointName(i->CenterPointName(), tr("Center point:"), AttrCenter);
     AddPropertyFormula(tr("Radius:"), i->GetFormulaRadius1(), AttrRadius1);
@@ -3425,6 +3427,10 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolEllipticalArc(QGraphicsItem *it
     AddPropertyFormula(tr("Second angle:"), i->GetFormulaF2(), AttrAngle2);
     AddPropertyFormula(tr("Rotation angle:"), i->GetFormulaRotationAngle(), AttrRotationAngle);
     AddPropertyAlias(i, tr("Alias:"));
+    AddPropertyCurvePenStyle(i,
+                             tr("Pen style:"),
+                             CurvePenStylesPics(comboBoxPalette.color(QPalette::Base),
+                                                comboBoxPalette.color(QPalette::Text)));
     AddPropertyLineColor(i, tr("Color:"), VAbstractTool::ColorsList(), AttrColor);
     AddPropertyApproximationScale(tr("Approximation scale:"), i->GetApproximationScale());
     AddPropertyText(tr("Notes:"), i->GetNotes(), AttrNotes);
@@ -4415,6 +4421,15 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolEllipticalArc()
     QVariant valueFormulaRotationAngle;
     valueFormulaRotationAngle.setValue(i->GetFormulaRotationAngle());
     m_idToProperty[AttrRotationAngle]->setValue(valueFormulaRotationAngle);
+
+    {
+        QPalette const comboBoxPalette = ComboBoxPalette();
+        const auto index = VPE::VLineTypeProperty::IndexOfStyle(CurvePenStylesPics(comboBoxPalette.color(QPalette::Base),
+                                                                                   comboBoxPalette.color(
+                                                                                       QPalette::Text)),
+                                                                i->GetPenStyle());
+        m_idToProperty[AttrPenStyle]->setValue(index);
+    }
 
     m_idToProperty[AttrColor]->setValue(i->GetLineColor());
 
