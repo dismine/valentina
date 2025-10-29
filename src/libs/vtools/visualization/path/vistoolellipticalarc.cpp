@@ -118,11 +118,15 @@ void VisToolEllipticalArc::RefreshGeometry()
 
                 SetToolTip(tr("<b>Elliptical arc</b>: radius1 = %1%2, "
                               "radius2 = %3%2, angle1 = %4°; "
-                              "<b>Mouse click</b> - finish selecting the second radius, "
+                              "<b>Mouse click</b> - finish selecting the first radius, "
                               "<b>%5</b> - sticking angle, "
                               "<b>%6</b> - skip")
-                               .arg(LengthToUser(m_radius1), prefix, LengthToUser(m_radius2), AngleToUser(f1Angle),
-                                    VModifierKey::Shift(), VModifierKey::EnterKey()));
+                               .arg(LengthToUser(m_radius1),
+                                    prefix,
+                                    LengthToUser(m_radius2),
+                                    AngleToUser(f1Angle),
+                                    VModifierKey::Shift(),
+                                    VModifierKey::EnterKey()));
             }
             else if (m_f2 < 0)
             {
@@ -159,11 +163,16 @@ void VisToolEllipticalArc::RefreshGeometry()
 
                 SetToolTip(tr("<b>Elliptical arc</b>: radius1 = %1%2, "
                               "radius2 = %3%2, angle1 = %4°, angle2 = %5°, rotation = %6°; "
-                              "<b>Mouse click</b> - finish selecting the second radius, "
+                              "<b>Mouse click</b> - finish creating, "
                               "<b>%7</b> - sticking angle, "
                               "<b>%8</b> - skip")
-                               .arg(LengthToUser(m_radius1), prefix, LengthToUser(radius.length()), AngleToUser(m_f1),
-                                    AngleToUser(m_f2), AngleToUser(rotationAngle), VModifierKey::Shift(),
+                               .arg(LengthToUser(m_radius1),
+                                    prefix,
+                                    LengthToUser(radius.length()),
+                                    AngleToUser(m_f1),
+                                    AngleToUser(m_f2),
+                                    AngleToUser(rotationAngle),
+                                    VModifierKey::Shift(),
                                     VModifierKey::EnterKey()));
             }
         }
