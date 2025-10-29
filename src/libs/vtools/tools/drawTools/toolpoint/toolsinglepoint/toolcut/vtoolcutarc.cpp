@@ -28,9 +28,9 @@
 
 #include "vtoolcutarc.h"
 
+#include <QDebug>
 #include <QPointF>
 #include <QSharedPointer>
-#include <new>
 
 #include "../../../../../dialogs/tools/dialogcutarc.h"
 #include "../../../../../dialogs/tools/dialogtool.h"
