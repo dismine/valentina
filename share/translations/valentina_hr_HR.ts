@@ -864,9 +864,8 @@
 <context>
     <name>DialogArcWithLength</name>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="14"/>
         <source>Dialog</source>
-        <translation>Dijalog</translation>
+        <translation type="vanished">Dijalog</translation>
     </message>
     <message>
         <source>Radius</source>
@@ -1003,6 +1002,11 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="28"/>
         <source>Tool</source>
         <translation>Alat</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="14"/>
+        <source>Arc with length</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="651"/>
@@ -3870,7 +3874,7 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.ui" line="290"/>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="517"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="516"/>
         <source>Tool</source>
         <translation>Alat</translation>
     </message>
@@ -4020,7 +4024,6 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="370"/>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="465"/>
         <source>%1 with length %2</source>
         <translation>%1 s duljinom %2</translation>
     </message>
@@ -4057,32 +4060,32 @@
         <translation>putanja krivulje</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="465"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="464"/>
         <source>Elliptical arc</source>
         <translation>Eliptični luk</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="469"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="468"/>
         <source>Rotate objects around point %1. Suffix &apos;%2&apos;</source>
         <translation>Rotiraj objekte oko točke %1. Sufiks &apos;%2&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="475"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="474"/>
         <source>Flipping by line %1_%2. Suffix &apos;%3&apos;</source>
         <translation>Preokretanje po liniji %1_%2. Sufiks &apos;%3&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="480"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="479"/>
         <source>Flipping by axis through %1 point. Suffix &apos;%2&apos;</source>
         <translation>Preokretanje po osi kroz točku %1. Sufiks &apos;%2&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="486"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="485"/>
         <source>Move objects. Suffix &apos;%1&apos;</source>
         <translation>Pomakni objekte. Sufiks &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="779"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="778"/>
         <source>Empty</source>
         <comment>list</comment>
         <translation>Prazno</translation>
@@ -4104,7 +4107,7 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.ui" line="74"/>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="693"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="692"/>
         <source>0 results</source>
         <translation>0 rezultata</translation>
     </message>
@@ -15345,26 +15348,26 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <translation>Nepoznato</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="956"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="970"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="963"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="977"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam path at %2.</source>
         <translation>Dio &apos;%1&apos;. Nije moguće generirati punu putanju šava na %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="958"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="972"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="965"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="979"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam path.</source>
         <translation>Dio &apos;%1&apos;. Nije moguće generirati punu putanju šava.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1022"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1042"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1029"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1049"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam allowance path at %2.</source>
         <translation>Dio &apos;%1&apos;. Nije moguće generirati punu putanju šavnog dodatka na %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1024"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1044"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1031"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1051"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam allowance path.</source>
         <translation>Dio &apos;%1&apos;. Nije moguće generirati punu putanju šava s dopuštenjem.</translation>
     </message>
@@ -24062,32 +24065,37 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
 <context>
     <name>VToolCutArc</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="296"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="138"/>
+        <source>Fatal Error: Processing elliptical arcs is not supported in this version. Please update the application to a newer version to use this feature.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="302"/>
         <source>Arc</source>
         <translation>Luk</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="297"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="303"/>
         <source>length</source>
         <translation>duljina</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="298"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="304"/>
         <source>start angle</source>
         <translation>početni kut</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="299"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="305"/>
         <source>end angle</source>
         <translation>završni kut</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="300"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="306"/>
         <source>radius</source>
         <translation>polumjer</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="331"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="337"/>
         <source>label</source>
         <translation>oznaka</translation>
     </message>
@@ -24801,7 +24809,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2782"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2805"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3325"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3327"/>
         <source>Center point:</source>
         <translation>Središnja točka:</translation>
     </message>
@@ -24809,21 +24817,21 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2783"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2806"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2991"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3326"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3327"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3328"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3329"/>
         <source>Radius:</source>
         <translation>Polumjer:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2784"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2807"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3328"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3330"/>
         <source>First angle:</source>
         <translation>Prvi kut:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2785"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3329"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3331"/>
         <source>Second angle:</source>
         <translation>Drugi kut:</translation>
     </message>
@@ -24834,7 +24842,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3166"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3185"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3204"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3332"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3338"/>
         <source>Color:</source>
         <translation>Boja:</translation>
     </message>
@@ -25038,9 +25046,9 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3157"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3180"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3199"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3324"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3343"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3355"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3326"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3349"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3361"/>
         <source>Name:</source>
         <translation>Naziv:</translation>
     </message>
@@ -25101,7 +25109,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3286"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3330"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3332"/>
         <source>Rotation angle:</source>
         <translation>Kut rotacije:</translation>
     </message>
@@ -25117,6 +25125,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3164"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3183"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3202"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3335"/>
         <source>Pen style:</source>
         <translation>Stil pera:</translation>
     </message>
@@ -25127,7 +25136,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3167"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3186"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3205"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3333"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3339"/>
         <source>Approximation scale:</source>
         <translation>Skala aproksimacije:</translation>
     </message>
@@ -25170,7 +25179,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3288"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3301"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3314"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3334"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3340"/>
         <source>Notes:</source>
         <translation>Bilješke:</translation>
     </message>
@@ -25181,7 +25190,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3162"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3181"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3200"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3331"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3333"/>
         <source>Alias:</source>
         <translation>Pseudonim:</translation>
     </message>
@@ -25205,26 +25214,26 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation>Točka presjeka kruga i segmenta</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3341"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3353"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3347"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3359"/>
         <source>Background image</source>
         <translation>Pozadinska slika</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3344"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3356"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3350"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3362"/>
         <source>Hold:</source>
         <translation>Zadrži:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3345"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3357"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3351"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3363"/>
         <source>Visible:</source>
         <translation>Vidljivo:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3346"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3358"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3352"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3364"/>
         <source>Opacity:</source>
         <translation>Prozirnost:</translation>
     </message>
@@ -27234,37 +27243,37 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation>Forma</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="294"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="274"/>
         <source>Unnamed</source>
         <translation>Neimenovano</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="307"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="287"/>
         <source>Select all</source>
         <translation>Označi sve</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="308"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="288"/>
         <source>Select none</source>
         <translation>Odznači sve</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="378"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="358"/>
         <source>select all details</source>
         <translation>označi sve detalje</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="385"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="365"/>
         <source>select none details</source>
         <translation>odznači sve detalje</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="312"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="292"/>
         <source>Invert selection</source>
         <translation>Invertiraj odabir</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="391"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="371"/>
         <source>invert selection</source>
         <translation>invertiraj odabir</translation>
     </message>
@@ -27274,17 +27283,17 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation>Sakrij što nije u izgledu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="332"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="312"/>
         <source>Piece options</source>
         <translation>Opcije krojnog dijela</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="334"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="314"/>
         <source>Delete piece</source>
         <translation>Obriši krojni dio</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="340"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="320"/>
         <source>Cannot find piece by id &apos;%1&apos;</source>
         <translation>Ne mogu pronaći dio s ID-om &apos;%1&apos;</translation>
     </message>
@@ -27474,18 +27483,26 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarc.cpp" line="119"/>
-        <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%5&lt;/b&gt; - sticking angle, &lt;b&gt;%6&lt;/b&gt; - skip</source>
-        <translation>&lt;b&gt;Eliptični luk&lt;/b&gt;: prvi polumjer = %1%2, drugi polumjer = %3%2, prvi kut = %4°; &lt;b&gt;Klik mišem&lt;/b&gt; - završetak odabira drugog polumjera, &lt;b&gt;%5&lt;/b&gt; - pridržavanje kuta, &lt;b&gt;%6&lt;/b&gt; - preskoči</translation>
+        <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first radius, &lt;b&gt;%5&lt;/b&gt; - sticking angle, &lt;b&gt;%6&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarc.cpp" line="137"/>
+        <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarc.cpp" line="164"/>
+        <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°, angle2 = %5°, rotation = %6°; &lt;b&gt;Mouse click&lt;/b&gt; - finish creating, &lt;b&gt;%7&lt;/b&gt; - sticking angle, &lt;b&gt;%8&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%5&lt;/b&gt; - sticking angle, &lt;b&gt;%6&lt;/b&gt; - skip</source>
+        <translation type="vanished">&lt;b&gt;Eliptični luk&lt;/b&gt;: prvi polumjer = %1%2, drugi polumjer = %3%2, prvi kut = %4°; &lt;b&gt;Klik mišem&lt;/b&gt; - završetak odabira drugog polumjera, &lt;b&gt;%5&lt;/b&gt; - pridržavanje kuta, &lt;b&gt;%6&lt;/b&gt; - preskoči</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarc.cpp" line="141"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°, angle2 = %5°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%6&lt;/b&gt; - sticking angle, &lt;b&gt;%7&lt;/b&gt; - skip</source>
         <translation>&lt;b&gt;Eliptični luk&lt;/b&gt;: prvi polumjer = %1%2, drugi polumjer = %3%2, prvi kut = %4°, drugi kut = %5°; &lt;b&gt;Klik mišem&lt;/b&gt; - završetak odabira drugog polumjera, &lt;b&gt;%6&lt;/b&gt; - pridržavanje kuta, &lt;b&gt;%7&lt;/b&gt; - preskoči</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarc.cpp" line="160"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°, angle2 = %5°, rotation = %6°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%7&lt;/b&gt; - sticking angle, &lt;b&gt;%8&lt;/b&gt; - skip</source>
-        <translation>&lt;b&gt;Eliptični luk&lt;/b&gt;: prvi polumjer = %1%2, drugi polumjer = %3%2, prvi kut = %4°, drugi kut = %5°, rotacija = %6°; &lt;b&gt;Klik mišem&lt;/b&gt; - završetak odabira drugog polumjera, &lt;b&gt;%7&lt;/b&gt; - pridržavanje kuta, &lt;b&gt;%8&lt;/b&gt; - preskoči</translation>
+        <translation type="vanished">&lt;b&gt;Eliptični luk&lt;/b&gt;: prvi polumjer = %1%2, drugi polumjer = %3%2, prvi kut = %4°, drugi kut = %5°, rotacija = %6°; &lt;b&gt;Klik mišem&lt;/b&gt; - završetak odabira drugog polumjera, &lt;b&gt;%7&lt;/b&gt; - pridržavanje kuta, &lt;b&gt;%8&lt;/b&gt; - preskoči</translation>
     </message>
 </context>
 <context>
