@@ -380,7 +380,7 @@ void DialogArcWithLength::ChosenObject(quint32 id, const SceneObject &type)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArcWithLength::DeployRadiusTextEdit()
 {
-    DeployFormula(this, ui->plainTextEditRadius, ui->pushButtonGrowLengthArcLength, m_formulaBaseHeightRadius);
+    DeployFormula(this, ui->plainTextEditRadius, ui->pushButtonGrowLengthRadius, m_formulaBaseHeightRadius);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
