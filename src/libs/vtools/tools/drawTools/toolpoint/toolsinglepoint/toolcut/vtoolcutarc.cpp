@@ -28,7 +28,6 @@
 
 #include "vtoolcutarc.h"
 
-#include <QDebug>
 #include <QPointF>
 #include <QSharedPointer>
 
@@ -135,8 +134,10 @@ auto VToolCutArc::Create(VToolCutInitData &initData) -> VToolCutArc *
 {
     if (initData.data->GetGObject(initData.baseCurveId)->getType() == GOType::EllipticalArc)
     {
-        qFatal() << tr("Fatal Error: Processing elliptical arcs is not supported in this version. Please update the "
-                       "application to a newer version to use this feature.");
+        throw VExceptionBadId(
+            tr("Fatal Error: Processing elliptical arcs is not supported in this version. Please update the "
+               "application to a newer version to use this feature."),
+            initData.baseCurveId);
     }
 
     const QSharedPointer<VArc> arc = initData.data->GeometricObject<VArc>(initData.baseCurveId);
