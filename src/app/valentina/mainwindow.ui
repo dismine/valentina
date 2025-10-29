@@ -2636,6 +2636,24 @@
     <string>Install single line font</string>
    </property>
   </action>
+  <action name="actionEllipticalArcWithLengthTool">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="share/resources/toolicon.qrc">
+     <normaloff>:/toolicon/light/el_arc_with_length.png</normaloff>:/toolicon/light/el_arc_with_length.png</iconset>
+   </property>
+   <property name="text">
+    <string>Elliptical arc with given length</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>

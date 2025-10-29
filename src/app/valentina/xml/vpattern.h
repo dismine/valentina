@@ -236,6 +236,7 @@ private:
 
     void ParseToolEllipticalArc(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
     void ParseNodeEllipticalArc(const QDomElement &domElement, const Document &parse);
+    void ParseToolEllipticalArcWithLength(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
 
     void ParseToolRotation(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
     void ParseToolFlippingByLine(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);

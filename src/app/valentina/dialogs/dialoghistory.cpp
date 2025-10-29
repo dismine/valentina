@@ -287,7 +287,7 @@ auto DialogHistory::RecordDescription(const VToolRecord &tool, HistoryRecord rec
     -> HistoryRecord
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 61, "Not all tools were used in history.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 62, "Not all tools were used in history.");
 
     switch (tool.getTypeTool())
     {
@@ -407,8 +407,9 @@ auto DialogHistory::RecordDescription(const VToolRecord &tool, HistoryRecord rec
             return record;
         case Tool::CutArc:
         {
-            const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(AttrUInt(domElem, AttrArc));
-            record.description = tr("%1 - cut %2").arg(PointName(tool.getId()), arc->NameForHistory(tr("arc")));
+            const QSharedPointer<VAbstractArc> arc = data->GeometricObject<VAbstractArc>(AttrUInt(domElem, AttrArc));
+            QString const toolName = arc->getType() == GOType::EllipticalArc ? tr("elliptical arc") : tr("arc");
+            record.description = tr("%1 - cut %2").arg(PointName(tool.getId()), arc->NameForHistory(toolName));
             return record;
         }
         case Tool::CutSpline:
@@ -485,6 +486,13 @@ auto DialogHistory::RecordDescription(const VToolRecord &tool, HistoryRecord rec
             record.description =
                 tr("Move objects. Suffix '%1'").arg(VDomDocument::GetParametrString(domElem, AttrSuffix, QString()));
             return record;
+        case Tool::EllipticalArcWithLength:
+        {
+            const QSharedPointer<VEllipticalArc> arc = data->GeometricObject<VEllipticalArc>(tool.getId());
+            record.description
+                = tr("%1 with length %2").arg(arc->NameForHistory(tr("Elliptical arc"))).arg(arc->GetLength());
+            return record;
+        }
         // Because "history" not only show history of pattern, but help restore current data for each pattern's
         // piece, we need add record about details and nodes, but don't show them.
         case Tool::Piece:

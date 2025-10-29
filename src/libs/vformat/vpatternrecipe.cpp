@@ -49,6 +49,7 @@
 #include "../vtools/tools/drawTools/toolcurve/vtoolcubicbezier.h"
 #include "../vtools/tools/drawTools/toolcurve/vtoolcubicbezierpath.h"
 #include "../vtools/tools/drawTools/toolcurve/vtoolellipticalarc.h"
+#include "../vtools/tools/drawTools/toolcurve/vtoolellipticalarcwithlength.h"
 #include "../vtools/tools/drawTools/toolcurve/vtoolspline.h"
 #include "../vtools/tools/drawTools/toolcurve/vtoolsplinepath.h"
 #include "../vtools/tools/drawTools/toolpoint/tooldoublepoint/vtooltruedarts.h"
@@ -347,7 +348,7 @@ auto VPatternRecipe::Draft(const QDomElement &draft) -> QDomElement
 auto VPatternRecipe::Step(const VToolRecord &tool, const VContainer &data) -> QDomElement
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 61, "Not all tools were used in history.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 62, "Not all tools were used in history.");
 
     if (const QDomElement domElem = m_pattern->FindElementById(tool.getId()); not domElem.isElement() && tool.IsMandatory())
     {
@@ -446,6 +447,8 @@ auto VPatternRecipe::Step(const VToolRecord &tool, const VContainer &data) -> QD
                 return FlippingByAxis(tool, data);
             case Tool::Move:
                 return Move(tool, data);
+            case Tool::EllipticalArcWithLength:
+                return EllipticalArcWithLength(tool);
             // Because "history" not only show history of pattern, but help restore current data for each pattern's
             // piece, we need add record about details and nodes, but don't show them.
             case Tool::Piece:
@@ -1147,6 +1150,25 @@ auto VPatternRecipe::Move(const VToolRecord &record, const VContainer &data) -> 
     SetAttribute(step, AttrSuffix, tool->Suffix());
 
     step.appendChild(GroupOperationSource(tool, record.getId(), data));
+
+    return step;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPatternRecipe::EllipticalArcWithLength(const VToolRecord &record) -> QDomElement
+{
+    auto *tool = GetPatternTool<VToolEllipticalArcWithLength>(record.getId());
+
+    QDomElement step = createElement(TagStep);
+
+    ToolAttributes(step, tool);
+    SetAttribute(step, AttrCenter, tool->CenterPointName());
+    Formula(step, tool->GetFormulaRadius1(), AttrRadius1, AttrRadius1Value);
+    Formula(step, tool->GetFormulaRadius2(), AttrRadius2, AttrRadius2Value);
+    Formula(step, tool->GetFormulaF1(), AttrAngle1, AttrAngle1Value);
+    Formula(step, tool->GetFormulaLength(), AttrLength, AttrLengthValue);
+
+    CurveAttributes(step, tool);
 
     return step;
 }

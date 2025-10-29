@@ -199,6 +199,7 @@ private slots:
     void ToolInsertNode(bool checked);
     void ToolArcStart(bool checked);
     void ToolArcEnd(bool checked);
+    void ToolEllipticalArcWithLength(bool checked);
 
     void ActionDraw(bool checked);
     void ActionDetails(bool checked);

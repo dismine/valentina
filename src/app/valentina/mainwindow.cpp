@@ -102,6 +102,7 @@
 #include "../vtools/dialogs/tools/dialogcutarc.h"
 #include "../vtools/dialogs/tools/dialogcutspline.h"
 #include "../vtools/dialogs/tools/dialogcutsplinepath.h"
+#include "../vtools/dialogs/tools/dialogellipticalarcwithlength.h"
 #include "../vtools/dialogs/tools/dialogellipticalarc.h"
 #include "../vtools/dialogs/tools/dialogendline.h"
 #include "../vtools/dialogs/tools/dialogflippingbyaxis.h"
@@ -197,6 +198,7 @@
 #include "dialogs/vwidgetbackgroundimages.h"
 #include "dialogs/vwidgetdetails.h"
 #include "dialogs/vwidgetgroups.h"
+#include "tools/drawTools/toolcurve/vtoolellipticalarcwithlength.h"
 #include "vabstractapplication.h"
 #include "vabstractshortcutmanager.h"
 #include "vsinglelineoutlinechar.h"
@@ -889,7 +891,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
         auto *dialogTool = new Dialog(pattern, doc, 0, this);
 
         // This check helps to find missed tools in the switch
-        Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 61, "Check if need to extend.");
+        Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 62, "Check if need to extend.");
 
         switch (t)
         {
@@ -931,7 +933,8 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
         }
 
         if constexpr (std::is_same_v<Dialog,DialogArc> || std::is_same_v<Dialog,DialogArcWithLength> ||
-                      std::is_same_v<Dialog,DialogEllipticalArc>)
+                      std::is_same_v<Dialog,DialogEllipticalArc> ||
+                      std::is_same_v<Dialog,DialogEllipticalArcWithLength>)
         {
             dialogTool->SetPenStyle(settings->GetGlobalPenStyle());
             dialogTool->SetColor(settings->GetGlobalToolColor());
@@ -1823,6 +1826,18 @@ void MainWindow::ToolArcEnd(bool checked)
                                          &MainWindow::ClosedDrawDialogWithApply<VToolCutArc>,
                                          &MainWindow::ApplyDrawDialog<VToolCutArc>);
     LogPatternToolUsed(checked, QStringLiteral("Arc end tool"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolEllipticalArcWithLength(bool checked)
+{
+    ToolSelectPointByRelease();
+    SetToolButtonWithApply<DialogEllipticalArcWithLength>(
+        checked, Tool::EllipticalArcWithLength, QStringLiteral("el_arc_with_length_cursor.png"),
+        tr("Select point of the center of the elliptical arc"),
+                &MainWindow::ClosedDrawDialogWithApply<VToolEllipticalArcWithLength>,
+        &MainWindow::ApplyDrawDialog<VToolEllipticalArcWithLength>);
+    LogPatternToolUsed(checked, QStringLiteral("Elliptical arc with length tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3354,6 +3369,7 @@ void MainWindow::ToolBarDrawTools()
             curveToolMenu->addAction(ui->actionArcTool);
             curveToolMenu->addAction(ui->actionArcWithLengthTool);
             curveToolMenu->addAction(ui->actionEllipticalArcTool);
+            curveToolMenu->addAction(ui->actionEllipticalArcWithLengthTool);
 
             auto *curvePointTool = new VToolButtonPopup(this);
             curvePointTool->AssignMenu(curveToolMenu);
@@ -3372,6 +3388,7 @@ void MainWindow::ToolBarDrawTools()
         ui->toolBarCurveTools->addAction(ui->actionArcTool);
         ui->toolBarCurveTools->addAction(ui->actionArcWithLengthTool);
         ui->toolBarCurveTools->addAction(ui->actionEllipticalArcTool);
+        ui->toolBarCurveTools->addAction(ui->actionEllipticalArcWithLengthTool);
     }
 
     ui->toolBarOperationTools->clear();
@@ -3480,7 +3497,7 @@ void MainWindow::InitToolButtons()
     connect(ui->actionToolSelect, &QAction::triggered, this, &MainWindow::ArrowTool);
 
     // This check helps to find missed tools
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 61, "Check if all tools were connected.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 62, "Check if all tools were connected.");
 
     auto InitToolButton = [this](VShortcutAction type, QAction *action, void (MainWindow::*slotFunction)(bool))
     {
@@ -3549,6 +3566,8 @@ void MainWindow::InitToolButtons()
     InitToolButton(VShortcutAction::ToolPlaceLabel, ui->actionPlaceLabelTool, &MainWindow::ToolPlaceLabel);
     InitToolButton(VShortcutAction::ToolArcStart, ui->actionArcStartPointTool, &MainWindow::ToolArcStart);
     InitToolButton(VShortcutAction::ToolArcEnd, ui->actionArcEndPointTool, &MainWindow::ToolArcEnd);
+    InitToolButton(VShortcutAction::ToolEllipticalArcWithLength, ui->actionEllipticalArcWithLengthTool,
+                   &MainWindow::ToolEllipticalArcWithLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3598,7 +3617,7 @@ void MainWindow::MouseMove(const QPointF &scenePos)
 void MainWindow::CancelTool()
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 61, "Not all tools were handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 62, "Not all tools were handled.");
 
     qCDebug(vMainWindow, "Canceling tool.");
     if (not m_dialogTool.isNull())
@@ -3783,6 +3802,9 @@ void MainWindow::CancelTool()
         case Tool::ArcEnd:
             ui->actionArcEndPointTool->setChecked(false);
             break;
+        case Tool::EllipticalArcWithLength:
+            ui->actionEllipticalArcWithLengthTool->setChecked(false);
+            break;
     }
 
     QT_WARNING_POP
@@ -3800,7 +3822,7 @@ void MainWindow::SetupDrawToolsIcons()
     const auto resource = QStringLiteral("toolicon");
 
     // This check helps to find missed tools
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 61, "Not all tools were handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 62, "Not all tools were handled.");
 
     ui->actionLineTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("line.png")));
     ui->actionEndLineTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("segment.png")));
@@ -3857,6 +3879,8 @@ void MainWindow::SetupDrawToolsIcons()
     ui->actionPlaceLabelTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("place_label.png")));
     ui->actionArcStartPointTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("arc_start.png")));
     ui->actionArcEndPointTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("arc_end.png")));
+    ui->actionEllipticalArcWithLengthTool->setIcon(
+                VTheme::GetIconResource(resource, QStringLiteral("el_arc_with_length.png")));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -5674,7 +5698,7 @@ void MainWindow::SetEnableTool(bool enable)
     QT_WARNING_POP
 
     // This check helps to find missed tools
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 61, "Not all tools were handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 62, "Not all tools were handled.");
 
     // Drawing Tools
     ui->actionEndLineTool->setEnabled(drawTools);
@@ -5721,6 +5745,7 @@ void MainWindow::SetEnableTool(bool enable)
     ui->actionExportDraw->setEnabled(drawTools);
     ui->actionArcStartPointTool->setEnabled(drawTools);
     ui->actionArcEndPointTool->setEnabled(drawTools);
+    ui->actionEllipticalArcWithLengthTool->setEnabled(drawTools);
 
     ui->actionLast_tool->setEnabled(drawTools);
 
@@ -6022,7 +6047,7 @@ void MainWindow::CreateMenus()
 void MainWindow::LastUsedTool()
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 61, "Not all tools were handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 62, "Not all tools were handled.");
 
     if (m_currentTool == m_lastUsedTool)
     {
@@ -6237,6 +6262,10 @@ void MainWindow::LastUsedTool()
         case Tool::ArcEnd:
             ui->actionArcEndPointTool->setChecked(true);
             ToolArcEnd(true);
+            break;
+        case Tool::EllipticalArcWithLength:
+            ui->actionEllipticalArcWithLengthTool->setChecked(true);
+            ToolEllipticalArcWithLength(true);
             break;
     }
 

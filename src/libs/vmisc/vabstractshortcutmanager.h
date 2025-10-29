@@ -128,6 +128,7 @@ enum class VShortcutAction
     ToolPlaceLabel,
     ToolArcStart,
     ToolArcEnd,
+    ToolEllipticalArcWithLength,
     LAST_ONE_DO_NOT_USE
 };
 

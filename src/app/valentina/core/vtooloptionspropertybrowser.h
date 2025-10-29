@@ -207,6 +207,7 @@ private:
     void ChangeDataToolEllipticalArc(VPE::VProperty *property);
     void ChangeDataBackgroundPixmapItem(VPE::VProperty *property);
     void ChangeDataBackgroundSVGItem(VPE::VProperty *property);
+    void ChangeDataToolEllipticalArcWithLength(VPE::VProperty *property);
 
     void ShowOptionsToolSinglePoint(QGraphicsItem *item);
     void ShowOptionsToolEndLine(QGraphicsItem *item);
@@ -244,6 +245,7 @@ private:
     void ShowOptionsToolEllipticalArc(QGraphicsItem *item);
     void ShowOptionsBackgroundPixmapItem(QGraphicsItem *item);
     void ShowOptionsBackgroundSVGItem(QGraphicsItem *item);
+    void ShowOptionsToolEllipticalArcWithLength(QGraphicsItem *item);
 
     void UpdateOptionsToolSinglePoint();
     void UpdateOptionsToolEndLine();
@@ -281,6 +283,7 @@ private:
     void UpdateOptionsToolEllipticalArc();
     void UpdateOptionsBackgroundPixmapItem();
     void UpdateOptionsBackgroundSVGItem();
+    void UpdateOptionsToolEllipticalArcWithLength();
 };
 
 #endif // VTOOLOPTIONSPROPERTYBROWSER_H

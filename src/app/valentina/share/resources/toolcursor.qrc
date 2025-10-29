@@ -180,5 +180,9 @@
         <file>toolcursor/dark/arc_end_cursor.png</file>
         <file>toolcursor/dark/arc_end_cursor@2x.png</file>
         <file>toolcursor/dark/arc_start_cursor.png</file>
+        <file>toolcursor/light/el_arc_with_length_cursor@2x.png</file>
+        <file>toolcursor/light/el_arc_with_length_cursor.png</file>
+        <file>toolcursor/dark/el_arc_with_length_cursor@2x.png</file>
+        <file>toolcursor/dark/el_arc_with_length_cursor.png</file>
     </qresource>
 </RCC>

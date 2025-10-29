@@ -65,6 +65,7 @@
 #include "../vtools/tools/drawTools/toolcurve/vtoolcubicbezier.h"
 #include "../vtools/tools/drawTools/toolcurve/vtoolcubicbezierpath.h"
 #include "../vtools/tools/drawTools/toolcurve/vtoolellipticalarc.h"
+#include "../vtools/tools/drawTools/toolcurve/vtoolellipticalarcwithlength.h"
 #include "../vtools/tools/drawTools/toolcurve/vtoolspline.h"
 #include "../vtools/tools/drawTools/toolcurve/vtoolsplinepath.h"
 #include "../vtools/tools/drawTools/toolpoint/tooldoublepoint/vtooltruedarts.h"
@@ -3406,6 +3407,68 @@ void VPattern::ParseNodeEllipticalArc(const QDomElement &domElement, const Docum
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseToolEllipticalArcWithLength(VMainGraphicsScene *scene,
+                                                QDomElement &domElement,
+                                                const Document &parse)
+{
+    SCASSERT(scene != nullptr)
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
+    try
+    {
+        VToolEllipticalArcWithLengthInitData initData;
+        initData.scene = scene;
+        initData.doc = this;
+        initData.data = data;
+        initData.parse = parse;
+        initData.typeCreation = Source::FromFile;
+
+        DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
+        initData.center = GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
+        initData.radius1 = GetParametrString(domElement, AttrRadius1, QStringLiteral("10"));
+        initData.radius2 = GetParametrString(domElement, AttrRadius2, QStringLiteral("10"));
+        const QString r1 = initData.radius1; // need for saving fixed formula;
+        const QString r2 = initData.radius2; // need for saving fixed formula;
+        initData.f1 = GetParametrString(domElement, AttrAngle1, QStringLiteral("180"));
+        const QString f1Fix = initData.f1; // need for saving fixed formula;
+        initData.length = GetParametrString(domElement, AttrLength, QStringLiteral("10"));
+        const QString lengthFix = initData.length; // need for saving fixed length;
+        initData.rotationAngle = GetParametrString(domElement, AttrRotationAngle, QChar('0'));
+        const QString frotationFix = initData.rotationAngle; // need for saving fixed formula;
+        initData.color = GetParametrString(domElement, AttrColor, ColorBlack);
+        initData.penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
+        initData.approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
+        initData.aliasSuffix = GetParametrEmptyString(domElement, AttrAlias);
+
+        VToolEllipticalArcWithLength::Create(initData);
+        // Rewrite attribute formula. Need for situation when we have wrong formula.
+        if (r1 != initData.radius1 || r2 != initData.radius2 || f1Fix != initData.f1 || lengthFix != initData.length
+            || frotationFix != initData.rotationAngle)
+        {
+            SetAttribute(domElement, AttrRadius1, initData.radius1);
+            SetAttribute(domElement, AttrRadius2, initData.radius2);
+            SetAttribute(domElement, AttrAngle1, initData.f1);
+            SetAttribute(domElement, AttrLength, initData.length);
+            SetAttribute(domElement, AttrRotationAngle, initData.rotationAngle);
+            modified = true;
+            haveLiteChange();
+        }
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating elliptical arc with length"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating elliptical arc with length"), domElement);
+        excep.AddMoreInformation("Message:     "_L1 + e.GetMsg() + '\n'_L1 + "Expression:  "_L1 + e.GetExpr());
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPattern::ParseNodeArc(const QDomElement &domElement, const Document &parse)
 {
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
@@ -4030,8 +4093,11 @@ void VPattern::ParseEllipticalArcElement(VMainGraphicsScene *scene, QDomElement 
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(not type.isEmpty(), Q_FUNC_INFO, "type of elliptical arc is empty");
 
-    const auto arcs = QStringList() << VToolEllipticalArc::ToolType  /*0*/
-                                    << VNodeEllipticalArc::ToolType; /*1*/
+    const auto arcs = QStringList{
+        VToolEllipticalArc::ToolType,          /*0*/
+        VNodeEllipticalArc::ToolType,          /*1*/
+        VToolEllipticalArcWithLength::ToolType /*2*/
+    };
 
     switch (arcs.indexOf(type))
     {
@@ -4040,6 +4106,9 @@ void VPattern::ParseEllipticalArcElement(VMainGraphicsScene *scene, QDomElement 
             break;
         case 1: // VNodeEllipticalArc::ToolType
             ParseNodeEllipticalArc(domElement, parse);
+            break;
+        case 2: // VToolEllipticalArcWithLength::ToolType
+            ParseToolEllipticalArcWithLength(scene, domElement, parse);
             break;
         default:
             VException const e(tr("Unknown elliptical arc type '%1'.").arg(type));
@@ -4598,7 +4667,7 @@ void VPattern::DrawToolsCommonAttributes(const QDomElement &domElement, quint32 
 auto VPattern::ActiveDrawBoundingRect() const -> QRectF
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 61, "Not all tools were used.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 62, "Not all tools were used.");
 
     QRectF rec;
 
@@ -4660,6 +4729,7 @@ auto VPattern::ActiveDrawBoundingRect() const -> QRectF
                 case Tool::CubicBezierPath:
                 case Tool::ArcWithLength:
                 case Tool::EllipticalArc:
+                case Tool::EllipticalArcWithLength:
                     rec = ToolBoundingRect<VAbstractSpline>(rec, tool.getId());
                     break;
                 case Tool::TrueDarts:

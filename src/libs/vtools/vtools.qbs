@@ -20,6 +20,9 @@ VLib {
             "tools/dialogcutarc.h",
             "tools/dialogcutspline.h",
             "tools/dialogcutsplinepath.h",
+            "tools/dialogellipticalarcwithlength.cpp",
+            "tools/dialogellipticalarcwithlength.h",
+            "tools/dialogellipticalarcwithlength.ui",
             "tools/dialogendline.h",
             "tools/dialogheight.h",
             "tools/dialogline.h",
@@ -171,6 +174,8 @@ VLib {
             "backgroundimage/vbackgroundimagecontrols.h",
             "backgroundimage/vbackgroundpixmapitem.h",
             "backgroundimage/vbackgroundsvgitem.h",
+            "drawTools/toolcurve/vtoolellipticalarcwithlength.cpp",
+            "drawTools/toolcurve/vtoolellipticalarcwithlength.h",
             "toolsdef.h",
             "backgroundimage/vbackgroundimageitem.h",
             "vdatatool.h",
@@ -291,7 +296,7 @@ VLib {
             "nodeDetails/vtoolpiecepath.cpp",
             "nodeDetails/vtoolpin.cpp",
             "vinteractivetool.cpp",
-            "nodeDetails/vtoolplacelabel.cpp"
+            "nodeDetails/vtoolplacelabel.cpp",
         ]
     }
 
@@ -384,6 +389,8 @@ VLib {
         name: "visualization"
         prefix: "visualization/"
         files: [
+            "path/vistoolellipticalarcwithlength.cpp",
+            "path/vistoolellipticalarcwithlength.h",
             "visualization.h",
             "line/visline.h",
             "line/vistoolline.h",
@@ -467,7 +474,7 @@ VLib {
             "path/vistoolpiecepath.cpp",
             "path/vispiecespecialpoints.cpp",
             "line/vistoolspecialpoint.cpp",
-            "path/vistoolduplicatedetail.cpp"
+            "path/vistoolduplicatedetail.cpp",
         ]
     }
 

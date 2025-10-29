@@ -180,5 +180,9 @@
         <file>toolicon/dark/arc_end.png</file>
         <file>toolicon/dark/arc_start@2x.png</file>
         <file>toolicon/dark/arc_start.png</file>
+        <file>toolicon/light/el_arc_with_length@2x.png</file>
+        <file>toolicon/light/el_arc_with_length.png</file>
+        <file>toolicon/dark/el_arc_with_length.png</file>
+        <file>toolicon/dark/el_arc_with_length@2x.png</file>
     </qresource>
 </RCC>

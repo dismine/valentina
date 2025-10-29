@@ -8,6 +8,7 @@
 - Valentina app. New action Install single line font.
 - Valentina app. Tool Segment Arc now supports an elliptical arc.
 - Valentina app. Added Global object color and default pen style properties.
+- New tool Elliptical arc with length.
 
 # Valentina 1.0.1 (unreleased)
 - Tool Normal. Fixed formula values were not saved.

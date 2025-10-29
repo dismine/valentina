@@ -283,6 +283,7 @@ enum class Tool : ToolVisHolderType
     BackgroundSVGImage,
     ArcStart,
     ArcEnd,
+    EllipticalArcWithLength,
     LAST_ONE_DO_NOT_USE // add new stuffs above this, this constant must be last and never used
 };
 
@@ -342,6 +343,7 @@ enum class Vis : ToolVisHolderType
     PieceItem,
     TextGraphicsItem,
     ScenePoint,
+    ToolEllipticalArcWithLength,
     LAST_ONE_DO_NOT_USE // add new stuffs above this, this constant must be last and never used
 };
 

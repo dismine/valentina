@@ -32,7 +32,6 @@
 #include <QPointF>
 #include <QSharedPointer>
 #include <QtMath>
-#include <new>
 
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
@@ -115,6 +114,12 @@ void VisToolArcWithLength::RefreshGeometry()
                 auto arc = VArc(*first, m_radius, m_f1, r.angle());
                 arc.SetApproximationScale(ApproximationScale());
                 DrawPath(this, arc.GetPath(), arc.DirectionArrows(), LineStyle(), Qt::RoundCap);
+
+                QLineF f1Line = r;
+                f1Line.setLength(m_radius);
+                f1Line.setAngle(m_f1);
+
+                DrawPoint(m_f1Point, f1Line.p2());
 
                 SetToolTip(tr("<b>Arc</b>: radius = %1%2, first angle = %3°, arc length = %4%2; "
                               "<b>Mouse click</b> - finish creating, "

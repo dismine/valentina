@@ -35,6 +35,8 @@
 VValentinaShortcutManager::VValentinaShortcutManager(QObject *parent)
   : VAbstractShortcutManager{parent}
 {
+    Q_STATIC_ASSERT_X(static_cast<int>(VShortcutAction::LAST_ONE_DO_NOT_USE) == 86, "Check if all actions were used.");
+
     QT_WARNING_PUSH
 #if !defined(Q_OS_MACOS) && defined(Q_CC_CLANG)
     QT_WARNING_DISABLE_CLANG("-Wenum-enum-conversion")
@@ -169,6 +171,7 @@ VValentinaShortcutManager::VValentinaShortcutManager(QObject *parent)
     AddShortcut({VShortcutAction::ToolPlaceLabel, {}, {}});
     AddShortcut({VShortcutAction::ToolArcStart, {}, {}});
     AddShortcut({VShortcutAction::ToolArcEnd, {}, {}});
+    AddShortcut({VShortcutAction::ToolEllipticalArcWithLength, {}, {}});
 
     QT_WARNING_POP
 }

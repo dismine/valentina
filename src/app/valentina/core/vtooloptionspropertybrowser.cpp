@@ -49,6 +49,7 @@
 #include "../vwidgets/vgraphicssimpletextitem.h"
 #include "../vwidgets/vsimplecurve.h"
 #include "../vwidgets/vsimplepoint.h"
+#include "tools/drawTools/toolcurve/vtoolellipticalarcwithlength.h"
 #include "vformulaproperty.h"
 
 #include "../vtools/tools/drawTools/operation/flipping/vtoolflippingbyaxis.h"
@@ -144,7 +145,7 @@ void VToolOptionsPropertyBrowser::ClearPropertyBrowser()
 void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 61, "Not all tools were used in switch.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 62, "Not all tools were used in switch.");
 
     switch (item->type())
     {
@@ -263,6 +264,9 @@ void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
         case VBackgroundSVGItem::Type:
             ShowOptionsBackgroundSVGItem(item);
             break;
+        case VToolEllipticalArcWithLength::Type:
+            ShowOptionsToolEllipticalArcWithLength(item);
+            break;
         default:
             break;
     }
@@ -277,7 +281,7 @@ void VToolOptionsPropertyBrowser::UpdateOptions()
     }
 
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 61, "Not all tools were used in switch.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 62, "Not all tools were used in switch.");
 
     switch (m_currentItem->type())
     {
@@ -393,6 +397,9 @@ void VToolOptionsPropertyBrowser::UpdateOptions()
         case VBackgroundSVGItem::Type:
             UpdateOptionsBackgroundSVGItem();
             break;
+        case VToolEllipticalArcWithLength::Type:
+            UpdateOptionsToolEllipticalArcWithLength();
+            break;
         default:
             break;
     }
@@ -426,7 +433,7 @@ void VToolOptionsPropertyBrowser::userChangedData(VPE::VProperty *property)
     }
 
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 61, "Not all tools were used in switch.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 62, "Not all tools were used in switch.");
 
     switch (m_currentItem->type())
     {
@@ -537,6 +544,9 @@ void VToolOptionsPropertyBrowser::userChangedData(VPE::VProperty *property)
             break;
         case VBackgroundSVGItem::Type:
             ChangeDataBackgroundSVGItem(prop);
+            break;
+        case VToolEllipticalArcWithLength::Type:
+            ChangeDataToolEllipticalArcWithLength(prop);
             break;
         default:
             break;
@@ -2716,6 +2726,92 @@ void VToolOptionsPropertyBrowser::ChangeDataBackgroundSVGItem(VPE::VProperty *pr
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ChangeDataToolEllipticalArcWithLength(VPE::VProperty *property)
+{
+    SCASSERT(property != nullptr)
+
+    const QString id = m_propertyToId[property];
+
+    auto SetFormulaRadius1 = [this](VPE::VProperty *property)
+    {
+        if (auto *i = qgraphicsitem_cast<VToolEllipticalArcWithLength *>(m_currentItem))
+        {
+            auto formula = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).value<VFormula>();
+            if (formula == i->GetFormulaRadius1())
+            {
+                return;
+            }
+
+            i->SetFormulaRadius1(formula);
+        }
+        else
+        {
+            qWarning() << "Can't cast item";
+        }
+    };
+
+    auto SetFormulaRadius2 = [this](VPE::VProperty *property)
+    {
+        if (auto *i = qgraphicsitem_cast<VToolEllipticalArcWithLength *>(m_currentItem))
+        {
+            auto formula = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).value<VFormula>();
+            if (formula == i->GetFormulaRadius2())
+            {
+                return;
+            }
+
+            i->SetFormulaRadius2(formula);
+        }
+        else
+        {
+            qWarning() << "Can't cast item";
+        }
+    };
+
+    switch (PropertiesList().indexOf(id))
+    {
+        case 0:              // AttrName
+            Q_UNREACHABLE(); // The attribute is read only
+            break;
+        case 40: // AttrRadius1
+            SetFormulaRadius1(property);
+            break;
+        case 41: // AttrRadius2
+            SetFormulaRadius2(property);
+            break;
+        case 9: // AttrAngle1
+            SetFormulaF1<VToolEllipticalArcWithLength>(property);
+            break;
+        case 4: // AttrLength
+            SetFormulaLength<VToolEllipticalArcWithLength>(property);
+            break;
+        case 42: // AttrRotationAngle
+            SetFormulaRotationAngle<VToolEllipticalArcWithLength>(property);
+            break;
+        case 27: // AttrTypeColor
+            SetLineColor<VToolEllipticalArcWithLength>(property);
+            break;
+        case 11: // AttrCenter (read only)
+            break;
+        case 59: // AttrPenStyle
+            SetPenStyle<VToolEllipticalArcWithLength>(property);
+            break;
+        case 60: // AttrAScale
+            SetApproximationScale<VToolEllipticalArcWithLength>(property);
+            break;
+        case 61: // AttrNotes
+            SetNotes<VToolEllipticalArcWithLength>(property);
+            break;
+        case 62: // AttrAlias
+            SetAlias<VToolEllipticalArcWithLength>(property);
+            break;
+        default:
+            qWarning() << "Unknown property type. id = " << id;
+            break;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::ShowOptionsToolSinglePoint(QGraphicsItem *item)
 {
     auto *i = qgraphicsitem_cast<VToolBasePoint *>(item);
@@ -3356,6 +3452,32 @@ void VToolOptionsPropertyBrowser::ShowOptionsBackgroundSVGItem(QGraphicsItem *it
     AddPropertyBool(tr("Hold:"), i->IsHold(), *AttrHold);
     AddPropertyBool(tr("Visible:"), i->IsVisible(), *AttrVisible);
     AddPropertyOpacity(tr("Opacity:"), static_cast<int>(i->GetOpacity() * 100));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ShowOptionsToolEllipticalArcWithLength(QGraphicsItem *item)
+{
+    auto *i = qgraphicsitem_cast<VToolEllipticalArcWithLength *>(item);
+    i->ShowVisualization(true);
+    m_formView->setTitle(tr("Elliptical arc with given length"));
+
+    QPalette const comboBoxPalette = ComboBoxPalette();
+
+    AddPropertyObjectName(i, tr("Name:"), true);
+    AddPropertyParentPointName(i->CenterPointName(), tr("Center point:"), AttrCenter);
+    AddPropertyFormula(tr("Radius1:"), i->GetFormulaRadius1(), AttrRadius1);
+    AddPropertyFormula(tr("Radius2:"), i->GetFormulaRadius2(), AttrRadius2);
+    AddPropertyFormula(tr("First angle:"), i->GetFormulaF1(), AttrAngle1);
+    AddPropertyFormula(tr("Length:"), i->GetFormulaLength(), AttrLength);
+    AddPropertyFormula(tr("Rotation angle:"), i->GetFormulaRotationAngle(), AttrRotationAngle);
+    AddPropertyAlias(i, tr("Alias:"));
+    AddPropertyCurvePenStyle(i,
+                             tr("Pen style:"),
+                             CurvePenStylesPics(comboBoxPalette.color(QPalette::Base),
+                                                comboBoxPalette.color(QPalette::Text)));
+    AddPropertyLineColor(i, tr("Color:"), VAbstractTool::ColorsList(), AttrColor);
+    AddPropertyApproximationScale(tr("Approximation scale:"), i->GetApproximationScale());
+    AddPropertyText(tr("Notes:"), i->GetNotes(), AttrNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -4329,6 +4451,57 @@ void VToolOptionsPropertyBrowser::UpdateOptionsBackgroundSVGItem()
     m_idToProperty.value(*AttrHold)->setValue(i->IsHold());
     m_idToProperty.value(*AttrVisible)->setValue(i->IsVisible());
     m_idToProperty.value(*AttrOpacity)->setValue(static_cast<int>(i->GetOpacity() * 100));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::UpdateOptionsToolEllipticalArcWithLength()
+{
+    auto *i = qgraphicsitem_cast<VToolEllipticalArcWithLength *>(m_currentItem);
+
+    m_idToProperty[AttrName]->setValue(i->name());
+
+    QVariant valueRadius1;
+    valueRadius1.setValue(i->GetFormulaRadius1());
+    m_idToProperty[AttrRadius1]->setValue(valueRadius1);
+
+    QVariant valueFormulaRadius2;
+    valueFormulaRadius2.setValue(i->GetFormulaRadius2());
+    m_idToProperty[AttrRadius2]->setValue(valueFormulaRadius2);
+
+    QVariant valueFirstAngle;
+    valueFirstAngle.setValue(i->GetFormulaF1());
+    m_idToProperty[AttrAngle1]->setValue(valueFirstAngle);
+
+    QVariant valueLength;
+    valueLength.setValue(i->GetFormulaLength());
+    m_idToProperty[AttrLength]->setValue(valueLength);
+
+    QVariant valueFormulaRotationAngle;
+    valueFormulaRotationAngle.setValue(i->GetFormulaRotationAngle());
+    m_idToProperty[AttrRotationAngle]->setValue(valueFormulaRotationAngle);
+
+    {
+        QPalette const comboBoxPalette = ComboBoxPalette();
+        const auto index = VPE::VLineTypeProperty::IndexOfStyle(CurvePenStylesPics(comboBoxPalette.color(QPalette::Base),
+                                                                                   comboBoxPalette.color(
+                                                                                       QPalette::Text)),
+                                                                i->GetPenStyle());
+        m_idToProperty[AttrPenStyle]->setValue(index);
+    }
+
+    m_idToProperty[AttrColor]->setValue(i->GetLineColor());
+
+    QVariant valueCenterPoint;
+    valueCenterPoint.setValue(i->CenterPointName());
+    m_idToProperty[AttrCenter]->setValue(valueCenterPoint);
+
+    QVariant valueApproximationScale;
+    valueApproximationScale.setValue(i->GetApproximationScale());
+    m_idToProperty[AttrAScale]->setValue(valueApproximationScale);
+
+    m_idToProperty[AttrNotes]->setValue(i->GetNotes());
+
+    m_idToProperty[AttrAlias]->setValue(i->GetAliasSuffix());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
