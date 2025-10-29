@@ -462,8 +462,7 @@ auto DialogHistory::RecordDescription(const VToolRecord &tool, HistoryRecord rec
         case Tool::EllipticalArc:
         {
             const QSharedPointer<VEllipticalArc> elArc = data->GeometricObject<VEllipticalArc>(tool.getId());
-            record.description =
-                tr("%1 with length %2").arg(elArc->NameForHistory(tr("Elliptical arc"))).arg(elArc->GetLength());
+            record.description = elArc->NameForHistory(tr("Elliptical arc"));
             return record;
         }
         case Tool::Rotation:
