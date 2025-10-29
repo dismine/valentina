@@ -187,7 +187,7 @@ auto VToolArcWithLength::GetFormulaRadius() const -> VFormula
 //---------------------------------------------------------------------------------------------------------------------
 void VToolArcWithLength::SetFormulaRadius(const VFormula &value)
 {
-    if (value.error() == false)
+    if (!value.error())
     {
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
         QSharedPointer<VArc> const arc = qSharedPointerDynamicCast<VArc>(obj);
@@ -212,7 +212,7 @@ auto VToolArcWithLength::GetFormulaF1() const -> VFormula
 //---------------------------------------------------------------------------------------------------------------------
 void VToolArcWithLength::SetFormulaF1(const VFormula &value)
 {
-    if (value.error() == false)
+    if (!value.error())
     {
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
         QSharedPointer<VArc> const arc = qSharedPointerDynamicCast<VArc>(obj);
@@ -242,7 +242,7 @@ auto VToolArcWithLength::GetFormulaLength() const -> VFormula
 //---------------------------------------------------------------------------------------------------------------------
 void VToolArcWithLength::SetFormulaLength(const VFormula &value)
 {
-    if (value.error() == false)
+    if (!value.error())
     {
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
         QSharedPointer<VArc> const arc = qSharedPointerDynamicCast<VArc>(obj);
