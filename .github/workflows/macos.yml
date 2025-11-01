@@ -43,21 +43,21 @@ jobs:
         qt:
           - install: 6.10.0
             label: Qt6_10
-            build_target: '12+'
+            build_target: '13+'
             xcode: '16.4'
-            target: 'MacOS_12+'
-            minimumMacosVersion: '12.0'
+            target: 'MacOS_13+'
+            minimumMacosVersion: '13.0'
             run_tests: 'true'
             with_icu: 'True'
             with_iconv: 'False'
             withBigCodecs: 'False'
             deploy: 'true'
           - install: 6.10.0
-            label: Qt6_9
-            build_target: '12+'
+            label: Qt6_10
+            build_target: '13+'
             xcode: '16.4'
-            target: 'MacOS_12+'
-            minimumMacosVersion: '12.0'
+            target: 'MacOS_13+'
+            minimumMacosVersion: '13.0'
             run_tests: 'true'
             with_icu: 'False'
             with_iconv: 'True'
@@ -337,10 +337,10 @@ jobs:
           # LTS release
           - install: 6.10.0
             label: Qt6_10
-            build_target: '12+'
+            build_target: '13+'
             xcode: '16.2'
-            target: 'MacOS_12+'
-            minimumMacosVersion: '12.0'
+            target: 'MacOS_13+'
+            minimumMacosVersion: '13.0'
             run_tests: 'true'
             with_icu: 'True'
             with_iconv: 'False'
@@ -348,10 +348,10 @@ jobs:
             deploy: 'true'
           - install: 6.10.0
             label: Qt6_10
-            build_target: '12+'
+            build_target: '13+'
             xcode: '16.2'
-            target: 'MacOS_12+'
-            minimumMacosVersion: '12.0'
+            target: 'MacOS_13+'
+            minimumMacosVersion: '13.0'
             run_tests: 'true'
             with_icu: 'False'
             with_iconv: 'True'
