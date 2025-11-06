@@ -37,6 +37,7 @@
 #include <QPrinterInfo>
 #include <QSaveFile>
 #include <QScopeGuard>
+#include <QStringLiteral>
 #include <QSvgGenerator>
 #include <QTimer>
 #include <QUndoStack>
@@ -319,7 +320,21 @@ struct VPExportData
     bool showTilesScheme{false};
     bool showGrainline{true};
     bool hideRuler{false};
+
+    auto ExportPath(int sheetIndex) const -> QString;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPExportData::ExportPath(int sheetIndex) const -> QString
+{
+    const auto suffix = VLayoutExporter::ExportFormatSuffix(format);
+
+    if (sheets.size() > 1)
+    {
+        return QStringLiteral("%1/%2 (%3)%4").arg(path, fileName, QString::number(sheetIndex + 1), suffix);
+    }
+    return QStringLiteral("%1/%2%3").arg(path, fileName, suffix);
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VPMainWindow::VPMainWindow(VPCommandLinePtr cmd, QWidget *parent)
@@ -2391,20 +2406,8 @@ void VPMainWindow::ExportData(const VPExportData &data)
     {
         for (int i = 0; i < data.sheets.size(); ++i)
         {
-            QString name;
-
-            if (data.sheets.size() > 1)
-            {
-                name = data.path + '/' + data.fileName + QString::number(i + 1) +
-                       VLayoutExporter::ExportFormatSuffix(data.format);
-            }
-            else
-            {
-                name = data.path + '/' + data.fileName + VLayoutExporter::ExportFormatSuffix(data.format);
-            }
-
-            VPSheetPtr const sheet = data.sheets.at(i);
-            ExportApparelLayout(data, sheet->GetAsLayoutPieces(), name, sheet->GetSheetSize().toSize());
+            VPSheetPtr const &sheet = data.sheets.at(i);
+            ExportApparelLayout(data, sheet->GetAsLayoutPieces(), data.ExportPath(i), sheet->GetSheetSize().toSize());
         }
     }
     else
@@ -2556,19 +2559,7 @@ void VPMainWindow::ExportScene(const VPExportData &data)
         exporter.SetMargins(sheet->GetSheetMargins());
         exporter.SetTitle(sheet->GetName());
         exporter.SetIgnorePrinterMargins(sheet->IgnoreMargins());
-
-        QString name;
-        if (sheets.size() > 1)
-        {
-            name = data.path + '/' + data.fileName + QString::number(i + 1) +
-                   VLayoutExporter::ExportFormatSuffix(data.format);
-        }
-        else
-        {
-            name = data.path + '/' + data.fileName + VLayoutExporter::ExportFormatSuffix(data.format);
-        }
-
-        exporter.SetFileName(name);
+        exporter.SetFileName(data.ExportPath(i));
         exporter.SetImageRect(sheet->GetMarginsRect());
 
         switch (data.format)
@@ -2787,8 +2778,7 @@ void VPMainWindow::ExportPdfTiledFile(const VPExportData &data)
     {
         for (int i = 0; i < data.sheets.size(); ++i)
         {
-            const QString name = data.path + '/' + data.fileName + QString::number(i + 1) +
-                                 VLayoutExporter::ExportFormatSuffix(data.format);
+            QString const name = data.ExportPath(i);
 
             printer->setOutputFileName(name);
             printer->setDocName(QFileInfo(name).baseName());
