@@ -203,31 +203,41 @@ Module {
     cpp.visibility: "minimal"
 
     readonly property string minimumMacosVersion: {
-        if (project.minimumMacosVersion !== undefined)
-            return project.minimumMacosVersion;
-
-        // Check which minimal MacOS version supports current Qt version
+        var qtRequiredMinVersion;
         if (Qt.core.versionMajor >= 6) {
             // For Qt 6.10 https://doc-snapshots.qt.io/qt6-6.10/supported-platforms.html
-            if (Qt.core.versionMinor >= 10) // Qt 6.10
-                return "13.0";
-
+            if (Qt.core.versionMinor >= 10)
+                qtRequiredMinVersion = "13.0";
             // For Qt 6.8 https://doc-snapshots.qt.io/qt6-6.8/supported-platforms.html
-            if (Qt.core.versionMinor >= 8) // Qt 6.8
-                return "12.0";
-
+            else if (Qt.core.versionMinor >= 8)
+                qtRequiredMinVersion = "12.0";
             // For Qt 6.5 https://doc-snapshots.qt.io/qt6-6.5/supported-platforms.html
-            if (Qt.core.versionMinor >= 5) // Qt 6.5
-                return "11.0";
-
+            else if (Qt.core.versionMinor >= 5)
+                qtRequiredMinVersion = "11.0";
+            // Qt 6.4 and below (within 6.x)
             // See page https://doc.qt.io/qt-6.4/supported-platforms.html
             // According to the documentation minimal version must be 10.14. But for some reason it requires 10.15 to
             // build.
-            return "10.15"; // Qt 6.4 and above
+            else
+                qtRequiredMinVersion = "10.15";
+        } else {
+            // Qt 5 https://doc.qt.io/qt-5.15/supported-platforms.html
+            qtRequiredMinVersion = "10.13";
         }
 
-        // See page https://doc.qt.io/qt-5.15/supported-platforms.html
-        return "10.13";
+        if (project.minimumMacosVersion === undefined) {
+            // Not defined by user, so just use the required version we found
+            return qtRequiredMinVersion;
+        }
+
+        if (Utilities.versionCompare(project.minimumMacosVersion, qtRequiredMinVersion) < 0) {
+            // The user's version is *lower* than the Qt-required version. This is an error.
+            throw "Error: project.minimumMacosVersion (" + project.minimumMacosVersion + ") " +
+                  "is set lower than the minimum required by Qt " + Qt.core.versionMajor + "." + Qt.core.versionMinor +
+                  ". Qt requires " + qtRequiredMinVersion + " or later.";
+        }
+
+        return project.minimumMacosVersion;
     }
 
     cpp.separateDebugInformation: true
