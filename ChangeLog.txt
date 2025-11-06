@@ -9,6 +9,7 @@
 - Valentina app. Tool Segment Arc now supports an elliptical arc.
 - Valentina app. Added Global object color and default pen style properties.
 - New tool Elliptical arc with length.
+- Puzzle app. Show number of sheet in brackets to separate them from sheet name.
 
 # Valentina 1.0.1 (unreleased)
 - Tool Normal. Fixed formula values were not saved.
@@ -24,6 +25,7 @@
 - Improved custom Dark/Light theme styles.
 - Fix calculation notch on seam allowance.
 - Valentina app. Added missing pen style control in property browser for elliptical arc.
+- Puzzle app. Show number of sheet in brackets to separate them from sheet name.
 
 # Valentina 1.0.0 July 21, 2025
 - Fix Puzzle app crash when application closing.
