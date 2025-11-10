@@ -60,20 +60,39 @@ public:
         DestinationPathNotFound,
         CopyFailed,
         FontCacheRebuildFailed, // Specific to Linux
-        RegistrationFailed      // Added to handle Windows registry errors
+        RegistrationFailed,     // Added to handle Windows registry errors
+        UserCancelled
     };
 
     /**
      * @brief Installs a single font file to the user's font directory.
      * @param sourceFilePath The absolute path to the font file (e.g., ".ttf", ".otf" or ".svg").
+     * @param window Parent window
      * @return An InstallError code indicating success or failure reason.
      */
-    auto InstallFont(const QString &sourceFilePath) -> InstallError;
+    auto InstallFont(const QString &sourceFilePath, QWidget *window) -> InstallError;
 
     auto ErrorMessage() const -> QString;
 
+    /**
+     * @brief Resets the overwrite choice. Call this before starting
+     * a new batch of font installations.
+     */
+    void ResetOverwriteMode();
+
 private:
     Q_DISABLE_COPY_MOVE(VFontInstaller)
+
+    // Define the states for the overwrite decision
+    enum class OverwriteMode
+    {
+        Ask,      // Ask the user for each font
+        YesToAll, // Overwrite all subsequent fonts
+        NoToAll   // Skip all subsequent fonts
+    };
+
+    // Add this member variable to your class
+    OverwriteMode m_overwriteMode = OverwriteMode::Ask;
 
     /**
      * @brief m_errorMessage If installation fails, this string will contain a detailed error.
@@ -83,16 +102,18 @@ private:
     /**
      * @brief Installs a single outline font file to the user's system font directory.
      * @param sourceFilePath The absolute path to the outline font file (e.g., ".ttf" or ".otf").
+     * @param window Parent window
      * @return An InstallError code indicating success or failure reason.
      */
-    auto InstallOutLineFont(const QString &sourceFilePath) -> InstallError;
+    auto InstallOutLineFont(const QString &sourceFilePath, QWidget *window) -> InstallError;
 
     /**
      * @brief Installs a single SVG font file to the user's font directory.
      * @param sourceFilePath The absolute path to the SVG font file (e.g., ".svg").
+     * @param window Parent window
      * @return An InstallError code indicating success or failure reason.
      */
-    auto InstallSVGFont(const QString &sourceFilePath) -> InstallError;
+    auto InstallSVGFont(const QString &sourceFilePath, QWidget *window) -> InstallError;
 
     /**
      * @brief Searches for and installs an optional companion JSON correction file for the font.
@@ -102,6 +123,17 @@ private:
      * @param fontId The ID of the font as loaded by QFontDatabase.
      */
     void InstallFontCorrections(const QDir &sourceDir, int fontId);
+
+    auto ValidateInstallPath(const QString &installPath, const QString &sourceFilePath, QString &outDestinationFilePath)
+        -> InstallError;
+    auto HandleFileOverwriteAndCopy(const QString &sourceFilePath, const QString &destinationFilePath, QWidget *window)
+        -> InstallError;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VFontInstaller::ResetOverwriteMode()
+{
+    m_overwriteMode = OverwriteMode::Ask;
+}
 
 #endif // VFONTINSTALLER_H

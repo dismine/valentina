@@ -31,6 +31,7 @@
 #include <QDebug>
 #include <QDir>
 #include <QFontDatabase>
+#include <QMessageBox>
 #include <QProcess>
 #include <QStandardPaths>
 
@@ -222,9 +223,10 @@ auto VFontInstaller::ErrorMessage() const -> QString
 /**
  * @brief Installs a single font file to the user's font directory.
  * @param sourceFilePath The absolute path to the font file.
+ * @param window Parent window
  * @return An InstallError code indicating success or failure reason.
  */
-auto VFontInstaller::InstallFont(const QString &sourceFilePath) -> InstallError
+auto VFontInstaller::InstallFont(const QString &sourceFilePath, QWidget *window) -> InstallError
 {
     m_errorMessage.clear();
 
@@ -239,66 +241,39 @@ auto VFontInstaller::InstallFont(const QString &sourceFilePath) -> InstallError
 
     if (sourceInfo.suffix() == "svg"_L1)
     {
-        return InstallSVGFont(sourceFilePath);
+        return InstallSVGFont(sourceFilePath, window);
     }
 
-    return InstallOutLineFont(sourceFilePath);
+    return InstallOutLineFont(sourceFilePath, window);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Installs a single font file to the user's system outline font directory.
  * @param sourceFilePath The absolute path to the outline font file.
+ * @param window Parent window
  * @return An InstallError code indicating success or failure reason.
  */
-auto VFontInstaller::InstallOutLineFont(const QString &sourceFilePath) -> InstallError
+auto VFontInstaller::InstallOutLineFont(const QString &sourceFilePath, QWidget *window) -> InstallError
 {
-    QString const installPath = GetOutlineFontInstallPath();
-
-    // 1. Validate installation path
-    if (installPath.isEmpty())
+    // 1. & 2. Validate path and get destination
+    QString destinationFilePath;
+    if (InstallError const pathError = ValidateInstallPath(GetOutlineFontInstallPath(),
+                                                           sourceFilePath,
+                                                           destinationFilePath);
+        pathError != InstallError::NoError)
     {
-        m_errorMessage = tr("Could not determine the system font installation path.");
-        return InstallError::DestinationPathNotFound;
+        return pathError;
     }
 
-    QDir const dir;
-    if (!dir.mkpath(installPath))
+    // 3. & 4. Handle copy and overwrite logic
+    if (InstallError const copyError = HandleFileOverwriteAndCopy(sourceFilePath, destinationFilePath, window);
+        copyError != InstallError::NoError)
     {
-        m_errorMessage = tr("Failed to create destination directory: %1").arg(installPath);
-        return InstallError::DestinationPathNotFound;
+        return copyError; // Returns CopyFailed, UserCancelled, etc.
     }
 
-    QFileInfo const sourceInfo(sourceFilePath);
-
-    // 2. Define destination path and copy
-    QString const destinationFilePath = QDir(installPath).filePath(sourceInfo.fileName());
-
-    // QFile::copy fails if the destination already exists and will not overwrite by default.
-    if (!QFile::copy(sourceFilePath, destinationFilePath))
-    {
-        // If copy fails, check if the files are the same (already installed)
-        if (QFile::exists(destinationFilePath))
-        {
-            // Font file already exists. Continue to registration step in case that failed previously.
-            m_errorMessage = tr("Font file already exists at destination: %1. Continuing with registration.")
-                                 .arg(destinationFilePath);
-            qWarning() << m_errorMessage;
-        }
-        else
-        {
-            m_errorMessage = tr("Failed to copy file from %1 to %2. Possible reasons: permission denied, file "
-                                "locked, or general I/O error.")
-                                 .arg(sourceFilePath, destinationFilePath);
-            return InstallError::CopyFailed;
-        }
-    }
-    else
-    {
-        qInfo() << "Successfully copied font file to:" << destinationFilePath;
-    }
-
-    // 3. Perform platform-specific post-copy and registration actions
+    // 5. Perform platform-specific post-copy and registration actions
 #ifdef Q_OS_LINUX
     if (!RebuildFontCache())
     {
@@ -308,7 +283,7 @@ auto VFontInstaller::InstallOutLineFont(const QString &sourceFilePath) -> Instal
     }
 #elif defined(Q_OS_WIN)
     // For all Windows versions, register the font in HKCU and broadcast the change.
-    if (!RegisterFontInRegistry(sourceInfo.fileName(), destinationFilePath))
+    if (!RegisterFontInRegistry(QFileInfo(sourceFilePath).fileName(), destinationFilePath))
     {
         m_errorMessage = tr("Font copy succeeded, but Windows Registry registration failed.");
         // Registration failure should still be returned as an error state.
@@ -316,14 +291,14 @@ auto VFontInstaller::InstallOutLineFont(const QString &sourceFilePath) -> Instal
     }
 #endif
 
-    // 4. Explicitly inform Qt's running application about the new font.
+    // 6. Explicitly inform Qt's running application about the new font.
     // This is the key step to avoid restarting the application.
     if (int const fontId = QFontDatabase::addApplicationFont(destinationFilePath); fontId == -1)
     {
         qWarning() << "Could not load font into Qt's application font database:" << destinationFilePath
                    << ". It might already be loaded.";
 
-        InstallFontCorrections(sourceInfo.dir(), fontId);
+        InstallFontCorrections(QFileInfo(sourceFilePath).dir(), fontId);
     }
     else
     {
@@ -340,54 +315,29 @@ auto VFontInstaller::InstallOutLineFont(const QString &sourceFilePath) -> Instal
 /**
  * @brief Installs a single SVG font file to the user's font directory.
  * @param sourceFilePath The absolute path to the SVG font file.
+ * @param window Parent window
  * @return An InstallError code indicating success or failure reason.
  */
-auto VFontInstaller::InstallSVGFont(const QString &sourceFilePath) -> InstallError
+auto VFontInstaller::InstallSVGFont(const QString &sourceFilePath, QWidget *window) -> InstallError
 {
-    QString const installPath = VAbstractApplication::VApp()->Settings()->GetPathSVGFonts();
-
-    // 1. Validate installation path
-    if (installPath.isEmpty())
+    // 1. & 2. Validate path and get destination
+    QString destinationFilePath;
+    if (InstallError const pathError = ValidateInstallPath(VAbstractApplication::VApp()->Settings()->GetPathSVGFonts(),
+                                                           sourceFilePath,
+                                                           destinationFilePath);
+        pathError != InstallError::NoError)
     {
-        m_errorMessage = tr("Could not determine the system font installation path.");
-        return InstallError::DestinationPathNotFound;
+        return pathError;
     }
 
-    QDir const dir;
-    if (!dir.mkpath(installPath))
+    // 3. & 4. Handle copy and overwrite logic
+    if (InstallError const copyError = HandleFileOverwriteAndCopy(sourceFilePath, destinationFilePath, window);
+        copyError != InstallError::NoError)
     {
-        m_errorMessage = tr("Failed to create destination directory: %1").arg(installPath);
-        return InstallError::DestinationPathNotFound;
+        return copyError; // Returns CopyFailed, UserCancelled, etc.
     }
 
-    QFileInfo const sourceInfo(sourceFilePath);
-
-    // 2. Define destination path and copy
-    QString const destinationFilePath = QDir(installPath).filePath(sourceInfo.fileName());
-
-    // QFile::copy fails if the destination already exists and will not overwrite by default.
-    if (!QFile::copy(sourceFilePath, destinationFilePath))
-    {
-        // If copy fails, check if the files are the same (already installed)
-        if (QFile::exists(destinationFilePath))
-        {
-            // Font file already exists. Continue to registration step in case that failed previously.
-            m_errorMessage = tr("Font file already exists at destination: %1.").arg(destinationFilePath);
-            qWarning() << m_errorMessage;
-        }
-        else
-        {
-            // Corrected: Replaced invalid dir.errorString() with a descriptive message.
-            m_errorMessage = tr("Failed to copy file from %1 to %2. Possible reasons: permission denied, file "
-                                "locked, or general I/O error.")
-                                 .arg(sourceFilePath, destinationFilePath);
-            return InstallError::CopyFailed;
-        }
-    }
-    else
-    {
-        qInfo() << "Successfully copied font file to:" << destinationFilePath;
-    }
+    // SVG fonts require no post-install steps
 
     m_errorMessage.clear(); // Clear error message on success
     return InstallError::NoError;
@@ -459,4 +409,121 @@ void VFontInstaller::InstallFontCorrections(const QDir &sourceDir, int fontId)
     {
         qInfo() << "Successfully copied font correction file to:" << destinationFilePath;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Handles the file copy, including the "overwrite" dialog logic.
+ * @param sourceFilePath The full path to the source file.
+ * @param destinationFilePath The full path to the destination.
+ * @param window The parent widget for the dialog.
+ * @return InstallError::NoError on success, or an error code on failure.
+ */
+auto VFontInstaller::HandleFileOverwriteAndCopy(const QString &sourceFilePath,
+                                                const QString &destinationFilePath,
+                                                QWidget *window) -> VFontInstaller::InstallError
+{
+    // 3. Check for existing file and ask user to replace
+    if (QFile::exists(destinationFilePath))
+    {
+        bool doOverwrite = (m_overwriteMode == OverwriteMode::YesToAll);
+
+        if (m_overwriteMode == OverwriteMode::NoToAll)
+        {
+            // Instantly skip if "No to All" was previously selected
+            m_errorMessage = tr("Skipped existing font (User choice: No to All): %1")
+                                 .arg(QFileInfo(sourceFilePath).fileName());
+            return InstallError::UserCancelled;
+        }
+
+        // If we don't have an "All" answer yet, ask the user
+        if (m_overwriteMode == OverwriteMode::Ask)
+        {
+            QMessageBox msgBox(window);
+            msgBox.setWindowTitle(tr("Font Already Exists"));
+            msgBox.setText(tr("The font '%1' is already installed.").arg(QFileInfo(sourceFilePath).fileName()));
+            msgBox.setInformativeText(tr("Do you want to replace it?"));
+            msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No | QMessageBox::YesToAll | QMessageBox::NoToAll);
+            msgBox.setDefaultButton(QMessageBox::No);
+
+            int const reply = msgBox.exec();
+
+            switch (reply)
+            {
+                case QMessageBox::YesToAll:
+                    m_overwriteMode = OverwriteMode::YesToAll;
+                    doOverwrite = true;
+                    break;
+                case QMessageBox::Yes:
+                    doOverwrite = true;
+                    break;
+                case QMessageBox::NoToAll:
+                    m_overwriteMode = OverwriteMode::NoToAll;
+                    doOverwrite = false;
+                    break;
+                case QMessageBox::No:
+                default:
+                    doOverwrite = false;
+                    break;
+            }
+        }
+
+        // If the user decided NOT to overwrite, we must return now.
+        if (!doOverwrite)
+        {
+            m_errorMessage = tr("Installation cancelled by user. Font not replaced.");
+            return InstallError::UserCancelled;
+        }
+
+        // --- User wants to overwrite ---
+        if (!QFile::remove(destinationFilePath))
+        {
+            m_errorMessage = tr("Failed to remove existing file: %1. Check permissions.").arg(destinationFilePath);
+            return InstallError::CopyFailed;
+        }
+        qInfo() << "Existing font file removed, proceeding with overwrite.";
+    }
+
+    // 4. Copy the new file
+    if (!QFile::copy(sourceFilePath, destinationFilePath))
+    {
+        m_errorMessage = tr("Failed to copy file from %1 to %2. Possible reasons: permission denied, file "
+                            "locked, or general I/O error.")
+                             .arg(sourceFilePath, destinationFilePath);
+        return InstallError::CopyFailed;
+    }
+
+    qInfo() << "Successfully copied font file to:" << destinationFilePath;
+    return InstallError::NoError;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Validates an installation path, creates it, and calculates the final destination file path.
+ * @param installPath The base directory to install to (e.g., "/usr/share/fonts").
+ * @param sourceFilePath The file to be installed (e.g., "/tmp/myfont.ttf").
+ * @param outDestinationFilePath Output parameter for the calculated full destination path.
+ * @return InstallError::NoError on success, or an error code on failure.
+ */
+auto VFontInstaller::ValidateInstallPath(const QString &installPath,
+                                         const QString &sourceFilePath,
+                                         QString &outDestinationFilePath) -> VFontInstaller::InstallError
+{
+    // 1. Validate installation path
+    if (installPath.isEmpty())
+    {
+        m_errorMessage = tr("Could not determine the system font installation path.");
+        return InstallError::DestinationPathNotFound;
+    }
+
+    if (QDir const dir; !dir.mkpath(installPath))
+    {
+        m_errorMessage = tr("Failed to create destination directory: %1").arg(installPath);
+        return InstallError::DestinationPathNotFound;
+    }
+
+    // 2. Define destination path
+    QFileInfo const sourceInfo(sourceFilePath);
+    outDestinationFilePath = QDir(installPath).filePath(sourceInfo.fileName());
+    return InstallError::NoError;
 }

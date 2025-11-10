@@ -4608,6 +4608,10 @@ void MainWindow::ActionInstallSingleLineFont()
 
     // 2. Initialize installer and counters
     VFontInstaller installer(this);
+
+    // Reset the "Yes to All" / "No to All" state for this new batch.
+    installer.ResetOverwriteMode();
+
     int successCount = 0;
     int failCount = 0;
 
@@ -4615,13 +4619,13 @@ void MainWindow::ActionInstallSingleLineFont()
     for (const QString &filePath : selectedFiles)
     {
         // Install the font using the FontInstaller class logic
-        if (VFontInstaller::InstallError result = installer.InstallFont(filePath);
+        if (VFontInstaller::InstallError result = installer.InstallFont(filePath, this);
             result == VFontInstaller::InstallError::NoError)
         {
             successCount++;
             qCInfo(vMainWindow) << "Successfully installed font:" << filePath;
         }
-        else
+        else if (result != VFontInstaller::InstallError::UserCancelled)
         {
             failCount++;
             qCWarning(vMainWindow) << tr("Failed to install font file: %1\n\nReason: %2")
@@ -4630,17 +4634,15 @@ void MainWindow::ActionInstallSingleLineFont()
     }
 
     // 4. Provide final summary to the user
-    QString const finalMessage = tr("Font Installation Summary:\n\n"
-                                    "Successful Installations: %1\n"
-                                    "Failed Installations: %2")
-                                     .arg(successCount)
-                                     .arg(failCount);
-
-    if (failCount > 0)
+    if (QString const finalMessage = tr("Font Installation Summary:\n\n"
+                                        "Successful Installations: %1\n"
+                                        "Failed Installations: %2")
+            .arg(successCount)
+            .arg(failCount); failCount > 0)
     {
         QMessageBox::warning(this, tr("Installation Complete with Errors"), finalMessage);
     }
-    else
+    else if (successCount > 0)
     {
         QMessageBox::information(this, tr("Installation Successful"), finalMessage);
     }
