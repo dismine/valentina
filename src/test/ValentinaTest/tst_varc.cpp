@@ -30,6 +30,7 @@
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
 #include "../vlayout/vabstractpiece.h"
+#include "../vmisc/def.h"
 
 #include <QtTest>
 
@@ -291,20 +292,20 @@ void TST_VArc::TestGetPoints()
 
     const VPointF center;
     VArc arc(center, radius, startAngle, endAngle);
-    arc.SetApproximationScale(10);
+    arc.SetApproximationScale(maxCurveApproximationScale);
 
     QVector<QPointF> points = arc.GetPoints();
 
     {
-        const qreal epsRadius = 1.5; // computing error
+        constexpr qreal epsRadius = MmToPixel(0.5); // computing error
 
-        for (auto point : points)
+        for (auto point : qAsConst(points))
         {
             QLineF const rLine(static_cast<QPointF>(center), point);
             const qreal value = qAbs(rLine.length() - qAbs(radius));
             // cppcheck-suppress unreadVariable
             const QString errorMsg = u"Broken the first rule. All points should be on the same distance from "
-                                     u"the center. Error ='%1'."_s.arg(value);
+                                     u"the center. Error ='%1'mm."_s.arg(PixelToMm(value));
             QVERIFY2(value <= epsRadius, qUtf8Printable(errorMsg));
         }
     }

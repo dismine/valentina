@@ -646,7 +646,7 @@ auto VEllipticalArc::ToSplinePath() const -> VSplinePath
     };
 
     qreal startDeg = ToParametric(GetStartAngle());
-    qreal endDeg = ToParametric(GetEndAngle());
+    qreal const endDeg = ToParametric(GetEndAngle());
     qreal const sweepDeg = AngleArc(startDeg, endDeg); // always signed
     qreal direction = 1.0;
 
@@ -657,14 +657,15 @@ auto VEllipticalArc::ToSplinePath() const -> VSplinePath
         direction = -1.0;
     }
 
-    // 4. Split arc into ≤ 90° chunks
+    // 4. Split arc into chunks
     QVector<qreal> segments;
     qreal remaining = qAbs(sweepDeg);
+    const qreal angleInterpolation = GetApproximationScale() < 5.0 ? 90. : 45.; // degree
 
-    while (remaining > 90.0)
+    while (remaining > angleInterpolation)
     {
-        segments.append(90.0);
-        remaining -= 90.0;
+        segments.append(angleInterpolation);
+        remaining -= angleInterpolation;
     }
 
     if (remaining > 0.01)
@@ -695,8 +696,8 @@ auto VEllipticalArc::ToSplinePath() const -> VSplinePath
         const qreal k = (4.0 / 3.0) * qTan(qDegreesToRadians(segDeg) / 4.0);
 
         // Control Points (Unit)
-        QPointF cp1_unit(u1.x() + k * u1.y(), u1.y() - k * u1.x());
-        QPointF cp2_unit(u2.x() - k * u2.y(), u2.y() + k * u2.x());
+        QPointF const cp1_unit(u1.x() + k * u1.y(), u1.y() - k * u1.x());
+        QPointF const cp2_unit(u2.x() - k * u2.y(), u2.y() + k * u2.x());
 
         // Transform unit → ellipse world coords
         const QPointF p1 = ellipseTf.map(u1);

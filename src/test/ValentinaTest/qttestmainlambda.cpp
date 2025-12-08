@@ -151,7 +151,7 @@ auto main(int argc, char **argv) -> int
 #endif
     ASSERT_TEST(new TST_VTextStream());
 #endif // QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-	ASSERT_TEST(new TST_VTheme());
+    ASSERT_TEST(new TST_VTheme());
 
     return status;
 }

@@ -301,7 +301,6 @@ auto VArc::ToSplinePath() const -> VSplinePath
         direction = -1.0;
     }
 
-    QVector<QPointF> points;
     QVector<qreal> sectionAngle;
 
     {
@@ -319,7 +318,7 @@ auto VArc::ToSplinePath() const -> VSplinePath
             angle = dummy.angle();
         }
 
-        const qreal angleInterpolation = 90; // degree
+        const qreal angleInterpolation = GetApproximationScale() < 5.0 ? 90. : 45.; // degree
         const int sections = qFloor(angle / angleInterpolation);
         sectionAngle.reserve(sections + 1);
         for (int i = 0; i < sections; ++i)
