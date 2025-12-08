@@ -36,9 +36,9 @@ class QSharedPointer;
 
 struct VGraduatedCurveOffset
 {
-    QString name;
-    VFormula offset;
-    QString description;
+    QString name{};
+    VFormula offset{};
+    QString description{};
 };
 
 struct VToolGraduatedCurveInitData : VAbstractSplineInitData
