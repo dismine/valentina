@@ -155,15 +155,18 @@ auto Compute(double t, const QVector<QPointF> &points) -> QPointF
     // Linear
     if (order == 1)
     {
-        return QPointF(mt * points.at(0).x() + t * points.at(1).x(), mt * points.at(0).y() + t * points.at(1).y());
+        return {mt * points.at(0).x() + t * points.at(1).x(), mt * points.at(0).y() + t * points.at(1).y()};
     }
 
     // Quadratic or Cubic
     if (order < 4)
     {
-        double mt2 = mt * mt;
-        double t2 = t * t;
-        double a, b, c, d = 0.0;
+        double const mt2 = mt * mt;
+        double const t2 = t * t;
+        double a = 0.0;
+        double b = 0.0;
+        double c = 0.0;
+        double d = 0.0;
         QVector<QPointF> p = points;
 
         if (order == 2)
@@ -182,8 +185,8 @@ auto Compute(double t, const QVector<QPointF> &points) -> QPointF
             d = t * t2;
         }
 
-        return QPointF(a * p.at(0).x() + b * p.at(1).x() + c * p.at(2).x() + d * p.at(3).x(),
-                       a * p.at(0).y() + b * p.at(1).y() + c * p.at(2).y() + d * p.at(3).y());
+        return {a * p.at(0).x() + b * p.at(1).x() + c * p.at(2).x() + d * p.at(3).x(),
+                a * p.at(0).y() + b * p.at(1).y() + c * p.at(2).y() + d * p.at(3).y()};
     }
 
     // Higher-order case: generic De Casteljau evaluation
@@ -218,7 +221,7 @@ auto MakePositions(const QVector<qreal> &values) -> QVector<qreal>
     QVector<qreal> positions;
     positions.resize(n);
 
-    qreal const step = 1.0 / qreal(n - 1);
+    qreal const step = 1.0 / static_cast<qreal>(n - 1);
 
     for (int i = 0; i < n; ++i)
     {
@@ -237,6 +240,37 @@ auto SignedAngle(const QPointF &p1, const QPointF &p2, const QPointF &p3) -> qre
     double const det = v1.x() * v2.y() - v1.y() * v2.x();
     double const dot = v1.x() * v2.x() + v1.y() * v2.y();
     return std::atan2(det, dot); // signed angle in radians
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto LineIntersection(const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4, QPointF &out) -> bool
+{
+    QLineF const l1(p1, p2);
+    QLineF const l2(p3, p4);
+
+    QPointF intersection;
+    if (QLineF::IntersectionType const type = l1.intersects(l2, &intersection); type == QLineF::NoIntersection)
+    {
+        return false;
+    }
+
+    out = intersection;
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void ApplyFallbackScaling(const QVector<QPointF> &pts, QVector<QPointF> &np)
+{
+    // Fallback: Translate control points relative to their endpoints.
+    // This preserves the original tangent vectors' lengths and
+    // directions relative to the new endpoints.
+    // It's a simple, robust, and predictable approximation.
+
+    // np[1] (P2_new) = P1_new + (P2_orig - P1_orig)
+    np[1] = np.at(0) + (pts.at(1) - pts.at(0));
+
+    // np[2] (P3_new) = P4_new + (P3_orig - P4_orig)
+    np[2] = np.at(3) + (pts.at(2) - pts.at(3));
 }
 } // namespace
 
@@ -384,7 +418,7 @@ auto VSpline::Move(qreal length, qreal angle, const QString &prefix) const -> VS
 //---------------------------------------------------------------------------------------------------------------------
 auto VSpline::OffsetPath(qreal distance, const QString &suffix) const -> QVector<VSpline>
 {
-    QVector<VSpline> subSplines = OffsetCurve(distance);
+    QVector<VSpline> subSplines = OffsetCurve_r(distance);
 
     for (int i = 0; i < subSplines.size(); ++i)
     {
@@ -547,7 +581,9 @@ auto VSpline::SplinePoints(const QPointF &p1, const QPointF &p4, qreal angle1, q
 {
     QLineF p1pX(p1.x(), p1.y(), p1.x() + 100, p1.y());
     p1pX.setAngle(angle1);
-    qreal L = 0, radius = 0, angle = 90;
+    qreal L = 0;
+    qreal radius = 0;
+    constexpr qreal angle = 90;
     radius = QLineF(QPointF(p1.x(), p4.y()), p4).length();
     L = kCurve * radius * 4 / 3 * tan(angle * M_PI_4 / 180.0);
     QLineF p1p2(p1.x(), p1.y(), p1.x() + L * kAsm1, p1.y());
@@ -574,6 +610,7 @@ auto VSpline::operator=(const VSpline &spline) -> VSpline &
 //---------------------------------------------------------------------------------------------------------------------
 VSpline::VSpline(VSpline &&spline) noexcept
   : VAbstractCubicBezier(std::move(spline)),
+    // cppcheck-suppress accessMoved
     d(std::move(spline.d)) // NOLINT(bugprone-use-after-move)
 {
 }
@@ -617,13 +654,13 @@ auto VSpline::GetP2() const -> VPointF
 //---------------------------------------------------------------------------------------------------------------------
 void VSpline::SetP2(const QPointF &p)
 {
-    QLineF p1p2(d->p1.toQPointF(), p);
+    QLineF const p1p2(d->p1.toQPointF(), p);
 
     d->angle1 = p1p2.angle();
     d->angle1F = QString::number(d->angle1);
 
     d->c1Length = p1p2.length();
-    if (VAbstractValApplication::VApp())
+    if (VAbstractValApplication::VApp() != nullptr)
     {
         d->c1LengthF = QString::number(VAbstractValApplication::VApp()->fromPixel(d->c1Length));
     }
@@ -644,13 +681,13 @@ auto VSpline::GetP3() const -> VPointF
 //---------------------------------------------------------------------------------------------------------------------
 void VSpline::SetP3(const QPointF &p)
 {
-    QLineF p4p3(d->p4.toQPointF(), p);
+    QLineF const p4p3(d->p4.toQPointF(), p);
 
     d->angle2 = p4p3.angle();
     d->angle2F = QString::number(d->angle2);
 
     d->c2Length = p4p3.length();
-    if (VAbstractValApplication::VApp())
+    if (VAbstractValApplication::VApp() != nullptr)
     {
         d->c2LengthF = QString::number(VAbstractValApplication::VApp()->fromPixel(d->c2Length));
     }
@@ -816,8 +853,8 @@ auto VSpline::Reduce() const -> QVector<VSpline>
 
     struct ExstremaData
     {
-        VSpline spl;
-        qreal step;
+        VSpline spl{};
+        qreal step{};
     };
 
     QVector<ExstremaData> pass1;
@@ -826,9 +863,9 @@ auto VSpline::Reduce() const -> QVector<VSpline>
     // split curve into first-pass segments
     for (int i = 1; i < extrema.size(); ++i)
     {
-        double t1 = extrema.at(i - 1);
-        double t2 = extrema.at(i);
-        VSpline seg = this->SplitRange(t1, t2);
+        double const t1 = extrema.at(i - 1);
+        double const t2 = extrema.at(i);
+        VSpline const seg = this->SplitRange(t1, t2);
         ExstremaData data;
         data.spl = seg;
         // data.step = std::clamp((t2 - t1) / 5000.0, 0.00000001, 0.01);
@@ -869,7 +906,7 @@ auto VSpline::Reduce() const -> QVector<VSpline>
             // 2. Binary search for the largest t2
             while (search_high - search_low > kPrecision)
             {
-                double t_mid = search_low + (search_high - search_low) / 2.0;
+                double const t_mid = search_low + (search_high - search_low) / 2.0;
                 VSpline mid_seg = data.spl.SplitRange(t1, t_mid);
 
                 if (mid_seg.IsSimple())
@@ -928,13 +965,13 @@ auto VSpline::Extrema() const -> QVector<double>
             {
                 p2.append(dim == 0 ? pt.x() : pt.y());
             }
-            QVector<double> extra = DRoots(p2);
+            QVector<double> const extra = DRoots(p2);
             result += extra;
         }
 
         // Keep only valid t in [0,1]
         QVector<double> filtered;
-        for (double t : result)
+        for (double const t : qAsConst(result))
         {
             if (t >= 0.0 && t <= 1.0)
             {
@@ -943,7 +980,7 @@ auto VSpline::Extrema() const -> QVector<double>
         }
 
         // Append to global roots list
-        for (double t : filtered)
+        for (double const t : qAsConst(filtered))
         {
             roots.append(t);
         }
@@ -953,7 +990,7 @@ auto VSpline::Extrema() const -> QVector<double>
     std::sort(roots.begin(), roots.end());
     roots.erase(std::unique(roots.begin(),
                             roots.end(),
-                            [](double a, double b) { return VFuzzyComparePossibleNulls(a, b); }),
+                            [](double a, double b) -> bool { return VFuzzyComparePossibleNulls(a, b); }),
                 roots.end());
 
     return roots;
@@ -1007,7 +1044,7 @@ auto VSpline::Hull(double t) const -> QVector<QPointF>
         next.reserve(p.size() - 1);
         for (int i = 0; i < p.size() - 1; ++i)
         {
-            QPointF pt(p[i].x() + (p[i + 1].x() - p[i].x()) * t, p[i].y() + (p[i + 1].y() - p[i].y()) * t);
+            QPointF const pt(p[i].x() + (p[i + 1].x() - p[i].x()) * t, p[i].y() + (p[i + 1].y() - p[i].y()) * t);
             q.append(pt);
             next.append(pt);
         }
@@ -1047,7 +1084,7 @@ auto VSpline::SplitRange(double t1, double t2) const -> VSpline
     }
 
     auto result = SplitRange(t1);
-    double t2mapped = Map(t2, t1, 1.0, 0.0, 1.0);
+    double const t2mapped = Map(t2, t1, 1.0, 0.0, 1.0);
 
     QVector<QPointF> const right = result.right;
     VSpline rightSpl{VPointF(right.at(0)), right.at(1), right.at(2), VPointF(right.at(3))};
@@ -1088,7 +1125,7 @@ auto VSpline::IsSimple() const -> bool
     // Angle between normals
     double const angle = std::abs(std::acos(s));
 
-    auto GetApproximationAngle = [this]()
+    auto GetApproximationAngle = [this]() -> double
     {
         qreal approximationScale = GetApproximationScale();
         if (approximationScale < minCurveApproximationScale || approximationScale > maxCurveApproximationScale)
@@ -1136,7 +1173,7 @@ auto VSpline::Derivative(double t) const -> QPointF
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VSpline::OffsetCurve(double distance) const -> QVector<VSpline>
+auto VSpline::OffsetCurve_r(double distance) const -> QVector<VSpline>
 {
     QVector<VSpline> result;
 
@@ -1167,7 +1204,7 @@ auto VSpline::OffsetCurve(double distance) const -> QVector<VSpline>
     {
         if (seg.IsLinear())
         {
-            QVector<VSpline> const tmp = seg.OffsetCurve(distance);
+            QVector<VSpline> const tmp = seg.OffsetCurve_r(distance);
             result.append(tmp.constFirst());
         }
         else
@@ -1185,7 +1222,7 @@ auto VSpline::OffsetPoint(double t, double d) const -> QPointF
     QPointF const c = PointAt(t);
     QVector2D const n = Normal(t);
 
-    return QPointF(c.x() + n.x() * d, c.y() + n.y() * d);
+    return {c.x() + n.x() * d, c.y() + n.y() * d};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1204,123 +1241,31 @@ auto VSpline::IsLinear() const -> bool
 auto VSpline::Scale(double distance) const -> VSpline
 {
     // numeric distance → wrap into constant function
-    auto Fn = [distance](qreal) { return distance; };
+    auto Fn = [distance](qreal) -> double { return distance; };
     return Scale(Fn, false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VSpline::Scale(std::function<qreal(qreal)> distanceFn, bool functionMode) const -> VSpline
+auto VSpline::Scale(const std::function<qreal(qreal)> &distanceFn, bool functionMode) const -> VSpline
 {
-    auto LineIntersection = [](const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4, QPointF &out)
-    {
-        QLineF const l1(p1, p2);
-        QLineF const l2(p3, p4);
-
-        QPointF intersection;
-        if (QLineF::IntersectionType const type = l1.intersects(l2, &intersection); type == QLineF::NoIntersection)
-        {
-            return false;
-        }
-
-        out = intersection;
-        return true;
-    };
-
     QVector<QPointF> const pts{GetP1().toQPointF(), GetP2().toQPointF(), GetP3().toQPointF(), GetP4().toQPointF()};
     QVector<QPointF> np(pts.size());
 
-    // --- 1. Endpoint scale distances r1=r(0), r2=r(1) ---
-    qreal const r1 = distanceFn(0.0);
-    qreal const r2 = distanceFn(1.0);
+    // Step 1-2: Scale endpoints
+    ScaleEndpoints(pts, np, distanceFn);
 
-    // --- 2. Move end points along their normals (Unchanged) ---
-    for (int t = 0; t <= 1; ++t)
+    // Step 3-4: Handle control points
+    QPointF focalPoint;
+    if (bool const hasFocalPoint = TryFindFocalPoint(focalPoint); hasFocalPoint)
     {
-        QPointF const p = (t == 0 ? pts.constFirst() : pts.constLast());
-        QVector2D const n = Normal(t);
-        qreal const distance = (t == 0 ? r1 : r2);
-        np[t * (pts.size() - 1)] = QPointF(p.x() + distance * n.x(), p.y() + distance * n.y());
-    }
-
-    // --- 3. Try to find focal point 'o' ---
-    QPointF o;
-    bool bCanUseFocalPoint = false;
-    {
-        auto const v0 = OffsetPoint(0.0, 10.0);
-        auto const v1 = OffsetPoint(1.0, 10.0);
-        QPointF const c0 = PointAt(0.0);
-        QPointF const c1 = PointAt(1.0);
-
-        // Try to find the intersection of the endpoint normals
-        bCanUseFocalPoint = LineIntersection(v0, c0, v1, c1, o);
-    }
-
-    // --- 4. Move control points ---
-    bool bFocalPointMethodSucceeded = true;
-    if (bCanUseFocalPoint)
-    {
-        if (!functionMode)
+        if (!ScaleControlPointsWithFocalPoint(pts, np, focalPoint, distanceFn, functionMode))
         {
-            // --- 4a. Try to use focal point method ---
-            for (int t = 0; t <= 1; ++t)
-            {
-                QPointF const p = (t == 0 ? np.constFirst() : np.constLast());
-                QPointF const der = Derivative(t);
-                QPointF const p2(p.x() + der.x(), p.y() + der.y());
-
-                QPointF intersection;
-                if (bool const hasIntersection = LineIntersection(p, p2, o, pts.at(t + 1), intersection);
-                    !hasIntersection)
-                {
-                    // This intersection failed (e.g., parallel lines)
-                    bFocalPointMethodSucceeded = false;
-                    break; // Stop trying this method
-                }
-                np[t + 1] = intersection;
-            }
-        }
-        else
-        {
-            for (int t = 0; t <= 1; ++t)
-            {
-                QPointF pOrig = pts.at(t + 1);
-
-                // Distance for this control point uses t=(k+1)/3
-                qreal rc = distanceFn(qreal(t + 1) / 3);
-
-                // If curve orientation is reversed, invert distance
-                if (!IsClockwise())
-                {
-                    rc = -rc;
-                }
-
-                QPointF ov(pOrig.x() - o.x(), pOrig.y() - o.y());
-                qreal m = std::hypot(ov.x(), ov.y());
-                if (qFuzzyIsNull(m))
-                {
-                    bFocalPointMethodSucceeded = false;
-                    break;
-                }
-                ov /= m;
-
-                np[t + 1] = QPointF(pOrig.x() + rc * ov.x(), pOrig.y() + rc * ov.y());
-            }
+            ApplyFallbackScaling(pts, np);
         }
     }
-
-    // --- 4. Use FALLBACK if focal method failed ---
-    if (!bCanUseFocalPoint || !bFocalPointMethodSucceeded)
+    else
     {
-        // Fallback: Translate control points relative to their endpoints.
-        // This preserves the original tangent vectors' lengths and
-        // directions relative to the new endpoints.
-        // It's a simple, robust, and predictable approximation.
-
-        // np[1] (P2_new) = P1_new + (P2_orig - P1_orig)
-        np[1] = np.at(0) + (pts.at(1) - pts.at(0));
-
-        // np[2] (P3_new) = P4_new + (P3_orig - P4_orig)
-        np[2] = np.at(3) + (pts.at(2) - pts.at(3));
+        ApplyFallbackScaling(pts, np);
     }
 
     // --- 5. Create new spline (Unchanged) ---
@@ -1339,7 +1284,7 @@ auto VSpline::OutlineCurve(const QVector<qreal> &distances) const -> QVector<VSp
 
     if (distances.size() == 1)
     {
-        return OffsetCurve(distances.constFirst());
+        return OffsetCurve_r(distances.constFirst());
     }
 
     QVector<VSpline> const reduced = Reduce();
@@ -1349,7 +1294,7 @@ auto VSpline::OutlineCurve(const QVector<qreal> &distances) const -> QVector<VSp
 
     QVector<qreal> const positions = MakePositions(distances);
 
-    auto PiecewiseDistance = [=](double v)
+    auto PiecewiseDistance = [=](double v) -> double
     {
         // v is in [0,1]
         for (int i = 0; i < positions.size() - 1; ++i)
@@ -1389,7 +1334,7 @@ auto VSpline::OutlineCurve(const QVector<qreal> &distances) const -> QVector<VSp
     }
 
     // Smooth the joints
-    result = SmoothJoints(result);
+    SmoothJoints(result);
 
     return result;
 }
@@ -1400,6 +1345,105 @@ auto VSpline::IsClockwise() const -> bool
     QVector<QPointF> const pts{GetP1().toQPointF(), GetP2().toQPointF(), GetP3().toQPointF(), GetP4().toQPointF()};
     double const angle = SignedAngle(pts.at(0), pts.at(3), pts.at(1));
     return angle > 0;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSpline::ScaleEndpoints(const QVector<QPointF> &pts,
+                             QVector<QPointF> &np,
+                             const std::function<qreal(qreal)> &distanceFn) const
+{
+    // --- 1. Endpoint scale distances r1=r(0), r2=r(1) ---
+    qreal const r1 = distanceFn(0.0);
+    qreal const r2 = distanceFn(1.0);
+
+    // --- 2. Move end points along their normals (Unchanged) ---
+    for (int t = 0; t <= 1; ++t)
+    {
+        QPointF const p = (t == 0 ? pts.constFirst() : pts.constLast());
+        QVector2D const n = Normal(t);
+        qreal const distance = (t == 0 ? r1 : r2);
+        np[t * (pts.size() - 1)] = QPointF(p.x() + distance * n.x(), p.y() + distance * n.y());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VSpline::TryFindFocalPoint(QPointF &o) const -> bool
+{
+    auto const v0 = OffsetPoint(0.0, 10.0);
+    auto const v1 = OffsetPoint(1.0, 10.0);
+    QPointF const c0 = PointAt(0.0);
+    QPointF const c1 = PointAt(1.0);
+
+    // Try to find the intersection of the endpoint normals
+    return LineIntersection(v0, c0, v1, c1, o);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VSpline::ScaleControlPointsWithFocalPoint(const QVector<QPointF> &pts,
+                                               QVector<QPointF> &np,
+                                               const QPointF &focalPoint,
+                                               const std::function<qreal(qreal)> &distanceFn,
+                                               bool functionMode) const -> bool
+{
+    if (functionMode)
+    {
+        return ScaleControlPointsFunctionMode(pts, np, focalPoint, distanceFn);
+    }
+    return ScaleControlPointsNormalMode(pts, np, focalPoint);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VSpline::ScaleControlPointsFunctionMode(const QVector<QPointF> &pts,
+                                             QVector<QPointF> &np,
+                                             const QPointF &focalPoint,
+                                             const std::function<qreal(qreal)> &distanceFn) const -> bool
+{
+    for (int t = 0; t <= 1; ++t)
+    {
+        QPointF const pOrig = pts.at(t + 1);
+
+        // Distance for this control point uses t=(k+1)/3
+        qreal rc = distanceFn(static_cast<qreal>(t + 1) / 3);
+
+        // If curve orientation is reversed, invert distance
+        if (!IsClockwise())
+        {
+            rc = -rc;
+        }
+
+        QPointF ov(pOrig.x() - focalPoint.x(), pOrig.y() - focalPoint.y());
+        qreal const m = std::hypot(ov.x(), ov.y());
+
+        if (qFuzzyIsNull(m))
+        {
+            return false;
+        }
+
+        ov /= m;
+        np[t + 1] = QPointF(pOrig.x() + rc * ov.x(), pOrig.y() + rc * ov.y());
+    }
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VSpline::ScaleControlPointsNormalMode(const QVector<QPointF> &pts,
+                                           QVector<QPointF> &np,
+                                           const QPointF &focalPoint) const -> bool
+{
+    for (int t = 0; t <= 1; ++t)
+    {
+        QPointF const p = (t == 0 ? np.constFirst() : np.constLast());
+        QPointF const der = Derivative(t);
+        QPointF const p2(p.x() + der.x(), p.y() + der.y());
+
+        QPointF intersection;
+        if (!LineIntersection(p, p2, focalPoint, pts.at(t + 1), intersection))
+        {
+            return false; // This intersection failed (e.g., parallel lines)
+        }
+        np[t + 1] = intersection;
+    }
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1566,7 +1610,8 @@ auto VSpline::ToJson() const -> QJsonObject
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VSpline::SmoothJoints(QVector<VSpline> path) -> QVector<VSpline>
+// cppcheck-suppress constParameterReference
+void VSpline::SmoothJoints(QVector<VSpline> &path)
 {
     // Smooth the joints
     // We adjust the control points at the seam between result[i] and result[i+1]
@@ -1576,19 +1621,19 @@ auto VSpline::SmoothJoints(QVector<VSpline> path) -> QVector<VSpline>
         VSpline &next = path[i + 1];
 
         // Get the join point
-        QPointF anchor = prev.GetP4().toQPointF();
+        QPointF const anchor = prev.GetP4().toQPointF();
 
         // Get incoming handle (from previous segment) and outgoing handle (to next segment)
-        QPointF p3 = prev.GetP3().toQPointF();
-        QPointF p2_next = next.GetP2().toQPointF();
+        QPointF const p3 = prev.GetP3().toQPointF();
+        QPointF const p2_next = next.GetP2().toQPointF();
 
         // Vectors from the anchor
         QVector2D vIn(anchor - p3);
         QVector2D vOut(p2_next - anchor);
 
         // Calculate lengths (to preserve the curvature intensity as much as possible)
-        qreal lenIn = vIn.length();
-        qreal lenOut = vOut.length();
+        qreal const lenIn = vIn.length();
+        qreal const lenOut = vOut.length();
 
         if (qFuzzyIsNull(lenIn) || qFuzzyIsNull(lenOut))
         {
@@ -1613,15 +1658,13 @@ auto VSpline::SmoothJoints(QVector<VSpline> path) -> QVector<VSpline>
 
         // Apply the new smooth tangent
         // Move Previous P3
-        QPointF newP3 = anchor - (avgTangent.toPointF() * lenIn);
+        QPointF const newP3 = anchor - (avgTangent.toPointF() * lenIn);
         prev.SetP3(newP3);
 
         // Move Next P2
-        QPointF newP2_next = anchor + (avgTangent.toPointF() * lenOut);
+        QPointF const newP2_next = anchor + (avgTangent.toPointF() * lenOut);
         next.SetP2(newP2_next);
     }
-
-    return path;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

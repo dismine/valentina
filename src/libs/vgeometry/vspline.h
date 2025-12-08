@@ -125,7 +125,7 @@ public:
 
     auto ToJson() const -> QJsonObject override;
 
-    static auto SmoothJoints(QVector<VSpline> path) -> QVector<VSpline>;
+    static void SmoothJoints(QVector<VSpline> &path);
 
 protected:
     auto GetControlPoint1() const -> QPointF override;
@@ -149,13 +149,28 @@ private:
     auto Normal(double t) const -> QVector2D;
     auto PointAt(double t) const -> QPointF;
     auto Derivative(double t) const -> QPointF;
-    auto OffsetCurve(double distance) const -> QVector<VSpline>;
+    auto OffsetCurve_r(double distance) const -> QVector<VSpline>;
     auto OffsetPoint(double t, double d) const -> QPointF;
     auto IsLinear() const -> bool;
     auto Scale(double distance) const -> VSpline;
-    auto Scale(std::function<qreal(qreal)> distanceFn, bool functionMode = true) const -> VSpline;
+    auto Scale(const std::function<qreal(qreal)> &distanceFn, bool functionMode = true) const -> VSpline;
     auto OutlineCurve(const QVector<qreal> &distances) const -> QVector<VSpline>;
     auto IsClockwise() const -> bool;
+    void ScaleEndpoints(const QVector<QPointF> &pts,
+                        QVector<QPointF> &np,
+                        const std::function<qreal(qreal)> &distanceFn) const;
+    auto TryFindFocalPoint(QPointF &o) const -> bool;
+    auto ScaleControlPointsWithFocalPoint(const QVector<QPointF> &pts,
+                                          QVector<QPointF> &np,
+                                          const QPointF &focalPoint,
+                                          const std::function<qreal(qreal)> &distanceFn,
+                                          bool functionMode) const -> bool;
+    auto ScaleControlPointsFunctionMode(const QVector<QPointF> &pts,
+                                        QVector<QPointF> &np,
+                                        const QPointF &focalPoint,
+                                        const std::function<qreal(qreal)> &distanceFn) const -> bool;
+    auto ScaleControlPointsNormalMode(const QVector<QPointF> &pts, QVector<QPointF> &np, const QPointF &focalPoint) const
+        -> bool;
 };
 
 Q_DECLARE_METATYPE(VSpline)                  // NOLINT
