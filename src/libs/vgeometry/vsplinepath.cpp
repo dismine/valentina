@@ -691,8 +691,13 @@ auto VSplinePath::GetSplinePath() const -> QVector<VSplinePoint>
 //---------------------------------------------------------------------------------------------------------------------
 auto VSplinePath::GetFSplinePath() const -> QVector<VFSplinePoint>
 {
+    if (d->path.isEmpty())
+    {
+        return {};
+    }
+
     QVector<VFSplinePoint> points;
-    points.reserve(d->path.size());
+    points.resize(d->path.size());
 
     for (qint32 i = 1; i <= CountSubSpl(); ++i)
     {
