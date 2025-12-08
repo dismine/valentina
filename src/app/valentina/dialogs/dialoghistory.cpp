@@ -592,6 +592,7 @@ auto DialogHistory::CurveName(quint32 curveId) const -> QString
         case GOType::PlaceLabel:
         case GOType::Unknown:
             Q_UNREACHABLE();
+            break;
         default:
             break;
     };
