@@ -109,7 +109,7 @@ auto DRoots(const QVector<double> &p) -> QVector<double>
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto Map(qreal v, qreal ds, qreal de, qreal rs, qreal re) -> qreal
+auto Map(qreal v, qreal ds, qreal de, qreal rs, qreal re) noexcept -> qreal
 {
     if (std::abs(de - ds) < 1e-12)
     {
@@ -1241,7 +1241,7 @@ auto VSpline::IsLinear() const -> bool
 auto VSpline::Scale(double distance) const -> VSpline
 {
     // numeric distance → wrap into constant function
-    auto Fn = [distance](qreal) -> double { return distance; };
+    auto Fn = [distance](qreal) noexcept -> double { return distance; };
     return Scale(Fn, false);
 }
 
@@ -1326,7 +1326,7 @@ auto VSpline::OutlineCurve(const QVector<qreal> &distances) const -> QVector<VSp
         qreal const dEnd = PiecewiseDistance(v1);
 
         // Convert to linear-distance-function (scaled across v=0..1)
-        auto DistanceFn = [=](qreal t) -> qreal { return Map(t, 0.0, 1.0, dStart, dEnd); };
+        auto DistanceFn = [=](qreal t) noexcept -> qreal { return Map(t, 0.0, 1.0, dStart, dEnd); };
 
         result.append(seg.Scale(DistanceFn));
 
