@@ -58,11 +58,15 @@ public:
     explicit VSplinePath(const QVector<VFSplinePoint> &points, qreal kCurve = 1, quint32 idObject = 0,
                          Draw mode = Draw::Calculation);
     explicit VSplinePath(const QVector<VSplinePoint> &points, quint32 idObject = 0, Draw mode = Draw::Calculation);
+    explicit VSplinePath(const QVector<VSpline> &path, quint32 idObject = 0, Draw mode = Draw::Calculation);
     VSplinePath(const VSplinePath &splPath);
+    ~VSplinePath() override;
+
     auto Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const -> VSplinePath;
     auto Flip(const QLineF &axis, const QString &prefix = QString()) const -> VSplinePath;
     auto Move(qreal length, qreal angle, const QString &prefix = QString()) const -> VSplinePath;
-    ~VSplinePath() override;
+    auto Offset(qreal distance, const QString &suffix = QString()) const -> VSplinePath override;
+    auto Outline(const QVector<qreal> &distances, const QString &suffix = QString()) const -> VSplinePath override;
 
     auto operator[](vsizetype indx) -> VSplinePoint &;
     auto operator=(const VSplinePath &path) -> VSplinePath &;
@@ -92,6 +96,15 @@ public:
     auto at(vsizetype indx) const -> const VSplinePoint &;
 
     auto ToJson() const -> QJsonObject override;
+
+    auto DirectionArrows() const -> QVector<DirectionArrow> override;
+
+    void SetStrict(bool strict);
+
+    auto NameForHistory(const QString &toolName) const -> QString override;
+
+    void SetMainNameForHistory(const QString &name);
+    auto GetMainNameForHistory() const -> QString override;
 
 protected:
     auto FirstPoint() const -> VPointF override;

@@ -2627,6 +2627,9 @@
    <property name="toolTip">
     <string>Reload piece labels</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
   </action>
   <action name="actionInstallSingleLineFont">
    <property name="enabled">
@@ -2634,6 +2637,9 @@
    </property>
    <property name="text">
     <string>Install single line font</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionEllipticalArcWithLengthTool">
@@ -2649,6 +2655,39 @@
    </property>
    <property name="text">
     <string>Elliptical arc with given length</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionParallelCurveTool">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="share/resources/toolicon.qrc">
+     <normaloff>:/toolicon/light/parallel_curve.png</normaloff>:/toolicon/light/parallel_curve.png</iconset>
+   </property>
+   <property name="text">
+    <string>Parallel curve tool</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionGraduatedCurveTool">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="share/resources/toolicon.qrc">
+     <normaloff>:/toolicon/light/graduated_curve_offseting.png</normaloff>:/toolicon/light/graduated_curve_offseting.png</iconset>
+   </property>
+   <property name="text">
+    <string>Graduated curve tool</string>
+   </property>
+   <property name="toolTip">
+    <string>Graduated curve tool</string>
    </property>
    <property name="menuRole">
     <enum>QAction::MenuRole::NoRole</enum>

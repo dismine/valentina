@@ -284,6 +284,8 @@ enum class Tool : ToolVisHolderType
     ArcStart,
     ArcEnd,
     EllipticalArcWithLength,
+    ParallelCurve,
+    GraduatedCurve,
     LAST_ONE_DO_NOT_USE // add new stuffs above this, this constant must be last and never used
 };
 
@@ -344,6 +346,8 @@ enum class Vis : ToolVisHolderType
     TextGraphicsItem,
     ScenePoint,
     ToolEllipticalArcWithLength,
+    ToolParallelCurve,
+    ToolGraduatedCurve,
     LAST_ONE_DO_NOT_USE // add new stuffs above this, this constant must be last and never used
 };
 

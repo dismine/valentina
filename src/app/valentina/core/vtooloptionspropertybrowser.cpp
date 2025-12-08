@@ -49,7 +49,8 @@
 #include "../vwidgets/vgraphicssimpletextitem.h"
 #include "../vwidgets/vsimplecurve.h"
 #include "../vwidgets/vsimplepoint.h"
-#include "tools/drawTools/toolcurve/vtoolellipticalarcwithlength.h"
+#include "ifcdef.h"
+#include "tools/drawTools/toolcurve/vtoolgraduatedcurve.h"
 #include "vformulaproperty.h"
 
 #include "../vtools/tools/drawTools/operation/flipping/vtoolflippingbyaxis.h"
@@ -61,6 +62,9 @@
 #include "../vtools/tools/drawTools/toolcurve/vtoolcubicbezier.h"
 #include "../vtools/tools/drawTools/toolcurve/vtoolcubicbezierpath.h"
 #include "../vtools/tools/drawTools/toolcurve/vtoolellipticalarc.h"
+#include "../vtools/tools/drawTools/toolcurve/vtoolellipticalarcwithlength.h"
+#include "../vtools/tools/drawTools/toolcurve/vtoolgraduatedcurve.h"
+#include "../vtools/tools/drawTools/toolcurve/vtoolparallelcurve.h"
 #include "../vtools/tools/drawTools/toolcurve/vtoolspline.h"
 #include "../vtools/tools/drawTools/toolcurve/vtoolsplinepath.h"
 #include "../vtools/tools/drawTools/toolpoint/tooldoublepoint/vtooltruedarts.h"
@@ -145,7 +149,7 @@ void VToolOptionsPropertyBrowser::ClearPropertyBrowser()
 void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 62, "Not all tools were used in switch.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64, "Not all tools were used in switch.");
 
     switch (item->type())
     {
@@ -267,6 +271,12 @@ void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
         case VToolEllipticalArcWithLength::Type:
             ShowOptionsToolEllipticalArcWithLength(item);
             break;
+        case VToolParallelCurve::Type:
+            ShowOptionsToolParallelCurve(item);
+            break;
+        case VToolGraduatedCurve::Type:
+            ShowOptionsToolGraduatedCurve(item);
+            break;
         default:
             break;
     }
@@ -281,7 +291,7 @@ void VToolOptionsPropertyBrowser::UpdateOptions()
     }
 
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 62, "Not all tools were used in switch.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64, "Not all tools were used in switch.");
 
     switch (m_currentItem->type())
     {
@@ -400,6 +410,12 @@ void VToolOptionsPropertyBrowser::UpdateOptions()
         case VToolEllipticalArcWithLength::Type:
             UpdateOptionsToolEllipticalArcWithLength();
             break;
+        case VToolParallelCurve::Type:
+            UpdateOptionsToolParallelCurve();
+            break;
+        case VToolGraduatedCurve::Type:
+            UpdateOptionsToolGraduatedCurve();
+            break;
         default:
             break;
     }
@@ -433,7 +449,7 @@ void VToolOptionsPropertyBrowser::userChangedData(VPE::VProperty *property)
     }
 
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 62, "Not all tools were used in switch.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64, "Not all tools were used in switch.");
 
     switch (m_currentItem->type())
     {
@@ -548,6 +564,12 @@ void VToolOptionsPropertyBrowser::userChangedData(VPE::VProperty *property)
         case VToolEllipticalArcWithLength::Type:
             ChangeDataToolEllipticalArcWithLength(prop);
             break;
+        case VToolParallelCurve::Type:
+            ChangeDataToolParallelCurve(prop);
+            break;
+        case VToolGraduatedCurve::Type:
+            ChangeDataToolGraduatedCurve(prop);
+            break;
         default:
             break;
     }
@@ -626,6 +648,16 @@ void VToolOptionsPropertyBrowser::AddPropertyObjectName(Tool *i, const QString &
         itemName->setReadOnly(readOnly);
         AddProperty(itemName, AttrName);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::AddPropertySuffix(Tool *i, const QString &propertyName)
+{
+    auto *itemName = new VPE::VStringProperty(propertyName);
+    itemName->setClearButtonEnable(true);
+    itemName->setValue(VAbstractApplication::VApp()->TrVars()->VarToUser(i->GetSuffix()));
+    AddProperty(itemName, AttrSuffix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1005,6 +1037,45 @@ template <class Tool> void VToolOptionsPropertyBrowser::SetOperationSuffix(VPE::
             if (not rx.match(name).hasMatch() || not VContainer::IsUnique(name, valentinaNamespace))
             {
                 m_idToProperty[AttrSuffix]->setValue(item->Suffix());
+                return;
+            }
+        }
+
+        item->SetSuffix(suffix);
+    }
+    else
+    {
+        qWarning() << "Can't cast item";
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::SetOffsetCurveSuffix(VPE::VProperty *property)
+{
+    if (auto *item = qgraphicsitem_cast<Tool *>(m_currentItem))
+    {
+        QString const suffix = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
+
+        if (suffix == item->GetSuffix())
+        {
+            return;
+        }
+
+        if (suffix.isEmpty())
+        {
+            m_idToProperty[AttrSuffix]->setValue(item->GetSuffix());
+            return;
+        }
+
+        QRegularExpression const rx(NameRegExp());
+        const QStringList uniqueNames = VContainer::AllUniqueNames(valentinaNamespace);
+        for (const auto &uniqueName : uniqueNames)
+        {
+            const QString name = uniqueName + suffix;
+            if (not rx.match(name).hasMatch() || not VContainer::IsUnique(name, valentinaNamespace))
+            {
+                m_idToProperty[AttrSuffix]->setValue(item->GetSuffix());
                 return;
             }
         }
@@ -2812,6 +2883,103 @@ void VToolOptionsPropertyBrowser::ChangeDataToolEllipticalArcWithLength(VPE::VPr
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ChangeDataToolParallelCurve(VPE::VProperty *property)
+{
+    SCASSERT(property != nullptr)
+
+    const QString id = m_propertyToId[property];
+
+    auto SetFormulaWidth = [this](VPE::VProperty *property)
+    {
+        if (auto *i = qgraphicsitem_cast<VToolParallelCurve *>(m_currentItem))
+        {
+            auto formula = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).value<VFormula>();
+            if (formula == i->GetFormulaWidth())
+            {
+                return;
+            }
+
+            i->SetFormulaWidth(formula);
+        }
+        else
+        {
+            qWarning() << "Can't cast item";
+        }
+    };
+
+    switch (PropertiesList().indexOf(id))
+    {
+        case 0:              // AttrName
+            Q_UNREACHABLE(); // The attribute is read only
+            break;
+        case 25: // AttrWidth
+            SetFormulaWidth(property);
+            break;
+        case 27: // AttrTypeColor
+            SetLineColor<VToolParallelCurve>(property);
+            break;
+        case 46: // AttrCurve (read only)
+            break;
+        case 59: // AttrPenStyle
+            SetPenStyle<VToolParallelCurve>(property);
+            break;
+        case 60: // AttrAScale
+            SetApproximationScale<VToolParallelCurve>(property);
+            break;
+        case 61: // AttrNotes
+            SetNotes<VToolParallelCurve>(property);
+            break;
+        case 62: // AttrAlias
+            SetAlias<VToolParallelCurve>(property);
+            break;
+        case 38: // AttrSuffix
+            SetOffsetCurveSuffix<VToolParallelCurve>(property);
+            break;
+        default:
+            qWarning() << "Unknown property type. id = " << id;
+            break;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ChangeDataToolGraduatedCurve(VPE::VProperty *property)
+{
+    SCASSERT(property != nullptr)
+
+    const QString id = m_propertyToId[property];
+
+    switch (PropertiesList().indexOf(id))
+    {
+        case 0:              // AttrName
+            Q_UNREACHABLE(); // The attribute is read only
+            break;
+        case 27: // AttrTypeColor
+            SetLineColor<VToolGraduatedCurve>(property);
+            break;
+        case 46: // AttrCurve (read only)
+            break;
+        case 59: // AttrPenStyle
+            SetPenStyle<VToolGraduatedCurve>(property);
+            break;
+        case 60: // AttrAScale
+            SetApproximationScale<VToolGraduatedCurve>(property);
+            break;
+        case 61: // AttrNotes
+            SetNotes<VToolGraduatedCurve>(property);
+            break;
+        case 62: // AttrAlias
+            SetAlias<VToolGraduatedCurve>(property);
+            break;
+        case 38: // AttrSuffix
+            SetOffsetCurveSuffix<VToolGraduatedCurve>(property);
+            break;
+        default:
+            qWarning() << "Unknown property type. id = " << id;
+            break;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::ShowOptionsToolSinglePoint(QGraphicsItem *item)
 {
     auto *i = qgraphicsitem_cast<VToolBasePoint *>(item);
@@ -3476,6 +3644,51 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolEllipticalArcWithLength(QGraphi
     AddPropertyFormula(tr("First angle:"), i->GetFormulaF1(), AttrAngle1);
     AddPropertyFormula(tr("Length:"), i->GetFormulaLength(), AttrLength);
     AddPropertyFormula(tr("Rotation angle:"), i->GetFormulaRotationAngle(), AttrRotationAngle);
+    AddPropertyAlias(i, tr("Alias:"));
+    AddPropertyCurvePenStyle(i,
+                             tr("Pen style:"),
+                             CurvePenStylesPics(comboBoxPalette.color(QPalette::Base),
+                                                comboBoxPalette.color(QPalette::Text)));
+    AddPropertyLineColor(i, tr("Color:"), VAbstractTool::ColorsList(), AttrColor);
+    AddPropertyApproximationScale(tr("Approximation scale:"), i->GetApproximationScale());
+    AddPropertyText(tr("Notes:"), i->GetNotes(), AttrNotes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ShowOptionsToolParallelCurve(QGraphicsItem *item)
+{
+    auto *i = qgraphicsitem_cast<VToolParallelCurve *>(item);
+    i->ShowVisualization(true);
+    m_formView->setTitle(tr("Parallel curve"));
+
+    QPalette const comboBoxPalette = ComboBoxPalette();
+
+    AddPropertyObjectName(i, tr("Name:"), true);
+    AddPropertyParentPointName(i->CurveName(), tr("Curve:"), AttrCurve);
+    AddPropertyFormula(tr("Width:"), i->GetFormulaWidth(), AttrWidth);
+    AddPropertySuffix(i, tr("Suffix:"));
+    AddPropertyAlias(i, tr("Alias:"));
+    AddPropertyCurvePenStyle(i,
+                             tr("Pen style:"),
+                             CurvePenStylesPics(comboBoxPalette.color(QPalette::Base),
+                                                comboBoxPalette.color(QPalette::Text)));
+    AddPropertyLineColor(i, tr("Color:"), VAbstractTool::ColorsList(), AttrColor);
+    AddPropertyApproximationScale(tr("Approximation scale:"), i->GetApproximationScale());
+    AddPropertyText(tr("Notes:"), i->GetNotes(), AttrNotes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ShowOptionsToolGraduatedCurve(QGraphicsItem *item)
+{
+    auto *i = qgraphicsitem_cast<VToolGraduatedCurve *>(item);
+    i->ShowVisualization(true);
+    m_formView->setTitle(tr("Graduated curve"));
+
+    QPalette const comboBoxPalette = ComboBoxPalette();
+
+    AddPropertyObjectName(i, tr("Name:"), true);
+    AddPropertyParentPointName(i->CurveName(), tr("Curve:"), AttrCurve);
+    AddPropertySuffix(i, tr("Suffix:"));
     AddPropertyAlias(i, tr("Alias:"));
     AddPropertyCurvePenStyle(i,
                              tr("Pen style:"),
@@ -4520,6 +4733,76 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolEllipticalArcWithLength()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::UpdateOptionsToolParallelCurve()
+{
+    auto *i = qgraphicsitem_cast<VToolParallelCurve *>(m_currentItem);
+
+    m_idToProperty[AttrName]->setValue(i->name());
+
+    QVariant valueWidth;
+    valueWidth.setValue(i->GetFormulaWidth());
+    m_idToProperty[AttrWidth]->setValue(valueWidth);
+
+    {
+        QPalette const comboBoxPalette = ComboBoxPalette();
+        const auto index = VPE::VLineTypeProperty::IndexOfStyle(CurvePenStylesPics(comboBoxPalette.color(QPalette::Base),
+                                                                                   comboBoxPalette.color(
+                                                                                       QPalette::Text)),
+                                                                i->GetPenStyle());
+        m_idToProperty[AttrPenStyle]->setValue(index);
+    }
+
+    m_idToProperty[AttrColor]->setValue(i->GetLineColor());
+
+    QVariant valueCurve;
+    valueCurve.setValue(i->CurveName());
+    m_idToProperty[AttrCurve]->setValue(valueCurve);
+
+    QVariant valueApproximationScale;
+    valueApproximationScale.setValue(i->GetApproximationScale());
+    m_idToProperty[AttrAScale]->setValue(valueApproximationScale);
+
+    m_idToProperty[AttrNotes]->setValue(i->GetNotes());
+
+    m_idToProperty[AttrSuffix]->setValue(i->GetSuffix());
+
+    m_idToProperty[AttrAlias]->setValue(i->GetAliasSuffix());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::UpdateOptionsToolGraduatedCurve()
+{
+    auto *i = qgraphicsitem_cast<VToolGraduatedCurve *>(m_currentItem);
+
+    m_idToProperty[AttrName]->setValue(i->name());
+
+    {
+        QPalette const comboBoxPalette = ComboBoxPalette();
+        const auto index = VPE::VLineTypeProperty::IndexOfStyle(CurvePenStylesPics(comboBoxPalette.color(QPalette::Base),
+                                                                                   comboBoxPalette.color(
+                                                                                       QPalette::Text)),
+                                                                i->GetPenStyle());
+        m_idToProperty[AttrPenStyle]->setValue(index);
+    }
+
+    m_idToProperty[AttrColor]->setValue(i->GetLineColor());
+
+    QVariant valueCurve;
+    valueCurve.setValue(i->CurveName());
+    m_idToProperty[AttrCurve]->setValue(valueCurve);
+
+    QVariant valueApproximationScale;
+    valueApproximationScale.setValue(i->GetApproximationScale());
+    m_idToProperty[AttrAScale]->setValue(valueApproximationScale);
+
+    m_idToProperty[AttrNotes]->setValue(i->GetNotes());
+
+    m_idToProperty[AttrSuffix]->setValue(i->GetSuffix());
+
+    m_idToProperty[AttrAlias]->setValue(i->GetAliasSuffix());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VToolOptionsPropertyBrowser::PropertiesList() -> QStringList
 {
     static QStringList const attr{
@@ -4549,7 +4832,7 @@ auto VToolOptionsPropertyBrowser::PropertiesList() -> QStringList
         AttrAxisP1,                         /* 23 */
         AttrAxisP2,                         /* 24 */
         AttrKCurve,
-        /*Not used*/       /* 25 */
+        AttrWidth,         /* 25 */
         AttrLineColor,     /* 26 */
         AttrColor,         /* 27 */
         AttrCrossPoint,    /* 28 */

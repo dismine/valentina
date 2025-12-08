@@ -636,7 +636,7 @@ VPassmark::VPassmark(const VPiecePassmarkData &data)
     m_null(false)
 {
     // Correct distorsion
-    if (VGObject::IsPointOnLineSegment(m_data.passmarkSAPoint, m_data.previousSAPoint, m_data.nextSAPoint))
+    if (IsPointOnLineSegment(m_data.passmarkSAPoint, m_data.previousSAPoint, m_data.nextSAPoint))
     {
         const QPointF p =
             VGObject::CorrectDistortion(m_data.passmarkSAPoint, m_data.previousSAPoint, m_data.nextSAPoint);

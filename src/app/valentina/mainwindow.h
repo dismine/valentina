@@ -200,6 +200,8 @@ private slots:
     void ToolArcStart(bool checked);
     void ToolArcEnd(bool checked);
     void ToolEllipticalArcWithLength(bool checked);
+    void ToolParallelCurve(bool checked);
+    void ToolGraduatedCurve(bool checked);
 
     void ActionDraw(bool checked);
     void ActionDetails(bool checked);

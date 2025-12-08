@@ -274,7 +274,7 @@ void AbstractTest::ComparePaths(const QVector<QPointF> &actual, const QVector<QP
     {
         for (int i = 0; i < expected.size() - 1; ++i)
         {
-            if (VGObject::IsPointOnLineSegment(p, expected.at(i), expected.at(i + 1), accuracyPointOnLine * 2.))
+            if (IsPointOnLineSegment(p, expected.at(i), expected.at(i + 1), accuracyPointOnLine * 2.))
             {
                 usedEdges.insert(i + 1);
                 onLine = true;
@@ -668,11 +668,22 @@ void AbstractTest::ReadSplinePointValue(const QJsonObject &itemObject, VSplinePo
     QString length2Formula;
     AbstractTest::ReadStringValue(itemObject, QStringLiteral("length2Formula"), length2Formula);
 
+    bool strict;
+    AbstractTest::ReadBooleanValue(itemObject, QStringLiteral("strict"), strict, "1"_L1);
+
     VPointF pSpline;
     ReadPointValue(itemObject, QStringLiteral("point"), pSpline);
 
-    point = VSplinePoint(pSpline, angle1, angle1Formula, angle2, angle2Formula, length1, length1Formula, length2,
-                         length2Formula);
+    point = VSplinePoint(pSpline,
+                         angle1,
+                         angle1Formula,
+                         angle2,
+                         angle2Formula,
+                         length1,
+                         length1Formula,
+                         length2,
+                         length2Formula,
+                         strict);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -873,6 +884,9 @@ void AbstractTest::SplinePathFromJson(const QJsonObject &itemObject, QSharedPoin
     qreal aScale = 0;
     AbstractTest::ReadDoubleValue(itemObject, QStringLiteral("aScale"), aScale);
 
+    QString mainName;
+    AbstractTest::ReadStringValue(itemObject, QStringLiteral("mainName"), mainName);
+
     QVector<VSplinePoint> points;
     AbstractTest::ReadSplinePointValues(itemObject, QStringLiteral("nodes"), points);
     for (auto &point : points)
@@ -882,6 +896,7 @@ void AbstractTest::SplinePathFromJson(const QJsonObject &itemObject, QSharedPoin
 
     auto *path = new VSplinePath(points);
     path->SetApproximationScale(aScale);
+    path->SetMainNameForHistory(mainName);
     data->UpdateGObject(id, path);
 }
 

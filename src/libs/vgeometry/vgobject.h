@@ -108,13 +108,7 @@ public:
     static auto ClosestPoint(const QLineF &line, const QPointF &point) -> QPointF;
     static auto addVector(const QPointF &p, const QPointF &p1, const QPointF &p2, qreal k) -> QPointF;
     static void LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c);
-    static auto IsPointOnLineSegment(const QPointF &t, const QPointF &p1, const QPointF &p2,
-                                     qreal accuracy = accuracyPointOnLine) -> bool;
-    static auto IsLineSegmentOnLineSegment(const QLineF &seg1, const QLineF &seg2, qreal accuracy = accuracyPointOnLine)
-        -> bool;
     static auto CorrectDistortion(const QPointF &t, const QPointF &p1, const QPointF &p2) -> QPointF;
-    static auto IsPointOnLineviaPDP(const QPointF &t, const QPointF &p1, const QPointF &p2,
-                                    qreal accuracy = accuracyPointOnLine) -> bool;
     static auto GetLengthContour(const QVector<QPointF> &contour, const QVector<QPointF> &newPoints) -> int;
 
     template <class T> static auto PainterPath(const QVector<T> &points) -> QPainterPath;

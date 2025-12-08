@@ -150,7 +150,7 @@ auto AngleByLength(QVector<VRawSAPoint> points,
 
         if (const qreal angle = edge1.angleTo(edge2); angle > 180 && p.GetAngleType() != PieceNodeAngle::ByLengthCurve)
         {
-            if (VGObject::IsPointOnLineSegment(sp2, bigLine2.p1(), bigLine2.p2()))
+            if (IsPointOnLineSegment(sp2, bigLine2.p1(), bigLine2.p2()))
             {
                 QLineF loop(bigLine1.p2(), sp2);
                 loop.setLength(loop.length() + accuracyPointOnLine * 2.);
@@ -179,7 +179,7 @@ auto AngleByLength(QVector<VRawSAPoint> points,
         {
             if (not IsOutsidePoint(bigLine1.p1(), bigLine1.p2(), sp2))
             {
-                if (VGObject::IsPointOnLineSegment(sp2, bigLine1.p1(), bigLine1.p2())
+                if (IsPointOnLineSegment(sp2, bigLine1.p1(), bigLine1.p2())
                     || p.GetAngleType() == PieceNodeAngle::ByLengthCurve)
                 {
                     points.append(VRawSAPoint(sp2, p.CurvePoint(), p.TurnPoint()));
@@ -748,7 +748,7 @@ template <class T> auto CorrectPathDistortion(QVector<T> path) -> QVector<T>
         const QPointF &prevPoint = path.at(prev);
         const QPointF &nextPoint = path.at(next);
 
-        if (VGObject::IsPointOnLineSegment(iPoint, prevPoint, nextPoint))
+        if (IsPointOnLineSegment(iPoint, prevPoint, nextPoint))
         {
             const QPointF p = VGObject::CorrectDistortion(iPoint, prevPoint, nextPoint);
             path[i].setX(p.x());
@@ -1827,7 +1827,7 @@ auto VAbstractPiece::IsAllowanceValid(const QVector<QPointF> &base, const QVecto
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractPiece::IsEkvPointOnLine(const QPointF &iPoint, const QPointF &prevPoint, const QPointF &nextPoint) -> bool
 {
-    return VGObject::IsPointOnLineviaPDP(iPoint, prevPoint, nextPoint, accuracyPointOnLine / 4.);
+    return IsPointOnLineviaPDP(iPoint, prevPoint, nextPoint, accuracyPointOnLine / 4.);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1840,9 +1840,9 @@ auto VAbstractPiece::IsEkvPointOnLine(const VSAPoint &iPoint, const VSAPoint &pr
     const QLineF bigLine1 = ParallelLine(prevPoint, iPoint, tmpWidth, trueZeroWidth);
     const QLineF bigLine2 = ParallelLine(iPoint, nextPoint, tmpWidth, trueZeroWidth);
 
-    bool const seamOnLine = VGObject::IsPointOnLineviaPDP(iPoint, prevPoint, nextPoint);
-    bool const sa1OnLine = VGObject::IsPointOnLineviaPDP(bigLine1.p2(), bigLine1.p1(), bigLine2.p2());
-    bool const sa2OnLine = VGObject::IsPointOnLineviaPDP(bigLine2.p1(), bigLine1.p1(), bigLine2.p2());
+    bool const seamOnLine = IsPointOnLineviaPDP(iPoint, prevPoint, nextPoint);
+    bool const sa1OnLine = IsPointOnLineviaPDP(bigLine1.p2(), bigLine1.p1(), bigLine2.p2());
+    bool const sa2OnLine = IsPointOnLineviaPDP(bigLine2.p1(), bigLine1.p1(), bigLine2.p2());
     bool const saDiff = qAbs(prevPoint.GetSAAfter(tmpWidth, trueZeroWidth)
                              - nextPoint.GetSABefore(tmpWidth, trueZeroWidth))
                         < accuracyPointOnLine;
@@ -2061,8 +2061,8 @@ auto VAbstractPiece::RollbackSeamAllowance(QVector<VRawSAPoint> points, const QL
         QPointF crosPoint;
         const QLineF::IntersectType type = cuttingEdge.intersects(segment, &crosPoint);
 
-        if (type != QLineF::NoIntersection && VGObject::IsPointOnLineSegment(crosPoint, segment.p1(), segment.p2()) &&
-            IsSameDirection(cuttingEdge.p2(), cuttingEdge.p1(), crosPoint))
+        if (type != QLineF::NoIntersection && IsPointOnLineSegment(crosPoint, segment.p1(), segment.p2())
+            && IsSameDirection(cuttingEdge.p2(), cuttingEdge.p1(), crosPoint))
         {
             clipped.append(VRawSAPoint(crosPoint, points.at(i).CurvePoint(), points.at(i).TurnPoint()));
             for (auto j = i - 1; j >= 0; --j)

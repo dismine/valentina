@@ -204,10 +204,17 @@ VSplinePoint::VSplinePoint()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSplinePoint::VSplinePoint(const VPointF &pSpline, qreal angle1, const QString &angle1F, qreal angle2,
-                           const QString &angle2F, qreal length1, const QString &length1F, qreal length2,
-                           const QString &length2F)
-  : d(new VSplinePointData(pSpline, angle1, angle1F, angle2, angle2F, length1, length1F, length2, length2F))
+VSplinePoint::VSplinePoint(const VPointF &pSpline,
+                           qreal angle1,
+                           const QString &angle1F,
+                           qreal angle2,
+                           const QString &angle2F,
+                           qreal length1,
+                           const QString &length1F,
+                           qreal length2,
+                           const QString &length2F,
+                           bool strict)
+  : d(new VSplinePointData(pSpline, angle1, angle1F, angle2, angle2F, length1, length1F, length2, length2F, strict))
 {
 }
 
@@ -274,9 +281,12 @@ void VSplinePoint::SetAngle1(const qreal &value, const QString &angle1F)
     line.setAngle(value);
     d->angle1 = line.angle();
 
-    line.setAngle(d->angle1 + 180);
-    d->angle2 = line.angle();
-    d->angle2F = QString::number(d->angle2);
+    if (d->strict)
+    {
+        line.setAngle(d->angle1 + 180);
+        d->angle2 = line.angle();
+        d->angle2F = QString::number(d->angle2);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -300,9 +310,12 @@ void VSplinePoint::SetAngle2(const qreal &value, const QString &angle2F)
     line.setAngle(value);
     d->angle2 = line.angle();
 
-    line.setAngle(d->angle2 + 180);
-    d->angle1 = line.angle();
-    d->angle1F = QString::number(d->angle1);
+    if (d->strict)
+    {
+        line.setAngle(d->angle2 + 180);
+        d->angle1 = line.angle();
+        d->angle1F = QString::number(d->angle1);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -351,12 +364,31 @@ auto VSplinePoint::IsMovable() const -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VSplinePoint::IsStrict() const -> bool
+{
+    return d->strict;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSplinePoint::SetStrict(bool value)
+{
+    d->strict = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VSplinePoint::ToJson() const -> QJsonObject
 {
     QJsonObject object{
-        {"point", d->pSpline.ToJson()},  {"angle1", d->angle1},         {"angle1Formula", d->angle1F},
-        {"angle2", d->angle2},           {"angle2Formula", d->angle2F}, {"length1", d->length1},
-        {"length1Formula", d->length1F}, {"length2", d->length2},       {"length2Formula", d->length2F},
+        {"point", d->pSpline.ToJson()},
+        {"angle1", d->angle1},
+        {"angle1Formula", d->angle1F},
+        {"angle2", d->angle2},
+        {"angle2Formula", d->angle2F},
+        {"length1", d->length1},
+        {"length1Formula", d->length1F},
+        {"length2", d->length2},
+        {"length2Formula", d->length2F},
+        {"strict", d->strict},
     };
     return object;
 }

@@ -478,8 +478,8 @@ void VHPGLEngine::PlotPassmarks(QTextStream &out, const VLayoutPiece &detail)
         PlotPassmark(passmark);
 
         const QLineF mirrorLine = detail.GetMappedSeamMirrorLine();
-        if (!mirrorLine.isNull() && detail.IsShowFullPiece() &&
-            !VGObject::IsPointOnLineviaPDP(passmark.baseLine.p1(), mirrorLine.p1(), mirrorLine.p2()))
+        if (!mirrorLine.isNull() && detail.IsShowFullPiece()
+            && !IsPointOnLineviaPDP(passmark.baseLine.p1(), mirrorLine.p1(), mirrorLine.p2()))
         {
             const QTransform matrix = VGObject::FlippingMatrix(mirrorLine);
             const VLayoutPassmark mirroredPassmark = VLayoutPiece::MapPassmark(passmark, matrix, false);

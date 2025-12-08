@@ -152,6 +152,8 @@ const QString AttrCurve2Alias2 = QStringLiteral("curve2Alias2");
 const QString AttrLayoutVersion = QStringLiteral("version");
 const QString AttrKMVersion = QStringLiteral("version");
 const QString AttrNotMirrored = QStringLiteral("notMirrored");
+const QString AttrOffset = QStringLiteral("offset");
+const QString AttrDescription = QStringLiteral("description");
 
 const QString TypeLineDefault = QStringLiteral("default");
 const QString TypeLineNone = QStringLiteral("none");
@@ -279,6 +281,7 @@ const QString ColorCornFlowerBlue = QStringLiteral("cornflowerblue");
 // variables
 const QString measurement_ = QStringLiteral("M_");
 const QString increment_ = QStringLiteral("Increment_");
+const QString offset_ = QStringLiteral("Offset_");
 const QString line_ = QStringLiteral("Line_");
 const QString angleLine_ = QStringLiteral("AngleLine_");
 const QString spl_ = QStringLiteral(SPL_);
@@ -317,6 +320,7 @@ auto BuilInVariables() -> QStringList
 {
     return {measurement_,
             increment_,
+            offset_,
             line_,
             angleLine_,
             arc_,

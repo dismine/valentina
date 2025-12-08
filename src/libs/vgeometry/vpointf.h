@@ -52,9 +52,18 @@ public:
     VPointF();
     VPointF(const VPointF &point);
     explicit VPointF(const QPointF &point);
-    VPointF(qreal x, qreal y, const QString &name, qreal mx, qreal my, quint32 idObject = 0,
+    VPointF(qreal x,
+            qreal y,
+            const QString &name,
+            qreal mx = 0,
+            qreal my = 0,
+            quint32 idObject = 0,
             const Draw &mode = Draw::Calculation);
-    VPointF(const QPointF &point, const QString &name, qreal mx, qreal my, quint32 idObject = 0,
+    VPointF(const QPointF &point,
+            const QString &name,
+            qreal mx = 0,
+            qreal my = 0,
+            quint32 idObject = 0,
             const Draw &mode = Draw::Calculation);
     ~VPointF() override;
 

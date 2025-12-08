@@ -468,9 +468,9 @@ auto VAbstractCurve::CurveIntersectLine(const QVector<QPointF> &points, const QL
         auto type = line.intersects(QLineF(points.at(i), points.at(i + 1)), &crosPoint);
 
         // QLineF::intersects not always accurate on edge cases
-        if (type == QLineF::BoundedIntersection ||
-            (VGObject::IsPointOnLineSegment(crosPoint, points.at(i), points.at(i + 1)) &&
-             VGObject::IsPointOnLineSegment(crosPoint, line.p1(), line.p2())))
+        if (type == QLineF::BoundedIntersection
+            || (IsPointOnLineSegment(crosPoint, points.at(i), points.at(i + 1))
+                && IsPointOnLineSegment(crosPoint, line.p1(), line.p2())))
         {
             intersections.append(crosPoint);
         }
@@ -564,8 +564,6 @@ auto VAbstractCurve::CurveIntersectAxis(const QPointF &point, qreal angle, const
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractCurve::DirectionArrows() const -> QVector<DirectionArrow>
 {
-    QVector<DirectionArrow> arrows;
-
     if (const QVector<QPointF> points = GetPoints(); points.count() >= 2)
     {
         /*Need find coordinate midle of curve.
@@ -599,9 +597,9 @@ auto VAbstractCurve::DirectionArrows() const -> QVector<DirectionArrow>
         arrow.setAngle(angle + 35);
         dArrow.second = arrow;
 
-        arrows.append(dArrow);
+        return {dArrow};
     }
-    return arrows;
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

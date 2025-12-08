@@ -48,13 +48,13 @@ public:
     ~VToolRecord() = default;
 
     auto getId() const -> quint32;
-    void    setId(const quint32 &value);
+    void setId(const quint32 &value);
 
     auto getTypeTool() const -> Tool;
-    void    setTypeTool(const Tool &value);
+    void setTypeTool(const Tool &value);
 
     auto getNameDraw() const -> QString;
-    void    setNameDraw(const QString &value);
+    void setNameDraw(const QString &value);
 
     auto IsMandatory() const -> bool;
 

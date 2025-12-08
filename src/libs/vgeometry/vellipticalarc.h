@@ -42,6 +42,7 @@
 #include "vpointf.h"
 
 class VEllipticalArcData;
+class VSplinePath;
 
 class VEllipticalArc final : public VAbstractArc
 {
@@ -60,12 +61,11 @@ public:
                    Draw mode = Draw::Calculation);
     VEllipticalArc(qreal length, const VPointF &center, qreal radius1, qreal radius2, qreal f1, qreal rotationAngle);
     VEllipticalArc(const VEllipticalArc &arc);
+    ~VEllipticalArc() override;
 
     auto Rotate(QPointF originPoint, qreal degrees, const QString &prefix = QString()) const -> VEllipticalArc;
     auto Flip(const QLineF &axis, const QString &prefix = QString()) const -> VEllipticalArc;
     auto Move(qreal length, qreal angle, const QString &prefix = QString()) const -> VEllipticalArc;
-
-    ~VEllipticalArc() override;
 
     auto operator=(const VEllipticalArc &arc) -> VEllipticalArc &;
 
@@ -99,6 +99,8 @@ public:
     auto GetPoints() const -> QVector<QPointF> override;
     auto GetStartAngle() const -> qreal override;
     auto GetEndAngle() const -> qreal override;
+
+    auto ToSplinePath() const -> VSplinePath override;
 
     static auto OptimizeAngle(qreal angle) -> qreal;
 

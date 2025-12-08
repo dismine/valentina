@@ -28,11 +28,12 @@
 
 #include "vcontainer.h"
 
+#include <climits>
+#include <utility>
 #include <QLoggingCategory>
 #include <QUuid>
 #include <QVector>
 #include <QtDebug>
-#include <climits>
 
 #include "../vgeometry/vabstractcubicbezierpath.h"
 #include "../vgeometry/vabstractcurve.h"
@@ -667,10 +668,8 @@ auto VContainer::IsUnique(const QString &name, const QString &nspace) -> bool
     {
         return (!uniqueNames.value(nspace).contains(name) && !BuilInFunctions().contains(name));
     }
-    else
-    {
-        throw VException(QStringLiteral("Unknown namespace"));
-    }
+
+    throw VException(QStringLiteral("Unknown namespace"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -688,10 +687,8 @@ auto VContainer::AllUniqueNames(const QString &nspace) -> QStringList
         names.append(uniqueNames.value(nspace).values());
         return names;
     }
-    else
-    {
-        throw VException(QStringLiteral("Unknown namespace"));
-    }
+
+    throw VException(QStringLiteral("Unknown namespace"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -759,6 +756,12 @@ void VContainer::ClearExceptUniqueIncrementNames() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VContainer::RemoveUniqueName(const QString &name) const
+{
+    uniqueNames[d->nspace].remove(name);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief data container with datagObjects return container of gObjects
  * @return pointer on container of gObjects
@@ -781,10 +784,10 @@ auto VContainer::DataVariables() const -> const QHash<QString, QSharedPointer<VI
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VContainerData::VContainerData(const VTranslateVars *trVars, const Unit *patternUnit, const QString &nspace)
+VContainerData::VContainerData(const VTranslateVars *trVars, const Unit *patternUnit, QString nspace)
   : trVars(trVars),
     patternUnit(patternUnit),
-    nspace(nspace)
+    nspace(std::move(nspace))
 {
 }
 

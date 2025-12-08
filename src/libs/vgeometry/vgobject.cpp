@@ -43,47 +43,6 @@
 #include "vgeometrydef.h"
 #include "vgobject_p.h"
 
-namespace
-{
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief PerpDotProduct Calculates the area of the parallelogram of the three points.
- * This is actually the same as the area of the triangle defined by the three points, multiplied by 2.
- * @return 2 * triangleArea(a,b,c)
- */
-auto PerpDotProduct(const QPointF &p1, const QPointF &p2, const QPointF &t) -> double
-{
-    return (p1.x() - t.x()) * (p2.y() - t.y()) - (p1.y() - t.y()) * (p2.x() - t.x());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetEpsilon solve the floating-point accuraccy problem.
- *
- * There is the floating-point accuraccy problem, so instead of checking against zero, some epsilon value has to be
- * used. Because the size of the pdp value depends on the length of the vectors, no static value can be used. One
- * approach is to compare the pdp/area value to the fraction of another area which also depends on the length of the
- * line e1=(p1, p2), e.g. the minimal area calucalted with PerpDotProduc() if point still not on the line. This distance
- * is controled by variable accuracyPointOnLine
- */
-auto GetEpsilon(const QPointF &t, QPointF p1, QPointF p2, qreal accuracy) -> double
-{
-    QLineF edge1(p1, p2);
-    if (QLineF const edge2(p1, t); edge2.length() > edge1.length())
-    {
-        edge1.setLength(edge2.length());
-        p1 = edge1.p1();
-        p2 = edge1.p2();
-    }
-
-    QLineF line(p1, p2);
-    line.setAngle(line.angle() + 90);
-    line.setLength(accuracy); // less than accuracy means the same point
-
-    return qAbs(PerpDotProduct(p1, p2, line.p2()));
-}
-} // namespace
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VGObject default constructor.
@@ -539,77 +498,6 @@ void VGObject::LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief IsPointOnLineSegment Check if the point is on the line segment.
- */
-auto VGObject::IsPointOnLineSegment(const QPointF &t, const QPointF &p1, const QPointF &p2, qreal accuracy) -> bool
-{
-    // Because of accuracy issues, this operation is slightly different from ordinary checking point on segment.
-    // Here we deal with more like cigar shape.
-
-    // Front and rear easy to check
-    if (VFuzzyComparePoints(p1, t, accuracy) || VFuzzyComparePoints(p2, t, accuracy))
-    {
-        return true;
-    }
-
-    // Check if we have a segment. On previous step we already confirmed that we don't have intersection
-    if (VFuzzyComparePoints(p1, p2, accuracy))
-    {
-        return false;
-    }
-
-    // Calculate the main rectangle shape. QLineF is not 100% accurate in calculating positions for points, but this
-    // should be good enough for us.
-
-    // Compute the perpendicular vector scaled by `accuracy`
-    QLineF edge(p1, p2);
-    edge.setAngle(edge.angle() + 90);
-    edge.setLength(accuracy);
-    QPointF const offset = edge.p2() - p1; // Store the perpendicular offset vector
-
-    // Define the expanded bounding rectangle
-    const QPointF sP1 = p1 + offset;
-    const QPointF sP2 = p2 + offset;
-    const QPointF sP3 = p2 - offset;
-    const QPointF sP4 = p1 - offset;
-
-    // Early exit if `t` is outside the bounding box (expanded by `accuracy`)
-    const qreal minX = std::min({sP1.x(), sP2.x(), sP3.x(), sP4.x()});
-    const qreal maxX = std::max({sP1.x(), sP2.x(), sP3.x(), sP4.x()});
-    const qreal minY = std::min({sP1.y(), sP2.y(), sP3.y(), sP4.y()});
-    const qreal maxY = std::max({sP1.y(), sP2.y(), sP3.y(), sP4.y()});
-
-    if (t.x() < minX || t.x() > maxX || t.y() < minY || t.y() > maxY)
-    {
-        return false;
-    }
-
-    // Use cross-product to determine if `t` is inside the expanded rectangle
-    auto CrossProduct = [](QPointF a, QPointF b, QPointF c)
-    { return (b.x() - a.x()) * (c.y() - a.y()) - (b.y() - a.y()) * (c.x() - a.x()); };
-
-    return !(CrossProduct(sP1, sP2, t) < 0 || CrossProduct(sP2, sP3, t) < 0 || CrossProduct(sP3, sP4, t) < 0
-             || CrossProduct(sP4, sP1, t) < 0);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VGObject::IsLineSegmentOnLineSegment(const QLineF &seg1, const QLineF &seg2, qreal accuracy) -> bool
-{
-    const bool onLine = IsPointOnLineviaPDP(seg1.p1(), seg2.p1(), seg2.p2(), accuracy) &&
-                        IsPointOnLineviaPDP(seg1.p2(), seg2.p1(), seg2.p2(), accuracy);
-    if (onLine)
-    {
-        return IsPointOnLineSegment(seg1.p1(), seg2.p1(), seg2.p2(), accuracy) ||
-               IsPointOnLineSegment(seg1.p2(), seg2.p1(), seg2.p2(), accuracy) ||
-               IsPointOnLineSegment(seg2.p1(), seg1.p1(), seg1.p2(), accuracy) ||
-               IsPointOnLineSegment(seg2.p2(), seg1.p1(), seg1.p2(), accuracy);
-    }
-
-    return onLine;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 auto VGObject::CorrectDistortion(const QPointF &t, const QPointF &p1, const QPointF &p2) -> QPointF
 {
     if (not VFuzzyComparePoints(p1, p2))
@@ -618,27 +506,6 @@ auto VGObject::CorrectDistortion(const QPointF &t, const QPointF &p1, const QPoi
     }
 
     return t;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief IsPointOnLineviaPDP use the perp dot product (PDP) way.
- *
- *  The pdp is zero only if the t lies on the line e1 = vector from p1 to p2.
- * @return true if point is on line
- */
-auto VGObject::IsPointOnLineviaPDP(const QPointF &t, const QPointF &p1, const QPointF &p2, qreal accuracy) -> bool
-{
-    if (p1 == p2)
-    {
-        return VFuzzyComparePoints(p1, t, accuracy);
-    }
-
-    const double p = qAbs(PerpDotProduct(p1, p2, t));
-    const double e = GetEpsilon(t, p1, p2, accuracy);
-
-    // We can't use common "<=" here because of the floating-point accuraccy problem
-    return p < e || VFuzzyComparePossibleNulls(p, e);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

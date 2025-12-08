@@ -91,8 +91,9 @@ auto VAbstractSpline::shape() const -> QPainterPath
 
     if (m_isHovered || m_detailsMode)
     {
-        path.addPath(VAbstractCurve::ShowDirection(
-            curve->DirectionArrows(), ScaleWidth(VAbstractCurve::LengthCurveDirectionArrow(), SceneScale(scene()))));
+        path.addPath(VAbstractCurve::ShowDirection(curve->DirectionArrows(),
+                                                   ScaleWidth(VAbstractCurve::LengthCurveDirectionArrow(),
+                                                              SceneScale(scene()))));
     }
     path.setFillRule(Qt::WindingFill);
     return ItemShapeFromPath(path, pen());

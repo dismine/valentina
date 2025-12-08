@@ -340,6 +340,7 @@ public:
     static const QString TagBackgroundImages;
     static const QString TagBackgroundImage;
     static const QString TagPieceLabel;
+    static const QString TagOffset;
 
     static const QString AttrName;
     static const QString AttrEnabled;
@@ -406,7 +407,6 @@ public:
     static const QString AttrContentType;
 
     static const QString AttrFormula;
-    static const QString AttrDescription;
     static const QString AttrSpecialUnits;
 
     static const QString NodeArc;
@@ -552,7 +552,6 @@ private:
     auto ListArcExpressions() const -> QVector<VFormulaField>;
     auto ListElArcExpressions() const -> QVector<VFormulaField>;
     auto ListSplineExpressions() const -> QVector<VFormulaField>;
-    auto ListPathPointExpressions() const -> QVector<VFormulaField>;
     auto ListOperationExpressions() const -> QVector<VFormulaField>;
     auto ListNodesExpressions(const QDomElement &nodes) const -> QVector<VFormulaField>;
     auto ListPathExpressions() const -> QVector<VFormulaField>;

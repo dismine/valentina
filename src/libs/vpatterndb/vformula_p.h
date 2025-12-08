@@ -28,9 +28,10 @@
 #ifndef VFORMULA_P_H
 #define VFORMULA_P_H
 
+#include <limits>
+#include <utility>
 #include <QCoreApplication>
 #include <QSharedData>
-#include <limits>
 
 #include "../vmisc/defglobal.h"
 #include "../vmisc/typedef.h"
@@ -47,7 +48,8 @@ class VFormulaData : public QSharedData
 
 public:
     VFormulaData() = default;
-    VFormulaData(const QString &formula, const VContainer *container);
+    explicit VFormulaData(const VContainer *container);
+    VFormulaData(QString formula, const VContainer *container);
     VFormulaData(const VFormulaData &formula) = default;
     ~VFormulaData() = default;
 
@@ -69,8 +71,15 @@ private:
 QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
-inline VFormulaData::VFormulaData(const QString &formula, const VContainer *container)
-  : formula(formula),
+inline VFormulaData::VFormulaData(const VContainer *container)
+  : data(container),
+    reason(tr("Not evaluated"))
+{
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline VFormulaData::VFormulaData(QString formula, const VContainer *container)
+  : formula(std::move(formula)),
     data(container),
     reason(tr("Not evaluated"))
 {

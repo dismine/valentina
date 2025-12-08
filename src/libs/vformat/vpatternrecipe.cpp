@@ -50,6 +50,8 @@
 #include "../vtools/tools/drawTools/toolcurve/vtoolcubicbezierpath.h"
 #include "../vtools/tools/drawTools/toolcurve/vtoolellipticalarc.h"
 #include "../vtools/tools/drawTools/toolcurve/vtoolellipticalarcwithlength.h"
+#include "../vtools/tools/drawTools/toolcurve/vtoolgraduatedcurve.h"
+#include "../vtools/tools/drawTools/toolcurve/vtoolparallelcurve.h"
 #include "../vtools/tools/drawTools/toolcurve/vtoolspline.h"
 #include "../vtools/tools/drawTools/toolcurve/vtoolsplinepath.h"
 #include "../vtools/tools/drawTools/toolpoint/tooldoublepoint/vtooltruedarts.h"
@@ -75,6 +77,7 @@
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.h"
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtooltriangle.h"
 #include "../vtools/tools/drawTools/vtoolline.h"
+#include "ifcdef.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
@@ -100,6 +103,7 @@ namespace
 #define AttrRadius1Value QStringLiteral("radius1Value")
 #define AttrRadius2Value QStringLiteral("radius2Value")
 #define AttrRotationAngleValue QStringLiteral("rotationAngleValue")
+#define AttrWidthValue QStringLiteral("widthValue")
 
 //---------------------------------------------------------------------------------------------------------------------
 inline auto FileComment() -> QString
@@ -348,7 +352,7 @@ auto VPatternRecipe::Draft(const QDomElement &draft) -> QDomElement
 auto VPatternRecipe::Step(const VToolRecord &tool, const VContainer &data) -> QDomElement
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 62, "Not all tools were used in history.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64, "Not all tools were used in history.");
 
     if (const QDomElement domElem = m_pattern->FindElementById(tool.getId()); not domElem.isElement() && tool.IsMandatory())
     {
@@ -449,6 +453,10 @@ auto VPatternRecipe::Step(const VToolRecord &tool, const VContainer &data) -> QD
                 return Move(tool, data);
             case Tool::EllipticalArcWithLength:
                 return EllipticalArcWithLength(tool);
+            case Tool::ParallelCurve:
+                return ParallelCurve(tool);
+            case Tool::GraduatedCurve:
+                return GraduatedCurve(tool);
             // Because "history" not only show history of pattern, but help restore current data for each pattern's
             // piece, we need add record about details and nodes, but don't show them.
             case Tool::Piece:
@@ -1167,6 +1175,62 @@ auto VPatternRecipe::EllipticalArcWithLength(const VToolRecord &record) -> QDomE
     Formula(step, tool->GetFormulaRadius2(), AttrRadius2, AttrRadius2Value);
     Formula(step, tool->GetFormulaF1(), AttrAngle1, AttrAngle1Value);
     Formula(step, tool->GetFormulaLength(), AttrLength, AttrLengthValue);
+
+    CurveAttributes(step, tool);
+
+    return step;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPatternRecipe::ParallelCurve(const VToolRecord &record) -> QDomElement
+{
+    auto *tool = GetPatternTool<VToolParallelCurve>(record.getId());
+
+    QDomElement step = createElement(TagStep);
+
+    ToolAttributes(step, tool);
+    SetAttribute(step, AttrCurve, tool->CurveName());
+    SetAttribute(step, AttrSuffix, tool->GetSuffix());
+    Formula(step, tool->GetFormulaWidth(), AttrWidth, AttrWidthValue);
+
+    CurveAttributes(step, tool);
+
+    return step;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPatternRecipe::GraduatedCurve(const VToolRecord &record) -> QDomElement
+{
+    auto *tool = GetPatternTool<VToolGraduatedCurve>(record.getId());
+    QDomElement step = createElement(TagStep);
+
+    ToolAttributes(step, tool);
+    SetAttribute(step, AttrCurve, tool->CurveName());
+    SetAttribute(step, AttrSuffix, tool->GetSuffix());
+
+    QDomElement offsetsTag = createElement(QStringLiteral("offsets"));
+    QVector<VGraduatedCurveOffset> const offsets = tool->GetGraduatedOffsets();
+
+    if (offsets.isEmpty())
+    {
+        throw VExceptionInvalidHistory(
+            QStringLiteral("Empty list of graduated offsets for tool with id '%1'.").arg(record.getId()));
+    }
+
+    for (const auto &offset : offsets)
+    {
+        QDomElement offsetTage = createElement(QStringLiteral("offset"));
+
+        SetAttribute(offsetTage, AttrName, offset.name);
+
+        Formula(offsetTage, offset.offset, AttrWidth, AttrWidthValue);
+
+        SetAttribute(offsetTage, AttrDescription, offset.description);
+
+        offsetsTag.appendChild(offsetTage);
+    }
+
+    step.appendChild(offsetsTag);
 
     CurveAttributes(step, tool);
 

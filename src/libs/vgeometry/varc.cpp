@@ -41,6 +41,7 @@
 #include "vabstractcurve.h"
 #include "varc_p.h"
 #include "vspline.h"
+#include "vsplinepath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -267,18 +268,48 @@ auto VArc::GetPoints() const -> QVector<QPointF>
         return {GetCenter().toQPointF()};
     }
 
+    if (qFuzzyIsNull(AngleArc()))
+    {
+        return {IsFlipped() ? GetP2() : GetP1()};
+    }
+
+    return ToSplinePath().GetPoints();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Splits a large arc into multiple, smaller Bézier curve segments.
+ *
+ * This function ensures that no single segment is larger than 45°,
+ * maintaining a high-quality approximation of the circular arc.
+ *
+ * @return A spline path
+ */
+auto VArc::ToSplinePath() const -> VSplinePath
+{
+    if (qFuzzyIsNull(d->radius))
+    {
+        return VSplinePath();
+    }
+
+    QPointF pStart = GetP1();
+    qreal direction = 1.0;
+
+    if (IsFlipped())
+    {
+        pStart = GetP2();
+        direction = -1.0;
+    }
+
     QVector<QPointF> points;
     QVector<qreal> sectionAngle;
-
-    QPointF pStart = IsFlipped() ? GetP2() : GetP1();
 
     {
         qreal angle = AngleArc();
 
         if (qFuzzyIsNull(angle))
         {
-            points.append(pStart);
-            return points;
+            return VSplinePath();
         }
 
         if (angle > 360 || angle < 0)
@@ -288,7 +319,7 @@ auto VArc::GetPoints() const -> QVector<QPointF>
             angle = dummy.angle();
         }
 
-        const qreal angleInterpolation = 45; // degree
+        const qreal angleInterpolation = 90; // degree
         const int sections = qFloor(angle / angleInterpolation);
         sectionAngle.reserve(sections + 1);
         for (int i = 0; i < sections; ++i)
@@ -303,9 +334,13 @@ auto VArc::GetPoints() const -> QVector<QPointF>
         }
     }
 
+    QVector<VSpline> allSegments;
+    allSegments.reserve(sectionAngle.size());
+
     for (int i = 0; i < sectionAngle.size(); ++i)
     {
-        const qreal lDistance = qAbs(d->radius) * 4.0 / 3.0 * qTan(qDegreesToRadians(sectionAngle.at(i)) * 0.25);
+        const qreal segDeg = sectionAngle.at(i) * direction;
+        const qreal lDistance = qAbs(d->radius) * 4.0 / 3.0 * qTan(qDegreesToRadians(segDeg) * 0.25);
 
         const auto center = static_cast<QPointF>(GetCenter());
 
@@ -314,24 +349,35 @@ auto VArc::GetPoints() const -> QVector<QPointF>
         lineP1P2.setLength(lDistance);
 
         QLineF lineP4P3(center, pStart);
-        lineP4P3.setAngle(lineP4P3.angle() + sectionAngle.at(i));
+        lineP4P3.setAngle(lineP4P3.angle() + segDeg);
         lineP4P3.setLength(qAbs(d->radius)); // in case of computing error
         lineP4P3 = QLineF(lineP4P3.p2(), center);
         lineP4P3.setAngle(lineP4P3.angle() + 90.0);
         lineP4P3.setLength(lDistance);
 
-        VSpline spl(VPointF(pStart), lineP1P2.p2(), lineP4P3.p2(), VPointF(lineP4P3.p1()), 1.0);
-        spl.SetApproximationScale(GetApproximationScale());
-        QVector<QPointF> splPoints = spl.GetPoints();
-        if (not splPoints.isEmpty() && i != sectionAngle.size() - 1)
-        {
-            splPoints.removeLast();
-        }
+        QString const p1Name = QStringLiteral("%1_seg%3_p1").arg(name()).arg(i);
+        QString const p4Name = QStringLiteral("%1_seg%2_p4").arg(name()).arg(i);
+        VSpline const spl(VPointF(pStart, p1Name), lineP1P2.p2(), lineP4P3.p2(), VPointF(lineP4P3.p1(), p4Name));
+        allSegments.append(spl);
 
-        points << splPoints;
         pStart = lineP4P3.p1();
     }
-    return IsFlipped() ? Reverse(points) : points;
+
+    if (allSegments.size() == 1)
+    {
+        QString const midPointName = QStringLiteral("%1_seg1_mid").arg(name());
+        VSpline const only = allSegments.constFirst();
+        VSpline left;
+        VSpline right;
+        only.CutSplineAtParam(0.5, left, right, midPointName);
+        allSegments = {left, right};
+    }
+
+    VSplinePath path(allSegments);
+    path.SetStrict(true);
+    path.SetApproximationScale(GetApproximationScale());
+
+    return path;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

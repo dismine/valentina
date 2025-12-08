@@ -44,6 +44,7 @@
 #include "../vmisc/vmath.h"
 #include "vabstractcurve.h"
 #include "vellipticalarc_p.h"
+#include "vsplinepath.h"
 
 namespace
 {
@@ -232,9 +233,9 @@ auto JoinVectors(const QVector<QPointF> &v1, const QVector<QPointF> &v2) -> QVec
 auto IsBoundedIntersection(QLineF::IntersectType type, QPointF p, const QLineF &segment1, const QLineF &segment2)
     -> bool
 {
-    return type == QLineF::BoundedIntersection ||
-           (type == QLineF::UnboundedIntersection && VGObject::IsPointOnLineSegment(p, segment1.p1(), segment2.p1()) &&
-            VGObject::IsPointOnLineSegment(p, segment2.p1(), segment2.p2()));
+    return type == QLineF::BoundedIntersection
+           || (type == QLineF::UnboundedIntersection && IsPointOnLineSegment(p, segment1.p1(), segment2.p1())
+               && IsPointOnLineSegment(p, segment2.p1(), segment2.p2()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -607,6 +608,125 @@ auto VEllipticalArc::GetStartAngle() const -> qreal
 auto VEllipticalArc::GetEndAngle() const -> qreal
 {
     return QLineF(GetCenter().toQPointF(), GetP2()).angle() - d->rotationAngle;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VEllipticalArc::ToSplinePath() const -> VSplinePath
+{
+    // 1. Radii check
+    if (qFuzzyIsNull(d->radius1) || qFuzzyIsNull(d->radius2))
+    {
+        return VSplinePath();
+    }
+
+    const QPointF center = static_cast<QPointF>(GetCenter());
+
+    // 2. Rotation of ellipse (Qt uses degrees CCW)
+    QTransform ellipseTf;
+    ellipseTf.translate(center.x(), center.y());
+    ellipseTf.rotate(-d->rotationAngle);     // <-- Qt CCW rotation
+    ellipseTf.scale(d->radius1, d->radius2); // <-- Scale unit circle to ellipse
+
+    // 3. Angle logic
+    // Helper lambda to convert Visual Angle -> Parametric Angle
+    auto ToParametric = [&](qreal visualDegrees) -> qreal
+    {
+        // 1. Convert to radians
+        qreal const localRad = qDegreesToRadians(visualDegrees);
+
+        // 2. Apply the scaling factor to the tangent
+        //    Math: tan(t) = (r1 / r2) * tan(theta)
+        //    We use atan2 for correct quadrant handling
+        qreal const y = d->radius1 * qSin(localRad);
+        qreal const x = d->radius2 * qCos(localRad);
+
+        qreal const paramRad = qAtan2(y, x);
+
+        return qRadiansToDegrees(paramRad);
+    };
+
+    qreal startDeg = ToParametric(GetStartAngle());
+    qreal endDeg = ToParametric(GetEndAngle());
+    qreal const sweepDeg = AngleArc(startDeg, endDeg); // always signed
+    qreal direction = 1.0;
+
+    // If flipped, reverse parametrization
+    if (IsFlipped())
+    {
+        startDeg = endDeg;
+        direction = -1.0;
+    }
+
+    // 4. Split arc into ≤ 90° chunks
+    QVector<qreal> segments;
+    qreal remaining = qAbs(sweepDeg);
+
+    while (remaining > 90.0)
+    {
+        segments.append(90.0);
+        remaining -= 90.0;
+    }
+
+    if (remaining > 0.01)
+    {
+        segments.append(remaining);
+    }
+
+    // 5. Build curves
+    QVector<VSpline> allSegments;
+    allSegments.reserve(segments.size());
+
+    qreal currentDeg = startDeg;
+
+    // 4. Loop through segments
+    for (int i = 0; i < segments.size(); ++i)
+    {
+        const qreal segDeg = segments.at(i) * direction;
+
+        // --- Points on unit circle (parametric angle, degrees) ---
+        const qreal a1 = currentDeg;
+        const qreal a2 = currentDeg + segDeg;
+
+        // Start/end unit circle points via QLineF
+        const QPointF u1 = QLineF::fromPolar(1.0, a1).p2();
+        const QPointF u2 = QLineF::fromPolar(1.0, a2).p2();
+
+        // kappa factor
+        const qreal k = (4.0 / 3.0) * qTan(qDegreesToRadians(segDeg) / 4.0);
+
+        // Control Points (Unit)
+        QPointF cp1_unit(u1.x() + k * u1.y(), u1.y() - k * u1.x());
+        QPointF cp2_unit(u2.x() - k * u2.y(), u2.y() + k * u2.x());
+
+        // Transform unit → ellipse world coords
+        const QPointF p1 = ellipseTf.map(u1);
+        const QPointF p4 = ellipseTf.map(u2);
+        const QPointF c1 = ellipseTf.map(cp1_unit);
+        const QPointF c2 = ellipseTf.map(cp2_unit);
+
+        const QString p1Name = QStringLiteral("%1_seg%2_p1").arg(name()).arg(i);
+        const QString p4Name = QStringLiteral("%1_seg%2_p4").arg(name()).arg(i);
+
+        allSegments.append(VSpline(VPointF(p1, p1Name), c1, c2, VPointF(p4, p4Name)));
+
+        currentDeg += segDeg;
+    }
+
+    if (allSegments.size() == 1)
+    {
+        QString const midPointName = QStringLiteral("%1_seg1_mid").arg(name());
+        VSpline const only = allSegments.constFirst();
+        VSpline left;
+        VSpline right;
+        only.CutSplineAtParam(0.5, left, right, midPointName);
+        allSegments = {left, right};
+    }
+
+    VSplinePath path(allSegments);
+    path.SetStrict(true);
+    path.SetApproximationScale(GetApproximationScale());
+
+    return path;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

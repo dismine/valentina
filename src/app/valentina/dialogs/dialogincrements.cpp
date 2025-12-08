@@ -424,10 +424,10 @@ auto DialogIncrements::GetCustomName() const -> QString
 {
     qint32 num = 1;
     QString name;
+    QString const subName = CustomIncrSign + VAbstractApplication::VApp()->TrVars()->InternalVarToUser(increment_);
     do
     {
-        name = CustomIncrSign + VAbstractApplication::VApp()->TrVars()->InternalVarToUser(increment_) +
-               QString::number(num);
+        name = subName + QString::number(num);
         num++;
     } while (not m_data->IsUnique(name));
     return name;

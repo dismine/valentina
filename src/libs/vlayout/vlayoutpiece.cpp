@@ -1702,9 +1702,10 @@ auto VLayoutPiece::ContourPath(bool togetherWithNotches, bool showLayoutAllowanc
                 }
                 path.addPath(passmaksPath);
 
-                if (!d->m_seamAllowanceMirrorLine.isNull() && IsShowFullPiece() &&
-                    !VGObject::IsPointOnLineviaPDP(passmark.baseLine.p1(), d->m_seamAllowanceMirrorLine.p1(),
-                                                   d->m_seamAllowanceMirrorLine.p2()))
+                if (!d->m_seamAllowanceMirrorLine.isNull() && IsShowFullPiece()
+                    && !IsPointOnLineviaPDP(passmark.baseLine.p1(),
+                                            d->m_seamAllowanceMirrorLine.p1(),
+                                            d->m_seamAllowanceMirrorLine.p2()))
                 {
                     QPainterPath mirroredPassmaksPath;
                     for (const auto &line : passmark.lines)

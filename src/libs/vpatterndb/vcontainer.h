@@ -72,7 +72,7 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VContainerData final : public QSharedData //-V690
 {
 public:
-    VContainerData(const VTranslateVars *trVars, const Unit *patternUnit, const QString &nspace);
+    VContainerData(const VTranslateVars *trVars, const Unit *patternUnit, QString nspace);
     VContainerData(const VContainerData &data) = default;
     virtual ~VContainerData();
 
@@ -172,6 +172,8 @@ public:
     void ClearUniqueNames() const;
     void ClearUniqueIncrementNames() const;
     void ClearExceptUniqueIncrementNames() const;
+
+    void RemoveUniqueName(const QString &name) const;
 
     void RemoveIncrement(const QString &name);
 

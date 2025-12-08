@@ -42,9 +42,9 @@
 #include "../xml/vpattern.h"
 #include "ui_dialoghistory.h"
 
+#include <functional>
 #include <QDebug>
 #include <QtConcurrent>
-#include <functional>
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
@@ -287,7 +287,7 @@ auto DialogHistory::RecordDescription(const VToolRecord &tool, HistoryRecord rec
     -> HistoryRecord
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 62, "Not all tools were used in history.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64, "Not all tools were used in history.");
 
     switch (tool.getTypeTool())
     {
@@ -368,6 +368,20 @@ auto DialogHistory::RecordDescription(const VToolRecord &tool, HistoryRecord rec
         {
             const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(tool.getId());
             record.description = tr("%1 with length %2").arg(arc->NameForHistory(tr("Arc"))).arg(arc->GetLength());
+            return record;
+        }
+        case Tool::ParallelCurve:
+        {
+            const QSharedPointer<VSplinePath> splPath = data->GeometricObject<VSplinePath>(tool.getId());
+            record.description = tr("%1 - parallel curve to %2")
+                                     .arg(splPath->NameForHistory(tr("Curve")), CurveName(AttrUInt(domElem, AttrCurve)));
+            return record;
+        }
+        case Tool::GraduatedCurve:
+        {
+            const QSharedPointer<VSplinePath> splPath = data->GeometricObject<VSplinePath>(tool.getId());
+            record.description = tr("%1 - graduated curve to %2")
+                                     .arg(splPath->NameForHistory(tr("Curve")), CurveName(AttrUInt(domElem, AttrCurve)));
             return record;
         }
         case Tool::SplinePath:
@@ -553,6 +567,36 @@ void DialogHistory::ShowPoint()
 auto DialogHistory::PointName(quint32 pointId) const -> QString
 {
     return data->GeometricObject<VPointF>(pointId)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogHistory::CurveName(quint32 curveId) const -> QString
+{
+    const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(curveId);
+
+    switch (curve->getType())
+    {
+        case GOType::Arc:
+            return curve->NameForHistory(tr("Arc"));
+        case GOType::EllipticalArc:
+            return curve->NameForHistory(tr("Elliptical arc"));
+        case GOType::Spline:
+            return curve->NameForHistory(tr("Curve"));
+        case GOType::SplinePath:
+            return curve->NameForHistory(tr("Spline path"));
+        case GOType::CubicBezier:
+            return curve->NameForHistory(tr("Cubic bezier curve"));
+        case GOType::CubicBezierPath:
+            return curve->NameForHistory(tr("Cubic bezier curve path"));
+        case GOType::Point:
+        case GOType::PlaceLabel:
+        case GOType::Unknown:
+            Q_UNREACHABLE();
+        default:
+            break;
+    };
+
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

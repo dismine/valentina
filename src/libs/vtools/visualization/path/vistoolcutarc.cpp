@@ -100,11 +100,11 @@ void VisToolCutArc::RefreshGeometry()
 
             DrawPoint(m_point, p);
 
-            const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
+            const QString suffix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
             SetToolTip(tr("Length = %1%2; "
                           "<b>Mouse click</b> - finish selecting the length, "
                           "<b>%3</b> - skip")
-                           .arg(LengthToUser(length), prefix, VModifierKey::EnterKey()));
+                           .arg(LengthToUser(length), suffix, VModifierKey::EnterKey()));
         }
     }
 }

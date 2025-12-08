@@ -103,6 +103,8 @@ private:
     auto FlippingByAxis(const VToolRecord &record, const VContainer &data) -> QDomElement;
     auto Move(const VToolRecord &record, const VContainer &data) -> QDomElement;
     auto EllipticalArcWithLength(const VToolRecord &record) -> QDomElement;
+    auto ParallelCurve(const VToolRecord &record) -> QDomElement;
+    auto GraduatedCurve(const VToolRecord &record) -> QDomElement;
 
     void Formula(QDomElement &step, const VFormula &formula, const QString &formulaStr, const QString &formulaValue);
 

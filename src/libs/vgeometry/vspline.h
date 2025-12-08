@@ -42,6 +42,8 @@
 #include "vpointf.h"
 
 class VSplineData;
+struct VSplinePair;
+class VSplinePath;
 
 /**
  * @brief VSpline class that implements the spline.
@@ -58,10 +60,16 @@ public:
     VSpline(const VPointF &p1, const VPointF &p4, qreal angle1, const QString &angle1Formula, qreal angle2,
             const QString &angle2Formula, qreal c1Length, const QString &c1LengthFormula, qreal c2Length,
             const QString &c2LengthFormula, quint32 idObject = 0, Draw mode = Draw::Calculation);
+    ~VSpline() override;
+
     auto Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const -> VSpline;
     auto Flip(const QLineF &axis, const QString &prefix = QString()) const -> VSpline;
     auto Move(qreal length, qreal angle, const QString &prefix = QString()) const -> VSpline;
-    ~VSpline() override;
+    auto Offset(qreal distance, const QString &suffix = QString()) const -> VSplinePath override;
+    auto Outline(const QVector<qreal> &distances, const QString &suffix = QString()) const -> VSplinePath override;
+
+    auto OffsetPath(qreal distance, const QString &suffix = QString()) const -> QVector<VSpline>;
+    auto OutlinePath(const QVector<qreal> &distances, const QString &suffix = QString()) const -> QVector<VSpline>;
 
     auto operator=(const VSpline &spline) -> VSpline &;
 
@@ -72,7 +80,10 @@ public:
     void SetP1(const VPointF &p);
 
     auto GetP2() const -> VPointF override;
+    void SetP2(const QPointF &p);
+
     auto GetP3() const -> VPointF override;
+    void SetP3(const QPointF &p);
 
     auto GetP4() const -> VPointF override;
     void SetP4(const VPointF &p);
@@ -102,6 +113,9 @@ public:
 
     using VAbstractCubicBezier::CutSpline;
     auto CutSpline(qreal length, VSpline &spl1, VSpline &spl2, const QString &pointName) const -> QPointF;
+    using VAbstractCubicBezier::CutSplineAtParam;
+    auto CutSplineAtParam(qreal t, VSpline &left, VSpline &right, const QString &midPointName = QString()) const
+        -> QPointF;
 
     auto GetPoints() const -> QVector<QPointF> override;
     // cppcheck-suppress unusedFunction
@@ -110,6 +124,8 @@ public:
     auto ParamT(const QPointF &pBt) const -> qreal;
 
     auto ToJson() const -> QJsonObject override;
+
+    static auto SmoothJoints(QVector<VSpline> path) -> QVector<VSpline>;
 
 protected:
     auto GetControlPoint1() const -> QPointF override;
@@ -122,6 +138,24 @@ private:
         -> QVector<qreal>;
     static auto Cubic(QVector<qreal> &x, qreal a, qreal b, qreal c) -> qint32;
     static auto Sign(long double ld) -> int;
+
+    auto Reduce() const -> QVector<VSpline>;
+    auto Extrema() const -> QVector<double>;
+    auto ComputeDerivatives() const -> QVector<QVector<QPointF>>;
+    auto Hull(double t) const -> QVector<QPointF>;
+    auto SplitRange(double t1) const -> VSplinePair;
+    auto SplitRange(double t1, double t2) const -> VSpline;
+    auto IsSimple() const -> bool;
+    auto Normal(double t) const -> QVector2D;
+    auto PointAt(double t) const -> QPointF;
+    auto Derivative(double t) const -> QPointF;
+    auto OffsetCurve(double distance) const -> QVector<VSpline>;
+    auto OffsetPoint(double t, double d) const -> QPointF;
+    auto IsLinear() const -> bool;
+    auto Scale(double distance) const -> VSpline;
+    auto Scale(std::function<qreal(qreal)> distanceFn, bool functionMode = true) const -> VSpline;
+    auto OutlineCurve(const QVector<qreal> &distances) const -> QVector<VSpline>;
+    auto IsClockwise() const -> bool;
 };
 
 Q_DECLARE_METATYPE(VSpline)                  // NOLINT

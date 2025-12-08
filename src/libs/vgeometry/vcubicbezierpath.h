@@ -50,10 +50,13 @@ public:
     explicit VCubicBezierPath(quint32 idObject = 0, Draw mode = Draw::Calculation);
     VCubicBezierPath(const VCubicBezierPath &curve);
     explicit VCubicBezierPath(const QVector<VPointF> &points, quint32 idObject = 0, Draw mode = Draw::Calculation);
+    ~VCubicBezierPath() override;
+
     auto Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const -> VCubicBezierPath;
     auto Flip(const QLineF &axis, const QString &prefix = QString()) const -> VCubicBezierPath;
     auto Move(qreal length, qreal angle, const QString &prefix = QString()) const -> VCubicBezierPath;
-    ~VCubicBezierPath() override;
+    auto Offset(qreal distance, const QString &suffix = QString()) const -> VSplinePath override;
+    auto Outline(const QVector<qreal> &distances, const QString &suffix = QString()) const -> VSplinePath override;
 
     auto operator=(const VCubicBezierPath &curve) -> VCubicBezierPath &;
 

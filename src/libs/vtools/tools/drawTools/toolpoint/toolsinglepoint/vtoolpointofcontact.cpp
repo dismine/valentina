@@ -124,8 +124,8 @@ auto VToolPointOfContact::FindPoint(qreal radius, const QPointF &center, const Q
             return true;
         case 2:
         {
-            const bool flagP1 = VGObject::IsPointOnLineSegment(p1, firstPoint, secondPoint);
-            const bool flagP2 = VGObject::IsPointOnLineSegment(p2, firstPoint, secondPoint);
+            const bool flagP1 = IsPointOnLineSegment(p1, firstPoint, secondPoint);
+            const bool flagP2 = IsPointOnLineSegment(p2, firstPoint, secondPoint);
             if ((flagP1 && flagP2) || (!flagP1 && !flagP2) /*In case we have something wrong*/)
             {
                 // We don't have options for choosing correct point. Use closest to segment first point.

@@ -53,6 +53,7 @@ class VFormula
 
 public:
     VFormula();
+    explicit VFormula(const VContainer *container);
     VFormula(const QString &formula, const VContainer *container);
     auto operator=(const VFormula &formula) -> VFormula &;
     VFormula(const VFormula &formula);

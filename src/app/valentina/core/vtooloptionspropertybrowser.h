@@ -91,6 +91,9 @@ private:
 
     template <class Tool> void SetOperationSuffix(VPE::VProperty *property);
 
+    template<class Tool>
+    void SetOffsetCurveSuffix(VPE::VProperty *property);
+
     template <class Type> auto GetCrossPoint(const QVariant &value) -> Type;
 
     template <class Tool> void SetCrossCirclesPoint(VPE::VProperty *property);
@@ -130,6 +133,9 @@ private:
     template <class Tool> void SetApproximationScale(VPE::VProperty *property);
 
     template <class Tool> void AddPropertyObjectName(Tool *i, const QString &propertyName, bool readOnly = false);
+
+    template<class Tool>
+    void AddPropertySuffix(Tool *i, const QString &propertyName);
 
     template <class Tool> void AddPropertyAlias(Tool *i, const QString &propertyName);
 
@@ -208,6 +214,8 @@ private:
     void ChangeDataBackgroundPixmapItem(VPE::VProperty *property);
     void ChangeDataBackgroundSVGItem(VPE::VProperty *property);
     void ChangeDataToolEllipticalArcWithLength(VPE::VProperty *property);
+    void ChangeDataToolParallelCurve(VPE::VProperty *property);
+    void ChangeDataToolGraduatedCurve(VPE::VProperty *property);
 
     void ShowOptionsToolSinglePoint(QGraphicsItem *item);
     void ShowOptionsToolEndLine(QGraphicsItem *item);
@@ -246,6 +254,8 @@ private:
     void ShowOptionsBackgroundPixmapItem(QGraphicsItem *item);
     void ShowOptionsBackgroundSVGItem(QGraphicsItem *item);
     void ShowOptionsToolEllipticalArcWithLength(QGraphicsItem *item);
+    void ShowOptionsToolParallelCurve(QGraphicsItem *item);
+    void ShowOptionsToolGraduatedCurve(QGraphicsItem *item);
 
     void UpdateOptionsToolSinglePoint();
     void UpdateOptionsToolEndLine();
@@ -284,6 +294,8 @@ private:
     void UpdateOptionsBackgroundPixmapItem();
     void UpdateOptionsBackgroundSVGItem();
     void UpdateOptionsToolEllipticalArcWithLength();
+    void UpdateOptionsToolParallelCurve();
+    void UpdateOptionsToolGraduatedCurve();
 };
 
 #endif // VTOOLOPTIONSPROPERTYBROWSER_H

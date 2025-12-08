@@ -30,16 +30,215 @@
 
 #include <QJsonObject>
 #include <QLineF>
+#include <QStringLiteral>
+#include <QVector2D>
+#include <QtConcurrent>
 
+#include "../vmisc/def.h"
+#include "../vmisc/defglobal.h"
 #include "../vmisc/vmath.h"
-#include "vabstractcurve.h"
 #include "vspline_p.h"
+#include "vsplinepath.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
 #endif
 
 using namespace Qt::Literals::StringLiterals;
+
+struct VSplinePair
+{
+    QVector<QPointF> left;
+    QVector<QPointF> right;
+};
+
+namespace
+{
+auto DRoots(const QVector<double> &p) -> QVector<double>
+{
+    // --- Quadratic case (three points) -------------------------------------
+    if (p.size() == 3)
+    {
+        QVector<double> roots;
+        double const a = p.at(0);
+        double const b = p.at(1);
+        double const c = p.at(2);
+        double const d = a - 2.0 * b + c;
+        if (!qFuzzyIsNull(d))
+        {
+            double const underSqrt = b * b - a * c;
+            if (underSqrt < 0.0)
+            {
+                return {}; // no real roots
+            }
+
+            double const m1 = -std::sqrt(underSqrt);
+            double const m2 = -a + b;
+            double const v1 = -(m1 + m2) / d;
+            double const v2 = -(-m1 + m2) / d;
+            roots.append(v1);
+            roots.append(v2);
+        }
+        else if (!VFuzzyComparePossibleNulls(b, c))
+        {
+            // d == 0, but b != c
+            double const v = (2.0 * b - c) / (2.0 * (b - c));
+            roots.append(v);
+        }
+
+        return roots;
+    }
+
+    // --- Linear case (two points) -----------------------------------------
+    if (p.size() == 2)
+    {
+        QVector<double> roots;
+        double const a = p.at(0);
+        double const b = p.at(1);
+        if (!VFuzzyComparePossibleNulls(a, b))
+        {
+            double const v = a / (a - b);
+            roots.append(v);
+        }
+
+        return roots;
+    }
+
+    // --- Default: no roots -------------------------------------------------
+    return {};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto Map(qreal v, qreal ds, qreal de, qreal rs, qreal re) -> qreal
+{
+    if (std::abs(de - ds) < 1e-12)
+    {
+        return rs;
+    }
+    const qreal d1 = de - ds;
+    const qreal d2 = re - rs;
+    const qreal v2 = v - ds;
+    const qreal r = v2 / d1;
+
+    return rs + d2 * r;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto Compute(double t, const QVector<QPointF> &points) -> QPointF
+{
+    if (points.isEmpty())
+    {
+        return {};
+    }
+
+    // t == 0 → first point
+    if (t <= 0.0)
+    {
+        return points.constFirst();
+    }
+
+    // t == 1 → last point
+    if (t >= 1.0)
+    {
+        return points.constLast();
+    }
+
+    const vsizetype order = points.size() - 1;
+    const double mt = 1.0 - t;
+
+    // Constant
+    if (order == 0)
+    {
+        return points.constFirst();
+    }
+
+    // Linear
+    if (order == 1)
+    {
+        return QPointF(mt * points.at(0).x() + t * points.at(1).x(), mt * points.at(0).y() + t * points.at(1).y());
+    }
+
+    // Quadratic or Cubic
+    if (order < 4)
+    {
+        double mt2 = mt * mt;
+        double t2 = t * t;
+        double a, b, c, d = 0.0;
+        QVector<QPointF> p = points;
+
+        if (order == 2)
+        {
+            // promote to cubic by adding dummy zero point
+            p.append(QPointF());
+            a = mt2;
+            b = mt * t * 2.0;
+            c = t2;
+        }
+        else
+        { // order == 3
+            a = mt2 * mt;
+            b = mt2 * t * 3.0;
+            c = mt * t2 * 3.0;
+            d = t * t2;
+        }
+
+        return QPointF(a * p.at(0).x() + b * p.at(1).x() + c * p.at(2).x() + d * p.at(3).x(),
+                       a * p.at(0).y() + b * p.at(1).y() + c * p.at(2).y() + d * p.at(3).y());
+    }
+
+    // Higher-order case: generic De Casteljau evaluation
+    QVector<QPointF> tmp = points;
+    while (tmp.size() > 1)
+    {
+        for (int i = 0; i < tmp.size() - 1; ++i)
+        {
+            tmp[i].setX(tmp.at(i).x() + (tmp.at(i + 1).x() - tmp.at(i).x()) * t);
+            tmp[i].setY(tmp.at(i).y() + (tmp.at(i + 1).y() - tmp.at(i).y()) * t);
+        }
+        tmp.removeLast();
+    }
+
+    return tmp.constFirst();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto MakePositions(const QVector<qreal> &values) -> QVector<qreal>
+{
+    vsizetype const n = values.size();
+    if (n == 0)
+    {
+        return {};
+    }
+
+    if (n == 1)
+    {
+        return {0.0}; // trivial
+    }
+
+    QVector<qreal> positions;
+    positions.resize(n);
+
+    qreal const step = 1.0 / qreal(n - 1);
+
+    for (int i = 0; i < n; ++i)
+    {
+        positions[i] = step * i;
+    }
+
+    return positions;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto SignedAngle(const QPointF &p1, const QPointF &p2, const QPointF &p3) -> qreal
+{
+    QPointF const v1 = p2 - p1;
+    QPointF const v2 = p3 - p1;
+
+    double const det = v1.x() * v2.y() - v1.y() * v2.x();
+    double const dot = v1.x() * v2.x() + v1.y() * v2.y();
+    return std::atan2(det, dot); // signed angle in radians
+}
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -183,7 +382,95 @@ auto VSpline::Move(qreal length, qreal angle, const QString &prefix) const -> VS
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VSpline::OffsetPath(qreal distance, const QString &suffix) const -> QVector<VSpline>
+{
+    QVector<VSpline> subSplines = OffsetCurve(distance);
+
+    for (int i = 0; i < subSplines.size(); ++i)
+    {
+        const QString index = QStringLiteral("_%1").arg(i + 1);
+        VSpline &spl = subSplines[i];
+        spl.setName(name() + index + suffix);
+
+        if (not GetAliasSuffix().isEmpty())
+        {
+            spl.SetAliasSuffix(GetAliasSuffix() + index + suffix);
+        }
+
+        spl.SetColor(GetColor());
+        spl.SetPenStyle(GetPenStyle());
+        spl.SetApproximationScale(GetApproximationScale());
+    }
+
+    return subSplines;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VSpline::OutlinePath(const QVector<qreal> &distances, const QString &suffix) const -> QVector<VSpline>
+{
+    QVector<VSpline> subSplines = OutlineCurve(distances);
+
+    for (int i = 0; i < subSplines.size(); ++i)
+    {
+        const QString index = QStringLiteral("_%1").arg(i + 1);
+        VSpline &spl = subSplines[i];
+        spl.setName(name() + index + suffix);
+
+        if (not GetAliasSuffix().isEmpty())
+        {
+            spl.SetAliasSuffix(GetAliasSuffix() + index + suffix);
+        }
+
+        spl.SetColor(GetColor());
+        spl.SetPenStyle(GetPenStyle());
+        spl.SetApproximationScale(GetApproximationScale());
+    }
+
+    return subSplines;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VSpline::~VSpline() = default;
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VSpline::Offset(qreal distance, const QString &suffix) const -> VSplinePath
+{
+    QVector<VSpline> const subSplines = OffsetPath(distance, suffix);
+
+    VSplinePath splPath(subSplines);
+    splPath.setName(name() + suffix);
+    splPath.SetMainNameForHistory(GetMainNameForHistory() + suffix);
+
+    if (not GetAliasSuffix().isEmpty())
+    {
+        splPath.SetAliasSuffix(GetAliasSuffix() + suffix);
+    }
+
+    splPath.SetColor(GetColor());
+    splPath.SetPenStyle(GetPenStyle());
+    splPath.SetApproximationScale(GetApproximationScale());
+    return splPath;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VSpline::Outline(const QVector<qreal> &distances, const QString &suffix) const -> VSplinePath
+{
+    QVector<VSpline> const subSplines = OutlinePath(distances, suffix);
+
+    VSplinePath splPath(subSplines);
+    splPath.setName(name() + suffix);
+    splPath.SetMainNameForHistory(GetMainNameForHistory() + suffix);
+
+    if (not GetAliasSuffix().isEmpty())
+    {
+        splPath.SetAliasSuffix(GetAliasSuffix() + suffix);
+    }
+
+    splPath.SetColor(GetColor());
+    splPath.SetPenStyle(GetPenStyle());
+    splPath.SetApproximationScale(GetApproximationScale());
+    return splPath;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -205,11 +492,29 @@ auto VSpline::CutSpline(qreal length, VSpline &spl1, VSpline &spl2, const QStrin
     QPointF spl2p3;
     const QPointF cutPoint = CutSpline(length, spl1p2, spl1p3, spl2p2, spl2p3, pointName);
 
-    spl1 = VSpline(GetP1(), spl1p2, spl1p3, VPointF(cutPoint));
+    spl1 = VSpline(GetP1(), spl1p2, spl1p3, VPointF(cutPoint, pointName));
     spl1.SetApproximationScale(GetApproximationScale());
 
-    spl2 = VSpline(VPointF(cutPoint), spl2p2, spl2p3, GetP4());
+    spl2 = VSpline(VPointF(cutPoint, pointName), spl2p2, spl2p3, GetP4());
     spl2.SetApproximationScale(GetApproximationScale());
+    return cutPoint;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VSpline::CutSplineAtParam(qreal t, VSpline &left, VSpline &right, const QString &midPointName) const -> QPointF
+{
+    QPointF spl1p2;
+    QPointF spl1p3;
+    QPointF spl2p2;
+    QPointF spl2p3;
+
+    const QPointF cutPoint = CutSplineAtParam(t, spl1p2, spl1p3, spl2p2, spl2p3);
+
+    left = VSpline(GetP1(), spl1p2, spl1p3, VPointF(cutPoint, midPointName));
+    left.SetApproximationScale(GetApproximationScale());
+
+    right = VSpline(VPointF(cutPoint, midPointName), spl2p2, spl2p3, GetP4());
+    right.SetApproximationScale(GetApproximationScale());
     return cutPoint;
 }
 
@@ -310,6 +615,21 @@ auto VSpline::GetP2() const -> VPointF
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VSpline::SetP2(const QPointF &p)
+{
+    QLineF p1p2(d->p1.toQPointF(), p);
+
+    d->angle1 = p1p2.angle();
+    d->angle1F = QString::number(d->angle1);
+
+    d->c1Length = p1p2.length();
+    if (VAbstractValApplication::VApp())
+    {
+        d->c1LengthF = QString::number(VAbstractValApplication::VApp()->fromPixel(d->c1Length));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief GetP3 return second control point.
  * @return second control point.
@@ -319,6 +639,21 @@ auto VSpline::GetP3() const -> VPointF
     QLineF p4p3(d->p4.x(), d->p4.y(), d->p4.x() + d->c2Length, d->p4.y());
     p4p3.setAngle(d->angle2);
     return VPointF(p4p3.p2());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSpline::SetP3(const QPointF &p)
+{
+    QLineF p4p3(d->p4.toQPointF(), p);
+
+    d->angle2 = p4p3.angle();
+    d->angle2F = QString::number(d->angle2);
+
+    d->c2Length = p4p3.length();
+    if (VAbstractValApplication::VApp())
+    {
+        d->c2LengthF = QString::number(VAbstractValApplication::VApp()->fromPixel(d->c2Length));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -464,6 +799,633 @@ auto VSpline::Sign(long double ld) -> int
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VSpline::Reduce() const -> QVector<VSpline>
+{
+    // --- 1st pass: split on extrema ---------------------------------------
+    QVector<double> extrema = this->Extrema();
+
+    // ensure [0, 1] bounds included
+    if (extrema.isEmpty() || !qFuzzyIsNull(extrema.constFirst()))
+    {
+        extrema.prepend(0.0);
+    }
+    if (!VFuzzyComparePossibleNulls(extrema.constLast(), 1.0))
+    {
+        extrema.append(1.0);
+    }
+
+    struct ExstremaData
+    {
+        VSpline spl;
+        qreal step;
+    };
+
+    QVector<ExstremaData> pass1;
+    pass1.reserve(extrema.size());
+
+    // split curve into first-pass segments
+    for (int i = 1; i < extrema.size(); ++i)
+    {
+        double t1 = extrema.at(i - 1);
+        double t2 = extrema.at(i);
+        VSpline seg = this->SplitRange(t1, t2);
+        ExstremaData data;
+        data.spl = seg;
+        // data.step = std::clamp((t2 - t1) / 5000.0, 0.00000001, 0.01);
+        data.step = 0.01;
+        pass1.append(data);
+    }
+
+    // --- 2nd pass: further split into "simple" segments -------------------
+    QVector<VSpline> pass2;
+    pass2.reserve(pass1.size() * 1000);
+
+    for (const ExstremaData &data : pass1)
+    {
+        double t1 = 0.0;
+        // Define a precision for floating point checks, related to the step
+        const double kPrecision = data.step / 16.0;
+
+        while (t1 < 1.0 - kPrecision)
+        {
+            // Define the search range for our optimal t2
+            double search_low = t1 + data.step;
+            double search_high = 1.0;
+
+            if (search_low >= 1.0 - kPrecision)
+            {
+                // Remaining segment is smaller than one step, just add it
+                pass2.append(data.spl.SplitRange(t1, 1.0));
+                break; // Finish this pass1 segment
+            }
+
+            // 1. Set the minimum step as the initial "last known good" segment.
+            // If this segment isn't "simple", the binary search will fail
+            // to find a larger one, and this (non-simple) segment
+            // will be used, which is the desired behavior.
+            VSpline last_good_spl = data.spl.SplitRange(t1, search_low);
+            double last_good_t2 = search_low;
+
+            // 2. Binary search for the largest t2
+            while (search_high - search_low > kPrecision)
+            {
+                double t_mid = search_low + (search_high - search_low) / 2.0;
+                VSpline mid_seg = data.spl.SplitRange(t1, t_mid);
+
+                if (mid_seg.IsSimple())
+                {
+                    // This segment is good. Try a larger one.
+                    search_low = t_mid;
+                    last_good_spl = std::move(mid_seg);
+                    last_good_t2 = t_mid;
+                }
+                else
+                {
+                    // This segment is bad. Search in the lower half.
+                    search_high = t_mid;
+                }
+            }
+
+            // 3. Append the best (largest) linear segment we found
+            pass2.append(std::move(last_good_spl));
+
+            // 4. Advance t1 for the next search
+            t1 = last_good_t2;
+        }
+    }
+
+    return pass2;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VSpline::Extrema() const -> QVector<double>
+{
+    QVector<QVector<QPointF>> const dpoints = ComputeDerivatives();
+    if (dpoints.isEmpty())
+    {
+        return {};
+    }
+
+    QVector<double> roots;
+
+    // We’ll handle both X and Y dimensions
+    for (int dim = 0; dim < 2; ++dim)
+    {
+        // Extract derivative control points for this dimension
+        QVector<double> p;
+        for (const QPointF &pt : dpoints.at(0))
+        {
+            p.append(dim == 0 ? pt.x() : pt.y());
+        }
+
+        // Find the roots of derivative (quadratic or linear)
+        QVector<double> result = DRoots(p);
+
+        if (dpoints.size() > 1)
+        {
+            QVector<double> p2;
+            for (const QPointF &pt : dpoints.at(1))
+            {
+                p2.append(dim == 0 ? pt.x() : pt.y());
+            }
+            QVector<double> extra = DRoots(p2);
+            result += extra;
+        }
+
+        // Keep only valid t in [0,1]
+        QVector<double> filtered;
+        for (double t : result)
+        {
+            if (t >= 0.0 && t <= 1.0)
+            {
+                filtered.append(t);
+            }
+        }
+
+        // Append to global roots list
+        for (double t : filtered)
+        {
+            roots.append(t);
+        }
+    }
+
+    // Sort and unique
+    std::sort(roots.begin(), roots.end());
+    roots.erase(std::unique(roots.begin(),
+                            roots.end(),
+                            [](double a, double b) { return VFuzzyComparePossibleNulls(a, b); }),
+                roots.end());
+
+    return roots;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VSpline::ComputeDerivatives() const -> QVector<QVector<QPointF>>
+{
+    QVector<QVector<QPointF>> dpoints;
+
+    QVector<QPointF> points{GetP1().toQPointF(), GetP2().toQPointF(), GetP3().toQPointF(), GetP4().toQPointF()};
+    int size = static_cast<int>(points.size());
+    int c = size - 1;
+
+    while (size > 1)
+    {
+        QVector<QPointF> list;
+        list.reserve(c);
+
+        for (int j = 0; j < c; ++j)
+        {
+            QPointF dpt;
+            dpt.setX(c * (points.at(j + 1).x() - points.at(j).x()));
+            dpt.setY(c * (points.at(j + 1).y() - points.at(j).y()));
+            list.append(dpt);
+        }
+
+        dpoints.append(list);
+        points = list;
+        size = static_cast<int>(points.size());
+        c = size - 1;
+    }
+
+    return dpoints;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VSpline::Hull(double t) const -> QVector<QPointF>
+{
+    QVector<QPointF> p{GetP1().toQPointF(), GetP2().toQPointF(), GetP3().toQPointF(), GetP4().toQPointF()};
+    // flattened list of all intermediate points
+    QVector<QPointF> q;
+    q.reserve(9);
+
+    q += p; // push all original control points in order
+
+    // iterative linear interpolation
+    while (p.size() > 1)
+    {
+        QVector<QPointF> next;
+        next.reserve(p.size() - 1);
+        for (int i = 0; i < p.size() - 1; ++i)
+        {
+            QPointF pt(p[i].x() + (p[i + 1].x() - p[i].x()) * t, p[i].y() + (p[i + 1].y() - p[i].y()) * t);
+            q.append(pt);
+            next.append(pt);
+        }
+        p = std::move(next);
+    }
+
+    return q;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VSpline::SplitRange(double t1) const -> VSplinePair
+{
+    QVector<QPointF> const q = Hull(t1);
+    QVector<QPointF> const left{q.at(0), q.at(4), q.at(7), q.at(9)};
+    QVector<QPointF> const right{q.at(9), q.at(8), q.at(6), q.at(3)};
+
+    return {left, right};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VSpline::SplitRange(double t1, double t2) const -> VSpline
+{
+    // Shortcuts --------------------------------------------------------------
+    if (qFuzzyIsNull(t1) && !qFuzzyIsNull(t2))
+    {
+        QVector<QPointF> const left = SplitRange(t2).left;
+        VSpline leftSpl{VPointF(left.at(0)), left.at(1), left.at(2), VPointF(left.at(3))};
+        leftSpl.SetApproximationScale(GetApproximationScale());
+        return leftSpl;
+    }
+    if (VFuzzyComparePossibleNulls(t2, 1.0))
+    {
+        QVector<QPointF> const right = SplitRange(t1).right;
+        VSpline rightSpl{VPointF(right.at(0)), right.at(1), right.at(2), VPointF(right.at(3))};
+        rightSpl.SetApproximationScale(GetApproximationScale());
+        return rightSpl;
+    }
+
+    auto result = SplitRange(t1);
+    double t2mapped = Map(t2, t1, 1.0, 0.0, 1.0);
+
+    QVector<QPointF> const right = result.right;
+    VSpline rightSpl{VPointF(right.at(0)), right.at(1), right.at(2), VPointF(right.at(3))};
+    rightSpl.SetApproximationScale(GetApproximationScale());
+
+    QVector<QPointF> const left = rightSpl.SplitRange(t2mapped).left;
+    VSpline leftSpl{VPointF(left.at(0)), left.at(1), left.at(2), VPointF(left.at(3))};
+    leftSpl.SetApproximationScale(GetApproximationScale());
+    return leftSpl;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VSpline::IsSimple() const -> bool
+{
+    {
+        QVector<QPointF> const pts{GetP1().toQPointF(), GetP2().toQPointF(), GetP3().toQPointF(), GetP4().toQPointF()};
+
+        double const a1 = SignedAngle(pts.at(0), pts.at(3), pts.at(1));
+        double const a2 = SignedAngle(pts.at(0), pts.at(3), pts.at(2));
+
+        // Opposite curvature directions → not simple
+        if ((a1 > 0 && a2 < 0) || (a1 < 0 && a2 > 0))
+        {
+            return false;
+        }
+    }
+
+    // Compute 2D normals at t = 0 and t = 1
+    QVector2D const n1 = Normal(0.0);
+    QVector2D const n2 = Normal(1.0);
+
+    // Dot product of normals
+    double s = QVector2D::dotProduct(n1, n2);
+
+    // Clamp to prevent NaNs due to rounding
+    s = std::clamp(s, -1.0, 1.0);
+
+    // Angle between normals
+    double const angle = std::abs(std::acos(s));
+
+    auto GetApproximationAngle = [this]()
+    {
+        qreal approximationScale = GetApproximationScale();
+        if (approximationScale < minCurveApproximationScale || approximationScale > maxCurveApproximationScale)
+        {
+            approximationScale = VAbstractApplication::VApp()->GlobalCurveApproximationScale();
+        }
+
+        if (approximationScale <= 2)
+        {
+            return 60.;
+        }
+
+        if (approximationScale <= 4)
+        {
+            return 30.;
+        }
+
+        if (approximationScale <= 6)
+        {
+            return 15.;
+        }
+
+        if (approximationScale <= 8)
+        {
+            return 7.5;
+        }
+
+        return 3.75;
+    };
+
+    // Curve is simple if the normals differ by less than angle value
+    return angle < qDegreesToRadians(GetApproximationAngle());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VSpline::Derivative(double t) const -> QPointF
+{
+    QVector<QVector<QPointF>> const dpoints = ComputeDerivatives();
+    if (dpoints.isEmpty())
+    {
+        return {};
+    }
+
+    return Compute(t, dpoints.at(0));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VSpline::OffsetCurve(double distance) const -> QVector<VSpline>
+{
+    QVector<VSpline> result;
+
+    // Linear curve case -------------------------------------
+    if (IsLinear())
+    {
+        QVector<QPointF> const pts{GetP1().toQPointF(), GetP2().toQPointF(), GetP3().toQPointF(), GetP4().toQPointF()};
+        QVector2D const n = Normal(0.0);
+        QVector<QPointF> coords;
+        coords.reserve(pts.size());
+
+        for (const QPointF &p : pts)
+        {
+            coords.append(QPointF(p.x() + distance * n.x(), p.y() + distance * n.y()));
+        }
+
+        VSpline spl(VPointF(coords.at(0)), coords.at(1), coords.at(2), VPointF(coords.at(3)));
+        spl.SetApproximationScale(GetApproximationScale());
+        result.append(spl);
+        return result;
+    }
+
+    // Non-linear case ---------------------------------------
+    QVector<VSpline> reduced = Reduce();
+    result.reserve(reduced.size());
+
+    for (const VSpline &seg : qAsConst(reduced))
+    {
+        if (seg.IsLinear())
+        {
+            QVector<VSpline> const tmp = seg.OffsetCurve(distance);
+            result.append(tmp.constFirst());
+        }
+        else
+        {
+            result.append(seg.Scale(distance));
+        }
+    }
+
+    return result;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VSpline::OffsetPoint(double t, double d) const -> QPointF
+{
+    QPointF const c = PointAt(t);
+    QVector2D const n = Normal(t);
+
+    return QPointF(c.x() + n.x() * d, c.y() + n.y() * d);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VSpline::IsLinear() const -> bool
+{
+    QPointF const p1 = GetP1().toQPointF();
+    QPointF const p2 = GetP2().toQPointF();
+    QPointF const p3 = GetP3().toQPointF();
+    QPointF const p4 = GetP4().toQPointF();
+
+    return IsPointOnLineviaPDP(p2, p1, p4, MmToPixel(0.000000001))
+           && IsPointOnLineviaPDP(p3, p1, p4, MmToPixel(0.000000001));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VSpline::Scale(double distance) const -> VSpline
+{
+    // numeric distance → wrap into constant function
+    auto Fn = [distance](qreal) { return distance; };
+    return Scale(Fn, false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VSpline::Scale(std::function<qreal(qreal)> distanceFn, bool functionMode) const -> VSpline
+{
+    auto LineIntersection = [](const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4, QPointF &out)
+    {
+        QLineF const l1(p1, p2);
+        QLineF const l2(p3, p4);
+
+        QPointF intersection;
+        if (QLineF::IntersectionType const type = l1.intersects(l2, &intersection); type == QLineF::NoIntersection)
+        {
+            return false;
+        }
+
+        out = intersection;
+        return true;
+    };
+
+    QVector<QPointF> const pts{GetP1().toQPointF(), GetP2().toQPointF(), GetP3().toQPointF(), GetP4().toQPointF()};
+    QVector<QPointF> np(pts.size());
+
+    // --- 1. Endpoint scale distances r1=r(0), r2=r(1) ---
+    qreal const r1 = distanceFn(0.0);
+    qreal const r2 = distanceFn(1.0);
+
+    // --- 2. Move end points along their normals (Unchanged) ---
+    for (int t = 0; t <= 1; ++t)
+    {
+        QPointF const p = (t == 0 ? pts.constFirst() : pts.constLast());
+        QVector2D const n = Normal(t);
+        qreal const distance = (t == 0 ? r1 : r2);
+        np[t * (pts.size() - 1)] = QPointF(p.x() + distance * n.x(), p.y() + distance * n.y());
+    }
+
+    // --- 3. Try to find focal point 'o' ---
+    QPointF o;
+    bool bCanUseFocalPoint = false;
+    {
+        auto const v0 = OffsetPoint(0.0, 10.0);
+        auto const v1 = OffsetPoint(1.0, 10.0);
+        QPointF const c0 = PointAt(0.0);
+        QPointF const c1 = PointAt(1.0);
+
+        // Try to find the intersection of the endpoint normals
+        bCanUseFocalPoint = LineIntersection(v0, c0, v1, c1, o);
+    }
+
+    // --- 4. Move control points ---
+    bool bFocalPointMethodSucceeded = true;
+    if (bCanUseFocalPoint)
+    {
+        if (!functionMode)
+        {
+            // --- 4a. Try to use focal point method ---
+            for (int t = 0; t <= 1; ++t)
+            {
+                QPointF const p = (t == 0 ? np.constFirst() : np.constLast());
+                QPointF const der = Derivative(t);
+                QPointF const p2(p.x() + der.x(), p.y() + der.y());
+
+                QPointF intersection;
+                if (bool const hasIntersection = LineIntersection(p, p2, o, pts.at(t + 1), intersection);
+                    !hasIntersection)
+                {
+                    // This intersection failed (e.g., parallel lines)
+                    bFocalPointMethodSucceeded = false;
+                    break; // Stop trying this method
+                }
+                np[t + 1] = intersection;
+            }
+        }
+        else
+        {
+            for (int t = 0; t <= 1; ++t)
+            {
+                QPointF pOrig = pts.at(t + 1);
+
+                // Distance for this control point uses t=(k+1)/3
+                qreal rc = distanceFn(qreal(t + 1) / 3);
+
+                // If curve orientation is reversed, invert distance
+                if (!IsClockwise())
+                {
+                    rc = -rc;
+                }
+
+                QPointF ov(pOrig.x() - o.x(), pOrig.y() - o.y());
+                qreal m = std::hypot(ov.x(), ov.y());
+                if (qFuzzyIsNull(m))
+                {
+                    bFocalPointMethodSucceeded = false;
+                    break;
+                }
+                ov /= m;
+
+                np[t + 1] = QPointF(pOrig.x() + rc * ov.x(), pOrig.y() + rc * ov.y());
+            }
+        }
+    }
+
+    // --- 4. Use FALLBACK if focal method failed ---
+    if (!bCanUseFocalPoint || !bFocalPointMethodSucceeded)
+    {
+        // Fallback: Translate control points relative to their endpoints.
+        // This preserves the original tangent vectors' lengths and
+        // directions relative to the new endpoints.
+        // It's a simple, robust, and predictable approximation.
+
+        // np[1] (P2_new) = P1_new + (P2_orig - P1_orig)
+        np[1] = np.at(0) + (pts.at(1) - pts.at(0));
+
+        // np[2] (P3_new) = P4_new + (P3_orig - P4_orig)
+        np[2] = np.at(3) + (pts.at(2) - pts.at(3));
+    }
+
+    // --- 5. Create new spline (Unchanged) ---
+    VSpline spl(VPointF(np.at(0)), np.at(1), np.at(2), VPointF(np.at(3)));
+    spl.SetApproximationScale(GetApproximationScale());
+    return spl;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VSpline::OutlineCurve(const QVector<qreal> &distances) const -> QVector<VSpline>
+{
+    if (distances.isEmpty())
+    {
+        return {};
+    }
+
+    if (distances.size() == 1)
+    {
+        return OffsetCurve(distances.constFirst());
+    }
+
+    QVector<VSpline> const reduced = Reduce();
+
+    QVector<VSpline> result;
+    result.reserve(reduced.size());
+
+    QVector<qreal> const positions = MakePositions(distances);
+
+    auto PiecewiseDistance = [=](double v)
+    {
+        // v is in [0,1]
+        for (int i = 0; i < positions.size() - 1; ++i)
+        {
+            double const t0 = positions[i];
+            double const t1 = positions[i + 1];
+
+            if (v >= t0 && v <= t1)
+            {
+                return Map(v, t0, t1, distances[i], distances[i + 1]);
+            }
+        }
+        return distances.last(); // fallback
+    };
+
+    qreal const totalLen = GetLength();
+    qreal accumulated = 0.0;
+
+    for (const VSpline &seg : reduced)
+    {
+        qreal const segLen = seg.GetLength();
+
+        // Normalize length for this segment’s start
+        qreal const v0 = accumulated / totalLen;
+        qreal const v1 = (accumulated + segLen) / totalLen;
+
+        // Thickness for start and end of this segment
+        qreal const dStart = PiecewiseDistance(v0);
+        qreal const dEnd = PiecewiseDistance(v1);
+
+        // Convert to linear-distance-function (scaled across v=0..1)
+        auto DistanceFn = [=](qreal t) -> qreal { return Map(t, 0.0, 1.0, dStart, dEnd); };
+
+        result.append(seg.Scale(DistanceFn));
+
+        accumulated += segLen;
+    }
+
+    // Smooth the joints
+    result = SmoothJoints(result);
+
+    return result;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VSpline::IsClockwise() const -> bool
+{
+    QVector<QPointF> const pts{GetP1().toQPointF(), GetP2().toQPointF(), GetP3().toQPointF(), GetP4().toQPointF()};
+    double const angle = SignedAngle(pts.at(0), pts.at(3), pts.at(1));
+    return angle > 0;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VSpline::Normal(double t) const -> QVector2D
+{
+    QPointF const der = Derivative(t); // 1. get tangent vector (dx/dt, dy/dt)
+
+    // 2. compute its length (q = sqrt(dx² + dy²))
+    qreal const q = std::sqrt(der.x() * der.x() + der.y() * der.y());
+    if (qFuzzyIsNull(q))
+    {
+        return {0, 0}; // degenerate tangent
+    }
+
+    // 3. perpendicular rotation (-dy, dx) normalized by length
+    return {static_cast<float>(-der.y() / q), static_cast<float>(der.x() / q)};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VSpline::PointAt(double t) const -> QPointF
+{
+    QVector<QPointF> const pts{GetP1().toQPointF(), GetP2().toQPointF(), GetP3().toQPointF(), GetP4().toQPointF()};
+    return Compute(t, pts);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Cubic Cubic equation solution. Real coefficients case.
  *
@@ -601,6 +1563,65 @@ auto VSpline::ToJson() const -> QJsonObject
     object["c2Length"_L1] = GetC2Length();
     object["c2LengthFormula"_L1] = GetC2LengthFormula();
     return object;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VSpline::SmoothJoints(QVector<VSpline> path) -> QVector<VSpline>
+{
+    // Smooth the joints
+    // We adjust the control points at the seam between result[i] and result[i+1]
+    for (int i = 0; i < path.size() - 1; ++i)
+    {
+        VSpline &prev = path[i];
+        VSpline &next = path[i + 1];
+
+        // Get the join point
+        QPointF anchor = prev.GetP4().toQPointF();
+
+        // Get incoming handle (from previous segment) and outgoing handle (to next segment)
+        QPointF p3 = prev.GetP3().toQPointF();
+        QPointF p2_next = next.GetP2().toQPointF();
+
+        // Vectors from the anchor
+        QVector2D vIn(anchor - p3);
+        QVector2D vOut(p2_next - anchor);
+
+        // Calculate lengths (to preserve the curvature intensity as much as possible)
+        qreal lenIn = vIn.length();
+        qreal lenOut = vOut.length();
+
+        if (qFuzzyIsNull(lenIn) || qFuzzyIsNull(lenOut))
+        {
+            continue;
+        }
+
+        // Normalize to get directions
+        vIn.normalize();
+        vOut.normalize();
+
+        // Calculate the average tangent vector
+        // We add them. If they are perfectly collinear (smooth), no change happens.
+        // If there is a kink, this finds the middle ground.
+        QVector2D avgTangent = vIn + vOut;
+
+        if (qFuzzyIsNull(avgTangent.length()))
+        {
+            // Corner case: 180 degree turn (cusp). Don't smooth.
+            continue;
+        }
+        avgTangent.normalize();
+
+        // Apply the new smooth tangent
+        // Move Previous P3
+        QPointF newP3 = anchor - (avgTangent.toPointF() * lenIn);
+        prev.SetP3(newP3);
+
+        // Move Next P2
+        QPointF newP2_next = anchor + (avgTangent.toPointF() * lenOut);
+        next.SetP2(newP2_next);
+    }
+
+    return path;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

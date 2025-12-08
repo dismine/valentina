@@ -66,7 +66,6 @@ public:
     virtual auto GetSpline(vsizetype index) const -> VSpline = 0;
     virtual auto GetSplinePath() const -> QVector<VSplinePoint> = 0;
 
-    auto GetPath() const -> QPainterPath override;
     auto GetPoints() const -> QVector<QPointF> override;
     auto GetLength() const -> qreal override;
 
@@ -78,6 +77,7 @@ public:
                        QPointF &spl2p3, const QString &pointName) const -> QPointF;
 
     auto NameForHistory(const QString &toolName) const -> QString override;
+    auto GetMainNameForHistory() const -> QString override;
 
 protected:
     void CreateName() override;
@@ -85,6 +85,8 @@ protected:
 
     virtual auto FirstPoint() const -> VPointF = 0;
     virtual auto LastPoint() const -> VPointF = 0;
+
+    auto IsRelaxed() const -> bool;
 };
 
 QT_WARNING_POP

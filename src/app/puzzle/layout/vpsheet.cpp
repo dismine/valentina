@@ -65,7 +65,6 @@ struct VPiecesValidationData
 //---------------------------------------------------------------------------------------------------------------------
 void ValidatePiecesOutOfBound(const VPiecesValidationData &data, QHash<QString, VPiecePositionValidity> &validations)
 {
-
     for (const auto &piece : data.m_pieces)
     {
         VPiecePositionValidity validation = validations.value(piece.m_id);
@@ -76,8 +75,9 @@ void ValidatePiecesOutOfBound(const VPiecesValidationData &data, QHash<QString, 
                                         ? QLineF(data.m_sheetRect.topLeft(), data.m_sheetRect.topRight())
                                         : QLineF(data.m_sheetRect.topRight(), data.m_sheetRect.bottomRight());
 
-            validation.m_outOfBound =
-                not VGObject::IsLineSegmentOnLineSegment(foldLine, piece.m_seamAllowanceMirrorLine, MmToPixel(0.5));
+            validation.m_outOfBound = not IsLineSegmentOnLineSegment(foldLine,
+                                                                     piece.m_seamAllowanceMirrorLine,
+                                                                     MmToPixel(0.5));
         }
         else
         {

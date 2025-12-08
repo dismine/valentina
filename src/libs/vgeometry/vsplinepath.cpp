@@ -32,6 +32,7 @@
 #include <QJsonObject>
 #include <QPoint>
 
+#include "../vmisc/defglobal.h"
 #include "../vmisc/exception/vexception.h"
 #include "vabstractcurve.h"
 #include "vsplinepath_p.h"
@@ -95,6 +96,57 @@ VSplinePath::VSplinePath(const QVector<VSplinePoint> &points, quint32 idObject, 
     }
 
     d->path = points;
+    CreateName();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VSplinePath::VSplinePath(const QVector<VSpline> &path, quint32 idObject, Draw mode)
+  : VAbstractCubicBezierPath(GOType::SplinePath, idObject, mode),
+    d(new VSplinePathData())
+{
+    if (path.size() < 2)
+    {
+        return;
+    }
+
+    QVector<VSplinePoint> nodes;
+    nodes.reserve(path.size() + 1);
+
+    for (int i = 0; i < path.size(); ++i)
+    {
+        const VSpline &spl = path.at(i);
+
+        if (i == 0)
+        {
+            VSplinePoint node;
+            node.SetStrict(false);
+            node.SetP(spl.GetP1());
+            node.SetAngle2(spl.GetStartAngle(), spl.GetStartAngleFormula());
+            node.SetLength2(spl.GetC1Length(), spl.GetC1LengthFormula());
+            nodes.append(node);
+        }
+        else
+        {
+            // Update previous node with this spline's start control info
+            VSplinePoint &prevNode = nodes.last();
+            prevNode.SetAngle2(spl.GetStartAngle(), spl.GetStartAngleFormula());
+            prevNode.SetLength2(spl.GetC1Length(), spl.GetC1LengthFormula());
+        }
+
+        VSplinePoint node;
+        node.SetStrict(false);
+        node.SetP(spl.GetP4());
+        node.SetAngle1(spl.GetEndAngle(), spl.GetEndAngleFormula());
+        node.SetLength1(spl.GetC2Length(), spl.GetC2LengthFormula());
+        nodes.append(node);
+    }
+
+    if (nodes.isEmpty())
+    {
+        return;
+    }
+
+    d->path = nodes;
     CreateName();
 }
 
@@ -186,6 +238,146 @@ auto VSplinePath::Move(qreal length, qreal angle, const QString &prefix) const -
     if (not GetAliasSuffix().isEmpty())
     {
         splPath.SetAliasSuffix(GetAliasSuffix() + prefix);
+    }
+
+    splPath.SetColor(GetColor());
+    splPath.SetPenStyle(GetPenStyle());
+    splPath.SetApproximationScale(GetApproximationScale());
+    return splPath;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VSplinePath::Offset(qreal distance, const QString &suffix) const -> VSplinePath
+{
+    if (qFuzzyIsNull(distance))
+    {
+        VSplinePath tmp = *this;
+        tmp.setName(name() + suffix);
+        tmp.SetMainNameForHistory(GetMainNameForHistory() + suffix);
+
+        if (not GetAliasSuffix().isEmpty())
+        {
+            tmp.SetAliasSuffix(GetAliasSuffix() + suffix);
+        }
+        return tmp;
+    }
+
+    QVector<VSpline> offsetPath;
+    for (qint32 i = 1; i <= CountSubSpl(); ++i)
+    {
+        const QVector<VSpline> subSplines = GetSpline(i).OffsetPath(distance);
+        offsetPath.append(subSplines);
+    }
+
+    VSplinePath splPath(offsetPath);
+    splPath.setName(name() + suffix);
+    splPath.SetMainNameForHistory(GetMainNameForHistory() + suffix);
+
+    if (not GetAliasSuffix().isEmpty())
+    {
+        splPath.SetAliasSuffix(GetAliasSuffix() + suffix);
+    }
+
+    splPath.SetColor(GetColor());
+    splPath.SetPenStyle(GetPenStyle());
+    splPath.SetApproximationScale(GetApproximationScale());
+    return splPath;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VSplinePath::Outline(const QVector<qreal> &distances, const QString &suffix) const -> VSplinePath
+{
+    qreal const totalLen = GetLength();
+    qreal accumulated = 0.0;
+    const auto maxIndex = static_cast<int>(distances.size() - 1);
+
+    // 2. Helper: Linear Interpolator
+    // Returns the exact width at a precise floating-point index
+    auto GetInterpolatedWidth = [&](double preciseIndex) -> qreal
+    {
+        if (preciseIndex <= 0.0)
+        {
+            return distances.first();
+        }
+        if (preciseIndex >= maxIndex)
+        {
+            return distances.last();
+        }
+
+        int idx = static_cast<int>(preciseIndex);
+        double fraction = preciseIndex - idx;
+        return distances.at(idx) * (1.0 - fraction) + distances.at(idx + 1) * fraction;
+    };
+
+    QVector<VSpline> outlinePath;
+    for (qint32 i = 1; i <= CountSubSpl(); ++i)
+    {
+        VSpline const seg = GetSpline(i);
+        if (distances.size() > 1)
+        {
+            qreal const segLen = seg.GetLength();
+
+            // Calculate Global 't' (0.0 to 1.0)
+            double const tStart = accumulated / totalLen;
+            double const tEnd = (accumulated + segLen) / totalLen;
+
+            // Map Global 't' to 'distances' array indices (e.g., 0.0 to 99.0)
+            double const indexStart = tStart * maxIndex;
+            double const indexEnd = tEnd * maxIndex;
+
+            QVector<qreal> localDistances;
+
+            // A. ALWAYS add the exact interpolated width at the start of this segment
+            localDistances.append(GetInterpolatedWidth(indexStart));
+
+            // B. Capture any ORIGINAL values that fall strictly between start and end
+            // Using ceil/floor to find the integer indices inside the range
+            auto firstWholeIdx = static_cast<int>(std::ceil(indexStart));
+            auto lastWholeIdx = static_cast<int>(std::floor(indexEnd));
+
+            // Only consider indices that are strictly inside (avoid duplicating start/end if they align exactly)
+            // Small epsilon might be needed if floating point precision is an issue,
+            // but generally strict comparison works for the "between" logic.
+            if (firstWholeIdx <= indexStart)
+            {
+                firstWholeIdx++;
+            }
+            if (lastWholeIdx >= indexEnd)
+            {
+                lastWholeIdx--;
+            }
+
+            for (int k = firstWholeIdx; k <= lastWholeIdx; ++k)
+            {
+                // Clamp k just in case logic slips out of bounds
+                if (k >= 0 && k < distances.size())
+                {
+                    localDistances.append(distances[k]);
+                }
+            }
+
+            // C. ALWAYS add the exact interpolated width at the end
+            localDistances.append(GetInterpolatedWidth(indexEnd));
+
+            const QVector<VSpline> subSplines = seg.OutlinePath(localDistances);
+            outlinePath.append(subSplines);
+
+            accumulated += segLen;
+        }
+        else
+        {
+            const QVector<VSpline> subSplines = seg.OutlinePath(distances);
+            outlinePath.append(subSplines);
+        }
+    }
+
+    VSplinePath splPath(outlinePath);
+    splPath.setName(name() + suffix);
+    splPath.SetMainNameForHistory(GetMainNameForHistory() + suffix);
+
+    if (not GetAliasSuffix().isEmpty())
+    {
+        splPath.SetAliasSuffix(GetAliasSuffix() + suffix);
     }
 
     splPath.SetColor(GetColor());
@@ -354,6 +546,7 @@ auto VSplinePath::ToJson() const -> QJsonObject
 {
     QJsonObject object = VAbstractCubicBezierPath::ToJson();
     object["aScale"_L1] = GetApproximationScale();
+    object["mainName"_L1] = GetMainNameForHistory();
 
     QJsonArray nodesArray;
     for (const auto &node : d->path)
@@ -363,6 +556,41 @@ auto VSplinePath::ToJson() const -> QJsonObject
     object["nodes"_L1] = nodesArray;
 
     return object;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VSplinePath::DirectionArrows() const -> QVector<DirectionArrow>
+{
+    if (IsRelaxed())
+    {
+        return VAbstractCurve::DirectionArrows(); // NOLINT(bugprone-parent-virtual-call)
+    }
+
+    return VAbstractCubicBezierPath::DirectionArrows();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSplinePath::SetStrict(bool strict)
+{
+    for (auto &node : d->path)
+    {
+        node.SetStrict(strict);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VSplinePath::NameForHistory(const QString &toolName) const -> QString
+{
+    QString const name = toolName + GetMainNameForHistory();
+
+    QString alias;
+
+    if (not GetAliasSuffix().isEmpty())
+    {
+        alias = u"%1 %2"_s.arg(toolName, GetAliasSuffix());
+    }
+
+    return not alias.isEmpty() ? u"%1 (%2)"_s.arg(alias, name) : name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -406,6 +634,38 @@ auto VSplinePath::LastPoint() const -> VPointF
     const vsizetype count = CountSubSpl();
     return count >= 1 ? d->path.at(count).P() : // Take last point of the last real spline
                VPointF();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VSplinePath::GetMainNameForHistory() const -> QString
+{
+    if (!d->mainNameForHistory.isEmpty())
+    {
+        return d->mainNameForHistory;
+    }
+
+    QString name;
+    if (CountPoints() > 0)
+    {
+        name += u" %1"_s.arg(FirstPoint().name());
+        if (CountSubSpl() >= 1)
+        {
+            name += u"_%1"_s.arg(LastPoint().name());
+        }
+
+        if (GetDuplicate() > 0)
+        {
+            name += u"_%1"_s.arg(GetDuplicate());
+        }
+    }
+
+    return name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSplinePath::SetMainNameForHistory(const QString &name)
+{
+    d->mainNameForHistory = name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

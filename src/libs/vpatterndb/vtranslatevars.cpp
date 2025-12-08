@@ -63,6 +63,7 @@ void VTranslateVars::InitVariables()
 {
     variables.insert(measurement_, translate("VTranslateVars", "M_", "Left symbol _ in the name"));
     variables.insert(increment_, translate("VTranslateVars", "Increment_", "Left symbol _ in the name"));
+    variables.insert(offset_, translate("VTranslateVars", "Offset_", "Left symbol _ in the name"));
     variables.insert(line_, translate("VTranslateVars", "Line_", "Left symbol _ in the name"));
     variables.insert(angleLine_, translate("VTranslateVars", "AngleLine_", "Left symbol _ in the name"));
     variables.insert(arc_, translate("VTranslateVars", "Arc_", "Left symbol _ in the name"));
@@ -621,6 +622,12 @@ auto VTranslateVars::VariablesToUser(QString &newFormula, vsizetype position, co
 //---------------------------------------------------------------------------------------------------------------------
 auto VTranslateVars::InternalVarToUser(const QString &var) const -> QString
 {
+    const QString locale = VAbstractApplication::VApp()->Settings()->GetLocale();
+    if (locale == QStringLiteral("zh_CN") || locale == QStringLiteral("he_IL") || locale == QStringLiteral("ja_JP"))
+    {
+        return var; // We do not support translation of variables for these locales
+    }
+
     VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
     if (!settings->IsTranslateFormula())
     {
@@ -630,6 +637,31 @@ auto VTranslateVars::InternalVarToUser(const QString &var) const -> QString
     QString newVar = var;
     vsizetype bias = 0;
     if (VariablesToUser(newVar, 0, var, bias))
+    {
+        return newVar;
+    }
+
+    return var;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTranslateVars::InternalVarFromUser(const QString &var) const -> QString
+{
+    const QString locale = VAbstractApplication::VApp()->Settings()->GetLocale();
+    if (locale == QStringLiteral("zh_CN") || locale == QStringLiteral("he_IL") || locale == QStringLiteral("ja_JP"))
+    {
+        return var; // We do not support translation of variables for these locales
+    }
+
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    if (!settings->IsTranslateFormula())
+    {
+        return var;
+    }
+
+    QString newVar = var;
+    vsizetype bias = 0;
+    if (VariablesFromUser(newVar, 0, var, bias))
     {
         return newVar;
     }

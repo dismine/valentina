@@ -107,7 +107,7 @@ auto VAbstractShortcutManager::GetShortcutsList() const -> QList<VAbstractShortc
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractShortcutManager::ShortcutActionToString(VShortcutAction type) -> QString
 {
-    Q_STATIC_ASSERT_X(static_cast<int>(VShortcutAction::LAST_ONE_DO_NOT_USE) == 86, "Convert all actions.");
+    Q_STATIC_ASSERT_X(static_cast<int>(VShortcutAction::LAST_ONE_DO_NOT_USE) == 88, "Convert all actions.");
 
     switch (type)
     {
@@ -283,6 +283,10 @@ auto VAbstractShortcutManager::ShortcutActionToString(VShortcutAction type) -> Q
             return "toolarcend"_L1;
         case VShortcutAction::ToolEllipticalArcWithLength:
             return "toolellipticalarcwithlength"_L1;
+        case VShortcutAction::ToolParallelCurve:
+            return "toolparallelcurve"_L1;
+        case VShortcutAction::ToolGraduatedCurve:
+            return "toolgraduatedcurve"_L1;
         case VShortcutAction::LAST_ONE_DO_NOT_USE:
             Q_UNREACHABLE();
             break;
@@ -295,7 +299,7 @@ auto VAbstractShortcutManager::ShortcutActionToString(VShortcutAction type) -> Q
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractShortcutManager::ReadableName(VShortcutAction type) -> QString
 {
-    Q_STATIC_ASSERT_X(static_cast<int>(VShortcutAction::LAST_ONE_DO_NOT_USE) == 86, "Translate all actions.");
+    Q_STATIC_ASSERT_X(static_cast<int>(VShortcutAction::LAST_ONE_DO_NOT_USE) == 88, "Translate all actions.");
 
     switch (type)
     {
@@ -471,6 +475,10 @@ auto VAbstractShortcutManager::ReadableName(VShortcutAction type) -> QString
             return tr("Tool 'Arc end'", "shortcut for action");
         case VShortcutAction::ToolEllipticalArcWithLength:
             return tr("Tool 'Elliptical arc with given length'", "shortcut for action");
+        case VShortcutAction::ToolParallelCurve:
+            return tr("Tool 'Parallel curve'", "shortcut for action");
+        case VShortcutAction::ToolGraduatedCurve:
+            return tr("Tool 'Graduated curve'", "shortcut for action");
         case VShortcutAction::LAST_ONE_DO_NOT_USE:
             Q_UNREACHABLE(); //-V501
             break;

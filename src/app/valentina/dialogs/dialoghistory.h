@@ -110,6 +110,7 @@ private:
     void InitialTable();
     void ShowPoint();
     auto PointName(quint32 pointId) const -> QString;
+    auto CurveName(quint32 curveId) const -> QString;
     void RetranslateUi();
     auto CursorRow() const -> int;
 

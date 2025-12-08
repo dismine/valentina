@@ -160,7 +160,6 @@ public:
     static auto Equidistant(QVector<VSAPoint> points, qreal width, bool trueZeroWidth, const QString &name)
         -> QVector<VLayoutPoint>;
     static auto SumTrapezoids(const QVector<QPointF> &points) -> qreal;
-    template <class T> static auto CheckLoops(QVector<T> points) -> QVector<T>;
     static auto EkvPoint(QVector<VRawSAPoint> points,
                          const VSAPoint &p1Line1,
                          const VSAPoint &p2Line1,
@@ -236,9 +235,6 @@ protected:
                                       qreal &rotationAngle, QPointF &pos) -> bool;
     template <class T> static auto ComparePoints(QVector<T> &points, const T &p1, const T &p2, qreal accuracy) -> bool;
     template <class T> static auto CompareFirstAndLastPoints(QVector<T> &points, qreal accuracy) -> void;
-    template <class T> static auto CheckLoop(const QVector<T> &points, bool &loopFound) -> QVector<T>;
-    template <class T>
-    static auto IntersectionPoint(QPointF crosPoint, const T &l1p1, const T &l1p2, const T &l2p1, const T &l2p2) -> T;
 
 private:
     QSharedDataPointer<VAbstractPieceData> d;
@@ -256,9 +252,8 @@ template <class T>
 inline auto VAbstractPiece::CheckPointOnLine(QVector<T> &points, const T &iPoint, const T &prevPoint,
                                              const T &nextPoint) -> bool
 {
-    if (iPoint.TurnPoint() || (iPoint.CurvePoint() && !prevPoint.CurvePoint()) ||
-        !VGObject::IsPointOnLineSegment(iPoint, prevPoint, nextPoint) ||
-        !IsEkvPointOnLine(iPoint, prevPoint, nextPoint))
+    if (iPoint.TurnPoint() || (iPoint.CurvePoint() && !prevPoint.CurvePoint())
+        || !IsPointOnLineSegment(iPoint, prevPoint, nextPoint) || !IsEkvPointOnLine(iPoint, prevPoint, nextPoint))
     {
         points.append(iPoint);
         return false;
@@ -272,7 +267,7 @@ template <>
 inline auto VAbstractPiece::CheckPointOnLine<QPointF>(QVector<QPointF> &points, const QPointF &iPoint,
                                                       const QPointF &prevPoint, const QPointF &nextPoint) -> bool
 {
-    if (!VGObject::IsPointOnLineSegment(iPoint, prevPoint, nextPoint, accuracyPointOnLine / 4.))
+    if (!IsPointOnLineSegment(iPoint, prevPoint, nextPoint, accuracyPointOnLine / 4.))
     {
         points.append(iPoint);
         return false;
@@ -308,7 +303,7 @@ QVector<T> VAbstractPiece::CorrectPathDistortion(QVector<T> path)
         const QPointF &prevPoint = path.at(prev);
         const QPointF &nextPoint = path.at(next);
 
-        if (VGObject::IsPointOnLineSegment(iPoint, prevPoint, nextPoint))
+        if (IsPointOnLineSegment(iPoint, prevPoint, nextPoint))
         {
             const QPointF p = VGObject::CorrectDistortion(iPoint, prevPoint, nextPoint);
             path[i].setX(p.x());
@@ -642,11 +637,10 @@ inline auto VAbstractPiece::IsInsidePolygon(const QVector<T> &path, const QVecto
             QPointF crosPoint;
             const auto type = baseSegment.intersects(allowanceSegment, &crosPoint);
 
-            if (type == QLineF::BoundedIntersection && not VFuzzyComparePoints(baseSegment.p1(), crosPoint, accuracy) &&
-                not VFuzzyComparePoints(baseSegment.p2(), crosPoint, accuracy) &&
-                not VGObject::IsPointOnLineviaPDP(allowanceSegment.p1(), baseSegment.p1(), baseSegment.p2(),
-                                                  accuracy) &&
-                not VGObject::IsPointOnLineviaPDP(allowanceSegment.p2(), baseSegment.p1(), baseSegment.p2(), accuracy))
+            if (type == QLineF::BoundedIntersection && not VFuzzyComparePoints(baseSegment.p1(), crosPoint, accuracy)
+                && not VFuzzyComparePoints(baseSegment.p2(), crosPoint, accuracy)
+                && not IsPointOnLineviaPDP(allowanceSegment.p1(), baseSegment.p1(), baseSegment.p2(), accuracy)
+                && not IsPointOnLineviaPDP(allowanceSegment.p2(), baseSegment.p1(), baseSegment.p2(), accuracy))
             {
                 return false;
             }
@@ -658,151 +652,6 @@ inline auto VAbstractPiece::IsInsidePolygon(const QVector<T> &path, const QVecto
     return std::all_of(path.begin(), path.end(),
                        [allowancePolygon](const T &point)
                        { return allowancePolygon.containsPoint(point, Qt::WindingFill); });
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief CheckLoops seek and delete loops in equidistant.
- * @param points vector of points of equidistant.
- * @return vector of points of equidistant.
- */
-template <class T> inline auto VAbstractPiece::CheckLoops(QVector<T> points) -> QVector<T>
-{
-    //    DumpVector(points, QStringLiteral("input.json.XXXXXX")); // Uncomment for dumping test data
-
-    /*If we got less than 4 points no need seek loops.*/
-    if (points.size() < 4)
-    {
-        return points;
-    }
-
-    bool loopFound = false;
-    const int maxLoops = 10000; // limit number of loops to be removed
-
-    for (qint32 i = 0; i < maxLoops; ++i)
-    {
-        points = CheckLoop(points, loopFound);
-        if (not loopFound)
-        {
-            break;
-        }
-    }
-
-    //    DumpVector(ekvPoints, QStringLiteral("output.json.XXXXXX")); // Uncomment for dumping test data
-    return points;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <class T> inline auto VAbstractPiece::CheckLoop(const QVector<T> &points, bool &loopFound) -> QVector<T>
-{
-    loopFound = false;
-
-    const bool pathClosed = (points.constFirst() == points.constLast());
-
-    QVector<T> ekvPoints;
-    ekvPoints.reserve(points.size());
-
-    for (qint32 i = 0; i < points.size(); ++i)
-    {
-        /*Last three points no need to check.*/
-        /*Triangle can not contain a loop*/
-        if (loopFound || i > points.size() - 4)
-        {
-            ekvPoints.append(points.at(i));
-            continue;
-        }
-
-        enum LoopIntersectType
-        {
-            NoIntersection,
-            BoundedIntersection,
-            ParallelIntersection
-        };
-
-        QPointF crosPoint;
-        LoopIntersectType status = NoIntersection;
-        const QLineF line1(points.at(i), points.at(i + 1));
-
-        const int limit = pathClosed && i == 0 ? 2 : 1;
-        qint32 j;
-        for (j = i + 2; j < points.size() - limit; ++j)
-        {
-            QLineF line2(points.at(j), points.at(j + 1));
-
-            const QLineF::IntersectType intersect = line1.intersects(line2, &crosPoint);
-            if (intersect == QLineF::NoIntersection)
-            { // According to the documentation QLineF::NoIntersection indicates that the lines do not intersect;
-                // i.e. they are parallel. But parallel also mean they can be on the same line.
-                // Method IsLineSegmentOnLineSegment will check it.
-                if (VGObject::IsLineSegmentOnLineSegment(line1, line2))
-                { // Now we really sure that segments are on the same line and have real intersections.
-                    status = ParallelIntersection;
-                    break;
-                }
-            }
-            else if (intersect == QLineF::BoundedIntersection)
-            {
-                status = BoundedIntersection;
-                break;
-            }
-        }
-
-        switch (status)
-        {
-            case ParallelIntersection:
-                /*We have found a loop.*/
-                ekvPoints.append(points.at(i));
-                ekvPoints.append(points.at(j + 1));
-                i = j + 1; // Skip a loop
-                loopFound = true;
-                break;
-            case BoundedIntersection:
-                ekvPoints.append(points.at(i));
-                ekvPoints.append(
-                    IntersectionPoint(crosPoint, points.at(i), points.at(i + 1), points.at(j), points.at(j + 1)));
-                i = j;
-                loopFound = true;
-                break;
-            case NoIntersection:
-                /*We have not found loop.*/
-                ekvPoints.append(points.at(i));
-                break;
-            default:
-                break;
-        }
-    }
-    return ekvPoints;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <class T>
-inline auto VAbstractPiece::IntersectionPoint(QPointF crosPoint, const T &l1p1, const T &l1p2, const T &l2p1,
-                                              const T &l2p2) -> T
-{
-    T point(crosPoint);
-
-    if ((l1p1.CurvePoint() && l1p2.CurvePoint()) || (l2p1.CurvePoint() && l2p2.CurvePoint()) ||
-        (l1p1.CurvePoint() && l2p2.CurvePoint()))
-    {
-        point.SetCurvePoint(true);
-    }
-
-    if ((l1p1.TurnPoint() && l1p2.TurnPoint()) || (l2p1.TurnPoint() && l2p2.TurnPoint()) ||
-        (l1p1.TurnPoint() && l2p2.TurnPoint()))
-    {
-        point.SetTurnPoint(true);
-    }
-
-    return point;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <>
-inline auto VAbstractPiece::IntersectionPoint<QPointF>(QPointF crosPoint, const QPointF & /*unused*/,
-                                                       const QPointF & /*unused*/, const QPointF & /*unused*/,
-                                                       const QPointF & /*unused*/) -> QPointF
-{
-    return crosPoint;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -850,10 +699,7 @@ inline auto VAbstractPiece::SubdividePath(const QVector<T> &boundary, const QPoi
             continue;
         }
 
-        if (!VGObject::IsPointOnLineSegment(p,
-                                            boundary.at(i).ToQPointF(),
-                                            boundary.at(i + 1).ToQPointF(),
-                                            MmToPixel(0.5)))
+        if (!IsPointOnLineSegment(p, boundary.at(i).ToQPointF(), boundary.at(i + 1).ToQPointF(), MmToPixel(0.5)))
         {
             sub1.append(boundary.at(i));
             continue;
@@ -1127,13 +973,13 @@ inline auto VAbstractPiece::CorrectSAMirrolLine(const QVector<T> &points, const 
 
     for (qint32 i = 0; i < points.count() - 1; ++i)
     {
-        if (VGObject::IsPointOnLineSegment(mirrorLine.p1(), points.at(i), points.at(i + 1)))
+        if (IsPointOnLineSegment(mirrorLine.p1(), points.at(i), points.at(i + 1)))
         {
             reverse = false;
             return mirrorLine;
         }
 
-        if (VGObject::IsPointOnLineSegment(mirrorLine.p2(), points.at(i), points.at(i + 1)))
+        if (IsPointOnLineSegment(mirrorLine.p2(), points.at(i), points.at(i + 1)))
         {
             reverse = true;
             return {mirrorLine.p2(), mirrorLine.p1()};

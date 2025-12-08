@@ -154,6 +154,8 @@ extern const QString AttrCurve2Alias2;
 extern const QString AttrLayoutVersion;
 extern const QString AttrKMVersion;
 extern const QString AttrNotMirrored;
+extern const QString AttrOffset;
+extern const QString AttrDescription;
 
 extern const QString TypeLineDefault;
 extern const QString TypeLineNone;
@@ -197,6 +199,7 @@ extern const QString ColorCornFlowerBlue;
 
 extern const QString measurement_;
 extern const QString increment_;
+extern const QString offset_;
 extern const QString line_;
 extern const QString angleLine_;
 extern const QString arc_;

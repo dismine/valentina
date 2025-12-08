@@ -84,8 +84,16 @@ class VSplinePoint
 {
 public:
     VSplinePoint();
-    VSplinePoint(const VPointF &pSpline, qreal angle1, const QString &angle1F, qreal angle2, const QString &angle2F,
-                 qreal length1, const QString &length1F, qreal length2, const QString &length2F);
+    VSplinePoint(const VPointF &pSpline,
+                 qreal angle1,
+                 const QString &angle1F,
+                 qreal angle2,
+                 const QString &angle2F,
+                 qreal length1,
+                 const QString &length1F,
+                 qreal length2,
+                 const QString &length2F,
+                 bool strict = true);
     VSplinePoint(const VSplinePoint &point);
     ~VSplinePoint();
 
@@ -114,6 +122,9 @@ public:
     void SetLength2(const qreal &value, const QString &length2F);
 
     auto IsMovable() const -> bool;
+
+    auto IsStrict() const -> bool;
+    void SetStrict(bool value);
 
     auto ToJson() const -> QJsonObject;
 

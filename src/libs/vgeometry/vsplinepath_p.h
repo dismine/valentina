@@ -48,6 +48,8 @@ public:
      */
     QVector<VSplinePoint> path{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
+    QString mainNameForHistory{};
+
 private:
     Q_DISABLE_ASSIGN_MOVE(VSplinePathData) // NOLINT
 };

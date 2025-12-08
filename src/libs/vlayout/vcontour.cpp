@@ -74,7 +74,7 @@ auto OptimizeCombining(const QVector<QPointF> &contour, const QPointF &withdrawE
 
     for (auto i = contour.size() - 2; i >= 0; --i)
     {
-        if (not VGObject::IsPointOnLineSegment(contour.at(i), withdrawFirst, withdrawEnd, accuracyPointOnLine * 2))
+        if (not IsPointOnLineSegment(contour.at(i), withdrawFirst, withdrawEnd, accuracyPointOnLine * 2))
         {
             optimize = true;
             cutIndex = i + 1;

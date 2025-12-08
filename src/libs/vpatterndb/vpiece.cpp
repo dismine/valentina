@@ -1299,14 +1299,12 @@ auto VPiece::CreatePassmark(const QVector<VPieceNode> &path, vsizetype previousI
     }
 
     if (const QLineF mirrorLine = SeamMirrorLine(data);
-        !mirrorLine.isNull() && IsShowFullPiece() &&
-        VGObject::IsPointOnLineviaPDP(passmarkSAPoint.ToQPointF(), mirrorLine.p1(), mirrorLine.p2(),
-                                      accuracyPointOnLine * 2))
+        !mirrorLine.isNull() && IsShowFullPiece()
+        && IsPointOnLineviaPDP(passmarkSAPoint.ToQPointF(), mirrorLine.p1(), mirrorLine.p2(), accuracyPointOnLine * 2))
     {
         const QTransform matrix = VGObject::FlippingMatrix(mirrorLine);
 
-        if (!VGObject::IsPointOnLineviaPDP(previousSAPoint.ToQPointF(), mirrorLine.p1(), mirrorLine.p2(),
-                                           accuracyPointOnLine * 2))
+        if (!IsPointOnLineviaPDP(previousSAPoint.ToQPointF(), mirrorLine.p1(), mirrorLine.p2(), accuracyPointOnLine * 2))
         {
             QPointF newPos = matrix.map(previousSAPoint.ToQPointF());
             nextSAPoint.setX(newPos.x());
@@ -1314,8 +1312,7 @@ auto VPiece::CreatePassmark(const QVector<VPieceNode> &path, vsizetype previousI
             nextSAPoint.SetSABefore(previousSAPoint.GetSAAfter());
             nextSAPoint.SetSAAfter(previousSAPoint.GetSABefore());
         }
-        else if (!VGObject::IsPointOnLineviaPDP(nextSAPoint.ToQPointF(), mirrorLine.p1(), mirrorLine.p2(),
-                                                accuracyPointOnLine * 2))
+        else if (!IsPointOnLineviaPDP(nextSAPoint.ToQPointF(), mirrorLine.p1(), mirrorLine.p2(), accuracyPointOnLine * 2))
         {
             QPointF newPos = matrix.map(nextSAPoint.ToQPointF());
             previousSAPoint.setX(newPos.x());

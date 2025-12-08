@@ -41,6 +41,7 @@
 #include "vpointf.h"
 
 class VArcData;
+class VSplinePath;
 
 /**
  * @brief VArc class for anticlockwise arc.
@@ -58,10 +59,11 @@ public:
          qreal f1, const QString &formulaF1, quint32 idObject = 0, Draw mode = Draw::Calculation);
     VArc(qreal length, const VPointF &center, qreal radius, qreal f1);
     VArc(const VArc &arc);
+    ~VArc() override;
+
     auto Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const -> VArc;
     auto Flip(const QLineF &axis, const QString &prefix = QString()) const -> VArc;
     auto Move(qreal length, qreal angle, const QString &prefix = QString()) const -> VArc;
-    ~VArc() override;
 
     auto operator=(const VArc &arc) -> VArc &;
 
@@ -78,6 +80,8 @@ public:
     auto GetP2() const -> QPointF;
 
     auto GetPoints() const -> QVector<QPointF> override;
+
+    auto ToSplinePath() const -> VSplinePath override;
 
     static auto OptimalApproximationScale(qreal radius, qreal f1, qreal f2, qreal tolerance) -> qreal;
 

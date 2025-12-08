@@ -111,4 +111,158 @@ template <class T> inline void Swap(T &line)
 auto SingleParallelPoint(const QPointF &p1, const QPointF &p2, qreal angle, qreal width) -> QPointF;
 auto SimpleParallelLine(const QPointF &p1, const QPointF &p2, qreal width) -> QLineF;
 
+auto IsPointOnLineviaPDP(const QPointF &t, const QPointF &p1, const QPointF &p2, qreal accuracy = accuracyPointOnLine)
+    -> bool;
+auto IsLineSegmentOnLineSegment(const QLineF &seg1, const QLineF &seg2, qreal accuracy = accuracyPointOnLine) -> bool;
+auto IsPointOnLineSegment(const QPointF &t, const QPointF &p1, const QPointF &p2, qreal accuracy = accuracyPointOnLine)
+    -> bool;
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class T>
+inline auto IntersectionPoint(QPointF crosPoint, const T &l1p1, const T &l1p2, const T &l2p1, const T &l2p2) -> T
+{
+    T point(crosPoint);
+
+    if ((l1p1.CurvePoint() && l1p2.CurvePoint()) || (l2p1.CurvePoint() && l2p2.CurvePoint())
+        || (l1p1.CurvePoint() && l2p2.CurvePoint()))
+    {
+        point.SetCurvePoint(true);
+    }
+
+    if ((l1p1.TurnPoint() && l1p2.TurnPoint()) || (l2p1.TurnPoint() && l2p2.TurnPoint())
+        || (l1p1.TurnPoint() && l2p2.TurnPoint()))
+    {
+        point.SetTurnPoint(true);
+    }
+
+    return point;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<>
+inline auto IntersectionPoint<QPointF>(QPointF crosPoint,
+                                       const QPointF & /*unused*/,
+                                       const QPointF & /*unused*/,
+                                       const QPointF & /*unused*/,
+                                       const QPointF & /*unused*/) -> QPointF
+{
+    return crosPoint;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief CheckLoops seek and delete loops in equidistant.
+ * @param points vector of points of equidistant.
+ * @return vector of points of equidistant.
+ */
+template<class T>
+inline auto CheckLoops(QVector<T> points) -> QVector<T>
+{
+    //    DumpVector(points, QStringLiteral("input.json.XXXXXX")); // Uncomment for dumping test data
+
+    /*If we got less than 4 points no need seek loops.*/
+    if (points.size() < 4)
+    {
+        return points;
+    }
+
+    bool loopFound = false;
+    const int maxLoops = 10000; // limit number of loops to be removed
+
+    for (qint32 i = 0; i < maxLoops; ++i)
+    {
+        points = CheckLoop(points, loopFound);
+        if (not loopFound)
+        {
+            break;
+        }
+    }
+
+    //    DumpVector(ekvPoints, QStringLiteral("output.json.XXXXXX")); // Uncomment for dumping test data
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class T>
+inline auto CheckLoop(const QVector<T> &points, bool &loopFound) -> QVector<T>
+{
+    loopFound = false;
+
+    const bool pathClosed = (points.constFirst() == points.constLast());
+
+    QVector<T> ekvPoints;
+    ekvPoints.reserve(points.size());
+
+    for (qint32 i = 0; i < points.size(); ++i)
+    {
+        /*Last three points no need to check.*/
+        /*Triangle can not contain a loop*/
+        if (loopFound || i > points.size() - 4)
+        {
+            ekvPoints.append(points.at(i));
+            continue;
+        }
+
+        enum LoopIntersectType
+        {
+            NoIntersection,
+            BoundedIntersection,
+            ParallelIntersection
+        };
+
+        QPointF crosPoint;
+        LoopIntersectType status = NoIntersection;
+        const QLineF line1(points.at(i), points.at(i + 1));
+
+        const int limit = pathClosed && i == 0 ? 2 : 1;
+        qint32 j;
+        for (j = i + 2; j < points.size() - limit; ++j)
+        {
+            QLineF line2(points.at(j), points.at(j + 1));
+
+            const QLineF::IntersectType intersect = line1.intersects(line2, &crosPoint);
+            if (intersect == QLineF::NoIntersection)
+            { // According to the documentation QLineF::NoIntersection indicates that the lines do not intersect;
+                // i.e. they are parallel. But parallel also mean they can be on the same line.
+                // Method IsLineSegmentOnLineSegment will check it.
+                if (IsLineSegmentOnLineSegment(line1, line2))
+                { // Now we really sure that segments are on the same line and have real intersections.
+                    status = ParallelIntersection;
+                    break;
+                }
+            }
+            else if (intersect == QLineF::BoundedIntersection)
+            {
+                status = BoundedIntersection;
+                break;
+            }
+        }
+
+        switch (status)
+        {
+            case ParallelIntersection:
+                /*We have found a loop.*/
+                ekvPoints.append(points.at(i));
+                ekvPoints.append(points.at(j + 1));
+                i = j + 1; // Skip a loop
+                loopFound = true;
+                break;
+            case BoundedIntersection:
+                ekvPoints.append(points.at(i));
+                ekvPoints.append(
+                    IntersectionPoint(crosPoint, points.at(i), points.at(i + 1), points.at(j), points.at(j + 1)));
+                i = j;
+                loopFound = true;
+                break;
+            case NoIntersection:
+                /*We have not found loop.*/
+                ekvPoints.append(points.at(i));
+                break;
+            default:
+                break;
+        }
+    }
+    return ekvPoints;
+}
+
 #endif // VGEOMETRYDEF_H

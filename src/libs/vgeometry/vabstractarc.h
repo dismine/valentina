@@ -78,6 +78,7 @@ public:
 
     void setId(const quint32 &id) override;
     auto NameForHistory(const QString &toolName) const -> QString override;
+    auto GetMainNameForHistory() const -> QString override;
 
     auto IsFlipped() const -> bool;
     auto AngleArc() const -> qreal;
@@ -86,6 +87,11 @@ public:
 
     auto CutArc(qreal length, VAbstractArc *arc1, VAbstractArc *arc2, const QString &pointName) const -> QPointF;
     auto CutArc(qreal length, const QString &pointName) const -> QPointF;
+
+    virtual auto ToSplinePath() const -> VSplinePath = 0;
+
+    auto Offset(qreal distance, const QString &suffix = QString()) const -> VSplinePath override;
+    auto Outline(const QVector<qreal> &distances, const QString &suffix = QString()) const -> VSplinePath override;
 
 protected:
     void SetFlipped(bool value);
@@ -99,6 +105,8 @@ protected:
         -> QPointF
         = 0;
     virtual auto DoCutArcByLength(qreal length, const QString &pointName) const -> QPointF = 0;
+
+    auto AngleArc(qreal startAngle, qreal endAngle) const -> qreal;
 
 private:
     QSharedDataPointer<VAbstractArcData> d;

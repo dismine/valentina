@@ -184,5 +184,13 @@
         <file>toolicon/light/el_arc_with_length.png</file>
         <file>toolicon/dark/el_arc_with_length.png</file>
         <file>toolicon/dark/el_arc_with_length@2x.png</file>
+        <file>toolicon/light/parallel_curve@2x.png</file>
+        <file>toolicon/light/parallel_curve.png</file>
+        <file>toolicon/dark/parallel_curve@2x.png</file>
+        <file>toolicon/dark/parallel_curve.png</file>
+        <file>toolicon/light/graduated_curve_offseting@2x.png</file>
+        <file>toolicon/light/graduated_curve_offseting.png</file>
+        <file>toolicon/dark/graduated_curve_offseting@2x.png</file>
+        <file>toolicon/dark/graduated_curve_offseting.png</file>
     </qresource>
 </RCC>

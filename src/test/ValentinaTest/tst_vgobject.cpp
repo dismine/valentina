@@ -150,7 +150,7 @@ void TST_VGObject::TestIsPointOnLineviaPDP() const
     QFETCH(QPointF, t);
     QFETCH(bool, excpect);
 
-    const bool res = VGObject::IsPointOnLineviaPDP(t, p1, p2);
+    const bool res = IsPointOnLineviaPDP(t, p1, p2);
     QCOMPARE(res, excpect);
 }
 

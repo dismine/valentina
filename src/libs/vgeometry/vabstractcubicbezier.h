@@ -61,8 +61,10 @@ public:
 
     auto CutSpline(qreal length, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2, QPointF &spl2p3,
                    const QString &pointName) const -> QPointF;
+    auto CutSplineAtParam(qreal t, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2, QPointF &spl2p3) const -> QPointF;
 
     auto NameForHistory(const QString &toolName) const -> QString override;
+    auto GetMainNameForHistory() const -> QString override;
 
     auto GetParmT(qreal length) const -> qreal;
     auto RealLengthByT(qreal t) const -> qreal;

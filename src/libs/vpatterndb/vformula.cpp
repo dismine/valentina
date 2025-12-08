@@ -56,6 +56,12 @@ VFormula::VFormula()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VFormula::VFormula(const VContainer *container)
+  : d(new VFormulaData(container))
+{
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VFormula::VFormula(const QString &formula, const VContainer *container)
   : d(new VFormulaData(formula, container))
 {

@@ -32,7 +32,6 @@
 #include <QPointF>
 #include <QSharedPointer>
 #include <QtMath>
-#include <new>
 
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
@@ -79,7 +78,7 @@ void VisToolArc::RefreshGeometry()
                 return r.angle();
             };
 
-            static const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
+            static const QString suffix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
 
             if (qFuzzyIsNull(m_radius))
             {
@@ -90,7 +89,7 @@ void VisToolArc::RefreshGeometry()
                 SetToolTip(tr("<b>Arc</b>: radius = %1%2; "
                               "<b>Mouse click</b> - finish selecting the radius, "
                               "<b>%3</b> - skip")
-                               .arg(LengthToUser(r.length()), prefix, VModifierKey::EnterKey()));
+                               .arg(LengthToUser(r.length()), suffix, VModifierKey::EnterKey()));
             }
             else if (m_f1 < 0)
             {
@@ -109,7 +108,10 @@ void VisToolArc::RefreshGeometry()
                               "<b>Mouse click</b> - finish selecting the first angle, "
                               "<b>%4</b> - sticking angle, "
                               "<b>%5</b> - skip")
-                               .arg(LengthToUser(m_radius), prefix, AngleToUser(f1Angle), VModifierKey::Shift(),
+                               .arg(LengthToUser(m_radius),
+                                    suffix,
+                                    AngleToUser(f1Angle),
+                                    VModifierKey::Shift(),
                                     VModifierKey::EnterKey()));
             }
             else if (m_f1 >= 0)
@@ -124,8 +126,13 @@ void VisToolArc::RefreshGeometry()
                               "<b>%5</b> - sticking angle, "
                               "<b>%6</b> - sticking end, "
                               "<b>%7</b> - skip")
-                               .arg(LengthToUser(m_radius), prefix, AngleToUser(m_f1), AngleToUser(f2Angle),
-                                    VModifierKey::Shift(), VModifierKey::Control(), VModifierKey::EnterKey()));
+                               .arg(LengthToUser(m_radius),
+                                    suffix,
+                                    AngleToUser(m_f1),
+                                    AngleToUser(f2Angle),
+                                    VModifierKey::Shift(),
+                                    VModifierKey::Control(),
+                                    VModifierKey::EnterKey()));
             }
         }
         else

@@ -27,9 +27,9 @@
  *************************************************************************/
 
 #include "vabstractcubicbezierpath.h"
+#include "vgeometrydef.h"
 #include "vsplinepoint.h"
 
-#include <QPainterPath>
 #include <QtDebug>
 
 #include "../ifc/ifcdef.h"
@@ -69,21 +69,6 @@ VAbstractCubicBezierPath::~VAbstractCubicBezierPath()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief GetPath return QPainterPath which reprezent spline path.
- * @return path.
- */
-auto VAbstractCubicBezierPath::GetPath() const -> QPainterPath
-{
-    QPainterPath painterPath;
-    for (qint32 i = 1; i <= CountSubSpl(); ++i)
-    {
-        painterPath.addPath(GetSpline(i).GetPath());
-    }
-    return painterPath;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief GetPathPoints return list of points what located on path.
  * @return list.
  */
@@ -99,6 +84,12 @@ auto VAbstractCubicBezierPath::GetPoints() const -> QVector<QPointF>
 
         pathPoints += GetSpline(i).GetPoints();
     }
+
+    if (IsRelaxed())
+    {
+        pathPoints = CheckLoops(pathPoints);
+    }
+
     return pathPoints;
 }
 
@@ -285,7 +276,22 @@ auto VAbstractCubicBezierPath::CutSplinePath(qreal length, qint32 &p1, qint32 &p
  */
 auto VAbstractCubicBezierPath::NameForHistory(const QString &toolName) const -> QString
 {
-    QString name = toolName;
+    QString const name = toolName + GetMainNameForHistory();
+
+    QString alias;
+
+    if (not GetAliasSuffix().isEmpty())
+    {
+        alias = u"%1 %2"_s.arg(toolName, GetAliasSuffix());
+    }
+
+    return not alias.isEmpty() ? u"%1 (%2)"_s.arg(alias, name) : name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractCubicBezierPath::GetMainNameForHistory() const -> QString
+{
+    QString name;
     if (CountPoints() > 0)
     {
         name += u" %1"_s.arg(FirstPoint().name());
@@ -299,15 +305,7 @@ auto VAbstractCubicBezierPath::NameForHistory(const QString &toolName) const -> 
             name += u"_%1"_s.arg(GetDuplicate());
         }
     }
-
-    QString alias;
-
-    if (not GetAliasSuffix().isEmpty())
-    {
-        alias = u"%1 %2"_s.arg(toolName, GetAliasSuffix());
-    }
-
-    return not alias.isEmpty() ? u"%1 (%2)"_s.arg(alias, name) : name;
+    return name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -342,4 +340,13 @@ void VAbstractCubicBezierPath::CreateAlias()
     }
 
     SetAlias(splPath + '_'_L1 + aliasSuffix);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractCubicBezierPath::IsRelaxed() const -> bool
+{
+    QVector<VSplinePoint> const splinePoints = GetSplinePath();
+    return std::any_of(splinePoints.cbegin(),
+                       splinePoints.cend(),
+                       [](const VSplinePoint &p) -> bool { return !p.IsStrict(); });
 }

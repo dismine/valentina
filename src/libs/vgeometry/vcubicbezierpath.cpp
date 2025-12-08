@@ -36,6 +36,7 @@
 #include "vabstractcurve.h"
 #include "vcubicbezierpath_p.h"
 #include "vspline.h"
+#include "vsplinepath.h"
 #include "vsplinepoint.h"
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -154,6 +155,46 @@ auto VCubicBezierPath::Move(qreal length, qreal angle, const QString &prefix) co
     curve.SetPenStyle(GetPenStyle());
     curve.SetApproximationScale(GetApproximationScale());
     return curve;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCubicBezierPath::Offset(qreal distance, const QString &suffix) const -> VSplinePath
+{
+    VSplinePath splPath(GetSplinePath());
+    splPath.SetApproximationScale(GetApproximationScale());
+
+    splPath = splPath.Offset(distance, suffix);
+    splPath.setName(name() + suffix);
+    splPath.SetMainNameForHistory(GetMainNameForHistory() + suffix);
+
+    if (not GetAliasSuffix().isEmpty())
+    {
+        splPath.SetAliasSuffix(GetAliasSuffix() + suffix);
+    }
+
+    splPath.SetColor(GetColor());
+    splPath.SetPenStyle(GetPenStyle());
+    return splPath;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCubicBezierPath::Outline(const QVector<qreal> &distances, const QString &suffix) const -> VSplinePath
+{
+    VSplinePath splPath(GetSplinePath());
+    splPath.SetApproximationScale(GetApproximationScale());
+
+    splPath = splPath.Outline(distances, suffix);
+    splPath.setName(name() + suffix);
+    splPath.SetMainNameForHistory(GetMainNameForHistory() + suffix);
+
+    if (not GetAliasSuffix().isEmpty())
+    {
+        splPath.SetAliasSuffix(GetAliasSuffix() + suffix);
+    }
+
+    splPath.SetColor(GetColor());
+    splPath.SetPenStyle(GetPenStyle());
+    return splPath;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

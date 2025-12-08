@@ -42,6 +42,7 @@ public:
     ~VTranslateVars() = default;
 
     auto InternalVarToUser(const QString &var) const -> QString;
+    auto InternalVarFromUser(const QString &var) const -> QString;
 
     auto VarToUser(const QString &var) const -> QString;
     auto VarFromUser(const QString &var) const -> QString;

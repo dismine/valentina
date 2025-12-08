@@ -195,10 +195,14 @@
 #include "dialogs/dialognewpattern.h"
 #include "dialogs/dialogpatternproperties.h"
 #include "dialogs/dialogpreferences.h"
+#include "../vtools/dialogs/tools/dialogparallelcurve.h"
 #include "dialogs/vwidgetbackgroundimages.h"
 #include "dialogs/vwidgetdetails.h"
 #include "dialogs/vwidgetgroups.h"
-#include "tools/drawTools/toolcurve/vtoolellipticalarcwithlength.h"
+#include "../vtools/tools/drawTools/toolcurve/vtoolellipticalarcwithlength.h"
+#include "../vtools/tools/drawTools/toolcurve/vtoolparallelcurve.h"
+#include "../vtools/tools/drawTools/toolcurve/vtoolgraduatedcurve.h"
+#include "../vtools/dialogs/tools/dialoggraduatedcurve.h"
 #include "vabstractapplication.h"
 #include "vabstractshortcutmanager.h"
 #include "vsinglelineoutlinechar.h"
@@ -891,7 +895,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
         auto *dialogTool = new Dialog(pattern, doc, 0, this);
 
         // This check helps to find missed tools in the switch
-        Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 62, "Check if need to extend.");
+        Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64, "Check if need to extend.");
 
         switch (t)
         {
@@ -1838,6 +1842,28 @@ void MainWindow::ToolEllipticalArcWithLength(bool checked)
                 &MainWindow::ClosedDrawDialogWithApply<VToolEllipticalArcWithLength>,
         &MainWindow::ApplyDrawDialog<VToolEllipticalArcWithLength>);
     LogPatternToolUsed(checked, QStringLiteral("Elliptical arc with length tool"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolParallelCurve(bool checked)
+{
+    ToolSelectCurve();
+    SetToolButtonWithApply<DialogParallelCurve>(
+        checked, Tool::ParallelCurve, QStringLiteral("parallel_curve_cursor.png"),
+        tr("Select curve"), &MainWindow::ClosedDrawDialogWithApply<VToolParallelCurve>,
+        &MainWindow::ApplyDrawDialog<VToolParallelCurve>);
+    LogPatternToolUsed(checked, QStringLiteral("Parallel curve tool"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolGraduatedCurve(bool checked)
+{
+    ToolSelectCurve();
+    SetToolButtonWithApply<DialogGraduatedCurve>(
+        checked, Tool::GraduatedCurve, QStringLiteral("graduated_curve_offseting_cursor.png"),
+        tr("Select curve"), &MainWindow::ClosedDrawDialogWithApply<VToolGraduatedCurve>,
+        &MainWindow::ApplyDrawDialog<VToolGraduatedCurve>);
+    LogPatternToolUsed(checked, QStringLiteral("Graduated curve tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3370,6 +3396,8 @@ void MainWindow::ToolBarDrawTools()
             curveToolMenu->addAction(ui->actionArcWithLengthTool);
             curveToolMenu->addAction(ui->actionEllipticalArcTool);
             curveToolMenu->addAction(ui->actionEllipticalArcWithLengthTool);
+            curveToolMenu->addAction(ui->actionParallelCurveTool);
+            curveToolMenu->addAction(ui->actionGraduatedCurveTool);
 
             auto *curvePointTool = new VToolButtonPopup(this);
             curvePointTool->AssignMenu(curveToolMenu);
@@ -3389,6 +3417,8 @@ void MainWindow::ToolBarDrawTools()
         ui->toolBarCurveTools->addAction(ui->actionArcWithLengthTool);
         ui->toolBarCurveTools->addAction(ui->actionEllipticalArcTool);
         ui->toolBarCurveTools->addAction(ui->actionEllipticalArcWithLengthTool);
+        ui->toolBarCurveTools->addAction(ui->actionParallelCurveTool);
+        ui->toolBarCurveTools->addAction(ui->actionGraduatedCurveTool);
     }
 
     ui->toolBarOperationTools->clear();
@@ -3497,7 +3527,7 @@ void MainWindow::InitToolButtons()
     connect(ui->actionToolSelect, &QAction::triggered, this, &MainWindow::ArrowTool);
 
     // This check helps to find missed tools
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 62, "Check if all tools were connected.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64, "Check if all tools were connected.");
 
     auto InitToolButton = [this](VShortcutAction type, QAction *action, void (MainWindow::*slotFunction)(bool))
     {
@@ -3568,6 +3598,8 @@ void MainWindow::InitToolButtons()
     InitToolButton(VShortcutAction::ToolArcEnd, ui->actionArcEndPointTool, &MainWindow::ToolArcEnd);
     InitToolButton(VShortcutAction::ToolEllipticalArcWithLength, ui->actionEllipticalArcWithLengthTool,
                    &MainWindow::ToolEllipticalArcWithLength);
+    InitToolButton(VShortcutAction::ToolParallelCurve, ui->actionParallelCurveTool, &MainWindow::ToolParallelCurve);
+    InitToolButton(VShortcutAction::ToolGraduatedCurve, ui->actionGraduatedCurveTool, &MainWindow::ToolGraduatedCurve);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3617,7 +3649,7 @@ void MainWindow::MouseMove(const QPointF &scenePos)
 void MainWindow::CancelTool()
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 62, "Not all tools were handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64, "Not all tools were handled.");
 
     qCDebug(vMainWindow, "Canceling tool.");
     if (not m_dialogTool.isNull())
@@ -3805,6 +3837,12 @@ void MainWindow::CancelTool()
         case Tool::EllipticalArcWithLength:
             ui->actionEllipticalArcWithLengthTool->setChecked(false);
             break;
+        case Tool::ParallelCurve:
+            ui->actionParallelCurveTool->setChecked(false);
+            break;
+        case Tool::GraduatedCurve:
+            ui->actionGraduatedCurveTool->setChecked(false);
+            break;
     }
 
     QT_WARNING_POP
@@ -3822,7 +3860,7 @@ void MainWindow::SetupDrawToolsIcons()
     const auto resource = QStringLiteral("toolicon");
 
     // This check helps to find missed tools
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 62, "Not all tools were handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64, "Not all tools were handled.");
 
     ui->actionLineTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("line.png")));
     ui->actionEndLineTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("segment.png")));
@@ -3881,6 +3919,9 @@ void MainWindow::SetupDrawToolsIcons()
     ui->actionArcEndPointTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("arc_end.png")));
     ui->actionEllipticalArcWithLengthTool->setIcon(
                 VTheme::GetIconResource(resource, QStringLiteral("el_arc_with_length.png")));
+    ui->actionParallelCurveTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("parallel_curve.png")));
+    ui->actionGraduatedCurveTool->setIcon(
+                VTheme::GetIconResource(resource, QStringLiteral("graduated_curve_offseting.png")));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -5700,7 +5741,7 @@ void MainWindow::SetEnableTool(bool enable)
     QT_WARNING_POP
 
     // This check helps to find missed tools
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 62, "Not all tools were handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64, "Not all tools were handled.");
 
     // Drawing Tools
     ui->actionEndLineTool->setEnabled(drawTools);
@@ -5748,6 +5789,8 @@ void MainWindow::SetEnableTool(bool enable)
     ui->actionArcStartPointTool->setEnabled(drawTools);
     ui->actionArcEndPointTool->setEnabled(drawTools);
     ui->actionEllipticalArcWithLengthTool->setEnabled(drawTools);
+    ui->actionParallelCurveTool->setEnabled(drawTools);
+    ui->actionGraduatedCurveTool->setEnabled(drawTools);
 
     ui->actionLast_tool->setEnabled(drawTools);
 
@@ -6049,7 +6092,7 @@ void MainWindow::CreateMenus()
 void MainWindow::LastUsedTool()
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 62, "Not all tools were handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64, "Not all tools were handled.");
 
     if (m_currentTool == m_lastUsedTool)
     {
@@ -6268,6 +6311,14 @@ void MainWindow::LastUsedTool()
         case Tool::EllipticalArcWithLength:
             ui->actionEllipticalArcWithLengthTool->setChecked(true);
             ToolEllipticalArcWithLength(true);
+            break;
+        case Tool::ParallelCurve:
+            ui->actionParallelCurveTool->setChecked(true);
+            ToolParallelCurve(true);
+            break;
+        case Tool::GraduatedCurve:
+            ui->actionGraduatedCurveTool->setChecked(true);
+            ToolGraduatedCurve(true);
             break;
     }
 

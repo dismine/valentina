@@ -1008,8 +1008,8 @@ void VDxfEngine::ExportAAMANotch(const QSharedPointer<dx_ifaceBlock> &detailBloc
         {
             ExportNotch(passmark.baseLine.p1(), passmark.baseLine.length(), passmark.baseLine.angle());
 
-            if (!mirrorLine.isNull() && detail.IsShowFullPiece() &&
-                !VGObject::IsPointOnLineviaPDP(passmark.baseLine.p1(), mirrorLine.p1(), mirrorLine.p2()))
+            if (!mirrorLine.isNull() && detail.IsShowFullPiece()
+                && !IsPointOnLineviaPDP(passmark.baseLine.p1(), mirrorLine.p1(), mirrorLine.p2()))
             {
                 const QTransform matrix = VGObject::FlippingMatrix(mirrorLine);
                 QLineF const baseLine = matrix.map(passmark.baseLine);
@@ -1609,8 +1609,8 @@ void VDxfEngine::ExportASTMNotches(const QSharedPointer<dx_ifaceBlock> &detailBl
         ExportPassmark(passmark);
 
         const QLineF mirrorLine = detail.GetMappedSeamMirrorLine();
-        if (!mirrorLine.isNull() && detail.IsShowFullPiece() &&
-            !VGObject::IsPointOnLineviaPDP(passmark.baseLine.p1(), mirrorLine.p1(), mirrorLine.p2()))
+        if (!mirrorLine.isNull() && detail.IsShowFullPiece()
+            && !IsPointOnLineviaPDP(passmark.baseLine.p1(), mirrorLine.p1(), mirrorLine.p2()))
         {
             const QTransform matrix = VGObject::FlippingMatrix(mirrorLine);
             const VLayoutPassmark mirroredPassmark = VLayoutPiece::MapPassmark(passmark, matrix, false);
@@ -1924,7 +1924,7 @@ auto VDxfEngine::NotchPrecedingPoint(const QVector<VLayoutPoint> &boundary, QPoi
     {
         const QPointF cPoint = VGObject::ClosestPoint(QLineF(boundary.at(i), boundary.at(i + 1)), notchBase);
 
-        if (VGObject::IsPointOnLineSegment(cPoint, boundary.at(i), boundary.at(i + 1)))
+        if (IsPointOnLineSegment(cPoint, boundary.at(i), boundary.at(i + 1)))
         {
             const qreal length = QLineF(notchBase, cPoint).length();
             if (length < bestDistance)

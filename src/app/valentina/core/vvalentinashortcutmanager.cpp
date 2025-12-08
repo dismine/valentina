@@ -35,7 +35,7 @@
 VValentinaShortcutManager::VValentinaShortcutManager(QObject *parent)
   : VAbstractShortcutManager{parent}
 {
-    Q_STATIC_ASSERT_X(static_cast<int>(VShortcutAction::LAST_ONE_DO_NOT_USE) == 86, "Check if all actions were used.");
+    Q_STATIC_ASSERT_X(static_cast<int>(VShortcutAction::LAST_ONE_DO_NOT_USE) == 88, "Check if all actions were used.");
 
     QT_WARNING_PUSH
 #if !defined(Q_OS_MACOS) && defined(Q_CC_CLANG)
@@ -172,6 +172,8 @@ VValentinaShortcutManager::VValentinaShortcutManager(QObject *parent)
     AddShortcut({VShortcutAction::ToolArcStart, {}, {}});
     AddShortcut({VShortcutAction::ToolArcEnd, {}, {}});
     AddShortcut({VShortcutAction::ToolEllipticalArcWithLength, {}, {}});
+    AddShortcut({VShortcutAction::ToolParallelCurve, {}, {}});
+    AddShortcut({VShortcutAction::ToolGraduatedCurve, {}, {}});
 
     QT_WARNING_POP
 }

@@ -36,6 +36,13 @@
 class VGObject;
 class VContainer;
 
+struct VRawGraduatedCurveOffset
+{
+    QString name;
+    QString formula;
+    QString description;
+};
+
 struct SourceItem
 {
     quint32 id{NULL_ID};

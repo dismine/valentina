@@ -410,28 +410,37 @@ auto VAbstractCubicBezier::CutSpline(qreal length, QPointF &spl1p2, QPointF &spl
 
     const qreal parT = GetParmT(length);
 
+    return CutSplineAtParam(parT, spl1p2, spl1p3, spl2p2, spl2p3);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractCubicBezier::CutSplineAtParam(
+    qreal t, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2, QPointF &spl2p3) const -> QPointF
+{
+    t = qBound(0.0, t, 1.0);
+
     QLineF seg1_2(static_cast<QPointF>(GetP1()), GetControlPoint1());
-    seg1_2.setLength(seg1_2.length() * parT);
+    seg1_2.setLength(seg1_2.length() * t);
     const QPointF p12 = seg1_2.p2();
 
     QLineF seg2_3(GetControlPoint1(), GetControlPoint2());
-    seg2_3.setLength(seg2_3.length() * parT);
+    seg2_3.setLength(seg2_3.length() * t);
     const QPointF p23 = seg2_3.p2();
 
     QLineF seg12_23(p12, p23);
-    seg12_23.setLength(seg12_23.length() * parT);
+    seg12_23.setLength(seg12_23.length() * t);
     const QPointF p123 = seg12_23.p2();
 
     QLineF seg3_4(GetControlPoint2(), static_cast<QPointF>(GetP4()));
-    seg3_4.setLength(seg3_4.length() * parT);
+    seg3_4.setLength(seg3_4.length() * t);
     const QPointF p34 = seg3_4.p2();
 
     QLineF seg23_34(p23, p34);
-    seg23_34.setLength(seg23_34.length() * parT);
+    seg23_34.setLength(seg23_34.length() * t);
     const QPointF p234 = seg23_34.p2();
 
     QLineF seg123_234(p123, p234);
-    seg123_234.setLength(seg123_234.length() * parT);
+    seg123_234.setLength(seg123_234.length() * t);
     const QPointF p1234 = seg123_234.p2();
 
     spl1p2 = p12;
@@ -444,11 +453,7 @@ auto VAbstractCubicBezier::CutSpline(qreal length, QPointF &spl1p2, QPointF &spl
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractCubicBezier::NameForHistory(const QString &toolName) const -> QString
 {
-    QString name = toolName + QStringLiteral(" %1_%2").arg(GetP1().name(), GetP4().name());
-    if (GetDuplicate() > 0)
-    {
-        name += QStringLiteral("_%1").arg(GetDuplicate());
-    }
+    QString const name = toolName + GetMainNameForHistory();
 
     QString alias;
 
@@ -458,6 +463,17 @@ auto VAbstractCubicBezier::NameForHistory(const QString &toolName) const -> QStr
     }
 
     return not alias.isEmpty() ? QStringLiteral("%1 (%2)").arg(alias, name) : name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractCubicBezier::GetMainNameForHistory() const -> QString
+{
+    QString name = QStringLiteral(" %1_%2").arg(GetP1().name(), GetP4().name());
+    if (GetDuplicate() > 0)
+    {
+        name += QStringLiteral("_%1").arg(GetDuplicate());
+    }
+    return name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -508,7 +508,7 @@ void TST_VAbstractPiece::RawPathRemoveLoop() const
     QFETCH(QVector<QPointF>, expect);
 
     QVector<QPointF> res;
-    CastTo(VAbstractPiece::CheckLoops(path), res);
+    CastTo(CheckLoops(path), res);
     ComparePaths(res, expect);
 }
 
@@ -781,7 +781,7 @@ void TST_VAbstractPiece::PathRemoveLoop() const
     QFETCH(QVector<QPointF>, path);
     QFETCH(QVector<QPointF>, expect);
 
-    QVector<QPointF> const res = VAbstractPiece::CheckLoops(path);
+    QVector<QPointF> const res = CheckLoops(path);
     ComparePaths(res, expect);
 }
 
@@ -967,7 +967,7 @@ void TST_VAbstractPiece::PathLoopsCase() const
     QFETCH(QVector<QPointF>, path);
     QFETCH(QVector<QPointF>, expect);
 
-    const QVector<QPointF> res = VAbstractPiece::CheckLoops(path);
+    const QVector<QPointF> res = CheckLoops(path);
     ComparePaths(res, expect);
 }
 
@@ -1459,7 +1459,7 @@ void TST_VAbstractPiece::PossibleInfiniteClearLoops() const
     QFETCH(QVector<QPointF>, path);
     QFETCH(QVector<QPointF>, expect);
 
-    QVector<QPointF> const res = VAbstractPiece::CheckLoops(path);
+    QVector<QPointF> const res = CheckLoops(path);
     ComparePaths(res, expect);
 }
 

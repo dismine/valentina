@@ -33,6 +33,7 @@
 #include "../vmisc/def.h"
 #include "vabstractarc_p.h"
 #include "vpointf.h"
+#include "vsplinepath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractArc::VAbstractArc(const GOType &type, const quint32 &idObject, const Draw &mode)
@@ -177,17 +178,7 @@ void VAbstractArc::setId(const quint32 &id)
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractArc::NameForHistory(const QString &toolName) const -> QString
 {
-    QString name = toolName + QStringLiteral(" %1").arg(GetCenter().name());
-
-    if (VAbstractCurve::id() != NULL_ID)
-    {
-        name += QStringLiteral("_%1").arg(VAbstractCurve::id());
-    }
-
-    if (GetDuplicate() > 0)
-    {
-        name += QStringLiteral("_%1").arg(GetDuplicate());
-    }
+    QString const name = toolName + GetMainNameForHistory();
 
     QString alias;
 
@@ -200,6 +191,24 @@ auto VAbstractArc::NameForHistory(const QString &toolName) const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VAbstractArc::GetMainNameForHistory() const -> QString
+{
+    QString name = QStringLiteral(" %1").arg(GetCenter().name());
+
+    if (VAbstractCurve::id() != NULL_ID)
+    {
+        name += QStringLiteral("_%1").arg(VAbstractCurve::id());
+    }
+
+    if (GetDuplicate() > 0)
+    {
+        name += QStringLiteral("_%1").arg(GetDuplicate());
+    }
+
+    return name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VAbstractArc::IsFlipped() const -> bool
 {
     return d->isFlipped;
@@ -208,26 +217,7 @@ auto VAbstractArc::IsFlipped() const -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractArc::AngleArc() const -> qreal
 {
-    {
-        const qreal angleDiff = qAbs(GetStartAngle() - GetEndAngle());
-        if (VFuzzyComparePossibleNulls(angleDiff, 0) || VFuzzyComparePossibleNulls(angleDiff, 360))
-        {
-            return !d->isAllowEmpty ? 360 : 0;
-        }
-    }
-    QLineF l1(0, 0, 100, 0);
-    l1.setAngle(GetStartAngle());
-    QLineF l2(0, 0, 100, 0);
-    l2.setAngle(GetEndAngle());
-
-    qreal ang = l1.angleTo(l2);
-
-    if (IsFlipped())
-    {
-        ang = 360 - ang;
-    }
-
-    return ang;
+    return AngleArc(GetStartAngle(), GetEndAngle());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -264,6 +254,51 @@ auto VAbstractArc::CutArc(qreal length, const QString &pointName) const -> QPoin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VAbstractArc::Offset(qreal distance, const QString &suffix) const -> VSplinePath
+{
+    VSplinePath splPath = ToSplinePath().Offset(IsFlipped() ? -distance : distance, suffix);
+    splPath.setName(name() + suffix);
+    splPath.SetMainNameForHistory(GetMainNameForHistory() + suffix);
+
+    if (not GetAliasSuffix().isEmpty())
+    {
+        splPath.SetAliasSuffix(GetAliasSuffix() + suffix);
+    }
+
+    splPath.SetColor(GetColor());
+    splPath.SetPenStyle(GetPenStyle());
+    splPath.SetApproximationScale(GetApproximationScale());
+    return splPath;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractArc::Outline(const QVector<qreal> &distances, const QString &suffix) const -> VSplinePath
+{
+    QVector<qreal> tmpDistances = distances;
+    if (IsFlipped())
+    {
+        for (auto &dist : tmpDistances)
+        {
+            dist = -dist;
+        }
+    }
+
+    VSplinePath splPath = ToSplinePath().Outline(tmpDistances, suffix);
+    splPath.setName(name() + suffix);
+    splPath.SetMainNameForHistory(GetMainNameForHistory() + suffix);
+
+    if (not GetAliasSuffix().isEmpty())
+    {
+        splPath.SetAliasSuffix(GetAliasSuffix() + suffix);
+    }
+
+    splPath.SetColor(GetColor());
+    splPath.SetPenStyle(GetPenStyle());
+    splPath.SetApproximationScale(GetApproximationScale());
+    return splPath;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractArc::SetFlipped(bool value)
 {
     d->isFlipped = value;
@@ -285,4 +320,29 @@ auto VAbstractArc::IsAllowEmpty() const -> bool
 void VAbstractArc::SetFormulaLength(const QString &formula)
 {
     d->formulaLength = formula;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractArc::AngleArc(qreal startAngle, qreal endAngle) const -> qreal
+{
+    {
+        const qreal angleDiff = qAbs(startAngle - endAngle);
+        if (VFuzzyComparePossibleNulls(angleDiff, 0) || VFuzzyComparePossibleNulls(angleDiff, 360))
+        {
+            return !d->isAllowEmpty ? 360 : 0;
+        }
+    }
+    QLineF l1(0, 0, 100, 0);
+    l1.setAngle(startAngle);
+    QLineF l2(0, 0, 100, 0);
+    l2.setAngle(endAngle);
+
+    qreal ang = l1.angleTo(l2);
+
+    if (IsFlipped())
+    {
+        ang = 360 - ang;
+    }
+
+    return ang;
 }

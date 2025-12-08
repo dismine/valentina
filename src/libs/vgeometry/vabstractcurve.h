@@ -44,6 +44,7 @@ using DirectionArrow = QPair<QLineF, QLineF>;
 
 class QPainterPath;
 class VAbstractCurveData;
+class VSplinePath;
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
@@ -100,6 +101,7 @@ public:
     static auto CurveIntersectAxis(const QPointF &point, qreal angle, const QVector<QPointF> &curvePoints,
                                    QPointF *intersectionPoint) -> bool;
 
+    virtual auto GetMainNameForHistory() const -> QString = 0;
     virtual auto NameForHistory(const QString &toolName) const -> QString = 0;
     virtual auto DirectionArrows() const -> QVector<DirectionArrow>;
     static auto ShowDirection(const QVector<DirectionArrow> &arrows, qreal width) -> QPainterPath;
@@ -109,6 +111,9 @@ public:
     void SetAliasSuffix(const QString &aliasSuffix) override;
 
     static auto Curvature(const QVector<QPointF> &vertices) -> double;
+
+    virtual auto Offset(qreal distance, const QString &suffix = QString()) const -> VSplinePath = 0;
+    virtual auto Outline(const QVector<qreal> &distances, const QString &suffix = QString()) const -> VSplinePath = 0;
 
 protected:
     virtual void CreateName() = 0;

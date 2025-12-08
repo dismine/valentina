@@ -103,9 +103,12 @@
 #include "../vtools/tools/vtoolseamallowance.h"
 #include "../vtools/tools/vtooluniondetails.h"
 #include "../vwidgets/vabstractmainwindow.h"
+#include "tools/drawTools/toolcurve/vtoolgraduatedcurve.h"
+#include "tools/drawTools/toolcurve/vtoolparallelcurve.h"
 
 #include <chrono>
 #include <functional>
+#include <qstringliteral.h>
 #include <QDebug>
 #include <QFileInfo>
 #include <QFuture>
@@ -3099,6 +3102,118 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseToolParallelCurve(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse)
+{
+    SCASSERT(scene != nullptr)
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
+
+    try
+    {
+        VToolParallelCurveInitData initData;
+        initData.scene = scene;
+        initData.doc = this;
+        initData.data = data;
+        initData.parse = parse;
+        initData.typeCreation = Source::FromFile;
+
+        DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
+        initData.formulaWidth = GetParametrString(domElement, AttrWidth, QChar('0'));
+        const QString fWidth = initData.formulaWidth; // need for saving fixed formula;
+        initData.originCurveId = GetParametrUInt(domElement, AttrCurve, NULL_ID_STR);
+        initData.color = GetParametrString(domElement, AttrColor, ColorBlack);
+        initData.penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
+        initData.approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
+        initData.aliasSuffix = GetParametrEmptyString(domElement, AttrAlias);
+        initData.suffix = GetParametrEmptyString(domElement, AttrSuffix);
+
+        VToolParallelCurve::Create(initData);
+        // Rewrite attribute formula. Need for situation when we have wrong formula.
+        if (fWidth != initData.formulaWidth)
+        {
+            SetAttribute(domElement, AttrWidth, initData.formulaWidth);
+            modified = true;
+            haveLiteChange();
+        }
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating a parallel curve"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating a parallel curve"), domElement);
+        excep.AddMoreInformation("Message:     "_L1 + e.GetMsg() + '\n'_L1 + "Expression:  "_L1 + e.GetExpr());
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseToolGraduatedCurve(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse)
+{
+    SCASSERT(scene != nullptr)
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
+
+    try
+    {
+        VToolGraduatedCurveInitData initData;
+        initData.scene = scene;
+        initData.doc = this;
+        initData.data = data;
+        initData.parse = parse;
+        initData.typeCreation = Source::FromFile;
+
+        DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
+        initData.originCurveId = GetParametrUInt(domElement, AttrCurve, NULL_ID_STR);
+        initData.color = GetParametrString(domElement, AttrColor, ColorBlack);
+        initData.penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
+        initData.approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
+        initData.aliasSuffix = GetParametrEmptyString(domElement, AttrAlias);
+        initData.suffix = GetParametrEmptyString(domElement, AttrSuffix);
+        initData.offsets = VToolGraduatedCurve::ExtractOffsetData(domElement);
+
+        const QDomNodeList nodeList = domElement.childNodes();
+        const qint32 num = nodeList.size();
+        initData.offsets.reserve(num);
+
+        QVector<QString> originalFormulas;
+        originalFormulas.reserve(initData.offsets.size());
+        for (const auto &offsetData : qAsConst(initData.offsets))
+        {
+            originalFormulas.append(offsetData.formula); // need for saving fixed formula;
+        }
+
+        VToolGraduatedCurve::Create(initData);
+        // Rewrite attribute formula. Need for situation when we have wrong formula.
+        for (qint32 i = 0; i < num; ++i)
+        {
+            if (QDomElement element = nodeList.at(i).toElement(); not element.isNull() && element.tagName() == TagOffset)
+            {
+                if (const QString &newFormula = initData.offsets.at(i).formula; originalFormulas.at(i) != newFormula)
+                {
+                    SetAttribute(element, AttrWidth, newFormula);
+                    modified = true;
+                    haveLiteChange();
+                }
+            }
+        }
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating a graduated curve"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating a graduated curve"), domElement);
+        excep.AddMoreInformation("Message:     "_L1 + e.GetMsg() + '\n'_L1 + "Expression:  "_L1 + e.GetExpr());
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPattern::ParseToolCubicBezierPath(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse)
 {
     SCASSERT(scene != nullptr)
@@ -3994,14 +4109,16 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, QDomElement &domEle
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(type.isEmpty() == false, Q_FUNC_INFO, "type of spline is empty");
 
-    static const QStringList splines({VToolSpline::OldToolType,         /*0*/
-                                      VToolSpline::ToolType,            /*1*/
-                                      VToolSplinePath::OldToolType,     /*2*/
-                                      VToolSplinePath::ToolType,        /*3*/
-                                      VNodeSpline::ToolType,            /*4*/
-                                      VNodeSplinePath::ToolType,        /*5*/
-                                      VToolCubicBezier::ToolType,       /*6*/
-                                      VToolCubicBezierPath::ToolType}); /*7*/
+    static const QStringList splines({VToolSpline::OldToolType,        /*0*/
+                                      VToolSpline::ToolType,           /*1*/
+                                      VToolSplinePath::OldToolType,    /*2*/
+                                      VToolSplinePath::ToolType,       /*3*/
+                                      VNodeSpline::ToolType,           /*4*/
+                                      VNodeSplinePath::ToolType,       /*5*/
+                                      VToolCubicBezier::ToolType,      /*6*/
+                                      VToolCubicBezierPath::ToolType,  /*7*/
+                                      VToolParallelCurve::ToolType,    /*8*/
+                                      VToolGraduatedCurve::ToolType}); /*9*/
     switch (splines.indexOf(type))
     {
         case 0: // VToolSpline::OldToolType
@@ -4035,6 +4152,14 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, QDomElement &domEle
         case 7: // VToolCubicBezierPath::ToolType
             qCDebug(vXML, "VToolCubicBezierPath.");
             ParseToolCubicBezierPath(scene, domElement, parse);
+            break;
+        case 8: // VToolParallelCurve::ToolType
+            qCDebug(vXML, "VToolParallelCurve.");
+            ParseToolParallelCurve(scene, domElement, parse);
+            break;
+        case 9: // VToolGraduatedCurve::ToolType
+            qCDebug(vXML, "VToolGraduatedCurve.");
+            ParseToolGraduatedCurve(scene, domElement, parse);
             break;
         default:
             VException const e(tr("Unknown spline type '%1'.").arg(type));
@@ -4667,7 +4792,7 @@ void VPattern::DrawToolsCommonAttributes(const QDomElement &domElement, quint32 
 auto VPattern::ActiveDrawBoundingRect() const -> QRectF
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 62, "Not all tools were used.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64, "Not all tools were used.");
 
     QRectF rec;
 
@@ -4730,6 +4855,8 @@ auto VPattern::ActiveDrawBoundingRect() const -> QRectF
                 case Tool::ArcWithLength:
                 case Tool::EllipticalArc:
                 case Tool::EllipticalArcWithLength:
+                case Tool::ParallelCurve:
+                case Tool::GraduatedCurve:
                     rec = ToolBoundingRect<VAbstractSpline>(rec, tool.getId());
                     break;
                 case Tool::TrueDarts:

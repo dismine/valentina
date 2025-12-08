@@ -31,6 +31,8 @@
 #include <QLineF>
 
 #include "vcubicbezier_p.h"
+#include "vspline.h"
+#include "vsplinepath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VCubicBezier::VCubicBezier()
@@ -139,6 +141,52 @@ auto VCubicBezier::Move(qreal length, qreal angle, const QString &prefix) const 
     curve.SetPenStyle(GetPenStyle());
     curve.SetApproximationScale(GetApproximationScale());
     return curve;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCubicBezier::Offset(qreal distance, const QString &suffix) const -> VSplinePath
+{
+    VSpline spl(GetP1(), GetP2().toQPointF(), GetP3().toQPointF(), GetP4());
+    spl.SetApproximationScale(GetApproximationScale());
+
+    QVector<VSpline> const subSplines = spl.OffsetPath(distance, suffix);
+
+    VSplinePath splPath(subSplines);
+    splPath.setName(name() + suffix);
+    splPath.SetMainNameForHistory(GetMainNameForHistory() + suffix);
+
+    if (not GetAliasSuffix().isEmpty())
+    {
+        splPath.SetAliasSuffix(GetAliasSuffix() + suffix);
+    }
+
+    splPath.SetColor(GetColor());
+    splPath.SetPenStyle(GetPenStyle());
+    splPath.SetApproximationScale(GetApproximationScale());
+    return splPath;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCubicBezier::Outline(const QVector<qreal> &distances, const QString &suffix) const -> VSplinePath
+{
+    VSpline spl(GetP1(), GetP2().toQPointF(), GetP3().toQPointF(), GetP4());
+    spl.SetApproximationScale(GetApproximationScale());
+
+    QVector<VSpline> const subSplines = spl.OutlinePath(distances, suffix);
+
+    VSplinePath splPath(subSplines);
+    splPath.setName(name() + suffix);
+    splPath.SetMainNameForHistory(GetMainNameForHistory() + suffix);
+
+    if (not GetAliasSuffix().isEmpty())
+    {
+        splPath.SetAliasSuffix(GetAliasSuffix() + suffix);
+    }
+
+    splPath.SetColor(GetColor());
+    splPath.SetPenStyle(GetPenStyle());
+    splPath.SetApproximationScale(GetApproximationScale());
+    return splPath;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

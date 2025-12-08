@@ -321,8 +321,7 @@ auto RenderPassmarks(const VPiece &detail, const VContainer *data) -> QPainterPa
             }
             path.addPath(passmaksPath);
 
-            if (!VGObject::IsPointOnLineviaPDP(passmark.baseLine.p1(), mirrorLine.p1(), mirrorLine.p2(),
-                                               accuracyPointOnLine * 2))
+            if (!IsPointOnLineviaPDP(passmark.baseLine.p1(), mirrorLine.p1(), mirrorLine.p2(), accuracyPointOnLine * 2))
             {
                 QPainterPath mirroredPassmaksPath;
                 for (const auto &line : passmark.lines)
