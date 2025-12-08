@@ -41,10 +41,10 @@ struct VRawGraduatedCurveOffset;
 
 struct VGraduatedCurveOffsetFormula
 {
-    QString name;
-    VFormula formula;
-    QSharedPointer<VContainer> formulaData;
-    QString description;
+    QString name{};
+    VFormula formula{};
+    QSharedPointer<VContainer> formulaData{};
+    QString description{};
 };
 
 class DialogGraduatedCurve : public DialogTool

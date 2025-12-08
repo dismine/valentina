@@ -38,9 +38,9 @@ class VContainer;
 
 struct VRawGraduatedCurveOffset
 {
-    QString name;
-    QString formula;
-    QString description;
+    QString name{};
+    QString formula{};
+    QString description{};
 };
 
 struct SourceItem
