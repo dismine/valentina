@@ -938,7 +938,8 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
 
         if constexpr (std::is_same_v<Dialog,DialogArc> || std::is_same_v<Dialog,DialogArcWithLength> ||
                       std::is_same_v<Dialog,DialogEllipticalArc> ||
-                      std::is_same_v<Dialog,DialogEllipticalArcWithLength>)
+                      std::is_same_v<Dialog,DialogEllipticalArcWithLength> ||
+                      std::is_same_v<Dialog,DialogParallelCurve> || std::is_same_v<Dialog,DialogGraduatedCurve>)
         {
             dialogTool->SetPenStyle(settings->GetGlobalPenStyle());
             dialogTool->SetColor(settings->GetGlobalToolColor());
