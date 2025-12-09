@@ -95,7 +95,7 @@ auto VToolParallelCurve::Create(const QPointer<DialogTool> &dialog,
 //---------------------------------------------------------------------------------------------------------------------
 auto VToolParallelCurve::Create(VToolParallelCurveInitData &initData) -> VToolParallelCurve *
 {
-    qreal calcWidth = VAbstractValApplication::VApp()->toPixel(
+    qreal const calcWidth = VAbstractValApplication::VApp()->toPixel(
         CheckFormula(initData.id, initData.formulaWidth, initData.data));
 
     const QSharedPointer<VAbstractCurve> curve = initData.data->GeometricObject<VAbstractCurve>(initData.originCurveId);

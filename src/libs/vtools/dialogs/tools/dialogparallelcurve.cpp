@@ -73,7 +73,7 @@ DialogParallelCurve::DialogParallelCurve(const VContainer *data, VAbstractPatter
     connect(ui->plainTextEditWidth,
             &QPlainTextEdit::textChanged,
             this,
-            [this]() { m_timerWidth->start(formulaTimerTimeout); });
+            [this]() -> void { m_timerWidth->start(formulaTimerTimeout); });
 
     connect(ui->pushButtonGrowLengthWidth, &QPushButton::clicked, this, &DialogParallelCurve::DeployWidthTextEdit);
 
@@ -356,7 +356,7 @@ void DialogParallelCurve::changeEvent(QEvent *event)
 void DialogParallelCurve::ValidateSuffix()
 {
     const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(GetOriginCurveId());
-    VSplinePath splPath = curve->Offset(0, GetSuffix());
+    VSplinePath const splPath = curve->Offset(0, GetSuffix());
 
     if (QRegularExpression const rx(NameRegExp());
         not GetSuffix().isEmpty()
