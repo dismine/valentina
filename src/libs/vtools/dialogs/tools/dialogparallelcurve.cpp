@@ -361,7 +361,7 @@ void DialogParallelCurve::ValidateSuffix()
     if (QRegularExpression const rx(NameRegExp());
         not GetSuffix().isEmpty()
         && (not rx.match(splPath.name()).hasMatch()
-            || (m_originSuffix != GetAliasSuffix() && not data->IsUnique(splPath.name()))))
+            || (m_originSuffix != GetSuffix() && not data->IsUnique(splPath.name()))))
     {
         m_flagSuffix = false;
         ChangeColor(ui->labelSuffix, errorColor);
