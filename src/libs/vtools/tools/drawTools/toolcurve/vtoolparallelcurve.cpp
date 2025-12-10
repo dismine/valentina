@@ -128,7 +128,7 @@ auto VToolParallelCurve::Create(VToolParallelCurveInitData &initData) -> VToolPa
         initData.scene->addItem(path);
         InitSplinePathToolConnections(initData.scene, path);
         VAbstractPattern::AddTool(initData.id, path);
-        initData.doc->IncrementReferens(initData.originCurveId);
+        initData.doc->IncrementReferens(curve->getIdTool());
         return path;
     }
     return nullptr;
@@ -218,7 +218,8 @@ void VToolParallelCurve::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolParallelCurve::RemoveReferens()
 {
-    doc->DecrementReferens(m_originCurveId);
+    const auto curve = VAbstractTool::data.GetGObject(m_originCurveId);
+    doc->DecrementReferens(curve->getIdTool());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
