@@ -434,6 +434,10 @@ inline auto AbstractTest::ItemFromJson(const QJsonObject &pointObject, VSAPoint 
                                    QStringLiteral("0"));
     point.SetManualPasskmarkAngle(manualPassmarkAngle);
 
+    bool customSA = false;
+    AbstractTest::ReadBooleanValue(pointObject, QLatin1String("customSA"), customSA, QStringLiteral("0"));
+    point.SetCustomSA(customSA);
+
     if (manualPassmarkAngle)
     {
         qreal passmarkAngle = 0;

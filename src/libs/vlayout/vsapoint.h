@@ -87,6 +87,9 @@ public:
     constexpr auto IsPassmarkClockwiseOpening() const -> bool;
     constexpr void SetPassmarkClockwiseOpening(bool clockwise);
 
+    constexpr auto IsCustomSA() const -> bool;
+    constexpr void SetCustomSA(bool value);
+
     auto toJson() const -> QJsonObject override;
 
     static constexpr qreal passmarkFactor{0.5};
@@ -104,13 +107,14 @@ private:
     qreal m_passmarkWidth{0};
     qreal m_passmarkAngle{0};
     bool m_passmarkClockwiseOpening{false};
+    bool m_customSA{false};
 };
 
 Q_DECLARE_METATYPE(VSAPoint)                  // NOLINT
 Q_DECLARE_TYPEINFO(VSAPoint, Q_MOVABLE_TYPE); // NOLINT
 
 //---------------------------------------------------------------------------------------------------------------------
-constexpr VSAPoint::VSAPoint() noexcept // NOLINT(hicpp-use-equals-default)
+constexpr VSAPoint::VSAPoint() noexcept // NOLINT(hicpp-use-equals-default, modernize-use-equals-default)
 {
 }
 
@@ -289,6 +293,18 @@ constexpr auto VSAPoint::IsPassmarkClockwiseOpening() const -> bool
 constexpr void VSAPoint::SetPassmarkClockwiseOpening(bool clockwise)
 {
     m_passmarkClockwiseOpening = clockwise;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+constexpr auto VSAPoint::IsCustomSA() const -> bool
+{
+    return m_customSA;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+constexpr void VSAPoint::SetCustomSA(bool value)
+{
+    m_customSA = value;
 }
 
 QT_WARNING_POP

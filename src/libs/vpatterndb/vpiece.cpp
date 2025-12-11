@@ -820,6 +820,7 @@ auto VPiece::SeamAllowancePointsWithRotation(const VContainer *data, vsizetype m
                             j.SetAngleType(PieceNodeAngle::ByLengthCurve);
                             j.SetSABefore(0);
                             j.SetSAAfter(0);
+                            j.SetCustomSA(true);
                         }
 
                         pointsEkv += r;

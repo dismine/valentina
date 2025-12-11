@@ -1276,6 +1276,17 @@ auto VAbstractPiece::EkvPoint(QVector<VRawSAPoint> points, const VSAPoint &p1Lin
         return {}; // Wrong edges
     }
 
+    if (p2Line1.IsCustomSA())
+    {
+        points.append(VRawSAPoint(p2Line1, p2Line1.CurvePoint(), p2Line1.TurnPoint()));
+        return points;
+    }
+
+    if (p1Line1.IsCustomSA() || p1Line2.IsCustomSA())
+    {
+        return points;
+    }
+
     const QLineF bigLine1 = ParallelLine(p1Line1, p2Line1, width);
     const QLineF bigLine2 = ParallelLine(p2Line2, p1Line2, width);
 
@@ -1724,6 +1735,11 @@ auto VSAPoint::toJson() const -> QJsonObject
     {
         pointObject["manualPassmarkAngle"_L1] = m_manualPassmarkAngle;
         pointObject["passmarkAngle"_L1] = m_passmarkAngle;
+    }
+
+    if (m_customSA)
+    {
+        pointObject["customSA"_L1] = m_customSA;
     }
 
     return pointObject;

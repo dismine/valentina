@@ -235,5 +235,7 @@
         <file>notch/boundary.json</file>
         <file>notch/passmarks.json</file>
         <file>notch/points.json</file>
+        <file>base2025/input.json</file>
+        <file>base2025/output.json</file>
     </qresource>
 </RCC>
