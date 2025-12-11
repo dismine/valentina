@@ -51,8 +51,7 @@ void TST_VAbstractPiece::EquidistantRemoveLoop_data()
     QTest::addColumn<qreal>("width");
     QTest::addColumn<QVector<QPointF>>("ekvOrig");
 
-    auto ASSERT_TEST_CASE =
-        [](const char *title, const QString &input, const QString &output, qreal width, bool trueZeroWidth)
+    auto ASSERT_TEST_CASE = [](const char *title, const QString &input, const QString &output, qreal width, bool trueZeroWidth) -> void
     {
         QVector<VSAPoint> const inputPoints = AbstractTest::VectorFromJson<VSAPoint>(input);
         QVector<QPointF> const outputPoints = AbstractTest::VectorFromJson<QPointF>(output);
@@ -351,6 +350,13 @@ void TST_VAbstractPiece::EquidistantRemoveLoop_data()
                      QStringLiteral("://winter_coat/output.json"),
                      37.795275590551185, /*seam allowance width (1.0 cm)*/
                      false);
+
+    // See file valentina_private_collection/bugs/base2025/base2025.val
+    ASSERT_TEST_CASE("Incorrect custom seam allowance",
+                     QStringLiteral("://base2025/input.json"),
+                     QStringLiteral("://base2025/output.json"),
+                     37.795275590551185,/*seam allowance width (1.0 cm)*/
+                     true);                 
 }
 
 //---------------------------------------------------------------------------------------------------------------------

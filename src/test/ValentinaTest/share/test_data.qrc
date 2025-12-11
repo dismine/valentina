@@ -241,5 +241,7 @@
         <file>true_zero_width_notches/passmarkShape.json</file>
         <file>true_zero_width_notches/rotatedSeamAllowance.json</file>
         <file>true_zero_width_notches/seamAllowance.json</file>
+        <file>base2025/input.json</file>
+        <file>base2025/output.json</file>
     </qresource>
 </RCC>
