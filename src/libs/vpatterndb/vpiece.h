@@ -202,8 +202,6 @@ private:
     auto CreatePassmark(const QVector<VPieceNode> &path, vsizetype previousIndex, vsizetype passmarkIndex,
                         vsizetype nextIndex, const VContainer *data) const -> VPassmark;
 
-    static auto IsCSAStart(const QVector<CustomSARecord> &records, quint32 id) -> int;
-
     auto MainPathToJson() const -> QJsonObject;
     auto DBToJson(const VContainer *data) const -> QJsonObject;
 
@@ -214,6 +212,27 @@ private:
     void TestInternalPathsIntersections(const VContainer *data) const;
 
     auto Area(const QVector<QPointF> &shape, const VContainer *data) const -> qreal;
+
+    auto BuildSeamAllowancePoints(const VContainer *data, const QVector<VPieceNode> &unitedPath, qreal width) const
+        -> QVector<VSAPoint>;
+    void ProcessNode(const VContainer *data,
+                     const QVector<VPieceNode> &unitedPath,
+                     const VPieceNode &node,
+                     int nodeIndex,
+                     const QVector<CustomSARecord> &records,
+                     qreal width,
+                     const QLineF &mirrorLine,
+                     QVector<VSAPoint> &pointsEkv,
+                     int &recordIndex,
+                     bool &insertingCSA) const;
+    void ProcessCurveNode(const VContainer *data,
+                          const QVector<VPieceNode> &unitedPath,
+                          const VPieceNode &node,
+                          int nodeIndex,
+                          qreal width,
+                          const QLineF &mirrorLine,
+                          QVector<VSAPoint> &pointsEkv,
+                          bool insertingCSA) const;
 };
 
 Q_DECLARE_TYPEINFO(VPiece, Q_MOVABLE_TYPE); // NOLINT
