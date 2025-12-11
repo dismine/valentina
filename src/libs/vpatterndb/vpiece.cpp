@@ -115,6 +115,110 @@ auto RotatePath(const QVector<VPieceNode> &path, vsizetype index) -> QVector<VPi
 
     return path.mid(index) + path.mid(0, index);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void AddRegularPoint(const VContainer *data,
+                     const VPieceNode &node,
+                     const QLineF &mirrorLine,
+                     QVector<VSAPoint> &pointsEkv)
+{
+    VSAPoint ekvPoint = VPiecePath::PreparePointEkv(node, data);
+
+    if (!mirrorLine.isNull())
+    {
+        if (VFuzzyComparePoints(ekvPoint, mirrorLine.p1()))
+        {
+            ekvPoint.SetSAAfter(0);
+        }
+        else if (VFuzzyComparePoints(ekvPoint, mirrorLine.p2()))
+        {
+            ekvPoint.SetSABefore(0);
+        }
+    }
+
+    pointsEkv.append(ekvPoint);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto IsCSAStart(const QVector<CustomSARecord> &records, quint32 id) -> int
+{
+    for (int i = 0; i < records.size(); ++i)
+    {
+        if (records.at(i).startPoint == id)
+        {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void CheckAndStartCSA(const VContainer *data,
+                      const VPieceNode &node,
+                      const QVector<CustomSARecord> &records,
+                      qreal width,
+                      QVector<VSAPoint> &pointsEkv,
+                      int &recordIndex,
+                      bool &insertingCSA)
+{
+    recordIndex = IsCSAStart(records, node.GetId());
+    if (recordIndex != -1 && records.at(recordIndex).includeType == PiecePathIncludeType::AsCustomSA)
+    {
+        insertingCSA = true;
+
+        const VPiecePath path = data->GetPiecePath(records.at(recordIndex).path);
+        QVector<VSAPoint> customPoints = path.SeamAllowancePoints(data, width, records.at(recordIndex).reverse);
+
+        for (auto &point : customPoints)
+        {
+            point.SetAngleType(PieceNodeAngle::ByLengthCurve);
+            point.SetSABefore(0);
+            point.SetSAAfter(0);
+            point.SetCustomSA(true);
+        }
+
+        pointsEkv += customPoints;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void CheckAndEndCSA(const VContainer *data,
+                    const VPieceNode &node,
+                    const QVector<CustomSARecord> &records,
+                    QVector<VSAPoint> &pointsEkv,
+                    int &recordIndex,
+                    bool &insertingCSA)
+{
+    if (records.at(recordIndex).endPoint == node.GetId())
+    {
+        insertingCSA = false;
+        recordIndex = -1;
+
+        pointsEkv.append(VPiecePath::PreparePointEkv(node, data));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void ProcessPointNode(const VContainer *data,
+                      const VPieceNode &node,
+                      const QVector<CustomSARecord> &records,
+                      qreal width,
+                      const QLineF &mirrorLine,
+                      QVector<VSAPoint> &pointsEkv,
+                      int &recordIndex,
+                      bool &insertingCSA)
+{
+    if (not insertingCSA)
+    {
+        AddRegularPoint(data, node, mirrorLine, pointsEkv);
+        CheckAndStartCSA(data, node, records, width, pointsEkv, recordIndex, insertingCSA);
+    }
+    else
+    {
+        CheckAndEndCSA(data, node, records, pointsEkv, recordIndex, insertingCSA);
+    }
+}
 } // anonymous namespace
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -765,98 +869,10 @@ auto VPiece::SeamAllowancePointsWithRotation(const VContainer *data, vsizetype m
         return {};
     }
 
-    const QVector<CustomSARecord> records = FilterRecords(GetValidRecords());
-    int recordIndex = -1;
-    bool insertingCSA = false;
     const qreal width = ToPixel(GetSAWidth(), *data->GetPatternUnit());
-    const QVector<VPieceNode> unitedPath =
-        makeFirst > 0 ? RotatePath(GetUnitedPath(data), makeFirst) : GetUnitedPath(data);
-
-    const QLineF mirrorLine = SeamMirrorLine(data);
-    const bool showMirrorLine = !mirrorLine.isNull();
-
-    QVector<VSAPoint> pointsEkv;
-    for (int i = 0; i < unitedPath.size(); ++i)
-    {
-        const VPieceNode &node = unitedPath.at(i);
-        if (node.IsExcluded())
-        {
-            continue; // skip excluded node
-        }
-
-        switch (node.GetTypeTool())
-        {
-            case (Tool::NodePoint):
-            {
-                if (not insertingCSA)
-                {
-                    {
-                        VSAPoint ekvPoint = VPiecePath::PreparePointEkv(node, data);
-                        if (showMirrorLine)
-                        {
-                            if (VFuzzyComparePoints(ekvPoint, mirrorLine.p1()))
-                            {
-                                ekvPoint.SetSAAfter(0);
-                            }
-                            else if (VFuzzyComparePoints(ekvPoint, mirrorLine.p2()))
-                            {
-                                ekvPoint.SetSABefore(0);
-                            }
-                        }
-
-                        pointsEkv.append(ekvPoint);
-                    }
-
-                    recordIndex = IsCSAStart(records, node.GetId());
-                    if (recordIndex != -1 && records.at(recordIndex).includeType == PiecePathIncludeType::AsCustomSA)
-                    {
-                        insertingCSA = true;
-
-                        const VPiecePath path = data->GetPiecePath(records.at(recordIndex).path);
-                        QVector<VSAPoint> r = path.SeamAllowancePoints(data, width, records.at(recordIndex).reverse);
-
-                        for (auto &j : r)
-                        {
-                            j.SetAngleType(PieceNodeAngle::ByLengthCurve);
-                            j.SetSABefore(0);
-                            j.SetSAAfter(0);
-                            j.SetCustomSA(true);
-                        }
-
-                        pointsEkv += r;
-                    }
-                }
-                else
-                {
-                    if (records.at(recordIndex).endPoint == node.GetId())
-                    {
-                        insertingCSA = false;
-                        recordIndex = -1;
-
-                        pointsEkv.append(VPiecePath::PreparePointEkv(node, data));
-                    }
-                }
-            }
-            break;
-            case (Tool::NodeArc):
-            case (Tool::NodeElArc):
-            case (Tool::NodeSpline):
-            case (Tool::NodeSplinePath):
-            {
-                if (not insertingCSA)
-                {
-                    const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(node.GetId());
-
-                    pointsEkv += VPiecePath::CurveSeamAllowanceSegment(data, unitedPath, curve, i, node.GetReverse(),
-                                                                       width, mirrorLine, GetName());
-                }
-            }
-            break;
-            default:
-                qDebug() << "Get wrong tool type. Ignore." << static_cast<char>(node.GetTypeTool());
-                break;
-        }
-    }
+    const QVector<VPieceNode> unitedPath = makeFirst > 0 ? RotatePath(GetUnitedPath(data), makeFirst)
+                                                         : GetUnitedPath(data);
+    const QVector<VSAPoint> pointsEkv = BuildSeamAllowancePoints(data, unitedPath, width);
 
     return Equidistant(pointsEkv, width, IsTrueZeroWidth(), GetName());
 }
@@ -1364,20 +1380,6 @@ auto VPiece::CreatePassmark(const QVector<VPieceNode> &path, vsizetype previousI
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPiece::IsCSAStart(const QVector<CustomSARecord> &records, quint32 id) -> int
-{
-    for (int i = 0; i < records.size(); ++i)
-    {
-        if (records.at(i).startPoint == id)
-        {
-            return i;
-        }
-    }
-
-    return -1;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 auto VPiece::Area(const QVector<QPointF> &shape, const VContainer *data) const -> qreal
 {
     SCASSERT(data != nullptr)
@@ -1406,6 +1408,84 @@ auto VPiece::Area(const QVector<QPointF> &shape, const VContainer *data) const -
     }
 
     return mainArea - internalPathArea;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::BuildSeamAllowancePoints(const VContainer *data, const QVector<VPieceNode> &unitedPath, qreal width) const
+    -> QVector<VSAPoint>
+{
+    QVector<VSAPoint> pointsEkv;
+    int recordIndex = -1;
+    bool insertingCSA = false;
+    const QLineF mirrorLine = SeamMirrorLine(data);
+    const QVector<CustomSARecord> records = FilterRecords(GetValidRecords());
+
+    for (int i = 0; i < unitedPath.size(); ++i)
+    {
+        const VPieceNode &node = unitedPath.at(i);
+        if (node.IsExcluded())
+        {
+            continue; // skip excluded node
+        }
+
+        ProcessNode(data, unitedPath, node, i, records, width, mirrorLine, pointsEkv, recordIndex, insertingCSA);
+    }
+
+    return pointsEkv;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiece::ProcessNode(const VContainer *data,
+                         const QVector<VPieceNode> &unitedPath,
+                         const VPieceNode &node,
+                         int nodeIndex,
+                         const QVector<CustomSARecord> &records,
+                         qreal width,
+                         const QLineF &mirrorLine,
+                         QVector<VSAPoint> &pointsEkv,
+                         int &recordIndex,
+                         bool &insertingCSA) const
+{
+    switch (node.GetTypeTool())
+    {
+        case Tool::NodePoint:
+            ProcessPointNode(data, node, records, width, mirrorLine, pointsEkv, recordIndex, insertingCSA);
+            break;
+        case Tool::NodeArc:
+        case Tool::NodeElArc:
+        case Tool::NodeSpline:
+        case Tool::NodeSplinePath:
+            ProcessCurveNode(data, unitedPath, node, nodeIndex, width, mirrorLine, pointsEkv, insertingCSA);
+            break;
+        default:
+            qDebug() << "Get wrong tool type. Ignore." << static_cast<char>(node.GetTypeTool());
+            break;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiece::ProcessCurveNode(const VContainer *data,
+                              const QVector<VPieceNode> &unitedPath,
+                              const VPieceNode &node,
+                              int nodeIndex,
+                              qreal width,
+                              const QLineF &mirrorLine,
+                              QVector<VSAPoint> &pointsEkv,
+                              bool insertingCSA) const
+{
+    if (not insertingCSA)
+    {
+        const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(node.GetId());
+
+        pointsEkv += VPiecePath::CurveSeamAllowanceSegment(data,
+                                                           unitedPath,
+                                                           curve,
+                                                           nodeIndex,
+                                                           node.GetReverse(),
+                                                           width,
+                                                           mirrorLine,
+                                                           GetName());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
