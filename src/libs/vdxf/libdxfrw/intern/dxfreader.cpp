@@ -115,18 +115,18 @@ auto dxfReader::getHandleString() -> int
 
 auto dxfReaderBinary::readCode(int *code) -> bool
 {
-    unsigned short *int16p;
-    char buffer[2];
-    filestr->read(buffer,2);
-    int16p = reinterpret_cast<unsigned short *>(buffer);
+    union {
+        unsigned short val;
+        char buf[2];
+    } buffer;
+    filestr->read(buffer.buf,2);
 //exist a 32bits int (code 90) with 2 bytes???
-    if ((*code == 90) && (*int16p>2000)){
+    if ((*code == 90) && (buffer.val>2000)){
         DRW_DBG(*code); DRW_DBG(" de 16bits\n");
         filestr->seekg(-4, std::ios_base::cur);
-        filestr->read(buffer,2);
-        int16p = reinterpret_cast<unsigned short *>(buffer);
+        filestr->read(buffer.buf,2);
     }
-    *code = *int16p;
+    *code = buffer.val;
     DRW_DBG(*code); DRW_DBG("\n");
 
     return (filestr->good());
@@ -172,11 +172,12 @@ auto dxfReaderBinary::readInt16() -> bool
 auto dxfReaderBinary::readInt32() -> bool
 {
     type = INT32;
-    unsigned *int32p;
-    char buffer[4];
-    filestr->read(buffer,4);
-    int32p = reinterpret_cast<unsigned *>(buffer);
-    intData = static_cast<signed int>(*int32p);
+    union {
+        signed int val;
+        char buf[4];
+    } buffer;
+    filestr->read(buffer.buf,4);
+    intData = buffer.val;
     // cppcheck-suppress danglingLifetime
     DRW_DBG(intData); DRW_DBG("\n");
     return (filestr->good());
@@ -185,11 +186,12 @@ auto dxfReaderBinary::readInt32() -> bool
 auto dxfReaderBinary::readInt64() -> bool
 {
     type = INT64;
-    unsigned long long int *int64p; //64 bits integer pointer
-    char buffer[8];
-    filestr->read(buffer,8);
-    int64p = reinterpret_cast<unsigned long long int *>(buffer);
-    int64 = *int64p;
+    union {
+        unsigned long long int val;
+        char buf[8];
+    } buffer;
+    filestr->read(buffer.buf,8);
+    int64 = buffer.val;
     // cppcheck-suppress danglingLifetime
     DRW_DBG(int64); DRW_DBG(" int64\n");
     return (filestr->good());
@@ -198,12 +200,12 @@ auto dxfReaderBinary::readInt64() -> bool
 auto dxfReaderBinary::readDouble() -> bool
 {
     type = DOUBLE;
-    double *result;
-    char buffer[8];
-    filestr->read(buffer,8);
-    // cppcheck-suppress invalidPointerCast
-    result = reinterpret_cast<double *>(buffer);
-    doubleData = *result;
+    union {
+        double val;
+        char buf[8];
+    } buffer;
+    filestr->read(buffer.buf,8);
+    doubleData = buffer.val;
     // cppcheck-suppress danglingLifetime
     DRW_DBG(doubleData); DRW_DBG("\n");
     return (filestr->good());
