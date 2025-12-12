@@ -153,14 +153,17 @@ void StyleHelper::drawIconWithShadow(const QIcon &icon, const QRect &rect, QPain
 
             for (int y = 0; y < im.height(); ++y)
             {
-                // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
-                auto *scanLine = reinterpret_cast<QRgb *>(im.scanLine(y));
+                // Scanline data is at least 32-bit aligned.
+                // https://doc.qt.io/qt-6/qimage.html#scanLine
+                void *voidPtr = im.scanLine(y);
+                auto *scanLine = static_cast<QRgb *>(voidPtr);
+
                 for (int x = 0; x < im.width(); ++x)
                 {
                     QRgb const pixel = *scanLine;
                     auto const intensity = static_cast<char>(qGray(pixel));
                     *scanLine = qRgba(intensity, intensity, intensity, qAlpha(pixel));
-                    ++scanLine; // NOLINT(cppcoreguidelines-pro-bounds-pointer-arithmetic)
+                    ++scanLine;
                 }
             }
             px = QPixmap::fromImage(im);
