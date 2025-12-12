@@ -113,11 +113,13 @@ auto Grayscale(QImage image) -> QImage
 {
     for (int ii = 0; ii < image.height(); ii++)
     {
-        uchar *scan = image.scanLine(ii);
-        int const depth = 4;
+        // Scanline data is at least 32-bit aligned.
+        // https://doc.qt.io/qt-6/qimage.html#scanLine
+        void *voidPtr = image.scanLine(ii);
+        auto *scan = static_cast<QRgb *>(voidPtr);
         for (int jj = 0; jj < image.width(); jj++)
         {
-            auto *rgbpixel = reinterpret_cast<QRgb *>(scan + jj * depth); // NOLINT
+            auto *rgbpixel = scan + jj;
             int const gray = qGray(*rgbpixel);
             *rgbpixel = QColor(gray, gray, gray, qAlpha(*rgbpixel)).rgba();
         }
