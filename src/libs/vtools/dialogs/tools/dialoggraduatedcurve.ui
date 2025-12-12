@@ -111,7 +111,7 @@
                    <bool>false</bool>
                   </property>
                   <property name="toolTip">
-                   <string>Move measurement up</string>
+                   <string>Move offset up</string>
                   </property>
                   <property name="text">
                    <string notr="true"/>
@@ -128,7 +128,7 @@
                    <bool>false</bool>
                   </property>
                   <property name="toolTip">
-                   <string>Move measurement down</string>
+                   <string>Move offset down</string>
                   </property>
                   <property name="text">
                    <string notr="true"/>
@@ -533,14 +533,14 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>VPE::QtColorPicker</class>
-   <extends>QPushButton</extends>
-   <header>../vpropertyexplorer/qtcolorpicker.h</header>
-  </customwidget>
-  <customwidget>
    <class>VPlainTextEdit</class>
    <extends>QPlainTextEdit</extends>
    <header>../vwidgets/vplaintextedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>VPE::QtColorPicker</class>
+   <extends>QPushButton</extends>
+   <header>../vpropertyexplorer/qtcolorpicker.h</header>
   </customwidget>
  </customwidgets>
  <resources>

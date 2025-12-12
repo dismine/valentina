@@ -74,8 +74,8 @@ void VisToolParallelCurve::RefreshGeometry()
 
         SetToolTip(tr("<b>Parallel curve</b>: width = %1%2; "
                       "<b>Mouse click</b> - finish selecting the width, "
-                      "<b>%4</b> - negative width, "
-                      "<b>%5</b> - skip")
+                      "<b>%3</b> - negative width, "
+                      "<b>%4</b> - skip")
                        .arg(LengthToUser(width), suffix, VModifierKey::Shift(), VModifierKey::EnterKey()));
     }
 }
