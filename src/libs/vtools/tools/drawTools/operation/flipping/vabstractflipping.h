@@ -37,7 +37,8 @@ class VAbstractFlipping : public VAbstractOperation
 {
     Q_OBJECT // NOLINT
 public:
-    virtual ~VAbstractFlipping() = default;
+    ~VAbstractFlipping() override = default;
+
 protected:
     explicit VAbstractFlipping(const VAbstractOperationInitData &initData, QGraphicsItem *parent = nullptr);
 

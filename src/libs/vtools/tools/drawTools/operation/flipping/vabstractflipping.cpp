@@ -53,7 +53,7 @@ void VAbstractFlipping::CreateDestination(VAbstractOperationInitData &initData, 
 
         initData.id = initData.data->getNextId(); // Just reserve id for tool
 
-        for (auto object : qAsConst(initData.source))
+        for (const auto &object : qAsConst(initData.source))
         {
             const QSharedPointer<VGObject> obj = initData.data->GetGObject(object.id);
 

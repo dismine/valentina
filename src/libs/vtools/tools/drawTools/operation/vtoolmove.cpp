@@ -44,9 +44,7 @@
 #include "../../../visualization/line/operation/vistoolmove.h"
 #include "../../../visualization/visualization.h"
 #include "../../vabstracttool.h"
-#include "../../vdatatool.h"
 #include "../ifc/ifcdef.h"
-#include "../vdrawtool.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vcubicbezier.h"
@@ -253,7 +251,7 @@ auto VToolMove::Create(VToolMoveInitData &initData) -> VToolMove *
     {
         for (int i = 0; i < initData.source.size(); ++i)
         {
-            const SourceItem object = initData.source.at(i);
+            const SourceItem &object = initData.source.at(i);
             const QSharedPointer<VGObject> obj = initData.data->GetGObject(object.id);
 
             // This check helps to find missed objects in the switch
@@ -402,7 +400,7 @@ auto VToolMove::GetFormulaLength() const -> VFormula
 //---------------------------------------------------------------------------------------------------------------------
 void VToolMove::SetFormulaLength(const VFormula &value)
 {
-    if (value.error() == false)
+    if (!value.error())
     {
         formulaLength = value.GetFormula(FormulaType::FromUser);
 
@@ -480,8 +478,10 @@ void VToolMove::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependenc
     doc->SetAttribute(domElement, AttrSuffix, dialogTool->GetSuffix());
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetRotationOrigPointId()));
     doc->SetAttribute(domElement, AttrRotationAngle, dialogTool->GetRotationAngle());
-    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
+    doc->SetAttributeOrRemoveIf<QString>(domElement,
+                                         AttrNotes,
+                                         dialogTool->GetNotes(),
+                                         [](const QString &notes) noexcept -> bool { return notes.isEmpty(); });
 
     source = dialogTool->GetSourceObjects();
     SaveSourceDestination(domElement);

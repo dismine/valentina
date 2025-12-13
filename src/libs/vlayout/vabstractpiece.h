@@ -175,7 +175,7 @@ public:
         -> bool;
 
     template<class T>
-    static QVector<T> CorrectPathDistortion(QVector<T> path);
+    static auto CorrectPathDistortion(QVector<T> path) -> QVector<T>;
 
     template <class T>
     static auto CorrectEquidistantPoints(const QVector<T> &points, bool removeFirstAndLast = true) -> QVector<T>;
@@ -278,7 +278,7 @@ inline auto VAbstractPiece::CheckPointOnLine<QPointF>(QVector<QPointF> &points, 
 
 //---------------------------------------------------------------------------------------------------------------------
 template<class T>
-QVector<T> VAbstractPiece::CorrectPathDistortion(QVector<T> path)
+auto VAbstractPiece::CorrectPathDistortion(QVector<T> path) -> QVector<T>
 {
     if (path.size() < 3)
     {
@@ -649,8 +649,9 @@ inline auto VAbstractPiece::IsInsidePolygon(const QVector<T> &path, const QVecto
 
     // Just instersection edges is not enough. The base must be inside of the allowance.
     QPolygonF allowancePolygon(polygon);
-    return std::all_of(path.begin(), path.end(),
-                       [allowancePolygon](const T &point)
+    return std::all_of(path.begin(),
+                       path.end(),
+                       [allowancePolygon](const T &point) -> auto
                        { return allowancePolygon.containsPoint(point, Qt::WindingFill); });
 }
 
@@ -935,8 +936,10 @@ inline auto VAbstractPiece::FullSeamAllowancePath(const QVector<T> &points,
 template <class T>
 inline auto VAbstractPiece::MapVector(QVector<T> points, const QTransform &matrix, bool mirror) -> QVector<T>
 {
-    std::transform(points.begin(), points.end(), points.begin(),
-                   [&matrix](const T &point) { return MapPoint(point, matrix); });
+    std::transform(points.begin(),
+                   points.end(),
+                   points.begin(),
+                   [&matrix](const T &point) -> auto { return MapPoint(point, matrix); });
     if (mirror)
     {
         std::reverse(points.begin(), points.end());

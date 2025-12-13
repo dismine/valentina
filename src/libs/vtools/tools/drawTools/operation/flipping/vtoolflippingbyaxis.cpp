@@ -44,16 +44,12 @@
 #include "../../../../visualization/line/operation/vistoolflippingbyaxis.h"
 #include "../../../../visualization/visualization.h"
 #include "../../../vabstracttool.h"
-#include "../../../vdatatool.h"
-#include "../../vdrawtool.h"
 #include "../vmisc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/vabstractapplication.h"
-#include "../vmisc/vcommonsettings.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vformula.h"
-#include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vabstractsimple.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 
@@ -138,7 +134,7 @@ auto VToolFlippingByAxis::Create(VToolFlippingByAxisInitData initData) -> VToolF
         InitOperationToolConnections(initData.scene, tool);
         VAbstractPattern::AddTool(initData.id, tool);
         initData.doc->IncrementReferens(originPoint.getIdTool());
-        for (auto object : qAsConst(initData.source))
+        for (const auto &object : qAsConst(initData.source))
         {
             initData.doc->IncrementReferens(initData.data->GetGObject(object.id)->getIdTool());
         }
@@ -225,8 +221,10 @@ void VToolFlippingByAxis::SaveDialog(QDomElement &domElement, QList<quint32> &ol
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetOriginPointId()));
     doc->SetAttribute(domElement, AttrAxisType, QString().setNum(static_cast<int>(dialogTool->GetAxisType())));
     doc->SetAttribute(domElement, AttrSuffix, dialogTool->GetSuffix());
-    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
+    doc->SetAttributeOrRemoveIf<QString>(domElement,
+                                         AttrNotes,
+                                         dialogTool->GetNotes(),
+                                         [](const QString &notes) noexcept -> bool { return notes.isEmpty(); });
 
     source = dialogTool->GetSourceObjects();
     SaveSourceDestination(domElement);
@@ -259,8 +257,9 @@ auto VToolFlippingByAxis::MakeToolTip() const -> QString
 {
     return QStringLiteral("<tr> <td><b>%1:</b> %2</td> </tr>"
                           "%3")
-        .arg(tr("Origin point"), OriginPointName()) // 1, 2
-        .arg(VisibilityGroupToolTip());             // 3
+        .arg(tr("Origin point"),        // 1
+             OriginPointName(),         // 2
+             VisibilityGroupToolTip()); // 3
 }
 
 //---------------------------------------------------------------------------------------------------------------------

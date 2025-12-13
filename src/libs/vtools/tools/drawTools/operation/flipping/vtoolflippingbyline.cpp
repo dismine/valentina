@@ -36,7 +36,6 @@
 #include <QSharedPointer>
 #include <QUndoStack>
 #include <climits>
-#include <new>
 #include <qiterator.h>
 
 #include "../../../../dialogs/tools/dialogflippingbyline.h"
@@ -44,16 +43,12 @@
 #include "../../../../visualization/line/operation/vistoolflippingbyline.h"
 #include "../../../../visualization/visualization.h"
 #include "../../../vabstracttool.h"
-#include "../../../vdatatool.h"
-#include "../../vdrawtool.h"
 #include "../vmisc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/vabstractapplication.h"
-#include "../vmisc/vcommonsettings.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vformula.h"
-#include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vabstractsimple.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 
@@ -132,7 +127,7 @@ auto VToolFlippingByLine::Create(VToolFlippingByLineInitData initData) -> VToolF
         VAbstractPattern::AddTool(initData.id, tool);
         initData.doc->IncrementReferens(firstPoint.getIdTool());
         initData.doc->IncrementReferens(secondPoint.getIdTool());
-        for (auto object : qAsConst(initData.source))
+        for (const auto &object : qAsConst(initData.source))
         {
             initData.doc->IncrementReferens(initData.data->GetGObject(object.id)->getIdTool());
         }
@@ -212,8 +207,10 @@ void VToolFlippingByLine::SaveDialog(QDomElement &domElement, QList<quint32> &ol
     doc->SetAttribute(domElement, AttrP1Line, QString().setNum(dialogTool->GetFirstLinePointId()));
     doc->SetAttribute(domElement, AttrP2Line, QString().setNum(dialogTool->GetSecondLinePointId()));
     doc->SetAttribute(domElement, AttrSuffix, dialogTool->GetSuffix());
-    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
+    doc->SetAttributeOrRemoveIf<QString>(domElement,
+                                         AttrNotes,
+                                         dialogTool->GetNotes(),
+                                         [](const QString &notes) noexcept -> bool { return notes.isEmpty(); });
 
     source = dialogTool->GetSourceObjects();
     SaveSourceDestination(domElement);
@@ -247,8 +244,11 @@ auto VToolFlippingByLine::MakeToolTip() const -> QString
     return QStringLiteral("<tr> <td><b>%1:</b> %2</td> </tr>"
                           "<tr> <td><b>%3:</b> %4</td> </tr>"
                           "%5")
-        .arg(tr("First line point"), FirstLinePointName(), tr("Second line point"), SecondLinePointName()) // 1, 2, 3, 4
-        .arg(VisibilityGroupToolTip());                                                                    // 5
+        .arg(tr("First line point"),    // 1
+             FirstLinePointName(),      // 2
+             tr("Second line point"),   // 3
+             SecondLinePointName(),     // 4
+             VisibilityGroupToolTip()); // 5
 }
 
 //---------------------------------------------------------------------------------------------------------------------

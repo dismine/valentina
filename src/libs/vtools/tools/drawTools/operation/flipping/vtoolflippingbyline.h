@@ -35,14 +35,10 @@
 
 struct VToolFlippingByLineInitData : VAbstractOperationInitData
 {
-    VToolFlippingByLineInitData()
-        : VAbstractOperationInitData(),
-          firstLinePointId(NULL_ID),
-          secondLinePointId(NULL_ID)
-    {}
+    VToolFlippingByLineInitData() = default;
 
-    quint32 firstLinePointId;
-    quint32 secondLinePointId;
+    quint32 firstLinePointId{NULL_ID};
+    quint32 secondLinePointId{NULL_ID};
 };
 
 
@@ -50,30 +46,30 @@ class VToolFlippingByLine : public VAbstractFlipping
 {
     Q_OBJECT // NOLINT
 public:
-    virtual ~VToolFlippingByLine() = default;
-    virtual void SetDialog() override;
+    ~VToolFlippingByLine() override = default;
+    void SetDialog() override;
     static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                        VContainer *data) -> VToolFlippingByLine *;
     static auto Create(VToolFlippingByLineInitData initData) -> VToolFlippingByLine *;
 
     static const QString ToolType;
 
-    virtual auto type() const -> int override { return Type; }
+    auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::FlippingByLine)};
 
     auto FirstLinePointName() const -> QString;
     auto SecondLinePointName() const -> QString;
 
-    virtual void ShowVisualization(bool show) override;
+    void ShowVisualization(bool show) override;
 protected slots:
-    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
+    void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) override;
+
 protected:
-    virtual void    SetVisualization() override;
-    virtual void    SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                               QList<quint32> &newDependencies) override;
-    virtual void    ReadToolAttributes(const QDomElement &domElement) override;
-    virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
-    virtual auto MakeToolTip() const -> QString override;
+    void SetVisualization() override;
+    void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies) override;
+    void ReadToolAttributes(const QDomElement &domElement) override;
+    void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    auto MakeToolTip() const -> QString override;
 
 private:
     Q_DISABLE_COPY_MOVE(VToolFlippingByLine) // NOLINT
@@ -81,7 +77,7 @@ private:
     quint32 m_firstLinePointId;
     quint32 m_secondLinePointId;
 
-    VToolFlippingByLine(const VToolFlippingByLineInitData &initData, QGraphicsItem *parent = nullptr);
+    explicit VToolFlippingByLine(const VToolFlippingByLineInitData &initData, QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLFLIPPINGBYLINE_H

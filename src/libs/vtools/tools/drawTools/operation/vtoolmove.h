@@ -37,7 +37,6 @@
 #include <QtGlobal>
 
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vgeometry/vgeometrydef.h"
 #include "../vmisc/def.h"
 #include "vabstractoperation.h"
 
@@ -46,19 +45,12 @@ class VFormula;
 
 struct VToolMoveInitData : VAbstractOperationInitData
 {
-    VToolMoveInitData()
-      : VAbstractOperationInitData(),
-        formulaAngle(),
-        formulaRotationAngle(),
-        formulaLength(),
-        rotationOrigin(NULL_ID)
-    {
-    }
+    VToolMoveInitData() = default;
 
-    QString formulaAngle;
-    QString formulaRotationAngle;
-    QString formulaLength;
-    quint32 rotationOrigin;
+    QString formulaAngle{};
+    QString formulaRotationAngle{};
+    QString formulaLength{};
+    quint32 rotationOrigin{NULL_ID};
 };
 
 class VToolMove : public VAbstractOperation

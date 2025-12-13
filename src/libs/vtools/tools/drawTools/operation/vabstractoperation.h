@@ -40,7 +40,6 @@
 #include "../../toolsdef.h"
 #include "../vdrawtool.h"
 #include "../vwidgets/vsimplecurve.h"
-#include "../vwidgets/vsimplepoint.h"
 
 struct DestinationItem
 {

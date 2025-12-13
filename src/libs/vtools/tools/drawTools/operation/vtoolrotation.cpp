@@ -36,16 +36,13 @@
 #include <QSharedPointer>
 #include <QUndoStack>
 #include <climits>
-#include <new>
 
 #include "../../../dialogs/tools/dialogrotation.h"
 #include "../../../dialogs/tools/dialogtool.h"
 #include "../../../visualization/line/operation/vistoolrotation.h"
 #include "../../../visualization/visualization.h"
 #include "../../vabstracttool.h"
-#include "../../vdatatool.h"
 #include "../ifc/ifcdef.h"
-#include "../vdrawtool.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vcubicbezier.h"
 #include "../vgeometry/vcubicbezierpath.h"
@@ -361,8 +358,10 @@ void VToolRotation::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepen
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetOrigPointId()));
     doc->SetAttribute(domElement, AttrAngle, dialogTool->GetAngle());
     doc->SetAttribute(domElement, AttrSuffix, dialogTool->GetSuffix());
-    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
+    doc->SetAttributeOrRemoveIf<QString>(domElement,
+                                         AttrNotes,
+                                         dialogTool->GetNotes(),
+                                         [](const QString &notes) noexcept -> bool { return notes.isEmpty(); });
 
     source = dialogTool->GetSourceObjects();
     SaveSourceDestination(domElement);
