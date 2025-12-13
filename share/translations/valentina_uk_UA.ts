@@ -3897,12 +3897,12 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="114"/>
         <source>Move offset up</source>
-        <translation type="unfinished"></translation>
+        <translation>Перемістити зміщення вгору</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="131"/>
         <source>Move offset down</source>
-        <translation type="unfinished"></translation>
+        <translation>Перемістити зміщення вниз</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="206"/>
@@ -6657,7 +6657,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="14"/>
         <source>Parallel curve tool</source>
-        <translation type="unfinished">Інструмент Паралельна крива</translation>
+        <translation>Інструмент Паралельна крива</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="28"/>
@@ -28466,20 +28466,12 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
 <context>
     <name>VisToolGraduatedCurve</name>
     <message numerus="yes">
-        <source>&lt;b&gt;Graduated curve&lt;/b&gt;: offset(s) = %1; &lt;b&gt;Mouse click&lt;/b&gt; - selecting next width, &lt;b&gt;%3&lt;/b&gt; - negative width, &lt;b&gt;%4&lt;/b&gt; - finish</source>
-        <translation type="vanished">
-            <numerusform>&lt;b&gt;Градієнтна крива&lt;/b&gt;: зміщення = %1; &lt;b&gt;Клацніть мишкою&lt;/b&gt;, щоб вибрати наступну ширину, &lt;b&gt;%3&lt;/b&gt; — від&apos;ємна ширина, &lt;b&gt;%4&lt;/b&gt; — закінчити створення</numerusform>
-            <numerusform>&lt;b&gt;Градієнтна крива&lt;/b&gt;: зміщення = %1; &lt;b&gt;Клацніть мишкою&lt;/b&gt;, щоб вибрати наступну ширину, &lt;b&gt;%3&lt;/b&gt; — від&apos;ємна ширина, &lt;b&gt;%4&lt;/b&gt; — закінчити створення</numerusform>
-            <numerusform>&lt;b&gt;Градієнтна крива&lt;/b&gt;: зміщення = %1; &lt;b&gt;Клацніть мишкою&lt;/b&gt;, щоб вибрати наступну ширину, &lt;b&gt;%3&lt;/b&gt; — від&apos;ємна ширина, &lt;b&gt;%4&lt;/b&gt; — закінчити створення</numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
         <location filename="../../src/libs/vtools/visualization/path/vistoolgraduatedcurve.cpp" line="100"/>
         <source>&lt;b&gt;Graduated curve&lt;/b&gt;: offset(s) = %1; &lt;b&gt;Mouse click&lt;/b&gt; - selecting next width, &lt;b&gt;%2&lt;/b&gt; - negative width, &lt;b&gt;%3&lt;/b&gt; - finish</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>&lt;b&gt;Градієнтна крива&lt;/b&gt;: зміщення = %1; &lt;b&gt;Клацніть мишкою&lt;/b&gt;, щоб вибрати наступну ширину, &lt;b&gt;%2&lt;/b&gt; — від&apos;ємна ширина, &lt;b&gt;%3&lt;/b&gt; — закінчити створення</numerusform>
+            <numerusform>&lt;b&gt;Градієнтна крива&lt;/b&gt;: зміщення = %1; &lt;b&gt;Клацніть мишкою&lt;/b&gt;, щоб вибрати наступну ширину, &lt;b&gt;%2&lt;/b&gt; — від&apos;ємна ширина, &lt;b&gt;%3&lt;/b&gt; — закінчити створення</numerusform>
+            <numerusform>&lt;b&gt;Градієнтна крива&lt;/b&gt;: зміщення = %1; &lt;b&gt;Клацніть мишкою&lt;/b&gt;, щоб вибрати наступну ширину, &lt;b&gt;%2&lt;/b&gt; — від&apos;ємна ширина, &lt;b&gt;%3&lt;/b&gt; — закінчити створення</numerusform>
         </translation>
     </message>
 </context>
@@ -28523,13 +28515,9 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
 <context>
     <name>VisToolParallelCurve</name>
     <message>
-        <source>&lt;b&gt;Parallel curve&lt;/b&gt;: width = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the width, &lt;b&gt;%4&lt;/b&gt; - negative width, &lt;b&gt;%5&lt;/b&gt; - skip</source>
-        <translation type="vanished">&lt;b&gt;Паралельна крива&lt;/b&gt;: ширина = %1%2; &lt;b&gt;Клацніть мишкою&lt;/b&gt;, щоб завершити вибір ширини, &lt;b&gt;%4&lt;/b&gt; — від&apos;ємна ширина, &lt;b&gt;%5&lt;/b&gt; — пропустити</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolparallelcurve.cpp" line="75"/>
         <source>&lt;b&gt;Parallel curve&lt;/b&gt;: width = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the width, &lt;b&gt;%3&lt;/b&gt; - negative width, &lt;b&gt;%4&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Паралельна крива&lt;/b&gt;: ширина = %1%2; &lt;b&gt;Клацніть мишкою&lt;/b&gt;, щоб завершити вибір ширини, &lt;b&gt;%3&lt;/b&gt; — від&apos;ємна ширина, &lt;b&gt;%4&lt;/b&gt; — пропустити</translation>
     </message>
 </context>
 <context>

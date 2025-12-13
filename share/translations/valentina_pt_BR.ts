@@ -3060,10 +3060,6 @@
         <translation>Valor</translation>
     </message>
     <message>
-        <source>Calulation</source>
-        <translation type="vanished">Fórmula</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="195"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="380"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="559"/>
@@ -3898,14 +3894,6 @@ O significado das classes de caracteres \w, \d, etc., bem como o significado de 
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="103"/>
         <source>Details</source>
         <translation>Moldes</translation>
-    </message>
-    <message>
-        <source>Move measurement up</source>
-        <translation type="vanished">Mover medida para cima</translation>
-    </message>
-    <message>
-        <source>Move measurement down</source>
-        <translation type="vanished">Mover medida para baixo</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="114"/>
@@ -6669,10 +6657,6 @@ Aplicar configurações assim mesmo?</translation>
 </context>
 <context>
     <name>DialogParallelCurve</name>
-    <message>
-        <source>Dialog</source>
-        <translation type="vanished">Caixa de diálogo</translation>
-    </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="14"/>
         <source>Parallel curve tool</source>
@@ -28488,13 +28472,6 @@ Erro de compatibilidade de formato: actualFileVersion = %1 and fileVersion = %2<
 <context>
     <name>VisToolGraduatedCurve</name>
     <message numerus="yes">
-        <source>&lt;b&gt;Graduated curve&lt;/b&gt;: offset(s) = %1; &lt;b&gt;Mouse click&lt;/b&gt; - selecting next width, &lt;b&gt;%3&lt;/b&gt; - negative width, &lt;b&gt;%4&lt;/b&gt; - finish</source>
-        <translation type="vanished">
-            <numerusform>&lt;b&gt;Curva graduada&lt;/b&gt;: deslocamento(s) = %1; &lt;b&gt;Clique do mouse&lt;/b&gt; - selecionando a próxima largura, &lt;b&gt;%3&lt;/b&gt; - largura negativa, &lt;b&gt;%4&lt;/b&gt; - acabamento</numerusform>
-            <numerusform>&lt;b&gt;Curva graduada&lt;/b&gt;: deslocamento(s) = %1; &lt;b&gt;Clique do mouse&lt;/b&gt; - selecionando a próxima largura, &lt;b&gt;%3&lt;/b&gt; - largura negativa, &lt;b&gt;%4&lt;/b&gt; - acabamento</numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
         <location filename="../../src/libs/vtools/visualization/path/vistoolgraduatedcurve.cpp" line="100"/>
         <source>&lt;b&gt;Graduated curve&lt;/b&gt;: offset(s) = %1; &lt;b&gt;Mouse click&lt;/b&gt; - selecting next width, &lt;b&gt;%2&lt;/b&gt; - negative width, &lt;b&gt;%3&lt;/b&gt; - finish</source>
         <translation type="unfinished">
@@ -28542,10 +28519,6 @@ Erro de compatibilidade de formato: actualFileVersion = %1 and fileVersion = %2<
 </context>
 <context>
     <name>VisToolParallelCurve</name>
-    <message>
-        <source>&lt;b&gt;Parallel curve&lt;/b&gt;: width = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the width, &lt;b&gt;%4&lt;/b&gt; - negative width, &lt;b&gt;%5&lt;/b&gt; - skip</source>
-        <translation type="vanished">&lt;b&gt;Curva paralela&lt;/b&gt;: largura = %1%2; &lt;b&gt;Clique do mouse&lt;/b&gt; - termine de selecionar a largura, &lt;b&gt;%4&lt;/b&gt; - largura negativa, &lt;b&gt;%5&lt;/b&gt; - pular</translation>
-    </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolparallelcurve.cpp" line="75"/>
         <source>&lt;b&gt;Parallel curve&lt;/b&gt;: width = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the width, &lt;b&gt;%3&lt;/b&gt; - negative width, &lt;b&gt;%4&lt;/b&gt; - skip</source>
