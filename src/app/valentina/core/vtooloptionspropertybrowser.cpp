@@ -2305,7 +2305,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolSpline(VPE::VProperty *property)
                 i->setSpline(spl);
             }
             break;
-        case 27: // AttrTypeColor
+        case 27: // AttrColor
             SetLineColor<VToolSpline>(property);
             break;
         case 59: // AttrPenStyle
@@ -4831,50 +4831,49 @@ auto VToolOptionsPropertyBrowser::PropertiesList() -> QStringList
         AttrPShoulder,                      /* 22 */
         AttrAxisP1,                         /* 23 */
         AttrAxisP2,                         /* 24 */
-        AttrKCurve,
-        AttrWidth,         /* 25 */
-        AttrLineColor,     /* 26 */
-        AttrColor,         /* 27 */
-        AttrCrossPoint,    /* 28 */
-        AttrC1Radius,      /* 29 */
-        AttrC2Radius,      /* 30 */
-        AttrCRadius,       /* 31 */
-        AttrName1,         /* 32 */
-        AttrName2,         /* 33 */
-        AttrVCrossPoint,   /* 34 */
-        AttrHCrossPoint,   /* 35 */
-        AttrLength1,       /* 36 */
-        AttrLength2,       /* 37 */
-        AttrSuffix,        /* 38 */
-        AttrAxisType,      /* 39 */
-        AttrRadius1,       /* 40 */
-        AttrRadius2,       /* 41 */
-        AttrRotationAngle, /* 42 */
-        AttrDartP1,        /* 43 */
-        AttrDartP2,        /* 44 */
-        AttrDartP3,        /* 45 */
-        AttrCurve,         /* 46 */
-        AttrFirstArc,      /* 47 */
-        AttrSecondArc,     /* 48 */
-        AttrC1Center,      /* 49 */
-        AttrC2Center,      /* 50 */
-        AttrCurve1,        /* 51 */
-        AttrCurve2,        /* 52 */
-        AttrCCenter,       /* 53 */
-        AttrTangent,       /* 54 */
-        AttrPoint1,        /* 55 */
-        AttrPoint2,        /* 56 */
-        AttrPoint3,        /* 57 */
-        AttrPoint4,        /* 58 */
-        AttrPenStyle,      /* 59 */
-        AttrAScale,        /* 60 */
-        AttrNotes,         /* 61 */
-        AttrAlias,         /* 62 */
-        AttrAlias1,        /* 63 */
-        AttrAlias2,        /* 64 */
-        *AttrHold,         /* 65 */
-        *AttrVisible,      /* 66 */
-        *AttrOpacity       /* 67 */
+        AttrWidth,                          /* 25 */
+        AttrLineColor,                      /* 26 */
+        AttrColor,                          /* 27 */
+        AttrCrossPoint,                     /* 28 */
+        AttrC1Radius,                       /* 29 */
+        AttrC2Radius,                       /* 30 */
+        AttrCRadius,                        /* 31 */
+        AttrName1,                          /* 32 */
+        AttrName2,                          /* 33 */
+        AttrVCrossPoint,                    /* 34 */
+        AttrHCrossPoint,                    /* 35 */
+        AttrLength1,                        /* 36 */
+        AttrLength2,                        /* 37 */
+        AttrSuffix,                         /* 38 */
+        AttrAxisType,                       /* 39 */
+        AttrRadius1,                        /* 40 */
+        AttrRadius2,                        /* 41 */
+        AttrRotationAngle,                  /* 42 */
+        AttrDartP1,                         /* 43 */
+        AttrDartP2,                         /* 44 */
+        AttrDartP3,                         /* 45 */
+        AttrCurve,                          /* 46 */
+        AttrFirstArc,                       /* 47 */
+        AttrSecondArc,                      /* 48 */
+        AttrC1Center,                       /* 49 */
+        AttrC2Center,                       /* 50 */
+        AttrCurve1,                         /* 51 */
+        AttrCurve2,                         /* 52 */
+        AttrCCenter,                        /* 53 */
+        AttrTangent,                        /* 54 */
+        AttrPoint1,                         /* 55 */
+        AttrPoint2,                         /* 56 */
+        AttrPoint3,                         /* 57 */
+        AttrPoint4,                         /* 58 */
+        AttrPenStyle,                       /* 59 */
+        AttrAScale,                         /* 60 */
+        AttrNotes,                          /* 61 */
+        AttrAlias,                          /* 62 */
+        AttrAlias1,                         /* 63 */
+        AttrAlias2,                         /* 64 */
+        *AttrHold,                          /* 65 */
+        *AttrVisible,                       /* 66 */
+        *AttrOpacity                        /* 67 */
     };
     return attr;
 }
