@@ -32,14 +32,14 @@ jobs:
       matrix:
         qt:
           # LTS release
-          - install: 6.10.0
+          - install: 6.10.1
             label: Qt6_10
             run_tests: 'true'
             with_icu: 'True'
             with_iconv: 'False'
             withBigCodecs: 'False'
             deploy: 'true'
-          - install: 6.10.0
+          - install: 6.10.1
             label: Qt6_10
             run_tests: 'true'
             with_icu: 'False'
