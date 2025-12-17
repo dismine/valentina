@@ -12,6 +12,7 @@
 - Puzzle app. Show number of sheet in brackets to separate them from sheet name.
 - New tool Parallel curve.
 - New tool Graduated curve.
+- Fix calculation of seam allowance for symmetrical piece.
 
 # Valentina 1.0.1 (unreleased)
 - Tool Normal. Fixed formula values were not saved.
