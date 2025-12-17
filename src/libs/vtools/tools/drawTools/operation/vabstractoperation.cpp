@@ -33,11 +33,8 @@
 #include "../../../undocommands/savetooloptions.h"
 #include "../../../undocommands/undogroup.h"
 #include "../vgeometry/vpointf.h"
-#include "../vwidgets/vsimplepoint.h"
-
-#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
-#endif
+#include "../vwidgets/vsimplepoint.h"
 
 using namespace Qt::Literals::StringLiterals;
 
@@ -212,15 +209,15 @@ auto VAbstractOperation::ExtractSourceData(const QDomElement &domElement) -> QVe
 {
     QVector<SourceItem> source;
     const QDomNodeList nodeList = domElement.childNodes();
-    for (const auto &i : nodeList)
+    QDOM_LOOP(nodeList, i)
     {
-        if (const QDomElement dataElement = i.toElement();
+        if (const QDomElement dataElement = QDOM_ELEMENT(nodeList, i).toElement();
             not dataElement.isNull() && dataElement.tagName() == TagSource)
         {
             const QDomNodeList srcList = dataElement.childNodes();
-            for (const auto &j : srcList)
+            QDOM_LOOP(srcList, j)
             {
-                if (const QDomElement element = j.toElement(); not element.isNull())
+                if (const QDomElement element = QDOM_ELEMENT(srcList, j).toElement(); not element.isNull())
                 {
                     SourceItem item;
                     item.id = VDomDocument::GetParametrUInt(element, AttrIdObject, NULL_ID_STR);
@@ -242,15 +239,15 @@ auto VAbstractOperation::ExtractDestinationData(const QDomElement &domElement) -
 {
     QVector<DestinationItem> destination;
     const QDomNodeList nodeList = domElement.childNodes();
-    for (const auto &i : nodeList)
+    QDOM_LOOP(nodeList, i)
     {
-        if (const QDomElement dataElement = i.toElement();
+        if (const QDomElement dataElement = QDOM_ELEMENT(nodeList, i).toElement();
             not dataElement.isNull() && dataElement.tagName() == TagDestination)
         {
             const QDomNodeList srcList = dataElement.childNodes();
-            for (const auto &j : srcList)
+            QDOM_LOOP(srcList, j)
             {
-                if (const QDomElement element = j.toElement(); not element.isNull())
+                if (const QDomElement element = QDOM_ELEMENT(srcList, j).toElement(); not element.isNull())
                 {
                     DestinationItem d;
                     d.id = VDomDocument::GetParametrUInt(element, AttrIdObject, NULL_ID_STR);

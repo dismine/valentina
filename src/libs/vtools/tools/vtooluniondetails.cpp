@@ -47,12 +47,12 @@
 #include "../vgeometry/vabstractcubicbezierpath.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vellipticalarc.h"
-#include "../vgeometry/vgeometrydef.h"
 #include "../vgeometry/vplacelabelitem.h"
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
 #include "../vgeometry/vsplinepath.h"
 #include "../vgeometry/vsplinepoint.h"
+#include "../vmisc/compatibility.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vpiecenode.h"
@@ -105,14 +105,14 @@ auto GetPiecePath(int piece, VAbstractPattern *doc, quint32 id) -> VPiecePath
     const QDomNodeList nodesList = tool.childNodes();
     for (qint32 i = 0; i < nodesList.size(); ++i)
     {
-        const QDomElement element = nodesList.at(i).toElement();
-        if (not element.isNull() && element.tagName() == VToolUnionDetails::TagDetail && i + 1 == piece)
+        if (const QDomElement element = nodesList.at(i).toElement();
+            not element.isNull() && element.tagName() == VToolUnionDetails::TagDetail && i + 1 == piece)
         {
             const QDomNodeList detList = element.childNodes();
-            for (qint32 j = 0; j < detList.size(); ++j)
+            QDOM_LOOP(detList, j)
             {
-                const QDomElement element = detList.at(j).toElement();
-                if (not element.isNull() && element.tagName() == VAbstractPattern::TagNodes)
+                if (const QDomElement element = QDOM_ELEMENT(detList, j).toElement();
+                    not element.isNull() && element.tagName() == VAbstractPattern::TagNodes)
                 {
                     return VAbstractPattern::ParsePieceNodes(element);
                 }
@@ -147,14 +147,14 @@ auto GetPiece2CSAPaths(VAbstractPattern *doc, quint32 id) -> QVector<CustomSARec
     const QDomNodeList nodesList = tool.childNodes();
     for (qint32 i = 0; i < nodesList.size(); ++i)
     {
-        const QDomElement element = nodesList.at(i).toElement();
-        if (not element.isNull() && element.tagName() == VToolUnionDetails::TagDetail && i + 1 == 2)
+        if (const QDomElement element = nodesList.at(i).toElement();
+            not element.isNull() && element.tagName() == VToolUnionDetails::TagDetail && i + 1 == 2)
         {
             const QDomNodeList detList = element.childNodes();
-            for (qint32 j = 0; j < detList.size(); ++j)
+            QDOM_LOOP(detList, j)
             {
-                const QDomElement element = detList.at(j).toElement();
-                if (not element.isNull() && element.tagName() == VToolSeamAllowance::TagCSA)
+                if (const QDomElement element = QDOM_ELEMENT(detList, j).toElement();
+                    not element.isNull() && element.tagName() == VToolSeamAllowance::TagCSA)
                 {
                     return VAbstractPattern::ParsePieceCSARecords(element);
                 }
@@ -177,14 +177,14 @@ auto GetPiece2InternalPaths(VAbstractPattern *doc, quint32 id) -> QVector<quint3
     const QDomNodeList nodesList = tool.childNodes();
     for (qint32 i = 0; i < nodesList.size(); ++i)
     {
-        const QDomElement element = nodesList.at(i).toElement();
-        if (not element.isNull() && element.tagName() == VToolUnionDetails::TagDetail && i + 1 == 2)
+        if (const QDomElement element = nodesList.at(i).toElement();
+            not element.isNull() && element.tagName() == VToolUnionDetails::TagDetail && i + 1 == 2)
         {
             const QDomNodeList detList = element.childNodes();
-            for (qint32 j = 0; j < detList.size(); ++j)
+            QDOM_LOOP(detList, j)
             {
-                const QDomElement element = detList.at(j).toElement();
-                if (not element.isNull() && element.tagName() == VToolSeamAllowance::TagIPaths)
+                if (const QDomElement element = QDOM_ELEMENT(detList, j).toElement();
+                    not element.isNull() && element.tagName() == VToolSeamAllowance::TagIPaths)
                 {
                     return VAbstractPattern::ParsePieceInternalPaths(element);
                 }
@@ -207,14 +207,14 @@ auto GetPiece2Pins(VAbstractPattern *doc, quint32 id) -> QVector<quint32>
     const QDomNodeList nodesList = tool.childNodes();
     for (qint32 i = 0; i < nodesList.size(); ++i)
     {
-        const QDomElement element = nodesList.at(i).toElement();
-        if (not element.isNull() && element.tagName() == VToolUnionDetails::TagDetail && i + 1 == 2)
+        if (const QDomElement element = nodesList.at(i).toElement();
+            not element.isNull() && element.tagName() == VToolUnionDetails::TagDetail && i + 1 == 2)
         {
             const QDomNodeList detList = element.childNodes();
-            for (qint32 j = 0; j < detList.size(); ++j)
+            QDOM_LOOP(detList, j)
             {
-                const QDomElement element = detList.at(j).toElement();
-                if (not element.isNull() && element.tagName() == VToolSeamAllowance::TagPins)
+                if (const QDomElement element = QDOM_ELEMENT(detList, j).toElement();
+                    not element.isNull() && element.tagName() == VToolSeamAllowance::TagPins)
                 {
                     return VAbstractPattern::ParsePiecePointRecords(element);
                 }
@@ -237,14 +237,14 @@ auto GetPiece2PlaceLabels(VAbstractPattern *doc, quint32 id) -> QVector<quint32>
     const QDomNodeList nodesList = tool.childNodes();
     for (qint32 i = 0; i < nodesList.size(); ++i)
     {
-        const QDomElement element = nodesList.at(i).toElement();
-        if (not element.isNull() && element.tagName() == VToolUnionDetails::TagDetail && i + 1 == 2)
+        if (const QDomElement element = nodesList.at(i).toElement();
+            not element.isNull() && element.tagName() == VToolUnionDetails::TagDetail && i + 1 == 2)
         {
             const QDomNodeList detList = element.childNodes();
-            for (qint32 j = 0; j < detList.size(); ++j)
+            QDOM_LOOP(detList, j)
             {
-                const QDomElement element = detList.at(j).toElement();
-                if (not element.isNull() && element.tagName() == VToolSeamAllowance::TagPlaceLabels)
+                if (const QDomElement element = QDOM_ELEMENT(detList, j).toElement();
+                    not element.isNull() && element.tagName() == VToolSeamAllowance::TagPlaceLabels)
                 {
                     return VAbstractPattern::ParsePiecePointRecords(element);
                 }
@@ -1866,19 +1866,19 @@ auto VToolUnionDetails::GetReferenceObjects() const -> QVector<quint32>
                                      << VToolSeamAllowance::TagPins         /*3*/
                                      << VToolSeamAllowance::TagPlaceLabels; /*4*/
 
-    const QDomNodeList nodesList = tool.childNodes();
-    for (qint32 i = 0; i < nodesList.size(); ++i)
+    const QDomNodeList nodeList = tool.childNodes();
+    QDOM_LOOP(nodeList, i)
     {
-        const QDomElement element = nodesList.at(i).toElement();
+        const QDomElement element = QDOM_ELEMENT(nodeList, i).toElement();
         if (element.isNull() || element.tagName() != VToolUnionDetails::TagDetail)
         {
             continue;
         }
 
         const QDomNodeList detList = element.childNodes();
-        for (qint32 j = 0; j < detList.size(); ++j)
+        QDOM_LOOP(detList, j)
         {
-            const QDomElement element = detList.at(j).toElement();
+            const QDomElement element = QDOM_ELEMENT(detList, j).toElement();
             if (element.isNull())
             {
                 continue;
@@ -1897,10 +1897,10 @@ auto VToolUnionDetails::GetReferenceObjects() const -> QVector<quint32>
                 case 4: // VToolSeamAllowance::TagPlaceLabels
                 {
                     const QDomNodeList children = element.childNodes();
-                    for (qint32 index = 0; index < children.size(); ++index)
+                    QDOM_LOOP(children, index)
                     {
-                        const QDomElement record = children.at(index).toElement();
-                        if (not record.isNull() && record.tagName() == VToolSeamAllowance::TagRecord)
+                        if (const QDomElement record = QDOM_ELEMENT(children, index).toElement();
+                            not record.isNull() && record.tagName() == VToolSeamAllowance::TagRecord)
                         {
                             list.append(record.text().toUInt());
                         }
@@ -1923,13 +1923,12 @@ auto VToolUnionDetails::ReferenceObjects(const QDomElement &root, const QString 
     QVector<quint32> objects;
     objects.reserve(list.size());
 
-    for (qint32 i = 0; i < list.size(); ++i)
+    QDOM_LOOP(list, i)
     {
-        const QDomElement element = list.at(i).toElement();
-        if (not element.isNull() && element.tagName() == tag)
+        if (const QDomElement element = QDOM_ELEMENT(list, i).toElement();
+            not element.isNull() && element.tagName() == tag)
         {
-            const quint32 id = VAbstractPattern::GetParametrUInt(element, attribute, NULL_ID_STR);
-            if (id > NULL_ID)
+            if (const quint32 id = VAbstractPattern::GetParametrUInt(element, attribute, NULL_ID_STR); id > NULL_ID)
             {
                 objects.append(id);
             }

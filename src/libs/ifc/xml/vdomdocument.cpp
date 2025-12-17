@@ -36,6 +36,7 @@
 #include "../exception/vexceptionemptyparameter.h"
 #include "../exception/vexceptionwrongid.h"
 #include "../ifcdef.h"
+#include "../vmisc/compatibility.h"
 #include "../vmisc/exception/vexception.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -68,10 +69,6 @@
 #ifdef Q_OS_UNIX
 #include <fcntl.h>
 #include <unistd.h>
-#endif
-
-#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
-#include "../vmisc/compatibility.h"
 #endif
 
 using namespace Qt::Literals::StringLiterals;
@@ -139,9 +136,9 @@ auto GetChildElements(const QDomNode &e) -> QList<QDomNode>
     QDomNodeList const children = e.childNodes();
     QList<QDomNode> r;
     r.reserve(children.size());
-    for (int k = 0; k < children.size(); ++k)
+    QDOM_LOOP(children, k)
     {
-        r << children.at(k);
+        r << QDOM_ELEMENT(children, k);
     }
     return r;
 }

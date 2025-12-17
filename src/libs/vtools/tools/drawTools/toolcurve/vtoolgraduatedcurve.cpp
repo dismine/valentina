@@ -31,13 +31,11 @@
 #include "../../../visualization/path/vistoolgraduatedcurve.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vsplinepath.h"
+#include "../vmisc/compatibility.h"
 #include "../vpatterndb/variables/vincrement.h"
 #include "ifcdef.h"
-#include <utility>
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
-#include "../vmisc/compatibility.h"
-#endif
+#include <utility>
 
 using namespace Qt::Literals::StringLiterals;
 
@@ -259,12 +257,11 @@ auto VToolGraduatedCurve::ExtractOffsetData(const QDomElement &domElement) -> QV
 {
     QVector<VRawGraduatedCurveOffset> offsets;
     const QDomNodeList nodeList = domElement.childNodes();
-    const qint32 num = nodeList.size();
-    offsets.reserve(num);
+    offsets.reserve(nodeList.size());
 
-    for (qint32 i = 0; i < num; ++i)
+    QDOM_LOOP(nodeList, i)
     {
-        if (const QDomElement element = nodeList.at(i).toElement();
+        if (const QDomElement element = QDOM_ELEMENT(nodeList, i).toElement();
             not element.isNull() && element.tagName() == VAbstractPattern::TagOffset)
         {
             VRawGraduatedCurveOffset offsetData;

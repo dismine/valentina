@@ -44,10 +44,7 @@
 #include "../qmuparser/qmutokenparser.h"
 #include "../vmisc/def.h"
 #include "../vmisc/exception/vexception.h"
-
-#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
-#endif
 
 using namespace Qt::Literals::StringLiterals;
 
@@ -1694,9 +1691,9 @@ void VPatternConverter::TagDetailToV0_4_0()
             QDomElement tagNodes = createElement(*strNodes);
 
             const QDomNodeList childList = dom.childNodes();
-            for (qint32 i = 0; i < childList.size(); ++i)
+            QDOM_LOOP(childList, i)
             {
-                if (const QDomElement element = childList.at(i).toElement(); not element.isNull())
+                if (const QDomElement element = QDOM_ELEMENT(childList, i).toElement(); not element.isNull())
                 {
                     switch (tags.indexOf(element.tagName()))
                     {
@@ -1760,9 +1757,9 @@ auto VPatternConverter::GetUnionDetailNodesV0_4_0(const QDomElement &detail) -> 
     if (not detail.isNull())
     {
         const QDomNodeList childList = detail.childNodes();
-        for (qint32 i = 0; i < childList.size(); ++i)
+        QDOM_LOOP(childList, i)
         {
-            if (const QDomElement node = childList.at(i).toElement(); not node.isNull())
+            if (const QDomElement node = QDOM_ELEMENT(childList, i).toElement(); not node.isNull())
             {
                 QDomElement tagNode = createElement(*strNode);
 
@@ -1791,9 +1788,9 @@ auto VPatternConverter::GetUnionChildrenNodesV0_4_0(const QDomElement &detail) -
     if (not detail.isNull())
     {
         const QDomNodeList childList = detail.childNodes();
-        for (qint32 i = 0; i < childList.size(); ++i)
+        QDOM_LOOP(childList, i)
         {
-            if (const QDomElement node = childList.at(i).toElement(); not node.isNull())
+            if (const QDomElement node = QDOM_ELEMENT(childList, i).toElement(); not node.isNull())
             {
                 QDomElement const tagNode = node.cloneNode().toElement();
                 tagNodes.appendChild(tagNode);
@@ -1958,9 +1955,9 @@ void VPatternConverter::PortPieceLabelstoV0_6_0()
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 6, 0), "Time to refactor the code.");
 
     const QDomNodeList nodeList = elementsByTagName(*strData);
-    for (int i = 0; i < nodeList.size(); ++i)
+    QDOM_LOOP(nodeList, i)
     {
-        QDomElement dataTag = nodeList.at(i).toElement();
+        QDomElement dataTag = QDOM_ELEMENT(nodeList, i).toElement();
         QDomNodeList const nodeListMCP = dataTag.childNodes();
         const int count = nodeListMCP.count();
         try
@@ -2289,11 +2286,11 @@ void VPatternConverter::TagUnionDetailsToV0_4_0()
     QVector<QDomElement> nodes;
 
     const QDomNodeList list = elementsByTagName(*strTools);
-    for (int i = 0; i < list.size(); ++i)
+    QDOM_LOOP(list, i)
     {
         // Tag 'tools' used only for union details, so no need to check any additional attributes
-        QDomElement toolDOM = list.at(i).toElement();
-        if (not toolDOM.isNull())
+
+        if (QDomElement toolDOM = QDOM_ELEMENT(list, i).toElement(); not toolDOM.isNull())
         {
             const auto tags = QStringList() << *strDet << *strChildren;
 
@@ -2302,9 +2299,9 @@ void VPatternConverter::TagUnionDetailsToV0_4_0()
 
             const QDomNodeList childList = toolDOM.childNodes();
             nodes.reserve(childList.size());
-            for (qint32 i = 0; i < childList.size(); ++i)
+            QDOM_LOOP(childList, j)
             {
-                if (const QDomElement element = childList.at(i).toElement(); not element.isNull())
+                if (const QDomElement element = QDOM_ELEMENT(childList, j).toElement(); not element.isNull())
                 {
                     switch (tags.indexOf(element.tagName()))
                     {
@@ -2322,7 +2319,7 @@ void VPatternConverter::TagUnionDetailsToV0_4_0()
 
             RemoveAllChildren(toolDOM);
 
-            for (auto &node : nodes)
+            for (const auto &node : nodes)
             {
                 QDomElement tagDet = createElement(*strDet);
                 tagDet.appendChild(node);

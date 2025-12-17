@@ -709,9 +709,9 @@ auto VAbstractPattern::ParsePieceNodes(const QDomElement &domElement) -> VPieceP
 {
     VPiecePath path;
     const QDomNodeList nodeList = domElement.childNodes();
-    for (qint32 i = 0; i < nodeList.size(); ++i)
+    QDOM_LOOP(nodeList, i)
     {
-        if (const QDomElement element = nodeList.at(i).toElement(); not element.isNull())
+        if (const QDomElement element = QDOM_ELEMENT(nodeList, i).toElement(); not element.isNull())
         {
             path.Append(ParseSANode(element));
         }
@@ -725,9 +725,9 @@ auto VAbstractPattern::ParsePieceCSARecords(const QDomElement &domElement) -> QV
     const QDomNodeList nodeList = domElement.childNodes();
     QVector<CustomSARecord> records;
     records.reserve(nodeList.size());
-    for (qint32 i = 0; i < nodeList.size(); ++i)
+    QDOM_LOOP(nodeList, i)
     {
-        if (const QDomElement element = nodeList.at(i).toElement(); not element.isNull())
+        if (const QDomElement element = QDOM_ELEMENT(nodeList, i).toElement(); not element.isNull())
         {
             CustomSARecord record;
             record.startPoint = GetParametrUInt(element, VAbstractPattern::AttrStart, NULL_ID_STR);
@@ -748,12 +748,11 @@ auto VAbstractPattern::ParsePieceInternalPaths(const QDomElement &domElement) ->
     const QDomNodeList nodeList = domElement.childNodes();
     QVector<quint32> records;
     records.reserve(nodeList.size());
-    for (qint32 i = 0; i < nodeList.size(); ++i)
+    QDOM_LOOP(nodeList, i)
     {
-        if (const QDomElement element = nodeList.at(i).toElement(); not element.isNull())
+        if (const QDomElement element = QDOM_ELEMENT(nodeList, i).toElement(); not element.isNull())
         {
-            const quint32 path = GetParametrUInt(element, VAbstractPattern::AttrPath, NULL_ID_STR);
-            if (path > NULL_ID)
+            if (const quint32 path = GetParametrUInt(element, VAbstractPattern::AttrPath, NULL_ID_STR); path > NULL_ID)
             {
                 records.append(path);
             }
@@ -768,12 +767,11 @@ auto VAbstractPattern::ParsePiecePointRecords(const QDomElement &domElement) -> 
     const QDomNodeList nodeList = domElement.childNodes();
     QVector<quint32> records;
     records.reserve(nodeList.size());
-    for (qint32 i = 0; i < nodeList.size(); ++i)
+    QDOM_LOOP(nodeList, i)
     {
-        if (const QDomElement element = nodeList.at(i).toElement(); not element.isNull())
+        if (const QDomElement element = QDOM_ELEMENT(nodeList, i).toElement(); not element.isNull())
         {
-            const quint32 path = element.text().toUInt();
-            if (path > NULL_ID)
+            if (const quint32 path = element.text().toUInt(); path > NULL_ID)
             {
                 records.append(path);
             }
@@ -1187,7 +1185,7 @@ auto VAbstractPattern::GetPatternLabelTemplate() const -> QVector<VLabelTemplate
         const QDomNodeList list = elementsByTagName(TagPatternLabel);
         if (list.isEmpty() || list.at(0).childNodes().isEmpty())
         {
-            return QVector<VLabelTemplateLine>();
+            return {};
         }
 
         patternLabelLines = GetLabelTemplate(list.at(0).toElement());
@@ -1254,7 +1252,7 @@ auto VAbstractPattern::GetPatternMaterials() const -> QMap<int, QString>
         const QDomNodeList list = elementsByTagName(TagPatternMaterials);
         if (list.isEmpty() || list.at(0).childNodes().isEmpty())
         {
-            return QMap<int, QString>();
+            return {};
         }
 
         patternMaterials = GetMaterials(list.at(0).toElement());
@@ -1269,7 +1267,7 @@ auto VAbstractPattern::GetFinalMeasurements() const -> QVector<VFinalMeasurement
     const QDomNodeList list = elementsByTagName(TagFinalMeasurements);
     if (list.isEmpty() || list.at(0).childNodes().isEmpty())
     {
-        return QVector<VFinalMeasurement>();
+        return {};
     }
 
     return GetFMeasurements(list.at(0).toElement());
@@ -1467,15 +1465,13 @@ void VAbstractPattern::DeleteBackgroundImage(const QUuid &id)
         {
             if (const QDomElement imageElement = imageNode.toElement(); not imageElement.isNull())
             {
-                auto const imageId = QUuid(GetParametrEmptyString(imageElement, AttrImageId));
-                if (imageId == id)
+                if (auto const imageId = QUuid(GetParametrEmptyString(imageElement, AttrImageId)); imageId == id)
                 {
                     imagesTag.removeChild(imageElement);
 
                     if (imagesTag.childNodes().isEmpty())
                     {
-                        QDomNode parent = imagesTag.parentNode();
-                        if (not parent.isNull())
+                        if (QDomNode parent = imagesTag.parentNode(); not parent.isNull())
                         {
                             parent.removeChild(imagesTag);
                         }
@@ -1558,10 +1554,10 @@ auto VAbstractPattern::ParsePathNodes(const QDomElement &domElement) -> VPiecePa
 {
     VPiecePath path;
     const QDomNodeList nodeList = domElement.childNodes();
-    for (qint32 i = 0; i < nodeList.size(); ++i)
+    QDOM_LOOP(nodeList, i)
     {
-        const QDomElement element = nodeList.at(i).toElement();
-        if (not element.isNull() && element.tagName() == VAbstractPattern::TagNode)
+        if (const QDomElement element = QDOM_ELEMENT(nodeList, i).toElement();
+            not element.isNull() && element.tagName() == VAbstractPattern::TagNode)
         {
             path.Append(ParseSANode(element));
         }
@@ -1925,10 +1921,10 @@ auto VAbstractPattern::ListNodesExpressions(const QDomElement &nodes) const -> Q
     QVector<VFormulaField> expressions;
 
     const QDomNodeList nodeList = nodes.childNodes();
-    for (qint32 i = 0; i < nodeList.size(); ++i)
+    QDOM_LOOP(nodeList, i)
     {
-        const QDomElement element = nodeList.at(i).toElement();
-        if (not element.isNull() && element.tagName() == VAbstractPattern::TagNode)
+        if (const QDomElement element = QDOM_ELEMENT(nodeList, i).toElement();
+            !element.isNull() && element.tagName() == VAbstractPattern::TagNode)
         {
             ReadExpressionAttribute(expressions, element, VAbstractPattern::AttrSABefore);
             ReadExpressionAttribute(expressions, element, VAbstractPattern::AttrSAAfter);
@@ -2069,11 +2065,10 @@ auto VAbstractPattern::ParseItemElement(const QDomElement &domElement) -> QPair<
         QMap<quint32, quint32> items;
 
         const QDomNodeList nodeList = domElement.childNodes();
-        const qint32 num = nodeList.size();
-        for (qint32 i = 0; i < num; ++i)
+        QDOM_LOOP(nodeList, i)
         {
-            const QDomElement element = nodeList.at(i).toElement();
-            if (not element.isNull() && element.tagName() == TagGroupItem)
+            if (const QDomElement element = QDOM_ELEMENT(nodeList, i).toElement();
+                !element.isNull() && element.tagName() == TagGroupItem)
             {
                 const quint32 tool = GetParametrUInt(element, AttrTool, NULL_ID_STR);
                 const quint32 object = GetParametrUInt(element, AttrObject, QString::number(tool));
@@ -2608,12 +2603,11 @@ auto VAbstractPattern::GetGroups(const QString &patternPieceName) -> QMap<quint3
                         items.resize(0);
 
                         const QDomNodeList nodeList = group.childNodes();
-                        const qint32 num = nodeList.size();
-                        items.reserve(num);
-                        for (qint32 i = 0; i < num; ++i)
+                        items.reserve(nodeList.size());
+                        QDOM_LOOP(nodeList, i)
                         {
-                            const QDomElement element = nodeList.at(i).toElement();
-                            if (not element.isNull() && element.tagName() == TagGroupItem)
+                            if (const QDomElement element = QDOM_ELEMENT(nodeList, i).toElement();
+                                !element.isNull() && element.tagName() == TagGroupItem)
                             {
                                 const quint32 tool = GetParametrUInt(element, AttrTool, NULL_ID_STR);
                                 const quint32 object = GetParametrUInt(element, AttrObject, QString::number(tool));

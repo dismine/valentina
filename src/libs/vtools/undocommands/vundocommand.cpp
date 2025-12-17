@@ -33,6 +33,7 @@
 
 #include "../ifc/ifcdef.h"
 #include "../tools/drawTools/operation/vabstractoperation.h"
+#include "../vmisc/compatibility.h"
 #include "../vmisc/customevents.h"
 #include "../vmisc/def.h"
 #include "../vpatterndb/vpiecenode.h"
@@ -177,15 +178,14 @@ void VUndoCommand::DecrementReferences(const QVector<VPieceNode> &nodes) const
 //---------------------------------------------------------------------------------------------------------------------
 auto VUndoCommand::GetDestinationObject(quint32 idTool, quint32 idPoint) const -> QDomElement
 {
-    const QDomElement tool = doc->FindElementById(idTool, VAbstractPattern::TagOperation);
-    if (tool.isElement())
+    if (const QDomElement tool = doc->FindElementById(idTool, VAbstractPattern::TagOperation); tool.isElement())
     {
         QDomElement correctDest;
         const QDomNodeList nodeList = tool.childNodes();
-        for (qint32 i = 0; i < nodeList.size(); ++i)
+        QDOM_LOOP(nodeList, i)
         {
-            const QDomElement dest = nodeList.at(i).toElement();
-            if (not dest.isNull() && dest.isElement() && dest.tagName() == VAbstractOperation::TagDestination)
+            if (const QDomElement dest = QDOM_ELEMENT(nodeList, i).toElement();
+                not dest.isNull() && dest.isElement() && dest.tagName() == VAbstractOperation::TagDestination)
             {
                 correctDest = dest;
                 break;
@@ -195,13 +195,13 @@ auto VUndoCommand::GetDestinationObject(quint32 idTool, quint32 idPoint) const -
         if (not correctDest.isNull())
         {
             const QDomNodeList destObjects = correctDest.childNodes();
-            for (qint32 i = 0; i < destObjects.size(); ++i)
+            QDOM_LOOP(destObjects, i)
             {
-                const QDomElement obj = destObjects.at(i).toElement();
-                if (not obj.isNull() && obj.isElement())
+                if (const QDomElement obj = QDOM_ELEMENT(destObjects, i).toElement();
+                    not obj.isNull() && obj.isElement())
                 {
-                    const quint32 id = VAbstractPattern::GetParametrUInt(obj, AttrIdObject, NULL_ID_STR);
-                    if (idPoint == id)
+                    if (const quint32 id = VAbstractPattern::GetParametrUInt(obj, AttrIdObject, NULL_ID_STR);
+                        idPoint == id)
                     {
                         return obj;
                     }

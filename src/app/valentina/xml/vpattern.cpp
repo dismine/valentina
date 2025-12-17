@@ -974,9 +974,9 @@ void VPattern::ParseDrawMode(const QDomNode &node, const Document &parse, const 
     SCASSERT(sceneDetail != nullptr)
 
     const QDomNodeList nodeList = node.childNodes();
-    for (qint32 i = 0; i < nodeList.size(); ++i)
+    QDOM_LOOP(nodeList, i)
     {
-        QDomElement domElement = nodeList.at(i).toElement();
+        QDomElement domElement = QDOM_ELEMENT(nodeList, i).toElement();
         ParseDrawModeElement(domElement, parse, mode);
     }
 
@@ -1138,9 +1138,9 @@ void VPattern::ParseDetailInternals(const QDomElement &domElement, VPiece &detai
     QFuture<VPieceFoldLineData> futureMirrorLine;
 
     const QDomNodeList nodeList = domElement.childNodes();
-    for (qint32 i = 0; i < nodeList.size(); ++i)
+    QDOM_LOOP(nodeList, i)
     {
-        if (const QDomElement element = nodeList.at(i).toElement(); not element.isNull())
+        if (const QDomElement element = QDOM_ELEMENT(nodeList, i).toElement(); not element.isNull())
         {
             switch (tags.indexOf(element.tagName()))
             {
@@ -1151,7 +1151,7 @@ void VPattern::ParseDetailInternals(const QDomElement &domElement, VPiece &detai
                         Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 4, 0),
                                           "Time to refactor the code.");
                         futurePathV1 = QtConcurrent::run(
-                            [this, domElement, element]()
+                            [this, domElement, element]() -> QVector<VPieceNode>
                             {
                                 const bool closed = GetParametrUInt(domElement, AttrClosed, QChar('1'));
                                 const qreal width = GetParametrDouble(domElement, AttrWidth, QStringLiteral("0.0"));
@@ -1164,18 +1164,18 @@ void VPattern::ParseDetailInternals(const QDomElement &domElement, VPiece &detai
                     }
                     break;
                 case 1: // TagData
-                    futurePPData = QtConcurrent::run(
-                        [this, element, detail]() { return ParsePieceDataTag(element, detail.GetPieceLabelData()); });
+                    futurePPData = QtConcurrent::run([this, element, detail]() -> VPieceLabelData
+                                                     { return ParsePieceDataTag(element, detail.GetPieceLabelData()); });
                     break;
                 case 2: // TagPatternInfo
-                    futurePatternInfo =
-                        QtConcurrent::run([this, element, detail]()
-                                          { return ParsePiecePatternInfo(element, detail.GetPatternLabelData()); });
+                    futurePatternInfo = QtConcurrent::run(
+                        [this, element, detail]() -> VPatternLabelData
+                        { return ParsePiecePatternInfo(element, detail.GetPatternLabelData()); });
                     break;
                 case 3: // TagGrainline
-                    futureGGeometry =
-                        QtConcurrent::run([this, element, detail]()
-                                          { return ParsePieceGrainline(element, detail.GetGrainlineGeometry()); });
+                    futureGGeometry = QtConcurrent::run(
+                        [this, element, detail]() -> VGrainlineData
+                        { return ParsePieceGrainline(element, detail.GetGrainlineGeometry()); });
                     break;
                 case 4: // VToolSeamAllowance::TagCSA
                     futureRecords = QtConcurrent::run(&VPattern::ParsePieceCSARecords, element);
@@ -1268,9 +1268,9 @@ auto VPattern::ParseDetailNodes(const QDomElement &domElement, qreal width, bool
 {
     QVector<VNodeDetail> oldNodes;
     const QDomNodeList nodeList = domElement.childNodes();
-    for (qint32 i = 0; i < nodeList.size(); ++i)
+    QDOM_LOOP(nodeList, i)
     {
-        const QDomElement element = nodeList.at(i).toElement();
+        const QDomElement element = QDOM_ELEMENT(nodeList, i).toElement();
         if (not element.isNull() &&
             element.tagName() == VAbstractPattern::TagNode) // Old detail version need this check!
         {
@@ -2965,11 +2965,10 @@ void VPattern::ParseOldToolSplinePath(VMainGraphicsScene *scene, QDomElement &do
         QVector<VFSplinePoint> points;
 
         const QDomNodeList nodeList = domElement.childNodes();
-        const qint32 num = nodeList.size();
-        for (qint32 i = 0; i < num; ++i)
+        QDOM_LOOP(nodeList, i)
         {
-            const QDomElement element = nodeList.at(i).toElement();
-            if (element.isNull() == false && element.tagName() == AttrPathPoint)
+            if (const QDomElement element = QDOM_ELEMENT(nodeList, i).toElement();
+                !element.isNull() && element.tagName() == AttrPathPoint)
             {
                 const qreal kAsm1 = GetParametrDouble(element, AttrKAsm1, QStringLiteral("1.0"));
                 const qreal angle = GetParametrDouble(element, AttrAngle, QChar('0'));
@@ -3033,11 +3032,10 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
         initData.aliasSuffix = GetParametrEmptyString(domElement, AttrAlias);
 
         const QDomNodeList nodeList = domElement.childNodes();
-        const qint32 num = nodeList.size();
-        for (qint32 i = 0; i < num; ++i)
+        QDOM_LOOP(nodeList, i)
         {
-            const QDomElement element = nodeList.at(i).toElement();
-            if (not element.isNull() && element.tagName() == AttrPathPoint)
+            if (const QDomElement element = QDOM_ELEMENT(nodeList, i).toElement();
+                not element.isNull() && element.tagName() == AttrPathPoint)
             {
                 initData.a1.append(GetParametrString(element, AttrAngle1, QChar('0')));
                 initData.a2.append(GetParametrString(element, AttrAngle2, QChar('0')));
@@ -3068,10 +3066,10 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
 
         // Rewrite attribute formula. Need for situation when we have wrong formula.
         int count = 0;
-        for (qint32 i = 0; i < num; ++i)
+        QDOM_LOOP(nodeList, i)
         {
-            QDomElement element = nodeList.at(i).toElement();
-            if (not element.isNull() && element.tagName() == AttrPathPoint)
+            if (QDomElement element = QDOM_ELEMENT(nodeList, i).toElement();
+                not element.isNull() && element.tagName() == AttrPathPoint)
             {
                 if (angle1.at(count) != initData.a1.at(count) || angle2.at(count) != initData.a2.at(count) ||
                     length1.at(count) != initData.l1.at(count) || length2.at(count) != initData.l2.at(count))
@@ -3238,11 +3236,10 @@ void VPattern::ParseToolCubicBezierPath(VMainGraphicsScene *scene, const QDomEle
         QVector<VPointF> points;
 
         const QDomNodeList nodeList = domElement.childNodes();
-        const qint32 num = nodeList.size();
-        for (qint32 i = 0; i < num; ++i)
+        QDOM_LOOP(nodeList, i)
         {
-            const QDomElement element = nodeList.at(i).toElement();
-            if (element.isNull() == false && element.tagName() == AttrPathPoint)
+            if (const QDomElement element = QDOM_ELEMENT(nodeList, i).toElement();
+                !element.isNull() && element.tagName() == AttrPathPoint)
             {
                 const quint32 pSpline = GetParametrUInt(element, AttrPSpline, NULL_ID_STR);
                 const VPointF p = *data->GeometricObject<VPointF>(pSpline);
