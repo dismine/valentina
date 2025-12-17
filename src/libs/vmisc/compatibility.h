@@ -53,14 +53,15 @@
 #define REGISTER_META_TYPE_STREAM_OPERATORS(TYPE) qRegisterMetaTypeStreamOperators<TYPE>(#TYPE);
 #endif // QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 9, 0)
-#define QDOM_LOOP(list, var) for (const auto &var : list) // NOLINT(cppcoreguidelines-macro-usage)
-#define QDOM_ELEMENT(list, var) var                       // NOLINT(cppcoreguidelines-macro-usage)
-#else
+// Waiting fix for QTBUG-142804
+// #if QT_VERSION >= QT_VERSION_CHECK(6, 9, 0)
+// #define QDOM_LOOP(list, var) for (const auto &(var) : list) // NOLINT(cppcoreguidelines-macro-usage)
+// #define QDOM_ELEMENT(list, var) var                         // NOLINT(cppcoreguidelines-macro-usage)
+// #else
 // NOLINTNEXTLINE(cppcoreguidelines-macro-usage)
-#define QDOM_LOOP(list, var) for (int var##_idx = 0; var##_idx < list.size(); ++var##_idx)
-#define QDOM_ELEMENT(list, var) list.at(var##_idx) // NOLINT(cppcoreguidelines-macro-usage)
-#endif
+#define QDOM_LOOP(list, var) for (int var##_idx = 0; var##_idx < (list).size(); ++var##_idx)
+#define QDOM_ELEMENT(list, var) (list).at(var##_idx) // NOLINT(cppcoreguidelines-macro-usage)
+// #endif
 
 class QPointF;
 
