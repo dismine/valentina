@@ -237,5 +237,7 @@
         <file>notch/points.json</file>
         <file>base2025/input.json</file>
         <file>base2025/output.json</file>
+        <file>full_seam_path_lu_54_z/input.json</file>
+        <file>full_seam_path_lu_54_z/output.json</file>
     </qresource>
 </RCC>

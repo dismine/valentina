@@ -897,7 +897,10 @@ auto VPiece::FullSeamAllowancePointsWithRotation(const VContainer *data, vsizety
         }
 
         points = VAbstractPiece::FullSeamAllowancePath(points, mirrorLine, GetName(), mirrorP1Label, mirrorP2Label);
-        points = CheckLoops(CorrectEquidistantPoints(points)); // A path can contains loops
+
+        const bool removeFirstAndLast = false;
+        points = CorrectEquidistantPoints(points, removeFirstAndLast);
+        points = CheckLoops(points); // A path can contains loops
     }
 
     return points;

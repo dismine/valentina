@@ -843,8 +843,7 @@ inline auto VAbstractPiece::SubdividePath(const QVector<T> &boundary, const QPoi
 
         if (!VGObject::IsPointOnLineSegment(p,
                                             boundary.at(i).ToQPointF(),
-                                            boundary.at(i + 1).ToQPointF(),
-                                            MmToPixel(0.5)))
+                                            boundary.at(i + 1).ToQPointF()))
         {
             sub1.append(boundary.at(i));
             continue;
@@ -883,7 +882,7 @@ template <class T>
 inline auto VAbstractPiece::MirrorPath(const QVector<T> &points, const QLineF &mirrorLine) -> QVector<T>
 {
     QVector<T> flipped;
-    flipped.reserve(points.size());
+    flipped.reserve(points.size() * 2);
 
     const QTransform matrix = VGObject::FlippingMatrix(mirrorLine);
 
@@ -1005,18 +1004,10 @@ inline auto VAbstractPiece::FullSeamAllowancePath(const QVector<T> &points,
 {
     // DumpVector(points, QStringLiteral("input.json.XXXXXX")); // Uncomment for dumping test data
 
-    if (mirrorLine.isNull())
+    if (mirrorLine.isNull() || points.size() <= 3)
     {
         return points;
     }
-
-    if (points.size() <= 3)
-    {
-        return points;
-    }
-
-    QVector<T> base;
-    base.reserve(points.size());
 
     bool reverse = false;
     mirrorLine = CorrectSAMirrolLine(points, mirrorLine, reverse);
@@ -1055,6 +1046,9 @@ inline auto VAbstractPiece::FullSeamAllowancePath(const QVector<T> &points,
             : qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
         return points;
     }
+
+    QVector<T> base;
+    base.reserve(points.size());
 
     if (!reverse)
     {

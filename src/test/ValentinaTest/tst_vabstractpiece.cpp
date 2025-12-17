@@ -1364,6 +1364,16 @@ void TST_VAbstractPiece::TestFullSeamPath_data() const
     ASSERT_TEST_CASE(
         "Molde", QStringLiteral("://capa_over/input.json"), QStringLiteral("://capa_over/output.json"),
         QLineF(QPointF(30.000000000000068, 101.31401574803158), QPointF(1367.9527559055118, 101.31401574803158)));
+
+    // See file valentina_private_collection/bugs/full_piece/Lu_54_z_.val (private collection)
+    mirrorLine = QLineF(QPointF(-29.208680314961267, 3499.4481259842523),
+                        QPointF(-29.20868031496066, 100.89694488188954));
+
+    // Height: 170; Size: 48
+    ASSERT_TEST_CASE("Incorrect symmetry",
+                     QStringLiteral("://full_seam_path_lu_54_z/input.json"),
+                     QStringLiteral("://full_seam_path_lu_54_z/output.json"),
+                     mirrorLine);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
