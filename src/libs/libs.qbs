@@ -16,5 +16,6 @@ Project {
         "vwidgets/vwidgets.qbs",
         "vganalytics/vganalytics.qbs",
         "vhpgl/vhpgl.qbs",
+        "graaflib/graaflib.qbs",
     ]
 }
