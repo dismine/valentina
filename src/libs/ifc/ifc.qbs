@@ -3,6 +3,7 @@ import qbs.Utilities
 VLib {
     Depends { name: "Qt"; submodules: ["core", "gui", "xml", "svg", "concurrent"] }
     Depends { name: "VMiscLib" }
+    Depends { name: "GraafLib" }
 
     Depends {
         name: "Qt.xmlpatterns"
@@ -64,6 +65,8 @@ VLib {
             "vparsererrorhandler.cpp",
             "vparsererrorhandler.h",
             "vpatternconverter.h",
+            "vpatterngraph.cpp",
+            "vpatterngraph.h",
             "vpatternimage.h",
             "vtoolrecord.h",
             "vabstractpattern.h",
