@@ -111,6 +111,7 @@ void VAbstractOperation::GroupVisibility(quint32 object, bool visible)
 {
     if (!operatedObjects.contains(object))
     {
+        return;
     }
 
     if (VAbstractSimple *obj = operatedObjects.value(object); (obj != nullptr) && obj->GetType() == GOType::Point)

@@ -668,7 +668,7 @@ void AbstractTest::ReadSplinePointValue(const QJsonObject &itemObject, VSplinePo
     QString length2Formula;
     AbstractTest::ReadStringValue(itemObject, QStringLiteral("length2Formula"), length2Formula);
 
-    bool strict;
+    bool strict = true;
     AbstractTest::ReadBooleanValue(itemObject, QStringLiteral("strict"), strict, "1"_L1);
 
     VPointF pSpline;

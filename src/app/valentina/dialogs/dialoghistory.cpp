@@ -595,7 +595,7 @@ auto DialogHistory::CurveName(quint32 curveId) const -> QString
             break;
         default:
             break;
-    };
+    }
 
     return {};
 }

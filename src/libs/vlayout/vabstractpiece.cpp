@@ -1297,13 +1297,11 @@ auto HandleUnbounded(QVector<VRawSAPoint> &points,
 
     // Comparison bisector angles helps to find direction
     if (const qreal angle = AngleBetweenBisectors(b1, b2);
-        angle < 135 || VFuzzyComparePossibleNulls(angle, 135.0)) // Go in a same direction
-    {                                                            // Regular equdistant case
-        if (DispatchAngleType(
-                points, p1Line1, p2Line1, p1Line2, bigLine1, crosPoint, bigLine2, width, trueZeroWidth, needRollback))
-        {
-            return true;
-        }
+        (angle < 135 || VFuzzyComparePossibleNulls(angle, 135.0)) // Go in a same direction
+        && DispatchAngleType(
+            points, p1Line1, p2Line1, p1Line2, bigLine1, crosPoint, bigLine2, width, trueZeroWidth, needRollback))
+    {
+        return true;
     }
 
     // Different directions
@@ -1736,7 +1734,7 @@ auto VAbstractPiece::EkvPoint(QVector<VRawSAPoint> points,
 
     if (p2Line1.IsCustomSA())
     {
-        points.append(VRawSAPoint(p2Line1, p2Line1.CurvePoint(), p2Line1.TurnPoint()));
+        points.append(VRawSAPoint(p2Line1.ToQPointF(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
         return points;
     }
 

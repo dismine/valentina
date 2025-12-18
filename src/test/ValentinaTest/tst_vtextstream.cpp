@@ -182,7 +182,7 @@ void TST_VTextStream::getSetCheck()
 
 void TST_VTextStream::cleanup()
 {
-    QCoreApplication::instance()->processEvents();
+    QCoreApplication::processEvents();
 }
 
 // ------------------------------------------------------------------------------

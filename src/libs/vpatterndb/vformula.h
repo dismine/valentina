@@ -57,6 +57,8 @@ public:
     VFormula(const QString &formula, const VContainer *container);
     auto operator=(const VFormula &formula) -> VFormula &;
     VFormula(const VFormula &formula);
+    VFormula(VFormula &&formula) noexcept;
+    auto operator=(VFormula &&formula) noexcept -> VFormula &;
     ~VFormula();
 
     auto operator==(const VFormula &formula) const -> bool;

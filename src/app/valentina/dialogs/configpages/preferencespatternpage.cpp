@@ -102,12 +102,9 @@ PreferencesPatternPage::PreferencesPatternPage(QWidget *parent)
         ui->labelCurveApproximationScaleWarning->setPixmap(warningIcon.pixmap(size, size));
 
         bool warningVisible = false;
-        if (VCommandLinePtr const commandLine = VApplication::CommandLine(); commandLine != nullptr)
+        if (VCommandLinePtr const commandLine = VApplication::CommandLine(); commandLine != nullptr && !qFuzzyIsNull(commandLine->CurveApproximationScale()))
         {
-            if (!qFuzzyIsNull(commandLine->CurveApproximationScale()))
-            {
-                warningVisible = true;
-            }
+            warningVisible = true;
         }
         ui->labelCurveApproximationScaleWarning->setVisible(warningVisible);
     }

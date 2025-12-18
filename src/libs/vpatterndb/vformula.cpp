@@ -85,6 +85,19 @@ COPY_CONSTRUCTOR_IMPL(VFormula)
 VFormula::~VFormula() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
+VFormula::VFormula(VFormula &&formula) noexcept
+  : d(std::move(formula.d))
+{
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VFormula::operator=(VFormula &&formula) noexcept -> VFormula &
+{
+    std::swap(d, formula.d);
+    return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VFormula::operator==(const VFormula &formula) const -> bool
 {
     return d->formula == formula.GetFormula() && d->strValue == formula.getStringValue() &&

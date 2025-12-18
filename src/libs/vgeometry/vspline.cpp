@@ -1326,7 +1326,7 @@ auto VSpline::OutlineCurve(const QVector<qreal> &distances) const -> QVector<VSp
         qreal const dEnd = PiecewiseDistance(v1);
 
         // Convert to linear-distance-function (scaled across v=0..1)
-        auto DistanceFn = [=](qreal t) noexcept -> qreal { return Map(t, 0.0, 1.0, dStart, dEnd); };
+        auto DistanceFn = [dStart, dEnd](qreal t) noexcept -> qreal { return Map(t, 0.0, 1.0, dStart, dEnd); };
 
         result.append(seg.Scale(DistanceFn));
 

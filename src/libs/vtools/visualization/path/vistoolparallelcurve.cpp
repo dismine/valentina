@@ -88,7 +88,7 @@ void VisToolParallelCurve::VisualMode(quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolParallelCurve::SetWidth(const QString &expression)
+void VisToolParallelCurve::SetOffsetWidth(const QString &expression)
 {
     m_width = FindLengthFromUser(expression, GetData()->DataVariables());
 }

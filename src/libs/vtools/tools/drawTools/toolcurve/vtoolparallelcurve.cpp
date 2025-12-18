@@ -274,7 +274,7 @@ void VToolParallelCurve::SetVisualization()
         const VTranslateVars *trVars = VAbstractApplication::VApp()->TrVars();
 
         visual->SetCurveId(m_originCurveId);
-        visual->SetWidth(trVars->FormulaToUser(m_formulaWidth, osSeparator));
+        visual->SetOffsetWidth(trVars->FormulaToUser(m_formulaWidth, osSeparator));
         visual->SetLineStyle(LineStyleToPenStyle(curve->GetPenStyle()));
         visual->SetApproximationScale(curve->GetApproximationScale());
         visual->SetMode(Mode::Show);

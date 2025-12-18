@@ -391,10 +391,12 @@ void TST_QTextCodec::codecForLocale()
     originalLocaleEncodedTimeString.resize(1024);
     time_t t;
     time(&t);
+    struct tm timeinfo;
+    localtime_r(&t, &timeinfo);
     int r = static_cast<int>(strftime(originalLocaleEncodedTimeString.data(),
                                       static_cast<size_t>(originalLocaleEncodedTimeString.size()),
                                       "%A%a%B%b%Z",
-                                      localtime(&t)));
+                                      &timeinfo));
     QVERIFY(r != 0);
     originalLocaleEncodedTimeString.resize(r);
 
@@ -2893,15 +2895,17 @@ void TST_QTextCodec::userCodec()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-static struct DontCrashAtExit
+struct DontCrashAtExit
 {
     ~DontCrashAtExit()
     {
-        const QTextCodec *c = QTextCodec::codecForName("utf8");
-        if (c)
+        if (const QTextCodec *c = QTextCodec::codecForName("utf8"); c)
+        {
             c->toUnicode("azerty");
+        }
     }
-} dontCrashAtExit;
+};
+static DontCrashAtExit dontCrashAtExit;
 
 //---------------------------------------------------------------------------------------------------------------------
 void TST_QTextCodec::nullInputZeroOrNegativeLength_data()

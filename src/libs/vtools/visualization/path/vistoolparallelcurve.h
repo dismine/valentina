@@ -42,7 +42,7 @@ public:
     void VisualMode(quint32 id) override;
 
     void SetCurveId(quint32 newCurveId);
-    void SetWidth(const QString &expression);
+    void SetOffsetWidth(const QString &expression);
 
     auto type() const -> int override { return Type; }
     enum

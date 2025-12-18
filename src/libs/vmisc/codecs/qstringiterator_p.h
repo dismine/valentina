@@ -23,7 +23,7 @@ QT_BEGIN_NAMESPACE
 class QStringIterator
 {
     QString::const_iterator i, pos, e;
-    static_assert((std::is_same<QString::const_iterator, const QChar *>::value));
+    static_assert((std::is_same_v<QString::const_iterator, const QChar *>) );
     static bool less(const QChar *lhs, const QChar *rhs) noexcept
     { return std::less{}(lhs, rhs); }
 public:

@@ -1036,7 +1036,7 @@ void VTextStreamPrivate::putString(QLatin1String data, bool number)
 
         if (params.fieldAlignment == VTextStream::AlignAccountingStyle && number)
         {
-            const QChar sign = data.size() > 0 ? QLatin1Char(*data.data()) : QChar();
+            const QChar sign = !data.empty() ? QLatin1Char(*data.data()) : QChar();
             if (sign == locale.negativeSign() || sign == locale.positiveSign()) {
                 // write the sign before the padding, then skip it later
                 write(&sign, 1);

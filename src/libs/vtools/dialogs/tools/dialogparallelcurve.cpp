@@ -131,7 +131,7 @@ void DialogParallelCurve::SetFormulaWidth(const QString &value)
 
     auto *path = qobject_cast<VisToolParallelCurve *>(vis);
     SCASSERT(path != nullptr)
-    path->SetWidth(m_width);
+    path->SetOffsetWidth(m_width);
 
     MoveCursorToEnd(ui->plainTextEditWidth);
 }
@@ -322,7 +322,7 @@ void DialogParallelCurve::SaveData()
     SCASSERT(path != nullptr)
 
     path->SetCurveId(GetOriginCurveId());
-    path->SetWidth(m_width);
+    path->SetOffsetWidth(m_width);
     path->SetApproximationScale(ui->doubleSpinBoxApproximationScale->value());
     path->RefreshGeometry();
 }
