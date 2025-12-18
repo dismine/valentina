@@ -43,11 +43,7 @@ CppApplication {
       bundle.isBundle: false
   }
 
-  cpp.cxxLanguageVersion: {
-      if (Qt.core.versionMajor >= 6) // Start building with C++20 since Qt 6.0
-          return "c++20";
-      return "c++17";
-  }
+  cpp.cxxLanguageVersion: "c++20"
 
   files: ["main.cpp"]
 

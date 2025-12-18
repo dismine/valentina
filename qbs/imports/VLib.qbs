@@ -39,11 +39,7 @@ Library {
         cpp.compilerWrapper: "ccache"
     }
 
-    cpp.cxxLanguageVersion: {
-        if (Qt.core.versionMajor >= 6) // Start building with C++20 since Qt 6.0
-            return "c++20";
-        return "c++17";
-    }
+    cpp.cxxLanguageVersion: "c++20"
 
     Properties {
         condition: qbs.targetOS.contains("windows") && qbs.toolchain.contains("gcc") && !qbs.toolchain.contains("clang")
