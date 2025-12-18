@@ -39,11 +39,6 @@
 #include <QSize>
 #include <QSvgRenderer>
 
-// Header <ciso646> is removed in C++20.
-#if defined(Q_CC_MSVC) && __cplusplus <= 201703L
-#include <ciso646> // and, not, or
-#endif
-
 #include "../vmisc/compatibility.h"
 #include "utils.h"
 

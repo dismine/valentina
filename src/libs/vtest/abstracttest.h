@@ -45,11 +45,6 @@
 #include "../vmisc/exception/vexception.h"
 #include "../vmisc/typedef.h"
 
-// Header <ciso646> is removed in C++20.
-#if defined(Q_CC_MSVC) && __cplusplus <= 201703L
-#include <ciso646> // and, not, or
-#endif
-
 #ifdef __GNUC__
 #define V_UNUSED __attribute__((unused))
 #else

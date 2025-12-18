@@ -32,11 +32,6 @@
 #include <QtCore/qcontainerfwd.h>
 #include <QtGlobal>
 
-// Header <ciso646> is removed in C++20.
-#if defined(Q_CC_MSVC) && __cplusplus <= 201703L
-#include <ciso646> // and, not, or
-#endif
-
 enum class VarMeasurement : quint8
 {
     English = 0,

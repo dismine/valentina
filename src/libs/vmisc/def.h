@@ -46,11 +46,6 @@
 
 template <class T> class QSharedPointer;
 
-// Header <ciso646> is removed in C++20.
-#if defined(Q_CC_MSVC) && __cplusplus <= 201703L
-#include <ciso646> // and, not, or
-#endif
-
 // NOLINTNEXTLINE(cppcoreguidelines-macro-usage)
 #define COPY_CONSTRUCTOR_IMPL(className) className::className(const className &) = default;
 // NOLINTNEXTLINE(cppcoreguidelines-macro-usage)

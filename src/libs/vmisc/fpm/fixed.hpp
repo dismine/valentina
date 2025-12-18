@@ -456,59 +456,6 @@ template <typename B, typename I, unsigned int F> struct numeric_limits<fpm::fix
 
     static constexpr auto denorm_min() noexcept -> fpm::fixed<B, I, F> { return min(); }
 };
-
-// See https://stackoverflow.com/a/46719572/3045403
-#if __cplusplus < 201703L
-template <typename B, typename I, unsigned int F>
-constexpr bool numeric_limits<fpm::fixed<B, I, F>>::is_specialized; // NOLINT(readability-redundant-declaration)
-template <typename B, typename I, unsigned int F>
-constexpr bool numeric_limits<fpm::fixed<B, I, F>>::is_signed; // NOLINT(readability-redundant-declaration)
-template <typename B, typename I, unsigned int F>
-constexpr bool numeric_limits<fpm::fixed<B, I, F>>::is_integer; // NOLINT(readability-redundant-declaration)
-template <typename B, typename I, unsigned int F>
-constexpr bool numeric_limits<fpm::fixed<B, I, F>>::is_exact; // NOLINT(readability-redundant-declaration)
-template <typename B, typename I, unsigned int F>
-constexpr bool numeric_limits<fpm::fixed<B, I, F>>::has_infinity; // NOLINT(readability-redundant-declaration)
-template <typename B, typename I, unsigned int F>
-constexpr bool numeric_limits<fpm::fixed<B, I, F>>::has_quiet_NaN; // NOLINT(readability-redundant-declaration)
-template <typename B, typename I, unsigned int F>
-constexpr bool numeric_limits<fpm::fixed<B, I, F>>::has_signaling_NaN; // NOLINT(readability-redundant-declaration)
-template <typename B, typename I, unsigned int F>
-constexpr std::float_denorm_style
-    numeric_limits<fpm::fixed<B, I, F>>::has_denorm; // NOLINT(readability-redundant-declaration)
-template <typename B, typename I, unsigned int F>
-constexpr bool numeric_limits<fpm::fixed<B, I, F>>::has_denorm_loss; // NOLINT(readability-redundant-declaration)
-template <typename B, typename I, unsigned int F>
-constexpr std::float_round_style
-    numeric_limits<fpm::fixed<B, I, F>>::round_style; // NOLINT(readability-redundant-declaration)
-template <typename B, typename I, unsigned int F>
-constexpr bool numeric_limits<fpm::fixed<B, I, F>>::is_iec_559; // NOLINT(readability-redundant-declaration)
-template <typename B, typename I, unsigned int F>
-constexpr bool numeric_limits<fpm::fixed<B, I, F>>::is_bounded; // NOLINT(readability-redundant-declaration)
-template <typename B, typename I, unsigned int F>
-constexpr bool numeric_limits<fpm::fixed<B, I, F>>::is_modulo; // NOLINT(readability-redundant-declaration)
-template <typename B, typename I, unsigned int F>
-constexpr int numeric_limits<fpm::fixed<B, I, F>>::digits; // NOLINT(readability-redundant-declaration)
-template <typename B, typename I, unsigned int F>
-constexpr int numeric_limits<fpm::fixed<B, I, F>>::digits10; // NOLINT(readability-redundant-declaration)
-template <typename B, typename I, unsigned int F>
-constexpr int numeric_limits<fpm::fixed<B, I, F>>::max_digits10; // NOLINT(readability-redundant-declaration)
-template <typename B, typename I, unsigned int F>
-constexpr int numeric_limits<fpm::fixed<B, I, F>>::radix; // NOLINT(readability-redundant-declaration)
-template <typename B, typename I, unsigned int F>
-constexpr int numeric_limits<fpm::fixed<B, I, F>>::min_exponent; // NOLINT(readability-redundant-declaration)
-template <typename B, typename I, unsigned int F>
-constexpr int numeric_limits<fpm::fixed<B, I, F>>::min_exponent10; // NOLINT(readability-redundant-declaration)
-template <typename B, typename I, unsigned int F>
-constexpr int numeric_limits<fpm::fixed<B, I, F>>::max_exponent; // NOLINT(readability-redundant-declaration)
-template <typename B, typename I, unsigned int F>
-constexpr int numeric_limits<fpm::fixed<B, I, F>>::max_exponent10; // NOLINT(readability-redundant-declaration)
-template <typename B, typename I, unsigned int F>
-constexpr bool numeric_limits<fpm::fixed<B, I, F>>::traps; // NOLINT(readability-redundant-declaration)
-template <typename B, typename I, unsigned int F>
-constexpr bool numeric_limits<fpm::fixed<B, I, F>>::tinyness_before; // NOLINT(readability-redundant-declaration)
-#endif
-
 } // namespace std
 
 #endif

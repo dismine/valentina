@@ -21,11 +21,6 @@
 #include <string>
 #include <unordered_map>
 
-// Header <ciso646> is removed in C++20.
-#if defined(Q_CC_MSVC) && __cplusplus <= 201703L
-#include <ciso646> // and, not, or
-#endif
-
 #ifdef DRW_ASSERTS
 #define drw_assert(a) assert(a)
 #else
@@ -300,11 +295,8 @@ public:
     /*!< convert to unitary vector */
     void unitize()
     {
-#if __cplusplus < 201703
-        double dist = std::hypot(std::hypot(x, y), z);
-#else
         double dist = std::hypot(x, y, z);
-#endif
+
         if (std::isnormal(dist))
         {
             x = x / dist;

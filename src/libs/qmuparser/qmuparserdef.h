@@ -27,11 +27,6 @@
 #include <QtGlobal>
 #include <locale>
 
-// Header <ciso646> is removed in C++20.
-#if defined(Q_CC_MSVC) && __cplusplus <= 201703L
-#include <ciso646> // and, not, or
-#endif
-
 #ifdef __INTEL_COMPILER
 #include "qmuparserfixes.h"
 #endif
