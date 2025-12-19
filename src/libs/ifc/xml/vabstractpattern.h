@@ -132,7 +132,7 @@ class VAbstractPattern : public VDomDocument
 
 public:
     explicit VAbstractPattern(QObject *parent = nullptr);
-    virtual ~VAbstractPattern();
+    ~VAbstractPattern() override;
 
     auto RequiresMeasurements() const -> bool;
     auto ListMeasurements() const -> QStringList;
@@ -154,7 +154,7 @@ public:
     auto getCursor() const -> quint32;
     void setCursor(const quint32 &value);
 
-    virtual void setXMLContent(const QString &fileName) override;
+    void setXMLContent(const QString &fileName) override;
 
     virtual void IncrementReferens(quint32 id) const = 0;
     virtual void DecrementReferens(quint32 id) const = 0;
