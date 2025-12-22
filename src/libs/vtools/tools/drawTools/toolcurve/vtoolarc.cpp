@@ -141,12 +141,11 @@ auto VToolArc::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *sc
  */
 auto VToolArc::Create(VToolArcInitData &initData) -> VToolArc *
 {
-    qreal calcRadius = 0, calcF1 = 0, calcF2 = 0;
+    qreal const calcRadius = VAbstractValApplication::VApp()->toPixel(
+        CheckFormula(initData.id, initData.radius, initData.data));
 
-    calcRadius = VAbstractValApplication::VApp()->toPixel(CheckFormula(initData.id, initData.radius, initData.data));
-
-    calcF1 = CheckFormula(initData.id, initData.f1, initData.data);
-    calcF2 = CheckFormula(initData.id, initData.f2, initData.data);
+    qreal const calcF1 = CheckFormula(initData.id, initData.f1, initData.data);
+    qreal const calcF2 = CheckFormula(initData.id, initData.f2, initData.data);
 
     const VPointF c = *initData.data->GeometricObject<VPointF>(initData.center);
     auto *arc = new VArc(c, calcRadius, initData.radius, calcF1, initData.f1, calcF2, initData.f2);

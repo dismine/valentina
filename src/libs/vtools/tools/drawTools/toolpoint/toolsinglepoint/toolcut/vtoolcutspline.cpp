@@ -146,7 +146,10 @@ auto VToolCutSpline::Create(VToolCutInitData &initData) -> VToolCutSpline *
 
     const qreal result = CheckFormula(initData.id, initData.formula, initData.data);
 
-    QPointF spl1p2, spl1p3, spl2p2, spl2p3;
+    QPointF spl1p2;
+    QPointF spl1p3;
+    QPointF spl2p2;
+    QPointF spl2p3;
     QPointF const point =
         spl->CutSpline(VAbstractValApplication::VApp()->toPixel(result), spl1p2, spl1p3, spl2p2, spl2p3, initData.name);
 

@@ -126,14 +126,14 @@ auto VToolEllipticalArcWithLength::Create(const QPointer<DialogTool> &dialog,
 auto VToolEllipticalArcWithLength::Create(VToolEllipticalArcWithLengthInitData &initData)
     -> VToolEllipticalArcWithLength *
 {
-    qreal calcRadius1 = VAbstractValApplication::VApp()->toPixel(
+    qreal const calcRadius1 = VAbstractValApplication::VApp()->toPixel(
         CheckFormula(initData.id, initData.radius1, initData.data));
-    qreal calcRadius2 = VAbstractValApplication::VApp()->toPixel(
+    qreal const calcRadius2 = VAbstractValApplication::VApp()->toPixel(
         CheckFormula(initData.id, initData.radius2, initData.data));
-    qreal calcLength = VAbstractValApplication::VApp()->toPixel(
+    qreal const calcLength = VAbstractValApplication::VApp()->toPixel(
         CheckFormula(initData.id, initData.length, initData.data));
-    qreal calcF1 = CheckFormula(initData.id, initData.f1, initData.data);
-    qreal calcRotationAngle = CheckFormula(initData.id, initData.rotationAngle, initData.data);
+    qreal const calcF1 = CheckFormula(initData.id, initData.f1, initData.data);
+    qreal const calcRotationAngle = CheckFormula(initData.id, initData.rotationAngle, initData.data);
 
     const VPointF c = *initData.data->GeometricObject<VPointF>(initData.center);
     auto *arc = new VEllipticalArc(calcLength,

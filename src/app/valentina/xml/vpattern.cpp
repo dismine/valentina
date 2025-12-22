@@ -216,7 +216,7 @@ VPattern::VPattern(VContainer *data, VMainGraphicsScene *sceneDraw, VMainGraphic
     connect(qApp,
             &QCoreApplication::aboutToQuit,
             m_refreshPieceGeometryWatcher,
-            [this]()
+            [this]() -> void
             {
                 m_refreshPieceGeometryWatcher->cancel();
                 m_refreshPieceGeometryWatcher->waitForFinished();
@@ -1399,12 +1399,11 @@ void VPattern::ParseDetails(const QDomElement &domElement, const Document &parse
 {
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
     QDomNode domNode = domElement.firstChild();
-    while (domNode.isNull() == false)
+    while (!domNode.isNull())
     {
         if (domNode.isElement())
         {
-            QDomElement domElement = domNode.toElement();
-            if (domElement.isNull() == false && domElement.tagName() == TagDetail)
+            if (QDomElement domElement = domNode.toElement(); !domElement.isNull() && domElement.tagName() == TagDetail)
             {
                 ParseDetailElement(domElement, parse);
             }
@@ -4159,8 +4158,7 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, QDomElement &domEle
             ParseToolGraduatedCurve(scene, domElement, parse);
             break;
         default:
-            VException const e(tr("Unknown spline type '%1'.").arg(type));
-            throw e;
+            throw VException(tr("Unknown spline type '%1'.").arg(type));
     }
 }
 
@@ -4195,8 +4193,7 @@ void VPattern::ParseArcElement(VMainGraphicsScene *scene, QDomElement &domElemen
             ParseToolArcWithLength(scene, domElement, parse);
             break;
         default:
-            VException const e(tr("Unknown arc type '%1'.").arg(type));
-            throw e;
+            throw VException(tr("Unknown arc type '%1'.").arg(type));
     }
 }
 
@@ -4233,8 +4230,7 @@ void VPattern::ParseEllipticalArcElement(VMainGraphicsScene *scene, QDomElement 
             ParseToolEllipticalArcWithLength(scene, domElement, parse);
             break;
         default:
-            VException const e(tr("Unknown elliptical arc type '%1'.").arg(type));
-            throw e;
+            throw VException(tr("Unknown elliptical arc type '%1'.").arg(type));
     }
 }
 
@@ -4281,8 +4277,7 @@ void VPattern::ParseToolsElement(VMainGraphicsScene *scene, const QDomElement &d
             }
             break;
         default:
-            VException const e(tr("Unknown tools type '%1'.").arg(type));
-            throw e;
+            throw VException(tr("Unknown tools type '%1'.").arg(type));
     }
 }
 
@@ -4314,8 +4309,7 @@ void VPattern::ParseOperationElement(VMainGraphicsScene *scene, QDomElement &dom
             ParseToolMove(scene, domElement, parse);
             break;
         default:
-            VException const e(tr("Unknown operation type '%1'.").arg(type));
-            throw e;
+            throw VException(tr("Unknown operation type '%1'.").arg(type));
     }
 }
 

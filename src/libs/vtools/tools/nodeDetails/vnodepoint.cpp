@@ -64,7 +64,7 @@ const QString VNodePoint::ToolType = QStringLiteral("modeling");
 
 namespace
 {
-enum class ContextMenuOption : int
+enum class ContextMenuOption : std::uint8_t
 {
     NoSelection,
     ShowLabel,
@@ -121,8 +121,10 @@ VNodePoint::VNodePoint(const VAbstractNodeInitData &initData, QObject *qoParent,
     m_namePoint->SetShowParentTooltip(false);
     connect(m_namePoint, &VGraphicsSimpleTextItem::PointChoosed, this, &VNodePoint::PointChoosed);
     connect(m_namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this, &VNodePoint::NameChangePosition);
-    connect(m_namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this,
-            [this](QGraphicsSceneContextMenuEvent *event) { contextMenuEvent(event); });
+    connect(m_namePoint,
+            &VGraphicsSimpleTextItem::ShowContextMenu,
+            this,
+            [this](QGraphicsSceneContextMenuEvent *event) -> void { contextMenuEvent(event); });
     m_lineName->SetColorRole(VColorRole::PieceNodeLabelLineColor);
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(initData.id));
     ToolCreation(initData.typeCreation);
@@ -139,7 +141,7 @@ void VNodePoint::Create(const VAbstractNodeInitData &initData)
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::NodePoint, initData.doc);
-        // TODO Need create garbage collector and remove all nodes, what we don't use.
+        // TODO Need create garbage collector and remove all nodes, that we don't use.
         // Better check garbage before each saving file. Check only modeling tags.
         auto *point = new VNodePoint(initData);
 
@@ -404,7 +406,8 @@ void VNodePoint::InitPassmarkMenu(QMenu *menu, vidtype pieceId, QHash<int, QActi
 
     Q_STATIC_ASSERT_X(static_cast<int>(PassmarkLineType::LAST_ONE_DO_NOT_USE) == 9, "Not all types were handled.");
 
-    auto InitPassmarkLineTypeAction = [passmarkSubmenu, node](const QString &name, PassmarkLineType lineType)
+    auto InitPassmarkLineTypeAction = [passmarkSubmenu, node](const QString &name,
+                                                              PassmarkLineType lineType) -> QAction *
     {
         QAction *action = passmarkSubmenu->addAction(name);
         action->setCheckable(true);

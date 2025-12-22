@@ -37,52 +37,55 @@ class DialogTool;
 
 struct VToolPiecePathInitData : VAbstractNodeInitData
 {
-    VToolPiecePathInitData()
-        : VAbstractNodeInitData(),
-          path()
-    {}
+    VToolPiecePathInitData() = default;
 
-    VPiecePath path;
+    VPiecePath path{};
 };
 
 class VToolPiecePath : public VAbstractNode, public QGraphicsPathItem
 {
     Q_OBJECT // NOLINT
 public:
-    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+    ~VToolPiecePath() = default;
+
+    static auto Create(const QPointer<DialogTool> &dialog,
+                       VMainGraphicsScene *scene,
+                       VAbstractPattern *doc,
                        VContainer *data) -> VToolPiecePath *;
     static auto Create(VToolPiecePathInitData initData) -> VToolPiecePath *;
 
-    virtual auto type() const -> int override { return Type; }
+    auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::PiecePath)};
-    virtual auto getTagName() const -> QString override;
+    auto getTagName() const -> QString override;
 
-    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                       QWidget *widget = nullptr) override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 
-    virtual void incrementReferens() override;
-    virtual void decrementReferens() override;
+    void incrementReferens() override;
+    void decrementReferens() override;
 
     void RefreshGeometry();
 
     static void AddAttributes(VAbstractPattern *doc, QDomElement &domElement, quint32 id, const VPiecePath &path);
 public slots:
-    virtual void FullUpdateFromFile () override;
-    virtual void AllowHover(bool enabled) override;
-    virtual void AllowSelecting(bool enabled) override;
+    void FullUpdateFromFile() override;
+    void AllowHover(bool enabled) override;
+    void AllowSelecting(bool enabled) override;
+
 protected:
-    virtual void AddToFile() override;
-    virtual void ShowNode() override;
-    virtual void HideNode() override;
-    virtual void ToolCreation(const Source &typeCreation) override;
+    void AddToFile() override;
+    void ShowNode() override;
+    void HideNode() override;
+    void ToolCreation(const Source &typeCreation) override;
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VToolPiecePath) // NOLINT
 
     quint32 m_pieceId;
 
-    VToolPiecePath(const VToolPiecePathInitData &initData, QObject *qoParent = nullptr,
-                   QGraphicsItem *parent = nullptr);
+    explicit VToolPiecePath(const VToolPiecePathInitData &initData,
+                            QObject *qoParent = nullptr,
+                            QGraphicsItem *parent = nullptr);
 
     void IncrementNodes(const VPiecePath &path) const;
     void DecrementNodes(const VPiecePath &path) const;
