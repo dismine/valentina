@@ -39,7 +39,10 @@
 enum class VNodeType : quint8
 {
     TOOL,
-    OBJECT
+    MODELING_TOOL,
+    OBJECT,
+    MODELING_OBJECT,
+    PIECE
 };
 
 // Node structure

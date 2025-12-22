@@ -52,6 +52,8 @@ public:
     QString name{};  // NOLINT(misc-non-private-member-variables-in-classes)
     QString alias{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
+    QList<quint32> references{}; // NOLINT(misc-non-private-member-variables-in-classes)
+
 private:
     Q_DISABLE_ASSIGN_MOVE(VInternalVariableData) // NOLINT
 };

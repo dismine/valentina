@@ -29,8 +29,9 @@
 #include "vtoolpin.h"
 #include "../../dialogs/tools/piece/dialogpin.h"
 #include "../../undocommands/savepieceoptions.h"
-#include "../vtoolseamallowance.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vpointf.h"
+#include "../vtoolseamallowance.h"
 
 const QString VToolPin::ToolType = QStringLiteral("pin");
 
@@ -55,57 +56,66 @@ auto VToolPin::Create(const QPointer<DialogTool> &dialog, VAbstractPattern *doc,
 //---------------------------------------------------------------------------------------------------------------------
 auto VToolPin::Create(VToolPinInitData initData) -> VToolPin *
 {
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::MODELING_OBJECT);
+
+    QSharedPointer<VPointF> point;
+    try
+    {
+        point = initData.data->GeometricObject<VPointF>(initData.pointId);
+    }
+    catch (const VExceptionBadId &e)
+    { // Possible case. Parent was deleted, but the node object is still here.
+        Q_UNUSED(e)
+        if (initData.typeCreation != Source::FromGui)
+        {
+            initData.data->UpdateId(initData.id);
+        }
+        return nullptr; // Just ignore
+    }
+
+    patternGraph->AddEdge(initData.pointId, initData.id);
+
+    auto *pinPoint = new VPointF(*point);
+    pinPoint->setIdObject(initData.pointId);
+    pinPoint->setMode(Draw::Modeling);
+
     if (initData.typeCreation == Source::FromGui)
     {
-        initData.id = CreateNode<VPointF>(initData.data, initData.pointId);
+        initData.id = initData.data->AddGObject(pinPoint);
     }
     else
     {
-        QSharedPointer<VPointF> point;
-        try
-        {
-            point = initData.data->GeometricObject<VPointF>(initData.pointId);
-        }
-        catch (const VExceptionBadId &e)
-        { // Possible case. Parent was deleted, but the node object is still here.
-            Q_UNUSED(e)
-            initData.data->UpdateId(initData.id);
-            return nullptr;// Just ignore
-        }
-        auto *pinPoint = new VPointF(*point);
-        pinPoint->setIdObject(initData.pointId);
-        pinPoint->setMode(Draw::Modeling);
         initData.data->UpdateGObject(initData.id, pinPoint);
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
     }
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
+    }
+
     VAbstractTool::AddRecord(initData.id, Tool::Pin, initData.doc);
-    VToolPin *point = nullptr;
     if (initData.parse == Document::FullParse)
     {
-        point = new VToolPin(initData);
+        auto *pinTool = new VToolPin(initData);
 
-        VAbstractPattern::AddTool(initData.id, point);
+        VAbstractPattern::AddTool(initData.id, pinTool);
         if (initData.idTool != NULL_ID)
         {
             //Some nodes we don't show on scene. Tool that create this nodes must free memory.
             VDataTool *tool = VAbstractPattern::getTool(initData.idTool);
             SCASSERT(tool != nullptr)
-            point->setParent(tool);// Adopted by a tool
+            pinTool->setParent(tool); // Adopted by a tool
         }
         else
         {
             // Help to delete the node before each FullParse
-            initData.doc->AddToolOnRemove(point);
+            initData.doc->AddToolOnRemove(pinTool);
         }
     }
-    else
-    {
-        initData.doc->UpdateToolData(initData.id, initData.data);
-    }
-    return point;
+    return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

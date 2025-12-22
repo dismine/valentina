@@ -39,13 +39,13 @@
 #include "../../../../visualization/line/vistoollineintersect.h"
 #include "../../../../visualization/visualization.h"
 #include "../../../vabstracttool.h"
-#include "../../vdrawtool.h"
-#include "../vmisc/exception/vexception.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/compatibility.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "vtoolsinglepoint.h"
@@ -164,22 +164,30 @@ auto VToolLineIntersect::Create(VToolLineIntersectInitData initData) -> VToolLin
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(p);
-        initData.data->AddLine(initData.p1Line1Id, initData.id);
-        initData.data->AddLine(initData.id, initData.p2Line1Id);
-        initData.data->AddLine(initData.p1Line2Id, initData.id);
-        initData.data->AddLine(initData.id, initData.p2Line2Id);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, p);
-        initData.data->AddLine(initData.p1Line1Id, initData.id);
-        initData.data->AddLine(initData.id, initData.p2Line1Id);
-        initData.data->AddLine(initData.p1Line2Id, initData.id);
-        initData.data->AddLine(initData.id, initData.p2Line2Id);
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL);
+
+    initData.data->AddLine(initData.p1Line1Id, initData.id);
+    initData.data->AddLine(initData.id, initData.p2Line1Id);
+    initData.data->AddLine(initData.p1Line2Id, initData.id);
+    initData.data->AddLine(initData.id, initData.p2Line2Id);
+
+    patternGraph->AddEdge(initData.p1Line1Id, initData.id);
+    patternGraph->AddEdge(initData.p2Line1Id, initData.id);
+    patternGraph->AddEdge(initData.p1Line2Id, initData.id);
+    patternGraph->AddEdge(initData.p2Line2Id, initData.id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     if (initData.parse == Document::FullParse)

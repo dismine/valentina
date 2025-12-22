@@ -79,6 +79,12 @@ auto VInternalVariable::IsNotUsed() const -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VInternalVariable::GetReferences() const -> QList<quint32>
+{
+    return d->references;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VInternalVariable::GetValue() const -> qreal
 {
     return d->value;
@@ -118,6 +124,12 @@ auto VInternalVariable::GetType() const -> VarType
 void VInternalVariable::SetType(const VarType &type)
 {
     d->type = type;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VInternalVariable::SetReferences(const QList<quint32> &references)
+{
+    d->references = references;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

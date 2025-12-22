@@ -37,8 +37,8 @@
 #include "../../../../visualization/line/vistooltruedarts.h"
 #include "../../../../visualization/visualization.h"
 #include "../../../vabstracttool.h"
-#include "../../vdrawtool.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/compatibility.h"
@@ -169,10 +169,28 @@ auto VToolTrueDarts::Create(VToolTrueDartsInitData initData) -> VToolTrueDarts *
     {
         initData.data->UpdateGObject(initData.p1id, p1);
         initData.data->UpdateGObject(initData.p2id, p2);
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL);
+
+    patternGraph->AddEdge(initData.baseLineP1Id, initData.id);
+    patternGraph->AddEdge(initData.baseLineP2Id, initData.id);
+    patternGraph->AddEdge(initData.dartP1Id, initData.id);
+    patternGraph->AddEdge(initData.dartP2Id, initData.id);
+    patternGraph->AddEdge(initData.dartP3Id, initData.id);
+
+    patternGraph->AddVertex(initData.p1id, VNodeType::OBJECT);
+    patternGraph->AddVertex(initData.p2id, VNodeType::OBJECT);
+
+    patternGraph->AddEdge(initData.id, initData.p1id);
+    patternGraph->AddEdge(initData.id, initData.p2id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     if (initData.parse == Document::FullParse)

@@ -195,6 +195,8 @@ public:
     auto DataAnglesCurves() const -> QMap<QString, QSharedPointer<VCurveAngle>>;
     auto DataPieceArea() const -> QMap<QString, QSharedPointer<VPieceArea>>;
 
+    auto DataDependencyVariables() const -> QHash<QString, QList<quint32>>;
+
     auto IsUnique(const QString &name) const -> bool;
     static auto IsUnique(const QString &name, const QString &nspace) -> bool;
 

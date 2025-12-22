@@ -30,6 +30,7 @@
 #include "../../dialogs/tools/piece/dialogpiecepath.h"
 #include "../../undocommands/savepieceoptions.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vlayout/vabstractpiece.h"
 #include "../vmisc/theme/vscenestylesheet.h"
 #include "../vpatterndb/vpiecenode.h"
@@ -69,10 +70,39 @@ auto VToolPiecePath::Create(VToolPiecePathInitData initData) -> VToolPiecePath *
     else
     {
         initData.data->UpdatePiecePath(initData.id, initData.path);
-        if (initData.parse != Document::FullParse)
+    }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::MODELING_OBJECT);
+
+    bool ignorePath = false;
+    for (int i = 0; i < initData.path.CountNodes(); ++i)
+    {
+        quint32 const id = initData.path.at(i).GetId();
+        try
         {
-            initData.doc->UpdateToolData(initData.id, initData.data);
+            initData.data->GetGObject(id);
         }
+        catch (const VExceptionBadId &)
+        { // Possible case. Parent was deleted, but the node object is still here.
+            qDebug() << "Broken relation. Parent was deleted, but the piece path object is still here. Piece "
+                        "path id ="
+                     << initData.id << ".";
+            ignorePath = true; // Just ignore
+        }
+        patternGraph->AddEdge(id, initData.id);
+    }
+
+    if (ignorePath)
+    {
+        return nullptr;
+    }
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     if (initData.parse == Document::FullParse)
@@ -225,7 +255,7 @@ void VToolPiecePath::AllowSelecting(bool enabled)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPiecePath::AddToFile()
 {
-    QDomElement domElement = doc->createElement(getTagName());
+    QDomElement domElement = doc->createElement(VToolPiecePath::getTagName());
     const VPiecePath path = VAbstractTool::data.GetPiecePath(m_id);
 
     AddAttributes(doc, domElement, m_id, path);
@@ -326,8 +356,11 @@ void VToolPiecePath::RefreshGeometry()
         {
             QVector<VLayoutPoint> points = path.PathPoints(this->getData(), cuttingPath);
             const QTransform matrix = VGObject::FlippingMatrix(mirrorLine);
-            std::transform(points.begin(), points.end(), points.begin(),
-                           [&matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
+            std::transform(points.begin(),
+                           points.end(),
+                           points.begin(),
+                           [&matrix](const VLayoutPoint &point) -> VLayoutPoint
+                           { return VAbstractPiece::MapPoint(point, matrix); });
             QVector<QPointF> casted;
             CastTo(points, casted);
             p.addPath(VPiecePath::MakePainterPath(casted));

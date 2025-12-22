@@ -38,15 +38,15 @@
 #include "../../../../../visualization/path/vistoolcutsplinepath.h"
 #include "../../../../../visualization/visualization.h"
 #include "../../../../vabstracttool.h"
-#include "../../../vdrawtool.h"
-#include "../vmisc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vabstractcubicbezierpath.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
 #include "../vgeometry/vsplinepath.h"
 #include "../vgeometry/vsplinepoint.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vpatterndb/variables/vcurvelength.h"
@@ -169,31 +169,40 @@ auto VToolCutSplinePath::Create(VToolCutInitData &initData) -> VToolCutSplinePat
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(p);
-
-        auto path1 = QSharedPointer<VAbstractBezier>(splPath1);
-        initData.data->AddSpline(path1, NULL_ID, initData.id);
-        initData.data->RegisterUniqueName(path1);
-
-        auto path2 = QSharedPointer<VAbstractBezier>(splPath2);
-        initData.data->AddSpline(path2, NULL_ID, initData.id);
-        initData.data->RegisterUniqueName(path2);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, p);
+    }
 
-        auto path1 = QSharedPointer<VAbstractBezier>(splPath1);
-        initData.data->AddSpline(path1, NULL_ID, initData.id);
-        initData.data->RegisterUniqueName(path1);
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
 
-        auto path2 = QSharedPointer<VAbstractBezier>(splPath2);
-        initData.data->AddSpline(path2, NULL_ID, initData.id);
-        initData.data->RegisterUniqueName(path2);
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL);
 
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    const auto varData = initData.data->DataDependencyVariables();
+    initData.doc->FindFormulaDependencies(initData.formula, initData.id, varData);
+
+    auto path1 = QSharedPointer<VAbstractBezier>(splPath1);
+    initData.data->AddSpline(path1, NULL_ID, initData.id);
+    initData.data->RegisterUniqueName(path1);
+
+    auto path2 = QSharedPointer<VAbstractBezier>(splPath2);
+    initData.data->AddSpline(path2, NULL_ID, initData.id);
+    initData.data->RegisterUniqueName(path2);
+
+    // TODO: Add segments to graph when we start showing them for users
+    // patternGraph->AddVertex(initData.segment1Id, VNodeType::OBJECT);
+    // patternGraph->AddVertex(initData.segment2Id, VNodeType::OBJECT);
+
+    // patternGraph->AddEdge(initData.id, initData.segment1Id);
+    // patternGraph->AddEdge(initData.id, initData.segment2Id);
+
+    patternGraph->AddEdge(initData.baseCurveId, initData.id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     VToolCutSplinePath *tool = nullptr;

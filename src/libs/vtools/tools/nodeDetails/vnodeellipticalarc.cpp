@@ -30,10 +30,12 @@
 
 #include <QDomElement>
 
-#include "../ifc/xml/vdomdocument.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vdomdocument.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vabstracttool.h"
 #include "../vdatatool.h"
+#include "../vgeometry/vellipticalarc.h"
 #include "vabstractnode.h"
 
 const QString VNodeEllipticalArc::ToolType = QStringLiteral("modeling");
@@ -41,6 +43,26 @@ const QString VNodeEllipticalArc::ToolType = QStringLiteral("modeling");
 //---------------------------------------------------------------------------------------------------------------------
 void VNodeEllipticalArc::Create(const VAbstractNodeInitData &initData)
 {
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::MODELING_OBJECT);
+
+    try
+    {
+        auto *arc = new VEllipticalArc(*initData.data->GeometricObject<VEllipticalArc>(initData.idObject));
+        arc->setIdObject(initData.idObject);
+        arc->setMode(Draw::Modeling);
+        initData.data->UpdateGObject(initData.id, arc);
+    }
+    catch (const VExceptionBadId &e)
+    { // Possible case. Parent was deleted, but the node object is still here.
+        Q_UNUSED(e)
+        return; // Just ignore
+    }
+
+    patternGraph->AddEdge(initData.idObject, initData.id);
+
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::NodeElArc, initData.doc);

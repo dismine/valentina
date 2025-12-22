@@ -656,6 +656,36 @@ auto VContainer::DataPieceArea() const -> QMap<QString, QSharedPointer<VPieceAre
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VContainer::DataDependencyVariables() const -> QHash<QString, QList<quint32>>
+{
+    Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 12, "Check that you used all types");
+    QVector<VarType> types{VarType::LineAngle,
+                           VarType::LineLength,
+                           VarType::CurveLength,
+                           VarType::CurveCLength,
+                           VarType::ArcRadius,
+                           VarType::CurveAngle};
+
+    QHash<QString, QList<quint32>> varData;
+
+    for (const auto &var : d->variables)
+    {
+        if (types.contains(var->GetType()))
+        {
+            auto const references = var->GetReferences();
+            varData.insert(var->GetName(), references);
+
+            if (const QString alias = var->GetAlias(); !alias.isEmpty())
+            {
+                varData.insert(alias, references);
+            }
+        }
+    }
+
+    return varData;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VContainer::IsUnique(const QString &name) const -> bool
 {
     return VContainer::IsUnique(name, d->nspace);

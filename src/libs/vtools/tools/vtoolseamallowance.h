@@ -40,6 +40,7 @@
 class DialogTool;
 class VNoBrushScalePathItem;
 class VFoldLine;
+class VPatternGraph;
 
 struct VToolSeamAllowanceInitData : VAbstractToolInitData
 {
@@ -63,6 +64,11 @@ public:
     static auto Duplicate(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc)
         -> VToolSeamAllowance *;
     static auto Duplicate(VToolSeamAllowanceInitData &initData) -> VToolSeamAllowance *;
+
+    static void AddPieceDependencies(quint32 id,
+                                     const VPiece &piece,
+                                     VAbstractPattern *doc,
+                                     const QHash<QString, QList<quint32>> &variables);
 
     static const quint8 pieceVersion;
 

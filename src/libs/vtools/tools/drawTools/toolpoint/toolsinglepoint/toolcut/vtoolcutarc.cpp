@@ -37,6 +37,7 @@
 #include "../../../../../visualization/visualization.h"
 #include "../../../../vabstracttool.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vabstractarc.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vellipticalarc.h"
@@ -175,34 +176,51 @@ auto VToolCutArc::Create(VToolCutInitData &initData) -> VToolCutArc *
     auto *p = new VPointF(cutPoint, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
 
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL);
+
+    const auto varData = initData.data->DataDependencyVariables();
+    initData.doc->FindFormulaDependencies(initData.formula, initData.id, varData);
+
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(p);
 
         a1->setId(initData.data->getNextId());
         initData.data->RegisterUniqueName(a1);
-        initData.data->AddArc(a1, a1->id(), initData.id);
+        initData.data->AddArc(a1, /*a1->id()*/ NULL_ID, initData.id);
 
         a2->setId(initData.data->getNextId());
         initData.data->RegisterUniqueName(a2);
-        initData.data->AddArc(a2, a2->id(), initData.id);
+        initData.data->AddArc(a2, /*a2->id()*/ NULL_ID, initData.id);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, p);
 
-        a1->setId(initData.id + 1);
+        // a1->setId(initData.id + 1);
         initData.data->RegisterUniqueName(a1);
         initData.data->AddArc(a1, a1->id(), initData.id);
 
-        a2->setId(initData.id + 2);
+        // a2->setId(initData.id + 2);
         initData.data->RegisterUniqueName(a2);
         initData.data->AddArc(a2, a2->id(), initData.id);
+    }
 
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    // TODO: Add segments to graph when we start showing them for users
+    // patternGraph->AddVertex(initData.segment1Id, VNodeType::OBJECT);
+    // patternGraph->AddVertex(initData.segment2Id, VNodeType::OBJECT);
+
+    // patternGraph->AddEdge(initData.id, initData.segment1Id);
+    // patternGraph->AddEdge(initData.id, initData.segment2Id);
+
+    patternGraph->AddEdge(initData.baseCurveId, initData.id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     VToolCutArc *tool = nullptr;

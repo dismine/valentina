@@ -29,6 +29,7 @@
 
 #include "../../../dialogs/tools/dialogparallelcurve.h"
 #include "../../../visualization/path/vistoolparallelcurve.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vsplinepath.h"
 #include "../vpatterndb/vformula.h"
@@ -109,16 +110,27 @@ auto VToolParallelCurve::Create(VToolParallelCurveInitData &initData) -> VToolPa
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(new VSplinePath(splPath));
-        initData.data->AddSpline(initData.data->GeometricObject<VAbstractBezier>(initData.id), initData.id);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, new VSplinePath(splPath));
-        initData.data->AddSpline(initData.data->GeometricObject<VAbstractBezier>(initData.id), initData.id);
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL);
+
+    const auto varData = initData.data->DataDependencyVariables();
+    initData.doc->FindFormulaDependencies(initData.formulaWidth, initData.id, varData);
+
+    initData.data->AddSpline(initData.data->GeometricObject<VAbstractBezier>(initData.id), initData.id);
+
+    patternGraph->AddEdge(initData.originCurveId, initData.id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     if (initData.parse == Document::FullParse)

@@ -43,9 +43,10 @@
 #include "../../../../visualization/line/operation/vistoolflippingbyline.h"
 #include "../../../../visualization/visualization.h"
 #include "../../../vabstracttool.h"
-#include "../vmisc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vformula.h"
@@ -111,7 +112,38 @@ auto VToolFlippingByLine::Create(VToolFlippingByLineInitData initData) -> VToolF
     const auto secondPoint = *initData.data->GeometricObject<VPointF>(initData.secondLinePointId);
     const auto sPoint = static_cast<QPointF>(secondPoint);
 
+    if (initData.typeCreation == Source::FromGui)
+    {
+        initData.destination.clear(); // Try to avoid mistake, value must be empty
+
+        initData.id = initData.data->getNextId(); // Just reserve id for tool
+    }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL);
+
     CreateDestination(initData, fPoint, sPoint);
+
+    patternGraph->AddEdge(initData.firstLinePointId, initData.id);
+    patternGraph->AddEdge(initData.secondLinePointId, initData.id);
+
+    for (const auto &object : qAsConst(initData.source))
+    {
+        patternGraph->AddEdge(object.id, initData.id);
+    }
+
+    for (const auto &object : qAsConst(initData.destination))
+    {
+        patternGraph->AddVertex(object.id, VNodeType::OBJECT);
+        patternGraph->AddEdge(initData.id, object.id);
+    }
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
+    }
 
     if (initData.parse == Document::FullParse)
     {

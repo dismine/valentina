@@ -36,11 +36,11 @@
 #include "../../../../../visualization/line/vistoolheight.h"
 #include "../../../../../visualization/visualization.h"
 #include "../../../../vabstracttool.h"
-#include "../../../vdrawtool.h"
-#include "../vmisc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "vtoollinepoint.h"
@@ -147,20 +147,28 @@ auto VToolHeight::Create(VToolHeightInitData initData) -> VToolHeight *
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(p);
-        initData.data->AddLine(initData.basePointId, initData.id);
-        initData.data->AddLine(initData.p1LineId, initData.id);
-        initData.data->AddLine(initData.p2LineId, initData.id);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, p);
-        initData.data->AddLine(initData.basePointId, initData.id);
-        initData.data->AddLine(initData.p1LineId, initData.id);
-        initData.data->AddLine(initData.p2LineId, initData.id);
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL);
+
+    initData.data->AddLine(initData.basePointId, initData.id);
+    initData.data->AddLine(initData.p1LineId, initData.id);
+    initData.data->AddLine(initData.p2LineId, initData.id);
+
+    patternGraph->AddEdge(initData.basePointId, initData.id);
+    patternGraph->AddEdge(initData.p1LineId, initData.id);
+    patternGraph->AddEdge(initData.p2LineId, initData.id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     if (initData.parse == Document::FullParse)

@@ -37,8 +37,8 @@
 #include "../../../../../visualization/path/vistoolcutspline.h"
 #include "../../../../../visualization/visualization.h"
 #include "../../../../vabstracttool.h"
-#include "../../../vdrawtool.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vabstractcubicbezier.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vpointf.h"
@@ -168,25 +168,38 @@ auto VToolCutSpline::Create(VToolCutInitData &initData) -> VToolCutSpline *
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(p);
-        initData.data->AddSpline(spline1, NULL_ID, initData.id);
-        initData.data->AddSpline(spline2, NULL_ID, initData.id);
-
-        initData.data->RegisterUniqueName(spline1);
-        initData.data->RegisterUniqueName(spline2);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, p);
-        initData.data->AddSpline(spline1, NULL_ID, initData.id);
-        initData.data->AddSpline(spline2, NULL_ID, initData.id);
+    }
 
-        initData.data->RegisterUniqueName(spline1);
-        initData.data->RegisterUniqueName(spline2);
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
 
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL);
+
+    const auto varData = initData.data->DataDependencyVariables();
+    initData.doc->FindFormulaDependencies(initData.formula, initData.id, varData);
+
+    initData.data->AddSpline(spline1, NULL_ID, initData.id);
+    initData.data->AddSpline(spline2, NULL_ID, initData.id);
+
+    initData.data->RegisterUniqueName(spline1);
+    initData.data->RegisterUniqueName(spline2);
+
+    // TODO: Add segments to graph when we start showing them for users
+    // patternGraph->AddVertex(initData.segment1Id, VNodeType::OBJECT);
+    // patternGraph->AddVertex(initData.segment2Id, VNodeType::OBJECT);
+
+    // patternGraph->AddEdge(initData.id, initData.segment1Id);
+    // patternGraph->AddEdge(initData.id, initData.segment2Id);
+
+    patternGraph->AddEdge(initData.baseCurveId, initData.id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     VToolCutSpline *tool = nullptr;

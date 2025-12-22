@@ -31,6 +31,7 @@
 #include <QDomNode>
 #include <QDomNodeList>
 #include <QFuture>
+#include <QFutureWatcher>
 #include <QLatin1String>
 #include <QList>
 #include <QMessageLogger>
@@ -40,11 +41,11 @@
 #include <QtConcurrentRun>
 #include <QtDebug>
 
+#include "../exception/vexceptionbadid.h"
 #include "../exception/vexceptionconversionerror.h"
 #include "../exception/vexceptionemptyparameter.h"
 #include "../exception/vexceptionobjecterror.h"
-#include "../ifc/exception/vexceptionbadid.h"
-#include "../ifc/ifcdef.h"
+#include "../ifcdef.h"
 #include "../qmuparser/qmutokenparser.h"
 #include "../vmisc/compatibility.h"
 #include "../vmisc/vabstractvalapplication.h"
@@ -52,9 +53,11 @@
 #include "../vpatterndb/vpiecenode.h"
 #include "../vtools/tools/vdatatool.h"
 #include "def.h"
+#include "typedef.h"
 #include "vbackgroundpatternimage.h"
 #include "vdomdocument.h"
 #include "vpatternconverter.h"
+#include "vpatterngraph.h"
 #include "vpatternimage.h"
 #include "vtoolrecord.h"
 #include "vvalentinasettings.h"
@@ -319,8 +322,10 @@ VAbstractPattern::VAbstractPattern(QObject *parent)
     toolsOnRemove(QVector<VDataTool *>()),
     history(QVector<VToolRecord>()),
     patternPieces(),
-    modified(false)
+    modified(false),
+    m_patternGraph(new VPatternGraph())
 {
+    connect(qApp, &QCoreApplication::aboutToQuit, this, &VAbstractPattern::CancelFormulaDependencyChecks);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -328,6 +333,7 @@ VAbstractPattern::~VAbstractPattern()
 {
     qDeleteAll(toolsOnRemove);
     toolsOnRemove.clear();
+    delete m_patternGraph;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -820,7 +826,7 @@ auto VAbstractPattern::ParseSANode(const QDomElement &domElement) -> VPieceNode
     const bool turnPoint = VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrNodeTurnPoint, trueStr);
 
     const QString t = VDomDocument::GetParametrString(domElement, AttrType, VAbstractPattern::NodePoint);
-    Tool tool;
+    Tool tool = Tool::LAST_ONE_DO_NOT_USE;
 
     switch (const QStringList types{VAbstractPattern::NodePoint, VAbstractPattern::NodeArc,
                                     VAbstractPattern::NodeSpline, VAbstractPattern::NodeSplinePath,
@@ -1541,9 +1547,94 @@ void VAbstractPattern::UpdateVisiblityGroups()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VAbstractPattern::PatternGraph() const -> VPatternGraph *
+{
+    return m_patternGraph;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::FindFormulaDependencies(const QString &formula,
+                                               quint32 id,
+                                               const QHash<QString, QList<quint32>> &variables)
+{
+    if (formula.isEmpty() || id == NULL_ID || variables.isEmpty())
+    {
+        return;
+    }
+
+    // Create a new watcher for this task
+    auto *watcher = new QFutureWatcher<void>(this);
+
+    // Connect to cleanup when finished
+    connect(watcher,
+            &QFutureWatcher<void>::finished,
+            this,
+            [this]() -> void
+            {
+                // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+                auto *watcher = static_cast<QFutureWatcher<void> *>(sender());
+                QMutexLocker const locker(&m_watchersMutex);
+                m_formulaDependenciesWatchers.removeOne(watcher);
+                watcher->deleteLater();
+            });
+
+    // Create the async task
+    QFuture<void> const future = QtConcurrent::run(
+        [this, formula, id, variables]() -> void
+        {
+            QList<QString> tokens;
+            try
+            {
+                QScopedPointer<qmu::QmuTokenParser> const cal(new qmu::QmuTokenParser(formula, false, false));
+                tokens = cal->GetTokens().values();
+            }
+            catch (qmu::QmuParserError &e)
+            {
+                qDebug() << "\nMath parser error:\n"
+                         << "--------------------------------------\n"
+                         << "Message:     " << e.GetMsg() << "\n"
+                         << "Expression:  " << e.GetExpr() << "\n"
+                         << "--------------------------------------";
+                return;
+            }
+
+            const QThread *currentThread = QThread::currentThread();
+            int checkCounter = 0;
+            const int checkInterval = 10; // Check every 10 iterations
+
+            for (const auto &token : qAsConst(tokens))
+            {
+                if (++checkCounter >= checkInterval && currentThread->isInterruptionRequested())
+                {
+                    return;
+                }
+
+                if (!variables.contains(token))
+                {
+                    continue;
+                }
+
+                QList<quint32> const references = variables.value(token);
+                for (const auto &ref : references)
+                {
+                    if (ref > NULL_ID && ref != id)
+                    {
+                        m_patternGraph->AddEdge(ref, id);
+                    }
+                }
+            }
+        });
+
+    watcher->setFuture(future);
+
+    QMutexLocker const locker(&m_watchersMutex);
+    m_formulaDependenciesWatchers.append(watcher);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractPattern::ToolExists(const quint32 &id)
 {
-    if (tools.contains(id) == false)
+    if (!tools.contains(id))
     {
         throw VExceptionBadId(QCoreApplication::translate("VAbstractPattern", "Can't find tool in table."), id);
     }
@@ -2791,6 +2882,41 @@ auto VAbstractPattern::ReadWatermarkPath() const -> QString
 auto VAbstractPattern::ReadCompanyName() const -> QString
 {
     return UniqueTagText(TagCompanyName);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::CancelFormulaDependencyChecks()
+{
+    QList<QFutureWatcher<void> *> watchersCopy;
+
+    {
+        QMutexLocker const locker(&m_watchersMutex);
+
+        if (m_formulaDependenciesWatchers.isEmpty())
+        {
+            return;
+        }
+
+        watchersCopy = m_formulaDependenciesWatchers;
+        m_formulaDependenciesWatchers.clear();
+
+        // Disconnect to prevent cleanup from running
+        for (auto *watcher : qAsConst(watchersCopy))
+        {
+            watcher->disconnect();
+        }
+    }
+
+    for (auto *watcher : qAsConst(watchersCopy))
+    {
+        watcher->cancel();
+    }
+
+    for (auto *watcher : qAsConst(watchersCopy))
+    {
+        watcher->waitForFinished();
+        delete watcher; // Manual cleanup since we disconnected
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -50,17 +50,17 @@
 #include "../../../visualization/path/vistoolsplinepath.h"
 #include "../../../visualization/visualization.h"
 #include "../../vabstracttool.h"
-#include "../vmisc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vdomdocument.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../qmuparser/qmutokenparser.h"
-#include "../vdrawtool.h"
 #include "../vgeometry/vabstractcubicbezierpath.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
 #include "../vgeometry/vsplinepoint.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/../vgeometry/vsplinepath.h"
@@ -129,9 +129,13 @@ auto VToolSplinePath::Create(const QPointer<DialogTool> &dialog, VMainGraphicsSc
     initData.notes = dialogTool->GetNotes();
 
     auto *path = new VSplinePath(dialogTool->GetPath());
+
+    initData.points.reserve(path->CountPoints());
     for (qint32 i = 0; i < path->CountPoints(); ++i)
     {
-        doc->IncrementReferens((*path)[i].P().getIdTool());
+        VPointF const point = (*path)[i].P();
+        initData.points.append(point.id());
+        doc->IncrementReferens(point.getIdTool());
     }
 
     VToolSplinePath *spl = Create(initData, path);
@@ -153,18 +157,38 @@ auto VToolSplinePath::Create(VToolSplinePathInitData &initData, VSplinePath *pat
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(path);
-        initData.data->AddCurveWithSegments(initData.data->GeometricObject<VAbstractCubicBezierPath>(initData.id),
-                                            initData.id);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, path);
-        initData.data->AddCurveWithSegments(initData.data->GeometricObject<VAbstractCubicBezierPath>(initData.id),
-                                            initData.id);
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL);
+
+    const auto varData = initData.data->DataDependencyVariables();
+
+    for (int i = 0; i < initData.points.size(); ++i)
+    {
+        initData.doc->FindFormulaDependencies(initData.a1.at(i), initData.id, varData);
+        initData.doc->FindFormulaDependencies(initData.a2.at(i), initData.id, varData);
+        initData.doc->FindFormulaDependencies(initData.l1.at(i), initData.id, varData);
+        initData.doc->FindFormulaDependencies(initData.l2.at(i), initData.id, varData);
+    }
+
+    initData.data->AddCurveWithSegments(initData.data->GeometricObject<VAbstractCubicBezierPath>(initData.id),
+                                        initData.id);
+
+    for (const auto &pId : std::as_const(initData.points))
+    {
+        patternGraph->AddEdge(pId, initData.id);
+    }
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     if (initData.parse == Document::FullParse)

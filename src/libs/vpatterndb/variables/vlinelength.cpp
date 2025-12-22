@@ -59,6 +59,8 @@ VLengthLine::VLengthLine(const VPointF *p1, const quint32 &p1Id, const VPointF *
     SetType(VarType::LineLength);
     SetName(line_ + p1->name() + '_' + p2->name());
     SetValue(p1, p2);
+
+    SetReferences({p1Id, p2Id});
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -47,6 +47,7 @@
 #include "../../undocommands/label/showlabel.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vdomdocument.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vabstracttool.h"
 #include "../vdatatool.h"
 #include "../vmisc/theme/themeDef.h"
@@ -138,6 +139,34 @@ VNodePoint::VNodePoint(const VAbstractNodeInitData &initData, QObject *qoParent,
  */
 void VNodePoint::Create(const VAbstractNodeInitData &initData)
 {
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::MODELING_OBJECT);
+
+    QSharedPointer<VPointF> point;
+    try
+    {
+        point = initData.data->GeometricObject<VPointF>(initData.idObject);
+    }
+    catch (const VExceptionBadId &)
+    { // Possible case. Parent was deleted, but the node object is still here.
+        qDebug() << "Broken relation. Parent was deleted, but the node object is still here. Node point id ="
+                 << initData.id << ".";
+        return; // Just ignore
+    }
+
+    patternGraph->AddEdge(initData.idObject, initData.id);
+
+    QSharedPointer<VPointF> const p(new VPointF(*point));
+    p->setIdObject(initData.idObject);
+    p->setMode(Draw::Modeling);
+    p->SetShowLabel(initData.showLabel);
+    p->setMx(initData.mx);
+    p->setMy(initData.my);
+
+    initData.data->UpdateGObject(initData.id, p);
+
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::NodePoint, initData.doc);

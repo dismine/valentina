@@ -46,17 +46,14 @@ enum class ParentType : bool
 
 struct VAbstractNodeInitData : VAbstractToolInitData
 {
-    VAbstractNodeInitData()
-      : VAbstractToolInitData(),
-        idObject(NULL_ID),
-        drawName(),
-        idTool(NULL_ID)
-    {
-    }
+    VAbstractNodeInitData() = default;
 
-    quint32 idObject;
-    QString drawName;
-    quint32 idTool;
+    quint32 idObject{NULL_ID};
+    QString drawName{};
+    quint32 idTool{NULL_ID};
+    qreal mx{0};
+    qreal my{0};
+    bool showLabel{true};
 };
 
 /**

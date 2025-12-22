@@ -158,8 +158,8 @@ inline auto VToolSinglePoint::InitArc(VContainer *data, qreal segLength, const V
         a2->setName(arc2.name());
     }
 
-    data->AddArc(a1, arc1.id(), p->id());
-    data->AddArc(a2, arc2.id(), p->id());
+    data->AddArc(a1, /*arc1.id()*/ NULL_ID, p->id());
+    data->AddArc(a2, /*arc2.id()*/ NULL_ID, p->id());
 
     // Because we don't store segments, but only data about them we must register the names manually
     data->RegisterUniqueName(a1);

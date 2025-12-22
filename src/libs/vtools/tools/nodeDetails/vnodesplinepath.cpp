@@ -30,10 +30,13 @@
 
 #include <QDomElement>
 
-#include "../ifc/xml/vdomdocument.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vdomdocument.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vabstracttool.h"
 #include "../vdatatool.h"
+#include "../vgeometry/vcubicbezierpath.h"
+#include "../vgeometry/vsplinepath.h"
 #include "vabstractnode.h"
 
 const QString VNodeSplinePath::ToolType = QStringLiteral("modelingPath");
@@ -58,6 +61,37 @@ VNodeSplinePath::VNodeSplinePath(const VAbstractNodeInitData &initData, QObject 
  */
 void VNodeSplinePath::Create(const VAbstractNodeInitData &initData)
 {
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::MODELING_OBJECT);
+
+    try
+    {
+        const auto obj = initData.data->GetGObject(initData.idObject);
+        if (obj->getType() == GOType::SplinePath)
+        {
+            auto *path = new VSplinePath(*initData.data->GeometricObject<VSplinePath>(initData.idObject));
+            path->setIdObject(initData.idObject);
+            path->setMode(Draw::Modeling);
+            initData.data->UpdateGObject(initData.id, path);
+        }
+        else
+        {
+            auto *spl = new VCubicBezierPath(*initData.data->GeometricObject<VCubicBezierPath>(initData.idObject));
+            spl->setIdObject(initData.idObject);
+            spl->setMode(Draw::Modeling);
+            initData.data->UpdateGObject(initData.id, spl);
+        }
+    }
+    catch (const VExceptionBadId &e)
+    { // Possible case. Parent was deleted, but the node object is still here.
+        Q_UNUSED(e)
+        return; // Just ignore
+    }
+
+    patternGraph->AddEdge(initData.idObject, initData.id);
+
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::NodeSplinePath, initData.doc);

@@ -42,6 +42,7 @@
 #include "../../visualization/line/vistoolline.h"
 #include "../../visualization/visualization.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vabstracttool.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
@@ -148,16 +149,25 @@ auto VToolLine::Create(VToolLineInitData initData) -> VToolLine *
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->getNextId();
-        initData.data->AddLine(initData.firstPoint, initData.secondPoint);
     }
     else
     {
         initData.data->UpdateId(initData.id);
-        initData.data->AddLine(initData.firstPoint, initData.secondPoint);
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL);
+
+    initData.data->AddLine(initData.firstPoint, initData.secondPoint);
+
+    patternGraph->AddEdge(initData.firstPoint, initData.id);
+    patternGraph->AddEdge(initData.secondPoint, initData.id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     if (initData.parse == Document::FullParse)

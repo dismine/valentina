@@ -49,19 +49,19 @@
 #include "../../../visualization/path/vistoolspline.h"
 #include "../../../visualization/visualization.h"
 #include "../../vabstracttool.h"
-#include "../vmisc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../qmuparser/qmutokenparser.h"
-#include "../vdrawtool.h"
-#include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/global.h"
 #include "../vwidgets/vcontrolpointspline.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "vabstractspline.h"
+#include "vgeometry/vspline.h"
 
 const QString VToolSpline::ToolType = QStringLiteral("simpleInteractive"); // NOLINT
 const QString VToolSpline::OldToolType = QStringLiteral("simple");         // NOLINT
@@ -82,7 +82,7 @@ VToolSpline::VToolSpline(const VToolSplineInitData &initData, QGraphicsItem *par
 
     const auto spl = VAbstractTool::data.GeometricObject<VSpline>(initData.id);
 
-    auto InitControlPoint = [this](VControlPointSpline *cPoint)
+    auto InitControlPoint = [this](VControlPointSpline *cPoint) -> void
     {
         connect(cPoint, &VControlPointSpline::ControlPointChangePosition, this,
                 &VToolSpline::ControlPointChangePosition);
@@ -144,6 +144,8 @@ auto VToolSpline::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene 
     const QPointer<DialogSpline> dialogTool = qobject_cast<DialogSpline *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
+    VSpline const spline = dialogTool->GetSpline();
+
     VToolSplineInitData initData;
     initData.scene = scene;
     initData.doc = doc;
@@ -151,8 +153,10 @@ auto VToolSpline::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene 
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
     initData.notes = dialogTool->GetNotes();
+    initData.point1 = spline.GetP1().id();
+    initData.point4 = spline.GetP4().id();
 
-    auto *spl = Create(initData, new VSpline(dialogTool->GetSpline()));
+    auto *spl = Create(initData, new VSpline(spline));
 
     if (spl != nullptr)
     {
@@ -173,16 +177,31 @@ auto VToolSpline::Create(VToolSplineInitData &initData, VSpline *spline) -> VToo
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(spline);
-        initData.data->AddSpline(initData.data->GeometricObject<VAbstractBezier>(initData.id), initData.id);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, spline);
-        initData.data->AddSpline(initData.data->GeometricObject<VAbstractBezier>(initData.id), initData.id);
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL);
+
+    const auto varData = initData.data->DataDependencyVariables();
+    initData.doc->FindFormulaDependencies(initData.a1, initData.id, varData);
+    initData.doc->FindFormulaDependencies(initData.a2, initData.id, varData);
+    initData.doc->FindFormulaDependencies(initData.l1, initData.id, varData);
+    initData.doc->FindFormulaDependencies(initData.l2, initData.id, varData);
+
+    initData.data->AddSpline(initData.data->GeometricObject<VAbstractBezier>(initData.id), initData.id);
+
+    patternGraph->AddEdge(initData.point1, initData.id);
+    patternGraph->AddEdge(initData.point4, initData.id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     if (initData.parse == Document::FullParse)

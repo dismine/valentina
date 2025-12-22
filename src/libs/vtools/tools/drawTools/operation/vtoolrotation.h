@@ -126,6 +126,8 @@ private:
     template <class Item>
     static void UpdateCurveWithSegments(quint32 idTool, const SourceItem &sItem, const QPointF &origin, qreal angle,
                                         const QString &suffix, VContainer *data, quint32 id);
+
+    static void CreateDestination(VToolRotationInitData &initData);
 };
 
 #endif // VTOOLROTATION_H

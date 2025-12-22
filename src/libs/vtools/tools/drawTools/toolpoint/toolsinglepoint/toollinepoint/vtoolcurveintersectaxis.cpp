@@ -39,14 +39,14 @@
 #include "../../../../../dialogs/tools/dialogcurveintersectaxis.h"
 #include "../../../../../dialogs/tools/dialogtool.h"
 #include "../../../../vabstracttool.h"
-#include "../../../vdrawtool.h"
-#include "../vmisc/exception/vexception.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../toolcut/vtoolcutsplinepath.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vpatterndb/vcontainer.h"
@@ -165,25 +165,36 @@ auto VToolCurveIntersectAxis::Create(VToolCurveIntersectAxisInitData &initData) 
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(p);
-        initData.data->AddLine(initData.basePointId, initData.id);
 
         initData.data->getNextId();
         initData.data->getNextId();
-        initData.segments = VToolSinglePoint::InitSegments(curve->getType(), segLength, p, initData.curveId,
-                                                           initData.data, initData.aliasSuffix1, initData.aliasSuffix2);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, p);
-        initData.data->AddLine(initData.basePointId, initData.id);
+    }
 
-        initData.segments = VToolSinglePoint::InitSegments(curve->getType(), segLength, p, initData.curveId,
-                                                           initData.data, initData.aliasSuffix1, initData.aliasSuffix2);
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
 
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL);
+
+    initData.data->AddLine(initData.basePointId, initData.id);
+
+    initData.segments = VToolSinglePoint::InitSegments(curve->getType(),
+                                                       segLength,
+                                                       p,
+                                                       initData.curveId,
+                                                       initData.data,
+                                                       initData.aliasSuffix1,
+                                                       initData.aliasSuffix2);
+
+    patternGraph->AddEdge(initData.basePointId, initData.id);
+    patternGraph->AddEdge(initData.curveId, initData.id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     if (initData.parse == Document::FullParse)

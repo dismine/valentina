@@ -32,6 +32,7 @@
 #include <QHash>
 #include <QMap>
 #include <QMetaObject>
+#include <QMutex>
 #include <QObject>
 #include <QPair>
 #include <QString>
@@ -87,6 +88,7 @@ enum class AxisType : qint8
 
 class VContainer;
 class VDataTool;
+class VPatternGraph;
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -415,6 +417,10 @@ public:
     static const QString NodeSpline;
     static const QString NodeSplinePath;
 
+    auto PatternGraph() const -> VPatternGraph *;
+
+    void FindFormulaDependencies(const QString &formula, quint32 id, const QHash<QString, QList<quint32>> &variables);
+
 signals:
     /**
      * @brief ChangedActivPP change active pattern peace.
@@ -484,6 +490,9 @@ public slots:
     void SelectedDetail(quint32 id);
     void UpdateVisiblityGroups();
 
+protected slots:
+    void CancelFormulaDependencyChecks();
+
 protected:
     /** @brief nameActivDraw name current pattern peace. */
     QString nameActivPP;
@@ -546,6 +555,11 @@ protected:
 
 private:
     Q_DISABLE_COPY_MOVE(VAbstractPattern) // NOLINT
+
+    VPatternGraph *m_patternGraph;
+
+    QList<QFutureWatcher<void> *> m_formulaDependenciesWatchers{};
+    mutable QMutex m_watchersMutex;
 
     auto ListIncrements() const -> QStringList;
     auto ListPointExpressions() const -> QVector<VFormulaField>;

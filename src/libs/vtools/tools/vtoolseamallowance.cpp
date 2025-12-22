@@ -32,6 +32,7 @@
 #include "../ifc/exception/vexceptionwrongid.h"
 #include "../ifc/xml/vlabeltemplateconverter.h"
 #include "../ifc/xml/vpatternconverter.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../qmuparser/qmutokenparser.h"
 #include "../undocommands/addpiece.h"
 #include "../undocommands/deletepiece.h"
@@ -522,7 +523,7 @@ auto VToolSeamAllowance::Create(const QPointer<DialogTool> &dialog, VMainGraphic
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
 
-    auto LoadLabelTemplate = [&initData](const QString &path)
+    auto LoadLabelTemplate = [&initData](const QString &path) -> QVector<VLabelTemplateLine>
     {
         if (not path.isEmpty())
         {
@@ -542,7 +543,7 @@ auto VToolSeamAllowance::Create(const QPointer<DialogTool> &dialog, VMainGraphic
             }
         }
 
-        return QVector<VLabelTemplateLine>();
+        return {};
     };
 
     initData.detail.GetPieceLabelData().SetLabelTemplate(LoadLabelTemplate(doc->GetDefaultPieceLabelPath()));
@@ -582,10 +583,19 @@ auto VToolSeamAllowance::Create(VToolSeamAllowanceInitData &initData) -> VToolSe
         initData.data->AddVariable(currentSA);
 
         initData.data->UpdatePiece(initData.id, initData.detail);
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::PIECE);
+
+    const auto varData = initData.data->DataDependencyVariables();
+    AddPieceDependencies(initData.id, initData.detail, initData.doc, varData);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     VToolSeamAllowance *piece = nullptr;
@@ -668,6 +678,94 @@ auto VToolSeamAllowance::Duplicate(VToolSeamAllowanceInitData &initData) -> VToo
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::AddPieceDependencies(quint32 id,
+                                              const VPiece &piece,
+                                              VAbstractPattern *doc,
+                                              const QHash<QString, QList<quint32>> &variables)
+{
+    SCASSERT(doc != nullptr)
+
+    VPatternGraph *patternGraph = doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    doc->FindFormulaDependencies(piece.GetFormulaSAWidth(), id, variables);
+
+    if (piece.IsManualFoldHeight())
+    {
+        doc->FindFormulaDependencies(piece.GetFormulaFoldHeight(), id, variables);
+    }
+
+    if (piece.IsManualFoldWidth())
+    {
+        doc->FindFormulaDependencies(piece.GetFormulaFoldWidth(), id, variables);
+    }
+
+    if (piece.IsManualFoldCenter())
+    {
+        doc->FindFormulaDependencies(piece.GetFormulaFoldCenter(), id, variables);
+    }
+
+    const VPieceLabelData &pieceLabelData = piece.GetPieceLabelData();
+    doc->FindFormulaDependencies(pieceLabelData.GetLabelWidth(), id, variables);
+    doc->FindFormulaDependencies(pieceLabelData.GetLabelHeight(), id, variables);
+    doc->FindFormulaDependencies(pieceLabelData.GetRotation(), id, variables);
+
+    const VPatternLabelData &patternLabelData = piece.GetPatternLabelData();
+    doc->FindFormulaDependencies(patternLabelData.GetLabelWidth(), id, variables);
+    doc->FindFormulaDependencies(patternLabelData.GetLabelHeight(), id, variables);
+    doc->FindFormulaDependencies(patternLabelData.GetRotation(), id, variables);
+
+    const VGrainlineData &grainlineData = piece.GetGrainlineGeometry();
+    doc->FindFormulaDependencies(grainlineData.GetLength(), id, variables);
+    doc->FindFormulaDependencies(grainlineData.GetRotation(), id, variables);
+
+    const VPiecePath &path = piece.GetPath();
+    doc->FindFormulaDependencies(path.GetVisibilityTrigger(), id, variables);
+
+    for (int i = 0; i < path.CountNodes(); ++i)
+    {
+        const VPieceNode &node = path.at(i);
+
+        if (node.GetFormulaSABefore() != currentSeamAllowance)
+        {
+            doc->FindFormulaDependencies(node.GetFormulaSABefore(), id, variables);
+        }
+
+        if (node.GetFormulaSAAfter() != currentSeamAllowance)
+        {
+            doc->FindFormulaDependencies(node.GetFormulaSAAfter(), id, variables);
+        }
+
+        doc->FindFormulaDependencies(node.GetFormulaPassmarkLength(), id, variables);
+        doc->FindFormulaDependencies(node.GetFormulaPassmarkWidth(), id, variables);
+        doc->FindFormulaDependencies(node.GetFormulaPassmarkAngle(), id, variables);
+        patternGraph->AddEdge(node.GetId(), id);
+    }
+
+    const QVector<CustomSARecord> records = piece.GetCustomSARecords();
+    for (const auto &record : records)
+    {
+        patternGraph->AddEdge(record.path, id);
+    }
+
+    const QVector<quint32> paths = piece.GetInternalPaths();
+    for (auto iPath : paths)
+    {
+        patternGraph->AddEdge(iPath, id);
+    }
+
+    for (auto point : piece.GetPins())
+    {
+        patternGraph->AddEdge(point, id);
+    }
+
+    for (auto point : piece.GetPlaceLabels())
+    {
+        patternGraph->AddEdge(point, id);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::RemoveWithConfirm(bool ask)
 {
     try
@@ -689,7 +787,7 @@ void VToolSeamAllowance::InsertNodes(const QVector<VPieceNode> &nodes, quint32 p
     SCASSERT(data != nullptr)
     SCASSERT(doc != nullptr)
 
-    if (pieceId <= NULL_ID || nodes.isEmpty())
+    if (pieceId == NULL_ID || nodes.isEmpty())
     {
         return;
     }
@@ -1868,13 +1966,17 @@ VToolSeamAllowance::VToolSeamAllowance(const VToolSeamAllowanceInitData &initDat
 
     m_foldLineMark->setBrush(Qt::SolidPattern);
 
-    connect(qApp, &QCoreApplication::aboutToQuit, m_patternUpdateInfoWatcher,
-            [this]()
+    connect(qApp,
+            &QCoreApplication::aboutToQuit,
+            m_patternUpdateInfoWatcher,
+            [this]() -> void
             {
                 m_patternUpdateInfoWatcher->cancel();
                 m_patternUpdateInfoWatcher->waitForFinished();
             });
-    connect(m_patternUpdateInfoWatcher, &QFutureWatcher<void>::finished, this,
+    connect(m_patternUpdateInfoWatcher,
+            &QFutureWatcher<void>::finished,
+            this,
             [this]()
             {
                 if (m_patternUpdateInfoWatcher->isCanceled())

@@ -139,6 +139,11 @@ private:
     static void UpdateCurveWithSegments(quint32 idTool, const SourceItem &sItem, qreal angle, qreal length,
                                         qreal rotationAngle, const QPointF &rotationOrigin, const QString &suffix,
                                         VContainer *data, quint32 id);
+
+    static void CreateDestination(VToolMoveInitData &initData,
+                                  QPointF rotationOrigin,
+                                  qreal calcAngle,
+                                  qreal calcLength);
 };
 
 #endif // VTOOLMOVING_H

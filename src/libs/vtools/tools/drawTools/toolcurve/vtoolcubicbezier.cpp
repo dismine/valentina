@@ -38,13 +38,12 @@
 #include "../../../visualization/path/vistoolcubicbezier.h"
 #include "../../../visualization/visualization.h"
 #include "../../vabstracttool.h"
-#include "../vmisc/exception/vexception.h"
-#include "../vdrawtool.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/../ifc/ifcdef.h"
-#include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vcubicbezier.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "vabstractspline.h"
@@ -105,16 +104,27 @@ auto VToolCubicBezier::Create(VToolCubicBezierInitData initData) -> VToolCubicBe
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(initData.spline);
-        initData.data->AddSpline(initData.data->GeometricObject<VAbstractBezier>(initData.id), initData.id);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, initData.spline);
-        initData.data->AddSpline(initData.data->GeometricObject<VAbstractBezier>(initData.id), initData.id);
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL);
+
+    initData.data->AddSpline(initData.data->GeometricObject<VAbstractBezier>(initData.id), initData.id);
+
+    patternGraph->AddEdge(initData.spline->GetP1().id(), initData.id);
+    patternGraph->AddEdge(initData.spline->GetP2().id(), initData.id);
+    patternGraph->AddEdge(initData.spline->GetP3().id(), initData.id);
+    patternGraph->AddEdge(initData.spline->GetP4().id(), initData.id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     if (initData.parse == Document::FullParse)
@@ -125,8 +135,8 @@ auto VToolCubicBezier::Create(VToolCubicBezierInitData initData) -> VToolCubicBe
         InitSplineToolConnections(initData.scene, _spl);
         VAbstractPattern::AddTool(initData.id, _spl);
         initData.doc->IncrementReferens(initData.spline->GetP1().getIdTool());
-        initData.doc->IncrementReferens(initData.spline->GetP1().getIdTool());
-        initData.doc->IncrementReferens(initData.spline->GetP1().getIdTool());
+        initData.doc->IncrementReferens(initData.spline->GetP2().getIdTool());
+        initData.doc->IncrementReferens(initData.spline->GetP3().getIdTool());
         initData.doc->IncrementReferens(initData.spline->GetP4().getIdTool());
         return _spl;
     }

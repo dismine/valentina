@@ -31,22 +31,20 @@
 #include <QDomElement>
 #include <QPen>
 #include <QSharedPointer>
-#include <new>
 
 #include "../../../dialogs/tools/dialogcubicbezierpath.h"
 #include "../../../dialogs/tools/dialogtool.h"
 #include "../../../visualization/path/vistoolcubicbezierpath.h"
 #include "../../../visualization/visualization.h"
 #include "../../vabstracttool.h"
-#include "../vmisc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vdomdocument.h"
-#include "../vdrawtool.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vabstractcubicbezierpath.h"
-#include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vcubicbezierpath.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "vabstractspline.h"
@@ -111,18 +109,28 @@ auto VToolCubicBezierPath::Create(VToolCubicBezierPathInitData initData) -> VToo
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(initData.path);
-        initData.data->AddCurveWithSegments(initData.data->GeometricObject<VAbstractCubicBezierPath>(initData.id),
-                                            initData.id);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, initData.path);
-        initData.data->AddCurveWithSegments(initData.data->GeometricObject<VAbstractCubicBezierPath>(initData.id),
-                                            initData.id);
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL);
+
+    initData.data->AddCurveWithSegments(initData.data->GeometricObject<VAbstractCubicBezierPath>(initData.id),
+                                        initData.id);
+
+    for (qint32 i = 0; i < initData.path->CountPoints(); ++i)
+    {
+        patternGraph->AddEdge((*initData.path)[i].id(), initData.id);
+    }
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     if (initData.parse == Document::FullParse)

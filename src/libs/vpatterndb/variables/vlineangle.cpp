@@ -61,6 +61,8 @@ VLineAngle::VLineAngle(const VPointF *p1, const quint32 &p1Id, const VPointF *p2
 
     SetName(angleLine_ + p1->name() + '_' + p2->name());
     SetValue(p1, p2);
+
+    SetReferences({p1Id, p2Id});
 }
 
 //---------------------------------------------------------------------------------------------------------------------

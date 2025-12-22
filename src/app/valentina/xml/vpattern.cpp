@@ -35,6 +35,7 @@
 #include "../ifc/exception/vexceptionwrongid.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vpatternconverter.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../qmuparser/qmuparsererror.h"
 #include "../qmuparser/qmutokenparser.h"
 #include "../vgeometry/varc.h"
@@ -105,6 +106,7 @@
 #include "../vwidgets/vabstractmainwindow.h"
 #include "tools/drawTools/toolcurve/vtoolgraduatedcurve.h"
 #include "tools/drawTools/toolcurve/vtoolparallelcurve.h"
+#include "typedef.h"
 
 #include <chrono>
 #include <functional>
@@ -2054,32 +2056,11 @@ void VPattern::ParseNodePoint(const QDomElement &domElement, const Document &par
         initData.typeCreation = Source::FromFile;
         initData.scene = sceneDetail;
 
-        qreal mx = 0;
-        qreal my = 0;
-
-        PointsCommonAttributes(domElement, initData.id, mx, my);
+        PointsCommonAttributes(domElement, initData.id, initData.mx, initData.my);
         initData.idObject = GetParametrUInt(domElement, AttrIdObject, NULL_ID_STR);
         initData.idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, NULL_ID_STR);
-        QSharedPointer<VPointF> point;
-        try
-        {
-            point = initData.data->GeometricObject<VPointF>(initData.idObject);
-        }
-        catch (const VExceptionBadId &)
-        { // Possible case. Parent was deleted, but the node object is still here.
-            qDebug() << "Broken relation. Parent was deleted, but the node object is still here. Node point id ="
-                     << initData.id << ".";
-            return; // Just ignore
-        }
+        initData.showLabel = GetParametrBool(domElement, AttrShowLabel, trueStr);
 
-        QSharedPointer<VPointF> const p(new VPointF(*point));
-        p->setIdObject(initData.idObject);
-        p->setMode(Draw::Modeling);
-        p->SetShowLabel(GetParametrBool(domElement, AttrShowLabel, trueStr));
-        p->setMx(mx);
-        p->setMy(my);
-
-        initData.data->UpdateGObject(initData.id, p);
         VNodePoint::Create(initData);
     }
     catch (const VExceptionBadId &e)
@@ -2105,20 +2086,8 @@ void VPattern::ParsePinPoint(const QDomElement &domElement, const Document &pars
 
         ToolsCommonAttributes(domElement, initData.id);
         initData.pointId = GetParametrUInt(domElement, AttrIdObject, NULL_ID_STR);
-
-        try
-        {
-            initData.data->GeometricObject<VPointF>(initData.pointId);
-        }
-        catch (const VExceptionBadId &)
-        { // Possible case. Parent was deleted, but the node object is still here.
-            qDebug() << "Broken relation. Parent was deleted, but the place label object is still here. Place label "
-                        "id ="
-                     << initData.id << ".";
-            return; // Just ignore
-        }
-
         initData.idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, NULL_ID_STR);
+
         VToolPin::Create(initData);
     }
     catch (const VExceptionBadId &e)
@@ -2784,8 +2753,8 @@ void VPattern::ParseOldToolSpline(VMainGraphicsScene *scene, QDomElement &domEle
         initData.typeCreation = Source::FromFile;
 
         DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
-        const quint32 point1 = GetParametrUInt(domElement, AttrPoint1, NULL_ID_STR);
-        const quint32 point4 = GetParametrUInt(domElement, AttrPoint4, NULL_ID_STR);
+        initData.point1 = GetParametrUInt(domElement, AttrPoint1, NULL_ID_STR);
+        initData.point4 = GetParametrUInt(domElement, AttrPoint4, NULL_ID_STR);
         const qreal angle1 = GetParametrDouble(domElement, AttrAngle1, QStringLiteral("270.0"));
         const qreal angle2 = GetParametrDouble(domElement, AttrAngle2, QStringLiteral("90.0"));
         const qreal kAsm1 = GetParametrDouble(domElement, AttrKAsm1, QStringLiteral("1.0"));
@@ -2794,8 +2763,8 @@ void VPattern::ParseOldToolSpline(VMainGraphicsScene *scene, QDomElement &domEle
         const QString color = GetParametrString(domElement, AttrColor, ColorBlack);
         const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, QChar('0'));
 
-        const auto p1 = data->GeometricObject<VPointF>(point1);
-        const auto p4 = data->GeometricObject<VPointF>(point4);
+        const auto p1 = data->GeometricObject<VPointF>(initData.point1);
+        const auto p4 = data->GeometricObject<VPointF>(initData.point4);
 
         auto *spline = new VSpline(*p1, *p4, angle1, angle2, kAsm1, kAsm2, kCurve);
         if (duplicate > 0)
@@ -2973,6 +2942,7 @@ void VPattern::ParseOldToolSplinePath(VMainGraphicsScene *scene, QDomElement &do
                 const qreal angle = GetParametrDouble(element, AttrAngle, QChar('0'));
                 const qreal kAsm2 = GetParametrDouble(element, AttrKAsm2, QStringLiteral("1.0"));
                 const quint32 pSpline = GetParametrUInt(element, AttrPSpline, NULL_ID_STR);
+                initData.points.append(pSpline);
                 const VPointF p = *data->GeometricObject<VPointF>(pSpline);
 
                 QLineF line(0, 0, 100, 0);
@@ -3284,29 +3254,6 @@ void VPattern::ParseNodeSpline(const QDomElement &domElement, const Document &pa
         initData.typeCreation = Source::FromFile;
 
         SplinesCommonAttributes(domElement, initData.id, initData.idObject, initData.idTool);
-        try
-        {
-            const auto obj = initData.data->GetGObject(initData.idObject);
-            if (obj->getType() == GOType::Spline)
-            {
-                auto *spl = new VSpline(*data->GeometricObject<VSpline>(initData.idObject));
-                spl->setIdObject(initData.idObject);
-                spl->setMode(Draw::Modeling);
-                initData.data->UpdateGObject(initData.id, spl);
-            }
-            else
-            {
-                auto *spl = new VCubicBezier(*initData.data->GeometricObject<VCubicBezier>(initData.idObject));
-                spl->setIdObject(initData.idObject);
-                spl->setMode(Draw::Modeling);
-                initData.data->UpdateGObject(initData.id, spl);
-            }
-        }
-        catch (const VExceptionBadId &e)
-        { // Possible case. Parent was deleted, but the node object is still here.
-            Q_UNUSED(e)
-            return; // Just ignore
-        }
 
         VNodeSpline::Create(initData);
     }
@@ -3332,29 +3279,7 @@ void VPattern::ParseNodeSplinePath(const QDomElement &domElement, const Document
         initData.typeCreation = Source::FromFile;
 
         SplinesCommonAttributes(domElement, initData.id, initData.idObject, initData.idTool);
-        try
-        {
-            const auto obj = initData.data->GetGObject(initData.idObject);
-            if (obj->getType() == GOType::SplinePath)
-            {
-                auto *path = new VSplinePath(*initData.data->GeometricObject<VSplinePath>(initData.idObject));
-                path->setIdObject(initData.idObject);
-                path->setMode(Draw::Modeling);
-                initData.data->UpdateGObject(initData.id, path);
-            }
-            else
-            {
-                auto *spl = new VCubicBezierPath(*initData.data->GeometricObject<VCubicBezierPath>(initData.idObject));
-                spl->setIdObject(initData.idObject);
-                spl->setMode(Draw::Modeling);
-                initData.data->UpdateGObject(initData.id, spl);
-            }
-        }
-        catch (const VExceptionBadId &e)
-        { // Possible case. Parent was deleted, but the node object is still here.
-            Q_UNUSED(e)
-            return; // Just ignore
-        }
+
         VNodeSplinePath::Create(initData);
     }
     catch (const VExceptionBadId &e)
@@ -3494,19 +3419,7 @@ void VPattern::ParseNodeEllipticalArc(const QDomElement &domElement, const Docum
         ToolsCommonAttributes(domElement, initData.id);
         initData.idObject = GetParametrUInt(domElement, AttrIdObject, NULL_ID_STR);
         initData.idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, NULL_ID_STR);
-        VEllipticalArc *arc = nullptr;
-        try
-        {
-            arc = new VEllipticalArc(*initData.data->GeometricObject<VEllipticalArc>(initData.idObject));
-        }
-        catch (const VExceptionBadId &e)
-        { // Possible case. Parent was deleted, but the node object is still here.
-            Q_UNUSED(e)
-            return; // Just ignore
-        }
-        arc->setIdObject(initData.idObject);
-        arc->setMode(Draw::Modeling);
-        initData.data->UpdateGObject(initData.id, arc);
+
         VNodeEllipticalArc::Create(initData);
     }
     catch (const VExceptionBadId &e)
@@ -3595,19 +3508,7 @@ void VPattern::ParseNodeArc(const QDomElement &domElement, const Document &parse
         ToolsCommonAttributes(domElement, initData.id);
         initData.idObject = GetParametrUInt(domElement, AttrIdObject, NULL_ID_STR);
         initData.idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, NULL_ID_STR);
-        VArc *arc = nullptr;
-        try
-        {
-            arc = new VArc(*data->GeometricObject<VArc>(initData.idObject));
-        }
-        catch (const VExceptionBadId &e)
-        { // Possible case. Parent was deleted, but the node object is still here.
-            Q_UNUSED(e)
-            return; // Just ignore
-        }
-        arc->setIdObject(initData.idObject);
-        arc->setMode(Draw::Modeling);
-        initData.data->UpdateGObject(initData.id, arc);
+
         VNodeArc::Create(initData);
     }
     catch (const VExceptionBadId &e)
@@ -4256,8 +4157,8 @@ void VPattern::ParseToolsElement(VMainGraphicsScene *scene, const QDomElement &d
             try
             {
                 VToolUnionDetailsInitData initData;
-                initData.indexD1 = GetParametrUInt(domElement, VToolUnionDetails::AttrIndexD1, QStringLiteral("-1"));
-                initData.indexD2 = GetParametrUInt(domElement, VToolUnionDetails::AttrIndexD2, QStringLiteral("-1"));
+                initData.indexD1 = GetParametrUInt(domElement, VToolUnionDetails::AttrIndexD1, NULL_ID_STR);
+                initData.indexD2 = GetParametrUInt(domElement, VToolUnionDetails::AttrIndexD2, NULL_ID_STR);
                 initData.version = GetParametrUInt(domElement, AttrVersion, QChar('1'));
                 initData.scene = scene;
                 initData.doc = this;
@@ -4333,21 +4234,6 @@ void VPattern::ParsePathElement(VMainGraphicsScene *scene, QDomElement &domEleme
         if (const QDomElement element = domElement.firstChildElement(VAbstractPattern::TagNodes); not element.isNull())
         {
             initData.path = ParsePathNodes(element);
-
-            try
-            {
-                for (int i = 0; i < initData.path.CountNodes(); ++i)
-                {
-                    initData.data->GetGObject(initData.path.at(i).GetId());
-                }
-            }
-            catch (const VExceptionBadId &)
-            { // Possible case. Parent was deleted, but the node object is still here.
-                qDebug() << "Broken relation. Parent was deleted, but the piece path object is still here. Piece "
-                            "path id ="
-                         << initData.id << ".";
-                return; // Just ignore
-            }
         }
         else
         {
@@ -4730,6 +4616,9 @@ void VPattern::PrepareForParse(const Document &parse)
     SCASSERT(sceneDetail != nullptr)
 
     emit CancelLabelRendering();
+
+    CancelFormulaDependencyChecks();
+    PatternGraph()->Clear();
 
     if (parse == Document::FullParse)
     {

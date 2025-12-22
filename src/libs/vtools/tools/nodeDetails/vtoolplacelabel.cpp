@@ -29,6 +29,7 @@
 #include "vtoolplacelabel.h"
 #include "../../dialogs/tools/piece/dialogplacelabel.h"
 #include "../../undocommands/savepieceoptions.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vplacelabelitem.h"
 #include "../vgeometry/vpointf.h"
 #include "../vtoolseamallowance.h"
@@ -63,8 +64,23 @@ auto VToolPlaceLabel::Create(const QPointer<DialogTool> &dialog, VAbstractPatter
 //---------------------------------------------------------------------------------------------------------------------
 auto VToolPlaceLabel::Create(VToolPlaceLabelInitData &initData) -> VToolPlaceLabel *
 {
-    const qreal w =
-        qAbs(VAbstractValApplication::VApp()->toPixel(CheckFormula(initData.id, initData.width, initData.data)));
+    QSharedPointer<VPointF> centerPoint;
+    try
+    {
+        centerPoint = initData.data->GeometricObject<VPointF>(initData.centerPoint);
+    }
+    catch (const VExceptionBadId &e)
+    { // Possible case. Parent was deleted, but the node object is still here.
+        Q_UNUSED(e)
+        if (initData.typeCreation != Source::FromGui)
+        {
+            initData.data->UpdateId(initData.id);
+        }
+        return nullptr; // Just ignore
+    }
+
+    const qreal w = qAbs(
+        VAbstractValApplication::VApp()->toPixel(CheckFormula(initData.id, initData.width, initData.data)));
     const qreal h =
         qAbs(VAbstractValApplication::VApp()->toPixel(CheckFormula(initData.id, initData.height, initData.data)));
     const qreal a = CheckFormula(initData.id, initData.angle, initData.data);
@@ -78,58 +94,52 @@ auto VToolPlaceLabel::Create(VToolPlaceLabelInitData &initData) -> VToolPlaceLab
     node->SetLabelType(initData.type);
     node->SetCenterPoint(initData.centerPoint);
     node->SetNotMirrored(initData.notMirrored);
+    node->setName(centerPoint->name());
+    node->setX(centerPoint->x());
+    node->setY(centerPoint->y());
+    node->setMx(centerPoint->mx());
+    node->setMy(centerPoint->my());
 
     if (initData.typeCreation == Source::FromGui)
     {
-        // We can't use exist object. Need create new.
-        auto point = initData.data->GeometricObject<VPointF>(initData.centerPoint);
-
-        node->setName(point->name());
-        node->setX(point->x());
-        node->setY(point->y());
-        node->setMx(point->mx());
-        node->setMy(point->my());
-
         initData.id = initData.data->AddGObject(node);
     }
     else
     {
-        QSharedPointer<VPointF> point;
-        try
-        {
-            point = initData.data->GeometricObject<VPointF>(initData.centerPoint);
-        }
-        catch (const VExceptionBadId &e)
-        { // Possible case. Parent was deleted, but the node object is still here.
-            Q_UNUSED(e)
-            initData.data->UpdateId(initData.id);
-            return nullptr; // Just ignore
-        }
-        node->setName(point->name());
-        node->setX(point->x());
-        node->setY(point->y());
-        node->setMx(point->mx());
-        node->setMy(point->my());
-
         if (initData.idTool != NULL_ID)
         {
-            QSharedPointer<VPlaceLabelItem> const label = qSharedPointerDynamicCast<VPlaceLabelItem>(point);
+            QSharedPointer<VPlaceLabelItem> const label = qSharedPointerDynamicCast<VPlaceLabelItem>(centerPoint);
             SCASSERT(label.isNull() == false)
 
             node->SetCorrectionAngle(label->GetCorrectionAngle());
         }
 
         initData.data->UpdateGObject(initData.id, node);
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
     }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::MODELING_OBJECT);
+
+    const auto varData = initData.data->DataDependencyVariables();
+    initData.doc->FindFormulaDependencies(initData.width, initData.id, varData);
+    initData.doc->FindFormulaDependencies(initData.height, initData.id, varData);
+    initData.doc->FindFormulaDependencies(initData.angle, initData.id, varData);
+    initData.doc->FindFormulaDependencies(initData.visibilityTrigger, initData.id, varData);
+
+    patternGraph->AddEdge(initData.centerPoint, initData.id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
+    }
+
     VAbstractTool::AddRecord(initData.id, Tool::PlaceLabel, initData.doc);
-    VToolPlaceLabel *point = nullptr;
+
     if (initData.parse == Document::FullParse)
     {
-        point = new VToolPlaceLabel(initData);
+        auto *point = new VToolPlaceLabel(initData);
 
         VAbstractPattern::AddTool(initData.id, point);
         if (initData.idTool != NULL_ID)
@@ -145,11 +155,7 @@ auto VToolPlaceLabel::Create(VToolPlaceLabelInitData &initData) -> VToolPlaceLab
             initData.doc->AddToolOnRemove(point);
         }
     }
-    else
-    {
-        initData.doc->UpdateToolData(initData.id, initData.data);
-    }
-    return point;
+    return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -409,7 +409,10 @@ auto VToolSinglePoint::InitSegments(GOType curveType, qreal segLength, const VPo
             QSharedPointer<VAbstractBezier> spline2;
 
             const auto spl = data->GeometricObject<VAbstractCubicBezier>(curveId);
-            QPointF spl1p2, spl1p3, spl2p2, spl2p3;
+            QPointF spl1p2;
+            QPointF spl1p3;
+            QPointF spl2p2;
+            QPointF spl2p3;
             if (not VFuzzyComparePossibleNulls(segLength, -1))
             {
                 spl->CutSpline(segLength, spl1p2, spl1p3, spl2p2, spl2p3, p->name());
@@ -466,12 +469,16 @@ auto VToolSinglePoint::InitSegments(GOType curveType, qreal segLength, const VPo
             VSplinePath *splPath2 = nullptr;
             if (not VFuzzyComparePossibleNulls(segLength, -1))
             {
-                VPointF *pC = VToolCutSplinePath::CutSplinePath(segLength, splPath, p->name(), &splPath1, &splPath2);
+                VPointF const *pC = VToolCutSplinePath::CutSplinePath(segLength,
+                                                                      splPath,
+                                                                      p->name(),
+                                                                      &splPath1,
+                                                                      &splPath2);
                 delete pC;
             }
             else
             {
-                VPointF *pC = VToolCutSplinePath::CutSplinePath(0, splPath, p->name(), &splPath1, &splPath2);
+                VPointF const *pC = VToolCutSplinePath::CutSplinePath(0, splPath, p->name(), &splPath1, &splPath2);
                 delete pC;
             }
 

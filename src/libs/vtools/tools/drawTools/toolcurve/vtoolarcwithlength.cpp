@@ -30,20 +30,19 @@
 
 #include <QPen>
 #include <QSharedPointer>
-#include <new>
 
 #include "../../../dialogs/tools/dialogarcwithlength.h"
 #include "../../../dialogs/tools/dialogtool.h"
 #include "../../../visualization/path/vistoolarcwithlength.h"
 #include "../../../visualization/visualization.h"
 #include "../../vabstracttool.h"
-#include "../vmisc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vdomdocument.h"
-#include "../vdrawtool.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vpatterndb/vcontainer.h"
@@ -145,11 +144,25 @@ auto VToolArcWithLength::Create(VToolArcWithLengthInitData &initData) -> VToolAr
     else
     {
         initData.data->UpdateGObject(initData.id, arc);
-        initData.data->AddArc(initData.data->GeometricObject<VArc>(initData.id), initData.id);
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL);
+
+    const auto varData = initData.data->DataDependencyVariables();
+    initData.doc->FindFormulaDependencies(initData.radius, initData.id, varData);
+    initData.doc->FindFormulaDependencies(initData.length, initData.id, varData);
+    initData.doc->FindFormulaDependencies(initData.f1, initData.id, varData);
+
+    initData.data->AddArc(initData.data->GeometricObject<VArc>(initData.id), initData.id);
+
+    patternGraph->AddEdge(initData.center, initData.id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     if (initData.parse == Document::FullParse)

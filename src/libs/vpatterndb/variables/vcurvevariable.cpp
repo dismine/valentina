@@ -44,6 +44,15 @@ VCurveVariable::VCurveVariable(const quint32 &id, const quint32 &parentId)
   : d(new VCurveVariableData(id, parentId))
 {
     SetType(VarType::Unknown);
+
+    if (id != NULL_ID)
+    {
+        SetReferences({id});
+    }
+    else if (parentId != NULL_ID)
+    {
+        SetReferences({parentId});
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

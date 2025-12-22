@@ -29,13 +29,12 @@
 
 #include "../../../dialogs/tools/dialoggraduatedcurve.h"
 #include "../../../visualization/path/vistoolgraduatedcurve.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vsplinepath.h"
 #include "../vmisc/compatibility.h"
 #include "../vpatterndb/variables/vincrement.h"
 #include "ifcdef.h"
-
-#include <utility>
 
 using namespace Qt::Literals::StringLiterals;
 
@@ -131,11 +130,26 @@ auto VToolGraduatedCurve::Create(VToolGraduatedCurveInitData &initData) -> VTool
     else
     {
         initData.data->UpdateGObject(initData.id, new VSplinePath(splPath));
-        initData.data->AddSpline(initData.data->GeometricObject<VAbstractBezier>(initData.id), initData.id);
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL);
+
+    const auto varData = initData.data->DataDependencyVariables();
+    for (auto &offset : initData.offsets)
+    {
+        initData.doc->FindFormulaDependencies(offset.formula, initData.id, varData);
+    }
+
+    initData.data->AddSpline(initData.data->GeometricObject<VAbstractBezier>(initData.id), initData.id);
+
+    patternGraph->AddEdge(initData.originCurveId, initData.id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     if (initData.parse == Document::FullParse)

@@ -36,7 +36,6 @@
 #include <QSharedPointer>
 #include <QUndoStack>
 #include <climits>
-#include <new>
 #include <qiterator.h>
 
 #include "../../../../dialogs/tools/dialogflippingbyaxis.h"
@@ -44,9 +43,10 @@
 #include "../../../../visualization/line/operation/vistoolflippingbyaxis.h"
 #include "../../../../visualization/visualization.h"
 #include "../../../vabstracttool.h"
-#include "../vmisc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vformula.h"
@@ -109,17 +109,40 @@ auto VToolFlippingByAxis::Create(VToolFlippingByAxisInitData initData) -> VToolF
     const auto originPoint = *initData.data->GeometricObject<VPointF>(initData.originPointId);
     const auto fPoint = static_cast<QPointF>(originPoint);
 
-    QPointF sPoint;
-    if (initData.axisType == AxisType::VerticalAxis)
+    QPointF const sPoint = initData.axisType == AxisType::VerticalAxis ? QPointF(fPoint.x(), fPoint.y() + 100)
+                                                                       : QPointF(fPoint.x() + 100, fPoint.y());
+
+    if (initData.typeCreation == Source::FromGui)
     {
-        sPoint = QPointF(fPoint.x(), fPoint.y() + 100);
-    }
-    else
-    {
-        sPoint = QPointF(fPoint.x() + 100, fPoint.y());
+        initData.destination.clear(); // Try to avoid mistake, value must be empty
+
+        initData.id = initData.data->getNextId(); // Just reserve id for tool
     }
 
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL);
+
     CreateDestination(initData, fPoint, sPoint);
+
+    patternGraph->AddEdge(initData.originPointId, initData.id);
+
+    for (const auto &object : qAsConst(initData.source))
+    {
+        patternGraph->AddEdge(object.id, initData.id);
+    }
+
+    for (const auto &object : qAsConst(initData.destination))
+    {
+        patternGraph->AddVertex(object.id, VNodeType::OBJECT);
+        patternGraph->AddEdge(initData.id, object.id);
+    }
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
+    }
 
     if (initData.parse == Document::FullParse)
     {

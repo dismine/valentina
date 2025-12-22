@@ -30,10 +30,13 @@
 
 #include <QDomElement>
 
-#include "../ifc/xml/vdomdocument.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vdomdocument.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vabstracttool.h"
 #include "../vdatatool.h"
+#include "../vgeometry/vcubicbezier.h"
+#include "../vgeometry/vspline.h"
 #include "vabstractnode.h"
 
 const QString VNodeSpline::ToolType = QStringLiteral("modelingSpline");
@@ -55,15 +58,44 @@ VNodeSpline::VNodeSpline(const VAbstractNodeInitData &initData, QObject *qoParen
 /**
  * @brief Create help create tool.
  * @param initData init data.
- * @return pointer to node.
  */
-auto VNodeSpline::Create(const VAbstractNodeInitData &initData) -> VNodeSpline *
+void VNodeSpline::Create(const VAbstractNodeInitData &initData)
 {
-    VNodeSpline *spl = nullptr;
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::MODELING_OBJECT);
+
+    try
+    {
+        const auto obj = initData.data->GetGObject(initData.idObject);
+        if (obj->getType() == GOType::Spline)
+        {
+            auto *spl = new VSpline(*initData.data->GeometricObject<VSpline>(initData.idObject));
+            spl->setIdObject(initData.idObject);
+            spl->setMode(Draw::Modeling);
+            initData.data->UpdateGObject(initData.id, spl);
+        }
+        else
+        {
+            auto *spl = new VCubicBezier(*initData.data->GeometricObject<VCubicBezier>(initData.idObject));
+            spl->setIdObject(initData.idObject);
+            spl->setMode(Draw::Modeling);
+            initData.data->UpdateGObject(initData.id, spl);
+        }
+    }
+    catch (const VExceptionBadId &e)
+    { // Possible case. Parent was deleted, but the node object is still here.
+        Q_UNUSED(e)
+        return; // Just ignore
+    }
+
+    patternGraph->AddEdge(initData.idObject, initData.id);
+
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::NodeSpline, initData.doc);
-        spl = new VNodeSpline(initData);
+        auto *spl = new VNodeSpline(initData);
 
         VAbstractPattern::AddTool(initData.id, spl);
         if (initData.idTool != NULL_ID)
@@ -83,7 +115,6 @@ auto VNodeSpline::Create(const VAbstractNodeInitData &initData) -> VNodeSpline *
     {
         initData.doc->UpdateToolData(initData.id, initData.data);
     }
-    return spl;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
