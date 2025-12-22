@@ -57,7 +57,7 @@ VLengthLine::VLengthLine(const VPointF *p1, const quint32 &p1Id, const VPointF *
     SCASSERT(p2 != nullptr)
 
     SetType(VarType::LineLength);
-    SetName(QString(line_ + "%1_%2").arg(p1->name(), p2->name()));
+    SetName(line_ + p1->name() + '_' + p2->name());
     SetValue(p1, p2);
 }
 
