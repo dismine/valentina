@@ -54,11 +54,11 @@ template <class T> class QSharedPointer;
  * @param data container with variables.
  * @param id object id in container.
  */
-VDrawTool::VDrawTool(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes, QObject *parent)
+VDrawTool::VDrawTool(VAbstractPattern *doc, VContainer *data, quint32 id, QString notes, QObject *parent)
   : VInteractiveTool(doc, data, id, parent),
     nameActivDraw(doc->GetNameActivPP()),
     m_lineType(TypeLineLine),
-    m_notes(notes)
+    m_notes(std::move(notes))
 {
     connect(this->doc, &VAbstractPattern::ChangedActivPP, this, &VDrawTool::ChangedActivDraw);
     connect(this->doc, &VAbstractPattern::ChangedNameDraw, this, &VDrawTool::ChangedNameDraw);
@@ -181,7 +181,7 @@ void VDrawTool::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 //---------------------------------------------------------------------------------------------------------------------
 auto VDrawTool::MakeToolTip() const -> QString
 {
-    return QString();
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

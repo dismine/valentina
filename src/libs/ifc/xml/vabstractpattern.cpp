@@ -421,9 +421,8 @@ auto VAbstractPattern::getLocalHistory(const QString &draw) const -> QVector<VTo
 {
     QVector<VToolRecord> historyPP;
     historyPP.reserve(history.size());
-    for (qint32 i = 0; i < history.size(); ++i)
+    for (const auto &tool : history)
     {
-        const VToolRecord &tool = history.at(i);
         if (tool.getNameDraw() == draw)
         {
             historyPP.append(tool);
@@ -556,7 +555,7 @@ auto VAbstractPattern::GetPPElement(const QString &name) -> QDomElement
         const QDomNodeList elements = this->documentElement().elementsByTagName(TagDraw);
         if (elements.isEmpty())
         {
-            return QDomElement();
+            return {};
         }
 
         for (qint32 i = 0; i < elements.count(); i++)
@@ -568,7 +567,7 @@ auto VAbstractPattern::GetPPElement(const QString &name) -> QDomElement
             }
         }
     }
-    return QDomElement();
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2938,8 +2937,10 @@ auto VAbstractPattern::AddItemToGroup(quint32 toolId, quint32 objectId, quint32 
 
         QDomElement item = createElement(TagGroupItem);
         item.setAttribute(AttrTool, toolId);
-        SetAttributeOrRemoveIf<vidtype>(item, AttrObject, objectId,
-                                        [toolId](vidtype object) noexcept { return object == toolId; });
+        SetAttributeOrRemoveIf<vidtype>(item,
+                                        AttrObject,
+                                        objectId,
+                                        [toolId](vidtype object) noexcept -> bool { return object == toolId; });
         group.appendChild(item);
 
         // to signalised that the pattern was changed and need to be saved

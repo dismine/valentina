@@ -43,7 +43,6 @@
 #include <QRectF>
 #include <QSharedPointer>
 #include <QUndoStack>
-#include <new>
 
 #include "../../../../dialogs/tools/dialogsinglepoint.h"
 #include "../../../../dialogs/tools/dialogtool.h"
@@ -262,8 +261,7 @@ void VToolBasePoint::DeleteToolWithConfirm(bool ask)
     VAbstractApplication::VApp()->getUndoStack()->push(deletePP);
 
     // Throw exception, this will help prevent case when we forget to immediately quit function.
-    VExceptionToolWasDeleted const e("Tool was used after deleting.");
-    throw e;
+    throw VExceptionToolWasDeleted(QStringLiteral("Tool was used after deleting."));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

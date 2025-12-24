@@ -448,7 +448,7 @@ void VAbstractTool::AddRecord(const VToolRecord &record, VAbstractPattern *doc)
  * @param toolType tool type
  * @param doc dom document container
  */
-void VAbstractTool::AddRecord(const quint32 id, const Tool &toolType, VAbstractPattern *doc)
+void VAbstractTool::AddRecord(quint32 id, const Tool &toolType, VAbstractPattern *doc)
 {
     AddRecord(VToolRecord(id, toolType, doc->GetNameActivPP()), doc);
 }

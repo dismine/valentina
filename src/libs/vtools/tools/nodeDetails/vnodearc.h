@@ -36,8 +36,6 @@
 #include <QString>
 #include <QtGlobal>
 
-#include "../ifc/xml/vabstractpattern.h"
-#include "../vmisc/def.h"
 #include "vabstractnode.h"
 
 /**

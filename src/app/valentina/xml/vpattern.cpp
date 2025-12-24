@@ -621,7 +621,7 @@ auto VPattern::ElementsToParse() const -> int
  */
 void VPattern::LiteParseTree(const Document &parse)
 {
-    // Save name current pattern piece
+    // Save current pattern block name
     QString const namePP = nameActivPP;
 
     try
@@ -717,7 +717,7 @@ void VPattern::LiteParseTree(const Document &parse)
         return;
     }
 
-    // Restore name current pattern piece
+    // Restore current pattern block name
     nameActivPP = namePP;
     qCDebug(vXML, "Current pattern piece %s", qUtf8Printable(nameActivPP));
     setCurrentData();

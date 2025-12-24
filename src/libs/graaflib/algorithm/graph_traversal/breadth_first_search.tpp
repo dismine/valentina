@@ -2,7 +2,6 @@
 
 #include "breadth_first_search.h"
 
-#include <algorithm>
 #include <queue>
 #include <unordered_set>
 

@@ -77,7 +77,7 @@ DelTool::DelTool(VAbstractPattern *doc, quint32 id, QUndoCommand *parent)
             cleanItems.clear();
             cleanItems.reserve(groupData.items.size());
 
-            for (auto item : groupData.items)
+            for (auto item : std::as_const(groupData.items))
             {
                 if (item.second != id)
                 {

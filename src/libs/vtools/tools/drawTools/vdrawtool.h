@@ -183,7 +183,7 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
 
     qCDebug(vTool, "Creating tool context menu.");
     QMenu menu;
-    QAction *actionOption = menu.addAction(FromTheme(VThemeIcon::PreferencesOther), VDrawTool::tr("Options"));
+    QAction const *actionOption = menu.addAction(FromTheme(VThemeIcon::PreferencesOther), VDrawTool::tr("Options"));
 
     // add the menu "add to group" to the context menu
     QMap<quint32, QString> groupsNotContainingItem = doc->GetGroupsContainingItem(this->getId(), itemId, false);
@@ -272,7 +272,7 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
         actionRemove->setEnabled(false);
     }
 
-    QAction *selectedAction = menu.exec(event->screenPos());
+    QAction const *selectedAction = menu.exec(event->screenPos());
 
     if (selectedAction == nullptr)
     {
@@ -374,7 +374,7 @@ auto VDrawTool::ObjectName(quint32 id) const -> QString
     {
         qCDebug(vTool, "Error! Couldn't get object name by id = %s. %s %s", qUtf8Printable(QString().setNum(id)),
                 qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        return QString(); // Return empty string for property browser
+        return {}; // Return empty string for property browser
     }
 }
 
@@ -395,7 +395,7 @@ auto VDrawTool::ObjectAliasSuffix(quint32 id) const -> QString
         qCDebug(vTool, "Error! Couldn't get object alias suffix by id = %s. %s %s",
                 qUtf8Printable(QString().setNum(id)), qUtf8Printable(e.ErrorMessage()),
                 qUtf8Printable(e.DetailedInformation()));
-        return QString(); // Return empty string for property browser
+        return {}; // Return empty string for property browser
     }
 }
 
