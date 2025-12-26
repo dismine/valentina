@@ -296,9 +296,9 @@ void VMainGraphicsScene::setTransform(const QTransform &transform)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VMainGraphicsScene::SetDisableTools(bool disable, const QString &namePP)
+void VMainGraphicsScene::EnableTools()
 {
-    emit DisableItem(disable, namePP);
+    emit EnableItem();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -29,6 +29,7 @@
 
 #include "../../../dialogs/tools/dialogparallelcurve.h"
 #include "../../../visualization/path/vistoolparallelcurve.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 #include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vsplinepath.h"
@@ -119,7 +120,7 @@ auto VToolParallelCurve::Create(VToolParallelCurveInitData &initData) -> VToolPa
     VPatternGraph *patternGraph = initData.doc->PatternGraph();
     SCASSERT(patternGraph != nullptr)
 
-    patternGraph->AddVertex(initData.id, VNodeType::TOOL);
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
 
     const auto varData = initData.data->DataDependencyVariables();
     initData.doc->FindFormulaDependencies(initData.formulaWidth, initData.id, varData);

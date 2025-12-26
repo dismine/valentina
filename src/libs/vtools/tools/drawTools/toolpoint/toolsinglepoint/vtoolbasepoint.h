@@ -45,17 +45,8 @@ template <class T> class QSharedPointer;
 
 struct VToolBasePointInitData : VToolSinglePointInitData
 {
-    VToolBasePointInitData()
-      : VToolSinglePointInitData(),
-        nameActivPP(),
-        x(labelMX),
-        y(labelMY)
-    {
-    }
-
-    QString nameActivPP;
-    qreal x;
-    qreal y;
+    qreal x{labelMX};
+    qreal y{labelMY};
 };
 
 /**
@@ -101,7 +92,7 @@ private slots:
 private:
     Q_DISABLE_COPY_MOVE(VToolBasePoint) // NOLINT
 
-    QString namePP;
+    int m_indexPatternBlock{-1};
 
     explicit VToolBasePoint(const VToolBasePointInitData &initData, QGraphicsItem *parent = nullptr);
 };

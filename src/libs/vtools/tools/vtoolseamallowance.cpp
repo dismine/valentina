@@ -31,6 +31,7 @@
 #include "../dialogs/tools/piece/dialogseamallowance.h"
 #include "../ifc/exception/vexceptionwrongid.h"
 #include "../ifc/xml/vlabeltemplateconverter.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 #include "../ifc/xml/vpatternconverter.h"
 #include "../ifc/xml/vpatterngraph.h"
 #include "../qmuparser/qmutokenparser.h"
@@ -588,7 +589,7 @@ auto VToolSeamAllowance::Create(VToolSeamAllowanceInitData &initData) -> VToolSe
     VPatternGraph *patternGraph = initData.doc->PatternGraph();
     SCASSERT(patternGraph != nullptr)
 
-    patternGraph->AddVertex(initData.id, VNodeType::PIECE);
+    patternGraph->AddVertex(initData.id, VNodeType::PIECE, initData.doc->PatternBlockMapper()->GetActiveId());
 
     const auto varData = initData.data->DataDependencyVariables();
     AddPieceDependencies(initData.id, initData.detail, initData.doc, varData);

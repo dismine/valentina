@@ -32,6 +32,7 @@
 #include "../../../undocommands/label/operationshowlabel.h"
 #include "../../../undocommands/savetooloptions.h"
 #include "../../../undocommands/undogroup.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/compatibility.h"
 #include "../vwidgets/vsimplepoint.h"
@@ -496,9 +497,9 @@ void VAbstractOperation::ToolSelectionType(const SelectionType &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractOperation::Disable(bool disable, const QString &namePP)
+void VAbstractOperation::Enable()
 {
-    const bool enabled = !CorrectDisable(disable, namePP);
+    const bool enabled = m_indexActivePatternBlock == doc->PatternBlockMapper()->GetActiveId();
     setEnabled(enabled);
 
     QMapIterator i(operatedObjects);

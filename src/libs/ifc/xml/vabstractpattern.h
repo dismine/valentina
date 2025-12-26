@@ -50,6 +50,7 @@ class VPiecePath;
 class VPieceNode;
 class VPatternImage;
 class VBackgroundPatternImage;
+class VPatternBlockMapper;
 
 enum class Document : qint8
 {
@@ -143,13 +144,7 @@ public:
 
     virtual void CreateEmptyFile() = 0;
 
-    void ChangeActivPP(const QString &name, const Document &parse = Document::FullParse);
-    auto GetNameActivPP() const -> QString;
-    auto CheckExistNamePP(const QString &name) const -> bool;
-    auto CountPP() const -> int;
-    auto GetPPElement(const QString &name) -> QDomElement;
-    auto ChangeNamePP(const QString &oldName, const QString &newName) -> bool;
-    auto appendPP(const QString &name) -> bool;
+    auto CountPatternBlockTags() const -> int;
 
     auto GetActivNodeElement(const QString &name, QDomElement &element) const -> bool;
 
@@ -180,14 +175,12 @@ public:
     void AddToolOnRemove(VDataTool *tool);
 
     auto getHistory() -> QVector<VToolRecord> *;
-    auto getLocalHistory() const -> QVector<VToolRecord>;
+    auto GetLocalHistory() const -> QVector<VToolRecord>;
 
     auto MPath() const -> QString;
     void SetMPath(const QString &path);
 
     auto SiblingNodeId(const quint32 &nodeId) const -> quint32;
-
-    auto getPatternPieces() const -> QStringList;
 
     auto GetDescription() const -> QString;
     void SetDescription(const QString &text);
@@ -423,23 +416,11 @@ public:
 
 signals:
     /**
-     * @brief ChangedActivPP change active pattern peace.
-     * @param newName new pattern peace name.
-     */
-    void ChangedActivPP(const QString &newName);
-
-    /**
      * @brief ChangedCursor change cursor position.
      * @param id tool id.
      */
     void ChangedCursor(quint32 id);
 
-    /**
-     * @brief ChangedNameDraw save new name pattern peace.
-     * @param oldName old name.
-     * @param newName new name.
-     */
-    void ChangedNameDraw(const QString &oldName, const QString &newName);
     /**
      * @brief FullUpdateFromFile update tool data form file.
      */
@@ -461,7 +442,7 @@ signals:
     void CheckLayout();
     void UpdateInLayoutList();
     void ShowDetail(quint32 id);
-    void SetCurrentPP(const QString &patterPiece);
+    void ShowPatternBlock(const QString &patterBlockName);
     void MadeProgress();
     /**
      * @brief UpdateGroups emit if the groups have been updated
@@ -494,9 +475,6 @@ protected slots:
     void CancelFormulaDependencyChecks();
 
 protected:
-    /** @brief nameActivDraw name current pattern peace. */
-    QString nameActivPP;
-
     /** @brief cursor cursor keep id tool after which we will add new tool in file. */
     quint32 cursor;
 
@@ -504,9 +482,6 @@ protected:
 
     /** @brief history history records. */
     QVector<VToolRecord> history;
-
-    /** @brief patternPieces list of patern pieces names for combobox*/
-    QStringList patternPieces;
 
     /** @brief modified keep state of the document for cases that do not cover QUndoStack*/
     mutable bool modified;
@@ -531,17 +506,12 @@ protected:
     static auto ParsePathNodes(const QDomElement &domElement) -> VPiecePath;
     static auto ParseSANode(const QDomElement &domElement) -> VPieceNode;
 
-    void SetActivPP(const QString &name);
-
     auto CheckTagExists(const QString &tag) -> QDomElement;
     void InsertTag(const QStringList &tags, const QDomElement &element);
 
     void SetChildTag(const QString &qsParent, const QString &qsChild, const QString &qsValue);
 
-    auto GetIndexActivPP() const -> int;
-    auto GetActivDrawElement(QDomElement &element) const -> bool;
-
-    auto getLocalHistory(const QString &draw) const -> QVector<VToolRecord>;
+    auto GetLocalHistory(const QString &draw) const -> QVector<VToolRecord>;
 
     auto GroupHasItem(const QDomElement &groupDomElement, quint32 toolId, quint32 objectId) -> bool;
 
@@ -557,6 +527,8 @@ private:
     Q_DISABLE_COPY_MOVE(VAbstractPattern) // NOLINT
 
     VPatternGraph *m_patternGraph;
+
+    VPatternBlockMapper *m_patternBlockMapper;
 
     QList<QFutureWatcher<void> *> m_formulaDependenciesWatchers{};
     mutable QMutex m_watchersMutex;
@@ -593,15 +565,5 @@ private:
 };
 
 QT_WARNING_POP
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetNameActivPP return current pattern piece name.
- * @return pattern piece name.
- */
-inline auto VAbstractPattern::GetNameActivPP() const -> QString
-{
-    return nameActivPP;
-}
 
 #endif // VABSTRACTPATTERN_H

@@ -126,7 +126,7 @@ public slots:
     void AllowElArcSelecting(bool enabled);
 
     void ToolSelectionType(const SelectionType &type) override;
-    void Disable(bool disable, const QString &namePP) override;
+    void Enable() override;
     void ObjectSelected(bool selected, quint32 objId);
     void DeleteFromLabel();
     void LabelChangePosition(const QPointF &pos, quint32 labelId);

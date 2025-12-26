@@ -42,7 +42,9 @@ class AddPatternPiece : public VUndoCommand
     Q_OBJECT // NOLINT
 
 public:
-    AddPatternPiece(const QDomElement &xml, VAbstractPattern *doc, const QString &namePP,
+    AddPatternPiece(const QDomElement &xml,
+                    VAbstractPattern *doc,
+                    int indexPatternBlock,
                     QUndoCommand *parent = nullptr);
     ~AddPatternPiece() override = default;
     void undo() override;
@@ -51,7 +53,7 @@ public:
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(AddPatternPiece) // NOLINT
-    QString namePP;
+    int m_indexPatternBlock{-1};
 };
 
 #endif // ADDPATTERNPIECE_H

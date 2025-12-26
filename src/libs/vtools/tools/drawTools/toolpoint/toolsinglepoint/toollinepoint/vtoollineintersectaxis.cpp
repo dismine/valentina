@@ -39,6 +39,7 @@
 #include "../../../../vabstracttool.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 #include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/compatibility.h"
@@ -156,7 +157,7 @@ auto VToolLineIntersectAxis::Create(VToolLineIntersectAxisInitData &initData) ->
     VPatternGraph *patternGraph = initData.doc->PatternGraph();
     SCASSERT(patternGraph != nullptr)
 
-    patternGraph->AddVertex(initData.id, VNodeType::TOOL);
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
 
     initData.data->AddLine(initData.basePointId, initData.id);
     initData.data->AddLine(initData.firstPointId, initData.id);

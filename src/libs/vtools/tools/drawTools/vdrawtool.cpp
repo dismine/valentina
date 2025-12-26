@@ -42,6 +42,7 @@
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/xml/vdomdocument.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 #include "../vabstracttool.h"
 #include "../vpatterndb/vcontainer.h"
 
@@ -56,12 +57,14 @@ template <class T> class QSharedPointer;
  */
 VDrawTool::VDrawTool(VAbstractPattern *doc, VContainer *data, quint32 id, QString notes, QObject *parent)
   : VInteractiveTool(doc, data, id, parent),
-    nameActivDraw(doc->GetNameActivPP()),
+    m_indexActivePatternBlock(doc->PatternBlockMapper()->GetActiveId()),
     m_lineType(TypeLineLine),
     m_notes(std::move(notes))
 {
-    connect(this->doc, &VAbstractPattern::ChangedActivPP, this, &VDrawTool::ChangedActivDraw);
-    connect(this->doc, &VAbstractPattern::ChangedNameDraw, this, &VDrawTool::ChangedNameDraw);
+    connect(this->doc->PatternBlockMapper(),
+            QOverload<int>::of(&VPatternBlockMapper::ChangedActivePatternBlock),
+            this,
+            &VDrawTool::Enable);
     connect(this->doc, &VAbstractPattern::ShowTool, this, &VDrawTool::ShowTool);
 }
 
@@ -75,30 +78,6 @@ void VDrawTool::ShowTool(quint32 id, bool enable)
 {
     Q_UNUSED(id)
     Q_UNUSED(enable)
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
- * @param newName new name active pattern peace.
- */
-void VDrawTool::ChangedActivDraw(const QString &newName)
-{
-    Disable(!(nameActivDraw == newName), newName);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ChangedNameDraw save new name active pattern peace.
- * @param oldName old name.
- * @param newName new name active pattern peace. new name.
- */
-void VDrawTool::ChangedNameDraw(const QString &oldName, const QString &newName)
-{
-    if (nameActivDraw == oldName)
-    {
-        nameActivDraw = newName;
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -189,17 +168,6 @@ void VDrawTool::UpdateNamePosition(quint32 id, const QPointF &pos)
 {
     Q_UNUSED(id)
     Q_UNUSED(pos)
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VDrawTool::CorrectDisable(bool disable, const QString &namePP) const -> bool
-{
-    if (disable)
-    {
-        return disable;
-    }
-
-    return !(nameActivDraw == namePP);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

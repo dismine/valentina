@@ -68,7 +68,7 @@ class VDrawTool : public VInteractiveTool
     Q_OBJECT // NOLINT
 
 public:
-    VDrawTool(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes, QObject *parent = nullptr);
+    VDrawTool(VAbstractPattern *doc, VContainer *data, quint32 id, QString notes, QObject *parent = nullptr);
     ~VDrawTool() override = default;
 
     auto getLineType() const -> QString;
@@ -84,10 +84,8 @@ signals:
 
 public slots:
     virtual void ShowTool(quint32 id, bool enable);
-    virtual void ChangedActivDraw(const QString &newName);
-    void ChangedNameDraw(const QString &oldName, const QString &newName);
+    virtual void Enable() = 0;
     virtual void EnableToolMove(bool move);
-    virtual void Disable(bool disable, const QString &namePP) = 0;
     virtual void SetDetailsMode(bool mode);
 protected slots:
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) = 0;
@@ -98,14 +96,9 @@ protected:
         Disable = false,
         Enable = true
     };
-    enum class Referens : bool
-    {
-        Follow = true,
-        Ignore = false
-    };
 
-    /** @brief nameActivDraw name of tool's pattern peace. */
-    QString nameActivDraw;
+    /** @brief m_indexActivePatternBlock index of active patetrn block */
+    int m_indexActivePatternBlock;
 
     /** @brief typeLine line type. */
     QString m_lineType;
@@ -127,15 +120,14 @@ protected:
     virtual auto MakeToolTip() const -> QString;
     virtual void UpdateNamePosition(quint32 id, const QPointF &pos);
 
-    auto CorrectDisable(bool disable, const QString &namePP) const -> bool;
-
     void ReadAttributes();
     virtual void ReadToolAttributes(const QDomElement &domElement);
     virtual void ChangeLabelVisibility(quint32 id, bool visible);
 
-    template <class Dialog>
-    void ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemId = NULL_ID,
-                     const RemoveOption &showRemove = RemoveOption::Enable, const Referens &ref = Referens::Follow);
+    template<class Dialog>
+    void ContextMenu(QGraphicsSceneContextMenuEvent *event,
+                     quint32 itemId = NULL_ID,
+                     const RemoveOption &showRemove = RemoveOption::Enable);
 
     template <class Item> void ShowItem(Item *item, quint32 id, bool enable);
 
@@ -150,16 +142,14 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-template <class Dialog>
+template<class Dialog>
 /**
  * @brief ContextMenu show context menu for tool.
  * @param event context menu event.
  * @param itemId id of point. 0 if not a point
  * @param showRemove true - tool enable option delete.
- * @param ref true - do not ignore referens value.
  */
-void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemId, const RemoveOption &showRemove,
-                            const Referens &ref)
+void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemId, const RemoveOption &showRemove)
 {
     SCASSERT(event != nullptr)
 
@@ -247,28 +237,10 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
     QAction *actionRemove = menu.addAction(FromTheme(VThemeIcon::EditDelete), VDrawTool::tr("Delete"));
     if (showRemove == RemoveOption::Enable)
     {
-        if (ref == Referens::Follow)
-        {
-            if (_referens > 0)
-            {
-                qCDebug(vTool, "Remove disabled. Tool has childern.");
-                actionRemove->setEnabled(false);
-            }
-            else
-            {
-                qCDebug(vTool, "Remove enabled. Tool has not childern.");
-                actionRemove->setEnabled(true);
-            }
-        }
-        else
-        {
-            qCDebug(vTool, "Remove enabled. Ignore referens value.");
-            actionRemove->setEnabled(true);
-        }
+        actionRemove->setEnabled(IsRemovable());
     }
     else
     {
-        qCDebug(vTool, "Remove disabled.");
         actionRemove->setEnabled(false);
     }
 
@@ -407,7 +379,7 @@ template <class T> void VDrawTool::InitDrawToolConnections(VMainGraphicsScene *s
 
     QObject::connect(tool, &T::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
     QObject::connect(tool, &T::ChangedToolSelection, scene, &VMainGraphicsScene::SelectedItem);
-    QObject::connect(scene, &VMainGraphicsScene::DisableItem, tool, &T::Disable);
+    QObject::connect(scene, &VMainGraphicsScene::EnableItem, tool, &T::Enable);
     QObject::connect(scene, &VMainGraphicsScene::EnableToolMove, tool, &T::EnableToolMove);
     QObject::connect(scene, &VMainGraphicsScene::CurveDetailsMode, tool, &T::SetDetailsMode);
     QObject::connect(scene, &VMainGraphicsScene::ItemSelection, tool, &T::ToolSelectionType);

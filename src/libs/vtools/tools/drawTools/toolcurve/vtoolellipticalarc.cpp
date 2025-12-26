@@ -38,6 +38,7 @@
 #include "../../vabstracttool.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vdomdocument.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 #include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vellipticalarc.h"
 #include "../vgeometry/vgobject.h"
@@ -175,7 +176,7 @@ auto VToolEllipticalArc::Create(VToolEllipticalArcInitData &initData) -> VToolEl
     VPatternGraph *patternGraph = initData.doc->PatternGraph();
     SCASSERT(patternGraph != nullptr)
 
-    patternGraph->AddVertex(initData.id, VNodeType::TOOL);
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
 
     const auto varData = initData.data->DataDependencyVariables();
     initData.doc->FindFormulaDependencies(initData.radius1, initData.id, varData);

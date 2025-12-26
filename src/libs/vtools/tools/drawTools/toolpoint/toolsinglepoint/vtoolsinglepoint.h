@@ -83,7 +83,7 @@ public:
 
 public slots:
     void NameChangePosition(const QPointF &pos);
-    void Disable(bool disable, const QString &namePP) override;
+    void Enable() override;
     void EnableToolMove(bool move) override;
     void PointChoosed();
     void PointSelected(bool selected);

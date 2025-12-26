@@ -32,6 +32,7 @@
 
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vdomdocument.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 #include "../ifc/xml/vpatterngraph.h"
 #include "../vabstracttool.h"
 #include "../vdatatool.h"
@@ -64,7 +65,7 @@ void VNodeSpline::Create(const VAbstractNodeInitData &initData)
     VPatternGraph *patternGraph = initData.doc->PatternGraph();
     SCASSERT(patternGraph != nullptr)
 
-    patternGraph->AddVertex(initData.id, VNodeType::MODELING_OBJECT);
+    patternGraph->AddVertex(initData.id, VNodeType::MODELING_OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
 
     try
     {

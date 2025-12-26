@@ -206,6 +206,7 @@
 #include "vabstractapplication.h"
 #include "vabstractshortcutmanager.h"
 #include "vsinglelineoutlinechar.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #ifdef WITH_TEXTCODEC
@@ -393,7 +394,7 @@ MainWindow::MainWindow(QWidget *parent)
                     ActionDraw(true);
                 }
             });
-    connect(doc, &VPattern::SetCurrentPP, this, &MainWindow::GlobalChangePP);
+    connect(doc, &VPattern::ShowPatternBlock, this, &MainWindow::GlobalChangePP);
     connect(doc, &VPattern::MadeProgress, this, &MainWindow::ShowProgress);
     VAbstractValApplication::VApp()->setCurrentDocument(doc);
 
@@ -560,9 +561,10 @@ MainWindow::MainWindow(QWidget *parent)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::AddPP(const QString &PPName)
 {
-    if (not doc->appendPP(PPName))
+    VPatternBlockMapper *blocks = doc->PatternBlockMapper();
+    if (int const id = blocks->GetId(PPName); !blocks->SetActiveById(id))
     {
-        qCDebug(vMainWindow, "Error creating pattern piece with the name %s.", qUtf8Printable(PPName));
+        qCDebug(vMainWindow, "Error creating pattern block with the name %s.", qUtf8Printable(PPName));
         return;
     }
 
@@ -590,7 +592,6 @@ void MainWindow::AddPP(const QString &PPName)
     initData.x = startPosition.x();
     initData.y = startPosition.y();
     initData.name = label;
-    initData.nameActivPP = PPName;
 
     auto *spoint = VToolBasePoint::Create(initData);
     emit ui->view->itemClicked(spoint);
@@ -2721,7 +2722,7 @@ void MainWindow::ExportDraw(const QString &fileName)
     ui->view->verticalScrollBar()->setValue(verticalScrollBarValue);
     ui->view->horizontalScrollBar()->setValue(horizontalScrollBarValue);
 
-    doc->ChangeActivPP(doc->GetNameActivPP(), Document::FullParse);
+    m_sceneDraw->EnableTools();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3068,7 +3069,7 @@ void MainWindow::ToolBarDraws()
     connect(ui->actionOptionDraw, &QAction::triggered, this,
             [this]()
             {
-                QString draw = doc->GetNameActivPP();
+                QString draw = doc->PatternBlockMapper()->GetActive();
                 if (bool const ok = PatternPieceName(draw); not ok)
                 {
                     return;
@@ -4815,7 +4816,7 @@ void MainWindow::FullParseFile()
     m_comboBoxDraws->blockSignals(true);
     m_comboBoxDraws->clear();
 
-    QStringList patternPieceNames = doc->getPatternPieces();
+    QStringList patternPieceNames = doc->PatternBlockMapper()->GetBlockNames();
     patternPieceNames.sort();
     m_comboBoxDraws->addItems(patternPieceNames);
 
@@ -5018,7 +5019,7 @@ void MainWindow::SetEnableWidgets(bool enable)
     redoAction->setEnabled(enableOnDesignStage && VAbstractApplication::VApp()->getUndoStack()->canRedo());
 
     // Now we don't want allow user call context menu
-    m_sceneDraw->SetDisableTools(!enable, doc->GetNameActivPP());
+    m_sceneDraw->EnableTools();
     ui->view->setEnabled(enable);
     ui->view->setAcceptDrops(enable);
 }
@@ -7347,7 +7348,7 @@ void MainWindow::ChangePP(int index, bool zoomBestFit)
 {
     if (index != -1)
     {
-        doc->ChangeActivPP(m_comboBoxDraws->itemText(index));
+        doc->PatternBlockMapper()->SetActive(m_comboBoxDraws->itemText(index));
         doc->setCurrentData();
         emit RefreshHistory();
         if (m_drawMode)

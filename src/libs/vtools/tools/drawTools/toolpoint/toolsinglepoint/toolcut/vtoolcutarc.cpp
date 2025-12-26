@@ -37,6 +37,7 @@
 #include "../../../../../visualization/visualization.h"
 #include "../../../../vabstracttool.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 #include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vabstractarc.h"
 #include "../vgeometry/varc.h"
@@ -179,7 +180,7 @@ auto VToolCutArc::Create(VToolCutInitData &initData) -> VToolCutArc *
     VPatternGraph *patternGraph = initData.doc->PatternGraph();
     SCASSERT(patternGraph != nullptr)
 
-    patternGraph->AddVertex(initData.id, VNodeType::TOOL);
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
 
     const auto varData = initData.data->DataDependencyVariables();
     initData.doc->FindFormulaDependencies(initData.formula, initData.id, varData);
@@ -210,8 +211,8 @@ auto VToolCutArc::Create(VToolCutInitData &initData) -> VToolCutArc *
     }
 
     // TODO: Add segments to graph when we start showing them for users
-    // patternGraph->AddVertex(initData.segment1Id, VNodeType::OBJECT);
-    // patternGraph->AddVertex(initData.segment2Id, VNodeType::OBJECT);
+    // patternGraph->AddVertex(initData.segment1Id, VNodeType::OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
+    // patternGraph->AddVertex(initData.segment2Id, VNodeType::OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
 
     // patternGraph->AddEdge(initData.id, initData.segment1Id);
     // patternGraph->AddEdge(initData.id, initData.segment2Id);

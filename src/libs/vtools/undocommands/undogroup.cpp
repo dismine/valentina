@@ -31,17 +31,19 @@
 #include <QDomNode>
 #include <QDomNodeList>
 
-#include "../vmisc/vabstractvalapplication.h"
-#include "../vmisc/def.h"
-#include "../vwidgets/vmaingraphicsview.h"
 #include "../ifc/xml/vabstractpattern.h"
-#include "vundocommand.h"
+#include "../ifc/xml/vpatternblockmapper.h"
+#include "../vmisc/def.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vtools/tools/vdatatool.h"
+#include "../vwidgets/vmaingraphicsview.h"
+#include "vundocommand.h"
 
 //AddGroup
 //---------------------------------------------------------------------------------------------------------------------
 AddGroup::AddGroup(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent)
-    : VUndoCommand(xml, doc, parent), nameActivDraw(doc->GetNameActivPP())
+  : VUndoCommand(xml, doc, parent),
+    m_indexPatternBlock(doc->PatternBlockMapper()->GetActiveId())
 {
     setText(tr("add group"));
     nodeId = VDomDocument::GetParametrId(xml);
@@ -52,7 +54,7 @@ void AddGroup::undo()
 {
     qCDebug(vUndo, "Undo.");
 
-    doc->ChangeActivPP(nameActivDraw);//Without this user will not see this change
+    doc->PatternBlockMapper()->SetActiveById(m_indexPatternBlock); //Without this user will not see this change
 
     if (QDomElement groups = doc->CreateGroups(); not groups.isNull())
     {
@@ -89,7 +91,8 @@ void AddGroup::undo()
                                     VAbstractValApplication::VApp()->getSceneView());
     if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
     {
-        emit doc->SetCurrentPP(nameActivDraw);//Return current pattern piece after undo
+        emit doc->ShowPatternBlock(
+            doc->PatternBlockMapper()->FindName(m_indexPatternBlock)); //Return current pattern piece after undo
     }
 }
 
@@ -98,7 +101,7 @@ void AddGroup::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    doc->ChangeActivPP(nameActivDraw);//Without this user will not see this change
+    doc->PatternBlockMapper()->SetActiveById(m_indexPatternBlock); //Without this user will not see this change
 
     if (QDomElement groups = doc->CreateGroups(); not groups.isNull())
     {
@@ -183,7 +186,8 @@ void ChangeGroupOptions::redo()
 //AddItemToGroup
 //---------------------------------------------------------------------------------------------------------------------
 AddItemToGroup::AddItemToGroup(const QDomElement &xml, VAbstractPattern *doc, quint32 groupId, QUndoCommand *parent)
-    : VUndoCommand(xml, doc, parent), nameActivDraw(doc->GetNameActivPP())
+  : VUndoCommand(xml, doc, parent),
+    m_indexPatternBlock(doc->PatternBlockMapper()->GetActiveId())
 {
     setText(tr("Add item to group"));
     nodeId = groupId;
@@ -206,7 +210,7 @@ void AddItemToGroup::redo()
 //---------------------------------------------------------------------------------------------------------------------
 void AddItemToGroup::performUndoRedo(bool isUndo)
 {
-    doc->ChangeActivPP(nameActivDraw);//Without this user will not see this change
+    doc->PatternBlockMapper()->SetActiveById(m_indexPatternBlock); //Without this user will not see this change
 
     if (QDomElement group = doc->FindElementById(nodeId, VAbstractPattern::TagGroup); group.isElement())
     {
@@ -260,15 +264,19 @@ void AddItemToGroup::performUndoRedo(bool isUndo)
                                     VAbstractValApplication::VApp()->getSceneView());
     if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
     {
-        emit doc->SetCurrentPP(nameActivDraw);//Return current pattern piece after undo
+        //Return current pattern piece after undo
+        emit doc->ShowPatternBlock(doc->PatternBlockMapper()->FindName(m_indexPatternBlock));
     }
 }
 
 //RemoveItemFromGroup
 //---------------------------------------------------------------------------------------------------------------------
-RemoveItemFromGroup::RemoveItemFromGroup(const QDomElement &xml, VAbstractPattern *doc, quint32 groupId,
+RemoveItemFromGroup::RemoveItemFromGroup(const QDomElement &xml,
+                                         VAbstractPattern *doc,
+                                         quint32 groupId,
                                          QUndoCommand *parent)
-    : VUndoCommand(xml, doc, parent), nameActivDraw(doc->GetNameActivPP())
+  : VUndoCommand(xml, doc, parent),
+    m_indexPatternBlock(doc->PatternBlockMapper()->GetActiveId())
 {
     setText(tr("Remove item from group"));
     nodeId = groupId;
@@ -291,7 +299,7 @@ void RemoveItemFromGroup::redo()
 //---------------------------------------------------------------------------------------------------------------------
 void RemoveItemFromGroup::performUndoRedo(bool isUndo)
 {
-    doc->ChangeActivPP(nameActivDraw);//Without this user will not see this change
+    doc->PatternBlockMapper()->SetActiveById(m_indexPatternBlock); //Without this user will not see this change
 
     if (QDomElement group = doc->FindElementById(nodeId, VAbstractPattern::TagGroup); group.isElement())
     {
@@ -345,16 +353,17 @@ void RemoveItemFromGroup::performUndoRedo(bool isUndo)
 
     if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
     {
-        emit doc->SetCurrentPP(nameActivDraw);//Return current pattern piece after undo
+        //Return current pattern piece after undo
+        emit doc->ShowPatternBlock(doc->PatternBlockMapper()->FindName(m_indexPatternBlock));
     }
 }
 
 //ChangeGroupVisibility
 //---------------------------------------------------------------------------------------------------------------------
 ChangeGroupVisibility::ChangeGroupVisibility(VAbstractPattern *doc, vidtype id, bool visible, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent),
+  : VUndoCommand(QDomElement(), doc, parent),
     m_newVisibility(visible),
-    m_nameActivDraw(doc->GetNameActivPP())
+    m_indexPatternBlock(doc->PatternBlockMapper()->GetActiveId())
 {
     setText(tr("change group visibility"));
     nodeId = id;
@@ -387,7 +396,7 @@ void ChangeGroupVisibility::redo()
 //---------------------------------------------------------------------------------------------------------------------
 void ChangeGroupVisibility::Do(bool visible)
 {
-    doc->ChangeActivPP(m_nameActivDraw);//Without this user will not see this change
+    doc->PatternBlockMapper()->SetActiveById(m_indexPatternBlock); //Without this user will not see this change
 
     if (QDomElement group = doc->FindElementById(nodeId, VAbstractPattern::TagGroup); group.isElement())
     {
@@ -411,12 +420,14 @@ void ChangeGroupVisibility::Do(bool visible)
 
 //ChangeMultipleGroupsVisibility
 //---------------------------------------------------------------------------------------------------------------------
-ChangeMultipleGroupsVisibility::ChangeMultipleGroupsVisibility(VAbstractPattern *doc, const QVector<vidtype> &groups,
-                                                               bool visible, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent),
+ChangeMultipleGroupsVisibility::ChangeMultipleGroupsVisibility(VAbstractPattern *doc,
+                                                               const QVector<vidtype> &groups,
+                                                               bool visible,
+                                                               QUndoCommand *parent)
+  : VUndoCommand(QDomElement(), doc, parent),
     m_groups(groups),
     m_newVisibility(visible),
-    m_nameActivDraw(doc->GetNameActivPP())
+    m_indexPatternBlock(doc->PatternBlockMapper()->GetActiveId())
 {
     setText(tr("change multiple groups visibility"));
 
@@ -440,7 +451,7 @@ void ChangeMultipleGroupsVisibility::undo()
 {
     qCDebug(vUndo, "Undo.");
 
-    doc->ChangeActivPP(m_nameActivDraw);//Without this user will not see this change
+    doc->PatternBlockMapper()->SetActiveById(m_indexPatternBlock); //Without this user will not see this change
 
     QMap<vidtype, bool> groupsState;
 
@@ -478,7 +489,7 @@ void ChangeMultipleGroupsVisibility::redo()
 {
     qCDebug(vUndo, "ChangeMultipleGroupsVisibility::redo");
 
-    doc->ChangeActivPP(m_nameActivDraw);//Without this user will not see this change
+    doc->PatternBlockMapper()->SetActiveById(m_indexPatternBlock); //Without this user will not see this change
 
     QMap<vidtype, bool> groupsState;
 
@@ -512,7 +523,8 @@ void ChangeMultipleGroupsVisibility::redo()
 //DelGroup
 //---------------------------------------------------------------------------------------------------------------------
 DelGroup::DelGroup(VAbstractPattern *doc, quint32 id, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent), nameActivDraw(doc->GetNameActivPP())
+  : VUndoCommand(QDomElement(), doc, parent),
+    m_indexPatternBlock(doc->PatternBlockMapper()->GetActiveId())
 {
     setText(tr("delete group"));
     nodeId = id;
@@ -526,7 +538,8 @@ void DelGroup::undo()
 
     if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
     {
-        emit doc->SetCurrentPP(nameActivDraw);//Without this user will not see this change
+        //Without this user will not see this change
+        emit doc->ShowPatternBlock(doc->PatternBlockMapper()->FindName(m_indexPatternBlock));
     }
 
     if (QDomElement groups = doc->CreateGroups(); not groups.isNull())
@@ -552,7 +565,8 @@ void DelGroup::redo()
 
     if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
     {//Keep first!
-        emit doc->SetCurrentPP(nameActivDraw);//Without this user will not see this change
+        //Without this user will not see this change
+        emit doc->ShowPatternBlock(doc->PatternBlockMapper()->FindName(m_indexPatternBlock));
     }
 
     if (QDomElement groups = doc->CreateGroups(); not groups.isNull())

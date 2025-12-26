@@ -204,7 +204,7 @@ void DialogHistory::UpdateHistory()
 void DialogHistory::FillTable()
 {
     ui->tableWidget->clear();
-    QVector<VToolRecord> const history = m_doc->getLocalHistory();
+    QVector<VToolRecord> const history = m_doc->GetLocalHistory();
     qint32 currentRow = -1;
     qint32 count = 0;
     ui->tableWidget->setRowCount(static_cast<int>(history.size())); // Make row count max possible number
@@ -259,10 +259,10 @@ void DialogHistory::FillTable()
 auto DialogHistory::Record(const VToolRecord &tool) const -> HistoryRecord
 {
     HistoryRecord record;
-    record.id = tool.getId();
+    record.id = tool.GetId();
 
     bool const updateCache = false;
-    const QDomElement domElem = m_doc->FindElementById(tool.getId(), QString(), updateCache);
+    const QDomElement domElem = m_doc->FindElementById(tool.GetId(), QString(), updateCache);
     if (not domElem.isElement())
     {
         qDebug() << "Can't find element by id" << record.id << Q_FUNC_INFO;
@@ -289,7 +289,7 @@ auto DialogHistory::RecordDescription(const VToolRecord &tool, HistoryRecord rec
     // This check helps to find missed tools in the switch
     Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64, "Not all tools were used in history.");
 
-    switch (tool.getTypeTool())
+    switch (tool.GetToolType())
     {
         case Tool::Arrow:
         case Tool::SinglePoint:
@@ -309,11 +309,11 @@ auto DialogHistory::RecordDescription(const VToolRecord &tool, HistoryRecord rec
             Q_UNREACHABLE(); //-V501
             break;
         case Tool::BasePoint:
-            record.description = tr("%1 - Base point").arg(PointName(tool.getId()));
+            record.description = tr("%1 - Base point").arg(PointName(tool.GetId()));
             return record;
         case Tool::EndLine:
             record.description = tr("%1_%2 - Line from point %1 to point %2")
-                                     .arg(PointName(AttrUInt(domElem, AttrBasePoint)), PointName(tool.getId()));
+                                     .arg(PointName(AttrUInt(domElem, AttrBasePoint)), PointName(tool.GetId()));
             return record;
         case Tool::Line:
             record.description =
@@ -323,76 +323,76 @@ auto DialogHistory::RecordDescription(const VToolRecord &tool, HistoryRecord rec
         case Tool::AlongLine:
             record.description = tr("%3 - Point along line %1_%2")
                                      .arg(PointName(AttrUInt(domElem, AttrFirstPoint)),
-                                          PointName(AttrUInt(domElem, AttrSecondPoint)), PointName(tool.getId()));
+                                          PointName(AttrUInt(domElem, AttrSecondPoint)), PointName(tool.GetId()));
             return record;
         case Tool::ShoulderPoint:
-            record.description = tr("%1 - Point of shoulder").arg(PointName(tool.getId()));
+            record.description = tr("%1 - Point of shoulder").arg(PointName(tool.GetId()));
             return record;
         case Tool::Normal:
             record.description = tr("%3 - normal to line %1_%2")
                                      .arg(PointName(AttrUInt(domElem, AttrFirstPoint)),
-                                          PointName(AttrUInt(domElem, AttrSecondPoint)), PointName(tool.getId()));
+                                          PointName(AttrUInt(domElem, AttrSecondPoint)), PointName(tool.GetId()));
             return record;
         case Tool::Bisector:
             record.description =
                 tr("%4 - bisector of angle %1_%2_%3")
                     .arg(PointName(AttrUInt(domElem, AttrFirstPoint)), PointName(AttrUInt(domElem, AttrSecondPoint)),
-                         PointName(AttrUInt(domElem, AttrThirdPoint)), PointName(tool.getId()));
+                         PointName(AttrUInt(domElem, AttrThirdPoint)), PointName(tool.GetId()));
             return record;
         case Tool::LineIntersect:
             record.description =
                 tr("%5 - intersection of lines %1_%2 and %3_%4")
                     .arg(PointName(AttrUInt(domElem, AttrP1Line1)), PointName(AttrUInt(domElem, AttrP2Line1)),
                          PointName(AttrUInt(domElem, AttrP1Line2)), PointName(AttrUInt(domElem, AttrP2Line2)),
-                         PointName(tool.getId()));
+                         PointName(tool.GetId()));
             return record;
         case Tool::Spline:
         {
-            const QSharedPointer<VSpline> spl = data->GeometricObject<VSpline>(tool.getId());
+            const QSharedPointer<VSpline> spl = data->GeometricObject<VSpline>(tool.GetId());
             record.description = spl->NameForHistory(tr("Curve"));
             return record;
         }
         case Tool::CubicBezier:
         {
-            const QSharedPointer<VCubicBezier> spl = data->GeometricObject<VCubicBezier>(tool.getId());
+            const QSharedPointer<VCubicBezier> spl = data->GeometricObject<VCubicBezier>(tool.GetId());
             record.description = spl->NameForHistory(tr("Cubic bezier curve"));
             return record;
         }
         case Tool::Arc:
         {
-            const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(tool.getId());
+            const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(tool.GetId());
             record.description = arc->NameForHistory(tr("Arc"));
             return record;
         }
         case Tool::ArcWithLength:
         {
-            const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(tool.getId());
+            const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(tool.GetId());
             record.description = tr("%1 with length %2").arg(arc->NameForHistory(tr("Arc"))).arg(arc->GetLength());
             return record;
         }
         case Tool::ParallelCurve:
         {
-            const QSharedPointer<VSplinePath> splPath = data->GeometricObject<VSplinePath>(tool.getId());
+            const QSharedPointer<VSplinePath> splPath = data->GeometricObject<VSplinePath>(tool.GetId());
             record.description = tr("%1 - parallel curve to %2")
                                      .arg(splPath->NameForHistory(tr("Curve")), CurveName(AttrUInt(domElem, AttrCurve)));
             return record;
         }
         case Tool::GraduatedCurve:
         {
-            const QSharedPointer<VSplinePath> splPath = data->GeometricObject<VSplinePath>(tool.getId());
+            const QSharedPointer<VSplinePath> splPath = data->GeometricObject<VSplinePath>(tool.GetId());
             record.description = tr("%1 - graduated curve to %2")
                                      .arg(splPath->NameForHistory(tr("Curve")), CurveName(AttrUInt(domElem, AttrCurve)));
             return record;
         }
         case Tool::SplinePath:
         {
-            const QSharedPointer<VSplinePath> splPath = data->GeometricObject<VSplinePath>(tool.getId());
+            const QSharedPointer<VSplinePath> splPath = data->GeometricObject<VSplinePath>(tool.GetId());
             record.description = splPath->NameForHistory(tr("Spline path"));
             return record;
         }
         case Tool::CubicBezierPath:
         {
-            const QSharedPointer<VCubicBezierPath> splPath = data->GeometricObject<VCubicBezierPath>(tool.getId());
+            const QSharedPointer<VCubicBezierPath> splPath = data->GeometricObject<VCubicBezierPath>(tool.GetId());
             record.description = splPath->NameForHistory(tr("Cubic bezier curve path"));
             return record;
         }
@@ -400,7 +400,7 @@ auto DialogHistory::RecordDescription(const VToolRecord &tool, HistoryRecord rec
             record.description =
                 tr("%4 - point of contact of arc with the center in point %1 and line %2_%3")
                     .arg(PointName(AttrUInt(domElem, AttrCenter)), PointName(AttrUInt(domElem, AttrFirstPoint)),
-                         PointName(AttrUInt(domElem, AttrSecondPoint)), PointName(tool.getId()));
+                         PointName(AttrUInt(domElem, AttrSecondPoint)), PointName(tool.GetId()));
             return record;
         case Tool::Height:
             record.description =
@@ -416,21 +416,21 @@ auto DialogHistory::RecordDescription(const VToolRecord &tool, HistoryRecord rec
             return record;
         case Tool::PointOfIntersection:
             record.description = tr("%1 - point of intersection %2 and %3")
-                                     .arg(PointName(tool.getId()), PointName(AttrUInt(domElem, AttrFirstPoint)),
+                                     .arg(PointName(tool.GetId()), PointName(AttrUInt(domElem, AttrFirstPoint)),
                                           PointName(AttrUInt(domElem, AttrSecondPoint)));
             return record;
         case Tool::CutArc:
         {
             const QSharedPointer<VAbstractArc> arc = data->GeometricObject<VAbstractArc>(AttrUInt(domElem, AttrArc));
             QString const toolName = arc->getType() == GOType::EllipticalArc ? tr("elliptical arc") : tr("arc");
-            record.description = tr("%1 - cut %2").arg(PointName(tool.getId()), arc->NameForHistory(toolName));
+            record.description = tr("%1 - cut %2").arg(PointName(tool.GetId()), arc->NameForHistory(toolName));
             return record;
         }
         case Tool::CutSpline:
         {
             const quint32 splineId = AttrUInt(domElem, VToolCutSpline::AttrSpline);
             const QSharedPointer<VAbstractCubicBezier> spl = data->GeometricObject<VAbstractCubicBezier>(splineId);
-            record.description = tr("%1 - cut %2").arg(PointName(tool.getId()), spl->NameForHistory(tr("curve")));
+            record.description = tr("%1 - cut %2").arg(PointName(tool.GetId()), spl->NameForHistory(tr("curve")));
             return record;
         }
         case Tool::CutSplinePath:
@@ -439,33 +439,33 @@ auto DialogHistory::RecordDescription(const VToolRecord &tool, HistoryRecord rec
             const QSharedPointer<VAbstractCubicBezierPath> splPath =
                 data->GeometricObject<VAbstractCubicBezierPath>(splinePathId);
             record.description =
-                tr("%1 - cut %2").arg(PointName(tool.getId()), splPath->NameForHistory(tr("curve path")));
+                tr("%1 - cut %2").arg(PointName(tool.GetId()), splPath->NameForHistory(tr("curve path")));
             return record;
         }
         case Tool::LineIntersectAxis:
             record.description =
                 tr("%1 - point of intersection line %2_%3 and axis through point %4")
-                    .arg(PointName(tool.getId()), PointName(AttrUInt(domElem, AttrP1Line)),
+                    .arg(PointName(tool.GetId()), PointName(AttrUInt(domElem, AttrP1Line)),
                          PointName(AttrUInt(domElem, AttrP2Line)), PointName(AttrUInt(domElem, AttrBasePoint)));
             return record;
         case Tool::CurveIntersectAxis:
             record.description = tr("%1 - point of intersection curve and axis through point %2")
-                                     .arg(PointName(tool.getId()), PointName(AttrUInt(domElem, AttrBasePoint)));
+                                     .arg(PointName(tool.GetId()), PointName(AttrUInt(domElem, AttrBasePoint)));
             return record;
         case Tool::PointOfIntersectionArcs:
-            record.description = tr("%1 - point of arcs intersection").arg(PointName(tool.getId()));
+            record.description = tr("%1 - point of arcs intersection").arg(PointName(tool.GetId()));
             return record;
         case Tool::PointOfIntersectionCircles:
-            record.description = tr("%1 - point of circles intersection").arg(PointName(tool.getId()));
+            record.description = tr("%1 - point of circles intersection").arg(PointName(tool.GetId()));
             return record;
         case Tool::PointOfIntersectionCurves:
-            record.description = tr("%1 - point of curves intersection").arg(PointName(tool.getId()));
+            record.description = tr("%1 - point of curves intersection").arg(PointName(tool.GetId()));
             return record;
         case Tool::PointFromCircleAndTangent:
-            record.description = tr("%1 - point from circle and tangent").arg(PointName(tool.getId()));
+            record.description = tr("%1 - point from circle and tangent").arg(PointName(tool.GetId()));
             return record;
         case Tool::PointFromArcAndTangent:
-            record.description = tr("%1 - point from arc and tangent").arg(PointName(tool.getId()));
+            record.description = tr("%1 - point from arc and tangent").arg(PointName(tool.GetId()));
             return record;
         case Tool::TrueDarts:
             record.description =
@@ -475,7 +475,7 @@ auto DialogHistory::RecordDescription(const VToolRecord &tool, HistoryRecord rec
             return record;
         case Tool::EllipticalArc:
         {
-            const QSharedPointer<VEllipticalArc> elArc = data->GeometricObject<VEllipticalArc>(tool.getId());
+            const QSharedPointer<VEllipticalArc> elArc = data->GeometricObject<VEllipticalArc>(tool.GetId());
             record.description = elArc->NameForHistory(tr("Elliptical arc"));
             return record;
         }
@@ -501,7 +501,7 @@ auto DialogHistory::RecordDescription(const VToolRecord &tool, HistoryRecord rec
             return record;
         case Tool::EllipticalArcWithLength:
         {
-            const QSharedPointer<VEllipticalArc> arc = data->GeometricObject<VEllipticalArc>(tool.getId());
+            const QSharedPointer<VEllipticalArc> arc = data->GeometricObject<VEllipticalArc>(tool.GetId());
             record.description
                 = tr("%1 with length %2").arg(arc->NameForHistory(tr("Elliptical arc"))).arg(arc->GetLength());
             return record;

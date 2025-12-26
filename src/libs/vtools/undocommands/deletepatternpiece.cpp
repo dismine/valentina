@@ -32,22 +32,27 @@
 #include <QDomNodeList>
 
 #include "../ifc/xml/vabstractpattern.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DeletePatternPiece::DeletePatternPiece(VAbstractPattern *doc, const QString &namePP, QUndoCommand *parent)
+DeletePatternPiece::DeletePatternPiece(VAbstractPattern *doc, int indexPatternBlock, QUndoCommand *parent)
   : VUndoCommand(QDomElement(), doc, parent),
-    namePP(namePP)
+    m_indexPatternBlock(indexPatternBlock)
 {
-    setText(tr("delete pattern piece %1").arg(namePP));
+    SCASSERT(m_indexPatternBlock >= 0)
+    setText(tr("delete pattern block"));
 
-    const QDomElement patternP = doc->GetPPElement(namePP);
-    patternPiece = patternP.cloneNode().toElement();
-    const QDomElement previousPP = patternP.previousSibling().toElement(); // find previous pattern piece
-    if (not previousPP.isNull() && previousPP.tagName() == VAbstractPattern::TagDraw)
+    const QDomElement patternBlockElement = doc->PatternBlockMapper()->GetElementById(m_indexPatternBlock);
+    m_patternBlock = patternBlockElement.cloneNode().toElement();
+
+    if (const QDomElement previousPatternBlockElement = patternBlockElement.previousSibling().toElement();
+        not previousPatternBlockElement.isNull() && previousPatternBlockElement.tagName() == VAbstractPattern::TagDraw)
     {
-        previousPPName = VAbstractPattern::GetParametrString(previousPP, VAbstractPattern::AttrName, QString());
+        m_previousPatternBlockName = VAbstractPattern::GetParametrString(previousPatternBlockElement,
+                                                                         VAbstractPattern::AttrName,
+                                                                         QString());
     }
 }
 
@@ -56,12 +61,13 @@ void DeletePatternPiece::undo()
 {
     qCDebug(vUndo, "Undo.");
 
+    const VPatternBlockMapper *blocks = doc->PatternBlockMapper();
     QDomElement rootElement = doc->documentElement();
 
-    if (not previousPPName.isEmpty())
+    if (!m_previousPatternBlockName.isEmpty())
     { // not first in the list, add after tag draw
-        const QDomNode previousPP = doc->GetPPElement(previousPPName);
-        rootElement.insertAfter(patternPiece, previousPP);
+        const QDomNode previousPatternBlock = blocks->GetElement(m_previousPatternBlockName);
+        rootElement.insertAfter(m_patternBlock, previousPatternBlock);
     }
     else
     { // first in the list, add before tag draw
@@ -73,13 +79,13 @@ void DeletePatternPiece::undo()
         }
 
         Q_ASSERT_X(not draw.isNull(), Q_FUNC_INFO, "Couldn't' find tag draw");
-        rootElement.insertBefore(patternPiece, draw);
+        rootElement.insertBefore(m_patternBlock, draw);
     }
 
     emit NeedFullParsing();
     if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
     {
-        emit doc->SetCurrentPP(namePP); // Without this user will not see this change
+        emit doc->ShowPatternBlock(blocks->FindName(m_indexPatternBlock)); // Without this user will not see this change
     }
 }
 
@@ -88,12 +94,15 @@ void DeletePatternPiece::redo()
 {
     qCDebug(vUndo, "Redo.");
 
+    const VPatternBlockMapper *blocks = doc->PatternBlockMapper();
+
     if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
     {
-        emit doc->SetCurrentPP(namePP); // Without this user will not see this change
+        emit doc->ShowPatternBlock(blocks->FindName(m_indexPatternBlock)); // Without this user will not see this change
     }
+
     QDomElement rootElement = doc->documentElement();
-    const QDomElement patternPieceElement = doc->GetPPElement(namePP);
+    const QDomElement patternPieceElement = blocks->GetElementById(m_indexPatternBlock);
     rootElement.removeChild(patternPieceElement);
     emit NeedFullParsing();
 }

@@ -35,11 +35,12 @@
  * @brief Add a vertex to the graph
  * @param id Unique node ID
  * @param type Node type (TOOL or OBJECT)
+ * @param index of node's pattern block name
  * @return true if vertex was added, false if ID already exists
  */
-auto VPatternGraph::AddVertex(vidtype id, VNodeType type) -> bool
+auto VPatternGraph::AddVertex(vidtype id, VNodeType type, int index) -> bool
 {
-    return AddVertex(VNode(id, type));
+    return AddVertex(VNode(id, type, index));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -48,7 +49,7 @@ auto VPatternGraph::AddVertex(vidtype id, VNodeType type) -> bool
  * @param node Unique node
  * @return true if vertex was added, false if ID already exists
  */
-auto VPatternGraph::AddVertex(VNode node) -> bool
+auto VPatternGraph::AddVertex(const VNode &node) -> bool
 {
     QWriteLocker const locker(&m_lock);
 

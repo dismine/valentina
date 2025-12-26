@@ -75,7 +75,7 @@ public:
 public slots:
     void Label1ChangePosition(const QPointF &pos);
     void Label2ChangePosition(const QPointF &pos);
-    void Disable(bool disable, const QString &namePP) override;
+    void Enable() override;
     void EnableToolMove(bool move) override;
     void Point1Choosed();
     void Point2Choosed();

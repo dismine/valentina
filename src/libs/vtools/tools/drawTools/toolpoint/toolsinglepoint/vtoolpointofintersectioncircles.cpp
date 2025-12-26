@@ -29,7 +29,6 @@
 #include "vtoolpointofintersectioncircles.h"
 
 #include <QSharedPointer>
-#include <new>
 
 #include "../../../../dialogs/tools/dialogpointofintersectioncircles.h"
 #include "../../../../dialogs/tools/dialogtool.h"
@@ -39,6 +38,7 @@
 #include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vdomdocument.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 #include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
@@ -156,7 +156,7 @@ auto VToolPointOfIntersectionCircles::Create(VToolPointOfIntersectionCirclesInit
     VPatternGraph *patternGraph = initData.doc->PatternGraph();
     SCASSERT(patternGraph != nullptr)
 
-    patternGraph->AddVertex(initData.id, VNodeType::TOOL);
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
 
     const auto varData = initData.data->DataDependencyVariables();
     initData.doc->FindFormulaDependencies(initData.firstCircleRadius, initData.id, varData);

@@ -40,6 +40,7 @@
 #include "../../../vabstracttool.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 #include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
@@ -165,7 +166,7 @@ auto VToolTriangle::Create(VToolTriangleInitData initData) -> VToolTriangle *
     VPatternGraph *patternGraph = initData.doc->PatternGraph();
     SCASSERT(patternGraph != nullptr)
 
-    patternGraph->AddVertex(initData.id, VNodeType::TOOL);
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
 
     patternGraph->AddEdge(initData.axisP1Id, initData.id);
     patternGraph->AddEdge(initData.axisP2Id, initData.id);

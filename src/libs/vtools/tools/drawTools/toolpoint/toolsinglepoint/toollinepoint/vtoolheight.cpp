@@ -37,6 +37,7 @@
 #include "../../../../../visualization/visualization.h"
 #include "../../../../vabstracttool.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 #include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
@@ -156,7 +157,7 @@ auto VToolHeight::Create(VToolHeightInitData initData) -> VToolHeight *
     VPatternGraph *patternGraph = initData.doc->PatternGraph();
     SCASSERT(patternGraph != nullptr)
 
-    patternGraph->AddVertex(initData.id, VNodeType::TOOL);
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
 
     initData.data->AddLine(initData.basePointId, initData.id);
     initData.data->AddLine(initData.p1LineId, initData.id);

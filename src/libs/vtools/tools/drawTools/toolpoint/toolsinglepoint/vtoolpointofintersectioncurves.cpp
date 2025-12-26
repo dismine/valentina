@@ -36,9 +36,10 @@
 #include "../../../../dialogs/tools/dialogtool.h"
 #include "../../../../visualization/path/vistoolpointofintersectioncurves.h"
 #include "../../../vabstracttool.h"
-#include "../../vdrawtool.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
@@ -46,7 +47,6 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "vtoolsinglepoint.h"
-#include "xml/vpatterngraph.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
@@ -173,7 +173,7 @@ auto VToolPointOfIntersectionCurves::Create(VToolPointOfIntersectionCurvesInitDa
     VPatternGraph *patternGraph = initData.doc->PatternGraph();
     SCASSERT(patternGraph != nullptr)
 
-    patternGraph->AddVertex(initData.id, VNodeType::TOOL);
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
 
     initData.curve1Segments = VToolSinglePoint::InitSegments(curve1->getType(),
                                                              segLength1,

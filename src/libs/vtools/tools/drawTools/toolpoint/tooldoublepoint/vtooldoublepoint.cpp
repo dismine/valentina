@@ -39,13 +39,13 @@
 #include "../../../../undocommands/label/movedoublelabel.h"
 #include "../../../../undocommands/label/showdoublelabel.h"
 #include "../../../vabstracttool.h"
-#include "../../../vdatatool.h"
 #include "../../vdrawtool.h"
-#include "../vmisc/exception/vexception.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 #include "../vabstractpoint.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vmisc/theme/themeDef.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
@@ -190,10 +190,10 @@ void VToolDoublePoint::Label2ChangePosition(const QPointF &pos)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolDoublePoint::Disable(bool disable, const QString &namePP)
+void VToolDoublePoint::Enable()
 {
-    const bool enabled = !CorrectDisable(disable, namePP);
-    this->setEnabled(enabled);
+    const bool enabled = m_indexActivePatternBlock == doc->PatternBlockMapper()->GetActiveId();
+    setEnabled(enabled);
     firstPoint->SetEnabled(enabled);
     secondPoint->SetEnabled(enabled);
 }

@@ -37,8 +37,8 @@
 #include "../../../../../visualization/line/vistoolnormal.h"
 #include "../../../../../visualization/visualization.h"
 #include "../../../../vabstracttool.h"
-#include "../../../vdrawtool.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/exception/vexception.h"
@@ -157,7 +157,7 @@ auto VToolNormal::Create(VToolNormalInitData &initData) -> VToolNormal *
     VPatternGraph *patternGraph = initData.doc->PatternGraph();
     SCASSERT(patternGraph != nullptr)
 
-    patternGraph->AddVertex(initData.id, VNodeType::TOOL);
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
 
     const auto varData = initData.data->DataDependencyVariables();
     initData.doc->FindFormulaDependencies(initData.formula, initData.id, varData);

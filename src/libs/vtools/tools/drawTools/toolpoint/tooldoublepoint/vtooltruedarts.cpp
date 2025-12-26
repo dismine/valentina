@@ -38,6 +38,7 @@
 #include "../../../../visualization/visualization.h"
 #include "../../../vabstracttool.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 #include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
@@ -174,7 +175,7 @@ auto VToolTrueDarts::Create(VToolTrueDartsInitData initData) -> VToolTrueDarts *
     VPatternGraph *patternGraph = initData.doc->PatternGraph();
     SCASSERT(patternGraph != nullptr)
 
-    patternGraph->AddVertex(initData.id, VNodeType::TOOL);
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
 
     patternGraph->AddEdge(initData.baseLineP1Id, initData.id);
     patternGraph->AddEdge(initData.baseLineP2Id, initData.id);
@@ -182,8 +183,8 @@ auto VToolTrueDarts::Create(VToolTrueDartsInitData initData) -> VToolTrueDarts *
     patternGraph->AddEdge(initData.dartP2Id, initData.id);
     patternGraph->AddEdge(initData.dartP3Id, initData.id);
 
-    patternGraph->AddVertex(initData.p1id, VNodeType::OBJECT);
-    patternGraph->AddVertex(initData.p2id, VNodeType::OBJECT);
+    patternGraph->AddVertex(initData.p1id, VNodeType::OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
+    patternGraph->AddVertex(initData.p2id, VNodeType::OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
 
     patternGraph->AddEdge(initData.id, initData.p1id);
     patternGraph->AddEdge(initData.id, initData.p2id);

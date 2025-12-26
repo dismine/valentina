@@ -44,6 +44,7 @@
 #include "../../../visualization/visualization.h"
 #include "../../vabstracttool.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 #include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
@@ -172,7 +173,7 @@ auto VToolMove::Create(VToolMoveInitData &initData) -> VToolMove *
     VPatternGraph *patternGraph = initData.doc->PatternGraph();
     SCASSERT(patternGraph != nullptr)
 
-    patternGraph->AddVertex(initData.id, VNodeType::TOOL);
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
 
     const auto varData = initData.data->DataDependencyVariables();
     initData.doc->FindFormulaDependencies(initData.formulaAngle, initData.id, varData);
@@ -207,7 +208,7 @@ auto VToolMove::Create(VToolMoveInitData &initData) -> VToolMove *
 
     for (const auto &object : qAsConst(initData.destination))
     {
-        patternGraph->AddVertex(object.id, VNodeType::OBJECT);
+        patternGraph->AddVertex(object.id, VNodeType::OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
         patternGraph->AddEdge(initData.id, object.id);
     }
 

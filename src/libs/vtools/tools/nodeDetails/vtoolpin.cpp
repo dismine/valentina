@@ -29,6 +29,7 @@
 #include "vtoolpin.h"
 #include "../../dialogs/tools/piece/dialogpin.h"
 #include "../../undocommands/savepieceoptions.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 #include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vpointf.h"
 #include "../vtoolseamallowance.h"
@@ -59,7 +60,7 @@ auto VToolPin::Create(VToolPinInitData initData) -> VToolPin *
     VPatternGraph *patternGraph = initData.doc->PatternGraph();
     SCASSERT(patternGraph != nullptr)
 
-    patternGraph->AddVertex(initData.id, VNodeType::MODELING_OBJECT);
+    patternGraph->AddVertex(initData.id, VNodeType::MODELING_OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
 
     QSharedPointer<VPointF> point;
     try

@@ -29,6 +29,7 @@
 
 #include "../../../dialogs/tools/dialoggraduatedcurve.h"
 #include "../../../visualization/path/vistoolgraduatedcurve.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 #include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vsplinepath.h"
@@ -135,7 +136,7 @@ auto VToolGraduatedCurve::Create(VToolGraduatedCurveInitData &initData) -> VTool
     VPatternGraph *patternGraph = initData.doc->PatternGraph();
     SCASSERT(patternGraph != nullptr)
 
-    patternGraph->AddVertex(initData.id, VNodeType::TOOL);
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
 
     const auto varData = initData.data->DataDependencyVariables();
     for (auto &offset : initData.offsets)

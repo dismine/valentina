@@ -91,7 +91,7 @@ public:
 public slots:
     void FullUpdateFromFile() override;
     void ShowTool(quint32 id, bool enable) override;
-    void Disable(bool disable, const QString &namePP) override;
+    void Enable() override;
     void AllowHover(bool enabled) override;
     void AllowSelecting(bool enabled) override;
 

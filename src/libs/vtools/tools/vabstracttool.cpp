@@ -44,13 +44,12 @@
 #include <QSharedPointer>
 #include <QUndoStack>
 #include <QVector>
-#include <new>
 #include <qnumeric.h>
 
 #include "../dialogs/support/dialogeditwrongformula.h"
 #include "../dialogs/support/dialogundo.h"
-#include "../vmisc/exception/vexception.h"
 #include "../ifc/exception/vexceptionundo.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 #include "../ifc/xml/vtoolrecord.h"
 #include "../undocommands/deltool.h"
 #include "../vgeometry/../ifc/ifcdef.h"
@@ -62,6 +61,7 @@
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vsplinepath.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vpiecenode.h"
@@ -389,7 +389,7 @@ auto VAbstractTool::GetRecord(const quint32 id, const Tool &toolType, VAbstractP
     const QVector<VToolRecord> *history = doc->getHistory();
     for (const auto &record : *history)
     {
-        if (record.getId() == id && record.getTypeTool() == toolType)
+        if (record.GetId() == id && record.GetToolType() == toolType)
         {
             return record;
         }
@@ -431,7 +431,7 @@ void VAbstractTool::AddRecord(const VToolRecord &record, VAbstractPattern *doc)
         for (qint32 i = 0; i < history->size(); ++i)
         {
             VToolRecord const rec = history->at(i);
-            if (rec.getId() == cursor)
+            if (rec.GetId() == cursor)
             {
                 index = i;
                 break;
@@ -450,7 +450,7 @@ void VAbstractTool::AddRecord(const VToolRecord &record, VAbstractPattern *doc)
  */
 void VAbstractTool::AddRecord(quint32 id, const Tool &toolType, VAbstractPattern *doc)
 {
-    AddRecord(VToolRecord(id, toolType, doc->GetNameActivPP()), doc);
+    AddRecord(VToolRecord(id, toolType, doc->PatternBlockMapper()->GetActiveId()), doc);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

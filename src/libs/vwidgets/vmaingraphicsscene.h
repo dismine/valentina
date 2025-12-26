@@ -57,7 +57,7 @@ public:
     void          setVerScrollBar(const qint32 &value);
     auto transform() const -> QTransform;
     void          setTransform(const QTransform &transform);
-    void          SetDisableTools(bool disable, const QString &namePP);
+    void EnableTools();
     auto getScenePos() const -> QPointF;
 
     auto VisibleItemsBoundingRect() const -> QRectF;
@@ -101,9 +101,9 @@ public slots:
     void          ToggleNodePointHover(bool enabled);
     void          ToggleDetailHover(bool enabled);
 protected:
-    virtual void  mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
-    virtual void  mousePressEvent(QGraphicsSceneMouseEvent *event) override;
-    virtual void  mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
+    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 signals:
     /**
      * @brief mouseMove send new mouse position.
@@ -124,7 +124,7 @@ signals:
      */
     void          ChoosedObject(quint32 id, SceneObject type);
     void          SelectedObject(bool selected, quint32 object, quint32 tool);
-    void          DisableItem(bool disable, const QString &namePP);
+    void EnableItem();
     void          EnableToolMove(bool move);
     void          CurveDetailsMode(bool mode);
     void          ItemSelection(const SelectionType &type);

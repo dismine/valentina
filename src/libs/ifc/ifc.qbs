@@ -64,6 +64,8 @@ VLib {
             "vlayoutconverter.h",
             "vparsererrorhandler.cpp",
             "vparsererrorhandler.h",
+            "vpatternblockmapper.cpp",
+            "vpatternblockmapper.h",
             "vpatternconverter.h",
             "vpatterngraph.cpp",
             "vpatterngraph.h",

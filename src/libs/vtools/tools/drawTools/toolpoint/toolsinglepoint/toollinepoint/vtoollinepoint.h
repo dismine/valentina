@@ -81,8 +81,8 @@ public:
     void SetLineColor(const QString &value);
 
 public slots:
-    virtual void Disable(bool disable, const QString &namePP) override;
-    virtual void FullUpdateFromFile() override;
+    void Enable() override;
+    void FullUpdateFromFile() override;
 
 protected:
     /** @brief formula string with length formula. */

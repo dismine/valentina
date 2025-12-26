@@ -48,6 +48,7 @@
 #include "../../vdrawtool.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 #include "../vabstractpoint.h"
 #include "../vgeometry/vabstractcubicbezier.h"
 #include "../vgeometry/vabstractcubicbezierpath.h"
@@ -197,10 +198,10 @@ void VToolSinglePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSinglePoint::Disable(bool disable, const QString &namePP)
+void VToolSinglePoint::Enable()
 {
-    const bool enabled = !CorrectDisable(disable, namePP);
-    SetEnabled(enabled);
+    const bool enabled = m_indexActivePatternBlock == doc->PatternBlockMapper()->GetActiveId();
+    setEnabled(enabled);
     m_namePoint->SetEnabledState(enabled);
 }
 

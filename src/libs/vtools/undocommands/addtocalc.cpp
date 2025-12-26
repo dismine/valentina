@@ -31,6 +31,7 @@
 #include <QDomNode>
 
 #include "../ifc/xml/vabstractpattern.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 #include "../vmisc/customevents.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vwidgets/vmaingraphicsview.h"
@@ -39,7 +40,7 @@
 //---------------------------------------------------------------------------------------------------------------------
 AddToCalc::AddToCalc(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent)
   : VUndoCommand(xml, doc, parent),
-    nameActivDraw(doc->GetNameActivPP()),
+    m_indexActiveBlock(doc->PatternBlockMapper()->GetActiveId()),
     cursor(doc->getCursor())
 {
     setText(tr("add object"));
@@ -51,7 +52,8 @@ void AddToCalc::undo()
 {
     qCDebug(vUndo, "Undo.");
 
-    doc->ChangeActivPP(nameActivDraw); // Without this user will not see this change
+    // Without this user will not see this change
+    doc->ShowPatternBlock(doc->PatternBlockMapper()->FindName(m_indexActiveBlock));
 
     QDomElement calcElement;
     if (doc->GetActivNodeElement(VAbstractPattern::TagCalculation, calcElement))
@@ -81,7 +83,8 @@ void AddToCalc::undo()
                                     VAbstractValApplication::VApp()->getSceneView());
     if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
     {
-        emit doc->SetCurrentPP(nameActivDraw); // Return current pattern piece after undo
+        // Return current pattern piece after undo
+        emit doc->ShowPatternBlock(doc->PatternBlockMapper()->FindName(m_indexActiveBlock));
     }
 }
 
@@ -90,7 +93,8 @@ void AddToCalc::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    doc->ChangeActivPP(nameActivDraw); // Without this user will not see this change
+    // Without this user will not see this change
+    doc->ShowPatternBlock(doc->PatternBlockMapper()->FindName(m_indexActiveBlock));
     doc->setCursor(cursor);
 
     QDomElement calcElement;
@@ -132,7 +136,8 @@ void AddToCalc::RedoFullParsing()
         emit NeedFullParsing();
         if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
         {
-            emit doc->SetCurrentPP(nameActivDraw); // Return current pattern piece after undo
+            // Return current pattern piece after undo
+            emit doc->ShowPatternBlock(doc->PatternBlockMapper()->FindName(m_indexActiveBlock));
         }
     }
     else

@@ -42,6 +42,7 @@
 #include "../dialogs/tools/dialoguniondetails.h"
 #include "../ifc/exception/vexceptionwrongid.h"
 #include "../ifc/xml/vdomdocument.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 #include "../ifc/xml/vpatternconverter.h"
 #include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vabstractcubicbezier.h"
@@ -1140,7 +1141,7 @@ void CreateUnitedNodes(VPiece &newDetail, const VPiece &d1, const VPiece &d2, co
 
     for (auto child : std::as_const(children))
     {
-        patternGraph->AddVertex(child, VNodeType::MODELING_OBJECT);
+        patternGraph->AddVertex(child, VNodeType::MODELING_OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
         patternGraph->AddEdge(initData.id, child);
     }
 
@@ -1207,7 +1208,7 @@ void CreateUnitedCSA(VPiece &newDetail, const VPiece &d1, const VPiece &d2, cons
 
     for (auto child : std::as_const(children))
     {
-        patternGraph->AddVertex(child, VNodeType::MODELING_OBJECT);
+        patternGraph->AddVertex(child, VNodeType::MODELING_OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
         patternGraph->AddEdge(initData.id, child);
     }
 }
@@ -1273,7 +1274,7 @@ void CreateUnitedInternalPaths(VPiece &newDetail, const VPiece &d1, const VPiece
 
     for (auto child : std::as_const(children))
     {
-        patternGraph->AddVertex(child, VNodeType::MODELING_OBJECT);
+        patternGraph->AddVertex(child, VNodeType::MODELING_OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
         patternGraph->AddEdge(initData.id, child);
     }
 }
@@ -1335,7 +1336,7 @@ void CreateUnitedPins(VPiece &newDetail, const VPiece &d1, const VPiece &d2, con
 
     for (auto child : std::as_const(children))
     {
-        patternGraph->AddVertex(child, VNodeType::MODELING_OBJECT);
+        patternGraph->AddVertex(child, VNodeType::MODELING_OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
         patternGraph->AddEdge(initData.id, child);
     }
 }
@@ -1360,7 +1361,7 @@ void CreateUnitedPlaceLabels(VPiece &newDetail, const VPiece &d1, const VPiece &
 
     for (auto child : std::as_const(children))
     {
-        patternGraph->AddVertex(child, VNodeType::MODELING_OBJECT);
+        patternGraph->AddVertex(child, VNodeType::MODELING_OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
         patternGraph->AddEdge(initData.id, child);
     }
 }
@@ -1379,7 +1380,7 @@ void UpdateUnitedNodes(const VToolUnionDetailsInitData &initData, qreal dx, qrea
 
     for (auto child : std::as_const(children))
     {
-        patternGraph->AddVertex(child, VNodeType::MODELING_OBJECT);
+        patternGraph->AddVertex(child, VNodeType::MODELING_OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
         patternGraph->AddEdge(initData.id, child);
     }
 
@@ -1495,7 +1496,7 @@ void UpdateUnitedDetailPaths(const VToolUnionDetailsInitData &initData, qreal dx
 
     for (auto child : std::as_const(children))
     {
-        patternGraph->AddVertex(child, VNodeType::MODELING_OBJECT);
+        patternGraph->AddVertex(child, VNodeType::MODELING_OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
         patternGraph->AddEdge(initData.id, child);
     }
 
@@ -1571,7 +1572,7 @@ void UpdateUnitedDetailPins(const VToolUnionDetailsInitData &initData, qreal dx,
 
     for (auto child : std::as_const(children))
     {
-        patternGraph->AddVertex(child, VNodeType::MODELING_OBJECT);
+        patternGraph->AddVertex(child, VNodeType::MODELING_OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
         patternGraph->AddEdge(initData.id, child);
     }
 
@@ -1600,7 +1601,7 @@ void UpdateUnitedDetailPlaceLabels(const VToolUnionDetailsInitData &initData, qr
 
     for (auto child : std::as_const(children))
     {
-        patternGraph->AddVertex(child, VNodeType::MODELING_OBJECT);
+        patternGraph->AddVertex(child, VNodeType::MODELING_OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
         patternGraph->AddEdge(initData.id, child);
     }
 
@@ -1874,7 +1875,7 @@ auto VToolUnionDetails::Create(VToolUnionDetailsInitData initData) -> VToolUnion
     VPatternGraph *patternGraph = initData.doc->PatternGraph();
     SCASSERT(patternGraph != nullptr)
 
-    patternGraph->AddVertex(initData.id, VNodeType::MODELING_TOOL);
+    patternGraph->AddVertex(initData.id, VNodeType::MODELING_TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
 
     if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
     {

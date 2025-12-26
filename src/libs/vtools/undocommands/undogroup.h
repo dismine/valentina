@@ -53,7 +53,7 @@ signals:
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(AddGroup) // NOLINT
-    const QString nameActivDraw;
+    int m_indexPatternBlock{-1};
 };
 
 class RenameGroup : public VUndoCommand
@@ -112,7 +112,7 @@ protected:
 
 private:
     Q_DISABLE_COPY_MOVE(AddItemToGroup) // NOLINT
-    const QString nameActivDraw;
+    int m_indexPatternBlock{-1};
 };
 
 class RemoveItemFromGroup : public VUndoCommand
@@ -132,7 +132,7 @@ protected:
 
 private:
     Q_DISABLE_COPY_MOVE(RemoveItemFromGroup) // NOLINT
-    const QString nameActivDraw;
+    int m_indexPatternBlock{-1};
 };
 
 class ChangeGroupVisibility : public VUndoCommand
@@ -153,7 +153,7 @@ private:
 
     bool m_oldVisibility{true};
     bool m_newVisibility{true};
-    const QString m_nameActivDraw{};
+    int m_indexPatternBlock{-1};
 
     void Do(bool visible);
 };
@@ -178,7 +178,7 @@ private:
     QVector<vidtype> m_groups;
     bool m_newVisibility{true};
     QMap<vidtype, bool> m_oldVisibility{};
-    const QString m_nameActivDraw{};
+    int m_indexPatternBlock{-1};
 };
 
 class DelGroup : public VUndoCommand
@@ -195,7 +195,7 @@ signals:
 
 private:
     Q_DISABLE_COPY_MOVE(DelGroup) // NOLINT
-    const QString nameActivDraw;
+    int m_indexPatternBlock{-1};
 };
 
 #endif // UNDOGROUP_H

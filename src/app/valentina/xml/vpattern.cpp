@@ -34,6 +34,7 @@
 #include "../ifc/exception/vexceptionundo.h"
 #include "../ifc/exception/vexceptionwrongid.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 #include "../ifc/xml/vpatternconverter.h"
 #include "../ifc/xml/vpatterngraph.h"
 #include "../qmuparser/qmuparsererror.h"
@@ -314,7 +315,7 @@ void VPattern::Parse(const Document &parse)
  */
 void VPattern::setCurrentData()
 {
-    const int countPP = CountPP();
+    const int countPP = CountPatternBlockTags();
     // don't need upadate data if we have only one pattern piece
     if (VAbstractValApplication::VApp()->GetDrawMode() != Draw::Calculation || countPP <= 1)
     {
@@ -322,17 +323,17 @@ void VPattern::setCurrentData()
     }
 
     qCDebug(vXML, "Setting current data");
-    qCDebug(vXML, "Current PP name %s", qUtf8Printable(nameActivPP));
+    qCDebug(vXML, "Current PP name %s", qUtf8Printable(PatternBlockMapper()->GetActive()));
     qCDebug(vXML, "PP count %d", countPP);
 
-    const QVector<VToolRecord> localHistory = getLocalHistory();
+    const QVector<VToolRecord> localHistory = GetLocalHistory();
     if (localHistory.isEmpty())
     {
         qCDebug(vXML, "History is empty!");
         return;
     }
 
-    const quint32 id = localHistory.constLast().getId();
+    const quint32 id = localHistory.constLast().GetId();
     qCDebug(vXML, "Resoring data from tool with id %u", id);
 
     if (tools.isEmpty())
@@ -379,13 +380,13 @@ void VPattern::UpdateToolData(const quint32 &id, VContainer *data)
 //---------------------------------------------------------------------------------------------------------------------
 auto VPattern::GetCompleteData() const -> VContainer
 {
-    const int countPP = CountPP();
+    const int countPP = CountPatternBlockTags();
     if (countPP <= 0 || history.isEmpty() || tools.isEmpty())
     {
         return (data != nullptr ? *data : VContainer(nullptr, nullptr, VContainer::UniqueNamespace()));
     }
 
-    const quint32 id = (countPP == 1 ? history.constLast().getId() : LastToolId());
+    const quint32 id = (countPP == 1 ? history.constLast().GetId() : LastToolId());
 
     if (id == NULL_ID)
     {
@@ -414,13 +415,13 @@ auto VPattern::GetCompleteData() const -> VContainer
 //---------------------------------------------------------------------------------------------------------------------
 auto VPattern::GetCompletePPData(const QString &name) const -> VContainer
 {
-    const int countPP = CountPP();
+    const int countPP = CountPatternBlockTags();
     if (countPP <= 0 || history.isEmpty() || tools.isEmpty())
     {
         return (data != nullptr ? *data : VContainer(nullptr, nullptr, VContainer::UniqueNamespace()));
     }
 
-    const quint32 id = (countPP == 1 ? history.constLast().getId() : PPLastToolId(name));
+    const quint32 id = (countPP == 1 ? history.constLast().GetId() : PPLastToolId(name));
 
     if (id == NULL_ID)
     {
@@ -472,23 +473,29 @@ auto VPattern::SPointActiveDraw() -> quint32
 //---------------------------------------------------------------------------------------------------------------------
 auto VPattern::GetActivePPPieces() const -> QVector<quint32>
 {
-    QVector<quint32> pieces;
-    if (QDomElement drawElement; GetActivDrawElement(drawElement))
+    QDomElement drawElement = PatternBlockMapper()->GetActiveElement();
+    if (drawElement.isNull())
     {
-        const QDomElement details = drawElement.firstChildElement(TagDetails);
-        if (not details.isNull())
-        {
-            QDomElement detail = details.firstChildElement(TagDetail);
-            while (not detail.isNull())
-            {
-                if (bool const united = GetParametrBool(detail, VToolSeamAllowance::AttrUnited, falseStr); not united)
-                {
-                    pieces.append(GetParametrId(detail));
-                }
-                detail = detail.nextSiblingElement(TagDetail);
-            }
-        }
+        return {};
     }
+
+    const QDomElement details = drawElement.firstChildElement(TagDetails);
+    if (details.isNull())
+    {
+        return {};
+    }
+
+    QVector<quint32> pieces;
+    QDomElement detail = details.firstChildElement(TagDetail);
+    while (!detail.isNull())
+    {
+        if (bool const united = GetParametrBool(detail, VToolSeamAllowance::AttrUnited, falseStr); not united)
+        {
+            pieces.append(GetParametrId(detail));
+        }
+        detail = detail.nextSiblingElement(TagDetail);
+    }
+
     return pieces;
 }
 
@@ -622,7 +629,7 @@ auto VPattern::ElementsToParse() const -> int
 void VPattern::LiteParseTree(const Document &parse)
 {
     // Save current pattern block name
-    QString const namePP = nameActivPP;
+    QString const namePP = PatternBlockMapper()->GetActive();
 
     try
     {
@@ -718,8 +725,8 @@ void VPattern::LiteParseTree(const Document &parse)
     }
 
     // Restore current pattern block name
-    nameActivPP = namePP;
-    qCDebug(vXML, "Current pattern piece %s", qUtf8Printable(nameActivPP));
+    PatternBlockMapper()->SetActive(namePP);
+    qCDebug(vXML, "Current pattern piece %s", qUtf8Printable(PatternBlockMapper()->GetActive()));
     setCurrentData();
     emit FullUpdateFromFile();
     // Recalculate scene rect
@@ -873,25 +880,23 @@ void VPattern::ParseRootElement(const Document &parse, const QDomNode &node)
     switch (tags.indexOf(domElement.tagName()))
     {
         case 0: // TagDraw
+        {
             qCDebug(vXML, "Tag draw.");
+            VPatternBlockMapper *blocks = PatternBlockMapper();
             if (parse == Document::FullParse)
             {
-                if (nameActivPP.isEmpty())
-                {
-                    SetActivPP(GetParametrString(domElement, AttrName));
-                }
-                else
-                {
-                    ChangeActivPP(GetParametrString(domElement, AttrName));
-                }
-                patternPieces << GetParametrString(domElement, AttrName);
+                int const id = blocks->AddBlock(GetParametrString(domElement, AttrName), domElement);
+                blocks->SetActiveById(id);
             }
             else
             {
-                ChangeActivPP(GetParametrString(domElement, AttrName), Document::LiteParse);
+                blocks->blockSignals(true);
+                blocks->SetActive(GetParametrString(domElement, AttrName));
+                blocks->blockSignals(false);
             }
             ParseDrawElement(domElement, parse);
             break;
+        }
         case 1: // TagIncrements
             if (parse != Document::LiteParse)
             {
@@ -1620,10 +1625,13 @@ void VPattern::SplinesCommonAttributes(const QDomElement &domElement, quint32 &i
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::ParseCurrentPP()
 {
-    if (QDomElement domElement; GetActivDrawElement(domElement))
+    QDomElement domElement = PatternBlockMapper()->GetActiveElement();
+    if (domElement.isNull())
     {
-        ParseDrawElement(domElement, Document::LiteParse);
+        return;
     }
+
+    ParseDrawElement(domElement, Document::LiteParse);
     emit CheckLayout();
 }
 
@@ -3827,9 +3835,10 @@ void VPattern::GarbageCollector(bool commit)
                             try
                             {
                                 vidtype const id = GetParametrId(modNode);
-                                auto record =
-                                    std::find_if(history.begin(), history.end(),
-                                                 [id](const VToolRecord &record) { return record.getId() == id; });
+                                auto record = std::find_if(history.begin(),
+                                                           history.end(),
+                                                           [id](const VToolRecord &record)
+                                                           { return record.GetId() == id; });
                                 if (record != history.end())
                                 {
                                     history.erase(record);
@@ -3966,9 +3975,9 @@ auto VPattern::LastToolId() const -> quint32
 //---------------------------------------------------------------------------------------------------------------------
 auto VPattern::PPLastToolId(const QString &name) const -> quint32
 {
-    const QVector<VToolRecord> localHistory = getLocalHistory(name);
+    const QVector<VToolRecord> localHistory = GetLocalHistory(name);
 
-    return (not localHistory.isEmpty() ? localHistory.constLast().getId() : NULL_ID);
+    return (not localHistory.isEmpty() ? localHistory.constLast().GetId() : NULL_ID);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -4503,9 +4512,11 @@ auto VPattern::GenerateLabel(const LabelType &type, const QString &reservedName)
         qCDebug(vXML, "Point label: %s", qUtf8Printable(name));
         return name;
     }
-    else if (type == LabelType::NewLabel)
+
+    if (type == LabelType::NewLabel)
     {
-        const QString labelBase = GetLabelBase(static_cast<quint32>(GetIndexActivPP()));
+        const int index = qMax(PatternBlockMapper()->GetActiveId(), 0);
+        const QString labelBase = GetLabelBase(static_cast<quint32>(index));
 
         qint32 num = 1;
         QString name;
@@ -4528,7 +4539,8 @@ auto VPattern::GenerateLabel(const LabelType &type, const QString &reservedName)
 //---------------------------------------------------------------------------------------------------------------------
 auto VPattern::GenerateSuffix() const -> QString
 {
-    const QString suffixBase = GetLabelBase(static_cast<quint32>(GetIndexActivPP())).toLower();
+    const int index = qMax(PatternBlockMapper()->GetActiveId(), 0);
+    const QString suffixBase = GetLabelBase(static_cast<quint32>(index)).toLower();
     const QStringList uniqueNames = data->AllUniqueNames();
     qint32 num = 1;
     QString suffix;
@@ -4628,8 +4640,7 @@ void VPattern::PrepareForParse(const Document &parse)
         sceneDetail->clear();
         sceneDetail->InitOrigins();
         data->ClearForFullParse();
-        nameActivPP.clear();
-        patternPieces.clear();
+        PatternBlockMapper()->Clear();
 
         qDeleteAll(toolsOnRemove); // Remove all invisible on a scene objects.
         toolsOnRemove.clear();
@@ -4676,95 +4687,99 @@ auto VPattern::ActiveDrawBoundingRect() const -> QRectF
 
     QRectF rec;
 
+    const int index = PatternBlockMapper()->GetActiveId();
+
     for (const auto &tool : history)
     {
-        if (tool.getNameDraw() == nameActivPP)
+        if (tool.GetPatternBlockIndex() != index)
         {
-            switch (tool.getTypeTool())
-            {
-                case Tool::Arrow:
-                case Tool::SinglePoint:
-                case Tool::DoublePoint:
-                case Tool::LinePoint:
-                case Tool::AbstractSpline:
-                case Tool::Cut:
-                case Tool::Midpoint:         // Same as Tool::AlongLine, but tool will never has such type
-                case Tool::ArcIntersectAxis: // Same as Tool::CurveIntersectAxis, but tool will never has such type
-                case Tool::BackgroundImage:  // Not part of active draw
-                case Tool::BackgroundImageControls: // Not part of active draw
-                case Tool::BackgroundPixmapImage:   // Not part of active draw
-                case Tool::BackgroundSVGImage:      // Not part of active draw
-                case Tool::ArcStart:                // Same as Tool::CutArc, but tool will never has such type
-                case Tool::ArcEnd:                  // Same as Tool::CutArc, but tool will never has such type
-                case Tool::LAST_ONE_DO_NOT_USE:
-                    Q_UNREACHABLE();
-                    break;
-                case Tool::BasePoint:
-                case Tool::LineIntersect:
-                case Tool::PointOfContact:
-                case Tool::Triangle:
-                case Tool::PointOfIntersection:
-                case Tool::CutArc:
-                case Tool::CutSpline:
-                case Tool::CutSplinePath:
-                case Tool::PointOfIntersectionArcs:
-                case Tool::PointOfIntersectionCircles:
-                case Tool::PointOfIntersectionCurves:
-                case Tool::PointFromCircleAndTangent:
-                case Tool::PointFromArcAndTangent:
-                    rec = ToolBoundingRect<VToolSinglePoint>(rec, tool.getId());
-                    break;
-                case Tool::EndLine:
-                case Tool::AlongLine:
-                case Tool::ShoulderPoint:
-                case Tool::Normal:
-                case Tool::Bisector:
-                case Tool::Height:
-                case Tool::LineIntersectAxis:
-                case Tool::CurveIntersectAxis:
-                    rec = ToolBoundingRect<VToolLinePoint>(rec, tool.getId());
-                    break;
-                case Tool::Line:
-                    rec = ToolBoundingRect<VToolLine>(rec, tool.getId());
-                    break;
-                case Tool::Spline:
-                case Tool::CubicBezier:
-                case Tool::Arc:
-                case Tool::SplinePath:
-                case Tool::CubicBezierPath:
-                case Tool::ArcWithLength:
-                case Tool::EllipticalArc:
-                case Tool::EllipticalArcWithLength:
-                case Tool::ParallelCurve:
-                case Tool::GraduatedCurve:
-                    rec = ToolBoundingRect<VAbstractSpline>(rec, tool.getId());
-                    break;
-                case Tool::TrueDarts:
-                    rec = ToolBoundingRect<VToolDoublePoint>(rec, tool.getId());
-                    break;
-                case Tool::Rotation:
-                case Tool::FlippingByLine:
-                case Tool::FlippingByAxis:
-                case Tool::Move:
-                    rec = ToolBoundingRect<VAbstractOperation>(rec, tool.getId());
-                    break;
-                // These tools are not accesseble in Draw mode, but still 'history' contains them.
-                case Tool::Piece:
-                case Tool::UnionDetails:
-                case Tool::NodeArc:
-                case Tool::NodeElArc:
-                case Tool::NodePoint:
-                case Tool::NodeSpline:
-                case Tool::NodeSplinePath:
-                case Tool::Group:
-                case Tool::PiecePath:
-                case Tool::Pin:
-                case Tool::InsertNode:
-                case Tool::PlaceLabel:
-                case Tool::DuplicateDetail:
-                default:
-                    break;
-            }
+            continue;
+        }
+
+        switch (tool.GetToolType())
+        {
+            case Tool::Arrow:
+            case Tool::SinglePoint:
+            case Tool::DoublePoint:
+            case Tool::LinePoint:
+            case Tool::AbstractSpline:
+            case Tool::Cut:
+            case Tool::Midpoint:                // Same as Tool::AlongLine, but tool will never has such a type
+            case Tool::ArcIntersectAxis:        // Same as Tool::CurveIntersectAxis, but tool will never has such a type
+            case Tool::BackgroundImage:         // Not part of active draw
+            case Tool::BackgroundImageControls: // Not part of active draw
+            case Tool::BackgroundPixmapImage:   // Not part of active draw
+            case Tool::BackgroundSVGImage:      // Not part of active draw
+            case Tool::ArcStart:                // Same as Tool::CutArc, but tool will never has such a type
+            case Tool::ArcEnd:                  // Same as Tool::CutArc, but tool will never has such a type
+            case Tool::LAST_ONE_DO_NOT_USE:
+                Q_UNREACHABLE();
+                break;
+            case Tool::BasePoint:
+            case Tool::LineIntersect:
+            case Tool::PointOfContact:
+            case Tool::Triangle:
+            case Tool::PointOfIntersection:
+            case Tool::CutArc:
+            case Tool::CutSpline:
+            case Tool::CutSplinePath:
+            case Tool::PointOfIntersectionArcs:
+            case Tool::PointOfIntersectionCircles:
+            case Tool::PointOfIntersectionCurves:
+            case Tool::PointFromCircleAndTangent:
+            case Tool::PointFromArcAndTangent:
+                rec = ToolBoundingRect<VToolSinglePoint>(rec, tool.GetId());
+                break;
+            case Tool::EndLine:
+            case Tool::AlongLine:
+            case Tool::ShoulderPoint:
+            case Tool::Normal:
+            case Tool::Bisector:
+            case Tool::Height:
+            case Tool::LineIntersectAxis:
+            case Tool::CurveIntersectAxis:
+                rec = ToolBoundingRect<VToolLinePoint>(rec, tool.GetId());
+                break;
+            case Tool::Line:
+                rec = ToolBoundingRect<VToolLine>(rec, tool.GetId());
+                break;
+            case Tool::Spline:
+            case Tool::CubicBezier:
+            case Tool::Arc:
+            case Tool::SplinePath:
+            case Tool::CubicBezierPath:
+            case Tool::ArcWithLength:
+            case Tool::EllipticalArc:
+            case Tool::EllipticalArcWithLength:
+            case Tool::ParallelCurve:
+            case Tool::GraduatedCurve:
+                rec = ToolBoundingRect<VAbstractSpline>(rec, tool.GetId());
+                break;
+            case Tool::TrueDarts:
+                rec = ToolBoundingRect<VToolDoublePoint>(rec, tool.GetId());
+                break;
+            case Tool::Rotation:
+            case Tool::FlippingByLine:
+            case Tool::FlippingByAxis:
+            case Tool::Move:
+                rec = ToolBoundingRect<VAbstractOperation>(rec, tool.GetId());
+                break;
+            // These tools are not accesseble in Draw mode, but still 'history' contains them.
+            case Tool::Piece:
+            case Tool::UnionDetails:
+            case Tool::NodeArc:
+            case Tool::NodeElArc:
+            case Tool::NodePoint:
+            case Tool::NodeSpline:
+            case Tool::NodeSplinePath:
+            case Tool::Group:
+            case Tool::PiecePath:
+            case Tool::Pin:
+            case Tool::InsertNode:
+            case Tool::PlaceLabel:
+            case Tool::DuplicateDetail:
+            default:
+                break;
         }
     }
     return rec;

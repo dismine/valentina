@@ -63,7 +63,8 @@
 #include "../vwidgets/vmaingraphicsview.h"
 #include "def.h"
 #include "vtoolsinglepoint.h"
-#include "xml/vpatterngraph.h"
+#include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatterngraph.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
@@ -81,7 +82,7 @@ const QString VToolBasePoint::ToolType = QStringLiteral("single");
  */
 VToolBasePoint::VToolBasePoint(const VToolBasePointInitData &initData, QGraphicsItem *parent)
   : VToolSinglePoint(initData.doc, initData.data, initData.id, initData.notes, parent),
-    namePP(initData.nameActivPP)
+    m_indexPatternBlock(initData.doc->PatternBlockMapper()->GetActiveId())
 {
     SetColorRole(VColorRole::BasePointColor);
     setFlag(QGraphicsItem::ItemIsMovable, true);
@@ -122,7 +123,7 @@ auto VToolBasePoint::Create(VToolBasePointInitData initData) -> VToolBasePoint *
     VPatternGraph *patternGraph = initData.doc->PatternGraph();
     SCASSERT(patternGraph != nullptr)
 
-    patternGraph->AddVertex(initData.id, VNodeType::TOOL);
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
 
     if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
     {
@@ -153,7 +154,9 @@ void VToolBasePoint::ShowVisualization(bool show)
  */
 void VToolBasePoint::AddToFile()
 {
-    Q_ASSERT_X(not namePP.isEmpty(), Q_FUNC_INFO, "name pattern piece is empty");
+    VPatternBlockMapper *blocks = doc->PatternBlockMapper();
+    const QString blockName = blocks->FindName(m_indexPatternBlock);
+    Q_ASSERT_X(not blockName.isEmpty(), Q_FUNC_INFO, "name pattern block name is empty");
 
     QDomElement sPoint = doc->createElement(getTagName());
 
@@ -163,7 +166,12 @@ void VToolBasePoint::AddToFile()
 
     // Create pattern piece structure
     QDomElement patternPiece = doc->createElement(VAbstractPattern::TagDraw);
-    doc->SetAttribute(patternPiece, AttrName, namePP);
+    doc->SetAttribute(patternPiece, AttrName, blockName);
+
+    if (blocks->GetElementById(m_indexPatternBlock).isNull())
+    {
+        blocks->SetElementById(m_indexPatternBlock, patternPiece);
+    }
 
     QDomElement calcElement = doc->createElement(VAbstractPattern::TagCalculation);
     calcElement.appendChild(sPoint);
@@ -172,7 +180,7 @@ void VToolBasePoint::AddToFile()
     patternPiece.appendChild(doc->createElement(VAbstractPattern::TagModeling));
     patternPiece.appendChild(doc->createElement(VAbstractPattern::TagDetails));
 
-    auto *addPP = new AddPatternPiece(patternPiece, doc, namePP);
+    auto *addPP = new AddPatternPiece(patternPiece, doc, m_indexPatternBlock);
     connect(addPP, &AddPatternPiece::ClearScene, doc, &VAbstractPattern::ClearScene);
     connect(addPP, &AddPatternPiece::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
     VAbstractApplication::VApp()->getUndoStack()->push(addPP);
@@ -238,7 +246,7 @@ void VToolBasePoint::SetBasePointPos(const QPointF &pos)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolBasePoint::DeleteToolWithConfirm(bool ask)
 {
-    if (doc->CountPP() <= 1)
+    if (doc->CountPatternBlockTags() <= 1)
     {
         return;
     }
@@ -256,7 +264,7 @@ void VToolBasePoint::DeleteToolWithConfirm(bool ask)
     }
 
     qCDebug(vTool, "Begin deleting.");
-    auto *deletePP = new DeletePatternPiece(doc, nameActivDraw);
+    auto *deletePP = new DeletePatternPiece(doc, m_indexPatternBlock);
     connect(deletePP, &DeletePatternPiece::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
     VAbstractApplication::VApp()->getUndoStack()->push(deletePP);
 

@@ -52,6 +52,7 @@
 #include "../../vabstracttool.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vdomdocument.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 #include "../ifc/xml/vpatterngraph.h"
 #include "../qmuparser/qmutokenparser.h"
 #include "../vgeometry/vabstractcubicbezierpath.h"
@@ -166,7 +167,7 @@ auto VToolSplinePath::Create(VToolSplinePathInitData &initData, VSplinePath *pat
     VPatternGraph *patternGraph = initData.doc->PatternGraph();
     SCASSERT(patternGraph != nullptr)
 
-    patternGraph->AddVertex(initData.id, VNodeType::TOOL);
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
 
     const auto varData = initData.data->DataDependencyVariables();
 

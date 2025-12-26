@@ -29,6 +29,7 @@
 #include "vtoolplacelabel.h"
 #include "../../dialogs/tools/piece/dialogplacelabel.h"
 #include "../../undocommands/savepieceoptions.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 #include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vplacelabelitem.h"
 #include "../vgeometry/vpointf.h"
@@ -120,7 +121,7 @@ auto VToolPlaceLabel::Create(VToolPlaceLabelInitData &initData) -> VToolPlaceLab
     VPatternGraph *patternGraph = initData.doc->PatternGraph();
     SCASSERT(patternGraph != nullptr)
 
-    patternGraph->AddVertex(initData.id, VNodeType::MODELING_OBJECT);
+    patternGraph->AddVertex(initData.id, VNodeType::MODELING_OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
 
     const auto varData = initData.data->DataDependencyVariables();
     initData.doc->FindFormulaDependencies(initData.width, initData.id, varData);

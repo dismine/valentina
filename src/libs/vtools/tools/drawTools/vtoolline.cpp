@@ -42,6 +42,7 @@
 #include "../../visualization/line/vistoolline.h"
 #include "../../visualization/visualization.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 #include "../ifc/xml/vpatterngraph.h"
 #include "../vabstracttool.h"
 #include "../vgeometry/vgobject.h"
@@ -158,7 +159,7 @@ auto VToolLine::Create(VToolLineInitData initData) -> VToolLine *
     VPatternGraph *patternGraph = initData.doc->PatternGraph();
     SCASSERT(patternGraph != nullptr)
 
-    patternGraph->AddVertex(initData.id, VNodeType::TOOL);
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
 
     initData.data->AddLine(initData.firstPoint, initData.secondPoint);
 
@@ -243,10 +244,9 @@ void VToolLine::ShowTool(quint32 id, bool enable)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolLine::Disable(bool disable, const QString &namePP)
+void VToolLine::Enable()
 {
-    const bool enabled = !CorrectDisable(disable, namePP);
-    this->setEnabled(enabled);
+    setEnabled(m_indexActivePatternBlock == doc->PatternBlockMapper()->GetActiveId());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

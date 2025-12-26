@@ -99,7 +99,7 @@ public:
 
 public slots:
     void FullUpdateFromFile() override;
-    void Disable(bool disable, const QString &namePP) override;
+    void Enable() override;
     void SetDetailsMode(bool mode) override;
     void AllowHover(bool enabled) override;
     void AllowSelecting(bool enabled) override;

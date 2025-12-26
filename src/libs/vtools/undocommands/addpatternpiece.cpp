@@ -31,16 +31,19 @@
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vmisc/def.h"
 #include "vundocommand.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-AddPatternPiece::AddPatternPiece(const QDomElement &xml, VAbstractPattern *doc, const QString &namePP,
+AddPatternPiece::AddPatternPiece(const QDomElement &xml,
+                                 VAbstractPattern *doc,
+                                 int indexPatternBlock,
                                  QUndoCommand *parent)
   : VUndoCommand(xml, doc, parent),
-    namePP(namePP)
+    m_indexPatternBlock(indexPatternBlock)
 {
     // cppcheck-suppress unknownMacro
-    SCASSERT(namePP.isEmpty() == false)
-    setText(tr("add pattern piece %1").arg(namePP));
+    SCASSERT(m_indexPatternBlock >= 0)
+    setText(tr("add pattern piece %1").arg(indexPatternBlock));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -48,15 +51,15 @@ void AddPatternPiece::undo()
 {
     qCDebug(vUndo, "Undo.");
 
-    if (doc->CountPP() <= 1)
+    if (doc->CountPatternBlockTags() <= 1)
     {
         emit ClearScene();
     }
     else
     {
         QDomElement rootElement = doc->documentElement();
-        QDomElement const patternPiece = doc->GetPPElement(namePP);
-        rootElement.removeChild(patternPiece);
+        QDomElement const patternBlock = doc->PatternBlockMapper()->GetElementById(m_indexPatternBlock);
+        rootElement.removeChild(patternBlock);
         emit NeedFullParsing();
     }
 }
@@ -66,7 +69,7 @@ void AddPatternPiece::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    if (doc->CountPP() == 0)
+    if (doc->CountPatternBlockTags() == 0)
     {
         doc->CreateEmptyFile();
     }

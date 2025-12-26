@@ -32,6 +32,7 @@
 #include <QReadWriteLock>
 #include <QtGlobal>
 
+#include "../graaflib/algorithm/graph_traversal/breadth_first_search.h"
 #include "../graaflib/graph.h"
 #include "../vmisc/typedef.h"
 
@@ -50,21 +51,32 @@ struct VNode
 {
     vidtype id{NULL_ID};
     VNodeType type{VNodeType::TOOL};
+    int indexPatternBlock{-1};
 
     VNode() = default;
-    VNode(vidtype nodeId, VNodeType nodeType)
+    VNode(vidtype nodeId, VNodeType nodeType, int index)
       : id(nodeId),
-        type(nodeType)
+        type(nodeType),
+        indexPatternBlock(index)
     {
     }
 
-    auto operator==(const VNode &other) const -> bool { return id == other.id && type == other.type; }
+    // Each node uniquely represented by id. No need for additional checks
+    auto operator==(const VNode &other) const -> bool { return id == other.id; }
 };
 
 // Empty edge type for unweighted graph
 struct VEdge
 {
     // Empty struct for unweighted edges
+};
+
+/**
+ * An filter callback which does nothing.
+ */
+struct FilterNoopCallback
+{
+    auto operator()(const VNode & /*node*/) const -> bool { return true; }
 };
 
 /**
@@ -83,8 +95,8 @@ public:
     VPatternGraph() = default;
     ~VPatternGraph() = default;
 
-    auto AddVertex(vidtype id, VNodeType type) -> bool;
-    auto AddVertex(VNode node) -> bool;
+    auto AddVertex(vidtype id, VNodeType type, int index) -> bool;
+    auto AddVertex(const VNode &node) -> bool;
 
     auto AddEdge(vidtype fromId, vidtype toId) -> bool;
 
@@ -125,6 +137,16 @@ public:
 
     auto GetInternalVertexId(vidtype id) const -> std::optional<vertex_id_t>;
     auto GetNodeId(vertex_id_t vertexId) const -> std::optional<vidtype>;
+
+    template<typename Predicate = FilterNoopCallback>
+    requires std::predicate<Predicate, VNode> auto GetDependentNodes(vidtype id, Predicate &&filter) const
+        -> QVector<VNode>;
+
+    template<typename Predicate = FilterNoopCallback>
+    requires std::predicate<Predicate, VNode> auto TryGetDependentNodes(vidtype id,
+                                                                        int timeout,
+                                                                        Predicate &&filter) const
+        -> std::optional<QVector<VNode>>;
 
 private:
     Q_DISABLE_COPY_MOVE(VPatternGraph)
@@ -205,6 +227,115 @@ inline auto VPatternGraph::TryWithWriteLock(Func &&func, int timeout) -> bool
         return true;
     }
     return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Find all nodes that depend on the given node (forward dependencies)
+ * Uses graaf's BFS to traverse all reachable nodes from the starting node.
+ * 
+ * @param id Starting node ID
+ * @param filter filter funtion. Return true to add a node to the list
+ * @return Vector of all nodes that can be reached from the starting node
+ * based on filter
+ * 
+ * Example: If A->B, B->C, C->D, then GetDependentNodes(A) returns [B, C, D]
+ * This answers: "What nodes depend on A?"
+ */
+template<typename Predicate>
+requires std::predicate<Predicate, VNode> inline auto VPatternGraph::GetDependentNodes(vidtype id,
+                                                                                       Predicate &&filter) const
+    -> QVector<VNode>
+{
+    QReadLocker const locker(&m_lock);
+
+    if (!m_idToVertex.contains(id))
+    {
+        return {};
+    }
+
+    auto const startVertex = m_idToVertex.value(id);
+    if (!m_graph.has_vertex(startVertex))
+    {
+        return {};
+    }
+
+    QVector<VNode> result;
+
+    // Use graaf's BFS algorithm
+    auto EdgeCallback = [this, &result, startVertex, &filter](const graaf::edge_id_t &edge) -> void
+    {
+        // Add to result (exclude the starting node itself)
+        if (vertex_id_t const target = edge.second; target != startVertex && m_vertexToId.contains(target))
+        {
+            if (const auto node = m_graph.get_vertex(target); std::forward<Predicate>(filter)(node))
+            {
+                result.append(node);
+            }
+        }
+    };
+
+    graaf::algorithm::breadth_first_traverse(m_graph, startVertex, EdgeCallback);
+
+    return result;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Find all nodes that depend on the given node (forward dependencies)
+ * Uses graaf's BFS to traverse all reachable nodes from the starting node.
+ * 
+ * @param id Starting node ID
+ * @param timeout lock timeout
+ * @param filter filter funtion. Return true to add a node to the list
+ * @return Vector of all nodes that can be reached from the starting node
+ * based on filter if lock was successful, empty list otherwise.
+ * 
+ * Example: If A->B, B->C, C->D, then GetDependentNodes(A) returns [B, C, D]
+ * This answers: "What nodes depend on A?"
+ */
+template<typename Predicate>
+requires std::predicate<Predicate, VNode> inline auto VPatternGraph::TryGetDependentNodes(vidtype id,
+                                                                                          int timeout,
+                                                                                          Predicate &&filter) const
+    -> std::optional<QVector<VNode>>
+{
+    if (!m_lock.tryLockForRead(timeout))
+    {
+        return std::nullopt;
+    }
+
+    auto Unlock = qScopeGuard([this]() -> auto { m_lock.unlock(); });
+
+    if (!m_idToVertex.contains(id))
+    {
+        return {};
+    }
+
+    auto const startVertex = m_idToVertex.value(id);
+    if (!m_graph.has_vertex(startVertex))
+    {
+        return {};
+    }
+
+    QVector<VNode> result;
+
+    // Use graaf's BFS algorithm
+    auto EdgeCallback = [this, &result, startVertex, &filter](const graaf::edge_id_t &edge) -> void
+    {
+        // Add to result (exclude the starting node itself)
+        if (vertex_id_t const target = edge.second; target != startVertex && m_vertexToId.contains(target))
+        {
+            if (const auto node = m_graph.get_vertex(target); std::forward<Predicate>(filter)(node))
+            {
+                result.append(node);
+            }
+        }
+    };
+
+    graaf::algorithm::breadth_first_traverse(m_graph, startVertex, EdgeCallback);
+
+    return result;
 }
 
 #endif // VPATTERNGRAPH_H

@@ -39,6 +39,7 @@
 #include "../../../vabstracttool.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 #include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vgobject.h"
@@ -139,7 +140,7 @@ auto VToolPointOfIntersectionArcs::Create(VToolPointOfIntersectionArcsInitData i
     VPatternGraph *patternGraph = initData.doc->PatternGraph();
     SCASSERT(patternGraph != nullptr)
 
-    patternGraph->AddVertex(initData.id, VNodeType::TOOL);
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
 
     patternGraph->AddEdge(initData.firstArcId, initData.id);
     patternGraph->AddEdge(initData.secondArcId, initData.id);

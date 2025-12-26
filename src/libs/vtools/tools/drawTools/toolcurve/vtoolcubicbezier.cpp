@@ -38,6 +38,7 @@
 #include "../../../visualization/path/vistoolcubicbezier.h"
 #include "../../../visualization/visualization.h"
 #include "../../vabstracttool.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 #include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/../ifc/ifcdef.h"
 #include "../vgeometry/vcubicbezier.h"
@@ -113,7 +114,7 @@ auto VToolCubicBezier::Create(VToolCubicBezierInitData initData) -> VToolCubicBe
     VPatternGraph *patternGraph = initData.doc->PatternGraph();
     SCASSERT(patternGraph != nullptr)
 
-    patternGraph->AddVertex(initData.id, VNodeType::TOOL);
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
 
     initData.data->AddSpline(initData.data->GeometricObject<VAbstractBezier>(initData.id), initData.id);
 

@@ -176,9 +176,9 @@ auto VToolLinePoint::MakeToolTip() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolLinePoint::Disable(bool disable, const QString &namePP)
+void VToolLinePoint::Enable()
 {
-    VToolSinglePoint::Disable(disable, namePP);
+    VToolSinglePoint::Enable();
     mainLine->setEnabled(isEnabled());
 }
 
