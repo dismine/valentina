@@ -342,7 +342,14 @@ void VGraphicsSimpleTextItem::keyReleaseEvent(QKeyEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VGraphicsSimpleTextItem::RefreshColor()
 {
-    setBrush(VSceneStylesheet::Color(m_hoverFlag ? m_textHoverColor : m_textColor));
+    if (!isEnabled() && scene() != nullptr)
+    {
+        setBrush(scene()->palette().brush(QPalette::Disabled, QPalette::Text));
+    }
+    else
+    {
+        setBrush(VSceneStylesheet::Color(m_hoverFlag ? m_textHoverColor : m_textColor));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

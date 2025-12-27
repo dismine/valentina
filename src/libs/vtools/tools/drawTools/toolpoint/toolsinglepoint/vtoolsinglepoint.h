@@ -73,8 +73,6 @@ public:
     auto name() const -> QString;
     void setName(const QString &name);
 
-    void SetEnabled(bool enabled);
-
     void GroupVisibility(quint32 object, bool visible) override;
     void ChangeLabelPosition(quint32 id, const QPointF &pos) override;
 

@@ -108,13 +108,6 @@ void VToolSinglePoint::setName(const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSinglePoint::SetEnabled(bool enabled)
-{
-    setEnabled(enabled);
-    m_lineName->setEnabled(enabled);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::GroupVisibility(quint32 object, bool visible)
 {
     Q_UNUSED(object)
@@ -203,6 +196,7 @@ void VToolSinglePoint::Enable()
     const bool enabled = m_indexActivePatternBlock == doc->PatternBlockMapper()->GetActiveId();
     setEnabled(enabled);
     m_namePoint->SetEnabledState(enabled);
+    m_lineName->setEnabled(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
