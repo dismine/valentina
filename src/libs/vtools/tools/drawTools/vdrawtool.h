@@ -54,10 +54,6 @@
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vmaingraphicsview.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
-#include "../vmisc/compatibility.h"
-#endif
-
 struct VDrawToolInitData : VAbstractToolInitData
 {
     VDrawToolInitData() = default;
@@ -136,19 +132,50 @@ protected:
 
 private:
     Q_DISABLE_COPY_MOVE(VDrawTool) // NOLINT
+
+    auto GetItemType(quint32 itemId) const -> GOType;
+
+    auto CreateAddToGroupMenu(QMenu &menu, quint32 itemId) -> QActionGroup *;
+    auto CreateRemoveFromGroupMenu(QMenu &menu, quint32 itemId) -> QActionGroup *;
+    auto CreateShowLabelAction(QMenu &menu, GOType itemType, quint32 itemId) -> QAction *;
+    auto CreateRestoreLabelAction(QMenu &menu, GOType itemType) -> QAction *;
+    auto CreateRemoveAction(QMenu &menu) -> QAction *;
+
+    template<class Dialog>
+    void HandleMenuSelection(QAction const *selectedAction,
+                             QAction const *actionOption,
+                             QAction *actionRemove,
+                             QAction *actionShowLabel,
+                             QAction *actionRestoreLabelPosition,
+                             QActionGroup *actionsAddToGroup,
+                             QActionGroup *actionsRemoveFromGroup,
+                             quint32 itemId);
+
+    template<class Dialog>
+    void ShowOptionsDialog();
+
+    void HandleRemoveAction();
+    void HandleAddToGroup(QAction const *selectedAction, quint32 itemId);
+    void HandleRemoveFromGroup(QAction const *selectedAction, quint32 itemId);
 };
 
-//---------------------------------------------------------------------------------------------------------------------
 template<class Dialog>
 /**
- * @brief ContextMenu show context menu for tool.
- * @param event context menu event.
- * @param itemId id of point. 0 if not a point
+ * @brief Displays a context menu for the drawing tool with options to edit, group, 
+ *        show/hide labels, and delete the tool or its items.
+ * 
+ * The menu provides the following functionality:
+ * - Options dialog for tool configuration
+ * - Add/remove items to/from groups
+ * - Show/hide point labels (points only)
+ * - Restore label positions (points only)
+ * - Delete tool or item
+ * 
+ * @param event The context menu event containing position and triggering information
+ * @param itemId The ID of the specific item (e.g., point) being clicked, or 0 for the tool itself
  */
 void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemId)
 {
-    using namespace Qt::Literals::StringLiterals;
-
     SCASSERT(event != nullptr)
 
     if (m_suppressContextMenu)
@@ -156,90 +183,25 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
         return;
     }
 
-    GOType itemType = GOType::Unknown;
-    if (itemId != NULL_ID)
-    {
-        try
-        {
-            itemType = data.GetGObject(itemId)->getType();
-        }
-        catch (const VExceptionBadId &e)
-        { // Possible case. Parent was deleted, but the node object is still here.
-            qWarning() << qUtf8Printable(e.ErrorMessage());
-        }
-    }
+    GOType const itemType = GetItemType(itemId);
 
     qCDebug(vTool, "Creating tool context menu.");
     QMenu menu;
+
+    // Build menu structure
     QAction const *actionOption = menu.addAction(FromTheme(VThemeIcon::PreferencesOther), VDrawTool::tr("Options"));
 
     // add the menu "add to group" to the context menu
-    QMap<quint32, QString> groupsNotContainingItem = doc->GetGroupsContainingItem(this->getId(), itemId, false);
-    auto *actionsAddToGroup = new QActionGroup(this);
-    if (not groupsNotContainingItem.empty())
-    {
-        QMenu *menuAddToGroup = menu.addMenu(FromTheme(VThemeIcon::ListAdd), VDrawTool::tr("Add to group"));
-
-        auto list = QStringList(groupsNotContainingItem.values());
-        list.sort(Qt::CaseInsensitive);
-
-        for (int i = 0; i < list.count(); ++i)
-        {
-            QAction *actionAddToGroup = menuAddToGroup->addAction(list[i]);
-            actionsAddToGroup->addAction(actionAddToGroup);
-            const quint32 groupId = groupsNotContainingItem.key(list[i]);
-            actionAddToGroup->setData(groupId);
-
-            // removes the group we just treated, because we can have several group
-            // with the same name. Otherwise the groupId would always be the same
-            groupsNotContainingItem.remove(groupId);
-        }
-    }
+    auto *actionsAddToGroup = CreateAddToGroupMenu(menu, itemId);
 
     // add the menu "remove from group" to the context menu
-    QMap<quint32, QString> groupsContainingItem = doc->GetGroupsContainingItem(this->getId(), itemId, true);
-    auto *actionsRemoveFromGroup = new QActionGroup(this);
-    if (not groupsContainingItem.empty())
-    {
-        QMenu *menuRemoveFromGroup =
-            menu.addMenu(FromTheme(VThemeIcon::ListRemove), VDrawTool::tr("Remove from group"));
+    auto *actionsRemoveFromGroup = CreateRemoveFromGroupMenu(menu, itemId);
 
-        auto list = QStringList(groupsContainingItem.values());
-        list.sort(Qt::CaseInsensitive);
+    QAction *actionShowLabel = CreateShowLabelAction(menu, itemType, itemId);
+    QAction *actionRestoreLabelPosition = CreateRestoreLabelAction(menu, itemType);
+    QAction *actionRemove = CreateRemoveAction(menu);
 
-        for (int i = 0; i < list.count(); ++i)
-        {
-            QAction *actionRemoveFromGroup = menuRemoveFromGroup->addAction(list[i]);
-            actionsRemoveFromGroup->addAction(actionRemoveFromGroup);
-            const quint32 groupId = groupsContainingItem.key(list[i]);
-            actionRemoveFromGroup->setData(groupId);
-            groupsContainingItem.remove(groupId);
-        }
-    }
-
-    QAction *actionShowLabel = menu.addAction(VDrawTool::tr("Show label"));
-    actionShowLabel->setCheckable(true);
-
-    if (itemType == GOType::Point)
-    {
-        actionShowLabel->setChecked(IsLabelVisible(itemId));
-    }
-    else
-    {
-        actionShowLabel->setVisible(false);
-    }
-
-    QAction *actionRestoreLabelPosition = menu.addAction(VDrawTool::tr("Restore label position"));
-    actionRestoreLabelPosition->setVisible(itemType == GOType::Point);
-
-    QAction *actionRemove = menu.addAction(FromTheme(VThemeIcon::EditDelete), VDrawTool::tr("Delete"));
-    RemoveStatus const status = IsRemovable();
-    actionRemove->setEnabled(status == RemoveStatus::Removable || status == RemoveStatus::Blocked);
-    if (status == RemoveStatus::Pending)
-    {
-        actionRemove->setText(actionRemove->text() + " ("_L1 + tr("Pending") + ')');
-    }
-
+    // Execute menu and handle selection
     QAction const *selectedAction = menu.exec(event->screenPos());
 
     if (selectedAction == nullptr)
@@ -247,37 +209,46 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
         return;
     }
 
+    HandleMenuSelection<Dialog>(selectedAction,
+                                actionOption,
+                                actionRemove,
+                                actionShowLabel,
+                                actionRestoreLabelPosition,
+                                actionsAddToGroup,
+                                actionsRemoveFromGroup,
+                                itemId);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Dialog>
+/**
+ * @brief Handles the user's menu selection and executes the corresponding action.
+ * 
+ * @param selectedAction The action selected by the user
+ * @param actionOption The options dialog action
+ * @param actionRemove The delete action
+ * @param actionShowLabel The show/hide label action
+ * @param actionRestoreLabelPosition The restore label position action
+ * @param actionsAddToGroup Action group for adding to groups
+ * @param actionsRemoveFromGroup Action group for removing from groups
+ * @param itemId The ID of the item being operated on
+ */
+void VDrawTool::HandleMenuSelection(const QAction *selectedAction,
+                                    const QAction *actionOption,
+                                    QAction *actionRemove,
+                                    QAction *actionShowLabel,
+                                    QAction *actionRestoreLabelPosition,
+                                    QActionGroup *actionsAddToGroup,
+                                    QActionGroup *actionsRemoveFromGroup,
+                                    quint32 itemId)
+{
     if (selectedAction == actionOption)
     {
-        qCDebug(vTool, "Show options.");
-        emit VAbstractValApplication::VApp()->getSceneView()->itemClicked(nullptr);
-        m_dialog = QPointer<Dialog>(new Dialog(getData(), doc, m_id, VAbstractValApplication::VApp()->getMainWindow()));
-        m_dialog->setModal(true);
-
-        connect(m_dialog.data(), &DialogTool::DialogClosed, this, &VDrawTool::FullUpdateFromGuiOk);
-        connect(m_dialog.data(), &DialogTool::DialogApplied, this, &VDrawTool::FullUpdateFromGuiApply);
-
-        this->SetDialog();
-
-        m_dialog->show();
+        ShowOptionsDialog<Dialog>();
     }
     else if (selectedAction == actionRemove)
     {
-        if (status == RemoveStatus::Removable)
-        {
-            qCDebug(vTool, "Deleting tool.");
-            DeleteToolWithConfirm(); // do not catch exception here
-            return;                  // Leave this method immediately after call!!!
-        }
-
-        QMessageBox messageBox;
-        messageBox.setIcon(QMessageBox::Warning);
-        messageBox.setWindowTitle(tr("Cannot Delete Object"));
-        messageBox.setText(tr("This object cannot be deleted because it is being used by other items."));
-        messageBox.setInformativeText(tr("Please resolve the dependencies before attempting to delete this object."));
-        messageBox.setDefaultButton(QMessageBox::Ok);
-        messageBox.setStandardButtons(QMessageBox::Ok);
-        messageBox.exec();
+        HandleRemoveAction();
     }
     else if (selectedAction == actionShowLabel)
     {
@@ -289,36 +260,36 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
     }
     else if (selectedAction->actionGroup() == actionsAddToGroup)
     {
-        quint32 const groupId = selectedAction->data().toUInt();
-        QDomElement const item = doc->AddItemToGroup(this->getId(), itemId, groupId);
-
-        auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
-        SCASSERT(scene != nullptr)
-        scene->clearSelection();
-
-        auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
-        SCASSERT(window != nullptr)
-        {
-            auto *addItemToGroup = new AddItemToGroup(item, doc, groupId);
-            connect(addItemToGroup, &AddItemToGroup::UpdateGroups, window,
-                    &VAbstractMainWindow::UpdateVisibilityGroups);
-            VAbstractApplication::VApp()->getUndoStack()->push(addItemToGroup);
-        }
+        HandleAddToGroup(selectedAction, itemId);
     }
     else if (selectedAction->actionGroup() == actionsRemoveFromGroup)
     {
-        quint32 const groupId = selectedAction->data().toUInt();
-        QDomElement const item = doc->RemoveItemFromGroup(this->getId(), itemId, groupId);
-
-        auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
-        SCASSERT(window != nullptr)
-        {
-            auto *removeItemFromGroup = new RemoveItemFromGroup(item, doc, groupId);
-            connect(removeItemFromGroup, &RemoveItemFromGroup::UpdateGroups, window,
-                    &VAbstractMainWindow::UpdateVisibilityGroups);
-            VAbstractApplication::VApp()->getUndoStack()->push(removeItemFromGroup);
-        }
+        HandleRemoveFromGroup(selectedAction, itemId);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Dialog>
+/**
+ * @brief Shows the options dialog for configuring the tool.
+ * 
+ * Creates and displays a modal dialog for tool configuration. The dialog
+ * is connected to update handlers that apply changes when the user confirms
+ * or applies the settings.
+ */
+void VDrawTool::ShowOptionsDialog()
+{
+    qCDebug(vTool, "Show options.");
+    emit VAbstractValApplication::VApp()->getSceneView()->itemClicked(nullptr);
+
+    m_dialog = QPointer<Dialog>(new Dialog(getData(), doc, m_id, VAbstractValApplication::VApp()->getMainWindow()));
+    m_dialog->setModal(true);
+
+    connect(m_dialog.data(), &DialogTool::DialogClosed, this, &VDrawTool::FullUpdateFromGuiOk);
+    connect(m_dialog.data(), &DialogTool::DialogApplied, this, &VDrawTool::FullUpdateFromGuiApply);
+
+    this->SetDialog();
+    m_dialog->show();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
