@@ -163,14 +163,13 @@ auto VToolBasePoint::IsRemovable() const -> RemoveStatus
     VPatternGraph const *patternGraph = doc->PatternGraph();
     SCASSERT(patternGraph != nullptr)
 
-    auto const dependecies = patternGraph->TryGetDependentNodes(m_id,
-                                                                1000,
-                                                                [this](const auto &node) -> auto
-                                                                {
-                                                                    return node.indexPatternBlock != m_indexPatternBlock
-                                                                           && node.type != VNodeType::MODELING_TOOL
-                                                                           && node.type != VNodeType::MODELING_OBJECT;
-                                                                });
+    auto Filter = [this](const auto &node) -> auto
+    {
+        return node.indexPatternBlock != m_indexPatternBlock && node.type != VNodeType::MODELING_TOOL
+               && node.type != VNodeType::MODELING_OBJECT;
+    };
+
+    auto const dependecies = patternGraph->TryGetDependentNodes(m_id, 1000, Filter);
 
     if (!dependecies)
     {

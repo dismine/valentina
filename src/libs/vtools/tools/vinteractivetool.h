@@ -51,6 +51,8 @@ public:
 
     void DialogLinkDestroy();
 
+    virtual void DeleteToolWithConfirm(bool ask = true);
+    virtual void PerformDelete();
     virtual auto IsRemovable() const -> RemoveStatus;
 
 public slots:

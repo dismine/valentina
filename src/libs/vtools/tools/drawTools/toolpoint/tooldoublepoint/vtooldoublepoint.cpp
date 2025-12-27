@@ -42,6 +42,7 @@
 #include "../../vdrawtool.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vabstractpoint.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
@@ -175,6 +176,45 @@ void VToolDoublePoint::SetLabelVisible(quint32 id, bool visible)
             VMainGraphicsView::NewSceneRect(sc, VAbstractValApplication::VApp()->getSceneView(), secondPoint);
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VToolDoublePoint::IsRemovable() const -> RemoveStatus
+{
+    if (!doc->IsPatternGraphComplete())
+    {
+        return RemoveStatus::Pending; // Data not ready yet
+    }
+
+    VPatternGraph const *patternGraph = doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    auto Filter = [](const auto &node) -> auto
+    { return node.type != VNodeType::MODELING_TOOL && node.type != VNodeType::MODELING_OBJECT; };
+
+    auto const p1Dependecies = patternGraph->TryGetDependentNodes(p1id, 500, Filter);
+    if (!p1Dependecies)
+    {
+        return RemoveStatus::Pending; // Lock timeout
+    }
+
+    if (!p1Dependecies->isEmpty())
+    {
+        return RemoveStatus::Blocked;
+    }
+
+    auto const p2Dependecies = patternGraph->TryGetDependentNodes(p2id, 500, Filter);
+    if (!p2Dependecies)
+    {
+        return RemoveStatus::Pending; // Lock timeout
+    }
+
+    if (!p2Dependecies->isEmpty())
+    {
+        return RemoveStatus::Blocked;
+    }
+
+    return RemoveStatus::Removable;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

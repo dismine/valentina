@@ -60,14 +60,14 @@ public:
     VToolLinePoint(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
                    const QString &lineColor, const QString &formula, const quint32 &basePointId, const qreal &angle,
                    const QString &notes, QGraphicsItem *parent = nullptr);
-    virtual ~VToolLinePoint() override;
-    virtual auto type() const -> int override { return Type; }
+    ~VToolLinePoint() override;
+    auto type() const -> int override { return Type; }
     enum
     {
         Type = UserType + static_cast<int>(Tool::LinePoint)
     };
 
-    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 
     auto GetFormulaLength() const -> VFormula;
     void SetFormulaLength(const VFormula &value);

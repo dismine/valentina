@@ -33,6 +33,7 @@
 #include "../../../undocommands/savetooloptions.h"
 #include "../../../undocommands/undogroup.h"
 #include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/compatibility.h"
 #include "../vwidgets/vsimplepoint.h"
@@ -75,6 +76,38 @@ auto VisibilityGroupDataFromSource(const VContainer *data, const QVector<SourceI
 auto VAbstractOperation::getTagName() const -> QString
 {
     return VAbstractPattern::TagOperation;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractOperation::IsRemovable() const -> RemoveStatus
+{
+    if (!doc->IsPatternGraphComplete())
+    {
+        return RemoveStatus::Pending; // Data not ready yet
+    }
+
+    VPatternGraph const *patternGraph = doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    auto Filter = [](const auto &node) -> auto
+    { return node.type != VNodeType::MODELING_TOOL && node.type != VNodeType::MODELING_OBJECT; };
+
+    for (const auto &item : destination)
+    {
+        auto const dependecies = patternGraph->TryGetDependentNodes(item.id, 100, Filter);
+
+        if (!dependecies)
+        {
+            return RemoveStatus::Pending; // Lock timeout
+        }
+
+        if (!dependecies->isEmpty())
+        {
+            return RemoveStatus::Blocked;
+        }
+    }
+
+    return RemoveStatus::Removable;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

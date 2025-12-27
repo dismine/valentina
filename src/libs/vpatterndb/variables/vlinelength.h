@@ -34,6 +34,7 @@
 #include <QtGlobal>
 
 #include "../vmisc/def.h"
+#include "../vmisc/typedef.h"
 #include "vinternalvariable.h"
 
 class VLengthLineData;
@@ -43,7 +44,12 @@ class VLengthLine final : public VInternalVariable
 {
 public:
     VLengthLine();
-    VLengthLine(const VPointF *p1, const quint32 &p1Id, const VPointF *p2, const quint32 &p2Id, Unit patternUnit);
+    VLengthLine(const VPointF *p1,
+                quint32 p1Id,
+                const VPointF *p2,
+                quint32 p2Id,
+                Unit patternUnit,
+                quint32 mainReference = NULL_ID);
     VLengthLine(const VLengthLine &var);
     ~VLengthLine() override;
 

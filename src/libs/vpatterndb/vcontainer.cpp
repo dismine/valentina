@@ -450,13 +450,14 @@ void VContainer::ClearVariables(const QVector<VarType> &types)
  * @param firstPointId id of first point of line
  * @param secondPointId id of second point of line
  */
-void VContainer::AddLine(const quint32 &firstPointId, const quint32 &secondPointId)
+void VContainer::AddLine(quint32 firstPointId, quint32 secondPointId, quint32 mainReference)
 {
     const QSharedPointer<VPointF> first = GeometricObject<VPointF>(firstPointId);
     const QSharedPointer<VPointF> second = GeometricObject<VPointF>(secondPointId);
 
-    AddVariable(new VLengthLine(first.data(), firstPointId, second.data(), secondPointId, *GetPatternUnit()));
-    AddVariable(new VLineAngle(first.data(), firstPointId, second.data(), secondPointId));
+    AddVariable(
+        new VLengthLine(first.data(), firstPointId, second.data(), secondPointId, *GetPatternUnit(), mainReference));
+    AddVariable(new VLineAngle(first.data(), firstPointId, second.data(), secondPointId, mainReference));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

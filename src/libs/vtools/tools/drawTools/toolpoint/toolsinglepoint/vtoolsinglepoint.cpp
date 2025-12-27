@@ -40,7 +40,6 @@
 #include <QRectF>
 #include <QSharedPointer>
 #include <QUndoStack>
-#include <new>
 
 #include "../../../../undocommands/label/movelabel.h"
 #include "../../../../undocommands/label/showlabel.h"

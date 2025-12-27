@@ -47,8 +47,8 @@ VLengthLine::VLengthLine()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLengthLine::VLengthLine(const VPointF *p1, const quint32 &p1Id, const VPointF *p2, const quint32 &p2Id,
-                         Unit patternUnit)
+VLengthLine::VLengthLine(
+    const VPointF *p1, quint32 p1Id, const VPointF *p2, quint32 p2Id, Unit patternUnit, quint32 mainReference)
   : VInternalVariable(),
     d(new VLengthLineData(p1Id, p2Id, patternUnit))
 {
@@ -60,7 +60,14 @@ VLengthLine::VLengthLine(const VPointF *p1, const quint32 &p1Id, const VPointF *
     SetName(line_ + p1->name() + '_' + p2->name());
     SetValue(p1, p2);
 
-    SetReferences({p1Id, p2Id});
+    if (mainReference == NULL_ID)
+    {
+        SetReferences({p1Id, p2Id});
+    }
+    else
+    {
+        SetReferences({mainReference});
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

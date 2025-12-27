@@ -161,7 +161,7 @@ auto VToolLine::Create(VToolLineInitData initData) -> VToolLine *
 
     patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
 
-    initData.data->AddLine(initData.firstPoint, initData.secondPoint);
+    initData.data->AddLine(initData.firstPoint, initData.secondPoint, initData.id);
 
     patternGraph->AddEdge(initData.firstPoint, initData.id);
     patternGraph->AddEdge(initData.secondPoint, initData.id);

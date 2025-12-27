@@ -162,8 +162,6 @@ protected:
      * @brief RemoveReferens decrement value of reference.
      */
     virtual void RemoveReferens() {}
-    virtual void DeleteToolWithConfirm(bool ask = true);
-    virtual void PerformDelete();
 
     template <typename T> static auto CreateNode(VContainer *data, quint32 id) -> quint32;
     static auto CreateNodeSpline(VContainer *data, quint32 id) -> quint32;

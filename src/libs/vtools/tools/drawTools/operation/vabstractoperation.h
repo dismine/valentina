@@ -80,6 +80,8 @@ public:
 
     auto getTagName() const -> QString override;
 
+    auto IsRemovable() const -> RemoveStatus override;
+
     auto Suffix() const -> QString;
     void SetSuffix(const QString &suffix);
 

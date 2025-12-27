@@ -51,7 +51,6 @@
 #include "../ifc/exception/vexceptionundo.h"
 #include "../ifc/xml/vpatternblockmapper.h"
 #include "../ifc/xml/vtoolrecord.h"
-#include "../undocommands/deltool.h"
 #include "../vgeometry/../ifc/ifcdef.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vcubicbezier.h"
@@ -198,48 +197,6 @@ auto VAbstractTool::CheckFormula(const quint32 &toolId, QString &formula, VConta
         }
     }
     return result;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief DeleteTool full delete object form scene and file.
- */
-void VAbstractTool::DeleteToolWithConfirm(bool ask)
-{
-    qCDebug(vTool, "Deleting abstract tool.");
-    if (_referens == 0)
-    {
-        qCDebug(vTool, "No children.");
-        emit VAbstractValApplication::VApp()->getSceneView()->itemClicked(nullptr);
-        if (ask)
-        {
-            qCDebug(vTool, "Asking.");
-            if (ConfirmDeletion() == QMessageBox::No)
-            {
-                qCDebug(vTool, "User said no.");
-                return;
-            }
-        }
-
-        PerformDelete();
-
-        // Throw exception, this will help prevent case when we forget to immediately quit function.
-        VExceptionToolWasDeleted const e("Tool was used after deleting.");
-        throw e;
-    }
-    else
-    {
-        qCDebug(vTool, "Can't delete, tool has children.");
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractTool::PerformDelete()
-{
-    qCDebug(vTool, "Begin deleting.");
-    auto *delTool = new DelTool(doc, m_id);
-    connect(delTool, &DelTool::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
-    VAbstractApplication::VApp()->getUndoStack()->push(delTool);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
