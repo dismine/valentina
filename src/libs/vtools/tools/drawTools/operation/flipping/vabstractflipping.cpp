@@ -49,7 +49,7 @@ void VAbstractFlipping::CreateDestination(VAbstractOperationInitData &initData, 
 {
     if (initData.typeCreation == Source::FromGui)
     {
-        for (const auto &object : qAsConst(initData.source))
+        for (const auto &object : std::as_const(initData.source))
         {
             const QSharedPointer<VGObject> obj = initData.data->GetGObject(object.id);
 

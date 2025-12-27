@@ -602,7 +602,7 @@ auto VFoldLine::OutlineFontLabel(const QLineF &base, qreal width, qreal textHeig
         }
 
         int w = 0;
-        for (auto c : qAsConst(label))
+        for (auto c : std::as_const(label))
         {
             labelPath.addPath(corrector.DrawChar(w, static_cast<qreal>(fm.ascent()), c));
             w += fm.horizontalAdvance(c);

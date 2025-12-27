@@ -127,7 +127,7 @@ void VisToolPiece::HideAllItems()
         m_line2->setVisible(false);
     }
 
-    for (QGraphicsEllipseItem *item : qAsConst(m_points))
+    for (QGraphicsEllipseItem *item : std::as_const(m_points))
     {
         if (item)
         {
@@ -135,7 +135,7 @@ void VisToolPiece::HideAllItems()
         }
     }
 
-    for (QGraphicsPathItem *item : qAsConst(m_curves))
+    for (QGraphicsPathItem *item : std::as_const(m_curves))
     {
         if (item)
         {

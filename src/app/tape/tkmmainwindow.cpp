@@ -2817,7 +2817,7 @@ void TKMMainWindow::ImportKnownMeasurements(const QxtCsvModel &csv, const QVecto
         return;
     }
 
-    for (const auto &im : qAsConst(measurements))
+    for (const auto &im : std::as_const(measurements))
     {
         m_m->AddEmptyMeasurement(im.name);
 

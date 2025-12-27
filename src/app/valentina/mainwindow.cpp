@@ -8158,7 +8158,7 @@ void MainWindow::PrintPatternMessage(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::OpenWatermark(const QString &path)
 {
-    for (const auto &watermarkEditor : qAsConst(m_watermarkEditors))
+    for (const auto &watermarkEditor : std::as_const(m_watermarkEditors))
     {
         if (not watermarkEditor.isNull() && not watermarkEditor->CurrentFile().isEmpty() &&
             watermarkEditor->CurrentFile() == AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), path))

@@ -80,7 +80,7 @@ auto GetSeamPassmarkSAPoint(const VPiecePassmarkData &passmarkData, const QVecto
         point = ekvPoints.at(0).ToQPointF();
         qreal minDistance = QLineF(passmarkData.passmarkSAPoint, point).length();
 
-        for (const QPointF &p : qAsConst(ekvPoints))
+        for (const QPointF &p : std::as_const(ekvPoints))
         {
             qreal const distance = QLineF(passmarkData.passmarkSAPoint, p).length();
             if (distance < minDistance)

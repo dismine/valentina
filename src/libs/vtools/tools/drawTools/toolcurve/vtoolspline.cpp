@@ -273,7 +273,7 @@ void VToolSpline::ShowVisualization(bool show)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::ShowHandles(bool show)
 {
-    for (auto *point : qAsConst(controlPoints))
+    for (auto *point : std::as_const(controlPoints))
     {
         point->setVisible(show);
     }
@@ -323,7 +323,7 @@ void VToolSpline::EnableToolMove(bool move)
 {
     this->setFlag(QGraphicsItem::ItemIsMovable, move);
 
-    for (auto *point : qAsConst(controlPoints))
+    for (auto *point : std::as_const(controlPoints))
     {
         point->setFlag(QGraphicsItem::ItemIsMovable, move);
     }
@@ -334,7 +334,7 @@ void VToolSpline::AllowHover(bool enabled)
 {
     VAbstractSpline::AllowHover(enabled);
 
-    for (auto *point : qAsConst(controlPoints))
+    for (auto *point : std::as_const(controlPoints))
     {
         point->setAcceptHoverEvents(enabled);
     }
@@ -345,7 +345,7 @@ void VToolSpline::AllowSelecting(bool enabled)
 {
     VAbstractSpline::AllowSelecting(enabled);
 
-    for (auto *point : qAsConst(controlPoints))
+    for (auto *point : std::as_const(controlPoints))
     {
         point->setFlag(QGraphicsItem::ItemIsSelectable, enabled);
     }
@@ -608,7 +608,7 @@ auto VToolSpline::IsMovable() const -> bool
 void VToolSpline::RefreshCtrlPoints()
 {
     // Very important to disable control points. Without it the pogram can't move the curve.
-    for (auto *point : qAsConst(controlPoints))
+    for (auto *point : std::as_const(controlPoints))
     {
         point->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
     }
@@ -639,7 +639,7 @@ void VToolSpline::RefreshCtrlPoints()
     controlPoints[0]->blockSignals(false);
     controlPoints[1]->blockSignals(false);
 
-    for (auto *point : qAsConst(controlPoints))
+    for (auto *point : std::as_const(controlPoints))
     {
         point->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     }
@@ -679,7 +679,7 @@ void VToolSpline::CurveSelected(bool selected)
 {
     setSelected(selected);
 
-    for (auto *point : qAsConst(controlPoints))
+    for (auto *point : std::as_const(controlPoints))
     {
         point->blockSignals(true);
         point->setSelected(selected);

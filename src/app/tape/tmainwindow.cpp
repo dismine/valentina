@@ -4506,7 +4506,7 @@ void TMainWindow::ImportIndividualMeasurements(const QxtCsvModel &csv, const QVe
         }
     }
 
-    for (const auto &im : qAsConst(measurements))
+    for (const auto &im : std::as_const(measurements))
     {
         m_m->AddEmpty(im.name, im.value);
 
@@ -4562,7 +4562,7 @@ void TMainWindow::ImportMultisizeMeasurements(const QxtCsvModel &csv, const QVec
         }
     }
 
-    for (const auto &mm : qAsConst(measurements))
+    for (const auto &mm : std::as_const(measurements))
     {
         m_m->AddEmpty(mm.name);
         m_m->SetMBaseValue(mm.name, mm.base);

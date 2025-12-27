@@ -188,7 +188,7 @@ void VTableSearch::Find(const QString &term)
 
     if (not searchList.isEmpty())
     {
-        for (auto *item : qAsConst(searchList))
+        for (auto *item : std::as_const(searchList))
         {
             item->setBackground(Qt::yellow);
         }
@@ -243,7 +243,7 @@ void VTableSearch::RemoveRow(int row)
 
     if (row <= indexRow)
     {
-        for (auto *item : qAsConst(searchList))
+        for (auto *item : std::as_const(searchList))
         {
             if (item->row() == row)
             {
@@ -265,7 +265,7 @@ void VTableSearch::AddRow(vsizetype row)
 
     if (row <= indexRow)
     {
-        for (auto *item : qAsConst(searchList))
+        for (auto *item : std::as_const(searchList))
         {
             if (item->row() == row)
             {
@@ -284,7 +284,7 @@ void VTableSearch::RefreshList(const QString &term)
 
     if (not searchList.isEmpty())
     {
-        for (auto *item : qAsConst(searchList))
+        for (auto *item : std::as_const(searchList))
         {
             item->setBackground(Qt::yellow);
         }

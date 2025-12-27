@@ -88,7 +88,7 @@ void VisOperation::RefreshFlippedObjects(quint32 originPointId, const QPointF &f
 {
     int iPoint = -1;
     int iCurve = -1;
-    for (auto id : qAsConst(m_objects))
+    for (auto id : std::as_const(m_objects))
     {
         const QSharedPointer<VGObject> obj = GetData()->GetGObject(id);
 

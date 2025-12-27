@@ -370,7 +370,7 @@ void VToolGraduatedCurve::SetVisualization()
 
         QVector<VRawGraduatedCurveOffset> toUserOffsets;
         toUserOffsets.reserve(m_offsets.size());
-        for (const auto &offset : qAsConst(m_offsets))
+        for (const auto &offset : std::as_const(m_offsets))
         {
             VRawGraduatedCurveOffset offsetData;
             offsetData.name = offset.name;

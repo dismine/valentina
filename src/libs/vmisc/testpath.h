@@ -96,7 +96,7 @@ template <class T> auto TurnPointList(const QVector<T> &points) -> QVector<T>
     QVector<T> list;
     list.reserve(points.size());
 
-    for (const auto &p : qAsConst(points))
+    for (const auto &p : std::as_const(points))
     {
         if (p.TurnPoint())
         {

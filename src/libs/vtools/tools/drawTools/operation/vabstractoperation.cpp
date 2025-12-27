@@ -757,7 +757,7 @@ void VAbstractOperation::SaveSourceDestination(QDomElement &tag)
     VAbstractPattern::RemoveAllChildren(tag);
 
     QDomElement tagObjects = doc->createElement(TagSource);
-    for (const auto &sItem : qAsConst(source))
+    for (const auto &sItem : std::as_const(source))
     {
         QDomElement item = doc->createElement(TagItem);
         doc->SetAttribute(item, AttrIdObject, sItem.id);
@@ -780,7 +780,7 @@ void VAbstractOperation::SaveSourceDestination(QDomElement &tag)
     tag.appendChild(tagObjects);
 
     tagObjects = doc->createElement(TagDestination);
-    for (auto dItem : qAsConst(destination))
+    for (auto dItem : std::as_const(destination))
     {
         QDomElement item = doc->createElement(TagItem);
         doc->SetAttribute(item, AttrIdObject, dItem.id);
@@ -905,7 +905,7 @@ auto VAbstractOperation::NeedUpdateVisibilityGroup() const -> bool
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractOperation::InitOperatedObjects()
 {
-    for (auto object : qAsConst(destination))
+    for (auto object : std::as_const(destination))
     {
         const QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(object.id);
 

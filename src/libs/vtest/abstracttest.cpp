@@ -889,7 +889,7 @@ void AbstractTest::SplinePathFromJson(const QJsonObject &itemObject, QSharedPoin
 
     QVector<VSplinePoint> points;
     AbstractTest::ReadSplinePointValues(itemObject, QStringLiteral("nodes"), points);
-    for (const auto &point : qAsConst(points))
+    for (const auto &point : std::as_const(points))
     {
         data->UpdateGObject(point.P().id(), new VPointF(point.P()));
     }

@@ -88,7 +88,7 @@ auto VisPieceSpecialPoints::GetPoint(quint32 i, VColorRole role) -> VSimplePoint
 //---------------------------------------------------------------------------------------------------------------------
 void VisPieceSpecialPoints::HideAllItems()
 {
-    for (auto *item : qAsConst(m_points))
+    for (auto *item : std::as_const(m_points))
     {
         if (item)
         {

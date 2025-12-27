@@ -1961,7 +1961,7 @@ auto VLayoutPiece::GrainlinePath(const GrainlineShape &shape) -> QPainterPath
     {
         QPainterPath path;
         path.moveTo(subShape.at(0));
-        for (auto p : qAsConst(subShape))
+        for (auto p : std::as_const(subShape))
         {
             path.lineTo(p);
         }
@@ -2156,7 +2156,7 @@ void VLayoutPiece::LabelStringsOutlineFont(QGraphicsItem *parent, const QVector<
             if (settings->GetSingleStrokeOutlineFont())
             {
                 int w = 0;
-                for (auto c : qAsConst(tl.m_qsText))
+                for (auto c : std::as_const(tl.m_qsText))
                 {
                     path.addPath(corrector.DrawChar(w, static_cast<qreal>(fm.ascent()), c));
                     w += fm.horizontalAdvance(c);

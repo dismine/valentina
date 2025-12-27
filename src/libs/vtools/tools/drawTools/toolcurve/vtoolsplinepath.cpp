@@ -283,7 +283,7 @@ void VToolSplinePath::EnableToolMove(bool move)
 {
     this->setFlag(QGraphicsItem::ItemIsMovable, move);
 
-    for (auto *point : qAsConst(controlPoints))
+    for (auto *point : std::as_const(controlPoints))
     {
         point->setFlag(QGraphicsItem::ItemIsMovable, move);
     }
@@ -294,7 +294,7 @@ void VToolSplinePath::AllowHover(bool enabled)
 {
     VAbstractSpline::AllowHover(enabled);
 
-    for (auto *point : qAsConst(controlPoints))
+    for (auto *point : std::as_const(controlPoints))
     {
         point->setAcceptHoverEvents(enabled);
     }
@@ -305,7 +305,7 @@ void VToolSplinePath::AllowSelecting(bool enabled)
 {
     VAbstractSpline::AllowSelecting(enabled);
 
-    for (auto *point : qAsConst(controlPoints))
+    for (auto *point : std::as_const(controlPoints))
     {
         point->setFlag(QGraphicsItem::ItemIsSelectable, enabled);
     }
@@ -331,7 +331,7 @@ void VToolSplinePath::CurveSelected(bool selected)
 {
     setSelected(selected);
 
-    for (auto *point : qAsConst(controlPoints))
+    for (auto *point : std::as_const(controlPoints))
     {
         point->blockSignals(true);
         point->setSelected(selected);
@@ -517,7 +517,7 @@ void VToolSplinePath::ShowVisualization(bool show)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSplinePath::ShowHandles(bool show)
 {
-    for (auto *point : qAsConst(controlPoints))
+    for (auto *point : std::as_const(controlPoints))
     {
         point->setVisible(show);
     }
@@ -828,7 +828,7 @@ auto VToolSplinePath::IsMovable(int index) const -> bool
 void VToolSplinePath::RefreshCtrlPoints()
 {
     // Very important to disable control points. Without it the pogram can't move the curve.
-    for (auto *point : qAsConst(controlPoints))
+    for (auto *point : std::as_const(controlPoints))
     {
         point->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
     }
@@ -896,7 +896,7 @@ void VToolSplinePath::RefreshCtrlPoints()
         controlPoints[j - 1]->blockSignals(false);
     }
 
-    for (auto *point : qAsConst(controlPoints))
+    for (auto *point : std::as_const(controlPoints))
     {
         point->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     }

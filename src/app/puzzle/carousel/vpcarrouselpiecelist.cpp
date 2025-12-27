@@ -94,7 +94,7 @@ void VPCarrouselPieceList::Refresh()
     }
 
     // create the corresponding carrousel pieces
-    for (const auto &piece : qAsConst(m_pieceList)) // NOLINT(clang-analyzer-cplusplus.NewDeleteLeaks)
+    for (const auto &piece : std::as_const(m_pieceList)) // NOLINT(clang-analyzer-cplusplus.NewDeleteLeaks)
     {
         if (not piece.isNull())
         {

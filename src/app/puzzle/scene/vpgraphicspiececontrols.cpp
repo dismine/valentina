@@ -510,7 +510,7 @@ void VPGraphicsPieceControls::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         {
             VPTransformationOrigon const rotationOrigin = TransformationOrigin(m_layout, m_pieceRect);
             QList<VPPiecePtr> const pieces = SelectedPieces();
-            for (const auto &piece : qAsConst(pieces))
+            for (const auto &piece : std::as_const(pieces))
             {
                 piece->RotateToGrainline(rotationOrigin);
                 emit layout->PieceTransformationChanged(piece);

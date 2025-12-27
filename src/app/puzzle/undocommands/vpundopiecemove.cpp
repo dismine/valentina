@@ -160,7 +160,7 @@ void VPUndoPiecesMove::undo()
         layout->SetFocusedSheet(sheet);
     }
 
-    for (const auto &piece : qAsConst(m_pieces))
+    for (const auto &piece : std::as_const(m_pieces))
     {
         VPPiecePtr const p = piece.toStrongRef();
         if (not p.isNull() && m_oldTransforms.contains(p->GetUniqueID()))
@@ -190,7 +190,7 @@ void VPUndoPiecesMove::redo()
         layout->SetFocusedSheet(sheet);
     }
 
-    for (const auto &piece : qAsConst(m_pieces))
+    for (const auto &piece : std::as_const(m_pieces))
     {
         VPPiecePtr const p = piece.toStrongRef();
         if (not p.isNull())

@@ -154,7 +154,7 @@ DialogGraduatedCurve::DialogGraduatedCurve(const VContainer *data,
 //---------------------------------------------------------------------------------------------------------------------
 DialogGraduatedCurve::~DialogGraduatedCurve()
 {
-    for (const auto &offset : qAsConst(m_offsets))
+    for (const auto &offset : std::as_const(m_offsets))
     {
         data->RemoveUniqueName(offset.name);
     }
@@ -948,7 +948,7 @@ auto DialogGraduatedCurve::VisualizationOffsets() const -> QVector<VRawGraduated
 {
     QVector<VRawGraduatedCurveOffset> toUserOffsets;
     toUserOffsets.reserve(m_offsets.size());
-    for (const auto &offset : qAsConst(m_offsets))
+    for (const auto &offset : std::as_const(m_offsets))
     {
         VRawGraduatedCurveOffset offsetData;
         offsetData.name = offset.name;

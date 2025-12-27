@@ -1092,7 +1092,7 @@ auto VPiece::FilterRecords(QVector<CustomSARecord> records) const -> QVector<Cus
 
     QVector<VPieceNode> path = d->m_path.GetNodes();
     QVector<CustomSARecord> filteredRecords;
-    for (auto record : qAsConst(records))
+    for (auto record : std::as_const(records))
     {
         const int indexStartPoint = VPiecePath::indexOfNode(path, record.startPoint);
         const int indexEndPoint = VPiecePath::indexOfNode(path, record.endPoint);

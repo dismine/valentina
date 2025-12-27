@@ -260,7 +260,7 @@ auto VisToolMove::AddMovedRotatedCurve(qreal angle, qreal length, quint32 id, in
 auto VisToolMove::GetOriginPoint(const QVector<QGraphicsItem *> &objects) -> QPointF
 {
     QRectF boundingRect;
-    for (auto *object : qAsConst(objects))
+    for (auto *object : std::as_const(objects))
     {
         if (object)
         {

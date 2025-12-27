@@ -429,7 +429,7 @@ void VPMainGraphicsView::RotatePiecesByAngle(qreal angle)
         QCoreApplication::processEvents(QEventLoop::AllEvents, 50);
     }
 
-    for (const auto &piece : qAsConst(pieces))
+    for (const auto &piece : std::as_const(pieces))
     {
         if (not piece.isNull())
         {

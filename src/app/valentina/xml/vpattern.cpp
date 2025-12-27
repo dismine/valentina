@@ -788,7 +788,7 @@ void VPattern::RefreshDirtyPieceGeometry(const QList<vidtype> &list)
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::RefreshPieceGeometryForList(const QList<vidtype> &list) const
 {
-    for (auto pieceId : qAsConst(list))
+    for (auto pieceId : std::as_const(list))
     {
         QMetaObject::invokeMethod(
             QApplication::instance(),
@@ -3154,7 +3154,7 @@ void VPattern::ParseToolGraduatedCurve(VMainGraphicsScene *scene, QDomElement &d
 
         QVector<QString> originalFormulas;
         originalFormulas.reserve(initData.offsets.size());
-        for (const auto &offsetData : qAsConst(initData.offsets))
+        for (const auto &offsetData : std::as_const(initData.offsets))
         {
             originalFormulas.append(offsetData.formula); // need for saving fixed formula;
         }

@@ -1807,7 +1807,7 @@ auto VDxfEngine::ExportASTMNotchDataDependecy(const VLayoutPassmark &passmark, c
 void VDxfEngine::ExportTurnPoints(const QSharedPointer<dx_ifaceBlock> &detailBlock,
                                   const QVector<VLayoutPoint> &points) const
 {
-    for (const auto &p : qAsConst(points))
+    for (const auto &p : std::as_const(points))
     {
         if (p.TurnPoint())
         {
@@ -1820,7 +1820,7 @@ void VDxfEngine::ExportTurnPoints(const QSharedPointer<dx_ifaceBlock> &detailBlo
 void VDxfEngine::ExportCurvePoints(const QSharedPointer<dx_ifaceBlock> &detailBlock,
                                    const QVector<VLayoutPoint> &points) const
 {
-    for (const auto &p : qAsConst(points))
+    for (const auto &p : std::as_const(points))
     {
         if (p.CurvePoint() && not p.TurnPoint())
         {

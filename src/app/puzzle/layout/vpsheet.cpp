@@ -355,7 +355,7 @@ void VPSheetSceneData::PrepareForExport(LayoutExportFormats format)
         VPSheetPtr const sheet = layout->GetSheet(m_sheetUuid);
         m_slectedPiecesTmp = sheet->GetSelectedPieces();
 
-        for (const auto &piece : qAsConst(m_slectedPiecesTmp))
+        for (const auto &piece : std::as_const(m_slectedPiecesTmp))
         {
             if (not piece.isNull())
             {
@@ -397,7 +397,7 @@ void VPSheetSceneData::CleanAfterExport()
         layout->LayoutSettings().SetShowGrid(m_showGridTmp);
         layout->LayoutSettings().SetShowTiles(m_showTilesTmp);
 
-        for (const auto &piece : qAsConst(m_slectedPiecesTmp))
+        for (const auto &piece : std::as_const(m_slectedPiecesTmp))
         {
             if (not piece.isNull())
             {
@@ -471,7 +471,7 @@ void VPSheetSceneData::AddPiece(VPGraphicsPiece *piece)
 //---------------------------------------------------------------------------------------------------------------------
 void VPSheetSceneData::SetTextAsPaths(bool textAsPaths)
 {
-    for (auto *piece : qAsConst(m_graphicsPieces))
+    for (auto *piece : std::as_const(m_graphicsPieces))
     {
         if (piece != nullptr)
         {

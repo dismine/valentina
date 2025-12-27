@@ -201,12 +201,12 @@ auto VToolMove::Create(VToolMoveInitData &initData) -> VToolMove *
 
     CreateDestination(initData, rotationOrigin, calcAngle, calcLength);
 
-    for (const auto &object : qAsConst(initData.source))
+    for (const auto &object : std::as_const(initData.source))
     {
         patternGraph->AddEdge(object.id, initData.id);
     }
 
-    for (const auto &object : qAsConst(initData.destination))
+    for (const auto &object : std::as_const(initData.destination))
     {
         patternGraph->AddVertex(object.id, VNodeType::OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
         patternGraph->AddEdge(initData.id, object.id);
@@ -235,7 +235,7 @@ auto VToolMove::Create(VToolMoveInitData &initData) -> VToolMove *
             initData.doc->IncrementReferens(originPoint->getIdTool());
         }
 
-        for (const auto &object : qAsConst(initData.source))
+        for (const auto &object : std::as_const(initData.source))
         {
             initData.doc->IncrementReferens(initData.data->GetGObject(object.id)->getIdTool());
         }
@@ -512,7 +512,7 @@ void VToolMove::CreateDestination(VToolMoveInitData &initData, QPointF rotationO
 
     if (initData.typeCreation == Source::FromGui)
     {
-        for (const auto &object : qAsConst(initData.source))
+        for (const auto &object : std::as_const(initData.source))
         {
             const QSharedPointer<VGObject> obj = initData.data->GetGObject(object.id);
 

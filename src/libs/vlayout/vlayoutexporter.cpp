@@ -87,7 +87,7 @@ void PrepareDetailsForDXF(const QString &placeholder, const QList<QGraphicsItem 
     for (auto *item : paperItems)
     {
         QList<QGraphicsItem *> pieceChildren = item->childItems();
-        for (auto *child : qAsConst(pieceChildren))
+        for (auto *child : std::as_const(pieceChildren))
         {
             if (child->type() == QGraphicsSimpleTextItem::Type)
             {
@@ -116,7 +116,7 @@ void RestoreDetailsAfterDXF(const QString &placeholder, const QList<QGraphicsIte
     for (auto *item : paperItems)
     {
         QList<QGraphicsItem *> pieceChildren = item->childItems();
-        for (auto *child : qAsConst(pieceChildren))
+        for (auto *child : std::as_const(pieceChildren))
         {
             if (child->type() == QGraphicsSimpleTextItem::Type)
             {
@@ -675,7 +675,7 @@ void VLayoutExporter::PrepareGrainlineForExport(const QList<QGraphicsItem *> &it
     for (auto *item : items)
     {
         QList<QGraphicsItem *> pieceChildren = item->childItems();
-        for (auto *child : qAsConst(pieceChildren))
+        for (auto *child : std::as_const(pieceChildren))
         {
             if (child->type() == VGraphicsFillItem::Type)
             {
@@ -691,7 +691,7 @@ void VLayoutExporter::RestoreGrainlineAfterExport(const QList<QGraphicsItem *> &
     for (auto *item : items)
     {
         QList<QGraphicsItem *> pieceChildren = item->childItems();
-        for (auto *child : qAsConst(pieceChildren))
+        for (auto *child : std::as_const(pieceChildren))
         {
             if (child->type() == VGraphicsFillItem::Type)
             {

@@ -1424,7 +1424,7 @@ void VAbstractPattern::FindFormulaDependencies(const QString &formula,
             int checkCounter = 0;
             const int checkInterval = 10; // Check every 10 iterations
 
-            for (const auto &token : qAsConst(tokens))
+            for (const auto &token : std::as_const(tokens))
             {
                 if (++checkCounter >= checkInterval && currentThread->isInterruptionRequested())
                 {
@@ -2699,18 +2699,18 @@ void VAbstractPattern::CancelFormulaDependencyChecks()
         m_formulaDependenciesWatchers.clear();
 
         // Disconnect to prevent cleanup from running
-        for (auto *watcher : qAsConst(watchersCopy))
+        for (auto *watcher : std::as_const(watchersCopy))
         {
             disconnect(watcher, &QFutureWatcher<void>::finished, this, &VAbstractPattern::CleanDependenciesWatcher);
         }
     }
 
-    for (auto *watcher : qAsConst(watchersCopy))
+    for (auto *watcher : std::as_const(watchersCopy))
     {
         watcher->cancel();
     }
 
-    for (auto *watcher : qAsConst(watchersCopy))
+    for (auto *watcher : std::as_const(watchersCopy))
     {
         watcher->waitForFinished();
         watcher->deleteLater(); // Manual cleanup since we disconnected

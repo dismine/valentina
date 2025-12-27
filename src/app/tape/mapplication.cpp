@@ -719,7 +719,7 @@ void MApplication::Preferences(QWidget *parent)
         guard = preferences;
         // Must be first
 
-        for (const auto &w : qAsConst(m_mainWindows))
+        for (const auto &w : std::as_const(m_mainWindows))
         {
             if (!w.isNull())
             {
@@ -730,7 +730,7 @@ void MApplication::Preferences(QWidget *parent)
             }
         }
 
-        for (const auto &w : qAsConst(m_kmMainWindows))
+        for (const auto &w : std::as_const(m_kmMainWindows))
         {
             if (!w.isNull())
             {
@@ -987,7 +987,7 @@ void MApplication::KnownMeasurementsPathChanged(const QString &oldPath, const QS
 //---------------------------------------------------------------------------------------------------------------------
 void MApplication::SyncKnownMeasurements()
 {
-    for (const auto &w : qAsConst(m_mainWindows))
+    for (const auto &w : std::as_const(m_mainWindows))
     {
         if (!w.isNull())
         {
