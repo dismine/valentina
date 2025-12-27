@@ -40,7 +40,7 @@
 class QIcon;
 #endif
 
-enum class VColorRole
+enum class VColorRole : quint8
 {
     DefaultColor,
     PatternColor,

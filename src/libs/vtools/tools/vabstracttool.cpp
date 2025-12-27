@@ -96,9 +96,7 @@ const QString VAbstractTool::AttrInUse = QStringLiteral("inUse");
 VAbstractTool::VAbstractTool(VAbstractPattern *doc, VContainer *data, quint32 id, QObject *parent)
   : VDataTool(data, parent),
     doc(doc),
-    m_id(id),
-    vis(),
-    selectionType(SelectionType::ByMouseRelease)
+    m_id(id)
 {
     SCASSERT(doc != nullptr)
     connect(this, &VAbstractTool::toolhaveChange, this->doc, &VAbstractPattern::haveLiteChange);

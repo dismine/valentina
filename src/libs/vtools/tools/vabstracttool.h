@@ -147,8 +147,8 @@ protected:
     /** @brief id object id. */
     const quint32 m_id;
 
-    QPointer<Visualization> vis;
-    SelectionType selectionType;
+    QPointer<Visualization> vis{};
+    SelectionType selectionType{SelectionType::ByMouseRelease};
 
     /**
      * @brief AddToFile add tag with informations about tool into file.

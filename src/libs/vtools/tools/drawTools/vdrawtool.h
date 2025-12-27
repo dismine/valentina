@@ -48,9 +48,6 @@
 #include "../vdatatool.h"
 #include "../vinteractivetool.h"
 #include "../vmisc/def.h"
-#include "../vmisc/vabstractapplication.h"
-#include "../vtools/undocommands/undogroup.h"
-#include "../vwidgets/vabstractmainwindow.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vmaingraphicsview.h"
 

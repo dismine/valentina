@@ -45,7 +45,9 @@ QT_WARNING_POP
  * @param parent parent object
  */
 VDataTool::VDataTool(VContainer *data, QObject *parent)
-    : QObject(parent), data(*data), _referens(0)
+  : QObject(parent),
+    data(*data),
+    _referens(0)
 {
     SCASSERT(data != nullptr)
 }

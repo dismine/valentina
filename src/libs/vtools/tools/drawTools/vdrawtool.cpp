@@ -38,6 +38,7 @@
 
 #include "../../undocommands/addtocalc.h"
 #include "../../undocommands/savetooloptions.h"
+#include "../../undocommands/undogroup.h"
 #include "../ifc/exception/vexceptionwrongid.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
@@ -45,6 +46,7 @@
 #include "../ifc/xml/vpatternblockmapper.h"
 #include "../vabstracttool.h"
 #include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/vabstractmainwindow.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"

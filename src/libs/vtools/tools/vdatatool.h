@@ -37,7 +37,7 @@
 
 #include "../vpatterndb/vcontainer.h"
 
-Q_DECLARE_LOGGING_CATEGORY(vTool)
+Q_DECLARE_LOGGING_CATEGORY(vTool) // NOLINT
 
 // We need QObject class because we use qobject_cast.
 /**
@@ -49,12 +49,15 @@ class VDataTool : public QObject
 
 public:
     explicit VDataTool(VContainer *data, QObject *parent = nullptr);
-    virtual ~VDataTool() = default;
+    ~VDataTool() override = default;
+
     auto getData() const -> VContainer;
     void setData(const VContainer *value);
+
     virtual auto referens() const -> quint32;
     virtual void incrementReferens();
     virtual void decrementReferens();
+
     virtual void GroupVisibility(quint32 object, bool visible) = 0;
 
 protected:
