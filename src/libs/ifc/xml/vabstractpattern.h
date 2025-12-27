@@ -414,6 +414,10 @@ public:
 
     void FindFormulaDependencies(const QString &formula, quint32 id, const QHash<QString, QList<quint32>> &variables);
 
+    auto IsPatternGraphComplete() const -> bool;
+
+    auto PatternBlockMapper() const -> VPatternBlockMapper *;
+
 signals:
     /**
      * @brief ChangedCursor change cursor position.
@@ -522,6 +526,9 @@ protected:
     auto ReadMPath() const -> QString;
     auto ReadWatermarkPath() const -> QString;
     auto ReadCompanyName() const -> QString;
+
+private slots:
+    void CleanDependenciesWatcher();
 
 private:
     Q_DISABLE_COPY_MOVE(VAbstractPattern) // NOLINT

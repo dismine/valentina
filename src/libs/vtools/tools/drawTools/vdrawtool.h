@@ -37,6 +37,7 @@
 #include <QGraphicsSceneContextMenuEvent>
 #include <QIcon>
 #include <QMenu>
+#include <QMessageBox>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -52,6 +53,10 @@
 #include "../vwidgets/vabstractmainwindow.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vmaingraphicsview.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
 
 struct VDrawToolInitData : VAbstractToolInitData
 {
@@ -91,12 +96,6 @@ protected slots:
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) = 0;
 
 protected:
-    enum class RemoveOption : bool
-    {
-        Disable = false,
-        Enable = true
-    };
-
     /** @brief m_indexActivePatternBlock index of active patetrn block */
     int m_indexActivePatternBlock;
 
@@ -125,9 +124,7 @@ protected:
     virtual void ChangeLabelVisibility(quint32 id, bool visible);
 
     template<class Dialog>
-    void ContextMenu(QGraphicsSceneContextMenuEvent *event,
-                     quint32 itemId = NULL_ID,
-                     const RemoveOption &showRemove = RemoveOption::Enable);
+    void ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemId = NULL_ID);
 
     template <class Item> void ShowItem(Item *item, quint32 id, bool enable);
 
@@ -147,10 +144,11 @@ template<class Dialog>
  * @brief ContextMenu show context menu for tool.
  * @param event context menu event.
  * @param itemId id of point. 0 if not a point
- * @param showRemove true - tool enable option delete.
  */
-void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemId, const RemoveOption &showRemove)
+void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemId)
 {
+    using namespace Qt::Literals::StringLiterals;
+
     SCASSERT(event != nullptr)
 
     if (m_suppressContextMenu)
@@ -235,13 +233,11 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
     actionRestoreLabelPosition->setVisible(itemType == GOType::Point);
 
     QAction *actionRemove = menu.addAction(FromTheme(VThemeIcon::EditDelete), VDrawTool::tr("Delete"));
-    if (showRemove == RemoveOption::Enable)
+    RemoveStatus const status = IsRemovable();
+    actionRemove->setEnabled(status == RemoveStatus::Removable || status == RemoveStatus::Blocked);
+    if (status == RemoveStatus::Pending)
     {
-        actionRemove->setEnabled(IsRemovable());
-    }
-    else
-    {
-        actionRemove->setEnabled(false);
+        actionRemove->setText(actionRemove->text() + " ("_L1 + tr("Pending") + ')');
     }
 
     QAction const *selectedAction = menu.exec(event->screenPos());
@@ -267,9 +263,21 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
     }
     else if (selectedAction == actionRemove)
     {
-        qCDebug(vTool, "Deleting tool.");
-        DeleteToolWithConfirm(); // do not catch exception here
-        return;                  // Leave this method immediately after call!!!
+        if (status == RemoveStatus::Removable)
+        {
+            qCDebug(vTool, "Deleting tool.");
+            DeleteToolWithConfirm(); // do not catch exception here
+            return;                  // Leave this method immediately after call!!!
+        }
+
+        QMessageBox messageBox;
+        messageBox.setIcon(QMessageBox::Warning);
+        messageBox.setWindowTitle(tr("Cannot Delete Object"));
+        messageBox.setText(tr("This object cannot be deleted because it is being used by other items."));
+        messageBox.setInformativeText(tr("Please resolve the dependencies before attempting to delete this object."));
+        messageBox.setDefaultButton(QMessageBox::Ok);
+        messageBox.setStandardButtons(QMessageBox::Ok);
+        messageBox.exec();
     }
     else if (selectedAction == actionShowLabel)
     {

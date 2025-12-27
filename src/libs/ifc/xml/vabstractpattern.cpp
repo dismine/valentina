@@ -1454,6 +1454,25 @@ void VAbstractPattern::FindFormulaDependencies(const QString &formula,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VAbstractPattern::IsPatternGraphComplete() const -> bool
+{
+    if (!m_watchersMutex.tryLock(100))
+    {
+        return false;
+    }
+
+    auto Unlock = qScopeGuard([this]() -> auto { m_watchersMutex.unlock(); });
+
+    return m_formulaDependenciesWatchers.isEmpty();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractPattern::PatternBlockMapper() const -> VPatternBlockMapper *
+{
+    return m_patternBlockMapper;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractPattern::ToolExists(const quint32 &id)
 {
     if (!tools.contains(id))
@@ -2675,13 +2694,14 @@ void VAbstractPattern::CancelFormulaDependencyChecks()
             return;
         }
 
+        watchersCopy.reserve(m_formulaDependenciesWatchers.size());
         watchersCopy = m_formulaDependenciesWatchers;
         m_formulaDependenciesWatchers.clear();
 
         // Disconnect to prevent cleanup from running
         for (auto *watcher : qAsConst(watchersCopy))
         {
-            watcher->disconnect();
+            disconnect(watcher, &QFutureWatcher<void>::finished, this, &VAbstractPattern::CleanDependenciesWatcher);
         }
     }
 
@@ -2693,8 +2713,18 @@ void VAbstractPattern::CancelFormulaDependencyChecks()
     for (auto *watcher : qAsConst(watchersCopy))
     {
         watcher->waitForFinished();
-        delete watcher; // Manual cleanup since we disconnected
+        watcher->deleteLater(); // Manual cleanup since we disconnected
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::CleanDependenciesWatcher()
+{
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+    auto *watcher = static_cast<QFutureWatcher<void> *>(sender());
+    QMutexLocker const locker(&m_watchersMutex);
+    m_formulaDependenciesWatchers.removeOne(watcher);
+    watcher->deleteLater();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

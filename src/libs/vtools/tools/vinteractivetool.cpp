@@ -41,6 +41,12 @@ void VInteractiveTool::DialogLinkDestroy()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VInteractiveTool::IsRemovable() const -> RemoveStatus
+{
+    return RemoveStatus::Removable;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief FullUpdateFromGuiOk refresh tool data after change in options.
  * @param result keep result working dialog.

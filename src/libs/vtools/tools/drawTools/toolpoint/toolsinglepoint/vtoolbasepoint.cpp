@@ -51,8 +51,9 @@
 #include "../../../../undocommands/movespoint.h"
 #include "../../../vabstracttool.h"
 #include "../../../vdatatool.h"
-#include "../../vdrawtool.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/exception/vexception.h"
@@ -63,8 +64,6 @@
 #include "../vwidgets/vmaingraphicsview.h"
 #include "def.h"
 #include "vtoolsinglepoint.h"
-#include "../ifc/xml/vpatternblockmapper.h"
-#include "../ifc/xml/vpatterngraph.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
@@ -146,6 +145,39 @@ auto VToolBasePoint::Create(VToolBasePointInitData initData) -> VToolBasePoint *
 void VToolBasePoint::ShowVisualization(bool show)
 {
     Q_UNUSED(show) // don't have any visualization for base point yet
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VToolBasePoint::IsRemovable() const -> RemoveStatus
+{
+    if (doc->CountPatternBlockTags() <= 1)
+    {
+        return RemoveStatus::Locked; // One pattern block
+    }
+
+    if (!doc->IsPatternGraphComplete())
+    {
+        return RemoveStatus::Pending; // Data not ready yet
+    }
+
+    VPatternGraph const *patternGraph = doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    auto const dependecies = patternGraph->TryGetDependentNodes(m_id,
+                                                                1000,
+                                                                [this](const auto &node) -> auto
+                                                                {
+                                                                    return node.indexPatternBlock != m_indexPatternBlock
+                                                                           && node.type != VNodeType::MODELING_TOOL
+                                                                           && node.type != VNodeType::MODELING_OBJECT;
+                                                                });
+
+    if (!dependecies)
+    {
+        return RemoveStatus::Pending; // Lock timeout
+    }
+
+    return dependecies->isEmpty() ? RemoveStatus::Removable : RemoveStatus::Blocked;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -246,7 +278,7 @@ void VToolBasePoint::SetBasePointPos(const QPointF &pos)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolBasePoint::DeleteToolWithConfirm(bool ask)
 {
-    if (doc->CountPatternBlockTags() <= 1)
+    if (IsRemovable() != RemoveStatus::Removable)
     {
         return;
     }
@@ -364,16 +396,7 @@ void VToolBasePoint::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quin
 
     try
     {
-        if (doc->CountPP() > 1)
-        {
-            qCDebug(vTool, "PP count > 1");
-            ContextMenu<DialogSinglePoint>(event, id, RemoveOption::Enable, Referens::Ignore);
-        }
-        else
-        {
-            qCDebug(vTool, "PP count = 1");
-            ContextMenu<DialogSinglePoint>(event, id, RemoveOption::Disable);
-        }
+        ContextMenu<DialogSinglePoint>(event, id);
     }
     catch (const VExceptionToolWasDeleted &e)
     {

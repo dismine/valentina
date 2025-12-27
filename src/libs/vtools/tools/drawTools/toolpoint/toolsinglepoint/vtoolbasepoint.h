@@ -69,6 +69,8 @@ public:
     };
     void ShowVisualization(bool show) override;
 
+    auto IsRemovable() const -> RemoveStatus override;
+
     auto GetBasePointPos() const -> QPointF;
     void SetBasePointPos(const QPointF &pos);
 public slots:
