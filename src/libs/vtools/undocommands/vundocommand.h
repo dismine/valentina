@@ -39,7 +39,7 @@
 
 #include "../ifc/xml/vabstractpattern.h"
 
-Q_DECLARE_LOGGING_CATEGORY(vUndo)
+Q_DECLARE_LOGGING_CATEGORY(vUndo) //NOLINT
 
 enum class UndoCommand : qint8
 {
@@ -74,7 +74,7 @@ class VUndoCommand : public QObject, public QUndoCommand
 
 public:
     VUndoCommand(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
-    virtual ~VUndoCommand() = default;
+    ~VUndoCommand() = default;
 signals:
     void ClearScene();
     void NeedFullParsing();

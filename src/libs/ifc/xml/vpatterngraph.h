@@ -72,7 +72,7 @@ struct VEdge
 };
 
 /**
- * An filter callback which does nothing.
+ * A filter callback which does nothing.
  */
 struct FilterNoopCallback
 {

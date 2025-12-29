@@ -64,9 +64,14 @@ class VAbstractNode : public VAbstractTool
     Q_OBJECT // NOLINT
 
 public:
-    VAbstractNode(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &idNode,
-                  const QString &drawName = QString(), const quint32 &idTool = 0, QObject *parent = nullptr);
-    virtual ~VAbstractNode() override = default;
+    VAbstractNode(VAbstractPattern *doc,
+                  VContainer *data,
+                  quint32 id,
+                  quint32 idNode,
+                  const QString &drawName = QString(),
+                  quint32 idTool = 0,
+                  QObject *parent = nullptr);
+    ~VAbstractNode() override = default;
 
     static const QString AttrIdTool;
     void ShowVisualization(bool show) override;

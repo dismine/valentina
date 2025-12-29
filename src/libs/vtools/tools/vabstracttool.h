@@ -51,31 +51,13 @@ QT_WARNING_DISABLE_CLANG("-Wdeprecated")
 
 struct VAbstractToolInitData
 {
-    VAbstractToolInitData()
-      : id(NULL_ID),
-        scene(nullptr),
-        doc(nullptr),
-        data(nullptr),
-        parse(Document::FullParse),
-        typeCreation(Source::FromFile)
-    {
-    }
-
-    virtual ~VAbstractToolInitData() = default;
-
-    VAbstractToolInitData(const VAbstractToolInitData &) = default;
-    auto operator=(const VAbstractToolInitData &) -> VAbstractToolInitData & = default;
-
-    VAbstractToolInitData(VAbstractToolInitData &&) = default;
-    auto operator=(VAbstractToolInitData &&) -> VAbstractToolInitData & = default;
-
     /** @brief id tool id, 0 if tool doesn't exist yet.*/
-    quint32 id;
-    VMainGraphicsScene *scene;
-    VAbstractPattern *doc;
-    VContainer *data;
-    Document parse;
-    Source typeCreation;
+    quint32 id{NULL_ID};
+    VMainGraphicsScene *scene{nullptr};
+    VAbstractPattern *doc{nullptr};
+    VContainer *data{nullptr};
+    Document parse{Document::FullParse};
+    Source typeCreation{Source::FromFile};
 };
 
 QT_WARNING_POP
@@ -89,7 +71,7 @@ class VAbstractTool : public VDataTool
 
 public:
     VAbstractTool(VAbstractPattern *doc, VContainer *data, quint32 id, QObject *parent = nullptr);
-    virtual ~VAbstractTool() override;
+    ~VAbstractTool() override;
     auto getId() const -> quint32;
 
     static bool m_suppressContextMenu;

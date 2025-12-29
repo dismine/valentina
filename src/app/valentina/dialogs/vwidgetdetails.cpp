@@ -44,7 +44,7 @@ using namespace std::chrono_literals;
 
 namespace
 {
-enum PieceColumn
+enum PieceColumn : quint8
 {
     InLayout = 0,
     PieceName = 1
@@ -72,7 +72,7 @@ VWidgetDetails::VWidgetDetails(VContainer *data, VAbstractPattern *doc, QWidget 
     connect(ui->tableWidget, &QTableWidget::customContextMenuRequested, this, &VWidgetDetails::ShowContextMenu);
 
     m_updateListTimer->setSingleShot(true);
-    connect(m_updateListTimer, &QTimer::timeout, this, [this]() { FillTable(m_data->DataPieces()); });
+    connect(m_updateListTimer, &QTimer::timeout, this, [this]() -> void { FillTable(m_data->DataPieces()); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
