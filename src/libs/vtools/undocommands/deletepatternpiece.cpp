@@ -38,7 +38,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 DeletePatternPiece::DeletePatternPiece(VAbstractPattern *doc, int indexPatternBlock, QUndoCommand *parent)
-  : VUndoCommand(QDomElement(), doc, parent),
+  : VUndoCommand(doc, parent),
     m_indexPatternBlock(indexPatternBlock)
 {
     SCASSERT(m_indexPatternBlock >= 0)

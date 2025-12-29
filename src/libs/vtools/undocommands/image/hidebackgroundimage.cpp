@@ -30,9 +30,9 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 HideBackgroundImage::HideBackgroundImage(QUuid id, bool hide, VAbstractPattern *doc, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent),
-      m_id(id),
-      m_hide(hide)
+  : VUndoCommand(doc, parent),
+    m_id(id),
+    m_hide(hide)
 {
     if (hide)
     {

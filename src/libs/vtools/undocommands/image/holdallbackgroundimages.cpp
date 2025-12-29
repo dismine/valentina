@@ -30,8 +30,8 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 HoldAllBackgroundImages::HoldAllBackgroundImages(bool hold, VAbstractPattern *doc, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent),
-      m_hold(hold)
+  : VUndoCommand(doc, parent),
+    m_hold(hold)
 {
     if (hold)
     {

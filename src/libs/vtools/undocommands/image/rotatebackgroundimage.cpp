@@ -29,12 +29,12 @@
 #include "../ifc/xml/vbackgroundpatternimage.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-RotateBackgroundImage::RotateBackgroundImage(QUuid id, const QTransform &matrix, VAbstractPattern *doc, bool allowMerge,
-                                             QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent),
-      m_id(id),
-      m_matrix(matrix),
-      m_allowMerge(allowMerge)
+RotateBackgroundImage::RotateBackgroundImage(
+    QUuid id, const QTransform &matrix, VAbstractPattern *doc, bool allowMerge, QUndoCommand *parent)
+  : VUndoCommand(doc, parent),
+    m_id(id),
+    m_matrix(matrix),
+    m_allowMerge(allowMerge)
 {
     setText(tr("rotate background image"));
 

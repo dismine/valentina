@@ -122,8 +122,8 @@ void AddGroup::redo()
 //RenameGroup
 //---------------------------------------------------------------------------------------------------------------------
 RenameGroup::RenameGroup(VAbstractPattern *doc, quint32 id, const QString &name, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent),
-      newName(name)
+  : VUndoCommand(doc, parent),
+    newName(name)
 {
     setText(tr("rename group"));
     nodeId = id;
@@ -151,11 +151,11 @@ void RenameGroup::redo()
 
 //ChangeGroupOptions
 //---------------------------------------------------------------------------------------------------------------------
-ChangeGroupOptions::ChangeGroupOptions(VAbstractPattern *doc, quint32 id, const QString &name, const QStringList &tags,
-                                       QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent),
-      newName(name),
-      newTags(tags)
+ChangeGroupOptions::ChangeGroupOptions(
+    VAbstractPattern *doc, quint32 id, const QString &name, const QStringList &tags, QUndoCommand *parent)
+  : VUndoCommand(doc, parent),
+    newName(name),
+    newTags(tags)
 {
     setText(tr("rename group"));
     nodeId = id;
@@ -361,7 +361,7 @@ void RemoveItemFromGroup::performUndoRedo(bool isUndo)
 //ChangeGroupVisibility
 //---------------------------------------------------------------------------------------------------------------------
 ChangeGroupVisibility::ChangeGroupVisibility(VAbstractPattern *doc, vidtype id, bool visible, QUndoCommand *parent)
-  : VUndoCommand(QDomElement(), doc, parent),
+  : VUndoCommand(doc, parent),
     m_newVisibility(visible),
     m_indexPatternBlock(doc->PatternBlockMapper()->GetActiveId())
 {
@@ -424,7 +424,7 @@ ChangeMultipleGroupsVisibility::ChangeMultipleGroupsVisibility(VAbstractPattern 
                                                                const QVector<vidtype> &groups,
                                                                bool visible,
                                                                QUndoCommand *parent)
-  : VUndoCommand(QDomElement(), doc, parent),
+  : VUndoCommand(doc, parent),
     m_groups(groups),
     m_newVisibility(visible),
     m_indexPatternBlock(doc->PatternBlockMapper()->GetActiveId())
@@ -523,7 +523,7 @@ void ChangeMultipleGroupsVisibility::redo()
 //DelGroup
 //---------------------------------------------------------------------------------------------------------------------
 DelGroup::DelGroup(VAbstractPattern *doc, quint32 id, QUndoCommand *parent)
-  : VUndoCommand(QDomElement(), doc, parent),
+  : VUndoCommand(doc, parent),
     m_indexPatternBlock(doc->PatternBlockMapper()->GetActiveId())
 {
     setText(tr("delete group"));

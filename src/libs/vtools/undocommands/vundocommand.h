@@ -73,6 +73,7 @@ class VUndoCommand : public QObject, public QUndoCommand
     Q_OBJECT // NOLINT
 
 public:
+    explicit VUndoCommand(VAbstractPattern *doc, QUndoCommand *parent = nullptr);
     VUndoCommand(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
     ~VUndoCommand() override = default;
 signals:

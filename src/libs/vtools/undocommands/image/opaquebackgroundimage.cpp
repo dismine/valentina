@@ -30,9 +30,9 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 OpaqueBackgroundImage::OpaqueBackgroundImage(QUuid id, qreal opacity, VAbstractPattern *doc, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent),
-      m_id(id),
-      m_opacity(opacity)
+  : VUndoCommand(doc, parent),
+    m_id(id),
+    m_opacity(opacity)
 {
     setText(tr("change a background image opacity"));
 

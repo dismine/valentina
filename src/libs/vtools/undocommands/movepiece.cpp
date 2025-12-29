@@ -39,14 +39,18 @@
 #include "vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-MovePiece::MovePiece(VAbstractPattern *doc, const double &x, const double &y, const quint32 &id,
-                     QGraphicsScene *scene, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent),
-      m_oldX(0.0),
-      m_oldY(0.0),
-      m_newX(x),
-      m_newY(y),
-      m_scene(scene)
+MovePiece::MovePiece(VAbstractPattern *doc,
+                     const double &x,
+                     const double &y,
+                     const quint32 &id,
+                     QGraphicsScene *scene,
+                     QUndoCommand *parent)
+  : VUndoCommand(doc, parent),
+    m_oldX(0.0),
+    m_oldY(0.0),
+    m_newX(x),
+    m_newY(y),
+    m_scene(scene)
 {
     setText(QObject::tr("move detail"));
     nodeId = id;

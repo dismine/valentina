@@ -39,12 +39,15 @@
 #include "vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-MoveSplinePath::MoveSplinePath(VAbstractPattern *doc, const VSplinePath &oldSplPath, const VSplinePath &newSplPath,
-                               const quint32 &id, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent),
-      oldSplinePath(oldSplPath),
-      newSplinePath(newSplPath),
-      scene(VAbstractValApplication::VApp()->getCurrentScene())
+MoveSplinePath::MoveSplinePath(VAbstractPattern *doc,
+                               const VSplinePath &oldSplPath,
+                               const VSplinePath &newSplPath,
+                               const quint32 &id,
+                               QUndoCommand *parent)
+  : VUndoCommand(doc, parent),
+    oldSplinePath(oldSplPath),
+    newSplinePath(newSplPath),
+    scene(VAbstractValApplication::VApp()->getCurrentScene())
 {
     setText(tr("move spline path"));
     nodeId = id;

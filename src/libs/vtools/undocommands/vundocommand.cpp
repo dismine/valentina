@@ -50,13 +50,21 @@ Q_LOGGING_CATEGORY(vUndo, "v.undo") // NOLINT
 QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
+VUndoCommand::VUndoCommand(VAbstractPattern *doc, QUndoCommand *parent)
+  : QObject(),
+    QUndoCommand(parent),
+    xml(QDomElement()),
+    doc(doc)
+{
+    SCASSERT(doc != nullptr);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VUndoCommand::VUndoCommand(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent)
   : QObject(),
     QUndoCommand(parent),
     xml(xml),
-    doc(doc),
-    nodeId(NULL_ID),
-    redoFlag(false)
+    doc(doc)
 {
     SCASSERT(doc != nullptr)
 }

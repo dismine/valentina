@@ -39,7 +39,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 RenamePP::RenamePP(VAbstractPattern *doc, QString newPatternBlockName, QComboBox *combo, QUndoCommand *parent)
-  : VUndoCommand(QDomElement(), doc, parent),
+  : VUndoCommand(doc, parent),
     combo(combo),
     m_newPatternBlockName(std::move(newPatternBlockName)),
     m_oldPatternBlockName(doc->PatternBlockMapper()->GetActive())

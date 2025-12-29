@@ -36,13 +36,13 @@
 #include "../vtools/tools/drawTools/vdrawtool.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-OperationShowLabel::OperationShowLabel(VAbstractPattern *doc, quint32 idTool, quint32 idPoint, bool visible,
-                                       QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent),
-      m_visible(visible),
-      m_oldVisible(not visible),
-      m_scene(VAbstractValApplication::VApp()->getCurrentScene()),
-      m_idTool(idTool)
+OperationShowLabel::OperationShowLabel(
+    VAbstractPattern *doc, quint32 idTool, quint32 idPoint, bool visible, QUndoCommand *parent)
+  : VUndoCommand(doc, parent),
+    m_visible(visible),
+    m_oldVisible(not visible),
+    m_scene(VAbstractValApplication::VApp()->getCurrentScene()),
+    m_idTool(idTool)
 {
     nodeId = idPoint;
     qCDebug(vUndo, "Point id %u", nodeId);

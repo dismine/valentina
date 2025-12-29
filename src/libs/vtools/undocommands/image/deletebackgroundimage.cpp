@@ -28,10 +28,11 @@
 #include "deletebackgroundimage.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DeleteBackgroundImage::DeleteBackgroundImage(const VBackgroundPatternImage &image, VAbstractPattern *doc,
+DeleteBackgroundImage::DeleteBackgroundImage(const VBackgroundPatternImage &image,
+                                             VAbstractPattern *doc,
                                              QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent),
-      m_image(image)
+  : VUndoCommand(doc, parent),
+    m_image(image)
 {
     setText(tr("delete background image"));
 

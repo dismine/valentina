@@ -30,9 +30,9 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 HoldBackgroundImage::HoldBackgroundImage(QUuid id, bool hold, VAbstractPattern *doc, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent),
-      m_id(id),
-      m_hold(hold)
+  : VUndoCommand(doc, parent),
+    m_id(id),
+    m_hold(hold)
 {
     if (hold)
     {

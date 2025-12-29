@@ -29,13 +29,13 @@
 #include "../ifc/xml/vbackgroundpatternimage.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-MoveBackgroundImage::MoveBackgroundImage(QUuid id, qreal dx, qreal dy, VAbstractPattern *doc, bool allowMerge,
-                                         QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent),
-      m_id(id),
-      m_dx(dx),
-      m_dy(dy),
-      m_allowMerge(allowMerge)
+MoveBackgroundImage::MoveBackgroundImage(
+    QUuid id, qreal dx, qreal dy, VAbstractPattern *doc, bool allowMerge, QUndoCommand *parent)
+  : VUndoCommand(doc, parent),
+    m_id(id),
+    m_dx(dx),
+    m_dy(dy),
+    m_allowMerge(allowMerge)
 {
     setText(tr("move background image"));
 

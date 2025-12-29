@@ -53,7 +53,7 @@ auto FixGroups(QMap<quint32, VGroupData> groups, const QMap<quint32, VGroupData>
 
 //---------------------------------------------------------------------------------------------------------------------
 DelTool::DelTool(VAbstractPattern *doc, quint32 id, QUndoCommand *parent)
-  : VUndoCommand(QDomElement(), doc, parent),
+  : VUndoCommand(doc, parent),
     parentNode(doc->ParentNodeById(nodeId)),
     siblingId(doc->SiblingNodeId(nodeId)),
     nameActivDraw(doc->PatternBlockMapper()->GetActive())

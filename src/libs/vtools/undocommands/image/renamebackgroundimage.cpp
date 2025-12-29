@@ -30,9 +30,9 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 RenameBackgroundImage::RenameBackgroundImage(QUuid id, const QString &name, VAbstractPattern *doc, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent),
-      m_id(id),
-      m_name(name)
+  : VUndoCommand(doc, parent),
+    m_id(id),
+    m_name(name)
 {
     setText(tr("rename background image"));
 
