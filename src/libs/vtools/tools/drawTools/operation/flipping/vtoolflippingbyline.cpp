@@ -158,12 +158,6 @@ auto VToolFlippingByLine::Create(VToolFlippingByLineInitData initData) -> VToolF
         initData.scene->addItem(tool);
         InitOperationToolConnections(initData.scene, tool);
         VAbstractPattern::AddTool(initData.id, tool);
-        initData.doc->IncrementReferens(firstPoint.getIdTool());
-        initData.doc->IncrementReferens(secondPoint.getIdTool());
-        for (const auto &object : std::as_const(initData.source))
-        {
-            initData.doc->IncrementReferens(initData.data->GetGObject(object.id)->getIdTool());
-        }
 
         if (initData.typeCreation == Source::FromGui && initData.hasLinkedVisibilityGroup)
         {
@@ -225,17 +219,11 @@ void VToolFlippingByLine::SetVisualization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolFlippingByLine::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                                     QList<quint32> &newDependencies)
+void VToolFlippingByLine::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogFlippingByLine> dialogTool = qobject_cast<DialogFlippingByLine *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
-
-    AddDependence(oldDependencies, m_firstLinePointId);
-    AddDependence(oldDependencies, m_secondLinePointId);
-    AddDependence(newDependencies, dialogTool->GetFirstLinePointId());
-    AddDependence(newDependencies, dialogTool->GetSecondLinePointId());
 
     doc->SetAttribute(domElement, AttrP1Line, QString().setNum(dialogTool->GetFirstLinePointId()));
     doc->SetAttribute(domElement, AttrP2Line, QString().setNum(dialogTool->GetSecondLinePointId()));

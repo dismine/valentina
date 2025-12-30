@@ -46,18 +46,10 @@ template <class T> class QSharedPointer;
 
 struct VToolNormalInitData : VToolLinePointInitData
 {
-    VToolNormalInitData()
-        : VToolLinePointInitData(),
-          formula(),
-          firstPointId(NULL_ID),
-          secondPointId(NULL_ID),
-          angle(0)
-    {}
-
-    QString formula;
-    quint32 firstPointId;
-    quint32 secondPointId;
-    qreal angle;
+    QString formula{};
+    quint32 firstPointId{NULL_ID};
+    quint32 secondPointId{NULL_ID};
+    qreal angle{0};
 };
 
 /**
@@ -67,35 +59,36 @@ class VToolNormal : public VToolLinePoint
 {
     Q_OBJECT // NOLINT
 public:
-    virtual void   SetDialog() override;
+    ~VToolNormal() override = default;
+    void SetDialog() override;
     static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                        VContainer *data) -> VToolNormal *;
     static auto Create(VToolNormalInitData &initData) -> VToolNormal *;
     static auto FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, qreal length, qreal angle = 0)
         -> QPointF;
     static const QString ToolType;
-    virtual auto type() const -> int override { return Type; }
+    auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::Normal)};
 
     auto SecondPointName() const -> QString;
 
-    virtual void   ShowVisualization(bool show) override;
+    void ShowVisualization(bool show) override;
 protected slots:
-    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
+    void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) override;
+
 protected:
-    virtual void   RemoveReferens() override;
-    virtual void   SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                              QList<quint32> &newDependencies) override;
-    virtual void   SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
-    virtual void   ReadToolAttributes(const QDomElement &domElement) override;
-    virtual void   SetVisualization() override;
+    void SaveDialog(QDomElement &domElement) override;
+    void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    void ReadToolAttributes(const QDomElement &domElement) override;
+    void SetVisualization() override;
+
 private:
     Q_DISABLE_COPY_MOVE(VToolNormal) // NOLINT
 
     /** @brief secondPointId id second line point. */
     quint32        secondPointId;
 
-    VToolNormal(const VToolNormalInitData &initData, QGraphicsItem *parent = nullptr);
+    explicit VToolNormal(const VToolNormalInitData &initData, QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLNORMAL_H

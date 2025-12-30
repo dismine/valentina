@@ -349,21 +349,7 @@ auto VAbstractTool::GetRecord(const quint32 id, const Tool &toolType, VAbstractP
             return record;
         }
     }
-    return VToolRecord();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractTool::RemoveRecord(const VToolRecord &record, VAbstractPattern *doc)
-{
-    QVector<VToolRecord> *history = doc->getHistory();
-    for (int i = 0; i < history->size(); ++i)
-    {
-        if (history->at(i) == record)
-        {
-            history->remove(i);
-            return;
-        }
-    }
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

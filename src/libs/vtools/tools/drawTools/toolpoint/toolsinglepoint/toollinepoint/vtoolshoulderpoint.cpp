@@ -106,8 +106,8 @@ void VToolShoulderPoint::SetDialog()
  * @param length length form shoulder point to our.
  * @return point.
  */
-auto VToolShoulderPoint::FindPoint(const QPointF &p1Line, const QPointF &p2Line, const QPointF &pShoulder,
-                                   const qreal &length) -> QPointF
+auto VToolShoulderPoint::FindPoint(const QPointF &p1Line, const QPointF &p2Line, const QPointF &pShoulder, qreal length)
+    -> QPointF
 {
     QPointF shoulderPoint = p2Line; // Position if result was not found
     if (length <= 0)
@@ -238,9 +238,6 @@ auto VToolShoulderPoint::Create(VToolShoulderPointInitData &initData) -> VToolSh
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
-        initData.doc->IncrementReferens(firstPoint->getIdTool());
-        initData.doc->IncrementReferens(secondPoint->getIdTool());
-        initData.doc->IncrementReferens(shoulderPoint->getIdTool());
         return point;
     }
     return nullptr;
@@ -260,35 +257,13 @@ auto VToolShoulderPoint::ShoulderPointName() const -> QString
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief RemoveReferens decrement value of reference.
- */
-void VToolShoulderPoint::RemoveReferens()
-{
-    const auto p2 = VAbstractTool::data.GetGObject(p2Line);
-    const auto pS = VAbstractTool::data.GetGObject(pShoulder);
-
-    doc->DecrementReferens(p2->getIdTool());
-    doc->DecrementReferens(pS->getIdTool());
-    VToolLinePoint::RemoveReferens();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolShoulderPoint::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                                    QList<quint32> &newDependencies)
+void VToolShoulderPoint::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogShoulderPoint> dialogTool = qobject_cast<DialogShoulderPoint *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
-
-    AddDependence(oldDependencies, basePointId);
-    AddDependence(oldDependencies, p2Line);
-    AddDependence(oldDependencies, pShoulder);
-    AddDependence(newDependencies, dialogTool->GetP1Line());
-    AddDependence(newDependencies, dialogTool->GetP2Line());
-    AddDependence(newDependencies, dialogTool->GetP3());
 
     doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
@@ -299,8 +274,10 @@ void VToolShoulderPoint::SaveDialog(QDomElement &domElement, QList<quint32> &old
     doc->SetAttribute(domElement, AttrPShoulder, QString().setNum(dialogTool->GetP3()));
 
     const QString notes = dialogTool->GetNotes();
-    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, notes,
-                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
+    doc->SetAttributeOrRemoveIf<QString>(domElement,
+                                         AttrNotes,
+                                         notes,
+                                         [](const QString &notes) noexcept -> bool { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

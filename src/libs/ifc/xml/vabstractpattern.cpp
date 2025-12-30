@@ -397,7 +397,7 @@ auto VAbstractPattern::GetActivNodeElement(const QString &name, QDomElement &ele
 {
     Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name draw is empty");
 
-    QDomElement drawElement = m_patternBlockMapper->GetActiveElement();
+    QDomElement const drawElement = m_patternBlockMapper->GetActiveElement();
     if (drawElement.isNull())
     {
         return false;
@@ -2217,26 +2217,6 @@ auto VAbstractPattern::IsModified() const -> bool
 void VAbstractPattern::SetModified(bool modified)
 {
     this->modified = modified;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VAbstractPattern::GetDraw(const QString &name) const -> QDomElement
-{
-    const QDomNodeList draws = documentElement().elementsByTagName(TagDraw);
-    for (int i = 0; i < draws.size(); ++i)
-    {
-        QDomElement const draw = draws.at(i).toElement();
-        if (draw.isNull())
-        {
-            continue;
-        }
-
-        if (draw.attribute(AttrName) == name)
-        {
-            return draw;
-        }
-    }
-    return QDomElement();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -41,20 +41,22 @@ class DeletePiece : public VUndoCommand
 public:
     DeletePiece(VAbstractPattern *doc, quint32 id, const VContainer &data, VMainGraphicsScene *scene,
                 QUndoCommand *parent = nullptr);
-    virtual ~DeletePiece();
+    ~DeletePiece() override;
 
-    virtual void undo() override;
-    virtual void redo() override;
+    void undo() override;
+    void redo() override;
+
 private:
     Q_DISABLE_COPY_MOVE(DeletePiece) // NOLINT
 
-    QDomNode                     m_parentNode;
-    quint32                      m_siblingId;
-    VPiece                       m_detail;
-    VContainer                   m_data;
-    VMainGraphicsScene          *m_scene;
-    QPointer<VToolSeamAllowance> m_tool;
-    VToolRecord                  m_record;
+    QDomNode m_parentNode{};
+    quint32 m_siblingId{};
+    VPiece m_detail;
+    VContainer m_data;
+    VMainGraphicsScene *m_scene;
+    QPointer<VToolSeamAllowance> m_tool{};
+    VToolRecord m_record;
+    int m_indexPatternBlock{-1};
 };
 
 #endif // DELETEPIECE_H

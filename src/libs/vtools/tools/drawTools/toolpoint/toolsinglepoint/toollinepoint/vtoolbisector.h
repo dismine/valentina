@@ -71,37 +71,37 @@ public:
         -> qreal;
     static auto FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const QPointF &thirdPoint,
                           const qreal &length) -> QPointF;
-    virtual void   SetDialog() override;
+    void SetDialog() override;
     static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                        VContainer *data) -> VToolBisector *;
     static auto Create(VToolBisectorInitData &initData) -> VToolBisector *;
     static const QString ToolType;
-    virtual auto type() const -> int override { return Type; }
+    auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::Bisector)};
 
     auto FirstPointName() const -> QString;
     auto ThirdPointName() const -> QString;
 
-    virtual void   ShowVisualization(bool show) override;
+    void ShowVisualization(bool show) override;
 protected slots:
-    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
+    void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) override;
+
 protected:
-    virtual void   RemoveReferens() override;
-    virtual void   SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                              QList<quint32> &newDependencies) override;
-    virtual void   SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
-    virtual void   ReadToolAttributes(const QDomElement &domElement) override;
-    virtual void   SetVisualization() override;
+    void SaveDialog(QDomElement &domElement) override;
+    void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    void ReadToolAttributes(const QDomElement &domElement) override;
+    void SetVisualization() override;
+
 private:
     Q_DISABLE_COPY_MOVE(VToolBisector) // NOLINT
 
     /** @brief firstPointId id first point of angle. */
-    quint32         firstPointId;
+    quint32 firstPointId;
 
     /** @brief thirdPointId id third point of angle. */
-    quint32         thirdPointId;
+    quint32 thirdPointId;
 
-    VToolBisector(const VToolBisectorInitData &initData, QGraphicsItem *parent = nullptr);
+    explicit VToolBisector(const VToolBisectorInitData &initData, QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLBISECTOR_H

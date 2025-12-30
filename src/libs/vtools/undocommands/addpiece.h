@@ -44,8 +44,12 @@ class AddPiece : public VUndoCommand
     Q_OBJECT // NOLINT
 
 public:
-    AddPiece(const QDomElement &xml, VAbstractPattern *doc, const VContainer &data, VMainGraphicsScene *scene,
-             const QString &drawName = QString(), QUndoCommand *parent = nullptr);
+    AddPiece(const QDomElement &xml,
+             VAbstractPattern *doc,
+             const VContainer &data,
+             VMainGraphicsScene *scene,
+             QString drawName = QString(),
+             QUndoCommand *parent = nullptr);
     ~AddPiece() override;
 
     // cppcheck-suppress unusedFunction

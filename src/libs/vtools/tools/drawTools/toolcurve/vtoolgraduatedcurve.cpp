@@ -160,7 +160,6 @@ auto VToolGraduatedCurve::Create(VToolGraduatedCurveInitData &initData) -> VTool
         initData.scene->addItem(path);
         InitSplinePathToolConnections(initData.scene, path);
         VAbstractPattern::AddTool(initData.id, path);
-        initData.doc->IncrementReferens(curve->getIdTool());
         return path;
     }
     return nullptr;
@@ -306,23 +305,11 @@ void VToolGraduatedCurve::ShowContextMenu(QGraphicsSceneContextMenuEvent *event,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolGraduatedCurve::RemoveReferens()
-{
-    const auto curve = VAbstractTool::data.GetGObject(m_originCurveId);
-    doc->DecrementReferens(curve->getIdTool());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolGraduatedCurve::SaveDialog(QDomElement &domElement,
-                                     QList<quint32> &oldDependencies,
-                                     QList<quint32> &newDependencies)
+void VToolGraduatedCurve::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     QPointer<DialogGraduatedCurve> const dialogTool = qobject_cast<DialogGraduatedCurve *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
-
-    AddDependence(oldDependencies, m_originCurveId);
-    AddDependence(newDependencies, dialogTool->GetOriginCurveId());
 
     doc->SetAttribute(domElement, AttrCurve, dialogTool->GetOriginCurveId());
     doc->SetAttribute(domElement, AttrSuffix, dialogTool->GetSuffix());

@@ -510,27 +510,29 @@ auto VPiece::PlaceLabelPath(const VContainer *data) const -> QPainterPath
         try
         {
             const auto label = data->GeometricObject<VPlaceLabelItem>(placeLabel);
-            if (label->IsVisible())
+            if (!label->IsVisible())
             {
-                VLayoutPlaceLabel const layoutLabel(*label);
-                path.addPath(LabelShapePath(layoutLabel));
+                continue;
+            }
 
-                const QLineF mirrorLine = SeamMirrorLine(data);
-                if (!label->IsNotMirrored() && IsShowFullPiece() && !mirrorLine.isNull())
+            VLayoutPlaceLabel const layoutLabel(*label);
+            path.addPath(LabelShapePath(layoutLabel));
+
+            if (const QLineF mirrorLine = SeamMirrorLine(data);
+                !label->IsNotMirrored() && IsShowFullPiece() && !mirrorLine.isNull())
+            {
+                PlaceLabelImg shape = VAbstractPiece::PlaceLabelShape(layoutLabel);
+                const QTransform matrix = VGObject::FlippingMatrix(mirrorLine);
+                for (auto &points : shape)
                 {
-                    PlaceLabelImg shape = VAbstractPiece::PlaceLabelShape(layoutLabel);
-                    const QTransform matrix = VGObject::FlippingMatrix(mirrorLine);
-                    for (auto &points : shape)
-                    {
-                        std::transform(points.begin(),
-                                       points.end(),
-                                       points.begin(),
-                                       [&matrix](const VLayoutPoint &point) -> VLayoutPoint
-                                       { return MapPoint(point, matrix); });
-                    }
-
-                    path.addPath(LabelShapePath(shape));
+                    std::transform(points.begin(),
+                                   points.end(),
+                                   points.begin(),
+                                   [&matrix](const VLayoutPoint &point) -> VLayoutPoint
+                                   { return MapPoint(point, matrix); });
                 }
+
+                path.addPath(LabelShapePath(shape));
             }
         }
         catch (const VExceptionBadId &e)

@@ -1782,46 +1782,6 @@ void VToolUnionDetails::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolUnionDetails::incrementReferens()
-{
-    VDataTool::incrementReferens();
-    if (_referens == 1)
-    {
-        const QVector<quint32> objects = GetReferenceObjects();
-        for (auto object : objects)
-        {
-            doc->IncrementReferens(object);
-        }
-
-        QDomElement domElement = doc->FindElementById(m_id, getTagName());
-        if (domElement.isElement())
-        {
-            VAbstractPattern::SetParametrUsage(domElement, AttrInUse, NodeUsage::InUse);
-        }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolUnionDetails::decrementReferens()
-{
-    VDataTool::decrementReferens();
-    if (_referens == 0)
-    {
-        const QVector<quint32> objects = GetReferenceObjects();
-        for (auto object : objects)
-        {
-            doc->DecrementReferens(object);
-        }
-
-        QDomElement domElement = doc->FindElementById(m_id, getTagName());
-        if (domElement.isElement())
-        {
-            VAbstractPattern::SetParametrUsage(domElement, AttrInUse, NodeUsage::NotInUse);
-        }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolUnionDetails::GroupVisibility(quint32 object, bool visible)
 {
     Q_UNUSED(object)
@@ -1956,7 +1916,8 @@ void VToolUnionDetails::AddToModeling(const QDomElement &domElement)
     const QString drawName = DrawName(doc, d1id, d2id);
     SCASSERT(not drawName.isEmpty())
 
-    QDomElement modeling = doc->GetDraw(drawName).firstChildElement(VAbstractPattern::TagModeling);
+    const VPatternBlockMapper *blocks = doc->PatternBlockMapper();
+    QDomElement modeling = blocks->GetElement(drawName).firstChildElement(VAbstractPattern::TagModeling);
     if (not modeling.isNull())
     {
         modeling.appendChild(domElement);

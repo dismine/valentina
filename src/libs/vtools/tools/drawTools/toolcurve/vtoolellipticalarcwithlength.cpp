@@ -190,7 +190,6 @@ auto VToolEllipticalArcWithLength::Create(VToolEllipticalArcWithLengthInitData &
         initData.scene->addItem(toolArc);
         InitElArcToolConnections(initData.scene, toolArc);
         VAbstractPattern::AddTool(initData.id, toolArc);
-        initData.doc->IncrementReferens(c.getIdTool());
         return toolArc;
     }
     return nullptr;
@@ -372,25 +371,11 @@ void VToolEllipticalArcWithLength::ShowContextMenu(QGraphicsSceneContextMenuEven
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolEllipticalArcWithLength::RemoveReferens()
-{
-    const auto elArc = VAbstractTool::data.GeometricObject<VEllipticalArc>(m_id);
-    doc->DecrementReferens(elArc->GetCenter().getIdTool());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolEllipticalArcWithLength::SaveDialog(QDomElement &domElement,
-                                              QList<quint32> &oldDependencies,
-                                              QList<quint32> &newDependencies)
+void VToolEllipticalArcWithLength::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogEllipticalArcWithLength> dialogTool = qobject_cast<DialogEllipticalArcWithLength *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
-
-    QSharedPointer<VEllipticalArc> const elArc = VAbstractTool::data.GeometricObject<VEllipticalArc>(m_id);
-    SCASSERT(elArc.isNull() == false)
-    AddDependence(oldDependencies, elArc->GetCenter().id());
-    AddDependence(newDependencies, dialogTool->GetCenter());
 
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetCenter()));
     doc->SetAttribute(domElement, AttrRadius1, dialogTool->GetRadius1());

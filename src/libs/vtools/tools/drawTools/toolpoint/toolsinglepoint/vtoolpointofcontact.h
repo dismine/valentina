@@ -69,14 +69,15 @@ class VToolPointOfContact : public VToolSinglePoint
     Q_OBJECT // NOLINT
 
 public:
-    virtual void SetDialog() override;
+    ~VToolPointOfContact() override = default;
+    void SetDialog() override;
     static auto FindPoint(qreal radius, const QPointF &center, const QPointF &firstPoint, const QPointF &secondPoint,
                           QPointF *intersectionPoint) -> bool;
     static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                        VContainer *data) -> VToolPointOfContact *;
     static auto Create(VToolPointOfContactInitData &initData) -> VToolPointOfContact *;
     static const QString ToolType;
-    virtual auto type() const -> int override { return Type; }
+    auto type() const -> int override { return Type; }
     enum
     {
         Type = UserType + static_cast<int>(Tool::PointOfContact)
@@ -89,18 +90,16 @@ public:
     auto getArcRadius() const -> VFormula;
     void setArcRadius(const VFormula &value);
 
-    virtual void ShowVisualization(bool show) override;
+    void ShowVisualization(bool show) override;
 protected slots:
-    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) override;
+    void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) override;
 
 protected:
-    virtual void RemoveReferens() override;
-    virtual void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                            QList<quint32> &newDependencies) override;
-    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
-    virtual void ReadToolAttributes(const QDomElement &domElement) override;
-    virtual void SetVisualization() override;
-    virtual auto MakeToolTip() const -> QString override;
+    void SaveDialog(QDomElement &domElement) override;
+    void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    void ReadToolAttributes(const QDomElement &domElement) override;
+    void SetVisualization() override;
+    auto MakeToolTip() const -> QString override;
 
 private:
     Q_DISABLE_COPY_MOVE(VToolPointOfContact) // NOLINT
@@ -117,7 +116,7 @@ private:
     /** @brief secondPointId id second line point. */
     quint32 secondPointId;
 
-    VToolPointOfContact(const VToolPointOfContactInitData &initData, QGraphicsItem *parent = nullptr);
+    explicit VToolPointOfContact(const VToolPointOfContactInitData &initData, QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLPOINTOFCONTACT_H

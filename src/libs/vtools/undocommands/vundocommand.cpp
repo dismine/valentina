@@ -32,7 +32,10 @@
 #include <QDomNode>
 
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../tools/drawTools/operation/vabstractoperation.h"
+#include "../tools/nodeDetails/vnodepoint.h"
+#include "../tools/nodeDetails/vtoolpiecepath.h"
 #include "../vmisc/compatibility.h"
 #include "../vmisc/customevents.h"
 #include "../vmisc/def.h"
@@ -88,91 +91,83 @@ void VUndoCommand::UndoDeleteAfterSibling(QDomNode &parentNode, quint32 siblingI
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VUndoCommand::IncrementReferences(const QVector<quint32> &nodes) const
+void VUndoCommand::AddEdges(const QVector<quint32> &nodes) const
 {
-    for (qint32 i = 0; i < nodes.size(); ++i)
+    VPatternGraph *patternGraph = doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    for (auto id : nodes)
     {
-        try
-        {
-            doc->IncrementReferens(nodes.at(i));
-        }
-        catch (const VExceptionBadId &e)
-        { // ignoring
-            Q_UNUSED(e);
-        }
+        patternGraph->AddEdge(id, nodeId);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VUndoCommand::DecrementReferences(const QVector<quint32> &nodes) const
+void VUndoCommand::RemoveEdges(const QVector<quint32> &nodes) const
 {
-    for (qint32 i = 0; i < nodes.size(); ++i)
+    VPatternGraph *patternGraph = doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    for (auto id : nodes)
     {
-        try
-        {
-            doc->DecrementReferens(nodes.at(i));
-        }
-        catch (const VExceptionBadId &e)
-        { // ignoring
-            Q_UNUSED(e);
-        }
+        patternGraph->RemoveEdge(id, nodeId);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VUndoCommand::IncrementReferences(const QVector<CustomSARecord> &nodes) const
+void VUndoCommand::AddEdges(const QVector<CustomSARecord> &nodes) const
 {
     QVector<quint32> n;
     n.reserve(nodes.size());
 
-    for (qint32 i = 0; i < nodes.size(); ++i)
+    for (const auto &node : nodes)
     {
-        n.append(nodes.at(i).path);
+        n.append(node.path);
     }
 
-    IncrementReferences(n);
+    AddEdges(n);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VUndoCommand::DecrementReferences(const QVector<CustomSARecord> &nodes) const
+void VUndoCommand::RemoveEdges(const QVector<CustomSARecord> &nodes) const
 {
     QVector<quint32> n;
     n.reserve(nodes.size());
 
-    for (qint32 i = 0; i < nodes.size(); ++i)
+    for (const auto &node : nodes)
     {
-        n.append(nodes.at(i).path);
+        n.append(node.path);
     }
 
-    DecrementReferences(n);
+    RemoveEdges(n);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VUndoCommand::IncrementReferences(const QVector<VPieceNode> &nodes) const
+void VUndoCommand::AddEdges(const QVector<VPieceNode> &nodes) const
 {
     QVector<quint32> n;
     n.reserve(nodes.size());
 
-    for (qint32 i = 0; i < nodes.size(); ++i)
+    for (const auto &node : nodes)
     {
-        n.append(nodes.at(i).GetId());
+        n.append(node.GetId());
     }
 
-    IncrementReferences(n);
+    AddEdges(n);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VUndoCommand::DecrementReferences(const QVector<VPieceNode> &nodes) const
+void VUndoCommand::RemoveEdges(const QVector<VPieceNode> &nodes) const
 {
     QVector<quint32> n;
     n.reserve(nodes.size());
 
-    for (qint32 i = 0; i < nodes.size(); ++i)
+    for (const auto &node : nodes)
     {
-        n.append(nodes.at(i).GetId());
+        n.append(node.GetId());
     }
 
-    DecrementReferences(n);
+    RemoveEdges(n);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -211,4 +206,72 @@ auto VUndoCommand::GetDestinationObject(quint32 idTool, quint32 idPoint) const -
     }
 
     return {};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VUndoCommand::DisablePieceNodes(const VPiecePath &path)
+{
+    for (int i = 0; i < path.CountNodes(); ++i)
+    {
+        const VPieceNode &node = path.at(i);
+        if (node.GetTypeTool() != Tool::NodePoint)
+        {
+            continue;
+        }
+        try
+        {
+            if (auto *tool = qobject_cast<VNodePoint *>(VAbstractPattern::getTool(node.GetId())))
+            {
+                tool->setVisible(false);
+            }
+        }
+        catch (const VExceptionBadId &)
+        {
+            // ignore
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VUndoCommand::EnablePieceNodes(const VPiecePath &path)
+{
+    for (int i = 0; i < path.CountNodes(); ++i)
+    {
+        const VPieceNode &node = path.at(i);
+        if (node.GetTypeTool() != Tool::NodePoint)
+        {
+            continue;
+        }
+
+        try
+        {
+            if (auto *tool = qobject_cast<VNodePoint *>(VAbstractPattern::getTool(node.GetId())))
+            {
+                tool->setVisible(!node.IsExcluded());
+            }
+        }
+        catch (const VExceptionBadId &)
+        {
+            // ignore
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VUndoCommand::DisableInternalPaths(const QVector<quint32> &paths)
+{
+    for (auto path : paths)
+    {
+        try
+        {
+            if (auto *tool = qobject_cast<VToolPiecePath *>(VAbstractPattern::getTool(path)))
+            {
+                tool->setVisible(false);
+            }
+        }
+        catch (const VExceptionBadId &)
+        {
+            // ignore
+        }
+    }
 }

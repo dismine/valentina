@@ -103,10 +103,9 @@ protected:
     void AddToFile() override;
     void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
     void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
-    void RemoveReferens() override;
     auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
     void keyReleaseEvent(QKeyEvent *event) override;
-    void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies) override;
+    void SaveDialog(QDomElement &domElement) override;
     void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     void ReadToolAttributes(const QDomElement &domElement) override;
     void SetVisualization() override;
@@ -126,7 +125,7 @@ private:
 
     bool m_acceptHoverEvents;
 
-    VToolLine(const VToolLineInitData &initData, QGraphicsItem *parent = nullptr);
+    explicit VToolLine(const VToolLineInitData &initData, QGraphicsItem *parent = nullptr);
 
     void RefreshGeometry();
 };

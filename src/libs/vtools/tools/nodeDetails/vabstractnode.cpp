@@ -32,12 +32,11 @@
 #include <QUndoStack>
 
 #include "../ifc/exception/vexceptionwrongid.h"
-#include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vabstracttool.h"
-#include "../vgeometry/vgobject.h"
 #include "../vmisc/def.h"
-#include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 
 const QString VAbstractNode::AttrIdTool = QStringLiteral("idTool");
@@ -66,64 +65,12 @@ VAbstractNode::VAbstractNode(VAbstractPattern *doc,
     m_drawName(drawName),
     m_exluded(false)
 {
-    _referens = 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractNode::ShowVisualization(bool show)
 {
     Q_UNUSED(show)
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractNode::incrementReferens()
-{
-    VAbstractTool::incrementReferens();
-    if (_referens == 1)
-    {
-        if (idTool != NULL_ID)
-        {
-            doc->IncrementReferens(idTool);
-        }
-        else
-        {
-            const QSharedPointer<VGObject> node = VAbstractTool::data.GetGObject(idNode);
-            doc->IncrementReferens(node->getIdTool());
-        }
-        ShowNode();
-        QDomElement domElement = doc->FindElementById(m_id, getTagName());
-        if (domElement.isElement())
-        {
-            VDomDocument::SetParametrUsage(domElement, AttrInUse, NodeUsage::InUse);
-        }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief decrementReferens decrement reference for all parent objects.
- */
-void VAbstractNode::decrementReferens()
-{
-    VAbstractTool::decrementReferens();
-    if (_referens == 0)
-    {
-        if (idTool != NULL_ID)
-        {
-            doc->DecrementReferens(idTool);
-        }
-        else
-        {
-            const QSharedPointer<VGObject> node = VAbstractTool::data.GetGObject(idNode);
-            doc->DecrementReferens(node->getIdTool());
-        }
-        HideNode();
-        QDomElement domElement = doc->FindElementById(m_id, getTagName());
-        if (domElement.isElement())
-        {
-            VDomDocument::SetParametrUsage(domElement, AttrInUse, NodeUsage::NotInUse);
-        }
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -155,6 +102,29 @@ auto VAbstractNode::IsExluded() const -> bool
 void VAbstractNode::SetExluded(bool exluded)
 {
     m_exluded = exluded;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractNode::IsRemovable() const -> RemoveStatus
+{
+    if (!doc->IsPatternGraphComplete())
+    {
+        return RemoveStatus::Pending; // Data not ready yet
+    }
+
+    VPatternGraph const *patternGraph = doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    auto Filter = [](const auto &) -> auto { return true; };
+
+    auto const dependecies = patternGraph->TryGetDependentNodes(m_id, 1000, Filter);
+
+    if (!dependecies)
+    {
+        return RemoveStatus::Pending; // Lock timeout
+    }
+
+    return dependecies->isEmpty() ? RemoveStatus::Removable : RemoveStatus::Blocked;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -190,7 +160,8 @@ void VAbstractNode::AddToModeling(const QDomElement &domElement)
     }
     else
     {
-        modeling = doc->GetDraw(m_drawName).firstChildElement(VAbstractPattern::TagModeling);
+        const VPatternBlockMapper *blocks = doc->PatternBlockMapper();
+        modeling = blocks->GetElement(m_drawName).firstChildElement(VAbstractPattern::TagModeling);
     }
     modeling.appendChild(domElement);
 }

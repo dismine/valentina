@@ -238,9 +238,7 @@ private:
 
     void InitNodes(const VPiece &detail, VMainGraphicsScene *scene);
     static void InitNode(const VPieceNode &node, VMainGraphicsScene *scene, VToolSeamAllowance *parent);
-    void InitCSAPaths(const VPiece &detail) const;
     void InitInternalPaths(const VPiece &detail);
-    void InitSpecialPoints(const QVector<quint32> &points) const;
 
     auto PrepareLabelData(const VPatternLabelData &labelData, const QVector<quint32> &pins,
                           VTextGraphicsItem *labelItem, QPointF &pos, qreal &labelAngle) -> bool;

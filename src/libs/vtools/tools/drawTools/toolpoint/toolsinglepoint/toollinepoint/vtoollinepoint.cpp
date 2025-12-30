@@ -123,16 +123,6 @@ void VToolLinePoint::RefreshGeometry()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RemoveReferens decrement value of reference.
- */
-void VToolLinePoint::RemoveReferens()
-{
-    const auto basePoint = VAbstractTool::data.GetGObject(basePointId);
-    doc->DecrementReferens(basePoint->getIdTool());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolLinePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
     VToolSinglePoint::SaveOptions(tag, obj);

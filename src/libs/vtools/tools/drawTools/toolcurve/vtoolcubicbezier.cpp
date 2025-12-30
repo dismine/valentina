@@ -135,10 +135,6 @@ auto VToolCubicBezier::Create(VToolCubicBezierInitData initData) -> VToolCubicBe
         initData.scene->addItem(_spl);
         InitSplineToolConnections(initData.scene, _spl);
         VAbstractPattern::AddTool(initData.id, _spl);
-        initData.doc->IncrementReferens(initData.spline->GetP1().getIdTool());
-        initData.doc->IncrementReferens(initData.spline->GetP2().getIdTool());
-        initData.doc->IncrementReferens(initData.spline->GetP3().getIdTool());
-        initData.doc->IncrementReferens(initData.spline->GetP4().getIdTool());
         return _spl;
     }
     return nullptr;
@@ -210,38 +206,16 @@ void VToolCubicBezier::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, qu
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCubicBezier::RemoveReferens()
-{
-    const auto spl = VAbstractTool::data.GeometricObject<VCubicBezier>(m_id);
-    doc->DecrementReferens(spl->GetP1().getIdTool());
-    doc->DecrementReferens(spl->GetP2().getIdTool());
-    doc->DecrementReferens(spl->GetP3().getIdTool());
-    doc->DecrementReferens(spl->GetP4().getIdTool());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolCubicBezier::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                                  QList<quint32> &newDependencies)
+void VToolCubicBezier::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     auto *dialogTool = qobject_cast<DialogCubicBezier *>(m_dialog);
     SCASSERT(dialogTool != nullptr)
 
-    const auto oldSpl = VAbstractTool::data.GeometricObject<VCubicBezier>(m_id);
-    AddDependence(oldDependencies, oldSpl->GetP1().id());
-    AddDependence(oldDependencies, oldSpl->GetP2().id());
-    AddDependence(oldDependencies, oldSpl->GetP3().id());
-    AddDependence(oldDependencies, oldSpl->GetP4().id());
-
-    const VCubicBezier spl = dialogTool->GetSpline();
-    AddDependence(newDependencies, spl.GetP1().id());
-    AddDependence(newDependencies, spl.GetP2().id());
-    AddDependence(newDependencies, spl.GetP3().id());
-    AddDependence(newDependencies, spl.GetP4().id());
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
                                          [](const QString &notes) noexcept { return notes.isEmpty(); });
 
-    SetSplineAttributes(domElement, spl);
+    SetSplineAttributes(domElement, dialogTool->GetSpline());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -46,7 +46,7 @@ class VToolPiecePath : public VAbstractNode, public QGraphicsPathItem
 {
     Q_OBJECT // NOLINT
 public:
-    ~VToolPiecePath() = default;
+    ~VToolPiecePath() override = default;
 
     static auto Create(const QPointer<DialogTool> &dialog,
                        VMainGraphicsScene *scene,
@@ -60,9 +60,6 @@ public:
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 
-    void incrementReferens() override;
-    void decrementReferens() override;
-
     void RefreshGeometry();
 
     static void AddAttributes(VAbstractPattern *doc, QDomElement &domElement, quint32 id, const VPiecePath &path);
@@ -73,8 +70,6 @@ public slots:
 
 protected:
     void AddToFile() override;
-    void ShowNode() override;
-    void HideNode() override;
     void ToolCreation(const Source &typeCreation) override;
 
 private:

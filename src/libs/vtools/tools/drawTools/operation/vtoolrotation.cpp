@@ -176,11 +176,6 @@ auto VToolRotation::Create(VToolRotationInitData &initData) -> VToolRotation *
         initData.scene->addItem(tool);
         InitOperationToolConnections(initData.scene, tool);
         VAbstractPattern::AddTool(initData.id, tool);
-        // initData.doc->IncrementReferens(originPoint.getIdTool());
-        for (const auto &object : std::as_const(initData.source))
-        {
-            initData.doc->IncrementReferens(initData.data->GetGObject(object.id)->getIdTool());
-        }
 
         if (initData.typeCreation == Source::FromGui && initData.hasLinkedVisibilityGroup)
         {
@@ -259,15 +254,11 @@ void VToolRotation::SetVisualization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolRotation::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                               QList<quint32> &newDependencies)
+void VToolRotation::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogRotation> dialogTool = qobject_cast<DialogRotation *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
-
-    AddDependence(oldDependencies, origPointId);
-    AddDependence(newDependencies, dialogTool->GetOrigPointId());
 
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetOrigPointId()));
     doc->SetAttribute(domElement, AttrAngle, dialogTool->GetAngle());

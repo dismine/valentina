@@ -40,18 +40,6 @@ void VLitePattern::CreateEmptyFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLitePattern::IncrementReferens(quint32 id) const
-{
-    Q_UNUSED(id)
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VLitePattern::DecrementReferens(quint32 id) const
-{
-    Q_UNUSED(id)
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 auto VLitePattern::GenerateLabel(const LabelType &type, const QString &reservedName) const -> QString
 {
     Q_UNUSED(type)

@@ -67,38 +67,39 @@ class VToolPointOfIntersectionCircles : public VToolSinglePoint
 {
     Q_OBJECT // NOLINT
 public:
-    virtual void SetDialog() override;
+    ~VToolPointOfIntersectionCircles() override = default;
+    void SetDialog() override;
     static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                        VContainer *data) -> VToolPointOfIntersectionCircles *;
     static auto Create(VToolPointOfIntersectionCirclesInitData &initData) -> VToolPointOfIntersectionCircles *;
     static auto FindPoint(const QPointF &c1Point, const QPointF &c2Point, qreal c1Radius, qreal c2Radius,
                           const CrossCirclesPoint crossPoint, QPointF *intersectionPoint) -> bool;
     static const QString ToolType;
-    virtual auto type() const -> int override { return Type; }
+    auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::PointOfIntersectionCircles) };
 
     auto FirstCircleCenterPointName() const -> QString;
     auto SecondCircleCenterPointName() const -> QString;
 
     auto GetFirstCircleRadius() const -> VFormula;
-    void     SetFirstCircleRadius(const VFormula &value);
+    void SetFirstCircleRadius(const VFormula &value);
 
     auto GetSecondCircleRadius() const -> VFormula;
-    void     SetSecondCircleRadius(const VFormula &value);
+    void SetSecondCircleRadius(const VFormula &value);
 
     auto GetCrossCirclesPoint() const -> CrossCirclesPoint;
-    void              SetCrossCirclesPoint(const CrossCirclesPoint &value);
+    void SetCrossCirclesPoint(const CrossCirclesPoint &value);
 
-    virtual void ShowVisualization(bool show) override;
+    void ShowVisualization(bool show) override;
 protected slots:
-    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
+    void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) override;
+
 protected:
-    virtual void RemoveReferens() override;
-    virtual void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                            QList<quint32> &newDependencies) override;
-    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
-    virtual void ReadToolAttributes(const QDomElement &domElement) override;
-    virtual void SetVisualization() override;
+    void SaveDialog(QDomElement &domElement) override;
+    void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    void ReadToolAttributes(const QDomElement &domElement) override;
+    void SetVisualization() override;
+
 private:
     Q_DISABLE_COPY_MOVE(VToolPointOfIntersectionCircles) // NOLINT
 
@@ -110,8 +111,8 @@ private:
 
     CrossCirclesPoint crossPoint;
 
-    VToolPointOfIntersectionCircles(const VToolPointOfIntersectionCirclesInitData &initData,
-                                    QGraphicsItem * parent = nullptr);
+    explicit VToolPointOfIntersectionCircles(const VToolPointOfIntersectionCirclesInitData &initData,
+                                             QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLPOINTOFINTERSECTIONCIRCLES_H

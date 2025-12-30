@@ -27,15 +27,22 @@
  *************************************************************************/
 
 #include "addpiece.h"
+
+#include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "../vpatterndb/vpiecepath.h"
 #include "../vwidgets/vmaingraphicsview.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-AddPiece::AddPiece(const QDomElement &xml, VAbstractPattern *doc, const VContainer &data, VMainGraphicsScene *scene,
-                   const QString &drawName, QUndoCommand *parent)
+AddPiece::AddPiece(const QDomElement &xml,
+                   VAbstractPattern *doc,
+                   const VContainer &data,
+                   VMainGraphicsScene *scene,
+                   QString drawName,
+                   QUndoCommand *parent)
   : VUndoCommand(xml, doc, parent),
-    m_drawName(drawName),
+    m_drawName(std::move(drawName)),
     m_scene(scene),
     m_data(data)
 {
@@ -57,48 +64,43 @@ void AddPiece::undo()
     qCDebug(vUndo, "Undo.");
 
     QDomElement details = GetDetailsSection();
-    if (not details.isNull())
-    {
-        QDomElement const domElement = doc->FindElementById(nodeId, VAbstractPattern::TagDetail);
-        if (domElement.isElement())
-        {
-            if (details.removeChild(domElement).isNull())
-            {
-                qCDebug(vUndo, "Can't delete node");
-                return;
-            }
-
-            m_tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId));
-            SCASSERT(not m_tool.isNull());
-            m_tool->DisconnectOutsideSignals();
-            m_tool->hide();
-            m_tool->CancelLabelRendering();
-
-            m_scene->removeItem(m_tool);
-
-            VAbstractPattern::RemoveTool(nodeId);
-            m_data.RemovePiece(nodeId);
-            VAbstractTool::RemoveRecord(m_record, doc);
-
-            DecrementReferences(m_detail.GetPath().GetNodes());
-            DecrementReferences(m_detail.GetCustomSARecords());
-            DecrementReferences(m_detail.GetInternalPaths());
-            DecrementReferences(m_detail.GetPins());
-
-            emit doc->UpdateInLayoutList();
-        }
-        else
-        {
-            qCDebug(vUndo, "Can't get node by id = %u.", nodeId);
-            return;
-        }
-    }
-    else
+    if (details.isNull())
     {
         qCDebug(vUndo, "Can't find tag %s.", qUtf8Printable(VAbstractPattern::TagDetails));
         return;
     }
-    emit NeedFullParsing();
+
+    QDomElement const domElement = doc->FindElementById(nodeId, VAbstractPattern::TagDetail);
+    if (domElement.isElement())
+    {
+        qCDebug(vUndo, "Can't get node by id = %u.", nodeId);
+        return;
+    }
+
+    if (details.removeChild(domElement).isNull())
+    {
+        qCDebug(vUndo, "Can't delete node");
+        return;
+    }
+
+    m_tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId));
+    SCASSERT(not m_tool.isNull());
+    m_tool->DisconnectOutsideSignals();
+    m_tool->hide();
+    m_tool->CancelLabelRendering();
+
+    m_scene->removeItem(m_tool);
+
+    VAbstractPattern::RemoveTool(nodeId);
+    m_data.RemovePiece(nodeId);
+    doc->getHistory()->removeOne(m_record);
+
+    VPatternGraph *patternGraph = doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->RemoveVertex(nodeId);
+
+    emit doc->UpdateInLayoutList();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -107,31 +109,38 @@ void AddPiece::redo()
     qCDebug(vUndo, "Redo.");
 
     QDomElement details = GetDetailsSection();
-    if (not details.isNull())
-    {
-        details.appendChild(xml);
-
-        if (not m_tool.isNull())
-        {
-            VAbstractPattern::AddTool(nodeId, m_tool);
-            m_data.UpdatePiece(nodeId, m_detail);
-
-            m_tool->ReinitInternals(m_detail, m_scene);
-
-            VAbstractTool::AddRecord(m_record, doc);
-            m_scene->addItem(m_tool);
-            m_tool->ConnectOutsideSignals();
-            m_tool->show();
-            VMainGraphicsView::NewSceneRect(m_scene, VAbstractValApplication::VApp()->getSceneView(), m_tool);
-            m_tool.clear();
-        }
-
-        emit doc->UpdateInLayoutList();
-    }
-    else
+    if (details.isNull())
     {
         qCDebug(vUndo, "Can't find tag %s.", qUtf8Printable(VAbstractPattern::TagDetails));
+        return;
     }
+
+    details.appendChild(xml);
+
+    if (not m_tool.isNull())
+    {
+        VPatternGraph *patternGraph = doc->PatternGraph();
+        SCASSERT(patternGraph != nullptr)
+
+        patternGraph->AddVertex(nodeId, VNodeType::PIECE, doc->PatternBlockMapper()->FindId(m_drawName));
+
+        const auto varData = m_data.DataDependencyVariables();
+        VToolSeamAllowance::AddPieceDependencies(nodeId, m_detail, doc, varData);
+
+        VAbstractPattern::AddTool(nodeId, m_tool);
+        m_data.UpdatePiece(nodeId, m_detail);
+
+        m_tool->ReinitInternals(m_detail, m_scene);
+
+        VAbstractTool::AddRecord(m_record, doc);
+        m_scene->addItem(m_tool);
+        m_tool->ConnectOutsideSignals();
+        m_tool->show();
+        VMainGraphicsView::NewSceneRect(m_scene, VAbstractValApplication::VApp()->getSceneView(), m_tool);
+        m_tool.clear();
+    }
+
+    emit doc->UpdateInLayoutList();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -144,7 +153,8 @@ auto AddPiece::GetDetailsSection() const -> QDomElement
     }
     else
     {
-        details = doc->GetDraw(m_drawName).firstChildElement(VAbstractPattern::TagDetails);
+        const VPatternBlockMapper *blocks = doc->PatternBlockMapper();
+        details = blocks->GetElement(m_drawName).firstChildElement(VAbstractPattern::TagDetails);
     }
     return details;
 }

@@ -709,13 +709,6 @@ void VDomDocument::RefreshElementIdCache()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VDomDocument::Compare(const QDomElement &element1, const QDomElement &element2) -> bool
-{
-    QFuture<bool> const lessThen2 = QtConcurrent::run(LessThen, element2, element1);
-    return !LessThen(element1, element2) && !lessThen2.result();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VDomDocument::CacheRefreshed()
 {
     if (m_watcher->isCanceled())

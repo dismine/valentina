@@ -2958,10 +2958,6 @@ void VPattern::ParseOldToolSplinePath(VMainGraphicsScene *scene, QDomElement &do
 
                 VFSplinePoint const splPoint(p, kAsm1, line.angle(), kAsm2, angle);
                 points.append(splPoint);
-                if (parse == Document::FullParse)
-                {
-                    IncrementReferens(p.getIdTool());
-                }
             }
         }
 
@@ -3020,11 +3016,6 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
                 initData.l2.append(GetParametrString(element, AttrLength2, QChar('0')));
                 const quint32 pSpline = GetParametrUInt(element, AttrPSpline, NULL_ID_STR);
                 initData.points.append(pSpline);
-
-                if (parse == Document::FullParse)
-                {
-                    IncrementReferens(data->GeometricObject<VPointF>(pSpline)->getIdTool());
-                }
             }
         }
 
@@ -3221,10 +3212,6 @@ void VPattern::ParseToolCubicBezierPath(VMainGraphicsScene *scene, const QDomEle
                 const quint32 pSpline = GetParametrUInt(element, AttrPSpline, NULL_ID_STR);
                 const VPointF p = *data->GeometricObject<VPointF>(pSpline);
                 points.append(p);
-                if (parse == Document::FullParse)
-                {
-                    IncrementReferens(p.getIdTool());
-                }
             }
         }
 
@@ -4810,32 +4797,4 @@ template <typename T> auto VPattern::ToolBoundingRect(const QRectF &rec, quint32
         qDebug() << "Can't find tool with id=" << id;
     }
     return recTool;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief IncrementReferens increment reference parent objects.
- * @param id parent object id.
- */
-void VPattern::IncrementReferens(quint32 id) const
-{
-    Q_ASSERT_X(id != 0, Q_FUNC_INFO, "id == 0");
-    ToolExists(id);
-    VDataTool *tool = tools.value(id);
-    SCASSERT(tool != nullptr)
-    tool->incrementReferens();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief DecrementReferens decrement reference parent objects.
- * @param id parent object id.
- */
-void VPattern::DecrementReferens(quint32 id) const
-{
-    Q_ASSERT_X(id != 0, Q_FUNC_INFO, "id == 0");
-    ToolExists(id);
-    VDataTool *tool = tools.value(id);
-    SCASSERT(tool != nullptr)
-    tool->decrementReferens();
 }

@@ -404,6 +404,51 @@ auto VPatternGraph::GetOutDegree(vidtype id) const -> std::size_t
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
+ * @brief Remove all incoming edges to a node
+ * @param id Node ID whose incoming edges should be removed
+ * @return Number of edges removed
+ * 
+ * Example: If A->C, B->C exist, RemoveIncomingEdges(C) removes both edges
+ */
+auto VPatternGraph::RemoveIncomingEdges(vidtype id) -> size_t
+{
+    QWriteLocker const m_locker(&m_lock);
+
+    if (!m_idToVertex.contains(id))
+    {
+        return 0;
+    }
+
+    auto vertexId = m_idToVertex[id];
+    if (!m_graph.has_vertex(vertexId))
+    {
+        return 0;
+    }
+
+    size_t removedCount = 0;
+
+    // Collect all predecessors first to avoid iterator invalidation
+    std::vector<vertex_id_t> predecessors;
+    for (const auto &[vid, node] : m_graph.get_vertices())
+    {
+        if (m_graph.has_edge(vid, vertexId))
+        {
+            predecessors.push_back(vid);
+        }
+    }
+
+    // Remove all incoming edges
+    for (const auto &pred : predecessors)
+    {
+        m_graph.remove_edge(pred, vertexId);
+        ++removedCount;
+    }
+
+    return removedCount;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
  * @brief Clear all vertices and edges from the graph
  */
 void VPatternGraph::Clear()

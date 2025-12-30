@@ -144,8 +144,6 @@ public:
 
     void RefreshElementIdCache();
 
-    static auto Compare(const QDomElement &element1, const QDomElement &element2) -> bool;
-
 protected:
     auto setTagText(const QString &tag, const QString &text) -> bool;
     auto setTagText(QDomElement &domElement, const QString &text) -> bool;

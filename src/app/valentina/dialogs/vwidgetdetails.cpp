@@ -28,9 +28,9 @@
 
 #include "vwidgetdetails.h"
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
+#include "../vtools/tools/vabstracttool.h"
 #include "../vtools/tools/vtoolseamallowance.h"
 #include "../vtools/undocommands/renamepiece.h"
 #include "../vtools/undocommands/togglepiecestate.h"
@@ -312,7 +312,7 @@ void VWidgetDetails::ShowContextMenu(const QPoint &pos)
                 actionPieceOptions = menu->addAction(FromTheme(VThemeIcon::PreferencesOther), tr("Piece options"));
 
                 actionDeletePiece = menu->addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete piece"));
-                actionDeletePiece->setDisabled(toolPiece->referens() > 0);
+                actionDeletePiece->setEnabled(toolPiece->IsRemovable() == RemoveStatus::Removable);
             }
         }
         catch (const VExceptionBadId &)

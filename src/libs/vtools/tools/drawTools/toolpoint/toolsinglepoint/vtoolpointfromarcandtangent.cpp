@@ -157,8 +157,6 @@ auto VToolPointFromArcAndTangent::Create(VToolPointFromArcAndTangentInitData ini
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
-        initData.doc->IncrementReferens(arc.getIdTool());
-        initData.doc->IncrementReferens(tPoint.getIdTool());
         return point;
     }
     return nullptr;
@@ -280,27 +278,11 @@ void VToolPointFromArcAndTangent::ShowContextMenu(QGraphicsSceneContextMenuEvent
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPointFromArcAndTangent::RemoveReferens()
-{
-    const auto arc = VAbstractTool::data.GetGObject(arcId);
-    const auto tP = VAbstractTool::data.GetGObject(tangentPointId);
-
-    doc->DecrementReferens(arc->getIdTool());
-    doc->DecrementReferens(tP->getIdTool());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolPointFromArcAndTangent::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                                             QList<quint32> &newDependencies)
+void VToolPointFromArcAndTangent::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogPointFromArcAndTangent> dialogTool = qobject_cast<DialogPointFromArcAndTangent *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
-
-    AddDependence(oldDependencies, arcId);
-    AddDependence(oldDependencies, tangentPointId);
-    AddDependence(newDependencies, dialogTool->GetArcId());
-    AddDependence(newDependencies, dialogTool->GetTangentPointId());
 
     doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrArc, QString().setNum(dialogTool->GetArcId()));

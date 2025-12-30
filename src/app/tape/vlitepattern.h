@@ -40,9 +40,6 @@ public:
 
     void CreateEmptyFile() override;
 
-    void IncrementReferens(quint32 id) const override;
-    void DecrementReferens(quint32 id) const override;
-
     auto GenerateLabel(const LabelType &type, const QString &reservedName = QString())const -> QString override;
     auto GenerateSuffix() const -> QString override;
 

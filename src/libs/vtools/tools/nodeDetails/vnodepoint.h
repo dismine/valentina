@@ -91,8 +91,6 @@ protected:
     void AddToFile() override;
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
-    void ShowNode() override;
-    void HideNode() override;
     void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
     void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
 
@@ -103,7 +101,7 @@ private:
     explicit VNodePoint(const VAbstractNodeInitData &initData, QObject *qoParent = nullptr,
                         QGraphicsItem *parent = nullptr);
 
-    auto InitContextMenu(QMenu *menu, vidtype pieceId, quint32 referens) -> QHash<int, QAction *>;
+    auto InitContextMenu(QMenu *menu, vidtype pieceId, RemoveStatus status) -> QHash<int, QAction *>;
     void InitPassmarkMenu(QMenu *menu, vidtype pieceId, QHash<int, QAction *> &contextMenu);
     void InitAngleTypeMenu(QMenu *menu, vidtype pieceId, QHash<int, QAction *> &contextMenu);
     void InitPassmarkAngleTypeMenu(QMenu *menu, vidtype pieceId, QHash<int, QAction *> &contextMenu);

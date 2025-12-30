@@ -190,7 +190,6 @@ auto VToolArc::Create(VToolArcInitData &initData) -> VToolArc *
         initData.scene->addItem(toolArc);
         InitArcToolConnections(initData.scene, toolArc);
         VAbstractPattern::AddTool(initData.id, toolArc);
-        initData.doc->IncrementReferens(c.getIdTool());
         return toolArc;
     }
     return nullptr;
@@ -320,28 +319,13 @@ void VToolArc::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief RemoveReferens decrement value of reference.
- */
-void VToolArc::RemoveReferens()
-{
-    const auto arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
-    doc->DecrementReferens(arc->GetCenter().getIdTool());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolArc::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies)
+void VToolArc::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     QPointer<DialogArc> const dialogTool = qobject_cast<DialogArc *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
-
-    QSharedPointer<VArc> const arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
-    SCASSERT(arc.isNull() == false)
-    AddDependence(oldDependencies, arc->GetCenter().id());
-    AddDependence(newDependencies, dialogTool->GetCenter());
 
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetCenter()));
     doc->SetAttribute(domElement, AttrRadius, dialogTool->GetRadius());

@@ -149,8 +149,7 @@ protected:
 
     void AddToFile() override;
     void ChangeLabelVisibility(quint32 id, bool visible) override;
-    void ApplyToolOptions(const QList<quint32> &oldDependencies, const QList<quint32> &newDependencies,
-                          const QDomElement &oldDomElement, const QDomElement &newDomElement) override;
+    void ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement) override;
     void PerformDelete() override;
     void ReadToolAttributes(const QDomElement &domElement) override;
     void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;

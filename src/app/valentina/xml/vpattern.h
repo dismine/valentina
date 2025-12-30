@@ -63,9 +63,6 @@ public:
     auto GetCompleteData() const -> VContainer override;
     auto GetCompletePPData(const QString &name) const -> VContainer override;
 
-    void IncrementReferens(quint32 id) const override;
-    void DecrementReferens(quint32 id) const override;
-
     auto SPointActiveDraw() -> quint32;
 
     auto GetActivePPPieces() const -> QVector<quint32>;

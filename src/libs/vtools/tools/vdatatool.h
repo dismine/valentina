@@ -54,18 +54,11 @@ public:
     auto getData() const -> VContainer;
     void setData(const VContainer *value);
 
-    virtual auto referens() const -> quint32;
-    virtual void incrementReferens();
-    virtual void decrementReferens();
-
     virtual void GroupVisibility(quint32 object, bool visible) = 0;
 
 protected:
     /** @brief data container with data */
     VContainer data;
-
-    /** @brief _referens keep count tools what use this tool. If value more than 1 you can't delete tool. */
-    quint32 _referens;
 
 private:
     Q_DISABLE_COPY_MOVE(VDataTool) // NOLINT
@@ -89,25 +82,6 @@ inline auto VDataTool::getData() const -> VContainer
 inline void VDataTool::setData(const VContainer *value)
 {
     data = *value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief referens return count of referens.
- * @return count count of referens.
- */
-inline auto VDataTool::referens() const -> quint32
-{
-    return _referens;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief incrementReferens increment referens.
- */
-inline void VDataTool::incrementReferens()
-{
-    ++_referens;
 }
 
 #endif // VDATATOOL_H

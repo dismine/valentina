@@ -173,7 +173,6 @@ auto VToolArcWithLength::Create(VToolArcWithLengthInitData &initData) -> VToolAr
         initData.scene->addItem(toolArc);
         InitArcToolConnections(initData.scene, toolArc);
         VAbstractPattern::AddTool(initData.id, toolArc);
-        initData.doc->IncrementReferens(c.getIdTool());
         return toolArc;
     }
     return nullptr;
@@ -305,24 +304,11 @@ void VToolArcWithLength::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolArcWithLength::RemoveReferens()
-{
-    const auto arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
-    doc->DecrementReferens(arc->GetCenter().getIdTool());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolArcWithLength::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                                    QList<quint32> &newDependencies)
+void VToolArcWithLength::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogArcWithLength> dialogTool = qobject_cast<DialogArcWithLength *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
-
-    QSharedPointer<VArc> const arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
-    SCASSERT(arc.isNull() == false)
-    AddDependence(oldDependencies, arc->GetCenter().id());
-    AddDependence(newDependencies, dialogTool->GetCenter());
 
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetCenter()));
     doc->SetAttribute(domElement, AttrRadius, dialogTool->GetRadius());

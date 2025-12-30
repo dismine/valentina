@@ -654,25 +654,18 @@ void VAbstractOperation::ChangeLabelVisibility(quint32 id, bool visible)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractOperation::ApplyToolOptions(const QList<quint32> &oldDependencies, const QList<quint32> &newDependencies,
-                                          const QDomElement &oldDomElement, const QDomElement &newDomElement)
+void VAbstractOperation::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
 {
-    bool const updateToolOptions =
-        newDependencies != oldDependencies || not VDomDocument::Compare(newDomElement, oldDomElement);
     bool const updateVisibilityOptions = NeedUpdateVisibilityGroup();
 
-    if (updateToolOptions && updateVisibilityOptions)
+    if (updateVisibilityOptions)
     {
         VAbstractApplication::VApp()->getUndoStack()->beginMacro(tr("operation options"));
     }
 
-    if (updateToolOptions)
-    {
-        auto *saveOptions =
-            new SaveToolOptions(oldDomElement, newDomElement, oldDependencies, newDependencies, doc, m_id);
-        connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        VAbstractApplication::VApp()->getUndoStack()->push(saveOptions);
-    }
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+    connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    VAbstractApplication::VApp()->getUndoStack()->push(saveOptions);
 
     if (updateVisibilityOptions)
     {
@@ -708,7 +701,7 @@ void VAbstractOperation::ApplyToolOptions(const QList<quint32> &oldDependencies,
         }
     }
 
-    if (updateToolOptions && updateVisibilityOptions)
+    if (updateVisibilityOptions)
     {
         VAbstractApplication::VApp()->getUndoStack()->endMacro();
     }

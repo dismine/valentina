@@ -89,12 +89,7 @@ auto VToolCubicBezierPath::Create(const QPointer<DialogTool> &dialog, VMainGraph
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
     initData.notes = dialogTool->GetNotes();
-
     initData.path = new VCubicBezierPath(dialogTool->GetPath());
-    for (qint32 i = 0; i < initData.path->CountPoints(); ++i)
-    {
-        doc->IncrementReferens((*initData.path)[i].getIdTool());
-    }
 
     VToolCubicBezierPath *spl = Create(initData);
     if (spl != nullptr)
@@ -194,39 +189,16 @@ void VToolCubicBezierPath::ShowContextMenu(QGraphicsSceneContextMenuEvent *event
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCubicBezierPath::RemoveReferens()
-{
-    const QSharedPointer<VCubicBezierPath> splPath = VAbstractTool::data.GeometricObject<VCubicBezierPath>(m_id);
-    for (qint32 i = 0; i < splPath->CountPoints(); ++i)
-    {
-        doc->DecrementReferens(splPath->at(i).getIdTool());
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolCubicBezierPath::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                                      QList<quint32> &newDependencies)
+void VToolCubicBezierPath::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     auto *const dialogTool = qobject_cast<DialogCubicBezierPath *>(m_dialog);
     SCASSERT(dialogTool != nullptr)
 
-    const auto oldSplPath = VAbstractTool::data.GeometricObject<VCubicBezierPath>(m_id);
-    for (qint32 i = 0; i < oldSplPath->CountPoints(); ++i)
-    {
-        AddDependence(oldDependencies, oldSplPath->at(i).id());
-    }
-
-    const VCubicBezierPath splPath = dialogTool->GetPath();
-    for (qint32 i = 0; i < splPath.CountPoints(); ++i)
-    {
-        AddDependence(newDependencies, splPath.at(i).id());
-    }
-
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
                                          [](const QString &notes) noexcept { return notes.isEmpty(); });
 
-    SetSplinePathAttributes(domElement, splPath);
+    SetSplinePathAttributes(domElement, dialogTool->GetPath());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -26,16 +26,22 @@
  **
  *************************************************************************/
 #include "saveplacelabeloptions.h"
+
+#include "../ifc/xml/vpatterngraph.h"
 #include "../tools/nodeDetails/vtoolplacelabel.h"
 #include "../tools/vtoolseamallowance.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-SavePlaceLabelOptions::SavePlaceLabelOptions(quint32 pieceId, const VPlaceLabelItem &oldLabel,
-                                             const VPlaceLabelItem &newLabel, VAbstractPattern *doc, VContainer *data,
-                                             quint32 id, QUndoCommand *parent)
-  : VUndoCommand(QDomElement(), doc, parent),
-    m_oldLabel(oldLabel),
-    m_newLabel(newLabel),
+SavePlaceLabelOptions::SavePlaceLabelOptions(quint32 pieceId,
+                                             VPlaceLabelItem oldLabel,
+                                             VPlaceLabelItem newLabel,
+                                             VAbstractPattern *doc,
+                                             VContainer *data,
+                                             quint32 id,
+                                             QUndoCommand *parent)
+  : VUndoCommand(doc, parent),
+    m_oldLabel(std::move(oldLabel)),
+    m_newLabel(std::move(newLabel)),
     m_data(data),
     m_pieceId(pieceId)
 {
@@ -49,30 +55,35 @@ void SavePlaceLabelOptions::undo()
     qCDebug(vUndo, "Undo.");
 
     QDomElement domElement = doc->FindElementById(nodeId, VAbstractPattern::TagPoint);
-    if (domElement.isElement())
-    {
-        VToolPlaceLabel::AddAttributes(doc, domElement, nodeId, m_oldLabel);
-
-        if (m_oldLabel.GetCenterPoint() != m_newLabel.GetCenterPoint())
-        {
-            doc->IncrementReferens(m_oldLabel.GetCenterPoint());
-            doc->DecrementReferens(m_newLabel.GetCenterPoint());
-        }
-
-        SCASSERT(m_data);
-        m_data->UpdateGObject(nodeId, new VPlaceLabelItem(m_oldLabel));
-
-        if (m_pieceId != NULL_ID)
-        {
-            if (auto *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(m_pieceId)))
-            {
-                tool->RefreshGeometry();
-            }
-        }
-    }
-    else
+    if (!domElement.isElement())
     {
         qCDebug(vUndo, "Can't find place label with id = %u.", nodeId);
+        return;
+    }
+
+    VToolPlaceLabel::AddAttributes(doc, domElement, nodeId, m_oldLabel);
+
+    VPatternGraph *patternGraph = doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->RemoveIncomingEdges(nodeId);
+    patternGraph->AddEdge(m_oldLabel.GetCenterPoint(), nodeId);
+
+    const auto varData = m_data->DataDependencyVariables();
+    doc->FindFormulaDependencies(m_oldLabel.GetWidthFormula(), nodeId, varData);
+    doc->FindFormulaDependencies(m_oldLabel.GetHeightFormula(), nodeId, varData);
+    doc->FindFormulaDependencies(m_oldLabel.GetAngleFormula(), nodeId, varData);
+    doc->FindFormulaDependencies(m_oldLabel.GetVisibilityTrigger(), nodeId, varData);
+
+    SCASSERT(m_data);
+    m_data->UpdateGObject(nodeId, new VPlaceLabelItem(m_oldLabel));
+
+    if (m_pieceId != NULL_ID)
+    {
+        if (auto *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(m_pieceId)))
+        {
+            tool->RefreshGeometry();
+        }
     }
 }
 
@@ -82,30 +93,35 @@ void SavePlaceLabelOptions::redo()
     qCDebug(vUndo, "Redo.");
 
     QDomElement domElement = doc->FindElementById(nodeId, VAbstractPattern::TagPoint);
-    if (domElement.isElement())
-    {
-        VToolPlaceLabel::AddAttributes(doc, domElement, nodeId, m_newLabel);
-
-        if (m_oldLabel.GetCenterPoint() != m_newLabel.GetCenterPoint())
-        {
-            doc->IncrementReferens(m_newLabel.GetCenterPoint());
-            doc->DecrementReferens(m_oldLabel.GetCenterPoint());
-        }
-
-        SCASSERT(m_data);
-        m_data->UpdateGObject(nodeId, new VPlaceLabelItem(m_newLabel));
-
-        if (m_pieceId != NULL_ID)
-        {
-            if (auto *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(m_pieceId)))
-            {
-                tool->RefreshGeometry();
-            }
-        }
-    }
-    else
+    if (!domElement.isElement())
     {
         qCDebug(vUndo, "Can't find path with id = %u.", nodeId);
+        return;
+    }
+
+    VToolPlaceLabel::AddAttributes(doc, domElement, nodeId, m_newLabel);
+
+    VPatternGraph *patternGraph = doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->RemoveIncomingEdges(nodeId);
+    patternGraph->AddEdge(m_newLabel.GetCenterPoint(), nodeId);
+
+    const auto varData = m_data->DataDependencyVariables();
+    doc->FindFormulaDependencies(m_newLabel.GetWidthFormula(), nodeId, varData);
+    doc->FindFormulaDependencies(m_newLabel.GetHeightFormula(), nodeId, varData);
+    doc->FindFormulaDependencies(m_newLabel.GetAngleFormula(), nodeId, varData);
+    doc->FindFormulaDependencies(m_newLabel.GetVisibilityTrigger(), nodeId, varData);
+
+    SCASSERT(m_data);
+    m_data->UpdateGObject(nodeId, new VPlaceLabelItem(m_newLabel));
+
+    if (m_pieceId != NULL_ID)
+    {
+        if (auto *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(m_pieceId)))
+        {
+            tool->RefreshGeometry();
+        }
     }
 }
 

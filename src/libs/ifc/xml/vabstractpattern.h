@@ -153,9 +153,6 @@ public:
 
     void setXMLContent(const QString &fileName) override;
 
-    virtual void IncrementReferens(quint32 id) const = 0;
-    virtual void DecrementReferens(quint32 id) const = 0;
-
     virtual auto GenerateLabel(const LabelType &type, const QString &reservedName = QString()) const -> QString = 0;
     virtual auto GenerateSuffix() const -> QString = 0;
 
@@ -251,8 +248,6 @@ public:
 
     auto IsModified() const -> bool;
     void SetModified(bool modified);
-
-    auto GetDraw(const QString &name) const -> QDomElement;
 
     void ParseGroups(const QDomElement &domElement);
     auto CreateGroups(const QString &patternPieceName = QString()) -> QDomElement;

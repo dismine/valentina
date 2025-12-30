@@ -45,8 +45,6 @@ template <class T> class QSharedPointer;
 
 struct VToolArcWithLengthInitData : VAbstractSplineInitData
 {
-    VToolArcWithLengthInitData() = default;
-
     quint32 center{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
     QString radius{'0'};     // NOLINT(misc-non-private-member-variables-in-classes)
     QString f1{'0'};         // NOLINT(misc-non-private-member-variables-in-classes)
@@ -89,8 +87,7 @@ protected slots:
     void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) override;
 
 protected:
-    void RemoveReferens() override;
-    void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies) override;
+    void SaveDialog(QDomElement &domElement) override;
     void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     void SetVisualization() override;
     auto MakeToolTip() const -> QString override;

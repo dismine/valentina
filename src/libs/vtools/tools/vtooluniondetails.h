@@ -87,8 +87,6 @@ public:
 
     auto getTagName() const -> QString override;
     void ShowVisualization(bool show) override;
-    void incrementReferens() override;
-    void decrementReferens() override;
     void GroupVisibility(quint32 object, bool visible) override;
 
     static auto CalcUnitedPath(const VPiecePath &d1Path, const VPiecePath &d2Path, quint32 indexD2, quint32 pRotate)

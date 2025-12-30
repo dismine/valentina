@@ -63,7 +63,8 @@ class VToolPointOfIntersectionCurves : public VToolSinglePoint
 {
     Q_OBJECT // NOLINT
 public:
-    virtual void SetDialog() override;
+    ~VToolPointOfIntersectionCurves() override = default;
+    void SetDialog() override;
     static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                        VContainer *data) -> VToolPointOfIntersectionCurves *;
     static auto Create(VToolPointOfIntersectionCurvesInitData initData) -> VToolPointOfIntersectionCurves *;
@@ -71,29 +72,28 @@ public:
                           VCrossCurvesPoint vCrossPoint, HCrossCurvesPoint hCrossPoint, QPointF *intersectionPoint)
         -> bool;
     static const QString ToolType;
-    virtual auto type() const -> int override { return Type; }
+    auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::PointOfIntersectionCurves) };
 
     auto FirstCurveName() const -> QString;
     auto SecondCurveName() const -> QString;
 
     auto GetVCrossPoint() const -> VCrossCurvesPoint;
-    void              SetVCrossPoint(VCrossCurvesPoint value);
+    void SetVCrossPoint(VCrossCurvesPoint value);
 
     auto GetHCrossPoint() const -> HCrossCurvesPoint;
-    void              SetHCrossPoint(HCrossCurvesPoint value);
+    void SetHCrossPoint(HCrossCurvesPoint value);
 
-    virtual void ShowVisualization(bool show) override;
+    void ShowVisualization(bool show) override;
 protected slots:
-    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
+    void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) override;
+
 protected:
-    virtual void RemoveReferens() override;
-    virtual void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                            QList<quint32> &newDependencies) override;
-    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
-    virtual void ReadToolAttributes(const QDomElement &domElement) override;
-    virtual void SetVisualization() override;
-    virtual auto MakeToolTip() const -> QString override;
+    void SaveDialog(QDomElement &domElement) override;
+    void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    void ReadToolAttributes(const QDomElement &domElement) override;
+    void SetVisualization() override;
+    auto MakeToolTip() const -> QString override;
 
     void SetCurve1Segments(const QPair<QString, QString> &segments);
     void SetCurve2Segments(const QPair<QString, QString> &segments);

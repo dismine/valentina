@@ -160,7 +160,6 @@ void VToolPin::AddToFile()
         VPiece newDet = oldDet;
 
         newDet.GetPins().append(m_id);
-        incrementReferens(); // Manually increment reference since in this case a piece tool will not do this for us
 
         VAbstractApplication::VApp()->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, m_pieceId));
     }

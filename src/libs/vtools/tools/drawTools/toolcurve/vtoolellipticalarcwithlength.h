@@ -51,6 +51,7 @@ class VToolEllipticalArcWithLength : public VToolAbstractArc
     Q_OBJECT // NOLINT
 
 public:
+    ~VToolEllipticalArcWithLength() override = default;
     void SetDialog() override;
     static auto Create(const QPointer<DialogTool> &dialog,
                        VMainGraphicsScene *scene,
@@ -90,8 +91,7 @@ protected slots:
     void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) override;
 
 protected:
-    void RemoveReferens() override;
-    void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies) override;
+    void SaveDialog(QDomElement &domElement) override;
     void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     void SetVisualization() override;
     auto MakeToolTip() const -> QString override;
@@ -101,7 +101,6 @@ private:
 
     explicit VToolEllipticalArcWithLength(const VToolEllipticalArcWithLengthInitData &initData,
                                           QGraphicsItem *parent = nullptr);
-    ~VToolEllipticalArcWithLength() override = default;
 };
 
 #endif // VTOOLELLIPTICALARCWITHLENGTH_H

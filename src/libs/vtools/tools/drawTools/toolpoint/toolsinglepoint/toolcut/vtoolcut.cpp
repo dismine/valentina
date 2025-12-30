@@ -172,17 +172,6 @@ void VToolCut::RefreshGeometry()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RemoveReferens decrement referens value for used objects.
- */
-void VToolCut::RemoveReferens()
-{
-    const auto curve = VAbstractTool::data.GetGObject(baseCurveId);
-
-    doc->DecrementReferens(curve->getIdTool());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolCut::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
     VToolSinglePoint::SaveOptions(tag, obj);

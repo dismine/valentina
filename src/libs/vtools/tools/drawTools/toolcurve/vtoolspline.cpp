@@ -212,8 +212,6 @@ auto VToolSpline::Create(VToolSplineInitData &initData, VSpline *spline) -> VToo
         initData.scene->addItem(_spl);
         InitSplineToolConnections(initData.scene, _spl);
         VAbstractPattern::AddTool(initData.id, _spl);
-        initData.doc->IncrementReferens(spline->GetP1().getIdTool());
-        initData.doc->IncrementReferens(spline->GetP4().getIdTool());
         return _spl;
     }
     return nullptr;
@@ -353,32 +351,15 @@ void VToolSpline::AllowSelecting(bool enabled)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief RemoveReferens decrement value of reference.
- */
-void VToolSpline::RemoveReferens()
-{
-    const auto spl = VAbstractTool::data.GeometricObject<VSpline>(m_id);
-    doc->DecrementReferens(spl->GetP1().getIdTool());
-    doc->DecrementReferens(spl->GetP4().getIdTool());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolSpline::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies)
+void VToolSpline::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     auto *dialogTool = qobject_cast<DialogSpline *>(m_dialog);
     SCASSERT(dialogTool != nullptr)
 
-    const auto oldSpl = VAbstractTool::data.GeometricObject<VSpline>(m_id);
-    AddDependence(oldDependencies, oldSpl->GetP1().id());
-    AddDependence(oldDependencies, oldSpl->GetP4().id());
-
     const VSpline spl = dialogTool->GetSpline();
-    AddDependence(newDependencies, spl.GetP1().id());
-    AddDependence(newDependencies, spl.GetP4().id());
 
     controlPoints[0]->blockSignals(true);
     controlPoints[1]->blockSignals(true);

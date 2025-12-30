@@ -198,10 +198,6 @@ auto VToolLineIntersect::Create(VToolLineIntersectInitData initData) -> VToolLin
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
-        initData.doc->IncrementReferens(p1Line1->getIdTool());
-        initData.doc->IncrementReferens(p2Line1->getIdTool());
-        initData.doc->IncrementReferens(p1Line2->getIdTool());
-        initData.doc->IncrementReferens(p2Line2->getIdTool());
         return point;
     }
     return nullptr;
@@ -233,48 +229,23 @@ auto VToolLineIntersect::Line2P2Name() const -> QString
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief RemoveReferens decrement value of reference.
- */
-void VToolLineIntersect::RemoveReferens()
-{
-    const auto p1L1 = VAbstractTool::data.GetGObject(p1Line1);
-    const auto p2L1 = VAbstractTool::data.GetGObject(p2Line1);
-    const auto p1L2 = VAbstractTool::data.GetGObject(p1Line2);
-    const auto p2L2 = VAbstractTool::data.GetGObject(p2Line2);
-
-    doc->DecrementReferens(p1L1->getIdTool());
-    doc->DecrementReferens(p2L1->getIdTool());
-    doc->DecrementReferens(p1L2->getIdTool());
-    doc->DecrementReferens(p2L2->getIdTool());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolLineIntersect::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                                    QList<quint32> &newDependencies)
+void VToolLineIntersect::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogLineIntersect> dialogTool = qobject_cast<DialogLineIntersect *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
-
-    AddDependence(oldDependencies, p1Line1);
-    AddDependence(oldDependencies, p2Line1);
-    AddDependence(oldDependencies, p1Line2);
-    AddDependence(oldDependencies, p2Line2);
-    AddDependence(newDependencies, dialogTool->GetP1Line1());
-    AddDependence(newDependencies, dialogTool->GetP2Line1());
-    AddDependence(newDependencies, dialogTool->GetP1Line2());
-    AddDependence(newDependencies, dialogTool->GetP2Line2());
 
     doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrP1Line1, QString().setNum(dialogTool->GetP1Line1()));
     doc->SetAttribute(domElement, AttrP2Line1, QString().setNum(dialogTool->GetP2Line1()));
     doc->SetAttribute(domElement, AttrP1Line2, QString().setNum(dialogTool->GetP1Line2()));
     doc->SetAttribute(domElement, AttrP2Line2, QString().setNum(dialogTool->GetP2Line2()));
-    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
+    doc->SetAttributeOrRemoveIf<QString>(domElement,
+                                         AttrNotes,
+                                         dialogTool->GetNotes(),
+                                         [](const QString &notes) noexcept -> bool { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

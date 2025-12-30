@@ -74,7 +74,7 @@ class VUndoCommand : public QObject, public QUndoCommand
 
 public:
     VUndoCommand(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
-    ~VUndoCommand() = default;
+    ~VUndoCommand() override = default;
 signals:
     void ClearScene();
     void NeedFullParsing();
@@ -83,21 +83,26 @@ signals:
 protected:
     QDomElement xml;
     VAbstractPattern *doc;
-    quint32 nodeId;
-    bool redoFlag;
+    quint32 nodeId{NULL_ID};
+    bool redoFlag{false};
     virtual void RedoFullParsing();
     void UndoDeleteAfterSibling(QDomNode &parentNode, quint32 siblingId, const QString &tagName = QString()) const;
 
-    void IncrementReferences(const QVector<quint32> &nodes) const;
-    void DecrementReferences(const QVector<quint32> &nodes) const;
+    void AddEdges(const QVector<quint32> &nodes) const;
+    void RemoveEdges(const QVector<quint32> &nodes) const;
 
-    void IncrementReferences(const QVector<CustomSARecord> &nodes) const;
-    void DecrementReferences(const QVector<CustomSARecord> &nodes) const;
+    void AddEdges(const QVector<CustomSARecord> &nodes) const;
+    void RemoveEdges(const QVector<CustomSARecord> &nodes) const;
 
-    void IncrementReferences(const QVector<VPieceNode> &nodes) const;
-    void DecrementReferences(const QVector<VPieceNode> &nodes) const;
+    void AddEdges(const QVector<VPieceNode> &nodes) const;
+    void RemoveEdges(const QVector<VPieceNode> &nodes) const;
 
     auto GetDestinationObject(quint32 idTool, quint32 idPoint) const -> QDomElement;
+
+    static void DisablePieceNodes(const VPiecePath &path);
+    static void EnablePieceNodes(const VPiecePath &path);
+
+    static void DisableInternalPaths(const QVector<quint32> &paths);
 
 private:
     Q_DISABLE_COPY_MOVE(VUndoCommand) // NOLINT

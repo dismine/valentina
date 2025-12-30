@@ -66,12 +66,13 @@ class VToolLineIntersect:public VToolSinglePoint
 {
     Q_OBJECT // NOLINT
 public:
-    virtual void SetDialog() override;
+    ~VToolLineIntersect() override = default;
+    void SetDialog() override;
     static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                        VContainer *data) -> VToolLineIntersect *;
     static auto Create(VToolLineIntersectInitData initData) -> VToolLineIntersect *;
     static const QString ToolType;
-    virtual auto type() const -> int override { return Type; }
+    auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::LineIntersect)};
 
     auto Line1P1Name() const -> QString;
@@ -79,34 +80,33 @@ public:
     auto Line2P1Name() const -> QString;
     auto Line2P2Name() const -> QString;
 
-    virtual void ShowVisualization(bool show) override;
+    void ShowVisualization(bool show) override;
 protected slots:
-    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
+    void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) override;
+
 protected:
-    virtual void    RemoveReferens() override;
-    virtual void    SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                               QList<quint32> &newDependencies) override;
-    virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
-    virtual void    ReadToolAttributes(const QDomElement &domElement) override;
-    virtual void    SetVisualization() override;
-    virtual auto MakeToolTip() const -> QString override;
+    void SaveDialog(QDomElement &domElement) override;
+    void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    void ReadToolAttributes(const QDomElement &domElement) override;
+    void SetVisualization() override;
+    auto MakeToolTip() const -> QString override;
 
 private:
     Q_DISABLE_COPY_MOVE(VToolLineIntersect) // NOLINT
 
     /** @brief p1Line1 id first point first line. */
-    quint32       p1Line1;
+    quint32 p1Line1;
 
     /** @brief p2Line1 id second point first line. */
-    quint32       p2Line1;
+    quint32 p2Line1;
 
     /** @brief p1Line2 id first point second line. */
-    quint32       p1Line2;
+    quint32 p1Line2;
 
     /** @brief p2Line2 id second point second line.*/
-    quint32       p2Line2;
+    quint32 p2Line2;
 
-    VToolLineIntersect(const VToolLineIntersectInitData &initData, QGraphicsItem *parent = nullptr);
+    explicit VToolLineIntersect(const VToolLineIntersectInitData &initData, QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLLINEINTERSECT_H

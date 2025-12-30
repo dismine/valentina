@@ -34,14 +34,6 @@
 
 #include <QtCore/qglobal.h>
 
-enum class RemoveStatus : quint8
-{
-    Removable, // Tool can be removed
-    Blocked,   // Tool has dependencies which prevent removing
-    Locked,    // Tool cannot be removed
-    Pending    // Collecting data about dependecies
-};
-
 class VInteractiveTool : public VAbstractTool
 {
     Q_OBJECT // NOLINT

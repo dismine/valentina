@@ -75,8 +75,6 @@ public:
 
     static const QString AttrIdTool;
     void ShowVisualization(bool show) override;
-    void incrementReferens() override;
-    void decrementReferens() override;
 
     auto GetParentType() const -> ParentType;
     void SetParentType(const ParentType &value);
@@ -87,6 +85,8 @@ public:
 
     auto IsExluded() const -> bool;
     void SetExluded(bool exluded);
+
+    auto IsRemovable() const -> RemoveStatus;
 
 protected:
     ParentType parentType;
@@ -104,9 +104,6 @@ protected:
     void AddToModeling(const QDomElement &domElement);
     void ToolCreation(const Source &typeCreation) override;
     void SetVisualization() override {}
-
-    virtual void ShowNode() = 0;
-    virtual void HideNode() = 0;
 
 private:
     Q_DISABLE_COPY_MOVE(VAbstractNode) // NOLINT

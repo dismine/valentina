@@ -45,8 +45,6 @@ template <class T> class QSharedPointer;
 
 struct VToolTrueDartsInitData : VDrawToolInitData
 {
-    VToolTrueDartsInitData() = default;
-
     quint32 p1id{NULL_ID};         // NOLINT(misc-non-private-member-variables-in-classes)
     quint32 p2id{NULL_ID};         // NOLINT(misc-non-private-member-variables-in-classes)
     quint32 baseLineP1Id{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
@@ -95,8 +93,7 @@ protected slots:
     void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) override;
 
 protected:
-    void RemoveReferens() override;
-    void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies) override;
+    void SaveDialog(QDomElement &domElement) override;
     void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     void ReadToolAttributes(const QDomElement &domElement) override;
     void SetVisualization() override;

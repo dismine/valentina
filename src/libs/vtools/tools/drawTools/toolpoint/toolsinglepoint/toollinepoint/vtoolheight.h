@@ -47,16 +47,9 @@ template <class T> class QSharedPointer;
 
 struct VToolHeightInitData : VToolLinePointInitData
 {
-    VToolHeightInitData()
-        : VToolLinePointInitData(),
-          basePointId(NULL_ID),
-          p1LineId(NULL_ID),
-          p2LineId(NULL_ID)
-    {}
-
-    quint32 basePointId;
-    quint32 p1LineId;
-    quint32 p2LineId;
+    quint32 basePointId{NULL_ID};
+    quint32 p1LineId{NULL_ID};
+    quint32 p2LineId{NULL_ID};
 };
 
 /**
@@ -66,28 +59,29 @@ class VToolHeight: public VToolLinePoint
 {
     Q_OBJECT // NOLINT
 public:
-    virtual void   SetDialog() override;
+    ~VToolHeight() override = default;
+    void SetDialog() override;
     static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                        VContainer *data) -> VToolHeight *;
     static auto Create(VToolHeightInitData initData) -> VToolHeight *;
     static auto FindPoint(const QLineF &line, const QPointF &point) -> QPointF;
     static const QString ToolType;
-    virtual auto type() const -> int override { return Type; }
+    auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::Height)};
 
     auto FirstLinePointName() const -> QString;
     auto SecondLinePointName() const -> QString;
 
-    virtual void   ShowVisualization(bool show) override;
+    void ShowVisualization(bool show) override;
 protected slots:
-    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
+    void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) override;
+
 protected:
-    virtual void    SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                               QList<quint32> &newDependencies) override;
-    virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
-    virtual void    ReadToolAttributes(const QDomElement &domElement) override;
-    virtual void    SetVisualization() override;
-    virtual auto MakeToolTip() const -> QString override;
+    void SaveDialog(QDomElement &domElement) override;
+    void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    void ReadToolAttributes(const QDomElement &domElement) override;
+    void SetVisualization() override;
+    auto MakeToolTip() const -> QString override;
 
 private:
     Q_DISABLE_COPY_MOVE(VToolHeight) // NOLINT
@@ -98,7 +92,7 @@ private:
     /** @brief p2LineId id second point of line. */
     quint32         p2LineId;
 
-    VToolHeight(const VToolHeightInitData &initData, QGraphicsItem *parent = nullptr);
+    explicit VToolHeight(const VToolHeightInitData &initData, QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLHEIGHT_H

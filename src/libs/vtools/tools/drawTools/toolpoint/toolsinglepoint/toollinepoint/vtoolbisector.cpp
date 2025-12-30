@@ -214,9 +214,6 @@ auto VToolBisector::Create(VToolBisectorInitData &initData) -> VToolBisector *
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
-        initData.doc->IncrementReferens(firstPoint->getIdTool());
-        initData.doc->IncrementReferens(secondPoint->getIdTool());
-        initData.doc->IncrementReferens(thirdPoint->getIdTool());
         return point;
     }
     return nullptr;
@@ -236,35 +233,13 @@ auto VToolBisector::ThirdPointName() const -> QString
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief RemoveReferens decrement value of reference.
- */
-void VToolBisector::RemoveReferens()
-{
-    const auto firstPoint = VAbstractTool::data.GetGObject(firstPointId);
-    const auto thirdPoint = VAbstractTool::data.GetGObject(thirdPointId);
-
-    doc->DecrementReferens(firstPoint->getIdTool());
-    doc->DecrementReferens(thirdPoint->getIdTool());
-    VToolLinePoint::RemoveReferens();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolBisector::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                               QList<quint32> &newDependencies)
+void VToolBisector::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     QPointer<DialogBisector> const dialogTool = qobject_cast<DialogBisector *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
-
-    AddDependence(oldDependencies, firstPointId);
-    AddDependence(oldDependencies, basePointId);
-    AddDependence(oldDependencies, thirdPointId);
-    AddDependence(newDependencies, dialogTool->GetFirstPointId());
-    AddDependence(newDependencies, dialogTool->GetSecondPointId());
-    AddDependence(newDependencies, dialogTool->GetThirdPointId());
 
     doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
@@ -273,8 +248,10 @@ void VToolBisector::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepen
     doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->GetFirstPointId()));
     doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->GetSecondPointId()));
     doc->SetAttribute(domElement, AttrThirdPoint, QString().setNum(dialogTool->GetThirdPointId()));
-    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes) noexcept {return notes.isEmpty();});
+    doc->SetAttributeOrRemoveIf<QString>(domElement,
+                                         AttrNotes,
+                                         dialogTool->GetNotes(),
+                                         [](const QString &notes) noexcept -> bool { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

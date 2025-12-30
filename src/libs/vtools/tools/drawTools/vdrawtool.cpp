@@ -92,31 +92,23 @@ void VDrawTool::SaveDialogChange(const QString &undoText)
     Q_UNUSED(undoText)
     qCDebug(vTool, "Saving tool options after using dialog");
     QDomElement const oldDomElement = doc->FindElementById(m_id, getTagName());
-    if (oldDomElement.isElement())
-    {
-        QDomElement newDomElement = oldDomElement.cloneNode().toElement();
-        QList<quint32> oldDependencies;
-        QList<quint32> newDependencies;
-        SaveDialog(newDomElement, oldDependencies, newDependencies);
-        ApplyToolOptions(oldDependencies, newDependencies, oldDomElement, newDomElement);
-    }
-    else
+    if (!oldDomElement.isElement())
     {
         qCDebug(vTool, "Can't find tool with id = %u", m_id);
+        return;
     }
+
+    QDomElement newDomElement = oldDomElement.cloneNode().toElement();
+    SaveDialog(newDomElement);
+    ApplyToolOptions(oldDomElement, newDomElement);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDrawTool::ApplyToolOptions(const QList<quint32> &oldDependencies, const QList<quint32> &newDependencies,
-                                 const QDomElement &oldDomElement, const QDomElement &newDomElement)
+void VDrawTool::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
 {
-    if (newDependencies != oldDependencies || not VDomDocument::Compare(newDomElement, oldDomElement))
-    {
-        auto *saveOptions =
-            new SaveToolOptions(oldDomElement, newDomElement, oldDependencies, newDependencies, doc, m_id);
-        connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        VAbstractApplication::VApp()->getUndoStack()->push(saveOptions);
-    }
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+    connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    VAbstractApplication::VApp()->getUndoStack()->push(saveOptions);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -136,21 +128,19 @@ void VDrawTool::SaveOption(QSharedPointer<VGObject> &obj)
 {
     qCDebug(vTool, "Saving tool options");
     QDomElement const oldDomElement = doc->FindElementById(m_id, getTagName());
-    if (oldDomElement.isElement())
-    {
-        QDomElement newDomElement = oldDomElement.cloneNode().toElement();
-
-        SaveOptions(newDomElement, obj);
-
-        auto *saveOptions =
-            new SaveToolOptions(oldDomElement, newDomElement, QList<quint32>(), QList<quint32>(), doc, m_id);
-        connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        VAbstractApplication::VApp()->getUndoStack()->push(saveOptions);
-    }
-    else
+    if (!oldDomElement.isElement())
     {
         qCDebug(vTool, "Can't find tool with id = %u", m_id);
+        return;
     }
+
+    QDomElement newDomElement = oldDomElement.cloneNode().toElement();
+
+    SaveOptions(newDomElement, obj);
+
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+    connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    VAbstractApplication::VApp()->getUndoStack()->push(saveOptions);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -159,8 +149,10 @@ void VDrawTool::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     Q_UNUSED(obj)
 
     doc->SetAttribute(tag, VDomDocument::AttrId, m_id);
-    doc->SetAttributeOrRemoveIf<QString>(tag, AttrNotes, m_notes,
-                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
+    doc->SetAttributeOrRemoveIf<QString>(tag,
+                                         AttrNotes,
+                                         m_notes,
+                                         [](const QString &notes) noexcept -> bool { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -469,16 +461,6 @@ void VDrawTool::AddToCalculation(const QDomElement &domElement)
     auto *addToCal = new AddToCalc(domElement, doc);
     connect(addToCal, &AddToCalc::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
     VAbstractApplication::VApp()->getUndoStack()->push(addToCal);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VDrawTool::AddDependence(QList<quint32> &list, quint32 objectId) const
-{
-    if (objectId != NULL_ID)
-    {
-        auto originPoint = VAbstractTool::data.GetGObject(objectId);
-        list.append(originPoint->getIdTool());
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

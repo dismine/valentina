@@ -81,7 +81,7 @@ protected:
     void AddToFile() override;
     auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
     void DeleteToolWithConfirm(bool ask = true) override;
-    void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies) override;
+    void SaveDialog(QDomElement &domElement) override;
     void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;

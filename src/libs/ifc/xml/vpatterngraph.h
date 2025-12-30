@@ -121,6 +121,8 @@ public:
     auto GetInDegree(vidtype id) const -> std::size_t;
     auto GetOutDegree(vidtype id) const -> std::size_t;
 
+    auto RemoveIncomingEdges(vidtype id) -> size_t;
+
     void Clear();
 
     template<typename Func>

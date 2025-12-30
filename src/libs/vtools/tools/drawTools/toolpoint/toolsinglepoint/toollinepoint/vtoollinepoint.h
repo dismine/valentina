@@ -101,7 +101,6 @@ protected:
     QString lineColor;
 
     virtual void RefreshGeometry();
-    virtual void RemoveReferens() override;
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
     virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;

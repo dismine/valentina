@@ -205,8 +205,6 @@ auto VToolPointOfIntersectionCurves::Create(VToolPointOfIntersectionCurvesInitDa
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
-        initData.doc->IncrementReferens(curve1->getIdTool());
-        initData.doc->IncrementReferens(curve2->getIdTool());
         return point;
     }
 
@@ -398,27 +396,11 @@ void VToolPointOfIntersectionCurves::ShowContextMenu(QGraphicsSceneContextMenuEv
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfIntersectionCurves::RemoveReferens()
-{
-    const auto curve1 = VAbstractTool::data.GetGObject(firstCurveId);
-    const auto curve2 = VAbstractTool::data.GetGObject(secondCurveId);
-
-    doc->DecrementReferens(curve1->getIdTool());
-    doc->DecrementReferens(curve2->getIdTool());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfIntersectionCurves::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                                                QList<quint32> &newDependencies)
+void VToolPointOfIntersectionCurves::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     auto *dialogTool = qobject_cast<DialogPointOfIntersectionCurves *>(m_dialog);
     SCASSERT(dialogTool != nullptr)
-
-    AddDependence(oldDependencies, firstCurveId);
-    AddDependence(oldDependencies, secondCurveId);
-    AddDependence(newDependencies, dialogTool->GetFirstCurveId());
-    AddDependence(newDependencies, dialogTool->GetSecondCurveId());
 
     doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrCurve1, QString().setNum(dialogTool->GetFirstCurveId()));

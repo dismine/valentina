@@ -179,9 +179,6 @@ auto VToolHeight::Create(VToolHeightInitData initData) -> VToolHeight *
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
-        initData.doc->IncrementReferens(basePoint->getIdTool());
-        initData.doc->IncrementReferens(p1Line->getIdTool());
-        initData.doc->IncrementReferens(p2Line->getIdTool());
         return point;
     }
     return nullptr;
@@ -215,18 +212,11 @@ auto VToolHeight::SecondLinePointName() const -> QString
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolHeight::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies)
+void VToolHeight::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogHeight> dialogTool = qobject_cast<DialogHeight *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
-
-    AddDependence(oldDependencies, basePointId);
-    AddDependence(oldDependencies, p1LineId);
-    AddDependence(oldDependencies, p2LineId);
-    AddDependence(newDependencies, dialogTool->GetBasePointId());
-    AddDependence(newDependencies, dialogTool->GetP1LineId());
-    AddDependence(newDependencies, dialogTool->GetP2LineId());
 
     doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());

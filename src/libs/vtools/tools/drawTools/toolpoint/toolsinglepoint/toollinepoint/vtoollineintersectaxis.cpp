@@ -179,9 +179,6 @@ auto VToolLineIntersectAxis::Create(VToolLineIntersectAxisInitData &initData) ->
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
-        initData.doc->IncrementReferens(basePoint->getIdTool());
-        initData.doc->IncrementReferens(firstPoint->getIdTool());
-        initData.doc->IncrementReferens(secondPoint->getIdTool());
         return point;
     }
     return nullptr;
@@ -269,19 +266,11 @@ void VToolLineIntersectAxis::ShowContextMenu(QGraphicsSceneContextMenuEvent *eve
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolLineIntersectAxis::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                                        QList<quint32> &newDependencies)
+void VToolLineIntersectAxis::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogLineIntersectAxis> dialogTool = qobject_cast<DialogLineIntersectAxis *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
-
-    AddDependence(oldDependencies, basePointId);
-    AddDependence(oldDependencies, firstPointId);
-    AddDependence(oldDependencies, secondPointId);
-    AddDependence(newDependencies, dialogTool->GetBasePointId());
-    AddDependence(newDependencies, dialogTool->GetFirstPointId());
-    AddDependence(newDependencies, dialogTool->GetSecondPointId());
 
     doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());

@@ -76,6 +76,7 @@
 #include "nodeDetails/vtoolplacelabel.h"
 #include "qpainterpath.h"
 #include "toolsdef.h"
+#include "vinteractivetool.h"
 
 #include <QFuture>
 #include <QFutureWatcher>
@@ -1130,10 +1131,7 @@ void VToolSeamAllowance::ConnectOutsideSignals()
 void VToolSeamAllowance::ReinitInternals(const VPiece &detail, VMainGraphicsScene *scene)
 {
     InitNodes(detail, scene);
-    InitCSAPaths(detail);
     InitInternalPaths(detail);
-    InitSpecialPoints(detail.GetPins());
-    InitSpecialPoints(detail.GetPlaceLabels());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1826,7 +1824,7 @@ void VToolSeamAllowance::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     reseteLabelTemplateOption->setEnabled(not doc->GetDefaultPieceLabelPath().isEmpty());
 
     QAction *actionRemove = menu.addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
-    actionRemove->setDisabled(_referens > 0);
+    actionRemove->setEnabled(IsRemovable() == RemoveStatus::Removable);
 
     QAction *selectedAction = menu.exec(event->screenPos());
     if (selectedAction == actionOption)
@@ -2149,8 +2147,10 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
 
     if (VAbstractApplication::VApp()->IsAppInGUIMode())
     {
-        QTimer::singleShot(100ms, Qt::CoarseTimer, this,
-                           [this, updateChildren]()
+        QTimer::singleShot(100ms,
+                           Qt::CoarseTimer,
+                           this,
+                           [this, updateChildren]() -> void
                            {
                                this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
                                UpdateDetailLabel();
@@ -2625,9 +2625,7 @@ void VToolSeamAllowance::InitNodes(const VPiece &detail, VMainGraphicsScene *sce
     const VPiecePath &path = detail.GetPath();
     for (int i = 0; i < path.CountNodes(); ++i)
     {
-        const VPieceNode &node = path.at(i);
-        InitNode(node, scene, this);
-        doc->IncrementReferens(VAbstractTool::data.GetGObject(node.GetId())->getIdTool());
+        InitNode(path.at(i), scene, this);
     }
 }
 
@@ -2691,16 +2689,6 @@ void VToolSeamAllowance::InitNode(const VPieceNode &node, VMainGraphicsScene *sc
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSeamAllowance::InitCSAPaths(const VPiece &detail) const
-{
-    const QVector<CustomSARecord> records = detail.GetCustomSARecords();
-    for (auto record : records)
-    {
-        doc->IncrementReferens(record.path);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::InitInternalPaths(const VPiece &detail)
 {
     const QVector<quint32> paths = detail.GetInternalPaths();
@@ -2715,16 +2703,6 @@ void VToolSeamAllowance::InitInternalPaths(const VPiece &detail)
             tool->SetParentType(ParentType::Item);
         }
         tool->show();
-        doc->IncrementReferens(path);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolSeamAllowance::InitSpecialPoints(const QVector<quint32> &points) const
-{
-    for (auto point : points)
-    {
-        doc->IncrementReferens(point);
     }
 }
 

@@ -35,14 +35,19 @@ class SavePlaceLabelOptions : public VUndoCommand
 {
     Q_OBJECT // NOLINT
 public:
-    SavePlaceLabelOptions(quint32 pieceId, const VPlaceLabelItem &oldLabel, const VPlaceLabelItem &newLabel,
-                          VAbstractPattern *doc, VContainer *data, quint32 id, QUndoCommand *parent = nullptr);
-    virtual ~SavePlaceLabelOptions()=default;
+    SavePlaceLabelOptions(quint32 pieceId,
+                          VPlaceLabelItem oldLabel,
+                          VPlaceLabelItem newLabel,
+                          VAbstractPattern *doc,
+                          VContainer *data,
+                          quint32 id,
+                          QUndoCommand *parent = nullptr);
+    ~SavePlaceLabelOptions() override = default;
 
-    virtual void undo() override;
-    virtual void redo() override;
-    virtual auto mergeWith(const QUndoCommand *command) -> bool override;
-    virtual auto id() const -> int override;
+    void undo() override;
+    void redo() override;
+    auto mergeWith(const QUndoCommand *command) -> bool override;
+    auto id() const -> int override;
 
     auto LabelId() const -> quint32;
     auto NewLabel() const -> VPlaceLabelItem;

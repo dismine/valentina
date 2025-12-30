@@ -98,14 +98,11 @@ protected:
     QString m_notes{};
 
     void AddToCalculation(const QDomElement &domElement);
-    void AddDependence(QList<quint32> &list, quint32 objectId) const;
 
     /** @brief SaveDialog save options into file after change in dialog. */
-    virtual void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                            QList<quint32> &newDependencies) = 0;
+    virtual void SaveDialog(QDomElement &domElement) = 0;
     void SaveDialogChange(const QString &undoText = QString()) final;
-    virtual void ApplyToolOptions(const QList<quint32> &oldDependencies, const QList<quint32> &newDependencies,
-                                  const QDomElement &oldDomElement, const QDomElement &newDomElement);
+    virtual void ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement);
     void AddToFile() override;
     void SaveOption(QSharedPointer<VGObject> &obj);
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);

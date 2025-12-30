@@ -48,26 +48,18 @@ template <class T> class QSharedPointer;
 
 struct VToolLineIntersectAxisInitData : VToolLinePointInitData
 {
-    VToolLineIntersectAxisInitData()
-        : VToolLinePointInitData(),
-          formulaAngle('0'),
-          basePointId(NULL_ID),
-          firstPointId(NULL_ID),
-          secondPointId(NULL_ID)
-    {}
-
-    QString formulaAngle;
-    quint32 basePointId;
-    quint32 firstPointId;
-    quint32 secondPointId;
+    QString formulaAngle{'0'};
+    quint32 basePointId{NULL_ID};
+    quint32 firstPointId{NULL_ID};
+    quint32 secondPointId{NULL_ID};
 };
 
 class VToolLineIntersectAxis : public VToolLinePoint
 {
     Q_OBJECT // NOLINT
 public:
-    virtual ~VToolLineIntersectAxis() = default;
-    virtual void SetDialog() override;
+    ~VToolLineIntersectAxis() override = default;
+    void SetDialog() override;
 
     static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                        VContainer *data) -> VToolLineIntersectAxis *;
@@ -76,26 +68,27 @@ public:
     static auto FindPoint(const QLineF &axis, const QLineF &line, QPointF *intersectionPoint) -> bool;
 
     static const QString ToolType;
-    virtual auto type() const -> int override { return Type; }
+    auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::LineIntersectAxis)};
 
     auto FirstLinePoint() const -> QString;
     auto SecondLinePoint() const -> QString;
 
     auto GetFormulaAngle() const -> VFormula;
-    void         SetFormulaAngle(const VFormula &value);
+    void SetFormulaAngle(const VFormula &value);
 
-    virtual void ShowVisualization(bool show) override;
+    void ShowVisualization(bool show) override;
 protected slots:
-    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
+    void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) override;
+
 protected:
-    virtual void    SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                               QList<quint32> &newDependencies) override;
-    virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
-    virtual void    ReadToolAttributes(const QDomElement &domElement) override;
-    virtual void    SetVisualization() override;
-    virtual auto MakeToolTip() const -> QString override;
-    virtual void    hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+    void SaveDialog(QDomElement &domElement) override;
+    void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    void ReadToolAttributes(const QDomElement &domElement) override;
+    void SetVisualization() override;
+    auto MakeToolTip() const -> QString override;
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+
 private:
     Q_DISABLE_COPY_MOVE(VToolLineIntersectAxis) // NOLINT
 
@@ -103,7 +96,7 @@ private:
     quint32 firstPointId;
     quint32 secondPointId;
 
-    VToolLineIntersectAxis(const VToolLineIntersectAxisInitData &initData, QGraphicsItem * parent = nullptr);
+    explicit VToolLineIntersectAxis(const VToolLineIntersectAxisInitData &initData, QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLLINEINTERSECTAXIS_H

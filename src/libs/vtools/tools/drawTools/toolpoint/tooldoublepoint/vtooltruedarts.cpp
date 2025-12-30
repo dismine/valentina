@@ -201,11 +201,6 @@ auto VToolTrueDarts::Create(VToolTrueDartsInitData initData) -> VToolTrueDarts *
         initData.scene->addItem(points);
         InitToolConnections(initData.scene, points);
         VAbstractPattern::AddTool(initData.id, points);
-        initData.doc->IncrementReferens(baseLineP1->getIdTool());
-        initData.doc->IncrementReferens(baseLineP2->getIdTool());
-        initData.doc->IncrementReferens(dartP1->getIdTool());
-        initData.doc->IncrementReferens(dartP2->getIdTool());
-        initData.doc->IncrementReferens(dartP3->getIdTool());
         return points;
     }
     return nullptr;
@@ -262,41 +257,11 @@ void VToolTrueDarts::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolTrueDarts::RemoveReferens()
-{
-    const auto baseLineP1 = VAbstractTool::data.GetGObject(baseLineP1Id);
-    const auto baseLineP2 = VAbstractTool::data.GetGObject(baseLineP2Id);
-    const auto dartP1 = VAbstractTool::data.GetGObject(dartP1Id);
-    const auto dartP2 = VAbstractTool::data.GetGObject(dartP2Id);
-    const auto dartP3 = VAbstractTool::data.GetGObject(dartP3Id);
-
-    doc->DecrementReferens(baseLineP1->getIdTool());
-    doc->DecrementReferens(baseLineP2->getIdTool());
-    doc->DecrementReferens(dartP1->getIdTool());
-    doc->DecrementReferens(dartP2->getIdTool());
-    doc->DecrementReferens(dartP3->getIdTool());
-    VToolDoublePoint::RemoveReferens();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolTrueDarts::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                                QList<quint32> &newDependencies)
+void VToolTrueDarts::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogTrueDarts> dialogTool = qobject_cast<DialogTrueDarts *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
-
-    AddDependence(oldDependencies, baseLineP1Id);
-    AddDependence(oldDependencies, baseLineP2Id);
-    AddDependence(oldDependencies, dartP1Id);
-    AddDependence(oldDependencies, dartP2Id);
-    AddDependence(oldDependencies, dartP3Id);
-
-    AddDependence(newDependencies, dialogTool->GetFirstBasePointId());
-    AddDependence(newDependencies, dialogTool->GetSecondBasePointId());
-    AddDependence(newDependencies, dialogTool->GetFirstDartPointId());
-    AddDependence(newDependencies, dialogTool->GetSecondDartPointId());
-    AddDependence(newDependencies, dialogTool->GetThirdDartPointId());
 
     doc->SetAttribute(domElement, AttrName1, dialogTool->GetFirstNewDartPointName());
     doc->SetAttribute(domElement, AttrName2, dialogTool->GetSecondNewDartPointName());
@@ -305,8 +270,10 @@ void VToolTrueDarts::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepe
     doc->SetAttribute(domElement, AttrDartP1, QString().setNum(dialogTool->GetFirstDartPointId()));
     doc->SetAttribute(domElement, AttrDartP2, QString().setNum(dialogTool->GetSecondDartPointId()));
     doc->SetAttribute(domElement, AttrDartP3, QString().setNum(dialogTool->GetThirdDartPointId()));
-    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
+    doc->SetAttributeOrRemoveIf<QString>(domElement,
+                                         AttrNotes,
+                                         dialogTool->GetNotes(),
+                                         [](const QString &notes) noexcept -> bool { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

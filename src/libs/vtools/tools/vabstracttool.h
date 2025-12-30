@@ -62,6 +62,14 @@ struct VAbstractToolInitData
 
 QT_WARNING_POP
 
+enum class RemoveStatus : quint8
+{
+    Removable, // Tool can be removed
+    Blocked,   // Tool has dependencies which prevent removing
+    Locked,    // Tool cannot be removed
+    Pending    // Collecting data about dependecies
+};
+
 /**
  * @brief The VAbstractTool abstract class for all tools.
  */
@@ -83,7 +91,6 @@ public:
     static auto ColorsList() -> QMap<QString, QString>;
 
     static auto GetRecord(const quint32 id, const Tool &toolType, VAbstractPattern *doc) -> VToolRecord;
-    static void RemoveRecord(const VToolRecord &record, VAbstractPattern *doc);
     static void AddRecord(const VToolRecord &record, VAbstractPattern *doc);
     static void AddRecord(quint32 id, const Tool &toolType, VAbstractPattern *doc);
     static void AddNodes(VAbstractPattern *doc, QDomElement &domElement, const VPiecePath &path);
@@ -140,10 +147,6 @@ protected:
      * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
      */
     virtual void RefreshDataInFile();
-    /**
-     * @brief RemoveReferens decrement value of reference.
-     */
-    virtual void RemoveReferens() {}
 
     template <typename T> static auto CreateNode(VContainer *data, quint32 id) -> quint32;
     static auto CreateNodeSpline(VContainer *data, quint32 id) -> quint32;

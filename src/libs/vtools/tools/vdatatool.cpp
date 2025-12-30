@@ -46,20 +46,7 @@ QT_WARNING_POP
  */
 VDataTool::VDataTool(VContainer *data, QObject *parent)
   : QObject(parent),
-    data(*data),
-    _referens(0)
+    data(*data)
 {
     SCASSERT(data != nullptr)
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief decrementReferens decrement referens.
- */
-void VDataTool::decrementReferens()
-{
-    if (_referens > 0)
-    {
-        --_referens;
-    }
 }
