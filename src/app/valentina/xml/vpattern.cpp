@@ -473,7 +473,7 @@ auto VPattern::SPointActiveDraw() -> quint32
 //---------------------------------------------------------------------------------------------------------------------
 auto VPattern::GetActivePPPieces() const -> QVector<quint32>
 {
-    QDomElement drawElement = PatternBlockMapper()->GetActiveElement();
+    QDomElement const drawElement = PatternBlockMapper()->GetActiveElement();
     if (drawElement.isNull())
     {
         return {};
@@ -3737,22 +3737,20 @@ auto VPattern::EvalFormula(VContainer *data, const QString &formula, bool *ok) c
         *ok = true;
         return 0;
     }
-    else
-    {
-        try
-        {
-            QScopedPointer<Calculator> cal(new Calculator());
-            const qreal result = cal->EvalFormula(data->DataVariables(), formula);
 
-            (qIsInf(result) || qIsNaN(result)) ? *ok = false : *ok = true;
-            return result;
-        }
-        catch (qmu::QmuParserError &e)
-        {
-            Q_UNUSED(e)
-            *ok = false;
-            return 0;
-        }
+    try
+    {
+        QScopedPointer<Calculator> cal(new Calculator());
+        const qreal result = cal->EvalFormula(data->DataVariables(), formula);
+
+        (qIsInf(result) || qIsNaN(result)) ? *ok = false : *ok = true;
+        return result;
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        Q_UNUSED(e)
+        *ok = false;
+        return 0;
     }
 }
 
@@ -3784,7 +3782,7 @@ auto VPattern::FindIncrement(const QString &name) const -> QDomElement
         }
     }
 
-    return QDomElement();
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

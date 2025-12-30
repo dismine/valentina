@@ -53,8 +53,6 @@
 
 struct VDrawToolInitData : VAbstractToolInitData
 {
-    VDrawToolInitData() = default;
-
     QString notes{};
 };
 

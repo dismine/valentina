@@ -45,8 +45,6 @@ class VFormula;
 
 struct VToolMoveInitData : VAbstractOperationInitData
 {
-    VToolMoveInitData() = default;
-
     QString formulaAngle{};
     QString formulaRotationAngle{};
     QString formulaLength{};

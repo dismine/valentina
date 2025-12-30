@@ -270,8 +270,10 @@ VDomDocument::VDomDocument(QObject *parent)
     m_elementIdCache(),
     m_watcher(new QFutureWatcher<QHash<quint32, QDomElement>>(this))
 {
-    connect(qApp, &QCoreApplication::aboutToQuit, m_watcher,
-            [this]()
+    connect(qApp,
+            &QCoreApplication::aboutToQuit,
+            m_watcher,
+            [this]() -> void
             {
                 m_watcher->cancel();
                 m_watcher->waitForFinished();
@@ -704,7 +706,8 @@ void VDomDocument::RefreshElementIdCache()
 {
     if (m_watcher->isFinished())
     {
-        m_watcher->setFuture(QtConcurrent::run([this]() { return RefreshCache(documentElement()); }));
+        m_watcher->setFuture(
+            QtConcurrent::run([this]() -> QHash<quint32, QDomElement> { return RefreshCache(documentElement()); }));
     }
 }
 
