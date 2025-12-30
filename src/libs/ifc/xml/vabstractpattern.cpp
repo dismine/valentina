@@ -2705,6 +2705,11 @@ void VAbstractPattern::CleanDependenciesWatcher()
     QMutexLocker const locker(&m_watchersMutex);
     m_formulaDependenciesWatchers.removeOne(watcher);
     watcher->deleteLater();
+
+    if (m_formulaDependenciesWatchers.isEmpty())
+    {
+        emit PatternDependencyGraphCompleted();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -55,8 +55,6 @@ public:
 
     void Parse(const Document &parse);
 
-    void GarbageCollector(bool commit = false);
-
     void setCurrentData();
     void UpdateToolData(const quint32 &id, VContainer *data) override;
 
@@ -127,6 +125,9 @@ public slots:
 protected:
     void customEvent(QEvent *event) override;
 
+private slots:
+    void CollectGarbage();
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VPattern) // NOLINT
@@ -141,6 +142,8 @@ private:
     QFutureWatcher<void> *m_refreshPieceGeometryWatcher;
 
     bool m_pieceGeometryDirty{true};
+
+    bool m_garbageCollected{false};
 
     static auto ParseDetailNode(const QDomElement &domElement) -> VNodeDetail;
 
@@ -261,6 +264,8 @@ private:
 
     void PostRefreshActions();
     void RefreshPieceGeometryForList(const QList<vidtype> &list) const;
+
+    void GarbageCollector();
 };
 
 #endif // VPATTERN_H

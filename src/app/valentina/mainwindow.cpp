@@ -6883,13 +6883,6 @@ auto MainWindow::LoadPattern(QString fileName, const QString &customMeasureFile)
 
     if (m_guiEnabled)
     { // No errors occurred
-        if (VApplication::IsGUIMode())
-        {
-            /* Collect garbage only after successfully parse. This way wrongly accused items have one more time to
-             * restore a reference. */
-            QTimer::singleShot(100ms, Qt::CoarseTimer, this, [this]() { doc->GarbageCollector(true); });
-        }
-
         m_patternReadOnly = doc->IsReadOnly();
         m_sceneDraw->SetAcceptDrop(true);
         SetEnableWidgets(true);

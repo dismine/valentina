@@ -224,6 +224,8 @@ VPattern::VPattern(VContainer *data, VMainGraphicsScene *sceneDraw, VMainGraphic
                 m_refreshPieceGeometryWatcher->cancel();
                 m_refreshPieceGeometryWatcher->waitForFinished();
             });
+
+    connect(this, &VAbstractPattern::PatternDependencyGraphCompleted, this, &VPattern::CollectGarbage);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -746,6 +748,16 @@ void VPattern::customEvent(QEvent *event)
     else if (event->type() == LITE_PARSE_EVENT)
     {
         LiteParseTree(Document::LiteParse);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::CollectGarbage()
+{
+    if (!m_garbageCollected)
+    {
+        GarbageCollector();
+        m_garbageCollected = true;
     }
 }
 
@@ -3786,65 +3798,51 @@ auto VPattern::FindIncrement(const QString &name) const -> QDomElement
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::GarbageCollector(bool commit)
+void VPattern::GarbageCollector()
 {
     bool cleared = false;
 
-    QDomNodeList const modelingList = elementsByTagName(TagModeling);
-    for (int i = 0; i < modelingList.size(); ++i)
+    VPatternGraph const *graph = PatternGraph();
+
+    QSet<vidtype> candidates = ConvertToSet(graph->GetVerticesByType(VNodeType ::MODELING_OBJECT));
+    candidates += ConvertToSet(graph->GetVerticesByType(VNodeType ::MODELING_TOOL));
+
+    QSet<vidtype> clearedNodes;
+    clearedNodes.reserve(candidates.size());
+
+    for (const auto node : std::as_const(candidates))
     {
-        QDomElement modElement = modelingList.at(i).toElement();
-        if (not modElement.isNull())
+        if (graph->GetOutDegree(node) != 0)
         {
-            QDomElement modNode = modElement.firstChild().toElement();
-            while (not modNode.isNull())
-            {
-                // First get next sibling because later will not have chance to get it
-                QDomElement const nextSibling = modNode.nextSibling().toElement();
-                if (modNode.hasAttribute(VAbstractTool::AttrInUse))
-                {
-                    const NodeUsage inUse = GetParametrUsage(modNode, VAbstractTool::AttrInUse);
-                    if (inUse == NodeUsage::InUse)
-                    { // It is dangerous to leave object with attribute 'inUse'
-                      // Each parse should confirm this status.
-                        SetParametrUsage(modNode, VAbstractTool::AttrInUse, NodeUsage::NotInUse);
-                    }
-                    else
-                    { // Parent was deleted. We do not need this object anymore
-                        if (commit)
-                        {
-                            modElement.removeChild(modNode);
-                            cleared = true;
+            continue;
+        }
 
-                            // Clear history
-                            try
-                            {
-                                vidtype const id = GetParametrId(modNode);
-                                auto record = std::find_if(history.begin(),
-                                                           history.end(),
-                                                           [id](const VToolRecord &record)
-                                                           { return record.GetId() == id; });
-                                if (record != history.end())
-                                {
-                                    history.erase(record);
-                                }
-                            }
-                            catch (const VExceptionWrongId &)
-                            {
-                                // do nothing
-                            }
-                        }
-                    }
-                }
-                else
-                { // Each parse should confirm his status.
-                    SetParametrUsage(modNode, VAbstractTool::AttrInUse, NodeUsage::NotInUse);
-                }
+        QDomElement const domElement = FindElementById(node, TagModeling);
+        if (domElement.isNull())
+        {
+            continue;
+        }
 
-                modNode = nextSibling;
-            }
+        if (QDomNode parent = domElement.parentNode(); !parent.isNull())
+        {
+            parent.removeChild(domElement);
+            cleared = true;
+            clearedNodes.insert(node);
         }
     }
+
+    QVector<VToolRecord> newHistory;
+    newHistory.reserve(history.size());
+
+    for (const auto &record : std::as_const(history))
+    {
+        if (!clearedNodes.contains(record.GetId()))
+        {
+            newHistory.append(record);
+        }
+    }
+
+    history = newHistory;
 
     if (cleared)
     {
@@ -4613,6 +4611,13 @@ void VPattern::PrepareForParse(const Document &parse)
     SCASSERT(sceneDetail != nullptr)
 
     emit CancelLabelRendering();
+
+    // We can run garbage collection only in a narrow window between first successfull parse and user change
+    if (!m_garbageCollected && !IsPatternGraphComplete())
+    {
+        disconnect(this, &VAbstractPattern::PatternDependencyGraphCompleted, this, &VPattern::CollectGarbage);
+        m_garbageCollected = true;
+    }
 
     CancelFormulaDependencyChecks();
     PatternGraph()->Clear();

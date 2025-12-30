@@ -461,6 +461,8 @@ signals:
 
     void CancelLabelRendering();
 
+    void PatternDependencyGraphCompleted();
+
 public slots:
     virtual void LiteParseTree(const Document &parse) = 0;
     void haveLiteChange();
