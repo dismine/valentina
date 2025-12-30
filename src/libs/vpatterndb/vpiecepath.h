@@ -102,7 +102,6 @@ public:
     auto CurvesPainterPath(const VContainer *data) const -> QVector<QPainterPath>;
 
     auto Dependencies() const -> QList<quint32>;
-    auto MissingNodes(const VPiecePath &path) const -> QVector<quint32>;
 
     auto NodeName(int nodeIndex, const VContainer *data) const -> QString;
 

@@ -56,36 +56,6 @@ using namespace Qt::Literals::StringLiterals;
 
 namespace
 {
-auto PieceMissingNodes(const QVector<quint32> &d1Nodes, const QVector<quint32> &d2Nodes) -> QVector<quint32>
-{
-    if (d1Nodes.size() == d2Nodes.size()) //-V807
-    {
-        return {};
-    }
-
-    QSet<quint32> set1;
-    for (unsigned int const d1Node : d1Nodes)
-    {
-        set1.insert(d1Node);
-    }
-
-    QSet<quint32> set2;
-    for (unsigned int const d2Node : d2Nodes)
-    {
-        set2.insert(d2Node);
-    }
-
-    const QList<quint32> set3 = set1.subtract(set2).values();
-    QVector<quint32> r;
-    r.reserve(set3.size());
-    for (unsigned int const i : set3)
-    {
-        r.append(i);
-    }
-
-    return r;
-}
-
 //---------------------------------------------------------------------------------------------------------------------
 auto IsPassmarksPossible(const QVector<VPieceNode> &path) -> bool
 {
@@ -711,54 +681,6 @@ auto VPiece::Dependencies() const -> QList<quint32>
     }
 
     return list;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief MissingNodes find missing nodes in detail. When we deleted object in detail and return this detail need
- * understand, what nodes need make invisible.
- * @param det changed detail.
- * @return  list with missing nodes.
- */
-auto VPiece::MissingNodes(const VPiece &det) const -> QVector<quint32>
-{
-    return d->m_path.MissingNodes(det.GetPath());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VPiece::MissingCSAPath(const VPiece &det) const -> QVector<quint32>
-{
-    QVector<quint32> oldCSARecords;
-    for (const auto &m_customSARecord : d->m_customSARecords)
-    {
-        oldCSARecords.append(m_customSARecord.path);
-    }
-
-    QVector<quint32> newCSARecords;
-    for (qint32 i = 0; i < det.GetCustomSARecords().size(); ++i)
-    {
-        newCSARecords.append(det.GetCustomSARecords().at(i).path);
-    }
-
-    return PieceMissingNodes(oldCSARecords, newCSARecords);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VPiece::MissingInternalPaths(const VPiece &det) const -> QVector<quint32>
-{
-    return PieceMissingNodes(d->m_internalPaths, det.GetInternalPaths());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VPiece::MissingPins(const VPiece &det) const -> QVector<quint32>
-{
-    return PieceMissingNodes(d->m_pins, det.GetPins());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VPiece::MissingPlaceLabels(const VPiece &det) const -> QVector<quint32>
-{
-    return PieceMissingNodes(d->m_placeLabels, det.GetPlaceLabels());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

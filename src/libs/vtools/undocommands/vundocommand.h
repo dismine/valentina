@@ -89,15 +89,6 @@ protected:
     virtual void RedoFullParsing();
     void UndoDeleteAfterSibling(QDomNode &parentNode, quint32 siblingId, const QString &tagName = QString()) const;
 
-    void AddEdges(const QVector<quint32> &nodes) const;
-    void RemoveEdges(const QVector<quint32> &nodes) const;
-
-    void AddEdges(const QVector<CustomSARecord> &nodes) const;
-    void RemoveEdges(const QVector<CustomSARecord> &nodes) const;
-
-    void AddEdges(const QVector<VPieceNode> &nodes) const;
-    void RemoveEdges(const QVector<VPieceNode> &nodes) const;
-
     auto GetDestinationObject(quint32 idTool, quint32 idPoint) const -> QDomElement;
 
     static void DisablePieceNodes(const VPiecePath &path);
