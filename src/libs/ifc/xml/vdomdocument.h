@@ -109,9 +109,6 @@ public:
     static auto GetParametrInt(const QDomElement &domElement, const QString &name, const QString &defValue) -> int;
     static auto GetParametrBool(const QDomElement &domElement, const QString &name, const QString &defValue) -> bool;
 
-    static auto GetParametrUsage(const QDomElement &domElement, const QString &name) -> NodeUsage;
-    static void SetParametrUsage(QDomElement &domElement, const QString &name, const NodeUsage &value);
-
     static auto GetParametrString(const QDomElement &domElement, const QString &name,
                                   const QString &defValue = QString()) -> QString;
     static auto GetParametrEmptyString(const QDomElement &domElement, const QString &name) -> QString;

@@ -532,29 +532,6 @@ auto VDomDocument::GetParametrBool(const QDomElement &domElement, const QString 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VDomDocument::GetParametrUsage(const QDomElement &domElement, const QString &name) -> NodeUsage
-{
-    if (const bool value = GetParametrBool(domElement, name, trueStr); value)
-    {
-        return NodeUsage::InUse;
-    }
-    return NodeUsage::NotInUse;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VDomDocument::SetParametrUsage(QDomElement &domElement, const QString &name, const NodeUsage &value)
-{
-    if (value == NodeUsage::InUse)
-    {
-        domElement.setAttribute(name, trueStr);
-    }
-    else
-    {
-        domElement.setAttribute(name, falseStr);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Returns the string value of the given attribute. RENAME: see above
  *

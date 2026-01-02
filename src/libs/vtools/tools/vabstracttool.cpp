@@ -82,7 +82,6 @@ using namespace Qt::Literals::StringLiterals;
 template <class T> class QSharedPointer;
 
 bool VAbstractTool::m_suppressContextMenu = false;
-const QString VAbstractTool::AttrInUse = QStringLiteral("inUse");
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

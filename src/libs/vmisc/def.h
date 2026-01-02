@@ -113,11 +113,6 @@ enum class Source : qint8
     FromFile,
     FromTool
 };
-enum class NodeUsage : bool
-{
-    NotInUse = false,
-    InUse = true
-};
 enum class SelectionType : bool
 {
     ByMousePress,

@@ -83,7 +83,6 @@ public:
     auto getId() const -> quint32;
 
     static bool m_suppressContextMenu;
-    static const QString AttrInUse;
 
     static auto CheckFormula(const quint32 &toolId, QString &formula, VContainer *data) -> qreal;
 
