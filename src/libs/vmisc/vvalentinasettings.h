@@ -165,6 +165,10 @@ public:
     static auto GetDefDockWidgetBackgroundImagesActive() -> bool;
     void SetDockWidgetBackgroundImagesActive(bool value);
 
+    auto IsDockWidgetDependenciesActive() const -> bool;
+    static auto GetDefDockWidgetDependenciesActive() -> bool;
+    void SetDockWidgetDependenciesActive(bool value);
+
     auto GetPatternMessageFontSize(int fontSizeDef) const -> int;
     static auto GetDefMinPatternMessageFontSize() -> int;
     static auto GetDefMaxPatternMessageFontSize() -> int;

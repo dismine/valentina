@@ -133,6 +133,9 @@ VToolApp {
             "dialoglayoutprogress.h",
             "dialogsavelayout.h",
             "vwidgetbackgroundimages.h",
+            "vwidgetdependencies.cpp",
+            "vwidgetdependencies.h",
+            "vwidgetdependencies.ui",
             "vwidgetgroups.h",
             "vwidgetdetails.h",
             "dialogpreferences.h",
@@ -197,6 +200,8 @@ VToolApp {
         prefix: "core/"
         files: [
             "vapplication.h",
+            "vdependencytreemodel.cpp",
+            "vdependencytreemodel.h",
             "vformulaproperty.h",
             "vformulapropertyeditor.h",
             "vtooloptionspropertybrowser.h",

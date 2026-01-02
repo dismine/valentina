@@ -118,6 +118,7 @@ protected:
     QAction *actionDockWidgetToolOptions{nullptr};      // NOLINT(misc-non-private-member-variables-in-classes)
     QAction *actionDockWidgetGroups{nullptr};           // NOLINT(misc-non-private-member-variables-in-classes)
     QAction *actionDockWidgetBackgroundImages{nullptr}; // NOLINT(misc-non-private-member-variables-in-classes)
+    QAction *actionDockWidgetDependencies{nullptr};     // NOLINT(misc-non-private-member-variables-in-classes)
 
     bool isNoScaling{false};                                // NOLINT(misc-non-private-member-variables-in-classes)
     bool isNeedAutosave{false};                             // NOLINT(misc-non-private-member-variables-in-classes)

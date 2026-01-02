@@ -260,7 +260,7 @@ private:
 
     auto LastDrawName() const -> QString;
     auto LastToolId() const -> quint32;
-    auto PPLastToolId(const QString &name) const -> quint32;
+    auto PPLastToolId(int blockIndex) const -> quint32;
 
     void PostRefreshActions();
     void RefreshPieceGeometryForList(const QList<vidtype> &list) const;

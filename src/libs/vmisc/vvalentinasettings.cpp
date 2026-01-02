@@ -127,6 +127,8 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockWidgetPatternMessagesActive,
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockWidgetBackgroundImagesActive,
                           ("dockWidget/backgroundImagesActive"_L1))
 // NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockWidgetDependenciesActive, ("dockWidget/dependenciesActive"_L1))
+// NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternMessagesFontSize, ("font/patternMessagesSize"_L1))
 
 // NOLINTNEXTLINE
@@ -697,6 +699,24 @@ auto VValentinaSettings::GetDefDockWidgetBackgroundImagesActive() -> bool
 void VValentinaSettings::SetDockWidgetBackgroundImagesActive(bool value)
 {
     setValue(*settingDockWidgetBackgroundImagesActive, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::IsDockWidgetDependenciesActive() const -> bool
+{
+    return value(*settingDockWidgetDependenciesActive, GetDefDockWidgetDependenciesActive()).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::GetDefDockWidgetDependenciesActive() -> bool
+{
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetDockWidgetDependenciesActive(bool value)
+{
+    setValue(*settingDockWidgetDependenciesActive, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -172,7 +172,7 @@ public:
     void AddToolOnRemove(VDataTool *tool);
 
     auto getHistory() -> QVector<VToolRecord> *;
-    auto GetLocalHistory() const -> QVector<VToolRecord>;
+    auto GetLocalHistory(int blockIndex = -1) const -> QVector<VToolRecord>;
 
     auto MPath() const -> QString;
     void SetMPath(const QString &path);
@@ -511,8 +511,6 @@ protected:
     void InsertTag(const QStringList &tags, const QDomElement &element);
 
     void SetChildTag(const QString &qsParent, const QString &qsChild, const QString &qsValue);
-
-    auto GetLocalHistory(const QString &draw) const -> QVector<VToolRecord>;
 
     auto GroupHasItem(const QDomElement &groupDomElement, quint32 toolId, quint32 objectId) -> bool;
 

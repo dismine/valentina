@@ -78,7 +78,6 @@
 #include "../vmisc/customevents.h"
 #include "../vtools/dialogs/dialogtoolbox.h"
 #include "../vmisc/def.h"
-#include "../vmisc/defglobal.h"
 #include "../vmisc/dialogs/dialogaskcollectstatistic.h"
 #include "../vmisc/dialogs/dialogselectlanguage.h"
 #include "../vmisc/qxtcsvmodel.h"
@@ -199,6 +198,7 @@
 #include "dialogs/vwidgetbackgroundimages.h"
 #include "dialogs/vwidgetdetails.h"
 #include "dialogs/vwidgetgroups.h"
+#include "dialogs/vwidgetdependencies.h"
 #include "../vtools/tools/drawTools/toolcurve/vtoolellipticalarcwithlength.h"
 #include "../vtools/tools/drawTools/toolcurve/vtoolparallelcurve.h"
 #include "../vtools/tools/drawTools/toolcurve/vtoolgraduatedcurve.h"
@@ -4091,6 +4091,8 @@ void MainWindow::ActionDraw(bool checked)
         ui->dockWidgetGroups->setToolTip(tr("Contains all visibility groups"));
 
         ui->dockWidgetBackgroundImages->setVisible(m_backgroundImagesActive);
+
+        ui->dockWidgetDependencies->setVisible(m_dependenciesActive);
     }
     else
     {
@@ -4162,6 +4164,7 @@ void MainWindow::ActionDetails(bool checked)
 
         ui->dockWidgetToolOptions->setVisible(m_toolOptionsActive);
         ui->dockWidgetBackgroundImages->setVisible(false);
+        ui->dockWidgetDependencies->setVisible(false);
 
         m_statusLabel->setText(QString());
 
@@ -4275,6 +4278,7 @@ void MainWindow::ActionLayout(bool checked)
     ui->dockWidgetToolOptions->setVisible(false);
     ui->dockWidgetGroups->setVisible(false);
     ui->dockWidgetBackgroundImages->setVisible(false);
+    ui->dockWidgetDependencies->setVisible(false);
 
     ShowPaper(ui->listWidget->currentRow());
 
@@ -5946,11 +5950,13 @@ void MainWindow::ReadSettings()
         m_toolOptionsActive = settings->IsDockWidgetToolOptionsActive();
         m_patternMessagesActive = settings->IsDockWidgetPatternMessagesActive();
         m_backgroundImagesActive = settings->IsDockWidgetBackgroundImagesActive();
+        m_dependenciesActive = settings->IsDockWidgetDependenciesActive();
 
         ui->dockWidgetGroups->setVisible(m_groupsActive);
         ui->dockWidgetToolOptions->setVisible(m_toolOptionsActive);
         ui->dockWidgetMessages->setVisible(m_patternMessagesActive);
         ui->dockWidgetBackgroundImages->setVisible(m_backgroundImagesActive);
+        ui->dockWidgetDependencies->setVisible(m_dependenciesActive);
 
         // Scene antialiasing
         ui->view->SetAntialiasing(settings->GetGraphicalOutput());
@@ -5994,6 +6000,7 @@ void MainWindow::WriteSettings()
     settings->SetDockWidgetToolOptionsActive(ui->dockWidgetToolOptions->isVisible());
     settings->SetDockWidgetPatternMessagesActive(ui->dockWidgetMessages->isVisible());
     settings->SetDockWidgetBackgroundImagesActive(actionDockWidgetBackgroundImages->isChecked());
+    settings->SetDockWidgetDependenciesActive(ui->dockWidgetDependencies->isVisible());
 
     settings->sync();
     if (settings->status() == QSettings::AccessError)
@@ -6348,8 +6355,13 @@ void MainWindow::AddDocks()
 
     actionDockWidgetBackgroundImages = ui->dockWidgetBackgroundImages->toggleViewAction();
     connect(actionDockWidgetBackgroundImages, &QAction::triggered, this,
-            [this](bool checked) { m_backgroundImagesActive = checked; });
+            [this](bool checked) -> void { m_backgroundImagesActive = checked; });
     ui->menuWindow->addAction(actionDockWidgetBackgroundImages);
+
+    actionDockWidgetDependencies = ui->dockWidgetDependencies->toggleViewAction();
+    connect(actionDockWidgetDependencies, &QAction::triggered, this,
+            [this](bool checked) -> void { m_dependenciesActive = checked; });
+    ui->menuWindow->addAction(actionDockWidgetDependencies);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -6376,6 +6388,13 @@ void MainWindow::InitDocksContain()
     m_backgroundImagesWidget = new VWidgetBackgroundImages(doc, this);
     ui->dockWidgetBackgroundImages->setWidget(m_backgroundImagesWidget);
     connect(m_backgroundImagesWidget, &VWidgetBackgroundImages::DeleteImage, this, &MainWindow::RemoveBackgroundImage);
+
+    m_dependenciesWidget = new VWidgetDependencies(doc, this);
+    connect(doc, &VPattern::FullUpdateFromFile, m_dependenciesWidget, &VWidgetDependencies::UpdateDependencies);
+    connect(doc, &VPattern::PatternDependencyGraphCompleted, m_dependenciesWidget, &VWidgetDependencies::UpdateDependencies);
+    connect(m_dependenciesWidget, &VWidgetDependencies::Highlight, m_sceneDetails, &VMainGraphicsScene::HighlightItem);
+    connect(ui->view, &VMainGraphicsView::itemClicked, m_dependenciesWidget, &VWidgetDependencies::ShowDependency);
+    ui->dockWidgetDependencies->setWidget(m_dependenciesWidget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -7354,6 +7373,7 @@ void MainWindow::ChangePP(int index, bool zoomBestFit)
         }
         m_toolOptions->itemClicked(nullptr); // hide options for tool in previous pattern piece
         m_groupsWidget->UpdateGroups();
+        m_dependenciesWidget->UpdateDependencies();
     }
 }
 

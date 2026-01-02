@@ -68,7 +68,7 @@ private:
     vidtype id{NULL_ID};
 
     /** @brief toolType tool type. */
-    Tool toolType{Tool::Arrow};
+    Tool toolType{Tool::LAST_ONE_DO_NOT_USE};
 
     /** @brief nameDraw pattern peace name. */
     int indexPatternBlock{-1};

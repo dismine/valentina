@@ -366,27 +366,6 @@ auto VAbstractPattern::ListMeasurements() const -> QStringList
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstractPattern::GetLocalHistory(const QString &draw) const -> QVector<VToolRecord>
-{
-    const int index = PatternBlockMapper()->FindId(draw);
-    if (index < 0)
-    {
-        return {};
-    }
-
-    QVector<VToolRecord> historyPP;
-    historyPP.reserve(history.size());
-    for (const auto &tool : history)
-    {
-        if (tool.GetPatternBlockIndex() == index)
-        {
-            historyPP.append(tool);
-        }
-    }
-    return historyPP;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief GetActivNodeElement find element in current pattern piece by name.
  * @param name name tag.
@@ -729,9 +708,24 @@ auto VAbstractPattern::getHistory() -> QVector<VToolRecord> *
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstractPattern::GetLocalHistory() const -> QVector<VToolRecord>
+auto VAbstractPattern::GetLocalHistory(int blockIndex) const -> QVector<VToolRecord>
 {
-    return GetLocalHistory(PatternBlockMapper()->GetActive());
+    const int index = blockIndex >= 0 ? blockIndex : PatternBlockMapper()->GetActiveId();
+    if (index < 0)
+    {
+        return {};
+    }
+
+    QVector<VToolRecord> historyPatternBlock;
+    historyPatternBlock.reserve(history.size());
+    for (const auto &tool : history)
+    {
+        if (tool.GetPatternBlockIndex() == index)
+        {
+            historyPatternBlock.append(tool);
+        }
+    }
+    return historyPatternBlock;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

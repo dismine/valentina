@@ -53,6 +53,7 @@ class DialogHistory;
 class DialogFinalMeasurements;
 class VWidgetGroups;
 class VWidgetDetails;
+class VWidgetDependencies;
 class QToolButton;
 class QProgressBar;
 class WatermarkWindow;
@@ -343,6 +344,7 @@ private:
     VToolOptionsPropertyBrowser *m_toolOptions{nullptr};
     VWidgetGroups *m_groupsWidget{nullptr};
     VWidgetDetails *m_detailsWidget{nullptr};
+    VWidgetDependencies *m_dependenciesWidget{nullptr};
     VWidgetBackgroundImages *m_backgroundImagesWidget{nullptr};
     QSharedPointer<VLockGuard<char>> m_lock{nullptr};
 
@@ -366,6 +368,7 @@ private:
     bool m_toolOptionsActive{false};
     bool m_patternMessagesActive{false};
     bool m_backgroundImagesActive{false};
+    bool m_dependenciesActive{false};
 
     QMultiHash<VShortcutAction, QAction *> m_shortcutActions{};
 

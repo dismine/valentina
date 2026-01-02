@@ -423,7 +423,7 @@ auto VPattern::GetCompletePPData(const QString &name) const -> VContainer
         return (data != nullptr ? *data : VContainer(nullptr, nullptr, VContainer::UniqueNamespace()));
     }
 
-    const quint32 id = (countPP == 1 ? history.constLast().GetId() : PPLastToolId(name));
+    const quint32 id = (countPP == 1 ? history.constLast().GetId() : PPLastToolId(PatternBlockMapper()->FindId(name)));
 
     if (id == NULL_ID)
     {
@@ -3932,7 +3932,7 @@ auto VPattern::LastDrawName() const -> QString
     const QDomNodeList elements = this->documentElement().elementsByTagName(TagDraw);
     if (elements.isEmpty())
     {
-        return QString();
+        return {};
     }
 
     if (const QDomElement &elem = elements.at(elements.size() - 1).toElement(); not elem.isNull())
@@ -3940,7 +3940,7 @@ auto VPattern::LastDrawName() const -> QString
         return GetParametrString(elem, AttrName);
     }
 
-    return QString();
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3952,13 +3952,13 @@ auto VPattern::LastToolId() const -> quint32
         return NULL_ID;
     }
 
-    return PPLastToolId(name);
+    return PPLastToolId(PatternBlockMapper()->FindId(name));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPattern::PPLastToolId(const QString &name) const -> quint32
+auto VPattern::PPLastToolId(int blockIndex) const -> quint32
 {
-    const QVector<VToolRecord> localHistory = GetLocalHistory(name);
+    const QVector<VToolRecord> localHistory = GetLocalHistory(blockIndex);
 
     return (not localHistory.isEmpty() ? localHistory.constLast().GetId() : NULL_ID);
 }

@@ -45,8 +45,6 @@ template <class T> class QSharedPointer;
 
 struct VToolTriangleInitData : VToolSinglePointInitData
 {
-    VToolTriangleInitData() = default;
-
     quint32 axisP1Id{NULL_ID};      // NOLINT(misc-non-private-member-variables-in-classes)
     quint32 axisP2Id{NULL_ID};      // NOLINT(misc-non-private-member-variables-in-classes)
     quint32 firstPointId{NULL_ID};  // NOLINT(misc-non-private-member-variables-in-classes)
