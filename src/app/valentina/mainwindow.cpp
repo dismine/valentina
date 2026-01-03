@@ -6392,7 +6392,6 @@ void MainWindow::InitDocksContain()
     m_dependenciesWidget = new VWidgetDependencies(doc, this);
     connect(doc, &VPattern::FullUpdateFromFile, m_dependenciesWidget, &VWidgetDependencies::UpdateDependencies);
     connect(doc, &VPattern::PatternDependencyGraphCompleted, m_dependenciesWidget, &VWidgetDependencies::UpdateDependencies);
-    connect(m_dependenciesWidget, &VWidgetDependencies::Highlight, m_sceneDetails, &VMainGraphicsScene::HighlightItem);
     connect(ui->view, &VMainGraphicsView::itemClicked, m_dependenciesWidget, &VWidgetDependencies::ShowDependency);
     ui->dockWidgetDependencies->setWidget(m_dependenciesWidget);
 }

@@ -334,6 +334,20 @@ void VDependencyTreeModel::SetCurrentPattern(const VAbstractPattern *doc)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VDependencyTreeModel::FindRootIndexByObjectId(vidtype objectId) const -> QModelIndex
+{
+    for (int i = 0; i < m_rootNode->children.size(); ++i)
+    {
+        if (m_rootNode->children.at(i)->objectId == objectId)
+        {
+            return index(i, 0, QModelIndex());
+        }
+    }
+
+    return {};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VDependencyTreeModel::UpdateTree(const QVector<vidtype> &newRootObjects)
 {
     // Build sets for comparison

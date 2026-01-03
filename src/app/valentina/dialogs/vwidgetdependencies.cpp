@@ -31,32 +31,114 @@
 #include "../core/vdependencytreemodel.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatterngraph.h"
+#include "../vtools/tools/vabstracttool.h"
+#include "../vwidgets/vcontrolpointspline.h"
+#include "../vwidgets/vgraphicssimpletextitem.h"
+#include "../vwidgets/vsimplecurve.h"
+#include "../vwidgets/vsimplepoint.h"
 
 #include <QGraphicsItem>
+
+#include <../vwidgets/vmaingraphicsview.h>
+
+namespace
+{
+auto FindItemTool_r(QGraphicsItem *item) -> QGraphicsItem *
+{
+    if (item == nullptr)
+    {
+        return item;
+    }
+
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64, "List of tools changed.");
+
+    switch (item->type())
+    {
+        case VGraphicsSimpleTextItem::Type:
+        case VControlPointSpline::Type:
+        case VSimplePoint::Type:
+        case VSimpleCurve::Type:
+            return FindItemTool_r(item->parentItem());
+        default:
+            break;
+    }
+
+    return item;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void ShowToolProperties(VAbstractTool *tool)
+{
+    if (auto *sceneItem = dynamic_cast<QGraphicsItem *>(tool))
+    {
+        if (auto *scene = sceneItem->scene())
+        {
+            const QList<QGraphicsView *> viewList = scene->views();
+            if (!viewList.isEmpty())
+            {
+                if (auto *view = qobject_cast<VMainGraphicsView *>(viewList.at(0)))
+                {
+                    emit view->itemClicked(sceneItem);
+                }
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto HighlightTool(vidtype id, bool show) -> vidtype
+{
+    try
+    {
+        if (auto *tool = qobject_cast<VAbstractTool *>(VAbstractPattern::getTool(id)))
+        {
+            tool->ShowVisualization(show);
+
+            if (show)
+            {
+                ShowToolProperties(tool);
+            }
+
+            return id;
+        }
+    }
+    catch (const VExceptionBadId &)
+    {
+        // do nothing
+    }
+
+    return NULL_ID;
+}
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VWidgetDependencies::VWidgetDependencies(VAbstractPattern *doc, QWidget *parent)
   : QWidget(parent),
     ui(new Ui::VWidgetDependencies),
     m_doc(doc),
-    m_model(new VDependencyTreeModel(this)),
+    m_dependencyModel(new VDependencyTreeModel(this)),
     m_proxyModel(new VDependencyFilterProxyModel(this))
 {
-    m_model->SetCurrentPattern(m_doc);
+    m_dependencyModel->SetCurrentPattern(m_doc);
 
-    m_proxyModel->setSourceModel(m_model);
+    m_proxyModel->setSourceModel(m_dependencyModel);
 
     ui->setupUi(this);
     ui->treeView->header()->hide();
     ui->treeView->setModel(m_proxyModel);
 
     // NOLINTNEXTLINE(cppcoreguidelines-prefer-member-initializer)
-    m_stateManager = new VTreeStateManager(ui->treeView, m_model, this);
+    m_stateManager = new VTreeStateManager(ui->treeView, m_dependencyModel, this);
 
     connect(ui->lineEditFilter,
             &QLineEdit::textChanged,
             this,
             [this](const QString &text) -> void { m_proxyModel->setFilterFixedString(text); });
+    connect(ui->treeView->selectionModel(),
+            &QItemSelectionModel::currentChanged,
+            this,
+            &VWidgetDependencies::OnNodeSelectionChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -71,14 +153,14 @@ void VWidgetDependencies::UpdateDependencies()
     if (VPatternBlockMapper const *blocks = m_doc->PatternBlockMapper(); m_indexPatternBlock != blocks->GetActiveId())
     {
         m_indexPatternBlock = blocks->GetActiveId();
-        m_model->ClearModel();
+        m_dependencyModel->ClearModel();
 
-        m_model->SetRootObjects(RootTools());
+        m_dependencyModel->SetRootObjects(RootTools());
     }
     else
     {
         m_stateManager->SaveState();
-        m_model->UpdateTree(RootTools());
+        m_dependencyModel->UpdateTree(RootTools());
         m_stateManager->RestoreState();
     }
 }
@@ -86,10 +168,48 @@ void VWidgetDependencies::UpdateDependencies()
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetDependencies::ShowDependency(QGraphicsItem *item)
 {
-    if (item != nullptr && not item->isEnabled())
+    if (item == nullptr || !item->isEnabled())
+    {
+        if (m_activeTool != NULL_ID)
+        {
+            HighlightTool(m_activeTool, false);
+            m_activeTool = NULL_ID;
+        }
+        return;
+    }
+
+    auto *toolItem = FindItemTool_r(item);
+
+    const auto *tool = dynamic_cast<VAbstractTool *>(toolItem);
+    if (tool == nullptr)
     {
         return;
     }
+
+    vidtype const objectId = tool->getId();
+
+    // Find in source model
+    const QModelIndex sourceIndex = m_dependencyModel->FindRootIndexByObjectId(objectId);
+
+    if (!sourceIndex.isValid())
+    {
+        return; // Object not found
+    }
+
+    // Map to proxy model
+    const QModelIndex proxyIndex = m_proxyModel->mapFromSource(sourceIndex);
+
+    if (!proxyIndex.isValid())
+    {
+        // Object is filtered out
+        return;
+    }
+
+    // Select and scroll to the item
+    QSignalBlocker const blocker(ui->treeView->selectionModel());
+    ui->treeView->setCurrentIndex(proxyIndex);
+    ui->treeView->scrollTo(proxyIndex);
+    ui->treeView->expand(proxyIndex);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -183,4 +303,110 @@ auto VWidgetDependencies::RootTools() const -> QVector<vidtype>
     }
 
     return rootObjects;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VWidgetDependencies::HighlightObject(vidtype id, int indexPatternBlock, bool show) const -> vidtype
+{
+    if (indexPatternBlock < 0)
+    {
+        return NULL_ID;
+    }
+
+    VContainer const patternData = m_doc->GetCompletePPData(m_doc->PatternBlockMapper()->FindName(indexPatternBlock));
+
+    try
+    {
+        const QSharedPointer<VGObject> obj = patternData.GetGObject(id);
+        return HighlightTool(obj->getIdTool(), show);
+    }
+    catch (const VExceptionBadId &)
+    {
+        // do nothing
+    }
+    return NULL_ID;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VWidgetDependencies::ObjectId(const QModelIndex &index) const -> vidtype
+{
+    if (!index.isValid())
+    {
+        // No selection
+        return NULL_ID;
+    }
+
+    // Map proxy index to source index
+    QModelIndex const sourceIndex = m_proxyModel->mapToSource(index);
+
+    if (!sourceIndex.isValid())
+    {
+        return NULL_ID;
+    }
+
+    // Get the node
+    const auto *node = static_cast<VDependencyNode *>(sourceIndex.internalPointer());
+    if (node == nullptr)
+    {
+        return NULL_ID;
+    }
+
+    return node->objectId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VWidgetDependencies::OnNodeSelectionChanged(const QModelIndex &current, const QModelIndex &previous)
+{
+    if (m_doc == nullptr)
+    {
+        return;
+    }
+
+    VPatternGraph const *graph = m_doc->PatternGraph();
+
+    if (const vidtype previousObjectId = ObjectId(previous); previousObjectId != NULL_ID)
+    {
+        auto previousVertex = graph->GetVertex(previousObjectId);
+        if (!previousVertex)
+        {
+            return;
+        }
+
+        switch (previousVertex->type)
+        {
+            case VNodeType::OBJECT:
+                HighlightObject(previousVertex->id, previousVertex->indexPatternBlock, false);
+                break;
+            case VNodeType::TOOL:
+                HighlightTool(previousVertex->id, false);
+                break;
+            default:
+                break;
+        }
+    }
+
+    const vidtype currentObjectId = ObjectId(current);
+    if (currentObjectId == NULL_ID)
+    {
+        // No selection
+        return;
+    }
+
+    auto currentVertex = graph->GetVertex(currentObjectId);
+    if (!currentVertex)
+    {
+        return;
+    }
+
+    switch (currentVertex->type)
+    {
+        case VNodeType::OBJECT:
+            m_activeTool = HighlightObject(currentVertex->id, currentVertex->indexPatternBlock, true);
+            break;
+        case VNodeType::TOOL:
+            m_activeTool = HighlightTool(currentVertex->id, true);
+            break;
+        default:
+            break;
+    }
 }

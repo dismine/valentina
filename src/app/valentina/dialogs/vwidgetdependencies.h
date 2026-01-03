@@ -38,6 +38,7 @@ class QGraphicsItem;
 class VDependencyTreeModel;
 class VTreeStateManager;
 class VDependencyFilterProxyModel;
+class VAbstractTool;
 
 namespace Ui
 {
@@ -57,18 +58,26 @@ public slots:
     void ShowDependency(QGraphicsItem *item);
 
 signals:
-    void Highlight(quint32 id);
+    void Highlight(vidtype id) const;
+
+private slots:
+    void OnNodeSelectionChanged(const QModelIndex &current, const QModelIndex &previous);
 
 private:
     Q_DISABLE_COPY_MOVE(VWidgetDependencies)
     Ui::VWidgetDependencies *ui;
     VAbstractPattern *m_doc;
-    VDependencyTreeModel *m_model;
+    VDependencyTreeModel *m_dependencyModel;
     VDependencyFilterProxyModel *m_proxyModel;
     VTreeStateManager *m_stateManager{nullptr};
     int m_indexPatternBlock{-1};
+    vidtype m_activeTool{NULL_ID};
 
     auto RootTools() const -> QVector<vidtype>;
+
+    auto HighlightObject(vidtype id, int indexPatternBlock, bool show) const -> vidtype;
+
+    auto ObjectId(const QModelIndex &index) const -> vidtype;
 };
 
 #endif // VWIDGETDEPENDENCIES_H

@@ -90,6 +90,7 @@ public:
     void SetRootObjects(const QVector<vidtype> &objectIds);
     void ClearModel();
     void SetCurrentPattern(const VAbstractPattern *doc);
+    auto FindRootIndexByObjectId(vidtype objectId) const -> QModelIndex;
 
     // Update operations that preserve state
     void UpdateTree(const QVector<vidtype> &newRootObjects);
