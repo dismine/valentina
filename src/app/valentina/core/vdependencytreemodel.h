@@ -106,12 +106,12 @@ private:
     Q_DISABLE_COPY_MOVE(VDependencyTreeModel)
 
     QSharedPointer<VDependencyNode> m_rootNode;
-    const VAbstractPattern *m_doc;
+    const VAbstractPattern *m_doc{nullptr};
     QSet<QString> m_expandedNodes{}; // Track expanded state internally
 
     auto GetNode(const QModelIndex &index) const -> VDependencyNode *;
     auto FindNodeByPath(const QString &path, VDependencyNode *root = nullptr) -> VDependencyNode *;
-    void LoadDependencies(VDependencyNode *node);
+    void LoadDependencies(const QModelIndex &parentIndex, VDependencyNode *node);
     auto FetchDependenciesForObject(vidtype objectId) const -> QVector<vidtype>;
     auto GetDisplayNameForObject(vidtype objectId) const -> QString; // Fetch display name
     auto GetDisplayToolTipForObject(vidtype objectId) const -> QString;

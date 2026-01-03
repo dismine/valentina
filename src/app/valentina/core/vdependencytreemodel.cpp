@@ -294,7 +294,11 @@ void VDependencyTreeModel::fetchMore(const QModelIndex &parent)
         return;
     }
 
-    LoadDependencies(node);
+    QGuiApplication::setOverrideCursor(Qt::WaitCursor);
+
+    LoadDependencies(parent, node);
+
+    QGuiApplication::restoreOverrideCursor();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -506,7 +510,7 @@ auto VDependencyTreeModel::FindNodeByPath(const QString &path, VDependencyNode *
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDependencyTreeModel::LoadDependencies(VDependencyNode *node)
+void VDependencyTreeModel::LoadDependencies(const QModelIndex &parentIndex, VDependencyNode *node)
 {
     if ((node == nullptr) || node->childrenLoaded)
     {
@@ -517,26 +521,6 @@ void VDependencyTreeModel::LoadDependencies(VDependencyNode *node)
 
     if (!dependencies.isEmpty())
     {
-        QModelIndex parentIndex;
-
-        if (node->parent == m_rootNode.get())
-        {
-            int row = 0;
-            for (const auto &child : std::as_const(m_rootNode->children))
-            {
-                if (child.get() == node)
-                {
-                    parentIndex = createIndex(row, 0, node);
-                    break;
-                }
-                row++;
-            }
-        }
-        else
-        {
-            parentIndex = createIndex(0, 0, node);
-        }
-
         beginInsertRows(parentIndex, 0, static_cast<int>(dependencies.size() - 1));
 
         for (vidtype const depId : std::as_const(dependencies))
