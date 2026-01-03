@@ -38,7 +38,9 @@
 #include "../vwidgets/vsimplecurve.h"
 #include "../vwidgets/vsimplepoint.h"
 
+#include <QClipboard>
 #include <QGraphicsItem>
+#include <QMenu>
 
 #include <../vwidgets/vmaingraphicsview.h>
 
@@ -68,47 +70,25 @@ auto FindItemTool_r(QGraphicsItem *item) -> QGraphicsItem *
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void ShowToolProperties(VAbstractTool *tool)
+auto ItemBoundingRect(QGraphicsItem *item) -> QRectF
 {
-    if (auto *sceneItem = dynamic_cast<QGraphicsItem *>(tool))
+    if (item == nullptr)
     {
-        if (auto *scene = sceneItem->scene())
-        {
-            const QList<QGraphicsView *> viewList = scene->views();
-            if (!viewList.isEmpty())
-            {
-                if (auto *view = qobject_cast<VMainGraphicsView *>(viewList.at(0)))
-                {
-                    emit view->itemClicked(sceneItem);
-                }
-            }
-        }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto HighlightTool(vidtype id, bool show) -> vidtype
-{
-    try
-    {
-        if (auto *tool = qobject_cast<VAbstractTool *>(VAbstractPattern::getTool(id)))
-        {
-            tool->ShowVisualization(show);
-
-            if (show)
-            {
-                ShowToolProperties(tool);
-            }
-
-            return id;
-        }
-    }
-    catch (const VExceptionBadId &)
-    {
-        // do nothing
+        return {};
     }
 
-    return NULL_ID;
+    QRectF childrenRect = item->childrenBoundingRect();
+    // map to scene coordinate.
+    childrenRect.translate(item->scenePos());
+
+    QRectF itemRect = item->boundingRect();
+    // map to scene coordinate.
+    itemRect.translate(item->scenePos());
+
+    QRectF boundingRect;
+    boundingRect = boundingRect.united(itemRect);
+    boundingRect = boundingRect.united(childrenRect);
+    return boundingRect;
 }
 } // namespace
 
@@ -139,6 +119,9 @@ VWidgetDependencies::VWidgetDependencies(VAbstractPattern *doc, QWidget *parent)
             &QItemSelectionModel::currentChanged,
             this,
             &VWidgetDependencies::OnNodeSelectionChanged);
+
+    ui->treeView->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(ui->treeView, &QTreeView::customContextMenuRequested, this, &VWidgetDependencies::OnContextMenuRequested);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -355,6 +338,90 @@ auto VWidgetDependencies::ObjectId(const QModelIndex &index) const -> vidtype
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VWidgetDependencies::ExpandAllChildren(const QModelIndex &index)
+{
+    if (!index.isValid())
+    {
+        return;
+    }
+
+    QGuiApplication::setOverrideCursor(Qt::WaitCursor);
+
+    ui->treeView->expand(index);
+
+    int const rows = index.model()->rowCount(index);
+    for (int i = 0; i < rows; ++i)
+    {
+        const QModelIndex child = index.model()->index(i, 0, index);
+        ExpandAllChildren(child);
+    }
+
+    QGuiApplication::restoreOverrideCursor();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VWidgetDependencies::CollapseAllChildren(const QModelIndex &index)
+{
+    if (!index.isValid())
+    {
+        return;
+    }
+
+    int const rows = index.model()->rowCount(index);
+    for (int i = 0; i < rows; ++i)
+    {
+        const QModelIndex child = index.model()->index(i, 0, index);
+        CollapseAllChildren(child);
+    }
+
+    ui->treeView->collapse(index);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VWidgetDependencies::GoToObject(vidtype id) const
+{
+    if (id == NULL_ID)
+    {
+        return;
+    }
+
+    VDataTool *tool = nullptr;
+
+    try
+    {
+        tool = VAbstractPattern::getTool(id);
+    }
+    catch (const VExceptionBadId &)
+    {
+        return;
+    }
+
+    if (auto *sceneItem = dynamic_cast<QGraphicsItem *>(tool))
+    {
+        bool makeInvisible = false;
+        if (!sceneItem->isVisible())
+        {
+            sceneItem->setVisible(true);
+            makeInvisible = true;
+        }
+
+        const QRectF rect = ItemBoundingRect(sceneItem);
+
+        if (makeInvisible)
+        {
+            sceneItem->setVisible(false);
+        }
+
+        if (rect.isEmpty())
+        {
+            return;
+        }
+
+        emit ShowTool(rect);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VWidgetDependencies::OnNodeSelectionChanged(const QModelIndex &current, const QModelIndex &previous)
 {
     if (m_doc == nullptr)
@@ -409,4 +476,90 @@ void VWidgetDependencies::OnNodeSelectionChanged(const QModelIndex &current, con
         default:
             break;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VWidgetDependencies::OnContextMenuRequested(const QPoint &pos)
+{
+    QModelIndex const proxyIndex = ui->treeView->indexAt(pos);
+    if (!proxyIndex.isValid())
+    {
+        return; // No item at this position
+    }
+
+    // Map to source model
+    QModelIndex const sourceIndex = m_proxyModel->mapToSource(proxyIndex);
+    const auto *node = static_cast<VDependencyNode *>(sourceIndex.internalPointer());
+
+    if (node == nullptr)
+    {
+        return;
+    }
+
+    // Create context menu
+    QMenu contextMenu(this);
+
+    QAction const *actionExpand = contextMenu.addAction(tr("Expand All"));
+    QAction const *actionCollapse = contextMenu.addAction(tr("Collapse All"));
+    contextMenu.addSeparator();
+    QAction const *actionCopyId = contextMenu.addAction(tr("Copy ID"));
+    contextMenu.addSeparator();
+    QAction *actionGoToObject = contextMenu.addAction(FromTheme(VThemeIcon::SystemSearch), tr("Go to Object"));
+
+    if (m_doc != nullptr)
+    {
+        if (auto vertex = m_doc->PatternGraph()->GetVertex(node->objectId); vertex)
+        {
+            actionGoToObject->setEnabled(vertex->type != VNodeType::PIECE);
+        }
+    }
+
+    // Show menu and get selected action
+    QAction const *selectedAction = contextMenu.exec(ui->treeView->viewport()->mapToGlobal(pos));
+
+    if (selectedAction == actionExpand)
+    {
+        ExpandAllChildren(proxyIndex);
+    }
+    else if (selectedAction == actionCollapse)
+    {
+        CollapseAllChildren(proxyIndex);
+    }
+    else if (selectedAction == actionCopyId)
+    {
+        QApplication::clipboard()->setText(QString::number(node->objectId));
+    }
+    else if (selectedAction == actionGoToObject)
+    {
+        GoToObject(node->objectId);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VWidgetDependencies::ShowToolProperties(VAbstractTool *tool, bool show) const
+{
+    if (auto *sceneItem = dynamic_cast<QGraphicsItem *>(tool))
+    {
+        emit ShowProperties(show ? sceneItem : nullptr);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VWidgetDependencies::HighlightTool(vidtype id, bool show) const -> vidtype
+{
+    try
+    {
+        if (auto *tool = qobject_cast<VAbstractTool *>(VAbstractPattern::getTool(id)))
+        {
+            tool->ShowVisualization(show);
+            ShowToolProperties(tool, show);
+            return id;
+        }
+    }
+    catch (const VExceptionBadId &)
+    {
+        // do nothing
+    }
+
+    return NULL_ID;
 }

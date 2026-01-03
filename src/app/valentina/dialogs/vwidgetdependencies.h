@@ -58,10 +58,12 @@ public slots:
     void ShowDependency(QGraphicsItem *item);
 
 signals:
-    void Highlight(vidtype id) const;
+    void ShowProperties(QGraphicsItem *item) const;
+    void ShowTool(const QRectF &rect) const;
 
 private slots:
     void OnNodeSelectionChanged(const QModelIndex &current, const QModelIndex &previous);
+    void OnContextMenuRequested(const QPoint &pos);
 
 private:
     Q_DISABLE_COPY_MOVE(VWidgetDependencies)
@@ -75,9 +77,15 @@ private:
 
     auto RootTools() const -> QVector<vidtype>;
 
+    void ShowToolProperties(VAbstractTool *tool, bool show) const;
+    auto HighlightTool(vidtype id, bool show) const -> vidtype;
     auto HighlightObject(vidtype id, int indexPatternBlock, bool show) const -> vidtype;
 
     auto ObjectId(const QModelIndex &index) const -> vidtype;
+
+    void ExpandAllChildren(const QModelIndex &index);
+    void CollapseAllChildren(const QModelIndex &index);
+    void GoToObject(vidtype id) const;
 };
 
 #endif // VWIDGETDEPENDENCIES_H

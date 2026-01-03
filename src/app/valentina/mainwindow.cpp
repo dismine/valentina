@@ -6390,9 +6390,16 @@ void MainWindow::InitDocksContain()
     connect(m_backgroundImagesWidget, &VWidgetBackgroundImages::DeleteImage, this, &MainWindow::RemoveBackgroundImage);
 
     m_dependenciesWidget = new VWidgetDependencies(doc, this);
-    connect(doc, &VPattern::FullUpdateFromFile, m_dependenciesWidget, &VWidgetDependencies::UpdateDependencies);
-    connect(doc, &VPattern::PatternDependencyGraphCompleted, m_dependenciesWidget, &VWidgetDependencies::UpdateDependencies);
-    connect(ui->view, &VMainGraphicsView::itemClicked, m_dependenciesWidget, &VWidgetDependencies::ShowDependency);
+    connect(doc, &VPattern::FullUpdateFromFile, m_dependenciesWidget, &VWidgetDependencies::UpdateDependencies,
+            Qt::QueuedConnection);
+    connect(doc, &VPattern::PatternDependencyGraphCompleted, m_dependenciesWidget,
+            &VWidgetDependencies::UpdateDependencies, Qt::QueuedConnection);
+    connect(ui->view, &VMainGraphicsView::itemClicked, m_dependenciesWidget, &VWidgetDependencies::ShowDependency,
+            Qt::QueuedConnection);
+    connect(m_dependenciesWidget, &VWidgetDependencies::ShowProperties, m_toolOptions,
+            &VToolOptionsPropertyBrowser::itemClicked, Qt::QueuedConnection);
+    connect(m_dependenciesWidget, &VWidgetDependencies::ShowTool, ui->view, &VMainGraphicsView::EnsureToolVisible,
+            Qt::QueuedConnection);
     ui->dockWidgetDependencies->setWidget(m_dependenciesWidget);
 }
 
@@ -6407,6 +6414,7 @@ auto MainWindow::OpenNewValentina(const QString &fileName) const -> bool
     return false;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::CreateActions()
 {
     ui->setupUi(this);
