@@ -4636,7 +4636,6 @@ void VPattern::PrepareForParse(const Document &parse)
         toolsOnRemove.clear();
 
         tools.clear();
-        cursor = 0;
         history.clear();
     }
     else if (parse == Document::LiteParse || parse == Document::FullLiteParse)

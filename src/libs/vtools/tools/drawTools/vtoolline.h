@@ -90,7 +90,6 @@ public:
 
 public slots:
     void FullUpdateFromFile() override;
-    void ShowTool(quint32 id, bool enable) override;
     void Enable() override;
     void AllowHover(bool enabled) override;
     void AllowSelecting(bool enabled) override;

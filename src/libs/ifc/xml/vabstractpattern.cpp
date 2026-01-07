@@ -318,7 +318,6 @@ auto TransformToString(const QTransform &m) -> QString
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractPattern::VAbstractPattern(QObject *parent)
   : VDomDocument(parent),
-    cursor(0),
     toolsOnRemove(QVector<VDataTool *>()),
     history(QVector<VToolRecord>()),
     modified(false),
@@ -450,22 +449,6 @@ auto VAbstractPattern::CountPatternBlockTags() const -> int
     }
 
     return rootElement.elementsByTagName(TagDraw).count();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VAbstractPattern::getCursor() const -> quint32
-{
-    return cursor;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractPattern::setCursor(const quint32 &value)
-{
-    if (cursor != value)
-    {
-        cursor = value;
-        emit ChangedCursor(cursor);
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -116,7 +116,6 @@ protected:
      * @brief RefreshGeometry  refresh item on scene.
      */
     virtual void RefreshGeometry();
-    void ShowTool(quint32 id, bool enable) override;
     void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
     void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
     auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;

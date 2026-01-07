@@ -9,7 +9,6 @@
         <file>icon/32x32/option_draw.png</file>
         <file>icon/32x32/table.png</file>
         <file>icon/24x24/putHere.png</file>
-        <file>icon/32x32/history.png</file>
         <file>icon/32x32/layout.png</file>
         <file>icon/16x16/mirror.png</file>
         <file>icon/config.png</file>
@@ -197,10 +196,6 @@
         <file>icon/dark/32x32/rotate-bottom-left-disabled.png</file>
         <file>icon/dark/32x32/rotate-bottom-left@2x.png</file>
         <file>icon/dark/32x32/rotate-bottom-left.png</file>
-        <file>icon/light/32x32/put_after@2x.png</file>
-        <file>icon/light/32x32/put_after.png</file>
-        <file>icon/dark/32x32/put_after@2x.png</file>
-        <file>icon/dark/32x32/put_after.png</file>
         <file>icon/light/16x16/remove-image@2x.png</file>
         <file>icon/light/16x16/remove-image.png</file>
         <file>icon/light/16x16/insert-image@2x.png</file>

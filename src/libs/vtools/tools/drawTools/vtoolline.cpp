@@ -227,17 +227,6 @@ void VToolLine::FullUpdateFromFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ShowTool highlight tool.
- * @param id object id in container
- * @param enable enable or disable highlight.
- */
-void VToolLine::ShowTool(quint32 id, bool enable)
-{
-    ShowItem(this, id, enable);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolLine::Enable()
 {
     setEnabled(m_indexActivePatternBlock == doc->PatternBlockMapper()->GetActiveId());

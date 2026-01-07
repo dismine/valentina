@@ -71,19 +71,6 @@ VDrawTool::VDrawTool(VAbstractPattern *doc, VContainer *data, quint32 id, QStrin
             QOverload<int>::of(&VPatternBlockMapper::ChangedActivePatternBlock),
             this,
             &VDrawTool::Enable);
-    connect(this->doc, &VAbstractPattern::ShowTool, this, &VDrawTool::ShowTool);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ShowTool  highlight tool.
- * @param id object id in container.
- * @param enable enable or disable highlight.
- */
-void VDrawTool::ShowTool(quint32 id, bool enable)
-{
-    Q_UNUSED(id)
-    Q_UNUSED(enable)
 }
 
 //---------------------------------------------------------------------------------------------------------------------

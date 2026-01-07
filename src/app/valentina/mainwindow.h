@@ -89,7 +89,6 @@ public slots:
     void RemoveBackgroundImage(const QUuid &id);
 
 signals:
-    void RefreshHistory();
     void EnableItemMove(bool move);
     void ItemsSelection(SelectionType type);
 
@@ -269,7 +268,6 @@ private slots:
 
     void ParseBackgroundImages();
 
-    void ActionHistory_triggered(bool checked);
     void ActionExportRecipe_triggered();
     void ActionNewDraw_triggered();
     void ActionTable_triggered();
@@ -309,7 +307,6 @@ private:
 
     QPointer<DialogIncrements> m_dialogTable;
     QPointer<DialogTool> m_dialogTool{};
-    QPointer<DialogHistory> m_dialogHistory;
     QPointer<DialogFinalMeasurements> m_dialogFMeasurements;
 
     /** @brief comboBoxDraws comboc who show name of pattern peaces. */

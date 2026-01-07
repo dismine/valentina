@@ -57,7 +57,6 @@ public:
     template <typename T> void ShowToolVisualization(bool show);
 
 public slots:
-    virtual void ShowTool(quint32 id, bool enable) override;
     void DeleteFromLabel();
 
 protected:

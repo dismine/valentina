@@ -360,25 +360,7 @@ void VAbstractTool::AddRecord(const VToolRecord &record, VAbstractPattern *doc)
         return;
     }
 
-    quint32 const cursor = doc->getCursor();
-    if (cursor == NULL_ID)
-    {
-        history->append(record);
-    }
-    else
-    {
-        qint32 index = 0;
-        for (qint32 i = 0; i < history->size(); ++i)
-        {
-            VToolRecord const rec = history->at(i);
-            if (rec.GetId() == cursor)
-            {
-                index = i;
-                break;
-            }
-        }
-        history->insert(index + 1, record);
-    }
+    history->append(record);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

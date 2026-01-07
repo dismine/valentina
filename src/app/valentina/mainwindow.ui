@@ -155,7 +155,6 @@
     <property name="title">
      <string>History</string>
     </property>
-    <addaction name="actionHistory"/>
     <addaction name="actionExportRecipe"/>
    </widget>
    <widget class="QMenu" name="menuMode">
@@ -188,7 +187,6 @@
    <addaction name="menuPatternPiece"/>
    <addaction name="menuMode"/>
    <addaction name="menuMeasurements"/>
-   <addaction name="menuHistory"/>
    <addaction name="menuWatermark"/>
    <addaction name="menuManual_Layout"/>
    <addaction name="menuWindow"/>
@@ -929,27 +927,6 @@
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+T</string>
-   </property>
-   <property name="menuRole">
-    <enum>QAction::MenuRole::NoRole</enum>
-   </property>
-  </action>
-  <action name="actionHistory">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="icon">
-    <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
-     <normaloff>:/icon/32x32/history.png</normaloff>:/icon/32x32/history.png</iconset>
-   </property>
-   <property name="text">
-    <string>History</string>
-   </property>
-   <property name="shortcut">
-    <string notr="true">Ctrl+H</string>
    </property>
    <property name="menuRole">
     <enum>QAction::MenuRole::NoRole</enum>

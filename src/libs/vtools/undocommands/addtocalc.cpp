@@ -40,8 +40,7 @@
 //---------------------------------------------------------------------------------------------------------------------
 AddToCalc::AddToCalc(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent)
   : VUndoCommand(xml, doc, parent),
-    m_indexActiveBlock(doc->PatternBlockMapper()->GetActiveId()),
-    cursor(doc->getCursor())
+    m_indexActiveBlock(doc->PatternBlockMapper()->GetActiveId())
 {
     setText(tr("add object"));
     nodeId = VAbstractPattern::GetParametrId(xml);
@@ -95,28 +94,11 @@ void AddToCalc::redo()
 
     // Without this user will not see this change
     doc->ShowPatternBlock(doc->PatternBlockMapper()->FindName(m_indexActiveBlock));
-    doc->setCursor(cursor);
 
     QDomElement calcElement;
     if (doc->GetActivNodeElement(VAbstractPattern::TagCalculation, calcElement))
     {
-        if (cursor == NULL_ID)
-        {
-            calcElement.appendChild(xml);
-        }
-        else
-        {
-            QDomElement const refElement = doc->FindElementById(cursor);
-            if (refElement.isElement())
-            {
-                calcElement.insertAfter(xml, refElement);
-            }
-            else
-            {
-                qCDebug(vUndo, "Can not find the element after which you want to insert.");
-                return;
-            }
-        }
+        calcElement.appendChild(xml);
     }
     else
     {

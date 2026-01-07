@@ -79,7 +79,6 @@ signals:
     void ChangedToolSelection(bool selected, quint32 object, quint32 tool);
 
 public slots:
-    virtual void ShowTool(quint32 id, bool enable);
     virtual void Enable() = 0;
     virtual void EnableToolMove(bool move);
     virtual void SetDetailsMode(bool mode);
@@ -113,8 +112,6 @@ protected:
 
     template<class Dialog>
     void ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemId = NULL_ID);
-
-    template <class Item> void ShowItem(Item *item, quint32 id, bool enable);
 
     template <class T> auto ObjectName(quint32 id) const -> QString;
 
@@ -282,23 +279,6 @@ void VDrawTool::ShowOptionsDialog()
 
     this->SetDialog();
     m_dialog->show();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <class Item>
-/**
- * @brief ShowItem highlight tool.
- * @param item tool.
- * @param id object id in container.
- * @param enable enable or disable highlight.
- */
-void VDrawTool::ShowItem(Item *item, quint32 id, bool enable)
-{
-    SCASSERT(item != nullptr)
-    if (id == item->m_id)
-    {
-        ShowVisualization(enable);
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

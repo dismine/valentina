@@ -148,9 +148,6 @@ public:
 
     auto GetActivNodeElement(const QString &name, QDomElement &element) const -> bool;
 
-    auto getCursor() const -> quint32;
-    void setCursor(const quint32 &value);
-
     void setXMLContent(const QString &fileName) override;
 
     virtual auto GenerateLabel(const LabelType &type, const QString &reservedName = QString()) const -> QString = 0;
@@ -416,12 +413,6 @@ public:
 
 signals:
     /**
-     * @brief ChangedCursor change cursor position.
-     * @param id tool id.
-     */
-    void ChangedCursor(quint32 id);
-
-    /**
      * @brief FullUpdateFromFile update tool data form file.
      */
     void FullUpdateFromFile();
@@ -430,12 +421,6 @@ signals:
      */
     void patternChanged(bool saved);
     void UpdatePatternLabel();
-    /**
-     * @brief ShowTool highlight tool.
-     * @param id tool id.
-     * @param enable enable or disable highlight.
-     */
-    void ShowTool(quint32 id, bool enable);
     void ClearMainWindow();
     void UndoCommand();
     void SetEnabledGUI(bool enabled);
@@ -477,9 +462,6 @@ protected slots:
     void CancelFormulaDependencyChecks();
 
 protected:
-    /** @brief cursor cursor keep id tool after which we will add new tool in file. */
-    quint32 cursor;
-
     QVector<VDataTool *> toolsOnRemove;
 
     /** @brief history history records. */

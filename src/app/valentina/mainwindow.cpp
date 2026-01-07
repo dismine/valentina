@@ -189,7 +189,6 @@
 #include "dialogs/dialogaboutapp.h"
 #include "dialogs/dialogaddbackgroundimage.h"
 #include "dialogs/dialogfinalmeasurements.h"
-#include "dialogs/dialoghistory.h"
 #include "dialogs/dialogincrements.h"
 #include "dialogs/dialognewpattern.h"
 #include "dialogs/dialogpatternproperties.h"
@@ -369,7 +368,6 @@ MainWindow::MainWindow(QWidget *parent)
   : MainWindowsNoGUI(parent),
     ui(new Ui::MainWindow),
     m_dialogTable(nullptr),
-    m_dialogHistory(nullptr),
     m_dialogFMeasurements(nullptr),
     m_measurementsSyncTimer(new QTimer(this)),
     m_progressBar(new QProgressBar(this)),
@@ -1047,15 +1045,6 @@ template <typename DrawTool> void MainWindow::ClosedDialogWithApply(int result, 
     if (vtool)
     {
         vtool->setFocus();
-    }
-    // If insert not to the end of file call lite parse
-    if (doc->getCursor() > 0)
-    {
-        doc->LiteParseTree(Document::LiteParse);
-        if (m_dialogHistory)
-        {
-            m_dialogHistory->UpdateHistory();
-        }
     }
 }
 
@@ -3619,7 +3608,6 @@ void MainWindow::InitActionShortcuts()
     m_shortcutActions.insert(VShortcutAction::PreviusPatternPiece, ui->actionPreviousPatternPiece);
     m_shortcutActions.insert(VShortcutAction::InteractiveTools, ui->actionInteractiveTools);
     m_shortcutActions.insert(VShortcutAction::TableOfVariables, ui->actionTable);
-    m_shortcutActions.insert(VShortcutAction::PatternHistory, ui->actionHistory);
     m_shortcutActions.insert(VShortcutAction::Quit, ui->actionExit);
     m_shortcutActions.insert(VShortcutAction::LastTool, ui->actionLast_tool);
     m_shortcutActions.insert(VShortcutAction::CurveDetails, ui->actionShowCurveDetails);
@@ -4737,7 +4725,6 @@ void MainWindow::Clear()
     ui->actionZoomFitBest->setEnabled(false);
     ui->actionZoomFitBestCurrent->setEnabled(false);
     ui->actionZoomOriginal->setEnabled(false);
-    ui->actionHistory->setEnabled(false);
     ui->actionExportRecipe->setEnabled(false);
     ui->actionTable->setEnabled(false);
     ui->actionExportFinalMeasurementsToCSV->setEnabled(false);
@@ -4982,7 +4969,6 @@ void MainWindow::SetEnableWidgets(bool enable)
     ui->actionZoomIn->setEnabled(enable);
     ui->actionZoomOut->setEnabled(enable);
     ui->actionArrowTool->setEnabled(enableOnDesignStage);
-    ui->actionHistory->setEnabled(enableOnDrawStage);
     ui->actionExportRecipe->setEnabled(enableOnDrawStage);
     ui->actionNewDraw->setEnabled(enableOnDrawStage);
     ui->actionDraw->setEnabled(enable);
@@ -5355,31 +5341,6 @@ void MainWindow::ParseBackgroundImages()
         NewBackgroundImageItem(image);
     }
     m_backgroundImagesWidget->UpdateImages();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MainWindow::ActionHistory_triggered(bool checked)
-{
-    if (checked)
-    {
-        m_dialogHistory = new DialogHistory(pattern, doc, this);
-        m_dialogHistory->setWindowFlags(Qt::Window);
-        connect(this, &MainWindow::RefreshHistory, m_dialogHistory.data(), &DialogHistory::UpdateHistory);
-        connect(m_dialogHistory.data(), &DialogHistory::DialogClosed, this,
-                [this]()
-                {
-                    ui->actionHistory->setChecked(false);
-                    delete m_dialogHistory.data();
-                });
-        // Fix issue #526. Dialog Detail is not on top after selection second object on Mac.
-        m_dialogHistory->setWindowFlags(m_dialogHistory->windowFlags() | Qt::WindowStaysOnTopHint);
-        m_dialogHistory->show();
-    }
-    else
-    {
-        ui->actionHistory->setChecked(true);
-        m_dialogHistory->activateWindow();
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -6423,7 +6384,6 @@ void MainWindow::CreateActions()
     connect(ui->actionDraw, &QAction::triggered, this, &MainWindow::ActionDraw);
     connect(ui->actionDetails, &QAction::triggered, this, &MainWindow::ActionDetails);
     connect(ui->actionLayout, &QAction::triggered, this, &MainWindow::ActionLayout);
-    connect(ui->actionHistory, &QAction::triggered, this, &MainWindow::ActionHistory_triggered);
     connect(ui->actionExportRecipe, &QAction::triggered, this, &MainWindow::ActionExportRecipe_triggered);
     connect(ui->actionNewDraw, &QAction::triggered, this, &MainWindow::ActionNewDraw_triggered);
     connect(ui->actionExportFinalMeasurementsToCSV, &QAction::triggered, this, &MainWindow::ExportFMeasurementsToCSV);
@@ -7369,7 +7329,6 @@ void MainWindow::ChangePP(int index, bool zoomBestFit)
     {
         doc->PatternBlockMapper()->SetActive(m_comboBoxDraws->itemText(index));
         doc->setCurrentData();
-        emit RefreshHistory();
         if (m_drawMode)
         {
             ArrowTool(true);

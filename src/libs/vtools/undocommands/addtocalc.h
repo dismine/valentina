@@ -54,7 +54,6 @@ private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(AddToCalc) // NOLINT
     const int m_indexActiveBlock{-1};
-    quint32 cursor;
 };
 
 #endif // ADDTOCALC_H
