@@ -172,6 +172,7 @@ public:
     void AddToolOnRemove(VDataTool *tool);
 
     auto getHistory() -> QVector<VToolRecord> *;
+    auto getHistory() const -> const QVector<VToolRecord> *;
     auto GetLocalHistory(int blockIndex = -1) const -> QVector<VToolRecord>;
 
     auto MPath() const -> QString;

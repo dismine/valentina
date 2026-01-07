@@ -356,9 +356,11 @@ void VDependencyTreeModel::UpdateTree(const QVector<vidtype> &newRootObjects)
 {
     // Build sets for comparison
     QSet<vidtype> currentIds;
+    QVector<vidtype> currentOrder;
     for (const auto &child : std::as_const(m_rootNode->children))
     {
         currentIds.insert(child->objectId);
+        currentOrder.append(child->objectId);
     }
 
     QSet<vidtype> const newIds = QSet<vidtype>(newRootObjects.begin(), newRootObjects.end());
@@ -377,6 +379,42 @@ void VDependencyTreeModel::UpdateTree(const QVector<vidtype> &newRootObjects)
     for (vidtype const id : std::as_const(toAdd))
     {
         AddRootObject(id);
+    }
+
+    // Check if reordering is needed (only for objects that weren't added/removed)
+    QSet<vidtype> const remaining = currentIds - toRemove;
+    bool needsReorder = false;
+
+    if (remaining.size() > 1) // Only check if there are multiple items
+    {
+        // Build current order of remaining items
+        QVector<vidtype> currentRemainingOrder;
+        for (vidtype const id : std::as_const(currentOrder))
+        {
+            if (remaining.contains(id))
+            {
+                currentRemainingOrder.append(id);
+            }
+        }
+
+        // Build expected order from newRootObjects
+        QVector<vidtype> newRemainingOrder;
+        for (vidtype const id : std::as_const(newRootObjects))
+        {
+            if (remaining.contains(id))
+            {
+                newRemainingOrder.append(id);
+            }
+        }
+
+        // Check if order changed
+        needsReorder = (currentRemainingOrder != newRemainingOrder);
+    }
+
+    if (needsReorder)
+    {
+        // Reorder the children to match newRootObjects
+        ReorderRootObjects(newRootObjects);
     }
 
     // Refresh existing nodes if their children were loaded
@@ -437,6 +475,52 @@ void VDependencyTreeModel::RefreshNode(const QString &objectPath)
 
     QVector<vidtype> const newDependencies = FetchDependenciesForObject(node->objectId);
     UpdateNodeChildren(node, newDependencies);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDependencyTreeModel::ReorderRootObjects(const QVector<vidtype> &newOrder)
+{
+    // Build map for quick lookup
+    QHash<vidtype, int> currentPositions;
+    for (int i = 0; i < m_rootNode->children.size(); ++i)
+    {
+        currentPositions[m_rootNode->children[i]->objectId] = i;
+    }
+
+    // Move items one by one to match new order
+    for (int targetPos = 0; targetPos < newOrder.size(); ++targetPos)
+    {
+        vidtype const id = newOrder[targetPos];
+
+        if (!currentPositions.contains(id))
+        {
+            continue; // Skip items that don't exist
+        }
+
+        int currentPos = -1;
+        for (int i = 0; i < m_rootNode->children.size(); ++i)
+        {
+            if (m_rootNode->children[i]->objectId == id)
+            {
+                currentPos = i;
+                break;
+            }
+        }
+
+        if (currentPos != targetPos && currentPos != -1)
+        {
+            // Move from currentPos to targetPos
+            int destPos = targetPos;
+            if (currentPos < targetPos)
+            {
+                destPos++; // Qt adjustment for moving down
+            }
+
+            beginMoveRows(QModelIndex(), currentPos, currentPos, QModelIndex(), destPos);
+            m_rootNode->children.move(currentPos, targetPos);
+            endMoveRows();
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -793,9 +877,9 @@ auto VDependencyTreeModel::CanHaveChildren(vidtype objectId) const -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto VDependencyTreeModel::FindToolRecord(vidtype id) const -> VToolRecord
 {
-    QVector<VToolRecord> const history = m_doc->GetLocalHistory();
+    const QVector<VToolRecord> *history = m_doc->getHistory();
 
-    for (const auto &record : history)
+    for (const auto &record : *history)
     {
         if (id == record.GetId())
         {

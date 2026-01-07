@@ -26,6 +26,7 @@
  **
  *************************************************************************/
 #include "vwidgetdependencies.h"
+#include "dialogmovesteps.h"
 #include "ui_vwidgetdependencies.h"
 
 #include "../core/vdependencytreemodel.h"
@@ -33,6 +34,7 @@
 #include "../ifc/xml/vpatternblockmapper.h"
 #include "../ifc/xml/vpatterngraph.h"
 #include "../vtools/tools/vabstracttool.h"
+#include "../vtools/undocommands/movetool.h"
 #include "../vwidgets/vcontrolpointspline.h"
 #include "../vwidgets/vgraphicssimpletextitem.h"
 #include "../vwidgets/vsimplecurve.h"
@@ -98,7 +100,8 @@ VWidgetDependencies::VWidgetDependencies(VAbstractPattern *doc, QWidget *parent)
     ui(new Ui::VWidgetDependencies),
     m_doc(doc),
     m_dependencyModel(new VDependencyTreeModel(this)),
-    m_proxyModel(new VDependencyFilterProxyModel(this))
+    m_proxyModel(new VDependencyFilterProxyModel(this)),
+    m_historyManager(doc)
 {
     m_dependencyModel->SetCurrentPattern(m_doc);
 
@@ -107,6 +110,16 @@ VWidgetDependencies::VWidgetDependencies(VAbstractPattern *doc, QWidget *parent)
     ui->setupUi(this);
     ui->treeView->header()->hide();
     ui->treeView->setModel(m_proxyModel);
+
+    ui->toolButtonTop->setIcon(FromTheme(VThemeIcon::ObjectOrderFront));
+    ui->toolButtonUp->setIcon(FromTheme(VThemeIcon::ObjectOrderRaise));
+    ui->toolButtonDown->setIcon(FromTheme(VThemeIcon::ObjectOrderLower));
+    ui->toolButtonBottom->setIcon(FromTheme(VThemeIcon::ObjectOrderBack));
+
+    connect(ui->toolButtonTop, &QToolButton::clicked, this, &VWidgetDependencies::MoveTop);
+    connect(ui->toolButtonUp, &QToolButton::clicked, this, &VWidgetDependencies::MoveUp);
+    connect(ui->toolButtonDown, &QToolButton::clicked, this, &VWidgetDependencies::MoveDown);
+    connect(ui->toolButtonBottom, &QToolButton::clicked, this, &VWidgetDependencies::MoveBottom);
 
     // NOLINTNEXTLINE(cppcoreguidelines-prefer-member-initializer)
     m_stateManager = new VTreeStateManager(ui->treeView, m_dependencyModel, this);
@@ -133,19 +146,28 @@ VWidgetDependencies::~VWidgetDependencies()
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetDependencies::UpdateDependencies()
 {
+    if (m_doc == nullptr)
+    {
+        return;
+    }
+
+    m_historyManager.RebuildIndex();
+
     if (VPatternBlockMapper const *blocks = m_doc->PatternBlockMapper(); m_indexPatternBlock != blocks->GetActiveId())
     {
         m_indexPatternBlock = blocks->GetActiveId();
         m_dependencyModel->ClearModel();
 
-        m_dependencyModel->SetRootObjects(RootTools());
+        m_dependencyModel->SetRootObjects(m_historyManager.RootTools());
     }
     else
     {
         m_stateManager->SaveState();
-        m_dependencyModel->UpdateTree(RootTools());
+        m_dependencyModel->UpdateTree(m_historyManager.RootTools());
         m_stateManager->RestoreState();
     }
+
+    EnableMoveButtons(ui->treeView->currentIndex());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -196,96 +218,12 @@ void VWidgetDependencies::ShowDependency(QGraphicsItem *item)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VWidgetDependencies::RootTools() const -> QVector<vidtype>
+void VWidgetDependencies::changeEvent(QEvent *event)
 {
-    QVector<VToolRecord> const history = m_doc->GetLocalHistory();
-    QVector<vidtype> rootObjects;
-    rootObjects.reserve(history.size());
-
-    for (const auto &record : history)
+    if (event->type() == QEvent::LanguageChange)
     {
-        // This check helps to find missed tools in the switch
-        Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64, "List of tools changed.");
-
-        switch (record.GetToolType())
-        {
-            case Tool::Arrow:
-            case Tool::SinglePoint:
-            case Tool::DoublePoint:
-            case Tool::LinePoint:
-            case Tool::AbstractSpline:
-            case Tool::Cut:
-            case Tool::Midpoint:         // Same as Tool::AlongLine, but tool will never has such type
-            case Tool::ArcIntersectAxis: // Same as Tool::CurveIntersectAxis, but tool will never has such type
-            case Tool::BackgroundImage:
-            case Tool::BackgroundImageControls:
-            case Tool::BackgroundPixmapImage:
-            case Tool::BackgroundSVGImage:
-            case Tool::ArcStart: // Same as Tool::CutArc, but tool will never has such type
-            case Tool::ArcEnd:   // Same as Tool::CutArc, but tool will never has such type
-            case Tool::LAST_ONE_DO_NOT_USE:
-                Q_UNREACHABLE(); //-V501
-                break;
-            // Because "history" not only show history of pattern, but help restore current data for each pattern
-            // block, we keep records about pieces and nodes, but don't show them.
-            case Tool::UnionDetails:
-            case Tool::NodeArc:
-            case Tool::NodeElArc:
-            case Tool::NodePoint:
-            case Tool::NodeSpline:
-            case Tool::NodeSplinePath:
-            case Tool::Group:
-            case Tool::PiecePath:
-            case Tool::Pin:
-            case Tool::PlaceLabel:
-            case Tool::InsertNode:
-            case Tool::DuplicateDetail:
-            case Tool::Piece:
-                break;
-            // Regular tools dependencies which a user can see
-            case Tool::BasePoint:
-            case Tool::EndLine:
-            case Tool::Line:
-            case Tool::AlongLine:
-            case Tool::ShoulderPoint:
-            case Tool::Normal:
-            case Tool::Bisector:
-            case Tool::LineIntersect:
-            case Tool::Spline:
-            case Tool::CubicBezier:
-            case Tool::Arc:
-            case Tool::ArcWithLength:
-            case Tool::ParallelCurve:
-            case Tool::GraduatedCurve:
-            case Tool::SplinePath:
-            case Tool::CubicBezierPath:
-            case Tool::PointOfContact:
-            case Tool::Height:
-            case Tool::Triangle:
-            case Tool::PointOfIntersection:
-            case Tool::CutArc:
-            case Tool::CutSpline:
-            case Tool::CutSplinePath:
-            case Tool::LineIntersectAxis:
-            case Tool::CurveIntersectAxis:
-            case Tool::PointOfIntersectionArcs:
-            case Tool::PointOfIntersectionCircles:
-            case Tool::PointOfIntersectionCurves:
-            case Tool::PointFromCircleAndTangent:
-            case Tool::PointFromArcAndTangent:
-            case Tool::TrueDarts:
-            case Tool::EllipticalArc:
-            case Tool::Rotation:
-            case Tool::FlippingByLine:
-            case Tool::FlippingByAxis:
-            case Tool::Move:
-            case Tool::EllipticalArcWithLength:
-            default:
-                rootObjects.append(record.GetId());
-        }
+        ui->retranslateUi(this);
     }
-
-    return rootObjects;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -335,6 +273,18 @@ auto VWidgetDependencies::ObjectId(const QModelIndex &index) const -> vidtype
     }
 
     return node->objectId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VWidgetDependencies::CurrentObjectId() const -> vidtype
+{
+    const QModelIndex currentModel = ui->treeView->currentIndex();
+    if (!currentModel.isValid() || currentModel.parent().isValid())
+    {
+        return NULL_ID;
+    }
+
+    return ObjectId(currentModel);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -422,12 +372,47 @@ void VWidgetDependencies::GoToObject(vidtype id) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VWidgetDependencies::EnableMoveButtons(const QModelIndex &current)
+{
+    ui->toolButtonTop->setDisabled(true);
+    ui->toolButtonUp->setDisabled(true);
+    ui->toolButtonDown->setDisabled(true);
+    ui->toolButtonBottom->setDisabled(true);
+
+    if (!current.isValid() || current.parent().isValid())
+    {
+        return;
+    }
+
+    if (m_doc == nullptr || !m_doc->IsPatternGraphComplete())
+    {
+        return;
+    }
+
+    const vidtype objectId = ObjectId(current);
+
+    if (m_historyManager.CanMoveUp(objectId))
+    {
+        ui->toolButtonTop->setEnabled(true);
+        ui->toolButtonUp->setEnabled(true);
+    }
+
+    if (m_historyManager.CanMoveDown(objectId))
+    {
+        ui->toolButtonDown->setEnabled(true);
+        ui->toolButtonBottom->setEnabled(true);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VWidgetDependencies::OnNodeSelectionChanged(const QModelIndex &current, const QModelIndex &previous)
 {
     if (m_doc == nullptr)
     {
         return;
     }
+
+    EnableMoveButtons(current);
 
     VPatternGraph const *graph = m_doc->PatternGraph();
 
@@ -533,6 +518,117 @@ void VWidgetDependencies::OnContextMenuRequested(const QPoint &pos)
     {
         GoToObject(node->objectId);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VWidgetDependencies::MoveTop()
+{
+    if (m_doc == nullptr)
+    {
+        return;
+    }
+
+    const vidtype currentObjectId = CurrentObjectId();
+    if (currentObjectId == NULL_ID)
+    {
+        return;
+    }
+
+    const vidtype topId = m_historyManager.CalculateTopId(currentObjectId);
+    if (topId != NULL_ID)
+    {
+        auto *moveUp = new MoveToolUp(m_doc, currentObjectId, topId);
+        connect(moveUp, &MoveToolUp::NeedFullParsing, m_doc, &VAbstractPattern::NeedFullParsing);
+        VAbstractApplication::VApp()->getUndoStack()->push(moveUp);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VWidgetDependencies::MoveUp()
+{
+    if (m_doc == nullptr)
+    {
+        return;
+    }
+
+    const vidtype currentObjectId = CurrentObjectId();
+    if (currentObjectId == NULL_ID)
+    {
+        return;
+    }
+
+    const vsizetype maxSteps = m_historyManager.CalculateMaxUpSteps(currentObjectId);
+    if (maxSteps == 0)
+    {
+        return;
+    }
+
+    DialogMoveSteps dialog(static_cast<int>(maxSteps), this);
+    dialog.SetMoveSteps(1);
+    if (dialog.exec() == QDialog::Rejected)
+    {
+        return;
+    }
+
+    if (const vidtype upId = m_historyManager.CalculateUpId(currentObjectId, dialog.GetMoveSteps()); upId != NULL_ID)
+    {
+        auto *moveUp = new MoveToolUp(m_doc, currentObjectId, upId);
+        connect(moveUp, &MoveToolUp::NeedFullParsing, m_doc, &VAbstractPattern::NeedFullParsing);
+        VAbstractApplication::VApp()->getUndoStack()->push(moveUp);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VWidgetDependencies::MoveDown()
+{
+    if (m_doc == nullptr)
+    {
+        return;
+    }
+
+    const vidtype currentObjectId = CurrentObjectId();
+    if (currentObjectId == NULL_ID)
+    {
+        return;
+    }
+
+    const vsizetype maxSteps = m_historyManager.CalculateMaxDownSteps(currentObjectId);
+    if (maxSteps == 0)
+    {
+        return;
+    }
+
+    DialogMoveSteps dialog(static_cast<int>(maxSteps), this);
+    dialog.SetMoveSteps(1);
+    if (dialog.exec() == QDialog::Rejected)
+    {
+        return;
+    }
+
+    const vidtype downId = m_historyManager.CalculateDownId(currentObjectId, dialog.GetMoveSteps());
+    auto *moveDown = new MoveToolDown(m_doc, currentObjectId, downId);
+    connect(moveDown, &MoveToolDown::NeedFullParsing, m_doc, &VAbstractPattern::NeedFullParsing);
+    VAbstractApplication::VApp()->getUndoStack()->push(moveDown);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VWidgetDependencies::MoveBottom()
+{
+    if (m_doc == nullptr)
+    {
+        return;
+    }
+
+    const vidtype currentObjectId = CurrentObjectId();
+    if (currentObjectId == NULL_ID)
+    {
+        return;
+    }
+
+    const vidtype bottomId = m_historyManager.CalculateBottomId(currentObjectId);
+    auto *moveDown = new MoveToolDown(m_doc, currentObjectId, bottomId);
+    connect(moveDown, &MoveToolDown::NeedFullParsing, m_doc, &VAbstractPattern::NeedFullParsing);
+    VAbstractApplication::VApp()->getUndoStack()->push(moveDown);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

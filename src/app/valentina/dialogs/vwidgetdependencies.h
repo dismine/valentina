@@ -28,6 +28,7 @@
 #ifndef VWIDGETDEPENDENCIES_H
 #define VWIDGETDEPENDENCIES_H
 
+#include "../core/vhistorymanager.h"
 #include "../vmisc/typedef.h"
 
 #include <QObject>
@@ -61,9 +62,17 @@ signals:
     void ShowProperties(QGraphicsItem *item) const;
     void ShowTool(const QRectF &rect) const;
 
+protected:
+    void changeEvent(QEvent *event) override;
+
 private slots:
     void OnNodeSelectionChanged(const QModelIndex &current, const QModelIndex &previous);
     void OnContextMenuRequested(const QPoint &pos);
+
+    void MoveTop();
+    void MoveUp();
+    void MoveDown();
+    void MoveBottom();
 
 private:
     Q_DISABLE_COPY_MOVE(VWidgetDependencies)
@@ -74,18 +83,20 @@ private:
     VTreeStateManager *m_stateManager{nullptr};
     int m_indexPatternBlock{-1};
     vidtype m_activeTool{NULL_ID};
-
-    auto RootTools() const -> QVector<vidtype>;
+    VHistoryManager m_historyManager;
 
     void ShowToolProperties(VAbstractTool *tool, bool show) const;
     auto HighlightTool(vidtype id, bool show) const -> vidtype;
     auto HighlightObject(vidtype id, int indexPatternBlock, bool show) const -> vidtype;
 
     auto ObjectId(const QModelIndex &index) const -> vidtype;
+    auto CurrentObjectId() const -> vidtype;
 
     void ExpandAllChildren(const QModelIndex &index);
     void CollapseAllChildren(const QModelIndex &index);
     void GoToObject(vidtype id) const;
+
+    void EnableMoveButtons(const QModelIndex &current);
 };
 
 #endif // VWIDGETDEPENDENCIES_H

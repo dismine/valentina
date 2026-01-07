@@ -708,6 +708,12 @@ auto VAbstractPattern::getHistory() -> QVector<VToolRecord> *
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VAbstractPattern::getHistory() const -> const QVector<VToolRecord> *
+{
+    return &history;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VAbstractPattern::GetLocalHistory(int blockIndex) const -> QVector<VToolRecord>
 {
     const int index = blockIndex >= 0 ? blockIndex : PatternBlockMapper()->GetActiveId();

@@ -97,6 +97,7 @@ public:
     void AddRootObject(vidtype objectId);
     void RemoveRootObject(vidtype objectId);
     void RefreshNode(const QString &objectPath); // Refresh specific node's children
+    void ReorderRootObjects(const QVector<vidtype> &newOrder);
 
     // State management (to be used with QTreeView)
     void SetExpandedNodes(const QSet<QString> &expandedPaths);
