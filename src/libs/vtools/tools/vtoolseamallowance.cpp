@@ -722,8 +722,6 @@ void VToolSeamAllowance::AddPieceDependencies(quint32 id,
     doc->FindFormulaDependencies(grainlineData.GetRotation(), id, variables);
 
     const VPiecePath &path = piece.GetPath();
-    doc->FindFormulaDependencies(path.GetVisibilityTrigger(), id, variables);
-
     for (int i = 0; i < path.CountNodes(); ++i)
     {
         const VPieceNode &node = path.at(i);

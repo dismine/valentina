@@ -69,13 +69,13 @@ void SavePlaceLabelOptions::undo()
     patternGraph->RemoveIncomingEdges(nodeId);
     patternGraph->AddEdge(m_oldLabel.GetCenterPoint(), nodeId);
 
+    SCASSERT(m_data);
     const auto varData = m_data->DataDependencyVariables();
     doc->FindFormulaDependencies(m_oldLabel.GetWidthFormula(), nodeId, varData);
     doc->FindFormulaDependencies(m_oldLabel.GetHeightFormula(), nodeId, varData);
     doc->FindFormulaDependencies(m_oldLabel.GetAngleFormula(), nodeId, varData);
     doc->FindFormulaDependencies(m_oldLabel.GetVisibilityTrigger(), nodeId, varData);
 
-    SCASSERT(m_data);
     m_data->UpdateGObject(nodeId, new VPlaceLabelItem(m_oldLabel));
 
     if (m_pieceId != NULL_ID)
@@ -107,13 +107,13 @@ void SavePlaceLabelOptions::redo()
     patternGraph->RemoveIncomingEdges(nodeId);
     patternGraph->AddEdge(m_newLabel.GetCenterPoint(), nodeId);
 
+    SCASSERT(m_data);
     const auto varData = m_data->DataDependencyVariables();
     doc->FindFormulaDependencies(m_newLabel.GetWidthFormula(), nodeId, varData);
     doc->FindFormulaDependencies(m_newLabel.GetHeightFormula(), nodeId, varData);
     doc->FindFormulaDependencies(m_newLabel.GetAngleFormula(), nodeId, varData);
     doc->FindFormulaDependencies(m_newLabel.GetVisibilityTrigger(), nodeId, varData);
 
-    SCASSERT(m_data);
     m_data->UpdateGObject(nodeId, new VPlaceLabelItem(m_newLabel));
 
     if (m_pieceId != NULL_ID)

@@ -79,6 +79,12 @@ auto VToolPiecePath::Create(VToolPiecePathInitData initData) -> VToolPiecePath *
 
     patternGraph->AddVertex(initData.id, VNodeType::MODELING_OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
 
+    if (initData.path.GetType() == PiecePathType::InternalPath)
+    {
+        const auto varData = initData.data->DataDependencyVariables();
+        initData.doc->FindFormulaDependencies(initData.path.GetVisibilityTrigger(), initData.id, varData);
+    }
+
     bool ignorePath = false;
     for (int i = 0; i < initData.path.CountNodes(); ++i)
     {

@@ -82,12 +82,19 @@ void SavePiecePathOptions::undo()
     DisablePieceNodes(m_newPath);
     EnablePieceNodes(m_oldPath);
 
+    SCASSERT(m_data);
+
+    if (m_newPath.GetType() == PiecePathType::InternalPath)
+    {
+        const auto varData = m_data->DataDependencyVariables();
+        doc->FindFormulaDependencies(m_oldPath.GetVisibilityTrigger(), nodeId, varData);
+    }
+
     for (int i = 0; i < m_oldPath.CountNodes(); ++i)
     {
         patternGraph->AddEdge(m_oldPath.at(i).GetId(), nodeId);
     }
 
-    SCASSERT(m_data);
     m_data->UpdatePiecePath(nodeId, m_oldPath);
 
     if (m_pieceId != NULL_ID)
@@ -123,12 +130,19 @@ void SavePiecePathOptions::redo()
     DisablePieceNodes(m_oldPath);
     EnablePieceNodes(m_newPath);
 
+    SCASSERT(m_data);
+
+    if (m_newPath.GetType() == PiecePathType::InternalPath)
+    {
+        const auto varData = m_data->DataDependencyVariables();
+        doc->FindFormulaDependencies(m_newPath.GetVisibilityTrigger(), nodeId, varData);
+    }
+
     for (int i = 0; i < m_newPath.CountNodes(); ++i)
     {
         patternGraph->AddEdge(m_newPath.at(i).GetId(), nodeId);
     }
 
-    SCASSERT(m_data);
     m_data->UpdatePiecePath(nodeId, m_newPath);
 
     if (m_pieceId != NULL_ID)
