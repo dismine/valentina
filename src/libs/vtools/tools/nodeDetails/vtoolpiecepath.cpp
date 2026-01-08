@@ -185,8 +185,10 @@ void VToolPiecePath::AddAttributes(VAbstractPattern *doc, QDomElement &domElemen
         doc->SetAttribute(domElement, AttrCut, path.IsCutPath());
         doc->SetAttribute(domElement, AttrFirstToContour, path.IsFirstToCuttingContour());
         doc->SetAttribute(domElement, AttrLastToContour, path.IsLastToCuttingContour());
-        doc->SetAttributeOrRemoveIf<bool>(domElement, AttrNotMirrored, path.IsNotMirrored(),
-                                          [](bool value) noexcept { return not value; });
+        doc->SetAttributeOrRemoveIf<bool>(domElement,
+                                          AttrNotMirrored,
+                                          path.IsNotMirrored(),
+                                          [](bool value) noexcept -> bool { return not value; });
     }
 }
 

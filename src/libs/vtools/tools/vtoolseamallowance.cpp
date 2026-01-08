@@ -996,12 +996,18 @@ void VToolSeamAllowance::AddGrainline(VAbstractPattern *doc, QDomElement &domEle
     doc->SetAttribute(domData, AttrLength, glGeom.GetLength());
     doc->SetAttribute(domData, VAbstractPattern::AttrRotation, glGeom.GetRotation());
     doc->SetAttribute(domData, VAbstractPattern::AttrArrows, static_cast<int>(glGeom.GetArrowType()));
-    doc->SetAttributeOrRemoveIf<quint32>(domData, AttrCenterPin, glGeom.CenterPin(),
-                                         [](quint32 pin) noexcept { return pin <= NULL_ID; });
-    doc->SetAttributeOrRemoveIf<quint32>(domData, AttrTopPin, glGeom.TopPin(),
-                                         [](quint32 pin) noexcept { return pin <= NULL_ID; });
-    doc->SetAttributeOrRemoveIf<quint32>(domData, AttrBottomPin, glGeom.BottomPin(),
-                                         [](quint32 pin) noexcept { return pin <= NULL_ID; });
+    doc->SetAttributeOrRemoveIf<quint32>(domData,
+                                         AttrCenterPin,
+                                         glGeom.CenterPin(),
+                                         [](quint32 pin) noexcept { return pin == NULL_ID; });
+    doc->SetAttributeOrRemoveIf<quint32>(domData,
+                                         AttrTopPin,
+                                         glGeom.TopPin(),
+                                         [](quint32 pin) noexcept { return pin == NULL_ID; });
+    doc->SetAttributeOrRemoveIf<quint32>(domData,
+                                         AttrBottomPin,
+                                         glGeom.BottomPin(),
+                                         [](quint32 pin) noexcept { return pin == NULL_ID; });
 
     domElement.appendChild(domData);
 }

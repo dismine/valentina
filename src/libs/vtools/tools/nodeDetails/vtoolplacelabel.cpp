@@ -177,8 +177,10 @@ void VToolPlaceLabel::AddAttributes(VAbstractPattern *doc, QDomElement &domEleme
     doc->SetAttribute(domElement, AttrAngle, label.GetAngleFormula());
     doc->SetAttribute(domElement, VAbstractPattern::AttrVisible, label.GetVisibilityTrigger());
     doc->SetAttribute(domElement, AttrPlaceLabelType, static_cast<int>(label.GetLabelType()));
-    doc->SetAttributeOrRemoveIf<bool>(domElement, AttrNotMirrored, label.IsNotMirrored(),
-                                      [](bool value) noexcept { return not value; });
+    doc->SetAttributeOrRemoveIf<bool>(domElement,
+                                      AttrNotMirrored,
+                                      label.IsNotMirrored(),
+                                      [](bool value) noexcept -> bool { return not value; });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
