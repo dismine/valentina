@@ -1113,16 +1113,26 @@ void UpdatePathNode(VContainer *data, const VPieceNode &node, QVector<quint32> &
 void CreateUnitedNodes(VPiece &newDetail, const VPiece &d1, const VPiece &d2, const QString &drawName,
                        const VToolUnionDetailsInitData &initData, qreal dx, qreal dy, quint32 pRotate, qreal angle)
 {
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
     const VPiecePath d1Path = d1.GetPath().RemoveEdge(initData.indexD1);
     const VPiecePath d2Path = d2.GetPath().RemoveEdge(initData.indexD2);
+
+    for (qint32 i = 0; i < d1Path.CountNodes(); ++i)
+    {
+        patternGraph->AddEdge(d1Path.at(i).GetId(), initData.id);
+    }
+
+    for (qint32 i = 0; i < d2Path.CountNodes(); ++i)
+    {
+        patternGraph->AddEdge(d2Path.at(i).GetId(), initData.id);
+    }
 
     const auto unitedPath = VToolUnionDetails::CalcUnitedPath(d1Path, d2Path, initData.indexD2, pRotate);
 
     QVector<quint32> children;
     VPiecePath newPath;
-
-    VPatternGraph *patternGraph = initData.doc->PatternGraph();
-    SCASSERT(patternGraph != nullptr)
 
     for (const auto &[first, second] : unitedPath)
     {
@@ -1389,6 +1399,16 @@ void UpdateUnitedNodes(const VToolUnionDetailsInitData &initData, qreal dx, qrea
 
     const vsizetype countNodeD1 = d1REPath.CountNodes();
     const vsizetype countNodeD2 = d2REPath.CountNodes();
+
+    for (qint32 i = 0; i < countNodeD1; ++i)
+    {
+        patternGraph->AddEdge(d1REPath.at(i).GetId(), initData.id);
+    }
+
+    for (qint32 i = 0; i < countNodeD2; ++i)
+    {
+        patternGraph->AddEdge(d2REPath.at(i).GetId(), initData.id);
+    }
 
     // This check needed for backward compatibility
     // Remove check and "else" part if min version is 0.3.2

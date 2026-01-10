@@ -270,6 +270,9 @@ public:
     auto GetGlobalToolColor() const -> QString;
     void SetGlobalToolColor(const QString &value);
 
+    auto IsCollectGarbage() const -> bool;
+    void SetCollectGarbage(bool value);
+
 signals:
     void UserToolColorsChanged();
 

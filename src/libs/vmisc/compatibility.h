@@ -333,4 +333,29 @@ inline void RemoveLast(QString &str)
 #endif
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+template<typename T, typename Predicate>
+inline auto EraseIf(QSet<T> &set, Predicate pred) -> vsizetype
+{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 1, 0)
+    return erase_if(set, pred);
+#else
+    vsizetype count = 0;
+    auto it = set.begin();
+    while (it != set.end())
+    {
+        if (pred(*it))
+        {
+            it = set.erase(it);
+            ++count;
+        }
+        else
+        {
+            ++it;
+        }
+    }
+    return count;
+#endif
+}
+
 #endif // COMPATIBILITY_H

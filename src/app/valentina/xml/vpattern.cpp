@@ -123,6 +123,9 @@
 #include <QtConcurrentMap>
 #include <QtConcurrentRun>
 #include <QtNumeric>
+#ifdef Q_OS_WIN
+#include <qt_windows.h>
+#endif /*Q_OS_WIN*/
 
 using namespace std::chrono_literals;
 
@@ -290,11 +293,18 @@ void VPattern::Parse(const Document &parse)
     SCASSERT(sceneDetail != nullptr)
     PrepareForParse(parse);
 
+    m_fileParsingCompleted = false;
     QDomNode domNode = documentElement().firstChild();
     while (not domNode.isNull())
     {
         ParseRootElement(parse, domNode);
         domNode = domNode.nextSibling();
+    }
+
+    m_fileParsingCompleted = true;
+    if (IsPatternGraphComplete())
+    {
+        emit PatternDependencyGraphCompleted();
     }
 
     if (VApplication::IsGUIMode())
@@ -754,6 +764,12 @@ void VPattern::customEvent(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::CollectGarbage()
 {
+    if (!VAbstractValApplication::VApp()->ValentinaSettings()->IsCollectGarbage())
+    {
+        m_garbageCollected = true;
+        return;
+    }
+
     if (!m_garbageCollected)
     {
         GarbageCollector();
@@ -795,6 +811,12 @@ void VPattern::RefreshDirtyPieceGeometry(const QList<vidtype> &list)
     }
 
     m_pieceGeometryDirty = false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::SetGBBackupFilePath(const QString &fileName)
+{
+    m_garbageCollectBackupFilePath = fileName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3807,28 +3829,44 @@ void VPattern::GarbageCollector()
     QSet<vidtype> candidates = ConvertToSet(graph->GetVerticesByType(VNodeType ::MODELING_OBJECT));
     candidates += ConvertToSet(graph->GetVerticesByType(VNodeType ::MODELING_TOOL));
 
+    EraseIf(candidates,
+            [graph, this](auto node) -> bool
+            {
+                auto Filter = [](const auto &node) -> auto { return node.type == VNodeType::PIECE; };
+                const QVector<VNode> nodeDependencies = graph->GetDependentNodes(node, Filter);
+                return !nodeDependencies.isEmpty() || FindElementById(node).isNull();
+            });
+
+    if (candidates.isEmpty())
+    {
+        return;
+    }
+
+    BackupBeforeGarbageCollector();
+
     QSet<vidtype> clearedNodes;
     clearedNodes.reserve(candidates.size());
 
     for (const auto node : std::as_const(candidates))
     {
-        if (graph->GetOutDegree(node) != 0)
-        {
-            continue;
-        }
-
-        QDomElement const domElement = FindElementById(node, TagModeling);
+        QDomElement const domElement = FindElementById(node);
         if (domElement.isNull())
         {
             continue;
         }
 
-        if (QDomNode parent = domElement.parentNode(); !parent.isNull())
+        if (QDomElement parent = domElement.parentNode().toElement();
+            !parent.isNull() && parent.tagName() == TagModeling)
         {
             parent.removeChild(domElement);
             cleared = true;
             clearedNodes.insert(node);
         }
+    }
+
+    if (!cleared)
+    {
+        return;
     }
 
     QVector<VToolRecord> newHistory;
@@ -3847,6 +3885,30 @@ void VPattern::GarbageCollector()
     if (cleared)
     {
         RefreshElementIdCache();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::BackupBeforeGarbageCollector() const
+{
+    if (!m_garbageCollectBackupFilePath.isEmpty())
+    {
+        QString error;
+        QFileInfo const info(m_garbageCollectBackupFilePath);
+#if defined(Q_OS_UNIX) || defined(Q_OS_MACOS)
+        const QString hidden = QChar('.');
+#else
+        const QString hidden;
+#endif
+        const QString backupFileName = u"%1/%2%3.gb.bak"_s.arg(info.absoluteDir().absolutePath(),
+                                                               hidden,
+                                                               info.fileName());
+        if (VDomDocument::SafeCopy(m_garbageCollectBackupFilePath, backupFileName, error))
+        {
+#if defined(Q_OS_WIN)
+            SetFileAttributesW(backupFileName.toStdWString().c_str(), FILE_ATTRIBUTE_HIDDEN);
+#endif
+        }
     }
 }
 

@@ -6859,6 +6859,7 @@ auto MainWindow::LoadPattern(QString fileName, const QString &customMeasureFile)
     m_taskbarProgress->setMaximum(elements);
 #endif
 
+    doc->SetGBBackupFilePath(fileName);
     FullParseFile();
 
     m_progressBar->setVisible(false);

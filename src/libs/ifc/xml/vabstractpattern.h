@@ -478,6 +478,8 @@ protected:
     QString m_watermarkPath{};
     QString m_companyName{};
 
+    bool m_fileParsingCompleted{true};
+
     /** @brief tools list with pointer on tools. */
     static QHash<quint32, VDataTool *> tools;
     /** @brief patternLabelLines list to speed up reading a template by many pieces. */

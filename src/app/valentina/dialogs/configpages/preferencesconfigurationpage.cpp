@@ -118,6 +118,7 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
     ui->checkBoxZoomFitBestCurrentPP->setChecked(settings->IsDoubleClickZoomFitBestCurrentPP());
     ui->checkBoxInteractiveTools->setChecked(settings->IsInteractiveTools());
     ui->checkBoxTranslateFormula->setChecked(settings->IsTranslateFormula());
+    ui->checkBoxGarbageCollector->setChecked(settings->IsCollectGarbage());
 
     //----------------------- Toolbar
     ui->toolBarStyleCheck->setChecked(settings->GetToolBarStyle());
@@ -268,6 +269,7 @@ auto PreferencesConfigurationPage::Apply() -> QStringList
     settings->SetDoubleClickZoomFitBestCurrentPP(ui->checkBoxZoomFitBestCurrentPP->isChecked());
     settings->SetInteractiveTools(ui->checkBoxInteractiveTools->isChecked());
     settings->SetTranslateFormula(ui->checkBoxTranslateFormula->isChecked());
+    settings->SetCollectGarbage(ui->checkBoxGarbageCollector->isChecked());
 
     if (m_pieceLabelLangChanged)
     {

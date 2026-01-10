@@ -127,8 +127,7 @@ void VAbstractConverter::ReserveFile() const
         // #endif /*Q_OS_WIN32*/
         if (not IsReadOnly() && isFileWritable)
         {
-            const QString errorMsg(tr("Error creating a reserv copy: %1.").arg(error));
-            throw VException(errorMsg);
+            throw VException(tr("Error creating a reserv copy: %1.").arg(error));
         }
     }
 }

@@ -1446,7 +1446,7 @@ auto VAbstractPattern::IsPatternGraphComplete() const -> bool
 
     auto Unlock = qScopeGuard([this]() -> auto { m_watchersMutex.unlock(); });
 
-    return m_formulaDependenciesWatchers.isEmpty();
+    return m_fileParsingCompleted && m_formulaDependenciesWatchers.isEmpty();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2689,7 +2689,7 @@ void VAbstractPattern::CleanDependenciesWatcher()
     m_formulaDependenciesWatchers.removeOne(watcher);
     watcher->deleteLater();
 
-    if (m_formulaDependenciesWatchers.isEmpty())
+    if (m_formulaDependenciesWatchers.isEmpty() && m_fileParsingCompleted)
     {
         emit PatternDependencyGraphCompleted();
     }

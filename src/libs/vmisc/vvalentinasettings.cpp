@@ -79,6 +79,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternBoundaryTogetherWithNotch
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternUserToolColors, ("pattern/userToolColors"_L1))   // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternGlobalPenStyle, ("pattern/globalPenStyle"_L1))   // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternGlobalToolColor, ("pattern/globalToolColor"_L1)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternCollectGarbage, ("pattern/collectGarbage"_L1))   // NOLINT
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutWidth, ("layout/width"_L1))             // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSorting, ("layout/sorting"_L1))         // NOLINT
@@ -1153,6 +1154,18 @@ auto VValentinaSettings::GetGlobalToolColor() const -> QString
 void VValentinaSettings::SetGlobalToolColor(const QString &value)
 {
     setValue(*settingPatternGlobalToolColor, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::IsCollectGarbage() const -> bool
+{
+    return value(*settingPatternCollectGarbage, true).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetCollectGarbage(bool value)
+{
+    setValue(*settingPatternCollectGarbage, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

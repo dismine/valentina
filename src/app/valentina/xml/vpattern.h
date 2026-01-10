@@ -114,6 +114,8 @@ public:
 
     void RefreshDirtyPieceGeometry(const QList<vidtype> &list);
 
+    void SetGBBackupFilePath(const QString &fileName);
+
 signals:
     void PreParseState();
 
@@ -144,6 +146,7 @@ private:
     bool m_pieceGeometryDirty{true};
 
     bool m_garbageCollected{false};
+    QString m_garbageCollectBackupFilePath{};
 
     static auto ParseDetailNode(const QDomElement &domElement) -> VNodeDetail;
 
@@ -266,6 +269,7 @@ private:
     void RefreshPieceGeometryForList(const QList<vidtype> &list) const;
 
     void GarbageCollector();
+    void BackupBeforeGarbageCollector() const;
 };
 
 #endif // VPATTERN_H
