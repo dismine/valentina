@@ -28,7 +28,6 @@
 #include "movetool.h"
 #include "typedef.h"
 #include <qdom.h>
-#include <qtdeprecationdefinitions.h>
 
 //---------------------------------------------------------------------------------------------------------------------
 MoveToolUp::MoveToolUp(VAbstractPattern *doc, vidtype currentId, vidtype topId, QUndoCommand *parent)

@@ -33,7 +33,6 @@
 #include <QObject>
 
 #include "../vmisc/defglobal.h"
-#include <qtmetamacros.h>
 
 class VPatternBlockMapper : public QObject
 {
