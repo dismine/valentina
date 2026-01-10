@@ -32,11 +32,6 @@
 
 constexpr qreal PrintDPI = 96.0;
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 6, 0)
-// Since Qt 6.0 minimal requirement is C++17. There is no longer need for qAsConst.
-#define qAsConst std::as_const
-#endif
-
 #ifndef Q_DISABLE_ASSIGN
 #define Q_DISABLE_ASSIGN(Class) Class &operator=(const Class &) = delete;
 #endif

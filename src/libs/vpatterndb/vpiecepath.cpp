@@ -674,41 +674,6 @@ auto VPiecePath::Dependencies() const -> QList<quint32>
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPiecePath::MissingNodes(const VPiecePath &path) const -> QVector<quint32>
-{
-    if (d->m_nodes.size() == path.CountNodes()) //-V807
-    {
-        return QVector<quint32>();
-    }
-
-    QSet<quint32> set1;
-    for (qint32 i = 0; i < d->m_nodes.size(); ++i)
-    {
-        set1.insert(d->m_nodes.at(i).GetId());
-    }
-
-    QSet<quint32> set2;
-    for (qint32 j = 0; j < path.CountNodes(); ++j)
-    {
-        set2.insert(path.at(j).GetId());
-    }
-
-    const QList<quint32> set3 = set1.subtract(set2).values();
-    QVector<quint32> nodes;
-    nodes.reserve(set3.size());
-    for (qint32 i = 0; i < set3.size(); ++i)
-    {
-        const int index = indexOfNode(set3.at(i));
-        if (index != -1)
-        {
-            nodes.append(d->m_nodes.at(index).GetId());
-        }
-    }
-
-    return nodes;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 auto VPiecePath::NodeName(int nodeIndex, const VContainer *data) const -> QString
 {
     return NodeName(d->m_nodes, nodeIndex, data);

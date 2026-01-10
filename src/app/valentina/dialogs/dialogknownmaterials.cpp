@@ -29,11 +29,6 @@
 #include "dialogknownmaterials.h"
 #include "ui_dialogknownmaterials.h"
 
-// Header <ciso646> is removed in C++20.
-#if defined(Q_CC_MSVC) && __cplusplus <= 201703L
-#include <ciso646> // and, not, or
-#endif
-
 //---------------------------------------------------------------------------------------------------------------------
 DialogKnownMaterials::DialogKnownMaterials(QWidget *parent)
   : QDialog(parent),

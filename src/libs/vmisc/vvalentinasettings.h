@@ -165,6 +165,10 @@ public:
     static auto GetDefDockWidgetBackgroundImagesActive() -> bool;
     void SetDockWidgetBackgroundImagesActive(bool value);
 
+    auto IsDockWidgetDependenciesActive() const -> bool;
+    static auto GetDefDockWidgetDependenciesActive() -> bool;
+    void SetDockWidgetDependenciesActive(bool value);
+
     auto GetPatternMessageFontSize(int fontSizeDef) const -> int;
     static auto GetDefMinPatternMessageFontSize() -> int;
     static auto GetDefMaxPatternMessageFontSize() -> int;
@@ -265,6 +269,9 @@ public:
 
     auto GetGlobalToolColor() const -> QString;
     void SetGlobalToolColor(const QString &value);
+
+    auto IsCollectGarbage() const -> bool;
+    void SetCollectGarbage(bool value);
 
 signals:
     void UserToolColorsChanged();

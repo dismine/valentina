@@ -60,14 +60,14 @@ public:
     VToolLinePoint(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
                    const QString &lineColor, const QString &formula, const quint32 &basePointId, const qreal &angle,
                    const QString &notes, QGraphicsItem *parent = nullptr);
-    virtual ~VToolLinePoint() override;
-    virtual auto type() const -> int override { return Type; }
+    ~VToolLinePoint() override;
+    auto type() const -> int override { return Type; }
     enum
     {
         Type = UserType + static_cast<int>(Tool::LinePoint)
     };
 
-    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 
     auto GetFormulaLength() const -> VFormula;
     void SetFormulaLength(const VFormula &value);
@@ -81,8 +81,8 @@ public:
     void SetLineColor(const QString &value);
 
 public slots:
-    virtual void Disable(bool disable, const QString &namePP) override;
-    virtual void FullUpdateFromFile() override;
+    void Enable() override;
+    void FullUpdateFromFile() override;
 
 protected:
     /** @brief formula string with length formula. */
@@ -101,7 +101,6 @@ protected:
     QString lineColor;
 
     virtual void RefreshGeometry();
-    virtual void RemoveReferens() override;
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
     virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;

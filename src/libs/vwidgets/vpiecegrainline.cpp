@@ -420,7 +420,7 @@ auto VPieceGrainline::IsPositionValid(const QVector<QPointF> &contourPoints) con
 
     grainLine = {mainLine};
 
-    for (auto line : qAsConst(grainLine))
+    for (auto line : std::as_const(grainLine))
     {
         QVector<QPointF> const points = VAbstractCurve::CurveIntersectLine(contourPoints, line);
         for (const auto &point : points)
@@ -433,7 +433,7 @@ auto VPieceGrainline::IsPositionValid(const QVector<QPointF> &contourPoints) con
     }
 
     QPainterPath grainLinePath;
-    for (auto line : qAsConst(grainLine))
+    for (auto line : std::as_const(grainLine))
     {
         grainLinePath.addPath(VGObject::PainterPath(QVector<QPointF>{line.p1(), line.p2()}));
     }

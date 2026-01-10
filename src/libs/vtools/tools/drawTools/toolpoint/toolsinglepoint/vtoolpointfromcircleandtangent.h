@@ -46,19 +46,10 @@ template <class T> class QSharedPointer;
 
 struct VToolPointFromCircleAndTangentInitData : VToolSinglePointInitData
 {
-    VToolPointFromCircleAndTangentInitData()
-      : VToolSinglePointInitData(),
-        circleCenterId(NULL_ID),
-        circleRadius('0'),
-        tangentPointId(NULL_ID),
-        crossPoint(CrossCirclesPoint::FirstPoint)
-    {
-    }
-
-    quint32 circleCenterId;
-    QString circleRadius;
-    quint32 tangentPointId;
-    CrossCirclesPoint crossPoint;
+    quint32 circleCenterId{NULL_ID};
+    QString circleRadius{'0'};
+    quint32 tangentPointId{NULL_ID};
+    CrossCirclesPoint crossPoint{CrossCirclesPoint::FirstPoint};
 };
 
 class VToolPointFromCircleAndTangent : public VToolSinglePoint
@@ -66,14 +57,15 @@ class VToolPointFromCircleAndTangent : public VToolSinglePoint
     Q_OBJECT // NOLINT
 
 public:
-    virtual void SetDialog() override;
+    ~VToolPointFromCircleAndTangent() override = default;
+    void SetDialog() override;
     static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                        VContainer *data) -> VToolPointFromCircleAndTangent *;
     static auto Create(VToolPointFromCircleAndTangentInitData &initData) -> VToolPointFromCircleAndTangent *;
     static auto FindPoint(const QPointF &p, const QPointF &center, qreal radius, const CrossCirclesPoint crossPoint,
                           QPointF *intersectionPoint) -> bool;
     static const QString ToolType;
-    virtual auto type() const -> int override { return Type; }
+    auto type() const -> int override { return Type; }
     enum
     {
         Type = UserType + static_cast<int>(Tool::PointFromCircleAndTangent)
@@ -88,17 +80,15 @@ public:
     auto GetCrossCirclesPoint() const -> CrossCirclesPoint;
     void SetCrossCirclesPoint(const CrossCirclesPoint &value);
 
-    virtual void ShowVisualization(bool show) override;
+    void ShowVisualization(bool show) override;
 protected slots:
-    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) override;
+    void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) override;
 
 protected:
-    virtual void RemoveReferens() override;
-    virtual void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                            QList<quint32> &newDependencies) override;
-    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
-    virtual void ReadToolAttributes(const QDomElement &domElement) override;
-    virtual void SetVisualization() override;
+    void SaveDialog(QDomElement &domElement) override;
+    void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    void ReadToolAttributes(const QDomElement &domElement) override;
+    void SetVisualization() override;
 
 private:
     Q_DISABLE_COPY_MOVE(VToolPointFromCircleAndTangent) // NOLINT
@@ -108,8 +98,8 @@ private:
     QString circleRadius;
     CrossCirclesPoint crossPoint;
 
-    VToolPointFromCircleAndTangent(const VToolPointFromCircleAndTangentInitData &initData,
-                                   QGraphicsItem *parent = nullptr);
+    explicit VToolPointFromCircleAndTangent(const VToolPointFromCircleAndTangentInitData &initData,
+                                            QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLPOINTFROMCIRCLEANDTANGENT_H

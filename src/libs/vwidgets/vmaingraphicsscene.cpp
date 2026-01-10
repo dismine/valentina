@@ -244,7 +244,7 @@ void VMainGraphicsScene::InitOrigins()
 //---------------------------------------------------------------------------------------------------------------------
 void VMainGraphicsScene::SetOriginsVisible(bool visible)
 {
-    for (auto *item : qAsConst(origins))
+    for (auto *item : std::as_const(origins))
     {
         if (item != nullptr)
         {
@@ -296,9 +296,9 @@ void VMainGraphicsScene::setTransform(const QTransform &transform)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VMainGraphicsScene::SetDisableTools(bool disable, const QString &namePP)
+void VMainGraphicsScene::EnableTools()
 {
-    emit DisableItem(disable, namePP);
+    emit EnableItem();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -60,8 +60,8 @@ class VToolCurveIntersectAxis : public VToolLinePoint
 {
     Q_OBJECT // NOLINT
 public:
-    virtual ~VToolCurveIntersectAxis() = default;
-    virtual void SetDialog() override;
+    ~VToolCurveIntersectAxis() override = default;
+    void SetDialog() override;
 
     static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                        VContainer *data) -> VToolCurveIntersectAxis *;
@@ -71,7 +71,7 @@ public:
                           QPointF *intersectionPoint) -> bool;
 
     static const QString ToolType;
-    virtual auto type() const -> int override { return Type; }
+    auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::CurveIntersectAxis)};
 
     auto GetFormulaAngle() const -> VFormula;
@@ -79,17 +79,17 @@ public:
 
     auto CurveName() const -> QString;
 
-    virtual void ShowVisualization(bool show) override;
+    void ShowVisualization(bool show) override;
 protected slots:
-    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
+    void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) override;
+
 protected:
-    virtual void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                            QList<quint32> &newDependencies) override;
-    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
-    virtual void ReadToolAttributes(const QDomElement &domElement) override;
-    virtual void SetVisualization() override;
-    virtual auto MakeToolTip() const -> QString override;
-    virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+    void SaveDialog(QDomElement &domElement) override;
+    void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    void ReadToolAttributes(const QDomElement &domElement) override;
+    void SetVisualization() override;
+    auto MakeToolTip() const -> QString override;
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
 
     void SetSegments(const QPair<QString, QString> &segments);
 private:

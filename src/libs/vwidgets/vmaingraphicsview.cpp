@@ -521,6 +521,34 @@ void VMainGraphicsView::ResetScrollingAnimation()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsView::EnsureToolVisible(const QRectF &rect)
+{
+    if (rect.isEmpty())
+    {
+        return;
+    }
+
+    fitInView(rect, Qt::KeepAspectRatio);
+    QTransform transform = this->transform();
+
+    qreal factor = transform.m11();
+    factor = qMax(factor, VMainGraphicsView::MinScale());
+    factor = qMin(factor, VMainGraphicsView::MaxScale());
+
+    transform.setMatrix(factor,
+                        transform.m12(),
+                        transform.m13(),
+                        transform.m21(),
+                        factor,
+                        transform.m23(),
+                        transform.m31(),
+                        transform.m32(),
+                        transform.m33());
+    setTransform(transform);
+    ensureVisible(rect);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief mousePressEvent handle mouse press events.
  * @param event mouse press event.

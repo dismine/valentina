@@ -33,6 +33,7 @@
 #include <QTypeInfo>
 #include <QtGlobal>
 
+#include "../vmisc/typedef.h"
 #include "vinternalvariable.h"
 
 class VLineAngleData;
@@ -42,7 +43,7 @@ class VLineAngle final : public VInternalVariable
 {
 public:
     VLineAngle();
-    VLineAngle(const VPointF *p1, const quint32 &p1Id, const VPointF *p2, const quint32 &p2Id);
+    VLineAngle(const VPointF *p1, quint32 p1Id, const VPointF *p2, quint32 p2Id, quint32 mainReference = NULL_ID);
     VLineAngle(const VLineAngle &var);
     ~VLineAngle() override;
 

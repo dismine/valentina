@@ -36,14 +36,14 @@
 #include "../vtools/tools/drawTools/vdrawtool.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-ShowDoubleLabel::ShowDoubleLabel(VAbstractPattern *doc, quint32 toolId, quint32 pointId, bool visible,
-                                 ShowDoublePoint type, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent),
-      m_visible(visible),
-      m_oldVisible(not visible),
-      m_scene(VAbstractValApplication::VApp()->getCurrentScene()),
-      m_type(type),
-      m_idTool(toolId)
+ShowDoubleLabel::ShowDoubleLabel(
+    VAbstractPattern *doc, quint32 toolId, quint32 pointId, bool visible, ShowDoublePoint type, QUndoCommand *parent)
+  : VUndoCommand(doc, parent),
+    m_visible(visible),
+    m_oldVisible(not visible),
+    m_scene(VAbstractValApplication::VApp()->getCurrentScene()),
+    m_type(type),
+    m_idTool(toolId)
 {
     nodeId = pointId;
     qCDebug(vUndo, "Point id %u", nodeId);

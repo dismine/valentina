@@ -44,15 +44,13 @@
 #include <QSharedPointer>
 #include <QUndoStack>
 #include <QVector>
-#include <new>
 #include <qnumeric.h>
 
 #include "../dialogs/support/dialogeditwrongformula.h"
 #include "../dialogs/support/dialogundo.h"
-#include "../vmisc/exception/vexception.h"
 #include "../ifc/exception/vexceptionundo.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 #include "../ifc/xml/vtoolrecord.h"
-#include "../undocommands/deltool.h"
 #include "../vgeometry/../ifc/ifcdef.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vcubicbezier.h"
@@ -62,6 +60,7 @@
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vsplinepath.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vpiecenode.h"
@@ -83,7 +82,6 @@ using namespace Qt::Literals::StringLiterals;
 template <class T> class QSharedPointer;
 
 bool VAbstractTool::m_suppressContextMenu = false;
-const QString VAbstractTool::AttrInUse = QStringLiteral("inUse");
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -96,9 +94,7 @@ const QString VAbstractTool::AttrInUse = QStringLiteral("inUse");
 VAbstractTool::VAbstractTool(VAbstractPattern *doc, VContainer *data, quint32 id, QObject *parent)
   : VDataTool(data, parent),
     doc(doc),
-    m_id(id),
-    vis(),
-    selectionType(SelectionType::ByMouseRelease)
+    m_id(id)
 {
     SCASSERT(doc != nullptr)
     connect(this, &VAbstractTool::toolhaveChange, this->doc, &VAbstractPattern::haveLiteChange);
@@ -200,48 +196,6 @@ auto VAbstractTool::CheckFormula(const quint32 &toolId, QString &formula, VConta
         }
     }
     return result;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief DeleteTool full delete object form scene and file.
- */
-void VAbstractTool::DeleteToolWithConfirm(bool ask)
-{
-    qCDebug(vTool, "Deleting abstract tool.");
-    if (_referens == 0)
-    {
-        qCDebug(vTool, "No children.");
-        emit VAbstractValApplication::VApp()->getSceneView()->itemClicked(nullptr);
-        if (ask)
-        {
-            qCDebug(vTool, "Asking.");
-            if (ConfirmDeletion() == QMessageBox::No)
-            {
-                qCDebug(vTool, "User said no.");
-                return;
-            }
-        }
-
-        PerformDelete();
-
-        // Throw exception, this will help prevent case when we forget to immediately quit function.
-        VExceptionToolWasDeleted const e("Tool was used after deleting.");
-        throw e;
-    }
-    else
-    {
-        qCDebug(vTool, "Can't delete, tool has children.");
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractTool::PerformDelete()
-{
-    qCDebug(vTool, "Begin deleting.");
-    auto *delTool = new DelTool(doc, m_id);
-    connect(delTool, &DelTool::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
-    VAbstractApplication::VApp()->getUndoStack()->push(delTool);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -389,26 +343,12 @@ auto VAbstractTool::GetRecord(const quint32 id, const Tool &toolType, VAbstractP
     const QVector<VToolRecord> *history = doc->getHistory();
     for (const auto &record : *history)
     {
-        if (record.getId() == id && record.getTypeTool() == toolType)
+        if (record.GetId() == id && record.GetToolType() == toolType)
         {
             return record;
         }
     }
-    return VToolRecord();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractTool::RemoveRecord(const VToolRecord &record, VAbstractPattern *doc)
-{
-    QVector<VToolRecord> *history = doc->getHistory();
-    for (int i = 0; i < history->size(); ++i)
-    {
-        if (history->at(i) == record)
-        {
-            history->remove(i);
-            return;
-        }
-    }
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -420,25 +360,7 @@ void VAbstractTool::AddRecord(const VToolRecord &record, VAbstractPattern *doc)
         return;
     }
 
-    quint32 const cursor = doc->getCursor();
-    if (cursor == NULL_ID)
-    {
-        history->append(record);
-    }
-    else
-    {
-        qint32 index = 0;
-        for (qint32 i = 0; i < history->size(); ++i)
-        {
-            VToolRecord const rec = history->at(i);
-            if (rec.getId() == cursor)
-            {
-                index = i;
-                break;
-            }
-        }
-        history->insert(index + 1, record);
-    }
+    history->append(record);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -448,9 +370,9 @@ void VAbstractTool::AddRecord(const VToolRecord &record, VAbstractPattern *doc)
  * @param toolType tool type
  * @param doc dom document container
  */
-void VAbstractTool::AddRecord(const quint32 id, const Tool &toolType, VAbstractPattern *doc)
+void VAbstractTool::AddRecord(quint32 id, const Tool &toolType, VAbstractPattern *doc)
 {
-    AddRecord(VToolRecord(id, toolType, doc->GetNameActivPP()), doc);
+    AddRecord(VToolRecord(id, toolType, doc->PatternBlockMapper()->GetActiveId()), doc);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

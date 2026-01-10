@@ -29,13 +29,13 @@
 
 #include "../../../dialogs/tools/dialoggraduatedcurve.h"
 #include "../../../visualization/path/vistoolgraduatedcurve.h"
+#include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vsplinepath.h"
 #include "../vmisc/compatibility.h"
 #include "../vpatterndb/variables/vincrement.h"
 #include "ifcdef.h"
-
-#include <utility>
 
 using namespace Qt::Literals::StringLiterals;
 
@@ -131,11 +131,26 @@ auto VToolGraduatedCurve::Create(VToolGraduatedCurveInitData &initData) -> VTool
     else
     {
         initData.data->UpdateGObject(initData.id, new VSplinePath(splPath));
-        initData.data->AddSpline(initData.data->GeometricObject<VAbstractBezier>(initData.id), initData.id);
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
+
+    const auto varData = initData.data->DataDependencyVariables();
+    for (auto &offset : initData.offsets)
+    {
+        initData.doc->FindFormulaDependencies(offset.formula, initData.id, varData);
+    }
+
+    initData.data->AddSpline(initData.data->GeometricObject<VAbstractBezier>(initData.id), initData.id);
+
+    patternGraph->AddEdge(initData.originCurveId, initData.id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     if (initData.parse == Document::FullParse)
@@ -145,7 +160,6 @@ auto VToolGraduatedCurve::Create(VToolGraduatedCurveInitData &initData) -> VTool
         initData.scene->addItem(path);
         InitSplinePathToolConnections(initData.scene, path);
         VAbstractPattern::AddTool(initData.id, path);
-        initData.doc->IncrementReferens(curve->getIdTool());
         return path;
     }
     return nullptr;
@@ -291,23 +305,11 @@ void VToolGraduatedCurve::ShowContextMenu(QGraphicsSceneContextMenuEvent *event,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolGraduatedCurve::RemoveReferens()
-{
-    const auto curve = VAbstractTool::data.GetGObject(m_originCurveId);
-    doc->DecrementReferens(curve->getIdTool());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolGraduatedCurve::SaveDialog(QDomElement &domElement,
-                                     QList<quint32> &oldDependencies,
-                                     QList<quint32> &newDependencies)
+void VToolGraduatedCurve::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     QPointer<DialogGraduatedCurve> const dialogTool = qobject_cast<DialogGraduatedCurve *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
-
-    AddDependence(oldDependencies, m_originCurveId);
-    AddDependence(newDependencies, dialogTool->GetOriginCurveId());
 
     doc->SetAttribute(domElement, AttrCurve, dialogTool->GetOriginCurveId());
     doc->SetAttribute(domElement, AttrSuffix, dialogTool->GetSuffix());
@@ -355,7 +357,7 @@ void VToolGraduatedCurve::SetVisualization()
 
         QVector<VRawGraduatedCurveOffset> toUserOffsets;
         toUserOffsets.reserve(m_offsets.size());
-        for (const auto &offset : qAsConst(m_offsets))
+        for (const auto &offset : std::as_const(m_offsets))
         {
             VRawGraduatedCurveOffset offsetData;
             offsetData.name = offset.name;

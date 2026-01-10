@@ -501,7 +501,7 @@ void VPTileFactory::DrawRulerOutlineFont(QPainter *painter, qreal scale, bool te
         QPainterPath path;
 
         int w = 0;
-        for (auto c : qAsConst(units))
+        for (auto c : std::as_const(units))
         {
             path.addPath(corrector.DrawChar(w, static_cast<qreal>(fm.ascent()), c));
             w += fm.horizontalAdvance(c);
@@ -977,7 +977,7 @@ void VPTileFactory::DrawGridTextInformationOutlineFont(QPainter *painter, const 
         QFontMetrics const fm(font);
 
         int w = 0;
-        for (auto c : qAsConst(text))
+        for (auto c : std::as_const(text))
         {
             path.addPath(corrector.DrawChar(w, static_cast<qreal>(fm.ascent()), c));
             w += fm.horizontalAdvance(c);
@@ -1123,7 +1123,7 @@ void VPTileFactory::DrawPageTextInformationOutlineFont(QPainter *painter,
         QPainterPath path;
 
         int w = 0;
-        for (auto c : qAsConst(page))
+        for (auto c : std::as_const(page))
         {
             path.addPath(corrector.DrawChar(w, static_cast<qreal>(fm.ascent()), c));
             w += fm.horizontalAdvance(c);

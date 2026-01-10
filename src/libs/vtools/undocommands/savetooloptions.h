@@ -42,8 +42,10 @@ class SaveToolOptions : public VUndoCommand
     Q_OBJECT // NOLINT
 
 public:
-    SaveToolOptions(const QDomElement &oldXml, const QDomElement &newXml, const QList<quint32> &oldDependencies,
-                    const QList<quint32> &newDependencies, VAbstractPattern *doc, const quint32 &id,
+    SaveToolOptions(const QDomElement &oldXml,
+                    const QDomElement &newXml,
+                    VAbstractPattern *doc,
+                    quint32 id,
                     QUndoCommand *parent = nullptr);
     ~SaveToolOptions() override = default;
 
@@ -55,17 +57,12 @@ public:
 
     auto getNewXml() const -> QDomElement;
     auto getToolId() const -> quint32;
-    auto NewDependencies() const -> QList<quint32>;
 
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(SaveToolOptions) // NOLINT
     const QDomElement oldXml;
     QDomElement newXml;
-    const QList<quint32> oldDependencies;
-    const QList<quint32> newDependencies;
-
-    auto Missing(const QList<quint32> &list1, const QList<quint32> &list2) const -> QVector<quint32>;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -84,12 +81,6 @@ inline auto SaveToolOptions::getNewXml() const -> QDomElement
 inline auto SaveToolOptions::getToolId() const -> quint32
 {
     return nodeId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto SaveToolOptions::NewDependencies() const -> QList<quint32>
-{
-    return newDependencies;
 }
 
 #endif // SAVETOOLOPTIONS_H

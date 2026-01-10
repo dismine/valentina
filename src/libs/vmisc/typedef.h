@@ -32,7 +32,7 @@
 
 using vidtype = quint32;
 
-static const vidtype null_id = 0;
+constexpr vidtype null_id = 0;
 
 #define NULL_ID null_id//use this value for initialization variables that keeps id values. 0 mean uknown id value.
 #define NULL_ID_STR QChar('0')

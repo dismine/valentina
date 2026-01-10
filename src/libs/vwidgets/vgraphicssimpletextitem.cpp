@@ -80,7 +80,7 @@ VGraphicsSimpleTextItem::VGraphicsSimpleTextItem(const QString &text, VColorRole
 //---------------------------------------------------------------------------------------------------------------------
 void VGraphicsSimpleTextItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    auto UpdateLine = [this]()
+    auto UpdateLine = [this]() -> void
     {
         if (auto *parent = dynamic_cast<VScenePoint *>(parentItem()))
         {
@@ -187,7 +187,7 @@ void VGraphicsSimpleTextItem::CorrectLabelPosition()
  */
 auto VGraphicsSimpleTextItem::itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant
 {
-    if (change == ItemPositionChange && scene())
+    if (change == ItemPositionChange && (scene() != nullptr))
     {
         // Each time we move something we call recalculation scene rect. In some cases this can cause moving
         // objects positions. And this cause infinite redrawing. That's why we wait the finish of saving the last move.
@@ -195,7 +195,7 @@ auto VGraphicsSimpleTextItem::itemChange(GraphicsItemChange change, const QVaria
         if (changeFinished)
         {
             changeFinished = false;
-            if (scene())
+            if (scene() != nullptr)
             {
                 const QList<QGraphicsView *> viewList = scene()->views();
                 if (not viewList.isEmpty())
@@ -247,8 +247,7 @@ void VGraphicsSimpleTextItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
     m_hoverFlag = true;
     setBrush(Qt::green);
 
-    QGraphicsItem *parent = parentItem();
-    if (parent && m_showParentTooltip)
+    if (QGraphicsItem const *parent = parentItem(); parent && m_showParentTooltip)
     {
         setToolTip(parent->toolTip());
     }
@@ -343,7 +342,14 @@ void VGraphicsSimpleTextItem::keyReleaseEvent(QKeyEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VGraphicsSimpleTextItem::RefreshColor()
 {
-    setBrush(VSceneStylesheet::Color(m_hoverFlag ? m_textHoverColor : m_textColor));
+    if (!isEnabled() && scene() != nullptr)
+    {
+        setBrush(scene()->palette().brush(QPalette::Disabled, QPalette::Text));
+    }
+    else
+    {
+        setBrush(VSceneStylesheet::Color(m_hoverFlag ? m_textHoverColor : m_textColor));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

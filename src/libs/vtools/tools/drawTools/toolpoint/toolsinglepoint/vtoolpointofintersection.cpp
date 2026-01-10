@@ -37,8 +37,9 @@
 #include "../../../../visualization/line/vistoolpointofintersection.h"
 #include "../../../../visualization/visualization.h"
 #include "../../../vabstracttool.h"
-#include "../../vdrawtool.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/exception/vexception.h"
@@ -139,10 +140,19 @@ auto VToolPointOfIntersection::Create(VToolPointOfIntersectionInitData initData)
     else
     {
         initData.data->UpdateGObject(initData.id, p);
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
+
+    patternGraph->AddEdge(initData.firstPointId, initData.id);
+    patternGraph->AddEdge(initData.secondPointId, initData.id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     if (initData.parse == Document::FullParse)
@@ -152,8 +162,6 @@ auto VToolPointOfIntersection::Create(VToolPointOfIntersectionInitData initData)
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
-        initData.doc->IncrementReferens(firstPoint->getIdTool());
-        initData.doc->IncrementReferens(secondPoint->getIdTool());
         return point;
     }
     return nullptr;
@@ -173,40 +181,23 @@ auto VToolPointOfIntersection::SecondPointName() const -> QString
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief RemoveReferens decrement value of reference.
- */
-void VToolPointOfIntersection::RemoveReferens()
-{
-    const auto firstPoint = VAbstractTool::data.GetGObject(firstPointId);
-    const auto secondPoint = VAbstractTool::data.GetGObject(secondPointId);
-
-    doc->DecrementReferens(firstPoint->getIdTool());
-    doc->DecrementReferens(secondPoint->getIdTool());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolPointOfIntersection::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                                          QList<quint32> &newDependencies)
+void VToolPointOfIntersection::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogPointOfIntersection> dialogTool = qobject_cast<DialogPointOfIntersection *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
-
-    AddDependence(oldDependencies, firstPointId);
-    AddDependence(oldDependencies, secondPointId);
-    AddDependence(newDependencies, dialogTool->GetFirstPointId());
-    AddDependence(newDependencies, dialogTool->GetSecondPointId());
 
     doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->GetFirstPointId()));
     doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->GetSecondPointId()));
 
     const QString notes = dialogTool->GetNotes();
-    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, notes,
-                                         [](const QString &notes) noexcept {return notes.isEmpty();});
+    doc->SetAttributeOrRemoveIf<QString>(domElement,
+                                         AttrNotes,
+                                         notes,
+                                         [](const QString &notes) noexcept -> bool { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

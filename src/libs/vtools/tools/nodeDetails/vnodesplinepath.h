@@ -57,8 +57,6 @@ public slots:
     virtual void AllowSelecting(bool enabled) override;
 protected:
     virtual void AddToFile() override;
-    virtual void ShowNode() override {}
-    virtual void HideNode() override {}
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VNodeSplinePath) // NOLINT

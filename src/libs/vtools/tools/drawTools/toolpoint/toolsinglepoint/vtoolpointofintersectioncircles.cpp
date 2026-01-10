@@ -29,20 +29,20 @@
 #include "vtoolpointofintersectioncircles.h"
 
 #include <QSharedPointer>
-#include <new>
 
 #include "../../../../dialogs/tools/dialogpointofintersectioncircles.h"
 #include "../../../../dialogs/tools/dialogtool.h"
 #include "../../../../visualization/line/vistoolpointofintersectioncircles.h"
 #include "../../../../visualization/visualization.h"
 #include "../../../vabstracttool.h"
-#include "../../vdrawtool.h"
-#include "../vmisc/exception/vexception.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vdomdocument.h"
+#include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vformula.h"
@@ -151,10 +151,23 @@ auto VToolPointOfIntersectionCircles::Create(VToolPointOfIntersectionCirclesInit
     else
     {
         initData.data->UpdateGObject(initData.id, p);
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
+
+    const auto varData = initData.data->DataDependencyVariables();
+    initData.doc->FindFormulaDependencies(initData.firstCircleRadius, initData.id, varData);
+    initData.doc->FindFormulaDependencies(initData.secondCircleRadius, initData.id, varData);
+
+    patternGraph->AddEdge(initData.firstCircleCenterId, initData.id);
+    patternGraph->AddEdge(initData.secondCircleCenterId, initData.id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     if (initData.parse == Document::FullParse)
@@ -164,8 +177,6 @@ auto VToolPointOfIntersectionCircles::Create(VToolPointOfIntersectionCirclesInit
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
-        initData.doc->IncrementReferens(c1Point.getIdTool());
-        initData.doc->IncrementReferens(c2Point.getIdTool());
         return point;
     }
     return nullptr;
@@ -294,28 +305,12 @@ void VToolPointOfIntersectionCircles::ShowContextMenu(QGraphicsSceneContextMenuE
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfIntersectionCircles::RemoveReferens()
-{
-    const auto firstCircleCenter = VAbstractTool::data.GetGObject(firstCircleCenterId);
-    const auto secondCircleCenter = VAbstractTool::data.GetGObject(secondCircleCenterId);
-
-    doc->DecrementReferens(firstCircleCenter->getIdTool());
-    doc->DecrementReferens(secondCircleCenter->getIdTool());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfIntersectionCircles::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                                                 QList<quint32> &newDependencies)
+void VToolPointOfIntersectionCircles::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogPointOfIntersectionCircles> dialogTool =
         qobject_cast<DialogPointOfIntersectionCircles *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
-
-    AddDependence(oldDependencies, firstCircleCenterId);
-    AddDependence(oldDependencies, secondCircleCenterId);
-    AddDependence(newDependencies, dialogTool->GetFirstCircleCenterId());
-    AddDependence(newDependencies, dialogTool->GetSecondCircleCenterId());
 
     doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrC1Center, QString().setNum(dialogTool->GetFirstCircleCenterId()));
@@ -324,8 +319,10 @@ void VToolPointOfIntersectionCircles::SaveDialog(QDomElement &domElement, QList<
     doc->SetAttribute(domElement, AttrC2Radius, dialogTool->GetSecondCircleRadius());
     doc->SetAttribute(domElement, AttrCrossPoint,
                       QString().setNum(static_cast<int>(dialogTool->GetCrossCirclesPoint())));
-    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
+    doc->SetAttributeOrRemoveIf<QString>(domElement,
+                                         AttrNotes,
+                                         dialogTool->GetNotes(),
+                                         [](const QString &notes) noexcept -> bool { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

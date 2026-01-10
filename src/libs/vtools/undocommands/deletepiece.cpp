@@ -31,10 +31,9 @@
 #include <QDomElement>
 #include <QHash>
 
-#include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/xml/vdomdocument.h"
-#include "../tools/vdatatool.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vmisc/def.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "../vpatterndb/vpiecepath.h"
@@ -42,40 +41,42 @@
 #include "vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DeletePiece::DeletePiece(VAbstractPattern *doc, quint32 id, const VContainer &data, VMainGraphicsScene *scene,
-                         QUndoCommand *parent)
-  : VUndoCommand(QDomElement(), doc, parent),
-    m_parentNode(),
-    m_siblingId(NULL_ID),
+DeletePiece::DeletePiece(
+    VAbstractPattern *doc, quint32 id, const VContainer &data, VMainGraphicsScene *scene, QUndoCommand *parent)
+  : VUndoCommand(doc, parent),
     m_detail(data.GetPiece(id)),
     m_data(data),
     m_scene(scene),
-    m_tool(),
     m_record(VAbstractTool::GetRecord(id, Tool::Piece, doc))
 {
     setText(tr("delete tool"));
     nodeId = id;
     QDomElement const domElement = doc->FindElementById(id, VAbstractPattern::TagDetail);
-    if (domElement.isElement())
+    if (!domElement.isElement())
     {
-        xml = domElement.cloneNode().toElement();
-        m_parentNode = domElement.parentNode();
-        QDomNode const previousDetail = domElement.previousSibling();
-        if (previousDetail.isNull())
-        {
-            m_siblingId = NULL_ID;
-        }
-        else
-        {
-            // Better save id of previous detail instead of reference to node.
-            m_siblingId = VAbstractPattern::GetParametrUInt(previousDetail.toElement(),
-                                                            VDomDocument::AttrId,
-                                                            NULL_ID_STR);
-        }
+        qCDebug(vUndo, "Can't get detail by id = %u.", nodeId);
+        return;
+    }
+
+    xml = domElement.cloneNode().toElement();
+    m_parentNode = domElement.parentNode();
+    QDomNode const previousDetail = domElement.previousSibling();
+    if (previousDetail.isNull())
+    {
+        m_siblingId = NULL_ID;
     }
     else
     {
-        qCDebug(vUndo, "Can't get detail by id = %u.", nodeId);
+        // Better save id of previous detail instead of reference to node.
+        m_siblingId = VAbstractPattern::GetParametrUInt(previousDetail.toElement(), VDomDocument::AttrId, NULL_ID_STR);
+    }
+
+    VPatternGraph const *patternGraph = doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    if (const auto node = patternGraph->GetVertex(nodeId))
+    {
+        m_indexPatternBlock = node->indexPatternBlock;
     }
 }
 
@@ -95,6 +96,14 @@ void DeletePiece::undo()
     VAbstractPattern::AddTool(nodeId, m_tool);
     m_data.UpdatePiece(nodeId, m_detail);
 
+    VPatternGraph *patternGraph = doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(nodeId, VNodeType::PIECE, m_indexPatternBlock);
+
+    const auto varData = m_data.DataDependencyVariables();
+    VToolSeamAllowance::AddPieceDependencies(nodeId, m_detail, doc, varData);
+
     m_tool->ReinitInternals(m_detail, m_scene);
 
     VAbstractTool::AddRecord(m_record, doc);
@@ -112,32 +121,30 @@ void DeletePiece::redo()
     qCDebug(vUndo, "Redo.");
 
     QDomElement const domElement = doc->FindElementById(nodeId, VAbstractPattern::TagDetail);
-    if (domElement.isElement())
-    {
-        m_parentNode.removeChild(domElement);
-
-        m_tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId));
-        SCASSERT(not m_tool.isNull());
-        m_tool->DisconnectOutsideSignals();
-        m_tool->EnableToolMove(true);
-        m_tool->hide();
-        m_tool->CancelLabelRendering();
-
-        m_scene->removeItem(m_tool);
-
-        VAbstractPattern::RemoveTool(nodeId);
-        m_data.RemovePiece(nodeId);
-        VAbstractTool::RemoveRecord(m_record, doc);
-
-        DecrementReferences(m_detail.GetPath().GetNodes());
-        DecrementReferences(m_detail.GetCustomSARecords());
-        DecrementReferences(m_detail.GetInternalPaths());
-        DecrementReferences(m_detail.GetPins());
-
-        emit doc->UpdateInLayoutList();
-    }
-    else
+    if (!domElement.isElement())
     {
         qCDebug(vUndo, "Can't get detail by id = %u.", nodeId);
+        return;
     }
+
+    m_parentNode.removeChild(domElement);
+
+    m_tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId));
+    SCASSERT(not m_tool.isNull());
+    m_tool->DisconnectOutsideSignals();
+    m_tool->EnableToolMove(true);
+    m_tool->hide();
+    m_tool->CancelLabelRendering();
+
+    m_scene->removeItem(m_tool);
+
+    VAbstractPattern::RemoveTool(nodeId);
+    m_data.RemovePiece(nodeId);
+    doc->getHistory()->removeOne(m_record);
+
+    VPatternGraph *patternGraph = doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+    patternGraph->RemoveVertex(nodeId);
+
+    emit doc->UpdateInLayoutList();
 }

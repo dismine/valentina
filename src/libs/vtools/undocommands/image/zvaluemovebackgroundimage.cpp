@@ -49,11 +49,13 @@ auto CorrectedZValues(const QList<QVector<QUuid>> &order) -> QHash<QUuid, qreal>
 }  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
-ZValueMoveBackgroundImage::ZValueMoveBackgroundImage(QUuid id, ZValueMoveType move, VAbstractPattern *doc,
+ZValueMoveBackgroundImage::ZValueMoveBackgroundImage(QUuid id,
+                                                     ZValueMoveType move,
+                                                     VAbstractPattern *doc,
                                                      QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent),
-      m_id(id),
-      m_move(move)
+  : VUndoCommand(doc, parent),
+    m_id(id),
+    m_move(move)
 {
     setText(tr("z value move a background image"));
 

@@ -37,12 +37,13 @@
 #include "../../../../../visualization/line/vistoollineintersectaxis.h"
 #include "../../../../../visualization/visualization.h"
 #include "../../../../vabstracttool.h"
-#include "../../../vdrawtool.h"
-#include "../vmisc/exception/vexception.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/compatibility.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vpatterndb/vcontainer.h"
@@ -147,20 +148,28 @@ auto VToolLineIntersectAxis::Create(VToolLineIntersectAxisInitData &initData) ->
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(p);
-        initData.data->AddLine(initData.basePointId, initData.id);
-        initData.data->AddLine(initData.firstPointId, initData.id);
-        initData.data->AddLine(initData.id, initData.secondPointId);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, p);
-        initData.data->AddLine(initData.basePointId, initData.id);
-        initData.data->AddLine(initData.firstPointId, initData.id);
-        initData.data->AddLine(initData.id, initData.secondPointId);
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
+
+    initData.data->AddLine(initData.basePointId, initData.id);
+    initData.data->AddLine(initData.firstPointId, initData.id);
+    initData.data->AddLine(initData.id, initData.secondPointId);
+
+    patternGraph->AddEdge(initData.basePointId, initData.id);
+    patternGraph->AddEdge(initData.firstPointId, initData.id);
+    patternGraph->AddEdge(initData.secondPointId, initData.id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     if (initData.parse == Document::FullParse)
@@ -170,9 +179,6 @@ auto VToolLineIntersectAxis::Create(VToolLineIntersectAxisInitData &initData) ->
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
-        initData.doc->IncrementReferens(basePoint->getIdTool());
-        initData.doc->IncrementReferens(firstPoint->getIdTool());
-        initData.doc->IncrementReferens(secondPoint->getIdTool());
         return point;
     }
     return nullptr;
@@ -260,19 +266,11 @@ void VToolLineIntersectAxis::ShowContextMenu(QGraphicsSceneContextMenuEvent *eve
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolLineIntersectAxis::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                                        QList<quint32> &newDependencies)
+void VToolLineIntersectAxis::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogLineIntersectAxis> dialogTool = qobject_cast<DialogLineIntersectAxis *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
-
-    AddDependence(oldDependencies, basePointId);
-    AddDependence(oldDependencies, firstPointId);
-    AddDependence(oldDependencies, secondPointId);
-    AddDependence(newDependencies, dialogTool->GetBasePointId());
-    AddDependence(newDependencies, dialogTool->GetFirstPointId());
-    AddDependence(newDependencies, dialogTool->GetSecondPointId());
 
     doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());

@@ -53,8 +53,7 @@ protected:
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(AddToCalc) // NOLINT
-    const QString nameActivDraw;
-    quint32 cursor;
+    const int m_indexActiveBlock{-1};
 };
 
 #endif // ADDTOCALC_H

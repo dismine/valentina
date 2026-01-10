@@ -163,6 +163,7 @@ public slots:
     void ZoomOriginal();
     void ZoomFitBest();
     void ResetScrollingAnimation();
+    void EnsureToolVisible(const QRectF &rect);
 
 protected:
     void mousePressEvent(QMouseEvent *event) override;

@@ -971,7 +971,7 @@ auto VSpline::Extrema() const -> QVector<double>
 
         // Keep only valid t in [0,1]
         QVector<double> filtered;
-        for (double const t : qAsConst(result))
+        for (double const t : std::as_const(result))
         {
             if (t >= 0.0 && t <= 1.0)
             {
@@ -980,7 +980,7 @@ auto VSpline::Extrema() const -> QVector<double>
         }
 
         // Append to global roots list
-        for (double const t : qAsConst(filtered))
+        for (double const t : std::as_const(filtered))
         {
             roots.append(t);
         }
@@ -1200,7 +1200,7 @@ auto VSpline::OffsetCurve_r(double distance) const -> QVector<VSpline>
     QVector<VSpline> reduced = Reduce();
     result.reserve(reduced.size());
 
-    for (const VSpline &seg : qAsConst(reduced))
+    for (const VSpline &seg : std::as_const(reduced))
     {
         if (seg.IsLinear())
         {
@@ -1531,7 +1531,7 @@ auto VSpline::CalcT(qreal curveCoord1, qreal curveCoord2, qreal curveCoord3, qre
 
     QVector<qreal> retT;
     retT.reserve(t.size());
-    for (auto i : qAsConst(t))
+    for (auto i : std::as_const(t))
     {
         if (i >= 0 && i <= 1)
         {
@@ -1568,7 +1568,7 @@ auto VSpline::ParamT(const QPointF &pBt) const -> qreal
 
     // In morst case we will have 6 result in interval [0; 1].
     // Here we try find closest to our point.
-    for (auto t : qAsConst(ts))
+    for (auto t : std::as_const(ts))
     {
         const auto p0 = static_cast<QPointF>(GetP1());
         const auto p1 = static_cast<QPointF>(GetP2());

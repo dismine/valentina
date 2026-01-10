@@ -36,7 +36,6 @@
 #include <QSharedPointer>
 #include <QUndoStack>
 #include <climits>
-#include <new>
 #include <qiterator.h>
 
 #include "../../../../dialogs/tools/dialogflippingbyaxis.h"
@@ -44,9 +43,11 @@
 #include "../../../../visualization/line/operation/vistoolflippingbyaxis.h"
 #include "../../../../visualization/visualization.h"
 #include "../../../vabstracttool.h"
-#include "../vmisc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vformula.h"
@@ -109,17 +110,40 @@ auto VToolFlippingByAxis::Create(VToolFlippingByAxisInitData initData) -> VToolF
     const auto originPoint = *initData.data->GeometricObject<VPointF>(initData.originPointId);
     const auto fPoint = static_cast<QPointF>(originPoint);
 
-    QPointF sPoint;
-    if (initData.axisType == AxisType::VerticalAxis)
+    QPointF const sPoint = initData.axisType == AxisType::VerticalAxis ? QPointF(fPoint.x(), fPoint.y() + 100)
+                                                                       : QPointF(fPoint.x() + 100, fPoint.y());
+
+    if (initData.typeCreation == Source::FromGui)
     {
-        sPoint = QPointF(fPoint.x(), fPoint.y() + 100);
-    }
-    else
-    {
-        sPoint = QPointF(fPoint.x() + 100, fPoint.y());
+        initData.destination.clear(); // Try to avoid mistake, value must be empty
+
+        initData.id = initData.data->getNextId(); // Just reserve id for tool
     }
 
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
+
     CreateDestination(initData, fPoint, sPoint);
+
+    patternGraph->AddEdge(initData.originPointId, initData.id);
+
+    for (const auto &object : std::as_const(initData.source))
+    {
+        patternGraph->AddEdge(object.id, initData.id);
+    }
+
+    for (const auto &object : std::as_const(initData.destination))
+    {
+        patternGraph->AddVertex(object.id, VNodeType::OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
+        patternGraph->AddEdge(initData.id, object.id);
+    }
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
+    }
 
     if (initData.parse == Document::FullParse)
     {
@@ -133,11 +157,6 @@ auto VToolFlippingByAxis::Create(VToolFlippingByAxisInitData initData) -> VToolF
         initData.scene->addItem(tool);
         InitOperationToolConnections(initData.scene, tool);
         VAbstractPattern::AddTool(initData.id, tool);
-        initData.doc->IncrementReferens(originPoint.getIdTool());
-        for (const auto &object : qAsConst(initData.source))
-        {
-            initData.doc->IncrementReferens(initData.data->GetGObject(object.id)->getIdTool());
-        }
 
         if (initData.typeCreation == Source::FromGui && initData.hasLinkedVisibilityGroup)
         {
@@ -208,15 +227,11 @@ void VToolFlippingByAxis::SetVisualization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolFlippingByAxis::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                                     QList<quint32> &newDependencies)
+void VToolFlippingByAxis::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogFlippingByAxis> dialogTool = qobject_cast<DialogFlippingByAxis *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
-
-    AddDependence(oldDependencies, m_originPointId);
-    AddDependence(newDependencies, dialogTool->GetOriginPointId());
 
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetOriginPointId()));
     doc->SetAttribute(domElement, AttrAxisType, QString().setNum(static_cast<int>(dialogTool->GetAxisType())));

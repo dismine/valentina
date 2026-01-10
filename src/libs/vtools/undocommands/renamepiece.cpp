@@ -34,7 +34,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 RenamePiece::RenamePiece(VAbstractPattern *doc, QString newName, quint32 id, QUndoCommand *parent)
-  : VUndoCommand(QDomElement(), doc, parent),
+  : VUndoCommand(doc, parent),
     m_newName(std::move(newName))
 {
     setText(QObject::tr("rename detail"));

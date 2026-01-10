@@ -1,0 +1,102 @@
+/************************************************************************
+ **
+ **  @file   vwidgetdependencies.h
+ **  @author Roman Telezhynskyi <dismine(at)gmail.com>
+ **  @date   31 12, 2025
+ **
+ **  @brief
+ **  @copyright
+ **  This source code is part of the Valentina project, a pattern making
+ **  program, whose allow create and modeling patterns of clothing.
+ **  Copyright (C) 2025 Valentina project
+ **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
+ **
+ **  Valentina is free software: you can redistribute it and/or modify
+ **  it under the terms of the GNU General Public License as published by
+ **  the Free Software Foundation, either version 3 of the License, or
+ **  (at your option) any later version.
+ **
+ **  Valentina is distributed in the hope that it will be useful,
+ **  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ **  GNU General Public License for more details.
+ **
+ **  You should have received a copy of the GNU General Public License
+ **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
+ **
+ *************************************************************************/
+#ifndef VWIDGETDEPENDENCIES_H
+#define VWIDGETDEPENDENCIES_H
+
+#include "../core/vhistorymanager.h"
+#include "../vmisc/typedef.h"
+
+#include <QObject>
+#include <QWidget>
+
+class VAbstractPattern;
+class QGraphicsItem;
+class VDependencyTreeModel;
+class VTreeStateManager;
+class VDependencyFilterProxyModel;
+class VAbstractTool;
+
+namespace Ui
+{
+class VWidgetDependencies;
+}
+
+class VWidgetDependencies : public QWidget
+{
+    Q_OBJECT // NOLINT
+
+public:
+    explicit VWidgetDependencies(VAbstractPattern *doc, QWidget *parent = nullptr);
+    ~VWidgetDependencies() override;
+
+public slots:
+    void UpdateDependencies();
+    void ShowDependency(QGraphicsItem *item);
+
+signals:
+    void ShowProperties(QGraphicsItem *item) const;
+    void ShowTool(const QRectF &rect) const;
+
+protected:
+    void changeEvent(QEvent *event) override;
+
+private slots:
+    void OnNodeSelectionChanged(const QModelIndex &current, const QModelIndex &previous);
+    void OnContextMenuRequested(const QPoint &pos);
+
+    void MoveTop();
+    void MoveUp();
+    void MoveDown();
+    void MoveBottom();
+
+private:
+    Q_DISABLE_COPY_MOVE(VWidgetDependencies)
+    Ui::VWidgetDependencies *ui;
+    VAbstractPattern *m_doc;
+    VDependencyTreeModel *m_dependencyModel;
+    VDependencyFilterProxyModel *m_proxyModel;
+    VTreeStateManager *m_stateManager{nullptr};
+    int m_indexPatternBlock{-1};
+    vidtype m_activeTool{NULL_ID};
+    VHistoryManager m_historyManager;
+
+    void ShowToolProperties(VAbstractTool *tool, bool show) const;
+    auto HighlightTool(vidtype id, bool show) const -> vidtype;
+    auto HighlightObject(vidtype id, int indexPatternBlock, bool show) const -> vidtype;
+
+    auto ObjectId(const QModelIndex &index) const -> vidtype;
+    auto CurrentObjectId() const -> vidtype;
+
+    void ExpandAllChildren(const QModelIndex &index);
+    void CollapseAllChildren(const QModelIndex &index);
+    void GoToObject(vidtype id) const;
+
+    void EnableMoveButtons(const QModelIndex &current);
+};
+
+#endif // VWIDGETDEPENDENCIES_H

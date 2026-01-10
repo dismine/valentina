@@ -107,7 +107,7 @@ auto VAbstractShortcutManager::GetShortcutsList() const -> QList<VAbstractShortc
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractShortcutManager::ShortcutActionToString(VShortcutAction type) -> QString
 {
-    Q_STATIC_ASSERT_X(static_cast<int>(VShortcutAction::LAST_ONE_DO_NOT_USE) == 88, "Convert all actions.");
+    Q_STATIC_ASSERT_X(static_cast<int>(VShortcutAction::LAST_ONE_DO_NOT_USE) == 87, "Convert all actions.");
 
     switch (type)
     {
@@ -157,8 +157,6 @@ auto VAbstractShortcutManager::ShortcutActionToString(VShortcutAction type) -> Q
             return "interactivetools"_L1;
         case VShortcutAction::TableOfVariables:
             return "tableofvariables"_L1;
-        case VShortcutAction::PatternHistory:
-            return "patternhistory"_L1;
         case VShortcutAction::Quit:
             return "quit"_L1;
         case VShortcutAction::LastTool:
@@ -299,7 +297,7 @@ auto VAbstractShortcutManager::ShortcutActionToString(VShortcutAction type) -> Q
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractShortcutManager::ReadableName(VShortcutAction type) -> QString
 {
-    Q_STATIC_ASSERT_X(static_cast<int>(VShortcutAction::LAST_ONE_DO_NOT_USE) == 88, "Translate all actions.");
+    Q_STATIC_ASSERT_X(static_cast<int>(VShortcutAction::LAST_ONE_DO_NOT_USE) == 87, "Translate all actions.");
 
     switch (type)
     {
@@ -349,8 +347,6 @@ auto VAbstractShortcutManager::ReadableName(VShortcutAction type) -> QString
             return tr("Interactive tools mode", "shortcut for action");
         case VShortcutAction::TableOfVariables:
             return tr("Open Table of variables dialog", "shortcut for action");
-        case VShortcutAction::PatternHistory:
-            return tr("Open pattern history dialog", "shortcut for action");
         case VShortcutAction::Quit:
             return tr("Quit app", "shortcut for action");
         case VShortcutAction::LastTool:

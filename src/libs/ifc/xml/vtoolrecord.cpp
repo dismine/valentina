@@ -27,54 +27,25 @@
  *************************************************************************/
 
 #include "vtoolrecord.h"
-#include "../ifcdef.h"
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VToolRecord default constructor.
- */
-VToolRecord::VToolRecord()
-    :id(NULL_ID), typeTool(Tool::Arrow), nameDraw(QString())
-{}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VToolRecord constructor.
  * @param id tool id.
- * @param typeTool tool type.
- * @param nameDraw pattern peace name.
+ * @param toolType tool type.
+ * @param indexPatternBlock pattern peace name.
  */
-VToolRecord::VToolRecord(const quint32 &id, const Tool &typeTool, const QString &nameDraw)
-    :id(id), typeTool(typeTool), nameDraw(nameDraw)
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VToolRecord::operator=(const VToolRecord &record) -> VToolRecord &
-{
-    if ( &record == this )
-    {
-        return *this;
-    }
-
-    this->id = record.getId();
-    this->typeTool = record.getTypeTool();
-    this->nameDraw = record.getNameDraw();
-    return *this;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VToolRecord::VToolRecord(const VToolRecord &record)
-    :id(record.getId()), typeTool(record.getTypeTool()), nameDraw(record.getNameDraw())
+VToolRecord::VToolRecord(vidtype id, Tool toolType, int indexPatternBlock)
+  : id(id),
+    toolType(toolType),
+    indexPatternBlock(indexPatternBlock)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VToolRecord::IsMandatory() const -> bool
 {
-    return typeTool != Tool::Pin
-            && typeTool != Tool::NodePoint
-            && typeTool != Tool::NodeArc
-            && typeTool != Tool::NodeElArc
-            && typeTool != Tool::NodeSpline
-            && typeTool != Tool::NodeSplinePath
-            && typeTool != Tool::PiecePath;
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64, "Check list.");
+    return toolType != Tool::Pin && toolType != Tool::NodePoint && toolType != Tool::NodeArc
+           && toolType != Tool::NodeElArc && toolType != Tool::NodeSpline && toolType != Tool::NodeSplinePath
+           && toolType != Tool::PiecePath;
 }

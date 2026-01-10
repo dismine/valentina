@@ -31,6 +31,10 @@
         <file>icons/Eleven-Light/16/actions/list-add-font.svg</file>
         <file>icons/Eleven-Light/16/actions/list-add.svg</file>
         <file>icons/Eleven-Light/16/actions/list-remove.svg</file>
+        <file>icons/Eleven-Light/16/actions/object-order-back.svg</file>
+        <file>icons/Eleven-Light/16/actions/object-order-front.svg</file>
+        <file>icons/Eleven-Light/16/actions/object-order-lower.svg</file>
+        <file>icons/Eleven-Light/16/actions/object-order-raise.svg</file>
         <file>icons/Eleven-Light/16/actions/object-rotate-left.svg</file>
         <file>icons/Eleven-Light/16/actions/object-rotate-right.svg</file>
         <file>icons/Eleven-Light/16/actions/snap-nodes-rotation-center.svg</file>
@@ -76,6 +80,10 @@
         <file>icons/Eleven-Light/22/actions/list-add-font.svg</file>
         <file>icons/Eleven-Light/22/actions/list-add.svg</file>
         <file>icons/Eleven-Light/22/actions/list-remove.svg</file>
+        <file>icons/Eleven-Light/22/actions/object-order-back.svg</file>
+        <file>icons/Eleven-Light/22/actions/object-order-front.svg</file>
+        <file>icons/Eleven-Light/22/actions/object-order-lower.svg</file>
+        <file>icons/Eleven-Light/22/actions/object-order-raise.svg</file>
         <file>icons/Eleven-Light/22/actions/object-rotate-left.svg</file>
         <file>icons/Eleven-Light/22/actions/object-rotate-right.svg</file>
         <file>icons/Eleven-Light/22/actions/view-refresh.svg</file>
@@ -119,6 +127,10 @@
         <file>icons/Eleven-Light/24/actions/list-add-font.svg</file>
         <file>icons/Eleven-Light/24/actions/list-add.svg</file>
         <file>icons/Eleven-Light/24/actions/list-remove.svg</file>
+        <file>icons/Eleven-Light/24/actions/object-order-back.svg</file>
+        <file>icons/Eleven-Light/24/actions/object-order-front.svg</file>
+        <file>icons/Eleven-Light/24/actions/object-order-lower.svg</file>
+        <file>icons/Eleven-Light/24/actions/object-order-raise.svg</file>
         <file>icons/Eleven-Light/24/actions/object-rotate-left.svg</file>
         <file>icons/Eleven-Light/24/actions/object-rotate-right.svg</file>
         <file>icons/Eleven-Light/24/actions/view-refresh.svg</file>
@@ -166,6 +178,10 @@
         <file>icons/Eleven-Light/16@2x/actions/list-add-font.svg</file>
         <file>icons/Eleven-Light/16@2x/actions/list-add.svg</file>
         <file>icons/Eleven-Light/16@2x/actions/list-remove.svg</file>
+        <file>icons/Eleven-Light/16@2x/actions/object-order-back.svg</file>
+        <file>icons/Eleven-Light/16@2x/actions/object-order-front.svg</file>
+        <file>icons/Eleven-Light/16@2x/actions/object-order-lower.svg</file>
+        <file>icons/Eleven-Light/16@2x/actions/object-order-raise.svg</file>
         <file>icons/Eleven-Light/16@2x/actions/object-rotate-left.svg</file>
         <file>icons/Eleven-Light/16@2x/actions/object-rotate-right.svg</file>
         <file>icons/Eleven-Light/16@2x/actions/snap-nodes-rotation-center.svg</file>
@@ -211,6 +227,10 @@
         <file>icons/Eleven-Light/22@2x/actions/list-add-font.svg</file>
         <file>icons/Eleven-Light/22@2x/actions/list-add.svg</file>
         <file>icons/Eleven-Light/22@2x/actions/list-remove.svg</file>
+        <file>icons/Eleven-Light/22@2x/actions/object-order-back.svg</file>
+        <file>icons/Eleven-Light/22@2x/actions/object-order-front.svg</file>
+        <file>icons/Eleven-Light/22@2x/actions/object-order-lower.svg</file>
+        <file>icons/Eleven-Light/22@2x/actions/object-order-raise.svg</file>
         <file>icons/Eleven-Light/22@2x/actions/object-rotate-left.svg</file>
         <file>icons/Eleven-Light/22@2x/actions/object-rotate-right.svg</file>
         <file>icons/Eleven-Light/22@2x/actions/view-refresh.svg</file>
@@ -254,6 +274,10 @@
         <file>icons/Eleven-Light/24@2x/actions/list-add-font.svg</file>
         <file>icons/Eleven-Light/24@2x/actions/list-add.svg</file>
         <file>icons/Eleven-Light/24@2x/actions/list-remove.svg</file>
+        <file>icons/Eleven-Light/24@2x/actions/object-order-back.svg</file>
+        <file>icons/Eleven-Light/24@2x/actions/object-order-front.svg</file>
+        <file>icons/Eleven-Light/24@2x/actions/object-order-lower.svg</file>
+        <file>icons/Eleven-Light/24@2x/actions/object-order-raise.svg</file>
         <file>icons/Eleven-Light/24@2x/actions/object-rotate-left.svg</file>
         <file>icons/Eleven-Light/24@2x/actions/object-rotate-right.svg</file>
         <file>icons/Eleven-Light/24@2x/actions/view-refresh.svg</file>
@@ -287,6 +311,10 @@
         <file>icons/Eleven-Light/32/actions/go-top.svg</file>
         <file>icons/Eleven-Light/32/actions/go-up.svg</file>
         <file>icons/Eleven-Light/32/actions/help-about.svg</file>
+        <file>icons/Eleven-Light/32/actions/object-order-back.svg</file>
+        <file>icons/Eleven-Light/32/actions/object-order-front.svg</file>
+        <file>icons/Eleven-Light/32/actions/object-order-lower.svg</file>
+        <file>icons/Eleven-Light/32/actions/object-order-raise.svg</file>
         <file>icons/Eleven-Light/32/actions/view-refresh.svg</file>
         <file>icons/Eleven-Light/32/actions/zoom-fit-best.svg</file>
         <file>icons/Eleven-Light/32/actions/zoom-in.svg</file>
@@ -312,6 +340,10 @@
         <file>icons/Eleven-Light/32@2x/actions/go-top.svg</file>
         <file>icons/Eleven-Light/32@2x/actions/go-up.svg</file>
         <file>icons/Eleven-Light/32@2x/actions/help-about.svg</file>
+        <file>icons/Eleven-Light/32@2x/actions/object-order-back.svg</file>
+        <file>icons/Eleven-Light/32@2x/actions/object-order-front.svg</file>
+        <file>icons/Eleven-Light/32@2x/actions/object-order-lower.svg</file>
+        <file>icons/Eleven-Light/32@2x/actions/object-order-raise.svg</file>
         <file>icons/Eleven-Light/32@2x/actions/view-refresh.svg</file>
         <file>icons/Eleven-Light/32@2x/actions/zoom-fit-best.svg</file>
         <file>icons/Eleven-Light/32@2x/actions/zoom-in.svg</file>

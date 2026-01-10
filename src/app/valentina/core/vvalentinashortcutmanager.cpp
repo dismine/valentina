@@ -35,7 +35,7 @@
 VValentinaShortcutManager::VValentinaShortcutManager(QObject *parent)
   : VAbstractShortcutManager{parent}
 {
-    Q_STATIC_ASSERT_X(static_cast<int>(VShortcutAction::LAST_ONE_DO_NOT_USE) == 88, "Check if all actions were used.");
+    Q_STATIC_ASSERT_X(static_cast<int>(VShortcutAction::LAST_ONE_DO_NOT_USE) == 87, "Check if all actions were used.");
 
     QT_WARNING_PUSH
 #if !defined(Q_OS_MACOS) && defined(Q_CC_CLANG)
@@ -95,9 +95,6 @@ VValentinaShortcutManager::VValentinaShortcutManager(QObject *parent)
                  {}});
     AddShortcut({VShortcutAction::TableOfVariables,
                  {QKeySequence(Qt::ControlModifier QKEY_SEQUENCE_OP Qt::Key_T).toString()},
-                 {}});
-    AddShortcut({VShortcutAction::PatternHistory,
-                 {QKeySequence(Qt::ControlModifier QKEY_SEQUENCE_OP Qt::Key_H).toString()},
                  {}});
     AddShortcut({VShortcutAction::Quit, KeyBindingsToStringList(QKeySequence::Quit), {}});
     AddShortcut({VShortcutAction::CurveDetails, {QKeySequence(Qt::Key_F2).toString()}, {}});

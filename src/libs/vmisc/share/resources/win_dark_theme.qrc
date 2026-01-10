@@ -699,10 +699,10 @@
         <!-- <file>icons/Eleven-Dark/16/actions/object-flip-ver.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/object-flip-vertical.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/object-group.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/16/actions/object-order-back.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/16/actions/object-order-front.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/16/actions/object-order-lower.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/16/actions/object-order-raise.svg</file> -->
+        <file>icons/Eleven-Dark/16/actions/object-order-back.svg</file>
+        <file>icons/Eleven-Dark/16/actions/object-order-front.svg</file>
+        <file>icons/Eleven-Dark/16/actions/object-order-lower.svg</file>
+        <file>icons/Eleven-Dark/16/actions/object-order-raise.svg</file>
         <file>icons/Eleven-Dark/16/actions/object-rotate-left.svg</file>
         <file>icons/Eleven-Dark/16/actions/object-rotate-right.svg</file>
         <!-- <file>icons/Eleven-Dark/16/actions/object-rows.svg</file> -->
@@ -3097,10 +3097,10 @@
         <!-- <file>icons/Eleven-Dark/22/actions/object-flip-horizontal.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22/actions/object-flip-vertical.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22/actions/object-group.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/22/actions/object-order-back.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/22/actions/object-order-front.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/22/actions/object-order-lower.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/22/actions/object-order-raise.svg</file> -->
+        <file>icons/Eleven-Dark/22/actions/object-order-back.svg</file>
+        <file>icons/Eleven-Dark/22/actions/object-order-front.svg</file>
+        <file>icons/Eleven-Dark/22/actions/object-order-lower.svg</file>
+        <file>icons/Eleven-Dark/22/actions/object-order-raise.svg</file>
         <file>icons/Eleven-Dark/22/actions/object-rotate-left.svg</file>
         <file>icons/Eleven-Dark/22/actions/object-rotate-right.svg</file>
         <!-- <file>icons/Eleven-Dark/22/actions/object-rows.svg</file> -->
@@ -5414,10 +5414,10 @@
         <!-- <file>icons/Eleven-Dark/24/actions/object-flip-horizontal.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24/actions/object-flip-vertical.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24/actions/object-group.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/24/actions/object-order-back.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/24/actions/object-order-front.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/24/actions/object-order-lower.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/24/actions/object-order-raise.svg</file> -->
+        <file>icons/Eleven-Dark/24/actions/object-order-back.svg</file>
+        <file>icons/Eleven-Dark/24/actions/object-order-front.svg</file>
+        <file>icons/Eleven-Dark/24/actions/object-order-lower.svg</file>
+        <file>icons/Eleven-Dark/24/actions/object-order-raise.svg</file>
         <file>icons/Eleven-Dark/24/actions/object-rotate-left.svg</file>
         <file>icons/Eleven-Dark/24/actions/object-rotate-right.svg</file>
         <!-- <file>icons/Eleven-Dark/24/actions/object-rows.svg</file> -->
@@ -7153,10 +7153,10 @@
         <!-- <file>icons/Eleven-Dark/32/actions/media-skip-backward.svg</file> -->
         <!-- <file>icons/Eleven-Dark/32/actions/media-skip-forward.svg</file> -->
         <!-- <file>icons/Eleven-Dark/32/actions/multiple.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/32/actions/object-order-back.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/32/actions/object-order-front.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/32/actions/object-order-lower.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/32/actions/object-order-raise.svg</file> -->
+        <file>icons/Eleven-Dark/32/actions/object-order-back.svg</file>
+        <file>icons/Eleven-Dark/32/actions/object-order-front.svg</file>
+        <file>icons/Eleven-Dark/32/actions/object-order-lower.svg</file>
+        <file>icons/Eleven-Dark/32/actions/object-order-raise.svg</file>
         <!-- <file>icons/Eleven-Dark/32/actions/overflow-menu.svg</file> -->
         <!-- <file>icons/Eleven-Dark/32/actions/percent.svg</file> -->
         <!-- <file>icons/Eleven-Dark/32/actions/qa.svg</file> -->
@@ -8634,10 +8634,10 @@
         <!-- <file>icons/Eleven-Dark/16@2x/actions/object-flip-ver.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/object-flip-vertical.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/object-group.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/16@2x/actions/object-order-back.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/16@2x/actions/object-order-front.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/16@2x/actions/object-order-lower.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/16@2x/actions/object-order-raise.svg</file> -->
+        <file>icons/Eleven-Dark/16@2x/actions/object-order-back.svg</file>
+        <file>icons/Eleven-Dark/16@2x/actions/object-order-front.svg</file>
+        <file>icons/Eleven-Dark/16@2x/actions/object-order-lower.svg</file>
+        <file>icons/Eleven-Dark/16@2x/actions/object-order-raise.svg</file>
         <file>icons/Eleven-Dark/16@2x/actions/object-rotate-left.svg</file>
         <file>icons/Eleven-Dark/16@2x/actions/object-rotate-right.svg</file>
         <!-- <file>icons/Eleven-Dark/16@2x/actions/object-rows.svg</file> -->
@@ -11032,10 +11032,10 @@
         <!-- <file>icons/Eleven-Dark/22@2x/actions/object-flip-horizontal.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22@2x/actions/object-flip-vertical.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22@2x/actions/object-group.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/22@2x/actions/object-order-back.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/22@2x/actions/object-order-front.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/22@2x/actions/object-order-lower.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/22@2x/actions/object-order-raise.svg</file> -->
+        <file>icons/Eleven-Dark/22@2x/actions/object-order-back.svg</file>
+        <file>icons/Eleven-Dark/22@2x/actions/object-order-front.svg</file>
+        <file>icons/Eleven-Dark/22@2x/actions/object-order-lower.svg</file>
+        <file>icons/Eleven-Dark/22@2x/actions/object-order-raise.svg</file>
         <file>icons/Eleven-Dark/22@2x/actions/object-rotate-left.svg</file>
         <file>icons/Eleven-Dark/22@2x/actions/object-rotate-right.svg</file>
         <!-- <file>icons/Eleven-Dark/22@2x/actions/object-rows.svg</file> -->
@@ -13349,10 +13349,10 @@
         <!-- <file>icons/Eleven-Dark/24@2x/actions/object-flip-horizontal.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24@2x/actions/object-flip-vertical.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24@2x/actions/object-group.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/24@2x/actions/object-order-back.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/24@2x/actions/object-order-front.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/24@2x/actions/object-order-lower.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/24@2x/actions/object-order-raise.svg</file> -->
+        <file>icons/Eleven-Dark/24@2x/actions/object-order-back.svg</file>
+        <file>icons/Eleven-Dark/24@2x/actions/object-order-front.svg</file>
+        <file>icons/Eleven-Dark/24@2x/actions/object-order-lower.svg</file>
+        <file>icons/Eleven-Dark/24@2x/actions/object-order-raise.svg</file>
         <file>icons/Eleven-Dark/24@2x/actions/object-rotate-left.svg</file>
         <file>icons/Eleven-Dark/24@2x/actions/object-rotate-right.svg</file>
         <!-- <file>icons/Eleven-Dark/24@2x/actions/object-rows.svg</file> -->
@@ -15088,10 +15088,10 @@
         <!-- <file>icons/Eleven-Dark/32@2x/actions/media-skip-backward.svg</file> -->
         <!-- <file>icons/Eleven-Dark/32@2x/actions/media-skip-forward.svg</file> -->
         <!-- <file>icons/Eleven-Dark/32@2x/actions/multiple.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/32@2x/actions/object-order-back.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/32@2x/actions/object-order-front.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/32@2x/actions/object-order-lower.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/32@2x/actions/object-order-raise.svg</file> -->
+        <file>icons/Eleven-Dark/32@2x/actions/object-order-back.svg</file>
+        <file>icons/Eleven-Dark/32@2x/actions/object-order-front.svg</file>
+        <file>icons/Eleven-Dark/32@2x/actions/object-order-lower.svg</file>
+        <file>icons/Eleven-Dark/32@2x/actions/object-order-raise.svg</file>
         <!-- <file>icons/Eleven-Dark/32@2x/actions/overflow-menu.svg</file> -->
         <!-- <file>icons/Eleven-Dark/32@2x/actions/percent.svg</file> -->
         <!-- <file>icons/Eleven-Dark/32@2x/actions/qa.svg</file> -->

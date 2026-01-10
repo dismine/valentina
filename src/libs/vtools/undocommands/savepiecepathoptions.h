@@ -38,14 +38,19 @@ class SavePiecePathOptions : public VUndoCommand
 {
     Q_OBJECT // NOLINT
 public:
-    SavePiecePathOptions(quint32 pieceId, const VPiecePath &oldPath, const VPiecePath &newPath, VAbstractPattern *doc,
-                         VContainer *data, quint32 id, QUndoCommand *parent = nullptr);
-    virtual ~SavePiecePathOptions() = default;
+    SavePiecePathOptions(quint32 pieceId,
+                         VPiecePath oldPath,
+                         VPiecePath newPath,
+                         VAbstractPattern *doc,
+                         VContainer *data,
+                         quint32 id,
+                         QUndoCommand *parent = nullptr);
+    ~SavePiecePathOptions() override = default;
 
-    virtual void undo() override;
-    virtual void redo() override;
-    virtual auto mergeWith(const QUndoCommand *command) -> bool override;
-    virtual auto id() const -> int override;
+    void undo() override;
+    void redo() override;
+    auto mergeWith(const QUndoCommand *command) -> bool override;
+    auto id() const -> int override;
     auto PathId() const -> quint32;
     auto NewPath() const -> VPiecePath;
 

@@ -38,12 +38,19 @@
 
 #include "../../undocommands/addtocalc.h"
 #include "../../undocommands/savetooloptions.h"
+#include "../../undocommands/undogroup.h"
 #include "../ifc/exception/vexceptionwrongid.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/xml/vdomdocument.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 #include "../vabstracttool.h"
 #include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/vabstractmainwindow.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
 
 template <class T> class QSharedPointer;
 
@@ -54,51 +61,16 @@ template <class T> class QSharedPointer;
  * @param data container with variables.
  * @param id object id in container.
  */
-VDrawTool::VDrawTool(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes, QObject *parent)
+VDrawTool::VDrawTool(VAbstractPattern *doc, VContainer *data, quint32 id, QString notes, QObject *parent)
   : VInteractiveTool(doc, data, id, parent),
-    nameActivDraw(doc->GetNameActivPP()),
+    m_indexActivePatternBlock(doc->PatternBlockMapper()->GetActiveId()),
     m_lineType(TypeLineLine),
-    m_notes(notes)
+    m_notes(std::move(notes))
 {
-    connect(this->doc, &VAbstractPattern::ChangedActivPP, this, &VDrawTool::ChangedActivDraw);
-    connect(this->doc, &VAbstractPattern::ChangedNameDraw, this, &VDrawTool::ChangedNameDraw);
-    connect(this->doc, &VAbstractPattern::ShowTool, this, &VDrawTool::ShowTool);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ShowTool  highlight tool.
- * @param id object id in container.
- * @param enable enable or disable highlight.
- */
-void VDrawTool::ShowTool(quint32 id, bool enable)
-{
-    Q_UNUSED(id)
-    Q_UNUSED(enable)
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
- * @param newName new name active pattern peace.
- */
-void VDrawTool::ChangedActivDraw(const QString &newName)
-{
-    Disable(!(nameActivDraw == newName), newName);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ChangedNameDraw save new name active pattern peace.
- * @param oldName old name.
- * @param newName new name active pattern peace. new name.
- */
-void VDrawTool::ChangedNameDraw(const QString &oldName, const QString &newName)
-{
-    if (nameActivDraw == oldName)
-    {
-        nameActivDraw = newName;
-    }
+    connect(this->doc->PatternBlockMapper(),
+            QOverload<int>::of(&VPatternBlockMapper::ChangedActivePatternBlock),
+            this,
+            &VDrawTool::Enable);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -107,31 +79,23 @@ void VDrawTool::SaveDialogChange(const QString &undoText)
     Q_UNUSED(undoText)
     qCDebug(vTool, "Saving tool options after using dialog");
     QDomElement const oldDomElement = doc->FindElementById(m_id, getTagName());
-    if (oldDomElement.isElement())
-    {
-        QDomElement newDomElement = oldDomElement.cloneNode().toElement();
-        QList<quint32> oldDependencies;
-        QList<quint32> newDependencies;
-        SaveDialog(newDomElement, oldDependencies, newDependencies);
-        ApplyToolOptions(oldDependencies, newDependencies, oldDomElement, newDomElement);
-    }
-    else
+    if (!oldDomElement.isElement())
     {
         qCDebug(vTool, "Can't find tool with id = %u", m_id);
+        return;
     }
+
+    QDomElement newDomElement = oldDomElement.cloneNode().toElement();
+    SaveDialog(newDomElement);
+    ApplyToolOptions(oldDomElement, newDomElement);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDrawTool::ApplyToolOptions(const QList<quint32> &oldDependencies, const QList<quint32> &newDependencies,
-                                 const QDomElement &oldDomElement, const QDomElement &newDomElement)
+void VDrawTool::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
 {
-    if (newDependencies != oldDependencies || not VDomDocument::Compare(newDomElement, oldDomElement))
-    {
-        auto *saveOptions =
-            new SaveToolOptions(oldDomElement, newDomElement, oldDependencies, newDependencies, doc, m_id);
-        connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        VAbstractApplication::VApp()->getUndoStack()->push(saveOptions);
-    }
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+    connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    VAbstractApplication::VApp()->getUndoStack()->push(saveOptions);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -151,21 +115,19 @@ void VDrawTool::SaveOption(QSharedPointer<VGObject> &obj)
 {
     qCDebug(vTool, "Saving tool options");
     QDomElement const oldDomElement = doc->FindElementById(m_id, getTagName());
-    if (oldDomElement.isElement())
-    {
-        QDomElement newDomElement = oldDomElement.cloneNode().toElement();
-
-        SaveOptions(newDomElement, obj);
-
-        auto *saveOptions =
-            new SaveToolOptions(oldDomElement, newDomElement, QList<quint32>(), QList<quint32>(), doc, m_id);
-        connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        VAbstractApplication::VApp()->getUndoStack()->push(saveOptions);
-    }
-    else
+    if (!oldDomElement.isElement())
     {
         qCDebug(vTool, "Can't find tool with id = %u", m_id);
+        return;
     }
+
+    QDomElement newDomElement = oldDomElement.cloneNode().toElement();
+
+    SaveOptions(newDomElement, obj);
+
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+    connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    VAbstractApplication::VApp()->getUndoStack()->push(saveOptions);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -174,14 +136,16 @@ void VDrawTool::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     Q_UNUSED(obj)
 
     doc->SetAttribute(tag, VDomDocument::AttrId, m_id);
-    doc->SetAttributeOrRemoveIf<QString>(tag, AttrNotes, m_notes,
-                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
+    doc->SetAttributeOrRemoveIf<QString>(tag,
+                                         AttrNotes,
+                                         m_notes,
+                                         [](const QString &notes) noexcept -> bool { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VDrawTool::MakeToolTip() const -> QString
 {
-    return QString();
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -189,17 +153,6 @@ void VDrawTool::UpdateNamePosition(quint32 id, const QPointF &pos)
 {
     Q_UNUSED(id)
     Q_UNUSED(pos)
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VDrawTool::CorrectDisable(bool disable, const QString &namePP) const -> bool
-{
-    if (disable)
-    {
-        return disable;
-    }
-
-    return !(nameActivDraw == namePP);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -245,6 +198,242 @@ void VDrawTool::ChangeLabelVisibility(quint32 id, bool visible)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
+ * @brief Retrieves the geometric object type for the given item ID.
+ * 
+ * @param itemId The ID of the item to query
+ * @return The GOType of the item, or GOType::Unknown if the item doesn't exist or was deleted
+ */
+auto VDrawTool::GetItemType(quint32 itemId) const -> GOType
+{
+    if (itemId == NULL_ID)
+    {
+        return GOType::Unknown;
+    }
+
+    try
+    {
+        return data.GetGObject(itemId)->getType();
+    }
+    catch (const VExceptionBadId &e)
+    {
+        // Possible case: Parent was deleted, but the node object still exists
+        qWarning() << qUtf8Printable(e.ErrorMessage());
+        return GOType::Unknown;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Creates the "Add to group" submenu with available groups.
+ * 
+ * @param menu The parent menu to add the submenu to
+ * @param itemId The ID of the item that will be added to a group
+ * @return Action group containing all "add to group" actions, or nullptr if no groups available
+ */
+auto VDrawTool::CreateAddToGroupMenu(QMenu &menu, quint32 itemId) -> QActionGroup *
+{
+    QMap<quint32, QString> groupsNotContainingItem = doc->GetGroupsContainingItem(this->getId(), itemId, false);
+
+    auto *actionsAddToGroup = new QActionGroup(this);
+
+    if (groupsNotContainingItem.empty())
+    {
+        return actionsAddToGroup;
+    }
+
+    QMenu *menuAddToGroup = menu.addMenu(FromTheme(VThemeIcon::ListAdd), tr("Add to group"));
+
+    auto list = QStringList(groupsNotContainingItem.values());
+    list.sort(Qt::CaseInsensitive);
+
+    for (const auto &name : list)
+    {
+        QAction *actionAddToGroup = menuAddToGroup->addAction(name);
+        actionsAddToGroup->addAction(actionAddToGroup);
+        const quint32 groupId = groupsNotContainingItem.key(name);
+        actionAddToGroup->setData(groupId);
+
+        // Remove the processed group to handle duplicate names correctly
+        groupsNotContainingItem.remove(groupId);
+    }
+
+    return actionsAddToGroup;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VDrawTool::CreateRemoveFromGroupMenu(QMenu &menu, quint32 itemId) -> QActionGroup *
+{
+    QMap<quint32, QString> groupsContainingItem = doc->GetGroupsContainingItem(this->getId(), itemId, true);
+
+    auto *actionsRemoveFromGroup = new QActionGroup(this);
+
+    if (groupsContainingItem.empty())
+    {
+        return actionsRemoveFromGroup;
+    }
+
+    QMenu *menuRemoveFromGroup = menu.addMenu(FromTheme(VThemeIcon::ListRemove), tr("Remove from group"));
+
+    auto list = QStringList(groupsContainingItem.values());
+    list.sort(Qt::CaseInsensitive);
+
+    for (const auto &name : list)
+    {
+        QAction *actionRemoveFromGroup = menuRemoveFromGroup->addAction(name);
+        actionsRemoveFromGroup->addAction(actionRemoveFromGroup);
+        const quint32 groupId = groupsContainingItem.key(name);
+        actionRemoveFromGroup->setData(groupId);
+
+        // Remove the processed group to handle duplicate names correctly
+        groupsContainingItem.remove(groupId);
+    }
+
+    return actionsRemoveFromGroup;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Creates the "Show label" toggle action for point items.
+ * 
+ * @param menu The parent menu to add the action to
+ * @param itemType The type of the geometric object
+ * @param itemId The ID of the item
+ * @return Checkable action for showing/hiding the label, or nullptr if not applicable
+ */
+auto VDrawTool::CreateShowLabelAction(QMenu &menu, GOType itemType, quint32 itemId) -> QAction *
+{
+    QAction *actionShowLabel = menu.addAction(tr("Show label"));
+    actionShowLabel->setCheckable(true);
+
+    if (itemType == GOType::Point)
+    {
+        actionShowLabel->setChecked(IsLabelVisible(itemId));
+    }
+    else
+    {
+        actionShowLabel->setVisible(false);
+    }
+
+    return actionShowLabel;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Creates the "Restore label position" action for point items.
+ * 
+ * @param menu The parent menu to add the action to
+ * @param itemType The type of the geometric object
+ * @return Action for restoring label position, visible only for points
+ */
+auto VDrawTool::CreateRestoreLabelAction(QMenu &menu, GOType itemType) -> QAction *
+{
+    QAction *actionRestoreLabelPosition = menu.addAction(VDrawTool::tr("Restore label position"));
+    actionRestoreLabelPosition->setVisible(itemType == GOType::Point);
+    return actionRestoreLabelPosition;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Creates the "Delete" action with appropriate status indication.
+ * 
+ * The action is enabled if the item is removable or blocked, and shows
+ * a "Pending" indicator if deletion status is pending.
+ * 
+ * @param menu The parent menu to add the action to
+ * @return Delete action with enabled state based on removal status
+ */
+auto VDrawTool::CreateRemoveAction(QMenu &menu) -> QAction *
+{
+    using namespace Qt::Literals::StringLiterals;
+
+    QAction *actionRemove = menu.addAction(FromTheme(VThemeIcon::EditDelete), VDrawTool::tr("Delete"));
+    RemoveStatus const status = IsRemovable();
+    actionRemove->setEnabled(status == RemoveStatus::Removable || status == RemoveStatus::Blocked);
+
+    if (status == RemoveStatus::Pending)
+    {
+        actionRemove->setText(actionRemove->text() + " ("_L1 + tr("Pending") + ')');
+    }
+
+    return actionRemove;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Handles the remove/delete action, either deleting the tool or showing an error.
+ * 
+ * If the tool is removable, it proceeds with deletion. If the tool is blocked
+ * due to dependencies, it displays a warning message explaining why deletion
+ * cannot proceed.
+ */
+void VDrawTool::HandleRemoveAction()
+{
+    if (IsRemovable() == RemoveStatus::Removable)
+    {
+        qCDebug(vTool, "Deleting tool.");
+        DeleteToolWithConfirm(); // do not catch exception here
+        return;                  // Leave this method immediately after call!!!
+    }
+
+    QMessageBox messageBox;
+    messageBox.setIcon(QMessageBox::Warning);
+    messageBox.setWindowTitle(tr("Cannot Delete Object"));
+    messageBox.setText(tr("This object cannot be deleted because it is being used by other items."));
+    messageBox.setInformativeText(tr("Please resolve the dependencies before attempting to delete this object."));
+    messageBox.setDefaultButton(QMessageBox::Ok);
+    messageBox.setStandardButtons(QMessageBox::Ok);
+    messageBox.exec();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Adds the item to the selected group and updates the UI.
+ * 
+ * @param selectedAction The action containing the group ID as data
+ * @param itemId The ID of the item to add to the group
+ */
+void VDrawTool::HandleAddToGroup(const QAction *selectedAction, quint32 itemId)
+{
+    quint32 const groupId = selectedAction->data().toUInt();
+    QDomElement const item = doc->AddItemToGroup(this->getId(), itemId, groupId);
+
+    auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
+    SCASSERT(scene != nullptr)
+    scene->clearSelection();
+
+    auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
+    SCASSERT(window != nullptr)
+
+    auto *addItemToGroup = new AddItemToGroup(item, doc, groupId);
+    connect(addItemToGroup, &AddItemToGroup::UpdateGroups, window, &VAbstractMainWindow::UpdateVisibilityGroups);
+    VAbstractApplication::VApp()->getUndoStack()->push(addItemToGroup);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Removes the item from the selected group and updates the UI.
+ * 
+ * @param selectedAction The action containing the group ID as data
+ * @param itemId The ID of the item to remove from the group
+ */
+void VDrawTool::HandleRemoveFromGroup(const QAction *selectedAction, quint32 itemId)
+{
+    quint32 const groupId = selectedAction->data().toUInt();
+    QDomElement const item = doc->RemoveItemFromGroup(this->getId(), itemId, groupId);
+
+    auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
+    SCASSERT(window != nullptr)
+
+    auto *removeItemFromGroup = new RemoveItemFromGroup(item, doc, groupId);
+    connect(removeItemFromGroup,
+            &RemoveItemFromGroup::UpdateGroups,
+            window,
+            &VAbstractMainWindow::UpdateVisibilityGroups);
+    VAbstractApplication::VApp()->getUndoStack()->push(removeItemFromGroup);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
  * @brief AddToCalculation add tool to calculation tag in pattern file.
  * @param domElement tag in xml tree.
  */
@@ -259,16 +448,6 @@ void VDrawTool::AddToCalculation(const QDomElement &domElement)
     auto *addToCal = new AddToCalc(domElement, doc);
     connect(addToCal, &AddToCalc::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
     VAbstractApplication::VApp()->getUndoStack()->push(addToCal);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VDrawTool::AddDependence(QList<quint32> &list, quint32 objectId) const
-{
-    if (objectId != NULL_ID)
-    {
-        auto originPoint = VAbstractTool::data.GetGObject(objectId);
-        list.append(originPoint->getIdTool());
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

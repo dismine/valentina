@@ -51,34 +51,24 @@ QT_WARNING_DISABLE_CLANG("-Wdeprecated")
 
 struct VAbstractToolInitData
 {
-    VAbstractToolInitData()
-      : id(NULL_ID),
-        scene(nullptr),
-        doc(nullptr),
-        data(nullptr),
-        parse(Document::FullParse),
-        typeCreation(Source::FromFile)
-    {
-    }
-
-    virtual ~VAbstractToolInitData() = default;
-
-    VAbstractToolInitData(const VAbstractToolInitData &) = default;
-    auto operator=(const VAbstractToolInitData &) -> VAbstractToolInitData & = default;
-
-    VAbstractToolInitData(VAbstractToolInitData &&) = default;
-    auto operator=(VAbstractToolInitData &&) -> VAbstractToolInitData & = default;
-
     /** @brief id tool id, 0 if tool doesn't exist yet.*/
-    quint32 id;
-    VMainGraphicsScene *scene;
-    VAbstractPattern *doc;
-    VContainer *data;
-    Document parse;
-    Source typeCreation;
+    quint32 id{NULL_ID};
+    VMainGraphicsScene *scene{nullptr};
+    VAbstractPattern *doc{nullptr};
+    VContainer *data{nullptr};
+    Document parse{Document::FullParse};
+    Source typeCreation{Source::FromFile};
 };
 
 QT_WARNING_POP
+
+enum class RemoveStatus : quint8
+{
+    Removable, // Tool can be removed
+    Blocked,   // Tool has dependencies which prevent removing
+    Locked,    // Tool cannot be removed
+    Pending    // Collecting data about dependecies
+};
 
 /**
  * @brief The VAbstractTool abstract class for all tools.
@@ -89,11 +79,10 @@ class VAbstractTool : public VDataTool
 
 public:
     VAbstractTool(VAbstractPattern *doc, VContainer *data, quint32 id, QObject *parent = nullptr);
-    virtual ~VAbstractTool() override;
+    ~VAbstractTool() override;
     auto getId() const -> quint32;
 
     static bool m_suppressContextMenu;
-    static const QString AttrInUse;
 
     static auto CheckFormula(const quint32 &toolId, QString &formula, VContainer *data) -> qreal;
 
@@ -101,9 +90,8 @@ public:
     static auto ColorsList() -> QMap<QString, QString>;
 
     static auto GetRecord(const quint32 id, const Tool &toolType, VAbstractPattern *doc) -> VToolRecord;
-    static void RemoveRecord(const VToolRecord &record, VAbstractPattern *doc);
     static void AddRecord(const VToolRecord &record, VAbstractPattern *doc);
-    static void AddRecord(const quint32 id, const Tool &toolType, VAbstractPattern *doc);
+    static void AddRecord(quint32 id, const Tool &toolType, VAbstractPattern *doc);
     static void AddNodes(VAbstractPattern *doc, QDomElement &domElement, const VPiecePath &path);
     static void AddNodes(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
 
@@ -147,8 +135,8 @@ protected:
     /** @brief id object id. */
     const quint32 m_id;
 
-    QPointer<Visualization> vis;
-    SelectionType selectionType;
+    QPointer<Visualization> vis{};
+    SelectionType selectionType{SelectionType::ByMouseRelease};
 
     /**
      * @brief AddToFile add tag with informations about tool into file.
@@ -158,12 +146,6 @@ protected:
      * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
      */
     virtual void RefreshDataInFile();
-    /**
-     * @brief RemoveReferens decrement value of reference.
-     */
-    virtual void RemoveReferens() {}
-    virtual void DeleteToolWithConfirm(bool ask = true);
-    virtual void PerformDelete();
 
     template <typename T> static auto CreateNode(VContainer *data, quint32 id) -> quint32;
     static auto CreateNodeSpline(VContainer *data, quint32 id) -> quint32;

@@ -450,13 +450,14 @@ void VContainer::ClearVariables(const QVector<VarType> &types)
  * @param firstPointId id of first point of line
  * @param secondPointId id of second point of line
  */
-void VContainer::AddLine(const quint32 &firstPointId, const quint32 &secondPointId)
+void VContainer::AddLine(quint32 firstPointId, quint32 secondPointId, quint32 mainReference)
 {
     const QSharedPointer<VPointF> first = GeometricObject<VPointF>(firstPointId);
     const QSharedPointer<VPointF> second = GeometricObject<VPointF>(secondPointId);
 
-    AddVariable(new VLengthLine(first.data(), firstPointId, second.data(), secondPointId, *GetPatternUnit()));
-    AddVariable(new VLineAngle(first.data(), firstPointId, second.data(), secondPointId));
+    AddVariable(
+        new VLengthLine(first.data(), firstPointId, second.data(), secondPointId, *GetPatternUnit(), mainReference));
+    AddVariable(new VLineAngle(first.data(), firstPointId, second.data(), secondPointId, mainReference));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -653,6 +654,36 @@ auto VContainer::DataPieceArea() const -> QMap<QString, QSharedPointer<VPieceAre
     externalAreas.insert(seamLineAreas);
 
     return externalAreas;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VContainer::DataDependencyVariables() const -> QHash<QString, QList<quint32>>
+{
+    Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 12, "Check that you used all types");
+    QVector<VarType> types{VarType::LineAngle,
+                           VarType::LineLength,
+                           VarType::CurveLength,
+                           VarType::CurveCLength,
+                           VarType::ArcRadius,
+                           VarType::CurveAngle};
+
+    QHash<QString, QList<quint32>> varData;
+
+    for (const auto &var : d->variables)
+    {
+        if (types.contains(var->GetType()))
+        {
+            auto const references = var->GetReferences();
+            varData.insert(var->GetName(), references);
+
+            if (const QString alias = var->GetAlias(); !alias.isEmpty())
+            {
+                varData.insert(alias, references);
+            }
+        }
+    }
+
+    return varData;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

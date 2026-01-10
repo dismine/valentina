@@ -28,10 +28,9 @@
 #include "addbackgroundimage.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-AddBackgroundImage::AddBackgroundImage(const VBackgroundPatternImage &image, VAbstractPattern *doc,
-                                       QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent),
-      m_image(image)
+AddBackgroundImage::AddBackgroundImage(const VBackgroundPatternImage &image, VAbstractPattern *doc, QUndoCommand *parent)
+  : VUndoCommand(doc, parent),
+    m_image(image)
 {
     setText(tr("add background image"));
 }

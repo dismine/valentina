@@ -62,6 +62,7 @@ class VToolEllipticalArc : public VToolAbstractArc
     Q_OBJECT // NOLINT
 
 public:
+    ~VToolEllipticalArc() override = default;
     void SetDialog() override;
     static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                        VContainer *data) -> VToolEllipticalArc *;
@@ -98,8 +99,7 @@ protected slots:
     void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) override;
 
 protected:
-    void RemoveReferens() override;
-    void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies) override;
+    void SaveDialog(QDomElement &domElement) override;
     void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     void SetVisualization() override;
     auto MakeToolTip() const -> QString override;
@@ -107,7 +107,6 @@ protected:
 private:
     Q_DISABLE_COPY_MOVE(VToolEllipticalArc) // NOLINT
     explicit VToolEllipticalArc(const VToolEllipticalArcInitData &initData, QGraphicsItem *parent = nullptr);
-    ~VToolEllipticalArc() = default;
 };
 
 #endif // VTOOLELLIPTICALARC_H

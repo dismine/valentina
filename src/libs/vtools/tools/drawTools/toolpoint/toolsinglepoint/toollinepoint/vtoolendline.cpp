@@ -38,8 +38,9 @@
 #include "../../../../../visualization/line/vistoolendline.h"
 #include "../../../../../visualization/visualization.h"
 #include "../../../../vabstracttool.h"
-#include "../../../vdrawtool.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/exception/vexception.h"
 #include "../vmisc/vabstractapplication.h"
@@ -145,16 +146,28 @@ auto VToolEndLine::Create(VToolEndLineInitData &initData) -> VToolEndLine *
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(p);
-        initData.data->AddLine(initData.basePointId, initData.id);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, p);
-        initData.data->AddLine(initData.basePointId, initData.id);
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
+
+    const auto varData = initData.data->DataDependencyVariables();
+    initData.doc->FindFormulaDependencies(initData.formulaAngle, initData.id, varData);
+    initData.doc->FindFormulaDependencies(initData.formulaLength, initData.id, varData);
+
+    initData.data->AddLine(initData.basePointId, initData.id);
+
+    patternGraph->AddEdge(initData.basePointId, initData.id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     if (initData.parse == Document::FullParse)
@@ -164,7 +177,6 @@ auto VToolEndLine::Create(VToolEndLineInitData &initData) -> VToolEndLine *
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
-        initData.doc->IncrementReferens(basePoint->getIdTool());
         return point;
     }
     return nullptr;
@@ -174,14 +186,11 @@ auto VToolEndLine::Create(VToolEndLineInitData &initData) -> VToolEndLine *
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolEndLine::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies)
+void VToolEndLine::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogEndLine> dialogTool = qobject_cast<DialogEndLine *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
-
-    AddDependence(oldDependencies, basePointId);
-    AddDependence(newDependencies, dialogTool->GetBasePointId());
 
     doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
@@ -189,8 +198,10 @@ void VToolEndLine::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepend
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrAngle, dialogTool->GetAngle());
     doc->SetAttribute(domElement, AttrBasePoint, QString().setNum(dialogTool->GetBasePointId()));
-    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
+    doc->SetAttributeOrRemoveIf<QString>(domElement,
+                                         AttrNotes,
+                                         dialogTool->GetNotes(),
+                                         [](const QString &notes) noexcept -> bool { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -38,13 +38,13 @@
 #include "../../../visualization/path/vistoolcubicbezier.h"
 #include "../../../visualization/visualization.h"
 #include "../../vabstracttool.h"
-#include "../vmisc/exception/vexception.h"
-#include "../vdrawtool.h"
+#include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/../ifc/ifcdef.h"
-#include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vcubicbezier.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "vabstractspline.h"
@@ -105,16 +105,27 @@ auto VToolCubicBezier::Create(VToolCubicBezierInitData initData) -> VToolCubicBe
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(initData.spline);
-        initData.data->AddSpline(initData.data->GeometricObject<VAbstractBezier>(initData.id), initData.id);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, initData.spline);
-        initData.data->AddSpline(initData.data->GeometricObject<VAbstractBezier>(initData.id), initData.id);
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
+
+    initData.data->AddSpline(initData.data->GeometricObject<VAbstractBezier>(initData.id), initData.id);
+
+    patternGraph->AddEdge(initData.spline->GetP1().id(), initData.id);
+    patternGraph->AddEdge(initData.spline->GetP2().id(), initData.id);
+    patternGraph->AddEdge(initData.spline->GetP3().id(), initData.id);
+    patternGraph->AddEdge(initData.spline->GetP4().id(), initData.id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     if (initData.parse == Document::FullParse)
@@ -124,10 +135,6 @@ auto VToolCubicBezier::Create(VToolCubicBezierInitData initData) -> VToolCubicBe
         initData.scene->addItem(_spl);
         InitSplineToolConnections(initData.scene, _spl);
         VAbstractPattern::AddTool(initData.id, _spl);
-        initData.doc->IncrementReferens(initData.spline->GetP1().getIdTool());
-        initData.doc->IncrementReferens(initData.spline->GetP1().getIdTool());
-        initData.doc->IncrementReferens(initData.spline->GetP1().getIdTool());
-        initData.doc->IncrementReferens(initData.spline->GetP4().getIdTool());
         return _spl;
     }
     return nullptr;
@@ -199,38 +206,16 @@ void VToolCubicBezier::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, qu
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCubicBezier::RemoveReferens()
-{
-    const auto spl = VAbstractTool::data.GeometricObject<VCubicBezier>(m_id);
-    doc->DecrementReferens(spl->GetP1().getIdTool());
-    doc->DecrementReferens(spl->GetP2().getIdTool());
-    doc->DecrementReferens(spl->GetP3().getIdTool());
-    doc->DecrementReferens(spl->GetP4().getIdTool());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolCubicBezier::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                                  QList<quint32> &newDependencies)
+void VToolCubicBezier::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     auto *dialogTool = qobject_cast<DialogCubicBezier *>(m_dialog);
     SCASSERT(dialogTool != nullptr)
 
-    const auto oldSpl = VAbstractTool::data.GeometricObject<VCubicBezier>(m_id);
-    AddDependence(oldDependencies, oldSpl->GetP1().id());
-    AddDependence(oldDependencies, oldSpl->GetP2().id());
-    AddDependence(oldDependencies, oldSpl->GetP3().id());
-    AddDependence(oldDependencies, oldSpl->GetP4().id());
-
-    const VCubicBezier spl = dialogTool->GetSpline();
-    AddDependence(newDependencies, spl.GetP1().id());
-    AddDependence(newDependencies, spl.GetP2().id());
-    AddDependence(newDependencies, spl.GetP3().id());
-    AddDependence(newDependencies, spl.GetP4().id());
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
                                          [](const QString &notes) noexcept { return notes.isEmpty(); });
 
-    SetSplineAttributes(domElement, spl);
+    SetSplineAttributes(domElement, dialogTool->GetSpline());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

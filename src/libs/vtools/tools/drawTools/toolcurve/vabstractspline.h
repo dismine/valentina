@@ -99,7 +99,7 @@ public:
 
 public slots:
     void FullUpdateFromFile() override;
-    void Disable(bool disable, const QString &namePP) override;
+    void Enable() override;
     void SetDetailsMode(bool mode) override;
     void AllowHover(bool enabled) override;
     void AllowSelecting(bool enabled) override;
@@ -116,7 +116,6 @@ protected:
      * @brief RefreshGeometry  refresh item on scene.
      */
     virtual void RefreshGeometry();
-    void ShowTool(quint32 id, bool enable) override;
     void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
     void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
     auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;

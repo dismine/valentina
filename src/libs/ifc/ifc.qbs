@@ -3,6 +3,7 @@ import qbs.Utilities
 VLib {
     Depends { name: "Qt"; submodules: ["core", "gui", "xml", "svg", "concurrent"] }
     Depends { name: "VMiscLib" }
+    Depends { name: "GraafLib" }
 
     Depends {
         name: "Qt.xmlpatterns"
@@ -63,7 +64,11 @@ VLib {
             "vlayoutconverter.h",
             "vparsererrorhandler.cpp",
             "vparsererrorhandler.h",
+            "vpatternblockmapper.cpp",
+            "vpatternblockmapper.h",
             "vpatternconverter.h",
+            "vpatterngraph.cpp",
+            "vpatterngraph.h",
             "vpatternimage.h",
             "vtoolrecord.h",
             "vabstractpattern.h",
@@ -107,6 +112,7 @@ VLib {
                                                 (buildconfig.useConanPackages && !buildconfig.conanXercesEnabled)) }
         Depends { name: "XercesC"; condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 &&
                                               buildconfig.useConanPackages && buildconfig.conanXercesEnabled }
+        Depends { name: "GraafLib" }
         cpp.includePaths: [exportingProduct.sourceDirectory]
     }
 }

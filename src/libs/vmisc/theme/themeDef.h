@@ -40,7 +40,7 @@
 class QIcon;
 #endif
 
-enum class VColorRole
+enum class VColorRole : quint8
 {
     DefaultColor,
     PatternColor,
@@ -238,7 +238,11 @@ enum class VThemeIcon
     DrawStar,
     AddPlacemark,
     DuplicateNode,
-    ListAddFont
+    ListAddFont,
+    ObjectOrderFront,
+    ObjectOrderRaise,
+    ObjectOrderLower,
+    ObjectOrderBack
 };
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)

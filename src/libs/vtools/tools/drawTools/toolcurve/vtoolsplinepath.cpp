@@ -50,17 +50,18 @@
 #include "../../../visualization/path/vistoolsplinepath.h"
 #include "../../../visualization/visualization.h"
 #include "../../vabstracttool.h"
-#include "../vmisc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vdomdocument.h"
+#include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../qmuparser/qmutokenparser.h"
-#include "../vdrawtool.h"
 #include "../vgeometry/vabstractcubicbezierpath.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
 #include "../vgeometry/vsplinepoint.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/../vgeometry/vsplinepath.h"
@@ -129,9 +130,12 @@ auto VToolSplinePath::Create(const QPointer<DialogTool> &dialog, VMainGraphicsSc
     initData.notes = dialogTool->GetNotes();
 
     auto *path = new VSplinePath(dialogTool->GetPath());
+
+    initData.points.reserve(path->CountPoints());
     for (qint32 i = 0; i < path->CountPoints(); ++i)
     {
-        doc->IncrementReferens((*path)[i].P().getIdTool());
+        VPointF const point = (*path)[i].P();
+        initData.points.append(point.id());
     }
 
     VToolSplinePath *spl = Create(initData, path);
@@ -153,18 +157,38 @@ auto VToolSplinePath::Create(VToolSplinePathInitData &initData, VSplinePath *pat
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(path);
-        initData.data->AddCurveWithSegments(initData.data->GeometricObject<VAbstractCubicBezierPath>(initData.id),
-                                            initData.id);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, path);
-        initData.data->AddCurveWithSegments(initData.data->GeometricObject<VAbstractCubicBezierPath>(initData.id),
-                                            initData.id);
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
+
+    const auto varData = initData.data->DataDependencyVariables();
+
+    for (int i = 0; i < initData.points.size(); ++i)
+    {
+        initData.doc->FindFormulaDependencies(initData.a1.at(i), initData.id, varData);
+        initData.doc->FindFormulaDependencies(initData.a2.at(i), initData.id, varData);
+        initData.doc->FindFormulaDependencies(initData.l1.at(i), initData.id, varData);
+        initData.doc->FindFormulaDependencies(initData.l2.at(i), initData.id, varData);
+    }
+
+    initData.data->AddCurveWithSegments(initData.data->GeometricObject<VAbstractCubicBezierPath>(initData.id),
+                                        initData.id);
+
+    for (const auto &pId : std::as_const(initData.points))
+    {
+        patternGraph->AddEdge(pId, initData.id);
+    }
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     if (initData.parse == Document::FullParse)
@@ -258,7 +282,7 @@ void VToolSplinePath::EnableToolMove(bool move)
 {
     this->setFlag(QGraphicsItem::ItemIsMovable, move);
 
-    for (auto *point : qAsConst(controlPoints))
+    for (auto *point : std::as_const(controlPoints))
     {
         point->setFlag(QGraphicsItem::ItemIsMovable, move);
     }
@@ -269,7 +293,7 @@ void VToolSplinePath::AllowHover(bool enabled)
 {
     VAbstractSpline::AllowHover(enabled);
 
-    for (auto *point : qAsConst(controlPoints))
+    for (auto *point : std::as_const(controlPoints))
     {
         point->setAcceptHoverEvents(enabled);
     }
@@ -280,7 +304,7 @@ void VToolSplinePath::AllowSelecting(bool enabled)
 {
     VAbstractSpline::AllowSelecting(enabled);
 
-    for (auto *point : qAsConst(controlPoints))
+    for (auto *point : std::as_const(controlPoints))
     {
         point->setFlag(QGraphicsItem::ItemIsSelectable, enabled);
     }
@@ -306,7 +330,7 @@ void VToolSplinePath::CurveSelected(bool selected)
 {
     setSelected(selected);
 
-    for (auto *point : qAsConst(controlPoints))
+    for (auto *point : std::as_const(controlPoints))
     {
         point->blockSignals(true);
         point->setSelected(selected);
@@ -492,7 +516,7 @@ void VToolSplinePath::ShowVisualization(bool show)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSplinePath::ShowHandles(bool show)
 {
-    for (auto *point : qAsConst(controlPoints))
+    for (auto *point : std::as_const(controlPoints))
     {
         point->setVisible(show);
     }
@@ -536,39 +560,15 @@ void VToolSplinePath::AddPathPoint(VAbstractPattern *doc, QDomElement &domElemen
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief RemoveReferens decrement value of reference.
- */
-void VToolSplinePath::RemoveReferens()
-{
-    const QSharedPointer<VSplinePath> splPath = VAbstractTool::data.GeometricObject<VSplinePath>(m_id);
-    for (qint32 i = 0; i < splPath->CountPoints(); ++i)
-    {
-        doc->DecrementReferens(splPath->at(i).P().getIdTool());
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolSplinePath::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                                 QList<quint32> &newDependencies)
+void VToolSplinePath::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogSplinePath> dialogTool = qobject_cast<DialogSplinePath *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
-    const auto oldSplPath = VAbstractTool::data.GeometricObject<VSplinePath>(m_id);
-    for (qint32 i = 0; i < oldSplPath->CountPoints(); ++i)
-    {
-        AddDependence(oldDependencies, oldSplPath->at(i).P().id());
-    }
-
     const VSplinePath splPath = dialogTool->GetPath();
-    for (qint32 i = 0; i < splPath.CountPoints(); ++i)
-    {
-        AddDependence(newDependencies, splPath.at(i).P().id());
-    }
 
     qDeleteAll(controlPoints);
     controlPoints.clear();
@@ -803,7 +803,7 @@ auto VToolSplinePath::IsMovable(int index) const -> bool
 void VToolSplinePath::RefreshCtrlPoints()
 {
     // Very important to disable control points. Without it the pogram can't move the curve.
-    for (auto *point : qAsConst(controlPoints))
+    for (auto *point : std::as_const(controlPoints))
     {
         point->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
     }
@@ -871,7 +871,7 @@ void VToolSplinePath::RefreshCtrlPoints()
         controlPoints[j - 1]->blockSignals(false);
     }
 
-    for (auto *point : qAsConst(controlPoints))
+    for (auto *point : std::as_const(controlPoints))
     {
         point->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     }

@@ -34,11 +34,6 @@
 #include <QXmlStreamWriter>
 #include <functional>
 
-// Header <ciso646> is removed in C++20.
-#if defined(Q_CC_MSVC) && __cplusplus <= 201703L
-#include <ciso646> // and, not, or
-#endif
-
 #include "../layout/layoutdef.h"
 #include "../qmuparser/qmudef.h"
 #include "../vmisc/literals.h"

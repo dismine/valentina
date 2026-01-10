@@ -41,8 +41,8 @@ class RenamePP : public VUndoCommand
     Q_OBJECT // NOLINT
 
 public:
-    RenamePP(VAbstractPattern *doc, const QString &newPPname, QComboBox *combo, QUndoCommand *parent = nullptr);
-    ~RenamePP() override;
+    RenamePP(VAbstractPattern *doc, QString newPatternBlockName, QComboBox *combo, QUndoCommand *parent = nullptr);
+    ~RenamePP() override = default;
 
     void undo() override;
     void redo() override;
@@ -50,28 +50,28 @@ public:
     auto mergeWith(const QUndoCommand *command) -> bool override;
     auto id() const -> int override;
 
-    auto getNewPPname() const -> QString;
-    auto getOldPPname() const -> QString;
+    auto GetNewPatternBlockName() const -> QString;
+    auto GetOldPatternBlockName() const -> QString;
 
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(RenamePP) // NOLINT
     QComboBox *combo;
-    QString newPPname;
-    QString oldPPname;
+    QString m_newPatternBlockName;
+    QString m_oldPatternBlockName{};
     void ChangeName(const QString &oldName, const QString &newName);
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline auto RenamePP::getNewPPname() const -> QString
+inline auto RenamePP::GetNewPatternBlockName() const -> QString
 {
-    return newPPname;
+    return m_newPatternBlockName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline auto RenamePP::getOldPPname() const -> QString
+inline auto RenamePP::GetOldPatternBlockName() const -> QString
 {
-    return oldPPname;
+    return m_oldPatternBlockName;
 }
 
 #endif // RENAMEPP_H

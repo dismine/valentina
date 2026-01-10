@@ -332,6 +332,8 @@ VLib {
             "movespoint.h",
             "movespline.h",
             "movesplinepath.h",
+            "movetool.cpp",
+            "movetool.h",
             "renamepiece.cpp",
             "renamepiece.h",
             "savetooloptions.h",

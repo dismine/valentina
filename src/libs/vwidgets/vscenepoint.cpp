@@ -72,7 +72,7 @@ void VScenePoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     ScaleMainPenWidth(scale);
     ScaleCircleSize(this, scale);
 
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    const VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
 
     if (settings->GetShowAccuracyRadius())
     {
@@ -130,8 +130,7 @@ auto VScenePoint::boundingRect() const -> QRectF
 {
     QRectF rect = QGraphicsEllipseItem::boundingRect();
 
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
-    if (settings->GetShowAccuracyRadius())
+    if (VAbstractApplication::VApp()->Settings()->GetShowAccuracyRadius())
     {
         rect = rect.united(PointRect(accuracyPointOnLine));
     }

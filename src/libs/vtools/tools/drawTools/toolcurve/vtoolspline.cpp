@@ -49,19 +49,20 @@
 #include "../../../visualization/path/vistoolspline.h"
 #include "../../../visualization/visualization.h"
 #include "../../vabstracttool.h"
-#include "../vmisc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../qmuparser/qmutokenparser.h"
-#include "../vdrawtool.h"
-#include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/global.h"
 #include "../vwidgets/vcontrolpointspline.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "vabstractspline.h"
+#include "vgeometry/vspline.h"
 
 const QString VToolSpline::ToolType = QStringLiteral("simpleInteractive"); // NOLINT
 const QString VToolSpline::OldToolType = QStringLiteral("simple");         // NOLINT
@@ -82,7 +83,7 @@ VToolSpline::VToolSpline(const VToolSplineInitData &initData, QGraphicsItem *par
 
     const auto spl = VAbstractTool::data.GeometricObject<VSpline>(initData.id);
 
-    auto InitControlPoint = [this](VControlPointSpline *cPoint)
+    auto InitControlPoint = [this](VControlPointSpline *cPoint) -> void
     {
         connect(cPoint, &VControlPointSpline::ControlPointChangePosition, this,
                 &VToolSpline::ControlPointChangePosition);
@@ -144,6 +145,8 @@ auto VToolSpline::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene 
     const QPointer<DialogSpline> dialogTool = qobject_cast<DialogSpline *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
+    VSpline const spline = dialogTool->GetSpline();
+
     VToolSplineInitData initData;
     initData.scene = scene;
     initData.doc = doc;
@@ -151,8 +154,10 @@ auto VToolSpline::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene 
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
     initData.notes = dialogTool->GetNotes();
+    initData.point1 = spline.GetP1().id();
+    initData.point4 = spline.GetP4().id();
 
-    auto *spl = Create(initData, new VSpline(dialogTool->GetSpline()));
+    auto *spl = Create(initData, new VSpline(spline));
 
     if (spl != nullptr)
     {
@@ -173,16 +178,31 @@ auto VToolSpline::Create(VToolSplineInitData &initData, VSpline *spline) -> VToo
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(spline);
-        initData.data->AddSpline(initData.data->GeometricObject<VAbstractBezier>(initData.id), initData.id);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, spline);
-        initData.data->AddSpline(initData.data->GeometricObject<VAbstractBezier>(initData.id), initData.id);
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
+
+    const auto varData = initData.data->DataDependencyVariables();
+    initData.doc->FindFormulaDependencies(initData.a1, initData.id, varData);
+    initData.doc->FindFormulaDependencies(initData.a2, initData.id, varData);
+    initData.doc->FindFormulaDependencies(initData.l1, initData.id, varData);
+    initData.doc->FindFormulaDependencies(initData.l2, initData.id, varData);
+
+    initData.data->AddSpline(initData.data->GeometricObject<VAbstractBezier>(initData.id), initData.id);
+
+    patternGraph->AddEdge(initData.point1, initData.id);
+    patternGraph->AddEdge(initData.point4, initData.id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     if (initData.parse == Document::FullParse)
@@ -192,8 +212,6 @@ auto VToolSpline::Create(VToolSplineInitData &initData, VSpline *spline) -> VToo
         initData.scene->addItem(_spl);
         InitSplineToolConnections(initData.scene, _spl);
         VAbstractPattern::AddTool(initData.id, _spl);
-        initData.doc->IncrementReferens(spline->GetP1().getIdTool());
-        initData.doc->IncrementReferens(spline->GetP4().getIdTool());
         return _spl;
     }
     return nullptr;
@@ -253,7 +271,7 @@ void VToolSpline::ShowVisualization(bool show)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::ShowHandles(bool show)
 {
-    for (auto *point : qAsConst(controlPoints))
+    for (auto *point : std::as_const(controlPoints))
     {
         point->setVisible(show);
     }
@@ -303,7 +321,7 @@ void VToolSpline::EnableToolMove(bool move)
 {
     this->setFlag(QGraphicsItem::ItemIsMovable, move);
 
-    for (auto *point : qAsConst(controlPoints))
+    for (auto *point : std::as_const(controlPoints))
     {
         point->setFlag(QGraphicsItem::ItemIsMovable, move);
     }
@@ -314,7 +332,7 @@ void VToolSpline::AllowHover(bool enabled)
 {
     VAbstractSpline::AllowHover(enabled);
 
-    for (auto *point : qAsConst(controlPoints))
+    for (auto *point : std::as_const(controlPoints))
     {
         point->setAcceptHoverEvents(enabled);
     }
@@ -325,7 +343,7 @@ void VToolSpline::AllowSelecting(bool enabled)
 {
     VAbstractSpline::AllowSelecting(enabled);
 
-    for (auto *point : qAsConst(controlPoints))
+    for (auto *point : std::as_const(controlPoints))
     {
         point->setFlag(QGraphicsItem::ItemIsSelectable, enabled);
     }
@@ -333,32 +351,15 @@ void VToolSpline::AllowSelecting(bool enabled)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief RemoveReferens decrement value of reference.
- */
-void VToolSpline::RemoveReferens()
-{
-    const auto spl = VAbstractTool::data.GeometricObject<VSpline>(m_id);
-    doc->DecrementReferens(spl->GetP1().getIdTool());
-    doc->DecrementReferens(spl->GetP4().getIdTool());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolSpline::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies)
+void VToolSpline::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     auto *dialogTool = qobject_cast<DialogSpline *>(m_dialog);
     SCASSERT(dialogTool != nullptr)
 
-    const auto oldSpl = VAbstractTool::data.GeometricObject<VSpline>(m_id);
-    AddDependence(oldDependencies, oldSpl->GetP1().id());
-    AddDependence(oldDependencies, oldSpl->GetP4().id());
-
     const VSpline spl = dialogTool->GetSpline();
-    AddDependence(newDependencies, spl.GetP1().id());
-    AddDependence(newDependencies, spl.GetP4().id());
 
     controlPoints[0]->blockSignals(true);
     controlPoints[1]->blockSignals(true);
@@ -588,7 +589,7 @@ auto VToolSpline::IsMovable() const -> bool
 void VToolSpline::RefreshCtrlPoints()
 {
     // Very important to disable control points. Without it the pogram can't move the curve.
-    for (auto *point : qAsConst(controlPoints))
+    for (auto *point : std::as_const(controlPoints))
     {
         point->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
     }
@@ -619,7 +620,7 @@ void VToolSpline::RefreshCtrlPoints()
     controlPoints[0]->blockSignals(false);
     controlPoints[1]->blockSignals(false);
 
-    for (auto *point : qAsConst(controlPoints))
+    for (auto *point : std::as_const(controlPoints))
     {
         point->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     }
@@ -659,7 +660,7 @@ void VToolSpline::CurveSelected(bool selected)
 {
     setSelected(selected);
 
-    for (auto *point : qAsConst(controlPoints))
+    for (auto *point : std::as_const(controlPoints))
     {
         point->blockSignals(true);
         point->setSelected(selected);

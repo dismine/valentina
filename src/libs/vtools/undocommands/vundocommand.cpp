@@ -32,7 +32,10 @@
 #include <QDomNode>
 
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../tools/drawTools/operation/vabstractoperation.h"
+#include "../tools/nodeDetails/vnodepoint.h"
+#include "../tools/nodeDetails/vtoolpiecepath.h"
 #include "../vmisc/compatibility.h"
 #include "../vmisc/customevents.h"
 #include "../vmisc/def.h"
@@ -47,13 +50,21 @@ Q_LOGGING_CATEGORY(vUndo, "v.undo") // NOLINT
 QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
+VUndoCommand::VUndoCommand(VAbstractPattern *doc, QUndoCommand *parent)
+  : QObject(),
+    QUndoCommand(parent),
+    xml(QDomElement()),
+    doc(doc)
+{
+    SCASSERT(doc != nullptr);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VUndoCommand::VUndoCommand(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent)
   : QObject(),
     QUndoCommand(parent),
     xml(xml),
-    doc(doc),
-    nodeId(NULL_ID),
-    redoFlag(false)
+    doc(doc)
 {
     SCASSERT(doc != nullptr)
 }
@@ -85,94 +96,6 @@ void VUndoCommand::UndoDeleteAfterSibling(QDomNode &parentNode, quint32 siblingI
         parentNode.insertAfter(xml, refElement);
         doc->RefreshElementIdCache();
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VUndoCommand::IncrementReferences(const QVector<quint32> &nodes) const
-{
-    for (qint32 i = 0; i < nodes.size(); ++i)
-    {
-        try
-        {
-            doc->IncrementReferens(nodes.at(i));
-        }
-        catch (const VExceptionBadId &e)
-        { // ignoring
-            Q_UNUSED(e);
-        }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VUndoCommand::DecrementReferences(const QVector<quint32> &nodes) const
-{
-    for (qint32 i = 0; i < nodes.size(); ++i)
-    {
-        try
-        {
-            doc->DecrementReferens(nodes.at(i));
-        }
-        catch (const VExceptionBadId &e)
-        { // ignoring
-            Q_UNUSED(e);
-        }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VUndoCommand::IncrementReferences(const QVector<CustomSARecord> &nodes) const
-{
-    QVector<quint32> n;
-    n.reserve(nodes.size());
-
-    for (qint32 i = 0; i < nodes.size(); ++i)
-    {
-        n.append(nodes.at(i).path);
-    }
-
-    IncrementReferences(n);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VUndoCommand::DecrementReferences(const QVector<CustomSARecord> &nodes) const
-{
-    QVector<quint32> n;
-    n.reserve(nodes.size());
-
-    for (qint32 i = 0; i < nodes.size(); ++i)
-    {
-        n.append(nodes.at(i).path);
-    }
-
-    DecrementReferences(n);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VUndoCommand::IncrementReferences(const QVector<VPieceNode> &nodes) const
-{
-    QVector<quint32> n;
-    n.reserve(nodes.size());
-
-    for (qint32 i = 0; i < nodes.size(); ++i)
-    {
-        n.append(nodes.at(i).GetId());
-    }
-
-    IncrementReferences(n);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VUndoCommand::DecrementReferences(const QVector<VPieceNode> &nodes) const
-{
-    QVector<quint32> n;
-    n.reserve(nodes.size());
-
-    for (qint32 i = 0; i < nodes.size(); ++i)
-    {
-        n.append(nodes.at(i).GetId());
-    }
-
-    DecrementReferences(n);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -211,4 +134,72 @@ auto VUndoCommand::GetDestinationObject(quint32 idTool, quint32 idPoint) const -
     }
 
     return {};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VUndoCommand::DisablePieceNodes(const VPiecePath &path)
+{
+    for (int i = 0; i < path.CountNodes(); ++i)
+    {
+        const VPieceNode &node = path.at(i);
+        if (node.GetTypeTool() != Tool::NodePoint)
+        {
+            continue;
+        }
+        try
+        {
+            if (auto *tool = qobject_cast<VNodePoint *>(VAbstractPattern::getTool(node.GetId())))
+            {
+                tool->setVisible(false);
+            }
+        }
+        catch (const VExceptionBadId &)
+        {
+            // ignore
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VUndoCommand::EnablePieceNodes(const VPiecePath &path)
+{
+    for (int i = 0; i < path.CountNodes(); ++i)
+    {
+        const VPieceNode &node = path.at(i);
+        if (node.GetTypeTool() != Tool::NodePoint)
+        {
+            continue;
+        }
+
+        try
+        {
+            if (auto *tool = qobject_cast<VNodePoint *>(VAbstractPattern::getTool(node.GetId())))
+            {
+                tool->setVisible(!node.IsExcluded());
+            }
+        }
+        catch (const VExceptionBadId &)
+        {
+            // ignore
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VUndoCommand::DisableInternalPaths(const QVector<quint32> &paths)
+{
+    for (auto path : paths)
+    {
+        try
+        {
+            if (auto *tool = qobject_cast<VToolPiecePath *>(VAbstractPattern::getTool(path)))
+            {
+                tool->setVisible(false);
+            }
+        }
+        catch (const VExceptionBadId &)
+        {
+            // ignore
+        }
+    }
 }

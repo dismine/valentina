@@ -299,7 +299,7 @@ void TST_VArc::TestGetPoints()
     {
         constexpr qreal epsRadius = MmToPixel(0.5); // computing error
 
-        for (auto point : qAsConst(points))
+        for (auto point : std::as_const(points))
         {
             QLineF const rLine(static_cast<QPointF>(center), point);
             const qreal value = qAbs(rLine.length() - qAbs(radius));

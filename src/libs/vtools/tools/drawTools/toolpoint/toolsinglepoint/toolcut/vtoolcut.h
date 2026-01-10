@@ -93,7 +93,6 @@ protected:
     QString m_aliasSuffix2{};
 
     void RefreshGeometry();
-    void RemoveReferens() override;
     void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     void ReadToolAttributes(const QDomElement &domElement) override;
 

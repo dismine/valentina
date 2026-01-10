@@ -34,7 +34,8 @@
 #include "../../vabstracttool.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vdomdocument.h"
-#include "../vdrawtool.h"
+#include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vellipticalarc.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
@@ -126,14 +127,14 @@ auto VToolEllipticalArcWithLength::Create(const QPointer<DialogTool> &dialog,
 auto VToolEllipticalArcWithLength::Create(VToolEllipticalArcWithLengthInitData &initData)
     -> VToolEllipticalArcWithLength *
 {
-    qreal calcRadius1 = VAbstractValApplication::VApp()->toPixel(
+    qreal const calcRadius1 = VAbstractValApplication::VApp()->toPixel(
         CheckFormula(initData.id, initData.radius1, initData.data));
-    qreal calcRadius2 = VAbstractValApplication::VApp()->toPixel(
+    qreal const calcRadius2 = VAbstractValApplication::VApp()->toPixel(
         CheckFormula(initData.id, initData.radius2, initData.data));
-    qreal calcLength = VAbstractValApplication::VApp()->toPixel(
+    qreal const calcLength = VAbstractValApplication::VApp()->toPixel(
         CheckFormula(initData.id, initData.length, initData.data));
-    qreal calcF1 = CheckFormula(initData.id, initData.f1, initData.data);
-    qreal calcRotationAngle = CheckFormula(initData.id, initData.rotationAngle, initData.data);
+    qreal const calcF1 = CheckFormula(initData.id, initData.f1, initData.data);
+    qreal const calcRotationAngle = CheckFormula(initData.id, initData.rotationAngle, initData.data);
 
     const VPointF c = *initData.data->GeometricObject<VPointF>(initData.center);
     auto *arc = new VEllipticalArc(calcLength,
@@ -155,16 +156,31 @@ auto VToolEllipticalArcWithLength::Create(VToolEllipticalArcWithLengthInitData &
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(arc);
-        initData.data->AddArc(initData.data->GeometricObject<VEllipticalArc>(initData.id), initData.id);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, arc);
-        initData.data->AddArc(initData.data->GeometricObject<VEllipticalArc>(initData.id), initData.id);
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
+
+    const auto varData = initData.data->DataDependencyVariables();
+    initData.doc->FindFormulaDependencies(initData.radius1, initData.id, varData);
+    initData.doc->FindFormulaDependencies(initData.radius2, initData.id, varData);
+    initData.doc->FindFormulaDependencies(initData.length, initData.id, varData);
+    initData.doc->FindFormulaDependencies(initData.f1, initData.id, varData);
+    initData.doc->FindFormulaDependencies(initData.rotationAngle, initData.id, varData);
+
+    initData.data->AddArc(initData.data->GeometricObject<VEllipticalArc>(initData.id), initData.id);
+
+    patternGraph->AddEdge(initData.center, initData.id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     if (initData.parse == Document::FullParse)
@@ -174,7 +190,6 @@ auto VToolEllipticalArcWithLength::Create(VToolEllipticalArcWithLengthInitData &
         initData.scene->addItem(toolArc);
         InitElArcToolConnections(initData.scene, toolArc);
         VAbstractPattern::AddTool(initData.id, toolArc);
-        initData.doc->IncrementReferens(c.getIdTool());
         return toolArc;
     }
     return nullptr;
@@ -356,25 +371,11 @@ void VToolEllipticalArcWithLength::ShowContextMenu(QGraphicsSceneContextMenuEven
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolEllipticalArcWithLength::RemoveReferens()
-{
-    const auto elArc = VAbstractTool::data.GeometricObject<VEllipticalArc>(m_id);
-    doc->DecrementReferens(elArc->GetCenter().getIdTool());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolEllipticalArcWithLength::SaveDialog(QDomElement &domElement,
-                                              QList<quint32> &oldDependencies,
-                                              QList<quint32> &newDependencies)
+void VToolEllipticalArcWithLength::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogEllipticalArcWithLength> dialogTool = qobject_cast<DialogEllipticalArcWithLength *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
-
-    QSharedPointer<VEllipticalArc> const elArc = VAbstractTool::data.GeometricObject<VEllipticalArc>(m_id);
-    SCASSERT(elArc.isNull() == false)
-    AddDependence(oldDependencies, elArc->GetCenter().id());
-    AddDependence(newDependencies, dialogTool->GetCenter());
 
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetCenter()));
     doc->SetAttribute(domElement, AttrRadius1, dialogTool->GetRadius1());

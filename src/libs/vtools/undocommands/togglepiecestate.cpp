@@ -41,9 +41,9 @@
 #include "vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-TogglePieceInLayout::TogglePieceInLayout(quint32 id, bool state, VContainer *data, VAbstractPattern *doc,
-                                         QUndoCommand *parent)
-  : VUndoCommand(QDomElement(), doc, parent),
+TogglePieceInLayout::TogglePieceInLayout(
+    quint32 id, bool state, VContainer *data, VAbstractPattern *doc, QUndoCommand *parent)
+  : VUndoCommand(doc, parent),
     m_id(id),
     m_data(data),
     m_oldState(not state),
@@ -87,10 +87,9 @@ void TogglePieceInLayout::Do(bool state)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-TogglePieceForceForbidFlipping::TogglePieceForceForbidFlipping(quint32 id, bool state, ForceForbidFlippingType type,
-                                                               VContainer *data, VAbstractPattern *doc,
-                                                               QUndoCommand *parent)
-  : VUndoCommand(QDomElement(), doc, parent),
+TogglePieceForceForbidFlipping::TogglePieceForceForbidFlipping(
+    quint32 id, bool state, ForceForbidFlippingType type, VContainer *data, VAbstractPattern *doc, QUndoCommand *parent)
+  : VUndoCommand(doc, parent),
     m_id(id),
     m_data(data),
     m_type(type)
@@ -171,9 +170,9 @@ void TogglePieceForceForbidFlipping::redo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-ToggleHideMainPath::ToggleHideMainPath(quint32 id, bool state, VContainer *data, VAbstractPattern *doc,
-                                       QUndoCommand *parent)
-  : VUndoCommand(QDomElement(), doc, parent),
+ToggleHideMainPath::ToggleHideMainPath(
+    quint32 id, bool state, VContainer *data, VAbstractPattern *doc, QUndoCommand *parent)
+  : VUndoCommand(doc, parent),
     m_id(id),
     m_data(data),
     m_oldState(not state),
@@ -217,9 +216,9 @@ void ToggleHideMainPath::Do(bool state)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-ToggleShowFullPiece::ToggleShowFullPiece(quint32 id, bool state, VContainer *data, VAbstractPattern *doc,
-                                         QUndoCommand *parent)
-  : VUndoCommand(QDomElement(), doc, parent),
+ToggleShowFullPiece::ToggleShowFullPiece(
+    quint32 id, bool state, VContainer *data, VAbstractPattern *doc, QUndoCommand *parent)
+  : VUndoCommand(doc, parent),
     m_id(id),
     m_data(data),
     m_oldState(not state),

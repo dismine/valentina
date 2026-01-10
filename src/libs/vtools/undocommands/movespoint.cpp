@@ -37,9 +37,18 @@
 #include "vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-MoveSPoint::MoveSPoint(VAbstractPattern *doc, const double &x, const double &y, const quint32 &id,
-                       QGraphicsScene *scene, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent), oldX(0.0), oldY(0.0), newX(x), newY(y), scene(scene)
+MoveSPoint::MoveSPoint(VAbstractPattern *doc,
+                       const double &x,
+                       const double &y,
+                       const quint32 &id,
+                       QGraphicsScene *scene,
+                       QUndoCommand *parent)
+  : VUndoCommand(doc, parent),
+    oldX(0.0),
+    oldY(0.0),
+    newX(x),
+    newY(y),
+    scene(scene)
 {
     setText(tr("move single point"));
     nodeId = id;

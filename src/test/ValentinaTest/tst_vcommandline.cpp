@@ -31,11 +31,6 @@
 
 #include <QtTest>
 
-// Header <ciso646> is removed in C++20.
-#if defined(Q_CC_MSVC) && __cplusplus <= 201703L
-#include <ciso646> // and, not, or
-#endif
-
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
 #endif

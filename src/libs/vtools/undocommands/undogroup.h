@@ -53,7 +53,7 @@ signals:
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(AddGroup) // NOLINT
-    const QString nameActivDraw;
+    int m_indexPatternBlock{-1};
 };
 
 class RenameGroup : public VUndoCommand
@@ -62,9 +62,9 @@ class RenameGroup : public VUndoCommand
 
 public:
     RenameGroup(VAbstractPattern *doc, quint32 id, const QString &name, QUndoCommand *parent = nullptr);
-    virtual ~RenameGroup() = default;
-    virtual void undo() override;
-    virtual void redo() override;
+    ~RenameGroup() override = default;
+    void undo() override;
+    void redo() override;
 signals:
     void UpdateGroups();
 
@@ -81,9 +81,9 @@ class ChangeGroupOptions : public VUndoCommand
 public:
     ChangeGroupOptions(VAbstractPattern *doc, quint32 id, const QString &name, const QStringList &tags,
                        QUndoCommand *parent = nullptr);
-    virtual ~ChangeGroupOptions() = default;
-    virtual void undo() override;
-    virtual void redo() override;
+    ~ChangeGroupOptions() override = default;
+    void undo() override;
+    void redo() override;
 signals:
     void UpdateGroups();
 
@@ -101,9 +101,9 @@ class AddItemToGroup : public VUndoCommand
 
 public:
     AddItemToGroup(const QDomElement &xml, VAbstractPattern *doc, quint32 groupId, QUndoCommand *parent = nullptr);
-    virtual ~AddItemToGroup() = default;
-    virtual void undo() override;
-    virtual void redo() override;
+    ~AddItemToGroup() override = default;
+    void undo() override;
+    void redo() override;
 signals:
     void UpdateGroups();
 
@@ -112,7 +112,7 @@ protected:
 
 private:
     Q_DISABLE_COPY_MOVE(AddItemToGroup) // NOLINT
-    const QString nameActivDraw;
+    int m_indexPatternBlock{-1};
 };
 
 class RemoveItemFromGroup : public VUndoCommand
@@ -121,9 +121,9 @@ class RemoveItemFromGroup : public VUndoCommand
 
 public:
     RemoveItemFromGroup(const QDomElement &xml, VAbstractPattern *doc, quint32 groupId, QUndoCommand *parent = nullptr);
-    virtual ~RemoveItemFromGroup() = default;
-    virtual void undo() override;
-    virtual void redo() override;
+    ~RemoveItemFromGroup() override = default;
+    void undo() override;
+    void redo() override;
 signals:
     void UpdateGroups();
 
@@ -132,7 +132,7 @@ protected:
 
 private:
     Q_DISABLE_COPY_MOVE(RemoveItemFromGroup) // NOLINT
-    const QString nameActivDraw;
+    int m_indexPatternBlock{-1};
 };
 
 class ChangeGroupVisibility : public VUndoCommand
@@ -141,9 +141,9 @@ class ChangeGroupVisibility : public VUndoCommand
 
 public:
     ChangeGroupVisibility(VAbstractPattern *doc, vidtype id, bool visible, QUndoCommand *parent = nullptr);
-    virtual ~ChangeGroupVisibility() = default;
-    virtual void undo() override;
-    virtual void redo() override;
+    ~ChangeGroupVisibility() override = default;
+    void undo() override;
+    void redo() override;
 
 signals:
     void UpdateGroup(vidtype id, bool visible);
@@ -153,7 +153,7 @@ private:
 
     bool m_oldVisibility{true};
     bool m_newVisibility{true};
-    const QString m_nameActivDraw{};
+    int m_indexPatternBlock{-1};
 
     void Do(bool visible);
 };
@@ -165,9 +165,9 @@ class ChangeMultipleGroupsVisibility : public VUndoCommand
 public:
     ChangeMultipleGroupsVisibility(VAbstractPattern *doc, const QVector<vidtype> &groups, bool visible,
                                    QUndoCommand *parent = nullptr);
-    virtual ~ChangeMultipleGroupsVisibility() = default;
-    virtual void undo() override;
-    virtual void redo() override;
+    ~ChangeMultipleGroupsVisibility() override = default;
+    void undo() override;
+    void redo() override;
 
 signals:
     void UpdateMultipleGroups(const QMap<vidtype, bool> &groups);
@@ -178,7 +178,7 @@ private:
     QVector<vidtype> m_groups;
     bool m_newVisibility{true};
     QMap<vidtype, bool> m_oldVisibility{};
-    const QString m_nameActivDraw{};
+    int m_indexPatternBlock{-1};
 };
 
 class DelGroup : public VUndoCommand
@@ -187,15 +187,15 @@ class DelGroup : public VUndoCommand
 
 public:
     DelGroup(VAbstractPattern *doc, quint32 id, QUndoCommand *parent = nullptr);
-    virtual ~DelGroup() = default;
-    virtual void undo() override;
-    virtual void redo() override;
+    ~DelGroup() override = default;
+    void undo() override;
+    void redo() override;
 signals:
     void UpdateGroups();
 
 private:
     Q_DISABLE_COPY_MOVE(DelGroup) // NOLINT
-    const QString nameActivDraw;
+    int m_indexPatternBlock{-1};
 };
 
 #endif // UNDOGROUP_H

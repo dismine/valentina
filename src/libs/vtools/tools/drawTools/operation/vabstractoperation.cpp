@@ -32,6 +32,8 @@
 #include "../../../undocommands/label/operationshowlabel.h"
 #include "../../../undocommands/savetooloptions.h"
 #include "../../../undocommands/undogroup.h"
+#include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/compatibility.h"
 #include "../vwidgets/vsimplepoint.h"
@@ -74,6 +76,38 @@ auto VisibilityGroupDataFromSource(const VContainer *data, const QVector<SourceI
 auto VAbstractOperation::getTagName() const -> QString
 {
     return VAbstractPattern::TagOperation;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractOperation::IsRemovable() const -> RemoveStatus
+{
+    if (!doc->IsPatternGraphComplete())
+    {
+        return RemoveStatus::Pending; // Data not ready yet
+    }
+
+    VPatternGraph const *patternGraph = doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    auto Filter = [](const auto &node) -> auto
+    { return node.type != VNodeType::MODELING_TOOL && node.type != VNodeType::MODELING_OBJECT; };
+
+    for (const auto &item : destination)
+    {
+        auto const dependecies = patternGraph->TryGetDependentNodes(item.id, 100, Filter);
+
+        if (!dependecies)
+        {
+            return RemoveStatus::Pending; // Lock timeout
+        }
+
+        if (!dependecies->isEmpty())
+        {
+            return RemoveStatus::Blocked;
+        }
+    }
+
+    return RemoveStatus::Removable;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -496,9 +530,9 @@ void VAbstractOperation::ToolSelectionType(const SelectionType &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractOperation::Disable(bool disable, const QString &namePP)
+void VAbstractOperation::Enable()
 {
-    const bool enabled = !CorrectDisable(disable, namePP);
+    const bool enabled = m_indexActivePatternBlock == doc->PatternBlockMapper()->GetActiveId();
     setEnabled(enabled);
 
     QMapIterator i(operatedObjects);
@@ -620,25 +654,18 @@ void VAbstractOperation::ChangeLabelVisibility(quint32 id, bool visible)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractOperation::ApplyToolOptions(const QList<quint32> &oldDependencies, const QList<quint32> &newDependencies,
-                                          const QDomElement &oldDomElement, const QDomElement &newDomElement)
+void VAbstractOperation::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
 {
-    bool const updateToolOptions =
-        newDependencies != oldDependencies || not VDomDocument::Compare(newDomElement, oldDomElement);
     bool const updateVisibilityOptions = NeedUpdateVisibilityGroup();
 
-    if (updateToolOptions && updateVisibilityOptions)
+    if (updateVisibilityOptions)
     {
         VAbstractApplication::VApp()->getUndoStack()->beginMacro(tr("operation options"));
     }
 
-    if (updateToolOptions)
-    {
-        auto *saveOptions =
-            new SaveToolOptions(oldDomElement, newDomElement, oldDependencies, newDependencies, doc, m_id);
-        connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        VAbstractApplication::VApp()->getUndoStack()->push(saveOptions);
-    }
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+    connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    VAbstractApplication::VApp()->getUndoStack()->push(saveOptions);
 
     if (updateVisibilityOptions)
     {
@@ -674,7 +701,7 @@ void VAbstractOperation::ApplyToolOptions(const QList<quint32> &oldDependencies,
         }
     }
 
-    if (updateToolOptions && updateVisibilityOptions)
+    if (updateVisibilityOptions)
     {
         VAbstractApplication::VApp()->getUndoStack()->endMacro();
     }
@@ -756,7 +783,7 @@ void VAbstractOperation::SaveSourceDestination(QDomElement &tag)
     VAbstractPattern::RemoveAllChildren(tag);
 
     QDomElement tagObjects = doc->createElement(TagSource);
-    for (const auto &sItem : qAsConst(source))
+    for (const auto &sItem : std::as_const(source))
     {
         QDomElement item = doc->createElement(TagItem);
         doc->SetAttribute(item, AttrIdObject, sItem.id);
@@ -779,7 +806,7 @@ void VAbstractOperation::SaveSourceDestination(QDomElement &tag)
     tag.appendChild(tagObjects);
 
     tagObjects = doc->createElement(TagDestination);
-    for (auto dItem : qAsConst(destination))
+    for (auto dItem : std::as_const(destination))
     {
         QDomElement item = doc->createElement(TagItem);
         doc->SetAttribute(item, AttrIdObject, dItem.id);
@@ -904,7 +931,7 @@ auto VAbstractOperation::NeedUpdateVisibilityGroup() const -> bool
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractOperation::InitOperatedObjects()
 {
-    for (auto object : qAsConst(destination))
+    for (auto object : std::as_const(destination))
     {
         const QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(object.id);
 

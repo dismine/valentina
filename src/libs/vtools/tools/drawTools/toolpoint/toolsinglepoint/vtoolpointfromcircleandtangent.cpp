@@ -36,13 +36,14 @@
 #include "../../../../visualization/line/vistoolpointfromcircleandtangent.h"
 #include "../../../../visualization/visualization.h"
 #include "../../../vabstracttool.h"
-#include "../../vdrawtool.h"
-#include "../vmisc/exception/vexception.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vdomdocument.h"
+#include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vformula.h"
@@ -146,10 +147,22 @@ auto VToolPointFromCircleAndTangent::Create(VToolPointFromCircleAndTangentInitDa
     else
     {
         initData.data->UpdateGObject(initData.id, p);
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
+
+    const auto varData = initData.data->DataDependencyVariables();
+    initData.doc->FindFormulaDependencies(initData.circleRadius, initData.id, varData);
+
+    patternGraph->AddEdge(initData.circleCenterId, initData.id);
+    patternGraph->AddEdge(initData.tangentPointId, initData.id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     if (initData.parse == Document::FullParse)
@@ -159,8 +172,6 @@ auto VToolPointFromCircleAndTangent::Create(VToolPointFromCircleAndTangentInitDa
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
-        initData.doc->IncrementReferens(cPoint.getIdTool());
-        initData.doc->IncrementReferens(tPoint.getIdTool());
         return point;
     }
     return nullptr;
@@ -260,28 +271,12 @@ void VToolPointFromCircleAndTangent::ShowContextMenu(QGraphicsSceneContextMenuEv
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPointFromCircleAndTangent::RemoveReferens()
-{
-    const auto circleCenter = VAbstractTool::data.GetGObject(circleCenterId);
-    const auto tangentPoint = VAbstractTool::data.GetGObject(tangentPointId);
-
-    doc->DecrementReferens(circleCenter->getIdTool());
-    doc->DecrementReferens(tangentPoint->getIdTool());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolPointFromCircleAndTangent::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                                                QList<quint32> &newDependencies)
+void VToolPointFromCircleAndTangent::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogPointFromCircleAndTangent> dialogTool =
         qobject_cast<DialogPointFromCircleAndTangent *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
-
-    AddDependence(oldDependencies, circleCenterId);
-    AddDependence(oldDependencies, tangentPointId);
-    AddDependence(newDependencies, dialogTool->GetTangentPointId());
-    AddDependence(newDependencies, dialogTool->GetCircleCenterId());
 
     doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrCCenter, QString().setNum(dialogTool->GetCircleCenterId()));
@@ -289,8 +284,10 @@ void VToolPointFromCircleAndTangent::SaveDialog(QDomElement &domElement, QList<q
     doc->SetAttribute(domElement, AttrCRadius, dialogTool->GetCircleRadius());
     doc->SetAttribute(domElement, AttrCrossPoint,
                       QString().setNum(static_cast<int>(dialogTool->GetCrossCirclesPoint())));
-    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
+    doc->SetAttributeOrRemoveIf<QString>(domElement,
+                                         AttrNotes,
+                                         dialogTool->GetNotes(),
+                                         [](const QString &notes) noexcept -> bool { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

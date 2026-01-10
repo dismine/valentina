@@ -37,8 +37,6 @@ class DialogTool;
 
 struct VToolPlaceLabelInitData : VAbstractNodeInitData
 {
-    VToolPlaceLabelInitData() {}
-
     QString width{'0'};
     QString height{'0'};
     QString angle{'0'};
@@ -53,23 +51,22 @@ class VToolPlaceLabel : public VAbstractNode
     Q_OBJECT // NOLINT
 
 public:
+    ~VToolPlaceLabel() override = default;
     static auto Create(const QPointer<DialogTool> &dialog, VAbstractPattern *doc, VContainer *data)
         -> VToolPlaceLabel *;
     static auto Create(VToolPlaceLabelInitData &initData) -> VToolPlaceLabel *;
 
     static const QString ToolType;
-    virtual auto getTagName() const -> QString override;
+    auto getTagName() const -> QString override;
 
     static void AddAttributes(VAbstractPattern *doc, QDomElement &domElement, quint32 id, const VPlaceLabelItem &label);
 public slots:
-    virtual void FullUpdateFromFile() override {}
-    virtual void AllowHover(bool enabled) override;
-    virtual void AllowSelecting(bool enabled) override;
+    void FullUpdateFromFile() override {}
+    void AllowHover(bool enabled) override;
+    void AllowSelecting(bool enabled) override;
 
 protected:
-    virtual void AddToFile() override;
-    virtual void ShowNode() override {}
-    virtual void HideNode() override {}
+    void AddToFile() override;
 
 private:
     // cppcheck-suppress unknownMacro
@@ -77,7 +74,7 @@ private:
 
     quint32 m_pieceId;
 
-    VToolPlaceLabel(const VToolPlaceLabelInitData &initData, QObject *qoParent = nullptr);
+    explicit VToolPlaceLabel(const VToolPlaceLabelInitData &initData, QObject *qoParent = nullptr);
 };
 
 #endif // VTOOLPLACELABEL_H

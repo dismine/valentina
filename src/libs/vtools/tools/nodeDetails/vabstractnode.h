@@ -46,17 +46,14 @@ enum class ParentType : bool
 
 struct VAbstractNodeInitData : VAbstractToolInitData
 {
-    VAbstractNodeInitData()
-      : VAbstractToolInitData(),
-        idObject(NULL_ID),
-        drawName(),
-        idTool(NULL_ID)
-    {
-    }
+    VAbstractNodeInitData() = default;
 
-    quint32 idObject;
-    QString drawName;
-    quint32 idTool;
+    quint32 idObject{NULL_ID};
+    QString drawName{};
+    quint32 idTool{NULL_ID};
+    qreal mx{0};
+    qreal my{0};
+    bool showLabel{true};
 };
 
 /**
@@ -67,14 +64,17 @@ class VAbstractNode : public VAbstractTool
     Q_OBJECT // NOLINT
 
 public:
-    VAbstractNode(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &idNode,
-                  const QString &drawName = QString(), const quint32 &idTool = 0, QObject *parent = nullptr);
-    virtual ~VAbstractNode() override = default;
+    VAbstractNode(VAbstractPattern *doc,
+                  VContainer *data,
+                  quint32 id,
+                  quint32 idNode,
+                  const QString &drawName = QString(),
+                  quint32 idTool = 0,
+                  QObject *parent = nullptr);
+    ~VAbstractNode() override = default;
 
     static const QString AttrIdTool;
     void ShowVisualization(bool show) override;
-    void incrementReferens() override;
-    void decrementReferens() override;
 
     auto GetParentType() const -> ParentType;
     void SetParentType(const ParentType &value);
@@ -85,6 +85,8 @@ public:
 
     auto IsExluded() const -> bool;
     void SetExluded(bool exluded);
+
+    auto IsRemovable() const -> RemoveStatus;
 
 protected:
     ParentType parentType;
@@ -102,9 +104,6 @@ protected:
     void AddToModeling(const QDomElement &domElement);
     void ToolCreation(const Source &typeCreation) override;
     void SetVisualization() override {}
-
-    virtual void ShowNode() = 0;
-    virtual void HideNode() = 0;
 
 private:
     Q_DISABLE_COPY_MOVE(VAbstractNode) // NOLINT

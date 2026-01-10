@@ -1260,7 +1260,7 @@ auto VTextManager::HorizontalAdvance(const QString &text, const QFont &font) -> 
     if (settings->GetSingleStrokeOutlineFont())
     {
         int w = 0;
-        for (auto c : qAsConst(text))
+        for (auto c : std::as_const(text))
         {
             w += fm.horizontalAdvance(c) + qRound(penWidth / 2.0);
         }

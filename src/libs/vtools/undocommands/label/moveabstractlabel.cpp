@@ -36,9 +36,9 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 MoveAbstractLabel::MoveAbstractLabel(VAbstractPattern *doc, quint32 pointId, const QPointF &pos, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent),
-      m_oldPos(),
-      m_newPos(pos)
+  : VUndoCommand(doc, parent),
+    m_oldPos(),
+    m_newPos(pos)
 {
     nodeId = pointId;
     qCDebug(vUndo, "Point id %u", nodeId);

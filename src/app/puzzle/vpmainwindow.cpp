@@ -2890,7 +2890,7 @@ void VPMainWindow::UpdateScaleConnection() const
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::OpenWatermark(const QString &path)
 {
-    for (const auto &m_watermarkEditor : qAsConst(m_watermarkEditors))
+    for (const auto &m_watermarkEditor : std::as_const(m_watermarkEditors))
     {
         if (not m_watermarkEditor.isNull() && not m_watermarkEditor->CurrentFile().isEmpty() &&
             m_watermarkEditor->CurrentFile() == AbsoluteMPath(curFile, path))
@@ -3540,7 +3540,7 @@ void VPMainWindow::TranslatePieces()
             }
 
             QRectF const rect = PiecesBoundingRect(selectedPieces);
-            for (const auto &piece : qAsConst(selectedPieces))
+            for (const auto &piece : std::as_const(selectedPieces))
             {
                 TranslatePieceRelatively(piece, rect, selectedPieces.size(), dx, dy);
             }
@@ -3682,7 +3682,7 @@ void VPMainWindow::RotatePieces()
         VPTransformationOrigon const origin = sheet->TransformationOrigin();
         m_layout->UndoStack()->push(new VPUndoPiecesRotate(selectedPieces, origin, angle));
 
-        for (const auto &piece : qAsConst(selectedPieces))
+        for (const auto &piece : std::as_const(selectedPieces))
         {
             StickyRotateToGrainline(piece, origin);
         }

@@ -47,6 +47,8 @@
 #include "../../undocommands/label/showlabel.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vdomdocument.h"
+#include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vabstracttool.h"
 #include "../vdatatool.h"
 #include "../vmisc/theme/themeDef.h"
@@ -59,12 +61,19 @@
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vmaingraphicsview.h"
 #include "vabstractnode.h"
+#include "vtools/tools/vinteractivetool.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
 
 const QString VNodePoint::ToolType = QStringLiteral("modeling");
 
 namespace
 {
-enum class ContextMenuOption : int
+enum class ContextMenuOption : std::uint8_t
 {
     NoSelection,
     ShowLabel,
@@ -121,8 +130,10 @@ VNodePoint::VNodePoint(const VAbstractNodeInitData &initData, QObject *qoParent,
     m_namePoint->SetShowParentTooltip(false);
     connect(m_namePoint, &VGraphicsSimpleTextItem::PointChoosed, this, &VNodePoint::PointChoosed);
     connect(m_namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this, &VNodePoint::NameChangePosition);
-    connect(m_namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this,
-            [this](QGraphicsSceneContextMenuEvent *event) { contextMenuEvent(event); });
+    connect(m_namePoint,
+            &VGraphicsSimpleTextItem::ShowContextMenu,
+            this,
+            [this](QGraphicsSceneContextMenuEvent *event) -> void { contextMenuEvent(event); });
     m_lineName->SetColorRole(VColorRole::PieceNodeLabelLineColor);
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(initData.id));
     ToolCreation(initData.typeCreation);
@@ -136,10 +147,38 @@ VNodePoint::VNodePoint(const VAbstractNodeInitData &initData, QObject *qoParent,
  */
 void VNodePoint::Create(const VAbstractNodeInitData &initData)
 {
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::MODELING_OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
+
+    QSharedPointer<VPointF> point;
+    try
+    {
+        point = initData.data->GeometricObject<VPointF>(initData.idObject);
+    }
+    catch (const VExceptionBadId &)
+    { // Possible case. Parent was deleted, but the node object is still here.
+        qDebug() << "Broken relation. Parent was deleted, but the node object is still here. Node point id ="
+                 << initData.id << ".";
+        return; // Just ignore
+    }
+
+    patternGraph->AddEdge(initData.idObject, initData.id);
+
+    QSharedPointer<VPointF> const p(new VPointF(*point));
+    p->setIdObject(initData.idObject);
+    p->setMode(Draw::Modeling);
+    p->SetShowLabel(initData.showLabel);
+    p->setMx(initData.mx);
+    p->setMy(initData.my);
+
+    initData.data->UpdateGObject(initData.id, p);
+
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::NodePoint, initData.doc);
-        // TODO Need create garbage collector and remove all nodes, what we don't use.
+        // TODO Need create garbage collector and remove all nodes, that we don't use.
         // Better check garbage before each saving file. Check only modeling tags.
         auto *point = new VNodePoint(initData);
 
@@ -293,22 +332,7 @@ void VNodePoint::NameChangePosition(const QPointF &pos)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VNodePoint::ShowNode()
-{
-    if (parentType != ParentType::Scene && not m_exluded)
-    {
-        show();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VNodePoint::HideNode()
-{
-    hide();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VNodePoint::InitContextMenu(QMenu *menu, vidtype pieceId, quint32 referens) -> QHash<int, QAction *>
+auto VNodePoint::InitContextMenu(QMenu *menu, vidtype pieceId, RemoveStatus status) -> QHash<int, QAction *>
 {
     SCASSERT(menu != nullptr)
 
@@ -374,7 +398,12 @@ auto VNodePoint::InitContextMenu(QMenu *menu, vidtype pieceId, quint32 referens)
 
     QAction *actionRemove =
         menu->addAction(FromTheme(VThemeIcon::EditDelete), QCoreApplication::translate("VNodePoint", "Delete"));
-    referens > 1 ? actionRemove->setEnabled(false) : actionRemove->setEnabled(true);
+    actionRemove->setEnabled(status == RemoveStatus::Removable);
+    if (status == RemoveStatus::Pending)
+    {
+        actionRemove->setText(actionRemove->text() + " ("_L1 + QCoreApplication::translate("VNodePoint", "Pending")
+                              + ')');
+    }
     contextMenu.insert(static_cast<int>(ContextMenuOption::Remove), actionRemove);
 
     return contextMenu;
@@ -404,7 +433,8 @@ void VNodePoint::InitPassmarkMenu(QMenu *menu, vidtype pieceId, QHash<int, QActi
 
     Q_STATIC_ASSERT_X(static_cast<int>(PassmarkLineType::LAST_ONE_DO_NOT_USE) == 9, "Not all types were handled.");
 
-    auto InitPassmarkLineTypeAction = [passmarkSubmenu, node](const QString &name, PassmarkLineType lineType)
+    auto InitPassmarkLineTypeAction = [passmarkSubmenu, node](const QString &name,
+                                                              PassmarkLineType lineType) -> QAction *
     {
         QAction *action = passmarkSubmenu->addAction(name);
         action->setCheckable(true);
@@ -542,7 +572,7 @@ void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     }
 
     QMenu menu;
-    QHash<int, QAction *> const contextMenu = InitContextMenu(&menu, piece->getId(), piece->referens());
+    QHash<int, QAction *> const contextMenu = InitContextMenu(&menu, piece->getId(), piece->IsRemovable());
 
     PieceNodeAngle angleCurType = PieceNodeAngle::ByLength;
     PassmarkAngleType passmarkAngleCurType = PassmarkAngleType::Straightforward;
@@ -559,7 +589,7 @@ void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
         passmarkLineCurType = node.GetPassmarkLineType();
     }
 
-    auto SelectSeamAllowanceAngle = [angleCurType, this](PieceNodeAngle type)
+    auto SelectSeamAllowanceAngle = [angleCurType, this](PieceNodeAngle type) -> void
     {
         if (angleCurType != type)
         {
@@ -567,7 +597,7 @@ void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
         }
     };
 
-    auto SelectPassmarkAngle = [passmarkAngleCurType, this](PassmarkAngleType type)
+    auto SelectPassmarkAngle = [passmarkAngleCurType, this](PassmarkAngleType type) -> void
     {
         if (passmarkAngleCurType != type)
         {
@@ -575,7 +605,7 @@ void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
         }
     };
 
-    auto SelectPassmarkLine = [passmarkLineCurType, this](PassmarkLineType type)
+    auto SelectPassmarkLine = [passmarkLineCurType, this](PassmarkLineType type) -> void
     {
         emit TogglePassmark(m_id, true);
 

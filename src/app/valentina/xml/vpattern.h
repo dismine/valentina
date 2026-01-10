@@ -55,16 +55,11 @@ public:
 
     void Parse(const Document &parse);
 
-    void GarbageCollector(bool commit = false);
-
     void setCurrentData();
     void UpdateToolData(const quint32 &id, VContainer *data) override;
 
     auto GetCompleteData() const -> VContainer override;
     auto GetCompletePPData(const QString &name) const -> VContainer override;
-
-    void IncrementReferens(quint32 id) const override;
-    void DecrementReferens(quint32 id) const override;
 
     auto SPointActiveDraw() -> quint32;
 
@@ -119,6 +114,8 @@ public:
 
     void RefreshDirtyPieceGeometry(const QList<vidtype> &list);
 
+    void SetGBBackupFilePath(const QString &fileName);
+
 signals:
     void PreParseState();
 
@@ -129,6 +126,9 @@ public slots:
 
 protected:
     void customEvent(QEvent *event) override;
+
+private slots:
+    void CollectGarbage();
 
 private:
     // cppcheck-suppress unknownMacro
@@ -144,6 +144,9 @@ private:
     QFutureWatcher<void> *m_refreshPieceGeometryWatcher;
 
     bool m_pieceGeometryDirty{true};
+
+    bool m_garbageCollected{false};
+    QString m_garbageCollectBackupFilePath{};
 
     static auto ParseDetailNode(const QDomElement &domElement) -> VNodeDetail;
 
@@ -260,10 +263,13 @@ private:
 
     auto LastDrawName() const -> QString;
     auto LastToolId() const -> quint32;
-    auto PPLastToolId(const QString &name) const -> quint32;
+    auto PPLastToolId(int blockIndex) const -> quint32;
 
     void PostRefreshActions();
     void RefreshPieceGeometryForList(const QList<vidtype> &list) const;
+
+    void GarbageCollector();
+    void BackupBeforeGarbageCollector() const;
 };
 
 #endif // VPATTERN_H

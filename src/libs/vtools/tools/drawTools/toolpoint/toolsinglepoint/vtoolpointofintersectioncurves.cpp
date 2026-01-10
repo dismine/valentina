@@ -36,9 +36,10 @@
 #include "../../../../dialogs/tools/dialogtool.h"
 #include "../../../../visualization/path/vistoolpointofintersectioncurves.h"
 #include "../../../vabstracttool.h"
-#include "../../vdrawtool.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
@@ -163,29 +164,38 @@ auto VToolPointOfIntersectionCurves::Create(VToolPointOfIntersectionCurvesInitDa
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(p);
-
-        initData.curve1Segments =
-            VToolSinglePoint::InitSegments(curve1->getType(), segLength1, p, initData.firstCurveId, initData.data,
-                                           initData.curve1AliasSuffix1, initData.curve1AliasSuffix2);
-        initData.curve2Segments =
-            VToolSinglePoint::InitSegments(curve2->getType(), segLength2, p, initData.secondCurveId, initData.data,
-                                           initData.curve2AliasSuffix1, initData.curve2AliasSuffix2);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, p);
+    }
 
-        initData.curve1Segments =
-            VToolSinglePoint::InitSegments(curve1->getType(), segLength1, p, initData.firstCurveId, initData.data,
-                                           initData.curve1AliasSuffix1, initData.curve1AliasSuffix2);
-        initData.curve2Segments =
-            VToolSinglePoint::InitSegments(curve2->getType(), segLength2, p, initData.secondCurveId, initData.data,
-                                           initData.curve2AliasSuffix1, initData.curve2AliasSuffix2);
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
 
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
+
+    initData.curve1Segments = VToolSinglePoint::InitSegments(curve1->getType(),
+                                                             segLength1,
+                                                             p,
+                                                             initData.firstCurveId,
+                                                             initData.data,
+                                                             initData.curve1AliasSuffix1,
+                                                             initData.curve1AliasSuffix2);
+    initData.curve2Segments = VToolSinglePoint::InitSegments(curve2->getType(),
+                                                             segLength2,
+                                                             p,
+                                                             initData.secondCurveId,
+                                                             initData.data,
+                                                             initData.curve2AliasSuffix1,
+                                                             initData.curve2AliasSuffix2);
+
+    patternGraph->AddEdge(initData.firstCurveId, initData.id);
+    patternGraph->AddEdge(initData.secondCurveId, initData.id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     if (initData.parse == Document::FullParse)
@@ -195,8 +205,6 @@ auto VToolPointOfIntersectionCurves::Create(VToolPointOfIntersectionCurvesInitDa
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
-        initData.doc->IncrementReferens(curve1->getIdTool());
-        initData.doc->IncrementReferens(curve2->getIdTool());
         return point;
     }
 
@@ -388,27 +396,11 @@ void VToolPointOfIntersectionCurves::ShowContextMenu(QGraphicsSceneContextMenuEv
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfIntersectionCurves::RemoveReferens()
-{
-    const auto curve1 = VAbstractTool::data.GetGObject(firstCurveId);
-    const auto curve2 = VAbstractTool::data.GetGObject(secondCurveId);
-
-    doc->DecrementReferens(curve1->getIdTool());
-    doc->DecrementReferens(curve2->getIdTool());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfIntersectionCurves::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                                                QList<quint32> &newDependencies)
+void VToolPointOfIntersectionCurves::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     auto *dialogTool = qobject_cast<DialogPointOfIntersectionCurves *>(m_dialog);
     SCASSERT(dialogTool != nullptr)
-
-    AddDependence(oldDependencies, firstCurveId);
-    AddDependence(oldDependencies, secondCurveId);
-    AddDependence(newDependencies, dialogTool->GetFirstCurveId());
-    AddDependence(newDependencies, dialogTool->GetSecondCurveId());
 
     doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrCurve1, QString().setNum(dialogTool->GetFirstCurveId()));

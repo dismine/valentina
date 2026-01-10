@@ -30,20 +30,20 @@
 
 #include <QPen>
 #include <QSharedPointer>
-#include <new>
 
 #include "../../../dialogs/tools/dialogarcwithlength.h"
 #include "../../../dialogs/tools/dialogtool.h"
 #include "../../../visualization/path/vistoolarcwithlength.h"
 #include "../../../visualization/visualization.h"
 #include "../../vabstracttool.h"
-#include "../vmisc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vdomdocument.h"
-#include "../vdrawtool.h"
+#include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vpatterndb/vcontainer.h"
@@ -124,11 +124,11 @@ auto VToolArcWithLength::Create(const QPointer<DialogTool> &dialog, VMainGraphic
 //---------------------------------------------------------------------------------------------------------------------
 auto VToolArcWithLength::Create(VToolArcWithLengthInitData &initData) -> VToolArcWithLength *
 {
-    qreal calcRadius = 0, calcF1 = 0, calcLength = 0;
-
-    calcRadius = VAbstractValApplication::VApp()->toPixel(CheckFormula(initData.id, initData.radius, initData.data));
-    calcLength = VAbstractValApplication::VApp()->toPixel(CheckFormula(initData.id, initData.length, initData.data));
-    calcF1 = CheckFormula(initData.id, initData.f1, initData.data);
+    qreal const calcRadius = VAbstractValApplication::VApp()->toPixel(
+        CheckFormula(initData.id, initData.radius, initData.data));
+    qreal const calcLength = VAbstractValApplication::VApp()->toPixel(
+        CheckFormula(initData.id, initData.length, initData.data));
+    qreal const calcF1 = CheckFormula(initData.id, initData.f1, initData.data);
 
     const VPointF c = *initData.data->GeometricObject<VPointF>(initData.center);
     auto *arc = new VArc(calcLength, initData.length, c, calcRadius, initData.radius, calcF1, initData.f1);
@@ -145,11 +145,25 @@ auto VToolArcWithLength::Create(VToolArcWithLengthInitData &initData) -> VToolAr
     else
     {
         initData.data->UpdateGObject(initData.id, arc);
-        initData.data->AddArc(initData.data->GeometricObject<VArc>(initData.id), initData.id);
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
+
+    const auto varData = initData.data->DataDependencyVariables();
+    initData.doc->FindFormulaDependencies(initData.radius, initData.id, varData);
+    initData.doc->FindFormulaDependencies(initData.length, initData.id, varData);
+    initData.doc->FindFormulaDependencies(initData.f1, initData.id, varData);
+
+    initData.data->AddArc(initData.data->GeometricObject<VArc>(initData.id), initData.id);
+
+    patternGraph->AddEdge(initData.center, initData.id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     if (initData.parse == Document::FullParse)
@@ -159,7 +173,6 @@ auto VToolArcWithLength::Create(VToolArcWithLengthInitData &initData) -> VToolAr
         initData.scene->addItem(toolArc);
         InitArcToolConnections(initData.scene, toolArc);
         VAbstractPattern::AddTool(initData.id, toolArc);
-        initData.doc->IncrementReferens(c.getIdTool());
         return toolArc;
     }
     return nullptr;
@@ -291,24 +304,11 @@ void VToolArcWithLength::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolArcWithLength::RemoveReferens()
-{
-    const auto arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
-    doc->DecrementReferens(arc->GetCenter().getIdTool());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolArcWithLength::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                                    QList<quint32> &newDependencies)
+void VToolArcWithLength::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogArcWithLength> dialogTool = qobject_cast<DialogArcWithLength *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
-
-    QSharedPointer<VArc> const arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
-    SCASSERT(arc.isNull() == false)
-    AddDependence(oldDependencies, arc->GetCenter().id());
-    AddDependence(newDependencies, dialogTool->GetCenter());
 
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetCenter()));
     doc->SetAttribute(domElement, AttrRadius, dialogTool->GetRadius());

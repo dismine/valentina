@@ -35,8 +35,6 @@
 
 struct VToolFlippingByLineInitData : VAbstractOperationInitData
 {
-    VToolFlippingByLineInitData() = default;
-
     quint32 firstLinePointId{NULL_ID};
     quint32 secondLinePointId{NULL_ID};
 };
@@ -66,7 +64,7 @@ protected slots:
 
 protected:
     void SetVisualization() override;
-    void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies) override;
+    void SaveDialog(QDomElement &domElement) override;
     void ReadToolAttributes(const QDomElement &domElement) override;
     void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     auto MakeToolTip() const -> QString override;

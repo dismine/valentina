@@ -45,8 +45,6 @@ class VFormula;
 
 struct VToolMoveInitData : VAbstractOperationInitData
 {
-    VToolMoveInitData() = default;
-
     QString formulaAngle{};
     QString formulaRotationAngle{};
     QString formulaLength{};
@@ -92,7 +90,7 @@ protected slots:
 
 protected:
     void SetVisualization() override;
-    void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies) override;
+    void SaveDialog(QDomElement &domElement) override;
     void ReadToolAttributes(const QDomElement &domElement) override;
     void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     auto MakeToolTip() const -> QString override;
@@ -139,6 +137,11 @@ private:
     static void UpdateCurveWithSegments(quint32 idTool, const SourceItem &sItem, qreal angle, qreal length,
                                         qreal rotationAngle, const QPointF &rotationOrigin, const QString &suffix,
                                         VContainer *data, quint32 id);
+
+    static void CreateDestination(VToolMoveInitData &initData,
+                                  QPointF rotationOrigin,
+                                  qreal calcAngle,
+                                  qreal calcLength);
 };
 
 #endif // VTOOLMOVING_H

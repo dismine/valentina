@@ -30,8 +30,8 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 HideAllBackgroundImages::HideAllBackgroundImages(bool hide, VAbstractPattern *doc, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent),
-      m_hide(hide)
+  : VUndoCommand(doc, parent),
+    m_hide(hide)
 {
     if (hide)
     {

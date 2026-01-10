@@ -36,8 +36,6 @@
 #include <QString>
 #include <QtGlobal>
 
-#include "../ifc/xml/vabstractpattern.h"
-#include "../vmisc/def.h"
 #include "vabstractnode.h"
 
 /**
@@ -47,7 +45,7 @@ class VNodeSpline:public VAbstractNode
 {
     Q_OBJECT // NOLINT
 public:
-    static auto Create(const VAbstractNodeInitData &initData) -> VNodeSpline *;
+    static void Create(const VAbstractNodeInitData &initData);
 
     static const QString ToolType;
     virtual auto getTagName() const -> QString override;
@@ -57,8 +55,6 @@ public slots:
     virtual void AllowSelecting(bool enabled) override;
 protected:
     virtual void AddToFile () override;
-    virtual void ShowNode() override {}
-    virtual void HideNode() override {}
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VNodeSpline) // NOLINT

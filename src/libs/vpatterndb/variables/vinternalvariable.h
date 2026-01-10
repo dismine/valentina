@@ -69,9 +69,13 @@ public:
 
     virtual auto IsNotUsed() const -> bool;
 
+    auto GetReferences() const -> QList<quint32>;
+
 protected:
     void StoreValue(qreal value);
     void SetType(const VarType &type);
+
+    void SetReferences(const QList<quint32> &references);
 
 private:
     QSharedDataPointer<VInternalVariableData> d;

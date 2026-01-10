@@ -43,9 +43,11 @@
 #include "../../../../visualization/line/operation/vistoolflippingbyline.h"
 #include "../../../../visualization/visualization.h"
 #include "../../../vabstracttool.h"
-#include "../vmisc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vformula.h"
@@ -111,7 +113,38 @@ auto VToolFlippingByLine::Create(VToolFlippingByLineInitData initData) -> VToolF
     const auto secondPoint = *initData.data->GeometricObject<VPointF>(initData.secondLinePointId);
     const auto sPoint = static_cast<QPointF>(secondPoint);
 
+    if (initData.typeCreation == Source::FromGui)
+    {
+        initData.destination.clear(); // Try to avoid mistake, value must be empty
+
+        initData.id = initData.data->getNextId(); // Just reserve id for tool
+    }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
+
     CreateDestination(initData, fPoint, sPoint);
+
+    patternGraph->AddEdge(initData.firstLinePointId, initData.id);
+    patternGraph->AddEdge(initData.secondLinePointId, initData.id);
+
+    for (const auto &object : std::as_const(initData.source))
+    {
+        patternGraph->AddEdge(object.id, initData.id);
+    }
+
+    for (const auto &object : std::as_const(initData.destination))
+    {
+        patternGraph->AddVertex(object.id, VNodeType::OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
+        patternGraph->AddEdge(initData.id, object.id);
+    }
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
+    }
 
     if (initData.parse == Document::FullParse)
     {
@@ -125,12 +158,6 @@ auto VToolFlippingByLine::Create(VToolFlippingByLineInitData initData) -> VToolF
         initData.scene->addItem(tool);
         InitOperationToolConnections(initData.scene, tool);
         VAbstractPattern::AddTool(initData.id, tool);
-        initData.doc->IncrementReferens(firstPoint.getIdTool());
-        initData.doc->IncrementReferens(secondPoint.getIdTool());
-        for (const auto &object : qAsConst(initData.source))
-        {
-            initData.doc->IncrementReferens(initData.data->GetGObject(object.id)->getIdTool());
-        }
 
         if (initData.typeCreation == Source::FromGui && initData.hasLinkedVisibilityGroup)
         {
@@ -192,17 +219,11 @@ void VToolFlippingByLine::SetVisualization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolFlippingByLine::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                                     QList<quint32> &newDependencies)
+void VToolFlippingByLine::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogFlippingByLine> dialogTool = qobject_cast<DialogFlippingByLine *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
-
-    AddDependence(oldDependencies, m_firstLinePointId);
-    AddDependence(oldDependencies, m_secondLinePointId);
-    AddDependence(newDependencies, dialogTool->GetFirstLinePointId());
-    AddDependence(newDependencies, dialogTool->GetSecondLinePointId());
 
     doc->SetAttribute(domElement, AttrP1Line, QString().setNum(dialogTool->GetFirstLinePointId()));
     doc->SetAttribute(domElement, AttrP2Line, QString().setNum(dialogTool->GetSecondLinePointId()));

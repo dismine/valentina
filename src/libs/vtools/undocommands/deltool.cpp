@@ -33,6 +33,7 @@
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "vundocommand.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 
 namespace
 {
@@ -52,13 +53,13 @@ auto FixGroups(QMap<quint32, VGroupData> groups, const QMap<quint32, VGroupData>
 
 //---------------------------------------------------------------------------------------------------------------------
 DelTool::DelTool(VAbstractPattern *doc, quint32 id, QUndoCommand *parent)
-  : VUndoCommand(QDomElement(), doc, parent),
-    nameActivDraw(doc->GetNameActivPP())
+  : VUndoCommand(doc, parent),
+    parentNode(doc->ParentNodeById(nodeId)),
+    siblingId(doc->SiblingNodeId(nodeId)),
+    nameActivDraw(doc->PatternBlockMapper()->GetActive())
 {
     setText(tr("delete tool"));
     nodeId = id;
-    siblingId = doc->SiblingNodeId(nodeId);
-    parentNode = doc->ParentNodeById(nodeId);
     xml = doc->CloneNodeById(nodeId);
 
     QVector<QPair<vidtype, vidtype>> cleanItems;
@@ -67,8 +68,9 @@ DelTool::DelTool(VAbstractPattern *doc, quint32 id, QUndoCommand *parent)
     while (i != groups.constEnd())
     {
         VGroupData groupData = i.value();
-        auto itemRecord = std::find_if(groupData.items.begin(), groupData.items.end(),
-                                       [id](const QPair<vidtype, vidtype> &item) { return item.second == id; });
+        auto itemRecord = std::find_if(groupData.items.begin(),
+                                       groupData.items.end(),
+                                       [id](const QPair<vidtype, vidtype> &item) -> bool { return item.second == id; });
 
         if (itemRecord != groupData.items.end())
         {
@@ -77,7 +79,7 @@ DelTool::DelTool(VAbstractPattern *doc, quint32 id, QUndoCommand *parent)
             cleanItems.clear();
             cleanItems.reserve(groupData.items.size());
 
-            for (auto item : groupData.items)
+            for (auto item : std::as_const(groupData.items))
             {
                 if (item.second != id)
                 {
@@ -109,7 +111,7 @@ void DelTool::undo()
 
     if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
     {                                          // Keep last!
-        emit doc->SetCurrentPP(nameActivDraw); // Without this user will not see this change
+        emit doc->ShowPatternBlock(nameActivDraw); // Without this user will not see this change
     }
 }
 
@@ -120,7 +122,7 @@ void DelTool::redo()
 
     if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
     {                                          // Keep first!
-        emit doc->SetCurrentPP(nameActivDraw); // Without this user will not see this change
+        emit doc->ShowPatternBlock(nameActivDraw); // Without this user will not see this change
     }
     QDomElement const domElement = doc->NodeById(nodeId);
     parentNode.removeChild(domElement);

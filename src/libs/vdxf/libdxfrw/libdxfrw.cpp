@@ -84,12 +84,7 @@ auto dxfRW::read(DRW_Interface *interface_, bool ext) -> bool
      || (defined(_MSC_VER) && (_MSC_VER < 1920)))
     filestr.open(fileName.c_str(), std::ios_base::in | std::ios::binary);
 #else
-#if __cplusplus >= 202002L // C++20 or newer
     auto filePath = std::filesystem::path(fileName);
-#else                      // C++17 and older
-    auto filePath = std::filesystem::u8path(fileName);
-#endif
-
     filestr.open(filePath, std::ios_base::in | std::ios::binary);
 #endif
     if (!filestr.is_open() || !filestr.good())
@@ -154,12 +149,7 @@ auto dxfRW::write(DRW_Interface *interface_, DRW::Version ver, bool bin) -> bool
      || (defined(_MSC_VER) && (_MSC_VER < 1920)))
         filestr.open(fileName.c_str(), std::ios_base::out | std::ios::binary | std::ios::trunc);
 #else
-#if __cplusplus >= 202002L // C++20 or newer
         auto filePath = std::filesystem::path(fileName);
-#else                      // C++17 and older
-        auto filePath = std::filesystem::u8path(fileName);
-#endif
-
         filestr.open(filePath, std::ios_base::out | std::ios::binary | std::ios::trunc);
 #endif
 
@@ -182,12 +172,7 @@ auto dxfRW::write(DRW_Interface *interface_, DRW::Version ver, bool bin) -> bool
      || (defined(_MSC_VER) && (_MSC_VER < 1920)))
         filestr.open(fileName.c_str(), std::ios_base::out | std::ios::trunc);
 #else
-#if __cplusplus >= 202002L // C++20 or newer
         auto filePath = std::filesystem::path(fileName);
-#else                      // C++17 and older
-        auto filePath = std::filesystem::u8path(fileName);
-#endif
-
         filestr.open(filePath, std::ios_base::out | std::ios::trunc);
 #endif
 

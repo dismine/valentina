@@ -98,7 +98,7 @@ void VisToolPiecePath::HideAllItems()
         m_line->setVisible(false);
     }
 
-    for (auto *item : qAsConst(m_points))
+    for (auto *item : std::as_const(m_points))
     {
         if (item)
         {

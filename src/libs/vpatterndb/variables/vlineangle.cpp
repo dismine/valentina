@@ -49,7 +49,7 @@ VLineAngle::VLineAngle()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLineAngle::VLineAngle(const VPointF *p1, const quint32 &p1Id, const VPointF *p2, const quint32 &p2Id)
+VLineAngle::VLineAngle(const VPointF *p1, quint32 p1Id, const VPointF *p2, quint32 p2Id, quint32 mainReference)
   : VInternalVariable(),
     d(new VLineAngleData(p1Id, p2Id))
 {
@@ -59,8 +59,17 @@ VLineAngle::VLineAngle(const VPointF *p1, const quint32 &p1Id, const VPointF *p2
     SCASSERT(p1 != nullptr)
     SCASSERT(p2 != nullptr)
 
-    SetName(QString(angleLine_ + "%1_%2").arg(p1->name(), p2->name()));
+    SetName(angleLine_ + p1->name() + '_' + p2->name());
     SetValue(p1, p2);
+
+    if (mainReference == NULL_ID)
+    {
+        SetReferences({p1Id, p2Id});
+    }
+    else
+    {
+        SetReferences({mainReference});
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

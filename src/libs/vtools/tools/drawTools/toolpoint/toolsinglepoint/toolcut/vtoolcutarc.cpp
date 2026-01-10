@@ -37,6 +37,8 @@
 #include "../../../../../visualization/visualization.h"
 #include "../../../../vabstracttool.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vabstractarc.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vellipticalarc.h"
@@ -175,34 +177,51 @@ auto VToolCutArc::Create(VToolCutInitData &initData) -> VToolCutArc *
     auto *p = new VPointF(cutPoint, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
 
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
+
+    const auto varData = initData.data->DataDependencyVariables();
+    initData.doc->FindFormulaDependencies(initData.formula, initData.id, varData);
+
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(p);
 
         a1->setId(initData.data->getNextId());
         initData.data->RegisterUniqueName(a1);
-        initData.data->AddArc(a1, a1->id(), initData.id);
+        initData.data->AddArc(a1, /*a1->id()*/ NULL_ID, initData.id);
 
         a2->setId(initData.data->getNextId());
         initData.data->RegisterUniqueName(a2);
-        initData.data->AddArc(a2, a2->id(), initData.id);
+        initData.data->AddArc(a2, /*a2->id()*/ NULL_ID, initData.id);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, p);
 
-        a1->setId(initData.id + 1);
+        // a1->setId(initData.id + 1);
         initData.data->RegisterUniqueName(a1);
         initData.data->AddArc(a1, a1->id(), initData.id);
 
-        a2->setId(initData.id + 2);
+        // a2->setId(initData.id + 2);
         initData.data->RegisterUniqueName(a2);
         initData.data->AddArc(a2, a2->id(), initData.id);
+    }
 
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    // TODO: Add segments to graph when we start showing them for users
+    // patternGraph->AddVertex(initData.segment1Id, VNodeType::OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
+    // patternGraph->AddVertex(initData.segment2Id, VNodeType::OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
+
+    // patternGraph->AddEdge(initData.id, initData.segment1Id);
+    // patternGraph->AddEdge(initData.id, initData.segment2Id);
+
+    patternGraph->AddEdge(initData.baseCurveId, initData.id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     VToolCutArc *tool = nullptr;
@@ -213,7 +232,6 @@ auto VToolCutArc::Create(VToolCutInitData &initData) -> VToolCutArc *
         initData.scene->addItem(tool);
         InitToolConnections(initData.scene, tool);
         VAbstractPattern::AddTool(initData.id, tool);
-        initData.doc->IncrementReferens(arc->getIdTool());
     }
     // Very important to delete it. Only this tool need this special variable.
     initData.data->RemoveVariable(currentLength);
@@ -244,26 +262,29 @@ void VToolCutArc::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolCutArc::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies)
+void VToolCutArc::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogCutArc> dialogTool = qobject_cast<DialogCutArc *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
-    AddDependence(oldDependencies, baseCurveId);
-    AddDependence(newDependencies, dialogTool->getArcId());
-
     doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrArc, QString().setNum(dialogTool->getArcId()));
-    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrAlias1, dialogTool->GetAliasSuffix1(),
-                                         [](const QString &suffix) noexcept { return suffix.isEmpty(); });
-    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrAlias2, dialogTool->GetAliasSuffix2(),
-                                         [](const QString &suffix) noexcept { return suffix.isEmpty(); });
+    doc->SetAttributeOrRemoveIf<QString>(domElement,
+                                         AttrAlias1,
+                                         dialogTool->GetAliasSuffix1(),
+                                         [](const QString &suffix) noexcept -> bool { return suffix.isEmpty(); });
+    doc->SetAttributeOrRemoveIf<QString>(domElement,
+                                         AttrAlias2,
+                                         dialogTool->GetAliasSuffix2(),
+                                         [](const QString &suffix) noexcept -> bool { return suffix.isEmpty(); });
 
     const QString notes = dialogTool->GetNotes();
-    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, notes,
-                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
+    doc->SetAttributeOrRemoveIf<QString>(domElement,
+                                         AttrNotes,
+                                         notes,
+                                         [](const QString &notes) noexcept -> bool { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

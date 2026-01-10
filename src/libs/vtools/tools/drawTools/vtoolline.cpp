@@ -42,6 +42,8 @@
 #include "../../visualization/line/vistoolline.h"
 #include "../../visualization/visualization.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vabstracttool.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
@@ -148,16 +150,25 @@ auto VToolLine::Create(VToolLineInitData initData) -> VToolLine *
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->getNextId();
-        initData.data->AddLine(initData.firstPoint, initData.secondPoint);
     }
     else
     {
         initData.data->UpdateId(initData.id);
-        initData.data->AddLine(initData.firstPoint, initData.secondPoint);
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
+
+    initData.data->AddLine(initData.firstPoint, initData.secondPoint, initData.id);
+
+    patternGraph->AddEdge(initData.firstPoint, initData.id);
+    patternGraph->AddEdge(initData.secondPoint, initData.id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     if (initData.parse == Document::FullParse)
@@ -169,12 +180,6 @@ auto VToolLine::Create(VToolLineInitData initData) -> VToolLine *
         connect(initData.scene, &VMainGraphicsScene::EnableLineItemSelection, line, &VToolLine::AllowSelecting);
         connect(initData.scene, &VMainGraphicsScene::EnableLineItemHover, line, &VToolLine::AllowHover);
         VAbstractPattern::AddTool(initData.id, line);
-
-        const QSharedPointer<VPointF> first = initData.data->GeometricObject<VPointF>(initData.firstPoint);
-        const QSharedPointer<VPointF> second = initData.data->GeometricObject<VPointF>(initData.secondPoint);
-
-        initData.doc->IncrementReferens(first->getIdTool());
-        initData.doc->IncrementReferens(second->getIdTool());
         return line;
     }
     return nullptr;
@@ -222,21 +227,9 @@ void VToolLine::FullUpdateFromFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ShowTool highlight tool.
- * @param id object id in container
- * @param enable enable or disable highlight.
- */
-void VToolLine::ShowTool(quint32 id, bool enable)
+void VToolLine::Enable()
 {
-    ShowItem(this, id, enable);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolLine::Disable(bool disable, const QString &namePP)
-{
-    const bool enabled = !CorrectDisable(disable, namePP);
-    this->setEnabled(enabled);
+    setEnabled(m_indexActivePatternBlock == doc->PatternBlockMapper()->GetActiveId());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -324,19 +317,6 @@ void VToolLine::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief RemoveReferens decrement value of reference.
- */
-void VToolLine::RemoveReferens()
-{
-    const auto p1 = VAbstractTool::data.GetGObject(firstPoint);
-    const auto p2 = VAbstractTool::data.GetGObject(secondPoint);
-
-    doc->DecrementReferens(p1->getIdTool());
-    doc->DecrementReferens(p2->getIdTool());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief itemChange handle item change.
  * @param change change.
  * @param value value.
@@ -382,23 +362,20 @@ void VToolLine::keyReleaseEvent(QKeyEvent *event)
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolLine::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies)
+void VToolLine::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogLine> dialogTool = qobject_cast<DialogLine *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
-    AddDependence(oldDependencies, firstPoint);
-    AddDependence(oldDependencies, secondPoint);
-    AddDependence(newDependencies, dialogTool->GetFirstPoint());
-    AddDependence(newDependencies, dialogTool->GetSecondPoint());
-
     doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->GetFirstPoint()));
     doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->GetSecondPoint()));
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
-    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
+    doc->SetAttributeOrRemoveIf<QString>(domElement,
+                                         AttrNotes,
+                                         dialogTool->GetNotes(),
+                                         [](const QString &notes) noexcept -> bool { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

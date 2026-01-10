@@ -37,8 +37,9 @@
 #include "../../../../../visualization/path/vistoolcutspline.h"
 #include "../../../../../visualization/visualization.h"
 #include "../../../../vabstracttool.h"
-#include "../../../vdrawtool.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vabstractcubicbezier.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vpointf.h"
@@ -146,7 +147,10 @@ auto VToolCutSpline::Create(VToolCutInitData &initData) -> VToolCutSpline *
 
     const qreal result = CheckFormula(initData.id, initData.formula, initData.data);
 
-    QPointF spl1p2, spl1p3, spl2p2, spl2p3;
+    QPointF spl1p2;
+    QPointF spl1p3;
+    QPointF spl2p2;
+    QPointF spl2p3;
     QPointF const point =
         spl->CutSpline(VAbstractValApplication::VApp()->toPixel(result), spl1p2, spl1p3, spl2p2, spl2p3, initData.name);
 
@@ -165,25 +169,38 @@ auto VToolCutSpline::Create(VToolCutInitData &initData) -> VToolCutSpline *
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(p);
-        initData.data->AddSpline(spline1, NULL_ID, initData.id);
-        initData.data->AddSpline(spline2, NULL_ID, initData.id);
-
-        initData.data->RegisterUniqueName(spline1);
-        initData.data->RegisterUniqueName(spline2);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, p);
-        initData.data->AddSpline(spline1, NULL_ID, initData.id);
-        initData.data->AddSpline(spline2, NULL_ID, initData.id);
+    }
 
-        initData.data->RegisterUniqueName(spline1);
-        initData.data->RegisterUniqueName(spline2);
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
 
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
+
+    const auto varData = initData.data->DataDependencyVariables();
+    initData.doc->FindFormulaDependencies(initData.formula, initData.id, varData);
+
+    initData.data->AddSpline(spline1, NULL_ID, initData.id);
+    initData.data->AddSpline(spline2, NULL_ID, initData.id);
+
+    initData.data->RegisterUniqueName(spline1);
+    initData.data->RegisterUniqueName(spline2);
+
+    // TODO: Add segments to graph when we start showing them for users
+    // patternGraph->AddVertex(initData.segment1Id, VNodeType::OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
+    // patternGraph->AddVertex(initData.segment2Id, VNodeType::OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
+
+    // patternGraph->AddEdge(initData.id, initData.segment1Id);
+    // patternGraph->AddEdge(initData.id, initData.segment2Id);
+
+    patternGraph->AddEdge(initData.baseCurveId, initData.id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     VToolCutSpline *tool = nullptr;
@@ -194,7 +211,6 @@ auto VToolCutSpline::Create(VToolCutInitData &initData) -> VToolCutSpline *
         initData.scene->addItem(tool);
         InitToolConnections(initData.scene, tool);
         VAbstractPattern::AddTool(initData.id, tool);
-        initData.doc->IncrementReferens(spl->getIdTool());
     }
     // Very important to delete it. Only this tool need this special variable.
     initData.data->RemoveVariable(currentLength);
@@ -225,25 +241,27 @@ void VToolCutSpline::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quin
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolCutSpline::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                                QList<quint32> &newDependencies)
+void VToolCutSpline::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogCutSpline> dialogTool = qobject_cast<DialogCutSpline *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
-    AddDependence(oldDependencies, baseCurveId);
-    AddDependence(newDependencies, dialogTool->getSplineId());
-
     doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrSpline, QString().setNum(dialogTool->getSplineId()));
-    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrAlias1, dialogTool->GetAliasSuffix1(),
-                                         [](const QString &suffix) noexcept { return suffix.isEmpty(); });
-    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrAlias2, dialogTool->GetAliasSuffix2(),
-                                         [](const QString &suffix) noexcept { return suffix.isEmpty(); });
-    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
+    doc->SetAttributeOrRemoveIf<QString>(domElement,
+                                         AttrAlias1,
+                                         dialogTool->GetAliasSuffix1(),
+                                         [](const QString &suffix) noexcept -> bool { return suffix.isEmpty(); });
+    doc->SetAttributeOrRemoveIf<QString>(domElement,
+                                         AttrAlias2,
+                                         dialogTool->GetAliasSuffix2(),
+                                         [](const QString &suffix) noexcept -> bool { return suffix.isEmpty(); });
+    doc->SetAttributeOrRemoveIf<QString>(domElement,
+                                         AttrNotes,
+                                         dialogTool->GetNotes(),
+                                         [](const QString &notes) noexcept -> bool { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

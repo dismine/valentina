@@ -270,8 +270,10 @@ VDomDocument::VDomDocument(QObject *parent)
     m_elementIdCache(),
     m_watcher(new QFutureWatcher<QHash<quint32, QDomElement>>(this))
 {
-    connect(qApp, &QCoreApplication::aboutToQuit, m_watcher,
-            [this]()
+    connect(qApp,
+            &QCoreApplication::aboutToQuit,
+            m_watcher,
+            [this]() -> void
             {
                 m_watcher->cancel();
                 m_watcher->waitForFinished();
@@ -530,29 +532,6 @@ auto VDomDocument::GetParametrBool(const QDomElement &domElement, const QString 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VDomDocument::GetParametrUsage(const QDomElement &domElement, const QString &name) -> NodeUsage
-{
-    if (const bool value = GetParametrBool(domElement, name, trueStr); value)
-    {
-        return NodeUsage::InUse;
-    }
-    return NodeUsage::NotInUse;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VDomDocument::SetParametrUsage(QDomElement &domElement, const QString &name, const NodeUsage &value)
-{
-    if (value == NodeUsage::InUse)
-    {
-        domElement.setAttribute(name, trueStr);
-    }
-    else
-    {
-        domElement.setAttribute(name, falseStr);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Returns the string value of the given attribute. RENAME: see above
  *
@@ -704,15 +683,9 @@ void VDomDocument::RefreshElementIdCache()
 {
     if (m_watcher->isFinished())
     {
-        m_watcher->setFuture(QtConcurrent::run([this]() { return RefreshCache(documentElement()); }));
+        m_watcher->setFuture(
+            QtConcurrent::run([this]() -> QHash<quint32, QDomElement> { return RefreshCache(documentElement()); }));
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VDomDocument::Compare(const QDomElement &element1, const QDomElement &element2) -> bool
-{
-    QFuture<bool> const lessThen2 = QtConcurrent::run(LessThen, element2, element1);
-    return !LessThen(element1, element2) && !lessThen2.result();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

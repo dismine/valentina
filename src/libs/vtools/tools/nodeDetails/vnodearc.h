@@ -36,8 +36,6 @@
 #include <QString>
 #include <QtGlobal>
 
-#include "../ifc/xml/vabstractpattern.h"
-#include "../vmisc/def.h"
 #include "vabstractnode.h"
 
 /**
@@ -57,8 +55,6 @@ public slots:
     virtual void AllowSelecting(bool enabled) override;
 protected:
     virtual void AddToFile() override;
-    virtual void ShowNode() override {}
-    virtual void HideNode() override {}
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VNodeArc) // NOLINT

@@ -324,7 +324,7 @@ void VPGraphicsPiece::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     {
         QMenu *moveMenu = menu.addMenu(tr("Move to"));
 
-        for (const auto &sheet : qAsConst(sheets))
+        for (const auto &sheet : std::as_const(sheets))
         {
             if (not sheet.isNull())
             {
@@ -525,7 +525,7 @@ void VPGraphicsPiece::InitPieceLabelOutlineFont(const QVector<QPointF> &labelSha
                 }
 
                 int w = 0;
-                for (auto c : qAsConst(tl.m_qsText))
+                for (auto c : std::as_const(tl.m_qsText))
                 {
                     path.addPath(corrector.DrawChar(w, static_cast<qreal>(fm.ascent()), c));
                     w += fm.horizontalAdvance(c);

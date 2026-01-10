@@ -40,7 +40,6 @@
 #include <QRectF>
 #include <QSharedPointer>
 #include <QUndoStack>
-#include <new>
 
 #include "../../../../undocommands/label/movelabel.h"
 #include "../../../../undocommands/label/showlabel.h"
@@ -48,6 +47,7 @@
 #include "../../vdrawtool.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 #include "../vabstractpoint.h"
 #include "../vgeometry/vabstractcubicbezier.h"
 #include "../vgeometry/vabstractcubicbezierpath.h"
@@ -104,13 +104,6 @@ auto VToolSinglePoint::name() const -> QString
 void VToolSinglePoint::setName(const QString &name)
 {
     SetPointName(m_id, name);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolSinglePoint::SetEnabled(bool enabled)
-{
-    setEnabled(enabled);
-    m_lineName->setEnabled(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -197,11 +190,12 @@ void VToolSinglePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSinglePoint::Disable(bool disable, const QString &namePP)
+void VToolSinglePoint::Enable()
 {
-    const bool enabled = !CorrectDisable(disable, namePP);
-    SetEnabled(enabled);
+    const bool enabled = m_indexActivePatternBlock == doc->PatternBlockMapper()->GetActiveId();
+    setEnabled(enabled);
     m_namePoint->SetEnabledState(enabled);
+    m_lineName->setEnabled(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -409,7 +403,10 @@ auto VToolSinglePoint::InitSegments(GOType curveType, qreal segLength, const VPo
             QSharedPointer<VAbstractBezier> spline2;
 
             const auto spl = data->GeometricObject<VAbstractCubicBezier>(curveId);
-            QPointF spl1p2, spl1p3, spl2p2, spl2p3;
+            QPointF spl1p2;
+            QPointF spl1p3;
+            QPointF spl2p2;
+            QPointF spl2p3;
             if (not VFuzzyComparePossibleNulls(segLength, -1))
             {
                 spl->CutSpline(segLength, spl1p2, spl1p3, spl2p2, spl2p3, p->name());
@@ -466,12 +463,16 @@ auto VToolSinglePoint::InitSegments(GOType curveType, qreal segLength, const VPo
             VSplinePath *splPath2 = nullptr;
             if (not VFuzzyComparePossibleNulls(segLength, -1))
             {
-                VPointF *pC = VToolCutSplinePath::CutSplinePath(segLength, splPath, p->name(), &splPath1, &splPath2);
+                VPointF const *pC = VToolCutSplinePath::CutSplinePath(segLength,
+                                                                      splPath,
+                                                                      p->name(),
+                                                                      &splPath1,
+                                                                      &splPath2);
                 delete pC;
             }
             else
             {
-                VPointF *pC = VToolCutSplinePath::CutSplinePath(0, splPath, p->name(), &splPath1, &splPath2);
+                VPointF const *pC = VToolCutSplinePath::CutSplinePath(0, splPath, p->name(), &splPath1, &splPath2);
                 delete pC;
             }
 

@@ -28,25 +28,31 @@
 
 #include "savepiecepathoptions.h"
 
+#include <QDebug>
 #include <QDomElement>
 #include <QUndoCommand>
-#include <QDebug>
 
 #include "../ifc/xml/vabstractpattern.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../tools/nodeDetails/vtoolpiecepath.h"
 #include "../tools/vtoolseamallowance.h"
-#include "../vpatterndb/vpiecenode.h"
 #include "../vmisc/compatibility.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vpiecenode.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-SavePiecePathOptions::SavePiecePathOptions(quint32 pieceId, const VPiecePath &oldPath, const VPiecePath &newPath,
-                                           VAbstractPattern *doc, VContainer *data, quint32 id,
+SavePiecePathOptions::SavePiecePathOptions(quint32 pieceId,
+                                           VPiecePath oldPath,
+                                           VPiecePath newPath,
+                                           VAbstractPattern *doc,
+                                           VContainer *data,
+                                           quint32 id,
                                            QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent),
-      m_oldPath(oldPath),
-      m_newPath(newPath),
-      m_data(data),
-      m_pieceId(pieceId)
+  : VUndoCommand(doc, parent),
+    m_oldPath(std::move(oldPath)),
+    m_newPath(std::move(newPath)),
+    m_data(data),
+    m_pieceId(pieceId)
 {
     setText(tr("save path options"));
     nodeId = id;
@@ -58,29 +64,45 @@ void SavePiecePathOptions::undo()
     qCDebug(vUndo, "Undo.");
 
     QDomElement domElement = doc->FindElementById(nodeId, VAbstractPattern::TagPath);
-    if (domElement.isElement())
-    {
-        VToolPiecePath::AddAttributes(doc, domElement, nodeId, m_oldPath);
-        VDomDocument::RemoveAllChildren(domElement); //Very important to clear before rewrite
-        VToolPiecePath::AddNodes(doc, domElement, m_oldPath);
-
-        DecrementReferences(m_newPath.MissingNodes(m_oldPath));
-        IncrementReferences(m_oldPath.MissingNodes(m_newPath));
-
-        SCASSERT(m_data);
-        m_data->UpdatePiecePath(nodeId, m_oldPath);
-
-        if (m_pieceId != NULL_ID)
-        {
-            if (auto *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(m_pieceId)))
-            {
-                tool->RefreshGeometry();
-            }
-        }
-    }
-    else
+    if (!domElement.isElement())
     {
         qCDebug(vUndo, "Can't find path with id = %u.", nodeId);
+        return;
+    }
+
+    VToolPiecePath::AddAttributes(doc, domElement, nodeId, m_oldPath);
+    VDomDocument::RemoveAllChildren(domElement); //Very important to clear before rewrite
+    VToolPiecePath::AddNodes(doc, domElement, m_oldPath);
+
+    VPatternGraph *patternGraph = doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->RemoveIncomingEdges(nodeId);
+
+    DisablePieceNodes(m_newPath);
+    EnablePieceNodes(m_oldPath);
+
+    SCASSERT(m_data);
+
+    if (m_newPath.GetType() == PiecePathType::InternalPath)
+    {
+        const auto varData = m_data->DataDependencyVariables();
+        doc->FindFormulaDependencies(m_oldPath.GetVisibilityTrigger(), nodeId, varData);
+    }
+
+    for (int i = 0; i < m_oldPath.CountNodes(); ++i)
+    {
+        patternGraph->AddEdge(m_oldPath.at(i).GetId(), nodeId);
+    }
+
+    m_data->UpdatePiecePath(nodeId, m_oldPath);
+
+    if (m_pieceId != NULL_ID)
+    {
+        if (auto *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(m_pieceId)))
+        {
+            tool->RefreshGeometry();
+        }
     }
 }
 
@@ -90,29 +112,45 @@ void SavePiecePathOptions::redo()
     qCDebug(vUndo, "Redo.");
 
     QDomElement domElement = doc->FindElementById(nodeId, VAbstractPattern::TagPath);
-    if (domElement.isElement())
-    {
-        VToolPiecePath::AddAttributes(doc, domElement, nodeId, m_newPath);
-        VDomDocument::RemoveAllChildren(domElement); //Very important to clear before rewrite
-        VToolPiecePath::AddNodes(doc, domElement, m_newPath);
-
-        DecrementReferences(m_oldPath.MissingNodes(m_newPath));
-        IncrementReferences(m_newPath.MissingNodes(m_oldPath));
-
-        SCASSERT(m_data);
-        m_data->UpdatePiecePath(nodeId, m_newPath);
-
-        if (m_pieceId != NULL_ID)
-        {
-            if (auto *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(m_pieceId)))
-            {
-                tool->RefreshGeometry();
-            }
-        }
-    }
-    else
+    if (!domElement.isElement())
     {
         qCDebug(vUndo, "Can't find path with id = %u.", nodeId);
+        return;
+    }
+
+    VToolPiecePath::AddAttributes(doc, domElement, nodeId, m_newPath);
+    VDomDocument::RemoveAllChildren(domElement); //Very important to clear before rewrite
+    VToolPiecePath::AddNodes(doc, domElement, m_newPath);
+
+    VPatternGraph *patternGraph = doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->RemoveIncomingEdges(nodeId);
+
+    DisablePieceNodes(m_oldPath);
+    EnablePieceNodes(m_newPath);
+
+    SCASSERT(m_data);
+
+    if (m_newPath.GetType() == PiecePathType::InternalPath)
+    {
+        const auto varData = m_data->DataDependencyVariables();
+        doc->FindFormulaDependencies(m_newPath.GetVisibilityTrigger(), nodeId, varData);
+    }
+
+    for (int i = 0; i < m_newPath.CountNodes(); ++i)
+    {
+        patternGraph->AddEdge(m_newPath.at(i).GetId(), nodeId);
+    }
+
+    m_data->UpdatePiecePath(nodeId, m_newPath);
+
+    if (m_pieceId != NULL_ID)
+    {
+        if (auto *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(m_pieceId)))
+        {
+            tool->RefreshGeometry();
+        }
     }
 }
 
@@ -126,33 +164,31 @@ auto SavePiecePathOptions::mergeWith(const QUndoCommand *command) -> bool
     {
         return false;
     }
-    else
+
+    const VPiecePath candidate = saveCommand->NewPath();
+
+    auto currentSet = ConvertToSet(m_newPath.Dependencies());
+    auto candidateSet = ConvertToSet(candidate.Dependencies());
+
+    if (currentSet != candidateSet)
     {
-        const VPiecePath candidate = saveCommand->NewPath();
+        return false;
+    }
 
-        auto currentSet = ConvertToSet(m_newPath.Dependencies());
-        auto candidateSet = ConvertToSet(candidate.Dependencies());
+    const QVector<VPieceNode> nodes = m_newPath.GetNodes();
+    const QVector<VPieceNode> candidateNodes = candidate.GetNodes();
 
-        if (currentSet != candidateSet)
+    if (nodes.size() == candidateNodes.size())
+    {
+        return false;
+    }
+
+    for (int i = 0; i < nodes.size(); ++i)
+    {
+        if (nodes.at(i).IsExcluded() != candidateNodes.at(i).IsExcluded()
+            || nodes.at(i).IsCheckUniqueness() != candidateNodes.at(i).IsCheckUniqueness())
         {
             return false;
-        }
-
-        const QVector<VPieceNode> nodes = m_newPath.GetNodes();
-        const QVector<VPieceNode> candidateNodes = candidate.GetNodes();
-
-        if (nodes.size() == candidateNodes.size())
-        {
-            return false;
-        }
-
-        for (int i = 0; i < nodes.size(); ++i)
-        {
-            if (nodes.at(i).IsExcluded() != candidateNodes.at(i).IsExcluded()
-                    || nodes.at(i).IsCheckUniqueness() != candidateNodes.at(i).IsCheckUniqueness())
-            {
-                return false;
-            }
         }
     }
 

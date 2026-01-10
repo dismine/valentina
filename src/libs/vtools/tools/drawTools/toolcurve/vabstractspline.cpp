@@ -40,8 +40,8 @@
 
 #include "../../../visualization/line/visline.h"
 #include "../../vabstracttool.h"
-#include "../vmisc/exception/vexception.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 #include "../qmuparser/qmudef.h"
 #include "../qmuparser/qmutokenparser.h"
 #include "../vdrawtool.h"
@@ -49,6 +49,7 @@
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vmisc/theme/vscenestylesheet.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/global.h"
@@ -158,10 +159,10 @@ void VAbstractSpline::FullUpdateFromFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractSpline::Disable(bool disable, const QString &namePP)
+void VAbstractSpline::Enable()
 {
-    const bool enabled = !CorrectDisable(disable, namePP);
-    this->setEnabled(enabled);
+    const bool enabled = m_indexActivePatternBlock == doc->PatternBlockMapper()->GetActiveId();
+    setEnabled(enabled);
     emit setEnabledPoint(enabled);
 }
 
@@ -199,17 +200,6 @@ auto VAbstractSpline::MakeToolTip() const -> QString
             .arg(VAbstractValApplication::VApp()->fromPixel(curve->GetLength()))
             .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), tr("Label"), curve->ObjectName());
     return toolTip;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ShowTool highlight tool.
- * @param id object id in container
- * @param enable enable or disable highlight.
- */
-void VAbstractSpline::ShowTool(quint32 id, bool enable)
-{
-    ShowItem(this, id, enable);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

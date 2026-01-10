@@ -49,11 +49,7 @@ void VAbstractFlipping::CreateDestination(VAbstractOperationInitData &initData, 
 {
     if (initData.typeCreation == Source::FromGui)
     {
-        initData.destination.clear(); // Try to avoid mistake, value must be empty
-
-        initData.id = initData.data->getNextId(); // Just reserve id for tool
-
-        for (const auto &object : qAsConst(initData.source))
+        for (const auto &object : std::as_const(initData.source))
         {
             const QSharedPointer<VGObject> obj = initData.data->GetGObject(object.id);
 
@@ -156,10 +152,6 @@ void VAbstractFlipping::CreateDestination(VAbstractOperationInitData &initData, 
             }
 
             QT_WARNING_POP
-        }
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
         }
     }
 }

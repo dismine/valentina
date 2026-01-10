@@ -30,8 +30,8 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 ResetBackgroundImage::ResetBackgroundImage(QUuid id, VAbstractPattern *doc, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent),
-      m_id(id)
+  : VUndoCommand(doc, parent),
+    m_id(id)
 {
     setText(tr("reset background image transformation"));
 

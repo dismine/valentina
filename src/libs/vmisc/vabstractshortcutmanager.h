@@ -66,7 +66,6 @@ enum class VShortcutAction
     PreviusPatternPiece,
     InteractiveTools,
     TableOfVariables,
-    PatternHistory,
     Quit,
     LastTool,
     CurveDetails,

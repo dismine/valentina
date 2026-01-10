@@ -38,14 +38,13 @@ class SavePieceOptions : public VUndoCommand
 {
     Q_OBJECT // NOLINT
 public:
-    SavePieceOptions(const VPiece &oldDet, const VPiece &newDet, VAbstractPattern *doc, quint32 id,
-                     QUndoCommand *parent = nullptr);
-    virtual ~SavePieceOptions() = default;
+    SavePieceOptions(VPiece oldDet, VPiece newDet, VAbstractPattern *doc, quint32 id, QUndoCommand *parent = nullptr);
+    ~SavePieceOptions() override = default;
 
-    virtual void undo() override;
-    virtual void redo() override;
-    virtual auto mergeWith(const QUndoCommand *command) -> bool override;
-    virtual auto id() const -> int override;
+    void undo() override;
+    void redo() override;
+    auto mergeWith(const QUndoCommand *command) -> bool override;
+    auto id() const -> int override;
     auto DetId() const -> quint32;
     auto NewDet() const -> VPiece;
 signals:
@@ -54,8 +53,8 @@ private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(SavePieceOptions) // NOLINT
 
-    const VPiece    m_oldDet;
-    VPiece          m_newDet;
+    const VPiece m_oldDet;
+    VPiece m_newDet;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

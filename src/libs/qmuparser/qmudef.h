@@ -39,11 +39,6 @@
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wattributes")
 
-// Header <ciso646> is removed in C++20.
-#if defined(Q_CC_MSVC) && __cplusplus <= 201703L
-#include <ciso646> // and, not, or
-#endif
-
 class QLocale;
 class QChar;
 class QString;

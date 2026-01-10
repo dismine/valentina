@@ -43,7 +43,6 @@
 #include <QRectF>
 #include <QSharedPointer>
 #include <QUndoStack>
-#include <new>
 
 #include "../../../../dialogs/tools/dialogsinglepoint.h"
 #include "../../../../dialogs/tools/dialogtool.h"
@@ -52,8 +51,9 @@
 #include "../../../../undocommands/movespoint.h"
 #include "../../../vabstracttool.h"
 #include "../../../vdatatool.h"
-#include "../../vdrawtool.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/exception/vexception.h"
@@ -62,6 +62,7 @@
 #include "../vwidgets/vgraphicssimpletextitem.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vmaingraphicsview.h"
+#include "def.h"
 #include "vtoolsinglepoint.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
@@ -80,7 +81,7 @@ const QString VToolBasePoint::ToolType = QStringLiteral("single");
  */
 VToolBasePoint::VToolBasePoint(const VToolBasePointInitData &initData, QGraphicsItem *parent)
   : VToolSinglePoint(initData.doc, initData.data, initData.id, initData.notes, parent),
-    namePP(initData.nameActivPP)
+    m_indexPatternBlock(initData.doc->PatternBlockMapper()->GetActiveId())
 {
     SetColorRole(VColorRole::BasePointColor);
     setFlag(QGraphicsItem::ItemIsMovable, true);
@@ -116,10 +117,16 @@ auto VToolBasePoint::Create(VToolBasePointInitData initData) -> VToolBasePoint *
     else
     {
         initData.data->UpdateGObject(initData.id, point);
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     if (initData.parse == Document::FullParse)
@@ -141,12 +148,46 @@ void VToolBasePoint::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VToolBasePoint::IsRemovable() const -> RemoveStatus
+{
+    if (doc->CountPatternBlockTags() <= 1)
+    {
+        return RemoveStatus::Locked; // One pattern block
+    }
+
+    if (!doc->IsPatternGraphComplete())
+    {
+        return RemoveStatus::Pending; // Data not ready yet
+    }
+
+    VPatternGraph const *patternGraph = doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    auto Filter = [this](const auto &node) -> auto
+    {
+        return node.indexPatternBlock != m_indexPatternBlock && node.type != VNodeType::MODELING_TOOL
+               && node.type != VNodeType::MODELING_OBJECT;
+    };
+
+    auto const dependecies = patternGraph->TryGetDependentNodes(m_id, 1000, Filter);
+
+    if (!dependecies)
+    {
+        return RemoveStatus::Pending; // Lock timeout
+    }
+
+    return dependecies->isEmpty() ? RemoveStatus::Removable : RemoveStatus::Blocked;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief AddToFile add tag with informations about tool into file.
  */
 void VToolBasePoint::AddToFile()
 {
-    Q_ASSERT_X(not namePP.isEmpty(), Q_FUNC_INFO, "name pattern piece is empty");
+    VPatternBlockMapper *blocks = doc->PatternBlockMapper();
+    const QString blockName = blocks->FindName(m_indexPatternBlock);
+    Q_ASSERT_X(not blockName.isEmpty(), Q_FUNC_INFO, "name pattern block name is empty");
 
     QDomElement sPoint = doc->createElement(getTagName());
 
@@ -156,7 +197,12 @@ void VToolBasePoint::AddToFile()
 
     // Create pattern piece structure
     QDomElement patternPiece = doc->createElement(VAbstractPattern::TagDraw);
-    doc->SetAttribute(patternPiece, AttrName, namePP);
+    doc->SetAttribute(patternPiece, AttrName, blockName);
+
+    if (blocks->GetElementById(m_indexPatternBlock).isNull())
+    {
+        blocks->SetElementById(m_indexPatternBlock, patternPiece);
+    }
 
     QDomElement calcElement = doc->createElement(VAbstractPattern::TagCalculation);
     calcElement.appendChild(sPoint);
@@ -165,7 +211,7 @@ void VToolBasePoint::AddToFile()
     patternPiece.appendChild(doc->createElement(VAbstractPattern::TagModeling));
     patternPiece.appendChild(doc->createElement(VAbstractPattern::TagDetails));
 
-    auto *addPP = new AddPatternPiece(patternPiece, doc, namePP);
+    auto *addPP = new AddPatternPiece(patternPiece, doc, m_indexPatternBlock);
     connect(addPP, &AddPatternPiece::ClearScene, doc, &VAbstractPattern::ClearScene);
     connect(addPP, &AddPatternPiece::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
     VAbstractApplication::VApp()->getUndoStack()->push(addPP);
@@ -231,7 +277,7 @@ void VToolBasePoint::SetBasePointPos(const QPointF &pos)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolBasePoint::DeleteToolWithConfirm(bool ask)
 {
-    if (doc->CountPP() <= 1)
+    if (IsRemovable() != RemoveStatus::Removable)
     {
         return;
     }
@@ -249,36 +295,33 @@ void VToolBasePoint::DeleteToolWithConfirm(bool ask)
     }
 
     qCDebug(vTool, "Begin deleting.");
-    auto *deletePP = new DeletePatternPiece(doc, nameActivDraw);
+    auto *deletePP = new DeletePatternPiece(doc, m_indexPatternBlock);
     connect(deletePP, &DeletePatternPiece::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
     VAbstractApplication::VApp()->getUndoStack()->push(deletePP);
 
     // Throw exception, this will help prevent case when we forget to immediately quit function.
-    VExceptionToolWasDeleted const e("Tool was used after deleting.");
-    throw e;
+    throw VExceptionToolWasDeleted(QStringLiteral("Tool was used after deleting."));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolBasePoint::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                                QList<quint32> &newDependencies)
+void VToolBasePoint::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogSinglePoint> dialogTool = qobject_cast<DialogSinglePoint *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
-
-    Q_UNUSED(oldDependencies)
-    Q_UNUSED(newDependencies)
 
     const QPointF p = dialogTool->GetPoint();
     const QString name = dialogTool->GetPointName();
     doc->SetAttribute(domElement, AttrName, name);
     doc->SetAttribute(domElement, AttrX, QString().setNum(VAbstractValApplication::VApp()->fromPixel(p.x())));
     doc->SetAttribute(domElement, AttrY, QString().setNum(VAbstractValApplication::VApp()->fromPixel(p.y())));
-    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
+    doc->SetAttributeOrRemoveIf<QString>(domElement,
+                                         AttrNotes,
+                                         dialogTool->GetNotes(),
+                                         [](const QString &notes) noexcept -> bool { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -350,16 +393,7 @@ void VToolBasePoint::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quin
 
     try
     {
-        if (doc->CountPP() > 1)
-        {
-            qCDebug(vTool, "PP count > 1");
-            ContextMenu<DialogSinglePoint>(event, id, RemoveOption::Enable, Referens::Ignore);
-        }
-        else
-        {
-            qCDebug(vTool, "PP count = 1");
-            ContextMenu<DialogSinglePoint>(event, id, RemoveOption::Disable);
-        }
+        ContextMenu<DialogSinglePoint>(event, id);
     }
     catch (const VExceptionToolWasDeleted &e)
     {

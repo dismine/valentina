@@ -47,17 +47,6 @@ auto VAbstractPoint::getTagName() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ShowTool  highlight tool.
- * @param id object id in container.
- * @param enable enable or disable highlight.
- */
-void VAbstractPoint::ShowTool(quint32 id, bool enable)
-{
-    ShowItem(this, id, enable);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VAbstractPoint::DeleteFromLabel()
 {
     try

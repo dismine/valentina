@@ -45,8 +45,6 @@ template <class T> class QSharedPointer;
 
 struct VToolTriangleInitData : VToolSinglePointInitData
 {
-    VToolTriangleInitData() = default;
-
     quint32 axisP1Id{NULL_ID};      // NOLINT(misc-non-private-member-variables-in-classes)
     quint32 axisP2Id{NULL_ID};      // NOLINT(misc-non-private-member-variables-in-classes)
     quint32 firstPointId{NULL_ID};  // NOLINT(misc-non-private-member-variables-in-classes)
@@ -96,8 +94,7 @@ public:
     void ShowVisualization(bool show) override;
 
 protected:
-    void RemoveReferens() override;
-    void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies) override;
+    void SaveDialog(QDomElement &domElement) override;
     void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     void ReadToolAttributes(const QDomElement &domElement) override;
     void SetVisualization() override;

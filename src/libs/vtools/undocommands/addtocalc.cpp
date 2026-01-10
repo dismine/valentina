@@ -31,6 +31,7 @@
 #include <QDomNode>
 
 #include "../ifc/xml/vabstractpattern.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 #include "../vmisc/customevents.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vwidgets/vmaingraphicsview.h"
@@ -39,8 +40,7 @@
 //---------------------------------------------------------------------------------------------------------------------
 AddToCalc::AddToCalc(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent)
   : VUndoCommand(xml, doc, parent),
-    nameActivDraw(doc->GetNameActivPP()),
-    cursor(doc->getCursor())
+    m_indexActiveBlock(doc->PatternBlockMapper()->GetActiveId())
 {
     setText(tr("add object"));
     nodeId = VAbstractPattern::GetParametrId(xml);
@@ -51,7 +51,8 @@ void AddToCalc::undo()
 {
     qCDebug(vUndo, "Undo.");
 
-    doc->ChangeActivPP(nameActivDraw); // Without this user will not see this change
+    // Without this user will not see this change
+    doc->ShowPatternBlock(doc->PatternBlockMapper()->FindName(m_indexActiveBlock));
 
     QDomElement calcElement;
     if (doc->GetActivNodeElement(VAbstractPattern::TagCalculation, calcElement))
@@ -81,7 +82,8 @@ void AddToCalc::undo()
                                     VAbstractValApplication::VApp()->getSceneView());
     if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
     {
-        emit doc->SetCurrentPP(nameActivDraw); // Return current pattern piece after undo
+        // Return current pattern piece after undo
+        emit doc->ShowPatternBlock(doc->PatternBlockMapper()->FindName(m_indexActiveBlock));
     }
 }
 
@@ -90,29 +92,13 @@ void AddToCalc::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    doc->ChangeActivPP(nameActivDraw); // Without this user will not see this change
-    doc->setCursor(cursor);
+    // Without this user will not see this change
+    doc->ShowPatternBlock(doc->PatternBlockMapper()->FindName(m_indexActiveBlock));
 
     QDomElement calcElement;
     if (doc->GetActivNodeElement(VAbstractPattern::TagCalculation, calcElement))
     {
-        if (cursor == NULL_ID)
-        {
-            calcElement.appendChild(xml);
-        }
-        else
-        {
-            QDomElement const refElement = doc->FindElementById(cursor);
-            if (refElement.isElement())
-            {
-                calcElement.insertAfter(xml, refElement);
-            }
-            else
-            {
-                qCDebug(vUndo, "Can not find the element after which you want to insert.");
-                return;
-            }
-        }
+        calcElement.appendChild(xml);
     }
     else
     {
@@ -132,7 +118,8 @@ void AddToCalc::RedoFullParsing()
         emit NeedFullParsing();
         if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
         {
-            emit doc->SetCurrentPP(nameActivDraw); // Return current pattern piece after undo
+            // Return current pattern piece after undo
+            emit doc->ShowPatternBlock(doc->PatternBlockMapper()->FindName(m_indexActiveBlock));
         }
     }
     else

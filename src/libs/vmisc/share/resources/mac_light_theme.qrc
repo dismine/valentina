@@ -689,9 +689,9 @@
         <!-- <file>icons/La-Sierra-Light/actions/22x22/object-flip-horizontal.svg</file> -->
         <!-- <file>icons/La-Sierra-Light/actions/22x22/object-flip-vertical.svg</file> -->
         <!-- <file>icons/La-Sierra-Light/actions/22x22/object-group.svg</file> -->
-        <!-- <file>icons/La-Sierra-Light/actions/22x22/object-order-back.svg</file> -->
-        <!-- <file>icons/La-Sierra-Light/actions/22x22/object-order-lower.svg</file> -->
-        <!-- <file>icons/La-Sierra-Light/actions/22x22/object-order-raise.svg</file> -->
+        <file>icons/La-Sierra-Light/actions/22x22/object-order-back.svg</file>
+        <file>icons/La-Sierra-Light/actions/22x22/object-order-lower.svg</file>
+        <file>icons/La-Sierra-Light/actions/22x22/object-order-raise.svg</file>
         <file>icons/La-Sierra-Light/actions/22x22/object-rotate-right.svg</file>
         <!-- <file>icons/La-Sierra-Light/actions/22x22/object-ungroup.svg</file> -->
         <!-- <file>icons/La-Sierra-Light/actions/22x22/object-visible.svg</file> -->
@@ -1444,7 +1444,7 @@
         <!-- <file>icons/La-Sierra-Light/actions/22x22/object-locked.svg</file> -->
         <!-- <file>icons/La-Sierra-Light/actions/22x22/object-order-back-calligra.svg</file> -->
         <!-- <file>icons/La-Sierra-Light/actions/22x22/object-order-front-calligra.svg</file> -->
-        <!-- <file>icons/La-Sierra-Light/actions/22x22/object-order-front.svg</file> -->
+        <file>icons/La-Sierra-Light/actions/22x22/object-order-front.svg</file>
         <!-- <file>icons/La-Sierra-Light/actions/22x22/object-order-lower-calligra.svg</file> -->
         <!-- <file>icons/La-Sierra-Light/actions/22x22/object-order-raise-calligra.svg</file> -->
         <file>icons/La-Sierra-Light/actions/22x22/object-rotate-left.svg</file>
@@ -2197,9 +2197,9 @@
         <!-- <file>icons/La-Sierra-Light/actions/22x22@2x/object-flip-horizontal.svg</file> -->
         <!-- <file>icons/La-Sierra-Light/actions/22x22@2x/object-flip-vertical.svg</file> -->
         <!-- <file>icons/La-Sierra-Light/actions/22x22@2x/object-group.svg</file> -->
-        <!-- <file>icons/La-Sierra-Light/actions/22x22@2x/object-order-back.svg</file> -->
-        <!-- <file>icons/La-Sierra-Light/actions/22x22@2x/object-order-lower.svg</file> -->
-        <!-- <file>icons/La-Sierra-Light/actions/22x22@2x/object-order-raise.svg</file> -->
+        <file>icons/La-Sierra-Light/actions/22x22@2x/object-order-back.svg</file>
+        <file>icons/La-Sierra-Light/actions/22x22@2x/object-order-lower.svg</file>
+        <file>icons/La-Sierra-Light/actions/22x22@2x/object-order-raise.svg</file>
         <file>icons/La-Sierra-Light/actions/22x22@2x/object-rotate-right.svg</file>
         <!-- <file>icons/La-Sierra-Light/actions/22x22@2x/object-ungroup.svg</file> -->
         <!-- <file>icons/La-Sierra-Light/actions/22x22@2x/object-visible.svg</file> -->
@@ -2952,7 +2952,7 @@
         <!-- <file>icons/La-Sierra-Light/actions/22x22@2x/object-locked.svg</file> -->
         <!-- <file>icons/La-Sierra-Light/actions/22x22@2x/object-order-back-calligra.svg</file> -->
         <!-- <file>icons/La-Sierra-Light/actions/22x22@2x/object-order-front-calligra.svg</file> -->
-        <!-- <file>icons/La-Sierra-Light/actions/22x22@2x/object-order-front.svg</file> -->
+        <file>icons/La-Sierra-Light/actions/22x22@2x/object-order-front.svg</file>
         <!-- <file>icons/La-Sierra-Light/actions/22x22@2x/object-order-lower-calligra.svg</file> -->
         <!-- <file>icons/La-Sierra-Light/actions/22x22@2x/object-order-raise-calligra.svg</file> -->
         <file>icons/La-Sierra-Light/actions/22x22@2x/object-rotate-left.svg</file>

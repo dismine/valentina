@@ -1508,7 +1508,7 @@ void DialogIncrements::ImportCSVIncrements(bool incrementMode,
     QTableWidget *table = incrementMode ? ui->tableWidgetIncrement : ui->tableWidgetPC;
     qint32 const currentRow = table->rowCount();
 
-    for (const auto &icr : qAsConst(increments))
+    for (const auto &icr : std::as_const(increments))
     {
         incrementMode ? m_patternDoc->AddEmptyIncrement(icr.name, IncrementType::Increment)
                       : m_patternDoc->AddEmptyPreviewCalculation(icr.name, IncrementType::Increment);

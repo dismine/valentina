@@ -749,7 +749,7 @@ void VHPGLEngine::PlotLabelOutlineFont(QTextStream &out, const VLayoutPiece &det
         if (m_singleStrokeOutlineFont)
         {
             int w = 0;
-            for (auto c : qAsConst(qsText))
+            for (auto c : std::as_const(qsText))
             {
                 path.addPath(corrector.DrawChar(w, static_cast<qreal>(fm.ascent()), c));
                 w += fm.horizontalAdvance(c);

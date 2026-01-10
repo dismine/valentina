@@ -80,6 +80,8 @@ public:
 
     auto getTagName() const -> QString override;
 
+    auto IsRemovable() const -> RemoveStatus override;
+
     auto Suffix() const -> QString;
     void SetSuffix(const QString &suffix);
 
@@ -126,7 +128,7 @@ public slots:
     void AllowElArcSelecting(bool enabled);
 
     void ToolSelectionType(const SelectionType &type) override;
-    void Disable(bool disable, const QString &namePP) override;
+    void Enable() override;
     void ObjectSelected(bool selected, quint32 objId);
     void DeleteFromLabel();
     void LabelChangePosition(const QPointF &pos, quint32 labelId);
@@ -147,8 +149,7 @@ protected:
 
     void AddToFile() override;
     void ChangeLabelVisibility(quint32 id, bool visible) override;
-    void ApplyToolOptions(const QList<quint32> &oldDependencies, const QList<quint32> &newDependencies,
-                          const QDomElement &oldDomElement, const QDomElement &newDomElement) override;
+    void ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement) override;
     void PerformDelete() override;
     void ReadToolAttributes(const QDomElement &domElement) override;
     void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;

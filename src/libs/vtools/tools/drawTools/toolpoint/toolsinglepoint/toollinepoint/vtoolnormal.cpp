@@ -34,20 +34,21 @@
 
 #include "../../../../../dialogs/tools/dialognormal.h"
 #include "../../../../../dialogs/tools/dialogtool.h"
-#include "../../../../../visualization/visualization.h"
 #include "../../../../../visualization/line/vistoolnormal.h"
-#include "../vmisc/exception/vexception.h"
+#include "../../../../../visualization/visualization.h"
+#include "../../../../vabstracttool.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "../../../../vabstracttool.h"
-#include "../../../vdrawtool.h"
 #include "vtoollinepoint.h"
+#include "xml/vpatterngraph.h"
 
 template <class T> class QSharedPointer;
 
@@ -147,16 +148,28 @@ auto VToolNormal::Create(VToolNormalInitData &initData) -> VToolNormal *
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(p);
-        initData.data->AddLine(initData.firstPointId, initData.id);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, p);
-        initData.data->AddLine(initData.firstPointId, initData.id);
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
+
+    const auto varData = initData.data->DataDependencyVariables();
+    initData.doc->FindFormulaDependencies(initData.formula, initData.id, varData);
+
+    initData.data->AddLine(initData.firstPointId, initData.id);
+
+    patternGraph->AddEdge(initData.firstPointId, initData.id);
+    patternGraph->AddEdge(initData.secondPointId, initData.id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     if (initData.parse == Document::FullParse)
@@ -166,8 +179,6 @@ auto VToolNormal::Create(VToolNormalInitData &initData) -> VToolNormal *
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
-        initData.doc->IncrementReferens(firstPoint->getIdTool());
-        initData.doc->IncrementReferens(secondPoint->getIdTool());
         return point;
     }
     return nullptr;
@@ -199,30 +210,13 @@ auto VToolNormal::SecondPointName() const -> QString
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief RemoveReferens decrement value of reference.
- */
-void VToolNormal::RemoveReferens()
-{
-    const auto secondPoint = VAbstractTool::data.GetGObject(secondPointId);
-    doc->DecrementReferens(secondPoint->getIdTool());
-    VToolLinePoint::RemoveReferens();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolNormal::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                             QList<quint32> &newDependencies)
+void VToolNormal::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogNormal> dialogTool = qobject_cast<DialogNormal *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
-
-    AddDependence(oldDependencies, basePointId);
-    AddDependence(oldDependencies, secondPointId);
-    AddDependence(newDependencies, dialogTool->GetFirstPointId());
-    AddDependence(newDependencies, dialogTool->GetSecondPointId());
 
     doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
@@ -231,8 +225,10 @@ void VToolNormal::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepende
     doc->SetAttribute(domElement, AttrAngle, QString().setNum(dialogTool->GetAngle()));
     doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->GetFirstPointId()));
     doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->GetSecondPointId()));
-    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes) noexcept {return notes.isEmpty();});
+    doc->SetAttributeOrRemoveIf<QString>(domElement,
+                                         AttrNotes,
+                                         dialogTool->GetNotes(),
+                                         [](const QString &notes) noexcept -> bool { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

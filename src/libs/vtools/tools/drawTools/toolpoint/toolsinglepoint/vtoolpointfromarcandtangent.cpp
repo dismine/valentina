@@ -37,13 +37,14 @@
 #include "../../../../visualization/line/vistoolpointfromarcandtangent.h"
 #include "../../../../visualization/visualization.h"
 #include "../../../vabstracttool.h"
-#include "../../vdrawtool.h"
-#include "../vmisc/exception/vexception.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "vtoolsinglepoint.h"
@@ -134,10 +135,19 @@ auto VToolPointFromArcAndTangent::Create(VToolPointFromArcAndTangentInitData ini
     else
     {
         initData.data->UpdateGObject(initData.id, p);
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
+
+    patternGraph->AddEdge(initData.arcId, initData.id);
+    patternGraph->AddEdge(initData.tangentPointId, initData.id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     if (initData.parse == Document::FullParse)
@@ -147,8 +157,6 @@ auto VToolPointFromArcAndTangent::Create(VToolPointFromArcAndTangentInitData ini
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
-        initData.doc->IncrementReferens(arc.getIdTool());
-        initData.doc->IncrementReferens(tPoint.getIdTool());
         return point;
     }
     return nullptr;
@@ -270,27 +278,11 @@ void VToolPointFromArcAndTangent::ShowContextMenu(QGraphicsSceneContextMenuEvent
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPointFromArcAndTangent::RemoveReferens()
-{
-    const auto arc = VAbstractTool::data.GetGObject(arcId);
-    const auto tP = VAbstractTool::data.GetGObject(tangentPointId);
-
-    doc->DecrementReferens(arc->getIdTool());
-    doc->DecrementReferens(tP->getIdTool());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolPointFromArcAndTangent::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                                             QList<quint32> &newDependencies)
+void VToolPointFromArcAndTangent::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogPointFromArcAndTangent> dialogTool = qobject_cast<DialogPointFromArcAndTangent *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
-
-    AddDependence(oldDependencies, arcId);
-    AddDependence(oldDependencies, tangentPointId);
-    AddDependence(newDependencies, dialogTool->GetArcId());
-    AddDependence(newDependencies, dialogTool->GetTangentPointId());
 
     doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrArc, QString().setNum(dialogTool->GetArcId()));

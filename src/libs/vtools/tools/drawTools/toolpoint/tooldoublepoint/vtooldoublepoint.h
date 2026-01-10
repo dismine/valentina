@@ -72,10 +72,12 @@ public:
     auto IsLabelVisible(quint32 id) const -> bool override;
     void SetLabelVisible(quint32 id, bool visible) override;
 
+    auto IsRemovable() const -> RemoveStatus override;
+
 public slots:
     void Label1ChangePosition(const QPointF &pos);
     void Label2ChangePosition(const QPointF &pos);
-    void Disable(bool disable, const QString &namePP) override;
+    void Enable() override;
     void EnableToolMove(bool move) override;
     void Point1Choosed();
     void Point2Choosed();
@@ -86,7 +88,7 @@ public slots:
     void AllowSelecting(bool enabled) override;
     void AllowLabelHover(bool enabled);
     void AllowLabelSelecting(bool enabled);
-    virtual void ToolSelectionType(const SelectionType &type) override;
+    void ToolSelectionType(const SelectionType &type) override;
 
 protected:
     VSimplePoint *firstPoint;

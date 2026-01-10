@@ -39,13 +39,14 @@
 #include "../../../../visualization/line/vistoolpointofcontact.h"
 #include "../../../../visualization/visualization.h"
 #include "../../../vabstracttool.h"
-#include "../../vdrawtool.h"
-#include "../vmisc/exception/vexception.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vdomdocument.h"
+#include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vpatterndb/vcontainer.h"
@@ -228,20 +229,28 @@ auto VToolPointOfContact::Create(VToolPointOfContactInitData &initData) -> VTool
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(p);
-        initData.data->AddLine(initData.firstPointId, initData.id);
-        initData.data->AddLine(initData.secondPointId, initData.id);
-        initData.data->AddLine(initData.center, initData.id);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, p);
-        initData.data->AddLine(initData.firstPointId, initData.id);
-        initData.data->AddLine(initData.secondPointId, initData.id);
-        initData.data->AddLine(initData.center, initData.id);
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
+
+    initData.data->AddLine(initData.firstPointId, initData.id);
+    initData.data->AddLine(initData.secondPointId, initData.id);
+    initData.data->AddLine(initData.center, initData.id);
+
+    patternGraph->AddEdge(initData.center, initData.id);
+    patternGraph->AddEdge(initData.firstPointId, initData.id);
+    patternGraph->AddEdge(initData.secondPointId, initData.id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     if (initData.parse == Document::FullParse)
@@ -251,9 +260,6 @@ auto VToolPointOfContact::Create(VToolPointOfContactInitData &initData) -> VTool
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
-        initData.doc->IncrementReferens(centerP->getIdTool());
-        initData.doc->IncrementReferens(firstP->getIdTool());
-        initData.doc->IncrementReferens(secondP->getIdTool());
         return point;
     }
     return nullptr;
@@ -279,44 +285,23 @@ auto VToolPointOfContact::SecondPointName() const -> QString
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief RemoveReferens decrement value of reference.
- */
-void VToolPointOfContact::RemoveReferens()
-{
-    const auto c = VAbstractTool::data.GetGObject(center);
-    const auto firstPoint = VAbstractTool::data.GetGObject(firstPointId);
-    const auto secondPoint = VAbstractTool::data.GetGObject(secondPointId);
-
-    doc->DecrementReferens(c->getIdTool());
-    doc->DecrementReferens(firstPoint->getIdTool());
-    doc->DecrementReferens(secondPoint->getIdTool());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolPointOfContact::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                                     QList<quint32> &newDependencies)
+void VToolPointOfContact::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogPointOfContact> dialogTool = qobject_cast<DialogPointOfContact *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
-
-    AddDependence(oldDependencies, center);
-    AddDependence(oldDependencies, firstPointId);
-    AddDependence(oldDependencies, secondPointId);
-    AddDependence(newDependencies, dialogTool->GetCenter());
-    AddDependence(newDependencies, dialogTool->GetFirstPoint());
-    AddDependence(newDependencies, dialogTool->GetSecondPoint());
 
     doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrRadius, dialogTool->GetRadius());
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetCenter()));
     doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->GetFirstPoint()));
     doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->GetSecondPoint()));
-    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
+    doc->SetAttributeOrRemoveIf<QString>(domElement,
+                                         AttrNotes,
+                                         dialogTool->GetNotes(),
+                                         [](const QString &notes) noexcept -> bool { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -36,11 +36,12 @@
 #include "../../../../../visualization/line/vistoolheight.h"
 #include "../../../../../visualization/visualization.h"
 #include "../../../../vabstracttool.h"
-#include "../../../vdrawtool.h"
-#include "../vmisc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "vtoollinepoint.h"
@@ -147,20 +148,28 @@ auto VToolHeight::Create(VToolHeightInitData initData) -> VToolHeight *
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(p);
-        initData.data->AddLine(initData.basePointId, initData.id);
-        initData.data->AddLine(initData.p1LineId, initData.id);
-        initData.data->AddLine(initData.p2LineId, initData.id);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, p);
-        initData.data->AddLine(initData.basePointId, initData.id);
-        initData.data->AddLine(initData.p1LineId, initData.id);
-        initData.data->AddLine(initData.p2LineId, initData.id);
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
+
+    initData.data->AddLine(initData.basePointId, initData.id);
+    initData.data->AddLine(initData.p1LineId, initData.id);
+    initData.data->AddLine(initData.p2LineId, initData.id);
+
+    patternGraph->AddEdge(initData.basePointId, initData.id);
+    patternGraph->AddEdge(initData.p1LineId, initData.id);
+    patternGraph->AddEdge(initData.p2LineId, initData.id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     if (initData.parse == Document::FullParse)
@@ -170,9 +179,6 @@ auto VToolHeight::Create(VToolHeightInitData initData) -> VToolHeight *
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
-        initData.doc->IncrementReferens(basePoint->getIdTool());
-        initData.doc->IncrementReferens(p1Line->getIdTool());
-        initData.doc->IncrementReferens(p2Line->getIdTool());
         return point;
     }
     return nullptr;
@@ -206,18 +212,11 @@ auto VToolHeight::SecondLinePointName() const -> QString
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolHeight::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies)
+void VToolHeight::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogHeight> dialogTool = qobject_cast<DialogHeight *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
-
-    AddDependence(oldDependencies, basePointId);
-    AddDependence(oldDependencies, p1LineId);
-    AddDependence(oldDependencies, p2LineId);
-    AddDependence(newDependencies, dialogTool->GetBasePointId());
-    AddDependence(newDependencies, dialogTool->GetP1LineId());
-    AddDependence(newDependencies, dialogTool->GetP2LineId());
 
     doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());

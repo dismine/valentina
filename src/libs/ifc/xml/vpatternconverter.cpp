@@ -59,8 +59,8 @@ class QDomElement;
  */
 
 const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.4");                     // NOLINT
-const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("1.0.0");                     // NOLINT
-const QString VPatternConverter::CurrentSchema = QStringLiteral("://schema/pattern/v1.0.0.xsd"); // NOLINT
+const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("1.1.0");                     // NOLINT
+const QString VPatternConverter::CurrentSchema = QStringLiteral("://schema/pattern/v1.1.0.xsd"); // NOLINT
 
 // VPatternConverter::PatternMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 // VPatternConverter::PatternMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
@@ -182,6 +182,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, strVisible, ("visible"_L1))            
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strEnabled, ("enabled"_L1))                   // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strP1, ("p1"_L1))                             // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strP2, ("p2"_L1))                             // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strInUse, ("inUse"_L1))                       // NOLINT
 
 QT_WARNING_POP
 } // anonymous namespace
@@ -273,7 +274,8 @@ auto VPatternConverter::XSDSchemas() -> QHash<unsigned int, QString>
         std::make_pair(FormatVersion(0, 9, 7), QStringLiteral("://schema/pattern/v0.9.7.xsd")),
         std::make_pair(FormatVersion(0, 9, 8), QStringLiteral("://schema/pattern/v0.9.8.xsd")),
         std::make_pair(FormatVersion(0, 9, 9), QStringLiteral("://schema/pattern/v0.9.9.xsd")),
-        std::make_pair(FormatVersion(1, 0, 0), CurrentSchema)};
+        std::make_pair(FormatVersion(1, 0, 0), QStringLiteral("://schema/pattern/v1.0.0.xsd")),
+        std::make_pair(FormatVersion(1, 1, 0), CurrentSchema)};
 
     return schemas;
 }
@@ -404,10 +406,11 @@ void VPatternConverter::ApplyPatches()
         case (FormatVersion(0, 9, 7)):
         case (FormatVersion(0, 9, 8)):
         case (FormatVersion(0, 9, 9)):
-            ToV1_0_0();
+        case (FormatVersion(1, 0, 0)):
+            ToV1_1_0();
             ValidateXML(CurrentSchema);
             Q_FALLTHROUGH();
-        case (FormatVersion(1, 0, 0)):
+        case (FormatVersion(1, 1, 0)):
             break;
         default:
             InvalidVersion(m_ver);
@@ -425,7 +428,7 @@ void VPatternConverter::DowngradeToCurrentMaxVersion()
 auto VPatternConverter::IsReadOnly() const -> bool
 {
     // Check if attribute readOnly was not changed in file format
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMaxVer == FormatVersion(1, 0, 0), "Check attribute readOnly.");
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMaxVer == FormatVersion(1, 1, 0), "Check attribute readOnly.");
 
     // Possibly in future attribute readOnly will change position etc.
     // For now position is the same for all supported format versions.
@@ -625,12 +628,14 @@ void VPatternConverter::ToV0_9_7()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPatternConverter::ToV1_0_0()
+void VPatternConverter::ToV1_1_0()
 {
-    // TODO. Delete if minimal supported version is 1.0.0
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(1, 0, 0), "Time to refactor the code.");
+    // TODO. Delete if minimal supported version is 1.1.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 0), "Time to refactor the code.");
 
-    SetVersion(QStringLiteral("1.0.0"));
+    RemoveInUseAttributeV1_1_0();
+
+    SetVersion(QStringLiteral("1.1.0"));
     Save();
 }
 
@@ -2273,6 +2278,42 @@ void VPatternConverter::ConvertMirrorLineToV0_9_7() const
             QString const p1 = domElement.attribute(*strP1);
             domElement.setAttribute(*strP1, domElement.attribute(*strP2));
             domElement.setAttribute(*strP2, p1);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::RemoveInUseAttributeV1_1_0() const
+{
+    // TODO. Delete if minimal supported version is 1.1.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 0), "Time to refactor the code.");
+
+    const QDomNodeList list = elementsByTagName(*strModeling);
+    for (int i = 0; i < list.size(); ++i)
+    {
+        QDomElement const modelingItem = list.at(i).toElement();
+        if (modelingItem.isNull())
+        {
+            continue;
+        }
+
+        QDomNode domNode = modelingItem.firstChild();
+        while (not domNode.isNull())
+        {
+            if (domNode.isElement())
+            {
+                QDomElement domElement = domNode.toElement();
+                if (domElement.isNull())
+                {
+                    continue;
+                }
+
+                if (domElement.hasAttribute(*strInUse))
+                {
+                    domElement.removeAttribute(*strInUse);
+                }
+            }
+            domNode = domNode.nextSibling();
         }
     }
 }

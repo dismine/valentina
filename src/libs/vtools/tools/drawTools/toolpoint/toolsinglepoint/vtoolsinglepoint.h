@@ -73,8 +73,6 @@ public:
     auto name() const -> QString;
     void setName(const QString &name);
 
-    void SetEnabled(bool enabled);
-
     void GroupVisibility(quint32 object, bool visible) override;
     void ChangeLabelPosition(quint32 id, const QPointF &pos) override;
 
@@ -83,7 +81,7 @@ public:
 
 public slots:
     void NameChangePosition(const QPointF &pos);
-    void Disable(bool disable, const QString &namePP) override;
+    void Enable() override;
     void EnableToolMove(bool move) override;
     void PointChoosed();
     void PointSelected(bool selected);
@@ -158,8 +156,8 @@ inline auto VToolSinglePoint::InitArc(VContainer *data, qreal segLength, const V
         a2->setName(arc2.name());
     }
 
-    data->AddArc(a1, arc1.id(), p->id());
-    data->AddArc(a2, arc2.id(), p->id());
+    data->AddArc(a1, /*arc1.id()*/ NULL_ID, p->id());
+    data->AddArc(a2, /*arc2.id()*/ NULL_ID, p->id());
 
     // Because we don't store segments, but only data about them we must register the names manually
     data->RegisterUniqueName(a1);

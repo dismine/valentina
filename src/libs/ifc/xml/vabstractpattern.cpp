@@ -31,6 +31,7 @@
 #include <QDomNode>
 #include <QDomNodeList>
 #include <QFuture>
+#include <QFutureWatcher>
 #include <QLatin1String>
 #include <QList>
 #include <QMessageLogger>
@@ -40,11 +41,11 @@
 #include <QtConcurrentRun>
 #include <QtDebug>
 
+#include "../exception/vexceptionbadid.h"
 #include "../exception/vexceptionconversionerror.h"
 #include "../exception/vexceptionemptyparameter.h"
 #include "../exception/vexceptionobjecterror.h"
-#include "../ifc/exception/vexceptionbadid.h"
-#include "../ifc/ifcdef.h"
+#include "../ifcdef.h"
 #include "../qmuparser/qmutokenparser.h"
 #include "../vmisc/compatibility.h"
 #include "../vmisc/vabstractvalapplication.h"
@@ -52,9 +53,12 @@
 #include "../vpatterndb/vpiecenode.h"
 #include "../vtools/tools/vdatatool.h"
 #include "def.h"
+#include "typedef.h"
 #include "vbackgroundpatternimage.h"
 #include "vdomdocument.h"
+#include "vpatternblockmapper.h"
 #include "vpatternconverter.h"
+#include "vpatterngraph.h"
 #include "vpatternimage.h"
 #include "vtoolrecord.h"
 #include "vvalentinasettings.h"
@@ -314,13 +318,13 @@ auto TransformToString(const QTransform &m) -> QString
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractPattern::VAbstractPattern(QObject *parent)
   : VDomDocument(parent),
-    nameActivPP(),
-    cursor(0),
     toolsOnRemove(QVector<VDataTool *>()),
     history(QVector<VToolRecord>()),
-    patternPieces(),
-    modified(false)
+    modified(false),
+    m_patternGraph(new VPatternGraph()),
+    m_patternBlockMapper(new VPatternBlockMapper(this))
 {
+    connect(qApp, &QCoreApplication::aboutToQuit, this, &VAbstractPattern::CancelFormulaDependencyChecks);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -328,6 +332,7 @@ VAbstractPattern::~VAbstractPattern()
 {
     qDeleteAll(toolsOnRemove);
     toolsOnRemove.clear();
+    delete m_patternGraph;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -361,98 +366,6 @@ auto VAbstractPattern::ListMeasurements() const -> QStringList
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief ChangeActivPP set new active pattern piece name.
- * @param name new name.
- * @param parse parser file mode.
- */
-void VAbstractPattern::ChangeActivPP(const QString &name, const Document &parse)
-{
-    Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name pattern piece is empty");
-    if (CheckExistNamePP(name))
-    {
-        this->nameActivPP = name;
-        if (parse == Document::FullParse)
-        {
-            emit ChangedActivPP(name);
-        }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetActivDrawElement return draw tag for current pattern peace.
- * @param element draw tag.
- * @return true if found.
- */
-auto VAbstractPattern::GetActivDrawElement(QDomElement &element) const -> bool
-{
-    if (nameActivPP.isEmpty() == false)
-    {
-        const QDomNodeList elements = this->documentElement().elementsByTagName(TagDraw);
-        if (elements.isEmpty())
-        {
-            return false;
-        }
-        for (qint32 i = 0; i < elements.count(); i++)
-        {
-            element = elements.at(i).toElement();
-            if (element.isNull() == false)
-            {
-                const QString fieldName = element.attribute(AttrName);
-                if (fieldName == nameActivPP)
-                {
-                    return true;
-                }
-            }
-        }
-        element = QDomElement();
-    }
-    return false;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VAbstractPattern::getLocalHistory(const QString &draw) const -> QVector<VToolRecord>
-{
-    QVector<VToolRecord> historyPP;
-    historyPP.reserve(history.size());
-    for (qint32 i = 0; i < history.size(); ++i)
-    {
-        const VToolRecord &tool = history.at(i);
-        if (tool.getNameDraw() == draw)
-        {
-            historyPP.append(tool);
-        }
-    }
-    return historyPP;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief CheckNameDraw check if exist pattern peace with this name.
- * @param name pattern peace name.
- * @return true if exist.
- */
-auto VAbstractPattern::CheckExistNamePP(const QString &name) const -> bool
-{
-    Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name draw is empty");
-    const QDomNodeList elements = this->documentElement().elementsByTagName(TagDraw);
-    if (elements.isEmpty())
-    {
-        return false;
-    }
-    for (qint32 i = 0; i < elements.count(); i++)
-    {
-        const QDomElement elem = elements.at(i).toElement();
-        if (elem.isNull() == false && GetParametrString(elem, AttrName) == name)
-        {
-            return true;
-        }
-    }
-    return false;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief GetActivNodeElement find element in current pattern piece by name.
  * @param name name tag.
  * @param element element.
@@ -461,24 +374,20 @@ auto VAbstractPattern::CheckExistNamePP(const QString &name) const -> bool
 auto VAbstractPattern::GetActivNodeElement(const QString &name, QDomElement &element) const -> bool
 {
     Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name draw is empty");
-    if (QDomElement drawElement; GetActivDrawElement(drawElement))
+
+    QDomElement const drawElement = m_patternBlockMapper->GetActiveElement();
+    if (drawElement.isNull())
     {
-        const QDomNodeList listElement = drawElement.elementsByTagName(name);
-        if (listElement.size() != 1)
-        {
-            return false;
-        }
-        element = listElement.at(0).toElement();
-        if (element.isNull() == false)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return false;
     }
-    return false;
+
+    const QDomNodeList listElement = drawElement.elementsByTagName(name);
+    if (listElement.size() != 1)
+    {
+        return false;
+    }
+    element = listElement.at(0).toElement();
+    return !element.isNull();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -531,7 +440,7 @@ void VAbstractPattern::ParseGroups(const QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstractPattern::CountPP() const -> int
+auto VAbstractPattern::CountPatternBlockTags() const -> int
 {
     const QDomElement rootElement = this->documentElement();
     if (rootElement.isNull())
@@ -540,109 +449,6 @@ auto VAbstractPattern::CountPP() const -> int
     }
 
     return rootElement.elementsByTagName(TagDraw).count();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VAbstractPattern::GetPPElement(const QString &name) -> QDomElement
-{
-    if (not name.isEmpty())
-    {
-        const QDomNodeList elements = this->documentElement().elementsByTagName(TagDraw);
-        if (elements.isEmpty())
-        {
-            return QDomElement();
-        }
-
-        for (qint32 i = 0; i < elements.count(); i++)
-        {
-            if (QDomElement const element = elements.at(i).toElement();
-                not element.isNull() && element.attribute(AttrName) == name)
-            {
-                return element;
-            }
-        }
-    }
-    return QDomElement();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ChangeNamePP change pattern piece name.
- * @param oldName old pattern piece name.
- * @param newName new pattern piece name.
- * @return true if success.
- */
-auto VAbstractPattern::ChangeNamePP(const QString &oldName, const QString &newName) -> bool
-{
-    Q_ASSERT_X(not newName.isEmpty(), Q_FUNC_INFO, "new name pattern piece is empty");
-    Q_ASSERT_X(not oldName.isEmpty(), Q_FUNC_INFO, "old name pattern piece is empty");
-
-    if (CheckExistNamePP(oldName) == false)
-    {
-        qDebug() << "Do not exist pattern piece with name" << oldName;
-        return false;
-    }
-
-    if (CheckExistNamePP(newName))
-    {
-        qDebug() << "Already exist pattern piece with name" << newName;
-        return false;
-    }
-
-    if (QDomElement ppElement = GetPPElement(oldName); ppElement.isElement())
-    {
-        if (nameActivPP == oldName)
-        {
-            nameActivPP = newName;
-        }
-        ppElement.setAttribute(AttrName, newName);
-        emit patternChanged(false); // For situation when we change name directly, without undocommands.
-        emit ChangedNameDraw(oldName, newName);
-        return true;
-    }
-
-    qDebug() << "Can't find pattern piece node with name" << oldName << Q_FUNC_INFO;
-    return false;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief appendPP add new pattern piece.
- *
- * Method check if not exist pattern piece with the same name and change name active pattern piece name, send signal
- * about change pattern piece. Doen't add pattern piece to file structure. This task make SPoint tool.
- * @param name pattern peace name.
- * @return true if success.
- */
-auto VAbstractPattern::appendPP(const QString &name) -> bool
-{
-    Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name pattern piece is empty");
-    if (name.isEmpty())
-    {
-        return false;
-    }
-    if (CheckExistNamePP(name) == false)
-    {
-        SetActivPP(name);
-        return true;
-    }
-    return false;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VAbstractPattern::getCursor() const -> quint32
-{
-    return cursor;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractPattern::setCursor(const quint32 &value)
-{
-    if (cursor != value)
-    {
-        cursor = value;
-        emit ChangedCursor(cursor);
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -820,7 +626,7 @@ auto VAbstractPattern::ParseSANode(const QDomElement &domElement) -> VPieceNode
     const bool turnPoint = VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrNodeTurnPoint, trueStr);
 
     const QString t = VDomDocument::GetParametrString(domElement, AttrType, VAbstractPattern::NodePoint);
-    Tool tool;
+    Tool tool = Tool::LAST_ONE_DO_NOT_USE;
 
     switch (const QStringList types{VAbstractPattern::NodePoint, VAbstractPattern::NodeArc,
                                     VAbstractPattern::NodeSpline, VAbstractPattern::NodeSplinePath,
@@ -885,9 +691,30 @@ auto VAbstractPattern::getHistory() -> QVector<VToolRecord> *
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstractPattern::getLocalHistory() const -> QVector<VToolRecord>
+auto VAbstractPattern::getHistory() const -> const QVector<VToolRecord> *
 {
-    return getLocalHistory(GetNameActivPP());
+    return &history;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractPattern::GetLocalHistory(int blockIndex) const -> QVector<VToolRecord>
+{
+    const int index = blockIndex >= 0 ? blockIndex : PatternBlockMapper()->GetActiveId();
+    if (index < 0)
+    {
+        return {};
+    }
+
+    QVector<VToolRecord> historyPatternBlock;
+    historyPatternBlock.reserve(history.size());
+    for (const auto &tool : history)
+    {
+        if (tool.GetPatternBlockIndex() == index)
+        {
+            historyPatternBlock.append(tool);
+        }
+    }
+    return historyPatternBlock;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -941,11 +768,11 @@ auto VAbstractPattern::SiblingNodeId(const quint32 &nodeId) const -> quint32
 
     quint32 siblingId = NULL_ID;
 
-    const QVector<VToolRecord> history = getLocalHistory();
+    const QVector<VToolRecord> history = GetLocalHistory();
     for (qint32 i = 0; i < history.size(); ++i)
     {
         const VToolRecord tool = history.at(i);
-        if (nodeId == tool.getId())
+        if (nodeId == tool.GetId())
         {
             if (i == 0)
             {
@@ -956,7 +783,7 @@ auto VAbstractPattern::SiblingNodeId(const quint32 &nodeId) const -> quint32
                 for (qint32 j = i; j > 0; --j)
                 {
                     const VToolRecord tool = history.at(j - 1);
-                    switch (tool.getTypeTool())
+                    switch (tool.GetToolType())
                     {
                         case Tool::Arrow:
                         case Tool::Piece:
@@ -977,7 +804,7 @@ auto VAbstractPattern::SiblingNodeId(const quint32 &nodeId) const -> quint32
                         case Tool::BackgroundSVGImage:
                             continue;
                         default:
-                            siblingId = tool.getId();
+                            siblingId = tool.GetId();
                             j = 0; // break loop
                             break;
                     }
@@ -986,12 +813,6 @@ auto VAbstractPattern::SiblingNodeId(const quint32 &nodeId) const -> quint32
         }
     }
     return siblingId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VAbstractPattern::getPatternPieces() const -> QStringList
-{
-    return patternPieces;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1541,9 +1362,103 @@ void VAbstractPattern::UpdateVisiblityGroups()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VAbstractPattern::PatternGraph() const -> VPatternGraph *
+{
+    return m_patternGraph;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::FindFormulaDependencies(const QString &formula,
+                                               quint32 id,
+                                               const QHash<QString, QList<quint32>> &variables)
+{
+    if (formula.isEmpty() || id == NULL_ID || variables.isEmpty())
+    {
+        return;
+    }
+
+    // Create a new watcher for this task
+    auto *watcher = new QFutureWatcher<void>(this);
+
+    // Connect to cleanup when finished
+    connect(watcher, &QFutureWatcher<void>::finished, this, &VAbstractPattern::CleanDependenciesWatcher);
+
+    // Create the async task
+    QFuture<void> const future = QtConcurrent::run(
+        [this, formula, id, variables]() -> void
+        {
+            QList<QString> tokens;
+            try
+            {
+                QScopedPointer<qmu::QmuTokenParser> const cal(new qmu::QmuTokenParser(formula, false, false));
+                tokens = cal->GetTokens().values();
+            }
+            catch (qmu::QmuParserError &e)
+            {
+                qDebug() << "\nMath parser error:\n"
+                         << "--------------------------------------\n"
+                         << "Message:     " << e.GetMsg() << "\n"
+                         << "Expression:  " << e.GetExpr() << "\n"
+                         << "--------------------------------------";
+                return;
+            }
+
+            const QThread *currentThread = QThread::currentThread();
+            int checkCounter = 0;
+            const int checkInterval = 10; // Check every 10 iterations
+
+            for (const auto &token : std::as_const(tokens))
+            {
+                if (++checkCounter >= checkInterval && currentThread->isInterruptionRequested())
+                {
+                    return;
+                }
+
+                if (!variables.contains(token))
+                {
+                    continue;
+                }
+
+                QList<quint32> const references = variables.value(token);
+                for (const auto &ref : references)
+                {
+                    if (ref > NULL_ID && ref != id)
+                    {
+                        m_patternGraph->AddEdge(ref, id);
+                    }
+                }
+            }
+        });
+
+    watcher->setFuture(future);
+
+    QMutexLocker const locker(&m_watchersMutex);
+    m_formulaDependenciesWatchers.append(watcher);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractPattern::IsPatternGraphComplete() const -> bool
+{
+    if (!m_watchersMutex.tryLock(100))
+    {
+        return false;
+    }
+
+    auto Unlock = qScopeGuard([this]() -> auto { m_watchersMutex.unlock(); });
+
+    return m_fileParsingCompleted && m_formulaDependenciesWatchers.isEmpty();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractPattern::PatternBlockMapper() const -> VPatternBlockMapper *
+{
+    return m_patternBlockMapper;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractPattern::ToolExists(const quint32 &id)
 {
-    if (tools.contains(id) == false)
+    if (!tools.contains(id))
     {
         throw VExceptionBadId(QCoreApplication::translate("VAbstractPattern", "Can't find tool in table."), id);
     }
@@ -1563,18 +1478,6 @@ auto VAbstractPattern::ParsePathNodes(const QDomElement &domElement) -> VPiecePa
         }
     }
     return path;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief SetActivPP set current pattern piece.
- * @param name pattern peace name.
- */
-void VAbstractPattern::SetActivPP(const QString &name)
-{
-    Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name pattern piece is empty");
-    this->nameActivPP = name;
-    emit ChangedActivPP(name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1673,28 +1576,6 @@ void VAbstractPattern::InsertTag(const QStringList &tags, const QDomElement &ele
         }
     }
     SetVersion();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VAbstractPattern::GetIndexActivPP() const -> int
-{
-    const QDomNodeList drawList = elementsByTagName(TagDraw);
-
-    int index = 0;
-    if (not drawList.isEmpty())
-    {
-        for (int i = 0; i < drawList.size(); ++i)
-        {
-            QDomElement const node = drawList.at(i).toElement();
-            if (node.attribute(AttrName) == nameActivPP)
-            {
-                index = i;
-                break;
-            }
-        }
-    }
-
-    return index;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2322,44 +2203,14 @@ void VAbstractPattern::SetModified(bool modified)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstractPattern::GetDraw(const QString &name) const -> QDomElement
-{
-    const QDomNodeList draws = documentElement().elementsByTagName(TagDraw);
-    for (int i = 0; i < draws.size(); ++i)
-    {
-        QDomElement const draw = draws.at(i).toElement();
-        if (draw.isNull())
-        {
-            continue;
-        }
-
-        if (draw.attribute(AttrName) == name)
-        {
-            return draw;
-        }
-    }
-    return QDomElement();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 auto VAbstractPattern::CreateGroups(const QString &patternPieceName) -> QDomElement
 {
-    QDomElement draw;
+    QDomElement draw = patternPieceName.isEmpty() ? m_patternBlockMapper->GetActiveElement()
+                                                  : m_patternBlockMapper->GetElement(patternPieceName);
 
-    if (patternPieceName.isEmpty())
+    if (draw.isNull())
     {
-        if (not GetActivDrawElement(draw))
-        {
-            return QDomElement();
-        }
-    }
-    else
-    {
-        draw = GetPPElement(patternPieceName);
-        if (not draw.isElement())
-        {
-            return QDomElement();
-        }
+        return {};
     }
 
     QDomElement groups = draw.firstChildElement(TagGroups);
@@ -2794,6 +2645,57 @@ auto VAbstractPattern::ReadCompanyName() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::CancelFormulaDependencyChecks()
+{
+    QList<QFutureWatcher<void> *> watchersCopy;
+
+    {
+        QMutexLocker const locker(&m_watchersMutex);
+
+        if (m_formulaDependenciesWatchers.isEmpty())
+        {
+            return;
+        }
+
+        watchersCopy.reserve(m_formulaDependenciesWatchers.size());
+        watchersCopy = m_formulaDependenciesWatchers;
+        m_formulaDependenciesWatchers.clear();
+
+        // Disconnect to prevent cleanup from running
+        for (auto *watcher : std::as_const(watchersCopy))
+        {
+            disconnect(watcher, &QFutureWatcher<void>::finished, this, &VAbstractPattern::CleanDependenciesWatcher);
+        }
+    }
+
+    for (auto *watcher : std::as_const(watchersCopy))
+    {
+        watcher->cancel();
+    }
+
+    for (auto *watcher : std::as_const(watchersCopy))
+    {
+        watcher->waitForFinished();
+        watcher->deleteLater(); // Manual cleanup since we disconnected
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::CleanDependenciesWatcher()
+{
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+    auto *watcher = static_cast<QFutureWatcher<void> *>(sender());
+    QMutexLocker const locker(&m_watchersMutex);
+    m_formulaDependenciesWatchers.removeOne(watcher);
+    watcher->deleteLater();
+
+    if (m_formulaDependenciesWatchers.isEmpty() && m_fileParsingCompleted)
+    {
+        emit PatternDependencyGraphCompleted();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Adds an item to the given group with the given toolId and objectId
  * @param toolId tool id
@@ -2812,8 +2714,10 @@ auto VAbstractPattern::AddItemToGroup(quint32 toolId, quint32 objectId, quint32 
 
         QDomElement item = createElement(TagGroupItem);
         item.setAttribute(AttrTool, toolId);
-        SetAttributeOrRemoveIf<vidtype>(item, AttrObject, objectId,
-                                        [toolId](vidtype object) noexcept { return object == toolId; });
+        SetAttributeOrRemoveIf<vidtype>(item,
+                                        AttrObject,
+                                        objectId,
+                                        [toolId](vidtype object) noexcept -> bool { return object == toolId; });
         group.appendChild(item);
 
         // to signalised that the pattern was changed and need to be saved

@@ -31,18 +31,14 @@
 #include <QDomNode>
 
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vmisc/compatibility.h"
 #include "vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-SaveToolOptions::SaveToolOptions(const QDomElement &oldXml, const QDomElement &newXml,
-                                 const QList<quint32> &oldDependencies, const QList<quint32> &newDependencies,
-                                 VAbstractPattern *doc, const quint32 &id, QUndoCommand *parent)
-  : VUndoCommand(QDomElement(), doc, parent),
+SaveToolOptions::SaveToolOptions(
+    const QDomElement &oldXml, const QDomElement &newXml, VAbstractPattern *doc, quint32 id, QUndoCommand *parent)
+  : VUndoCommand(doc, parent),
     oldXml(oldXml),
-    newXml(newXml),
-    oldDependencies(oldDependencies),
-    newDependencies(newDependencies)
+    newXml(newXml)
 {
     setText(tr("save tool option"));
     nodeId = id;
@@ -54,19 +50,15 @@ void SaveToolOptions::undo()
     qCDebug(vUndo, "Undo.");
 
     QDomElement const domElement = doc->FindElementById(nodeId);
-    if (domElement.isElement())
-    {
-        domElement.parentNode().replaceChild(oldXml, domElement);
-
-        DecrementReferences(Missing(newDependencies, oldDependencies));
-        IncrementReferences(Missing(oldDependencies, newDependencies));
-
-        emit NeedLiteParsing(Document::LiteParse);
-    }
-    else
+    if (!domElement.isElement())
     {
         qCDebug(vUndo, "Can't find tool with id = %u.", nodeId);
+        return;
     }
+
+    domElement.parentNode().replaceChild(oldXml, domElement);
+
+    emit NeedLiteParsing(Document::LiteParse);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -75,25 +67,15 @@ void SaveToolOptions::redo()
     qCDebug(vUndo, "Redo.");
 
     QDomElement const domElement = doc->FindElementById(nodeId);
-    if (domElement.isElement())
-    {
-        domElement.parentNode().replaceChild(newXml, domElement);
-
-        DecrementReferences(Missing(oldDependencies, newDependencies));
-        IncrementReferences(Missing(newDependencies, oldDependencies));
-
-        emit NeedLiteParsing(Document::LiteParse);
-    }
-    else
+    if (!domElement.isElement())
     {
         qCDebug(vUndo, "Can't find tool with id = %u.", nodeId);
+        return;
     }
-}
 
-//---------------------------------------------------------------------------------------------------------------------
-auto SaveToolOptions::Missing(const QList<quint32> &list1, const QList<quint32> &list2) const -> QVector<quint32>
-{
-    return ConvertToVector(ConvertToSet(list1).subtract(ConvertToSet(list2)));
+    domElement.parentNode().replaceChild(newXml, domElement);
+
+    emit NeedLiteParsing(Document::LiteParse);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -104,16 +86,6 @@ auto SaveToolOptions::mergeWith(const QUndoCommand *command) -> bool
     if (saveCommand->getToolId() != nodeId)
     {
         return false;
-    }
-    else
-    {
-        auto currentSet = ConvertToSet(newDependencies);
-        auto candidateSet = ConvertToSet(saveCommand->NewDependencies());
-
-        if (currentSet != candidateSet)
-        {
-            return false;
-        }
     }
 
     newXml = saveCommand->getNewXml();

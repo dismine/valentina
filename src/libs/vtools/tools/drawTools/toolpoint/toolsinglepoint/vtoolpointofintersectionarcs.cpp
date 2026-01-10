@@ -37,13 +37,14 @@
 #include "../../../../visualization/line/vistoolpointofintersectionarcs.h"
 #include "../../../../visualization/visualization.h"
 #include "../../../vabstracttool.h"
-#include "../../vdrawtool.h"
-#include "../vmisc/exception/vexception.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "vtoolsinglepoint.h"
@@ -134,10 +135,19 @@ auto VToolPointOfIntersectionArcs::Create(VToolPointOfIntersectionArcsInitData i
     else
     {
         initData.data->UpdateGObject(initData.id, p);
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
+
+    patternGraph->AddEdge(initData.firstArcId, initData.id);
+    patternGraph->AddEdge(initData.secondArcId, initData.id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     if (initData.parse == Document::FullParse)
@@ -147,15 +157,15 @@ auto VToolPointOfIntersectionArcs::Create(VToolPointOfIntersectionArcsInitData i
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
-        initData.doc->IncrementReferens(firstArc->getIdTool());
-        initData.doc->IncrementReferens(secondArc->getIdTool());
         return point;
     }
     return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VToolPointOfIntersectionArcs::FindPoint(const VArc *arc1, const VArc *arc2, const CrossCirclesPoint pType,
+auto VToolPointOfIntersectionArcs::FindPoint(const VArc *arc1,
+                                             const VArc *arc2,
+                                             CrossCirclesPoint pType,
                                              QPointF *intersectionPoint) -> bool
 {
     SCASSERT(intersectionPoint != nullptr)
@@ -293,34 +303,20 @@ void VToolPointOfIntersectionArcs::ShowContextMenu(QGraphicsSceneContextMenuEven
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfIntersectionArcs::RemoveReferens()
-{
-    const auto firstArc = VAbstractTool::data.GetGObject(firstArcId);
-    const auto secondArc = VAbstractTool::data.GetGObject(secondArcId);
-
-    doc->DecrementReferens(firstArc->getIdTool());
-    doc->DecrementReferens(secondArc->getIdTool());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfIntersectionArcs::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                                              QList<quint32> &newDependencies)
+void VToolPointOfIntersectionArcs::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogPointOfIntersectionArcs> dialogTool = qobject_cast<DialogPointOfIntersectionArcs *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
-    AddDependence(oldDependencies, firstArcId);
-    AddDependence(oldDependencies, secondArcId);
-    AddDependence(newDependencies, dialogTool->GetFirstArcId());
-    AddDependence(newDependencies, dialogTool->GetSecondArcId());
-
     doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrFirstArc, QString().setNum(dialogTool->GetFirstArcId()));
     doc->SetAttribute(domElement, AttrSecondArc, QString().setNum(dialogTool->GetSecondArcId()));
     doc->SetAttribute(domElement, AttrCrossPoint, QString().setNum(static_cast<int>(dialogTool->GetCrossArcPoint())));
-    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
+    doc->SetAttributeOrRemoveIf<QString>(domElement,
+                                         AttrNotes,
+                                         dialogTool->GetNotes(),
+                                         [](const QString &notes) noexcept -> bool { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

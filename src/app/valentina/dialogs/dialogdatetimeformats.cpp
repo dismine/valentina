@@ -29,11 +29,6 @@
 #include "dialogdatetimeformats.h"
 #include "ui_dialogdatetimeformats.h"
 
-// Header <ciso646> is removed in C++20.
-#if defined(Q_CC_MSVC) && __cplusplus <= 201703L
-#include <ciso646> // and, not, or
-#endif
-
 //---------------------------------------------------------------------------------------------------------------------
 DialogDateTimeFormats::DialogDateTimeFormats(const QDate &date, const QStringList &predefinedFormats,
                                              const QStringList &userDefinedFormats, QWidget *parent)

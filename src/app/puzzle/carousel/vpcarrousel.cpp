@@ -120,7 +120,7 @@ void VPCarrousel::Refresh()
 
         ui->comboBoxPieceList->blockSignals(true);
 
-        for (const auto &sheet : qAsConst(m_pieceLists))
+        for (const auto &sheet : std::as_const(m_pieceLists))
         {
             ui->comboBoxPieceList->addItem(GetSheetName(sheet), sheet.sheetUuid);
         }

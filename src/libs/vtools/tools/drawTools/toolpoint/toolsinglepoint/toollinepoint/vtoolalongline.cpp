@@ -38,11 +38,12 @@
 #include "../../../../../visualization/line/vistoolalongline.h"
 #include "../../../../../visualization/visualization.h"
 #include "../../../../vabstracttool.h"
-#include "../../../vdrawtool.h"
-#include "../vmisc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vpatterndb/variables/vlinelength.h"
@@ -77,30 +78,13 @@ VToolAlongLine::VToolAlongLine(const VToolAlongLineInitData &initData, QGraphics
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief RemoveReferens decrement value of reference.
- */
-void VToolAlongLine::RemoveReferens()
-{
-    const auto secondPoint = VAbstractTool::data.GetGObject(m_secondPointId);
-    doc->DecrementReferens(secondPoint->getIdTool());
-    VToolLinePoint::RemoveReferens();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolAlongLine::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                                QList<quint32> &newDependencies)
+void VToolAlongLine::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogAlongLine> dialogTool = qobject_cast<DialogAlongLine *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
-
-    AddDependence(oldDependencies, basePointId);
-    AddDependence(oldDependencies, m_secondPointId);
-    AddDependence(newDependencies, dialogTool->GetFirstPointId());
-    AddDependence(newDependencies, dialogTool->GetSecondPointId());
 
     doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
@@ -110,8 +94,10 @@ void VToolAlongLine::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepe
     doc->SetAttribute(domElement, AttrSecondPoint, dialogTool->GetSecondPointId());
 
     const QString notes = dialogTool->GetNotes();
-    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, notes,
-                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
+    doc->SetAttributeOrRemoveIf<QString>(domElement,
+                                         AttrNotes,
+                                         notes,
+                                         [](const QString &notes) noexcept -> bool { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -289,18 +275,29 @@ auto VToolAlongLine::Create(VToolAlongLineInitData &initData) -> VToolAlongLine 
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(p);
-        initData.data->AddLine(initData.firstPointId, initData.id);
-        initData.data->AddLine(initData.id, initData.secondPointId);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, p);
-        initData.data->AddLine(initData.firstPointId, initData.id);
-        initData.data->AddLine(initData.id, initData.secondPointId);
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
+
+    const auto varData = initData.data->DataDependencyVariables();
+    initData.doc->FindFormulaDependencies(initData.formula, initData.id, varData);
+
+    initData.data->AddLine(initData.firstPointId, initData.id);
+    initData.data->AddLine(initData.id, initData.secondPointId);
+
+    patternGraph->AddEdge(initData.firstPointId, initData.id);
+    patternGraph->AddEdge(initData.secondPointId, initData.id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     VToolAlongLine *point = nullptr;
@@ -311,8 +308,6 @@ auto VToolAlongLine::Create(VToolAlongLineInitData &initData) -> VToolAlongLine 
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
-        initData.doc->IncrementReferens(firstPoint->getIdTool());
-        initData.doc->IncrementReferens(secondPoint->getIdTool());
     }
     // Very important to delete it. Only this tool need this special variable.
     initData.data->RemoveVariable(currentLength);

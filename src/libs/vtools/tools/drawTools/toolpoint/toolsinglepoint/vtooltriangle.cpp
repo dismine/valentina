@@ -38,13 +38,14 @@
 #include "../../../../visualization/line/vistooltriangle.h"
 #include "../../../../visualization/visualization.h"
 #include "../../../vabstracttool.h"
-#include "../../vdrawtool.h"
-#include "../vmisc/exception/vexception.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/compatibility.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "vtoolsinglepoint.h"
@@ -160,10 +161,21 @@ auto VToolTriangle::Create(VToolTriangleInitData initData) -> VToolTriangle *
     else
     {
         initData.data->UpdateGObject(initData.id, p);
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
+
+    patternGraph->AddEdge(initData.axisP1Id, initData.id);
+    patternGraph->AddEdge(initData.axisP2Id, initData.id);
+    patternGraph->AddEdge(initData.firstPointId, initData.id);
+    patternGraph->AddEdge(initData.secondPointId, initData.id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     if (initData.parse == Document::FullParse)
@@ -173,10 +185,6 @@ auto VToolTriangle::Create(VToolTriangleInitData initData) -> VToolTriangle *
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
-        initData.doc->IncrementReferens(axisP1->getIdTool());
-        initData.doc->IncrementReferens(axisP2->getIdTool());
-        initData.doc->IncrementReferens(firstPoint->getIdTool());
-        initData.doc->IncrementReferens(secondPoint->getIdTool());
         return point;
     }
     return nullptr;
@@ -261,40 +269,13 @@ auto VToolTriangle::SecondPointName() const -> QString
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief RemoveReferens decrement value of reference.
- */
-void VToolTriangle::RemoveReferens()
-{
-    const auto axisP1 = VAbstractTool::data.GetGObject(axisP1Id);
-    const auto axisP2 = VAbstractTool::data.GetGObject(axisP2Id);
-    const auto firstPoint = VAbstractTool::data.GetGObject(firstPointId);
-    const auto secondPoint = VAbstractTool::data.GetGObject(secondPointId);
-
-    doc->DecrementReferens(axisP1->getIdTool());
-    doc->DecrementReferens(axisP2->getIdTool());
-    doc->DecrementReferens(firstPoint->getIdTool());
-    doc->DecrementReferens(secondPoint->getIdTool());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolTriangle::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                               QList<quint32> &newDependencies)
+void VToolTriangle::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogTriangle> dialogTool = qobject_cast<DialogTriangle *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
-
-    AddDependence(oldDependencies, axisP1Id);
-    AddDependence(oldDependencies, axisP2Id);
-    AddDependence(oldDependencies, firstPointId);
-    AddDependence(oldDependencies, secondPointId);
-    AddDependence(newDependencies, dialogTool->GetAxisP1Id());
-    AddDependence(newDependencies, dialogTool->GetAxisP2Id());
-    AddDependence(newDependencies, dialogTool->GetFirstPointId());
-    AddDependence(newDependencies, dialogTool->GetSecondPointId());
 
     doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrAxisP1, QString().setNum(dialogTool->GetAxisP1Id()));
@@ -303,8 +284,10 @@ void VToolTriangle::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepen
     doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->GetSecondPointId()));
 
     const QString notes = dialogTool->GetNotes();
-    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, notes,
-                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
+    doc->SetAttributeOrRemoveIf<QString>(domElement,
+                                         AttrNotes,
+                                         notes,
+                                         [](const QString &notes) noexcept -> bool { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

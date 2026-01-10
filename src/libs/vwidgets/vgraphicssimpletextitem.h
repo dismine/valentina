@@ -73,10 +73,10 @@ public:
 
     void RefreshColor();
 
-    VColorRole GetTextColor() const;
+    auto GetTextColor() const -> VColorRole;
     void SetTextColor(VColorRole newTextColor);
 
-    VColorRole GetTextHoverColor() const;
+    auto GetTextHoverColor() const -> VColorRole;
     void SetTextHoverColor(VColorRole newTextHoverColor);
 
 signals:

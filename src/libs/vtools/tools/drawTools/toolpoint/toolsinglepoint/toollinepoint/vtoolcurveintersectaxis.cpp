@@ -39,14 +39,15 @@
 #include "../../../../../dialogs/tools/dialogcurveintersectaxis.h"
 #include "../../../../../dialogs/tools/dialogtool.h"
 #include "../../../../vabstracttool.h"
-#include "../../../vdrawtool.h"
-#include "../vmisc/exception/vexception.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../toolcut/vtoolcutsplinepath.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vpatterndb/vcontainer.h"
@@ -165,25 +166,36 @@ auto VToolCurveIntersectAxis::Create(VToolCurveIntersectAxisInitData &initData) 
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(p);
-        initData.data->AddLine(initData.basePointId, initData.id);
 
         initData.data->getNextId();
         initData.data->getNextId();
-        initData.segments = VToolSinglePoint::InitSegments(curve->getType(), segLength, p, initData.curveId,
-                                                           initData.data, initData.aliasSuffix1, initData.aliasSuffix2);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, p);
-        initData.data->AddLine(initData.basePointId, initData.id);
+    }
 
-        initData.segments = VToolSinglePoint::InitSegments(curve->getType(), segLength, p, initData.curveId,
-                                                           initData.data, initData.aliasSuffix1, initData.aliasSuffix2);
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
 
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
+
+    initData.data->AddLine(initData.basePointId, initData.id);
+
+    initData.segments = VToolSinglePoint::InitSegments(curve->getType(),
+                                                       segLength,
+                                                       p,
+                                                       initData.curveId,
+                                                       initData.data,
+                                                       initData.aliasSuffix1,
+                                                       initData.aliasSuffix2);
+
+    patternGraph->AddEdge(initData.basePointId, initData.id);
+    patternGraph->AddEdge(initData.curveId, initData.id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     if (initData.parse == Document::FullParse)
@@ -193,8 +205,6 @@ auto VToolCurveIntersectAxis::Create(VToolCurveIntersectAxisInitData &initData) 
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
-        initData.doc->IncrementReferens(basePoint->getIdTool());
-        initData.doc->IncrementReferens(curve->getIdTool());
         return point;
     }
 
@@ -260,17 +270,11 @@ void VToolCurveIntersectAxis::ShowContextMenu(QGraphicsSceneContextMenuEvent *ev
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCurveIntersectAxis::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                                         QList<quint32> &newDependencies)
+void VToolCurveIntersectAxis::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogCurveIntersectAxis> dialogTool = qobject_cast<DialogCurveIntersectAxis *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
-
-    AddDependence(oldDependencies, basePointId);
-    AddDependence(oldDependencies, curveId);
-    AddDependence(newDependencies, dialogTool->GetBasePointId());
-    AddDependence(newDependencies, dialogTool->getCurveId());
 
     doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());

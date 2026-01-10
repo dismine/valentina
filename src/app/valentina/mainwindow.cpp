@@ -78,7 +78,6 @@
 #include "../vmisc/customevents.h"
 #include "../vtools/dialogs/dialogtoolbox.h"
 #include "../vmisc/def.h"
-#include "../vmisc/defglobal.h"
 #include "../vmisc/dialogs/dialogaskcollectstatistic.h"
 #include "../vmisc/dialogs/dialogselectlanguage.h"
 #include "../vmisc/qxtcsvmodel.h"
@@ -190,7 +189,6 @@
 #include "dialogs/dialogaboutapp.h"
 #include "dialogs/dialogaddbackgroundimage.h"
 #include "dialogs/dialogfinalmeasurements.h"
-#include "dialogs/dialoghistory.h"
 #include "dialogs/dialogincrements.h"
 #include "dialogs/dialognewpattern.h"
 #include "dialogs/dialogpatternproperties.h"
@@ -199,6 +197,7 @@
 #include "dialogs/vwidgetbackgroundimages.h"
 #include "dialogs/vwidgetdetails.h"
 #include "dialogs/vwidgetgroups.h"
+#include "dialogs/vwidgetdependencies.h"
 #include "../vtools/tools/drawTools/toolcurve/vtoolellipticalarcwithlength.h"
 #include "../vtools/tools/drawTools/toolcurve/vtoolparallelcurve.h"
 #include "../vtools/tools/drawTools/toolcurve/vtoolgraduatedcurve.h"
@@ -206,6 +205,7 @@
 #include "vabstractapplication.h"
 #include "vabstractshortcutmanager.h"
 #include "vsinglelineoutlinechar.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #ifdef WITH_TEXTCODEC
@@ -368,7 +368,6 @@ MainWindow::MainWindow(QWidget *parent)
   : MainWindowsNoGUI(parent),
     ui(new Ui::MainWindow),
     m_dialogTable(nullptr),
-    m_dialogHistory(nullptr),
     m_dialogFMeasurements(nullptr),
     m_measurementsSyncTimer(new QTimer(this)),
     m_progressBar(new QProgressBar(this)),
@@ -393,7 +392,7 @@ MainWindow::MainWindow(QWidget *parent)
                     ActionDraw(true);
                 }
             });
-    connect(doc, &VPattern::SetCurrentPP, this, &MainWindow::GlobalChangePP);
+    connect(doc, &VPattern::ShowPatternBlock, this, &MainWindow::GlobalChangePP);
     connect(doc, &VPattern::MadeProgress, this, &MainWindow::ShowProgress);
     VAbstractValApplication::VApp()->setCurrentDocument(doc);
 
@@ -560,9 +559,10 @@ MainWindow::MainWindow(QWidget *parent)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::AddPP(const QString &PPName)
 {
-    if (not doc->appendPP(PPName))
+    VPatternBlockMapper *blocks = doc->PatternBlockMapper();
+    if (int const id = blocks->GetId(PPName); !blocks->SetActiveById(id))
     {
-        qCDebug(vMainWindow, "Error creating pattern piece with the name %s.", qUtf8Printable(PPName));
+        qCDebug(vMainWindow, "Error creating pattern block with the name %s.", qUtf8Printable(PPName));
         return;
     }
 
@@ -590,7 +590,6 @@ void MainWindow::AddPP(const QString &PPName)
     initData.x = startPosition.x();
     initData.y = startPosition.y();
     initData.name = label;
-    initData.nameActivPP = PPName;
 
     auto *spoint = VToolBasePoint::Create(initData);
     emit ui->view->itemClicked(spoint);
@@ -1046,15 +1045,6 @@ template <typename DrawTool> void MainWindow::ClosedDialogWithApply(int result, 
     if (vtool)
     {
         vtool->setFocus();
-    }
-    // If insert not to the end of file call lite parse
-    if (doc->getCursor() > 0)
-    {
-        doc->LiteParseTree(Document::LiteParse);
-        if (m_dialogHistory)
-        {
-            m_dialogHistory->UpdateHistory();
-        }
     }
 }
 
@@ -2721,7 +2711,7 @@ void MainWindow::ExportDraw(const QString &fileName)
     ui->view->verticalScrollBar()->setValue(verticalScrollBarValue);
     ui->view->horizontalScrollBar()->setValue(horizontalScrollBarValue);
 
-    doc->ChangeActivPP(doc->GetNameActivPP(), Document::FullParse);
+    m_sceneDraw->EnableTools();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3068,7 +3058,7 @@ void MainWindow::ToolBarDraws()
     connect(ui->actionOptionDraw, &QAction::triggered, this,
             [this]()
             {
-                QString draw = doc->GetNameActivPP();
+                QString draw = doc->PatternBlockMapper()->GetActive();
                 if (bool const ok = PatternPieceName(draw); not ok)
                 {
                     return;
@@ -3618,7 +3608,6 @@ void MainWindow::InitActionShortcuts()
     m_shortcutActions.insert(VShortcutAction::PreviusPatternPiece, ui->actionPreviousPatternPiece);
     m_shortcutActions.insert(VShortcutAction::InteractiveTools, ui->actionInteractiveTools);
     m_shortcutActions.insert(VShortcutAction::TableOfVariables, ui->actionTable);
-    m_shortcutActions.insert(VShortcutAction::PatternHistory, ui->actionHistory);
     m_shortcutActions.insert(VShortcutAction::Quit, ui->actionExit);
     m_shortcutActions.insert(VShortcutAction::LastTool, ui->actionLast_tool);
     m_shortcutActions.insert(VShortcutAction::CurveDetails, ui->actionShowCurveDetails);
@@ -4090,6 +4079,8 @@ void MainWindow::ActionDraw(bool checked)
         ui->dockWidgetGroups->setToolTip(tr("Contains all visibility groups"));
 
         ui->dockWidgetBackgroundImages->setVisible(m_backgroundImagesActive);
+
+        ui->dockWidgetDependencies->setVisible(m_dependenciesActive);
     }
     else
     {
@@ -4161,6 +4152,7 @@ void MainWindow::ActionDetails(bool checked)
 
         ui->dockWidgetToolOptions->setVisible(m_toolOptionsActive);
         ui->dockWidgetBackgroundImages->setVisible(false);
+        ui->dockWidgetDependencies->setVisible(false);
 
         m_statusLabel->setText(QString());
 
@@ -4274,6 +4266,7 @@ void MainWindow::ActionLayout(bool checked)
     ui->dockWidgetToolOptions->setVisible(false);
     ui->dockWidgetGroups->setVisible(false);
     ui->dockWidgetBackgroundImages->setVisible(false);
+    ui->dockWidgetDependencies->setVisible(false);
 
     ShowPaper(ui->listWidget->currentRow());
 
@@ -4732,7 +4725,6 @@ void MainWindow::Clear()
     ui->actionZoomFitBest->setEnabled(false);
     ui->actionZoomFitBestCurrent->setEnabled(false);
     ui->actionZoomOriginal->setEnabled(false);
-    ui->actionHistory->setEnabled(false);
     ui->actionExportRecipe->setEnabled(false);
     ui->actionTable->setEnabled(false);
     ui->actionExportFinalMeasurementsToCSV->setEnabled(false);
@@ -4815,7 +4807,7 @@ void MainWindow::FullParseFile()
     m_comboBoxDraws->blockSignals(true);
     m_comboBoxDraws->clear();
 
-    QStringList patternPieceNames = doc->getPatternPieces();
+    QStringList patternPieceNames = doc->PatternBlockMapper()->GetBlockNames();
     patternPieceNames.sort();
     m_comboBoxDraws->addItems(patternPieceNames);
 
@@ -4977,7 +4969,6 @@ void MainWindow::SetEnableWidgets(bool enable)
     ui->actionZoomIn->setEnabled(enable);
     ui->actionZoomOut->setEnabled(enable);
     ui->actionArrowTool->setEnabled(enableOnDesignStage);
-    ui->actionHistory->setEnabled(enableOnDrawStage);
     ui->actionExportRecipe->setEnabled(enableOnDrawStage);
     ui->actionNewDraw->setEnabled(enableOnDrawStage);
     ui->actionDraw->setEnabled(enable);
@@ -5018,7 +5009,7 @@ void MainWindow::SetEnableWidgets(bool enable)
     redoAction->setEnabled(enableOnDesignStage && VAbstractApplication::VApp()->getUndoStack()->canRedo());
 
     // Now we don't want allow user call context menu
-    m_sceneDraw->SetDisableTools(!enable, doc->GetNameActivPP());
+    m_sceneDraw->EnableTools();
     ui->view->setEnabled(enable);
     ui->view->setAcceptDrops(enable);
 }
@@ -5350,31 +5341,6 @@ void MainWindow::ParseBackgroundImages()
         NewBackgroundImageItem(image);
     }
     m_backgroundImagesWidget->UpdateImages();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MainWindow::ActionHistory_triggered(bool checked)
-{
-    if (checked)
-    {
-        m_dialogHistory = new DialogHistory(pattern, doc, this);
-        m_dialogHistory->setWindowFlags(Qt::Window);
-        connect(this, &MainWindow::RefreshHistory, m_dialogHistory.data(), &DialogHistory::UpdateHistory);
-        connect(m_dialogHistory.data(), &DialogHistory::DialogClosed, this,
-                [this]()
-                {
-                    ui->actionHistory->setChecked(false);
-                    delete m_dialogHistory.data();
-                });
-        // Fix issue #526. Dialog Detail is not on top after selection second object on Mac.
-        m_dialogHistory->setWindowFlags(m_dialogHistory->windowFlags() | Qt::WindowStaysOnTopHint);
-        m_dialogHistory->show();
-    }
-    else
-    {
-        ui->actionHistory->setChecked(true);
-        m_dialogHistory->activateWindow();
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -5945,11 +5911,13 @@ void MainWindow::ReadSettings()
         m_toolOptionsActive = settings->IsDockWidgetToolOptionsActive();
         m_patternMessagesActive = settings->IsDockWidgetPatternMessagesActive();
         m_backgroundImagesActive = settings->IsDockWidgetBackgroundImagesActive();
+        m_dependenciesActive = settings->IsDockWidgetDependenciesActive();
 
         ui->dockWidgetGroups->setVisible(m_groupsActive);
         ui->dockWidgetToolOptions->setVisible(m_toolOptionsActive);
         ui->dockWidgetMessages->setVisible(m_patternMessagesActive);
         ui->dockWidgetBackgroundImages->setVisible(m_backgroundImagesActive);
+        ui->dockWidgetDependencies->setVisible(m_dependenciesActive);
 
         // Scene antialiasing
         ui->view->SetAntialiasing(settings->GetGraphicalOutput());
@@ -5993,6 +5961,7 @@ void MainWindow::WriteSettings()
     settings->SetDockWidgetToolOptionsActive(ui->dockWidgetToolOptions->isVisible());
     settings->SetDockWidgetPatternMessagesActive(ui->dockWidgetMessages->isVisible());
     settings->SetDockWidgetBackgroundImagesActive(actionDockWidgetBackgroundImages->isChecked());
+    settings->SetDockWidgetDependenciesActive(ui->dockWidgetDependencies->isVisible());
 
     settings->sync();
     if (settings->status() == QSettings::AccessError)
@@ -6347,8 +6316,13 @@ void MainWindow::AddDocks()
 
     actionDockWidgetBackgroundImages = ui->dockWidgetBackgroundImages->toggleViewAction();
     connect(actionDockWidgetBackgroundImages, &QAction::triggered, this,
-            [this](bool checked) { m_backgroundImagesActive = checked; });
+            [this](bool checked) -> void { m_backgroundImagesActive = checked; });
     ui->menuWindow->addAction(actionDockWidgetBackgroundImages);
+
+    actionDockWidgetDependencies = ui->dockWidgetDependencies->toggleViewAction();
+    connect(actionDockWidgetDependencies, &QAction::triggered, this,
+            [this](bool checked) -> void { m_dependenciesActive = checked; });
+    ui->menuWindow->addAction(actionDockWidgetDependencies);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -6375,6 +6349,19 @@ void MainWindow::InitDocksContain()
     m_backgroundImagesWidget = new VWidgetBackgroundImages(doc, this);
     ui->dockWidgetBackgroundImages->setWidget(m_backgroundImagesWidget);
     connect(m_backgroundImagesWidget, &VWidgetBackgroundImages::DeleteImage, this, &MainWindow::RemoveBackgroundImage);
+
+    m_dependenciesWidget = new VWidgetDependencies(doc, this);
+    connect(doc, &VPattern::FullUpdateFromFile, m_dependenciesWidget, &VWidgetDependencies::UpdateDependencies,
+            Qt::QueuedConnection);
+    connect(doc, &VPattern::PatternDependencyGraphCompleted, m_dependenciesWidget,
+            &VWidgetDependencies::UpdateDependencies, Qt::QueuedConnection);
+    connect(ui->view, &VMainGraphicsView::itemClicked, m_dependenciesWidget, &VWidgetDependencies::ShowDependency,
+            Qt::QueuedConnection);
+    connect(m_dependenciesWidget, &VWidgetDependencies::ShowProperties, m_toolOptions,
+            &VToolOptionsPropertyBrowser::itemClicked, Qt::QueuedConnection);
+    connect(m_dependenciesWidget, &VWidgetDependencies::ShowTool, ui->view, &VMainGraphicsView::EnsureToolVisible,
+            Qt::QueuedConnection);
+    ui->dockWidgetDependencies->setWidget(m_dependenciesWidget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -6388,6 +6375,7 @@ auto MainWindow::OpenNewValentina(const QString &fileName) const -> bool
     return false;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::CreateActions()
 {
     ui->setupUi(this);
@@ -6396,7 +6384,6 @@ void MainWindow::CreateActions()
     connect(ui->actionDraw, &QAction::triggered, this, &MainWindow::ActionDraw);
     connect(ui->actionDetails, &QAction::triggered, this, &MainWindow::ActionDetails);
     connect(ui->actionLayout, &QAction::triggered, this, &MainWindow::ActionLayout);
-    connect(ui->actionHistory, &QAction::triggered, this, &MainWindow::ActionHistory_triggered);
     connect(ui->actionExportRecipe, &QAction::triggered, this, &MainWindow::ActionExportRecipe_triggered);
     connect(ui->actionNewDraw, &QAction::triggered, this, &MainWindow::ActionNewDraw_triggered);
     connect(ui->actionExportFinalMeasurementsToCSV, &QAction::triggered, this, &MainWindow::ExportFMeasurementsToCSV);
@@ -6872,6 +6859,7 @@ auto MainWindow::LoadPattern(QString fileName, const QString &customMeasureFile)
     m_taskbarProgress->setMaximum(elements);
 #endif
 
+    doc->SetGBBackupFilePath(fileName);
     FullParseFile();
 
     m_progressBar->setVisible(false);
@@ -6882,13 +6870,6 @@ auto MainWindow::LoadPattern(QString fileName, const QString &customMeasureFile)
 
     if (m_guiEnabled)
     { // No errors occurred
-        if (VApplication::IsGUIMode())
-        {
-            /* Collect garbage only after successfully parse. This way wrongly accused items have one more time to
-             * restore a reference. */
-            QTimer::singleShot(100ms, Qt::CoarseTimer, this, [this]() { doc->GarbageCollector(true); });
-        }
-
         m_patternReadOnly = doc->IsReadOnly();
         m_sceneDraw->SetAcceptDrop(true);
         SetEnableWidgets(true);
@@ -7347,9 +7328,8 @@ void MainWindow::ChangePP(int index, bool zoomBestFit)
 {
     if (index != -1)
     {
-        doc->ChangeActivPP(m_comboBoxDraws->itemText(index));
+        doc->PatternBlockMapper()->SetActive(m_comboBoxDraws->itemText(index));
         doc->setCurrentData();
-        emit RefreshHistory();
         if (m_drawMode)
         {
             ArrowTool(true);
@@ -7360,6 +7340,7 @@ void MainWindow::ChangePP(int index, bool zoomBestFit)
         }
         m_toolOptions->itemClicked(nullptr); // hide options for tool in previous pattern piece
         m_groupsWidget->UpdateGroups();
+        m_dependenciesWidget->UpdateDependencies();
     }
 }
 
@@ -8157,7 +8138,7 @@ void MainWindow::PrintPatternMessage(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::OpenWatermark(const QString &path)
 {
-    for (const auto &watermarkEditor : qAsConst(m_watermarkEditors))
+    for (const auto &watermarkEditor : std::as_const(m_watermarkEditors))
     {
         if (not watermarkEditor.isNull() && not watermarkEditor->CurrentFile().isEmpty() &&
             watermarkEditor->CurrentFile() == AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), path))

@@ -28,32 +28,32 @@
 
 #include "renamepp.h"
 
+#include <utility>
 #include <QComboBox>
 #include <QDomElement>
 
-#include "../vmisc/def.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../ifc/xml/vpatternblockmapper.h"
+#include "../vmisc/def.h"
 #include "vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-RenamePP::RenamePP(VAbstractPattern *doc, const QString &newPPname, QComboBox *combo, QUndoCommand *parent)
-    :VUndoCommand(QDomElement(), doc, parent), combo(combo), newPPname(newPPname), oldPPname(QString())
+RenamePP::RenamePP(VAbstractPattern *doc, QString newPatternBlockName, QComboBox *combo, QUndoCommand *parent)
+  : VUndoCommand(doc, parent),
+    combo(combo),
+    m_newPatternBlockName(std::move(newPatternBlockName)),
+    m_oldPatternBlockName(doc->PatternBlockMapper()->GetActive())
 {
-    setText(tr("rename pattern piece"));
+    setText(tr("rename pattern block"));
     SCASSERT(combo != nullptr)
-    oldPPname = doc->GetNameActivPP();
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-RenamePP::~RenamePP()
-{}
 
 //---------------------------------------------------------------------------------------------------------------------
 void RenamePP::undo()
 {
     qCDebug(vUndo, "Undo.");
 
-    ChangeName(newPPname, oldPPname);
+    ChangeName(m_newPatternBlockName, m_oldPatternBlockName);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -61,7 +61,7 @@ void RenamePP::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    ChangeName(oldPPname, newPPname);
+    ChangeName(m_oldPatternBlockName, m_newPatternBlockName);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -70,13 +70,12 @@ auto RenamePP::mergeWith(const QUndoCommand *command) -> bool
     const auto *renameCommand = static_cast<const RenamePP *>(command);
     SCASSERT(renameCommand != nullptr)
 
-    const QString oldName = renameCommand->getOldPPname();
-    if (newPPname != oldName)
+    if (m_newPatternBlockName != renameCommand->GetOldPatternBlockName())
     {
         return false;
     }
 
-    newPPname = renameCommand->getNewPPname();
+    m_newPatternBlockName = renameCommand->GetNewPatternBlockName();
     return true;
 }
 
@@ -89,7 +88,7 @@ auto RenamePP::id() const -> int
 //---------------------------------------------------------------------------------------------------------------------
 void RenamePP::ChangeName(const QString &oldName, const QString &newName)
 {
-    if (doc->ChangeNamePP(oldName, newName))
+    if (doc->PatternBlockMapper()->Rename(oldName, newName))
     {
         combo->setItemText(combo->findText(oldName), newName);
     }

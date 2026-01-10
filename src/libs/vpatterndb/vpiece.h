@@ -118,11 +118,6 @@ public:
     void SetPlaceLabels(const QVector<quint32> &labels);
 
     auto Dependencies() const -> QList<quint32>;
-    auto MissingNodes(const VPiece &det) const -> QVector<quint32>;
-    auto MissingCSAPath(const VPiece &det) const -> QVector<quint32>;
-    auto MissingInternalPaths(const VPiece &det) const -> QVector<quint32>;
-    auto MissingPins(const VPiece &det) const -> QVector<quint32>;
-    auto MissingPlaceLabels(const VPiece &det) const -> QVector<quint32>;
 
     void SetPieceLabelData(const VPieceLabelData &data);
     auto GetPieceLabelData() -> VPieceLabelData &;

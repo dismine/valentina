@@ -79,6 +79,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternBoundaryTogetherWithNotch
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternUserToolColors, ("pattern/userToolColors"_L1))   // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternGlobalPenStyle, ("pattern/globalPenStyle"_L1))   // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternGlobalToolColor, ("pattern/globalToolColor"_L1)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternCollectGarbage, ("pattern/collectGarbage"_L1))   // NOLINT
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutWidth, ("layout/width"_L1))             // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSorting, ("layout/sorting"_L1))         // NOLINT
@@ -126,6 +127,8 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockWidgetPatternMessagesActive,
 // NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockWidgetBackgroundImagesActive,
                           ("dockWidget/backgroundImagesActive"_L1))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockWidgetDependenciesActive, ("dockWidget/dependenciesActive"_L1))
 // NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternMessagesFontSize, ("font/patternMessagesSize"_L1))
 
@@ -700,6 +703,24 @@ void VValentinaSettings::SetDockWidgetBackgroundImagesActive(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::IsDockWidgetDependenciesActive() const -> bool
+{
+    return value(*settingDockWidgetDependenciesActive, GetDefDockWidgetDependenciesActive()).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::GetDefDockWidgetDependenciesActive() -> bool
+{
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetDockWidgetDependenciesActive(bool value)
+{
+    setValue(*settingDockWidgetDependenciesActive, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VValentinaSettings::GetPatternMessageFontSize(int fontSizeDef) const -> int
 {
     fontSizeDef = qBound(GetDefMinPatternMessageFontSize(), fontSizeDef, GetDefMaxPatternMessageFontSize());
@@ -1133,6 +1154,18 @@ auto VValentinaSettings::GetGlobalToolColor() const -> QString
 void VValentinaSettings::SetGlobalToolColor(const QString &value)
 {
     setValue(*settingPatternGlobalToolColor, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::IsCollectGarbage() const -> bool
+{
+    return value(*settingPatternCollectGarbage, true).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetCollectGarbage(bool value)
+{
+    setValue(*settingPatternCollectGarbage, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

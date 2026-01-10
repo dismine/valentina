@@ -84,7 +84,7 @@ protected slots:
 
 protected:
     void SetVisualization() override;
-    void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies) override;
+    void SaveDialog(QDomElement &domElement) override;
     void ReadToolAttributes(const QDomElement &domElement) override;
     void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     auto MakeToolTip() const -> QString override;
@@ -126,6 +126,8 @@ private:
     template <class Item>
     static void UpdateCurveWithSegments(quint32 idTool, const SourceItem &sItem, const QPointF &origin, qreal angle,
                                         const QString &suffix, VContainer *data, quint32 id);
+
+    static void CreateDestination(VToolRotationInitData &initData);
 };
 
 #endif // VTOOLROTATION_H

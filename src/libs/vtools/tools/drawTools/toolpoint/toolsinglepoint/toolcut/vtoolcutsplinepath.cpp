@@ -38,15 +38,16 @@
 #include "../../../../../visualization/path/vistoolcutsplinepath.h"
 #include "../../../../../visualization/visualization.h"
 #include "../../../../vabstracttool.h"
-#include "../../../vdrawtool.h"
-#include "../vmisc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vabstractcubicbezierpath.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
 #include "../vgeometry/vsplinepath.h"
 #include "../vgeometry/vsplinepoint.h"
+#include "../vmisc/exception/vexception.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vpatterndb/variables/vcurvelength.h"
@@ -169,31 +170,40 @@ auto VToolCutSplinePath::Create(VToolCutInitData &initData) -> VToolCutSplinePat
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(p);
-
-        auto path1 = QSharedPointer<VAbstractBezier>(splPath1);
-        initData.data->AddSpline(path1, NULL_ID, initData.id);
-        initData.data->RegisterUniqueName(path1);
-
-        auto path2 = QSharedPointer<VAbstractBezier>(splPath2);
-        initData.data->AddSpline(path2, NULL_ID, initData.id);
-        initData.data->RegisterUniqueName(path2);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, p);
+    }
 
-        auto path1 = QSharedPointer<VAbstractBezier>(splPath1);
-        initData.data->AddSpline(path1, NULL_ID, initData.id);
-        initData.data->RegisterUniqueName(path1);
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
 
-        auto path2 = QSharedPointer<VAbstractBezier>(splPath2);
-        initData.data->AddSpline(path2, NULL_ID, initData.id);
-        initData.data->RegisterUniqueName(path2);
+    patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
 
-        if (initData.parse != Document::FullParse)
-        {
-            initData.doc->UpdateToolData(initData.id, initData.data);
-        }
+    const auto varData = initData.data->DataDependencyVariables();
+    initData.doc->FindFormulaDependencies(initData.formula, initData.id, varData);
+
+    auto path1 = QSharedPointer<VAbstractBezier>(splPath1);
+    initData.data->AddSpline(path1, NULL_ID, initData.id);
+    initData.data->RegisterUniqueName(path1);
+
+    auto path2 = QSharedPointer<VAbstractBezier>(splPath2);
+    initData.data->AddSpline(path2, NULL_ID, initData.id);
+    initData.data->RegisterUniqueName(path2);
+
+    // TODO: Add segments to graph when we start showing them for users
+    // patternGraph->AddVertex(initData.segment1Id, VNodeType::OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
+    // patternGraph->AddVertex(initData.segment2Id, VNodeType::OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
+
+    // patternGraph->AddEdge(initData.id, initData.segment1Id);
+    // patternGraph->AddEdge(initData.id, initData.segment2Id);
+
+    patternGraph->AddEdge(initData.baseCurveId, initData.id);
+
+    if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
+    {
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 
     VToolCutSplinePath *tool = nullptr;
@@ -204,7 +214,6 @@ auto VToolCutSplinePath::Create(VToolCutInitData &initData) -> VToolCutSplinePat
         initData.scene->addItem(tool);
         InitToolConnections(initData.scene, tool);
         VAbstractPattern::AddTool(initData.id, tool);
-        initData.doc->IncrementReferens(splPath->getIdTool());
     }
     // Very important to delete it. Only this tool need this special variable.
     initData.data->RemoveVariable(currentLength);
@@ -317,27 +326,29 @@ void VToolCutSplinePath::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, 
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolCutSplinePath::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                                    QList<quint32> &newDependencies)
+void VToolCutSplinePath::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogCutSplinePath> dialogTool = qobject_cast<DialogCutSplinePath *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
-    AddDependence(oldDependencies, baseCurveId);
-    AddDependence(newDependencies, dialogTool->getSplinePathId());
-
     doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrSplinePath, QString().setNum(dialogTool->getSplinePathId()));
-    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrAlias1, dialogTool->GetAliasSuffix1(),
-                                         [](const QString &suffix) noexcept { return suffix.isEmpty(); });
-    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrAlias2, dialogTool->GetAliasSuffix2(),
-                                         [](const QString &suffix) noexcept { return suffix.isEmpty(); });
+    doc->SetAttributeOrRemoveIf<QString>(domElement,
+                                         AttrAlias1,
+                                         dialogTool->GetAliasSuffix1(),
+                                         [](const QString &suffix) noexcept -> bool { return suffix.isEmpty(); });
+    doc->SetAttributeOrRemoveIf<QString>(domElement,
+                                         AttrAlias2,
+                                         dialogTool->GetAliasSuffix2(),
+                                         [](const QString &suffix) noexcept -> bool { return suffix.isEmpty(); });
 
     const QString notes = dialogTool->GetNotes();
-    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, notes,
-                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
+    doc->SetAttributeOrRemoveIf<QString>(domElement,
+                                         AttrNotes,
+                                         notes,
+                                         [](const QString &notes) noexcept -> bool { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

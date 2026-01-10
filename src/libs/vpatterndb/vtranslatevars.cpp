@@ -809,8 +809,7 @@ auto VTranslateVars::FormulaToUser(const QString &formula, bool osSeparator) con
         return newFormula;
     }
 
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
-    if (settings->IsTranslateFormula())
+    if (VCommonSettings const *settings = VAbstractApplication::VApp()->Settings(); settings->IsTranslateFormula())
     {
         TranslateVarsToUser(newFormula, tokens, numbers);
     }

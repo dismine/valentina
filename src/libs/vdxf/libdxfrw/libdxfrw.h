@@ -23,11 +23,6 @@
 #include <string>
 #include <unordered_map>
 
-// Header <ciso646> is removed in C++20.
-#if defined(Q_CC_MSVC) && __cplusplus <= 201703L
-#include <ciso646> // and, not, or
-#endif
-
 class dxfRW
 {
 public:
