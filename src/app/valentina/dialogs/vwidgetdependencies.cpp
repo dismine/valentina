@@ -214,7 +214,6 @@ void VWidgetDependencies::ShowDependency(QGraphicsItem *item)
     QSignalBlocker const blocker(ui->treeView->selectionModel());
     ui->treeView->setCurrentIndex(proxyIndex);
     ui->treeView->scrollTo(proxyIndex);
-    ui->treeView->expand(proxyIndex);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
