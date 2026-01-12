@@ -4309,93 +4309,12 @@
         <translation type="vanished">arc</translation>
     </message>
     <message>
-        <source>elliptical arc</source>
-        <translation type="vanished">Arc elliptique</translation>
-    </message>
-    <message>
         <source>curve</source>
         <translation type="vanished">courbe</translation>
     </message>
     <message>
         <source>curve path</source>
         <translation type="vanished">Courbe</translation>
-    </message>
-    <message>
-        <source>Elliptical arc</source>
-        <translation type="vanished">Arc elliptique</translation>
-    </message>
-    <message>
-        <source>Rotate objects around point %1. Suffix &apos;%2&apos;</source>
-        <translation type="vanished">Rotation des objets avec point %1 comme centre de rotation. Suffixe &apos;%2&apos;</translation>
-    </message>
-    <message>
-        <source>Flipping by line %1_%2. Suffix &apos;%3&apos;</source>
-        <translation type="vanished">Miroir des objects par rapport à la ligne %1_%2. Suffixe &apos;%3&apos;</translation>
-    </message>
-    <message>
-        <source>Flipping by axis through %1 point. Suffix &apos;%2&apos;</source>
-        <translation type="vanished">Miroir des objets par rapport à l&apos;axe %1 point. Suffixe &apos;%2&apos;</translation>
-    </message>
-    <message>
-        <source>Move objects. Suffix &apos;%1&apos;</source>
-        <translation type="vanished">Objets déplacés. Suffixe &apos;%1&apos;</translation>
-    </message>
-    <message>
-        <source>Empty</source>
-        <comment>list</comment>
-        <translation type="vanished">Vide</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search history &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Recherches précédentes &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Alt+Down</source>
-        <translation type="vanished">Alt+Down</translation>
-    </message>
-    <message>
-        <source>Search</source>
-        <translation type="vanished">Rechercher</translation>
-    </message>
-    <message>
-        <source>0 results</source>
-        <translation type="vanished">0 résultat trouvé</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match Case &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Contient au moins &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match words &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Contient exactement &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match with regular expressions &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Avec expression régulière &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use unicode properties &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;The meaning of the \w, \d, etc., character classes, as well as the meaning of their counterparts (\W, \D, etc.), is changed from matching ASCII characters only to matching any character with the corresponding Unicode property. For instance, \d is changed to match any character with the Unicode Nd (decimal digit) property; \w to match any character with either the Unicode L (letter) or N (digit) property, plus underscore, and so on. This option corresponds to the /u modifier in Perl regular expressions.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;utilisent les propriétés unicode &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;La signification de \w, \d, etc., appelés classes de caractères, aussi bien que la signification de leurs équivalents (\W, \D, etc.), est modifiée pour correspondre aux caractères ASCII de n&apos;importe quel caractère ayant la propriété Unicode correspondante. Par exemple, \d est modifié pour correspondre à n&apos;importe quel caractère ayant la propriété Unicode Nd (chiffre decimal ou decimal digit); \w pour correspondre à n&apos;importe quel caractère ayant soit la propriété Unicode L (lettre) ou N (chiffre), plus underscore, etc. Cette option correspond au modificateur /u dans les expressions régulières Perl.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Alt+U</source>
-        <translation type="vanished">Alt+U</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Previous &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Précédent &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Shift+F3</source>
-        <translation type="vanished">Shift+F3</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Next %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Suivant %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>F3</source>
-        <translation type="vanished">F3</translation>
     </message>
 </context>
 <context>
@@ -13955,7 +13874,7 @@ Voulez-vous charger un autre fichier de mesures ?</translation>
 <context>
     <name>MoveToolDown</name>
     <message>
-        <location filename="../../src/libs/vtools/undocommands/movetool.cpp" line="218"/>
+        <location filename="../../src/libs/vtools/undocommands/movetool.cpp" line="217"/>
         <source>move tool down in history</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13963,7 +13882,7 @@ Voulez-vous charger un autre fichier de mesures ?</translation>
 <context>
     <name>MoveToolUp</name>
     <message>
-        <location filename="../../src/libs/vtools/undocommands/movetool.cpp" line="42"/>
+        <location filename="../../src/libs/vtools/undocommands/movetool.cpp" line="41"/>
         <source>move tool up in history</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14313,11 +14232,6 @@ Voulez-vous charger un autre fichier de mesures ?</translation>
         <translation>Traduire les libellés des variables dans les formules</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="234"/>
-        <source>Enable collecting unsuded objects when open pattern file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="237"/>
         <source>Enable Garbage Collector</source>
         <translation type="unfinished"></translation>
@@ -14482,6 +14396,11 @@ Voulez-vous charger un autre fichier de mesures ?</translation>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="313"/>
         <source>User Interface</source>
         <translation>Interface utilisateur</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="234"/>
+        <source>Enable collecting unused objects when open pattern file.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="371"/>
@@ -20301,11 +20220,6 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation>Ouvrir la table des variables</translation>
     </message>
     <message>
-        <source>Open pattern history dialog</source>
-        <comment>shortcut for action</comment>
-        <translation type="vanished">Ouvrir l&apos;historique</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="351"/>
         <source>Quit app</source>
         <comment>shortcut for action</comment>
@@ -23118,17 +23032,17 @@ Voulez-vous enregistrer vos changements ?</translation>
 <context>
     <name>VPMainGraphicsView</name>
     <message>
-        <location filename="../../src/app/puzzle/scene/vpmaingraphicsview.cpp" line="338"/>
+        <location filename="../../src/app/puzzle/scene/vpmaingraphicsview.cpp" line="329"/>
         <source>Restore transformation origin</source>
         <translation>Réinitialiser</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/scene/vpmaingraphicsview.cpp" line="342"/>
+        <location filename="../../src/app/puzzle/scene/vpmaingraphicsview.cpp" line="333"/>
         <source>Remove sheet</source>
         <translation>Supprimer la feuille</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/scene/vpmaingraphicsview.cpp" line="621"/>
+        <location filename="../../src/app/puzzle/scene/vpmaingraphicsview.cpp" line="612"/>
         <source>Remove pieces</source>
         <translation>Supprimer les pièces</translation>
     </message>
@@ -24335,54 +24249,54 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation>Erreur lors de la création ou de la mise à jour de la courbe</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3013"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3092"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3016"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3095"/>
         <source>Error creating or updating curve path</source>
         <translation>Erreur lors de la création ou de la modification de la courbe</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3140"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3146"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3143"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3149"/>
         <source>Error creating or updating a parallel curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3204"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3210"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3207"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3213"/>
         <source>Error creating or updating a graduated curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3291"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3294"/>
         <source>Error creating or updating modeling simple curve</source>
         <translation>Erreur lors de la création ou de la mise à jour de la courbe</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3316"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3319"/>
         <source>Error creating or updating modeling curve path</source>
         <translation>Erreur lors de la création ou de la modification de la courbe</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3363"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3369"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3592"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3598"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3366"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3372"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3595"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3601"/>
         <source>Error creating or updating simple arc</source>
         <translation>Erreur lors de la création ou mise à jour de l&apos;arc</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3512"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3518"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3515"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3521"/>
         <source>Error creating or updating elliptical arc with length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3545"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3548"/>
         <source>Error creating or updating modeling arc</source>
         <translation>Erreur lors de la création ou mise à jour de l&apos;arc</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4229"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4236"/>
         <source>Error creating or updating union details</source>
         <translation>Erreur lors de la création ou de la mise à jour de la fusion de pièces de patron</translation>
     </message>
@@ -24424,17 +24338,17 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation>Type de point inconnu &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4116"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4123"/>
         <source>Unknown spline type &apos;%1&apos;.</source>
         <translation>Type de courbe inconnu &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4151"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4158"/>
         <source>Unknown arc type &apos;%1&apos;.</source>
         <translation>Type d&apos;arc inconnu &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4235"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4242"/>
         <source>Unknown tools type &apos;%1&apos;.</source>
         <translation>Type d&apos;outil inconnu &apos;%1&apos;.</translation>
     </message>
@@ -24454,7 +24368,7 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation>Erreur lors de la création ou de la modification de la courbe</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3098"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3101"/>
         <source>Error creating or updating interactive spline path</source>
         <translation>Erreur lors de la création ou de la modification de la courbe</translation>
     </message>
@@ -24464,34 +24378,34 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation>Erreur lors de la création ou de la modification de la courbe</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3266"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3269"/>
         <source>Error creating or updating cubic bezier path curve</source>
         <translation>Erreur lors de la création ou de la mise à jour de la courbe</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3638"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3644"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3641"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3647"/>
         <source>Error creating or updating operation of rotation</source>
         <translation>Erreur lors de la création ou de la modification de l&apos;opération de rotation</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4267"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4274"/>
         <source>Unknown operation type &apos;%1&apos;.</source>
         <translation>Type d&apos;opération inconnu &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3676"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3679"/>
         <source>Error creating or updating operation of flipping by line</source>
         <translation>Erreur lors de la création ou la mise à jour de l&apos;opération de reproduction d&apos;objets en miroir par rapport à une ligne</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3708"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3711"/>
         <source>Error creating or updating operation of flipping by axis</source>
         <translation>Erreur de création ou de mise à jour de l&apos;opération de reproduction d&apos;objets en miroir par rapport à un axe</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3754"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3760"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3757"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3763"/>
         <source>Error creating or updating operation of moving</source>
         <translation>Erreur de création ou de la modification de l&apos;opération de déplacement</translation>
     </message>
@@ -24501,18 +24415,18 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation>Impossible de créer ou mettre à jour le point d&apos;intersection de 2 lignes</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3423"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3429"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3426"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3432"/>
         <source>Error creating or updating simple elliptical arc</source>
         <translation>Erreur de création ou de mise à jour de l&apos;arc elliptique</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4188"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4195"/>
         <source>Unknown elliptical arc type &apos;%1&apos;.</source>
         <translation>Type d&apos;arc de cercle elliptique inconnu &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3456"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3459"/>
         <source>Error creating or updating modeling elliptical arc</source>
         <translation>Erreur lors de la création ou de mise à jour de l&apos;arc elliptique</translation>
     </message>
@@ -24522,13 +24436,13 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation>Pièce de patron</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4301"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4308"/>
         <source>Unnamed path</source>
         <translation>Chemin sans nom</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4294"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4317"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4301"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4324"/>
         <source>Error creating or updating a piece path</source>
         <translation>Erreur lors de la création ou de la modification du contour de la pièce</translation>
     </message>
@@ -24538,7 +24452,7 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation>Erreur de création ou de mise à jour de point d&apos;épingle</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4295"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4302"/>
         <source>Piece path doesn&apos;t contain nodes</source>
         <translation>Le contour de la pièce ne contient pas de nœuds</translation>
     </message>
@@ -24549,7 +24463,7 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation>Erreur de création ou de mise à jour de repère d&apos;assemblage</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4470"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4477"/>
         <source>Can&apos;t find increment &apos;%1&apos;</source>
         <translation>Impossible de trouver l&apos;incrément &apos;%1&apos;</translation>
     </message>

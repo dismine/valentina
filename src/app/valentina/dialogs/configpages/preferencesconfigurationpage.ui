@@ -231,7 +231,7 @@
               <item>
                <widget class="QCheckBox" name="checkBoxGarbageCollector">
                 <property name="toolTip">
-                 <string>Enable collecting unsuded objects when open pattern file.</string>
+                 <string>Enable collecting unused objects when open pattern file.</string>
                 </property>
                 <property name="text">
                  <string>Enable Garbage Collector</string>

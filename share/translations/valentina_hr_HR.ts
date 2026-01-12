@@ -4316,83 +4316,6 @@
         <source>curve path</source>
         <translation type="vanished">putanja krivulje</translation>
     </message>
-    <message>
-        <source>Elliptical arc</source>
-        <translation type="vanished">Eliptični luk</translation>
-    </message>
-    <message>
-        <source>Rotate objects around point %1. Suffix &apos;%2&apos;</source>
-        <translation type="vanished">Rotiraj objekte oko točke %1. Sufiks &apos;%2&apos;</translation>
-    </message>
-    <message>
-        <source>Flipping by line %1_%2. Suffix &apos;%3&apos;</source>
-        <translation type="vanished">Preokretanje po liniji %1_%2. Sufiks &apos;%3&apos;</translation>
-    </message>
-    <message>
-        <source>Flipping by axis through %1 point. Suffix &apos;%2&apos;</source>
-        <translation type="vanished">Preokretanje po osi kroz točku %1. Sufiks &apos;%2&apos;</translation>
-    </message>
-    <message>
-        <source>Move objects. Suffix &apos;%1&apos;</source>
-        <translation type="vanished">Pomakni objekte. Sufiks &apos;%1&apos;</translation>
-    </message>
-    <message>
-        <source>Empty</source>
-        <comment>list</comment>
-        <translation type="vanished">Prazno</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search history &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Povijest pretraživanja &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Alt+Down</source>
-        <translation type="vanished">Alt+Dolje</translation>
-    </message>
-    <message>
-        <source>Search</source>
-        <translation type="vanished">Pretraga</translation>
-    </message>
-    <message>
-        <source>0 results</source>
-        <translation type="vanished">0 rezultata</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match Case &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Usporedi velika i mala slova &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match words &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Podudaranje riječi &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match with regular expressions &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Podudaranje s regularnim izrazima &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use unicode properties &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;The meaning of the \w, \d, etc., character classes, as well as the meaning of their counterparts (\W, \D, etc.), is changed from matching ASCII characters only to matching any character with the corresponding Unicode property. For instance, \d is changed to match any character with the Unicode Nd (decimal digit) property; \w to match any character with either the Unicode L (letter) or N (digit) property, plus underscore, and so on. This option corresponds to the /u modifier in Perl regular expressions.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Koristi Unicode svojstva &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;Značenje znakova poput \w, \d, itd., kao i njihovih suprotnih parova (\W, \D, itd.), mijenja se iz ASCII podudaranja u podudaranje s bilo kojim znakom koji ima odgovarajuće Unicode svojstvo. Na primjer, \d će se promijeniti kako bi se podudarao s bilo kojim znakom koji ima Unicode Nd (decimalna znamenka) svojstvo; \w se mijenja kako bi uključio bilo koji znak s Unicode L (slovo) ili N (znamenka) svojstvom, plus podvlaku, i tako dalje. Ova opcija odgovara /u modifikatoru u Perl regularnim izrazima.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Alt+U</source>
-        <translation type="vanished">Alt+U</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Previous &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pronađi prethodno &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Shift+F3</source>
-        <translation type="vanished">Shift+F3</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Next %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pronađi sljedeće %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>F3</source>
-        <translation type="vanished">F3</translation>
-    </message>
 </context>
 <context>
     <name>DialogIncrements</name>
@@ -13954,7 +13877,7 @@ Nedostaje: %1
 <context>
     <name>MoveToolDown</name>
     <message>
-        <location filename="../../src/libs/vtools/undocommands/movetool.cpp" line="218"/>
+        <location filename="../../src/libs/vtools/undocommands/movetool.cpp" line="217"/>
         <source>move tool down in history</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13962,7 +13885,7 @@ Nedostaje: %1
 <context>
     <name>MoveToolUp</name>
     <message>
-        <location filename="../../src/libs/vtools/undocommands/movetool.cpp" line="42"/>
+        <location filename="../../src/libs/vtools/undocommands/movetool.cpp" line="41"/>
         <source>move tool up in history</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14312,11 +14235,6 @@ Nedostaje: %1
         <translation>Prevedi formulu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="234"/>
-        <source>Enable collecting unsuded objects when open pattern file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="237"/>
         <source>Enable Garbage Collector</source>
         <translation type="unfinished"></translation>
@@ -14481,6 +14399,11 @@ Nedostaje: %1
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="313"/>
         <source>User Interface</source>
         <translation>Korisničko sučelje</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="234"/>
+        <source>Enable collecting unused objects when open pattern file.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="371"/>
@@ -20302,11 +20225,6 @@ Do you want to save your changes?</source>
         <translation>Otvori tablicu varijabli</translation>
     </message>
     <message>
-        <source>Open pattern history dialog</source>
-        <comment>shortcut for action</comment>
-        <translation type="vanished">Otvori povijest krojnih dijelova</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="351"/>
         <source>Quit app</source>
         <comment>shortcut for action</comment>
@@ -23119,17 +23037,17 @@ Do you want to save your changes?</source>
 <context>
     <name>VPMainGraphicsView</name>
     <message>
-        <location filename="../../src/app/puzzle/scene/vpmaingraphicsview.cpp" line="338"/>
+        <location filename="../../src/app/puzzle/scene/vpmaingraphicsview.cpp" line="329"/>
         <source>Restore transformation origin</source>
         <translation>Vrati podrijetlo transformacije</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/scene/vpmaingraphicsview.cpp" line="342"/>
+        <location filename="../../src/app/puzzle/scene/vpmaingraphicsview.cpp" line="333"/>
         <source>Remove sheet</source>
         <translation>Ukloni list</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/scene/vpmaingraphicsview.cpp" line="621"/>
+        <location filename="../../src/app/puzzle/scene/vpmaingraphicsview.cpp" line="612"/>
         <source>Remove pieces</source>
         <translation>Ukloni dijelove</translation>
     </message>
@@ -24336,54 +24254,54 @@ Do you want to save your changes?</source>
         <translation>Greška pri stvaranju ili ažuriranju jednostavne krivulje</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3013"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3092"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3016"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3095"/>
         <source>Error creating or updating curve path</source>
         <translation>Greška pri stvaranju ili ažuriranju putanje krivulje</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3140"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3146"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3143"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3149"/>
         <source>Error creating or updating a parallel curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3204"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3210"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3207"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3213"/>
         <source>Error creating or updating a graduated curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3291"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3294"/>
         <source>Error creating or updating modeling simple curve</source>
         <translation>Greška pri stvaranju ili ažuriranju modelirane jednostavne krivulje</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3316"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3319"/>
         <source>Error creating or updating modeling curve path</source>
         <translation>Greška pri izradi ili ažuriranju putanje modelirane krivulje</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3363"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3369"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3592"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3598"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3366"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3372"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3595"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3601"/>
         <source>Error creating or updating simple arc</source>
         <translation>Greška pri stvaranju ili ažuriranju jednostavnog luka</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3512"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3518"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3515"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3521"/>
         <source>Error creating or updating elliptical arc with length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3545"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3548"/>
         <source>Error creating or updating modeling arc</source>
         <translation>Greška pri stvaranju ili ažuriranju modeliranog luka</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4229"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4236"/>
         <source>Error creating or updating union details</source>
         <translation>Greška pri stvaranju ili ažuriranju spojenih detalja</translation>
     </message>
@@ -24425,17 +24343,17 @@ Do you want to save your changes?</source>
         <translation>Nepoznat tip točke &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4116"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4123"/>
         <source>Unknown spline type &apos;%1&apos;.</source>
         <translation>Nepoznat tip splajna &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4151"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4158"/>
         <source>Unknown arc type &apos;%1&apos;.</source>
         <translation>Nepoznat tip luka &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4235"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4242"/>
         <source>Unknown tools type &apos;%1&apos;.</source>
         <translation>Nepoznat tip alata &apos;%1&apos;.</translation>
     </message>
@@ -24455,7 +24373,7 @@ Do you want to save your changes?</source>
         <translation>Greška pri stvaranju ili ažuriranju jednostavnog interaktivnog splajna</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3098"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3101"/>
         <source>Error creating or updating interactive spline path</source>
         <translation>Greška pri stvaranju ili ažuriranju interaktivne putanje splajna</translation>
     </message>
@@ -24465,34 +24383,34 @@ Do you want to save your changes?</source>
         <translation>Greška pri stvaranju ili ažuriranju kubične Bezierove krivulje</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3266"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3269"/>
         <source>Error creating or updating cubic bezier path curve</source>
         <translation>Greška pri stvaranju ili ažuriranju putanje kubične Bezierove krivulje</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3638"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3644"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3641"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3647"/>
         <source>Error creating or updating operation of rotation</source>
         <translation>Greška pri stvaranju ili ažuriranju operacije rotacije</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4267"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4274"/>
         <source>Unknown operation type &apos;%1&apos;.</source>
         <translation>Nepoznat tip operacije &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3676"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3679"/>
         <source>Error creating or updating operation of flipping by line</source>
         <translation>Greška pri stvaranju ili ažuriranju operacije zrcaljenja prema liniji</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3708"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3711"/>
         <source>Error creating or updating operation of flipping by axis</source>
         <translation>Greška pri stvaranju ili ažuriranju operacije zrcaljenja prema osi</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3754"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3760"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3757"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3763"/>
         <source>Error creating or updating operation of moving</source>
         <translation>Greška pri stvaranju ili ažuriranju operacije pomicanja</translation>
     </message>
@@ -24502,18 +24420,18 @@ Do you want to save your changes?</source>
         <translation>Greška pri stvaranju ili ažuriranju točke presjeka linija</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3423"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3429"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3426"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3432"/>
         <source>Error creating or updating simple elliptical arc</source>
         <translation>Greška pri stvaranju ili ažuriranju jednostavnog eliptičnog luka</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4188"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4195"/>
         <source>Unknown elliptical arc type &apos;%1&apos;.</source>
         <translation>Nepoznat tip eliptičnog luka &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3456"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3459"/>
         <source>Error creating or updating modeling elliptical arc</source>
         <translation>Greška pri stvaranju ili ažuriranju modelnog eliptičnog luka</translation>
     </message>
@@ -24523,13 +24441,13 @@ Do you want to save your changes?</source>
         <translation>Detalj</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4301"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4308"/>
         <source>Unnamed path</source>
         <translation>Neimenovana putanja</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4294"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4317"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4301"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4324"/>
         <source>Error creating or updating a piece path</source>
         <translation>Greška pri stvaranju ili ažuriranju putanje dijela</translation>
     </message>
@@ -24539,7 +24457,7 @@ Do you want to save your changes?</source>
         <translation>Greška pri stvaranju ili ažuriranju točke pribadanja</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4295"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4302"/>
         <source>Piece path doesn&apos;t contain nodes</source>
         <translation>Putanja dijela ne sadrži čvorove</translation>
     </message>
@@ -24550,7 +24468,7 @@ Do you want to save your changes?</source>
         <translation>Greška pri stvaranju ili ažuriranju oznake</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4470"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4477"/>
         <source>Can&apos;t find increment &apos;%1&apos;</source>
         <translation>Nije moguće pronaći povećanje &apos;%1&apos;</translation>
     </message>
