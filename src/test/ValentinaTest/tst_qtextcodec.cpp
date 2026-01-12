@@ -391,7 +391,7 @@ void TST_QTextCodec::codecForLocale()
     originalLocaleEncodedTimeString.resize(1024);
     time_t t;
     time(&t);
-    struct tm timeinfo;
+    tm timeinfo;
     localtime_r(&t, &timeinfo);
     int r = static_cast<int>(strftime(originalLocaleEncodedTimeString.data(),
                                       static_cast<size_t>(originalLocaleEncodedTimeString.size()),
