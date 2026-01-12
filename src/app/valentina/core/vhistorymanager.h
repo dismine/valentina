@@ -40,6 +40,7 @@ class VHistoryManager
 {
 public:
     explicit VHistoryManager(VAbstractPattern *doc);
+    ~VHistoryManager() = default;
 
     auto CanMoveUp(vidtype objectId) const -> bool;
     auto CanMoveDown(vidtype objectId) const -> bool;
@@ -58,6 +59,7 @@ public:
     auto RootTools() const -> QVector<vidtype>;
 
 private:
+    Q_DISABLE_COPY_MOVE(VHistoryManager)
     VAbstractPattern *m_doc;
     QVector<vidtype> m_objects{};
     QMap<vidtype, vsizetype> m_idToIndex{}; // ID -> index in history
