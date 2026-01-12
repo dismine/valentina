@@ -28,8 +28,10 @@
 #ifndef DIALOGMOVESTEPS_H
 #define DIALOGMOVESTEPS_H
 
-#include <qtclasshelpermacros.h>
 #include <QDialog>
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
+#include <qtclasshelpermacros.h>
+#endif
 
 namespace Ui
 {
