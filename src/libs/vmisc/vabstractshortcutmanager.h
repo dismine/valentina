@@ -35,12 +35,6 @@
 #include <QtCore/QHashFunctions>
 #endif
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-#define QKEY_SEQUENCE_OP |
-#else
-#define QKEY_SEQUENCE_OP +
-#endif
-
 enum class VShortcutAction
 {
     ZoomIn,

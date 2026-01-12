@@ -40,20 +40,20 @@ VTapeShortcutManager::VTapeShortcutManager(QObject *parent)
     AddShortcut({VShortcutAction::SaveAs, KeyBindingsToStringList(QKeySequence::SaveAs), {}});
     AddShortcut({VShortcutAction::Quit, KeyBindingsToStringList(QKeySequence::Quit), {}});
     AddShortcut({VShortcutAction::CaseSensitiveMatch,
-                 {QKeySequence(Qt::AltModifier QKEY_SEQUENCE_OP Qt::Key_C).toString()},
+                 {QKeySequence(Qt::AltModifier | Qt::Key_C).toString()},
                  {}});
     AddShortcut(
-        {VShortcutAction::WholeWordMatch, {QKeySequence(Qt::AltModifier QKEY_SEQUENCE_OP Qt::Key_W).toString()}, {}});
+        {VShortcutAction::WholeWordMatch, {QKeySequence(Qt::AltModifier | Qt::Key_W).toString()}, {}});
     AddShortcut(
-        {VShortcutAction::RegexMatch, {QKeySequence(Qt::AltModifier QKEY_SEQUENCE_OP Qt::Key_X).toString()}, {}});
+        {VShortcutAction::RegexMatch, {QKeySequence(Qt::AltModifier | Qt::Key_X).toString()}, {}});
     AddShortcut(
-        {VShortcutAction::SearchHistory, {QKeySequence(Qt::AltModifier QKEY_SEQUENCE_OP Qt::Key_Down).toString()}, {}});
+        {VShortcutAction::SearchHistory, {QKeySequence(Qt::AltModifier | Qt::Key_Down).toString()}, {}});
     AddShortcut({VShortcutAction::RegexMatchUnicodeProperties,
-                 {QKeySequence(Qt::AltModifier QKEY_SEQUENCE_OP Qt::Key_U).toString()},
+                 {QKeySequence(Qt::AltModifier | Qt::Key_U).toString()},
                  {}});
     AddShortcut({VShortcutAction::FindNext, {QKeySequence(Qt::Key_F3).toString()}, {}});
     AddShortcut(
-        {VShortcutAction::FindPrevious, {QKeySequence(Qt::ShiftModifier QKEY_SEQUENCE_OP Qt::Key_F3).toString()}, {}});
+        {VShortcutAction::FindPrevious, {QKeySequence(Qt::ShiftModifier | Qt::Key_F3).toString()}, {}});
 
     QT_WARNING_POP
 }

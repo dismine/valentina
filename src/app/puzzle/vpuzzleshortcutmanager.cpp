@@ -33,11 +33,6 @@
 VPuzzleShortcutManager::VPuzzleShortcutManager(QObject *parent)
   : VAbstractShortcutManager{parent}
 {
-    QT_WARNING_PUSH
-#if !defined(Q_OS_MACOS) && defined(Q_CC_CLANG)
-    QT_WARNING_DISABLE_CLANG("-Wenum-enum-conversion")
-#endif
-
     AddShortcut({VShortcutAction::New, KeyBindingsToStringList(QKeySequence::New), {}});
     AddShortcut({VShortcutAction::Open, KeyBindingsToStringList(QKeySequence::Open), {}});
     AddShortcut({VShortcutAction::Save, KeyBindingsToStringList(QKeySequence::Save), {}});
@@ -47,18 +42,9 @@ VPuzzleShortcutManager::VPuzzleShortcutManager(QObject *parent)
     AddShortcut({VShortcutAction::ZoomIn, KeyBindingsToStringList(QKeySequence::ZoomIn), {}});
     AddShortcut({VShortcutAction::ZoomOut, KeyBindingsToStringList(QKeySequence::ZoomOut), {}});
     AddShortcut({VShortcutAction::ZoomOriginal,
-                 {QKeySequence(Qt::ControlModifier QKEY_SEQUENCE_OP Qt::Key_0).toString(),
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-                  QKeySequence(Qt::ControlModifier | Qt::KeypadModifier | Qt::Key_0).toString()
-#else
-                  QKeySequence(Qt::ControlModifier + Qt::Key_0 + Qt::KeypadModifier).toString()
-#endif
-                 },
+                 {QKeySequence(Qt::ControlModifier | Qt::Key_0).toString(),
+                  QKeySequence(Qt::ControlModifier | Qt::KeypadModifier | Qt::Key_0).toString()},
                  {}});
-    AddShortcut({VShortcutAction::ZoomFitBest,
-                 {QKeySequence(Qt::ControlModifier QKEY_SEQUENCE_OP Qt::Key_Equal).toString()},
-                 {}});
+    AddShortcut({VShortcutAction::ZoomFitBest, {QKeySequence(Qt::ControlModifier | Qt::Key_Equal).toString()}, {}});
     AddShortcut({VShortcutAction::Quit, KeyBindingsToStringList(QKeySequence::Quit), {}});
-
-    QT_WARNING_POP
 }

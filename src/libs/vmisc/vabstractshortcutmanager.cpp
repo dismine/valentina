@@ -508,22 +508,12 @@ auto VAbstractShortcutManager::CustomKeyBindings(QKeySequence::StandardKey seque
     switch (sequence)
     {
         case QKeySequence::ZoomIn:
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
             return {QKeySequence(Qt::ControlModifier | Qt::KeypadModifier | Qt::Key_Plus)};
-#else
-            return {QKeySequence(Qt::ControlModifier + Qt::Key_Plus + Qt::KeypadModifier)};
-#endif
         case QKeySequence::ZoomOut:
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
             return {QKeySequence(Qt::ControlModifier | Qt::KeypadModifier | Qt::Key_Minus)};
-#else
-            return {QKeySequence(Qt::ControlModifier + Qt::Key_Minus + Qt::KeypadModifier)};
-#endif
         default:
-            break;
+            return {};
     }
-
-    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -41,39 +41,30 @@ VValentinaShortcutManager::VValentinaShortcutManager(QObject *parent)
 {
     Q_STATIC_ASSERT_X(static_cast<int>(VShortcutAction::LAST_ONE_DO_NOT_USE) == 87, "Check if all actions were used.");
 
-    QT_WARNING_PUSH
-#if !defined(Q_OS_MACOS) && defined(Q_CC_CLANG)
-    QT_WARNING_DISABLE_CLANG("-Wenum-enum-conversion")
-#endif
-
     AddShortcut({VShortcutAction::ZoomIn, KeyBindingsToStringList(QKeySequence::ZoomIn), {}});
     AddShortcut({VShortcutAction::ZoomOut, KeyBindingsToStringList(QKeySequence::ZoomOut), {}});
     AddShortcut({VShortcutAction::ZoomOriginal,
-                 {QKeySequence(Qt::ControlModifier QKEY_SEQUENCE_OP Qt::Key_0).toString(),
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                 {QKeySequence(Qt::ControlModifier | Qt::Key_0).toString(),
                   QKeySequence(Qt::ControlModifier | Qt::KeypadModifier | Qt::Key_0).toString()
-#else
-                  QKeySequence(Qt::ControlModifier + Qt::Key_0 + Qt::KeypadModifier).toString()
-#endif
                  },
                  {}});
     AddShortcut({VShortcutAction::ZoomFitBest,
-                 {QKeySequence(Qt::ControlModifier QKEY_SEQUENCE_OP Qt::Key_Equal).toString()},
+                 {QKeySequence(Qt::ControlModifier | Qt::Key_Equal).toString()},
                  {}});
     AddShortcut({VShortcutAction::ZoomFitBestCurrent,
-                 {QKeySequence(Qt::ControlModifier QKEY_SEQUENCE_OP Qt::Key_M).toString()},
+                 {QKeySequence(Qt::ControlModifier | Qt::Key_M).toString()},
                  {}});
     AddShortcut({VShortcutAction::IncreaseLabelFont,
-                 {QKeySequence(Qt::ShiftModifier QKEY_SEQUENCE_OP Qt::Key_Plus).toString()},
+                 {QKeySequence(Qt::ShiftModifier | Qt::Key_Plus).toString()},
                  {}});
     AddShortcut({VShortcutAction::DecreaseLabelFont,
-                 {QKeySequence(Qt::ShiftModifier QKEY_SEQUENCE_OP Qt::Key_Minus).toString()},
+                 {QKeySequence(Qt::ShiftModifier | Qt::Key_Minus).toString()},
                  {}});
     AddShortcut({VShortcutAction::OriginalLabelFont,
-                 {QKeySequence(Qt::ShiftModifier QKEY_SEQUENCE_OP Qt::Key_0).toString()},
+                 {QKeySequence(Qt::ShiftModifier | Qt::Key_0).toString()},
                  {}});
     AddShortcut(
-        {VShortcutAction::HideLabels, {QKeySequence(Qt::AltModifier QKEY_SEQUENCE_OP Qt::Key_L).toString()}, {}});
+        {VShortcutAction::HideLabels, {QKeySequence(Qt::AltModifier | Qt::Key_L).toString()}, {}});
     AddShortcut({VShortcutAction::Undo, KeyBindingsToStringList(QKeySequence::Undo), {}});
     AddShortcut({VShortcutAction::Redo, KeyBindingsToStringList(QKeySequence::Redo), {}});
     AddShortcut({VShortcutAction::New, KeyBindingsToStringList(QKeySequence::New), {}});
@@ -81,49 +72,49 @@ VValentinaShortcutManager::VValentinaShortcutManager(QObject *parent)
     AddShortcut({VShortcutAction::Save, KeyBindingsToStringList(QKeySequence::Save), {}});
     AddShortcut({VShortcutAction::SaveAs, KeyBindingsToStringList(QKeySequence::SaveAs), {}});
     AddShortcut(
-        {VShortcutAction::DrawMode, {QKeySequence(Qt::ControlModifier QKEY_SEQUENCE_OP Qt::Key_W).toString()}, {}});
+        {VShortcutAction::DrawMode, {QKeySequence(Qt::ControlModifier | Qt::Key_W).toString()}, {}});
     AddShortcut(
-        {VShortcutAction::DetailsMode, {QKeySequence(Qt::ControlModifier QKEY_SEQUENCE_OP Qt::Key_E).toString()}, {}});
+        {VShortcutAction::DetailsMode, {QKeySequence(Qt::ControlModifier | Qt::Key_E).toString()}, {}});
     AddShortcut(
-        {VShortcutAction::LayoutMode, {QKeySequence(Qt::ControlModifier QKEY_SEQUENCE_OP Qt::Key_L).toString()}, {}});
+        {VShortcutAction::LayoutMode, {QKeySequence(Qt::ControlModifier | Qt::Key_L).toString()}, {}});
     AddShortcut(
         {VShortcutAction::NewPatternPiece,
-         {QKeySequence(Qt::ControlModifier QKEY_SEQUENCE_OP Qt::ShiftModifier QKEY_SEQUENCE_OP Qt::Key_N).toString()},
+         {QKeySequence(Qt::ControlModifier | Qt::ShiftModifier | Qt::Key_N).toString()},
          {}});
     AddShortcut({VShortcutAction::NextPatternPiece,
-                 {QKeySequence(Qt::ControlModifier QKEY_SEQUENCE_OP Qt::Key_PageDown).toString()},
+                 {QKeySequence(Qt::ControlModifier | Qt::Key_PageDown).toString()},
                  {}});
     AddShortcut({VShortcutAction::PreviusPatternPiece,
-                 {QKeySequence(Qt::ControlModifier QKEY_SEQUENCE_OP Qt::Key_PageUp).toString()},
+                 {QKeySequence(Qt::ControlModifier | Qt::Key_PageUp).toString()},
                  {}});
     AddShortcut({VShortcutAction::InteractiveTools,
-                 {QKeySequence(Qt::ControlModifier QKEY_SEQUENCE_OP Qt::Key_D).toString()},
+                 {QKeySequence(Qt::ControlModifier | Qt::Key_D).toString()},
                  {}});
     AddShortcut({VShortcutAction::TableOfVariables,
-                 {QKeySequence(Qt::ControlModifier QKEY_SEQUENCE_OP Qt::Key_T).toString()},
+                 {QKeySequence(Qt::ControlModifier | Qt::Key_T).toString()},
                  {}});
     AddShortcut({VShortcutAction::Quit, KeyBindingsToStringList(QKeySequence::Quit), {}});
     AddShortcut({VShortcutAction::CurveDetails, {QKeySequence(Qt::Key_F2).toString()}, {}});
     AddShortcut({VShortcutAction::FinalMeasurements,
-                 {QKeySequence(Qt::ControlModifier QKEY_SEQUENCE_OP Qt::Key_I).toString()},
+                 {QKeySequence(Qt::ControlModifier | Qt::Key_I).toString()},
                  {}});
     AddShortcut({VShortcutAction::ReloadPieceLabels, {QKeySequence(Qt::Key_F9).toString()}, {}});
 
     AddShortcut({VShortcutAction::CaseSensitiveMatch,
-                 {QKeySequence(Qt::AltModifier QKEY_SEQUENCE_OP Qt::Key_C).toString()},
+                 {QKeySequence(Qt::AltModifier | Qt::Key_C).toString()},
                  {}});
     AddShortcut(
-        {VShortcutAction::WholeWordMatch, {QKeySequence(Qt::AltModifier QKEY_SEQUENCE_OP Qt::Key_W).toString()}, {}});
+        {VShortcutAction::WholeWordMatch, {QKeySequence(Qt::AltModifier | Qt::Key_W).toString()}, {}});
     AddShortcut(
-        {VShortcutAction::RegexMatch, {QKeySequence(Qt::AltModifier QKEY_SEQUENCE_OP Qt::Key_X).toString()}, {}});
+        {VShortcutAction::RegexMatch, {QKeySequence(Qt::AltModifier | Qt::Key_X).toString()}, {}});
     AddShortcut(
-        {VShortcutAction::SearchHistory, {QKeySequence(Qt::AltModifier QKEY_SEQUENCE_OP Qt::Key_Down).toString()}, {}});
+        {VShortcutAction::SearchHistory, {QKeySequence(Qt::AltModifier | Qt::Key_Down).toString()}, {}});
     AddShortcut({VShortcutAction::RegexMatchUnicodeProperties,
-                 {QKeySequence(Qt::AltModifier QKEY_SEQUENCE_OP Qt::Key_U).toString()},
+                 {QKeySequence(Qt::AltModifier | Qt::Key_U).toString()},
                  {}});
     AddShortcut({VShortcutAction::FindNext, {QKeySequence(Qt::Key_F3).toString()}, {}});
     AddShortcut(
-        {VShortcutAction::FindPrevious, {QKeySequence(Qt::ShiftModifier QKEY_SEQUENCE_OP Qt::Key_F3).toString()}, {}});
+        {VShortcutAction::FindPrevious, {QKeySequence(Qt::ShiftModifier | Qt::Key_F3).toString()}, {}});
     AddShortcut({VShortcutAction::LastTool, {QKeySequence(Qt::Key_L).toString()}, {}});
     AddShortcut({VShortcutAction::ToolEndLine, {}, {}});
     AddShortcut({VShortcutAction::ToolLine, {}, {}});
@@ -177,6 +168,4 @@ VValentinaShortcutManager::VValentinaShortcutManager(QObject *parent)
     AddShortcut({VShortcutAction::ToolEllipticalArcWithLength, {}, {}});
     AddShortcut({VShortcutAction::ToolParallelCurve, {}, {}});
     AddShortcut({VShortcutAction::ToolGraduatedCurve, {}, {}});
-
-    QT_WARNING_POP
 }

@@ -64,21 +64,11 @@ QT_WARNING_POP
 namespace
 {
 QT_WARNING_PUSH
-#if !defined(Q_OS_MACOS) && defined(Q_CC_CLANG)
-QT_WARNING_DISABLE_CLANG("-Wenum-enum-conversion")
-#endif
-
 QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 // NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QKeySequence, restoreOriginShortcut,
                           (QKeySequence(Qt::ControlModifier | Qt::Key_Asterisk)))
-#else
-// NOLINTNEXTLINE
-Q_GLOBAL_STATIC_WITH_ARGS(const QKeySequence, restoreOriginShortcut,
-                          (QKeySequence(Qt::ControlModifier + Qt::Key_Asterisk)))
-#endif
 
 QT_WARNING_POP
 } // namespace
