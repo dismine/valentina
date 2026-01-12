@@ -2954,6 +2954,9 @@ void VPattern::ParseToolCubicBezier(VMainGraphicsScene *scene, const QDomElement
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::ParseOldToolSplinePath(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse)
 {
+    // TODO. Delete if minimal supported version is 0.2.7
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 2, 7), "Time to refactor the code.");
+
     SCASSERT(scene != nullptr)
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
@@ -4074,7 +4077,9 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, QDomElement &domEle
     {
         case 0: // VToolSpline::OldToolType
             qCDebug(vXML, "VOldToolSpline.");
-            ParseOldToolSpline(scene, domElement, parse); // TODO. Delete if minimal supported version is 0.2.7
+            // TODO. Delete if minimal supported version is 0.2.7
+            Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 2, 7), "Time to refactor the code.");
+            ParseOldToolSpline(scene, domElement, parse);
             break;
         case 1: // VToolSpline::ToolType
             qCDebug(vXML, "VToolSpline.");
@@ -4082,7 +4087,9 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, QDomElement &domEle
             break;
         case 2: // VToolSplinePath::OldToolType
             qCDebug(vXML, "VOldToolSplinePath.");
-            ParseOldToolSplinePath(scene, domElement, parse); // TODO. Delete if minimal supported version is 0.2.7
+            // TODO. Delete if minimal supported version is 0.2.7
+            Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 2, 7), "Time to refactor the code.");
+            ParseOldToolSplinePath(scene, domElement, parse);
             break;
         case 3: // VToolSplinePath::ToolType
             qCDebug(vXML, "VToolSplinePath.");

@@ -172,10 +172,10 @@ auto VToolSplinePath::Create(VToolSplinePathInitData &initData, VSplinePath *pat
 
     for (int i = 0; i < initData.points.size(); ++i)
     {
-        initData.doc->FindFormulaDependencies(initData.a1.at(i), initData.id, varData);
-        initData.doc->FindFormulaDependencies(initData.a2.at(i), initData.id, varData);
-        initData.doc->FindFormulaDependencies(initData.l1.at(i), initData.id, varData);
-        initData.doc->FindFormulaDependencies(initData.l2.at(i), initData.id, varData);
+        initData.doc->FindFormulaDependencies(initData.a1.value(i), initData.id, varData);
+        initData.doc->FindFormulaDependencies(initData.a2.value(i), initData.id, varData);
+        initData.doc->FindFormulaDependencies(initData.l1.value(i), initData.id, varData);
+        initData.doc->FindFormulaDependencies(initData.l2.value(i), initData.id, varData);
     }
 
     initData.data->AddCurveWithSegments(initData.data->GeometricObject<VAbstractCubicBezierPath>(initData.id),
