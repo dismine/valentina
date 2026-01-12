@@ -200,7 +200,11 @@ auto VDependencyTreeModel::parent(const QModelIndex &child) const -> QModelIndex
     {
         if (c.get() == parentNode)
         {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
             return createIndex(row, 0, parentNode);
+#else
+            return createIndex(row, 0, const_cast<VDependencyNode *>(parentNode));
+#endif
         }
         row++;
     }
