@@ -74,7 +74,7 @@ class VContainerData final : public QSharedData //-V690
 public:
     VContainerData(const VTranslateVars *trVars, const Unit *patternUnit, QString nspace);
     VContainerData(const VContainerData &data) = default;
-    virtual ~VContainerData();
+    ~VContainerData();
 
     // NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
     QHash<quint32, QSharedPointer<VGObject>> calculationObjects{};
