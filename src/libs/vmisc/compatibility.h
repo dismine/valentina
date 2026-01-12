@@ -108,6 +108,31 @@ inline auto operator""_s(const char16_t *str, size_t size)Q_DECL_NOEXCEPT->QStri
 } // namespace Qt
 #endif
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+// restore bit-wise enum-enum operators deprecated in C++20,
+// but used in a few places in the API
+#if __cplusplus > 201702L // assume compilers don't warn if in C++17 mode
+// provide user-defined operators to override the deprecated operations:
+#define Q_DECLARE_MIXED_ENUM_OPERATOR(op, Ret, LHS, RHS) \
+    [[maybe_unused]] constexpr inline Ret operator op(LHS lhs, RHS rhs) noexcept \
+    { \
+        return static_cast<Ret>(qToUnderlying(lhs) op qToUnderlying(rhs)); \
+    } \
+/* end */
+#endif
+#define Q_DECLARE_MIXED_ENUM_OPERATORS(Ret, Flags, Enum) \
+    Q_DECLARE_MIXED_ENUM_OPERATOR(|, Ret, Flags, Enum) \
+    Q_DECLARE_MIXED_ENUM_OPERATOR(&, Ret, Flags, Enum) \
+    Q_DECLARE_MIXED_ENUM_OPERATOR(^, Ret, Flags, Enum) \
+/* end */
+#define Q_DECLARE_MIXED_ENUM_OPERATORS_SYMMETRIC(Ret, Flags, Enum) \
+    Q_DECLARE_MIXED_ENUM_OPERATORS(Ret, Flags, Enum) \
+    Q_DECLARE_MIXED_ENUM_OPERATORS(Ret, Enum, Flags) \
+    /* end */
+
+Q_DECLARE_MIXED_ENUM_OPERATORS_SYMMETRIC(int, Qt::KeyboardModifier, Qt::Key)
+#endif
+
 // Contains helpful methods to hide version dependent code. It can be deprecation of method or change in API
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T, template <typename> class C> inline auto ConvertToList(const C<T> &container) -> QList<T>

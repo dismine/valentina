@@ -26,6 +26,9 @@
  **
  *************************************************************************/
 #include "vpuzzleshortcutmanager.h"
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#include "../vmisc/compatibility.h"
+#endif
 
 VPuzzleShortcutManager::VPuzzleShortcutManager(QObject *parent)
   : VAbstractShortcutManager{parent}
@@ -45,7 +48,9 @@ VPuzzleShortcutManager::VPuzzleShortcutManager(QObject *parent)
     AddShortcut({VShortcutAction::ZoomOut, KeyBindingsToStringList(QKeySequence::ZoomOut), {}});
     AddShortcut({VShortcutAction::ZoomOriginal,
                  {QKeySequence(Qt::ControlModifier QKEY_SEQUENCE_OP Qt::Key_0).toString(),
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                  QKeySequence(Qt::ControlModifier | Qt::KeypadModifier | Qt::Key_0).toString()
+#else
                   QKeySequence(Qt::ControlModifier + Qt::Key_0 + Qt::KeypadModifier).toString()
 #endif
                  },

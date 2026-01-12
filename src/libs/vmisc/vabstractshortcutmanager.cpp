@@ -500,33 +500,30 @@ void VAbstractShortcutManager::AddShortcut(const VSShortcut &shortcut)
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractShortcutManager::CustomKeyBindings(QKeySequence::StandardKey sequence) -> QList<QKeySequence>
 {
-    QT_WARNING_PUSH
-#if !defined(Q_OS_MACOS) && defined(Q_CC_CLANG)
-    QT_WARNING_DISABLE_CLANG("-Wenum-enum-conversion")
-#endif
-
-/*
- * Because keypad "-" and "+" not the same keys like in main keypad, shortcut Ctrl+"-" or "+" from keypad will not
- * working with standard shortcut (QKeySequence::ZoomIn or QKeySequence::ZoomOut). For examle "+" is Qt::Key_Plus +
- * Qt::KeypadModifier for keypad. Also for me don't work Qt:CTRL and work Qt::ControlModifier.
- */
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    /*
+     * Because keypad "-" and "+" not the same keys like in main keypad, shortcut Ctrl+"-" or "+" from keypad will not
+     * work with standard shortcut (QKeySequence::ZoomIn or QKeySequence::ZoomOut). For example "+" is Qt::Key_Plus +
+     * Qt::KeypadModifier for keypad. Also for me don't work Qt:CTRL and work Qt::ControlModifier.
+     */
     switch (sequence)
     {
         case QKeySequence::ZoomIn:
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+            return {QKeySequence(Qt::ControlModifier | Qt::KeypadModifier | Qt::Key_Plus)};
+#else
             return {QKeySequence(Qt::ControlModifier + Qt::Key_Plus + Qt::KeypadModifier)};
+#endif
         case QKeySequence::ZoomOut:
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+            return {QKeySequence(Qt::ControlModifier | Qt::KeypadModifier | Qt::Key_Minus)};
+#else
             return {QKeySequence(Qt::ControlModifier + Qt::Key_Minus + Qt::KeypadModifier)};
+#endif
         default:
             break;
     }
-#else
-    Q_UNUSED(sequence)
-#endif
 
     return {};
-
-    QT_WARNING_POP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
