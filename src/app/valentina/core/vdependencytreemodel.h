@@ -45,11 +45,11 @@ class VContainer;
 // Represents a single object in dependency tree
 struct VDependencyNode
 {
-    vidtype objectId = 0;
-    QString displayName;
-    QVector<QSharedPointer<VDependencyNode>> children;
-    bool childrenLoaded = false;
-    VDependencyNode *parent = nullptr;
+    vidtype objectId{0};
+    QString displayName{};
+    QVector<QSharedPointer<VDependencyNode>> children{};
+    bool childrenLoaded{false};
+    VDependencyNode *parent{nullptr};
 
     // Helper to build unique path for state tracking
     auto GetPath() const -> QString
