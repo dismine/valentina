@@ -154,7 +154,7 @@ private:
     Q_DISABLE_COPY_MOVE(VPatternGraph)
 
     Graph m_graph{};
-    mutable QReadWriteLock m_lock; // mutable for const methods with locks
+    mutable QReadWriteLock m_lock{}; // mutable for const methods with locks
 
     // Fast bidirectional mapping between node IDs and internal vertex IDs
     QHash<vidtype, vertex_id_t> m_idToVertex{}; // node ID -> vertex_id_t

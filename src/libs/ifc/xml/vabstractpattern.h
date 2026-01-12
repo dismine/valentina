@@ -518,7 +518,7 @@ private:
     VPatternBlockMapper *m_patternBlockMapper;
 
     QList<QFutureWatcher<void> *> m_formulaDependenciesWatchers{};
-    mutable QMutex m_watchersMutex;
+    mutable QMutex m_watchersMutex{};
 
     auto ListIncrements() const -> QStringList;
     auto ListPointExpressions() const -> QVector<VFormulaField>;
