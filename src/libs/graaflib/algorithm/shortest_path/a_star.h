@@ -1,10 +1,10 @@
 #pragma once
 
+#include "../../concepts_compat.h"
 #include "../../graph.h"
 #include "../../types.h"
 #include "common.h"
 
-#include <concepts>
 #include <optional>
 
 namespace graaf::algorithm {
@@ -21,13 +21,20 @@ namespace graaf::algorithm {
  * @return An optional containing the shortest path if found, or std::nullopt if
  * no path exists.
  */
-template <typename V, typename E, graph_type T, typename HEURISTIC_T,
-          typename WEIGHT_T = decltype(get_weight(std::declval<E>()))>
-  requires std::is_invocable_r_v<WEIGHT_T, HEURISTIC_T&, vertex_id_t>
-std::optional<graph_path<WEIGHT_T>> a_star_search(const graph<V, E, T>& graph,
+// clang-format off
+template <typename V,
+          typename E,
+          graph_type T,
+          typename HEURISTIC_T,
+          typename WEIGHT_T = decltype(get_weight(std::declval<E>()))
+          GRAAF_ENABLE_IF_H(std::is_invocable_r_v<WEIGHT_T, HEURISTIC_T&, vertex_id_t>)
+>
+GRAAF_REQUIRES(std::is_invocable_r_v<WEIGHT_T, HEURISTIC_T&, vertex_id_t>)
+// clang-format on
+std::optional<graph_path<WEIGHT_T>> a_star_search(const graph<V, E, T> &graph,
                                                   vertex_id_t start_vertex,
                                                   vertex_id_t target_vertex,
-                                                  const HEURISTIC_T& heuristic);
+                                                  const HEURISTIC_T &heuristic);
 
 }  // namespace graaf::algorithm
 
