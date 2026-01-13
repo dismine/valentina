@@ -60,6 +60,7 @@
 #include <QPainter>
 #include <QPixmap>
 #include <QPushButton>
+#include <QScreen>
 #include <QShowEvent>
 #include <QStyle>
 #include <QTimer>

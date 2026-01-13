@@ -36,6 +36,7 @@
 #include <QList>
 #include <QMessageLogger>
 #include <QMimeDatabase>
+#include <QScopeGuard>
 #include <QSet>
 #include <QtConcurrentMap>
 #include <QtConcurrentRun>

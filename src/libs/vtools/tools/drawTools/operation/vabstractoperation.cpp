@@ -27,6 +27,9 @@
  *************************************************************************/
 
 #include "vabstractoperation.h"
+
+#include <QScopeGuard>
+
 #include "../../../undocommands/deltool.h"
 #include "../../../undocommands/label/operationmovelabel.h"
 #include "../../../undocommands/label/operationshowlabel.h"

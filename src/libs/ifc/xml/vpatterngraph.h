@@ -28,8 +28,10 @@
 #ifndef VPATTERNGRAPH_H
 #define VPATTERNGRAPH_H
 
+#include <optional>
 #include <QHash>
 #include <QReadWriteLock>
+#include <QScopeGuard>
 #include <QtGlobal>
 
 #include "../graaflib/algorithm/graph_traversal/breadth_first_search.h"

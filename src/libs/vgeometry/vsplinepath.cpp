@@ -28,6 +28,7 @@
 
 #include "vsplinepath.h"
 
+#include <cmath>
 #include <QJsonArray>
 #include <QJsonObject>
 #include <QPoint>

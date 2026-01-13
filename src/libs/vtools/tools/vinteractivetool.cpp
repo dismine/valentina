@@ -26,6 +26,7 @@
  **
  *************************************************************************/
 #include <QMessageBox>
+#include <QScopeGuard>
 
 #include "../ifc/xml/vpatterngraph.h"
 #include "../undocommands/deltool.h"
