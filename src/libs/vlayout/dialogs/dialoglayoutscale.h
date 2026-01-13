@@ -41,7 +41,7 @@ class DialogLayoutScale final : public QDialog
 
 public:
     explicit DialogLayoutScale(bool printTiled, QWidget *parent = nullptr);
-    ~DialogLayoutScale();
+    ~DialogLayoutScale() override;
 
     void SetTiledMargins(QMarginsF margins);
     auto GetTiledMargins() const -> QMarginsF;
@@ -53,7 +53,7 @@ public:
     auto GetYScale() const -> qreal;
 
 protected:
-    virtual void showEvent(QShowEvent *event) override;
+    void showEvent(QShowEvent *event) override;
 
 private slots:
     void Save();

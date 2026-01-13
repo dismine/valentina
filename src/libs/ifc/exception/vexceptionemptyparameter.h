@@ -47,17 +47,17 @@ public:
         V_NOEXCEPT_EXPR(true);
     VExceptionEmptyParameter(const VExceptionEmptyParameter &e) V_NOEXCEPT_EXPR(true);
     auto operator=(const VExceptionEmptyParameter &e) V_NOEXCEPT_EXPR(true) -> VExceptionEmptyParameter &;
-    virtual ~VExceptionEmptyParameter() V_NOEXCEPT_EXPR(true) = default;
+    ~VExceptionEmptyParameter() V_NOEXCEPT_EXPR(true) override = default;
 
-    Q_NORETURN virtual void raise() const override { throw *this; }
+    Q_NORETURN void raise() const override { throw *this; }
 
-    Q_REQUIRED_RESULT virtual auto clone() const -> VExceptionEmptyParameter * override
+    Q_REQUIRED_RESULT auto clone() const -> VExceptionEmptyParameter * override
     {
         return new VExceptionEmptyParameter(*this);
     }
 
-    virtual auto ErrorMessage() const -> QString override;
-    virtual auto DetailedInformation() const -> QString override;
+    auto ErrorMessage() const -> QString override;
+    auto DetailedInformation() const -> QString override;
     auto Name() const -> QString;
     auto TagText() const -> QString;
     auto TagName() const -> QString;

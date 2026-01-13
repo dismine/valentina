@@ -45,13 +45,13 @@ public:
     VExceptionBadId(const QString &error, const QString &key) V_NOEXCEPT_EXPR(true);
     VExceptionBadId(const VExceptionBadId &e) V_NOEXCEPT_EXPR(true);
     auto operator=(const VExceptionBadId &e) V_NOEXCEPT_EXPR(true) -> VExceptionBadId &;
-    virtual ~VExceptionBadId() V_NOEXCEPT_EXPR(true) = default;
+    ~VExceptionBadId() V_NOEXCEPT_EXPR(true) override = default;
 
-    Q_NORETURN virtual void raise() const override { throw *this; }
+    Q_NORETURN void raise() const override { throw *this; }
 
-    Q_REQUIRED_RESULT virtual auto clone() const -> VExceptionBadId * override { return new VExceptionBadId(*this); }
+    Q_REQUIRED_RESULT auto clone() const -> VExceptionBadId * override { return new VExceptionBadId(*this); }
 
-    virtual auto ErrorMessage() const -> QString override;
+    auto ErrorMessage() const -> QString override;
     auto BadId() const -> quint32;
     auto BadKey() const -> QString;
 

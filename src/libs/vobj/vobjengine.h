@@ -51,14 +51,14 @@ public:
     VObjEngine();
     ~VObjEngine() override = default;
 
-    virtual auto begin(QPaintDevice *pdev) -> bool override;
-    virtual auto end() -> bool override;
-    virtual void updateState(const QPaintEngineState &state) override;
-    virtual void drawPath(const QPainterPath &path) override;
-    virtual auto type() const -> Type override;
-    virtual void drawPoints(const QPointF *points, int pointCount) override;
-    virtual void drawPixmap(const QRectF &r, const QPixmap &pm, const QRectF &sr) override;
-    virtual void drawPolygon(const QPointF *points, int pointCount, PolygonDrawMode mode) override;
+    auto begin(QPaintDevice *pdev) -> bool override;
+    auto end() -> bool override;
+    void updateState(const QPaintEngineState &state) override;
+    void drawPath(const QPainterPath &path) override;
+    auto type() const -> Type override;
+    void drawPoints(const QPointF *points, int pointCount) override;
+    void drawPixmap(const QRectF &r, const QPixmap &pm, const QRectF &sr) override;
+    void drawPolygon(const QPointF *points, int pointCount, PolygonDrawMode mode) override;
 
     auto getSize() const -> QSize;
     void setSize(const QSize &value);

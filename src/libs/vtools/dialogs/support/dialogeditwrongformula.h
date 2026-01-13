@@ -73,8 +73,8 @@ public:
     void ShowPieceArea(bool show) const;
 
 public slots:
-    virtual void DialogAccepted();
-    virtual void DialogRejected();
+    void DialogAccepted();
+    void DialogRejected();
 
     void EvalFormula();
     void ValChanged(int row);
@@ -151,12 +151,12 @@ private:
 
     void InitIcons();
 
-    virtual auto IsValid() const -> bool;
+    auto IsValid() const -> bool;
     void closeEvent(QCloseEvent *event) override;
     void showEvent(QShowEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
     void changeEvent(QEvent *event) override;
-    virtual void CheckState();
+    void CheckState();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -35,7 +35,7 @@ class VWatermarkConverter final : public VAbstractConverter
 {
 public:
     explicit VWatermarkConverter(const QString &fileName);
-    virtual ~VWatermarkConverter() = default;
+    ~VWatermarkConverter() override = default;
 
     static const QString WatermarkMaxVerStr;
     static const QString CurrentSchema;
@@ -45,16 +45,16 @@ public:
     static auto XSDSchemas() -> QHash <unsigned, QString>;
 
 protected:
-    virtual auto MinVer() const -> unsigned override;
-    virtual auto MaxVer() const -> unsigned override;
+    auto MinVer() const -> unsigned override;
+    auto MaxVer() const -> unsigned override;
 
-    virtual auto MinVerStr() const -> QString override;
-    virtual auto MaxVerStr() const -> QString override;
+    auto MinVerStr() const -> QString override;
+    auto MaxVerStr() const -> QString override;
 
-    virtual void ApplyPatches() override;
-    virtual void DowngradeToCurrentMaxVersion() override;
+    void ApplyPatches() override;
+    void DowngradeToCurrentMaxVersion() override;
 
-    virtual auto IsReadOnly() const -> bool override { return false; }
+    auto IsReadOnly() const -> bool override { return false; }
 
     auto Schemas() const -> QHash <unsigned, QString> override;
 
