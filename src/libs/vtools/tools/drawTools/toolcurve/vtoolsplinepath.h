@@ -47,8 +47,6 @@ template <class T> class QSharedPointer;
 
 struct VToolSplinePathInitData : VAbstractSplineInitData
 {
-    VToolSplinePathInitData() = default;
-
     QVector<quint32> points{}; // NOLINT(misc-non-private-member-variables-in-classes)
     QVector<QString> a1{};     // NOLINT(misc-non-private-member-variables-in-classes)
     QVector<QString> a2{};     // NOLINT(misc-non-private-member-variables-in-classes)

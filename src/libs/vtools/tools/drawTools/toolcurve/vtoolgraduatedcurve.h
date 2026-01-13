@@ -43,8 +43,6 @@ struct VGraduatedCurveOffset
 
 struct VToolGraduatedCurveInitData : VAbstractSplineInitData
 {
-    VToolGraduatedCurveInitData() = default;
-
     quint32 originCurveId{NULL_ID};                 // NOLINT(misc-non-private-member-variables-in-classes)
     QVector<VRawGraduatedCurveOffset> offsets{};    // NOLINT(misc-non-private-member-variables-in-classes)
     QString suffix{};                               // NOLINT(misc-non-private-member-variables-in-classes)

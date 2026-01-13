@@ -46,18 +46,10 @@ template <class T> class QSharedPointer;
 
 struct VToolShoulderPointInitData : VToolLinePointInitData
 {
-    VToolShoulderPointInitData()
-        : VToolLinePointInitData(),
-          formula(),
-          p1Line(NULL_ID),
-          p2Line(NULL_ID),
-          pShoulder(NULL_ID)
-    {}
-
-    QString formula;
-    quint32 p1Line;
-    quint32 p2Line;
-    quint32 pShoulder;
+    QString formula{};
+    quint32 p1Line{NULL_ID};
+    quint32 p2Line{NULL_ID};
+    quint32 pShoulder{NULL_ID};
 };
 
 /**

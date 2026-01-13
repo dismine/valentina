@@ -46,19 +46,10 @@ template <class T> class QSharedPointer;
 
 struct VToolPointOfContactInitData : VToolSinglePointInitData
 {
-    VToolPointOfContactInitData()
-      : VToolSinglePointInitData(),
-        radius('0'),
-        center(NULL_ID),
-        firstPointId(NULL_ID),
-        secondPointId(NULL_ID)
-    {
-    }
-
-    QString radius;
-    quint32 center;
-    quint32 firstPointId;
-    quint32 secondPointId;
+    QString radius{'0'};
+    quint32 center{NULL_ID};
+    quint32 firstPointId{NULL_ID};
+    quint32 secondPointId{NULL_ID};
 };
 
 /**

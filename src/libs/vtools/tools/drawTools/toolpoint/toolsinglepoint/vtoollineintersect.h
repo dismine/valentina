@@ -45,18 +45,10 @@ template <class T> class QSharedPointer;
 
 struct VToolLineIntersectInitData : VToolSinglePointInitData
 {
-    VToolLineIntersectInitData()
-        : VToolSinglePointInitData(),
-          p1Line1Id(NULL_ID),
-          p2Line1Id(NULL_ID),
-          p1Line2Id(NULL_ID),
-          p2Line2Id(NULL_ID)
-    {}
-
-    quint32 p1Line1Id;
-    quint32 p2Line1Id;
-    quint32 p1Line2Id;
-    quint32 p2Line2Id;
+    quint32 p1Line1Id{NULL_ID};
+    quint32 p2Line1Id{NULL_ID};
+    quint32 p1Line2Id{NULL_ID};
+    quint32 p2Line2Id{NULL_ID};
 };
 
 /**

@@ -46,16 +46,9 @@ template <class T> class QSharedPointer;
 
 struct VToolEndLineInitData : VToolLinePointInitData
 {
-    VToolEndLineInitData()
-        : VToolLinePointInitData(),
-          formulaLength(),
-          formulaAngle(),
-          basePointId(NULL_ID)
-    {}
-
-    QString formulaLength;
-    QString formulaAngle;
-    quint32 basePointId;
+    QString formulaLength{};
+    QString formulaAngle{};
+    quint32 basePointId{NULL_ID};
 };
 
 /**

@@ -44,8 +44,6 @@ template <class T> class QSharedPointer;
 
 struct VToolArcInitData : VAbstractSplineInitData
 {
-    VToolArcInitData() = default;
-
     quint32 center{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
     QString radius{'0'};     // NOLINT(misc-non-private-member-variables-in-classes)
     QString f1{'0'};         // NOLINT(misc-non-private-member-variables-in-classes)

@@ -48,8 +48,6 @@ constexpr int UNION_VERSSION = 2;
 
 struct VToolUnionDetailsInitData : VAbstractToolInitData
 {
-    VToolUnionDetailsInitData() = default;
-
     quint32 d1id{NULL_ID};        // NOLINT(misc-non-private-member-variables-in-classes)
     quint32 d2id{NULL_ID};        // NOLINT(misc-non-private-member-variables-in-classes)
     quint32 indexD1{NULL_ID};     // NOLINT(misc-non-private-member-variables-in-classes)

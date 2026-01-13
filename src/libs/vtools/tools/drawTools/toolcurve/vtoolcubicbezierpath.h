@@ -47,8 +47,6 @@ QT_WARNING_DISABLE_GCC("-Weffc++")
 
 struct VToolCubicBezierPathInitData : VDrawToolInitData
 {
-    VToolCubicBezierPathInitData() = default;
-
     VCubicBezierPath *path{nullptr}; // NOLINT(misc-non-private-member-variables-in-classes)
 };
 

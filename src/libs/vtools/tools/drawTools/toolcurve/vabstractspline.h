@@ -52,8 +52,6 @@ template <class T> class QSharedPointer;
 
 struct VAbstractSplineInitData : VDrawToolInitData
 {
-    VAbstractSplineInitData() = default;
-
     QString color{ColorBlack};                            // NOLINT(misc-non-private-member-variables-in-classes)
     QString penStyle{TypeLineLine};                       // NOLINT(misc-non-private-member-variables-in-classes)
     qreal approximationScale{defCurveApproximationScale}; // NOLINT(misc-non-private-member-variables-in-classes)

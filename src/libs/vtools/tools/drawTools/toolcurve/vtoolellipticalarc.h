@@ -44,8 +44,6 @@ template <class T> class QSharedPointer;
 
 struct VToolEllipticalArcInitData : VAbstractSplineInitData
 {
-    VToolEllipticalArcInitData() = default;
-
     quint32 center{NULL_ID};    // NOLINT(misc-non-private-member-variables-in-classes)
     QString radius1{'0'};       // NOLINT(misc-non-private-member-variables-in-classes)
     QString radius2{'0'};       // NOLINT(misc-non-private-member-variables-in-classes)

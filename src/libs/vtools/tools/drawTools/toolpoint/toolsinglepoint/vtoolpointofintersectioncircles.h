@@ -47,20 +47,11 @@ template <class T> class QSharedPointer;
 
 struct VToolPointOfIntersectionCirclesInitData : VToolSinglePointInitData
 {
-    VToolPointOfIntersectionCirclesInitData()
-        : VToolSinglePointInitData(),
-          firstCircleCenterId(NULL_ID),
-          secondCircleCenterId(NULL_ID),
-          firstCircleRadius('0'),
-          secondCircleRadius('0'),
-          crossPoint(CrossCirclesPoint::FirstPoint)
-    {}
-
-    quint32 firstCircleCenterId;
-    quint32 secondCircleCenterId;
-    QString firstCircleRadius;
-    QString secondCircleRadius;
-    CrossCirclesPoint crossPoint;
+    quint32 firstCircleCenterId{NULL_ID};
+    quint32 secondCircleCenterId{NULL_ID};
+    QString firstCircleRadius{'0'};
+    QString secondCircleRadius{'0'};
+    CrossCirclesPoint crossPoint{CrossCirclesPoint::FirstPoint};
 };
 
 class VToolPointOfIntersectionCircles : public VToolSinglePoint

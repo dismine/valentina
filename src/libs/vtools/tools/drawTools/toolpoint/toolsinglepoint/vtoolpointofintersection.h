@@ -45,14 +45,8 @@ template <class T> class QSharedPointer;
 
 struct VToolPointOfIntersectionInitData : VToolSinglePointInitData
 {
-    VToolPointOfIntersectionInitData()
-        : VToolSinglePointInitData(),
-          firstPointId(NULL_ID),
-          secondPointId(NULL_ID)
-    {}
-
-    quint32 firstPointId;
-    quint32 secondPointId;
+    quint32 firstPointId{NULL_ID};
+    quint32 secondPointId{NULL_ID};
 };
 
 /**

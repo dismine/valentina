@@ -45,8 +45,6 @@ class VFormula;
 
 struct VToolRotationInitData : VAbstractOperationInitData
 {
-    VToolRotationInitData() = default;
-
     quint32 origin{NULL_ID};
     QString angle{};
 };

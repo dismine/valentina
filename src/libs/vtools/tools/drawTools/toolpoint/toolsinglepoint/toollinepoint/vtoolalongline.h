@@ -45,8 +45,6 @@ template <class T> class QSharedPointer;
 
 struct VToolAlongLineInitData : VToolLinePointInitData
 {
-    VToolAlongLineInitData() = default;
-
     QString formula{QStringLiteral("100.0")}; // NOLINT(misc-non-private-member-variables-in-classes)
     quint32 firstPointId{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
     quint32 secondPointId{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)

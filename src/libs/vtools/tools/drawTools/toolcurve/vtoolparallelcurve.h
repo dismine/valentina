@@ -36,8 +36,6 @@ class QSharedPointer;
 
 struct VToolParallelCurveInitData : VAbstractSplineInitData
 {
-    VToolParallelCurveInitData() = default;
-
     quint32 originCurveId{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
     QString formulaWidth{'0'};      // NOLINT(misc-non-private-member-variables-in-classes)
     QString suffix{};               // NOLINT(misc-non-private-member-variables-in-classes)

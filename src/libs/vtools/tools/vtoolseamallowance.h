@@ -44,8 +44,6 @@ class VPatternGraph;
 
 struct VToolSeamAllowanceInitData : VAbstractToolInitData
 {
-    VToolSeamAllowanceInitData() = default;
-
     VPiece detail{};    // NOLINT(misc-non-private-member-variables-in-classes)
     QString width{'0'}; // NOLINT(misc-non-private-member-variables-in-classes)
     QString drawName{}; // NOLINT(misc-non-private-member-variables-in-classes)

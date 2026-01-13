@@ -37,12 +37,7 @@ class DialogTool;
 
 struct VToolPinInitData : VAbstractNodeInitData
 {
-    VToolPinInitData()
-        : VAbstractNodeInitData(),
-          pointId(NULL_ID)
-    {}
-
-    quint32 pointId;
+    quint32 pointId{NULL_ID};
 };
 
 class VToolPin : public VAbstractNode

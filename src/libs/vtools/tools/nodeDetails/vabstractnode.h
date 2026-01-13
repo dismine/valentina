@@ -46,8 +46,6 @@ enum class ParentType : bool
 
 struct VAbstractNodeInitData : VAbstractToolInitData
 {
-    VAbstractNodeInitData() = default;
-
     quint32 idObject{NULL_ID};
     QString drawName{};
     quint32 idTool{NULL_ID};

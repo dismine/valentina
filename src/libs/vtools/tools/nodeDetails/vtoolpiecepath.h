@@ -37,8 +37,6 @@ class DialogTool;
 
 struct VToolPiecePathInitData : VAbstractNodeInitData
 {
-    VToolPiecePathInitData() = default;
-
     VPiecePath path{};
 };
 

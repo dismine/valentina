@@ -46,18 +46,10 @@ template <class T> class QSharedPointer;
 
 struct VToolBisectorInitData : VToolLinePointInitData
 {
-    VToolBisectorInitData()
-        : VToolLinePointInitData(),
-          formula("100.0"),
-          firstPointId(NULL_ID),
-          secondPointId(NULL_ID),
-          thirdPointId(NULL_ID)
-    {}
-
-    QString formula;
-    quint32 firstPointId;
-    quint32 secondPointId;
-    quint32 thirdPointId;
+    QString formula{QStringLiteral("100.0")};
+    quint32 firstPointId{NULL_ID};
+    quint32 secondPointId{NULL_ID};
+    quint32 thirdPointId{NULL_ID};
 };
 
 /**
