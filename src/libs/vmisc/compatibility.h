@@ -109,7 +109,11 @@ inline auto operator""_s(const char16_t *str, size_t size)Q_DECL_NOEXCEPT->QStri
 #endif
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-Q_DECLARE_MIXED_ENUM_OPERATORS_SYMMETRIC(int, Qt::KeyboardModifier, Qt::Key)
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wc++98-compat-extra-semi")
+QT_WARNING_DISABLE_CLANG("-Wc++98-compat-extra-semi")
+Q_DECLARE_MIXED_ENUM_OPERATORS_SYMMETRIC(int, Qt::KeyboardModifier, Qt::Key);
+QT_WARNING_POP
 #endif
 
 // Contains helpful methods to hide version dependent code. It can be deprecation of method or change in API
