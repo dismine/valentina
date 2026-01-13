@@ -109,12 +109,36 @@ inline auto operator""_s(const char16_t *str, size_t size)Q_DECL_NOEXCEPT->QStri
 #endif
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Wc++98-compat-extra-semi")
-QT_WARNING_DISABLE_CLANG("-Wc++98-compat-extra-semi")
-Q_DECLARE_MIXED_ENUM_OPERATORS_SYMMETRIC(int, Qt::KeyboardModifier, Qt::Key);
-QT_WARNING_POP
+#ifndef Q_DECLARE_MIXED_ENUM_OPERATORS_SYMMETRIC
+// like std::to_underlying
+template<typename Enum>
+constexpr std::underlying_type_t<Enum> qToUnderlying(Enum e) noexcept
+{
+    return static_cast<std::underlying_type_t<Enum>>(e);
+}
+
+// restore bit-wise enum-enum operators deprecated in C++20
+// provide user-defined operators to override the deprecated operations:
+#define Q_DECLARE_MIXED_ENUM_OPERATOR(op, Ret, LHS, RHS) \
+    [[maybe_unused]] constexpr inline Ret operator op(LHS lhs, RHS rhs) noexcept \
+    { \
+        return static_cast<Ret>(qToUnderlying(lhs) op qToUnderlying(rhs)); \
+    } \
+    /* end */
+
+#define Q_DECLARE_MIXED_ENUM_OPERATORS(Ret, Flags, Enum) \
+    Q_DECLARE_MIXED_ENUM_OPERATOR(|, Ret, Flags, Enum) \
+    Q_DECLARE_MIXED_ENUM_OPERATOR(&, Ret, Flags, Enum) \
+    Q_DECLARE_MIXED_ENUM_OPERATOR(^, Ret, Flags, Enum) \
+/* end */
+#define Q_DECLARE_MIXED_ENUM_OPERATORS_SYMMETRIC(Ret, Flags, Enum) \
+    Q_DECLARE_MIXED_ENUM_OPERATORS(Ret, Flags, Enum) \
+    Q_DECLARE_MIXED_ENUM_OPERATORS(Ret, Enum, Flags) \
+    /* end */
 #endif
+
+Q_DECLARE_MIXED_ENUM_OPERATORS_SYMMETRIC(int, Qt::KeyboardModifier, Qt::Key)
+#endif // QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 
 // Contains helpful methods to hide version dependent code. It can be deprecation of method or change in API
 //---------------------------------------------------------------------------------------------------------------------
