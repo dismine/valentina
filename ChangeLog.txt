@@ -13,6 +13,7 @@
 - New tool Parallel curve.
 - New tool Graduated curve.
 - Fix calculation of seam allowance for symmetrical piece.
+- Dependency graph.
 
 # Valentina 1.0.1 (unreleased)
 - Tool Normal. Fixed formula values were not saved.
