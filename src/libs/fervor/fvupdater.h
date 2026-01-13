@@ -83,7 +83,7 @@ private:
     //
     Q_DISABLE_COPY_MOVE(FvUpdater) // NOLINT
     FvUpdater() = default;         // Hide main constructor
-    virtual ~FvUpdater();          // Hide main destructor
+    ~FvUpdater() override;         // Hide main destructor
 
     static QPointer<FvUpdater> m_Instance; // Singleton instance
 
