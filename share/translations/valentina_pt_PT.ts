@@ -19931,193 +19931,193 @@ This option will take an affect after restart.</source>
 <context>
     <name>VDependencyTreeModel</name>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="258"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="262"/>
         <source>Dependency tree</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="850"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="854"/>
         <source>Piece &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="925"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="929"/>
         <source>True darts</source>
         <comment>operation</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="927"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="931"/>
         <source>Rotation</source>
         <comment>operation</comment>
         <translation type="unfinished">Rotação</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="929"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="933"/>
         <source>Flipping by line</source>
         <comment>operation</comment>
         <translation type="unfinished">Virar pela linha</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="931"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="935"/>
         <source>Flipping by axis</source>
         <comment>operation</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="933"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="937"/>
         <source>Move</source>
         <comment>operation</comment>
         <translation type="unfinished">Mover</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="954"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="958"/>
         <source>Base point</source>
         <translation type="unfinished">Ponto base</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="956"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="960"/>
         <source>Point at distance and angle</source>
         <translation type="unfinished">Ponto na distância e ângulo</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="958"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="962"/>
         <source>Point along line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="960"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="964"/>
         <source>Shoulder point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="962"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="966"/>
         <source>Point along perpendicular</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="964"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="968"/>
         <source>Bisector</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="966"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="970"/>
         <source>Point at line intersection</source>
         <translation type="unfinished">Ponto na linha de interseção</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="969"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="973"/>
         <source>Spline</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="971"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="975"/>
         <source>Arc</source>
         <translation type="unfinished">Arco</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="973"/>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1012"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="977"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1016"/>
         <source>Elliptical arc with given length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="975"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="979"/>
         <source>Parallel curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="977"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="981"/>
         <source>Graduated curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="980"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="984"/>
         <source>Spline path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="982"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="986"/>
         <source>Point of intersection circle and segment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="984"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="988"/>
         <source>Perpendicular point along line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="986"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="990"/>
         <source>Point located at the triangle&apos;s right-angled corner, lying along the axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="988"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="992"/>
         <source>Point from X and Y of two other points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="990"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="994"/>
         <source>Point segmenting an arc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="992"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="996"/>
         <source>Point segmenting a spline</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="994"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="998"/>
         <source>Point segmenting a spline path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="996"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1000"/>
         <source>Point of intersection line and axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="998"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1002"/>
         <source>Point of intersection curve and axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1000"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1004"/>
         <source>Point of intersection arcs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1002"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1006"/>
         <source>Point of intersection circles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1004"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1008"/>
         <source>Point of intersection curves</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1006"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1010"/>
         <source>Point from circle and tangent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1008"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1012"/>
         <source>Point from arc and tangent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1010"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1014"/>
         <source>Elliptical arc</source>
         <translation type="unfinished">Arco eliptical</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1014"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1018"/>
         <source>Line connecting two points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1031"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1035"/>
         <source>Line_%1_%2</source>
         <translation type="unfinished"></translation>
     </message>
