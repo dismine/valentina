@@ -43,7 +43,6 @@ VLib {
         "algorithm/topological_sorting/dfs_topological_sorting.tpp",
         "algorithm/utils.h",
         "algorithm/utils.tpp",
-        "concepts_compat.h",
         "edge.h",
         "edge.tpp",
         "graph.h",

@@ -1,9 +1,10 @@
 #pragma once
 
-#include "../../concepts_compat.h"
 #include "../../graph.h"
 #include "../../types.h"
 #include "common.h"
+
+#include <concepts>
 
 namespace graaf::algorithm {
 
@@ -19,26 +20,18 @@ namespace graaf::algorithm {
  * should continue the traversal or not. Traversal continues while this
  * predicate returns false.
  */
-// clang-format off
-template <typename V,
-          typename E,
-          graph_type T,
-          typename EDGE_CALLBACK_T = detail::noop_callback,
-          typename SEARCH_TERMINATION_STRATEGY_T = detail::exhaustive_search_strategy
-          GRAAF_ENABLE_IF_H(
-              std::is_invocable_v<EDGE_CALLBACK_T &, edge_id_t &> &&
-              std::is_invocable_r_v<bool, SEARCH_TERMINATION_STRATEGY_T &, vertex_id_t>
-          )
->
-GRAAF_REQUIRES(std::invocable<EDGE_CALLBACK_T &, edge_id_t &> &&
-               std::is_invocable_r_v<bool, SEARCH_TERMINATION_STRATEGY_T &, vertex_id_t>
-)
-// clang-format on
+template <
+    typename V, typename E, graph_type T,
+    typename EDGE_CALLBACK_T = detail::noop_callback,
+    typename SEARCH_TERMINATION_STRATEGY_T = detail::exhaustive_search_strategy>
+  requires std::invocable<EDGE_CALLBACK_T &, edge_id_t &> &&
+           std::is_invocable_r_v<bool, SEARCH_TERMINATION_STRATEGY_T &,
+                                 vertex_id_t>
 void depth_first_traverse(
-    const graph<V, E, T> &graph,
-    vertex_id_t start_vertex,
+    const graph<V, E, T> &graph, vertex_id_t start_vertex,
     const EDGE_CALLBACK_T &edge_callback,
-    const SEARCH_TERMINATION_STRATEGY_T &search_termination_strategy = SEARCH_TERMINATION_STRATEGY_T{});
+    const SEARCH_TERMINATION_STRATEGY_T &search_termination_strategy =
+        SEARCH_TERMINATION_STRATEGY_T{});
 
 }  // namespace graaf::algorithm
 
