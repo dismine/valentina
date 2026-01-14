@@ -18,7 +18,7 @@ defaults:
 
 env:
   SOURCE_DIR: ${{ github.workspace }}
-  QBS_VERSION: 3.0.1
+  QBS_VERSION: 3.1.1
   INNOSETUP_VERSION: 6.4.0
   VALENTINA_VERSION: 1_1_0
   ACCESS_TOKEN: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
@@ -32,14 +32,14 @@ jobs:
       matrix:
         qt:
           # LTS release
-          - install: 6.10.1
+          - install: 6.10.2
             label: Qt6_10
             run_tests: 'true'
             with_icu: 'True'
             with_iconv: 'False'
             withBigCodecs: 'False'
             deploy: 'true'
-          - install: 6.10.1
+          - install: 6.10.2
             label: Qt6_10
             run_tests: 'true'
             with_icu: 'False'
