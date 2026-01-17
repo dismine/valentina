@@ -532,7 +532,7 @@ void VToolSplinePath::ShowHandles(bool show)
 void VToolSplinePath::AddPathPoint(VAbstractPattern *doc, QDomElement &domElement, const VSplinePoint &splPoint)
 {
     SCASSERT(doc != nullptr)
-    QDomElement pathPoint = doc->createElement(AttrPathPoint);
+    QDomElement pathPoint = doc->createElement(TagPathPoint);
 
     doc->SetAttribute(pathPoint, AttrPSpline, splPoint.P().id());
     doc->SetAttribute(pathPoint, AttrLength1, splPoint.Length1Formula());

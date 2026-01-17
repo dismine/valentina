@@ -1740,7 +1740,7 @@ auto VAbstractPattern::ListSplineExpressions() const -> QVector<VFormulaField>
             ReadExpressionAttribute(expressions, dom, AttrWidth);
         }
 
-        const QDomNodeList pathPointNodes = dom.elementsByTagName(AttrPathPoint);
+        const QDomNodeList pathPointNodes = dom.elementsByTagName(TagPathPoint);
         for (int i = 0; i < pathPointNodes.size(); ++i)
         {
             const QDomElement dom = pathPointNodes.at(i).toElement();

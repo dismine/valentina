@@ -241,7 +241,7 @@ void VToolCubicBezierPath::RefreshGeometry()
 void VToolCubicBezierPath::AddPathPoint(VAbstractPattern *doc, QDomElement &domElement, const VPointF &splPoint)
 {
     SCASSERT(doc != nullptr)
-    QDomElement pathPoint = doc->createElement(AttrPathPoint);
+    QDomElement pathPoint = doc->createElement(TagPathPoint);
     doc->SetAttribute(pathPoint, AttrPSpline, splPoint.id());
     domElement.appendChild(pathPoint);
 }

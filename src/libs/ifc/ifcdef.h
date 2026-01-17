@@ -99,7 +99,7 @@ extern const QString AttrKAsm2;  // TODO. Delete if minimal supported version is
 extern const QString AttrKCurve; // TODO. Delete if minimal supported version is 0.2.7
 extern const QString AttrDuplicate;
 extern const QString AttrAScale;
-extern const QString AttrPathPoint;
+extern const QString TagPathPoint;
 extern const QString AttrPSpline;
 extern const QString AttrAxisP1;
 extern const QString AttrAxisP2;

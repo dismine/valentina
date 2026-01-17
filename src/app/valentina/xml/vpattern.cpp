@@ -2981,7 +2981,7 @@ void VPattern::ParseOldToolSplinePath(VMainGraphicsScene *scene, QDomElement &do
         QDOM_LOOP(nodeList, i)
         {
             if (const QDomElement element = QDOM_ELEMENT(nodeList, i).toElement();
-                !element.isNull() && element.tagName() == AttrPathPoint)
+                !element.isNull() && element.tagName() == TagPathPoint)
             {
                 const qreal kAsm1 = GetParametrDouble(element, AttrKAsm1, QStringLiteral("1.0"));
                 const qreal angle = GetParametrDouble(element, AttrAngle, QChar('0'));
@@ -3045,7 +3045,7 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
         QDOM_LOOP(nodeList, i)
         {
             if (const QDomElement element = QDOM_ELEMENT(nodeList, i).toElement();
-                not element.isNull() && element.tagName() == AttrPathPoint)
+                not element.isNull() && element.tagName() == TagPathPoint)
             {
                 initData.a1.append(GetParametrString(element, AttrAngle1, QChar('0')));
                 initData.a2.append(GetParametrString(element, AttrAngle2, QChar('0')));
@@ -3074,7 +3074,7 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
         QDOM_LOOP(nodeList, i)
         {
             if (QDomElement element = QDOM_ELEMENT(nodeList, i).toElement();
-                not element.isNull() && element.tagName() == AttrPathPoint)
+                not element.isNull() && element.tagName() == TagPathPoint)
             {
                 if (angle1.at(count) != initData.a1.at(count) || angle2.at(count) != initData.a2.at(count) ||
                     length1.at(count) != initData.l1.at(count) || length2.at(count) != initData.l2.at(count))
@@ -3244,7 +3244,7 @@ void VPattern::ParseToolCubicBezierPath(VMainGraphicsScene *scene, const QDomEle
         QDOM_LOOP(nodeList, i)
         {
             if (const QDomElement element = QDOM_ELEMENT(nodeList, i).toElement();
-                !element.isNull() && element.tagName() == AttrPathPoint)
+                !element.isNull() && element.tagName() == TagPathPoint)
             {
                 const quint32 pSpline = GetParametrUInt(element, AttrPSpline, NULL_ID_STR);
                 const VPointF p = *data->GeometricObject<VPointF>(pSpline);
