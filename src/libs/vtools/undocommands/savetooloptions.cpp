@@ -40,7 +40,7 @@ SaveToolOptions::SaveToolOptions(
     oldXml(oldXml),
     newXml(newXml)
 {
-    setText(tr("save tool option"));
+    setText(tr("save tool options"));
     nodeId = id;
 }
 
@@ -75,7 +75,10 @@ void SaveToolOptions::redo()
 
     domElement.parentNode().replaceChild(newXml, domElement);
 
-    emit NeedLiteParsing(Document::LiteParse);
+    if (!m_inGroup)
+    {
+        emit NeedLiteParsing(Document::LiteParse);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

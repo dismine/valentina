@@ -55,17 +55,26 @@ public:
     auto mergeWith(const QUndoCommand *command) -> bool override;
     auto id() const -> int override;
 
+    void SetInGroup(bool newInGroup);
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(SaveToolOptions) // NOLINT
     const QDomElement oldXml;
     QDomElement newXml;
+    bool m_inGroup{false};
 };
 
 //---------------------------------------------------------------------------------------------------------------------
 inline auto SaveToolOptions::id() const -> int
 {
     return static_cast<int>(UndoCommand::SaveToolOptions);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void SaveToolOptions::SetInGroup(bool newInGroup)
+{
+    m_inGroup = newInGroup;
 }
 
 #endif // SAVETOOLOPTIONS_H
