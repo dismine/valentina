@@ -1750,6 +1750,10 @@ auto VAbstractPattern::ListSplineExpressions() const -> QVector<VFormulaField>
             ReadExpressionAttribute(expressions, dom, AttrKAsm1);
             ReadExpressionAttribute(expressions, dom, AttrKAsm2);
             ReadExpressionAttribute(expressions, dom, AttrAngle);
+            ReadExpressionAttribute(expressions, dom, AttrAngle1);
+            ReadExpressionAttribute(expressions, dom, AttrAngle2);
+            ReadExpressionAttribute(expressions, dom, AttrLength1);
+            ReadExpressionAttribute(expressions, dom, AttrLength2);
         }
     }
 
