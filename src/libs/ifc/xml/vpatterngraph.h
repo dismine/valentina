@@ -37,35 +37,7 @@
 #include "../graaflib/algorithm/graph_traversal/breadth_first_search.h"
 #include "../graaflib/graph.h"
 #include "../vmisc/typedef.h"
-
-// Node type enumeration
-enum class VNodeType : quint8
-{
-    TOOL,
-    MODELING_TOOL,
-    OBJECT,
-    MODELING_OBJECT,
-    PIECE
-};
-
-// Node structure
-struct VNode
-{
-    vidtype id{NULL_ID};
-    VNodeType type{VNodeType::TOOL};
-    int indexPatternBlock{-1};
-
-    VNode() = default;
-    VNode(vidtype nodeId, VNodeType nodeType, int index)
-      : id(nodeId),
-        type(nodeType),
-        indexPatternBlock(index)
-    {
-    }
-
-    // Each node uniquely represented by id. No need for additional checks
-    auto operator==(const VNode &other) const -> bool { return id == other.id; }
-};
+#include "vpatterngraphnode.h"
 
 // Empty edge type for unweighted graph
 struct VEdge
