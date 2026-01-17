@@ -55,9 +55,6 @@ public:
     auto mergeWith(const QUndoCommand *command) -> bool override;
     auto id() const -> int override;
 
-    auto getNewXml() const -> QDomElement;
-    auto getToolId() const -> quint32;
-
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(SaveToolOptions) // NOLINT
@@ -69,18 +66,6 @@ private:
 inline auto SaveToolOptions::id() const -> int
 {
     return static_cast<int>(UndoCommand::SaveToolOptions);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto SaveToolOptions::getNewXml() const -> QDomElement
-{
-    return newXml;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto SaveToolOptions::getToolId() const -> quint32
-{
-    return nodeId;
 }
 
 #endif // SAVETOOLOPTIONS_H

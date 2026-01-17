@@ -83,11 +83,11 @@ auto SaveToolOptions::mergeWith(const QUndoCommand *command) -> bool
 {
     const auto *saveCommand = static_cast<const SaveToolOptions *>(command);
 
-    if (saveCommand->getToolId() != nodeId)
+    if (saveCommand->nodeId != nodeId)
     {
         return false;
     }
 
-    newXml = saveCommand->getNewXml();
+    newXml = saveCommand->newXml;
     return true;
 }
