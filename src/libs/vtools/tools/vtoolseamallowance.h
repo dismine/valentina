@@ -75,7 +75,6 @@ public:
     static const QString TagIPaths;
     static const QString TagPins;
     static const QString TagPlaceLabels;
-    static const QString TagMirrorLine;
 
     static const QString AttrSeamAllowance;
     static const QString AttrHideMainPath;

@@ -1165,7 +1165,7 @@ void VPattern::ParseDetailInternals(const QDomElement &domElement, VPiece &detai
                            VToolSeamAllowance::TagIPaths,
                            VToolSeamAllowance::TagPins,
                            VToolSeamAllowance::TagPlaceLabels,
-                           VToolSeamAllowance::TagMirrorLine};
+                           VAbstractPattern::TagMirrorLine};
 
     QFuture<QVector<VPieceNode>> futurePathV1;
     QFuture<VPiecePath> futurePathV2;

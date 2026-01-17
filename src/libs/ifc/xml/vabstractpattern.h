@@ -329,6 +329,7 @@ public:
     static const QString TagBackgroundImage;
     static const QString TagPieceLabel;
     static const QString TagOffset;
+    static const QString TagMirrorLine;
 
     static const QString AttrName;
     static const QString AttrEnabled;

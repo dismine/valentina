@@ -112,6 +112,7 @@ const QString VAbstractPattern::TagBackgroundImages = QStringLiteral("backgroudI
 const QString VAbstractPattern::TagBackgroundImage = QStringLiteral("backgroudImage");
 const QString VAbstractPattern::TagPieceLabel = QStringLiteral("pieceLabel");
 const QString VAbstractPattern::TagOffset = QStringLiteral("offset");
+const QString VAbstractPattern::TagMirrorLine = QStringLiteral("mirrorLine"); // NOLINT(cert-err58-cpp)
 
 const QString VAbstractPattern::AttrName = QStringLiteral("name");
 const QString VAbstractPattern::AttrEnabled = QStringLiteral("enabled");
