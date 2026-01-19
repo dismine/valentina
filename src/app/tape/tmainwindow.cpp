@@ -124,8 +124,6 @@ enum class MUnits : qint8
 
 struct IndividualMeasurement
 {
-    IndividualMeasurement() = default;
-
     QString name{};           // NOLINT(misc-non-private-member-variables-in-classes)
     QString value{'0'};       // NOLINT(misc-non-private-member-variables-in-classes)
     QString fullName{};       // NOLINT(misc-non-private-member-variables-in-classes)

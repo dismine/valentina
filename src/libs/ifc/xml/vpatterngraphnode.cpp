@@ -28,14 +28,6 @@
 #include "vpatterngraphnode.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VNode::VNode(vidtype nodeId, VNodeType nodeType, int index)
-  : id(nodeId),
-    type(nodeType),
-    indexPatternBlock(index)
-{
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 auto VNode::operator==(const VNode &other) const -> bool
 {
     return id == other.id;

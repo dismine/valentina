@@ -67,13 +67,6 @@ struct FoldLabelPosData
     QPointF pos{};   // NOLINT(misc-non-private-member-variables-in-classes)
     QString label{}; // NOLINT(misc-non-private-member-variables-in-classes)
     qreal angle{0};  // NOLINT(misc-non-private-member-variables-in-classes)
-
-    FoldLabelPosData() = default;
-    FoldLabelPosData(FoldLabelPosData &&) noexcept = default;
-    auto operator=(FoldLabelPosData &&) noexcept -> FoldLabelPosData & = default;
-    FoldLabelPosData(const FoldLabelPosData &) = default;
-    auto operator=(const FoldLabelPosData &) -> FoldLabelPosData & = default;
-    ~FoldLabelPosData() = default;
 };
 
 class VFoldLine

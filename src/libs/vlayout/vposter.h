@@ -42,14 +42,6 @@ struct VWatermarkData;
 
 struct PosterData
 {
-    PosterData()
-        : index(0),
-          row(0),
-          column(0),
-          rows(0),
-          columns(0),
-          rect(){}
-
     quint32 index{0}; // paper index
     quint32 row{0};   // positions in the grid
     quint32 column{0};

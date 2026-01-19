@@ -47,9 +47,6 @@ struct VNode
     VNodeType type{VNodeType::TOOL};
     int indexPatternBlock{-1};
 
-    VNode() = default;
-    VNode(vidtype nodeId, VNodeType nodeType, int index);
-
     // Each node uniquely represented by id. No need for additional checks
     auto operator==(const VNode &other) const -> bool;
 };

@@ -261,13 +261,6 @@ struct VWatermarkData
     bool grayscale{false};       // NOLINT(misc-non-private-member-variables-in-classes)
     bool invalidFile{false};     // NOLINT(misc-non-private-member-variables-in-classes)
     QColor textColor{Qt::black}; // NOLINT(misc-non-private-member-variables-in-classes)
-
-    VWatermarkData() = default;
-    VWatermarkData(VWatermarkData &&) noexcept = default;
-    auto operator=(VWatermarkData &&) noexcept -> VWatermarkData & = default;
-    VWatermarkData(const VWatermarkData &) = default;
-    auto operator=(const VWatermarkData &) -> VWatermarkData & = default;
-    ~VWatermarkData() = default;
 };
 
 QT_WARNING_POP

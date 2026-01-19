@@ -85,8 +85,6 @@ enum class IncrUnits : qint8
 
 struct IncrementData
 {
-    IncrementData() = default;
-
     QString name{};           // NOLINT(misc-non-private-member-variables-in-classes)
     QString value{'0'};       // NOLINT(misc-non-private-member-variables-in-classes)
     QString description{};    // NOLINT(misc-non-private-member-variables-in-classes)
