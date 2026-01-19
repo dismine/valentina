@@ -2479,7 +2479,7 @@ auto VAbstractPattern::GetGroups(const QString &patternPieceName) -> QMap<quint3
     }
     catch (const VExceptionConversionError &)
     {
-        return QMap<quint32, VGroupData>();
+        return {};
     }
 
     return data;

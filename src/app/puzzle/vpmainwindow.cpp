@@ -3678,7 +3678,7 @@ void VPMainWindow::InitIcons()
 {
     const auto resource = QStringLiteral("puzzleicon");
 
-    auto SetTabIcon = [resource, this](QWidget *tab, const QString &iconName)
+    auto SetTabIcon = [resource, this](QWidget *tab, const QString &iconName) -> void
     {
         if (const int index = ui->tabWidgetProperties->indexOf(tab); index != -1)
         {

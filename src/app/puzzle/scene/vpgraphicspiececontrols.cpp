@@ -325,14 +325,11 @@ void VPGraphicsPieceControls::on_UpdateControls()
 
     if (not m_pieceRect.isNull())
     {
-        VPLayoutPtr const layout = m_layout.toStrongRef();
-        if (not layout.isNull())
+        if (VPLayoutPtr const layout = m_layout.toStrongRef(); not layout.isNull())
         {
-            VPSheetPtr const sheet = layout->GetFocusedSheet();
-            if (not sheet.isNull())
+            if (VPSheetPtr const sheet = layout->GetFocusedSheet(); not sheet.isNull())
             {
-                VPTransformationOrigon origin = sheet->TransformationOrigin();
-                if (not origin.custom)
+                if (VPTransformationOrigon origin = sheet->TransformationOrigin(); not origin.custom)
                 {
                     origin.origin = m_pieceRect.center();
                     sheet->SetTransformationOrigin(origin);

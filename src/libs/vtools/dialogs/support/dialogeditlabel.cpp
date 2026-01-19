@@ -770,8 +770,7 @@ auto DialogEditLabel::GetTemplate() const -> QVector<VLabelTemplateLine>
 
     for (int i = 0; i < ui->listWidgetEdit->count(); ++i)
     {
-        const QListWidgetItem *lineItem = ui->listWidgetEdit->item(i);
-        if (lineItem != nullptr)
+        if (const QListWidgetItem *lineItem = ui->listWidgetEdit->item(i))
         {
             const QFont font = lineItem->font();
             lines.append({.line = lineItem->text(),

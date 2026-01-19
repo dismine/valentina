@@ -121,7 +121,7 @@ void ValidateSuperpositionOfPieces(const VPiecesValidationData &data,
             }
         }
 
-        auto UpdateValidity = [&validations, hasSuperposition, &invalidPieces](const QString &id)
+        auto UpdateValidity = [&validations, hasSuperposition, &invalidPieces](const QString &id) -> void
         {
             VPiecePositionValidity validation = validations.value(id);
             validation.superposition = hasSuperposition;
@@ -191,7 +191,7 @@ void ValidatePiecesGapePosition(const VPiecesValidationData &data, QHash<QString
             }
         }
 
-        auto UpdateValidity = [&validations, hasInvalidPieceGapPosition, &invalidPieces](const QString &id)
+        auto UpdateValidity = [&validations, hasInvalidPieceGapPosition, &invalidPieces](const QString &id) -> void
         {
             VPiecePositionValidity validation = validations.value(id);
             validation.gap = hasInvalidPieceGapPosition;
@@ -850,7 +850,8 @@ void VPSheet::CheckPiecesPositionValidity() const
                .pieces = sheetPieces};
 
         m_validationStale = false;
-        m_validityWatcher->setFuture(QtConcurrent::run([data]() { return ValidatePiecesPositions(data); }));
+        m_validityWatcher->setFuture(QtConcurrent::run([data]() -> QHash<QString, VPiecePositionValidity>
+                                                       { return ValidatePiecesPositions(data); }));
     }
     else
     {

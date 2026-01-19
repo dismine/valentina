@@ -354,28 +354,32 @@ void VPMainGraphicsView::RestoreOrigin() const
     }
 
     VPSheetPtr const sheet = layout->GetFocusedSheet();
-    if (not sheet.isNull())
+    if (sheet.isNull())
     {
-        VPTransformationOrigon origin = sheet->TransformationOrigin();
-        if (origin.custom)
-        { // ignore if not custom. Prevent double call
-            origin.custom = false;
+        return;
+    }
 
-            QRectF boundingRect;
-            QList<VPPiecePtr> const selectedPieces = sheet->GetSelectedPieces();
-            for (const auto &piece : selectedPieces)
-            {
-                if (piece->IsSelected())
-                {
-                    boundingRect = boundingRect.united(piece->MappedDetailBoundingRect());
-                }
-            }
-            origin.origin = boundingRect.center();
+    VPTransformationOrigon origin = sheet->TransformationOrigin();
+    if (!origin.custom)
+    {
+        return; // ignore if not custom. Prevent double call
+    }
 
-            auto *command = new VPUndoOriginMove(sheet, origin);
-            layout->UndoStack()->push(command);
+    origin.custom = false;
+
+    QRectF boundingRect;
+    QList<VPPiecePtr> const selectedPieces = sheet->GetSelectedPieces();
+    for (const auto &piece : selectedPieces)
+    {
+        if (piece->IsSelected())
+        {
+            boundingRect = boundingRect.united(piece->MappedDetailBoundingRect());
         }
     }
+    origin.origin = boundingRect.center();
+
+    auto *command = new VPUndoOriginMove(sheet, origin);
+    layout->UndoStack()->push(command);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

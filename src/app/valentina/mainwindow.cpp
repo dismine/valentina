@@ -302,9 +302,9 @@ auto SortDetailsForLayout(const QHash<quint32, VPiece> *allDetails, const QStrin
     -> QVector<DetailForLayout>
 {
     QVector<DetailForLayout> details;
-    QHash<quint32, VPiece>::const_iterator i = allDetails->constBegin();
+    details.reserve(allDetails->size());
 
-    if (nameRegex.isEmpty())
+    if (QHash<quint32, VPiece>::const_iterator i = allDetails->constBegin(); nameRegex.isEmpty())
     {
         while (i != allDetails->constEnd())
         {

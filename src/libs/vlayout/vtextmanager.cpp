@@ -725,6 +725,7 @@ auto ReplacePlaceholders(const QMap<QString, QString> &placeholders, QString lin
 auto PrepareLines(const QVector<VLabelTemplateLine> &lines) -> QVector<TextLine>
 {
     QVector<TextLine> textLines;
+    textLines.reserve(lines.size());
 
     for (const auto &line : lines)
     {

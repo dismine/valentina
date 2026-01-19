@@ -69,7 +69,7 @@ auto VLabelTemplate::ReadLines() const -> QVector<VLabelTemplateLine>
     const QDomNodeList listLines = elementsByTagName(TagLines);
     if (listLines.isEmpty())
     {
-        return QVector<VLabelTemplateLine>();
+        return {};
     }
 
     return VDomDocument::GetLabelTemplate(listLines.at(0).toElement());
