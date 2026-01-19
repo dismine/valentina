@@ -179,17 +179,17 @@ auto CalculateTextAlignment(const TextLine &tl,
                             const QFontMetrics &fm,
                             const QRectF &boundingRect) -> qreal
 {
-    if (tl.m_eAlign == 0 || (tl.m_eAlign & Qt::AlignLeft) > 0)
+    if (tl.eAlign == 0 || (tl.eAlign & Qt::AlignLeft) > 0)
     {
         return 0;
     }
 
-    if ((tl.m_eAlign & Qt::AlignHCenter) > 0)
+    if ((tl.eAlign & Qt::AlignHCenter) > 0)
     {
         return (boundingRect.width() - fm.horizontalAdvance(qsText)) / 2;
     }
 
-    if ((tl.m_eAlign & Qt::AlignRight) > 0)
+    if ((tl.eAlign & Qt::AlignRight) > 0)
     {
         return boundingRect.width() - fm.horizontalAdvance(qsText);
     }
@@ -204,7 +204,7 @@ void DrawTextAsPaths(const TextLine &tl,
                      qreal iY,
                      QPainter *painter)
 {
-    const qreal dX = CalculateTextAlignment(tl, tl.m_qsText, fm, boundingRect);
+    const qreal dX = CalculateTextAlignment(tl, tl.qsText, fm, boundingRect);
 
     VSingleLineOutlineChar const corrector(fnt);
     if (!corrector.IsPopulated())
@@ -213,7 +213,7 @@ void DrawTextAsPaths(const TextLine &tl,
     }
 
     QPainterPath path;
-    ConstructPath(tl.m_qsText, corrector, fm, path);
+    ConstructPath(tl.qsText, corrector, fm, path);
 
     QTransform matrix;
     matrix.translate(dX, iY);
@@ -227,12 +227,12 @@ void DrawTextAsPaths(const TextLine &tl,
 //---------------------------------------------------------------------------------------------------------------------
 auto AdjustFont(const TextLine &tl, QFont fnt) -> QFont
 {
-    fnt.setPointSize(qMax(fnt.pointSize() + tl.m_iFontSize, 1));
+    fnt.setPointSize(qMax(fnt.pointSize() + tl.iFontSize, 1));
     if (!VAbstractApplication::VApp()->Settings()->GetSingleStrokeOutlineFont())
     {
-        fnt.setBold(tl.m_bold);
+        fnt.setBold(tl.bold);
     }
-    fnt.setItalic(tl.m_italic);
+    fnt.setItalic(tl.italic);
     return fnt;
 }
 } // namespace
@@ -912,9 +912,9 @@ void VTextGraphicsItem::PaintLabelSVGFont(QPainter *painter)
     for (const auto &tl : labelLines)
     {
         VSvgFont lineFont = svgFont;
-        lineFont.SetBold(tl.m_bold);
-        lineFont.SetItalic(tl.m_italic);
-        lineFont.SetPointSize(svgFont.PointSize() + tl.m_iFontSize);
+        lineFont.SetBold(tl.bold);
+        lineFont.SetItalic(tl.italic);
+        lineFont.SetPointSize(svgFont.PointSize() + tl.iFontSize);
 
         engine = db->FontEngine(lineFont);
 
@@ -924,7 +924,7 @@ void VTextGraphicsItem::PaintLabelSVGFont(QPainter *painter)
             lineHeight = boundingRect.height() - iY;
         }
 
-        engine.Draw(painter, QRectF(0, iY, iW, lineHeight), tl.m_qsText, tl.m_eAlign);
+        engine.Draw(painter, QRectF(0, iY, iW, lineHeight), tl.qsText, tl.eAlign);
 
         // check if the next line will go out of bounds
         qreal const nextStep = iY + engine.FontHeight() + painter->pen().widthF() * 2 + MmToPixel(1.);
@@ -1003,6 +1003,6 @@ void VTextGraphicsItem::DrawTextAsPlain(
     {
         QPainterStateGuard const guard(painter);
         painter->setFont(fnt);
-        painter->drawText(QRectF(0, iY, iW, lineHeight * 2), static_cast<int>(tl.m_eAlign), tl.m_qsText);
+        painter->drawText(QRectF(0, iY, iW, lineHeight * 2), static_cast<int>(tl.eAlign), tl.qsText);
     }
 }

@@ -168,16 +168,14 @@ void DialogEditWrongFormula::DialogRejected()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::EvalFormula()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditFormula->toPlainText();
-    formulaData.variables = m_data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditFormula;
-    formulaData.labelResult = ui->labelResultCalculation;
-    formulaData.postfix = postfix;
-    formulaData.checkZero = checkZero;
-    formulaData.checkLessThanZero = checkLessThanZero;
-
-    Eval(formulaData, flagFormula);
+    Eval({.formula = ui->plainTextEditFormula->toPlainText(),
+          .variables = m_data->DataVariables(),
+          .labelEditFormula = ui->labelEditFormula,
+          .labelResult = ui->labelResultCalculation,
+          .postfix = postfix,
+          .checkZero = checkZero,
+          .checkLessThanZero = checkLessThanZero},
+         flagFormula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

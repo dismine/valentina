@@ -124,12 +124,12 @@ QT_WARNING_POP
 inline auto LineFont(const TextLine &tl, const QFont &base) -> QFont
 {
     QFont fnt = base;
-    fnt.setPointSize(qMax(base.pointSize() + tl.m_iFontSize, 1));
+    fnt.setPointSize(qMax(base.pointSize() + tl.iFontSize, 1));
     if (!VAbstractApplication::VApp()->Settings()->GetSingleStrokeOutlineFont())
     {
-        fnt.setBold(tl.m_bold);
+        fnt.setBold(tl.bold);
     }
-    fnt.setItalic(tl.m_italic);
+    fnt.setItalic(tl.italic);
     return fnt;
 }
 
@@ -139,11 +139,11 @@ inline auto LineAlign(const TextLine &tl, const QString &text, const QFontMetric
     const int lineWidth = fm.horizontalAdvance(text);
 
     qreal dX = 0;
-    if ((tl.m_eAlign & Qt::AlignHCenter) > 0)
+    if ((tl.eAlign & Qt::AlignHCenter) > 0)
     {
         dX = (width - lineWidth) / 2;
     }
-    else if ((tl.m_eAlign & Qt::AlignRight) > 0)
+    else if ((tl.eAlign & Qt::AlignRight) > 0)
     {
         dX = width - lineWidth;
     }
@@ -1077,7 +1077,7 @@ void VDxfEngine::ExportPieceText(const QSharedPointer<dx_ifaceBlock> &detailBloc
 
         dY += fm.height() * scale / 2;
 
-        const qreal dX = LineAlign(tl, tl.m_qsText, fm, dW);
+        const qreal dX = LineAlign(tl, tl.qsText, fm, dW);
         QTransform const lineMatrix = detail.LineMatrix(labelShape.at(0), angle, QPointF(dX, dY), dW);
 
         QPointF const pos = lineMatrix.map(QPointF());
@@ -1089,7 +1089,7 @@ void VDxfEngine::ExportPieceText(const QSharedPointer<dx_ifaceBlock> &detailBloc
             DRW_Coord(FromPixel(pos.x(), m_varInsunits), FromPixel(GetSize().height() - pos.y(), m_varInsunits), 0);
         textLine->height = FromPixel(fm.ascent() * scale / 2, m_varInsunits);
         textLine->layer = *layer1;
-        textLine->text = tl.m_qsText.toStdString();
+        textLine->text = tl.qsText.toStdString();
         textLine->style = m_input->AddFont(fnt);
 
         QLineF string(0, 0, 100, 0);

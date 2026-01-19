@@ -824,15 +824,13 @@ void DialogPiecePath::PassmarkClockwiseOrientationChanged(int state)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::EvalWidth()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditFormulaWidth->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditWidth;
-    formulaData.labelResult = ui->labelResultWidth;
-    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-    formulaData.checkLessThanZero = true;
-
-    m_saWidth = Eval(formulaData, m_flagFormula);
+    m_saWidth = Eval({.formula = ui->plainTextEditFormulaWidth->toPlainText(),
+                      .variables = data->DataVariables(),
+                      .labelEditFormula = ui->labelEditWidth,
+                      .labelResult = ui->labelResultWidth,
+                      .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+                      .checkLessThanZero = true},
+                     m_flagFormula);
 
     if (m_saWidth >= 0)
     {
@@ -854,21 +852,19 @@ void DialogPiecePath::EvalWidthBefore()
 {
     if (ui->comboBoxNodes->count() > 0)
     {
-        FormulaData formulaData;
-        formulaData.formula = ui->plainTextEditFormulaWidthBefore->toPlainText();
-        formulaData.variables = data->DataVariables();
-        formulaData.labelEditFormula = ui->labelEditBefore;
-        formulaData.labelResult = ui->labelResultBefore;
-        formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-        formulaData.checkLessThanZero = true;
-
         const QString formula = GetFormulaSAWidthBefore();
         if (formula != currentSeamAllowance)
         {
             ui->pushButtonDefBefore->setEnabled(true);
         }
 
-        Eval(formulaData, m_flagFormulaBefore);
+        Eval({.formula = ui->plainTextEditFormulaWidthBefore->toPlainText(),
+              .variables = data->DataVariables(),
+              .labelEditFormula = ui->labelEditBefore,
+              .labelResult = ui->labelResultBefore,
+              .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+              .checkLessThanZero = true},
+             m_flagFormulaBefore);
 
         if (m_flagFormulaBefore)
         {
@@ -888,21 +884,19 @@ void DialogPiecePath::EvalWidthAfter()
 {
     if (ui->comboBoxNodes->count() > 0)
     {
-        FormulaData formulaData;
-        formulaData.formula = ui->plainTextEditFormulaWidthAfter->toPlainText();
-        formulaData.variables = data->DataVariables();
-        formulaData.labelEditFormula = ui->labelEditAfter;
-        formulaData.labelResult = ui->labelResultAfter;
-        formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-        formulaData.checkLessThanZero = true;
-
         const QString formula = GetFormulaSAWidthAfter();
         if (formula != currentSeamAllowance)
         {
             ui->pushButtonDefAfter->setEnabled(true);
         }
 
-        Eval(formulaData, m_flagFormulaAfter);
+        Eval({.formula = ui->plainTextEditFormulaWidthAfter->toPlainText(),
+              .variables = data->DataVariables(),
+              .labelEditFormula = ui->labelEditAfter,
+              .labelResult = ui->labelResultAfter,
+              .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+              .checkLessThanZero = true},
+             m_flagFormulaAfter);
 
         if (m_flagFormulaAfter)
         {
@@ -920,15 +914,12 @@ void DialogPiecePath::EvalWidthAfter()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::EvalVisible()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditFormulaVisible->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditVisible;
-    formulaData.labelResult = ui->labelResultVisible;
-    formulaData.postfix = QString();
-    formulaData.checkLessThanZero = true;
-
-    Eval(formulaData, m_flagFormulaVisible);
+    Eval({.formula = ui->plainTextEditFormulaVisible->toPlainText(),
+          .variables = data->DataVariables(),
+          .labelEditFormula = ui->labelEditVisible,
+          .labelResult = ui->labelResultVisible,
+          .checkLessThanZero = true},
+         m_flagFormulaVisible);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -938,16 +929,14 @@ void DialogPiecePath::EvalPassmarkLength()
     {
         if (ui->comboBoxPassmarks->count() > 0)
         {
-            FormulaData formulaData;
-            formulaData.formula = ui->plainTextEditPassmarkLength->toPlainText();
-            formulaData.variables = data->DataVariables();
-            formulaData.labelEditFormula = ui->labelEditPassmarkLength;
-            formulaData.labelResult = ui->labelResultPassmarkLength;
-            formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-            formulaData.checkZero = true;
-            formulaData.checkLessThanZero = true;
-
-            Eval(formulaData, m_flagFormulaPassmarkLength);
+            Eval({.formula = ui->plainTextEditPassmarkLength->toPlainText(),
+                  .variables = data->DataVariables(),
+                  .labelEditFormula = ui->labelEditPassmarkLength,
+                  .labelResult = ui->labelResultPassmarkLength,
+                  .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+                  .checkZero = true,
+                  .checkLessThanZero = true},
+                 m_flagFormulaPassmarkLength);
 
             UpdateNodePassmarkLength(
                 VTranslateVars::TryFormulaFromUser(ui->plainTextEditPassmarkLength->toPlainText(),
@@ -969,15 +958,13 @@ void DialogPiecePath::EvalPassmarkWidth()
     {
         if (ui->comboBoxPassmarks->count() > 0)
         {
-            FormulaData formulaData;
-            formulaData.formula = ui->plainTextEditPassmarkWidth->toPlainText();
-            formulaData.variables = data->DataVariables();
-            formulaData.labelEditFormula = ui->labelEditPassmarkWidth;
-            formulaData.labelResult = ui->labelResultPassmarkWidth;
-            formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-            formulaData.checkZero = true;
-
-            Eval(formulaData, m_flagFormulaPassmarkWidth);
+            Eval({.formula = ui->plainTextEditPassmarkWidth->toPlainText(),
+                  .variables = data->DataVariables(),
+                  .labelEditFormula = ui->labelEditPassmarkWidth,
+                  .labelResult = ui->labelResultPassmarkWidth,
+                  .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+                  .checkZero = true},
+                 m_flagFormulaPassmarkWidth);
 
             UpdateNodePassmarkWidth(
                 VTranslateVars::TryFormulaFromUser(ui->plainTextEditPassmarkWidth->toPlainText(),
@@ -999,14 +986,12 @@ void DialogPiecePath::EvalPassmarkAngle()
     {
         if (ui->comboBoxPassmarks->count() > 0)
         {
-            FormulaData formulaData;
-            formulaData.formula = ui->plainTextEditPassmarkAngle->toPlainText();
-            formulaData.variables = data->DataVariables();
-            formulaData.labelEditFormula = ui->labelEditPassmarkAngle;
-            formulaData.labelResult = ui->labelResultPassmarkAngle;
-            formulaData.postfix = degreeSymbol;
-
-            Eval(formulaData, m_flagFormulaPassmarkAngle);
+            Eval({.formula = ui->plainTextEditPassmarkAngle->toPlainText(),
+                  .variables = data->DataVariables(),
+                  .labelEditFormula = ui->labelEditPassmarkAngle,
+                  .labelResult = ui->labelResultPassmarkAngle,
+                  .postfix = degreeSymbol},
+                 m_flagFormulaPassmarkAngle);
 
             UpdateNodePassmarkAngle(
                 VTranslateVars::TryFormulaFromUser(ui->plainTextEditPassmarkAngle->toPlainText(),

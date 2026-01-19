@@ -321,14 +321,12 @@ void DialogPointFromCircleAndTangent::FXCircleRadius()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointFromCircleAndTangent::EvalCircleRadius()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditRadius->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditRadius;
-    formulaData.labelResult = ui->labelResultCircleRadius;
-    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-
-    const qreal radius = Eval(formulaData, m_flagCircleRadius);
+    const qreal radius = Eval({.formula = ui->plainTextEditRadius->toPlainText(),
+                               .variables = data->DataVariables(),
+                               .labelEditFormula = ui->labelEditRadius,
+                               .labelResult = ui->labelResultCircleRadius,
+                               .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true)},
+                              m_flagCircleRadius);
 
     if (radius < 0)
     {

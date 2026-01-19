@@ -453,12 +453,10 @@ auto VToolMove::CreatePoint(quint32 idTool, const SourceItem &sItem, qreal angle
         moved.setName(sItem.alias);
     }
 
-    DestinationItem item;
-    item.mx = moved.mx();
-    item.my = moved.my();
-    item.showLabel = moved.IsShowLabel();
-    item.id = data->AddGObject(new VPointF(moved));
-    return item;
+    return {.id = data->AddGObject(new VPointF(moved)),
+            .mx = moved.mx(),
+            .my = moved.my(),
+            .showLabel = moved.IsShowLabel()};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -728,9 +726,7 @@ auto VToolMove::CreateItem(quint32 idTool, const SourceItem &sItem, qreal angle,
         moved.SetColor(sItem.color);
     }
 
-    DestinationItem item;
-    item.id = data->AddGObject(new Item(moved));
-    return item;
+    return {.id = data->AddGObject(new Item(moved))};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

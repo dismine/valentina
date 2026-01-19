@@ -81,12 +81,12 @@ namespace
 inline auto LineFont(const TextLine &tl, const QFont &base) -> QFont
 {
     QFont fnt = base;
-    fnt.setPointSize(qMax(base.pointSize() + tl.m_iFontSize, 1));
+    fnt.setPointSize(qMax(base.pointSize() + tl.iFontSize, 1));
     if (!VAbstractApplication::VApp()->Settings()->GetSingleStrokeOutlineFont())
     {
-        fnt.setBold(tl.m_bold);
+        fnt.setBold(tl.bold);
     }
-    fnt.setItalic(tl.m_italic);
+    fnt.setItalic(tl.italic);
     return fnt;
 }
 
@@ -94,9 +94,9 @@ inline auto LineFont(const TextLine &tl, const QFont &base) -> QFont
 inline auto LineFont(const TextLine &tl, const VSvgFont &base) -> VSvgFont
 {
     VSvgFont fnt = base;
-    fnt.SetPointSize(base.PointSize() + tl.m_iFontSize);
-    fnt.SetBold(tl.m_bold);
-    fnt.SetItalic(tl.m_italic);
+    fnt.SetPointSize(base.PointSize() + tl.iFontSize);
+    fnt.SetBold(tl.bold);
+    fnt.SetItalic(tl.italic);
     return fnt;
 }
 
@@ -106,15 +106,15 @@ inline auto LineAlign(const TextLine &tl, const QString &text, const QFontMetric
     const int lineWidth = fm.horizontalAdvance(text);
 
     qreal dX = 0;
-    if (tl.m_eAlign == 0 || (tl.m_eAlign & Qt::AlignLeft) > 0)
+    if (tl.eAlign == 0 || (tl.eAlign & Qt::AlignLeft) > 0)
     {
         dX = 0;
     }
-    else if ((tl.m_eAlign & Qt::AlignHCenter) > 0)
+    else if ((tl.eAlign & Qt::AlignHCenter) > 0)
     {
         dX = (width - lineWidth) / 2;
     }
-    else if ((tl.m_eAlign & Qt::AlignRight) > 0)
+    else if ((tl.eAlign & Qt::AlignRight) > 0)
     {
         dX = width - lineWidth;
     }
@@ -129,15 +129,15 @@ inline auto LineAlign(const TextLine &tl, const QString &text, const VSvgFontEng
     const int lineWidth = qRound(engine.TextWidth(text, penWidth));
 
     qreal dX = 0;
-    if (tl.m_eAlign == 0 || (tl.m_eAlign & Qt::AlignLeft) > 0)
+    if (tl.eAlign == 0 || (tl.eAlign & Qt::AlignLeft) > 0)
     {
         dX = 0;
     }
-    else if ((tl.m_eAlign & Qt::AlignHCenter) > 0)
+    else if ((tl.eAlign & Qt::AlignHCenter) > 0)
     {
         dX = (width - lineWidth) / 2;
     }
-    else if ((tl.m_eAlign & Qt::AlignRight) > 0)
+    else if ((tl.eAlign & Qt::AlignRight) > 0)
     {
         dX = width - lineWidth;
     }
@@ -442,7 +442,7 @@ void VPGraphicsPiece::InitPieceLabelSVGFont(const QVector<QPointF> &labelShape, 
             break;
         }
 
-        const QString qsText = tl.m_qsText;
+        const QString qsText = tl.qsText;
         const qreal dX = LineAlign(tl, qsText, engine, dW, penWidth);
         // set up the rotation around top-left corner matrix
         const QTransform lineMatrix = piece->LineMatrix(labelShape.at(0), angle, QPointF(dX, dY), dW);
@@ -508,7 +508,7 @@ void VPGraphicsPiece::InitPieceLabelOutlineFont(const QVector<QPointF> &labelSha
             break;
         }
 
-        const qreal dX = LineAlign(tl, tl.m_qsText, fm, dW);
+        const qreal dX = LineAlign(tl, tl.qsText, fm, dW);
         // set up the rotation around top-left corner matrix
         const QTransform lineMatrix = piece->LineMatrix(labelShape.at(0), angle, QPointF(dX, dY), dW);
 
@@ -525,7 +525,7 @@ void VPGraphicsPiece::InitPieceLabelOutlineFont(const QVector<QPointF> &labelSha
                 }
 
                 int w = 0;
-                for (auto c : std::as_const(tl.m_qsText))
+                for (auto c : std::as_const(tl.qsText))
                 {
                     path.addPath(corrector.DrawChar(w, static_cast<qreal>(fm.ascent()), c));
                     w += fm.horizontalAdvance(c);
@@ -533,7 +533,7 @@ void VPGraphicsPiece::InitPieceLabelOutlineFont(const QVector<QPointF> &labelSha
             }
             else
             {
-                path.addText(0, static_cast<qreal>(fm.ascent()), fnt, tl.m_qsText);
+                path.addText(0, static_cast<qreal>(fm.ascent()), fnt, tl.qsText);
             }
 
             auto *item = new QGraphicsPathItem(this);
@@ -555,7 +555,7 @@ void VPGraphicsPiece::InitPieceLabelOutlineFont(const QVector<QPointF> &labelSha
         {
             auto *item = new QGraphicsSimpleTextItem(this);
             item->setFont(fnt);
-            item->setText(tl.m_qsText);
+            item->setText(tl.qsText);
             item->setBrush(QBrush(color));
             item->setTransform(lineMatrix);
             m_labelTextItems.append(item);

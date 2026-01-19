@@ -257,12 +257,10 @@ auto VAbstractOperation::ExtractSourceData(const QDomElement &domElement) -> QVe
             {
                 if (const QDomElement element = QDOM_ELEMENT(srcList, j).toElement(); not element.isNull())
                 {
-                    SourceItem item;
-                    item.id = VDomDocument::GetParametrUInt(element, AttrIdObject, NULL_ID_STR);
-                    item.alias = VDomDocument::GetParametrEmptyString(element, AttrAlias);
-                    item.penStyle = VDomDocument::GetParametrString(element, AttrPenStyle, TypeLineDefault);
-                    item.color = VDomDocument::GetParametrString(element, AttrColor, ColorDefault);
-                    source.append(item);
+                    source.append({.id = VDomDocument::GetParametrUInt(element, AttrIdObject, NULL_ID_STR),
+                                   .alias = VDomDocument::GetParametrEmptyString(element, AttrAlias),
+                                   .penStyle = VDomDocument::GetParametrString(element, AttrPenStyle, TypeLineDefault),
+                                   .color = VDomDocument::GetParametrString(element, AttrColor, ColorDefault)});
                 }
             }
             return source;
@@ -287,14 +285,12 @@ auto VAbstractOperation::ExtractDestinationData(const QDomElement &domElement) -
             {
                 if (const QDomElement element = QDOM_ELEMENT(srcList, j).toElement(); not element.isNull())
                 {
-                    DestinationItem d;
-                    d.id = VDomDocument::GetParametrUInt(element, AttrIdObject, NULL_ID_STR);
-                    d.mx = VAbstractValApplication::VApp()->toPixel(
-                        VDomDocument::GetParametrDouble(element, AttrMx, QChar('1')));
-                    d.my = VAbstractValApplication::VApp()->toPixel(
-                        VDomDocument::GetParametrDouble(element, AttrMy, QChar('1')));
-                    d.showLabel = VDomDocument::GetParametrBool(element, AttrShowLabel, trueStr);
-                    destination.append(d);
+                    destination.append({.id = VDomDocument::GetParametrUInt(element, AttrIdObject, NULL_ID_STR),
+                                        .mx = VAbstractValApplication::VApp()->toPixel(
+                                            VDomDocument::GetParametrDouble(element, AttrMx, QChar('1'))),
+                                        .my = VAbstractValApplication::VApp()->toPixel(
+                                            VDomDocument::GetParametrDouble(element, AttrMy, QChar('1'))),
+                                        .showLabel = VDomDocument::GetParametrBool(element, AttrShowLabel, trueStr)});
                 }
             }
 

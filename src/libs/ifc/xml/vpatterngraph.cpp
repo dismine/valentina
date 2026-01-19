@@ -40,7 +40,7 @@
  */
 auto VPatternGraph::AddVertex(vidtype id, VNodeType type, int index) -> bool
 {
-    return AddVertex(VNode(id, type, index));
+    return AddVertex({.id = id, .type = type, .indexPatternBlock = index});
 }
 
 //---------------------------------------------------------------------------------------------------------------------

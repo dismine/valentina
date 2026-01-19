@@ -428,12 +428,9 @@ auto VPoster::Cut(int i, int j, const QSize &imageRect, PageOrientation orientat
     SCASSERT(x <= imageRect.width())
     SCASSERT(y <= imageRect.height())
 
-    PosterData data;
-    data.row = static_cast<quint32>(i);
-    data.column = static_cast<quint32>(j);
-    data.rect = QRect(x, y, pageLengthX, pageLengthY);
-
-    return data;
+    return {.row = static_cast<quint32>(i),
+            .column = static_cast<quint32>(j),
+            .rect = QRect(x, y, pageLengthX, pageLengthY)};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

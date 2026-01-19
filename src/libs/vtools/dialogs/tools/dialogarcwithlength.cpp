@@ -513,41 +513,35 @@ void DialogArcWithLength::ValidateAlias()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArcWithLength::Radius()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditRadius->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditRadius;
-    formulaData.labelResult = ui->labelResultRadius;
-    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-    formulaData.checkLessThanZero = true;
-
-    Eval(formulaData, m_flagRadius);
+    Eval({.formula = ui->plainTextEditRadius->toPlainText(),
+          .variables = data->DataVariables(),
+          .labelEditFormula = ui->labelEditRadius,
+          .labelResult = ui->labelResultRadius,
+          .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+          .checkLessThanZero = true},
+         m_flagRadius);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArcWithLength::Length()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditLength->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditLength;
-    formulaData.labelResult = ui->labelResultLength;
-    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-
-    Eval(formulaData, m_flagLength);
+    Eval({.formula = ui->plainTextEditLength->toPlainText(),
+          .variables = data->DataVariables(),
+          .labelEditFormula = ui->labelEditLength,
+          .labelResult = ui->labelResultLength,
+          .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true)},
+         m_flagLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArcWithLength::EvalF()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditF1->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditF1;
-    formulaData.labelResult = ui->labelResultF1;
-    formulaData.postfix = degreeSymbol;
-
-    Eval(formulaData, m_flagF1);
+    Eval({.formula = ui->plainTextEditF1->toPlainText(),
+          .variables = data->DataVariables(),
+          .labelEditFormula = ui->labelEditF1,
+          .labelResult = ui->labelResultF1,
+          .postfix = degreeSymbol},
+         m_flagF1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

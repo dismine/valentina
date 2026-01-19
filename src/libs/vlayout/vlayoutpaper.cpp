@@ -243,18 +243,18 @@ auto VLayoutPaper::ArrangeDetail(const VLayoutPiece &detail, std::atomic_bool &s
     QMutex mutex;
 #endif
 
-    VPositionData data;
-    data.gContour = d->globalContour;
-    data.detail = detail;
-    data.rotate = d->localRotate;
-    data.rotationNumber = d->localRotationNumber;
-    data.followGrainline = d->followGrainline;
-    data.positionsCache = d->positionsCache;
-    data.isOriginPaperOrientationPortrait = d->originPaperOrientation;
+    const VPositionData data = {.gContour = d->globalContour,
+                                .detail = detail,
+                                .rotate = d->localRotate,
+                                .rotationNumber = d->localRotationNumber,
+                                .followGrainline = d->followGrainline,
+                                .positionsCache = d->positionsCache,
+                                .isOriginPaperOrientationPortrait = d->originPaperOrientation,
 #ifdef LAYOUT_DEBUG
-    data.details = d->details;
-    data.mutex = &mutex;
+                                .details = d->details,
+                                .mutex = &mutex
 #endif
+    };
 
     const VBestSquare result = VPosition::ArrangeDetail(data, &stop, d->saveLength);
 #ifdef LAYOUT_DEBUG
@@ -298,11 +298,9 @@ auto VLayoutPaper::SaveResult(const VBestSquare &bestResult, const VLayoutPiece 
         d->details.append(workDetail);
         d->globalContour.SetContour(newGContour);
 
-        VCachedPositions positionChache;
         QVector<QPointF> const layoutPoints = workDetail.GetMappedLayoutAllowancePoints();
-        positionChache.boundingRect = VLayoutPiece::BoundingRect(layoutPoints);
-        positionChache.layoutAllowancePath = VGObject::PainterPath(layoutPoints);
-        d->positionsCache.append(positionChache);
+        d->positionsCache.append({.boundingRect = VLayoutPiece::BoundingRect(layoutPoints),
+                                  .layoutAllowancePath = VGObject::PainterPath(layoutPoints)});
 
 #ifdef LAYOUT_DEBUG
 #ifdef SHOW_BEST

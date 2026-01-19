@@ -415,14 +415,12 @@ void DialogPointOfIntersectionCircles::FXCircle2Radius()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionCircles::EvalCircle1Radius()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditCircle1Radius->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditCircle1Radius;
-    formulaData.labelResult = ui->labelResultCircle1Radius;
-    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-
-    const qreal radius = Eval(formulaData, m_flagCircle1Radius);
+    const qreal radius = Eval({.formula = ui->plainTextEditCircle1Radius->toPlainText(),
+                               .variables = data->DataVariables(),
+                               .labelEditFormula = ui->labelEditCircle1Radius,
+                               .labelResult = ui->labelResultCircle1Radius,
+                               .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true)},
+                              m_flagCircle1Radius);
 
     if (radius < 0)
     {
@@ -438,14 +436,12 @@ void DialogPointOfIntersectionCircles::EvalCircle1Radius()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionCircles::EvalCircle2Radius()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditCircle2Radius->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditCircle2Radius;
-    formulaData.labelResult = ui->labelResultCircle2Radius;
-    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-
-    const qreal radius = Eval(formulaData, m_flagCircle2Radius);
+    const qreal radius = Eval({.formula = ui->plainTextEditCircle2Radius->toPlainText(),
+                               .variables = data->DataVariables(),
+                               .labelEditFormula = ui->labelEditCircle2Radius,
+                               .labelResult = ui->labelResultCircle2Radius,
+                               .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true)},
+                              m_flagCircle2Radius);
 
     if (radius < 0)
     {

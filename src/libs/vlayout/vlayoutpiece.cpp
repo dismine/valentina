@@ -223,7 +223,7 @@ auto PieceLabelText(const QVector<QPointF> &labelShape, const VTextManager &tm) 
     text.reserve(sourceCount);
     for (int i = 0; i < sourceCount; ++i)
     {
-        text.append(tm.GetSourceLine(i).m_qsText);
+        text.append(tm.GetSourceLine(i).qsText);
     }
 
     return text;
@@ -282,23 +282,6 @@ auto PrepareSAPassmark(const VPiece &piece, const VContainer *pattern, const VPa
         return {};
     }
 
-    QT_WARNING_PUSH
-    QT_WARNING_DISABLE_GCC("-Wnoexcept")
-    // noexcept-expression evaluates to 'false' because of a call to 'constexpr QPointF::QPointF()'
-
-    VLayoutPassmark layoutPassmark;
-
-    QT_WARNING_POP
-
-    if (side == PassmarkSide::All || side == PassmarkSide::Left)
-    {
-        layoutPassmark.baseLine = baseLines.constFirst();
-    }
-    else if (side == PassmarkSide::Right)
-    {
-        layoutPassmark.baseLine = baseLines.constLast();
-    }
-
     const QVector<QLineF> lines = passmark.SAPassmark(piece, pattern, side);
     if (lines.isEmpty())
     {
@@ -311,28 +294,28 @@ auto PrepareSAPassmark(const VPiece &piece, const VContainer *pattern, const VPa
         return {};
     }
 
-    layoutPassmark.lines = lines;
-    layoutPassmark.type = pData.passmarkLineType;
-    layoutPassmark.isBuiltIn = false;
-    layoutPassmark.isClockwiseOpening = pData.passmarkSAPoint.IsPassmarkClockwiseOpening();
-    layoutPassmark.label = pData.nodeName;
+    QLineF baseLine;
+    if (side == PassmarkSide::All || side == PassmarkSide::Left)
+    {
+        baseLine = baseLines.constFirst();
+    }
+    else if (side == PassmarkSide::Right)
+    {
+        baseLine = baseLines.constLast();
+    }
 
     ok = true;
-    return layoutPassmark;
+    return {.lines = lines,
+            .type = pData.passmarkLineType,
+            .baseLine = baseLine,
+            .isClockwiseOpening = pData.passmarkSAPoint.IsPassmarkClockwiseOpening(),
+            .label = pData.nodeName};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto PreapreBuiltInSAPassmark(const VPiece &piece, const VContainer *pattern, const VPassmark &passmark, bool &ok)
     -> VLayoutPassmark
 {
-    QT_WARNING_PUSH
-    QT_WARNING_DISABLE_GCC("-Wnoexcept")
-    // noexcept-expression evaluates to 'false' because of a call to 'constexpr QPointF::QPointF()'
-
-    VLayoutPassmark layoutPassmark;
-
-    QT_WARNING_POP
-
     VPiecePassmarkData const pData = passmark.Data();
     const QVector<VPieceNode> path = piece.GetUnitedPath(pattern);
     const int nodeIndex = VPiecePath::indexOfNode(path, pData.id);
@@ -359,8 +342,6 @@ auto PreapreBuiltInSAPassmark(const VPiece &piece, const VContainer *pattern, co
         return {};
     }
 
-    layoutPassmark.lines = lines;
-
     const QLineF mirrorLine = piece.SeamMirrorLine(pattern);
     const QVector<QLineF> baseLines = passmark.BuiltInSAPassmarkBaseLine(piece, mirrorLine);
     if (baseLines.isEmpty())
@@ -376,14 +357,13 @@ auto PreapreBuiltInSAPassmark(const VPiece &piece, const VContainer *pattern, co
         return {};
     }
 
-    layoutPassmark.baseLine = baseLines.constFirst();
-    layoutPassmark.type = pData.passmarkLineType;
-    layoutPassmark.isBuiltIn = true;
-    layoutPassmark.isClockwiseOpening = pData.passmarkSAPoint.IsPassmarkClockwiseOpening();
-    layoutPassmark.label = pData.nodeName;
-
     ok = true;
-    return layoutPassmark;
+    return {.lines = lines,
+            .type = pData.passmarkLineType,
+            .baseLine = baseLines.constFirst(),
+            .isBuiltIn = true,
+            .isClockwiseOpening = pData.passmarkSAPoint.IsPassmarkClockwiseOpening(),
+            .label = pData.nodeName};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2008,9 +1988,9 @@ void VLayoutPiece::LabelStringsSVGFont(QGraphicsItem *parent, const QVector<QPoi
     for (const auto &tl : labelLines)
     {
         VSvgFont lineFont = svgFont;
-        lineFont.SetPointSize(svgFont.PointSize() + tl.m_iFontSize);
-        lineFont.SetBold(tl.m_bold);
-        lineFont.SetItalic(tl.m_italic);
+        lineFont.SetPointSize(svgFont.PointSize() + tl.iFontSize);
+        lineFont.SetBold(tl.bold);
+        lineFont.SetItalic(tl.italic);
 
         engine = db->FontEngine(lineFont);
 
@@ -2020,17 +2000,17 @@ void VLayoutPiece::LabelStringsSVGFont(QGraphicsItem *parent, const QVector<QPoi
         }
 
         qreal dX = 0;
-        if (tl.m_eAlign == 0 || (tl.m_eAlign & Qt::AlignLeft) > 0)
+        if (tl.eAlign == 0 || (tl.eAlign & Qt::AlignLeft) > 0)
         {
             dX = 0;
         }
-        else if ((tl.m_eAlign & Qt::AlignHCenter) > 0)
+        else if ((tl.eAlign & Qt::AlignHCenter) > 0)
         {
-            dX = (dW - engine.TextWidth(tl.m_qsText, penWidth)) / 2;
+            dX = (dW - engine.TextWidth(tl.qsText, penWidth)) / 2;
         }
-        else if ((tl.m_eAlign & Qt::AlignRight) > 0)
+        else if ((tl.eAlign & Qt::AlignRight) > 0)
         {
-            dX = dW - engine.TextWidth(tl.m_qsText, penWidth);
+            dX = dW - engine.TextWidth(tl.qsText, penWidth);
         }
 
         // set up the rotation around top-left corner matrix
@@ -2059,7 +2039,7 @@ void VLayoutPiece::LabelStringsSVGFont(QGraphicsItem *parent, const QVector<QPoi
         pen.setWidthF(penWidth);
         item->setPen(pen);
 
-        item->setPath(engine.DrawPath(QPointF(), tl.m_qsText));
+        item->setPath(engine.DrawPath(QPointF(), tl.qsText));
         item->setBrush(QBrush(Qt::NoBrush));
         item->setTransform(labelMatrix);
 
@@ -2098,12 +2078,12 @@ void VLayoutPiece::LabelStringsOutlineFont(QGraphicsItem *parent, const QVector<
     for (const auto &tl : labelLines)
     {
         QFont fnt = tm.GetFont();
-        fnt.setPointSize(qMax(tm.GetFont().pointSize() + tl.m_iFontSize, 1));
+        fnt.setPointSize(qMax(tm.GetFont().pointSize() + tl.iFontSize, 1));
         if (!settings->GetSingleStrokeOutlineFont())
         {
-            fnt.setBold(tl.m_bold);
+            fnt.setBold(tl.bold);
         }
-        fnt.setItalic(tl.m_italic);
+        fnt.setItalic(tl.italic);
 
         VSingleLineOutlineChar const corrector(fnt);
         if (settings->GetSingleStrokeOutlineFont() && !corrector.IsPopulated())
@@ -2119,17 +2099,17 @@ void VLayoutPiece::LabelStringsOutlineFont(QGraphicsItem *parent, const QVector<
         }
 
         qreal dX = 0;
-        if (tl.m_eAlign == 0 || (tl.m_eAlign & Qt::AlignLeft) > 0)
+        if (tl.eAlign == 0 || (tl.eAlign & Qt::AlignLeft) > 0)
         {
             dX = 0;
         }
-        else if ((tl.m_eAlign & Qt::AlignHCenter) > 0)
+        else if ((tl.eAlign & Qt::AlignHCenter) > 0)
         {
-            dX = (dW - fm.horizontalAdvance(tl.m_qsText)) / 2;
+            dX = (dW - fm.horizontalAdvance(tl.qsText)) / 2;
         }
-        else if ((tl.m_eAlign & Qt::AlignRight) > 0)
+        else if ((tl.eAlign & Qt::AlignRight) > 0)
         {
-            dX = dW - fm.horizontalAdvance(tl.m_qsText);
+            dX = dW - fm.horizontalAdvance(tl.qsText);
         }
 
         // set up the rotation around top-left corner matrix
@@ -2156,7 +2136,7 @@ void VLayoutPiece::LabelStringsOutlineFont(QGraphicsItem *parent, const QVector<
             if (settings->GetSingleStrokeOutlineFont())
             {
                 int w = 0;
-                for (auto c : std::as_const(tl.m_qsText))
+                for (auto c : std::as_const(tl.qsText))
                 {
                     path.addPath(corrector.DrawChar(w, static_cast<qreal>(fm.ascent()), c));
                     w += fm.horizontalAdvance(c);
@@ -2164,7 +2144,7 @@ void VLayoutPiece::LabelStringsOutlineFont(QGraphicsItem *parent, const QVector<
             }
             else
             {
-                path.addText(0, static_cast<qreal>(fm.ascent()), fnt, tl.m_qsText);
+                path.addText(0, static_cast<qreal>(fm.ascent()), fnt, tl.qsText);
             }
 
             auto *item = new QGraphicsPathItem(parent);
@@ -2185,7 +2165,7 @@ void VLayoutPiece::LabelStringsOutlineFont(QGraphicsItem *parent, const QVector<
         {
             auto *item = new QGraphicsSimpleTextItem(parent);
             item->setFont(fnt);
-            item->setText(tl.m_qsText);
+            item->setText(tl.qsText);
             item->setTransform(labelMatrix);
 
             dY += (fm.height() + MmToPixel(1.5) + tm.GetSpacing());

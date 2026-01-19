@@ -53,9 +53,9 @@ class QGraphicsItem;
 
 struct VPiecePositionValidity
 {
-    bool m_outOfBound{false};
-    bool m_superposition{false};
-    bool m_gap{false};
+    bool outOfBound{false};
+    bool superposition{false};
+    bool gap{false};
 };
 
 class VPSheetSceneData

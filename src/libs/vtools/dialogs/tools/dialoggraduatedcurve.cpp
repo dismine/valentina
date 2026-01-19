@@ -186,11 +186,9 @@ auto DialogGraduatedCurve::GetOffsets() const -> QVector<VRawGraduatedCurveOffse
 
     for (const auto &formulaData : m_offsets)
     {
-        VRawGraduatedCurveOffset rawOffset;
-        rawOffset.name = formulaData.name;
-        rawOffset.description = formulaData.description;
-        rawOffset.formula = formulaData.formula.GetFormula(FormulaType::ToSystem);
-        rawOffsets.append(rawOffset);
+        rawOffsets.append({.name = formulaData.name,
+                           .formula = formulaData.formula.GetFormula(FormulaType::ToSystem),
+                           .description = formulaData.description});
     }
 
     return rawOffsets;
@@ -206,18 +204,13 @@ void DialogGraduatedCurve::SetOffsets(const QVector<VRawGraduatedCurveOffset> &o
 
     for (const auto &offset : offsets)
     {
-        VGraduatedCurveOffsetFormula formulaData;
-        formulaData.formulaData = localData;
-        formulaData.name = offset.name;
-        formulaData.description = offset.description;
-
         VFormula widthFormula(offset.formula, localData.data());
         widthFormula.setToolId(toolId);
         widthFormula.setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits()));
         widthFormula.Eval();
 
-        formulaData.formula = widthFormula;
-        m_offsets.append(formulaData);
+        m_offsets.append(
+            {.name = offset.name, .formula = widthFormula, .formulaData = localData, .description = offset.description});
 
         auto newData = QSharedPointer<VContainer>(new VContainer(*localData.data()));
 
@@ -360,11 +353,8 @@ void DialogGraduatedCurve::ShowDialog(bool click)
 
         QVector<VRawGraduatedCurveOffset> rawOffsets = GetOffsets();
 
-        VRawGraduatedCurveOffset offsetData;
-        offsetData.name = GetOffsetName(false);
-        offsetData.formula = QString::number(FromPixel(len, *data->GetPatternUnit()));
-
-        rawOffsets.append(offsetData);
+        rawOffsets.append(
+            {.name = GetOffsetName(false), .formula = QString::number(FromPixel(len, *data->GetPatternUnit()))});
 
         SetOffsets(rawOffsets);
         vis->RefreshGeometry();
@@ -550,23 +540,15 @@ void DialogGraduatedCurve::AddOffset()
     {
         currentRow = ui->tableWidget->rowCount();
 
-        VRawGraduatedCurveOffset offsetData;
-        offsetData.name = name;
-        offsetData.formula = "0"_L1;
-
-        rawOffsets.append(offsetData);
+        rawOffsets.append({.name = name, .formula = "0"_L1});
     }
     else
     {
         currentRow = ui->tableWidget->currentRow() + 1;
 
-        VRawGraduatedCurveOffset offsetData;
-        offsetData.name = name;
-        offsetData.formula = "0"_L1;
-
         if (currentRow >= 0 && currentRow <= rawOffsets.size())
         {
-            rawOffsets.insert(currentRow, offsetData);
+            rawOffsets.insert(currentRow, {.name = name, .formula = "0"_L1});
         }
     }
 
@@ -950,12 +932,9 @@ auto DialogGraduatedCurve::VisualizationOffsets() const -> QVector<VRawGraduated
     toUserOffsets.reserve(m_offsets.size());
     for (const auto &offset : std::as_const(m_offsets))
     {
-        VRawGraduatedCurveOffset offsetData;
-        offsetData.name = offset.name;
-        offsetData.formula = offset.formula.GetFormula(FormulaType::ToUser);
-        offsetData.description = offset.description;
-
-        toUserOffsets.append(offsetData);
+        toUserOffsets.append({.name = offset.name,
+                              .formula = offset.formula.GetFormula(FormulaType::ToUser),
+                              .description = offset.description});
     }
     return toUserOffsets;
 }

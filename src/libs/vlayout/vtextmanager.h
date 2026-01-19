@@ -55,11 +55,11 @@ class VTranslator;
  */
 struct TextLine
 {
-    QString m_qsText{};
-    int m_iFontSize{0}; // 0 means default
-    bool m_bold{false};
-    bool m_italic{false};
-    Qt::Alignment m_eAlign{Qt::AlignCenter};
+    QString qsText{};
+    int iFontSize{0}; // 0 means default
+    bool bold{false};
+    bool italic{false};
+    Qt::Alignment eAlign{Qt::AlignCenter};
 
     friend auto operator<<(QDataStream &dataStream, const TextLine &data) -> QDataStream &;
     friend auto operator>>(QDataStream &dataStream, TextLine &data) -> QDataStream &;

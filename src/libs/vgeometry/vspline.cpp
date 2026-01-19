@@ -48,8 +48,8 @@ using namespace Qt::Literals::StringLiterals;
 
 struct VSplinePair
 {
-    QVector<QPointF> left;
-    QVector<QPointF> right;
+    QVector<QPointF> left{};
+    QVector<QPointF> right{};
 };
 
 namespace
@@ -866,11 +866,8 @@ auto VSpline::Reduce() const -> QVector<VSpline>
         double const t1 = extrema.at(i - 1);
         double const t2 = extrema.at(i);
         VSpline const seg = this->SplitRange(t1, t2);
-        ExstremaData data;
-        data.spl = seg;
-        // data.step = std::clamp((t2 - t1) / 5000.0, 0.00000001, 0.01);
-        data.step = 0.01;
-        pass1.append(data);
+        // .step = std::clamp((t2 - t1) / 5000.0, 0.00000001, 0.01);
+        pass1.append({.spl = seg, .step = 0.01});
     }
 
     // --- 2nd pass: further split into "simple" segments -------------------

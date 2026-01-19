@@ -79,11 +79,7 @@ auto PrepareSequenceItem(const QVector<VLayoutPoint> &path, bool drawMode, VBoun
     VLayoutPiecePath countur(path);
     countur.SetCutPath(!drawMode);
 
-    VBoundarySequenceItemData itemData;
-    itemData.item = QVariant::fromValue(countur);
-    itemData.type = type;
-
-    return itemData;
+    return {.type = type, .item = QVariant::fromValue(countur)};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -97,11 +93,7 @@ void ConvertTwoLinesPassmark(const VLayoutPassmark &passmark, QList<VBoundarySeq
         line1.type = PassmarkLineType::OneLine;
         line1.baseLine = passmark.lines.constFirst();
 
-        VBoundarySequenceItemData itemData;
-        itemData.item = QVariant::fromValue(line1);
-        itemData.type = VBoundarySequenceItem::Passmark;
-
-        FillSequance(itemData, notchSequence);
+        FillSequance({.type = VBoundarySequenceItem::Passmark, .item = QVariant::fromValue(line1)}, notchSequence);
     }
 
     if (passmark.lines.size() > 1)
@@ -112,11 +104,7 @@ void ConvertTwoLinesPassmark(const VLayoutPassmark &passmark, QList<VBoundarySeq
         line2.type = PassmarkLineType::OneLine;
         line2.baseLine = passmark.lines.constLast();
 
-        VBoundarySequenceItemData itemData;
-        itemData.item = QVariant::fromValue(line2);
-        itemData.type = VBoundarySequenceItem::Passmark;
-
-        FillSequance(itemData, notchSequence);
+        FillSequance({.type = VBoundarySequenceItem::Passmark, .item = QVariant::fromValue(line2)}, notchSequence);
     }
 }
 
@@ -131,11 +119,7 @@ void ConvertThreeLinesPassmark(const VLayoutPassmark &passmark, QList<VBoundaryS
         line1.type = PassmarkLineType::OneLine;
         line1.baseLine = passmark.lines.constFirst();
 
-        VBoundarySequenceItemData itemData;
-        itemData.item = QVariant::fromValue(line1);
-        itemData.type = VBoundarySequenceItem::Passmark;
-
-        FillSequance(itemData, notchSequence);
+        FillSequance({.type = VBoundarySequenceItem::Passmark, .item = QVariant::fromValue(line1)}, notchSequence);
     }
 
     if (passmark.lines.size() > 1)
@@ -146,11 +130,7 @@ void ConvertThreeLinesPassmark(const VLayoutPassmark &passmark, QList<VBoundaryS
         line2.type = PassmarkLineType::OneLine;
         line2.baseLine = passmark.lines.at(1);
 
-        VBoundarySequenceItemData itemData;
-        itemData.item = QVariant::fromValue(line2);
-        itemData.type = VBoundarySequenceItem::Passmark;
-
-        FillSequance(itemData, notchSequence);
+        FillSequance({.type = VBoundarySequenceItem::Passmark, .item = QVariant::fromValue(line2)}, notchSequence);
     }
 
     if (passmark.lines.size() > 2)
@@ -161,11 +141,7 @@ void ConvertThreeLinesPassmark(const VLayoutPassmark &passmark, QList<VBoundaryS
         line3.type = PassmarkLineType::OneLine;
         line3.baseLine = passmark.lines.constLast();
 
-        VBoundarySequenceItemData itemData;
-        itemData.item = QVariant::fromValue(line3);
-        itemData.type = VBoundarySequenceItem::Passmark;
-
-        FillSequance(itemData, notchSequence);
+        FillSequance({.type = VBoundarySequenceItem::Passmark, .item = QVariant::fromValue(line3)}, notchSequence);
     }
 }
 
@@ -268,11 +244,7 @@ auto VBoundary::Combine(const QVector<VLayoutPassmark> &passmarks, bool drawMode
             continue;
         }
 
-        VBoundarySequenceItemData itemData;
-        itemData.item = QVariant::fromValue(passmark);
-        itemData.type = VBoundarySequenceItem::Passmark;
-
-        FillSequance(itemData, notchSequence);
+        FillSequance({.type = VBoundarySequenceItem::Passmark, .item = QVariant::fromValue(passmark)}, notchSequence);
     }
 
     QList<VBoundarySequenceItemData> sequence;

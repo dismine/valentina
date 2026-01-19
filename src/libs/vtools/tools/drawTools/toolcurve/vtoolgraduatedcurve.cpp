@@ -203,12 +203,7 @@ auto VToolGraduatedCurve::GetGraduatedOffsets() const -> QVector<VGraduatedCurve
 
         localData.AddVariable(offsetVal);
 
-        VGraduatedCurveOffset offsetData;
-        offsetData.name = offset.name;
-        offsetData.offset = width;
-        offsetData.description = offset.description;
-
-        widths.append(offsetData);
+        widths.append({.name = offset.name, .offset = width, .description = offset.description});
     }
 
     return widths;
@@ -228,12 +223,7 @@ void VToolGraduatedCurve::SetGraduatedOffsets(const QVector<VGraduatedCurveOffse
             formula = offset.offset.GetFormula(FormulaType::FromUser);
         }
 
-        VRawGraduatedCurveOffset offsetData;
-        offsetData.name = offset.name;
-        offsetData.formula = formula;
-        offsetData.description = offset.description;
-
-        m_offsets.append(offsetData);
+        m_offsets.append({.name = offset.name, .formula = formula, .description = offset.description});
     }
 
     QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
@@ -278,11 +268,9 @@ auto VToolGraduatedCurve::ExtractOffsetData(const QDomElement &domElement) -> QV
         if (const QDomElement element = QDOM_ELEMENT(nodeList, i).toElement();
             not element.isNull() && element.tagName() == VAbstractPattern::TagOffset)
         {
-            VRawGraduatedCurveOffset offsetData;
-            offsetData.name = VDomDocument::GetParametrString(element, AttrName);
-            offsetData.description = VDomDocument::GetParametrEmptyString(element, AttrDescription);
-            offsetData.formula = VDomDocument::GetParametrString(element, AttrWidth, QChar('0'));
-            offsets.append(offsetData);
+            offsets.append({.name = VDomDocument::GetParametrString(element, AttrName),
+                            .formula = VDomDocument::GetParametrString(element, AttrWidth, QChar('0')),
+                            .description = VDomDocument::GetParametrEmptyString(element, AttrDescription)});
         }
     }
 
@@ -359,11 +347,7 @@ void VToolGraduatedCurve::SetVisualization()
         toUserOffsets.reserve(m_offsets.size());
         for (const auto &offset : std::as_const(m_offsets))
         {
-            VRawGraduatedCurveOffset offsetData;
-            offsetData.name = offset.name;
-            offsetData.formula = trVars->FormulaToUser(offset.formula, osSeparator);
-
-            toUserOffsets.append(offsetData);
+            toUserOffsets.append({.name = offset.name, .formula = trVars->FormulaToUser(offset.formula, osSeparator)});
         }
         visual->SetOffsets(toUserOffsets);
 

@@ -106,9 +106,7 @@ auto VAbstractFlipping::CreateItem(quint32 idTool, const SourceItem &sItem, cons
         rotated.SetColor(sItem.color);
     }
 
-    DestinationItem item;
-    item.id = data->AddGObject(new Item(rotated));
-    return item;
+    return {.id = data->AddGObject(new Item(rotated))};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

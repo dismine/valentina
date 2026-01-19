@@ -1086,14 +1086,12 @@ auto VDomDocument::GetLabelTemplate(const QDomElement &element) const -> QVector
         {
             if (tagLine.tagName() == TagLine)
             {
-                VLabelTemplateLine line;
-                line.line =
-                    GetParametrString(tagLine, AttrText, QCoreApplication::translate("VDomDocument", "<empty>"));
-                line.bold = GetParametrBool(tagLine, AttrBold, falseStr);
-                line.italic = GetParametrBool(tagLine, AttrItalic, falseStr);
-                line.alignment = static_cast<int>(GetParametrUInt(tagLine, AttrAlignment, QChar('0')));
-                line.fontSizeIncrement = static_cast<int>(GetParametrUInt(tagLine, AttrFSIncrement, QChar('0')));
-                lines.append(line);
+                lines.append(
+                    {.line = GetParametrString(tagLine, AttrText, QCoreApplication::translate("VDomDocument", "<empty>")),
+                     .bold = GetParametrBool(tagLine, AttrBold, falseStr),
+                     .italic = GetParametrBool(tagLine, AttrItalic, falseStr),
+                     .alignment = static_cast<int>(GetParametrUInt(tagLine, AttrAlignment, QChar('0'))),
+                     .fontSizeIncrement = static_cast<int>(GetParametrUInt(tagLine, AttrFSIncrement, QChar('0')))});
             }
             tagLine = tagLine.nextSiblingElement(TagLine);
         }

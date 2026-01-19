@@ -318,12 +318,10 @@ auto VToolRotation::CreatePoint(quint32 idTool, const SourceItem &sItem, const Q
         rotated.setName(sItem.alias);
     }
 
-    DestinationItem item;
-    item.mx = rotated.mx();
-    item.my = rotated.my();
-    item.showLabel = rotated.IsShowLabel();
-    item.id = data->AddGObject(new VPointF(rotated));
-    return item;
+    return {.id = data->AddGObject(new VPointF(rotated)),
+            .mx = rotated.mx(),
+            .my = rotated.my(),
+            .showLabel = rotated.IsShowLabel()};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -350,9 +348,7 @@ auto VToolRotation::CreateItem(quint32 idTool, const SourceItem &sItem, const QP
         rotated.SetColor(sItem.color);
     }
 
-    DestinationItem item;
-    item.id = data->AddGObject(new Item(rotated));
-    return item;
+    return {.id = data->AddGObject(new Item(rotated))};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

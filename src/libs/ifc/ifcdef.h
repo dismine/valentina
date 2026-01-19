@@ -241,11 +241,11 @@ QT_WARNING_DISABLE_GCC("-Weffc++")
 
 struct VLabelTemplateLine
 {
-    QString line;
-    bool bold;
-    bool italic;
-    int alignment;
-    int fontSizeIncrement;
+    QString line{};
+    bool bold{false};
+    bool italic{false};
+    int alignment{0};
+    int fontSizeIncrement{0};
 };
 
 struct VWatermarkData

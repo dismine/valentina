@@ -402,14 +402,12 @@ void DialogParallelCurve::ValidateAlias()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogParallelCurve::Width()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditWidth->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditWidth;
-    formulaData.labelResult = ui->labelResultWidth;
-    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-
-    Eval(formulaData, m_flagWidth);
+    Eval({.formula = ui->plainTextEditWidth->toPlainText(),
+          .variables = data->DataVariables(),
+          .labelEditFormula = ui->labelEditWidth,
+          .labelResult = ui->labelResultWidth,
+          .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true)},
+         m_flagWidth);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

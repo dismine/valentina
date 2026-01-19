@@ -74,14 +74,10 @@ auto TransformationOrigin(const VPLayoutPtr &layout, const QRectF &boundingRect)
     QT_WARNING_PUSH
     QT_WARNING_DISABLE_GCC("-Wnoexcept")
 
-    VPTransformationOrigon origin;
-    origin.origin = boundingRect.center();
-    origin.custom = false;
+    return {.origin = boundingRect.center(), .custom = false};
 
     // cppcheck-suppress unknownMacro
     QT_WARNING_POP
-
-    return origin;
 }
 } // namespace
 
@@ -185,12 +181,8 @@ void VPGraphicsTransformationOrigin::mouseMoveEvent(QGraphicsSceneMouseEvent *ev
     {
         if (VPSheetPtr const sheet = layout->GetFocusedSheet(); not sheet.isNull())
         {
-            VPTransformationOrigon origin = sheet->TransformationOrigin();
-            origin.origin = event->scenePos();
-            origin.custom = true;
-
-            auto *command = new VPUndoOriginMove(sheet, origin, m_allowChangeMerge);
-            layout->UndoStack()->push(command);
+            const VPTransformationOrigon origin = {.origin = event->scenePos(), .custom = true};
+            layout->UndoStack()->push(new VPUndoOriginMove(sheet, origin, m_allowChangeMerge));
         }
         prepareGeometryChange();
     }

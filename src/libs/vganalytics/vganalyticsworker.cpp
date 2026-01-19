@@ -185,11 +185,7 @@ void VGAnalyticsWorker::ReadMessagesFromFile(const QList<QString> &dataList)
  */
 void VGAnalyticsWorker::EnqueQueryWithCurrentTime(const QJsonObject &query)
 {
-    QueryBuffer buffer;
-    buffer.postQuery = query;
-    buffer.time = QDateTime::currentDateTime();
-
-    m_messageQueue.enqueue(buffer);
+    m_messageQueue.enqueue({.postQuery = query, .time = QDateTime::currentDateTime()});
 }
 
 //---------------------------------------------------------------------------------------------------------------------

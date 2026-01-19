@@ -154,11 +154,11 @@ auto ReadCorrections(const QDomElement &mElement) -> QMap<QString, VMeasurementC
             const QDomElement c = correctionTag.toElement();
             const QString hash = VDomDocument::GetParametrString(c, VMeasurements::AttrCoordinates);
 
-            VMeasurementCorrection correction;
-            correction.correction = VDomDocument::GetParametrDouble(c, VMeasurements::AttrCorrection, QChar('0'));
-            correction.alias = VDomDocument::GetParametrEmptyString(c, AttrAlias);
-
-            corrections.insert(hash, correction);
+            corrections.insert(hash,
+                               {.correction = VDomDocument::GetParametrDouble(c,
+                                                                              VMeasurements::AttrCorrection,
+                                                                              QChar('0')),
+                                .alias = VDomDocument::GetParametrEmptyString(c, AttrAlias)});
         }
         correctionTag = correctionTag.nextSibling();
     }

@@ -2721,15 +2721,12 @@ void DialogSeamAllowance::EvalWidth()
     QHash<QString, QSharedPointer<VInternalVariable>> variables = *data->DataVariables();
     variables.remove(currentSeamAllowance);
 
-    FormulaData formulaData;
-    formulaData.formula = uiTabPaths->plainTextEditFormulaWidth->toPlainText();
-    formulaData.variables = &variables;
-    formulaData.labelEditFormula = uiTabPaths->labelEditWidth;
-    formulaData.labelResult = uiTabPaths->labelResultWidth;
-    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-    formulaData.checkLessThanZero = true;
-
-    m_saWidth = Eval(formulaData, flagFormula);
+    m_saWidth = Eval({.formula = uiTabPaths->plainTextEditFormulaWidth->toPlainText(),
+                      .variables = &variables,
+                      .labelEditFormula = uiTabPaths->labelEditWidth,
+                      .labelResult = uiTabPaths->labelResultWidth,
+                      .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+                      .checkLessThanZero = true}, flagFormula);
 
     if (m_saWidth >= 0)
     {
@@ -2753,15 +2750,12 @@ void DialogSeamAllowance::EvalWidthBefore()
     {
         if (uiTabPaths->comboBoxNodes->count() > 0)
         {
-            FormulaData formulaData;
-            formulaData.formula = uiTabPaths->plainTextEditFormulaWidthBefore->toPlainText();
-            formulaData.variables = data->DataVariables();
-            formulaData.labelEditFormula = uiTabPaths->labelEditBefore;
-            formulaData.labelResult = uiTabPaths->labelResultBefore;
-            formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-            formulaData.checkLessThanZero = true;
-
-            Eval(formulaData, flagFormulaBefore);
+            Eval({.formula = uiTabPaths->plainTextEditFormulaWidthBefore->toPlainText(),
+                  .variables = data->DataVariables(),
+                  .labelEditFormula = uiTabPaths->labelEditBefore,
+                  .labelResult = uiTabPaths->labelResultBefore,
+                  .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+                  .checkLessThanZero = true}, flagFormulaBefore);
 
             const QString formulaSABefore = GetFormulaFromUser(uiTabPaths->plainTextEditFormulaWidthBefore);
             UpdateNodeSABefore(formulaSABefore);
@@ -2783,15 +2777,12 @@ void DialogSeamAllowance::EvalWidthAfter()
     {
         if (uiTabPaths->comboBoxNodes->count() > 0)
         {
-            FormulaData formulaData;
-            formulaData.formula = uiTabPaths->plainTextEditFormulaWidthAfter->toPlainText();
-            formulaData.variables = data->DataVariables();
-            formulaData.labelEditFormula = uiTabPaths->labelEditAfter;
-            formulaData.labelResult = uiTabPaths->labelResultAfter;
-            formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-            formulaData.checkLessThanZero = true;
-
-            Eval(formulaData, flagFormulaAfter);
+            Eval({.formula = uiTabPaths->plainTextEditFormulaWidthAfter->toPlainText(),
+                  .variables = data->DataVariables(),
+                  .labelEditFormula = uiTabPaths->labelEditAfter,
+                  .labelResult = uiTabPaths->labelResultAfter,
+                  .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+                  .checkLessThanZero = true}, flagFormulaAfter);
 
             const QString formulaSAAfter = GetFormulaFromUser(uiTabPaths->plainTextEditFormulaWidthAfter);
             UpdateNodeSAAfter(formulaSAAfter);
@@ -2813,16 +2804,13 @@ void DialogSeamAllowance::EvalPassmarkLength()
     {
         if (uiTabPassmarks->comboBoxPassmarks->count() > 0)
         {
-            FormulaData formulaData;
-            formulaData.formula = uiTabPassmarks->plainTextEditPassmarkLength->toPlainText();
-            formulaData.variables = data->DataVariables();
-            formulaData.labelEditFormula = uiTabPassmarks->labelEditPassmarkLength;
-            formulaData.labelResult = uiTabPassmarks->labelResultPassmarkLength;
-            formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-            formulaData.checkZero = true;
-            formulaData.checkLessThanZero = true;
-
-            Eval(formulaData, flagFormulaPassmarkLength);
+            Eval({.formula = uiTabPassmarks->plainTextEditPassmarkLength->toPlainText(),
+                  .variables = data->DataVariables(),
+                  .labelEditFormula = uiTabPassmarks->labelEditPassmarkLength,
+                  .labelResult = uiTabPassmarks->labelResultPassmarkLength,
+                  .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+                  .checkZero = true,
+                  .checkLessThanZero = true}, flagFormulaPassmarkLength);
 
             UpdateNodePassmarkLength(GetFormulaFromUser(uiTabPassmarks->plainTextEditPassmarkLength));
         }
@@ -2842,15 +2830,12 @@ void DialogSeamAllowance::EvalPassmarkWidth()
     {
         if (uiTabPassmarks->comboBoxPassmarks->count() > 0)
         {
-            FormulaData formulaData;
-            formulaData.formula = uiTabPassmarks->plainTextEditPassmarkWidth->toPlainText();
-            formulaData.variables = data->DataVariables();
-            formulaData.labelEditFormula = uiTabPassmarks->labelEditPassmarkWidth;
-            formulaData.labelResult = uiTabPassmarks->labelResultPassmarkWidth;
-            formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-            formulaData.checkZero = true;
-
-            Eval(formulaData, flagFormulaPassmarkWidth);
+            Eval({.formula = uiTabPassmarks->plainTextEditPassmarkWidth->toPlainText(),
+                  .variables = data->DataVariables(),
+                  .labelEditFormula = uiTabPassmarks->labelEditPassmarkWidth,
+                  .labelResult = uiTabPassmarks->labelResultPassmarkWidth,
+                  .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+                  .checkZero = true}, flagFormulaPassmarkWidth);
 
             UpdateNodePassmarkWidth(GetFormulaFromUser(uiTabPassmarks->plainTextEditPassmarkWidth));
         }
@@ -2870,14 +2855,11 @@ void DialogSeamAllowance::EvalPassmarkAngle()
     {
         if (uiTabPassmarks->comboBoxPassmarks->count() > 0)
         {
-            FormulaData formulaData;
-            formulaData.formula = uiTabPassmarks->plainTextEditPassmarkAngle->toPlainText();
-            formulaData.variables = data->DataVariables();
-            formulaData.labelEditFormula = uiTabPassmarks->labelEditPassmarkAngle;
-            formulaData.labelResult = uiTabPassmarks->labelResultPassmarkAngle;
-            formulaData.postfix = degreeSymbol;
-
-            Eval(formulaData, flagFormulaPassmarkAngle);
+            Eval({.formula = uiTabPassmarks->plainTextEditPassmarkAngle->toPlainText(),
+                  .variables = data->DataVariables(),
+                  .labelEditFormula = uiTabPassmarks->labelEditPassmarkAngle,
+                  .labelResult = uiTabPassmarks->labelResultPassmarkAngle,
+                  .postfix = degreeSymbol}, flagFormulaPassmarkAngle);
 
             UpdateNodePassmarkAngle(GetFormulaFromUser(uiTabPassmarks->plainTextEditPassmarkAngle));
         }
@@ -2895,16 +2877,12 @@ void DialogSeamAllowance::EvalFoldHeight()
 {
     if (uiTabFoldLine->groupBoxManualHeight->isChecked())
     {
-        FormulaData formulaData;
-        formulaData.formula = uiTabFoldLine->plainTextEditHeight->toPlainText();
-        formulaData.variables = data->DataVariables();
-        formulaData.labelEditFormula = uiTabFoldLine->labelEditHeight;
-        formulaData.labelResult = uiTabFoldLine->labelResultHeight;
-        formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-        formulaData.checkZero = false;
-        formulaData.checkLessThanZero = true;
-
-        Eval(formulaData, flagFormulaFoldHeight);
+        Eval({.formula = uiTabFoldLine->plainTextEditHeight->toPlainText(),
+              .variables = data->DataVariables(),
+              .labelEditFormula = uiTabFoldLine->labelEditHeight,
+              .labelResult = uiTabFoldLine->labelResultHeight,
+              .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+              .checkLessThanZero = true}, flagFormulaFoldHeight);
     }
     else
     {
@@ -2917,16 +2895,12 @@ void DialogSeamAllowance::EvalFoldWidth()
 {
     if (uiTabFoldLine->groupBoxManualWidth->isChecked())
     {
-        FormulaData formulaData;
-        formulaData.formula = uiTabFoldLine->plainTextEditWidth->toPlainText();
-        formulaData.variables = data->DataVariables();
-        formulaData.labelEditFormula = uiTabFoldLine->labelEditWidth;
-        formulaData.labelResult = uiTabFoldLine->labelResultWidth;
-        formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-        formulaData.checkZero = false;
-        formulaData.checkLessThanZero = true;
-
-        Eval(formulaData, flagFormulaFoldWidth);
+        Eval({.formula = uiTabFoldLine->plainTextEditWidth->toPlainText(),
+              .variables = data->DataVariables(),
+              .labelEditFormula = uiTabFoldLine->labelEditWidth,
+              .labelResult = uiTabFoldLine->labelResultWidth,
+              .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+              .checkLessThanZero = true}, flagFormulaFoldWidth);
     }
     else
     {
@@ -2939,15 +2913,11 @@ void DialogSeamAllowance::EvalFoldCenter()
 {
     if (uiTabFoldLine->groupBoxManualCenter->isChecked())
     {
-        FormulaData formulaData;
-        formulaData.formula = uiTabFoldLine->plainTextEditCenter->toPlainText();
-        formulaData.variables = data->DataVariables();
-        formulaData.labelEditFormula = uiTabFoldLine->labelEditCenter;
-        formulaData.labelResult = uiTabFoldLine->labelResultCenter;
-        formulaData.checkZero = false;
-        formulaData.checkLessThanZero = true;
-
-        Eval(formulaData, flagFormulaFoldCenter);
+        Eval({.formula = uiTabFoldLine->plainTextEditCenter->toPlainText(),
+              .variables = data->DataVariables(),
+              .labelEditFormula = uiTabFoldLine->labelEditCenter,
+              .labelResult = uiTabFoldLine->labelResultCenter,
+              .checkLessThanZero = true}, flagFormulaFoldCenter);
     }
     else
     {

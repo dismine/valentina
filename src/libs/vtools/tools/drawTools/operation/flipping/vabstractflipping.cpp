@@ -170,12 +170,10 @@ auto VAbstractFlipping::CreatePoint(quint32 idTool, const SourceItem &sItem, con
         rotated.setName(sItem.alias);
     }
 
-    DestinationItem item;
-    item.mx = rotated.mx();
-    item.my = rotated.my();
-    item.showLabel = rotated.IsShowLabel();
-    item.id = data->AddGObject(new VPointF(rotated));
-    return item;
+    return {.id = data->AddGObject(new VPointF(rotated)),
+            .mx = rotated.mx(),
+            .my = rotated.my(),
+            .showLabel = rotated.IsShowLabel()};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

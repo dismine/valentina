@@ -372,9 +372,7 @@ void DialogRotation::SelectedObject(bool selected, quint32 object, quint32 tool)
         {
             if (obj == sourceObjects.end())
             {
-                SourceItem item;
-                item.id = object;
-                sourceObjects.append(item);
+                sourceObjects.append({.id = object});
             }
         }
         else
@@ -649,14 +647,12 @@ void DialogRotation::InitIcons()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogRotation::EvalAngle()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditFormula->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditAngle;
-    formulaData.labelResult = ui->labelResultAngle;
-    formulaData.postfix = degreeSymbol;
-
-    Eval(formulaData, flagAngle);
+    Eval({.formula = ui->plainTextEditFormula->toPlainText(),
+          .variables = data->DataVariables(),
+          .labelEditFormula = ui->labelEditAngle,
+          .labelResult = ui->labelResultAngle,
+          .postfix = degreeSymbol},
+         flagAngle);
 
     if (not flagAngle)
     {

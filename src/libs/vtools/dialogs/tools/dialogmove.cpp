@@ -429,9 +429,7 @@ void DialogMove::SelectedObject(bool selected, quint32 object, quint32 tool)
         {
             if (obj == sourceObjects.end())
             {
-                SourceItem item;
-                item.id = object;
-                sourceObjects.append(item);
+                sourceObjects.append({.id = object});
             }
         }
         else
@@ -781,14 +779,12 @@ void DialogMove::SetSourceObjects(const QVector<SourceItem> &value)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::EvalAngle()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditAngle->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditAngle;
-    formulaData.labelResult = ui->labelResultAngle;
-    formulaData.postfix = degreeSymbol;
-
-    Eval(formulaData, flagAngle);
+    Eval({.formula = ui->plainTextEditAngle->toPlainText(),
+          .variables = data->DataVariables(),
+          .labelEditFormula = ui->labelEditAngle,
+          .labelResult = ui->labelResultAngle,
+          .postfix = degreeSymbol},
+         flagAngle);
 
     if (not flagAngle)
     {
@@ -799,14 +795,12 @@ void DialogMove::EvalAngle()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::EvalRotationAngle()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditRotationAngle->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditRotationAngle;
-    formulaData.labelResult = ui->labelResultRotationAngle;
-    formulaData.postfix = degreeSymbol;
-
-    Eval(formulaData, flagRotationAngle);
+    Eval({.formula = ui->plainTextEditRotationAngle->toPlainText(),
+          .variables = data->DataVariables(),
+          .labelEditFormula = ui->labelEditRotationAngle,
+          .labelResult = ui->labelResultRotationAngle,
+          .postfix = degreeSymbol},
+         flagRotationAngle);
 
     if (not flagRotationAngle)
     {
@@ -817,14 +811,12 @@ void DialogMove::EvalRotationAngle()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::EvalLength()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditLength->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditLength;
-    formulaData.labelResult = ui->labelResultLength;
-    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-
-    Eval(formulaData, flagLength);
+    Eval({.formula = ui->plainTextEditLength->toPlainText(),
+          .variables = data->DataVariables(),
+          .labelEditFormula = ui->labelEditLength,
+          .labelResult = ui->labelResultLength,
+          .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true)},
+         flagLength);
 
     if (not flagLength)
     {

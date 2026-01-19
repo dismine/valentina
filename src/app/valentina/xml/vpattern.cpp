@@ -181,30 +181,30 @@ struct VPieceFoldLineData
 //---------------------------------------------------------------------------------------------------------------------
 auto ParsePieceMirrorLine(const QDomElement &domElement) -> VPieceFoldLineData
 {
-    VPieceFoldLineData data;
-
-    data.p1 = VDomDocument::GetParametrUInt(domElement, VAbstractPattern::AttrMirrorLineP1, NULL_ID_STR);
-    data.p2 = VDomDocument::GetParametrUInt(domElement, VAbstractPattern::AttrMirrorLineP2, NULL_ID_STR);
-    data.mirrorLineVisible =
-        VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrMirrorLineVisible, trueStr);
-    data.heightFormula = VDomDocument::GetParametrEmptyString(domElement, VAbstractPattern::AttrFoldLineHeightFormula);
-    data.widthFormula = VDomDocument::GetParametrEmptyString(domElement, VAbstractPattern::AttrFoldLineWidthFormula);
-    data.centerFormula = VDomDocument::GetParametrEmptyString(domElement, VAbstractPattern::AttrFoldLineCenterFormula);
-    data.manualHeight = VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrFoldLineManualHeight, falseStr);
-    data.manualWidth = VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrFoldLineManualWidth, falseStr);
-    data.manualCenter = VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrFoldLineManualCenter, falseStr);
-    data.type = StringToFoldLineType(VDomDocument::GetParametrString(
-        domElement, VAbstractPattern::AttrFoldLineType, FoldLineTypeToString(FoldLineType::TwoArrowsTextAbove)));
-    data.fontSize = qMax(static_cast<unsigned int>(VCommonSettings::MinPieceLabelFontPointSize()),
-                         VDomDocument::GetParametrUInt(domElement, VAbstractPattern::AttrFoldLineFontSize,
-                                                       QString::number(defFoldLineFontSize)));
-    data.italic = VDomDocument::GetParametrBool(domElement, VDomDocument::AttrItalic, falseStr);
-    data.bold = VDomDocument::GetParametrBool(domElement, VDomDocument::AttrBold, falseStr);
-    data.label = VDomDocument::GetParametrEmptyString(domElement, VAbstractPattern::AttrFoldLineLabel);
-    data.alignment =
-        VDomDocument::GetParametrInt(domElement, VDomDocument::AttrAlignment, QString::number(Qt::AlignHCenter));
-
-    return data;
+    return {
+        .p1 = VDomDocument::GetParametrUInt(domElement, VAbstractPattern::AttrMirrorLineP1, NULL_ID_STR),
+        .p2 = VDomDocument::GetParametrUInt(domElement, VAbstractPattern::AttrMirrorLineP2, NULL_ID_STR),
+        .mirrorLineVisible = VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrMirrorLineVisible, trueStr),
+        .heightFormula = VDomDocument::GetParametrEmptyString(domElement, VAbstractPattern::AttrFoldLineHeightFormula),
+        .widthFormula = VDomDocument::GetParametrEmptyString(domElement, VAbstractPattern::AttrFoldLineWidthFormula),
+        .centerFormula = VDomDocument::GetParametrEmptyString(domElement, VAbstractPattern::AttrFoldLineCenterFormula),
+        .manualHeight = VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrFoldLineManualHeight, falseStr),
+        .manualWidth = VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrFoldLineManualWidth, falseStr),
+        .manualCenter = VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrFoldLineManualCenter, falseStr),
+        .type = StringToFoldLineType(
+            VDomDocument::GetParametrString(domElement,
+                                            VAbstractPattern::AttrFoldLineType,
+                                            FoldLineTypeToString(FoldLineType::TwoArrowsTextAbove))),
+        .fontSize = qMax(static_cast<unsigned int>(VCommonSettings::MinPieceLabelFontPointSize()),
+                         VDomDocument::GetParametrUInt(domElement,
+                                                       VAbstractPattern::AttrFoldLineFontSize,
+                                                       QString::number(defFoldLineFontSize))),
+        .italic = VDomDocument::GetParametrBool(domElement, VDomDocument::AttrItalic, falseStr),
+        .bold = VDomDocument::GetParametrBool(domElement, VDomDocument::AttrBold, falseStr),
+        .label = VDomDocument::GetParametrEmptyString(domElement, VAbstractPattern::AttrFoldLineLabel),
+        .alignment = VDomDocument::GetParametrInt(domElement,
+                                                  VDomDocument::AttrAlignment,
+                                                  QString::number(Qt::AlignHCenter))};
 }
 } // anonymous namespace
 

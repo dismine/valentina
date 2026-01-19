@@ -310,7 +310,7 @@ auto SortDetailsForLayout(const QHash<quint32, VPiece> *allDetails, const QStrin
         {
             if (i.value().IsInLayout())
             {
-                details.append(DetailForLayout(i.key(), i.value()));
+                details.append({.id = i.key(), .piece = i.value()});
             }
 
             ++i;
@@ -323,7 +323,7 @@ auto SortDetailsForLayout(const QHash<quint32, VPiece> *allDetails, const QStrin
         {
             if (nameRe.match(i.value().GetName()).hasMatch())
             {
-                details.append(DetailForLayout(i.key(), i.value()));
+                details.append({.id = i.key(), .piece = i.value()});
             }
 
             ++i;

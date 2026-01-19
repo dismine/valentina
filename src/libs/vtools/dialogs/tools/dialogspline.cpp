@@ -380,55 +380,47 @@ auto DialogSpline::GetP4() const -> QSharedPointer<VPointF>
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSpline::EvalAngle1()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditAngle1F->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditAngle1;
-    formulaData.labelResult = ui->labelResultAngle1;
-    formulaData.postfix = degreeSymbol;
-
-    Eval(formulaData, flagAngle1);
+    Eval({.formula = ui->plainTextEditAngle1F->toPlainText(),
+          .variables = data->DataVariables(),
+          .labelEditFormula = ui->labelEditAngle1,
+          .labelResult = ui->labelResultAngle1,
+          .postfix = degreeSymbol},
+         flagAngle1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSpline::EvalAngle2()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditAngle2F->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditAngle2;
-    formulaData.labelResult = ui->labelResultAngle2;
-    formulaData.postfix = degreeSymbol;
-
-    Eval(formulaData, flagAngle2);
+    Eval({.formula = ui->plainTextEditAngle2F->toPlainText(),
+          .variables = data->DataVariables(),
+          .labelEditFormula = ui->labelEditAngle2,
+          .labelResult = ui->labelResultAngle2,
+          .postfix = degreeSymbol},
+         flagAngle2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSpline::EvalLength1()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditLength1F->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditLength1;
-    formulaData.labelResult = ui->labelResultLength1;
-    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-    formulaData.checkLessThanZero = true;
-
-    Eval(formulaData, flagLength1);
+    Eval({.formula = ui->plainTextEditLength1F->toPlainText(),
+          .variables = data->DataVariables(),
+          .labelEditFormula = ui->labelEditLength1,
+          .labelResult = ui->labelResultLength1,
+          .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+          .checkLessThanZero = true},
+         flagLength1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSpline::EvalLength2()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditLength2F->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditLength2;
-    formulaData.labelResult = ui->labelResultLength2;
-    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-    formulaData.checkLessThanZero = true;
-
-    Eval(formulaData, flagLength2);
+    Eval({.formula = ui->plainTextEditLength2F->toPlainText(),
+          .variables = data->DataVariables(),
+          .labelEditFormula = ui->labelEditLength2,
+          .labelResult = ui->labelResultLength2,
+          .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+          .checkLessThanZero = true},
+         flagLength2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

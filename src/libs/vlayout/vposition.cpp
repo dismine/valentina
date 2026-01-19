@@ -270,23 +270,14 @@ void VPosition::SaveCandidate(VBestSquare &bestResult, const VLayoutPiece &detai
     const qreal depthPosition = m_data.isOriginPaperOrientationPortrait ? boundingRect.y() : boundingRect.x();
     const qreal sidePosition = m_data.isOriginPaperOrientationPortrait ? boundingRect.x() : boundingRect.y();
 
-    QT_WARNING_PUSH
-    QT_WARNING_DISABLE_GCC("-Wnoexcept")
-
-    VBestSquareResData data;
-
-    QT_WARNING_POP
-
-    data.bestSize = size;
-    data.globalI = globalI;              // Edge of global contour
-    data.detJ = detJ;                    // Edge of detail
-    data.resMatrix = detail.GetMatrix(); // Matrix for rotation and translation detail
-    data.resMirror = detail.IsVerticallyFlipped();
-    data.type = type;
-    data.depthPosition = depthPosition;
-    data.sidePosition = sidePosition;
-
-    bestResult.NewResult(data);
+    bestResult.NewResult({.bestSize = size,
+                          .globalI = globalI,              // Edge of global contour
+                          .detJ = detJ,                    // Edge of detail
+                          .resMatrix = detail.GetMatrix(), // Matrix for rotation and translation detail
+                          .resMirror = detail.IsVerticallyFlipped(),
+                          .type = type,
+                          .depthPosition = depthPosition,
+                          .sidePosition = sidePosition});
 }
 
 //---------------------------------------------------------------------------------------------------------------------

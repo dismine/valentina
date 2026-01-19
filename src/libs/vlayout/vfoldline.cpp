@@ -1005,16 +1005,8 @@ auto VFoldLine::ThreeXPoints() const -> QVector<QVector<QPointF>>
 //---------------------------------------------------------------------------------------------------------------------
 auto VFoldLine::TwoArrowsData() const -> ArrowsTextPosData
 {
-    QT_WARNING_PUSH
-    QT_WARNING_DISABLE_GCC("-Wnoexcept")
-
-    ArrowsTextPosData data;
-
-    QT_WARNING_POP
-
-    data.arrowsWidth = qFuzzyIsNull(m_width) ? m_foldLine.length() * 0.9 : qMin(m_width, m_foldLine.length());
-    data.arrowsHeight = qFuzzyIsNull(m_height) ? defArrowsHeight : m_height;
-    return data;
+    return {.arrowsWidth = qFuzzyIsNull(m_width) ? m_foldLine.length() * 0.9 : qMin(m_width, m_foldLine.length()),
+            .arrowsHeight = qFuzzyIsNull(m_height) ? defArrowsHeight : m_height};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1031,8 +1023,8 @@ auto VFoldLine::TwoArrowsTextAboveData() const -> ArrowsTextPosData
 
     data.arrowsWidth = qFuzzyIsNull(m_width) ? m_foldLine.length() * 0.9 : qMin(m_width, m_foldLine.length());
     data.labelWidth = data.arrowsWidth;
-    data.arrowsHeight =
-        qFuzzyIsNull(m_height) ? defArrowsHeight : qMax(m_height - (defLabelHeight + CmToPixel(0.2)), minArrowsHeight);
+    data.arrowsHeight = qFuzzyIsNull(m_height) ? defArrowsHeight
+                                               : qMax(m_height - (defLabelHeight + CmToPixel(0.2)), minArrowsHeight);
     data.labelHeight = qFuzzyIsNull(m_height) ? defLabelHeight : (defLabelHeight + CmToPixel(0.2)) - m_height;
     data.base = SimpleParallelLine(m_foldLine.p1(), m_foldLine.p2(), -data.arrowsHeight);
     return data;
@@ -1064,11 +1056,9 @@ auto VFoldLine::TextData() const -> TextPosData
 {
     const qreal defLabelHeight = LabelTextHeight();
 
-    TextPosData data;
-    data.labelWidth = qFuzzyIsNull(m_width) ? m_foldLine.length() * 0.9 : qMin(m_width, m_foldLine.length());
-    data.labelHeight = qFuzzyIsNull(m_height) ? defLabelHeight : (defLabelHeight + CmToPixel(0.2)) - m_height;
-    data.base = m_foldLine;
-    return data;
+    return {.labelWidth = qFuzzyIsNull(m_width) ? m_foldLine.length() * 0.9 : qMin(m_width, m_foldLine.length()),
+            .labelHeight = qFuzzyIsNull(m_height) ? defLabelHeight : (defLabelHeight + CmToPixel(0.2)) - m_height,
+            .base = m_foldLine};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

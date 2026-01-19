@@ -455,11 +455,11 @@ void VPLayoutFileWriter::WriteLabelLines(const VTextManager &tm)
     {
         writeStartElement(ML::TagLine);
         const TextLine &tl = tm.GetSourceLine(i);
-        SetAttribute(ML::AttrFontSize, tl.m_iFontSize);
-        SetAttribute(ML::AttrBold, tl.m_bold);
-        SetAttribute(ML::AttrItalic, tl.m_italic);
-        SetAttribute(ML::AttrAlignment, static_cast<int>(tl.m_eAlign));
-        writeCharacters(tl.m_qsText);
+        SetAttribute(ML::AttrFontSize, tl.iFontSize);
+        SetAttribute(ML::AttrBold, tl.bold);
+        SetAttribute(ML::AttrItalic, tl.italic);
+        SetAttribute(ML::AttrAlignment, static_cast<int>(tl.eAlign));
+        writeCharacters(tl.qsText);
         writeEndElement();
     }
     writeEndElement();

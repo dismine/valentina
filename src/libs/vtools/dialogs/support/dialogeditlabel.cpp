@@ -773,16 +773,12 @@ auto DialogEditLabel::GetTemplate() const -> QVector<VLabelTemplateLine>
         const QListWidgetItem *lineItem = ui->listWidgetEdit->item(i);
         if (lineItem != nullptr)
         {
-            VLabelTemplateLine line;
-            line.line = lineItem->text();
-            line.alignment = lineItem->textAlignment();
-            line.fontSizeIncrement = lineItem->data(Qt::UserRole).toInt();
-
             const QFont font = lineItem->font();
-            line.bold = font.bold();
-            line.italic = font.italic();
-
-            lines.append(line);
+            lines.append({.line = lineItem->text(),
+                          .bold = font.bold(),
+                          .italic = font.italic(),
+                          .alignment = lineItem->textAlignment(),
+                          .fontSizeIncrement = lineItem->data(Qt::UserRole).toInt()});
         }
     }
 

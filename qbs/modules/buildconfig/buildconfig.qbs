@@ -628,7 +628,8 @@ Module {
                         "-Wno-error=reserved-identifier",
                         "-Wunused-but-set-parameter",
                         "-Wunused-but-set-variable",
-                        "-Wno-pre-c++17-compat-pedantic"
+                        "-Wno-pre-c++17-compat-pedantic",
+                        "-Wno-pre-c++20-compat-pedantic"
                     )
                 }
 

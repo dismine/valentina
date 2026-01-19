@@ -2386,12 +2386,10 @@ void VPMainWindow::RotatePiecesToGrainline()
                 QT_WARNING_PUSH
                 QT_WARNING_DISABLE_GCC("-Wnoexcept")
 
-                VPTransformationOrigon origin;
-                origin.custom = true;
+                piece->RotateToGrainline({.custom = true});
 
                 QT_WARNING_POP
 
-                piece->RotateToGrainline(origin);
                 emit m_layout->PieceTransformationChanged(piece);
             }
         }
@@ -3315,24 +3313,14 @@ auto VPMainWindow::PrepareLayoutTilePages(const QList<VPSheetPtr> &sheets) -> QV
     {
         if (m_layout->LayoutSettings().GetPrintTilesScheme())
         {
-            VPLayoutPrinterPage page;
-            page.sheet = sheet;
-            page.tilesScheme = true;
-
-            pages.append(page);
+            pages.append({.sheet = sheet, .tilesScheme = true});
         }
 
         for (int row = 0; row < m_layout->TileFactory()->RowNb(sheet); row++) // for each row of the tiling grid
         {
             for (int col = 0; col < m_layout->TileFactory()->ColNb(sheet); col++) // for each column of tiling grid
             {
-                VPLayoutPrinterPage page;
-                page.sheet = sheet;
-                page.tilesScheme = false;
-                page.tileRow = row;
-                page.tileCol = col;
-
-                pages.append(page);
+                pages.append({.sheet = sheet, .tileRow = row, .tileCol = col});
             }
         }
     }
@@ -3659,13 +3647,9 @@ void VPMainWindow::RotatePieces()
             if (not piece.isNull())
             {
                 const QRectF rect = piece->MappedDetailBoundingRect();
-
-                VPTransformationOrigon origin;
-                origin.origin = rect.center();
-                origin.custom = true;
+                const VPTransformationOrigon origin = {.origin = rect.center(), .custom = true};
 
                 m_layout->UndoStack()->push(new VPUndoPieceRotate(piece, origin, angle));
-
                 StickyRotateToGrainline(piece, origin);
             }
         }
@@ -4451,22 +4435,19 @@ void VPMainWindow::on_ExportLayout()
         return;
     }
 
-    VPExportData data;
-    data.format = dialog.Format();
-    data.path = dialog.Path();
-    data.fileName = dialog.FileName();
-    data.sheets = sheets;
-    data.xScale = m_layout->LayoutSettings().HorizontalScale();
-    data.yScale = m_layout->LayoutSettings().VerticalScale();
-    data.isBinaryDXF = dialog.IsBinaryDXFFormat();
-    data.textAsPaths = dialog.IsTextAsPaths();
-    data.exportUnified = dialog.IsExportUnified();
-    data.showTilesScheme = dialog.IsTilesScheme();
-    data.showGrainline = dialog.IsShowGrainline();
-    data.dxfCompatibility = dialog.DxfCompatibility();
-    data.hideRuler = dialog.IsHideRuler();
-
-    ExportData(data);
+    ExportData({.format = dialog.Format(),
+                .sheets = sheets,
+                .path = dialog.Path(),
+                .fileName = dialog.FileName(),
+                .xScale = m_layout->LayoutSettings().HorizontalScale(),
+                .yScale = m_layout->LayoutSettings().VerticalScale(),
+                .dxfCompatibility = dialog.DxfCompatibility(),
+                .isBinaryDXF = dialog.IsBinaryDXFFormat(),
+                .textAsPaths = dialog.IsTextAsPaths(),
+                .exportUnified = dialog.IsExportUnified(),
+                .showTilesScheme = dialog.IsTilesScheme(),
+                .showGrainline = dialog.IsShowGrainline(),
+                .hideRuler = dialog.IsHideRuler()});
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -4504,22 +4485,19 @@ void VPMainWindow::on_ExportSheet()
         return;
     }
 
-    VPExportData data;
-    data.format = dialog.Format();
-    data.path = dialog.Path();
-    data.fileName = dialog.FileName();
-    data.sheets = QList<VPSheetPtr>{sheet};
-    data.xScale = m_layout->LayoutSettings().HorizontalScale();
-    data.yScale = m_layout->LayoutSettings().VerticalScale();
-    data.isBinaryDXF = dialog.IsBinaryDXFFormat();
-    data.textAsPaths = dialog.IsTextAsPaths();
-    data.exportUnified = dialog.IsExportUnified();
-    data.showTilesScheme = dialog.IsTilesScheme();
-    data.showGrainline = dialog.IsShowGrainline();
-    data.dxfCompatibility = dialog.DxfCompatibility();
-    data.hideRuler = dialog.IsHideRuler();
-
-    ExportData(data);
+    ExportData({.format = dialog.Format(),
+                .sheets = QList<VPSheetPtr>{sheet},
+                .path = dialog.Path(),
+                .fileName = dialog.FileName(),
+                .xScale = m_layout->LayoutSettings().HorizontalScale(),
+                .yScale = m_layout->LayoutSettings().VerticalScale(),
+                .dxfCompatibility = dialog.DxfCompatibility(),
+                .isBinaryDXF = dialog.IsBinaryDXFFormat(),
+                .textAsPaths = dialog.IsTextAsPaths(),
+                .exportUnified = dialog.IsExportUnified(),
+                .showTilesScheme = dialog.IsTilesScheme(),
+                .showGrainline = dialog.IsShowGrainline(),
+                .hideRuler = dialog.IsHideRuler()});
 }
 
 //---------------------------------------------------------------------------------------------------------------------
