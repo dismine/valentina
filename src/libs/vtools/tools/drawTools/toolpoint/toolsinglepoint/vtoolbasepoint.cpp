@@ -49,6 +49,8 @@
 #include "../../../../undocommands/addpatternpiece.h"
 #include "../../../../undocommands/deletepatternpiece.h"
 #include "../../../../undocommands/movespoint.h"
+#include "../../../../undocommands/renameobject.h"
+#include "../../../../undocommands/savetooloptions.h"
 #include "../../../vabstracttool.h"
 #include "../../../vdatatool.h"
 #include "../ifc/ifcdef.h"
@@ -380,6 +382,39 @@ auto VToolBasePoint::MakeToolTip() const -> QString
                             u"<tr> <td><b>%1:</b> %2</td> </tr>"
                             u"</table>"_s.arg(tr("Label"), point->name());
     return toolTip;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolBasePoint::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogSinglePoint> dialogTool = qobject_cast<DialogSinglePoint *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    const QString oldLabel = VAbstractTool::data.GetGObject(m_id)->name();
+    const QString newLabel = dialogTool->GetPointName();
+
+    if (oldLabel == newLabel)
+    {
+        VToolSinglePoint::ApplyToolOptions(oldDomElement, newDomElement);
+        return;
+    }
+
+    VAbstractApplication::VApp()->getUndoStack()->beginMacro(tr("save tool options"));
+
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+    saveOptions->SetInGroup(true);
+    connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    VAbstractApplication::VApp()->getUndoStack()->push(saveOptions);
+
+    if (oldLabel != newLabel)
+    {
+        auto *renameLabel = new RenameLabel(oldLabel, newLabel, doc, m_id);
+        connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        VAbstractApplication::VApp()->getUndoStack()->push(renameLabel);
+    }
+
+    VAbstractApplication::VApp()->getUndoStack()->endMacro();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
