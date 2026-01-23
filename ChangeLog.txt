@@ -15,6 +15,7 @@
 - Puzzle app. Show number of sheet in brackets to separate them from sheet name.
 - Valentina app. Fix incorrect inclusion of custom seam allowance.
 - Fix calculation of seam allowance for symmetrical piece.
+- Fix popup menu style for tool button on MacOS.
 
 # Valentina 1.0.0 July 21, 2025
 - Fix Puzzle app crash when application closing.

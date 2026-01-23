@@ -29,6 +29,7 @@
 
 #include <QAction>
 #include <QEvent>
+#include <QMenu>
 #include <QStyle>
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -36,7 +37,7 @@ VToolButtonPopup::VToolButtonPopup(QWidget *parent)
   : QToolButton(parent)
 {
     setPopupMode(QToolButton::MenuButtonPopup);
-    QObject::connect(this, &QToolButton::triggered, this, [this](QAction *action) { setDefaultAction(action); });
+    QObject::connect(this, &QToolButton::triggered, this, [this](QAction *action) -> void { setDefaultAction(action); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -49,6 +50,21 @@ void VToolButtonPopup::SetToolGroupTooltip(const QString &toolGroupTooltip)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolButtonPopup::AssignMenu(QMenu *menu)
 {
+    if (menu != nullptr)
+    {
+        // Force icons to display in menu items on all platforms.
+        // macOS follows Apple HIG by hiding menu icons by default, but for toolbar
+        // popup menus, icons significantly improve usability by providing visual
+        // consistency with the toolbar buttons and making actions easier to identify.
+        for (QAction *action : menu->actions())
+        {
+            if ((action != nullptr) && !action->icon().isNull())
+            {
+                action->setIconVisibleInMenu(true);
+            }
+        }
+    }
+
     // Attach the menu normally.
     QToolButton::setMenu(menu);
 
