@@ -30,10 +30,12 @@
 
 #include <QLine>
 #include <QSharedPointer>
-#include <new>
+#include <QUndoStack>
 
 #include "../../../../../dialogs/tools/dialoglineintersectaxis.h"
 #include "../../../../../dialogs/tools/dialogtool.h"
+#include "../../../../../undocommands/renameobject.h"
+#include "../../../../../undocommands/savetooloptions.h"
 #include "../../../../../visualization/line/vistoollineintersectaxis.h"
 #include "../../../../../visualization/visualization.h"
 #include "../../../../vabstracttool.h"
@@ -362,4 +364,88 @@ void VToolLineIntersectAxis::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     VToolLinePoint::hoverEnterEvent(event);
     mainLine->SetBoldLine(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLineIntersectAxis::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogLineIntersectAxis> dialogTool = qobject_cast<DialogLineIntersectAxis *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    const QString oldLabel = VAbstractTool::data.GetGObject(m_id)->name();
+    const QString newLabel = dialogTool->GetPointName();
+
+    const QString newBasePointLabel = VAbstractTool::data.GetGObject(dialogTool->GetBasePointId())->name();
+    const QString oldBasePointLabel = BasePointName();
+
+    const QString newFirstPointLabel = VAbstractTool::data.GetGObject(dialogTool->GetFirstPointId())->name();
+    const QString oldFirstPointLabel = FirstLinePoint();
+
+    const QString newSecondPointLabel = VAbstractTool::data.GetGObject(dialogTool->GetSecondPointId())->name();
+    const QString oldSecondPointLabel = SecondLinePoint();
+
+    if (oldBasePointLabel == newBasePointLabel && oldFirstPointLabel == newFirstPointLabel
+        && oldSecondPointLabel == newSecondPointLabel && oldLabel == newLabel)
+    {
+        VToolLinePoint::ApplyToolOptions(oldDomElement, newDomElement);
+        return;
+    }
+
+    QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
+    undoStack->beginMacro(tr("save tool options"));
+
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+    saveOptions->SetInGroup(true);
+    connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    undoStack->push(saveOptions);
+
+    if (oldBasePointLabel != newBasePointLabel)
+    {
+        auto *renamePair = RenamePair::CreateForLine(std::make_pair(oldBasePointLabel, oldLabel),
+                                                     std::make_pair(newBasePointLabel, oldLabel),
+                                                     doc,
+                                                     m_id);
+        if (oldLabel == newLabel && oldFirstPointLabel == newFirstPointLabel
+            && oldSecondPointLabel == newSecondPointLabel)
+        {
+            connect(renamePair, &RenamePair::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        }
+        undoStack->push(renamePair);
+    }
+
+    if (oldFirstPointLabel != newFirstPointLabel)
+    {
+        auto *renamePair = RenamePair::CreateForLine(std::make_pair(oldFirstPointLabel, oldLabel),
+                                                     std::make_pair(newFirstPointLabel, oldLabel),
+                                                     doc,
+                                                     m_id);
+        if (oldLabel == newLabel && oldSecondPointLabel == newSecondPointLabel)
+        {
+            connect(renamePair, &RenamePair::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        }
+        undoStack->push(renamePair);
+    }
+
+    if (oldSecondPointLabel != newSecondPointLabel)
+    {
+        auto *renamePair = RenamePair::CreateForLine(std::make_pair(oldLabel, oldSecondPointLabel),
+                                                     std::make_pair(oldLabel, newSecondPointLabel),
+                                                     doc,
+                                                     m_id);
+        if (oldLabel == newLabel)
+        {
+            connect(renamePair, &RenamePair::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        }
+        undoStack->push(renamePair);
+    }
+
+    if (oldLabel != newLabel)
+    {
+        auto *renameLabel = new RenameLabel(oldLabel, newLabel, doc, m_id);
+        connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        undoStack->push(renameLabel);
+    }
+
+    undoStack->endMacro();
 }

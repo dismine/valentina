@@ -39,7 +39,6 @@
 #include <QPoint>
 #include <QRectF>
 #include <QSharedPointer>
-#include <QUndoStack>
 #include <QVector>
 #include <QtMath>
 
@@ -55,6 +54,7 @@
 #include "../qmuparser/qmutokenparser.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
+#include "../vgeometry/vspline.h"
 #include "../vmisc/exception/vexception.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
@@ -62,7 +62,6 @@
 #include "../vwidgets/vcontrolpointspline.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "vabstractspline.h"
-#include "vgeometry/vspline.h"
 
 const QString VToolSpline::ToolType = QStringLiteral("simpleInteractive"); // NOLINT
 const QString VToolSpline::OldToolType = QStringLiteral("simple");         // NOLINT
@@ -624,6 +623,16 @@ void VToolSpline::RefreshCtrlPoints()
     {
         point->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSpline::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogSpline> dialogTool = qobject_cast<DialogSpline *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    ProcessSplineToolOptions(oldDomElement, newDomElement, dialogTool->GetSpline());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

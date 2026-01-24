@@ -375,3 +375,16 @@ void VToolCurveIntersectAxis::SetSegments(const QPair<QString, QString> &segment
 {
     m_segments = segments;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCurveIntersectAxis::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogCurveIntersectAxis> dialogTool = qobject_cast<DialogCurveIntersectAxis *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    ProcessLinePointToolOptions(oldDomElement,
+                                newDomElement,
+                                dialogTool->GetPointName(),
+                                VAbstractTool::data.GetGObject(dialogTool->GetBasePointId())->name());
+}

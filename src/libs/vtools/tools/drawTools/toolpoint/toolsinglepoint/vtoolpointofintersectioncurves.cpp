@@ -30,7 +30,6 @@
 
 #include <QLineF>
 #include <QSharedPointer>
-#include <new>
 
 #include "../../../../dialogs/tools/dialogpointofintersectioncurves.h"
 #include "../../../../dialogs/tools/dialogtool.h"
@@ -492,6 +491,17 @@ auto VToolPointOfIntersectionCurves::MakeToolTip() const -> QString
                                      tr("Curve 2 segment 2"), m_curve2Segments.second); /* 9, 10 */
 
     return toolTip;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPointOfIntersectionCurves::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogPointOfIntersectionCurves> dialogTool = qobject_cast<DialogPointOfIntersectionCurves *>(
+        m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    ProcessSinglePointToolOptions(oldDomElement, newDomElement, dialogTool->GetPointName());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

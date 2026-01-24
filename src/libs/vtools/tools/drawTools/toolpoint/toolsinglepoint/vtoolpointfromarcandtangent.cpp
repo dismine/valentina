@@ -168,7 +168,8 @@ auto VToolPointFromArcAndTangent::FindPoint(const QPointF &p, const VArc *arc, c
 {
     SCASSERT(intersectionPoint != nullptr)
 
-    QPointF p1, p2;
+    QPointF p1;
+    QPointF p2;
     const auto center = static_cast<QPointF>(arc->GetCenter());
     const qreal radius = arc->GetRadius();
     const int res = VGObject::ContactPoints(p, center, radius, p1, p2);
@@ -330,4 +331,14 @@ void VToolPointFromArcAndTangent::SetVisualization()
         visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPointFromArcAndTangent::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogPointFromArcAndTangent> dialogTool = qobject_cast<DialogPointFromArcAndTangent *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    ProcessSinglePointToolOptions(oldDomElement, newDomElement, dialogTool->GetPointName());
 }

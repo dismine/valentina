@@ -29,6 +29,7 @@
 #include "../ifc/xml/vpatterngraph.h"
 #include "../qmuparser/qmutokenparser.h"
 
+#include <utility>
 #include <QRegularExpression>
 
 namespace
@@ -151,330 +152,139 @@ auto ReplaceTokenLabel(const QString &token, const QString &oldLabel, const QStr
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto ProcessFormula(const QString &formula, const QString &oldLabel, const QString &newLabel) -> QString
+auto ReplaceTokenPair(const QString &token,
+                      RenameObjectType type,
+                      const ObjectPair_t &oldPair,
+                      const ObjectPair_t &newPair,
+                      quint32 duplicate) -> QString
 {
-    if (formula.isEmpty())
+    // Check if all variable types handled when we have new tool
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64);
+
+    QStringList prefixes;
+
+    if (type == RenameObjectType::Line)
     {
-        return formula;
+        prefixes = {"Line", "AngleLine"};
+    }
+    else if (type == RenameObjectType::Spline)
+    {
+        prefixes = {"Angle1Spl", "Angle2Spl", "C1LengthSpl", "C2LengthSpl", "Spl"};
+    }
+    else // RenameObjectType::SplinePath
+    {
+        prefixes = {"Angle1SplPath", "Angle2SplPath", "C1LengthSplPath", "C2LengthSplPath", "SplPath"};
     }
 
-    QMap<vsizetype, QString> tokens = FormulaTokens(formula);
-    if (tokens.isEmpty())
+    for (const auto &prefix : std::as_const(prefixes))
     {
-        return formula;
-    }
+        QString expectedToken;
 
-    QString result = formula;
-
-    // Process tokens in reverse order to maintain correct positions during replacement
-    QList<vsizetype> positions = tokens.keys();
-    std::sort(positions.begin(), positions.end(), std::greater<>());
-
-    for (const vsizetype pos : std::as_const(positions))
-    {
-        const QString &token = tokens[pos];
-        const QString newToken = ReplaceTokenLabel(token, oldLabel, newLabel);
-
-        if (newToken != token)
+        if (duplicate > 0)
         {
-            result.replace(pos, token.length(), newToken);
+            // With specific duplicate number
+            expectedToken = QStringLiteral("%1_%2_%3_%4")
+                                .arg(prefix, oldPair.first, oldPair.second, QString::number(duplicate));
+        }
+        else
+        {
+            // Without duplicate number
+            expectedToken = QStringLiteral("%1_%2_%3").arg(prefix, oldPair.first, oldPair.second);
+        }
+
+        // Check for exact match with label1_label2 order
+        if (token == expectedToken)
+        {
+            if (duplicate > 0)
+            {
+                return QStringLiteral("%1_%2_%3_%4")
+                    .arg(prefix, newPair.first, newPair.second, QString::number(duplicate));
+            }
+            return QStringLiteral("%1_%2_%3").arg(prefix, newPair.first, newPair.second);
         }
     }
 
-    return result;
+    return token; // No replacement needed
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void ProcessAttribute(QDomElement &element, const QString &attr, const QString &oldLabel, const QString &newLabel)
+auto ReplaceTokenAlias(const QString &token, const QString &oldAlias, const QString &newAlias) -> QString
 {
-    if (!element.hasAttribute(attr))
-    {
-        return;
-    }
-
-    const QString formula = element.attribute(attr);
-    const QString newFormula = ProcessFormula(formula, oldLabel, newLabel);
-    if (newFormula != formula)
-    {
-        element.setAttribute(attr, newFormula);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void ProcessPointElement(QDomElement &element, const QString &oldLabel, const QString &newLabel)
-{
-    // Check if all attributes handled when we have new tool
+    // Check if all variable types handled when we have new tool
     Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64);
 
-    // Point elements have no children with formulas, only direct attributes
-    const QStringList attrs = {AttrLength,
-                               AttrAngle,
-                               AttrRadius,
-                               AttrC1Radius,
-                               AttrC2Radius,
-                               AttrCRadius,
-                               AttrWidth,
-                               AttrHeight,
-                               VAbstractPattern::AttrVisible};
+    QStringList prefixes = {"Angle1Spl",   "Angle2Spl",       "Angle1SplPath",   "Angle2SplPath", "C1LengthSpl",
+                            "C2LengthSpl", "C1LengthSplPath", "C2LengthSplPath", "Spl",           "SplPath",
+                            "RadiusArc",   "Angle1Arc",       "Angle2Arc",       "Angle1ElArc",   "Angle2ElArc",
+                            "Arc",         "ElArc",           "Radius1ElArc",    "Radius2ElArc",  "RotationElArc"};
 
-    for (const auto &attr : attrs)
+    for (const auto &prefix : std::as_const(prefixes))
     {
-        ProcessAttribute(element, attr, oldLabel, newLabel);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void ProcessOperationElement(QDomElement &element, const QString &oldLabel, const QString &newLabel)
-{
-    // Check if all attributes handled when we have new tool
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64);
-
-    // Formulas saved only in direct attributes
-    const QStringList attrs = {AttrAngle, AttrLength, AttrRotationAngle};
-
-    for (const auto &attr : attrs)
-    {
-        ProcessAttribute(element, attr, oldLabel, newLabel);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void ProcessArcElement(QDomElement &element, const QString &oldLabel, const QString &newLabel)
-{
-    // Check if all attributes handled when we have new tool
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64);
-
-    // Arc elements have no children with formulas, only direct attributes
-    const QStringList attrs = {AttrLength, AttrAngle1, AttrAngle2, AttrRadius};
-
-    for (const auto &attr : attrs)
-    {
-        ProcessAttribute(element, attr, oldLabel, newLabel);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void ProcessElArcElement(QDomElement &element, const QString &oldLabel, const QString &newLabel)
-{
-    // Check if all attributes handled when we have new tool
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64);
-
-    // Elliptical arc elements have no children with formulas, only direct attributes
-    const QStringList attrs = {AttrLength, AttrAngle1, AttrAngle2, AttrRadius1, AttrRadius2, AttrRotationAngle};
-
-    for (const auto &attr : attrs)
-    {
-        ProcessAttribute(element, attr, oldLabel, newLabel);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void ProcessSplineElement(QDomElement &element, const QString &oldLabel, const QString &newLabel)
-{
-    // Check if all attributes handled when we have new tool
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64);
-
-    // Process spline's own attributes
-    const QStringList attrs = {AttrAngle1, AttrAngle2, AttrLength1, AttrLength2, AttrWidth};
-    for (const auto &attr : attrs)
-    {
-        ProcessAttribute(element, attr, oldLabel, newLabel);
-    }
-
-    // Process pathPoint children
-    const QDomNodeList pathPoints = element.elementsByTagName(TagPathPoint);
-    for (int i = 0; i < pathPoints.count(); ++i)
-    {
-        QDomElement pathPoint = pathPoints.at(i).toElement();
-        const QStringList pathPointAttrs
-            = {AttrKAsm2, AttrAngle, AttrAngle1, AttrAngle2, AttrLength1, AttrLength2, AttrKAsm1};
-        for (const auto &attr : pathPointAttrs)
+        if (token == QStringLiteral("%1_%2").arg(prefix, oldAlias))
         {
-            ProcessAttribute(pathPoint, attr, oldLabel, newLabel);
+            return QStringLiteral("%1_%2").arg(prefix, newAlias);
         }
     }
 
-    // Process offset children
-    const QDomNodeList offsets = element.elementsByTagName(VAbstractPattern::TagOffset);
-    for (int i = 0; i < offsets.count(); ++i)
-    {
-        QDomElement offset = offsets.at(i).toElement();
-        ProcessAttribute(offset, AttrWidth, oldLabel, newLabel);
-    }
+    return token; // No replacement needed
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void ProcessNodeElement(QDomElement &node, const QString &oldLabel, const QString &newLabel)
+auto ReplaceTokenArc(const QString &token,
+                     RenameArcType type,
+                     const QString &oldCenterLabel,
+                     const QString &newCenterLabel,
+                     quint32 id,
+                     int duplicate) -> QString
 {
-    // Check if all attributes handled when we have new tool
+    // Check if all variable types handled when we have new tool
     Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64);
 
-    const QStringList nodeAttrs = {VAbstractPattern::AttrSABefore,
-                                   VAbstractPattern::AttrSAAfter,
-                                   VAbstractPattern::AttrPassmarkLength,
-                                   VAbstractPattern::AttrPassmarkWidth,
-                                   VAbstractPattern::AttrPassmarkAngle};
-    for (const auto &attr : nodeAttrs)
+    QStringList prefixes;
+
+    if (type == RenameArcType::Arc)
     {
-        ProcessAttribute(node, attr, oldLabel, newLabel);
+        prefixes = {"Angle1Arc", "Angle2Arc", "RadiusArc"};
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void ProcessPathElement(QDomElement &element, const QString &oldLabel, const QString &newLabel)
-{
-    // Check if all attributes handled when we have new tool
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64);
-
-    // Process path's own attributes
-    ProcessAttribute(element, VAbstractPattern::AttrVisible, oldLabel, newLabel);
-
-    // Process nodes
-    const QDomNodeList nodeList = element.elementsByTagName(VAbstractPattern::TagNode);
-    for (int i = 0; i < nodeList.count(); ++i)
+    else // RenameArcType::ElArc
     {
-        QDomElement node = nodeList.at(i).toElement();
-        ProcessNodeElement(node, oldLabel, newLabel);
+        prefixes = {"Angle1ElArc", "Angle2ElArc", "Radius1ElArc", "Radius2ElArc", "RotationElArc", "ElArc"};
     }
-}
 
-//---------------------------------------------------------------------------------------------------------------------
-void ProcessToolsElement(QDomElement &element, const QString &oldLabel, const QString &newLabel)
-{
-    // Check if all attributes handled when we have new tool
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64);
-
-    // Process tools' own attributes
-    ProcessAttribute(element, VAbstractPattern::AttrVisible, oldLabel, newLabel);
-
-    // Process nodes
-    const QDomNodeList nodeList = element.elementsByTagName(VAbstractPattern::TagNode);
-    for (int i = 0; i < nodeList.count(); ++i)
+    for (const auto &prefix : std::as_const(prefixes))
     {
-        QDomElement node = nodeList.at(i).toElement();
-        ProcessNodeElement(node, oldLabel, newLabel);
-    }
-}
+        QString expectedToken;
 
-//---------------------------------------------------------------------------------------------------------------------
-void ProcessDetailElement(QDomElement &element, const QString &oldLabel, const QString &newLabel)
-{
-    // Check if all attributes handled when we have new tool
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64);
-
-    // Process detail's own attributes
-    ProcessAttribute(element, AttrWidth, oldLabel, newLabel);
-
-    // Process data child - can use firstChildElement for single elements
-    QDomElement data = element.firstChildElement(VAbstractPattern::TagData);
-    if (!data.isNull())
-    {
-        const QStringList dataAttrs = {AttrWidth, AttrHeight, VAbstractPattern::AttrRotation};
-        for (const auto &attr : dataAttrs)
+        if (duplicate > 0)
         {
-            ProcessAttribute(data, attr, oldLabel, newLabel);
+            // With specific duplicate number
+            expectedToken
+                = QStringLiteral("%1_%2_%3_%4").arg(prefix, oldCenterLabel).arg(id).arg(QString::number(duplicate));
+        }
+        else
+        {
+            // Without duplicate number
+            expectedToken = QStringLiteral("%1_%2_%3").arg(prefix, oldCenterLabel).arg(id);
+        }
+
+        // Check for exact match with label1_label2 order
+        if (token == expectedToken)
+        {
+            if (duplicate > 0)
+            {
+                return QStringLiteral("%1_%2_%3_%4").arg(prefix, newCenterLabel).arg(id).arg(QString::number(duplicate));
+            }
+            return QStringLiteral("%1_%2_%3").arg(prefix, newCenterLabel).arg(id);
         }
     }
-
-    // Process patternInfo child
-    QDomElement patternInfo = element.firstChildElement(VAbstractPattern::TagPatternInfo);
-    if (!patternInfo.isNull())
-    {
-        const QStringList patternInfoAttrs = {AttrWidth, AttrHeight, VAbstractPattern::AttrRotation};
-        for (const auto &attr : patternInfoAttrs)
-        {
-            ProcessAttribute(patternInfo, attr, oldLabel, newLabel);
-        }
-    }
-
-    // Process grainline child
-    QDomElement grainline = element.firstChildElement(VAbstractPattern::TagGrainline);
-    if (!grainline.isNull())
-    {
-        const QStringList grainlineAttrs = {AttrLength, VAbstractPattern::AttrRotation};
-        for (const auto &attr : grainlineAttrs)
-        {
-            ProcessAttribute(grainline, attr, oldLabel, newLabel);
-        }
-    }
-
-    // Process mirrorLine child
-    QDomElement mirrorLine = element.firstChildElement(VAbstractPattern::TagMirrorLine);
-    if (!mirrorLine.isNull())
-    {
-        const QStringList mirrorLineAttrs = {VAbstractPattern::AttrFoldLineHeightFormula,
-                                             VAbstractPattern::AttrFoldLineWidthFormula,
-                                             VAbstractPattern::AttrFoldLineCenterFormula};
-        for (const auto &attr : mirrorLineAttrs)
-        {
-            ProcessAttribute(mirrorLine, attr, oldLabel, newLabel);
-        }
-    }
-
-    // Process nodes
-    const QDomNodeList nodeList = element.elementsByTagName(VAbstractPattern::TagNode);
-    for (int i = 0; i < nodeList.count(); ++i)
-    {
-        QDomElement node = nodeList.at(i).toElement();
-        ProcessNodeElement(node, oldLabel, newLabel);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void ProcessElementByType(QDomElement &element, const QString &oldLabel, const QString &newLabel)
-{
-    if (!element.isElement())
-    {
-        return;
-    }
-
-    // Check if all tags handled when we have new tool
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64);
-
-    if (const QString tagName = element.tagName(); tagName == VAbstractPattern::TagPoint)
-    {
-        ProcessPointElement(element, oldLabel, newLabel);
-    }
-    else if (tagName == VAbstractPattern::TagOperation)
-    {
-        ProcessOperationElement(element, oldLabel, newLabel);
-    }
-    else if (tagName == VAbstractPattern::TagArc)
-    {
-        ProcessArcElement(element, oldLabel, newLabel);
-    }
-    else if (tagName == VAbstractPattern::TagElArc)
-    {
-        ProcessElArcElement(element, oldLabel, newLabel);
-    }
-    else if (tagName == VAbstractPattern::TagSpline)
-    {
-        ProcessSplineElement(element, oldLabel, newLabel);
-    }
-    else if (tagName == VAbstractPattern::TagPath)
-    {
-        ProcessPathElement(element, oldLabel, newLabel);
-    }
-    else if (tagName == VAbstractPattern::TagTools)
-    {
-        ProcessToolsElement(element, oldLabel, newLabel);
-    }
-    else if (tagName == VAbstractPattern::TagDetail)
-    {
-        ProcessDetailElement(element, oldLabel, newLabel);
-    }
+    return token; // No replacement needed
 }
 } // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
-RenameLabel::RenameLabel(QString oldLabel, QString newLabel, VAbstractPattern *doc, quint32 id, QUndoCommand *parent)
-  : VUndoCommand(doc, parent),
-    m_oldLabel(std::move(oldLabel)),
-    m_newLabel(std::move(newLabel))
+AbstractObjectRename::AbstractObjectRename(VAbstractPattern *doc, quint32 id, QUndoCommand *parent)
+  : VUndoCommand(doc, parent)
 {
-    SCASSERT(!m_oldLabel.isEmpty())
-    SCASSERT(!m_newLabel.isEmpty())
-
     nodeId = id;
 
     // Do it here in case graph will not be completed when we next time call undo/redo
@@ -484,20 +294,27 @@ RenameLabel::RenameLabel(QString oldLabel, QString newLabel, VAbstractPattern *d
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void RenameLabel::undo()
+void AbstractObjectRename::undo()
 {
-    RenameLabelInFormulas(m_newLabel, m_oldLabel);
+    m_operationType = OperationType::Undo;
+    RenameFormulas();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void RenameLabel::redo()
+void AbstractObjectRename::redo()
 {
-    RenameLabelInFormulas(m_oldLabel, m_newLabel);
+    m_operationType = OperationType::Redo;
+    RenameFormulas();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void RenameLabel::RenameLabelInFormulas(const QString &oldLabel, const QString &newLabel)
+void AbstractObjectRename::RenameFormulas()
 {
+    if (m_operationType == OperationType::Unknown)
+    {
+        return;
+    }
+
     // Check if all tags handled when we have new tool
     Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64);
 
@@ -523,11 +340,472 @@ void RenameLabel::RenameLabelInFormulas(const QString &oldLabel, const QString &
             continue;
         }
 
-        ProcessElementByType(domElement, oldLabel, newLabel);
+        ProcessElementByType(domElement);
     }
 
     if (!m_dependencies.isEmpty())
     {
         emit NeedLiteParsing(Document::LiteParse);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void AbstractObjectRename::ProcessElementByType(QDomElement &element) const
+{
+    if (!element.isElement())
+    {
+        return;
+    }
+
+    // Check if all tags handled when we have new tool
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64);
+
+    if (const QString tagName = element.tagName(); tagName == VAbstractPattern::TagPoint)
+    {
+        ProcessPointElement(element);
+    }
+    else if (tagName == VAbstractPattern::TagOperation)
+    {
+        ProcessOperationElement(element);
+    }
+    else if (tagName == VAbstractPattern::TagArc)
+    {
+        ProcessArcElement(element);
+    }
+    else if (tagName == VAbstractPattern::TagElArc)
+    {
+        ProcessElArcElement(element);
+    }
+    else if (tagName == VAbstractPattern::TagSpline)
+    {
+        ProcessSplineElement(element);
+    }
+    else if (tagName == VAbstractPattern::TagPath)
+    {
+        ProcessPathElement(element);
+    }
+    else if (tagName == VAbstractPattern::TagTools)
+    {
+        ProcessToolsElement(element);
+    }
+    else if (tagName == VAbstractPattern::TagDetail)
+    {
+        ProcessDetailElement(element);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void AbstractObjectRename::ProcessPointElement(QDomElement &element) const
+{
+    // Check if all attributes handled when we have new tool
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64);
+
+    // Point elements have no children with formulas, only direct attributes
+    const QStringList attrs = {AttrLength,
+                               AttrAngle,
+                               AttrRadius,
+                               AttrC1Radius,
+                               AttrC2Radius,
+                               AttrCRadius,
+                               AttrWidth,
+                               AttrHeight,
+                               VAbstractPattern::AttrVisible};
+
+    for (const auto &attr : attrs)
+    {
+        ProcessAttribute(element, attr);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void AbstractObjectRename::ProcessOperationElement(QDomElement &element) const
+{
+    // Check if all attributes handled when we have new tool
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64);
+
+    // Formulas saved only in direct attributes
+    const QStringList attrs = {AttrAngle, AttrLength, AttrRotationAngle};
+
+    for (const auto &attr : attrs)
+    {
+        ProcessAttribute(element, attr);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void AbstractObjectRename::ProcessArcElement(QDomElement &element) const
+{
+    // Check if all attributes handled when we have new tool
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64);
+
+    // Arc elements have no children with formulas, only direct attributes
+    const QStringList attrs = {AttrLength, AttrAngle1, AttrAngle2, AttrRadius};
+
+    for (const auto &attr : attrs)
+    {
+        ProcessAttribute(element, attr);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void AbstractObjectRename::ProcessElArcElement(QDomElement &element) const
+{
+    // Check if all attributes handled when we have new tool
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64);
+
+    // Elliptical arc elements have no children with formulas, only direct attributes
+    const QStringList attrs = {AttrLength, AttrAngle1, AttrAngle2, AttrRadius1, AttrRadius2, AttrRotationAngle};
+
+    for (const auto &attr : attrs)
+    {
+        ProcessAttribute(element, attr);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void AbstractObjectRename::ProcessSplineElement(QDomElement &element) const
+{
+    // Check if all attributes handled when we have new tool
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64);
+
+    // Process spline's own attributes
+    const QStringList attrs = {AttrAngle1, AttrAngle2, AttrLength1, AttrLength2, AttrWidth};
+    for (const auto &attr : attrs)
+    {
+        ProcessAttribute(element, attr);
+    }
+
+    // Process pathPoint children
+    const QDomNodeList pathPoints = element.elementsByTagName(TagPathPoint);
+    for (int i = 0; i < pathPoints.count(); ++i)
+    {
+        QDomElement pathPoint = pathPoints.at(i).toElement();
+        const QStringList pathPointAttrs
+            = {AttrKAsm2, AttrAngle, AttrAngle1, AttrAngle2, AttrLength1, AttrLength2, AttrKAsm1};
+        for (const auto &attr : pathPointAttrs)
+        {
+            ProcessAttribute(pathPoint, attr);
+        }
+    }
+
+    // Process offset children
+    const QDomNodeList offsets = element.elementsByTagName(VAbstractPattern::TagOffset);
+    for (int i = 0; i < offsets.count(); ++i)
+    {
+        QDomElement offset = offsets.at(i).toElement();
+        ProcessAttribute(offset, AttrWidth);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void AbstractObjectRename::ProcessNodeElement(QDomElement &node) const
+{
+    // Check if all attributes handled when we have new tool
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64);
+
+    const QStringList nodeAttrs = {VAbstractPattern::AttrSABefore,
+                                   VAbstractPattern::AttrSAAfter,
+                                   VAbstractPattern::AttrPassmarkLength,
+                                   VAbstractPattern::AttrPassmarkWidth,
+                                   VAbstractPattern::AttrPassmarkAngle};
+    for (const auto &attr : nodeAttrs)
+    {
+        ProcessAttribute(node, attr);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void AbstractObjectRename::ProcessPathElement(QDomElement &element) const
+{
+    // Check if all attributes handled when we have new tool
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64);
+
+    // Process path's own attributes
+    ProcessAttribute(element, VAbstractPattern::AttrVisible);
+
+    // Process nodes
+    const QDomNodeList nodeList = element.elementsByTagName(VAbstractPattern::TagNode);
+    for (int i = 0; i < nodeList.count(); ++i)
+    {
+        QDomElement node = nodeList.at(i).toElement();
+        ProcessNodeElement(node);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void AbstractObjectRename::ProcessToolsElement(QDomElement &element) const
+{
+    // Check if all attributes handled when we have new tool
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64);
+
+    // Process tools' own attributes
+    ProcessAttribute(element, VAbstractPattern::AttrVisible);
+
+    // Process nodes
+    const QDomNodeList nodeList = element.elementsByTagName(VAbstractPattern::TagNode);
+    for (int i = 0; i < nodeList.count(); ++i)
+    {
+        QDomElement node = nodeList.at(i).toElement();
+        ProcessNodeElement(node);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void AbstractObjectRename::ProcessDetailElement(QDomElement &element) const
+{
+    // Check if all attributes handled when we have new tool
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64);
+
+    // Process detail's own attributes
+    ProcessAttribute(element, AttrWidth);
+
+    // Process data child - can use firstChildElement for single elements
+    QDomElement data = element.firstChildElement(VAbstractPattern::TagData);
+    if (!data.isNull())
+    {
+        const QStringList dataAttrs = {AttrWidth, AttrHeight, VAbstractPattern::AttrRotation};
+        for (const auto &attr : dataAttrs)
+        {
+            ProcessAttribute(data, attr);
+        }
+    }
+
+    // Process patternInfo child
+    QDomElement patternInfo = element.firstChildElement(VAbstractPattern::TagPatternInfo);
+    if (!patternInfo.isNull())
+    {
+        const QStringList patternInfoAttrs = {AttrWidth, AttrHeight, VAbstractPattern::AttrRotation};
+        for (const auto &attr : patternInfoAttrs)
+        {
+            ProcessAttribute(patternInfo, attr);
+        }
+    }
+
+    // Process grainline child
+    QDomElement grainline = element.firstChildElement(VAbstractPattern::TagGrainline);
+    if (!grainline.isNull())
+    {
+        const QStringList grainlineAttrs = {AttrLength, VAbstractPattern::AttrRotation};
+        for (const auto &attr : grainlineAttrs)
+        {
+            ProcessAttribute(grainline, attr);
+        }
+    }
+
+    // Process mirrorLine child
+    QDomElement mirrorLine = element.firstChildElement(VAbstractPattern::TagMirrorLine);
+    if (!mirrorLine.isNull())
+    {
+        const QStringList mirrorLineAttrs = {VAbstractPattern::AttrFoldLineHeightFormula,
+                                             VAbstractPattern::AttrFoldLineWidthFormula,
+                                             VAbstractPattern::AttrFoldLineCenterFormula};
+        for (const auto &attr : mirrorLineAttrs)
+        {
+            ProcessAttribute(mirrorLine, attr);
+        }
+    }
+
+    // Process nodes
+    const QDomNodeList nodeList = element.elementsByTagName(VAbstractPattern::TagNode);
+    for (int i = 0; i < nodeList.count(); ++i)
+    {
+        QDomElement node = nodeList.at(i).toElement();
+        ProcessNodeElement(node);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void AbstractObjectRename::ProcessAttribute(QDomElement &element, const QString &attr) const
+{
+    if (!element.hasAttribute(attr))
+    {
+        return;
+    }
+
+    const QString formula = element.attribute(attr);
+    const QString newFormula = ProcessFormula(formula);
+    if (newFormula != formula)
+    {
+        element.setAttribute(attr, newFormula);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto AbstractObjectRename::ProcessFormula(const QString &formula) const -> QString
+{
+    if (formula.isEmpty())
+    {
+        return formula;
+    }
+
+    QMap<vsizetype, QString> tokens = FormulaTokens(formula);
+    if (tokens.isEmpty())
+    {
+        return formula;
+    }
+
+    QString result = formula;
+
+    // Process tokens in reverse order to maintain correct positions during replacement
+    QList<vsizetype> positions = tokens.keys();
+    std::sort(positions.begin(), positions.end(), std::greater<>());
+
+    for (const vsizetype pos : std::as_const(positions))
+    {
+        const QString &token = tokens[pos];
+        const QString newToken = ProcessToken(token);
+
+        if (newToken != token)
+        {
+            result.replace(pos, token.length(), newToken);
+        }
+    }
+
+    return result;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+RenameLabel::RenameLabel(QString oldLabel, QString newLabel, VAbstractPattern *doc, quint32 id, QUndoCommand *parent)
+  : AbstractObjectRename(doc, id, parent),
+    m_oldLabel(std::move(oldLabel)),
+    m_newLabel(std::move(newLabel))
+{
+    SCASSERT(!m_oldLabel.isEmpty())
+    SCASSERT(!m_newLabel.isEmpty())
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto RenameLabel::ProcessToken(const QString &token) const -> QString
+{
+    if (ProcessType() == OperationType::Unknown)
+    {
+        return token;
+    }
+
+    if (ProcessType() == OperationType::Redo)
+    {
+        return ReplaceTokenLabel(token, m_oldLabel, m_newLabel);
+    }
+
+    return ReplaceTokenLabel(token, m_newLabel, m_oldLabel);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+RenamePair::RenamePair(RenameObjectType type,
+                       ObjectPair_t oldPair,
+                       ObjectPair_t newPair,
+                       quint32 duplicate,
+                       VAbstractPattern *doc,
+                       quint32 id,
+                       QUndoCommand *parent)
+  : AbstractObjectRename(doc, id, parent),
+    m_type(type),
+    m_oldPair(std::move(oldPair)),
+    m_newPair(std::move(newPair)),
+    m_duplicate(duplicate)
+{
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto RenamePair::CreateForLine(const ObjectPair_t &oldPair,
+                               const ObjectPair_t &newPair,
+                               VAbstractPattern *doc,
+                               quint32 id,
+                               QUndoCommand *parent) -> RenamePair *
+{
+    return new RenamePair(RenameObjectType::Line, oldPair, newPair, 0, doc, id, parent);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto RenamePair::CreateForSpline(const ObjectPair_t &oldPair,
+                                 const ObjectPair_t &newPair,
+                                 quint32 duplicate,
+                                 VAbstractPattern *doc,
+                                 quint32 id,
+                                 QUndoCommand *parent) -> RenamePair *
+{
+    return new RenamePair(RenameObjectType::Spline, oldPair, newPair, duplicate, doc, id, parent);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto RenamePair::CreateForSplinePath(const ObjectPair_t &oldPair,
+                                     const ObjectPair_t &newPair,
+                                     quint32 duplicate,
+                                     VAbstractPattern *doc,
+                                     quint32 id,
+                                     QUndoCommand *parent) -> RenamePair *
+{
+    return new RenamePair(RenameObjectType::SplinePath, oldPair, newPair, duplicate, doc, id, parent);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto RenamePair::ProcessToken(const QString &token) const -> QString
+{
+    if (ProcessType() == OperationType::Unknown)
+    {
+        return token;
+    }
+
+    if (ProcessType() == OperationType::Redo)
+    {
+        return ReplaceTokenPair(token, m_type, m_oldPair, m_newPair, m_duplicate);
+    }
+
+    return ReplaceTokenPair(token, m_type, m_newPair, m_oldPair, m_duplicate);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+RenameAlias::RenameAlias(QString oldAlias, QString newAlias, VAbstractPattern *doc, quint32 id, QUndoCommand *parent)
+  : AbstractObjectRename(doc, id, parent),
+    m_oldAlias(std::move(oldAlias)),
+    m_newAlias(std::move(newAlias))
+{
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto RenameAlias::ProcessToken(const QString &token) const -> QString
+{
+    if (ProcessType() == OperationType::Unknown)
+    {
+        return token;
+    }
+
+    if (ProcessType() == OperationType::Redo)
+    {
+        return ReplaceTokenAlias(token, m_oldAlias, m_newAlias);
+    }
+
+    return ReplaceTokenAlias(token, m_newAlias, m_oldAlias);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+RenameArc::RenameArc(RenameArcType type,
+                     QString oldCenterLabel,
+                     QString newCenterLabel,
+                     int duplicate,
+                     VAbstractPattern *doc,
+                     quint32 id,
+                     QUndoCommand *parent)
+  : AbstractObjectRename(doc, id, parent),
+    m_type(type),
+    m_oldCenterLabel(std::move(oldCenterLabel)),
+    m_newCenterLabel(std::move(newCenterLabel)),
+    m_duplicate(duplicate)
+{
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto RenameArc::ProcessToken(const QString &token) const -> QString
+{
+    if (ProcessType() == OperationType::Unknown)
+    {
+        return token;
+    }
+
+    if (ProcessType() == OperationType::Redo)
+    {
+        return ReplaceTokenArc(token, m_type, m_oldCenterLabel, m_newCenterLabel, nodeId, m_duplicate);
+    }
+
+    return ReplaceTokenArc(token, m_type, m_newCenterLabel, m_oldCenterLabel, nodeId, m_duplicate);
 }

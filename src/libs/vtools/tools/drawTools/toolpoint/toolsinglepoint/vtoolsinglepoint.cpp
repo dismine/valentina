@@ -43,6 +43,8 @@
 
 #include "../../../../undocommands/label/movelabel.h"
 #include "../../../../undocommands/label/showlabel.h"
+#include "../../../../undocommands/renameobject.h"
+#include "../../../../undocommands/savetooloptions.h"
 #include "../../../vabstracttool.h"
 #include "../../vdrawtool.h"
 #include "../ifc/ifcdef.h"
@@ -381,7 +383,6 @@ void VToolSinglePoint::ToolSelectionType(const SelectionType &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-
 auto VToolSinglePoint::InitSegments(GOType curveType, qreal segLength, const VPointF *p, quint32 curveId,
                                     VContainer *data, const QString &alias1, const QString &alias2)
     -> QPair<QString, QString>
@@ -522,4 +523,32 @@ auto VToolSinglePoint::InitSegments(GOType curveType, qreal segLength, const VPo
     QT_WARNING_POP
 
     return {};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSinglePoint::ProcessSinglePointToolOptions(const QDomElement &oldDomElement,
+                                                     const QDomElement &newDomElement,
+                                                     const QString &newLabel)
+{
+    const QString oldLabel = VAbstractTool::data.GetGObject(m_id)->name();
+
+    if (oldLabel == newLabel)
+    {
+        VToolSinglePoint::ApplyToolOptions(oldDomElement, newDomElement);
+        return;
+    }
+
+    QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
+    undoStack->beginMacro(tr("save tool options"));
+
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+    saveOptions->SetInGroup(true);
+    connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    undoStack->push(saveOptions);
+
+    auto *renameLabel = new RenameLabel(oldLabel, newLabel, doc, m_id);
+    connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    undoStack->push(renameLabel);
+
+    undoStack->endMacro();
 }

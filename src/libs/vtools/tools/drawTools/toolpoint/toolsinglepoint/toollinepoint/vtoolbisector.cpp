@@ -30,10 +30,12 @@
 
 #include <QLineF>
 #include <QSharedPointer>
-#include <new>
+#include <QUndoStack>
 
 #include "../../../../../dialogs/tools/dialogbisector.h"
 #include "../../../../../dialogs/tools/dialogtool.h"
+#include "../../../../../undocommands/renameobject.h"
+#include "../../../../../undocommands/savetooloptions.h"
 #include "../../../../../visualization/line/vistoolbisector.h"
 #include "../../../../../visualization/visualization.h"
 #include "../../../../vabstracttool.h"
@@ -296,6 +298,19 @@ void VToolBisector::SetVisualization()
         visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolBisector::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogBisector> dialogTool = qobject_cast<DialogBisector *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    ProcessLinePointToolOptions(oldDomElement,
+                                newDomElement,
+                                dialogTool->GetPointName(),
+                                VAbstractTool::data.GetGObject(dialogTool->GetSecondPointId())->name());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

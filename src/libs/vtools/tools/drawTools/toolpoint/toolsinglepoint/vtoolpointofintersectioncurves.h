@@ -94,6 +94,7 @@ protected:
     void ReadToolAttributes(const QDomElement &domElement) override;
     void SetVisualization() override;
     auto MakeToolTip() const -> QString override;
+    void ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement) override;
 
     void SetCurve1Segments(const QPair<QString, QString> &segments);
     void SetCurve2Segments(const QPair<QString, QString> &segments);

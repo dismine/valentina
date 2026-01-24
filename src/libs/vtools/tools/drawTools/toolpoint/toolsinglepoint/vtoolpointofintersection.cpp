@@ -30,7 +30,6 @@
 
 #include <QPointF>
 #include <QSharedPointer>
-#include <new>
 
 #include "../../../../dialogs/tools/dialogpointofintersection.h"
 #include "../../../../dialogs/tools/dialogtool.h"
@@ -232,6 +231,16 @@ void VToolPointOfIntersection::SetVisualization()
         visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPointOfIntersection::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogPointOfIntersection> dialogTool = qobject_cast<DialogPointOfIntersection *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    ProcessSinglePointToolOptions(oldDomElement, newDomElement, dialogTool->GetPointName());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

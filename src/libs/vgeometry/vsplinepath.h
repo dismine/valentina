@@ -106,7 +106,6 @@ public:
     void SetMainNameForHistory(const QString &name);
     auto GetMainNameForHistory() const -> QString override;
 
-protected:
     auto FirstPoint() const -> VPointF override;
     auto LastPoint() const -> VPointF override;
 

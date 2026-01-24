@@ -29,7 +29,6 @@
 #ifndef VTOOLSHOULDERPOINT_H
 #define VTOOLSHOULDERPOINT_H
 
-
 #include <QDomElement>
 #include <QGraphicsItem>
 #include <QMetaObject>
@@ -87,6 +86,8 @@ protected:
     void ReadToolAttributes(const QDomElement &domElement) override;
     void SetVisualization() override;
     auto MakeToolTip() const -> QString override;
+    void ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement) override;
+
 private slots:
     void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) override;
 

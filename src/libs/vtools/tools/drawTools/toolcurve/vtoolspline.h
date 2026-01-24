@@ -104,6 +104,7 @@ protected:
     void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
     void SetVisualization() override;
     void RefreshCtrlPoints() override;
+    void ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement) override;
 
 private slots:
     void CurveReleased();

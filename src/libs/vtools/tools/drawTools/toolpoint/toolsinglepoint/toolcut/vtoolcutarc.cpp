@@ -30,9 +30,12 @@
 
 #include <QPointF>
 #include <QSharedPointer>
+#include <QUndoStack>
 
 #include "../../../../../dialogs/tools/dialogcutarc.h"
 #include "../../../../../dialogs/tools/dialogtool.h"
+#include "../../../../../undocommands/renameobject.h"
+#include "../../../../../undocommands/savetooloptions.h"
 #include "../../../../../visualization/path/vistoolcutarc.h"
 #include "../../../../../visualization/visualization.h"
 #include "../../../../vabstracttool.h"
@@ -191,23 +194,23 @@ auto VToolCutArc::Create(VToolCutInitData &initData) -> VToolCutArc *
 
         a1->setId(initData.data->getNextId());
         initData.data->RegisterUniqueName(a1);
-        initData.data->AddArc(a1, /*a1->id()*/ NULL_ID, initData.id);
+        initData.data->AddArc(a1, NULL_ID, initData.id);
 
         a2->setId(initData.data->getNextId());
         initData.data->RegisterUniqueName(a2);
-        initData.data->AddArc(a2, /*a2->id()*/ NULL_ID, initData.id);
+        initData.data->AddArc(a2, NULL_ID, initData.id);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, p);
 
-        // a1->setId(initData.id + 1);
+        a1->setId(initData.id + 1);
         initData.data->RegisterUniqueName(a1);
-        initData.data->AddArc(a1, a1->id(), initData.id);
+        initData.data->AddArc(a1, NULL_ID, initData.id);
 
-        // a2->setId(initData.id + 2);
+        a2->setId(initData.id + 2);
         initData.data->RegisterUniqueName(a2);
-        initData.data->AddArc(a2, a2->id(), initData.id);
+        initData.data->AddArc(a2, NULL_ID, initData.id);
     }
 
     // TODO: Add segments to graph when we start showing them for users
@@ -432,4 +435,73 @@ auto VToolCutArc::MakeToolTip() const -> QString
     }
 
     return {};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCutArc::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogCutArc> dialogTool = qobject_cast<DialogCutArc *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    const QSharedPointer<VAbstractArc> arc = VAbstractTool::data.GeometricObject<VAbstractArc>(baseCurveId);
+
+    const QString oldCenterLabel = arc->GetCenter().name();
+    const QString newCenterLabel
+        = VAbstractTool::data.GeometricObject<VAbstractArc>(dialogTool->getArcId())->GetCenter().name();
+
+    const QString oldAliasSuffix1 = m_aliasSuffix1;
+    const QString newAliasSuffix1 = dialogTool->GetAliasSuffix1();
+
+    const QString oldAliasSuffix2 = m_aliasSuffix2;
+    const QString newAliasSuffix2 = dialogTool->GetAliasSuffix2();
+
+    if (oldCenterLabel == newCenterLabel && oldAliasSuffix1 == newAliasSuffix1 && oldAliasSuffix2 == newAliasSuffix2)
+    {
+        VToolCut::ApplyToolOptions(oldDomElement, newDomElement);
+        return;
+    }
+
+    QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
+    undoStack->beginMacro(tr("save tool options"));
+
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+    saveOptions->SetInGroup(true);
+    connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    undoStack->push(saveOptions);
+
+    if (oldCenterLabel != newCenterLabel)
+    {
+        const RenameArcType arcType = arc->getType() == GOType::Arc ? RenameArcType::Arc : RenameArcType::ElArc;
+
+        // Share the same center point as a base arc
+        auto *renameArc1 = new RenameArc(arcType, oldCenterLabel, newCenterLabel, 0, doc, m_id + 1);
+        undoStack->push(renameArc1);
+
+        auto *renameArc2 = new RenameArc(arcType, oldCenterLabel, newCenterLabel, 0, doc, m_id + 2);
+        if (oldAliasSuffix1 == newAliasSuffix1 && oldAliasSuffix2 == newAliasSuffix2)
+        {
+            connect(renameArc2, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        }
+        undoStack->push(renameArc2);
+    }
+
+    if (oldAliasSuffix1 != newAliasSuffix1)
+    {
+        auto *renameAlias = new RenameAlias(oldAliasSuffix1, newAliasSuffix1, doc, m_id);
+        if (oldAliasSuffix2 == newAliasSuffix2)
+        {
+            connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        }
+        undoStack->push(renameAlias);
+    }
+
+    if (oldAliasSuffix2 != newAliasSuffix2)
+    {
+        auto *renameAlias = new RenameAlias(oldAliasSuffix1, newAliasSuffix1, doc, m_id);
+        connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        undoStack->push(renameAlias);
+    }
+
+    undoStack->endMacro();
 }

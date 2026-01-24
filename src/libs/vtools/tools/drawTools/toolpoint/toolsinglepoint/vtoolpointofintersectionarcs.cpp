@@ -30,7 +30,6 @@
 
 #include <QLineF>
 #include <QSharedPointer>
-#include <new>
 
 #include "../../../../dialogs/tools/dialogpointofintersectionarcs.h"
 #include "../../../../dialogs/tools/dialogtool.h"
@@ -355,4 +354,14 @@ void VToolPointOfIntersectionArcs::SetVisualization()
         visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPointOfIntersectionArcs::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogPointOfIntersectionArcs> dialogTool = qobject_cast<DialogPointOfIntersectionArcs *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    ProcessSinglePointToolOptions(oldDomElement, newDomElement, dialogTool->GetPointName());
 }

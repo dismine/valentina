@@ -238,6 +238,16 @@ void VToolCubicBezierPath::RefreshGeometry()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolCubicBezierPath::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogCubicBezierPath> dialogTool = qobject_cast<DialogCubicBezierPath *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    ProcessSplinePathToolOptions(oldDomElement, newDomElement, dialogTool->GetPath());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolCubicBezierPath::AddPathPoint(VAbstractPattern *doc, QDomElement &domElement, const VPointF &splPoint)
 {
     SCASSERT(doc != nullptr)

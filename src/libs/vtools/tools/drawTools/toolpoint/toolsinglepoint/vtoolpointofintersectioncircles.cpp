@@ -372,3 +372,15 @@ void VToolPointOfIntersectionCircles::SetVisualization()
         visual->RefreshGeometry();
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPointOfIntersectionCircles::ApplyToolOptions(const QDomElement &oldDomElement,
+                                                       const QDomElement &newDomElement)
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogPointOfIntersectionCircles> dialogTool = qobject_cast<DialogPointOfIntersectionCircles *>(
+        m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    ProcessSinglePointToolOptions(oldDomElement, newDomElement, dialogTool->GetPointName());
+}

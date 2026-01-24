@@ -258,6 +258,16 @@ void VToolCubicBezier::RefreshGeometry()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolCubicBezier::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogCubicBezier> dialogTool = qobject_cast<DialogCubicBezier *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    ProcessSplineToolOptions(oldDomElement, newDomElement, dialogTool->GetSpline());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolCubicBezier::SetSplineAttributes(QDomElement &domElement, const VCubicBezier &spl)
 {
     SCASSERT(doc != nullptr)

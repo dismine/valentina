@@ -29,7 +29,6 @@
 #include "vtoolpointfromcircleandtangent.h"
 
 #include <QSharedPointer>
-#include <new>
 
 #include "../../../../dialogs/tools/dialogpointfromcircleandtangent.h"
 #include "../../../../dialogs/tools/dialogtool.h"
@@ -332,4 +331,15 @@ void VToolPointFromCircleAndTangent::SetVisualization()
         visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPointFromCircleAndTangent::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogPointFromCircleAndTangent> dialogTool = qobject_cast<DialogPointFromCircleAndTangent *>(
+        m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    ProcessSinglePointToolOptions(oldDomElement, newDomElement, dialogTool->GetPointName());
 }

@@ -383,3 +383,16 @@ auto VToolArcWithLength::MakeToolTip() const -> QString
                                 .arg(tr("Label"), arc->ObjectName());
     return toolTip;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolArcWithLength::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogArcWithLength> dialogTool = qobject_cast<DialogArcWithLength *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    const QString newCenterLabel = VAbstractTool::data.GetGObject(dialogTool->GetCenter())->name();
+    const QString newAliasSuffix = dialogTool->GetAliasSuffix();
+
+    ProcessArcToolOptions(oldDomElement, newDomElement, newCenterLabel, newAliasSuffix);
+}

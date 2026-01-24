@@ -31,9 +31,12 @@
 #include <QLine>
 #include <QLineF>
 #include <QSharedPointer>
+#include <QUndoStack>
 
 #include "../../../../dialogs/tools/dialogtool.h"
 #include "../../../../dialogs/tools/dialogtruedarts.h"
+#include "../../../../undocommands/renameobject.h"
+#include "../../../../undocommands/savetooloptions.h"
 #include "../../../../visualization/line/vistooltruedarts.h"
 #include "../../../../visualization/visualization.h"
 #include "../../../vabstracttool.h"
@@ -317,4 +320,64 @@ void VToolTrueDarts::SetVisualization()
         visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolTrueDarts::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogTrueDarts> dialogTool = qobject_cast<DialogTrueDarts *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    const QString newDartP1Label = VAbstractTool::data.GetGObject(dialogTool->GetFirstDartPointId())->name();
+    const QString oldDartP1Label = DartP1Name();
+
+    const QString newDartP2Label = VAbstractTool::data.GetGObject(dialogTool->GetSecondDartPointId())->name();
+    const QString oldDartP2Label = DartP2Name();
+
+    const QString newDartP3Label = VAbstractTool::data.GetGObject(dialogTool->GetThirdDartPointId())->name();
+    const QString oldDartP3Label = DartP3Name();
+
+    if (oldDartP1Label == newDartP1Label && oldDartP2Label == newDartP2Label && oldDartP3Label == newDartP3Label)
+    {
+        VToolDoublePoint::ApplyToolOptions(oldDomElement, newDomElement);
+        return;
+    }
+
+    QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
+    undoStack->beginMacro(tr("save tool options"));
+
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+    saveOptions->SetInGroup(true);
+    connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    undoStack->push(saveOptions);
+
+    if (oldDartP1Label != newDartP1Label)
+    {
+        auto *renameLabel = new RenameLabel(newDartP1Label, oldDartP1Label, doc, m_id);
+        if (oldDartP2Label == newDartP2Label && oldDartP3Label == newDartP3Label)
+        {
+            connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        }
+        undoStack->push(renameLabel);
+    }
+
+    if (oldDartP2Label != newDartP2Label)
+    {
+        auto *renameLabel = new RenameLabel(newDartP2Label, oldDartP2Label, doc, m_id);
+        if (oldDartP3Label == newDartP3Label)
+        {
+            connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        }
+        undoStack->push(renameLabel);
+    }
+
+    if (oldDartP3Label != newDartP3Label)
+    {
+        auto *renameLabel = new RenameLabel(newDartP3Label, oldDartP3Label, doc, m_id);
+        connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        undoStack->push(renameLabel);
+    }
+
+    undoStack->endMacro();
 }

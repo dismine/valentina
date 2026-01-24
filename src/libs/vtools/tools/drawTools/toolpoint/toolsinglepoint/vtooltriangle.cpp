@@ -331,6 +331,16 @@ void VToolTriangle::SetVisualization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolTriangle::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogTriangle> dialogTool = qobject_cast<DialogTriangle *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    ProcessSinglePointToolOptions(oldDomElement, newDomElement, dialogTool->GetPointName());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolTriangle::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
 {
     try

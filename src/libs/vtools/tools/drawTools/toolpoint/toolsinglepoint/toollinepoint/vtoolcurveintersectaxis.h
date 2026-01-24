@@ -29,7 +29,6 @@
 #ifndef VTOOLCURVEINTERSECTAXIS_H
 #define VTOOLCURVEINTERSECTAXIS_H
 
-
 #include <QDomElement>
 #include <QGraphicsItem>
 #include <QMetaObject>
@@ -75,7 +74,7 @@ public:
     enum { Type = UserType + static_cast<int>(Tool::CurveIntersectAxis)};
 
     auto GetFormulaAngle() const -> VFormula;
-    void         SetFormulaAngle(const VFormula &value);
+    void SetFormulaAngle(const VFormula &value);
 
     auto CurveName() const -> QString;
 
@@ -90,8 +89,9 @@ protected:
     void SetVisualization() override;
     auto MakeToolTip() const -> QString override;
     void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
-
     void SetSegments(const QPair<QString, QString> &segments);
+    void ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement) override;
+
 private:
     Q_DISABLE_COPY_MOVE(VToolCurveIntersectAxis) // NOLINT
     QString formulaAngle;

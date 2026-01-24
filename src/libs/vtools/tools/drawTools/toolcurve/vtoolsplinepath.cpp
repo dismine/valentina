@@ -878,6 +878,16 @@ void VToolSplinePath::RefreshCtrlPoints()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSplinePath::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogSplinePath> dialogTool = qobject_cast<DialogSplinePath *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    ProcessSplinePathToolOptions(oldDomElement, newDomElement, dialogTool->GetPath());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSplinePath::CurveReleased()
 {
     if (VAbstractApplication::VApp()->Settings()->IsFreeCurveMode() && moved)

@@ -466,3 +466,16 @@ auto VToolEllipticalArcWithLength::MakeToolTip() const -> QString
                                      elArc->ObjectName());                                              // %13
     return toolTip;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolEllipticalArcWithLength::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogEllipticalArcWithLength> dialogTool = qobject_cast<DialogEllipticalArcWithLength *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    const QString newCenterLabel = VAbstractTool::data.GetGObject(dialogTool->GetCenter())->name();
+    const QString newAliasSuffix = dialogTool->GetAliasSuffix();
+
+    ProcessArcToolOptions(oldDomElement, newDomElement, newCenterLabel, newAliasSuffix);
+}

@@ -31,7 +31,58 @@
 #include "../ifc/xml/vpatterngraphnode.h"
 #include "vundocommand.h"
 
-class RenameLabel : public VUndoCommand
+enum class OperationType : quint8
+{
+    Redo,
+    Undo,
+    Unknown
+};
+
+class AbstractObjectRename : public VUndoCommand
+{
+    Q_OBJECT // NOLINT
+
+public:
+    AbstractObjectRename(VAbstractPattern *doc, quint32 id, QUndoCommand *parent = nullptr);
+    ~AbstractObjectRename() override = default;
+
+    void undo() override;
+    void redo() override;
+
+protected:
+    auto ProcessType() const -> OperationType;
+
+    virtual auto ProcessToken(const QString &token) const -> QString = 0;
+
+private:
+    Q_DISABLE_COPY_MOVE(AbstractObjectRename) // NOLINT
+
+    QVector<VNode> m_dependencies{};
+    OperationType m_operationType{OperationType::Unknown};
+
+    void RenameFormulas();
+    void ProcessElementByType(QDomElement &element) const;
+    void ProcessPointElement(QDomElement &element) const;
+    void ProcessOperationElement(QDomElement &element) const;
+    void ProcessArcElement(QDomElement &element) const;
+    void ProcessElArcElement(QDomElement &element) const;
+    void ProcessSplineElement(QDomElement &element) const;
+    void ProcessNodeElement(QDomElement &node) const;
+    void ProcessPathElement(QDomElement &element) const;
+    void ProcessToolsElement(QDomElement &element) const;
+    void ProcessDetailElement(QDomElement &element) const;
+
+    void ProcessAttribute(QDomElement &element, const QString &attr) const;
+    auto ProcessFormula(const QString &formula) const -> QString;
+};
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto AbstractObjectRename::ProcessType() const -> OperationType
+{
+    return m_operationType;
+}
+
+class RenameLabel : public AbstractObjectRename
 {
     Q_OBJECT // NOLINT
 
@@ -39,17 +90,115 @@ public:
     RenameLabel(QString oldLabel, QString newLabel, VAbstractPattern *doc, quint32 id, QUndoCommand *parent = nullptr);
     ~RenameLabel() override = default;
 
-    void undo() override;
-    void redo() override;
+protected:
+    auto ProcessToken(const QString &token) const -> QString override;
 
 private:
-    // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(RenameLabel) // NOLINT
     QString m_oldLabel;
     QString m_newLabel;
-    QVector<VNode> m_dependencies{};
+};
 
-    void RenameLabelInFormulas(const QString &oldLabel, const QString &newLabel);
+enum class RenameObjectType : quint8
+{
+    Line,
+    Spline,
+    SplinePath
+};
+
+using ObjectPair_t = std::pair<QString, QString>;
+
+class RenamePair : public AbstractObjectRename
+{
+    Q_OBJECT // NOLINT
+
+public:
+    static auto CreateForLine(const ObjectPair_t &oldPair,
+                              const ObjectPair_t &newPair,
+                              VAbstractPattern *doc,
+                              quint32 id,
+                              QUndoCommand *parent = nullptr) -> RenamePair *;
+
+    static auto CreateForSpline(const ObjectPair_t &oldPair,
+                                const ObjectPair_t &newPair,
+                                quint32 duplicate,
+                                VAbstractPattern *doc,
+                                quint32 id,
+                                QUndoCommand *parent = nullptr) -> RenamePair *;
+    static auto CreateForSplinePath(const ObjectPair_t &oldPair,
+                                    const ObjectPair_t &newPair,
+                                    quint32 duplicate,
+                                    VAbstractPattern *doc,
+                                    quint32 id,
+                                    QUndoCommand *parent = nullptr) -> RenamePair *;
+
+    ~RenamePair() override = default;
+
+protected:
+    auto ProcessToken(const QString &token) const -> QString override;
+
+private:
+    Q_DISABLE_COPY_MOVE(RenamePair) // NOLINT
+    RenameObjectType m_type;
+    ObjectPair_t m_oldPair;
+    ObjectPair_t m_newPair;
+    quint32 m_duplicate;
+
+    RenamePair(RenameObjectType type,
+               ObjectPair_t oldPair,
+               ObjectPair_t newPair,
+               quint32 duplicate,
+               VAbstractPattern *doc,
+               quint32 id,
+               QUndoCommand *parent = nullptr);
+};
+
+class RenameAlias : public AbstractObjectRename
+{
+    Q_OBJECT // NOLINT
+
+public:
+    RenameAlias(QString oldAlias, QString newAlias, VAbstractPattern *doc, quint32 id, QUndoCommand *parent = nullptr);
+    ~RenameAlias() override = default;
+
+protected:
+    auto ProcessToken(const QString &token) const -> QString override;
+
+private:
+    Q_DISABLE_COPY_MOVE(RenameAlias) // NOLINT
+    QString m_oldAlias;
+    QString m_newAlias;
+};
+
+enum class RenameArcType : quint8
+{
+    Arc,
+    ElArc
+};
+
+class RenameArc : public AbstractObjectRename
+{
+    Q_OBJECT // NOLINT
+
+public:
+    RenameArc(RenameArcType type,
+              QString oldCenterLabel,
+              QString newCenterLabel,
+              int duplicate,
+              VAbstractPattern *doc,
+              quint32 id,
+              QUndoCommand *parent = nullptr);
+    ~RenameArc() override = default;
+
+protected:
+    auto ProcessToken(const QString &token) const -> QString override;
+
+private:
+    Q_DISABLE_COPY_MOVE(RenameArc) // NOLINT
+    RenameArcType m_type;
+    QString m_oldCenterLabel;
+    QString m_newCenterLabel;
+    int m_duplicate;
 };
 
 #endif // RENAMEOBJECT_H

@@ -78,6 +78,8 @@ public:
 
     auto CurveName() const -> QString;
 
+    auto BaseCurveId() const -> quint32;
+
 public slots:
     void SetDetailsMode(bool mode) override;
     void FullUpdateFromFile() override;
@@ -101,6 +103,12 @@ protected:
 private:
     Q_DISABLE_COPY_MOVE(VToolCut) // NOLINT
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VToolCut::BaseCurveId() const -> quint32
+{
+    return baseCurveId;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T> inline void VToolCut::ShowToolVisualization(bool show)

@@ -49,6 +49,7 @@
 
 class VControlPointSpline;
 template <class T> class QSharedPointer;
+class VAbstractCubicBezier;
 
 struct VAbstractSplineInitData : VDrawToolInitData
 {
@@ -132,6 +133,15 @@ protected:
 
     auto GetSceneType() const -> SceneObject;
     void SetSceneType(SceneObject newSceneType);
+
+    auto SegmentingTools(Tool toolType) const -> QVector<quint32>;
+
+    void ProcessSplineToolOptions(const QDomElement &oldDomElement,
+                                  const QDomElement &newDomElement,
+                                  const VAbstractCubicBezier &newSpline);
+    void ProcessSplinePathToolOptions(const QDomElement &oldDomElement,
+                                      const QDomElement &newDomElement,
+                                      const VAbstractCubicBezierPath &newSplinePath);
 
     static auto CorrectedSpline(const VSpline &spline, const SplinePointPosition &position, const QPointF &pos)
         -> VSpline;
@@ -276,6 +286,12 @@ public:
     ~VToolAbstractArc() override = default;
 
     auto CenterPointName() const -> QString;
+
+protected:
+    void ProcessArcToolOptions(const QDomElement &oldDomElement,
+                               const QDomElement &newDomElement,
+                               const QString &newCenterLabel,
+                               const QString &newAliasSuffix);
 
 private:
     Q_DISABLE_COPY_MOVE(VToolAbstractArc) // NOLINT

@@ -31,11 +31,13 @@
 #include <QLineF>
 #include <QMessageLogger>
 #include <QSharedPointer>
+#include <QUndoStack>
 #include <QtDebug>
-#include <new>
 
 #include "../../../../dialogs/tools/dialogpointofcontact.h"
 #include "../../../../dialogs/tools/dialogtool.h"
+#include "../../../../undocommands/renameobject.h"
+#include "../../../../undocommands/savetooloptions.h"
 #include "../../../../visualization/line/vistoolpointofcontact.h"
 #include "../../../../visualization/visualization.h"
 #include "../../../vabstracttool.h"
@@ -374,6 +376,90 @@ auto VToolPointOfContact::MakeToolTip() const -> QString
                                 .arg(centerToCur.angle())
                                 .arg(tr("Label"), current->name());
     return toolTip;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPointOfContact::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogPointOfContact> dialogTool = qobject_cast<DialogPointOfContact *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    const QString oldLabel = VAbstractTool::data.GetGObject(m_id)->name();
+    const QString newLabel = dialogTool->GetPointName();
+
+    const QString newFirstPointLabel = VAbstractTool::data.GetGObject(dialogTool->GetFirstPoint())->name();
+    const QString oldFirstPointLabel = FirstPointName();
+
+    const QString newSecondPointLabel = VAbstractTool::data.GetGObject(dialogTool->GetSecondPoint())->name();
+    const QString oldSecondPointLabel = SecondPointName();
+
+    const QString newArcCenterPointLabel = VAbstractTool::data.GetGObject(dialogTool->GetCenter())->name();
+    const QString oldArcCenterPointLabel = ArcCenterPointName();
+
+    if (oldFirstPointLabel == newFirstPointLabel && oldSecondPointLabel == newSecondPointLabel
+        && oldArcCenterPointLabel == newArcCenterPointLabel && oldLabel == newLabel)
+    {
+        VToolSinglePoint::ApplyToolOptions(oldDomElement, newDomElement);
+        return;
+    }
+
+    QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
+    undoStack->beginMacro(tr("save tool options"));
+
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+    saveOptions->SetInGroup(true);
+    connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    undoStack->push(saveOptions);
+
+    if (oldFirstPointLabel != newFirstPointLabel)
+    {
+        auto *renamePair = RenamePair::CreateForLine(std::make_pair(oldFirstPointLabel, oldLabel),
+                                                     std::make_pair(newFirstPointLabel, oldLabel),
+                                                     doc,
+                                                     m_id);
+        if (oldSecondPointLabel == newSecondPointLabel && oldArcCenterPointLabel == newArcCenterPointLabel
+            && oldLabel == newLabel)
+        {
+            connect(renamePair, &RenamePair::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        }
+        undoStack->push(renamePair);
+    }
+
+    if (oldSecondPointLabel != newSecondPointLabel)
+    {
+        auto *renamePair = RenamePair::CreateForLine(std::make_pair(oldSecondPointLabel, oldLabel),
+                                                     std::make_pair(newSecondPointLabel, oldLabel),
+                                                     doc,
+                                                     m_id);
+        if (oldArcCenterPointLabel == newArcCenterPointLabel && oldLabel == newLabel)
+        {
+            connect(renamePair, &RenamePair::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        }
+        undoStack->push(renamePair);
+    }
+
+    if (oldArcCenterPointLabel != newArcCenterPointLabel)
+    {
+        auto *renamePair = RenamePair::CreateForLine(std::make_pair(oldArcCenterPointLabel, oldLabel),
+                                                     std::make_pair(newArcCenterPointLabel, oldLabel),
+                                                     doc,
+                                                     m_id);
+        if (oldLabel == newLabel)
+        {
+            connect(renamePair, &RenamePair::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        }
+        undoStack->push(renamePair);
+    }
+
+    if (oldLabel != newLabel)
+    {
+        auto *renameLabel = new RenameLabel(oldLabel, newLabel, doc, m_id);
+        connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        undoStack->push(renameLabel);
+    }
+
+    undoStack->endMacro();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

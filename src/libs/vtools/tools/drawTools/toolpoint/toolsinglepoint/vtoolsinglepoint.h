@@ -109,6 +109,10 @@ protected:
     static auto InitSegments(GOType curveType, qreal segLength, const VPointF *p, quint32 curveId, VContainer *data,
                              const QString &alias1, const QString &alias2) -> QPair<QString, QString>;
 
+    void ProcessSinglePointToolOptions(const QDomElement &oldDomElement,
+                                       const QDomElement &newDomElement,
+                                       const QString &newLabel);
+
 private:
     Q_DISABLE_COPY_MOVE(VToolSinglePoint) // NOLINT
 };

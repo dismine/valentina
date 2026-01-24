@@ -86,7 +86,6 @@ public:
     static auto SubSplOffset(vsizetype subSplIndex) -> vsizetype;
     static auto SubSplPointsCount(vsizetype countSubSpl) -> vsizetype;
 
-protected:
     auto FirstPoint() const -> VPointF override;
     auto LastPoint() const -> VPointF override;
 

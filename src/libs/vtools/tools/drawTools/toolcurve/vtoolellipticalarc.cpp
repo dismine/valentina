@@ -474,3 +474,16 @@ auto VToolEllipticalArc::MakeToolTip() const -> QString
                                 .arg(elArc->GetRotationAngle());                                        // 15
     return toolTip;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolEllipticalArc::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogEllipticalArc> dialogTool = qobject_cast<DialogEllipticalArc *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    const QString newCenterLabel = VAbstractTool::data.GetGObject(dialogTool->GetCenter())->name();
+    const QString newAliasSuffix = dialogTool->GetAliasSuffix();
+
+    ProcessArcToolOptions(oldDomElement, newDomElement, newCenterLabel, newAliasSuffix);
+}

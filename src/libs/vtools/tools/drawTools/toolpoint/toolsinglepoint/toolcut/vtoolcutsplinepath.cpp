@@ -30,11 +30,13 @@
 
 #include <QPointF>
 #include <QSharedPointer>
+#include <QUndoStack>
 #include <QVector>
-#include <new>
 
 #include "../../../../../dialogs/tools/dialogcutsplinepath.h"
 #include "../../../../../dialogs/tools/dialogtool.h"
+#include "../../../../../undocommands/renameobject.h"
+#include "../../../../../undocommands/savetooloptions.h"
 #include "../../../../../visualization/path/vistoolcutsplinepath.h"
 #include "../../../../../visualization/visualization.h"
 #include "../../../../vabstracttool.h"
@@ -429,4 +431,104 @@ auto VToolCutSplinePath::MakeToolTip() const -> QString
     delete splPath2;
 
     return toolTip;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCutSplinePath::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogCutSplinePath> dialogTool = qobject_cast<DialogCutSplinePath *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    const quint32 oldBaseCurve = baseCurveId;
+    const quint32 newBaseCurve = dialogTool->getSplinePathId();
+
+    const QString oldLabel = VAbstractTool::data.GetGObject(m_id)->name();
+    const QString newLabel = dialogTool->GetPointName();
+
+    const QString oldAliasSuffix1 = m_aliasSuffix1;
+    const QString newAliasSuffix1 = dialogTool->GetAliasSuffix1();
+
+    const QString oldAliasSuffix2 = m_aliasSuffix2;
+    const QString newAliasSuffix2 = dialogTool->GetAliasSuffix2();
+
+    if (oldBaseCurve == newBaseCurve && oldLabel == newLabel && oldAliasSuffix1 == newAliasSuffix1
+        && oldAliasSuffix2 == newAliasSuffix2)
+    {
+        VToolCut::ApplyToolOptions(oldDomElement, newDomElement);
+        return;
+    }
+
+    QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
+    undoStack->beginMacro(tr("save tool options"));
+
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+    saveOptions->SetInGroup(true);
+    connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    undoStack->push(saveOptions);
+
+    if (oldBaseCurve != newBaseCurve)
+    {
+        const auto oldSpl = VAbstractTool::data.GeometricObject<VAbstractCubicBezierPath>(oldBaseCurve);
+        const auto newSpl = VAbstractTool::data.GeometricObject<VAbstractCubicBezierPath>(newBaseCurve);
+
+        auto *renamePair1 = RenamePair::CreateForSpline(std::make_pair(oldSpl->FirstPoint().name(), oldLabel),
+                                                        std::make_pair(newSpl->FirstPoint().name(), newLabel),
+                                                        0,
+                                                        doc,
+                                                        m_id);
+        undoStack->push(renamePair1);
+
+        auto *renamePair2 = RenamePair::CreateForSpline(std::make_pair(oldLabel, oldSpl->LastPoint().name()),
+                                                        std::make_pair(newLabel, newSpl->LastPoint().name()),
+                                                        0,
+                                                        doc,
+                                                        m_id);
+        if (oldAliasSuffix1 == newAliasSuffix1 && oldAliasSuffix2 == newAliasSuffix2)
+        {
+            connect(renamePair2, &RenamePair::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        }
+        undoStack->push(renamePair2);
+    }
+    else if (oldLabel != newLabel)
+    {
+        const auto oldSpl = VAbstractTool::data.GeometricObject<VAbstractCubicBezierPath>(oldBaseCurve);
+
+        auto *renamePair1 = RenamePair::CreateForSpline(std::make_pair(oldSpl->FirstPoint().name(), oldLabel),
+                                                        std::make_pair(oldSpl->FirstPoint().name(), newLabel),
+                                                        0,
+                                                        doc,
+                                                        m_id);
+        undoStack->push(renamePair1);
+
+        auto *renamePair2 = RenamePair::CreateForSpline(std::make_pair(oldLabel, oldSpl->LastPoint().name()),
+                                                        std::make_pair(newLabel, oldSpl->LastPoint().name()),
+                                                        0,
+                                                        doc,
+                                                        m_id);
+        if (oldAliasSuffix1 == newAliasSuffix1 && oldAliasSuffix2 == newAliasSuffix2)
+        {
+            connect(renamePair2, &RenamePair::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        }
+        undoStack->push(renamePair2);
+    }
+
+    if (oldAliasSuffix1 != newAliasSuffix1)
+    {
+        auto *renameAlias = new RenameAlias(oldAliasSuffix1, newAliasSuffix1, doc, m_id);
+        if (oldAliasSuffix2 == newAliasSuffix2)
+        {
+            connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        }
+        undoStack->push(renameAlias);
+    }
+
+    if (oldAliasSuffix2 != newAliasSuffix2)
+    {
+        auto *renameAlias = new RenameAlias(oldAliasSuffix1, newAliasSuffix1, doc, m_id);
+        connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        undoStack->push(renameAlias);
+    }
+
+    undoStack->endMacro();
 }

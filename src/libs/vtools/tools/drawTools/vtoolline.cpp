@@ -34,11 +34,13 @@
 #include <QPen>
 #include <QPointF>
 #include <QSharedPointer>
+#include <QUndoStack>
 #include <QtDebug>
-#include <new>
 
 #include "../../dialogs/tools/dialogline.h"
 #include "../../dialogs/tools/dialogtool.h"
+#include "../../undocommands/renameobject.h"
+#include "../../undocommands/savetooloptions.h"
 #include "../../visualization/line/vistoolline.h"
 #include "../../visualization/visualization.h"
 #include "../ifc/ifcdef.h"
@@ -432,6 +434,57 @@ auto VToolLine::MakeToolTip() const -> QString
                                 .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), tr("Angle"))
                                 .arg(line.angle());
     return toolTip;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLine::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogLine> dialogTool = qobject_cast<DialogLine *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    const QString oldFirstPointLabel = FirstPointName();
+    const QString newFirstPointLabel = VAbstractTool::data.GetGObject(dialogTool->GetFirstPoint())->name();
+
+    const QString oldSecondPointLabel = SecondPointName();
+    const QString newSecondPointLabel = VAbstractTool::data.GetGObject(dialogTool->GetFirstPoint())->name();
+
+    if (oldFirstPointLabel == newFirstPointLabel && oldSecondPointLabel == newSecondPointLabel)
+    {
+        VDrawTool::ApplyToolOptions(oldDomElement, newDomElement);
+        return;
+    }
+
+    QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
+    undoStack->beginMacro(tr("save tool options"));
+
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+    saveOptions->SetInGroup(true);
+    connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    undoStack->push(saveOptions);
+
+    ObjectPair_t newPair;
+    if (oldFirstPointLabel != newFirstPointLabel && oldSecondPointLabel != newSecondPointLabel)
+    {
+        newPair = std::make_pair(newFirstPointLabel, newSecondPointLabel);
+    }
+    else if (oldFirstPointLabel != newFirstPointLabel)
+    {
+        newPair = std::make_pair(newFirstPointLabel, oldSecondPointLabel);
+    }
+    else if (oldSecondPointLabel != newSecondPointLabel)
+    {
+        newPair = std::make_pair(oldFirstPointLabel, newSecondPointLabel);
+    }
+
+    auto *renamePair = RenamePair::CreateForLine(std::make_pair(oldFirstPointLabel, oldSecondPointLabel),
+                                                 newPair,
+                                                 doc,
+                                                 m_id);
+    connect(renamePair, &RenamePair::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    undoStack->push(renamePair);
+
+    undoStack->endMacro();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
