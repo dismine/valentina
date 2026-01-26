@@ -354,6 +354,12 @@ void VToolTrueDarts::ApplyToolOptions(const QDomElement &oldDomElement, const QD
 
     if (oldDartP1Label != newDartP1Label)
     {
+        const QList<QString> suffixes = GroupSuffixes(dartP1Id);
+        for (const auto &suffix : suffixes)
+        {
+            undoStack->push(new RenameSuffixedLabel(newDartP1Label, oldDartP1Label, suffix, doc, dartP1Id));
+        }
+
         auto *renameLabel = new RenameLabel(newDartP1Label, oldDartP1Label, doc, m_id);
         if (oldDartP2Label == newDartP2Label && oldDartP3Label == newDartP3Label)
         {
@@ -364,6 +370,12 @@ void VToolTrueDarts::ApplyToolOptions(const QDomElement &oldDomElement, const QD
 
     if (oldDartP2Label != newDartP2Label)
     {
+        const QList<QString> suffixes = GroupSuffixes(dartP2Id);
+        for (const auto &suffix : suffixes)
+        {
+            undoStack->push(new RenameSuffixedLabel(newDartP2Label, oldDartP2Label, suffix, doc, dartP2Id));
+        }
+
         auto *renameLabel = new RenameLabel(newDartP2Label, oldDartP2Label, doc, m_id);
         if (oldDartP3Label == newDartP3Label)
         {
@@ -374,6 +386,12 @@ void VToolTrueDarts::ApplyToolOptions(const QDomElement &oldDomElement, const QD
 
     if (oldDartP3Label != newDartP3Label)
     {
+        const QList<QString> suffixes = GroupSuffixes(dartP3Id);
+        for (const auto &suffix : suffixes)
+        {
+            undoStack->push(new RenameSuffixedLabel(newDartP3Label, oldDartP3Label, suffix, doc, dartP3Id));
+        }
+
         auto *renameLabel = new RenameLabel(newDartP3Label, oldDartP3Label, doc, m_id);
         connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         undoStack->push(renameLabel);

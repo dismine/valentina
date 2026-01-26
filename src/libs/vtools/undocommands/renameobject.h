@@ -99,6 +99,29 @@ private:
     QString m_newLabel;
 };
 
+class RenameSuffixedLabel : public AbstractObjectRename
+{
+    Q_OBJECT // NOLINT
+
+public:
+    RenameSuffixedLabel(QString oldLabel,
+                        QString newLabel,
+                        QString suffix,
+                        VAbstractPattern *doc,
+                        quint32 id,
+                        QUndoCommand *parent = nullptr);
+    ~RenameSuffixedLabel() override = default;
+
+protected:
+    auto ProcessToken(const QString &token) const -> QString override;
+
+private:
+    Q_DISABLE_COPY_MOVE(RenameSuffixedLabel) // NOLINT
+    QString m_oldLabel;
+    QString m_newLabel;
+    QString m_suffix;
+};
+
 enum class RenameObjectType : quint8
 {
     Line,

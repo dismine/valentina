@@ -50,9 +50,9 @@ class VAbstractPoint : public VDrawTool
 
 public:
     VAbstractPoint(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes);
-    virtual ~VAbstractPoint() = default;
+    ~VAbstractPoint() override = default;
 
-    virtual auto getTagName() const -> QString override;
+    auto getTagName() const -> QString override;
 
     template <typename T> void ShowToolVisualization(bool show);
 
@@ -63,6 +63,8 @@ protected:
     void SetPointName(quint32 id, const QString &name);
 
     template <typename T> static void InitToolConnections(VMainGraphicsScene *scene, T *tool);
+
+    auto GroupSuffixes(quint32 id) const -> QList<QString>;
 
 private:
     Q_DISABLE_COPY_MOVE(VAbstractPoint) // NOLINT

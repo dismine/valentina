@@ -152,6 +152,122 @@ auto ReplaceTokenLabel(const QString &token, const QString &oldLabel, const QStr
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto ReplaceTokenSuffixedLabel(const QString &token,
+                               const QString &oldLabel,
+                               const QString &newLabel,
+                               const QString &suffix) -> QString
+{
+    // Check if all variable types handled when we have new tool
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64);
+
+    // Token patterns with possible duplicate suffix or ID at the end
+    const QStringList twoLabelPrefixes = {"Line",
+                                          "AngleLine",
+                                          "Angle1Spl",
+                                          "Angle2Spl",
+                                          "Angle1SplPath",
+                                          "Angle2SplPath",
+                                          "C1LengthSpl",
+                                          "C2LengthSpl",
+                                          "C1LengthSplPath",
+                                          "C2LengthSplPath",
+                                          "Spl",
+                                          "SplPath"};
+
+    const QStringList oneLabelPrefixes = {"RadiusArc",
+                                          "Angle1Arc",
+                                          "Angle2Arc",
+                                          "Angle1ElArc",
+                                          "Angle2ElArc",
+                                          "Arc",
+                                          "ElArc",
+                                          "Radius1ElArc",
+                                          "Radius2ElArc"};
+
+    // Build the suffixed labels: oldLabel + suffix + any additional suffixes
+    // We search for pattern: oldLabel + suffix + (optional additional chars)
+    const QString oldLabelWithSuffix = oldLabel + suffix;
+    const QString newLabelWithSuffix = newLabel + suffix;
+
+    // Escape special regex characters
+    const QString escapedOldLabelWithSuffix = QRegularExpression::escape(oldLabelWithSuffix);
+
+    // Check two-label patterns
+    for (const auto &prefix : twoLabelPrefixes)
+    {
+        const QString escapedPrefix = QRegularExpression::escape(prefix);
+
+        // Pattern: prefix_oldLabelSuffix<additionalSuffixes>_label2 or prefix_oldLabelSuffix<additionalSuffixes>_label2_<number>
+        // Match label1 position with additional suffixes
+        // The (\w*) captures any additional suffix characters (letters/numbers)
+        const QRegularExpression regex1(
+            QStringLiteral("^(%1)_(%2)(\\w*)_(.+?)(?:_(\\d+))?$").arg(escapedPrefix, escapedOldLabelWithSuffix));
+        if (const QRegularExpressionMatch match = regex1.match(token); match.hasMatch())
+        {
+            const QString additionalSuffixes = match.captured(3); // Additional suffixes like "a2b2"
+            const QString label2 = match.captured(4);
+            const QString duplicateSuffix = match.captured(5); // May be empty
+
+            const QString fullNewLabel = newLabelWithSuffix + additionalSuffixes;
+
+            if (duplicateSuffix.isEmpty())
+            {
+                return QStringLiteral("%1_%2_%3").arg(match.captured(1), fullNewLabel, label2);
+            }
+            return QStringLiteral("%1_%2_%3_%4").arg(match.captured(1), fullNewLabel, label2, duplicateSuffix);
+        }
+
+        // Match label2 position: prefix_<label1>_oldLabelSuffix<additionalSuffixes> or prefix_<label1>_oldLabelSuffix<additionalSuffixes>_<number>
+
+        // First try: prefix_<something>_oldLabelSuffix<additionalSuffixes>_<number>
+        const QRegularExpression regex2a(
+            QStringLiteral("^(%1)_(.+?)_(%2)(\\w*)_(\\d+)$").arg(escapedPrefix, escapedOldLabelWithSuffix));
+        if (const QRegularExpressionMatch match = regex2a.match(token); match.hasMatch())
+        {
+            const QString additionalSuffixes = match.captured(4);
+            const QString fullNewLabel = newLabelWithSuffix + additionalSuffixes;
+            return QStringLiteral("%1_%2_%3_%4")
+                .arg(match.captured(1), match.captured(2), fullNewLabel, match.captured(5));
+        }
+
+        // Second try: prefix_<something>_oldLabelSuffix<additionalSuffixes> (no duplicate suffix)
+        const QRegularExpression regex2b(
+            QStringLiteral("^(%1)_(.+?)_(%2)(\\w*)$").arg(escapedPrefix, escapedOldLabelWithSuffix));
+        if (const QRegularExpressionMatch match = regex2b.match(token); match.hasMatch())
+        {
+            const QString additionalSuffixes = match.captured(4);
+            const QString fullNewLabel = newLabelWithSuffix + additionalSuffixes;
+            return QStringLiteral("%1_%2_%3").arg(match.captured(1), match.captured(2), fullNewLabel);
+        }
+    }
+
+    // Check one-label patterns (with ID or ID_duplicate)
+    for (const auto &prefix : oneLabelPrefixes)
+    {
+        const QString escapedPrefix = QRegularExpression::escape(prefix);
+
+        // Pattern: prefix_oldLabelSuffix<additionalSuffixes>_<id> or prefix_oldLabelSuffix<additionalSuffixes>_<id>_<duplicate>
+        const QRegularExpression regex1(
+            QStringLiteral("^(%1)_(%2)(\\w*)_(\\d+)(?:_(\\d+))?$").arg(escapedPrefix, escapedOldLabelWithSuffix));
+        if (const QRegularExpressionMatch match = regex1.match(token); match.hasMatch())
+        {
+            const QString additionalSuffixes = match.captured(3);
+            const QString fullNewLabel = newLabelWithSuffix + additionalSuffixes;
+            const QString id = match.captured(4);
+            const QString duplicate = match.captured(5); // May be empty
+
+            if (duplicate.isEmpty())
+            {
+                return QStringLiteral("%1_%2_%3").arg(match.captured(1), fullNewLabel, id);
+            }
+            return QStringLiteral("%1_%2_%3_%4").arg(match.captured(1), fullNewLabel, id, duplicate);
+        }
+    }
+
+    return token; // No replacement needed
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto ReplaceTokenPair(const QString &token,
                       RenameObjectType type,
                       const ObjectPair_t &oldPair,
@@ -688,6 +804,35 @@ auto RenameLabel::ProcessToken(const QString &token) const -> QString
     }
 
     return ReplaceTokenLabel(token, m_newLabel, m_oldLabel);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+RenameSuffixedLabel::RenameSuffixedLabel(
+    QString oldLabel, QString newLabel, QString suffix, VAbstractPattern *doc, quint32 id, QUndoCommand *parent)
+  : AbstractObjectRename(doc, id, parent),
+    m_oldLabel(std::move(oldLabel)),
+    m_newLabel(std::move(newLabel)),
+    m_suffix(std::move(suffix))
+{
+    SCASSERT(!m_oldLabel.isEmpty())
+    SCASSERT(!m_newLabel.isEmpty())
+    SCASSERT(!suffix.isEmpty())
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto RenameSuffixedLabel::ProcessToken(const QString &token) const -> QString
+{
+    if (ProcessType() == OperationType::Unknown)
+    {
+        return token;
+    }
+
+    if (ProcessType() == OperationType::Redo)
+    {
+        return ReplaceTokenSuffixedLabel(token, m_oldLabel, m_newLabel, m_suffix);
+    }
+
+    return ReplaceTokenSuffixedLabel(token, m_newLabel, m_oldLabel, m_suffix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

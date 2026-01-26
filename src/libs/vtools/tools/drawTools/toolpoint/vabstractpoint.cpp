@@ -30,10 +30,46 @@
 
 #include <QSharedPointer>
 
-#include "../vmisc/exception/vexception.h"
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vgeometry/vgobject.h"
+#include "../ifc/xml/vpatterngraph.h"
+#include "../operation/vabstractoperation.h"
 #include "../vdrawtool.h"
+#include "../vgeometry/vgobject.h"
+#include "../vmisc/exception/vexception.h"
+
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+auto IsRelevantToolType(Tool toolType) -> bool
+{
+    return toolType == Tool::FlippingByAxis || toolType == Tool::FlippingByLine || toolType == Tool::Rotation
+           || toolType == Tool::Move;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto ExtractSuffixIfContainsId(vidtype recordId, vidtype targetId) -> std::optional<QString>
+{
+    try
+    {
+        auto *tool = qobject_cast<VAbstractOperation *>(VAbstractPattern::getTool(recordId));
+        if (tool == nullptr)
+        {
+            return std::nullopt;
+        }
+
+        const QVector<SourceItem> source = tool->SourceItems();
+        const bool contains = std::any_of(source.cbegin(),
+                                          source.cend(),
+                                          [targetId](const auto &item) -> auto { return item.id == targetId; });
+
+        return contains ? std::optional<QString>(tool->Suffix()) : std::nullopt;
+    }
+    catch (const VExceptionBadId &)
+    {
+        return std::nullopt;
+    }
+}
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractPoint::VAbstractPoint(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes)
@@ -67,4 +103,28 @@ void VAbstractPoint::SetPointName(quint32 id, const QString &name)
     QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
     obj->setName(name);
     SaveOption(obj);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractPoint::GroupSuffixes(quint32 id) const -> QList<QString>
+{
+    const QVector<vidtype> neighbors = doc->PatternGraph()->GetNeighbors(id);
+
+    QSet<QString> suffixes;
+
+    const QVector<VToolRecord> *history = doc->getHistory();
+    for (const auto &record : *history)
+    {
+        if (!IsRelevantToolType(record.GetToolType()) || !neighbors.contains(record.GetId()))
+        {
+            continue;
+        }
+
+        if (auto suffix = ExtractSuffixIfContainsId(record.GetId(), id))
+        {
+            suffixes.insert(*suffix);
+        }
+    }
+
+    return ConvertToList(suffixes);
 }
