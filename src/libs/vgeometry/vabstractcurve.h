@@ -115,6 +115,8 @@ public:
     virtual auto Offset(qreal distance, const QString &name = QString()) const -> VSplinePath = 0;
     virtual auto Outline(const QVector<qreal> &distances, const QString &name = QString()) const -> VSplinePath = 0;
 
+    virtual auto HeadlessName() const -> QString = 0;
+
 protected:
     virtual void CreateName() = 0;
     virtual void CreateAlias() = 0;

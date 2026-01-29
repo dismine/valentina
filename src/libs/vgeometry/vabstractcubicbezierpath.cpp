@@ -311,22 +311,7 @@ auto VAbstractCubicBezierPath::GetMainNameForHistory() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractCubicBezierPath::CreateName()
 {
-    QString name;
-    if (CountPoints() > 0)
-    {
-        name = splPath_V;
-        name.append(u"_%1"_s.arg(FirstPoint().name()));
-        if (CountSubSpl() >= 1)
-        {
-            name.append(u"_%1"_s.arg(LastPoint().name()));
-
-            if (GetDuplicate() > 0)
-            {
-                name += u"_%1"_s.arg(GetDuplicate());
-            }
-        }
-    }
-    setName(name);
+    setName(splPath_V + '_'_L1 + HeadlessName());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -340,6 +325,27 @@ void VAbstractCubicBezierPath::CreateAlias()
     }
 
     SetAlias(splPath_V + '_'_L1 + aliasSuffix);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractCubicBezierPath::HeadlessName() const -> QString
+{
+    QString name;
+    if (CountPoints() > 0)
+    {
+        name = FirstPoint().name();
+        if (CountSubSpl() >= 1)
+        {
+            name.append(u"_%1"_s.arg(LastPoint().name()));
+
+            if (GetDuplicate() > 0)
+            {
+                name += u"_%1"_s.arg(GetDuplicate());
+            }
+        }
+    }
+
+    return name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

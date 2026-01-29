@@ -82,6 +82,8 @@ public:
     virtual auto FirstPoint() const -> VPointF = 0;
     virtual auto LastPoint() const -> VPointF = 0;
 
+    auto HeadlessName() const -> QString override;
+
 protected:
     void CreateName() override;
     void CreateAlias() override;

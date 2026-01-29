@@ -42,6 +42,12 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vmath.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
@@ -514,13 +520,7 @@ auto VAbstractCubicBezier::GetParmT(qreal length) const -> qreal
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractCubicBezier::CreateName()
 {
-    QString name = SPL_ + QStringLiteral("%1_%2").arg(GetP1().name(), GetP4().name());
-    if (GetDuplicate() > 0)
-    {
-        name += QStringLiteral("_%1").arg(GetDuplicate());
-    }
-
-    setName(name);
+    setName(SPL_ + HeadlessName());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -534,6 +534,17 @@ void VAbstractCubicBezier::CreateAlias()
     }
 
     SetAlias(SPL_ + aliasSuffix);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractCubicBezier::HeadlessName() const -> QString
+{
+    QString name = u"%1_%2"_s.arg(GetP1().name(), GetP4().name());
+    if (GetDuplicate() > 0)
+    {
+        name += u"_%1"_s.arg(GetDuplicate());
+    }
+    return name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

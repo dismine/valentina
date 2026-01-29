@@ -69,6 +69,8 @@ public:
     auto GetParmT(qreal length) const -> qreal;
     auto RealLengthByT(qreal t) const -> qreal;
 
+    auto HeadlessName() const -> QString override;
+
 protected:
     void CreateName() override;
     void CreateAlias() override;

@@ -46,6 +46,12 @@
 #include "vellipticalarc_p.h"
 #include "vsplinepath.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 constexpr qreal tolerance = accuracyPointOnLine / 8;
@@ -733,24 +739,7 @@ auto VEllipticalArc::ToSplinePath() const -> VSplinePath
 //---------------------------------------------------------------------------------------------------------------------
 void VEllipticalArc::CreateName()
 {
-    QString name = ELARC_ + this->GetCenter().name();
-    const auto nameStr = QStringLiteral("_%1");
-
-    if (getMode() == Draw::Modeling && getIdObject() != NULL_ID)
-    {
-        name += nameStr.arg(getIdObject());
-    }
-    else if (VAbstractCurve::id() != NULL_ID)
-    {
-        name += nameStr.arg(VAbstractCurve::id());
-    }
-
-    if (GetDuplicate() > 0)
-    {
-        name += nameStr.arg(GetDuplicate());
-    }
-
-    setName(name);
+    setName(ELARC_ + HeadlessName());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -764,6 +753,27 @@ void VEllipticalArc::CreateAlias()
     }
 
     SetAlias(ELARC_ + aliasSuffix);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VEllipticalArc::HeadlessName() const -> QString
+{
+    QString name = GetCenter().name();
+    if (getMode() == Draw::Modeling && getIdObject() != NULL_ID)
+    {
+        name += u"_%1"_s.arg(getIdObject());
+    }
+    else if (VAbstractCurve::id() != NULL_ID)
+    {
+        name += u"_%1"_s.arg(VAbstractCurve::id());
+    }
+
+    if (GetDuplicate() > 0)
+    {
+        name += u"_%1"_s.arg(GetDuplicate());
+    }
+
+    return name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

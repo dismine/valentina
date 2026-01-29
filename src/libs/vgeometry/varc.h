@@ -85,6 +85,8 @@ public:
 
     static auto OptimalApproximationScale(qreal radius, qreal f1, qreal f2, qreal tolerance) -> qreal;
 
+    auto HeadlessName() const -> QString override;
+
 protected:
     void CreateName() override;
     void CreateAlias() override;

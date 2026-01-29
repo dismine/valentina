@@ -43,6 +43,12 @@
 #include "vspline.h"
 #include "vsplinepath.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VArc default constructor.
@@ -409,24 +415,7 @@ auto VArc::OptimalApproximationScale(qreal radius, qreal f1, qreal f2, qreal tol
 //---------------------------------------------------------------------------------------------------------------------
 void VArc::CreateName()
 {
-    QString name = ARC_ + this->GetCenter().name();
-    const auto nameStr = QStringLiteral("_%1");
-
-    if (getMode() == Draw::Modeling && getIdObject() != NULL_ID)
-    {
-        name += nameStr.arg(getIdObject());
-    }
-    else if (VAbstractCurve::id() != NULL_ID)
-    {
-        name += nameStr.arg(VAbstractCurve::id());
-    }
-
-    if (GetDuplicate() > 0)
-    {
-        name += nameStr.arg(GetDuplicate());
-    }
-
-    setName(name);
+    setName(ARC_ + HeadlessName());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -440,6 +429,27 @@ void VArc::CreateAlias()
     }
 
     SetAlias(ARC_ + aliasSuffix);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VArc::HeadlessName() const -> QString
+{
+    QString name = GetCenter().name();
+    if (getMode() == Draw::Modeling && getIdObject() != NULL_ID)
+    {
+        name += u"_%1"_s.arg(getIdObject());
+    }
+    else if (VAbstractCurve::id() != NULL_ID)
+    {
+        name += u"_%1"_s.arg(VAbstractCurve::id());
+    }
+
+    if (GetDuplicate() > 0)
+    {
+        name += u"_%1"_s.arg(GetDuplicate());
+    }
+
+    return name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

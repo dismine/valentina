@@ -104,6 +104,8 @@ public:
 
     static auto OptimizeAngle(qreal angle) -> qreal;
 
+    auto HeadlessName() const -> QString override;
+
 protected:
     void CreateName() override;
     void CreateAlias() override;
