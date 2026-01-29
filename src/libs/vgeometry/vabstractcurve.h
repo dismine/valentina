@@ -95,6 +95,9 @@ public:
     auto GetApproximationScale() const -> qreal;
     void SetApproximationScale(qreal value);
 
+    auto IsDerivative() const -> bool;
+    void SetDerivative(bool value);
+
     static auto PathLength(const QVector<QPointF> &path) -> qreal;
 
     static auto CurveIntersectLine(const QVector<QPointF> &points, const QLineF &line) -> QVector<QPointF>;

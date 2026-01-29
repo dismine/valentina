@@ -166,6 +166,7 @@ auto VCubicBezierPath::Offset(qreal distance, const QString &name) const -> VSpl
     splPath = splPath.Offset(distance, name);
     splPath.SetColor(GetColor());
     splPath.SetPenStyle(GetPenStyle());
+    splPath.SetDerivative(true);
     return splPath;
 }
 
@@ -178,6 +179,7 @@ auto VCubicBezierPath::Outline(const QVector<qreal> &distances, const QString &n
     splPath = splPath.Outline(distances, name);
     splPath.SetColor(GetColor());
     splPath.SetPenStyle(GetPenStyle());
+    splPath.SetDerivative(true);
     return splPath;
 }
 

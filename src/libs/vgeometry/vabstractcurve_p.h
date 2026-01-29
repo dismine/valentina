@@ -52,6 +52,8 @@ public:
 
     qreal approximationScale{defCurveApproximationScale}; // NOLINT(misc-non-private-member-variables-in-classes)
 
+    bool derivative{false}; // NOLINT(misc-non-private-member-variables-in-classes)
+
 private:
     Q_DISABLE_ASSIGN_MOVE(VAbstractCurveData) // NOLINT
 };

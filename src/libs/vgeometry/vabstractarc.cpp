@@ -260,6 +260,7 @@ auto VAbstractArc::Offset(qreal distance, const QString &name) const -> VSplineP
     splPath.SetColor(GetColor());
     splPath.SetPenStyle(GetPenStyle());
     splPath.SetApproximationScale(GetApproximationScale());
+    splPath.SetDerivative(true);
     return splPath;
 }
 
@@ -279,6 +280,7 @@ auto VAbstractArc::Outline(const QVector<qreal> &distances, const QString &name)
     splPath.SetColor(GetColor());
     splPath.SetPenStyle(GetPenStyle());
     splPath.SetApproximationScale(GetApproximationScale());
+    splPath.SetDerivative(true);
     return splPath;
 }
 

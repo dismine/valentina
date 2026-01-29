@@ -458,6 +458,18 @@ void VAbstractCurve::SetApproximationScale(qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VAbstractCurve::IsDerivative() const -> bool
+{
+    return d->derivative;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractCurve::SetDerivative(bool value)
+{
+    d->derivative = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VAbstractCurve::CurveIntersectLine(const QVector<QPointF> &points, const QLineF &line) -> QVector<QPointF>
 {
     QVector<QPointF> intersections;

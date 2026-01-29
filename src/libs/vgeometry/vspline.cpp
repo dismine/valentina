@@ -464,6 +464,7 @@ auto VSpline::Offset(qreal distance, const QString &name) const -> VSplinePath
     splPath.SetColor(GetColor());
     splPath.SetPenStyle(GetPenStyle());
     splPath.SetApproximationScale(GetApproximationScale());
+    splPath.SetDerivative(true);
     return splPath;
 }
 
@@ -482,6 +483,7 @@ auto VSpline::Outline(const QVector<qreal> &distances, const QString &name) cons
     splPath.SetColor(GetColor());
     splPath.SetPenStyle(GetPenStyle());
     splPath.SetApproximationScale(GetApproximationScale());
+    splPath.SetDerivative(true);
     return splPath;
 }
 
