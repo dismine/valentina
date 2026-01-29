@@ -314,7 +314,7 @@ void VAbstractCubicBezierPath::CreateName()
     QString name;
     if (CountPoints() > 0)
     {
-        name = splPath;
+        name = splPath_V;
         name.append(u"_%1"_s.arg(FirstPoint().name()));
         if (CountSubSpl() >= 1)
         {
@@ -339,7 +339,7 @@ void VAbstractCubicBezierPath::CreateAlias()
         return;
     }
 
-    SetAlias(splPath + '_'_L1 + aliasSuffix);
+    SetAlias(splPath_V + '_'_L1 + aliasSuffix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

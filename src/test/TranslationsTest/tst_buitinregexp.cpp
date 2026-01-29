@@ -156,7 +156,7 @@ void TST_BuitInRegExp::TestCheckUnderlineExists_data()
     data.insert(arc_, true);
     data.insert(elarc_, true);
     data.insert(spl_, true);
-    data.insert(splPath, false);
+    data.insert(splPath_V, false);
     data.insert(radiusArc_, true);
     data.insert(radius1ElArc_, true);
     data.insert(radius2ElArc_, true);

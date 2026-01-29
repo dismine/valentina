@@ -205,7 +205,7 @@ extern const QString angleLine_;
 extern const QString arc_;
 extern const QString elarc_;
 extern const QString spl_;
-extern const QString splPath;
+extern const QString splPath_V;
 extern const QString radius_V;
 extern const QString radiusArc_;
 extern const QString radius1ElArc_;
