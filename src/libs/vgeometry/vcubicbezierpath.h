@@ -55,8 +55,8 @@ public:
     auto Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const -> VCubicBezierPath;
     auto Flip(const QLineF &axis, const QString &prefix = QString()) const -> VCubicBezierPath;
     auto Move(qreal length, qreal angle, const QString &prefix = QString()) const -> VCubicBezierPath;
-    auto Offset(qreal distance, const QString &suffix = QString()) const -> VSplinePath override;
-    auto Outline(const QVector<qreal> &distances, const QString &suffix = QString()) const -> VSplinePath override;
+    auto Offset(qreal distance, const QString &name = QString()) const -> VSplinePath override;
+    auto Outline(const QVector<qreal> &distances, const QString &name = QString()) const -> VSplinePath override;
 
     auto operator=(const VCubicBezierPath &curve) -> VCubicBezierPath &;
 

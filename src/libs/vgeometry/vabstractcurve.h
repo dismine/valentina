@@ -112,8 +112,8 @@ public:
 
     static auto Curvature(const QVector<QPointF> &vertices) -> double;
 
-    virtual auto Offset(qreal distance, const QString &suffix = QString()) const -> VSplinePath = 0;
-    virtual auto Outline(const QVector<qreal> &distances, const QString &suffix = QString()) const -> VSplinePath = 0;
+    virtual auto Offset(qreal distance, const QString &name = QString()) const -> VSplinePath = 0;
+    virtual auto Outline(const QVector<qreal> &distances, const QString &name = QString()) const -> VSplinePath = 0;
 
 protected:
     virtual void CreateName() = 0;

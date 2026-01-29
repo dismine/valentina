@@ -90,8 +90,8 @@ public:
 
     virtual auto ToSplinePath() const -> VSplinePath = 0;
 
-    auto Offset(qreal distance, const QString &suffix = QString()) const -> VSplinePath override;
-    auto Outline(const QVector<qreal> &distances, const QString &suffix = QString()) const -> VSplinePath override;
+    auto Offset(qreal distance, const QString &name = QString()) const -> VSplinePath override;
+    auto Outline(const QVector<qreal> &distances, const QString &name = QString()) const -> VSplinePath override;
 
 protected:
     void SetFlipped(bool value);

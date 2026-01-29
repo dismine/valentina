@@ -65,8 +65,8 @@ public:
     auto Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const -> VSplinePath;
     auto Flip(const QLineF &axis, const QString &prefix = QString()) const -> VSplinePath;
     auto Move(qreal length, qreal angle, const QString &prefix = QString()) const -> VSplinePath;
-    auto Offset(qreal distance, const QString &suffix = QString()) const -> VSplinePath override;
-    auto Outline(const QVector<qreal> &distances, const QString &suffix = QString()) const -> VSplinePath override;
+    auto Offset(qreal distance, const QString &name = QString()) const -> VSplinePath override;
+    auto Outline(const QVector<qreal> &distances, const QString &name = QString()) const -> VSplinePath override;
 
     auto operator[](vsizetype indx) -> VSplinePoint &;
     auto operator=(const VSplinePath &path) -> VSplinePath &;

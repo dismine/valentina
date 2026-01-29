@@ -158,40 +158,24 @@ auto VCubicBezierPath::Move(qreal length, qreal angle, const QString &prefix) co
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VCubicBezierPath::Offset(qreal distance, const QString &suffix) const -> VSplinePath
+auto VCubicBezierPath::Offset(qreal distance, const QString &name) const -> VSplinePath
 {
     VSplinePath splPath(GetSplinePath());
     splPath.SetApproximationScale(GetApproximationScale());
 
-    splPath = splPath.Offset(distance, suffix);
-    splPath.setName(name() + suffix);
-    splPath.SetMainNameForHistory(GetMainNameForHistory() + suffix);
-
-    if (not GetAliasSuffix().isEmpty())
-    {
-        splPath.SetAliasSuffix(GetAliasSuffix() + suffix);
-    }
-
+    splPath = splPath.Offset(distance, name);
     splPath.SetColor(GetColor());
     splPath.SetPenStyle(GetPenStyle());
     return splPath;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VCubicBezierPath::Outline(const QVector<qreal> &distances, const QString &suffix) const -> VSplinePath
+auto VCubicBezierPath::Outline(const QVector<qreal> &distances, const QString &name) const -> VSplinePath
 {
     VSplinePath splPath(GetSplinePath());
     splPath.SetApproximationScale(GetApproximationScale());
 
-    splPath = splPath.Outline(distances, suffix);
-    splPath.setName(name() + suffix);
-    splPath.SetMainNameForHistory(GetMainNameForHistory() + suffix);
-
-    if (not GetAliasSuffix().isEmpty())
-    {
-        splPath.SetAliasSuffix(GetAliasSuffix() + suffix);
-    }
-
+    splPath = splPath.Outline(distances, name);
     splPath.SetColor(GetColor());
     splPath.SetPenStyle(GetPenStyle());
     return splPath;

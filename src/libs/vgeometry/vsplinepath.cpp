@@ -33,6 +33,7 @@
 #include <QJsonObject>
 #include <QPoint>
 
+#include "../ifc/ifcdef.h"
 #include "../vmisc/defglobal.h"
 #include "../vmisc/exception/vexception.h"
 #include "vabstractcurve.h"
@@ -248,17 +249,15 @@ auto VSplinePath::Move(qreal length, qreal angle, const QString &prefix) const -
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VSplinePath::Offset(qreal distance, const QString &suffix) const -> VSplinePath
+auto VSplinePath::Offset(qreal distance, const QString &name) const -> VSplinePath
 {
     if (qFuzzyIsNull(distance))
     {
         VSplinePath tmp = *this;
-        tmp.setName(name() + suffix);
-        tmp.SetMainNameForHistory(GetMainNameForHistory() + suffix);
-
-        if (not GetAliasSuffix().isEmpty())
+        if (!name.isEmpty())
         {
-            tmp.SetAliasSuffix(GetAliasSuffix() + suffix);
+            tmp.setName(splPath_V + '_'_L1 + name);
+            tmp.SetMainNameForHistory(name);
         }
         return tmp;
     }
@@ -271,12 +270,10 @@ auto VSplinePath::Offset(qreal distance, const QString &suffix) const -> VSpline
     }
 
     VSplinePath splPath(offsetPath);
-    splPath.setName(name() + suffix);
-    splPath.SetMainNameForHistory(GetMainNameForHistory() + suffix);
-
-    if (not GetAliasSuffix().isEmpty())
+    if (!name.isEmpty())
     {
-        splPath.SetAliasSuffix(GetAliasSuffix() + suffix);
+        splPath.setName(splPath_V + '_'_L1 + name);
+        splPath.SetMainNameForHistory(name);
     }
 
     splPath.SetColor(GetColor());
@@ -286,7 +283,7 @@ auto VSplinePath::Offset(qreal distance, const QString &suffix) const -> VSpline
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VSplinePath::Outline(const QVector<qreal> &distances, const QString &suffix) const -> VSplinePath
+auto VSplinePath::Outline(const QVector<qreal> &distances, const QString &name) const -> VSplinePath
 {
     qreal const totalLen = GetLength();
     qreal accumulated = 0.0;
@@ -305,8 +302,8 @@ auto VSplinePath::Outline(const QVector<qreal> &distances, const QString &suffix
             return distances.last();
         }
 
-        int idx = static_cast<int>(preciseIndex);
-        double fraction = preciseIndex - idx;
+        const int idx = static_cast<int>(preciseIndex);
+        const double fraction = preciseIndex - idx;
         return distances.at(idx) * (1.0 - fraction) + distances.at(idx + 1) * fraction;
     };
 
@@ -373,14 +370,8 @@ auto VSplinePath::Outline(const QVector<qreal> &distances, const QString &suffix
     }
 
     VSplinePath splPath(outlinePath);
-    splPath.setName(name() + suffix);
-    splPath.SetMainNameForHistory(GetMainNameForHistory() + suffix);
-
-    if (not GetAliasSuffix().isEmpty())
-    {
-        splPath.SetAliasSuffix(GetAliasSuffix() + suffix);
-    }
-
+    splPath.setName(splPath_V + '_'_L1 + name);
+    splPath.SetMainNameForHistory(name);
     splPath.SetColor(GetColor());
     splPath.SetPenStyle(GetPenStyle());
     splPath.SetApproximationScale(GetApproximationScale());

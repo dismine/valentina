@@ -30,9 +30,16 @@
 
 #include <QLineF>
 
+#include "../ifc/ifcdef.h"
 #include "vcubicbezier_p.h"
 #include "vspline.h"
 #include "vsplinepath.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
 
 //---------------------------------------------------------------------------------------------------------------------
 VCubicBezier::VCubicBezier()
@@ -144,20 +151,18 @@ auto VCubicBezier::Move(qreal length, qreal angle, const QString &prefix) const 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VCubicBezier::Offset(qreal distance, const QString &suffix) const -> VSplinePath
+auto VCubicBezier::Offset(qreal distance, const QString &name) const -> VSplinePath
 {
     VSpline spl(GetP1(), GetP2().toQPointF(), GetP3().toQPointF(), GetP4());
     spl.SetApproximationScale(GetApproximationScale());
 
-    QVector<VSpline> const subSplines = spl.OffsetPath(distance, suffix);
+    QVector<VSpline> const subSplines = spl.OffsetPath(distance);
 
     VSplinePath splPath(subSplines);
-    splPath.setName(name() + suffix);
-    splPath.SetMainNameForHistory(GetMainNameForHistory() + suffix);
-
-    if (not GetAliasSuffix().isEmpty())
+    if (!name.isEmpty())
     {
-        splPath.SetAliasSuffix(GetAliasSuffix() + suffix);
+        splPath.setName(splPath_V + '_'_L1 + name);
+        splPath.SetMainNameForHistory(name);
     }
 
     splPath.SetColor(GetColor());
@@ -167,20 +172,18 @@ auto VCubicBezier::Offset(qreal distance, const QString &suffix) const -> VSplin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VCubicBezier::Outline(const QVector<qreal> &distances, const QString &suffix) const -> VSplinePath
+auto VCubicBezier::Outline(const QVector<qreal> &distances, const QString &name) const -> VSplinePath
 {
     VSpline spl(GetP1(), GetP2().toQPointF(), GetP3().toQPointF(), GetP4());
     spl.SetApproximationScale(GetApproximationScale());
 
-    QVector<VSpline> const subSplines = spl.OutlinePath(distances, suffix);
+    QVector<VSpline> const subSplines = spl.OutlinePath(distances);
 
     VSplinePath splPath(subSplines);
-    splPath.setName(name() + suffix);
-    splPath.SetMainNameForHistory(GetMainNameForHistory() + suffix);
-
-    if (not GetAliasSuffix().isEmpty())
+    if (!name.isEmpty())
     {
-        splPath.SetAliasSuffix(GetAliasSuffix() + suffix);
+        splPath.setName(splPath_V + '_'_L1 + name);
+        splPath.SetMainNameForHistory(name);
     }
 
     splPath.SetColor(GetColor());
