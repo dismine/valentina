@@ -48,7 +48,7 @@ struct VToolGraduatedCurveInitData : VAbstractSplineInitData
     QString name{};                                 // NOLINT(misc-non-private-member-variables-in-classes)
 };
 
-class VToolGraduatedCurve : public VAbstractSpline
+class VToolGraduatedCurve : public VToolAbstractOffsetCurve
 {
     Q_OBJECT // NOLINT
 
@@ -68,16 +68,8 @@ public:
         Type = UserType + static_cast<int>(Tool::GraduatedCurve)
     };
 
-    auto GetApproximationScale() const -> qreal override;
-    void SetApproximationScale(qreal value);
-
     auto GetGraduatedOffsets() const -> QVector<VGraduatedCurveOffset>;
     void SetGraduatedOffsets(const QVector<VGraduatedCurveOffset> &offsets);
-
-    auto GetName() const -> QString;
-    void SetName(const QString &name);
-
-    auto CurveName() const -> QString;
 
     void ShowVisualization(bool show) override;
 
@@ -91,13 +83,12 @@ protected:
     void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     void SetVisualization() override;
     void ReadToolAttributes(const QDomElement &domElement) override;
+    void ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement) override;
 
 private:
     Q_DISABLE_COPY_MOVE(VToolGraduatedCurve) // NOLINT
 
     QVector<VRawGraduatedCurveOffset> m_offsets;
-    quint32 m_originCurveId;
-    QString m_name;
 
     explicit VToolGraduatedCurve(const VToolGraduatedCurveInitData &initData, QGraphicsItem *parent = nullptr);
 

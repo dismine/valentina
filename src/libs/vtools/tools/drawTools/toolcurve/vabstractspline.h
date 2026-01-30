@@ -297,4 +297,56 @@ private:
     Q_DISABLE_COPY_MOVE(VToolAbstractArc) // NOLINT
 };
 
+class VToolAbstractOffsetCurve : public VAbstractSpline
+{
+    Q_OBJECT // NOLINT
+
+public:
+    VToolAbstractOffsetCurve(VAbstractPattern *doc,
+                             VContainer *data,
+                             quint32 id,
+                             quint32 originCurveId,
+                             QString name,
+                             const QString &notes,
+                             QGraphicsItem *parent = nullptr);
+    ~VToolAbstractOffsetCurve() override = default;
+
+    auto GetApproximationScale() const -> qreal override;
+    void SetApproximationScale(qreal value);
+
+    auto GetName() const -> QString;
+    void SetName(const QString &name);
+
+    auto CurveName() const -> QString;
+
+protected:
+    void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    void ReadToolAttributes(const QDomElement &domElement) override;
+
+    void ProcessOffsetCurveToolOptions(const QDomElement &oldDomElement,
+                                       const QDomElement &newDomElement,
+                                       const QString &newName,
+                                       const QString &newAliasSuffix);
+
+    auto OriginCurveId() const -> quint32;
+
+private:
+    Q_DISABLE_COPY_MOVE(VToolAbstractOffsetCurve) // NOLINT
+
+    quint32 m_originCurveId;
+    QString m_name;
+};
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VToolAbstractOffsetCurve::GetName() const -> QString
+{
+    return m_name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VToolAbstractOffsetCurve::OriginCurveId() const -> quint32
+{
+    return m_originCurveId;
+}
+
 #endif // VABSTRACTSPLINE_H

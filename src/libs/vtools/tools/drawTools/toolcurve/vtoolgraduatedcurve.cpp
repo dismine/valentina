@@ -49,12 +49,12 @@ void VToolGraduatedCurve::SetDialog()
     const QPointer<DialogGraduatedCurve> dialogTool = qobject_cast<DialogGraduatedCurve *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VSplinePath> splPath = VAbstractTool::data.GeometricObject<VSplinePath>(m_id);
-    dialogTool->SetOriginCurveId(m_originCurveId);
+    dialogTool->SetOriginCurveId(OriginCurveId());
     dialogTool->SetOffsets(m_offsets);
     dialogTool->SetPenStyle(splPath->GetPenStyle());
     dialogTool->SetColor(splPath->GetColor());
     dialogTool->SetApproximationScale(splPath->GetApproximationScale());
-    dialogTool->SetName(m_name);
+    dialogTool->SetName(GetName());
     dialogTool->SetAliasSuffix(splPath->GetAliasSuffix());
     dialogTool->SetNotes(m_notes);
 }
@@ -167,24 +167,6 @@ auto VToolGraduatedCurve::Create(VToolGraduatedCurveInitData &initData) -> VTool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VToolGraduatedCurve::GetApproximationScale() const -> qreal
-{
-    QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
-    SCASSERT(curve.isNull() == false)
-
-    return curve->GetApproximationScale();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolGraduatedCurve::SetApproximationScale(qreal value)
-{
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-    QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
-    curve->SetApproximationScale(value);
-    SaveOption(obj);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 auto VToolGraduatedCurve::GetGraduatedOffsets() const -> QVector<VGraduatedCurveOffset>
 {
     QVector<VGraduatedCurveOffset> widths;
@@ -229,26 +211,6 @@ void VToolGraduatedCurve::SetGraduatedOffsets(const QVector<VGraduatedCurveOffse
 
     QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
     SaveOption(obj);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VToolGraduatedCurve::GetName() const -> QString
-{
-    return m_name;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolGraduatedCurve::SetName(const QString &name)
-{
-    m_name = name;
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-    SaveOption(obj);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VToolGraduatedCurve::CurveName() const -> QString
-{
-    return VAbstractTool::data.GetGObject(m_originCurveId)->ObjectName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -328,20 +290,11 @@ void VToolGraduatedCurve::SaveDialog(QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolGraduatedCurve::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-    VAbstractSpline::SaveOptions(tag, obj);
+    VToolAbstractOffsetCurve::SaveOptions(tag, obj);
 
     doc->SetAttribute(tag, AttrType, ToolType);
-    doc->SetAttribute(tag, AttrCurve, m_originCurveId);
-    doc->SetAttribute(tag, AttrName, m_name);
 
     UpdateOffsets(tag, m_offsets);
-
-    // We no longer need to handle suffix attribute here. The code can be removed.
-    Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
-    if (!m_name.isEmpty() && tag.hasAttribute(AttrSuffix))
-    {
-        tag.removeAttribute(AttrSuffix);
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -353,7 +306,7 @@ void VToolGraduatedCurve::SetVisualization()
         auto *visual = qobject_cast<VisToolGraduatedCurve *>(vis);
         SCASSERT(visual != nullptr)
 
-        visual->SetCurveId(m_originCurveId);
+        visual->SetCurveId(OriginCurveId());
 
         const bool osSeparator = VAbstractApplication::VApp()->Settings()->GetOsSeparator();
         const VTranslateVars *trVars = VAbstractApplication::VApp()->TrVars();
@@ -376,19 +329,31 @@ void VToolGraduatedCurve::SetVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolGraduatedCurve::ReadToolAttributes(const QDomElement &domElement)
 {
-    VAbstractSpline::ReadToolAttributes(domElement);
+    VToolAbstractOffsetCurve::ReadToolAttributes(domElement);
 
-    m_originCurveId = VDomDocument::GetParametrUInt(domElement, AttrCurve, NULL_ID_STR);
-    m_name = VDomDocument::GetParametrString(domElement, AttrName);
     m_offsets = ExtractOffsetData(domElement);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolGraduatedCurve::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogGraduatedCurve> dialogTool = qobject_cast<DialogGraduatedCurve *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    ProcessOffsetCurveToolOptions(oldDomElement, newDomElement, dialogTool->GetName(), dialogTool->GetAliasSuffix());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VToolGraduatedCurve::VToolGraduatedCurve(const VToolGraduatedCurveInitData &initData, QGraphicsItem *parent)
-  : VAbstractSpline(initData.doc, initData.data, initData.id, initData.notes, parent),
-    m_offsets(initData.offsets),
-    m_originCurveId(initData.originCurveId),
-    m_name(initData.name)
+  : VToolAbstractOffsetCurve(initData.doc,
+                             initData.data,
+                             initData.id,
+                             initData.originCurveId,
+                             initData.name,
+                             initData.notes,
+                             parent),
+    m_offsets(initData.offsets)
 {
     SetSceneType(SceneObject::SplinePath);
 

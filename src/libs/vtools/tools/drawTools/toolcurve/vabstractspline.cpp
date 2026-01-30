@@ -45,6 +45,7 @@
 #include "../../vabstracttool.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatternconverter.h"
 #include "../ifc/xml/vpatterngraph.h"
 #include "../qmuparser/qmudef.h"
 #include "../qmuparser/qmutokenparser.h"
@@ -778,6 +779,121 @@ void VToolAbstractArc::ProcessArcToolOptions(const QDomElement &oldDomElement,
             }
             undoStack->push(renameArc2);
         }
+    }
+
+    if (oldAliasSuffix != newAliasSuffix)
+    {
+        auto *renameAlias = new RenameAlias(oldAliasSuffix, newAliasSuffix, doc, m_id);
+        connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        undoStack->push(renameAlias);
+    }
+
+    undoStack->endMacro();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VToolAbstractOffsetCurve::VToolAbstractOffsetCurve(VAbstractPattern *doc,
+                                                   VContainer *data,
+                                                   quint32 id,
+                                                   quint32 originCurveId,
+                                                   QString name,
+                                                   const QString &notes,
+                                                   QGraphicsItem *parent)
+  : VAbstractSpline(doc, data, id, notes, parent),
+    m_originCurveId(originCurveId),
+    m_name(std::move(name))
+{
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VToolAbstractOffsetCurve::GetApproximationScale() const -> qreal
+{
+    QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
+    SCASSERT(curve.isNull() == false)
+
+    return curve->GetApproximationScale();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolAbstractOffsetCurve::SetApproximationScale(qreal value)
+{
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
+    QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
+    curve->SetApproximationScale(value);
+    SaveOption(obj);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolAbstractOffsetCurve::SetName(const QString &name)
+{
+    m_name = name;
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
+    SaveOption(obj);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VToolAbstractOffsetCurve::CurveName() const -> QString
+{
+    return VAbstractTool::data.GetGObject(m_originCurveId)->ObjectName();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolAbstractOffsetCurve::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
+{
+    VAbstractSpline::SaveOptions(tag, obj);
+
+    doc->SetAttribute(tag, AttrCurve, m_originCurveId);
+    doc->SetAttribute(tag, AttrName, m_name);
+
+    // We no longer need to handle suffix attribute here. The code can be removed.
+    Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
+    if (!m_name.isEmpty() && tag.hasAttribute(AttrSuffix))
+    {
+        tag.removeAttribute(AttrSuffix);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolAbstractOffsetCurve::ReadToolAttributes(const QDomElement &domElement)
+{
+    VAbstractSpline::ReadToolAttributes(domElement);
+
+    m_originCurveId = VDomDocument::GetParametrUInt(domElement, AttrCurve, NULL_ID_STR);
+    m_name = VDomDocument::GetParametrString(domElement, AttrName);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolAbstractOffsetCurve::ProcessOffsetCurveToolOptions(const QDomElement &oldDomElement,
+                                                             const QDomElement &newDomElement,
+                                                             const QString &newName,
+                                                             const QString &newAliasSuffix)
+{
+    const QString oldName = m_name;
+
+    const QString oldAliasSuffix = GetAliasSuffix();
+
+    if (oldName == newName && oldAliasSuffix == newAliasSuffix)
+    {
+        VAbstractSpline::ApplyToolOptions(oldDomElement, newDomElement);
+        return;
+    }
+
+    QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
+    undoStack->beginMacro(tr("save tool options"));
+
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+    saveOptions->SetInGroup(true);
+    connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    undoStack->push(saveOptions);
+
+    if (oldName != newName)
+    {
+        auto *renameName = new RenameAlias(oldName, newName, doc, m_id);
+        if (oldAliasSuffix == newAliasSuffix)
+        {
+            connect(renameName, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        }
+        undoStack->push(renameName);
     }
 
     if (oldAliasSuffix != newAliasSuffix)

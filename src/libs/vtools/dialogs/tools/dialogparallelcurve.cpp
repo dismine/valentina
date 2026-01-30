@@ -441,18 +441,24 @@ void DialogParallelCurve::InitIcons()
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogParallelCurve::GenerateDefName() const -> QString
 {
+    auto GenerateName = [this](const QString &base) -> QString
+    {
+        VSplinePath path;
+        qint32 num = 1;
+        QString name;
+        do
+        {
+            path.SetNameSuffix(base + QString::number(num++));
+
+        } while (!data->IsUnique(path.name()));
+
+        return name;
+    };
     QSharedPointer<VAbstractCurve> const curve = data->GeometricObject<VAbstractCurve>(GetOriginCurveId());
     if (!curve->IsDerivative())
     {
-        return curve->HeadlessName() + VAbstractValApplication::VApp()->getCurrentDocument()->GenerateSuffix();
+        return GenerateName(curve->HeadlessName() + "__o"_L1);
     }
 
-    qint32 num = 1;
-    QString name;
-    QString const subName = "Curve"_L1 + offset_;
-    do
-    {
-        name = subName + QString::number(num++);
-    } while (!data->IsUnique(name));
-    return name;
+    return GenerateName("Curve"_L1 + offset_);
 }

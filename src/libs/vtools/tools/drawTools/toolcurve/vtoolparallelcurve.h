@@ -41,7 +41,7 @@ struct VToolParallelCurveInitData : VAbstractSplineInitData
     QString name{};                 // NOLINT(misc-non-private-member-variables-in-classes)
 };
 
-class VToolParallelCurve : public VAbstractSpline
+class VToolParallelCurve : public VToolAbstractOffsetCurve
 {
     Q_OBJECT // NOLINT
 
@@ -63,14 +63,6 @@ public:
     auto GetFormulaWidth() const -> VFormula;
     void SetFormulaWidth(const VFormula &value);
 
-    auto GetApproximationScale() const -> qreal override;
-    void SetApproximationScale(qreal value);
-
-    auto GetName() const -> QString;
-    void SetName(const QString &name);
-
-    auto CurveName() const -> QString;
-
     void ShowVisualization(bool show) override;
 
 protected slots:
@@ -81,13 +73,12 @@ protected:
     void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     void SetVisualization() override;
     void ReadToolAttributes(const QDomElement &domElement) override;
+    void ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement) override;
 
 private:
     Q_DISABLE_COPY_MOVE(VToolParallelCurve) // NOLINT
 
     QString m_formulaWidth;
-    quint32 m_originCurveId;
-    QString m_name;
 
     explicit VToolParallelCurve(const VToolParallelCurveInitData &initData, QGraphicsItem *parent = nullptr);
 };
