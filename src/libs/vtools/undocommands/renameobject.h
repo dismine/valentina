@@ -136,24 +136,24 @@ class RenamePair : public AbstractObjectRename
     Q_OBJECT // NOLINT
 
 public:
-    static auto CreateForLine(const ObjectPair_t &oldPair,
-                              const ObjectPair_t &newPair,
-                              VAbstractPattern *doc,
-                              quint32 id,
-                              QUndoCommand *parent = nullptr) -> RenamePair *;
+    Q_REQUIRED_RESULT static auto CreateForLine(const ObjectPair_t &oldPair,
+                                                const ObjectPair_t &newPair,
+                                                VAbstractPattern *doc,
+                                                quint32 id,
+                                                QUndoCommand *parent = nullptr) -> RenamePair *;
 
-    static auto CreateForSpline(const ObjectPair_t &oldPair,
-                                const ObjectPair_t &newPair,
-                                quint32 duplicate,
-                                VAbstractPattern *doc,
-                                quint32 id,
-                                QUndoCommand *parent = nullptr) -> RenamePair *;
-    static auto CreateForSplinePath(const ObjectPair_t &oldPair,
-                                    const ObjectPair_t &newPair,
-                                    quint32 duplicate,
-                                    VAbstractPattern *doc,
-                                    quint32 id,
-                                    QUndoCommand *parent = nullptr) -> RenamePair *;
+    Q_REQUIRED_RESULT static auto CreateForSpline(const ObjectPair_t &oldPair,
+                                                  const ObjectPair_t &newPair,
+                                                  quint32 duplicate,
+                                                  VAbstractPattern *doc,
+                                                  quint32 id,
+                                                  QUndoCommand *parent = nullptr) -> RenamePair *;
+    Q_REQUIRED_RESULT static auto CreateForSplinePath(const ObjectPair_t &oldPair,
+                                                      const ObjectPair_t &newPair,
+                                                      quint32 duplicate,
+                                                      VAbstractPattern *doc,
+                                                      quint32 id,
+                                                      QUndoCommand *parent = nullptr) -> RenamePair *;
 
     ~RenamePair() override = default;
 
