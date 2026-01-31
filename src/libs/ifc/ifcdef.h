@@ -156,6 +156,8 @@ extern const QString AttrKMVersion;
 extern const QString AttrNotMirrored;
 extern const QString AttrOffset;
 extern const QString AttrDescription;
+extern const QString AttrCurveName1;
+extern const QString AttrCurveName2;
 
 extern const QString TypeLineDefault;
 extern const QString TypeLineNone;

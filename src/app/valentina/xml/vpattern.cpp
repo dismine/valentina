@@ -2328,6 +2328,11 @@ void VPattern::ParseToolCutSpline(VMainGraphicsScene *scene, QDomElement &domEle
         initData.aliasSuffix1 = GetParametrEmptyString(domElement, AttrAlias1);
         initData.aliasSuffix2 = GetParametrEmptyString(domElement, AttrAlias2);
 
+        // Make name1 and name2 mandatory
+        Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
+        initData.name1 = GetParametrEmptyString(domElement, AttrCurveName1); // Optionally empty for compatibility
+        initData.name2 = GetParametrEmptyString(domElement, AttrCurveName2); // Optionally empty for compatibility
+
         VToolCutSpline::Create(initData);
         // Rewrite attribute formula. Need for situation when we have wrong formula.
         if (f != initData.formula)
@@ -2373,6 +2378,11 @@ void VPattern::ParseToolCutSplinePath(VMainGraphicsScene *scene, QDomElement &do
         initData.aliasSuffix1 = GetParametrEmptyString(domElement, AttrAlias1);
         initData.aliasSuffix2 = GetParametrEmptyString(domElement, AttrAlias2);
 
+        // Make name1 and name2 mandatory
+        Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
+        initData.name1 = GetParametrEmptyString(domElement, AttrCurveName1); // Optionally empty for compatibility
+        initData.name2 = GetParametrEmptyString(domElement, AttrCurveName2); // Optionally empty for compatibility
+
         VToolCutSplinePath::Create(initData);
         // Rewrite attribute formula. Need for situation when we have wrong formula.
         if (f != initData.formula)
@@ -2417,6 +2427,11 @@ void VPattern::ParseToolCutArc(VMainGraphicsScene *scene, QDomElement &domElemen
         initData.baseCurveId = GetParametrUInt(domElement, AttrArc, NULL_ID_STR);
         initData.aliasSuffix1 = GetParametrEmptyString(domElement, AttrAlias1);
         initData.aliasSuffix2 = GetParametrEmptyString(domElement, AttrAlias2);
+
+        // Make name1 and name2 mandatory
+        Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
+        initData.name1 = GetParametrEmptyString(domElement, AttrCurveName1); // Optionally empty for compatibility
+        initData.name2 = GetParametrEmptyString(domElement, AttrCurveName2); // Optionally empty for compatibility
 
         VToolCutArc::Create(initData);
         // Rewrite attribute formula. Need for situation when we have wrong formula.

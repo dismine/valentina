@@ -112,6 +112,12 @@ private:
 
     template <class Tool> void SetAlias2(VPE::VProperty *property);
 
+    template<class Tool>
+    void SetCurveName1(VPE::VProperty *property);
+
+    template<class Tool>
+    void SetCurveName2(VPE::VProperty *property);
+
     template <class Tool> void SetLineType(VPE::VProperty *property);
 
     template <class Tool> void SetLineColor(VPE::VProperty *property);
@@ -136,6 +142,12 @@ private:
 
     template<class Tool>
     void AddPropertySubName(Tool *i, const QString &propertyName);
+
+    template<class Tool>
+    void AddPropertyCurveName1(Tool *i, const QString &propertyName);
+
+    template<class Tool>
+    void AddPropertyCurveName2(Tool *i, const QString &propertyName);
 
     template <class Tool> void AddPropertyAlias(Tool *i, const QString &propertyName);
 

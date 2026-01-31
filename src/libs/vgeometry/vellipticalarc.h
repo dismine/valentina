@@ -106,6 +106,9 @@ public:
 
     auto HeadlessName() const -> QString override;
 
+    auto GetTypeHead() const -> QString override;
+    void SetNameSuffix(const QString &suffix) override;
+
 protected:
     void CreateName() override;
     void CreateAlias() override;

@@ -1100,3 +1100,30 @@ auto GetComboBoxCurrentData(const QComboBox *box, const QString &def) -> QString
     }
     return value;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+auto GenerateDefSubCurveName(const VContainer *data, quint32 curveId, const QString &derBase, const QString &base)
+    -> QString
+{
+    QSharedPointer<VAbstractCurve> const curve = data->GeometricObject<VAbstractCurve>(curveId);
+
+    auto GenerateName = [data, curve](const QString &base) -> QString
+    {
+        qint32 num = 1;
+        QString name;
+        const QString subName = curve->GetTypeHead() + base;
+        do
+        {
+            name = subName + QString::number(num++);
+        } while (!data->IsUnique(name));
+
+        return name;
+    };
+
+    if (!curve->IsDerivative())
+    {
+        return GenerateName(curve->HeadlessName() + derBase);
+    }
+
+    return GenerateName(base);
+}

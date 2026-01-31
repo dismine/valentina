@@ -154,6 +154,8 @@ const QString AttrKMVersion = QStringLiteral("version");
 const QString AttrNotMirrored = QStringLiteral("notMirrored");
 const QString AttrOffset = QStringLiteral("offset");
 const QString AttrDescription = QStringLiteral("description");
+const QString AttrCurveName1 = QStringLiteral("curveName1");
+const QString AttrCurveName2 = QStringLiteral("curveName2");
 
 const QString TypeLineDefault = QStringLiteral("default");
 const QString TypeLineNone = QStringLiteral("none");

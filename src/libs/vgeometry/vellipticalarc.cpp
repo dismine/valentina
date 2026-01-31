@@ -739,7 +739,7 @@ auto VEllipticalArc::ToSplinePath() const -> VSplinePath
 //---------------------------------------------------------------------------------------------------------------------
 void VEllipticalArc::CreateName()
 {
-    setName(ELARC_ + HeadlessName());
+    setName(GetTypeHead() + HeadlessName());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -752,7 +752,13 @@ void VEllipticalArc::CreateAlias()
         return;
     }
 
-    SetAlias(ELARC_ + aliasSuffix);
+    SetAlias(GetTypeHead() + aliasSuffix);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VEllipticalArc::SetNameSuffix(const QString &suffix)
+{
+    setName(GetTypeHead() + suffix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -774,6 +780,12 @@ auto VEllipticalArc::HeadlessName() const -> QString
     }
 
     return name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VEllipticalArc::GetTypeHead() const -> QString
+{
+    return ELARC_;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

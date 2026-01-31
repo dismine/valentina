@@ -52,6 +52,8 @@ struct VToolCutInitData : VToolSinglePointInitData
     QString formula{};            // NOLINT(misc-non-private-member-variables-in-classes)
     QString aliasSuffix1{};       // NOLINT(misc-non-private-member-variables-in-classes)
     QString aliasSuffix2{};       // NOLINT(misc-non-private-member-variables-in-classes)
+    QString name1{};              // NOLINT(misc-non-private-member-variables-in-classes)
+    QString name2{};              // NOLINT(misc-non-private-member-variables-in-classes)
 };
 
 class VToolCut : public VToolSinglePoint
@@ -69,6 +71,12 @@ public:
 
     auto GetFormulaLength() const -> VFormula;
     void SetFormulaLength(const VFormula &value);
+
+    auto GetName1() const -> QString;
+    void SetName1(const QString &name);
+
+    auto GetName2() const -> QString;
+    void SetName2(const QString &name);
 
     auto GetAliasSuffix1() const -> QString;
     void SetAliasSuffix1(QString alias);
@@ -90,6 +98,9 @@ protected:
 
     quint32 baseCurveId;
     bool detailsMode;
+
+    QString m_name1;
+    QString m_name2;
 
     QString m_aliasSuffix1{};
     QString m_aliasSuffix2{};

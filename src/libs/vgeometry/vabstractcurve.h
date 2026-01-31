@@ -113,6 +113,9 @@ public:
 
     void SetAliasSuffix(const QString &aliasSuffix) override;
 
+    virtual auto GetTypeHead() const -> QString = 0;
+    virtual void SetNameSuffix(const QString &suffix) = 0;
+
     static auto Curvature(const QVector<QPointF> &vertices) -> double;
 
     virtual auto Offset(qreal distance, const QString &name = QString()) const -> VSplinePath = 0;

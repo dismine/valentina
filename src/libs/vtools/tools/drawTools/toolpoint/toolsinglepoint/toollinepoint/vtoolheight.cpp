@@ -378,12 +378,6 @@ void VToolHeight::ApplyToolOptions(const QDomElement &oldDomElement, const QDomE
 
     if (oldLabel != newLabel)
     {
-        const QList<QString> suffixes = GroupSuffixes(m_id);
-        for (const auto &suffix : suffixes)
-        {
-            undoStack->push(new RenameSuffixedLabel(oldLabel, newLabel, suffix, doc, m_id));
-        }
-
         auto *renameLabel = new RenameLabel(oldLabel, newLabel, doc, m_id);
         connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         undoStack->push(renameLabel);

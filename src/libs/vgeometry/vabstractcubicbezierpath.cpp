@@ -311,7 +311,7 @@ auto VAbstractCubicBezierPath::GetMainNameForHistory() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractCubicBezierPath::CreateName()
 {
-    setName(splPath_V + '_'_L1 + HeadlessName());
+    setName(GetTypeHead() + HeadlessName());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -324,7 +324,13 @@ void VAbstractCubicBezierPath::CreateAlias()
         return;
     }
 
-    SetAlias(splPath_V + '_'_L1 + aliasSuffix);
+    SetAlias(GetTypeHead() + aliasSuffix);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractCubicBezierPath::SetNameSuffix(const QString &suffix)
+{
+    setName(GetTypeHead() + suffix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -346,6 +352,12 @@ auto VAbstractCubicBezierPath::HeadlessName() const -> QString
     }
 
     return name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractCubicBezierPath::GetTypeHead() const -> QString
+{
+    return splPath_V + '_'_L1;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

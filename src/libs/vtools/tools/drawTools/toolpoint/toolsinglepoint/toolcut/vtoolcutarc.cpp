@@ -41,6 +41,7 @@
 #include "../../../../vabstracttool.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatternconverter.h"
 #include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vabstractarc.h"
 #include "../vgeometry/varc.h"
@@ -78,6 +79,23 @@ VToolCutArc::VToolCutArc(const VToolCutInitData &initData, QGraphicsItem *parent
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VToolCutArc::GatherToolChanges() const -> VToolCutArc::ToolChanges
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogCutArc> dialogTool = qobject_cast<DialogCutArc *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    return {.oldName1 = GetName1(),
+            .newName1 = dialogTool->GetName1(),
+            .oldName2 = GetName2(),
+            .newName2 = dialogTool->GetName2(),
+            .oldAliasSuffix1 = m_aliasSuffix1,
+            .newAliasSuffix1 = dialogTool->GetAliasSuffix1(),
+            .oldAliasSuffix2 = m_aliasSuffix2,
+            .newAliasSuffix2 = dialogTool->GetAliasSuffix2()};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setDialog set dialog when user want change tool option.
  */
@@ -93,6 +111,8 @@ void VToolCutArc::SetDialog()
     dialogTool->SetNotes(m_notes);
     dialogTool->SetAliasSuffix1(m_aliasSuffix1);
     dialogTool->SetAliasSuffix2(m_aliasSuffix2);
+    dialogTool->SetName1(GetName1());
+    dialogTool->SetName2(GetName2());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -122,6 +142,8 @@ auto VToolCutArc::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene 
     initData.notes = dialogTool->GetNotes();
     initData.aliasSuffix1 = dialogTool->GetAliasSuffix1();
     initData.aliasSuffix2 = dialogTool->GetAliasSuffix2();
+    initData.name1 = dialogTool->GetName1();
+    initData.name2 = dialogTool->GetName2();
 
     VToolCutArc *point = Create(initData);
     if (point != nullptr)
@@ -158,9 +180,6 @@ auto VToolCutArc::Create(VToolCutInitData &initData) -> VToolCutArc *
         VArc arc2;
         cutPoint = arc->CutArc(VAbstractValApplication::VApp()->toPixel(result), &arc1, &arc2, initData.name);
 
-        arc1.SetAliasSuffix(initData.aliasSuffix1);
-        arc2.SetAliasSuffix(initData.aliasSuffix2);
-
         a1 = QSharedPointer<VArc>(new VArc(arc1));
         a2 = QSharedPointer<VArc>(new VArc(arc2));
     }
@@ -170,12 +189,30 @@ auto VToolCutArc::Create(VToolCutInitData &initData) -> VToolCutArc *
         VEllipticalArc arc2;
         cutPoint = arc->CutArc(VAbstractValApplication::VApp()->toPixel(result), &arc1, &arc2, initData.name);
 
-        arc1.SetAliasSuffix(initData.aliasSuffix1);
-        arc2.SetAliasSuffix(initData.aliasSuffix2);
-
         a1 = QSharedPointer<VEllipticalArc>(new VEllipticalArc(arc1));
         a2 = QSharedPointer<VEllipticalArc>(new VEllipticalArc(arc2));
     }
+
+    a1->SetDerivative(true);
+    a1->SetDerivative(true);
+
+    a1->SetAliasSuffix(initData.aliasSuffix1);
+    a2->SetAliasSuffix(initData.aliasSuffix2);
+
+    // These checks can be removed since name1 and name2 no longer should be empty
+    Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
+    if (initData.name1.isEmpty())
+    {
+        initData.name1 = a1->HeadlessName();
+    }
+
+    if (initData.name2.isEmpty())
+    {
+        initData.name2 = a2->HeadlessName();
+    }
+
+    a1->SetNameSuffix(initData.name1);
+    a2->SetNameSuffix(initData.name2);
 
     auto *p = new VPointF(cutPoint, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
@@ -274,6 +311,8 @@ void VToolCutArc::SaveDialog(QDomElement &domElement)
     doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrArc, QString().setNum(dialogTool->getArcId()));
+    doc->SetAttribute(domElement, AttrCurveName1, dialogTool->GetName1());
+    doc->SetAttribute(domElement, AttrCurveName2, dialogTool->GetName2());
     doc->SetAttributeOrRemoveIf<QString>(domElement,
                                          AttrAlias1,
                                          dialogTool->GetAliasSuffix1(),
@@ -440,23 +479,8 @@ auto VToolCutArc::MakeToolTip() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCutArc::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
 {
-    SCASSERT(not m_dialog.isNull())
-    const QPointer<DialogCutArc> dialogTool = qobject_cast<DialogCutArc *>(m_dialog);
-    SCASSERT(not dialogTool.isNull())
-
-    const QSharedPointer<VAbstractArc> arc = VAbstractTool::data.GeometricObject<VAbstractArc>(baseCurveId);
-
-    const QString oldCenterLabel = arc->GetCenter().name();
-    const QString newCenterLabel
-        = VAbstractTool::data.GeometricObject<VAbstractArc>(dialogTool->getArcId())->GetCenter().name();
-
-    const QString oldAliasSuffix1 = m_aliasSuffix1;
-    const QString newAliasSuffix1 = dialogTool->GetAliasSuffix1();
-
-    const QString oldAliasSuffix2 = m_aliasSuffix2;
-    const QString newAliasSuffix2 = dialogTool->GetAliasSuffix2();
-
-    if (oldCenterLabel == newCenterLabel && oldAliasSuffix1 == newAliasSuffix1 && oldAliasSuffix2 == newAliasSuffix2)
+    const ToolChanges changes = GatherToolChanges();
+    if (!changes.HasChanges())
     {
         VToolCut::ApplyToolOptions(oldDomElement, newDomElement);
         return;
@@ -470,35 +494,45 @@ void VToolCutArc::ApplyToolOptions(const QDomElement &oldDomElement, const QDomE
     connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     undoStack->push(saveOptions);
 
-    if (oldCenterLabel != newCenterLabel)
+    const quint32 subArc1Id = m_id /*+ 1*/;
+    const quint32 subArc2Id = m_id /*+ 2*/;
+
+    const QSharedPointer<VAbstractArc> arc = VAbstractTool::data.GeometricObject<VAbstractArc>(baseCurveId);
+    const CurveAliasType arcType = arc->getType() == GOType::Arc ? CurveAliasType::Arc : CurveAliasType::ElArc;
+
+    if (changes.Name1Changed())
     {
-        const RenameArcType arcType = arc->getType() == GOType::Arc ? RenameArcType::Arc : RenameArcType::ElArc;
-
-        // Share the same center point as a base arc
-        auto *renameArc1 = new RenameArc(arcType, oldCenterLabel, newCenterLabel, 0, doc, m_id + 1);
-        undoStack->push(renameArc1);
-
-        auto *renameArc2 = new RenameArc(arcType, oldCenterLabel, newCenterLabel, 0, doc, m_id + 2);
-        if (oldAliasSuffix1 == newAliasSuffix1 && oldAliasSuffix2 == newAliasSuffix2)
+        auto *renameName = new RenameAlias(arcType, changes.oldName1, changes.newName1, doc, subArc1Id);
+        if (!changes.Name2Changed() && !changes.AliasSuffix1Changed() && !changes.AliasSuffix2Changed())
         {
-            connect(renameArc2, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+            connect(renameName, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         }
-        undoStack->push(renameArc2);
+        undoStack->push(renameName);
     }
 
-    if (oldAliasSuffix1 != newAliasSuffix1)
+    if (changes.Name2Changed())
     {
-        auto *renameAlias = new RenameAlias(oldAliasSuffix1, newAliasSuffix1, doc, m_id);
-        if (oldAliasSuffix2 == newAliasSuffix2)
+        auto *renameName = new RenameAlias(arcType, changes.oldName2, changes.newName2, doc, subArc2Id);
+        if (!changes.AliasSuffix1Changed() && !changes.AliasSuffix2Changed())
+        {
+            connect(renameName, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        }
+        undoStack->push(renameName);
+    }
+
+    if (changes.AliasSuffix1Changed())
+    {
+        auto *renameAlias = new RenameAlias(arcType, changes.oldAliasSuffix1, changes.newAliasSuffix1, doc, subArc1Id);
+        if (!changes.AliasSuffix2Changed())
         {
             connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         }
         undoStack->push(renameAlias);
     }
 
-    if (oldAliasSuffix2 != newAliasSuffix2)
+    if (changes.AliasSuffix2Changed())
     {
-        auto *renameAlias = new RenameAlias(oldAliasSuffix1, newAliasSuffix1, doc, m_id);
+        auto *renameAlias = new RenameAlias(arcType, changes.oldAliasSuffix1, changes.newAliasSuffix1, doc, subArc2Id);
         connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         undoStack->push(renameAlias);
     }

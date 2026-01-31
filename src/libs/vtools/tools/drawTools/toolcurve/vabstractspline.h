@@ -134,8 +134,6 @@ protected:
     auto GetSceneType() const -> SceneObject;
     void SetSceneType(SceneObject newSceneType);
 
-    auto SegmentingTools(Tool toolType) const -> QVector<quint32>;
-
     void ProcessSplineToolOptions(const QDomElement &oldDomElement,
                                   const QDomElement &newDomElement,
                                   const VAbstractCubicBezier &newSpline);

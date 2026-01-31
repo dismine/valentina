@@ -50,6 +50,12 @@
 #include "../vwidgets/vabstractmainwindow.h"
 #include "ui_dialogcutspline.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DialogCutSpline create dialog.
@@ -78,6 +84,12 @@ DialogCutSpline::DialogCutSpline(const VContainer *data, VAbstractPattern *doc, 
     InitOkCancelApply(ui);
 
     FillComboBoxSplines(ui->comboBoxSpline);
+
+    ui->lineEditName1->setText(GenerateDefLeftSubName());
+    ui->lineEditName2->setText(GenerateDefRightSubName());
+
+    connect(ui->lineEditName1, &QLineEdit::textEdited, this, &DialogCutSpline::ValidateCurveNames);
+    connect(ui->lineEditName2, &QLineEdit::textEdited, this, &DialogCutSpline::ValidateCurveNames);
 
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogCutSpline::FXLength);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
@@ -122,6 +134,34 @@ void DialogCutSpline::SetPointName(const QString &value)
 {
     m_pointName = value;
     ui->lineEditNamePoint->setText(m_pointName);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutSpline::SetName1(const QString &name)
+{
+    m_originName1 = name;
+    ui->lineEditName1->setText(m_originName1);
+    ValidateCurveNames();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogCutSpline::GetName1() const -> QString
+{
+    return ui->lineEditName1->text();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutSpline::SetName2(const QString &name)
+{
+    m_originName2 = name;
+    ui->lineEditName1->setText(m_originName2);
+    ValidateCurveNames();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogCutSpline::GetName2() const -> QString
+{
+    return ui->lineEditName2->text();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -282,6 +322,42 @@ void DialogCutSpline::ValidateAlias()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogCutSpline::ValidateCurveNames()
+{
+    QRegularExpression const rx(NameRegExp());
+
+    VSpline spl1;
+    spl1.SetNameSuffix(GetName1());
+
+    VSpline spl2;
+    spl2.SetNameSuffix(GetName2());
+
+    if (GetName1().isEmpty() || !rx.match(spl1.name()).hasMatch()
+        || (m_originName1 != GetName1() && not data->IsUnique(spl1.name())) || spl1.name() == spl2.name())
+    {
+        m_flagCurveName1 = false;
+        ChangeColor(ui->labelName1, errorColor);
+    }
+    else
+    {
+        m_flagCurveName1 = true;
+        ChangeColor(ui->labelName1, OkColor(this));
+    }
+
+    if (GetName2().isEmpty() || !rx.match(spl2.name()).hasMatch()
+        || (m_originName2 != GetName2() && not data->IsUnique(spl2.name())) || spl1.name() == spl2.name())
+    {
+        m_flagCurveName2 = false;
+        ChangeColor(ui->labelName2, errorColor);
+    }
+    else
+    {
+        m_flagCurveName2 = true;
+        ChangeColor(ui->labelName2, OkColor(this));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogCutSpline::FinishCreating()
 {
     vis->SetMode(Mode::Show);
@@ -298,6 +374,18 @@ void DialogCutSpline::InitIcons()
 
     ui->toolButtonExprLength->setIcon(VTheme::GetIconResource(resource, QStringLiteral("24x24/fx.png")));
     ui->label_4->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/equal.png")));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogCutSpline::GenerateDefLeftSubName() const -> QString
+{
+    return GenerateDefSubCurveName(data, getSplineId(), "__ls"_L1, "LSubCurve"_L1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogCutSpline::GenerateDefRightSubName() const -> QString
+{
+    return GenerateDefSubCurveName(data, getSplineId(), "__rs"_L1, "RSubCurve"_L1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

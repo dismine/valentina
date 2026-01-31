@@ -99,29 +99,6 @@ private:
     QString m_newLabel;
 };
 
-class RenameSuffixedLabel : public AbstractObjectRename
-{
-    Q_OBJECT // NOLINT
-
-public:
-    RenameSuffixedLabel(QString oldLabel,
-                        QString newLabel,
-                        QString suffix,
-                        VAbstractPattern *doc,
-                        quint32 id,
-                        QUndoCommand *parent = nullptr);
-    ~RenameSuffixedLabel() override = default;
-
-protected:
-    auto ProcessToken(const QString &token) const -> QString override;
-
-private:
-    Q_DISABLE_COPY_MOVE(RenameSuffixedLabel) // NOLINT
-    QString m_oldLabel;
-    QString m_newLabel;
-    QString m_suffix;
-};
-
 enum class RenameObjectType : quint8
 {
     Line,
@@ -176,12 +153,26 @@ private:
                QUndoCommand *parent = nullptr);
 };
 
+enum class CurveAliasType : quint8
+{
+    Arc,
+    ElArc,
+    Spline,
+    SplinePath,
+    All
+};
+
 class RenameAlias : public AbstractObjectRename
 {
     Q_OBJECT // NOLINT
 
 public:
-    RenameAlias(QString oldAlias, QString newAlias, VAbstractPattern *doc, quint32 id, QUndoCommand *parent = nullptr);
+    RenameAlias(CurveAliasType type,
+                QString oldAlias,
+                QString newAlias,
+                VAbstractPattern *doc,
+                quint32 id,
+                QUndoCommand *parent = nullptr);
     ~RenameAlias() override = default;
 
 protected:
@@ -189,6 +180,7 @@ protected:
 
 private:
     Q_DISABLE_COPY_MOVE(RenameAlias) // NOLINT
+    CurveAliasType m_type;
     QString m_oldAlias;
     QString m_newAlias;
 };

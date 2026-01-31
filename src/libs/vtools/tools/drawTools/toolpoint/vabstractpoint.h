@@ -64,8 +64,6 @@ protected:
 
     template <typename T> static void InitToolConnections(VMainGraphicsScene *scene, T *tool);
 
-    auto GroupSuffixes(quint32 id) const -> QList<QString>;
-
 private:
     Q_DISABLE_COPY_MOVE(VAbstractPoint) // NOLINT
 };

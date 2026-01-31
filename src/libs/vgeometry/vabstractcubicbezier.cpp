@@ -520,7 +520,7 @@ auto VAbstractCubicBezier::GetParmT(qreal length) const -> qreal
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractCubicBezier::CreateName()
 {
-    setName(SPL_ + HeadlessName());
+    setName(GetTypeHead() + HeadlessName());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -533,7 +533,13 @@ void VAbstractCubicBezier::CreateAlias()
         return;
     }
 
-    SetAlias(SPL_ + aliasSuffix);
+    SetAlias(GetTypeHead() + aliasSuffix);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractCubicBezier::SetNameSuffix(const QString &suffix)
+{
+    setName(GetTypeHead() + suffix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -545,6 +551,12 @@ auto VAbstractCubicBezier::HeadlessName() const -> QString
         name += u"_%1"_s.arg(GetDuplicate());
     }
     return name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractCubicBezier::GetTypeHead() const -> QString
+{
+    return SPL_;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

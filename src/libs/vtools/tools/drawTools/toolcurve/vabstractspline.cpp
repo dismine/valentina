@@ -46,10 +46,8 @@
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/xml/vpatternblockmapper.h"
 #include "../ifc/xml/vpatternconverter.h"
-#include "../ifc/xml/vpatterngraph.h"
 #include "../qmuparser/qmudef.h"
 #include "../qmuparser/qmutokenparser.h"
-#include "../toolpoint/toolsinglepoint/toolcut/vtoolcut.h"
 #include "../vdrawtool.h"
 #include "../vgeometry/vabstractarc.h"
 #include "../vgeometry/vgobject.h"
@@ -209,39 +207,6 @@ auto VAbstractSpline::MakeToolTip() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstractSpline::SegmentingTools(Tool toolType) const -> QVector<quint32>
-{
-    const VPatternGraph *graph = doc->PatternGraph();
-    auto Filter = [](const auto &node) -> bool { return node.type == VNodeType::TOOL; };
-    const QVector<VNode> dependencies = graph->GetDependentNodes(m_id, Filter);
-
-    QVector<quint32> tools;
-    tools.reserve(dependencies.size());
-
-    const QVector<VToolRecord> *history = doc->getHistory();
-    for (const auto &record : *history)
-    {
-        if (record.GetToolType() == toolType && dependencies.contains({.id = record.GetId()}))
-        {
-            try
-            {
-                auto *tool = qobject_cast<VToolCut *>(VAbstractPattern::getTool(record.GetId()));
-                if (tool != nullptr && tool->BaseCurveId() == m_id)
-                {
-                    tools.append(record.GetId());
-                }
-            }
-            catch (VExceptionBadId &)
-            {
-                // ignore;
-            }
-        }
-    }
-
-    return tools;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VAbstractSpline::ProcessSplineToolOptions(const QDomElement &oldDomElement,
                                                const QDomElement &newDomElement,
                                                const VAbstractCubicBezier &newSpline)
@@ -273,57 +238,21 @@ void VAbstractSpline::ProcessSplineToolOptions(const QDomElement &oldDomElement,
 
     if (oldP1Label != newP1Label || oldP4Label != newP4Label)
     {
-        const QVector<quint32> dependencies = SegmentingTools(Tool::CutSpline);
-
         auto *renamePair = RenamePair::CreateForSpline(std::make_pair(oldP1Label, oldP4Label),
                                                        std::make_pair(newP1Label, newP4Label),
                                                        oldSpline->GetDuplicate(),
                                                        doc,
                                                        m_id);
-        if (dependencies.isEmpty() && oldAliasSuffix == newAliasSuffix)
+        if (oldAliasSuffix == newAliasSuffix)
         {
             connect(renamePair, &RenamePair::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         }
         undoStack->push(renamePair);
-
-        for (int i = 0; i < dependencies.size(); ++i)
-        {
-            quint32 const depId = dependencies.at(i);
-            const QString segLabel = VAbstractTool::data.GetGObject(depId)->name();
-
-            if (oldP1Label != newP1Label)
-            {
-                auto *renamePair1 = RenamePair::CreateForSpline(std::make_pair(oldP1Label, segLabel),
-                                                                std::make_pair(newP1Label, segLabel),
-                                                                0,
-                                                                doc,
-                                                                m_id);
-                if (i == dependencies.size() - 1 && oldP4Label == newP4Label && oldAliasSuffix == newAliasSuffix)
-                {
-                    connect(renamePair1, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-                }
-                undoStack->push(renamePair1);
-            }
-
-            if (oldP4Label != newP4Label)
-            {
-                auto *renamePair2 = RenamePair::CreateForSpline(std::make_pair(segLabel, oldP4Label),
-                                                                std::make_pair(segLabel, newP4Label),
-                                                                0,
-                                                                doc,
-                                                                m_id);
-                if (i == dependencies.size() - 1 && oldAliasSuffix == newAliasSuffix)
-                {
-                    connect(renamePair2, &RenamePair::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-                }
-                undoStack->push(renamePair2);
-            }
-        }
     }
 
     if (oldAliasSuffix != newAliasSuffix)
     {
-        auto *renameAlias = new RenameAlias(oldAliasSuffix, newAliasSuffix, doc, m_id);
+        auto *renameAlias = new RenameAlias(CurveAliasType::Spline, oldAliasSuffix, newAliasSuffix, doc, m_id);
         connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         undoStack->push(renameAlias);
     }
@@ -363,57 +292,21 @@ void VAbstractSpline::ProcessSplinePathToolOptions(const QDomElement &oldDomElem
 
     if (oldP1Label != newP1Label || oldP4Label != newP4Label)
     {
-        const QVector<quint32> dependencies = SegmentingTools(Tool::CutSplinePath);
-
         auto *renamePair = RenamePair::CreateForSplinePath(std::make_pair(oldP1Label, oldP4Label),
                                                            std::make_pair(newP1Label, newP4Label),
                                                            oldSplinePath->GetDuplicate(),
                                                            doc,
                                                            m_id);
-        if (dependencies.isEmpty() && oldAliasSuffix == newAliasSuffix)
+        if (oldAliasSuffix == newAliasSuffix)
         {
             connect(renamePair, &RenamePair::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         }
         undoStack->push(renamePair);
-
-        for (int i = 0; i < dependencies.size(); ++i)
-        {
-            quint32 depId = dependencies.at(i);
-            const QString segLabel = VAbstractTool::data.GetGObject(depId)->name();
-
-            if (oldP1Label != newP1Label)
-            {
-                auto *renamePair1 = RenamePair::CreateForSplinePath(std::make_pair(oldP1Label, segLabel),
-                                                                    std::make_pair(newP1Label, segLabel),
-                                                                    0,
-                                                                    doc,
-                                                                    m_id);
-                if (i == dependencies.size() - 1 && oldP4Label == newP4Label && oldAliasSuffix == newAliasSuffix)
-                {
-                    connect(renamePair1, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-                }
-                undoStack->push(renamePair1);
-            }
-
-            if (oldP4Label != newP4Label)
-            {
-                auto *renamePair2 = RenamePair::CreateForSplinePath(std::make_pair(segLabel, oldP4Label),
-                                                                    std::make_pair(segLabel, newP4Label),
-                                                                    0,
-                                                                    doc,
-                                                                    m_id);
-                if (i == dependencies.size() - 1 && oldAliasSuffix == newAliasSuffix)
-                {
-                    connect(renamePair2, &RenamePair::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-                }
-                undoStack->push(renamePair2);
-            }
-        }
     }
 
     if (oldAliasSuffix != newAliasSuffix)
     {
-        auto *renameAlias = new RenameAlias(oldAliasSuffix, newAliasSuffix, doc, m_id);
+        auto *renameAlias = new RenameAlias(CurveAliasType::SplinePath, oldAliasSuffix, newAliasSuffix, doc, m_id);
         connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         undoStack->push(renameAlias);
     }
@@ -753,37 +646,22 @@ void VToolAbstractArc::ProcessArcToolOptions(const QDomElement &oldDomElement,
 
     if (oldCenterLabel != newCenterLabel)
     {
-        const QVector<quint32> dependencies = SegmentingTools(Tool::CutArc);
-
         const RenameArcType arcType = arc->getType() == GOType::Arc ? RenameArcType::Arc : RenameArcType::ElArc;
 
         // Share the same center point as a base arc
         auto *renameArc = new RenameArc(arcType, oldCenterLabel, newCenterLabel, 0, doc, m_id);
-        if (dependencies.isEmpty() && oldAliasSuffix == newAliasSuffix)
+        if (oldAliasSuffix == newAliasSuffix)
         {
             connect(renameArc, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         }
         undoStack->push(renameArc);
-
-        for (int i = 0; i < dependencies.size(); ++i)
-        {
-            // Share the same center point as a base arc
-            auto *renameArc1 = new RenameArc(arcType, oldCenterLabel, newCenterLabel, 0, doc, dependencies.at(i) + 1);
-            connect(renameArc1, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-            undoStack->push(renameArc1);
-
-            auto *renameArc2 = new RenameArc(arcType, oldCenterLabel, newCenterLabel, 0, doc, dependencies.at(i) + 2);
-            if (i == dependencies.size() - 1 && oldAliasSuffix == newAliasSuffix)
-            {
-                connect(renameArc2, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-            }
-            undoStack->push(renameArc2);
-        }
     }
 
     if (oldAliasSuffix != newAliasSuffix)
     {
-        auto *renameAlias = new RenameAlias(oldAliasSuffix, newAliasSuffix, doc, m_id);
+        const CurveAliasType arcType = arc->getType() == GOType::Arc ? CurveAliasType::Arc : CurveAliasType::ElArc;
+
+        auto *renameAlias = new RenameAlias(arcType, oldAliasSuffix, newAliasSuffix, doc, m_id);
         connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         undoStack->push(renameAlias);
     }
@@ -888,7 +766,7 @@ void VToolAbstractOffsetCurve::ProcessOffsetCurveToolOptions(const QDomElement &
 
     if (oldName != newName)
     {
-        auto *renameName = new RenameAlias(oldName, newName, doc, m_id);
+        auto *renameName = new RenameAlias(CurveAliasType::SplinePath, oldName, newName, doc, m_id);
         if (oldAliasSuffix == newAliasSuffix)
         {
             connect(renameName, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
@@ -898,7 +776,7 @@ void VToolAbstractOffsetCurve::ProcessOffsetCurveToolOptions(const QDomElement &
 
     if (oldAliasSuffix != newAliasSuffix)
     {
-        auto *renameAlias = new RenameAlias(oldAliasSuffix, newAliasSuffix, doc, m_id);
+        auto *renameAlias = new RenameAlias(CurveAliasType::SplinePath, oldAliasSuffix, newAliasSuffix, doc, m_id);
         connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         undoStack->push(renameAlias);
     }

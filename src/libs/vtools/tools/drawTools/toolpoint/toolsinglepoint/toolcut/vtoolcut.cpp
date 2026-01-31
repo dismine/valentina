@@ -101,6 +101,50 @@ void VToolCut::SetFormulaLength(const VFormula &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VToolCut::GetName1() const -> QString
+{
+    return m_name1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCut::SetName1(const QString &name)
+{
+    QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(baseCurveId);
+
+    const QString newName1 = curve->GetTypeHead() + name;
+
+    if (QRegularExpression const rx(NameRegExp());
+        !name.isEmpty() && rx.match(newName1).hasMatch() && VAbstractTool::data.IsUnique(newName1) && name != m_name2)
+    {
+        m_name1 = name;
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
+        SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VToolCut::GetName2() const -> QString
+{
+    return m_name2;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCut::SetName2(const QString &name)
+{
+    QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(baseCurveId);
+
+    const QString newName2 = curve->GetTypeHead() + name;
+
+    if (QRegularExpression const rx(NameRegExp());
+        !name.isEmpty() && rx.match(newName2).hasMatch() && VAbstractTool::data.IsUnique(newName2) && name != m_name1)
+    {
+        m_name2 = name;
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
+        SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VToolCut::GetAliasSuffix1() const -> QString
 {
     return m_aliasSuffix1;
@@ -111,20 +155,16 @@ void VToolCut::SetAliasSuffix1(QString alias)
 {
     QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(baseCurveId);
 
-    const QString oldAliasSuffix = curve->GetAliasSuffix();
     alias = alias.simplified().replace(QChar(QChar::Space), '_'_L1);
-    curve->SetAliasSuffix(alias);
+    const QString newAlias = curve->GetTypeHead() + alias;
 
     if (QRegularExpression const rx(NameRegExp());
-        alias.isEmpty() || (rx.match(curve->GetAlias()).hasMatch() && VAbstractTool::data.IsUnique(curve->GetAlias())))
+        alias.isEmpty()
+        || (rx.match(newAlias).hasMatch() && VAbstractTool::data.IsUnique(newAlias) && alias != m_aliasSuffix2))
     {
         m_aliasSuffix1 = alias;
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
         SaveOption(obj);
-    }
-    else
-    {
-        curve->SetAliasSuffix(oldAliasSuffix);
     }
 }
 
@@ -139,20 +179,16 @@ void VToolCut::SetAliasSuffix2(QString alias)
 {
     QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(baseCurveId);
 
-    const QString oldAliasSuffix = curve->GetAliasSuffix();
     alias = alias.simplified().replace(QChar(QChar::Space), '_'_L1);
-    curve->SetAliasSuffix(alias);
+    const QString newAlias = curve->GetTypeHead() + alias;
 
     if (QRegularExpression const rx(NameRegExp());
-        alias.isEmpty() || (rx.match(curve->GetAlias()).hasMatch() && VAbstractTool::data.IsUnique(curve->GetAlias())))
+        alias.isEmpty()
+        || (rx.match(newAlias).hasMatch() && VAbstractTool::data.IsUnique(newAlias) && alias != m_aliasSuffix1))
     {
         m_aliasSuffix2 = alias;
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
         SaveOption(obj);
-    }
-    else
-    {
-        curve->SetAliasSuffix(oldAliasSuffix);
     }
 }
 
@@ -176,10 +212,16 @@ void VToolCut::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
     VToolSinglePoint::SaveOptions(tag, obj);
 
-    doc->SetAttributeOrRemoveIf<QString>(tag, AttrAlias1, m_aliasSuffix1,
-                                         [](const QString &suffix) noexcept { return suffix.isEmpty(); });
-    doc->SetAttributeOrRemoveIf<QString>(tag, AttrAlias2, m_aliasSuffix2,
-                                         [](const QString &suffix) noexcept { return suffix.isEmpty(); });
+    doc->SetAttribute(tag, AttrCurveName1, m_name1);
+    doc->SetAttribute(tag, AttrCurveName2, m_name2);
+    doc->SetAttributeOrRemoveIf<QString>(tag,
+                                         AttrAlias1,
+                                         m_aliasSuffix1,
+                                         [](const QString &suffix) noexcept -> bool { return suffix.isEmpty(); });
+    doc->SetAttributeOrRemoveIf<QString>(tag,
+                                         AttrAlias2,
+                                         m_aliasSuffix2,
+                                         [](const QString &suffix) noexcept -> bool { return suffix.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -187,6 +229,8 @@ void VToolCut::ReadToolAttributes(const QDomElement &domElement)
 {
     VToolSinglePoint::ReadToolAttributes(domElement);
 
+    m_name1 = VAbstractPattern::GetParametrEmptyString(domElement, AttrCurveName1);
+    m_name2 = VAbstractPattern::GetParametrEmptyString(domElement, AttrCurveName2);
     m_aliasSuffix1 = VAbstractPattern::GetParametrEmptyString(domElement, AttrAlias1);
     m_aliasSuffix2 = VAbstractPattern::GetParametrEmptyString(domElement, AttrAlias2);
 }
