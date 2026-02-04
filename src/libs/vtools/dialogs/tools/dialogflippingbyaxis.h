@@ -61,9 +61,6 @@ public:
     auto GetAxisType() const -> AxisType;
     void SetAxisType(AxisType type);
 
-    auto GetSuffix() const -> QString;
-    void SetSuffix(const QString &value);
-
     auto GetVisibilityGroupName() const -> QString;
     void SetVisibilityGroupName(const QString &name);
 
@@ -88,10 +85,9 @@ public slots:
     void SelectedObject(bool selected, quint32 object, quint32 tool) override;
 
 private slots:
-    void SuffixChanged();
     void GroupNameChanged();
     void ShowSourceDetails(int row);
-    void AliasChanged(const QString &text);
+    void NameChanged(const QString &text);
     void PenStyleChanged();
     void ColorChanged();
 
@@ -110,16 +106,13 @@ private:
 
     Ui::DialogFlippingByAxis *ui;
 
-    QVector<SourceItem> sourceObjects{};
+    QVector<SourceItem> m_sourceObjects{};
 
-    bool stage1;
+    bool stage1{true};
 
-    QString m_suffix;
-
-    bool flagName;
-    bool flagGroupName;
-    bool flagError;
-    bool flagAlias{true};
+    bool flagName{true};
+    bool flagGroupName{true};
+    bool flagError{false};
 
     QStringList m_groupTags{};
 
@@ -127,8 +120,7 @@ private:
 
     void FillSourceList();
 
-    void ValidateSourceAliases();
-    void SetAliasValid(quint32 id, bool valid);
+    auto SaveSourceObjects() const -> QVector<SourceItem>;
 };
 
 #endif // DIALOGFLIPPINGBYAXIS_H

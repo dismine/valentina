@@ -62,28 +62,19 @@
 #include "../vwidgets/vmaingraphicsview.h"
 #include "ui_dialogmove.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 DialogMove::DialogMove(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
   : DialogTool(data, doc, toolId, parent),
     ui(new Ui::DialogMove),
     timerAngle(new QTimer(this)),
     timerRotationAngle(new QTimer(this)),
-    timerLength(new QTimer(this)),
-    formulaAngle(),
-    formulaRotationAngle(),
-    formulaLength(),
-    formulaBaseHeightAngle(0),
-    formulaBaseHeightRotationAngle(0),
-    formulaBaseHeightLength(0),
-    stage1(true),
-    stage2(false),
-    m_suffix(),
-    optionalRotationOrigin(false),
-    flagAngle(false),
-    flagRotationAngle(false),
-    flagLength(false),
-    flagName(true),
-    flagGroupName(true)
+    timerLength(new QTimer(this))
 {
     ui->setupUi(this);
 
@@ -97,8 +88,6 @@ DialogMove::DialogMove(const VContainer *data, VAbstractPattern *doc, quint32 to
 
     this->formulaBaseHeightLength = ui->plainTextEditLength->height();
     ui->plainTextEditLength->installEventFilter(this);
-
-    ui->lineEditSuffix->setText(VAbstractValApplication::VApp()->getCurrentDocument()->GenerateSuffix());
 
     timerAngle->setSingleShot(true);
     connect(timerAngle, &QTimer::timeout, this, &DialogMove::EvalAngle);
@@ -124,7 +113,6 @@ DialogMove::DialogMove(const VContainer *data, VAbstractPattern *doc, quint32 to
     ui->comboBoxRotationOriginPoint->addItem(tr("Center point"), NULL_ID);
     ui->comboBoxRotationOriginPoint->blockSignals(false);
 
-    connect(ui->lineEditSuffix, &QLineEdit::textChanged, this, &DialogMove::SuffixChanged);
     connect(ui->lineEditVisibilityGroup, &QLineEdit::textChanged, this, &DialogMove::GroupNameChanged);
     connect(ui->toolButtonExprAngle, &QPushButton::clicked, this, &DialogMove::FXAngle);
     connect(ui->toolButtonExprRotationAngle, &QPushButton::clicked, this, &DialogMove::FXRotationAngle);
@@ -143,7 +131,7 @@ DialogMove::DialogMove(const VContainer *data, VAbstractPattern *doc, quint32 to
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogMove::DeployLengthTextEdit);
 
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogMove::ShowSourceDetails);
-    connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogMove::AliasChanged);
+    connect(ui->lineEditName, &QLineEdit::textEdited, this, &DialogMove::NameChanged);
     connect(ui->comboBoxPenStyle, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &DialogMove::PenStyleChanged);
     connect(ui->pushButtonColor, &VPE::QtColorPicker::colorChanged, this, &DialogMove::ColorChanged);
@@ -241,19 +229,6 @@ void DialogMove::SetRotationAngle(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto DialogMove::GetSuffix() const -> QString
-{
-    return m_suffix;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogMove::SetSuffix(const QString &value)
-{
-    m_suffix = value;
-    ui->lineEditSuffix->setText(value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 auto DialogMove::GetRotationOrigPointId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxRotationOriginPoint);
@@ -316,7 +291,7 @@ void DialogMove::ShowDialog(bool click)
 {
     if (stage1 && not click)
     {
-        if (sourceObjects.isEmpty())
+        if (m_sourceObjects.isEmpty())
         {
             return;
         }
@@ -330,7 +305,7 @@ void DialogMove::ShowDialog(bool click)
 
         auto *operation = qobject_cast<VisToolMove *>(vis);
         SCASSERT(operation != nullptr)
-        operation->SetObjects(SourceToObjects(sourceObjects));
+        operation->SetObjects(SourceToObjects(m_sourceObjects));
         operation->VisualMode();
 
         auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
@@ -349,6 +324,7 @@ void DialogMove::ShowDialog(bool click)
 
         VAbstractValApplication::VApp()->getSceneView()->AllowRubberBand(false);
 
+        FillDefSourceNames(m_sourceObjects, data, "m"_L1);
         FillSourceList();
     }
     else if (not stage2 && not stage1 && prepare && click)
@@ -382,7 +358,7 @@ void DialogMove::ShowDialog(bool click)
                 SetObject(NULL_ID, ui->comboBoxRotationOriginPoint, QString());
                 operation->RefreshGeometry();
             }
-            optionalRotationOrigin = false; // Handled, next click on empty filed will disable selection
+            optionalRotationOrigin = false; // Handled, next click on empty field will disable selection
         }
         else
         {
@@ -423,20 +399,21 @@ void DialogMove::SelectedObject(bool selected, quint32 object, quint32 tool)
     Q_UNUSED(tool)
     if (stage1)
     {
-        auto obj = std::find_if(sourceObjects.begin(), sourceObjects.end(),
+        auto obj = std::find_if(m_sourceObjects.begin(),
+                                m_sourceObjects.end(),
                                 [object](const SourceItem &sItem) { return sItem.id == object; });
         if (selected)
         {
-            if (obj == sourceObjects.end())
+            if (obj == m_sourceObjects.end())
             {
-                sourceObjects.append({.id = object});
+                m_sourceObjects.append({.id = object});
             }
         }
         else
         {
-            if (obj != sourceObjects.end())
+            if (obj != m_sourceObjects.end())
             {
-                sourceObjects.erase(obj);
+                m_sourceObjects.erase(obj);
             }
         }
     }
@@ -504,45 +481,6 @@ void DialogMove::FXLength()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogMove::SuffixChanged()
-{
-    if (const auto *edit = qobject_cast<QLineEdit *>(sender()); edit)
-    {
-        const QString suffix = edit->text();
-        if (suffix.isEmpty())
-        {
-            flagName = false;
-            ChangeColor(ui->labelSuffix, errorColor);
-            ui->labelStatus->setText(tr("Invalid suffix"));
-            CheckState();
-            return;
-        }
-
-        if (m_suffix != suffix)
-        {
-            QRegularExpression const rx(NameRegExp());
-            const QStringList uniqueNames = data->AllUniqueNames();
-            for (const auto &uniqueName : uniqueNames)
-            {
-                const QString name = uniqueName + suffix;
-                if (not rx.match(name).hasMatch() || not data->IsUnique(name))
-                {
-                    flagName = false;
-                    ChangeColor(ui->labelSuffix, errorColor);
-                    ui->labelStatus->setText(tr("Invalid suffix"));
-                    CheckState();
-                    return;
-                }
-            }
-        }
-
-        flagName = true;
-        ChangeColor(ui->labelSuffix, OkColor(this));
-    }
-    CheckState();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogMove::GroupNameChanged()
 {
     if (const auto *edit = qobject_cast<QLineEdit *>(sender()); edit)
@@ -566,7 +504,7 @@ void DialogMove::GroupNameChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::ShowSourceDetails(int row)
 {
-    ui->lineEditAlias->setDisabled(true);
+    ui->lineEditName->setDisabled(true);
     ui->comboBoxPenStyle->setDisabled(true);
     ui->pushButtonColor->setDisabled(true);
 
@@ -575,43 +513,38 @@ void DialogMove::ShowSourceDetails(int row)
         return;
     }
 
-    const auto sourceItem = qvariant_cast<SourceItem>(ui->listWidget->item(row)->data(Qt::UserRole));
+    auto *item = ui->listWidget->item(row);
+    if (item == nullptr)
+    {
+        return;
+    }
+
+    const auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
 
     const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
 
     if (obj->getType() == GOType::Point)
     {
-        ui->labelAlias->setText(tr("Label:"));
-
-        ui->comboBoxPenStyle->blockSignals(true);
-        ui->pushButtonColor->blockSignals(true);
+        const QSignalBlocker blockerPenStyle(ui->comboBoxPenStyle);
+        const QSignalBlocker blockerColor(ui->pushButtonColor);
 
         ui->comboBoxPenStyle->setCurrentIndex(-1);
         ui->pushButtonColor->setCurrentColor(QColor());
-
-        ui->comboBoxPenStyle->blockSignals(false);
-        ui->pushButtonColor->blockSignals(false);
     }
     else
     {
-        ui->labelAlias->setText(tr("Alias:"));
-
         auto SetValue = [](QComboBox *box, const QString &value, const QString &def)
         {
-            box->blockSignals(true);
+            const QSignalBlocker blocker(box);
 
-            int index = box->findData(value);
-            if (index != -1)
+            if (int index = box->findData(value); index != -1)
             {
                 box->setCurrentIndex(index);
             }
             else
             {
-                index = box->findData(def);
-                box->setCurrentIndex(index);
+                box->setCurrentIndex(box->findData(def));
             }
-
-            box->blockSignals(false);
         };
 
         SetValue(ui->comboBoxPenStyle, sourceItem.penStyle, TypeLineDefault);
@@ -623,12 +556,10 @@ void DialogMove::ShowSourceDetails(int row)
             ui->comboBoxPenStyle->setItemText(index, '<' + tr("Default") + '>');
         }
 
-        ui->pushButtonColor->blockSignals(true);
-
+        QSignalBlocker blockerColor(ui->pushButtonColor);
         QColor const color(sourceItem.color);
         ui->pushButtonColor->setCurrentColor(color.isValid() ? color : ColorDefault);
-
-        ui->pushButtonColor->blockSignals(false);
+        blockerColor.unblock();
 
         if (sourceItem.color.isEmpty() || sourceItem.color == ColorDefault)
         {
@@ -640,17 +571,18 @@ void DialogMove::ShowSourceDetails(int row)
         ui->pushButtonColor->setEnabled(true);
     }
 
-    ui->lineEditAlias->blockSignals(true);
-    ui->lineEditAlias->setText(sourceItem.alias);
-    ui->lineEditAlias->setEnabled(true);
-    ui->lineEditAlias->blockSignals(false);
+    const QSignalBlocker blockerName(ui->lineEditName);
+    ui->lineEditName->setText(sourceItem.name);
+    ui->lineEditName->setEnabled(true);
 
-    SetAliasValid(sourceItem.id,
-                  SourceAliasValid(sourceItem, obj, data, OriginAlias(sourceItem.id, sourceObjects, obj)));
+    const bool nameValid = IsValidSourceItem(sourceItem.id, m_sourceObjects, data);
+    item->setText(nameValid ? obj->ObjectName() : obj->ObjectName() + '*');
+
+    ChangeColor(ui->labelName, nameValid ? OkColor(this) : errorColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogMove::AliasChanged(const QString &text)
+void DialogMove::NameChanged(const QString &text)
 {
     if (ui->listWidget->count() == 0)
     {
@@ -660,11 +592,24 @@ void DialogMove::AliasChanged(const QString &text)
     if (auto *item = ui->listWidget->currentItem())
     {
         auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
-        sourceItem.alias = text;
+        sourceItem.name = text;
 
         item->setData(Qt::UserRole, QVariant::fromValue(sourceItem));
 
-        ValidateSourceAliases();
+        const QVector<SourceItem> objects = SaveSourceObjects();
+        const bool valid = IsValidSourceItem(sourceItem.id, objects, data);
+
+        const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
+        item->setText(valid ? obj->ObjectName() : obj->ObjectName() + '*');
+        ChangeColor(ui->labelName, valid ? OkColor(this) : errorColor);
+
+        if (!valid)
+        {
+            ui->labelStatus->setText(obj->getType() == GOType::Point ? tr("Invalid label") : tr("Invalid name"));
+        }
+
+        flagName = valid;
+        CheckState();
     }
 }
 
@@ -710,27 +655,15 @@ void DialogMove::ShowVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::SaveData()
 {
-    m_suffix = ui->lineEditSuffix->text();
     formulaAngle = ui->plainTextEditAngle->toPlainText();
     formulaRotationAngle = ui->plainTextEditRotationAngle->toPlainText();
     formulaLength = ui->plainTextEditLength->toPlainText();
-
-    sourceObjects.clear();
-    sourceObjects.reserve(ui->listWidget->count());
-
-    for (int i = 0; i < ui->listWidget->count(); ++i)
-    {
-        if (const QListWidgetItem *item = ui->listWidget->item(i))
-        {
-            auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
-            sourceObjects.append(sourceItem);
-        }
-    }
+    m_sourceObjects = SaveSourceObjects();
 
     auto *operation = qobject_cast<VisToolMove *>(vis);
     SCASSERT(operation != nullptr)
 
-    operation->SetObjects(SourceToObjects(sourceObjects));
+    operation->SetObjects(SourceToObjects(m_sourceObjects));
     operation->SetAngle(formulaAngle);
     operation->SetLength(formulaLength);
     operation->SetRotationAngle(formulaRotationAngle);
@@ -762,18 +695,18 @@ void DialogMove::closeEvent(QCloseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogMove::GetSourceObjects() const -> QVector<SourceItem>
 {
-    return sourceObjects;
+    return m_sourceObjects;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::SetSourceObjects(const QVector<SourceItem> &value)
 {
-    sourceObjects = value;
+    m_sourceObjects = value;
     FillSourceList();
 
     auto *operation = qobject_cast<VisToolMove *>(vis);
     SCASSERT(operation != nullptr)
-    operation->SetObjects(SourceToObjects(sourceObjects));
+    operation->SetObjects(SourceToObjects(m_sourceObjects));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -827,16 +760,16 @@ void DialogMove::EvalLength()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::FillSourceList()
 {
-    ui->listWidget->blockSignals(true);
+    QSignalBlocker blocker(ui->listWidget);
 
     ui->listWidget->clear();
 
     int row = -1;
 
-    for (auto &sourceItem : sourceObjects)
+    for (const auto &sourceItem : std::as_const(m_sourceObjects))
     {
         const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
-        bool const valid = SourceAliasValid(sourceItem, obj, data, OriginAlias(sourceItem.id, sourceObjects, obj));
+        const bool valid = IsValidSourceItem(sourceItem.id, m_sourceObjects, data);
 
         auto *item = new QListWidgetItem(valid ? obj->ObjectName() : obj->ObjectName() + '*');
         item->setToolTip(obj->ObjectName());
@@ -844,59 +777,11 @@ void DialogMove::FillSourceList()
         ui->listWidget->insertItem(++row, item);
     }
 
-    ui->listWidget->blockSignals(false);
+    blocker.unblock();
 
     if (ui->listWidget->count() > 0)
     {
         ui->listWidget->setCurrentRow(0);
-    }
-
-    ValidateSourceAliases();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogMove::ValidateSourceAliases()
-{
-    for (int i = 0; i < ui->listWidget->count(); ++i)
-    {
-        if (const QListWidgetItem *item = ui->listWidget->item(i))
-        {
-            auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
-
-            const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
-
-            if (not SourceAliasValid(sourceItem, obj, data, OriginAlias(sourceItem.id, sourceObjects, obj)))
-            {
-                flagAlias = false;
-                ui->labelStatus->setText(obj->getType() == GOType::Point ? tr("Invalid label") : tr("Invalid alias"));
-                SetAliasValid(sourceItem.id, false);
-                CheckState();
-                return;
-            }
-
-            SetAliasValid(sourceItem.id, true);
-        }
-    }
-
-    flagAlias = true;
-    CheckState();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogMove::SetAliasValid(quint32 id, bool valid)
-{
-    if (ui->listWidget->currentRow() != -1)
-    {
-        auto *item = ui->listWidget->item(ui->listWidget->currentRow());
-        const auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
-
-        if (id == sourceItem.id)
-        {
-            const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
-            item->setText(valid ? obj->ObjectName() : obj->ObjectName() + '*');
-
-            ChangeColor(ui->labelAlias, valid ? OkColor(this) : errorColor);
-        }
     }
 }
 
@@ -917,6 +802,24 @@ void DialogMove::InitIcons()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto DialogMove::SaveSourceObjects() const -> QVector<SourceItem>
+{
+    QVector<SourceItem> objects;
+    objects.reserve(ui->listWidget->count());
+
+    for (int i = 0; i < ui->listWidget->count(); ++i)
+    {
+        if (const QListWidgetItem *item = ui->listWidget->item(i))
+        {
+            const auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
+            objects.append(sourceItem);
+        }
+    }
+
+    return objects;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogMove::SetNotes(const QString &notes)
 {
     ui->plainTextEditToolNotes->setPlainText(notes);
@@ -931,7 +834,7 @@ auto DialogMove::GetNotes() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogMove::IsValid() const -> bool
 {
-    bool const ready = flagAngle && flagRotationAngle && flagLength && flagName && flagGroupName && flagAlias;
+    bool const ready = flagAngle && flagRotationAngle && flagLength && flagName && flagGroupName;
 
     if (ready)
     {

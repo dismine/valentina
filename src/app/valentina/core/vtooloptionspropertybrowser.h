@@ -89,8 +89,6 @@ private:
 
     template <class Tool> void SetPointName2(VPE::VProperty *property);
 
-    template <class Tool> void SetOperationSuffix(VPE::VProperty *property);
-
     template<class Tool>
     void SetSubName(VPE::VProperty *property);
 
@@ -158,8 +156,6 @@ private:
     template <class Tool> void AddPropertyPointName1(Tool *i, const QString &propertyName);
 
     template <class Tool> void AddPropertyPointName2(Tool *i, const QString &propertyName);
-
-    template <class Tool> void AddPropertyOperationSuffix(Tool *i, const QString &propertyName, bool readOnly = false);
 
     template <class Tool> void AddPropertyCrossPoint(Tool *i, const QString &propertyName);
 

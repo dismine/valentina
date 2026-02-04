@@ -93,39 +93,6 @@ private:
     QString formulaAngle;
 
     explicit VToolRotation(const VToolRotationInitData &initData, QGraphicsItem *parent = nullptr);
-
-    static auto CreatePoint(quint32 idTool, const SourceItem &sItem, const QPointF &origin, qreal angle,
-                            const QString &suffix, VContainer *data) -> DestinationItem;
-
-    template <class Item>
-    static auto CreateItem(quint32 idTool, const SourceItem &sItem, const QPointF &origin, qreal angle,
-                           const QString &suffix, VContainer *data) -> DestinationItem;
-    template <class Item>
-    static auto CreateArc(quint32 idTool, const SourceItem &sItem, const QPointF &origin, qreal angle,
-                          const QString &suffix, VContainer *data) -> DestinationItem;
-    template <class Item>
-    static auto CreateCurve(quint32 idTool, const SourceItem &sItem, const QPointF &origin, qreal angle,
-                            const QString &suffix, VContainer *data) -> DestinationItem;
-    template <class Item>
-    static auto CreateCurveWithSegments(quint32 idTool, const SourceItem &sItem, const QPointF &origin, qreal angle,
-                                        const QString &suffix, VContainer *data) -> DestinationItem;
-
-    static void UpdatePoint(quint32 idTool, const SourceItem &sItem, const QPointF &origin, qreal angle,
-                            const QString &suffix, VContainer *data, const DestinationItem &item);
-    template <class Item>
-    static void UpdateItem(quint32 idTool, const SourceItem &sItem, const QPointF &origin, qreal angle,
-                           const QString &suffix, VContainer *data, quint32 id);
-    template <class Item>
-    static void UpdateArc(quint32 idTool, const SourceItem &sItem, const QPointF &origin, qreal angle,
-                          const QString &suffix, VContainer *data, quint32 id);
-    template <class Item>
-    static void UpdateCurve(quint32 idTool, const SourceItem &sItem, const QPointF &origin, qreal angle,
-                            const QString &suffix, VContainer *data, quint32 id);
-    template <class Item>
-    static void UpdateCurveWithSegments(quint32 idTool, const SourceItem &sItem, const QPointF &origin, qreal angle,
-                                        const QString &suffix, VContainer *data, quint32 id);
-
-    static void CreateDestination(VToolRotationInitData &initData);
 };
 
 #endif // VTOOLROTATION_H

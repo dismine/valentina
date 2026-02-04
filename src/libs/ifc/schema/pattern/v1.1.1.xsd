@@ -223,6 +223,7 @@
                                     <xs:complexType>
                                       <xs:attribute name="idObject" type="xs:unsignedInt" use="required"/>
                                       <xs:attribute name="alias" type="nameSuffix"/>
+                                      <xs:attribute name="name" type="nameSuffix" use="required"/>
                                       <xs:attribute name="color" type="operationColors"/>
                                       <xs:attribute name="penStyle" type="operationPenStyle"/> 
                                     </xs:complexType>
@@ -250,7 +251,7 @@
                           <xs:attribute name="angle" type="xs:string"/>
                           <xs:attribute name="rotationAngle" type="xs:string"/>
                           <xs:attribute name="length" type="xs:string"/>
-                          <xs:attribute name="suffix" type="xs:string"/>
+                          <xs:attribute name="suffix" type="nameSuffix"/>
                           <xs:attribute name="type" type="xs:string" use="required"/>
                           <xs:attribute name="p1Line" type="xs:unsignedInt"/>
                           <xs:attribute name="p2Line" type="xs:unsignedInt"/>

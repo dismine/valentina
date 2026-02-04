@@ -1111,7 +1111,6 @@ auto VPatternRecipe::Rotation(const VToolRecord &record, const VContainer &data)
     SetAttribute(step, AttrType, VToolRotation::ToolType);
     SetAttribute(step, AttrCenter, tool->OriginPointName());
     Formula(step, tool->GetFormulaAngle(), AttrAngle, AttrAngleValue);
-    SetAttribute(step, AttrSuffix, tool->Suffix());
 
     step.appendChild(GroupOperationSource(tool, record.GetId(), data));
 
@@ -1128,7 +1127,6 @@ auto VPatternRecipe::FlippingByLine(const VToolRecord &record, const VContainer 
     SetAttribute(step, AttrType, VToolFlippingByLine::ToolType);
     SetAttribute(step, AttrP1Line, tool->FirstLinePointName());
     SetAttribute(step, AttrP2Line, tool->SecondLinePointName());
-    SetAttribute(step, AttrSuffix, tool->Suffix());
 
     step.appendChild(GroupOperationSource(tool, record.GetId(), data));
 
@@ -1145,7 +1143,6 @@ auto VPatternRecipe::FlippingByAxis(const VToolRecord &record, const VContainer 
     SetAttribute(step, AttrType, VToolFlippingByAxis::ToolType);
     SetAttribute(step, AttrCenter, tool->OriginPointName());
     SetAttribute(step, AttrAxisType, static_cast<int>(tool->GetAxisType()));
-    SetAttribute(step, AttrSuffix, tool->Suffix());
 
     step.appendChild(GroupOperationSource(tool, record.GetId(), data));
 
@@ -1164,7 +1161,6 @@ auto VPatternRecipe::Move(const VToolRecord &record, const VContainer &data) -> 
     Formula(step, tool->GetFormulaRotationAngle(), AttrRotationAngle, AttrRotationAngleValue);
     Formula(step, tool->GetFormulaLength(), AttrLength, AttrLengthValue);
     SetAttribute(step, AttrCenter, tool->OriginPointName());
-    SetAttribute(step, AttrSuffix, tool->Suffix());
 
     step.appendChild(GroupOperationSource(tool, record.GetId(), data));
 
@@ -1327,8 +1323,7 @@ auto VPatternRecipe::GroupOperationSource(VAbstractOperation *tool, quint32 id, 
         }
 
         SetAttribute(node, AttrItem, obj->ObjectName());
-        SetAttributeOrRemoveIf<QString>(node, AttrAlias, item.alias,
-                                        [](const QString &alias) noexcept { return alias.isEmpty(); });
+        SetAttribute(node, AttrName, item.name);
 
         if (obj->getType() != GOType::Point)
         {

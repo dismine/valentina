@@ -3658,7 +3658,10 @@ void VPattern::ParseToolRotation(VMainGraphicsScene *scene, QDomElement &domElem
         initData.origin = GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
         initData.angle = GetParametrString(domElement, AttrAngle, QStringLiteral("10"));
         const QString a = initData.angle; // need for saving fixed formula;
-        initData.suffix = GetParametrString(domElement, AttrSuffix, QString());
+
+        // We no longer need to handle suffix attribute here. The code can be removed.
+        Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
+        initData.suffix = GetParametrEmptyString(domElement, AttrSuffix);
 
         VAbstractOperation::ExtractData(domElement, initData);
 
@@ -3703,7 +3706,10 @@ void VPattern::ParseToolFlippingByLine(VMainGraphicsScene *scene, QDomElement &d
         DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
         initData.firstLinePointId = GetParametrUInt(domElement, AttrP1Line, NULL_ID_STR);
         initData.secondLinePointId = GetParametrUInt(domElement, AttrP2Line, NULL_ID_STR);
-        initData.suffix = GetParametrString(domElement, AttrSuffix, QString());
+
+        // We no longer need to handle suffix attribute here. The code can be removed.
+        Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
+        initData.suffix = GetParametrEmptyString(domElement, AttrSuffix);
 
         VAbstractOperation::ExtractData(domElement, initData);
 
@@ -3735,7 +3741,10 @@ void VPattern::ParseToolFlippingByAxis(VMainGraphicsScene *scene, QDomElement &d
         DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
         initData.originPointId = GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
         initData.axisType = static_cast<AxisType>(GetParametrUInt(domElement, AttrAxisType, QChar('1')));
-        initData.suffix = GetParametrString(domElement, AttrSuffix, QString());
+
+        // We no longer need to handle suffix attribute here. The code can be removed.
+        Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
+        initData.suffix = GetParametrEmptyString(domElement, AttrSuffix);
 
         VAbstractOperation::ExtractData(domElement, initData);
 
@@ -3771,8 +3780,11 @@ void VPattern::ParseToolMove(VMainGraphicsScene *scene, QDomElement &domElement,
         const QString r = initData.formulaRotationAngle; // need for saving fixed formula;
         initData.formulaLength = GetParametrString(domElement, AttrLength, QChar('0'));
         const QString len = initData.formulaLength; // need for saving fixed formula;
-        initData.suffix = GetParametrString(domElement, AttrSuffix, QString());
         initData.rotationOrigin = GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
+
+        // We no longer need to handle suffix attribute here. The code can be removed.
+        Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
+        initData.suffix = GetParametrEmptyString(domElement, AttrSuffix);
 
         VAbstractOperation::ExtractData(domElement, initData);
 

@@ -36,6 +36,7 @@
 #include "../../../undocommands/savetooloptions.h"
 #include "../../../undocommands/undogroup.h"
 #include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatternconverter.h"
 #include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/compatibility.h"
@@ -111,21 +112,6 @@ auto VAbstractOperation::IsRemovable() const -> RemoveStatus
     }
 
     return RemoveStatus::Removable;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VAbstractOperation::Suffix() const -> QString
-{
-    return suffix;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractOperation::SetSuffix(const QString &suffix)
-{
-    // Don't know if need check name here.
-    this->suffix = suffix;
-    QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(m_id);
-    SaveOption(obj);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -257,8 +243,18 @@ auto VAbstractOperation::ExtractSourceData(const QDomElement &domElement) -> QVe
             {
                 if (const QDomElement element = QDOM_ELEMENT(srcList, j).toElement(); not element.isNull())
                 {
+                    // We no longer need to handle alias attribute here. The code can be removed.
+                    // Name must be mandatory
+                    Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
+                    const QString alias = VDomDocument::GetParametrEmptyString(element, AttrAlias);
+                    QString name = VDomDocument::GetParametrEmptyString(element, AttrName);
+                    if (name.isEmpty() && !alias.isEmpty())
+                    {
+                        name = alias;
+                    }
+
                     source.append({.id = VDomDocument::GetParametrUInt(element, AttrIdObject, NULL_ID_STR),
-                                   .alias = VDomDocument::GetParametrEmptyString(element, AttrAlias),
+                                   .name = name,
                                    .penStyle = VDomDocument::GetParametrString(element, AttrPenStyle, TypeLineDefault),
                                    .color = VDomDocument::GetParametrString(element, AttrColor, ColorDefault)});
                 }
@@ -593,7 +589,6 @@ void VAbstractOperation::LabelChangePosition(const QPointF &pos, quint32 labelId
 VAbstractOperation::VAbstractOperation(const VAbstractOperationInitData &initData, QGraphicsItem *parent)
   : VDrawTool(initData.doc, initData.data, initData.id, initData.notes),
     QGraphicsLineItem(parent),
-    suffix(initData.suffix),
     source(initData.source),
     destination(initData.destination)
 {
@@ -698,10 +693,7 @@ void VAbstractOperation::ApplyToolOptions(const QDomElement &oldDomElement, cons
             connect(delGroup, &DelGroup::UpdateGroups, doc, &VAbstractPattern::UpdateVisiblityGroups);
             VAbstractApplication::VApp()->getUndoStack()->push(delGroup);
         }
-    }
 
-    if (updateVisibilityOptions)
-    {
         VAbstractApplication::VApp()->getUndoStack()->endMacro();
     }
 }
@@ -741,7 +733,6 @@ void VAbstractOperation::ReadToolAttributes(const QDomElement &domElement)
 
     source = ExtractSourceData(domElement);
     destination = ExtractDestinationData(domElement);
-    suffix = VDomDocument::GetParametrString(domElement, AttrSuffix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -749,7 +740,12 @@ void VAbstractOperation::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> 
 {
     VDrawTool::SaveOptions(tag, obj);
 
-    doc->SetAttribute(tag, AttrSuffix, suffix);
+    // We no longer need to handle suffix attribute here. The code can be removed.
+    Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
+    if (tag.hasAttribute(AttrSuffix))
+    {
+        tag.removeAttribute(AttrSuffix);
+    }
 
     SaveSourceDestination(tag);
 }
@@ -786,10 +782,7 @@ void VAbstractOperation::SaveSourceDestination(QDomElement &tag)
     {
         QDomElement item = doc->createElement(TagItem);
         doc->SetAttribute(item, AttrIdObject, sItem.id);
-        doc->SetAttributeOrRemoveIf<QString>(item,
-                                             AttrAlias,
-                                             sItem.alias,
-                                             [](const QString &alias) noexcept -> bool { return alias.isEmpty(); });
+        doc->SetAttribute(item, AttrName, sItem.name);
         doc->SetAttributeOrRemoveIf<QString>(item,
                                              AttrPenStyle,
                                              sItem.penStyle,
@@ -1047,5 +1040,36 @@ void VAbstractOperation::CreateVisibilityGroup(const VAbstractOperationInitData 
         auto *addGroup = new AddGroup(group, initData.doc);
         connect(addGroup, &AddGroup::UpdateGroups, initData.doc, &VAbstractPattern::UpdateVisiblityGroups);
         VAbstractApplication::VApp()->getUndoStack()->push(addGroup);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractOperation::PrepareNames(VAbstractOperationInitData &initData)
+{
+    // We no longer need to handle suffix attribute here. The code can be removed.
+    Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
+    if (initData.suffix.isEmpty())
+    {
+        return;
+    }
+
+    for (int i = 0; i < initData.source.size(); ++i)
+    {
+        SourceItem &object = initData.source[i];
+
+        if (!object.name.isEmpty())
+        {
+            continue;
+        }
+
+        if (const QSharedPointer<VGObject> obj = initData.data->GetGObject(object.id); obj->getType() == GOType::Point)
+        {
+            object.name = obj->name() + initData.suffix;
+        }
+        else
+        {
+            QSharedPointer<VAbstractCurve> const curve = initData.data->GeometricObject<VAbstractCurve>(object.id);
+            object.name = curve->HeadlessName() + initData.suffix;
+        }
     }
 }

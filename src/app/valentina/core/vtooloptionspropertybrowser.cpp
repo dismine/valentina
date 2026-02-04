@@ -727,17 +727,6 @@ template <class Tool> void VToolOptionsPropertyBrowser::AddPropertyPointName2(To
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <class Tool>
-void VToolOptionsPropertyBrowser::AddPropertyOperationSuffix(Tool *i, const QString &propertyName, bool readOnly)
-{
-    auto *itemSuffix = new VPE::VStringProperty(propertyName);
-    itemSuffix->setClearButtonEnable(true);
-    itemSuffix->setValue(i->Suffix());
-    itemSuffix->setReadOnly(readOnly);
-    AddProperty(itemSuffix, AttrSuffix);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::AddPropertyParentPointName(const QString &pointName, const QString &propertyName,
                                                              const QString &propertyAttribure)
 {
@@ -1025,44 +1014,6 @@ template <class Tool> void VToolOptionsPropertyBrowser::SetPointName2(VPE::VProp
         {
             i->setNameP2(name);
         }
-    }
-    else
-    {
-        qWarning() << "Can't cast item";
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <class Tool> void VToolOptionsPropertyBrowser::SetOperationSuffix(VPE::VProperty *property)
-{
-    if (auto *item = qgraphicsitem_cast<Tool *>(m_currentItem))
-    {
-        QString const suffix = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
-
-        if (suffix == item->Suffix())
-        {
-            return;
-        }
-
-        if (suffix.isEmpty())
-        {
-            m_idToProperty[AttrSuffix]->setValue(item->Suffix());
-            return;
-        }
-
-        QRegularExpression const rx(NameRegExp());
-        const QStringList uniqueNames = VContainer::AllUniqueNames(valentinaNamespace);
-        for (const auto &uniqueName : uniqueNames)
-        {
-            const QString name = uniqueName + suffix;
-            if (not rx.match(name).hasMatch() || not VContainer::IsUnique(name, valentinaNamespace))
-            {
-                m_idToProperty[AttrSuffix]->setValue(item->Suffix());
-                return;
-            }
-        }
-
-        item->SetSuffix(suffix);
     }
     else
     {
@@ -2632,9 +2583,6 @@ void VToolOptionsPropertyBrowser::ChangeDataToolRotation(VPE::VProperty *propert
 
     switch (PropertiesList().indexOf(id))
     {
-        case 38: // AttrSuffix
-            SetOperationSuffix<VToolRotation>(property);
-            break;
         case 5: // AttrAngle
             SetFormulaAngle<VToolRotation>(property);
             break;
@@ -2658,9 +2606,6 @@ void VToolOptionsPropertyBrowser::ChangeDataToolMove(VPE::VProperty *property)
 
     switch (PropertiesList().indexOf(id))
     {
-        case 38: // AttrSuffix
-            SetOperationSuffix<VToolMove>(property);
-            break;
         case 5: // AttrAngle
             SetFormulaAngle<VToolMove>(property);
             break;
@@ -2690,9 +2635,6 @@ void VToolOptionsPropertyBrowser::ChangeDataToolFlippingByLine(VPE::VProperty *p
 
     switch (PropertiesList().indexOf(id))
     {
-        case 38: // AttrSuffix
-            SetOperationSuffix<VToolFlippingByLine>(property);
-            break;
         case 61: // AttrNotes
             SetNotes<VToolFlippingByLine>(property);
             break;
@@ -2716,9 +2658,6 @@ void VToolOptionsPropertyBrowser::ChangeDataToolFlippingByAxis(VPE::VProperty *p
     {
         case 39: // AttrAxisType
             SetAxisType<VToolFlippingByAxis>(property);
-            break;
-        case 38: // AttrSuffix
-            SetOperationSuffix<VToolFlippingByAxis>(property);
             break;
         case 61: // AttrNotes
             SetNotes<VToolFlippingByAxis>(property);
@@ -3612,7 +3551,6 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolRotation(QGraphicsItem *item)
     i->ShowVisualization(true);
     m_formView->setTitle(tr("Tool rotation"));
 
-    AddPropertyOperationSuffix(i, tr("Suffix:"));
     AddPropertyParentPointName(i->OriginPointName(), tr("Origin point:"), AttrCenter);
     AddPropertyFormula(tr("Angle:"), i->GetFormulaAngle(), AttrAngle);
     AddPropertyText(tr("Notes:"), i->GetNotes(), AttrNotes);
@@ -3625,7 +3563,6 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolMove(QGraphicsItem *item)
     i->ShowVisualization(true);
     m_formView->setTitle(tr("Tool move"));
 
-    AddPropertyOperationSuffix(i, tr("Suffix:"));
     AddPropertyFormula(tr("Angle:"), i->GetFormulaAngle(), AttrAngle);
     AddPropertyFormula(tr("Length:"), i->GetFormulaLength(), AttrLength);
     AddPropertyFormula(tr("Rotation angle:"), i->GetFormulaRotationAngle(), AttrRotationAngle);
@@ -3640,7 +3577,6 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolFlippingByLine(QGraphicsItem *i
     i->ShowVisualization(true);
     m_formView->setTitle(tr("Tool flipping by line"));
 
-    AddPropertyOperationSuffix(i, tr("Suffix:"));
     AddPropertyParentPointName(i->FirstLinePointName(), tr("First line point:"), AttrFirstPoint);
     AddPropertyParentPointName(i->SecondLinePointName(), tr("Second line point:"), AttrSecondPoint);
     AddPropertyText(tr("Notes:"), i->GetNotes(), AttrNotes);
@@ -3654,7 +3590,6 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolFlippingByAxis(QGraphicsItem *i
     m_formView->setTitle(tr("Tool flipping by axis"));
 
     AddPropertyAxisType(i, tr("Axis type:"));
-    AddPropertyOperationSuffix(i, tr("Suffix:"));
     AddPropertyParentPointName(i->OriginPointName(), tr("Origin point:"), AttrCenter);
     AddPropertyText(tr("Notes:"), i->GetNotes(), AttrNotes);
 }
@@ -4629,7 +4564,6 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCurveIntersectAxis()
 void VToolOptionsPropertyBrowser::UpdateOptionsToolRotation()
 {
     auto *i = qgraphicsitem_cast<VToolRotation *>(m_currentItem);
-    m_idToProperty[AttrSuffix]->setValue(i->Suffix());
 
     QVariant valueAngle;
     valueAngle.setValue(i->GetFormulaAngle());
@@ -4646,7 +4580,6 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolRotation()
 void VToolOptionsPropertyBrowser::UpdateOptionsToolMove()
 {
     auto *i = qgraphicsitem_cast<VToolMove *>(m_currentItem);
-    m_idToProperty[AttrSuffix]->setValue(i->Suffix());
 
     QVariant valueAngle;
     valueAngle.setValue(i->GetFormulaAngle());
@@ -4671,7 +4604,6 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolMove()
 void VToolOptionsPropertyBrowser::UpdateOptionsToolFlippingByLine()
 {
     auto *i = qgraphicsitem_cast<VToolFlippingByLine *>(m_currentItem);
-    m_idToProperty[AttrSuffix]->setValue(i->Suffix());
 
     QVariant valueFirstPoint;
     valueFirstPoint.setValue(i->FirstLinePointName());
@@ -4689,7 +4621,6 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolFlippingByAxis()
 {
     auto *i = qgraphicsitem_cast<VToolFlippingByAxis *>(m_currentItem);
     m_idToProperty[AttrAxisType]->setValue(static_cast<int>(i->GetAxisType()) - 1);
-    m_idToProperty[AttrSuffix]->setValue(i->Suffix());
 
     QVariant valueOriginPoint;
     valueOriginPoint.setValue(i->OriginPointName());
