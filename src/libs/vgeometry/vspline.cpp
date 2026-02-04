@@ -348,22 +348,19 @@ VSpline::VSpline(const VPointF &p1, const VPointF &p4, qreal angle1, const QStri
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VSpline::Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix) const -> VSpline
+auto VSpline::Rotate(const QPointF &originPoint, qreal degrees, const QString &name) const -> VSpline
 {
-    const VPointF p1 = GetP1().Rotate(originPoint, degrees);
-    const VPointF p4 = GetP4().Rotate(originPoint, degrees);
+    const VPointF p1 = GetP1().Rotate(originPoint, degrees, "X1"_L1);
+    const VPointF p4 = GetP4().Rotate(originPoint, degrees, "X1"_L1);
 
     const QPointF p2 = VPointF::RotatePF(originPoint, static_cast<QPointF>(GetP2()), degrees);
     const QPointF p3 = VPointF::RotatePF(originPoint, static_cast<QPointF>(GetP3()), degrees);
 
     VSpline spl(p1, p2, p3, p4);
-    spl.setName(name() + prefix);
-
-    if (not GetAliasSuffix().isEmpty())
+    if (!name.isEmpty())
     {
-        spl.SetAliasSuffix(GetAliasSuffix() + prefix);
+        spl.setName(spl.GetTypeHead() + name);
     }
-
     spl.SetColor(GetColor());
     spl.SetPenStyle(GetPenStyle());
     spl.SetApproximationScale(GetApproximationScale());
@@ -371,22 +368,19 @@ auto VSpline::Rotate(const QPointF &originPoint, qreal degrees, const QString &p
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VSpline::Flip(const QLineF &axis, const QString &prefix) const -> VSpline
+auto VSpline::Flip(const QLineF &axis, const QString &name) const -> VSpline
 {
-    const VPointF p1 = GetP1().Flip(axis);
-    const VPointF p4 = GetP4().Flip(axis);
+    const VPointF p1 = GetP1().Flip(axis, "X1"_L1);
+    const VPointF p4 = GetP4().Flip(axis, "X4"_L1);
 
     const QPointF p2 = VPointF::FlipPF(axis, static_cast<QPointF>(GetP2()));
     const QPointF p3 = VPointF::FlipPF(axis, static_cast<QPointF>(GetP3()));
 
     VSpline spl(p1, p2, p3, p4);
-    spl.setName(name() + prefix);
-
-    if (not GetAliasSuffix().isEmpty())
+    if (!name.isEmpty())
     {
-        spl.SetAliasSuffix(GetAliasSuffix() + prefix);
+        spl.setName(spl.GetTypeHead() + name);
     }
-
     spl.SetColor(GetColor());
     spl.SetPenStyle(GetPenStyle());
     spl.SetApproximationScale(GetApproximationScale());
@@ -394,22 +388,19 @@ auto VSpline::Flip(const QLineF &axis, const QString &prefix) const -> VSpline
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VSpline::Move(qreal length, qreal angle, const QString &prefix) const -> VSpline
+auto VSpline::Move(qreal length, qreal angle, const QString &name) const -> VSpline
 {
-    const VPointF p1 = GetP1().Move(length, angle);
-    const VPointF p4 = GetP4().Move(length, angle);
+    const VPointF p1 = GetP1().Move(length, angle, "X1"_L1);
+    const VPointF p4 = GetP4().Move(length, angle, "X4"_L1);
 
     const QPointF p2 = VPointF::MovePF(static_cast<QPointF>(GetP2()), length, angle);
     const QPointF p3 = VPointF::MovePF(static_cast<QPointF>(GetP3()), length, angle);
 
     VSpline spl(p1, p2, p3, p4);
-    spl.setName(name() + prefix);
-
-    if (not GetAliasSuffix().isEmpty())
+    if (!name.isEmpty())
     {
-        spl.SetAliasSuffix(GetAliasSuffix() + prefix);
+        spl.setName(spl.GetTypeHead() + name);
     }
-
     spl.SetColor(GetColor());
     spl.SetPenStyle(GetPenStyle());
     spl.SetApproximationScale(GetApproximationScale());
@@ -457,7 +448,7 @@ auto VSpline::Offset(qreal distance, const QString &name) const -> VSplinePath
     VSplinePath splPath(subSplines);
     if (!name.isEmpty())
     {
-        splPath.setName(splPath_V + '_'_L1 + name);
+        splPath.setName(splPath.GetTypeHead() + name);
         splPath.SetMainNameForHistory(name);
     }
 
@@ -476,7 +467,7 @@ auto VSpline::Outline(const QVector<qreal> &distances, const QString &name) cons
     VSplinePath splPath(subSplines);
     if (!name.isEmpty())
     {
-        splPath.setName(splPath_V + '_'_L1 + name);
+        splPath.setName(splPath.GetTypeHead() + name);
         splPath.SetMainNameForHistory(name);
     }
 

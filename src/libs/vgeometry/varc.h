@@ -61,9 +61,9 @@ public:
     VArc(const VArc &arc);
     ~VArc() override;
 
-    auto Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const -> VArc;
-    auto Flip(const QLineF &axis, const QString &prefix = QString()) const -> VArc;
-    auto Move(qreal length, qreal angle, const QString &prefix = QString()) const -> VArc;
+    auto Rotate(const QPointF &originPoint, qreal degrees, const QString &name = QString()) const -> VArc;
+    auto Flip(const QLineF &axis, const QString &name = QString()) const -> VArc;
+    auto Move(qreal length, qreal angle, const QString &name = QString()) const -> VArc;
 
     auto operator=(const VArc &arc) -> VArc &;
 

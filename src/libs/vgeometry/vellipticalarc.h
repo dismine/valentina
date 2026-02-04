@@ -63,9 +63,9 @@ public:
     VEllipticalArc(const VEllipticalArc &arc);
     ~VEllipticalArc() override;
 
-    auto Rotate(QPointF originPoint, qreal degrees, const QString &prefix = QString()) const -> VEllipticalArc;
-    auto Flip(const QLineF &axis, const QString &prefix = QString()) const -> VEllipticalArc;
-    auto Move(qreal length, qreal angle, const QString &prefix = QString()) const -> VEllipticalArc;
+    auto Rotate(QPointF originPoint, qreal degrees, const QString &name = QString()) const -> VEllipticalArc;
+    auto Flip(const QLineF &axis, const QString &name = QString()) const -> VEllipticalArc;
+    auto Move(qreal length, qreal angle, const QString &name = QString()) const -> VEllipticalArc;
 
     auto operator=(const VEllipticalArc &arc) -> VEllipticalArc &;
 

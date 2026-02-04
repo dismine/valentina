@@ -419,7 +419,7 @@ auto VEllipticalArc::operator=(VEllipticalArc &&arc) noexcept -> VEllipticalArc 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VEllipticalArc::Rotate(QPointF originPoint, qreal degrees, const QString &prefix) const -> VEllipticalArc
+auto VEllipticalArc::Rotate(QPointF originPoint, qreal degrees, const QString &name) const -> VEllipticalArc
 {
     originPoint = d->m_transform.inverted().map(originPoint);
 
@@ -428,15 +428,18 @@ auto VEllipticalArc::Rotate(QPointF originPoint, qreal degrees, const QString &p
     t.rotate(-degrees);
     t.translate(-originPoint.x(), -originPoint.y());
 
-    VEllipticalArc elArc(VAbstractArc::GetCenter(), d->radius1, d->radius2, VAbstractArc::GetStartAngle(),
-                         VAbstractArc::GetEndAngle(), d->rotationAngle);
-    elArc.setName(name() + prefix);
-
-    if (not GetAliasSuffix().isEmpty())
+    VPointF center = VAbstractArc::GetCenter();
+    center.setName("X"_L1);
+    VEllipticalArc elArc(center,
+                         d->radius1,
+                         d->radius2,
+                         VAbstractArc::GetStartAngle(),
+                         VAbstractArc::GetEndAngle(),
+                         d->rotationAngle);
+    if (!name.isEmpty())
     {
-        elArc.SetAliasSuffix(GetAliasSuffix() + prefix);
+        elArc.setName(elArc.GetTypeHead() + name);
     }
-
     elArc.SetColor(GetColor());
     elArc.SetPenStyle(GetPenStyle());
     elArc.SetFlipped(IsFlipped());
@@ -446,17 +449,20 @@ auto VEllipticalArc::Rotate(QPointF originPoint, qreal degrees, const QString &p
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VEllipticalArc::Flip(const QLineF &axis, const QString &prefix) const -> VEllipticalArc
+auto VEllipticalArc::Flip(const QLineF &axis, const QString &name) const -> VEllipticalArc
 {
-    VEllipticalArc elArc(VAbstractArc::GetCenter(), d->radius1, d->radius2, VAbstractArc::GetStartAngle(),
-                         VAbstractArc::GetEndAngle(), d->rotationAngle);
-    elArc.setName(name() + prefix);
-
-    if (not GetAliasSuffix().isEmpty())
+    VPointF center = VAbstractArc::GetCenter();
+    center.setName("X"_L1);
+    VEllipticalArc elArc(center,
+                         d->radius1,
+                         d->radius2,
+                         VAbstractArc::GetStartAngle(),
+                         VAbstractArc::GetEndAngle(),
+                         d->rotationAngle);
+    if (!name.isEmpty())
     {
-        elArc.SetAliasSuffix(GetAliasSuffix() + prefix);
+        elArc.setName(elArc.GetTypeHead() + name);
     }
-
     elArc.SetColor(GetColor());
     elArc.SetPenStyle(GetPenStyle());
     elArc.SetFlipped(not IsFlipped());
@@ -466,7 +472,7 @@ auto VEllipticalArc::Flip(const QLineF &axis, const QString &prefix) const -> VE
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VEllipticalArc::Move(qreal length, qreal angle, const QString &prefix) const -> VEllipticalArc
+auto VEllipticalArc::Move(qreal length, qreal angle, const QString &name) const -> VEllipticalArc
 {
     const VPointF oldCenter = VAbstractArc::GetCenter();
     const VPointF center = oldCenter.Move(length, angle);
@@ -479,13 +485,10 @@ auto VEllipticalArc::Move(qreal length, qreal angle, const QString &prefix) cons
 
     VEllipticalArc elArc(oldCenter, d->radius1, d->radius2, VAbstractArc::GetStartAngle(), VAbstractArc::GetEndAngle(),
                          d->rotationAngle);
-    elArc.setName(name() + prefix);
-
-    if (not GetAliasSuffix().isEmpty())
+    if (!name.isEmpty())
     {
-        elArc.SetAliasSuffix(GetAliasSuffix() + prefix);
+        elArc.setName(elArc.GetTypeHead() + name);
     }
-
     elArc.SetColor(GetColor());
     elArc.SetPenStyle(GetPenStyle());
     elArc.SetFlipped(IsFlipped());

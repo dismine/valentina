@@ -133,28 +133,31 @@ VPointF::operator QPointF() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPointF::Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix) const -> VPointF
+auto VPointF::Rotate(const QPointF &originPoint, qreal degrees, const QString &name) const -> VPointF
 {
     const QPointF p = RotatePF(originPoint, toQPointF(), degrees);
-    VPointF rotated(p, name() + prefix, mx(), my());
+    const QString newName = !name.isEmpty() ? name : "X"_L1;
+    VPointF rotated(p, newName, mx(), my());
     rotated.SetShowLabel(IsShowLabel());
     return rotated;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPointF::Flip(const QLineF &axis, const QString &prefix) const -> VPointF
+auto VPointF::Flip(const QLineF &axis, const QString &name) const -> VPointF
 {
     const QPointF p = FlipPF(axis, toQPointF());
-    VPointF flipped(p, name() + prefix, mx(), my());
+    const QString newName = !name.isEmpty() ? name : "X"_L1;
+    VPointF flipped(p, newName, mx(), my());
     flipped.SetShowLabel(IsShowLabel());
     return flipped;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPointF::Move(qreal length, qreal angle, const QString &prefix) const -> VPointF
+auto VPointF::Move(qreal length, qreal angle, const QString &name) const -> VPointF
 {
     const QPointF p = MovePF(toQPointF(), length, angle);
-    VPointF moved(p, name() + prefix, mx(), my());
+    const QString newName = !name.isEmpty() ? name : "X"_L1;
+    VPointF moved(p, newName, mx(), my());
     moved.SetShowLabel(IsShowLabel());
 
     return moved;
