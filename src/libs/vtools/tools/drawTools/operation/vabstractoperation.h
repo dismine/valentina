@@ -172,6 +172,10 @@ protected:
 
     static void PrepareNames(VAbstractOperationInitData &initData);
 
+    void ProcessOperationToolOptions(const QDomElement &oldDomElement,
+                                     const QDomElement &newDomElement,
+                                     const QVector<SourceItem> &newSource);
+
 private:
     Q_DISABLE_COPY_MOVE(VAbstractOperation) // NOLINT
 

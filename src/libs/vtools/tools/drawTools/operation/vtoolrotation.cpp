@@ -583,3 +583,13 @@ auto VToolRotation::MakeToolTip() const -> QString
         .arg(GetFormulaAngle().getDoubleValue())                          // 4
         .arg(VisibilityGroupToolTip());                                   // 5
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolRotation::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogRotation> dialogTool = qobject_cast<DialogRotation *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    ProcessOperationToolOptions(oldDomElement, newDomElement, dialogTool->GetSourceObjects());
+}

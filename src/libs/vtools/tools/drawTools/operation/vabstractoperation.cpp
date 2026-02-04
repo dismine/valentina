@@ -41,6 +41,7 @@
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/compatibility.h"
 #include "../vwidgets/vsimplepoint.h"
+#include "vtools/undocommands/renameobject.h"
 
 using namespace Qt::Literals::StringLiterals;
 
@@ -73,6 +74,20 @@ auto VisibilityGroupDataFromSource(const VContainer *data, const QVector<SourceI
     }
 
     return groupData;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto BuildNameMap(const QVector<SourceItem> &items) -> QMap<quint32, QString>
+{
+    QMap<quint32, QString> names;
+    for (const auto &item : items)
+    {
+        if (item.id != NULL_ID)
+        {
+            names.insert(item.id, item.name);
+        }
+    }
+    return names;
 }
 } // namespace
 
@@ -1072,4 +1087,97 @@ void VAbstractOperation::PrepareNames(VAbstractOperationInitData &initData)
             object.name = curve->HeadlessName() + initData.suffix;
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractOperation::ProcessOperationToolOptions(const QDomElement &oldDomElement,
+                                                     const QDomElement &newDomElement,
+                                                     const QVector<SourceItem> &newSource)
+{
+    // Build maps for efficient lookup by id
+    const QMap<quint32, QString> oldNames = BuildNameMap(source);
+    const QMap<quint32, QString> newNames = BuildNameMap(newSource);
+
+    // Check if there are any name changes
+    if (oldNames == newNames)
+    {
+        VDrawTool::ApplyToolOptions(oldDomElement, newDomElement);
+        return;
+    }
+
+    QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
+    undoStack->beginMacro(tr("save tool options"));
+
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+    saveOptions->SetInGroup(true);
+    connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    undoStack->push(saveOptions);
+
+    const QSet<quint32> oldIds = ConvertToSet<quint32>(oldNames.keys());
+    const QSet<quint32> newIds = ConvertToSet<quint32>(newNames.keys());
+    const QSet<quint32> commonIds = oldIds & newIds;
+
+    // Collect all rename operations first
+    QVector<QPair<quint32, QPair<QString, QString>>> renames;
+    renames.reserve(commonIds.size());
+    for (quint32 const id : std::as_const(commonIds))
+    {
+        const QString oldName = oldNames.value(id);
+        const QString newName = newNames.value(id);
+
+        if (oldName != newName)
+        {
+            renames.append(qMakePair(id, qMakePair(oldName, newName)));
+        }
+    }
+
+    // Process rename operations, connecting signal only for the last one
+    for (int i = 0; i < renames.size(); ++i)
+    {
+        const auto &rename = renames.at(i);
+
+        if (const QSharedPointer<VGObject> obj = VDataTool::data.GetGObject(rename.first);
+            obj->getType() == GOType::Point)
+        {
+            auto *renameLabel = new RenameLabel(rename.second.first, rename.second.second, doc, rename.first);
+
+            if (i == renames.size() - 1) // Last rename operation
+            {
+                connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+            }
+
+            undoStack->push(renameLabel);
+        }
+        else
+        {
+            CurveAliasType type = CurveAliasType::All;
+            if (obj->getType() == GOType::Arc)
+            {
+                type = CurveAliasType::Arc;
+            }
+            else if (obj->getType() == GOType::EllipticalArc)
+            {
+                type = CurveAliasType::ElArc;
+            }
+            else if (obj->getType() == GOType::CubicBezier || obj->getType() == GOType::Spline)
+            {
+                type = CurveAliasType::Spline;
+            }
+            else if (obj->getType() == GOType::CubicBezierPath || obj->getType() == GOType::SplinePath)
+            {
+                type = CurveAliasType::SplinePath;
+            }
+
+            auto *renameName = new RenameAlias(type, rename.second.first, rename.second.second, doc, rename.first);
+
+            if (i == renames.size() - 1) // Last rename operation
+            {
+                connect(renameName, &RenameAlias::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+            }
+
+            undoStack->push(renameName);
+        }
+    }
+
+    undoStack->endMacro();
 }

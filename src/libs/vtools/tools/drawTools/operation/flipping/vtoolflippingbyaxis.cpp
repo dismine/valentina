@@ -287,6 +287,16 @@ auto VToolFlippingByAxis::MakeToolTip() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolFlippingByAxis::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogFlippingByAxis> dialogTool = qobject_cast<DialogFlippingByAxis *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    ProcessOperationToolOptions(oldDomElement, newDomElement, dialogTool->GetSourceObjects());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VToolFlippingByAxis::VToolFlippingByAxis(const VToolFlippingByAxisInitData &initData, QGraphicsItem *parent)
   : VAbstractFlipping(initData, parent),
     m_originPointId(initData.originPointId),

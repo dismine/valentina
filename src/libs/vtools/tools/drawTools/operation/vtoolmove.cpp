@@ -817,6 +817,16 @@ auto VToolMove::MakeToolTip() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolMove::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogMove> dialogTool = qobject_cast<DialogMove *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    ProcessOperationToolOptions(oldDomElement, newDomElement, dialogTool->GetSourceObjects());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VToolMove::VToolMove(const VToolMoveInitData &initData, QGraphicsItem *parent)
   : VAbstractOperation(initData, parent),
     formulaAngle(initData.formulaAngle),

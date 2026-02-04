@@ -282,6 +282,16 @@ auto VToolFlippingByLine::MakeToolTip() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolFlippingByLine::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogFlippingByLine> dialogTool = qobject_cast<DialogFlippingByLine *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    ProcessOperationToolOptions(oldDomElement, newDomElement, dialogTool->GetSourceObjects());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VToolFlippingByLine::VToolFlippingByLine(const VToolFlippingByLineInitData &initData, QGraphicsItem *parent)
   : VAbstractFlipping(initData, parent),
     m_firstLinePointId(initData.firstLinePointId),
