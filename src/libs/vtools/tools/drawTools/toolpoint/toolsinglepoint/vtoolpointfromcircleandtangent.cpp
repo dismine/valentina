@@ -73,6 +73,7 @@ void VToolPointFromCircleAndTangent::SetDialog()
         qobject_cast<DialogPointFromCircleAndTangent *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
+    dialogTool->CheckDependencyTreeComplete();
     dialogTool->SetCircleCenterId(circleCenterId);
     dialogTool->SetCircleRadius(circleRadius);
     dialogTool->SetCrossCirclesPoint(crossPoint);

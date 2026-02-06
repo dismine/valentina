@@ -514,3 +514,14 @@ void DialogCutSpline::ShowDialog(bool click)
 
     FinishCreating();
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutSpline::CheckDependencyTreeComplete()
+{
+    const bool ready = m_doc->IsPatternGraphComplete();
+    ui->lineEditNamePoint->setEnabled(ready);
+    ui->lineEditName1->setEnabled(ready);
+    ui->lineEditName2->setEnabled(ready);
+    ui->lineEditAlias1->setEnabled(ready);
+    ui->lineEditAlias2->setEnabled(ready);
+}

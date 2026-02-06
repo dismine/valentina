@@ -248,13 +248,20 @@ void DialogFlippingByAxis::SetSourceObjects(const QVector<SourceItem> &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByAxis::CheckDependencyTreeComplete()
+{
+    m_dependencyReady = m_doc->IsPatternGraphComplete();
+    ui->lineEditName->setEnabled(m_dependencyReady);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByAxis::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (not stage1 && not prepare && type == SceneObject::Point) // After first choose we ignore all objects
     {
         auto obj = std::find_if(m_sourceObjects.begin(),
                                 m_sourceObjects.end(),
-                                [id](const SourceItem &sItem) { return sItem.id == id; });
+                                [id](const SourceItem &sItem) -> bool { return sItem.id == id; });
 
         if (obj != m_sourceObjects.end())
         {
@@ -282,7 +289,7 @@ void DialogFlippingByAxis::SelectedObject(bool selected, quint32 object, quint32
     {
         auto obj = std::find_if(m_sourceObjects.begin(),
                                 m_sourceObjects.end(),
-                                [object](const SourceItem &sItem) { return sItem.id == object; });
+                                [object](const SourceItem &sItem) -> bool { return sItem.id == object; });
         if (selected)
         {
             if (obj == m_sourceObjects.cend())
@@ -353,7 +360,7 @@ void DialogFlippingByAxis::ShowSourceDetails(int row)
     }
     else
     {
-        auto SetValue = [](QComboBox *box, const QString &value, const QString &def)
+        auto SetValue = [](QComboBox *box, const QString &value, const QString &def) -> void
         {
             const QSignalBlocker blocker(box);
 
@@ -392,7 +399,7 @@ void DialogFlippingByAxis::ShowSourceDetails(int row)
 
     const QSignalBlocker blockerName(ui->lineEditName);
     ui->lineEditName->setText(sourceItem.name);
-    ui->lineEditName->setEnabled(true);
+    ui->lineEditName->setEnabled(m_dependencyReady);
 
     const bool nameValid = IsValidSourceItem(sourceItem.id, m_sourceObjects, data);
     item->setText(nameValid ? obj->ObjectName() : obj->ObjectName() + '*');
@@ -513,7 +520,7 @@ void DialogFlippingByAxis::PointChanged()
     quint32 const id = getCurrentObjectId(ui->comboBoxOriginPoint);
     auto obj = std::find_if(m_sourceObjects.begin(),
                             m_sourceObjects.end(),
-                            [id](const SourceItem &sItem) { return sItem.id == id; });
+                            [id](const SourceItem &sItem) -> bool { return sItem.id == id; });
     if (obj != m_sourceObjects.end())
     {
         flagError = false;

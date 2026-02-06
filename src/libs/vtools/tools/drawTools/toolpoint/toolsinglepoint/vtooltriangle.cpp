@@ -80,6 +80,7 @@ void VToolTriangle::SetDialog()
     const QPointer<DialogTriangle> dialogTool = qobject_cast<DialogTriangle *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
+    dialogTool->CheckDependencyTreeComplete();
     dialogTool->SetAxisP1Id(axisP1Id);
     dialogTool->SetAxisP2Id(axisP2Id);
     dialogTool->SetFirstPointId(firstPointId);

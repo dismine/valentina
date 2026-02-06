@@ -212,6 +212,16 @@ void DialogPointOfContact::ShowDialog(bool click)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfContact::CheckDependencyTreeComplete()
+{
+    const bool ready = m_doc->IsPatternGraphComplete();
+    ui->lineEditNamePoint->setEnabled(ready);
+    ui->comboBoxCenter->setEnabled(ready);
+    ui->comboBoxFirstPoint->setEnabled(ready);
+    ui->comboBoxSecondPoint->setEnabled(ready);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
  * @param id id of point or detail

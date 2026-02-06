@@ -78,6 +78,8 @@ public:
     auto GetSourceObjects() const -> QVector<SourceItem>;
     void SetSourceObjects(const QVector<SourceItem> &value);
 
+    void CheckDependencyTreeComplete() override;
+
 public slots:
     void ChosenObject(quint32 id, const SceneObject &type) override;
     void SelectedObject(bool selected, quint32 object, quint32 tool) override;
@@ -131,6 +133,8 @@ private:
     bool flagError{false};
 
     QStringList m_groupTags{};
+
+    bool m_dependencyReady{true};
 
     void FillSourceList();
 

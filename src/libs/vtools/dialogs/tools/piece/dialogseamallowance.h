@@ -69,6 +69,8 @@ public:
 
     void SetPatternDoc(VAbstractPattern *doc) override;
 
+    void CheckDependencyTreeComplete() override;
+
 public slots:
     void ChosenObject(quint32 id, const SceneObject &type) override;
     void ShowDialog(bool click) override;

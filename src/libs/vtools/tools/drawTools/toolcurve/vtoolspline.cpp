@@ -124,6 +124,7 @@ void VToolSpline::SetDialog()
     const QPointer<DialogSpline> dialogTool = qobject_cast<DialogSpline *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const auto spl = VAbstractTool::data.GeometricObject<VSpline>(m_id);
+    dialogTool->CheckDependencyTreeComplete();
     dialogTool->SetSpline(*spl);
     dialogTool->SetNotes(m_notes);
 }

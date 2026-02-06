@@ -48,8 +48,12 @@ public:
     auto MoveDuplicateY() const -> qreal;
 
     virtual void ShowDialog(bool click) override;
+
+    void CheckDependencyTreeComplete() override;
+
 public slots:
     virtual void ChosenObject(quint32 id, const SceneObject &type) override;
+
 protected:
     virtual auto IsValid() const -> bool final { return true; }
 

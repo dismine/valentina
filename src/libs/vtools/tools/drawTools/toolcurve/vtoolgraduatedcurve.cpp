@@ -49,6 +49,7 @@ void VToolGraduatedCurve::SetDialog()
     const QPointer<DialogGraduatedCurve> dialogTool = qobject_cast<DialogGraduatedCurve *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VSplinePath> splPath = VAbstractTool::data.GeometricObject<VSplinePath>(m_id);
+    dialogTool->CheckDependencyTreeComplete();
     dialogTool->SetOriginCurveId(OriginCurveId());
     dialogTool->SetOffsets(m_offsets);
     dialogTool->SetPenStyle(splPath->GetPenStyle());

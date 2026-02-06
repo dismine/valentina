@@ -34,8 +34,6 @@
 
 #include "../../../../../dialogs/tools/dialogbisector.h"
 #include "../../../../../dialogs/tools/dialogtool.h"
-#include "../../../../../undocommands/renameobject.h"
-#include "../../../../../undocommands/savetooloptions.h"
 #include "../../../../../visualization/line/vistoolbisector.h"
 #include "../../../../../visualization/visualization.h"
 #include "../../../../vabstracttool.h"
@@ -113,6 +111,7 @@ void VToolBisector::SetDialog()
     const QPointer<DialogBisector> dialogTool = qobject_cast<DialogBisector *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
+    dialogTool->CheckDependencyTreeComplete();
     dialogTool->SetTypeLine(m_lineType);
     dialogTool->SetLineColor(lineColor);
     dialogTool->SetFormula(formulaLength);

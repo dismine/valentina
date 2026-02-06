@@ -71,6 +71,7 @@ void VToolPointFromArcAndTangent::SetDialog()
     const QPointer<DialogPointFromArcAndTangent> dialogTool = qobject_cast<DialogPointFromArcAndTangent *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
+    dialogTool->CheckDependencyTreeComplete();
     dialogTool->SetArcId(arcId);
     dialogTool->SetCrossCirclesPoint(crossPoint);
     dialogTool->SetTangentPointId(tangentPointId);

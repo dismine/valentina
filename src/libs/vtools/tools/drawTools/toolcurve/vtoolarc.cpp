@@ -85,6 +85,7 @@ void VToolArc::SetDialog()
     const QPointer<DialogArc> dialogTool = qobject_cast<DialogArc *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
+    dialogTool->CheckDependencyTreeComplete();
     dialogTool->SetCenter(arc->GetCenter().id());
     dialogTool->SetF1(arc->GetFormulaF1());
     dialogTool->SetF2(arc->GetFormulaF2());

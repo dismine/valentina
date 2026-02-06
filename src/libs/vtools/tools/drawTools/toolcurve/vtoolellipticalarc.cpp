@@ -86,6 +86,7 @@ void VToolEllipticalArc::SetDialog()
     const QPointer<DialogEllipticalArc> dialogTool = qobject_cast<DialogEllipticalArc *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VEllipticalArc> elArc = VAbstractTool::data.GeometricObject<VEllipticalArc>(m_id);
+    dialogTool->CheckDependencyTreeComplete();
     dialogTool->SetCenter(elArc->GetCenter().id());
     dialogTool->SetF1(elArc->GetFormulaF1());
     dialogTool->SetF2(elArc->GetFormulaF2());

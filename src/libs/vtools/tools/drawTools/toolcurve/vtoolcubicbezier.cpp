@@ -69,6 +69,7 @@ void VToolCubicBezier::SetDialog()
     auto *dialogTool = qobject_cast<DialogCubicBezier *>(m_dialog);
     SCASSERT(dialogTool != nullptr)
     const auto spl = VAbstractTool::data.GeometricObject<VCubicBezier>(m_id);
+    dialogTool->CheckDependencyTreeComplete();
     dialogTool->SetSpline(*spl);
     dialogTool->SetNotes(m_notes);
 }

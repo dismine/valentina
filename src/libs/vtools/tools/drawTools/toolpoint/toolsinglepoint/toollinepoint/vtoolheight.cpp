@@ -83,6 +83,7 @@ void VToolHeight::SetDialog()
     const QPointer<DialogHeight> dialogTool = qobject_cast<DialogHeight *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
+    dialogTool->CheckDependencyTreeComplete();
     dialogTool->SetTypeLine(m_lineType);
     dialogTool->SetLineColor(lineColor);
     dialogTool->SetBasePointId(basePointId);

@@ -277,6 +277,16 @@ void DialogLineIntersectAxis::ShowDialog(bool click)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogLineIntersectAxis::CheckDependencyTreeComplete()
+{
+    const bool ready = m_doc->IsPatternGraphComplete();
+    ui->lineEditNamePoint->setEnabled(ready);
+    ui->comboBoxAxisPoint->setEnabled(ready);
+    ui->comboBoxFirstLinePoint->setEnabled(ready);
+    ui->comboBoxSecondLinePoint->setEnabled(ready);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogLineIntersectAxis::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (prepare == false && type == SceneObject::Point) // After first choose we ignore all objects

@@ -70,6 +70,7 @@ void VToolCubicBezierPath::SetDialog()
     auto *dialogTool = qobject_cast<DialogCubicBezierPath *>(m_dialog);
     SCASSERT(dialogTool != nullptr)
     const QSharedPointer<VCubicBezierPath> splPath = VAbstractTool::data.GeometricObject<VCubicBezierPath>(m_id);
+    dialogTool->CheckDependencyTreeComplete();
     dialogTool->SetPath(*splPath);
     dialogTool->SetNotes(m_notes);
 }

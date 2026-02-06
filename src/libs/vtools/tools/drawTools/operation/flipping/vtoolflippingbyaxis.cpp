@@ -65,6 +65,7 @@ void VToolFlippingByAxis::SetDialog()
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogFlippingByAxis> dialogTool = qobject_cast<DialogFlippingByAxis *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
+    dialogTool->CheckDependencyTreeComplete();
     dialogTool->SetOriginPointId(m_originPointId);
     dialogTool->SetAxisType(m_axisType);
     dialogTool->SetNotes(m_notes);

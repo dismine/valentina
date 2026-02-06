@@ -359,6 +359,14 @@ void DialogEndLine::ShowDialog(bool click)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogEndLine::CheckDependencyTreeComplete()
+{
+    const bool ready = m_doc->IsPatternGraphComplete();
+    ui->comboBoxBasePoint->setEnabled(ready);
+    ui->lineEditNamePoint->setEnabled(ready);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogEndLine::ShowVisualization()
 {
     AddVisualization<VisToolEndLine>();

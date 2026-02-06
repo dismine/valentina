@@ -97,6 +97,7 @@ void VToolLine::SetDialog()
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogLine> dialogTool = qobject_cast<DialogLine *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
+    dialogTool->CheckDependencyTreeComplete();
     dialogTool->SetFirstPoint(firstPoint);
     dialogTool->SetSecondPoint(secondPoint);
     dialogTool->SetTypeLine(m_lineType);

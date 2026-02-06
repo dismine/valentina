@@ -302,6 +302,13 @@ void DialogRotation::SetSourceObjects(const QVector<SourceItem> &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogRotation::CheckDependencyTreeComplete()
+{
+    m_dependencyReady = m_doc->IsPatternGraphComplete();
+    ui->lineEditName->setEnabled(m_dependencyReady);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogRotation::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (not stage1 && not prepare && type == SceneObject::Point) // After first choose we ignore all objects
@@ -644,7 +651,7 @@ void DialogRotation::ShowSourceDetails(int row)
 
     const QSignalBlocker blockerName(ui->lineEditName);
     ui->lineEditName->setText(sourceItem.name);
-    ui->lineEditName->setEnabled(true);
+    ui->lineEditName->setEnabled(m_dependencyReady);
 
     const bool nameValid = IsValidSourceItem(sourceItem.id, m_sourceObjects, data);
     item->setText(nameValid ? obj->ObjectName() : obj->ObjectName() + '*');

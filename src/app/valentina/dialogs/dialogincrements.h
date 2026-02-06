@@ -57,6 +57,8 @@ public:
 
     void RestoreAfterClose();
 
+    void CheckDependencyTreeComplete() override;
+
 signals:
     void UpdateProperties();
 

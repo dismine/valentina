@@ -369,6 +369,14 @@ void DialogGraduatedCurve::ShowDialog(bool click)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogGraduatedCurve::CheckDependencyTreeComplete()
+{
+    const bool ready = m_doc->IsPatternGraphComplete();
+    ui->lineEditCurveName->setEnabled(ready);
+    ui->lineEditAlias->setEnabled(ready);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogGraduatedCurve::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (prepare) // After first choose we ignore all objects

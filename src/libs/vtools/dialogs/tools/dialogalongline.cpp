@@ -426,6 +426,15 @@ void DialogAlongLine::ShowDialog(bool click)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogAlongLine::CheckDependencyTreeComplete()
+{
+    const bool ready = m_doc->IsPatternGraphComplete();
+    ui->lineEditNamePoint->setEnabled(ready);
+    ui->comboBoxFirstPoint->setEnabled(ready);
+    ui->comboBoxSecondPoint->setEnabled(ready);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief SetFirstPointId set id first point of line
  * @param value id

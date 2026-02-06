@@ -1055,6 +1055,12 @@ void DialogSeamAllowance::SetPatternDoc(VAbstractPattern *doc)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::CheckDependencyTreeComplete()
+{
+    // does nothing
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::NameDetailChanged()
 {
     if (const auto *edit = qobject_cast<QLineEdit *>(sender());edit)

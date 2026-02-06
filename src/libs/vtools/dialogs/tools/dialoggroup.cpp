@@ -101,6 +101,12 @@ void DialogGroup::ShowDialog(bool click)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogGroup::CheckDependencyTreeComplete()
+{
+    // Does nothing
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogGroup::SelectedObject(bool selected, quint32 object, quint32 tool)
 {
     if (selected)

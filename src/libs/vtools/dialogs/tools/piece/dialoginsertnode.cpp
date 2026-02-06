@@ -138,6 +138,12 @@ void DialogInsertNode::ShowDialog(bool click)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogInsertNode::CheckDependencyTreeComplete()
+{
+    // does nothing
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogInsertNode::SelectedObject(bool selected, quint32 object, quint32 tool)
 {
     Q_UNUSED(tool)

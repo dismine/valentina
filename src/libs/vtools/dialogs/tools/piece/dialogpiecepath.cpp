@@ -2006,6 +2006,12 @@ void DialogPiecePath::SetPiecesList(const QVector<quint32> &list)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::CheckDependencyTreeComplete()
+{
+    // does nothing
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto DialogPiecePath::CreatePath() const -> VPiecePath
 {
     VPiecePath path;

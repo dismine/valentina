@@ -389,6 +389,14 @@ void DialogBisector::ShowDialog(bool click)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogBisector::CheckDependencyTreeComplete()
+{
+    const bool ready = m_doc->IsPatternGraphComplete();
+    ui->lineEditNamePoint->setEnabled(ready);
+    ui->comboBoxSecondPoint->setEnabled(ready);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogBisector::SaveData()
 {
     m_pointName = ui->lineEditNamePoint->text();

@@ -507,3 +507,12 @@ void DialogShoulderPoint::ShowDialog(bool click)
 
     FinishCreating();
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogShoulderPoint::CheckDependencyTreeComplete()
+{
+    const bool ready = m_doc->IsPatternGraphComplete();
+    ui->lineEditNamePoint->setEnabled(ready);
+    ui->comboBoxP1Line->setEnabled(ready);
+    ui->comboBoxP2Line->setEnabled(ready);
+}

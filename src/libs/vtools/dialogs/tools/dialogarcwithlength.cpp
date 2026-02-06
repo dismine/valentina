@@ -353,6 +353,14 @@ void DialogArcWithLength::ShowDialog(bool click)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogArcWithLength::CheckDependencyTreeComplete()
+{
+    const bool ready = m_doc->IsPatternGraphComplete();
+    ui->comboBoxCenter->setEnabled(ready);
+    ui->lineEditAlias->setEnabled(ready);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogArcWithLength::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (not prepare && type == SceneObject::Point &&

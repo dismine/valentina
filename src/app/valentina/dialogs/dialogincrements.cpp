@@ -2514,3 +2514,9 @@ void DialogIncrements::RestoreAfterClose()
         ui->tableWidgetPC->selectRow(0);
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::CheckDependencyTreeComplete()
+{
+    // does nothing
+}

@@ -265,6 +265,14 @@ void DialogParallelCurve::ShowDialog(bool click)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogParallelCurve::CheckDependencyTreeComplete()
+{
+    const bool ready = m_doc->IsPatternGraphComplete();
+    ui->lineEditName->setEnabled(ready);
+    ui->lineEditAlias->setEnabled(ready);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogParallelCurve::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (prepare) // After first choose we ignore all objects

@@ -357,6 +357,7 @@ void VToolRotation::SetDialog()
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogRotation> dialogTool = qobject_cast<DialogRotation *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
+    dialogTool->CheckDependencyTreeComplete();
     dialogTool->SetOrigPointId(origPointId);
     dialogTool->SetAngle(formulaAngle);
     dialogTool->SetNotes(m_notes);

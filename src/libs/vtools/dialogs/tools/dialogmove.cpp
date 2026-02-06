@@ -573,7 +573,7 @@ void DialogMove::ShowSourceDetails(int row)
 
     const QSignalBlocker blockerName(ui->lineEditName);
     ui->lineEditName->setText(sourceItem.name);
-    ui->lineEditName->setEnabled(true);
+    ui->lineEditName->setEnabled(m_dependencyReady);
 
     const bool nameValid = IsValidSourceItem(sourceItem.id, m_sourceObjects, data);
     item->setText(nameValid ? obj->ObjectName() : obj->ObjectName() + '*');
@@ -707,6 +707,13 @@ void DialogMove::SetSourceObjects(const QVector<SourceItem> &value)
     auto *operation = qobject_cast<VisToolMove *>(vis);
     SCASSERT(operation != nullptr)
     operation->SetObjects(SourceToObjects(m_sourceObjects));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::CheckDependencyTreeComplete()
+{
+    m_dependencyReady = m_doc->IsPatternGraphComplete();
+    ui->lineEditName->setEnabled(m_dependencyReady);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

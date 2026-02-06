@@ -295,6 +295,13 @@ void DialogPointOfIntersectionCircles::ShowDialog(bool click)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfIntersectionCircles::CheckDependencyTreeComplete()
+{
+    const bool ready = m_doc->IsPatternGraphComplete();
+    ui->lineEditNamePoint->setEnabled(ready);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionCircles::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (prepare) // After first choose we ignore all objects

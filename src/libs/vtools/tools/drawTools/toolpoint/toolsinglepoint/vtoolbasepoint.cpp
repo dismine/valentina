@@ -99,6 +99,7 @@ void VToolBasePoint::SetDialog()
     const QPointer<DialogSinglePoint> dialogTool = qobject_cast<DialogSinglePoint *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
+    dialogTool->CheckDependencyTreeComplete();
     dialogTool->SetData(p->name(), static_cast<QPointF>(*p));
     dialogTool->SetNotes(m_notes);
 }

@@ -507,3 +507,11 @@ void DialogNormal::ShowDialog(bool click)
 
     FinishCreating();
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogNormal::CheckDependencyTreeComplete()
+{
+    const bool ready = m_doc->IsPatternGraphComplete();
+    ui->lineEditNamePoint->setEnabled(ready);
+    ui->comboBoxFirstPoint->setEnabled(ready);
+}

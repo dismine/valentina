@@ -419,3 +419,11 @@ auto DialogTrueDarts::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogTrueDarts::CheckDependencyTreeComplete()
+{
+    const bool ready = m_doc->IsPatternGraphComplete();
+    ui->lineEditFirstNewDartPoint->setEnabled(ready);
+    ui->lineEditSecondNewDartPoint->setEnabled(ready);
+}

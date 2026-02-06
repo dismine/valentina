@@ -232,6 +232,13 @@ void DialogPointFromCircleAndTangent::ShowDialog(bool click)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPointFromCircleAndTangent::CheckDependencyTreeComplete()
+{
+    const bool ready = m_doc->IsPatternGraphComplete();
+    ui->lineEditNamePoint->setEnabled(ready);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPointFromCircleAndTangent::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (prepare) // After first choose we ignore all objects

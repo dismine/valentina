@@ -93,6 +93,7 @@ void VToolPointOfContact::SetDialog()
     const QPointer<DialogPointOfContact> dialogTool = qobject_cast<DialogPointOfContact *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
+    dialogTool->CheckDependencyTreeComplete();
     dialogTool->SetRadius(arcRadius);
     dialogTool->SetCenter(center);
     dialogTool->SetFirstPoint(firstPointId);

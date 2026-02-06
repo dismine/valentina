@@ -52,6 +52,7 @@ void VToolParallelCurve::SetDialog()
     const QPointer<DialogParallelCurve> dialogTool = qobject_cast<DialogParallelCurve *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VSplinePath> splPath = VAbstractTool::data.GeometricObject<VSplinePath>(m_id);
+    dialogTool->CheckDependencyTreeComplete();
     dialogTool->SetOriginCurveId(OriginCurveId());
     dialogTool->SetFormulaWidth(m_formulaWidth);
     dialogTool->SetPenStyle(splPath->GetPenStyle());

@@ -80,6 +80,8 @@ public:
     void Build(const Tool &type) override;
     void ShowDialog(bool click) override;
 
+    void CheckDependencyTreeComplete() override;
+
 public slots:
     void ChosenObject(quint32 id, const SceneObject &type) override;
     /**

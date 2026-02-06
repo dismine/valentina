@@ -355,3 +355,13 @@ auto DialogHeight::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogHeight::CheckDependencyTreeComplete()
+{
+    const bool ready = m_doc->IsPatternGraphComplete();
+    ui->lineEditNamePoint->setEnabled(ready);
+    ui->comboBoxBasePoint->setEnabled(ready);
+    ui->comboBoxP1Line->setEnabled(ready);
+    ui->comboBoxP2Line->setEnabled(ready);
+}

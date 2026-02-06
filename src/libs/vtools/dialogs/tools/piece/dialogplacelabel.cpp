@@ -242,6 +242,12 @@ void DialogPlaceLabel::SetPiecesList(const QVector<quint32> &list)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPlaceLabel::CheckDependencyTreeComplete()
+{
+    // does nothing
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (not prepare && type == SceneObject::Point && SetObject(id, ui->comboBoxPoint, QString()))

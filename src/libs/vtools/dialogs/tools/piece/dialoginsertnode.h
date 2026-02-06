@@ -54,6 +54,8 @@ public:
 
     void ShowDialog(bool click) override;
 
+    void CheckDependencyTreeComplete() override;
+
 public slots:
     void SelectedObject(bool selected, quint32 object, quint32 tool) override;
 
