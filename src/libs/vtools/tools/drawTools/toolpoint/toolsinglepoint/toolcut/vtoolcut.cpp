@@ -109,17 +109,33 @@ auto VToolCut::GetName1() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCut::SetName1(const QString &name)
 {
+    if (name.isEmpty())
+    {
+        return; // Name is required
+    }
+
     QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(baseCurveId);
 
     const QString newName1 = curve->GetTypeHead() + name;
 
-    if (QRegularExpression const rx(NameRegExp());
-        !name.isEmpty() && rx.match(newName1).hasMatch() && VAbstractTool::data.IsUnique(newName1) && name != m_name2)
+    if (QRegularExpression const rx(NameRegExp()); !rx.match(newName1).hasMatch())
     {
-        m_name1 = name;
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
+        return; // Invalid format
     }
+
+    if (!VAbstractTool::data.IsUnique(newName1))
+    {
+        return; // Not unique in data
+    }
+
+    if (name == m_name2 || name == m_aliasSuffix1 || name == m_aliasSuffix2)
+    {
+        return; // Conflicts with other identifiers
+    }
+
+    m_name1 = name;
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
+    SaveOption(obj);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -131,17 +147,33 @@ auto VToolCut::GetName2() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCut::SetName2(const QString &name)
 {
+    if (name.isEmpty())
+    {
+        return; // Name is required
+    }
+
     QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(baseCurveId);
 
     const QString newName2 = curve->GetTypeHead() + name;
 
-    if (QRegularExpression const rx(NameRegExp());
-        !name.isEmpty() && rx.match(newName2).hasMatch() && VAbstractTool::data.IsUnique(newName2) && name != m_name1)
+    if (QRegularExpression const rx(NameRegExp()); !rx.match(newName2).hasMatch())
     {
-        m_name2 = name;
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
+        return; // Invalid format
     }
+
+    if (!VAbstractTool::data.IsUnique(newName2))
+    {
+        return; // Not unique in data
+    }
+
+    if (name == m_name1 || name == m_aliasSuffix1 || name == m_aliasSuffix2)
+    {
+        return; // Conflicts with other identifiers
+    }
+
+    m_name2 = name;
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
+    SaveOption(obj);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -151,21 +183,33 @@ auto VToolCut::GetAliasSuffix1() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCut::SetAliasSuffix1(QString alias)
+void VToolCut::SetAliasSuffix1(const QString &alias)
 {
-    QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(baseCurveId);
-
-    alias = alias.simplified().replace(QChar(QChar::Space), '_'_L1);
-    const QString newAlias = curve->GetTypeHead() + alias;
-
-    if (QRegularExpression const rx(NameRegExp());
-        alias.isEmpty()
-        || (rx.match(newAlias).hasMatch() && VAbstractTool::data.IsUnique(newAlias) && alias != m_aliasSuffix2))
+    if (!alias.isEmpty())
     {
-        m_aliasSuffix1 = alias;
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
+        QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(baseCurveId);
+
+        const QString newAlias = curve->GetTypeHead() + alias;
+
+        if (QRegularExpression const rx(NameRegExp()); !rx.match(newAlias).hasMatch())
+        {
+            return; // Invalid format
+        }
+
+        if (!VAbstractTool::data.IsUnique(newAlias))
+        {
+            return; // Not unique in data
+        }
+
+        if (alias == m_name1 || alias == m_name2 || (!m_aliasSuffix2.isEmpty() && alias == m_aliasSuffix2))
+        {
+            return; // Conflicts with other identifiers
+        }
     }
+
+    m_aliasSuffix1 = alias;
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
+    SaveOption(obj);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -175,21 +219,33 @@ auto VToolCut::GetAliasSuffix2() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCut::SetAliasSuffix2(QString alias)
+void VToolCut::SetAliasSuffix2(const QString &alias)
 {
-    QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(baseCurveId);
-
-    alias = alias.simplified().replace(QChar(QChar::Space), '_'_L1);
-    const QString newAlias = curve->GetTypeHead() + alias;
-
-    if (QRegularExpression const rx(NameRegExp());
-        alias.isEmpty()
-        || (rx.match(newAlias).hasMatch() && VAbstractTool::data.IsUnique(newAlias) && alias != m_aliasSuffix1))
+    if (!alias.isEmpty())
     {
-        m_aliasSuffix2 = alias;
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
+        QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(baseCurveId);
+
+        const QString newAlias = curve->GetTypeHead() + alias;
+
+        if (QRegularExpression const rx(NameRegExp()); !rx.match(newAlias).hasMatch())
+        {
+            return; // Invalid format
+        }
+
+        if (!VAbstractTool::data.IsUnique(newAlias))
+        {
+            return; // Not unique in data
+        }
+
+        if (alias == m_name1 || alias == m_name2 || (!m_aliasSuffix1.isEmpty() && alias == m_aliasSuffix1))
+        {
+            return; // Conflicts with other identifiers
+        }
     }
+
+    m_aliasSuffix2 = alias;
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
+    SaveOption(obj);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

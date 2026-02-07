@@ -79,10 +79,10 @@ public:
     void SetName2(const QString &name);
 
     auto GetAliasSuffix1() const -> QString;
-    void SetAliasSuffix1(QString alias);
+    void SetAliasSuffix1(const QString &alias);
 
     auto GetAliasSuffix2() const -> QString;
-    void SetAliasSuffix2(QString alias);
+    void SetAliasSuffix2(const QString &alias);
 
     auto CurveName() const -> QString;
 
