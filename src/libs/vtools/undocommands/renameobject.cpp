@@ -791,6 +791,29 @@ RenameAlias::RenameAlias(
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto RenameAlias::CurveType(GOType objType) -> CurveAliasType
+{
+    switch (objType)
+    {
+        case GOType::Arc:
+            return CurveAliasType::Arc;
+        case GOType::EllipticalArc:
+            return CurveAliasType::ElArc;
+        case GOType::CubicBezier:
+        case GOType::Spline:
+            return CurveAliasType::Spline;
+        case GOType::SplinePath:
+        case GOType::CubicBezierPath:
+            return CurveAliasType::SplinePath;
+        case GOType::PlaceLabel:
+        case GOType::Unknown:
+        case GOType::Point:
+        default:
+            return CurveAliasType::All;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto RenameAlias::ProcessToken(const QString &token) const -> QString
 {
     if (ProcessType() == OperationType::Unknown)

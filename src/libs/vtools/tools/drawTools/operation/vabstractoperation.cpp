@@ -1150,24 +1150,7 @@ void VAbstractOperation::ProcessOperationToolOptions(const QDomElement &oldDomEl
         }
         else
         {
-            CurveAliasType type = CurveAliasType::All;
-            if (obj->getType() == GOType::Arc)
-            {
-                type = CurveAliasType::Arc;
-            }
-            else if (obj->getType() == GOType::EllipticalArc)
-            {
-                type = CurveAliasType::ElArc;
-            }
-            else if (obj->getType() == GOType::CubicBezier || obj->getType() == GOType::Spline)
-            {
-                type = CurveAliasType::Spline;
-            }
-            else if (obj->getType() == GOType::CubicBezierPath || obj->getType() == GOType::SplinePath)
-            {
-                type = CurveAliasType::SplinePath;
-            }
-
+            const CurveAliasType type = RenameAlias::CurveType(obj->getType());
             auto *renameName = new RenameAlias(type, rename.second.first, rename.second.second, doc, rename.first);
 
             if (i == renames.size() - 1) // Last rename operation

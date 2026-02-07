@@ -29,6 +29,7 @@
 #define RENAMEOBJECT_H
 
 #include "../ifc/xml/vpatterngraphnode.h"
+#include "../vgeometry/vgeometrydef.h"
 #include "vundocommand.h"
 
 enum class OperationType : quint8
@@ -174,6 +175,8 @@ public:
                 quint32 id,
                 QUndoCommand *parent = nullptr);
     ~RenameAlias() override = default;
+
+    static auto CurveType(GOType objType) -> CurveAliasType;
 
 protected:
     auto ProcessToken(const QString &token) const -> QString override;
