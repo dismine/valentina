@@ -77,6 +77,8 @@ private:
 
     struct ToolChanges
     {
+        QString oldLabel{};
+        QString newLabel{};
         QString oldName1{};
         QString newName1{};
         QString oldName2{};
@@ -88,10 +90,11 @@ private:
 
         auto HasChanges() const -> bool
         {
-            return oldName1 != newName1 || oldName2 != newName2 || oldAliasSuffix1 != newAliasSuffix1
-                   || oldAliasSuffix2 != newAliasSuffix2;
+            return oldLabel != newLabel || oldName1 != newName1 || oldName2 != newName2
+                   || oldAliasSuffix1 != newAliasSuffix1 || oldAliasSuffix2 != newAliasSuffix2;
         }
 
+        auto LabelChanged() const -> bool { return oldLabel != newLabel; }
         auto Name1Changed() const -> bool { return oldName1 != newName1; }
         auto Name2Changed() const -> bool { return oldName2 != newName2; }
         auto AliasSuffix1Changed() const -> bool { return oldAliasSuffix1 != newAliasSuffix1; }

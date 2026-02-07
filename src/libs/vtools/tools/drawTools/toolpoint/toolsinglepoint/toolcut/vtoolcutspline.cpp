@@ -86,7 +86,9 @@ auto VToolCutSpline::GatherToolChanges() const -> VToolCutSpline::ToolChanges
     const QPointer<DialogCutSpline> dialogTool = qobject_cast<DialogCutSpline *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
-    return {.oldName1 = GetName1(),
+    return {.oldLabel = VAbstractTool::data.GeometricObject<VPointF>(m_id)->name(),
+            .newLabel = dialogTool->GetPointName(),
+            .oldName1 = GetName1(),
             .newName1 = dialogTool->GetName1(),
             .oldName2 = GetName2(),
             .newName2 = dialogTool->GetName2(),
@@ -106,6 +108,7 @@ void VToolCutSpline::SetDialog()
     QPointer<DialogCutSpline> const dialogTool = qobject_cast<DialogCutSpline *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(m_id);
+    dialogTool->CheckDependencyTreeComplete();
     dialogTool->SetFormula(formula);
     dialogTool->setSplineId(baseCurveId);
     dialogTool->SetPointName(point->name());
@@ -409,6 +412,17 @@ void VToolCutSpline::ApplyToolOptions(const QDomElement &oldDomElement, const QD
     saveOptions->SetInGroup(true);
     connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     undoStack->push(saveOptions);
+
+    if (changes.LabelChanged())
+    {
+        auto *renameLabel = new RenameLabel(changes.oldLabel, changes.newLabel, doc, m_id);
+        if (!changes.Name1Changed() && !changes.Name2Changed() && !changes.AliasSuffix1Changed()
+            && !changes.AliasSuffix2Changed())
+        {
+            connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        }
+        undoStack->push(renameLabel);
+    }
 
     const quint32 subSpl1Id = m_id /*+ 1*/;
     const quint32 subSpl2Id = m_id /*+ 2*/;

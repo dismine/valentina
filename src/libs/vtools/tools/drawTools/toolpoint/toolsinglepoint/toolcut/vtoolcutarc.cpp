@@ -85,7 +85,9 @@ auto VToolCutArc::GatherToolChanges() const -> VToolCutArc::ToolChanges
     const QPointer<DialogCutArc> dialogTool = qobject_cast<DialogCutArc *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
-    return {.oldName1 = GetName1(),
+    return {.oldLabel = VAbstractTool::data.GeometricObject<VPointF>(m_id)->name(),
+            .newLabel = dialogTool->GetPointName(),
+            .oldName1 = GetName1(),
             .newName1 = dialogTool->GetName1(),
             .oldName2 = GetName2(),
             .newName2 = dialogTool->GetName2(),
@@ -105,6 +107,7 @@ void VToolCutArc::SetDialog()
     const QPointer<DialogCutArc> dialogTool = qobject_cast<DialogCutArc *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(m_id);
+    dialogTool->CheckDependencyTreeComplete();
     dialogTool->SetFormula(formula);
     dialogTool->setArcId(baseCurveId);
     dialogTool->SetPointName(point->name());
@@ -194,7 +197,7 @@ auto VToolCutArc::Create(VToolCutInitData &initData) -> VToolCutArc *
     }
 
     a1->SetDerivative(true);
-    a1->SetDerivative(true);
+    a2->SetDerivative(true);
 
     a1->SetAliasSuffix(initData.aliasSuffix1);
     a2->SetAliasSuffix(initData.aliasSuffix2);
@@ -493,6 +496,17 @@ void VToolCutArc::ApplyToolOptions(const QDomElement &oldDomElement, const QDomE
     saveOptions->SetInGroup(true);
     connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     undoStack->push(saveOptions);
+
+    if (changes.LabelChanged())
+    {
+        auto *renameLabel = new RenameLabel(changes.oldLabel, changes.newLabel, doc, m_id);
+        if (!changes.Name1Changed() && !changes.Name2Changed() && !changes.AliasSuffix1Changed()
+            && !changes.AliasSuffix2Changed())
+        {
+            connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        }
+        undoStack->push(renameLabel);
+    }
 
     const quint32 subArc1Id = m_id /*+ 1*/;
     const quint32 subArc2Id = m_id /*+ 2*/;
