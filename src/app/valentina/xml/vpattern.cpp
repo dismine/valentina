@@ -2530,6 +2530,8 @@ void VPattern::ParseToolCurveIntersectAxis(VMainGraphicsScene *scene, QDomElemen
         initData.curveId = GetParametrUInt(domElement, AttrCurve, NULL_ID_STR);
         initData.formulaAngle = GetParametrString(domElement, AttrAngle, QStringLiteral("0.0"));
         const QString angleFix = initData.formulaAngle;
+        initData.name1 = GetParametrEmptyString(domElement, AttrName1);
+        initData.name2 = GetParametrEmptyString(domElement, AttrName2);
         initData.aliasSuffix1 = GetParametrEmptyString(domElement, AttrAlias1);
         initData.aliasSuffix2 = GetParametrEmptyString(domElement, AttrAlias2);
 

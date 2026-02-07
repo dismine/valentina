@@ -2572,6 +2572,18 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCurveIntersectAxis(VPE::VPropert
         case 2:  // AttrBasePoint (read only)
         case 46: // AttrCurve (read only)
             break;
+        case 32: // AttrName1
+            SetCurveName1<VToolCurveIntersectAxis>(property);
+            break;
+        case 33: // AttrName2
+            SetCurveName2<VToolCurveIntersectAxis>(property);
+            break;
+        case 63: // AttrAlias1
+            SetAlias1<VToolCurveIntersectAxis>(property);
+            break;
+        case 64: // AttrAlias2
+            SetAlias2<VToolCurveIntersectAxis>(property);
+            break;
         default:
             qWarning() << "Unknown property type. id = " << id;
             break;
@@ -3549,6 +3561,10 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCurveIntersectAxis(QGraphicsIte
     AddPropertyObjectName(i, tr("Point label:"));
     AddPropertyParentPointName(i->BasePointName(), tr("Axis point:"), AttrBasePoint);
     AddPropertyParentPointName(i->CurveName(), tr("Curve:"), AttrCurve);
+    AddPropertyCurveName1(i, tr("Name1:"));
+    AddPropertyCurveName2(i, tr("Name2:"));
+    AddPropertyAlias1(i, tr("Alias1:"));
+    AddPropertyAlias2(i, tr("Alias2:"));
     AddPropertyLineType(i, tr("Line type:"),
                         LineStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)));
     AddPropertyLineColor(i, tr("Line color:"), VAbstractTool::ColorsList(), AttrLineColor);
@@ -4580,6 +4596,12 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCurveIntersectAxis()
     m_idToProperty[AttrCurve]->setValue(valueCurve);
 
     m_idToProperty[AttrNotes]->setValue(i->GetNotes());
+
+    m_idToProperty[AttrName1]->setValue(i->GetName1());
+    m_idToProperty[AttrName2]->setValue(i->GetName2());
+
+    m_idToProperty[AttrAlias1]->setValue(i->GetAliasSuffix1());
+    m_idToProperty[AttrAlias2]->setValue(i->GetAliasSuffix2());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
