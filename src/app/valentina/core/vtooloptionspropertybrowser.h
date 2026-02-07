@@ -75,6 +75,12 @@ private:
     void AddProperty(VPE::VProperty *property, const QString &id);
     void ShowItemOptions(QGraphicsItem *item);
 
+    template<class Tool, typename Getter, typename Setter>
+    void SetStringPropertyGeneric(VPE::VProperty *property, Getter getter, Setter setter);
+
+    template<class Tool, typename Getter, typename Setter>
+    void SetFormulaPropertyGeneric(VPE::VProperty *property, Getter getter, Setter setter);
+
     template <class Tool> void SetName(VPE::VProperty *property);
 
     template <class Tool> void SetHold(VPE::VProperty *property);
@@ -116,6 +122,30 @@ private:
     template<class Tool>
     void SetCurveName2(VPE::VProperty *property);
 
+    template<class Tool>
+    void SetCurve1Name1(VPE::VProperty *property);
+
+    template<class Tool>
+    void SetCurve1Name2(VPE::VProperty *property);
+
+    template<class Tool>
+    void SetCurve2Name1(VPE::VProperty *property);
+
+    template<class Tool>
+    void SetCurve2Name2(VPE::VProperty *property);
+
+    template<class Tool>
+    void SetCurve1Alias1(VPE::VProperty *property);
+
+    template<class Tool>
+    void SetCurve1Alias2(VPE::VProperty *property);
+
+    template<class Tool>
+    void SetCurve2Alias1(VPE::VProperty *property);
+
+    template<class Tool>
+    void SetCurve2Alias2(VPE::VProperty *property);
+
     template <class Tool> void SetLineType(VPE::VProperty *property);
 
     template <class Tool> void SetLineColor(VPE::VProperty *property);
@@ -146,6 +176,30 @@ private:
 
     template<class Tool>
     void AddPropertyCurveName2(Tool *i, const QString &propertyName);
+
+    template<class Tool>
+    void AddPropertyCurve1Name1(Tool *i, const QString &propertyName);
+
+    template<class Tool>
+    void AddPropertyCurve1Name2(Tool *i, const QString &propertyName);
+
+    template<class Tool>
+    void AddPropertyCurve2Name1(Tool *i, const QString &propertyName);
+
+    template<class Tool>
+    void AddPropertyCurve2Name2(Tool *i, const QString &propertyName);
+
+    template<class Tool>
+    void AddPropertyCurve1Alias1(Tool *i, const QString &propertyName);
+
+    template<class Tool>
+    void AddPropertyCurve1Alias2(Tool *i, const QString &propertyName);
+
+    template<class Tool>
+    void AddPropertyCurve2Alias1(Tool *i, const QString &propertyName);
+
+    template<class Tool>
+    void AddPropertyCurve2Alias2(Tool *i, const QString &propertyName);
 
     template <class Tool> void AddPropertyAlias(Tool *i, const QString &propertyName);
 

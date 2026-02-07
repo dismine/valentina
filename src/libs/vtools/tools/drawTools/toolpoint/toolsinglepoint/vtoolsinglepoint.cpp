@@ -383,136 +383,27 @@ void VToolSinglePoint::ToolSelectionType(const SelectionType &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VToolSinglePoint::InitSegments(GOType curveType, qreal segLength, const VPointF *p, quint32 curveId,
-                                    VContainer *data, const QString &alias1, const QString &alias2)
-    -> QPair<QString, QString>
+auto VToolSinglePoint::InitSegments(SegmentDetails &details) -> QPair<QString, QString>
 {
+    // This check helps to find missed objects in the switch
+    Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects were handled.");
+
     QT_WARNING_PUSH
     QT_WARNING_DISABLE_GCC("-Wswitch-default")
     QT_WARNING_DISABLE_CLANG("-Wswitch-default")
 
-    switch (curveType)
+    switch (details.curveType)
     {
         case GOType::EllipticalArc:
-            return InitArc<VEllipticalArc>(data, segLength, p, curveId, alias1, alias2);
+            return InitArc<VEllipticalArc>(details);
         case GOType::Arc:
-            return InitArc<VArc>(data, segLength, p, curveId, alias1, alias2);
+            return InitArc<VArc>(details);
         case GOType::CubicBezier:
         case GOType::Spline:
-        {
-            QSharedPointer<VAbstractBezier> spline1;
-            QSharedPointer<VAbstractBezier> spline2;
-
-            const auto spl = data->GeometricObject<VAbstractCubicBezier>(curveId);
-            QPointF spl1p2;
-            QPointF spl1p3;
-            QPointF spl2p2;
-            QPointF spl2p3;
-            if (not VFuzzyComparePossibleNulls(segLength, -1))
-            {
-                spl->CutSpline(segLength, spl1p2, spl1p3, spl2p2, spl2p3, p->name());
-            }
-            else
-            {
-                spl->CutSpline(0, spl1p2, spl1p3, spl2p2, spl2p3, p->name());
-            }
-
-            auto *spl1 = new VSpline(spl->GetP1(), spl1p2, spl1p3, *p);
-            auto *spl2 = new VSpline(*p, spl2p2, spl2p3, spl->GetP4());
-
-            if (not VFuzzyComparePossibleNulls(segLength, -1))
-            {
-                spline1 = QSharedPointer<VAbstractBezier>(spl1);
-                spline2 = QSharedPointer<VAbstractBezier>(spl2);
-            }
-            else
-            {
-                spline1 = QSharedPointer<VAbstractBezier>(new VSpline());
-                spline2 = QSharedPointer<VAbstractBezier>(new VSpline());
-
-                // Take names for empty splines from donors.
-                spline1->setName(spl1->name());
-                spline2->setName(spl2->name());
-
-                delete spl1;
-                delete spl2;
-            }
-
-            spline1->SetAliasSuffix(alias1);
-            spline2->SetAliasSuffix(alias2);
-
-            data->RegisterUniqueName(spline1);
-            data->AddSpline(spline1, NULL_ID, p->id());
-
-            data->RegisterUniqueName(spline2);
-            data->AddSpline(spline2, NULL_ID, p->id());
-
-            // Because we don't store segments, but only data about them we must register the names manually
-            data->RegisterUniqueName(spline1);
-            data->RegisterUniqueName(spline2);
-
-            return qMakePair(spline1->ObjectName(), spline2->ObjectName());
-        }
+            return InitSpline(details);
         case GOType::CubicBezierPath:
         case GOType::SplinePath:
-        {
-            QSharedPointer<VAbstractBezier> splP1;
-            QSharedPointer<VAbstractBezier> splP2;
-
-            const auto splPath = data->GeometricObject<VAbstractCubicBezierPath>(curveId);
-            VSplinePath *splPath1 = nullptr;
-            VSplinePath *splPath2 = nullptr;
-            if (not VFuzzyComparePossibleNulls(segLength, -1))
-            {
-                VPointF const *pC = VToolCutSplinePath::CutSplinePath(segLength,
-                                                                      splPath,
-                                                                      p->name(),
-                                                                      &splPath1,
-                                                                      &splPath2);
-                delete pC;
-            }
-            else
-            {
-                VPointF const *pC = VToolCutSplinePath::CutSplinePath(0, splPath, p->name(), &splPath1, &splPath2);
-                delete pC;
-            }
-
-            SCASSERT(splPath1 != nullptr)
-            SCASSERT(splPath2 != nullptr)
-
-            if (not VFuzzyComparePossibleNulls(segLength, -1))
-            {
-                splP1 = QSharedPointer<VAbstractBezier>(splPath1);
-                splP2 = QSharedPointer<VAbstractBezier>(splPath2);
-            }
-            else
-            {
-                splP1 = QSharedPointer<VAbstractBezier>(new VSplinePath());
-                splP2 = QSharedPointer<VAbstractBezier>(new VSplinePath());
-
-                // Take names for empty spline paths from donors.
-                splP1->setName(splPath1->name());
-                splP2->setName(splPath2->name());
-
-                delete splPath1;
-                delete splPath2;
-            }
-
-            splP1->SetAliasSuffix(alias1);
-            splP2->SetAliasSuffix(alias2);
-
-            data->RegisterUniqueName(splP1);
-            data->AddSpline(splP1, NULL_ID, p->id());
-
-            data->RegisterUniqueName(splP2);
-            data->AddSpline(splP2, NULL_ID, p->id());
-
-            // Because we don't store segments, but only data about them we must register the names manually
-            data->RegisterUniqueName(splP1);
-            data->RegisterUniqueName(splP2);
-
-            return qMakePair(splP1->ObjectName(), splP2->ObjectName());
-        }
+            return InitSplinePath(details);
         case GOType::Point:
         case GOType::PlaceLabel:
         case GOType::Unknown:
@@ -522,6 +413,7 @@ auto VToolSinglePoint::InitSegments(GOType curveType, qreal segLength, const VPo
 
     QT_WARNING_POP
 
+    Q_UNREACHABLE();
     return {};
 }
 
@@ -551,4 +443,198 @@ void VToolSinglePoint::ProcessSinglePointToolOptions(const QDomElement &oldDomEl
     undoStack->push(renameLabel);
 
     undoStack->endMacro();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VToolSinglePoint::InitSplinePath(SegmentDetails &details) -> QPair<QString, QString>
+{
+    const auto splPath = details.data->GeometricObject<VAbstractCubicBezierPath>(details.curveId);
+    VSplinePath *splPath1 = nullptr;
+    VSplinePath *splPath2 = nullptr;
+    if (not VFuzzyComparePossibleNulls(details.segLength, -1))
+    {
+        QScopedPointer<VPointF> const pC(
+            VToolCutSplinePath::CutSplinePath(details.segLength, splPath, details.p.name(), &splPath1, &splPath2));
+    }
+    else
+    {
+        QScopedPointer<VPointF> const pC(
+            VToolCutSplinePath::CutSplinePath(0, splPath, details.p.name(), &splPath1, &splPath2));
+    }
+
+    SCASSERT(splPath1 != nullptr)
+    SCASSERT(splPath2 != nullptr)
+
+    QSharedPointer<VSplinePath> splP1;
+    QSharedPointer<VSplinePath> splP2;
+
+    if (not VFuzzyComparePossibleNulls(details.segLength, -1))
+    {
+        splP1 = QSharedPointer<VSplinePath>::create(*splPath1);
+        splP2 = QSharedPointer<VSplinePath>::create(*splPath2);
+    }
+    else
+    {
+        splP1 = QSharedPointer<VSplinePath>::create();
+        splP2 = QSharedPointer<VSplinePath>::create();
+    }
+
+    splP1->SetDerivative(true);
+    splP2->SetDerivative(true);
+
+    if (details.name1.isEmpty())
+    {
+        details.name1 = splP1->HeadlessName();
+    }
+    else
+    {
+        splP1->SetNameSuffix(details.name1);
+    }
+
+    if (details.name2.isEmpty())
+    {
+        details.name2 = splP2->HeadlessName();
+    }
+    else
+    {
+        splP2->SetNameSuffix(details.name2);
+    }
+
+    splP1->SetAliasSuffix(details.alias1);
+    splP2->SetAliasSuffix(details.alias2);
+
+    details.data->AddSpline(splP1, NULL_ID, details.p.id());
+    details.data->AddSpline(splP2, NULL_ID, details.p.id());
+
+    return qMakePair(splP1->ObjectName(), splP2->ObjectName());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VToolSinglePoint::InitSpline(SegmentDetails &details) -> QPair<QString, QString>
+{
+    QSharedPointer<VSpline> spline1;
+    QSharedPointer<VSpline> spline2;
+
+    const auto spl = details.data->GeometricObject<VAbstractCubicBezier>(details.curveId);
+    QPointF spl1p2;
+    QPointF spl1p3;
+    QPointF spl2p2;
+    QPointF spl2p3;
+    if (not VFuzzyComparePossibleNulls(details.segLength, -1))
+    {
+        spl->CutSpline(details.segLength, spl1p2, spl1p3, spl2p2, spl2p3, details.p.name());
+    }
+    else
+    {
+        spl->CutSpline(0, spl1p2, spl1p3, spl2p2, spl2p3, details.p.name());
+    }
+
+    if (not VFuzzyComparePossibleNulls(details.segLength, -1))
+    {
+        spline1 = QSharedPointer<VSpline>::create(spl->GetP1(), spl1p2, spl1p3, details.p);
+        spline2 = QSharedPointer<VSpline>::create(details.p, spl2p2, spl2p3, spl->GetP4());
+    }
+    else
+    {
+        spline1 = QSharedPointer<VSpline>::create();
+        spline2 = QSharedPointer<VSpline>::create();
+    }
+
+    spline1->SetDerivative(true);
+    spline2->SetDerivative(true);
+
+    if (details.name1.isEmpty())
+    {
+        details.name1 = spline1->HeadlessName();
+    }
+    else
+    {
+        spline1->SetNameSuffix(details.name1);
+    }
+
+    if (details.name2.isEmpty())
+    {
+        details.name2 = spline2->HeadlessName();
+    }
+    else
+    {
+        spline2->SetNameSuffix(details.name2);
+    }
+
+    spline1->SetAliasSuffix(details.alias1);
+    spline2->SetAliasSuffix(details.alias2);
+
+    details.data->AddSpline(spline1, NULL_ID, details.p.id());
+    details.data->AddSpline(spline2, NULL_ID, details.p.id());
+
+    return qMakePair(spline1->ObjectName(), spline2->ObjectName());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Item>
+auto VToolSinglePoint::InitArc(SegmentDetails &details) -> QPair<QString, QString>
+{
+    const QSharedPointer<Item> arc = details.data->GeometricObject<Item>(details.curveId);
+    Item arc1;
+    Item arc2;
+
+    if (not VFuzzyComparePossibleNulls(details.segLength, -1))
+    {
+        arc->CutArc(details.segLength, &arc1, &arc2, details.p.name());
+    }
+    else
+    {
+        arc->CutArc(0, &arc1, &arc2, details.p.name());
+    }
+
+    // Arc highly depend on id. Need for creating the name.
+    arc1.setId(details.p.id() + 1);
+    arc2.setId(details.p.id() + 2);
+
+    QSharedPointer<Item> a1;
+    QSharedPointer<Item> a2;
+
+    if (not VFuzzyComparePossibleNulls(details.segLength, -1))
+    {
+        a1 = QSharedPointer<Item>::create(arc1);
+        a2 = QSharedPointer<Item>::create(arc2);
+    }
+    else
+    {
+        a1 = QSharedPointer<Item>::create();
+        a2 = QSharedPointer<Item>::create();
+    }
+
+    a1->SetDerivative(true);
+    a2->SetDerivative(true);
+
+    if (details.name1.isEmpty())
+    {
+        details.name1 = a1->HeadlessName();
+    }
+    else
+    {
+        a1->SetNameSuffix(details.name1);
+    }
+
+    if (details.name2.isEmpty())
+    {
+        details.name2 = a1->HeadlessName();
+    }
+    else
+    {
+        a2->SetNameSuffix(details.name2);
+    }
+
+    a1->SetAliasSuffix(details.alias1);
+    a2->SetAliasSuffix(details.alias2);
+
+    details.data->AddArc(a1, /*arc1.id()*/ NULL_ID, details.p.id());
+    details.data->AddArc(a2, /*arc2.id()*/ NULL_ID, details.p.id());
+
+    // Because we don't store segments, but only data about them we must register the names manually
+    details.data->RegisterUniqueName(a1);
+    details.data->RegisterUniqueName(a2);
+
+    return qMakePair(arc1.ObjectName(), arc2.ObjectName());
 }

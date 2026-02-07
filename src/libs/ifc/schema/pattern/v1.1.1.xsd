@@ -195,6 +195,10 @@
                           <xs:attribute name="notes" type="xs:string"/>
                           <xs:attribute name="alias1" type="nameSuffix"/>
                           <xs:attribute name="alias2" type="nameSuffix"/>
+                          <xs:attribute name="curve1Name1" type="nameSuffix"/>
+                          <xs:attribute name="curve1Name2" type="nameSuffix"/>
+                          <xs:attribute name="curve2Name1" type="nameSuffix"/>
+                          <xs:attribute name="curve2Name2" type="nameSuffix"/>
                           <xs:attribute name="curve1Alias1" type="nameSuffix"/>
                           <xs:attribute name="curve1Alias2" type="nameSuffix"/>
                           <xs:attribute name="curve2Alias1" type="nameSuffix"/>

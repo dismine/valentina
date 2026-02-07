@@ -2657,6 +2657,10 @@ void VPattern::ParseToolPointOfIntersectionCurves(VMainGraphicsScene *scene, QDo
         initData.secondCurveId = GetParametrUInt(domElement, AttrCurve2, NULL_ID_STR);
         initData.vCrossPoint = static_cast<VCrossCurvesPoint>(GetParametrUInt(domElement, AttrVCrossPoint, QChar('1')));
         initData.hCrossPoint = static_cast<HCrossCurvesPoint>(GetParametrUInt(domElement, AttrHCrossPoint, QChar('1')));
+        initData.curve1Name1 = GetParametrEmptyString(domElement, AttrCurve1Name1);
+        initData.curve1Name2 = GetParametrEmptyString(domElement, AttrCurve1Name2);
+        initData.curve2Name1 = GetParametrEmptyString(domElement, AttrCurve2Name1);
+        initData.curve2Name2 = GetParametrEmptyString(domElement, AttrCurve2Name2);
         initData.curve1AliasSuffix1 = GetParametrEmptyString(domElement, AttrCurve1Alias1);
         initData.curve1AliasSuffix2 = GetParametrEmptyString(domElement, AttrCurve1Alias2);
         initData.curve2AliasSuffix1 = GetParametrEmptyString(domElement, AttrCurve2Alias1);

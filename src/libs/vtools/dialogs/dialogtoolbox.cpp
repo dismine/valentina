@@ -182,6 +182,19 @@ template <class T> auto CurveAliases(const QString &alias1, const QString &alias
 
     return qMakePair(curve1.GetAlias(), curve2.GetAlias());
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class T>
+auto CurveNames(const QString &name1, const QString &name2) -> QPair<QString, QString>
+{
+    T curve1;
+    curve1.SetNameSuffix(name1);
+
+    T curve2;
+    curve2.SetNameSuffix(name2);
+
+    return qMakePair(curve1.name(), curve2.name());
+}
 } // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -681,6 +694,9 @@ void SetTabStopDistance(QPlainTextEdit *edit, int tabWidthChar)
 //---------------------------------------------------------------------------------------------------------------------
 auto SegmentAliases(GOType curveType, const QString &alias1, const QString &alias2) -> QPair<QString, QString>
 {
+    // This check helps to find missed objects in the switch
+    Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects were handled.");
+
     switch (curveType)
     {
         case GOType::EllipticalArc:
@@ -695,6 +711,36 @@ auto SegmentAliases(GOType curveType, const QString &alias1, const QString &alia
             return CurveAliases<VCubicBezierPath>(alias1, alias2);
         case GOType::SplinePath:
             return CurveAliases<VSplinePath>(alias1, alias2);
+        case GOType::Point:
+        case GOType::PlaceLabel:
+        case GOType::Unknown:
+            Q_UNREACHABLE();
+            break;
+        default:
+            return {};
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto SegmentNames(GOType curveType, const QString &name1, const QString &name2) -> QPair<QString, QString>
+{
+    // This check helps to find missed objects in the switch
+    Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects were handled.");
+
+    switch (curveType)
+    {
+        case GOType::EllipticalArc:
+            return CurveNames<VEllipticalArc>(name1, name2);
+        case GOType::Arc:
+            return CurveNames<VArc>(name1, name2);
+        case GOType::CubicBezier:
+            return CurveNames<VCubicBezier>(name1, name2);
+        case GOType::Spline:
+            return CurveNames<VSpline>(name1, name2);
+        case GOType::CubicBezierPath:
+            return CurveNames<VCubicBezierPath>(name1, name2);
+        case GOType::SplinePath:
+            return CurveNames<VSplinePath>(name1, name2);
         case GOType::Point:
         case GOType::PlaceLabel:
         case GOType::Unknown:
