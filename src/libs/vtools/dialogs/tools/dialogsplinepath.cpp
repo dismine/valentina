@@ -183,7 +183,6 @@ void DialogSplinePath::SetPath(const VSplinePath &value)
         NewItem(path.at(i));
     }
     ui->listWidget->setFocus(Qt::OtherFocusReason);
-    ui->lineEditSplPathName->setText(VAbstractApplication::VApp()->TrVars()->VarToUser(path.name()));
     ui->doubleSpinBoxApproximationScale->setValue(path.GetApproximationScale());
 
     originAliasSuffix = path.GetAliasSuffix();
@@ -707,46 +706,19 @@ void DialogSplinePath::currentPointChanged(int index)
         {
             flagError = false;
             color = errorColor;
-
-            ui->lineEditSplPathName->setText(tr("Invalid spline path"));
         }
         else
         {
             flagError = true;
             color = OkColor(this);
-
-            auto first = qvariant_cast<VSplinePoint>(ui->listWidget->item(0)->data(Qt::UserRole));
-            auto last =
-                qvariant_cast<VSplinePoint>(ui->listWidget->item(ui->listWidget->count() - 1)->data(Qt::UserRole));
-
-            if (first.P().id() == path.at(0).P().id() && last.P().id() == path.at(path.CountPoints() - 1).P().id())
-            {
-                newDuplicate = -1;
-                ui->lineEditSplPathName->setText(VAbstractApplication::VApp()->TrVars()->VarToUser(path.name()));
-            }
-            else
-            {
-                VSplinePath newPath = ExtractPath();
-
-                if (not data->IsUnique(newPath.name()))
-                {
-                    newDuplicate = static_cast<qint32>(DNumber(newPath.name()));
-                    newPath.SetDuplicate(static_cast<quint32>(newDuplicate));
-                }
-
-                ui->lineEditSplPathName->setText(VAbstractApplication::VApp()->TrVars()->VarToUser(newPath.name()));
-            }
         }
     }
     catch (const VExceptionBadId &)
     {
         flagError = false;
         color = errorColor;
-
-        ui->lineEditSplPathName->setText(tr("Cannot find point with id %1").arg(id));
     }
 
-    ChangeColor(ui->labelName, color);
     ChangeColor(ui->labelPoint, color);
     CheckState();
 }
@@ -754,7 +726,7 @@ void DialogSplinePath::currentPointChanged(int index)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSplinePath::NewPointChanged()
 {
-    ui->toolButtonAddPoint->setEnabled(ui->comboBoxNewPoint->currentIndex() != -1);
+    ui->toolButtonAddPoint->setEnabled(m_dependencyReady && ui->comboBoxNewPoint->currentIndex() != -1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1197,4 +1169,17 @@ void DialogSplinePath::SetDefPenStyle(const QString &value)
 void DialogSplinePath::SetDefColor(const QString &value)
 {
     ui->pushButtonColor->setCurrentColor(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSplinePath::CheckDependencyTreeComplete()
+{
+    m_dependencyReady = m_doc->IsPatternGraphComplete();
+    ui->toolButtonAddPoint->setEnabled(m_dependencyReady);
+    ui->toolButtonRemovePoint->setEnabled(m_dependencyReady);
+    ui->toolButtonTop->setEnabled(m_dependencyReady);
+    ui->toolButtonUp->setEnabled(m_dependencyReady);
+    ui->toolButtonDown->setEnabled(m_dependencyReady);
+    ui->toolButtonBottom->setEnabled(m_dependencyReady);
+    ui->lineEditAlias->setEnabled(m_dependencyReady);
 }

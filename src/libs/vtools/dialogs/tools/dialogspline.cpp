@@ -430,9 +430,8 @@ void DialogSpline::ValidateAlias()
     spline.SetAliasSuffix(ui->lineEditAlias->text());
 
     if (QRegularExpression const rx(NameRegExp());
-        not ui->lineEditAlias->text().isEmpty() &&
-        (not rx.match(spline.GetAlias()).hasMatch() ||
-         (originAliasSuffix != ui->lineEditAlias->text() && not data->IsUnique(spline.GetAlias()))))
+        ui->lineEditAlias->text().isEmpty() || !rx.match(spline.GetAlias()).hasMatch()
+        || (originAliasSuffix != ui->lineEditAlias->text() && !data->IsUnique(spline.GetAlias())))
     {
         flagAlias = false;
         ChangeColor(ui->labelAlias, errorColor);
@@ -498,52 +497,17 @@ void DialogSpline::InitIcons()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSpline::PointNameChanged()
 {
-    QSet<quint32> set;
-    set.insert(getCurrentObjectId(ui->comboBoxP1));
-    set.insert(getCurrentObjectId(ui->comboBoxP4));
-
     QColor color;
     if (getCurrentObjectId(ui->comboBoxP1) == getCurrentObjectId(ui->comboBoxP4))
     {
         flagError = false;
         color = errorColor;
-
-        ui->lineEditSplineName->setText(tr("Invalid spline"));
     }
     else
     {
         flagError = true;
         color = OkColor(this);
-
-        const VTranslateVars *trVars = VAbstractApplication::VApp()->TrVars();
-
-        if (getCurrentObjectId(ui->comboBoxP1) == spl.GetP1().id() &&
-            getCurrentObjectId(ui->comboBoxP4) == spl.GetP4().id())
-        {
-            newDuplicate = -1;
-            ui->lineEditSplineName->setText(trVars->VarToUser(spl.name()));
-        }
-        else
-        {
-            try
-            {
-                VSpline spline(*GetP1(), *GetP4(), spl.GetStartAngle(), spl.GetEndAngle(), spl.GetKasm1(),
-                               spl.GetKasm2(), spl.GetKcurve());
-                if (not data->IsUnique(spline.name()))
-                {
-                    newDuplicate = static_cast<qint32>(DNumber(spline.name()));
-                    spline.SetDuplicate(static_cast<quint32>(newDuplicate));
-                }
-                ui->lineEditSplineName->setText(trVars->VarToUser(spline.name()));
-            }
-            catch (const VExceptionBadId &)
-            {
-                flagError = false;
-                color = errorColor;
-            }
-        }
     }
-    ChangeColor(ui->labelName, color);
     ChangeColor(ui->labelFirstPoint, color);
     ChangeColor(ui->labelSecondPoint, color);
     CheckState();
@@ -574,8 +538,6 @@ void DialogSpline::ShowDialog(bool click)
         {
             spl.SetDuplicate(DNumber(spl.name()));
         }
-
-        ui->lineEditSplineName->setText(trVars->VarToUser(spl.name()));
 
         DialogAccepted();
     }
@@ -619,7 +581,6 @@ void DialogSpline::SetSpline(const VSpline &spline)
 
     ui->plainTextEditLength1F->setPlainText(length1F);
     ui->plainTextEditLength2F->setPlainText(length2F);
-    ui->lineEditSplineName->setText(trVars->VarToUser(spl.name()));
 
     originAliasSuffix = spl.GetAliasSuffix();
     ui->lineEditAlias->setText(originAliasSuffix);
@@ -660,4 +621,13 @@ void DialogSpline::SetDefPenStyle(const QString &value)
 void DialogSpline::SetDefColor(const QString &value)
 {
     ui->pushButtonColor->setCurrentColor(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSpline::CheckDependencyTreeComplete()
+{
+    const bool ready = m_doc->IsPatternGraphComplete();
+    ui->comboBoxP1->setEnabled(ready);
+    ui->comboBoxP4->setEnabled(ready);
+    ui->lineEditAlias->setEnabled(ready);
 }

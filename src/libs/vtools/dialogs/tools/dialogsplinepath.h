@@ -65,6 +65,8 @@ public:
     void SetDefPenStyle(const QString &value);
     void SetDefColor(const QString &value);
 
+    void CheckDependencyTreeComplete() override;
+
 public slots:
     void ChosenObject(quint32 id, const SceneObject &type) override;
     void ShowDialog(bool click) override;
@@ -135,6 +137,8 @@ private:
     bool flagAlias{true};
 
     QString originAliasSuffix{};
+
+    bool m_dependencyReady{true};
 
     void EvalAngle1();
     void EvalAngle2();

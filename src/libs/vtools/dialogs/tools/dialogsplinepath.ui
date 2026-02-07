@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>553</width>
-    <height>743</height>
+    <height>712</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -32,7 +32,7 @@
         <x>0</x>
         <y>0</y>
         <width>533</width>
-        <height>692</height>
+        <height>661</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -61,7 +61,7 @@
              <item>
               <spacer name="horizontalSpacer_5">
                <property name="orientation">
-                <enum>Qt::Horizontal</enum>
+                <enum>Qt::Orientation::Horizontal</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -127,7 +127,7 @@
                    <layout class="QVBoxLayout" name="verticalLayout_6">
                     <item>
                      <layout class="QHBoxLayout" name="horizontalLayout_2">
-                      <item alignment="Qt::AlignLeft">
+                      <item alignment="Qt::AlignmentFlag::AlignLeft">
                        <widget class="QLabel" name="labelEditLength1">
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -180,7 +180,7 @@
                       <item>
                        <spacer name="horizontalSpacer">
                         <property name="orientation">
-                         <enum>Qt::Horizontal</enum>
+                         <enum>Qt::Orientation::Horizontal</enum>
                         </property>
                         <property name="sizeHint" stdset="0">
                          <size>
@@ -190,7 +190,7 @@
                         </property>
                        </spacer>
                       </item>
-                      <item alignment="Qt::AlignRight">
+                      <item alignment="Qt::AlignmentFlag::AlignRight">
                        <widget class="QToolButton" name="toolButtonExprLength1">
                         <property name="toolTip">
                          <string>Formula wizard</string>
@@ -210,7 +210,7 @@
                         </property>
                        </widget>
                       </item>
-                      <item alignment="Qt::AlignRight">
+                      <item alignment="Qt::AlignmentFlag::AlignRight">
                        <widget class="QLabel" name="label_8">
                         <property name="text">
                          <string/>
@@ -220,7 +220,7 @@
                         </property>
                        </widget>
                       </item>
-                      <item alignment="Qt::AlignRight">
+                      <item alignment="Qt::AlignmentFlag::AlignRight">
                        <widget class="QLabel" name="labelResultLength1">
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -306,7 +306,7 @@
                     </item>
                     <item>
                      <layout class="QHBoxLayout" name="horizontalLayout_4">
-                      <item alignment="Qt::AlignLeft">
+                      <item alignment="Qt::AlignmentFlag::AlignLeft">
                        <widget class="QLabel" name="labelEditAngle1">
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -359,7 +359,7 @@
                       <item>
                        <spacer name="horizontalSpacer_2">
                         <property name="orientation">
-                         <enum>Qt::Horizontal</enum>
+                         <enum>Qt::Orientation::Horizontal</enum>
                         </property>
                         <property name="sizeHint" stdset="0">
                          <size>
@@ -369,7 +369,7 @@
                         </property>
                        </spacer>
                       </item>
-                      <item alignment="Qt::AlignRight">
+                      <item alignment="Qt::AlignmentFlag::AlignRight">
                        <widget class="QToolButton" name="toolButtonExprAngle1">
                         <property name="toolTip">
                          <string>Formula wizard</string>
@@ -389,7 +389,7 @@
                         </property>
                        </widget>
                       </item>
-                      <item alignment="Qt::AlignRight">
+                      <item alignment="Qt::AlignmentFlag::AlignRight">
                        <widget class="QLabel" name="label_9">
                         <property name="text">
                          <string/>
@@ -399,7 +399,7 @@
                         </property>
                        </widget>
                       </item>
-                      <item alignment="Qt::AlignRight">
+                      <item alignment="Qt::AlignmentFlag::AlignRight">
                        <widget class="QLabel" name="labelResultAngle1">
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -498,7 +498,7 @@
                    <layout class="QVBoxLayout" name="verticalLayout_7">
                     <item>
                      <layout class="QHBoxLayout" name="horizontalLayout_8">
-                      <item alignment="Qt::AlignLeft">
+                      <item alignment="Qt::AlignmentFlag::AlignLeft">
                        <widget class="QLabel" name="labelEditLength2">
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -551,7 +551,7 @@
                       <item>
                        <spacer name="horizontalSpacer_3">
                         <property name="orientation">
-                         <enum>Qt::Horizontal</enum>
+                         <enum>Qt::Orientation::Horizontal</enum>
                         </property>
                         <property name="sizeHint" stdset="0">
                          <size>
@@ -561,7 +561,7 @@
                         </property>
                        </spacer>
                       </item>
-                      <item alignment="Qt::AlignRight">
+                      <item alignment="Qt::AlignmentFlag::AlignRight">
                        <widget class="QToolButton" name="toolButtonExprLength2">
                         <property name="toolTip">
                          <string>Formula wizard</string>
@@ -581,7 +581,7 @@
                         </property>
                        </widget>
                       </item>
-                      <item alignment="Qt::AlignRight">
+                      <item alignment="Qt::AlignmentFlag::AlignRight">
                        <widget class="QLabel" name="label_10">
                         <property name="text">
                          <string/>
@@ -591,7 +591,7 @@
                         </property>
                        </widget>
                       </item>
-                      <item alignment="Qt::AlignRight">
+                      <item alignment="Qt::AlignmentFlag::AlignRight">
                        <widget class="QLabel" name="labelResultLength2">
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -677,7 +677,7 @@
                     </item>
                     <item>
                      <layout class="QHBoxLayout" name="horizontalLayout_11">
-                      <item alignment="Qt::AlignLeft">
+                      <item alignment="Qt::AlignmentFlag::AlignLeft">
                        <widget class="QLabel" name="labelEditAngle2">
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -730,7 +730,7 @@
                       <item>
                        <spacer name="horizontalSpacer_4">
                         <property name="orientation">
-                         <enum>Qt::Horizontal</enum>
+                         <enum>Qt::Orientation::Horizontal</enum>
                         </property>
                         <property name="sizeHint" stdset="0">
                          <size>
@@ -740,7 +740,7 @@
                         </property>
                        </spacer>
                       </item>
-                      <item alignment="Qt::AlignRight">
+                      <item alignment="Qt::AlignmentFlag::AlignRight">
                        <widget class="QToolButton" name="toolButtonExprAngle2">
                         <property name="toolTip">
                          <string>Formula wizard</string>
@@ -760,7 +760,7 @@
                         </property>
                        </widget>
                       </item>
-                      <item alignment="Qt::AlignRight">
+                      <item alignment="Qt::AlignmentFlag::AlignRight">
                        <widget class="QLabel" name="label_11">
                         <property name="text">
                          <string/>
@@ -770,7 +770,7 @@
                         </property>
                        </widget>
                       </item>
-                      <item alignment="Qt::AlignRight">
+                      <item alignment="Qt::AlignmentFlag::AlignRight">
                        <widget class="QLabel" name="labelResultAngle2">
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -872,7 +872,7 @@
                </item>
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_10">
-                 <item alignment="Qt::AlignLeft">
+                 <item alignment="Qt::AlignmentFlag::AlignLeft">
                   <widget class="QToolButton" name="toolButtonTop">
                    <property name="enabled">
                     <bool>false</bool>
@@ -889,7 +889,7 @@
                    </property>
                   </widget>
                  </item>
-                 <item alignment="Qt::AlignLeft">
+                 <item alignment="Qt::AlignmentFlag::AlignLeft">
                   <widget class="QToolButton" name="toolButtonUp">
                    <property name="enabled">
                     <bool>false</bool>
@@ -906,7 +906,7 @@
                    </property>
                   </widget>
                  </item>
-                 <item alignment="Qt::AlignLeft">
+                 <item alignment="Qt::AlignmentFlag::AlignLeft">
                   <widget class="QToolButton" name="toolButtonDown">
                    <property name="enabled">
                     <bool>false</bool>
@@ -923,7 +923,7 @@
                    </property>
                   </widget>
                  </item>
-                 <item alignment="Qt::AlignLeft">
+                 <item alignment="Qt::AlignmentFlag::AlignLeft">
                   <widget class="QToolButton" name="toolButtonBottom">
                    <property name="enabled">
                     <bool>false</bool>
@@ -943,7 +943,7 @@
                  <item>
                   <spacer name="horizontalSpacer_6">
                    <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
+                    <enum>Qt::Orientation::Horizontal</enum>
                    </property>
                    <property name="sizeHint" stdset="0">
                     <size>
@@ -962,29 +962,8 @@
            <item>
             <layout class="QFormLayout" name="formLayout">
              <property name="fieldGrowthPolicy">
-              <enum>QFormLayout::ExpandingFieldsGrow</enum>
+              <enum>QFormLayout::FieldGrowthPolicy::ExpandingFieldsGrow</enum>
              </property>
-             <item row="1" column="0">
-              <widget class="QLabel" name="label_5">
-               <property name="text">
-                <string>Color:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="labelName">
-               <property name="text">
-                <string>Name:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="QLineEdit" name="lineEditSplPathName">
-               <property name="readOnly">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
              <item row="0" column="0">
               <widget class="QLabel" name="label">
                <property name="text">
@@ -1014,6 +993,20 @@
                </property>
               </widget>
              </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_5">
+               <property name="text">
+                <string>Color:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="VPE::QtColorPicker" name="pushButtonColor">
+               <property name="text">
+                <string notr="true">Color</string>
+               </property>
+              </widget>
+             </item>
              <item row="2" column="0">
               <widget class="QLabel" name="label_2">
                <property name="text">
@@ -1037,29 +1030,22 @@
                </property>
               </widget>
              </item>
-             <item row="4" column="0">
+             <item row="3" column="0">
               <widget class="QLabel" name="labelAlias">
                <property name="text">
                 <string>Alias:</string>
                </property>
               </widget>
              </item>
-             <item row="4" column="1">
+             <item row="3" column="1">
               <widget class="QLineEdit" name="lineEditAlias"/>
-             </item>
-             <item row="1" column="1">
-              <widget class="VPE::QtColorPicker" name="pushButtonColor">
-               <property name="text">
-                <string notr="true">Color</string>
-               </property>
-              </widget>
              </item>
             </layout>
            </item>
            <item>
             <spacer name="verticalSpacer">
              <property name="orientation">
-              <enum>Qt::Vertical</enum>
+              <enum>Qt::Orientation::Vertical</enum>
              </property>
              <property name="sizeHint" stdset="0">
               <size>
@@ -1090,10 +1076,10 @@
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+      <enum>Qt::Orientation::Horizontal</enum>
      </property>
      <property name="standardButtons">
-      <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+      <set>QDialogButtonBox::StandardButton::Apply|QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Ok</set>
      </property>
     </widget>
    </item>
@@ -1101,14 +1087,14 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>VPE::QtColorPicker</class>
-   <extends>QPushButton</extends>
-   <header>../vpropertyexplorer/qtcolorpicker.h</header>
-  </customwidget>
-  <customwidget>
    <class>VPlainTextEdit</class>
    <extends>QPlainTextEdit</extends>
    <header>../vwidgets/vplaintextedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>VPE::QtColorPicker</class>
+   <extends>QPushButton</extends>
+   <header>../vpropertyexplorer/qtcolorpicker.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

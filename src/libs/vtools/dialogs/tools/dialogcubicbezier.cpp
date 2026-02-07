@@ -67,8 +67,6 @@ DialogCubicBezier::DialogCubicBezier(const VContainer *data, VAbstractPattern *d
     ui->doubleSpinBoxApproximationScale->setMaximum(maxCurveApproximationScale);
 
     connect(ui->comboBoxP1, &QComboBox::currentTextChanged, this, &DialogCubicBezier::PointNameChanged);
-    connect(ui->comboBoxP2, &QComboBox::currentTextChanged, this, &DialogCubicBezier::PointNameChanged);
-    connect(ui->comboBoxP3, &QComboBox::currentTextChanged, this, &DialogCubicBezier::PointNameChanged);
     connect(ui->comboBoxP4, &QComboBox::currentTextChanged, this, &DialogCubicBezier::PointNameChanged);
 
     connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogCubicBezier::ValidateAlias);
@@ -105,7 +103,6 @@ void DialogCubicBezier::SetSpline(const VCubicBezier &spline)
     ChangeCurrentData(ui->comboBoxPenStyle, spl.GetPenStyle());
     ui->pushButtonColor->setCurrentColor(spl.GetColor());
 
-    ui->lineEditSplineName->setText(VAbstractApplication::VApp()->TrVars()->VarToUser(spl.name()));
     ui->doubleSpinBoxApproximationScale->setValue(spl.GetApproximationScale());
 
     originAliasSuffix = spl.GetAliasSuffix();
@@ -181,44 +178,13 @@ void DialogCubicBezier::PointNameChanged()
     {
         flagError = false;
         color = errorColor;
-
-        ui->lineEditSplineName->setText(tr("Invalid spline"));
     }
     else
     {
         flagError = true;
         color = OkColor(this);
-
-        if (getCurrentObjectId(ui->comboBoxP1) == spl.GetP1().id() &&
-            getCurrentObjectId(ui->comboBoxP4) == spl.GetP4().id())
-        {
-            newDuplicate = -1;
-            ui->lineEditSplineName->setText(VAbstractApplication::VApp()->TrVars()->VarToUser(spl.name()));
-        }
-        else
-        {
-            try
-            {
-                VCubicBezier spline(*GetP1(), *GetP2(), *GetP3(), *GetP4());
-
-                if (not data->IsUnique(spline.name()))
-                {
-                    newDuplicate = static_cast<qint32>(DNumber(spline.name()));
-                    spline.SetDuplicate(static_cast<quint32>(newDuplicate));
-                }
-                ui->lineEditSplineName->setText(VAbstractApplication::VApp()->TrVars()->VarToUser(spline.name()));
-            }
-            catch (const VExceptionBadId &)
-            {
-                flagError = false;
-                color = errorColor;
-            }
-        }
     }
-    ChangeColor(ui->labelName, color);
     ChangeColor(ui->labelFirstPoint, color);
-    ChangeColor(ui->labelSecondPoint, color);
-    ChangeColor(ui->labelThirdPoint, color);
     ChangeColor(ui->labelForthPoint, color);
     CheckState();
 }
@@ -263,9 +229,8 @@ void DialogCubicBezier::ValidateAlias()
     VCubicBezier spline = spl;
     spline.SetAliasSuffix(ui->lineEditAlias->text());
     if (QRegularExpression const rx(NameRegExp());
-        not ui->lineEditAlias->text().isEmpty() &&
-        (not rx.match(spline.GetAlias()).hasMatch() ||
-         (originAliasSuffix != ui->lineEditAlias->text() && not data->IsUnique(spline.GetAlias()))))
+        ui->lineEditAlias->text().isEmpty() || !rx.match(spline.GetAlias()).hasMatch()
+        || (originAliasSuffix != ui->lineEditAlias->text() && !data->IsUnique(spline.GetAlias())))
     {
         flagAlias = false;
         ChangeColor(ui->labelAlias, errorColor);
@@ -325,4 +290,13 @@ void DialogCubicBezier::SetDefPenStyle(const QString &value)
 void DialogCubicBezier::SetDefColor(const QString &value)
 {
     ui->pushButtonColor->setCurrentColor(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCubicBezier::CheckDependencyTreeComplete()
+{
+    const bool ready = m_doc->IsPatternGraphComplete();
+    ui->comboBoxP1->setEnabled(ready);
+    ui->comboBoxP4->setEnabled(ready);
+    ui->lineEditAlias->setEnabled(ready);
 }

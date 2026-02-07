@@ -64,6 +64,8 @@ public:
     void SetDefPenStyle(const QString &value);
     void SetDefColor(const QString &value);
 
+    void CheckDependencyTreeComplete() override;
+
 public slots:
     void ChosenObject(quint32 id, const SceneObject &type) override;
     void PointNameChanged() override;
