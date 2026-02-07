@@ -107,6 +107,11 @@ protected:
 
     auto ComplexToolTip(quint32 itemId) const -> QString;
 
+    void ProcessTrueDartsToolOptions(const QDomElement &oldDomElement,
+                                     const QDomElement &newDomElement,
+                                     const QString &newP1Label,
+                                     const QString &newP2Label);
+
 private:
     Q_DISABLE_COPY_MOVE(VToolDoublePoint) // NOLINT
 };

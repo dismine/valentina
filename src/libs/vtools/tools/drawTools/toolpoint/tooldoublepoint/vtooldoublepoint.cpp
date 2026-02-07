@@ -34,10 +34,11 @@
 #include <QPoint>
 #include <QSharedPointer>
 #include <QUndoStack>
-#include <new>
 
 #include "../../../../undocommands/label/movedoublelabel.h"
 #include "../../../../undocommands/label/showdoublelabel.h"
+#include "../../../../undocommands/renameobject.h"
+#include "../../../../undocommands/savetooloptions.h"
 #include "../../../vabstracttool.h"
 #include "../../vdrawtool.h"
 #include "../ifc/xml/vabstractpattern.h"
@@ -496,4 +497,47 @@ auto VToolDoublePoint::ComplexToolTip(quint32 itemId) const -> QString
                             u"%3"
                             u"</table>"_s.arg(tr("Label"), point->name(), MakeToolTip());
     return toolTip;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolDoublePoint::ProcessTrueDartsToolOptions(const QDomElement &oldDomElement,
+                                                   const QDomElement &newDomElement,
+                                                   const QString &newP1Label,
+                                                   const QString &newP2Label)
+{
+    const QString oldP1Label = VAbstractTool::data.GetGObject(p1id)->name();
+    const QString oldP2Label = VAbstractTool::data.GetGObject(p2id)->name();
+
+    if (oldP1Label == newP1Label && oldP2Label == newP2Label)
+    {
+        VAbstractPoint::ApplyToolOptions(oldDomElement, newDomElement);
+        return;
+    }
+
+    QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
+    undoStack->beginMacro(tr("save tool options"));
+
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+    saveOptions->SetInGroup(true);
+    connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    undoStack->push(saveOptions);
+
+    if (oldP1Label != newP1Label)
+    {
+        auto *renameLabel = new RenameLabel(oldP1Label, newP1Label, doc, p1id);
+        if (oldP2Label == newP2Label)
+        {
+            connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        }
+        undoStack->push(renameLabel);
+    }
+
+    if (oldP2Label != newP2Label)
+    {
+        auto *renameLabel = new RenameLabel(oldP2Label, newP2Label, doc, p2id);
+        connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        undoStack->push(renameLabel);
+    }
+
+    undoStack->endMacro();
 }
