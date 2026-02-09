@@ -525,7 +525,7 @@ void DialogRestrictDimension::InitTable()
     QSignalBlocker blocker(ui->tableWidget);
     ui->tableWidget->clear();
 
-    auto InitVerticalHeaderForDimension = [this](int index)
+    auto InitVerticalHeaderForDimension = [this](int index) -> void
     {
         if (m_dimensions.size() > index)
         {
@@ -536,7 +536,7 @@ void DialogRestrictDimension::InitTable()
         }
     };
 
-    auto InitHorizontalHeaderForDimension = [this](int index)
+    auto InitHorizontalHeaderForDimension = [this](int index) -> void
     {
         if (m_dimensions.size() > index)
         {

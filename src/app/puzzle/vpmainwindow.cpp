@@ -1532,7 +1532,7 @@ void VPMainWindow::SetPropertyTabSheetData()
                 ui->comboBoxLayoutUnit->setCurrentIndex(0);
             }
 
-            const QString suffix = " " + UnitsToStr(LayoutUnit(), true);
+            const QString suffix = " "_L1 + UnitsToStr(LayoutUnit(), true);
 
             ui->doubleSpinBoxSheetPaperWidth->setSuffix(suffix);
             ui->doubleSpinBoxSheetPaperHeight->setSuffix(suffix);

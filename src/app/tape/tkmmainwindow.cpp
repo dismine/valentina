@@ -2433,8 +2433,8 @@ void TKMMainWindow::RefreshImages()
             auto const scalingFactorWidth = static_cast<double>(targetSize.width()) / size.width();
             auto const scalingFactorHeight = static_cast<double>(targetSize.height()) / size.height();
 
-            int newWidth;
-            int newHeight;
+            int newWidth = 0;
+            int newHeight = 0;
 
             if (scalingFactorWidth < scalingFactorHeight)
             {

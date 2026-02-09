@@ -1649,7 +1649,7 @@ void DialogIncrements::RefreshPattern()
     if (m_hasChanges)
     {
         QVector<VFormulaField> expressions = m_patternDoc->ListExpressions();
-        for (const auto &[first, second] : m_renameList)
+        for (const auto &[first, second] : std::as_const(m_renameList))
         {
             m_patternDoc->ReplaceNameInFormula(expressions, first, second);
         }
