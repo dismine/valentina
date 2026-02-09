@@ -1,5 +1,7 @@
 IDI_ICON1               ICON    DISCARDABLE     "valentina.ico"
 
+1 RT_MANIFEST "valentina.manifest"
+
 #include <windows.h>
 #include "../../version.h"
 #include "../../../../libs/vmisc/projectversion.h"

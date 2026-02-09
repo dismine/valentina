@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include <QMessageBox> // For QT_REQUIRE_VERSION
+#include <QScreen>
 #include <QTimer>
 
 #include "vpapplication.h"
@@ -121,11 +122,48 @@ auto main(int argc, char *argv[]) -> int
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     XERCES_CPP_NAMESPACE::XMLPlatformUtils::Initialize();
 
-    auto Terminate = qScopeGuard([]() { XERCES_CPP_NAMESPACE::XMLPlatformUtils::Terminate(); });
+    auto Terminate = qScopeGuard([]() -> void { XERCES_CPP_NAMESPACE::XMLPlatformUtils::Terminate(); });
 #endif
 
     VPApplication app(argc, argv);
     app.InitOptions();
+
+    // === Diagnostic logging for DPI/multi-monitor crash investigation ===
+    // This logs screen configuration to help diagnose crashes that only occur
+    // on specific user systems, particularly related to:
+    // - Multi-monitor setups with different DPI scaling (e.g., 100% + 150%)
+    // - High-DPI displays (4K, 5K) with scaling > 100%
+    // - QPainter "engine == 0" errors caused by invalid paint device dimensions
+    // The crash stack trace shows UxTheme.dll + GetSystemMetricsForDpi, indicating
+    // Windows is calculating UI metrics based on DPI, which may fail if Qt and
+    // Windows disagree about DPI handling.
+    qDebug() << "=== Screen Information ===";
+    qDebug() << "Screens:";
+    for (auto *screen : QGuiApplication::screens())
+    {
+        qDebug() << "  -" << screen->name() << "DPI:" << screen->logicalDotsPerInch()
+                 << "Ratio:" << screen->devicePixelRatio() << "Geometry:" << screen->geometry();
+    }
+
+    // Monitor for screen configuration changes during runtime
+    // These events can trigger repainting with new DPI values, which may expose
+    // the crash if Qt/Windows DPI coordination fails during the transition
+    QObject::connect(qApp,
+                     &QGuiApplication::screenAdded,
+                     [](QScreen *screen) -> void
+                     {
+                         qDebug() << "Screen added:" << screen->name();
+                         // User plugged in external monitor - may trigger DPI recalculation
+                     });
+
+    QObject::connect(qApp,
+                     &QGuiApplication::primaryScreenChanged,
+                     [](QScreen *screen) -> void
+                     {
+                         qDebug() << "Primary screen changed to:" << screen->name();
+                         // User moved window to different monitor or changed primary display
+                         // This can cause widgets to repaint with different DPI values
+                     });
 
     QT_REQUIRE_VERSION(argc, argv, "5.15.0") // clazy:exclude=qstring-arg,qstring-allocations NOLINT
 
