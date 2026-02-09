@@ -15085,16 +15085,16 @@ This option will take an affect after restart.</source>
         <translation type="vanished">The path to the measurments is already absolute.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/main.cpp" line="65"/>
-        <location filename="../../src/app/tape/main.cpp" line="66"/>
-        <location filename="../../src/app/valentina/main.cpp" line="70"/>
+        <location filename="../../src/app/puzzle/main.cpp" line="66"/>
+        <location filename="../../src/app/tape/main.cpp" line="67"/>
+        <location filename="../../src/app/valentina/main.cpp" line="71"/>
         <source>Executable &apos;%1&apos; requires Qt %2, found Qt %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/main.cpp" line="70"/>
-        <location filename="../../src/app/tape/main.cpp" line="71"/>
-        <location filename="../../src/app/valentina/main.cpp" line="75"/>
+        <location filename="../../src/app/puzzle/main.cpp" line="71"/>
+        <location filename="../../src/app/tape/main.cpp" line="72"/>
+        <location filename="../../src/app/valentina/main.cpp" line="76"/>
         <source>Incompatible Qt Library Error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -15638,7 +15638,7 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1431"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1521"/>
         <source>Invalid global value for a passmark length. Piece &apos;%1&apos;. Length is less than minimal allowed.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -15653,15 +15653,15 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="213"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="261"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="214"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="262"/>
         <source>Cannot set printer page size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="222"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="270"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3243"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="223"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="271"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3233"/>
         <source>Cannot set printer margins</source>
         <translation type="unfinished">Cannot set printer margins</translation>
     </message>
@@ -15766,22 +15766,22 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1678"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1768"/>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with internal path &apos;%3&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1593"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1683"/>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with cutting contour.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1466"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1556"/>
         <source>Invalid global value for a passmark width. Piece &apos;%1&apos;. Width is less than minimal allowed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1604"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1694"/>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; not inside of cutting contour.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -15802,26 +15802,26 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="963"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="977"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="962"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="976"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam path at %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="965"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="979"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="964"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="978"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam path.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1029"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1049"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1020"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1040"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam allowance path at %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1031"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1051"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1022"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1042"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam allowance path.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -23172,147 +23172,147 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2303"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="5179"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="5169"/>
         <source>Preferences</source>
         <translation type="unfinished">Preferences</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="472"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="487"/>
         <source>File &apos;%1&apos; doesn&apos;t exist!</source>
         <translation type="unfinished">File &apos;%1&apos; doesn&apos;t exist!</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="516"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="526"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="552"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="531"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="541"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="567"/>
         <source>File error.</source>
         <translation type="unfinished">File error.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="638"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="653"/>
         <source>Fail to create layout.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3471"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3461"/>
         <source>Could not extract data from file &apos;%1&apos;. %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="931"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1018"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="946"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1033"/>
         <source>Centimeters</source>
         <translation type="unfinished">Centimeters</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="930"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1017"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="945"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1032"/>
         <source>Millimiters</source>
         <translation type="unfinished">Millimiters</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="932"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1019"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="947"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1034"/>
         <source>Inches</source>
         <translation type="unfinished">Inches</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1792"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1807"/>
         <source>Scale:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1822"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1837"/>
         <source>untitled %1.vlt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1822"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1837"/>
         <source>untitled.vlt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1829"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1844"/>
         <source>read only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1895"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1910"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1912"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1927"/>
         <source>Cannot save settings. Access denied.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2845"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3199"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3382"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2835"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3189"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3372"/>
         <source>Failed to open file, is it writable?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1967"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1982"/>
         <source>&amp;New Window</source>
         <translation type="unfinished">&amp;New Window</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1924"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1939"/>
         <source>Layout has been modified. Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3809"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3871"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3799"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3861"/>
         <source>Layout files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3813"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3961"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4910"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3803"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3951"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4900"/>
         <source>Open file</source>
         <translation type="unfinished">Open file</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3854"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3844"/>
         <source>Could not save the file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3873"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3863"/>
         <source>layout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3885"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3875"/>
         <source>Save as</source>
         <translation type="unfinished">Save as</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3915"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3905"/>
         <source>Failed to lock. This file already opened in another window.</source>
         <translation type="unfinished">Failed to lock. This file already opened in another window.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3925"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3915"/>
         <source>Could not save file</source>
         <translation type="unfinished">Could not save file</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3946"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3936"/>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
         <translation type="unfinished">Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3956"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3946"/>
         <source>Raw Layout files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3974"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3964"/>
         <source>About Qt</source>
         <translation type="unfinished">About Qt</translation>
     </message>
@@ -23577,157 +23577,157 @@ Do you want to save your changes?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="517"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="532"/>
         <source>Unable to read a layout file. %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="527"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="542"/>
         <source>Failed to read %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="743"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3777"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="758"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3767"/>
         <source>&amp;Undo</source>
         <translation type="unfinished">&amp;Undo</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="749"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3778"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="764"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3768"/>
         <source>&amp;Redo</source>
         <translation type="unfinished">&amp;Redo</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="933"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1020"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="948"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1035"/>
         <source>Pixels</source>
         <translation type="unfinished">Pixels</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1923"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1938"/>
         <source>Unsaved changes</source>
         <translation type="unfinished">Unsaved changes</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1932"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1947"/>
         <source>Save…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1932"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1947"/>
         <source>Save</source>
         <translation type="unfinished">Save</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1937"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1952"/>
         <source>Don&apos;t Save</source>
         <translation type="unfinished">Don&apos;t Save</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2424"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2489"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2427"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2492"/>
         <source>Can&apos;t create a path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2723"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2714"/>
         <source>Can&apos;t open file &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2737"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3249"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2728"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3239"/>
         <source>Failed in flushing page to disk, disk full?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3087"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3114"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3143"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3077"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3104"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3133"/>
         <source>The layout is invalid.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3088"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3078"/>
         <source>The layout is invalid. Piece out of bound. Do you want to continue export?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3115"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3105"/>
         <source>The layout is invalid. Pieces superposition. Do you want to continue export?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3144"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3134"/>
         <source>The layout is invalid. One or several pieces are closer than minimally allowed. Do you want to continue export?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4244"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4234"/>
         <source>Sheet %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3547"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3537"/>
         <source>translate pieces</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3664"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3654"/>
         <source>rotate pieces</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4448"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4438"/>
         <source>untitled %1</source>
         <translation type="unfinished">untitled %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4448"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4438"/>
         <source>untitled</source>
         <translation type="unfinished">untitled</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4539"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4590"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4529"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4580"/>
         <source>For printing multipages document all sheet should have the same size.</source>
         <translation type="unfinished">For printing multipages document all sheet should have the same size.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4551"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4602"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4637"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4675"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4730"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4774"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4807"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4843"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4541"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4592"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4627"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4665"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4720"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4764"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4797"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4833"/>
         <source>Print error</source>
         <translation type="unfinished">Print error</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4552"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4603"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4638"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4676"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4731"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4775"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4808"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4844"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4542"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4593"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4628"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4666"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4721"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4765"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4798"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4834"/>
         <source>Cannot proceed because there are no available printers in your system.</source>
         <translation type="unfinished">Cannot proceed because there are no available printers in your system.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4907"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4897"/>
         <source>Watermark files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4563"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4614"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4649"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4687"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4553"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4604"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4639"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4677"/>
         <source>Unable to get sheet page settings</source>
         <translation type="unfinished"></translation>
     </message>
@@ -23767,12 +23767,12 @@ Do you want to save your changes?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4501"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4491"/>
         <source>sheet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3493"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3483"/>
         <source>Piece %1 invalid. %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -23846,35 +23846,35 @@ Do you want to save your changes?</translation>
 <context>
     <name>VPTileFactory</name>
     <message>
-        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="942"/>
+        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="944"/>
         <source>Grid ( %1 , %2 )</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="1079"/>
+        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="1081"/>
         <source>Page %1 of %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="1450"/>
+        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="1452"/>
         <source>Warning: Multiple single stroke outline fonts detected (%1). The font &quot;%2&quot; was selected.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="1512"/>
+        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="1514"/>
         <source>Warning: Multiple single-line SVG fonts detected (%1). The font &quot;%2&quot; was selected.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="479"/>
-        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="589"/>
+        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="481"/>
+        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="591"/>
         <source>cm</source>
         <comment>unit</comment>
         <translation type="unfinished">cm</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="479"/>
-        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="589"/>
+        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="481"/>
+        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="591"/>
         <source>in</source>
         <comment>unit</comment>
         <translation type="unfinished">in</translation>
@@ -24399,20 +24399,20 @@ Do you want to save your changes?</translation>
 <context>
     <name>VPiece</name>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="184"/>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="201"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="288"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="305"/>
         <source>Main path of piece %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1156"/>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1196"/>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1279"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1181"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1221"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1305"/>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1335"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1361"/>
         <source>Notch for point &apos;%1&apos; in piece &apos;%2&apos; will be disabled. Manual length is less than allowed value.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -24420,38 +24420,38 @@ Do you want to save your changes?</translation>
 <context>
     <name>VPoster</name>
     <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="250"/>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="252"/>
         <source>Grid ( %1 , %2 )</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="251"/>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="253"/>
         <source>Page %1 of %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="258"/>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="260"/>
         <source>Sheet %1 of %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="323"/>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="325"/>
         <source>Cannot open the watermark image.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="335"/>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="337"/>
         <source>Not supported file suffix &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="493"/>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="495"/>
         <source>cm</source>
         <comment>unit</comment>
         <translation type="unfinished">cm</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="494"/>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="496"/>
         <source>in</source>
         <comment>unit</comment>
         <translation type="unfinished">in</translation>
@@ -24827,32 +24827,32 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="302"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="303"/>
         <source>Arc</source>
         <translation type="unfinished">Arc</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="303"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="304"/>
         <source>length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="304"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="305"/>
         <source>start angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="305"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="306"/>
         <source>end angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="306"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="307"/>
         <source>radius</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="337"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="338"/>
         <source>label</source>
         <translation type="unfinished"></translation>
     </message>

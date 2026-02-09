@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="hr_HR">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="hr_HR">
 <context>
     <name>AddBackgroundImage</name>
     <message>
@@ -87,10 +89,6 @@
 </context>
 <context>
     <name>ColorPickerPopup</name>
-    <message>
-        <source>Custom</source>
-        <translation type="unfinished"/>
-    </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="1226"/>
         <source>Custom</source>
@@ -436,12 +434,12 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="266"/>
         <source>Special thanks</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="308"/>
         <source>Credits</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Contributors</source>
@@ -502,12 +500,12 @@
     <message>
         <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="273"/>
         <source>Special thanks</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="321"/>
         <source>Credits</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogabouttape.cpp" line="144"/>
@@ -693,10 +691,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="31"/>
         <source>Tool</source>
         <translation>Alat</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="355"/>
@@ -1012,7 +1006,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="14"/>
         <source>Arc with length</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="651"/>
@@ -1209,10 +1203,6 @@
         <translation>Alat</translation>
     </message>
     <message>
-        <source>Color</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="351"/>
         <source>Notes</source>
         <translation>Bilješke</translation>
@@ -1221,23 +1211,19 @@
 <context>
     <name>DialogCredits</name>
     <message>
-        <source>Dialog</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogcredits.ui" line="14"/>
         <source>Credits</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogcredits.ui" line="28"/>
         <source>Sponsors</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogcredits.ui" line="42"/>
         <source>Authors</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1327,10 +1313,6 @@
         <translation>Pseudonim:</translation>
     </message>
     <message>
-        <source>Color</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="172"/>
         <source>Notes</source>
         <translation>Bilješke</translation>
@@ -1376,10 +1358,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="36"/>
         <source>New point:</source>
         <translation>Nova točka:</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="134"/>
@@ -1430,10 +1408,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="296"/>
         <source>Alias:</source>
         <translation>Pseudonim:</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="333"/>
@@ -1558,10 +1532,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="28"/>
         <source>Tool</source>
         <translation>Alat</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="373"/>
@@ -2422,14 +2392,6 @@
         <translation>Naziv datoteke kroja</translation>
     </message>
     <message>
-        <source>Size</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Height</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="713"/>
         <source>Piece letter</source>
         <translation>Slovo krojnog dijela</translation>
@@ -2475,17 +2437,9 @@
         <translation>Materijal: Tkanina</translation>
     </message>
     <message>
-        <source>Fabric</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="722"/>
         <source>Material: Lining</source>
         <translation>Materijal: Podstava</translation>
-    </message>
-    <message>
-        <source>Lining</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="724"/>
@@ -2493,17 +2447,9 @@
         <translation>Materijal: Pojačanje</translation>
     </message>
     <message>
-        <source>Interfacing</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="726"/>
         <source>Material: Interlining</source>
         <translation>Materijal: Međupodstava</translation>
-    </message>
-    <message>
-        <source>Interlining</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="727"/>
@@ -2511,17 +2457,9 @@
         <translation>Riječ: Izrezati</translation>
     </message>
     <message>
-        <source>Cut</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="728"/>
         <source>Word: on fold</source>
         <translation>Riječ: na preklopu</translation>
-    </message>
-    <message>
-        <source>on fold</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="641"/>
@@ -2947,10 +2885,6 @@
 <context>
     <name>DialogEllipticalArc</name>
     <message>
-        <source>Dialog</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="79"/>
         <source>Radius1:</source>
         <translation>Polumjer1:</translation>
@@ -3031,18 +2965,6 @@
         <translation>Boja:</translation>
     </message>
     <message>
-        <source>Error</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Radius can&apos;t be negative</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Angles equal</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="476"/>
         <source>Edit radius1</source>
         <translation>Uredi polumjer1</translation>
@@ -3086,10 +3008,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="1020"/>
         <source>Alias:</source>
         <translation>Pseudonim:</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="1076"/>
@@ -3234,10 +3152,6 @@
         <translation>Alat</translation>
     </message>
     <message>
-        <source>Color</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="549"/>
         <source>Notes</source>
         <translation>Bilješke</translation>
@@ -3311,10 +3225,6 @@
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="14"/>
         <source>Final measurements</source>
         <translation>Završna mjerenja</translation>
-    </message>
-    <message>
-        <source>Find:</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="52"/>
@@ -3600,10 +3510,6 @@
         <translation>Boja:</translation>
     </message>
     <message>
-        <source>Color</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="205"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="682"/>
         <source>Ready</source>
@@ -3753,10 +3659,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="94"/>
         <source>Color:</source>
         <translation>Boja:</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="205"/>
@@ -3956,10 +3858,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="31"/>
         <source>Tool</source>
         <translation>Alat</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="155"/>
@@ -4892,10 +4790,6 @@
         <source>Vertical:</source>
         <translation>Vertikalno:</translation>
     </message>
-    <message>
-        <source>...</source>
-        <translation type="unfinished"/>
-    </message>
 </context>
 <context>
     <name>DialogLayoutSettings</name>
@@ -5328,10 +5222,6 @@ Svejedno primijeniti postavke?</translation>
         <translation>Alat</translation>
     </message>
     <message>
-        <source>Color</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="160"/>
         <source>Notes</source>
         <translation>Bilješke</translation>
@@ -5562,10 +5452,6 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="28"/>
         <source>Tool</source>
         <translation>Alat</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="372"/>
@@ -5809,18 +5695,6 @@ Svejedno primijeniti postavke?</translation>
         <translation>Preskoči</translation>
     </message>
     <message>
-        <source>Name</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Value</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Base value</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="828"/>
         <source>File path is empty</source>
         <translation>Putanja datoteke je prazna</translation>
@@ -5976,10 +5850,6 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="101"/>
         <source>Color:</source>
         <translation>Boja:</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="744"/>
@@ -6295,10 +6165,6 @@ Svejedno primijeniti postavke?</translation>
         <translation>Alat</translation>
     </message>
     <message>
-        <source>Color</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="545"/>
         <source>Notes</source>
         <translation>Bilješke</translation>
@@ -6566,10 +6432,6 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="97"/>
         <source>Label language:</source>
         <translation>Jezik oznaka:</translation>
-    </message>
-    <message>
-        <source>yyyy-MM-dd</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="114"/>
@@ -6915,14 +6777,6 @@ Svejedno primijeniti postavke?</translation>
         <translation>Kut:</translation>
     </message>
     <message>
-        <source>Reverse</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1028"/>
         <source>Edit seam allowance width</source>
         <translation>Uredi širinu šava</translation>
@@ -6982,10 +6836,6 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1039"/>
         <source>Passmark:</source>
         <translation>Oznaka:</translation>
-    </message>
-    <message>
-        <source>Lines</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1075"/>
@@ -7269,10 +7119,6 @@ Svejedno primijeniti postavke?</translation>
         <translation>V oznaka 2</translation>
     </message>
     <message>
-        <source>Length:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1156"/>
         <source>U mark</source>
         <translation>U oznaka</translation>
@@ -7295,10 +7141,6 @@ Svejedno primijeniti postavke?</translation>
 </context>
 <context>
     <name>DialogPin</name>
-    <message>
-        <source>Dialog</source>
-        <translation type="unfinished"/>
-    </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpin.ui" line="21"/>
         <source>Pin tool</source>
@@ -7327,10 +7169,6 @@ Svejedno primijeniti postavke?</translation>
 </context>
 <context>
     <name>DialogPlaceLabel</name>
-    <message>
-        <source>Dialog</source>
-        <translation type="unfinished"/>
-    </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="79"/>
         <source>Width:</source>
@@ -8194,7 +8032,11 @@ Svejedno primijeniti postavke?</translation>
     <message numerus="yes">
         <location filename="../../src/app/valentina/dialogs/dialogpreferences.cpp" line="158"/>
         <source>Followed %n option(s) require restart to take effect: %1.</source>
-        <translation><numerusform>Sljedeća %n opcija zahtijeva ponovno pokretanje za primjenu: %1.</numerusform><numerusform>Sljedeće %n opcije zahtijevaju ponovno pokretanje za primjenu: %1.</numerusform><numerusform>Za sljedećih %n opcija potrebno je ponovno pokretanje: %1.</numerusform></translation>
+        <translation>
+            <numerusform>Sljedeća %n opcija zahtijeva ponovno pokretanje za primjenu: %1.</numerusform>
+            <numerusform>Sljedeće %n opcije zahtijevaju ponovno pokretanje za primjenu: %1.</numerusform>
+            <numerusform>Za sljedećih %n opcija potrebno je ponovno pokretanje: %1.</numerusform>
+        </translation>
     </message>
 </context>
 <context>
@@ -8217,7 +8059,11 @@ Svejedno primijeniti postavke?</translation>
     <message numerus="yes">
         <location filename="../../src/app/puzzle/dialogs/dialogpuzzlepreferences.cpp" line="159"/>
         <source>Followed %n option(s) require restart to take effect: %1.</source>
-        <translation><numerusform>Sljedeća %n opcija zahtijeva ponovno pokretanje za primjenu: %1.</numerusform><numerusform>Sljedeće %n opcije zahtijevaju ponovno pokretanje za primjenu: %1.</numerusform><numerusform>Za sljedećih %n opcija potrebno je ponovno pokretanje: %1.</numerusform></translation>
+        <translation>
+            <numerusform>Sljedeća %n opcija zahtijeva ponovno pokretanje za primjenu: %1.</numerusform>
+            <numerusform>Sljedeće %n opcije zahtijevaju ponovno pokretanje za primjenu: %1.</numerusform>
+            <numerusform>Za sljedećih %n opcija potrebno je ponovno pokretanje: %1.</numerusform>
+        </translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogpuzzlepreferences.ui" line="75"/>
@@ -8271,10 +8117,6 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="194"/>
         <source>Rotation</source>
         <translation>Rotacija</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="157"/>
@@ -8567,10 +8409,6 @@ Svejedno primijeniti postavke?</translation>
         <translation>Format papira</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="58"/>
         <source>Browse…</source>
         <translation>Pregledaj…</translation>
@@ -8712,10 +8550,6 @@ Svejedno primijeniti postavke?</translation>
 <context>
     <name>DialogSaveManualLayout</name>
     <message>
-        <source>Dialog</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.ui" line="26"/>
         <source>Path:</source>
         <translation>Putanja:</translation>
@@ -8812,14 +8646,6 @@ Svejedno primijeniti postavke?</translation>
         <translation>Odaberite mapu</translation>
     </message>
     <message>
-        <source>Tried to use out of range format number.</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Selected not present format.</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="188"/>
         <source>Tried to use out of range file format type number.</source>
         <translation>Pokušano korištenje vrste formata izvan dometa.</translation>
@@ -8869,37 +8695,9 @@ Svejedno primijeniti postavke?</translation>
 <context>
     <name>DialogSeamAllowance</name>
     <message>
-        <source>Seam allowance tool</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>All objects in path should follow in clockwise direction.</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Forbid piece be mirrored in a layout.</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Forbid flipping</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="634"/>
         <source>Ready!</source>
         <translation>Spremno!</translation>
-    </message>
-    <message>
-        <source>Seam allowance</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Width:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Formula wizard</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2102"/>
@@ -8909,90 +8707,14 @@ Svejedno primijeniti postavke?</translation>
         <translation>Vrijednost</translation>
     </message>
     <message>
-        <source>Calculation</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4646"/>
         <source>Default</source>
         <translation>Zadano</translation>
     </message>
     <message>
-        <source>Angle:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Custom</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Pattern piece data</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Letter:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Letter of pattern piece</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Name of detail:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5059"/>
         <source>Detail</source>
         <translation>Detalj</translation>
-    </message>
-    <message>
-        <source>Name can&apos;t be empty</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Material/Cut number/Placement</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Cut number:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Material type:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>You can choose one of the predefined materials or enter a new one</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Placement:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Detail label visible</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Pattern label visible</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2142"/>
@@ -9001,30 +8723,6 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3770"/>
         <source>Grainline</source>
         <translation>Nit osnove</translation>
-    </message>
-    <message>
-        <source>Grainline visible</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Rotation:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Length:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Arrows:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Cut %1 of %2%3</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>on Fold</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2479"/>
@@ -9156,10 +8854,6 @@ Svejedno primijeniti postavke?</translation>
         <translation>Pogreška analizatora: %1</translation>
     </message>
     <message>
-        <source>Update</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2739"/>
         <source>Current seam allowance</source>
         <translation>Trenutna širina šava</translation>
@@ -9233,22 +8927,6 @@ Svejedno primijeniti postavke?</translation>
         <translation>Ništa</translation>
     </message>
     <message>
-        <source>Cut on fold</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Both</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Just front</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Just rear</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3768"/>
         <source>Pins</source>
         <translation>Iglice</translation>
@@ -9269,10 +8947,6 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3769"/>
         <source>Labels</source>
         <translation>Oznake</translation>
-    </message>
-    <message>
-        <source>Height:</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2126"/>
@@ -9729,11 +9403,6 @@ Svejedno primijeniti postavke?</translation>
         <translation>Koristi cijeli opseg</translation>
     </message>
     <message>
-        <source>Height</source>
-        <comment>dimension</comment>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.ui" line="76"/>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.ui" line="214"/>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.ui" line="355"/>
@@ -9796,11 +9465,6 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.ui" line="540"/>
         <source>The base value for the column</source>
         <translation>Osnovna vrijednost za stupac</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <comment>dimension</comment>
-        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.cpp" line="453"/>
@@ -9991,10 +9655,6 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="31"/>
         <source>Tool</source>
         <translation>Alat</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="402"/>
@@ -10310,10 +9970,6 @@ Svejedno primijeniti postavke?</translation>
         <translation>Nova točka:</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="123"/>
         <source>First control point</source>
         <translation>Prva kontrolna točka</translation>
@@ -10498,7 +10154,11 @@ Svejedno primijeniti postavke?</translation>
     <message numerus="yes">
         <location filename="../../src/app/tape/dialogs/dialogtapepreferences.cpp" line="147"/>
         <source>Followed %n option(s) require restart to take effect: %1.</source>
-        <translation><numerusform>Sljedeća %n opcija zahtijeva ponovno pokretanje za primjenu: %1.</numerusform><numerusform>Sljedeće %n opcije zahtijevaju ponovno pokretanje za primjenu: %1.</numerusform><numerusform>Za sljedećih %n opcija potrebno je ponovno pokretanje: %1.</numerusform></translation>
+        <translation>
+            <numerusform>Sljedeća %n opcija zahtijeva ponovno pokretanje za primjenu: %1.</numerusform>
+            <numerusform>Sljedeće %n opcije zahtijevaju ponovno pokretanje za primjenu: %1.</numerusform>
+            <numerusform>Za sljedećih %n opcija potrebno je ponovno pokretanje: %1.</numerusform>
+        </translation>
     </message>
 </context>
 <context>
@@ -13091,10 +12751,6 @@ Do you want to save your changes?</source>
         <translation>Obriši sve poruke</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="467"/>
         <source>Filter</source>
         <translation>Filter</translation>
@@ -13563,14 +13219,6 @@ Do you want to save your changes?</source>
         <translation>Datoteka mjerenja ima nepoznat format.</translation>
     </message>
     <message>
-        <source>Measurement file contains invalid known measurement(s).</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Wrong units.</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1366"/>
         <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1435"/>
         <source>File error.</source>
@@ -13583,7 +13231,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1442"/>
-        <source>Measurement file doesn't include all required measurements.
+        <source>Measurement file doesn&apos;t include all required measurements.
 
 Missing: %1
 
@@ -13881,10 +13529,6 @@ Nedostaje: %1
         <translation>Interval:</translation>
     </message>
     <message>
-        <source>min</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="90"/>
         <source>Language</source>
         <translation>Jezik</translation>
@@ -13910,30 +13554,6 @@ Nedostaje: %1
         <translation>Jezik oznaka:</translation>
     </message>
     <message>
-        <source>Pattern making system</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Pattern making system:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Author:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Book:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Send crash reports</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Send crash reports (recommended)</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="166"/>
         <source>Pattern editing</source>
         <translation>Uređivanje krojeva</translation>
@@ -13957,14 +13577,6 @@ Nedostaje: %1
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="416"/>
         <source>With OS options</source>
         <translation>S opcijama OS-a</translation>
-    </message>
-    <message>
-        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="338"/>
@@ -14308,14 +13920,6 @@ Nedostaje: %1
 <context>
     <name>PreferencesPatternPage</name>
     <message>
-        <source>User</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>User name:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="47"/>
         <source>Graphical output</source>
         <translation>Grafički izlaz</translation>
@@ -14336,14 +13940,6 @@ Nedostaje: %1
         <translation>Broj koraka (0 - nema ograničenja):</translation>
     </message>
     <message>
-        <source>User defined materials</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Delete all</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="184"/>
         <source>Workpiece</source>
         <translation>Radni dijelovi</translation>
@@ -14357,10 +13953,6 @@ Nedostaje: %1
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="213"/>
         <source>Show second passmark on seam line</source>
         <translation>Prikaži drugu oznaku šava na liniji šava</translation>
-    </message>
-    <message>
-        <source>All user defined materials have been deleted!</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="190"/>
@@ -14559,10 +14151,6 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
 <context>
     <name>Puzzle</name>
     <message>
-        <source>Export options can be used with single input file only.</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/app/puzzle/vpcommandline.cpp" line="73"/>
         <source>Valentina&apos;s manual layout editor.</source>
         <translation>Ručno uređivanje rasporeda Valentinine.</translation>
@@ -14575,10 +14163,6 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
 </context>
 <context>
     <name>PuzzlePreferencesConfigurationPage</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"/>
-    </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="45"/>
         <source>Language</source>
@@ -14859,10 +14443,6 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
 <context>
     <name>PuzzlePreferencesLayoutPage</name>
     <message>
-        <source>Form</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferenceslayoutpage.ui" line="22"/>
         <source>Sheet</source>
         <translation>List</translation>
@@ -15021,10 +14601,6 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
 <context>
     <name>PuzzlePreferencesPathPage</name>
     <message>
-        <source>Form</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencespathpage.ui" line="20"/>
         <source>Paths that Valentina uses</source>
         <translation>Putanje koje koristi Valentina</translation>
@@ -15081,16 +14657,16 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <translation type="vanished">Putanja do mjerenja je već apsolutna.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/main.cpp" line="65"/>
-        <location filename="../../src/app/tape/main.cpp" line="66"/>
-        <location filename="../../src/app/valentina/main.cpp" line="70"/>
+        <location filename="../../src/app/puzzle/main.cpp" line="66"/>
+        <location filename="../../src/app/tape/main.cpp" line="67"/>
+        <location filename="../../src/app/valentina/main.cpp" line="71"/>
         <source>Executable &apos;%1&apos; requires Qt %2, found Qt %3.</source>
         <translation>Izvršna datoteka &apos;%1&apos; zahtijeva Qt %2, pronađen Qt %3.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/main.cpp" line="70"/>
-        <location filename="../../src/app/tape/main.cpp" line="71"/>
-        <location filename="../../src/app/valentina/main.cpp" line="75"/>
+        <location filename="../../src/app/puzzle/main.cpp" line="71"/>
+        <location filename="../../src/app/tape/main.cpp" line="72"/>
+        <location filename="../../src/app/valentina/main.cpp" line="76"/>
         <source>Incompatible Qt Library Error</source>
         <translation>Pogreška nekompatibilne Qt biblioteke</translation>
     </message>
@@ -15309,10 +14885,6 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <translation type="vanished">Promjene su primijenjene.</translation>
     </message>
     <message>
-        <source>Wrong tag name &apos;%1&apos;.</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1148"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="454"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="459"/>
@@ -15346,30 +14918,6 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <location filename="../../src/libs/vtools/tools/vtooluniondetails.cpp" line="1538"/>
         <source>United detail</source>
         <translation>Sjedinjeni detalj</translation>
-    </message>
-    <message>
-        <source>Fabric</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Lining</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Interfacing</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Interlining</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Cut</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>on fold</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vgeometry/vplacelabelitem.cpp" line="146"/>
@@ -15618,7 +15166,7 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="538"/>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2318"/>
-        <source>Piece '%1'. Unable to load default piece label template.
+        <source>Piece &apos;%1&apos;. Unable to load default piece label template.
 %2
 %3</source>
         <translation>Krojni dio &apos;%1&apos;. Nije moguće učitati zadani predložak oznake krojnog dijela.
@@ -15636,7 +15184,7 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <translation>Dio &apos;%1&apos;. Linija preklopa nije valjana.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1431"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1521"/>
         <source>Invalid global value for a passmark length. Piece &apos;%1&apos;. Length is less than minimal allowed.</source>
         <translation>Nevažeća globalna vrijednost za duljinu oznake. Dio &apos;%1&apos;. Duljina je manja od minimalno dopuštene.</translation>
     </message>
@@ -15651,15 +15199,15 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <translation>rotiraj dijelove</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="213"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="261"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="214"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="262"/>
         <source>Cannot set printer page size</source>
         <translation>Nije moguće postaviti veličinu stranice pisača</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="222"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="270"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3243"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="223"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="271"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3233"/>
         <source>Cannot set printer margins</source>
         <translation>Nije moguće postaviti margine pisača</translation>
     </message>
@@ -15764,22 +15312,22 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <translation>Krivulja &apos;%1&apos;. Duljina segmenta rezanja (%2) je prevelika. Optimizirajte na maksimalnu vrijednost.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1678"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1768"/>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with internal path &apos;%3&apos;.</source>
         <translation>Dio &apos;%1&apos;. Unutarnja putanja &apos;%2&apos; se presijeca s unutarnjom putanjom &apos;%3&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1593"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1683"/>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with cutting contour.</source>
         <translation>Dio &apos;%1&apos;. Unutarnja putanja &apos;%2&apos; se presijeca s linijom rezanja.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1466"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1556"/>
         <source>Invalid global value for a passmark width. Piece &apos;%1&apos;. Width is less than minimal allowed.</source>
         <translation>Nevažeća globalna vrijednost za širinu oznake. Dio &apos;%1&apos;. Širina je manja od minimalno dopuštene.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1604"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1694"/>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; not inside of cutting contour.</source>
         <translation>Dio &apos;%1&apos;. Unutarnja putanja &apos;%2&apos; nije unutar linije rezanja.</translation>
     </message>
@@ -15800,26 +15348,26 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <translation>Nepoznato</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="963"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="977"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="962"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="976"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam path at %2.</source>
         <translation>Dio &apos;%1&apos;. Nije moguće generirati punu putanju šava na %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="965"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="979"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="964"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="978"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam path.</source>
         <translation>Dio &apos;%1&apos;. Nije moguće generirati punu putanju šava.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1029"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1049"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1020"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1040"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam allowance path at %2.</source>
         <translation>Dio &apos;%1&apos;. Nije moguće generirati punu putanju šavnog dodatka na %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1031"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1051"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1022"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="1042"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam allowance path.</source>
         <translation>Dio &apos;%1&apos;. Nije moguće generirati punu putanju šava s dopuštenjem.</translation>
     </message>
@@ -16081,13 +15629,6 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
     </message>
 </context>
 <context>
-    <name>QtColorPicker</name>
-    <message>
-        <source>Custom</source>
-        <translation type="unfinished"/>
-    </message>
-</context>
-<context>
     <name>RemoveItemFromGroup</name>
     <message>
         <location filename="../../src/libs/vtools/undocommands/undogroup.cpp" line="273"/>
@@ -16160,10 +15701,6 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
 <context>
     <name>SavePieceOptions</name>
     <message>
-        <source>save detail option</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/undocommands/savepieceoptions.cpp" line="50"/>
         <source>save detail options</source>
         <translation>spremi opcije detalja</translation>
@@ -16220,17 +15757,6 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <location filename="../../src/libs/vtools/undocommands/label/showlabel.cpp" line="45"/>
         <source>toggle label</source>
         <translation>uključi/isključi oznaku</translation>
-    </message>
-</context>
-<context>
-    <name>T</name>
-    <message>
-        <source>Options</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -16458,10 +15984,6 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="1245"/>
         <source>Settings Directory</source>
         <translation>Direktorij postavki</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="786"/>
@@ -18215,14 +17737,6 @@ Do you want to save your changes?</source>
 <context>
     <name>TabGrainline</name>
     <message>
-        <source>Form</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Grainline visible</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="39"/>
         <source>Grainline enabled</source>
         <translation>Linija tkanine omogućena</translation>
@@ -18290,10 +17804,6 @@ Do you want to save your changes?</source>
 <context>
     <name>TabLabels</name>
     <message>
-        <source>Form</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="43"/>
         <source>Piece label data</source>
         <translation>Podaci o oznaci komada</translation>
@@ -18309,58 +17819,14 @@ Do you want to save your changes?</source>
         <translation>Slovo krojnog komada</translation>
     </message>
     <message>
-        <source>Name of detail:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Detail</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Name can&apos;t be empty</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Material/Cut number/Placement</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Cut number:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Material type:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>You can choose one of the predefined materials or enter a new one</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="129"/>
         <source>Placement:</source>
         <translation>Pozicija:</translation>
     </message>
     <message>
-        <source>Add</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="431"/>
         <source>Labels</source>
         <translation>Oznake</translation>
-    </message>
-    <message>
-        <source>Detail label visible</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="528"/>
@@ -18606,17 +18072,9 @@ Do you want to save your changes?</source>
 <context>
     <name>TabPassmarks</name>
     <message>
-        <source>Form</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="40"/>
         <source>Passmark:</source>
         <translation>Oznaka:</translation>
-    </message>
-    <message>
-        <source>Lines</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="197"/>
@@ -18800,10 +18258,6 @@ Do you want to save your changes?</source>
         <translation>Oštar kut koji gleda prema van komada</translation>
     </message>
     <message>
-        <source>Length:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="433"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="658"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="886"/>
@@ -18844,10 +18298,6 @@ Do you want to save your changes?</source>
 </context>
 <context>
     <name>TabPaths</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"/>
-    </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="43"/>
         <source>Main path</source>
@@ -19020,10 +18470,6 @@ Do you want to save your changes?</source>
         <translation>Kut:</translation>
     </message>
     <message>
-        <source>Custom</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="346"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1288"/>
         <source>Start point:</source>
@@ -19171,13 +18617,6 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="89"/>
         <source>Export to DXF-AAMA sew line on Draw layer</source>
         <translation>Izvoz u DXF-AAMA  linije šivanja na sloj Crtanja</translation>
-    </message>
-</context>
-<context>
-    <name>TabPins</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -19332,22 +18771,6 @@ Do you want to save your changes?</source>
         <translation>Decimalni separator:</translation>
     </message>
     <message>
-        <source>Pattern making system</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Pattern making system:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Author:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Book:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="84"/>
         <source>Default known measurements</source>
         <translation>Zadana poznata mjerenja</translation>
@@ -19447,18 +18870,6 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="374"/>
         <source>Reporting crash reports will help us make Valentina more reliable. All information is treated as confidential and is only used to improve future versions of this program. Please activate sending automatic crash reports and fill your email address (optional). If provided, we may contact you with additional information about the crash.</source>
         <translation>Slanje izvještaja o padu pomoći će nam da Valentina učinimo pouzdanijom. Sve informacije tretiraju se kao povjerljive i koriste se samo za poboljšanje budućih verzija ovog programa. Molimo aktivirajte slanje automatskih izvještaja o padu i unesite svoju adresu e-pošte (opcionalno). Ako je navedeno, možemo vas kontaktirati s dodatnim informacijama o padu.</translation>
-    </message>
-    <message>
-        <source>Default height and size</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Default height:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Default size:</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="232"/>
@@ -19612,41 +19023,6 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
-    <name>Tool</name>
-    <message>
-        <source>First point</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Second point</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Highest point</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Lowest point</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Leftmost point</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Rightmost point</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Vertical axis</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Horizontal axis</source>
-        <translation type="unfinished"/>
-    </message>
-</context>
-<context>
     <name>Utils::CheckableMessageBox</name>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/checkablemessagebox.cpp" line="81"/>
@@ -19721,10 +19097,6 @@ Do you want to save your changes?</source>
         <source>Chest half circumference</source>
         <comment>dimension</comment>
         <translation>Opseg grudi (polovičan)</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vformat/vdimensions.cpp" line="323"/>
@@ -19817,14 +19189,14 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="236"/>
         <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="262"/>
-        <source>Can't open file %1:
+        <source>Can&apos;t open file %1:
 %2.</source>
         <translation>Ne mogu otvoriti datoteku %1:
 %2.</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="188"/>
-        <source>Can't open schema file %1:
+        <source>Can&apos;t open schema file %1:
 %2.</source>
         <translation>Nije moguće otvoriti datoteku sheme %1:
 %2.</translation>
@@ -19882,50 +19254,6 @@ Do you want to save your changes?</source>
 </context>
 <context>
     <name>VAbstractLayoutDialog</name>
-    <message>
-        <source>Letter</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Legal</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Roll 24in</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Roll 30in</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Roll 36in</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Roll 42in</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Roll 44in</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Custom</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Roll 48in</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Roll 62in</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Roll 72in</source>
-        <translation type="unfinished"/>
-    </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/vabstractlayoutdialog.cpp" line="102"/>
         <source>Letter</source>
@@ -21749,13 +21077,6 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
-    <name>VCommonSettings</name>
-    <message>
-        <source>measurements</source>
-        <translation type="unfinished"/>
-    </message>
-</context>
-<context>
     <name>VContainer</name>
     <message>
         <location filename="../../src/libs/vpatterndb/vcontainer.cpp" line="185"/>
@@ -21828,13 +21149,13 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="738"/>
-        <source>Can't open file %1:
+        <source>Can&apos;t open file %1:
 %2.</source>
         <translation>Ne mogu otvoriti datoteku %1:
 %2.</translation>
     </message>
     <message>
-        <source>Can't open schema file %1:
+        <source>Can&apos;t open schema file %1:
 %2.</source>
         <translation type="vanished">Nije moguće otvoriti datoteku sheme %1:
 %2.</translation>
@@ -22082,13 +21403,6 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
-    <name>VInteractiveTool</name>
-    <message>
-        <source>Options</source>
-        <translation type="unfinished"/>
-    </message>
-</context>
-<context>
     <name>VKnownMeasurementsDocument</name>
     <message>
         <location filename="../../src/libs/vformat/knownmeasurements/vknownmeasurementsdocument.cpp" line="365"/>
@@ -22304,10 +21618,6 @@ Do you want to save your changes?</source>
         <translation>Zabranjeno okretanje</translation>
     </message>
     <message>
-        <source>Angle</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="470"/>
         <source>by length</source>
         <translation>po duljini</translation>
@@ -22516,10 +21826,6 @@ Do you want to save your changes?</source>
         <translation>Ne mogu započeti slušanje dolaznih veza na imenu &apos;%1&apos;</translation>
     </message>
     <message>
-        <source>Please, provide one input file.</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/app/puzzle/vpapplication.cpp" line="732"/>
         <source>Export mode doesn&apos;t support opening several files.</source>
         <translation>Način izvoza ne podržava otvaranje više datoteka.</translation>
@@ -22593,7 +21899,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="273"/>
         <source>Special thanks</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="317"/>
@@ -22603,7 +21909,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="324"/>
         <source>Credits</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/vpdialogabout.cpp" line="66"/>
@@ -22957,14 +22263,6 @@ Do you want to save your changes?</source>
         <translation>Format</translation>
     </message>
     <message>
-        <source>Width</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Length</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1108"/>
         <source>Remove unused length</source>
         <translation>Ukloni neiskorištenu duljinu</translation>
@@ -23074,10 +22372,6 @@ Do you want to save your changes?</source>
         <translation>Raspored</translation>
     </message>
     <message>
-        <source>Name</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1769"/>
         <source>Description</source>
         <translation>Opis</translation>
@@ -23170,147 +22464,147 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2303"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="5179"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="5169"/>
         <source>Preferences</source>
         <translation>Postavke</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="472"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="487"/>
         <source>File &apos;%1&apos; doesn&apos;t exist!</source>
         <translation>Datoteka &apos;%1&apos; ne postoji!</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="516"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="526"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="552"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="531"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="541"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="567"/>
         <source>File error.</source>
         <translation>Pogreška u datoteci.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="638"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="653"/>
         <source>Fail to create layout.</source>
         <translation>Neuspješno stvaranje rasporeda.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3471"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3461"/>
         <source>Could not extract data from file &apos;%1&apos;. %2</source>
         <translation>Nije moguće izdvojiti podatke iz datoteke &apos;%1&apos;. %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="931"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1018"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="946"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1033"/>
         <source>Centimeters</source>
         <translation>Centimetri</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="930"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1017"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="945"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1032"/>
         <source>Millimiters</source>
         <translation>Milimetri</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="932"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1019"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="947"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1034"/>
         <source>Inches</source>
         <translation>Inči</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1792"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1807"/>
         <source>Scale:</source>
         <translation>Skala:</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1822"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1837"/>
         <source>untitled %1.vlt</source>
         <translation>neimenovano %1.vlt</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1822"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1837"/>
         <source>untitled.vlt</source>
         <translation>neimenovano.vlt</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1829"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1844"/>
         <source>read only</source>
         <translation>samo za čitanje</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1895"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1910"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation>Ne mogu čitati postavke iz neispravno oblikovane .INI datoteke.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1912"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1927"/>
         <source>Cannot save settings. Access denied.</source>
         <translation>Ne mogu spremiti postavke. Pristup odbijen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2845"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3199"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3382"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2835"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3189"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3372"/>
         <source>Failed to open file, is it writable?</source>
         <translation>Neuspješno otvaranje datoteke, je li zapisiva?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1967"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1982"/>
         <source>&amp;New Window</source>
         <translation>&amp;Novi prozor</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1924"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1939"/>
         <source>Layout has been modified. Do you want to save your changes?</source>
         <translation>Raspored je izmijenjen. Želite li spremiti promjene?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3809"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3871"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3799"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3861"/>
         <source>Layout files</source>
         <translation>Datoteke rasporeda</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3813"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3961"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4910"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3803"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3951"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4900"/>
         <source>Open file</source>
         <translation>Otvori datoteku</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3854"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3844"/>
         <source>Could not save the file</source>
         <translation>Nije moguće spremiti datoteku</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3873"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3863"/>
         <source>layout</source>
         <translation>raspored</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3885"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3875"/>
         <source>Save as</source>
         <translation>Spremi kao</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3915"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3905"/>
         <source>Failed to lock. This file already opened in another window.</source>
         <translation>Neuspješno zaključavanje. Ova datoteka je već otvorena u drugom prozoru.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3925"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3915"/>
         <source>Could not save file</source>
         <translation>Nije moguće spremiti datoteku</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3946"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3936"/>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
         <translation>Neuspješno zaključavanje. Ova datoteka je već otvorena u drugom prozoru. Očekuju se sukobi ako se program pokrene dvaput.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3956"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3946"/>
         <source>Raw Layout files</source>
         <translation>Sirove datoteke rasporeda</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3974"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3964"/>
         <source>About Qt</source>
         <translation>O Qt</translation>
     </message>
@@ -23575,157 +22869,157 @@ Do you want to save your changes?</source>
         <translation>Direktorij postavki</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="517"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="532"/>
         <source>Unable to read a layout file. %1</source>
         <translation>Nije moguće učitati datoteku rasporeda. %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="527"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="542"/>
         <source>Failed to read %1</source>
         <translation>Nije uspjelo čitanje %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="743"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3777"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="758"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3767"/>
         <source>&amp;Undo</source>
         <translation>&amp;Poništi</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="749"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3778"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="764"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3768"/>
         <source>&amp;Redo</source>
         <translation>&amp;Ponovi</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="933"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1020"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="948"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1035"/>
         <source>Pixels</source>
         <translation>Pikseli</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1923"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1938"/>
         <source>Unsaved changes</source>
         <translation>Nespremljene promjene</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1932"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1947"/>
         <source>Save…</source>
         <translation>Spremi…</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1932"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1947"/>
         <source>Save</source>
         <translation>Spremi</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1937"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1952"/>
         <source>Don&apos;t Save</source>
         <translation>Nemoj spremiti</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2424"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2489"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2427"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2492"/>
         <source>Can&apos;t create a path</source>
         <translation>Ne mogu stvoriti putanju</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2723"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2714"/>
         <source>Can&apos;t open file &apos;%1&apos;</source>
         <translation>Ne mogu otvoriti datoteku &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2737"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3249"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2728"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3239"/>
         <source>Failed in flushing page to disk, disk full?</source>
         <translation>Neuspjelo ispisivanje stranice na disk, disk pun?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3087"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3114"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3143"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3077"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3104"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3133"/>
         <source>The layout is invalid.</source>
         <translation>Raspored nije valjan.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3088"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3078"/>
         <source>The layout is invalid. Piece out of bound. Do you want to continue export?</source>
         <translation>Raspored nije valjan. Dio izvan granice. Želite li nastaviti s izvozom?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3115"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3105"/>
         <source>The layout is invalid. Pieces superposition. Do you want to continue export?</source>
         <translation>Raspored nije valjan. Preklapanje dijelova. Želite li nastaviti s izvozom?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3144"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3134"/>
         <source>The layout is invalid. One or several pieces are closer than minimally allowed. Do you want to continue export?</source>
         <translation>Raspored nije valjan. Jedan ili više dijelova su bliže od minimalno dopuštenog razmaka. Želite li nastaviti s izvozom?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4244"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4234"/>
         <source>Sheet %1</source>
         <translation>List %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3547"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3537"/>
         <source>translate pieces</source>
         <translation>premjesti dijelove</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3664"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3654"/>
         <source>rotate pieces</source>
         <translation>rotiraj dijelove</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4448"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4438"/>
         <source>untitled %1</source>
         <translation>neimenovano %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4448"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4438"/>
         <source>untitled</source>
         <translation>neimenovano</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4539"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4590"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4529"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4580"/>
         <source>For printing multipages document all sheet should have the same size.</source>
         <translation>Za ispis višestranih dokumenata svi listovi moraju biti iste veličine.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4551"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4602"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4637"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4675"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4730"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4774"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4807"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4843"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4541"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4592"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4627"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4665"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4720"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4764"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4797"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4833"/>
         <source>Print error</source>
         <translation>Pogreška pri ispisu</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4552"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4603"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4638"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4676"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4731"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4775"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4808"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4844"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4542"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4593"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4628"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4666"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4721"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4765"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4798"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4834"/>
         <source>Cannot proceed because there are no available printers in your system.</source>
         <translation>Nije moguće nastaviti jer u sustavu nema dostupnih pisača.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4907"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4897"/>
         <source>Watermark files</source>
         <translation>Datoteke vodenih žigova</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4563"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4614"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4649"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4687"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4553"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4604"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4639"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4677"/>
         <source>Unable to get sheet page settings</source>
         <translation>Nije moguće dohvatiti postavke stranice lista</translation>
     </message>
@@ -23765,12 +23059,12 @@ Do you want to save your changes?</source>
         <translation>Ima učinak samo pri ispisu u aplikaciji. Za izvoz s shemom pločica koristite odvojenu postavku</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4501"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4491"/>
         <source>sheet</source>
         <translation>list</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3493"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3483"/>
         <source>Piece %1 invalid. %2</source>
         <translation>Dio %1 nije valjan. %2</translation>
     </message>
@@ -23795,84 +23089,37 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
-    <name>VPSheet</name>
-    <message>
-        <source>Letter</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Legal</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Roll 24in</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Roll 30in</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Roll 36in</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Roll 42in</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Roll 44in</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Roll 48in</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Roll 62in</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Roll 72in</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Custom</source>
-        <translation type="unfinished"/>
-    </message>
-</context>
-<context>
     <name>VPTileFactory</name>
     <message>
-        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="942"/>
+        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="944"/>
         <source>Grid ( %1 , %2 )</source>
         <translation>Mreža ( %1 , %2 )</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="1079"/>
+        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="1081"/>
         <source>Page %1 of %2</source>
         <translation>Stranica %1 od %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="1450"/>
+        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="1452"/>
         <source>Warning: Multiple single stroke outline fonts detected (%1). The font &quot;%2&quot; was selected.</source>
         <translation>Upozorenje: Otkriveno je više fontova s obrisom od jednog poteza (%1). Odabran je font &quot;%2&quot;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="1512"/>
+        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="1514"/>
         <source>Warning: Multiple single-line SVG fonts detected (%1). The font &quot;%2&quot; was selected.</source>
         <translation>Upozorenje: Pronađeno je više SVG fontova s jednom linijom (%1). Odabran je font „%2.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="479"/>
-        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="589"/>
+        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="481"/>
+        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="591"/>
         <source>cm</source>
         <comment>unit</comment>
         <translation>cm</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="479"/>
-        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="589"/>
+        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="481"/>
+        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="591"/>
         <source>in</source>
         <comment>unit</comment>
         <translation>in</translation>
@@ -24397,20 +23644,20 @@ Do you want to save your changes?</source>
 <context>
     <name>VPiece</name>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="184"/>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="201"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="288"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="305"/>
         <source>Main path of piece %1</source>
         <translation>Glavna putanja dijela %1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1156"/>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1196"/>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1279"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1181"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1221"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1305"/>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
         <translation>Nije moguće izračunati urez za točku &apos;%1&apos; u dijelu &apos;%2&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1335"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1361"/>
         <source>Notch for point &apos;%1&apos; in piece &apos;%2&apos; will be disabled. Manual length is less than allowed value.</source>
         <translation>Urez za točku &apos;%1&apos; u dijelu &apos;%2&apos; će biti onemogućen. Ručna duljina je manja od dopuštene vrijednosti.</translation>
     </message>
@@ -24418,38 +23665,38 @@ Do you want to save your changes?</source>
 <context>
     <name>VPoster</name>
     <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="250"/>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="252"/>
         <source>Grid ( %1 , %2 )</source>
         <translation>Mreža ( %1 , %2 )</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="251"/>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="253"/>
         <source>Page %1 of %2</source>
         <translation>Stranica %1 od %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="258"/>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="260"/>
         <source>Sheet %1 of %2</source>
         <translation>List %1 od %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="323"/>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="325"/>
         <source>Cannot open the watermark image.</source>
         <translation>Nije moguće otvoriti sliku vodenog žiga.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="335"/>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="337"/>
         <source>Not supported file suffix &apos;%1&apos;</source>
         <translation>Nepodržani sufiks datoteke &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="493"/>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="495"/>
         <source>cm</source>
         <comment>unit</comment>
         <translation>cm</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="494"/>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="496"/>
         <source>in</source>
         <comment>unit</comment>
         <translation>in</translation>
@@ -24816,46 +24063,39 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
 </context>
 <context>
-    <name>VToolCut</name>
-    <message>
-        <source>Length</source>
-        <translation type="unfinished"/>
-    </message>
-</context>
-<context>
     <name>VToolCutArc</name>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="138"/>
         <source>Fatal Error: Processing elliptical arcs is not supported in this version. Please update the application to a newer version to use this feature.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="302"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="303"/>
         <source>Arc</source>
         <translation>Luk</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="303"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="304"/>
         <source>length</source>
         <translation>duljina</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="304"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="305"/>
         <source>start angle</source>
         <translation>početni kut</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="305"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="306"/>
         <source>end angle</source>
         <translation>završni kut</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="306"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="307"/>
         <source>radius</source>
         <translation>polumjer</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="337"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="338"/>
         <source>label</source>
         <translation>oznaka</translation>
     </message>
@@ -27481,36 +26721,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation>atan</translation>
     </message>
     <message>
-        <source>sinh</source>
-        <comment>hyperbolic sine function working with radians</comment>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>cosh</source>
-        <comment>hyperbolic cosine working with radians</comment>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>tanh</source>
-        <comment>hyperbolic tangens function working with radians</comment>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>asinh</source>
-        <comment>hyperbolic arcus sine function working with radians</comment>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>acosh</source>
-        <comment>hyperbolic arcus cosine function working with radians</comment>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>atanh</source>
-        <comment>hyperbolic arcur tangens function working with radians</comment>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="175"/>
         <source>sinD</source>
         <comment>sine function working with degrees</comment>
@@ -28274,12 +27484,12 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarc.cpp" line="119"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first radius, &lt;b&gt;%5&lt;/b&gt; - sticking angle, &lt;b&gt;%6&lt;/b&gt; - skip</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarc.cpp" line="164"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°, angle2 = %5°, rotation = %6°; &lt;b&gt;Mouse click&lt;/b&gt; - finish creating, &lt;b&gt;%7&lt;/b&gt; - sticking angle, &lt;b&gt;%8&lt;/b&gt; - skip</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarc.cpp" line="141"/>
@@ -28665,10 +27875,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="702"/>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
         <translation>Dogodila se nepoznata pogreška, primjerice, puna particija spriječila je zapisivanje zaključne datoteke. Ignorirajte ako želite nastaviti (ne preporučuje se, može uzrokovati korupciju podataka).</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="200"/>
