@@ -265,9 +265,8 @@ auto VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, cons
     {
         if (not m_selectedFromChild)
         {
-            m_namePoint->blockSignals(true);
+            const QSignalBlocker blocker(m_namePoint);
             m_namePoint->setSelected(value.toBool());
-            m_namePoint->blockSignals(false);
         }
 
         emit ChangedToolSelection(value.toBool(), m_id, m_id);

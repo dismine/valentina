@@ -361,14 +361,13 @@ void VToolSpline::SaveDialog(QDomElement &domElement)
 
     const VSpline spl = dialogTool->GetSpline();
 
-    controlPoints[0]->blockSignals(true);
-    controlPoints[1]->blockSignals(true);
+    {
+        const QSignalBlocker blocker0(controlPoints[0]);
+        const QSignalBlocker blocker1(controlPoints[1]);
 
-    controlPoints[0]->setPos(static_cast<QPointF>(spl.GetP2()));
-    controlPoints[1]->setPos(static_cast<QPointF>(spl.GetP3()));
-
-    controlPoints[0]->blockSignals(false);
-    controlPoints[1]->blockSignals(false);
+        controlPoints[0]->setPos(static_cast<QPointF>(spl.GetP2()));
+        controlPoints[1]->setPos(static_cast<QPointF>(spl.GetP3()));
+    }
 
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
                                          [](const QString &notes) noexcept { return notes.isEmpty(); });
@@ -596,29 +595,38 @@ void VToolSpline::RefreshCtrlPoints()
 
     const auto spl = VAbstractTool::data.GeometricObject<VSpline>(m_id);
 
-    controlPoints[0]->blockSignals(true);
-    controlPoints[1]->blockSignals(true);
-
     {
-        const bool freeAngle1 = qmu::QmuTokenParser::IsSingle(spl->GetStartAngleFormula());
-        const bool freeLength1 = qmu::QmuTokenParser::IsSingle(spl->GetC1LengthFormula());
+        const QSignalBlocker blocker0(controlPoints[0]);
+        const QSignalBlocker blocker1(controlPoints[1]);
 
-        const auto splinePoint = static_cast<QPointF>(*VAbstractTool::data.GeometricObject<VPointF>(spl->GetP1().id()));
-        controlPoints[0]->RefreshCtrlPoint(1, SplinePointPosition::FirstPoint, static_cast<QPointF>(spl->GetP2()),
-                                           static_cast<QPointF>(splinePoint), freeAngle1, freeLength1);
+        {
+            const bool freeAngle1 = qmu::QmuTokenParser::IsSingle(spl->GetStartAngleFormula());
+            const bool freeLength1 = qmu::QmuTokenParser::IsSingle(spl->GetC1LengthFormula());
+
+            const auto splinePoint = static_cast<QPointF>(
+                *VAbstractTool::data.GeometricObject<VPointF>(spl->GetP1().id()));
+            controlPoints[0]->RefreshCtrlPoint(1,
+                                               SplinePointPosition::FirstPoint,
+                                               static_cast<QPointF>(spl->GetP2()),
+                                               static_cast<QPointF>(splinePoint),
+                                               freeAngle1,
+                                               freeLength1);
+        }
+
+        {
+            const bool freeAngle2 = qmu::QmuTokenParser::IsSingle(spl->GetEndAngleFormula());
+            const bool freeLength2 = qmu::QmuTokenParser::IsSingle(spl->GetC2LengthFormula());
+
+            const auto splinePoint = static_cast<QPointF>(
+                *VAbstractTool::data.GeometricObject<VPointF>(spl->GetP4().id()));
+            controlPoints[1]->RefreshCtrlPoint(1,
+                                               SplinePointPosition::LastPoint,
+                                               static_cast<QPointF>(spl->GetP3()),
+                                               static_cast<QPointF>(splinePoint),
+                                               freeAngle2,
+                                               freeLength2);
+        }
     }
-
-    {
-        const bool freeAngle2 = qmu::QmuTokenParser::IsSingle(spl->GetEndAngleFormula());
-        const bool freeLength2 = qmu::QmuTokenParser::IsSingle(spl->GetC2LengthFormula());
-
-        const auto splinePoint = static_cast<QPointF>(*VAbstractTool::data.GeometricObject<VPointF>(spl->GetP4().id()));
-        controlPoints[1]->RefreshCtrlPoint(1, SplinePointPosition::LastPoint, static_cast<QPointF>(spl->GetP3()),
-                                           static_cast<QPointF>(splinePoint), freeAngle2, freeLength2);
-    }
-
-    controlPoints[0]->blockSignals(false);
-    controlPoints[1]->blockSignals(false);
 
     for (auto *point : std::as_const(controlPoints))
     {
@@ -672,9 +680,8 @@ void VToolSpline::CurveSelected(bool selected)
 
     for (auto *point : std::as_const(controlPoints))
     {
-        point->blockSignals(true);
+        const QSignalBlocker blocker(point);
         point->setSelected(selected);
-        point->blockSignals(false);
     }
 }
 

@@ -324,7 +324,7 @@ void VPCarrouselPieceList::InitStyleSheet()
 //---------------------------------------------------------------------------------------------------------------------
 void VPCarrouselPieceList::on_SelectionChangedExternal()
 {
-    blockSignals(true);
+    const QSignalBlocker blocker(this);
     for (int i = 0; i < count(); ++i)
     {
         QListWidgetItem *_item = item(i);
@@ -335,5 +335,4 @@ void VPCarrouselPieceList::on_SelectionChangedExternal()
             itemPiece->RefreshSelection();
         }
     }
-    blockSignals(false);
 }

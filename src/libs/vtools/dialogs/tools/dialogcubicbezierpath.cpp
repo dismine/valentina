@@ -118,26 +118,27 @@ auto DialogCubicBezierPath::GetPath() const -> VCubicBezierPath
 void DialogCubicBezierPath::SetPath(const VCubicBezierPath &value)
 {
     this->path = value;
-    ui->listWidget->blockSignals(true);
-    ui->listWidget->clear();
-    for (qint32 i = 0; i < path.CountPoints(); ++i)
     {
-        NewItem(path.at(i));
+        const QSignalBlocker blocker(ui->listWidget);
+        ui->listWidget->clear();
+        for (qint32 i = 0; i < path.CountPoints(); ++i)
+        {
+            NewItem(path.at(i));
+        }
+        ui->listWidget->setFocus(Qt::OtherFocusReason);
+        ui->doubleSpinBoxApproximationScale->setValue(path.GetApproximationScale());
+
+        originAliasSuffix = path.GetAliasSuffix();
+        ui->lineEditAlias->setText(originAliasSuffix);
+        ValidateAlias();
+
+        ChangeCurrentData(ui->comboBoxPenStyle, path.GetPenStyle());
+        ui->pushButtonColor->setCurrentColor(path.GetColor());
+
+        auto *visPath = qobject_cast<VisToolCubicBezierPath *>(vis);
+        SCASSERT(visPath != nullptr)
+        visPath->SetPath(path);
     }
-    ui->listWidget->setFocus(Qt::OtherFocusReason);
-    ui->doubleSpinBoxApproximationScale->setValue(path.GetApproximationScale());
-
-    originAliasSuffix = path.GetAliasSuffix();
-    ui->lineEditAlias->setText(originAliasSuffix);
-    ValidateAlias();
-
-    ChangeCurrentData(ui->comboBoxPenStyle, path.GetPenStyle());
-    ui->pushButtonColor->setCurrentColor(path.GetColor());
-
-    auto *visPath = qobject_cast<VisToolCubicBezierPath *>(vis);
-    SCASSERT(visPath != nullptr)
-    visPath->SetPath(path);
-    ui->listWidget->blockSignals(false);
 
     if (ui->listWidget->count() > 0)
     {
@@ -310,9 +311,10 @@ void DialogCubicBezierPath::AddPoint()
     flagError = IsPathValid();
     CheckState(); // Disable Ok and Apply buttons if something wrong.
 
-    ui->comboBoxNewPoint->blockSignals(true);
-    ui->comboBoxNewPoint->setCurrentIndex(-1);
-    ui->comboBoxNewPoint->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->comboBoxNewPoint);
+        ui->comboBoxNewPoint->setCurrentIndex(-1);
+    }
     ui->toolButtonAddPoint->setDisabled(true);
 }
 
@@ -395,9 +397,8 @@ void DialogCubicBezierPath::NewItem(const VPointF &point)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCubicBezierPath::DataPoint(const VPointF &p)
 {
-    ui->comboBoxPoint->blockSignals(true);
+    const QSignalBlocker blocker(ui->comboBoxPoint);
     ChangeCurrentData(ui->comboBoxPoint, p.id());
-    ui->comboBoxPoint->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

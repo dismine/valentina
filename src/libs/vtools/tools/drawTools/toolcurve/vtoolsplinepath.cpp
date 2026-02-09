@@ -333,9 +333,8 @@ void VToolSplinePath::CurveSelected(bool selected)
 
     for (auto *point : std::as_const(controlPoints))
     {
-        point->blockSignals(true);
+        const QSignalBlocker blocker(point);
         point->setSelected(selected);
-        point->blockSignals(false);
     }
 }
 
@@ -820,8 +819,8 @@ void VToolSplinePath::RefreshCtrlPoints()
             break;
         }
 
-        controlPoints[j - 2]->blockSignals(true);
-        controlPoints[j - 1]->blockSignals(true);
+        const QSignalBlocker blockerJ2(controlPoints[j - 2]);
+        const QSignalBlocker blockerJ1(controlPoints[j - 1]);
 
         const auto spl = splPath->GetSpline(i);
 
@@ -867,9 +866,6 @@ void VToolSplinePath::RefreshCtrlPoints()
             controlPoints[j - 1]->RefreshCtrlPoint(i, SplinePointPosition::LastPoint, static_cast<QPointF>(spl.GetP3()),
                                                    static_cast<QPointF>(splinePoint), freeAngle2, freeLength2);
         }
-
-        controlPoints[j - 2]->blockSignals(false);
-        controlPoints[j - 1]->blockSignals(false);
     }
 
     for (auto *point : std::as_const(controlPoints))

@@ -123,33 +123,29 @@ void RemoveLayoutPath(const QString &path, bool usedNotExistedDir)
 //---------------------------------------------------------------------------------------------------------------------
 void SetDoubleSpinBoxValue(QDoubleSpinBox *spinBox, qreal value)
 {
-    spinBox->blockSignals(true);
+    const QSignalBlocker blocker(spinBox);
     spinBox->setValue(value);
-    spinBox->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void SetCheckBoxValue(QCheckBox *checkbox, bool value)
 {
-    checkbox->blockSignals(true);
+    const QSignalBlocker blocker(checkbox);
     checkbox->setChecked(value);
-    checkbox->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void SetLineEditValue(QLineEdit *lineEdit, const QString &value)
 {
-    lineEdit->blockSignals(true);
+    const QSignalBlocker blocker(lineEdit);
     lineEdit->setText(value);
-    lineEdit->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void SetPlainTextEditValue(QPlainTextEdit *textEdit, const QString &value)
 {
-    textEdit->blockSignals(true);
+    const QSignalBlocker blocker(textEdit);
     textEdit->setPlainText(value);
-    textEdit->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -438,9 +434,8 @@ VPMainWindow::VPMainWindow(VPCommandLinePtr cmd, QWidget *parent)
 
                 if (path == m_layout->LayoutSettings().WatermarkPath())
                 {
-                    m_layoutWatcher->blockSignals(true);
+                    const QSignalBlocker blocker(m_layoutWatcher);
                     m_layout->TileFactory()->RefreshWatermarkData();
-                    m_layoutWatcher->blockSignals(false);
                 }
 
                 m_graphicsView->RefreshLayout();
@@ -949,14 +944,15 @@ void VPMainWindow::InitPropertyTabCurrentPiece()
     ui->comboBoxTranslateUnit->addItem(tr("Inches"), QVariant(UnitsToStr(Unit::Inch)));
     ui->comboBoxTranslateUnit->addItem(tr("Pixels"), QVariant(UnitsToStr(Unit::Px)));
 
-    m_oldPieceTranslationUnit = Unit::Mm;
-    ui->comboBoxTranslateUnit->blockSignals(true);
-    ui->comboBoxTranslateUnit->setCurrentIndex(0);
-    ui->comboBoxTranslateUnit->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->comboBoxTranslateUnit);
+        ui->comboBoxTranslateUnit->setCurrentIndex(0);
+    }
 
     const int minTranslate = -1000;
     const int maxTranslate = 1000;
 
+    m_oldPieceTranslationUnit = Unit::Mm;
     ui->doubleSpinBoxCurrentPieceBoxPositionX->setMinimum(
         UnitConvertor(minTranslate, Unit::Cm, m_oldPieceTranslationUnit));
     ui->doubleSpinBoxCurrentPieceBoxPositionX->setMaximum(
@@ -1528,9 +1524,8 @@ void VPMainWindow::SetPropertyTabSheetData()
                     ui->comboBoxLayoutUnit->findData(UnitsToStr(m_layout->LayoutSettings().GetUnit()));
                 indexUnit != -1)
             {
-                ui->comboBoxLayoutUnit->blockSignals(true);
+                const QSignalBlocker blocker(ui->comboBoxLayoutUnit);
                 ui->comboBoxLayoutUnit->setCurrentIndex(indexUnit);
-                ui->comboBoxLayoutUnit->blockSignals(false);
             }
             else
             {
@@ -1597,13 +1592,15 @@ void VPMainWindow::SetPropertyTabSheetData()
 
     ui->groupBoxPaperFormat->setDisabled(true);
 
-    ui->comboBoxLayoutUnit->blockSignals(true);
-    ui->comboBoxLayoutUnit->setCurrentIndex(-1);
-    ui->comboBoxLayoutUnit->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->comboBoxLayoutUnit);
+        ui->comboBoxLayoutUnit->setCurrentIndex(-1);
+    }
 
-    ui->comboBoxSheetTemplates->blockSignals(true);
-    ui->comboBoxSheetTemplates->setCurrentIndex(-1);
-    ui->comboBoxSheetTemplates->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->comboBoxSheetTemplates);
+        ui->comboBoxSheetTemplates->setCurrentIndex(-1);
+    }
 
     SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPaperWidth, 0);
     SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPaperHeight, 0);
@@ -1748,9 +1745,10 @@ void VPMainWindow::SetPropertyTabLayoutData()
 
         ui->groupBoxLayoutControl->setDisabled(true);
 
-        ui->comboBoxLayoutUnit->blockSignals(true);
-        ui->comboBoxLayoutUnit->setCurrentIndex(-1);
-        ui->comboBoxLayoutUnit->blockSignals(false);
+        {
+            const QSignalBlocker blocker(ui->comboBoxLayoutUnit);
+            ui->comboBoxLayoutUnit->setCurrentIndex(-1);
+        }
 
         // set controls
         SetCheckBoxValue(ui->checkBoxLayoutWarningPiecesOutOfBound, false);
@@ -2213,13 +2211,15 @@ void VPMainWindow::SheetPaperSizeChanged()
 {
     bool const portrait = ui->doubleSpinBoxSheetPaperHeight->value() >= ui->doubleSpinBoxSheetPaperWidth->value();
 
-    ui->toolButtonSheetPortraitOritation->blockSignals(true);
-    ui->toolButtonSheetPortraitOritation->setChecked(portrait);
-    ui->toolButtonSheetPortraitOritation->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->toolButtonSheetPortraitOritation);
+        ui->toolButtonSheetPortraitOritation->setChecked(portrait);
+    }
 
-    ui->toolButtonSheetLandscapeOrientation->blockSignals(true);
-    ui->toolButtonSheetLandscapeOrientation->setChecked(not portrait);
-    ui->toolButtonSheetLandscapeOrientation->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->toolButtonSheetLandscapeOrientation);
+        ui->toolButtonSheetLandscapeOrientation->setChecked(not portrait);
+    }
 
     if (not m_layout.isNull())
     {
@@ -2247,13 +2247,15 @@ void VPMainWindow::TilePaperSizeChanged()
 {
     bool const portrait = ui->doubleSpinBoxTilePaperHeight->value() >= ui->doubleSpinBoxTilePaperWidth->value();
 
-    ui->toolButtonTilePortraitOrientation->blockSignals(true);
-    ui->toolButtonTilePortraitOrientation->setChecked(portrait);
-    ui->toolButtonTilePortraitOrientation->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->toolButtonTilePortraitOrientation);
+        ui->toolButtonTilePortraitOrientation->setChecked(portrait);
+    }
 
-    ui->toolButtonTileLandscapeOrientation->blockSignals(true);
-    ui->toolButtonTileLandscapeOrientation->setChecked(not portrait);
-    ui->toolButtonTileLandscapeOrientation->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->toolButtonTileLandscapeOrientation);
+        ui->toolButtonTileLandscapeOrientation->setChecked(not portrait);
+    }
 
     VMainGraphicsView::NewSceneRect(m_graphicsView->scene(), m_graphicsView);
 }
@@ -2289,22 +2291,20 @@ void VPMainWindow::FindTemplate(QComboBox *box, qreal width, qreal height)
             // NOLINTNEXTLINE(readability-suspicious-call-argument)
             VAbstractLayoutDialog::RoundTemplateSize(height, width, paperUnit) == tmplSize)
         {
-            box->blockSignals(true);
+            const QSignalBlocker blocker(box);
             if (const int index = box->findData(i); index != -1)
             {
                 box->setCurrentIndex(index);
             }
-            box->blockSignals(false);
             return;
         }
     }
 
-    box->blockSignals(true);
+    const QSignalBlocker blocker(box);
     if (const int index = box->findData(max); index != -1)
     {
         box->setCurrentIndex(index);
     }
-    box->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -4134,12 +4134,11 @@ void VPMainWindow::on_ScaleChanged(qreal scale)
 {
     if (not m_doubleSpinBoxScale.isNull())
     {
-        m_doubleSpinBoxScale->blockSignals(true);
+        const QSignalBlocker blocker(m_doubleSpinBoxScale);
         m_doubleSpinBoxScale->setMaximum(qFloor(VPMainGraphicsView::MaxScale() * 1000) / 10.0);
         m_doubleSpinBoxScale->setMinimum(qFloor(VPMainGraphicsView::MinScale() * 1000) / 10.0);
         m_doubleSpinBoxScale->setValue(qFloor(scale * 1000) / 10.0);
         m_doubleSpinBoxScale->setSingleStep(1);
-        m_doubleSpinBoxScale->blockSignals(false);
     }
 }
 
@@ -4296,12 +4295,12 @@ void VPMainWindow::on_ConvertPaperSize()
     const qreal sheetTopMargin = ui->doubleSpinBoxSheetMarginTop->value();
     const qreal sheetBottomMargin = ui->doubleSpinBoxSheetMarginBottom->value();
 
-    ui->doubleSpinBoxSheetPaperWidth->blockSignals(true);
-    ui->doubleSpinBoxSheetPaperHeight->blockSignals(true);
-    ui->doubleSpinBoxSheetPaperWidth->setMaximum(FromPixel(QIMAGE_MAX, layoutUnit));
-    ui->doubleSpinBoxSheetPaperHeight->setMaximum(FromPixel(QIMAGE_MAX, layoutUnit));
-    ui->doubleSpinBoxSheetPaperWidth->blockSignals(false);
-    ui->doubleSpinBoxSheetPaperHeight->blockSignals(false);
+    {
+        const QSignalBlocker blockerSheetPaperWidth(ui->doubleSpinBoxSheetPaperWidth);
+        const QSignalBlocker blockerSheetPaperHeight(ui->doubleSpinBoxSheetPaperHeight);
+        ui->doubleSpinBoxSheetPaperWidth->setMaximum(FromPixel(QIMAGE_MAX, layoutUnit));
+        ui->doubleSpinBoxSheetPaperHeight->setMaximum(FromPixel(QIMAGE_MAX, layoutUnit));
+    }
 
     const qreal newSheetWidth = UnitConvertor(sheetWidth, m_oldLayoutUnit, layoutUnit);
     const qreal newSheetHeight = UnitConvertor(sheetHeight, m_oldLayoutUnit, layoutUnit);
@@ -4319,12 +4318,12 @@ void VPMainWindow::on_ConvertPaperSize()
     const qreal tileTopMargin = ui->doubleSpinBoxTileMarginTop->value();
     const qreal tileBottomMargin = ui->doubleSpinBoxTileMarginBottom->value();
 
-    ui->doubleSpinBoxTilePaperWidth->blockSignals(true);
-    ui->doubleSpinBoxTilePaperHeight->blockSignals(true);
-    ui->doubleSpinBoxTilePaperWidth->setMaximum(FromPixel(QIMAGE_MAX, layoutUnit));
-    ui->doubleSpinBoxTilePaperHeight->setMaximum(FromPixel(QIMAGE_MAX, layoutUnit));
-    ui->doubleSpinBoxTilePaperWidth->blockSignals(false);
-    ui->doubleSpinBoxTilePaperHeight->blockSignals(false);
+    {
+        const QSignalBlocker blockerTilePaperWidth(ui->doubleSpinBoxTilePaperWidth);
+        const QSignalBlocker blockerTilePaperHeight(ui->doubleSpinBoxTilePaperHeight);
+        ui->doubleSpinBoxTilePaperWidth->setMaximum(FromPixel(QIMAGE_MAX, layoutUnit));
+        ui->doubleSpinBoxTilePaperHeight->setMaximum(FromPixel(QIMAGE_MAX, layoutUnit));
+    }
 
     const qreal newTileWidth = UnitConvertor(tileWidth, m_oldLayoutUnit, layoutUnit);
     const qreal newTileHeight = UnitConvertor(tileHeight, m_oldLayoutUnit, layoutUnit);
@@ -4981,9 +4980,10 @@ void VPMainWindow::HorizontalScaleChanged(double value)
 
     if (m_scaleConnected)
     {
-        ui->doubleSpinBoxVerticalScale->blockSignals(true);
-        ui->doubleSpinBoxVerticalScale->setValue(value);
-        ui->doubleSpinBoxVerticalScale->blockSignals(false);
+        {
+            const QSignalBlocker blocker(ui->doubleSpinBoxVerticalScale);
+            ui->doubleSpinBoxVerticalScale->setValue(value);
+        }
 
         m_layout->LayoutSettings().SetVerticalScale(value / 100.);
     }
@@ -5007,9 +5007,10 @@ void VPMainWindow::VerticalScaleChanged(double value)
 
     if (m_scaleConnected)
     {
-        ui->doubleSpinBoxHorizontalScale->blockSignals(true);
-        ui->doubleSpinBoxHorizontalScale->setValue(value);
-        ui->doubleSpinBoxHorizontalScale->blockSignals(false);
+        {
+            const QSignalBlocker blocker(ui->doubleSpinBoxHorizontalScale);
+            ui->doubleSpinBoxHorizontalScale->setValue(value);
+        }
 
         m_layout->LayoutSettings().SetHorizontalScale(value / 100.);
     }

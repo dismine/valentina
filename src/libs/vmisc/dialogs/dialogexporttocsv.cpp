@@ -78,21 +78,21 @@ DialogExportToCSV::DialogExportToCSV(QWidget *parent)
 
     QPushButton *bDefaults = ui->buttonBox->button(QDialogButtonBox::RestoreDefaults);
     SCASSERT(bDefaults != nullptr)
-    connect(bDefaults, &QPushButton::clicked, this,
+    connect(bDefaults,
+            &QPushButton::clicked,
+            this,
             [this]()
             {
-                ui->comboBoxCodec->blockSignals(true);
-                ui->checkBoxWithHeader->blockSignals(true);
-                ui->buttonGroup->blockSignals(true);
+                {
+                    const QSignalBlocker blockerCodec(ui->comboBoxCodec);
+                    const QSignalBlocker blockerWithHeader(ui->checkBoxWithHeader);
+                    const QSignalBlocker blockerGroup(ui->buttonGroup);
 
-                ui->checkBoxWithHeader->setChecked(VCommonSettings::GetDefCSVWithHeader());
-                ui->comboBoxCodec->setCurrentIndex(ui->comboBoxCodec->findData(VCommonSettings::GetDefCSVCodec()));
+                    ui->checkBoxWithHeader->setChecked(VCommonSettings::GetDefCSVWithHeader());
+                    ui->comboBoxCodec->setCurrentIndex(ui->comboBoxCodec->findData(VCommonSettings::GetDefCSVCodec()));
 
-                SetSeparator(VCommonSettings::GetDefCSVSeparator());
-
-                ui->comboBoxCodec->blockSignals(false);
-                ui->checkBoxWithHeader->blockSignals(false);
-                ui->buttonGroup->blockSignals(false);
+                    SetSeparator(VCommonSettings::GetDefCSVSeparator());
+                }
 
                 ShowPreview();
             });

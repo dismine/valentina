@@ -460,22 +460,20 @@ void DialogLayoutSettings::FindTemplate()
         const QSizeF tmplSize = GetTemplateSize(static_cast<PaperSizeTemplate>(i), paperUnit);
         if (QSizeF(width, height) == tmplSize || QSizeF(height, width) == tmplSize)
         {
-            ui->comboBoxTemplates->blockSignals(true);
+            const QSignalBlocker blocker(ui->comboBoxTemplates);
             if (const int index = ui->comboBoxTemplates->findData(i); index != -1)
             {
                 ui->comboBoxTemplates->setCurrentIndex(index);
             }
-            ui->comboBoxTemplates->blockSignals(false);
             return;
         }
     }
 
-    ui->comboBoxTemplates->blockSignals(true);
+    const QSignalBlocker blocker(ui->comboBoxTemplates);
     if (const int index = ui->comboBoxTemplates->findData(max); index != -1)
     {
         ui->comboBoxTemplates->setCurrentIndex(index);
     }
-    ui->comboBoxTemplates->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -490,12 +488,12 @@ void DialogLayoutSettings::ConvertPaperSize()
     const qreal top = ui->doubleSpinBoxTopField->value();
     const qreal bottom = ui->doubleSpinBoxBottomField->value();
 
-    ui->doubleSpinBoxPaperWidth->blockSignals(true);
-    ui->doubleSpinBoxPaperHeight->blockSignals(true);
-    ui->doubleSpinBoxPaperWidth->setMaximum(FromPixel(QIMAGE_MAX, paperUnit));
-    ui->doubleSpinBoxPaperHeight->setMaximum(FromPixel(QIMAGE_MAX, paperUnit));
-    ui->doubleSpinBoxPaperWidth->blockSignals(false);
-    ui->doubleSpinBoxPaperHeight->blockSignals(false);
+    {
+        const QSignalBlocker blockerPaperWidth(ui->doubleSpinBoxPaperWidth);
+        const QSignalBlocker blockerPaperHeight(ui->doubleSpinBoxPaperHeight);
+        ui->doubleSpinBoxPaperWidth->setMaximum(FromPixel(QIMAGE_MAX, paperUnit));
+        ui->doubleSpinBoxPaperHeight->setMaximum(FromPixel(QIMAGE_MAX, paperUnit));
+    }
 
     const qreal newWidth = UnitConvertor(width, m_oldPaperUnit, paperUnit);
     const qreal newHeight = UnitConvertor(height, m_oldPaperUnit, paperUnit);
@@ -618,15 +616,13 @@ void DialogLayoutSettings::PaperSizeChanged()
 {
     if (ui->doubleSpinBoxPaperHeight->value() > ui->doubleSpinBoxPaperWidth->value())
     {
-        ui->toolButtonPortrait->blockSignals(true);
+        const QSignalBlocker blocker(ui->toolButtonPortrait);
         ui->toolButtonPortrait->setChecked(true);
-        ui->toolButtonPortrait->blockSignals(false);
     }
     else
     {
-        ui->toolButtonLandscape->blockSignals(true);
+        const QSignalBlocker blocker(ui->toolButtonLandscape);
         ui->toolButtonLandscape->setChecked(true);
-        ui->toolButtonLandscape->blockSignals(false);
     }
 }
 
@@ -650,13 +646,13 @@ void DialogLayoutSettings::Swap(bool checked)
         const qreal width = ui->doubleSpinBoxPaperWidth->value();
         const qreal height = ui->doubleSpinBoxPaperHeight->value();
 
-        ui->doubleSpinBoxPaperWidth->blockSignals(true);
-        ui->doubleSpinBoxPaperWidth->setValue(height);
-        ui->doubleSpinBoxPaperWidth->blockSignals(false);
+        {
+            const QSignalBlocker blocker(ui->doubleSpinBoxPaperWidth);
+            ui->doubleSpinBoxPaperWidth->setValue(height);
+        }
 
-        ui->doubleSpinBoxPaperHeight->blockSignals(true);
+        const QSignalBlocker blocker(ui->doubleSpinBoxPaperHeight);
         ui->doubleSpinBoxPaperHeight->setValue(width);
-        ui->doubleSpinBoxPaperHeight->blockSignals(false);
     }
 }
 
@@ -733,14 +729,16 @@ void DialogLayoutSettings::DialogAccepted()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::RestoreDefaults()
 {
-    ui->comboBoxTemplates->blockSignals(true);
-    ui->comboBoxTemplates->setCurrentIndex(0); // A0
-    TemplateSelected();
-    ui->comboBoxTemplates->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->comboBoxTemplates);
+        ui->comboBoxTemplates->setCurrentIndex(0); // A0
+        TemplateSelected();
+    }
 
-    ui->comboBoxPrinter->blockSignals(true);
-    InitPrinter();
-    ui->comboBoxPrinter->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->comboBoxPrinter);
+        InitPrinter();
+    }
 
     SetLayoutWidth(VValentinaSettings::GetDefLayoutWidth());
     SetGroup(VValentinaSettings::GetDefLayoutGroup());

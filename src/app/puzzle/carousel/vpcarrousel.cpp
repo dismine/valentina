@@ -82,9 +82,10 @@ void VPCarrousel::Refresh()
     const QUuid sheetUuid = ui->comboBoxPieceList->currentData().toUuid();
 
     // --- clears the content of the carrousel
-    ui->comboBoxPieceList->blockSignals(true);
-    Clear();
-    ui->comboBoxPieceList->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->comboBoxPieceList);
+        Clear();
+    }
 
     // --- add the content saved in the layout to the carrousel.
     // Do not rely on m_layout because we do not control it.
@@ -108,19 +109,17 @@ void VPCarrousel::Refresh()
             }
         }
 
-        ui->comboBoxPieceList->blockSignals(true);
-
+        const QSignalBlocker blocker(ui->comboBoxPieceList);
         for (const auto &sheet : std::as_const(m_pieceLists))
         {
             ui->comboBoxPieceList->addItem(GetSheetName(sheet), sheet.sheetUuid);
         }
-
-        ui->comboBoxPieceList->blockSignals(false);
     }
 
-    ui->comboBoxPieceList->blockSignals(true);
-    ui->comboBoxPieceList->setCurrentIndex(-1);
-    ui->comboBoxPieceList->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->comboBoxPieceList);
+        ui->comboBoxPieceList->setCurrentIndex(-1);
+    }
 
     int const index = ui->comboBoxPieceList->findData(sheetUuid);
     ui->comboBoxPieceList->setCurrentIndex(index != -1 ? index : 0);

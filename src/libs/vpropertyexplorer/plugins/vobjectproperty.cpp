@@ -101,9 +101,8 @@ auto VPE::VObjectProperty::setEditorData(QWidget *editor) -> bool
         {
             tmpIndex = 0;
         }
-        tmpEditor->blockSignals(true);
+        const QSignalBlocker blocker(tmpEditor);
         tmpEditor->setCurrentIndex(tmpIndex);
-        tmpEditor->blockSignals(false);
         return true;
     }
 

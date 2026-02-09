@@ -340,7 +340,7 @@ void VWidgetGroups::FillTable(QMap<quint32, VGroupData> groups)
 
     groups = FilterGroups(groups);
 
-    ui->tableWidget->blockSignals(true);
+    const QSignalBlocker blocker(ui->tableWidget);
     ui->tableWidget->clear();
 
     ui->tableWidget->setColumnCount(2);
@@ -387,5 +387,4 @@ void VWidgetGroups::FillTable(QMap<quint32, VGroupData> groups)
     ui->tableWidget->sortItems(1, Qt::AscendingOrder);
     ui->tableWidget->resizeColumnsToContents();
     ui->tableWidget->resizeRowsToContents();
-    ui->tableWidget->blockSignals(false);
 }

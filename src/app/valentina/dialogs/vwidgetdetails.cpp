@@ -174,7 +174,7 @@ void VWidgetDetails::RenameDetail(int row, int column)
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetDetails::FillTable(const QHash<quint32, VPiece> *details)
 {
-    ui->tableWidget->blockSignals(true);
+    const QSignalBlocker blocker(ui->tableWidget);
 
     const int selectedRow = ui->tableWidget->currentRow();
     ui->tableWidget->clearContents();
@@ -199,8 +199,6 @@ void VWidgetDetails::FillTable(const QHash<quint32, VPiece> *details)
     ui->tableWidget->setCurrentCell(selectedRow, 0);
 
     on_checkBoxHideNotInLayout_stateChanged(); // Trigger hide for action from context menu
-
-    ui->tableWidget->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

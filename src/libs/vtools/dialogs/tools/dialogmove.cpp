@@ -109,9 +109,10 @@ DialogMove::DialogMove(const VContainer *data, VAbstractPattern *doc, quint32 to
     ui->pushButtonColor->setUseNativeDialog(!VAbstractApplication::VApp()->Settings()->IsDontUseNativeDialog());
     FillComboBoxPoints(ui->comboBoxRotationOriginPoint);
 
-    ui->comboBoxRotationOriginPoint->blockSignals(true);
-    ui->comboBoxRotationOriginPoint->addItem(tr("Center point"), NULL_ID);
-    ui->comboBoxRotationOriginPoint->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->comboBoxRotationOriginPoint);
+        ui->comboBoxRotationOriginPoint->addItem(tr("Center point"), NULL_ID);
+    }
 
     connect(ui->lineEditVisibilityGroup, &QLineEdit::textChanged, this, &DialogMove::GroupNameChanged);
     connect(ui->toolButtonExprAngle, &QPushButton::clicked, this, &DialogMove::FXAngle);

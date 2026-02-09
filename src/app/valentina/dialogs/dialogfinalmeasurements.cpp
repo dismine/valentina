@@ -239,22 +239,23 @@ void DialogFinalMeasurements::ShowFinalMeasurementDetails()
 
         const VFinalMeasurement &m = m_measurements.at(ui->tableWidget->currentRow());
 
-        ui->lineEditName->blockSignals(true);
-        ui->lineEditName->setText(m.name);
-        ui->lineEditName->blockSignals(false);
+        {
+            const QSignalBlocker blocker(ui->lineEditName);
+            ui->lineEditName->setText(m.name);
+        }
 
-        ui->plainTextEditDescription->blockSignals(true);
-        ui->plainTextEditDescription->setPlainText(m.description);
-        ui->plainTextEditDescription->blockSignals(false);
+        {
+            const QSignalBlocker blocker(ui->plainTextEditDescription);
+            ui->plainTextEditDescription->setPlainText(m.description);
+        }
 
         EvalUserFormula(m.formula, false);
-        ui->plainTextEditFormula->blockSignals(true);
+        const QSignalBlocker blocker(ui->plainTextEditFormula);
 
         const QString formula =
             VTranslateVars::TryFormulaToUser(m.formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 
         ui->plainTextEditFormula->setPlainText(formula);
-        ui->plainTextEditFormula->blockSignals(false);
     }
     else
     {
@@ -347,9 +348,8 @@ void DialogFinalMeasurements::SaveName(const QString &text)
 
     UpdateTree();
 
-    ui->tableWidget->blockSignals(true);
+    const QSignalBlocker blocker(ui->tableWidget);
     ui->tableWidget->selectRow(row);
-    ui->tableWidget->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -368,9 +368,10 @@ void DialogFinalMeasurements::SaveDescription()
 
     UpdateTree();
 
-    ui->tableWidget->blockSignals(true);
-    ui->tableWidget->selectRow(row);
-    ui->tableWidget->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->tableWidget);
+        ui->tableWidget->selectRow(row);
+    }
     ui->plainTextEditDescription->setTextCursor(cursor);
 }
 
@@ -424,9 +425,10 @@ void DialogFinalMeasurements::SaveFormula()
 
     UpdateTree();
 
-    ui->tableWidget->blockSignals(true);
-    ui->tableWidget->selectRow(row);
-    ui->tableWidget->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->tableWidget);
+        ui->tableWidget->selectRow(row);
+    }
     ui->plainTextEditFormula->setTextCursor(cursor);
 }
 
@@ -511,7 +513,7 @@ void DialogFinalMeasurements::UpdateShortcuts()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFinalMeasurements::FillFinalMeasurements(bool freshCall)
 {
-    ui->tableWidget->blockSignals(true);
+    const QSignalBlocker blocker(ui->tableWidget);
     ui->tableWidget->clearContents();
 
     ui->tableWidget->setRowCount(static_cast<int>(m_measurements.size()));
@@ -537,7 +539,6 @@ void DialogFinalMeasurements::FillFinalMeasurements(bool freshCall)
         ui->tableWidget->resizeRowsToContents();
     }
     ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
-    ui->tableWidget->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -677,21 +678,23 @@ void DialogFinalMeasurements::EnableDetails(bool enabled)
 
     if (not enabled)
     { // Clear
-        ui->lineEditName->blockSignals(true);
-        ui->lineEditName->clear();
-        ui->lineEditName->blockSignals(false);
+        {
+            const QSignalBlocker blocker(ui->lineEditName);
+            ui->lineEditName->clear();
+        }
 
-        ui->plainTextEditDescription->blockSignals(true);
-        ui->plainTextEditDescription->clear();
-        ui->plainTextEditDescription->blockSignals(false);
+        {
+            const QSignalBlocker blocker(ui->plainTextEditDescription);
+            ui->plainTextEditDescription->clear();
+        }
 
-        ui->labelCalculatedValue->blockSignals(true);
-        ui->labelCalculatedValue->clear();
-        ui->labelCalculatedValue->blockSignals(false);
+        {
+            const QSignalBlocker blocker(ui->labelCalculatedValue);
+            ui->labelCalculatedValue->clear();
+        }
 
-        ui->plainTextEditFormula->blockSignals(true);
+        const QSignalBlocker blocker(ui->plainTextEditFormula);
         ui->plainTextEditFormula->clear();
-        ui->plainTextEditFormula->blockSignals(false);
     }
 
     ui->pushButtonGrow->setEnabled(enabled);
@@ -706,9 +709,10 @@ void DialogFinalMeasurements::UpdateTree()
 {
     int const row = ui->tableWidget->currentRow();
     FillFinalMeasurements();
-    ui->tableWidget->blockSignals(true);
-    ui->tableWidget->selectRow(row);
-    ui->tableWidget->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->tableWidget);
+        ui->tableWidget->selectRow(row);
+    }
 
     m_search->RefreshList(ui->lineEditFind->text());
 }
@@ -844,9 +848,10 @@ void DialogFinalMeasurements::InitSearch()
 
                 if (checked)
                 {
-                    ui->toolButtonWholeWord->blockSignals(true);
-                    ui->toolButtonWholeWord->setChecked(false);
-                    ui->toolButtonWholeWord->blockSignals(false);
+                    {
+                        const QSignalBlocker blocker(ui->toolButtonWholeWord);
+                        ui->toolButtonWholeWord->setChecked(false);
+                    }
                     ui->toolButtonWholeWord->setEnabled(false);
 
                     ui->toolButtonUseUnicodeProperties->setEnabled(true);
@@ -854,9 +859,11 @@ void DialogFinalMeasurements::InitSearch()
                 else
                 {
                     ui->toolButtonWholeWord->setEnabled(true);
-                    ui->toolButtonUseUnicodeProperties->blockSignals(true);
-                    ui->toolButtonUseUnicodeProperties->setChecked(false);
-                    ui->toolButtonUseUnicodeProperties->blockSignals(false);
+
+                    {
+                        const QSignalBlocker blocker(ui->toolButtonUseUnicodeProperties);
+                        ui->toolButtonUseUnicodeProperties->setChecked(false);
+                    }
                     ui->toolButtonUseUnicodeProperties->setEnabled(false);
                 }
                 m_search->Find(ui->lineEditFind->text());

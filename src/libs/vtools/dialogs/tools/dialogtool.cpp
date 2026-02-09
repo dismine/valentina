@@ -165,13 +165,14 @@ void DialogTool::keyPressEvent(QKeyEvent *event)
 void DialogTool::FillComboBoxPiecesList(QComboBox *box, const QVector<quint32> &list)
 {
     SCASSERT(box != nullptr)
-    box->blockSignals(true);
-    box->clear();
-    for (auto id : list)
     {
-        box->addItem(data->GetPiece(id).GetName(), id);
+        const QSignalBlocker blocker(box);
+        box->clear();
+        for (auto id : list)
+        {
+            box->addItem(data->GetPiece(id).GetName(), id);
+        }
     }
-    box->blockSignals(false);
     box->setCurrentIndex(-1); // Force a user to choose
 }
 
@@ -195,7 +196,7 @@ void DialogTool::FillComboBoxArcs(QComboBox *box, FillComboBox rule, quint32 ch1
 void DialogTool::FillComboBoxArcCurves(QComboBox *box, FillComboBox rule, quint32 ch1, quint32 ch2) const
 {
     SCASSERT(box != nullptr)
-    box->blockSignals(true);
+    const QSignalBlocker blocker(box);
 
     const QHash<quint32, QSharedPointer<VGObject>> *objs = data->CalculationGObjects();
     QMap<QString, quint32> list;
@@ -228,14 +229,13 @@ void DialogTool::FillComboBoxArcCurves(QComboBox *box, FillComboBox rule, quint3
 
     FillList(box, list);
     box->setCurrentIndex(-1); // force to select
-    box->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogTool::FillComboBoxSplines(QComboBox *box) const
 {
     SCASSERT(box != nullptr)
-    box->blockSignals(true);
+    const QSignalBlocker blocker(box);
 
     const auto *const objs = data->CalculationGObjects();
     QMap<QString, quint32> list;
@@ -248,14 +248,13 @@ void DialogTool::FillComboBoxSplines(QComboBox *box) const
     }
     FillList(box, list);
     box->setCurrentIndex(-1); // force to select
-    box->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogTool::FillComboBoxSplinesPath(QComboBox *box) const
 {
     SCASSERT(box != nullptr)
-    box->blockSignals(true);
+    const QSignalBlocker blocker(box);
 
     const auto *const objs = data->CalculationGObjects();
     QMap<QString, quint32> list;
@@ -268,7 +267,6 @@ void DialogTool::FillComboBoxSplinesPath(QComboBox *box) const
     }
     FillList(box, list);
     box->setCurrentIndex(-1); // force to select
-    box->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -484,12 +482,10 @@ void DialogTool::setCurrentPointId(QComboBox *box, const quint32 &value, FillCom
 {
     SCASSERT(box != nullptr)
 
-    box->blockSignals(true);
+    const QSignalBlocker blocker(box);
 
     FillComboBoxPoints(box, rule, ch1, ch2);
     ChangeCurrentData(box, value);
-
-    box->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -744,7 +740,7 @@ void DialogTool::FillCombo(QComboBox *box, GOType gType, FillComboBox rule, cons
                            const quint32 &ch2) const
 {
     SCASSERT(box != nullptr)
-    box->blockSignals(true);
+    const QSignalBlocker blocker(box);
 
     const QHash<quint32, QSharedPointer<VGObject>> *objs = data->CalculationGObjects();
     QMap<QString, quint32> list;
@@ -775,5 +771,4 @@ void DialogTool::FillCombo(QComboBox *box, GOType gType, FillComboBox rule, cons
     }
     FillList(box, list);
     box->setCurrentIndex(-1); // force to select
-    box->blockSignals(false);
 }

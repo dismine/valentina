@@ -243,17 +243,15 @@ void DialogInsertNode::NodeSelected()
     if (item == nullptr)
     {
         ui->spinBoxNodeNumber->setDisabled(true);
-        ui->spinBoxNodeNumber->blockSignals(true);
+        const QSignalBlocker blocker(ui->spinBoxNodeNumber);
         ui->spinBoxNodeNumber->setValue(1);
-        ui->spinBoxNodeNumber->blockSignals(false);
         return;
     }
 
     auto const node = qvariant_cast<VPieceNode>(item->data(Qt::UserRole));
     ui->spinBoxNodeNumber->setEnabled(true);
-    ui->spinBoxNodeNumber->blockSignals(true);
+    const QSignalBlocker blocker(ui->spinBoxNodeNumber);
     ui->spinBoxNodeNumber->setValue(nodeNumbers.value(node.GetId(), 1));
-    ui->spinBoxNodeNumber->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -158,9 +158,8 @@ void DialogLayoutScale::HorizontalScaleChanged(double d)
 {
     if (m_scaleConnected)
     {
-        ui->doubleSpinBoxVerticalScale->blockSignals(true);
+        const QSignalBlocker blocker(ui->doubleSpinBoxVerticalScale);
         ui->doubleSpinBoxVerticalScale->setValue(d);
-        ui->doubleSpinBoxVerticalScale->blockSignals(false);
     }
 }
 
@@ -169,9 +168,8 @@ void DialogLayoutScale::VerticalScaleChanged(double d)
 {
     if (m_scaleConnected)
     {
-        ui->doubleSpinBoxHorizontalScale->blockSignals(true);
+        const QSignalBlocker blocker(ui->doubleSpinBoxHorizontalScale);
         ui->doubleSpinBoxHorizontalScale->setValue(d);
-        ui->doubleSpinBoxHorizontalScale->blockSignals(false);
     }
 }
 

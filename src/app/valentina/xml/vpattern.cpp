@@ -924,9 +924,8 @@ void VPattern::ParseRootElement(const Document &parse, const QDomNode &node)
             }
             else
             {
-                blocks->blockSignals(true);
+                const QSignalBlocker blocker(blocks);
                 blocks->SetActive(GetParametrString(domElement, AttrName));
-                blocks->blockSignals(false);
             }
             ParseDrawElement(domElement, parse);
             break;

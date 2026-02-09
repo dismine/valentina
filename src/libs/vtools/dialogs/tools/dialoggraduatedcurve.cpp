@@ -502,9 +502,10 @@ void DialogGraduatedCurve::ShowOffsetDetails()
 
         const VGraduatedCurveOffsetFormula &offsetData = m_offsets.at(ui->tableWidget->currentRow());
 
-        ui->lineEditName->blockSignals(true);
-        ui->lineEditName->setText(VAbstractApplication::VApp()->TrVars()->InternalVarToUser(offsetData.name));
-        ui->lineEditName->blockSignals(false);
+        {
+            const QSignalBlocker blocker(ui->lineEditName);
+            ui->lineEditName->setText(VAbstractApplication::VApp()->TrVars()->InternalVarToUser(offsetData.name));
+        }
 
         if (QString const unitSuffix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits());
             offsetData.formula.error())
@@ -518,14 +519,14 @@ void DialogGraduatedCurve::ShowOffsetDetails()
             ui->labelCalculatedValue->setToolTip(tr("Value"));
         }
 
-        ui->plainTextEditFormula->blockSignals(true);
-        QString const formula = offsetData.formula.GetFormula(FormulaType::ToUser);
-        ui->plainTextEditFormula->setPlainText(formula);
-        ui->plainTextEditFormula->blockSignals(false);
+        {
+            const QSignalBlocker blocker(ui->plainTextEditFormula);
+            QString const formula = offsetData.formula.GetFormula(FormulaType::ToUser);
+            ui->plainTextEditFormula->setPlainText(formula);
+        }
 
-        ui->plainTextEditDescription->blockSignals(true);
+        const QSignalBlocker blocker(ui->plainTextEditDescription);
         ui->plainTextEditDescription->setPlainText(offsetData.description);
-        ui->plainTextEditDescription->blockSignals(false);
 
         return;
     }
@@ -730,9 +731,8 @@ void DialogGraduatedCurve::SaveOffsetName(const QString &text)
 
     SetOffsets(rawOffsets);
 
-    ui->tableWidget->blockSignals(true);
+    const QSignalBlocker blocker(ui->tableWidget);
     ui->tableWidget->selectRow(row);
-    ui->tableWidget->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -751,9 +751,10 @@ void DialogGraduatedCurve::SaveOffsetDescription()
     rawOffsets[row].description = ui->plainTextEditDescription->toPlainText();
     SetOffsets(rawOffsets);
 
-    ui->tableWidget->blockSignals(true);
-    ui->tableWidget->selectRow(row);
-    ui->tableWidget->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->tableWidget);
+        ui->tableWidget->selectRow(row);
+    }
     ui->plainTextEditDescription->setTextCursor(cursor);
 }
 
@@ -793,9 +794,10 @@ void DialogGraduatedCurve::SaveOffsetFormula()
 
     SetOffsets(rawOffsets);
 
-    ui->tableWidget->blockSignals(true);
-    ui->tableWidget->selectRow(row);
-    ui->tableWidget->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->tableWidget);
+        ui->tableWidget->selectRow(row);
+    }
     ui->plainTextEditFormula->setTextCursor(cursor);
 }
 
@@ -823,7 +825,7 @@ void DialogGraduatedCurve::InitIcons()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogGraduatedCurve::FillOffsets()
 {
-    ui->tableWidget->blockSignals(true);
+    const QSignalBlocker blocker(ui->tableWidget);
     ui->tableWidget->clearContents();
     ui->tableWidget->setRowCount(static_cast<int>(m_offsets.size()));
 
@@ -842,7 +844,6 @@ void DialogGraduatedCurve::FillOffsets()
 
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
-    ui->tableWidget->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -891,21 +892,23 @@ void DialogGraduatedCurve::EnableDetails(bool enabled)
 
     if (not enabled)
     { // Clear
-        ui->lineEditName->blockSignals(true);
-        ui->lineEditName->clear();
-        ui->lineEditName->blockSignals(false);
+        {
+            const QSignalBlocker blocker(ui->lineEditName);
+            ui->lineEditName->clear();
+        }
 
-        ui->plainTextEditDescription->blockSignals(true);
-        ui->plainTextEditDescription->clear();
-        ui->plainTextEditDescription->blockSignals(false);
+        {
+            const QSignalBlocker blocker(ui->plainTextEditDescription);
+            ui->plainTextEditDescription->clear();
+        }
 
-        ui->labelCalculatedValue->blockSignals(true);
-        ui->labelCalculatedValue->clear();
-        ui->labelCalculatedValue->blockSignals(false);
+        {
+            const QSignalBlocker blocker(ui->labelCalculatedValue);
+            ui->labelCalculatedValue->clear();
+        }
 
-        ui->plainTextEditFormula->blockSignals(true);
+        const QSignalBlocker blocker(ui->plainTextEditFormula);
         ui->plainTextEditFormula->clear();
-        ui->plainTextEditFormula->blockSignals(false);
     }
 
     ui->pushButtonGrow->setEnabled(enabled);

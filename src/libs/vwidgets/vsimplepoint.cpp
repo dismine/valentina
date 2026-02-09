@@ -215,9 +215,10 @@ auto VSimplePoint::itemChange(QGraphicsItem::GraphicsItemChange change, const QV
 {
     if (change == QGraphicsItem::ItemSelectedHasChanged)
     {
-        m_namePoint->blockSignals(true);
-        m_namePoint->setSelected(value.toBool());
-        m_namePoint->blockSignals(false);
+        {
+            const QSignalBlocker blocker(m_namePoint);
+            m_namePoint->setSelected(value.toBool());
+        }
         emit Selected(value.toBool(), id);
     }
 

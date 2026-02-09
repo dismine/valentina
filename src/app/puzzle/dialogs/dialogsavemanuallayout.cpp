@@ -118,10 +118,11 @@ DialogSaveManualLayout::DialogSaveManualLayout(vsizetype count, bool consoleExpo
                     return;
                 }
 
-                ui->comboBoxFormatType->blockSignals(true);
-                InitFileFormatTypes(static_cast<LayoutExportFileFormat>(ui->comboBoxFormat->currentData().toInt()));
-                ui->comboBoxFormatType->setCurrentIndex(-1);
-                ui->comboBoxFormatType->blockSignals(false);
+                {
+                    const QSignalBlocker blocker(ui->comboBoxFormatType);
+                    InitFileFormatTypes(static_cast<LayoutExportFileFormat>(ui->comboBoxFormat->currentData().toInt()));
+                    ui->comboBoxFormatType->setCurrentIndex(-1);
+                }
 
                 ui->comboBoxFormatType->setCurrentIndex(0);
             });
@@ -197,14 +198,16 @@ void DialogSaveManualLayout::SelectFormat(LayoutExportFormats format)
         throw VException(tr("Selected not present file format."));
     }
 
-    ui->comboBoxFormat->blockSignals(true);
-    ui->comboBoxFormat->setCurrentIndex(i);
-    ui->comboBoxFormat->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->comboBoxFormat);
+        ui->comboBoxFormat->setCurrentIndex(i);
+    }
 
-    ui->comboBoxFormatType->blockSignals(true);
-    InitFileFormatTypes(fileFormat);
-    ui->comboBoxFormatType->setCurrentIndex(-1);
-    ui->comboBoxFormatType->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->comboBoxFormatType);
+        InitFileFormatTypes(fileFormat);
+        ui->comboBoxFormatType->setCurrentIndex(-1);
+    }
 
     i = ui->comboBoxFormatType->findData(static_cast<int>(format));
     if (i < 0)

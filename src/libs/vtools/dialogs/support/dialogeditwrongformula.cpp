@@ -622,7 +622,7 @@ void DialogEditWrongFormula::InitIcons()
  */
 template <class T> void DialogEditWrongFormula::ShowVariable(const QList<T> &vars)
 {
-    ui->tableWidget->blockSignals(true);
+    QSignalBlocker blocker(ui->tableWidget);
     ui->tableWidget->clearContents();
     ui->tableWidget->setRowCount(0);
     ui->tableWidget->setColumnHidden(ColumnFullName, true);
@@ -662,7 +662,7 @@ template <class T> void DialogEditWrongFormula::ShowVariable(const QList<T> &var
         }
     }
 
-    ui->tableWidget->blockSignals(false);
+    blocker.unblock();
     ui->tableWidget->selectRow(0);
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
@@ -674,7 +674,7 @@ template <class T> void DialogEditWrongFormula::ShowVariable(const QList<T> &var
  */
 void DialogEditWrongFormula::ShowMeasurements(const QList<QSharedPointer<VMeasurement>> &vars)
 {
-    ui->tableWidget->blockSignals(true);
+    QSignalBlocker blocker(ui->tableWidget);
     ui->tableWidget->clearContents();
     ui->tableWidget->setRowCount(0);
     ui->tableWidget->setColumnHidden(ColumnFullName, false);
@@ -723,7 +723,7 @@ void DialogEditWrongFormula::ShowMeasurements(const QList<QSharedPointer<VMeasur
         }
     }
 
-    ui->tableWidget->blockSignals(false);
+    blocker.unblock();
     ui->tableWidget->selectRow(0);
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
@@ -734,7 +734,7 @@ void DialogEditWrongFormula::ShowMeasurements(const QList<QSharedPointer<VMeasur
  */
 void DialogEditWrongFormula::ShowFunctions()
 {
-    ui->tableWidget->blockSignals(true);
+    QSignalBlocker blocker(ui->tableWidget);
     ui->tableWidget->clearContents();
     ui->tableWidget->setRowCount(0);
     ui->tableWidget->setColumnHidden(ColumnFullName, true);
@@ -775,7 +775,7 @@ void DialogEditWrongFormula::ShowFunctions()
         ++i;
     }
 
-    ui->tableWidget->blockSignals(false);
+    blocker.unblock();
     ui->tableWidget->selectRow(0);
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
@@ -859,7 +859,7 @@ void DialogEditWrongFormula::SetPieceAreaDescription(QTableWidgetItem *item, con
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::FilterVariablesEdited(const QString &filter)
 {
-    ui->tableWidget->blockSignals(true);
+    const QSignalBlocker blocker(ui->tableWidget);
 
     // If filter is empty findItems() for unknown reason returns nullptr items.
     // See issue #586. https://bitbucket.org/dismine/valentina/issues/586/valentina-crashes-if-clear-input-filter
@@ -891,6 +891,4 @@ void DialogEditWrongFormula::FilterVariablesEdited(const QString &filter)
             }
         }
     }
-
-    ui->tableWidget->blockSignals(false);
 }

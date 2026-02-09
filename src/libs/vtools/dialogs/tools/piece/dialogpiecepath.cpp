@@ -510,7 +510,7 @@ void DialogPiecePath::NodeChanged(int index)
 
     ui->comboBoxAngle->setDisabled(true);
 
-    ui->comboBoxAngle->blockSignals(true);
+    const QSignalBlocker blocker(ui->comboBoxAngle);
 
     if (index != -1)
     {
@@ -571,8 +571,6 @@ void DialogPiecePath::NodeChanged(int index)
         ui->plainTextEditFormulaWidthAfter->setPlainText(QString());
         ui->comboBoxAngle->setCurrentIndex(-1);
     }
-
-    ui->comboBoxAngle->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -591,32 +589,19 @@ void DialogPiecePath::PassmarkChanged(int index)
     ui->checkBoxClockwiseOpening->setDisabled(true);
     ui->checkBoxShowSecondPassmark->setDisabled(true);
 
-    ui->checkBoxClockwiseOpening->blockSignals(true);
-    ui->checkBoxShowSecondPassmark->blockSignals(true);
-
-    ui->groupBoxManualLength->blockSignals(true);
-    ui->groupBoxManualWidth->blockSignals(true);
-    ui->groupBoxManualAngle->blockSignals(true);
-    ui->groupBoxMarkType->blockSignals(true);
-    ui->groupBoxAngleType->blockSignals(true);
+    const QSignalBlocker blockerClockwiseOpening(ui->checkBoxClockwiseOpening);
+    const QSignalBlocker blockerShowSecondPassmark(ui->checkBoxShowSecondPassmark);
+    const QSignalBlocker blockerManualLength(ui->groupBoxManualLength);
+    const QSignalBlocker blockerManualWidth(ui->groupBoxManualWidth);
+    const QSignalBlocker blockerManualAngle(ui->groupBoxManualAngle);
+    const QSignalBlocker blockerMarkType(ui->groupBoxMarkType);
+    const QSignalBlocker blockerAngleType(ui->groupBoxAngleType);
 
     ui->checkBoxClockwiseOpening->setChecked(false);
 
     ui->groupBoxManualLength->setChecked(false);
     ui->groupBoxManualWidth->setChecked(false);
     ui->groupBoxManualAngle->setChecked(false);
-
-    auto EnableSignals = qScopeGuard(
-        [this]
-        {
-            ui->checkBoxClockwiseOpening->blockSignals(false);
-            ui->checkBoxShowSecondPassmark->blockSignals(false);
-            ui->groupBoxManualLength->blockSignals(false);
-            ui->groupBoxManualWidth->blockSignals(false);
-            ui->groupBoxManualAngle->blockSignals(false);
-            ui->groupBoxMarkType->blockSignals(false);
-            ui->groupBoxAngleType->blockSignals(false);
-        });
 
     if (index == -1)
     {
@@ -1186,9 +1171,8 @@ void DialogPiecePath::SetOptionControls()
 
     auto SetChecked = [](QToolButton *toolButton, bool checked = false)
     {
-        toolButton->blockSignals(true);
+        const QSignalBlocker blocker(toolButton);
         toolButton->setChecked(checked);
-        toolButton->blockSignals(false);
     };
 
     SetChecked(ui->toolButtonReverse);
@@ -1556,22 +1540,23 @@ void DialogPiecePath::InitNodesList()
 {
     const quint32 id = ui->comboBoxNodes->currentData().toUInt();
 
-    ui->comboBoxNodes->blockSignals(true);
-    ui->comboBoxNodes->clear();
-
-    const VPiecePath path = CreatePath();
-
-    for (int i = 0; i < path.CountNodes(); ++i)
     {
-        const VPieceNode &node = path.at(i);
-        if (node.GetTypeTool() == Tool::NodePoint)
-        {
-            const QString name = GetNodeName(data, node);
+        const QSignalBlocker blocker(ui->comboBoxNodes);
+        ui->comboBoxNodes->clear();
 
-            ui->comboBoxNodes->addItem(name, node.GetId());
+        const VPiecePath path = CreatePath();
+
+        for (int i = 0; i < path.CountNodes(); ++i)
+        {
+            const VPieceNode &node = path.at(i);
+            if (node.GetTypeTool() == Tool::NodePoint)
+            {
+                const QString name = GetNodeName(data, node);
+
+                ui->comboBoxNodes->addItem(name, node.GetId());
+            }
         }
     }
-    ui->comboBoxNodes->blockSignals(false);
 
     const int index = ui->comboBoxNodes->findData(id);
     if (index != -1)
@@ -1590,21 +1575,22 @@ void DialogPiecePath::InitPassmarksList()
 {
     const quint32 id = ui->comboBoxPassmarks->currentData().toUInt();
 
-    ui->comboBoxPassmarks->blockSignals(true);
-    ui->comboBoxPassmarks->clear();
-
-    const QVector<VPieceNode> nodes = GetListInternals<VPieceNode>(ui->listWidget);
-
-    for (const auto &node : nodes)
     {
-        if (node.GetTypeTool() == Tool::NodePoint && node.IsPassmark())
-        {
-            const QString name = GetNodeName(data, node);
+        const QSignalBlocker blocker(ui->comboBoxPassmarks);
+        ui->comboBoxPassmarks->clear();
 
-            ui->comboBoxPassmarks->addItem(name, node.GetId());
+        const QVector<VPieceNode> nodes = GetListInternals<VPieceNode>(ui->listWidget);
+
+        for (const auto &node : nodes)
+        {
+            if (node.GetTypeTool() == Tool::NodePoint && node.IsPassmark())
+            {
+                const QString name = GetNodeName(data, node);
+
+                ui->comboBoxPassmarks->addItem(name, node.GetId());
+            }
         }
     }
-    ui->comboBoxPassmarks->blockSignals(false);
 
     const int index = ui->comboBoxPassmarks->findData(id);
     if (index != -1)
@@ -2213,13 +2199,12 @@ void DialogPiecePath::SetFormulaPassmarkAngle(const QString &formula)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::RefreshPathList(const VPiecePath &path)
 {
-    ui->listWidget->blockSignals(true);
+    const QSignalBlocker blocker(ui->listWidget);
     ui->listWidget->clear();
     for (int i = 0; i < path.CountNodes(); ++i)
     {
         NewItem(path.at(i));
     }
-    ui->listWidget->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
