@@ -194,6 +194,12 @@ VApp {
         windeployqt.languages: i18nconfig.qtTranslationLocales.join(',')
     }
 
+    // Disable auto-generated manifest since we provide our own via RC file
+    Properties {
+        condition: qbs.targetOS.contains("windows")
+        cpp.generateManifestFile: false
+    }
+
     Group {
         condition: qbs.targetOS.contains("macos") && bundle.isBundle
         fileTagsFilter: "bundle.content"
