@@ -58,7 +58,7 @@ NOTE: There is no comma after the final capture variable before the V_LAMBDA_CON
 will work with 1 or more captures.
 */
 #ifndef V_LAMBDA_CONSTANTS
-#if defined(Q_CC_MSVC)
+#if defined(Q_CC_MSVC) && _MSC_VER < 1932 // MSVC versions before VS 2022 17.2
 #define V_LAMBDA_CONSTANTS(...) ,__VA_ARGS__
 #else
 #define V_LAMBDA_CONSTANTS(...)
