@@ -80,51 +80,7 @@ VGraphicsSimpleTextItem::VGraphicsSimpleTextItem(const QString &text, VColorRole
 //---------------------------------------------------------------------------------------------------------------------
 void VGraphicsSimpleTextItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    auto UpdateLine = [this]() -> void
-    {
-        if (auto *parent = dynamic_cast<VScenePoint *>(parentItem()))
-        {
-            parent->RefreshLine();
-        }
-    };
-
-    RefreshColor();
-
-    QFont font = this->font();
-    if (font.pointSize() != VAbstractApplication::VApp()->Settings()->GetPatternLabelFontSize())
-    {
-        font.setPointSize(qMax(VAbstractApplication::VApp()->Settings()->GetPatternLabelFontSize(),
-                               static_cast<int>(minVisibleFontSize)));
-        setFont(font);
-    }
-
-    QGraphicsScene *scene = this->scene();
-    const qreal scale = SceneScale(scene);
-    if (scale > 1 && not VFuzzyComparePossibleNulls(m_oldScale, scale))
-    {
-        setScale(1 / scale);
-        CorrectLabelPosition();
-        UpdateLine();
-        m_oldScale = scale;
-    }
-    else if (scale <= 1 && not VFuzzyComparePossibleNulls(m_oldScale, 1.0))
-    {
-        setScale(1);
-        CorrectLabelPosition();
-        UpdateLine();
-        m_oldScale = 1;
-    }
-
-    if (QGraphicsView *view = scene->views().at(0))
-    {
-        VMainGraphicsView::NewSceneRect(scene, view, this);
-    }
-
-    if (font.pointSize() * scale < minVisibleFontSize)
-    {
-        return; // smaller font size will cause problems on Windows
-    }
-
+    // Perform the actual painting
     PaintWithFixItemHighlightSelected<QGraphicsSimpleTextItem>(this, painter, option, widget);
 }
 
@@ -179,6 +135,59 @@ void VGraphicsSimpleTextItem::CorrectLabelPosition()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VGraphicsSimpleTextItem::UpdateGeometry()
+{
+    auto UpdateLine = [this]()
+    {
+        if (auto *parent = dynamic_cast<VScenePoint *>(parentItem()))
+        {
+            parent->RefreshLine();
+        }
+    };
+
+    // Update font size if needed
+    QFont font = this->font();
+    if (font.pointSize() != VAbstractApplication::VApp()->Settings()->GetPatternLabelFontSize())
+    {
+        font.setPointSize(qMax(VAbstractApplication::VApp()->Settings()->GetPatternLabelFontSize(),
+                               static_cast<int>(minVisibleFontSize)));
+        setFont(font);
+    }
+
+    // Handle scale changes
+    QGraphicsScene *scene = this->scene();
+    if (!scene)
+    {
+        return;
+    }
+
+    const qreal scale = SceneScale(scene);
+    if (scale > 1 && not VFuzzyComparePossibleNulls(m_oldScale, scale))
+    {
+        setScale(1 / scale);
+        CorrectLabelPosition();
+        UpdateLine();
+        m_oldScale = scale;
+    }
+    else if (scale <= 1 && not VFuzzyComparePossibleNulls(m_oldScale, 1.0))
+    {
+        setScale(1);
+        CorrectLabelPosition();
+        UpdateLine();
+        m_oldScale = 1;
+    }
+
+    // Update scene rect
+    if (!scene->views().isEmpty())
+    {
+        if (QGraphicsView *view = scene->views().at(0))
+        {
+            VMainGraphicsView::NewSceneRect(scene, view, this);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief itemChange handle item change.
  * @param change change.
@@ -220,10 +229,14 @@ auto VGraphicsSimpleTextItem::itemChange(GraphicsItemChange change, const QVaria
             changeFinished = true;
         }
     }
-    if (change == QGraphicsItem::ItemSelectedHasChanged)
+    else if (change == QGraphicsItem::ItemSelectedHasChanged)
     {
         setFlag(QGraphicsItem::ItemIsFocusable, value.toBool());
         emit PointSelected(value.toBool());
+    }
+    else if (change == ItemVisibleHasChanged || change == ItemScaleHasChanged)
+    {
+        UpdateGeometry();
     }
     return QGraphicsSimpleTextItem::itemChange(change, value);
 }
@@ -245,7 +258,7 @@ void VGraphicsSimpleTextItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
     }
 
     m_hoverFlag = true;
-    setBrush(Qt::green);
+    RefreshColor();
 
     if (QGraphicsItem const *parent = parentItem(); parent && m_showParentTooltip)
     {
@@ -263,6 +276,7 @@ void VGraphicsSimpleTextItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 void VGraphicsSimpleTextItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     m_hoverFlag = false;
+    RefreshColor();
     QGraphicsSimpleTextItem::hoverLeaveEvent(event);
 }
 
@@ -342,13 +356,12 @@ void VGraphicsSimpleTextItem::keyReleaseEvent(QKeyEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VGraphicsSimpleTextItem::RefreshColor()
 {
-    if (!isEnabled() && scene() != nullptr)
+    if (const QBrush newBrush = !isEnabled() && scene() != nullptr
+                                    ? scene()->palette().brush(QPalette::Disabled, QPalette::Text)
+                                    : VSceneStylesheet::Color(m_hoverFlag ? m_textHoverColor : m_textColor);
+        brush() != newBrush)
     {
-        setBrush(scene()->palette().brush(QPalette::Disabled, QPalette::Text));
-    }
-    else
-    {
-        setBrush(VSceneStylesheet::Color(m_hoverFlag ? m_textHoverColor : m_textColor));
+        setBrush(newBrush);
     }
 }
 
