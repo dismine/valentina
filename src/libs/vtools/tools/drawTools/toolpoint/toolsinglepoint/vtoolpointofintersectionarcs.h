@@ -72,7 +72,7 @@ public:
     auto SecondArcName() const -> QString;
 
     auto GetCrossCirclesPoint() const -> CrossCirclesPoint;
-    void              SetCrossCirclesPoint(const CrossCirclesPoint &value);
+    void SetCrossCirclesPoint(const CrossCirclesPoint &value);
 
     void ShowVisualization(bool show) override;
 protected slots:

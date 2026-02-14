@@ -59,6 +59,8 @@ class VToolShoulderPoint : public VToolLinePoint
 {
     Q_OBJECT // NOLINT
 public:
+    ~VToolShoulderPoint() override = default;
+
     void SetDialog() override;
     static auto FindPoint(const QPointF &p1Line, const QPointF &p2Line, const QPointF &pShoulder, qreal length)
         -> QPointF;

@@ -539,7 +539,7 @@ auto VPatternRecipe::FinalMeasurement(const VFinalMeasurement &fm, const VContai
     catch (const qmu::QmuParserError &e)
     {
         throw VExceptionInvalidHistory(
-            tr("Unable to create record for final measurement '%1'. Error: %2").arg(fm.name).arg(e.GetMsg()));
+            tr("Unable to create record for final measurement '%1'. Error: %2").arg(fm.name, e.GetMsg()));
     }
 
     return recipeFinalMeasurement;
@@ -1272,17 +1272,23 @@ template <typename T> void VPatternRecipe::CurveAttributes(QDomElement &step, T 
     SetAttribute(step, AttrPenStyle, tool->GetPenStyle());
     SetAttribute(step, AttrAScale, tool->GetApproximationScale());
     SetAttribute(step, AttrDuplicate, tool->GetDuplicate());
-    SetAttributeOrRemoveIf<QString>(step, AttrAlias, tool->GetAliasSuffix(),
-                                    [](const QString &suffix) noexcept { return suffix.isEmpty(); });
+    SetAttributeOrRemoveIf<QString>(step,
+                                    AttrAlias,
+                                    tool->GetAliasSuffix(),
+                                    [](const QString &suffix) noexcept -> bool { return suffix.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T> void VPatternRecipe::CutCurveAttributes(QDomElement &step, T *tool)
 {
-    SetAttributeOrRemoveIf<QString>(step, AttrAlias1, tool->GetAliasSuffix1(),
-                                    [](const QString &suffix) noexcept { return suffix.isEmpty(); });
-    SetAttributeOrRemoveIf<QString>(step, AttrAlias2, tool->GetAliasSuffix2(),
-                                    [](const QString &suffix) noexcept { return suffix.isEmpty(); });
+    SetAttributeOrRemoveIf<QString>(step,
+                                    AttrAlias1,
+                                    tool->GetAliasSuffix1(),
+                                    [](const QString &suffix) noexcept -> bool { return suffix.isEmpty(); });
+    SetAttributeOrRemoveIf<QString>(step,
+                                    AttrAlias2,
+                                    tool->GetAliasSuffix2(),
+                                    [](const QString &suffix) noexcept -> bool { return suffix.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

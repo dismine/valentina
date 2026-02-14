@@ -99,8 +99,10 @@ DialogCutSpline::DialogCutSpline(const VContainer *data, VAbstractPattern *doc, 
                                 m_flagName);
                 CheckState();
             });
-    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this,
-            [this]() { m_timerFormula->start(formulaTimerTimeout); });
+    connect(ui->plainTextEditFormula,
+            &QPlainTextEdit::textChanged,
+            this,
+            [this]() -> void { m_timerFormula->start(formulaTimerTimeout); });
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogCutSpline::DeployFormulaTextEdit);
     connect(ui->comboBoxSpline, &QComboBox::currentTextChanged, this, &DialogCutSpline::SplineChanged);
 

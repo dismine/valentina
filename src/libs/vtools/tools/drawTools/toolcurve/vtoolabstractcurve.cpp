@@ -116,7 +116,7 @@ void VToolAbstractCurve::paint(QPainter *painter, const QStyleOptionGraphicsItem
         VSceneStylesheet::CorrectToolColor(this, VSceneStylesheet::CorrectToolColorForDarkTheme(curve->GetColor()));
     setPen(QPen(penColor, width, LineStyleToPenStyle(curve->GetPenStyle()), Qt::RoundCap));
 
-    auto PaintSpline = [this, curve](QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+    auto PaintSpline = [this, curve](QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) -> void
     {
         if (m_isHovered || m_detailsMode)
         {
