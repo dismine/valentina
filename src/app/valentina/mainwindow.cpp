@@ -6036,19 +6036,37 @@ void MainWindow::CreateMenus()
     UpdateRecentFileActions();
 
     // Add Undo/Redo actions.
-    undoAction = VAbstractApplication::VApp()->getUndoStack()->createUndoAction(this, tr("&Undo"));
+    QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
+    undoAction = undoStack->createUndoAction(this, tr("&Undo"));
     connect(undoAction, &QAction::triggered, m_toolOptions, &VToolOptionsPropertyBrowser::RefreshOptions);
     m_shortcutActions.insert(VShortcutAction::Undo, undoAction);
     undoAction->setIcon(FromTheme(VThemeIcon::EditUndo));
     ui->menuPatternPiece->insertAction(ui->actionLast_tool, undoAction);
     ui->toolBarTools->addAction(undoAction);
 
-    redoAction = VAbstractApplication::VApp()->getUndoStack()->createRedoAction(this, tr("&Redo"));
+    connect(undoStack, &QUndoStack::canUndoChanged, this, [this]()
+    {
+        if (!m_guiEnabled)
+        {
+            undoAction->setDisabled(true);
+        }
+    });
+
+    redoAction = undoStack->createRedoAction(this, tr("&Redo"));
     connect(redoAction, &QAction::triggered, m_toolOptions, &VToolOptionsPropertyBrowser::RefreshOptions);
     m_shortcutActions.insert(VShortcutAction::Redo, redoAction);
     redoAction->setIcon(FromTheme(VThemeIcon::EditRedo));
     ui->menuPatternPiece->insertAction(ui->actionLast_tool, redoAction);
     ui->toolBarTools->addAction(redoAction);
+
+    connect(undoStack, &QUndoStack::canRedoChanged, this, [this]()
+    {
+        if (!m_guiEnabled)
+        {
+            redoAction->setDisabled(true);
+        }
+    });
+
 
     m_separatorAct = new QAction(this);
     m_separatorAct->setSeparator(true);
