@@ -270,7 +270,7 @@ auto ReplaceTokenArc(const QString &token,
 
     if (type == RenameArcType::Arc)
     {
-        prefixes = {"Angle1Arc", "Angle2Arc", "RadiusArc"};
+        prefixes = {"Angle1Arc", "Angle2Arc", "RadiusArc", "Arc"};
     }
     else // RenameArcType::ElArc
     {
