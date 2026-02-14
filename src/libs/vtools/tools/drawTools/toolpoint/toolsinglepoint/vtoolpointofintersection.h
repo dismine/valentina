@@ -90,6 +90,8 @@ private:
     quint32       secondPointId;
 
     explicit VToolPointOfIntersection(const VToolPointOfIntersectionInitData &initData, QGraphicsItem *parent = nullptr);
+
+    auto GatherToolChanges() const -> ToolChanges;
 };
 
 #endif // VTOOLPOINTOFINTERSECTION_H

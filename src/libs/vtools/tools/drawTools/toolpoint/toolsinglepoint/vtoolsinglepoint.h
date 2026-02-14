@@ -123,10 +123,6 @@ protected:
     static auto InitSplinePath(SegmentDetails &details) -> QPair<QString, QString>;
     static auto InitSegments(SegmentDetails &details) -> QPair<QString, QString>;
 
-    void ProcessSinglePointToolOptions(const QDomElement &oldDomElement,
-                                       const QDomElement &newDomElement,
-                                       const QString &newLabel);
-
 private:
     Q_DISABLE_COPY_MOVE(VToolSinglePoint) // NOLINT
 };

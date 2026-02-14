@@ -101,6 +101,8 @@ private:
 
     explicit VToolPointFromArcAndTangent(const VToolPointFromArcAndTangentInitData &initData,
                                          QGraphicsItem *parent = nullptr);
+
+    auto GatherToolChanges() const -> ToolChanges;
 };
 
 #endif // VTOOLPOINTFROMARCANDTANGENT_H

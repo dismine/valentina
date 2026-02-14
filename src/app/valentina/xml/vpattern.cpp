@@ -4863,7 +4863,7 @@ auto VPattern::ActiveDrawBoundingRect() const -> QRectF
             case Tool::EllipticalArcWithLength:
             case Tool::ParallelCurve:
             case Tool::GraduatedCurve:
-                rec = ToolBoundingRect<VAbstractSpline>(rec, tool.GetId());
+                rec = ToolBoundingRect<VToolAbstractCurve>(rec, tool.GetId());
                 break;
             case Tool::TrueDarts:
                 rec = ToolBoundingRect<VToolDoublePoint>(rec, tool.GetId());

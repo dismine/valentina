@@ -76,32 +76,6 @@ protected:
 private:
     Q_DISABLE_COPY_MOVE(VToolCutArc) // NOLINT
 
-    struct ToolChanges
-    {
-        QString oldLabel{};
-        QString newLabel{};
-        QString oldName1{};
-        QString newName1{};
-        QString oldName2{};
-        QString newName2{};
-        QString oldAliasSuffix1{};
-        QString newAliasSuffix1{};
-        QString oldAliasSuffix2{};
-        QString newAliasSuffix2{};
-
-        auto HasChanges() const -> bool
-        {
-            return oldLabel != newLabel || oldName1 != newName1 || oldName2 != newName2
-                   || oldAliasSuffix1 != newAliasSuffix1 || oldAliasSuffix2 != newAliasSuffix2;
-        }
-
-        auto LabelChanged() const -> bool { return oldLabel != newLabel; }
-        auto Name1Changed() const -> bool { return oldName1 != newName1; }
-        auto Name2Changed() const -> bool { return oldName2 != newName2; }
-        auto AliasSuffix1Changed() const -> bool { return oldAliasSuffix1 != newAliasSuffix1; }
-        auto AliasSuffix2Changed() const -> bool { return oldAliasSuffix2 != newAliasSuffix2; }
-    };
-
     explicit VToolCutArc(const VToolCutInitData &initData, QGraphicsItem *parent = nullptr);
 
     auto GatherToolChanges() const -> ToolChanges;

@@ -66,6 +66,16 @@ VToolPointOfIntersection::VToolPointOfIntersection(const VToolPointOfIntersectio
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VToolPointOfIntersection::GatherToolChanges() const -> VAbstractPoint::ToolChanges
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogPointOfIntersection> dialogTool = qobject_cast<DialogPointOfIntersection *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    return {.pointId = m_id, .oldLabel = name(), .newLabel = dialogTool->GetPointName()};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setDialog set dialog when user want change tool option.
  */
@@ -237,11 +247,7 @@ void VToolPointOfIntersection::SetVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersection::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
 {
-    SCASSERT(not m_dialog.isNull())
-    const QPointer<DialogPointOfIntersection> dialogTool = qobject_cast<DialogPointOfIntersection *>(m_dialog);
-    SCASSERT(not dialogTool.isNull())
-
-    ProcessSinglePointToolOptions(oldDomElement, newDomElement, dialogTool->GetPointName());
+    ProcessPointToolOptions(oldDomElement, newDomElement, GatherToolChanges());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

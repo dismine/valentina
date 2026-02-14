@@ -28,13 +28,13 @@
 #ifndef VTOOLPARALLELCURVE_H
 #define VTOOLPARALLELCURVE_H
 
-#include "vabstractspline.h"
+#include "vtoolabstractcurve.h"
 
 class VFormula;
 template<class T>
 class QSharedPointer;
 
-struct VToolParallelCurveInitData : VAbstractSplineInitData
+struct VToolParallelCurveInitData : VToolAbstractCurveInitData
 {
     quint32 originCurveId{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
     QString formulaWidth{'0'};      // NOLINT(misc-non-private-member-variables-in-classes)
@@ -81,6 +81,8 @@ private:
     QString m_formulaWidth;
 
     explicit VToolParallelCurve(const VToolParallelCurveInitData &initData, QGraphicsItem *parent = nullptr);
+
+    auto GatherToolChanges() const -> ToolChanges;
 };
 
 #endif // VTOOLPARALLELCURVE_H

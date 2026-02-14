@@ -63,6 +63,27 @@ struct VToolPointOfIntersectionCurvesInitData : VToolSinglePointInitData
     QString curve2AliasSuffix2{};
 };
 
+// Helper enum to identify which field is being updated
+enum class VToolPointOfIntersectionCurvesNameField : quint8
+{
+    Curve1Name1,
+    Curve1Name2,
+    Curve2Name1,
+    Curve2Name2,
+    Curve1AliasSuffix1,
+    Curve1AliasSuffix2,
+    Curve2AliasSuffix1,
+    Curve2AliasSuffix2
+};
+
+// Struct to hold field metadata
+struct VToolPointOfIntersectionCurvesFieldMetadata
+{
+    quint32 curveId{NULL_ID};
+    bool isName{true}; // true for name fields, false for alias fields
+    QString *memberPtr{nullptr};
+};
+
 class VToolPointOfIntersectionCurves : public VToolSinglePoint
 {
     Q_OBJECT // NOLINT
@@ -192,6 +213,14 @@ private:
                                             QGraphicsItem *parent = nullptr);
 
     auto GatherToolChanges() const -> ToolChanges;
+
+    void ProcessToolOptions(const QDomElement &oldDomElement,
+                            const QDomElement &newDomElement,
+                            const ToolChanges &changes);
+
+    auto GetFieldMetadata(VToolPointOfIntersectionCurvesNameField field) -> VToolPointOfIntersectionCurvesFieldMetadata;
+    auto HasConflict(const QString &value, VToolPointOfIntersectionCurvesNameField currentField) const -> bool;
+    void UpdateNameField(VToolPointOfIntersectionCurvesNameField field, const QString &value);
 };
 
 #endif // VTOOLPOINTOFINTERSECTIONCURVES_H

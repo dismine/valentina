@@ -64,6 +64,16 @@ VToolPointOfIntersectionArcs::VToolPointOfIntersectionArcs(const VToolPointOfInt
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VToolPointOfIntersectionArcs::GatherToolChanges() const -> VAbstractPoint::ToolChanges
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogPointOfIntersectionArcs> dialogTool = qobject_cast<DialogPointOfIntersectionArcs *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    return {.pointId = m_id, .oldLabel = name(), .newLabel = dialogTool->GetPointName()};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersectionArcs::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
@@ -360,9 +370,5 @@ void VToolPointOfIntersectionArcs::SetVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersectionArcs::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
 {
-    SCASSERT(not m_dialog.isNull())
-    const QPointer<DialogPointOfIntersectionArcs> dialogTool = qobject_cast<DialogPointOfIntersectionArcs *>(m_dialog);
-    SCASSERT(not dialogTool.isNull())
-
-    ProcessSinglePointToolOptions(oldDomElement, newDomElement, dialogTool->GetPointName());
+    ProcessPointToolOptions(oldDomElement, newDomElement, GatherToolChanges());
 }

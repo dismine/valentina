@@ -118,6 +118,8 @@ private:
     quint32 secondPointId;
 
     explicit VToolTriangle(const VToolTriangleInitData &initData, QGraphicsItem *parent = nullptr);
+
+    auto GatherToolChanges() const -> ToolChanges;
 };
 
 #endif // VTOOLTRIANGLE_H

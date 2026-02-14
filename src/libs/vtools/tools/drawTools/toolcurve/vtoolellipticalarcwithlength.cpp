@@ -68,6 +68,21 @@ VToolEllipticalArcWithLength::VToolEllipticalArcWithLength(const VToolElliptical
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VToolEllipticalArcWithLength::GatherToolChanges() const -> VToolAbstractArc::ToolChanges
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogEllipticalArcWithLength> dialogTool = qobject_cast<DialogEllipticalArcWithLength *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    const QSharedPointer<VAbstractArc> arc = VAbstractTool::data.GeometricObject<VAbstractArc>(m_id);
+
+    return {.oldCenterLabel = CenterPointName(),
+            .newCenterLabel = VAbstractTool::data.GetGObject(dialogTool->GetCenter())->name(),
+            .oldAliasSuffix = arc->GetAliasSuffix(),
+            .newAliasSuffix = dialogTool->GetAliasSuffix()};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolEllipticalArcWithLength::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
@@ -400,7 +415,7 @@ void VToolEllipticalArcWithLength::SaveDialog(QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolEllipticalArcWithLength::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-    VAbstractSpline::SaveOptions(tag, obj);
+    VToolAbstractArc::SaveOptions(tag, obj);
 
     QSharedPointer<VEllipticalArc> const elArc = qSharedPointerDynamicCast<VEllipticalArc>(obj);
     SCASSERT(elArc.isNull() == false)
@@ -471,12 +486,5 @@ auto VToolEllipticalArcWithLength::MakeToolTip() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VToolEllipticalArcWithLength::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
 {
-    SCASSERT(not m_dialog.isNull())
-    const QPointer<DialogEllipticalArcWithLength> dialogTool = qobject_cast<DialogEllipticalArcWithLength *>(m_dialog);
-    SCASSERT(not dialogTool.isNull())
-
-    const QString newCenterLabel = VAbstractTool::data.GetGObject(dialogTool->GetCenter())->name();
-    const QString newAliasSuffix = dialogTool->GetAliasSuffix();
-
-    ProcessArcToolOptions(oldDomElement, newDomElement, newCenterLabel, newAliasSuffix);
+    ProcessArcToolOptions(oldDomElement, newDomElement, GatherToolChanges());
 }

@@ -29,7 +29,10 @@
 #include "vabstractpoint.h"
 
 #include <QSharedPointer>
+#include <QUndoStack>
 
+#include "../../../undocommands/renameobject.h"
+#include "../../../undocommands/savetooloptions.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vdrawtool.h"
 #include "../vgeometry/vgobject.h"
@@ -61,10 +64,66 @@ void VAbstractPoint::DeleteFromLabel()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractPoint::SetPointName(quint32 id, const QString &name)
+void VAbstractPoint::UpdatePointName(
+    quint32 pointId,
+    const QString &name,
+    const std::function<void(const QDomElement &, const QDomElement &, const ToolChanges &)> &ProcessOptions)
 {
-    // Don't know if need check name here.
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+    QDomElement const oldDomElement = doc->FindElementById(m_id, getTagName());
+    if (!oldDomElement.isElement())
+    {
+        qDebug("Can't find tool with id = %u", m_id);
+        return;
+    }
+
+    if (name.isEmpty())
+    {
+        return; // Name is required
+    }
+
+    if (QRegularExpression const rx(NameRegExp()); !rx.match(name).hasMatch())
+    {
+        return; // Invalid format
+    }
+
+    if (!VAbstractTool::data.IsUnique(name))
+    {
+        return; // Not unique in data
+    }
+
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(pointId);
+
+    ToolChanges const changes = {.pointId = pointId, .oldLabel = obj->name(), .newLabel = name};
+
     obj->setName(name);
-    SaveOption(obj);
+
+    QDomElement newDomElement = oldDomElement.cloneNode().toElement();
+    SaveOptions(newDomElement, obj);
+    ProcessOptions(oldDomElement, newDomElement, changes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPoint::ProcessPointToolOptions(const QDomElement &oldDomElement,
+                                             const QDomElement &newDomElement,
+                                             const ToolChanges &changes)
+{
+    if (!changes.HasChanges())
+    {
+        VDrawTool::ApplyToolOptions(oldDomElement, newDomElement);
+        return;
+    }
+
+    QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
+    undoStack->beginMacro(tr("save tool options"));
+
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+    saveOptions->SetInGroup(true);
+    connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    undoStack->push(saveOptions);
+
+    auto *renameLabel = new RenameLabel(changes.oldLabel, changes.newLabel, doc, changes.pointId);
+    connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    undoStack->push(renameLabel);
+
+    undoStack->endMacro();
 }

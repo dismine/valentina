@@ -61,7 +61,7 @@
 #include "../vwidgets/global.h"
 #include "../vwidgets/vcontrolpointspline.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "vabstractspline.h"
+#include "vtoolabstractcurve.h"
 
 const QString VToolSpline::ToolType = QStringLiteral("simpleInteractive"); // NOLINT
 const QString VToolSpline::OldToolType = QStringLiteral("simple");         // NOLINT
@@ -73,7 +73,7 @@ const QString VToolSpline::OldToolType = QStringLiteral("simple");         // NO
  * @param parent parent object.
  */
 VToolSpline::VToolSpline(const VToolSplineInitData &initData, QGraphicsItem *parent)
-  : VAbstractSpline(initData.doc, initData.data, initData.id, initData.notes, parent)
+  : VToolAbstractBezier(initData.doc, initData.data, initData.id, initData.notes, parent)
 {
     SetSceneType(SceneObject::Spline);
 
@@ -275,7 +275,7 @@ void VToolSpline::ShowHandles(bool show)
     {
         point->setVisible(show);
     }
-    VAbstractSpline::ShowHandles(show);
+    VToolAbstractBezier::ShowHandles(show);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -330,7 +330,7 @@ void VToolSpline::EnableToolMove(bool move)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::AllowHover(bool enabled)
 {
-    VAbstractSpline::AllowHover(enabled);
+    VToolAbstractBezier::AllowHover(enabled);
 
     for (auto *point : std::as_const(controlPoints))
     {
@@ -341,7 +341,7 @@ void VToolSpline::AllowHover(bool enabled)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::AllowSelecting(bool enabled)
 {
-    VAbstractSpline::AllowSelecting(enabled);
+    VToolAbstractBezier::AllowSelecting(enabled);
 
     for (auto *point : std::as_const(controlPoints))
     {
@@ -378,7 +378,7 @@ void VToolSpline::SaveDialog(QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-    VAbstractSpline::SaveOptions(tag, obj);
+    VToolAbstractBezier::SaveOptions(tag, obj);
 
     auto spl = qSharedPointerDynamicCast<VSpline>(obj);
     SCASSERT(spl.isNull() == false)
@@ -395,7 +395,7 @@ void VToolSpline::mousePressEvent(QGraphicsSceneMouseEvent *event)
         oldPosition = event->scenePos();
         event->accept();
     }
-    VAbstractSpline::mousePressEvent(event);
+    VToolAbstractBezier::mousePressEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -408,7 +408,7 @@ void VToolSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
         CurveReleased();
     }
-    VAbstractSpline::mouseReleaseEvent(event);
+    VToolAbstractBezier::mouseReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -533,7 +533,7 @@ void VToolSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
             setCursor(VAbstractValApplication::VApp()->getSceneView()->viewport()->cursor());
         }
 
-        VAbstractSpline::hoverEnterEvent(event);
+        VToolAbstractBezier::hoverEnterEvent(event);
     }
     else
     {
@@ -546,7 +546,7 @@ void VToolSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     if (GetAcceptHoverEvents())
     {
-        VAbstractSpline::hoverLeaveEvent(event);
+        VToolAbstractBezier::hoverLeaveEvent(event);
     }
 }
 
@@ -637,11 +637,7 @@ void VToolSpline::RefreshCtrlPoints()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
 {
-    SCASSERT(not m_dialog.isNull())
-    const QPointer<DialogSpline> dialogTool = qobject_cast<DialogSpline *>(m_dialog);
-    SCASSERT(not dialogTool.isNull())
-
-    ProcessSplineToolOptions(oldDomElement, newDomElement, dialogTool->GetSpline());
+    ProcessSplineToolOptions(oldDomElement, newDomElement, GatherToolChanges());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -727,4 +723,22 @@ void VToolSpline::UndoCommandMove(const VSpline &oldSpl, const VSpline &newSpl)
     auto *moveSpl = new MoveSpline(doc, oldSpl, newSpl, m_id);
     connect(moveSpl, &MoveSpline::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     VAbstractApplication::VApp()->getUndoStack()->push(moveSpl);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VToolSpline::GatherToolChanges() const -> VToolAbstractBezier::ToolChanges
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogSpline> dialogTool = qobject_cast<DialogSpline *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    const VSpline newCurve = dialogTool->GetSpline();
+    const auto oldCurve = VAbstractTool::data.GeometricObject<VAbstractCubicBezier>(m_id);
+
+    return {.oldP1Label = oldCurve->GetP1().name(),
+            .newP1Label = newCurve.GetP1().name(),
+            .oldP4Label = oldCurve->GetP4().name(),
+            .newP4Label = newCurve.GetP4().name(),
+            .oldAliasSuffix = oldCurve->GetAliasSuffix(),
+            .newAliasSuffix = newCurve.GetAliasSuffix()};
 }

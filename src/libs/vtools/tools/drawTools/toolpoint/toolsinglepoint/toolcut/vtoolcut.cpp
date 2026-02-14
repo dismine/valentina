@@ -30,7 +30,10 @@
 
 #include <QDomElement>
 #include <QSharedPointer>
+#include <QUndoStack>
 
+#include "../../../../../undocommands/renameobject.h"
+#include "../../../../../undocommands/savetooloptions.h"
 #include "../../../../vabstracttool.h"
 #include "../../../vdrawtool.h"
 #include "../ifc/ifcdef.h"
@@ -79,6 +82,82 @@ void VToolCut::FullUpdateFromFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolCut::ProcessToolCutOptions(const QDomElement &oldDomElement,
+                                     const QDomElement &newDomElement,
+                                     const ToolChanges &changes)
+{
+    if (!changes.HasChanges())
+    {
+        VToolCut::ApplyToolOptions(oldDomElement, newDomElement);
+        return;
+    }
+
+    QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
+    undoStack->beginMacro(tr("save tool options"));
+
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+    saveOptions->SetInGroup(true);
+    connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    undoStack->push(saveOptions);
+
+    if (changes.LabelChanged())
+    {
+        auto *renameLabel = new RenameLabel(changes.oldLabel, changes.newLabel, doc, m_id);
+        if (!changes.Name1Changed() && !changes.Name2Changed() && !changes.AliasSuffix1Changed()
+            && !changes.AliasSuffix2Changed())
+        {
+            connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        }
+        undoStack->push(renameLabel);
+    }
+
+    const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(baseCurveId);
+    const CurveAliasType curveType = RenameAlias::CurveType(curve->getType());
+
+    const quint32 subSpl1Id = m_id /*+ 1*/;
+    const quint32 subSpl2Id = m_id /*+ 2*/;
+
+    if (changes.Name1Changed())
+    {
+        auto *renameName = new RenameAlias(curveType, changes.oldName1, changes.newName1, doc, subSpl1Id);
+        if (!changes.Name2Changed() && !changes.AliasSuffix1Changed() && !changes.AliasSuffix2Changed())
+        {
+            connect(renameName, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        }
+        undoStack->push(renameName);
+    }
+
+    if (changes.Name2Changed())
+    {
+        auto *renameName = new RenameAlias(curveType, changes.oldName2, changes.newName2, doc, subSpl2Id);
+        if (!changes.AliasSuffix1Changed() && !changes.AliasSuffix2Changed())
+        {
+            connect(renameName, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        }
+        undoStack->push(renameName);
+    }
+
+    if (changes.AliasSuffix1Changed())
+    {
+        auto *renameAlias = new RenameAlias(curveType, changes.oldAliasSuffix1, changes.newAliasSuffix1, doc, subSpl1Id);
+        if (!changes.AliasSuffix2Changed())
+        {
+            connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        }
+        undoStack->push(renameAlias);
+    }
+
+    if (changes.AliasSuffix2Changed())
+    {
+        auto *renameAlias = new RenameAlias(curveType, changes.oldAliasSuffix1, changes.newAliasSuffix1, doc, subSpl2Id);
+        connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        undoStack->push(renameAlias);
+    }
+
+    undoStack->endMacro();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VToolCut::GetFormulaLength() const -> VFormula
 {
     VFormula val(formula, getData());
@@ -109,33 +188,7 @@ auto VToolCut::GetName1() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCut::SetName1(const QString &name)
 {
-    if (name.isEmpty())
-    {
-        return; // Name is required
-    }
-
-    QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(baseCurveId);
-
-    const QString newName1 = curve->GetTypeHead() + name;
-
-    if (QRegularExpression const rx(NameRegExp()); !rx.match(newName1).hasMatch())
-    {
-        return; // Invalid format
-    }
-
-    if (!VAbstractTool::data.IsUnique(newName1))
-    {
-        return; // Not unique in data
-    }
-
-    if (name == m_name2 || name == m_aliasSuffix1 || name == m_aliasSuffix2)
-    {
-        return; // Conflicts with other identifiers
-    }
-
-    m_name1 = name;
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-    SaveOption(obj);
+    UpdateNameField(VToolCutNameField::Name1, name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -147,33 +200,7 @@ auto VToolCut::GetName2() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCut::SetName2(const QString &name)
 {
-    if (name.isEmpty())
-    {
-        return; // Name is required
-    }
-
-    QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(baseCurveId);
-
-    const QString newName2 = curve->GetTypeHead() + name;
-
-    if (QRegularExpression const rx(NameRegExp()); !rx.match(newName2).hasMatch())
-    {
-        return; // Invalid format
-    }
-
-    if (!VAbstractTool::data.IsUnique(newName2))
-    {
-        return; // Not unique in data
-    }
-
-    if (name == m_name1 || name == m_aliasSuffix1 || name == m_aliasSuffix2)
-    {
-        return; // Conflicts with other identifiers
-    }
-
-    m_name2 = name;
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-    SaveOption(obj);
+    UpdateNameField(VToolCutNameField::Name2, name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -185,31 +212,7 @@ auto VToolCut::GetAliasSuffix1() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCut::SetAliasSuffix1(const QString &alias)
 {
-    if (!alias.isEmpty())
-    {
-        QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(baseCurveId);
-
-        const QString newAlias = curve->GetTypeHead() + alias;
-
-        if (QRegularExpression const rx(NameRegExp()); !rx.match(newAlias).hasMatch())
-        {
-            return; // Invalid format
-        }
-
-        if (!VAbstractTool::data.IsUnique(newAlias))
-        {
-            return; // Not unique in data
-        }
-
-        if (alias == m_name1 || alias == m_name2 || (!m_aliasSuffix2.isEmpty() && alias == m_aliasSuffix2))
-        {
-            return; // Conflicts with other identifiers
-        }
-    }
-
-    m_aliasSuffix1 = alias;
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-    SaveOption(obj);
+    UpdateNameField(VToolCutNameField::AliasSuffix1, alias);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -221,31 +224,7 @@ auto VToolCut::GetAliasSuffix2() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCut::SetAliasSuffix2(const QString &alias)
 {
-    if (!alias.isEmpty())
-    {
-        QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(baseCurveId);
-
-        const QString newAlias = curve->GetTypeHead() + alias;
-
-        if (QRegularExpression const rx(NameRegExp()); !rx.match(newAlias).hasMatch())
-        {
-            return; // Invalid format
-        }
-
-        if (!VAbstractTool::data.IsUnique(newAlias))
-        {
-            return; // Not unique in data
-        }
-
-        if (alias == m_name1 || alias == m_name2 || (!m_aliasSuffix1.isEmpty() && alias == m_aliasSuffix1))
-        {
-            return; // Conflicts with other identifiers
-        }
-    }
-
-    m_aliasSuffix2 = alias;
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-    SaveOption(obj);
+    UpdateNameField(VToolCutNameField::AliasSuffix2, alias);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -289,4 +268,113 @@ void VToolCut::ReadToolAttributes(const QDomElement &domElement)
     m_name2 = VAbstractPattern::GetParametrEmptyString(domElement, AttrCurveName2);
     m_aliasSuffix1 = VAbstractPattern::GetParametrEmptyString(domElement, AttrAlias1);
     m_aliasSuffix2 = VAbstractPattern::GetParametrEmptyString(domElement, AttrAlias2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCut::UpdateNameField(VToolCutNameField field, const QString &value)
+{
+    // Validation - name fields require non-empty values
+    if ((field == VToolCutNameField::Name1 || field == VToolCutNameField::Name2) && value.isEmpty())
+    {
+        return; // Name is required
+    }
+
+    // Validate format and uniqueness for non-empty values
+    if (!value.isEmpty())
+    {
+        QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(baseCurveId);
+        const QString fullName = curve->GetTypeHead() + value;
+
+        if (QRegularExpression const rx(NameRegExp()); !rx.match(fullName).hasMatch())
+        {
+            return; // Invalid format
+        }
+
+        if (!VAbstractTool::data.IsUnique(fullName))
+        {
+            return; // Not unique in data
+        }
+
+        // Check conflicts with other identifiers
+        if (HasConflict(value, field))
+        {
+            return; // Conflicts with other identifiers
+        }
+    }
+
+    QDomElement const oldDomElement = doc->FindElementById(m_id, getTagName());
+    if (!oldDomElement.isElement())
+    {
+        qCDebug(vTool, "Can't find tool with id = %u", m_id);
+        return;
+    }
+
+    const QString label = VAbstractTool::data.GeometricObject<VPointF>(m_id)->name();
+
+    // Build changes struct
+    ToolChanges const changes = {.oldLabel = label,
+                                 .newLabel = label,
+                                 .oldName1 = m_name1,
+                                 .newName1 = (field == VToolCutNameField::Name1) ? value : m_name1,
+                                 .oldName2 = m_name2,
+                                 .newName2 = (field == VToolCutNameField::Name2) ? value : m_name2,
+                                 .oldAliasSuffix1 = m_aliasSuffix1,
+                                 .newAliasSuffix1 = (field == VToolCutNameField::AliasSuffix1) ? value : m_aliasSuffix1,
+                                 .oldAliasSuffix2 = m_aliasSuffix2,
+                                 .newAliasSuffix2 = (field == VToolCutNameField::AliasSuffix2) ? value : m_aliasSuffix2};
+
+    // Update the appropriate member variable
+    switch (field)
+    {
+        case VToolCutNameField::Name1:
+            m_name1 = value;
+            break;
+        case VToolCutNameField::Name2:
+            m_name2 = value;
+            break;
+        case VToolCutNameField::AliasSuffix1:
+            m_aliasSuffix1 = value;
+            break;
+        case VToolCutNameField::AliasSuffix2:
+            m_aliasSuffix2 = value;
+            break;
+        default:
+            break;
+    }
+
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
+    QDomElement newDomElement = oldDomElement.cloneNode().toElement();
+    SaveOptions(newDomElement, obj);
+    ProcessToolCutOptions(oldDomElement, newDomElement, changes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VToolCut::HasConflict(const QString &value, VToolCutNameField currentField) const -> bool
+{
+    if (value.isEmpty())
+    {
+        return false;
+    }
+
+    // Check name fields
+    if (currentField != VToolCutNameField::Name1 && value == m_name1)
+    {
+        return true;
+    }
+    if (currentField != VToolCutNameField::Name2 && value == m_name2)
+    {
+        return true;
+    }
+
+    // Check non-empty alias fields
+    if (currentField != VToolCutNameField::AliasSuffix1 && !m_aliasSuffix1.isEmpty() && value == m_aliasSuffix1)
+    {
+        return true;
+    }
+    if (currentField != VToolCutNameField::AliasSuffix2 && !m_aliasSuffix2.isEmpty() && value == m_aliasSuffix2)
+    {
+        return true;
+    }
+
+    return false;
 }

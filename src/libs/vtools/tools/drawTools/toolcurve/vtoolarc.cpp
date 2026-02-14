@@ -50,7 +50,7 @@
 #include "../vpatterndb/vformula.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "vabstractspline.h"
+#include "vtoolabstractcurve.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
@@ -73,6 +73,21 @@ VToolArc::VToolArc(const VToolArcInitData &initData, QGraphicsItem *parent)
     this->setFlag(QGraphicsItem::ItemIsFocusable, true); // For keyboard input focus
 
     ToolCreation(initData.typeCreation);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VToolArc::GatherToolChanges() const -> VToolAbstractArc::ToolChanges
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogArc> dialogTool = qobject_cast<DialogArc *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    const QSharedPointer<VAbstractArc> arc = VAbstractTool::data.GeometricObject<VAbstractArc>(m_id);
+
+    return {.oldCenterLabel = CenterPointName(),
+            .newCenterLabel = VAbstractTool::data.GetGObject(dialogTool->GetCenter())->name(),
+            .oldAliasSuffix = arc->GetAliasSuffix(),
+            .newAliasSuffix = dialogTool->GetAliasSuffix()};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -344,7 +359,7 @@ void VToolArc::SaveDialog(QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolArc::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-    VAbstractSpline::SaveOptions(tag, obj);
+    VToolAbstractArc::SaveOptions(tag, obj);
 
     QSharedPointer<VArc> const arc = qSharedPointerDynamicCast<VArc>(obj);
     SCASSERT(arc.isNull() == false)
@@ -409,8 +424,5 @@ void VToolArc::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElem
     const QPointer<DialogArc> dialogTool = qobject_cast<DialogArc *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
-    const QString newCenterLabel = VAbstractTool::data.GetGObject(dialogTool->GetCenter())->name();
-    const QString newAliasSuffix = dialogTool->GetAliasSuffix();
-
-    ProcessArcToolOptions(oldDomElement, newDomElement, newCenterLabel, newAliasSuffix);
+    ProcessArcToolOptions(oldDomElement, newDomElement, GatherToolChanges());
 }

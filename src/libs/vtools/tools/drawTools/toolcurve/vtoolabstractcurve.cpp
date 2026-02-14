@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vabstractspline.cpp
+ **  @file   vtoolabstractcurve.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   4 3, 2014
  **
@@ -26,7 +26,7 @@
  **
  *************************************************************************/
 
-#include "vabstractspline.h"
+#include "vtoolabstractcurve.h"
 
 #include <QColor>
 #include <QFlags>
@@ -71,8 +71,8 @@
 using namespace Qt::Literals::StringLiterals;
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractSpline::VAbstractSpline(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes,
-                                 QGraphicsItem *parent)
+VToolAbstractCurve::VToolAbstractCurve(
+    VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes, QGraphicsItem *parent)
   : VDrawTool(doc, data, id, notes),
     QGraphicsPathItem(parent),
     m_detailsMode(VAbstractApplication::VApp()->Settings()->IsShowCurveDetails())
@@ -82,7 +82,7 @@ VAbstractSpline::VAbstractSpline(VAbstractPattern *doc, VContainer *data, quint3
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstractSpline::shape() const -> QPainterPath
+auto VToolAbstractCurve::shape() const -> QPainterPath
 {
     const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
     const QVector<QPointF> points = curve->GetPoints();
@@ -105,7 +105,7 @@ auto VAbstractSpline::shape() const -> QPainterPath
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractSpline::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void VToolAbstractCurve::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     const qreal width = ScaleWidth(m_isHovered ? VAbstractApplication::VApp()->Settings()->WidthMainLine()
                                                : VAbstractApplication::VApp()->Settings()->WidthHairLine(),
@@ -140,13 +140,13 @@ void VAbstractSpline::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstractSpline::getTagName() const -> QString
+auto VToolAbstractCurve::getTagName() const -> QString
 {
     return VAbstractPattern::TagSpline;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractSpline::ShowHandles(bool show)
+void VToolAbstractCurve::ShowHandles(bool show)
 {
     Q_UNUSED(show);
     update(); // Show direction
@@ -156,14 +156,14 @@ void VAbstractSpline::ShowHandles(bool show)
 /**
  * @brief FullUpdateFromFile update tool data form file.
  */
-void VAbstractSpline::FullUpdateFromFile()
+void VToolAbstractCurve::FullUpdateFromFile()
 {
     ReadAttributes();
     RefreshGeometry();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractSpline::Enable()
+void VToolAbstractCurve::Enable()
 {
     const bool enabled = m_indexActivePatternBlock == doc->PatternBlockMapper()->GetActiveId();
     setEnabled(enabled);
@@ -171,7 +171,7 @@ void VAbstractSpline::Enable()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractSpline::SetDetailsMode(bool mode)
+void VToolAbstractCurve::SetDetailsMode(bool mode)
 {
     m_detailsMode = mode;
     RefreshGeometry();
@@ -179,20 +179,20 @@ void VAbstractSpline::SetDetailsMode(bool mode)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractSpline::AllowHover(bool enabled)
+void VToolAbstractCurve::AllowHover(bool enabled)
 {
     // Manually handle hover events. Need for setting cursor for not selectable paths.
     SetAcceptHoverEvents(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractSpline::AllowSelecting(bool enabled)
+void VToolAbstractCurve::AllowSelecting(bool enabled)
 {
     setFlag(QGraphicsItem::ItemIsSelectable, enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstractSpline::MakeToolTip() const -> QString
+auto VToolAbstractCurve::MakeToolTip() const -> QString
 {
     const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
 
@@ -207,115 +207,7 @@ auto VAbstractSpline::MakeToolTip() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractSpline::ProcessSplineToolOptions(const QDomElement &oldDomElement,
-                                               const QDomElement &newDomElement,
-                                               const VAbstractCubicBezier &newSpline)
-{
-    const auto oldSpline = VAbstractTool::data.GeometricObject<VAbstractCubicBezier>(m_id);
-
-    const QString oldP1Label = oldSpline->GetP1().name();
-    const QString newP1Label = newSpline.GetP1().name();
-
-    const QString oldP4Label = oldSpline->GetP4().name();
-    const QString newP4Label = newSpline.GetP4().name();
-
-    const QString oldAliasSuffix = oldSpline->GetAliasSuffix();
-    const QString newAliasSuffix = newSpline.GetAliasSuffix();
-
-    if (oldP1Label == newP1Label && oldP4Label == newP4Label && oldAliasSuffix == newAliasSuffix)
-    {
-        VDrawTool::ApplyToolOptions(oldDomElement, newDomElement);
-        return;
-    }
-
-    QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
-    undoStack->beginMacro(tr("save tool options"));
-
-    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
-    saveOptions->SetInGroup(true);
-    connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-    undoStack->push(saveOptions);
-
-    if (oldP1Label != newP1Label || oldP4Label != newP4Label)
-    {
-        auto *renamePair = RenamePair::CreateForSpline(std::make_pair(oldP1Label, oldP4Label),
-                                                       std::make_pair(newP1Label, newP4Label),
-                                                       oldSpline->GetDuplicate(),
-                                                       doc,
-                                                       m_id);
-        if (oldAliasSuffix == newAliasSuffix)
-        {
-            connect(renamePair, &RenamePair::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        }
-        undoStack->push(renamePair);
-    }
-
-    if (oldAliasSuffix != newAliasSuffix)
-    {
-        auto *renameAlias = new RenameAlias(CurveAliasType::Spline, oldAliasSuffix, newAliasSuffix, doc, m_id);
-        connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        undoStack->push(renameAlias);
-    }
-
-    undoStack->endMacro();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractSpline::ProcessSplinePathToolOptions(const QDomElement &oldDomElement,
-                                                   const QDomElement &newDomElement,
-                                                   const VAbstractCubicBezierPath &newSplinePath)
-{
-    const auto oldSplinePath = VAbstractTool::data.GeometricObject<VAbstractCubicBezierPath>(m_id);
-
-    const QString oldP1Label = oldSplinePath->FirstPoint().name();
-    const QString newP1Label = newSplinePath.FirstPoint().name();
-
-    const QString oldP4Label = oldSplinePath->LastPoint().name();
-    const QString newP4Label = newSplinePath.LastPoint().name();
-
-    const QString oldAliasSuffix = oldSplinePath->GetAliasSuffix();
-    const QString newAliasSuffix = newSplinePath.GetAliasSuffix();
-
-    if (oldP1Label == newP1Label && oldP4Label == newP4Label && oldAliasSuffix == newAliasSuffix)
-    {
-        VDrawTool::ApplyToolOptions(oldDomElement, newDomElement);
-        return;
-    }
-
-    QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
-    undoStack->beginMacro(tr("save tool options"));
-
-    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
-    saveOptions->SetInGroup(true);
-    connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-    undoStack->push(saveOptions);
-
-    if (oldP1Label != newP1Label || oldP4Label != newP4Label)
-    {
-        auto *renamePair = RenamePair::CreateForSplinePath(std::make_pair(oldP1Label, oldP4Label),
-                                                           std::make_pair(newP1Label, newP4Label),
-                                                           oldSplinePath->GetDuplicate(),
-                                                           doc,
-                                                           m_id);
-        if (oldAliasSuffix == newAliasSuffix)
-        {
-            connect(renamePair, &RenamePair::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        }
-        undoStack->push(renamePair);
-    }
-
-    if (oldAliasSuffix != newAliasSuffix)
-    {
-        auto *renameAlias = new RenameAlias(CurveAliasType::SplinePath, oldAliasSuffix, newAliasSuffix, doc, m_id);
-        connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        undoStack->push(renameAlias);
-    }
-
-    undoStack->endMacro();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractSpline::RefreshGeometry()
+void VToolAbstractCurve::RefreshGeometry()
 {
     InitDefShape();
     RefreshCtrlPoints();
@@ -328,7 +220,7 @@ void VAbstractSpline::RefreshGeometry()
  * @param event hover enter event.
  */
 // cppcheck-suppress unusedFunction
-void VAbstractSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
+void VToolAbstractCurve::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     m_isHovered = true;
     setToolTip(MakeToolTip());
@@ -341,7 +233,7 @@ void VAbstractSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
  * @param event hover leave event.
  */
 // cppcheck-suppress unusedFunction
-void VAbstractSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+void VToolAbstractCurve::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     m_isHovered = false;
     QGraphicsPathItem::hoverLeaveEvent(event);
@@ -354,7 +246,7 @@ void VAbstractSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
  * @param value value.
  * @return value.
  */
-auto VAbstractSpline::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value) -> QVariant
+auto VToolAbstractCurve::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value) -> QVariant
 {
     if (change == QGraphicsItem::ItemSelectedHasChanged)
     {
@@ -369,7 +261,7 @@ auto VAbstractSpline::itemChange(QGraphicsItem::GraphicsItemChange change, const
  * @brief keyReleaseEvent handle key release events.
  * @param event key release event.
  */
-void VAbstractSpline::keyReleaseEvent(QKeyEvent *event)
+void VToolAbstractCurve::keyReleaseEvent(QKeyEvent *event)
 {
     switch (event->key())
     {
@@ -391,7 +283,7 @@ void VAbstractSpline::keyReleaseEvent(QKeyEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractSpline::mousePressEvent(QGraphicsSceneMouseEvent *event)
+void VToolAbstractCurve::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     // Special for not selectable item first need to call standard mousePressEvent then accept event
     QGraphicsPathItem::mousePressEvent(event);
@@ -410,7 +302,7 @@ void VAbstractSpline::mousePressEvent(QGraphicsSceneMouseEvent *event)
  * @brief mouseReleaseEvent  handle mouse release events.
  * @param event mouse release event.
  */
-void VAbstractSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+void VToolAbstractCurve::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (IsSelectedByReleaseEvent(this, event))
     {
@@ -420,7 +312,7 @@ void VAbstractSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
+void VToolAbstractCurve::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
     VDrawTool::SaveOptions(tag, obj);
 
@@ -428,24 +320,26 @@ void VAbstractSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &ob
     doc->SetAttribute(tag, AttrColor, curve->GetColor());
     doc->SetAttribute(tag, AttrPenStyle, curve->GetPenStyle());
     doc->SetAttribute(tag, AttrAScale, curve->GetApproximationScale());
-    doc->SetAttributeOrRemoveIf<QString>(tag, AttrAlias, curve->GetAliasSuffix(),
+    doc->SetAttributeOrRemoveIf<QString>(tag,
+                                         AttrAlias,
+                                         curve->GetAliasSuffix(),
                                          [](const QString &suffix) noexcept { return suffix.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractSpline::RefreshCtrlPoints()
+void VToolAbstractCurve::RefreshCtrlPoints()
 {
     // do nothing
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractSpline::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+void VToolAbstractCurve::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ShowContextMenu(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstractSpline::CorrectedSpline(const VSpline &spline, const SplinePointPosition &position, const QPointF &pos)
+auto VToolAbstractCurve::CorrectedSpline(const VSpline &spline, const SplinePointPosition &position, const QPointF &pos)
     -> VSpline
 {
     VSpline spl;
@@ -512,21 +406,21 @@ auto VAbstractSpline::CorrectedSpline(const VSpline &spline, const SplinePointPo
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractSpline::InitDefShape()
+void VToolAbstractCurve::InitDefShape()
 {
     const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
     this->setPath(curve->GetPath());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstractSpline::GetLineColor() const -> QString
+auto VToolAbstractCurve::GetLineColor() const -> QString
 {
     const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
     return curve->GetColor();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractSpline::SetLineColor(const QString &value)
+void VToolAbstractCurve::SetLineColor(const QString &value)
 {
     QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
     curve->SetColor(value);
@@ -535,14 +429,14 @@ void VAbstractSpline::SetLineColor(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstractSpline::GetPenStyle() const -> QString
+auto VToolAbstractCurve::GetPenStyle() const -> QString
 {
     const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
     return curve->GetPenStyle();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractSpline::SetPenStyle(const QString &value)
+void VToolAbstractCurve::SetPenStyle(const QString &value)
 {
     QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
     curve->SetPenStyle(value);
@@ -551,52 +445,31 @@ void VAbstractSpline::SetPenStyle(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstractSpline::name() const -> QString
+auto VToolAbstractCurve::name() const -> QString
 {
     return ObjectName<VAbstractCurve>(m_id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstractSpline::GetApproximationScale() const -> qreal
+auto VToolAbstractCurve::GetApproximationScale() const -> qreal
 {
     return VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id)->GetApproximationScale();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstractSpline::GetDuplicate() const -> quint32
+auto VToolAbstractCurve::GetDuplicate() const -> quint32
 {
     return VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id)->GetDuplicate();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstractSpline::GetAliasSuffix() const -> QString
+auto VToolAbstractCurve::GetAliasSuffix() const -> QString
 {
     return ObjectAliasSuffix<VAbstractCurve>(m_id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractSpline::SetAliasSuffix(QString alias)
-{
-    QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
-
-    const QString oldAliasSuffix = curve->GetAliasSuffix();
-    alias = alias.simplified().replace(QChar(QChar::Space), '_'_L1);
-    curve->SetAliasSuffix(alias);
-
-    if (QRegularExpression const rx(NameRegExp());
-        alias.isEmpty() || (rx.match(curve->GetAlias()).hasMatch() && VAbstractTool::data.IsUnique(curve->GetAlias())))
-    {
-        QSharedPointer<VGObject> obj = qSharedPointerCast<VGObject>(curve);
-        SaveOption(obj);
-    }
-    else
-    {
-        curve->SetAliasSuffix(oldAliasSuffix);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractSpline::GroupVisibility(quint32 object, bool visible)
+void VToolAbstractCurve::GroupVisibility(quint32 object, bool visible)
 {
     Q_UNUSED(object)
     setVisible(visible);
@@ -604,9 +477,9 @@ void VAbstractSpline::GroupVisibility(quint32 object, bool visible)
 
 // VToolAbstractArc
 //---------------------------------------------------------------------------------------------------------------------
-VToolAbstractArc::VToolAbstractArc(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes,
-                                   QGraphicsItem *parent)
-  : VAbstractSpline(doc, data, id, notes, parent)
+VToolAbstractArc::VToolAbstractArc(
+    VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes, QGraphicsItem *parent)
+  : VToolAbstractCurve(doc, data, id, notes, parent)
 {
 }
 
@@ -620,53 +493,88 @@ auto VToolAbstractArc::CenterPointName() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolAbstractArc::SetAliasSuffix(const QString &alias)
+{
+    QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
+
+    if (!alias.isEmpty())
+    {
+        const QString newAlias = curve->GetTypeHead() + alias;
+
+        if (QRegularExpression const rx(NameRegExp()); !rx.match(newAlias).hasMatch())
+        {
+            return; // Invalid format
+        }
+
+        if (!VAbstractTool::data.IsUnique(newAlias))
+        {
+            return; // Not unique in data
+        }
+    }
+
+    QDomElement const oldDomElement = doc->FindElementById(m_id, getTagName());
+    if (!oldDomElement.isElement())
+    {
+        qCDebug(vTool, "Can't find tool with id = %u", m_id);
+        return;
+    }
+
+    ToolChanges const changes = {.oldCenterLabel = CenterPointName(),
+                                 .newCenterLabel = CenterPointName(),
+                                 .oldAliasSuffix = curve->GetAliasSuffix(),
+                                 .newAliasSuffix = alias};
+
+    curve->SetAliasSuffix(alias);
+    QSharedPointer<VGObject> obj = qSharedPointerCast<VGObject>(curve);
+
+    QDomElement newDomElement = oldDomElement.cloneNode().toElement();
+    SaveOptions(newDomElement, obj);
+
+    ProcessArcToolOptions(oldDomElement, newDomElement, changes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolAbstractArc::ProcessArcToolOptions(const QDomElement &oldDomElement,
                                              const QDomElement &newDomElement,
-                                             const QString &newCenterLabel,
-                                             const QString &newAliasSuffix)
+                                             const ToolChanges &changes)
 {
-    const QSharedPointer<VAbstractArc> arc = VAbstractTool::data.GeometricObject<VAbstractArc>(m_id);
-
-    const QString oldCenterLabel = CenterPointName();
-    const QString oldAliasSuffix = arc->GetAliasSuffix();
-
-    if (oldCenterLabel == newCenterLabel && oldAliasSuffix == newAliasSuffix)
+    if (!changes.HasChanges())
     {
         VDrawTool::ApplyToolOptions(oldDomElement, newDomElement);
         return;
     }
 
     QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
-    undoStack->beginMacro(tr("save tool options"));
+    auto *newGroup = new QUndoCommand(); // an empty command
+    newGroup->setText(tr("save tool options"));
 
-    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id, newGroup);
     saveOptions->SetInGroup(true);
     connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-    undoStack->push(saveOptions);
 
-    if (oldCenterLabel != newCenterLabel)
+    const QSharedPointer<VAbstractArc> arc = VAbstractTool::data.GeometricObject<VAbstractArc>(m_id);
+
+    if (changes.CenterLabelChanged())
     {
         const RenameArcType arcType = arc->getType() == GOType::Arc ? RenameArcType::Arc : RenameArcType::ElArc;
 
         // Share the same center point as a base arc
-        auto *renameArc = new RenameArc(arcType, oldCenterLabel, newCenterLabel, 0, doc, m_id);
-        if (oldAliasSuffix == newAliasSuffix)
+        auto *renameArc = new RenameArc(arcType, changes.oldCenterLabel, changes.newCenterLabel, 0, doc, m_id, newGroup);
+        if (!changes.AliasSuffixChanged())
         {
             connect(renameArc, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         }
-        undoStack->push(renameArc);
     }
 
-    if (oldAliasSuffix != newAliasSuffix)
+    if (changes.AliasSuffixChanged())
     {
         const CurveAliasType arcType = arc->getType() == GOType::Arc ? CurveAliasType::Arc : CurveAliasType::ElArc;
 
-        auto *renameAlias = new RenameAlias(arcType, oldAliasSuffix, newAliasSuffix, doc, m_id);
+        auto *renameAlias = new RenameAlias(arcType, changes.oldAliasSuffix, changes.newAliasSuffix, doc, m_id, newGroup);
         connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        undoStack->push(renameAlias);
     }
 
-    undoStack->endMacro();
+    undoStack->push(newGroup);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -677,7 +585,7 @@ VToolAbstractOffsetCurve::VToolAbstractOffsetCurve(VAbstractPattern *doc,
                                                    QString name,
                                                    const QString &notes,
                                                    QGraphicsItem *parent)
-  : VAbstractSpline(doc, data, id, notes, parent),
+  : VToolAbstractCurve(doc, data, id, notes, parent),
     m_originCurveId(originCurveId),
     m_name(std::move(name))
 {
@@ -704,9 +612,13 @@ void VToolAbstractOffsetCurve::SetApproximationScale(qreal value)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolAbstractOffsetCurve::SetName(const QString &name)
 {
-    m_name = name;
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-    SaveOption(obj);
+    UpdateNameField(VToolAbstractOffsetCurveField::Name, name);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolAbstractOffsetCurve::SetAliasSuffix(const QString &alias)
+{
+    UpdateNameField(VToolAbstractOffsetCurveField::AliasSuffix, alias);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -718,7 +630,7 @@ auto VToolAbstractOffsetCurve::CurveName() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VToolAbstractOffsetCurve::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-    VAbstractSpline::SaveOptions(tag, obj);
+    VToolAbstractCurve::SaveOptions(tag, obj);
 
     doc->SetAttribute(tag, AttrCurve, m_originCurveId);
     doc->SetAttribute(tag, AttrName, m_name);
@@ -734,7 +646,7 @@ void VToolAbstractOffsetCurve::SaveOptions(QDomElement &tag, QSharedPointer<VGOb
 //---------------------------------------------------------------------------------------------------------------------
 void VToolAbstractOffsetCurve::ReadToolAttributes(const QDomElement &domElement)
 {
-    VAbstractSpline::ReadToolAttributes(domElement);
+    VToolAbstractCurve::ReadToolAttributes(domElement);
 
     m_originCurveId = VDomDocument::GetParametrUInt(domElement, AttrCurve, NULL_ID_STR);
     m_name = VDomDocument::GetParametrString(domElement, AttrName);
@@ -743,16 +655,11 @@ void VToolAbstractOffsetCurve::ReadToolAttributes(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolAbstractOffsetCurve::ProcessOffsetCurveToolOptions(const QDomElement &oldDomElement,
                                                              const QDomElement &newDomElement,
-                                                             const QString &newName,
-                                                             const QString &newAliasSuffix)
+                                                             const ToolChanges &changes)
 {
-    const QString oldName = m_name;
-
-    const QString oldAliasSuffix = GetAliasSuffix();
-
-    if (oldName == newName && oldAliasSuffix == newAliasSuffix)
+    if (!changes.HasChanges())
     {
-        VAbstractSpline::ApplyToolOptions(oldDomElement, newDomElement);
+        VToolAbstractCurve::ApplyToolOptions(oldDomElement, newDomElement);
         return;
     }
 
@@ -764,19 +671,291 @@ void VToolAbstractOffsetCurve::ProcessOffsetCurveToolOptions(const QDomElement &
     connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     undoStack->push(saveOptions);
 
-    if (oldName != newName)
+    if (changes.NameChanged())
     {
-        auto *renameName = new RenameAlias(CurveAliasType::SplinePath, oldName, newName, doc, m_id);
-        if (oldAliasSuffix == newAliasSuffix)
+        auto *renameName = new RenameAlias(CurveAliasType::SplinePath, changes.oldName, changes.newName, doc, m_id);
+        if (!changes.AliasSuffixChanged())
         {
             connect(renameName, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         }
         undoStack->push(renameName);
     }
 
-    if (oldAliasSuffix != newAliasSuffix)
+    if (changes.AliasSuffixChanged())
     {
-        auto *renameAlias = new RenameAlias(CurveAliasType::SplinePath, oldAliasSuffix, newAliasSuffix, doc, m_id);
+        auto *renameAlias = new RenameAlias(CurveAliasType::SplinePath,
+                                            changes.oldAliasSuffix,
+                                            changes.newAliasSuffix,
+                                            doc,
+                                            m_id);
+        connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        undoStack->push(renameAlias);
+    }
+
+    undoStack->endMacro();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolAbstractOffsetCurve::UpdateNameField(VToolAbstractOffsetCurveField field, const QString &value)
+{
+    // Validation - name field requires non-empty value
+    if (field == VToolAbstractOffsetCurveField::Name && value.isEmpty())
+    {
+        return; // Name is required
+    }
+
+    // Get curve for alias validation
+    QSharedPointer<VAbstractCurve> curve;
+    if (field == VToolAbstractOffsetCurveField::AliasSuffix)
+    {
+        curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
+    }
+
+    // Validate format and uniqueness for non-empty values
+    if (!value.isEmpty())
+    {
+        // For alias, prepend type head; for name, use as-is
+        const QString fullName = (field == VToolAbstractOffsetCurveField::AliasSuffix) ? curve->GetTypeHead() + value
+                                                                                       : value;
+
+        if (QRegularExpression const rx(NameRegExp()); !rx.match(fullName).hasMatch())
+        {
+            return; // Invalid format
+        }
+
+        if (!VAbstractTool::data.IsUnique(fullName))
+        {
+            return; // Not unique in data
+        }
+
+        // Check conflicts
+        if (HasConflict(value, field))
+        {
+            return; // Conflicts with other identifiers
+        }
+    }
+
+    QDomElement const oldDomElement = doc->FindElementById(m_id, getTagName());
+    if (!oldDomElement.isElement())
+    {
+        qCDebug(vTool, "Can't find tool with id = %u", m_id);
+        return;
+    }
+
+    // Build changes struct
+    ToolChanges const changes = {.oldName = GetName(),
+                                 .newName = (field == VToolAbstractOffsetCurveField::Name) ? value : GetName(),
+                                 .oldAliasSuffix = GetAliasSuffix(),
+                                 .newAliasSuffix = (field == VToolAbstractOffsetCurveField::AliasSuffix)
+                                                       ? value
+                                                       : GetAliasSuffix()};
+
+    // Update the appropriate member variable or curve property
+    QSharedPointer<VGObject> obj;
+    if (field == VToolAbstractOffsetCurveField::Name)
+    {
+        m_name = value;
+        obj = VAbstractTool::data.GetGObject(m_id);
+    }
+    else // AliasSuffix
+    {
+        curve->SetAliasSuffix(value);
+        obj = qSharedPointerCast<VGObject>(curve);
+    }
+
+    QDomElement newDomElement = oldDomElement.cloneNode().toElement();
+    SaveOptions(newDomElement, obj);
+    ProcessOffsetCurveToolOptions(oldDomElement, newDomElement, changes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VToolAbstractOffsetCurve::HasConflict(const QString &value, VToolAbstractOffsetCurveField currentField) const
+    -> bool
+{
+    if (value.isEmpty())
+    {
+        return false;
+    }
+
+    const QString currentName = GetName();
+    const QString currentAlias = GetAliasSuffix();
+
+    // Check conflict based on which field is being updated
+    if (currentField == VToolAbstractOffsetCurveField::Name)
+    {
+        // Name cannot conflict with non-empty alias
+        return !currentAlias.isEmpty() && value == currentAlias;
+    }
+    // AliasSuffix
+    {
+        // Alias cannot conflict with name
+        return value == currentName;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VToolAbstractBezier::VToolAbstractBezier(
+    VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes, QGraphicsItem *parent)
+  : VToolAbstractCurve(doc, data, id, notes, parent)
+{
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolAbstractBezier::SetAliasSuffix(const QString &alias)
+{
+    QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
+
+    if (!alias.isEmpty())
+    {
+        const QString newAlias = curve->GetTypeHead() + alias;
+
+        if (QRegularExpression const rx(NameRegExp()); !rx.match(newAlias).hasMatch())
+        {
+            return; // Invalid format
+        }
+
+        if (!VAbstractTool::data.IsUnique(newAlias))
+        {
+            return; // Not unique in data
+        }
+    }
+
+    QDomElement const oldDomElement = doc->FindElementById(m_id, getTagName());
+    if (!oldDomElement.isElement())
+    {
+        qCDebug(vTool, "Can't find tool with id = %u", m_id);
+        return;
+    }
+
+    GOType const curveType = curve->getType();
+    ToolChanges changes;
+    if (curveType == GOType::CubicBezier || curveType == GOType::Spline)
+    {
+        QSharedPointer<VAbstractCubicBezier> const bezierCurve = qSharedPointerCast<VAbstractCubicBezier>(curve);
+        changes = {.oldP1Label = bezierCurve->GetP1().name(),
+                   .newP1Label = bezierCurve->GetP1().name(),
+                   .oldP4Label = bezierCurve->GetP4().name(),
+                   .newP4Label = bezierCurve->GetP4().name(),
+                   .oldAliasSuffix = bezierCurve->GetAliasSuffix(),
+                   .newAliasSuffix = alias};
+    }
+    else if (curveType == GOType::CubicBezierPath || curveType == GOType::SplinePath)
+    {
+        QSharedPointer<VAbstractCubicBezierPath> const path = qSharedPointerCast<VAbstractCubicBezierPath>(curve);
+        changes = {.oldP1Label = path->FirstPoint().name(),
+                   .newP1Label = path->FirstPoint().name(),
+                   .oldP4Label = path->LastPoint().name(),
+                   .newP4Label = path->LastPoint().name(),
+                   .oldAliasSuffix = path->GetAliasSuffix(),
+                   .newAliasSuffix = alias};
+    }
+
+    curve->SetAliasSuffix(alias);
+    QSharedPointer<VGObject> obj = qSharedPointerCast<VGObject>(curve);
+
+    QDomElement newDomElement = oldDomElement.cloneNode().toElement();
+    SaveOptions(newDomElement, obj);
+
+    if (curveType == GOType::CubicBezier || curveType == GOType::Spline)
+    {
+        ProcessSplineToolOptions(oldDomElement, newDomElement, changes);
+    }
+    else if (curveType == GOType::CubicBezierPath || curveType == GOType::SplinePath)
+    {
+        ProcessSplinePathToolOptions(oldDomElement, newDomElement, changes);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolAbstractBezier::ProcessSplineToolOptions(const QDomElement &oldDomElement,
+                                                   const QDomElement &newDomElement,
+                                                   const ToolChanges &changes)
+{
+    if (!changes.HasChanges())
+    {
+        VDrawTool::ApplyToolOptions(oldDomElement, newDomElement);
+        return;
+    }
+    const auto oldSpline = VAbstractTool::data.GeometricObject<VAbstractCubicBezier>(m_id);
+
+    QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
+    undoStack->beginMacro(tr("save tool options"));
+
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+    saveOptions->SetInGroup(true);
+    connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    undoStack->push(saveOptions);
+
+    if (changes.P1LabelChanged() || changes.P4LabelChanged())
+    {
+        auto *renamePair = RenamePair::CreateForSpline(std::make_pair(changes.oldP1Label, changes.oldP4Label),
+                                                       std::make_pair(changes.newP1Label, changes.newP4Label),
+                                                       oldSpline->GetDuplicate(),
+                                                       doc,
+                                                       m_id);
+        if (!changes.AliasSuffixChanged())
+        {
+            connect(renamePair, &RenamePair::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        }
+        undoStack->push(renamePair);
+    }
+
+    if (changes.AliasSuffixChanged())
+    {
+        auto *renameAlias = new RenameAlias(CurveAliasType::Spline,
+                                            changes.oldAliasSuffix,
+                                            changes.newAliasSuffix,
+                                            doc,
+                                            m_id);
+        connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        undoStack->push(renameAlias);
+    }
+
+    undoStack->endMacro();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolAbstractBezier::ProcessSplinePathToolOptions(const QDomElement &oldDomElement,
+                                                       const QDomElement &newDomElement,
+                                                       const ToolChanges &changes)
+{
+    if (!changes.HasChanges())
+    {
+        VDrawTool::ApplyToolOptions(oldDomElement, newDomElement);
+        return;
+    }
+
+    const auto oldSplinePath = VAbstractTool::data.GeometricObject<VAbstractCubicBezierPath>(m_id);
+
+    QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
+    undoStack->beginMacro(tr("save tool options"));
+
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+    saveOptions->SetInGroup(true);
+    connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    undoStack->push(saveOptions);
+
+    if (changes.P1LabelChanged() || changes.P4LabelChanged())
+    {
+        auto *renamePair = RenamePair::CreateForSplinePath(std::make_pair(changes.oldP1Label, changes.oldP4Label),
+                                                           std::make_pair(changes.newP1Label, changes.newP4Label),
+                                                           oldSplinePath->GetDuplicate(),
+                                                           doc,
+                                                           m_id);
+        if (!changes.AliasSuffixChanged())
+        {
+            connect(renamePair, &RenamePair::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        }
+        undoStack->push(renamePair);
+    }
+
+    if (changes.AliasSuffixChanged())
+    {
+        auto *renameAlias = new RenameAlias(CurveAliasType::SplinePath,
+                                            changes.oldAliasSuffix,
+                                            changes.newAliasSuffix,
+                                            doc,
+                                            m_id);
         connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         undoStack->push(renameAlias);
     }

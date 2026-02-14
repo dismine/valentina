@@ -101,6 +101,8 @@ private:
 
     explicit VToolPointFromCircleAndTangent(const VToolPointFromCircleAndTangentInitData &initData,
                                             QGraphicsItem *parent = nullptr);
+
+    auto GatherToolChanges() const -> ToolChanges;
 };
 
 #endif // VTOOLPOINTFROMCIRCLEANDTANGENT_H

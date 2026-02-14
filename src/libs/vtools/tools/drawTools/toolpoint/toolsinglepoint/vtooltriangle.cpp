@@ -71,6 +71,16 @@ VToolTriangle::VToolTriangle(const VToolTriangleInitData &initData, QGraphicsIte
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VToolTriangle::GatherToolChanges() const -> VAbstractPoint::ToolChanges
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogTriangle> dialogTool = qobject_cast<DialogTriangle *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    return {.pointId = m_id, .oldLabel = name(), .newLabel = dialogTool->GetPointName()};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setDialog set dialog when user want change tool option.
  */
@@ -334,11 +344,7 @@ void VToolTriangle::SetVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolTriangle::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
 {
-    SCASSERT(not m_dialog.isNull())
-    const QPointer<DialogTriangle> dialogTool = qobject_cast<DialogTriangle *>(m_dialog);
-    SCASSERT(not dialogTool.isNull())
-
-    ProcessSinglePointToolOptions(oldDomElement, newDomElement, dialogTool->GetPointName());
+    ProcessPointToolOptions(oldDomElement, newDomElement, GatherToolChanges());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

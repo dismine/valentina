@@ -28,13 +28,13 @@
 #ifndef VTOOLELLIPTICALARCWITHLENGTH_H
 #define VTOOLELLIPTICALARCWITHLENGTH_H
 
-#include "vabstractspline.h"
+#include "vtoolabstractcurve.h"
 
 class VFormula;
 template<class T>
 class QSharedPointer;
 
-struct VToolEllipticalArcWithLengthInitData : VAbstractSplineInitData
+struct VToolEllipticalArcWithLengthInitData : VToolAbstractCurveInitData
 {
     quint32 center{NULL_ID};    // NOLINT(misc-non-private-member-variables-in-classes)
     QString radius1{'0'};       // NOLINT(misc-non-private-member-variables-in-classes)
@@ -100,6 +100,8 @@ private:
 
     explicit VToolEllipticalArcWithLength(const VToolEllipticalArcWithLengthInitData &initData,
                                           QGraphicsItem *parent = nullptr);
+
+    auto GatherToolChanges() const -> ToolChanges;
 };
 
 #endif // VTOOLELLIPTICALARCWITHLENGTH_H

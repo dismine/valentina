@@ -105,6 +105,8 @@ private:
 
     explicit VToolPointOfIntersectionCircles(const VToolPointOfIntersectionCirclesInitData &initData,
                                              QGraphicsItem *parent = nullptr);
+
+    auto GatherToolChanges() const -> ToolChanges;
 };
 
 #endif // VTOOLPOINTOFINTERSECTIONCIRCLES_H

@@ -30,12 +30,9 @@
 
 #include <QPointF>
 #include <QSharedPointer>
-#include <QUndoStack>
 
 #include "../../../../../dialogs/tools/dialogcutspline.h"
 #include "../../../../../dialogs/tools/dialogtool.h"
-#include "../../../../../undocommands/renameobject.h"
-#include "../../../../../undocommands/savetooloptions.h"
 #include "../../../../../visualization/path/vistoolcutspline.h"
 #include "../../../../../visualization/visualization.h"
 #include "../../../../vabstracttool.h"
@@ -80,7 +77,7 @@ VToolCutSpline::VToolCutSpline(const VToolCutInitData &initData, QGraphicsItem *
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VToolCutSpline::GatherToolChanges() const -> VToolCutSpline::ToolChanges
+auto VToolCutSpline::GatherToolChanges() const -> VToolCut::ToolChanges
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogCutSpline> dialogTool = qobject_cast<DialogCutSpline *>(m_dialog);
@@ -398,79 +395,5 @@ auto VToolCutSpline::MakeToolTip() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCutSpline::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
 {
-    const ToolChanges changes = GatherToolChanges();
-    if (!changes.HasChanges())
-    {
-        VToolCut::ApplyToolOptions(oldDomElement, newDomElement);
-        return;
-    }
-
-    QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
-    undoStack->beginMacro(tr("save tool options"));
-
-    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
-    saveOptions->SetInGroup(true);
-    connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-    undoStack->push(saveOptions);
-
-    if (changes.LabelChanged())
-    {
-        auto *renameLabel = new RenameLabel(changes.oldLabel, changes.newLabel, doc, m_id);
-        if (!changes.Name1Changed() && !changes.Name2Changed() && !changes.AliasSuffix1Changed()
-            && !changes.AliasSuffix2Changed())
-        {
-            connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        }
-        undoStack->push(renameLabel);
-    }
-
-    const quint32 subSpl1Id = m_id /*+ 1*/;
-    const quint32 subSpl2Id = m_id /*+ 2*/;
-
-    if (changes.Name1Changed())
-    {
-        auto *renameName = new RenameAlias(CurveAliasType::Spline, changes.oldName1, changes.newName1, doc, subSpl1Id);
-        if (!changes.Name2Changed() && !changes.AliasSuffix1Changed() && !changes.AliasSuffix2Changed())
-        {
-            connect(renameName, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        }
-        undoStack->push(renameName);
-    }
-
-    if (changes.Name2Changed())
-    {
-        auto *renameName = new RenameAlias(CurveAliasType::Spline, changes.oldName2, changes.newName2, doc, subSpl2Id);
-        if (!changes.AliasSuffix1Changed() && !changes.AliasSuffix2Changed())
-        {
-            connect(renameName, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        }
-        undoStack->push(renameName);
-    }
-
-    if (changes.AliasSuffix1Changed())
-    {
-        auto *renameAlias = new RenameAlias(CurveAliasType::Spline,
-                                            changes.oldAliasSuffix1,
-                                            changes.newAliasSuffix1,
-                                            doc,
-                                            subSpl1Id);
-        if (!changes.AliasSuffix2Changed())
-        {
-            connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        }
-        undoStack->push(renameAlias);
-    }
-
-    if (changes.AliasSuffix2Changed())
-    {
-        auto *renameAlias = new RenameAlias(CurveAliasType::Spline,
-                                            changes.oldAliasSuffix1,
-                                            changes.newAliasSuffix1,
-                                            doc,
-                                            subSpl2Id);
-        connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        undoStack->push(renameAlias);
-    }
-
-    undoStack->endMacro();
+    ProcessToolCutOptions(oldDomElement, newDomElement, GatherToolChanges());
 }

@@ -67,6 +67,17 @@ VToolPointOfIntersectionCircles::VToolPointOfIntersectionCircles(
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VToolPointOfIntersectionCircles::GatherToolChanges() const -> VAbstractPoint::ToolChanges
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogPointOfIntersectionCircles> dialogTool = qobject_cast<DialogPointOfIntersectionCircles *>(
+        m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    return {.pointId = m_id, .oldLabel = name(), .newLabel = dialogTool->GetPointName()};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersectionCircles::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
@@ -378,10 +389,5 @@ void VToolPointOfIntersectionCircles::SetVisualization()
 void VToolPointOfIntersectionCircles::ApplyToolOptions(const QDomElement &oldDomElement,
                                                        const QDomElement &newDomElement)
 {
-    SCASSERT(not m_dialog.isNull())
-    const QPointer<DialogPointOfIntersectionCircles> dialogTool = qobject_cast<DialogPointOfIntersectionCircles *>(
-        m_dialog);
-    SCASSERT(not dialogTool.isNull())
-
-    ProcessSinglePointToolOptions(oldDomElement, newDomElement, dialogTool->GetPointName());
+    ProcessPointToolOptions(oldDomElement, newDomElement, GatherToolChanges());
 }

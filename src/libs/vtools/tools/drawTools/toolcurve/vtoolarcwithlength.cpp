@@ -50,7 +50,7 @@
 #include "../vpatterndb/vformula.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "vabstractspline.h"
+#include "vtoolabstractcurve.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
@@ -69,6 +69,21 @@ VToolArcWithLength::VToolArcWithLength(const VToolArcWithLengthInitData &initDat
     this->setFlag(QGraphicsItem::ItemIsFocusable, true); // For keyboard input focus
 
     ToolCreation(initData.typeCreation);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VToolArcWithLength::GatherToolChanges() const -> VToolAbstractArc::ToolChanges
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogArcWithLength> dialogTool = qobject_cast<DialogArcWithLength *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    const QSharedPointer<VAbstractArc> arc = VAbstractTool::data.GeometricObject<VAbstractArc>(m_id);
+
+    return {.oldCenterLabel = CenterPointName(),
+            .newCenterLabel = VAbstractTool::data.GetGObject(dialogTool->GetCenter())->name(),
+            .oldAliasSuffix = arc->GetAliasSuffix(),
+            .newAliasSuffix = dialogTool->GetAliasSuffix()};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -327,7 +342,7 @@ void VToolArcWithLength::SaveDialog(QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolArcWithLength::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-    VAbstractSpline::SaveOptions(tag, obj);
+    VToolAbstractArc::SaveOptions(tag, obj);
 
     QSharedPointer<VArc> const arc = qSharedPointerDynamicCast<VArc>(obj);
     SCASSERT(arc.isNull() == false)
@@ -388,12 +403,5 @@ auto VToolArcWithLength::MakeToolTip() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VToolArcWithLength::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
 {
-    SCASSERT(not m_dialog.isNull())
-    const QPointer<DialogArcWithLength> dialogTool = qobject_cast<DialogArcWithLength *>(m_dialog);
-    SCASSERT(not dialogTool.isNull())
-
-    const QString newCenterLabel = VAbstractTool::data.GetGObject(dialogTool->GetCenter())->name();
-    const QString newAliasSuffix = dialogTool->GetAliasSuffix();
-
-    ProcessArcToolOptions(oldDomElement, newDomElement, newCenterLabel, newAliasSuffix);
+    ProcessArcToolOptions(oldDomElement, newDomElement, GatherToolChanges());
 }

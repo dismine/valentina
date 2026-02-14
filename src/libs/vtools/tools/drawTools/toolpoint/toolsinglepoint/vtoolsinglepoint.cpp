@@ -105,7 +105,10 @@ auto VToolSinglePoint::name() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::setName(const QString &name)
 {
-    SetPointName(m_id, name);
+    UpdatePointName(m_id,
+                    name,
+                    [&](const QDomElement &oldElem, const QDomElement &newElem, const ToolChanges &changes) -> void
+                    { ProcessPointToolOptions(oldElem, newElem, changes); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -414,34 +417,6 @@ auto VToolSinglePoint::InitSegments(SegmentDetails &details) -> QPair<QString, Q
 
     Q_UNREACHABLE();
     return {};
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolSinglePoint::ProcessSinglePointToolOptions(const QDomElement &oldDomElement,
-                                                     const QDomElement &newDomElement,
-                                                     const QString &newLabel)
-{
-    const QString oldLabel = VAbstractTool::data.GetGObject(m_id)->name();
-
-    if (oldLabel == newLabel)
-    {
-        VToolSinglePoint::ApplyToolOptions(oldDomElement, newDomElement);
-        return;
-    }
-
-    QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
-    undoStack->beginMacro(tr("save tool options"));
-
-    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
-    saveOptions->SetInGroup(true);
-    connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-    undoStack->push(saveOptions);
-
-    auto *renameLabel = new RenameLabel(oldLabel, newLabel, doc, m_id);
-    connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-    undoStack->push(renameLabel);
-
-    undoStack->endMacro();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

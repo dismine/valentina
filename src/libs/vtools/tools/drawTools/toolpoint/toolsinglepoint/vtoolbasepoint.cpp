@@ -90,6 +90,16 @@ VToolBasePoint::VToolBasePoint(const VToolBasePointInitData &initData, QGraphics
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VToolBasePoint::GatherToolChanges() const -> VAbstractPoint::ToolChanges
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogSinglePoint> dialogTool = qobject_cast<DialogSinglePoint *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    return {.pointId = m_id, .oldLabel = name(), .newLabel = dialogTool->GetPointName()};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setDialog set dialog when user want change tool option.
  */
@@ -385,11 +395,7 @@ auto VToolBasePoint::MakeToolTip() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VToolBasePoint::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
 {
-    SCASSERT(not m_dialog.isNull())
-    const QPointer<DialogSinglePoint> dialogTool = qobject_cast<DialogSinglePoint *>(m_dialog);
-    SCASSERT(not dialogTool.isNull())
-
-    ProcessSinglePointToolOptions(oldDomElement, newDomElement, dialogTool->GetPointName());
+    ProcessPointToolOptions(oldDomElement, newDomElement, GatherToolChanges());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

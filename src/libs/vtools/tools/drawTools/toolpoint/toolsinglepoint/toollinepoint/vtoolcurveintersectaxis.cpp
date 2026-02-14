@@ -84,6 +84,199 @@ VToolCurveIntersectAxis::VToolCurveIntersectAxis(const VToolCurveIntersectAxisIn
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolCurveIntersectAxis::ProcessToolOptions(const QDomElement &oldDomElement,
+                                                 const QDomElement &newDomElement,
+                                                 const ToolChanges &changes)
+{
+    if (!changes.HasChanges())
+    {
+        VToolLinePoint::ApplyToolOptions(oldDomElement, newDomElement);
+        return;
+    }
+
+    QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
+    undoStack->beginMacro(tr("save tool options"));
+
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+    saveOptions->SetInGroup(true);
+    connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    undoStack->push(saveOptions);
+
+    if (changes.LabelChanged())
+    {
+        auto *renameLabel = new RenameLabel(changes.oldLabel, changes.newLabel, doc, m_id);
+        if (!changes.Name1Changed() && !changes.Name2Changed() && !changes.AliasSuffix1Changed()
+            && !changes.AliasSuffix2Changed())
+        {
+            connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        }
+        undoStack->push(renameLabel);
+    }
+
+    const quint32 subCurve1Id = m_id /*+ 1*/;
+    const quint32 subCurve2Id = m_id /*+ 2*/;
+
+    const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(curveId);
+    const CurveAliasType curveType = RenameAlias::CurveType(curve->getType());
+
+    if (changes.Name1Changed())
+    {
+        auto *renameName = new RenameAlias(curveType, changes.oldName1, changes.newName1, doc, subCurve1Id);
+        if (!changes.Name2Changed() && !changes.AliasSuffix1Changed() && !changes.AliasSuffix2Changed())
+        {
+            connect(renameName, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        }
+        undoStack->push(renameName);
+    }
+
+    if (changes.Name2Changed())
+    {
+        auto *renameName = new RenameAlias(curveType, changes.oldName2, changes.newName2, doc, subCurve2Id);
+        if (!changes.AliasSuffix1Changed() && !changes.AliasSuffix2Changed())
+        {
+            connect(renameName, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        }
+        undoStack->push(renameName);
+    }
+
+    if (changes.AliasSuffix1Changed())
+    {
+        auto *renameAlias = new RenameAlias(curveType,
+                                            changes.oldAliasSuffix1,
+                                            changes.newAliasSuffix1,
+                                            doc,
+                                            subCurve1Id);
+        if (!changes.AliasSuffix2Changed())
+        {
+            connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        }
+        undoStack->push(renameAlias);
+    }
+
+    if (changes.AliasSuffix2Changed())
+    {
+        auto *renameAlias = new RenameAlias(curveType,
+                                            changes.oldAliasSuffix1,
+                                            changes.newAliasSuffix1,
+                                            doc,
+                                            subCurve2Id);
+        connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        undoStack->push(renameAlias);
+    }
+
+    undoStack->endMacro();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCurveIntersectAxis::UpdateNameField(VToolCurveIntersectAxisNameField field, const QString &value)
+{
+    // Validation - name fields require non-empty values
+    if ((field == VToolCurveIntersectAxisNameField::Name1 || field == VToolCurveIntersectAxisNameField::Name2)
+        && value.isEmpty())
+    {
+        return; // Name is required
+    }
+
+    // Validate format and uniqueness for non-empty values
+    if (!value.isEmpty())
+    {
+        QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(curveId);
+        const QString fullName = curve->GetTypeHead() + value;
+
+        if (QRegularExpression const rx(NameRegExp()); !rx.match(fullName).hasMatch())
+        {
+            return; // Invalid format
+        }
+
+        if (!VAbstractTool::data.IsUnique(fullName))
+        {
+            return; // Not unique in data
+        }
+
+        // Check conflicts with other identifiers
+        if (value == GetFieldValue(VToolCurveIntersectAxisNameField::Name1, field)
+            || value == GetFieldValue(VToolCurveIntersectAxisNameField::Name2, field)
+            || value == GetFieldValue(VToolCurveIntersectAxisNameField::AliasSuffix1, field)
+            || value == GetFieldValue(VToolCurveIntersectAxisNameField::AliasSuffix2, field))
+        {
+            return; // Conflicts with other identifiers
+        }
+    }
+
+    QDomElement const oldDomElement = doc->FindElementById(m_id, getTagName());
+    if (!oldDomElement.isElement())
+    {
+        qDebug("Can't find tool with id = %u", m_id);
+        return;
+    }
+
+    const QString label = VAbstractTool::data.GeometricObject<VPointF>(m_id)->name();
+
+    // Build changes struct
+    ToolChanges const changes
+        = {.oldLabel = label,
+           .newLabel = label,
+           .oldName1 = m_name1,
+           .newName1 = (field == VToolCurveIntersectAxisNameField::Name1) ? value : m_name1,
+           .oldName2 = m_name2,
+           .newName2 = (field == VToolCurveIntersectAxisNameField::Name2) ? value : m_name2,
+           .oldAliasSuffix1 = m_aliasSuffix1,
+           .newAliasSuffix1 = (field == VToolCurveIntersectAxisNameField::AliasSuffix1) ? value : m_aliasSuffix1,
+           .oldAliasSuffix2 = m_aliasSuffix2,
+           .newAliasSuffix2 = (field == VToolCurveIntersectAxisNameField::AliasSuffix2) ? value : m_aliasSuffix2};
+
+    // Update the appropriate member variable
+    switch (field)
+    {
+        case VToolCurveIntersectAxisNameField::Name1:
+            m_name1 = value;
+            break;
+        case VToolCurveIntersectAxisNameField::Name2:
+            m_name2 = value;
+            break;
+        case VToolCurveIntersectAxisNameField::AliasSuffix1:
+            m_aliasSuffix1 = value;
+            break;
+        case VToolCurveIntersectAxisNameField::AliasSuffix2:
+            m_aliasSuffix2 = value;
+            break;
+        default:
+            break;
+    }
+
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
+    QDomElement newDomElement = oldDomElement.cloneNode().toElement();
+    SaveOptions(newDomElement, obj);
+    ProcessToolOptions(oldDomElement, newDomElement, changes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// Helper to get field values, excluding the current field being updated
+auto VToolCurveIntersectAxis::GetFieldValue(VToolCurveIntersectAxisNameField field,
+                                            VToolCurveIntersectAxisNameField excludeField) const -> QString
+{
+    if (field == excludeField)
+    {
+        return {}; // Don't check against self
+    }
+
+    switch (field)
+    {
+        case VToolCurveIntersectAxisNameField::Name1:
+            return m_name1;
+        case VToolCurveIntersectAxisNameField::Name2:
+            return m_name2;
+        case VToolCurveIntersectAxisNameField::AliasSuffix1:
+            return m_aliasSuffix1;
+        case VToolCurveIntersectAxisNameField::AliasSuffix2:
+            return m_aliasSuffix2;
+        default:
+            break;
+    }
+    return {};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VToolCurveIntersectAxis::GatherToolChanges() const -> VToolCurveIntersectAxis::ToolChanges
 {
     SCASSERT(not m_dialog.isNull())
@@ -286,33 +479,7 @@ auto VToolCurveIntersectAxis::GetName1() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCurveIntersectAxis::SetName1(const QString &name)
 {
-    if (name.isEmpty())
-    {
-        return; // Name is required
-    }
-
-    QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(curveId);
-
-    const QString newName1 = curve->GetTypeHead() + name;
-
-    if (QRegularExpression const rx(NameRegExp()); !rx.match(newName1).hasMatch())
-    {
-        return; // Invalid format
-    }
-
-    if (!VAbstractTool::data.IsUnique(newName1))
-    {
-        return; // Not unique in data
-    }
-
-    if (name == m_name2 || name == m_aliasSuffix1 || name == m_aliasSuffix2)
-    {
-        return; // Conflicts with other identifiers
-    }
-
-    m_name1 = name;
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-    SaveOption(obj);
+    UpdateNameField(VToolCurveIntersectAxisNameField::Name1, name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -324,33 +491,7 @@ auto VToolCurveIntersectAxis::GetName2() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCurveIntersectAxis::SetName2(const QString &name)
 {
-    if (name.isEmpty())
-    {
-        return; // Name is required
-    }
-
-    QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(curveId);
-
-    const QString newName2 = curve->GetTypeHead() + name;
-
-    if (QRegularExpression const rx(NameRegExp()); !rx.match(newName2).hasMatch())
-    {
-        return; // Invalid format
-    }
-
-    if (!VAbstractTool::data.IsUnique(newName2))
-    {
-        return; // Not unique in data
-    }
-
-    if (name == m_name1 || name == m_aliasSuffix1 || name == m_aliasSuffix2)
-    {
-        return; // Conflicts with other identifiers
-    }
-
-    m_name2 = name;
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-    SaveOption(obj);
+    UpdateNameField(VToolCurveIntersectAxisNameField::Name2, name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -362,31 +503,7 @@ auto VToolCurveIntersectAxis::GetAliasSuffix1() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCurveIntersectAxis::SetAliasSuffix1(const QString &alias)
 {
-    if (!alias.isEmpty())
-    {
-        QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(curveId);
-
-        const QString newAlias = curve->GetTypeHead() + alias;
-
-        if (QRegularExpression const rx(NameRegExp()); !rx.match(newAlias).hasMatch())
-        {
-            return; // Invalid format
-        }
-
-        if (!VAbstractTool::data.IsUnique(newAlias))
-        {
-            return; // Not unique in data
-        }
-
-        if (alias == m_name1 || alias == m_name2 || (!m_aliasSuffix2.isEmpty() && alias == m_aliasSuffix2))
-        {
-            return; // Conflicts with other identifiers
-        }
-    }
-
-    m_aliasSuffix1 = alias;
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-    SaveOption(obj);
+    UpdateNameField(VToolCurveIntersectAxisNameField::AliasSuffix1, alias);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -398,31 +515,7 @@ auto VToolCurveIntersectAxis::GetAliasSuffix2() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCurveIntersectAxis::SetAliasSuffix2(const QString &alias)
 {
-    if (!alias.isEmpty())
-    {
-        QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(curveId);
-
-        const QString newAlias = curve->GetTypeHead() + alias;
-
-        if (QRegularExpression const rx(NameRegExp()); !rx.match(newAlias).hasMatch())
-        {
-            return; // Invalid format
-        }
-
-        if (!VAbstractTool::data.IsUnique(newAlias))
-        {
-            return; // Not unique in data
-        }
-
-        if (alias == m_name1 || alias == m_name2 || (!m_aliasSuffix1.isEmpty() && alias == m_aliasSuffix1))
-        {
-            return; // Conflicts with other identifiers
-        }
-    }
-
-    m_aliasSuffix2 = alias;
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-    SaveOption(obj);
+    UpdateNameField(VToolCurveIntersectAxisNameField::AliasSuffix2, alias);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -567,86 +660,5 @@ void VToolCurveIntersectAxis::SetSegments(const QPair<QString, QString> &segment
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCurveIntersectAxis::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
 {
-    SCASSERT(not m_dialog.isNull())
-    const QPointer<DialogCurveIntersectAxis> dialogTool = qobject_cast<DialogCurveIntersectAxis *>(m_dialog);
-    SCASSERT(not dialogTool.isNull())
-
-    const ToolChanges changes = GatherToolChanges();
-    if (!changes.HasChanges())
-    {
-        VToolLinePoint::ApplyToolOptions(oldDomElement, newDomElement);
-        return;
-    }
-
-    QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
-    undoStack->beginMacro(tr("save tool options"));
-
-    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
-    saveOptions->SetInGroup(true);
-    connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-    undoStack->push(saveOptions);
-
-    if (changes.LabelChanged())
-    {
-        auto *renameLabel = new RenameLabel(changes.oldLabel, changes.newLabel, doc, m_id);
-        if (!changes.Name1Changed() && !changes.Name2Changed() && !changes.AliasSuffix1Changed()
-            && !changes.AliasSuffix2Changed())
-        {
-            connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        }
-        undoStack->push(renameLabel);
-    }
-
-    const quint32 subCurve1Id = m_id /*+ 1*/;
-    const quint32 subCurve2Id = m_id /*+ 2*/;
-
-    const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(curveId);
-    const CurveAliasType curveType = RenameAlias::CurveType(curve->getType());
-
-    if (changes.Name1Changed())
-    {
-        auto *renameName = new RenameAlias(curveType, changes.oldName1, changes.newName1, doc, subCurve1Id);
-        if (!changes.Name2Changed() && !changes.AliasSuffix1Changed() && !changes.AliasSuffix2Changed())
-        {
-            connect(renameName, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        }
-        undoStack->push(renameName);
-    }
-
-    if (changes.Name2Changed())
-    {
-        auto *renameName = new RenameAlias(curveType, changes.oldName2, changes.newName2, doc, subCurve2Id);
-        if (!changes.AliasSuffix1Changed() && !changes.AliasSuffix2Changed())
-        {
-            connect(renameName, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        }
-        undoStack->push(renameName);
-    }
-
-    if (changes.AliasSuffix1Changed())
-    {
-        auto *renameAlias = new RenameAlias(curveType,
-                                            changes.oldAliasSuffix1,
-                                            changes.newAliasSuffix1,
-                                            doc,
-                                            subCurve1Id);
-        if (!changes.AliasSuffix2Changed())
-        {
-            connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        }
-        undoStack->push(renameAlias);
-    }
-
-    if (changes.AliasSuffix2Changed())
-    {
-        auto *renameAlias = new RenameAlias(curveType,
-                                            changes.oldAliasSuffix1,
-                                            changes.newAliasSuffix1,
-                                            doc,
-                                            subCurve2Id);
-        connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        undoStack->push(renameAlias);
-    }
-
-    undoStack->endMacro();
+    ProcessToolOptions(oldDomElement, newDomElement, GatherToolChanges());
 }

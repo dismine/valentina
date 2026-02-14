@@ -338,11 +338,7 @@ void VToolGraduatedCurve::ReadToolAttributes(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolGraduatedCurve::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
 {
-    SCASSERT(not m_dialog.isNull())
-    const QPointer<DialogGraduatedCurve> dialogTool = qobject_cast<DialogGraduatedCurve *>(m_dialog);
-    SCASSERT(not dialogTool.isNull())
-
-    ProcessOffsetCurveToolOptions(oldDomElement, newDomElement, dialogTool->GetName(), dialogTool->GetAliasSuffix());
+    ProcessOffsetCurveToolOptions(oldDomElement, newDomElement, GatherToolChanges());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -377,4 +373,17 @@ void VToolGraduatedCurve::UpdateOffsets(QDomElement &tag, const QVector<VRawGrad
 
         tag.appendChild(offsetTag);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VToolGraduatedCurve::GatherToolChanges() const -> VToolAbstractOffsetCurve::ToolChanges
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogGraduatedCurve> dialogTool = qobject_cast<DialogGraduatedCurve *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    return {.oldName = GetName(),
+            .newName = dialogTool->GetName(),
+            .oldAliasSuffix = GetAliasSuffix(),
+            .newAliasSuffix = dialogTool->GetAliasSuffix()};
 }

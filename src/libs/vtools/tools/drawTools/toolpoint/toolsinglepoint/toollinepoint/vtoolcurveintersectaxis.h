@@ -57,6 +57,14 @@ struct VToolCurveIntersectAxisInitData : VToolLinePointInitData
     QString name2{}; // NOLINT(misc-non-private-member-variables-in-classes)
 };
 
+enum class VToolCurveIntersectAxisNameField : quint8
+{
+    Name1,
+    Name2,
+    AliasSuffix1,
+    AliasSuffix2
+};
+
 class VToolCurveIntersectAxis : public VToolLinePoint
 {
     Q_OBJECT // NOLINT
@@ -146,9 +154,17 @@ private:
 
     auto GatherToolChanges() const -> ToolChanges;
 
+    void ProcessToolOptions(const QDomElement &oldDomElement,
+                            const QDomElement &newDomElement,
+                            const ToolChanges &changes);
+
     template <class Item>
     static void InitArc(VContainer *data, qreal segLength, const VPointF *p, quint32 curveId);
     static void InitSegments(GOType curveType, qreal segLength, const VPointF *p, quint32 curveId, VContainer *data);
+
+    void UpdateNameField(VToolCurveIntersectAxisNameField field, const QString &value);
+    auto GetFieldValue(VToolCurveIntersectAxisNameField field, VToolCurveIntersectAxisNameField excludeField) const
+        -> QString;
 };
 
 #endif // VTOOLCURVEINTERSECTAXIS_H

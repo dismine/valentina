@@ -66,6 +66,17 @@ VToolPointFromCircleAndTangent::VToolPointFromCircleAndTangent(const VToolPointF
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VToolPointFromCircleAndTangent::GatherToolChanges() const -> VAbstractPoint::ToolChanges
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogPointFromCircleAndTangent> dialogTool = qobject_cast<DialogPointFromCircleAndTangent *>(
+        m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    return {.pointId = m_id, .oldLabel = name(), .newLabel = dialogTool->GetPointName()};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPointFromCircleAndTangent::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
@@ -337,10 +348,5 @@ void VToolPointFromCircleAndTangent::SetVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointFromCircleAndTangent::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
 {
-    SCASSERT(not m_dialog.isNull())
-    const QPointer<DialogPointFromCircleAndTangent> dialogTool = qobject_cast<DialogPointFromCircleAndTangent *>(
-        m_dialog);
-    SCASSERT(not dialogTool.isNull())
-
-    ProcessSinglePointToolOptions(oldDomElement, newDomElement, dialogTool->GetPointName());
+    ProcessPointToolOptions(oldDomElement, newDomElement, GatherToolChanges());
 }

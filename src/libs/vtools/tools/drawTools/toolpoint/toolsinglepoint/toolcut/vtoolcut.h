@@ -37,7 +37,7 @@
 
 #include "../../../../../visualization/visualization.h"
 #include "../../../../vdatatool.h"
-#include "../../../toolcurve/vabstractspline.h"
+#include "../../../toolcurve/vtoolabstractcurve.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vmisc/def.h"
 #include "../vtoolsinglepoint.h"
@@ -54,6 +54,14 @@ struct VToolCutInitData : VToolSinglePointInitData
     QString aliasSuffix2{};       // NOLINT(misc-non-private-member-variables-in-classes)
     QString name1{};              // NOLINT(misc-non-private-member-variables-in-classes)
     QString name2{};              // NOLINT(misc-non-private-member-variables-in-classes)
+};
+
+enum class VToolCutNameField : quint8
+{
+    Name1,
+    Name2,
+    AliasSuffix1,
+    AliasSuffix2
 };
 
 class VToolCut : public VToolSinglePoint
@@ -105,6 +113,36 @@ protected:
     QString m_aliasSuffix1{};
     QString m_aliasSuffix2{};
 
+    struct ToolChanges
+    {
+        QString oldLabel{};
+        QString newLabel{};
+        QString oldName1{};
+        QString newName1{};
+        QString oldName2{};
+        QString newName2{};
+        QString oldAliasSuffix1{};
+        QString newAliasSuffix1{};
+        QString oldAliasSuffix2{};
+        QString newAliasSuffix2{};
+
+        auto HasChanges() const -> bool
+        {
+            return oldLabel != newLabel || oldName1 != newName1 || oldName2 != newName2
+                   || oldAliasSuffix1 != newAliasSuffix1 || oldAliasSuffix2 != newAliasSuffix2;
+        }
+
+        auto LabelChanged() const -> bool { return oldLabel != newLabel; }
+        auto Name1Changed() const -> bool { return oldName1 != newName1; }
+        auto Name2Changed() const -> bool { return oldName2 != newName2; }
+        auto AliasSuffix1Changed() const -> bool { return oldAliasSuffix1 != newAliasSuffix1; }
+        auto AliasSuffix2Changed() const -> bool { return oldAliasSuffix2 != newAliasSuffix2; }
+    };
+
+    void ProcessToolCutOptions(const QDomElement &oldDomElement,
+                               const QDomElement &newDomElement,
+                               const ToolChanges &changes);
+
     void RefreshGeometry();
     void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     void ReadToolAttributes(const QDomElement &domElement) override;
@@ -113,6 +151,9 @@ protected:
 
 private:
     Q_DISABLE_COPY_MOVE(VToolCut) // NOLINT
+
+    void UpdateNameField(VToolCutNameField field, const QString &value);
+    auto HasConflict(const QString &value, VToolCutNameField currentField) const -> bool;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -145,7 +186,7 @@ template <typename T> inline void VToolCut::ShowToolVisualization(bool show)
     }
 
     VDataTool *parent = VAbstractPattern::getTool(VAbstractTool::data.GetGObject(baseCurveId)->getIdTool());
-    if (auto *parentCurve = qobject_cast<VAbstractSpline *>(parent))
+    if (auto *parentCurve = qobject_cast<VToolAbstractCurve *>(parent))
     {
         detailsMode ? parentCurve->ShowHandles(detailsMode) : parentCurve->ShowHandles(show);
     }

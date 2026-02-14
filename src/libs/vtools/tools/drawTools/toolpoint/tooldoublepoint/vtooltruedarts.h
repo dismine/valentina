@@ -108,6 +108,8 @@ private:
     quint32 dartP3Id;
 
     explicit VToolTrueDarts(const VToolTrueDartsInitData &initData, QGraphicsItem *parent = nullptr);
+
+    auto GatherToolChanges() const -> ToolChanges;
 };
 
 #endif // VTOOLTRUEDARTS_H

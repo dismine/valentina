@@ -65,6 +65,21 @@ VToolTrueDarts::VToolTrueDarts(const VToolTrueDartsInitData &initData, QGraphics
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VToolTrueDarts::GatherToolChanges() const -> VToolDoublePoint::ToolChanges
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogTrueDarts> dialogTool = qobject_cast<DialogTrueDarts *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    return {
+        .oldP1Label = VAbstractTool::data.GetGObject(p1id)->name(),
+        .newP1Label = dialogTool->GetFirstNewDartPointName(),
+        .oldP2Label = VAbstractTool::data.GetGObject(p2id)->name(),
+        .newP2Label = dialogTool->GetSecondNewDartPointName(),
+    };
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolTrueDarts::FindPoint(const QPointF &baseLineP1, const QPointF &baseLineP2, const QPointF &dartP1,
                                const QPointF &dartP2, const QPointF &dartP3, QPointF &p1, QPointF &p2)
 {
@@ -323,12 +338,5 @@ void VToolTrueDarts::SetVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolTrueDarts::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
 {
-    SCASSERT(not m_dialog.isNull())
-    const QPointer<DialogTrueDarts> dialogTool = qobject_cast<DialogTrueDarts *>(m_dialog);
-    SCASSERT(not dialogTool.isNull())
-
-    ProcessTrueDartsToolOptions(oldDomElement,
-                                newDomElement,
-                                dialogTool->GetFirstNewDartPointName(),
-                                dialogTool->GetSecondNewDartPointName());
+    ProcessTrueDartsToolOptions(oldDomElement, newDomElement, GatherToolChanges());
 }

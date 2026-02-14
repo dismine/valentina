@@ -99,6 +99,8 @@ private:
     int m_indexPatternBlock{-1};
 
     explicit VToolBasePoint(const VToolBasePointInitData &initData, QGraphicsItem *parent = nullptr);
+
+    auto GatherToolChanges() const -> ToolChanges;
 };
 
 #endif // VTOOLBASEPOINT_H

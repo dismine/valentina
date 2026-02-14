@@ -262,11 +262,7 @@ void VToolParallelCurve::ReadToolAttributes(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolParallelCurve::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
 {
-    SCASSERT(not m_dialog.isNull())
-    const QPointer<DialogParallelCurve> dialogTool = qobject_cast<DialogParallelCurve *>(m_dialog);
-    SCASSERT(not dialogTool.isNull())
-
-    ProcessOffsetCurveToolOptions(oldDomElement, newDomElement, dialogTool->GetName(), dialogTool->GetAliasSuffix());
+    ProcessOffsetCurveToolOptions(oldDomElement, newDomElement, GatherToolChanges());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -285,4 +281,17 @@ VToolParallelCurve::VToolParallelCurve(const VToolParallelCurveInitData &initDat
     this->setFlag(QGraphicsItem::ItemIsFocusable, true); // For keyboard input focus
 
     ToolCreation(initData.typeCreation);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VToolParallelCurve::GatherToolChanges() const -> VToolAbstractOffsetCurve::ToolChanges
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogParallelCurve> dialogTool = qobject_cast<DialogParallelCurve *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    return {.oldName = GetName(),
+            .newName = dialogTool->GetName(),
+            .oldAliasSuffix = GetAliasSuffix(),
+            .newAliasSuffix = dialogTool->GetAliasSuffix()};
 }

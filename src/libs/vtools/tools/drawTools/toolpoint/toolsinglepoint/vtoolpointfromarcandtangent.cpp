@@ -65,6 +65,16 @@ VToolPointFromArcAndTangent::VToolPointFromArcAndTangent(const VToolPointFromArc
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VToolPointFromArcAndTangent::GatherToolChanges() const -> VAbstractPoint::ToolChanges
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogPointFromArcAndTangent> dialogTool = qobject_cast<DialogPointFromArcAndTangent *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    return {.pointId = m_id, .oldLabel = name(), .newLabel = dialogTool->GetPointName()};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPointFromArcAndTangent::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
@@ -337,9 +347,5 @@ void VToolPointFromArcAndTangent::SetVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointFromArcAndTangent::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
 {
-    SCASSERT(not m_dialog.isNull())
-    const QPointer<DialogPointFromArcAndTangent> dialogTool = qobject_cast<DialogPointFromArcAndTangent *>(m_dialog);
-    SCASSERT(not dialogTool.isNull())
-
-    ProcessSinglePointToolOptions(oldDomElement, newDomElement, dialogTool->GetPointName());
+    ProcessPointToolOptions(oldDomElement, newDomElement, GatherToolChanges());
 }

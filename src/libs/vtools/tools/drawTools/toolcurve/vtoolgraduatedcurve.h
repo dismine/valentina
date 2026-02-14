@@ -29,7 +29,7 @@
 #define VTOOLGRADUATEDCURVE_H
 
 #include "../vpatterndb/vformula.h"
-#include "vabstractspline.h"
+#include "vtoolabstractcurve.h"
 
 template<class T>
 class QSharedPointer;
@@ -41,7 +41,7 @@ struct VGraduatedCurveOffset
     QString description{};
 };
 
-struct VToolGraduatedCurveInitData : VAbstractSplineInitData
+struct VToolGraduatedCurveInitData : VToolAbstractCurveInitData
 {
     quint32 originCurveId{NULL_ID};                 // NOLINT(misc-non-private-member-variables-in-classes)
     QVector<VRawGraduatedCurveOffset> offsets{};    // NOLINT(misc-non-private-member-variables-in-classes)
@@ -93,6 +93,8 @@ private:
     explicit VToolGraduatedCurve(const VToolGraduatedCurveInitData &initData, QGraphicsItem *parent = nullptr);
 
     void UpdateOffsets(QDomElement &tag, const QVector<VRawGraduatedCurveOffset> &offsets);
+
+    auto GatherToolChanges() const -> ToolChanges;
 };
 
 #endif // VTOOLGRADUATEDCURVE_H

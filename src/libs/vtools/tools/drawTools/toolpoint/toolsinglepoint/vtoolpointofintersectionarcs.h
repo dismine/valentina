@@ -98,6 +98,8 @@ private:
 
     explicit VToolPointOfIntersectionArcs(const VToolPointOfIntersectionArcsInitData &initData,
                                           QGraphicsItem *parent = nullptr);
+
+    auto GatherToolChanges() const -> ToolChanges;
 };
 
 #endif // VTOOLPOINTOFINTERSECTIONARCS_H
