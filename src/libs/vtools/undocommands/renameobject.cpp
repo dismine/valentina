@@ -369,7 +369,7 @@ void AbstractObjectRename::RenameFormulas()
         ProcessElementByType(domElement);
     }
 
-    if (!m_dependencies.isEmpty())
+    if (!m_dependencies.isEmpty() && m_operationType != OperationType::Undo)
     {
         emit NeedLiteParsing(Document::LiteParse);
     }
