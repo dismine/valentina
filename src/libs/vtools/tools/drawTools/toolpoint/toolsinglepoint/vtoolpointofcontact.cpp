@@ -406,25 +406,25 @@ void VToolPointOfContact::ApplyToolOptions(const QDomElement &oldDomElement, con
     }
 
     QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
-    undoStack->beginMacro(tr("save tool options"));
+    auto *newGroup = new QUndoCommand(); // an empty command
+    newGroup->setText(tr("save tool options"));
 
-    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id, newGroup);
     saveOptions->SetInGroup(true);
     connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-    undoStack->push(saveOptions);
 
     if (oldFirstPointLabel != newFirstPointLabel)
     {
         auto *renamePair = RenamePair::CreateForLine(std::make_pair(oldFirstPointLabel, oldLabel),
                                                      std::make_pair(newFirstPointLabel, oldLabel),
                                                      doc,
-                                                     m_id);
+                                                     m_id,
+                                                     newGroup);
         if (oldSecondPointLabel == newSecondPointLabel && oldArcCenterPointLabel == newArcCenterPointLabel
             && oldLabel == newLabel)
         {
             connect(renamePair, &RenamePair::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         }
-        undoStack->push(renamePair);
     }
 
     if (oldSecondPointLabel != newSecondPointLabel)
@@ -432,12 +432,12 @@ void VToolPointOfContact::ApplyToolOptions(const QDomElement &oldDomElement, con
         auto *renamePair = RenamePair::CreateForLine(std::make_pair(oldSecondPointLabel, oldLabel),
                                                      std::make_pair(newSecondPointLabel, oldLabel),
                                                      doc,
-                                                     m_id);
+                                                     m_id,
+                                                     newGroup);
         if (oldArcCenterPointLabel == newArcCenterPointLabel && oldLabel == newLabel)
         {
             connect(renamePair, &RenamePair::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         }
-        undoStack->push(renamePair);
     }
 
     if (oldArcCenterPointLabel != newArcCenterPointLabel)
@@ -445,22 +445,21 @@ void VToolPointOfContact::ApplyToolOptions(const QDomElement &oldDomElement, con
         auto *renamePair = RenamePair::CreateForLine(std::make_pair(oldArcCenterPointLabel, oldLabel),
                                                      std::make_pair(newArcCenterPointLabel, oldLabel),
                                                      doc,
-                                                     m_id);
+                                                     m_id,
+                                                     newGroup);
         if (oldLabel == newLabel)
         {
             connect(renamePair, &RenamePair::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         }
-        undoStack->push(renamePair);
     }
 
     if (oldLabel != newLabel)
     {
-        auto *renameLabel = new RenameLabel(oldLabel, newLabel, doc, m_id);
+        auto *renameLabel = new RenameLabel(oldLabel, newLabel, doc, m_id, newGroup);
         connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        undoStack->push(renameLabel);
     }
 
-    undoStack->endMacro();
+    undoStack->push(newGroup);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

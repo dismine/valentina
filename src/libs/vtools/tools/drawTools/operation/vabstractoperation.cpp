@@ -1106,12 +1106,12 @@ void VAbstractOperation::ProcessOperationToolOptions(const QDomElement &oldDomEl
     }
 
     QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
-    undoStack->beginMacro(tr("save tool options"));
+    auto *newGroup = new QUndoCommand(); // an empty command
+    newGroup->setText(tr("save tool options"));
 
-    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id, newGroup);
     saveOptions->SetInGroup(true);
     connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-    undoStack->push(saveOptions);
 
     const QSet<quint32> oldIds = ConvertToSet<quint32>(oldNames.keys());
     const QSet<quint32> newIds = ConvertToSet<quint32>(newNames.keys());
@@ -1139,28 +1139,25 @@ void VAbstractOperation::ProcessOperationToolOptions(const QDomElement &oldDomEl
         if (const QSharedPointer<VGObject> obj = VDataTool::data.GetGObject(rename.first);
             obj->getType() == GOType::Point)
         {
-            auto *renameLabel = new RenameLabel(rename.second.first, rename.second.second, doc, rename.first);
+            auto *renameLabel = new RenameLabel(rename.second.first, rename.second.second, doc, rename.first, newGroup);
 
             if (i == renames.size() - 1) // Last rename operation
             {
                 connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
             }
-
-            undoStack->push(renameLabel);
         }
         else
         {
             const CurveAliasType type = RenameAlias::CurveType(obj->getType());
-            auto *renameName = new RenameAlias(type, rename.second.first, rename.second.second, doc, rename.first);
+            auto *renameName
+                = new RenameAlias(type, rename.second.first, rename.second.second, doc, rename.first, newGroup);
 
             if (i == renames.size() - 1) // Last rename operation
             {
                 connect(renameName, &RenameAlias::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
             }
-
-            undoStack->push(renameName);
         }
     }
 
-    undoStack->endMacro();
+    undoStack->push(newGroup);
 }

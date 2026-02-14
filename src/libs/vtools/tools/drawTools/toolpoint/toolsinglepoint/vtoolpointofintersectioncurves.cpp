@@ -94,16 +94,16 @@ void VToolPointOfIntersectionCurves::ProcessToolOptions(const QDomElement &oldDo
     }
 
     QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
-    undoStack->beginMacro(tr("save tool options"));
+    auto *newGroup = new QUndoCommand(); // an empty command
+    newGroup->setText(tr("save tool options"));
 
-    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id, newGroup);
     saveOptions->SetInGroup(true);
     connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-    undoStack->push(saveOptions);
 
     if (changes.LabelChanged())
     {
-        auto *renameLabel = new RenameLabel(changes.oldLabel, changes.newLabel, doc, m_id);
+        auto *renameLabel = new RenameLabel(changes.oldLabel, changes.newLabel, doc, m_id, newGroup);
         if (!changes.Curve1Name1Changed() && !changes.Curve1Name2Changed() && !changes.Curve2Name1Changed()
             && !changes.Curve2Name2Changed() && !changes.Curve1AliasSuffix1Changed()
             && !changes.Curve1AliasSuffix2Changed() && !changes.Curve2AliasSuffix1Changed()
@@ -111,7 +111,6 @@ void VToolPointOfIntersectionCurves::ProcessToolOptions(const QDomElement &oldDo
         {
             connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         }
-        undoStack->push(renameLabel);
     }
 
     const QSharedPointer<VAbstractCurve> curve1 = VAbstractTool::data.GeometricObject<VAbstractCurve>(firstCurveId);
@@ -119,26 +118,26 @@ void VToolPointOfIntersectionCurves::ProcessToolOptions(const QDomElement &oldDo
 
     if (changes.Curve1Name1Changed())
     {
-        auto *renameName = new RenameAlias(curve1Type, changes.oldCurve1Name1, changes.newCurve1Name1, doc, m_id);
+        auto *renameName
+            = new RenameAlias(curve1Type, changes.oldCurve1Name1, changes.newCurve1Name1, doc, m_id, newGroup);
         if (!changes.Curve1Name2Changed() && !changes.Curve2Name1Changed() && !changes.Curve2Name2Changed()
             && !changes.Curve1AliasSuffix1Changed() && !changes.Curve1AliasSuffix2Changed()
             && !changes.Curve2AliasSuffix1Changed() && !changes.Curve2AliasSuffix2Changed())
         {
             connect(renameName, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         }
-        undoStack->push(renameName);
     }
 
     if (changes.Curve1Name2Changed())
     {
-        auto *renameName = new RenameAlias(curve1Type, changes.oldCurve1Name2, changes.newCurve1Name2, doc, m_id);
+        auto *renameName
+            = new RenameAlias(curve1Type, changes.oldCurve1Name2, changes.newCurve1Name2, doc, m_id, newGroup);
         if (!changes.Curve2Name1Changed() && !changes.Curve2Name2Changed() && !changes.Curve1AliasSuffix1Changed()
             && !changes.Curve1AliasSuffix2Changed() && !changes.Curve2AliasSuffix1Changed()
             && !changes.Curve2AliasSuffix2Changed())
         {
             connect(renameName, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         }
-        undoStack->push(renameName);
     }
 
     if (changes.Curve1AliasSuffix1Changed())
@@ -147,13 +146,13 @@ void VToolPointOfIntersectionCurves::ProcessToolOptions(const QDomElement &oldDo
                                             changes.oldCurve1AliasSuffix1,
                                             changes.newCurve1AliasSuffix1,
                                             doc,
-                                            m_id);
+                                            m_id,
+                                            newGroup);
         if (!changes.Curve2Name1Changed() && !changes.Curve2Name2Changed() && !changes.Curve1AliasSuffix2Changed()
             && !changes.Curve2AliasSuffix1Changed() && !changes.Curve2AliasSuffix2Changed())
         {
             connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         }
-        undoStack->push(renameAlias);
     }
 
     if (changes.Curve1AliasSuffix2Changed())
@@ -162,13 +161,13 @@ void VToolPointOfIntersectionCurves::ProcessToolOptions(const QDomElement &oldDo
                                             changes.oldCurve1AliasSuffix1,
                                             changes.newCurve1AliasSuffix1,
                                             doc,
-                                            m_id);
+                                            m_id,
+                                            newGroup);
         if (!changes.Curve2Name1Changed() && !changes.Curve2Name2Changed() && !changes.Curve2AliasSuffix1Changed()
             && !changes.Curve2AliasSuffix2Changed())
         {
             connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         }
-        undoStack->push(renameAlias);
     }
 
     const QSharedPointer<VAbstractCurve> curve2 = VAbstractTool::data.GeometricObject<VAbstractCurve>(secondCurveId);
@@ -176,23 +175,23 @@ void VToolPointOfIntersectionCurves::ProcessToolOptions(const QDomElement &oldDo
 
     if (changes.Curve2Name1Changed())
     {
-        auto *renameName = new RenameAlias(curve2Type, changes.oldCurve2Name1, changes.newCurve2Name1, doc, m_id);
+        auto *renameName
+            = new RenameAlias(curve2Type, changes.oldCurve2Name1, changes.newCurve2Name1, doc, m_id, newGroup);
         if (!changes.Curve2Name2Changed() && !changes.Curve2AliasSuffix1Changed()
             && !changes.Curve2AliasSuffix2Changed())
         {
             connect(renameName, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         }
-        undoStack->push(renameName);
     }
 
     if (changes.Curve2Name2Changed())
     {
-        auto *renameName = new RenameAlias(curve2Type, changes.oldCurve2Name2, changes.newCurve2Name2, doc, m_id);
+        auto *renameName
+            = new RenameAlias(curve2Type, changes.oldCurve2Name2, changes.newCurve2Name2, doc, m_id, newGroup);
         if (!changes.Curve2AliasSuffix1Changed() && !changes.Curve2AliasSuffix2Changed())
         {
             connect(renameName, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         }
-        undoStack->push(renameName);
     }
 
     if (changes.Curve2AliasSuffix1Changed())
@@ -201,12 +200,12 @@ void VToolPointOfIntersectionCurves::ProcessToolOptions(const QDomElement &oldDo
                                             changes.oldCurve2AliasSuffix1,
                                             changes.newCurve2AliasSuffix1,
                                             doc,
-                                            m_id);
+                                            m_id,
+                                            newGroup);
         if (!changes.Curve2AliasSuffix2Changed())
         {
             connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         }
-        undoStack->push(renameAlias);
     }
 
     if (changes.Curve2AliasSuffix2Changed())
@@ -215,13 +214,13 @@ void VToolPointOfIntersectionCurves::ProcessToolOptions(const QDomElement &oldDo
                                             changes.oldCurve2AliasSuffix1,
                                             changes.newCurve2AliasSuffix1,
                                             doc,
-                                            m_id);
+                                            m_id,
+                                            newGroup);
 
         connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        undoStack->push(renameAlias);
     }
 
-    undoStack->endMacro();
+    undoStack->push(newGroup);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

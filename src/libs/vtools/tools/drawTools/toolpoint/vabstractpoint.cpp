@@ -114,16 +114,15 @@ void VAbstractPoint::ProcessPointToolOptions(const QDomElement &oldDomElement,
     }
 
     QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
-    undoStack->beginMacro(tr("save tool options"));
+    auto *newGroup = new QUndoCommand(); // an empty command
+    newGroup->setText(tr("save tool options"));
 
-    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id, newGroup);
     saveOptions->SetInGroup(true);
     connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-    undoStack->push(saveOptions);
 
-    auto *renameLabel = new RenameLabel(changes.oldLabel, changes.newLabel, doc, changes.pointId);
+    auto *renameLabel = new RenameLabel(changes.oldLabel, changes.newLabel, doc, changes.pointId, newGroup);
     connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-    undoStack->push(renameLabel);
 
-    undoStack->endMacro();
+    undoStack->push(newGroup);
 }

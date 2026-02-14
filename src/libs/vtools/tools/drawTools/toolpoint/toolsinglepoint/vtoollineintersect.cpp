@@ -354,25 +354,25 @@ void VToolLineIntersect::ApplyToolOptions(const QDomElement &oldDomElement, cons
     }
 
     QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
-    undoStack->beginMacro(tr("save tool options"));
+    auto *newGroup = new QUndoCommand(); // an empty command
+    newGroup->setText(tr("save tool options"));
 
-    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id, newGroup);
     saveOptions->SetInGroup(true);
     connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-    undoStack->push(saveOptions);
 
     if (oldLine1P1Label != newLine1P1Label)
     {
         auto *renamePair = RenamePair::CreateForLine(std::make_pair(oldLine1P1Label, oldLabel),
                                                      std::make_pair(newLine1P1Label, oldLabel),
                                                      doc,
-                                                     m_id);
+                                                     m_id,
+                                                     newGroup);
         if (oldLine1P2Label == newLine1P2Label && oldLine2P1Label == newLine2P1Label
             && oldLine2P2Label == newLine2P2Label && oldLabel == newLabel)
         {
             connect(renamePair, &RenamePair::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         }
-        undoStack->push(renamePair);
     }
 
     if (oldLine1P2Label != newLine1P2Label)
@@ -380,12 +380,12 @@ void VToolLineIntersect::ApplyToolOptions(const QDomElement &oldDomElement, cons
         auto *renamePair = RenamePair::CreateForLine(std::make_pair(oldLabel, oldLine1P2Label),
                                                      std::make_pair(oldLabel, newLine1P2Label),
                                                      doc,
-                                                     m_id);
+                                                     m_id,
+                                                     newGroup);
         if (oldLine2P1Label == newLine2P1Label && oldLine2P2Label == newLine2P2Label && oldLabel == newLabel)
         {
             connect(renamePair, &RenamePair::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         }
-        undoStack->push(renamePair);
     }
 
     if (oldLine2P1Label != newLine2P1Label)
@@ -393,12 +393,12 @@ void VToolLineIntersect::ApplyToolOptions(const QDomElement &oldDomElement, cons
         auto *renamePair = RenamePair::CreateForLine(std::make_pair(oldLine2P1Label, oldLabel),
                                                      std::make_pair(newLine2P1Label, oldLabel),
                                                      doc,
-                                                     m_id);
+                                                     m_id,
+                                                     newGroup);
         if (oldLine2P2Label == newLine2P2Label && oldLabel == newLabel)
         {
             connect(renamePair, &RenamePair::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         }
-        undoStack->push(renamePair);
     }
 
     if (oldLine2P2Label != newLine2P2Label)
@@ -406,22 +406,21 @@ void VToolLineIntersect::ApplyToolOptions(const QDomElement &oldDomElement, cons
         auto *renamePair = RenamePair::CreateForLine(std::make_pair(oldLabel, oldLine2P2Label),
                                                      std::make_pair(oldLabel, newLine2P2Label),
                                                      doc,
-                                                     m_id);
+                                                     m_id,
+                                                     newGroup);
         if (oldLabel == newLabel)
         {
             connect(renamePair, &RenamePair::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         }
-        undoStack->push(renamePair);
     }
 
     if (oldLabel != newLabel)
     {
-        auto *renameLabel = new RenameLabel(oldLabel, newLabel, doc, m_id);
+        auto *renameLabel = new RenameLabel(oldLabel, newLabel, doc, m_id, newGroup);
         connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        undoStack->push(renameLabel);
     }
 
-    undoStack->endMacro();
+    undoStack->push(newGroup);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

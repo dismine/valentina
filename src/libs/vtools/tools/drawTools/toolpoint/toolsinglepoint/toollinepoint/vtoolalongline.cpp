@@ -192,24 +192,24 @@ void VToolAlongLine::ApplyToolOptions(const QDomElement &oldDomElement, const QD
     }
 
     QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
-    undoStack->beginMacro(tr("save tool options"));
+    auto *newGroup = new QUndoCommand(); // an empty command
+    newGroup->setText(tr("save tool options"));
 
-    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id, newGroup);
     saveOptions->SetInGroup(true);
     connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-    undoStack->push(saveOptions);
 
     if (oldBasePointLabel != newBasePointLabel)
     {
         auto *renamePair = RenamePair::CreateForLine(std::make_pair(oldBasePointLabel, oldLabel),
                                                      std::make_pair(newBasePointLabel, oldLabel),
                                                      doc,
-                                                     m_id);
+                                                     m_id,
+                                                     newGroup);
         if (oldLabel == newLabel && oldSecondPointLabel == newSecondPointLabel)
         {
             connect(renamePair, &RenamePair::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         }
-        undoStack->push(renamePair);
     }
 
     if (oldSecondPointLabel != newSecondPointLabel)
@@ -217,22 +217,21 @@ void VToolAlongLine::ApplyToolOptions(const QDomElement &oldDomElement, const QD
         auto *renamePair = RenamePair::CreateForLine(std::make_pair(oldLabel, oldSecondPointLabel),
                                                      std::make_pair(oldLabel, newSecondPointLabel),
                                                      doc,
-                                                     m_id);
+                                                     m_id,
+                                                     newGroup);
         if (oldLabel == newLabel)
         {
             connect(renamePair, &RenamePair::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         }
-        undoStack->push(renamePair);
     }
 
     if (oldLabel != newLabel)
     {
-        auto *renameLabel = new RenameLabel(oldLabel, newLabel, doc, m_id);
+        auto *renameLabel = new RenameLabel(oldLabel, newLabel, doc, m_id, newGroup);
         connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        undoStack->push(renameLabel);
     }
 
-    undoStack->endMacro();
+    undoStack->push(newGroup);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

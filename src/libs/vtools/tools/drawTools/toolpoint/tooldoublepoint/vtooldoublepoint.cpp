@@ -521,29 +521,27 @@ void VToolDoublePoint::ProcessTrueDartsToolOptions(const QDomElement &oldDomElem
     }
 
     QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
-    undoStack->beginMacro(tr("save tool options"));
+    auto *newGroup = new QUndoCommand(); // an empty command
+    newGroup->setText(tr("save tool options"));
 
-    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id, newGroup);
     saveOptions->SetInGroup(true);
     connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-    undoStack->push(saveOptions);
 
     if (changes.P1LabelChanged())
     {
-        auto *renameLabel = new RenameLabel(changes.oldP1Label, changes.newP1Label, doc, p1id);
+        auto *renameLabel = new RenameLabel(changes.oldP1Label, changes.newP1Label, doc, p1id, newGroup);
         if (!changes.P2LabelChanged())
         {
             connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         }
-        undoStack->push(renameLabel);
     }
 
     if (changes.P2LabelChanged())
     {
-        auto *renameLabel = new RenameLabel(changes.oldP2Label, changes.newP2Label, doc, p2id);
+        auto *renameLabel = new RenameLabel(changes.oldP2Label, changes.newP2Label, doc, p2id, newGroup);
         connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        undoStack->push(renameLabel);
     }
 
-    undoStack->endMacro();
+    undoStack->push(newGroup);
 }

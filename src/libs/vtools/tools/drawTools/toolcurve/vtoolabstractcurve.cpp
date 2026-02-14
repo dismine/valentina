@@ -664,21 +664,21 @@ void VToolAbstractOffsetCurve::ProcessOffsetCurveToolOptions(const QDomElement &
     }
 
     QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
-    undoStack->beginMacro(tr("save tool options"));
+    auto *newGroup = new QUndoCommand(); // an empty command
+    newGroup->setText(tr("save tool options"));
 
-    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id, newGroup);
     saveOptions->SetInGroup(true);
     connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-    undoStack->push(saveOptions);
 
     if (changes.NameChanged())
     {
-        auto *renameName = new RenameAlias(CurveAliasType::SplinePath, changes.oldName, changes.newName, doc, m_id);
+        auto *renameName
+            = new RenameAlias(CurveAliasType::SplinePath, changes.oldName, changes.newName, doc, m_id, newGroup);
         if (!changes.AliasSuffixChanged())
         {
             connect(renameName, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         }
-        undoStack->push(renameName);
     }
 
     if (changes.AliasSuffixChanged())
@@ -687,12 +687,12 @@ void VToolAbstractOffsetCurve::ProcessOffsetCurveToolOptions(const QDomElement &
                                             changes.oldAliasSuffix,
                                             changes.newAliasSuffix,
                                             doc,
-                                            m_id);
+                                            m_id,
+                                            newGroup);
         connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        undoStack->push(renameAlias);
     }
 
-    undoStack->endMacro();
+    undoStack->push(newGroup);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -879,12 +879,12 @@ void VToolAbstractBezier::ProcessSplineToolOptions(const QDomElement &oldDomElem
     const auto oldSpline = VAbstractTool::data.GeometricObject<VAbstractCubicBezier>(m_id);
 
     QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
-    undoStack->beginMacro(tr("save tool options"));
+    auto *newGroup = new QUndoCommand(); // an empty command
+    newGroup->setText(tr("save tool options"));
 
-    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id, newGroup);
     saveOptions->SetInGroup(true);
     connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-    undoStack->push(saveOptions);
 
     if (changes.P1LabelChanged() || changes.P4LabelChanged())
     {
@@ -892,12 +892,12 @@ void VToolAbstractBezier::ProcessSplineToolOptions(const QDomElement &oldDomElem
                                                        std::make_pair(changes.newP1Label, changes.newP4Label),
                                                        oldSpline->GetDuplicate(),
                                                        doc,
-                                                       m_id);
+                                                       m_id,
+                                                       newGroup);
         if (!changes.AliasSuffixChanged())
         {
             connect(renamePair, &RenamePair::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         }
-        undoStack->push(renamePair);
     }
 
     if (changes.AliasSuffixChanged())
@@ -906,12 +906,12 @@ void VToolAbstractBezier::ProcessSplineToolOptions(const QDomElement &oldDomElem
                                             changes.oldAliasSuffix,
                                             changes.newAliasSuffix,
                                             doc,
-                                            m_id);
+                                            m_id,
+                                            newGroup);
         connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        undoStack->push(renameAlias);
     }
 
-    undoStack->endMacro();
+    undoStack->push(newGroup);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -928,12 +928,12 @@ void VToolAbstractBezier::ProcessSplinePathToolOptions(const QDomElement &oldDom
     const auto oldSplinePath = VAbstractTool::data.GeometricObject<VAbstractCubicBezierPath>(m_id);
 
     QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
-    undoStack->beginMacro(tr("save tool options"));
+    auto *newGroup = new QUndoCommand(); // an empty command
+    newGroup->setText(tr("save tool options"));
 
-    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id, newGroup);
     saveOptions->SetInGroup(true);
     connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-    undoStack->push(saveOptions);
 
     if (changes.P1LabelChanged() || changes.P4LabelChanged())
     {
@@ -941,12 +941,12 @@ void VToolAbstractBezier::ProcessSplinePathToolOptions(const QDomElement &oldDom
                                                            std::make_pair(changes.newP1Label, changes.newP4Label),
                                                            oldSplinePath->GetDuplicate(),
                                                            doc,
-                                                           m_id);
+                                                           m_id,
+                                                           newGroup);
         if (!changes.AliasSuffixChanged())
         {
             connect(renamePair, &RenamePair::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         }
-        undoStack->push(renamePair);
     }
 
     if (changes.AliasSuffixChanged())
@@ -955,10 +955,10 @@ void VToolAbstractBezier::ProcessSplinePathToolOptions(const QDomElement &oldDom
                                             changes.oldAliasSuffix,
                                             changes.newAliasSuffix,
                                             doc,
-                                            m_id);
+                                            m_id,
+                                            newGroup);
         connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        undoStack->push(renameAlias);
     }
 
-    undoStack->endMacro();
+    undoStack->push(newGroup);
 }

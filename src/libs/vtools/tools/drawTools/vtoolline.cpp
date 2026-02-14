@@ -457,12 +457,12 @@ void VToolLine::ApplyToolOptions(const QDomElement &oldDomElement, const QDomEle
     }
 
     QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
-    undoStack->beginMacro(tr("save tool options"));
+    auto *newGroup = new QUndoCommand(); // an empty command
+    newGroup->setText(tr("save tool options"));
 
-    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id, newGroup);
     saveOptions->SetInGroup(true);
     connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-    undoStack->push(saveOptions);
 
     ObjectPair_t newPair;
     if (oldFirstPointLabel != newFirstPointLabel && oldSecondPointLabel != newSecondPointLabel)
@@ -481,11 +481,11 @@ void VToolLine::ApplyToolOptions(const QDomElement &oldDomElement, const QDomEle
     auto *renamePair = RenamePair::CreateForLine(std::make_pair(oldFirstPointLabel, oldSecondPointLabel),
                                                  newPair,
                                                  doc,
-                                                 m_id);
+                                                 m_id,
+                                                 newGroup);
     connect(renamePair, &RenamePair::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-    undoStack->push(renamePair);
 
-    undoStack->endMacro();
+    undoStack->push(newGroup);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
