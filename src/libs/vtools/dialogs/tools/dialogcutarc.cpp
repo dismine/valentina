@@ -85,9 +85,6 @@ DialogCutArc::DialogCutArc(const VContainer *data, VAbstractPattern *doc, quint3
 
     FillComboBoxArcCurves(ui->comboBoxArc);
 
-    ui->lineEditName1->setText(GenerateDefLeftSubName());
-    ui->lineEditName2->setText(GenerateDefRightSubName());
-
     connect(ui->lineEditName1, &QLineEdit::textEdited, this, &DialogCutArc::ValidateCurveNames);
     connect(ui->lineEditName2, &QLineEdit::textEdited, this, &DialogCutArc::ValidateCurveNames);
 
@@ -183,6 +180,9 @@ void DialogCutArc::ChosenObject(quint32 id, const SceneObject &type)
             vis->VisualMode(id);
         }
         prepare = true;
+
+        SetName1(GenerateDefLeftSubName());
+        SetName2(GenerateDefRightSubName());
 
         auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
         SCASSERT(window != nullptr)

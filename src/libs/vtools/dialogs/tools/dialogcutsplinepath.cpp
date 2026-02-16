@@ -85,9 +85,6 @@ DialogCutSplinePath::DialogCutSplinePath(const VContainer *data, VAbstractPatter
 
     FillComboBoxSplinesPath(ui->comboBoxSplinePath);
 
-    ui->lineEditName1->setText(GenerateDefLeftSubName());
-    ui->lineEditName2->setText(GenerateDefRightSubName());
-
     connect(ui->lineEditName1, &QLineEdit::textEdited, this, &DialogCutSplinePath::ValidateCurveNames);
     connect(ui->lineEditName2, &QLineEdit::textEdited, this, &DialogCutSplinePath::ValidateCurveNames);
 
@@ -222,6 +219,9 @@ void DialogCutSplinePath::ChosenObject(quint32 id, const SceneObject &type)
             vis->VisualMode(id);
         }
         prepare = true;
+
+        SetName1(GenerateDefLeftSubName());
+        SetName2(GenerateDefRightSubName());
 
         auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
         SCASSERT(window != nullptr)

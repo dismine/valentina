@@ -83,8 +83,6 @@ DialogParallelCurve::DialogParallelCurve(const VContainer *data, VAbstractPatter
 
     connect(ui->pushButtonGrowLengthWidth, &QPushButton::clicked, this, &DialogParallelCurve::DeployWidthTextEdit);
 
-    ui->lineEditName->setText(GenerateDefName());
-
     connect(ui->lineEditName, &QLineEdit::textEdited, this, &DialogParallelCurve::ValidateName);
     connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogParallelCurve::ValidateAlias);
 
@@ -289,6 +287,8 @@ void DialogParallelCurve::ChosenObject(quint32 id, const SceneObject &type)
             vis->VisualMode(id);
         }
         prepare = true;
+
+        SetName(GenerateDefName());
 
         auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
         SCASSERT(window != nullptr)

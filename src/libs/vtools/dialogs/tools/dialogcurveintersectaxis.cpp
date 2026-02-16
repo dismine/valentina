@@ -98,9 +98,6 @@ DialogCurveIntersectAxis::DialogCurveIntersectAxis(const VContainer *data, VAbst
     InitColorPicker(ui->pushButtonLineColor, VAbstractValApplication::VApp()->ValentinaSettings()->GetUserToolColors());
     ui->pushButtonLineColor->setUseNativeDialog(!VAbstractApplication::VApp()->Settings()->IsDontUseNativeDialog());
 
-    ui->lineEditName1->setText(GenerateDefLeftSubName());
-    ui->lineEditName2->setText(GenerateDefRightSubName());
-
     connect(ui->lineEditName1, &QLineEdit::textEdited, this, &DialogCurveIntersectAxis::ValidateCurveNames);
     connect(ui->lineEditName2, &QLineEdit::textEdited, this, &DialogCurveIntersectAxis::ValidateCurveNames);
 
@@ -304,6 +301,9 @@ void DialogCurveIntersectAxis::ChosenObject(quint32 id, const SceneObject &type)
                     line->setAxisPointId(id);
                     line->RefreshGeometry();
                     prepare = true;
+
+                    SetName1(GenerateDefLeftSubName());
+                    SetName2(GenerateDefRightSubName());
 
                     if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
                     {

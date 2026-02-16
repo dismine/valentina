@@ -106,8 +106,6 @@ DialogGraduatedCurve::DialogGraduatedCurve(const VContainer *data,
 
     ui->doubleSpinBoxApproximationScale->setMaximum(maxCurveApproximationScale);
 
-    ui->lineEditCurveName->setText(GenerateDefName());
-
     connect(ui->lineEditCurveName, &QLineEdit::textEdited, this, &DialogGraduatedCurve::ValidateName);
     connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogGraduatedCurve::ValidateAlias);
 
@@ -393,6 +391,8 @@ void DialogGraduatedCurve::ChosenObject(quint32 id, const SceneObject &type)
             vis->VisualMode(id);
         }
         prepare = true;
+
+        SetName(GenerateDefName());
 
         auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
         SCASSERT(window != nullptr)
