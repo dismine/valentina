@@ -62,8 +62,9 @@ auto SourceToObjects(const QVector<SourceItem> &source) -> QVector<quint32>;
 
 void FillDefSourceNames(QVector<SourceItem> &source, const VContainer *data, const QString &suffix);
 
-auto GetSourceItemName(quint32 id, const QVector<SourceItem> &source, const VContainer *data) -> QString;
-auto IsValidSourceItem(quint32 id, const QVector<SourceItem> &source, const VContainer *data) -> bool;
+auto GetSourceItemName(const QString &name, quint32 id, const VContainer *data) -> QString;
+auto IsValidSourceName(const QString &newName, quint32 id, const QVector<SourceItem> &source, const VContainer *data)
+    -> bool;
 
 auto OperationLineStylesPics(QColor backgroundColor, QColor textColor) -> QMap<QString, QIcon>;
 

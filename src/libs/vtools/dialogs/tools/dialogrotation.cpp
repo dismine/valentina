@@ -521,9 +521,7 @@ void DialogRotation::FillSourceList()
     for (const auto &sourceItem : std::as_const(m_sourceObjects))
     {
         const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
-        const bool valid = IsValidSourceItem(sourceItem.id, m_sourceObjects, data);
-
-        auto *item = new QListWidgetItem(valid ? obj->ObjectName() : obj->ObjectName() + '*');
+        auto *item = new QListWidgetItem(obj->ObjectName());
         item->setToolTip(obj->ObjectName());
         item->setData(Qt::UserRole, QVariant::fromValue(sourceItem));
         ui->listWidget->insertItem(++row, item);
@@ -653,10 +651,10 @@ void DialogRotation::ShowSourceDetails(int row)
     ui->lineEditName->setText(sourceItem.name);
     ui->lineEditName->setEnabled(m_dependencyReady);
 
-    const bool nameValid = IsValidSourceItem(sourceItem.id, m_sourceObjects, data);
-    item->setText(nameValid ? obj->ObjectName() : obj->ObjectName() + '*');
-
+    const bool nameValid = IsValidSourceName(sourceItem.name, sourceItem.id, m_sourceObjects, data);
     ChangeColor(ui->labelName, nameValid ? OkColor(this) : errorColor);
+    flagName = nameValid;
+    CheckState();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -670,15 +668,17 @@ void DialogRotation::NameChanged(const QString &text)
     if (auto *item = ui->listWidget->currentItem())
     {
         auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
-        sourceItem.name = text;
-
-        item->setData(Qt::UserRole, QVariant::fromValue(sourceItem));
 
         const QVector<SourceItem> objects = SaveSourceObjects();
-        const bool valid = IsValidSourceItem(sourceItem.id, objects, data);
+        const bool valid = IsValidSourceName(text, sourceItem.id, objects, data);
+
+        if (valid)
+        {
+            sourceItem.name = text;
+            item->setData(Qt::UserRole, QVariant::fromValue(sourceItem));
+        }
 
         const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
-        item->setText(valid ? obj->ObjectName() : obj->ObjectName() + '*');
         ChangeColor(ui->labelName, valid ? OkColor(this) : errorColor);
 
         if (!valid)

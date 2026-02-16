@@ -193,39 +193,46 @@ void FillDefSourceNames(QVector<SourceItem> &source, const VContainer *data, con
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto IsValidSourceItem(quint32 id, const QVector<SourceItem> &source, const VContainer *data) -> bool
+auto IsValidSourceName(const QString &newName, quint32 id, const QVector<SourceItem> &source, const VContainer *data)
+    -> bool
 {
-    if (id == NULL_ID)
+    if (id == NULL_ID || newName.isEmpty())
     {
         return false;
     }
 
     SCASSERT(data != nullptr)
 
-    const QString name = GetSourceItemName(id, source, data);
+    auto item = std::find_if(source.begin(),
+                             source.end(),
+                             [id](const SourceItem &sItem) -> bool { return sItem.id == id; });
+    if (item == source.end())
+    {
+        return false;
+    }
+
+    const QString name = GetSourceItemName(newName, id, data);
 
     if (name.isEmpty())
     {
         return false;
     }
 
-    QRegularExpression const rx(NameRegExp());
-
     // Check if name matches regex
-    if (!rx.match(name).hasMatch())
+    if (QRegularExpression const rx(NameRegExp()); !rx.match(name).hasMatch())
     {
         return false;
     }
 
     // Check if name is unique in data
-    if (!data->IsUnique(name))
+    if (newName != item->name && !data->IsUnique(name))
     {
         return false;
     }
 
     // Check uniqueness among all names in source
     return std::ranges::all_of(source,
-                               [id, name](const SourceItem &sourceItem) -> bool
+                               [id, name, source, data](const SourceItem &sourceItem) -> bool
                                {
                                    if (sourceItem.id == NULL_ID || sourceItem.id == id)
                                    {
@@ -233,7 +240,8 @@ auto IsValidSourceItem(quint32 id, const QVector<SourceItem> &source, const VCon
                                    }
 
                                    // Check against other item's name
-                                   if (!sourceItem.name.isEmpty() && name == sourceItem.name)
+                                   if (!sourceItem.name.isEmpty()
+                                       && name == GetSourceItemName(sourceItem.name, sourceItem.id, data))
                                    {
                                        return false;
                                    }
@@ -243,14 +251,11 @@ auto IsValidSourceItem(quint32 id, const QVector<SourceItem> &source, const VCon
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto GetSourceItemName(quint32 id, const QVector<SourceItem> &source, const VContainer *data) -> QString
+auto GetSourceItemName(const QString &name, quint32 id, const VContainer *data) -> QString
 {
     SCASSERT(data != nullptr)
 
-    auto item = std::find_if(source.begin(),
-                             source.end(),
-                             [id](const SourceItem &sItem) -> bool { return sItem.id == id; });
-    if (item == source.end())
+    if (id == NULL_ID || name.isEmpty())
     {
         return {};
     }
@@ -261,11 +266,11 @@ auto GetSourceItemName(quint32 id, const QVector<SourceItem> &source, const VCon
 
         if (obj->getType() == GOType::Point)
         {
-            return item->name;
+            return name;
         }
 
         const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(id);
-        return curve->GetTypeHead() + item->name;
+        return curve->GetTypeHead() + name;
     }
     catch (const VExceptionBadId &)
     {
