@@ -32,9 +32,7 @@
 
 #include "../ifc/xml/vabstractpattern.h"
 #include "../tools/drawTools/toolcurve/vtoolsplinepath.h"
-#include "../vmisc/vabstractapplication.h"
 #include "../vmisc/def.h"
-#include "../vwidgets/vmaingraphicsview.h"
 #include "../vgeometry/vsplinepath.h"
 #include "vundocommand.h"
 
@@ -44,13 +42,12 @@ MoveSplinePath::MoveSplinePath(VAbstractPattern *doc,
                                const VSplinePath &newSplPath,
                                const quint32 &id,
                                QUndoCommand *parent)
-  : VUndoCommand(doc, parent),
+  : VUndoCommand(doc, id, parent),
     oldSplinePath(oldSplPath),
     newSplinePath(newSplPath),
     scene(VAbstractValApplication::VApp()->getCurrentScene())
 {
     setText(tr("move spline path"));
-    nodeId = id;
 
     SCASSERT(scene != nullptr)
 }
@@ -76,14 +73,13 @@ auto MoveSplinePath::mergeWith(const QUndoCommand *command) -> bool
 {
     const auto *moveCommand = static_cast<const MoveSplinePath *>(command);
     SCASSERT(moveCommand != nullptr)
-    const quint32 id = moveCommand->getSplinePathId();
 
-    if (id != nodeId)
+    if (moveCommand->ElementId() != ElementId())
     {
         return false;
     }
 
-    newSplinePath = moveCommand->getNewSplinePath();
+    newSplinePath = moveCommand->newSplinePath;
     return true;
 }
 
@@ -96,15 +92,15 @@ auto MoveSplinePath::id() const -> int
 //---------------------------------------------------------------------------------------------------------------------
 void MoveSplinePath::Do(const VSplinePath &splPath)
 {
-    QDomElement domElement = doc->FindElementById(nodeId, VAbstractPattern::TagSpline);
+    QDomElement domElement = Doc()->FindElementById(ElementId(), VAbstractPattern::TagSpline);
     if (domElement.isElement())
     {
-        VToolSplinePath::UpdatePathPoints(doc, domElement, splPath);
+        VToolSplinePath::UpdatePathPoints(Doc(), domElement, splPath);
 
         emit NeedLiteParsing(Document::LiteParse);
     }
     else
     {
-        qCDebug(vUndo, "Can't find spline path with id = %u.", nodeId);
+        qCDebug(vUndo, "Can't find spline path with id = %u.", ElementId());
     }
 }

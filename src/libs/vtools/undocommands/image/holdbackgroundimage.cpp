@@ -51,25 +51,25 @@ HoldBackgroundImage::HoldBackgroundImage(QUuid id, bool hold, VAbstractPattern *
 //---------------------------------------------------------------------------------------------------------------------
 void HoldBackgroundImage::undo()
 {
-    VBackgroundPatternImage image = doc->GetBackgroundImage(m_id);
+    VBackgroundPatternImage image = Doc()->GetBackgroundImage(m_id);
 
     if (not image.IsNull())
     {
         image.SetHold(m_oldHold);
-        doc->SaveBackgroundImage(image);
-        emit doc->BackgroundImageHoldChanged(m_id);
+        Doc()->SaveBackgroundImage(image);
+        emit Doc()->BackgroundImageHoldChanged(m_id);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void HoldBackgroundImage::redo()
 {
-    VBackgroundPatternImage image = doc->GetBackgroundImage(m_id);
+    VBackgroundPatternImage image = Doc()->GetBackgroundImage(m_id);
 
     if (not image.IsNull())
     {
         image.SetHold(m_hold);
-        doc->SaveBackgroundImage(image);
-        emit doc->BackgroundImageHoldChanged(m_id);
+        Doc()->SaveBackgroundImage(image);
+        emit Doc()->BackgroundImageHoldChanged(m_id);
     }
 }

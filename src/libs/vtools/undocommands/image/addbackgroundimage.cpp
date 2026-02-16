@@ -40,7 +40,7 @@ void AddBackgroundImage::undo()
 {
     qCDebug(vUndo, "Undo.");
 
-    doc->DeleteBackgroundImage(m_image.Id());
+    Doc()->DeleteBackgroundImage(m_image.Id());
     emit DeleteItem(m_image.Id());
 }
 
@@ -50,8 +50,8 @@ void AddBackgroundImage::redo()
     qCDebug(vUndo, "Redo.");
 
     // Find and remove if already exists
-    doc->DeleteBackgroundImage(m_image.Id());
+    Doc()->DeleteBackgroundImage(m_image.Id());
 
-    doc->SaveBackgroundImage(m_image);
+    Doc()->SaveBackgroundImage(m_image);
     emit AddItem(m_image.Id());
 }

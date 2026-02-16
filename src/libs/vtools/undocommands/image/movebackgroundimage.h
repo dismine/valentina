@@ -48,11 +48,6 @@ public:
     auto mergeWith(const QUndoCommand *command) -> bool override;
     auto id() const -> int override;
 
-    auto ImageId() const -> QUuid;
-    auto Dx() const -> qreal;
-    auto Dy() const -> qreal;
-    auto AllowMerge() const -> bool;
-
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(MoveBackgroundImage) // NOLINT

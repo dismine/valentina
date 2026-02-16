@@ -32,21 +32,19 @@
 
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vwidgets/vmaingraphicsview.h"
-#include "../vmisc/vabstractapplication.h"
 #include "../vtools/tools/drawTools/vdrawtool.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 ShowDoubleLabel::ShowDoubleLabel(
     VAbstractPattern *doc, quint32 toolId, quint32 pointId, bool visible, ShowDoublePoint type, QUndoCommand *parent)
-  : VUndoCommand(doc, parent),
+  : VUndoCommand(doc, pointId, parent),
     m_visible(visible),
     m_oldVisible(not visible),
     m_scene(VAbstractValApplication::VApp()->getCurrentScene()),
     m_type(type),
     m_idTool(toolId)
 {
-    nodeId = pointId;
-    qCDebug(vUndo, "Point id %u", nodeId);
+    qCDebug(vUndo, "Point id %u", pointId);
 
     if (type == ShowDoublePoint::FirstPoint)
     {
@@ -94,21 +92,21 @@ void ShowDoubleLabel::redo()
 //---------------------------------------------------------------------------------------------------------------------
 void ShowDoubleLabel::Do(bool visible)
 {
-    QDomElement domElement = doc->FindElementById(m_idTool, VAbstractPattern::TagPoint);
+    QDomElement domElement = Doc()->FindElementById(m_idTool, VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
         if (m_type == ShowDoublePoint::FirstPoint)
         {
-            doc->SetAttribute<bool>(domElement, AttrShowLabel1, visible);
+            Doc()->SetAttribute<bool>(domElement, AttrShowLabel1, visible);
         }
         else
         {
-            doc->SetAttribute<bool>(domElement, AttrShowLabel2, visible);
+            Doc()->SetAttribute<bool>(domElement, AttrShowLabel2, visible);
         }
 
         if (auto *tool = qobject_cast<VDrawTool *>(VAbstractPattern::getTool(m_idTool)))
         {
-            tool->SetLabelVisible(nodeId, visible);
+            tool->SetLabelVisible(ElementId(), visible);
         }
         VMainGraphicsView::NewSceneRect(m_scene, VAbstractValApplication::VApp()->getSceneView());
     }

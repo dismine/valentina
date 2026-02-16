@@ -36,12 +36,11 @@
 //---------------------------------------------------------------------------------------------------------------------
 SaveToolOptions::SaveToolOptions(
     const QDomElement &oldXml, const QDomElement &newXml, VAbstractPattern *doc, quint32 id, QUndoCommand *parent)
-  : VUndoCommand(doc, parent),
+  : VUndoCommand(doc, id, parent),
     oldXml(oldXml),
     newXml(newXml)
 {
     setText(tr("save tool options"));
-    nodeId = id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -49,10 +48,10 @@ void SaveToolOptions::undo()
 {
     qCDebug(vUndo, "Undo.");
 
-    QDomElement const domElement = doc->FindElementById(nodeId);
+    QDomElement const domElement = Doc()->FindElementById(ElementId());
     if (!domElement.isElement())
     {
-        qCDebug(vUndo, "Can't find tool with id = %u.", nodeId);
+        qCDebug(vUndo, "Can't find tool with id = %u.", ElementId());
         return;
     }
 
@@ -66,10 +65,10 @@ void SaveToolOptions::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    QDomElement const domElement = doc->FindElementById(nodeId);
+    QDomElement const domElement = Doc()->FindElementById(ElementId());
     if (!domElement.isElement())
     {
-        qCDebug(vUndo, "Can't find tool with id = %u.", nodeId);
+        qCDebug(vUndo, "Can't find tool with id = %u.", ElementId());
         return;
     }
 
@@ -86,7 +85,7 @@ auto SaveToolOptions::mergeWith(const QUndoCommand *command) -> bool
 {
     const auto *saveCommand = static_cast<const SaveToolOptions *>(command);
 
-    if (saveCommand->nodeId != nodeId)
+    if (saveCommand->ElementId() != ElementId())
     {
         return false;
     }

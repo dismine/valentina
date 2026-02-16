@@ -61,8 +61,8 @@ void DeletePatternPiece::undo()
 {
     qCDebug(vUndo, "Undo.");
 
-    const VPatternBlockMapper *blocks = doc->PatternBlockMapper();
-    QDomElement rootElement = doc->documentElement();
+    const VPatternBlockMapper *blocks = Doc()->PatternBlockMapper();
+    QDomElement rootElement = Doc()->documentElement();
 
     if (!m_previousPatternBlockName.isEmpty())
     { // not first in the list, add after tag draw
@@ -85,7 +85,8 @@ void DeletePatternPiece::undo()
     emit NeedFullParsing();
     if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
     {
-        emit doc->ShowPatternBlock(blocks->FindName(m_indexPatternBlock)); // Without this user will not see this change
+        emit Doc()->ShowPatternBlock(
+            blocks->FindName(m_indexPatternBlock)); // Without this user will not see this change
     }
 }
 
@@ -94,14 +95,15 @@ void DeletePatternPiece::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    const VPatternBlockMapper *blocks = doc->PatternBlockMapper();
+    const VPatternBlockMapper *blocks = Doc()->PatternBlockMapper();
 
     if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
     {
-        emit doc->ShowPatternBlock(blocks->FindName(m_indexPatternBlock)); // Without this user will not see this change
+        emit Doc()->ShowPatternBlock(
+            blocks->FindName(m_indexPatternBlock)); // Without this user will not see this change
     }
 
-    QDomElement rootElement = doc->documentElement();
+    QDomElement rootElement = Doc()->documentElement();
     const QDomElement patternPieceElement = blocks->GetElementById(m_indexPatternBlock);
     rootElement.removeChild(patternPieceElement);
     emit NeedFullParsing();

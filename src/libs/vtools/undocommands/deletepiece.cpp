@@ -43,22 +43,21 @@
 //---------------------------------------------------------------------------------------------------------------------
 DeletePiece::DeletePiece(
     VAbstractPattern *doc, quint32 id, const VContainer &data, VMainGraphicsScene *scene, QUndoCommand *parent)
-  : VUndoCommand(doc, parent),
+  : VUndoCommand(doc, id, parent),
     m_detail(data.GetPiece(id)),
     m_data(data),
     m_scene(scene),
     m_record(VAbstractTool::GetRecord(id, Tool::Piece, doc))
 {
     setText(tr("delete tool"));
-    nodeId = id;
     QDomElement const domElement = doc->FindElementById(id, VAbstractPattern::TagDetail);
     if (!domElement.isElement())
     {
-        qCDebug(vUndo, "Can't get detail by id = %u.", nodeId);
+        qCDebug(vUndo, "Can't get detail by id = %u.", id);
         return;
     }
 
-    xml = domElement.cloneNode().toElement();
+    SetElement(domElement.cloneNode().toElement());
     m_parentNode = domElement.parentNode();
     QDomNode const previousDetail = domElement.previousSibling();
     if (previousDetail.isNull())
@@ -74,7 +73,7 @@ DeletePiece::DeletePiece(
     VPatternGraph const *patternGraph = doc->PatternGraph();
     SCASSERT(patternGraph != nullptr)
 
-    if (const auto node = patternGraph->GetVertex(nodeId))
+    if (const auto node = patternGraph->GetVertex(id))
     {
         m_indexPatternBlock = node->indexPatternBlock;
     }
@@ -93,26 +92,26 @@ void DeletePiece::undo()
 
     UndoDeleteAfterSibling(m_parentNode, m_siblingId, VAbstractPattern::TagDetail);
 
-    VAbstractPattern::AddTool(nodeId, m_tool);
-    m_data.UpdatePiece(nodeId, m_detail);
+    VAbstractPattern::AddTool(ElementId(), m_tool);
+    m_data.UpdatePiece(ElementId(), m_detail);
 
-    VPatternGraph *patternGraph = doc->PatternGraph();
+    VPatternGraph *patternGraph = Doc()->PatternGraph();
     SCASSERT(patternGraph != nullptr)
 
-    patternGraph->AddVertex(nodeId, VNodeType::PIECE, m_indexPatternBlock);
+    patternGraph->AddVertex(ElementId(), VNodeType::PIECE, m_indexPatternBlock);
 
     const auto varData = m_data.DataDependencyVariables();
-    VToolSeamAllowance::AddPieceDependencies(nodeId, m_detail, doc, varData);
+    VToolSeamAllowance::AddPieceDependencies(ElementId(), m_detail, Doc(), varData);
 
     m_tool->ReinitInternals(m_detail, m_scene);
 
-    VAbstractTool::AddRecord(m_record, doc);
+    VAbstractTool::AddRecord(m_record, Doc());
     m_scene->addItem(m_tool);
     m_tool->ConnectOutsideSignals();
     m_tool->show();
     VMainGraphicsView::NewSceneRect(m_scene, VAbstractValApplication::VApp()->getSceneView(), m_tool);
     m_tool.clear();
-    emit doc->UpdateInLayoutList();
+    emit Doc()->UpdateInLayoutList();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -120,16 +119,16 @@ void DeletePiece::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    QDomElement const domElement = doc->FindElementById(nodeId, VAbstractPattern::TagDetail);
+    QDomElement const domElement = Doc()->FindElementById(ElementId(), VAbstractPattern::TagDetail);
     if (!domElement.isElement())
     {
-        qCDebug(vUndo, "Can't get detail by id = %u.", nodeId);
+        qCDebug(vUndo, "Can't get detail by id = %u.", ElementId());
         return;
     }
 
     m_parentNode.removeChild(domElement);
 
-    m_tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId));
+    m_tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(ElementId()));
     SCASSERT(not m_tool.isNull());
     m_tool->DisconnectOutsideSignals();
     m_tool->EnableToolMove(true);
@@ -138,13 +137,13 @@ void DeletePiece::redo()
 
     m_scene->removeItem(m_tool);
 
-    VAbstractPattern::RemoveTool(nodeId);
-    m_data.RemovePiece(nodeId);
-    doc->getHistory()->removeOne(m_record);
+    VAbstractPattern::RemoveTool(ElementId());
+    m_data.RemovePiece(ElementId());
+    Doc()->getHistory()->removeOne(m_record);
 
-    VPatternGraph *patternGraph = doc->PatternGraph();
+    VPatternGraph *patternGraph = Doc()->PatternGraph();
     SCASSERT(patternGraph != nullptr)
-    patternGraph->RemoveVertex(nodeId);
+    patternGraph->RemoveVertex(ElementId());
 
-    emit doc->UpdateInLayoutList();
+    emit Doc()->UpdateInLayoutList();
 }

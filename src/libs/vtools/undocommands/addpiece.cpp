@@ -47,9 +47,10 @@ AddPiece::AddPiece(const QDomElement &xml,
     m_data(data)
 {
     setText(tr("add detail"));
-    nodeId = VAbstractPattern::GetParametrId(xml);
-    m_detail = data.GetPiece(nodeId);
-    m_record = VAbstractTool::GetRecord(nodeId, Tool::Piece, doc);
+    const quint32 id = VAbstractPattern::GetParametrId(xml);
+    m_detail = data.GetPiece(id);
+    m_record = VAbstractTool::GetRecord(id, Tool::Piece, doc);
+    SetElementId(id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -70,10 +71,10 @@ void AddPiece::undo()
         return;
     }
 
-    QDomElement const domElement = doc->FindElementById(nodeId, VAbstractPattern::TagDetail);
+    QDomElement const domElement = Doc()->FindElementById(ElementId(), VAbstractPattern::TagDetail);
     if (domElement.isElement())
     {
-        qCDebug(vUndo, "Can't get node by id = %u.", nodeId);
+        qCDebug(vUndo, "Can't get node by id = %u.", ElementId());
         return;
     }
 
@@ -83,7 +84,7 @@ void AddPiece::undo()
         return;
     }
 
-    m_tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId));
+    m_tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(ElementId()));
     SCASSERT(not m_tool.isNull());
     m_tool->DisconnectOutsideSignals();
     m_tool->hide();
@@ -91,16 +92,16 @@ void AddPiece::undo()
 
     m_scene->removeItem(m_tool);
 
-    VAbstractPattern::RemoveTool(nodeId);
-    m_data.RemovePiece(nodeId);
-    doc->getHistory()->removeOne(m_record);
+    VAbstractPattern::RemoveTool(ElementId());
+    m_data.RemovePiece(ElementId());
+    Doc()->getHistory()->removeOne(m_record);
 
-    VPatternGraph *patternGraph = doc->PatternGraph();
+    VPatternGraph *patternGraph = Doc()->PatternGraph();
     SCASSERT(patternGraph != nullptr)
 
-    patternGraph->RemoveVertex(nodeId);
+    patternGraph->RemoveVertex(ElementId());
 
-    emit doc->UpdateInLayoutList();
+    emit Doc()->UpdateInLayoutList();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -115,24 +116,24 @@ void AddPiece::redo()
         return;
     }
 
-    details.appendChild(xml);
+    details.appendChild(GetElement());
 
     if (not m_tool.isNull())
     {
-        VPatternGraph *patternGraph = doc->PatternGraph();
+        VPatternGraph *patternGraph = Doc()->PatternGraph();
         SCASSERT(patternGraph != nullptr)
 
-        patternGraph->AddVertex(nodeId, VNodeType::PIECE, doc->PatternBlockMapper()->FindId(m_drawName));
+        patternGraph->AddVertex(ElementId(), VNodeType::PIECE, Doc()->PatternBlockMapper()->FindId(m_drawName));
 
         const auto varData = m_data.DataDependencyVariables();
-        VToolSeamAllowance::AddPieceDependencies(nodeId, m_detail, doc, varData);
+        VToolSeamAllowance::AddPieceDependencies(ElementId(), m_detail, Doc(), varData);
 
-        VAbstractPattern::AddTool(nodeId, m_tool);
-        m_data.UpdatePiece(nodeId, m_detail);
+        VAbstractPattern::AddTool(ElementId(), m_tool);
+        m_data.UpdatePiece(ElementId(), m_detail);
 
         m_tool->ReinitInternals(m_detail, m_scene);
 
-        VAbstractTool::AddRecord(m_record, doc);
+        VAbstractTool::AddRecord(m_record, Doc());
         m_scene->addItem(m_tool);
         m_tool->ConnectOutsideSignals();
         m_tool->show();
@@ -140,7 +141,7 @@ void AddPiece::redo()
         m_tool.clear();
     }
 
-    emit doc->UpdateInLayoutList();
+    emit Doc()->UpdateInLayoutList();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -149,11 +150,11 @@ auto AddPiece::GetDetailsSection() const -> QDomElement
     QDomElement details;
     if (m_drawName.isEmpty())
     {
-        doc->GetActivNodeElement(VAbstractPattern::TagDetails, details);
+        Doc()->GetActivNodeElement(VAbstractPattern::TagDetails, details);
     }
     else
     {
-        const VPatternBlockMapper *blocks = doc->PatternBlockMapper();
+        const VPatternBlockMapper *blocks = Doc()->PatternBlockMapper();
         details = blocks->GetElement(m_drawName).firstChildElement(VAbstractPattern::TagDetails);
     }
     return details;

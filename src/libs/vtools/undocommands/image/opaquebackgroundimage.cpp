@@ -44,25 +44,25 @@ OpaqueBackgroundImage::OpaqueBackgroundImage(QUuid id, qreal opacity, VAbstractP
 //---------------------------------------------------------------------------------------------------------------------
 void OpaqueBackgroundImage::undo()
 {
-    VBackgroundPatternImage image = doc->GetBackgroundImage(m_id);
+    VBackgroundPatternImage image = Doc()->GetBackgroundImage(m_id);
 
     if (not image.IsNull())
     {
         image.SetOpacity(m_oldOpacity);
-        doc->SaveBackgroundImage(image);
-        emit doc->BackgroundImageOpacityChanged(m_id);
+        Doc()->SaveBackgroundImage(image);
+        emit Doc()->BackgroundImageOpacityChanged(m_id);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void OpaqueBackgroundImage::redo()
 {
-    VBackgroundPatternImage image = doc->GetBackgroundImage(m_id);
+    VBackgroundPatternImage image = Doc()->GetBackgroundImage(m_id);
 
     if (not image.IsNull())
     {
         image.SetOpacity(m_opacity);
-        doc->SaveBackgroundImage(image);
-        emit doc->BackgroundImageOpacityChanged(m_id);
+        Doc()->SaveBackgroundImage(image);
+        emit Doc()->BackgroundImageOpacityChanged(m_id);
     }
 }

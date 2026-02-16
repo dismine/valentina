@@ -51,25 +51,25 @@ HideBackgroundImage::HideBackgroundImage(QUuid id, bool hide, VAbstractPattern *
 //---------------------------------------------------------------------------------------------------------------------
 void HideBackgroundImage::undo()
 {
-    VBackgroundPatternImage image = doc->GetBackgroundImage(m_id);
+    VBackgroundPatternImage image = Doc()->GetBackgroundImage(m_id);
 
     if (not image.IsNull())
     {
         image.SetVisible(m_oldVisibility);
-        doc->SaveBackgroundImage(image);
-        emit doc->BackgroundImageVisibilityChanged(m_id);
+        Doc()->SaveBackgroundImage(image);
+        emit Doc()->BackgroundImageVisibilityChanged(m_id);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void HideBackgroundImage::redo()
 {
-    VBackgroundPatternImage image = doc->GetBackgroundImage(m_id);
+    VBackgroundPatternImage image = Doc()->GetBackgroundImage(m_id);
 
     if (not image.IsNull())
     {
         image.SetVisible(not m_hide);
-        doc->SaveBackgroundImage(image);
-        emit doc->BackgroundImageVisibilityChanged(m_id);
+        Doc()->SaveBackgroundImage(image);
+        emit Doc()->BackgroundImageVisibilityChanged(m_id);
     }
 }

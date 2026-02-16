@@ -32,33 +32,31 @@
 
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vwidgets/vmaingraphicsview.h"
-#include "../vmisc/vabstractapplication.h"
 #include "../vtools/tools/drawTools/vdrawtool.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 OperationShowLabel::OperationShowLabel(
     VAbstractPattern *doc, quint32 idTool, quint32 idPoint, bool visible, QUndoCommand *parent)
-  : VUndoCommand(doc, parent),
+  : VUndoCommand(doc, idPoint, parent),
     m_visible(visible),
     m_oldVisible(not visible),
     m_scene(VAbstractValApplication::VApp()->getCurrentScene()),
     m_idTool(idTool)
 {
-    nodeId = idPoint;
-    qCDebug(vUndo, "Point id %u", nodeId);
+    qCDebug(vUndo, "Point id %u", idPoint);
 
     setText(tr("toggle label"));
 
     qCDebug(vUndo, "Tool id %u", m_idTool);
 
-    const QDomElement element = GetDestinationObject(m_idTool, nodeId);
+    const QDomElement element = GetDestinationObject(m_idTool, idPoint);
     if (element.isElement())
     {
         m_oldVisible = VDomDocument::GetParametrBool(element, AttrShowLabel, trueStr);
     }
     else
     {
-        qCDebug(vUndo, "Can't find point with id = %u.", nodeId);
+        qCDebug(vUndo, "Can't find point with id = %u.", idPoint);
     }
 }
 
@@ -81,20 +79,20 @@ void OperationShowLabel::redo()
 //---------------------------------------------------------------------------------------------------------------------
 void OperationShowLabel::Do(bool visible)
 {
-    QDomElement domElement = GetDestinationObject(m_idTool, nodeId);
+    QDomElement domElement = GetDestinationObject(m_idTool, ElementId());
     if (not domElement.isNull() && domElement.isElement())
     {
-        doc->SetAttribute<bool>(domElement, AttrShowLabel, visible);
+        Doc()->SetAttribute<bool>(domElement, AttrShowLabel, visible);
 
         if (auto *tool = qobject_cast<VDrawTool *>(VAbstractPattern::getTool(m_idTool)))
         {
-            tool->SetLabelVisible(nodeId, visible);
+            tool->SetLabelVisible(ElementId(), visible);
         }
         VMainGraphicsView::NewSceneRect(m_scene, VAbstractValApplication::VApp()->getSceneView());
     }
     else
     {
-        qCDebug(vUndo, "Can't find point with id = %u.", nodeId);
+        qCDebug(vUndo, "Can't find point with id = %u.", ElementId());
     }
 }
 

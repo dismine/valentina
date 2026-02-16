@@ -53,27 +53,27 @@ HideAllBackgroundImages::HideAllBackgroundImages(bool hide, VAbstractPattern *do
 //---------------------------------------------------------------------------------------------------------------------
 void HideAllBackgroundImages::undo()
 {
-    QVector<VBackgroundPatternImage> images = doc->GetBackgroundImages();
+    QVector<VBackgroundPatternImage> images = Doc()->GetBackgroundImages();
 
     for (auto &image : images)
     {
         image.SetVisible(m_oldVisibility.value(image.Id(), image.Visible()));
     }
 
-    doc->SaveBackgroundImages(images);
-    emit doc->BackgroundImagesVisibilityChanged();
+    Doc()->SaveBackgroundImages(images);
+    emit Doc()->BackgroundImagesVisibilityChanged();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void HideAllBackgroundImages::redo()
 {
-    QVector<VBackgroundPatternImage> images = doc->GetBackgroundImages();
+    QVector<VBackgroundPatternImage> images = Doc()->GetBackgroundImages();
 
     for (auto &image : images)
     {
         image.SetVisible(not m_hide);
     }
 
-    doc->SaveBackgroundImages(images);
-    emit doc->BackgroundImagesVisibilityChanged();
+    Doc()->SaveBackgroundImages(images);
+    emit Doc()->BackgroundImagesVisibilityChanged();
 }

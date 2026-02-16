@@ -70,21 +70,21 @@ ZValueMoveBackgroundImage::ZValueMoveBackgroundImage(QUuid id,
 //---------------------------------------------------------------------------------------------------------------------
 void ZValueMoveBackgroundImage::undo()
 {
-    QVector<VBackgroundPatternImage> images = doc->GetBackgroundImages();
+    QVector<VBackgroundPatternImage> images = Doc()->GetBackgroundImages();
 
     for (auto &image: images)
     {
         image.SetZValue(m_oldValues.value(image.Id(), image.ZValue()));
     }
 
-    doc->SaveBackgroundImages(images);
-    emit doc->BackgroundImagesZValueChanged();
+    Doc()->SaveBackgroundImages(images);
+    emit Doc()->BackgroundImagesZValueChanged();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void ZValueMoveBackgroundImage::redo()
 {
-    QVector<VBackgroundPatternImage> images = doc->GetBackgroundImages();
+    QVector<VBackgroundPatternImage> images = Doc()->GetBackgroundImages();
 
     auto Levels = [this](const QVector<VBackgroundPatternImage> &images, bool skip)
     {
@@ -155,6 +155,6 @@ void ZValueMoveBackgroundImage::redo()
         image.SetZValue(correctedZValues.value(image.Id(), image.ZValue()));
     }
 
-    doc->SaveBackgroundImages(images);
-    emit doc->BackgroundImagesZValueChanged();
+    Doc()->SaveBackgroundImages(images);
+    emit Doc()->BackgroundImagesZValueChanged();
 }

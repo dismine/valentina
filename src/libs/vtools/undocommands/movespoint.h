@@ -45,17 +45,13 @@ class MoveSPoint : public VUndoCommand
 public:
     MoveSPoint(VAbstractPattern *doc, const double &x, const double &y, const quint32 &id, QGraphicsScene *scene,
                QUndoCommand *parent = nullptr);
-    ~MoveSPoint() override;
+    ~MoveSPoint() override = default;
 
     void undo() override;
     void redo() override;
 
     auto mergeWith(const QUndoCommand *command) -> bool override;
     auto id() const -> int override;
-
-    auto getSPointId() const -> quint32;
-    auto getNewX() const -> double;
-    auto getNewY() const -> double;
 
     void Do(double x, double y);
 
@@ -68,23 +64,5 @@ private:
     double newY;
     QGraphicsScene *scene;
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto MoveSPoint::getSPointId() const -> quint32
-{
-    return nodeId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto MoveSPoint::getNewX() const -> double
-{
-    return newX;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto MoveSPoint::getNewY() const -> double
-{
-    return newY;
-}
 
 #endif // MOVESPOINT_H

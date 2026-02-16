@@ -53,14 +53,13 @@ auto FixGroups(QMap<quint32, VGroupData> groups, const QMap<quint32, VGroupData>
 
 //---------------------------------------------------------------------------------------------------------------------
 DelTool::DelTool(VAbstractPattern *doc, quint32 id, QUndoCommand *parent)
-  : VUndoCommand(doc, parent),
-    parentNode(doc->ParentNodeById(nodeId)),
-    siblingId(doc->SiblingNodeId(nodeId)),
+  : VUndoCommand(doc, id, parent),
+    parentNode(doc->ParentNodeById(id)),
+    siblingId(doc->SiblingNodeId(id)),
     nameActivDraw(doc->PatternBlockMapper()->GetActive())
 {
     setText(tr("delete tool"));
-    nodeId = id;
-    xml = doc->CloneNodeById(nodeId);
+    SetElement(doc->CloneNodeById(id));
 
     QVector<QPair<vidtype, vidtype>> cleanItems;
     QMap<quint32, VGroupData> const groups = doc->GetGroups(nameActivDraw);
@@ -104,14 +103,14 @@ void DelTool::undo()
 
     if (not m_groupsBefore.isEmpty())
     {
-        UpdateGroups(FixGroups(doc->GetGroups(nameActivDraw), m_groupsBefore));
+        UpdateGroups(FixGroups(Doc()->GetGroups(nameActivDraw), m_groupsBefore));
     }
 
     emit NeedFullParsing();
 
     if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
     {                                          // Keep last!
-        emit doc->ShowPatternBlock(nameActivDraw); // Without this user will not see this change
+        emit Doc()->ShowPatternBlock(nameActivDraw); // Without this user will not see this change
     }
 }
 
@@ -122,14 +121,14 @@ void DelTool::redo()
 
     if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
     {                                          // Keep first!
-        emit doc->ShowPatternBlock(nameActivDraw); // Without this user will not see this change
+        emit Doc()->ShowPatternBlock(nameActivDraw); // Without this user will not see this change
     }
-    QDomElement const domElement = doc->NodeById(nodeId);
+    QDomElement const domElement = Doc()->NodeById(ElementId());
     parentNode.removeChild(domElement);
 
     if (not m_groupsAfter.isEmpty())
     {
-        UpdateGroups(FixGroups(doc->GetGroups(nameActivDraw), m_groupsAfter));
+        UpdateGroups(FixGroups(Doc()->GetGroups(nameActivDraw), m_groupsAfter));
     }
 
     emit NeedFullParsing();
@@ -138,7 +137,7 @@ void DelTool::redo()
 //---------------------------------------------------------------------------------------------------------------------
 void DelTool::UpdateGroups(const QMap<quint32, VGroupData> &groups) const
 {
-    QDomElement groupsTag = doc->CreateGroups(nameActivDraw);
+    QDomElement groupsTag = Doc()->CreateGroups(nameActivDraw);
     if (not groupsTag.isNull())
     {
         VDomDocument::RemoveAllChildren(groupsTag);
@@ -152,8 +151,8 @@ void DelTool::UpdateGroups(const QMap<quint32, VGroupData> &groups) const
                 groupMap.insert(first, second);
             }
 
-            QDomElement group = doc->CreateGroup(i.key(), i.value().name, i.value().tags, groupMap, i.value().tool);
-            doc->SetAttribute(group, VAbstractPattern::AttrVisible, i.value().visible);
+            QDomElement group = Doc()->CreateGroup(i.key(), i.value().name, i.value().tags, groupMap, i.value().tool);
+            Doc()->SetAttribute(group, VAbstractPattern::AttrVisible, i.value().visible);
             groupsTag.appendChild(group);
 
             ++i;

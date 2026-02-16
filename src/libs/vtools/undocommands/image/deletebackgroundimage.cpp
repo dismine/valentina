@@ -53,16 +53,16 @@ void DeleteBackgroundImage::undo()
 {
     qCDebug(vUndo, "Undo.");
 
-    QVector<VBackgroundPatternImage> allImages = doc->GetBackgroundImages();
+    QVector<VBackgroundPatternImage> allImages = Doc()->GetBackgroundImages();
 
     if (m_index == -1)
     {
-        doc->SaveBackgroundImage(m_image);
+        Doc()->SaveBackgroundImage(m_image);
     }
     else
     {
         allImages.insert(m_index, m_image);
-        doc->SaveBackgroundImages(allImages);
+        Doc()->SaveBackgroundImages(allImages);
     }
 
     emit AddItem(m_image.Id());
@@ -73,7 +73,7 @@ void DeleteBackgroundImage::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    doc->DeleteBackgroundImage(m_image.Id());
+    Doc()->DeleteBackgroundImage(m_image.Id());
 
     emit DeleteItem(m_image.Id());
 }

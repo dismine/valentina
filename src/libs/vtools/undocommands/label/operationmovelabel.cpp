@@ -33,7 +33,6 @@
 
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/ifcdef.h"
-#include "../vmisc/vabstractapplication.h"
 #include "../vmisc/def.h"
 #include "../vundocommand.h"
 #include "moveabstractlabel.h"
@@ -50,7 +49,7 @@ OperationMoveLabel::OperationMoveLabel(quint32 idTool, VAbstractPattern *doc, co
 
     qCDebug(vUndo, "Tool id %u", m_idTool);
 
-    const QDomElement element = GetDestinationObject(m_idTool, nodeId);
+    const QDomElement element = GetDestinationObject(m_idTool, idPoint);
     if (element.isElement())
     {
         m_oldPos.rx() = VAbstractValApplication::VApp()->toPixel(VDomDocument::GetParametrDouble(element, AttrMx, "0.0"));
@@ -61,7 +60,7 @@ OperationMoveLabel::OperationMoveLabel(quint32 idTool, VAbstractPattern *doc, co
     }
     else
     {
-        qCDebug(vUndo, "Can't find point with id = %u.", nodeId);
+        qCDebug(vUndo, "Can't find point with id = %u.", idPoint);
     }
 }
 
@@ -71,13 +70,13 @@ auto OperationMoveLabel::mergeWith(const QUndoCommand *command) -> bool
     const auto *moveCommand = static_cast<const OperationMoveLabel *>(command);
     SCASSERT(moveCommand != nullptr)
 
-    if (moveCommand->GetToolId() != m_idTool && moveCommand->GetPointId() != nodeId)
+    if (moveCommand->m_idTool != m_idTool && moveCommand->ElementId() != ElementId())
     {
         return false;
     }
 
     qCDebug(vUndo, "Mergin undo.");
-    m_newPos = moveCommand->GetNewPos();
+    m_newPos = moveCommand->m_newPos;
     qCDebug(vUndo, "Label new Mx %f", m_newPos.x());
     qCDebug(vUndo, "Label new My %f", m_newPos.y());
     return true;
@@ -95,19 +94,19 @@ void OperationMoveLabel::Do(const QPointF &pos)
     qCDebug(vUndo, "New mx %f", pos.x());
     qCDebug(vUndo, "New my %f", pos.y());
 
-    QDomElement domElement = GetDestinationObject(m_idTool, nodeId);
+    QDomElement domElement = GetDestinationObject(m_idTool, ElementId());
     if (not domElement.isNull() && domElement.isElement())
     {
-        doc->SetAttribute(domElement, AttrMx, QString().setNum(VAbstractValApplication::VApp()->fromPixel(pos.x())));
-        doc->SetAttribute(domElement, AttrMy, QString().setNum(VAbstractValApplication::VApp()->fromPixel(pos.y())));
+        Doc()->SetAttribute(domElement, AttrMx, QString().setNum(VAbstractValApplication::VApp()->fromPixel(pos.x())));
+        Doc()->SetAttribute(domElement, AttrMy, QString().setNum(VAbstractValApplication::VApp()->fromPixel(pos.y())));
 
         if (auto *tool = qobject_cast<VDrawTool *>(VAbstractPattern::getTool(m_idTool)))
         {
-            tool->ChangeLabelPosition(nodeId, pos);
+            tool->ChangeLabelPosition(ElementId(), pos);
         }
     }
     else
     {
-        qCDebug(vUndo, "Can't find point with id = %u.", nodeId);
+        qCDebug(vUndo, "Can't find point with id = %u.", ElementId());
     }
 }

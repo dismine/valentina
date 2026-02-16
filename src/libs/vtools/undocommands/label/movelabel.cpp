@@ -45,7 +45,7 @@ MoveLabel::MoveLabel(VAbstractPattern *doc, const QPointF &pos, const quint32 &i
 {
     setText(tr("move point label"));
 
-    QDomElement const domElement = doc->FindElementById(nodeId, VAbstractPattern::TagPoint);
+    QDomElement const domElement = doc->FindElementById(id, VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
         m_oldPos.rx() = VAbstractValApplication::VApp()->toPixel(VDomDocument::GetParametrDouble(domElement, AttrMx, "0.0"));
@@ -56,7 +56,7 @@ MoveLabel::MoveLabel(VAbstractPattern *doc, const QPointF &pos, const quint32 &i
     }
     else
     {
-        qCDebug(vUndo, "Can't find point with id = %u.", nodeId);
+        qCDebug(vUndo, "Can't find point with id = %u.", id);
     }
 }
 
@@ -66,7 +66,7 @@ auto MoveLabel::mergeWith(const QUndoCommand *command) -> bool
     const auto *moveCommand = static_cast<const MoveLabel *>(command);
     SCASSERT(moveCommand != nullptr)
 
-    if (moveCommand->GetPointId() != nodeId)
+    if (moveCommand->ElementId() != ElementId())
     {
         return false;
     }
@@ -90,19 +90,19 @@ void MoveLabel::Do(const QPointF &pos)
     qCDebug(vUndo, "New mx %f", pos.x());
     qCDebug(vUndo, "New my %f", pos.y());
 
-    QDomElement domElement = doc->FindElementById(nodeId, VAbstractPattern::TagPoint);
+    QDomElement domElement = Doc()->FindElementById(ElementId(), VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
-        doc->SetAttribute(domElement, AttrMx, QString().setNum(VAbstractValApplication::VApp()->fromPixel(pos.x())));
-        doc->SetAttribute(domElement, AttrMy, QString().setNum(VAbstractValApplication::VApp()->fromPixel(pos.y())));
+        Doc()->SetAttribute(domElement, AttrMx, QString().setNum(VAbstractValApplication::VApp()->fromPixel(pos.x())));
+        Doc()->SetAttribute(domElement, AttrMy, QString().setNum(VAbstractValApplication::VApp()->fromPixel(pos.y())));
 
-        if (auto *tool = qobject_cast<VAbstractTool *>(VAbstractPattern::getTool(nodeId)))
+        if (auto *tool = qobject_cast<VAbstractTool *>(VAbstractPattern::getTool(ElementId())))
         {
-            tool->ChangeLabelPosition(nodeId, pos);
+            tool->ChangeLabelPosition(ElementId(), pos);
         }
     }
     else
     {
-        qCDebug(vUndo, "Can't find point with id = %u.", nodeId);
+        qCDebug(vUndo, "Can't find point with id = %u.", ElementId());
     }
 }

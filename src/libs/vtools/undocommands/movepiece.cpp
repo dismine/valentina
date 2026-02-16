@@ -45,7 +45,7 @@ MovePiece::MovePiece(VAbstractPattern *doc,
                      const quint32 &id,
                      QGraphicsScene *scene,
                      QUndoCommand *parent)
-  : VUndoCommand(doc, parent),
+  : VUndoCommand(doc, id, parent),
     m_oldX(0.0),
     m_oldY(0.0),
     m_newX(x),
@@ -53,7 +53,6 @@ MovePiece::MovePiece(VAbstractPattern *doc,
     m_scene(scene)
 {
     setText(QObject::tr("move detail"));
-    nodeId = id;
 
     SCASSERT(scene != nullptr)
     QDomElement const domElement = doc->FindElementById(id, VAbstractPattern::TagDetail);
@@ -64,7 +63,7 @@ MovePiece::MovePiece(VAbstractPattern *doc,
     }
     else
     {
-        qCDebug(vUndo, "Can't find detail with id = %u.", nodeId);
+        qCDebug(vUndo, "Can't find detail with id = %u.", id);
     }
 }
 
@@ -88,15 +87,14 @@ auto MovePiece::mergeWith(const QUndoCommand *command) -> bool
 {
     const auto *moveCommand = static_cast<const MovePiece *>(command);
     SCASSERT(moveCommand != nullptr)
-    const quint32 id = moveCommand->getDetId();
 
-    if (id != nodeId)
+    if (moveCommand->ElementId() != ElementId())
     {
         return false;
     }
 
-    m_newX = moveCommand->getNewX();
-    m_newY = moveCommand->getNewY();
+    m_newX = moveCommand->m_newX;
+    m_newY = moveCommand->m_newY;
     return true;
 }
 
@@ -111,12 +109,12 @@ void MovePiece::Do(qreal x, qreal y)
 {
     qCDebug(vUndo, "Do.");
 
-    QDomElement domElement = doc->FindElementById(nodeId, VAbstractPattern::TagDetail);
+    QDomElement domElement = Doc()->FindElementById(ElementId(), VAbstractPattern::TagDetail);
     if (domElement.isElement())
     {
         SaveCoordinates(domElement, x, y);
 
-        auto *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId));
+        auto *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(ElementId()));
         if (tool != nullptr)
         {
             tool->Move(x, y);
@@ -125,13 +123,13 @@ void MovePiece::Do(qreal x, qreal y)
     }
     else
     {
-        qCDebug(vUndo, "Can't find detail with id = %u.", nodeId);
+        qCDebug(vUndo, "Can't find detail with id = %u.", ElementId());
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void MovePiece::SaveCoordinates(QDomElement &domElement, double x, double y)
 {
-    doc->SetAttribute(domElement, AttrMx, QString().setNum(VAbstractValApplication::VApp()->fromPixel(x)));
-    doc->SetAttribute(domElement, AttrMy, QString().setNum(VAbstractValApplication::VApp()->fromPixel(y)));
+    Doc()->SetAttribute(domElement, AttrMx, QString().setNum(VAbstractValApplication::VApp()->fromPixel(x)));
+    Doc()->SetAttribute(domElement, AttrMy, QString().setNum(VAbstractValApplication::VApp()->fromPixel(y)));
 }

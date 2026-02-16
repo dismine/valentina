@@ -41,20 +41,15 @@
 //---------------------------------------------------------------------------------------------------------------------
 MoveSpline::MoveSpline(
     VAbstractPattern *doc, const VSpline &oldSpl, const VSpline &newSpl, const quint32 &id, QUndoCommand *parent)
-  : VUndoCommand(doc, parent),
+  : VUndoCommand(doc, id, parent),
     oldSpline(oldSpl),
     newSpline(newSpl),
     scene(VAbstractValApplication::VApp()->getCurrentScene())
 {
     setText(tr("move spline"));
-    nodeId = id;
 
     SCASSERT(scene != nullptr)
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-MoveSpline::~MoveSpline()
-{}
 
 //---------------------------------------------------------------------------------------------------------------------
 void MoveSpline::undo()
@@ -77,14 +72,13 @@ auto MoveSpline::mergeWith(const QUndoCommand *command) -> bool
 {
     const auto *moveCommand = static_cast<const MoveSpline *>(command);
     SCASSERT(moveCommand != nullptr)
-    const quint32 splineId = moveCommand->getSplineId();
 
-    if (splineId != nodeId)
+    if (moveCommand->ElementId() != ElementId())
     {
         return false;
     }
 
-    newSpline = moveCommand->getNewSpline();
+    newSpline = moveCommand->newSpline;
     return true;
 }
 
@@ -97,19 +91,20 @@ auto MoveSpline::id() const -> int
 //---------------------------------------------------------------------------------------------------------------------
 void MoveSpline::Do(const VSpline &spl)
 {
-    if (QDomElement domElement = doc->FindElementById(nodeId, VAbstractPattern::TagSpline); domElement.isElement())
+    if (QDomElement domElement = Doc()->FindElementById(ElementId(), VAbstractPattern::TagSpline);
+        domElement.isElement())
     {
-        doc->SetAttribute(domElement, AttrPoint1,  spl.GetP1().id());
-        doc->SetAttribute(domElement, AttrPoint4,  spl.GetP4().id());
-        doc->SetAttribute(domElement, AttrAngle1,  spl.GetStartAngleFormula());
-        doc->SetAttribute(domElement, AttrAngle2,  spl.GetEndAngleFormula());
-        doc->SetAttribute(domElement, AttrLength1, spl.GetC1LengthFormula());
-        doc->SetAttribute(domElement, AttrLength2, spl.GetC2LengthFormula());
+        Doc()->SetAttribute(domElement, AttrPoint1, spl.GetP1().id());
+        Doc()->SetAttribute(domElement, AttrPoint4, spl.GetP4().id());
+        Doc()->SetAttribute(domElement, AttrAngle1, spl.GetStartAngleFormula());
+        Doc()->SetAttribute(domElement, AttrAngle2, spl.GetEndAngleFormula());
+        Doc()->SetAttribute(domElement, AttrLength1, spl.GetC1LengthFormula());
+        Doc()->SetAttribute(domElement, AttrLength2, spl.GetC2LengthFormula());
 
         emit NeedLiteParsing(Document::LiteParse);
     }
     else
     {
-        qCDebug(vUndo, "Can't find spline with id = %u.", nodeId);
+        qCDebug(vUndo, "Can't find spline with id = %u.", ElementId());
     }
 }

@@ -49,9 +49,6 @@ public:
     auto mergeWith(const QUndoCommand *command) -> bool override;
     auto id() const -> int override;
 
-    auto LabelId() const -> quint32;
-    auto NewLabel() const -> VPlaceLabelItem;
-
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(SavePlaceLabelOptions) // NOLINT
@@ -67,18 +64,6 @@ private:
 inline auto SavePlaceLabelOptions::id() const -> int
 {
     return static_cast<int>(UndoCommand::SavePlaceLabelOptions);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto SavePlaceLabelOptions::LabelId() const -> quint32
-{
-    return nodeId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto SavePlaceLabelOptions::NewLabel() const -> VPlaceLabelItem
-{
-    return m_newLabel;
 }
 
 #endif // SAVEPLACELABELOPTIONS_H

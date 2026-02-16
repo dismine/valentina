@@ -46,26 +46,26 @@ RotateBackgroundImage::RotateBackgroundImage(
 //---------------------------------------------------------------------------------------------------------------------
 void RotateBackgroundImage::undo()
 {
-    VBackgroundPatternImage image = doc->GetBackgroundImage(m_id);
+    VBackgroundPatternImage image = Doc()->GetBackgroundImage(m_id);
 
     if (not image.IsNull())
     {
         image.SetMatrix(m_oldMatrix);
-        doc->SaveBackgroundImage(image);
-        emit doc->BackgroundImageTransformationChanged(m_id);
+        Doc()->SaveBackgroundImage(image);
+        emit Doc()->BackgroundImageTransformationChanged(m_id);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void RotateBackgroundImage::redo()
 {
-    VBackgroundPatternImage image = doc->GetBackgroundImage(m_id);
+    VBackgroundPatternImage image = Doc()->GetBackgroundImage(m_id);
 
     if (not image.IsNull())
     {
         image.SetMatrix(m_matrix);
-        doc->SaveBackgroundImage(image);
-        emit doc->BackgroundImageTransformationChanged(m_id);
+        Doc()->SaveBackgroundImage(image);
+        emit Doc()->BackgroundImageTransformationChanged(m_id);
     }
 }
 
@@ -80,12 +80,12 @@ auto RotateBackgroundImage::mergeWith(const QUndoCommand *command) -> bool
     const auto *moveCommand = dynamic_cast<const RotateBackgroundImage *>(command);
     SCASSERT(moveCommand != nullptr)
 
-    if (moveCommand->ImageId() != m_id || not moveCommand->AllowMerge())
+    if (moveCommand->m_id != m_id || !moveCommand->m_allowMerge)
     {
         return false;
     }
 
-    m_matrix = moveCommand->Matrix();
+    m_matrix = moveCommand->m_matrix;
     return true;
 }
 
@@ -93,22 +93,4 @@ auto RotateBackgroundImage::mergeWith(const QUndoCommand *command) -> bool
 auto RotateBackgroundImage::id() const -> int
 {
     return static_cast<int>(UndoCommand::RotateBackGroundImage);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto RotateBackgroundImage::ImageId() const -> QUuid
-{
-    return m_id;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto RotateBackgroundImage::Matrix() const -> QTransform
-{
-    return m_matrix;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto RotateBackgroundImage::AllowMerge() const -> bool
-{
-    return m_allowMerge;
 }

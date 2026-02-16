@@ -62,7 +62,7 @@ MoveToolUp::MoveToolUp(VAbstractPattern *doc, vidtype currentId, vidtype topId, 
 //---------------------------------------------------------------------------------------------------------------------
 void MoveToolUp::undo()
 {
-    QDomElement const currentElement = doc->FindElementById(m_currentId);
+    QDomElement const currentElement = Doc()->FindElementById(m_currentId);
     if (!currentElement.isElement())
     {
         return;
@@ -83,7 +83,8 @@ void MoveToolUp::undo()
     // Restore to original position
     if (m_originalPreviousId != NULL_ID)
     {
-        if (QDomElement const previousElement = doc->FindElementById(m_originalPreviousId); previousElement.isElement())
+        if (QDomElement const previousElement = Doc()->FindElementById(m_originalPreviousId);
+            previousElement.isElement())
         {
             QDomNode previousParent = previousElement.parentNode();
             res = previousParent.insertAfter(currentElement, previousElement);
@@ -101,7 +102,7 @@ void MoveToolUp::undo()
         // Restore to original position
         if (m_topId != NULL_ID)
         {
-            if (QDomElement const topElement = doc->FindElementById(m_topId); topElement.isElement())
+            if (QDomElement const topElement = Doc()->FindElementById(m_topId); topElement.isElement())
             {
                 QDomNode topParent = topElement.parentNode();
                 topParent.insertAfter(currentElement, topElement);
@@ -116,7 +117,7 @@ void MoveToolUp::undo()
         return;
     }
 
-    doc->RefreshElementIdCache();
+    Doc()->RefreshElementIdCache();
 
     emit NeedFullParsing();
 }
@@ -124,7 +125,7 @@ void MoveToolUp::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void MoveToolUp::redo()
 {
-    QDomElement const currentElement = doc->FindElementById(m_currentId);
+    QDomElement const currentElement = Doc()->FindElementById(m_currentId);
     if (!currentElement.isElement())
     {
         return;
@@ -136,7 +137,7 @@ void MoveToolUp::redo()
         return;
     }
 
-    QDomElement const topElement = doc->FindElementById(m_topId);
+    QDomElement const topElement = Doc()->FindElementById(m_topId);
     if (!topElement.isElement())
     {
         return;
@@ -161,7 +162,7 @@ void MoveToolUp::redo()
         // Restore to original position
         if (m_originalPreviousId != NULL_ID)
         {
-            if (QDomElement const previousElement = doc->FindElementById(m_originalPreviousId);
+            if (QDomElement const previousElement = Doc()->FindElementById(m_originalPreviousId);
                 previousElement.isElement())
             {
                 QDomNode previousParent = previousElement.parentNode();
@@ -177,7 +178,7 @@ void MoveToolUp::redo()
         return;
     }
 
-    doc->RefreshElementIdCache();
+    Doc()->RefreshElementIdCache();
 
     emit NeedFullParsing();
 }
@@ -238,7 +239,7 @@ MoveToolDown::MoveToolDown(VAbstractPattern *doc, vidtype currentId, vidtype bot
 //---------------------------------------------------------------------------------------------------------------------
 void MoveToolDown::undo()
 {
-    QDomElement const currentElement = doc->FindElementById(m_currentId);
+    QDomElement const currentElement = Doc()->FindElementById(m_currentId);
     if (!currentElement.isElement())
     {
         return;
@@ -260,7 +261,7 @@ void MoveToolDown::undo()
     // Restore to original position
     if (m_originalNextId != NULL_ID)
     {
-        if (QDomElement const nextElement = doc->FindElementById(m_originalNextId); nextElement.isElement())
+        if (QDomElement const nextElement = Doc()->FindElementById(m_originalNextId); nextElement.isElement())
         {
             QDomNode nextParent = nextElement.parentNode();
             res = nextParent.insertBefore(currentRemovedElement, nextElement);
@@ -278,7 +279,7 @@ void MoveToolDown::undo()
         // Restore to original position
         if (m_bottomId != NULL_ID)
         {
-            if (QDomElement const bottomElement = doc->FindElementById(m_bottomId); bottomElement.isElement())
+            if (QDomElement const bottomElement = Doc()->FindElementById(m_bottomId); bottomElement.isElement())
             {
                 QDomNode bottomParent = bottomElement.parentNode();
                 bottomParent.insertBefore(currentElement, bottomElement);
@@ -293,7 +294,7 @@ void MoveToolDown::undo()
         return;
     }
 
-    doc->RefreshElementIdCache();
+    Doc()->RefreshElementIdCache();
 
     emit NeedFullParsing();
 }
@@ -301,7 +302,7 @@ void MoveToolDown::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void MoveToolDown::redo()
 {
-    QDomElement const currentElement = doc->FindElementById(m_currentId);
+    QDomElement const currentElement = Doc()->FindElementById(m_currentId);
     if (!currentElement.isElement())
     {
         return;
@@ -317,7 +318,7 @@ void MoveToolDown::redo()
 
     if (m_bottomId != NULL_ID)
     {
-        bottomElement = doc->FindElementById(m_bottomId);
+        bottomElement = Doc()->FindElementById(m_bottomId);
         if (!bottomElement.isElement())
         {
             return;
@@ -346,7 +347,7 @@ void MoveToolDown::redo()
         // Restore to original position
         if (m_originalNextId != NULL_ID)
         {
-            if (QDomElement const nextElement = doc->FindElementById(m_originalNextId); nextElement.isElement())
+            if (QDomElement const nextElement = Doc()->FindElementById(m_originalNextId); nextElement.isElement())
             {
                 QDomNode nextParent = nextElement.parentNode();
                 nextParent.insertBefore(currentElement, nextElement);
@@ -361,7 +362,7 @@ void MoveToolDown::redo()
         return;
     }
 
-    doc->RefreshElementIdCache();
+    Doc()->RefreshElementIdCache();
 
     emit NeedFullParsing();
 }

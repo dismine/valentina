@@ -309,10 +309,8 @@ auto ReplaceTokenArc(const QString &token,
 
 //---------------------------------------------------------------------------------------------------------------------
 AbstractObjectRename::AbstractObjectRename(VAbstractPattern *doc, quint32 id, QUndoCommand *parent)
-  : VUndoCommand(doc, parent)
+  : VUndoCommand(doc, id, parent)
 {
-    nodeId = id;
-
     // Do it here in case graph will not be completed when we next time call undo/redo
     const VPatternGraph *graph = doc->PatternGraph();
     auto Filter = [](const auto &node) -> bool { return node.type != VNodeType::OBJECT; };
@@ -355,7 +353,7 @@ void AbstractObjectRename::RenameFormulas()
 
     for (const auto &node : std::as_const(m_dependencies))
     {
-        QDomElement domElement = doc->FindElementById(node.id);
+        QDomElement domElement = Doc()->FindElementById(node.id);
         if (!domElement.isElement())
         {
             continue;
@@ -857,8 +855,8 @@ auto RenameArc::ProcessToken(const QString &token) const -> QString
 
     if (ProcessType() == OperationType::Redo)
     {
-        return ReplaceTokenArc(token, m_type, m_oldCenterLabel, m_newCenterLabel, nodeId, m_duplicate);
+        return ReplaceTokenArc(token, m_type, m_oldCenterLabel, m_newCenterLabel, ElementId(), m_duplicate);
     }
 
-    return ReplaceTokenArc(token, m_type, m_newCenterLabel, m_oldCenterLabel, nodeId, m_duplicate);
+    return ReplaceTokenArc(token, m_type, m_newCenterLabel, m_oldCenterLabel, ElementId(), m_duplicate);
 }
