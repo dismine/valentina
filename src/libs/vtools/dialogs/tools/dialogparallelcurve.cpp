@@ -456,7 +456,8 @@ auto DialogParallelCurve::GenerateDefName() const -> QString
         QString name;
         do
         {
-            path.SetNameSuffix(base + QString::number(num++));
+            name = base + QString::number(num++);
+            path.SetNameSuffix(name);
 
         } while (!data->IsUnique(path.name()));
 
