@@ -84,7 +84,7 @@ VSplinePath::VSplinePath(const QVector<VFSplinePoint> &points, qreal kCurve, qui
     }
 
     d->path = newPoints;
-    CreateName();
+    VSplinePath::CreateName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -98,7 +98,7 @@ VSplinePath::VSplinePath(const QVector<VSplinePoint> &points, quint32 idObject, 
     }
 
     d->path = points;
-    CreateName();
+    VSplinePath::CreateName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -149,14 +149,14 @@ VSplinePath::VSplinePath(const QVector<VSpline> &path, quint32 idObject, Draw mo
     }
 
     d->path = nodes;
-    CreateName();
+    VSplinePath::CreateName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 COPY_CONSTRUCTOR_IMPL_2(VSplinePath, VAbstractCubicBezierPath)
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VSplinePath::Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix) const -> VSplinePath
+auto VSplinePath::Rotate(const QPointF &originPoint, qreal degrees, const QString &name) const -> VSplinePath
 {
     QVector<VSplinePoint> newPoints(CountPoints());
     for (qint32 i = 1; i <= CountSubSpl(); ++i)
@@ -173,21 +173,21 @@ auto VSplinePath::Rotate(const QPointF &originPoint, qreal degrees, const QStrin
     }
 
     VSplinePath splPath(newPoints);
-    splPath.setName(name() + prefix);
-
-    if (not GetAliasSuffix().isEmpty())
+    if (!name.isEmpty())
     {
-        splPath.SetAliasSuffix(GetAliasSuffix() + prefix);
+        splPath.SetNameSuffix(name);
+        splPath.SetMainNameForHistory(name);
     }
 
     splPath.SetColor(GetColor());
     splPath.SetPenStyle(GetPenStyle());
     splPath.SetApproximationScale(GetApproximationScale());
+    splPath.SetDerivative(true);
     return splPath;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VSplinePath::Flip(const QLineF &axis, const QString &prefix) const -> VSplinePath
+auto VSplinePath::Flip(const QLineF &axis, const QString &name) const -> VSplinePath
 {
     QVector<VSplinePoint> newPoints(CountPoints());
     for (qint32 i = 1; i <= CountSubSpl(); ++i)
@@ -204,11 +204,10 @@ auto VSplinePath::Flip(const QLineF &axis, const QString &prefix) const -> VSpli
     }
 
     VSplinePath splPath(newPoints);
-    splPath.setName(name() + prefix);
-
-    if (not GetAliasSuffix().isEmpty())
+    if (!name.isEmpty())
     {
-        splPath.SetAliasSuffix(GetAliasSuffix() + prefix);
+        splPath.SetNameSuffix(name);
+        splPath.SetMainNameForHistory(name);
     }
 
     splPath.SetColor(GetColor());
@@ -218,7 +217,7 @@ auto VSplinePath::Flip(const QLineF &axis, const QString &prefix) const -> VSpli
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VSplinePath::Move(qreal length, qreal angle, const QString &prefix) const -> VSplinePath
+auto VSplinePath::Move(qreal length, qreal angle, const QString &name) const -> VSplinePath
 {
     QVector<VSplinePoint> newPoints(CountPoints());
     for (qint32 i = 1; i <= CountSubSpl(); ++i)
@@ -235,11 +234,10 @@ auto VSplinePath::Move(qreal length, qreal angle, const QString &prefix) const -
     }
 
     VSplinePath splPath(newPoints);
-    splPath.setName(name() + prefix);
-
-    if (not GetAliasSuffix().isEmpty())
+    if (!name.isEmpty())
     {
-        splPath.SetAliasSuffix(GetAliasSuffix() + prefix);
+        splPath.SetNameSuffix(name);
+        splPath.SetMainNameForHistory(name);
     }
 
     splPath.SetColor(GetColor());
@@ -256,7 +254,7 @@ auto VSplinePath::Offset(qreal distance, const QString &name) const -> VSplinePa
         VSplinePath tmp = *this;
         if (!name.isEmpty())
         {
-            tmp.setName(splPath_V + '_'_L1 + name);
+            tmp.SetNameSuffix(name);
             tmp.SetMainNameForHistory(name);
         }
         tmp.SetDerivative(true);
@@ -273,7 +271,7 @@ auto VSplinePath::Offset(qreal distance, const QString &name) const -> VSplinePa
     VSplinePath splPath(offsetPath);
     if (!name.isEmpty())
     {
-        splPath.setName(splPath_V + '_'_L1 + name);
+        splPath.SetNameSuffix(name);
         splPath.SetMainNameForHistory(name);
     }
 
@@ -372,8 +370,11 @@ auto VSplinePath::Outline(const QVector<qreal> &distances, const QString &name) 
     }
 
     VSplinePath splPath(outlinePath);
-    splPath.setName(splPath_V + '_'_L1 + name);
-    splPath.SetMainNameForHistory(name);
+    if (!name.isEmpty())
+    {
+        splPath.SetNameSuffix(name);
+        splPath.SetMainNameForHistory(name);
+    }
     splPath.SetColor(GetColor());
     splPath.SetPenStyle(GetPenStyle());
     splPath.SetApproximationScale(GetApproximationScale());

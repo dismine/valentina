@@ -50,9 +50,9 @@ public:
                  Draw mode = Draw::Calculation);
     ~VCubicBezier() override;
 
-    auto Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const -> VCubicBezier;
-    auto Flip(const QLineF &axis, const QString &prefix = QString()) const -> VCubicBezier;
-    auto Move(qreal length, qreal angle, const QString &prefix = QString()) const -> VCubicBezier;
+    auto Rotate(const QPointF &originPoint, qreal degrees, const QString &name = QString()) const -> VCubicBezier;
+    auto Flip(const QLineF &axis, const QString &name = QString()) const -> VCubicBezier;
+    auto Move(qreal length, qreal angle, const QString &name = QString()) const -> VCubicBezier;
     auto Offset(qreal distance, const QString &name = QString()) const -> VSplinePath override;
     auto Outline(const QVector<qreal> &distances, const QString &name = QString()) const -> VSplinePath override;
 

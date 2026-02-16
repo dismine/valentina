@@ -57,7 +57,7 @@ VCubicBezier::VCubicBezier(const VPointF &p1, const VPointF &p2, const VPointF &
   : VAbstractCubicBezier(GOType::CubicBezier, idObject, mode),
     d(new VCubicBezierData(p1, p2, p3, p4))
 {
-    CreateName();
+    VCubicBezier::CreateName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -88,65 +88,59 @@ auto VCubicBezier::operator=(VCubicBezier &&curve) noexcept -> VCubicBezier &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VCubicBezier::Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix) const -> VCubicBezier
+auto VCubicBezier::Rotate(const QPointF &originPoint, qreal degrees, const QString &name) const -> VCubicBezier
 {
     const VPointF p1 = GetP1().Rotate(originPoint, degrees);
     const VPointF p2 = GetP2().Rotate(originPoint, degrees);
     const VPointF p3 = GetP3().Rotate(originPoint, degrees);
     const VPointF p4 = GetP4().Rotate(originPoint, degrees);
     VCubicBezier curve(p1, p2, p3, p4);
-    curve.setName(name() + prefix);
-
-    if (not GetAliasSuffix().isEmpty())
+    if (!name.isEmpty())
     {
-        curve.SetAliasSuffix(GetAliasSuffix() + prefix);
+        curve.SetNameSuffix(name);
     }
-
     curve.SetColor(GetColor());
     curve.SetPenStyle(GetPenStyle());
     curve.SetApproximationScale(GetApproximationScale());
+    curve.SetDerivative(true);
     return curve;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VCubicBezier::Flip(const QLineF &axis, const QString &prefix) const -> VCubicBezier
+auto VCubicBezier::Flip(const QLineF &axis, const QString &name) const -> VCubicBezier
 {
     const VPointF p1 = GetP1().Flip(axis);
     const VPointF p2 = GetP2().Flip(axis);
     const VPointF p3 = GetP3().Flip(axis);
     const VPointF p4 = GetP4().Flip(axis);
     VCubicBezier curve(p1, p2, p3, p4);
-    curve.setName(name() + prefix);
-
-    if (not GetAliasSuffix().isEmpty())
+    if (!name.isEmpty())
     {
-        curve.SetAliasSuffix(GetAliasSuffix() + prefix);
+        curve.SetNameSuffix(name);
     }
-
     curve.SetColor(GetColor());
     curve.SetPenStyle(GetPenStyle());
     curve.SetApproximationScale(GetApproximationScale());
+    curve.SetDerivative(true);
     return curve;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VCubicBezier::Move(qreal length, qreal angle, const QString &prefix) const -> VCubicBezier
+auto VCubicBezier::Move(qreal length, qreal angle, const QString &name) const -> VCubicBezier
 {
     const VPointF p1 = GetP1().Move(length, angle);
     const VPointF p2 = GetP2().Move(length, angle);
     const VPointF p3 = GetP3().Move(length, angle);
     const VPointF p4 = GetP4().Move(length, angle);
     VCubicBezier curve(p1, p2, p3, p4);
-    curve.setName(name() + prefix);
-
-    if (not GetAliasSuffix().isEmpty())
+    if (!name.isEmpty())
     {
-        curve.SetAliasSuffix(GetAliasSuffix() + prefix);
+        curve.SetNameSuffix(name);
     }
-
     curve.SetColor(GetColor());
     curve.SetPenStyle(GetPenStyle());
     curve.SetApproximationScale(GetApproximationScale());
+    curve.SetDerivative(true);
     return curve;
 }
 
@@ -161,7 +155,7 @@ auto VCubicBezier::Offset(qreal distance, const QString &name) const -> VSplineP
     VSplinePath splPath(subSplines);
     if (!name.isEmpty())
     {
-        splPath.setName(splPath_V + '_'_L1 + name);
+        splPath.SetNameSuffix(name);
         splPath.SetMainNameForHistory(name);
     }
 
@@ -183,7 +177,7 @@ auto VCubicBezier::Outline(const QVector<qreal> &distances, const QString &name)
     VSplinePath splPath(subSplines);
     if (!name.isEmpty())
     {
-        splPath.setName(splPath_V + '_'_L1 + name);
+        splPath.SetNameSuffix(name);
         splPath.SetMainNameForHistory(name);
     }
 

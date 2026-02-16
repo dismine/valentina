@@ -311,7 +311,10 @@ auto VAbstractCubicBezierPath::GetMainNameForHistory() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractCubicBezierPath::CreateName()
 {
-    setName(GetTypeHead() + HeadlessName());
+    if (!IsDerivative())
+    {
+        setName(GetTypeHead() + HeadlessName());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

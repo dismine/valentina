@@ -346,7 +346,7 @@ VEllipticalArc::VEllipticalArc(const VPointF &center, qreal radius1, qreal radiu
   : VAbstractArc(GOType::EllipticalArc, center, f1, formulaF1, f2, formulaF2, idObject, mode),
     d(new VEllipticalArcData(radius1, radius2, formulaRadius1, formulaRadius2, rotationAngle, formulaRotationAngle))
 {
-    CreateName();
+    VEllipticalArc::CreateName();
     SetFlipped(radius1 < 0 || radius2 < 0);
 }
 
@@ -356,7 +356,7 @@ VEllipticalArc::VEllipticalArc(const VPointF &center, qreal radius1, qreal radiu
   : VAbstractArc(GOType::EllipticalArc, center, f1, f2, NULL_ID, Draw::Calculation),
     d(new VEllipticalArcData(radius1, radius2, rotationAngle))
 {
-    CreateName();
+    VEllipticalArc::CreateName();
     SetFlipped(radius1 < 0 || radius2 < 0);
 }
 
@@ -368,7 +368,7 @@ VEllipticalArc::VEllipticalArc(qreal length, const QString &formulaLength, const
   : VAbstractArc(GOType::EllipticalArc, formulaLength, center, f1, formulaF1, idObject, mode),
     d(new VEllipticalArcData(radius1, radius2, formulaRadius1, formulaRadius2, rotationAngle, formulaRotationAngle))
 {
-    CreateName();
+    VEllipticalArc::CreateName();
     FindF2(length);
 }
 
@@ -378,7 +378,7 @@ VEllipticalArc::VEllipticalArc(qreal length, const VPointF &center, qreal radius
   : VAbstractArc(GOType::EllipticalArc, center, f1, NULL_ID, Draw::Calculation),
     d(new VEllipticalArcData(radius1, radius2, rotationAngle))
 {
-    CreateName();
+    VEllipticalArc::CreateName();
     FindF2(length);
     SetFormulaLength(QString::number(length));
 }
@@ -445,6 +445,7 @@ auto VEllipticalArc::Rotate(QPointF originPoint, qreal degrees, const QString &n
     elArc.SetFlipped(IsFlipped());
     elArc.SetTransform(t);
     elArc.SetApproximationScale(GetApproximationScale());
+    elArc.SetDerivative(true);
     return elArc;
 }
 
@@ -468,6 +469,7 @@ auto VEllipticalArc::Flip(const QLineF &axis, const QString &name) const -> VEll
     elArc.SetFlipped(not IsFlipped());
     elArc.SetTransform(d->m_transform * VGObject::FlippingMatrix(d->m_transform.inverted().map(axis)));
     elArc.SetApproximationScale(GetApproximationScale());
+    elArc.SetDerivative(true);
     return elArc;
 }
 
@@ -494,6 +496,7 @@ auto VEllipticalArc::Move(qreal length, qreal angle, const QString &name) const 
     elArc.SetFlipped(IsFlipped());
     elArc.SetTransform(t);
     elArc.SetApproximationScale(GetApproximationScale());
+    elArc.SetDerivative(true);
     return elArc;
 }
 
@@ -742,7 +745,10 @@ auto VEllipticalArc::ToSplinePath() const -> VSplinePath
 //---------------------------------------------------------------------------------------------------------------------
 void VEllipticalArc::CreateName()
 {
-    setName(GetTypeHead() + HeadlessName());
+    if (!IsDerivative())
+    {
+        setName(GetTypeHead() + HeadlessName());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

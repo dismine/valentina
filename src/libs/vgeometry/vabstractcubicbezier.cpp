@@ -520,7 +520,10 @@ auto VAbstractCubicBezier::GetParmT(qreal length) const -> qreal
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractCubicBezier::CreateName()
 {
-    setName(GetTypeHead() + HeadlessName());
+    if (!IsDerivative())
+    {
+        setName(GetTypeHead() + HeadlessName());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

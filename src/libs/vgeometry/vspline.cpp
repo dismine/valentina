@@ -304,7 +304,7 @@ VSpline::VSpline(const VPointF &p1, const VPointF &p4, qreal angle1, qreal angle
   : VAbstractCubicBezier(GOType::Spline, idObject, mode),
     d(new VSplineData(p1, p4, angle1, angle2, kAsm1, kAsm2, kCurve))
 {
-    CreateName();
+    VSpline::CreateName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -320,7 +320,7 @@ VSpline::VSpline(const VPointF &p1, const QPointF &p2, const QPointF &p3, const 
   : VAbstractCubicBezier(GOType::Spline, idObject, mode),
     d(new VSplineData(p1, p2, p3, p4))
 {
-    CreateName();
+    VSpline::CreateName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -344,7 +344,7 @@ VSpline::VSpline(const VPointF &p1, const VPointF &p4, qreal angle1, const QStri
     d(new VSplineData(p1, p4, angle1, angle1Formula, angle2, angle2Formula, c1Length, c1LengthFormula, c2Length,
                       c2LengthFormula))
 {
-    CreateName();
+    VSpline::CreateName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -359,11 +359,12 @@ auto VSpline::Rotate(const QPointF &originPoint, qreal degrees, const QString &n
     VSpline spl(p1, p2, p3, p4);
     if (!name.isEmpty())
     {
-        spl.setName(spl.GetTypeHead() + name);
+        spl.SetNameSuffix(name);
     }
     spl.SetColor(GetColor());
     spl.SetPenStyle(GetPenStyle());
     spl.SetApproximationScale(GetApproximationScale());
+    spl.SetDerivative(true);
     return spl;
 }
 
@@ -379,11 +380,12 @@ auto VSpline::Flip(const QLineF &axis, const QString &name) const -> VSpline
     VSpline spl(p1, p2, p3, p4);
     if (!name.isEmpty())
     {
-        spl.setName(spl.GetTypeHead() + name);
+        spl.SetNameSuffix(name);
     }
     spl.SetColor(GetColor());
     spl.SetPenStyle(GetPenStyle());
     spl.SetApproximationScale(GetApproximationScale());
+    spl.SetDerivative(true);
     return spl;
 }
 
@@ -399,11 +401,12 @@ auto VSpline::Move(qreal length, qreal angle, const QString &name) const -> VSpl
     VSpline spl(p1, p2, p3, p4);
     if (!name.isEmpty())
     {
-        spl.setName(spl.GetTypeHead() + name);
+        spl.SetNameSuffix(name);
     }
     spl.SetColor(GetColor());
     spl.SetPenStyle(GetPenStyle());
     spl.SetApproximationScale(GetApproximationScale());
+    spl.SetDerivative(true);
     return spl;
 }
 
@@ -448,7 +451,7 @@ auto VSpline::Offset(qreal distance, const QString &name) const -> VSplinePath
     VSplinePath splPath(subSplines);
     if (!name.isEmpty())
     {
-        splPath.setName(splPath.GetTypeHead() + name);
+        splPath.SetNameSuffix(name);
         splPath.SetMainNameForHistory(name);
     }
 
@@ -467,7 +470,7 @@ auto VSpline::Outline(const QVector<qreal> &distances, const QString &name) cons
     VSplinePath splPath(subSplines);
     if (!name.isEmpty())
     {
-        splPath.setName(splPath.GetTypeHead() + name);
+        splPath.SetNameSuffix(name);
         splPath.SetMainNameForHistory(name);
     }
 
