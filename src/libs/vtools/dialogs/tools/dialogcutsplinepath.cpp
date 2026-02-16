@@ -151,7 +151,7 @@ auto DialogCutSplinePath::GetName1() const -> QString
 void DialogCutSplinePath::SetName2(const QString &name)
 {
     m_originName2 = name;
-    ui->lineEditName1->setText(m_originName2);
+    ui->lineEditName2->setText(m_originName2);
     ValidateCurveNames();
 }
 
