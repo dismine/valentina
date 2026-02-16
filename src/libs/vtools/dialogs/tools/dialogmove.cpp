@@ -534,11 +534,11 @@ void DialogMove::ShowSourceDetails(int row)
     }
     else
     {
-        auto SetValue = [](QComboBox *box, const QString &value, const QString &def)
+        auto SetValue = [](QComboBox *box, const QString &value, const QString &def) -> void
         {
             const QSignalBlocker blocker(box);
 
-            if (int index = box->findData(value); index != -1)
+            if (int const index = box->findData(value); index != -1)
             {
                 box->setCurrentIndex(index);
             }
