@@ -1157,11 +1157,10 @@ auto GenerateDefSubCurveName(const VContainer *data, quint32 curveId, const QStr
     {
         qint32 num = 1;
         QString name;
-        const QString subName = curve->GetTypeHead() + base;
         do
         {
-            name = subName + QString::number(num++);
-        } while (!data->IsUnique(name));
+            name = base + QString::number(num++);
+        } while (!data->IsUnique(curve->GetTypeHead() + name));
 
         return name;
     };
