@@ -1172,3 +1172,30 @@ auto GenerateDefSubCurveName(const VContainer *data, quint32 curveId, const QStr
 
     return GenerateName(base);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+auto GenerateDefOffsetCurveName(const VContainer *data, quint32 curveId, const QString &derBase, const QString &base)
+    -> QString
+{
+    auto GenerateName = [data](const QString &base) -> QString
+    {
+        VSplinePath path;
+        qint32 num = 1;
+        QString name;
+        do
+        {
+            name = base + QString::number(num++);
+            path.SetNameSuffix(name);
+
+        } while (!data->IsUnique(path.name()));
+
+        return name;
+    };
+    QSharedPointer<VAbstractCurve> const curve = data->GeometricObject<VAbstractCurve>(curveId);
+    if (!curve->IsDerivative())
+    {
+        return GenerateName(curve->HeadlessName() + derBase);
+    }
+
+    return GenerateName(base);
+}

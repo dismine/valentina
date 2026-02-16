@@ -113,5 +113,7 @@ void ChangeCurrentData(QComboBox *box, const QVariant &value);
 auto GetComboBoxCurrentData(const QComboBox *box, const QString &def) -> QString;
 auto GenerateDefSubCurveName(const VContainer *data, quint32 curveId, const QString &derBase, const QString &base)
     -> QString;
+auto GenerateDefOffsetCurveName(const VContainer *data, quint32 curveId, const QString &derBase, const QString &base)
+    -> QString;
 
 #endif // DIALOGTOOLBOX_H

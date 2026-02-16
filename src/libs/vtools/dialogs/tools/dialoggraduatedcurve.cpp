@@ -392,7 +392,7 @@ void DialogGraduatedCurve::ChosenObject(quint32 id, const SceneObject &type)
         }
         prepare = true;
 
-        SetName(GenerateDefName());
+        SetName(GenerateDefOffsetCurveName(data, GetOriginCurveId(), "__o"_L1, "Curve"_L1 + offset_));
 
         auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
         SCASSERT(window != nullptr)
@@ -954,32 +954,6 @@ void DialogGraduatedCurve::ShowHeaderUnits(int column)
     const QString header = ui->tableWidget->horizontalHeaderItem(column)->text();
     const auto unitHeader = QStringLiteral("%1 (%2)").arg(header, unit);
     ui->tableWidget->horizontalHeaderItem(column)->setText(unitHeader);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto DialogGraduatedCurve::GenerateDefName() const -> QString
-{
-    auto GenerateName = [this](const QString &base) -> QString
-    {
-        VSplinePath path;
-        qint32 num = 1;
-        QString name;
-        do
-        {
-            name = base + QString::number(num++);
-            path.SetNameSuffix(name);
-
-        } while (!data->IsUnique(path.name()));
-
-        return name;
-    };
-    QSharedPointer<VAbstractCurve> const curve = data->GeometricObject<VAbstractCurve>(GetOriginCurveId());
-    if (!curve->IsDerivative())
-    {
-        return GenerateName(curve->HeadlessName() + "__o"_L1);
-    }
-
-    return GenerateName("Curve"_L1 + offset_);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

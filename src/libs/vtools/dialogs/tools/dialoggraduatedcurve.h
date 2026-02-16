@@ -143,8 +143,6 @@ private:
     auto VisualizationOffsets() const -> QVector<VRawGraduatedCurveOffset>;
 
     void ShowHeaderUnits(int column);
-
-    auto GenerateDefName() const -> QString;
 };
 
 #endif // DIALOGGRADUATEDCURVE_H

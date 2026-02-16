@@ -119,8 +119,6 @@ private:
     void FinishCreating();
 
     void InitIcons();
-
-    auto GenerateDefName() const -> QString;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

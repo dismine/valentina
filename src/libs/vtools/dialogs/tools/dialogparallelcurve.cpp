@@ -288,7 +288,7 @@ void DialogParallelCurve::ChosenObject(quint32 id, const SceneObject &type)
         }
         prepare = true;
 
-        SetName(GenerateDefName());
+        SetName(GenerateDefOffsetCurveName(data, GetOriginCurveId(), "__o"_L1, "Curve"_L1 + offset_));
 
         auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
         SCASSERT(window != nullptr)
@@ -444,30 +444,4 @@ void DialogParallelCurve::InitIcons()
 
     const auto equalIcon = QStringLiteral("24x24/equal.png");
     ui->label_10->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto DialogParallelCurve::GenerateDefName() const -> QString
-{
-    auto GenerateName = [this](const QString &base) -> QString
-    {
-        VSplinePath path;
-        qint32 num = 1;
-        QString name;
-        do
-        {
-            name = base + QString::number(num++);
-            path.SetNameSuffix(name);
-
-        } while (!data->IsUnique(path.name()));
-
-        return name;
-    };
-    QSharedPointer<VAbstractCurve> const curve = data->GeometricObject<VAbstractCurve>(GetOriginCurveId());
-    if (!curve->IsDerivative())
-    {
-        return GenerateName(curve->HeadlessName() + "__o"_L1);
-    }
-
-    return GenerateName("Curve"_L1 + offset_);
 }
