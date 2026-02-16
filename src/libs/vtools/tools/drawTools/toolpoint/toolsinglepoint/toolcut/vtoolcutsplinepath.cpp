@@ -284,8 +284,8 @@ auto VToolCutSplinePath::CutSplinePath(qreal length, const QSharedPointer<VAbstr
 
     const QVector<VSplinePoint> points = splPath->GetSplinePath();
 
-    const VSplinePoint splP1 = points.at(p1);
-    const VSplinePoint splP2 = points.at(p2);
+    const VSplinePoint &splP1 = points.at(p1);
+    const VSplinePoint &splP2 = points.at(p2);
 
     auto spl1 = VSpline(splP1.P(), spl1p2, spl1p3, *p);
     spl1.SetApproximationScale(splPath->GetApproximationScale());
@@ -442,11 +442,22 @@ auto VToolCutSplinePath::MakeToolTip() const -> QString
         formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     const qreal length = Visualization::FindValFromUser(expression, VAbstractTool::data.DataVariables());
 
-    VSplinePath *splPath1 = nullptr;
-    VSplinePath *splPath2 = nullptr;
-    VPointF *p = VToolCutSplinePath::CutSplinePath(VAbstractValApplication::VApp()->toPixel(length), splPath,
-                                                   QChar('X'), &splPath1, &splPath2);
-    delete p; // Don't need this point
+    QScopedPointer<VSplinePath> splPath1;
+    QScopedPointer<VSplinePath> splPath2;
+
+    VSplinePath *rawSplPath1 = nullptr;
+    VSplinePath *rawSplPath2 = nullptr;
+    delete VToolCutSplinePath::CutSplinePath(VAbstractValApplication::VApp()->toPixel(length),
+                                             splPath,
+                                             QChar('X'),
+                                             &rawSplPath1,
+                                             &rawSplPath2);
+
+    splPath1.reset(rawSplPath1);
+    splPath2.reset(rawSplPath2);
+
+    splPath1->SetNameSuffix(m_name1);
+    splPath2->SetNameSuffix(m_name2);
 
     splPath1->SetAliasSuffix(m_aliasSuffix1);
     splPath2->SetAliasSuffix(m_aliasSuffix2);
@@ -454,23 +465,20 @@ auto VToolCutSplinePath::MakeToolTip() const -> QString
     const QString curveStr = QCoreApplication::translate("VToolCutSplinePath", "Curve");
     const QString lengthStr = QCoreApplication::translate("VToolCutSplinePath", "length");
 
-    const QString toolTip =
-        u"<table>"
-        u"<tr> <td><b>%6:</b> %7</td> </tr>"
-        u"<tr> <td><b>%1:</b> %2 %3</td> </tr>"
-        u"<tr> <td><b>%8:</b> %9</td> </tr>"
-        u"<tr> <td><b>%4:</b> %5 %3</td> </tr>"
-        u"</table>"_s.arg(curveStr + "1 "_L1 + lengthStr)
-            .arg(VAbstractValApplication::VApp()->fromPixel(splPath1->GetLength()))
-            .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), curveStr + "2 "_L1 + lengthStr)
-            .arg(VAbstractValApplication::VApp()->fromPixel(splPath2->GetLength()))
-            .arg(curveStr + " 1"_L1 + QCoreApplication::translate("VToolCutSplinePath", "label"),
-                 splPath1->ObjectName(),
-                 curveStr + " 2"_L1 + QCoreApplication::translate("VToolCutSplinePath", "label"),
-                 splPath2->ObjectName());
-
-    delete splPath1;
-    delete splPath2;
+    const QString toolTip = u"<table>"
+                            u"<tr> <td><b>%6:</b> %7</td> </tr>"
+                            u"<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                            u"<tr> <td><b>%8:</b> %9</td> </tr>"
+                            u"<tr> <td><b>%4:</b> %5 %3</td> </tr>"
+                            u"</table>"_s.arg(curveStr + " 1 "_L1 + lengthStr)
+                                .arg(VAbstractValApplication::VApp()->fromPixel(splPath1->GetLength()))
+                                .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+                                     curveStr + " 2 "_L1 + lengthStr)
+                                .arg(VAbstractValApplication::VApp()->fromPixel(splPath2->GetLength()))
+                                .arg(curveStr + " 1 "_L1 + QCoreApplication::translate("VToolCutSplinePath", "label"),
+                                     splPath1->ObjectName(),
+                                     curveStr + " 2 "_L1 + QCoreApplication::translate("VToolCutSplinePath", "label"),
+                                     splPath2->ObjectName());
 
     return toolTip;
 }

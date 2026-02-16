@@ -390,25 +390,26 @@ auto VToolCutArc::MakeToolTip() const -> QString
 
     if (arc->getType() == GOType::Arc)
     {
-        auto ArcToolTip = [arcStr, lengthStr, startAngleStr, endAngleStr, radiusStr, labelStr](QString toolTip,
-                                                                                               const VArc &arc,
-                                                                                               const QString &arcNumber)
+        auto ArcToolTip =
+            [arcStr, lengthStr, startAngleStr, endAngleStr, radiusStr, labelStr](QString toolTip,
+                                                                                 const VArc &arc,
+                                                                                 const QString &arcNumber) -> QString
         {
             toolTip += u"<tr> <td><b>%10:</b> %11</td> </tr>"
                        u"<tr> <td><b>%1:</b> %2 %3</td> </tr>"
                        u"<tr> <td><b>%4:</b> %5 %3</td> </tr>"
                        u"<tr> <td><b>%6:</b> %7°</td> </tr>"
                        u"<tr> <td><b>%8:</b> %9°</td> </tr>"_s
-                           .arg(arcStr + arcNumber + QChar(QChar::Space) + lengthStr)              // %1
+                           .arg(arcStr + arcNumber + " "_L1 + lengthStr)                           // %1
                            .arg(VAbstractValApplication::VApp()->fromPixel(arc.GetLength()))       // %2
                            .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), // %3
-                                arcStr + arcNumber + QChar(QChar::Space) + radiusStr)              // %4
+                                arcStr + arcNumber + " "_L1 + radiusStr)                           // %4
                            .arg(arc.GetRadius())                                                   // %5
-                           .arg(arcStr + arcNumber + QChar(QChar::Space) + startAngleStr)          // %6
+                           .arg(arcStr + arcNumber + " "_L1 + startAngleStr)                       // %6
                            .arg(arc.GetStartAngle())                                               // %7
-                           .arg(arcStr + arcNumber + QChar(QChar::Space) + endAngleStr)            // %8
+                           .arg(arcStr + arcNumber + " "_L1 + endAngleStr)                         // %8
                            .arg(arc.GetEndAngle())                                                 // %9
-                           .arg(arcStr + arcNumber + QChar(QChar::Space) + labelStr,               // %10
+                           .arg(arcStr + arcNumber + " "_L1 + labelStr,                            // %10
                                 arc.ObjectName());                                                 // %11
             return toolTip;
         };
@@ -418,9 +419,11 @@ auto VToolCutArc::MakeToolTip() const -> QString
         arc->CutArc(VAbstractValApplication::VApp()->toPixel(length), &ar1, &ar2, point->name());
 
         ar1.setId(m_id + 1);
+        ar1.SetNameSuffix(m_name1);
         ar1.SetAliasSuffix(m_aliasSuffix1);
 
         ar2.setId(m_id + 2);
+        ar2.SetNameSuffix(m_name2);
         ar2.SetAliasSuffix(m_aliasSuffix2);
 
         return ArcToolTip(ArcToolTip(QStringLiteral("<table>"), ar1, QChar('1')), ar2, QChar('2'))
@@ -435,7 +438,7 @@ auto VToolCutArc::MakeToolTip() const -> QString
                              endAngleStr,
                              radius1Str,
                              radius2Str,
-                             labelStr](QString toolTip, const VEllipticalArc &arc, const QString &arcNumber)
+                             labelStr](QString toolTip, const VEllipticalArc &arc, const QString &arcNumber) -> QString
         {
             toolTip += u"<tr> <td><b>%12:</b> %13</td> </tr>"
                        u"<tr> <td><b>%1:</b> %2 %3</td> </tr>"
@@ -464,9 +467,11 @@ auto VToolCutArc::MakeToolTip() const -> QString
         arc->CutArc(VAbstractValApplication::VApp()->toPixel(length), &ar1, &ar2, point->name());
 
         ar1.setId(m_id + 1);
+        ar1.SetNameSuffix(m_name1);
         ar1.SetAliasSuffix(m_aliasSuffix1);
 
         ar2.setId(m_id + 2);
+        ar2.SetNameSuffix(m_name2);
         ar2.SetAliasSuffix(m_aliasSuffix2);
 
         return ElArcToolTip(ElArcToolTip(QStringLiteral("<table>"), ar1, QChar('1')), ar2, QChar('2'))

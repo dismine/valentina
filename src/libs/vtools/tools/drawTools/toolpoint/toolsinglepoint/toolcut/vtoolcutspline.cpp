@@ -365,29 +365,30 @@ auto VToolCutSpline::MakeToolTip() const -> QString
         spl->CutSpline(VAbstractValApplication::VApp()->toPixel(length), spl1p2, spl1p3, spl2p2, spl2p3, p->name());
 
     auto spline1 = VSpline(spl->GetP1(), spl1p2, spl1p3, VPointF(point));
+    spline1.SetNameSuffix(m_name1);
     spline1.SetAliasSuffix(m_aliasSuffix1);
 
     auto spline2 = VSpline(VPointF(point), spl2p2, spl2p3, spl->GetP4());
+    spline2.SetNameSuffix(m_name2);
     spline2.SetAliasSuffix(m_aliasSuffix2);
 
     const QString curveStr = QCoreApplication::translate("VToolCutSpline", "Curve");
     const QString lengthStr = QCoreApplication::translate("VToolCutSpline", "length");
 
-    const QString toolTip =
-        u"<table>"
-        u"<tr> <td><b>%6:</b> %7</td> </tr>"
-        u"<tr> <td><b>%1:</b> %2 %3</td> </tr>"
-        u"<tr> <td><b>%8:</b> %9</td> </tr>"
-        u"<tr> <td><b>%4:</b> %5 %3</td> </tr>"
-        u"</table>"_s.arg(curveStr + QStringLiteral("1 ") + lengthStr)
-            .arg(VAbstractValApplication::VApp()->fromPixel(spline1.GetLength()))
-            .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
-                 curveStr + QStringLiteral("2 ") + lengthStr)
-            .arg(VAbstractValApplication::VApp()->fromPixel(spline2.GetLength()))
-            .arg(curveStr + QStringLiteral(" 1") + QCoreApplication::translate("VToolCutSpline", "label"),
-                 spline1.ObjectName(),
-                 curveStr + QStringLiteral(" 2") + QCoreApplication::translate("VToolCutSpline", "label"),
-                 spline2.ObjectName());
+    const QString toolTip = u"<table>"
+                            u"<tr> <td><b>%6:</b> %7</td> </tr>"
+                            u"<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                            u"<tr> <td><b>%8:</b> %9</td> </tr>"
+                            u"<tr> <td><b>%4:</b> %5 %3</td> </tr>"
+                            u"</table>"_s.arg(curveStr + " 1 "_L1 + lengthStr)
+                                .arg(VAbstractValApplication::VApp()->fromPixel(spline1.GetLength()))
+                                .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+                                     curveStr + " 2 "_L1 + lengthStr)
+                                .arg(VAbstractValApplication::VApp()->fromPixel(spline2.GetLength()))
+                                .arg(curveStr + " 1 "_L1 + QCoreApplication::translate("VToolCutSpline", "label"),
+                                     spline1.ObjectName(),
+                                     curveStr + " 2 "_L1 + QCoreApplication::translate("VToolCutSpline", "label"),
+                                     spline2.ObjectName());
 
     return toolTip;
 }
