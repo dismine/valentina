@@ -58,6 +58,8 @@ VToolCut::VToolCut(const VToolCutInitData &initData, QGraphicsItem *parent)
     formula(initData.formula),
     baseCurveId(initData.baseCurveId),
     detailsMode(VAbstractApplication::VApp()->Settings()->IsShowCurveDetails()),
+    m_name1(initData.name1),
+    m_name2(initData.name2),
     m_aliasSuffix1(initData.aliasSuffix1),
     m_aliasSuffix2(initData.aliasSuffix2)
 {
