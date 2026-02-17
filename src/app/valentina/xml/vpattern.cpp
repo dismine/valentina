@@ -3127,7 +3127,17 @@ void VPattern::ParseToolParallelCurve(VMainGraphicsScene *scene, QDomElement &do
         initData.penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         initData.approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
         initData.aliasSuffix = GetParametrEmptyString(domElement, AttrAlias);
-        initData.suffix = GetParametrEmptyString(domElement, AttrSuffix);
+        initData.name = GetParametrEmptyString(domElement, AttrName);
+
+        // We no longer need to handle suffix attribute here. The code can be removed.
+        Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
+        if (initData.name.isEmpty())
+        {
+            const QString suffix = GetParametrEmptyString(domElement, AttrSuffix);
+            const QSharedPointer<VAbstractCurve> curve = initData.data->GeometricObject<VAbstractCurve>(
+                initData.originCurveId);
+            initData.name = curve->HeadlessName() + suffix;
+        }
 
         VToolParallelCurve::Create(initData);
         // Rewrite attribute formula. Need for situation when we have wrong formula.
@@ -3173,7 +3183,7 @@ void VPattern::ParseToolGraduatedCurve(VMainGraphicsScene *scene, QDomElement &d
         initData.penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         initData.approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
         initData.aliasSuffix = GetParametrEmptyString(domElement, AttrAlias);
-        initData.suffix = GetParametrEmptyString(domElement, AttrSuffix);
+        initData.name = GetParametrEmptyString(domElement, AttrName);
         initData.offsets = VToolGraduatedCurve::ExtractOffsetData(domElement);
 
         const QDomNodeList nodeList = domElement.childNodes();
@@ -3185,6 +3195,16 @@ void VPattern::ParseToolGraduatedCurve(VMainGraphicsScene *scene, QDomElement &d
         for (const auto &offsetData : std::as_const(initData.offsets))
         {
             originalFormulas.append(offsetData.formula); // need for saving fixed formula;
+        }
+
+        // We no longer need to handle suffix attribute here. The code can be removed.
+        Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
+        if (initData.name.isEmpty())
+        {
+            const QString suffix = GetParametrEmptyString(domElement, AttrSuffix);
+            const QSharedPointer<VAbstractCurve> curve = initData.data->GeometricObject<VAbstractCurve>(
+                initData.originCurveId);
+            initData.name = curve->HeadlessName() + suffix;
         }
 
         VToolGraduatedCurve::Create(initData);

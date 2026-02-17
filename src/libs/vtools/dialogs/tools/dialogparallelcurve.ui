@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>328</width>
-    <height>364</height>
+    <width>434</width>
+    <height>625</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -309,14 +309,14 @@
           </widget>
          </item>
          <item row="4" column="0">
-          <widget class="QLabel" name="labelSuffix">
+          <widget class="QLabel" name="labelName">
            <property name="text">
-            <string>Suffix:</string>
+            <string>Name:</string>
            </property>
           </widget>
          </item>
          <item row="4" column="1">
-          <widget class="QLineEdit" name="lineEditSuffix"/>
+          <widget class="QLineEdit" name="lineEditName"/>
          </item>
         </layout>
        </item>

@@ -45,7 +45,7 @@ struct VToolGraduatedCurveInitData : VAbstractSplineInitData
 {
     quint32 originCurveId{NULL_ID};                 // NOLINT(misc-non-private-member-variables-in-classes)
     QVector<VRawGraduatedCurveOffset> offsets{};    // NOLINT(misc-non-private-member-variables-in-classes)
-    QString suffix{};                               // NOLINT(misc-non-private-member-variables-in-classes)
+    QString name{};                                 // NOLINT(misc-non-private-member-variables-in-classes)
 };
 
 class VToolGraduatedCurve : public VAbstractSpline
@@ -74,8 +74,8 @@ public:
     auto GetGraduatedOffsets() const -> QVector<VGraduatedCurveOffset>;
     void SetGraduatedOffsets(const QVector<VGraduatedCurveOffset> &offsets);
 
-    auto GetSuffix() const -> QString;
-    void SetSuffix(QString suffix);
+    auto GetName() const -> QString;
+    void SetName(const QString &name);
 
     auto CurveName() const -> QString;
 
@@ -97,7 +97,7 @@ private:
 
     QVector<VRawGraduatedCurveOffset> m_offsets;
     quint32 m_originCurveId;
-    QString m_suffix;
+    QString m_name;
 
     explicit VToolGraduatedCurve(const VToolGraduatedCurveInitData &initData, QGraphicsItem *parent = nullptr);
 

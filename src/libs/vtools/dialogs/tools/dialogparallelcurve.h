@@ -61,8 +61,8 @@ public:
     void SetNotes(const QString &notes);
     auto GetNotes() const -> QString;
 
-    void SetSuffix(const QString &suffix);
-    auto GetSuffix() const -> QString;
+    void SetName(const QString &name);
+    auto GetName() const -> QString;
 
     void SetAliasSuffix(const QString &alias);
     auto GetAliasSuffix() const -> QString;
@@ -89,7 +89,7 @@ protected:
     auto IsValid() const -> bool override;
 
 private slots:
-    void ValidateSuffix();
+    void ValidateName();
     void ValidateAlias();
 
 private:
@@ -98,7 +98,7 @@ private:
 
     /** @brief m_flagWidth true if value of width is correct */
     bool m_flagWidth{false};
-    bool m_flagSuffix{true};
+    bool m_flagName{true};
     bool m_flagAlias{true};
 
     QTimer *m_timerWidth;
@@ -107,7 +107,7 @@ private:
 
     int m_formulaBaseHeightWidth{0};
 
-    QString m_originSuffix{};
+    QString m_originName{};
     QString m_originAliasSuffix{};
 
     bool m_firstRelease{false};
@@ -117,12 +117,14 @@ private:
     void FinishCreating();
 
     void InitIcons();
+
+    auto GenerateDefName() const -> QString;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
 inline auto DialogParallelCurve::IsValid() const -> bool
 {
-    return m_flagWidth && m_flagSuffix && m_flagAlias;
+    return m_flagWidth && m_flagName && m_flagAlias;
 }
 
 #endif // DIALOGPARALLELCURVE_H

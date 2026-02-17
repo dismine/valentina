@@ -30,7 +30,6 @@
 #include "../../visualization/path/vistoolgraduatedcurve.h"
 #include "../../visualization/visualization.h"
 #include "../qmuparser/qmudef.h"
-#include "../qmuparser/qmuparsererror.h"
 #include "../support/dialogeditwrongformula.h"
 #include "../vgeometry/vsplinepath.h"
 #include "../vmisc/theme/vtheme.h"
@@ -107,9 +106,9 @@ DialogGraduatedCurve::DialogGraduatedCurve(const VContainer *data,
 
     ui->doubleSpinBoxApproximationScale->setMaximum(maxCurveApproximationScale);
 
-    ui->lineEditSuffix->setText(VAbstractValApplication::VApp()->getCurrentDocument()->GenerateSuffix());
+    ui->lineEditCurveName->setText(GenerateDefName());
 
-    connect(ui->lineEditSuffix, &QLineEdit::textEdited, this, &DialogGraduatedCurve::ValidateSuffix);
+    connect(ui->lineEditCurveName, &QLineEdit::textEdited, this, &DialogGraduatedCurve::ValidateName);
     connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogGraduatedCurve::ValidateAlias);
 
     vis = new VisToolGraduatedCurve(data);
@@ -288,17 +287,17 @@ auto DialogGraduatedCurve::GetNotes() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogGraduatedCurve::SetSuffix(const QString &suffix)
+void DialogGraduatedCurve::SetName(const QString &name)
 {
-    m_originSuffix = suffix;
-    ui->lineEditSuffix->setText(m_originSuffix);
-    ValidateSuffix();
+    m_originName = name;
+    ui->lineEditCurveName->setText(m_originName);
+    ValidateName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto DialogGraduatedCurve::GetSuffix() const -> QString
+auto DialogGraduatedCurve::GetName() const -> QString
 {
-    return ui->lineEditSuffix->text();
+    return ui->lineEditCurveName->text();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -442,23 +441,21 @@ void DialogGraduatedCurve::changeEvent(QEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogGraduatedCurve::ValidateSuffix()
+void DialogGraduatedCurve::ValidateName()
 {
     const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(GetOriginCurveId());
-    VSplinePath const splPath = curve->Outline({0}, GetSuffix());
+    VSplinePath const splPath = curve->Outline({0}, GetName());
 
-    if (QRegularExpression const rx(NameRegExp());
-        not GetSuffix().isEmpty()
-        && (not rx.match(splPath.name()).hasMatch()
-            || (m_originSuffix != GetSuffix() && not data->IsUnique(splPath.name()))))
+    if (QRegularExpression const rx(NameRegExp()); not GetName().isEmpty() || not rx.match(splPath.name()).hasMatch()
+                                                   || (m_originName != GetName() && not data->IsUnique(splPath.name())))
     {
         m_flagSuffix = false;
-        ChangeColor(ui->labelSuffix, errorColor);
+        ChangeColor(ui->labelName, errorColor);
     }
     else
     {
         m_flagSuffix = true;
-        ChangeColor(ui->labelSuffix, OkColor(this));
+        ChangeColor(ui->labelName, OkColor(this));
     }
 
     CheckState();
@@ -468,7 +465,7 @@ void DialogGraduatedCurve::ValidateSuffix()
 void DialogGraduatedCurve::ValidateAlias()
 {
     const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(GetOriginCurveId());
-    VSplinePath splPath = curve->Offset(0, GetSuffix());
+    VSplinePath splPath = curve->Offset(0, GetName());
 
     splPath.SetAliasSuffix(GetAliasSuffix());
     if (QRegularExpression const rx(NameRegExp());
@@ -946,6 +943,25 @@ void DialogGraduatedCurve::ShowHeaderUnits(int column)
     const QString header = ui->tableWidget->horizontalHeaderItem(column)->text();
     const auto unitHeader = QStringLiteral("%1 (%2)").arg(header, unit);
     ui->tableWidget->horizontalHeaderItem(column)->setText(unitHeader);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogGraduatedCurve::GenerateDefName() const -> QString
+{
+    QSharedPointer<VAbstractCurve> const curve = data->GeometricObject<VAbstractCurve>(GetOriginCurveId());
+    if (!curve->IsDerivative())
+    {
+        return curve->HeadlessName() + VAbstractValApplication::VApp()->getCurrentDocument()->GenerateSuffix();
+    }
+
+    qint32 num = 1;
+    QString name;
+    QString const subName = "Curve"_L1 + offset_;
+    do
+    {
+        name = subName + QString::number(num++);
+    } while (!data->IsUnique(name));
+    return name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

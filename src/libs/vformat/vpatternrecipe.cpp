@@ -1199,7 +1199,7 @@ auto VPatternRecipe::ParallelCurve(const VToolRecord &record) -> QDomElement
 
     ToolAttributes(step, tool);
     SetAttribute(step, AttrCurve, tool->CurveName());
-    SetAttribute(step, AttrSuffix, tool->GetSuffix());
+    SetAttribute(step, AttrName, tool->GetName());
     Formula(step, tool->GetFormulaWidth(), AttrWidth, AttrWidthValue);
 
     CurveAttributes(step, tool);
@@ -1215,7 +1215,7 @@ auto VPatternRecipe::GraduatedCurve(const VToolRecord &record) -> QDomElement
 
     ToolAttributes(step, tool);
     SetAttribute(step, AttrCurve, tool->CurveName());
-    SetAttribute(step, AttrSuffix, tool->GetSuffix());
+    SetAttribute(step, AttrName, tool->GetName());
 
     QDomElement offsetsTag = createElement(QStringLiteral("offsets"));
     QVector<VGraduatedCurveOffset> const offsets = tool->GetGraduatedOffsets();

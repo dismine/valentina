@@ -92,7 +92,7 @@ private:
     template <class Tool> void SetOperationSuffix(VPE::VProperty *property);
 
     template<class Tool>
-    void SetOffsetCurveSuffix(VPE::VProperty *property);
+    void SetSubName(VPE::VProperty *property);
 
     template <class Type> auto GetCrossPoint(const QVariant &value) -> Type;
 
@@ -135,7 +135,7 @@ private:
     template <class Tool> void AddPropertyObjectName(Tool *i, const QString &propertyName, bool readOnly = false);
 
     template<class Tool>
-    void AddPropertySuffix(Tool *i, const QString &propertyName);
+    void AddPropertySubName(Tool *i, const QString &propertyName);
 
     template <class Tool> void AddPropertyAlias(Tool *i, const QString &propertyName);
 

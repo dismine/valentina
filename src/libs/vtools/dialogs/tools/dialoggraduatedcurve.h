@@ -76,8 +76,8 @@ public:
     void SetNotes(const QString &notes);
     auto GetNotes() const -> QString;
 
-    void SetSuffix(const QString &suffix);
-    auto GetSuffix() const -> QString;
+    void SetName(const QString &name);
+    auto GetName() const -> QString;
 
     void SetAliasSuffix(const QString &alias);
     auto GetAliasSuffix() const -> QString;
@@ -98,7 +98,7 @@ protected:
     auto IsValid() const -> bool override;
 
 private slots:
-    void ValidateSuffix();
+    void ValidateName();
     void ValidateAlias();
     void ShowOffsetDetails();
     void AddOffset();
@@ -118,7 +118,7 @@ private:
     bool m_flagSuffix{true};
     bool m_flagAlias{true};
 
-    QString m_originSuffix{};
+    QString m_originName{};
     QString m_originAliasSuffix{};
 
     bool m_firstRelease{false};
@@ -141,6 +141,8 @@ private:
     auto VisualizationOffsets() const -> QVector<VRawGraduatedCurveOffset>;
 
     void ShowHeaderUnits(int column);
+
+    auto GenerateDefName() const -> QString;
 };
 
 #endif // DIALOGGRADUATEDCURVE_H

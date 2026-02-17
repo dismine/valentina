@@ -38,7 +38,7 @@ struct VToolParallelCurveInitData : VAbstractSplineInitData
 {
     quint32 originCurveId{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
     QString formulaWidth{'0'};      // NOLINT(misc-non-private-member-variables-in-classes)
-    QString suffix{};               // NOLINT(misc-non-private-member-variables-in-classes)
+    QString name{};                 // NOLINT(misc-non-private-member-variables-in-classes)
 };
 
 class VToolParallelCurve : public VAbstractSpline
@@ -66,8 +66,8 @@ public:
     auto GetApproximationScale() const -> qreal override;
     void SetApproximationScale(qreal value);
 
-    auto GetSuffix() const -> QString;
-    void SetSuffix(QString suffix);
+    auto GetName() const -> QString;
+    void SetName(const QString &name);
 
     auto CurveName() const -> QString;
 
@@ -87,7 +87,7 @@ private:
 
     QString m_formulaWidth;
     quint32 m_originCurveId;
-    QString m_suffix;
+    QString m_name;
 
     explicit VToolParallelCurve(const VToolParallelCurveInitData &initData, QGraphicsItem *parent = nullptr);
 };

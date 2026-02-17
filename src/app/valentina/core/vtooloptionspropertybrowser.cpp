@@ -114,6 +114,7 @@ QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, AttrHold, ("hold"_L1))       // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, AttrVisible, ("visible"_L1)) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, AttrOpacity, ("opacity"_L1)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, AttrSubName, ("subName"_L1)) // NOLINT
 
 QT_WARNING_POP
 } // namespace
@@ -652,12 +653,12 @@ void VToolOptionsPropertyBrowser::AddPropertyObjectName(Tool *i, const QString &
 
 //---------------------------------------------------------------------------------------------------------------------
 template<class Tool>
-void VToolOptionsPropertyBrowser::AddPropertySuffix(Tool *i, const QString &propertyName)
+void VToolOptionsPropertyBrowser::AddPropertySubName(Tool *i, const QString &propertyName)
 {
     auto *itemName = new VPE::VStringProperty(propertyName);
     itemName->setClearButtonEnable(true);
-    itemName->setValue(VAbstractApplication::VApp()->TrVars()->VarToUser(i->GetSuffix()));
-    AddProperty(itemName, AttrSuffix);
+    itemName->setValue(VAbstractApplication::VApp()->TrVars()->VarToUser(i->GetName()));
+    AddProperty(itemName, *AttrSubName);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1051,36 +1052,32 @@ template <class Tool> void VToolOptionsPropertyBrowser::SetOperationSuffix(VPE::
 
 //---------------------------------------------------------------------------------------------------------------------
 template<class Tool>
-void VToolOptionsPropertyBrowser::SetOffsetCurveSuffix(VPE::VProperty *property)
+void VToolOptionsPropertyBrowser::SetSubName(VPE::VProperty *property)
 {
     if (auto *item = qgraphicsitem_cast<Tool *>(m_currentItem))
     {
-        QString const suffix = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
+        QString const name = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
 
-        if (suffix == item->GetSuffix())
+        if (name == item->GetName())
         {
             return;
         }
 
-        if (suffix.isEmpty())
+        if (name.isEmpty())
         {
-            m_idToProperty[AttrSuffix]->setValue(item->GetSuffix());
+            m_idToProperty[*AttrSubName]->setValue(item->GetName());
             return;
         }
 
         QRegularExpression const rx(NameRegExp());
-        const QStringList uniqueNames = VContainer::AllUniqueNames(valentinaNamespace);
-        for (const auto &uniqueName : uniqueNames)
+        const QString curveName = splPath_V + '_'_L1 + name;
+        if (!rx.match(curveName).hasMatch() || !VContainer::IsUnique(curveName, valentinaNamespace))
         {
-            const QString name = uniqueName + suffix;
-            if (not rx.match(name).hasMatch() || not VContainer::IsUnique(name, valentinaNamespace))
-            {
-                m_idToProperty[AttrSuffix]->setValue(item->GetSuffix());
-                return;
-            }
+            m_idToProperty[*AttrSubName]->setValue(item->GetName());
+            return;
         }
 
-        item->SetSuffix(suffix);
+        item->SetName(name);
     }
     else
     {
@@ -2932,8 +2929,8 @@ void VToolOptionsPropertyBrowser::ChangeDataToolParallelCurve(VPE::VProperty *pr
         case 62: // AttrAlias
             SetAlias<VToolParallelCurve>(property);
             break;
-        case 38: // AttrSuffix
-            SetOffsetCurveSuffix<VToolParallelCurve>(property);
+        case 68: // AttrSubName
+            SetSubName<VToolParallelCurve>(property);
             break;
         default:
             qWarning() << "Unknown property type. id = " << id;
@@ -2970,8 +2967,8 @@ void VToolOptionsPropertyBrowser::ChangeDataToolGraduatedCurve(VPE::VProperty *p
         case 62: // AttrAlias
             SetAlias<VToolGraduatedCurve>(property);
             break;
-        case 38: // AttrSuffix
-            SetOffsetCurveSuffix<VToolGraduatedCurve>(property);
+        case 68: // AttrSubName
+            SetSubName<VToolGraduatedCurve>(property);
             break;
         default:
             qWarning() << "Unknown property type. id = " << id;
@@ -3663,10 +3660,10 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolParallelCurve(QGraphicsItem *it
 
     QPalette const comboBoxPalette = ComboBoxPalette();
 
-    AddPropertyObjectName(i, tr("Name:"), true);
+    AddPropertyObjectName(i, tr("Full name:"), true);
     AddPropertyParentPointName(i->CurveName(), tr("Curve:"), AttrCurve);
     AddPropertyFormula(tr("Width:"), i->GetFormulaWidth(), AttrWidth);
-    AddPropertySuffix(i, tr("Suffix:"));
+    AddPropertySubName(i, tr("Name:"));
     AddPropertyAlias(i, tr("Alias:"));
     AddPropertyCurvePenStyle(i,
                              tr("Pen style:"),
@@ -3686,9 +3683,9 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolGraduatedCurve(QGraphicsItem *i
 
     QPalette const comboBoxPalette = ComboBoxPalette();
 
-    AddPropertyObjectName(i, tr("Name:"), true);
+    AddPropertyObjectName(i, tr("Full name:"), true);
     AddPropertyParentPointName(i->CurveName(), tr("Curve:"), AttrCurve);
-    AddPropertySuffix(i, tr("Suffix:"));
+    AddPropertySubName(i, tr("Name:"));
     AddPropertyAlias(i, tr("Alias:"));
     AddPropertyCurvePenStyle(i,
                              tr("Pen style:"),
@@ -4764,7 +4761,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolParallelCurve()
 
     m_idToProperty[AttrNotes]->setValue(i->GetNotes());
 
-    m_idToProperty[AttrSuffix]->setValue(i->GetSuffix());
+    m_idToProperty[*AttrSubName]->setValue(i->GetName());
 
     m_idToProperty[AttrAlias]->setValue(i->GetAliasSuffix());
 }
@@ -4797,7 +4794,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolGraduatedCurve()
 
     m_idToProperty[AttrNotes]->setValue(i->GetNotes());
 
-    m_idToProperty[AttrSuffix]->setValue(i->GetSuffix());
+    m_idToProperty[*AttrSubName]->setValue(i->GetName());
 
     m_idToProperty[AttrAlias]->setValue(i->GetAliasSuffix());
 }
@@ -4873,7 +4870,8 @@ auto VToolOptionsPropertyBrowser::PropertiesList() -> QStringList
         AttrAlias2,                         /* 64 */
         *AttrHold,                          /* 65 */
         *AttrVisible,                       /* 66 */
-        *AttrOpacity                        /* 67 */
+        *AttrOpacity,                       /* 67 */
+        *AttrSubName                        /* 68 */
     };
     return attr;
 }

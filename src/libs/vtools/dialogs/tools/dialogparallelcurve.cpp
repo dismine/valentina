@@ -39,6 +39,12 @@
 
 #include <QTimer>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 DialogParallelCurve::DialogParallelCurve(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
   : DialogTool(data, doc, toolId, parent),
@@ -77,9 +83,9 @@ DialogParallelCurve::DialogParallelCurve(const VContainer *data, VAbstractPatter
 
     connect(ui->pushButtonGrowLengthWidth, &QPushButton::clicked, this, &DialogParallelCurve::DeployWidthTextEdit);
 
-    ui->lineEditSuffix->setText(VAbstractValApplication::VApp()->getCurrentDocument()->GenerateSuffix());
+    ui->lineEditName->setText(GenerateDefName());
 
-    connect(ui->lineEditSuffix, &QLineEdit::textEdited, this, &DialogParallelCurve::ValidateSuffix);
+    connect(ui->lineEditName, &QLineEdit::textEdited, this, &DialogParallelCurve::ValidateName);
     connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogParallelCurve::ValidateAlias);
 
     vis = new VisToolParallelCurve(data);
@@ -189,17 +195,17 @@ auto DialogParallelCurve::GetNotes() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogParallelCurve::SetSuffix(const QString &suffix)
+void DialogParallelCurve::SetName(const QString &name)
 {
-    m_originSuffix = suffix;
-    ui->lineEditSuffix->setText(m_originSuffix);
-    ValidateSuffix();
+    m_originName = name;
+    ui->lineEditName->setText(m_originName);
+    ValidateName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto DialogParallelCurve::GetSuffix() const -> QString
+auto DialogParallelCurve::GetName() const -> QString
 {
-    return ui->lineEditSuffix->text();
+    return ui->lineEditName->text();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -353,23 +359,21 @@ void DialogParallelCurve::changeEvent(QEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogParallelCurve::ValidateSuffix()
+void DialogParallelCurve::ValidateName()
 {
     const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(GetOriginCurveId());
-    VSplinePath const splPath = curve->Offset(0, GetSuffix());
+    VSplinePath const splPath = curve->Offset(0, GetName());
 
-    if (QRegularExpression const rx(NameRegExp());
-        not GetSuffix().isEmpty()
-        && (not rx.match(splPath.name()).hasMatch()
-            || (m_originSuffix != GetSuffix() && not data->IsUnique(splPath.name()))))
+    if (QRegularExpression const rx(NameRegExp()); GetName().isEmpty() || not rx.match(splPath.name()).hasMatch()
+                                                   || (m_originName != GetName() && not data->IsUnique(splPath.name())))
     {
-        m_flagSuffix = false;
-        ChangeColor(ui->labelSuffix, errorColor);
+        m_flagName = false;
+        ChangeColor(ui->labelName, errorColor);
     }
     else
     {
-        m_flagSuffix = true;
-        ChangeColor(ui->labelSuffix, OkColor(this));
+        m_flagName = true;
+        ChangeColor(ui->labelName, OkColor(this));
     }
 
     CheckState();
@@ -379,7 +383,7 @@ void DialogParallelCurve::ValidateSuffix()
 void DialogParallelCurve::ValidateAlias()
 {
     const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(GetOriginCurveId());
-    VSplinePath splPath = curve->Offset(0, GetSuffix());
+    VSplinePath splPath = curve->Offset(0, GetName());
 
     splPath.SetAliasSuffix(GetAliasSuffix());
     if (QRegularExpression const rx(NameRegExp());
@@ -432,4 +436,23 @@ void DialogParallelCurve::InitIcons()
 
     const auto equalIcon = QStringLiteral("24x24/equal.png");
     ui->label_10->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogParallelCurve::GenerateDefName() const -> QString
+{
+    QSharedPointer<VAbstractCurve> const curve = data->GeometricObject<VAbstractCurve>(GetOriginCurveId());
+    if (!curve->IsDerivative())
+    {
+        return curve->HeadlessName() + VAbstractValApplication::VApp()->getCurrentDocument()->GenerateSuffix();
+    }
+
+    qint32 num = 1;
+    QString name;
+    QString const subName = "Curve"_L1 + offset_;
+    do
+    {
+        name = subName + QString::number(num++);
+    } while (!data->IsUnique(name));
+    return name;
 }
