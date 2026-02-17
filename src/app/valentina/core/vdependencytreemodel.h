@@ -116,7 +116,6 @@ private:
     auto FetchDependenciesForObject(vidtype objectId) const -> QVector<vidtype>;
     auto GetDisplayNameForObject(vidtype objectId) const -> QString; // Fetch display name
     auto GetDisplayToolTipForObject(vidtype objectId) const -> QString;
-    auto CanHaveChildren(vidtype objectId) const -> bool; // Quick check if object can have dependencies
 
     // Smart update helpers
     void UpdateNodeChildren(VDependencyNode *node, const QVector<vidtype> &newDependencies);
