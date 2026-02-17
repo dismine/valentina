@@ -227,7 +227,7 @@
                                     <xs:complexType>
                                       <xs:attribute name="idObject" type="xs:unsignedInt" use="required"/>
                                       <xs:attribute name="alias" type="nameSuffix"/>
-                                      <xs:attribute name="name" type="nameSuffix" use="required"/>
+                                      <xs:attribute name="name" type="nameSuffix"/>
                                       <xs:attribute name="color" type="operationColors"/>
                                       <xs:attribute name="penStyle" type="operationPenStyle"/> 
                                     </xs:complexType>
