@@ -339,6 +339,17 @@ void VAbstractCubicBezierPath::SetNameSuffix(const QString &suffix)
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractCubicBezierPath::HeadlessName() const -> QString
 {
+    if (IsDerivative())
+    {
+        const QString fullName = name();
+        const QString prefix = GetTypeHead();
+        if (const QString headless = fullName.startsWith(prefix) ? fullName.sliced(prefix.length()) : fullName;
+            !headless.isEmpty())
+        {
+            return headless;
+        }
+    }
+
     QString name;
     if (CountPoints() > 0)
     {

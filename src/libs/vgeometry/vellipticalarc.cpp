@@ -773,6 +773,17 @@ void VEllipticalArc::SetNameSuffix(const QString &suffix)
 //---------------------------------------------------------------------------------------------------------------------
 auto VEllipticalArc::HeadlessName() const -> QString
 {
+    if (IsDerivative())
+    {
+        const QString fullName = name();
+        const QString prefix = GetTypeHead();
+        if (const QString headless = fullName.startsWith(prefix) ? fullName.sliced(prefix.length()) : fullName;
+            !headless.isEmpty())
+        {
+            return headless;
+        }
+    }
+
     QString name = GetCenter().name();
     if (getMode() == Draw::Modeling && getIdObject() != NULL_ID)
     {

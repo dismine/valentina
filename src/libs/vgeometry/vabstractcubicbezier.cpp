@@ -548,6 +548,17 @@ void VAbstractCubicBezier::SetNameSuffix(const QString &suffix)
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractCubicBezier::HeadlessName() const -> QString
 {
+    if (IsDerivative())
+    {
+        const QString fullName = name();
+        const QString prefix = GetTypeHead();
+        if (const QString headless = fullName.startsWith(prefix) ? fullName.sliced(prefix.length()) : fullName;
+            !headless.isEmpty())
+        {
+            return headless;
+        }
+    }
+
     QString name = u"%1_%2"_s.arg(GetP1().name(), GetP4().name());
     if (GetDuplicate() > 0)
     {
