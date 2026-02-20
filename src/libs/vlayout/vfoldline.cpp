@@ -1005,8 +1005,10 @@ auto VFoldLine::ThreeXPoints() const -> QVector<QVector<QPointF>>
 //---------------------------------------------------------------------------------------------------------------------
 auto VFoldLine::TwoArrowsData() const -> ArrowsTextPosData
 {
-    return {.arrowsWidth = qFuzzyIsNull(m_width) ? m_foldLine.length() * 0.9 : qMin(m_width, m_foldLine.length()),
-            .arrowsHeight = qFuzzyIsNull(m_height) ? defArrowsHeight : m_height};
+    ArrowsTextPosData data{};
+    data.arrowsWidth = qFuzzyIsNull(m_width) ? m_foldLine.length() * 0.9 : qMin(m_width, m_foldLine.length());
+    data.arrowsHeight = qFuzzyIsNull(m_height) ? defArrowsHeight : m_height;
+    return data;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
