@@ -777,7 +777,7 @@ auto VEllipticalArc::HeadlessName() const -> QString
     {
         const QString fullName = name();
         const QString prefix = GetTypeHead();
-        if (const QString headless = fullName.startsWith(prefix) ? fullName.sliced(prefix.length()) : fullName;
+        if (const QString headless = fullName.startsWith(prefix) ? Sliced(fullName, prefix.length()) : fullName;
             !headless.isEmpty())
         {
             return headless;
