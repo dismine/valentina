@@ -137,7 +137,7 @@ void VGraphicsSimpleTextItem::CorrectLabelPosition()
 //---------------------------------------------------------------------------------------------------------------------
 void VGraphicsSimpleTextItem::UpdateGeometry()
 {
-    auto UpdateLine = [this]()
+    auto UpdateLine = [this]() -> void
     {
         if (auto *parent = dynamic_cast<VScenePoint *>(parentItem()))
         {
@@ -156,7 +156,7 @@ void VGraphicsSimpleTextItem::UpdateGeometry()
 
     // Handle scale changes
     QGraphicsScene *scene = this->scene();
-    if (!scene)
+    if (scene == nullptr)
     {
         return;
     }
