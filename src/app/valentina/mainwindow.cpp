@@ -302,15 +302,15 @@ auto SortDetailsForLayout(const QHash<quint32, VPiece> *allDetails, const QStrin
     -> QVector<DetailForLayout>
 {
     QVector<DetailForLayout> details;
-    QHash<quint32, VPiece>::const_iterator i = allDetails->constBegin();
+    details.reserve(allDetails->size());
 
-    if (nameRegex.isEmpty())
+    if (QHash<quint32, VPiece>::const_iterator i = allDetails->constBegin(); nameRegex.isEmpty())
     {
         while (i != allDetails->constEnd())
         {
             if (i.value().IsInLayout())
             {
-                details.append(DetailForLayout(i.key(), i.value()));
+                details.append({.id = i.key(), .piece = i.value()});
             }
 
             ++i;
@@ -323,7 +323,7 @@ auto SortDetailsForLayout(const QHash<quint32, VPiece> *allDetails, const QStrin
         {
             if (nameRe.match(i.value().GetName()).hasMatch())
             {
-                details.append(DetailForLayout(i.key(), i.value()));
+                details.append({.id = i.key(), .piece = i.value()});
             }
 
             ++i;
@@ -572,7 +572,7 @@ void MainWindow::AddPP(const QString &PPName)
         m_sceneDetails->InitOrigins();
     }
 
-    m_comboBoxDraws->blockSignals(true);
+    QSignalBlocker blocker(m_comboBoxDraws);
     m_comboBoxDraws->addItem(PPName);
 
     pattern->ClearCalculationGObjects();
@@ -605,7 +605,7 @@ void MainWindow::AddPP(const QString &PPName)
     {
         m_comboBoxDraws->setCurrentIndex(0);
     }
-    m_comboBoxDraws->blockSignals(false);
+    blocker.unblock();
 
     // Show best for new PP
     VMainGraphicsView::NewSceneRect(ui->view->scene(), ui->view, spoint);
@@ -1971,13 +1971,14 @@ void MainWindow::changeEvent(QEvent *event)
     {
         VTheme::Instance()->ResetColorScheme();
 
-        m_comboBoxPenStyle->blockSignals(true);
-        m_comboBoxPenStyle->clear();
-        FillComboBoxTypeLine(m_comboBoxPenStyle,
-                             LineStylesPics(m_comboBoxPenStyle->palette().color(QPalette::Base),
-                                            m_comboBoxPenStyle->palette().color(QPalette::Text)));
-        ChangeCurrentData(m_comboBoxPenStyle, VApplication::VApp()->ValentinaSettings()->GetGlobalPenStyle());
-        m_comboBoxPenStyle->blockSignals(false);
+        {
+            const QSignalBlocker blocker(m_comboBoxPenStyle);
+            m_comboBoxPenStyle->clear();
+            FillComboBoxTypeLine(m_comboBoxPenStyle,
+                                 LineStylesPics(m_comboBoxPenStyle->palette().color(QPalette::Base),
+                                                m_comboBoxPenStyle->palette().color(QPalette::Text)));
+            ChangeCurrentData(m_comboBoxPenStyle, VApplication::VApp()->ValentinaSettings()->GetGlobalPenStyle());
+        }
 
         m_pushButtonColor->makeDirty();
     }
@@ -2143,12 +2144,11 @@ void MainWindow::ScaleChanged(qreal scale)
 {
     if (not m_doubleSpinBoxScale.isNull())
     {
-        m_doubleSpinBoxScale->blockSignals(true);
+        const QSignalBlocker blocker(m_doubleSpinBoxScale);
         m_doubleSpinBoxScale->setMaximum(qFloor(VMainGraphicsView::MaxScale() * 1000) / 10.0);
         m_doubleSpinBoxScale->setMinimum(qFloor(VMainGraphicsView::MinScale() * 1000) / 10.0);
         m_doubleSpinBoxScale->setValue(qFloor(scale * 1000) / 10.0);
         m_doubleSpinBoxScale->setSingleStep(1);
-        m_doubleSpinBoxScale->blockSignals(false);
     }
 }
 
@@ -2619,7 +2619,7 @@ void MainWindow::SetDimensionBases()
         {
             SCASSERT(control != nullptr)
 
-            control->blockSignals(true);
+            const QSignalBlocker blocker(control);
 
             if (const qint32 i = control->findData(value); i != -1)
             {
@@ -2629,8 +2629,6 @@ void MainWindow::SetDimensionBases()
             {
                 value = control->currentData().toDouble();
             }
-
-            control->blockSignals(false);
         }
     };
 
@@ -4804,26 +4802,28 @@ void MainWindow::FullParseFile()
     {
         patternPiece = m_comboBoxDraws->itemText(m_comboBoxDraws->currentIndex());
     }
-    m_comboBoxDraws->blockSignals(true);
-    m_comboBoxDraws->clear();
 
-    QStringList patternPieceNames = doc->PatternBlockMapper()->GetBlockNames();
-    patternPieceNames.sort();
-    m_comboBoxDraws->addItems(patternPieceNames);
+    {
+        const QSignalBlocker blocker(m_comboBoxDraws);
+        m_comboBoxDraws->clear();
 
-    if (not m_drawMode)
-    {
-        m_comboBoxDraws->setCurrentIndex(m_comboBoxDraws->count() - 1);
-    }
-    else
-    {
-        const qint32 index = m_comboBoxDraws->findText(patternPiece);
-        if (index != -1)
+        QStringList patternPieceNames = doc->PatternBlockMapper()->GetBlockNames();
+        patternPieceNames.sort();
+        m_comboBoxDraws->addItems(patternPieceNames);
+
+        if (not m_drawMode)
         {
-            m_comboBoxDraws->setCurrentIndex(index);
+            m_comboBoxDraws->setCurrentIndex(m_comboBoxDraws->count() - 1);
+        }
+        else
+        {
+            const qint32 index = m_comboBoxDraws->findText(patternPiece);
+            if (index != -1)
+            {
+                m_comboBoxDraws->setCurrentIndex(index);
+            }
         }
     }
-    m_comboBoxDraws->blockSignals(false);
     ui->actionPattern_properties->setEnabled(true);
 
     GlobalChangePP(patternPiece);
@@ -4844,9 +4844,8 @@ void MainWindow::GlobalChangePP(const QString &patternPiece)
         if (index != -1)
         { // -1 for not found
             ChangePP(index, false);
-            m_comboBoxDraws->blockSignals(true);
+            const QSignalBlocker blocker(m_comboBoxDraws);
             m_comboBoxDraws->setCurrentIndex(index);
-            m_comboBoxDraws->blockSignals(false);
         }
         else
         {
@@ -5583,7 +5582,7 @@ void MainWindow::InitDimensionGradation(int index, const MeasurementDimension_p 
         current = control->currentData().toDouble();
     }
 
-    control->blockSignals(true);
+    QSignalBlocker blocker(control);
     control->clear();
 
     const QVector<qreal> bases = DimensionRestrictedValues(index, dimension);
@@ -5622,11 +5621,11 @@ void MainWindow::InitDimensionGradation(int index, const MeasurementDimension_p 
     if (i != -1)
     {
         control->setCurrentIndex(i);
-        control->blockSignals(false);
+        blocker.unblock();
     }
     else
     {
-        control->blockSignals(false);
+        blocker.unblock();
         control->setCurrentIndex(0);
     }
 }
@@ -6037,19 +6036,37 @@ void MainWindow::CreateMenus()
     UpdateRecentFileActions();
 
     // Add Undo/Redo actions.
-    undoAction = VAbstractApplication::VApp()->getUndoStack()->createUndoAction(this, tr("&Undo"));
+    QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
+    undoAction = undoStack->createUndoAction(this, tr("&Undo"));
     connect(undoAction, &QAction::triggered, m_toolOptions, &VToolOptionsPropertyBrowser::RefreshOptions);
     m_shortcutActions.insert(VShortcutAction::Undo, undoAction);
     undoAction->setIcon(FromTheme(VThemeIcon::EditUndo));
     ui->menuPatternPiece->insertAction(ui->actionLast_tool, undoAction);
     ui->toolBarTools->addAction(undoAction);
 
-    redoAction = VAbstractApplication::VApp()->getUndoStack()->createRedoAction(this, tr("&Redo"));
+    connect(undoStack, &QUndoStack::canUndoChanged, this, [this]()
+    {
+        if (!m_guiEnabled)
+        {
+            undoAction->setDisabled(true);
+        }
+    });
+
+    redoAction = undoStack->createRedoAction(this, tr("&Redo"));
     connect(redoAction, &QAction::triggered, m_toolOptions, &VToolOptionsPropertyBrowser::RefreshOptions);
     m_shortcutActions.insert(VShortcutAction::Redo, redoAction);
     redoAction->setIcon(FromTheme(VThemeIcon::EditRedo));
     ui->menuPatternPiece->insertAction(ui->actionLast_tool, redoAction);
     ui->toolBarTools->addAction(redoAction);
+
+    connect(undoStack, &QUndoStack::canRedoChanged, this, [this]()
+    {
+        if (!m_guiEnabled)
+        {
+            redoAction->setDisabled(true);
+        }
+    });
+
 
     m_separatorAct = new QAction(this);
     m_separatorAct->setSeparator(true);

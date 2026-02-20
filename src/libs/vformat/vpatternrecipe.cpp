@@ -539,7 +539,7 @@ auto VPatternRecipe::FinalMeasurement(const VFinalMeasurement &fm, const VContai
     catch (const qmu::QmuParserError &e)
     {
         throw VExceptionInvalidHistory(
-            tr("Unable to create record for final measurement '%1'. Error: %2").arg(fm.name).arg(e.GetMsg()));
+            tr("Unable to create record for final measurement '%1'. Error: %2").arg(fm.name, e.GetMsg()));
     }
 
     return recipeFinalMeasurement;
@@ -1111,7 +1111,6 @@ auto VPatternRecipe::Rotation(const VToolRecord &record, const VContainer &data)
     SetAttribute(step, AttrType, VToolRotation::ToolType);
     SetAttribute(step, AttrCenter, tool->OriginPointName());
     Formula(step, tool->GetFormulaAngle(), AttrAngle, AttrAngleValue);
-    SetAttribute(step, AttrSuffix, tool->Suffix());
 
     step.appendChild(GroupOperationSource(tool, record.GetId(), data));
 
@@ -1128,7 +1127,6 @@ auto VPatternRecipe::FlippingByLine(const VToolRecord &record, const VContainer 
     SetAttribute(step, AttrType, VToolFlippingByLine::ToolType);
     SetAttribute(step, AttrP1Line, tool->FirstLinePointName());
     SetAttribute(step, AttrP2Line, tool->SecondLinePointName());
-    SetAttribute(step, AttrSuffix, tool->Suffix());
 
     step.appendChild(GroupOperationSource(tool, record.GetId(), data));
 
@@ -1145,7 +1143,6 @@ auto VPatternRecipe::FlippingByAxis(const VToolRecord &record, const VContainer 
     SetAttribute(step, AttrType, VToolFlippingByAxis::ToolType);
     SetAttribute(step, AttrCenter, tool->OriginPointName());
     SetAttribute(step, AttrAxisType, static_cast<int>(tool->GetAxisType()));
-    SetAttribute(step, AttrSuffix, tool->Suffix());
 
     step.appendChild(GroupOperationSource(tool, record.GetId(), data));
 
@@ -1164,7 +1161,6 @@ auto VPatternRecipe::Move(const VToolRecord &record, const VContainer &data) -> 
     Formula(step, tool->GetFormulaRotationAngle(), AttrRotationAngle, AttrRotationAngleValue);
     Formula(step, tool->GetFormulaLength(), AttrLength, AttrLengthValue);
     SetAttribute(step, AttrCenter, tool->OriginPointName());
-    SetAttribute(step, AttrSuffix, tool->Suffix());
 
     step.appendChild(GroupOperationSource(tool, record.GetId(), data));
 
@@ -1199,7 +1195,7 @@ auto VPatternRecipe::ParallelCurve(const VToolRecord &record) -> QDomElement
 
     ToolAttributes(step, tool);
     SetAttribute(step, AttrCurve, tool->CurveName());
-    SetAttribute(step, AttrSuffix, tool->GetSuffix());
+    SetAttribute(step, AttrName, tool->GetName());
     Formula(step, tool->GetFormulaWidth(), AttrWidth, AttrWidthValue);
 
     CurveAttributes(step, tool);
@@ -1215,7 +1211,7 @@ auto VPatternRecipe::GraduatedCurve(const VToolRecord &record) -> QDomElement
 
     ToolAttributes(step, tool);
     SetAttribute(step, AttrCurve, tool->CurveName());
-    SetAttribute(step, AttrSuffix, tool->GetSuffix());
+    SetAttribute(step, AttrName, tool->GetName());
 
     QDomElement offsetsTag = createElement(QStringLiteral("offsets"));
     QVector<VGraduatedCurveOffset> const offsets = tool->GetGraduatedOffsets();
@@ -1276,17 +1272,23 @@ template <typename T> void VPatternRecipe::CurveAttributes(QDomElement &step, T 
     SetAttribute(step, AttrPenStyle, tool->GetPenStyle());
     SetAttribute(step, AttrAScale, tool->GetApproximationScale());
     SetAttribute(step, AttrDuplicate, tool->GetDuplicate());
-    SetAttributeOrRemoveIf<QString>(step, AttrAlias, tool->GetAliasSuffix(),
-                                    [](const QString &suffix) noexcept { return suffix.isEmpty(); });
+    SetAttributeOrRemoveIf<QString>(step,
+                                    AttrAlias,
+                                    tool->GetAliasSuffix(),
+                                    [](const QString &suffix) noexcept -> bool { return suffix.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T> void VPatternRecipe::CutCurveAttributes(QDomElement &step, T *tool)
 {
-    SetAttributeOrRemoveIf<QString>(step, AttrAlias1, tool->GetAliasSuffix1(),
-                                    [](const QString &suffix) noexcept { return suffix.isEmpty(); });
-    SetAttributeOrRemoveIf<QString>(step, AttrAlias2, tool->GetAliasSuffix2(),
-                                    [](const QString &suffix) noexcept { return suffix.isEmpty(); });
+    SetAttributeOrRemoveIf<QString>(step,
+                                    AttrAlias1,
+                                    tool->GetAliasSuffix1(),
+                                    [](const QString &suffix) noexcept -> bool { return suffix.isEmpty(); });
+    SetAttributeOrRemoveIf<QString>(step,
+                                    AttrAlias2,
+                                    tool->GetAliasSuffix2(),
+                                    [](const QString &suffix) noexcept -> bool { return suffix.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1327,8 +1329,7 @@ auto VPatternRecipe::GroupOperationSource(VAbstractOperation *tool, quint32 id, 
         }
 
         SetAttribute(node, AttrItem, obj->ObjectName());
-        SetAttributeOrRemoveIf<QString>(node, AttrAlias, item.alias,
-                                        [](const QString &alias) noexcept { return alias.isEmpty(); });
+        SetAttribute(node, AttrName, item.name);
 
         if (obj->getType() != GOType::Point)
         {

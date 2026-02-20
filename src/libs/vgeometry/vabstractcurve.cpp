@@ -189,7 +189,7 @@ auto VAbstractCurve::GetSegmentPoints(const QPointF &begin, const QPointF &end, 
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractCurve::FromBegin(const QVector<QPointF> &points, const QPointF &begin, bool *ok) -> QVector<QPointF>
 {
-    auto SetResult = [&ok](bool res)
+    auto SetResult = [&ok](bool res) -> void
     {
         if (ok != nullptr)
         {
@@ -455,6 +455,18 @@ auto VAbstractCurve::GetApproximationScale() const -> qreal
 void VAbstractCurve::SetApproximationScale(qreal value)
 {
     d->approximationScale = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractCurve::IsDerivative() const -> bool
+{
+    return d->derivative;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractCurve::SetDerivative(bool value)
+{
+    d->derivative = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

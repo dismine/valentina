@@ -90,9 +90,8 @@ auto VPE::VBoolProperty::setEditorData(QWidget *editor) -> bool
     auto* tmpEditor = qobject_cast<QCheckBox*>(editor);
     if (tmpEditor)
     {
-        tmpEditor->blockSignals(true);
+        const QSignalBlocker blocker(tmpEditor);
         tmpEditor->setCheckState(vproperty_d_ptr->VariantValue.toBool() ? Qt::Checked : Qt::Unchecked);
-        tmpEditor->blockSignals(false);
         return true;
     }
 

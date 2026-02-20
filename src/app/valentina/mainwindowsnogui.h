@@ -56,14 +56,6 @@ QT_WARNING_DISABLE_GCC("-Weffc++")
 
 struct DetailForLayout
 {
-    DetailForLayout() = default;
-
-    DetailForLayout(quint32 id, const VPiece &piece)
-      : id(id),
-        piece(piece)
-    {
-    }
-
     quint32 id{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
     VPiece piece{};      // NOLINT(misc-non-private-member-variables-in-classes)
 };

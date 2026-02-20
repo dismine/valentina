@@ -37,7 +37,7 @@
 
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vmisc/def.h"
-#include "vabstractspline.h"
+#include "vtoolabstractcurve.h"
 
 class VCubicBezierPath;
 template <class T> class QSharedPointer;
@@ -52,7 +52,7 @@ struct VToolCubicBezierPathInitData : VDrawToolInitData
 
 QT_WARNING_POP
 
-class VToolCubicBezierPath : public VAbstractSpline
+class VToolCubicBezierPath : public VToolAbstractBezier
 {
     Q_OBJECT // NOLINT
 
@@ -84,6 +84,7 @@ protected:
     void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     void SetVisualization() override;
     void RefreshGeometry() override;
+    void ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement) override;
 
 private:
     Q_DISABLE_COPY_MOVE(VToolCubicBezierPath) // NOLINT
@@ -92,6 +93,8 @@ private:
 
     static void AddPathPoint(VAbstractPattern *doc, QDomElement &domElement, const VPointF &splPoint);
     void SetSplinePathAttributes(QDomElement &domElement, const VCubicBezierPath &path);
+
+    auto GatherToolChanges() const -> ToolChanges;
 };
 
 #endif // VTOOLCUBICBEZIERPATH_H

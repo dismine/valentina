@@ -31,29 +31,26 @@
 #include <QDomElement>
 
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vwidgets/vmaingraphicsview.h"
-#include "../vmisc/vabstractapplication.h"
-#include "../vtools/tools/drawTools/vdrawtool.h"
+#include "../vmisc/vabstractvalapplication.h"
+#include "../vtools/tools/vabstracttool.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 ShowLabel::ShowLabel(VAbstractPattern *doc, quint32 id, bool visible, QUndoCommand *parent)
-  : VUndoCommand(doc, parent),
+  : VUndoCommand(doc, id, parent),
     m_visible(visible),
     m_oldVisible(true),
     m_scene(VAbstractValApplication::VApp()->getCurrentScene())
 {
     setText(tr("toggle label"));
 
-    nodeId = id;
-
-    QDomElement const domElement = doc->FindElementById(nodeId, VAbstractPattern::TagPoint);
+    QDomElement const domElement = doc->FindElementById(id, VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
         m_oldVisible = VDomDocument::GetParametrBool(domElement, AttrShowLabel, trueStr);
     }
     else
     {
-        qCDebug(vUndo, "Can't find point with id = %u.", nodeId);
+        qCDebug(vUndo, "Can't find point with id = %u.", id);
     }
 }
 
@@ -76,18 +73,18 @@ void ShowLabel::redo()
 //---------------------------------------------------------------------------------------------------------------------
 void ShowLabel::Do(bool visible)
 {
-    QDomElement domElement = doc->FindElementById(nodeId, VAbstractPattern::TagPoint);
+    QDomElement domElement = Doc()->FindElementById(ElementId(), VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
-        doc->SetAttribute<bool>(domElement, AttrShowLabel, visible);
+        Doc()->SetAttribute<bool>(domElement, AttrShowLabel, visible);
 
-        if (auto *tool = qobject_cast<VAbstractTool *>(VAbstractPattern::getTool(nodeId)))
+        if (auto *tool = qobject_cast<VAbstractTool *>(VAbstractPattern::getTool(ElementId())))
         {
-            tool->SetLabelVisible(nodeId, visible);
+            tool->SetLabelVisible(ElementId(), visible);
         }
     }
     else
     {
-        qCDebug(vUndo, "Can't find point with id = %u.", nodeId);
+        qCDebug(vUndo, "Can't find point with id = %u.", ElementId());
     }
 }

@@ -46,6 +46,12 @@
 #include "vellipticalarc_p.h"
 #include "vsplinepath.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 constexpr qreal tolerance = accuracyPointOnLine / 8;
@@ -340,7 +346,7 @@ VEllipticalArc::VEllipticalArc(const VPointF &center, qreal radius1, qreal radiu
   : VAbstractArc(GOType::EllipticalArc, center, f1, formulaF1, f2, formulaF2, idObject, mode),
     d(new VEllipticalArcData(radius1, radius2, formulaRadius1, formulaRadius2, rotationAngle, formulaRotationAngle))
 {
-    CreateName();
+    VEllipticalArc::CreateName();
     SetFlipped(radius1 < 0 || radius2 < 0);
 }
 
@@ -350,7 +356,7 @@ VEllipticalArc::VEllipticalArc(const VPointF &center, qreal radius1, qreal radiu
   : VAbstractArc(GOType::EllipticalArc, center, f1, f2, NULL_ID, Draw::Calculation),
     d(new VEllipticalArcData(radius1, radius2, rotationAngle))
 {
-    CreateName();
+    VEllipticalArc::CreateName();
     SetFlipped(radius1 < 0 || radius2 < 0);
 }
 
@@ -362,7 +368,7 @@ VEllipticalArc::VEllipticalArc(qreal length, const QString &formulaLength, const
   : VAbstractArc(GOType::EllipticalArc, formulaLength, center, f1, formulaF1, idObject, mode),
     d(new VEllipticalArcData(radius1, radius2, formulaRadius1, formulaRadius2, rotationAngle, formulaRotationAngle))
 {
-    CreateName();
+    VEllipticalArc::CreateName();
     FindF2(length);
 }
 
@@ -372,7 +378,7 @@ VEllipticalArc::VEllipticalArc(qreal length, const VPointF &center, qreal radius
   : VAbstractArc(GOType::EllipticalArc, center, f1, NULL_ID, Draw::Calculation),
     d(new VEllipticalArcData(radius1, radius2, rotationAngle))
 {
-    CreateName();
+    VEllipticalArc::CreateName();
     FindF2(length);
     SetFormulaLength(QString::number(length));
 }
@@ -413,7 +419,7 @@ auto VEllipticalArc::operator=(VEllipticalArc &&arc) noexcept -> VEllipticalArc 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VEllipticalArc::Rotate(QPointF originPoint, qreal degrees, const QString &prefix) const -> VEllipticalArc
+auto VEllipticalArc::Rotate(QPointF originPoint, qreal degrees, const QString &name) const -> VEllipticalArc
 {
     originPoint = d->m_transform.inverted().map(originPoint);
 
@@ -422,45 +428,53 @@ auto VEllipticalArc::Rotate(QPointF originPoint, qreal degrees, const QString &p
     t.rotate(-degrees);
     t.translate(-originPoint.x(), -originPoint.y());
 
-    VEllipticalArc elArc(VAbstractArc::GetCenter(), d->radius1, d->radius2, VAbstractArc::GetStartAngle(),
-                         VAbstractArc::GetEndAngle(), d->rotationAngle);
-    elArc.setName(name() + prefix);
-
-    if (not GetAliasSuffix().isEmpty())
+    VPointF center = VAbstractArc::GetCenter();
+    center.setName("X"_L1);
+    VEllipticalArc elArc(center,
+                         d->radius1,
+                         d->radius2,
+                         VAbstractArc::GetStartAngle(),
+                         VAbstractArc::GetEndAngle(),
+                         d->rotationAngle);
+    if (!name.isEmpty())
     {
-        elArc.SetAliasSuffix(GetAliasSuffix() + prefix);
+        elArc.setName(elArc.GetTypeHead() + name);
     }
-
     elArc.SetColor(GetColor());
     elArc.SetPenStyle(GetPenStyle());
     elArc.SetFlipped(IsFlipped());
     elArc.SetTransform(t);
     elArc.SetApproximationScale(GetApproximationScale());
+    elArc.SetDerivative(true);
     return elArc;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VEllipticalArc::Flip(const QLineF &axis, const QString &prefix) const -> VEllipticalArc
+auto VEllipticalArc::Flip(const QLineF &axis, const QString &name) const -> VEllipticalArc
 {
-    VEllipticalArc elArc(VAbstractArc::GetCenter(), d->radius1, d->radius2, VAbstractArc::GetStartAngle(),
-                         VAbstractArc::GetEndAngle(), d->rotationAngle);
-    elArc.setName(name() + prefix);
-
-    if (not GetAliasSuffix().isEmpty())
+    VPointF center = VAbstractArc::GetCenter();
+    center.setName("X"_L1);
+    VEllipticalArc elArc(center,
+                         d->radius1,
+                         d->radius2,
+                         VAbstractArc::GetStartAngle(),
+                         VAbstractArc::GetEndAngle(),
+                         d->rotationAngle);
+    if (!name.isEmpty())
     {
-        elArc.SetAliasSuffix(GetAliasSuffix() + prefix);
+        elArc.setName(elArc.GetTypeHead() + name);
     }
-
     elArc.SetColor(GetColor());
     elArc.SetPenStyle(GetPenStyle());
     elArc.SetFlipped(not IsFlipped());
     elArc.SetTransform(d->m_transform * VGObject::FlippingMatrix(d->m_transform.inverted().map(axis)));
     elArc.SetApproximationScale(GetApproximationScale());
+    elArc.SetDerivative(true);
     return elArc;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VEllipticalArc::Move(qreal length, qreal angle, const QString &prefix) const -> VEllipticalArc
+auto VEllipticalArc::Move(qreal length, qreal angle, const QString &name) const -> VEllipticalArc
 {
     const VPointF oldCenter = VAbstractArc::GetCenter();
     const VPointF center = oldCenter.Move(length, angle);
@@ -473,18 +487,16 @@ auto VEllipticalArc::Move(qreal length, qreal angle, const QString &prefix) cons
 
     VEllipticalArc elArc(oldCenter, d->radius1, d->radius2, VAbstractArc::GetStartAngle(), VAbstractArc::GetEndAngle(),
                          d->rotationAngle);
-    elArc.setName(name() + prefix);
-
-    if (not GetAliasSuffix().isEmpty())
+    if (!name.isEmpty())
     {
-        elArc.SetAliasSuffix(GetAliasSuffix() + prefix);
+        elArc.setName(elArc.GetTypeHead() + name);
     }
-
     elArc.SetColor(GetColor());
     elArc.SetPenStyle(GetPenStyle());
     elArc.SetFlipped(IsFlipped());
     elArc.SetTransform(t);
     elArc.SetApproximationScale(GetApproximationScale());
+    elArc.SetDerivative(true);
     return elArc;
 }
 
@@ -733,24 +745,10 @@ auto VEllipticalArc::ToSplinePath() const -> VSplinePath
 //---------------------------------------------------------------------------------------------------------------------
 void VEllipticalArc::CreateName()
 {
-    QString name = ELARC_ + this->GetCenter().name();
-    const auto nameStr = QStringLiteral("_%1");
-
-    if (getMode() == Draw::Modeling && getIdObject() != NULL_ID)
+    if (!IsDerivative())
     {
-        name += nameStr.arg(getIdObject());
+        setName(GetTypeHead() + HeadlessName());
     }
-    else if (VAbstractCurve::id() != NULL_ID)
-    {
-        name += nameStr.arg(VAbstractCurve::id());
-    }
-
-    if (GetDuplicate() > 0)
-    {
-        name += nameStr.arg(GetDuplicate());
-    }
-
-    setName(name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -763,7 +761,51 @@ void VEllipticalArc::CreateAlias()
         return;
     }
 
-    SetAlias(ELARC_ + aliasSuffix);
+    SetAlias(GetTypeHead() + aliasSuffix);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VEllipticalArc::SetNameSuffix(const QString &suffix)
+{
+    setName(GetTypeHead() + suffix);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VEllipticalArc::HeadlessName() const -> QString
+{
+    if (IsDerivative())
+    {
+        const QString fullName = name();
+        const QString prefix = GetTypeHead();
+        if (const QString headless = fullName.startsWith(prefix) ? fullName.sliced(prefix.length()) : fullName;
+            !headless.isEmpty())
+        {
+            return headless;
+        }
+    }
+
+    QString name = GetCenter().name();
+    if (getMode() == Draw::Modeling && getIdObject() != NULL_ID)
+    {
+        name += u"_%1"_s.arg(getIdObject());
+    }
+    else if (VAbstractCurve::id() != NULL_ID)
+    {
+        name += u"_%1"_s.arg(VAbstractCurve::id());
+    }
+
+    if (GetDuplicate() > 0)
+    {
+        name += u"_%1"_s.arg(GetDuplicate());
+    }
+
+    return name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VEllipticalArc::GetTypeHead() const -> QString
+{
+    return ELARC_;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

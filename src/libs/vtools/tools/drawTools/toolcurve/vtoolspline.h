@@ -40,11 +40,11 @@
 #include "../vgeometry/vgeometrydef.h"
 #include "../vgeometry/vspline.h"
 #include "../vmisc/def.h"
-#include "vabstractspline.h"
+#include "vtoolabstractcurve.h"
 
 template <class T> class QSharedPointer;
 
-struct VToolSplineInitData : VAbstractSplineInitData
+struct VToolSplineInitData : VToolAbstractCurveInitData
 {
     quint32 point1{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
     quint32 point4{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
@@ -58,7 +58,7 @@ struct VToolSplineInitData : VAbstractSplineInitData
 /**
  * @brief The VToolSpline class tool for creation spline. I mean bezier curve.
  */
-class VToolSpline : public VAbstractSpline
+class VToolSpline : public VToolAbstractBezier
 {
     Q_OBJECT // NOLINT
 
@@ -104,6 +104,7 @@ protected:
     void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
     void SetVisualization() override;
     void RefreshCtrlPoints() override;
+    void ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement) override;
 
 private slots:
     void CurveReleased();
@@ -125,6 +126,8 @@ private:
     void SetSplineAttributes(QDomElement &domElement, const VSpline &spl);
 
     void UndoCommandMove(const VSpline &oldSpl, const VSpline &newSpl);
+
+    auto GatherToolChanges() const -> ToolChanges;
 };
 
 #endif // VTOOLSPLINE_H

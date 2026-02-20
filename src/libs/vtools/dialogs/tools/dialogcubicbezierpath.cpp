@@ -118,27 +118,27 @@ auto DialogCubicBezierPath::GetPath() const -> VCubicBezierPath
 void DialogCubicBezierPath::SetPath(const VCubicBezierPath &value)
 {
     this->path = value;
-    ui->listWidget->blockSignals(true);
-    ui->listWidget->clear();
-    for (qint32 i = 0; i < path.CountPoints(); ++i)
     {
-        NewItem(path.at(i));
+        const QSignalBlocker blocker(ui->listWidget);
+        ui->listWidget->clear();
+        for (qint32 i = 0; i < path.CountPoints(); ++i)
+        {
+            NewItem(path.at(i));
+        }
+        ui->listWidget->setFocus(Qt::OtherFocusReason);
+        ui->doubleSpinBoxApproximationScale->setValue(path.GetApproximationScale());
+
+        originAliasSuffix = path.GetAliasSuffix();
+        ui->lineEditAlias->setText(originAliasSuffix);
+        ValidateAlias();
+
+        ChangeCurrentData(ui->comboBoxPenStyle, path.GetPenStyle());
+        ui->pushButtonColor->setCurrentColor(path.GetColor());
+
+        auto *visPath = qobject_cast<VisToolCubicBezierPath *>(vis);
+        SCASSERT(visPath != nullptr)
+        visPath->SetPath(path);
     }
-    ui->listWidget->setFocus(Qt::OtherFocusReason);
-    ui->lineEditSplPathName->setText(VAbstractApplication::VApp()->TrVars()->VarToUser(path.name()));
-    ui->doubleSpinBoxApproximationScale->setValue(path.GetApproximationScale());
-
-    originAliasSuffix = path.GetAliasSuffix();
-    ui->lineEditAlias->setText(originAliasSuffix);
-    ValidateAlias();
-
-    ChangeCurrentData(ui->comboBoxPenStyle, path.GetPenStyle());
-    ui->pushButtonColor->setCurrentColor(path.GetColor());
-
-    auto *visPath = qobject_cast<VisToolCubicBezierPath *>(vis);
-    SCASSERT(visPath != nullptr)
-    visPath->SetPath(path);
-    ui->listWidget->blockSignals(false);
 
     if (ui->listWidget->count() > 0)
     {
@@ -147,7 +147,7 @@ void DialogCubicBezierPath::SetPath(const VCubicBezierPath &value)
 
     ValidatePath();
 
-    ui->toolButtonRemovePoint->setEnabled(ui->listWidget->count() > 7);
+    ui->toolButtonRemovePoint->setEnabled(m_dependencyReady && ui->listWidget->count() > 7);
     MoveControls();
 }
 
@@ -267,10 +267,7 @@ void DialogCubicBezierPath::currentPointChanged(int index)
     catch (const VExceptionBadId &)
     {
         flagError = false;
-        ChangeColor(ui->labelName, errorColor);
         ChangeColor(ui->labelPoint, errorColor);
-
-        ui->lineEditSplPathName->setText(tr("Cannot find point with id %1").arg(id));
     }
     CheckState();
 }
@@ -300,7 +297,7 @@ void DialogCubicBezierPath::ValidateAlias()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCubicBezierPath::NewPointChanged()
 {
-    ui->toolButtonAddPoint->setEnabled(ui->comboBoxNewPoint->currentIndex() != -1);
+    ui->toolButtonAddPoint->setEnabled(m_dependencyReady && ui->comboBoxNewPoint->currentIndex() != -1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -314,9 +311,10 @@ void DialogCubicBezierPath::AddPoint()
     flagError = IsPathValid();
     CheckState(); // Disable Ok and Apply buttons if something wrong.
 
-    ui->comboBoxNewPoint->blockSignals(true);
-    ui->comboBoxNewPoint->setCurrentIndex(-1);
-    ui->comboBoxNewPoint->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->comboBoxNewPoint);
+        ui->comboBoxNewPoint->setCurrentIndex(-1);
+    }
     ui->toolButtonAddPoint->setDisabled(true);
 }
 
@@ -329,12 +327,11 @@ void DialogCubicBezierPath::RemovePoint()
         return;
     }
 
-    QListWidgetItem *selectedItem = ui->listWidget->currentItem();
-    if (selectedItem)
+    if (QListWidgetItem *selectedItem = ui->listWidget->currentItem())
     {
         delete ui->listWidget->takeItem(ui->listWidget->row(selectedItem));
         ui->listWidget->setCurrentRow(0);
-        ui->toolButtonRemovePoint->setDisabled(ui->listWidget->count() <= 7);
+        ui->toolButtonRemovePoint->setDisabled(m_dependencyReady && ui->listWidget->count() <= 7);
     }
 
     SavePath();
@@ -400,9 +397,8 @@ void DialogCubicBezierPath::NewItem(const VPointF &point)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCubicBezierPath::DataPoint(const VPointF &p)
 {
-    ui->comboBoxPoint->blockSignals(true);
+    const QSignalBlocker blocker(ui->comboBoxPoint);
     ChangeCurrentData(ui->comboBoxPoint, p.id());
-    ui->comboBoxPoint->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -466,37 +462,13 @@ void DialogCubicBezierPath::ValidatePath()
     {
         flagError = false;
         color = errorColor;
-
-        ui->lineEditSplPathName->setText(tr("Invalid spline path"));
     }
     else
     {
         flagError = true;
         color = OkColor(this);
-
-        auto first = qvariant_cast<VPointF>(ui->listWidget->item(0)->data(Qt::UserRole));
-        auto last = qvariant_cast<VPointF>(ui->listWidget->item(ui->listWidget->count() - 1)->data(Qt::UserRole));
-
-        if (first.id() == path.at(0).id() && last.id() == path.at(path.CountPoints() - 1).id())
-        {
-            newDuplicate = -1;
-            ui->lineEditSplPathName->setText(VAbstractApplication::VApp()->TrVars()->VarToUser(path.name()));
-        }
-        else
-        {
-            VCubicBezierPath newPath = ExtractPath();
-
-            if (not data->IsUnique(newPath.name()))
-            {
-                newDuplicate = static_cast<qint32>(DNumber(newPath.name()));
-                newPath.SetDuplicate(static_cast<quint32>(newDuplicate));
-            }
-
-            ui->lineEditSplPathName->setText(VAbstractApplication::VApp()->TrVars()->VarToUser(newPath.name()));
-        }
     }
 
-    ChangeColor(ui->labelName, color);
     ChangeColor(ui->labelPoint, color);
 }
 
@@ -505,10 +477,10 @@ void DialogCubicBezierPath::MoveControls()
 {
     const int index = ui->listWidget->currentRow();
 
-    ui->toolButtonTop->setEnabled(index > 0);
-    ui->toolButtonUp->setEnabled(index > 0);
-    ui->toolButtonDown->setEnabled(index != -1 && index < ui->listWidget->count() - 1);
-    ui->toolButtonBottom->setEnabled(index != -1 && index < ui->listWidget->count() - 1);
+    ui->toolButtonTop->setEnabled(m_dependencyReady && index > 0);
+    ui->toolButtonUp->setEnabled(m_dependencyReady && index > 0);
+    ui->toolButtonDown->setEnabled(m_dependencyReady && index != -1 && index < ui->listWidget->count() - 1);
+    ui->toolButtonBottom->setEnabled(m_dependencyReady && index != -1 && index < ui->listWidget->count() - 1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -533,4 +505,17 @@ void DialogCubicBezierPath::SetDefPenStyle(const QString &value)
 void DialogCubicBezierPath::SetDefColor(const QString &value)
 {
     ui->pushButtonColor->setCurrentColor(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCubicBezierPath::CheckDependencyTreeComplete()
+{
+    m_dependencyReady = m_doc->IsPatternGraphComplete();
+    ui->toolButtonAddPoint->setEnabled(m_dependencyReady);
+    ui->toolButtonRemovePoint->setEnabled(m_dependencyReady);
+    ui->toolButtonTop->setEnabled(m_dependencyReady);
+    ui->toolButtonUp->setEnabled(m_dependencyReady);
+    ui->toolButtonDown->setEnabled(m_dependencyReady);
+    ui->toolButtonBottom->setEnabled(m_dependencyReady);
+    ui->lineEditAlias->setEnabled(m_dependencyReady);
 }

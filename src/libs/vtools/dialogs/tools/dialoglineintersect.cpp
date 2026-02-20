@@ -405,3 +405,14 @@ auto DialogLineIntersect::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLineIntersect::CheckDependencyTreeComplete()
+{
+    const bool ready = m_doc->IsPatternGraphComplete();
+    ui->lineEditNamePoint->setEnabled(ready);
+    ui->comboBoxP1Line1->setEnabled(ready);
+    ui->comboBoxP2Line1->setEnabled(ready);
+    ui->comboBoxP1Line2->setEnabled(ready);
+    ui->comboBoxP2Line2->setEnabled(ready);
+}

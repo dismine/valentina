@@ -144,3 +144,10 @@ auto DialogSinglePoint::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSinglePoint::CheckDependencyTreeComplete()
+{
+    const bool ready = m_doc->IsPatternGraphComplete();
+    ui->lineEditName->setEnabled(ready);
+}

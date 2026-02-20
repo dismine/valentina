@@ -492,7 +492,7 @@ void DialogMeasurementsCSVColumns::InitColumnsControls()
             currentColumn = control->currentData().toInt();
         }
 
-        control->blockSignals(true);
+        QSignalBlocker blocker(control);
         control->clear();
 
         for (int i = 0; i < inputColumnCount; ++i)
@@ -511,11 +511,11 @@ void DialogMeasurementsCSVColumns::InitColumnsControls()
         if (index != -1)
         {
             control->setCurrentIndex(index);
-            control->blockSignals(false);
+            blocker.unblock();
         }
         else
         {
-            control->blockSignals(false);
+            blocker.unblock();
 
             if (not ColumnMandatory(column))
             {

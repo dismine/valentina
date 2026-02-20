@@ -42,25 +42,25 @@ ResetBackgroundImage::ResetBackgroundImage(QUuid id, VAbstractPattern *doc, QUnd
 //---------------------------------------------------------------------------------------------------------------------
 void ResetBackgroundImage::undo()
 {
-    VBackgroundPatternImage image = doc->GetBackgroundImage(m_id);
+    VBackgroundPatternImage image = Doc()->GetBackgroundImage(m_id);
 
     if (not image.IsNull())
     {
         image.SetMatrix(m_oldMatrix);
-        doc->SaveBackgroundImage(image);
-        emit doc->BackgroundImageTransformationChanged(m_id);
+        Doc()->SaveBackgroundImage(image);
+        emit Doc()->BackgroundImageTransformationChanged(m_id);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void ResetBackgroundImage::redo()
 {
-    VBackgroundPatternImage image = doc->GetBackgroundImage(m_id);
+    VBackgroundPatternImage image = Doc()->GetBackgroundImage(m_id);
 
     if (not image.IsNull())
     {
         image.SetMatrix(QTransform());
-        doc->SaveBackgroundImage(image);
-        emit doc->BackgroundImageTransformationChanged(m_id);
+        Doc()->SaveBackgroundImage(image);
+        emit Doc()->BackgroundImageTransformationChanged(m_id);
     }
 }

@@ -44,25 +44,25 @@ RenameBackgroundImage::RenameBackgroundImage(QUuid id, const QString &name, VAbs
 //---------------------------------------------------------------------------------------------------------------------
 void RenameBackgroundImage::undo()
 {
-    VBackgroundPatternImage image = doc->GetBackgroundImage(m_id);
+    VBackgroundPatternImage image = Doc()->GetBackgroundImage(m_id);
 
     if (not image.IsNull())
     {
         image.SetName(m_oldName);
-        doc->SaveBackgroundImage(image);
-        emit doc->BackgroundImageNameChanged(m_id);
+        Doc()->SaveBackgroundImage(image);
+        emit Doc()->BackgroundImageNameChanged(m_id);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void RenameBackgroundImage::redo()
 {
-    VBackgroundPatternImage image = doc->GetBackgroundImage(m_id);
+    VBackgroundPatternImage image = Doc()->GetBackgroundImage(m_id);
 
     if (not image.IsNull())
     {
         image.SetName(m_name);
-        doc->SaveBackgroundImage(image);
-        emit doc->BackgroundImageNameChanged(m_id);
+        Doc()->SaveBackgroundImage(image);
+        emit Doc()->BackgroundImageNameChanged(m_id);
     }
 }

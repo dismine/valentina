@@ -82,6 +82,7 @@ public slots:
     virtual void Enable() = 0;
     virtual void EnableToolMove(bool move);
     virtual void SetDetailsMode(bool mode);
+
 protected slots:
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) = 0;
 

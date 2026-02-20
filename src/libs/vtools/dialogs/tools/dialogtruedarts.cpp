@@ -108,17 +108,16 @@ auto DialogTrueDarts::GetSecondNewDartPointName() -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void DialogTrueDarts::SetNewDartPointNames(const QString &firstPoint, const QString &secondPoint)
 {
-    ui->lineEditFirstNewDartPoint->blockSignals(true);
-    ui->lineEditSecondNewDartPoint->blockSignals(true);
+    {
+        const QSignalBlocker blockerFirstNewDartPoint(ui->lineEditFirstNewDartPoint);
+        const QSignalBlocker blockerSecondNewDartPoint(ui->lineEditSecondNewDartPoint);
 
-    d1PointName = firstPoint;
-    ui->lineEditFirstNewDartPoint->setText(d1PointName);
+        d1PointName = firstPoint;
+        ui->lineEditFirstNewDartPoint->setText(d1PointName);
 
-    d2PointName = secondPoint;
-    ui->lineEditSecondNewDartPoint->setText(d2PointName);
-
-    ui->lineEditSecondNewDartPoint->blockSignals(false);
-    ui->lineEditFirstNewDartPoint->blockSignals(false);
+        d2PointName = secondPoint;
+        ui->lineEditSecondNewDartPoint->setText(d2PointName);
+    }
 
     CheckName(ui->lineEditFirstNewDartPoint, ui->labelFirstNewDartPoint, d1PointName, d2PointName,
               ui->lineEditSecondNewDartPoint, flagName1);
@@ -418,4 +417,12 @@ void DialogTrueDarts::SetNotes(const QString &notes)
 auto DialogTrueDarts::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogTrueDarts::CheckDependencyTreeComplete()
+{
+    const bool ready = m_doc->IsPatternGraphComplete();
+    ui->lineEditFirstNewDartPoint->setEnabled(ready);
+    ui->lineEditSecondNewDartPoint->setEnabled(ready);
 }

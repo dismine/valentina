@@ -44,12 +44,11 @@ class MoveAbstractLabel : public VUndoCommand
 
 public:
     MoveAbstractLabel(VAbstractPattern *doc, quint32 pointId, const QPointF &pos, QUndoCommand *parent = nullptr);
-    ~MoveAbstractLabel() = default;
+    ~MoveAbstractLabel() override = default;
 
     void undo() override;
     void redo() override;
 
-    auto GetPointId() const -> quint32;
     auto GetNewPos() const -> QPointF;
 
 protected:
@@ -61,12 +60,6 @@ protected:
 private:
     Q_DISABLE_COPY_MOVE(MoveAbstractLabel) // NOLINT
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto MoveAbstractLabel::GetPointId() const -> quint32
-{
-    return nodeId;
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 inline auto MoveAbstractLabel::GetNewPos() const -> QPointF

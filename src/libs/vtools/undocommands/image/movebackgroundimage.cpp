@@ -47,20 +47,20 @@ MoveBackgroundImage::MoveBackgroundImage(
 //---------------------------------------------------------------------------------------------------------------------
 void MoveBackgroundImage::undo()
 {
-    VBackgroundPatternImage image = doc->GetBackgroundImage(m_id);
+    VBackgroundPatternImage image = Doc()->GetBackgroundImage(m_id);
 
     if (not image.IsNull())
     {
         image.SetMatrix(m_oldPos);
-        doc->SaveBackgroundImage(image);
-        emit doc->BackgroundImagePositionChanged(m_id);
+        Doc()->SaveBackgroundImage(image);
+        emit Doc()->BackgroundImagePositionChanged(m_id);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void MoveBackgroundImage::redo()
 {
-    VBackgroundPatternImage image = doc->GetBackgroundImage(m_id);
+    VBackgroundPatternImage image = Doc()->GetBackgroundImage(m_id);
 
     if (not image.IsNull())
     {
@@ -69,8 +69,8 @@ void MoveBackgroundImage::redo()
         m.translate(m_dx, m_dy);
         matrix *= m;
         image.SetMatrix(matrix);
-        doc->SaveBackgroundImage(image);
-        emit doc->BackgroundImagePositionChanged(m_id);
+        Doc()->SaveBackgroundImage(image);
+        emit Doc()->BackgroundImagePositionChanged(m_id);
     }
 }
 
@@ -85,13 +85,13 @@ auto MoveBackgroundImage::mergeWith(const QUndoCommand *command) -> bool
     const auto *moveCommand = dynamic_cast<const MoveBackgroundImage *>(command);
     SCASSERT(moveCommand != nullptr)
 
-    if (moveCommand->ImageId() != m_id || not moveCommand->AllowMerge())
+    if (moveCommand->m_id != m_id || !moveCommand->m_allowMerge)
     {
         return false;
     }
 
-    m_dx = moveCommand->Dx();
-    m_dy = moveCommand->Dy();
+    m_dx = moveCommand->m_dx;
+    m_dy = moveCommand->m_dy;
     return true;
 }
 
@@ -99,28 +99,4 @@ auto MoveBackgroundImage::mergeWith(const QUndoCommand *command) -> bool
 auto MoveBackgroundImage::id() const -> int
 {
     return static_cast<int>(UndoCommand::MoveBackGroundImage);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto MoveBackgroundImage::ImageId() const -> QUuid
-{
-    return m_id;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto MoveBackgroundImage::Dx() const -> qreal
-{
-    return m_dx;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto MoveBackgroundImage::Dy() const -> qreal
-{
-    return m_dy;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto MoveBackgroundImage::AllowMerge() const -> bool
-{
-    return m_allowMerge;
 }

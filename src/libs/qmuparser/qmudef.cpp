@@ -319,69 +319,73 @@ auto ReadVal(const QString &formula, qreal &val, const QLocale &locale, const QC
 //---------------------------------------------------------------------------------------------------------------------
 auto NameRegExp(VariableRegex type) -> QString
 {
-    static QString regex;
-
-    if (regex.isEmpty())
+    static QHash<VariableRegex, QString> cache;
+    if (cache.contains(type))
     {
-        const QList<QLocale> allLocales =
-            QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
+        return cache.value(type);
+    }
 
-        QString positiveSigns;
-        QString negativeSigns;
-        QString decimalPoints;
-        QString groupSeparators;
+    const QList<QLocale> allLocales = QLocale::matchingLocales(QLocale::AnyLanguage,
+                                                               QLocale::AnyScript,
+                                                               QLocale::AnyCountry);
 
-        for (const auto &locale : allLocales)
+    QString positiveSigns;
+    QString negativeSigns;
+    QString decimalPoints;
+    QString groupSeparators;
+
+    for (const auto &locale : allLocales)
+    {
+        if (not positiveSigns.contains(LocalePositiveSign(locale)))
         {
-            if (not positiveSigns.contains(LocalePositiveSign(locale)))
-            {
-                positiveSigns.append(LocalePositiveSign(locale));
-            }
-
-            if (not negativeSigns.contains(LocaleNegativeSign(locale)))
-            {
-                negativeSigns.append(LocaleNegativeSign(locale));
-            }
-
-            if (not decimalPoints.contains(LocaleDecimalPoint(locale)))
-            {
-                decimalPoints.append(LocaleDecimalPoint(locale));
-            }
-
-            if (not groupSeparators.contains(LocaleGroupSeparator(locale)))
-            {
-                groupSeparators.append(LocaleGroupSeparator(locale));
-            }
+            positiveSigns.append(LocalePositiveSign(locale));
         }
 
-        negativeSigns.replace('-', QLatin1String("\\-"));
-        groupSeparators.remove('\'');
-
-        // Same regexp in pattern.xsd shema file. Don't forget to synchronize.
-        //  \p{Nd} - \p{Decimal_Digit_Number}
-        //  \p{Zs} - \p{Space_Separator}
-        //  Here we use permanent start of string and end of string anchors \A and \z to match whole pattern as one
-        //  string. In some cases, a user may pass multiline or line that ends with a new line. To cover case with a new
-        //  line at the end of string use /z anchor.
-
-        switch (type)
+        if (not negativeSigns.contains(LocaleNegativeSign(locale)))
         {
-            case VariableRegex::Variable:
-                regex = QString("\\A([^\\p{Nd}\\\\\\p{Zs}*\\/&|!<>^\\n\\()%1%2%3%4=?:;'\"]){1,1}"
-                                "([^\\\\\\p{Zs}*\\/&|!<>^\\n\\()%1%2%3%4=?:;\"]){0,}\\z")
-                            .arg(negativeSigns, positiveSigns, decimalPoints, groupSeparators);
-                break;
-            case VariableRegex::KnownMeasurement:
-                regex = QString("\\A([^@\\p{Nd}\\p{Zs}*\\/&|!<>^\\n\\()%1%2%3%4=?:;'\"]){1,1}"
-                                "([^\\\\\\p{Zs}*\\/&|!<>^\\n\\()%1%2%3%4=?:;\"]){0,}\\z")
-                            .arg(negativeSigns, positiveSigns, decimalPoints, groupSeparators);
-                break;
-            default:
-                break;
+            negativeSigns.append(LocaleNegativeSign(locale));
+        }
+
+        if (not decimalPoints.contains(LocaleDecimalPoint(locale)))
+        {
+            decimalPoints.append(LocaleDecimalPoint(locale));
+        }
+
+        if (not groupSeparators.contains(LocaleGroupSeparator(locale)))
+        {
+            groupSeparators.append(LocaleGroupSeparator(locale));
         }
     }
 
-    return regex;
+    negativeSigns.replace('-', QLatin1String("\\-"));
+    groupSeparators.remove('\'');
+
+    // Same regexp in pattern.xsd shema file. Don't forget to synchronize.
+    //  \p{Nd} - \p{Decimal_Digit_Number}
+    //  \p{Zs} - \p{Space_Separator}
+    //  Here we use permanent start of string and end of string anchors \A and \z to match whole pattern as one
+    //  string. In some cases, a user may pass multiline or line that ends with a new line. To cover case with a new
+    //  line at the end of string use /z anchor.
+
+    switch (type)
+    {
+        case VariableRegex::Variable:
+            cache.insert(type,
+                         QStringLiteral("\\A([^\\p{Nd}\\\\\\p{Zs}*\\/&|!<>^\\n\\()%1%2%3%4=?:;'\"]){1,1}"
+                                        "([^\\\\\\p{Zs}*\\/&|!<>^\\n\\()%1%2%3%4=?:;\"]){0,}\\z")
+                             .arg(negativeSigns, positiveSigns, decimalPoints, groupSeparators));
+            break;
+        case VariableRegex::KnownMeasurement:
+            cache.insert(type,
+                         QStringLiteral("\\A([^@\\p{Nd}\\p{Zs}*\\/&|!<>^\\n\\()%1%2%3%4=?:;'\"]){1,1}"
+                                        "([^\\\\\\p{Zs}*\\/&|!<>^\\n\\()%1%2%3%4=?:;\"]){0,}\\z")
+                             .arg(negativeSigns, positiveSigns, decimalPoints, groupSeparators));
+            break;
+        default:
+            break;
+    }
+
+    return cache.value(type);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

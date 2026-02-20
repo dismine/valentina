@@ -30,7 +30,6 @@
 #include "../../visualization/path/vistoolgraduatedcurve.h"
 #include "../../visualization/visualization.h"
 #include "../qmuparser/qmudef.h"
-#include "../qmuparser/qmuparsererror.h"
 #include "../support/dialogeditwrongformula.h"
 #include "../vgeometry/vsplinepath.h"
 #include "../vmisc/theme/vtheme.h"
@@ -107,9 +106,7 @@ DialogGraduatedCurve::DialogGraduatedCurve(const VContainer *data,
 
     ui->doubleSpinBoxApproximationScale->setMaximum(maxCurveApproximationScale);
 
-    ui->lineEditSuffix->setText(VAbstractValApplication::VApp()->getCurrentDocument()->GenerateSuffix());
-
-    connect(ui->lineEditSuffix, &QLineEdit::textEdited, this, &DialogGraduatedCurve::ValidateSuffix);
+    connect(ui->lineEditCurveName, &QLineEdit::textEdited, this, &DialogGraduatedCurve::ValidateName);
     connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogGraduatedCurve::ValidateAlias);
 
     vis = new VisToolGraduatedCurve(data);
@@ -186,11 +183,9 @@ auto DialogGraduatedCurve::GetOffsets() const -> QVector<VRawGraduatedCurveOffse
 
     for (const auto &formulaData : m_offsets)
     {
-        VRawGraduatedCurveOffset rawOffset;
-        rawOffset.name = formulaData.name;
-        rawOffset.description = formulaData.description;
-        rawOffset.formula = formulaData.formula.GetFormula(FormulaType::ToSystem);
-        rawOffsets.append(rawOffset);
+        rawOffsets.append({.name = formulaData.name,
+                           .formula = formulaData.formula.GetFormula(FormulaType::ToSystem),
+                           .description = formulaData.description});
     }
 
     return rawOffsets;
@@ -206,18 +201,13 @@ void DialogGraduatedCurve::SetOffsets(const QVector<VRawGraduatedCurveOffset> &o
 
     for (const auto &offset : offsets)
     {
-        VGraduatedCurveOffsetFormula formulaData;
-        formulaData.formulaData = localData;
-        formulaData.name = offset.name;
-        formulaData.description = offset.description;
-
         VFormula widthFormula(offset.formula, localData.data());
         widthFormula.setToolId(toolId);
         widthFormula.setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits()));
         widthFormula.Eval();
 
-        formulaData.formula = widthFormula;
-        m_offsets.append(formulaData);
+        m_offsets.append(
+            {.name = offset.name, .formula = widthFormula, .formulaData = localData, .description = offset.description});
 
         auto newData = QSharedPointer<VContainer>(new VContainer(*localData.data()));
 
@@ -295,17 +285,17 @@ auto DialogGraduatedCurve::GetNotes() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogGraduatedCurve::SetSuffix(const QString &suffix)
+void DialogGraduatedCurve::SetName(const QString &name)
 {
-    m_originSuffix = suffix;
-    ui->lineEditSuffix->setText(m_originSuffix);
-    ValidateSuffix();
+    m_originName = name;
+    ui->lineEditCurveName->setText(m_originName);
+    ValidateName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto DialogGraduatedCurve::GetSuffix() const -> QString
+auto DialogGraduatedCurve::GetName() const -> QString
 {
-    return ui->lineEditSuffix->text();
+    return ui->lineEditCurveName->text();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -360,11 +350,8 @@ void DialogGraduatedCurve::ShowDialog(bool click)
 
         QVector<VRawGraduatedCurveOffset> rawOffsets = GetOffsets();
 
-        VRawGraduatedCurveOffset offsetData;
-        offsetData.name = GetOffsetName(false);
-        offsetData.formula = QString::number(FromPixel(len, *data->GetPatternUnit()));
-
-        rawOffsets.append(offsetData);
+        rawOffsets.append(
+            {.name = GetOffsetName(false), .formula = QString::number(FromPixel(len, *data->GetPatternUnit()))});
 
         SetOffsets(rawOffsets);
         vis->RefreshGeometry();
@@ -377,6 +364,14 @@ void DialogGraduatedCurve::ShowDialog(bool click)
             ui->tableWidget->selectRow(0);
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogGraduatedCurve::CheckDependencyTreeComplete()
+{
+    const bool ready = m_doc->IsPatternGraphComplete();
+    ui->lineEditCurveName->setEnabled(ready);
+    ui->lineEditAlias->setEnabled(ready);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -396,6 +391,8 @@ void DialogGraduatedCurve::ChosenObject(quint32 id, const SceneObject &type)
             vis->VisualMode(id);
         }
         prepare = true;
+
+        SetName(GenerateDefOffsetCurveName(data, GetOriginCurveId(), "__o"_L1, "Curve"_L1 + offset_));
 
         auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
         SCASSERT(window != nullptr)
@@ -452,23 +449,21 @@ void DialogGraduatedCurve::changeEvent(QEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogGraduatedCurve::ValidateSuffix()
+void DialogGraduatedCurve::ValidateName()
 {
     const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(GetOriginCurveId());
-    VSplinePath const splPath = curve->Outline({0}, GetSuffix());
+    VSplinePath const splPath = curve->Outline({0}, GetName());
 
-    if (QRegularExpression const rx(NameRegExp());
-        not GetSuffix().isEmpty()
-        && (not rx.match(splPath.name()).hasMatch()
-            || (m_originSuffix != GetSuffix() && not data->IsUnique(splPath.name()))))
+    if (QRegularExpression const rx(NameRegExp()); not GetName().isEmpty() || not rx.match(splPath.name()).hasMatch()
+                                                   || (m_originName != GetName() && not data->IsUnique(splPath.name())))
     {
         m_flagSuffix = false;
-        ChangeColor(ui->labelSuffix, errorColor);
+        ChangeColor(ui->labelName, errorColor);
     }
     else
     {
         m_flagSuffix = true;
-        ChangeColor(ui->labelSuffix, OkColor(this));
+        ChangeColor(ui->labelName, OkColor(this));
     }
 
     CheckState();
@@ -478,7 +473,7 @@ void DialogGraduatedCurve::ValidateSuffix()
 void DialogGraduatedCurve::ValidateAlias()
 {
     const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(GetOriginCurveId());
-    VSplinePath splPath = curve->Offset(0, GetSuffix());
+    VSplinePath splPath = curve->Offset(0, GetName());
 
     splPath.SetAliasSuffix(GetAliasSuffix());
     if (QRegularExpression const rx(NameRegExp());
@@ -507,9 +502,10 @@ void DialogGraduatedCurve::ShowOffsetDetails()
 
         const VGraduatedCurveOffsetFormula &offsetData = m_offsets.at(ui->tableWidget->currentRow());
 
-        ui->lineEditName->blockSignals(true);
-        ui->lineEditName->setText(VAbstractApplication::VApp()->TrVars()->InternalVarToUser(offsetData.name));
-        ui->lineEditName->blockSignals(false);
+        {
+            const QSignalBlocker blocker(ui->lineEditName);
+            ui->lineEditName->setText(VAbstractApplication::VApp()->TrVars()->InternalVarToUser(offsetData.name));
+        }
 
         if (QString const unitSuffix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits());
             offsetData.formula.error())
@@ -523,14 +519,14 @@ void DialogGraduatedCurve::ShowOffsetDetails()
             ui->labelCalculatedValue->setToolTip(tr("Value"));
         }
 
-        ui->plainTextEditFormula->blockSignals(true);
-        QString const formula = offsetData.formula.GetFormula(FormulaType::ToUser);
-        ui->plainTextEditFormula->setPlainText(formula);
-        ui->plainTextEditFormula->blockSignals(false);
+        {
+            const QSignalBlocker blocker(ui->plainTextEditFormula);
+            QString const formula = offsetData.formula.GetFormula(FormulaType::ToUser);
+            ui->plainTextEditFormula->setPlainText(formula);
+        }
 
-        ui->plainTextEditDescription->blockSignals(true);
+        const QSignalBlocker blocker(ui->plainTextEditDescription);
         ui->plainTextEditDescription->setPlainText(offsetData.description);
-        ui->plainTextEditDescription->blockSignals(false);
 
         return;
     }
@@ -550,23 +546,15 @@ void DialogGraduatedCurve::AddOffset()
     {
         currentRow = ui->tableWidget->rowCount();
 
-        VRawGraduatedCurveOffset offsetData;
-        offsetData.name = name;
-        offsetData.formula = "0"_L1;
-
-        rawOffsets.append(offsetData);
+        rawOffsets.append({.name = name, .formula = "0"_L1});
     }
     else
     {
         currentRow = ui->tableWidget->currentRow() + 1;
 
-        VRawGraduatedCurveOffset offsetData;
-        offsetData.name = name;
-        offsetData.formula = "0"_L1;
-
         if (currentRow >= 0 && currentRow <= rawOffsets.size())
         {
-            rawOffsets.insert(currentRow, offsetData);
+            rawOffsets.insert(currentRow, {.name = name, .formula = "0"_L1});
         }
     }
 
@@ -743,9 +731,8 @@ void DialogGraduatedCurve::SaveOffsetName(const QString &text)
 
     SetOffsets(rawOffsets);
 
-    ui->tableWidget->blockSignals(true);
+    const QSignalBlocker blocker(ui->tableWidget);
     ui->tableWidget->selectRow(row);
-    ui->tableWidget->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -764,9 +751,10 @@ void DialogGraduatedCurve::SaveOffsetDescription()
     rawOffsets[row].description = ui->plainTextEditDescription->toPlainText();
     SetOffsets(rawOffsets);
 
-    ui->tableWidget->blockSignals(true);
-    ui->tableWidget->selectRow(row);
-    ui->tableWidget->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->tableWidget);
+        ui->tableWidget->selectRow(row);
+    }
     ui->plainTextEditDescription->setTextCursor(cursor);
 }
 
@@ -806,9 +794,10 @@ void DialogGraduatedCurve::SaveOffsetFormula()
 
     SetOffsets(rawOffsets);
 
-    ui->tableWidget->blockSignals(true);
-    ui->tableWidget->selectRow(row);
-    ui->tableWidget->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->tableWidget);
+        ui->tableWidget->selectRow(row);
+    }
     ui->plainTextEditFormula->setTextCursor(cursor);
 }
 
@@ -836,7 +825,7 @@ void DialogGraduatedCurve::InitIcons()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogGraduatedCurve::FillOffsets()
 {
-    ui->tableWidget->blockSignals(true);
+    const QSignalBlocker blocker(ui->tableWidget);
     ui->tableWidget->clearContents();
     ui->tableWidget->setRowCount(static_cast<int>(m_offsets.size()));
 
@@ -855,7 +844,6 @@ void DialogGraduatedCurve::FillOffsets()
 
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
-    ui->tableWidget->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -904,21 +892,23 @@ void DialogGraduatedCurve::EnableDetails(bool enabled)
 
     if (not enabled)
     { // Clear
-        ui->lineEditName->blockSignals(true);
-        ui->lineEditName->clear();
-        ui->lineEditName->blockSignals(false);
+        {
+            const QSignalBlocker blocker(ui->lineEditName);
+            ui->lineEditName->clear();
+        }
 
-        ui->plainTextEditDescription->blockSignals(true);
-        ui->plainTextEditDescription->clear();
-        ui->plainTextEditDescription->blockSignals(false);
+        {
+            const QSignalBlocker blocker(ui->plainTextEditDescription);
+            ui->plainTextEditDescription->clear();
+        }
 
-        ui->labelCalculatedValue->blockSignals(true);
-        ui->labelCalculatedValue->clear();
-        ui->labelCalculatedValue->blockSignals(false);
+        {
+            const QSignalBlocker blocker(ui->labelCalculatedValue);
+            ui->labelCalculatedValue->clear();
+        }
 
-        ui->plainTextEditFormula->blockSignals(true);
+        const QSignalBlocker blocker(ui->plainTextEditFormula);
         ui->plainTextEditFormula->clear();
-        ui->plainTextEditFormula->blockSignals(false);
     }
 
     ui->pushButtonGrow->setEnabled(enabled);
@@ -950,12 +940,9 @@ auto DialogGraduatedCurve::VisualizationOffsets() const -> QVector<VRawGraduated
     toUserOffsets.reserve(m_offsets.size());
     for (const auto &offset : std::as_const(m_offsets))
     {
-        VRawGraduatedCurveOffset offsetData;
-        offsetData.name = offset.name;
-        offsetData.formula = offset.formula.GetFormula(FormulaType::ToUser);
-        offsetData.description = offset.description;
-
-        toUserOffsets.append(offsetData);
+        toUserOffsets.append({.name = offset.name,
+                              .formula = offset.formula.GetFormula(FormulaType::ToUser),
+                              .description = offset.description});
     }
     return toUserOffsets;
 }

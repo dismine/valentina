@@ -95,6 +95,9 @@ public:
     auto GetApproximationScale() const -> qreal;
     void SetApproximationScale(qreal value);
 
+    auto IsDerivative() const -> bool;
+    void SetDerivative(bool value);
+
     static auto PathLength(const QVector<QPointF> &path) -> qreal;
 
     static auto CurveIntersectLine(const QVector<QPointF> &points, const QLineF &line) -> QVector<QPointF>;
@@ -110,10 +113,15 @@ public:
 
     void SetAliasSuffix(const QString &aliasSuffix) override;
 
+    virtual auto GetTypeHead() const -> QString = 0;
+    virtual void SetNameSuffix(const QString &suffix) = 0;
+
     static auto Curvature(const QVector<QPointF> &vertices) -> double;
 
-    virtual auto Offset(qreal distance, const QString &suffix = QString()) const -> VSplinePath = 0;
-    virtual auto Outline(const QVector<qreal> &distances, const QString &suffix = QString()) const -> VSplinePath = 0;
+    virtual auto Offset(qreal distance, const QString &name = QString()) const -> VSplinePath = 0;
+    virtual auto Outline(const QVector<qreal> &distances, const QString &name = QString()) const -> VSplinePath = 0;
+
+    virtual auto HeadlessName() const -> QString = 0;
 
 protected:
     virtual void CreateName() = 0;

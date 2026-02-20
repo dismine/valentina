@@ -103,67 +103,38 @@ protected:
     void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     void ChangeLabelVisibility(quint32 id, bool visible) override;
 
-    template <class Item>
-    static auto InitArc(VContainer *data, qreal segLength, const VPointF *p, quint32 curveId, const QString &alias1,
-                        const QString &alias2) -> QPair<QString, QString>;
-    static auto InitSegments(GOType curveType, qreal segLength, const VPointF *p, quint32 curveId, VContainer *data,
-                             const QString &alias1, const QString &alias2) -> QPair<QString, QString>;
+    struct SegmentDetails
+    {
+        GOType curveType{GOType::Unknown};
+        qreal segLength{-1};
+        VPointF p{};
+        quint32 curveId{NULL_ID};
+        VContainer *data{nullptr};
+        VAbstractPattern *doc{nullptr};
+        QString name1{};
+        QString name2{};
+        QString alias1{};
+        QString alias2{};
+        quint32 id{NULL_ID};
+        QString name1AttrName{};
+        QString name2AttrName{};
+    };
+
+    template<typename T>
+    static void FixSubCurveNames(SegmentDetails &details,
+                                 const QSharedPointer<T> &baseCurve,
+                                 const QSharedPointer<T> &leftSub,
+                                 const QSharedPointer<T> &rightSub);
+
+    template<class Item>
+    static auto InitArc(SegmentDetails &details) -> QPair<QString, QString>;
+
+    static auto InitSpline(SegmentDetails &details) -> QPair<QString, QString>;
+    static auto InitSplinePath(SegmentDetails &details) -> QPair<QString, QString>;
+    static auto InitSegments(SegmentDetails &details) -> QPair<QString, QString>;
 
 private:
     Q_DISABLE_COPY_MOVE(VToolSinglePoint) // NOLINT
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-template <class Item>
-inline auto VToolSinglePoint::InitArc(VContainer *data, qreal segLength, const VPointF *p, quint32 curveId,
-                                      const QString &alias1, const QString &alias2) -> QPair<QString, QString>
-{
-    QSharedPointer<Item> a1;
-    QSharedPointer<Item> a2;
-
-    const QSharedPointer<Item> arc = data->GeometricObject<Item>(curveId);
-    Item arc1;
-    Item arc2;
-
-    if (not VFuzzyComparePossibleNulls(segLength, -1))
-    {
-        arc->CutArc(segLength, &arc1, &arc2, p->name());
-    }
-    else
-    {
-        arc->CutArc(0, &arc1, &arc2, p->name());
-    }
-
-    // Arc highly depend on id. Need for creating the name.
-    arc1.setId(p->id() + 1);
-    arc2.setId(p->id() + 2);
-
-    arc1.SetAliasSuffix(alias1);
-    arc2.SetAliasSuffix(alias2);
-
-    if (not VFuzzyComparePossibleNulls(segLength, -1))
-    {
-        a1 = QSharedPointer<Item>(new Item(arc1));
-        a2 = QSharedPointer<Item>(new Item(arc2));
-    }
-    else
-    {
-        a1 = QSharedPointer<Item>(new Item());
-        a2 = QSharedPointer<Item>(new Item());
-
-        // Take names for empty arcs from donors.
-        a1->setName(arc1.name());
-        a2->setName(arc2.name());
-    }
-
-    data->AddArc(a1, /*arc1.id()*/ NULL_ID, p->id());
-    data->AddArc(a2, /*arc2.id()*/ NULL_ID, p->id());
-
-    // Because we don't store segments, but only data about them we must register the names manually
-    data->RegisterUniqueName(a1);
-    data->RegisterUniqueName(a2);
-
-    return qMakePair(arc1.ObjectName(), arc2.ObjectName());
-}
 
 #endif // VTOOLSINGLEPOINT_H

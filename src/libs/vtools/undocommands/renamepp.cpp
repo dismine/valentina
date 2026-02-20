@@ -88,7 +88,7 @@ auto RenamePP::id() const -> int
 //---------------------------------------------------------------------------------------------------------------------
 void RenamePP::ChangeName(const QString &oldName, const QString &newName)
 {
-    if (doc->PatternBlockMapper()->Rename(oldName, newName))
+    if (Doc()->PatternBlockMapper()->Rename(oldName, newName))
     {
         combo->setItemText(combo->findText(oldName), newName);
     }

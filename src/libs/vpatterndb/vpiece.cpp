@@ -1286,30 +1286,21 @@ auto VPiece::CreatePassmark(const QVector<VPieceNode> &path, vsizetype previousI
         return {};
     }
 
-    QT_WARNING_PUSH
-    QT_WARNING_DISABLE_GCC("-Wnoexcept")
-
-    VPiecePassmarkData passmarkData;
-    passmarkData.previousSAPoint = previousSAPoint;
-    passmarkData.passmarkSAPoint = passmarkSAPoint;
-    passmarkData.nextSAPoint = nextSAPoint;
-    passmarkData.trueZeroWidth = IsTrueZeroWidth();
-    passmarkData.saWidth = ToPixel(GetSAWidth(), *data->GetPatternUnit());
-    passmarkData.nodeName = VPiecePath::NodeName(path, passmarkIndex, data);
-    passmarkData.pieceName = GetName();
-    passmarkData.passmarkLineType = path.at(passmarkIndex).GetPassmarkLineType();
-    passmarkData.passmarkAngleType = path.at(passmarkIndex).GetPassmarkAngleType();
-    passmarkData.isMainPathNode = path.at(passmarkIndex).IsMainPathNode();
-    passmarkData.isShowSecondPassmark = path.at(passmarkIndex).IsShowSecondPassmark();
-    passmarkData.passmarkIndex = passmarkIndex;
-    passmarkData.id = path.at(passmarkIndex).GetId();
-    passmarkData.globalPassmarkLength = ToPixel(GlobalPassmarkLength(data), *data->GetPatternUnit());
-    passmarkData.globalPassmarkWidth = ToPixel(GlobalPassmarkWidth(data), *data->GetPatternUnit());
-
-    // cppcheck-suppress unknownMacro
-    QT_WARNING_POP
-
-    return VPassmark(passmarkData);
+    return VPassmark({.previousSAPoint = previousSAPoint,
+                      .passmarkSAPoint = passmarkSAPoint,
+                      .nextSAPoint = nextSAPoint,
+                      .trueZeroWidth = IsTrueZeroWidth(),
+                      .saWidth = ToPixel(GetSAWidth(), *data->GetPatternUnit()),
+                      .nodeName = VPiecePath::NodeName(path, passmarkIndex, data),
+                      .pieceName = GetName(),
+                      .passmarkLineType = path.at(passmarkIndex).GetPassmarkLineType(),
+                      .passmarkAngleType = path.at(passmarkIndex).GetPassmarkAngleType(),
+                      .isMainPathNode = path.at(passmarkIndex).IsMainPathNode(),
+                      .isShowSecondPassmark = path.at(passmarkIndex).IsShowSecondPassmark(),
+                      .passmarkIndex = passmarkIndex,
+                      .id = path.at(passmarkIndex).GetId(),
+                      .globalPassmarkLength = ToPixel(GlobalPassmarkLength(data), *data->GetPatternUnit()),
+                      .globalPassmarkWidth = ToPixel(GlobalPassmarkWidth(data), *data->GetPatternUnit())});
 }
 
 //---------------------------------------------------------------------------------------------------------------------

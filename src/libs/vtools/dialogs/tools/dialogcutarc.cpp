@@ -85,6 +85,9 @@ DialogCutArc::DialogCutArc(const VContainer *data, VAbstractPattern *doc, quint3
 
     FillComboBoxArcCurves(ui->comboBoxArc);
 
+    connect(ui->lineEditName1, &QLineEdit::textEdited, this, &DialogCutArc::ValidateCurveNames);
+    connect(ui->lineEditName2, &QLineEdit::textEdited, this, &DialogCutArc::ValidateCurveNames);
+
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogCutArc::FXLength);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
             [this]()
@@ -125,14 +128,12 @@ void DialogCutArc::FXLength()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCutArc::EvalFormula()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditFormula->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditFormula;
-    formulaData.labelResult = ui->labelResultCalculation;
-    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-
-    Eval(formulaData, m_flagFormula);
+    Eval({.formula = ui->plainTextEditFormula->toPlainText(),
+          .variables = data->DataVariables(),
+          .labelEditFormula = ui->labelEditFormula,
+          .labelResult = ui->labelResultCalculation,
+          .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true)},
+         m_flagFormula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -179,6 +180,9 @@ void DialogCutArc::ChosenObject(quint32 id, const SceneObject &type)
             vis->VisualMode(id);
         }
         prepare = true;
+
+        SetName1(GenerateDefLeftSubName());
+        SetName2(GenerateDefRightSubName());
 
         auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
         SCASSERT(window != nullptr)
@@ -293,6 +297,42 @@ void DialogCutArc::ValidateAlias()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogCutArc::ValidateCurveNames()
+{
+    QRegularExpression const rx(NameRegExp());
+
+    VArc arc1;
+    arc1.SetNameSuffix(GetName1());
+
+    VArc arc2;
+    arc2.SetNameSuffix(GetName2());
+
+    if (GetName1().isEmpty() || !rx.match(arc1.name()).hasMatch()
+        || (m_originName1 != GetName1() && not data->IsUnique(arc1.name())) || arc1.name() == arc2.name())
+    {
+        m_flagCurveName1 = false;
+        ChangeColor(ui->labelName1, errorColor);
+    }
+    else
+    {
+        m_flagCurveName1 = true;
+        ChangeColor(ui->labelName1, OkColor(this));
+    }
+
+    if (GetName2().isEmpty() || !rx.match(arc2.name()).hasMatch()
+        || (m_originName2 != GetName2() && not data->IsUnique(arc2.name())) || arc1.name() == arc2.name())
+    {
+        m_flagCurveName2 = false;
+        ChangeColor(ui->labelName2, errorColor);
+    }
+    else
+    {
+        m_flagCurveName2 = true;
+        ChangeColor(ui->labelName2, OkColor(this));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogCutArc::FinishCreating()
 {
     vis->SetMode(Mode::Show);
@@ -309,6 +349,18 @@ void DialogCutArc::InitIcons()
 
     ui->toolButtonExprLength->setIcon(VTheme::GetIconResource(resource, QStringLiteral("24x24/fx.png")));
     ui->label_4->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/equal.png")));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogCutArc::GenerateDefLeftSubName() const -> QString
+{
+    return GenerateDefSubCurveName(data, getArcId(), "__ls"_L1, "LSubCurve"_L1, GetPointName());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogCutArc::GenerateDefRightSubName() const -> QString
+{
+    return GenerateDefSubCurveName(data, getArcId(), "__rs"_L1, "RSubCurve"_L1, GetPointName());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -357,6 +409,34 @@ void DialogCutArc::SetPointName(const QString &value)
 {
     m_pointName = value;
     ui->lineEditNamePoint->setText(m_pointName);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutArc::SetName1(const QString &name)
+{
+    m_originName1 = name;
+    ui->lineEditName1->setText(m_originName1);
+    ValidateCurveNames();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogCutArc::GetName1() const -> QString
+{
+    return ui->lineEditName1->text();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutArc::SetName2(const QString &name)
+{
+    m_originName2 = name;
+    ui->lineEditName2->setText(m_originName2);
+    ValidateCurveNames();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogCutArc::GetName2() const -> QString
+{
+    return ui->lineEditName2->text();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -463,4 +543,15 @@ void DialogCutArc::ShowDialog(bool click)
     }
 
     FinishCreating();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutArc::CheckDependencyTreeComplete()
+{
+    const bool ready = m_doc->IsPatternGraphComplete();
+    ui->lineEditNamePoint->setEnabled(ready);
+    ui->lineEditName1->setEnabled(ready);
+    ui->lineEditName2->setEnabled(ready);
+    ui->lineEditAlias1->setEnabled(ready);
+    ui->lineEditAlias2->setEnabled(ready);
 }

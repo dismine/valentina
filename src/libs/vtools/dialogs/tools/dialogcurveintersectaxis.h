@@ -71,6 +71,12 @@ public:
     void SetNotes(const QString &notes);
     auto GetNotes() const -> QString;
 
+    void SetName1(const QString &name);
+    auto GetName1() const -> QString;
+
+    void SetName2(const QString &name);
+    auto GetName2() const -> QString;
+
     void SetAliasSuffix1(const QString &alias);
     auto GetAliasSuffix1() const -> QString;
 
@@ -78,6 +84,8 @@ public:
     auto GetAliasSuffix2() const -> QString;
 
     void ShowDialog(bool click) override;
+
+    void CheckDependencyTreeComplete() override;
 
 public slots:
     void ChosenObject(quint32 id, const SceneObject &type) override;
@@ -97,6 +105,7 @@ protected:
 
 private slots:
     void ValidateAlias();
+    void ValidateCurveNames();
 
 private:
     Q_DISABLE_COPY_MOVE(DialogCurveIntersectAxis) // NOLINT
@@ -115,6 +124,11 @@ private:
     bool flagName;
     bool flagAlias1{true};
     bool flagAlias2{true};
+    bool m_flagCurveName1{true};
+    bool m_flagCurveName2{true};
+
+    QString m_originName1{};
+    QString m_originName2{};
 
     QString originAliasSuffix1{};
     QString originAliasSuffix2{};
@@ -123,12 +137,15 @@ private:
     qint32 number{0};
 
     void InitIcons();
+
+    auto GenerateDefLeftSubName() const -> QString;
+    auto GenerateDefRightSubName() const -> QString;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
 inline auto DialogCurveIntersectAxis::IsValid() const -> bool
 {
-    return flagFormula && flagName && flagAlias1 && flagAlias2;
+    return flagFormula && flagName && flagAlias1 && flagAlias2 && m_flagCurveName1 && m_flagCurveName2;
 }
 
 #endif // DIALOGCURVEINTERSECTAXIS_H

@@ -34,11 +34,10 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 RenamePiece::RenamePiece(VAbstractPattern *doc, QString newName, quint32 id, QUndoCommand *parent)
-  : VUndoCommand(doc, parent),
+  : VUndoCommand(doc, id, parent),
     m_newName(std::move(newName))
 {
     setText(QObject::tr("rename detail"));
-    nodeId = id;
 
     QDomElement const domElement = doc->FindElementById(id, VAbstractPattern::TagDetail);
     if (domElement.isElement())
@@ -47,7 +46,7 @@ RenamePiece::RenamePiece(VAbstractPattern *doc, QString newName, quint32 id, QUn
     }
     else
     {
-        qCDebug(vUndo, "Can't find detail with id = %u.", nodeId);
+        qCDebug(vUndo, "Can't find detail with id = %u.", id);
     }
 }
 
@@ -71,12 +70,12 @@ auto RenamePiece::mergeWith(const QUndoCommand *command) -> bool
     const auto *renameCommand = static_cast<const RenamePiece *>(command);
     SCASSERT(renameCommand != nullptr)
 
-    if (const quint32 id = renameCommand->getDetId(); id != nodeId)
+    if (renameCommand->ElementId() != ElementId())
     {
         return false;
     }
 
-    m_newName = renameCommand->getNewName();
+    m_newName = renameCommand->m_newName;
     return true;
 }
 
@@ -91,11 +90,12 @@ void RenamePiece::Do(const QString &name)
 {
     qCDebug(vUndo, "Do.");
 
-    if (QDomElement domElement = doc->FindElementById(nodeId, VAbstractPattern::TagDetail); domElement.isElement())
+    if (QDomElement domElement = Doc()->FindElementById(ElementId(), VAbstractPattern::TagDetail);
+        domElement.isElement())
     {
-        doc->SetAttribute(domElement, AttrName, name);
+        Doc()->SetAttribute(domElement, AttrName, name);
 
-        if (auto *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId)); tool != nullptr)
+        if (auto *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(ElementId())); tool != nullptr)
         {
             tool->SetName(name);
         }
@@ -104,6 +104,6 @@ void RenamePiece::Do(const QString &name)
     }
     else
     {
-        qCDebug(vUndo, "Can't find detail with id = %u.", nodeId);
+        qCDebug(vUndo, "Can't find detail with id = %u.", ElementId());
     }
 }

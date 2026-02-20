@@ -72,6 +72,12 @@ auto DialogUnionDetails::RetainPieces() const -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogUnionDetails::CheckDependencyTreeComplete()
+{
+    // does nothing
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ChoosedObject gets id and type of selected object. Save correct data and ignore wrong.
  * @param id id of point or detail

@@ -246,10 +246,7 @@ void VToolPiecePath::AddToFile()
         }
         else if (path.GetType() == PiecePathType::CustomSeamAllowance)
         {
-            CustomSARecord record;
-            record.path = m_id;
-
-            newDet.GetCustomSARecords().append(record);
+            newDet.GetCustomSARecords().append({.path = m_id});
         }
 
         VAbstractApplication::VApp()->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, m_pieceId));

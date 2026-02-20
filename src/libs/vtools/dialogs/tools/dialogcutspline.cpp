@@ -50,6 +50,12 @@
 #include "../vwidgets/vabstractmainwindow.h"
 #include "ui_dialogcutspline.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DialogCutSpline create dialog.
@@ -79,6 +85,9 @@ DialogCutSpline::DialogCutSpline(const VContainer *data, VAbstractPattern *doc, 
 
     FillComboBoxSplines(ui->comboBoxSpline);
 
+    connect(ui->lineEditName1, &QLineEdit::textEdited, this, &DialogCutSpline::ValidateCurveNames);
+    connect(ui->lineEditName2, &QLineEdit::textEdited, this, &DialogCutSpline::ValidateCurveNames);
+
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogCutSpline::FXLength);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
             [this]()
@@ -87,8 +96,10 @@ DialogCutSpline::DialogCutSpline(const VContainer *data, VAbstractPattern *doc, 
                                 m_flagName);
                 CheckState();
             });
-    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this,
-            [this]() { m_timerFormula->start(formulaTimerTimeout); });
+    connect(ui->plainTextEditFormula,
+            &QPlainTextEdit::textChanged,
+            this,
+            [this]() -> void { m_timerFormula->start(formulaTimerTimeout); });
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogCutSpline::DeployFormulaTextEdit);
     connect(ui->comboBoxSpline, &QComboBox::currentTextChanged, this, &DialogCutSpline::SplineChanged);
 
@@ -122,6 +133,34 @@ void DialogCutSpline::SetPointName(const QString &value)
 {
     m_pointName = value;
     ui->lineEditNamePoint->setText(m_pointName);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutSpline::SetName1(const QString &name)
+{
+    m_originName1 = name;
+    ui->lineEditName1->setText(m_originName1);
+    ValidateCurveNames();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogCutSpline::GetName1() const -> QString
+{
+    return ui->lineEditName1->text();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutSpline::SetName2(const QString &name)
+{
+    m_originName2 = name;
+    ui->lineEditName2->setText(m_originName2);
+    ValidateCurveNames();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogCutSpline::GetName2() const -> QString
+{
+    return ui->lineEditName2->text();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -182,6 +221,9 @@ void DialogCutSpline::ChosenObject(quint32 id, const SceneObject &type)
             vis->VisualMode(id);
         }
         prepare = true;
+
+        SetName1(GenerateDefLeftSubName());
+        SetName2(GenerateDefRightSubName());
 
         auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
         SCASSERT(window != nullptr)
@@ -282,6 +324,42 @@ void DialogCutSpline::ValidateAlias()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogCutSpline::ValidateCurveNames()
+{
+    QRegularExpression const rx(NameRegExp());
+
+    VSpline spl1;
+    spl1.SetNameSuffix(GetName1());
+
+    VSpline spl2;
+    spl2.SetNameSuffix(GetName2());
+
+    if (GetName1().isEmpty() || !rx.match(spl1.name()).hasMatch()
+        || (m_originName1 != GetName1() && not data->IsUnique(spl1.name())) || spl1.name() == spl2.name())
+    {
+        m_flagCurveName1 = false;
+        ChangeColor(ui->labelName1, errorColor);
+    }
+    else
+    {
+        m_flagCurveName1 = true;
+        ChangeColor(ui->labelName1, OkColor(this));
+    }
+
+    if (GetName2().isEmpty() || !rx.match(spl2.name()).hasMatch()
+        || (m_originName2 != GetName2() && not data->IsUnique(spl2.name())) || spl1.name() == spl2.name())
+    {
+        m_flagCurveName2 = false;
+        ChangeColor(ui->labelName2, errorColor);
+    }
+    else
+    {
+        m_flagCurveName2 = true;
+        ChangeColor(ui->labelName2, OkColor(this));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogCutSpline::FinishCreating()
 {
     vis->SetMode(Mode::Show);
@@ -298,6 +376,18 @@ void DialogCutSpline::InitIcons()
 
     ui->toolButtonExprLength->setIcon(VTheme::GetIconResource(resource, QStringLiteral("24x24/fx.png")));
     ui->label_4->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/equal.png")));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogCutSpline::GenerateDefLeftSubName() const -> QString
+{
+    return GenerateDefSubCurveName(data, getSplineId(), "__ls"_L1, "LSubCurve"_L1, GetPointName());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogCutSpline::GenerateDefRightSubName() const -> QString
+{
+    return GenerateDefSubCurveName(data, getSplineId(), "__rs"_L1, "RSubCurve"_L1, GetPointName());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -323,14 +413,12 @@ void DialogCutSpline::FXLength()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCutSpline::EvalFormula()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditFormula->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditFormula;
-    formulaData.labelResult = ui->labelResultCalculation;
-    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-
-    Eval(formulaData, m_flagFormula);
+    Eval({.formula = ui->plainTextEditFormula->toPlainText(),
+          .variables = data->DataVariables(),
+          .labelEditFormula = ui->labelEditFormula,
+          .labelResult = ui->labelResultCalculation,
+          .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true)},
+         m_flagFormula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -427,4 +515,15 @@ void DialogCutSpline::ShowDialog(bool click)
     }
 
     FinishCreating();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutSpline::CheckDependencyTreeComplete()
+{
+    const bool ready = m_doc->IsPatternGraphComplete();
+    ui->lineEditNamePoint->setEnabled(ready);
+    ui->lineEditName1->setEnabled(ready);
+    ui->lineEditName2->setEnabled(ready);
+    ui->lineEditAlias1->setEnabled(ready);
+    ui->lineEditAlias2->setEnabled(ready);
 }

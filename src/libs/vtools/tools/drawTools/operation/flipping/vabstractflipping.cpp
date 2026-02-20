@@ -37,6 +37,281 @@
 #include "../vgeometry/vspline.h"
 #include "../vgeometry/vsplinepath.h"
 
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+auto CreatePoint(quint32 idTool,
+                 const SourceItem &sItem,
+                 const QPointF &firstPoint,
+                 const QPointF &secondPoint,
+                 VContainer *data) -> DestinationItem
+{
+    const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(sItem.id);
+    VPointF rotated = point->Flip(QLineF(firstPoint, secondPoint), sItem.name);
+    rotated.setIdObject(idTool);
+
+    return {.id = data->AddGObject(new VPointF(rotated)),
+            .mx = rotated.mx(),
+            .my = rotated.my(),
+            .showLabel = rotated.IsShowLabel()};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Item>
+auto CreateItem(
+    quint32 idTool, const SourceItem &sItem, const QPointF &firstPoint, const QPointF &secondPoint, VContainer *data)
+    -> DestinationItem
+{
+    const QSharedPointer<Item> i = data->GeometricObject<Item>(sItem.id);
+    Item rotated = i->Flip(QLineF(firstPoint, secondPoint), sItem.name);
+    rotated.setIdObject(idTool);
+
+    if (sItem.penStyle != TypeLineDefault)
+    {
+        rotated.SetPenStyle(sItem.penStyle);
+    }
+
+    if (sItem.color != ColorDefault)
+    {
+        rotated.SetColor(sItem.color);
+    }
+
+    return {.id = data->AddGObject(new Item(rotated))};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Item>
+auto CreateCurve(
+    quint32 idTool, const SourceItem &sItem, const QPointF &firstPoint, const QPointF &secondPoint, VContainer *data)
+    -> DestinationItem
+{
+    const DestinationItem item = CreateItem<Item>(idTool, sItem, firstPoint, secondPoint, data);
+    data->AddSpline(data->GeometricObject<Item>(item.id), item.id);
+    return item;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Item>
+auto CreateCurveWithSegments(
+    quint32 idTool, const SourceItem &sItem, const QPointF &firstPoint, const QPointF &secondPoint, VContainer *data)
+    -> DestinationItem
+{
+    const DestinationItem item = CreateItem<Item>(idTool, sItem, firstPoint, secondPoint, data);
+    data->AddCurveWithSegments(data->GeometricObject<Item>(item.id), item.id);
+    return item;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Item>
+auto CreateArc(
+    quint32 idTool, const SourceItem &sItem, const QPointF &firstPoint, const QPointF &secondPoint, VContainer *data)
+    -> DestinationItem
+{
+    const DestinationItem item = CreateItem<Item>(idTool, sItem, firstPoint, secondPoint, data);
+    data->AddArc(data->GeometricObject<Item>(item.id), item.id);
+    return item;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto CreateDestinationObject(
+    quint32 id, const SourceItem &object, GOType type, const QPointF &fPoint, const QPointF &sPoint, VContainer *data)
+    -> DestinationItem
+{
+    // This check helps to find missed objects in the switch
+    Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects were handled.");
+
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wswitch-default")
+    QT_WARNING_DISABLE_CLANG("-Wswitch-default")
+
+    switch (type)
+    {
+        case GOType::Point:
+            return CreatePoint(id, object, fPoint, sPoint, data);
+        case GOType::Arc:
+            return CreateArc<VArc>(id, object, fPoint, sPoint, data);
+        case GOType::EllipticalArc:
+            return CreateArc<VEllipticalArc>(id, object, fPoint, sPoint, data);
+        case GOType::Spline:
+            return CreateCurve<VSpline>(id, object, fPoint, sPoint, data);
+        case GOType::SplinePath:
+            return CreateCurveWithSegments<VSplinePath>(id, object, fPoint, sPoint, data);
+        case GOType::CubicBezier:
+            return CreateCurve<VCubicBezier>(id, object, fPoint, sPoint, data);
+        case GOType::CubicBezierPath:
+            return CreateCurveWithSegments<VCubicBezierPath>(id, object, fPoint, sPoint, data);
+        case GOType::Unknown:
+        case GOType::PlaceLabel:
+            Q_UNREACHABLE();
+            break;
+    }
+
+    QT_WARNING_POP
+    Q_UNREACHABLE();
+    return {};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void CreateDestinationObjects(VAbstractOperationInitData &initData, const QPointF &fPoint, const QPointF &sPoint)
+{
+    for (const auto &object : std::as_const(initData.source))
+    {
+        const QSharedPointer<VGObject> obj = initData.data->GetGObject(object.id);
+        const DestinationItem item
+            = CreateDestinationObject(initData.id, object, obj->getType(), fPoint, sPoint, initData.data);
+        initData.destination.append(item);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void UpdatePoint(quint32 idTool,
+                 const SourceItem &sItem,
+                 const QPointF &firstPoint,
+                 const QPointF &secondPoint,
+                 VContainer *data,
+                 const DestinationItem &item)
+{
+    const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(sItem.id);
+    VPointF rotated = point->Flip(QLineF(firstPoint, secondPoint), sItem.name);
+    rotated.setIdObject(idTool);
+    rotated.setMx(item.mx);
+    rotated.setMy(item.my);
+    rotated.SetShowLabel(item.showLabel);
+
+    data->UpdateGObject(item.id, new VPointF(rotated));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Item>
+void UpdateItem(quint32 idTool,
+                const SourceItem &sItem,
+                const QPointF &firstPoint,
+                const QPointF &secondPoint,
+                VContainer *data,
+                quint32 id)
+{
+    const QSharedPointer<Item> i = data->GeometricObject<Item>(sItem.id);
+    Item rotated = i->Flip(QLineF(firstPoint, secondPoint), sItem.name);
+    rotated.setIdObject(idTool);
+
+    if (sItem.penStyle != TypeLineDefault)
+    {
+        rotated.SetPenStyle(sItem.penStyle);
+    }
+
+    if (sItem.color != ColorDefault)
+    {
+        rotated.SetColor(sItem.color);
+    }
+
+    data->UpdateGObject(id, new Item(rotated));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Item>
+void UpdateCurve(quint32 idTool,
+                 const SourceItem &sItem,
+                 const QPointF &firstPoint,
+                 const QPointF &secondPoint,
+                 VContainer *data,
+                 quint32 id)
+{
+    UpdateItem<Item>(idTool, sItem, firstPoint, secondPoint, data, id);
+    data->AddSpline(data->GeometricObject<Item>(id), id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Item>
+void UpdateCurveWithSegments(quint32 idTool,
+                             const SourceItem &sItem,
+                             const QPointF &firstPoint,
+                             const QPointF &secondPoint,
+                             VContainer *data,
+                             quint32 id)
+{
+    UpdateItem<Item>(idTool, sItem, firstPoint, secondPoint, data, id);
+    data->AddCurveWithSegments(data->GeometricObject<Item>(id), id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Item>
+void UpdateArc(quint32 idTool,
+               const SourceItem &sItem,
+               const QPointF &firstPoint,
+               const QPointF &secondPoint,
+               VContainer *data,
+               quint32 id)
+{
+    UpdateItem<Item>(idTool, sItem, firstPoint, secondPoint, data, id);
+    data->AddArc(data->GeometricObject<Item>(id), id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void UpdateDestinationObject(quint32 id,
+                             const SourceItem &object,
+                             GOType type,
+                             const QPointF &fPoint,
+                             const QPointF &sPoint,
+                             VContainer *data,
+                             const DestinationItem &destination)
+{
+    // This check helps to find missed objects in the switch
+    Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects were handled.");
+
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wswitch-default")
+    QT_WARNING_DISABLE_CLANG("-Wswitch-default")
+
+    switch (type)
+    {
+        case GOType::Point:
+            UpdatePoint(id, object, fPoint, sPoint, data, destination);
+            break;
+        case GOType::Arc:
+            UpdateArc<VArc>(id, object, fPoint, sPoint, data, destination.id);
+            break;
+        case GOType::EllipticalArc:
+            UpdateArc<VEllipticalArc>(id, object, fPoint, sPoint, data, destination.id);
+            break;
+        case GOType::Spline:
+            UpdateCurve<VSpline>(id, object, fPoint, sPoint, data, destination.id);
+            break;
+        case GOType::SplinePath:
+            UpdateCurveWithSegments<VSplinePath>(id, object, fPoint, sPoint, data, destination.id);
+            break;
+        case GOType::CubicBezier:
+            UpdateCurve<VCubicBezier>(id, object, fPoint, sPoint, data, destination.id);
+            break;
+        case GOType::CubicBezierPath:
+            UpdateCurveWithSegments<VCubicBezierPath>(id, object, fPoint, sPoint, data, destination.id);
+            break;
+        case GOType::Unknown:
+        case GOType::PlaceLabel:
+            Q_UNREACHABLE();
+            break;
+    }
+
+    QT_WARNING_POP
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void UpdateDestinationObjects(VAbstractOperationInitData &initData, const QPointF &fPoint, const QPointF &sPoint)
+{
+    for (int i = 0; i < initData.source.size(); ++i)
+    {
+        const SourceItem object = initData.source.at(i);
+        const QSharedPointer<VGObject> obj = initData.data->GetGObject(object.id);
+        UpdateDestinationObject(initData.id,
+                                object,
+                                obj->getType(),
+                                fPoint,
+                                sPoint,
+                                initData.data,
+                                initData.destination.at(i));
+    }
+}
+} // namespace
+
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractFlipping::VAbstractFlipping(const VAbstractOperationInitData &initData, QGraphicsItem *parent)
   : VAbstractOperation(initData, parent)
@@ -49,171 +324,10 @@ void VAbstractFlipping::CreateDestination(VAbstractOperationInitData &initData, 
 {
     if (initData.typeCreation == Source::FromGui)
     {
-        for (const auto &object : std::as_const(initData.source))
-        {
-            const QSharedPointer<VGObject> obj = initData.data->GetGObject(object.id);
-
-            // This check helps to find missed objects in the switch
-            Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects were handled.");
-
-            QT_WARNING_PUSH
-            QT_WARNING_DISABLE_GCC("-Wswitch-default")
-            QT_WARNING_DISABLE_CLANG("-Wswitch-default")
-
-            switch (obj->getType())
-            {
-                case GOType::Point:
-                    initData.destination.append(
-                        CreatePoint(initData.id, object, fPoint, sPoint, initData.suffix, initData.data));
-                    break;
-                case GOType::Arc:
-                    initData.destination.append(
-                        CreateArc<VArc>(initData.id, object, fPoint, sPoint, initData.suffix, initData.data));
-                    break;
-                case GOType::EllipticalArc:
-                    initData.destination.append(
-                        CreateArc<VEllipticalArc>(initData.id, object, fPoint, sPoint, initData.suffix, initData.data));
-                    break;
-                case GOType::Spline:
-                    initData.destination.append(
-                        CreateCurve<VSpline>(initData.id, object, fPoint, sPoint, initData.suffix, initData.data));
-                    break;
-                case GOType::SplinePath:
-                    initData.destination.append(CreateCurveWithSegments<VSplinePath>(
-                        initData.id, object, fPoint, sPoint, initData.suffix, initData.data));
-                    break;
-                case GOType::CubicBezier:
-                    initData.destination.append(
-                        CreateCurve<VCubicBezier>(initData.id, object, fPoint, sPoint, initData.suffix, initData.data));
-                    break;
-                case GOType::CubicBezierPath:
-                    initData.destination.append(CreateCurveWithSegments<VCubicBezierPath>(
-                        initData.id, object, fPoint, sPoint, initData.suffix, initData.data));
-                    break;
-                case GOType::Unknown:
-                case GOType::PlaceLabel:
-                    Q_UNREACHABLE();
-                    break;
-            }
-
-            QT_WARNING_POP
-        }
+        CreateDestinationObjects(initData, fPoint, sPoint);
     }
     else
     {
-        for (int i = 0; i < initData.source.size(); ++i)
-        {
-            const SourceItem object = initData.source.at(i);
-            const QSharedPointer<VGObject> obj = initData.data->GetGObject(object.id);
-
-            // This check helps to find missed objects in the switch
-            Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects were handled.");
-
-            QT_WARNING_PUSH
-            QT_WARNING_DISABLE_GCC("-Wswitch-default")
-            QT_WARNING_DISABLE_CLANG("-Wswitch-default")
-
-            switch (obj->getType())
-            {
-                case GOType::Point:
-                {
-                    const DestinationItem &item = initData.destination.at(i);
-                    UpdatePoint(initData.id, object, fPoint, sPoint, initData.suffix, initData.data, item);
-                    break;
-                }
-                case GOType::Arc:
-                    UpdateArc<VArc>(initData.id, object, fPoint, sPoint, initData.suffix, initData.data,
-                                    initData.destination.at(i).id);
-                    break;
-                case GOType::EllipticalArc:
-                    UpdateArc<VEllipticalArc>(initData.id, object, fPoint, sPoint, initData.suffix, initData.data,
-                                              initData.destination.at(i).id);
-                    break;
-                case GOType::Spline:
-                    UpdateCurve<VSpline>(initData.id, object, fPoint, sPoint, initData.suffix, initData.data,
-                                         initData.destination.at(i).id);
-                    break;
-                case GOType::SplinePath:
-                    UpdateCurveWithSegments<VSplinePath>(initData.id, object, fPoint, sPoint, initData.suffix,
-                                                         initData.data, initData.destination.at(i).id);
-                    break;
-                case GOType::CubicBezier:
-                    UpdateCurve<VCubicBezier>(initData.id, object, fPoint, sPoint, initData.suffix, initData.data,
-                                              initData.destination.at(i).id);
-                    break;
-                case GOType::CubicBezierPath:
-                    UpdateCurveWithSegments<VCubicBezierPath>(initData.id, object, fPoint, sPoint, initData.suffix,
-                                                              initData.data, initData.destination.at(i).id);
-                    break;
-                case GOType::Unknown:
-                case GOType::PlaceLabel:
-                    Q_UNREACHABLE();
-                    break;
-            }
-
-            QT_WARNING_POP
-        }
+        UpdateDestinationObjects(initData, fPoint, sPoint);
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VAbstractFlipping::CreatePoint(quint32 idTool, const SourceItem &sItem, const QPointF &firstPoint,
-                                    const QPointF &secondPoint, const QString &suffix, VContainer *data)
-    -> DestinationItem
-{
-    const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(sItem.id);
-    VPointF rotated = point->Flip(QLineF(firstPoint, secondPoint), suffix);
-    rotated.setIdObject(idTool);
-
-    if (not sItem.alias.isEmpty())
-    {
-        rotated.setName(sItem.alias);
-    }
-
-    DestinationItem item;
-    item.mx = rotated.mx();
-    item.my = rotated.my();
-    item.showLabel = rotated.IsShowLabel();
-    item.id = data->AddGObject(new VPointF(rotated));
-    return item;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <class Item>
-auto VAbstractFlipping::CreateArc(quint32 idTool, const SourceItem &sItem, const QPointF &firstPoint,
-                                  const QPointF &secondPoint, const QString &suffix, VContainer *data)
-    -> DestinationItem
-{
-    const DestinationItem item = CreateItem<Item>(idTool, sItem, firstPoint, secondPoint, suffix, data);
-    data->AddArc(data->GeometricObject<Item>(item.id), item.id);
-    return item;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractFlipping::UpdatePoint(quint32 idTool, const SourceItem &sItem, const QPointF &firstPoint,
-                                    const QPointF &secondPoint, const QString &suffix, VContainer *data,
-                                    const DestinationItem &item)
-{
-    const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(sItem.id);
-    VPointF rotated = point->Flip(QLineF(firstPoint, secondPoint), suffix);
-    rotated.setIdObject(idTool);
-    rotated.setMx(item.mx);
-    rotated.setMy(item.my);
-    rotated.SetShowLabel(item.showLabel);
-
-    if (not sItem.alias.isEmpty())
-    {
-        rotated.setName(sItem.alias);
-    }
-
-    data->UpdateGObject(item.id, new VPointF(rotated));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <class Item>
-void VAbstractFlipping::UpdateArc(quint32 idTool, const SourceItem &sItem, const QPointF &firstPoint,
-                                  const QPointF &secondPoint, const QString &suffix, VContainer *data, quint32 id)
-{
-    UpdateItem<Item>(idTool, sItem, firstPoint, secondPoint, suffix, data, id);
-    data->AddArc(data->GeometricObject<Item>(id), id);
 }

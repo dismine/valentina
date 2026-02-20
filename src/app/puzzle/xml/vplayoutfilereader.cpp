@@ -692,20 +692,16 @@ auto VPLayoutFileReader::ReadNotch() -> VLayoutPassmark
     QT_WARNING_PUSH
     QT_WARNING_DISABLE_GCC("-Wnoexcept")
 
-    VLayoutPassmark passmark;
-    passmark.isBuiltIn = ReadAttributeBool(attribs, ML::AttrBuiltIn, falseStr);
-    passmark.baseLine = StringToLine(ReadAttributeEmptyString(attribs, ML::AttrBaseLine));
-    passmark.lines = StringToLines(ReadAttributeEmptyString(attribs, ML::AttrPath));
-    passmark.isClockwiseOpening = ReadAttributeBool(attribs, ML::AttrClockwiseOpening, falseStr);
-
     QString const defaultType = QString::number(static_cast<int>(PassmarkLineType::OneLine));
-    passmark.type = static_cast<PassmarkLineType>(ReadAttributeUInt(attribs, ML::AttrType, defaultType));
-
-    QT_WARNING_POP
 
     readElementText();
 
-    return passmark;
+    return {.lines = StringToLines(ReadAttributeEmptyString(attribs, ML::AttrPath)),
+            .type = static_cast<PassmarkLineType>(ReadAttributeUInt(attribs, ML::AttrType, defaultType)),
+            .baseLine = StringToLine(ReadAttributeEmptyString(attribs, ML::AttrBaseLine)),
+            .isBuiltIn = ReadAttributeBool(attribs, ML::AttrBuiltIn, falseStr),
+            .isClockwiseOpening = ReadAttributeBool(attribs, ML::AttrClockwiseOpening, falseStr)};
+    QT_WARNING_POP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -917,20 +913,18 @@ auto VPLayoutFileReader::ReadLabelLine() -> TextLine
 {
     AssertRootTag(ML::TagLine);
 
-    TextLine line;
-
     QXmlStreamAttributes const attribs = attributes();
 
-    line.m_iFontSize =
-        ReadAttributeInt(attribs, ML::AttrFontSize, QString::number(VCommonSettings::MinPieceLabelFontPointSize()));
-    line.m_bold = ReadAttributeBool(attribs, ML::AttrBold, falseStr);
-    line.m_italic = ReadAttributeBool(attribs, ML::AttrItalic, falseStr);
     int const alignment =
         ReadAttributeInt(attribs, ML::AttrAlignment, QString::number(static_cast<int>(Qt::AlignCenter)));
-    line.m_eAlign = static_cast<Qt::Alignment>(alignment);
-    line.m_qsText = readElementText();
 
-    return line;
+    return {.qsText = readElementText(),
+            .iFontSize = ReadAttributeInt(attribs,
+                                          ML::AttrFontSize,
+                                          QString::number(VCommonSettings::MinPieceLabelFontPointSize())),
+            .bold = ReadAttributeBool(attribs, ML::AttrBold, falseStr),
+            .italic = ReadAttributeBool(attribs, ML::AttrItalic, falseStr),
+            .eAlign = static_cast<Qt::Alignment>(alignment)};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

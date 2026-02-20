@@ -136,27 +136,23 @@ DialogEndLine::DialogEndLine(const VContainer *data, VAbstractPattern *doc, quin
  */
 void DialogEndLine::EvalAngle()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditAngle->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditAngle;
-    formulaData.labelResult = ui->labelResultCalculationAngle;
-    formulaData.postfix = degreeSymbol;
-
-    Eval(formulaData, flagError);
+    Eval({.formula = ui->plainTextEditAngle->toPlainText(),
+          .variables = data->DataVariables(),
+          .labelEditFormula = ui->labelEditAngle,
+          .labelResult = ui->labelResultCalculationAngle,
+          .postfix = degreeSymbol},
+         flagError);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEndLine::EvalLength()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditFormula->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditFormula;
-    formulaData.labelResult = ui->labelResultCalculation;
-    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-
-    Eval(formulaData, flagFormula);
+    Eval({.formula = ui->plainTextEditFormula->toPlainText(),
+          .variables = data->DataVariables(),
+          .labelEditFormula = ui->labelEditFormula,
+          .labelResult = ui->labelResultCalculation,
+          .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true)},
+         flagFormula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -360,6 +356,14 @@ void DialogEndLine::ShowDialog(bool click)
 
         FinishCreating();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEndLine::CheckDependencyTreeComplete()
+{
+    const bool ready = m_doc->IsPatternGraphComplete();
+    ui->comboBoxBasePoint->setEnabled(ready);
+    ui->lineEditNamePoint->setEnabled(ready);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

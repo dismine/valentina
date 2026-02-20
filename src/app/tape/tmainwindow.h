@@ -195,8 +195,6 @@ private:
 
     struct MultisizeMeasurement
     {
-        MultisizeMeasurement() = default;
-
         QString name{};           // NOLINT(misc-non-private-member-variables-in-classes)
         qreal base{0};            // NOLINT(misc-non-private-member-variables-in-classes)
         qreal shiftA{0};          // NOLINT(misc-non-private-member-variables-in-classes)

@@ -207,3 +207,10 @@ auto DialogPointFromArcAndTangent::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointFromArcAndTangent::CheckDependencyTreeComplete()
+{
+    const bool ready = m_doc->IsPatternGraphComplete();
+    ui->lineEditNamePoint->setEnabled(ready);
+}

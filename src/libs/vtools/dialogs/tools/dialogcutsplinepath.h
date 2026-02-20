@@ -56,6 +56,12 @@ public:
     auto GetPointName() const -> QString;
     void SetPointName(const QString &value);
 
+    void SetName1(const QString &name);
+    auto GetName1() const -> QString;
+
+    void SetName2(const QString &name);
+    auto GetName2() const -> QString;
+
     auto GetFormula() const -> QString;
     void SetFormula(const QString &value);
 
@@ -72,6 +78,8 @@ public:
     auto GetAliasSuffix2() const -> QString;
 
     void ShowDialog(bool click) override;
+
+    void CheckDependencyTreeComplete() override;
 
 public slots:
     void ChosenObject(quint32 id, const SceneObject &type) override;
@@ -95,6 +103,7 @@ protected:
 private slots:
     void SplinePathChanged();
     void ValidateAlias();
+    void ValidateCurveNames();
 
 private:
     Q_DISABLE_COPY_MOVE(DialogCutSplinePath) // NOLINT
@@ -115,6 +124,11 @@ private:
     bool m_flagName{true};
     bool m_flagAlias1{true};
     bool m_flagAlias2{true};
+    bool m_flagCurveName1{true};
+    bool m_flagCurveName2{true};
+
+    QString m_originName1{};
+    QString m_originName2{};
 
     QString m_originAliasSuffix1{};
     QString m_originAliasSuffix2{};
@@ -124,12 +138,15 @@ private:
     void FinishCreating();
 
     void InitIcons();
+
+    auto GenerateDefLeftSubName() const -> QString;
+    auto GenerateDefRightSubName() const -> QString;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
 inline auto DialogCutSplinePath::IsValid() const -> bool
 {
-    return m_flagFormula && m_flagAlias1 && m_flagAlias2 && m_flagName;
+    return m_flagFormula && m_flagAlias1 && m_flagAlias2 && m_flagName && m_flagCurveName1 && m_flagCurveName2;
 }
 
 #endif // DIALOGCUTSPLINEPATH_H

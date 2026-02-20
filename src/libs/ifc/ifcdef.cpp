@@ -96,7 +96,7 @@ const QString AttrKAsm2 = QStringLiteral("kAsm2");
 const QString AttrKCurve = QStringLiteral("kCurve");
 const QString AttrDuplicate = QStringLiteral("duplicate");
 const QString AttrAScale = QStringLiteral("aScale");
-const QString AttrPathPoint = QStringLiteral("pathPoint");
+const QString TagPathPoint = QStringLiteral("pathPoint");
 const QString AttrPSpline = QStringLiteral("pSpline");
 const QString AttrAxisP1 = QStringLiteral("axisP1");
 const QString AttrAxisP2 = QStringLiteral("axisP2");
@@ -145,6 +145,10 @@ const QString AttrNotes = QStringLiteral("notes");
 const QString AttrAlias = QStringLiteral("alias");
 const QString AttrAlias1 = QStringLiteral("alias1");
 const QString AttrAlias2 = QStringLiteral("alias2");
+const QString AttrCurve1Name1 = QStringLiteral("curve1Name1");
+const QString AttrCurve1Name2 = QStringLiteral("curve1Name2");
+const QString AttrCurve2Name1 = QStringLiteral("curve2Name1");
+const QString AttrCurve2Name2 = QStringLiteral("curve2Name2");
 const QString AttrCurve1Alias1 = QStringLiteral("curve1Alias1");
 const QString AttrCurve1Alias2 = QStringLiteral("curve1Alias2");
 const QString AttrCurve2Alias1 = QStringLiteral("curve2Alias1");
@@ -154,6 +158,8 @@ const QString AttrKMVersion = QStringLiteral("version");
 const QString AttrNotMirrored = QStringLiteral("notMirrored");
 const QString AttrOffset = QStringLiteral("offset");
 const QString AttrDescription = QStringLiteral("description");
+const QString AttrCurveName1 = QStringLiteral("curveName1");
+const QString AttrCurveName2 = QStringLiteral("curveName2");
 
 const QString TypeLineDefault = QStringLiteral("default");
 const QString TypeLineNone = QStringLiteral("none");
@@ -287,7 +293,7 @@ const QString angleLine_ = QStringLiteral("AngleLine_");
 const QString spl_ = QStringLiteral(SPL_);
 const QString arc_ = QStringLiteral(ARC_);
 const QString elarc_ = QStringLiteral(ELARC_);
-const QString splPath = QStringLiteral("SplPath");
+const QString splPath_V = QStringLiteral("SplPath");
 const QString radius_V = QStringLiteral("Radius");
 const QString radiusArc_ = radius_V + arc_;
 const QString radius1ElArc_ = radius_V + '1'_L1 + elarc_;
@@ -298,16 +304,16 @@ const QString c1Length_V = QStringLiteral("C1Length");
 const QString c2Length_V = QStringLiteral("C2Length");
 const QString c1LengthSpl_ = c1Length_V + spl_;
 const QString c2LengthSpl_ = c2Length_V + spl_;
-const QString c1LengthSplPath = c1Length_V + splPath;
-const QString c2LengthSplPath = c2Length_V + splPath;
+const QString c1LengthSplPath = c1Length_V + splPath_V;
+const QString c2LengthSplPath = c2Length_V + splPath_V;
 const QString angle1Arc_ = angle1_V + arc_;
 const QString angle2Arc_ = angle2_V + arc_;
 const QString angle1ElArc_ = angle1_V + elarc_;
 const QString angle2ElArc_ = angle2_V + elarc_;
 const QString angle1Spl_ = angle1_V + spl_;
 const QString angle2Spl_ = angle2_V + spl_;
-const QString angle1SplPath = angle1_V + splPath;
-const QString angle2SplPath = angle2_V + splPath;
+const QString angle1SplPath = angle1_V + splPath_V;
+const QString angle2SplPath = angle2_V + splPath_V;
 const QString seg_ = QStringLiteral("Seg_");
 const QString currentLength = QStringLiteral("CurrentLength");
 const QString currentSeamAllowance = QStringLiteral("CurrentSeamAllowance");
@@ -326,7 +332,7 @@ auto BuilInVariables() -> QStringList
             arc_,
             elarc_,
             spl_,
-            splPath,
+            splPath_V,
             radiusArc_,
             radius1ElArc_,
             radius2ElArc_,

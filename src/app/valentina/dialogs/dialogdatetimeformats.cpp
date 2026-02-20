@@ -94,15 +94,16 @@ void DialogDateTimeFormats::AddLine()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogDateTimeFormats::RemoveLine()
 {
-    ui->listWidget->blockSignals(true);
-    if (QListWidgetItem *curLine = ui->listWidget->currentItem())
     {
-        if (not m_predefined.contains(curLine->data(Qt::UserRole).toString()))
+        const QSignalBlocker blocker(ui->listWidget);
+        if (QListWidgetItem *curLine = ui->listWidget->currentItem())
         {
-            delete ui->listWidget->takeItem(ui->listWidget->currentRow());
+            if (not m_predefined.contains(curLine->data(Qt::UserRole).toString()))
+            {
+                delete ui->listWidget->takeItem(ui->listWidget->currentRow());
+            }
         }
     }
-    ui->listWidget->blockSignals(false);
     ShowFormatDetails();
 }
 
@@ -127,9 +128,8 @@ void DialogDateTimeFormats::ShowFormatDetails()
     {
         if (const QListWidgetItem *line = ui->listWidget->currentItem())
         {
-            ui->lineEditFormat->blockSignals(true);
+            const QSignalBlocker blocker(ui->lineEditFormat);
             ui->lineEditFormat->setText(line->data(Qt::UserRole).toString());
-            ui->lineEditFormat->blockSignals(false);
         }
     }
 
@@ -154,7 +154,7 @@ void DialogDateTimeFormats::Init(const QStringList &predefined, const QStringLis
 //---------------------------------------------------------------------------------------------------------------------
 void DialogDateTimeFormats::SetFormatLines(const QStringList &predefined, const QStringList &userDefined)
 {
-    ui->listWidget->blockSignals(true);
+    QSignalBlocker blocker(ui->listWidget);
     ui->listWidget->clear();
 
     int row = -1;
@@ -169,7 +169,7 @@ void DialogDateTimeFormats::SetFormatLines(const QStringList &predefined, const 
         ui->listWidget->insertItem(++row, AddListLine(item));
     }
 
-    ui->listWidget->blockSignals(false);
+    blocker.unblock();
 
     if (ui->listWidget->count() > 0)
     {
@@ -184,9 +184,8 @@ void DialogDateTimeFormats::SetupControls()
 
     if (not enabled)
     {
-        ui->lineEditFormat->blockSignals(true);
+        const QSignalBlocker blocker(ui->lineEditFormat);
         ui->lineEditFormat->clear();
-        ui->lineEditFormat->blockSignals(false);
     }
 
     ui->toolButtonAdd->setEnabled(true);

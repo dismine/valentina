@@ -40,12 +40,12 @@
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vgeometry/vgeometrydef.h"
 #include "../vmisc/def.h"
-#include "vabstractspline.h"
+#include "vtoolabstractcurve.h"
 
 class VSplinePath;
 template <class T> class QSharedPointer;
 
-struct VToolSplinePathInitData : VAbstractSplineInitData
+struct VToolSplinePathInitData : VToolAbstractCurveInitData
 {
     QVector<quint32> points{}; // NOLINT(misc-non-private-member-variables-in-classes)
     QVector<QString> a1{};     // NOLINT(misc-non-private-member-variables-in-classes)
@@ -58,7 +58,7 @@ struct VToolSplinePathInitData : VAbstractSplineInitData
 /**
  * @brief The VToolSplinePath class tool for creation spline path.
  */
-class VToolSplinePath : public VAbstractSpline
+class VToolSplinePath : public VToolAbstractBezier
 {
     Q_OBJECT // NOLINT
 
@@ -116,6 +116,8 @@ protected:
     void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
     void SetVisualization() override;
     void RefreshCtrlPoints() override;
+    void ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement) override;
+
 private slots:
     void CurveReleased();
 
@@ -141,6 +143,8 @@ private:
     void UndoCommandMove(const VSplinePath &oldPath, const VSplinePath &newPath);
 
     void InitControlPoints(const VSplinePath *splPath);
+
+    auto GatherToolChanges() const -> ToolChanges;
 };
 
 #endif // VTOOLSPLINEPATH_H

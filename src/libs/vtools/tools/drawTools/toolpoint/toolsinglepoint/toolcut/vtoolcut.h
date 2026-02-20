@@ -37,9 +37,10 @@
 
 #include "../../../../../visualization/visualization.h"
 #include "../../../../vdatatool.h"
-#include "../../../toolcurve/vabstractspline.h"
+#include "../../../toolcurve/vtoolabstractcurve.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vmisc/def.h"
+#include "../vtools/undocommands/renameobject.h"
 #include "../vtoolsinglepoint.h"
 
 class VFormula;
@@ -52,6 +53,16 @@ struct VToolCutInitData : VToolSinglePointInitData
     QString formula{};            // NOLINT(misc-non-private-member-variables-in-classes)
     QString aliasSuffix1{};       // NOLINT(misc-non-private-member-variables-in-classes)
     QString aliasSuffix2{};       // NOLINT(misc-non-private-member-variables-in-classes)
+    QString name1{};              // NOLINT(misc-non-private-member-variables-in-classes)
+    QString name2{};              // NOLINT(misc-non-private-member-variables-in-classes)
+};
+
+enum class VToolCutNameField : quint8
+{
+    Name1,
+    Name2,
+    AliasSuffix1,
+    AliasSuffix2
 };
 
 class VToolCut : public VToolSinglePoint
@@ -70,13 +81,21 @@ public:
     auto GetFormulaLength() const -> VFormula;
     void SetFormulaLength(const VFormula &value);
 
+    auto GetName1() const -> QString;
+    void SetName1(const QString &name);
+
+    auto GetName2() const -> QString;
+    void SetName2(const QString &name);
+
     auto GetAliasSuffix1() const -> QString;
-    void SetAliasSuffix1(QString alias);
+    void SetAliasSuffix1(const QString &alias);
 
     auto GetAliasSuffix2() const -> QString;
-    void SetAliasSuffix2(QString alias);
+    void SetAliasSuffix2(const QString &alias);
 
     auto CurveName() const -> QString;
+
+    auto BaseCurveId() const -> quint32;
 
 public slots:
     void SetDetailsMode(bool mode) override;
@@ -89,8 +108,41 @@ protected:
     quint32 baseCurveId;
     bool detailsMode;
 
+    QString m_name1;
+    QString m_name2;
+
     QString m_aliasSuffix1{};
     QString m_aliasSuffix2{};
+
+    struct ToolChanges
+    {
+        QString oldLabel{};
+        QString newLabel{};
+        QString oldName1{};
+        QString newName1{};
+        QString oldName2{};
+        QString newName2{};
+        QString oldAliasSuffix1{};
+        QString newAliasSuffix1{};
+        QString oldAliasSuffix2{};
+        QString newAliasSuffix2{};
+
+        auto HasChanges() const -> bool
+        {
+            return oldLabel != newLabel || oldName1 != newName1 || oldName2 != newName2
+                   || oldAliasSuffix1 != newAliasSuffix1 || oldAliasSuffix2 != newAliasSuffix2;
+        }
+
+        auto LabelChanged() const -> bool { return oldLabel != newLabel; }
+        auto Name1Changed() const -> bool { return oldName1 != newName1; }
+        auto Name2Changed() const -> bool { return oldName2 != newName2; }
+        auto AliasSuffix1Changed() const -> bool { return oldAliasSuffix1 != newAliasSuffix1; }
+        auto AliasSuffix2Changed() const -> bool { return oldAliasSuffix2 != newAliasSuffix2; }
+    };
+
+    void ProcessToolCutOptions(const QDomElement &oldDomElement,
+                               const QDomElement &newDomElement,
+                               const ToolChanges &changes);
 
     void RefreshGeometry();
     void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
@@ -98,9 +150,93 @@ protected:
 
     template <typename T> void ShowToolVisualization(bool show);
 
+    template<typename T>
+    static void FixSubCurveNames(VToolCutInitData &initData,
+                                 const QSharedPointer<T> &baseCurve,
+                                 const QSharedPointer<T> &leftSub,
+                                 const QSharedPointer<T> &rightSub);
+
 private:
     Q_DISABLE_COPY_MOVE(VToolCut) // NOLINT
+
+    void UpdateNameField(VToolCutNameField field, const QString &value);
+    auto HasConflict(const QString &value, VToolCutNameField currentField) const -> bool;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+template<typename T>
+inline void VToolCut::FixSubCurveNames(VToolCutInitData &initData,
+                                       const QSharedPointer<T> &baseCurve,
+                                       const QSharedPointer<T> &leftSub,
+                                       const QSharedPointer<T> &rightSub)
+{
+    bool fixName1 = false;
+    bool fixName2 = false;
+    if (initData.name1.isEmpty())
+    {
+        if (!baseCurve->IsDerivative())
+        {
+            initData.name1 = leftSub->HeadlessName();
+        }
+        else
+        {
+            initData.name1 = GenerateUniqueCurveName(initData.data,
+                                                     leftSub->GetTypeHead(),
+                                                     QStringLiteral("LSubCurve"),
+                                                     initData.name);
+            fixName1 = true;
+        }
+    }
+
+    if (initData.name2.isEmpty())
+    {
+        if (!baseCurve->IsDerivative())
+        {
+            initData.name2 = rightSub->HeadlessName();
+        }
+        else
+        {
+            initData.name2 = GenerateUniqueCurveName(initData.data,
+                                                     rightSub->GetTypeHead(),
+                                                     QStringLiteral("RSubCurve"),
+                                                     initData.name);
+            fixName2 = true;
+        }
+    }
+
+    if (fixName1 || fixName2)
+    {
+        VAbstractApplication::VApp()->getUndoStack()->push(
+            new RenameSegmentCurves(RenameAlias::CurveType(baseCurve->getType()),
+                                    initData.name,
+                                    fixName1 ? initData.name1 : QString(),
+                                    fixName2 ? initData.name2 : QString(),
+                                    initData.doc));
+
+        QDomElement domElement = initData.doc->FindElementById(initData.id);
+        if (!domElement.isElement())
+        {
+            qCDebug(vTool, "Can't find tool with id = %u", initData.id);
+            return;
+        }
+
+        if (fixName1)
+        {
+            initData.doc->SetAttribute(domElement, AttrCurveName1, initData.name1);
+        }
+
+        if (fixName2)
+        {
+            initData.doc->SetAttribute(domElement, AttrCurveName2, initData.name2);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VToolCut::BaseCurveId() const -> quint32
+{
+    return baseCurveId;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T> inline void VToolCut::ShowToolVisualization(bool show)
@@ -126,7 +262,7 @@ template <typename T> inline void VToolCut::ShowToolVisualization(bool show)
     }
 
     VDataTool *parent = VAbstractPattern::getTool(VAbstractTool::data.GetGObject(baseCurveId)->getIdTool());
-    if (auto *parentCurve = qobject_cast<VAbstractSpline *>(parent))
+    if (auto *parentCurve = qobject_cast<VToolAbstractCurve *>(parent))
     {
         detailsMode ? parentCurve->ShowHandles(detailsMode) : parentCurve->ShowHandles(show);
     }

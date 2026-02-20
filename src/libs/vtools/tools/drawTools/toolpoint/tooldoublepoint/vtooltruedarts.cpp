@@ -65,6 +65,21 @@ VToolTrueDarts::VToolTrueDarts(const VToolTrueDartsInitData &initData, QGraphics
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VToolTrueDarts::GatherToolChanges() const -> VToolDoublePoint::ToolChanges
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogTrueDarts> dialogTool = qobject_cast<DialogTrueDarts *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    return {
+        .oldP1Label = VAbstractTool::data.GetGObject(p1id)->name(),
+        .newP1Label = dialogTool->GetFirstNewDartPointName(),
+        .oldP2Label = VAbstractTool::data.GetGObject(p2id)->name(),
+        .newP2Label = dialogTool->GetSecondNewDartPointName(),
+    };
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolTrueDarts::FindPoint(const QPointF &baseLineP1, const QPointF &baseLineP2, const QPointF &dartP1,
                                const QPointF &dartP2, const QPointF &dartP3, QPointF &p1, QPointF &p2)
 {
@@ -98,6 +113,7 @@ void VToolTrueDarts::SetDialog()
     const QSharedPointer<VPointF> p1 = VAbstractTool::data.GeometricObject<VPointF>(p1id);
     const QSharedPointer<VPointF> p2 = VAbstractTool::data.GeometricObject<VPointF>(p2id);
 
+    dialogTool->CheckDependencyTreeComplete();
     dialogTool->SetChildrenId(p1id, p2id);
     dialogTool->SetNewDartPointNames(p1->name(), p2->name());
     dialogTool->SetFirstBasePointId(baseLineP1Id);
@@ -317,4 +333,10 @@ void VToolTrueDarts::SetVisualization()
         visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolTrueDarts::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    ProcessTrueDartsToolOptions(oldDomElement, newDomElement, GatherToolChanges());
 }

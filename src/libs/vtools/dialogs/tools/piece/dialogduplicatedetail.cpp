@@ -76,6 +76,12 @@ void DialogDuplicateDetail::ShowDialog(bool click)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogDuplicateDetail::CheckDependencyTreeComplete()
+{
+    // does nothing
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogDuplicateDetail::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (prepare == false && type == SceneObject::Detail && id > NULL_ID) // After first choose we ignore all objects

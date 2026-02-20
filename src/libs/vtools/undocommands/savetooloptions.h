@@ -55,14 +55,14 @@ public:
     auto mergeWith(const QUndoCommand *command) -> bool override;
     auto id() const -> int override;
 
-    auto getNewXml() const -> QDomElement;
-    auto getToolId() const -> quint32;
+    void SetInGroup(bool newInGroup);
 
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(SaveToolOptions) // NOLINT
     const QDomElement oldXml;
     QDomElement newXml;
+    bool m_inGroup{false};
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -72,15 +72,9 @@ inline auto SaveToolOptions::id() const -> int
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline auto SaveToolOptions::getNewXml() const -> QDomElement
+inline void SaveToolOptions::SetInGroup(bool newInGroup)
 {
-    return newXml;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto SaveToolOptions::getToolId() const -> quint32
-{
-    return nodeId;
+    m_inGroup = newInGroup;
 }
 
 #endif // SAVETOOLOPTIONS_H

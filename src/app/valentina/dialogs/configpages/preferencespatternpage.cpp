@@ -443,12 +443,11 @@ void PreferencesPatternPage::InitUnits()
 //---------------------------------------------------------------------------------------------------------------------
 void PreferencesPatternPage::RetranslateUi()
 {
-    ui->comboBoxLineWidthUnit->blockSignals(true);
+    const QSignalBlocker blocker(ui->comboBoxLineWidthUnit);
     const int unit = ui->comboBoxLineWidthUnit->currentData().toInt();
     ui->comboBoxLineWidthUnit->clear();
     InitUnits();
     ui->comboBoxLineWidthUnit->setCurrentIndex(ui->comboBoxLineWidthUnit->findData(unit));
-    ui->comboBoxLineWidthUnit->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

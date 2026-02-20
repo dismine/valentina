@@ -318,6 +318,14 @@ void DialogArc::ShowDialog(bool click)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogArc::CheckDependencyTreeComplete()
+{
+    const bool ready = m_doc->IsPatternGraphComplete();
+    ui->comboBoxBasePoint->setEnabled(ready);
+    ui->lineEditAlias->setEnabled(ready);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief SetF1 set formula first angle of arc
  * @param value formula
@@ -514,14 +522,12 @@ void DialogArc::FXF2()
  */
 void DialogArc::EvalRadius()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditFormula->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditRadius;
-    formulaData.labelResult = ui->labelResultRadius;
-    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-
-    Eval(formulaData, m_flagRadius);
+    Eval({.formula = ui->plainTextEditFormula->toPlainText(),
+          .variables = data->DataVariables(),
+          .labelEditFormula = ui->labelEditRadius,
+          .labelResult = ui->labelResultRadius,
+          .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true)},
+         m_flagRadius);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -530,20 +536,19 @@ void DialogArc::EvalRadius()
  */
 void DialogArc::EvalF()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditF1->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditF1;
-    formulaData.labelResult = ui->labelResultF1;
-    formulaData.postfix = degreeSymbol;
+    m_angleF1 = Eval({.formula = ui->plainTextEditF1->toPlainText(),
+                      .variables = data->DataVariables(),
+                      .labelEditFormula = ui->labelEditF1,
+                      .labelResult = ui->labelResultF1,
+                      .postfix = degreeSymbol},
+                     m_flagF1);
 
-    m_angleF1 = Eval(formulaData, m_flagF1);
-
-    formulaData.formula = ui->plainTextEditF2->toPlainText();
-    formulaData.labelEditFormula = ui->labelEditF2;
-    formulaData.labelResult = ui->labelResultF2;
-
-    m_angleF2 = Eval(formulaData, m_flagF2);
+    m_angleF2 = Eval({.formula = ui->plainTextEditF2->toPlainText(),
+                      .variables = data->DataVariables(),
+                      .labelEditFormula = ui->labelEditF2,
+                      .labelResult = ui->labelResultF2,
+                      .postfix = degreeSymbol},
+                     m_flagF2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

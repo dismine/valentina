@@ -62,9 +62,6 @@ public:
     auto GetRotationAngle() const -> QString;
     void SetRotationAngle(const QString &value);
 
-    auto GetSuffix() const -> QString;
-    void SetSuffix(const QString &value);
-
     auto GetRotationOrigPointId() const -> quint32;
     void SetRotationOrigPointId(const quint32 &value);
 
@@ -87,6 +84,8 @@ public:
     auto GetSourceObjects() const -> QVector<SourceItem>;
     void SetSourceObjects(const QVector<SourceItem> &value);
 
+    void CheckDependencyTreeComplete() override;
+
 public slots:
     void ChosenObject(quint32 id, const SceneObject &type) override;
     void SelectedObject(bool selected, quint32 object, quint32 tool) override;
@@ -101,11 +100,10 @@ private slots:
     void FXRotationAngle();
     void FXLength();
 
-    void SuffixChanged();
     void GroupNameChanged();
 
     void ShowSourceDetails(int row);
-    void AliasChanged(const QString &text);
+    void NameChanged(const QString &text);
     void PenStyleChanged();
     void ColorChanged();
 
@@ -127,33 +125,32 @@ private:
     QTimer *timerLength;
 
     /** @brief angle formula of angle */
-    QString formulaAngle;
-    QString formulaRotationAngle;
-    QString formulaLength;
+    QString formulaAngle{};
+    QString formulaRotationAngle{};
+    QString formulaLength{};
 
     /** @brief formulaBaseHeightAngle base height defined by dialogui */
-    int formulaBaseHeightAngle;
-    int formulaBaseHeightRotationAngle;
-    int formulaBaseHeightLength;
+    int formulaBaseHeightAngle{0};
+    int formulaBaseHeightRotationAngle{0};
+    int formulaBaseHeightLength{0};
 
-    QVector<SourceItem> sourceObjects{};
+    QVector<SourceItem> m_sourceObjects{};
 
-    bool stage1;
-    bool stage2;
+    bool stage1{true};
+    bool stage2{false};
 
-    QString m_suffix;
-
-    bool optionalRotationOrigin;
+    bool optionalRotationOrigin{false};
 
     /** @brief flagAngle true if value of angle is correct */
-    bool flagAngle;
-    bool flagRotationAngle;
-    bool flagLength;
-    bool flagName;
-    bool flagGroupName;
-    bool flagAlias{true};
+    bool flagAngle{false};
+    bool flagRotationAngle{false};
+    bool flagLength{false};
+    bool flagName{true};
+    bool flagGroupName{true};
 
     QStringList m_groupTags{};
+
+    bool m_dependencyReady{true};
 
     void EvalAngle();
     void EvalRotationAngle();
@@ -161,10 +158,9 @@ private:
 
     void FillSourceList();
 
-    void ValidateSourceAliases();
-    void SetAliasValid(quint32 id, bool valid);
-
     void InitIcons();
+
+    auto SaveSourceObjects() const -> QVector<SourceItem>;
 };
 
 #endif // DIALOGMOVING_H

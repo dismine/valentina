@@ -106,11 +106,12 @@ void DialogNewMeasurements::InitMTypes()
         val = ui->comboBoxMType->currentData().toInt();
     }
 
-    ui->comboBoxMType->blockSignals(true);
-    ui->comboBoxMType->clear();
-    ui->comboBoxMType->addItem(tr("Individual"), static_cast<int>(MeasurementsType::Individual));
-    ui->comboBoxMType->addItem(tr("Multisize"), static_cast<int>(MeasurementsType::Multisize));
-    ui->comboBoxMType->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->comboBoxMType);
+        ui->comboBoxMType->clear();
+        ui->comboBoxMType->addItem(tr("Individual"), static_cast<int>(MeasurementsType::Individual));
+        ui->comboBoxMType->addItem(tr("Multisize"), static_cast<int>(MeasurementsType::Multisize));
+    }
 
     int const index = ui->comboBoxMType->findData(val);
     if (index != -1)
@@ -128,15 +129,16 @@ void DialogNewMeasurements::InitUnits()
         val = ui->comboBoxUnit->currentData().toInt();
     }
 
-    ui->comboBoxUnit->blockSignals(true);
-    ui->comboBoxUnit->clear();
+    {
+        const QSignalBlocker blocker(ui->comboBoxUnit);
+        ui->comboBoxUnit->clear();
 
-    ui->comboBoxUnit->addItem(tr("Centimeters"), static_cast<int>(Unit::Cm));
-    ui->comboBoxUnit->addItem(tr("Millimiters"), static_cast<int>(Unit::Mm));
-    ui->comboBoxUnit->addItem(tr("Inches"), static_cast<int>(Unit::Inch));
+        ui->comboBoxUnit->addItem(tr("Centimeters"), static_cast<int>(Unit::Cm));
+        ui->comboBoxUnit->addItem(tr("Millimiters"), static_cast<int>(Unit::Mm));
+        ui->comboBoxUnit->addItem(tr("Inches"), static_cast<int>(Unit::Inch));
 
-    ui->comboBoxUnit->setCurrentIndex(-1);
-    ui->comboBoxUnit->blockSignals(false);
+        ui->comboBoxUnit->setCurrentIndex(-1);
+    }
 
     int index = ui->comboBoxUnit->findData(val);
     if (index != -1)

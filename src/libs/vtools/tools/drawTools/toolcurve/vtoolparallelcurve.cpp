@@ -30,6 +30,7 @@
 #include "../../../dialogs/tools/dialogparallelcurve.h"
 #include "../../../visualization/path/vistoolparallelcurve.h"
 #include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatternconverter.h"
 #include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vsplinepath.h"
@@ -51,12 +52,13 @@ void VToolParallelCurve::SetDialog()
     const QPointer<DialogParallelCurve> dialogTool = qobject_cast<DialogParallelCurve *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VSplinePath> splPath = VAbstractTool::data.GeometricObject<VSplinePath>(m_id);
-    dialogTool->SetOriginCurveId(m_originCurveId);
+    dialogTool->CheckDependencyTreeComplete();
+    dialogTool->SetOriginCurveId(OriginCurveId());
     dialogTool->SetFormulaWidth(m_formulaWidth);
     dialogTool->SetPenStyle(splPath->GetPenStyle());
     dialogTool->SetColor(splPath->GetColor());
     dialogTool->SetApproximationScale(splPath->GetApproximationScale());
-    dialogTool->SetSuffix(m_suffix);
+    dialogTool->SetName(GetName());
     dialogTool->SetAliasSuffix(splPath->GetAliasSuffix());
     dialogTool->SetNotes(m_notes);
 }
@@ -74,7 +76,7 @@ auto VToolParallelCurve::Create(const QPointer<DialogTool> &dialog,
     VToolParallelCurveInitData initData;
     initData.originCurveId = dialogTool->GetOriginCurveId();
     initData.formulaWidth = dialogTool->GetFormulaWidth();
-    initData.suffix = dialogTool->GetSuffix();
+    initData.name = dialogTool->GetName();
     initData.color = dialogTool->GetColor();
     initData.penStyle = dialogTool->GetPenStyle();
     initData.approximationScale = dialogTool->GetApproximationScale();
@@ -102,7 +104,7 @@ auto VToolParallelCurve::Create(VToolParallelCurveInitData &initData) -> VToolPa
 
     const QSharedPointer<VAbstractCurve> curve = initData.data->GeometricObject<VAbstractCurve>(initData.originCurveId);
 
-    VSplinePath splPath = curve->Offset(calcWidth, initData.suffix);
+    VSplinePath splPath = curve->Offset(calcWidth, initData.name);
     splPath.SetColor(initData.color);
     splPath.SetPenStyle(initData.penStyle);
     splPath.SetApproximationScale(initData.approximationScale);
@@ -169,44 +171,6 @@ void VToolParallelCurve::SetFormulaWidth(const VFormula &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VToolParallelCurve::GetApproximationScale() const -> qreal
-{
-    QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
-    SCASSERT(curve.isNull() == false)
-
-    return curve->GetApproximationScale();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolParallelCurve::SetApproximationScale(qreal value)
-{
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-    QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
-    curve->SetApproximationScale(value);
-    SaveOption(obj);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VToolParallelCurve::GetSuffix() const -> QString
-{
-    return m_suffix;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolParallelCurve::SetSuffix(QString suffix)
-{
-    m_suffix = suffix;
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-    SaveOption(obj);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VToolParallelCurve::CurveName() const -> QString
-{
-    return VAbstractTool::data.GetGObject(m_originCurveId)->ObjectName();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolParallelCurve::ShowVisualization(bool show)
 {
     ShowToolVisualization<VisToolParallelCurve>(show);
@@ -236,7 +200,7 @@ void VToolParallelCurve::SaveDialog(QDomElement &domElement)
 
     doc->SetAttribute(domElement, AttrCurve, dialogTool->GetOriginCurveId());
     doc->SetAttribute(domElement, AttrWidth, dialogTool->GetFormulaWidth());
-    doc->SetAttribute(domElement, AttrSuffix, dialogTool->GetSuffix());
+    doc->SetAttribute(domElement, AttrName, dialogTool->GetName());
     doc->SetAttribute(domElement, AttrColor, dialogTool->GetColor());
     doc->SetAttribute(domElement, AttrPenStyle, dialogTool->GetPenStyle());
     doc->SetAttribute(domElement, AttrAScale, dialogTool->GetApproximationScale());
@@ -248,17 +212,22 @@ void VToolParallelCurve::SaveDialog(QDomElement &domElement)
                                          AttrNotes,
                                          dialogTool->GetNotes(),
                                          [](const QString &notes) noexcept -> bool { return notes.isEmpty(); });
+
+    // We no longer need to handle suffix attribute here. The code can be removed.
+    Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
+    if (!dialogTool->GetName().isEmpty() && domElement.hasAttribute(AttrSuffix))
+    {
+        domElement.removeAttribute(AttrSuffix);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolParallelCurve::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-    VAbstractSpline::SaveOptions(tag, obj);
+    VToolAbstractOffsetCurve::SaveOptions(tag, obj);
 
     doc->SetAttribute(tag, AttrType, ToolType);
-    doc->SetAttribute(tag, AttrCurve, m_originCurveId);
     doc->SetAttribute(tag, AttrWidth, m_formulaWidth);
-    doc->SetAttribute(tag, AttrSuffix, m_suffix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -273,7 +242,7 @@ void VToolParallelCurve::SetVisualization()
         const bool osSeparator = VAbstractApplication::VApp()->Settings()->GetOsSeparator();
         const VTranslateVars *trVars = VAbstractApplication::VApp()->TrVars();
 
-        visual->SetCurveId(m_originCurveId);
+        visual->SetCurveId(OriginCurveId());
         visual->SetOffsetWidth(trVars->FormulaToUser(m_formulaWidth, osSeparator));
         visual->SetLineStyle(LineStyleToPenStyle(curve->GetPenStyle()));
         visual->SetApproximationScale(curve->GetApproximationScale());
@@ -285,23 +254,44 @@ void VToolParallelCurve::SetVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolParallelCurve::ReadToolAttributes(const QDomElement &domElement)
 {
-    VAbstractSpline::ReadToolAttributes(domElement);
+    VToolAbstractOffsetCurve::ReadToolAttributes(domElement);
 
-    m_originCurveId = VDomDocument::GetParametrUInt(domElement, AttrCurve, NULL_ID_STR);
-    m_suffix = VDomDocument::GetParametrString(domElement, AttrSuffix);
     m_formulaWidth = VDomDocument::GetParametrString(domElement, AttrWidth, QChar('0'));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolParallelCurve::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    ProcessOffsetCurveToolOptions(oldDomElement, newDomElement, GatherToolChanges());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VToolParallelCurve::VToolParallelCurve(const VToolParallelCurveInitData &initData, QGraphicsItem *parent)
-  : VAbstractSpline(initData.doc, initData.data, initData.id, initData.notes, parent),
-    m_formulaWidth(initData.formulaWidth),
-    m_originCurveId(initData.originCurveId),
-    m_suffix(initData.suffix)
+  : VToolAbstractOffsetCurve(initData.doc,
+                             initData.data,
+                             initData.id,
+                             initData.originCurveId,
+                             initData.name,
+                             initData.notes,
+                             parent),
+    m_formulaWidth(initData.formulaWidth)
 {
     SetSceneType(SceneObject::SplinePath);
 
     this->setFlag(QGraphicsItem::ItemIsFocusable, true); // For keyboard input focus
 
     ToolCreation(initData.typeCreation);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VToolParallelCurve::GatherToolChanges() const -> VToolAbstractOffsetCurve::ToolChanges
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogParallelCurve> dialogTool = qobject_cast<DialogParallelCurve *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    return {.oldName = GetName(),
+            .newName = dialogTool->GetName(),
+            .oldAliasSuffix = GetAliasSuffix(),
+            .newAliasSuffix = dialogTool->GetAliasSuffix()};
 }

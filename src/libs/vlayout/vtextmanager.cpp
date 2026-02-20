@@ -201,11 +201,11 @@ auto operator<<(QDataStream &dataStream, const TextLine &data) -> QDataStream &
     dataStream << TextLine::streamHeader << TextLine::classVersion;
 
     // Added in classVersion = 1
-    dataStream << data.m_qsText;
-    dataStream << data.m_iFontSize;
-    dataStream << data.m_bold;
-    dataStream << data.m_italic;
-    dataStream << data.m_eAlign;
+    dataStream << data.qsText;
+    dataStream << data.iFontSize;
+    dataStream << data.bold;
+    dataStream << data.italic;
+    dataStream << data.eAlign;
 
     // Added in classVersion = 2
 
@@ -239,11 +239,11 @@ auto operator>>(QDataStream &dataStream, TextLine &data) -> QDataStream &
         throw VException(message);
     }
 
-    dataStream >> data.m_qsText;
-    dataStream >> data.m_iFontSize;
-    dataStream >> data.m_bold;
-    dataStream >> data.m_italic;
-    dataStream >> data.m_eAlign;
+    dataStream >> data.qsText;
+    dataStream >> data.iFontSize;
+    dataStream >> data.bold;
+    dataStream >> data.italic;
+    dataStream >> data.eAlign;
 
     //    if (actualClassVersion >= 2)
     //    {
@@ -725,19 +725,17 @@ auto ReplacePlaceholders(const QMap<QString, QString> &placeholders, QString lin
 auto PrepareLines(const QVector<VLabelTemplateLine> &lines) -> QVector<TextLine>
 {
     QVector<TextLine> textLines;
+    textLines.reserve(lines.size());
 
     for (const auto &line : lines)
     {
         if (not line.line.isEmpty())
         {
-            TextLine tl;
-            tl.m_qsText = line.line;
-            tl.m_eAlign = static_cast<Qt::Alignment>(line.alignment);
-            tl.m_iFontSize = line.fontSizeIncrement;
-            tl.m_bold = line.bold;
-            tl.m_italic = line.italic;
-
-            textLines << tl;
+            textLines.append({.qsText = line.line,
+                              .iFontSize = line.fontSizeIncrement,
+                              .bold = line.bold,
+                              .italic = line.italic,
+                              .eAlign = static_cast<Qt::Alignment>(line.alignment)});
         }
     }
 
@@ -858,21 +856,21 @@ auto VTextManager::GetLabelSourceLines(int width, const QFont &font) const -> QV
 
     for (const auto &tl : m_liLines)
     {
-        fnt.setPointSize(qMax(fSize + tl.m_iFontSize, 1));
+        fnt.setPointSize(qMax(fSize + tl.iFontSize, 1));
         if (!VAbstractApplication::VApp()->Settings()->GetSingleStrokeOutlineFont())
         {
-            fnt.setBold(tl.m_bold);
+            fnt.setBold(tl.bold);
         }
-        fnt.setItalic(tl.m_italic);
+        fnt.setItalic(tl.italic);
 
-        QString const qsText = tl.m_qsText;
+        QString const qsText = tl.qsText;
         if (HorizontalAdvance(qsText, fnt) > width)
         {
             const QStringList brokeLines = BreakTextIntoLines(qsText, fnt, width);
             for (const auto &lineText : brokeLines)
             {
                 TextLine line = tl;
-                line.m_qsText = lineText;
+                line.qsText = lineText;
                 lines.append(line);
             }
         }
@@ -900,9 +898,9 @@ auto VTextManager::GetLabelSourceLines(int width, const VSvgFont &font, qreal pe
     for (const auto &tl : m_liLines)
     {
         VSvgFont lineFont = font;
-        lineFont.SetPointSize(fSize + tl.m_iFontSize);
-        lineFont.SetBold(tl.m_bold);
-        lineFont.SetItalic(tl.m_italic);
+        lineFont.SetPointSize(fSize + tl.iFontSize);
+        lineFont.SetBold(tl.bold);
+        lineFont.SetItalic(tl.italic);
 
         VSvgFontEngine const engine = db->FontEngine(lineFont);
 
@@ -913,14 +911,14 @@ auto VTextManager::GetLabelSourceLines(int width, const VSvgFont &font, qreal pe
             continue;
         }
 
-        QString const qsText = tl.m_qsText;
+        QString const qsText = tl.qsText;
         if (engine.TextWidth(qsText, penWidth) > width)
         {
             const QStringList brokeLines = BreakTextIntoLines(qsText, svgFont, width, penWidth);
             for (const auto &lineText : brokeLines)
             {
                 TextLine line = tl;
-                line.m_qsText = lineText;
+                line.qsText = lineText;
                 lines.append(line);
             }
         }

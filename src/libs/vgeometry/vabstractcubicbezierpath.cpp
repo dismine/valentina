@@ -311,22 +311,10 @@ auto VAbstractCubicBezierPath::GetMainNameForHistory() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractCubicBezierPath::CreateName()
 {
-    QString name;
-    if (CountPoints() > 0)
+    if (!IsDerivative())
     {
-        name = splPath;
-        name.append(u"_%1"_s.arg(FirstPoint().name()));
-        if (CountSubSpl() >= 1)
-        {
-            name.append(u"_%1"_s.arg(LastPoint().name()));
-
-            if (GetDuplicate() > 0)
-            {
-                name += u"_%1"_s.arg(GetDuplicate());
-            }
-        }
+        setName(GetTypeHead() + HeadlessName());
     }
-    setName(name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -339,7 +327,51 @@ void VAbstractCubicBezierPath::CreateAlias()
         return;
     }
 
-    SetAlias(splPath + '_'_L1 + aliasSuffix);
+    SetAlias(GetTypeHead() + aliasSuffix);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractCubicBezierPath::SetNameSuffix(const QString &suffix)
+{
+    setName(GetTypeHead() + suffix);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractCubicBezierPath::HeadlessName() const -> QString
+{
+    if (IsDerivative())
+    {
+        const QString fullName = name();
+        const QString prefix = GetTypeHead();
+        if (const QString headless = fullName.startsWith(prefix) ? fullName.sliced(prefix.length()) : fullName;
+            !headless.isEmpty())
+        {
+            return headless;
+        }
+    }
+
+    QString name;
+    if (CountPoints() > 0)
+    {
+        name = FirstPoint().name();
+        if (CountSubSpl() >= 1)
+        {
+            name.append(u"_%1"_s.arg(LastPoint().name()));
+
+            if (GetDuplicate() > 0)
+            {
+                name += u"_%1"_s.arg(GetDuplicate());
+            }
+        }
+    }
+
+    return name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractCubicBezierPath::GetTypeHead() const -> QString
+{
+    return splPath_V + '_'_L1;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -103,7 +103,6 @@ const QString VToolSeamAllowance::TagRecord = QStringLiteral("record");         
 const QString VToolSeamAllowance::TagIPaths = QStringLiteral("iPaths");           // NOLINT(cert-err58-cpp)
 const QString VToolSeamAllowance::TagPins = QStringLiteral("pins");               // NOLINT(cert-err58-cpp)
 const QString VToolSeamAllowance::TagPlaceLabels = QStringLiteral("placeLabels"); // NOLINT(cert-err58-cpp)
-const QString VToolSeamAllowance::TagMirrorLine = QStringLiteral("mirrorLine");   // NOLINT(cert-err58-cpp)
 
 const QString VToolSeamAllowance::AttrSeamAllowance = QStringLiteral("seamAllowance"); // NOLINT(cert-err58-cpp)
 const QString VToolSeamAllowance::AttrHideMainPath = QStringLiteral("hideMainPath");   // NOLINT(cert-err58-cpp)
@@ -1013,7 +1012,7 @@ void VToolSeamAllowance::AddGrainline(VAbstractPattern *doc, QDomElement &domEle
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::AddMirrorLine(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece)
 {
-    QDomElement domData = doc->createElement(VToolSeamAllowance::TagMirrorLine);
+    QDomElement domData = doc->createElement(VAbstractPattern::TagMirrorLine);
     doc->SetAttributeOrRemoveIf<quint32>(domData, VAbstractPattern::AttrMirrorLineP1, piece.GetMirrorLineStartPoint(),
                                          [](quint32 id) noexcept { return id <= NULL_ID; });
     doc->SetAttributeOrRemoveIf<quint32>(domData, VAbstractPattern::AttrMirrorLineP2, piece.GetMirrorLineEndPoint(),

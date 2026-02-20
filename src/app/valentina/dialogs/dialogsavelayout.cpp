@@ -117,10 +117,11 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
                     return;
                 }
 
-                ui->comboBoxFormatType->blockSignals(true);
-                InitFileFormatTypes(static_cast<LayoutExportFileFormat>(ui->comboBoxFormat->currentData().toInt()));
-                ui->comboBoxFormatType->setCurrentIndex(-1);
-                ui->comboBoxFormatType->blockSignals(false);
+                {
+                    const QSignalBlocker blocker(ui->comboBoxFormatType);
+                    InitFileFormatTypes(static_cast<LayoutExportFileFormat>(ui->comboBoxFormat->currentData().toInt()));
+                    ui->comboBoxFormatType->setCurrentIndex(-1);
+                }
 
                 ui->comboBoxFormatType->setCurrentIndex(0);
             });
@@ -181,14 +182,16 @@ void DialogSaveLayout::SelectFormat(LayoutExportFormats format)
         throw VException(tr("Selected not present file format."));
     }
 
-    ui->comboBoxFormat->blockSignals(true);
-    ui->comboBoxFormat->setCurrentIndex(i);
-    ui->comboBoxFormat->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->comboBoxFormat);
+        ui->comboBoxFormat->setCurrentIndex(i);
+    }
 
-    ui->comboBoxFormatType->blockSignals(true);
-    InitFileFormatTypes(fileFormat);
-    ui->comboBoxFormatType->setCurrentIndex(-1);
-    ui->comboBoxFormatType->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->comboBoxFormatType);
+        InitFileFormatTypes(fileFormat);
+        ui->comboBoxFormatType->setCurrentIndex(-1);
+    }
 
     i = ui->comboBoxFormatType->findData(static_cast<int>(format));
     if (i < 0)
@@ -637,9 +640,8 @@ void DialogSaveLayout::HorizontalScaleChanged(double d)
 {
     if (m_scaleConnected)
     {
-        ui->doubleSpinBoxVerticalScale->blockSignals(true);
+        const QSignalBlocker blocker(ui->doubleSpinBoxVerticalScale);
         ui->doubleSpinBoxVerticalScale->setValue(d);
-        ui->doubleSpinBoxVerticalScale->blockSignals(false);
     }
 }
 
@@ -648,9 +650,8 @@ void DialogSaveLayout::VerticalScaleChanged(double d)
 {
     if (m_scaleConnected)
     {
-        ui->doubleSpinBoxHorizontalScale->blockSignals(true);
+        const QSignalBlocker blocker(ui->doubleSpinBoxHorizontalScale);
         ui->doubleSpinBoxHorizontalScale->setValue(d);
-        ui->doubleSpinBoxHorizontalScale->blockSignals(false);
     }
 }
 

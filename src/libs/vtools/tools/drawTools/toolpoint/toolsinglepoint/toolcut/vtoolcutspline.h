@@ -60,18 +60,24 @@ public:
     auto type() const -> int override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::CutSpline)};
     void  ShowVisualization(bool show) override;
+
 protected slots:
     void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
+
 protected:
     void SaveDialog(QDomElement &domElement) override;
     void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     void ReadToolAttributes(const QDomElement &domElement) override;
     void SetVisualization() override;
     auto MakeToolTip() const -> QString override;
+    void ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement) override;
+
 private:
     Q_DISABLE_COPY_MOVE(VToolCutSpline) // NOLINT
 
     explicit VToolCutSpline(const VToolCutInitData &initData, QGraphicsItem * parent = nullptr);
+
+    auto GatherToolChanges() const -> ToolChanges;
 };
 
 #endif // VTOOLCUTSPLINE_H

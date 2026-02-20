@@ -45,8 +45,6 @@ public:
     void redo() override;
     auto mergeWith(const QUndoCommand *command) -> bool override;
     auto id() const -> int override;
-    auto DetId() const -> quint32;
-    auto NewDet() const -> VPiece;
 signals:
     void UpdateGroups();
 private:
@@ -56,17 +54,5 @@ private:
     const VPiece m_oldDet;
     VPiece m_newDet;
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto SavePieceOptions::DetId() const -> quint32
-{
-    return nodeId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto SavePieceOptions::NewDet() const -> VPiece
-{
-    return m_newDet;
-}
 
 #endif // SAVEPIECEOPTIONS_H

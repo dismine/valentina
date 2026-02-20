@@ -46,7 +46,7 @@ struct VRawGraduatedCurveOffset
 struct SourceItem
 {
     quint32 id{NULL_ID};
-    QString alias{};
+    QString name{};
     QString penStyle{TypeLineDefault};
     QString color{ColorDefault};
 };
@@ -60,10 +60,11 @@ const int labelMY = 15;
 
 auto SourceToObjects(const QVector<SourceItem> &source) -> QVector<quint32>;
 
-auto OriginAlias(quint32 id, const QVector<SourceItem> &source, const QSharedPointer<VGObject> &obj) -> QString;
+void FillDefSourceNames(QVector<SourceItem> &source, const VContainer *data, const QString &suffix);
 
-auto SourceAliasValid(const SourceItem &item, const QSharedPointer<VGObject> &obj, const VContainer *data,
-                      const QString &originAlias) -> bool;
+auto GetSourceItemName(const QString &name, quint32 id, const VContainer *data) -> QString;
+auto IsValidSourceName(const QString &newName, quint32 id, const QVector<SourceItem> &source, const VContainer *data)
+    -> bool;
 
 auto OperationLineStylesPics(QColor backgroundColor, QColor textColor) -> QMap<QString, QIcon>;
 

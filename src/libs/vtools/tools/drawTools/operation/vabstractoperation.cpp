@@ -36,10 +36,12 @@
 #include "../../../undocommands/savetooloptions.h"
 #include "../../../undocommands/undogroup.h"
 #include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatternconverter.h"
 #include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/compatibility.h"
 #include "../vwidgets/vsimplepoint.h"
+#include "vtools/undocommands/renameobject.h"
 
 using namespace Qt::Literals::StringLiterals;
 
@@ -72,6 +74,20 @@ auto VisibilityGroupDataFromSource(const VContainer *data, const QVector<SourceI
     }
 
     return groupData;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto BuildNameMap(const QVector<SourceItem> &items) -> QMap<quint32, QString>
+{
+    QMap<quint32, QString> names;
+    for (const auto &item : items)
+    {
+        if (item.id != NULL_ID)
+        {
+            names.insert(item.id, item.name);
+        }
+    }
+    return names;
 }
 } // namespace
 
@@ -111,21 +127,6 @@ auto VAbstractOperation::IsRemovable() const -> RemoveStatus
     }
 
     return RemoveStatus::Removable;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VAbstractOperation::Suffix() const -> QString
-{
-    return suffix;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractOperation::SetSuffix(const QString &suffix)
-{
-    // Don't know if need check name here.
-    this->suffix = suffix;
-    QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(m_id);
-    SaveOption(obj);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -257,12 +258,20 @@ auto VAbstractOperation::ExtractSourceData(const QDomElement &domElement) -> QVe
             {
                 if (const QDomElement element = QDOM_ELEMENT(srcList, j).toElement(); not element.isNull())
                 {
-                    SourceItem item;
-                    item.id = VDomDocument::GetParametrUInt(element, AttrIdObject, NULL_ID_STR);
-                    item.alias = VDomDocument::GetParametrEmptyString(element, AttrAlias);
-                    item.penStyle = VDomDocument::GetParametrString(element, AttrPenStyle, TypeLineDefault);
-                    item.color = VDomDocument::GetParametrString(element, AttrColor, ColorDefault);
-                    source.append(item);
+                    // We no longer need to handle alias attribute here. The code can be removed.
+                    // Name must be mandatory
+                    Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
+                    const QString alias = VDomDocument::GetParametrEmptyString(element, AttrAlias);
+                    QString name = VDomDocument::GetParametrEmptyString(element, AttrName);
+                    if (name.isEmpty() && !alias.isEmpty())
+                    {
+                        name = alias;
+                    }
+
+                    source.append({.id = VDomDocument::GetParametrUInt(element, AttrIdObject, NULL_ID_STR),
+                                   .name = name,
+                                   .penStyle = VDomDocument::GetParametrString(element, AttrPenStyle, TypeLineDefault),
+                                   .color = VDomDocument::GetParametrString(element, AttrColor, ColorDefault)});
                 }
             }
             return source;
@@ -287,14 +296,12 @@ auto VAbstractOperation::ExtractDestinationData(const QDomElement &domElement) -
             {
                 if (const QDomElement element = QDOM_ELEMENT(srcList, j).toElement(); not element.isNull())
                 {
-                    DestinationItem d;
-                    d.id = VDomDocument::GetParametrUInt(element, AttrIdObject, NULL_ID_STR);
-                    d.mx = VAbstractValApplication::VApp()->toPixel(
-                        VDomDocument::GetParametrDouble(element, AttrMx, QChar('1')));
-                    d.my = VAbstractValApplication::VApp()->toPixel(
-                        VDomDocument::GetParametrDouble(element, AttrMy, QChar('1')));
-                    d.showLabel = VDomDocument::GetParametrBool(element, AttrShowLabel, trueStr);
-                    destination.append(d);
+                    destination.append({.id = VDomDocument::GetParametrUInt(element, AttrIdObject, NULL_ID_STR),
+                                        .mx = VAbstractValApplication::VApp()->toPixel(
+                                            VDomDocument::GetParametrDouble(element, AttrMx, QChar('1'))),
+                                        .my = VAbstractValApplication::VApp()->toPixel(
+                                            VDomDocument::GetParametrDouble(element, AttrMy, QChar('1'))),
+                                        .showLabel = VDomDocument::GetParametrBool(element, AttrShowLabel, trueStr)});
                 }
             }
 
@@ -597,7 +604,6 @@ void VAbstractOperation::LabelChangePosition(const QPointF &pos, quint32 labelId
 VAbstractOperation::VAbstractOperation(const VAbstractOperationInitData &initData, QGraphicsItem *parent)
   : VDrawTool(initData.doc, initData.data, initData.id, initData.notes),
     QGraphicsLineItem(parent),
-    suffix(initData.suffix),
     source(initData.source),
     destination(initData.destination)
 {
@@ -702,10 +708,7 @@ void VAbstractOperation::ApplyToolOptions(const QDomElement &oldDomElement, cons
             connect(delGroup, &DelGroup::UpdateGroups, doc, &VAbstractPattern::UpdateVisiblityGroups);
             VAbstractApplication::VApp()->getUndoStack()->push(delGroup);
         }
-    }
 
-    if (updateVisibilityOptions)
-    {
         VAbstractApplication::VApp()->getUndoStack()->endMacro();
     }
 }
@@ -745,7 +748,6 @@ void VAbstractOperation::ReadToolAttributes(const QDomElement &domElement)
 
     source = ExtractSourceData(domElement);
     destination = ExtractDestinationData(domElement);
-    suffix = VDomDocument::GetParametrString(domElement, AttrSuffix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -753,7 +755,12 @@ void VAbstractOperation::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> 
 {
     VDrawTool::SaveOptions(tag, obj);
 
-    doc->SetAttribute(tag, AttrSuffix, suffix);
+    // We no longer need to handle suffix attribute here. The code can be removed.
+    Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
+    if (tag.hasAttribute(AttrSuffix))
+    {
+        tag.removeAttribute(AttrSuffix);
+    }
 
     SaveSourceDestination(tag);
 }
@@ -790,10 +797,7 @@ void VAbstractOperation::SaveSourceDestination(QDomElement &tag)
     {
         QDomElement item = doc->createElement(TagItem);
         doc->SetAttribute(item, AttrIdObject, sItem.id);
-        doc->SetAttributeOrRemoveIf<QString>(item,
-                                             AttrAlias,
-                                             sItem.alias,
-                                             [](const QString &alias) noexcept -> bool { return alias.isEmpty(); });
+        doc->SetAttribute(item, AttrName, sItem.name);
         doc->SetAttributeOrRemoveIf<QString>(item,
                                              AttrPenStyle,
                                              sItem.penStyle,
@@ -1052,4 +1056,108 @@ void VAbstractOperation::CreateVisibilityGroup(const VAbstractOperationInitData 
         connect(addGroup, &AddGroup::UpdateGroups, initData.doc, &VAbstractPattern::UpdateVisiblityGroups);
         VAbstractApplication::VApp()->getUndoStack()->push(addGroup);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractOperation::PrepareNames(VAbstractOperationInitData &initData)
+{
+    // We no longer need to handle suffix attribute here. The code can be removed.
+    Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
+    if (initData.suffix.isEmpty())
+    {
+        return;
+    }
+
+    for (int i = 0; i < initData.source.size(); ++i)
+    {
+        SourceItem &object = initData.source[i];
+
+        if (!object.name.isEmpty())
+        {
+            continue;
+        }
+
+        if (const QSharedPointer<VGObject> obj = initData.data->GetGObject(object.id); obj->getType() == GOType::Point)
+        {
+            object.name = obj->name() + initData.suffix;
+        }
+        else
+        {
+            QSharedPointer<VAbstractCurve> const curve = initData.data->GeometricObject<VAbstractCurve>(object.id);
+            object.name = curve->HeadlessName() + initData.suffix;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractOperation::ProcessOperationToolOptions(const QDomElement &oldDomElement,
+                                                     const QDomElement &newDomElement,
+                                                     const QVector<SourceItem> &newSource)
+{
+    // Build maps for efficient lookup by id
+    const QMap<quint32, QString> oldNames = BuildNameMap(source);
+    const QMap<quint32, QString> newNames = BuildNameMap(newSource);
+
+    // Check if there are any name changes
+    if (oldNames == newNames)
+    {
+        VDrawTool::ApplyToolOptions(oldDomElement, newDomElement);
+        return;
+    }
+
+    QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
+    auto *newGroup = new QUndoCommand(); // an empty command
+    newGroup->setText(tr("save tool options"));
+
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id, newGroup);
+    saveOptions->SetInGroup(true);
+    connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+
+    const QSet<quint32> oldIds = ConvertToSet<quint32>(oldNames.keys());
+    const QSet<quint32> newIds = ConvertToSet<quint32>(newNames.keys());
+    const QSet<quint32> commonIds = oldIds & newIds;
+
+    // Collect all rename operations first
+    QVector<QPair<quint32, QPair<QString, QString>>> renames;
+    renames.reserve(commonIds.size());
+    for (quint32 const id : std::as_const(commonIds))
+    {
+        const QString oldName = oldNames.value(id);
+        const QString newName = newNames.value(id);
+
+        if (oldName != newName)
+        {
+            renames.append(qMakePair(id, qMakePair(oldName, newName)));
+        }
+    }
+
+    // Process rename operations, connecting signal only for the last one
+    for (int i = 0; i < renames.size(); ++i)
+    {
+        const auto &rename = renames.at(i);
+
+        if (const QSharedPointer<VGObject> obj = VDataTool::data.GetGObject(rename.first);
+            obj->getType() == GOType::Point)
+        {
+            auto *renameLabel = new RenameLabel(rename.second.first, rename.second.second, doc, rename.first, newGroup);
+
+            if (i == renames.size() - 1) // Last rename operation
+            {
+                connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+            }
+        }
+        else
+        {
+            const CurveAliasType type = RenameAlias::CurveType(obj->getType());
+            auto *renameName
+                = new RenameAlias(type, rename.second.first, rename.second.second, doc, rename.first, newGroup);
+
+            if (i == renames.size() - 1) // Last rename operation
+            {
+                connect(renameName, &RenameAlias::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+            }
+        }
+    }
+
+    undoStack->push(newGroup);
 }

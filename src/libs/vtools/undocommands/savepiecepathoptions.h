@@ -51,8 +51,6 @@ public:
     void redo() override;
     auto mergeWith(const QUndoCommand *command) -> bool override;
     auto id() const -> int override;
-    auto PathId() const -> quint32;
-    auto NewPath() const -> VPiecePath;
 
 private:
     // cppcheck-suppress unknownMacro
@@ -69,18 +67,6 @@ private:
 inline auto SavePiecePathOptions::id() const -> int
 {
     return static_cast<int>(UndoCommand::SavePiecePathOptions);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto SavePiecePathOptions::PathId() const -> quint32
-{
-    return nodeId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto SavePiecePathOptions::NewPath() const -> VPiecePath
-{
-    return m_newPath;
 }
 
 #endif // SAVEPIECEPATHOPTIONS_H

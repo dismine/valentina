@@ -43,7 +43,7 @@ AddToCalc::AddToCalc(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand
     m_indexActiveBlock(doc->PatternBlockMapper()->GetActiveId())
 {
     setText(tr("add object"));
-    nodeId = VAbstractPattern::GetParametrId(xml);
+    SetElementId(VAbstractPattern::GetParametrId(xml));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -52,12 +52,12 @@ void AddToCalc::undo()
     qCDebug(vUndo, "Undo.");
 
     // Without this user will not see this change
-    doc->ShowPatternBlock(doc->PatternBlockMapper()->FindName(m_indexActiveBlock));
+    Doc()->ShowPatternBlock(Doc()->PatternBlockMapper()->FindName(m_indexActiveBlock));
 
     QDomElement calcElement;
-    if (doc->GetActivNodeElement(VAbstractPattern::TagCalculation, calcElement))
+    if (Doc()->GetActivNodeElement(VAbstractPattern::TagCalculation, calcElement))
     {
-        QDomElement const domElement = doc->FindElementById(nodeId);
+        QDomElement const domElement = Doc()->FindElementById(ElementId());
         if (domElement.isElement())
         {
             if (calcElement.removeChild(domElement).isNull())
@@ -68,7 +68,7 @@ void AddToCalc::undo()
         }
         else
         {
-            qCDebug(vUndo, "Can't get tool by id = %u.", nodeId);
+            qCDebug(vUndo, "Can't get tool by id = %u.", ElementId());
             return;
         }
     }
@@ -83,7 +83,7 @@ void AddToCalc::undo()
     if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
     {
         // Return current pattern piece after undo
-        emit doc->ShowPatternBlock(doc->PatternBlockMapper()->FindName(m_indexActiveBlock));
+        emit Doc()->ShowPatternBlock(Doc()->PatternBlockMapper()->FindName(m_indexActiveBlock));
     }
 }
 
@@ -93,12 +93,12 @@ void AddToCalc::redo()
     qCDebug(vUndo, "Redo.");
 
     // Without this user will not see this change
-    doc->ShowPatternBlock(doc->PatternBlockMapper()->FindName(m_indexActiveBlock));
+    Doc()->ShowPatternBlock(Doc()->PatternBlockMapper()->FindName(m_indexActiveBlock));
 
     QDomElement calcElement;
-    if (doc->GetActivNodeElement(VAbstractPattern::TagCalculation, calcElement))
+    if (Doc()->GetActivNodeElement(VAbstractPattern::TagCalculation, calcElement))
     {
-        calcElement.appendChild(xml);
+        calcElement.appendChild(GetElement());
     }
     else
     {
@@ -113,18 +113,18 @@ void AddToCalc::redo()
 //---------------------------------------------------------------------------------------------------------------------
 void AddToCalc::RedoFullParsing()
 {
-    if (redoFlag)
+    if (RedoFlag())
     {
         emit NeedFullParsing();
         if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
         {
             // Return current pattern piece after undo
-            emit doc->ShowPatternBlock(doc->PatternBlockMapper()->FindName(m_indexActiveBlock));
+            emit Doc()->ShowPatternBlock(Doc()->PatternBlockMapper()->FindName(m_indexActiveBlock));
         }
     }
     else
     {
-        QApplication::postEvent(doc, new LiteParseEvent());
+        QApplication::postEvent(Doc(), new LiteParseEvent());
     }
-    redoFlag = true;
+    SetRedoFlag(true);
 }

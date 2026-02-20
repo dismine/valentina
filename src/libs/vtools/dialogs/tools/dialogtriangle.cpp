@@ -332,3 +332,10 @@ auto DialogTriangle::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogTriangle::CheckDependencyTreeComplete()
+{
+    const bool ready = m_doc->IsPatternGraphComplete();
+    ui->lineEditNamePoint->setEnabled(ready);
+}

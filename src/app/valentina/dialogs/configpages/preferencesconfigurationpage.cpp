@@ -418,20 +418,19 @@ void PreferencesConfigurationPage::RetranslateUi()
     ui->osOptionCheck->setText(tr("With OS options") + QStringLiteral(" (%1)").arg(LocaleDecimalPoint(QLocale())));
 
     {
-        ui->unitCombo->blockSignals(true);
+        const QSignalBlocker blocker(ui->unitCombo);
         const auto unit = qvariant_cast<QString>(ui->unitCombo->currentData());
         ui->unitCombo->clear();
         InitUnits();
         ui->unitCombo->setCurrentIndex(ui->unitCombo->findData(unit));
-        ui->unitCombo->blockSignals(false);
     }
 
     {
-        ui->comboBoxPieceLbelLanguage->blockSignals(true);
+        QSignalBlocker blocker(ui->comboBoxPieceLbelLanguage);
         const auto code = qvariant_cast<QString>(ui->comboBoxPieceLbelLanguage->currentData());
         InitPieceLabelLanguages(ui->comboBoxPieceLbelLanguage);
         ui->comboBoxPieceLbelLanguage->setCurrentIndex(-1);
-        ui->comboBoxPieceLbelLanguage->blockSignals(false);
+        blocker.unblock();
         ui->comboBoxPieceLbelLanguage->setCurrentIndex(ui->comboBoxPieceLbelLanguage->findData(code));
     }
 

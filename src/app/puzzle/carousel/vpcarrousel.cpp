@@ -82,9 +82,10 @@ void VPCarrousel::Refresh()
     const QUuid sheetUuid = ui->comboBoxPieceList->currentData().toUuid();
 
     // --- clears the content of the carrousel
-    ui->comboBoxPieceList->blockSignals(true);
-    Clear();
-    ui->comboBoxPieceList->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->comboBoxPieceList);
+        Clear();
+    }
 
     // --- add the content saved in the layout to the carrousel.
     // Do not rely on m_layout because we do not control it.
@@ -92,45 +93,33 @@ void VPCarrousel::Refresh()
 
     if (VPLayoutPtr const layout = m_layout.toStrongRef(); not layout.isNull())
     {
-        {
-            VPCarrouselSheet carrouselSheet;
-            carrouselSheet.unplaced = true;
-            carrouselSheet.active = false;
-            carrouselSheet.name = tr("Unplaced pieces");
-            carrouselSheet.pieces = layout->GetUnplacedPieces();
-
-            m_pieceLists.append(carrouselSheet);
-        }
+        m_pieceLists.append(
+            {.unplaced = true, .active = false, .name = tr("Unplaced pieces"), .pieces = layout->GetUnplacedPieces()});
 
         QList<VPSheetPtr> const sheets = layout->GetSheets();
         for (const auto &sheet : sheets)
         {
             if (not sheet.isNull())
             {
-                VPCarrouselSheet carrouselSheet;
-                carrouselSheet.unplaced = false;
-                carrouselSheet.active = (sheet == layout->GetFocusedSheet());
-                carrouselSheet.name = sheet->GetName();
-                carrouselSheet.pieces = sheet->GetPieces();
-                carrouselSheet.sheetUuid = sheet->Uuid();
-
-                m_pieceLists.append(carrouselSheet);
+                m_pieceLists.append({.unplaced = false,
+                                     .active = (sheet == layout->GetFocusedSheet()),
+                                     .name = sheet->GetName(),
+                                     .pieces = sheet->GetPieces(),
+                                     .sheetUuid = sheet->Uuid()});
             }
         }
 
-        ui->comboBoxPieceList->blockSignals(true);
-
+        const QSignalBlocker blocker(ui->comboBoxPieceList);
         for (const auto &sheet : std::as_const(m_pieceLists))
         {
             ui->comboBoxPieceList->addItem(GetSheetName(sheet), sheet.sheetUuid);
         }
-
-        ui->comboBoxPieceList->blockSignals(false);
     }
 
-    ui->comboBoxPieceList->blockSignals(true);
-    ui->comboBoxPieceList->setCurrentIndex(-1);
-    ui->comboBoxPieceList->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->comboBoxPieceList);
+        ui->comboBoxPieceList->setCurrentIndex(-1);
+    }
 
     int const index = ui->comboBoxPieceList->findData(sheetUuid);
     ui->comboBoxPieceList->setCurrentIndex(index != -1 ? index : 0);

@@ -127,11 +127,10 @@ void VGraphicsSimpleTextItem::CorrectLabelPosition()
         newPos = line.p2();
     }
 
-    blockSignals(true);
+    const QSignalBlocker blocker(this);
     setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
     setPos(newPos);
     setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
-    blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

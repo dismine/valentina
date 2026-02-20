@@ -30,18 +30,15 @@
 
 #include <QDomElement>
 
-#include "../vmisc/vabstractapplication.h"
-#include "../vwidgets/vmaingraphicsview.h"
 #include "../vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 MoveAbstractLabel::MoveAbstractLabel(VAbstractPattern *doc, quint32 pointId, const QPointF &pos, QUndoCommand *parent)
-  : VUndoCommand(doc, parent),
+  : VUndoCommand(doc, pointId, parent),
     m_oldPos(),
     m_newPos(pos)
 {
-    nodeId = pointId;
-    qCDebug(vUndo, "Point id %u", nodeId);
+    qCDebug(vUndo, "Point id %u", pointId);
 
     qCDebug(vUndo, "Label new position (%f;%f)", m_newPos.x(), m_newPos.y());
 }

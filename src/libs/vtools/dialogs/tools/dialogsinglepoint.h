@@ -61,6 +61,8 @@ public:
     void SetNotes(const QString &notes);
     auto GetNotes() const -> QString;
 
+    void CheckDependencyTreeComplete() override;
+
 public slots:
     void mousePress(const QPointF &scenePos);
 

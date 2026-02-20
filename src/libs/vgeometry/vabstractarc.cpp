@@ -254,25 +254,18 @@ auto VAbstractArc::CutArc(qreal length, const QString &pointName) const -> QPoin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstractArc::Offset(qreal distance, const QString &suffix) const -> VSplinePath
+auto VAbstractArc::Offset(qreal distance, const QString &name) const -> VSplinePath
 {
-    VSplinePath splPath = ToSplinePath().Offset(IsFlipped() ? -distance : distance, suffix);
-    splPath.setName(name() + suffix);
-    splPath.SetMainNameForHistory(GetMainNameForHistory() + suffix);
-
-    if (not GetAliasSuffix().isEmpty())
-    {
-        splPath.SetAliasSuffix(GetAliasSuffix() + suffix);
-    }
-
+    VSplinePath splPath = ToSplinePath().Offset(IsFlipped() ? -distance : distance, name);
     splPath.SetColor(GetColor());
     splPath.SetPenStyle(GetPenStyle());
     splPath.SetApproximationScale(GetApproximationScale());
+    splPath.SetDerivative(true);
     return splPath;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstractArc::Outline(const QVector<qreal> &distances, const QString &suffix) const -> VSplinePath
+auto VAbstractArc::Outline(const QVector<qreal> &distances, const QString &name) const -> VSplinePath
 {
     QVector<qreal> tmpDistances = distances;
     if (IsFlipped())
@@ -283,18 +276,11 @@ auto VAbstractArc::Outline(const QVector<qreal> &distances, const QString &suffi
         }
     }
 
-    VSplinePath splPath = ToSplinePath().Outline(tmpDistances, suffix);
-    splPath.setName(name() + suffix);
-    splPath.SetMainNameForHistory(GetMainNameForHistory() + suffix);
-
-    if (not GetAliasSuffix().isEmpty())
-    {
-        splPath.SetAliasSuffix(GetAliasSuffix() + suffix);
-    }
-
+    VSplinePath splPath = ToSplinePath().Outline(tmpDistances, name);
     splPath.SetColor(GetColor());
     splPath.SetPenStyle(GetPenStyle());
     splPath.SetApproximationScale(GetApproximationScale());
+    splPath.SetDerivative(true);
     return splPath;
 }
 

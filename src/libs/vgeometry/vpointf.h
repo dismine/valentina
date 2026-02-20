@@ -73,9 +73,9 @@ public:
     auto operator=(VPointF &&point) noexcept -> VPointF &;
 
     explicit operator QPointF() const;
-    auto Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const -> VPointF;
-    auto Flip(const QLineF &axis, const QString &prefix = QString()) const -> VPointF;
-    auto Move(qreal length, qreal angle, const QString &prefix = QString()) const -> VPointF;
+    auto Rotate(const QPointF &originPoint, qreal degrees, const QString &name = QString()) const -> VPointF;
+    auto Flip(const QLineF &axis, const QString &name = QString()) const -> VPointF;
+    auto Move(qreal length, qreal angle, const QString &name = QString()) const -> VPointF;
     auto mx() const -> qreal;
     auto my() const -> qreal;
     void setMx(qreal mx);

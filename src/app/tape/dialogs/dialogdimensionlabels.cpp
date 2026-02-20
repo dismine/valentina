@@ -65,16 +65,14 @@ void DialogDimensionLabels::changeEvent(QEvent *event)
 
         if (int const index = ui->comboBoxDimensionLabels->findData(static_cast<int>(type)); index != -1)
         {
-            ui->comboBoxDimensionLabels->blockSignals(true);
+            const QSignalBlocker blocker(ui->comboBoxDimensionLabels);
             ui->comboBoxDimensionLabels->setCurrentIndex(index);
-            ui->comboBoxDimensionLabels->blockSignals(false);
         }
 
         const int row = ui->tableWidget->currentRow();
         InitTable();
-        ui->tableWidget->blockSignals(true);
+        const QSignalBlocker blocker(ui->tableWidget);
         ui->tableWidget->selectRow(row);
-        ui->tableWidget->blockSignals(false);
     }
 
     // remember to call base class implementation
@@ -119,21 +117,19 @@ void DialogDimensionLabels::InitLabels()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogDimensionLabels::InitDimensions()
 {
-    ui->comboBoxDimensionLabels->blockSignals(true);
+    const QSignalBlocker blocker(ui->comboBoxDimensionLabels);
     ui->comboBoxDimensionLabels->clear();
 
     for (auto &dimension : m_dimensions)
     {
         ui->comboBoxDimensionLabels->addItem(dimension->Name(), static_cast<int>(dimension->Type()));
     }
-
-    ui->comboBoxDimensionLabels->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogDimensionLabels::InitTable()
 {
-    ui->tableWidget->blockSignals(true);
+    const QSignalBlocker blocker(ui->tableWidget);
     ui->tableWidget->clearContents();
 
     const auto type = static_cast<MeasurementDimension>(ui->comboBoxDimensionLabels->currentData().toInt());
@@ -183,7 +179,6 @@ void DialogDimensionLabels::InitTable()
     }
 
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    ui->tableWidget->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

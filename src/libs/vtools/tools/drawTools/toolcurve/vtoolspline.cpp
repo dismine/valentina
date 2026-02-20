@@ -39,7 +39,6 @@
 #include <QPoint>
 #include <QRectF>
 #include <QSharedPointer>
-#include <QUndoStack>
 #include <QVector>
 #include <QtMath>
 
@@ -55,14 +54,14 @@
 #include "../qmuparser/qmutokenparser.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
+#include "../vgeometry/vspline.h"
 #include "../vmisc/exception/vexception.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/global.h"
 #include "../vwidgets/vcontrolpointspline.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "vabstractspline.h"
-#include "vgeometry/vspline.h"
+#include "vtoolabstractcurve.h"
 
 const QString VToolSpline::ToolType = QStringLiteral("simpleInteractive"); // NOLINT
 const QString VToolSpline::OldToolType = QStringLiteral("simple");         // NOLINT
@@ -74,7 +73,7 @@ const QString VToolSpline::OldToolType = QStringLiteral("simple");         // NO
  * @param parent parent object.
  */
 VToolSpline::VToolSpline(const VToolSplineInitData &initData, QGraphicsItem *parent)
-  : VAbstractSpline(initData.doc, initData.data, initData.id, initData.notes, parent)
+  : VToolAbstractBezier(initData.doc, initData.data, initData.id, initData.notes, parent)
 {
     SetSceneType(SceneObject::Spline);
 
@@ -125,6 +124,7 @@ void VToolSpline::SetDialog()
     const QPointer<DialogSpline> dialogTool = qobject_cast<DialogSpline *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const auto spl = VAbstractTool::data.GeometricObject<VSpline>(m_id);
+    dialogTool->CheckDependencyTreeComplete();
     dialogTool->SetSpline(*spl);
     dialogTool->SetNotes(m_notes);
 }
@@ -275,7 +275,7 @@ void VToolSpline::ShowHandles(bool show)
     {
         point->setVisible(show);
     }
-    VAbstractSpline::ShowHandles(show);
+    VToolAbstractBezier::ShowHandles(show);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -330,7 +330,7 @@ void VToolSpline::EnableToolMove(bool move)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::AllowHover(bool enabled)
 {
-    VAbstractSpline::AllowHover(enabled);
+    VToolAbstractBezier::AllowHover(enabled);
 
     for (auto *point : std::as_const(controlPoints))
     {
@@ -341,7 +341,7 @@ void VToolSpline::AllowHover(bool enabled)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::AllowSelecting(bool enabled)
 {
-    VAbstractSpline::AllowSelecting(enabled);
+    VToolAbstractBezier::AllowSelecting(enabled);
 
     for (auto *point : std::as_const(controlPoints))
     {
@@ -361,14 +361,13 @@ void VToolSpline::SaveDialog(QDomElement &domElement)
 
     const VSpline spl = dialogTool->GetSpline();
 
-    controlPoints[0]->blockSignals(true);
-    controlPoints[1]->blockSignals(true);
+    {
+        const QSignalBlocker blocker0(controlPoints[0]);
+        const QSignalBlocker blocker1(controlPoints[1]);
 
-    controlPoints[0]->setPos(static_cast<QPointF>(spl.GetP2()));
-    controlPoints[1]->setPos(static_cast<QPointF>(spl.GetP3()));
-
-    controlPoints[0]->blockSignals(false);
-    controlPoints[1]->blockSignals(false);
+        controlPoints[0]->setPos(static_cast<QPointF>(spl.GetP2()));
+        controlPoints[1]->setPos(static_cast<QPointF>(spl.GetP3()));
+    }
 
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
                                          [](const QString &notes) noexcept { return notes.isEmpty(); });
@@ -379,7 +378,7 @@ void VToolSpline::SaveDialog(QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-    VAbstractSpline::SaveOptions(tag, obj);
+    VToolAbstractBezier::SaveOptions(tag, obj);
 
     auto spl = qSharedPointerDynamicCast<VSpline>(obj);
     SCASSERT(spl.isNull() == false)
@@ -396,7 +395,7 @@ void VToolSpline::mousePressEvent(QGraphicsSceneMouseEvent *event)
         oldPosition = event->scenePos();
         event->accept();
     }
-    VAbstractSpline::mousePressEvent(event);
+    VToolAbstractBezier::mousePressEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -409,7 +408,7 @@ void VToolSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
         CurveReleased();
     }
-    VAbstractSpline::mouseReleaseEvent(event);
+    VToolAbstractBezier::mouseReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -534,7 +533,7 @@ void VToolSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
             setCursor(VAbstractValApplication::VApp()->getSceneView()->viewport()->cursor());
         }
 
-        VAbstractSpline::hoverEnterEvent(event);
+        VToolAbstractBezier::hoverEnterEvent(event);
     }
     else
     {
@@ -547,7 +546,7 @@ void VToolSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     if (GetAcceptHoverEvents())
     {
-        VAbstractSpline::hoverLeaveEvent(event);
+        VToolAbstractBezier::hoverLeaveEvent(event);
     }
 }
 
@@ -596,34 +595,49 @@ void VToolSpline::RefreshCtrlPoints()
 
     const auto spl = VAbstractTool::data.GeometricObject<VSpline>(m_id);
 
-    controlPoints[0]->blockSignals(true);
-    controlPoints[1]->blockSignals(true);
-
     {
-        const bool freeAngle1 = qmu::QmuTokenParser::IsSingle(spl->GetStartAngleFormula());
-        const bool freeLength1 = qmu::QmuTokenParser::IsSingle(spl->GetC1LengthFormula());
+        const QSignalBlocker blocker0(controlPoints[0]);
+        const QSignalBlocker blocker1(controlPoints[1]);
 
-        const auto splinePoint = static_cast<QPointF>(*VAbstractTool::data.GeometricObject<VPointF>(spl->GetP1().id()));
-        controlPoints[0]->RefreshCtrlPoint(1, SplinePointPosition::FirstPoint, static_cast<QPointF>(spl->GetP2()),
-                                           static_cast<QPointF>(splinePoint), freeAngle1, freeLength1);
+        {
+            const bool freeAngle1 = qmu::QmuTokenParser::IsSingle(spl->GetStartAngleFormula());
+            const bool freeLength1 = qmu::QmuTokenParser::IsSingle(spl->GetC1LengthFormula());
+
+            const auto splinePoint = static_cast<QPointF>(
+                *VAbstractTool::data.GeometricObject<VPointF>(spl->GetP1().id()));
+            controlPoints[0]->RefreshCtrlPoint(1,
+                                               SplinePointPosition::FirstPoint,
+                                               static_cast<QPointF>(spl->GetP2()),
+                                               static_cast<QPointF>(splinePoint),
+                                               freeAngle1,
+                                               freeLength1);
+        }
+
+        {
+            const bool freeAngle2 = qmu::QmuTokenParser::IsSingle(spl->GetEndAngleFormula());
+            const bool freeLength2 = qmu::QmuTokenParser::IsSingle(spl->GetC2LengthFormula());
+
+            const auto splinePoint = static_cast<QPointF>(
+                *VAbstractTool::data.GeometricObject<VPointF>(spl->GetP4().id()));
+            controlPoints[1]->RefreshCtrlPoint(1,
+                                               SplinePointPosition::LastPoint,
+                                               static_cast<QPointF>(spl->GetP3()),
+                                               static_cast<QPointF>(splinePoint),
+                                               freeAngle2,
+                                               freeLength2);
+        }
     }
-
-    {
-        const bool freeAngle2 = qmu::QmuTokenParser::IsSingle(spl->GetEndAngleFormula());
-        const bool freeLength2 = qmu::QmuTokenParser::IsSingle(spl->GetC2LengthFormula());
-
-        const auto splinePoint = static_cast<QPointF>(*VAbstractTool::data.GeometricObject<VPointF>(spl->GetP4().id()));
-        controlPoints[1]->RefreshCtrlPoint(1, SplinePointPosition::LastPoint, static_cast<QPointF>(spl->GetP3()),
-                                           static_cast<QPointF>(splinePoint), freeAngle2, freeLength2);
-    }
-
-    controlPoints[0]->blockSignals(false);
-    controlPoints[1]->blockSignals(false);
 
     for (auto *point : std::as_const(controlPoints))
     {
         point->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSpline::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    ProcessSplineToolOptions(oldDomElement, newDomElement, GatherToolChanges());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -662,9 +676,8 @@ void VToolSpline::CurveSelected(bool selected)
 
     for (auto *point : std::as_const(controlPoints))
     {
-        point->blockSignals(true);
+        const QSignalBlocker blocker(point);
         point->setSelected(selected);
-        point->blockSignals(false);
     }
 }
 
@@ -710,4 +723,22 @@ void VToolSpline::UndoCommandMove(const VSpline &oldSpl, const VSpline &newSpl)
     auto *moveSpl = new MoveSpline(doc, oldSpl, newSpl, m_id);
     connect(moveSpl, &MoveSpline::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     VAbstractApplication::VApp()->getUndoStack()->push(moveSpl);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VToolSpline::GatherToolChanges() const -> VToolAbstractBezier::ToolChanges
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogSpline> dialogTool = qobject_cast<DialogSpline *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    const VSpline newCurve = dialogTool->GetSpline();
+    const auto oldCurve = VAbstractTool::data.GeometricObject<VAbstractCubicBezier>(m_id);
+
+    return {.oldP1Label = oldCurve->GetP1().name(),
+            .newP1Label = newCurve.GetP1().name(),
+            .oldP4Label = oldCurve->GetP4().name(),
+            .newP4Label = newCurve.GetP4().name(),
+            .oldAliasSuffix = oldCurve->GetAliasSuffix(),
+            .newAliasSuffix = newCurve.GetAliasSuffix()};
 }

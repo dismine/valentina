@@ -102,6 +102,7 @@ auto NodeFont(QFont font, bool nodeExcluded = false) -> QFont;
 void CurrentCurveLength(vidtype curveId, VContainer *data);
 void SetTabStopDistance(QPlainTextEdit *edit, int tabWidthChar = 4);
 auto SegmentAliases(GOType curveType, const QString &alias1, const QString &alias2) -> QPair<QString, QString>;
+auto SegmentNames(GOType curveType, const QString &name1, const QString &name2) -> QPair<QString, QString>;
 auto GetNodeName(const VContainer *data, const VPieceNode &node, bool showPassmarkDetails = false) -> QString;
 void InitDialogButtonBoxIcons(QDialogButtonBox *buttonBox);
 auto MirrorLinePointsNeighbors(QListWidget *listWidget, quint32 startPoint, quint32 endPoint) -> bool;
@@ -110,5 +111,16 @@ void InitOperationColorPicker(VPE::QtColorPicker *button, const QVector<QColor> 
 void FillComboBoxTypeLine(QComboBox *box, const QMap<QString, QIcon> &stylesPics, const QString &def = TypeLineLine);
 void ChangeCurrentData(QComboBox *box, const QVariant &value);
 auto GetComboBoxCurrentData(const QComboBox *box, const QString &def) -> QString;
+auto GenerateUniqueCurveName(const VContainer *data,
+                             const QString &typeHead,
+                             const QString &base,
+                             const QString &pointName = QString()) -> QString;
+auto GenerateDefSubCurveName(const VContainer *data,
+                             quint32 curveId,
+                             const QString &derBase,
+                             const QString &base,
+                             const QString &pointName = QString()) -> QString;
+auto GenerateDefOffsetCurveName(const VContainer *data, quint32 curveId, const QString &derBase, const QString &base)
+    -> QString;
 
 #endif // DIALOGTOOLBOX_H

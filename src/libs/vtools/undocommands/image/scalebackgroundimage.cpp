@@ -46,26 +46,26 @@ ScaleBackgroundImage::ScaleBackgroundImage(
 //---------------------------------------------------------------------------------------------------------------------
 void ScaleBackgroundImage::undo()
 {
-    VBackgroundPatternImage image = doc->GetBackgroundImage(m_id);
+    VBackgroundPatternImage image = Doc()->GetBackgroundImage(m_id);
 
     if (not image.IsNull())
     {
         image.SetMatrix(m_oldMatrix);
-        doc->SaveBackgroundImage(image);
-        emit doc->BackgroundImageTransformationChanged(m_id);
+        Doc()->SaveBackgroundImage(image);
+        emit Doc()->BackgroundImageTransformationChanged(m_id);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void ScaleBackgroundImage::redo()
 {
-    VBackgroundPatternImage image = doc->GetBackgroundImage(m_id);
+    VBackgroundPatternImage image = Doc()->GetBackgroundImage(m_id);
 
     if (not image.IsNull())
     {
         image.SetMatrix(m_matrix);
-        doc->SaveBackgroundImage(image);
-        emit doc->BackgroundImageTransformationChanged(m_id);
+        Doc()->SaveBackgroundImage(image);
+        emit Doc()->BackgroundImageTransformationChanged(m_id);
     }
 }
 

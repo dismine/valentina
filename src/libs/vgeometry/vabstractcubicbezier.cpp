@@ -42,6 +42,12 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vmath.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
@@ -514,13 +520,10 @@ auto VAbstractCubicBezier::GetParmT(qreal length) const -> qreal
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractCubicBezier::CreateName()
 {
-    QString name = SPL_ + QStringLiteral("%1_%2").arg(GetP1().name(), GetP4().name());
-    if (GetDuplicate() > 0)
+    if (!IsDerivative())
     {
-        name += QStringLiteral("_%1").arg(GetDuplicate());
+        setName(GetTypeHead() + HeadlessName());
     }
-
-    setName(name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -533,7 +536,41 @@ void VAbstractCubicBezier::CreateAlias()
         return;
     }
 
-    SetAlias(SPL_ + aliasSuffix);
+    SetAlias(GetTypeHead() + aliasSuffix);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractCubicBezier::SetNameSuffix(const QString &suffix)
+{
+    setName(GetTypeHead() + suffix);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractCubicBezier::HeadlessName() const -> QString
+{
+    if (IsDerivative())
+    {
+        const QString fullName = name();
+        const QString prefix = GetTypeHead();
+        if (const QString headless = fullName.startsWith(prefix) ? fullName.sliced(prefix.length()) : fullName;
+            !headless.isEmpty())
+        {
+            return headless;
+        }
+    }
+
+    QString name = u"%1_%2"_s.arg(GetP1().name(), GetP4().name());
+    if (GetDuplicate() > 0)
+    {
+        name += u"_%1"_s.arg(GetDuplicate());
+    }
+    return name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractCubicBezier::GetTypeHead() const -> QString
+{
+    return SPL_;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

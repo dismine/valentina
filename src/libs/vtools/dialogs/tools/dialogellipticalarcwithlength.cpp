@@ -482,6 +482,14 @@ void DialogEllipticalArcWithLength::ShowDialog(bool click)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogEllipticalArcWithLength::CheckDependencyTreeComplete()
+{
+    const bool ready = m_doc->IsPatternGraphComplete();
+    ui->comboBoxCenter->setEnabled(ready);
+    ui->lineEditAlias->setEnabled(ready);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogEllipticalArcWithLength::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (prepare) // After first choose we ignore all objects
@@ -698,68 +706,58 @@ void DialogEllipticalArcWithLength::ValidateAlias()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEllipticalArcWithLength::Radius1()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditRadius1->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditRadius1;
-    formulaData.labelResult = ui->labelResultRadius1;
-    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-    formulaData.checkLessThanZero = true;
-
-    Eval(formulaData, m_flagRadius1);
+    Eval({.formula = ui->plainTextEditRadius1->toPlainText(),
+          .variables = data->DataVariables(),
+          .labelEditFormula = ui->labelEditRadius1,
+          .labelResult = ui->labelResultRadius1,
+          .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+          .checkLessThanZero = true},
+         m_flagRadius1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEllipticalArcWithLength::Radius2()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditRadius2->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditRadius2;
-    formulaData.labelResult = ui->labelResultRadius2;
-    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-    formulaData.checkLessThanZero = true;
-
-    Eval(formulaData, m_flagRadius2);
+    Eval({.formula = ui->plainTextEditRadius2->toPlainText(),
+          .variables = data->DataVariables(),
+          .labelEditFormula = ui->labelEditRadius2,
+          .labelResult = ui->labelResultRadius2,
+          .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+          .checkLessThanZero = true},
+         m_flagRadius2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEllipticalArcWithLength::Length()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditLength->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditLength;
-    formulaData.labelResult = ui->labelResultLength;
-    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-
-    Eval(formulaData, m_flagLength);
+    Eval({.formula = ui->plainTextEditLength->toPlainText(),
+          .variables = data->DataVariables(),
+          .labelEditFormula = ui->labelEditLength,
+          .labelResult = ui->labelResultLength,
+          .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true)},
+         m_flagLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEllipticalArcWithLength::EvalF()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditF1->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditF1;
-    formulaData.labelResult = ui->labelResultF1;
-    formulaData.postfix = degreeSymbol;
-
-    Eval(formulaData, m_flagF1);
+    Eval({.formula = ui->plainTextEditF1->toPlainText(),
+          .variables = data->DataVariables(),
+          .labelEditFormula = ui->labelEditF1,
+          .labelResult = ui->labelResultF1,
+          .postfix = degreeSymbol},
+         m_flagF1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEllipticalArcWithLength::RotationAngle()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditRotationAngle->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditRotationAngle;
-    formulaData.labelResult = ui->labelResultRotationAngle;
-    formulaData.postfix = degreeSymbol;
-
-    Eval(formulaData, m_flagRotationAngle);
+    Eval({.formula = ui->plainTextEditRotationAngle->toPlainText(),
+          .variables = data->DataVariables(),
+          .labelEditFormula = ui->labelEditRotationAngle,
+          .labelResult = ui->labelResultRotationAngle,
+          .postfix = degreeSymbol},
+         m_flagRotationAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -249,3 +249,11 @@ auto DialogLine::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLine::CheckDependencyTreeComplete()
+{
+    const bool ready = m_doc->IsPatternGraphComplete();
+    ui->comboBoxFirstPoint->setEnabled(ready);
+    ui->comboBoxSecondPoint->setEnabled(ready);
+}

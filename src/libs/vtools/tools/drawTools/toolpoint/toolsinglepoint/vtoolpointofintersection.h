@@ -75,6 +75,8 @@ protected:
     void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     void ReadToolAttributes(const QDomElement &domElement) override;
     void SetVisualization() override;
+    void ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement) override;
+
 private slots:
     void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) override;
 
@@ -88,6 +90,8 @@ private:
     quint32       secondPointId;
 
     explicit VToolPointOfIntersection(const VToolPointOfIntersectionInitData &initData, QGraphicsItem *parent = nullptr);
+
+    auto GatherToolChanges() const -> ToolChanges;
 };
 
 #endif // VTOOLPOINTOFINTERSECTION_H

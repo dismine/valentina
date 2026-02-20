@@ -68,12 +68,28 @@ VToolEllipticalArcWithLength::VToolEllipticalArcWithLength(const VToolElliptical
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VToolEllipticalArcWithLength::GatherToolChanges() const -> VToolAbstractArc::ToolChanges
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogEllipticalArcWithLength> dialogTool = qobject_cast<DialogEllipticalArcWithLength *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    const QSharedPointer<VAbstractArc> arc = VAbstractTool::data.GeometricObject<VAbstractArc>(m_id);
+
+    return {.oldCenterLabel = CenterPointName(),
+            .newCenterLabel = VAbstractTool::data.GetGObject(dialogTool->GetCenter())->name(),
+            .oldAliasSuffix = arc->GetAliasSuffix(),
+            .newAliasSuffix = dialogTool->GetAliasSuffix()};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolEllipticalArcWithLength::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogEllipticalArcWithLength> dialogTool = qobject_cast<DialogEllipticalArcWithLength *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VEllipticalArc> elArc = VAbstractTool::data.GeometricObject<VEllipticalArc>(m_id);
+    dialogTool->CheckDependencyTreeComplete();
     dialogTool->SetCenter(elArc->GetCenter().id());
     dialogTool->SetF1(elArc->GetFormulaF1());
     dialogTool->SetLength(elArc->GetFormulaLength());
@@ -399,7 +415,7 @@ void VToolEllipticalArcWithLength::SaveDialog(QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolEllipticalArcWithLength::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-    VAbstractSpline::SaveOptions(tag, obj);
+    VToolAbstractArc::SaveOptions(tag, obj);
 
     QSharedPointer<VEllipticalArc> const elArc = qSharedPointerDynamicCast<VEllipticalArc>(obj);
     SCASSERT(elArc.isNull() == false)
@@ -465,4 +481,10 @@ auto VToolEllipticalArcWithLength::MakeToolTip() const -> QString
                                 .arg(tr("Label"),                                                       // %12
                                      elArc->ObjectName());                                              // %13
     return toolTip;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolEllipticalArcWithLength::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    ProcessArcToolOptions(oldDomElement, newDomElement, GatherToolChanges());
 }

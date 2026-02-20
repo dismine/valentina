@@ -72,7 +72,7 @@ public:
     auto SecondArcName() const -> QString;
 
     auto GetCrossCirclesPoint() const -> CrossCirclesPoint;
-    void              SetCrossCirclesPoint(const CrossCirclesPoint &value);
+    void SetCrossCirclesPoint(const CrossCirclesPoint &value);
 
     void ShowVisualization(bool show) override;
 protected slots:
@@ -83,6 +83,7 @@ protected:
     void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     void ReadToolAttributes(const QDomElement &domElement) override;
     void SetVisualization() override;
+    void ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement) override;
 
 private:
     Q_DISABLE_COPY_MOVE(VToolPointOfIntersectionArcs) // NOLINT
@@ -97,6 +98,8 @@ private:
 
     explicit VToolPointOfIntersectionArcs(const VToolPointOfIntersectionArcsInitData &initData,
                                           QGraphicsItem *parent = nullptr);
+
+    auto GatherToolChanges() const -> ToolChanges;
 };
 
 #endif // VTOOLPOINTOFINTERSECTIONARCS_H

@@ -101,10 +101,15 @@ protected:
     QString lineColor;
 
     virtual void RefreshGeometry();
-    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
-    virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
-    virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
-    virtual auto MakeToolTip() const -> QString override;
+    void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
+    auto MakeToolTip() const -> QString override;
+
+    void ProcessLinePointToolOptions(const QDomElement &oldDomElement,
+                                     const QDomElement &newDomElement,
+                                     const QString &newLabel,
+                                     const QString &newBasePointLabel);
 
 private:
     Q_DISABLE_COPY_MOVE(VToolLinePoint) // NOLINT

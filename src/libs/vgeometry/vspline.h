@@ -62,14 +62,14 @@ public:
             const QString &c2LengthFormula, quint32 idObject = 0, Draw mode = Draw::Calculation);
     ~VSpline() override;
 
-    auto Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const -> VSpline;
-    auto Flip(const QLineF &axis, const QString &prefix = QString()) const -> VSpline;
-    auto Move(qreal length, qreal angle, const QString &prefix = QString()) const -> VSpline;
-    auto Offset(qreal distance, const QString &suffix = QString()) const -> VSplinePath override;
-    auto Outline(const QVector<qreal> &distances, const QString &suffix = QString()) const -> VSplinePath override;
+    auto Rotate(const QPointF &originPoint, qreal degrees, const QString &name = QString()) const -> VSpline;
+    auto Flip(const QLineF &axis, const QString &name = QString()) const -> VSpline;
+    auto Move(qreal length, qreal angle, const QString &name = QString()) const -> VSpline;
+    auto Offset(qreal distance, const QString &name = QString()) const -> VSplinePath override;
+    auto Outline(const QVector<qreal> &distances, const QString &name = QString()) const -> VSplinePath override;
 
-    auto OffsetPath(qreal distance, const QString &suffix = QString()) const -> QVector<VSpline>;
-    auto OutlinePath(const QVector<qreal> &distances, const QString &suffix = QString()) const -> QVector<VSpline>;
+    auto OffsetPath(qreal distance) const -> QVector<VSpline>;
+    auto OutlinePath(const QVector<qreal> &distances) const -> QVector<VSpline>;
 
     auto operator=(const VSpline &spline) -> VSpline &;
 

@@ -81,12 +81,13 @@ protected:
     void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     void ReadToolAttributes(const QDomElement &domElement) override;
     void SetVisualization() override;
+    void ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement) override;
 
 private:
     Q_DISABLE_COPY_MOVE(VToolNormal) // NOLINT
 
     /** @brief secondPointId id second line point. */
-    quint32        secondPointId;
+    quint32 secondPointId;
 
     explicit VToolNormal(const VToolNormalInitData &initData, QGraphicsItem *parent = nullptr);
 };

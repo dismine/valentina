@@ -55,10 +55,6 @@ public:
 
     void Do(qreal x, qreal y);
 
-    auto getDetId() const -> quint32;
-    auto getNewX() const -> double;
-    auto getNewY() const -> double;
-
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(MovePiece) // NOLINT
@@ -71,23 +67,5 @@ private:
 
     void SaveCoordinates(QDomElement &domElement, double x, double y);
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto MovePiece::getDetId() const -> quint32
-{
-    return nodeId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto MovePiece::getNewX() const -> double
-{
-    return m_newX;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto MovePiece::getNewY() const -> double
-{
-    return m_newY;
-}
 
 #endif // MOVEDETAIL_H

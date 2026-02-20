@@ -54,9 +54,6 @@ public:
     auto mergeWith(const QUndoCommand *command) -> bool override;
     auto id() const -> int override;
 
-    auto getSplinePathId() const -> quint32;
-    auto getNewSplinePath() const -> VSplinePath;
-
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(MoveSplinePath) // NOLINT
@@ -65,17 +62,5 @@ private:
     QGraphicsScene *scene;
     void Do(const VSplinePath &splPath);
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto MoveSplinePath::getSplinePathId() const -> quint32
-{
-    return nodeId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto MoveSplinePath::getNewSplinePath() const -> VSplinePath
-{
-    return newSplinePath;
-}
 
 #endif // MOVESPLINEPATH_H

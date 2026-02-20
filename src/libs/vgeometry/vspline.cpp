@@ -34,6 +34,7 @@
 #include <QVector2D>
 #include <QtConcurrent>
 
+#include "../ifc/ifcdef.h"
 #include "../vmisc/def.h"
 #include "../vmisc/defglobal.h"
 #include "../vmisc/vmath.h"
@@ -48,8 +49,8 @@ using namespace Qt::Literals::StringLiterals;
 
 struct VSplinePair
 {
-    QVector<QPointF> left;
-    QVector<QPointF> right;
+    QVector<QPointF> left{};
+    QVector<QPointF> right{};
 };
 
 namespace
@@ -303,7 +304,7 @@ VSpline::VSpline(const VPointF &p1, const VPointF &p4, qreal angle1, qreal angle
   : VAbstractCubicBezier(GOType::Spline, idObject, mode),
     d(new VSplineData(p1, p4, angle1, angle2, kAsm1, kAsm2, kCurve))
 {
-    CreateName();
+    VSpline::CreateName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -319,7 +320,7 @@ VSpline::VSpline(const VPointF &p1, const QPointF &p2, const QPointF &p3, const 
   : VAbstractCubicBezier(GOType::Spline, idObject, mode),
     d(new VSplineData(p1, p2, p3, p4))
 {
-    CreateName();
+    VSpline::CreateName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -343,94 +344,79 @@ VSpline::VSpline(const VPointF &p1, const VPointF &p4, qreal angle1, const QStri
     d(new VSplineData(p1, p4, angle1, angle1Formula, angle2, angle2Formula, c1Length, c1LengthFormula, c2Length,
                       c2LengthFormula))
 {
-    CreateName();
+    VSpline::CreateName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VSpline::Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix) const -> VSpline
+auto VSpline::Rotate(const QPointF &originPoint, qreal degrees, const QString &name) const -> VSpline
 {
-    const VPointF p1 = GetP1().Rotate(originPoint, degrees);
-    const VPointF p4 = GetP4().Rotate(originPoint, degrees);
+    const VPointF p1 = GetP1().Rotate(originPoint, degrees, "X1"_L1);
+    const VPointF p4 = GetP4().Rotate(originPoint, degrees, "X4"_L1);
 
     const QPointF p2 = VPointF::RotatePF(originPoint, static_cast<QPointF>(GetP2()), degrees);
     const QPointF p3 = VPointF::RotatePF(originPoint, static_cast<QPointF>(GetP3()), degrees);
 
     VSpline spl(p1, p2, p3, p4);
-    spl.setName(name() + prefix);
-
-    if (not GetAliasSuffix().isEmpty())
+    if (!name.isEmpty())
     {
-        spl.SetAliasSuffix(GetAliasSuffix() + prefix);
+        spl.SetNameSuffix(name);
     }
-
     spl.SetColor(GetColor());
     spl.SetPenStyle(GetPenStyle());
     spl.SetApproximationScale(GetApproximationScale());
+    spl.SetDerivative(true);
     return spl;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VSpline::Flip(const QLineF &axis, const QString &prefix) const -> VSpline
+auto VSpline::Flip(const QLineF &axis, const QString &name) const -> VSpline
 {
-    const VPointF p1 = GetP1().Flip(axis);
-    const VPointF p4 = GetP4().Flip(axis);
+    const VPointF p1 = GetP1().Flip(axis, "X1"_L1);
+    const VPointF p4 = GetP4().Flip(axis, "X4"_L1);
 
     const QPointF p2 = VPointF::FlipPF(axis, static_cast<QPointF>(GetP2()));
     const QPointF p3 = VPointF::FlipPF(axis, static_cast<QPointF>(GetP3()));
 
     VSpline spl(p1, p2, p3, p4);
-    spl.setName(name() + prefix);
-
-    if (not GetAliasSuffix().isEmpty())
+    if (!name.isEmpty())
     {
-        spl.SetAliasSuffix(GetAliasSuffix() + prefix);
+        spl.SetNameSuffix(name);
     }
-
     spl.SetColor(GetColor());
     spl.SetPenStyle(GetPenStyle());
     spl.SetApproximationScale(GetApproximationScale());
+    spl.SetDerivative(true);
     return spl;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VSpline::Move(qreal length, qreal angle, const QString &prefix) const -> VSpline
+auto VSpline::Move(qreal length, qreal angle, const QString &name) const -> VSpline
 {
-    const VPointF p1 = GetP1().Move(length, angle);
-    const VPointF p4 = GetP4().Move(length, angle);
+    const VPointF p1 = GetP1().Move(length, angle, "X1"_L1);
+    const VPointF p4 = GetP4().Move(length, angle, "X4"_L1);
 
     const QPointF p2 = VPointF::MovePF(static_cast<QPointF>(GetP2()), length, angle);
     const QPointF p3 = VPointF::MovePF(static_cast<QPointF>(GetP3()), length, angle);
 
     VSpline spl(p1, p2, p3, p4);
-    spl.setName(name() + prefix);
-
-    if (not GetAliasSuffix().isEmpty())
+    if (!name.isEmpty())
     {
-        spl.SetAliasSuffix(GetAliasSuffix() + prefix);
+        spl.SetNameSuffix(name);
     }
-
     spl.SetColor(GetColor());
     spl.SetPenStyle(GetPenStyle());
     spl.SetApproximationScale(GetApproximationScale());
+    spl.SetDerivative(true);
     return spl;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VSpline::OffsetPath(qreal distance, const QString &suffix) const -> QVector<VSpline>
+auto VSpline::OffsetPath(qreal distance) const -> QVector<VSpline>
 {
     QVector<VSpline> subSplines = OffsetCurve_r(distance);
 
-    for (int i = 0; i < subSplines.size(); ++i)
+    for (auto &spl : subSplines)
     {
-        const QString index = QStringLiteral("_%1").arg(i + 1);
-        VSpline &spl = subSplines[i];
-        spl.setName(name() + index + suffix);
-
-        if (not GetAliasSuffix().isEmpty())
-        {
-            spl.SetAliasSuffix(GetAliasSuffix() + index + suffix);
-        }
-
         spl.SetColor(GetColor());
         spl.SetPenStyle(GetPenStyle());
         spl.SetApproximationScale(GetApproximationScale());
@@ -440,21 +426,12 @@ auto VSpline::OffsetPath(qreal distance, const QString &suffix) const -> QVector
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VSpline::OutlinePath(const QVector<qreal> &distances, const QString &suffix) const -> QVector<VSpline>
+auto VSpline::OutlinePath(const QVector<qreal> &distances) const -> QVector<VSpline>
 {
     QVector<VSpline> subSplines = OutlineCurve(distances);
 
-    for (int i = 0; i < subSplines.size(); ++i)
+    for (auto &spl : subSplines)
     {
-        const QString index = QStringLiteral("_%1").arg(i + 1);
-        VSpline &spl = subSplines[i];
-        spl.setName(name() + index + suffix);
-
-        if (not GetAliasSuffix().isEmpty())
-        {
-            spl.SetAliasSuffix(GetAliasSuffix() + index + suffix);
-        }
-
         spl.SetColor(GetColor());
         spl.SetPenStyle(GetPenStyle());
         spl.SetApproximationScale(GetApproximationScale());
@@ -467,42 +444,40 @@ auto VSpline::OutlinePath(const QVector<qreal> &distances, const QString &suffix
 VSpline::~VSpline() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VSpline::Offset(qreal distance, const QString &suffix) const -> VSplinePath
+auto VSpline::Offset(qreal distance, const QString &name) const -> VSplinePath
 {
-    QVector<VSpline> const subSplines = OffsetPath(distance, suffix);
+    QVector<VSpline> const subSplines = OffsetPath(distance);
 
     VSplinePath splPath(subSplines);
-    splPath.setName(name() + suffix);
-    splPath.SetMainNameForHistory(GetMainNameForHistory() + suffix);
-
-    if (not GetAliasSuffix().isEmpty())
+    if (!name.isEmpty())
     {
-        splPath.SetAliasSuffix(GetAliasSuffix() + suffix);
+        splPath.SetNameSuffix(name);
+        splPath.SetMainNameForHistory(name);
     }
 
     splPath.SetColor(GetColor());
     splPath.SetPenStyle(GetPenStyle());
     splPath.SetApproximationScale(GetApproximationScale());
+    splPath.SetDerivative(true);
     return splPath;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VSpline::Outline(const QVector<qreal> &distances, const QString &suffix) const -> VSplinePath
+auto VSpline::Outline(const QVector<qreal> &distances, const QString &name) const -> VSplinePath
 {
-    QVector<VSpline> const subSplines = OutlinePath(distances, suffix);
+    QVector<VSpline> const subSplines = OutlinePath(distances);
 
     VSplinePath splPath(subSplines);
-    splPath.setName(name() + suffix);
-    splPath.SetMainNameForHistory(GetMainNameForHistory() + suffix);
-
-    if (not GetAliasSuffix().isEmpty())
+    if (!name.isEmpty())
     {
-        splPath.SetAliasSuffix(GetAliasSuffix() + suffix);
+        splPath.SetNameSuffix(name);
+        splPath.SetMainNameForHistory(name);
     }
 
     splPath.SetColor(GetColor());
     splPath.SetPenStyle(GetPenStyle());
     splPath.SetApproximationScale(GetApproximationScale());
+    splPath.SetDerivative(true);
     return splPath;
 }
 
@@ -866,11 +841,8 @@ auto VSpline::Reduce() const -> QVector<VSpline>
         double const t1 = extrema.at(i - 1);
         double const t2 = extrema.at(i);
         VSpline const seg = this->SplitRange(t1, t2);
-        ExstremaData data;
-        data.spl = seg;
-        // data.step = std::clamp((t2 - t1) / 5000.0, 0.00000001, 0.01);
-        data.step = 0.01;
-        pass1.append(data);
+        // .step = std::clamp((t2 - t1) / 5000.0, 0.00000001, 0.01);
+        pass1.append({.spl = seg, .step = 0.01});
     }
 
     // --- 2nd pass: further split into "simple" segments -------------------
@@ -1071,14 +1043,14 @@ auto VSpline::SplitRange(double t1, double t2) const -> VSpline
     if (qFuzzyIsNull(t1) && !qFuzzyIsNull(t2))
     {
         QVector<QPointF> const left = SplitRange(t2).left;
-        VSpline leftSpl{VPointF(left.at(0)), left.at(1), left.at(2), VPointF(left.at(3))};
+        VSpline leftSpl{VPointF(left.at(0), "X1"_L1), left.at(1), left.at(2), VPointF(left.at(3), "X4"_L1)};
         leftSpl.SetApproximationScale(GetApproximationScale());
         return leftSpl;
     }
     if (VFuzzyComparePossibleNulls(t2, 1.0))
     {
         QVector<QPointF> const right = SplitRange(t1).right;
-        VSpline rightSpl{VPointF(right.at(0)), right.at(1), right.at(2), VPointF(right.at(3))};
+        VSpline rightSpl{VPointF(right.at(0), "X1"_L1), right.at(1), right.at(2), VPointF(right.at(3), "X4"_L1)};
         rightSpl.SetApproximationScale(GetApproximationScale());
         return rightSpl;
     }
@@ -1087,11 +1059,11 @@ auto VSpline::SplitRange(double t1, double t2) const -> VSpline
     double const t2mapped = Map(t2, t1, 1.0, 0.0, 1.0);
 
     QVector<QPointF> const right = result.right;
-    VSpline rightSpl{VPointF(right.at(0)), right.at(1), right.at(2), VPointF(right.at(3))};
+    VSpline rightSpl{VPointF(right.at(0), "X1"_L1), right.at(1), right.at(2), VPointF(right.at(3), "X4"_L1)};
     rightSpl.SetApproximationScale(GetApproximationScale());
 
     QVector<QPointF> const left = rightSpl.SplitRange(t2mapped).left;
-    VSpline leftSpl{VPointF(left.at(0)), left.at(1), left.at(2), VPointF(left.at(3))};
+    VSpline leftSpl{VPointF(left.at(0), "X1"_L1), left.at(1), left.at(2), VPointF(left.at(3), "X4"_L1)};
     leftSpl.SetApproximationScale(GetApproximationScale());
     return leftSpl;
 }
@@ -1190,7 +1162,7 @@ auto VSpline::OffsetCurve_r(double distance) const -> QVector<VSpline>
             coords.append(QPointF(p.x() + distance * n.x(), p.y() + distance * n.y()));
         }
 
-        VSpline spl(VPointF(coords.at(0)), coords.at(1), coords.at(2), VPointF(coords.at(3)));
+        VSpline spl(VPointF(coords.at(0), "X1"_L1), coords.at(1), coords.at(2), VPointF(coords.at(3), "X4"_L1));
         spl.SetApproximationScale(GetApproximationScale());
         result.append(spl);
         return result;
@@ -1269,7 +1241,7 @@ auto VSpline::Scale(const std::function<qreal(qreal)> &distanceFn, bool function
     }
 
     // --- 5. Create new spline (Unchanged) ---
-    VSpline spl(VPointF(np.at(0)), np.at(1), np.at(2), VPointF(np.at(3)));
+    VSpline spl(VPointF(np.at(0), "X1"_L1), np.at(1), np.at(2), VPointF(np.at(3), "X4"_L1));
     spl.SetApproximationScale(GetApproximationScale());
     return spl;
 }

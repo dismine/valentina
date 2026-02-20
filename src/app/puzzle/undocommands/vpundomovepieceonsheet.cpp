@@ -81,12 +81,9 @@ void VPUndoMovePieceOnSheet::undo()
             QT_WARNING_PUSH
             QT_WARNING_DISABLE_GCC("-Wnoexcept")
 
-            VPTransformationOrigon origin;
-            origin.custom = true;
+            piece->RotateToGrainline({.custom = true});
 
             QT_WARNING_POP
-
-            piece->RotateToGrainline(origin);
         }
 
         if (not layout.isNull())
@@ -137,12 +134,9 @@ void VPUndoMovePieceOnSheet::redo()
             QT_WARNING_PUSH
             QT_WARNING_DISABLE_GCC("-Wnoexcept")
 
-            VPTransformationOrigon origin;
-            origin.custom = true;
+            piece->RotateToGrainline({.custom = true});
 
             QT_WARNING_POP
-
-            piece->RotateToGrainline(origin);
         }
 
         if (not layout.isNull())

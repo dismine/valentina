@@ -621,17 +621,14 @@ void VKnownMeasurementsDocument::ReadMeasurements(VKnownMeasurements &known) con
             continue;
         }
 
-        VKnownMeasurement m;
-        m.name = domElement.attribute(*attrName);
-        m.fullName = domElement.attribute(*attrFullName);
-        m.description = domElement.attribute(*attrDescription);
-        m.formula = domElement.attribute(*attrFormula);
-        m.specialUnits = GetParametrBool(domElement, *attrSpecialUnits, falseStr);
-        m.diagram = QUuid(GetParametrEmptyString(domElement, *attrDiagram));
-        m.index = i;
-        m.group = GetParametrEmptyString(domElement, *attrGroup);
-
-        known.AddMeasurement(m);
+        known.AddMeasurement({.name = domElement.attribute(*attrName),
+                              .fullName = domElement.attribute(*attrFullName),
+                              .description = domElement.attribute(*attrDescription),
+                              .formula = domElement.attribute(*attrFormula),
+                              .specialUnits = GetParametrBool(domElement, *attrSpecialUnits, falseStr),
+                              .diagram = QUuid(GetParametrEmptyString(domElement, *attrDiagram)),
+                              .index = i,
+                              .group = GetParametrEmptyString(domElement, *attrGroup)});
     }
 }
 

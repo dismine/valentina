@@ -30,7 +30,6 @@
 
 #include <QLineF>
 #include <QSharedPointer>
-#include <new>
 
 #include "../../../../dialogs/tools/dialogpointofintersectionarcs.h"
 #include "../../../../dialogs/tools/dialogtool.h"
@@ -65,12 +64,23 @@ VToolPointOfIntersectionArcs::VToolPointOfIntersectionArcs(const VToolPointOfInt
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VToolPointOfIntersectionArcs::GatherToolChanges() const -> VAbstractPoint::ToolChanges
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogPointOfIntersectionArcs> dialogTool = qobject_cast<DialogPointOfIntersectionArcs *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    return {.pointId = m_id, .oldLabel = name(), .newLabel = dialogTool->GetPointName()};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersectionArcs::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogPointOfIntersectionArcs> dialogTool = qobject_cast<DialogPointOfIntersectionArcs *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
+    dialogTool->CheckDependencyTreeComplete();
     dialogTool->SetFirstArcId(firstArcId);
     dialogTool->SetSecondArcId(secondArcId);
     dialogTool->SetCrossArcPoint(crossPoint);
@@ -355,4 +365,10 @@ void VToolPointOfIntersectionArcs::SetVisualization()
         visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPointOfIntersectionArcs::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    ProcessPointToolOptions(oldDomElement, newDomElement, GatherToolChanges());
 }

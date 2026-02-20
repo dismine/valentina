@@ -53,27 +53,27 @@ HoldAllBackgroundImages::HoldAllBackgroundImages(bool hold, VAbstractPattern *do
 //---------------------------------------------------------------------------------------------------------------------
 void HoldAllBackgroundImages::undo()
 {
-    QVector<VBackgroundPatternImage> images = doc->GetBackgroundImages();
+    QVector<VBackgroundPatternImage> images = Doc()->GetBackgroundImages();
 
     for (auto &image : images)
     {
         image.SetHold(m_oldHold.value(image.Id(), image.Hold()));
     }
 
-    doc->SaveBackgroundImages(images);
-    emit doc->BackgroundImagesHoldChanged();
+    Doc()->SaveBackgroundImages(images);
+    emit Doc()->BackgroundImagesHoldChanged();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void HoldAllBackgroundImages::redo()
 {
-    QVector<VBackgroundPatternImage> images = doc->GetBackgroundImages();
+    QVector<VBackgroundPatternImage> images = Doc()->GetBackgroundImages();
 
     for (auto &image : images)
     {
         image.SetHold(m_hold);
     }
 
-    doc->SaveBackgroundImages(images);
-    emit doc->BackgroundImagesHoldChanged();
+    Doc()->SaveBackgroundImages(images);
+    emit Doc()->BackgroundImagesHoldChanged();
 }

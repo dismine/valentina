@@ -82,9 +82,6 @@ public:
 
     auto IsRemovable() const -> RemoveStatus override;
 
-    auto Suffix() const -> QString;
-    void SetSuffix(const QString &suffix);
-
     void SetNotes(const QString &notes) override;
 
     auto SourceItems() const -> QVector<SourceItem>;
@@ -134,8 +131,6 @@ public slots:
     void LabelChangePosition(const QPointF &pos, quint32 labelId);
 
 protected:
-    QString suffix;
-
     QVector<SourceItem> source;
     QVector<DestinationItem> destination;
 
@@ -174,6 +169,12 @@ protected:
     auto VisibilityGroupToolTip() const -> QString;
 
     static void CreateVisibilityGroup(const VAbstractOperationInitData &initData);
+
+    static void PrepareNames(VAbstractOperationInitData &initData);
+
+    void ProcessOperationToolOptions(const QDomElement &oldDomElement,
+                                     const QDomElement &newDomElement,
+                                     const QVector<SourceItem> &newSource);
 
 private:
     Q_DISABLE_COPY_MOVE(VAbstractOperation) // NOLINT

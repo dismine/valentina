@@ -43,7 +43,7 @@ MoveSPoint::MoveSPoint(VAbstractPattern *doc,
                        const quint32 &id,
                        QGraphicsScene *scene,
                        QUndoCommand *parent)
-  : VUndoCommand(doc, parent),
+  : VUndoCommand(doc, id, parent),
     oldX(0.0),
     oldY(0.0),
     newX(x),
@@ -51,8 +51,7 @@ MoveSPoint::MoveSPoint(VAbstractPattern *doc,
     scene(scene)
 {
     setText(tr("move single point"));
-    nodeId = id;
-    qCDebug(vUndo, "SPoint id %u", nodeId);
+    qCDebug(vUndo, "SPoint id %u", id);
 
     qCDebug(vUndo, "SPoint newX %f", newX);
     qCDebug(vUndo, "SPoint newY %f", newY);
@@ -69,13 +68,9 @@ MoveSPoint::MoveSPoint(VAbstractPattern *doc,
     }
     else
     {
-        qCDebug(vUndo, "Can't find spoint with id = %u.", nodeId);
+        qCDebug(vUndo, "Can't find spoint with id = %u.", id);
     }
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-MoveSPoint::~MoveSPoint()
-{}
 
 //---------------------------------------------------------------------------------------------------------------------
 void MoveSPoint::undo()
@@ -98,18 +93,17 @@ auto MoveSPoint::mergeWith(const QUndoCommand *command) -> bool
 {
     const auto *moveCommand = static_cast<const MoveSPoint *>(command);
     SCASSERT(moveCommand != nullptr)
-    const quint32 sPointId = moveCommand->getSPointId();
 
     qCDebug(vUndo, "Mergin.");
-    if (sPointId != nodeId)
+    if (moveCommand->ElementId() != ElementId())
     {
         qCDebug(vUndo, "Merging canceled.");
         return false;
     }
 
     qCDebug(vUndo, "Mergin undo.");
-    newX = moveCommand->getNewX();
-    newY = moveCommand->getNewY();
+    newX = moveCommand->newX;
+    newY = moveCommand->newY;
     qCDebug(vUndo, "SPoint newX %f", newX);
     qCDebug(vUndo, "SPoint newY %f", newY);
     return true;
@@ -127,16 +121,16 @@ void MoveSPoint::Do(double x, double y)
     qCDebug(vUndo, "Move to x %f", x);
     qCDebug(vUndo, "Move to y %f", y);
 
-    QDomElement domElement = doc->FindElementById(nodeId, VAbstractPattern::TagPoint);
+    QDomElement domElement = Doc()->FindElementById(ElementId(), VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
-        doc->SetAttribute(domElement, AttrX, QString().setNum(VAbstractValApplication::VApp()->fromPixel(x)));
-        doc->SetAttribute(domElement, AttrY, QString().setNum(VAbstractValApplication::VApp()->fromPixel(y)));
+        Doc()->SetAttribute(domElement, AttrX, QString().setNum(VAbstractValApplication::VApp()->fromPixel(x)));
+        Doc()->SetAttribute(domElement, AttrY, QString().setNum(VAbstractValApplication::VApp()->fromPixel(y)));
 
         emit NeedLiteParsing(Document::LitePPParse);
     }
     else
     {
-        qCDebug(vUndo, "Can't find spoint with id = %u.", nodeId);
+        qCDebug(vUndo, "Can't find spoint with id = %u.", ElementId());
     }
 }

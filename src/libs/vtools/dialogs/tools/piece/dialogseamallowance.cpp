@@ -138,7 +138,7 @@ void InitComboBoxFormats(QComboBox *box, const QStringList &items, const QString
 {
     SCASSERT(box != nullptr)
 
-    box->blockSignals(true);
+    const QSignalBlocker blocker(box);
     box->addItems(items);
     int const index = box->findText(currentFormat);
     if (index != -1)
@@ -149,7 +149,6 @@ void InitComboBoxFormats(QComboBox *box, const QStringList &items, const QString
     {
         box->setCurrentIndex(0);
     }
-    box->blockSignals(false);
 }
 } // namespace
 
@@ -303,23 +302,24 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     }
 
     uiTabPaths->checkBoxHideMainPath->setChecked(piece.IsHideMainPath());
-    uiTabPaths->listWidgetCustomSA->blockSignals(true);
-    uiTabPaths->listWidgetCustomSA->clear();
-    QVector<CustomSARecord> const records = piece.GetCustomSARecords();
-    for (auto record : records)
     {
-        if (record.path > NULL_ID)
+        const QSignalBlocker blocker(uiTabPaths->listWidgetCustomSA);
+        uiTabPaths->listWidgetCustomSA->clear();
+        QVector<CustomSARecord> const records = piece.GetCustomSARecords();
+        for (auto record : records)
         {
-            const QString name = GetPathName(record.path, record.reverse);
+            if (record.path > NULL_ID)
+            {
+                const QString name = GetPathName(record.path, record.reverse);
 
-            auto *item = new QListWidgetItem(name);
-            item->setFont(NodeFont(item->font()));
-            item->setData(Qt::UserRole, QVariant::fromValue(record));
-            uiTabPaths->listWidgetCustomSA->addItem(item);
-            uiTabPaths->listWidgetCustomSA->setCurrentRow(uiTabPaths->listWidgetCustomSA->count() - 1);
+                auto *item = new QListWidgetItem(name);
+                item->setFont(NodeFont(item->font()));
+                item->setData(Qt::UserRole, QVariant::fromValue(record));
+                uiTabPaths->listWidgetCustomSA->addItem(item);
+                uiTabPaths->listWidgetCustomSA->setCurrentRow(uiTabPaths->listWidgetCustomSA->count() - 1);
+            }
         }
     }
-    uiTabPaths->listWidgetCustomSA->blockSignals(false);
 
     uiTabPaths->listWidgetInternalPaths->clear();
     const QVector<quint32> paths = piece.GetInternalPaths();
@@ -379,13 +379,15 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
         uiTabPlaceLabels->listWidgetPlaceLabels->setCurrentRow(0);
     }
 
-    uiTabPaths->comboBoxStartPoint->blockSignals(true);
-    uiTabPaths->comboBoxStartPoint->clear();
-    uiTabPaths->comboBoxStartPoint->blockSignals(false);
+    {
+        const QSignalBlocker blocker(uiTabPaths->comboBoxStartPoint);
+        uiTabPaths->comboBoxStartPoint->clear();
+    }
 
-    uiTabPaths->comboBoxEndPoint->blockSignals(true);
-    uiTabPaths->comboBoxEndPoint->clear();
-    uiTabPaths->comboBoxEndPoint->blockSignals(false);
+    {
+        const QSignalBlocker blocker(uiTabPaths->comboBoxEndPoint);
+        uiTabPaths->comboBoxEndPoint->clear();
+    }
 
     CustomSAChanged(0);
 
@@ -788,17 +790,15 @@ void DialogSeamAllowance::InitFold(const VPiece &piece)
         }
     }
 
-    uiTabFoldLine->groupBoxManualHeight->blockSignals(true);
-    uiTabFoldLine->groupBoxManualWidth->blockSignals(true);
-    uiTabFoldLine->groupBoxManualCenter->blockSignals(true);
+    {
+        const QSignalBlocker blockerManualHeight(uiTabFoldLine->groupBoxManualHeight);
+        const QSignalBlocker blockerManualWidth(uiTabFoldLine->groupBoxManualWidth);
+        const QSignalBlocker blockerManualCenter(uiTabFoldLine->groupBoxManualCenter);
 
-    InitFoldHeightFormula(piece);
-    InitFoldWidthFormula(piece);
-    InitFoldCenterFormula(piece);
-
-    uiTabFoldLine->groupBoxManualHeight->blockSignals(false);
-    uiTabFoldLine->groupBoxManualWidth->blockSignals(false);
-    uiTabFoldLine->groupBoxManualCenter->blockSignals(false);
+        InitFoldHeightFormula(piece);
+        InitFoldWidthFormula(piece);
+        InitFoldCenterFormula(piece);
+    }
 
     {
         const int index = uiTabFoldLine->comboBoxType->findData(static_cast<unsigned int>(piece.GetFoldLineType()));
@@ -1052,6 +1052,12 @@ void DialogSeamAllowance::SetPatternDoc(VAbstractPattern *doc)
 {
     SCASSERT(doc != nullptr)
     m_doc = doc;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::CheckDependencyTreeComplete()
+{
+    // does nothing
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1470,7 +1476,7 @@ void DialogSeamAllowance::NodeChanged(int index)
 
     uiTabPaths->comboBoxAngle->setDisabled(true);
 
-    uiTabPaths->comboBoxAngle->blockSignals(true);
+    const QSignalBlocker blocker(uiTabPaths->comboBoxAngle);
 
     if (index != -1)
     {
@@ -1526,7 +1532,6 @@ void DialogSeamAllowance::NodeChanged(int index)
         uiTabPaths->plainTextEditFormulaWidthAfter->setPlainText(currentSeamAllowance);
         uiTabPaths->comboBoxAngle->setCurrentIndex(-1);
     }
-    uiTabPaths->comboBoxAngle->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1545,32 +1550,19 @@ void DialogSeamAllowance::PassmarkChanged(int index)
     uiTabPassmarks->checkBoxClockwiseOpening->setDisabled(true);
     uiTabPassmarks->checkBoxShowSecondPassmark->setDisabled(true);
 
-    uiTabPassmarks->checkBoxClockwiseOpening->blockSignals(true);
-    uiTabPassmarks->checkBoxShowSecondPassmark->blockSignals(true);
-
-    uiTabPassmarks->groupBoxManualLength->blockSignals(true);
-    uiTabPassmarks->groupBoxManualWidth->blockSignals(true);
-    uiTabPassmarks->groupBoxManualAngle->blockSignals(true);
-    uiTabPassmarks->groupBoxMarkType->blockSignals(true);
-    uiTabPassmarks->groupBoxAngleType->blockSignals(true);
+    const QSignalBlocker blockerClockwiseOpening(uiTabPassmarks->checkBoxClockwiseOpening);
+    const QSignalBlocker blockerShowSecondPassmark(uiTabPassmarks->checkBoxShowSecondPassmark);
+    const QSignalBlocker blockerManualLength(uiTabPassmarks->groupBoxManualLength);
+    const QSignalBlocker blockerManualWidth(uiTabPassmarks->groupBoxManualWidth);
+    const QSignalBlocker blockerManualAngle(uiTabPassmarks->groupBoxManualAngle);
+    const QSignalBlocker blockerMarkType(uiTabPassmarks->groupBoxMarkType);
+    const QSignalBlocker blockerAngleType(uiTabPassmarks->groupBoxAngleType);
 
     uiTabPassmarks->checkBoxClockwiseOpening->setChecked(false);
 
     uiTabPassmarks->groupBoxManualLength->setChecked(false);
     uiTabPassmarks->groupBoxManualWidth->setChecked(false);
     uiTabPassmarks->groupBoxManualAngle->setChecked(false);
-
-    auto EnableSignals = qScopeGuard(
-        [this]
-        {
-            uiTabPassmarks->checkBoxClockwiseOpening->blockSignals(false);
-            uiTabPassmarks->checkBoxShowSecondPassmark->blockSignals(false);
-            uiTabPassmarks->groupBoxManualLength->blockSignals(false);
-            uiTabPassmarks->groupBoxManualWidth->blockSignals(false);
-            uiTabPassmarks->groupBoxManualAngle->blockSignals(false);
-            uiTabPassmarks->groupBoxMarkType->blockSignals(false);
-            uiTabPassmarks->groupBoxAngleType->blockSignals(false);
-        });
 
     if (index == -1)
     {
@@ -1715,17 +1707,18 @@ void DialogSeamAllowance::CustomSAChanged(int row)
 {
     if (uiTabPaths->listWidgetCustomSA->count() == 0 || row == -1 || row >= uiTabPaths->listWidgetCustomSA->count())
     {
-        uiTabPaths->comboBoxStartPoint->blockSignals(true);
-        uiTabPaths->comboBoxStartPoint->clear();
-        uiTabPaths->comboBoxStartPoint->blockSignals(false);
+        {
+            const QSignalBlocker blocker(uiTabPaths->comboBoxStartPoint);
+            uiTabPaths->comboBoxStartPoint->clear();
+        }
 
-        uiTabPaths->comboBoxEndPoint->blockSignals(true);
-        uiTabPaths->comboBoxEndPoint->clear();
-        uiTabPaths->comboBoxEndPoint->blockSignals(false);
+        {
+            const QSignalBlocker blocker(uiTabPaths->comboBoxEndPoint);
+            uiTabPaths->comboBoxEndPoint->clear();
+        }
 
-        uiTabPaths->comboBoxIncludeType->blockSignals(true);
+        const QSignalBlocker blocker(uiTabPaths->comboBoxIncludeType);
         uiTabPaths->comboBoxIncludeType->clear();
-        uiTabPaths->comboBoxIncludeType->blockSignals(false);
         return;
     }
 
@@ -1733,29 +1726,31 @@ void DialogSeamAllowance::CustomSAChanged(int row)
     SCASSERT(item != nullptr);
     const auto record = qvariant_cast<CustomSARecord>(item->data(Qt::UserRole));
 
-    uiTabPaths->comboBoxStartPoint->blockSignals(true);
-    InitCSAPoint(uiTabPaths->comboBoxStartPoint);
     {
-        const int index = uiTabPaths->comboBoxStartPoint->findData(record.startPoint);
-        if (index != -1)
+        const QSignalBlocker blocker(uiTabPaths->comboBoxStartPoint);
+        InitCSAPoint(uiTabPaths->comboBoxStartPoint);
         {
-            uiTabPaths->comboBoxStartPoint->setCurrentIndex(index);
+            const int index = uiTabPaths->comboBoxStartPoint->findData(record.startPoint);
+            if (index != -1)
+            {
+                uiTabPaths->comboBoxStartPoint->setCurrentIndex(index);
+            }
         }
     }
-    uiTabPaths->comboBoxStartPoint->blockSignals(false);
 
-    uiTabPaths->comboBoxEndPoint->blockSignals(true);
-    InitCSAPoint(uiTabPaths->comboBoxEndPoint);
     {
-        const int index = uiTabPaths->comboBoxEndPoint->findData(record.endPoint);
-        if (index != -1)
+        const QSignalBlocker blocker(uiTabPaths->comboBoxEndPoint);
+        InitCSAPoint(uiTabPaths->comboBoxEndPoint);
         {
-            uiTabPaths->comboBoxEndPoint->setCurrentIndex(index);
+            const int index = uiTabPaths->comboBoxEndPoint->findData(record.endPoint);
+            if (index != -1)
+            {
+                uiTabPaths->comboBoxEndPoint->setCurrentIndex(index);
+            }
         }
     }
-    uiTabPaths->comboBoxEndPoint->blockSignals(false);
 
-    uiTabPaths->comboBoxIncludeType->blockSignals(true);
+    const QSignalBlocker blocker(uiTabPaths->comboBoxIncludeType);
     InitSAIncludeType();
     {
         const int index = uiTabPaths->comboBoxIncludeType->findData(static_cast<unsigned char>(record.includeType));
@@ -1764,7 +1759,6 @@ void DialogSeamAllowance::CustomSAChanged(int row)
             uiTabPaths->comboBoxIncludeType->setCurrentIndex(index);
         }
     }
-    uiTabPaths->comboBoxIncludeType->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2721,15 +2715,12 @@ void DialogSeamAllowance::EvalWidth()
     QHash<QString, QSharedPointer<VInternalVariable>> variables = *data->DataVariables();
     variables.remove(currentSeamAllowance);
 
-    FormulaData formulaData;
-    formulaData.formula = uiTabPaths->plainTextEditFormulaWidth->toPlainText();
-    formulaData.variables = &variables;
-    formulaData.labelEditFormula = uiTabPaths->labelEditWidth;
-    formulaData.labelResult = uiTabPaths->labelResultWidth;
-    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-    formulaData.checkLessThanZero = true;
-
-    m_saWidth = Eval(formulaData, flagFormula);
+    m_saWidth = Eval({.formula = uiTabPaths->plainTextEditFormulaWidth->toPlainText(),
+                      .variables = &variables,
+                      .labelEditFormula = uiTabPaths->labelEditWidth,
+                      .labelResult = uiTabPaths->labelResultWidth,
+                      .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+                      .checkLessThanZero = true}, flagFormula);
 
     if (m_saWidth >= 0)
     {
@@ -2753,15 +2744,12 @@ void DialogSeamAllowance::EvalWidthBefore()
     {
         if (uiTabPaths->comboBoxNodes->count() > 0)
         {
-            FormulaData formulaData;
-            formulaData.formula = uiTabPaths->plainTextEditFormulaWidthBefore->toPlainText();
-            formulaData.variables = data->DataVariables();
-            formulaData.labelEditFormula = uiTabPaths->labelEditBefore;
-            formulaData.labelResult = uiTabPaths->labelResultBefore;
-            formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-            formulaData.checkLessThanZero = true;
-
-            Eval(formulaData, flagFormulaBefore);
+            Eval({.formula = uiTabPaths->plainTextEditFormulaWidthBefore->toPlainText(),
+                  .variables = data->DataVariables(),
+                  .labelEditFormula = uiTabPaths->labelEditBefore,
+                  .labelResult = uiTabPaths->labelResultBefore,
+                  .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+                  .checkLessThanZero = true}, flagFormulaBefore);
 
             const QString formulaSABefore = GetFormulaFromUser(uiTabPaths->plainTextEditFormulaWidthBefore);
             UpdateNodeSABefore(formulaSABefore);
@@ -2783,15 +2771,12 @@ void DialogSeamAllowance::EvalWidthAfter()
     {
         if (uiTabPaths->comboBoxNodes->count() > 0)
         {
-            FormulaData formulaData;
-            formulaData.formula = uiTabPaths->plainTextEditFormulaWidthAfter->toPlainText();
-            formulaData.variables = data->DataVariables();
-            formulaData.labelEditFormula = uiTabPaths->labelEditAfter;
-            formulaData.labelResult = uiTabPaths->labelResultAfter;
-            formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-            formulaData.checkLessThanZero = true;
-
-            Eval(formulaData, flagFormulaAfter);
+            Eval({.formula = uiTabPaths->plainTextEditFormulaWidthAfter->toPlainText(),
+                  .variables = data->DataVariables(),
+                  .labelEditFormula = uiTabPaths->labelEditAfter,
+                  .labelResult = uiTabPaths->labelResultAfter,
+                  .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+                  .checkLessThanZero = true}, flagFormulaAfter);
 
             const QString formulaSAAfter = GetFormulaFromUser(uiTabPaths->plainTextEditFormulaWidthAfter);
             UpdateNodeSAAfter(formulaSAAfter);
@@ -2813,16 +2798,13 @@ void DialogSeamAllowance::EvalPassmarkLength()
     {
         if (uiTabPassmarks->comboBoxPassmarks->count() > 0)
         {
-            FormulaData formulaData;
-            formulaData.formula = uiTabPassmarks->plainTextEditPassmarkLength->toPlainText();
-            formulaData.variables = data->DataVariables();
-            formulaData.labelEditFormula = uiTabPassmarks->labelEditPassmarkLength;
-            formulaData.labelResult = uiTabPassmarks->labelResultPassmarkLength;
-            formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-            formulaData.checkZero = true;
-            formulaData.checkLessThanZero = true;
-
-            Eval(formulaData, flagFormulaPassmarkLength);
+            Eval({.formula = uiTabPassmarks->plainTextEditPassmarkLength->toPlainText(),
+                  .variables = data->DataVariables(),
+                  .labelEditFormula = uiTabPassmarks->labelEditPassmarkLength,
+                  .labelResult = uiTabPassmarks->labelResultPassmarkLength,
+                  .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+                  .checkZero = true,
+                  .checkLessThanZero = true}, flagFormulaPassmarkLength);
 
             UpdateNodePassmarkLength(GetFormulaFromUser(uiTabPassmarks->plainTextEditPassmarkLength));
         }
@@ -2842,15 +2824,12 @@ void DialogSeamAllowance::EvalPassmarkWidth()
     {
         if (uiTabPassmarks->comboBoxPassmarks->count() > 0)
         {
-            FormulaData formulaData;
-            formulaData.formula = uiTabPassmarks->plainTextEditPassmarkWidth->toPlainText();
-            formulaData.variables = data->DataVariables();
-            formulaData.labelEditFormula = uiTabPassmarks->labelEditPassmarkWidth;
-            formulaData.labelResult = uiTabPassmarks->labelResultPassmarkWidth;
-            formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-            formulaData.checkZero = true;
-
-            Eval(formulaData, flagFormulaPassmarkWidth);
+            Eval({.formula = uiTabPassmarks->plainTextEditPassmarkWidth->toPlainText(),
+                  .variables = data->DataVariables(),
+                  .labelEditFormula = uiTabPassmarks->labelEditPassmarkWidth,
+                  .labelResult = uiTabPassmarks->labelResultPassmarkWidth,
+                  .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+                  .checkZero = true}, flagFormulaPassmarkWidth);
 
             UpdateNodePassmarkWidth(GetFormulaFromUser(uiTabPassmarks->plainTextEditPassmarkWidth));
         }
@@ -2870,14 +2849,11 @@ void DialogSeamAllowance::EvalPassmarkAngle()
     {
         if (uiTabPassmarks->comboBoxPassmarks->count() > 0)
         {
-            FormulaData formulaData;
-            formulaData.formula = uiTabPassmarks->plainTextEditPassmarkAngle->toPlainText();
-            formulaData.variables = data->DataVariables();
-            formulaData.labelEditFormula = uiTabPassmarks->labelEditPassmarkAngle;
-            formulaData.labelResult = uiTabPassmarks->labelResultPassmarkAngle;
-            formulaData.postfix = degreeSymbol;
-
-            Eval(formulaData, flagFormulaPassmarkAngle);
+            Eval({.formula = uiTabPassmarks->plainTextEditPassmarkAngle->toPlainText(),
+                  .variables = data->DataVariables(),
+                  .labelEditFormula = uiTabPassmarks->labelEditPassmarkAngle,
+                  .labelResult = uiTabPassmarks->labelResultPassmarkAngle,
+                  .postfix = degreeSymbol}, flagFormulaPassmarkAngle);
 
             UpdateNodePassmarkAngle(GetFormulaFromUser(uiTabPassmarks->plainTextEditPassmarkAngle));
         }
@@ -2895,16 +2871,12 @@ void DialogSeamAllowance::EvalFoldHeight()
 {
     if (uiTabFoldLine->groupBoxManualHeight->isChecked())
     {
-        FormulaData formulaData;
-        formulaData.formula = uiTabFoldLine->plainTextEditHeight->toPlainText();
-        formulaData.variables = data->DataVariables();
-        formulaData.labelEditFormula = uiTabFoldLine->labelEditHeight;
-        formulaData.labelResult = uiTabFoldLine->labelResultHeight;
-        formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-        formulaData.checkZero = false;
-        formulaData.checkLessThanZero = true;
-
-        Eval(formulaData, flagFormulaFoldHeight);
+        Eval({.formula = uiTabFoldLine->plainTextEditHeight->toPlainText(),
+              .variables = data->DataVariables(),
+              .labelEditFormula = uiTabFoldLine->labelEditHeight,
+              .labelResult = uiTabFoldLine->labelResultHeight,
+              .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+              .checkLessThanZero = true}, flagFormulaFoldHeight);
     }
     else
     {
@@ -2917,16 +2889,12 @@ void DialogSeamAllowance::EvalFoldWidth()
 {
     if (uiTabFoldLine->groupBoxManualWidth->isChecked())
     {
-        FormulaData formulaData;
-        formulaData.formula = uiTabFoldLine->plainTextEditWidth->toPlainText();
-        formulaData.variables = data->DataVariables();
-        formulaData.labelEditFormula = uiTabFoldLine->labelEditWidth;
-        formulaData.labelResult = uiTabFoldLine->labelResultWidth;
-        formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-        formulaData.checkZero = false;
-        formulaData.checkLessThanZero = true;
-
-        Eval(formulaData, flagFormulaFoldWidth);
+        Eval({.formula = uiTabFoldLine->plainTextEditWidth->toPlainText(),
+              .variables = data->DataVariables(),
+              .labelEditFormula = uiTabFoldLine->labelEditWidth,
+              .labelResult = uiTabFoldLine->labelResultWidth,
+              .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+              .checkLessThanZero = true}, flagFormulaFoldWidth);
     }
     else
     {
@@ -2939,15 +2907,11 @@ void DialogSeamAllowance::EvalFoldCenter()
 {
     if (uiTabFoldLine->groupBoxManualCenter->isChecked())
     {
-        FormulaData formulaData;
-        formulaData.formula = uiTabFoldLine->plainTextEditCenter->toPlainText();
-        formulaData.variables = data->DataVariables();
-        formulaData.labelEditFormula = uiTabFoldLine->labelEditCenter;
-        formulaData.labelResult = uiTabFoldLine->labelResultCenter;
-        formulaData.checkZero = false;
-        formulaData.checkLessThanZero = true;
-
-        Eval(formulaData, flagFormulaFoldCenter);
+        Eval({.formula = uiTabFoldLine->plainTextEditCenter->toPlainText(),
+              .variables = data->DataVariables(),
+              .labelEditFormula = uiTabFoldLine->labelEditCenter,
+              .labelResult = uiTabFoldLine->labelResultCenter,
+              .checkLessThanZero = true}, flagFormulaFoldCenter);
     }
     else
     {
@@ -3578,21 +3542,22 @@ void DialogSeamAllowance::InitNodesList()
 {
     const quint32 id = uiTabPaths->comboBoxNodes->currentData().toUInt();
 
-    uiTabPaths->comboBoxNodes->blockSignals(true);
-    uiTabPaths->comboBoxNodes->clear();
-
-    const QVector<VPieceNode> nodes = GetListInternals<VPieceNode>(uiTabPaths->listWidgetMainPath);
-
-    for (const auto &node : nodes)
     {
-        if (node.GetTypeTool() == Tool::NodePoint && not node.IsExcluded())
-        {
-            const QString name = GetNodeName(data, node);
+        const QSignalBlocker blocker(uiTabPaths->comboBoxNodes);
+        uiTabPaths->comboBoxNodes->clear();
 
-            uiTabPaths->comboBoxNodes->addItem(name, node.GetId());
+        const QVector<VPieceNode> nodes = GetListInternals<VPieceNode>(uiTabPaths->listWidgetMainPath);
+
+        for (const auto &node : nodes)
+        {
+            if (node.GetTypeTool() == Tool::NodePoint && not node.IsExcluded())
+            {
+                const QString name = GetNodeName(data, node);
+
+                uiTabPaths->comboBoxNodes->addItem(name, node.GetId());
+            }
         }
     }
-    uiTabPaths->comboBoxNodes->blockSignals(false);
 
     const int index = uiTabPaths->comboBoxNodes->findData(id);
     if (index != -1)
@@ -3611,21 +3576,22 @@ void DialogSeamAllowance::InitPassmarksList()
 {
     const quint32 id = uiTabPassmarks->comboBoxPassmarks->currentData().toUInt();
 
-    uiTabPassmarks->comboBoxPassmarks->blockSignals(true);
-    uiTabPassmarks->comboBoxPassmarks->clear();
-
-    const QVector<VPieceNode> nodes = GetListInternals<VPieceNode>(uiTabPaths->listWidgetMainPath);
-
-    for (const auto &node : nodes)
     {
-        if (node.GetTypeTool() == Tool::NodePoint && node.IsPassmark())
-        {
-            const QString name = GetNodeName(data, node);
+        const QSignalBlocker blocker(uiTabPassmarks->comboBoxPassmarks);
+        uiTabPassmarks->comboBoxPassmarks->clear();
 
-            uiTabPassmarks->comboBoxPassmarks->addItem(name, node.GetId());
+        const QVector<VPieceNode> nodes = GetListInternals<VPieceNode>(uiTabPaths->listWidgetMainPath);
+
+        for (const auto &node : nodes)
+        {
+            if (node.GetTypeTool() == Tool::NodePoint && node.IsPassmark())
+            {
+                const QString name = GetNodeName(data, node);
+
+                uiTabPassmarks->comboBoxPassmarks->addItem(name, node.GetId());
+            }
         }
     }
-    uiTabPassmarks->comboBoxPassmarks->blockSignals(false);
 
     const int index = uiTabPassmarks->comboBoxPassmarks->findData(id);
     if (index != -1)
@@ -4214,7 +4180,7 @@ void DialogSeamAllowance::InitMirrorLine()
 void DialogSeamAllowance::InitMirrorLinePoint(QComboBox *box)
 {
     SCASSERT(box != nullptr);
-    box->blockSignals(true);
+    const QSignalBlocker blocker(box);
     box->clear();
 
     box->addItem(tr("None"), QUuid());
@@ -4229,7 +4195,6 @@ void DialogSeamAllowance::InitMirrorLinePoint(QComboBox *box)
             box->addItem(name, node.GetId());
         }
     }
-    box->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -5631,9 +5596,8 @@ void DialogSeamAllowance::SetOptionControls()
 
     auto SetChecked = [](QToolButton *toolButton, bool checked = false)
     {
-        toolButton->blockSignals(true);
+        const QSignalBlocker blocker(toolButton);
         toolButton->setChecked(checked);
-        toolButton->blockSignals(false);
     };
 
     SetChecked(uiTabPaths->toolButtonReverse);

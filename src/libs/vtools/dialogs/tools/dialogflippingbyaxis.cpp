@@ -53,20 +53,21 @@
 #include "../vwidgets/vmaingraphicsview.h"
 #include "ui_dialogflippingbyaxis.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
-DialogFlippingByAxis::DialogFlippingByAxis(const VContainer *data, VAbstractPattern *doc, quint32 toolId,
+DialogFlippingByAxis::DialogFlippingByAxis(const VContainer *data,
+                                           VAbstractPattern *doc,
+                                           quint32 toolId,
                                            QWidget *parent)
   : DialogTool(data, doc, toolId, parent),
-    ui(new Ui::DialogFlippingByAxis),
-    stage1(true),
-    m_suffix(),
-    flagName(true),
-    flagGroupName(true),
-    flagError(false)
+    ui(new Ui::DialogFlippingByAxis)
 {
     ui->setupUi(this);
-
-    ui->lineEditSuffix->setText(VAbstractValApplication::VApp()->getCurrentDocument()->GenerateSuffix());
 
     InitOkCancelApply(ui);
 
@@ -82,12 +83,11 @@ DialogFlippingByAxis::DialogFlippingByAxis(const VContainer *data, VAbstractPatt
 
     ui->comboBoxOriginPoint->setCurrentIndex(-1);
 
-    connect(ui->lineEditSuffix, &QLineEdit::textChanged, this, &DialogFlippingByAxis::SuffixChanged);
     connect(ui->lineEditVisibilityGroup, &QLineEdit::textChanged, this, &DialogFlippingByAxis::GroupNameChanged);
     connect(ui->comboBoxOriginPoint, &QComboBox::currentTextChanged, this, &DialogFlippingByAxis::PointChanged);
 
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogFlippingByAxis::ShowSourceDetails);
-    connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogFlippingByAxis::AliasChanged);
+    connect(ui->lineEditName, &QLineEdit::textEdited, this, &DialogFlippingByAxis::NameChanged);
     connect(ui->comboBoxPenStyle, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &DialogFlippingByAxis::PenStyleChanged);
     connect(ui->pushButtonColor, &VPE::QtColorPicker::colorChanged, this, &DialogFlippingByAxis::ColorChanged);
@@ -141,19 +141,6 @@ void DialogFlippingByAxis::SetAxisType(AxisType type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto DialogFlippingByAxis::GetSuffix() const -> QString
-{
-    return m_suffix;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogFlippingByAxis::SetSuffix(const QString &value)
-{
-    m_suffix = value;
-    ui->lineEditSuffix->setText(value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 auto DialogFlippingByAxis::GetVisibilityGroupName() const -> QString
 {
     return ui->lineEditVisibilityGroup->text();
@@ -201,7 +188,7 @@ void DialogFlippingByAxis::ShowDialog(bool click)
 {
     if (stage1 && not click)
     {
-        if (sourceObjects.isEmpty())
+        if (m_sourceObjects.isEmpty())
         {
             return;
         }
@@ -214,7 +201,7 @@ void DialogFlippingByAxis::ShowDialog(bool click)
 
         auto *operation = qobject_cast<VisToolFlippingByAxis *>(vis);
         SCASSERT(operation != nullptr)
-        operation->SetObjects(SourceToObjects(sourceObjects));
+        operation->SetObjects(SourceToObjects(m_sourceObjects));
         operation->VisualMode();
 
         scene->ToggleArcSelection(false);
@@ -229,6 +216,7 @@ void DialogFlippingByAxis::ShowDialog(bool click)
 
         VAbstractValApplication::VApp()->getSceneView()->AllowRubberBand(false);
 
+        FillDefSourceNames(m_sourceObjects, data, "fa"_L1);
         FillSourceList();
 
         emit ToolTip(tr("Select origin point"));
@@ -245,18 +233,25 @@ void DialogFlippingByAxis::ShowDialog(bool click)
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogFlippingByAxis::GetSourceObjects() const -> QVector<SourceItem>
 {
-    return sourceObjects;
+    return m_sourceObjects;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByAxis::SetSourceObjects(const QVector<SourceItem> &value)
 {
-    sourceObjects = value;
+    m_sourceObjects = value;
     FillSourceList();
 
     auto *operation = qobject_cast<VisToolFlippingByAxis *>(vis);
     SCASSERT(operation != nullptr)
-    operation->SetObjects(SourceToObjects(sourceObjects));
+    operation->SetObjects(SourceToObjects(m_sourceObjects));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByAxis::CheckDependencyTreeComplete()
+{
+    m_dependencyReady = m_doc->IsPatternGraphComplete();
+    ui->lineEditName->setEnabled(m_dependencyReady);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -264,10 +259,11 @@ void DialogFlippingByAxis::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (not stage1 && not prepare && type == SceneObject::Point) // After first choose we ignore all objects
     {
-        auto obj = std::find_if(sourceObjects.begin(), sourceObjects.end(),
-                                [id](const SourceItem &sItem) { return sItem.id == id; });
+        auto obj = std::find_if(m_sourceObjects.begin(),
+                                m_sourceObjects.end(),
+                                [id](const SourceItem &sItem) -> bool { return sItem.id == id; });
 
-        if (obj != sourceObjects.end())
+        if (obj != m_sourceObjects.end())
         {
             emit ToolTip(tr("Select origin point that is not part of the list of objects"));
             return;
@@ -291,64 +287,24 @@ void DialogFlippingByAxis::SelectedObject(bool selected, quint32 object, quint32
     Q_UNUSED(tool)
     if (stage1)
     {
-        auto obj = std::find_if(sourceObjects.begin(), sourceObjects.end(),
-                                [object](const SourceItem &sItem) { return sItem.id == object; });
+        auto obj = std::find_if(m_sourceObjects.begin(),
+                                m_sourceObjects.end(),
+                                [object](const SourceItem &sItem) -> bool { return sItem.id == object; });
         if (selected)
         {
-            if (obj == sourceObjects.cend())
+            if (obj == m_sourceObjects.cend())
             {
-                SourceItem item;
-                item.id = object;
-                sourceObjects.append(item);
+                m_sourceObjects.append({.id = object});
             }
         }
         else
         {
-            if (obj != sourceObjects.end())
+            if (obj != m_sourceObjects.end())
             {
-                sourceObjects.erase(obj);
+                m_sourceObjects.erase(obj);
             }
         }
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogFlippingByAxis::SuffixChanged()
-{
-    if (const auto *edit = qobject_cast<QLineEdit *>(sender()); edit)
-    {
-        const QString suffix = edit->text();
-        if (suffix.isEmpty())
-        {
-            flagName = false;
-            ChangeColor(ui->labelSuffix, errorColor);
-            ui->labelStatus->setText(tr("Invalid suffix"));
-            CheckState();
-            return;
-        }
-
-        if (m_suffix != suffix)
-        {
-            QRegularExpression const rx(NameRegExp());
-            const QStringList uniqueNames = data->AllUniqueNames();
-            for (const auto &uniqueName : uniqueNames)
-            {
-                const QString name = uniqueName + suffix;
-                if (not rx.match(name).hasMatch() || not data->IsUnique(name))
-                {
-                    flagName = false;
-                    ChangeColor(ui->labelSuffix, errorColor);
-                    ui->labelStatus->setText(tr("Invalid suffix"));
-                    CheckState();
-                    return;
-                }
-            }
-        }
-
-        flagName = true;
-        ChangeColor(ui->labelSuffix, OkColor(this));
-    }
-    CheckState();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -375,7 +331,7 @@ void DialogFlippingByAxis::GroupNameChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByAxis::ShowSourceDetails(int row)
 {
-    ui->lineEditAlias->setDisabled(true);
+    ui->lineEditName->setDisabled(true);
     ui->comboBoxPenStyle->setDisabled(true);
     ui->pushButtonColor->setDisabled(true);
 
@@ -384,43 +340,38 @@ void DialogFlippingByAxis::ShowSourceDetails(int row)
         return;
     }
 
-    const auto sourceItem = qvariant_cast<SourceItem>(ui->listWidget->item(row)->data(Qt::UserRole));
+    auto *item = ui->listWidget->item(row);
+    if (item == nullptr)
+    {
+        return;
+    }
+
+    const auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
 
     const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
 
     if (obj->getType() == GOType::Point)
     {
-        ui->labelAlias->setText(tr("Label:"));
-
-        ui->comboBoxPenStyle->blockSignals(true);
-        ui->pushButtonColor->blockSignals(true);
+        const QSignalBlocker blockerPenStyle(ui->comboBoxPenStyle);
+        const QSignalBlocker blockerColor(ui->pushButtonColor);
 
         ui->comboBoxPenStyle->setCurrentIndex(-1);
         ui->pushButtonColor->setCurrentColor(QColor());
-
-        ui->comboBoxPenStyle->blockSignals(false);
-        ui->pushButtonColor->blockSignals(false);
     }
     else
     {
-        ui->labelAlias->setText(tr("Alias:"));
-
-        auto SetValue = [](QComboBox *box, const QString &value, const QString &def)
+        auto SetValue = [](QComboBox *box, const QString &value, const QString &def) -> void
         {
-            box->blockSignals(true);
+            const QSignalBlocker blocker(box);
 
-            int index = box->findData(value);
-            if (index != -1)
+            if (const int index = box->findData(value); index != -1)
             {
                 box->setCurrentIndex(index);
             }
             else
             {
-                index = box->findData(def);
-                box->setCurrentIndex(index);
+                box->setCurrentIndex(box->findData(def));
             }
-
-            box->blockSignals(false);
         };
 
         SetValue(ui->comboBoxPenStyle, sourceItem.penStyle, TypeLineDefault);
@@ -431,12 +382,10 @@ void DialogFlippingByAxis::ShowSourceDetails(int row)
             ui->comboBoxPenStyle->setItemText(index, '<' + tr("Default") + '>');
         }
 
-        ui->pushButtonColor->blockSignals(true);
-
+        QSignalBlocker blockerColor(ui->pushButtonColor);
         QColor const color(sourceItem.color);
         ui->pushButtonColor->setCurrentColor(color.isValid() ? color : ColorDefault);
-
-        ui->pushButtonColor->blockSignals(false);
+        blockerColor.unblock();
 
         if (sourceItem.color.isEmpty() || sourceItem.color == ColorDefault)
         {
@@ -448,17 +397,18 @@ void DialogFlippingByAxis::ShowSourceDetails(int row)
         ui->pushButtonColor->setEnabled(true);
     }
 
-    ui->lineEditAlias->blockSignals(true);
-    ui->lineEditAlias->setText(sourceItem.alias);
-    ui->lineEditAlias->setEnabled(true);
-    ui->lineEditAlias->blockSignals(false);
+    const QSignalBlocker blockerName(ui->lineEditName);
+    ui->lineEditName->setText(sourceItem.name);
+    ui->lineEditName->setEnabled(m_dependencyReady);
 
-    SetAliasValid(sourceItem.id,
-                  SourceAliasValid(sourceItem, obj, data, OriginAlias(sourceItem.id, sourceObjects, obj)));
+    const bool nameValid = IsValidSourceName(sourceItem.name, sourceItem.id, m_sourceObjects, data);
+    ChangeColor(ui->labelName, nameValid ? OkColor(this) : errorColor);
+    flagName = nameValid;
+    CheckState();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogFlippingByAxis::AliasChanged(const QString &text)
+void DialogFlippingByAxis::NameChanged(const QString &text)
 {
     if (ui->listWidget->count() == 0)
     {
@@ -468,11 +418,26 @@ void DialogFlippingByAxis::AliasChanged(const QString &text)
     if (auto *item = ui->listWidget->currentItem())
     {
         auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
-        sourceItem.alias = text;
 
-        item->setData(Qt::UserRole, QVariant::fromValue(sourceItem));
+        const QVector<SourceItem> objects = SaveSourceObjects();
+        const bool valid = IsValidSourceName(text, sourceItem.id, objects, data);
 
-        ValidateSourceAliases();
+        if (valid)
+        {
+            sourceItem.name = text;
+            item->setData(Qt::UserRole, QVariant::fromValue(sourceItem));
+        }
+
+        const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
+        ChangeColor(ui->labelName, valid ? OkColor(this) : errorColor);
+
+        if (!valid)
+        {
+            ui->labelStatus->setText(obj->getType() == GOType::Point ? tr("Invalid label") : tr("Invalid name"));
+        }
+
+        flagName = valid;
+        CheckState();
     }
 }
 
@@ -518,24 +483,21 @@ void DialogFlippingByAxis::ShowVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByAxis::SaveData()
 {
-    m_suffix = ui->lineEditSuffix->text();
-
-    sourceObjects.clear();
-    sourceObjects.reserve(ui->listWidget->count());
+    m_sourceObjects = SaveSourceObjects();
 
     for (int i = 0; i < ui->listWidget->count(); ++i)
     {
         if (const QListWidgetItem *item = ui->listWidget->item(i))
         {
             auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
-            sourceObjects.append(sourceItem);
+            m_sourceObjects.append(sourceItem);
         }
     }
 
     auto *operation = qobject_cast<VisToolFlippingByAxis *>(vis);
     SCASSERT(operation != nullptr)
 
-    operation->SetObjects(SourceToObjects(sourceObjects));
+    operation->SetObjects(SourceToObjects(m_sourceObjects));
     operation->SetOriginPointId(GetOriginPointId());
     operation->SetAxisType(GetAxisType());
     operation->RefreshGeometry();
@@ -558,9 +520,10 @@ void DialogFlippingByAxis::PointChanged()
 {
     QColor color;
     quint32 const id = getCurrentObjectId(ui->comboBoxOriginPoint);
-    auto obj = std::find_if(sourceObjects.begin(), sourceObjects.end(),
-                            [id](const SourceItem &sItem) { return sItem.id == id; });
-    if (obj != sourceObjects.end())
+    auto obj = std::find_if(m_sourceObjects.begin(),
+                            m_sourceObjects.end(),
+                            [id](const SourceItem &sItem) -> bool { return sItem.id == id; });
+    if (obj != m_sourceObjects.end())
     {
         flagError = false;
         ui->labelStatus->setText(tr("Invalid point"));
@@ -587,77 +550,45 @@ void DialogFlippingByAxis::FillComboBoxAxisType(QComboBox *box)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByAxis::FillSourceList()
 {
-    ui->listWidget->blockSignals(true);
+    QSignalBlocker blocker(ui->listWidget);
 
     ui->listWidget->clear();
 
     int row = -1;
 
-    for (auto &sourceItem : sourceObjects)
+    for (const auto &sourceItem : std::as_const(m_sourceObjects))
     {
         const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
-        bool const valid = SourceAliasValid(sourceItem, obj, data, OriginAlias(sourceItem.id, sourceObjects, obj));
-
-        auto *item = new QListWidgetItem(valid ? obj->ObjectName() : obj->ObjectName() + '*');
+        auto *item = new QListWidgetItem(obj->ObjectName());
         item->setToolTip(obj->ObjectName());
         item->setData(Qt::UserRole, QVariant::fromValue(sourceItem));
         ui->listWidget->insertItem(++row, item);
     }
 
-    ui->listWidget->blockSignals(false);
+    blocker.unblock();
 
     if (ui->listWidget->count() > 0)
     {
         ui->listWidget->setCurrentRow(0);
     }
-
-    ValidateSourceAliases();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogFlippingByAxis::ValidateSourceAliases()
+auto DialogFlippingByAxis::SaveSourceObjects() const -> QVector<SourceItem>
 {
+    QVector<SourceItem> objects;
+    objects.reserve(ui->listWidget->count());
+
     for (int i = 0; i < ui->listWidget->count(); ++i)
     {
         if (const QListWidgetItem *item = ui->listWidget->item(i))
         {
-            auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
-
-            const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
-
-            if (not SourceAliasValid(sourceItem, obj, data, OriginAlias(sourceItem.id, sourceObjects, obj)))
-            {
-                flagAlias = false;
-                ui->labelStatus->setText(obj->getType() == GOType::Point ? tr("Invalid label") : tr("Invalid alias"));
-                SetAliasValid(sourceItem.id, false);
-                CheckState();
-                return;
-            }
-
-            SetAliasValid(sourceItem.id, true);
+            const auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
+            objects.append(sourceItem);
         }
     }
 
-    flagAlias = true;
-    CheckState();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogFlippingByAxis::SetAliasValid(quint32 id, bool valid)
-{
-    if (ui->listWidget->currentRow() != -1)
-    {
-        auto *item = ui->listWidget->item(ui->listWidget->currentRow());
-        const auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
-
-        if (id == sourceItem.id)
-        {
-            const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
-            item->setText(valid ? obj->ObjectName() : obj->ObjectName() + '*');
-
-            ChangeColor(ui->labelAlias, valid ? OkColor(this) : errorColor);
-        }
-    }
+    return objects;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -675,7 +606,7 @@ auto DialogFlippingByAxis::GetNotes() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogFlippingByAxis::IsValid() const -> bool
 {
-    bool const ready = flagError && flagName && flagGroupName && flagAlias;
+    bool const ready = flagError && flagName && flagGroupName;
 
     if (ready)
     {

@@ -277,11 +277,14 @@ void TapePreferencesConfigurationPage::RetranslateUi()
 
     {
         const auto code = qvariant_cast<QString>(ui->comboBoxKnownMeasurements->currentData());
-        ui->comboBoxKnownMeasurements->blockSignals(true);
-        ui->comboBoxKnownMeasurements->clear();
-        InitKnownMeasurements(ui->comboBoxKnownMeasurements);
-        ui->comboBoxKnownMeasurements->setCurrentIndex(-1);
-        ui->comboBoxKnownMeasurements->blockSignals(false);
+
+        {
+            const QSignalBlocker blocker(ui->comboBoxKnownMeasurements);
+            ui->comboBoxKnownMeasurements->clear();
+            InitKnownMeasurements(ui->comboBoxKnownMeasurements);
+            ui->comboBoxKnownMeasurements->setCurrentIndex(-1);
+        }
+
         ui->comboBoxKnownMeasurements->setCurrentIndex(ui->comboBoxKnownMeasurements->findData(code));
     }
 
@@ -375,7 +378,7 @@ void TapePreferencesConfigurationPage::InitKnownMeasurements(QComboBox *combo)
     VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
     QHash<QUuid, VKnownMeasurementsHeader> const known = db->AllKnownMeasurements();
 
-    combo->blockSignals(true);
+    const QSignalBlocker blocker(combo);
     combo->clear();
 
     SCASSERT(combo != nullptr)
@@ -396,8 +399,6 @@ void TapePreferencesConfigurationPage::InitKnownMeasurements(QComboBox *combo)
         combo->addItem(name, i.key());
         ++i;
     }
-
-    combo->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

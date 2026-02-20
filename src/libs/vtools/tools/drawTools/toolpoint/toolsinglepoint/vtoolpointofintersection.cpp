@@ -30,7 +30,6 @@
 
 #include <QPointF>
 #include <QSharedPointer>
-#include <new>
 
 #include "../../../../dialogs/tools/dialogpointofintersection.h"
 #include "../../../../dialogs/tools/dialogtool.h"
@@ -67,6 +66,16 @@ VToolPointOfIntersection::VToolPointOfIntersection(const VToolPointOfIntersectio
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VToolPointOfIntersection::GatherToolChanges() const -> VAbstractPoint::ToolChanges
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogPointOfIntersection> dialogTool = qobject_cast<DialogPointOfIntersection *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    return {.pointId = m_id, .oldLabel = name(), .newLabel = dialogTool->GetPointName()};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setDialog set dialog when user want change tool option.
  */
@@ -76,6 +85,7 @@ void VToolPointOfIntersection::SetDialog()
     const QPointer<DialogPointOfIntersection> dialogTool = qobject_cast<DialogPointOfIntersection *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
+    dialogTool->CheckDependencyTreeComplete();
     dialogTool->SetFirstPointId(firstPointId);
     dialogTool->SetSecondPointId(secondPointId);
     dialogTool->SetPointName(p->name());
@@ -232,6 +242,12 @@ void VToolPointOfIntersection::SetVisualization()
         visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPointOfIntersection::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    ProcessPointToolOptions(oldDomElement, newDomElement, GatherToolChanges());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -380,55 +380,47 @@ auto DialogSpline::GetP4() const -> QSharedPointer<VPointF>
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSpline::EvalAngle1()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditAngle1F->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditAngle1;
-    formulaData.labelResult = ui->labelResultAngle1;
-    formulaData.postfix = degreeSymbol;
-
-    Eval(formulaData, flagAngle1);
+    Eval({.formula = ui->plainTextEditAngle1F->toPlainText(),
+          .variables = data->DataVariables(),
+          .labelEditFormula = ui->labelEditAngle1,
+          .labelResult = ui->labelResultAngle1,
+          .postfix = degreeSymbol},
+         flagAngle1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSpline::EvalAngle2()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditAngle2F->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditAngle2;
-    formulaData.labelResult = ui->labelResultAngle2;
-    formulaData.postfix = degreeSymbol;
-
-    Eval(formulaData, flagAngle2);
+    Eval({.formula = ui->plainTextEditAngle2F->toPlainText(),
+          .variables = data->DataVariables(),
+          .labelEditFormula = ui->labelEditAngle2,
+          .labelResult = ui->labelResultAngle2,
+          .postfix = degreeSymbol},
+         flagAngle2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSpline::EvalLength1()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditLength1F->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditLength1;
-    formulaData.labelResult = ui->labelResultLength1;
-    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-    formulaData.checkLessThanZero = true;
-
-    Eval(formulaData, flagLength1);
+    Eval({.formula = ui->plainTextEditLength1F->toPlainText(),
+          .variables = data->DataVariables(),
+          .labelEditFormula = ui->labelEditLength1,
+          .labelResult = ui->labelResultLength1,
+          .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+          .checkLessThanZero = true},
+         flagLength1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSpline::EvalLength2()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditLength2F->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditLength2;
-    formulaData.labelResult = ui->labelResultLength2;
-    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-    formulaData.checkLessThanZero = true;
-
-    Eval(formulaData, flagLength2);
+    Eval({.formula = ui->plainTextEditLength2F->toPlainText(),
+          .variables = data->DataVariables(),
+          .labelEditFormula = ui->labelEditLength2,
+          .labelResult = ui->labelResultLength2,
+          .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+          .checkLessThanZero = true},
+         flagLength2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -438,9 +430,9 @@ void DialogSpline::ValidateAlias()
     spline.SetAliasSuffix(ui->lineEditAlias->text());
 
     if (QRegularExpression const rx(NameRegExp());
-        not ui->lineEditAlias->text().isEmpty() &&
-        (not rx.match(spline.GetAlias()).hasMatch() ||
-         (originAliasSuffix != ui->lineEditAlias->text() && not data->IsUnique(spline.GetAlias()))))
+        !ui->lineEditAlias->text().isEmpty()
+        && (!rx.match(spline.GetAlias()).hasMatch()
+            || (originAliasSuffix != ui->lineEditAlias->text() && !data->IsUnique(spline.GetAlias()))))
     {
         flagAlias = false;
         ChangeColor(ui->labelAlias, errorColor);
@@ -506,52 +498,17 @@ void DialogSpline::InitIcons()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSpline::PointNameChanged()
 {
-    QSet<quint32> set;
-    set.insert(getCurrentObjectId(ui->comboBoxP1));
-    set.insert(getCurrentObjectId(ui->comboBoxP4));
-
     QColor color;
     if (getCurrentObjectId(ui->comboBoxP1) == getCurrentObjectId(ui->comboBoxP4))
     {
         flagError = false;
         color = errorColor;
-
-        ui->lineEditSplineName->setText(tr("Invalid spline"));
     }
     else
     {
         flagError = true;
         color = OkColor(this);
-
-        const VTranslateVars *trVars = VAbstractApplication::VApp()->TrVars();
-
-        if (getCurrentObjectId(ui->comboBoxP1) == spl.GetP1().id() &&
-            getCurrentObjectId(ui->comboBoxP4) == spl.GetP4().id())
-        {
-            newDuplicate = -1;
-            ui->lineEditSplineName->setText(trVars->VarToUser(spl.name()));
-        }
-        else
-        {
-            try
-            {
-                VSpline spline(*GetP1(), *GetP4(), spl.GetStartAngle(), spl.GetEndAngle(), spl.GetKasm1(),
-                               spl.GetKasm2(), spl.GetKcurve());
-                if (not data->IsUnique(spline.name()))
-                {
-                    newDuplicate = static_cast<qint32>(DNumber(spline.name()));
-                    spline.SetDuplicate(static_cast<quint32>(newDuplicate));
-                }
-                ui->lineEditSplineName->setText(trVars->VarToUser(spline.name()));
-            }
-            catch (const VExceptionBadId &)
-            {
-                flagError = false;
-                color = errorColor;
-            }
-        }
     }
-    ChangeColor(ui->labelName, color);
     ChangeColor(ui->labelFirstPoint, color);
     ChangeColor(ui->labelSecondPoint, color);
     CheckState();
@@ -582,8 +539,6 @@ void DialogSpline::ShowDialog(bool click)
         {
             spl.SetDuplicate(DNumber(spl.name()));
         }
-
-        ui->lineEditSplineName->setText(trVars->VarToUser(spl.name()));
 
         DialogAccepted();
     }
@@ -627,7 +582,6 @@ void DialogSpline::SetSpline(const VSpline &spline)
 
     ui->plainTextEditLength1F->setPlainText(length1F);
     ui->plainTextEditLength2F->setPlainText(length2F);
-    ui->lineEditSplineName->setText(trVars->VarToUser(spl.name()));
 
     originAliasSuffix = spl.GetAliasSuffix();
     ui->lineEditAlias->setText(originAliasSuffix);
@@ -668,4 +622,13 @@ void DialogSpline::SetDefPenStyle(const QString &value)
 void DialogSpline::SetDefColor(const QString &value)
 {
     ui->pushButtonColor->setCurrentColor(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSpline::CheckDependencyTreeComplete()
+{
+    const bool ready = m_doc->IsPatternGraphComplete();
+    ui->comboBoxP1->setEnabled(ready);
+    ui->comboBoxP4->setEnabled(ready);
+    ui->lineEditAlias->setEnabled(ready);
 }

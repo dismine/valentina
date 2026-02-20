@@ -296,9 +296,8 @@ void DialogSetupMultisize::ShowFullCircumference()
         InitDimension(doubleSpinBoxMinValue, doubleSpinBoxMaxValue, comboBoxStep, dimension);
         UpdateBase(comboBoxBase, dimension);
 
-        comboBoxBase->blockSignals(true);
+        const QSignalBlocker blocker(comboBoxBase);
         comboBoxBase->setCurrentIndex(-1);
-        comboBoxBase->blockSignals(false);
     };
 
     ShowDimensionFullCircumference(ui->doubleSpinBoxYDimensionMinValue, ui->doubleSpinBoxYDimensionMaxValue,
@@ -322,9 +321,10 @@ void DialogSetupMultisize::XDimensionBodyMeasurementChanged()
 
     UpdateBase(ui->comboBoxXDimensionBase, m_xDimension);
 
-    ui->comboBoxXDimensionBase->blockSignals(true);
-    ui->comboBoxXDimensionBase->setCurrentIndex(-1);
-    ui->comboBoxXDimensionBase->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->comboBoxXDimensionBase);
+        ui->comboBoxXDimensionBase->setCurrentIndex(-1);
+    }
 
     bool ok = false;
     const qreal base = ui->comboBoxXDimensionBase->currentData().toDouble(&ok);
@@ -344,9 +344,10 @@ void DialogSetupMultisize::YDimensionBodyMeasurementChanged()
 
     UpdateBase(ui->comboBoxYDimensionBase, m_yDimension);
 
-    ui->comboBoxYDimensionBase->blockSignals(true);
-    ui->comboBoxYDimensionBase->setCurrentIndex(-1);
-    ui->comboBoxYDimensionBase->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->comboBoxYDimensionBase);
+        ui->comboBoxYDimensionBase->setCurrentIndex(-1);
+    }
 
     bool ok = false;
     const qreal base = ui->comboBoxYDimensionBase->currentData().toDouble(&ok);
@@ -366,9 +367,10 @@ void DialogSetupMultisize::WDimensionBodyMeasurementChanged()
 
     UpdateBase(ui->comboBoxWDimensionBase, m_wDimension);
 
-    ui->comboBoxWDimensionBase->blockSignals(true);
-    ui->comboBoxWDimensionBase->setCurrentIndex(-1);
-    ui->comboBoxWDimensionBase->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->comboBoxWDimensionBase);
+        ui->comboBoxWDimensionBase->setCurrentIndex(-1);
+    }
 
     bool ok = false;
     const qreal base = ui->comboBoxWDimensionBase->currentData().toDouble(&ok);
@@ -388,9 +390,10 @@ void DialogSetupMultisize::ZDimensionBodyMeasurementChanged()
 
     UpdateBase(ui->comboBoxZDimensionBase, m_zDimension);
 
-    ui->comboBoxZDimensionBase->blockSignals(true);
-    ui->comboBoxZDimensionBase->setCurrentIndex(-1);
-    ui->comboBoxZDimensionBase->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->comboBoxZDimensionBase);
+        ui->comboBoxZDimensionBase->setCurrentIndex(-1);
+    }
 
     bool ok = false;
     const qreal base = ui->comboBoxZDimensionBase->currentData().toDouble(&ok);
@@ -484,22 +487,22 @@ void DialogSetupMultisize::InitDimensionMinMax(QDoubleSpinBox *doubleSpinBoxMinV
     const bool m = dimension->IsBodyMeasurement();
     const QString unitStr = m ? " " + UnitsToStr(m_xDimension->Units()) : QString();
 
-    doubleSpinBoxMinValue->blockSignals(true);
-    doubleSpinBoxMinValue->setSuffix(unitStr);
-    doubleSpinBoxMinValue->setDecimals(dimension->Decimals());
-    doubleSpinBoxMinValue->setMinimum(m && fc ? dimension->RangeMin() * 2 : dimension->RangeMin());
-    doubleSpinBoxMinValue->setMaximum(m && fc ? dimension->MaxValue() * 2 : dimension->MaxValue());
-    doubleSpinBoxMinValue->setValue(m && fc ? dimension->MinValue() * 2 : dimension->MinValue());
-    doubleSpinBoxMinValue->blockSignals(false);
+    {
+    	const QSignalBlocker blocker(doubleSpinBoxMinValue);
+        doubleSpinBoxMinValue->setSuffix(unitStr);
+        doubleSpinBoxMinValue->setDecimals(dimension->Decimals());
+        doubleSpinBoxMinValue->setMinimum(m && fc ? dimension->RangeMin() * 2 : dimension->RangeMin());
+        doubleSpinBoxMinValue->setMaximum(m && fc ? dimension->MaxValue() * 2 : dimension->MaxValue());
+        doubleSpinBoxMinValue->setValue(m && fc ? dimension->MinValue() * 2 : dimension->MinValue());
+    }
 
-    doubleSpinBoxMaxValue->blockSignals(true);
+    const QSignalBlocker blocker(doubleSpinBoxMaxValue);
     doubleSpinBoxMaxValue->setSuffix(unitStr);
     doubleSpinBoxMaxValue->setDecimals(dimension->Decimals());
     doubleSpinBoxMaxValue->setMinimum(m && fc ? dimension->MinValue() * 2 : dimension->MinValue());
     doubleSpinBoxMaxValue->setMaximum(m && fc ? dimension->RangeMax() * 2 : dimension->RangeMax());
     doubleSpinBoxMaxValue->setValue(m && fc ? dimension->RangeMax() * 2 : dimension->RangeMax());
     doubleSpinBoxMaxValue->setValue(m && fc ? dimension->MaxValue() * 2 : dimension->MaxValue());
-    doubleSpinBoxMaxValue->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -513,16 +516,17 @@ void DialogSetupMultisize::InitDimensionStep(QComboBox *comboBoxStep, const Meas
 
     dimension->SetStep(-1);
 
-    comboBoxStep->blockSignals(true);
-    const QVector<qreal> steps = dimension->ValidSteps();
-    comboBoxStep->clear();
-    for (auto step : steps)
     {
-        comboBoxStep->addItem(QStringLiteral("%1%2").arg(m && fc ? step * 2 : step).arg(unitStr), step);
-    }
+        const QSignalBlocker blocker(comboBoxStep);
+        const QVector<qreal> steps = dimension->ValidSteps();
+        comboBoxStep->clear();
+        for (auto step : steps)
+        {
+            comboBoxStep->addItem(QStringLiteral("%1%2").arg(m && fc ? step * 2 : step).arg(unitStr), step);
+        }
 
-    comboBoxStep->setCurrentIndex(-1); // force a user to select
-    comboBoxStep->blockSignals(false);
+        comboBoxStep->setCurrentIndex(-1); // force a user to select
+    }
 
     bool ok = false;
     const qreal step = comboBoxStep->currentData().toDouble(&ok);
@@ -583,9 +587,10 @@ void DialogSetupMultisize::DimensionMinValueChanged(qreal value, QDoubleSpinBox 
 
     dimension->SetMinValue(m && fc ? value / 2 : value);
 
-    doubleSpinBoxMaxValue->blockSignals(true);
-    doubleSpinBoxMaxValue->setMinimum(value);
-    doubleSpinBoxMaxValue->blockSignals(false);
+    {
+        const QSignalBlocker blocker(doubleSpinBoxMaxValue);
+        doubleSpinBoxMaxValue->setMinimum(value);
+    }
 
     dimension->SetMaxValue(m && fc ? doubleSpinBoxMaxValue->value() / 2 : doubleSpinBoxMaxValue->value());
 
@@ -609,9 +614,10 @@ void DialogSetupMultisize::DimensionMaxValueChanged(qreal value, QDoubleSpinBox 
 
     dimension->SetMaxValue(m && fc ? value / 2 : value);
 
-    doubleSpinBoxMinValue->blockSignals(true);
-    doubleSpinBoxMinValue->setMaximum(value);
-    doubleSpinBoxMinValue->blockSignals(false);
+    {
+        const QSignalBlocker blocker(doubleSpinBoxMinValue);
+        doubleSpinBoxMinValue->setMaximum(value);
+    }
 
     dimension->SetMinValue(m && fc ? doubleSpinBoxMinValue->value() / 2 : doubleSpinBoxMinValue->value());
 
@@ -661,22 +667,24 @@ void DialogSetupMultisize::UpdateSteps(QComboBox *comboBoxStep, const Measuremen
         oldStep = comboBoxStep->currentData().toDouble();
     }
 
-    comboBoxStep->blockSignals(true);
-
-    const QVector<qreal> steps = dimension->ValidSteps();
-    comboBoxStep->clear();
-
-    const bool fc = dimension->Type() != MeasurementDimension::X ? ui->checkBoxFullCircumference->isChecked() : false;
-    const bool m = dimension->IsBodyMeasurement();
-    const QString unitStr = m ? " " + UnitsToStr(dimension->Units()) : QString();
-
-    for (auto step : steps)
     {
-        comboBoxStep->addItem(QStringLiteral("%1%2").arg(m && fc ? step * 2 : step).arg(unitStr), step);
-    }
+        const QSignalBlocker blocker(comboBoxStep);
 
-    comboBoxStep->setCurrentIndex(comboBoxStep->findData(oldStep));
-    comboBoxStep->blockSignals(false);
+        const QVector<qreal> steps = dimension->ValidSteps();
+        comboBoxStep->clear();
+
+        const bool fc = dimension->Type() != MeasurementDimension::X ? ui->checkBoxFullCircumference->isChecked()
+                                                                     : false;
+        const bool m = dimension->IsBodyMeasurement();
+        const QString unitStr = m ? " " + UnitsToStr(dimension->Units()) : QString();
+
+        for (auto step : steps)
+        {
+            comboBoxStep->addItem(QStringLiteral("%1%2").arg(m && fc ? step * 2 : step).arg(unitStr), step);
+        }
+
+        comboBoxStep->setCurrentIndex(comboBoxStep->findData(oldStep));
+    }
 
     bool ok = false;
     const qreal step = comboBoxStep->currentData().toDouble(&ok);
@@ -694,21 +702,23 @@ void DialogSetupMultisize::UpdateBase(QComboBox *comboBoxBase, const Measurement
         oldBase = comboBoxBase->currentData().toDouble();
     }
 
-    comboBoxBase->blockSignals(true);
-
-    const QVector<qreal> bases = dimension->ValidBases();
-    comboBoxBase->clear();
-    const bool fc = dimension->Type() != MeasurementDimension::X ? ui->checkBoxFullCircumference->isChecked() : false;
-    const bool m = dimension->IsBodyMeasurement();
-    const QString unitStr = m ? " " + UnitsToStr(dimension->Units()) : QString();
-
-    for (auto base : bases)
     {
-        comboBoxBase->addItem(QStringLiteral("%1%2").arg(m && fc ? base * 2 : base).arg(unitStr), base);
-    }
+        const QSignalBlocker blocker(comboBoxBase);
 
-    comboBoxBase->setCurrentIndex(comboBoxBase->findData(oldBase));
-    comboBoxBase->blockSignals(false);
+        const QVector<qreal> bases = dimension->ValidBases();
+        comboBoxBase->clear();
+        const bool fc = dimension->Type() != MeasurementDimension::X ? ui->checkBoxFullCircumference->isChecked()
+                                                                     : false;
+        const bool m = dimension->IsBodyMeasurement();
+        const QString unitStr = m ? " " + UnitsToStr(dimension->Units()) : QString();
+
+        for (auto base : bases)
+        {
+            comboBoxBase->addItem(QStringLiteral("%1%2").arg(m && fc ? base * 2 : base).arg(unitStr), base);
+        }
+
+        comboBoxBase->setCurrentIndex(comboBoxBase->findData(oldBase));
+    }
 
     bool ok = false;
     const qreal base = comboBoxBase->currentData().toDouble(&ok);

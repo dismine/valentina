@@ -69,6 +69,8 @@ VLib {
             "vpatternconverter.h",
             "vpatterngraph.cpp",
             "vpatterngraph.h",
+            "vpatterngraphnode.cpp",
+            "vpatterngraphnode.h",
             "vpatternimage.h",
             "vtoolrecord.h",
             "vabstractpattern.h",

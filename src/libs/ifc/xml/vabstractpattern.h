@@ -96,23 +96,16 @@ QT_WARNING_DISABLE_GCC("-Weffc++")
 
 struct VFormulaField
 {
-    QString expression;  // NOLINT(misc-non-private-member-variables-in-classes)
-    QDomElement element; // NOLINT(misc-non-private-member-variables-in-classes)
-    QString attribute;   // NOLINT(misc-non-private-member-variables-in-classes)
-
-    VFormulaField() = default;
-    VFormulaField(VFormulaField &&) noexcept = default;
-    auto operator=(VFormulaField &&) noexcept -> VFormulaField & = default;
-    VFormulaField(const VFormulaField &) = default;
-    auto operator=(const VFormulaField &) -> VFormulaField & = default;
-    ~VFormulaField() = default;
+    QString expression{};  // NOLINT(misc-non-private-member-variables-in-classes)
+    QDomElement element{}; // NOLINT(misc-non-private-member-variables-in-classes)
+    QString attribute{};   // NOLINT(misc-non-private-member-variables-in-classes)
 };
 
 struct VFinalMeasurement
 {
-    QString name;
-    QString formula;
-    QString description;
+    QString name{};
+    QString formula{};
+    QString description{};
 };
 
 struct VGroupData
@@ -329,6 +322,7 @@ public:
     static const QString TagBackgroundImage;
     static const QString TagPieceLabel;
     static const QString TagOffset;
+    static const QString TagMirrorLine;
 
     static const QString AttrName;
     static const QString AttrEnabled;

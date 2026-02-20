@@ -510,7 +510,7 @@ void DialogPiecePath::NodeChanged(int index)
 
     ui->comboBoxAngle->setDisabled(true);
 
-    ui->comboBoxAngle->blockSignals(true);
+    const QSignalBlocker blocker(ui->comboBoxAngle);
 
     if (index != -1)
     {
@@ -571,8 +571,6 @@ void DialogPiecePath::NodeChanged(int index)
         ui->plainTextEditFormulaWidthAfter->setPlainText(QString());
         ui->comboBoxAngle->setCurrentIndex(-1);
     }
-
-    ui->comboBoxAngle->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -591,32 +589,19 @@ void DialogPiecePath::PassmarkChanged(int index)
     ui->checkBoxClockwiseOpening->setDisabled(true);
     ui->checkBoxShowSecondPassmark->setDisabled(true);
 
-    ui->checkBoxClockwiseOpening->blockSignals(true);
-    ui->checkBoxShowSecondPassmark->blockSignals(true);
-
-    ui->groupBoxManualLength->blockSignals(true);
-    ui->groupBoxManualWidth->blockSignals(true);
-    ui->groupBoxManualAngle->blockSignals(true);
-    ui->groupBoxMarkType->blockSignals(true);
-    ui->groupBoxAngleType->blockSignals(true);
+    const QSignalBlocker blockerClockwiseOpening(ui->checkBoxClockwiseOpening);
+    const QSignalBlocker blockerShowSecondPassmark(ui->checkBoxShowSecondPassmark);
+    const QSignalBlocker blockerManualLength(ui->groupBoxManualLength);
+    const QSignalBlocker blockerManualWidth(ui->groupBoxManualWidth);
+    const QSignalBlocker blockerManualAngle(ui->groupBoxManualAngle);
+    const QSignalBlocker blockerMarkType(ui->groupBoxMarkType);
+    const QSignalBlocker blockerAngleType(ui->groupBoxAngleType);
 
     ui->checkBoxClockwiseOpening->setChecked(false);
 
     ui->groupBoxManualLength->setChecked(false);
     ui->groupBoxManualWidth->setChecked(false);
     ui->groupBoxManualAngle->setChecked(false);
-
-    auto EnableSignals = qScopeGuard(
-        [this]
-        {
-            ui->checkBoxClockwiseOpening->blockSignals(false);
-            ui->checkBoxShowSecondPassmark->blockSignals(false);
-            ui->groupBoxManualLength->blockSignals(false);
-            ui->groupBoxManualWidth->blockSignals(false);
-            ui->groupBoxManualAngle->blockSignals(false);
-            ui->groupBoxMarkType->blockSignals(false);
-            ui->groupBoxAngleType->blockSignals(false);
-        });
 
     if (index == -1)
     {
@@ -824,15 +809,13 @@ void DialogPiecePath::PassmarkClockwiseOrientationChanged(int state)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::EvalWidth()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditFormulaWidth->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditWidth;
-    formulaData.labelResult = ui->labelResultWidth;
-    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-    formulaData.checkLessThanZero = true;
-
-    m_saWidth = Eval(formulaData, m_flagFormula);
+    m_saWidth = Eval({.formula = ui->plainTextEditFormulaWidth->toPlainText(),
+                      .variables = data->DataVariables(),
+                      .labelEditFormula = ui->labelEditWidth,
+                      .labelResult = ui->labelResultWidth,
+                      .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+                      .checkLessThanZero = true},
+                     m_flagFormula);
 
     if (m_saWidth >= 0)
     {
@@ -854,21 +837,19 @@ void DialogPiecePath::EvalWidthBefore()
 {
     if (ui->comboBoxNodes->count() > 0)
     {
-        FormulaData formulaData;
-        formulaData.formula = ui->plainTextEditFormulaWidthBefore->toPlainText();
-        formulaData.variables = data->DataVariables();
-        formulaData.labelEditFormula = ui->labelEditBefore;
-        formulaData.labelResult = ui->labelResultBefore;
-        formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-        formulaData.checkLessThanZero = true;
-
         const QString formula = GetFormulaSAWidthBefore();
         if (formula != currentSeamAllowance)
         {
             ui->pushButtonDefBefore->setEnabled(true);
         }
 
-        Eval(formulaData, m_flagFormulaBefore);
+        Eval({.formula = ui->plainTextEditFormulaWidthBefore->toPlainText(),
+              .variables = data->DataVariables(),
+              .labelEditFormula = ui->labelEditBefore,
+              .labelResult = ui->labelResultBefore,
+              .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+              .checkLessThanZero = true},
+             m_flagFormulaBefore);
 
         if (m_flagFormulaBefore)
         {
@@ -888,21 +869,19 @@ void DialogPiecePath::EvalWidthAfter()
 {
     if (ui->comboBoxNodes->count() > 0)
     {
-        FormulaData formulaData;
-        formulaData.formula = ui->plainTextEditFormulaWidthAfter->toPlainText();
-        formulaData.variables = data->DataVariables();
-        formulaData.labelEditFormula = ui->labelEditAfter;
-        formulaData.labelResult = ui->labelResultAfter;
-        formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-        formulaData.checkLessThanZero = true;
-
         const QString formula = GetFormulaSAWidthAfter();
         if (formula != currentSeamAllowance)
         {
             ui->pushButtonDefAfter->setEnabled(true);
         }
 
-        Eval(formulaData, m_flagFormulaAfter);
+        Eval({.formula = ui->plainTextEditFormulaWidthAfter->toPlainText(),
+              .variables = data->DataVariables(),
+              .labelEditFormula = ui->labelEditAfter,
+              .labelResult = ui->labelResultAfter,
+              .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+              .checkLessThanZero = true},
+             m_flagFormulaAfter);
 
         if (m_flagFormulaAfter)
         {
@@ -920,15 +899,12 @@ void DialogPiecePath::EvalWidthAfter()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::EvalVisible()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditFormulaVisible->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditVisible;
-    formulaData.labelResult = ui->labelResultVisible;
-    formulaData.postfix = QString();
-    formulaData.checkLessThanZero = true;
-
-    Eval(formulaData, m_flagFormulaVisible);
+    Eval({.formula = ui->plainTextEditFormulaVisible->toPlainText(),
+          .variables = data->DataVariables(),
+          .labelEditFormula = ui->labelEditVisible,
+          .labelResult = ui->labelResultVisible,
+          .checkLessThanZero = true},
+         m_flagFormulaVisible);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -938,16 +914,14 @@ void DialogPiecePath::EvalPassmarkLength()
     {
         if (ui->comboBoxPassmarks->count() > 0)
         {
-            FormulaData formulaData;
-            formulaData.formula = ui->plainTextEditPassmarkLength->toPlainText();
-            formulaData.variables = data->DataVariables();
-            formulaData.labelEditFormula = ui->labelEditPassmarkLength;
-            formulaData.labelResult = ui->labelResultPassmarkLength;
-            formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-            formulaData.checkZero = true;
-            formulaData.checkLessThanZero = true;
-
-            Eval(formulaData, m_flagFormulaPassmarkLength);
+            Eval({.formula = ui->plainTextEditPassmarkLength->toPlainText(),
+                  .variables = data->DataVariables(),
+                  .labelEditFormula = ui->labelEditPassmarkLength,
+                  .labelResult = ui->labelResultPassmarkLength,
+                  .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+                  .checkZero = true,
+                  .checkLessThanZero = true},
+                 m_flagFormulaPassmarkLength);
 
             UpdateNodePassmarkLength(
                 VTranslateVars::TryFormulaFromUser(ui->plainTextEditPassmarkLength->toPlainText(),
@@ -969,15 +943,13 @@ void DialogPiecePath::EvalPassmarkWidth()
     {
         if (ui->comboBoxPassmarks->count() > 0)
         {
-            FormulaData formulaData;
-            formulaData.formula = ui->plainTextEditPassmarkWidth->toPlainText();
-            formulaData.variables = data->DataVariables();
-            formulaData.labelEditFormula = ui->labelEditPassmarkWidth;
-            formulaData.labelResult = ui->labelResultPassmarkWidth;
-            formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-            formulaData.checkZero = true;
-
-            Eval(formulaData, m_flagFormulaPassmarkWidth);
+            Eval({.formula = ui->plainTextEditPassmarkWidth->toPlainText(),
+                  .variables = data->DataVariables(),
+                  .labelEditFormula = ui->labelEditPassmarkWidth,
+                  .labelResult = ui->labelResultPassmarkWidth,
+                  .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+                  .checkZero = true},
+                 m_flagFormulaPassmarkWidth);
 
             UpdateNodePassmarkWidth(
                 VTranslateVars::TryFormulaFromUser(ui->plainTextEditPassmarkWidth->toPlainText(),
@@ -999,14 +971,12 @@ void DialogPiecePath::EvalPassmarkAngle()
     {
         if (ui->comboBoxPassmarks->count() > 0)
         {
-            FormulaData formulaData;
-            formulaData.formula = ui->plainTextEditPassmarkAngle->toPlainText();
-            formulaData.variables = data->DataVariables();
-            formulaData.labelEditFormula = ui->labelEditPassmarkAngle;
-            formulaData.labelResult = ui->labelResultPassmarkAngle;
-            formulaData.postfix = degreeSymbol;
-
-            Eval(formulaData, m_flagFormulaPassmarkAngle);
+            Eval({.formula = ui->plainTextEditPassmarkAngle->toPlainText(),
+                  .variables = data->DataVariables(),
+                  .labelEditFormula = ui->labelEditPassmarkAngle,
+                  .labelResult = ui->labelResultPassmarkAngle,
+                  .postfix = degreeSymbol},
+                 m_flagFormulaPassmarkAngle);
 
             UpdateNodePassmarkAngle(
                 VTranslateVars::TryFormulaFromUser(ui->plainTextEditPassmarkAngle->toPlainText(),
@@ -1201,9 +1171,8 @@ void DialogPiecePath::SetOptionControls()
 
     auto SetChecked = [](QToolButton *toolButton, bool checked = false)
     {
-        toolButton->blockSignals(true);
+        const QSignalBlocker blocker(toolButton);
         toolButton->setChecked(checked);
-        toolButton->blockSignals(false);
     };
 
     SetChecked(ui->toolButtonReverse);
@@ -1571,22 +1540,23 @@ void DialogPiecePath::InitNodesList()
 {
     const quint32 id = ui->comboBoxNodes->currentData().toUInt();
 
-    ui->comboBoxNodes->blockSignals(true);
-    ui->comboBoxNodes->clear();
-
-    const VPiecePath path = CreatePath();
-
-    for (int i = 0; i < path.CountNodes(); ++i)
     {
-        const VPieceNode &node = path.at(i);
-        if (node.GetTypeTool() == Tool::NodePoint)
-        {
-            const QString name = GetNodeName(data, node);
+        const QSignalBlocker blocker(ui->comboBoxNodes);
+        ui->comboBoxNodes->clear();
 
-            ui->comboBoxNodes->addItem(name, node.GetId());
+        const VPiecePath path = CreatePath();
+
+        for (int i = 0; i < path.CountNodes(); ++i)
+        {
+            const VPieceNode &node = path.at(i);
+            if (node.GetTypeTool() == Tool::NodePoint)
+            {
+                const QString name = GetNodeName(data, node);
+
+                ui->comboBoxNodes->addItem(name, node.GetId());
+            }
         }
     }
-    ui->comboBoxNodes->blockSignals(false);
 
     const int index = ui->comboBoxNodes->findData(id);
     if (index != -1)
@@ -1605,21 +1575,22 @@ void DialogPiecePath::InitPassmarksList()
 {
     const quint32 id = ui->comboBoxPassmarks->currentData().toUInt();
 
-    ui->comboBoxPassmarks->blockSignals(true);
-    ui->comboBoxPassmarks->clear();
-
-    const QVector<VPieceNode> nodes = GetListInternals<VPieceNode>(ui->listWidget);
-
-    for (const auto &node : nodes)
     {
-        if (node.GetTypeTool() == Tool::NodePoint && node.IsPassmark())
-        {
-            const QString name = GetNodeName(data, node);
+        const QSignalBlocker blocker(ui->comboBoxPassmarks);
+        ui->comboBoxPassmarks->clear();
 
-            ui->comboBoxPassmarks->addItem(name, node.GetId());
+        const QVector<VPieceNode> nodes = GetListInternals<VPieceNode>(ui->listWidget);
+
+        for (const auto &node : nodes)
+        {
+            if (node.GetTypeTool() == Tool::NodePoint && node.IsPassmark())
+            {
+                const QString name = GetNodeName(data, node);
+
+                ui->comboBoxPassmarks->addItem(name, node.GetId());
+            }
         }
     }
-    ui->comboBoxPassmarks->blockSignals(false);
 
     const int index = ui->comboBoxPassmarks->findData(id);
     if (index != -1)
@@ -2021,6 +1992,12 @@ void DialogPiecePath::SetPiecesList(const QVector<quint32> &list)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::CheckDependencyTreeComplete()
+{
+    // does nothing
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto DialogPiecePath::CreatePath() const -> VPiecePath
 {
     VPiecePath path;
@@ -2222,13 +2199,12 @@ void DialogPiecePath::SetFormulaPassmarkAngle(const QString &formula)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::RefreshPathList(const VPiecePath &path)
 {
-    ui->listWidget->blockSignals(true);
+    const QSignalBlocker blocker(ui->listWidget);
     ui->listWidget->clear();
     for (int i = 0; i < path.CountNodes(); ++i)
     {
         NewItem(path.at(i));
     }
-    ui->listWidget->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

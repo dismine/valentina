@@ -70,10 +70,10 @@ void TogglePieceInLayout::redo()
 //---------------------------------------------------------------------------------------------------------------------
 void TogglePieceInLayout::Do(bool state)
 {
-    QDomElement detail = doc->FindElementById(m_id, VAbstractPattern::TagDetail);
+    QDomElement detail = Doc()->FindElementById(m_id, VAbstractPattern::TagDetail);
     if (detail.isElement())
     {
-        doc->SetAttributeOrRemoveIf<bool>(detail, AttrInLayout, state, [](bool state) noexcept { return state; });
+        Doc()->SetAttributeOrRemoveIf<bool>(detail, AttrInLayout, state, [](bool state) noexcept { return state; });
 
         VPiece det = m_data->DataPieces()->value(m_id);
         det.SetInLayout(state);
@@ -118,7 +118,7 @@ TogglePieceForceForbidFlipping::TogglePieceForceForbidFlipping(
 //---------------------------------------------------------------------------------------------------------------------
 void TogglePieceForceForbidFlipping::undo()
 {
-    QDomElement detail = doc->FindElementById(m_id, VAbstractPattern::TagDetail);
+    QDomElement detail = Doc()->FindElementById(m_id, VAbstractPattern::TagDetail);
     if (detail.isElement())
     {
         VPiece det = m_data->DataPieces()->value(m_id);
@@ -135,7 +135,7 @@ void TogglePieceForceForbidFlipping::undo()
         m_data->UpdatePiece(m_id, det);
 
         // Probably overkill, but will help to avoid mistakes
-        VToolSeamAllowance::AddAttributes(doc, detail, m_id, det);
+        VToolSeamAllowance::AddAttributes(Doc(), detail, m_id, det);
     }
     else
     {
@@ -146,7 +146,7 @@ void TogglePieceForceForbidFlipping::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void TogglePieceForceForbidFlipping::redo()
 {
-    QDomElement detail = doc->FindElementById(m_id, VAbstractPattern::TagDetail);
+    QDomElement detail = Doc()->FindElementById(m_id, VAbstractPattern::TagDetail);
     if (detail.isElement())
     {
         VPiece det = m_data->DataPieces()->value(m_id);
@@ -161,7 +161,7 @@ void TogglePieceForceForbidFlipping::redo()
         m_data->UpdatePiece(m_id, det);
 
         // Probably overkill, but will help to avoid mistakes
-        VToolSeamAllowance::AddAttributes(doc, detail, m_id, det);
+        VToolSeamAllowance::AddAttributes(Doc(), detail, m_id, det);
     }
     else
     {
@@ -199,10 +199,10 @@ void ToggleHideMainPath::redo()
 //---------------------------------------------------------------------------------------------------------------------
 void ToggleHideMainPath::Do(bool state)
 {
-    QDomElement detail = doc->FindElementById(m_id, VAbstractPattern::TagDetail);
+    QDomElement detail = Doc()->FindElementById(m_id, VAbstractPattern::TagDetail);
     if (detail.isElement())
     {
-        doc->SetAttribute(detail, VToolSeamAllowance::AttrHideMainPath, state);
+        Doc()->SetAttribute(detail, VToolSeamAllowance::AttrHideMainPath, state);
 
         VPiece det = m_data->DataPieces()->value(m_id);
         det.SetHideMainPath(state);
@@ -245,10 +245,10 @@ void ToggleShowFullPiece::redo()
 //---------------------------------------------------------------------------------------------------------------------
 void ToggleShowFullPiece::Do(bool state)
 {
-    QDomElement detail = doc->FindElementById(m_id, VAbstractPattern::TagDetail);
+    QDomElement detail = Doc()->FindElementById(m_id, VAbstractPattern::TagDetail);
     if (detail.isElement())
     {
-        doc->SetAttribute(detail, VToolSeamAllowance::AttrShowFullPiece, state);
+        Doc()->SetAttribute(detail, VToolSeamAllowance::AttrShowFullPiece, state);
 
         VPiece det = m_data->DataPieces()->value(m_id);
         det.SetShowFullPiece(state);

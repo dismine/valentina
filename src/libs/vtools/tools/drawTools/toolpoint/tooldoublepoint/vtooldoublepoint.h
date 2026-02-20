@@ -97,6 +97,19 @@ protected:
     quint32 p1id;
     quint32 p2id;
 
+    struct ToolChanges
+    {
+        QString oldP1Label{};
+        QString newP1Label{};
+        QString oldP2Label{};
+        QString newP2Label{};
+
+        auto HasChanges() const -> bool { return oldP1Label != newP1Label || oldP2Label != newP2Label; }
+
+        auto P1LabelChanged() const -> bool { return oldP1Label != newP1Label; }
+        auto P2LabelChanged() const -> bool { return oldP2Label != newP2Label; }
+    };
+
     void UpdateNamePosition(quint32 id, const QPointF &pos) override;
     auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
     void keyReleaseEvent(QKeyEvent *event) override;
@@ -106,6 +119,10 @@ protected:
     void ChangeLabelVisibility(quint32 id, bool visible) override;
 
     auto ComplexToolTip(quint32 itemId) const -> QString;
+
+    void ProcessTrueDartsToolOptions(const QDomElement &oldDomElement,
+                                     const QDomElement &newDomElement,
+                                     const ToolChanges &changes);
 
 private:
     Q_DISABLE_COPY_MOVE(VToolDoublePoint) // NOLINT

@@ -32,10 +32,12 @@
 #include <QLineF>
 #include <QPointF>
 #include <QSharedPointer>
-#include <new>
+#include <QUndoStack>
 
 #include "../../../../dialogs/tools/dialoglineintersect.h"
 #include "../../../../dialogs/tools/dialogtool.h"
+#include "../../../../undocommands/renameobject.h"
+#include "../../../../undocommands/savetooloptions.h"
 #include "../../../../visualization/line/vistoollineintersect.h"
 #include "../../../../visualization/visualization.h"
 #include "../../../vabstracttool.h"
@@ -83,6 +85,7 @@ void VToolLineIntersect::SetDialog()
     const QPointer<DialogLineIntersect> dialogTool = qobject_cast<DialogLineIntersect *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
+    dialogTool->CheckDependencyTreeComplete();
     dialogTool->SetP1Line1(p1Line1);
     dialogTool->SetP2Line1(p2Line1);
     dialogTool->SetP1Line2(p1Line2);
@@ -319,6 +322,105 @@ auto VToolLineIntersect::MakeToolTip() const -> QString
                                 .arg(VAbstractValApplication::VApp()->fromPixel(curToP2L2.length()))
                                 .arg(tr("Label"), current->name());
     return toolTip;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLineIntersect::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogLineIntersect> dialogTool = qobject_cast<DialogLineIntersect *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    const QString oldLabel = VAbstractTool::data.GetGObject(m_id)->name();
+    const QString newLabel = dialogTool->GetPointName();
+
+    const QString newLine1P1Label = VAbstractTool::data.GetGObject(dialogTool->GetP1Line1())->name();
+    const QString oldLine1P1Label = Line1P1Name();
+
+    const QString newLine1P2Label = VAbstractTool::data.GetGObject(dialogTool->GetP2Line1())->name();
+    const QString oldLine1P2Label = Line1P2Name();
+
+    const QString newLine2P1Label = VAbstractTool::data.GetGObject(dialogTool->GetP1Line2())->name();
+    const QString oldLine2P1Label = Line2P1Name();
+
+    const QString newLine2P2Label = VAbstractTool::data.GetGObject(dialogTool->GetP2Line2())->name();
+    const QString oldLine2P2Label = Line2P2Name();
+
+    if (oldLine1P1Label == newLine1P1Label && oldLine1P2Label == newLine1P2Label && oldLine2P1Label == newLine2P1Label
+        && oldLine2P2Label == newLine2P2Label && oldLabel == newLabel)
+    {
+        VToolSinglePoint::ApplyToolOptions(oldDomElement, newDomElement);
+        return;
+    }
+
+    QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
+    auto *newGroup = new QUndoCommand(); // an empty command
+    newGroup->setText(tr("save tool options"));
+
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id, newGroup);
+    saveOptions->SetInGroup(true);
+    connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+
+    if (oldLine1P1Label != newLine1P1Label)
+    {
+        auto *renamePair = RenamePair::CreateForLine(std::make_pair(oldLine1P1Label, oldLabel),
+                                                     std::make_pair(newLine1P1Label, oldLabel),
+                                                     doc,
+                                                     m_id,
+                                                     newGroup);
+        if (oldLine1P2Label == newLine1P2Label && oldLine2P1Label == newLine2P1Label
+            && oldLine2P2Label == newLine2P2Label && oldLabel == newLabel)
+        {
+            connect(renamePair, &RenamePair::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        }
+    }
+
+    if (oldLine1P2Label != newLine1P2Label)
+    {
+        auto *renamePair = RenamePair::CreateForLine(std::make_pair(oldLabel, oldLine1P2Label),
+                                                     std::make_pair(oldLabel, newLine1P2Label),
+                                                     doc,
+                                                     m_id,
+                                                     newGroup);
+        if (oldLine2P1Label == newLine2P1Label && oldLine2P2Label == newLine2P2Label && oldLabel == newLabel)
+        {
+            connect(renamePair, &RenamePair::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        }
+    }
+
+    if (oldLine2P1Label != newLine2P1Label)
+    {
+        auto *renamePair = RenamePair::CreateForLine(std::make_pair(oldLine2P1Label, oldLabel),
+                                                     std::make_pair(newLine2P1Label, oldLabel),
+                                                     doc,
+                                                     m_id,
+                                                     newGroup);
+        if (oldLine2P2Label == newLine2P2Label && oldLabel == newLabel)
+        {
+            connect(renamePair, &RenamePair::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        }
+    }
+
+    if (oldLine2P2Label != newLine2P2Label)
+    {
+        auto *renamePair = RenamePair::CreateForLine(std::make_pair(oldLabel, oldLine2P2Label),
+                                                     std::make_pair(oldLabel, newLine2P2Label),
+                                                     doc,
+                                                     m_id,
+                                                     newGroup);
+        if (oldLabel == newLabel)
+        {
+            connect(renamePair, &RenamePair::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        }
+    }
+
+    if (oldLabel != newLabel)
+    {
+        auto *renameLabel = new RenameLabel(oldLabel, newLabel, doc, m_id, newGroup);
+        connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    }
+
+    undoStack->push(newGroup);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

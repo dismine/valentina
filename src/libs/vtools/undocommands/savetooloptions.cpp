@@ -36,12 +36,11 @@
 //---------------------------------------------------------------------------------------------------------------------
 SaveToolOptions::SaveToolOptions(
     const QDomElement &oldXml, const QDomElement &newXml, VAbstractPattern *doc, quint32 id, QUndoCommand *parent)
-  : VUndoCommand(doc, parent),
+  : VUndoCommand(doc, id, parent),
     oldXml(oldXml),
     newXml(newXml)
 {
-    setText(tr("save tool option"));
-    nodeId = id;
+    setText(tr("save tool options"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -49,10 +48,10 @@ void SaveToolOptions::undo()
 {
     qCDebug(vUndo, "Undo.");
 
-    QDomElement const domElement = doc->FindElementById(nodeId);
+    QDomElement const domElement = Doc()->FindElementById(ElementId());
     if (!domElement.isElement())
     {
-        qCDebug(vUndo, "Can't find tool with id = %u.", nodeId);
+        qCDebug(vUndo, "Can't find tool with id = %u.", ElementId());
         return;
     }
 
@@ -66,16 +65,19 @@ void SaveToolOptions::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    QDomElement const domElement = doc->FindElementById(nodeId);
+    QDomElement const domElement = Doc()->FindElementById(ElementId());
     if (!domElement.isElement())
     {
-        qCDebug(vUndo, "Can't find tool with id = %u.", nodeId);
+        qCDebug(vUndo, "Can't find tool with id = %u.", ElementId());
         return;
     }
 
     domElement.parentNode().replaceChild(newXml, domElement);
 
-    emit NeedLiteParsing(Document::LiteParse);
+    if (!m_inGroup)
+    {
+        emit NeedLiteParsing(Document::LiteParse);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -83,11 +85,11 @@ auto SaveToolOptions::mergeWith(const QUndoCommand *command) -> bool
 {
     const auto *saveCommand = static_cast<const SaveToolOptions *>(command);
 
-    if (saveCommand->getToolId() != nodeId)
+    if (saveCommand->ElementId() != ElementId())
     {
         return false;
     }
 
-    newXml = saveCommand->getNewXml();
+    newXml = saveCommand->newXml;
     return true;
 }

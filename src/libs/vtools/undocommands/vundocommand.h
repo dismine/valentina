@@ -76,18 +76,16 @@ class VUndoCommand : public QObject, public QUndoCommand
 
 public:
     explicit VUndoCommand(VAbstractPattern *doc, QUndoCommand *parent = nullptr);
+    VUndoCommand(VAbstractPattern *doc, quint32 id, QUndoCommand *parent = nullptr);
     VUndoCommand(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
     ~VUndoCommand() override = default;
+
 signals:
     void ClearScene();
     void NeedFullParsing();
     void NeedLiteParsing(const Document &parse);
 
 protected:
-    QDomElement xml;
-    VAbstractPattern *doc;
-    quint32 nodeId{NULL_ID};
-    bool redoFlag{false};
     virtual void RedoFullParsing();
     void UndoDeleteAfterSibling(QDomNode &parentNode, quint32 siblingId, const QString &tagName = QString()) const;
 
@@ -98,8 +96,66 @@ protected:
 
     static void DisableInternalPaths(const QVector<quint32> &paths);
 
+    auto GetElement() const -> QDomElement;
+    void SetElement(const QDomElement &newElement);
+
+    auto Doc() const -> VAbstractPattern *;
+
+    auto ElementId() const -> quint32;
+    void SetElementId(quint32 newId);
+
+    auto RedoFlag() const -> bool;
+    void SetRedoFlag(bool newRedoFlag);
+
 private:
     Q_DISABLE_COPY_MOVE(VUndoCommand) // NOLINT
+
+    QDomElement m_element{};
+    VAbstractPattern *m_doc;
+    quint32 m_elementId{NULL_ID};
+    bool m_redoFlag{false};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VUndoCommand::Doc() const -> VAbstractPattern *
+{
+    return m_doc;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VUndoCommand::ElementId() const -> quint32
+{
+    return m_elementId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VUndoCommand::SetElementId(quint32 newId)
+{
+    m_elementId = newId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VUndoCommand::RedoFlag() const -> bool
+{
+    return m_redoFlag;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VUndoCommand::SetRedoFlag(bool newRedoFlag)
+{
+    m_redoFlag = newRedoFlag;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VUndoCommand::GetElement() const -> QDomElement
+{
+    return m_element;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VUndoCommand::SetElement(const QDomElement &newElement)
+{
+    m_element = newElement;
+}
 
 #endif // VUNDOCOMMAND_H

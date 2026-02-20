@@ -114,6 +114,7 @@ QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, AttrHold, ("hold"_L1))       // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, AttrVisible, ("visible"_L1)) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, AttrOpacity, ("opacity"_L1)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, AttrSubName, ("subName"_L1)) // NOLINT
 
 QT_WARNING_POP
 } // namespace
@@ -652,12 +653,112 @@ void VToolOptionsPropertyBrowser::AddPropertyObjectName(Tool *i, const QString &
 
 //---------------------------------------------------------------------------------------------------------------------
 template<class Tool>
-void VToolOptionsPropertyBrowser::AddPropertySuffix(Tool *i, const QString &propertyName)
+void VToolOptionsPropertyBrowser::AddPropertySubName(Tool *i, const QString &propertyName)
 {
     auto *itemName = new VPE::VStringProperty(propertyName);
     itemName->setClearButtonEnable(true);
-    itemName->setValue(VAbstractApplication::VApp()->TrVars()->VarToUser(i->GetSuffix()));
-    AddProperty(itemName, AttrSuffix);
+    itemName->setValue(i->GetName());
+    AddProperty(itemName, *AttrSubName);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::AddPropertyCurveName1(Tool *i, const QString &propertyName)
+{
+    auto *itemName = new VPE::VStringProperty(propertyName);
+    itemName->setClearButtonEnable(true);
+    itemName->setValue(i->GetName1());
+    AddProperty(itemName, AttrCurveName1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::AddPropertyCurveName2(Tool *i, const QString &propertyName)
+{
+    auto *itemName = new VPE::VStringProperty(propertyName);
+    itemName->setClearButtonEnable(true);
+    itemName->setValue(i->GetName2());
+    AddProperty(itemName, AttrCurveName2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::AddPropertyCurve1Name1(Tool *i, const QString &propertyName)
+{
+    auto *itemName = new VPE::VStringProperty(propertyName);
+    itemName->setClearButtonEnable(true);
+    itemName->setValue(i->GetCurve1Name1());
+    AddProperty(itemName, AttrCurve1Name1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::AddPropertyCurve1Name2(Tool *i, const QString &propertyName)
+{
+    auto *itemName = new VPE::VStringProperty(propertyName);
+    itemName->setClearButtonEnable(true);
+    itemName->setValue(i->GetCurve1Name2());
+    AddProperty(itemName, AttrCurve1Name2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::AddPropertyCurve2Name1(Tool *i, const QString &propertyName)
+{
+    auto *itemName = new VPE::VStringProperty(propertyName);
+    itemName->setClearButtonEnable(true);
+    itemName->setValue(i->GetCurve2Name1());
+    AddProperty(itemName, AttrCurve2Name1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::AddPropertyCurve2Name2(Tool *i, const QString &propertyName)
+{
+    auto *itemName = new VPE::VStringProperty(propertyName);
+    itemName->setClearButtonEnable(true);
+    itemName->setValue(i->GetCurve2Name2());
+    AddProperty(itemName, AttrCurve2Name2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::AddPropertyCurve1Alias1(Tool *i, const QString &propertyName)
+{
+    auto *itemName = new VPE::VStringProperty(propertyName);
+    itemName->setClearButtonEnable(true);
+    itemName->setValue(i->GetCurve1AliasSuffix1());
+    AddProperty(itemName, AttrCurve1Alias1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::AddPropertyCurve1Alias2(Tool *i, const QString &propertyName)
+{
+    auto *itemName = new VPE::VStringProperty(propertyName);
+    itemName->setClearButtonEnable(true);
+    itemName->setValue(i->GetCurve1AliasSuffix2());
+    AddProperty(itemName, AttrCurve1Alias2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::AddPropertyCurve2Alias1(Tool *i, const QString &propertyName)
+{
+    auto *itemName = new VPE::VStringProperty(propertyName);
+    itemName->setClearButtonEnable(true);
+    itemName->setValue(i->GetCurve2AliasSuffix1());
+    AddProperty(itemName, AttrCurve2Alias1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::AddPropertyCurve2Alias2(Tool *i, const QString &propertyName)
+{
+    auto *itemName = new VPE::VStringProperty(propertyName);
+    itemName->setClearButtonEnable(true);
+    itemName->setValue(i->GetCurve2AliasSuffix2());
+    AddProperty(itemName, AttrCurve2Alias2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -665,7 +766,7 @@ template <class Tool> void VToolOptionsPropertyBrowser::AddPropertyAlias(Tool *i
 {
     auto *itemName = new VPE::VStringProperty(propertyName);
     itemName->setClearButtonEnable(true);
-    itemName->setValue(VAbstractApplication::VApp()->TrVars()->VarToUser(i->GetAliasSuffix()));
+    itemName->setValue(i->GetAliasSuffix());
     AddProperty(itemName, AttrAlias);
 }
 
@@ -674,7 +775,7 @@ template <class Tool> void VToolOptionsPropertyBrowser::AddPropertyAlias1(Tool *
 {
     auto *itemName = new VPE::VStringProperty(propertyName);
     itemName->setClearButtonEnable(true);
-    itemName->setValue(VAbstractApplication::VApp()->TrVars()->VarToUser(i->GetAliasSuffix1()));
+    itemName->setValue(i->GetAliasSuffix1());
     AddProperty(itemName, AttrAlias1);
 }
 
@@ -683,7 +784,7 @@ template <class Tool> void VToolOptionsPropertyBrowser::AddPropertyAlias2(Tool *
 {
     auto *itemName = new VPE::VStringProperty(propertyName);
     itemName->setClearButtonEnable(true);
-    itemName->setValue(VAbstractApplication::VApp()->TrVars()->VarToUser(i->GetAliasSuffix2()));
+    itemName->setValue(i->GetAliasSuffix2());
     AddProperty(itemName, AttrAlias2);
 }
 
@@ -703,17 +804,6 @@ template <class Tool> void VToolOptionsPropertyBrowser::AddPropertyPointName2(To
     itemName->setClearButtonEnable(true);
     itemName->setValue(i->nameP2());
     AddProperty(itemName, AttrName2);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <class Tool>
-void VToolOptionsPropertyBrowser::AddPropertyOperationSuffix(Tool *i, const QString &propertyName, bool readOnly)
-{
-    auto *itemSuffix = new VPE::VStringProperty(propertyName);
-    itemSuffix->setClearButtonEnable(true);
-    itemSuffix->setValue(i->Suffix());
-    itemSuffix->setReadOnly(readOnly);
-    AddProperty(itemSuffix, AttrSuffix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -855,22 +945,48 @@ void VToolOptionsPropertyBrowser::AddPropertyOpacity(const QString &propertyName
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <class Tool> void VToolOptionsPropertyBrowser::SetName(VPE::VProperty *property)
+template<class Tool, typename Getter, typename Setter>
+void VToolOptionsPropertyBrowser::SetStringPropertyGeneric(VPE::VProperty *property, Getter getter, Setter setter)
 {
     if (auto *i = qgraphicsitem_cast<Tool *>(m_currentItem))
     {
         QString const name = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
-        if (name == i->name())
+        if (name == (i->*getter)())
         {
             return;
         }
-
-        i->setName(name);
+        (i->*setter)(name);
     }
     else
     {
         qWarning() << "Can't cast item";
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool, typename Getter, typename Setter>
+void VToolOptionsPropertyBrowser::SetFormulaPropertyGeneric(VPE::VProperty *property, Getter getter, Setter setter)
+{
+    if (auto *i = qgraphicsitem_cast<Tool *>(m_currentItem))
+    {
+        auto formula = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).value<VFormula>();
+        if (formula == (i->*getter)())
+        {
+            return;
+        }
+
+        (i->*setter)(formula);
+    }
+    else
+    {
+        qWarning() << "Can't cast item";
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class Tool> void VToolOptionsPropertyBrowser::SetName(VPE::VProperty *property)
+{
+    SetStringPropertyGeneric<Tool>(property, &Tool::name, &Tool::setName);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1012,75 +1128,33 @@ template <class Tool> void VToolOptionsPropertyBrowser::SetPointName2(VPE::VProp
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <class Tool> void VToolOptionsPropertyBrowser::SetOperationSuffix(VPE::VProperty *property)
-{
-    if (auto *item = qgraphicsitem_cast<Tool *>(m_currentItem))
-    {
-        QString const suffix = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
-
-        if (suffix == item->Suffix())
-        {
-            return;
-        }
-
-        if (suffix.isEmpty())
-        {
-            m_idToProperty[AttrSuffix]->setValue(item->Suffix());
-            return;
-        }
-
-        QRegularExpression const rx(NameRegExp());
-        const QStringList uniqueNames = VContainer::AllUniqueNames(valentinaNamespace);
-        for (const auto &uniqueName : uniqueNames)
-        {
-            const QString name = uniqueName + suffix;
-            if (not rx.match(name).hasMatch() || not VContainer::IsUnique(name, valentinaNamespace))
-            {
-                m_idToProperty[AttrSuffix]->setValue(item->Suffix());
-                return;
-            }
-        }
-
-        item->SetSuffix(suffix);
-    }
-    else
-    {
-        qWarning() << "Can't cast item";
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 template<class Tool>
-void VToolOptionsPropertyBrowser::SetOffsetCurveSuffix(VPE::VProperty *property)
+void VToolOptionsPropertyBrowser::SetSubName(VPE::VProperty *property)
 {
     if (auto *item = qgraphicsitem_cast<Tool *>(m_currentItem))
     {
-        QString const suffix = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
+        QString const name = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
 
-        if (suffix == item->GetSuffix())
+        if (name == item->GetName())
         {
             return;
         }
 
-        if (suffix.isEmpty())
+        if (name.isEmpty())
         {
-            m_idToProperty[AttrSuffix]->setValue(item->GetSuffix());
+            m_idToProperty[*AttrSubName]->setValue(item->GetName());
             return;
         }
 
         QRegularExpression const rx(NameRegExp());
-        const QStringList uniqueNames = VContainer::AllUniqueNames(valentinaNamespace);
-        for (const auto &uniqueName : uniqueNames)
+        const QString curveName = splPath_V + '_'_L1 + name;
+        if (!rx.match(curveName).hasMatch() || !VContainer::IsUnique(curveName, valentinaNamespace))
         {
-            const QString name = uniqueName + suffix;
-            if (not rx.match(name).hasMatch() || not VContainer::IsUnique(name, valentinaNamespace))
-            {
-                m_idToProperty[AttrSuffix]->setValue(item->GetSuffix());
-                return;
-            }
+            m_idToProperty[*AttrSubName]->setValue(item->GetName());
+            return;
         }
 
-        item->SetSuffix(suffix);
+        item->SetName(name);
     }
     else
     {
@@ -1187,96 +1261,101 @@ template <class Tool> void VToolOptionsPropertyBrowser::SetAxisType(VPE::VProper
 //---------------------------------------------------------------------------------------------------------------------
 template <class Tool> void VToolOptionsPropertyBrowser::SetNotes(VPE::VProperty *property)
 {
-    if (auto *i = qgraphicsitem_cast<Tool *>(m_currentItem))
-    {
-        QString const notes = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
-        if (notes == i->GetNotes())
-        {
-            return;
-        }
-
-        i->SetNotes(notes);
-    }
-    else
-    {
-        qWarning() << "Can't cast item";
-    }
+    SetStringPropertyGeneric<Tool>(property, &Tool::GetNotes, &Tool::SetNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class Tool> void VToolOptionsPropertyBrowser::SetAlias(VPE::VProperty *property)
 {
-    if (auto *i = qgraphicsitem_cast<Tool *>(m_currentItem))
-    {
-        QString const notes = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
-        if (notes == i->GetAliasSuffix())
-        {
-            return;
-        }
-
-        i->SetAliasSuffix(notes);
-    }
-    else
-    {
-        qWarning() << "Can't cast item";
-    }
+    SetStringPropertyGeneric<Tool>(property, &Tool::GetAliasSuffix, &Tool::SetAliasSuffix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class Tool> void VToolOptionsPropertyBrowser::SetAlias1(VPE::VProperty *property)
 {
-    if (auto *i = qgraphicsitem_cast<Tool *>(m_currentItem))
-    {
-        QString const notes = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
-        if (notes == i->GetAliasSuffix1())
-        {
-            return;
-        }
-
-        i->SetAliasSuffix1(notes);
-    }
-    else
-    {
-        qWarning() << "Can't cast item";
-    }
+    SetStringPropertyGeneric<Tool>(property, &Tool::GetAliasSuffix1, &Tool::SetAliasSuffix1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class Tool> void VToolOptionsPropertyBrowser::SetAlias2(VPE::VProperty *property)
 {
-    if (auto *i = qgraphicsitem_cast<Tool *>(m_currentItem))
-    {
-        QString const notes = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
-        if (notes == i->GetAliasSuffix2())
-        {
-            return;
-        }
+    SetStringPropertyGeneric<Tool>(property, &Tool::GetAliasSuffix2, &Tool::SetAliasSuffix2);
+}
 
-        i->SetAliasSuffix2(notes);
-    }
-    else
-    {
-        qWarning() << "Can't cast item";
-    }
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::SetCurveName1(VPE::VProperty *property)
+{
+    SetStringPropertyGeneric<Tool>(property, &Tool::GetName1, &Tool::SetName1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::SetCurveName2(VPE::VProperty *property)
+{
+    SetStringPropertyGeneric<Tool>(property, &Tool::GetName2, &Tool::SetName2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::SetCurve1Name1(VPE::VProperty *property)
+{
+    SetStringPropertyGeneric<Tool>(property, &Tool::GetCurve1Name1, &Tool::SetCurve1Name1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::SetCurve1Name2(VPE::VProperty *property)
+{
+    SetStringPropertyGeneric<Tool>(property, &Tool::GetCurve1Name2, &Tool::SetCurve1Name2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::SetCurve2Name1(VPE::VProperty *property)
+{
+    SetStringPropertyGeneric<Tool>(property, &Tool::GetCurve2Name1, &Tool::SetCurve2Name1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::SetCurve2Name2(VPE::VProperty *property)
+{
+    SetStringPropertyGeneric<Tool>(property, &Tool::GetCurve2Name2, &Tool::SetCurve2Name2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::SetCurve1Alias1(VPE::VProperty *property)
+{
+    SetStringPropertyGeneric<Tool>(property, &Tool::GetCurve1AliasSuffix1, &Tool::SetCurve1AliasSuffix1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::SetCurve1Alias2(VPE::VProperty *property)
+{
+    SetStringPropertyGeneric<Tool>(property, &Tool::GetCurve1AliasSuffix2, &Tool::SetCurve1AliasSuffix2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::SetCurve2Alias1(VPE::VProperty *property)
+{
+    SetStringPropertyGeneric<Tool>(property, &Tool::GetCurve2AliasSuffix1, &Tool::SetCurve2AliasSuffix1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::SetCurve2Alias2(VPE::VProperty *property)
+{
+    SetStringPropertyGeneric<Tool>(property, &Tool::GetCurve2AliasSuffix2, &Tool::SetCurve2AliasSuffix2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class Tool> void VToolOptionsPropertyBrowser::SetLineType(VPE::VProperty *property)
 {
-    if (auto *i = qgraphicsitem_cast<Tool *>(m_currentItem))
-    {
-        QString const type = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
-        if (type == i->getLineType())
-        {
-            return;
-        }
-
-        i->SetLineType(type);
-    }
-    else
-    {
-        qWarning() << "Can't cast item";
-    }
+    SetStringPropertyGeneric<Tool>(property, &Tool::getLineType, &Tool::SetLineType);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1292,7 +1371,7 @@ template <class Tool> void VToolOptionsPropertyBrowser::SetLineColor(VPE::VPrope
 
         i->SetLineColor(color);
 
-        QVector<QColor> const customColors = property->getSetting("customColors"_L1).value<QVector<QColor>>();
+        auto const customColors = property->getSetting("customColors"_L1).value<QVector<QColor>>();
         VAbstractValApplication::VApp()->ValentinaSettings()->SetUserToolColors(customColors);
     }
     else
@@ -1304,134 +1383,43 @@ template <class Tool> void VToolOptionsPropertyBrowser::SetLineColor(VPE::VPrope
 //---------------------------------------------------------------------------------------------------------------------
 template <class Tool> void VToolOptionsPropertyBrowser::SetFormulaLength(VPE::VProperty *property)
 {
-    if (auto *i = qgraphicsitem_cast<Tool *>(m_currentItem))
-    {
-        auto formula = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).value<VFormula>();
-        if (formula == i->GetFormulaLength())
-        {
-            return;
-        }
-
-        i->SetFormulaLength(formula);
-    }
-    else
-    {
-        qWarning() << "Can't cast item";
-    }
+    SetFormulaPropertyGeneric<Tool>(property, &Tool::GetFormulaLength, &Tool::SetFormulaLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class Tool> void VToolOptionsPropertyBrowser::SetFormulaAngle(VPE::VProperty *property)
 {
-    if (auto *i = qgraphicsitem_cast<Tool *>(m_currentItem))
-    {
-        auto formula = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).value<VFormula>();
-        if (formula == i->GetFormulaAngle())
-        {
-            return;
-        }
-
-        i->SetFormulaAngle(formula);
-    }
-    else
-    {
-        qWarning() << "Can't cast item";
-    }
+    SetFormulaPropertyGeneric<Tool>(property, &Tool::GetFormulaAngle, &Tool::SetFormulaAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class Tool> void VToolOptionsPropertyBrowser::SetFormulaRadius(VPE::VProperty *property)
 {
-    if (auto *i = qgraphicsitem_cast<Tool *>(m_currentItem))
-    {
-        auto formula = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).value<VFormula>();
-        if (formula == i->GetFormulaRadius())
-        {
-            return;
-        }
-
-        i->SetFormulaRadius(formula);
-    }
-    else
-    {
-        qWarning() << "Can't cast item";
-    }
+    SetFormulaPropertyGeneric<Tool>(property, &Tool::GetFormulaRadius, &Tool::SetFormulaRadius);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class Tool> void VToolOptionsPropertyBrowser::SetFormulaF1(VPE::VProperty *property)
 {
-    if (auto *i = qgraphicsitem_cast<Tool *>(m_currentItem))
-    {
-        auto formula = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).value<VFormula>();
-        if (formula == i->GetFormulaF1())
-        {
-            return;
-        }
-
-        i->SetFormulaF1(formula);
-    }
-    else
-    {
-        qWarning() << "Can't cast item";
-    }
+    SetFormulaPropertyGeneric<Tool>(property, &Tool::GetFormulaF1, &Tool::SetFormulaF1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class Tool> void VToolOptionsPropertyBrowser::SetFormulaF2(VPE::VProperty *property)
 {
-    if (auto *i = qgraphicsitem_cast<Tool *>(m_currentItem))
-    {
-        auto formula = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).value<VFormula>();
-        if (formula == i->GetFormulaF2())
-        {
-            return;
-        }
-
-        i->SetFormulaF2(formula);
-    }
-    else
-    {
-        qWarning() << "Can't cast item";
-    }
+    SetFormulaPropertyGeneric<Tool>(property, &Tool::GetFormulaF2, &Tool::SetFormulaF2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class Tool> void VToolOptionsPropertyBrowser::SetPenStyle(VPE::VProperty *property)
 {
-    if (auto *i = qgraphicsitem_cast<Tool *>(m_currentItem))
-    {
-        QString const pen = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
-        if (pen == i->GetPenStyle())
-        {
-            return;
-        }
-
-        i->SetPenStyle(pen);
-    }
-    else
-    {
-        qWarning() << "Can't cast item";
-    }
+    SetStringPropertyGeneric<Tool>(property, &Tool::GetPenStyle, &Tool::SetPenStyle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class Tool> void VToolOptionsPropertyBrowser::SetFormulaRotationAngle(VPE::VProperty *property)
 {
-    if (auto *i = qgraphicsitem_cast<Tool *>(m_currentItem))
-    {
-        auto formula = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).value<VFormula>();
-        if (formula == i->GetFormulaRotationAngle())
-        {
-            return;
-        }
-
-        i->SetFormulaRotationAngle(formula);
-    }
-    else
-    {
-        qWarning() << "Can't cast item";
-    }
+    SetFormulaPropertyGeneric<Tool>(property, &Tool::GetFormulaRotationAngle, &Tool::SetFormulaRotationAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1744,6 +1732,12 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCutArc(VPE::VProperty *property)
         case 64: // AttrAlias2
             SetAlias2<VToolCutArc>(property);
             break;
+        case 69: // AttrCurveName1
+            SetCurveName1<VToolCutArc>(property);
+            break;
+        case 70: // AttrCurveName2
+            SetCurveName2<VToolCutArc>(property);
+            break;
         default:
             qWarning() << "Unknown property type. id = " << id;
             break;
@@ -1776,6 +1770,12 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCutSpline(VPE::VProperty *proper
         case 64: // AttrAlias2
             SetAlias2<VToolCutSpline>(property);
             break;
+        case 69: // AttrCurveName1
+            SetCurveName1<VToolCutSpline>(property);
+            break;
+        case 70: // AttrCurveName2
+            SetCurveName2<VToolCutSpline>(property);
+            break;
         default:
             qWarning() << "Unknown property type. id = " << id;
             break;
@@ -1807,6 +1807,12 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCutSplinePath(VPE::VProperty *pr
             break;
         case 64: // AttrAlias2
             SetAlias2<VToolCutSplinePath>(property);
+            break;
+        case 69: // AttrCurveName1
+            SetCurveName1<VToolCutSplinePath>(property);
+            break;
+        case 70: // AttrCurveName2
+            SetCurveName2<VToolCutSplinePath>(property);
             break;
         default:
             qWarning() << "Unknown property type. id = " << id;
@@ -2074,7 +2080,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolPointOfIntersectionCircles(VPE::
         }
     };
 
-    auto SetSecondCircleRadius = [this](VPE::VProperty *property)
+    auto SetSecondCircleRadius = [this](VPE::VProperty *property) -> void
     {
         if (auto *i = qgraphicsitem_cast<VToolPointOfIntersectionCircles *>(m_currentItem))
         {
@@ -2140,6 +2146,30 @@ void VToolOptionsPropertyBrowser::ChangeDataToolPointOfIntersectionCurves(VPE::V
             break;
         case 51: // AttrCurve1 (read only)
         case 52: // AttrCurve2 (read only)
+            break;
+        case 71: // AttrCurve1Name1
+            SetCurve1Name1<VToolPointOfIntersectionCurves>(property);
+            break;
+        case 72: // AttrCurve1Name2
+            SetCurve1Name2<VToolPointOfIntersectionCurves>(property);
+            break;
+        case 73: // AttrCurve2Name1
+            SetCurve2Name1<VToolPointOfIntersectionCurves>(property);
+            break;
+        case 74: // AttrCurve2Name2
+            SetCurve2Name2<VToolPointOfIntersectionCurves>(property);
+            break;
+        case 75: // AttrCurve1Alias1
+            SetCurve1Alias1<VToolPointOfIntersectionCurves>(property);
+            break;
+        case 76: // AttrCurve1Alias2
+            SetCurve1Alias2<VToolPointOfIntersectionCurves>(property);
+            break;
+        case 77: // AttrCurve2Alias1
+            SetCurve2Alias1<VToolPointOfIntersectionCurves>(property);
+            break;
+        case 78: // AttrCurve2Alias2
+            SetCurve2Alias2<VToolPointOfIntersectionCurves>(property);
             break;
         default:
             qWarning() << "Unknown property type. id = " << id;
@@ -2542,6 +2572,18 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCurveIntersectAxis(VPE::VPropert
         case 2:  // AttrBasePoint (read only)
         case 46: // AttrCurve (read only)
             break;
+        case 32: // AttrName1
+            SetCurveName1<VToolCurveIntersectAxis>(property);
+            break;
+        case 33: // AttrName2
+            SetCurveName2<VToolCurveIntersectAxis>(property);
+            break;
+        case 63: // AttrAlias1
+            SetAlias1<VToolCurveIntersectAxis>(property);
+            break;
+        case 64: // AttrAlias2
+            SetAlias2<VToolCurveIntersectAxis>(property);
+            break;
         default:
             qWarning() << "Unknown property type. id = " << id;
             break;
@@ -2557,9 +2599,6 @@ void VToolOptionsPropertyBrowser::ChangeDataToolRotation(VPE::VProperty *propert
 
     switch (PropertiesList().indexOf(id))
     {
-        case 38: // AttrSuffix
-            SetOperationSuffix<VToolRotation>(property);
-            break;
         case 5: // AttrAngle
             SetFormulaAngle<VToolRotation>(property);
             break;
@@ -2583,9 +2622,6 @@ void VToolOptionsPropertyBrowser::ChangeDataToolMove(VPE::VProperty *property)
 
     switch (PropertiesList().indexOf(id))
     {
-        case 38: // AttrSuffix
-            SetOperationSuffix<VToolMove>(property);
-            break;
         case 5: // AttrAngle
             SetFormulaAngle<VToolMove>(property);
             break;
@@ -2615,9 +2651,6 @@ void VToolOptionsPropertyBrowser::ChangeDataToolFlippingByLine(VPE::VProperty *p
 
     switch (PropertiesList().indexOf(id))
     {
-        case 38: // AttrSuffix
-            SetOperationSuffix<VToolFlippingByLine>(property);
-            break;
         case 61: // AttrNotes
             SetNotes<VToolFlippingByLine>(property);
             break;
@@ -2641,9 +2674,6 @@ void VToolOptionsPropertyBrowser::ChangeDataToolFlippingByAxis(VPE::VProperty *p
     {
         case 39: // AttrAxisType
             SetAxisType<VToolFlippingByAxis>(property);
-            break;
-        case 38: // AttrSuffix
-            SetOperationSuffix<VToolFlippingByAxis>(property);
             break;
         case 61: // AttrNotes
             SetNotes<VToolFlippingByAxis>(property);
@@ -2932,8 +2962,8 @@ void VToolOptionsPropertyBrowser::ChangeDataToolParallelCurve(VPE::VProperty *pr
         case 62: // AttrAlias
             SetAlias<VToolParallelCurve>(property);
             break;
-        case 38: // AttrSuffix
-            SetOffsetCurveSuffix<VToolParallelCurve>(property);
+        case 68: // AttrSubName
+            SetSubName<VToolParallelCurve>(property);
             break;
         default:
             qWarning() << "Unknown property type. id = " << id;
@@ -2970,8 +3000,8 @@ void VToolOptionsPropertyBrowser::ChangeDataToolGraduatedCurve(VPE::VProperty *p
         case 62: // AttrAlias
             SetAlias<VToolGraduatedCurve>(property);
             break;
-        case 38: // AttrSuffix
-            SetOffsetCurveSuffix<VToolGraduatedCurve>(property);
+        case 68: // AttrSubName
+            SetSubName<VToolGraduatedCurve>(property);
             break;
         default:
             qWarning() << "Unknown property type. id = " << id;
@@ -3125,6 +3155,8 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCutArc(QGraphicsItem *item)
 
     AddPropertyObjectName(i, tr("Point label:"));
     AddPropertyParentPointName(i->CurveName(), tr("Arc:"), AttrArc);
+    AddPropertyCurveName1(i, tr("Name1:"));
+    AddPropertyCurveName2(i, tr("Name2:"));
     AddPropertyAlias1(i, tr("Alias1:"));
     AddPropertyAlias2(i, tr("Alias2:"));
     AddPropertyFormula(tr("Length:"), i->GetFormulaLength(), AttrLength);
@@ -3140,6 +3172,8 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCutSpline(QGraphicsItem *item)
 
     AddPropertyObjectName(i, tr("Point label:"));
     AddPropertyParentPointName(i->CurveName(), tr("Curve:"), AttrCurve);
+    AddPropertyCurveName1(i, tr("Name1:"));
+    AddPropertyCurveName2(i, tr("Name2:"));
     AddPropertyAlias1(i, tr("Alias1:"));
     AddPropertyAlias2(i, tr("Alias2:"));
     AddPropertyFormula(tr("Length:"), i->GetFormulaLength(), AttrLength);
@@ -3155,6 +3189,8 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCutSplinePath(QGraphicsItem *it
 
     AddPropertyObjectName(i, tr("Point label:"));
     AddPropertyParentPointName(i->CurveName(), tr("Curve:"), AttrCurve);
+    AddPropertyCurveName1(i, tr("Name1:"));
+    AddPropertyCurveName2(i, tr("Name2:"));
     AddPropertyAlias1(i, tr("Alias1:"));
     AddPropertyAlias2(i, tr("Alias2:"));
     AddPropertyFormula(tr("Length:"), i->GetFormulaLength(), AttrLength);
@@ -3311,6 +3347,14 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolPointOfIntersectionCurves(QGrap
     AddPropertyParentPointName(i->SecondCurveName(), tr("Second curve:"), AttrCurve2);
     AddPropertyVCrossPoint(i, tr("Vertical correction:"));
     AddPropertyHCrossPoint(i, tr("Horizontal correction:"));
+    AddPropertyCurve1Name1(i, tr("First curve. Left sub curve name:"));
+    AddPropertyCurve1Name2(i, tr("First curve. Right sub curve name:"));
+    AddPropertyCurve1Alias1(i, tr("First curve. Left sub curve alias:"));
+    AddPropertyCurve1Alias2(i, tr("First curve. Right sub curve alias:"));
+    AddPropertyCurve2Name1(i, tr("Second curve. Left sub curve name:"));
+    AddPropertyCurve2Name2(i, tr("Second curve. Right sub curve name:"));
+    AddPropertyCurve2Alias1(i, tr("Second curve. Left sub curve alias:"));
+    AddPropertyCurve2Alias2(i, tr("Second curve. Right sub curve alias:"));
     AddPropertyText(tr("Notes:"), i->GetNotes(), AttrNotes);
 }
 
@@ -3517,6 +3561,10 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCurveIntersectAxis(QGraphicsIte
     AddPropertyObjectName(i, tr("Point label:"));
     AddPropertyParentPointName(i->BasePointName(), tr("Axis point:"), AttrBasePoint);
     AddPropertyParentPointName(i->CurveName(), tr("Curve:"), AttrCurve);
+    AddPropertyCurveName1(i, tr("Name1:"));
+    AddPropertyCurveName2(i, tr("Name2:"));
+    AddPropertyAlias1(i, tr("Alias1:"));
+    AddPropertyAlias2(i, tr("Alias2:"));
     AddPropertyLineType(i, tr("Line type:"),
                         LineStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)));
     AddPropertyLineColor(i, tr("Line color:"), VAbstractTool::ColorsList(), AttrLineColor);
@@ -3531,7 +3579,6 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolRotation(QGraphicsItem *item)
     i->ShowVisualization(true);
     m_formView->setTitle(tr("Tool rotation"));
 
-    AddPropertyOperationSuffix(i, tr("Suffix:"));
     AddPropertyParentPointName(i->OriginPointName(), tr("Origin point:"), AttrCenter);
     AddPropertyFormula(tr("Angle:"), i->GetFormulaAngle(), AttrAngle);
     AddPropertyText(tr("Notes:"), i->GetNotes(), AttrNotes);
@@ -3544,7 +3591,6 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolMove(QGraphicsItem *item)
     i->ShowVisualization(true);
     m_formView->setTitle(tr("Tool move"));
 
-    AddPropertyOperationSuffix(i, tr("Suffix:"));
     AddPropertyFormula(tr("Angle:"), i->GetFormulaAngle(), AttrAngle);
     AddPropertyFormula(tr("Length:"), i->GetFormulaLength(), AttrLength);
     AddPropertyFormula(tr("Rotation angle:"), i->GetFormulaRotationAngle(), AttrRotationAngle);
@@ -3559,7 +3605,6 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolFlippingByLine(QGraphicsItem *i
     i->ShowVisualization(true);
     m_formView->setTitle(tr("Tool flipping by line"));
 
-    AddPropertyOperationSuffix(i, tr("Suffix:"));
     AddPropertyParentPointName(i->FirstLinePointName(), tr("First line point:"), AttrFirstPoint);
     AddPropertyParentPointName(i->SecondLinePointName(), tr("Second line point:"), AttrSecondPoint);
     AddPropertyText(tr("Notes:"), i->GetNotes(), AttrNotes);
@@ -3573,7 +3618,6 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolFlippingByAxis(QGraphicsItem *i
     m_formView->setTitle(tr("Tool flipping by axis"));
 
     AddPropertyAxisType(i, tr("Axis type:"));
-    AddPropertyOperationSuffix(i, tr("Suffix:"));
     AddPropertyParentPointName(i->OriginPointName(), tr("Origin point:"), AttrCenter);
     AddPropertyText(tr("Notes:"), i->GetNotes(), AttrNotes);
 }
@@ -3663,10 +3707,10 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolParallelCurve(QGraphicsItem *it
 
     QPalette const comboBoxPalette = ComboBoxPalette();
 
-    AddPropertyObjectName(i, tr("Name:"), true);
+    AddPropertyObjectName(i, tr("Full name:"), true);
     AddPropertyParentPointName(i->CurveName(), tr("Curve:"), AttrCurve);
     AddPropertyFormula(tr("Width:"), i->GetFormulaWidth(), AttrWidth);
-    AddPropertySuffix(i, tr("Suffix:"));
+    AddPropertySubName(i, tr("Name:"));
     AddPropertyAlias(i, tr("Alias:"));
     AddPropertyCurvePenStyle(i,
                              tr("Pen style:"),
@@ -3686,9 +3730,9 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolGraduatedCurve(QGraphicsItem *i
 
     QPalette const comboBoxPalette = ComboBoxPalette();
 
-    AddPropertyObjectName(i, tr("Name:"), true);
+    AddPropertyObjectName(i, tr("Full name:"), true);
     AddPropertyParentPointName(i->CurveName(), tr("Curve:"), AttrCurve);
-    AddPropertySuffix(i, tr("Suffix:"));
+    AddPropertySubName(i, tr("Name:"));
     AddPropertyAlias(i, tr("Alias:"));
     AddPropertyCurvePenStyle(i,
                              tr("Pen style:"),
@@ -3936,6 +3980,9 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCutArc()
     valueArc.setValue(i->CurveName());
     m_idToProperty[AttrArc]->setValue(valueArc);
 
+    m_idToProperty[AttrCurveName1]->setValue(i->GetName1());
+    m_idToProperty[AttrCurveName2]->setValue(i->GetName2());
+
     m_idToProperty[AttrNotes]->setValue(i->GetNotes());
 
     m_idToProperty[AttrAlias1]->setValue(i->GetAliasSuffix1());
@@ -3957,6 +4004,9 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCutSpline()
     valueCurve.setValue(i->CurveName());
     m_idToProperty[AttrCurve]->setValue(valueCurve);
 
+    m_idToProperty[AttrCurveName1]->setValue(i->GetName1());
+    m_idToProperty[AttrCurveName2]->setValue(i->GetName2());
+
     m_idToProperty[AttrNotes]->setValue(i->GetNotes());
 
     m_idToProperty[AttrAlias1]->setValue(i->GetAliasSuffix1());
@@ -3977,6 +4027,9 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCutSplinePath()
     QVariant valueCurve;
     valueCurve.setValue(i->CurveName());
     m_idToProperty[AttrCurve]->setValue(valueCurve);
+
+    m_idToProperty[AttrCurveName1]->setValue(i->GetName1());
+    m_idToProperty[AttrCurveName2]->setValue(i->GetName2());
 
     m_idToProperty[AttrNotes]->setValue(i->GetNotes());
 
@@ -4210,6 +4263,16 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolPointOfIntersectionCurves()
     m_idToProperty[AttrCurve2]->setValue(valueCurve2);
 
     m_idToProperty[AttrNotes]->setValue(i->GetNotes());
+
+    m_idToProperty[AttrCurve1Name1]->setValue(i->GetCurve1Name1());
+    m_idToProperty[AttrCurve1Name2]->setValue(i->GetCurve1Name2());
+    m_idToProperty[AttrCurve2Name1]->setValue(i->GetCurve2Name1());
+    m_idToProperty[AttrCurve2Name2]->setValue(i->GetCurve2Name2());
+
+    m_idToProperty[AttrCurve1Alias1]->setValue(i->GetCurve1AliasSuffix1());
+    m_idToProperty[AttrCurve1Alias2]->setValue(i->GetCurve1AliasSuffix2());
+    m_idToProperty[AttrCurve2Alias1]->setValue(i->GetCurve2AliasSuffix1());
+    m_idToProperty[AttrCurve2Alias2]->setValue(i->GetCurve2AliasSuffix2());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -4533,13 +4596,18 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCurveIntersectAxis()
     m_idToProperty[AttrCurve]->setValue(valueCurve);
 
     m_idToProperty[AttrNotes]->setValue(i->GetNotes());
+
+    m_idToProperty[AttrName1]->setValue(i->GetName1());
+    m_idToProperty[AttrName2]->setValue(i->GetName2());
+
+    m_idToProperty[AttrAlias1]->setValue(i->GetAliasSuffix1());
+    m_idToProperty[AttrAlias2]->setValue(i->GetAliasSuffix2());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::UpdateOptionsToolRotation()
 {
     auto *i = qgraphicsitem_cast<VToolRotation *>(m_currentItem);
-    m_idToProperty[AttrSuffix]->setValue(i->Suffix());
 
     QVariant valueAngle;
     valueAngle.setValue(i->GetFormulaAngle());
@@ -4556,7 +4624,6 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolRotation()
 void VToolOptionsPropertyBrowser::UpdateOptionsToolMove()
 {
     auto *i = qgraphicsitem_cast<VToolMove *>(m_currentItem);
-    m_idToProperty[AttrSuffix]->setValue(i->Suffix());
 
     QVariant valueAngle;
     valueAngle.setValue(i->GetFormulaAngle());
@@ -4581,7 +4648,6 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolMove()
 void VToolOptionsPropertyBrowser::UpdateOptionsToolFlippingByLine()
 {
     auto *i = qgraphicsitem_cast<VToolFlippingByLine *>(m_currentItem);
-    m_idToProperty[AttrSuffix]->setValue(i->Suffix());
 
     QVariant valueFirstPoint;
     valueFirstPoint.setValue(i->FirstLinePointName());
@@ -4599,7 +4665,6 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolFlippingByAxis()
 {
     auto *i = qgraphicsitem_cast<VToolFlippingByAxis *>(m_currentItem);
     m_idToProperty[AttrAxisType]->setValue(static_cast<int>(i->GetAxisType()) - 1);
-    m_idToProperty[AttrSuffix]->setValue(i->Suffix());
 
     QVariant valueOriginPoint;
     valueOriginPoint.setValue(i->OriginPointName());
@@ -4764,7 +4829,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolParallelCurve()
 
     m_idToProperty[AttrNotes]->setValue(i->GetNotes());
 
-    m_idToProperty[AttrSuffix]->setValue(i->GetSuffix());
+    m_idToProperty[*AttrSubName]->setValue(i->GetName());
 
     m_idToProperty[AttrAlias]->setValue(i->GetAliasSuffix());
 }
@@ -4797,7 +4862,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolGraduatedCurve()
 
     m_idToProperty[AttrNotes]->setValue(i->GetNotes());
 
-    m_idToProperty[AttrSuffix]->setValue(i->GetSuffix());
+    m_idToProperty[*AttrSubName]->setValue(i->GetName());
 
     m_idToProperty[AttrAlias]->setValue(i->GetAliasSuffix());
 }
@@ -4873,7 +4938,18 @@ auto VToolOptionsPropertyBrowser::PropertiesList() -> QStringList
         AttrAlias2,                         /* 64 */
         *AttrHold,                          /* 65 */
         *AttrVisible,                       /* 66 */
-        *AttrOpacity                        /* 67 */
+        *AttrOpacity,                       /* 67 */
+        *AttrSubName,                       /* 68 */
+        AttrCurveName1,                     /* 69 */
+        AttrCurveName2,                     /* 70 */
+        AttrCurve1Name1,                    /* 71 */
+        AttrCurve1Name2,                    /* 72 */
+        AttrCurve2Name1,                    /* 73 */
+        AttrCurve2Name2,                    /* 74 */
+        AttrCurve1Alias1,                   /* 75 */
+        AttrCurve1Alias2,                   /* 76 */
+        AttrCurve2Alias1,                   /* 77 */
+        AttrCurve2Alias2                    /* 78 */
     };
     return attr;
 }

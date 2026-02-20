@@ -249,7 +249,7 @@ void DialogRestrictDimension::RowSelected()
 
         const QVector<qreal> bases = dimension->ValidBases();
 
-        ui->comboBoxMin->blockSignals(true);
+        QSignalBlocker blockerMin(ui->comboBoxMin);
         ui->comboBoxMin->clear();
         QVector<qreal> const filtered =
             FilterByMinimum(FilterByMaximum(bases, restriction.GetMax()), restriction.GetMin());
@@ -257,13 +257,14 @@ void DialogRestrictDimension::RowSelected()
         int index = ui->comboBoxMin->findData(restriction.GetMin());
         ui->comboBoxMin->setCurrentIndex(index != -1 ? index : 0);
         ui->comboBoxMin->blockSignals(false);
+        blockerMin.unblock();
 
-        ui->comboBoxMax->blockSignals(true);
+        QSignalBlocker blockerMax(ui->comboBoxMax);
         ui->comboBoxMax->clear();
         FillBases(filtered, dimension, ui->comboBoxMax);
         index = ui->comboBoxMax->findData(restriction.GetMax());
         ui->comboBoxMax->setCurrentIndex(index != -1 ? index : ui->comboBoxMax->count() - 1);
-        ui->comboBoxMax->blockSignals(false);
+        blockerMax.unblock();
 
         EnableRestrictionControls(true);
     }
@@ -304,9 +305,10 @@ void DialogRestrictDimension::MinRestrictionChanged()
         const int currentRow = ui->tableWidget->currentRow();
         RefreshTable();
 
-        ui->tableWidget->blockSignals(true);
-        ui->tableWidget->selectRow(currentRow);
-        ui->tableWidget->blockSignals(false);
+        {
+            const QSignalBlocker blocker(ui->tableWidget);
+            ui->tableWidget->selectRow(currentRow);
+        }
 
         RowSelected();
     }
@@ -341,9 +343,10 @@ void DialogRestrictDimension::MaxRestrictionChanged()
         const int currentRow = ui->tableWidget->currentRow();
         RefreshTable();
 
-        ui->tableWidget->blockSignals(true);
-        ui->tableWidget->selectRow(currentRow);
-        ui->tableWidget->blockSignals(false);
+        {
+            const QSignalBlocker blocker(ui->tableWidget);
+            ui->tableWidget->selectRow(currentRow);
+        }
 
         RowSelected();
     }
@@ -498,7 +501,7 @@ void DialogRestrictDimension::InitDimensionGradation(const MeasurementDimension_
         current = control->currentData().toDouble();
     }
 
-    control->blockSignals(true);
+    QSignalBlocker blocker(control);
     control->clear();
 
     FillBases(DimensionRestrictedValues(dimension), dimension, control);
@@ -507,11 +510,11 @@ void DialogRestrictDimension::InitDimensionGradation(const MeasurementDimension_
     if (i != -1)
     {
         control->setCurrentIndex(i);
-        control->blockSignals(false);
+        blocker.unblock();
     }
     else
     {
-        control->blockSignals(false);
+        blocker.unblock();
         control->setCurrentIndex(0);
     }
 }
@@ -519,10 +522,10 @@ void DialogRestrictDimension::InitDimensionGradation(const MeasurementDimension_
 //---------------------------------------------------------------------------------------------------------------------
 void DialogRestrictDimension::InitTable()
 {
-    ui->tableWidget->blockSignals(true);
+    QSignalBlocker blocker(ui->tableWidget);
     ui->tableWidget->clear();
 
-    auto InitVerticalHeaderForDimension = [this](int index)
+    auto InitVerticalHeaderForDimension = [this](int index) -> void
     {
         if (m_dimensions.size() > index)
         {
@@ -533,7 +536,7 @@ void DialogRestrictDimension::InitTable()
         }
     };
 
-    auto InitHorizontalHeaderForDimension = [this](int index)
+    auto InitHorizontalHeaderForDimension = [this](int index) -> void
     {
         if (m_dimensions.size() > index)
         {
@@ -560,7 +563,7 @@ void DialogRestrictDimension::InitTable()
         InitHorizontalHeaderForDimension(2);
     }
 
-    ui->tableWidget->blockSignals(false);
+    blocker.unblock();
 
     RefreshTable();
     ui->tableWidget->selectRow(StartRow());
@@ -615,7 +618,7 @@ void DialogRestrictDimension::RefreshTable()
         }
     }
 
-    ui->tableWidget->blockSignals(true);
+    const QSignalBlocker blocker(ui->tableWidget);
     ui->tableWidget->clearContents();
 
     if (m_restrictionType == RestrictDimension::First)
@@ -642,8 +645,6 @@ void DialogRestrictDimension::RefreshTable()
     {
         ui->tableWidget->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     }
-
-    ui->tableWidget->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -712,13 +713,13 @@ void DialogRestrictDimension::EnableRestrictionControls(bool enable)
 {
     if (not enable)
     {
-        ui->comboBoxMin->blockSignals(true);
-        ui->comboBoxMin->setCurrentIndex(-1);
-        ui->comboBoxMin->blockSignals(false);
+        {
+        	const QSignalBlocker blocker(ui->comboBoxMin);
+        	ui->comboBoxMin->setCurrentIndex(-1);
+        }
 
-        ui->comboBoxMax->blockSignals(true);
+        const QSignalBlocker blocker(ui->comboBoxMax);
         ui->comboBoxMax->setCurrentIndex(-1);
-        ui->comboBoxMax->blockSignals(false);
     }
 
     ui->groupBoxRestriction->setEnabled(enable);

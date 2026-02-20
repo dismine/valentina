@@ -45,6 +45,7 @@
 #include "../../../vabstracttool.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatternconverter.h"
 #include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/exception/vexception.h"
@@ -64,9 +65,9 @@ void VToolFlippingByAxis::SetDialog()
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogFlippingByAxis> dialogTool = qobject_cast<DialogFlippingByAxis *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
+    dialogTool->CheckDependencyTreeComplete();
     dialogTool->SetOriginPointId(m_originPointId);
     dialogTool->SetAxisType(m_axisType);
-    dialogTool->SetSuffix(suffix);
     dialogTool->SetNotes(m_notes);
     dialogTool->SetSourceObjects(source);
 
@@ -84,7 +85,6 @@ auto VToolFlippingByAxis::Create(const QPointer<DialogTool> &dialog, VMainGraphi
     VToolFlippingByAxisInitData initData;
     initData.originPointId = dialogTool->GetOriginPointId();
     initData.axisType = dialogTool->GetAxisType();
-    initData.suffix = dialogTool->GetSuffix();
     initData.source = dialogTool->GetSourceObjects();
     initData.hasLinkedVisibilityGroup = dialogTool->HasLinkedVisibilityGroup();
     initData.visibilityGroupName = dialogTool->GetVisibilityGroupName();
@@ -118,6 +118,10 @@ auto VToolFlippingByAxis::Create(VToolFlippingByAxisInitData initData) -> VToolF
         initData.destination.clear(); // Try to avoid mistake, value must be empty
 
         initData.id = initData.data->getNextId(); // Just reserve id for tool
+    }
+    else
+    {
+        PrepareNames(initData);
     }
 
     VPatternGraph *patternGraph = initData.doc->PatternGraph();
@@ -235,11 +239,17 @@ void VToolFlippingByAxis::SaveDialog(QDomElement &domElement)
 
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetOriginPointId()));
     doc->SetAttribute(domElement, AttrAxisType, QString().setNum(static_cast<int>(dialogTool->GetAxisType())));
-    doc->SetAttribute(domElement, AttrSuffix, dialogTool->GetSuffix());
     doc->SetAttributeOrRemoveIf<QString>(domElement,
                                          AttrNotes,
                                          dialogTool->GetNotes(),
                                          [](const QString &notes) noexcept -> bool { return notes.isEmpty(); });
+
+    // We no longer need to handle suffix attribute here. The code can be removed.
+    Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
+    if (domElement.hasAttribute(AttrSuffix))
+    {
+        domElement.removeAttribute(AttrSuffix);
+    }
 
     source = dialogTool->GetSourceObjects();
     SaveSourceDestination(domElement);
@@ -275,6 +285,16 @@ auto VToolFlippingByAxis::MakeToolTip() const -> QString
         .arg(tr("Origin point"),        // 1
              OriginPointName(),         // 2
              VisibilityGroupToolTip()); // 3
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolFlippingByAxis::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogFlippingByAxis> dialogTool = qobject_cast<DialogFlippingByAxis *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    ProcessOperationToolOptions(oldDomElement, newDomElement, dialogTool->GetSourceObjects());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -393,20 +393,19 @@ void DialogEllipticalArc::SetApproximationScale(qreal value)
  */
 void DialogEllipticalArc::EvalRadiuses()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditRadius1->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditRadius1;
-    formulaData.labelResult = ui->labelResultRadius1;
-    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
+    Eval({.formula = ui->plainTextEditRadius1->toPlainText(),
+          .variables = data->DataVariables(),
+          .labelEditFormula = ui->labelEditRadius1,
+          .labelResult = ui->labelResultRadius1,
+          .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true)},
+         m_flagRadius1);
 
-    Eval(formulaData, m_flagRadius1);
-
-    formulaData.formula = ui->plainTextEditRadius2->toPlainText();
-    formulaData.labelEditFormula = ui->labelEditRadius2;
-    formulaData.labelResult = ui->labelResultRadius2;
-
-    Eval(formulaData, m_flagRadius2);
+    Eval({.formula = ui->plainTextEditRadius2->toPlainText(),
+          .variables = data->DataVariables(),
+          .labelEditFormula = ui->labelEditRadius2,
+          .labelResult = ui->labelResultRadius2,
+          .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true)},
+         m_flagRadius2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -415,26 +414,26 @@ void DialogEllipticalArc::EvalRadiuses()
  */
 void DialogEllipticalArc::EvalAngles()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditF1->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditF1;
-    formulaData.labelResult = ui->labelResultF1;
-    formulaData.postfix = degreeSymbol;
+    m_angleF1 = Eval({.formula = ui->plainTextEditF1->toPlainText(),
+                      .variables = data->DataVariables(),
+                      .labelEditFormula = ui->labelEditF1,
+                      .labelResult = ui->labelResultF1,
+                      .postfix = degreeSymbol},
+                     m_flagF1);
 
-    m_angleF1 = Eval(formulaData, m_flagF1);
+    m_angleF2 = Eval({.formula = ui->plainTextEditF2->toPlainText(),
+                      .variables = data->DataVariables(),
+                      .labelEditFormula = ui->labelEditF2,
+                      .labelResult = ui->labelResultF2,
+                      .postfix = degreeSymbol},
+                     m_flagF2);
 
-    formulaData.formula = ui->plainTextEditF2->toPlainText();
-    formulaData.labelEditFormula = ui->labelEditF2;
-    formulaData.labelResult = ui->labelResultF2;
-
-    m_angleF2 = Eval(formulaData, m_flagF2);
-
-    formulaData.formula = ui->plainTextEditRotationAngle->toPlainText();
-    formulaData.labelEditFormula = ui->labelEditRotationAngle;
-    formulaData.labelResult = ui->labelResultRotationAngle;
-
-    m_angleRotation = Eval(formulaData, m_flagRotationAngle);
+    m_angleRotation = Eval({.formula = ui->plainTextEditRotationAngle->toPlainText(),
+                            .variables = data->DataVariables(),
+                            .labelEditFormula = ui->labelEditRotationAngle,
+                            .labelResult = ui->labelResultRotationAngle,
+                            .postfix = degreeSymbol},
+                           m_flagRotationAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -661,6 +660,14 @@ void DialogEllipticalArc::ShowDialog(bool click)
     }
 
     FinishCreating();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEllipticalArc::CheckDependencyTreeComplete()
+{
+    const bool ready = m_doc->IsPatternGraphComplete();
+    ui->comboBoxBasePoint->setEnabled(ready);
+    ui->lineEditAlias->setEnabled(ready);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

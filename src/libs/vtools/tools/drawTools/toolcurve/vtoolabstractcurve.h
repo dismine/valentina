@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vabstractspline.h
+ **  @file   vtoolabstractcurve.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   4 3, 2014
  **
@@ -26,8 +26,8 @@
  **
  *************************************************************************/
 
-#ifndef VABSTRACTSPLINE_H
-#define VABSTRACTSPLINE_H
+#ifndef VTOOLABSTRACTCURVE_H
+#define VTOOLABSTRACTCURVE_H
 
 #include <QDomElement>
 #include <QGraphicsItem>
@@ -49,8 +49,9 @@
 
 class VControlPointSpline;
 template <class T> class QSharedPointer;
+class VAbstractCubicBezier;
 
-struct VAbstractSplineInitData : VDrawToolInitData
+struct VToolAbstractCurveInitData : VDrawToolInitData
 {
     QString color{ColorBlack};                            // NOLINT(misc-non-private-member-variables-in-classes)
     QString penStyle{TypeLineLine};                       // NOLINT(misc-non-private-member-variables-in-classes)
@@ -58,14 +59,14 @@ struct VAbstractSplineInitData : VDrawToolInitData
     QString aliasSuffix{};                                // NOLINT(misc-non-private-member-variables-in-classes)
 };
 
-class VAbstractSpline : public VDrawTool, public QGraphicsPathItem
+class VToolAbstractCurve : public VDrawTool, public QGraphicsPathItem
 {
     Q_OBJECT // NOLINT
 
 public:
-    VAbstractSpline(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes,
-                    QGraphicsItem *parent = nullptr);
-    ~VAbstractSpline() override = default;
+    VToolAbstractCurve(
+        VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes, QGraphicsItem *parent = nullptr);
+    ~VToolAbstractCurve() override = default;
 
     auto shape() const -> QPainterPath override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
@@ -91,7 +92,7 @@ public:
     auto GetDuplicate() const -> quint32;
 
     auto GetAliasSuffix() const -> QString;
-    void SetAliasSuffix(QString alias);
+    virtual void SetAliasSuffix(const QString &alias) = 0;
 
     void GroupVisibility(quint32 object, bool visible) override;
 
@@ -144,7 +145,7 @@ protected:
     template <typename T> static void InitElArcToolConnections(VMainGraphicsScene *scene, T *tool);
 
 private:
-    Q_DISABLE_COPY_MOVE(VAbstractSpline) // NOLINT
+    Q_DISABLE_COPY_MOVE(VToolAbstractCurve) // NOLINT
 
     bool m_isHovered{false};
     bool m_detailsMode{false};
@@ -155,7 +156,8 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T> inline void VAbstractSpline::ShowToolVisualization(bool show)
+template<typename T>
+inline void VToolAbstractCurve::ShowToolVisualization(bool show)
 {
     if (show)
     {
@@ -193,7 +195,8 @@ template <typename T> inline void VAbstractSpline::ShowToolVisualization(bool sh
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T> inline void VAbstractSpline::InitSplineToolConnections(VMainGraphicsScene *scene, T *tool)
+template<typename T>
+inline void VToolAbstractCurve::InitSplineToolConnections(VMainGraphicsScene *scene, T *tool)
 {
     SCASSERT(scene != nullptr)
     SCASSERT(tool != nullptr)
@@ -204,7 +207,8 @@ template <typename T> inline void VAbstractSpline::InitSplineToolConnections(VMa
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T> inline void VAbstractSpline::InitSplinePathToolConnections(VMainGraphicsScene *scene, T *tool)
+template<typename T>
+inline void VToolAbstractCurve::InitSplinePathToolConnections(VMainGraphicsScene *scene, T *tool)
 {
     SCASSERT(scene != nullptr)
     SCASSERT(tool != nullptr)
@@ -215,7 +219,8 @@ template <typename T> inline void VAbstractSpline::InitSplinePathToolConnections
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T> inline void VAbstractSpline::InitArcToolConnections(VMainGraphicsScene *scene, T *tool)
+template<typename T>
+inline void VToolAbstractCurve::InitArcToolConnections(VMainGraphicsScene *scene, T *tool)
 {
     SCASSERT(scene != nullptr)
     SCASSERT(tool != nullptr)
@@ -226,7 +231,8 @@ template <typename T> inline void VAbstractSpline::InitArcToolConnections(VMainG
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T> inline void VAbstractSpline::InitElArcToolConnections(VMainGraphicsScene *scene, T *tool)
+template<typename T>
+inline void VToolAbstractCurve::InitElArcToolConnections(VMainGraphicsScene *scene, T *tool)
 {
     SCASSERT(scene != nullptr)
     SCASSERT(tool != nullptr)
@@ -237,36 +243,78 @@ template <typename T> inline void VAbstractSpline::InitElArcToolConnections(VMai
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline auto VAbstractSpline::IsDetailsMode() const -> bool
+inline auto VToolAbstractCurve::IsDetailsMode() const -> bool
 {
     return m_detailsMode;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline auto VAbstractSpline::GetAcceptHoverEvents() const -> bool
+inline auto VToolAbstractCurve::GetAcceptHoverEvents() const -> bool
 {
     return m_acceptHoverEvents;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline auto VAbstractSpline::GetSceneType() const -> SceneObject
+inline auto VToolAbstractCurve::GetSceneType() const -> SceneObject
 {
     return sceneType;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline void VAbstractSpline::SetSceneType(SceneObject newSceneType)
+inline void VToolAbstractCurve::SetSceneType(SceneObject newSceneType)
 {
     sceneType = newSceneType;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline void VAbstractSpline::SetAcceptHoverEvents(bool newAcceptHoverEvents)
+inline void VToolAbstractCurve::SetAcceptHoverEvents(bool newAcceptHoverEvents)
 {
     m_acceptHoverEvents = newAcceptHoverEvents;
 }
 
-class VToolAbstractArc : public VAbstractSpline
+class VToolAbstractBezier : public VToolAbstractCurve
+{
+    Q_OBJECT // NOLINT
+
+public:
+    VToolAbstractBezier(
+        VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes, QGraphicsItem *parent = nullptr);
+    ~VToolAbstractBezier() override = default;
+
+    void SetAliasSuffix(const QString &alias) override;
+
+protected:
+    struct ToolChanges
+    {
+        QString oldP1Label{};
+        QString newP1Label{};
+        QString oldP4Label{};
+        QString newP4Label{};
+        QString oldAliasSuffix{};
+        QString newAliasSuffix{};
+
+        auto HasChanges() const -> bool
+        {
+            return oldP1Label != newP1Label || oldP4Label != newP4Label || oldAliasSuffix != newAliasSuffix;
+        }
+
+        auto P1LabelChanged() const -> bool { return oldP1Label != newP1Label; }
+        auto P4LabelChanged() const -> bool { return oldP4Label != newP4Label; }
+        auto AliasSuffixChanged() const -> bool { return oldAliasSuffix != newAliasSuffix; }
+    };
+
+    void ProcessSplineToolOptions(const QDomElement &oldDomElement,
+                                  const QDomElement &newDomElement,
+                                  const ToolChanges &changes);
+    void ProcessSplinePathToolOptions(const QDomElement &oldDomElement,
+                                      const QDomElement &newDomElement,
+                                      const ToolChanges &changes);
+
+private:
+    Q_DISABLE_COPY_MOVE(VToolAbstractBezier) // NOLINT
+};
+
+class VToolAbstractArc : public VToolAbstractCurve
 {
     Q_OBJECT // NOLINT
 
@@ -277,8 +325,103 @@ public:
 
     auto CenterPointName() const -> QString;
 
+    void SetAliasSuffix(const QString &alias) override;
+
+protected:
+    struct ToolChanges
+    {
+        QString oldCenterLabel{};
+        QString newCenterLabel{};
+        QString oldAliasSuffix{};
+        QString newAliasSuffix{};
+
+        auto HasChanges() const -> bool { return oldCenterLabel != newCenterLabel || oldAliasSuffix != newAliasSuffix; }
+
+        auto CenterLabelChanged() const -> bool { return oldCenterLabel != newAliasSuffix; }
+        auto AliasSuffixChanged() const -> bool { return oldAliasSuffix != newAliasSuffix; }
+    };
+
+    void ProcessArcToolOptions(const QDomElement &oldDomElement,
+                               const QDomElement &newDomElement,
+                               const ToolChanges &changes);
+
 private:
     Q_DISABLE_COPY_MOVE(VToolAbstractArc) // NOLINT
 };
 
-#endif // VABSTRACTSPLINE_H
+enum class VToolAbstractOffsetCurveField : quint8
+{
+    Name,
+    AliasSuffix
+};
+
+class VToolAbstractOffsetCurve : public VToolAbstractCurve
+{
+    Q_OBJECT // NOLINT
+
+public:
+    VToolAbstractOffsetCurve(VAbstractPattern *doc,
+                             VContainer *data,
+                             quint32 id,
+                             quint32 originCurveId,
+                             QString name,
+                             const QString &notes,
+                             QGraphicsItem *parent = nullptr);
+    ~VToolAbstractOffsetCurve() override = default;
+
+    auto GetApproximationScale() const -> qreal override;
+    void SetApproximationScale(qreal value);
+
+    auto GetName() const -> QString;
+    void SetName(const QString &name);
+
+    void SetAliasSuffix(const QString &alias) override;
+
+    auto CurveName() const -> QString;
+
+protected:
+    struct ToolChanges
+    {
+        QString oldName{};
+        QString newName{};
+        QString oldAliasSuffix{};
+        QString newAliasSuffix{};
+
+        auto HasChanges() const -> bool { return oldName != newName || oldAliasSuffix != newAliasSuffix; }
+
+        auto NameChanged() const -> bool { return oldName != newName; }
+        auto AliasSuffixChanged() const -> bool { return oldAliasSuffix != newAliasSuffix; }
+    };
+
+    void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    void ReadToolAttributes(const QDomElement &domElement) override;
+
+    void ProcessOffsetCurveToolOptions(const QDomElement &oldDomElement,
+                                       const QDomElement &newDomElement,
+                                       const ToolChanges &changes);
+
+    auto OriginCurveId() const -> quint32;
+
+private:
+    Q_DISABLE_COPY_MOVE(VToolAbstractOffsetCurve) // NOLINT
+
+    quint32 m_originCurveId;
+    QString m_name;
+
+    void UpdateNameField(VToolAbstractOffsetCurveField field, const QString &value);
+    auto HasConflict(const QString &value, VToolAbstractOffsetCurveField currentField) const -> bool;
+};
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VToolAbstractOffsetCurve::GetName() const -> QString
+{
+    return m_name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VToolAbstractOffsetCurve::OriginCurveId() const -> quint32
+{
+    return m_originCurveId;
+}
+
+#endif // VTOOLABSTRACTCURVE_H

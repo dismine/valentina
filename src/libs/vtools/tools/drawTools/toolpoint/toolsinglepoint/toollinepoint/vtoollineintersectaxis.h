@@ -88,6 +88,7 @@ protected:
     void SetVisualization() override;
     auto MakeToolTip() const -> QString override;
     void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+    void ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement) override;
 
 private:
     Q_DISABLE_COPY_MOVE(VToolLineIntersectAxis) // NOLINT

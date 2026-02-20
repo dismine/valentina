@@ -43,6 +43,12 @@
 #include "vspline.h"
 #include "vsplinepath.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VArc default constructor.
@@ -66,7 +72,7 @@ VArc::VArc(const VPointF &center, qreal radius, const QString &formulaRadius, qr
   : VAbstractArc(GOType::Arc, center, f1, formulaF1, f2, formulaF2, idObject, mode),
     d(new VArcData(radius, formulaRadius))
 {
-    CreateName();
+    VArc::CreateName();
     SetFlipped(radius < 0);
 }
 
@@ -75,7 +81,7 @@ VArc::VArc(const VPointF &center, qreal radius, qreal f1, qreal f2)
   : VAbstractArc(GOType::Arc, center, f1, f2, NULL_ID, Draw::Calculation),
     d(new VArcData(radius))
 {
-    CreateName();
+    VArc::CreateName();
     SetFlipped(radius < 0);
 }
 
@@ -85,7 +91,7 @@ VArc::VArc(qreal length, const QString &formulaLength, const VPointF &center, qr
   : VAbstractArc(GOType::Arc, formulaLength, center, f1, formulaF1, idObject, mode),
     d(new VArcData(radius, formulaRadius))
 {
-    CreateName();
+    VArc::CreateName();
     FindF2(length);
 }
 
@@ -94,7 +100,7 @@ VArc::VArc(qreal length, const VPointF &center, qreal radius, qreal f1)
   : VAbstractArc(GOType::Arc, center, f1, NULL_ID, Draw::Calculation),
     d(new VArcData(radius))
 {
-    CreateName();
+    VArc::CreateName();
     FindF2(length);
 }
 
@@ -134,7 +140,7 @@ auto VArc::operator=(VArc &&arc) noexcept -> VArc &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VArc::Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix) const -> VArc
+auto VArc::Rotate(const QPointF &originPoint, qreal degrees, const QString &name) const -> VArc
 {
     const VPointF center = GetCenter().Rotate(originPoint, degrees);
 
@@ -145,22 +151,20 @@ auto VArc::Rotate(const QPointF &originPoint, qreal degrees, const QString &pref
     const qreal f2 = QLineF(static_cast<QPointF>(center), p2).angle();
 
     VArc arc(center, d->radius, f1, f2);
-    arc.setName(name() + prefix);
-
-    if (not GetAliasSuffix().isEmpty())
+    if (!name.isEmpty())
     {
-        arc.SetAliasSuffix(GetAliasSuffix() + prefix);
+        arc.SetNameSuffix(name);
     }
-
     arc.SetColor(GetColor());
     arc.SetPenStyle(GetPenStyle());
     arc.SetFlipped(IsFlipped());
     arc.SetApproximationScale(GetApproximationScale());
+    arc.SetDerivative(true);
     return arc;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VArc::Flip(const QLineF &axis, const QString &prefix) const -> VArc
+auto VArc::Flip(const QLineF &axis, const QString &name) const -> VArc
 {
     const VPointF center = GetCenter().Flip(axis);
 
@@ -171,22 +175,20 @@ auto VArc::Flip(const QLineF &axis, const QString &prefix) const -> VArc
     const qreal f2 = QLineF(static_cast<QPointF>(center), p2).angle();
 
     VArc arc(center, d->radius, f1, f2);
-    arc.setName(name() + prefix);
-
-    if (not GetAliasSuffix().isEmpty())
+    if (!name.isEmpty())
     {
-        arc.SetAliasSuffix(GetAliasSuffix() + prefix);
+        arc.SetNameSuffix(name);
     }
-
     arc.SetColor(GetColor());
     arc.SetPenStyle(GetPenStyle());
     arc.SetFlipped(not IsFlipped());
     arc.SetApproximationScale(GetApproximationScale());
+    arc.SetDerivative(true);
     return arc;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VArc::Move(qreal length, qreal angle, const QString &prefix) const -> VArc
+auto VArc::Move(qreal length, qreal angle, const QString &name) const -> VArc
 {
     const VPointF center = GetCenter().Move(length, angle);
 
@@ -197,17 +199,15 @@ auto VArc::Move(qreal length, qreal angle, const QString &prefix) const -> VArc
     const qreal f2 = QLineF(static_cast<QPointF>(center), p2).angle();
 
     VArc arc(center, d->radius, f1, f2);
-    arc.setName(name() + prefix);
-
-    if (not GetAliasSuffix().isEmpty())
+    if (!name.isEmpty())
     {
-        arc.SetAliasSuffix(GetAliasSuffix() + prefix);
+        arc.SetNameSuffix(name);
     }
-
     arc.SetColor(GetColor());
     arc.SetPenStyle(GetPenStyle());
     arc.SetFlipped(IsFlipped());
     arc.SetApproximationScale(GetApproximationScale());
+    arc.SetDerivative(true);
     return arc;
 }
 
@@ -409,24 +409,10 @@ auto VArc::OptimalApproximationScale(qreal radius, qreal f1, qreal f2, qreal tol
 //---------------------------------------------------------------------------------------------------------------------
 void VArc::CreateName()
 {
-    QString name = ARC_ + this->GetCenter().name();
-    const auto nameStr = QStringLiteral("_%1");
-
-    if (getMode() == Draw::Modeling && getIdObject() != NULL_ID)
+    if (!IsDerivative())
     {
-        name += nameStr.arg(getIdObject());
+        setName(GetTypeHead() + HeadlessName());
     }
-    else if (VAbstractCurve::id() != NULL_ID)
-    {
-        name += nameStr.arg(VAbstractCurve::id());
-    }
-
-    if (GetDuplicate() > 0)
-    {
-        name += nameStr.arg(GetDuplicate());
-    }
-
-    setName(name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -439,7 +425,51 @@ void VArc::CreateAlias()
         return;
     }
 
-    SetAlias(ARC_ + aliasSuffix);
+    SetAlias(GetTypeHead() + aliasSuffix);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VArc::SetNameSuffix(const QString &suffix)
+{
+    setName(GetTypeHead() + suffix);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VArc::HeadlessName() const -> QString
+{
+    if (IsDerivative())
+    {
+        const QString fullName = name();
+        const QString prefix = GetTypeHead();
+        if (const QString headless = fullName.startsWith(prefix) ? fullName.sliced(prefix.length()) : fullName;
+            !headless.isEmpty())
+        {
+            return headless;
+        }
+    }
+
+    QString name = GetCenter().name();
+    if (getMode() == Draw::Modeling && getIdObject() != NULL_ID)
+    {
+        name += u"_%1"_s.arg(getIdObject());
+    }
+    else if (VAbstractCurve::id() != NULL_ID)
+    {
+        name += u"_%1"_s.arg(VAbstractCurve::id());
+    }
+
+    if (GetDuplicate() > 0)
+    {
+        name += u"_%1"_s.arg(GetDuplicate());
+    }
+
+    return name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VArc::GetTypeHead() const -> QString
+{
+    return ARC_;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

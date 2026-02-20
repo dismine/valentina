@@ -59,9 +59,6 @@ public:
     auto GetAngle() const -> QString;
     void SetAngle(const QString &value);
 
-    auto GetSuffix() const -> QString;
-    void SetSuffix(const QString &value);
-
     auto GetVisibilityGroupName() const -> QString;
     void SetVisibilityGroupName(const QString &name);
 
@@ -81,6 +78,8 @@ public:
     auto GetSourceObjects() const -> QVector<SourceItem>;
     void SetSourceObjects(const QVector<SourceItem> &value);
 
+    void CheckDependencyTreeComplete() override;
+
 public slots:
     void ChosenObject(quint32 id, const SceneObject &type) override;
     void SelectedObject(bool selected, quint32 object, quint32 tool) override;
@@ -89,11 +88,10 @@ private slots:
     /** @brief DeployAngleTextEdit grow or shrink formula input */
     void DeployAngleTextEdit();
     void FXAngle();
-    void SuffixChanged();
     void GroupNameChanged();
     void EvalAngle();
     void ShowSourceDetails(int row);
-    void AliasChanged(const QString &text);
+    void NameChanged(const QString &text);
     void PenStyleChanged();
     void ColorChanged();
 
@@ -117,34 +115,32 @@ private:
     QTimer *timerAngle;
 
     /** @brief angle formula of angle */
-    QString formulaAngle;
+    QString formulaAngle{};
 
     /** @brief formulaBaseHeightAngle base height defined by dialogui */
-    int formulaBaseHeightAngle;
+    int formulaBaseHeightAngle{0};
 
-    QVector<SourceItem> sourceObjects{};
+    QVector<SourceItem> m_sourceObjects{};
 
-    bool stage1;
+    bool stage1{true};
 
-    QString m_suffix;
-
-    bool m_firstRelease;
+    bool m_firstRelease{false};
 
     /** @brief flagAngle true if value of angle is correct */
-    bool flagAngle;
-    bool flagName;
-    bool flagGroupName;
-    bool flagError;
-    bool flagAlias{true};
+    bool flagAngle{false};
+    bool flagName{true};
+    bool flagGroupName{true};
+    bool flagError{false};
 
     QStringList m_groupTags{};
 
+    bool m_dependencyReady{true};
+
     void FillSourceList();
 
-    void ValidateSourceAliases();
-    void SetAliasValid(quint32 id, bool valid);
-
     void InitIcons();
+
+    auto SaveSourceObjects() const -> QVector<SourceItem>;
 };
 
 #endif // DIALOGROTATION_H

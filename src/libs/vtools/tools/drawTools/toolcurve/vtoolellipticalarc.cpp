@@ -50,7 +50,7 @@
 #include "../vpatterndb/vformula.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "vabstractspline.h"
+#include "vtoolabstractcurve.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
@@ -77,6 +77,21 @@ VToolEllipticalArc::VToolEllipticalArc(const VToolEllipticalArcInitData &initDat
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VToolEllipticalArc::GatherToolChanges() const -> VToolAbstractArc::ToolChanges
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogEllipticalArc> dialogTool = qobject_cast<DialogEllipticalArc *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    const QSharedPointer<VAbstractArc> arc = VAbstractTool::data.GeometricObject<VAbstractArc>(m_id);
+
+    return {.oldCenterLabel = CenterPointName(),
+            .newCenterLabel = VAbstractTool::data.GetGObject(dialogTool->GetCenter())->name(),
+            .oldAliasSuffix = arc->GetAliasSuffix(),
+            .newAliasSuffix = dialogTool->GetAliasSuffix()};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setDialog set dialog when user want change tool option.
  */
@@ -86,6 +101,7 @@ void VToolEllipticalArc::SetDialog()
     const QPointer<DialogEllipticalArc> dialogTool = qobject_cast<DialogEllipticalArc *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VEllipticalArc> elArc = VAbstractTool::data.GeometricObject<VEllipticalArc>(m_id);
+    dialogTool->CheckDependencyTreeComplete();
     dialogTool->SetCenter(elArc->GetCenter().id());
     dialogTool->SetF1(elArc->GetFormulaF1());
     dialogTool->SetF2(elArc->GetFormulaF2());
@@ -404,7 +420,7 @@ void VToolEllipticalArc::SaveDialog(QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolEllipticalArc::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-    VAbstractSpline::SaveOptions(tag, obj);
+    VToolAbstractArc::SaveOptions(tag, obj);
 
     QSharedPointer<VEllipticalArc> const elArc = qSharedPointerDynamicCast<VEllipticalArc>(obj);
     SCASSERT(elArc.isNull() == false)
@@ -473,4 +489,10 @@ auto VToolEllipticalArc::MakeToolTip() const -> QString
                                      tr("Rotation"))                                                    // 14
                                 .arg(elArc->GetRotationAngle());                                        // 15
     return toolTip;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolEllipticalArc::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    ProcessArcToolOptions(oldDomElement, newDomElement, GatherToolChanges());
 }

@@ -71,11 +71,14 @@ protected:
     void ReadToolAttributes(const QDomElement &domElement) override;
     void SetVisualization() override;
     auto MakeToolTip() const -> QString override;
+    void ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement) override;
 
 private:
     Q_DISABLE_COPY_MOVE(VToolCutArc) // NOLINT
 
     explicit VToolCutArc(const VToolCutInitData &initData, QGraphicsItem *parent = nullptr);
+
+    auto GatherToolChanges() const -> ToolChanges;
 };
 
 #endif // VTOOLCUTARC_H

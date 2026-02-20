@@ -63,7 +63,7 @@ auto DialogDimensionCustomNames::CustomNames() const -> QMap<MeasurementDimensio
 //---------------------------------------------------------------------------------------------------------------------
 void DialogDimensionCustomNames::InitTable(const QMap<MeasurementDimension, MeasurementDimension_p> &dimensions)
 {
-    ui->tableWidget->blockSignals(true);
+    const QSignalBlocker blocker(ui->tableWidget);
     ui->tableWidget->clearContents();
 
     ui->tableWidget->setRowCount(static_cast<int>(dimensions.size()));
@@ -99,5 +99,4 @@ void DialogDimensionCustomNames::InitTable(const QMap<MeasurementDimension, Meas
     }
 
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    ui->tableWidget->blockSignals(false);
 }

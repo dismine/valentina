@@ -29,7 +29,6 @@
 #ifndef VTOOLSHOULDERPOINT_H
 #define VTOOLSHOULDERPOINT_H
 
-
 #include <QDomElement>
 #include <QGraphicsItem>
 #include <QMetaObject>
@@ -60,6 +59,8 @@ class VToolShoulderPoint : public VToolLinePoint
 {
     Q_OBJECT // NOLINT
 public:
+    ~VToolShoulderPoint() override = default;
+
     void SetDialog() override;
     static auto FindPoint(const QPointF &p1Line, const QPointF &p2Line, const QPointF &pShoulder, qreal length)
         -> QPointF;
@@ -87,6 +88,8 @@ protected:
     void ReadToolAttributes(const QDomElement &domElement) override;
     void SetVisualization() override;
     auto MakeToolTip() const -> QString override;
+    void ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement) override;
+
 private slots:
     void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) override;
 

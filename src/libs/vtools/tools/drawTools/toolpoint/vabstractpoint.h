@@ -50,9 +50,9 @@ class VAbstractPoint : public VDrawTool
 
 public:
     VAbstractPoint(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes);
-    virtual ~VAbstractPoint() = default;
+    ~VAbstractPoint() override = default;
 
-    virtual auto getTagName() const -> QString override;
+    auto getTagName() const -> QString override;
 
     template <typename T> void ShowToolVisualization(bool show);
 
@@ -60,7 +60,25 @@ public slots:
     void DeleteFromLabel();
 
 protected:
-    void SetPointName(quint32 id, const QString &name);
+    struct ToolChanges
+    {
+        quint32 pointId{NULL_ID};
+        QString oldLabel{};
+        QString newLabel{};
+
+        auto HasChanges() const -> bool { return oldLabel != newLabel; }
+
+        auto LabelChanged() const -> bool { return oldLabel != newLabel; }
+    };
+
+    void UpdatePointName(
+        quint32 pointId,
+        const QString &name,
+        const std::function<void(const QDomElement &, const QDomElement &, const ToolChanges &)> &ProcessOptions);
+
+    void ProcessPointToolOptions(const QDomElement &oldDomElement,
+                                 const QDomElement &newDomElement,
+                                 const ToolChanges &changes);
 
     template <typename T> static void InitToolConnections(VMainGraphicsScene *scene, T *tool);
 

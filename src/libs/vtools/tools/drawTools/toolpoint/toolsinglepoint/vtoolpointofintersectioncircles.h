@@ -90,6 +90,7 @@ protected:
     void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     void ReadToolAttributes(const QDomElement &domElement) override;
     void SetVisualization() override;
+    void ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement) override;
 
 private:
     Q_DISABLE_COPY_MOVE(VToolPointOfIntersectionCircles) // NOLINT
@@ -104,6 +105,8 @@ private:
 
     explicit VToolPointOfIntersectionCircles(const VToolPointOfIntersectionCirclesInitData &initData,
                                              QGraphicsItem *parent = nullptr);
+
+    auto GatherToolChanges() const -> ToolChanges;
 };
 
 #endif // VTOOLPOINTOFINTERSECTIONCIRCLES_H

@@ -267,25 +267,21 @@ auto VDependencyTreeModel::headerData(int section, Qt::Orientation orientation, 
 //---------------------------------------------------------------------------------------------------------------------
 auto VDependencyTreeModel::hasChildren(const QModelIndex &parent) const -> bool
 {
-    const VDependencyNode *node = GetNode(parent);
-    if (node->childrenLoaded)
+    if (const VDependencyNode *node = GetNode(parent); node->childrenLoaded)
     {
         return !node->children.isEmpty();
     }
 
-    return CanHaveChildren(node->objectId);
+    // Assume all unloaded nodes can have children
+    // The expand arrow disappears after loading if no children found
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VDependencyTreeModel::canFetchMore(const QModelIndex &parent) const -> bool
 {
     const VDependencyNode *node = GetNode(parent);
-    if (node->childrenLoaded)
-    {
-        return false;
-    }
-
-    return CanHaveChildren(node->objectId);
+    return !node->childrenLoaded;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -605,9 +601,7 @@ void VDependencyTreeModel::LoadDependencies(const QModelIndex &parentIndex, VDep
         return;
     }
 
-    QVector<vidtype> dependencies = FetchDependenciesForObject(node->objectId);
-
-    if (!dependencies.isEmpty())
+    if (const QVector<vidtype> dependencies = FetchDependenciesForObject(node->objectId); !dependencies.isEmpty())
     {
         beginInsertRows(parentIndex, 0, static_cast<int>(dependencies.size() - 1));
 
@@ -626,6 +620,9 @@ void VDependencyTreeModel::LoadDependencies(const QModelIndex &parentIndex, VDep
     }
 
     node->childrenLoaded = true;
+
+    // Notify the view to re-evaluate hasChildren and refresh the expand arrow
+    emit dataChanged(parentIndex, parentIndex, {Qt::DisplayRole});
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -858,24 +855,6 @@ auto VDependencyTreeModel::GetDisplayToolTipForObject(vidtype objectId) const ->
         default:
             return {};
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VDependencyTreeModel::CanHaveChildren(vidtype objectId) const -> bool
-{
-    if (m_doc == nullptr)
-    {
-        return false;
-    }
-
-    const VPatternGraph *graph = m_doc->PatternGraph();
-
-    auto Filter = [](const auto &node) -> auto
-    { return node.type != VNodeType::MODELING_TOOL && node.type != VNodeType::MODELING_OBJECT; };
-
-    auto const dependecies = graph->GetDependentNodes(objectId, Filter);
-
-    return !dependecies.isEmpty();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

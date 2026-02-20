@@ -95,9 +95,8 @@ void SetImageName(QTableWidgetItem *item, const VBackgroundPatternImage &image, 
 //---------------------------------------------------------------------------------------------------------------------
 void SetCheckBoxValue(QCheckBox *checkbox, bool value)
 {
-    checkbox->blockSignals(true);
+    const QSignalBlocker blocker(checkbox);
     checkbox->setChecked(value);
-    checkbox->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -222,7 +221,7 @@ void VWidgetBackgroundImages::UpdateImage(const QUuid &id)
         return;
     }
 
-    ui->tableWidget->blockSignals(true);
+    const QSignalBlocker blocker(ui->tableWidget);
 
     QTableWidgetItem *item = ui->tableWidget->item(row, ImageData::Hold);
     SetImageHold(item, image);
@@ -232,8 +231,6 @@ void VWidgetBackgroundImages::UpdateImage(const QUuid &id)
 
     item = ui->tableWidget->item(row, ImageData::Name);
     SetImageName(item, image, tr("Background image"));
-
-    ui->tableWidget->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -241,9 +238,10 @@ void VWidgetBackgroundImages::ImageSelected(const QUuid &id)
 {
     int const row = ImageRow(id);
 
-    ui->tableWidget->blockSignals(true);
-    ui->tableWidget->setCurrentCell(row, ImageData::Name);
-    ui->tableWidget->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->tableWidget);
+        ui->tableWidget->setCurrentCell(row, ImageData::Name);
+    }
 
     if (row != -1 && not ui->checkBoxRelativeTranslation->isChecked())
     {
@@ -667,9 +665,8 @@ void VWidgetBackgroundImages::ScaleWidthChanged(double value)
         ScaleUnit const unit = CurrentScaleUnit();
         if (unit == ScaleUnit::Percent)
         {
-            ui->doubleSpinBoxScaleHeight->blockSignals(true);
+            const QSignalBlocker blocker(ui->doubleSpinBoxScaleHeight);
             ui->doubleSpinBoxScaleHeight->setValue(value);
-            ui->doubleSpinBoxScaleHeight->blockSignals(false);
         }
         else
         {
@@ -677,9 +674,8 @@ void VWidgetBackgroundImages::ScaleWidthChanged(double value)
             qreal const heightPx = ImageHeight() * factor;
             qreal const height = HeightScaleUnitConvertor(heightPx, ScaleUnit::Px, unit);
 
-            ui->doubleSpinBoxScaleHeight->blockSignals(true);
+            const QSignalBlocker blocker(ui->doubleSpinBoxScaleHeight);
             ui->doubleSpinBoxScaleHeight->setValue(height);
-            ui->doubleSpinBoxScaleHeight->blockSignals(false);
         }
     }
 }
@@ -692,9 +688,8 @@ void VWidgetBackgroundImages::ScaleHeightChanged(double value)
         ScaleUnit const unit = CurrentScaleUnit();
         if (unit == ScaleUnit::Percent)
         {
-            ui->doubleSpinBoxScaleWidth->blockSignals(true);
+            const QSignalBlocker blocker(ui->doubleSpinBoxScaleWidth);
             ui->doubleSpinBoxScaleWidth->setValue(value);
-            ui->doubleSpinBoxScaleWidth->blockSignals(false);
         }
         else
         {
@@ -702,9 +697,8 @@ void VWidgetBackgroundImages::ScaleHeightChanged(double value)
             qreal const widthPx = ImageWidth() * factor;
             qreal const width = WidthScaleUnitConvertor(widthPx, ScaleUnit::Px, unit);
 
-            ui->doubleSpinBoxScaleHeight->blockSignals(true);
+            const QSignalBlocker blocker(ui->doubleSpinBoxScaleHeight);
             ui->doubleSpinBoxScaleHeight->setValue(width);
-            ui->doubleSpinBoxScaleHeight->blockSignals(false);
         }
     }
 }
@@ -738,7 +732,7 @@ void VWidgetBackgroundImages::ImagePositionChanged(const QUuid &id)
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetBackgroundImages::FillTable(const QVector<VBackgroundPatternImage> &images)
 {
-    ui->tableWidget->blockSignals(true);
+    const QSignalBlocker blocker(ui->tableWidget);
     ui->tableWidget->clear();
 
     ui->tableWidget->setColumnCount(3);
@@ -782,7 +776,6 @@ void VWidgetBackgroundImages::FillTable(const QVector<VBackgroundPatternImage> &
 
     ui->tableWidget->resizeColumnsToContents();
     ui->tableWidget->resizeRowsToContents();
-    ui->tableWidget->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -843,9 +836,10 @@ void VWidgetBackgroundImages::InitImageTranslation()
     ui->comboBoxTranslateUnit->addItem(tr("Centimeters"), QVariant(static_cast<int>(Unit::Cm)));
     ui->comboBoxTranslateUnit->addItem(tr("Inches"), QVariant(static_cast<int>(Unit::Inch)));
 
-    ui->comboBoxTranslateUnit->blockSignals(true);
-    ui->comboBoxTranslateUnit->setCurrentIndex(0);
-    ui->comboBoxTranslateUnit->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->comboBoxTranslateUnit);
+        ui->comboBoxTranslateUnit->setCurrentIndex(0);
+    }
 
     const int minTranslate = -10000;
     const int maxTranslate = 10000;
@@ -894,9 +888,10 @@ void VWidgetBackgroundImages::InitImageTranslation()
     ui->comboBoxScaleUnit->addItem(tr("Inches"), QVariant(static_cast<int>(ScaleUnit::Inch)));
     ui->comboBoxScaleUnit->addItem(tr("Pixels"), QVariant(static_cast<int>(ScaleUnit::Px)));
 
-    ui->comboBoxScaleUnit->blockSignals(true);
-    ui->comboBoxScaleUnit->setCurrentIndex(0);
-    ui->comboBoxScaleUnit->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->comboBoxScaleUnit);
+        ui->comboBoxScaleUnit->setCurrentIndex(0);
+    }
 
     const int minScale = -100000;
     const int maxScale = 100000;
@@ -917,29 +912,34 @@ void VWidgetBackgroundImages::InitImageTranslation()
             const qreal oldScaleWidth = ui->doubleSpinBoxScaleWidth->value();
             const qreal oldScaleHeight = ui->doubleSpinBoxScaleHeight->value();
 
-            ui->doubleSpinBoxScaleWidth->blockSignals(true);
-
-            ui->doubleSpinBoxScaleWidth->setMinimum(WidthScaleUnitConvertor(minScale, ScaleUnit::Percent, newUnit));
-            ui->doubleSpinBoxScaleWidth->setMinimum(WidthScaleUnitConvertor(minScale, ScaleUnit::Percent, newUnit));
-
-            ui->doubleSpinBoxScaleWidth->setValue(WidthScaleUnitConvertor(oldScaleWidth, m_oldImageScaleUnit, newUnit));
-            ui->doubleSpinBoxScaleWidth->blockSignals(false);
-
-            ui->doubleSpinBoxScaleHeight->blockSignals(true);
-
-            ui->doubleSpinBoxScaleHeight->setMaximum(HeightScaleUnitConvertor(maxScale, ScaleUnit::Percent, newUnit));
-            ui->doubleSpinBoxScaleHeight->setMaximum(HeightScaleUnitConvertor(maxScale, ScaleUnit::Percent, newUnit));
-
-            if (ui->checkBoxScaleProportionally->isChecked() && newUnit == ScaleUnit::Percent)
             {
-                ui->doubleSpinBoxScaleHeight->setValue(ui->doubleSpinBoxScaleWidth->value());
+                const QSignalBlocker blocker(ui->doubleSpinBoxScaleWidth);
+
+                ui->doubleSpinBoxScaleWidth->setMinimum(WidthScaleUnitConvertor(minScale, ScaleUnit::Percent, newUnit));
+                ui->doubleSpinBoxScaleWidth->setMinimum(WidthScaleUnitConvertor(minScale, ScaleUnit::Percent, newUnit));
+
+                ui->doubleSpinBoxScaleWidth->setValue(
+                    WidthScaleUnitConvertor(oldScaleWidth, m_oldImageScaleUnit, newUnit));
             }
-            else
+
             {
-                ui->doubleSpinBoxScaleHeight->setValue(
-                    HeightScaleUnitConvertor(oldScaleHeight, m_oldImageScaleUnit, newUnit));
+                const QSignalBlocker blocker(ui->doubleSpinBoxScaleHeight);
+
+                ui->doubleSpinBoxScaleHeight->setMaximum(
+                    HeightScaleUnitConvertor(maxScale, ScaleUnit::Percent, newUnit));
+                ui->doubleSpinBoxScaleHeight->setMaximum(
+                    HeightScaleUnitConvertor(maxScale, ScaleUnit::Percent, newUnit));
+
+                if (ui->checkBoxScaleProportionally->isChecked() && newUnit == ScaleUnit::Percent)
+                {
+                    ui->doubleSpinBoxScaleHeight->setValue(ui->doubleSpinBoxScaleWidth->value());
+                }
+                else
+                {
+                    ui->doubleSpinBoxScaleHeight->setValue(
+                        HeightScaleUnitConvertor(oldScaleHeight, m_oldImageScaleUnit, newUnit));
+                }
             }
-            ui->doubleSpinBoxScaleHeight->blockSignals(false);
 
             m_oldImageScaleUnit = newUnit;
         });

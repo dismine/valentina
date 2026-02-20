@@ -37,12 +37,12 @@
 
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vmisc/def.h"
-#include "vabstractspline.h"
+#include "vtoolabstractcurve.h"
 
 class VFormula;
 template <class T> class QSharedPointer;
 
-struct VToolEllipticalArcInitData : VAbstractSplineInitData
+struct VToolEllipticalArcInitData : VToolAbstractCurveInitData
 {
     quint32 center{NULL_ID};    // NOLINT(misc-non-private-member-variables-in-classes)
     QString radius1{'0'};       // NOLINT(misc-non-private-member-variables-in-classes)
@@ -101,10 +101,14 @@ protected:
     void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     void SetVisualization() override;
     auto MakeToolTip() const -> QString override;
+    void ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement) override;
 
 private:
     Q_DISABLE_COPY_MOVE(VToolEllipticalArc) // NOLINT
+
     explicit VToolEllipticalArc(const VToolEllipticalArcInitData &initData, QGraphicsItem *parent = nullptr);
+
+    auto GatherToolChanges() const -> ToolChanges;
 };
 
 #endif // VTOOLELLIPTICALARC_H

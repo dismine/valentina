@@ -37,12 +37,12 @@
 
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vmisc/def.h"
-#include "vabstractspline.h"
+#include "vtoolabstractcurve.h"
 
 class VFormula;
 template <class T> class QSharedPointer;
 
-struct VToolArcInitData : VAbstractSplineInitData
+struct VToolArcInitData : VToolAbstractCurveInitData
 {
     quint32 center{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
     QString radius{'0'};     // NOLINT(misc-non-private-member-variables-in-classes)
@@ -58,6 +58,7 @@ class VToolArc : public VToolAbstractArc
     Q_OBJECT // NOLINT
 
 public:
+    ~VToolArc() override = default;
     void SetDialog() override;
     static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                        VContainer *data) -> VToolArc *;
@@ -93,12 +94,14 @@ protected:
     void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     void SetVisualization() override;
     auto MakeToolTip() const -> QString override;
+    void ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement) override;
 
 private:
     Q_DISABLE_COPY_MOVE(VToolArc) // NOLINT
 
     explicit VToolArc(const VToolArcInitData &initData, QGraphicsItem *parent = nullptr);
-    ~VToolArc() override = default;
+
+    auto GatherToolChanges() const -> ToolChanges;
 };
 
 #endif // VTOOLARC_H

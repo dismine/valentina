@@ -29,13 +29,14 @@
 
 #include "../../../dialogs/tools/dialoggraduatedcurve.h"
 #include "../../../visualization/path/vistoolgraduatedcurve.h"
+#include "../ifc/ifcdef.h"
 #include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatternconverter.h"
 #include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vsplinepath.h"
 #include "../vmisc/compatibility.h"
 #include "../vpatterndb/variables/vincrement.h"
-#include "ifcdef.h"
 
 using namespace Qt::Literals::StringLiterals;
 
@@ -48,12 +49,13 @@ void VToolGraduatedCurve::SetDialog()
     const QPointer<DialogGraduatedCurve> dialogTool = qobject_cast<DialogGraduatedCurve *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VSplinePath> splPath = VAbstractTool::data.GeometricObject<VSplinePath>(m_id);
-    dialogTool->SetOriginCurveId(m_originCurveId);
+    dialogTool->CheckDependencyTreeComplete();
+    dialogTool->SetOriginCurveId(OriginCurveId());
     dialogTool->SetOffsets(m_offsets);
     dialogTool->SetPenStyle(splPath->GetPenStyle());
     dialogTool->SetColor(splPath->GetColor());
     dialogTool->SetApproximationScale(splPath->GetApproximationScale());
-    dialogTool->SetSuffix(m_suffix);
+    dialogTool->SetName(GetName());
     dialogTool->SetAliasSuffix(splPath->GetAliasSuffix());
     dialogTool->SetNotes(m_notes);
 }
@@ -71,7 +73,7 @@ auto VToolGraduatedCurve::Create(const QPointer<DialogTool> &dialog,
     VToolGraduatedCurveInitData initData;
     initData.originCurveId = dialogTool->GetOriginCurveId();
     initData.offsets = dialogTool->GetOffsets();
-    initData.suffix = dialogTool->GetSuffix();
+    initData.name = dialogTool->GetName();
     initData.color = dialogTool->GetColor();
     initData.penStyle = dialogTool->GetPenStyle();
     initData.approximationScale = dialogTool->GetApproximationScale();
@@ -117,7 +119,7 @@ auto VToolGraduatedCurve::Create(VToolGraduatedCurveInitData &initData) -> VTool
 
     const QSharedPointer<VAbstractCurve> curve = initData.data->GeometricObject<VAbstractCurve>(initData.originCurveId);
 
-    VSplinePath splPath = curve->Outline(widths, initData.suffix);
+    VSplinePath splPath = curve->Outline(widths, initData.name);
     splPath.SetColor(initData.color);
     splPath.SetPenStyle(initData.penStyle);
     splPath.SetApproximationScale(initData.approximationScale);
@@ -139,7 +141,7 @@ auto VToolGraduatedCurve::Create(VToolGraduatedCurveInitData &initData) -> VTool
     patternGraph->AddVertex(initData.id, VNodeType::TOOL, initData.doc->PatternBlockMapper()->GetActiveId());
 
     const auto varData = initData.data->DataDependencyVariables();
-    for (auto &offset : initData.offsets)
+    for (const auto &offset : std::as_const(initData.offsets))
     {
         initData.doc->FindFormulaDependencies(offset.formula, initData.id, varData);
     }
@@ -166,24 +168,6 @@ auto VToolGraduatedCurve::Create(VToolGraduatedCurveInitData &initData) -> VTool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VToolGraduatedCurve::GetApproximationScale() const -> qreal
-{
-    QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
-    SCASSERT(curve.isNull() == false)
-
-    return curve->GetApproximationScale();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolGraduatedCurve::SetApproximationScale(qreal value)
-{
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-    QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
-    curve->SetApproximationScale(value);
-    SaveOption(obj);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 auto VToolGraduatedCurve::GetGraduatedOffsets() const -> QVector<VGraduatedCurveOffset>
 {
     QVector<VGraduatedCurveOffset> widths;
@@ -203,12 +187,7 @@ auto VToolGraduatedCurve::GetGraduatedOffsets() const -> QVector<VGraduatedCurve
 
         localData.AddVariable(offsetVal);
 
-        VGraduatedCurveOffset offsetData;
-        offsetData.name = offset.name;
-        offsetData.offset = width;
-        offsetData.description = offset.description;
-
-        widths.append(offsetData);
+        widths.append({.name = offset.name, .offset = width, .description = offset.description});
     }
 
     return widths;
@@ -228,36 +207,11 @@ void VToolGraduatedCurve::SetGraduatedOffsets(const QVector<VGraduatedCurveOffse
             formula = offset.offset.GetFormula(FormulaType::FromUser);
         }
 
-        VRawGraduatedCurveOffset offsetData;
-        offsetData.name = offset.name;
-        offsetData.formula = formula;
-        offsetData.description = offset.description;
-
-        m_offsets.append(offsetData);
+        m_offsets.append({.name = offset.name, .formula = formula, .description = offset.description});
     }
 
     QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
     SaveOption(obj);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VToolGraduatedCurve::GetSuffix() const -> QString
-{
-    return m_suffix;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolGraduatedCurve::SetSuffix(QString suffix)
-{
-    m_suffix = suffix;
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-    SaveOption(obj);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VToolGraduatedCurve::CurveName() const -> QString
-{
-    return VAbstractTool::data.GetGObject(m_originCurveId)->ObjectName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -278,11 +232,9 @@ auto VToolGraduatedCurve::ExtractOffsetData(const QDomElement &domElement) -> QV
         if (const QDomElement element = QDOM_ELEMENT(nodeList, i).toElement();
             not element.isNull() && element.tagName() == VAbstractPattern::TagOffset)
         {
-            VRawGraduatedCurveOffset offsetData;
-            offsetData.name = VDomDocument::GetParametrString(element, AttrName);
-            offsetData.description = VDomDocument::GetParametrEmptyString(element, AttrDescription);
-            offsetData.formula = VDomDocument::GetParametrString(element, AttrWidth, QChar('0'));
-            offsets.append(offsetData);
+            offsets.append({.name = VDomDocument::GetParametrString(element, AttrName),
+                            .formula = VDomDocument::GetParametrString(element, AttrWidth, QChar('0')),
+                            .description = VDomDocument::GetParametrEmptyString(element, AttrDescription)});
         }
     }
 
@@ -312,7 +264,7 @@ void VToolGraduatedCurve::SaveDialog(QDomElement &domElement)
     SCASSERT(not dialogTool.isNull())
 
     doc->SetAttribute(domElement, AttrCurve, dialogTool->GetOriginCurveId());
-    doc->SetAttribute(domElement, AttrSuffix, dialogTool->GetSuffix());
+    doc->SetAttribute(domElement, AttrName, dialogTool->GetName());
     doc->SetAttribute(domElement, AttrColor, dialogTool->GetColor());
     doc->SetAttribute(domElement, AttrPenStyle, dialogTool->GetPenStyle());
     doc->SetAttribute(domElement, AttrAScale, dialogTool->GetApproximationScale());
@@ -327,16 +279,21 @@ void VToolGraduatedCurve::SaveDialog(QDomElement &domElement)
 
     QVector<VRawGraduatedCurveOffset> const offsets = dialogTool->GetOffsets();
     UpdateOffsets(domElement, offsets);
+
+    // We no longer need to handle suffix attribute here. The code can be removed.
+    Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
+    if (!dialogTool->GetName().isEmpty() && domElement.hasAttribute(AttrSuffix))
+    {
+        domElement.removeAttribute(AttrSuffix);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolGraduatedCurve::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-    VAbstractSpline::SaveOptions(tag, obj);
+    VToolAbstractOffsetCurve::SaveOptions(tag, obj);
 
     doc->SetAttribute(tag, AttrType, ToolType);
-    doc->SetAttribute(tag, AttrCurve, m_originCurveId);
-    doc->SetAttribute(tag, AttrSuffix, m_suffix);
 
     UpdateOffsets(tag, m_offsets);
 }
@@ -350,7 +307,7 @@ void VToolGraduatedCurve::SetVisualization()
         auto *visual = qobject_cast<VisToolGraduatedCurve *>(vis);
         SCASSERT(visual != nullptr)
 
-        visual->SetCurveId(m_originCurveId);
+        visual->SetCurveId(OriginCurveId());
 
         const bool osSeparator = VAbstractApplication::VApp()->Settings()->GetOsSeparator();
         const VTranslateVars *trVars = VAbstractApplication::VApp()->TrVars();
@@ -359,11 +316,7 @@ void VToolGraduatedCurve::SetVisualization()
         toUserOffsets.reserve(m_offsets.size());
         for (const auto &offset : std::as_const(m_offsets))
         {
-            VRawGraduatedCurveOffset offsetData;
-            offsetData.name = offset.name;
-            offsetData.formula = trVars->FormulaToUser(offset.formula, osSeparator);
-
-            toUserOffsets.append(offsetData);
+            toUserOffsets.append({.name = offset.name, .formula = trVars->FormulaToUser(offset.formula, osSeparator)});
         }
         visual->SetOffsets(toUserOffsets);
 
@@ -377,19 +330,27 @@ void VToolGraduatedCurve::SetVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolGraduatedCurve::ReadToolAttributes(const QDomElement &domElement)
 {
-    VAbstractSpline::ReadToolAttributes(domElement);
+    VToolAbstractOffsetCurve::ReadToolAttributes(domElement);
 
-    m_originCurveId = VDomDocument::GetParametrUInt(domElement, AttrCurve, NULL_ID_STR);
-    m_suffix = VDomDocument::GetParametrString(domElement, AttrSuffix);
     m_offsets = ExtractOffsetData(domElement);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolGraduatedCurve::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    ProcessOffsetCurveToolOptions(oldDomElement, newDomElement, GatherToolChanges());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VToolGraduatedCurve::VToolGraduatedCurve(const VToolGraduatedCurveInitData &initData, QGraphicsItem *parent)
-  : VAbstractSpline(initData.doc, initData.data, initData.id, initData.notes, parent),
-    m_offsets(initData.offsets),
-    m_originCurveId(initData.originCurveId),
-    m_suffix(initData.suffix)
+  : VToolAbstractOffsetCurve(initData.doc,
+                             initData.data,
+                             initData.id,
+                             initData.originCurveId,
+                             initData.name,
+                             initData.notes,
+                             parent),
+    m_offsets(initData.offsets)
 {
     SetSceneType(SceneObject::SplinePath);
 
@@ -412,4 +373,17 @@ void VToolGraduatedCurve::UpdateOffsets(QDomElement &tag, const QVector<VRawGrad
 
         tag.appendChild(offsetTag);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VToolGraduatedCurve::GatherToolChanges() const -> VToolAbstractOffsetCurve::ToolChanges
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogGraduatedCurve> dialogTool = qobject_cast<DialogGraduatedCurve *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    return {.oldName = GetName(),
+            .newName = dialogTool->GetName(),
+            .oldAliasSuffix = GetAliasSuffix(),
+            .newAliasSuffix = dialogTool->GetAliasSuffix()};
 }

@@ -53,7 +53,7 @@ DialogKnownMaterials::~DialogKnownMaterials()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogKnownMaterials::SetList(const QStringList &list)
 {
-    ui->listWidget->blockSignals(true);
+    QSignalBlocker blocker(ui->listWidget);
     ui->listWidget->clear();
 
     int row = -1;
@@ -66,7 +66,7 @@ void DialogKnownMaterials::SetList(const QStringList &list)
         }
     }
 
-    ui->listWidget->blockSignals(false);
+    blocker.unblock();
 
     if (ui->listWidget->count() > 0)
     {
@@ -101,9 +101,8 @@ void DialogKnownMaterials::ShowDetails()
         const QListWidgetItem *line = ui->listWidget->currentItem();
         if (line)
         {
-            ui->lineEditMaterial->blockSignals(true);
+            const QSignalBlocker blocker(ui->lineEditMaterial);
             ui->lineEditMaterial->setText(line->text());
-            ui->lineEditMaterial->blockSignals(false);
         }
     }
 
@@ -121,10 +120,10 @@ void DialogKnownMaterials::Add()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogKnownMaterials::Remove()
 {
-    ui->listWidget->blockSignals(true);
-    QListWidgetItem *curLine = ui->listWidget->takeItem(ui->listWidget->currentRow());
-    delete curLine;
-    ui->listWidget->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->listWidget);
+        delete ui->listWidget->takeItem(ui->listWidget->currentRow());
+    }
     ShowDetails();
 }
 
@@ -145,9 +144,8 @@ void DialogKnownMaterials::SetupControls()
 
     if (not enabled)
     {
-        ui->lineEditMaterial->blockSignals(true);
+        const QSignalBlocker blocker(ui->lineEditMaterial);
         ui->lineEditMaterial->clear();
-        ui->lineEditMaterial->blockSignals(false);
     }
 
     ui->toolButtonAdd->setEnabled(true);

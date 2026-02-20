@@ -46,9 +46,6 @@ public:
 
     void Do(const QString &name);
 
-    auto getDetId() const -> quint32;
-    auto getNewName() const -> QString;
-
 signals:
     void UpdateList();
 
@@ -59,17 +56,5 @@ private:
     QString m_oldName{};
     QString m_newName;
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-inline quint32 RenamePiece::getDetId() const
-{
-    return nodeId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline QString RenamePiece::getNewName() const
-{
-    return m_newName;
-}
 
 #endif // RENAMEPIECE_H

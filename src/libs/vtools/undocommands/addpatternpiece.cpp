@@ -51,14 +51,14 @@ void AddPatternPiece::undo()
 {
     qCDebug(vUndo, "Undo.");
 
-    if (doc->CountPatternBlockTags() <= 1)
+    if (Doc()->CountPatternBlockTags() <= 1)
     {
         emit ClearScene();
     }
     else
     {
-        QDomElement rootElement = doc->documentElement();
-        QDomElement const patternBlock = doc->PatternBlockMapper()->GetElementById(m_indexPatternBlock);
+        QDomElement rootElement = Doc()->documentElement();
+        QDomElement const patternBlock = Doc()->PatternBlockMapper()->GetElementById(m_indexPatternBlock);
         rootElement.removeChild(patternBlock);
         emit NeedFullParsing();
     }
@@ -69,14 +69,14 @@ void AddPatternPiece::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    if (doc->CountPatternBlockTags() == 0)
+    if (Doc()->CountPatternBlockTags() == 0)
     {
-        doc->CreateEmptyFile();
+        Doc()->CreateEmptyFile();
     }
 
-    QDomElement rootElement = doc->documentElement();
+    QDomElement rootElement = Doc()->documentElement();
 
-    rootElement.appendChild(xml);
+    rootElement.appendChild(GetElement());
 
     RedoFullParsing();
 }

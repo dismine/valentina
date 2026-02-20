@@ -38,6 +38,7 @@
 #include "../../../../vabstracttool.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatternconverter.h"
 #include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vabstractarc.h"
 #include "../vgeometry/varc.h"
@@ -75,6 +76,25 @@ VToolCutArc::VToolCutArc(const VToolCutInitData &initData, QGraphicsItem *parent
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VToolCutArc::GatherToolChanges() const -> VToolCut::ToolChanges
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogCutArc> dialogTool = qobject_cast<DialogCutArc *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    return {.oldLabel = VAbstractTool::data.GeometricObject<VPointF>(m_id)->name(),
+            .newLabel = dialogTool->GetPointName(),
+            .oldName1 = GetName1(),
+            .newName1 = dialogTool->GetName1(),
+            .oldName2 = GetName2(),
+            .newName2 = dialogTool->GetName2(),
+            .oldAliasSuffix1 = m_aliasSuffix1,
+            .newAliasSuffix1 = dialogTool->GetAliasSuffix1(),
+            .oldAliasSuffix2 = m_aliasSuffix2,
+            .newAliasSuffix2 = dialogTool->GetAliasSuffix2()};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setDialog set dialog when user want change tool option.
  */
@@ -84,12 +104,15 @@ void VToolCutArc::SetDialog()
     const QPointer<DialogCutArc> dialogTool = qobject_cast<DialogCutArc *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(m_id);
+    dialogTool->CheckDependencyTreeComplete();
     dialogTool->SetFormula(formula);
     dialogTool->setArcId(baseCurveId);
     dialogTool->SetPointName(point->name());
     dialogTool->SetNotes(m_notes);
     dialogTool->SetAliasSuffix1(m_aliasSuffix1);
     dialogTool->SetAliasSuffix2(m_aliasSuffix2);
+    dialogTool->SetName1(GetName1());
+    dialogTool->SetName2(GetName2());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -119,6 +142,8 @@ auto VToolCutArc::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene 
     initData.notes = dialogTool->GetNotes();
     initData.aliasSuffix1 = dialogTool->GetAliasSuffix1();
     initData.aliasSuffix2 = dialogTool->GetAliasSuffix2();
+    initData.name1 = dialogTool->GetName1();
+    initData.name2 = dialogTool->GetName2();
 
     VToolCutArc *point = Create(initData);
     if (point != nullptr)
@@ -155,9 +180,6 @@ auto VToolCutArc::Create(VToolCutInitData &initData) -> VToolCutArc *
         VArc arc2;
         cutPoint = arc->CutArc(VAbstractValApplication::VApp()->toPixel(result), &arc1, &arc2, initData.name);
 
-        arc1.SetAliasSuffix(initData.aliasSuffix1);
-        arc2.SetAliasSuffix(initData.aliasSuffix2);
-
         a1 = QSharedPointer<VArc>(new VArc(arc1));
         a2 = QSharedPointer<VArc>(new VArc(arc2));
     }
@@ -167,12 +189,22 @@ auto VToolCutArc::Create(VToolCutInitData &initData) -> VToolCutArc *
         VEllipticalArc arc2;
         cutPoint = arc->CutArc(VAbstractValApplication::VApp()->toPixel(result), &arc1, &arc2, initData.name);
 
-        arc1.SetAliasSuffix(initData.aliasSuffix1);
-        arc2.SetAliasSuffix(initData.aliasSuffix2);
-
         a1 = QSharedPointer<VEllipticalArc>(new VEllipticalArc(arc1));
         a2 = QSharedPointer<VEllipticalArc>(new VEllipticalArc(arc2));
     }
+
+    a1->SetDerivative(true);
+    a2->SetDerivative(true);
+
+    a1->SetAliasSuffix(initData.aliasSuffix1);
+    a2->SetAliasSuffix(initData.aliasSuffix2);
+
+    // This fix can be removed since name1 and name2 no longer should be empty
+    Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
+    FixSubCurveNames(initData, arc, a1, a2);
+
+    a1->SetNameSuffix(initData.name1);
+    a2->SetNameSuffix(initData.name2);
 
     auto *p = new VPointF(cutPoint, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
@@ -191,23 +223,23 @@ auto VToolCutArc::Create(VToolCutInitData &initData) -> VToolCutArc *
 
         a1->setId(initData.data->getNextId());
         initData.data->RegisterUniqueName(a1);
-        initData.data->AddArc(a1, /*a1->id()*/ NULL_ID, initData.id);
+        initData.data->AddArc(a1, NULL_ID, initData.id);
 
         a2->setId(initData.data->getNextId());
         initData.data->RegisterUniqueName(a2);
-        initData.data->AddArc(a2, /*a2->id()*/ NULL_ID, initData.id);
+        initData.data->AddArc(a2, NULL_ID, initData.id);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, p);
 
-        // a1->setId(initData.id + 1);
+        a1->setId(initData.id + 1);
         initData.data->RegisterUniqueName(a1);
-        initData.data->AddArc(a1, a1->id(), initData.id);
+        initData.data->AddArc(a1, NULL_ID, initData.id);
 
-        // a2->setId(initData.id + 2);
+        a2->setId(initData.id + 2);
         initData.data->RegisterUniqueName(a2);
-        initData.data->AddArc(a2, a2->id(), initData.id);
+        initData.data->AddArc(a2, NULL_ID, initData.id);
     }
 
     // TODO: Add segments to graph when we start showing them for users
@@ -271,6 +303,8 @@ void VToolCutArc::SaveDialog(QDomElement &domElement)
     doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrArc, QString().setNum(dialogTool->getArcId()));
+    doc->SetAttribute(domElement, AttrCurveName1, dialogTool->GetName1());
+    doc->SetAttribute(domElement, AttrCurveName2, dialogTool->GetName2());
     doc->SetAttributeOrRemoveIf<QString>(domElement,
                                          AttrAlias1,
                                          dialogTool->GetAliasSuffix1(),
@@ -348,25 +382,26 @@ auto VToolCutArc::MakeToolTip() const -> QString
 
     if (arc->getType() == GOType::Arc)
     {
-        auto ArcToolTip = [arcStr, lengthStr, startAngleStr, endAngleStr, radiusStr, labelStr](QString toolTip,
-                                                                                               const VArc &arc,
-                                                                                               const QString &arcNumber)
+        auto ArcToolTip =
+            [arcStr, lengthStr, startAngleStr, endAngleStr, radiusStr, labelStr](QString toolTip,
+                                                                                 const VArc &arc,
+                                                                                 const QString &arcNumber) -> QString
         {
             toolTip += u"<tr> <td><b>%10:</b> %11</td> </tr>"
                        u"<tr> <td><b>%1:</b> %2 %3</td> </tr>"
                        u"<tr> <td><b>%4:</b> %5 %3</td> </tr>"
                        u"<tr> <td><b>%6:</b> %7°</td> </tr>"
                        u"<tr> <td><b>%8:</b> %9°</td> </tr>"_s
-                           .arg(arcStr + arcNumber + QChar(QChar::Space) + lengthStr)              // %1
+                           .arg(arcStr + arcNumber + " "_L1 + lengthStr)                           // %1
                            .arg(VAbstractValApplication::VApp()->fromPixel(arc.GetLength()))       // %2
                            .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), // %3
-                                arcStr + arcNumber + QChar(QChar::Space) + radiusStr)              // %4
+                                arcStr + arcNumber + " "_L1 + radiusStr)                           // %4
                            .arg(arc.GetRadius())                                                   // %5
-                           .arg(arcStr + arcNumber + QChar(QChar::Space) + startAngleStr)          // %6
+                           .arg(arcStr + arcNumber + " "_L1 + startAngleStr)                       // %6
                            .arg(arc.GetStartAngle())                                               // %7
-                           .arg(arcStr + arcNumber + QChar(QChar::Space) + endAngleStr)            // %8
+                           .arg(arcStr + arcNumber + " "_L1 + endAngleStr)                         // %8
                            .arg(arc.GetEndAngle())                                                 // %9
-                           .arg(arcStr + arcNumber + QChar(QChar::Space) + labelStr,               // %10
+                           .arg(arcStr + arcNumber + " "_L1 + labelStr,                            // %10
                                 arc.ObjectName());                                                 // %11
             return toolTip;
         };
@@ -376,9 +411,11 @@ auto VToolCutArc::MakeToolTip() const -> QString
         arc->CutArc(VAbstractValApplication::VApp()->toPixel(length), &ar1, &ar2, point->name());
 
         ar1.setId(m_id + 1);
+        ar1.SetNameSuffix(m_name1);
         ar1.SetAliasSuffix(m_aliasSuffix1);
 
         ar2.setId(m_id + 2);
+        ar2.SetNameSuffix(m_name2);
         ar2.SetAliasSuffix(m_aliasSuffix2);
 
         return ArcToolTip(ArcToolTip(QStringLiteral("<table>"), ar1, QChar('1')), ar2, QChar('2'))
@@ -393,7 +430,7 @@ auto VToolCutArc::MakeToolTip() const -> QString
                              endAngleStr,
                              radius1Str,
                              radius2Str,
-                             labelStr](QString toolTip, const VEllipticalArc &arc, const QString &arcNumber)
+                             labelStr](QString toolTip, const VEllipticalArc &arc, const QString &arcNumber) -> QString
         {
             toolTip += u"<tr> <td><b>%12:</b> %13</td> </tr>"
                        u"<tr> <td><b>%1:</b> %2 %3</td> </tr>"
@@ -422,9 +459,11 @@ auto VToolCutArc::MakeToolTip() const -> QString
         arc->CutArc(VAbstractValApplication::VApp()->toPixel(length), &ar1, &ar2, point->name());
 
         ar1.setId(m_id + 1);
+        ar1.SetNameSuffix(m_name1);
         ar1.SetAliasSuffix(m_aliasSuffix1);
 
         ar2.setId(m_id + 2);
+        ar2.SetNameSuffix(m_name2);
         ar2.SetAliasSuffix(m_aliasSuffix2);
 
         return ElArcToolTip(ElArcToolTip(QStringLiteral("<table>"), ar1, QChar('1')), ar2, QChar('2'))
@@ -432,4 +471,10 @@ auto VToolCutArc::MakeToolTip() const -> QString
     }
 
     return {};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCutArc::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    ProcessToolCutOptions(oldDomElement, newDomElement, GatherToolChanges());
 }

@@ -112,6 +112,7 @@ const QString VAbstractPattern::TagBackgroundImages = QStringLiteral("backgroudI
 const QString VAbstractPattern::TagBackgroundImage = QStringLiteral("backgroudImage");
 const QString VAbstractPattern::TagPieceLabel = QStringLiteral("pieceLabel");
 const QString VAbstractPattern::TagOffset = QStringLiteral("offset");
+const QString VAbstractPattern::TagMirrorLine = QStringLiteral("mirrorLine"); // NOLINT(cert-err58-cpp)
 
 const QString VAbstractPattern::AttrName = QStringLiteral("name");
 const QString VAbstractPattern::AttrEnabled = QStringLiteral("enabled");
@@ -200,20 +201,16 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, dimensionDefValue, ("-1"_L1)) // NOLINT
 
 QT_WARNING_POP
 
+//---------------------------------------------------------------------------------------------------------------------
 void ReadExpressionAttribute(QVector<VFormulaField> &expressions, const QDomElement &element, const QString &attribute)
 {
-    VFormulaField formula;
-    formula.expression = VDomDocument::GetParametrEmptyString(element, attribute);
-
-    if (formula.expression.isEmpty())
+    const QString expression = VDomDocument::GetParametrEmptyString(element, attribute);
+    if (expression.isEmpty())
     {
         return;
     }
 
-    formula.element = element;
-    formula.attribute = attribute;
-
-    expressions.append(formula);
+    expressions.append({.expression = expression, .element = element, .attribute = attribute});
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -536,14 +533,12 @@ auto VAbstractPattern::ParsePieceCSARecords(const QDomElement &domElement) -> QV
     {
         if (const QDomElement element = QDOM_ELEMENT(nodeList, i).toElement(); not element.isNull())
         {
-            CustomSARecord record;
-            record.startPoint = GetParametrUInt(element, VAbstractPattern::AttrStart, NULL_ID_STR);
-            record.path = GetParametrUInt(element, VAbstractPattern::AttrPath, NULL_ID_STR);
-            record.endPoint = GetParametrUInt(element, VAbstractPattern::AttrEnd, NULL_ID_STR);
-            record.reverse = GetParametrBool(element, VAbstractPattern::AttrNodeReverse, falseStr);
-            record.includeType = static_cast<PiecePathIncludeType>(
-                GetParametrUInt(element, VAbstractPattern::AttrIncludeAs, QChar('1')));
-            records.append(record);
+            records.append({.startPoint = GetParametrUInt(element, VAbstractPattern::AttrStart, NULL_ID_STR),
+                            .path = GetParametrUInt(element, VAbstractPattern::AttrPath, NULL_ID_STR),
+                            .endPoint = GetParametrUInt(element, VAbstractPattern::AttrEnd, NULL_ID_STR),
+                            .reverse = GetParametrBool(element, VAbstractPattern::AttrNodeReverse, falseStr),
+                            .includeType = static_cast<PiecePathIncludeType>(
+                                GetParametrUInt(element, VAbstractPattern::AttrIncludeAs, QChar('1')))});
         }
     }
     return records;
@@ -1740,7 +1735,7 @@ auto VAbstractPattern::ListSplineExpressions() const -> QVector<VFormulaField>
             ReadExpressionAttribute(expressions, dom, AttrWidth);
         }
 
-        const QDomNodeList pathPointNodes = dom.elementsByTagName(AttrPathPoint);
+        const QDomNodeList pathPointNodes = dom.elementsByTagName(TagPathPoint);
         for (int i = 0; i < pathPointNodes.size(); ++i)
         {
             const QDomElement dom = pathPointNodes.at(i).toElement();
@@ -1749,6 +1744,10 @@ auto VAbstractPattern::ListSplineExpressions() const -> QVector<VFormulaField>
             ReadExpressionAttribute(expressions, dom, AttrKAsm1);
             ReadExpressionAttribute(expressions, dom, AttrKAsm2);
             ReadExpressionAttribute(expressions, dom, AttrAngle);
+            ReadExpressionAttribute(expressions, dom, AttrAngle1);
+            ReadExpressionAttribute(expressions, dom, AttrAngle2);
+            ReadExpressionAttribute(expressions, dom, AttrLength1);
+            ReadExpressionAttribute(expressions, dom, AttrLength2);
         }
     }
 
@@ -2032,14 +2031,12 @@ auto VAbstractPattern::GetFMeasurements(const QDomElement &element) const -> QVe
         {
             if (tagFMeasurement.tagName() == TagFMeasurement)
             {
-                VFinalMeasurement m;
-
-                m.name = GetParametrString(tagFMeasurement, AttrName,
-                                           QCoreApplication::translate("VAbstractPattern", "measurement"));
-                m.formula = GetParametrString(tagFMeasurement, AttrFormula, QChar('0'));
-                m.description = GetParametrEmptyString(tagFMeasurement, AttrDescription);
-
-                measurements.append(m);
+                measurements.append(
+                    {.name = GetParametrString(tagFMeasurement,
+                                               AttrName,
+                                               QCoreApplication::translate("VAbstractPattern", "measurement")),
+                     .formula = GetParametrString(tagFMeasurement, AttrFormula, QChar('0')),
+                     .description = GetParametrEmptyString(tagFMeasurement, AttrDescription)});
             }
             tagFMeasurement = tagFMeasurement.nextSiblingElement(TagFMeasurement);
         }
@@ -2444,14 +2441,6 @@ auto VAbstractPattern::GetGroups(const QString &patternPieceName) -> QMap<quint3
                     if (const QDomElement group = domNode.toElement();
                         not group.isNull() && group.tagName() == TagGroup)
                     {
-                        VGroupData groupData;
-                        const quint32 id = GetParametrUInt(group, AttrId, QChar('0'));
-                        groupData.visible = GetParametrBool(group, AttrVisible, trueStr);
-                        groupData.name = GetParametrString(
-                            group, AttrName, QCoreApplication::translate("VAbstractPattern", "New group"));
-                        groupData.tags = FilterGroupTags(GetParametrEmptyString(group, AttrTags));
-                        groupData.tool = GetParametrUInt(group, AttrTool, NULL_ID_STR);
-
                         items.resize(0);
 
                         const QDomNodeList nodeList = group.childNodes();
@@ -2468,9 +2457,16 @@ auto VAbstractPattern::GetGroups(const QString &patternPieceName) -> QMap<quint3
                             }
                         }
 
-                        groupData.items = items;
-
-                        data.insert(id, groupData);
+                        const quint32 id = GetParametrUInt(group, AttrId, QChar('0'));
+                        data.insert(id,
+                                    {.name = GetParametrString(group,
+                                                               AttrName,
+                                                               QCoreApplication::translate("VAbstractPattern",
+                                                                                           "New group")),
+                                     .visible = GetParametrBool(group, AttrVisible, trueStr),
+                                     .tags = FilterGroupTags(GetParametrEmptyString(group, AttrTags)),
+                                     .tool = GetParametrUInt(group, AttrTool, NULL_ID_STR),
+                                     .items = items});
                     }
                 }
                 domNode = domNode.nextSibling();
@@ -2483,7 +2479,7 @@ auto VAbstractPattern::GetGroups(const QString &patternPieceName) -> QMap<quint3
     }
     catch (const VExceptionConversionError &)
     {
-        return QMap<quint32, VGroupData>();
+        return {};
     }
 
     return data;

@@ -99,7 +99,7 @@ extern const QString AttrKAsm2;  // TODO. Delete if minimal supported version is
 extern const QString AttrKCurve; // TODO. Delete if minimal supported version is 0.2.7
 extern const QString AttrDuplicate;
 extern const QString AttrAScale;
-extern const QString AttrPathPoint;
+extern const QString TagPathPoint;
 extern const QString AttrPSpline;
 extern const QString AttrAxisP1;
 extern const QString AttrAxisP2;
@@ -147,6 +147,10 @@ extern const QString AttrNotes;
 extern const QString AttrAlias;
 extern const QString AttrAlias1;
 extern const QString AttrAlias2;
+extern const QString AttrCurve1Name1;
+extern const QString AttrCurve1Name2;
+extern const QString AttrCurve2Name1;
+extern const QString AttrCurve2Name2;
 extern const QString AttrCurve1Alias1;
 extern const QString AttrCurve1Alias2;
 extern const QString AttrCurve2Alias1;
@@ -156,6 +160,8 @@ extern const QString AttrKMVersion;
 extern const QString AttrNotMirrored;
 extern const QString AttrOffset;
 extern const QString AttrDescription;
+extern const QString AttrCurveName1;
+extern const QString AttrCurveName2;
 
 extern const QString TypeLineDefault;
 extern const QString TypeLineNone;
@@ -205,7 +211,7 @@ extern const QString angleLine_;
 extern const QString arc_;
 extern const QString elarc_;
 extern const QString spl_;
-extern const QString splPath;
+extern const QString splPath_V;
 extern const QString radius_V;
 extern const QString radiusArc_;
 extern const QString radius1ElArc_;
@@ -241,11 +247,11 @@ QT_WARNING_DISABLE_GCC("-Weffc++")
 
 struct VLabelTemplateLine
 {
-    QString line;
-    bool bold;
-    bool italic;
-    int alignment;
-    int fontSizeIncrement;
+    QString line{};
+    bool bold{false};
+    bool italic{false};
+    int alignment{0};
+    int fontSizeIncrement{0};
 };
 
 struct VWatermarkData
@@ -261,13 +267,6 @@ struct VWatermarkData
     bool grayscale{false};       // NOLINT(misc-non-private-member-variables-in-classes)
     bool invalidFile{false};     // NOLINT(misc-non-private-member-variables-in-classes)
     QColor textColor{Qt::black}; // NOLINT(misc-non-private-member-variables-in-classes)
-
-    VWatermarkData() = default;
-    VWatermarkData(VWatermarkData &&) noexcept = default;
-    auto operator=(VWatermarkData &&) noexcept -> VWatermarkData & = default;
-    VWatermarkData(const VWatermarkData &) = default;
-    auto operator=(const VWatermarkData &) -> VWatermarkData & = default;
-    ~VWatermarkData() = default;
 };
 
 QT_WARNING_POP

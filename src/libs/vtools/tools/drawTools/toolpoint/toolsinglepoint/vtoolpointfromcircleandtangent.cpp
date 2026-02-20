@@ -29,7 +29,6 @@
 #include "vtoolpointfromcircleandtangent.h"
 
 #include <QSharedPointer>
-#include <new>
 
 #include "../../../../dialogs/tools/dialogpointfromcircleandtangent.h"
 #include "../../../../dialogs/tools/dialogtool.h"
@@ -67,6 +66,17 @@ VToolPointFromCircleAndTangent::VToolPointFromCircleAndTangent(const VToolPointF
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VToolPointFromCircleAndTangent::GatherToolChanges() const -> VAbstractPoint::ToolChanges
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogPointFromCircleAndTangent> dialogTool = qobject_cast<DialogPointFromCircleAndTangent *>(
+        m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    return {.pointId = m_id, .oldLabel = name(), .newLabel = dialogTool->GetPointName()};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPointFromCircleAndTangent::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
@@ -74,6 +84,7 @@ void VToolPointFromCircleAndTangent::SetDialog()
         qobject_cast<DialogPointFromCircleAndTangent *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
+    dialogTool->CheckDependencyTreeComplete();
     dialogTool->SetCircleCenterId(circleCenterId);
     dialogTool->SetCircleRadius(circleRadius);
     dialogTool->SetCrossCirclesPoint(crossPoint);
@@ -332,4 +343,10 @@ void VToolPointFromCircleAndTangent::SetVisualization()
         visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPointFromCircleAndTangent::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    ProcessPointToolOptions(oldDomElement, newDomElement, GatherToolChanges());
 }

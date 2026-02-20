@@ -722,46 +722,54 @@ auto WatermarkWindow::IgnoreLocking(int error, const QString &path) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 void WatermarkWindow::ShowWatermark()
 {
-    ui->spinBoxOpacity->blockSignals(true);
-    ui->spinBoxOpacity->setValue(m_data.opacity);
-    ui->spinBoxOpacity->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->spinBoxOpacity);
+        ui->spinBoxOpacity->setValue(m_data.opacity);
+    }
 
-    ui->groupBoxWatermarkText->blockSignals(true);
-    ui->groupBoxWatermarkText->setChecked(m_data.showText);
-    ui->groupBoxWatermarkText->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->groupBoxWatermarkText);
+        ui->groupBoxWatermarkText->setChecked(m_data.showText);
+    }
 
-    ui->lineEditText->blockSignals(true);
-    ui->lineEditText->setText(m_data.text);
-    ui->lineEditText->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->lineEditText);
+        ui->lineEditText->setText(m_data.text);
+    }
 
-    ui->spinBoxTextRotation->blockSignals(true);
-    ui->spinBoxTextRotation->setValue(m_data.textRotation);
-    ui->spinBoxTextRotation->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->spinBoxTextRotation);
+        ui->spinBoxTextRotation->setValue(m_data.textRotation);
+    }
 
-    ui->lineEditFontSample->blockSignals(true);
-    ui->lineEditFontSample->setFont(m_data.font);
-    ui->lineEditFontSample->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->lineEditFontSample);
+        ui->lineEditFontSample->setFont(m_data.font);
+    }
 
-    ui->groupBoxWatermarkImage->blockSignals(true);
-    ui->groupBoxWatermarkImage->setChecked(m_data.showImage);
-    ui->groupBoxWatermarkImage->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->groupBoxWatermarkImage);
+        ui->groupBoxWatermarkImage->setChecked(m_data.showImage);
+    }
 
-    ui->lineEditPath->blockSignals(true);
-    ui->lineEditPath->setText(AbsoluteMPath(m_curFile, m_data.path));
-    ValidatePath();
-    ui->lineEditPath->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->lineEditPath);
+        ui->lineEditPath->setText(AbsoluteMPath(m_curFile, m_data.path));
+        ValidatePath();
+    }
 
-    ui->spinBoxImageRotation->blockSignals(true);
-    ui->spinBoxImageRotation->setValue(m_data.imageRotation);
-    ui->spinBoxImageRotation->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->spinBoxImageRotation);
+        ui->spinBoxImageRotation->setValue(m_data.imageRotation);
+    }
 
-    ui->checkBoxGrayColor->blockSignals(true);
-    ui->checkBoxGrayColor->setChecked(m_data.grayscale);
-    ui->checkBoxGrayColor->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->checkBoxGrayColor);
+        ui->checkBoxGrayColor->setChecked(m_data.grayscale);
+    }
 
-    ui->pushButtonColorPicker->blockSignals(true);
+    const QSignalBlocker blocker(ui->pushButtonColorPicker);
     ui->pushButtonColorPicker->setCurrentColor(m_data.textColor);
-    ui->pushButtonColorPicker->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -229,12 +229,12 @@ void PuzzlePreferencesLayoutPage::ConvertPaperSize()
     const qreal sheetTopMargin = ui->doubleSpinBoxSheetMarginTop->value();
     const qreal sheetBottomMargin = ui->doubleSpinBoxSheetMarginBottom->value();
 
-    ui->doubleSpinBoxSheetPaperWidth->blockSignals(true);
-    ui->doubleSpinBoxSheetPaperHeight->blockSignals(true);
-    ui->doubleSpinBoxSheetPaperWidth->setMaximum(FromPixel(QIMAGE_MAX, layoutUnit));
-    ui->doubleSpinBoxSheetPaperHeight->setMaximum(FromPixel(QIMAGE_MAX, layoutUnit));
-    ui->doubleSpinBoxSheetPaperWidth->blockSignals(false);
-    ui->doubleSpinBoxSheetPaperHeight->blockSignals(false);
+    {
+        const QSignalBlocker blockerSheetPaperWidth(ui->doubleSpinBoxSheetPaperWidth);
+        const QSignalBlocker blockerSheetPaperHeight(ui->doubleSpinBoxSheetPaperHeight);
+        ui->doubleSpinBoxSheetPaperWidth->setMaximum(FromPixel(QIMAGE_MAX, layoutUnit));
+        ui->doubleSpinBoxSheetPaperHeight->setMaximum(FromPixel(QIMAGE_MAX, layoutUnit));
+    }
 
     const qreal newSheetWidth = UnitConvertor(sheetWidth, m_oldLayoutUnit, layoutUnit);
     const qreal newSheetHeight = UnitConvertor(sheetHeight, m_oldLayoutUnit, layoutUnit);
@@ -252,12 +252,12 @@ void PuzzlePreferencesLayoutPage::ConvertPaperSize()
     const qreal tileTopMargin = ui->doubleSpinBoxTileMarginTop->value();
     const qreal tileBottomMargin = ui->doubleSpinBoxTileMarginBottom->value();
 
-    ui->doubleSpinBoxTilePaperWidth->blockSignals(true);
-    ui->doubleSpinBoxTilePaperHeight->blockSignals(true);
-    ui->doubleSpinBoxTilePaperWidth->setMaximum(FromPixel(QIMAGE_MAX, layoutUnit));
-    ui->doubleSpinBoxTilePaperHeight->setMaximum(FromPixel(QIMAGE_MAX, layoutUnit));
-    ui->doubleSpinBoxTilePaperWidth->blockSignals(false);
-    ui->doubleSpinBoxTilePaperHeight->blockSignals(false);
+    {
+        const QSignalBlocker blockerTilePaperWidth(ui->doubleSpinBoxTilePaperWidth);
+        const QSignalBlocker blockerTilePaperHeight(ui->doubleSpinBoxTilePaperHeight);
+        ui->doubleSpinBoxTilePaperWidth->setMaximum(FromPixel(QIMAGE_MAX, layoutUnit));
+        ui->doubleSpinBoxTilePaperHeight->setMaximum(FromPixel(QIMAGE_MAX, layoutUnit));
+    }
 
     const qreal newTileWidth = UnitConvertor(tileWidth, m_oldLayoutUnit, layoutUnit);
     const qreal newTileHeight = UnitConvertor(tileHeight, m_oldLayoutUnit, layoutUnit);
@@ -368,16 +368,17 @@ void PuzzlePreferencesLayoutPage::SwapSheetOrientation(bool checked)
 {
     if (checked)
     {
-        const qreal width = ui->doubleSpinBoxSheetPaperWidth->value();
-        const qreal height = ui->doubleSpinBoxSheetPaperHeight->value();
+        {
+            const QSignalBlocker blocker(ui->doubleSpinBoxSheetPaperWidth);
+            const qreal height = ui->doubleSpinBoxSheetPaperHeight->value();
+            ui->doubleSpinBoxSheetPaperWidth->setValue(height);
+        }
 
-        ui->doubleSpinBoxSheetPaperWidth->blockSignals(true);
-        ui->doubleSpinBoxSheetPaperWidth->setValue(height);
-        ui->doubleSpinBoxSheetPaperWidth->blockSignals(false);
-
-        ui->doubleSpinBoxSheetPaperHeight->blockSignals(true);
-        ui->doubleSpinBoxSheetPaperHeight->setValue(width);
-        ui->doubleSpinBoxSheetPaperHeight->blockSignals(false);
+        {
+            const QSignalBlocker blocker(ui->doubleSpinBoxSheetPaperHeight);
+            const qreal width = ui->doubleSpinBoxSheetPaperWidth->value();
+            ui->doubleSpinBoxSheetPaperHeight->setValue(width);
+        }
 
         SheetPaperSizeChanged();
 
@@ -390,16 +391,17 @@ void PuzzlePreferencesLayoutPage::SwapTileOrientation(bool checked)
 {
     if (checked)
     {
-        const qreal width = ui->doubleSpinBoxTilePaperWidth->value();
-        const qreal height = ui->doubleSpinBoxTilePaperHeight->value();
+        {
+            const QSignalBlocker blocker(ui->doubleSpinBoxTilePaperWidth);
+            const qreal height = ui->doubleSpinBoxTilePaperHeight->value();
+            ui->doubleSpinBoxTilePaperWidth->setValue(height);
+        }
 
-        ui->doubleSpinBoxTilePaperWidth->blockSignals(true);
-        ui->doubleSpinBoxTilePaperWidth->setValue(height);
-        ui->doubleSpinBoxTilePaperWidth->blockSignals(false);
-
-        ui->doubleSpinBoxTilePaperHeight->blockSignals(true);
-        ui->doubleSpinBoxTilePaperHeight->setValue(width);
-        ui->doubleSpinBoxTilePaperHeight->blockSignals(false);
+        {
+            const QSignalBlocker blocker(ui->doubleSpinBoxTilePaperHeight);
+            const qreal width = ui->doubleSpinBoxTilePaperWidth->value();
+            ui->doubleSpinBoxTilePaperHeight->setValue(width);
+        }
 
         TilePaperSizeChanged();
 
@@ -585,13 +587,15 @@ void PuzzlePreferencesLayoutPage::SheetPaperSizeChanged()
 {
     bool const portrait = ui->doubleSpinBoxSheetPaperHeight->value() > ui->doubleSpinBoxSheetPaperWidth->value();
 
-    ui->toolButtonSheetPortraitOritation->blockSignals(true);
-    ui->toolButtonSheetPortraitOritation->setChecked(portrait);
-    ui->toolButtonSheetPortraitOritation->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->toolButtonSheetPortraitOritation);
+        ui->toolButtonSheetPortraitOritation->setChecked(portrait);
+    }
 
-    ui->toolButtonSheetLandscapeOrientation->blockSignals(true);
-    ui->toolButtonSheetLandscapeOrientation->setChecked(not portrait);
-    ui->toolButtonSheetLandscapeOrientation->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->toolButtonSheetLandscapeOrientation);
+        ui->toolButtonSheetLandscapeOrientation->setChecked(not portrait);
+    }
 
     m_settingsChanged = true;
 }
@@ -601,13 +605,15 @@ void PuzzlePreferencesLayoutPage::TilePaperSizeChanged()
 {
     bool const portrait = ui->doubleSpinBoxTilePaperHeight->value() > ui->doubleSpinBoxTilePaperWidth->value();
 
-    ui->toolButtonTilePortraitOrientation->blockSignals(true);
-    ui->toolButtonTilePortraitOrientation->setChecked(portrait);
-    ui->toolButtonTilePortraitOrientation->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->toolButtonTilePortraitOrientation);
+        ui->toolButtonTilePortraitOrientation->setChecked(portrait);
+    }
 
-    ui->toolButtonTileLandscapeOrientation->blockSignals(true);
-    ui->toolButtonTileLandscapeOrientation->setChecked(not portrait);
-    ui->toolButtonTileLandscapeOrientation->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->toolButtonTileLandscapeOrientation);
+        ui->toolButtonTileLandscapeOrientation->setChecked(not portrait);
+    }
 
     m_settingsChanged = true;
 }
@@ -721,20 +727,18 @@ void PuzzlePreferencesLayoutPage::FindTemplate(QComboBox *box, qreal width, qrea
         if (VAbstractLayoutDialog::RoundTemplateSize(width, height, paperUnit) == tmplSize ||
             VAbstractLayoutDialog::RoundTemplateSize(height, width, paperUnit) == tmplSize)
         {
-            box->blockSignals(true);
+            const QSignalBlocker blocker(box);
             if (const int index = box->findData(i); index != -1)
             {
                 box->setCurrentIndex(index);
             }
-            box->blockSignals(false);
             return;
         }
     }
 
-    box->blockSignals(true);
+    const QSignalBlocker blocker(box);
     if (const int index = box->findData(max); index != -1)
     {
         box->setCurrentIndex(index);
     }
-    box->blockSignals(false);
 }

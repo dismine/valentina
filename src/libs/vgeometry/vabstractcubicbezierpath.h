@@ -79,12 +79,17 @@ public:
     auto NameForHistory(const QString &toolName) const -> QString override;
     auto GetMainNameForHistory() const -> QString override;
 
+    virtual auto FirstPoint() const -> VPointF = 0;
+    virtual auto LastPoint() const -> VPointF = 0;
+
+    auto HeadlessName() const -> QString override;
+
+    auto GetTypeHead() const -> QString override;
+    void SetNameSuffix(const QString &suffix) override;
+
 protected:
     void CreateName() override;
     void CreateAlias() override;
-
-    virtual auto FirstPoint() const -> VPointF = 0;
-    virtual auto LastPoint() const -> VPointF = 0;
 
     auto IsRelaxed() const -> bool;
 };

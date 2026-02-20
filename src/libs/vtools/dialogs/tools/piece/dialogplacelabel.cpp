@@ -242,6 +242,12 @@ void DialogPlaceLabel::SetPiecesList(const QVector<quint32> &list)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPlaceLabel::CheckDependencyTreeComplete()
+{
+    // does nothing
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (not prepare && type == SceneObject::Point && SetObject(id, ui->comboBoxPoint, QString()))
@@ -326,56 +332,47 @@ void DialogPlaceLabel::DeployVisibleFormulaTextEdit()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::EvalWidth()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditFormulaWidth->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditFormulaWidth;
-    formulaData.labelResult = ui->labelResultCalculationWidth;
-    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-    formulaData.checkLessThanZero = true;
-
-    Eval(formulaData, m_flagWidth);
+    Eval({.formula = ui->plainTextEditFormulaWidth->toPlainText(),
+          .variables = data->DataVariables(),
+          .labelEditFormula = ui->labelEditFormulaWidth,
+          .labelResult = ui->labelResultCalculationWidth,
+          .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+          .checkLessThanZero = true},
+         m_flagWidth);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::EvalHeight()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditFormulaHeight->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditFormulaHeight;
-    formulaData.labelResult = ui->labelResultCalculationHeight;
-    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-    formulaData.checkLessThanZero = true;
-
-    Eval(formulaData, m_flagHeight);
+    Eval({.formula = ui->plainTextEditFormulaHeight->toPlainText(),
+          .variables = data->DataVariables(),
+          .labelEditFormula = ui->labelEditFormulaHeight,
+          .labelResult = ui->labelResultCalculationHeight,
+          .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+          .checkLessThanZero = true},
+         m_flagHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::EvalAngle()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditFormulaAngle->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditFormulaAngle;
-    formulaData.labelResult = ui->labelResultCalculationAngle;
-    formulaData.postfix = degreeSymbol;
-
-    Eval(formulaData, m_flagAngle);
+    Eval({.formula = ui->plainTextEditFormulaAngle->toPlainText(),
+          .variables = data->DataVariables(),
+          .labelEditFormula = ui->labelEditFormulaAngle,
+          .labelResult = ui->labelResultCalculationAngle,
+          .postfix = degreeSymbol},
+         m_flagAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::EvalVisible()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditFormulaVisible->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditVisible;
-    formulaData.labelResult = ui->labelResultVisible;
-    formulaData.postfix = QString();
-    formulaData.checkLessThanZero = true;
-
-    Eval(formulaData, m_flagFormulaVisible);
+    Eval({.formula = ui->plainTextEditFormulaVisible->toPlainText(),
+          .variables = data->DataVariables(),
+          .labelEditFormula = ui->labelEditVisible,
+          .labelResult = ui->labelResultVisible,
+          .checkLessThanZero = true},
+         m_flagFormulaVisible);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

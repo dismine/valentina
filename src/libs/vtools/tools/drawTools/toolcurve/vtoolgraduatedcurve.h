@@ -29,7 +29,7 @@
 #define VTOOLGRADUATEDCURVE_H
 
 #include "../vpatterndb/vformula.h"
-#include "vabstractspline.h"
+#include "vtoolabstractcurve.h"
 
 template<class T>
 class QSharedPointer;
@@ -41,14 +41,14 @@ struct VGraduatedCurveOffset
     QString description{};
 };
 
-struct VToolGraduatedCurveInitData : VAbstractSplineInitData
+struct VToolGraduatedCurveInitData : VToolAbstractCurveInitData
 {
     quint32 originCurveId{NULL_ID};                 // NOLINT(misc-non-private-member-variables-in-classes)
     QVector<VRawGraduatedCurveOffset> offsets{};    // NOLINT(misc-non-private-member-variables-in-classes)
-    QString suffix{};                               // NOLINT(misc-non-private-member-variables-in-classes)
+    QString name{};                                 // NOLINT(misc-non-private-member-variables-in-classes)
 };
 
-class VToolGraduatedCurve : public VAbstractSpline
+class VToolGraduatedCurve : public VToolAbstractOffsetCurve
 {
     Q_OBJECT // NOLINT
 
@@ -68,16 +68,8 @@ public:
         Type = UserType + static_cast<int>(Tool::GraduatedCurve)
     };
 
-    auto GetApproximationScale() const -> qreal override;
-    void SetApproximationScale(qreal value);
-
     auto GetGraduatedOffsets() const -> QVector<VGraduatedCurveOffset>;
     void SetGraduatedOffsets(const QVector<VGraduatedCurveOffset> &offsets);
-
-    auto GetSuffix() const -> QString;
-    void SetSuffix(QString suffix);
-
-    auto CurveName() const -> QString;
 
     void ShowVisualization(bool show) override;
 
@@ -91,17 +83,18 @@ protected:
     void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     void SetVisualization() override;
     void ReadToolAttributes(const QDomElement &domElement) override;
+    void ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement) override;
 
 private:
     Q_DISABLE_COPY_MOVE(VToolGraduatedCurve) // NOLINT
 
     QVector<VRawGraduatedCurveOffset> m_offsets;
-    quint32 m_originCurveId;
-    QString m_suffix;
 
     explicit VToolGraduatedCurve(const VToolGraduatedCurveInitData &initData, QGraphicsItem *parent = nullptr);
 
     void UpdateOffsets(QDomElement &tag, const QVector<VRawGraduatedCurveOffset> &offsets);
+
+    auto GatherToolChanges() const -> ToolChanges;
 };
 
 #endif // VTOOLGRADUATEDCURVE_H

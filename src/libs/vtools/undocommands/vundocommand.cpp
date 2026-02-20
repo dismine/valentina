@@ -32,7 +32,6 @@
 #include <QDomNode>
 
 #include "../ifc/ifcdef.h"
-#include "../ifc/xml/vpatterngraph.h"
 #include "../tools/drawTools/operation/vabstractoperation.h"
 #include "../tools/nodeDetails/vnodepoint.h"
 #include "../tools/nodeDetails/vtoolpiecepath.h"
@@ -53,8 +52,17 @@ QT_WARNING_POP
 VUndoCommand::VUndoCommand(VAbstractPattern *doc, QUndoCommand *parent)
   : QObject(),
     QUndoCommand(parent),
-    xml(QDomElement()),
-    doc(doc)
+    m_doc(doc)
+{
+    SCASSERT(doc != nullptr);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VUndoCommand::VUndoCommand(VAbstractPattern *doc, quint32 id, QUndoCommand *parent)
+  : QObject(),
+    QUndoCommand(parent),
+    m_doc(doc),
+    m_elementId(id)
 {
     SCASSERT(doc != nullptr);
 }
@@ -63,24 +71,24 @@ VUndoCommand::VUndoCommand(VAbstractPattern *doc, QUndoCommand *parent)
 VUndoCommand::VUndoCommand(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent)
   : QObject(),
     QUndoCommand(parent),
-    xml(xml),
-    doc(doc)
+    m_element(xml),
+    m_doc(doc)
 {
-    SCASSERT(doc != nullptr)
+    SCASSERT(doc != nullptr);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VUndoCommand::RedoFullParsing()
 {
-    if (redoFlag)
+    if (m_redoFlag)
     {
         emit NeedFullParsing();
     }
     else
     {
-        QApplication::postEvent(doc, new LiteParseEvent());
+        QApplication::postEvent(m_doc, new LiteParseEvent());
     }
-    redoFlag = true;
+    m_redoFlag = true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -88,20 +96,20 @@ void VUndoCommand::UndoDeleteAfterSibling(QDomNode &parentNode, quint32 siblingI
 {
     if (siblingId == NULL_ID)
     {
-        parentNode.appendChild(xml);
+        parentNode.appendChild(m_element);
     }
     else
     {
-        const QDomElement refElement = doc->NodeById(siblingId, tagName);
-        parentNode.insertAfter(xml, refElement);
-        doc->RefreshElementIdCache();
+        const QDomElement refElement = m_doc->NodeById(siblingId, tagName);
+        parentNode.insertAfter(m_element, refElement);
+        m_doc->RefreshElementIdCache();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VUndoCommand::GetDestinationObject(quint32 idTool, quint32 idPoint) const -> QDomElement
 {
-    if (const QDomElement tool = doc->FindElementById(idTool, VAbstractPattern::TagOperation); tool.isElement())
+    if (const QDomElement tool = m_doc->FindElementById(idTool, VAbstractPattern::TagOperation); tool.isElement())
     {
         QDomElement correctDest;
         const QDomNodeList nodeList = tool.childNodes();

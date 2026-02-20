@@ -31,20 +31,20 @@
        <item>
         <widget class="QSplitter" name="splitter">
          <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+          <enum>Qt::Orientation::Horizontal</enum>
          </property>
          <widget class="QListWidget" name="listWidget"/>
          <widget class="QWidget" name="formLayoutWidget">
           <layout class="QFormLayout" name="formLayout_2">
            <item row="0" column="0">
-            <widget class="QLabel" name="labelAlias">
+            <widget class="QLabel" name="labelName">
              <property name="text">
-              <string>Alias</string>
+              <string>Name:</string>
              </property>
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QLineEdit" name="lineEditAlias">
+            <widget class="QLineEdit" name="lineEditName">
              <property name="enabled">
               <bool>false</bool>
              </property>
@@ -78,7 +78,7 @@
               </size>
              </property>
              <property name="sizeAdjustPolicy">
-              <enum>QComboBox::AdjustToContents</enum>
+              <enum>QComboBox::SizeAdjustPolicy::AdjustToContents</enum>
              </property>
              <property name="iconSize">
               <size>
@@ -108,7 +108,7 @@
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout">
-         <item alignment="Qt::AlignLeft">
+         <item alignment="Qt::AlignmentFlag::AlignLeft">
           <widget class="QLabel" name="labelEditAngle">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -161,7 +161,7 @@
          <item>
           <spacer name="horizontalSpacer">
            <property name="orientation">
-            <enum>Qt::Horizontal</enum>
+            <enum>Qt::Orientation::Horizontal</enum>
            </property>
            <property name="sizeHint" stdset="0">
             <size>
@@ -171,7 +171,7 @@
            </property>
           </spacer>
          </item>
-         <item alignment="Qt::AlignRight">
+         <item alignment="Qt::AlignmentFlag::AlignRight">
           <widget class="QToolButton" name="toolButtonExprAngle">
            <property name="toolTip">
             <string>Formula wizard</string>
@@ -191,7 +191,7 @@
            </property>
           </widget>
          </item>
-         <item alignment="Qt::AlignRight">
+         <item alignment="Qt::AlignmentFlag::AlignRight">
           <widget class="QLabel" name="label_2">
            <property name="text">
             <string/>
@@ -201,7 +201,7 @@
            </property>
           </widget>
          </item>
-         <item alignment="Qt::AlignRight">
+         <item alignment="Qt::AlignmentFlag::AlignRight">
           <widget class="QLabel" name="labelResultAngle">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -297,16 +297,6 @@
          <item row="0" column="1">
           <widget class="QComboBox" name="comboBoxOriginPoint"/>
          </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="labelSuffix">
-           <property name="text">
-            <string>Suffix:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QLineEdit" name="lineEditSuffix"/>
-         </item>
         </layout>
        </item>
        <item>
@@ -374,7 +364,7 @@
        <item>
         <spacer name="verticalSpacer">
          <property name="orientation">
-          <enum>Qt::Vertical</enum>
+          <enum>Qt::Orientation::Vertical</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -401,10 +391,10 @@
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+      <enum>Qt::Orientation::Horizontal</enum>
      </property>
      <property name="standardButtons">
-      <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+      <set>QDialogButtonBox::StandardButton::Apply|QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Ok</set>
      </property>
     </widget>
    </item>

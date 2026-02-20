@@ -29,7 +29,6 @@
 #ifndef VTOOLCURVEINTERSECTAXIS_H
 #define VTOOLCURVEINTERSECTAXIS_H
 
-
 #include <QDomElement>
 #include <QGraphicsItem>
 #include <QMetaObject>
@@ -54,6 +53,16 @@ struct VToolCurveIntersectAxisInitData : VToolLinePointInitData
     QPair<QString, QString> segments{};
     QString aliasSuffix1{};
     QString aliasSuffix2{};
+    QString name1{}; // NOLINT(misc-non-private-member-variables-in-classes)
+    QString name2{}; // NOLINT(misc-non-private-member-variables-in-classes)
+};
+
+enum class VToolCurveIntersectAxisNameField : quint8
+{
+    Name1,
+    Name2,
+    AliasSuffix1,
+    AliasSuffix2
 };
 
 class VToolCurveIntersectAxis : public VToolLinePoint
@@ -75,7 +84,19 @@ public:
     enum { Type = UserType + static_cast<int>(Tool::CurveIntersectAxis)};
 
     auto GetFormulaAngle() const -> VFormula;
-    void         SetFormulaAngle(const VFormula &value);
+    void SetFormulaAngle(const VFormula &value);
+
+    auto GetName1() const -> QString;
+    void SetName1(const QString &name);
+
+    auto GetName2() const -> QString;
+    void SetName2(const QString &name);
+
+    auto GetAliasSuffix1() const -> QString;
+    void SetAliasSuffix1(const QString &alias);
+
+    auto GetAliasSuffix2() const -> QString;
+    void SetAliasSuffix2(const QString &alias);
 
     auto CurveName() const -> QString;
 
@@ -90,21 +111,60 @@ protected:
     void SetVisualization() override;
     auto MakeToolTip() const -> QString override;
     void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
-
     void SetSegments(const QPair<QString, QString> &segments);
+    void ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement) override;
+
 private:
     Q_DISABLE_COPY_MOVE(VToolCurveIntersectAxis) // NOLINT
     QString formulaAngle;
     quint32 curveId;
     QPair<QString, QString> m_segments{};
+    QString m_name1{}; // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_name2{}; // NOLINT(misc-non-private-member-variables-in-classes)
     QString m_aliasSuffix1{};
     QString m_aliasSuffix2{};
 
+    struct ToolChanges
+    {
+        QString oldLabel{};
+        QString newLabel{};
+        QString oldName1{};
+        QString newName1{};
+        QString oldName2{};
+        QString newName2{};
+        QString oldAliasSuffix1{};
+        QString newAliasSuffix1{};
+        QString oldAliasSuffix2{};
+        QString newAliasSuffix2{};
+
+        auto HasChanges() const -> bool
+        {
+            return oldLabel != newLabel || oldName1 != newName1 || oldName2 != newName2
+                   || oldAliasSuffix1 != newAliasSuffix1 || oldAliasSuffix2 != newAliasSuffix2;
+        }
+
+        auto LabelChanged() const -> bool { return oldLabel != newLabel; }
+        auto Name1Changed() const -> bool { return oldName1 != newName1; }
+        auto Name2Changed() const -> bool { return oldName2 != newName2; }
+        auto AliasSuffix1Changed() const -> bool { return oldAliasSuffix1 != newAliasSuffix1; }
+        auto AliasSuffix2Changed() const -> bool { return oldAliasSuffix2 != newAliasSuffix2; }
+    };
+
     explicit VToolCurveIntersectAxis(const VToolCurveIntersectAxisInitData &initData, QGraphicsItem *parent = nullptr);
+
+    auto GatherToolChanges() const -> ToolChanges;
+
+    void ProcessToolOptions(const QDomElement &oldDomElement,
+                            const QDomElement &newDomElement,
+                            const ToolChanges &changes);
 
     template <class Item>
     static void InitArc(VContainer *data, qreal segLength, const VPointF *p, quint32 curveId);
     static void InitSegments(GOType curveType, qreal segLength, const VPointF *p, quint32 curveId, VContainer *data);
+
+    void UpdateNameField(VToolCurveIntersectAxisNameField field, const QString &value);
+    auto GetFieldValue(VToolCurveIntersectAxisNameField field, VToolCurveIntersectAxisNameField excludeField) const
+        -> QString;
 };
 
 #endif // VTOOLCURVEINTERSECTAXIS_H

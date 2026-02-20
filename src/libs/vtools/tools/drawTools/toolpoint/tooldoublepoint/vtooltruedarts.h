@@ -97,6 +97,7 @@ protected:
     void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     void ReadToolAttributes(const QDomElement &domElement) override;
     void SetVisualization() override;
+    void ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement) override;
 
 private:
     Q_DISABLE_COPY_MOVE(VToolTrueDarts) // NOLINT
@@ -107,6 +108,8 @@ private:
     quint32 dartP3Id;
 
     explicit VToolTrueDarts(const VToolTrueDartsInitData &initData, QGraphicsItem *parent = nullptr);
+
+    auto GatherToolChanges() const -> ToolChanges;
 };
 
 #endif // VTOOLTRUEDARTS_H

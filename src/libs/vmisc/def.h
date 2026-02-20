@@ -748,15 +748,6 @@ constexpr static auto VFuzzyComparePossibleNulls(double p1, double p2) -> bool
  */
 struct CustomSARecord
 {
-    CustomSARecord()
-      : startPoint(0),
-        path(0),
-        endPoint(0),
-        reverse(false),
-        includeType(PiecePathIncludeType::AsCustomSA)
-    {
-    }
-
     friend auto operator<<(QDataStream &out, const CustomSARecord &record) -> QDataStream &;
     friend auto operator>>(QDataStream &in, CustomSARecord &record) -> QDataStream &;
 

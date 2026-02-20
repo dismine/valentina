@@ -67,6 +67,17 @@ VToolPointOfIntersectionCircles::VToolPointOfIntersectionCircles(
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VToolPointOfIntersectionCircles::GatherToolChanges() const -> VAbstractPoint::ToolChanges
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogPointOfIntersectionCircles> dialogTool = qobject_cast<DialogPointOfIntersectionCircles *>(
+        m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    return {.pointId = m_id, .oldLabel = name(), .newLabel = dialogTool->GetPointName()};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersectionCircles::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
@@ -74,6 +85,7 @@ void VToolPointOfIntersectionCircles::SetDialog()
         qobject_cast<DialogPointOfIntersectionCircles *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
+    dialogTool->CheckDependencyTreeComplete();
     dialogTool->SetFirstCircleCenterId(firstCircleCenterId);
     dialogTool->SetSecondCircleCenterId(secondCircleCenterId);
     dialogTool->SetFirstCircleRadius(firstCircleRadius);
@@ -371,4 +383,11 @@ void VToolPointOfIntersectionCircles::SetVisualization()
         visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPointOfIntersectionCircles::ApplyToolOptions(const QDomElement &oldDomElement,
+                                                       const QDomElement &newDomElement)
+{
+    ProcessPointToolOptions(oldDomElement, newDomElement, GatherToolChanges());
 }

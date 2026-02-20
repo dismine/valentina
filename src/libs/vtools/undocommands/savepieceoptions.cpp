@@ -42,12 +42,11 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 SavePieceOptions::SavePieceOptions(VPiece oldDet, VPiece newDet, VAbstractPattern *doc, quint32 id, QUndoCommand *parent)
-  : VUndoCommand(doc, parent),
+  : VUndoCommand(doc, id, parent),
     m_oldDet(std::move(oldDet)),
     m_newDet(std::move(newDet))
 {
     setText(tr("save detail options"));
-    nodeId = id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -55,35 +54,35 @@ void SavePieceOptions::undo()
 {
     qCDebug(vUndo, "Undo.");
 
-    QDomElement domElement = doc->FindElementById(nodeId, VAbstractPattern::TagDetail);
+    QDomElement domElement = Doc()->FindElementById(ElementId(), VAbstractPattern::TagDetail);
     if (!domElement.isElement())
     {
-        qCDebug(vUndo, "Can't find detail with id = %u.", nodeId);
+        qCDebug(vUndo, "Can't find detail with id = %u.", ElementId());
         return;
     }
 
-    VToolSeamAllowance::AddAttributes(doc, domElement, nodeId, m_oldDet);
+    VToolSeamAllowance::AddAttributes(Doc(), domElement, ElementId(), m_oldDet);
     VAbstractPattern::RemoveAllChildren(domElement); // Very important to clear before rewrite
-    VToolSeamAllowance::AddPatternPieceData(doc, domElement, m_oldDet);
-    VToolSeamAllowance::AddPatternInfo(doc, domElement, m_oldDet);
-    VToolSeamAllowance::AddGrainline(doc, domElement, m_oldDet);
-    VToolSeamAllowance::AddNodes(doc, domElement, m_oldDet);
-    VToolSeamAllowance::AddCSARecords(doc, domElement, m_oldDet.GetCustomSARecords());
-    VToolSeamAllowance::AddInternalPaths(doc, domElement, m_oldDet.GetInternalPaths());
-    VToolSeamAllowance::AddPins(doc, domElement, m_oldDet.GetPins());
-    VToolSeamAllowance::AddPlaceLabels(doc, domElement, m_oldDet.GetPlaceLabels());
-    VToolSeamAllowance::AddMirrorLine(doc, domElement, m_oldDet);
+    VToolSeamAllowance::AddPatternPieceData(Doc(), domElement, m_oldDet);
+    VToolSeamAllowance::AddPatternInfo(Doc(), domElement, m_oldDet);
+    VToolSeamAllowance::AddGrainline(Doc(), domElement, m_oldDet);
+    VToolSeamAllowance::AddNodes(Doc(), domElement, m_oldDet);
+    VToolSeamAllowance::AddCSARecords(Doc(), domElement, m_oldDet.GetCustomSARecords());
+    VToolSeamAllowance::AddInternalPaths(Doc(), domElement, m_oldDet.GetInternalPaths());
+    VToolSeamAllowance::AddPins(Doc(), domElement, m_oldDet.GetPins());
+    VToolSeamAllowance::AddPlaceLabels(Doc(), domElement, m_oldDet.GetPlaceLabels());
+    VToolSeamAllowance::AddMirrorLine(Doc(), domElement, m_oldDet);
 
-    VPatternGraph *patternGraph = doc->PatternGraph();
+    VPatternGraph *patternGraph = Doc()->PatternGraph();
     SCASSERT(patternGraph != nullptr)
 
-    patternGraph->RemoveIncomingEdges(nodeId);
+    patternGraph->RemoveIncomingEdges(ElementId());
 
-    auto *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId));
+    auto *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(ElementId()));
     SCASSERT(tool != nullptr)
 
     const auto varData = tool->getData()->DataDependencyVariables();
-    VToolSeamAllowance::AddPieceDependencies(nodeId, m_oldDet, doc, varData);
+    VToolSeamAllowance::AddPieceDependencies(ElementId(), m_oldDet, Doc(), varData);
 
     DisablePieceNodes(m_newDet.GetPath());
     EnablePieceNodes(m_oldDet.GetPath());
@@ -101,35 +100,35 @@ void SavePieceOptions::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    QDomElement domElement = doc->FindElementById(nodeId, VAbstractPattern::TagDetail);
+    QDomElement domElement = Doc()->FindElementById(ElementId(), VAbstractPattern::TagDetail);
     if (!domElement.isElement())
     {
-        qCDebug(vUndo, "Can't find detail with id = %u.", nodeId);
+        qCDebug(vUndo, "Can't find detail with id = %u.", ElementId());
         return;
     }
 
-    VToolSeamAllowance::AddAttributes(doc, domElement, nodeId, m_newDet);
+    VToolSeamAllowance::AddAttributes(Doc(), domElement, ElementId(), m_newDet);
     VAbstractPattern::RemoveAllChildren(domElement); // Very important to clear before rewrite
-    VToolSeamAllowance::AddPatternPieceData(doc, domElement, m_newDet);
-    VToolSeamAllowance::AddPatternInfo(doc, domElement, m_newDet);
-    VToolSeamAllowance::AddGrainline(doc, domElement, m_newDet);
-    VToolSeamAllowance::AddNodes(doc, domElement, m_newDet);
-    VToolSeamAllowance::AddCSARecords(doc, domElement, m_newDet.GetCustomSARecords());
-    VToolSeamAllowance::AddInternalPaths(doc, domElement, m_newDet.GetInternalPaths());
-    VToolSeamAllowance::AddPins(doc, domElement, m_newDet.GetPins());
-    VToolSeamAllowance::AddPlaceLabels(doc, domElement, m_newDet.GetPlaceLabels());
-    VToolSeamAllowance::AddMirrorLine(doc, domElement, m_newDet);
+    VToolSeamAllowance::AddPatternPieceData(Doc(), domElement, m_newDet);
+    VToolSeamAllowance::AddPatternInfo(Doc(), domElement, m_newDet);
+    VToolSeamAllowance::AddGrainline(Doc(), domElement, m_newDet);
+    VToolSeamAllowance::AddNodes(Doc(), domElement, m_newDet);
+    VToolSeamAllowance::AddCSARecords(Doc(), domElement, m_newDet.GetCustomSARecords());
+    VToolSeamAllowance::AddInternalPaths(Doc(), domElement, m_newDet.GetInternalPaths());
+    VToolSeamAllowance::AddPins(Doc(), domElement, m_newDet.GetPins());
+    VToolSeamAllowance::AddPlaceLabels(Doc(), domElement, m_newDet.GetPlaceLabels());
+    VToolSeamAllowance::AddMirrorLine(Doc(), domElement, m_newDet);
 
-    VPatternGraph *patternGraph = doc->PatternGraph();
+    VPatternGraph *patternGraph = Doc()->PatternGraph();
     SCASSERT(patternGraph != nullptr)
 
-    patternGraph->RemoveIncomingEdges(nodeId);
+    patternGraph->RemoveIncomingEdges(ElementId());
 
-    auto *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId));
+    auto *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(ElementId()));
     SCASSERT(tool != nullptr)
 
     const auto varData = tool->getData()->DataDependencyVariables();
-    VToolSeamAllowance::AddPieceDependencies(nodeId, m_newDet, doc, varData);
+    VToolSeamAllowance::AddPieceDependencies(ElementId(), m_newDet, Doc(), varData);
 
     DisablePieceNodes(m_oldDet.GetPath());
     EnablePieceNodes(m_newDet.GetPath());
@@ -148,12 +147,12 @@ auto SavePieceOptions::mergeWith(const QUndoCommand *command) -> bool
     const auto *saveCommand = static_cast<const SavePieceOptions *>(command);
     SCASSERT(saveCommand != nullptr);
 
-    if (saveCommand->DetId() != nodeId)
+    if (saveCommand->ElementId() != ElementId())
     {
         return false;
     }
 
-    const VPiece candidate = saveCommand->NewDet();
+    const VPiece candidate = saveCommand->m_newDet;
 
     auto currentSet = ConvertToSet(m_newDet.Dependencies());
     auto candidateSet = ConvertToSet(candidate.Dependencies());
@@ -181,7 +180,7 @@ auto SavePieceOptions::mergeWith(const QUndoCommand *command) -> bool
         }
     }
 
-    m_newDet = saveCommand->NewDet();
+    m_newDet = saveCommand->m_newDet;
     return true;
 }
 

@@ -70,6 +70,18 @@ public:
     void SetNotes(const QString &notes);
     auto GetNotes() const -> QString;
 
+    void SetCurve1Name1(const QString &name);
+    auto GetCurve1Name1() const -> QString;
+
+    void SetCurve1Name2(const QString &name);
+    auto GetCurve1Name2() const -> QString;
+
+    void SetCurve2Name1(const QString &name);
+    auto GetCurve2Name1() const -> QString;
+
+    void SetCurve2Name2(const QString &name);
+    auto GetCurve2Name2() const -> QString;
+
     void SetCurve1AliasSuffix1(const QString &alias);
     auto GetCurve1AliasSuffix1() const -> QString;
 
@@ -81,6 +93,8 @@ public:
 
     void SetCurve2AliasSuffix2(const QString &alias);
     auto GetCurve2AliasSuffix2() const -> QString;
+
+    void CheckDependencyTreeComplete() override;
 
 public slots:
     void ChosenObject(quint32 id, const SceneObject &type) override;
@@ -97,6 +111,7 @@ protected:
 private slots:
     void CurveChanged();
     void ValidateAlias();
+    void ValidateName();
 
 private:
     Q_DISABLE_COPY_MOVE(DialogPointOfIntersectionCurves) // NOLINT
@@ -107,6 +122,12 @@ private:
 
     bool flagName;
     bool flagError;
+
+    bool flagCurve1Name1{true};
+    bool flagCurve1Name2{true};
+    bool flagCurve2Name1{true};
+    bool flagCurve2Name2{true};
+
     bool flagCurve1Alias1{true};
     bool flagCurve1Alias2{true};
     bool flagCurve2Alias1{true};
@@ -117,14 +138,25 @@ private:
     QString originCurve2AliasSuffix1{};
     QString originCurve2AliasSuffix2{};
 
+    QString originCurve1Name1{};
+    QString originCurve1Name2{};
+    QString originCurve2Name1{};
+    QString originCurve2Name2{};
+
     /** @brief number number of handled objects */
     qint32 number{0};
+
+    auto GenerateDefCurve1LeftSubName() const -> QString;
+    auto GenerateDefCurve1RightSubName() const -> QString;
+    auto GenerateDefCurve2LeftSubName() const -> QString;
+    auto GenerateDefCurve2RightSubName() const -> QString;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
 inline auto DialogPointOfIntersectionCurves::IsValid() const -> bool
 {
-    return flagName && flagError && flagCurve1Alias1 && flagCurve1Alias2 && flagCurve2Alias1 && flagCurve2Alias2;
+    return flagName && flagError && flagCurve1Alias1 && flagCurve1Alias2 && flagCurve2Alias1 && flagCurve2Alias2
+           && flagCurve1Name1 && flagCurve1Name2 && flagCurve2Name1 && flagCurve2Name2;
 }
 
 #endif // DIALOGPOINTOFINTERSECTIONCURVES_H

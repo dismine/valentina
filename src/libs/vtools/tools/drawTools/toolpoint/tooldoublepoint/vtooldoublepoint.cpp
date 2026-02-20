@@ -34,10 +34,11 @@
 #include <QPoint>
 #include <QSharedPointer>
 #include <QUndoStack>
-#include <new>
 
 #include "../../../../undocommands/label/movedoublelabel.h"
 #include "../../../../undocommands/label/showdoublelabel.h"
+#include "../../../../undocommands/renameobject.h"
+#include "../../../../undocommands/savetooloptions.h"
 #include "../../../vabstracttool.h"
 #include "../../vdrawtool.h"
 #include "../ifc/xml/vabstractpattern.h"
@@ -99,7 +100,12 @@ auto VToolDoublePoint::nameP1() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VToolDoublePoint::setNameP1(const QString &name)
 {
-    SetPointName(p1id, name);
+    UpdatePointName(p1id,
+                    name,
+                    [this](const QDomElement &oldElem,
+                           const QDomElement &newElem,
+                           const VAbstractPoint::ToolChanges &changes) -> void
+                    { ProcessPointToolOptions(oldElem, newElem, changes); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -111,7 +117,12 @@ auto VToolDoublePoint::nameP2() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VToolDoublePoint::setNameP2(const QString &name)
 {
-    SetPointName(p2id, name);
+    UpdatePointName(p2id,
+                    name,
+                    [this](const QDomElement &oldElem,
+                           const QDomElement &newElem,
+                           const VAbstractPoint::ToolChanges &changes) -> void
+                    { ProcessPointToolOptions(oldElem, newElem, changes); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -422,7 +433,7 @@ void VToolDoublePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &o
 {
     VDrawTool::SaveOptions(tag, obj);
 
-    auto SavePoint1 = [this](QDomElement &tag, const QSharedPointer<VPointF> &point)
+    auto SavePoint1 = [this](QDomElement &tag, const QSharedPointer<VPointF> &point) -> void
     {
         doc->SetAttribute(tag, AttrName1, point->name());
         doc->SetAttribute(tag, AttrMx1, VAbstractValApplication::VApp()->fromPixel(point->mx()));
@@ -430,7 +441,7 @@ void VToolDoublePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &o
         doc->SetAttribute<bool>(tag, AttrShowLabel1, point->IsShowLabel());
     };
 
-    auto SavePoint2 = [this](QDomElement &tag, const QSharedPointer<VPointF> &point)
+    auto SavePoint2 = [this](QDomElement &tag, const QSharedPointer<VPointF> &point) -> void
     {
         doc->SetAttribute(tag, AttrName2, point->name());
         doc->SetAttribute(tag, AttrMx2, VAbstractValApplication::VApp()->fromPixel(point->mx()));
@@ -496,4 +507,41 @@ auto VToolDoublePoint::ComplexToolTip(quint32 itemId) const -> QString
                             u"%3"
                             u"</table>"_s.arg(tr("Label"), point->name(), MakeToolTip());
     return toolTip;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolDoublePoint::ProcessTrueDartsToolOptions(const QDomElement &oldDomElement,
+                                                   const QDomElement &newDomElement,
+                                                   const ToolChanges &changes)
+{
+    if (!changes.HasChanges())
+    {
+        VAbstractPoint::ApplyToolOptions(oldDomElement, newDomElement);
+        return;
+    }
+
+    QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
+    auto *newGroup = new QUndoCommand(); // an empty command
+    newGroup->setText(tr("save tool options"));
+
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id, newGroup);
+    saveOptions->SetInGroup(true);
+    connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+
+    if (changes.P1LabelChanged())
+    {
+        auto *renameLabel = new RenameLabel(changes.oldP1Label, changes.newP1Label, doc, p1id, newGroup);
+        if (!changes.P2LabelChanged())
+        {
+            connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        }
+    }
+
+    if (changes.P2LabelChanged())
+    {
+        auto *renameLabel = new RenameLabel(changes.oldP2Label, changes.newP2Label, doc, p2id, newGroup);
+        connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    }
+
+    undoStack->push(newGroup);
 }

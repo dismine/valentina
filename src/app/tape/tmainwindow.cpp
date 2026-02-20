@@ -124,8 +124,6 @@ enum class MUnits : qint8
 
 struct IndividualMeasurement
 {
-    IndividualMeasurement() = default;
-
     QString name{};           // NOLINT(misc-non-private-member-variables-in-classes)
     QString value{'0'};       // NOLINT(misc-non-private-member-variables-in-classes)
     QString fullName{};       // NOLINT(misc-non-private-member-variables-in-classes)
@@ -785,23 +783,23 @@ void TMainWindow::changeEvent(QEvent *event)
         {
             ui->labelMType->setText(tr("Individual measurements"));
 
-            const qint32 index = ui->comboBoxGender->currentIndex();
-            ui->comboBoxGender->blockSignals(true);
-            ui->comboBoxGender->clear();
-            InitGender(ui->comboBoxGender);
-            ui->comboBoxGender->setCurrentIndex(index);
-            ui->comboBoxGender->blockSignals(false);
+            {
+                const qint32 index = ui->comboBoxGender->currentIndex();
+                const QSignalBlocker blocker(ui->comboBoxGender);
+                ui->comboBoxGender->clear();
+                InitGender(ui->comboBoxGender);
+                ui->comboBoxGender->setCurrentIndex(index);
+            }
 
             InitMeasurementDimension();
         }
 
         {
             const qint32 index = ui->comboBoxKnownMeasurements->currentIndex();
-            ui->comboBoxKnownMeasurements->blockSignals(true);
+            const QSignalBlocker blocker(ui->comboBoxKnownMeasurements);
             ui->comboBoxKnownMeasurements->clear();
             InitKnownMeasurements(ui->comboBoxKnownMeasurements);
             ui->comboBoxKnownMeasurements->setCurrentIndex(index);
-            ui->comboBoxKnownMeasurements->blockSignals(false);
         }
 
         {
@@ -813,11 +811,10 @@ void TMainWindow::changeEvent(QEvent *event)
             if (m_comboBoxUnits)
             {
                 const qint32 index = m_comboBoxUnits->currentIndex();
-                m_comboBoxUnits->blockSignals(true);
+                const QSignalBlocker blocker(m_comboBoxUnits);
                 m_comboBoxUnits->clear();
                 InitComboBoxUnits();
                 m_comboBoxUnits->setCurrentIndex(index);
-                m_comboBoxUnits->blockSignals(false);
             }
         }
     }
@@ -1334,30 +1331,34 @@ void TMainWindow::Remove()
 
         ui->actionExportToCSV->setEnabled(false);
 
-        ui->lineEditName->blockSignals(true);
-        ui->lineEditName->setText(QString());
-        ui->lineEditName->blockSignals(false);
+        {
+            const QSignalBlocker blocker(ui->lineEditName);
+            ui->lineEditName->setText(QString());
+        }
 
-        ui->plainTextEditDescription->blockSignals(true);
-        ui->plainTextEditDescription->setPlainText(QString());
-        ui->plainTextEditDescription->blockSignals(false);
+        {
+            const QSignalBlocker blocker(ui->plainTextEditDescription);
+            ui->plainTextEditDescription->setPlainText(QString());
+        }
 
-        ui->lineEditFullName->blockSignals(true);
-        ui->lineEditFullName->setText(QString());
-        ui->lineEditFullName->blockSignals(false);
+        {
+            const QSignalBlocker blocker(ui->lineEditFullName);
+            ui->lineEditFullName->setText(QString());
+        }
 
-        ui->comboBoxMUnits->blockSignals(true);
-        ui->comboBoxMUnits->setCurrentIndex(-1);
-        ui->comboBoxMUnits->blockSignals(false);
+        {
+            const QSignalBlocker blocker(ui->comboBoxMUnits);
+            ui->comboBoxMUnits->setCurrentIndex(-1);
+        }
 
         if (m_mType == MeasurementsType::Multisize)
         {
-            ui->labelCalculatedValue->blockSignals(true);
-            ui->doubleSpinBoxBaseValue->blockSignals(true);
-            ui->doubleSpinBoxCorrection->blockSignals(true);
-            ui->doubleSpinBoxShiftA->blockSignals(true);
-            ui->doubleSpinBoxShiftB->blockSignals(true);
-            ui->doubleSpinBoxShiftC->blockSignals(true);
+            const QSignalBlocker blockerCalculatedValue(ui->labelCalculatedValue);
+            const QSignalBlocker blockerBaseValue(ui->doubleSpinBoxBaseValue);
+            const QSignalBlocker blockerCorrection(ui->doubleSpinBoxCorrection);
+            const QSignalBlocker blockerShiftA(ui->doubleSpinBoxShiftA);
+            const QSignalBlocker blockerShiftB(ui->doubleSpinBoxShiftB);
+            const QSignalBlocker blockerShiftC(ui->doubleSpinBoxShiftC);
 
             ui->labelCalculatedValue->setText(QString());
             ui->doubleSpinBoxBaseValue->setValue(0);
@@ -1365,23 +1366,16 @@ void TMainWindow::Remove()
             ui->doubleSpinBoxShiftA->setValue(0);
             ui->doubleSpinBoxShiftB->setValue(0);
             ui->doubleSpinBoxShiftC->setValue(0);
-
-            ui->labelCalculatedValue->blockSignals(false);
-            ui->doubleSpinBoxBaseValue->blockSignals(false);
-            ui->doubleSpinBoxCorrection->blockSignals(false);
-            ui->doubleSpinBoxShiftA->blockSignals(false);
-            ui->doubleSpinBoxShiftB->blockSignals(false);
-            ui->doubleSpinBoxShiftC->blockSignals(false);
         }
         else
         {
-            ui->labelCalculatedValue->blockSignals(true);
-            ui->labelCalculatedValue->setText(QString());
-            ui->labelCalculatedValue->blockSignals(false);
+            {
+                const QSignalBlocker blocker(ui->labelCalculatedValue);
+                ui->labelCalculatedValue->setText(QString());
+            }
 
-            ui->plainTextEditFormula->blockSignals(true);
+            const QSignalBlocker blocker(ui->plainTextEditFormula);
             ui->plainTextEditFormula->setPlainText(QString());
-            ui->plainTextEditFormula->blockSignals(false);
         }
     }
 
@@ -1556,9 +1550,10 @@ void TMainWindow::AddImage()
         RefreshData();
         m_search->RefreshList(ui->lineEditFind->text());
 
-        ui->tableWidget->blockSignals(true);
-        ui->tableWidget->selectRow(row);
-        ui->tableWidget->blockSignals(false);
+        {
+            const QSignalBlocker blocker(ui->tableWidget);
+            ui->tableWidget->selectRow(row);
+        }
 
         ShowNewMData(false);
     }
@@ -1583,9 +1578,10 @@ void TMainWindow::RemoveImage()
     RefreshData();
     m_search->RefreshList(ui->lineEditFind->text());
 
-    ui->tableWidget->blockSignals(true);
-    ui->tableWidget->selectRow(row);
-    ui->tableWidget->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->tableWidget);
+        ui->tableWidget->selectRow(row);
+    }
 
     ShowNewMData(false);
 }
@@ -2001,9 +1997,8 @@ void TMainWindow::ShowNewMData(bool fresh)
 
     if (ui->tableWidget->currentRow() == -1)
     {
-        ui->tableWidget->blockSignals(true);
+        const QSignalBlocker blocker(ui->tableWidget);
         ui->tableWidget->selectRow(0);
-        ui->tableWidget->blockSignals(false);
     }
 
     const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName); // name
@@ -2036,34 +2031,37 @@ void TMainWindow::ShowNewMData(bool fresh)
 
     // Don't block all signal for QLineEdit. Need for correct handle with clear button.
     disconnect(ui->lineEditName, &QLineEdit::textEdited, this, &TMainWindow::SaveMName);
-    ui->plainTextEditDescription->blockSignals(true);
-    if (meash->IsCustom())
-    {
-        ui->plainTextEditDescription->setPlainText(meash->GetDescription());
-        ui->lineEditFullName->setText(meash->GetGuiText());
-        ui->lineEditName->setText(ClearCustomName(meash->GetName()));
-    }
-    else
-    {
-        // Show known
-        VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
-        VKnownMeasurements const knownDB = db->KnownMeasurements(m_m->KnownMeasurements());
-        VKnownMeasurement const known = knownDB.Measurement(meash->GetName());
 
-        ui->plainTextEditDescription->setPlainText(known.description);
-        ui->lineEditFullName->setText(known.fullName);
-        ui->lineEditName->setText(nameField->text());
+    {
+        const QSignalBlocker blocker(ui->plainTextEditDescription);
+        if (meash->IsCustom())
+        {
+            ui->plainTextEditDescription->setPlainText(meash->GetDescription());
+            ui->lineEditFullName->setText(meash->GetGuiText());
+            ui->lineEditName->setText(ClearCustomName(meash->GetName()));
+        }
+        else
+        {
+            // Show known
+            VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
+            VKnownMeasurements const knownDB = db->KnownMeasurements(m_m->KnownMeasurements());
+            VKnownMeasurement const known = knownDB.Measurement(meash->GetName());
+
+            ui->plainTextEditDescription->setPlainText(known.description);
+            ui->lineEditFullName->setText(known.fullName);
+            ui->lineEditName->setText(nameField->text());
+        }
+        connect(ui->lineEditName, &QLineEdit::textEdited, this, &TMainWindow::SaveMName);
     }
-    connect(ui->lineEditName, &QLineEdit::textEdited, this, &TMainWindow::SaveMName);
-    ui->plainTextEditDescription->blockSignals(false);
 
     ui->labelMUnits->setVisible(meash->GetType() == VarType::Measurement);
     ui->comboBoxMUnits->setVisible(meash->GetType() == VarType::Measurement);
 
-    ui->comboBoxMUnits->blockSignals(true);
-    ui->comboBoxMUnits->setCurrentIndex(
-        ui->comboBoxMUnits->findData(static_cast<int>(meash->IsSpecialUnits() ? MUnits::Degrees : MUnits::Table)));
-    ui->comboBoxMUnits->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->comboBoxMUnits);
+        ui->comboBoxMUnits->setCurrentIndex(
+            ui->comboBoxMUnits->findData(static_cast<int>(meash->IsSpecialUnits() ? MUnits::Degrees : MUnits::Table)));
+    }
 
     if (m_mType == MeasurementsType::Multisize)
     {
@@ -2093,13 +2091,13 @@ void TMainWindow::ShowNewMData(bool fresh)
             ui->doubleSpinBoxShiftC->setVisible(meash->GetType() == VarType::Measurement);
         }
 
-        ui->labelCalculatedValue->blockSignals(true);
-        ui->doubleSpinBoxBaseValue->blockSignals(true);
-        ui->doubleSpinBoxCorrection->blockSignals(true);
-        ui->doubleSpinBoxShiftA->blockSignals(true);
-        ui->doubleSpinBoxShiftB->blockSignals(true);
-        ui->doubleSpinBoxShiftC->blockSignals(true);
-        ui->lineEditAlias->blockSignals(true);
+        const QSignalBlocker blockerCalculatedValue(ui->labelCalculatedValue);
+        const QSignalBlocker blockerBaseValue(ui->doubleSpinBoxBaseValue);
+        const QSignalBlocker blockerCorrection(ui->doubleSpinBoxCorrection);
+        const QSignalBlocker blockerShiftA(ui->doubleSpinBoxShiftA);
+        const QSignalBlocker blockerShiftB(ui->doubleSpinBoxShiftB);
+        const QSignalBlocker blockerShiftC(ui->doubleSpinBoxShiftC);
+        const QSignalBlocker blockerAlias(ui->lineEditAlias);
 
         ui->lineEditAlias->setText(meash->GetValueAlias(m_currentDimensionA, m_currentDimensionB, m_currentDimensionC));
 
@@ -2129,14 +2127,6 @@ void TMainWindow::ShowNewMData(bool fresh)
             ui->doubleSpinBoxShiftB->setValue(meash->GetShiftB());
             ui->doubleSpinBoxShiftC->setValue(meash->GetShiftC());
         }
-
-        ui->labelCalculatedValue->blockSignals(false);
-        ui->doubleSpinBoxBaseValue->blockSignals(false);
-        ui->doubleSpinBoxCorrection->blockSignals(false);
-        ui->doubleSpinBoxShiftA->blockSignals(false);
-        ui->doubleSpinBoxShiftB->blockSignals(false);
-        ui->doubleSpinBoxShiftC->blockSignals(false);
-        ui->lineEditAlias->blockSignals(false);
     }
     else
     {
@@ -2153,22 +2143,24 @@ void TMainWindow::ShowNewMData(bool fresh)
 
         EvalFormula(meash->GetFormula(), false, meash->GetData(), ui->labelCalculatedValue, meash->IsSpecialUnits());
 
-        ui->plainTextEditFormula->blockSignals(true);
+        {
+            const QSignalBlocker blocker(ui->plainTextEditFormula);
 
-        QString const formula = VTranslateVars::TryFormulaToUser(
-            meash->GetFormula(), VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+            QString const formula
+                = VTranslateVars::TryFormulaToUser(meash->GetFormula(),
+                                                   VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 
-        ui->plainTextEditFormula->setPlainText(formula);
-        ui->plainTextEditFormula->blockSignals(false);
+            ui->plainTextEditFormula->setPlainText(formula);
+        }
 
-        ui->comboBoxDimension->blockSignals(true);
-        ui->comboBoxDimension->setCurrentIndex(
-            ui->comboBoxDimension->findData(static_cast<int>(meash->GetDimension())));
-        ui->comboBoxDimension->blockSignals(false);
+        {
+            const QSignalBlocker blocker(ui->comboBoxDimension);
+            ui->comboBoxDimension->setCurrentIndex(
+                ui->comboBoxDimension->findData(static_cast<int>(meash->GetDimension())));
+        }
 
-        ui->lineEditAlias->blockSignals(true);
+        const QSignalBlocker blocker(ui->lineEditAlias);
         ui->lineEditAlias->setText(meash->GetValueAlias());
-        ui->lineEditAlias->blockSignals(false);
     }
 
     MeasurementGUI();
@@ -2296,9 +2288,8 @@ void TMainWindow::SaveMName(const QString &text)
         RefreshData();
         m_search->RefreshList(ui->lineEditFind->text());
 
-        ui->tableWidget->blockSignals(true);
+        const QSignalBlocker blocker(ui->tableWidget);
         ui->tableWidget->selectRow(row);
-        ui->tableWidget->blockSignals(false);
     }
     else
     {
@@ -2335,9 +2326,10 @@ void TMainWindow::SaveMValueAlias(const QString &text)
     RefreshData();
     m_search->RefreshList(ui->lineEditFind->text());
 
-    ui->tableWidget->blockSignals(true);
-    ui->tableWidget->selectRow(row);
-    ui->tableWidget->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->tableWidget);
+        ui->tableWidget->selectRow(row);
+    }
 
     ShowNewMData(false);
 }
@@ -2409,9 +2401,10 @@ void TMainWindow::SaveMValue()
     RefreshData();
     m_search->RefreshList(ui->lineEditFind->text());
 
-    ui->tableWidget->blockSignals(true);
-    ui->tableWidget->selectRow(row);
-    ui->tableWidget->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->tableWidget);
+        ui->tableWidget->selectRow(row);
+    }
 
     ui->plainTextEditFormula->setTextCursor(cursor);
 }
@@ -2434,9 +2427,10 @@ void TMainWindow::SaveMBaseValue(double value)
     RefreshData();
     m_search->RefreshList(ui->lineEditFind->text());
 
-    ui->tableWidget->blockSignals(true);
-    ui->tableWidget->selectRow(row);
-    ui->tableWidget->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->tableWidget);
+        ui->tableWidget->selectRow(row);
+    }
 
     ShowNewMData(false);
 }
@@ -2459,9 +2453,10 @@ void TMainWindow::SaveMShiftA(double value)
     RefreshData();
     m_search->RefreshList(ui->lineEditFind->text());
 
-    ui->tableWidget->blockSignals(true);
-    ui->tableWidget->selectRow(row);
-    ui->tableWidget->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->tableWidget);
+        ui->tableWidget->selectRow(row);
+    }
 
     ShowNewMData(false);
 }
@@ -2484,9 +2479,10 @@ void TMainWindow::SaveMShiftB(double value)
     RefreshData();
     m_search->RefreshList(ui->lineEditFind->text());
 
-    ui->tableWidget->blockSignals(true);
-    ui->tableWidget->selectRow(row);
-    ui->tableWidget->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->tableWidget);
+        ui->tableWidget->selectRow(row);
+    }
 
     ShowNewMData(false);
 }
@@ -2509,9 +2505,10 @@ void TMainWindow::SaveMShiftC(double value)
     RefreshData();
     m_search->RefreshList(ui->lineEditFind->text());
 
-    ui->tableWidget->blockSignals(true);
-    ui->tableWidget->selectRow(row);
-    ui->tableWidget->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->tableWidget);
+        ui->tableWidget->selectRow(row);
+    }
 
     ShowNewMData(false);
 }
@@ -2535,9 +2532,10 @@ void TMainWindow::SaveMCorrectionValue(double value)
     RefreshData();
     m_search->RefreshList(ui->lineEditFind->text());
 
-    ui->tableWidget->blockSignals(true);
-    ui->tableWidget->selectRow(row);
-    ui->tableWidget->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->tableWidget);
+        ui->tableWidget->selectRow(row);
+    }
 
     ShowNewMData(false);
 }
@@ -2561,9 +2559,10 @@ void TMainWindow::SaveMDescription()
 
     RefreshData();
 
-    ui->tableWidget->blockSignals(true);
-    ui->tableWidget->selectRow(row);
-    ui->tableWidget->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->tableWidget);
+        ui->tableWidget->selectRow(row);
+    }
 
     ui->plainTextEditDescription->setTextCursor(cursor);
 }
@@ -2603,9 +2602,8 @@ void TMainWindow::SaveMFullName()
 
         RefreshData();
 
-        ui->tableWidget->blockSignals(true);
+        const QSignalBlocker blocker(ui->tableWidget);
         ui->tableWidget->selectRow(row);
-        ui->tableWidget->blockSignals(false);
     }
     else
     {
@@ -2632,9 +2630,10 @@ void TMainWindow::SaveMUnits()
     RefreshData();
     m_search->RefreshList(ui->lineEditFind->text());
 
-    ui->tableWidget->blockSignals(true);
-    ui->tableWidget->selectRow(row);
-    ui->tableWidget->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->tableWidget);
+        ui->tableWidget->selectRow(row);
+    }
 
     ShowNewMData(false);
 }
@@ -2658,9 +2657,10 @@ void TMainWindow::SaveMDimension()
     RefreshData();
     m_search->RefreshList(ui->lineEditFind->text());
 
-    ui->tableWidget->blockSignals(true);
-    ui->tableWidget->selectRow(row);
-    ui->tableWidget->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->tableWidget);
+        ui->tableWidget->selectRow(row);
+    }
 
     ShowNewMData(false);
 }
@@ -3191,9 +3191,10 @@ void TMainWindow::InitWindow()
     InitPatternUnits();
     InitMeasurementUnits();
 
-    ui->comboBoxMUnits->blockSignals(true);
-    ui->comboBoxMUnits->setCurrentIndex(-1);
-    ui->comboBoxMUnits->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->comboBoxMUnits);
+        ui->comboBoxMUnits->setCurrentIndex(-1);
+    }
 
     connect(ui->comboBoxMUnits, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TMainWindow::SaveMUnits);
 
@@ -3318,7 +3319,7 @@ void TMainWindow::InitDimensionGradation(int index, const MeasurementDimension_p
         current = control->currentData().toDouble();
     }
 
-    control->blockSignals(true);
+    QSignalBlocker blocker(control);
     control->clear();
 
     const QVector<qreal> bases = DimensionRestrictedValues(index, dimension);
@@ -3357,11 +3358,11 @@ void TMainWindow::InitDimensionGradation(int index, const MeasurementDimension_p
     if (i != -1)
     {
         control->setCurrentIndex(i);
-        control->blockSignals(false);
+        blocker.unblock();
     }
     else
     {
-        control->blockSignals(false);
+        blocker.unblock();
         control->setCurrentIndex(0);
     }
 }
@@ -3637,7 +3638,7 @@ void TMainWindow::RefreshData(bool freshCall)
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::RefreshTable(bool freshCall)
 {
-    ui->tableWidget->blockSignals(true);
+    QSignalBlocker blocker(ui->tableWidget);
     ui->tableWidget->setRowCount(0);
 
     ShowUnits();
@@ -3679,7 +3680,7 @@ void TMainWindow::RefreshTable(bool freshCall)
     //        ui->tableWidget->resizeRowsToContents();
     //    }
     //    ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
-    ui->tableWidget->blockSignals(false);
+    blocker.unblock();
 
     ui->actionExportToCSV->setEnabled(ui->tableWidget->rowCount() > 0);
 }
@@ -3944,12 +3945,13 @@ void TMainWindow::SyncKnownMeasurements()
         return;
     }
 
-    ui->comboBoxKnownMeasurements->blockSignals(true);
-    ui->comboBoxKnownMeasurements->clear();
-    InitKnownMeasurements(ui->comboBoxKnownMeasurements);
-    const qint32 index = ui->comboBoxKnownMeasurements->findData(m_m->KnownMeasurements());
-    ui->comboBoxKnownMeasurements->setCurrentIndex(index);
-    ui->comboBoxKnownMeasurements->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->comboBoxKnownMeasurements);
+        ui->comboBoxKnownMeasurements->clear();
+        InitKnownMeasurements(ui->comboBoxKnownMeasurements);
+        const qint32 index = ui->comboBoxKnownMeasurements->findData(m_m->KnownMeasurements());
+        ui->comboBoxKnownMeasurements->setCurrentIndex(index);
+    }
 
     InitKnownMeasurementsDescription();
 
@@ -3959,9 +3961,10 @@ void TMainWindow::SyncKnownMeasurements()
     {
         RefreshTable(false);
 
-        ui->tableWidget->blockSignals(true);
-        ui->tableWidget->selectRow(row);
-        ui->tableWidget->blockSignals(false);
+        {
+            const QSignalBlocker blocker(ui->tableWidget);
+            ui->tableWidget->selectRow(row);
+        }
 
         const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName); // name
         SCASSERT(nameField != nullptr)
@@ -3989,13 +3992,13 @@ void TMainWindow::SyncKnownMeasurements()
         VKnownMeasurements const knownDB = db->KnownMeasurements(m_m->KnownMeasurements());
         VKnownMeasurement const known = knownDB.Measurement(meash->GetName());
 
-        ui->plainTextEditDescription->blockSignals(true);
-        ui->plainTextEditDescription->setPlainText(known.description);
-        ui->plainTextEditDescription->blockSignals(false);
+        {
+            const QSignalBlocker blocker(ui->plainTextEditDescription);
+            ui->plainTextEditDescription->setPlainText(known.description);
+        }
 
-        ui->lineEditFullName->blockSignals(true);
+        const QSignalBlocker blocker(ui->lineEditFullName);
         ui->lineEditFullName->setText(known.fullName);
-        ui->lineEditFullName->blockSignals(false);
     }
 }
 
@@ -4672,12 +4675,11 @@ void TMainWindow::SetCurrentPatternUnit()
 {
     if (m_comboBoxUnits)
     {
-        m_comboBoxUnits->blockSignals(true);
+        const QSignalBlocker blocker(m_comboBoxUnits);
         if (const qint32 indexUnit = m_comboBoxUnits->findData(static_cast<int>(m_pUnit)); indexUnit != -1)
         {
             m_comboBoxUnits->setCurrentIndex(indexUnit);
         }
-        m_comboBoxUnits->blockSignals(false);
     }
 }
 
@@ -5191,7 +5193,7 @@ void TMainWindow::InitMeasurementUnits()
         return;
     }
 
-    ui->comboBoxMUnits->blockSignals(true);
+    const QSignalBlocker blocker(ui->comboBoxMUnits);
 
     int current = -1;
     if (ui->comboBoxMUnits->currentIndex() != -1)
@@ -5224,8 +5226,6 @@ void TMainWindow::InitMeasurementUnits()
     {
         ui->comboBoxMUnits->setCurrentIndex(i);
     }
-
-    ui->comboBoxMUnits->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -5240,7 +5240,7 @@ void TMainWindow::InitGender(QComboBox *gender)
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::InitMeasurementDimension()
 {
-    ui->comboBoxDimension->blockSignals(true);
+    const QSignalBlocker blocker(ui->comboBoxDimension);
 
     int current = -1;
     if (ui->comboBoxDimension->currentIndex() != -1)
@@ -5260,8 +5260,6 @@ void TMainWindow::InitMeasurementDimension()
     {
         ui->comboBoxDimension->setCurrentIndex(i);
     }
-
-    ui->comboBoxDimension->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -5361,9 +5359,10 @@ void TMainWindow::InitSearch()
 
                 if (checked)
                 {
-                    ui->toolButtonWholeWord->blockSignals(true);
-                    ui->toolButtonWholeWord->setChecked(false);
-                    ui->toolButtonWholeWord->blockSignals(false);
+                    {
+                        const QSignalBlocker blocker(ui->toolButtonWholeWord);
+                        ui->toolButtonWholeWord->setChecked(false);
+                    }
                     ui->toolButtonWholeWord->setEnabled(false);
 
                     ui->toolButtonUseUnicodeProperties->setEnabled(true);
@@ -5371,9 +5370,10 @@ void TMainWindow::InitSearch()
                 else
                 {
                     ui->toolButtonWholeWord->setEnabled(true);
-                    ui->toolButtonUseUnicodeProperties->blockSignals(true);
-                    ui->toolButtonUseUnicodeProperties->setChecked(false);
-                    ui->toolButtonUseUnicodeProperties->blockSignals(false);
+                    {
+                        const QSignalBlocker blocker(ui->toolButtonUseUnicodeProperties);
+                        ui->toolButtonUseUnicodeProperties->setChecked(false);
+                    }
                     ui->toolButtonUseUnicodeProperties->setEnabled(false);
                 }
                 m_search->Find(ui->lineEditFind->text());

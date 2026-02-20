@@ -396,7 +396,7 @@ void TKMMainWindow::changeEvent(QEvent *event)
 
         InitMeasurementUnits();
 
-        ui->comboBoxDiagram->blockSignals(true);
+        const QSignalBlocker blocker(ui->comboBoxDiagram);
 
         QUuid current;
         if (ui->comboBoxDiagram->currentIndex() != -1)
@@ -410,8 +410,6 @@ void TKMMainWindow::changeEvent(QEvent *event)
         {
             ui->comboBoxDiagram->setCurrentIndex(i);
         }
-
-        ui->comboBoxDiagram->blockSignals(false);
     }
 
     if (event->type() == QEvent::PaletteChange)
@@ -939,21 +937,23 @@ void TKMMainWindow::RemoveMeasurement()
 
         ui->actionExportToCSV->setEnabled(false);
 
-        ui->lineEditName->blockSignals(true);
-        ui->lineEditName->setText(QString());
-        ui->lineEditName->blockSignals(false);
+        {
+            const QSignalBlocker blocker(ui->lineEditName);
+            ui->lineEditName->setText(QString());
+        }
 
-        ui->plainTextEditDescription->blockSignals(true);
-        ui->plainTextEditDescription->setPlainText(QString());
-        ui->plainTextEditDescription->blockSignals(false);
+        {
+            const QSignalBlocker blocker(ui->plainTextEditDescription);
+            ui->plainTextEditDescription->setPlainText(QString());
+        }
 
-        ui->lineEditFullName->blockSignals(true);
-        ui->lineEditFullName->setText(QString());
-        ui->lineEditFullName->blockSignals(false);
+        {
+            const QSignalBlocker blocker(ui->lineEditFullName);
+            ui->lineEditFullName->setText(QString());
+        }
 
-        ui->comboBoxMUnits->blockSignals(true);
+        const QSignalBlocker blocker(ui->comboBoxMUnits);
         ui->comboBoxMUnits->setCurrentIndex(-1);
-        ui->comboBoxMUnits->blockSignals(false);
     }
 
     ui->tableWidget->repaint(); // Force repain to fix paint artifacts on Mac OS X
@@ -1265,9 +1265,8 @@ void TKMMainWindow::ShowMData()
 
     if (ui->tableWidget->currentRow() == -1)
     {
-        ui->tableWidget->blockSignals(true);
+        const QSignalBlocker blocker(ui->tableWidget);
         ui->tableWidget->selectRow(0);
-        ui->tableWidget->blockSignals(false);
     }
 
     const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName); // name
@@ -1277,9 +1276,10 @@ void TKMMainWindow::ShowMData()
 
     ShowMDiagram(m_known.Image(m.diagram));
 
-    ui->plainTextEditDescription->blockSignals(true);
-    ui->plainTextEditDescription->setPlainText(m.description);
-    ui->plainTextEditDescription->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->plainTextEditDescription);
+        ui->plainTextEditDescription->setPlainText(m.description);
+    }
 
     // Don't block all signal for QLineEdit. Need for correct handle with clear button.
     disconnect(ui->lineEditName, &QLineEdit::textEdited, this, &TKMMainWindow::SaveMName);
@@ -1294,19 +1294,20 @@ void TKMMainWindow::ShowMData()
     ui->lineEditGroup->setText(m.group);
     connect(ui->lineEditGroup, &QLineEdit::editingFinished, this, &TKMMainWindow::SaveMGroup);
 
-    ui->comboBoxMUnits->blockSignals(true);
-    ui->comboBoxMUnits->setCurrentIndex(
-        ui->comboBoxMUnits->findData(static_cast<int>(m.specialUnits ? MUnits::Degrees : MUnits::Table)));
-    ui->comboBoxMUnits->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->comboBoxMUnits);
+        ui->comboBoxMUnits->setCurrentIndex(
+            ui->comboBoxMUnits->findData(static_cast<int>(m.specialUnits ? MUnits::Degrees : MUnits::Table)));
+    }
 
-    ui->comboBoxDiagram->blockSignals(true);
-    InitMeasurementDiagramList();
-    ui->comboBoxDiagram->setCurrentIndex(ui->comboBoxDiagram->findData(m.diagram));
-    ui->comboBoxDiagram->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->comboBoxDiagram);
+        InitMeasurementDiagramList();
+        ui->comboBoxDiagram->setCurrentIndex(ui->comboBoxDiagram->findData(m.diagram));
+    }
 
-    ui->plainTextEditFormula->blockSignals(true);
+    const QSignalBlocker blocker(ui->plainTextEditFormula);
     ui->plainTextEditFormula->setPlainText(m.formula);
-    ui->plainTextEditFormula->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1320,9 +1321,8 @@ void TKMMainWindow::ShowImageData()
 
     if (ui->listWidget->currentRow() == -1)
     {
-        ui->listWidget->blockSignals(true);
+        const QSignalBlocker blocker(ui->listWidget);
         ui->listWidget->setCurrentRow(0);
-        ui->listWidget->blockSignals(false);
     }
 
     ImageFields(true);
@@ -1338,9 +1338,8 @@ void TKMMainWindow::ShowImageData()
     ui->lineEditImageTitle->setText(image.Title());
     connect(ui->lineEditImageTitle, &QLineEdit::editingFinished, this, &TKMMainWindow::SaveImageTitle);
 
-    ui->doubleSpinBoxImageSize->blockSignals(true);
+    const QSignalBlocker blocker(ui->doubleSpinBoxImageSize);
     ui->doubleSpinBoxImageSize->setValue(image.GetSizeScale());
-    ui->doubleSpinBoxImageSize->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1406,9 +1405,8 @@ void TKMMainWindow::SaveMName()
     RefreshTable();
     m_search->RefreshList(ui->lineEditFind->text());
 
-    ui->tableWidget->blockSignals(true);
+    const QSignalBlocker blocker(ui->tableWidget);
     ui->tableWidget->selectRow(row);
-    ui->tableWidget->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1434,9 +1432,10 @@ void TKMMainWindow::SaveMFormula()
     RefreshTable();
     m_search->RefreshList(ui->lineEditFind->text());
 
-    ui->tableWidget->blockSignals(true);
-    ui->tableWidget->selectRow(row);
-    ui->tableWidget->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->tableWidget);
+        ui->tableWidget->selectRow(row);
+    }
 
     ui->plainTextEditFormula->setTextCursor(cursor);
 }
@@ -1461,9 +1460,10 @@ void TKMMainWindow::SaveMDescription()
     m_known = VKnownMeasurements();
     RefreshTable();
 
-    ui->tableWidget->blockSignals(true);
-    ui->tableWidget->selectRow(row);
-    ui->tableWidget->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->tableWidget);
+        ui->tableWidget->selectRow(row);
+    }
 
     ui->plainTextEditDescription->setTextCursor(cursor);
 }
@@ -1487,9 +1487,8 @@ void TKMMainWindow::SaveMFullName()
     m_known = VKnownMeasurements();
     RefreshTable();
 
-    ui->tableWidget->blockSignals(true);
+    const QSignalBlocker blocker(ui->tableWidget);
     ui->tableWidget->selectRow(row);
-    ui->tableWidget->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1512,9 +1511,8 @@ void TKMMainWindow::SaveMUnits()
     RefreshTable();
     m_search->RefreshList(ui->lineEditFind->text());
 
-    ui->tableWidget->blockSignals(true);
+    const QSignalBlocker blocker(ui->tableWidget);
     ui->tableWidget->selectRow(row);
-    ui->tableWidget->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1536,9 +1534,8 @@ void TKMMainWindow::SaveMGroup()
     m_known = VKnownMeasurements();
     RefreshTable();
 
-    ui->tableWidget->blockSignals(true);
+    const QSignalBlocker blocker(ui->tableWidget);
     ui->tableWidget->selectRow(row);
-    ui->tableWidget->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1561,9 +1558,10 @@ void TKMMainWindow::SaveMDiagram()
     RefreshTable();
     m_search->RefreshList(ui->lineEditFind->text());
 
-    ui->tableWidget->blockSignals(true);
-    ui->tableWidget->selectRow(row);
-    ui->tableWidget->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->tableWidget);
+        ui->tableWidget->selectRow(row);
+    }
 
     ShowMDiagram(m_known.Image(id));
 }
@@ -1586,9 +1584,10 @@ void TKMMainWindow::SaveImageTitle()
     m_known = VKnownMeasurements();
     RefreshImages();
 
-    ui->listWidget->blockSignals(true);
-    ui->listWidget->setCurrentRow(row);
-    ui->listWidget->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->listWidget);
+        ui->listWidget->setCurrentRow(row);
+    }
 
     ShowMData();
 }
@@ -1611,9 +1610,10 @@ void TKMMainWindow::SaveImageSizeScale()
     m_known = VKnownMeasurements();
     RefreshImages();
 
-    ui->listWidget->blockSignals(true);
-    ui->listWidget->setCurrentRow(row);
-    ui->listWidget->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->listWidget);
+        ui->listWidget->setCurrentRow(row);
+    }
 
     ShowMData();
 }
@@ -1859,15 +1859,17 @@ void TKMMainWindow::InitWindow()
 
     InitMeasurementUnits();
 
-    ui->comboBoxMUnits->blockSignals(true);
-    ui->comboBoxMUnits->setCurrentIndex(-1);
-    ui->comboBoxMUnits->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->comboBoxMUnits);
+        ui->comboBoxMUnits->setCurrentIndex(-1);
+    }
 
     connect(ui->comboBoxMUnits, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TKMMainWindow::SaveMUnits);
 
-    ui->comboBoxDiagram->blockSignals(true);
-    ui->comboBoxDiagram->setCurrentIndex(-1);
-    ui->comboBoxDiagram->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->comboBoxDiagram);
+        ui->comboBoxDiagram->setCurrentIndex(-1);
+    }
 
     connect(ui->comboBoxDiagram, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &TKMMainWindow::SaveMDiagram);
@@ -2004,20 +2006,21 @@ void TKMMainWindow::InitSearch()
 
                 if (checked)
                 {
-                    ui->toolButtonWholeWord->blockSignals(true);
-                    ui->toolButtonWholeWord->setChecked(false);
-                    ui->toolButtonWholeWord->blockSignals(false);
-                    ui->toolButtonWholeWord->setEnabled(false);
+                    {
+                        const QSignalBlocker blocker(ui->toolButtonWholeWord);
+                        ui->toolButtonWholeWord->setChecked(false);
+                        ui->toolButtonWholeWord->blockSignals(false);
+                    }
 
                     ui->toolButtonUseUnicodeProperties->setEnabled(true);
                 }
                 else
                 {
                     ui->toolButtonWholeWord->setEnabled(true);
-                    ui->toolButtonUseUnicodeProperties->blockSignals(true);
+
+                    const QSignalBlocker blocker(ui->toolButtonUseUnicodeProperties);
                     ui->toolButtonUseUnicodeProperties->setChecked(false);
                     ui->toolButtonUseUnicodeProperties->blockSignals(false);
-                    ui->toolButtonUseUnicodeProperties->setEnabled(false);
                 }
                 m_search->Find(ui->lineEditFind->text());
                 ui->lineEditFind->setPlaceholderText(m_search->SearchPlaceholder());
@@ -2363,30 +2366,30 @@ void TKMMainWindow::RefreshTable()
 {
     QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-    ui->tableWidget->blockSignals(true);
-    ui->tableWidget->clearContents();
-
-    if (!m_known.IsValid())
     {
-        m_known = m_m->KnownMeasurements();
+        const QSignalBlocker blocker(ui->tableWidget);
+        ui->tableWidget->clearContents();
+
+        if (!m_known.IsValid())
+        {
+            m_known = m_m->KnownMeasurements();
+        }
+
+        const QMap<int, VKnownMeasurement> orderedTable = m_known.OrderedMeasurements();
+        qint32 currentRow = -1;
+        ui->tableWidget->setRowCount(static_cast<int>(orderedTable.size()));
+        for (auto iMap = orderedTable.constBegin(); iMap != orderedTable.constEnd(); ++iMap)
+        {
+            const VKnownMeasurement &m = iMap.value();
+            currentRow++;
+
+            QTableWidgetItem *item = AddCell(m.name, currentRow, ColumnName, Qt::AlignVCenter); // name
+            item->setData(Qt::UserRole, m.name);
+
+            AddCell(m.fullName, currentRow, ColumnFullName, Qt::AlignVCenter);
+            AddCell(m.group, currentRow, ColumnGroup, Qt::AlignVCenter);
+        }
     }
-
-    const QMap<int, VKnownMeasurement> orderedTable = m_known.OrderedMeasurements();
-    qint32 currentRow = -1;
-    ui->tableWidget->setRowCount(static_cast<int>(orderedTable.size()));
-    for (auto iMap = orderedTable.constBegin(); iMap != orderedTable.constEnd(); ++iMap)
-    {
-        const VKnownMeasurement &m = iMap.value();
-        currentRow++;
-
-        QTableWidgetItem *item = AddCell(m.name, currentRow, ColumnName, Qt::AlignVCenter); // name
-        item->setData(Qt::UserRole, m.name);
-
-        AddCell(m.fullName, currentRow, ColumnFullName, Qt::AlignVCenter);
-        AddCell(m.group, currentRow, ColumnGroup, Qt::AlignVCenter);
-    }
-
-    ui->tableWidget->blockSignals(false);
 
     ui->actionExportToCSV->setEnabled(ui->tableWidget->rowCount() > 0);
 
@@ -2402,7 +2405,7 @@ void TKMMainWindow::RefreshImages()
 
     int const row = ui->listWidget->currentRow();
 
-    ui->listWidget->blockSignals(true);
+    const QSignalBlocker blocker(ui->listWidget);
     ui->listWidget->clear();
 
     if (!m_known.IsValid())
@@ -2430,8 +2433,8 @@ void TKMMainWindow::RefreshImages()
             auto const scalingFactorWidth = static_cast<double>(targetSize.width()) / size.width();
             auto const scalingFactorHeight = static_cast<double>(targetSize.height()) / size.height();
 
-            int newWidth;
-            int newHeight;
+            int newWidth = 0;
+            int newHeight = 0;
 
             if (scalingFactorWidth < scalingFactorHeight)
             {
@@ -2479,11 +2482,7 @@ void TKMMainWindow::RefreshImages()
         item->setData(Qt::UserRole, i.key());
     }
 
-    ui->tableWidget->blockSignals(false);
-
-    ui->listWidget->blockSignals(true);
     ui->listWidget->setCurrentRow(row);
-    ui->listWidget->blockSignals(false);
 
     QGuiApplication::restoreOverrideCursor();
 }
@@ -2622,7 +2621,7 @@ auto TKMMainWindow::GenerateMeasurementName() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void TKMMainWindow::InitMeasurementUnits()
 {
-    ui->comboBoxMUnits->blockSignals(true);
+    const QSignalBlocker blocker(ui->comboBoxMUnits);
 
     int current = -1;
     if (ui->comboBoxMUnits->currentIndex() != -1)
@@ -2638,8 +2637,6 @@ void TKMMainWindow::InitMeasurementUnits()
     {
         ui->comboBoxMUnits->setCurrentIndex(i);
     }
-
-    ui->comboBoxMUnits->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

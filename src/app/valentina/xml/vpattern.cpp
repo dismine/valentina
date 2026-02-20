@@ -181,30 +181,30 @@ struct VPieceFoldLineData
 //---------------------------------------------------------------------------------------------------------------------
 auto ParsePieceMirrorLine(const QDomElement &domElement) -> VPieceFoldLineData
 {
-    VPieceFoldLineData data;
-
-    data.p1 = VDomDocument::GetParametrUInt(domElement, VAbstractPattern::AttrMirrorLineP1, NULL_ID_STR);
-    data.p2 = VDomDocument::GetParametrUInt(domElement, VAbstractPattern::AttrMirrorLineP2, NULL_ID_STR);
-    data.mirrorLineVisible =
-        VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrMirrorLineVisible, trueStr);
-    data.heightFormula = VDomDocument::GetParametrEmptyString(domElement, VAbstractPattern::AttrFoldLineHeightFormula);
-    data.widthFormula = VDomDocument::GetParametrEmptyString(domElement, VAbstractPattern::AttrFoldLineWidthFormula);
-    data.centerFormula = VDomDocument::GetParametrEmptyString(domElement, VAbstractPattern::AttrFoldLineCenterFormula);
-    data.manualHeight = VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrFoldLineManualHeight, falseStr);
-    data.manualWidth = VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrFoldLineManualWidth, falseStr);
-    data.manualCenter = VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrFoldLineManualCenter, falseStr);
-    data.type = StringToFoldLineType(VDomDocument::GetParametrString(
-        domElement, VAbstractPattern::AttrFoldLineType, FoldLineTypeToString(FoldLineType::TwoArrowsTextAbove)));
-    data.fontSize = qMax(static_cast<unsigned int>(VCommonSettings::MinPieceLabelFontPointSize()),
-                         VDomDocument::GetParametrUInt(domElement, VAbstractPattern::AttrFoldLineFontSize,
-                                                       QString::number(defFoldLineFontSize)));
-    data.italic = VDomDocument::GetParametrBool(domElement, VDomDocument::AttrItalic, falseStr);
-    data.bold = VDomDocument::GetParametrBool(domElement, VDomDocument::AttrBold, falseStr);
-    data.label = VDomDocument::GetParametrEmptyString(domElement, VAbstractPattern::AttrFoldLineLabel);
-    data.alignment =
-        VDomDocument::GetParametrInt(domElement, VDomDocument::AttrAlignment, QString::number(Qt::AlignHCenter));
-
-    return data;
+    return {
+        .p1 = VDomDocument::GetParametrUInt(domElement, VAbstractPattern::AttrMirrorLineP1, NULL_ID_STR),
+        .p2 = VDomDocument::GetParametrUInt(domElement, VAbstractPattern::AttrMirrorLineP2, NULL_ID_STR),
+        .mirrorLineVisible = VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrMirrorLineVisible, trueStr),
+        .heightFormula = VDomDocument::GetParametrEmptyString(domElement, VAbstractPattern::AttrFoldLineHeightFormula),
+        .widthFormula = VDomDocument::GetParametrEmptyString(domElement, VAbstractPattern::AttrFoldLineWidthFormula),
+        .centerFormula = VDomDocument::GetParametrEmptyString(domElement, VAbstractPattern::AttrFoldLineCenterFormula),
+        .manualHeight = VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrFoldLineManualHeight, falseStr),
+        .manualWidth = VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrFoldLineManualWidth, falseStr),
+        .manualCenter = VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrFoldLineManualCenter, falseStr),
+        .type = StringToFoldLineType(
+            VDomDocument::GetParametrString(domElement,
+                                            VAbstractPattern::AttrFoldLineType,
+                                            FoldLineTypeToString(FoldLineType::TwoArrowsTextAbove))),
+        .fontSize = qMax(static_cast<unsigned int>(VCommonSettings::MinPieceLabelFontPointSize()),
+                         VDomDocument::GetParametrUInt(domElement,
+                                                       VAbstractPattern::AttrFoldLineFontSize,
+                                                       QString::number(defFoldLineFontSize))),
+        .italic = VDomDocument::GetParametrBool(domElement, VDomDocument::AttrItalic, falseStr),
+        .bold = VDomDocument::GetParametrBool(domElement, VDomDocument::AttrBold, falseStr),
+        .label = VDomDocument::GetParametrEmptyString(domElement, VAbstractPattern::AttrFoldLineLabel),
+        .alignment = VDomDocument::GetParametrInt(domElement,
+                                                  VDomDocument::AttrAlignment,
+                                                  QString::number(Qt::AlignHCenter))};
 }
 } // anonymous namespace
 
@@ -924,9 +924,8 @@ void VPattern::ParseRootElement(const Document &parse, const QDomNode &node)
             }
             else
             {
-                blocks->blockSignals(true);
+                const QSignalBlocker blocker(blocks);
                 blocks->SetActive(GetParametrString(domElement, AttrName));
-                blocks->blockSignals(false);
             }
             ParseDrawElement(domElement, parse);
             break;
@@ -1165,7 +1164,7 @@ void VPattern::ParseDetailInternals(const QDomElement &domElement, VPiece &detai
                            VToolSeamAllowance::TagIPaths,
                            VToolSeamAllowance::TagPins,
                            VToolSeamAllowance::TagPlaceLabels,
-                           VToolSeamAllowance::TagMirrorLine};
+                           VAbstractPattern::TagMirrorLine};
 
     QFuture<QVector<VPieceNode>> futurePathV1;
     QFuture<VPiecePath> futurePathV2;
@@ -2328,6 +2327,11 @@ void VPattern::ParseToolCutSpline(VMainGraphicsScene *scene, QDomElement &domEle
         initData.aliasSuffix1 = GetParametrEmptyString(domElement, AttrAlias1);
         initData.aliasSuffix2 = GetParametrEmptyString(domElement, AttrAlias2);
 
+        // Make name1 and name2 mandatory
+        Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
+        initData.name1 = GetParametrEmptyString(domElement, AttrCurveName1); // Optionally empty for compatibility
+        initData.name2 = GetParametrEmptyString(domElement, AttrCurveName2); // Optionally empty for compatibility
+
         VToolCutSpline::Create(initData);
         // Rewrite attribute formula. Need for situation when we have wrong formula.
         if (f != initData.formula)
@@ -2373,6 +2377,11 @@ void VPattern::ParseToolCutSplinePath(VMainGraphicsScene *scene, QDomElement &do
         initData.aliasSuffix1 = GetParametrEmptyString(domElement, AttrAlias1);
         initData.aliasSuffix2 = GetParametrEmptyString(domElement, AttrAlias2);
 
+        // Make name1 and name2 mandatory
+        Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
+        initData.name1 = GetParametrEmptyString(domElement, AttrCurveName1); // Optionally empty for compatibility
+        initData.name2 = GetParametrEmptyString(domElement, AttrCurveName2); // Optionally empty for compatibility
+
         VToolCutSplinePath::Create(initData);
         // Rewrite attribute formula. Need for situation when we have wrong formula.
         if (f != initData.formula)
@@ -2417,6 +2426,11 @@ void VPattern::ParseToolCutArc(VMainGraphicsScene *scene, QDomElement &domElemen
         initData.baseCurveId = GetParametrUInt(domElement, AttrArc, NULL_ID_STR);
         initData.aliasSuffix1 = GetParametrEmptyString(domElement, AttrAlias1);
         initData.aliasSuffix2 = GetParametrEmptyString(domElement, AttrAlias2);
+
+        // Make name1 and name2 mandatory
+        Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
+        initData.name1 = GetParametrEmptyString(domElement, AttrCurveName1); // Optionally empty for compatibility
+        initData.name2 = GetParametrEmptyString(domElement, AttrCurveName2); // Optionally empty for compatibility
 
         VToolCutArc::Create(initData);
         // Rewrite attribute formula. Need for situation when we have wrong formula.
@@ -2515,6 +2529,8 @@ void VPattern::ParseToolCurveIntersectAxis(VMainGraphicsScene *scene, QDomElemen
         initData.curveId = GetParametrUInt(domElement, AttrCurve, NULL_ID_STR);
         initData.formulaAngle = GetParametrString(domElement, AttrAngle, QStringLiteral("0.0"));
         const QString angleFix = initData.formulaAngle;
+        initData.name1 = GetParametrEmptyString(domElement, AttrName1);
+        initData.name2 = GetParametrEmptyString(domElement, AttrName2);
         initData.aliasSuffix1 = GetParametrEmptyString(domElement, AttrAlias1);
         initData.aliasSuffix2 = GetParametrEmptyString(domElement, AttrAlias2);
 
@@ -2642,6 +2658,10 @@ void VPattern::ParseToolPointOfIntersectionCurves(VMainGraphicsScene *scene, QDo
         initData.secondCurveId = GetParametrUInt(domElement, AttrCurve2, NULL_ID_STR);
         initData.vCrossPoint = static_cast<VCrossCurvesPoint>(GetParametrUInt(domElement, AttrVCrossPoint, QChar('1')));
         initData.hCrossPoint = static_cast<HCrossCurvesPoint>(GetParametrUInt(domElement, AttrHCrossPoint, QChar('1')));
+        initData.curve1Name1 = GetParametrEmptyString(domElement, AttrCurve1Name1);
+        initData.curve1Name2 = GetParametrEmptyString(domElement, AttrCurve1Name2);
+        initData.curve2Name1 = GetParametrEmptyString(domElement, AttrCurve2Name1);
+        initData.curve2Name2 = GetParametrEmptyString(domElement, AttrCurve2Name2);
         initData.curve1AliasSuffix1 = GetParametrEmptyString(domElement, AttrCurve1Alias1);
         initData.curve1AliasSuffix2 = GetParametrEmptyString(domElement, AttrCurve1Alias2);
         initData.curve2AliasSuffix1 = GetParametrEmptyString(domElement, AttrCurve2Alias1);
@@ -2981,7 +3001,7 @@ void VPattern::ParseOldToolSplinePath(VMainGraphicsScene *scene, QDomElement &do
         QDOM_LOOP(nodeList, i)
         {
             if (const QDomElement element = QDOM_ELEMENT(nodeList, i).toElement();
-                !element.isNull() && element.tagName() == AttrPathPoint)
+                !element.isNull() && element.tagName() == TagPathPoint)
             {
                 const qreal kAsm1 = GetParametrDouble(element, AttrKAsm1, QStringLiteral("1.0"));
                 const qreal angle = GetParametrDouble(element, AttrAngle, QChar('0'));
@@ -3045,7 +3065,7 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
         QDOM_LOOP(nodeList, i)
         {
             if (const QDomElement element = QDOM_ELEMENT(nodeList, i).toElement();
-                not element.isNull() && element.tagName() == AttrPathPoint)
+                not element.isNull() && element.tagName() == TagPathPoint)
             {
                 initData.a1.append(GetParametrString(element, AttrAngle1, QChar('0')));
                 initData.a2.append(GetParametrString(element, AttrAngle2, QChar('0')));
@@ -3074,7 +3094,7 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
         QDOM_LOOP(nodeList, i)
         {
             if (QDomElement element = QDOM_ELEMENT(nodeList, i).toElement();
-                not element.isNull() && element.tagName() == AttrPathPoint)
+                not element.isNull() && element.tagName() == TagPathPoint)
             {
                 if (angle1.at(count) != initData.a1.at(count) || angle2.at(count) != initData.a2.at(count) ||
                     length1.at(count) != initData.l1.at(count) || length2.at(count) != initData.l2.at(count))
@@ -3127,7 +3147,17 @@ void VPattern::ParseToolParallelCurve(VMainGraphicsScene *scene, QDomElement &do
         initData.penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         initData.approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
         initData.aliasSuffix = GetParametrEmptyString(domElement, AttrAlias);
-        initData.suffix = GetParametrEmptyString(domElement, AttrSuffix);
+        initData.name = GetParametrEmptyString(domElement, AttrName);
+
+        // We no longer need to handle suffix attribute here. The code can be removed.
+        Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
+        if (initData.name.isEmpty())
+        {
+            const QString suffix = GetParametrEmptyString(domElement, AttrSuffix);
+            const QSharedPointer<VAbstractCurve> curve = initData.data->GeometricObject<VAbstractCurve>(
+                initData.originCurveId);
+            initData.name = curve->HeadlessName() + suffix;
+        }
 
         VToolParallelCurve::Create(initData);
         // Rewrite attribute formula. Need for situation when we have wrong formula.
@@ -3173,7 +3203,7 @@ void VPattern::ParseToolGraduatedCurve(VMainGraphicsScene *scene, QDomElement &d
         initData.penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         initData.approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
         initData.aliasSuffix = GetParametrEmptyString(domElement, AttrAlias);
-        initData.suffix = GetParametrEmptyString(domElement, AttrSuffix);
+        initData.name = GetParametrEmptyString(domElement, AttrName);
         initData.offsets = VToolGraduatedCurve::ExtractOffsetData(domElement);
 
         const QDomNodeList nodeList = domElement.childNodes();
@@ -3185,6 +3215,16 @@ void VPattern::ParseToolGraduatedCurve(VMainGraphicsScene *scene, QDomElement &d
         for (const auto &offsetData : std::as_const(initData.offsets))
         {
             originalFormulas.append(offsetData.formula); // need for saving fixed formula;
+        }
+
+        // We no longer need to handle suffix attribute here. The code can be removed.
+        Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
+        if (initData.name.isEmpty())
+        {
+            const QString suffix = GetParametrEmptyString(domElement, AttrSuffix);
+            const QSharedPointer<VAbstractCurve> curve = initData.data->GeometricObject<VAbstractCurve>(
+                initData.originCurveId);
+            initData.name = curve->HeadlessName() + suffix;
         }
 
         VToolGraduatedCurve::Create(initData);
@@ -3244,7 +3284,7 @@ void VPattern::ParseToolCubicBezierPath(VMainGraphicsScene *scene, const QDomEle
         QDOM_LOOP(nodeList, i)
         {
             if (const QDomElement element = QDOM_ELEMENT(nodeList, i).toElement();
-                !element.isNull() && element.tagName() == AttrPathPoint)
+                !element.isNull() && element.tagName() == TagPathPoint)
             {
                 const quint32 pSpline = GetParametrUInt(element, AttrPSpline, NULL_ID_STR);
                 const VPointF p = *data->GeometricObject<VPointF>(pSpline);
@@ -3623,7 +3663,10 @@ void VPattern::ParseToolRotation(VMainGraphicsScene *scene, QDomElement &domElem
         initData.origin = GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
         initData.angle = GetParametrString(domElement, AttrAngle, QStringLiteral("10"));
         const QString a = initData.angle; // need for saving fixed formula;
-        initData.suffix = GetParametrString(domElement, AttrSuffix, QString());
+
+        // We no longer need to handle suffix attribute here. The code can be removed.
+        Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
+        initData.suffix = GetParametrEmptyString(domElement, AttrSuffix);
 
         VAbstractOperation::ExtractData(domElement, initData);
 
@@ -3668,7 +3711,10 @@ void VPattern::ParseToolFlippingByLine(VMainGraphicsScene *scene, QDomElement &d
         DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
         initData.firstLinePointId = GetParametrUInt(domElement, AttrP1Line, NULL_ID_STR);
         initData.secondLinePointId = GetParametrUInt(domElement, AttrP2Line, NULL_ID_STR);
-        initData.suffix = GetParametrString(domElement, AttrSuffix, QString());
+
+        // We no longer need to handle suffix attribute here. The code can be removed.
+        Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
+        initData.suffix = GetParametrEmptyString(domElement, AttrSuffix);
 
         VAbstractOperation::ExtractData(domElement, initData);
 
@@ -3700,7 +3746,10 @@ void VPattern::ParseToolFlippingByAxis(VMainGraphicsScene *scene, QDomElement &d
         DrawToolsCommonAttributes(domElement, initData.id, initData.notes);
         initData.originPointId = GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
         initData.axisType = static_cast<AxisType>(GetParametrUInt(domElement, AttrAxisType, QChar('1')));
-        initData.suffix = GetParametrString(domElement, AttrSuffix, QString());
+
+        // We no longer need to handle suffix attribute here. The code can be removed.
+        Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
+        initData.suffix = GetParametrEmptyString(domElement, AttrSuffix);
 
         VAbstractOperation::ExtractData(domElement, initData);
 
@@ -3736,8 +3785,11 @@ void VPattern::ParseToolMove(VMainGraphicsScene *scene, QDomElement &domElement,
         const QString r = initData.formulaRotationAngle; // need for saving fixed formula;
         initData.formulaLength = GetParametrString(domElement, AttrLength, QChar('0'));
         const QString len = initData.formulaLength; // need for saving fixed formula;
-        initData.suffix = GetParametrString(domElement, AttrSuffix, QString());
         initData.rotationOrigin = GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
+
+        // We no longer need to handle suffix attribute here. The code can be removed.
+        Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
+        initData.suffix = GetParametrEmptyString(domElement, AttrSuffix);
 
         VAbstractOperation::ExtractData(domElement, initData);
 
@@ -4811,7 +4863,7 @@ auto VPattern::ActiveDrawBoundingRect() const -> QRectF
             case Tool::EllipticalArcWithLength:
             case Tool::ParallelCurve:
             case Tool::GraduatedCurve:
-                rec = ToolBoundingRect<VAbstractSpline>(rec, tool.GetId());
+                rec = ToolBoundingRect<VToolAbstractCurve>(rec, tool.GetId());
                 break;
             case Tool::TrueDarts:
                 rec = ToolBoundingRect<VToolDoublePoint>(rec, tool.GetId());

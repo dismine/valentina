@@ -120,6 +120,12 @@ void DialogPin::SetPiecesList(const QVector<quint32> &list)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPin::CheckDependencyTreeComplete()
+{
+    // does nothing
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPin::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (not prepare && type == SceneObject::Point && SetObject(id, ui->comboBoxPoint, QString()))

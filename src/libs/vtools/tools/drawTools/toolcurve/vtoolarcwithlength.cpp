@@ -50,7 +50,7 @@
 #include "../vpatterndb/vformula.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "vabstractspline.h"
+#include "vtoolabstractcurve.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
@@ -72,12 +72,28 @@ VToolArcWithLength::VToolArcWithLength(const VToolArcWithLengthInitData &initDat
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VToolArcWithLength::GatherToolChanges() const -> VToolAbstractArc::ToolChanges
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogArcWithLength> dialogTool = qobject_cast<DialogArcWithLength *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    const QSharedPointer<VAbstractArc> arc = VAbstractTool::data.GeometricObject<VAbstractArc>(m_id);
+
+    return {.oldCenterLabel = CenterPointName(),
+            .newCenterLabel = VAbstractTool::data.GetGObject(dialogTool->GetCenter())->name(),
+            .oldAliasSuffix = arc->GetAliasSuffix(),
+            .newAliasSuffix = dialogTool->GetAliasSuffix()};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolArcWithLength::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogArcWithLength> dialogTool = qobject_cast<DialogArcWithLength *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
+    dialogTool->CheckDependencyTreeComplete();
     dialogTool->SetCenter(arc->GetCenter().id());
     dialogTool->SetF1(arc->GetFormulaF1());
     dialogTool->SetLength(arc->GetFormulaLength());
@@ -326,7 +342,7 @@ void VToolArcWithLength::SaveDialog(QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolArcWithLength::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-    VAbstractSpline::SaveOptions(tag, obj);
+    VToolAbstractArc::SaveOptions(tag, obj);
 
     QSharedPointer<VArc> const arc = qSharedPointerDynamicCast<VArc>(obj);
     SCASSERT(arc.isNull() == false)
@@ -382,4 +398,10 @@ auto VToolArcWithLength::MakeToolTip() const -> QString
                                 .arg(arc->GetEndAngle())
                                 .arg(tr("Label"), arc->ObjectName());
     return toolTip;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolArcWithLength::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    ProcessArcToolOptions(oldDomElement, newDomElement, GatherToolChanges());
 }

@@ -31,7 +31,6 @@
 #include <QLineF>
 #include <QPointF>
 #include <QSharedPointer>
-#include <new>
 
 #include "../../../../../dialogs/tools/dialogendline.h"
 #include "../../../../../dialogs/tools/dialogtool.h"
@@ -79,6 +78,7 @@ void VToolEndLine::SetDialog()
     QPointer<DialogEndLine> const dialogTool = qobject_cast<DialogEndLine *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
+    dialogTool->CheckDependencyTreeComplete();
     dialogTool->SetTypeLine(m_lineType);
     dialogTool->SetLineColor(lineColor);
     dialogTool->SetFormula(formulaLength);
@@ -245,6 +245,19 @@ void VToolEndLine::SetVisualization()
         visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolEndLine::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogEndLine> dialogTool = qobject_cast<DialogEndLine *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    ProcessLinePointToolOptions(oldDomElement,
+                                newDomElement,
+                                dialogTool->GetPointName(),
+                                VAbstractTool::data.GetGObject(dialogTool->GetBasePointId())->name());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

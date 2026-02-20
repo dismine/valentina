@@ -85,8 +85,6 @@ enum class IncrUnits : qint8
 
 struct IncrementData
 {
-    IncrementData() = default;
-
     QString name{};           // NOLINT(misc-non-private-member-variables-in-classes)
     QString value{'0'};       // NOLINT(misc-non-private-member-variables-in-classes)
     QString description{};    // NOLINT(misc-non-private-member-variables-in-classes)
@@ -159,13 +157,15 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     InitIncrementUnits(ui->comboBoxIncrementUnits);
     InitIncrementUnits(ui->comboBoxPreviewCalculationUnits);
 
-    ui->comboBoxIncrementUnits->blockSignals(true);
-    ui->comboBoxIncrementUnits->setCurrentIndex(-1);
-    ui->comboBoxIncrementUnits->blockSignals(true);
+    {
+        const QSignalBlocker blocker(ui->comboBoxIncrementUnits);
+        ui->comboBoxIncrementUnits->setCurrentIndex(-1);
+    }
 
-    ui->comboBoxPreviewCalculationUnits->blockSignals(true);
-    ui->comboBoxPreviewCalculationUnits->setCurrentIndex(-1);
-    ui->comboBoxPreviewCalculationUnits->blockSignals(true);
+    {
+        const QSignalBlocker blocker(ui->comboBoxPreviewCalculationUnits);
+        ui->comboBoxPreviewCalculationUnits->setCurrentIndex(-1);
+    }
 
     connect(ui->comboBoxIncrementUnits, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &DialogIncrements::SaveIncrUnits);
@@ -617,47 +617,53 @@ void DialogIncrements::EnableDetails(QTableWidget *table, bool enabled)
     { // Clear
         if (table == ui->tableWidgetIncrement)
         {
-            ui->lineEditName->blockSignals(true);
-            ui->lineEditName->clear();
-            ui->lineEditName->blockSignals(false);
+            {
+                const QSignalBlocker blocker(ui->lineEditName);
+                ui->lineEditName->clear();
+            }
 
-            ui->comboBoxIncrementUnits->blockSignals(true);
-            ui->comboBoxIncrementUnits->setCurrentIndex(-1);
-            ui->comboBoxIncrementUnits->blockSignals(false);
+            {
+                const QSignalBlocker blocker(ui->comboBoxIncrementUnits);
+                ui->comboBoxIncrementUnits->setCurrentIndex(-1);
+            }
 
-            ui->plainTextEditDescription->blockSignals(true);
-            ui->plainTextEditDescription->clear();
-            ui->plainTextEditDescription->blockSignals(false);
+            {
+                const QSignalBlocker blocker(ui->plainTextEditDescription);
+                ui->plainTextEditDescription->clear();
+            }
 
-            ui->labelCalculatedValue->blockSignals(true);
-            ui->labelCalculatedValue->clear();
-            ui->labelCalculatedValue->blockSignals(false);
+            {
+                const QSignalBlocker blocker(ui->labelCalculatedValue);
+                ui->labelCalculatedValue->clear();
+            }
 
-            ui->plainTextEditFormula->blockSignals(true);
+            const QSignalBlocker blocker(ui->plainTextEditFormula);
             ui->plainTextEditFormula->clear();
-            ui->plainTextEditFormula->blockSignals(false);
         }
         else if (table == ui->tableWidgetPC)
         {
-            ui->lineEditNamePC->blockSignals(true);
-            ui->lineEditNamePC->clear();
-            ui->lineEditNamePC->blockSignals(false);
+            {
+                const QSignalBlocker blocker(ui->lineEditNamePC);
+                ui->lineEditNamePC->clear();
+            }
 
-            ui->comboBoxPreviewCalculationUnits->blockSignals(true);
-            ui->comboBoxPreviewCalculationUnits->setCurrentIndex(-1);
-            ui->comboBoxPreviewCalculationUnits->blockSignals(false);
+            {
+                const QSignalBlocker blocker(ui->comboBoxPreviewCalculationUnits);
+                ui->comboBoxPreviewCalculationUnits->setCurrentIndex(-1);
+            }
 
-            ui->plainTextEditDescriptionPC->blockSignals(true);
-            ui->plainTextEditDescriptionPC->clear();
-            ui->plainTextEditDescriptionPC->blockSignals(false);
+            {
+                const QSignalBlocker blocker(ui->plainTextEditDescriptionPC);
+                ui->plainTextEditDescriptionPC->clear();
+            }
 
-            ui->labelCalculatedValuePC->blockSignals(true);
-            ui->labelCalculatedValuePC->clear();
-            ui->labelCalculatedValuePC->blockSignals(false);
+            {
+                const QSignalBlocker blocker(ui->labelCalculatedValuePC);
+                ui->labelCalculatedValuePC->clear();
+            }
 
-            ui->plainTextEditFormulaPC->blockSignals(true);
+            const QSignalBlocker blocker(ui->plainTextEditFormulaPC);
             ui->plainTextEditFormulaPC->clear();
-            ui->plainTextEditFormulaPC->blockSignals(false);
         }
     }
 
@@ -721,17 +727,19 @@ void DialogIncrements::LocalUpdateTree()
 
     FillIncrements();
 
-    ui->tableWidgetIncrement->blockSignals(true);
-    ui->tableWidgetIncrement->selectRow(row);
-    ui->tableWidgetIncrement->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->tableWidgetIncrement);
+        ui->tableWidgetIncrement->selectRow(row);
+    }
 
     row = ui->tableWidgetPC->currentRow();
 
     FillPreviewCalculations();
 
-    ui->tableWidgetPC->blockSignals(true);
-    ui->tableWidgetPC->selectRow(row);
-    ui->tableWidgetPC->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->tableWidgetPC);
+        ui->tableWidgetPC->selectRow(row);
+    }
 
     m_search->RefreshList(ui->lineEditFind->text());
     m_searchPC->RefreshList(ui->lineEditFindPC->text());
@@ -834,27 +842,31 @@ void DialogIncrements::ShowTableIncrementDetails(QTableWidget *table)
             return;
         }
 
-        lineEditName->blockSignals(true);
-        lineEditName->setText(ClearIncrementName(incr->GetName()));
-        lineEditName->blockSignals(false);
+        {
+            const QSignalBlocker blocker(lineEditName);
+            lineEditName->setText(ClearIncrementName(incr->GetName()));
+        }
 
-        comboboxUnits->blockSignals(true);
-        comboboxUnits->setCurrentIndex(comboboxUnits->findData(
-            static_cast<int>(incr->IsSpecialUnits() ? IncrUnits::Degrees : IncrUnits::Pattern)));
-        comboboxUnits->blockSignals(false);
+        {
+            const QSignalBlocker blocker(comboboxUnits);
+            comboboxUnits->setCurrentIndex(comboboxUnits->findData(
+                static_cast<int>(incr->IsSpecialUnits() ? IncrUnits::Degrees : IncrUnits::Pattern)));
+        }
 
-        plainTextEditDescription->blockSignals(true);
-        plainTextEditDescription->setPlainText(incr->GetDescription());
-        plainTextEditDescription->blockSignals(false);
+        {
+            const QSignalBlocker blocker(plainTextEditDescription);
+            plainTextEditDescription->setPlainText(incr->GetDescription());
+        }
 
         EvalIncrementFormula(incr->GetFormula(), false, incr->GetData(), labelCalculatedValue, incr->IsSpecialUnits());
-        plainTextEditFormula->blockSignals(true);
 
-        QString const formula = VTranslateVars::TryFormulaToUser(
-            incr->GetFormula(), VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+        const QSignalBlocker blocker(plainTextEditFormula);
+
+        QString const formula
+            = VTranslateVars::TryFormulaToUser(incr->GetFormula(),
+                                               VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 
         plainTextEditFormula->setPlainText(formula);
-        plainTextEditFormula->blockSignals(false);
     }
     else
     {
@@ -1112,9 +1124,10 @@ void DialogIncrements::InitSearch()
 
                 if (checked)
                 {
-                    ui->toolButtonWholeWord->blockSignals(true);
-                    ui->toolButtonWholeWord->setChecked(false);
-                    ui->toolButtonWholeWord->blockSignals(false);
+                    {
+                        const QSignalBlocker blocker(ui->toolButtonWholeWord);
+                        ui->toolButtonWholeWord->setChecked(false);
+                    }
                     ui->toolButtonWholeWord->setEnabled(false);
 
                     ui->toolButtonUseUnicodeProperties->setEnabled(true);
@@ -1122,9 +1135,10 @@ void DialogIncrements::InitSearch()
                 else
                 {
                     ui->toolButtonWholeWord->setEnabled(true);
-                    ui->toolButtonUseUnicodeProperties->blockSignals(true);
-                    ui->toolButtonUseUnicodeProperties->setChecked(false);
-                    ui->toolButtonUseUnicodeProperties->blockSignals(false);
+                    {
+                        const QSignalBlocker blocker(ui->toolButtonUseUnicodeProperties);
+                        ui->toolButtonUseUnicodeProperties->setChecked(false);
+                    }
                     ui->toolButtonUseUnicodeProperties->setEnabled(false);
                 }
                 m_search->Find(ui->lineEditFind->text());
@@ -1138,9 +1152,10 @@ void DialogIncrements::InitSearch()
 
                 if (checked)
                 {
-                    ui->toolButtonWholeWordPC->blockSignals(true);
-                    ui->toolButtonWholeWordPC->setChecked(false);
-                    ui->toolButtonWholeWordPC->blockSignals(false);
+                    {
+                        const QSignalBlocker blocker(ui->toolButtonWholeWordPC);
+                        ui->toolButtonWholeWordPC->setChecked(false);
+                    }
                     ui->toolButtonWholeWordPC->setEnabled(false);
 
                     ui->toolButtonUseUnicodePropertiesPC->setEnabled(true);
@@ -1148,9 +1163,10 @@ void DialogIncrements::InitSearch()
                 else
                 {
                     ui->toolButtonWholeWordPC->setEnabled(true);
-                    ui->toolButtonUseUnicodePropertiesPC->blockSignals(true);
-                    ui->toolButtonUseUnicodePropertiesPC->setChecked(false);
-                    ui->toolButtonUseUnicodePropertiesPC->blockSignals(false);
+                    {
+                        const QSignalBlocker blocker(ui->toolButtonUseUnicodePropertiesPC);
+                        ui->toolButtonUseUnicodePropertiesPC->setChecked(false);
+                    }
                     ui->toolButtonUseUnicodePropertiesPC->setEnabled(false);
                 }
                 m_searchPC->Find(ui->lineEditFindPC->text());
@@ -1332,7 +1348,7 @@ void DialogIncrements::InitIncrementUnits(QComboBox *combo)
 {
     SCASSERT(combo != nullptr)
 
-    combo->blockSignals(true);
+    const QSignalBlocker blocker(combo);
 
     int current = -1;
     if (combo->currentIndex() != -1)
@@ -1365,8 +1381,6 @@ void DialogIncrements::InitIncrementUnits(QComboBox *combo)
     {
         combo->setCurrentIndex(i);
     }
-
-    combo->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1635,7 +1649,7 @@ void DialogIncrements::RefreshPattern()
     if (m_hasChanges)
     {
         QVector<VFormulaField> expressions = m_patternDoc->ListExpressions();
-        for (const auto &[first, second] : m_renameList)
+        for (const auto &[first, second] : std::as_const(m_renameList))
         {
             m_patternDoc->ReplaceNameInFormula(expressions, first, second);
         }
@@ -1646,13 +1660,15 @@ void DialogIncrements::RefreshPattern()
 
         m_patternDoc->LiteParseTree(Document::FullLiteParse);
 
-        ui->tableWidgetIncrement->blockSignals(true);
-        ui->tableWidgetIncrement->selectRow(row);
-        ui->tableWidgetIncrement->blockSignals(false);
+        {
+            const QSignalBlocker blocker(ui->tableWidgetIncrement);
+            ui->tableWidgetIncrement->selectRow(row);
+        }
 
-        ui->tableWidgetPC->blockSignals(true);
-        ui->tableWidgetPC->selectRow(rowPC);
-        ui->tableWidgetPC->blockSignals(false);
+        {
+            const QSignalBlocker blocker(ui->tableWidgetPC);
+            ui->tableWidgetPC->selectRow(rowPC);
+        }
 
         m_hasChanges = false;
     }
@@ -1790,7 +1806,7 @@ void DialogIncrements::FillIncrementsTable(QTableWidget *table,
 {
     SCASSERT(table != nullptr)
 
-    table->blockSignals(true);
+    const QSignalBlocker blocker(table);
     table->clearContents();
 
     QMap<quint32, QString> map;
@@ -1843,7 +1859,6 @@ void DialogIncrements::FillIncrementsTable(QTableWidget *table,
     }
 
     table->horizontalHeader()->setStretchLastSection(true);
-    table->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2061,9 +2076,8 @@ void DialogIncrements::SaveIncrName(const QString &text)
         m_patternDoc->LiteParseIncrements();
     }
 
-    table->blockSignals(true);
+    const QSignalBlocker blocker(table);
     table->selectRow(row);
-    table->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2099,9 +2113,10 @@ void DialogIncrements::SaveIncrUnits()
     m_patternDoc->SetIncrementSpecialUnits(nameField->text(), units == IncrUnits::Degrees);
     LocalUpdateTree();
 
-    table->blockSignals(true);
-    table->selectRow(row);
-    table->blockSignals(false);
+    {
+        const QSignalBlocker blocker(table);
+        table->selectRow(row);
+    }
 
     ShowTableIncrementDetails(table);
 }
@@ -2139,9 +2154,10 @@ void DialogIncrements::SaveIncrDescription()
     m_patternDoc->SetIncrementDescription(nameField->text(), textEdit->toPlainText());
     LocalUpdateTree();
 
-    table->blockSignals(true);
-    table->selectRow(row);
-    table->blockSignals(false);
+    {
+        const QSignalBlocker blocker(table);
+        table->selectRow(row);
+    }
     textEdit->setTextCursor(cursor);
 }
 
@@ -2238,9 +2254,10 @@ void DialogIncrements::SaveIncrFormula()
     m_hasChanges = true;
     LocalUpdateTree();
 
-    table->blockSignals(true);
-    table->selectRow(row);
-    table->blockSignals(false);
+    {
+        const QSignalBlocker blocker(table);
+        table->selectRow(row);
+    }
     textEdit->setTextCursor(cursor);
 }
 
@@ -2515,4 +2532,10 @@ void DialogIncrements::RestoreAfterClose()
     {
         ui->tableWidgetPC->selectRow(0);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::CheckDependencyTreeComplete()
+{
+    // does nothing
 }

@@ -42,6 +42,12 @@
 #include "../vpatterndb/vcontainer.h"
 #include "ui_dialogpointofintersectioncurves.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 DialogPointOfIntersectionCurves::DialogPointOfIntersectionCurves(const VContainer *data, VAbstractPattern *doc,
                                                                  quint32 toolId, QWidget *parent)
@@ -65,14 +71,27 @@ DialogPointOfIntersectionCurves::DialogPointOfIntersectionCurves(const VContaine
     FillComboBoxVCrossCurvesPoint(ui->comboBoxVCorrection);
     FillComboBoxHCrossCurvesPoint(ui->comboBoxHCorrection);
 
-    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
-            [this]()
+    ui->lineEditCurve1Name1->setText(GenerateDefCurve1LeftSubName());
+    ui->lineEditCurve1Name2->setText(GenerateDefCurve1RightSubName());
+    ui->lineEditCurve2Name1->setText(GenerateDefCurve2LeftSubName());
+    ui->lineEditCurve2Name2->setText(GenerateDefCurve2RightSubName());
+
+    connect(ui->lineEditNamePoint,
+            &QLineEdit::textChanged,
+            this,
+            [this]() -> void
             {
                 CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
                 CheckState();
             });
     connect(ui->comboBoxCurve1, &QComboBox::currentTextChanged, this, &DialogPointOfIntersectionCurves::CurveChanged);
     connect(ui->comboBoxCurve2, &QComboBox::currentTextChanged, this, &DialogPointOfIntersectionCurves::CurveChanged);
+
+    connect(ui->lineEditCurve1Name1, &QLineEdit::textEdited, this, &DialogPointOfIntersectionCurves::ValidateName);
+    connect(ui->lineEditCurve1Name2, &QLineEdit::textEdited, this, &DialogPointOfIntersectionCurves::ValidateName);
+    connect(ui->lineEditCurve2Name1, &QLineEdit::textEdited, this, &DialogPointOfIntersectionCurves::ValidateName);
+    connect(ui->lineEditCurve2Name2, &QLineEdit::textEdited, this, &DialogPointOfIntersectionCurves::ValidateName);
+
     connect(ui->lineEditCurve1Alias1, &QLineEdit::textEdited, this, &DialogPointOfIntersectionCurves::ValidateAlias);
     connect(ui->lineEditCurve1Alias2, &QLineEdit::textEdited, this, &DialogPointOfIntersectionCurves::ValidateAlias);
     connect(ui->lineEditCurve2Alias1, &QLineEdit::textEdited, this, &DialogPointOfIntersectionCurves::ValidateAlias);
@@ -252,60 +271,217 @@ void DialogPointOfIntersectionCurves::CurveChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionCurves::ValidateAlias()
 {
-    QRegularExpression const rx(NameRegExp());
-
     const QSharedPointer<VAbstractCurve> curve1 = data->GeometricObject<VAbstractCurve>(GetFirstCurveId());
     auto const [curve1AliasFirst, curve1AliasSecond] =
         SegmentAliases(curve1->getType(), GetCurve1AliasSuffix1(), GetCurve1AliasSuffix2());
+    auto const [curve1Name1, curve1Name2] = SegmentNames(curve1->getType(), GetCurve1Name1(), GetCurve1Name2());
 
     const QSharedPointer<VAbstractCurve> curve2 = data->GeometricObject<VAbstractCurve>(GetSecondCurveId());
     auto const [curve2AliasFirst, curve2AliasSecond] =
         SegmentAliases(curve2->getType(), GetCurve2AliasSuffix1(), GetCurve2AliasSuffix2());
+    auto const [curve2Name1, curve2Name2] = SegmentNames(curve2->getType(), GetCurve2Name1(), GetCurve2Name2());
 
-    QSet<QString> uniqueAliases;
-    int countAliases = 0;
+    QRegularExpression const rx(NameRegExp());
 
-    auto CountUniqueAliases = [&countAliases, &uniqueAliases](const QString &alias)
+    // Helper lambda to validate a single alias
+    auto ValidateAlias = [&](const QString &alias,
+                             const QString &suffix,
+                             const QString &originSuffix,
+                             const QSet<QString> &conflictSet) -> bool
     {
-        if (not alias.isEmpty())
+        if (suffix.isEmpty())
         {
-            uniqueAliases.insert(alias);
-            ++countAliases;
+            return true;
         }
+
+        if (!rx.match(alias).hasMatch())
+        {
+            return false;
+        }
+
+        if (originSuffix != suffix && !data->IsUnique(alias))
+        {
+            return false;
+        }
+
+        if (conflictSet.contains(alias))
+        {
+            return false;
+        }
+
+        return true;
     };
 
-    CountUniqueAliases(curve1AliasFirst);
-    CountUniqueAliases(curve1AliasSecond);
-    CountUniqueAliases(curve2AliasFirst);
-    CountUniqueAliases(curve2AliasSecond);
+    // Build conflict sets (excluding the alias being validated)
+    const QSet<QString> conflictsForCurve1Alias1{curve1AliasSecond,
+                                                 curve1Name1,
+                                                 curve1Name2,
+                                                 curve2AliasFirst,
+                                                 curve2AliasSecond,
+                                                 curve2Name1,
+                                                 curve2Name2};
+    const QSet<QString> conflictsForCurve1Alias2{curve1AliasFirst,
+                                                 curve1Name1,
+                                                 curve1Name2,
+                                                 curve2AliasFirst,
+                                                 curve2AliasSecond,
+                                                 curve2Name1,
+                                                 curve2Name2};
+    const QSet<QString> conflictsForCurve2Alias1{curve1AliasFirst,
+                                                 curve1AliasSecond,
+                                                 curve1Name1,
+                                                 curve1Name2,
+                                                 curve2AliasSecond,
+                                                 curve2Name1,
+                                                 curve2Name2};
+    const QSet<QString> conflictsForCurve2Alias2{curve1AliasFirst,
+                                                 curve1AliasSecond,
+                                                 curve1Name1,
+                                                 curve1Name2,
+                                                 curve2AliasFirst,
+                                                 curve2Name1,
+                                                 curve2Name2};
 
-    auto Validate = [countAliases, uniqueAliases, rx, this](const QString &originalSuffix, const QString &suffix,
-                                                            const QString &alias, bool &flagAlias, QLabel *label)
-    {
-        if (not suffix.isEmpty() &&
-            (not rx.match(alias).hasMatch() || (originalSuffix != suffix && not data->IsUnique(alias)) ||
-             countAliases != uniqueAliases.size()))
-        {
-            flagAlias = false;
-            ChangeColor(label, errorColor);
-        }
-        else
-        {
-            flagAlias = true;
-            ChangeColor(label, OkColor(this));
-        }
-    };
+    // Validate all aliases
+    flagCurve1Alias1 = ValidateAlias(curve1AliasFirst,
+                                     GetCurve1AliasSuffix1(),
+                                     originCurve1AliasSuffix1,
+                                     conflictsForCurve1Alias1);
+    flagCurve1Alias2 = ValidateAlias(curve1AliasSecond,
+                                     GetCurve1AliasSuffix2(),
+                                     originCurve1AliasSuffix2,
+                                     conflictsForCurve1Alias2);
+    flagCurve2Alias1 = ValidateAlias(curve2AliasFirst,
+                                     GetCurve2AliasSuffix1(),
+                                     originCurve2AliasSuffix1,
+                                     conflictsForCurve2Alias1);
+    flagCurve2Alias2 = ValidateAlias(curve2AliasSecond,
+                                     GetCurve2AliasSuffix2(),
+                                     originCurve2AliasSuffix2,
+                                     conflictsForCurve2Alias2);
 
-    Validate(originCurve1AliasSuffix1, GetCurve1AliasSuffix1(), curve1AliasFirst, flagCurve1Alias1,
-             ui->labelCurve1Alias1);
-    Validate(originCurve1AliasSuffix2, GetCurve1AliasSuffix2(), curve1AliasSecond, flagCurve1Alias2,
-             ui->labelCurve1Alias2);
-    Validate(originCurve2AliasSuffix1, GetCurve2AliasSuffix1(), curve2AliasFirst, flagCurve2Alias1,
-             ui->labelCurve2Alias1);
-    Validate(originCurve2AliasSuffix2, GetCurve2AliasSuffix2(), curve2AliasSecond, flagCurve2Alias2,
-             ui->labelCurve2Alias2);
+    // Update UI colors
+    ChangeColor(ui->labelCurve1Alias1, flagCurve1Alias1 ? OkColor(this) : errorColor);
+    ChangeColor(ui->labelCurve1Alias2, flagCurve1Alias2 ? OkColor(this) : errorColor);
+    ChangeColor(ui->labelCurve2Alias1, flagCurve2Alias1 ? OkColor(this) : errorColor);
+    ChangeColor(ui->labelCurve2Alias2, flagCurve2Alias2 ? OkColor(this) : errorColor);
 
     CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfIntersectionCurves::ValidateName()
+{
+    const QSharedPointer<VAbstractCurve> curve1 = data->GeometricObject<VAbstractCurve>(GetFirstCurveId());
+    auto const [curve1AliasFirst, curve1AliasSecond] = SegmentAliases(curve1->getType(),
+                                                                      GetCurve1AliasSuffix1(),
+                                                                      GetCurve1AliasSuffix2());
+    auto const [curve1Name1, curve1Name2] = SegmentNames(curve1->getType(), GetCurve1Name1(), GetCurve1Name2());
+
+    const QSharedPointer<VAbstractCurve> curve2 = data->GeometricObject<VAbstractCurve>(GetSecondCurveId());
+    auto const [curve2AliasFirst, curve2AliasSecond] = SegmentAliases(curve2->getType(),
+                                                                      GetCurve2AliasSuffix1(),
+                                                                      GetCurve2AliasSuffix2());
+    auto const [curve2Name1, curve2Name2] = SegmentNames(curve2->getType(), GetCurve2Name1(), GetCurve2Name2());
+
+    QRegularExpression const rx(NameRegExp());
+
+    // Helper lambda to validate a single name
+    auto ValidateName = [&](const QString &name,
+                            const QString &inputName,
+                            const QString &originName,
+                            const QSet<QString> &conflictSet) -> bool
+    {
+        if (inputName.isEmpty())
+        {
+            return false;
+        }
+
+        if (!rx.match(name).hasMatch())
+        {
+            return false;
+        }
+
+        if (originName != inputName && !data->IsUnique(name))
+        {
+            return false;
+        }
+
+        if (conflictSet.contains(name))
+        {
+            return false;
+        }
+
+        return true;
+    };
+
+    // Build conflict sets (excluding the name being validated)
+    const QSet<QString> conflictsForCurve1Name1{curve1AliasFirst,
+                                                curve1AliasSecond,
+                                                curve1Name2,
+                                                curve2AliasFirst,
+                                                curve2AliasSecond,
+                                                curve2Name1,
+                                                curve2Name2};
+    const QSet<QString> conflictsForCurve1Name2{curve1AliasFirst,
+                                                curve1AliasSecond,
+                                                curve1Name1,
+                                                curve2AliasFirst,
+                                                curve2AliasSecond,
+                                                curve2Name1,
+                                                curve2Name2};
+    const QSet<QString> conflictsForCurve2Name1{curve1AliasFirst,
+                                                curve1AliasSecond,
+                                                curve1Name1,
+                                                curve1Name2,
+                                                curve2AliasFirst,
+                                                curve2AliasSecond,
+                                                curve2Name2};
+    const QSet<QString> conflictsForCurve2Name2{curve1AliasFirst,
+                                                curve1AliasSecond,
+                                                curve1Name1,
+                                                curve1Name2,
+                                                curve2AliasFirst,
+                                                curve2AliasSecond,
+                                                curve2Name1};
+
+    // Validate all names
+    flagCurve1Name1 = ValidateName(curve1Name1, GetCurve1Name1(), originCurve1Name1, conflictsForCurve1Name1);
+    flagCurve1Name2 = ValidateName(curve1Name2, GetCurve1Name2(), originCurve1Name2, conflictsForCurve1Name2);
+    flagCurve2Name1 = ValidateName(curve2Name1, GetCurve2Name1(), originCurve2Name1, conflictsForCurve2Name1);
+    flagCurve2Name2 = ValidateName(curve2Name2, GetCurve2Name2(), originCurve2Name2, conflictsForCurve2Name2);
+
+    // Update UI colors
+    ChangeColor(ui->labelCurve1Name1, flagCurve1Name1 ? OkColor(this) : errorColor);
+    ChangeColor(ui->labelCurve1Name2, flagCurve1Name2 ? OkColor(this) : errorColor);
+    ChangeColor(ui->labelCurve2Name1, flagCurve2Name1 ? OkColor(this) : errorColor);
+    ChangeColor(ui->labelCurve2Name2, flagCurve2Name2 ? OkColor(this) : errorColor);
+
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogPointOfIntersectionCurves::GenerateDefCurve1LeftSubName() const -> QString
+{
+    return GenerateDefSubCurveName(data, GetFirstCurveId(), "__1ls"_L1, "L1SubCurve"_L1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogPointOfIntersectionCurves::GenerateDefCurve1RightSubName() const -> QString
+{
+    return GenerateDefSubCurveName(data, GetFirstCurveId(), "__1rs"_L1, "R1SubCurve"_L1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogPointOfIntersectionCurves::GenerateDefCurve2LeftSubName() const -> QString
+{
+    return GenerateDefSubCurveName(data, GetSecondCurveId(), "__2ls"_L1, "L2SubCurve"_L1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogPointOfIntersectionCurves::GenerateDefCurve2RightSubName() const -> QString
+{
+    return GenerateDefSubCurveName(data, GetSecondCurveId(), "__2rs"_L1, "R2SubCurve"_L1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -318,6 +494,62 @@ void DialogPointOfIntersectionCurves::SetNotes(const QString &notes)
 auto DialogPointOfIntersectionCurves::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfIntersectionCurves::SetCurve1Name1(const QString &name)
+{
+    originCurve1Name1 = name;
+    ui->lineEditCurve1Name1->setText(originCurve1Name1);
+    ValidateAlias();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogPointOfIntersectionCurves::GetCurve1Name1() const -> QString
+{
+    return ui->lineEditCurve1Name1->text();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfIntersectionCurves::SetCurve1Name2(const QString &name)
+{
+    originCurve1Name2 = name;
+    ui->lineEditCurve1Name2->setText(originCurve1Name2);
+    ValidateAlias();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogPointOfIntersectionCurves::GetCurve1Name2() const -> QString
+{
+    return ui->lineEditCurve1Name2->text();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfIntersectionCurves::SetCurve2Name1(const QString &name)
+{
+    originCurve2Name1 = name;
+    ui->lineEditCurve2Name1->setText(originCurve2Name1);
+    ValidateAlias();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogPointOfIntersectionCurves::GetCurve2Name1() const -> QString
+{
+    return ui->lineEditCurve2Name1->text();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfIntersectionCurves::SetCurve2Name2(const QString &name)
+{
+    originCurve2Name2 = name;
+    ui->lineEditCurve2Name2->setText(originCurve2Name2);
+    ValidateAlias();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogPointOfIntersectionCurves::GetCurve2Name2() const -> QString
+{
+    return ui->lineEditCurve2Name2->text();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -374,4 +606,19 @@ void DialogPointOfIntersectionCurves::SetCurve2AliasSuffix2(const QString &alias
 auto DialogPointOfIntersectionCurves::GetCurve2AliasSuffix2() const -> QString
 {
     return ui->lineEditCurve2Alias2->text();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfIntersectionCurves::CheckDependencyTreeComplete()
+{
+    const bool ready = m_doc->IsPatternGraphComplete();
+    ui->lineEditNamePoint->setEnabled(ready);
+    ui->lineEditCurve1Name1->setEnabled(ready);
+    ui->lineEditCurve1Name2->setEnabled(ready);
+    ui->lineEditCurve2Name1->setEnabled(ready);
+    ui->lineEditCurve2Name2->setEnabled(ready);
+    ui->lineEditCurve1Alias1->setEnabled(ready);
+    ui->lineEditCurve1Alias2->setEnabled(ready);
+    ui->lineEditCurve2Alias1->setEnabled(ready);
+    ui->lineEditCurve2Alias2->setEnabled(ready);
 }

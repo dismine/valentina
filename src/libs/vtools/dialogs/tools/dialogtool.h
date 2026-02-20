@@ -99,6 +99,8 @@ public:
     auto GetToolId() const -> quint32;
     void SetToolId(const quint32 &value);
 
+    virtual void CheckDependencyTreeComplete() = 0;
+
     virtual void SetGroupCategories(const QStringList &categories);
 
     static void MoveListRowTop(QListWidget *list);

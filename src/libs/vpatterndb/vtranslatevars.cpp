@@ -69,7 +69,7 @@ void VTranslateVars::InitVariables()
     variables.insert(arc_, translate("VTranslateVars", "Arc_", "Left symbol _ in the name"));
     variables.insert(elarc_, translate("VTranslateVars", "ElArc_", "Left symbol _ in the name"));
     variables.insert(spl_, translate("VTranslateVars", "Spl_", "Left symbol _ in the name"));
-    variables.insert(splPath, translate("VTranslateVars", "SplPath", "Do not add symbol _ to the end of the name"));
+    variables.insert(splPath_V, translate("VTranslateVars", "SplPath", "Do not add symbol _ to the end of the name"));
     variables.insert(radiusArc_, translate("VTranslateVars", "RadiusArc_", "Left symbol _ in the name"));
     variables.insert(radius1ElArc_, translate("VTranslateVars", "Radius1ElArc_", "Left symbol _ in the name"));
     variables.insert(radius2ElArc_, translate("VTranslateVars", "Radius2ElArc_", "Left symbol _ in the name"));

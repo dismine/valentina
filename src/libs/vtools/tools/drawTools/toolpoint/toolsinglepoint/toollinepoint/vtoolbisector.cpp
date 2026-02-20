@@ -30,7 +30,7 @@
 
 #include <QLineF>
 #include <QSharedPointer>
-#include <new>
+#include <QUndoStack>
 
 #include "../../../../../dialogs/tools/dialogbisector.h"
 #include "../../../../../dialogs/tools/dialogtool.h"
@@ -111,6 +111,7 @@ void VToolBisector::SetDialog()
     const QPointer<DialogBisector> dialogTool = qobject_cast<DialogBisector *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
+    dialogTool->CheckDependencyTreeComplete();
     dialogTool->SetTypeLine(m_lineType);
     dialogTool->SetLineColor(lineColor);
     dialogTool->SetFormula(formulaLength);
@@ -296,6 +297,19 @@ void VToolBisector::SetVisualization()
         visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolBisector::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogBisector> dialogTool = qobject_cast<DialogBisector *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    ProcessLinePointToolOptions(oldDomElement,
+                                newDomElement,
+                                dialogTool->GetPointName(),
+                                VAbstractTool::data.GetGObject(dialogTool->GetSecondPointId())->name());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -74,14 +74,10 @@ auto TransformationOrigin(const VPLayoutPtr &layout, const QRectF &boundingRect)
     QT_WARNING_PUSH
     QT_WARNING_DISABLE_GCC("-Wnoexcept")
 
-    VPTransformationOrigon origin;
-    origin.origin = boundingRect.center();
-    origin.custom = false;
+    return {.origin = boundingRect.center(), .custom = false};
 
     // cppcheck-suppress unknownMacro
     QT_WARNING_POP
-
-    return origin;
 }
 } // namespace
 
@@ -185,12 +181,8 @@ void VPGraphicsTransformationOrigin::mouseMoveEvent(QGraphicsSceneMouseEvent *ev
     {
         if (VPSheetPtr const sheet = layout->GetFocusedSheet(); not sheet.isNull())
         {
-            VPTransformationOrigon origin = sheet->TransformationOrigin();
-            origin.origin = event->scenePos();
-            origin.custom = true;
-
-            auto *command = new VPUndoOriginMove(sheet, origin, m_allowChangeMerge);
-            layout->UndoStack()->push(command);
+            const VPTransformationOrigon origin = {.origin = event->scenePos(), .custom = true};
+            layout->UndoStack()->push(new VPUndoOriginMove(sheet, origin, m_allowChangeMerge));
         }
         prepareGeometryChange();
     }
@@ -333,14 +325,11 @@ void VPGraphicsPieceControls::on_UpdateControls()
 
     if (not m_pieceRect.isNull())
     {
-        VPLayoutPtr const layout = m_layout.toStrongRef();
-        if (not layout.isNull())
+        if (VPLayoutPtr const layout = m_layout.toStrongRef(); not layout.isNull())
         {
-            VPSheetPtr const sheet = layout->GetFocusedSheet();
-            if (not sheet.isNull())
+            if (VPSheetPtr const sheet = layout->GetFocusedSheet(); not sheet.isNull())
             {
-                VPTransformationOrigon origin = sheet->TransformationOrigin();
-                if (not origin.custom)
+                if (VPTransformationOrigon origin = sheet->TransformationOrigin(); not origin.custom)
                 {
                     origin.origin = m_pieceRect.center();
                     sheet->SetTransformationOrigin(origin);

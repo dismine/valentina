@@ -139,9 +139,8 @@ auto VPE::VProperty::setEditorData(QWidget *editor) -> bool
 
     if (QByteArray const n = editor->metaObject()->userProperty().name(); !n.isEmpty())
     {
-        editor->blockSignals(true);
+        const QSignalBlocker blocker(editor);
         editor->setProperty(n, vproperty_d_ptr->VariantValue);
-        editor->blockSignals(false);
         return true;
     }
 

@@ -31,10 +31,12 @@
 #include <QLineF>
 #include <QPointF>
 #include <QSharedPointer>
-#include <new>
+#include <QUndoStack>
 
 #include "../../../../../dialogs/tools/dialogalongline.h"
 #include "../../../../../dialogs/tools/dialogtool.h"
+#include "../../../../../undocommands/renameobject.h"
+#include "../../../../../undocommands/savetooloptions.h"
 #include "../../../../../visualization/line/vistoolalongline.h"
 #include "../../../../../visualization/visualization.h"
 #include "../../../../vabstracttool.h"
@@ -168,6 +170,71 @@ auto VToolAlongLine::MakeToolTip() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolAlongLine::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    SCASSERT(not m_dialog.isNull())
+    const QPointer<DialogAlongLine> dialogTool = qobject_cast<DialogAlongLine *>(m_dialog);
+    SCASSERT(not dialogTool.isNull())
+
+    const QString oldLabel = VAbstractTool::data.GetGObject(m_id)->name();
+    const QString newLabel = dialogTool->GetPointName();
+
+    const QString newBasePointLabel = VAbstractTool::data.GetGObject(dialogTool->GetFirstPointId())->name();
+    const QString oldBasePointLabel = BasePointName();
+
+    const QString newSecondPointLabel = VAbstractTool::data.GetGObject(dialogTool->GetSecondPointId())->name();
+    const QString oldSecondPointLabel = SecondPointName();
+
+    if (oldBasePointLabel == newBasePointLabel && oldSecondPointLabel == newSecondPointLabel && oldLabel == newLabel)
+    {
+        VToolLinePoint::ApplyToolOptions(oldDomElement, newDomElement);
+        return;
+    }
+
+    QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
+    auto *newGroup = new QUndoCommand(); // an empty command
+    newGroup->setText(tr("save tool options"));
+
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id, newGroup);
+    saveOptions->SetInGroup(true);
+    connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+
+    if (oldBasePointLabel != newBasePointLabel)
+    {
+        auto *renamePair = RenamePair::CreateForLine(std::make_pair(oldBasePointLabel, oldLabel),
+                                                     std::make_pair(newBasePointLabel, oldLabel),
+                                                     doc,
+                                                     m_id,
+                                                     newGroup);
+        if (oldLabel == newLabel && oldSecondPointLabel == newSecondPointLabel)
+        {
+            connect(renamePair, &RenamePair::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        }
+    }
+
+    if (oldSecondPointLabel != newSecondPointLabel)
+    {
+        auto *renamePair = RenamePair::CreateForLine(std::make_pair(oldLabel, oldSecondPointLabel),
+                                                     std::make_pair(oldLabel, newSecondPointLabel),
+                                                     doc,
+                                                     m_id,
+                                                     newGroup);
+        if (oldLabel == newLabel)
+        {
+            connect(renamePair, &RenamePair::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        }
+    }
+
+    if (oldLabel != newLabel)
+    {
+        auto *renameLabel = new RenameLabel(oldLabel, newLabel, doc, m_id, newGroup);
+        connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    }
+
+    undoStack->push(newGroup);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolAlongLine::ShowVisualization(bool show)
 {
     ShowToolVisualization<VisToolAlongLine>(show);
@@ -197,6 +264,7 @@ void VToolAlongLine::SetDialog()
     const QPointer<DialogAlongLine> dialogTool = qobject_cast<DialogAlongLine *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
+    dialogTool->CheckDependencyTreeComplete();
     dialogTool->SetTypeLine(m_lineType);
     dialogTool->SetLineColor(lineColor);
     dialogTool->SetFormula(formulaLength);

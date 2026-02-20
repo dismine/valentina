@@ -75,10 +75,9 @@ void CalculateAndCacheWatermarkScaledImageSize(const VWatermarkData &watermarkDa
         scaledImageSize = pixelSize * scaledSize.width() * scaledSize.height() / 1024;
     }
 
-    auto *info = new WatermarkScaledImageInfo;
-    info->scaledImageSize = scaledImageSize;
-    info->width = watermarkImage.width();
-    info->height = watermarkImage.height();
+    auto *info = new WatermarkScaledImageInfo{.scaledImageSize = scaledImageSize,
+                                              .width = watermarkImage.width(),
+                                              .height = watermarkImage.height()};
 
     // Insert into the cache
     watermarkSizeCache->insert(GenerateWatermarkScaledSizeCacheKey(watermarkPath, xScale, yScale), info);

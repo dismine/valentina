@@ -42,20 +42,12 @@ struct VWatermarkData;
 
 struct PosterData
 {
-    PosterData()
-        : index(0),
-          row(0),
-          column(0),
-          rows(0),
-          columns(0),
-          rect(){}
-
-    quint32 index; // paper index
-    quint32 row; // positions in the grid
-    quint32 column;
-    quint32 rows;
-    quint32 columns;
-    QRect rect; // rect section
+    quint32 index{0}; // paper index
+    quint32 row{0};   // positions in the grid
+    quint32 column{0};
+    quint32 rows{0};
+    quint32 columns{0};
+    QRect rect{}; // rect section
 };
 
 Q_DECLARE_TYPEINFO(PosterData, Q_MOVABLE_TYPE); // NOLINT

@@ -142,52 +142,52 @@ void DialogEditLabel::ShowLineDetails()
         const QListWidgetItem *line = ui->listWidgetEdit->currentItem();
         if (line)
         {
-            ui->lineEditLine->blockSignals(true);
-            ui->lineEditLine->setText(line->text());
-            ui->lineEditLine->blockSignals(false);
+            {
+                const QSignalBlocker blocker(ui->lineEditLine);
+                ui->lineEditLine->setText(line->text());
+            }
 
             const QFont lineFont = line->font();
 
-            ui->toolButtonBold->blockSignals(true);
-            ui->toolButtonBold->setChecked(lineFont.bold());
-            ui->toolButtonBold->blockSignals(false);
-
-            ui->toolButtonItalic->blockSignals(true);
-            ui->toolButtonItalic->setChecked(lineFont.italic());
-            ui->toolButtonItalic->blockSignals(false);
-
-            ui->toolButtonTextLeft->blockSignals(true);
-            ui->toolButtonTextCenter->blockSignals(true);
-            ui->toolButtonTextRight->blockSignals(true);
-
-            const int lineAlignment = line->textAlignment();
-
-            if (lineAlignment == 0 || lineAlignment & Qt::AlignLeft)
             {
-                ui->toolButtonTextLeft->setChecked(true);
-                ui->toolButtonTextCenter->setChecked(false);
-                ui->toolButtonTextRight->setChecked(false);
-            }
-            else if (lineAlignment & Qt::AlignHCenter)
-            {
-                ui->toolButtonTextLeft->setChecked(false);
-                ui->toolButtonTextCenter->setChecked(true);
-                ui->toolButtonTextRight->setChecked(false);
-            }
-            else if (lineAlignment & Qt::AlignRight)
-            {
-                ui->toolButtonTextLeft->setChecked(false);
-                ui->toolButtonTextCenter->setChecked(false);
-                ui->toolButtonTextRight->setChecked(true);
+                const QSignalBlocker blocker(ui->toolButtonBold);
+                ui->toolButtonBold->setChecked(lineFont.bold());
             }
 
-            ui->toolButtonTextLeft->blockSignals(false);
-            ui->toolButtonTextCenter->blockSignals(false);
-            ui->toolButtonTextRight->blockSignals(false);
+            {
+                const QSignalBlocker blocker(ui->toolButtonItalic);
+                ui->toolButtonItalic->setChecked(lineFont.italic());
+            }
 
-            ui->spinBoxFontSize->blockSignals(true);
+            {
+                const QSignalBlocker blockerLeft(ui->toolButtonTextLeft);
+                const QSignalBlocker blockerCenter(ui->toolButtonTextCenter);
+                const QSignalBlocker blockerRight(ui->toolButtonTextRight);
+
+                const int lineAlignment = line->textAlignment();
+
+                if (lineAlignment == 0 || lineAlignment & Qt::AlignLeft)
+                {
+                    ui->toolButtonTextLeft->setChecked(true);
+                    ui->toolButtonTextCenter->setChecked(false);
+                    ui->toolButtonTextRight->setChecked(false);
+                }
+                else if (lineAlignment & Qt::AlignHCenter)
+                {
+                    ui->toolButtonTextLeft->setChecked(false);
+                    ui->toolButtonTextCenter->setChecked(true);
+                    ui->toolButtonTextRight->setChecked(false);
+                }
+                else if (lineAlignment & Qt::AlignRight)
+                {
+                    ui->toolButtonTextLeft->setChecked(false);
+                    ui->toolButtonTextCenter->setChecked(false);
+                    ui->toolButtonTextRight->setChecked(true);
+                }
+            }
+
+            const QSignalBlocker blocker(ui->spinBoxFontSize);
             ui->spinBoxFontSize->setValue(line->data(Qt::UserRole).toInt());
-            ui->spinBoxFontSize->blockSignals(false);
         }
     }
 
@@ -205,10 +205,10 @@ void DialogEditLabel::AddLine()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditLabel::RemoveLine()
 {
-    ui->listWidgetEdit->blockSignals(true);
-    QListWidgetItem *curLine = ui->listWidgetEdit->takeItem(ui->listWidgetEdit->currentRow());
-    delete curLine;
-    ui->listWidgetEdit->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->listWidgetEdit);
+        delete ui->listWidgetEdit->takeItem(ui->listWidgetEdit->currentRow());
+    }
     ShowLineDetails();
 }
 
@@ -256,9 +256,9 @@ void DialogEditLabel::SaveTextFormating(bool checked)
         auto *button = qobject_cast<QToolButton *>(sender());
         if (button)
         {
-            ui->toolButtonTextLeft->blockSignals(true);
-            ui->toolButtonTextCenter->blockSignals(true);
-            ui->toolButtonTextRight->blockSignals(true);
+            const QSignalBlocker blockerLeft(ui->toolButtonTextLeft);
+            const QSignalBlocker blockerCenter(ui->toolButtonTextCenter);
+            const QSignalBlocker blockerRight(ui->toolButtonTextRight);
 
             if (button == ui->toolButtonTextLeft)
             {
@@ -302,10 +302,6 @@ void DialogEditLabel::SaveTextFormating(bool checked)
                     button->setChecked(true);
                 }
             }
-
-            ui->toolButtonTextLeft->blockSignals(false);
-            ui->toolButtonTextCenter->blockSignals(false);
-            ui->toolButtonTextRight->blockSignals(false);
         }
     }
 }
@@ -326,9 +322,10 @@ void DialogEditLabel::NewTemplate()
         }
     }
 
-    ui->listWidgetEdit->blockSignals(true);
-    ui->listWidgetEdit->clear();
-    ui->listWidgetEdit->blockSignals(false);
+    {
+        const QSignalBlocker blocker(ui->listWidgetEdit);
+        ui->listWidgetEdit->clear();
+    }
     ShowLineDetails();
 }
 
@@ -461,9 +458,8 @@ void DialogEditLabel::SetupControls()
 
     if (not enabled)
     {
-        ui->lineEditLine->blockSignals(true);
+        const QSignalBlocker blocker(ui->lineEditLine);
         ui->lineEditLine->clear();
-        ui->lineEditLine->blockSignals(false);
     }
 
     ui->toolButtonAdd->setEnabled(true);
@@ -770,19 +766,14 @@ auto DialogEditLabel::GetTemplate() const -> QVector<VLabelTemplateLine>
 
     for (int i = 0; i < ui->listWidgetEdit->count(); ++i)
     {
-        const QListWidgetItem *lineItem = ui->listWidgetEdit->item(i);
-        if (lineItem != nullptr)
+        if (const QListWidgetItem *lineItem = ui->listWidgetEdit->item(i))
         {
-            VLabelTemplateLine line;
-            line.line = lineItem->text();
-            line.alignment = lineItem->textAlignment();
-            line.fontSizeIncrement = lineItem->data(Qt::UserRole).toInt();
-
             const QFont font = lineItem->font();
-            line.bold = font.bold();
-            line.italic = font.italic();
-
-            lines.append(line);
+            lines.append({.line = lineItem->text(),
+                          .bold = font.bold(),
+                          .italic = font.italic(),
+                          .alignment = lineItem->textAlignment(),
+                          .fontSizeIncrement = lineItem->data(Qt::UserRole).toInt()});
         }
     }
 
@@ -792,27 +783,27 @@ auto DialogEditLabel::GetTemplate() const -> QVector<VLabelTemplateLine>
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditLabel::SetTemplate(const QVector<VLabelTemplateLine> &lines)
 {
-    ui->listWidgetEdit->blockSignals(true);
-    ui->listWidgetEdit->clear();
-
-    int row = -1;
-
-    for (const auto &line : lines)
     {
-        auto *item = new QListWidgetItem(line.line);
-        SetTextAlignment(item, static_cast<Qt::Alignment>(line.alignment));
-        item->setData(Qt::UserRole, line.fontSizeIncrement);
+        const QSignalBlocker blocker(ui->listWidgetEdit);
+        ui->listWidgetEdit->clear();
 
-        QFont font = item->font();
-        font.setBold(line.bold);
-        font.setItalic(line.italic);
-        font.setPointSize(qMax(font.pointSize() + line.fontSizeIncrement, 1));
-        item->setFont(font);
+        int row = -1;
 
-        ui->listWidgetEdit->insertItem(++row, item);
+        for (const auto &line : lines)
+        {
+            auto *item = new QListWidgetItem(line.line);
+            SetTextAlignment(item, static_cast<Qt::Alignment>(line.alignment));
+            item->setData(Qt::UserRole, line.fontSizeIncrement);
+
+            QFont font = item->font();
+            font.setBold(line.bold);
+            font.setItalic(line.italic);
+            font.setPointSize(qMax(font.pointSize() + line.fontSizeIncrement, 1));
+            item->setFont(font);
+
+            ui->listWidgetEdit->insertItem(++row, item);
+        }
     }
-
-    ui->listWidgetEdit->blockSignals(false);
 
     if (ui->listWidgetEdit->count() > 0)
     {

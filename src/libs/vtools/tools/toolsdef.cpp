@@ -45,6 +45,12 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vpropertyexplorer/checkablemessagebox.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 auto SourceToObjects(const QVector<SourceItem> &source) -> QVector<quint32>
 {
@@ -57,56 +63,6 @@ auto SourceToObjects(const QVector<SourceItem> &source) -> QVector<quint32>
     }
 
     return ids;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto SourceAliasValid(const SourceItem &item, const QSharedPointer<VGObject> &obj, const VContainer *data,
-                      const QString &originAlias) -> bool
-{
-    SCASSERT(data != nullptr)
-
-    QString alias;
-
-    if (obj->getType() == GOType::Point)
-    {
-        alias = item.alias;
-    }
-    else
-    {
-        const QString oldAlias = obj->GetAliasSuffix();
-        obj->SetAliasSuffix(item.alias);
-        alias = obj->GetAlias();
-        obj->SetAliasSuffix(oldAlias);
-    }
-
-    if (QRegularExpression const rx(NameRegExp());
-        not alias.isEmpty() && originAlias != alias && (not rx.match(alias).hasMatch() || not data->IsUnique(alias)))
-    {
-        return false;
-    }
-
-    return true;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto OriginAlias(quint32 id, const QVector<SourceItem> &source, const QSharedPointer<VGObject> &obj) -> QString
-{
-    auto item = std::find_if(source.begin(), source.end(), [id](const SourceItem &sItem) { return sItem.id == id; });
-    if (item != source.end())
-    {
-        if (obj->getType() == GOType::Point)
-        {
-            return item->alias;
-        }
-
-        const QString oldAlias = obj->GetAliasSuffix();
-        obj->SetAliasSuffix(item->alias);
-        QString alias = obj->GetAlias();
-        obj->SetAliasSuffix(oldAlias);
-        return alias;
-    }
-
-    return QString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -140,4 +96,184 @@ auto ConfirmDeletion() -> int
     }
 
     return dialogResult == QDialog::Accepted ? QMessageBox::Yes : QMessageBox::No;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void FillDefSourceNames(QVector<SourceItem> &source, const VContainer *data, const QString &suffix)
+{
+    SCASSERT(data != nullptr)
+    SCASSERT(!suffix.isEmpty())
+
+    constexpr int maxTries = 100; // Limit number of tries per suffix
+
+    QRegularExpression const rx(NameRegExp());
+
+    // Lambda to get base name for an item
+    auto GetBaseName = [data](quint32 id) -> QString
+    {
+        if (const QSharedPointer<VGObject> obj = data->GetGObject(id); obj->getType() == GOType::Point)
+        {
+            return obj->name();
+        }
+
+        // Assume it's a curve for other types
+        const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(id);
+        return curve->HeadlessName();
+    };
+
+    // Try each suffix number until we find one that works for all items
+    for (int suffixIndex = 1; suffixIndex <= maxTries; ++suffixIndex)
+    {
+        QSet<QString> candidateNames;
+        bool allValid = true;
+
+        // Check if this suffix works for all items
+        for (const auto &sourceItem : source)
+        {
+            if (sourceItem.id == NULL_ID)
+            {
+                continue;
+            }
+
+            try
+            {
+                const QString baseName = GetBaseName(sourceItem.id);
+                const QString candidateName = u"%1__%2%3"_s.arg(baseName, suffix).arg(suffixIndex);
+
+                // Check if name matches the regex
+                if (!rx.match(candidateName).hasMatch())
+                {
+                    allValid = false;
+                    break;
+                }
+
+                // Check if name is unique in data and not already in candidate set
+                if (!data->IsUnique(candidateName) || candidateNames.contains(candidateName))
+                {
+                    allValid = false;
+                    break;
+                }
+
+                candidateNames.insert(candidateName);
+            }
+            catch (const VExceptionBadId &)
+            {
+                // If object not found, skip validation for this item
+                continue;
+            }
+        }
+
+        // If this suffix works for all items, apply it
+        if (allValid)
+        {
+            for (auto &sourceItem : source)
+            {
+                if (sourceItem.id == NULL_ID)
+                {
+                    continue;
+                }
+
+                try
+                {
+                    const QString baseName = GetBaseName(sourceItem.id);
+                    sourceItem.name = u"%1__%2%3"_s.arg(baseName, suffix).arg(suffixIndex);
+                }
+                catch (const VExceptionBadId &)
+                {
+                    // If object not found, leave name empty
+                    continue;
+                }
+            }
+
+            return; // Successfully filled all names with same suffix
+        }
+    }
+
+    // If no common suffix found after maxTries, names remain empty
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto IsValidSourceName(const QString &newName, quint32 id, const QVector<SourceItem> &source, const VContainer *data)
+    -> bool
+{
+    if (id == NULL_ID || newName.isEmpty())
+    {
+        return false;
+    }
+
+    SCASSERT(data != nullptr)
+
+    auto item = std::find_if(source.begin(),
+                             source.end(),
+                             [id](const SourceItem &sItem) -> bool { return sItem.id == id; });
+    if (item == source.end())
+    {
+        return false;
+    }
+
+    const QString name = GetSourceItemName(newName, id, data);
+
+    if (name.isEmpty())
+    {
+        return false;
+    }
+
+    // Check if name matches regex
+    if (QRegularExpression const rx(NameRegExp()); !rx.match(name).hasMatch())
+    {
+        return false;
+    }
+
+    // Check if name is unique in data
+    if (newName != item->name && !data->IsUnique(name))
+    {
+        return false;
+    }
+
+    // Check uniqueness among all names in source
+    return std::ranges::all_of(source,
+                               [id, name, source, data](const SourceItem &sourceItem) -> bool
+                               {
+                                   if (sourceItem.id == NULL_ID || sourceItem.id == id)
+                                   {
+                                       return true;
+                                   }
+
+                                   // Check against other item's name
+                                   if (!sourceItem.name.isEmpty()
+                                       && name == GetSourceItemName(sourceItem.name, sourceItem.id, data))
+                                   {
+                                       return false;
+                                   }
+
+                                   return true;
+                               });
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto GetSourceItemName(const QString &name, quint32 id, const VContainer *data) -> QString
+{
+    SCASSERT(data != nullptr)
+
+    if (id == NULL_ID || name.isEmpty())
+    {
+        return {};
+    }
+
+    try
+    {
+        const QSharedPointer<VGObject> obj = data->GetGObject(id);
+
+        if (obj->getType() == GOType::Point)
+        {
+            return name;
+        }
+
+        const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(id);
+        return curve->GetTypeHead() + name;
+    }
+    catch (const VExceptionBadId &)
+    {
+        return {};
+    }
 }

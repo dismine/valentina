@@ -57,6 +57,12 @@
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "ui_dialogcurveintersectaxis.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 DialogCurveIntersectAxis::DialogCurveIntersectAxis(const VContainer *data, VAbstractPattern *doc, quint32 toolId,
                                                    QWidget *parent)
@@ -91,6 +97,9 @@ DialogCurveIntersectAxis::DialogCurveIntersectAxis(const VContainer *data, VAbst
                                                               ui->comboBoxLineType->palette().color(QPalette::Text)));
     InitColorPicker(ui->pushButtonLineColor, VAbstractValApplication::VApp()->ValentinaSettings()->GetUserToolColors());
     ui->pushButtonLineColor->setUseNativeDialog(!VAbstractApplication::VApp()->Settings()->IsDontUseNativeDialog());
+
+    connect(ui->lineEditName1, &QLineEdit::textEdited, this, &DialogCurveIntersectAxis::ValidateCurveNames);
+    connect(ui->lineEditName2, &QLineEdit::textEdited, this, &DialogCurveIntersectAxis::ValidateCurveNames);
 
     connect(ui->toolButtonExprAngle, &QPushButton::clicked, this, &DialogCurveIntersectAxis::FXAngle);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
@@ -253,6 +262,17 @@ void DialogCurveIntersectAxis::ShowDialog(bool click)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogCurveIntersectAxis::CheckDependencyTreeComplete()
+{
+    const bool ready = m_doc->IsPatternGraphComplete();
+    ui->lineEditNamePoint->setEnabled(ready);
+    ui->lineEditName1->setEnabled(ready);
+    ui->lineEditName2->setEnabled(ready);
+    ui->lineEditAlias1->setEnabled(ready);
+    ui->lineEditAlias2->setEnabled(ready);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogCurveIntersectAxis::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (prepare == false) // After first choose we ignore all objects
@@ -282,6 +302,9 @@ void DialogCurveIntersectAxis::ChosenObject(quint32 id, const SceneObject &type)
                     line->RefreshGeometry();
                     prepare = true;
 
+                    SetName1(GenerateDefLeftSubName());
+                    SetName2(GenerateDefRightSubName());
+
                     if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
                     {
                         emit ToolTip(QString());
@@ -300,14 +323,12 @@ void DialogCurveIntersectAxis::ChosenObject(quint32 id, const SceneObject &type)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCurveIntersectAxis::EvalAngle()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditFormula->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditFormula;
-    formulaData.labelResult = ui->labelResultCalculation;
-    formulaData.postfix = degreeSymbol;
-
-    Eval(formulaData, flagFormula);
+    Eval({.formula = ui->plainTextEditFormula->toPlainText(),
+          .variables = data->DataVariables(),
+          .labelEditFormula = ui->labelEditFormula,
+          .labelResult = ui->labelResultCalculation,
+          .postfix = degreeSymbol},
+         flagFormula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -384,34 +405,97 @@ void DialogCurveIntersectAxis::ValidateAlias()
 
     const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(getCurveId());
     auto const [aliasFirst, aliasSecond] = SegmentAliases(curve->getType(), GetAliasSuffix1(), GetAliasSuffix2());
+    auto const [name1, name2] = SegmentNames(curve->getType(), GetName1(), GetName2());
 
-    if (not GetAliasSuffix1().isEmpty() &&
-        (not rx.match(aliasFirst).hasMatch() ||
-         (originAliasSuffix1 != GetAliasSuffix1() && not data->IsUnique(aliasFirst)) || aliasFirst == aliasSecond))
+    // Validate first alias
+    flagAlias1 = true;
+    if (not GetAliasSuffix1().isEmpty())
     {
-        flagAlias1 = false;
-        ChangeColor(ui->labelAlias1, errorColor);
+        if (not rx.match(aliasFirst).hasMatch())
+        {
+            flagAlias1 = false; // Invalid format
+        }
+        else if (originAliasSuffix1 != GetAliasSuffix1() && not data->IsUnique(aliasFirst))
+        {
+            flagAlias1 = false; // Not unique in data
+        }
+        else if (aliasFirst == aliasSecond || aliasFirst == name1 || aliasFirst == name2)
+        {
+            flagAlias1 = false; // Conflicts with other identifiers
+        }
     }
-    else
-    {
-        flagAlias1 = true;
-        ChangeColor(ui->labelAlias1, OkColor(this));
-    }
+    ChangeColor(ui->labelAlias1, flagAlias1 ? OkColor(this) : errorColor);
 
-    if (not GetAliasSuffix2().isEmpty() &&
-        (not rx.match(aliasSecond).hasMatch() ||
-         (originAliasSuffix2 != GetAliasSuffix2() && not data->IsUnique(aliasSecond)) || aliasFirst == aliasSecond))
+    // Validate second alias
+    flagAlias2 = true;
+    if (not GetAliasSuffix2().isEmpty())
     {
-        flagAlias2 = false;
-        ChangeColor(ui->labelAlias2, errorColor);
+        if (not rx.match(aliasSecond).hasMatch())
+        {
+            flagAlias2 = false; // Invalid format
+        }
+        else if (originAliasSuffix2 != GetAliasSuffix2() && not data->IsUnique(aliasSecond))
+        {
+            flagAlias2 = false; // Not unique in data
+        }
+        else if (aliasSecond == aliasFirst || aliasSecond == name1 || aliasSecond == name2)
+        {
+            flagAlias2 = false; // Conflicts with other identifiers
+        }
     }
-    else
-    {
-        flagAlias2 = true;
-        ChangeColor(ui->labelAlias2, OkColor(this));
-    }
+    ChangeColor(ui->labelAlias2, flagAlias2 ? OkColor(this) : errorColor);
 
     CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCurveIntersectAxis::ValidateCurveNames()
+{
+    const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(getCurveId());
+    auto const [name1, name2] = SegmentNames(curve->getType(), GetName1(), GetName2());
+    auto const [aliasFirst, aliasSecond] = SegmentAliases(curve->getType(), GetAliasSuffix1(), GetAliasSuffix2());
+
+    QRegularExpression const rx(NameRegExp());
+
+    // Validate first name
+    m_flagCurveName1 = true;
+    if (GetName1().isEmpty())
+    {
+        m_flagCurveName1 = false; // Name is required
+    }
+    else if (not rx.match(name1).hasMatch())
+    {
+        m_flagCurveName1 = false; // Invalid format
+    }
+    else if (m_originName1 != GetName1() && not data->IsUnique(name1))
+    {
+        m_flagCurveName1 = false; // Not unique in data
+    }
+    else if (name1 == name2 || name1 == aliasFirst || name1 == aliasSecond)
+    {
+        m_flagCurveName1 = false; // Conflicts with other identifiers
+    }
+    ChangeColor(ui->labelName1, m_flagCurveName1 ? OkColor(this) : errorColor);
+
+    // Validate second name
+    m_flagCurveName2 = true;
+    if (GetName2().isEmpty())
+    {
+        m_flagCurveName2 = false; // Name is required
+    }
+    else if (not rx.match(name2).hasMatch())
+    {
+        m_flagCurveName2 = false; // Invalid format
+    }
+    else if (m_originName2 != GetName2() && not data->IsUnique(name2))
+    {
+        m_flagCurveName2 = false; // Not unique in data
+    }
+    else if (name2 == name1 || name2 == aliasFirst || name2 == aliasSecond)
+    {
+        m_flagCurveName2 = false; // Conflicts with other identifiers
+    }
+    ChangeColor(ui->labelName2, m_flagCurveName2 ? OkColor(this) : errorColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -424,6 +508,18 @@ void DialogCurveIntersectAxis::InitIcons()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto DialogCurveIntersectAxis::GenerateDefLeftSubName() const -> QString
+{
+    return GenerateDefSubCurveName(data, getCurveId(), "__ls"_L1, "LSubCurve"_L1, GetPointName());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogCurveIntersectAxis::GenerateDefRightSubName() const -> QString
+{
+    return GenerateDefSubCurveName(data, getCurveId(), "__rs"_L1, "RSubCurve"_L1, GetPointName());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogCurveIntersectAxis::SetNotes(const QString &notes)
 {
     ui->plainTextEditToolNotes->setPlainText(notes);
@@ -433,6 +529,34 @@ void DialogCurveIntersectAxis::SetNotes(const QString &notes)
 auto DialogCurveIntersectAxis::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCurveIntersectAxis::SetName1(const QString &name)
+{
+    m_originName1 = name;
+    ui->lineEditName1->setText(m_originName1);
+    ValidateCurveNames();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogCurveIntersectAxis::GetName1() const -> QString
+{
+    return ui->lineEditName1->text();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCurveIntersectAxis::SetName2(const QString &name)
+{
+    m_originName2 = name;
+    ui->lineEditName2->setText(m_originName2);
+    ValidateCurveNames();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogCurveIntersectAxis::GetName2() const -> QString
+{
+    return ui->lineEditName2->text();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

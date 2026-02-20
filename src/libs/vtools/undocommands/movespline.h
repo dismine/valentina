@@ -46,16 +46,13 @@ class MoveSpline : public VUndoCommand
 public:
     MoveSpline(VAbstractPattern *doc, const VSpline &oldSpl, const VSpline &newSpl, const quint32 &id,
                QUndoCommand *parent = nullptr);
-    ~MoveSpline() override;
+    ~MoveSpline() override = default;
 
     void undo() override;
     void redo() override;
 
     auto mergeWith(const QUndoCommand *command) -> bool override;
     auto id() const -> int override;
-
-    auto getSplineId() const -> quint32;
-    auto getNewSpline() const -> VSpline;
 
 private:
     // cppcheck-suppress unknownMacro
@@ -65,17 +62,5 @@ private:
     QGraphicsScene *scene;
     void Do(const VSpline &spl);
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto MoveSpline::getSplineId() const -> quint32
-{
-    return nodeId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto MoveSpline::getNewSpline() const -> VSpline
-{
-    return newSpline;
-}
 
 #endif // MOVESPLINE_H

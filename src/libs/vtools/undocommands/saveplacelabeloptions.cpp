@@ -39,14 +39,13 @@ SavePlaceLabelOptions::SavePlaceLabelOptions(quint32 pieceId,
                                              VContainer *data,
                                              quint32 id,
                                              QUndoCommand *parent)
-  : VUndoCommand(doc, parent),
+  : VUndoCommand(doc, id, parent),
     m_oldLabel(std::move(oldLabel)),
     m_newLabel(std::move(newLabel)),
     m_data(data),
     m_pieceId(pieceId)
 {
     setText(tr("save place label options"));
-    nodeId = id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -54,29 +53,29 @@ void SavePlaceLabelOptions::undo()
 {
     qCDebug(vUndo, "Undo.");
 
-    QDomElement domElement = doc->FindElementById(nodeId, VAbstractPattern::TagPoint);
+    QDomElement domElement = Doc()->FindElementById(ElementId(), VAbstractPattern::TagPoint);
     if (!domElement.isElement())
     {
-        qCDebug(vUndo, "Can't find place label with id = %u.", nodeId);
+        qCDebug(vUndo, "Can't find place label with id = %u.", ElementId());
         return;
     }
 
-    VToolPlaceLabel::AddAttributes(doc, domElement, nodeId, m_oldLabel);
+    VToolPlaceLabel::AddAttributes(Doc(), domElement, ElementId(), m_oldLabel);
 
-    VPatternGraph *patternGraph = doc->PatternGraph();
+    VPatternGraph *patternGraph = Doc()->PatternGraph();
     SCASSERT(patternGraph != nullptr)
 
-    patternGraph->RemoveIncomingEdges(nodeId);
-    patternGraph->AddEdge(m_oldLabel.GetCenterPoint(), nodeId);
+    patternGraph->RemoveIncomingEdges(ElementId());
+    patternGraph->AddEdge(m_oldLabel.GetCenterPoint(), ElementId());
 
     SCASSERT(m_data);
     const auto varData = m_data->DataDependencyVariables();
-    doc->FindFormulaDependencies(m_oldLabel.GetWidthFormula(), nodeId, varData);
-    doc->FindFormulaDependencies(m_oldLabel.GetHeightFormula(), nodeId, varData);
-    doc->FindFormulaDependencies(m_oldLabel.GetAngleFormula(), nodeId, varData);
-    doc->FindFormulaDependencies(m_oldLabel.GetVisibilityTrigger(), nodeId, varData);
+    Doc()->FindFormulaDependencies(m_oldLabel.GetWidthFormula(), ElementId(), varData);
+    Doc()->FindFormulaDependencies(m_oldLabel.GetHeightFormula(), ElementId(), varData);
+    Doc()->FindFormulaDependencies(m_oldLabel.GetAngleFormula(), ElementId(), varData);
+    Doc()->FindFormulaDependencies(m_oldLabel.GetVisibilityTrigger(), ElementId(), varData);
 
-    m_data->UpdateGObject(nodeId, new VPlaceLabelItem(m_oldLabel));
+    m_data->UpdateGObject(ElementId(), new VPlaceLabelItem(m_oldLabel));
 
     if (m_pieceId != NULL_ID)
     {
@@ -92,29 +91,29 @@ void SavePlaceLabelOptions::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    QDomElement domElement = doc->FindElementById(nodeId, VAbstractPattern::TagPoint);
+    QDomElement domElement = Doc()->FindElementById(ElementId(), VAbstractPattern::TagPoint);
     if (!domElement.isElement())
     {
-        qCDebug(vUndo, "Can't find path with id = %u.", nodeId);
+        qCDebug(vUndo, "Can't find path with id = %u.", ElementId());
         return;
     }
 
-    VToolPlaceLabel::AddAttributes(doc, domElement, nodeId, m_newLabel);
+    VToolPlaceLabel::AddAttributes(Doc(), domElement, ElementId(), m_newLabel);
 
-    VPatternGraph *patternGraph = doc->PatternGraph();
+    VPatternGraph *patternGraph = Doc()->PatternGraph();
     SCASSERT(patternGraph != nullptr)
 
-    patternGraph->RemoveIncomingEdges(nodeId);
-    patternGraph->AddEdge(m_newLabel.GetCenterPoint(), nodeId);
+    patternGraph->RemoveIncomingEdges(ElementId());
+    patternGraph->AddEdge(m_newLabel.GetCenterPoint(), ElementId());
 
     SCASSERT(m_data);
     const auto varData = m_data->DataDependencyVariables();
-    doc->FindFormulaDependencies(m_newLabel.GetWidthFormula(), nodeId, varData);
-    doc->FindFormulaDependencies(m_newLabel.GetHeightFormula(), nodeId, varData);
-    doc->FindFormulaDependencies(m_newLabel.GetAngleFormula(), nodeId, varData);
-    doc->FindFormulaDependencies(m_newLabel.GetVisibilityTrigger(), nodeId, varData);
+    Doc()->FindFormulaDependencies(m_newLabel.GetWidthFormula(), ElementId(), varData);
+    Doc()->FindFormulaDependencies(m_newLabel.GetHeightFormula(), ElementId(), varData);
+    Doc()->FindFormulaDependencies(m_newLabel.GetAngleFormula(), ElementId(), varData);
+    Doc()->FindFormulaDependencies(m_newLabel.GetVisibilityTrigger(), ElementId(), varData);
 
-    m_data->UpdateGObject(nodeId, new VPlaceLabelItem(m_newLabel));
+    m_data->UpdateGObject(ElementId(), new VPlaceLabelItem(m_newLabel));
 
     if (m_pieceId != NULL_ID)
     {
@@ -131,11 +130,12 @@ auto SavePlaceLabelOptions::mergeWith(const QUndoCommand *command) -> bool
     const auto *saveCommand = static_cast<const SavePlaceLabelOptions *>(command);
     SCASSERT(saveCommand != nullptr);
 
-    if (saveCommand->LabelId() != nodeId || m_newLabel.GetCenterPoint() != saveCommand->NewLabel().GetCenterPoint())
+    if (saveCommand->ElementId() != ElementId()
+        || m_newLabel.GetCenterPoint() != saveCommand->m_newLabel.GetCenterPoint())
     {
         return false;
     }
 
-    m_newLabel = saveCommand->NewLabel();
+    m_newLabel = saveCommand->m_newLabel;
     return true;
 }
