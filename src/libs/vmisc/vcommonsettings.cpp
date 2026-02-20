@@ -1249,6 +1249,7 @@ void VCommonSettings::SetPatternLabelFontSize(int size)
     size = qBound(minLabelFontSize, size, maxLabelFontSize);
     setValue(*settingPatternLabelFontSize, size);
     labelFontSizeCached = size;
+    emit PatternLabelFontSizeChanged(size);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

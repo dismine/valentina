@@ -103,6 +103,9 @@ protected:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
     void keyReleaseEvent(QKeyEvent *event) override;
 
+private slots:
+    void UpdateFontSize(int size);
+
 private:
     Q_DISABLE_COPY_MOVE(VGraphicsSimpleTextItem) // NOLINT
     SelectionType selectionType{SelectionType::ByMouseRelease};
