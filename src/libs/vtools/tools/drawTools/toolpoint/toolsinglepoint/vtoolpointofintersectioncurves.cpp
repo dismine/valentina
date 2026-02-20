@@ -527,10 +527,14 @@ auto VToolPointOfIntersectionCurves::Create(VToolPointOfIntersectionCurvesInitDa
                                  .p = *p,
                                  .curveId = initData.firstCurveId,
                                  .data = initData.data,
+                                 .doc = initData.doc,
                                  .name1 = initData.curve1Name1,
                                  .name2 = initData.curve1Name2,
                                  .alias1 = initData.curve1AliasSuffix1,
-                                 .alias2 = initData.curve1AliasSuffix2};
+                                 .alias2 = initData.curve1AliasSuffix2,
+                                 .id = initData.id,
+                                 .name1AttrName = AttrCurve1Name1,
+                                 .name2AttrName = AttrCurve1Name2};
     initData.curve1Segments = VToolSinglePoint::InitSegments(curve1Details);
 
     initData.curve1Name1 = curve1Details.name1;
@@ -541,10 +545,14 @@ auto VToolPointOfIntersectionCurves::Create(VToolPointOfIntersectionCurvesInitDa
                                  .p = *p,
                                  .curveId = initData.secondCurveId,
                                  .data = initData.data,
+                                 .doc = initData.doc,
                                  .name1 = initData.curve2Name1,
                                  .name2 = initData.curve2Name2,
                                  .alias1 = initData.curve2AliasSuffix1,
-                                 .alias2 = initData.curve2AliasSuffix2};
+                                 .alias2 = initData.curve2AliasSuffix2,
+                                 .id = initData.id,
+                                 .name1AttrName = AttrCurve2Name1,
+                                 .name2AttrName = AttrCurve2Name2};
     initData.curve2Segments = VToolSinglePoint::InitSegments(curve2Details);
 
     initData.curve2Name1 = curve2Details.name1;

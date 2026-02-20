@@ -1148,29 +1148,20 @@ auto GetComboBoxCurrentData(const QComboBox *box, const QString &def) -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto GenerateDefSubCurveName(const VContainer *data, quint32 curveId, const QString &derBase, const QString &base)
-    -> QString
+auto GenerateDefSubCurveName(const VContainer *data,
+                             quint32 curveId,
+                             const QString &derBase,
+                             const QString &base,
+                             const QString &pointName) -> QString
 {
     QSharedPointer<VAbstractCurve> const curve = data->GeometricObject<VAbstractCurve>(curveId);
 
-    auto GenerateName = [data, curve](const QString &base) -> QString
-    {
-        qint32 num = 1;
-        QString name;
-        do
-        {
-            name = base + QString::number(num++);
-        } while (!data->IsUnique(curve->GetTypeHead() + name));
-
-        return name;
-    };
-
     if (!curve->IsDerivative())
     {
-        return GenerateName(curve->HeadlessName() + derBase);
+        return GenerateUniqueCurveName(data, curve->GetTypeHead(), curve->HeadlessName() + derBase);
     }
 
-    return GenerateName(base);
+    return GenerateUniqueCurveName(data, curve->GetTypeHead(), base, pointName);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1180,7 +1171,7 @@ auto GenerateDefOffsetCurveName(const VContainer *data, quint32 curveId, const Q
     auto GenerateName = [data](const QString &base) -> QString
     {
         VSplinePath path;
-        qint32 num = 1;
+        qint32 num = 2;
         QString name;
         do
         {
@@ -1198,4 +1189,25 @@ auto GenerateDefOffsetCurveName(const VContainer *data, quint32 curveId, const Q
     }
 
     return GenerateName(base);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto GenerateUniqueCurveName(const VContainer *data,
+                             const QString &typeHead,
+                             const QString &base,
+                             const QString &pointName) -> QString
+{
+    QString name = pointName + base;
+    if (data->IsUnique(typeHead + name))
+    {
+        return name;
+    }
+
+    qint32 num = 2;
+    do
+    {
+        name = pointName + base + QString::number(num++);
+    } while (!data->IsUnique(typeHead + name));
+
+    return name;
 }

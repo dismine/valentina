@@ -351,7 +351,7 @@ VSpline::VSpline(const VPointF &p1, const VPointF &p4, qreal angle1, const QStri
 auto VSpline::Rotate(const QPointF &originPoint, qreal degrees, const QString &name) const -> VSpline
 {
     const VPointF p1 = GetP1().Rotate(originPoint, degrees, "X1"_L1);
-    const VPointF p4 = GetP4().Rotate(originPoint, degrees, "X1"_L1);
+    const VPointF p4 = GetP4().Rotate(originPoint, degrees, "X4"_L1);
 
     const QPointF p2 = VPointF::RotatePF(originPoint, static_cast<QPointF>(GetP2()), degrees);
     const QPointF p3 = VPointF::RotatePF(originPoint, static_cast<QPointF>(GetP3()), degrees);

@@ -43,13 +43,12 @@
 
 #include "../../../../undocommands/label/movelabel.h"
 #include "../../../../undocommands/label/showlabel.h"
-#include "../../../../undocommands/renameobject.h"
-#include "../../../../undocommands/savetooloptions.h"
 #include "../../../vabstracttool.h"
 #include "../../vdrawtool.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/xml/vpatternblockmapper.h"
+#include "../ifc/xml/vpatternconverter.h"
 #include "../vabstractpoint.h"
 #include "../vgeometry/vabstractcubicbezier.h"
 #include "../vgeometry/vabstractcubicbezierpath.h"
@@ -66,6 +65,12 @@
 #include "../vwidgets/scalesceneitems.h"
 #include "../vwidgets/vgraphicssimpletextitem.h"
 #include "toolcut/vtoolcutsplinepath.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
@@ -439,40 +444,29 @@ auto VToolSinglePoint::InitSplinePath(SegmentDetails &details) -> QPair<QString,
     SCASSERT(splPath1 != nullptr)
     SCASSERT(splPath2 != nullptr)
 
-    QSharedPointer<VSplinePath> splP1;
-    QSharedPointer<VSplinePath> splP2;
+    QSharedPointer<VAbstractCubicBezierPath> splP1;
+    QSharedPointer<VAbstractCubicBezierPath> splP2;
 
     if (not VFuzzyComparePossibleNulls(details.segLength, -1))
     {
-        splP1 = QSharedPointer<VSplinePath>::create(*splPath1);
-        splP2 = QSharedPointer<VSplinePath>::create(*splPath2);
+        splP1 = QSharedPointer<VAbstractCubicBezierPath>(new VSplinePath(*splPath1));
+        splP2 = QSharedPointer<VAbstractCubicBezierPath>(new VSplinePath(*splPath2));
     }
     else
     {
-        splP1 = QSharedPointer<VSplinePath>::create();
-        splP2 = QSharedPointer<VSplinePath>::create();
+        splP1 = QSharedPointer<VAbstractCubicBezierPath>(new VSplinePath());
+        splP2 = QSharedPointer<VAbstractCubicBezierPath>(new VSplinePath());
     }
 
     splP1->SetDerivative(true);
     splP2->SetDerivative(true);
 
-    if (details.name1.isEmpty())
-    {
-        details.name1 = splP1->HeadlessName();
-    }
-    else
-    {
-        splP1->SetNameSuffix(details.name1);
-    }
+    // This fix can be removed since name1 and name2 no longer should be empty
+    Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
+    FixSubCurveNames(details, splPath, splP1, splP2);
 
-    if (details.name2.isEmpty())
-    {
-        details.name2 = splP2->HeadlessName();
-    }
-    else
-    {
-        splP2->SetNameSuffix(details.name2);
-    }
+    splP1->SetNameSuffix(details.name1);
+    splP2->SetNameSuffix(details.name2);
 
     splP1->SetAliasSuffix(details.alias1);
     splP2->SetAliasSuffix(details.alias2);
@@ -486,8 +480,8 @@ auto VToolSinglePoint::InitSplinePath(SegmentDetails &details) -> QPair<QString,
 //---------------------------------------------------------------------------------------------------------------------
 auto VToolSinglePoint::InitSpline(SegmentDetails &details) -> QPair<QString, QString>
 {
-    QSharedPointer<VSpline> spline1;
-    QSharedPointer<VSpline> spline2;
+    QSharedPointer<VAbstractCubicBezier> spline1;
+    QSharedPointer<VAbstractCubicBezier> spline2;
 
     const auto spl = details.data->GeometricObject<VAbstractCubicBezier>(details.curveId);
     QPointF spl1p2;
@@ -505,35 +499,24 @@ auto VToolSinglePoint::InitSpline(SegmentDetails &details) -> QPair<QString, QSt
 
     if (not VFuzzyComparePossibleNulls(details.segLength, -1))
     {
-        spline1 = QSharedPointer<VSpline>::create(spl->GetP1(), spl1p2, spl1p3, details.p);
-        spline2 = QSharedPointer<VSpline>::create(details.p, spl2p2, spl2p3, spl->GetP4());
+        spline1 = QSharedPointer<VAbstractCubicBezier>(new VSpline(spl->GetP1(), spl1p2, spl1p3, details.p));
+        spline2 = QSharedPointer<VAbstractCubicBezier>(new VSpline(details.p, spl2p2, spl2p3, spl->GetP4()));
     }
     else
     {
-        spline1 = QSharedPointer<VSpline>::create();
-        spline2 = QSharedPointer<VSpline>::create();
+        spline1 = QSharedPointer<VAbstractCubicBezier>(new VSpline());
+        spline2 = QSharedPointer<VAbstractCubicBezier>(new VSpline());
     }
 
     spline1->SetDerivative(true);
     spline2->SetDerivative(true);
 
-    if (details.name1.isEmpty())
-    {
-        details.name1 = spline1->HeadlessName();
-    }
-    else
-    {
-        spline1->SetNameSuffix(details.name1);
-    }
+    // This fix can be removed since name1 and name2 no longer should be empty
+    Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
+    FixSubCurveNames(details, spl, spline1, spline2);
 
-    if (details.name2.isEmpty())
-    {
-        details.name2 = spline2->HeadlessName();
-    }
-    else
-    {
-        spline2->SetNameSuffix(details.name2);
-    }
+    spline1->SetNameSuffix(details.name1);
+    spline2->SetNameSuffix(details.name2);
 
     spline1->SetAliasSuffix(details.alias1);
     spline2->SetAliasSuffix(details.alias2);
@@ -542,6 +525,75 @@ auto VToolSinglePoint::InitSpline(SegmentDetails &details) -> QPair<QString, QSt
     details.data->AddSpline(spline2, NULL_ID, details.p.id());
 
     return qMakePair(spline1->ObjectName(), spline2->ObjectName());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<typename T>
+void VToolSinglePoint::FixSubCurveNames(SegmentDetails &details,
+                                        const QSharedPointer<T> &baseCurve,
+                                        const QSharedPointer<T> &leftSub,
+                                        const QSharedPointer<T> &rightSub)
+{
+    bool fixName1 = false;
+    bool fixName2 = false;
+    if (details.name1.isEmpty())
+    {
+        if (!baseCurve->IsDerivative())
+        {
+            details.name1 = leftSub->HeadlessName();
+        }
+        else
+        {
+            details.name1 = GenerateUniqueCurveName(details.data,
+                                                    leftSub->GetTypeHead(),
+                                                    "LSubCurve"_L1,
+                                                    details.p.name());
+            fixName1 = true;
+        }
+    }
+
+    if (details.name2.isEmpty())
+    {
+        if (!baseCurve->IsDerivative())
+        {
+            details.name2 = rightSub->HeadlessName();
+        }
+        else
+        {
+            details.name2 = GenerateUniqueCurveName(details.data,
+                                                    rightSub->GetTypeHead(),
+                                                    "RSubCurve"_L1,
+                                                    details.p.name());
+            fixName2 = true;
+        }
+    }
+
+    if (fixName1 || fixName2)
+    {
+        VAbstractApplication::VApp()->getUndoStack()->push(
+            new RenameSegmentCurves(RenameAlias::CurveType(baseCurve->getType()),
+                                    details.p.name(),
+                                    fixName1 ? details.name1 : QString(),
+                                    fixName2 ? details.name2 : QString(),
+                                    details.doc));
+
+        QDomElement domElement = details.doc->FindElementById(details.id);
+        if (!domElement.isElement())
+        {
+            qCDebug(vTool, "Can't find tool with id = %u", details.id);
+            return;
+        }
+
+        if (fixName1)
+        {
+            details.doc->SetAttribute(domElement, details.name1AttrName, details.name1);
+        }
+
+        if (fixName2)
+        {
+            details.doc->SetAttribute(domElement, details.name2AttrName, details.name2);
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -582,23 +634,12 @@ auto VToolSinglePoint::InitArc(SegmentDetails &details) -> QPair<QString, QStrin
     a1->SetDerivative(true);
     a2->SetDerivative(true);
 
-    if (details.name1.isEmpty())
-    {
-        details.name1 = a1->HeadlessName();
-    }
-    else
-    {
-        a1->SetNameSuffix(details.name1);
-    }
+    // This fix can be removed since name1 and name2 no longer should be empty
+    Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
+    FixSubCurveNames(details, arc, a1, a2);
 
-    if (details.name2.isEmpty())
-    {
-        details.name2 = a1->HeadlessName();
-    }
-    else
-    {
-        a2->SetNameSuffix(details.name2);
-    }
+    a1->SetNameSuffix(details.name1);
+    a2->SetNameSuffix(details.name2);
 
     a1->SetAliasSuffix(details.alias1);
     a2->SetAliasSuffix(details.alias2);

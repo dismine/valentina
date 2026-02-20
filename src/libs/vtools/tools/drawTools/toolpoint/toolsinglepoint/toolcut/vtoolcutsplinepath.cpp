@@ -53,6 +53,7 @@
 #include "../vpatterndb/variables/vcurvelength.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vtranslatevars.h"
+#include "../vtools/undocommands/renameobject.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "vtoolcut.h"
 
@@ -188,26 +189,21 @@ auto VToolCutSplinePath::Create(VToolCutInitData &initData) -> VToolCutSplinePat
     p->setMy(initData.my);
     p->SetShowLabel(initData.showLabel);
 
-    splPath1->SetDerivative(true);
-    splPath2->SetDerivative(true);
+    auto path1 = QSharedPointer<VAbstractCubicBezierPath>(splPath1);
+    auto path2 = QSharedPointer<VAbstractCubicBezierPath>(splPath2);
 
-    splPath1->SetAliasSuffix(initData.aliasSuffix1);
-    splPath2->SetAliasSuffix(initData.aliasSuffix2);
+    path1->SetDerivative(true);
+    path2->SetDerivative(true);
 
-    // These checks can be removed since name1 and name2 no longer should be empty
+    path1->SetAliasSuffix(initData.aliasSuffix1);
+    path2->SetAliasSuffix(initData.aliasSuffix2);
+
+    // This fix can be removed since name1 and name2 no longer should be empty
     Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
-    if (initData.name1.isEmpty())
-    {
-        initData.name1 = splPath1->HeadlessName();
-    }
+    FixSubCurveNames(initData, splPath, path1, path2);
 
-    if (initData.name2.isEmpty())
-    {
-        initData.name2 = splPath2->HeadlessName();
-    }
-
-    splPath1->SetNameSuffix(initData.name1);
-    splPath2->SetNameSuffix(initData.name2);
+    path1->SetNameSuffix(initData.name1);
+    path2->SetNameSuffix(initData.name2);
 
     if (initData.typeCreation == Source::FromGui)
     {
@@ -226,11 +222,9 @@ auto VToolCutSplinePath::Create(VToolCutInitData &initData) -> VToolCutSplinePat
     const auto varData = initData.data->DataDependencyVariables();
     initData.doc->FindFormulaDependencies(initData.formula, initData.id, varData);
 
-    auto path1 = QSharedPointer<VAbstractBezier>(splPath1);
     initData.data->AddSpline(path1, NULL_ID, initData.id);
     initData.data->RegisterUniqueName(path1);
 
-    auto path2 = QSharedPointer<VAbstractBezier>(splPath2);
     initData.data->AddSpline(path2, NULL_ID, initData.id);
     initData.data->RegisterUniqueName(path2);
 

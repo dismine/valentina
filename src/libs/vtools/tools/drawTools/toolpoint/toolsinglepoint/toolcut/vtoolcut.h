@@ -40,6 +40,7 @@
 #include "../../../toolcurve/vtoolabstractcurve.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vmisc/def.h"
+#include "../vtools/undocommands/renameobject.h"
 #include "../vtoolsinglepoint.h"
 
 class VFormula;
@@ -149,12 +150,87 @@ protected:
 
     template <typename T> void ShowToolVisualization(bool show);
 
+    template<typename T>
+    static void FixSubCurveNames(VToolCutInitData &initData,
+                                 const QSharedPointer<T> &baseCurve,
+                                 const QSharedPointer<T> &leftSub,
+                                 const QSharedPointer<T> &rightSub);
+
 private:
     Q_DISABLE_COPY_MOVE(VToolCut) // NOLINT
 
     void UpdateNameField(VToolCutNameField field, const QString &value);
     auto HasConflict(const QString &value, VToolCutNameField currentField) const -> bool;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+template<typename T>
+inline void VToolCut::FixSubCurveNames(VToolCutInitData &initData,
+                                       const QSharedPointer<T> &baseCurve,
+                                       const QSharedPointer<T> &leftSub,
+                                       const QSharedPointer<T> &rightSub)
+{
+    bool fixName1 = false;
+    bool fixName2 = false;
+    if (initData.name1.isEmpty())
+    {
+        if (!baseCurve->IsDerivative())
+        {
+            initData.name1 = leftSub->HeadlessName();
+        }
+        else
+        {
+            initData.name1 = GenerateUniqueCurveName(initData.data,
+                                                     leftSub->GetTypeHead(),
+                                                     QStringLiteral("LSubCurve"),
+                                                     initData.name);
+            fixName1 = true;
+        }
+    }
+
+    if (initData.name2.isEmpty())
+    {
+        if (!baseCurve->IsDerivative())
+        {
+            initData.name2 = rightSub->HeadlessName();
+        }
+        else
+        {
+            initData.name2 = GenerateUniqueCurveName(initData.data,
+                                                     rightSub->GetTypeHead(),
+                                                     QStringLiteral("RSubCurve"),
+                                                     initData.name);
+            fixName2 = true;
+        }
+    }
+
+    if (fixName1 || fixName2)
+    {
+        VAbstractApplication::VApp()->getUndoStack()->push(
+            new RenameSegmentCurves(RenameAlias::CurveType(baseCurve->getType()),
+                                    initData.name,
+                                    fixName1 ? initData.name1 : QString(),
+                                    fixName2 ? initData.name2 : QString(),
+                                    initData.doc));
+
+        QDomElement domElement = initData.doc->FindElementById(initData.id);
+        if (!domElement.isElement())
+        {
+            qCDebug(vTool, "Can't find tool with id = %u", initData.id);
+            return;
+        }
+
+        if (fixName1)
+        {
+            initData.doc->SetAttribute(domElement, AttrCurveName1, initData.name1);
+        }
+
+        if (fixName2)
+        {
+            initData.doc->SetAttribute(domElement, AttrCurveName2, initData.name2);
+        }
+    }
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 inline auto VToolCut::BaseCurveId() const -> quint32

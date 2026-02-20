@@ -55,6 +55,8 @@ protected:
 
     virtual auto ProcessToken(const QString &token) const -> QString = 0;
 
+    void ProcessElementByType(QDomElement &element) const;
+
 private:
     Q_DISABLE_COPY_MOVE(AbstractObjectRename) // NOLINT
 
@@ -62,7 +64,7 @@ private:
     OperationType m_operationType{OperationType::Unknown};
 
     void RenameFormulas();
-    void ProcessElementByType(QDomElement &element) const;
+
     void ProcessPointElement(QDomElement &element) const;
     void ProcessOperationElement(QDomElement &element) const;
     void ProcessArcElement(QDomElement &element) const;
@@ -217,6 +219,33 @@ private:
     QString m_oldCenterLabel;
     QString m_newCenterLabel;
     int m_duplicate;
+};
+
+class RenameSegmentCurves : public AbstractObjectRename
+{
+    Q_OBJECT // NOLINT
+
+public:
+    RenameSegmentCurves(CurveAliasType type,
+                        QString pointName,
+                        QString leftSub,
+                        QString rightSub,
+                        VAbstractPattern *doc,
+                        QUndoCommand *parent = nullptr);
+    ~RenameSegmentCurves() override = default;
+
+    void undo() override;
+    void redo() override;
+
+protected:
+    auto ProcessToken(const QString &token) const -> QString override;
+
+private:
+    Q_DISABLE_COPY_MOVE(RenameSegmentCurves) // NOLINT
+    CurveAliasType m_type;
+    QString m_pointName;
+    QString m_leftSub;
+    QString m_rightSub;
 };
 
 #endif // RENAMEOBJECT_H

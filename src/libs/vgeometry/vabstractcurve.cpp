@@ -189,7 +189,7 @@ auto VAbstractCurve::GetSegmentPoints(const QPointF &begin, const QPointF &end, 
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractCurve::FromBegin(const QVector<QPointF> &points, const QPointF &begin, bool *ok) -> QVector<QPointF>
 {
-    auto SetResult = [&ok](bool res)
+    auto SetResult = [&ok](bool res) -> void
     {
         if (ok != nullptr)
         {

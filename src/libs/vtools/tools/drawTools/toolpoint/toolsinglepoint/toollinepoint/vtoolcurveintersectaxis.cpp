@@ -396,10 +396,14 @@ auto VToolCurveIntersectAxis::Create(VToolCurveIntersectAxisInitData &initData) 
                            .p = *p,
                            .curveId = initData.curveId,
                            .data = initData.data,
+                           .doc = initData.doc,
                            .name1 = initData.name1,
                            .name2 = initData.name2,
                            .alias1 = initData.aliasSuffix1,
-                           .alias2 = initData.aliasSuffix2};
+                           .alias2 = initData.aliasSuffix2,
+                           .id = initData.id,
+                           .name1AttrName = AttrName1,
+                           .name2AttrName = AttrName2};
 
     initData.segments = VToolSinglePoint::InitSegments(details);
 

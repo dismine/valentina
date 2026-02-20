@@ -510,13 +510,13 @@ void DialogCurveIntersectAxis::InitIcons()
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogCurveIntersectAxis::GenerateDefLeftSubName() const -> QString
 {
-    return GenerateDefSubCurveName(data, getCurveId(), "__ls"_L1, "LSubCurve"_L1);
+    return GenerateDefSubCurveName(data, getCurveId(), "__ls"_L1, "LSubCurve"_L1, GetPointName());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogCurveIntersectAxis::GenerateDefRightSubName() const -> QString
 {
-    return GenerateDefSubCurveName(data, getCurveId(), "__rs"_L1, "RSubCurve"_L1);
+    return GenerateDefSubCurveName(data, getCurveId(), "__rs"_L1, "RSubCurve"_L1, GetPointName());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

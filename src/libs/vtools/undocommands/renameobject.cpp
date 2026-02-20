@@ -208,12 +208,8 @@ auto ReplaceTokenPair(const QString &token,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto ReplaceTokenAlias(const QString &token, CurveAliasType type, const QString &oldAlias, const QString &newAlias)
-    -> QString
+auto CurveAliasPrefixes(CurveAliasType type) -> QStringList
 {
-    // Check if all variable types handled when we have new tool
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64);
-
     QStringList prefixes;
 
     if (type == CurveAliasType::All)
@@ -239,7 +235,20 @@ auto ReplaceTokenAlias(const QString &token, CurveAliasType type, const QString 
     {
         prefixes = {"Angle1SplPath", "Angle2SplPath", "C1LengthSplPath", "C2LengthSplPath", "SplPath"};
     }
-    else
+
+    return prefixes;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto ReplaceTokenAlias(const QString &token, CurveAliasType type, const QString &oldAlias, const QString &newAlias)
+    -> QString
+{
+    // Check if all variable types handled when we have new tool
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64);
+
+    QStringList const prefixes = CurveAliasPrefixes(type);
+
+    if (prefixes.isEmpty())
     {
         return token; // Unexpected type
     }
@@ -249,6 +258,64 @@ auto ReplaceTokenAlias(const QString &token, CurveAliasType type, const QString 
         if (token == QStringLiteral("%1_%2").arg(prefix, oldAlias))
         {
             return QStringLiteral("%1_%2").arg(prefix, newAlias);
+        }
+    }
+
+    return token; // No replacement needed
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto ReplaceTokenSegmentCurve(const QString &token,
+                              CurveAliasType type,
+                              const QString &pointName,
+                              const QString &leftSub,
+                              const QString &rightSub) -> QString
+{
+    // Check if all variable types handled when we have new tool
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64);
+
+    QStringList const prefixes = CurveAliasPrefixes(type);
+
+    if (prefixes.isEmpty() || pointName.isEmpty())
+    {
+        return token; // Unexpected type
+    }
+
+    static QString validName;
+    if (validName.isEmpty())
+    {
+        // Get valid name pattern and strip \A and \z anchors for embedding
+        validName = NameRegExp(VariableRegex::Variable);
+        validName.remove(QStringLiteral("\\A"));
+        validName.remove(QStringLiteral("\\z"));
+    }
+
+    const QString escapedPointName = QRegularExpression::escape(pointName);
+
+    for (const auto &prefix : std::as_const(prefixes))
+    {
+        const QString escapedPrefix = QRegularExpression::escape(prefix);
+
+        if (!leftSub.isEmpty())
+        {
+            // Match: prefix_pointName_<someLabel> -> prefix_pointName<leftSub>
+            const QRegularExpression regex(
+                QStringLiteral("^(%1)_(%2)_(%3)$").arg(escapedPrefix, escapedPointName, validName));
+            if (const QRegularExpressionMatch match = regex.match(token); match.hasMatch())
+            {
+                return QStringLiteral("%1_%2").arg(match.captured(1), leftSub);
+            }
+        }
+
+        if (!rightSub.isEmpty())
+        {
+            // Match: prefix_<someLabel>_pointName -> prefix_pointName<rightSub>
+            const QRegularExpression regex(
+                QStringLiteral("^(%1)_(%2)_(%3)$").arg(escapedPrefix, validName, escapedPointName));
+            if (const QRegularExpressionMatch match = regex.match(token); match.hasMatch())
+            {
+                return QStringLiteral("%1_%2").arg(match.captured(1), rightSub);
+            }
         }
     }
 
@@ -311,10 +378,13 @@ auto ReplaceTokenArc(const QString &token,
 AbstractObjectRename::AbstractObjectRename(VAbstractPattern *doc, quint32 id, QUndoCommand *parent)
   : VUndoCommand(doc, id, parent)
 {
-    // Do it here in case graph will not be completed when we next time call undo/redo
-    const VPatternGraph *graph = doc->PatternGraph();
-    auto Filter = [](const auto &node) -> bool { return node.type != VNodeType::OBJECT; };
-    m_dependencies = graph->GetDependentNodes(id, Filter);
+    if (id != NULL_ID)
+    {
+        // Do it here in case graph will not be completed when we next time call undo/redo
+        const VPatternGraph *graph = doc->PatternGraph();
+        auto Filter = [](const auto &node) -> bool { return node.type != VNodeType::OBJECT; };
+        m_dependencies = graph->GetDependentNodes(id, Filter);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -859,4 +929,76 @@ auto RenameArc::ProcessToken(const QString &token) const -> QString
     }
 
     return ReplaceTokenArc(token, m_type, m_newCenterLabel, m_oldCenterLabel, ElementId(), m_duplicate);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+RenameSegmentCurves::RenameSegmentCurves(CurveAliasType type,
+                                         QString pointName,
+                                         QString leftSub,
+                                         QString rightSub,
+                                         VAbstractPattern *doc,
+                                         QUndoCommand *parent)
+  : AbstractObjectRename(doc, NULL_ID, parent),
+    m_type(type),
+    m_pointName(std::move(pointName)),
+    m_leftSub(std::move(leftSub)),
+    m_rightSub(std::move(rightSub))
+{
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void RenameSegmentCurves::undo()
+{
+    // do nothing
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void RenameSegmentCurves::redo()
+{
+    const QVector<VToolRecord> *history = Doc()->getHistory();
+    QSet<quint32> processedTools;
+    processedTools.reserve(history->size());
+    for (const auto &record : *history)
+    {
+        processedTools.insert(record.GetId());
+    }
+
+    // Check if all tags handled when we have new tool
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64);
+
+    const QStringList validTags = {VAbstractPattern::TagPoint,
+                                   VAbstractPattern::TagOperation,
+                                   VAbstractPattern::TagArc,
+                                   VAbstractPattern::TagElArc,
+                                   VAbstractPattern::TagSpline,
+                                   VAbstractPattern::TagPath,
+                                   VAbstractPattern::TagTools,
+                                   VAbstractPattern::TagDetail};
+
+    for (const QString &tagName : validTags)
+    {
+        const QDomNodeList elements = Doc()->elementsByTagName(tagName);
+        for (int i = 0; i < elements.size(); ++i)
+        {
+            QDomElement domElement = elements.at(i).toElement();
+            if (domElement.isNull())
+            {
+                continue;
+            }
+
+            const quint32 id = domElement.attribute(VAbstractPattern::AttrId, NULL_ID_STR).toUInt();
+            if (!processedTools.contains(id))
+            {
+                ProcessElementByType(domElement);
+            }
+        }
+    }
+
+    setObsolete(true); // Replace works only in one way
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto RenameSegmentCurves::ProcessToken(const QString &token) const -> QString
+{
+    return ReplaceTokenSegmentCurve(token, m_type, m_pointName, m_leftSub, m_rightSub);
 }

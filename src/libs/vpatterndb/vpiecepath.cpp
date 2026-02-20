@@ -651,9 +651,7 @@ auto VPiecePath::EndSegment(const VContainer *data, const QVector<VPieceNode> &n
 
     if (nodes.size() > 2)
     {
-        const vsizetype index = FindInLoopNotExcludedDown(i, nodes);
-
-        if (index != i && index != -1)
+        if (const vsizetype index = FindInLoopNotExcludedDown(i, nodes); index != i && index != -1)
         {
             end = CurveEndPoint(end, data, nodes.at(index), points);
         }

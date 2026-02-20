@@ -181,8 +181,8 @@ auto VToolCutSpline::Create(VToolCutInitData &initData) -> VToolCutSpline *
     auto *p = new VPointF(point, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
 
-    auto spline1 = QSharedPointer<VAbstractBezier>(new VSpline(spl->GetP1(), spl1p2, spl1p3, *p));
-    auto spline2 = QSharedPointer<VAbstractBezier>(new VSpline(*p, spl2p2, spl2p3, spl->GetP4()));
+    auto spline1 = QSharedPointer<VAbstractCubicBezier>(new VSpline(spl->GetP1(), spl1p2, spl1p3, *p));
+    auto spline2 = QSharedPointer<VAbstractCubicBezier>(new VSpline(*p, spl2p2, spl2p3, spl->GetP4()));
 
     spline1->SetDerivative(true);
     spline2->SetDerivative(true);
@@ -193,17 +193,9 @@ auto VToolCutSpline::Create(VToolCutInitData &initData) -> VToolCutSpline *
     spline1->SetAliasSuffix(initData.aliasSuffix1);
     spline2->SetAliasSuffix(initData.aliasSuffix2);
 
-    // These checks can be removed since name1 and name2 no longer should be empty
+    // This fix can be removed since name1 and name2 no longer should be empty
     Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
-    if (initData.name1.isEmpty())
-    {
-        initData.name1 = spline1->HeadlessName();
-    }
-
-    if (initData.name2.isEmpty())
-    {
-        initData.name2 = spline2->HeadlessName();
-    }
+    FixSubCurveNames(initData, spl, spline1, spline2);
 
     spline1->SetNameSuffix(initData.name1);
     spline2->SetNameSuffix(initData.name2);

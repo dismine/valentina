@@ -354,13 +354,13 @@ void DialogCutArc::InitIcons()
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogCutArc::GenerateDefLeftSubName() const -> QString
 {
-    return GenerateDefSubCurveName(data, getArcId(), "__ls"_L1, "LSubCurve"_L1);
+    return GenerateDefSubCurveName(data, getArcId(), "__ls"_L1, "LSubCurve"_L1, GetPointName());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogCutArc::GenerateDefRightSubName() const -> QString
 {
-    return GenerateDefSubCurveName(data, getArcId(), "__rs"_L1, "RSubCurve"_L1);
+    return GenerateDefSubCurveName(data, getArcId(), "__rs"_L1, "RSubCurve"_L1, GetPointName());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

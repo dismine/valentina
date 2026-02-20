@@ -110,11 +110,21 @@ protected:
         VPointF p{};
         quint32 curveId{NULL_ID};
         VContainer *data{nullptr};
+        VAbstractPattern *doc{nullptr};
         QString name1{};
         QString name2{};
         QString alias1{};
         QString alias2{};
+        quint32 id{NULL_ID};
+        QString name1AttrName{};
+        QString name2AttrName{};
     };
+
+    template<typename T>
+    static void FixSubCurveNames(SegmentDetails &details,
+                                 const QSharedPointer<T> &baseCurve,
+                                 const QSharedPointer<T> &leftSub,
+                                 const QSharedPointer<T> &rightSub);
 
     template<class Item>
     static auto InitArc(SegmentDetails &details) -> QPair<QString, QString>;
