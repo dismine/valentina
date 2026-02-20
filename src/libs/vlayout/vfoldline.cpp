@@ -991,8 +991,10 @@ auto VFoldLine::ThreeXPoints() const -> QVector<QVector<QPointF>>
     XShape(x2Line);
     XShape(x3Line);
 
-    std::transform(shape.begin(), shape.end(), shape.begin(),
-                   [this](const QPointF &point) { return m_matrix.map(point); });
+    std::transform(shape.begin(),
+                   shape.end(),
+                   shape.begin(),
+                   [this](const QPointF &point) -> QPointF { return m_matrix.map(point); });
 
     if (m_verticallyFlipped || m_horizontallyFlipped)
     {
