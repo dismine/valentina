@@ -80,11 +80,19 @@ QMUPARSERSHARED_EXPORT auto LocaleGroupSeparator(const QLocale &locale) -> QChar
     const QChar decimalPoint = LocaleDecimalPoint((locale));                                                           \
     const QChar groupSeparator = LocaleGroupSeparator((locale));
 
-enum class VariableRegex
+enum class VariableRegex : quint8
 {
     Variable,
     KnownMeasurement
 };
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+Q_DECL_CONST_FUNCTION inline auto qHash(VariableRegex type, uint seed = 0) noexcept -> uint
+{
+    auto underlyingValue = static_cast<typename std::underlying_type<VariableRegex>::type>(type);
+    return ::qHash(underlyingValue, seed);
+}
+#endif
 
 QMUPARSERSHARED_EXPORT auto NameRegExp(VariableRegex type = VariableRegex::Variable) -> QString;
 
