@@ -364,6 +364,7 @@ public:
 signals:
     void SVGFontsPathChanged(const QString &oldPath, const QString &newPath);
     void KnownMeasurementsPathChanged(const QString &oldPath, const QString &newPath);
+    void PatternLabelFontSizeChanged(int size);
 
 protected:
     template <typename T>

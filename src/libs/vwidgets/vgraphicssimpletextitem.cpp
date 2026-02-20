@@ -146,13 +146,7 @@ void VGraphicsSimpleTextItem::UpdateGeometry()
     };
 
     // Update font size if needed
-    QFont font = this->font();
-    if (font.pointSize() != VAbstractApplication::VApp()->Settings()->GetPatternLabelFontSize())
-    {
-        font.setPointSize(qMax(VAbstractApplication::VApp()->Settings()->GetPatternLabelFontSize(),
-                               static_cast<int>(minVisibleFontSize)));
-        setFont(font);
-    }
+    UpdateFontSize(VAbstractApplication::VApp()->Settings()->GetPatternLabelFontSize());
 
     // Handle scale changes
     QGraphicsScene *scene = this->scene();
@@ -355,6 +349,17 @@ void VGraphicsSimpleTextItem::keyReleaseEvent(QKeyEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VGraphicsSimpleTextItem::UpdateFontSize(int size)
+{
+    QFont font = this->font();
+    if (font.pointSize() != size)
+    {
+        font.setPointSize(qMax(size, static_cast<int>(minVisibleFontSize)));
+        setFont(font);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VGraphicsSimpleTextItem::RefreshColor()
 {
     if (const QBrush newBrush = VSceneStylesheet::Color(m_hoverFlag ? m_textHoverColor : m_textColor);
@@ -377,4 +382,8 @@ void VGraphicsSimpleTextItem::Init()
     setFont(font);
     m_oldScale = minVisibleFontSize / VAbstractApplication::VApp()->Settings()->GetPatternLabelFontSize();
     setScale(m_oldScale);
+    connect(VAbstractApplication::VApp()->Settings(),
+            &VCommonSettings::PatternLabelFontSizeChanged,
+            this,
+            &VGraphicsSimpleTextItem::UpdateFontSize);
 }
