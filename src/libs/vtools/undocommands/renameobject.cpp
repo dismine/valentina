@@ -165,15 +165,15 @@ auto ReplaceTokenPair(const QString &token,
 
     if (type == RenameObjectType::Line)
     {
-        prefixes = {"Line", "AngleLine"};
+        prefixes = QStringList{"Line", "AngleLine"};
     }
     else if (type == RenameObjectType::Spline)
     {
-        prefixes = {"Angle1Spl", "Angle2Spl", "C1LengthSpl", "C2LengthSpl", "Spl"};
+        prefixes = QStringList{"Angle1Spl", "Angle2Spl", "C1LengthSpl", "C2LengthSpl", "Spl"};
     }
     else // RenameObjectType::SplinePath
     {
-        prefixes = {"Angle1SplPath", "Angle2SplPath", "C1LengthSplPath", "C2LengthSplPath", "SplPath"};
+        prefixes = QStringList{"Angle1SplPath", "Angle2SplPath", "C1LengthSplPath", "C2LengthSplPath", "SplPath"};
     }
 
     for (const auto &prefix : std::as_const(prefixes))
@@ -214,26 +214,26 @@ auto CurveAliasPrefixes(CurveAliasType type) -> QStringList
 
     if (type == CurveAliasType::All)
     {
-        prefixes = {"Angle1Spl",   "Angle2Spl",       "Angle1SplPath",   "Angle2SplPath", "C1LengthSpl",
-                    "C2LengthSpl", "C1LengthSplPath", "C2LengthSplPath", "Spl",           "SplPath",
-                    "RadiusArc",   "Angle1Arc",       "Angle2Arc",       "Angle1ElArc",   "Angle2ElArc",
-                    "Arc",         "ElArc",           "Radius1ElArc",    "Radius2ElArc",  "RotationElArc"};
+        prefixes = QStringList{"Angle1Spl",   "Angle2Spl",       "Angle1SplPath",   "Angle2SplPath", "C1LengthSpl",
+                               "C2LengthSpl", "C1LengthSplPath", "C2LengthSplPath", "Spl",           "SplPath",
+                               "RadiusArc",   "Angle1Arc",       "Angle2Arc",       "Angle1ElArc",   "Angle2ElArc",
+                               "Arc",         "ElArc",           "Radius1ElArc",    "Radius2ElArc",  "RotationElArc"};
     }
     else if (type == CurveAliasType::Arc)
     {
-        prefixes = {"RadiusArc", "Angle1Arc", "Angle2Arc", "Arc"};
+        prefixes = QStringList{"RadiusArc", "Angle1Arc", "Angle2Arc", "Arc"};
     }
     else if (type == CurveAliasType::ElArc)
     {
-        prefixes = {"Angle1ElArc", "Angle2ElArc", "ElArc", "Radius1ElArc", "Radius2ElArc", "RotationElArc"};
+        prefixes = QStringList{"Angle1ElArc", "Angle2ElArc", "ElArc", "Radius1ElArc", "Radius2ElArc", "RotationElArc"};
     }
     else if (type == CurveAliasType::Spline)
     {
-        prefixes = {"Angle1Spl", "Angle2Spl", "C1LengthSpl", "C2LengthSpl", "Spl"};
+        prefixes = QStringList{"Angle1Spl", "Angle2Spl", "C1LengthSpl", "C2LengthSpl", "Spl"};
     }
     else if (type == CurveAliasType::SplinePath)
     {
-        prefixes = {"Angle1SplPath", "Angle2SplPath", "C1LengthSplPath", "C2LengthSplPath", "SplPath"};
+        prefixes = QStringList{"Angle1SplPath", "Angle2SplPath", "C1LengthSplPath", "C2LengthSplPath", "SplPath"};
     }
 
     return prefixes;
@@ -337,11 +337,11 @@ auto ReplaceTokenArc(const QString &token,
 
     if (type == RenameArcType::Arc)
     {
-        prefixes = {"Angle1Arc", "Angle2Arc", "RadiusArc", "Arc"};
+        prefixes = QStringList{"Angle1Arc", "Angle2Arc", "RadiusArc", "Arc"};
     }
     else // RenameArcType::ElArc
     {
-        prefixes = {"Angle1ElArc", "Angle2ElArc", "Radius1ElArc", "Radius2ElArc", "RotationElArc", "ElArc"};
+        prefixes = QStringList{"Angle1ElArc", "Angle2ElArc", "Radius1ElArc", "Radius2ElArc", "RotationElArc", "ElArc"};
     }
 
     for (const auto &prefix : std::as_const(prefixes))
