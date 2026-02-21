@@ -232,7 +232,7 @@ auto IsValidSourceName(const QString &newName, quint32 id, const QVector<SourceI
 
     // Check uniqueness among all names in source
     return std::ranges::all_of(source,
-                               [id, name, source, data](const SourceItem &sourceItem) -> bool
+                               [id, name, data](const SourceItem &sourceItem) -> bool
                                {
                                    if (sourceItem.id == NULL_ID || sourceItem.id == id)
                                    {
