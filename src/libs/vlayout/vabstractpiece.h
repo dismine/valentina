@@ -688,7 +688,7 @@ template <class T> inline auto VAbstractPiece::CheckLoop(const QVector<T> &point
 {
     loopFound = false;
 
-    const bool pathClosed = (points.constFirst() == points.constLast());
+    const bool pathClosed = VFuzzyComparePoints(points.constFirst(), points.constLast());
 
     QVector<T> ekvPoints;
     ekvPoints.reserve(points.size());
