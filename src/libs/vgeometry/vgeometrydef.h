@@ -188,7 +188,7 @@ inline auto CheckLoop(const QVector<T> &points, bool &loopFound) -> QVector<T>
 {
     loopFound = false;
 
-    const bool pathClosed = (points.constFirst() == points.constLast());
+    const bool pathClosed = VFuzzyComparePoints(points.constFirst(), points.constLast());
 
     QVector<T> ekvPoints;
     ekvPoints.reserve(points.size());
