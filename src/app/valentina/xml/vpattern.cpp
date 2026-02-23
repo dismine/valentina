@@ -4641,41 +4641,6 @@ auto VPattern::GenerateLabel(const LabelType &type, const QString &reservedName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPattern::GenerateSuffix() const -> QString
-{
-    const int index = qMax(PatternBlockMapper()->GetActiveId(), 0);
-    const QString suffixBase = GetLabelBase(static_cast<quint32>(index)).toLower();
-    const QStringList uniqueNames = data->AllUniqueNames();
-    qint32 num = 1;
-    QString suffix;
-    for (;;)
-    {
-        suffix = QStringLiteral("%1%2").arg(suffixBase).arg(num);
-
-        for (int i = 0; i < uniqueNames.size(); ++i)
-        {
-            if (not data->IsUnique(uniqueNames.at(i) + suffix))
-            {
-                break;
-            }
-
-            if (i == uniqueNames.size() - 1)
-            {
-                qCDebug(vXML, "Suffix is: %s", qUtf8Printable(suffix));
-                return suffix;
-            }
-        }
-
-        if (num == INT_MAX)
-        {
-            break;
-        }
-        ++num;
-    }
-    return QString();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 auto VPattern::IsReadOnly() const -> bool
 {
     const QDomElement pattern = documentElement();

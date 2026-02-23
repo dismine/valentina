@@ -94,7 +94,6 @@ public:
     void ReplaceNameInFormula(QVector<VFormulaField> &expressions, const QString &name, const QString &newName);
 
     auto GenerateLabel(const LabelType &type, const QString &reservedName = QString()) const -> QString override;
-    auto GenerateSuffix() const -> QString override;
 
     auto IsReadOnly() const -> bool;
     void SetReadOnly(bool rOnly);

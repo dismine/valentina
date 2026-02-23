@@ -41,7 +41,6 @@ public:
     void CreateEmptyFile() override;
 
     auto GenerateLabel(const LabelType &type, const QString &reservedName = QString())const -> QString override;
-    auto GenerateSuffix() const -> QString override;
 
     void UpdateToolData(const quint32 &id, VContainer *data) override;
 

@@ -48,12 +48,6 @@ auto VLitePattern::GenerateLabel(const LabelType &type, const QString &reservedN
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VLitePattern::GenerateSuffix() const -> QString
-{
-    return {};
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VLitePattern::UpdateToolData(const quint32 &id, VContainer *data)
 {
     Q_UNUSED(id)
