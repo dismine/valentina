@@ -75,7 +75,7 @@
             <string notr="true">...</string>
            </property>
            <property name="icon">
-            <iconset theme="list-remove"/>
+            <iconset theme="editdelete"/>
            </property>
           </widget>
          </item>

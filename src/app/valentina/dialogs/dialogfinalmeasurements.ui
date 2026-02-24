@@ -35,8 +35,7 @@
         <string notr="true"/>
        </property>
        <property name="icon">
-        <iconset theme="system-search">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="system-search"/>
        </property>
        <property name="shortcut">
         <string>Alt+Down</string>
@@ -59,7 +58,7 @@
      <item>
       <widget class="Line" name="line_3">
        <property name="orientation">
-        <enum>Qt::Vertical</enum>
+        <enum>Qt::Orientation::Vertical</enum>
        </property>
       </widget>
      </item>
@@ -73,7 +72,7 @@
      <item>
       <widget class="Line" name="line_2">
        <property name="orientation">
-        <enum>Qt::Vertical</enum>
+        <enum>Qt::Orientation::Vertical</enum>
        </property>
       </widget>
      </item>
@@ -205,7 +204,7 @@
      <item>
       <widget class="Line" name="line">
        <property name="orientation">
-        <enum>Qt::Vertical</enum>
+        <enum>Qt::Orientation::Vertical</enum>
        </property>
       </widget>
      </item>
@@ -218,11 +217,10 @@
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Previous &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
-        <string notr="true"></string>
+        <string notr="true"/>
        </property>
        <property name="icon">
-        <iconset theme="go-up">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="go-up"/>
        </property>
        <property name="shortcut">
         <string>Shift+F3</string>
@@ -238,11 +236,10 @@
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Next %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
-        <string notr="true"></string>
+        <string notr="true"/>
        </property>
        <property name="icon">
-        <iconset theme="go-down">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="go-down"/>
        </property>
        <property name="shortcut">
         <string>F3</string>
@@ -257,7 +254,7 @@
    <item>
     <widget class="QSplitter" name="splitter">
      <property name="orientation">
-      <enum>Qt::Vertical</enum>
+      <enum>Qt::Orientation::Vertical</enum>
      </property>
      <widget class="QTableWidget" name="tableWidget">
       <property name="sizePolicy">
@@ -276,10 +273,10 @@
        <bool>true</bool>
       </property>
       <property name="selectionMode">
-       <enum>QAbstractItemView::SingleSelection</enum>
+       <enum>QAbstractItemView::SelectionMode::SingleSelection</enum>
       </property>
       <property name="selectionBehavior">
-       <enum>QAbstractItemView::SelectRows</enum>
+       <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
       </property>
       <property name="sortingEnabled">
        <bool>false</bool>
@@ -348,7 +345,7 @@
       </property>
       <layout class="QFormLayout" name="formLayout">
        <property name="fieldGrowthPolicy">
-        <enum>QFormLayout::ExpandingFieldsGrow</enum>
+        <enum>QFormLayout::FieldGrowthPolicy::ExpandingFieldsGrow</enum>
        </property>
        <item row="0" column="1">
         <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -358,7 +355,7 @@
          <item>
           <spacer name="horizontalSpacer">
            <property name="orientation">
-            <enum>Qt::Horizontal</enum>
+            <enum>Qt::Orientation::Horizontal</enum>
            </property>
            <property name="sizeHint" stdset="0">
             <size>
@@ -368,7 +365,7 @@
            </property>
           </spacer>
          </item>
-         <item alignment="Qt::AlignRight">
+         <item alignment="Qt::AlignmentFlag::AlignRight">
           <widget class="QToolButton" name="toolButtonAdd">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -377,25 +374,23 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string notr="true"></string>
+            <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="list-add">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="list-add"/>
            </property>
           </widget>
          </item>
-         <item alignment="Qt::AlignLeft">
+         <item alignment="Qt::AlignmentFlag::AlignLeft">
           <widget class="QToolButton" name="toolButtonRemove">
            <property name="enabled">
             <bool>false</bool>
            </property>
            <property name="text">
-            <string notr="true"></string>
+            <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="list-remove">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="editdelete"/>
            </property>
           </widget>
          </item>
@@ -481,7 +476,7 @@
             </size>
            </property>
            <property name="focusPolicy">
-            <enum>Qt::StrongFocus</enum>
+            <enum>Qt::FocusPolicy::StrongFocus</enum>
            </property>
            <property name="toolTip">
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -522,7 +517,7 @@
             <string>Formula wizard</string>
            </property>
            <property name="text">
-            <string notr="true"></string>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset resource="../../../libs/vmisc/share/resources/icon.qrc">
@@ -566,7 +561,7 @@
        </item>
        <item row="0" column="0">
         <layout class="QHBoxLayout" name="horizontalLayout">
-         <item alignment="Qt::AlignLeft">
+         <item alignment="Qt::AlignmentFlag::AlignLeft">
           <widget class="QToolButton" name="toolButtonUp">
            <property name="enabled">
             <bool>false</bool>
@@ -575,7 +570,7 @@
             <string>Move measurement up</string>
            </property>
            <property name="text">
-            <string notr="true"></string>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset theme="go-up">
@@ -583,7 +578,7 @@
            </property>
           </widget>
          </item>
-         <item alignment="Qt::AlignLeft">
+         <item alignment="Qt::AlignmentFlag::AlignLeft">
           <widget class="QToolButton" name="toolButtonDown">
            <property name="enabled">
             <bool>false</bool>
@@ -592,7 +587,7 @@
             <string>Move measurement down</string>
            </property>
            <property name="text">
-            <string notr="true"></string>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset theme="go-down">
@@ -603,7 +598,7 @@
          <item>
           <spacer name="horizontalSpacer_2">
            <property name="orientation">
-            <enum>Qt::Horizontal</enum>
+            <enum>Qt::Orientation::Horizontal</enum>
            </property>
            <property name="sizeHint" stdset="0">
             <size>
@@ -622,10 +617,10 @@
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+      <enum>Qt::Orientation::Horizontal</enum>
      </property>
      <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+      <set>QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Ok</set>
      </property>
     </widget>
    </item>

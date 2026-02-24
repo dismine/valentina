@@ -514,7 +514,7 @@
                 <string notr="true"/>
                </property>
                <property name="icon">
-                <iconset theme="list-remove"/>
+                <iconset theme="editdelete"/>
                </property>
               </widget>
              </item>
@@ -1216,7 +1216,7 @@
                 <string notr="true"/>
                </property>
                <property name="icon">
-                <iconset theme="list-remove"/>
+                <iconset theme="editdelete"/>
                </property>
               </widget>
              </item>
