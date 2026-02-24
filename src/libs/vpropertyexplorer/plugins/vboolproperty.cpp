@@ -25,6 +25,7 @@
 #include <QFlags>
 #include <QObject>
 
+#include "../vmisc/compatibility.h"
 #include "../vproperty_p.h"
 
 VPE::VBoolProperty::VBoolProperty(const QString& name) :
@@ -70,11 +71,7 @@ auto VPE::VBoolProperty::createEditor(QWidget *parent, const QStyleOptionViewIte
     auto* tmpEditor = new QCheckBox(parent);
     tmpEditor->setCheckState(vproperty_d_ptr->VariantValue.toBool() ? Qt::Checked : Qt::Unchecked);
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
-    connect(tmpEditor, &QCheckBox::checkStateChanged, this, &VBoolProperty::StateChanged);
-#else
-    connect(tmpEditor, &QCheckBox::stateChanged, this, &VBoolProperty::StateChanged);
-#endif
+    connect(tmpEditor, CHECKBOX_STATE_CHANGED, this, &VBoolProperty::StateChanged);
 
     VProperty::vproperty_d_ptr->editor = tmpEditor;
     return VProperty::vproperty_d_ptr->editor;

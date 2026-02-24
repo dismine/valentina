@@ -3994,11 +3994,7 @@ void DialogSeamAllowance::InitPieceTab()
     uiTabPaths->lineEditName->setClearButtonEnabled(true);
     uiTabPaths->lineEditName->setText(GetDefaultPieceName());
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
-    connect(uiTabPaths->checkBoxForbidFlipping, &QCheckBox::checkStateChanged, this,
-#else
-    connect(uiTabPaths->checkBoxForbidFlipping, &QCheckBox::stateChanged, this,
-#endif
+    connect(uiTabPaths->checkBoxForbidFlipping, CHECKBOX_STATE_CHANGED, this,
             [this](int state)
             {
                 if (state == Qt::Checked)
@@ -4007,11 +4003,7 @@ void DialogSeamAllowance::InitPieceTab()
                 }
             });
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
-    connect(uiTabPaths->checkBoxForceFlipping, &QCheckBox::checkStateChanged, this,
-#else
-    connect(uiTabPaths->checkBoxForceFlipping, &QCheckBox::stateChanged, this,
-#endif
+    connect(uiTabPaths->checkBoxForceFlipping, CHECKBOX_STATE_CHANGED, this,
             [this](int state)
             {
                 if (state == Qt::Checked)
@@ -4495,21 +4487,12 @@ void DialogSeamAllowance::InitPassmarksTab()
             &DialogSeamAllowance::PassmarkLineTypeChanged);
     connect(uiTabPassmarks->buttonGroupAngleType, &QButtonGroup::idClicked, this,
             &DialogSeamAllowance::PassmarkAngleTypeChanged);
-#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
-    connect(uiTabPassmarks->checkBoxShowSecondPassmark, &QCheckBox::checkStateChanged, this,
+    connect(uiTabPassmarks->checkBoxShowSecondPassmark, CHECKBOX_STATE_CHANGED, this,
             &DialogSeamAllowance::PassmarkShowSecondChanged);
-    connect(uiTabPassmarks->checkBoxClockwiseOpening, &QCheckBox::checkStateChanged, this,
+    connect(uiTabPassmarks->checkBoxClockwiseOpening, CHECKBOX_STATE_CHANGED, this,
             &DialogSeamAllowance::PassmarkClockwiseOrientationChanged);
-    connect(uiTabPassmarks->checkBoxNotMirrored, &QCheckBox::checkStateChanged, this,
+    connect(uiTabPassmarks->checkBoxNotMirrored, CHECKBOX_STATE_CHANGED, this,
             &DialogSeamAllowance::PassmarkNotMirroredStateChanged);
-#else
-    connect(uiTabPassmarks->checkBoxShowSecondPassmark, &QCheckBox::stateChanged, this,
-            &DialogSeamAllowance::PassmarkShowSecondChanged);
-    connect(uiTabPassmarks->checkBoxClockwiseOpening, &QCheckBox::stateChanged, this,
-            &DialogSeamAllowance::PassmarkClockwiseOrientationChanged);
-    connect(uiTabPassmarks->checkBoxNotMirrored, &QCheckBox::checkStateChanged, this,
-            &DialogSeamAllowance::PassmarkNotMirroredStateChanged);
-#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------

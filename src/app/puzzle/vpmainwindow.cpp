@@ -1160,11 +1160,9 @@ void VPMainWindow::InitMarginsData(const QString &suffix)
     connect(ui->doubleSpinBoxSheetMarginLeft, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
             &VPMainWindow::on_SheetMarginChanged);
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
-    connect(ui->checkBoxLayoutIgnoreFileds, &QCheckBox::checkStateChanged, this,
-#else
-    connect(ui->checkBoxLayoutIgnoreFileds, &QCheckBox::stateChanged, this,
-#endif
+    connect(ui->checkBoxLayoutIgnoreFileds,
+            CHECKBOX_STATE_CHANGED,
+            this,
             [this](int state)
             {
                 if (not m_layout.isNull())
@@ -1228,11 +1226,9 @@ void VPMainWindow::InitPropertyTabTiles()
     connect(ui->doubleSpinBoxTileMarginLeft, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
             &VPMainWindow::on_TilesMarginChanged);
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
-    connect(ui->checkBoxTileIgnoreFileds, &QCheckBox::checkStateChanged, this,
-#else
-    connect(ui->checkBoxTileIgnoreFileds, &QCheckBox::stateChanged, this,
-#endif
+    connect(ui->checkBoxTileIgnoreFileds,
+            CHECKBOX_STATE_CHANGED,
+            this,
             [this](int state)
             {
                 if (not m_layout.isNull())

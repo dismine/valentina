@@ -40,6 +40,7 @@
 
 #include "../ifc/xml/vwatermarkconverter.h"
 #include "../vformat/vwatermark.h"
+#include "../vmisc/compatibility.h"
 #include "../vmisc/def.h"
 #include "../vmisc/exception/vexception.h"
 #include "../vmisc/vabstractapplication.h"
@@ -119,11 +120,7 @@ WatermarkWindow::WatermarkWindow(const QString &patternPath, QWidget *parent)
     connect(ui->spinBoxImageRotation, QOverload<int>::of(&QSpinBox::valueChanged), this,
             [this]() { WatermarkChangesWereSaved(false); });
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
-    connect(ui->checkBoxGrayColor, &QCheckBox::checkStateChanged, this, [this]() { WatermarkChangesWereSaved(false); });
-#else
-    connect(ui->checkBoxGrayColor, &QCheckBox::stateChanged, this, [this]() { WatermarkChangesWereSaved(false); });
-#endif
+    connect(ui->checkBoxGrayColor, CHECKBOX_STATE_CHANGED, this, [this]() { WatermarkChangesWereSaved(false); });
 
     connect(ui->groupBoxWatermarkText, &QGroupBox::toggled, this, [this]() { WatermarkChangesWereSaved(false); });
     connect(ui->groupBoxWatermarkImage, &QGroupBox::toggled, this, [this]() { WatermarkChangesWereSaved(false); });

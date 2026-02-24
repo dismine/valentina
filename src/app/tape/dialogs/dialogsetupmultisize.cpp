@@ -31,6 +31,8 @@
 #include <QPushButton>
 #include <QShowEvent>
 
+#include "../vmisc/compatibility.h"
+
 namespace
 {
 void InitDimensionTitle(QGroupBox *group, const MeasurementDimension_p &dimension)
@@ -139,31 +141,24 @@ DialogSetupMultisize::DialogSetupMultisize(Unit unit, QWidget *parent)
     connect(ui->groupBoxWDimension, &QGroupBox::clicked, this, [this]() { CheckState(); });
     connect(ui->groupBoxZDimension, &QGroupBox::clicked, this, [this]() { CheckState(); });
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
-    connect(ui->checkBoxFullCircumference, &QCheckBox::checkStateChanged, this,
-            &DialogSetupMultisize::ShowFullCircumference);
+    connect(ui->checkBoxFullCircumference, CHECKBOX_STATE_CHANGED, this, &DialogSetupMultisize::ShowFullCircumference);
 
-    connect(ui->checkBoxXDimensionBodyMeasurement, &QCheckBox::checkStateChanged, this,
+    connect(ui->checkBoxXDimensionBodyMeasurement,
+            CHECKBOX_STATE_CHANGED,
+            this,
             &DialogSetupMultisize::XDimensionBodyMeasurementChanged);
-    connect(ui->checkBoxYDimensionBodyMeasurement, &QCheckBox::checkStateChanged, this,
+    connect(ui->checkBoxYDimensionBodyMeasurement,
+            CHECKBOX_STATE_CHANGED,
+            this,
             &DialogSetupMultisize::YDimensionBodyMeasurementChanged);
-    connect(ui->checkBoxWDimensionBodyMeasurement, &QCheckBox::checkStateChanged, this,
+    connect(ui->checkBoxWDimensionBodyMeasurement,
+            CHECKBOX_STATE_CHANGED,
+            this,
             &DialogSetupMultisize::WDimensionBodyMeasurementChanged);
-    connect(ui->checkBoxZDimensionBodyMeasurement, &QCheckBox::checkStateChanged, this,
+    connect(ui->checkBoxZDimensionBodyMeasurement,
+            CHECKBOX_STATE_CHANGED,
+            this,
             &DialogSetupMultisize::ZDimensionBodyMeasurementChanged);
-#else
-    connect(ui->checkBoxFullCircumference, &QCheckBox::stateChanged, this,
-            &DialogSetupMultisize::ShowFullCircumference);
-
-    connect(ui->checkBoxXDimensionBodyMeasurement, &QCheckBox::stateChanged, this,
-            &DialogSetupMultisize::XDimensionBodyMeasurementChanged);
-    connect(ui->checkBoxYDimensionBodyMeasurement, &QCheckBox::stateChanged, this,
-            &DialogSetupMultisize::YDimensionBodyMeasurementChanged);
-    connect(ui->checkBoxWDimensionBodyMeasurement, &QCheckBox::stateChanged, this,
-            &DialogSetupMultisize::WDimensionBodyMeasurementChanged);
-    connect(ui->checkBoxZDimensionBodyMeasurement, &QCheckBox::stateChanged, this,
-            &DialogSetupMultisize::ZDimensionBodyMeasurementChanged);
-#endif
 
     connect(ui->lineEditCustomXDimensionName, &QLineEdit::textChanged, this,
             [this](const QString &text)

@@ -1541,24 +1541,16 @@ void DialogPiecePath::InitPassmarksTab()
 
     connect(ui->buttonGroupMarkType, &QButtonGroup::idClicked, this, &DialogPiecePath::PassmarkLineTypeChanged);
     connect(ui->buttonGroupAngleType, &QButtonGroup::idClicked, this, &DialogPiecePath::PassmarkAngleTypeChanged);
-#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
-    connect(ui->checkBoxShowSecondPassmark, &QCheckBox::checkStateChanged, this,
-            &DialogPiecePath::PassmarkShowSecondChanged);
-    connect(ui->checkBoxClockwiseOpening, &QCheckBox::checkStateChanged, this,
+
+    connect(ui->checkBoxShowSecondPassmark, CHECKBOX_STATE_CHANGED, this, &DialogPiecePath::PassmarkShowSecondChanged);
+    connect(ui->checkBoxClockwiseOpening,
+            CHECKBOX_STATE_CHANGED,
+            this,
             &DialogPiecePath::PassmarkClockwiseOrientationChanged);
     connect(ui->checkBoxPassmarkNotMirrored,
-            &QCheckBox::checkStateChanged,
+            CHECKBOX_STATE_CHANGED,
             this,
             &DialogPiecePath::PassmarkNotMirroredStateChanged);
-#else
-    connect(ui->checkBoxShowSecondPassmark, &QCheckBox::stateChanged, this,
-            &DialogPiecePath::PassmarkShowSecondChanged);
-    connect(ui->checkBoxClockwiseOpening,
-            &QCheckBox::stateChanged,
-            this,
-            &DialogPiecePath::PassmarkClockwiseOrientationChanged);
-    connect(ui->checkBoxPassmarkNotMirrored, &QCheckBox::stateChanged, this, &DialogPiecePath::PassmarkNotMirroredStateChanged);
-#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------

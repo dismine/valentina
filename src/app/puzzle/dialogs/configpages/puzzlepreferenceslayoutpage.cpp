@@ -27,6 +27,7 @@
  *************************************************************************/
 #include "puzzlepreferenceslayoutpage.h"
 #include "../../vpapplication.h"
+#include "../vmisc/compatibility.h"
 #include "ui_puzzlepreferenceslayoutpage.h"
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -89,17 +90,14 @@ PuzzlePreferencesLayoutPage::PuzzlePreferencesLayoutPage(QWidget *parent)
     connect(ui->doubleSpinBoxTilePaperHeight, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
             &PuzzlePreferencesLayoutPage::CorrectMaxMargins);
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
-    connect(ui->checkBoxLayoutIgnoreFileds, &QCheckBox::checkStateChanged, this,
+    connect(ui->checkBoxLayoutIgnoreFileds,
+            CHECKBOX_STATE_CHANGED,
+            this,
             &PuzzlePreferencesLayoutPage::LayoutSheetIgnoreMargins);
-    connect(ui->checkBoxTileIgnoreFileds, &QCheckBox::checkStateChanged, this,
+    connect(ui->checkBoxTileIgnoreFileds,
+            CHECKBOX_STATE_CHANGED,
+            this,
             &PuzzlePreferencesLayoutPage::LayoutTileIgnoreMargins);
-#else
-    connect(ui->checkBoxLayoutIgnoreFileds, &QCheckBox::stateChanged, this,
-            &PuzzlePreferencesLayoutPage::LayoutSheetIgnoreMargins);
-    connect(ui->checkBoxTileIgnoreFileds, &QCheckBox::stateChanged, this,
-            &PuzzlePreferencesLayoutPage::LayoutTileIgnoreMargins);
-#endif
 
     connect(ui->toolButtonSheetPortraitOritation, &QToolButton::toggled, this,
             &PuzzlePreferencesLayoutPage::SwapSheetOrientation);
@@ -119,15 +117,9 @@ PuzzlePreferencesLayoutPage::PuzzlePreferencesLayoutPage(QWidget *parent)
     connect(ui->doubleSpinBoxSheetMarginBottom, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
             [this]() { m_settingsChanged = true; });
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
-    connect(ui->checkBoxTileShowTiles, &QCheckBox::checkStateChanged, this, [this]() { m_settingsChanged = true; });
-    connect(ui->checkBoxTileShowWatermark, &QCheckBox::checkStateChanged, this, [this]() { m_settingsChanged = true; });
-    connect(ui->checkBoxTileShowWatermark, &QCheckBox::checkStateChanged, this, [this]() { m_settingsChanged = true; });
-#else
-    connect(ui->checkBoxTileShowTiles, &QCheckBox::stateChanged, this, [this]() { m_settingsChanged = true; });
-    connect(ui->checkBoxTileShowWatermark, &QCheckBox::stateChanged, this, [this]() { m_settingsChanged = true; });
-    connect(ui->checkBoxTileShowWatermark, &QCheckBox::stateChanged, this, [this]() { m_settingsChanged = true; });
-#endif
+    connect(ui->checkBoxTileShowTiles, CHECKBOX_STATE_CHANGED, this, [this]() { m_settingsChanged = true; });
+    connect(ui->checkBoxTileShowWatermark, CHECKBOX_STATE_CHANGED, this, [this]() { m_settingsChanged = true; });
+    connect(ui->checkBoxTileShowWatermark, CHECKBOX_STATE_CHANGED, this, [this]() { m_settingsChanged = true; });
 
     connect(ui->doubleSpinBoxPiecesGap, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
             [this]() { m_settingsChanged = true; });
@@ -135,25 +127,14 @@ PuzzlePreferencesLayoutPage::PuzzlePreferencesLayoutPage(QWidget *parent)
 
     ui->spinBoxLineWidth->setSuffix(UnitsToStr(Unit::Px));
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
-    connect(ui->checkBoxWarningPiecesSuperposition, &QCheckBox::checkStateChanged, this,
+    connect(ui->checkBoxWarningPiecesSuperposition,
+            CHECKBOX_STATE_CHANGED,
+            this,
             [this]() { m_settingsChanged = true; });
-    connect(ui->checkBoxStickyEdges, &QCheckBox::checkStateChanged, this, [this]() { m_settingsChanged = true; });
-    connect(ui->checkBoxWarningPiecesOutOfBound, &QCheckBox::checkStateChanged, this,
-            [this]() { m_settingsChanged = true; });
-    connect(ui->checkBoxFollowGrainline, &QCheckBox::checkStateChanged, this, [this]() { m_settingsChanged = true; });
-    connect(ui->checkBoxWarningPieceGapePosition, &QCheckBox::checkStateChanged, this,
-            [this]() { m_settingsChanged = true; });
-#else
-    connect(ui->checkBoxWarningPiecesSuperposition, &QCheckBox::stateChanged, this,
-            [this]() { m_settingsChanged = true; });
-    connect(ui->checkBoxStickyEdges, &QCheckBox::stateChanged, this, [this]() { m_settingsChanged = true; });
-    connect(ui->checkBoxWarningPiecesOutOfBound, &QCheckBox::stateChanged, this,
-            [this]() { m_settingsChanged = true; });
-    connect(ui->checkBoxFollowGrainline, &QCheckBox::stateChanged, this, [this]() { m_settingsChanged = true; });
-    connect(ui->checkBoxWarningPieceGapePosition, &QCheckBox::stateChanged, this,
-            [this]() { m_settingsChanged = true; });
-#endif
+    connect(ui->checkBoxStickyEdges, CHECKBOX_STATE_CHANGED, this, [this]() { m_settingsChanged = true; });
+    connect(ui->checkBoxWarningPiecesOutOfBound, CHECKBOX_STATE_CHANGED, this, [this]() { m_settingsChanged = true; });
+    connect(ui->checkBoxFollowGrainline, CHECKBOX_STATE_CHANGED, this, [this]() { m_settingsChanged = true; });
+    connect(ui->checkBoxWarningPieceGapePosition, CHECKBOX_STATE_CHANGED, this, [this]() { m_settingsChanged = true; });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

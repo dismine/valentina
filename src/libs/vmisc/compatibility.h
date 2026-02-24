@@ -63,6 +63,12 @@
 #define QDOM_ELEMENT(list, var) (list).at(var##_idx) // NOLINT(cppcoreguidelines-macro-usage)
 // #endif
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
+#define CHECKBOX_STATE_CHANGED &QCheckBox::checkStateChanged
+#else
+#define CHECKBOX_STATE_CHANGED &QCheckBox::stateChanged
+#endif
+
 class QPointF;
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)

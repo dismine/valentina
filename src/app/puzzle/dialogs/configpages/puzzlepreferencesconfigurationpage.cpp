@@ -123,12 +123,7 @@ PuzzlePreferencesConfigurationPage::PuzzlePreferencesConfigurationPage(QWidget *
     ui->lineEditCrashUserEmail->setText(QString());
 #else
     ui->checkBoxSendCrashReports->setChecked(settings->IsSendCrashReport());
-#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
-    connect(ui->checkBoxSendCrashReports, &QCheckBox::checkStateChanged, this,
-#else
-    connect(ui->checkBoxSendCrashReports, &QCheckBox::stateChanged, this,
-#endif
-            [this]() { m_sendCrashReportsChanged = true; });
+    connect(ui->checkBoxSendCrashReports, CHECKBOX_STATE_CHANGED, this, [this]() { m_sendCrashReportsChanged = true; });
 
     QRegularExpression const rx(QStringLiteral("\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}\\b"),
                                 QRegularExpression::CaseInsensitiveOption);
