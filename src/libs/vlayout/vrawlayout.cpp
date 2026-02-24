@@ -141,7 +141,7 @@ auto VRawLayout::ReadFile(QIODevice *ioDevice, VRawLayoutData &data) -> bool
     if (wasOpen || ioDevice->open(QIODevice::ReadOnly))
     {
         auto CloseFile = qScopeGuard(
-            [wasOpen, ioDevice]()
+            [wasOpen, ioDevice]() -> void
             {
                 if (not wasOpen) // Only close this if it was opened by this function.
                 {
@@ -210,7 +210,7 @@ auto VRawLayout::WriteFile(const QString &filePath, const VRawLayoutData &data) 
     if (file.open(QIODevice::WriteOnly | QIODevice::Truncate))
     {
         auto CloseFile = qScopeGuard(
-            [&file]()
+            [&file]() -> void
             {
                 file.flush();
                 file.close();
@@ -229,7 +229,7 @@ auto VRawLayout::ReadFile(const QString &filePath, VRawLayoutData &data) -> bool
     if (file.open(QIODevice::ReadOnly))
     {
         auto CloseFile = qScopeGuard(
-            [&file]()
+            [&file]() -> void
             {
                 file.flush();
                 file.close();

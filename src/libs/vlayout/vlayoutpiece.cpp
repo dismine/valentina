@@ -621,7 +621,7 @@ VLayoutPiece::~VLayoutPiece() = default;
 auto VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContainer *pattern) -> VLayoutPiece
 {
     QFuture<QVector<VLayoutPoint>> const futureSeamAllowance = QtConcurrent::run(
-        [piece, pattern]()
+        [piece, pattern]() -> QVector<VLayoutPoint>
         {
             if (!piece.SeamMirrorLine(pattern).isNull())
             {
@@ -631,10 +631,10 @@ auto VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContainer *pat
             }
             return piece.SeamAllowancePoints(pattern);
         });
-    QFuture<bool> const futureSeamAllowanceValid =
-        QtConcurrent::run([piece, pattern]() { return piece.IsSeamAllowanceValid(pattern); });
-    QFuture<QVector<VLayoutPoint>> const futureMainPath =
-        QtConcurrent::run([piece, pattern]() { return piece.MainPathPoints(pattern); });
+    QFuture<bool> const futureSeamAllowanceValid = QtConcurrent::run([piece, pattern]() -> bool
+                                                                     { return piece.IsSeamAllowanceValid(pattern); });
+    QFuture<QVector<VLayoutPoint>> const futureMainPath = QtConcurrent::run([piece, pattern]() -> QVector<VLayoutPoint>
+                                                                            { return piece.MainPathPoints(pattern); });
     QFuture<QVector<VLayoutPiecePath>> const futureInternalPaths =
         QtConcurrent::run(ConvertInternalPaths, piece, pattern);
     QFuture<QVector<VLayoutPassmark>> const futurePassmarks =
@@ -670,7 +670,7 @@ auto VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContainer *pat
             : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    VCommonSettings const *settings = VAbstractApplication::VApp()->Settings();
     det.SetContourPoints(futureMainPath.result(), settings->IsPieceShowMainPath() ? false : piece.IsHideMainPath());
     det.SetSeamAllowancePoints(futureSeamAllowance.result(), piece.IsSeamAllowance(), piece.IsSeamAllowanceBuiltIn());
     det.SetInternalPaths(futureInternalPaths.result());
@@ -1653,7 +1653,7 @@ auto VLayoutPiece::ContourPath(bool togetherWithNotches, bool showLayoutAllowanc
     // sew line
     if (not IsHideMainPath() || not IsSeamAllowance() || IsSeamAllowanceBuiltIn())
     {
-        QVector<VLayoutPoint> points = GetFullContourPoints(togetherWithNotches, true, false);
+        QVector<VLayoutPoint> const points = GetFullContourPoints(togetherWithNotches, true, false);
         path = VGObject::PainterPath(points);
     }
 
@@ -2459,7 +2459,7 @@ auto VLayoutPiece::ConvertPassmarks(const VPiece &piece, const VContainer *patte
             continue;
         }
 
-        auto AddPassmark = [&passmark, &piece, pattern, &layoutPassmarks](PassmarkSide side)
+        auto AddPassmark = [&passmark, &piece, pattern, &layoutPassmarks](PassmarkSide side) -> void
         {
             bool ok = false;
             VLayoutPassmark const layoutPassmark = PrepareSAPassmark(piece, pattern, passmark, side, ok);
@@ -2469,7 +2469,7 @@ auto VLayoutPiece::ConvertPassmarks(const VPiece &piece, const VContainer *patte
             }
         };
 
-        auto AddBuiltInPassmark = [&passmark, &piece, pattern, &layoutPassmarks]()
+        auto AddBuiltInPassmark = [&passmark, &piece, pattern, &layoutPassmarks]() -> void
         {
             bool ok = false;
             VLayoutPassmark const layoutPassmark = PreapreBuiltInSAPassmark(piece, pattern, passmark, ok);

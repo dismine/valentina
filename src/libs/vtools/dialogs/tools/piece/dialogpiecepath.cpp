@@ -1192,7 +1192,7 @@ void DialogPiecePath::SetOptionControls()
     ui->toolButtonPassmark->setEnabled(false);
     ui->toolButtonDelete->setEnabled(false);
 
-    auto SetChecked = [](QToolButton *toolButton, bool checked = false)
+    auto SetChecked = [](QToolButton *toolButton, bool checked = false) -> void
     {
         const QSignalBlocker blocker(toolButton);
         toolButton->setChecked(checked);
@@ -1249,8 +1249,10 @@ void DialogPiecePath::InitPathTab()
     connect(ui->lineEditName, &QLineEdit::textChanged, this, &DialogPiecePath::NameChanged);
 
     InitPathTypes();
-    connect(ui->comboBoxType, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
-            [this]()
+    connect(ui->comboBoxType,
+            QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this,
+            [this]() -> void
             {
                 const bool isInternalPath = GetType() == PiecePathType::InternalPath;
                 ui->comboBoxPenType->setEnabled(isInternalPath);
@@ -1270,26 +1272,34 @@ void DialogPiecePath::InitPathTab()
 
     connect(ui->listWidget->model(), &QAbstractItemModel::rowsMoved, this, [this]() { ValidObjects(PathIsValid()); });
 
-    connect(ui->toolButtonTop, &QToolButton::clicked, this,
-            [this]()
+    connect(ui->toolButtonTop,
+            &QToolButton::clicked,
+            this,
+            [this]() -> void
             {
                 MoveListRowTop(ui->listWidget);
                 ValidObjects(PathIsValid());
             });
-    connect(ui->toolButtonUp, &QToolButton::clicked, this,
-            [this]()
+    connect(ui->toolButtonUp,
+            &QToolButton::clicked,
+            this,
+            [this]() -> void
             {
                 MoveListRowUp(ui->listWidget);
                 ValidObjects(PathIsValid());
             });
-    connect(ui->toolButtonDown, &QToolButton::clicked, this,
-            [this]()
+    connect(ui->toolButtonDown,
+            &QToolButton::clicked,
+            this,
+            [this]() -> void
             {
                 MoveListRowDown(ui->listWidget);
                 ValidObjects(PathIsValid());
             });
-    connect(ui->toolButtonBottom, &QToolButton::clicked, this,
-            [this]()
+    connect(ui->toolButtonBottom,
+            &QToolButton::clicked,
+            this,
+            [this]() -> void
             {
                 MoveListRowBottom(ui->listWidget);
                 ValidObjects(PathIsValid());
@@ -1298,7 +1308,7 @@ void DialogPiecePath::InitPathTab()
     connect(ui->toolButtonReverse,
             &QToolButton::toggled,
             this,
-            [this]()
+            [this]() -> void
             {
                 const int row = ui->listWidget->currentRow();
                 if (row < 0)
@@ -1319,7 +1329,7 @@ void DialogPiecePath::InitPathTab()
     connect(ui->toolButtonExcluded,
             &QToolButton::toggled,
             this,
-            [this]()
+            [this]() -> void
             {
                 const int row = ui->listWidget->currentRow();
                 if (row < 0)
@@ -1341,7 +1351,7 @@ void DialogPiecePath::InitPathTab()
     connect(ui->toolButtonTurnPoint,
             &QToolButton::toggled,
             this,
-            [this]()
+            [this]() -> void
             {
                 const int row = ui->listWidget->currentRow();
                 if (row < 0)
@@ -1362,7 +1372,7 @@ void DialogPiecePath::InitPathTab()
     connect(ui->toolButtonCheckUniqness,
             &QToolButton::toggled,
             this,
-            [this]()
+            [this]() -> void
             {
                 const int row = ui->listWidget->currentRow();
                 if (row < 0)
@@ -1383,7 +1393,7 @@ void DialogPiecePath::InitPathTab()
     connect(ui->toolButtonPassmark,
             &QToolButton::toggled,
             this,
-            [this](bool checked)
+            [this](bool checked) -> void
             {
                 const int row = ui->listWidget->currentRow();
                 if (row < 0)
@@ -1404,7 +1414,7 @@ void DialogPiecePath::InitPathTab()
     connect(ui->toolButtonDelete,
             &QToolButton::clicked,
             this,
-            [this]()
+            [this]() -> void
             {
                 const int row = ui->listWidget->currentRow();
                 if (row < 0)
@@ -1457,14 +1467,20 @@ void DialogPiecePath::InitSeamAllowanceTab()
     connect(ui->toolButtonExprBefore, &QPushButton::clicked, this, &DialogPiecePath::FXWidthBefore);
     connect(ui->toolButtonExprAfter, &QPushButton::clicked, this, &DialogPiecePath::FXWidthAfter);
 
-    connect(ui->plainTextEditFormulaWidth, &QPlainTextEdit::textChanged, this,
-            [this]() { m_timerWidth->start(formulaTimerTimeout); });
+    connect(ui->plainTextEditFormulaWidth,
+            &QPlainTextEdit::textChanged,
+            this,
+            [this]() -> void { m_timerWidth->start(formulaTimerTimeout); });
 
-    connect(ui->plainTextEditFormulaWidthBefore, &QPlainTextEdit::textChanged, this,
-            [this]() { m_timerWidthBefore->start(formulaTimerTimeout); });
+    connect(ui->plainTextEditFormulaWidthBefore,
+            &QPlainTextEdit::textChanged,
+            this,
+            [this]() -> void { m_timerWidthBefore->start(formulaTimerTimeout); });
 
-    connect(ui->plainTextEditFormulaWidthAfter, &QPlainTextEdit::textChanged, this,
-            [this]() { m_timerWidthAfter->start(formulaTimerTimeout); });
+    connect(ui->plainTextEditFormulaWidthAfter,
+            &QPlainTextEdit::textChanged,
+            this,
+            [this]() -> void { m_timerWidthAfter->start(formulaTimerTimeout); });
 
     connect(ui->pushButtonGrowWidth, &QPushButton::clicked, this, &DialogPiecePath::DeployWidthFormulaTextEdit);
     connect(ui->pushButtonGrowWidthBefore, &QPushButton::clicked, this,
@@ -1484,8 +1500,10 @@ void DialogPiecePath::InitPassmarksTab()
     connect(m_timerPassmarkLength, &QTimer::timeout, this, &DialogPiecePath::EvalPassmarkLength);
     connect(ui->groupBoxManualLength, &QGroupBox::toggled, this, &DialogPiecePath::EnabledManualPassmarkLength);
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogPiecePath::FXPassmarkLength);
-    connect(ui->plainTextEditPassmarkLength, &QPlainTextEdit::textChanged, this,
-            [this]() { m_timerPassmarkLength->start(formulaTimerTimeout); });
+    connect(ui->plainTextEditPassmarkLength,
+            &QPlainTextEdit::textChanged,
+            this,
+            [this]() -> void { m_timerPassmarkLength->start(formulaTimerTimeout); });
     connect(ui->pushButtonGrowPassmarkLength, &QPushButton::clicked, this, &DialogPiecePath::DeployPassmarkLength);
 
     // Width formula
@@ -1496,8 +1514,10 @@ void DialogPiecePath::InitPassmarksTab()
     connect(m_timerPassmarkWidth, &QTimer::timeout, this, &DialogPiecePath::EvalPassmarkWidth);
     connect(ui->groupBoxManualWidth, &QGroupBox::toggled, this, &DialogPiecePath::EnabledManualPassmarkWidth);
     connect(ui->toolButtonExprWidth, &QPushButton::clicked, this, &DialogPiecePath::FXPassmarkWidth);
-    connect(ui->plainTextEditPassmarkWidth, &QPlainTextEdit::textChanged, this,
-            [this]() { m_timerPassmarkWidth->start(formulaTimerTimeout); });
+    connect(ui->plainTextEditPassmarkWidth,
+            &QPlainTextEdit::textChanged,
+            this,
+            [this]() -> void { m_timerPassmarkWidth->start(formulaTimerTimeout); });
     connect(ui->pushButtonGrowPassmarkWidth, &QPushButton::clicked, this, &DialogPiecePath::DeployPassmarkWidth);
 
     // Angle formula
@@ -1508,8 +1528,10 @@ void DialogPiecePath::InitPassmarksTab()
     connect(m_timerPassmarkAngle, &QTimer::timeout, this, &DialogPiecePath::EvalPassmarkAngle);
     connect(ui->groupBoxManualAngle, &QGroupBox::toggled, this, &DialogPiecePath::EnabledManualPassmarkAngle);
     connect(ui->toolButtonExprAngle, &QPushButton::clicked, this, &DialogPiecePath::FXPassmarkAngle);
-    connect(ui->plainTextEditPassmarkAngle, &QPlainTextEdit::textChanged, this,
-            [this]() { m_timerPassmarkAngle->start(formulaTimerTimeout); });
+    connect(ui->plainTextEditPassmarkAngle,
+            &QPlainTextEdit::textChanged,
+            this,
+            [this]() -> void { m_timerPassmarkAngle->start(formulaTimerTimeout); });
     connect(ui->pushButtonGrowPassmarkAngle, &QPushButton::clicked, this, &DialogPiecePath::DeployPassmarkAngle);
 
     // notch list

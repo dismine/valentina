@@ -218,7 +218,8 @@ void VPLayoutFileWriter::WriteSheets(const VPLayoutPtr &layout)
 void VPLayoutFileWriter::WriteSheet(const VPSheetPtr &sheet)
 {
     writeStartElement(ML::TagSheet);
-    SetAttributeOrRemoveIf<QString>(ML::AttrGrainlineType, GrainlineTypeToStr(sheet->GetGrainlineType()),
+    SetAttributeOrRemoveIf<QString>(ML::AttrGrainlineType,
+                                    GrainlineTypeToStr(sheet->GetGrainlineType()),
                                     [](const QString &type) noexcept
                                     { return type == GrainlineTypeToStr(GrainlineType::NotFixed); });
 
@@ -236,10 +237,12 @@ void VPLayoutFileWriter::WriteTiles(const VPLayoutPtr &layout)
     writeStartElement(ML::TagTiles);
     SetAttribute(ML::AttrVisible, layout->LayoutSettings().GetShowTiles());
     SetAttribute(ML::AttrMatchingMarks, "standard"); // TODO / Fixme get the right value
-    SetAttributeOrRemoveIf<bool>(ML::AttrPrintScheme, layout->LayoutSettings().GetPrintTilesScheme(),
-                                 [](bool print) noexcept { return not print; });
-    SetAttributeOrRemoveIf<bool>(ML::AttrTileNumber, layout->LayoutSettings().GetShowTileNumber(),
-                                 [](bool show) noexcept { return not show; });
+    SetAttributeOrRemoveIf<bool>(ML::AttrPrintScheme,
+                                 layout->LayoutSettings().GetPrintTilesScheme(),
+                                 [](bool print) noexcept -> bool { return not print; });
+    SetAttributeOrRemoveIf<bool>(ML::AttrTileNumber,
+                                 layout->LayoutSettings().GetShowTileNumber(),
+                                 [](bool show) noexcept -> bool { return not show; });
 
     WriteSize(layout->LayoutSettings().GetTilesSize());
     WriteMargins(layout->LayoutSettings().GetTilesMargins(), layout->LayoutSettings().IgnoreTilesMargins());
@@ -265,32 +268,43 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
     writeStartElement(ML::TagPiece);
     SetAttribute(ML::AttrUID, piece->GetUUID().toString());
     SetAttribute(ML::AttrName, piece->GetName());
-    SetAttributeOrRemoveIf<bool>(ML::AttrVerticallyFlipped, piece->IsVerticallyFlipped(),
-                                 [](bool flipped) noexcept { return not flipped; });
-    SetAttributeOrRemoveIf<bool>(ML::AttrHorizontallyFlipped, piece->IsHorizontallyFlipped(),
-                                 [](bool flipped) noexcept { return not flipped; });
-    SetAttributeOrRemoveIf<bool>(ML::AttrForbidFlipping, piece->IsForbidFlipping(),
-                                 [](bool forbid) noexcept { return not forbid; });
-    SetAttributeOrRemoveIf<bool>(ML::AttrForceFlipping, piece->IsForceFlipping(),
-                                 [](bool force) noexcept { return not force; });
-    SetAttributeOrRemoveIf<bool>(ML::AttrFollowGrainline, piece->IsFollowGrainline(),
-                                 [](bool follow) noexcept { return not follow; });
-    SetAttributeOrRemoveIf<bool>(ML::AttrSewLineOnDrawing, piece->IsSewLineOnDrawing(),
-                                 [](bool value) noexcept { return not value; });
+    SetAttributeOrRemoveIf<bool>(ML::AttrVerticallyFlipped,
+                                 piece->IsVerticallyFlipped(),
+                                 [](bool flipped) noexcept -> bool { return not flipped; });
+    SetAttributeOrRemoveIf<bool>(ML::AttrHorizontallyFlipped,
+                                 piece->IsHorizontallyFlipped(),
+                                 [](bool flipped) noexcept -> bool { return not flipped; });
+    SetAttributeOrRemoveIf<bool>(ML::AttrForbidFlipping,
+                                 piece->IsForbidFlipping(),
+                                 [](bool forbid) noexcept -> bool { return not forbid; });
+    SetAttributeOrRemoveIf<bool>(ML::AttrForceFlipping,
+                                 piece->IsForceFlipping(),
+                                 [](bool force) noexcept -> bool { return not force; });
+    SetAttributeOrRemoveIf<bool>(ML::AttrFollowGrainline,
+                                 piece->IsFollowGrainline(),
+                                 [](bool follow) noexcept -> bool { return not follow; });
+    SetAttributeOrRemoveIf<bool>(ML::AttrSewLineOnDrawing,
+                                 piece->IsSewLineOnDrawing(),
+                                 [](bool value) noexcept -> bool { return not value; });
     SetAttribute(ML::AttrTransform, TransformToString(piece->GetMatrix()));
     SetAttributeOrRemoveIf<QString>(ML::AttrGradationLabel, piece->GetGradationId(),
                                     [](const QString &label) noexcept { return label.isEmpty(); });
     SetAttribute(ML::AttrCopyNumber, piece->CopyNumber());
-    SetAttributeOrRemoveIf<bool>(ML::AttrShowSeamline, not piece->IsHideMainPath(),
-                                 [](bool show) noexcept { return show; });
-    SetAttributeOrRemoveIf<qreal>(ML::AttrXScale, piece->GetXScale(),
-                                  [](qreal xs) noexcept { return VFuzzyComparePossibleNulls(xs, 1.0); });
-    SetAttributeOrRemoveIf<qreal>(ML::AttrYScale, piece->GetYScale(),
-                                  [](qreal ys) noexcept { return VFuzzyComparePossibleNulls(ys, 1.0); });
-    SetAttributeOrRemoveIf<qreal>(ML::AttrZValue, piece->ZValue(),
-                                  [](qreal z) noexcept { return VFuzzyComparePossibleNulls(z, 1.0); });
-    SetAttributeOrRemoveIf<bool>(ML::AttrShowFullPiece, piece->IsShowFullPiece(),
-                                 [](bool show) noexcept { return show; });
+    SetAttributeOrRemoveIf<bool>(ML::AttrShowSeamline,
+                                 not piece->IsHideMainPath(),
+                                 [](bool show) noexcept -> bool { return show; });
+    SetAttributeOrRemoveIf<qreal>(ML::AttrXScale,
+                                  piece->GetXScale(),
+                                  [](qreal xs) noexcept -> bool { return VFuzzyComparePossibleNulls(xs, 1.0); });
+    SetAttributeOrRemoveIf<qreal>(ML::AttrYScale,
+                                  piece->GetYScale(),
+                                  [](qreal ys) noexcept -> bool { return VFuzzyComparePossibleNulls(ys, 1.0); });
+    SetAttributeOrRemoveIf<qreal>(ML::AttrZValue,
+                                  piece->ZValue(),
+                                  [](qreal z) noexcept -> bool { return VFuzzyComparePossibleNulls(z, 1.0); });
+    SetAttributeOrRemoveIf<bool>(ML::AttrShowFullPiece,
+                                 piece->IsShowFullPiece(),
+                                 [](bool show) noexcept -> bool { return show; });
 
     writeStartElement(ML::TagSeamLine);
     QVector<VLayoutPoint> const contourPoints = piece->GetContourPoints();
@@ -301,10 +315,12 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
     writeEndElement();
 
     writeStartElement(ML::TagSeamAllowance);
-    SetAttributeOrRemoveIf<bool>(ML::AttrEnabled, piece->IsSeamAllowance(),
-                                 [](bool enabled) noexcept { return not enabled; });
-    SetAttributeOrRemoveIf<bool>(ML::AttrBuiltIn, piece->IsSeamAllowanceBuiltIn(),
-                                 [](bool builtin) noexcept { return not builtin; });
+    SetAttributeOrRemoveIf<bool>(ML::AttrEnabled,
+                                 piece->IsSeamAllowance(),
+                                 [](bool enabled) noexcept -> bool { return not enabled; });
+    SetAttributeOrRemoveIf<bool>(ML::AttrBuiltIn,
+                                 piece->IsSeamAllowanceBuiltIn(),
+                                 [](bool builtin) noexcept -> bool { return not builtin; });
     if (piece->IsSeamAllowance() && not piece->IsSeamAllowanceBuiltIn())
     {
         QVector<VLayoutPoint> const seamAllowancePoints = piece->GetSeamAllowancePoints();
@@ -316,10 +332,12 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
     writeEndElement();
 
     writeStartElement(ML::TagGrainline);
-    SetAttributeOrRemoveIf<bool>(ML::AttrEnabled, piece->IsGrainlineEnabled(),
-                                 [](bool enabled) noexcept { return not enabled; });
-    SetAttributeOrRemoveIf<bool>(ML::AttrVisible, piece->IsGrainlineVisible(),
-                                 [](bool visible) noexcept { return visible; });
+    SetAttributeOrRemoveIf<bool>(ML::AttrEnabled,
+                                 piece->IsGrainlineEnabled(),
+                                 [](bool enabled) noexcept -> bool { return not enabled; });
+    SetAttributeOrRemoveIf<bool>(ML::AttrVisible,
+                                 piece->IsGrainlineVisible(),
+                                 [](bool visible) noexcept -> bool { return visible; });
     if (piece->IsGrainlineEnabled())
     {
         SetAttribute(ML::AttrArrowDirection, GrainlineArrowDirrectionToString(piece->GetGrainline().GetArrowType()));
@@ -336,8 +354,9 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
         SetAttribute(ML::AttrType, static_cast<int>(passmark.type));
         SetAttribute(ML::AttrBaseLine, LineToString(passmark.baseLine));
         SetAttribute(ML::AttrPath, LinesToString(passmark.lines));
-        SetAttributeOrRemoveIf<bool>(ML::AttrClockwiseOpening, passmark.isClockwiseOpening,
-                                     [](bool clockwise) noexcept { return not clockwise; });
+        SetAttributeOrRemoveIf<bool>(ML::AttrClockwiseOpening,
+                                     passmark.isClockwiseOpening,
+                                     [](bool clockwise) noexcept -> bool { return !clockwise; });
         SetAttributeOrRemoveIf<bool>(ML::AttrNotMirrored,
                                      passmark.notMirrored,
                                      [](bool notMirrored) noexcept -> bool { return !notMirrored; });

@@ -344,7 +344,8 @@ auto RenderPassmarks(const VPiece &detail, const VContainer *data) -> QPainterPa
 //---------------------------------------------------------------------------------------------------------------------
 auto RenderFoldLine(const VPiece &detail, const VContainer *data) -> VFoldLine
 {
-    QLineF foldLine = detail.IsHideMainPath() ? detail.SeamAllowanceMirrorLine(data) : detail.SeamMirrorLine(data);
+    QLineF const foldLine = detail.IsHideMainPath() ? detail.SeamAllowanceMirrorLine(data)
+                                                    : detail.SeamMirrorLine(data);
     VFoldLine fLine(foldLine, detail.GetFoldLineType());
     fLine.SetLabelSvgFontSize(detail.GetFoldLineSvgFontSize());
     fLine.SetLabelFontItalic(detail.IsFoldLineLabelFontItalic());
@@ -353,7 +354,7 @@ auto RenderFoldLine(const VPiece &detail, const VContainer *data) -> VFoldLine
     fLine.SetLabelAlignment(detail.GetFoldLineLabelAlignment());
 
     {
-        VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+        const VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
         QFont font = settings->GetLabelFont();
         font.setPointSize(static_cast<int>(detail.GetFoldLineSvgFontSize()));
         fLine.SetOutlineFont(font);
