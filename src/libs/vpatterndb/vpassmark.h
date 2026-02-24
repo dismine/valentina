@@ -65,6 +65,7 @@ struct VPiecePassmarkData
     vidtype id{NULL_ID};             // NOLINT(misc-non-private-member-variables-in-classes)
     qreal globalPassmarkLength{0};   // NOLINT(misc-non-private-member-variables-in-classes)
     qreal globalPassmarkWidth{0};    // NOLINT(misc-non-private-member-variables-in-classes)
+    bool notMirrored{false};         // NOLINT(misc-non-private-member-variables-in-classes)
 
     auto toJson() const -> QJsonObject;
 };

@@ -346,6 +346,12 @@ inline auto AbstractTest::ItemFromJson(const QJsonObject &object, VLayoutPassmar
     {
         AbstractTest::ReadStringValue(object, QStringLiteral("label"), passmark.label);
     }
+
+    // Read "notMirrored" if present
+    if (object.contains(QStringLiteral("notMirrored")))
+    {
+        ReadBooleanValue(object, QStringLiteral("notMirrored"), passmark.notMirrored);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

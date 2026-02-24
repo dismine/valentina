@@ -309,7 +309,8 @@ auto PrepareSAPassmark(const VPiece &piece, const VContainer *pattern, const VPa
             .type = pData.passmarkLineType,
             .baseLine = baseLine,
             .isClockwiseOpening = pData.passmarkSAPoint.IsPassmarkClockwiseOpening(),
-            .label = pData.nodeName};
+            .label = pData.nodeName,
+            .notMirrored = pData.notMirrored};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -363,7 +364,8 @@ auto PreapreBuiltInSAPassmark(const VPiece &piece, const VContainer *pattern, co
             .baseLine = baseLines.constFirst(),
             .isBuiltIn = true,
             .isClockwiseOpening = pData.passmarkSAPoint.IsPassmarkClockwiseOpening(),
-            .label = pData.nodeName};
+            .label = pData.nodeName,
+            .notMirrored = pData.notMirrored};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1685,7 +1687,8 @@ auto VLayoutPiece::ContourPath(bool togetherWithNotches, bool showLayoutAllowanc
                 if (!d->m_seamAllowanceMirrorLine.isNull() && IsShowFullPiece()
                     && !IsPointOnLineviaPDP(passmark.baseLine.p1(),
                                             d->m_seamAllowanceMirrorLine.p1(),
-                                            d->m_seamAllowanceMirrorLine.p2()))
+                                            d->m_seamAllowanceMirrorLine.p2())
+                    && !passmark.notMirrored)
                 {
                     QPainterPath mirroredPassmaksPath;
                     for (const auto &line : passmark.lines)

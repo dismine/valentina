@@ -41,7 +41,7 @@
 using namespace Qt::Literals::StringLiterals;
 
 const quint32 VLayoutPassmark::streamHeader = 0x943E2759; // CRC-32Q string "VLayoutPassmark"
-const quint16 VLayoutPassmark::classVersion = 3;
+const quint16 VLayoutPassmark::classVersion = 4;
 
 namespace
 {
@@ -90,7 +90,17 @@ auto operator<<(QDataStream &dataStream, const VLayoutPassmark &data) -> QDataSt
 {
     dataStream << VLayoutPassmark::streamHeader << VLayoutPassmark::classVersion;
 
-    dataStream << data.lines << data.type << data.baseLine << data.isBuiltIn << data.isClockwiseOpening << data.label;
+    dataStream << data.lines << data.type << data.baseLine << data.isBuiltIn;
+
+    // Added in classVersion = 2
+    dataStream << data.isClockwiseOpening;
+
+    // Added in classVersion = 3
+    dataStream << data.label;
+
+    // Added in classVersion = 4
+    dataStream << data.notMirrored;
+
     return dataStream;
 }
 
@@ -132,6 +142,11 @@ auto operator>>(QDataStream &dataStream, VLayoutPassmark &data) -> QDataStream &
     if (actualClassVersion >= 3)
     {
         dataStream >> data.label;
+    }
+
+    if (actualClassVersion >= 4)
+    {
+        dataStream >> data.notMirrored;
     }
 
     return dataStream;
@@ -213,6 +228,8 @@ auto VLayoutPassmark::toJson() const -> QJsonObject
     {
         object["label"_L1] = label;
     }
+
+    object["notMirrored"_L1] = notMirrored;
 
     return object;
 }

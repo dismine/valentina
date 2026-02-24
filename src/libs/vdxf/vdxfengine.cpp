@@ -1009,7 +1009,8 @@ void VDxfEngine::ExportAAMANotch(const QSharedPointer<dx_ifaceBlock> &detailBloc
             ExportNotch(passmark.baseLine.p1(), passmark.baseLine.length(), passmark.baseLine.angle());
 
             if (!mirrorLine.isNull() && detail.IsShowFullPiece()
-                && !IsPointOnLineviaPDP(passmark.baseLine.p1(), mirrorLine.p1(), mirrorLine.p2()))
+                && !IsPointOnLineviaPDP(passmark.baseLine.p1(), mirrorLine.p1(), mirrorLine.p2())
+                && !passmark.notMirrored)
             {
                 const QTransform matrix = VGObject::FlippingMatrix(mirrorLine);
                 QLineF const baseLine = matrix.map(passmark.baseLine);
@@ -1610,7 +1611,7 @@ void VDxfEngine::ExportASTMNotches(const QSharedPointer<dx_ifaceBlock> &detailBl
 
         const QLineF mirrorLine = detail.GetMappedSeamMirrorLine();
         if (!mirrorLine.isNull() && detail.IsShowFullPiece()
-            && !IsPointOnLineviaPDP(passmark.baseLine.p1(), mirrorLine.p1(), mirrorLine.p2()))
+            && !IsPointOnLineviaPDP(passmark.baseLine.p1(), mirrorLine.p1(), mirrorLine.p2()) && !passmark.notMirrored)
         {
             const QTransform matrix = VGObject::FlippingMatrix(mirrorLine);
             const VLayoutPassmark mirroredPassmark = VLayoutPiece::MapPassmark(passmark, matrix, false);

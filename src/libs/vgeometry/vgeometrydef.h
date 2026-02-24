@@ -76,6 +76,7 @@ struct VLayoutPassmark
     bool isBuiltIn{false};
     bool isClockwiseOpening{false};
     QString label{};
+    bool notMirrored{false};
 
     friend auto operator<<(QDataStream &dataStream, const VLayoutPassmark &data) -> QDataStream &;
     friend auto operator>>(QDataStream &dataStream, VLayoutPassmark &data) -> QDataStream &;

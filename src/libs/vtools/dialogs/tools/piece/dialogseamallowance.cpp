@@ -1548,8 +1548,10 @@ void DialogSeamAllowance::PassmarkChanged(int index)
     uiTabPassmarks->labelEditPassmarkAngle->setDisabled(true);
 
     uiTabPassmarks->checkBoxClockwiseOpening->setDisabled(true);
+    uiTabPassmarks->checkBoxNotMirrored->setDisabled(true);
     uiTabPassmarks->checkBoxShowSecondPassmark->setDisabled(true);
 
+    const QSignalBlocker blockerNotMirrored(uiTabPassmarks->checkBoxNotMirrored);
     const QSignalBlocker blockerClockwiseOpening(uiTabPassmarks->checkBoxClockwiseOpening);
     const QSignalBlocker blockerShowSecondPassmark(uiTabPassmarks->checkBoxShowSecondPassmark);
     const QSignalBlocker blockerManualLength(uiTabPassmarks->groupBoxManualLength);
@@ -1559,6 +1561,7 @@ void DialogSeamAllowance::PassmarkChanged(int index)
     const QSignalBlocker blockerAngleType(uiTabPassmarks->groupBoxAngleType);
 
     uiTabPassmarks->checkBoxClockwiseOpening->setChecked(false);
+    uiTabPassmarks->checkBoxNotMirrored->setChecked(false);
 
     uiTabPassmarks->groupBoxManualLength->setChecked(false);
     uiTabPassmarks->groupBoxManualWidth->setChecked(false);
@@ -1584,6 +1587,9 @@ void DialogSeamAllowance::PassmarkChanged(int index)
     InitPassmarkAngleFormula(node);
     InitPassmarkShapeType(node);
     InitPassmarkAngleType(node);
+
+    uiTabPassmarks->checkBoxNotMirrored->setEnabled(true);
+    uiTabPassmarks->checkBoxNotMirrored->setChecked(node.IsPassmarkNotMirrored());
 
     if (node.GetPassmarkLineType() == PassmarkLineType::CheckMark)
     {
@@ -2062,6 +2068,24 @@ void DialogSeamAllowance::PassmarkClockwiseOrientationChanged(int state)
         {
             auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
             rowNode.SetPassmarkClockwiseOpening(state);
+            rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
+
+            ListChanged();
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::PassmarkNotMirroredStateChanged(int state)
+{
+    const int i = uiTabPassmarks->comboBoxPassmarks->currentIndex();
+    if (i != -1)
+    {
+        QListWidgetItem *rowItem = GetItemById(uiTabPassmarks->comboBoxPassmarks->currentData().toUInt());
+        if (rowItem)
+        {
+            auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+            rowNode.SetPassmarkNotMirrored(state);
             rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
 
             ListChanged();
@@ -4476,11 +4500,15 @@ void DialogSeamAllowance::InitPassmarksTab()
             &DialogSeamAllowance::PassmarkShowSecondChanged);
     connect(uiTabPassmarks->checkBoxClockwiseOpening, &QCheckBox::checkStateChanged, this,
             &DialogSeamAllowance::PassmarkClockwiseOrientationChanged);
+    connect(uiTabPassmarks->checkBoxNotMirrored, &QCheckBox::checkStateChanged, this,
+            &DialogSeamAllowance::PassmarkNotMirroredStateChanged);
 #else
     connect(uiTabPassmarks->checkBoxShowSecondPassmark, &QCheckBox::stateChanged, this,
             &DialogSeamAllowance::PassmarkShowSecondChanged);
     connect(uiTabPassmarks->checkBoxClockwiseOpening, &QCheckBox::stateChanged, this,
             &DialogSeamAllowance::PassmarkClockwiseOrientationChanged);
+    connect(uiTabPassmarks->checkBoxNotMirrored, &QCheckBox::checkStateChanged, this,
+            &DialogSeamAllowance::PassmarkNotMirroredStateChanged);
 #endif
 }
 

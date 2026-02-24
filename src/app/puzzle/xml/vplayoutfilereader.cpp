@@ -700,7 +700,8 @@ auto VPLayoutFileReader::ReadNotch() -> VLayoutPassmark
             .type = static_cast<PassmarkLineType>(ReadAttributeUInt(attribs, ML::AttrType, defaultType)),
             .baseLine = StringToLine(ReadAttributeEmptyString(attribs, ML::AttrBaseLine)),
             .isBuiltIn = ReadAttributeBool(attribs, ML::AttrBuiltIn, falseStr),
-            .isClockwiseOpening = ReadAttributeBool(attribs, ML::AttrClockwiseOpening, falseStr)};
+            .isClockwiseOpening = ReadAttributeBool(attribs, ML::AttrClockwiseOpening, falseStr),
+            .notMirrored = ReadAttributeBool(attribs, ML::AttrNotMirrored, falseStr)};
     QT_WARNING_POP
 }
 

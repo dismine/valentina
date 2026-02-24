@@ -598,6 +598,18 @@ void VPieceNode::SetTurnPoint(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VPieceNode::IsPassmarkNotMirrored() const -> bool
+{
+    return d->m_passmarkNotMirrored;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceNode::SetPassmarkNotMirrored(bool value)
+{
+    d->m_passmarkNotMirrored = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VPieceNode::IsExcluded() const -> bool
 {
     return d->m_excluded;

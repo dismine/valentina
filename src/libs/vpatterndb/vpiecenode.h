@@ -128,6 +128,9 @@ public:
     auto IsTurnPoint() const -> bool;
     void SetTurnPoint(bool value);
 
+    auto IsPassmarkNotMirrored() const -> bool;
+    void SetPassmarkNotMirrored(bool value);
+
 private:
     QSharedDataPointer<VPieceNodeData> d;
 };

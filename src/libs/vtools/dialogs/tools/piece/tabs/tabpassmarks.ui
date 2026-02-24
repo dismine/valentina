@@ -32,7 +32,7 @@
        <item>
         <layout class="QFormLayout" name="formLayout">
          <property name="fieldGrowthPolicy">
-          <enum>QFormLayout::ExpandingFieldsGrow</enum>
+          <enum>QFormLayout::FieldGrowthPolicy::ExpandingFieldsGrow</enum>
          </property>
          <item row="0" column="0">
           <widget class="QLabel" name="label">
@@ -334,6 +334,16 @@
              </property>
             </widget>
            </item>
+           <item>
+            <widget class="QCheckBox" name="checkBoxNotMirrored">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>Not Mirrored</string>
+             </property>
+            </widget>
+           </item>
           </layout>
          </widget>
          <widget class="QWidget" name="tabManualShape">
@@ -358,7 +368,7 @@
              <layout class="QVBoxLayout" name="verticalLayout_3">
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout">
-                <item alignment="Qt::AlignLeft">
+                <item alignment="Qt::AlignmentFlag::AlignLeft">
                  <widget class="QLabel" name="labelEditPassmarkLength">
                   <property name="enabled">
                    <bool>false</bool>
@@ -414,7 +424,7 @@
                 <item>
                  <spacer name="horizontalSpacer">
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                   <property name="sizeHint" stdset="0">
                    <size>
@@ -424,7 +434,7 @@
                   </property>
                  </spacer>
                 </item>
-                <item alignment="Qt::AlignRight">
+                <item alignment="Qt::AlignmentFlag::AlignRight">
                  <widget class="QToolButton" name="toolButtonExprLength">
                   <property name="enabled">
                    <bool>false</bool>
@@ -447,7 +457,7 @@
                   </property>
                  </widget>
                 </item>
-                <item alignment="Qt::AlignRight">
+                <item alignment="Qt::AlignmentFlag::AlignRight">
                  <widget class="QLabel" name="label_3">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -465,11 +475,11 @@
                    <string notr="true">=</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                 </item>
-                <item alignment="Qt::AlignRight">
+                <item alignment="Qt::AlignmentFlag::AlignRight">
                  <widget class="QLabel" name="labelResultPassmarkLength">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -583,7 +593,7 @@
              <layout class="QVBoxLayout" name="verticalLayout_5">
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_3">
-                <item alignment="Qt::AlignLeft">
+                <item alignment="Qt::AlignmentFlag::AlignLeft">
                  <widget class="QLabel" name="labelEditPassmarkWidth">
                   <property name="enabled">
                    <bool>false</bool>
@@ -639,7 +649,7 @@
                 <item>
                  <spacer name="horizontalSpacer_2">
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                   <property name="sizeHint" stdset="0">
                    <size>
@@ -649,7 +659,7 @@
                   </property>
                  </spacer>
                 </item>
-                <item alignment="Qt::AlignRight">
+                <item alignment="Qt::AlignmentFlag::AlignRight">
                  <widget class="QToolButton" name="toolButtonExprWidth">
                   <property name="enabled">
                    <bool>false</bool>
@@ -672,7 +682,7 @@
                   </property>
                  </widget>
                 </item>
-                <item alignment="Qt::AlignRight">
+                <item alignment="Qt::AlignmentFlag::AlignRight">
                  <widget class="QLabel" name="label_4">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -690,11 +700,11 @@
                    <string notr="true">=</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                 </item>
-                <item alignment="Qt::AlignRight">
+                <item alignment="Qt::AlignmentFlag::AlignRight">
                  <widget class="QLabel" name="labelResultPassmarkWidth">
                   <property name="enabled">
                    <bool>false</bool>
@@ -811,7 +821,7 @@
              <layout class="QVBoxLayout" name="verticalLayout_6">
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_4">
-                <item alignment="Qt::AlignLeft">
+                <item alignment="Qt::AlignmentFlag::AlignLeft">
                  <widget class="QLabel" name="labelEditPassmarkAngle">
                   <property name="enabled">
                    <bool>false</bool>
@@ -867,7 +877,7 @@
                 <item>
                  <spacer name="horizontalSpacer_3">
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                   <property name="sizeHint" stdset="0">
                    <size>
@@ -877,7 +887,7 @@
                   </property>
                  </spacer>
                 </item>
-                <item alignment="Qt::AlignRight">
+                <item alignment="Qt::AlignmentFlag::AlignRight">
                  <widget class="QToolButton" name="toolButtonExprAngle">
                   <property name="enabled">
                    <bool>false</bool>
@@ -900,7 +910,7 @@
                   </property>
                  </widget>
                 </item>
-                <item alignment="Qt::AlignRight">
+                <item alignment="Qt::AlignmentFlag::AlignRight">
                  <widget class="QLabel" name="label_5">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -918,11 +928,11 @@
                    <string notr="true">=</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                 </item>
-                <item alignment="Qt::AlignRight">
+                <item alignment="Qt::AlignmentFlag::AlignRight">
                  <widget class="QLabel" name="labelResultPassmarkAngle">
                   <property name="enabled">
                    <bool>false</bool>
@@ -1042,7 +1052,7 @@
        <item>
         <spacer name="verticalSpacer">
          <property name="orientation">
-          <enum>Qt::Vertical</enum>
+          <enum>Qt::Orientation::Vertical</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>

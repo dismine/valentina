@@ -1286,6 +1286,7 @@ auto VPiece::CreatePassmark(const QVector<VPieceNode> &path, vsizetype previousI
         return {};
     }
 
+    const VPieceNode &passmarkNode = path.at(passmarkIndex);
     return VPassmark({.previousSAPoint = previousSAPoint,
                       .passmarkSAPoint = passmarkSAPoint,
                       .nextSAPoint = nextSAPoint,
@@ -1293,14 +1294,15 @@ auto VPiece::CreatePassmark(const QVector<VPieceNode> &path, vsizetype previousI
                       .saWidth = ToPixel(GetSAWidth(), *data->GetPatternUnit()),
                       .nodeName = VPiecePath::NodeName(path, passmarkIndex, data),
                       .pieceName = GetName(),
-                      .passmarkLineType = path.at(passmarkIndex).GetPassmarkLineType(),
-                      .passmarkAngleType = path.at(passmarkIndex).GetPassmarkAngleType(),
-                      .isMainPathNode = path.at(passmarkIndex).IsMainPathNode(),
-                      .isShowSecondPassmark = path.at(passmarkIndex).IsShowSecondPassmark(),
+                      .passmarkLineType = passmarkNode.GetPassmarkLineType(),
+                      .passmarkAngleType = passmarkNode.GetPassmarkAngleType(),
+                      .isMainPathNode = passmarkNode.IsMainPathNode(),
+                      .isShowSecondPassmark = passmarkNode.IsShowSecondPassmark(),
                       .passmarkIndex = passmarkIndex,
-                      .id = path.at(passmarkIndex).GetId(),
+                      .id = passmarkNode.GetId(),
                       .globalPassmarkLength = ToPixel(GlobalPassmarkLength(data), *data->GetPatternUnit()),
-                      .globalPassmarkWidth = ToPixel(GlobalPassmarkWidth(data), *data->GetPatternUnit())});
+                      .globalPassmarkWidth = ToPixel(GlobalPassmarkWidth(data), *data->GetPatternUnit()),
+                      .notMirrored = passmarkNode.IsPassmarkNotMirrored()});
 }
 
 //---------------------------------------------------------------------------------------------------------------------

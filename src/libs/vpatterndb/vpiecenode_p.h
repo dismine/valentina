@@ -97,6 +97,8 @@ public:
 
     bool m_turnPoint{true}; // NOLINT(misc-non-private-member-variables-in-classes)
 
+    bool m_passmarkNotMirrored{false}; // NOLINT(misc-non-private-member-variables-in-classes)
+
 private:
     Q_DISABLE_ASSIGN_MOVE(VPieceNodeData) // NOLINT
 

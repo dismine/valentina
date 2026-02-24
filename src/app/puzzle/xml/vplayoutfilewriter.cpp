@@ -338,6 +338,9 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
         SetAttribute(ML::AttrPath, LinesToString(passmark.lines));
         SetAttributeOrRemoveIf<bool>(ML::AttrClockwiseOpening, passmark.isClockwiseOpening,
                                      [](bool clockwise) noexcept { return not clockwise; });
+        SetAttributeOrRemoveIf<bool>(ML::AttrNotMirrored,
+                                     passmark.notMirrored,
+                                     [](bool notMirrored) noexcept -> bool { return !notMirrored; });
         writeEndElement();
     }
     writeEndElement();

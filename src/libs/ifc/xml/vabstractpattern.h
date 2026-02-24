@@ -347,6 +347,7 @@ public:
     static const QString AttrNodePassmarkAngle;
     static const QString AttrNodeShowSecondPassmark;
     static const QString AttrNodePassmarkOpening;
+    static const QString AttrNodePassmarkNotMirrored;
     static const QString AttrNodeTurnPoint;
     static const QString AttrSABefore;
     static const QString AttrSAAfter;

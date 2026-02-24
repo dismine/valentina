@@ -259,7 +259,8 @@ auto VBoundary::Combine(const QVector<VLayoutPassmark> &passmarks, bool drawMode
             if (!m_mirrorLine.isNull())
             {
                 if (auto passmark = item.item.value<VLayoutPassmark>();
-                    !IsPointOnLineviaPDP(passmark.baseLine.p1(), m_mirrorLine.p1(), m_mirrorLine.p2()))
+                    !IsPointOnLineviaPDP(passmark.baseLine.p1(), m_mirrorLine.p1(), m_mirrorLine.p2())
+                    && !passmark.notMirrored)
                 {
                     item.mirror = true;
                     InsertPassmark(item, sequence, drawMode);

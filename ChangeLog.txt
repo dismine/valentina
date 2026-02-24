@@ -15,6 +15,7 @@
 - Fix calculation of seam allowance for symmetrical piece.
 - Dependency graph.
 - End of support for Windows versions below 10.
+- New option to disable mirroring a notch.
 
 # Valentina 1.0.1 (unreleased)
 - Tool Normal. Fixed formula values were not saved.

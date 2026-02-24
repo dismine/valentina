@@ -106,6 +106,7 @@ private slots:
     void PassmarkAngleTypeChanged(int id);
     void PassmarkShowSecondChanged(int state);
     void PassmarkClockwiseOrientationChanged(int state);
+    void PassmarkNotMirroredStateChanged(int state);
 
     void UpdateGrainlineValues();
     void UpdateDetailLabelValues();

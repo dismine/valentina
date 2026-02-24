@@ -485,6 +485,10 @@ auto VAbstractTool::AddSANode(VAbstractPattern *doc, const QString &tagName, con
 
         doc->SetAttributeOrRemoveIf<bool>(nod, VAbstractPattern::AttrNodeShowSecondPassmark,
                                           node.IsShowSecondPassmark(), [](bool show) noexcept { return show; });
+        doc->SetAttributeOrRemoveIf<bool>(nod,
+                                          VAbstractPattern::AttrNodePassmarkNotMirrored,
+                                          node.IsPassmarkNotMirrored(),
+                                          [](bool notMirrored) noexcept -> bool { return !notMirrored; });
         doc->SetAttributeOrRemoveIf<bool>(nod, VAbstractPattern::AttrNodePassmarkOpening,
                                           node.IsPassmarkClockwiseOpening(),
                                           [](bool opening) noexcept { return not opening; });
