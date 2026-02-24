@@ -32,6 +32,7 @@
 #include "../qmuparser/qmudef.h"
 #include "../vformat/knownmeasurements/vknownmeasurementsdatabase.h"
 #include "../vganalytics/vganalytics.h"
+#include "../vmisc/compatibility.h"
 #include "../vmisc/dialogs/vshortcutdialog.h"
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractshortcutmanager.h"

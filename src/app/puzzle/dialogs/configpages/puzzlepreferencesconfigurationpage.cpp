@@ -29,6 +29,7 @@
 #include "puzzlepreferencesconfigurationpage.h"
 #include "../../vpapplication.h"
 #include "../vganalytics/vganalytics.h"
+#include "../vmisc/compatibility.h"
 #include "../vmisc/dialogs/vshortcutdialog.h"
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractshortcutmanager.h"
