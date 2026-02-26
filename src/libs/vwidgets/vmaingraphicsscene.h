@@ -101,9 +101,10 @@ public slots:
     void          ToggleNodePointHover(bool enabled);
     void          ToggleDetailHover(bool enabled);
 protected:
-    virtual void  mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
-    virtual void  mousePressEvent(QGraphicsSceneMouseEvent *event) override;
-    virtual void  mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
+    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+
 signals:
     /**
      * @brief mouseMove send new mouse position.

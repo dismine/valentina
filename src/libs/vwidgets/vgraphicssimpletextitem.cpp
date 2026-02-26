@@ -198,7 +198,7 @@ auto VGraphicsSimpleTextItem::itemChange(GraphicsItemChange change, const QVaria
         if (changeFinished)
         {
             changeFinished = false;
-            if (scene())
+            if (scene() != nullptr)
             {
                 const QList<QGraphicsView *> viewList = scene()->views();
                 if (not viewList.isEmpty())
@@ -254,8 +254,7 @@ void VGraphicsSimpleTextItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
     m_hoverFlag = true;
     RefreshColor();
 
-    QGraphicsItem *parent = parentItem();
-    if (parent && m_showParentTooltip)
+    if (const QGraphicsItem *parent = parentItem(); (parent != nullptr) && m_showParentTooltip)
     {
         setToolTip(parent->toolTip());
     }

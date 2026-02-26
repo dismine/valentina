@@ -38,7 +38,6 @@
 #include <QLineF>
 #include <QPen>
 
-#include "../vmisc/vabstractapplication.h"
 #include "global.h"
 
 //---------------------------------------------------------------------------------------------------------------------
