@@ -253,7 +253,7 @@ void VGraphicsSimpleTextItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
     m_hoverFlag = true;
     RefreshColor();
 
-    if (QGraphicsItem const *parent = parentItem(); parent && m_showParentTooltip)
+    if (QGraphicsItem const *parent = parentItem(); (parent != nullptr) && m_showParentTooltip)
     {
         setToolTip(parent->toolTip());
     }
