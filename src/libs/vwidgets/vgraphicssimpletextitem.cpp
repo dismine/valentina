@@ -43,6 +43,7 @@
 #include <QRectF>
 
 #include "../vmisc/literals.h"
+#include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "global.h"
 #include "theme/vscenestylesheet.h"
@@ -178,6 +179,8 @@ void VGraphicsSimpleTextItem::UpdateGeometry()
             VMainGraphicsView::NewSceneRect(scene, view, this);
         }
     }
+
+    RefreshColor();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -377,13 +380,10 @@ void VGraphicsSimpleTextItem::Init()
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true); // For keyboard input focus
     this->setAcceptHoverEvents(true);
-    QFont font = this->font();
-    font.setPointSize(qMax(VAbstractApplication::VApp()->Settings()->GetPatternLabelFontSize(), 1));
-    setFont(font);
-    m_oldScale = minVisibleFontSize / VAbstractApplication::VApp()->Settings()->GetPatternLabelFontSize();
-    setScale(m_oldScale);
+    UpdateGeometry();
     connect(VAbstractApplication::VApp()->Settings(),
             &VCommonSettings::PatternLabelFontSizeChanged,
             this,
             &VGraphicsSimpleTextItem::UpdateFontSize);
+    connect(VTheme::Instance(), &VTheme::ThemeSettingsChanged, this, [this]() -> void { RefreshColor(); });
 }
