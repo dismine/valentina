@@ -103,10 +103,10 @@ void VSimplePoint::AllowLabelSelecting(bool enabled)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSimplePoint::ToolSelectionType(const SelectionType &type)
+void VSimplePoint::ToolSelectionType(const SelectionType &selectionType)
 {
-    VAbstractSimple::ToolSelectionType(type);
-    m_namePoint->LabelSelectionType(type);
+    VAbstractSimple::ToolSelectionType(selectionType);
+    m_namePoint->LabelSelectionType(selectionType);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -151,7 +151,7 @@ void VSimplePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
             scene()->clearSelection();
         }
 
-        if (selectionType == SelectionType::ByMouseRelease)
+        if (m_selectionType == SelectionType::ByMouseRelease)
         { // Special for not selectable item first need to call standard mousePressEvent then accept event
             event->accept();
         }
@@ -171,7 +171,7 @@ void VSimplePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (not m_visualizationMode)
     {
-        if (selectionType == SelectionType::ByMouseRelease && IsSelectedByReleaseEvent(this, event))
+        if (m_selectionType == SelectionType::ByMouseRelease && IsSelectedByReleaseEvent(this, event))
         {
             emit Choosed(id);
         }

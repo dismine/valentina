@@ -92,7 +92,7 @@ public slots:
     void AllowSelecting(bool enabled) override;
     void AllowLabelHover(bool enabled);
     void AllowLabelSelecting(bool enabled);
-    void ToolSelectionType(const SelectionType &type) override;
+    void ToolSelectionType(const SelectionType &selectionType) override;
 
 protected:
     void UpdateNamePosition(quint32 id, const QPointF &pos) override;

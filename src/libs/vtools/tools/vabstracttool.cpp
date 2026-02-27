@@ -98,7 +98,7 @@ VAbstractTool::VAbstractTool(VAbstractPattern *doc, VContainer *data, quint32 id
     doc(doc),
     m_id(id),
     vis(),
-    selectionType(SelectionType::ByMouseRelease)
+    m_selectionType(SelectionType::ByMouseRelease)
 {
     SCASSERT(doc != nullptr)
     connect(this, &VAbstractTool::toolhaveChange, this->doc, &VAbstractPattern::haveLiteChange);
@@ -359,9 +359,9 @@ void VAbstractTool::SetLabelVisible(quint32 id, bool visible)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractTool::ToolSelectionType(const SelectionType &type)
+void VAbstractTool::ToolSelectionType(const SelectionType &selectionType)
 {
-    selectionType = type;
+    m_selectionType = selectionType;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

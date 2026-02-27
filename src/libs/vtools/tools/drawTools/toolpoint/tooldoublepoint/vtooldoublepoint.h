@@ -86,7 +86,7 @@ public slots:
     void AllowSelecting(bool enabled) override;
     void AllowLabelHover(bool enabled);
     void AllowLabelSelecting(bool enabled);
-    virtual void ToolSelectionType(const SelectionType &type) override;
+    virtual void ToolSelectionType(const SelectionType &selectionType) override;
 
 protected:
     VSimplePoint *firstPoint;

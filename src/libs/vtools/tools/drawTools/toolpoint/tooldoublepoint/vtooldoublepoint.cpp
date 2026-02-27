@@ -298,11 +298,11 @@ void VToolDoublePoint::AllowLabelSelecting(bool enabled)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolDoublePoint::ToolSelectionType(const SelectionType &type)
+void VToolDoublePoint::ToolSelectionType(const SelectionType &selectionType)
 {
-    VAbstractTool::ToolSelectionType(type);
-    firstPoint->ToolSelectionType(type);
-    secondPoint->ToolSelectionType(type);
+    VAbstractTool::ToolSelectionType(selectionType);
+    firstPoint->ToolSelectionType(selectionType);
+    secondPoint->ToolSelectionType(selectionType);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

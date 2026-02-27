@@ -181,7 +181,7 @@ void VToolSinglePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
         scene()->clearSelection();
     }
 
-    if (selectionType == SelectionType::ByMouseRelease)
+    if (m_selectionType == SelectionType::ByMouseRelease)
     {
         event
             ->accept(); // Special for not selectable item first need to call standard mousePressEvent then accept event
@@ -242,7 +242,7 @@ void VToolSinglePoint::FullUpdateFromFile()
  */
 void VToolSinglePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (selectionType == SelectionType::ByMouseRelease && IsSelectedByReleaseEvent(this, event))
+    if (m_selectionType == SelectionType::ByMouseRelease && IsSelectedByReleaseEvent(this, event))
     {
         PointChoosed();
     }
@@ -380,10 +380,10 @@ void VToolSinglePoint::AllowLabelSelecting(bool enabled)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSinglePoint::ToolSelectionType(const SelectionType &type)
+void VToolSinglePoint::ToolSelectionType(const SelectionType &selectionType)
 {
-    VAbstractTool::ToolSelectionType(type);
-    m_namePoint->LabelSelectionType(type);
+    VAbstractTool::ToolSelectionType(selectionType);
+    m_namePoint->LabelSelectionType(selectionType);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

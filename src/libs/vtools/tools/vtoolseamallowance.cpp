@@ -1617,7 +1617,7 @@ void VToolSeamAllowance::mousePressEvent(QGraphicsSceneMouseEvent *event)
         SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
     }
 
-    if (selectionType == SelectionType::ByMouseRelease)
+    if (m_selectionType == SelectionType::ByMouseRelease)
     {
         event
             ->accept(); // Special for not selectable item first need to call standard mousePressEvent then accept event
@@ -1641,7 +1641,7 @@ void VToolSeamAllowance::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
     }
 
-    if (selectionType == SelectionType::ByMouseRelease && IsSelectedByReleaseEvent(this, event))
+    if (m_selectionType == SelectionType::ByMouseRelease && IsSelectedByReleaseEvent(this, event))
     {
         doc->SelectedDetail(m_id);
         emit ChoosedTool(m_id, SceneObject::Detail);

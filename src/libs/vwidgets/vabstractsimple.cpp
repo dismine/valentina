@@ -30,17 +30,17 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractSimple::VAbstractSimple(quint32 id, QObject *parent)
-    : QObject(parent),
-      id (id),
-      selectionType(SelectionType::ByMouseRelease),
-      type(GOType::Unknown)
+  : QObject(parent),
+    id(id),
+    m_selectionType(SelectionType::ByMouseRelease),
+    type(GOType::Unknown)
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractSimple::ToolSelectionType(const SelectionType &type)
+void VAbstractSimple::ToolSelectionType(const SelectionType &selectionType)
 {
-    selectionType = type;
+    m_selectionType = selectionType;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

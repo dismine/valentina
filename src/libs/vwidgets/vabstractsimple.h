@@ -50,7 +50,7 @@ public:
     VAbstractSimple(quint32 id, QObject *parent = nullptr);
     virtual ~VAbstractSimple() = default;
 
-    virtual void ToolSelectionType(const SelectionType &type);
+    virtual void ToolSelectionType(const SelectionType &selectionType);
 
     auto GetType() const -> GOType;
     void SetType(const GOType &value);
@@ -63,7 +63,7 @@ protected:
     /** @brief id spline id. */
     quint32 id;
 
-    SelectionType selectionType;
+    SelectionType m_selectionType;
 
     GOType type;
 

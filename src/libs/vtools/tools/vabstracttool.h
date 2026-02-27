@@ -121,7 +121,7 @@ public slots:
     virtual void FullUpdateFromFile() = 0;
     virtual void AllowHover(bool enabled) = 0;
     virtual void AllowSelecting(bool enabled) = 0;
-    virtual void ToolSelectionType(const SelectionType &type);
+    virtual void ToolSelectionType(const SelectionType &selectionType);
 signals:
     /**
      * @brief toolhaveChange emit if tool create change that need save.
@@ -148,7 +148,7 @@ protected:
     const quint32 m_id;
 
     QPointer<Visualization> vis;
-    SelectionType selectionType;
+    SelectionType m_selectionType;
 
     /**
      * @brief AddToFile add tag with informations about tool into file.
