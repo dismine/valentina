@@ -904,7 +904,7 @@ void TMainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int 
         }
     }
 
-    VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
+    VKnownMeasurementsDatabase const *db = MApplication::VApp()->KnownMeasurementsDatabase();
     VKnownMeasurements const knownDB = db->KnownMeasurements(m_m->KnownMeasurements());
 
     const QMap<int, QSharedPointer<VMeasurement>> orderedTable = OrderedMeasurements();
@@ -2006,8 +2006,8 @@ void TMainWindow::ShowNewMData(bool fresh)
     ShowMDiagram(meash);
 
     ui->toolButtonAddImage->setEnabled(meash->IsCustom());
-    ui->toolButtonRemoveImage->setEnabled(meash->IsCustom() && !meash->GetImage().IsNull());
-    ui->toolButtonSaveImage->setEnabled(meash->IsCustom() && !meash->GetImage().IsNull());
+    ui->toolButtonRemoveImage->setEnabled(meash->IsCustom() && !meash->GetCustomImage().IsNull());
+    ui->toolButtonSaveImage->setEnabled(!meash->GetImage().IsNull());
 
     ui->labelFullName->setVisible(meash->GetType() == VarType::Measurement);
     ui->lineEditFullName->setVisible(meash->GetType() == VarType::Measurement);
@@ -2028,7 +2028,7 @@ void TMainWindow::ShowNewMData(bool fresh)
     {
         // Show known
         VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
-        VKnownMeasurements const knownDB = db->KnownMeasurements(m_m->KnownMeasurements());
+        VKnownMeasurements const knownDB = db->KnownMeasurements(meash->GetKnownMeasurementsId());
         VKnownMeasurement const known = knownDB.Measurement(meash->GetName());
 
         ui->plainTextEditDescription->setPlainText(known.description);
@@ -2169,21 +2169,7 @@ void TMainWindow::ShowMDiagram(const QSharedPointer<VMeasurement> &m)
         return;
     }
 
-    VPatternImage image;
-
-    if (m->IsCustom())
-    {
-        image = m->GetImage();
-    }
-    else
-    {
-        VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
-        VKnownMeasurements const knownDB = db->KnownMeasurements(m_m->KnownMeasurements());
-        VKnownMeasurement const known = knownDB.Measurement(m->GetName());
-        image = knownDB.Image(known.diagram);
-    }
-
-    if (image.IsValid())
+    if (VPatternImage const image = m->GetImage(); image.IsValid())
     {
         ui->labelDiagram->setCursor(Qt::PointingHandCursor);
         ui->labelDiagram->setResizedPixmap(image.GetPixmap());
@@ -3606,6 +3592,11 @@ auto TMainWindow::AddSeparatorCell(const QString &text, int row, int column, int
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::RefreshData(bool freshCall)
 {
+    if (m_m == nullptr)
+    {
+        return;
+    }
+
     QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
     m_data->ClearUniqueNames();
@@ -3669,8 +3660,8 @@ void TMainWindow::RefreshTable(bool freshCall)
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::RefreshMeasurementData(const QSharedPointer<VMeasurement> &meash, qint32 currentRow)
 {
-    VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
-    VKnownMeasurements const knownDB = db->KnownMeasurements(m_m->KnownMeasurements());
+    VKnownMeasurementsDatabase const *db = MApplication::VApp()->KnownMeasurementsDatabase();
+    VKnownMeasurements const knownDB = db->KnownMeasurements(meash->GetKnownMeasurementsId());
     VKnownMeasurement const known = knownDB.Measurement(meash->GetName());
 
     if (m_mType == MeasurementsType::Individual)
@@ -3937,48 +3928,50 @@ void TMainWindow::SyncKnownMeasurements()
 
     const int row = ui->tableWidget->currentRow();
 
-    if (row != -1)
+    RefreshData(false);
+
+    if (row == -1)
     {
-        RefreshTable(false);
-
-        ui->tableWidget->blockSignals(true);
-        ui->tableWidget->selectRow(row);
-        ui->tableWidget->blockSignals(false);
-
-        const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName); // name
-        SCASSERT(nameField != nullptr)
-        QSharedPointer<VMeasurement> meash;
-
-        try
-        {
-            // Translate to internal look.
-            meash = m_data->GetVariable<VMeasurement>(nameField->data(Qt::UserRole).toString());
-        }
-        catch (const VExceptionBadId &e)
-        {
-            Q_UNUSED(e)
-            return;
-        }
-
-        if (meash->IsCustom())
-        {
-            return;
-        }
-
-        ShowMDiagram(meash);
-
-        VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
-        VKnownMeasurements const knownDB = db->KnownMeasurements(m_m->KnownMeasurements());
-        VKnownMeasurement const known = knownDB.Measurement(meash->GetName());
-
-        ui->plainTextEditDescription->blockSignals(true);
-        ui->plainTextEditDescription->setPlainText(known.description);
-        ui->plainTextEditDescription->blockSignals(false);
-
-        ui->lineEditFullName->blockSignals(true);
-        ui->lineEditFullName->setText(known.fullName);
-        ui->lineEditFullName->blockSignals(false);
+        return;
     }
+
+    ui->tableWidget->blockSignals(true);
+    ui->tableWidget->selectRow(row);
+    ui->tableWidget->blockSignals(false);
+
+    const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName); // name
+    SCASSERT(nameField != nullptr)
+    QSharedPointer<VMeasurement> meash;
+
+    try
+    {
+        // Translate to internal look.
+        meash = m_data->GetVariable<VMeasurement>(nameField->data(Qt::UserRole).toString());
+    }
+    catch (const VExceptionBadId &e)
+    {
+        Q_UNUSED(e)
+        return;
+    }
+
+    if (meash->IsCustom())
+    {
+        return;
+    }
+
+    ShowMDiagram(meash);
+
+    VKnownMeasurementsDatabase const *db = MApplication::VApp()->KnownMeasurementsDatabase();
+    VKnownMeasurements const knownDB = db->KnownMeasurements(meash->GetKnownMeasurementsId());
+    VKnownMeasurement const known = knownDB.Measurement(meash->GetName());
+
+    ui->plainTextEditDescription->blockSignals(true);
+    ui->plainTextEditDescription->setPlainText(known.description);
+    ui->plainTextEditDescription->blockSignals(false);
+
+    ui->lineEditFullName->blockSignals(true);
+    ui->lineEditFullName->setText(known.fullName);
+    ui->lineEditFullName->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

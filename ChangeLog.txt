@@ -17,6 +17,7 @@
 - Fix calculation of seam allowance for symmetrical piece.
 - Fix popup menu style for tool button on MacOS.
 - Valentina app. Fix crash on multi monitor systems.
+- Tape app. Fixed showing and saving a measurement image from database of known measurements.
 
 # Valentina 1.0.0 July 21, 2025
 - Fix Puzzle app crash when application closing.

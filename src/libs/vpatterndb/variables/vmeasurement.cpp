@@ -34,6 +34,9 @@
 
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vpatternimage.h"
+#include "../vformat/knownmeasurements/vknownmeasurement.h"
+#include "../vformat/knownmeasurements/vknownmeasurements.h"
+#include "../vformat/knownmeasurements/vknownmeasurementsdatabase.h"
 #include "vmeasurement_p.h"
 #include "vvariable.h"
 
@@ -406,15 +409,29 @@ void VMeasurement::SetCorrections(const QMap<QString, VMeasurementCorrection> &c
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VMeasurement::GetImage() const -> VPatternImage
+auto VMeasurement::GetCustomImage() const -> VPatternImage
 {
     return d->image;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VMeasurement::SetImage(const VPatternImage &image)
+void VMeasurement::SetCustomImage(const VPatternImage &image)
 {
     d->image = image;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VMeasurement::GetImage() const -> VPatternImage
+{
+    if (IsCustom())
+    {
+        return GetCustomImage();
+    }
+
+    VKnownMeasurementsDatabase const *db = VAbstractApplication::VApp()->KnownMeasurementsDatabase();
+    VKnownMeasurements const knownDB = db->KnownMeasurements(GetKnownMeasurementsId());
+    VKnownMeasurement const known = knownDB.Measurement(GetName());
+    return knownDB.Image(known.diagram);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
