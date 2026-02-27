@@ -121,8 +121,10 @@ public:
     auto GetCorrections() const -> QMap<QString, VMeasurementCorrection>;
     void SetCorrections(const QMap<QString, VMeasurementCorrection> &corrections);
 
+    auto GetCustomImage() const -> VPatternImage;
+    void SetCustomImage(const VPatternImage &image);
+
     auto GetImage() const -> VPatternImage;
-    void SetImage(const VPatternImage &image);
 
     auto GetValueAlias(qreal baseA, qreal baseB, qreal baseC) const -> QString;
 

@@ -1733,7 +1733,7 @@ void VMeasurements::ReadMeasurement(const QDomElement &dom, QSharedPointer<VCont
 
         if (meash->IsCustom())
         {
-            meash->SetImage(ReadImage(dom));
+            meash->SetCustomImage(ReadImage(dom));
         }
     }
     else
@@ -1764,7 +1764,7 @@ void VMeasurements::ReadMeasurement(const QDomElement &dom, QSharedPointer<VCont
 
         if (meash->IsCustom())
         {
-            meash->SetImage(ReadImage(dom));
+            meash->SetCustomImage(ReadImage(dom));
         }
     }
 }
