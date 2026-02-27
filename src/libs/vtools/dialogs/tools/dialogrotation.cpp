@@ -429,15 +429,6 @@ void DialogRotation::SaveData()
     formulaAngle = ui->plainTextEditFormula->toPlainText();
     m_sourceObjects = SaveSourceObjects();
 
-    for (int i = 0; i < ui->listWidget->count(); ++i)
-    {
-        if (const QListWidgetItem *item = ui->listWidget->item(i))
-        {
-            auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
-            m_sourceObjects.append(sourceItem);
-        }
-    }
-
     auto *operation = qobject_cast<VisToolRotation *>(vis);
     SCASSERT(operation != nullptr)
 
