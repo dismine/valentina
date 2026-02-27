@@ -523,9 +523,9 @@ void VAbstractOperation::AllowElArcSelecting(bool enabled)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractOperation::ToolSelectionType(const SelectionType &type)
+void VAbstractOperation::ToolSelectionType(const SelectionType &selectionType)
 {
-    VAbstractTool::ToolSelectionType(type);
+    VAbstractTool::ToolSelectionType(selectionType);
     QMapIterator i(operatedObjects);
     while (i.hasNext())
     {

@@ -313,9 +313,9 @@ void VAbstractTool::SetLabelVisible(quint32 id, bool visible)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractTool::ToolSelectionType(const SelectionType &type)
+void VAbstractTool::ToolSelectionType(const SelectionType &selectionType)
 {
-    selectionType = type;
+    m_selectionType = selectionType;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -124,7 +124,7 @@ public slots:
     void AllowElArcHover(bool enabled);
     void AllowElArcSelecting(bool enabled);
 
-    void ToolSelectionType(const SelectionType &type) override;
+    void ToolSelectionType(const SelectionType &selectionType) override;
     void Enable() override;
     void ObjectSelected(bool selected, quint32 objId);
     void DeleteFromLabel();

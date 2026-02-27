@@ -99,7 +99,7 @@ void VSimpleCurve::mousePressEvent(QGraphicsSceneMouseEvent *event)
         scene()->clearSelection();
     }
 
-    if (selectionType == SelectionType::ByMouseRelease)
+    if (m_selectionType == SelectionType::ByMouseRelease)
     {
         event
             ->accept(); // Special for not selectable item first need to call standard mousePressEvent then accept event
@@ -117,7 +117,7 @@ void VSimpleCurve::mousePressEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VSimpleCurve::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (selectionType == SelectionType::ByMouseRelease && IsSelectedByReleaseEvent(this, event))
+    if (m_selectionType == SelectionType::ByMouseRelease && IsSelectedByReleaseEvent(this, event))
     {
         emit Choosed(id);
     }
