@@ -198,7 +198,8 @@ class graph {
   /**
    * Add a new edge between two existing vertices
    *
-   * @param  vertex_id The ID of the vertex
+   * @param  vertex_id_lhs The ID of the vertex
+   * @param  vertex_id_rhs The ID of the vertex
    * @throws out_of_range - If either of the vertex does not exist in graph
    */
   void add_edge(vertex_id_t vertex_id_lhs, vertex_id_t vertex_id_rhs,
