@@ -148,9 +148,9 @@ appimage_task_template: &APPIMAGE_TASK_TEMPLATE
     - echo $CIRRUS_WORKING_DIR
     - qbs build -f valentina.qbs -d $CIRRUS_WORKING_DIR/build --jobs $(nproc) profile:qt6 config:release modules.buildconfig.enableCcache:${ENABLE_CCACHE} modules.cpp.linkerVariant:mold qbs.installRoot:$CIRRUS_WORKING_DIR/build/AppDir modules.buildconfig.enableAppImage:true modules.buildconfig.enableRPath:false project.conanWithCrashReporting:true project.enableConan:true project.conanProfiles:share/ci/conan/profiles/appimage
     - qbs -p autotest-runner -d build profile:qt6 config:release
-    - export CRASH_QT_VERSION=$(/usr/bin/qmake6 -query QT_VERSION | awk -F. '{print $1 "_" $2}')
+    - export CRASH_QT_VERSION=$(/usr/bin/qmake6 -query QT_VERSION | awk -F. '{print "Qt_" $1 "_" $2}')
     - export CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)
-    - python3 scripts/symupload.py $CIRRUS_WORKING_DIR/build/AppDir $VALENTINA_VERSION g$CRASH_SHORT_SHA $CRASH_QT_VERSION --clean
+    - python3 scripts/upload_symbols.py --build-dir $CIRRUS_WORKING_DIR/build/AppDir --app-version $VALENTINA_VERSION --git-hash g$CRASH_SHORT_SHA --qt-version $CRASH_QT_VERSION
     - $CIRRUS_WORKING_DIR/build/AppDir/usr/local/bin/crashpad_handler --version
     - du -h $CIRRUS_WORKING_DIR/build/AppDir/usr/local/bin/crashpad_handler
     - appimage-builder --recipe dist/AppImage/AppImageBuilder.yml --appdir $CIRRUS_WORKING_DIR/build/AppDir --skip-test
@@ -207,6 +207,9 @@ linux_task:
             ARCH: x86_64
             TARGET_PLATFORM: "Linux"
             VALENTINA_VERSION: 1_0_0
+            BUGSPLAT_DATABASE: "valentina"
+            SYMBOL_UPLOAD_CLIENT_ID: ENCRYPTED[b0f30428d4b537c8cdd2183dd3b7f0f5db3e8113e97dbeb73f56fc87c00eab99060e8c0530ec67d5f214b50b49d66312]
+            SYMBOL_UPLOAD_CLIENT_SECRET: ENCRYPTED[13519bce8d59e390059b8f83bc4f5ac9b49d89f8684968dcec4f652a4c57d61a16ac70a54fd5d86858b72925062b1f35]
           container:
             cpu: 4 
             memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container

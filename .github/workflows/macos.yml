@@ -241,11 +241,33 @@ jobs:
 
       - name: Deploy symbols
         if: env.WITH_CRASH_REPORTING == 'True'
+        env:
+          BUGSPLAT_DATABASE: "valentina"
+          SYMBOL_UPLOAD_CLIENT_ID: ${{ secrets.SYMBOL_UPLOAD_CLIENT_ID }}
+          SYMBOL_UPLOAD_CLIENT_SECRET: ${{ secrets.SYMBOL_UPLOAD_CLIENT_SECRET }}
         run: |
-          export CRASH_QT_VERSION=$($QTDIR/bin/qmake -query QT_VERSION | awk -F. '{print $1 "_" $2}')
-          export CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)
-          curl --proto '=https' --tlsv1.2 -LsSf https://github.com/mozilla/dump_syms/releases/download/${{ env.DUMP_SYMS_VERSION }}/dump_syms-installer.sh | sh
-          python3 scripts/symupload.py $GITHUB_WORKSPACE/build/release/install-root $VALENTINA_VERSION g$CRASH_SHORT_SHA $CRASH_QT_VERSION --multibundle=$MULTI_BUNDLE --clean
+          # Download symbol-upload
+          curl -sL "https://app.bugsplat.com/download/symbol-upload-macos" \
+            -o "$RUNNER_TEMP/symbol-upload"
+          chmod +x "$RUNNER_TEMP/symbol-upload"
+          export PATH="$RUNNER_TEMP:$PATH"
+
+          # Build version components
+          CRASH_QT_VERSION=$($QTDIR/bin/qmake -query QT_VERSION | awk -F. '{print "Qt_" $1 "_" $2}')
+          CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)
+
+          # Determine multibundle flag
+          MULTIBUNDLE_FLAG=""
+          if [ "$MULTI_BUNDLE" = "true" ]; then
+            MULTIBUNDLE_FLAG="--multibundle"
+          fi
+
+          python3 scripts/upload_symbols.py \
+            --build-dir   "$GITHUB_WORKSPACE/build/release/install-root" \
+            --app-version "$VALENTINA_VERSION" \
+            --git-hash    "g$CRASH_SHORT_SHA" \
+            --qt-version  "$CRASH_QT_VERSION" \
+            $MULTIBUNDLE_FLAG
 
       - name: Create DMG
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
@@ -494,11 +516,33 @@ jobs:
 
       - name: Deploy symbols
         if: env.WITH_CRASH_REPORTING == 'True'
+        env:
+          BUGSPLAT_DATABASE: "valentina"
+          SYMBOL_UPLOAD_CLIENT_ID: ${{ secrets.SYMBOL_UPLOAD_CLIENT_ID }}
+          SYMBOL_UPLOAD_CLIENT_SECRET: ${{ secrets.SYMBOL_UPLOAD_CLIENT_SECRET }}
         run: |
-          export CRASH_QT_VERSION=$($QTDIR/bin/qmake -query QT_VERSION | awk -F. '{print $1 "_" $2}')
-          export CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)
-          curl --proto '=https' --tlsv1.2 -LsSf https://github.com/mozilla/dump_syms/releases/download/${{ env.DUMP_SYMS_VERSION }}/dump_syms-installer.sh | sh
-          python3 scripts/symupload.py $GITHUB_WORKSPACE/build/release/install-root $VALENTINA_VERSION g$CRASH_SHORT_SHA $CRASH_QT_VERSION --multibundle=$MULTI_BUNDLE --clean
+          # Download symbol-upload
+          curl -sL "https://app.bugsplat.com/download/symbol-upload-macos" \
+            -o "$RUNNER_TEMP/symbol-upload"
+          chmod +x "$RUNNER_TEMP/symbol-upload"
+          export PATH="$RUNNER_TEMP:$PATH"
+
+          # Build version components
+          CRASH_QT_VERSION=$($QTDIR/bin/qmake -query QT_VERSION | awk -F. '{print "Qt_" $1 "_" $2}')
+          CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)
+
+          # Determine multibundle flag
+          MULTIBUNDLE_FLAG=""
+          if [ "$MULTI_BUNDLE" = "true" ]; then
+            MULTIBUNDLE_FLAG="--multibundle"
+          fi
+
+          python3 scripts/upload_symbols.py \
+            --build-dir   "$GITHUB_WORKSPACE/build/release/install-root" \
+            --app-version "$VALENTINA_VERSION" \
+            --git-hash    "g$CRASH_SHORT_SHA" \
+            --qt-version  "$CRASH_QT_VERSION" \
+            $MULTIBUNDLE_FLAG
 
       - name: Create DMG
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'

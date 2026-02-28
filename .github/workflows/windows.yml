@@ -194,16 +194,31 @@ jobs:
       - name: Deploy symbols
         if: env.WITH_CRASH_REPORTING == 'True'
         shell: pwsh
+        env:
+          BUGSPLAT_DATABASE: "valentina"
+          SYMBOL_UPLOAD_CLIENT_ID: ${{ secrets.SYMBOL_UPLOAD_CLIENT_ID }}
+          SYMBOL_UPLOAD_CLIENT_SECRET: ${{ secrets.SYMBOL_UPLOAD_CLIENT_SECRET }}
         run: |
-          $qmakeOutput = & "$env:QT_ROOT_DIR\bin\qmake.exe" -query QT_VERSION
-          $majorMinorVersion = $qmakeOutput -replace '(\d+)\.(\d+).*', '$1_$2'
-          $env:CRASH_QT_VERSION = $majorMinorVersion
+          # Download symbol-upload
+          Invoke-WebRequest -Uri "https://app.bugsplat.com/download/symbol-upload-windows.exe" `
+            -OutFile "${{ runner.temp }}\symbol-upload-windows.exe"
 
-          $env:CRASH_SHORT_SHA = git log --pretty=format:%h -n 1
+          # Build version components
+          $qtVersion = (& "$env:QT_ROOT_DIR\bin\qmake.exe" -query QT_VERSION) `
+            -replace '(\d+)\.(\d+).*', 'Qt_$1_$2'
+          $shortSha  = git log --pretty=format:%h -n 1
 
-          ./scripts/install_dump_sysms.ps1
+          # Add symbol-upload to PATH for this step
+          $env:PATH = "${{ runner.temp }};$env:PATH"
 
-          & python ./scripts/symupload.py ${{ runner.temp }}\build\release\install-root\valentina $env:VALENTINA_VERSION g$env:CRASH_SHORT_SHA $env:CRASH_QT_VERSION --clean
+          # Rename so the script can call it as 'symbol-upload'
+          Rename-Item "${{ runner.temp }}\symbol-upload-windows.exe" "symbol-upload.exe"
+
+          python ./scripts/upload_symbols.py `
+            --build-dir   "${{ runner.temp }}\build\release\install-root\valentina" `
+            --app-version $env:VALENTINA_VERSION `
+            --git-hash    "g$shortSha" `
+            --qt-version  $qtVersion
 
       - name: Create installer
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
