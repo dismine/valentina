@@ -241,7 +241,7 @@ def upload_target(
         "--version",     version,
         "--directory",   str(artifact_path.parent),
         "--files",       files_glob,
-        "--dumpSyms",    "true",
+        "--dumpSyms",
     ]
     cmd = base_cmd + auth_flags
 
