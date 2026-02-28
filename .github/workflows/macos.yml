@@ -262,6 +262,8 @@ jobs:
             MULTIBUNDLE_FLAG="--multibundle"
           fi
 
+          find $GITHUB_WORKSPACE/build/release/install-root -name "*.dSYM" -type d
+
           python3 scripts/upload_symbols.py \
             --build-dir   "$GITHUB_WORKSPACE/build/release/install-root" \
             --app-version "$VALENTINA_VERSION" \
@@ -536,6 +538,8 @@ jobs:
           if [ "$MULTI_BUNDLE" = "true" ]; then
             MULTIBUNDLE_FLAG="--multibundle"
           fi
+
+          find $GITHUB_WORKSPACE/build/release/install-root -name "*.dSYM" -type d
 
           python3 scripts/upload_symbols.py \
             --build-dir   "$GITHUB_WORKSPACE/build/release/install-root" \
