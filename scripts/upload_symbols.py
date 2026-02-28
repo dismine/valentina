@@ -102,16 +102,22 @@ TARGETS_WINDOWS: list[Target] = [
     Target("vpropertyexplorerlib","VPropertyExplorerLib.pdb",False, "VPropertyExplorerLib.pdb"),
 ]
 
-# macOS apps/frameworks: --directory points to the .app/.framework parent so
-# that symbol-upload searches recursively from there. --files uses the exact
-# dSYM bundle name to avoid picking up unrelated dSYMs that may also reside
-# inside the bundle.
+# macOS: dSYM bundles live in dedicated *_dSYM sibling directories, not inside
+# the .app. Actual names on disk:
+#   Tape_dSYM/Tape.app.dSYM
+#   Puzzle_dSYM/Puzzle.app.dSYM
+#   Valentina_dSYM/Valentina.app.dSYM
+#   Valentina_dSYM/QMUParserLib.framework.dSYM
+#   Valentina_dSYM/VPropertyExplorerLib.framework.dSYM
+#
+# We search directly for the .dSYM bundle by exact name and point --directory
+# at its parent. No .app/.framework discovery needed.
 TARGETS_MACOS: list[Target] = [
-    Target("puzzle",               "Puzzle.app",                     True, "**/Puzzle.dSYM"),
-    Target("tape",                 "Tape.app",                       True, "**/Tape.dSYM"),
-    Target("valentina",            "Valentina.app",                  True, "**/Valentina.dSYM"),
-    Target("qmuparserlib",         "QMUParserLib.framework",         True, "**/QMUParserLib.framework.dSYM"),
-    Target("vpropertyexplorerlib", "VPropertyExplorerLib.framework", True, "**/VPropertyExplorerLib.framework.dSYM"),
+    Target("puzzle",               "Puzzle.app.dSYM",                     True, "Puzzle.app.dSYM"),
+    Target("tape",                 "Tape.app.dSYM",                       True, "Tape.app.dSYM"),
+    Target("valentina",            "Valentina.app.dSYM",                  True, "Valentina.app.dSYM"),
+    Target("qmuparserlib",         "QMUParserLib.framework.dSYM",         True, "QMUParserLib.framework.dSYM"),
+    Target("vpropertyexplorerlib", "VPropertyExplorerLib.framework.dSYM", True, "VPropertyExplorerLib.framework.dSYM"),
 ]
 
 TARGETS_BY_PLATFORM: dict[str, list[Target]] = {
@@ -221,13 +227,10 @@ def upload_target(
     """
     Invoke symbol-upload for a single target.
 
-    --directory  points to the parent of the located artifact (the .app,
-                 .framework, .pdb, or .debug file/bundle). On macOS this
-                 allows symbol-upload to search both next to and inside the
-                 bundle for the .dSYM.
-    --files      is the exact filename of the artifact (Linux/Windows) or the
-                 exact .dSYM bundle name (macOS), preventing accidental uploads
-                 of unrelated dSYMs that may also reside in the bundle.
+    --directory  points to the parent directory of the located artifact.
+                 For macOS this is the *_dSYM folder containing the .dSYM bundle.
+    --files      is always the exact filename of the artifact, so symbol-upload
+                 matches precisely one item with no ambiguity.
     --dumpSyms   instructs symbol-upload to run dump_syms and upload the
                  resulting .sym rather than the raw debug artifact.
     """
@@ -238,7 +241,7 @@ def upload_target(
         "--version",     version,
         "--directory",   str(artifact_path.parent),
         "--files",       files_glob,
-        "--dumpSyms",
+        "--dumpSyms",    "true",
     ]
     cmd = base_cmd + auth_flags
 
