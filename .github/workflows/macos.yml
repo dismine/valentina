@@ -247,7 +247,7 @@ jobs:
           SYMBOL_UPLOAD_CLIENT_SECRET: ${{ secrets.SYMBOL_UPLOAD_CLIENT_SECRET }}
         run: |
           # Download symbol-upload
-          curl -sL "https://app.bugsplat.com/download/symbol-upload-macos" \
+          curl -sL "https://app.bugsplat.com/download/symbol-upload-macos-intel" \
             -o "$RUNNER_TEMP/symbol-upload"
           chmod +x "$RUNNER_TEMP/symbol-upload"
           export PATH="$RUNNER_TEMP:$PATH"
