@@ -41,7 +41,7 @@ class TST_AbstractRegExp : public AbstractTest
     Q_OBJECT // NOLINT
 
 public:
-    TST_AbstractRegExp(const QString &locale, QObject *parent = nullptr);
+    explicit TST_AbstractRegExp(const QString &locale, QObject *parent = nullptr);
     virtual ~TST_AbstractRegExp();
 
 protected:

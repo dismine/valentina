@@ -817,7 +817,7 @@ void TST_VTextStream::lineCount()
 struct CompareIndicesForArray
 {
     qint64 *array;
-    CompareIndicesForArray(qint64 *array)
+    explicit CompareIndicesForArray(qint64 *array)
       : array(array)
     {
     }
@@ -2877,7 +2877,7 @@ protected:
     qint64 writeData(const char *c, qint64 i) { return m_lock ? 0 : QBuffer::writeData(c, i); }
 
 public:
-    FakeBuffer(bool locked = false)
+    explicit FakeBuffer(bool locked = false)
       : m_lock(locked)
     {
     }

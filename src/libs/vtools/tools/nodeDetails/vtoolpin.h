@@ -61,7 +61,7 @@ private:
 
     quint32 m_pieceId;
 
-    VToolPin(const VToolPinInitData &initData, QObject *qoParent = nullptr);
+    explicit VToolPin(const VToolPinInitData &initData, QObject *qoParent = nullptr);
 };
 
 #endif // VTOOLPIN_H

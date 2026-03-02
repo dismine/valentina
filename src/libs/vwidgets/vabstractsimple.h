@@ -47,7 +47,7 @@ class VAbstractSimple : public QObject
     Q_OBJECT // NOLINT
 
 public:
-    VAbstractSimple(quint32 id, QObject *parent = nullptr);
+    explicit VAbstractSimple(quint32 id, QObject *parent = nullptr);
     virtual ~VAbstractSimple() = default;
 
     virtual void ToolSelectionType(const SelectionType &type);

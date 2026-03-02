@@ -102,7 +102,7 @@ private:
     /** @brief pShoulder id shoulder line point. */
     quint32 pShoulder;
 
-    VToolShoulderPoint(const VToolShoulderPointInitData &initData, QGraphicsItem *parent = nullptr);
+    explicit VToolShoulderPoint(const VToolShoulderPointInitData &initData, QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLSHOULDERPOINT_H
