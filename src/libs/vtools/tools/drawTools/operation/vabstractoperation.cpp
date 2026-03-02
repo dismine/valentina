@@ -813,7 +813,7 @@ void VAbstractOperation::SaveSourceDestination(QDomElement &tag)
     tag.appendChild(tagObjects);
 
     tagObjects = doc->createElement(TagDestination);
-    for (auto dItem : std::as_const(destination))
+    for (auto &dItem : std::as_const(destination))
     {
         QDomElement item = doc->createElement(TagItem);
         doc->SetAttribute(item, AttrIdObject, dItem.id);
@@ -938,7 +938,7 @@ auto VAbstractOperation::NeedUpdateVisibilityGroup() const -> bool
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractOperation::InitOperatedObjects()
 {
-    for (auto object : std::as_const(destination))
+    for (auto &object : std::as_const(destination))
     {
         const QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(object.id);
 
