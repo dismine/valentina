@@ -81,6 +81,9 @@ public:
     auto data(const QModelIndex &index, int role = Qt::DisplayRole) const -> QVariant override;
     auto headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const -> QVariant override;
 
+    // Unhide QObject::parent() to prevent hiding inherited non-virtual function
+    using QObject::parent;
+
     // For lazy loading
     auto hasChildren(const QModelIndex &parent = QModelIndex()) const -> bool override;
     auto canFetchMore(const QModelIndex &parent) const -> bool override;
