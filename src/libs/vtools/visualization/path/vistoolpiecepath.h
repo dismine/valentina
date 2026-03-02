@@ -45,7 +45,7 @@ public:
     ~VisToolPiecePath() override = default;
 
     void RefreshGeometry() override;
-    void VisualMode(quint32 id = NULL_ID) override;
+    void VisualMode(quint32 id) override;
 
     void SetPath(const VPiecePath &path);
     void SetCuttingPath(const QVector<QPointF> &cuttingPath);

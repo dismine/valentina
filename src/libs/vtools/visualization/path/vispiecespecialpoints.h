@@ -41,7 +41,7 @@ public:
     ~VisPieceSpecialPoints() override = default;
 
     void RefreshGeometry() override;
-    void VisualMode(quint32 id = NULL_ID) override;
+    void VisualMode(quint32 id) override;
 
     void SetSpecialPoints(const QVector<quint32> &pins);
     void SetShowRect(bool show);

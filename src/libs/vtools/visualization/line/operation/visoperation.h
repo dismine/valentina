@@ -43,7 +43,7 @@ public:
     ~VisOperation() override;
 
     void SetObjects(const QVector<quint32> &objects);
-    void VisualMode(quint32 id = NULL_ID) override;
+    void VisualMode(quint32 id) override;
 
     auto type() const -> int override { return Type; }
     enum

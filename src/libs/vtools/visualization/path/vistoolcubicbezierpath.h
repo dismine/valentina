@@ -49,7 +49,7 @@ public:
     ~VisToolCubicBezierPath() override;
 
     void RefreshGeometry() override;
-    void VisualMode(quint32 id = NULL_ID) override;
+    void VisualMode(quint32 id) override;
 
     void SetPath(const VCubicBezierPath &value);
     auto GetPath() const -> VCubicBezierPath;

@@ -45,7 +45,7 @@ public:
     ~VisToolPiece() override = default;
 
     void RefreshGeometry() override;
-    void VisualMode(quint32 id = NULL_ID) override;
+    void VisualMode(quint32 id) override;
 
     void SetPiece(const VPiece &piece);
 

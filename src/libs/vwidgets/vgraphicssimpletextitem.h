@@ -60,7 +60,7 @@ public:
         Type = UserType + static_cast<int>(Vis::GraphicsSimpleTextItem)
     };
 
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
     void SetEnabledState(bool enabled);
     void LabelSelectionType(const SelectionType &type);

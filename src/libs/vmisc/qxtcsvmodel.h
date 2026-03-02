@@ -82,7 +82,7 @@ public:
     auto data(const QModelIndex &index, int role = Qt::DisplayRole) const -> QVariant override;
     auto setData(const QModelIndex &index, const QVariant &data, int role = Qt::EditRole) -> bool override;
     auto headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const -> QVariant override;
-    auto setHeaderData(int section, Qt::Orientation orientation, const QVariant &value, int role = Qt::DisplayRole)
+    auto setHeaderData(int section, Qt::Orientation orientation, const QVariant &value, int role = Qt::EditRole)
         -> bool override;
     void setHeaderData(const QStringList &data);
 

@@ -307,7 +307,7 @@ void DialogMove::ShowDialog(bool click)
         auto *operation = qobject_cast<VisToolMove *>(vis);
         SCASSERT(operation != nullptr)
         operation->SetObjects(SourceToObjects(m_sourceObjects));
-        operation->VisualMode();
+        operation->VisualMode(NULL_ID);
 
         auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
         SCASSERT(window != nullptr)

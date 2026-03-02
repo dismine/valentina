@@ -196,7 +196,7 @@ void DialogFlippingByLine::ShowDialog(bool click)
         auto *operation = qobject_cast<VisToolFlippingByLine *>(vis);
         SCASSERT(operation != nullptr)
         operation->SetObjects(SourceToObjects(m_sourceObjects));
-        operation->VisualMode();
+        operation->VisualMode(NULL_ID);
 
         scene->ToggleArcSelection(false);
         scene->ToggleElArcSelection(false);
