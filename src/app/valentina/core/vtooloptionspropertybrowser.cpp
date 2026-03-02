@@ -2572,10 +2572,10 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCurveIntersectAxis(VPE::VPropert
         case 2:  // AttrBasePoint (read only)
         case 46: // AttrCurve (read only)
             break;
-        case 32: // AttrName1
+        case 69: // AttrCurveName1
             SetCurveName1<VToolCurveIntersectAxis>(property);
             break;
-        case 33: // AttrName2
+        case 70: // AttrCurveName2
             SetCurveName2<VToolCurveIntersectAxis>(property);
             break;
         case 63: // AttrAlias1
@@ -4597,8 +4597,8 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCurveIntersectAxis()
 
     m_idToProperty[AttrNotes]->setValue(i->GetNotes());
 
-    m_idToProperty[AttrName1]->setValue(i->GetName1());
-    m_idToProperty[AttrName2]->setValue(i->GetName2());
+    m_idToProperty[AttrCurveName1]->setValue(i->GetName1());
+    m_idToProperty[AttrCurveName2]->setValue(i->GetName2());
 
     m_idToProperty[AttrAlias1]->setValue(i->GetAliasSuffix1());
     m_idToProperty[AttrAlias2]->setValue(i->GetAliasSuffix2());
