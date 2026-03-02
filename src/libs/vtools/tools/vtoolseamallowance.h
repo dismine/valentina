@@ -143,7 +143,7 @@ public slots:
     void DeleteFromMenu();
     void CancelLabelRendering();
 
-protected slots:
+private slots:
     void UpdateGrainline();
     void SaveMoveDetail(const QPointF &ptPos);
     void SaveResizeDetail(qreal dLabelW);
@@ -154,24 +154,6 @@ protected slots:
     void SaveMoveGrainline(const QPointF &ptPos);
     void SaveResizeGrainline(qreal dLength);
     void SaveRotateGrainline(qreal dRot, const QPointF &ptPos);
-
-protected:
-    void AddToFile() override;
-    void RefreshDataInFile() override;
-    auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
-    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
-    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
-    void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
-    void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
-    void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
-    void keyReleaseEvent(QKeyEvent *event) override;
-    void SetVisualization() override {}
-    void DeleteToolWithConfirm(bool ask = true) override;
-    void ToolCreation(const Source &typeCreation) override;
-    void SetDialog() override;
-    void SaveDialogChange(const QString &undoText = QString()) override;
-
-private slots:
     void ToggleInLayout(bool checked);
     void ToggleHideMainPath(bool checked);
     void ToggleForbidFlipping(bool checked);
@@ -224,6 +206,21 @@ private:
     bool m_pieceLabelInfoStale{false};
 
     explicit VToolSeamAllowance(const VToolSeamAllowanceInitData &initData, QGraphicsItem *parent = nullptr);
+
+    void AddToFile() override;
+    void RefreshDataInFile() override;
+    auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
+    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
+    void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
+    void keyReleaseEvent(QKeyEvent *event) override;
+    void SetVisualization() override {}
+    void DeleteToolWithConfirm(bool ask = true) override;
+    void ToolCreation(const Source &typeCreation) override;
+    void SetDialog() override;
+    void SaveDialogChange(const QString &undoText = QString()) override;
 
     void UpdateExcludeState();
     void UpdateInternalPaths();
