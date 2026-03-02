@@ -131,15 +131,18 @@ private:
     auto CreateRestoreLabelAction(QMenu &menu, GOType itemType) -> QAction *;
     auto CreateRemoveAction(QMenu &menu) -> QAction *;
 
+    struct MenuActions
+    {
+        const QAction *option{nullptr};
+        QAction *remove{nullptr};
+        QAction *showLabel{nullptr};
+        QAction *restoreLabelPosition{nullptr};
+        QActionGroup *addToGroup{nullptr};
+        QActionGroup *removeFromGroup{nullptr};
+    };
+
     template<class Dialog>
-    void HandleMenuSelection(QAction const *selectedAction,
-                             QAction const *actionOption,
-                             QAction *actionRemove,
-                             QAction *actionShowLabel,
-                             QAction *actionRestoreLabelPosition,
-                             QActionGroup *actionsAddToGroup,
-                             QActionGroup *actionsRemoveFromGroup,
-                             quint32 itemId);
+    void HandleMenuSelection(QAction const *selectedAction, const MenuActions &actions, quint32 itemId);
 
     template<class Dialog>
     void ShowOptionsDialog();
@@ -200,12 +203,12 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
     }
 
     HandleMenuSelection<Dialog>(selectedAction,
-                                actionOption,
-                                actionRemove,
-                                actionShowLabel,
-                                actionRestoreLabelPosition,
-                                actionsAddToGroup,
-                                actionsRemoveFromGroup,
+                                {.option = actionOption,
+                                 .remove = actionRemove,
+                                 .showLabel = actionShowLabel,
+                                 .restoreLabelPosition = actionRestoreLabelPosition,
+                                 .addToGroup = actionsAddToGroup,
+                                 .removeFromGroup = actionsRemoveFromGroup},
                                 itemId);
 }
 
@@ -215,44 +218,32 @@ template<class Dialog>
  * @brief Handles the user's menu selection and executes the corresponding action.
  * 
  * @param selectedAction The action selected by the user
- * @param actionOption The options dialog action
- * @param actionRemove The delete action
- * @param actionShowLabel The show/hide label action
- * @param actionRestoreLabelPosition The restore label position action
- * @param actionsAddToGroup Action group for adding to groups
- * @param actionsRemoveFromGroup Action group for removing from groups
+ * @param actions Struct containing all menu actions and action groups
  * @param itemId The ID of the item being operated on
  */
-void VDrawTool::HandleMenuSelection(const QAction *selectedAction,
-                                    const QAction *actionOption,
-                                    QAction *actionRemove,
-                                    QAction *actionShowLabel,
-                                    QAction *actionRestoreLabelPosition,
-                                    QActionGroup *actionsAddToGroup,
-                                    QActionGroup *actionsRemoveFromGroup,
-                                    quint32 itemId)
+void VDrawTool::HandleMenuSelection(const QAction *selectedAction, const MenuActions &actions, quint32 itemId)
 {
-    if (selectedAction == actionOption)
+    if (selectedAction == actions.option)
     {
         ShowOptionsDialog<Dialog>();
     }
-    else if (selectedAction == actionRemove)
+    else if (selectedAction == actions.remove)
     {
         HandleRemoveAction();
     }
-    else if (selectedAction == actionShowLabel)
+    else if (selectedAction == actions.showLabel)
     {
         ChangeLabelVisibility(itemId, selectedAction->isChecked());
     }
-    else if (selectedAction == actionRestoreLabelPosition)
+    else if (selectedAction == actions.restoreLabelPosition)
     {
         UpdateNamePosition(itemId, QPointF(labelMX, labelMY));
     }
-    else if (selectedAction->actionGroup() == actionsAddToGroup)
+    else if (selectedAction->actionGroup() == actions.addToGroup)
     {
         HandleAddToGroup(selectedAction, itemId);
     }
-    else if (selectedAction->actionGroup() == actionsRemoveFromGroup)
+    else if (selectedAction->actionGroup() == actions.removeFromGroup)
     {
         HandleRemoveFromGroup(selectedAction, itemId);
     }
