@@ -55,7 +55,7 @@ void VKnownMeasurementsDatabase::PopulateMeasurementsDatabase()
 
     m_measurementsCache.clear();
 
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
 
     m_measurementsDB.clear();
     m_populated = false;

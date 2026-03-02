@@ -66,7 +66,7 @@ VGAnalyticsWorker::VGAnalyticsWorker(QObject *parent)
 
     m_screensNumber = QString::number(QGuiApplication::screens().size());
 
-    QScreen *screen = QGuiApplication::primaryScreen();
+    QScreen  const*screen = QGuiApplication::primaryScreen();
     QSize const logicalSize = screen->size();
     qreal const devicePixelRatio = screen->devicePixelRatio();
     m_screenPixelRatio = QString::number(devicePixelRatio);

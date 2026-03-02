@@ -67,7 +67,7 @@ DialogExportToCSV::DialogExportToCSV(QWidget *parent)
     const QList<int> mibs = QTextCodec::availableMibs();
     for (auto mib : mibs)
     {
-        if (QTextCodec *codec = QTextCodec::codecForMib(mib))
+        if (QTextCodec  const*codec = QTextCodec::codecForMib(mib))
         {
             ui->comboBoxCodec->addItem(codec->name(), mib);
         }
@@ -77,7 +77,7 @@ DialogExportToCSV::DialogExportToCSV(QWidget *parent)
 
     SetSeparator(VCommonSettings::GetDefCSVSeparator());
 
-    QPushButton *bDefaults = ui->buttonBox->button(QDialogButtonBox::RestoreDefaults);
+    QPushButton  const*bDefaults = ui->buttonBox->button(QDialogButtonBox::RestoreDefaults);
     SCASSERT(bDefaults != nullptr)
     connect(bDefaults,
             &QPushButton::clicked,
@@ -296,7 +296,7 @@ auto DialogExportToCSV::MakeHelpCodecsList() -> QString
     const QList<int> list = QTextCodec::availableMibs();
     for (int i = 0; i < list.size(); ++i)
     {
-        if (QTextCodec *codec = QTextCodec::codecForMib(list.at(i)))
+        if (QTextCodec  const*codec = QTextCodec::codecForMib(list.at(i)))
         {
             out += QStringLiteral("\t* ") + codec->name();
             out += i < list.size() - 1 ? ",\n"_L1 : ".\n"_L1;

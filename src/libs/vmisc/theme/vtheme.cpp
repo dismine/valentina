@@ -578,7 +578,7 @@ VTheme::VTheme(QObject *parent)
         m_isProcessingColorSchemeChange = true;
         QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-        VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+        VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
 
         if (VThemeMode const themeMode = settings->GetThemeMode();
             themeMode == VThemeMode::System && VTheme::NativeDarkThemeAvailable())
@@ -596,7 +596,7 @@ VTheme::VTheme(QObject *parent)
         m_isProcessingColorSchemeChange = false;
     };
 
-    QStyleHints *hints = QGuiApplication::styleHints();
+    QStyleHints  const*hints = QGuiApplication::styleHints();
     connect(hints, &QStyleHints::colorSchemeChanged, this, colorSchemeChangedSlot);
 #endif // QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
 }

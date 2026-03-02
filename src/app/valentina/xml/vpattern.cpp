@@ -1658,7 +1658,7 @@ void VPattern::SplinesCommonAttributes(const QDomElement &domElement, quint32 &i
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::ParseCurrentPP()
 {
-    QDomElement domElement = PatternBlockMapper()->GetActiveElement();
+    QDomElement const domElement = PatternBlockMapper()->GetActiveElement();
     if (domElement.isNull())
     {
         return;
@@ -3829,7 +3829,7 @@ auto VPattern::EvalFormula(VContainer *data, const QString &formula, bool *ok) c
 
     try
     {
-        QScopedPointer<Calculator> cal(new Calculator());
+        QScopedPointer<Calculator> const cal(new Calculator());
         const qreal result = cal->EvalFormula(data->DataVariables(), formula);
 
         (qIsInf(result) || qIsNaN(result)) ? *ok = false : *ok = true;

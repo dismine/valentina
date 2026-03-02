@@ -1386,7 +1386,7 @@ auto QmuParserTester::EqnTest(const QString &a_str, double a_fRes, bool a_fPass)
             // Test Eval function for multiple return values
             // use p2 since it has the optimizer enabled!
             int nNum;
-            qreal *v = p2.Eval(nNum);
+            qreal  const*v = p2.Eval(nNum);
             fVal[4] = v[nNum - 1];
         }
         catch (std::exception &e)

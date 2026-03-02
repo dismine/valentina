@@ -160,8 +160,8 @@ void VPE::VPropertyFormView::showEvent(QShowEvent *event)
 
 void VPE::VPropertyFormView::updatePropertyList()
 {
-    VPropertyModel *tmpModel = static_cast<VPropertyFormViewPrivate *>(vproperty_d_ptr)->Model;
-    VPropertySet *tmpSet = static_cast<VPropertyFormViewPrivate *>(vproperty_d_ptr)->PropertySet;
+    VPropertyModel  const*tmpModel = static_cast<VPropertyFormViewPrivate *>(vproperty_d_ptr)->Model;
+    VPropertySet  const*tmpSet = static_cast<VPropertyFormViewPrivate *>(vproperty_d_ptr)->PropertySet;
 
     if (tmpModel && tmpModel->getPropertySet())
     {

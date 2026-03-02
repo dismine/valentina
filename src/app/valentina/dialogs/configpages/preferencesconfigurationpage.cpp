@@ -113,7 +113,7 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
                 settings->SetAskContinueIfLayoutStale(true);
             });
 
-    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    VValentinaSettings  const*settings = VAbstractValApplication::VApp()->ValentinaSettings();
 
     ui->checkBoxFreeCurve->setChecked(settings->IsFreeCurveMode());
     ui->checkBoxZoomFitBestCurrentPP->setChecked(settings->IsDoubleClickZoomFitBestCurrentPP());
@@ -487,7 +487,7 @@ void PreferencesConfigurationPage::UpdateShortcutsTable()
 //---------------------------------------------------------------------------------------------------------------------
 void PreferencesConfigurationPage::RetranslateShortcutsTable()
 {
-    VAbstractShortcutManager *manager = VAbstractApplication::VApp()->GetShortcutManager();
+    VAbstractShortcutManager  const*manager = VAbstractApplication::VApp()->GetShortcutManager();
     if (manager == nullptr)
     {
         return;

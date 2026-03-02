@@ -327,7 +327,7 @@ void DialogCubicBezierPath::RemovePoint()
         return;
     }
 
-    if (QListWidgetItem *selectedItem = ui->listWidget->currentItem())
+    if (QListWidgetItem  const*selectedItem = ui->listWidget->currentItem())
     {
         delete ui->listWidget->takeItem(ui->listWidget->row(selectedItem));
         ui->listWidget->setCurrentRow(0);

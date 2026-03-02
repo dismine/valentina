@@ -481,7 +481,7 @@ void InitFoldLine(VLayoutPiece &det, const VPiece &piece, const VContainer *patt
     det.SetFoldLineLabelAlignment(piece.GetFoldLineLabelAlignment());
 
     {
-        VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+        VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
         QFont font = settings->GetLabelFont();
         font.setPointSize(static_cast<int>(piece.GetFoldLineSvgFontSize()));
         det.SetFoldLineOutlineFont(font);
@@ -1493,7 +1493,7 @@ auto VLayoutPiece::Diagonal() const -> qreal
 //---------------------------------------------------------------------------------------------------------------------
 auto VLayoutPiece::FoldLine() const -> VFoldLine
 {
-    QLineF foldLine = IsHideMainPath() ? GetSeamAllowanceMirrorLine() : GetSeamMirrorLine();
+    QLineF const foldLine = IsHideMainPath() ? GetSeamAllowanceMirrorLine() : GetSeamMirrorLine();
     VFoldLine fLine(foldLine, GetFoldLineType());
     fLine.SetLabelSvgFontSize(GetFoldLineSvgFontSize());
     fLine.SetLabelFontItalic(IsFoldLineLabelFontItalic());
@@ -1726,7 +1726,7 @@ void VLayoutPiece::DrawMiniature(QPainter &painter, bool togetherWithNotches) co
 
     if (IsForceFlipping())
     {
-        QRectF rect = DetailBoundingRect();
+        QRectF const rect = DetailBoundingRect();
         QPointF const center = rect.center();
 
         m.translate(center.x(), 0);
@@ -1964,7 +1964,7 @@ void VLayoutPiece::LabelStringsSVGFont(QGraphicsItem *parent, const QVector<QPoi
         return;
     }
 
-    VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
+    VSvgFontDatabase  const*db = VAbstractApplication::VApp()->SVGFontDatabase();
     VSvgFontEngine engine =
         db->FontEngine(tm.GetSVGFontFamily(), SVGFontStyle::Normal, SVGFontWeight::Normal, tm.GetSVGFontPointSize());
 
@@ -2061,7 +2061,7 @@ void VLayoutPiece::LabelStringsOutlineFont(QGraphicsItem *parent, const QVector<
         return;
     }
 
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
 
     const qreal dW = QLineF(labelShape.at(0), labelShape.at(1)).length();
     const qreal dH = QLineF(labelShape.at(1), labelShape.at(2)).length();
@@ -2180,7 +2180,7 @@ void VLayoutPiece::LabelStringsOutlineFont(QGraphicsItem *parent, const QVector<
 void VLayoutPiece::CreateLabelStrings(QGraphicsItem *parent, const QVector<QPointF> &labelShape, const VTextManager &tm,
                                       bool textAsPaths) const
 {
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
     if (settings->GetSingleLineFonts())
     {
         LabelStringsSVGFont(parent, labelShape, tm, textAsPaths);
@@ -2229,7 +2229,7 @@ void VLayoutPiece::CreateFoldLineItem(QGraphicsItem *parent, bool textAsPaths) c
         return;
     }
 
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
     if (!textAsPaths && !settings->GetSingleStrokeOutlineFont() && !settings->GetSingleLineFonts())
     {
         auto *item = new QGraphicsSimpleTextItem(parent);
@@ -2252,7 +2252,7 @@ void VLayoutPiece::CreateFoldLineItem(QGraphicsItem *parent, bool textAsPaths) c
         auto *item = new QGraphicsPathItem(parent);
         item->setPath(shape);
 
-        VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+        VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
 
         QPen itemPen = item->pen();
         itemPen.setColor(Qt::black);

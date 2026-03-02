@@ -559,7 +559,7 @@ VPSheet::VPSheet(const VPLayoutPtr &layout, QObject *parent)
 {
     SCASSERT(not layout.isNull())
 
-    VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
+    VPSettings  const*settings = VPApplication::VApp()->PuzzleSettings();
     SetIgnoreMargins(settings->GetLayoutSheetIgnoreMargins());
     SetSheetMargins(settings->GetLayoutSheetMargins());
     SetSheetSize(QSizeF(settings->GetLayoutSheetPaperWidth(), settings->GetLayoutSheetPaperHeight()));

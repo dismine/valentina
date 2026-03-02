@@ -451,7 +451,7 @@ void VBackgroundImageItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *even
 
     const QAction *actionRemove = menu.addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
 
-    QAction *selectedAction = menu.exec(event->screenPos());
+    QAction  const*selectedAction = menu.exec(event->screenPos());
     if (selectedAction == holdOption)
     {
         SetHold(selectedAction->isChecked());

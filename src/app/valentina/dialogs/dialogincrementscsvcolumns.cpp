@@ -193,7 +193,7 @@ bool DialogIncrementsCSVColumns::ColumnsValid()
 
     bool columnNameFlag = true;
     bool columnValueFlag = true;
-    bool columnFullNameFlag = true;
+    bool const columnFullNameFlag = true;
     bool columnDescriptionFlag = true;
 
     const QColor errorColor = Qt::red;

@@ -159,7 +159,7 @@ TKMMainWindow::TKMMainWindow(QWidget *parent)
     m_buttonShortcuts.insert(VShortcutAction::FindNext, ui->toolButtonFindNext);
     m_buttonShortcuts.insert(VShortcutAction::FindPrevious, ui->toolButtonFindNext);
 
-    if (VAbstractShortcutManager *manager = VAbstractApplication::VApp()->GetShortcutManager())
+    if (VAbstractShortcutManager  const*manager = VAbstractApplication::VApp()->GetShortcutManager())
     {
         connect(manager, &VAbstractShortcutManager::ShortcutsUpdated, this, &TKMMainWindow::UpdateShortcuts);
         UpdateShortcuts();
@@ -615,7 +615,7 @@ void TKMMainWindow::AddMeasurementImages(const QStringList &imagePaths)
 
     for (const auto &filePath : imagePaths)
     {
-        if (QFileInfo f(filePath); f.exists())
+        if (QFileInfo const f(filePath); f.exists())
         {
             settings->SetPathCustomImage(f.absolutePath());
         }
@@ -727,7 +727,7 @@ auto TKMMainWindow::FileSaveAs() -> bool
 
     fName += '.'_L1 + suffix;
 
-    VTapeSettings *settings = MApplication::VApp()->TapeSettings();
+    VTapeSettings  const*settings = MApplication::VApp()->TapeSettings();
     const QString dir = settings->GetPathKnownMeasurements();
 
     if (QDir const directory(dir); not directory.exists())
@@ -1114,7 +1114,7 @@ void TKMMainWindow::SaveImage()
         return;
     }
 
-    VTapeSettings *settings = MApplication::VApp()->TapeSettings();
+    VTapeSettings  const*settings = MApplication::VApp()->TapeSettings();
 
     QMimeType const mime = image.MimeTypeFromData();
 
@@ -1912,7 +1912,7 @@ void TKMMainWindow::InitWindow()
 //---------------------------------------------------------------------------------------------------------------------
 void TKMMainWindow::InitSearch()
 {
-    VTapeSettings *settings = MApplication::VApp()->TapeSettings();
+    VTapeSettings  const*settings = MApplication::VApp()->TapeSettings();
     m_search->SetUseUnicodePreperties(settings->GetKMSearchOptionUseUnicodeProperties());
     m_search->SetMatchWord(settings->GetKMSearchOptionWholeWord());
     m_search->SetMatchRegexp(settings->GetKMSearchOptionRegexp());
@@ -2342,7 +2342,7 @@ void TKMMainWindow::CreateWindowMenu(QMenu *menu)
     const QList<TKMMainWindow *> windows = MApplication::VApp()->MainKMWindows();
     for (int i = 0; i < windows.count(); ++i)
     {
-        TKMMainWindow *window = windows.at(i);
+        TKMMainWindow  const*window = windows.at(i);
 
         auto title = QStringLiteral("%1. %2").arg(i + 1).arg(window->windowTitle());
         if (const auto index = title.lastIndexOf("[*]"_L1); index != -1)

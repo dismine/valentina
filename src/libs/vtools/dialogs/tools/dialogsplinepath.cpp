@@ -579,7 +579,7 @@ void DialogSplinePath::EvalAngle1()
           .postfix = degreeSymbol},
          flagAngle1[row]);
 
-    QListWidgetItem *item = ui->listWidget->item(row);
+    QListWidgetItem  const*item = ui->listWidget->item(row);
     SCASSERT(item != nullptr)
     auto p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
@@ -602,7 +602,7 @@ void DialogSplinePath::EvalAngle2()
           .postfix = degreeSymbol},
          flagAngle2[row]);
 
-    QListWidgetItem *item = ui->listWidget->item(row);
+    QListWidgetItem  const*item = ui->listWidget->item(row);
     SCASSERT(item != nullptr)
     auto p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
@@ -626,7 +626,7 @@ void DialogSplinePath::EvalLength1()
           .checkLessThanZero = true},
          flagLength1[row]);
 
-    QListWidgetItem *item = ui->listWidget->item(row);
+    QListWidgetItem  const*item = ui->listWidget->item(row);
     SCASSERT(item != nullptr)
     auto p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
@@ -650,7 +650,7 @@ void DialogSplinePath::EvalLength2()
           .checkLessThanZero = true},
          flagLength2[row]);
 
-    QListWidgetItem *item = ui->listWidget->item(row);
+    QListWidgetItem  const*item = ui->listWidget->item(row);
     SCASSERT(item != nullptr)
     auto p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
@@ -757,7 +757,7 @@ void DialogSplinePath::RemovePoint()
         return;
     }
 
-    QListWidgetItem *selectedItem = ui->listWidget->currentItem();
+    QListWidgetItem  const*selectedItem = ui->listWidget->currentItem();
     if (selectedItem)
     {
         delete ui->listWidget->takeItem(ui->listWidget->row(selectedItem));

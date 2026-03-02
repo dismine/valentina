@@ -120,7 +120,7 @@ auto SplitTextByWidth(const QString &text, const QFont &font, int maxWidth) -> Q
 //---------------------------------------------------------------------------------------------------------------------
 auto SplitTextByWidth(const QString &text, const VSvgFont &font, int maxWidth, qreal penWidth) -> QStringList
 {
-    VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
+    VSvgFontDatabase  const*db = VAbstractApplication::VApp()->SVGFontDatabase();
     VSvgFontEngine const engine = db->FontEngine(font);
 
     if (engine.TextWidth(text, penWidth) <= maxWidth)
@@ -574,7 +574,7 @@ void PrepareFinalMeasurementPlaceholders(const VPieceLabelInfo &info, const VCon
 void PrepareFinalMeasurementsPlaceholders(bool pieceLabel, const VPieceLabelInfo &info,
                                           QMap<QString, QString> &placeholders, const QSet<QString> &uniquePlaceholders)
 {
-    QSet<QString> uniquePieceNames = ExtractUniquePieceNames(info, uniquePlaceholders);
+    QSet<QString> const uniquePieceNames = ExtractUniquePieceNames(info, uniquePlaceholders);
 
     VContainer completeData = info.completeData;
     PopulatePieceData(completeData, uniquePieceNames);
@@ -890,7 +890,7 @@ auto VTextManager::GetLabelSourceLines(int width, const VSvgFont &font, qreal pe
         return m_liLines;
     }
 
-    VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
+    VSvgFontDatabase  const*db = VAbstractApplication::VApp()->SVGFontDatabase();
     QVector<TextLine> lines;
     lines.reserve(m_liLines.size());
     int const fSize = m_font.pointSize();
@@ -1103,7 +1103,7 @@ auto VTextManager::BreakTextIntoLines(const QString &text, const QFont &font, in
 auto VTextManager::BreakTextIntoLines(const QString &text, const VSvgFont &font, int maxWidth, qreal penWidth) const
     -> QStringList
 {
-    VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
+    VSvgFontDatabase  const*db = VAbstractApplication::VApp()->SVGFontDatabase();
 
     VSvgFontEngine const engine = db->FontEngine(font);
 

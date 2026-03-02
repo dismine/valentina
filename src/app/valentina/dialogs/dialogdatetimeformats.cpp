@@ -96,7 +96,7 @@ void DialogDateTimeFormats::RemoveLine()
 {
     {
         const QSignalBlocker blocker(ui->listWidget);
-        if (QListWidgetItem *curLine = ui->listWidget->currentItem())
+        if (QListWidgetItem  const*curLine = ui->listWidget->currentItem())
         {
             if (not m_predefined.contains(curLine->data(Qt::UserRole).toString()))
             {

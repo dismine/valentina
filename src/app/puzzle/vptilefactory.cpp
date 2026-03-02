@@ -767,7 +767,7 @@ void VPTileFactory::DrawTopLineScissors(QPainter *painter) const
     }
     else
     {
-        static VSvgHandler handler(QStringLiteral("://puzzleicon/svg/icon_scissors_plotter_horizontal.svg"));
+        static VSvgHandler const handler(QStringLiteral("://puzzleicon/svg/icon_scissors_plotter_horizontal.svg"));
         guard.save();
         painter->translate(m_drawingAreaWidth - tileStripeWidth, 0);
         handler.Render(painter);
@@ -801,7 +801,7 @@ void VPTileFactory::DrawLeftLineScissors(QPainter *painter) const
     }
     else
     {
-        static VSvgHandler handler(QStringLiteral("://puzzleicon/svg/icon_scissors_plotter_vertical.svg"));
+        static VSvgHandler const handler(QStringLiteral("://puzzleicon/svg/icon_scissors_plotter_vertical.svg"));
         guard.save();
         painter->translate(0, m_drawingAreaHeight - tileStripeWidth);
         handler.Render(painter);

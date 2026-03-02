@@ -43,7 +43,7 @@ DialogLayoutScale::DialogLayoutScale(bool printTiled, QWidget *parent)
 
     VAbstractApplication::VApp()->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
-    QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
+    QPushButton  const*bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     // cppcheck-suppress unknownMacro
     SCASSERT(bOk != nullptr)
     connect(bOk, &QPushButton::clicked, this, &DialogLayoutScale::Save);
@@ -176,7 +176,7 @@ void DialogLayoutScale::VerticalScaleChanged(double d)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutScale::ReadSettings()
 {
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
     const Unit unit = VAbstractValApplication::VApp()->patternUnits();
 
     // read Margins top, right, bottom, left

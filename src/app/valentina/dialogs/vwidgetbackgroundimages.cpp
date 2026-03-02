@@ -257,7 +257,7 @@ void VWidgetBackgroundImages::ImageHoldChanged(int row, int column)
         return;
     }
 
-    QTableWidgetItem *item = ui->tableWidget->item(row, column);
+    QTableWidgetItem  const*item = ui->tableWidget->item(row, column);
     if (item != nullptr)
     {
         ToggleImageHold(item->data(Qt::UserRole).toUuid());
@@ -272,7 +272,7 @@ void VWidgetBackgroundImages::ImageVisibilityChanged(int row, int column)
         return;
     }
 
-    QTableWidgetItem *item = ui->tableWidget->item(row, column);
+    QTableWidgetItem  const*item = ui->tableWidget->item(row, column);
     if (item != nullptr)
     {
         ToggleImageVisibility(item->data(Qt::UserRole).toUuid());
@@ -287,7 +287,7 @@ void VWidgetBackgroundImages::ImageNameChanged(int row, int column)
         return;
     }
 
-    QTableWidgetItem *item = ui->tableWidget->item(row, column);
+    QTableWidgetItem  const*item = ui->tableWidget->item(row, column);
     if (item != nullptr)
     {
         auto *command = new RenameBackgroundImage(item->data(Qt::UserRole).toUuid(), item->text(), m_doc);
@@ -298,7 +298,7 @@ void VWidgetBackgroundImages::ImageNameChanged(int row, int column)
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetBackgroundImages::ContextMenu(const QPoint &pos)
 {
-    QTableWidgetItem *item = ui->tableWidget->itemAt(pos);
+    QTableWidgetItem  const*item = ui->tableWidget->itemAt(pos);
     if (item == nullptr)
     {
         return;
@@ -317,7 +317,7 @@ void VWidgetBackgroundImages::ContextMenu(const QPoint &pos)
     {
         for (int r = 0; r < ui->tableWidget->rowCount(); ++r)
         {
-            QTableWidgetItem *rowItem = ui->tableWidget->item(r, ImageData::Visibility);
+            QTableWidgetItem  const*rowItem = ui->tableWidget->item(r, ImageData::Visibility);
             if (rowItem && visibility != m_doc->GetBackgroundImage(rowItem->data(Qt::UserRole).toUuid()).Hold())
             {
                 return true;
@@ -331,7 +331,7 @@ void VWidgetBackgroundImages::ContextMenu(const QPoint &pos)
     {
         for (int r = 0; r < ui->tableWidget->rowCount(); ++r)
         {
-            QTableWidgetItem *rowItem = ui->tableWidget->item(r, ImageData::Visibility);
+            QTableWidgetItem  const*rowItem = ui->tableWidget->item(r, ImageData::Visibility);
             if (rowItem && visibility != m_doc->GetBackgroundImage(rowItem->data(Qt::UserRole).toUuid()).Visible())
             {
                 return true;
@@ -368,7 +368,7 @@ void VWidgetBackgroundImages::ContextMenu(const QPoint &pos)
     QAction *actionShowAll = menu.addAction(tr("Show All"));
     actionShowAll->setEnabled(MultipleChangeVisibilityTo(true));
 
-    QAction *selectedAction = menu.exec(ui->tableWidget->viewport()->mapToGlobal(pos));
+    QAction  const*selectedAction = menu.exec(ui->tableWidget->viewport()->mapToGlobal(pos));
 
     if (selectedAction == holdOption)
     {
@@ -416,7 +416,7 @@ void VWidgetBackgroundImages::CurrentImageChanged(int currentRow, int currentCol
     Q_UNUSED(previousColumn)
     if (previousRow != currentRow)
     {
-        QTableWidgetItem *item = ui->tableWidget->item(currentRow, 0);
+        QTableWidgetItem  const*item = ui->tableWidget->item(currentRow, 0);
         if (item != nullptr)
         {
             emit SelectImage(item->data(Qt::UserRole).toUuid());
@@ -433,7 +433,7 @@ void VWidgetBackgroundImages::MoveImageOnTop()
         return;
     }
 
-    QTableWidgetItem *item = ui->tableWidget->item(row, 0);
+    QTableWidgetItem  const*item = ui->tableWidget->item(row, 0);
     if (item != nullptr)
     {
         QUuid const id = item->data(Qt::UserRole).toUuid();
@@ -451,7 +451,7 @@ void VWidgetBackgroundImages::MoveImageUp()
         return;
     }
 
-    QTableWidgetItem *item = ui->tableWidget->item(row, 0);
+    QTableWidgetItem  const*item = ui->tableWidget->item(row, 0);
     if (item != nullptr)
     {
         QUuid const id = item->data(Qt::UserRole).toUuid();
@@ -469,7 +469,7 @@ void VWidgetBackgroundImages::MoveImageDown()
         return;
     }
 
-    QTableWidgetItem *item = ui->tableWidget->item(row, 0);
+    QTableWidgetItem  const*item = ui->tableWidget->item(row, 0);
     if (item != nullptr)
     {
         QUuid const id = item->data(Qt::UserRole).toUuid();
@@ -487,7 +487,7 @@ void VWidgetBackgroundImages::MoveImageBottom()
         return;
     }
 
-    QTableWidgetItem *item = ui->tableWidget->item(row, 0);
+    QTableWidgetItem  const*item = ui->tableWidget->item(row, 0);
     if (item != nullptr)
     {
         QUuid const id = item->data(Qt::UserRole).toUuid();
@@ -505,7 +505,7 @@ void VWidgetBackgroundImages::ApplyImageTransformation()
         return;
     }
 
-    QTableWidgetItem *item = ui->tableWidget->item(row, 0);
+    QTableWidgetItem  const*item = ui->tableWidget->item(row, 0);
     if (item == nullptr)
     {
         return;
@@ -638,7 +638,7 @@ void VWidgetBackgroundImages::RelativeTranslationChanged(bool checked)
             return;
         }
 
-        QTableWidgetItem *item = ui->tableWidget->item(row, 0);
+        QTableWidgetItem  const*item = ui->tableWidget->item(row, 0);
         if (item != nullptr)
         {
             QUuid const id = item->data(Qt::UserRole).toUuid();
@@ -717,7 +717,7 @@ void VWidgetBackgroundImages::ImagePositionChanged(const QUuid &id)
         return;
     }
 
-    QTableWidgetItem *item = ui->tableWidget->item(row, 0);
+    QTableWidgetItem  const*item = ui->tableWidget->item(row, 0);
     if (item != nullptr)
     {
         if (QUuid const curentId = item->data(Qt::UserRole).toUuid(); curentId != id)
@@ -805,7 +805,7 @@ auto VWidgetBackgroundImages::ImageRow(const QUuid &id) const -> int
 {
     for (int r = 0; r < ui->tableWidget->rowCount(); ++r)
     {
-        QTableWidgetItem *item = ui->tableWidget->item(r, 0);
+        QTableWidgetItem  const*item = ui->tableWidget->item(r, 0);
         if (item != nullptr && id == item->data(Qt::UserRole).toUuid())
         {
             return r;
@@ -958,11 +958,11 @@ void VWidgetBackgroundImages::InitImageTranslation()
 
     ui->toolButtonImageRotationAnticlockwise->setChecked(true);
 
-    QPushButton *bApply = ui->buttonBox->button(QDialogButtonBox::Apply);
+    QPushButton  const*bApply = ui->buttonBox->button(QDialogButtonBox::Apply);
     SCASSERT(bApply != nullptr)
     connect(bApply, &QPushButton::clicked, this, &VWidgetBackgroundImages::ApplyImageTransformation);
 
-    QPushButton *bReset = ui->buttonBox->button(QDialogButtonBox::Reset);
+    QPushButton  const*bReset = ui->buttonBox->button(QDialogButtonBox::Reset);
     SCASSERT(bReset != nullptr)
     connect(bReset, &QPushButton::clicked, this, &VWidgetBackgroundImages::ResetImageTransformationSettings);
 }
@@ -974,7 +974,7 @@ auto VWidgetBackgroundImages::ImageWidth() const -> qreal
 
     if (int const row = ui->tableWidget->currentRow(); row != -1)
     {
-        QTableWidgetItem *item = ui->tableWidget->item(row, 0);
+        QTableWidgetItem  const*item = ui->tableWidget->item(row, 0);
         if (item != nullptr)
         {
             QUuid const id = item->data(Qt::UserRole).toUuid();
@@ -993,7 +993,7 @@ auto VWidgetBackgroundImages::ImageHeight() const -> qreal
 
     if (int const row = ui->tableWidget->currentRow(); row != -1)
     {
-        QTableWidgetItem *item = ui->tableWidget->item(row, 0);
+        QTableWidgetItem  const*item = ui->tableWidget->item(row, 0);
         if (item != nullptr)
         {
             QUuid const id = item->data(Qt::UserRole).toUuid();

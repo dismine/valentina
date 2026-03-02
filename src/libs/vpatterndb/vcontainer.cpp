@@ -564,7 +564,7 @@ void VContainer::RemoveIncrement(const QString &name)
 //---------------------------------------------------------------------------------------------------------------------
 void VContainer::FillPiecesAreas(Unit unit)
 {
-    QHash<quint32, VPiece> *pieces = d->pieces.data();
+    QHash<quint32, VPiece>  const*pieces = d->pieces.data();
 
     auto i = pieces->constBegin();
     while (i != pieces->constEnd())
@@ -660,7 +660,7 @@ auto VContainer::DataPieceArea() const -> QMap<QString, QSharedPointer<VPieceAre
 auto VContainer::DataDependencyVariables() const -> QHash<QString, QList<quint32>>
 {
     Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 12, "Check that you used all types");
-    QVector<VarType> types{VarType::LineAngle,
+    QVector<VarType> const types{VarType::LineAngle,
                            VarType::LineLength,
                            VarType::CurveLength,
                            VarType::CurveCLength,

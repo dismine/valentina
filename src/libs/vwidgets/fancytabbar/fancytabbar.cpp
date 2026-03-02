@@ -669,7 +669,7 @@ void FancyTabBar::InsertTab(int index, const QIcon &icon, const QString &label)
 //---------------------------------------------------------------------------------------------------------------------
 void FancyTabBar::RemoveTab(int index)
 {
-    FancyTab *tab = m_attachedTabs.takeAt(index);
+    FancyTab  const*tab = m_attachedTabs.takeAt(index);
     delete tab;
 
     setMaximumWidth(TabSizeHint(false).width());

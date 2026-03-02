@@ -108,11 +108,11 @@ DialogEditWrongFormula::DialogEditWrongFormula(const VContainer *data, quint32 t
 
     connect(ui->filterFormulaInputs, &QLineEdit::textChanged, this, &DialogEditWrongFormula::FilterVariablesEdited);
 
-    QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
+    QPushButton  const*bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     SCASSERT(bOk != nullptr)
     connect(bOk, &QPushButton::clicked, this, &DialogEditWrongFormula::DialogAccepted);
 
-    QPushButton *bCancel = ui->buttonBox->button(QDialogButtonBox::Cancel);
+    QPushButton  const*bCancel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     SCASSERT(bCancel != nullptr)
     connect(bCancel, &QPushButton::clicked, this, &DialogEditWrongFormula::DialogRejected);
 
@@ -277,7 +277,7 @@ void DialogEditWrongFormula::PutHere()
 void DialogEditWrongFormula::PutVal(QTableWidgetItem *item)
 {
     SCASSERT(item != nullptr)
-    QTableWidgetItem *valItem = ui->tableWidget->item(item->row(), ColumnName);
+    QTableWidgetItem  const*valItem = ui->tableWidget->item(item->row(), ColumnName);
     QTextCursor cursor = ui->plainTextEditFormula->textCursor();
     if (ui->radioButtonFunctions->isChecked())
     {
@@ -703,7 +703,7 @@ void DialogEditWrongFormula::ShowMeasurements(const QList<QSharedPointer<VMeasur
             else
             {
                 itemFullName->setText(QString());
-                if (VKnownMeasurementsDatabase *db = VAbstractApplication::VApp()->KnownMeasurementsDatabase())
+                if (VKnownMeasurementsDatabase  const*db = VAbstractApplication::VApp()->KnownMeasurementsDatabase())
                 {
                     VKnownMeasurements const known = db->KnownMeasurements(var->GetKnownMeasurementsId());
                     if (known.IsValid())
@@ -736,7 +736,7 @@ void DialogEditWrongFormula::ShowFunctions()
     ui->tableWidget->setColumnHidden(ColumnFullName, true);
     ui->labelDescription->setText(QString());
 
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
     const VTranslateVars *trVars = VAbstractApplication::VApp()->TrVars();
     const QMap<QString, qmu::QmuTranslation> functionsDescriptions = trVars->GetFunctionsDescriptions();
     const QMap<QString, qmu::QmuTranslation> functions = trVars->GetFunctions();
@@ -811,7 +811,7 @@ void DialogEditWrongFormula::SetMeasurementDescription(QTableWidgetItem *item, c
 
     if (!stable->IsCustom())
     {
-        if (VKnownMeasurementsDatabase *db = VAbstractApplication::VApp()->KnownMeasurementsDatabase())
+        if (VKnownMeasurementsDatabase  const*db = VAbstractApplication::VApp()->KnownMeasurementsDatabase())
         {
             VKnownMeasurements const known = db->KnownMeasurements(stable->GetKnownMeasurementsId());
             if (known.IsValid())

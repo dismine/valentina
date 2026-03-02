@@ -659,7 +659,7 @@ public:
 
     ~DRW_LWPolyline()
     {
-        for (DRW_Vertex2D *item : vertlist)
+        for (DRW_Vertex2D  const*item : vertlist)
             delete item;
     }
     void applyExtrusion() override;
@@ -896,7 +896,7 @@ public:
 
     ~DRW_Polyline()
     {
-        for (DRW_Vertex *item : vertlist)
+        for (DRW_Vertex  const*item : vertlist)
             delete item;
     }
     void addVertex(const DRW_Vertex &v)
@@ -976,11 +976,11 @@ public:
 
     ~DRW_Spline()
     {
-        for (DRW_Coord *item : controllist)
+        for (DRW_Coord  const*item : controllist)
         {
             delete item;
         }
-        for (DRW_Coord *item : fitlist)
+        for (DRW_Coord  const*item : fitlist)
         {
             delete item;
         }
@@ -1041,7 +1041,7 @@ public:
     ~DRW_HatchLoop()
     {
         // for(DRW_LWPolyline *item : pollist) delete item;
-        for (DRW_Entity *item : objlist)
+        for (DRW_Entity  const*item : objlist)
             delete item;
     }
 
@@ -1095,7 +1095,7 @@ public:
 
     ~DRW_Hatch()
     {
-        for (DRW_HatchLoop *item : looplist)
+        for (DRW_HatchLoop  const*item : looplist)
             delete item;
     }
 
@@ -1652,7 +1652,7 @@ public:
     }
     ~DRW_Leader()
     {
-        for (DRW_Coord *item : vertexlist)
+        for (DRW_Coord  const*item : vertexlist)
             delete item;
     }
 

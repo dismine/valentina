@@ -73,7 +73,7 @@ auto ScrollingSteps(QWheelEvent *wheel_event) -> qreal
     const QPoint numPixels = wheel_event->pixelDelta();
     const QPoint numDegrees = wheel_event->angleDelta() / 8;
     qreal numSteps = 0;
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
 
     if (not numPixels.isNull())
     {
@@ -198,7 +198,7 @@ void GraphicsViewZoom::InitScrollingAnimation()
 {
     delete verticalScrollAnim.data();
 
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
 
     verticalScrollAnim = new QTimeLine(settings->GetScrollingDuration(), this);
     verticalScrollAnim->setUpdateInterval(settings->GetScrollingUpdateInterval());
@@ -418,7 +418,7 @@ VMainGraphicsView::VMainGraphicsView(QWidget *parent)
 {
     setAcceptDrops(true);
 
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
     if (settings && settings->IsOpenGLRender())
     {
         auto *viewport = new QOpenGLWidget();

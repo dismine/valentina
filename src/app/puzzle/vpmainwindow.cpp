@@ -453,7 +453,7 @@ VPMainWindow::VPMainWindow(VPCommandLinePtr cmd, QWidget *parent)
         QTimer::singleShot(1s, this, &VPMainWindow::AskDefaultSettings);
     }
 
-    if (VAbstractShortcutManager *manager = VAbstractApplication::VApp()->GetShortcutManager())
+    if (VAbstractShortcutManager  const*manager = VAbstractApplication::VApp()->GetShortcutManager())
     {
         connect(manager, &VAbstractShortcutManager::ShortcutsUpdated, this, &VPMainWindow::UpdateShortcuts);
         UpdateShortcuts();
@@ -541,7 +541,7 @@ auto VPMainWindow::LoadFile(const QString &path) -> bool
             return false;
         }
 
-        VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+        VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
         if (settings->IsCollectStatistic())
         {
             auto *statistic = VGAnalytics::Instance();
@@ -800,7 +800,7 @@ void VPMainWindow::InitProperties()
 {
     ui->tabWidgetProperties->setCurrentIndex(0);
 
-    VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
+    VPSettings  const*settings = VPApplication::VApp()->PuzzleSettings();
     m_oldLayoutUnit = settings->LayoutUnit();
 
     InitPropertyTabCurrentPiece();
@@ -995,11 +995,11 @@ void VPMainWindow::InitPropertyTabCurrentPiece()
     ui->toolButtonCurrentPieceRotationAnticlockwise->setChecked(true);
     ui->checkBoxTransformSeparately->setChecked(false);
 
-    QPushButton *bApply = ui->buttonBox->button(QDialogButtonBox::Apply);
+    QPushButton  const*bApply = ui->buttonBox->button(QDialogButtonBox::Apply);
     SCASSERT(bApply != nullptr)
     connect(bApply, &QPushButton::clicked, this, &VPMainWindow::on_ApplyPieceTransformation);
 
-    QPushButton *bReset = ui->buttonBox->button(QDialogButtonBox::Reset);
+    QPushButton  const*bReset = ui->buttonBox->button(QDialogButtonBox::Reset);
     SCASSERT(bReset != nullptr)
     connect(bReset, &QPushButton::clicked, this, &VPMainWindow::on_ResetPieceTransformationSettings);
 }
@@ -1032,7 +1032,7 @@ void VPMainWindow::InitPropertyTabCurrentSheet()
     ui->comboBoxLayoutUnit->addItem(tr("Inches"), QVariant(UnitsToStr(Unit::Inch)));
     ui->comboBoxLayoutUnit->addItem(tr("Pixels"), QVariant(UnitsToStr(Unit::Px)));
 
-    VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
+    VPSettings  const*settings = VPApplication::VApp()->PuzzleSettings();
     if (const qint32 indexUnit = ui->comboBoxLayoutUnit->findData(UnitsToStr(settings->LayoutUnit())); indexUnit != -1)
     {
         ui->comboBoxLayoutUnit->setCurrentIndex(indexUnit);
@@ -1365,7 +1365,7 @@ void VPMainWindow::InitPropertyTabLayout()
 
     connect(ui->checkBoxTogetherWithNotches, &QCheckBox::toggled, this, &VPMainWindow::TogetherWithNotchesChanged);
 
-    VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
+    VPSettings  const*settings = VPApplication::VApp()->PuzzleSettings();
     ui->doubleSpinBoxSheetPiecesGap->setMaximum(
         UnitConvertor(VPSettings::GetMaxLayoutPieceGap(), Unit::Px, settings->LayoutUnit()));
     ui->doubleSpinBoxSheetPiecesGap->setSuffix(" " + UnitsToStr(LayoutUnit(), true));
@@ -1983,7 +1983,7 @@ void VPMainWindow::CreateWindowMenu(QMenu *menu)
     const QList<VPMainWindow *> windows = VPApplication::VApp()->MainWindows();
     for (int i = 0; i < windows.count(); ++i)
     {
-        VPMainWindow *window = windows.at(i);
+        VPMainWindow  const*window = windows.at(i);
 
         auto title = QStringLiteral("%1. %2").arg(i + 1).arg(window->windowTitle());
         if (const vsizetype index = title.lastIndexOf("[*]"_L1); index != -1)
@@ -2225,7 +2225,7 @@ void VPMainWindow::SheetPaperSizeChanged()
         }
         else
         {
-            if (VPSheetPtr sheet = m_layout->GetFocusedSheet(); !sheet.isNull())
+            if (VPSheetPtr const sheet = m_layout->GetFocusedSheet(); !sheet.isNull())
             {
                 sheet->CheckPiecesPositionValidity();
             }
@@ -2424,7 +2424,7 @@ void VPMainWindow::ExportApparelLayout(const VPExportData &data, const QVector<V
         return;
     }
 
-    VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
+    VPSettings  const*settings = VPApplication::VApp()->PuzzleSettings();
     settings->SetPathLayoutExport(path);
 
     QT_WARNING_PUSH

@@ -55,7 +55,7 @@ void VPlainTextEdit::SetFilter(const QString &filter)
 {
     if (m_filter.isEmpty() && not filter.isEmpty())
     {
-        QTextDocument *doc = document();
+        QTextDocument  const*doc = document();
         m_allLines.clear();
         m_allLines.reserve(doc->lineCount());
 
@@ -108,7 +108,7 @@ void VPlainTextEdit::MatchParentheses()
         int const pos = textCursor().block().position();
         for (int i = 0; i < infos.size(); ++i)
         {
-            ParenthesisInfo *info = infos.at(i);
+            ParenthesisInfo  const*info = infos.at(i);
 
             int const curPos = textCursor().position() - textCursor().block().position();
             if ((info->position == curPos - 1 || info->position == curPos) && info->character == '(')
@@ -137,7 +137,7 @@ auto VPlainTextEdit::MatchLeftParenthesis(QTextBlock currentBlock, int i, int nu
     int const docPos = currentBlock.position();
     for (; i < infos.size(); ++i)
     {
-        ParenthesisInfo *info = infos.at(i);
+        ParenthesisInfo  const*info = infos.at(i);
 
         if (info->character == '(')
         {
@@ -172,7 +172,7 @@ auto VPlainTextEdit::MatchRightParenthesis(QTextBlock currentBlock, int i, int n
     int const docPos = currentBlock.position();
     for (; i > -1 && parentheses.size() > 0; --i)
     {
-        ParenthesisInfo *info = parentheses.at(i);
+        ParenthesisInfo  const*info = parentheses.at(i);
         if (info->character == ')')
         {
             ++numRightParentheses;

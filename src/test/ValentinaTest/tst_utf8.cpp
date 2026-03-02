@@ -377,7 +377,7 @@ void TST_Utf8::loadNonCharactersRows()
     for (int i = 0; i < 16; ++i)
     {
         char utf8[] = {char(0357), char(0267), char(0220 + i), 0};
-        QString utf16 = QChar(0xfdd0 + i);
+        QString const utf16 = QChar(0xfdd0 + i);
         QTest::newRow(qPrintable(QString::number(0xfdd0 + i, 16))) << QByteArray(utf8) << utf16;
     }
 
@@ -386,7 +386,7 @@ void TST_Utf8::loadNonCharactersRows()
     {
         for (uint lower = 0xfffe; lower < 0x10000; ++lower)
         {
-            uint ucs4 = (plane << 16) | lower;
+            uint const ucs4 = (plane << 16) | lower;
             char utf8[] = {char(0xf0 | uchar(ucs4 >> 18)),
                            char(0x80 | (uchar(ucs4 >> 12) & 0x3f)),
                            char(0x80 | (uchar(ucs4 >> 6) & 0x3f)),

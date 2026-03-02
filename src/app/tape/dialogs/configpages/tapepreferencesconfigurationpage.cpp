@@ -61,7 +61,7 @@ TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *pare
     connect(ui->langCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             [this]() { m_langChanged = true; });
 
-    VTapeSettings *settings = MApplication::VApp()->TapeSettings();
+    VTapeSettings  const*settings = MApplication::VApp()->TapeSettings();
 
     //-------------------- Decimal separator setup
     ui->osOptionCheck->setChecked(settings->GetOsSeparator());
@@ -350,7 +350,7 @@ void TapePreferencesConfigurationPage::UpdateShortcutsTable()
 //---------------------------------------------------------------------------------------------------------------------
 void TapePreferencesConfigurationPage::RetranslateShortcutsTable()
 {
-    VAbstractShortcutManager *manager = VAbstractApplication::VApp()->GetShortcutManager();
+    VAbstractShortcutManager  const*manager = VAbstractApplication::VApp()->GetShortcutManager();
     if (manager == nullptr)
     {
         return;
@@ -371,7 +371,7 @@ void TapePreferencesConfigurationPage::RetranslateShortcutsTable()
 //---------------------------------------------------------------------------------------------------------------------
 void TapePreferencesConfigurationPage::InitKnownMeasurements(QComboBox *combo)
 {
-    VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
+    VKnownMeasurementsDatabase  const*db = MApplication::VApp()->KnownMeasurementsDatabase();
     QHash<QUuid, VKnownMeasurementsHeader> const known = db->AllKnownMeasurements();
 
     const QSignalBlocker blocker(combo);
@@ -400,7 +400,7 @@ void TapePreferencesConfigurationPage::InitKnownMeasurements(QComboBox *combo)
 //---------------------------------------------------------------------------------------------------------------------
 void TapePreferencesConfigurationPage::InitKnownMeasurementsDescription()
 {
-    VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
+    VKnownMeasurementsDatabase  const*db = MApplication::VApp()->KnownMeasurementsDatabase();
     QHash<QUuid, VKnownMeasurementsHeader> const known = db->AllKnownMeasurements();
 
     ui->knownMeasurementsDescription->clear();

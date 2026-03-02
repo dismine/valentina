@@ -321,7 +321,7 @@ void DialogMDataBase::InitDataBase(const QStringList &usedMeasurements)
         return;
     }
 
-    VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
+    VKnownMeasurementsDatabase  const*db = MApplication::VApp()->KnownMeasurementsDatabase();
     VKnownMeasurements const knownDB = db->KnownMeasurements(m_knownId);
 
     if (QMap<int, VKnownMeasurement> const measurements = knownDB.OrderedGroupMeasurements(QString());
@@ -449,7 +449,7 @@ auto DialogMDataBase::ItemFullDescription(QTreeWidgetItem *item, bool showImage)
         return {};
     }
 
-    VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
+    VKnownMeasurementsDatabase  const*db = MApplication::VApp()->KnownMeasurementsDatabase();
     VKnownMeasurements const knownDB = db->KnownMeasurements(m_knownId);
     VKnownMeasurement const known = knownDB.Measurement(name);
 

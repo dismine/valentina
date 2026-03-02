@@ -111,7 +111,7 @@ void VSvgFontDatabase::PopulateFontDatabase(const QString &path)
 
     if (path.isEmpty())
     {
-        VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+        VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
         QStringList const directories = {SystemSVGFontPath(), settings->GetPathSVGFonts()};
 
         m_fontDB.clear();
@@ -375,7 +375,7 @@ auto VSvgFontDatabase::QueryFontEngine(const QString &family, SVGFontStyle style
     if (m_fontEngineCache.contains(hash))
     {
         VSvgFontEngine engine = *m_fontEngineCache.object(hash);
-        VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+        VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
         engine.SetFontPointSize(pointSize > 0 ? pointSize : settings->GetPatternLabelFontSize());
 
         return engine;
@@ -389,7 +389,7 @@ auto VSvgFontDatabase::QueryFontEngine(const QString &family, SVGFontStyle style
         if (fontFile.exists() && fontFile.open(QIODevice::ReadOnly))
         {
             VSvgFontEngine engine = reader.ReadSvgFont(&fontFile);
-            VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+            VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
             engine.SetFontPointSize(pointSize > 0 ? pointSize : settings->GetPatternLabelFontSize());
 
             m_fontEngineCache.insert(engine.Font().Hash(), new VSvgFontEngine(engine));

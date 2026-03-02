@@ -56,7 +56,7 @@ VPE::VProperty::~VProperty()
 
     while (!vproperty_d_ptr->Children.isEmpty())
     {
-        VProperty* tmpChild = vproperty_d_ptr->Children.takeLast();
+        VProperty const* tmpChild = vproperty_d_ptr->Children.takeLast();
         delete tmpChild;
     }
 

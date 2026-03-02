@@ -124,7 +124,7 @@ void TST_VTextStream::getSetCheck()
 
     // QChar VTextStream::padChar()
     // void VTextStream::setPadChar(QChar)
-    QChar var7 = 'Q';
+    QChar const var7 = 'Q';
     obj1.setPadChar(var7);
     QCOMPARE(var7, obj1.padChar());
     obj1.setPadChar(QChar());
@@ -366,7 +366,7 @@ void TST_VTextStream::readLineMaxlen()
     QFETCH(QStringList, lines);
     for (int i = 0; i < 2; ++i)
     {
-        bool useDevice = (i == 1);
+        bool const useDevice = (i == 1);
         VTextStream stream;
         QFile::remove("testfile");
         QFile file("testfile");
@@ -398,7 +398,7 @@ void TST_VTextStream::readLinesFromBufferCRCR()
 {
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
-    QByteArray data("0123456789\r\r\n");
+    QByteArray const data("0123456789\r\r\n");
 
     for (int i = 0; i < 10000; ++i)
         buffer.write(data);
@@ -668,7 +668,7 @@ void TST_VTextStream::readLineUntilNull()
     VTextStream stream(&file);
     for (int i = 0; i < 15066; ++i)
     {
-        QString line = stream.readLine();
+        QString const line = stream.readLine();
         QVERIFY(!line.isNull());
         QVERIFY(!line.isNull());
     }
@@ -761,7 +761,7 @@ void TST_VTextStream::skipWhiteSpace()
 
     QCOMPARE(tmp, output);
 
-    QString str = input;
+    QString const str = input;
     VTextStream stream2(&input);
     stream2.skipWhiteSpace();
 
@@ -804,7 +804,7 @@ void TST_VTextStream::lineCount()
     int lines = 0;
     while (!lineReader.atEnd())
     {
-        QString line = lineReader.readLine();
+        QString const line = lineReader.readLine();
         out.write(line.toLatin1() + "\n");
         ++lines;
     }
@@ -885,8 +885,8 @@ void TST_VTextStream::performance()
 
     for (int i = 0; i < N - 1; i++)
     {
-        int i1 = idx[i];
-        int i2 = idx[i + 1];
+        int const i1 = idx[i];
+        int const i2 = idx[i + 1];
         qDebug("Reading by %s is %.2fx faster than by %s",
                readMethods[i1],
                double(elapsed[i2]) / double(elapsed[i1]),
@@ -1069,7 +1069,7 @@ void TST_VTextStream::seek()
     VTextStream stream(&file);
     QString tmp;
 
-    uchar *ptr = file.map(0, file.size());
+    uchar  const*ptr = file.map(0, file.size());
     QVERIFY(ptr);
 
     QByteArray const data(reinterpret_cast<const char *>(ptr), file.size());
@@ -1213,7 +1213,7 @@ void TST_VTextStream::pos()
 
         stream.seek(0);
 
-        uchar *ptr = file.map(0, file.size());
+        uchar  const*ptr = file.map(0, file.size());
         QVERIFY(ptr);
 
         QByteArray const data(reinterpret_cast<const char *>(ptr), file.size());
@@ -1364,7 +1364,7 @@ void TST_VTextStream::pos3LargeFile()
         (void) file.open(QIODevice::WriteOnly | QIODevice::Text);
         VTextStream out(&file);
         // NOTE: The unusual spacing is to ensure non-1-character whitespace.
-        QString lineString = QStringLiteral(" 0  1  2\t3  4\t \t5  6  7  8   9 \n");
+        QString const lineString = QStringLiteral(" 0  1  2\t3  4\t \t5  6  7  8   9 \n");
         // Approximate 50kb text file
         const int NbLines = (50 * 1024) / static_cast<int>(lineString.length()) + 1;
         for (int line = 0; line < NbLines; ++line)
@@ -1793,7 +1793,7 @@ void TST_VTextStream::utf8IncompleteAtBufferBoundary()
 #else
 
     QTextCodec *utf8Codec = QTextCodec::codecForMib(106);
-    QString lineContents = QString::fromUtf8("\342\200\223" // U+2013 EN DASH
+    QString const lineContents = QString::fromUtf8("\342\200\223" // U+2013 EN DASH
                                              "\342\200\223"
                                              "\342\200\223"
                                              "\342\200\223"
@@ -1825,7 +1825,7 @@ void TST_VTextStream::utf8IncompleteAtBufferBoundary()
     int i = 0;
     do
     {
-        QString line = in.readLine().trimmed();
+        QString const line = in.readLine().trimmed();
         ++i;
         QVERIFY2(line.endsWith(lineContents), QString("Line %1: %2").arg(i).arg(line).toLocal8Bit());
     } while (!in.atEnd());
@@ -1875,7 +1875,7 @@ void TST_VTextStream::writeSeekWriteNoBOM()
     stream16.flush();
 
     // save that output
-    QByteArray first = out16.buffer();
+    QByteArray const first = out16.buffer();
 
     stream16.seek(0);
     stream16 << "one";
@@ -2960,8 +2960,8 @@ void TST_VTextStream::alignAccountingStyle()
 void TST_VTextStream::setCodec()
 {
 #ifdef WITH_TEXTCODEC
-    QByteArray ba("\xe5 v\xe6r\n\xc3\xa5 v\xc3\xa6r\n");
-    QString res = QLatin1String("\xe5 v\xe6r");
+    QByteArray const ba("\xe5 v\xe6r\n\xc3\xa5 v\xc3\xa6r\n");
+    QString const res = QLatin1String("\xe5 v\xe6r");
 
     VTextStream stream(ba);
     stream.setCodec("ISO 8859-1");
@@ -3120,6 +3120,6 @@ void TST_VTextStream::textModeOnEmptyRead()
     QVERIFY2(file.open(QIODevice::ReadWrite | QIODevice::Text), qPrintable(file.errorString()));
     VTextStream stream(&file);
     QVERIFY(file.isTextModeEnabled());
-    QString emptyLine = stream.readLine(); // Text mode flag cleared here
+    QString const emptyLine = stream.readLine(); // Text mode flag cleared here
     QVERIFY(file.isTextModeEnabled());
 }

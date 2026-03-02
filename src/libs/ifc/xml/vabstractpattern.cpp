@@ -2091,7 +2091,7 @@ auto VAbstractPattern::GetBackgroundPatternImage(const QDomElement &element) con
     image.SetZValue(GetParametrUInt(element, AttrZValue, QChar('0')));
     image.SetVisible(GetParametrBool(element, AttrVisible, trueStr));
 
-    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    VValentinaSettings  const*settings = VAbstractValApplication::VApp()->ValentinaSettings();
     image.SetOpacity(
         GetParametrDouble(element, AttrOpacity, QString::number(settings->GetBackgroundImageDefOpacity() / 100.)));
 

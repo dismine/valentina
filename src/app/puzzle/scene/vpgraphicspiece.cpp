@@ -198,7 +198,7 @@ auto VPGraphicsPiece::boundingRect() const -> QRectF
     shape.addPath(m_foldLineLabelPath);
     shape.addPath(m_mirrorLinePath);
 
-    VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
+    VPSettings  const*settings = VPApplication::VApp()->PuzzleSettings();
     const qreal halfPenWidth = settings->GetLayoutLineWidth() / 2.;
 
     return shape.boundingRect().adjusted(-halfPenWidth, -halfPenWidth, halfPenWidth, halfPenWidth);
@@ -221,7 +221,7 @@ void VPGraphicsPiece::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
     Q_UNUSED(widget);
     Q_UNUSED(option);
 
-    VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
+    VPSettings  const*settings = VPApplication::VApp()->PuzzleSettings();
     QPen const pen(PieceColor(), settings->GetLayoutLineWidth(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     painter->setPen(pen);
 
@@ -336,9 +336,9 @@ void VPGraphicsPiece::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     }
 
     // remove from layout action
-    QAction *removeAction = menu.addAction(tr("Remove from Sheet"));
+    QAction  const*removeAction = menu.addAction(tr("Remove from Sheet"));
 
-    QAction *selectedAction = menu.exec(event->screenPos());
+    QAction  const*selectedAction = menu.exec(event->screenPos());
 
     if (moveToActions.contains(selectedAction))
     {
@@ -408,7 +408,7 @@ void VPGraphicsPiece::InitPieceLabelSVGFont(const QVector<QPointF> &labelShape, 
         return;
     }
 
-    VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
+    VSvgFontDatabase  const*db = VAbstractApplication::VApp()->SVGFontDatabase();
     VSvgFontEngine engine =
         db->FontEngine(tm.GetSVGFontFamily(), SVGFontStyle::Normal, SVGFontWeight::Normal, tm.GetSVGFontPointSize());
 

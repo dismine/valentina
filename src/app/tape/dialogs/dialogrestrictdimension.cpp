@@ -212,7 +212,7 @@ void DialogRestrictDimension::RowSelected()
 {
     EnableRestrictionControls(false);
 
-    QTableWidgetItem *item = ui->tableWidget->currentItem();
+    QTableWidgetItem  const*item = ui->tableWidget->currentItem();
 
     if (item != nullptr && (item->flags() & Qt::ItemIsEnabled) != 0U)
     {
@@ -279,7 +279,7 @@ void DialogRestrictDimension::DimensionAChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogRestrictDimension::MinRestrictionChanged()
 {
-    QTableWidgetItem *item = ui->tableWidget->currentItem();
+    QTableWidgetItem  const*item = ui->tableWidget->currentItem();
 
     if (item != nullptr)
     {
@@ -317,7 +317,7 @@ void DialogRestrictDimension::MinRestrictionChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogRestrictDimension::MaxRestrictionChanged()
 {
-    QTableWidgetItem *item = ui->tableWidget->currentItem();
+    QTableWidgetItem  const*item = ui->tableWidget->currentItem();
 
     if (item != nullptr)
     {

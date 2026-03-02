@@ -137,7 +137,7 @@ auto SaveDirPath(const QString &curFile, MeasurementsType mType) -> QString
     QString dir;
     if (curFile.isEmpty())
     {
-        VTapeSettings *settings = MApplication::VApp()->TapeSettings();
+        VTapeSettings  const*settings = MApplication::VApp()->TapeSettings();
         dir = (mType == MeasurementsType::Individual ? settings->GetPathIndividualMeasurements()
                                                      : settings->GetPathMultisizeMeasurements());
     }
@@ -339,7 +339,7 @@ TMainWindow::TMainWindow(QWidget *parent)
     m_buttonShortcuts.insert(VShortcutAction::FindNext, ui->toolButtonFindNext);
     m_buttonShortcuts.insert(VShortcutAction::FindPrevious, ui->toolButtonFindNext);
 
-    if (VAbstractShortcutManager *manager = VAbstractApplication::VApp()->GetShortcutManager())
+    if (VAbstractShortcutManager  const*manager = VAbstractApplication::VApp()->GetShortcutManager())
     {
         connect(manager, &VAbstractShortcutManager::ShortcutsUpdated, this, &TMainWindow::UpdateShortcuts);
         UpdateShortcuts();
@@ -491,7 +491,7 @@ auto TMainWindow::LoadFile(const QString &path) -> bool
             m_curFileFormatVersionStr = converter.GetFormatVersionStr();
             m_m->setXMLContent(converter.Convert()); // Read again after conversion
 
-            VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+            VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
             if (settings->IsCollectStatistic())
             {
                 auto *statistic = VGAnalytics::Instance();
@@ -516,7 +516,7 @@ auto TMainWindow::LoadFile(const QString &path) -> bool
             m_curFileFormatVersionStr = converter.GetFormatVersionStr();
             m_m->setXMLContent(converter.Convert()); // Read again after conversion
 
-            VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+            VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
             if (settings->IsCollectStatistic())
             {
                 auto *statistic = VGAnalytics::Instance();
@@ -1027,7 +1027,7 @@ auto TMainWindow::FileSaveAs() -> bool
 
     if (m_curFile.isEmpty())
     {
-        VTapeSettings *settings = MApplication::VApp()->TapeSettings();
+        VTapeSettings  const*settings = MApplication::VApp()->TapeSettings();
         m_mType == MeasurementsType::Individual
             ? settings->SetPathIndividualMeasurements(QFileInfo(fileName).absolutePath())
             : settings->SetPathMultisizeMeasurements(QFileInfo(fileName).absolutePath());
@@ -1521,7 +1521,7 @@ void TMainWindow::AddImage()
         return;
     }
 
-    VTapeSettings *settings = MApplication::VApp()->TapeSettings();
+    VTapeSettings  const*settings = MApplication::VApp()->TapeSettings();
 
     const QString filePath =
         QFileDialog::getOpenFileName(this, tr("Measurement image"), settings->GetPathCustomImage(),
@@ -1619,7 +1619,7 @@ void TMainWindow::SaveImage()
         return;
     }
 
-    VTapeSettings *settings = MApplication::VApp()->TapeSettings();
+    VTapeSettings  const*settings = MApplication::VApp()->TapeSettings();
 
     QMimeType const mime = image.MimeTypeFromData();
     QString path = settings->GetPathCustomImage() + QDir::separator() + tr("untitled");
@@ -1755,7 +1755,7 @@ void TMainWindow::AddKnown()
 
     vsizetype currentRow = -1;
     const QStringList list = dialog->GetNewNames();
-    VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
+    VKnownMeasurementsDatabase  const*db = MApplication::VApp()->KnownMeasurementsDatabase();
     VKnownMeasurements const knownDB = db->KnownMeasurements(m_m->KnownMeasurements());
 
     auto AddMeasurement = [this, knownDB, &currentRow](const QString &name)
@@ -1869,7 +1869,7 @@ void TMainWindow::ImportFromPattern()
         doc->setXMLContent(converter.Convert());
         measurements = doc->ListMeasurements();
 
-        VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+        VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
         if (settings->IsCollectStatistic())
         {
             auto *statistic = VGAnalytics::Instance();
@@ -2043,7 +2043,7 @@ void TMainWindow::ShowNewMData(bool fresh)
         else
         {
             // Show known
-            VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
+            VKnownMeasurementsDatabase  const*db = MApplication::VApp()->KnownMeasurementsDatabase();
             VKnownMeasurements const knownDB = db->KnownMeasurements(meash->GetKnownMeasurementsId());
             VKnownMeasurement const known = knownDB.Measurement(meash->GetName());
 
@@ -2336,7 +2336,7 @@ void TMainWindow::SaveMValue()
 
     if (const QTableWidgetItem *formulaField = ui->tableWidget->item(row, ColumnFormula); formulaField->text() == text)
     {
-        QTableWidgetItem *result = ui->tableWidget->item(row, ColumnCalcValue);
+        QTableWidgetItem  const*result = ui->tableWidget->item(row, ColumnCalcValue);
         const QString postfix = UnitsToStr(m_mUnit); // Show unit in dialog lable (cm, mm or inch)
         ui->labelCalculatedValue->setText(result->text() + QChar(QChar::Space) + postfix);
         return;
@@ -2979,7 +2979,7 @@ void TMainWindow::SetupMenu()
                     return;
                 }
 
-                VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
+                VKnownMeasurementsDatabase  const*db = MApplication::VApp()->KnownMeasurementsDatabase();
                 QHash<QUuid, VKnownMeasurementsHeader> const known = db->AllKnownMeasurements();
                 if (!known.contains(id))
                 {
@@ -4326,7 +4326,7 @@ void TMainWindow::CreateWindowMenu(QMenu *menu)
     const QList<TMainWindow *> windows = MApplication::VApp()->MainTapeWindows();
     for (int i = 0; i < windows.count(); ++i)
     {
-        TMainWindow *window = windows.at(i);
+        TMainWindow  const*window = windows.at(i);
 
         auto title = QStringLiteral("%1. %2").arg(i + 1).arg(window->windowTitle());
         if (const auto index = title.lastIndexOf("[*]"_L1); index != -1)
@@ -4874,7 +4874,7 @@ void TMainWindow::RetranslateMDiagram()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::InitKnownMeasurements(QComboBox *combo)
 {
-    VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
+    VKnownMeasurementsDatabase  const*db = MApplication::VApp()->KnownMeasurementsDatabase();
     QHash<QUuid, VKnownMeasurementsHeader> const known = db->AllKnownMeasurements();
 
     SCASSERT(combo != nullptr)
@@ -4913,7 +4913,7 @@ void TMainWindow::InitKnownMeasurements(QComboBox *combo)
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::InitKnownMeasurementsDescription()
 {
-    VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
+    VKnownMeasurementsDatabase  const*db = MApplication::VApp()->KnownMeasurementsDatabase();
     QHash<QUuid, VKnownMeasurementsHeader> const known = db->AllKnownMeasurements();
 
     ui->plainTextEditKnownMeasurementsDescription->clear();
@@ -4932,7 +4932,7 @@ auto TMainWindow::KnownMeasurementsRegistred(const QUuid &id) -> bool
         return false;
     }
 
-    VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
+    VKnownMeasurementsDatabase  const*db = MApplication::VApp()->KnownMeasurementsDatabase();
     QHash<QUuid, VKnownMeasurementsHeader> const known = db->AllKnownMeasurements();
     return known.contains(id);
 }
@@ -5258,7 +5258,7 @@ void TMainWindow::InitMeasurementDimension()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::InitSearch()
 {
-    VTapeSettings *settings = MApplication::VApp()->TapeSettings();
+    VTapeSettings  const*settings = MApplication::VApp()->TapeSettings();
     m_search->SetUseUnicodePreperties(settings->GetTapeSearchOptionUseUnicodeProperties());
     m_search->SetMatchWord(settings->GetTapeSearchOptionWholeWord());
     m_search->SetMatchRegexp(settings->GetTapeSearchOptionRegexp());

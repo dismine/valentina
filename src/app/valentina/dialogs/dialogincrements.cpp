@@ -253,7 +253,7 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     m_shortcuts.insert(VShortcutAction::FindNext, ui->toolButtonFindNextPC);
     m_shortcuts.insert(VShortcutAction::FindPrevious, ui->toolButtonFindNextPC);
 
-    if (VAbstractShortcutManager *manager = VAbstractApplication::VApp()->GetShortcutManager())
+    if (VAbstractShortcutManager  const*manager = VAbstractApplication::VApp()->GetShortcutManager())
     {
         connect(manager, &VAbstractShortcutManager::ShortcutsUpdated, this, &DialogIncrements::UpdateShortcuts);
         UpdateShortcuts();
@@ -946,7 +946,7 @@ void DialogIncrements::AddNewIncrement(IncrementType type)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::InitSearch()
 {
-    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    VValentinaSettings  const*settings = VAbstractValApplication::VApp()->ValentinaSettings();
 
     m_search->SetUseUnicodePreperties(settings->GetIncrementsSearchOptionUseUnicodeProperties());
     m_search->SetMatchWord(settings->GetIncrementsSearchOptionWholeWord());
@@ -1773,7 +1773,7 @@ void DialogIncrements::ExportIncrements()
         fileName += '.'_L1 + suffix;
     }
 
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
 
     DialogExportToCSV dialog(this);
     dialog.SetWithHeader(settings->GetCSVWithHeader());
@@ -2198,7 +2198,7 @@ void DialogIncrements::SaveIncrFormula()
 
     if (const QTableWidgetItem *formulaField = table->item(row, 2); formulaField->text() == text)
     {
-        QTableWidgetItem *result = table->item(row, 1);
+        QTableWidgetItem  const*result = table->item(row, 1);
         if (incr->IsSpecialUnits())
         {
             labelCalculatedValue->setText(result->text() + QChar(QChar::Space) + degreeSymbol);
@@ -2323,7 +2323,7 @@ void DialogIncrements::Fx()
     auto *button = qobject_cast<QToolButton *>(sender());
 
     QTableWidget *table = nullptr;
-    QPlainTextEdit *plainTextEditFormula = nullptr;
+    QPlainTextEdit  const*plainTextEditFormula = nullptr;
 
     bool incrementMode = true;
     if (button == ui->toolButtonExpr)

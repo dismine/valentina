@@ -247,7 +247,7 @@ template <typename T> auto DialogTool::GetListInternals(const QListWidget *list)
     QVector<T> internals;
     for (qint32 i = 0; i < list->count(); ++i)
     {
-        QListWidgetItem *item = list->item(i);
+        QListWidgetItem  const*item = list->item(i);
         internals.append(qvariant_cast<T>(item->data(Qt::UserRole)));
     }
     return internals;

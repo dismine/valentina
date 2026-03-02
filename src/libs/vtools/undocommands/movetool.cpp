@@ -149,13 +149,13 @@ void MoveToolUp::redo()
         return;
     }
 
-    QDomNode removedCurrentElement = currentParent.removeChild(currentElement);
+    QDomNode const removedCurrentElement = currentParent.removeChild(currentElement);
     if (removedCurrentElement.isNull())
     {
         return;
     }
 
-    QDomNode insertedElement = topParent.insertAfter(removedCurrentElement, topElement);
+    QDomNode const insertedElement = topParent.insertAfter(removedCurrentElement, topElement);
     if (insertedElement.isNull())
     {
         // Try to recover

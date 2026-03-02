@@ -72,7 +72,7 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc, VContainer *patt
 
     SCASSERT(doc != nullptr)
 
-    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    VValentinaSettings  const*settings = VAbstractValApplication::VApp()->ValentinaSettings();
     settings->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
     if (VAbstractValApplication::VApp()->GetPatternPath().isEmpty())
@@ -121,7 +121,7 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc, VContainer *patt
     connect(ui->buttonBox->button(QDialogButtonBox::Apply), &QPushButton::clicked, this,
             &DialogPatternProperties::Apply);
 
-    QPushButton *bCancel = ui->buttonBox->button(QDialogButtonBox::Cancel);
+    QPushButton  const*bCancel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     SCASSERT(bCancel != nullptr)
     connect(bCancel, &QPushButton::clicked, this, &DialogPatternProperties::close);
 
@@ -418,7 +418,7 @@ void DialogPatternProperties::InitImage()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::ChangeImage()
 {
-    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    VValentinaSettings  const*settings = VAbstractValApplication::VApp()->ValentinaSettings();
 
     const QString fileName =
         QFileDialog::getOpenFileName(this, tr("Image for pattern"), settings->GetPathCustomImage(),
@@ -461,7 +461,7 @@ void DialogPatternProperties::SaveImage()
         return;
     }
 
-    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    VValentinaSettings  const*settings = VAbstractValApplication::VApp()->ValentinaSettings();
 
     QMimeType const mime = image.MimeTypeFromData();
     QString path = settings->GetPathCustomImage() + QDir::separator() + tr("untitled");

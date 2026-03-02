@@ -344,7 +344,7 @@ void VPE::QtColorPicker::buttonPressed(bool toggled)
     }
 
     // Find the screen that contains the button
-    QScreen *screen = this->screen();
+    QScreen  const*screen = this->screen();
     if (screen == nullptr)
     {
         screen = QGuiApplication::primaryScreen();

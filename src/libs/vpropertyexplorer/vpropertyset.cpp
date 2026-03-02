@@ -117,7 +117,7 @@ auto VPE::VPropertySet::takeProperty(const QString &id) -> VPE::VProperty *
 
 void VPE::VPropertySet::removeProperty(const QString &id)
 {
-    VProperty* tmpProp = takeProperty(id);
+    VProperty const* tmpProp = takeProperty(id);
     delete tmpProp;
 }
 
@@ -145,7 +145,7 @@ void VPE::VPropertySet::clear(bool delete_properties)
     d_ptr->Properties.clear();
     while (!d_ptr->RootProperties.isEmpty())
     {
-        VProperty* tmpProp = d_ptr->RootProperties.takeLast();
+        VProperty const* tmpProp = d_ptr->RootProperties.takeLast();
         if (tmpProp != nullptr && delete_properties)
         {
             delete tmpProp;

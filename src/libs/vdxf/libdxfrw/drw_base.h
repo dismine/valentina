@@ -295,7 +295,7 @@ public:
     /*!< convert to unitary vector */
     void unitize()
     {
-        double dist = std::hypot(x, y, z);
+        double const dist = std::hypot(x, y, z);
 
         if (std::isnormal(dist))
         {

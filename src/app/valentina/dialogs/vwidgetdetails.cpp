@@ -287,16 +287,16 @@ void VWidgetDetails::ShowContextMenu(const QPoint &pos)
 
     menu->addSeparator();
 
-    QAction *actionInvertSelection = menu->addAction(tr("Invert selection"));
+    QAction  const*actionInvertSelection = menu->addAction(tr("Invert selection"));
 
     bool pieceMode = false;
-    QAction *actionPieceOptions = nullptr;
+    QAction  const*actionPieceOptions = nullptr;
     QAction *actionDeletePiece = nullptr;
     VToolSeamAllowance *toolPiece = nullptr;
 
-    if (QTableWidgetItem *selectedItem = ui->tableWidget->itemAt(pos); selectedItem)
+    if (QTableWidgetItem  const*selectedItem = ui->tableWidget->itemAt(pos); selectedItem)
     {
-        QTableWidgetItem *item = ui->tableWidget->item(selectedItem->row(), PieceColumn::InLayout);
+        QTableWidgetItem  const*item = ui->tableWidget->item(selectedItem->row(), PieceColumn::InLayout);
         const quint32 id = item->data(Qt::UserRole).toUInt();
 
         try
@@ -347,7 +347,7 @@ void VWidgetDetails::ShowContextMenu(const QPoint &pos)
         actionSelectAll->setDisabled(true);
     }
 
-    QAction *selectedAction = menu->exec(ui->tableWidget->viewport()->mapToGlobal(pos));
+    QAction  const*selectedAction = menu->exec(ui->tableWidget->viewport()->mapToGlobal(pos));
 
     bool select;
     if (selectedAction == actionSelectAll)
@@ -370,7 +370,7 @@ void VWidgetDetails::ShowContextMenu(const QPoint &pos)
 
         for (int i = 0; i < ui->tableWidget->rowCount(); ++i)
         {
-            QTableWidgetItem *item = ui->tableWidget->item(i, PieceColumn::InLayout);
+            QTableWidgetItem  const*item = ui->tableWidget->item(i, PieceColumn::InLayout);
             const quint32 id = item->data(Qt::UserRole).toUInt();
             if (allDetails->contains(id))
             {

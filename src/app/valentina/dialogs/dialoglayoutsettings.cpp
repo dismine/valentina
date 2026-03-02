@@ -123,10 +123,10 @@ DialogLayoutSettings::DialogLayoutSettings(VLayoutGenerator *generator, QWidget 
     connect(ui->comboBoxLayoutUnit, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &DialogLayoutSettings::ConvertLayoutSize);
 
-    QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
+    QPushButton  const*bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     connect(bOk, &QPushButton::clicked, this, &DialogLayoutSettings::DialogAccepted);
 
-    QPushButton *bRestoreDefaults = ui->buttonBox->button(QDialogButtonBox::RestoreDefaults);
+    QPushButton  const*bRestoreDefaults = ui->buttonBox->button(QDialogButtonBox::RestoreDefaults);
     connect(bRestoreDefaults, &QPushButton::clicked, this, &DialogLayoutSettings::RestoreDefaults);
 }
 
@@ -694,7 +694,7 @@ void DialogLayoutSettings::DialogAccepted()
             if (fields.left() < minFields.left() || fields.right() < minFields.right() ||
                 fields.top() < minFields.top() || fields.bottom() < minFields.bottom())
             {
-                if (QMessageBox::StandardButton answer = QMessageBox::question(
+                if (QMessageBox::StandardButton const answer = QMessageBox::question(
                         this, tr("Wrong fields."), tr("Margins go beyond printing. \n\nApply settings anyway?"),
                         QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
                     answer == QMessageBox::No)

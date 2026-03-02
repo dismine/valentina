@@ -93,7 +93,7 @@ auto VParserErrorHandler::Column() const -> XMLFileLoc
 //---------------------------------------------------------------------------------------------------------------------
 void VParserErrorHandler::handleMessage(const XERCES_CPP_NAMESPACE::SAXParseException &ex)
 {
-    char* msg = XERCES_CPP_NAMESPACE::XMLString::transcode(ex.getMessage());
+    char *msg = XERCES_CPP_NAMESPACE::XMLString::transcode(ex.getMessage());
     m_description = QString(msg);
     m_line = ex.getLineNumber();
     m_column = ex.getColumnNumber();

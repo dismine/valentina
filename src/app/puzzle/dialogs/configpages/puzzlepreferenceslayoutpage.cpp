@@ -399,7 +399,7 @@ void PuzzlePreferencesLayoutPage::InitLayoutUnits()
     ui->comboBoxLayoutUnit->addItem(tr("Pixels"), QVariant(UnitsToStr(Unit::Px)));
 
     // set default unit
-    VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
+    VPSettings  const*settings = VPApplication::VApp()->PuzzleSettings();
     m_oldLayoutUnit = StrToUnits(settings->GetUnit());
     const qint32 indexUnit = ui->comboBoxLayoutUnit->findData(settings->GetUnit());
     if (indexUnit != -1)
@@ -650,7 +650,7 @@ void PuzzlePreferencesLayoutPage::SetPieceGap(qreal gap)
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzlePreferencesLayoutPage::ReadSettings()
 {
-    VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
+    VPSettings  const*settings = VPApplication::VApp()->PuzzleSettings();
 
     SetLayoutUnit(settings->LayoutUnit());
     m_oldLayoutUnit = LayoutUnit();

@@ -276,14 +276,14 @@ inline auto AbstractTest::ItemFromJson(const QJsonObject &object, VLayoutPassmar
     // Read "lines" array
     if (object.contains(QStringLiteral("lines")) && object[QStringLiteral("lines")].isArray())
     {
-        QJsonArray linesArray = object[QStringLiteral("lines")].toArray();
+        QJsonArray const linesArray = object[QStringLiteral("lines")].toArray();
         QVector<QLineF> lines;
 
         for (const auto lineValue : linesArray)
         {
             if (lineValue.isObject())
             {
-                QJsonObject lineObject = lineValue.toObject();
+                QJsonObject const lineObject = lineValue.toObject();
 
                 qreal x1 = 0;
                 AbstractTest::ReadDoubleValue(lineObject, QStringLiteral("x1"), x1);
@@ -312,7 +312,7 @@ inline auto AbstractTest::ItemFromJson(const QJsonObject &object, VLayoutPassmar
     // Read "baseLine" if present
     if (object.contains(QStringLiteral("baseLine")) && object[QStringLiteral("baseLine")].isObject())
     {
-        QJsonObject baseLineObject = object[QStringLiteral("baseLine")].toObject();
+        QJsonObject const baseLineObject = object[QStringLiteral("baseLine")].toObject();
 
         qreal x1 = 0;
         AbstractTest::ReadDoubleValue(baseLineObject, QStringLiteral("x1"), x1);

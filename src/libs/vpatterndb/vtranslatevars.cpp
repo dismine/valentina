@@ -628,7 +628,7 @@ auto VTranslateVars::InternalVarToUser(const QString &var) const -> QString
         return var; // We do not support translation of variables for these locales
     }
 
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
     if (!settings->IsTranslateFormula())
     {
         return var;
@@ -653,7 +653,7 @@ auto VTranslateVars::InternalVarFromUser(const QString &var) const -> QString
         return var; // We do not support translation of variables for these locales
     }
 
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
     if (!settings->IsTranslateFormula())
     {
         return var;
@@ -678,7 +678,7 @@ auto VTranslateVars::VarToUser(const QString &var) const -> QString
         return var; // We do not support translation of variables for these locales
     }
 
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
     if (!settings->IsTranslateFormula())
     {
         return var;
@@ -701,7 +701,7 @@ auto VTranslateVars::VarFromUser(const QString &var) const -> QString
         return var; // We do not support translation of variables for Chinese
     }
 
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
     if (!settings->IsTranslateFormula())
     {
         return var;
@@ -747,7 +747,7 @@ auto VTranslateVars::FormulaFromUser(const QString &formula, bool osSeparator) c
 
     QString newFormula = formula; // Local copy for making changes
 
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
     if (settings->IsTranslateFormula())
     {
         TranslateVarsFromUser(newFormula, tokens, numbers);

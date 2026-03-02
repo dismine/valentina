@@ -149,7 +149,7 @@ auto VWidgetGroups::GroupRow(vidtype id) const -> int
 {
     for (int r = 0; r < ui->tableWidget->rowCount(); ++r)
     {
-        QTableWidgetItem *item = ui->tableWidget->item(r, 0);
+        QTableWidgetItem  const*item = ui->tableWidget->item(r, 0);
         SCASSERT(item != nullptr)
 
         if (id == item->data(Qt::UserRole).toUInt())
@@ -193,7 +193,7 @@ void VWidgetGroups::ActionHideAll()
     groups.reserve(ui->tableWidget->rowCount());
     for (int r = 0; r < ui->tableWidget->rowCount(); ++r)
     {
-        QTableWidgetItem *rowItem = ui->tableWidget->item(r, 0);
+        QTableWidgetItem  const*rowItem = ui->tableWidget->item(r, 0);
         quint32 const i = rowItem->data(Qt::UserRole).toUInt();
         if (m_doc->GetGroupVisibility(i))
         {
@@ -219,7 +219,7 @@ void VWidgetGroups::ActionShowAll()
     groups.reserve(ui->tableWidget->rowCount());
     for (int r = 0; r < ui->tableWidget->rowCount(); ++r)
     {
-        QTableWidgetItem *rowItem = ui->tableWidget->item(r, 0);
+        QTableWidgetItem  const*rowItem = ui->tableWidget->item(r, 0);
         quint32 const i = rowItem->data(Qt::UserRole).toUInt();
         if (not m_doc->GetGroupVisibility(i))
         {
@@ -240,7 +240,7 @@ void VWidgetGroups::GroupVisibilityChanged(int row, int column)
     {
         return;
     }
-    QTableWidgetItem *item = ui->tableWidget->item(row, column);
+    QTableWidgetItem  const*item = ui->tableWidget->item(row, column);
     const quint32 id = item->data(Qt::UserRole).toUInt();
     SetGroupVisibility(id, not m_doc->GetGroupVisibility(id));
 }
@@ -262,7 +262,7 @@ void VWidgetGroups::RenameGroup(int row, int column)
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetGroups::CtxMenu(const QPoint &pos)
 {
-    QTableWidgetItem *item = ui->tableWidget->itemAt(pos);
+    QTableWidgetItem  const*item = ui->tableWidget->itemAt(pos);
     if (not item)
     {
         return;
@@ -276,7 +276,7 @@ void VWidgetGroups::CtxMenu(const QPoint &pos)
     {
         for (int r = 0; r < ui->tableWidget->rowCount(); ++r)
         {
-            QTableWidgetItem *rowItem = ui->tableWidget->item(r, 0);
+            QTableWidgetItem  const*rowItem = ui->tableWidget->item(r, 0);
             if (rowItem and visibility != m_doc->GetGroupVisibility(rowItem->data(Qt::UserRole).toUInt()))
             {
                 return true;
@@ -288,20 +288,20 @@ void VWidgetGroups::CtxMenu(const QPoint &pos)
 
     QScopedPointer<QMenu> const menu(new QMenu());
     const auto resource = QStringLiteral("icon");
-    QAction *triggerVisibilityMenu =
+    QAction  const*triggerVisibilityMenu =
         m_doc->GetGroupVisibility(id)
             ? menu->addAction(VTheme::GetIconResource(resource, QStringLiteral("16x16/closed_eye.png")), tr("Hide"))
             : menu->addAction(VTheme::GetIconResource(resource, QStringLiteral("16x16/open_eye.png")), tr("Show"));
 
-    QAction *actionPreferences = menu->addAction(FromTheme(VThemeIcon::PreferencesOther), tr("Preferences"));
-    QAction *actionDelete = menu->addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
+    QAction  const*actionPreferences = menu->addAction(FromTheme(VThemeIcon::PreferencesOther), tr("Preferences"));
+    QAction  const*actionDelete = menu->addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
     menu->addSeparator();
     QAction *actionHideAll = menu->addAction(tr("Hide All"));
     actionHideAll->setEnabled(MultipleChangeVisibilityTo(false));
     QAction *actionShowAll = menu->addAction(tr("Show All"));
     actionShowAll->setEnabled(MultipleChangeVisibilityTo(true));
 
-    QAction *selectedAction = menu->exec(ui->tableWidget->viewport()->mapToGlobal(pos));
+    QAction  const*selectedAction = menu->exec(ui->tableWidget->viewport()->mapToGlobal(pos));
 
     if (selectedAction == triggerVisibilityMenu)
     {

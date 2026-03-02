@@ -111,7 +111,7 @@ DialogFinalMeasurements::DialogFinalMeasurements(VPattern *doc, QWidget *parent)
     m_shortcuts.insert(VShortcutAction::FindNext, ui->toolButtonFindNext);
     m_shortcuts.insert(VShortcutAction::FindPrevious, ui->toolButtonFindNext);
 
-    if (VAbstractShortcutManager *manager = VAbstractApplication::VApp()->GetShortcutManager())
+    if (VAbstractShortcutManager  const*manager = VAbstractApplication::VApp()->GetShortcutManager())
     {
         connect(manager, &VAbstractShortcutManager::ShortcutsUpdated, this, &DialogFinalMeasurements::UpdateShortcuts);
         UpdateShortcuts();
@@ -390,7 +390,7 @@ void DialogFinalMeasurements::SaveFormula()
 
     if (const QTableWidgetItem *formulaField = ui->tableWidget->item(row, 2); formulaField->text() == text)
     {
-        QTableWidgetItem *result = ui->tableWidget->item(row, 1);
+        QTableWidgetItem  const*result = ui->tableWidget->item(row, 1);
         // Show unit in dialog lable (cm, mm or inch)
         const QString postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits());
         ui->labelCalculatedValue->setText(result->text() + QChar(QChar::Space) + postfix);
@@ -754,7 +754,7 @@ void DialogFinalMeasurements::InitSearch()
 {
     m_search = QSharedPointer<VTableSearch>(new VTableSearch(ui->tableWidget));
 
-    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    VValentinaSettings  const*settings = VAbstractValApplication::VApp()->ValentinaSettings();
     m_search->SetUseUnicodePreperties(settings->GetFinalMeasurementsSearchOptionUseUnicodeProperties());
     m_search->SetMatchWord(settings->GetFinalMeasurementsSearchOptionWholeWord());
     m_search->SetMatchRegexp(settings->GetFinalMeasurementsSearchOptionRegexp());

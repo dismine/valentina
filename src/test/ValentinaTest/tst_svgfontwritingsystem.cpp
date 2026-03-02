@@ -44,7 +44,7 @@ void TST_SVGFontWritingSystem::TestSimplifiedChineseWritingSystemValidCases_data
 {
     QFile file("://svg_font_writing_system/simplified_chinese_writing_system.json");
     QVERIFY(file.open(QIODevice::ReadOnly));
-    QJsonDocument doc = QJsonDocument::fromJson(file.readAll());
+    QJsonDocument const doc = QJsonDocument::fromJson(file.readAll());
     QJsonObject root = doc.object();
 
     QTest::addColumn<QChar>("input");
@@ -102,7 +102,7 @@ void TST_SVGFontWritingSystem::TestTraditionalChineseWritingSystemValidCases_dat
 {
     QFile file("://svg_font_writing_system/traditional_chinese_writing_system.json");
     QVERIFY(file.open(QIODevice::ReadOnly));
-    QJsonDocument doc = QJsonDocument::fromJson(file.readAll());
+    QJsonDocument const doc = QJsonDocument::fromJson(file.readAll());
     QJsonObject root = doc.object();
 
     QTest::addColumn<QChar>("input");

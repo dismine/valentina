@@ -293,7 +293,7 @@ void VGAnalytics::SendAppCloseEvent(qint64 engagementTimeMsec)
     };
 
     SendEvent(QStringLiteral("vapp_close"), params);
-    if (QNetworkReply *reply = d->SendAnalytics())
+    if (QNetworkReply  const*reply = d->SendAnalytics())
     {
         QTimer timer;
         timer.setSingleShot(true);

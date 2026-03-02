@@ -366,7 +366,7 @@ auto VSvgFontEngine::BoundingRect(const QString &str, qreal penWidth) const -> Q
     QPainterPath path = DrawPath(QPointF(), str, penWidth);
 
     // Shift path if top-left is positive
-    if (QPointF offset = CalcOffset(path); !offset.isNull())
+    if (QPointF const offset = CalcOffset(path); !offset.isNull())
     {
         path.translate(-offset);
     }

@@ -221,12 +221,12 @@ void DialogInsertNode::ShowContextMenu(const QPoint &pos)
 
     QScopedPointer<QMenu> const menu(new QMenu());
 
-    QListWidgetItem *rowItem = ui->listWidget->item(row);
+    QListWidgetItem  const*rowItem = ui->listWidget->item(row);
     SCASSERT(rowItem != nullptr)
 
     const QAction *actionDelete = menu->addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
 
-    QAction *selectedAction = menu->exec(ui->listWidget->viewport()->mapToGlobal(pos));
+    QAction  const*selectedAction = menu->exec(ui->listWidget->viewport()->mapToGlobal(pos));
     if (selectedAction == actionDelete)
     {
         delete rowItem;
@@ -238,7 +238,7 @@ void DialogInsertNode::ShowContextMenu(const QPoint &pos)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogInsertNode::NodeSelected()
 {
-    QListWidgetItem *item = ui->listWidget->currentItem();
+    QListWidgetItem  const*item = ui->listWidget->currentItem();
 
     if (item == nullptr)
     {
@@ -257,7 +257,7 @@ void DialogInsertNode::NodeSelected()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogInsertNode::NodeNumberChanged(int val)
 {
-    QListWidgetItem *item = ui->listWidget->currentItem();
+    QListWidgetItem  const*item = ui->listWidget->currentItem();
 
     if (item == nullptr)
     {

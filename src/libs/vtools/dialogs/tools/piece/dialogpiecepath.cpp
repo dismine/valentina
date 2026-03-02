@@ -1780,7 +1780,7 @@ auto DialogPiecePath::GetLastId() const -> quint32
     const int count = ui->listWidget->count();
     if (count > 0)
     {
-        QListWidgetItem *item = ui->listWidget->item(count - 1);
+        QListWidgetItem  const*item = ui->listWidget->item(count - 1);
         const auto node = qvariant_cast<VPieceNode>(item->data(Qt::UserRole));
         return node.GetId();
     }
@@ -2047,7 +2047,7 @@ auto DialogPiecePath::CreatePath() const -> VPiecePath
     VPiecePath path;
     for (qint32 i = 0; i < ui->listWidget->count(); ++i)
     {
-        QListWidgetItem *item = ui->listWidget->item(i);
+        QListWidgetItem  const*item = ui->listWidget->item(i);
         path.Append(qvariant_cast<VPieceNode>(item->data(Qt::UserRole)));
     }
 

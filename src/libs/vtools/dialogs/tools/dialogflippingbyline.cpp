@@ -381,7 +381,7 @@ void DialogFlippingByLine::ShowSourceDetails(int row)
         {
             const QSignalBlocker blocker(box);
 
-            if (int index = box->findData(value); index != -1)
+            if (int const index = box->findData(value); index != -1)
             {
                 box->setCurrentIndex(index);
             }

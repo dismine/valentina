@@ -106,7 +106,7 @@ QByteArray QLatin15Codec::convertFromUnicode(const QChar *ch, int len, Converter
     for (int i = 0; i < len; ++i)
     {
         uchar c;
-        ushort uc = ch[i].unicode();
+        ushort const uc = ch[i].unicode();
         if (uc < 0x0100) {
             if (uc > 0xa3) {
                 switch(uc) {

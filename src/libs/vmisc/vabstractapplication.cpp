@@ -513,7 +513,7 @@ auto VAbstractApplication::GetShortcutManager() const -> VAbstractShortcutManage
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractApplication::GetPlaceholderTranslator() -> QSharedPointer<VTranslator>
 {
-    VCommonSettings *settings = Settings();
+    VCommonSettings  const*settings = Settings();
 
     QString pieceLabelLocale = settings->GetPieceLabelLocale();
     if (pieceLabelLocale == VCommonSettings::defaultPieceLabelLocale)

@@ -996,7 +996,7 @@ void DialogSeamAllowance::showEvent(QShowEvent *event)
         uiTabLabels->lineEditPatternNumber->setText(m_doc->GetPatternNumber());
         uiTabLabels->lineEditCompanyName->setText(m_doc->GetCompanyName());
 
-        VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+        VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
         m_patternMaterials = m_doc->GetPatternMaterials();
 
         InitComboBoxFormats(uiTabLabels->comboBoxDateFormat,
@@ -1229,7 +1229,7 @@ void DialogSeamAllowance::ShowCustomSAContextMenu(const QPoint &pos)
     }
 
     QScopedPointer<QMenu> const menu(new QMenu());
-    QAction *actionOption = menu->addAction(FromTheme(VThemeIcon::PreferencesOther), tr("Options"));
+    QAction  const*actionOption = menu->addAction(FromTheme(VThemeIcon::PreferencesOther), tr("Options"));
 
     QListWidgetItem *rowItem = uiTabPaths->listWidgetCustomSA->item(row);
     SCASSERT(rowItem != nullptr)
@@ -1239,9 +1239,9 @@ void DialogSeamAllowance::ShowCustomSAContextMenu(const QPoint &pos)
     actionReverse->setCheckable(true);
     actionReverse->setChecked(record.reverse);
 
-    QAction *actionDelete = menu->addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
+    QAction  const*actionDelete = menu->addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
 
-    QAction *selectedAction = menu->exec(uiTabPaths->listWidgetCustomSA->viewport()->mapToGlobal(pos));
+    QAction  const*selectedAction = menu->exec(uiTabPaths->listWidgetCustomSA->viewport()->mapToGlobal(pos));
     if (selectedAction == actionDelete)
     {
         delete uiTabPaths->listWidgetCustomSA->item(row);
@@ -1281,17 +1281,17 @@ void DialogSeamAllowance::ShowInternalPathsContextMenu(const QPoint &pos)
     }
 
     QScopedPointer<QMenu> const menu(new QMenu());
-    QAction *actionOption = menu->addAction(FromTheme(VThemeIcon::PreferencesOther), tr("Options"));
-    QAction *actionDelete = menu->addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
+    QAction  const*actionOption = menu->addAction(FromTheme(VThemeIcon::PreferencesOther), tr("Options"));
+    QAction  const*actionDelete = menu->addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
 
-    QAction *selectedAction = menu->exec(uiTabPaths->listWidgetInternalPaths->viewport()->mapToGlobal(pos));
+    QAction  const*selectedAction = menu->exec(uiTabPaths->listWidgetInternalPaths->viewport()->mapToGlobal(pos));
     if (selectedAction == actionDelete)
     {
         delete uiTabPaths->listWidgetInternalPaths->item(row);
     }
     else if (selectedAction == actionOption)
     {
-        QListWidgetItem *rowItem = uiTabPaths->listWidgetInternalPaths->item(row);
+        QListWidgetItem  const*rowItem = uiTabPaths->listWidgetInternalPaths->item(row);
         SCASSERT(rowItem != nullptr)
         const auto pathId = qvariant_cast<quint32>(rowItem->data(Qt::UserRole));
 
@@ -1316,9 +1316,9 @@ void DialogSeamAllowance::ShowPinsContextMenu(const QPoint &pos)
     }
 
     QScopedPointer<QMenu> const menu(new QMenu());
-    QAction *actionDelete = menu->addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
+    QAction  const*actionDelete = menu->addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
 
-    QAction *selectedAction = menu->exec(uiTabPins->listWidgetPins->viewport()->mapToGlobal(pos));
+    QAction  const*selectedAction = menu->exec(uiTabPins->listWidgetPins->viewport()->mapToGlobal(pos));
     if (selectedAction == actionDelete)
     {
         delete uiTabPins->listWidgetPins->item(row);
@@ -1337,7 +1337,7 @@ void DialogSeamAllowance::ShowPlaceLabelsContextMenu(const QPoint &pos)
         return;
     }
 
-    QListWidgetItem *rowItem = uiTabPlaceLabels->listWidgetPlaceLabels->item(row);
+    QListWidgetItem  const*rowItem = uiTabPlaceLabels->listWidgetPlaceLabels->item(row);
     SCASSERT(rowItem != nullptr)
     const auto labelId = qvariant_cast<quint32>(rowItem->data(Qt::UserRole));
     VPlaceLabelItem currentLabel = CurrentPlaceLabel(labelId);
@@ -1365,22 +1365,22 @@ void DialogSeamAllowance::ShowPlaceLabelsContextMenu(const QPoint &pos)
         UpdateCurrentPlaceLabelRecords();
     };
 
-    QAction *actionOption = menu->addAction(FromTheme(VThemeIcon::PreferencesOther), tr("Options"));
+    QAction  const*actionOption = menu->addAction(FromTheme(VThemeIcon::PreferencesOther), tr("Options"));
     menu->addSeparator();
-    QAction *actionSegment = InitAction(tr("Segment"), PlaceLabelType::Segment);
-    QAction *actionRectangle = InitAction(tr("Rectangle"), PlaceLabelType::Rectangle);
-    QAction *actionCross = InitAction(tr("Cross"), PlaceLabelType::Cross);
-    QAction *actionTshaped = InitAction(tr("T-shaped"), PlaceLabelType::Tshaped);
-    QAction *actionDoubletree = InitAction(tr("Doubletree"), PlaceLabelType::Doubletree);
-    QAction *actionCorner = InitAction(tr("Corner"), PlaceLabelType::Corner);
-    QAction *actionTriangle = InitAction(tr("Triangle"), PlaceLabelType::Triangle);
-    QAction *actionHshaped = InitAction(tr("H-shaped"), PlaceLabelType::Hshaped);
-    QAction *actionButton = InitAction(tr("Button"), PlaceLabelType::Button);
-    QAction *actionCircle = InitAction(tr("Circle"), PlaceLabelType::Circle);
+    QAction  const*actionSegment = InitAction(tr("Segment"), PlaceLabelType::Segment);
+    QAction  const*actionRectangle = InitAction(tr("Rectangle"), PlaceLabelType::Rectangle);
+    QAction  const*actionCross = InitAction(tr("Cross"), PlaceLabelType::Cross);
+    QAction  const*actionTshaped = InitAction(tr("T-shaped"), PlaceLabelType::Tshaped);
+    QAction  const*actionDoubletree = InitAction(tr("Doubletree"), PlaceLabelType::Doubletree);
+    QAction  const*actionCorner = InitAction(tr("Corner"), PlaceLabelType::Corner);
+    QAction  const*actionTriangle = InitAction(tr("Triangle"), PlaceLabelType::Triangle);
+    QAction  const*actionHshaped = InitAction(tr("H-shaped"), PlaceLabelType::Hshaped);
+    QAction  const*actionButton = InitAction(tr("Button"), PlaceLabelType::Button);
+    QAction  const*actionCircle = InitAction(tr("Circle"), PlaceLabelType::Circle);
     menu->addSeparator();
-    QAction *actionDelete = menu->addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
+    QAction  const*actionDelete = menu->addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
 
-    QAction *selectedAction = menu->exec(uiTabPlaceLabels->listWidgetPlaceLabels->viewport()->mapToGlobal(pos));
+    QAction  const*selectedAction = menu->exec(uiTabPlaceLabels->listWidgetPlaceLabels->viewport()->mapToGlobal(pos));
     if (selectedAction == actionDelete)
     {
         delete uiTabPlaceLabels->listWidgetPlaceLabels->item(row);
@@ -3634,7 +3634,7 @@ auto DialogSeamAllowance::GetItemById(quint32 id) -> QListWidgetItem *
 {
     for (qint32 i = 0; i < uiTabPaths->listWidgetMainPath->count(); ++i)
     {
-        QListWidgetItem *item = uiTabPaths->listWidgetMainPath->item(i);
+        QListWidgetItem  *item = uiTabPaths->listWidgetMainPath->item(i);
         const auto node = qvariant_cast<VPieceNode>(item->data(Qt::UserRole));
 
         if (node.GetId() == id)
@@ -3651,7 +3651,7 @@ auto DialogSeamAllowance::GetLastId() const -> quint32
     const int count = uiTabPaths->listWidgetMainPath->count();
     if (count > 0)
     {
-        QListWidgetItem *item = uiTabPaths->listWidgetMainPath->item(count - 1);
+        QListWidgetItem  const*item = uiTabPaths->listWidgetMainPath->item(count - 1);
         const auto node = qvariant_cast<VPieceNode>(item->data(Qt::UserRole));
         return node.GetId();
     }
@@ -4012,7 +4012,7 @@ void DialogSeamAllowance::InitPieceTab()
                 }
             });
 
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
     uiTabPaths->checkBoxForbidFlipping->setChecked(settings->GetForbidWorkpieceFlipping());
     uiTabPaths->checkBoxForceFlipping->setChecked(settings->GetForceWorkpieceFlipping());
     uiTabPaths->checkBoxOnDrawing->setChecked(settings->GetSewLineOnDrawing());
@@ -4975,7 +4975,7 @@ void DialogSeamAllowance::SetPLAngle(QString angleFormula)
 auto DialogSeamAllowance::CurrentRect() const -> QRectF
 {
     QRectF rect;
-    if (QListWidgetItem *item = uiTabPlaceLabels->listWidgetPlaceLabels->currentItem())
+    if (QListWidgetItem  const*item = uiTabPlaceLabels->listWidgetPlaceLabels->currentItem())
     {
         VPlaceLabelItem const label = CurrentPlaceLabel(qvariant_cast<quint32>(item->data(Qt::UserRole)));
         rect = QRectF(QPointF(label.x() - label.GetWidth() / 2.0, label.y() - label.GetHeight() / 2.0),

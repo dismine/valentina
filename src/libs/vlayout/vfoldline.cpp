@@ -786,7 +786,7 @@ auto VFoldLine::LabelTextHeight() const -> qreal
 //---------------------------------------------------------------------------------------------------------------------
 auto VFoldLine::LabelSVGFontEngine(VSvgFontEngine &engine) const -> bool
 {
-    VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
+    VSvgFontDatabase  const*db = VAbstractApplication::VApp()->SVGFontDatabase();
     VSvgFontEngine const svgEngine =
         db->FontEngine(m_svgFont, SVGFontStyle::Normal, SVGFontWeight::Normal, static_cast<int>(m_svgFontSize));
     VSvgFont svgFont = svgEngine.Font();

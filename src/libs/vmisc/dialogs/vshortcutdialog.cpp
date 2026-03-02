@@ -48,7 +48,7 @@ auto ShortcutAlreadyBound(const QKeySequence &chosenSequence, const VShortcutAct
         return {};
     }
 
-    VAbstractShortcutManager *manager = VAbstractApplication::VApp()->GetShortcutManager();
+    VAbstractShortcutManager  const*manager = VAbstractApplication::VApp()->GetShortcutManager();
     if (manager == nullptr)
     {
         return {};

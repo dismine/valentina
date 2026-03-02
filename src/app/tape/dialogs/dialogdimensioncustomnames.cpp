@@ -50,7 +50,7 @@ auto DialogDimensionCustomNames::CustomNames() const -> QMap<MeasurementDimensio
     const int rows = ui->tableWidget->rowCount();
     for (int row = 0; row < rows; ++row)
     {
-        QTableWidgetItem *item = ui->tableWidget->item(row, 1);
+        QTableWidgetItem  const*item = ui->tableWidget->item(row, 1);
         if (item != nullptr)
         {
             names.insert(static_cast<MeasurementDimension>(item->data(Qt::UserRole).toInt()), item->text());

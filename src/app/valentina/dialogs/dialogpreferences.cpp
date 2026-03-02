@@ -56,11 +56,11 @@ DialogPreferences::DialogPreferences(QWidget *parent)
 
     VAbstractApplication::VApp()->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
-    QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
+    QPushButton  const*bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     SCASSERT(bOk != nullptr)
     connect(bOk, &QPushButton::clicked, this, &DialogPreferences::Ok);
 
-    QPushButton *bApply = ui->buttonBox->button(QDialogButtonBox::Apply);
+    QPushButton  const*bApply = ui->buttonBox->button(QDialogButtonBox::Apply);
     SCASSERT(bApply != nullptr)
     connect(bApply, &QPushButton::clicked, this, &DialogPreferences::Apply);
 

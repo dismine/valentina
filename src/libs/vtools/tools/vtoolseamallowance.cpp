@@ -1091,7 +1091,7 @@ void VToolSeamAllowance::DisconnectOutsideSignals()
     // Because this object should be inactive from no one we disconnect all signals that may cause a crash
     // KEEP THIS LIST ACTUALL!!!
     disconnect(doc, nullptr, this, nullptr);
-    if (QGraphicsScene *toolScene = scene())
+    if (QGraphicsScene  const*toolScene = scene())
     {
         disconnect(toolScene, nullptr, this, nullptr);
     }
@@ -1537,7 +1537,7 @@ void VToolSeamAllowance::paint(QPainter *painter, const QStyleOptionGraphicsItem
     mirrorLinePen.setStyle(Qt::DashDotLine);
     m_mirrorLine->setPen(mirrorLinePen);
 
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
     if (settings->GetSingleStrokeOutlineFont() || settings->GetSingleLineFonts())
     {
         m_foldLineLabel->setBrush(Qt::NoBrush);
@@ -1793,7 +1793,7 @@ void VToolSeamAllowance::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     }
 
     QMenu menu;
-    QAction *actionOption = menu.addAction(FromTheme(VThemeIcon::PreferencesOther), tr("Options"));
+    QAction  const*actionOption = menu.addAction(FromTheme(VThemeIcon::PreferencesOther), tr("Options"));
 
     const VPiece detail = VAbstractTool::data.GetPiece(m_id);
 
@@ -1831,7 +1831,7 @@ void VToolSeamAllowance::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     QAction *actionRemove = menu.addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
     actionRemove->setEnabled(IsRemovable() == RemoveStatus::Removable);
 
-    QAction *selectedAction = menu.exec(event->screenPos());
+    QAction  const*selectedAction = menu.exec(event->screenPos());
     if (selectedAction == actionOption)
     {
         ShowOptions();
@@ -2072,7 +2072,7 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
 
     const VPiece detail = VAbstractTool::data.GetPiece(m_id);
 
-    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    VValentinaSettings  const*settings = VAbstractValApplication::VApp()->ValentinaSettings();
     const bool combineTogether = settings->IsBoundaryTogetherWithNotches();
 
     QFuture<QPainterPath> const futurePath = QtConcurrent::run(
@@ -2756,7 +2756,7 @@ auto VToolSeamAllowance::PrepareLabelData(const VPatternLabelData &labelData, co
     }
     labelItem->SetMoveType(type);
 
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
     QFont fnt = settings->GetLabelFont();
     {
         const int iFS = labelData.GetFontSize() < VCommonSettings::MinPieceLabelFontPointSize()
@@ -3011,7 +3011,7 @@ void VToolSeamAllowance::UpdateFoldLine(const VFoldLine &foldLine)
         return;
     }
 
-    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    VValentinaSettings  const*settings = VAbstractValApplication::VApp()->ValentinaSettings();
 
     if (settings->GetSingleStrokeOutlineFont() || settings->GetSingleLineFonts())
     {

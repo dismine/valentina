@@ -656,7 +656,7 @@ void VHPGLEngine::PlotLabelSVGFont(QTextStream &out, const VLayoutPiece &detail,
         return;
     }
 
-    VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
+    VSvgFontDatabase  const*db = VAbstractApplication::VApp()->SVGFontDatabase();
     VSvgFontEngine engine =
         db->FontEngine(tm.GetSVGFontFamily(), SVGFontStyle::Normal, SVGFontWeight::Normal, tm.GetSVGFontPointSize());
 
@@ -713,7 +713,7 @@ void VHPGLEngine::PlotLabelOutlineFont(QTextStream &out, const VLayoutPiece &det
 
     qreal dY = 0;
 
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
 
     if (m_singleStrokeOutlineFont)
     {

@@ -446,7 +446,7 @@ auto AbstractTest::CopyRecursively(const QString &srcFilePath, const QString &tg
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 8, 0)
         using ItFlag = QDirListing::IteratorFlag;
-        QDirListing sourceDirListing(srcFilePath, ItFlag::IncludeHidden);
+        QDirListing const sourceDirListing(srcFilePath, ItFlag::IncludeHidden);
         for (const auto &entry : sourceDirListing)
         {
             const QString newSrcFilePath = entry.absoluteFilePath();

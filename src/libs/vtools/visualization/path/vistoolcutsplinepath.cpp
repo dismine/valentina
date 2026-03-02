@@ -72,13 +72,13 @@ void VisToolCutSplinePath::RefreshGeometry()
         {
             VSplinePath *spPath1 = nullptr;
             VSplinePath *spPath2 = nullptr;
-            VPointF *p = VToolCutSplinePath::CutSplinePath(m_length, splPath, QChar('X'), &spPath1, &spPath2);
-            SCASSERT(p != nullptr)
+            QScopedPointer<VPointF> const p(
+                VToolCutSplinePath::CutSplinePath(m_length, splPath, QChar('X'), &spPath1, &spPath2));
+            SCASSERT(!p.isNull())
             SCASSERT(spPath1 != nullptr)
             SCASSERT(spPath2 != nullptr)
 
             DrawPoint(m_point, static_cast<QPointF>(*p));
-            delete p;
 
             DrawPath(m_splPath1, spPath1->GetPath(), spPath1->DirectionArrows(), LineStyle(), Qt::RoundCap);
             DrawPath(m_splPath2, spPath2->GetPath(), spPath2->DirectionArrows(), LineStyle(), Qt::RoundCap);

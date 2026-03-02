@@ -70,7 +70,7 @@ DialogSaveManualLayout::DialogSaveManualLayout(vsizetype count, bool consoleExpo
     setWindowFlags(Qt::Window);
 #endif
 
-    VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
+    VPSettings  const*settings = VPApplication::VApp()->PuzzleSettings();
     settings->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
     if (settings->GetSingleLineFonts() || settings->GetSingleStrokeOutlineFont())
@@ -662,7 +662,7 @@ void DialogSaveManualLayout::ShowExample()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSaveManualLayout::ReadSettings()
 {
-    VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
+    VPSettings  const*settings = VPApplication::VApp()->PuzzleSettings();
     try
     {
         SelectFormat(static_cast<LayoutExportFormats>(settings->GetLayoutExportFormat()));

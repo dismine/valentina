@@ -46,7 +46,7 @@ VPE::VPropertyDelegate::~VPropertyDelegate()
 auto VPE::VPropertyDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option,
                                           const QModelIndex &index) const -> QWidget *
 {
-    QWidget* tmpWidget = nullptr;
+    QWidget *tmpWidget = nullptr;
     if (index.isValid())
     {
         auto *tmpProperty = reinterpret_cast<VProperty *>(index.internalPointer());

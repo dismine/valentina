@@ -167,7 +167,7 @@ void VSingleLineOutlineChar::LoadCorrections(const QString &dirPath) const
 #if QT_VERSION >= QT_VERSION_CHECK(6, 8, 0)
     using F = QDirListing::IteratorFlag;
 
-    QDirListing dirListing(dirPath, QStringList(fileName), F::FilesOnly);
+    QDirListing const dirListing(dirPath, QStringList(fileName), F::FilesOnly);
     QString filePath;
     for (const auto &entry : dirListing)
     {

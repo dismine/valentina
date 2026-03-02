@@ -82,7 +82,7 @@ public:
     {
         for (auto it = e.extData.begin(); it != e.extData.end(); ++it)
         {
-            DRW_Variant *src = *it;
+            DRW_Variant  const*src = *it;
             auto *dst = new DRW_Variant(*src);
             extData.push_back(dst);
             if (src == e.curr)

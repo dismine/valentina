@@ -976,7 +976,7 @@ void InitDialogButtonBoxIcons(QDialogButtonBox *buttonBox)
 {
     SCASSERT(buttonBox != nullptr)
 
-    QStyle *style = QApplication::style();
+    QStyle  const*style = QApplication::style();
 
     if (QPushButton *bOk = buttonBox->button(QDialogButtonBox::Ok))
     {

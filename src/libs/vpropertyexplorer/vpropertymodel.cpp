@@ -110,10 +110,10 @@ auto VPE::VPropertyModel::index(int row, int column, const QModelIndex &parent) 
     if (parent.isValid())
     {
         // Get the parent index
-        VProperty* parentItem = getProperty(parent);
+        VProperty const* parentItem = getProperty(parent);
         if (parentItem)
         {
-            VProperty* childItem = parentItem->getChild(row);
+            VProperty const* childItem = parentItem->getChild(row);
             if (childItem)
             {
                 return createIndex(row, column, childItem);
@@ -136,11 +136,11 @@ auto VPE::VPropertyModel::parent(const QModelIndex &index) const -> QModelIndex
         return {};
     }
 
-    if (VProperty *childItem = getProperty(index))
+    if (VProperty  const*childItem = getProperty(index))
     {
         if (VProperty *parentItem = childItem->getParent())
         {
-            VProperty* grandParentItem = parentItem->getParent();
+            VProperty const* grandParentItem = parentItem->getParent();
             vpesizetype const parents_row = grandParentItem != nullptr
                                                 ? grandParentItem->getChildRow(parentItem)
                                                 : vproperty_d_ptr->Properties->getRootProperties().indexOf(parentItem);
@@ -158,7 +158,7 @@ auto VPE::VPropertyModel::parent(const QModelIndex &index) const -> QModelIndex
 //! Returns the item flags for the given index
 auto VPE::VPropertyModel::flags(const QModelIndex &index) const -> Qt::ItemFlags
 {
-    VProperty* tmpProperty = getProperty(index);
+    VProperty const* tmpProperty = getProperty(index);
     if (!tmpProperty)
     {
         return Qt::NoItemFlags;
@@ -194,7 +194,7 @@ auto VPE::VPropertyModel::setData(const QModelIndex &index, const QVariant &valu
 //! Returns the data of an model index
 auto VPE::VPropertyModel::data(const QModelIndex &index, int role) const -> QVariant
 {
-    VProperty* tmpProperty = getProperty(index);
+    VProperty const* tmpProperty = getProperty(index);
     if (!tmpProperty)
     {
         return QVariant();
@@ -231,7 +231,7 @@ auto VPE::VPropertyModel::rowCount(const QModelIndex &parent) const -> int
 {
     if (parent.isValid())
     {
-        VProperty* tmpParent = getProperty(parent);
+        VProperty const* tmpParent = getProperty(parent);
         if (tmpParent)
         {
             return static_cast<int>(tmpParent->getRowCount());
@@ -283,7 +283,7 @@ auto VPE::VPropertyModel::getIndexFromProperty(VProperty *property, int column) 
         return {};
     }
 
-    VProperty* parentItem = property->getParent();
+    VProperty const* parentItem = property->getParent();
     vpesizetype row = 0;
 
     if (parentItem)
@@ -317,7 +317,7 @@ void VPE::VPropertyModel::clear(bool emit_signals)
 
 auto VPE::VPropertyModel::takePropertySet(VPropertySet *new_property_set, bool emit_signals) -> VPE::VPropertySet *
 {
-    VPropertySet* tmpOldPropertySet = vproperty_d_ptr->Properties;
+    VPropertySet *tmpOldPropertySet = vproperty_d_ptr->Properties;
 
     if (emit_signals)
     {
@@ -334,7 +334,7 @@ auto VPE::VPropertyModel::takePropertySet(VPropertySet *new_property_set, bool e
 
 void VPE::VPropertyModel::setPropertySet(VPropertySet *property_set, bool emit_signals)
 {
-    VPropertySet* tmpOldPropertySet = takePropertySet(property_set, emit_signals);
+    VPropertySet const* tmpOldPropertySet = takePropertySet(property_set, emit_signals);
     delete tmpOldPropertySet;
 }
 
@@ -344,7 +344,7 @@ auto VPE::VPropertyModel::takeProperty(const QString &id) -> VPE::VProperty *
     if (vproperty_d_ptr->Properties && tmpIndex.isValid())
     {
         beginRemoveRows(tmpIndex.parent(), tmpIndex.row(), tmpIndex.row());
-        VProperty* tmpProp = vproperty_d_ptr->Properties->takeProperty(id);
+        VProperty *tmpProp = vproperty_d_ptr->Properties->takeProperty(id);
         endRemoveRows();
         return tmpProp;
     }

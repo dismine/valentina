@@ -64,7 +64,7 @@ DialogLayoutProgress::DialogLayoutProgress(QElapsedTimer timer, qint64 timeout, 
     ui->labelProgress->setMovie(m_movie);
     m_movie->start();
 
-    QPushButton *bCancel = ui->buttonBox->button(QDialogButtonBox::Cancel);
+    QPushButton  const*bCancel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     SCASSERT(bCancel != nullptr)
     connect(bCancel, &QPushButton::clicked, this, [this]() { emit Abort(); });
     setModal(true);

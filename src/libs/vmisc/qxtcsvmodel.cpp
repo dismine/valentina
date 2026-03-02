@@ -653,8 +653,8 @@ auto QxtCsvModel::toCSV(QIODevice *file, QString &error, bool withHeader, QChar 
     };
 
     const QxtCsvModelPrivate &d_ptr = qxt_d();
-    int rows = rowCount();
-    int cols = columnCount();
+    int const rows = rowCount();
+    int const cols = columnCount();
 
     // Write header
     if (withHeader)

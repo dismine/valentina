@@ -333,7 +333,7 @@ void VPMainGraphicsView::contextMenuEvent(QContextMenuEvent *event)
     QAction *removeSheetAction = menu.addAction(FromTheme(VThemeIcon::EditDelete), tr("Remove sheet"));
     removeSheetAction->setEnabled(not sheet.isNull() && layout->GetSheets().size() > 1);
 
-    QAction *selectedAction = menu.exec(event->globalPos());
+    QAction  const*selectedAction = menu.exec(event->globalPos());
     if (selectedAction == removeSheetAction)
     {
         layout->UndoStack()->push(new VPUndoRemoveSheet(sheet));

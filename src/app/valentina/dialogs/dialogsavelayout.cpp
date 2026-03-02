@@ -133,7 +133,7 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
     connect(ui->pushButtonBrowse, &QPushButton::clicked, this,
             [this]()
             {
-                VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+                VValentinaSettings  const*settings = VAbstractValApplication::VApp()->ValentinaSettings();
                 const QString dirPath = settings->GetPathLayoutExport();
 
                 const QString dir = QFileDialog::getExistingDirectory(
@@ -554,7 +554,7 @@ void DialogSaveLayout::ShowExample()
     ui->labelDxfCompatibility->setVisible(false);
     ui->comboBoxDxfCompatibility->setVisible(false);
 
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
 
     switch (currentFormat)
     {
@@ -802,7 +802,7 @@ void DialogSaveLayout::showEvent(QShowEvent *event)
  */
 void DialogSaveLayout::ReadSettings()
 {
-    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    VValentinaSettings  const*settings = VAbstractValApplication::VApp()->ValentinaSettings();
     const Unit unit = VAbstractValApplication::VApp()->patternUnits();
 
     // read Margins top, right, bottom, left

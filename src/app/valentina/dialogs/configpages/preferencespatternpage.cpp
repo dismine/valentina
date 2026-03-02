@@ -87,7 +87,7 @@ PreferencesPatternPage::PreferencesPatternPage(QWidget *parent)
     VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->comboBoxTimeFormats);
     VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->spinBoxOpacity);
 
-    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    VValentinaSettings  const*settings = VAbstractValApplication::VApp()->ValentinaSettings();
 
     ui->graphOutputCheck->setChecked(settings->GetGraphicalOutput());
     ui->checkBoxOpenGLRender->setChecked(settings->IsOpenGLRender());
@@ -294,7 +294,7 @@ void PreferencesPatternPage::changeEvent(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void PreferencesPatternPage::EditDateTimeFormats()
 {
-    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    VValentinaSettings  const*settings = VAbstractValApplication::VApp()->ValentinaSettings();
 
     auto *button = qobject_cast<QPushButton *>(sender());
     if (button == ui->pushButtonEditDateFormats)
@@ -324,7 +324,7 @@ void PreferencesPatternPage::ManageKnownMaterials()
 //---------------------------------------------------------------------------------------------------------------------
 void PreferencesPatternPage::InitLabelDateTimeFormats()
 {
-    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    VValentinaSettings  const*settings = VAbstractValApplication::VApp()->ValentinaSettings();
 
     InitComboBoxFormats(ui->comboBoxDateFormats,
                         VCommonSettings::PredefinedDateFormats() + settings->GetUserDefinedDateFormats(),
@@ -356,7 +356,7 @@ void PreferencesPatternPage::InitLabelFontSizes()
 //---------------------------------------------------------------------------------------------------------------------
 void PreferencesPatternPage::InitSingleLineFonts()
 {
-    QScreen *primaryScreen = QGuiApplication::primaryScreen();
+    QScreen  const*primaryScreen = QGuiApplication::primaryScreen();
 
     // Retrieve the screen's physical DPI values and scale factor
     const qreal dpiX = primaryScreen->physicalDotsPerInchX();
@@ -381,7 +381,7 @@ void PreferencesPatternPage::InitSingleLineFonts()
     QPen pen(Qt::SolidPattern, 1 * scale, Qt::SolidLine, Qt::RoundCap, Qt::SvgMiterJoin);
     pen.setColor(ui->comboBoxSingleLineFont->palette().color(QPalette::Text));
 
-    VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
+    VSvgFontDatabase  const*db = VAbstractApplication::VApp()->SVGFontDatabase();
     QStringList families = db->Families();
     families.sort();
 

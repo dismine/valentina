@@ -669,7 +669,7 @@ void MainWindowsNoGUI::ExportApparelLayout(const QVector<VLayoutPiece> &details,
         return;
     }
 
-    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    VValentinaSettings  const*settings = VAbstractValApplication::VApp()->ValentinaSettings();
     settings->SetPathLayoutExport(path);
     const LayoutExportFormats format = m_dialogSaveLayout->Format();
 
@@ -830,7 +830,7 @@ void MainWindowsNoGUI::PrintPreviewTiled()
     }
     else
     {
-        VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+        VValentinaSettings  const*settings = VAbstractValApplication::VApp()->ValentinaSettings();
         m_layoutSettings->SetTiledMargins(settings->GetTiledPDFMargins(Unit::Mm));
         m_layoutSettings->SetTiledPDFOrientation(settings->GetTiledPDFOrientation());
         m_layoutSettings->SetTiledPDFPaperSize(
@@ -864,7 +864,7 @@ void MainWindowsNoGUI::PrintTiled()
     }
     else
     {
-        VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+        VValentinaSettings  const*settings = VAbstractValApplication::VApp()->ValentinaSettings();
         m_layoutSettings->SetTiledMargins(settings->GetTiledPDFMargins(Unit::Mm));
         m_layoutSettings->SetTiledPDFOrientation(settings->GetTiledPDFOrientation());
         m_layoutSettings->SetTiledPDFPaperSize(
@@ -1051,7 +1051,7 @@ void MainWindowsNoGUI::PdfTiledFile(const QString &name)
     }
     else
     {
-        VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+        VValentinaSettings  const*settings = VAbstractValApplication::VApp()->ValentinaSettings();
         m_layoutSettings->SetTiledMargins(QMarginsF(settings->GetTiledPDFMargins(Unit::Mm)));
         m_layoutSettings->SetTiledPDFOrientation(settings->GetTiledPDFOrientation());
         m_layoutSettings->SetTiledPDFPaperSize(
@@ -1415,7 +1415,7 @@ void MainWindowsNoGUI::CollectStatistics(MeasurementsType measurementsType, cons
         statistic->SetClientID(clientID);
     }
     statistic->Enable(true);
-    qint64 uptime = VAbstractApplication::VApp()->AppUptime();
+    qint64 const uptime = VAbstractApplication::VApp()->AppUptime();
     if (measurementsType == MeasurementsType::Multisize)
     {
         statistic->SendMultisizeMeasurementsFormatVersion(uptime, formatVersion);

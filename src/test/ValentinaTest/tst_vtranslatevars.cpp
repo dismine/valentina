@@ -42,7 +42,7 @@ TST_VTranslateVars::TST_VTranslateVars(QObject *parent)
     m_trMs(nullptr),
     m_systemLocale(QLocale::system())
 {
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
     m_translateFomula = settings->IsTranslateFormula();
     settings->SetTranslateFormula(true);
 }

@@ -59,7 +59,7 @@ PuzzlePreferencesConfigurationPage::PuzzlePreferencesConfigurationPage(QWidget *
     connect(ui->langCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             [this]() { m_langChanged = true; });
 
-    VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
+    VPSettings  const*settings = VPApplication::VApp()->PuzzleSettings();
 
     // Theme
     SetThemeModeComboBox();
@@ -354,7 +354,7 @@ void PuzzlePreferencesConfigurationPage::UpdateShortcutsTable() const
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzlePreferencesConfigurationPage::RetranslateShortcutsTable() const
 {
-    VAbstractShortcutManager *manager = VAbstractApplication::VApp()->GetShortcutManager();
+    VAbstractShortcutManager  const*manager = VAbstractApplication::VApp()->GetShortcutManager();
     if (manager == nullptr)
     {
         return;

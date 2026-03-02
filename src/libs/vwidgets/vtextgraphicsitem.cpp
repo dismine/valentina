@@ -149,7 +149,7 @@ auto InitializePainter(QPainter *painter, bool textAsPaths, const QRectF &boundi
 //---------------------------------------------------------------------------------------------------------------------
 auto CalculateNextStep(qreal iY, const QFontMetrics &fm, bool textAsPaths) -> qreal
 {
-    qreal penWidth = textAsPaths ? VAbstractApplication::VApp()->Settings()->WidthHairLine() : 0;
+    qreal const penWidth = textAsPaths ? VAbstractApplication::VApp()->Settings()->WidthHairLine() : 0;
     return iY + fm.height() + penWidth * 2 + MmToPixel(1.5);
 }
 
@@ -847,7 +847,7 @@ void VTextGraphicsItem::RotateLabel(QGraphicsSceneMouseEvent *pME)
 //---------------------------------------------------------------------------------------------------------------------
 void VTextGraphicsItem::PaintLabel(QPainter *painter)
 {
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
     if (settings->GetSingleLineFonts())
     {
         PaintLabelSVGFont(painter);
@@ -880,7 +880,7 @@ void VTextGraphicsItem::PaintLabelOutlineFont(QPainter *painter)
 //---------------------------------------------------------------------------------------------------------------------
 void VTextGraphicsItem::PaintLabelSVGFont(QPainter *painter)
 {
-    VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
+    VSvgFontDatabase  const*db = VAbstractApplication::VApp()->SVGFontDatabase();
     VSvgFontEngine engine = db->FontEngine(m_tm.GetSVGFontFamily(), SVGFontStyle::Normal, SVGFontWeight::Normal,
                                            m_tm.GetSVGFontPointSize());
 

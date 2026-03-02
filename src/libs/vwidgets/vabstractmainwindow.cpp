@@ -391,7 +391,7 @@ void VAbstractMainWindow::ExportDataToCSV()
         return;
     }
 
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
 
     DialogExportToCSV dialog(this);
     dialog.SetWithHeader(settings->GetCSVWithHeader());

@@ -197,7 +197,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     // only the GUI thread should display message boxes.  If you are
     // writing a multithreaded application and the error happens on
     // a non-GUI thread, you'll have to queue the message to the GUI
-    QCoreApplication *instance = QCoreApplication::instance();
+    QCoreApplication  const*instance = QCoreApplication::instance();
     const bool isGuiThread = instance && (QThread::currentThread() == instance->thread());
 
     if (not isGuiThread)

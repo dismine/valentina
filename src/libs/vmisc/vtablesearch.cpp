@@ -160,11 +160,11 @@ auto VTableSearch::FindCurrentMatchIndex() const -> int
         return 0;
     }
 
-    QTableWidgetItem *selectedItem = selectedItems.constFirst();
+    QTableWidgetItem  const*selectedItem = selectedItems.constFirst();
 
     for (int i = 0; i < searchList.size(); ++i)
     {
-        QTableWidgetItem *item = searchList.at(i);
+        QTableWidgetItem  const*item = searchList.at(i);
         if (item->row() >= selectedItem->row() && item->column() >= selectedItem->column())
         {
             return i;

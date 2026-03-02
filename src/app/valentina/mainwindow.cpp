@@ -277,7 +277,7 @@ void LogPatternToolUsed(bool checked, const QString &toolName)
 {
     if (checked)
     {
-        VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+        VValentinaSettings  const*settings = VAbstractValApplication::VApp()->ValentinaSettings();
         if (settings->IsCollectStatistic())
         {
             auto *statistic = VGAnalytics::Instance();
@@ -523,7 +523,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->toolButtonClearMessages, &QToolButton::clicked, this, &MainWindow::ClearPatternMessages);
 
-    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    VValentinaSettings  const*settings = VAbstractValApplication::VApp()->ValentinaSettings();
     ui->toolButtonAutoRefresh->setChecked(settings->GetAutoRefreshPatternMessage());
     connect(ui->toolButtonAutoRefresh, &QToolButton::clicked, this,
             [](bool checked)
@@ -549,7 +549,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->actionExportFontCorrections->setEnabled(settings->GetSingleStrokeOutlineFont());
 
-    if (VAbstractShortcutManager *manager = VAbstractValApplication::VApp()->GetShortcutManager())
+    if (VAbstractShortcutManager  const*manager = VAbstractValApplication::VApp()->GetShortcutManager())
     {
         connect(manager, &VAbstractShortcutManager::ShortcutsUpdated, this, &MainWindow::UpdateShortcuts);
         UpdateShortcuts();
@@ -1631,7 +1631,7 @@ void MainWindow::PlaceBackgroundImage(const QPointF &pos, const QString &fileNam
     VBackgroundPatternImage image = VBackgroundPatternImage::FromFile(fileName, dialog.BuiltIn());
     image.SetName(dialog.Name());
 
-    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    VValentinaSettings  const*settings = VAbstractValApplication::VApp()->ValentinaSettings();
     image.SetOpacity(settings->GetBackgroundImageDefOpacity() / 100.);
 
     QTransform m;
@@ -2748,7 +2748,7 @@ void MainWindow::NewBackgroundImageItem(const VBackgroundPatternImage &image)
 //---------------------------------------------------------------------------------------------------------------------
 auto MainWindow::InitBackgroundImageItem(const VBackgroundPatternImage &image) -> VBackgroundImageItem *
 {
-    VBackgroundImageItem *item = nullptr;
+    VBackgroundImageItem  *item = nullptr;
     if (image.Type() == PatternImage::Raster)
     {
         item = new VBackgroundPixmapItem(image, doc);
@@ -3217,7 +3217,7 @@ void MainWindow::ToolBarDrawTools()
 {
     SetupDrawToolsIcons();
 
-    VValentinaSettings *settings = VApplication::VApp()->ValentinaSettings();
+    VValentinaSettings  const*settings = VApplication::VApp()->ValentinaSettings();
 
     ui->toolBarPointTools->clear();
     if (settings->IsUseToolGroups())
@@ -4005,9 +4005,9 @@ void MainWindow::SaveCurrentScene()
         /*Save transform*/
         scene->setTransform(ui->view->transform());
         /*Save scroll bars value for previous scene.*/
-        QScrollBar *horScrollBar = ui->view->horizontalScrollBar();
+        QScrollBar  const*horScrollBar = ui->view->horizontalScrollBar();
         scene->setHorScrollBar(horScrollBar->value());
-        QScrollBar *verScrollBar = ui->view->verticalScrollBar();
+        QScrollBar  const*verScrollBar = ui->view->verticalScrollBar();
         scene->setVerScrollBar(verScrollBar->value());
     }
 }
@@ -4283,7 +4283,7 @@ void MainWindow::ActionLayout(bool checked)
  */
 auto MainWindow::on_actionSaveAs_triggered() -> bool
 {
-    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    VValentinaSettings  const*settings = VAbstractValApplication::VApp()->ValentinaSettings();
     QString const patternPath = VAbstractValApplication::VApp()->GetPatternPath();
     QString const dir = patternPath.isEmpty() ? settings->GetPathPattern() : QFileInfo(patternPath).absolutePath();
 
@@ -4484,7 +4484,7 @@ void MainWindow::on_actionUpdateManualLayout_triggered()
 {
     const QString filter(tr("Manual layout files") + " (*.vlt)"_L1);
 
-    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    VValentinaSettings  const*settings = VAbstractValApplication::VApp()->ValentinaSettings();
 
     // Use standard path to manual layouts
     const QString path = settings->GetPathManualLayouts();
@@ -4571,7 +4571,7 @@ void MainWindow::ActionAddBackgroundImage()
 void MainWindow::ActionExportFontCorrections()
 {
     // Use standard path to manual layouts
-    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    VValentinaSettings  const*settings = VAbstractValApplication::VApp()->ValentinaSettings();
     const QString dirPath = settings->GetPathFontCorrections();
 
     bool usedNotExistedDir = false;
@@ -4652,7 +4652,7 @@ void MainWindow::ActionInstallSingleLineFont()
     for (const QString &filePath : selectedFiles)
     {
         // Install the font using the FontInstaller class logic
-        if (VFontInstaller::InstallError result = installer.InstallFont(filePath, this);
+        if (VFontInstaller::InstallError const result = installer.InstallFont(filePath, this);
             result == VFontInstaller::InstallError::NoError)
         {
             successCount++;
@@ -6036,7 +6036,7 @@ void MainWindow::CreateMenus()
     UpdateRecentFileActions();
 
     // Add Undo/Redo actions.
-    QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
+    QUndoStack  const*undoStack = VAbstractApplication::VApp()->getUndoStack();
     undoAction = undoStack->createUndoAction(this, tr("&Undo"));
     connect(undoAction, &QAction::triggered, m_toolOptions, &VToolOptionsPropertyBrowser::RefreshOptions);
     m_shortcutActions.insert(VShortcutAction::Undo, undoAction);
@@ -6743,7 +6743,7 @@ auto MainWindow::LoadPattern(QString fileName, const QString &customMeasureFile)
             m_curFileFormatVersionStr = converter->GetFormatVersionStr();
             doc->setXMLContent(converter->Convert());
 
-            VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+            VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
             if (settings->IsCollectStatistic())
             {
                 auto *statistic = VGAnalytics::Instance();
@@ -6962,7 +6962,7 @@ void MainWindow::ToolboxIconSize()
 {
     auto SetIconSize = [](QToolBar *bar)
     {
-        VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+        VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
         QSize const size = settings->GetToolboxIconSizeSmall() ? QSize(24, 24) : QSize(32, 32);
         bar->setIconSize(size);
     };
@@ -7017,7 +7017,7 @@ void MainWindow::Preferences()
         if (guard->exec() == QDialog::Accepted)
         {
             InitAutoSave();
-            VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+            VValentinaSettings  const*settings = VAbstractValApplication::VApp()->ValentinaSettings();
             ui->actionExportFontCorrections->setEnabled(settings->GetSingleStrokeOutlineFont());
         }
     }
@@ -7136,7 +7136,7 @@ void MainWindow::ExportDetailsAs(bool checked)
         m_dialogSaveLayout =
             QSharedPointer<DialogSaveLayout>(new DialogSaveLayout(1, Draw::Modeling, FileName(), this));
 
-        VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+        VValentinaSettings  const*settings = VAbstractValApplication::VApp()->ValentinaSettings();
         m_dialogSaveLayout->SetBoundaryTogetherWithNotches(settings->IsBoundaryTogetherWithNotches());
 
         if (m_dialogSaveLayout->exec() == QDialog::Rejected)
@@ -7547,7 +7547,7 @@ auto MainWindow::DoFMExport(const VCommandLinePtr &expParams) -> bool
     int mib = QTextCodec::codecForLocale()->mibEnum();
     if (not codecName.isEmpty())
     {
-        if (QTextCodec *codec = QTextCodec::codecForName(codecName.toLatin1()))
+        if (QTextCodec  const*codec = QTextCodec::codecForName(codecName.toLatin1()))
         {
             mib = codec->mibEnum();
         }
