@@ -583,7 +583,7 @@ QSimpleTextCodec::~QSimpleTextCodec()
 
 static QByteArray *buildReverseMap(int forwardIndex)
 {
-    QByteArray *map = new QByteArray();
+    auto *map = new QByteArray();
     int m = 0;
     int i = 0;
     while(i < 128) {
@@ -609,7 +609,7 @@ static QByteArray *buildReverseMap(int forwardIndex)
 QString QSimpleTextCodec::convertToUnicode(const char *chars, int len, ConverterState *state) const
 {
     Q_UNUSED(state)
-    auto *c = reinterpret_cast<const unsigned char *>(chars);
+    const auto *c = reinterpret_cast<const unsigned char *>(chars);
 
     QString r(len, QT_PREPEND_NAMESPACE(Qt::Uninitialized));
     QChar* uc = r.data();
@@ -642,7 +642,7 @@ QByteArray QSimpleTextCodec::convertFromUnicode(const QChar *in, int len, Conver
     int u;
     const QChar* ucp = in;
     auto *rp = reinterpret_cast<unsigned char *>(r.data());
-    auto *rmp = reinterpret_cast<const unsigned char *>(rmap->constData());
+    const auto *rmp = reinterpret_cast<const unsigned char *>(rmap->constData());
     auto rmsize = static_cast<int>(rmap->size());
     while(i--)
     {

@@ -84,7 +84,7 @@ QString QTsciiCodec::convertToUnicode(const char* chars, int len, ConverterState
 
     QString result;
     for (int i = 0; i < len; i++) {
-        uchar ch = static_cast<uchar>(chars[i]);
+        auto ch = static_cast<uchar>(chars[i]);
         if (ch < 0x80) {
             // ASCII
             result += QLatin1Char(static_cast<char>(ch));

@@ -621,7 +621,7 @@ void VTextStreamPrivate::flushWriteBuffer()
     }
 
     // flush the file
-    QFileDevice *file = qobject_cast<QFileDevice *>(device);
+    auto *file = qobject_cast<QFileDevice *>(device);
     bool flushed = !file || file->flush();
 
 #if defined(VTEXTSTREAM_DEBUG)
@@ -1134,7 +1134,7 @@ VTextStream::VTextStream(const QByteArray &array, QIODevice::OpenMode openMode)
 #if defined(VTEXTSTREAM_DEBUG)
     qDebug("VTextStream::VTextStream(const QByteArray &array == *(%p), openMode = %d)", &array, int(openMode));
 #endif
-    QBuffer *buffer = new QBuffer;
+    auto *buffer = new QBuffer;
     buffer->setData(array);
     buffer->open(openMode);
 
@@ -1278,7 +1278,7 @@ qint64 VTextStream::pos() const
             return qint64(-1);
 
         // Reset the read buffer
-        VTextStreamPrivate *thatd = const_cast<VTextStreamPrivate *>(d);
+        auto *thatd = const_cast<VTextStreamPrivate *>(d);
         thatd->readBuffer.clear();
 
 #if defined(WITH_TEXTCODEC)
@@ -1900,7 +1900,7 @@ VTextStreamPrivate::NumberParsingStatus VTextStreamPrivate::getNumber(qulonglong
         if (ndigits == 0)
             return npsMissingDigit;
         if (sign == locale.negativeSign()) {
-            qlonglong ival = qlonglong(val);
+            auto ival = qlonglong(val);
             if (ival > 0)
                 ival = -ival;
             val = qulonglong(ival);

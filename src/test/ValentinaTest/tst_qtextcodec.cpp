@@ -484,7 +484,7 @@ void TST_QTextCodec::asciiToIscii() const
 void TST_QTextCodec::unicodeToISCII()
 {
 #if defined(WITH_BASIC_CODECS)
-    auto codec = QTextCodec::codecForName("iscii-tml");
+    auto *codec = QTextCodec::codecForName("iscii-tml");
     QVERIFY(codec != nullptr);
 
     auto ba = QByteArray::fromHex("ABA3B3DD");
@@ -2107,7 +2107,7 @@ void TST_QTextCodec::utfHeaders()
     QVERIFY(codec != 0);
 
     QFETCH(int, flags);
-    QTextCodec::ConversionFlags cFlags = QTextCodec::ConversionFlags(flags);
+    auto cFlags = QTextCodec::ConversionFlags(flags);
     QTextCodec::ConverterState state(cFlags);
 
     QFETCH(QByteArray, encoded);
@@ -2868,7 +2868,7 @@ void TST_QTextCodec::userCodec()
     QVERIFY(!QTextCodec::availableCodecs().contains("UserCodec"));
     QVERIFY(!QTextCodec::codecForName("UserCodec"));
 
-    UserCodec *codec = new UserCodec;
+    auto *codec = new UserCodec;
     executedOnce = true;
 
     QList<QByteArray> availableCodecs = QTextCodec::availableCodecs();

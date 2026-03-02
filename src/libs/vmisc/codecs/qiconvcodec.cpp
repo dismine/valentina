@@ -134,7 +134,7 @@ QString QIconvCodec::convertToUnicode(const char* chars, int len, ConverterState
     }
 
     IconvState *state = *pstate;
-    size_t inBytesLeft = static_cast<size_t>(len);
+    auto inBytesLeft = static_cast<size_t>(len);
     // best case assumption, each byte is converted into one UTF-16 character, plus 2 bytes for the BOM
     char *inBytes = const_cast<char *>(chars); // GNU and posix don't agree
 
@@ -151,7 +151,7 @@ QString QIconvCodec::convertToUnicode(const char* chars, int len, ConverterState
         remainingCount = 0;
     }
 
-    size_t outBytesLeft = static_cast<size_t>(len * 2 + 2);
+    auto outBytesLeft = static_cast<size_t>(len * 2 + 2);
     QByteArray ba(static_cast<vsizetype>(outBytesLeft), QT_PREPEND_NAMESPACE(Qt::Uninitialized));
     char *outBytes = ba.data();
     do {
@@ -282,7 +282,7 @@ QByteArray QIconvCodec::convertFromUnicode(const QChar *uc, int len, ConverterSt
         return QString(uc, len).toLatin1();
     }
 
-    size_t outBytesLeft = static_cast<size_t>(len);
+    auto outBytesLeft = static_cast<size_t>(len);
     QByteArray ba(static_cast<vsizetype>(outBytesLeft), QT_PREPEND_NAMESPACE(Qt::Uninitialized));
     outBytes = ba.data();
 
@@ -379,7 +379,7 @@ iconv_t QIconvCodec::createIconv_t(const char *to, const char *from) const
     if (!utf16Codec)
         init();
 
-    iconv_t cd = reinterpret_cast<iconv_t>(-1);
+    auto cd = reinterpret_cast<iconv_t>(-1);
 #if defined(Q_OS_QNX)
     // on QNX the default locale is UTF-8, and an empty string will cause iconv_open to fail
     static const char empty_codeset[] = "UTF-8";

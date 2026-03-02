@@ -901,7 +901,7 @@ auto SimplifiedChineseWritingSystem(QChar c) -> bool
 {
     char16_t codePoint = c.unicode();
 
-    auto it = std::lower_bound(simplifiedChineseWritingSystemRanges.begin(),
+    const auto *it = std::lower_bound(simplifiedChineseWritingSystemRanges.begin(),
                                simplifiedChineseWritingSystemRanges.end(),
                                codePoint,
                                [](const Range &range, char16_t value) { return range.end < value; });
@@ -913,7 +913,7 @@ auto TraditionalChineseWritingSystem(QChar c) -> bool
 {
     char16_t const codePoint = c.unicode();
 
-    auto it = std::lower_bound(traditionalChineseWritingSystemRanges.begin(),
+    const auto *it = std::lower_bound(traditionalChineseWritingSystemRanges.begin(),
                                traditionalChineseWritingSystemRanges.end(),
                                codePoint,
                                [](const Range &range, char16_t value) { return range.end < value; });

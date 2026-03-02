@@ -159,7 +159,7 @@ QByteArray QIsciiCodec::convertFromUnicode(const QChar *uc, int len, ConverterSt
 
     QByteArray result(2 * len, QT_PREPEND_NAMESPACE(Qt::Uninitialized)); // worst case
 
-    uchar *ch = reinterpret_cast<uchar *>(result.data());
+    auto *ch = reinterpret_cast<uchar *>(result.data());
 
     const int base = codecs[idx].base;
 

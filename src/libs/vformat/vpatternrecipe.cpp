@@ -340,7 +340,7 @@ auto VPatternRecipe::Draft(const QDomElement &draft) -> QDomElement
     VContainer const data = m_pattern->GetCompletePPData(draftName);
 
     const QVector<VToolRecord> *history = m_pattern->getHistory();
-    for (auto &record : *history)
+    for (const auto &record : *history)
     {
         if (record.GetPatternBlockIndex() != index)
         {

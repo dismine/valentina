@@ -1350,7 +1350,7 @@ auto dxfRW::writeSpline(DRW_Spline *ent) -> bool
         }
         for (int i = 0; i < ent->nfit; i++)
         {
-            auto crd = ent->fitlist.at(static_cast<std::size_t>(i));
+            auto *crd = ent->fitlist.at(static_cast<std::size_t>(i));
             writer->writeDouble(11, crd->x);
             writer->writeDouble(21, crd->y);
             writer->writeDouble(31, crd->z);

@@ -1250,7 +1250,7 @@ QTextCodec *QTextCodec::codecForHtml(const QByteArray &ba)
 QTextCodec *QTextCodec::codecForUtfText(const QByteArray &ba, QTextCodec *defaultCodec)
 {
     const vsizetype arraySize = ba.size();
-    const uchar *buf = reinterpret_cast<const uchar *>(ba.constData());
+    const auto *buf = reinterpret_cast<const uchar *>(ba.constData());
     const uint bom = 0xfeff;
 
     if (arraySize > 3) {
@@ -1264,7 +1264,7 @@ QTextCodec *QTextCodec::codecForUtfText(const QByteArray &ba, QTextCodec *defaul
     if (arraySize < 2)
         return defaultCodec;
 
-    ushort uc = qFromUnaligned<ushort>(buf);
+    auto uc = qFromUnaligned<ushort>(buf);
     if (uc == qToBigEndian(ushort(bom)))
         return QTextCodec::codecForMib(1013); // utf16 be
     else if (uc == qToLittleEndian(ushort(bom)))
