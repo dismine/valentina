@@ -2897,6 +2897,7 @@ void TST_QTextCodec::userCodec()
 //---------------------------------------------------------------------------------------------------------------------
 struct DontCrashAtExit
 {
+    DontCrashAtExit() = default;
     ~DontCrashAtExit()
     {
         if (const QTextCodec *c = QTextCodec::codecForName("utf8"); c)
@@ -2904,6 +2905,8 @@ struct DontCrashAtExit
             c->toUnicode("azerty");
         }
     }
+
+    Q_DISABLE_COPY_MOVE(DontCrashAtExit)
 };
 static DontCrashAtExit dontCrashAtExit;
 
