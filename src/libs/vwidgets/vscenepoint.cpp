@@ -170,6 +170,12 @@ void VScenePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VScenePoint::RefreshLine()
 {
+    if (m_onlyPoint)
+    {
+        m_lineName->setVisible(false);
+        return;
+    }
+
     QRectF nRec = m_namePoint->sceneBoundingRect();
     nRec.translate(-scenePos());
     if (not rect().intersects(nRec))
