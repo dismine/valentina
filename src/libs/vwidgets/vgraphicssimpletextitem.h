@@ -72,6 +72,7 @@ public:
     void SetDestination(const QPointF &destination);
 
     void RefreshColor();
+    void RefreshScale();
 
     auto GetTextColor() const -> VColorRole;
     void SetTextColor(VColorRole newTextColor);

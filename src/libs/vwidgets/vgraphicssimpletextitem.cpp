@@ -138,48 +138,11 @@ void VGraphicsSimpleTextItem::CorrectLabelPosition()
 //---------------------------------------------------------------------------------------------------------------------
 void VGraphicsSimpleTextItem::UpdateGeometry()
 {
-    auto UpdateLine = [this]() -> void
-    {
-        if (auto *parent = dynamic_cast<VScenePoint *>(parentItem()))
-        {
-            parent->RefreshLine();
-        }
-    };
-
     // Update font size if needed
     UpdateFontSize(VAbstractApplication::VApp()->Settings()->GetPatternLabelFontSize());
 
     // Handle scale changes
-    QGraphicsScene *scene = this->scene();
-    if (scene == nullptr)
-    {
-        return;
-    }
-
-    const qreal scale = SceneScale(scene);
-    if (scale > 1 && not VFuzzyComparePossibleNulls(m_oldScale, scale))
-    {
-        setScale(1 / scale);
-        CorrectLabelPosition();
-        UpdateLine();
-        m_oldScale = scale;
-    }
-    else if (scale <= 1 && not VFuzzyComparePossibleNulls(m_oldScale, 1.0))
-    {
-        setScale(1);
-        CorrectLabelPosition();
-        UpdateLine();
-        m_oldScale = 1;
-    }
-
-    // Update scene rect
-    if (!scene->views().isEmpty())
-    {
-        if (QGraphicsView *view = scene->views().at(0))
-        {
-            VMainGraphicsView::NewSceneRect(scene, view, this);
-        }
-    }
+    RefreshScale();
 
     RefreshColor();
 }
@@ -368,6 +331,49 @@ void VGraphicsSimpleTextItem::RefreshColor()
         brush() != newBrush)
     {
         setBrush(newBrush);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VGraphicsSimpleTextItem::RefreshScale()
+{
+    QGraphicsScene *scene = this->scene();
+    if (scene == nullptr)
+    {
+        return;
+    }
+
+    auto UpdateLine = [this]() -> void
+    {
+        if (auto *parent = dynamic_cast<VScenePoint *>(parentItem()))
+        {
+            parent->RefreshLine();
+        }
+    };
+
+    const qreal scale = SceneScale(scene);
+    if (scale > 1 && not VFuzzyComparePossibleNulls(m_oldScale, scale))
+    {
+        setScale(1 / scale);
+        CorrectLabelPosition();
+        UpdateLine();
+        m_oldScale = scale;
+    }
+    else if (scale <= 1 && not VFuzzyComparePossibleNulls(m_oldScale, 1.0))
+    {
+        setScale(1);
+        CorrectLabelPosition();
+        UpdateLine();
+        m_oldScale = 1;
+    }
+
+    // Update scene rect
+    if (!scene->views().isEmpty())
+    {
+        if (QGraphicsView *view = scene->views().at(0))
+        {
+            VMainGraphicsView::NewSceneRect(scene, view, this);
+        }
     }
 }
 

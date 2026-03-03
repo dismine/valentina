@@ -644,9 +644,9 @@ void MainWindow::InitScenes()
     m_sceneDraw->setTransform(ui->view->transform());
     m_sceneDetails->setTransform(ui->view->transform());
 
-    connect(ui->view, &VMainGraphicsView::MouseRelease, this, [this]() { EndVisualization(true); });
+    connect(ui->view, &VMainGraphicsView::MouseRelease, this, [this]() -> void { EndVisualization(true); });
     connect(ui->view, &VMainGraphicsView::ScaleChanged, this, &MainWindow::ScaleChanged);
-    connect(ui->view, &VMainGraphicsView::ZoomFitBestCurrent, this, [this]() { ZoomFitBestCurrent(); });
+    connect(ui->view, &VMainGraphicsView::ZoomFitBestCurrent, this, [this]() -> void { ZoomFitBestCurrent(); });
     QSizePolicy policy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     policy.setHorizontalStretch(12);
     ui->view->setSizePolicy(policy);
@@ -1549,13 +1549,15 @@ void MainWindow::ZoomFitBestCurrent()
         ui->view->fitInView(rect, Qt::KeepAspectRatio);
         QTransform transform = ui->view->transform();
 
-        qreal factor = transform.m11();
-        factor = qMax(factor, VMainGraphicsView::MinScale());
-        factor = qMin(factor, VMainGraphicsView::MaxScale());
+        const qreal scale = qBound(VMainGraphicsView::MinScale(),
+                                   transform.m11(),
+                                   VMainGraphicsView::MaxScale());
 
-        transform.setMatrix(factor, transform.m12(), transform.m13(), transform.m21(), factor, transform.m23(),
+        transform.setMatrix(scale, transform.m12(), transform.m13(), transform.m21(), scale, transform.m23(),
                             transform.m31(), transform.m32(), transform.m33());
         ui->view->setTransform(transform);
+
+        ScaleChanged(scale);
     }
 }
 
@@ -2089,6 +2091,29 @@ void MainWindow::ScaleChanged(qreal scale)
         m_doubleSpinBoxScale->setValue(qFloor(scale * 1000) / 10.0);
         m_doubleSpinBoxScale->setSingleStep(1);
         m_doubleSpinBoxScale->blockSignals(false);
+    }
+
+    VMainGraphicsScene const *scene = nullptr;
+    if (ui->view->scene() == m_sceneDraw)
+    {
+        scene = m_sceneDraw;
+    }
+    else if (ui->view->scene() == m_sceneDetails)
+    {
+        scene = m_sceneDetails;
+    }
+    else
+    {
+        return;
+    }
+
+    for (QGraphicsItem *item : scene->items())
+    {
+        if (item->type() == VGraphicsSimpleTextItem::Type)
+        {
+            auto *text = dynamic_cast<VGraphicsSimpleTextItem *>(item);
+            text->RefreshScale();
+        }
     }
 }
 
