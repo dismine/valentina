@@ -598,6 +598,8 @@ void DialogSpline::SetSpline(const VSpline &spline)
     path->SetKAsm2(spl.GetKasm2());
     path->SetKCurve(spl.GetKcurve());
     path->SetApproximationScale(spl.GetApproximationScale());
+
+    PointNameChanged();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
