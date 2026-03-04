@@ -452,17 +452,18 @@ void DialogGraduatedCurve::changeEvent(QEvent *event)
 void DialogGraduatedCurve::ValidateName()
 {
     const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(GetOriginCurveId());
-    VSplinePath const splPath = curve->Outline({0}, GetName());
+    const QString namePrefix = GetName();
+    VSplinePath const splPath = curve->Outline({0}, namePrefix);
 
-    if (QRegularExpression const rx(NameRegExp()); not GetName().isEmpty() || not rx.match(splPath.name()).hasMatch()
-                                                   || (m_originName != GetName() && not data->IsUnique(splPath.name())))
+    if (QRegularExpression const rx(NameRegExp()); namePrefix.isEmpty() || not rx.match(splPath.name()).hasMatch()
+                                                   || (m_originName != namePrefix && not data->IsUnique(splPath.name())))
     {
-        m_flagSuffix = false;
+        m_flagName = false;
         ChangeColor(ui->labelName, errorColor);
     }
     else
     {
-        m_flagSuffix = true;
+        m_flagName = true;
         ChangeColor(ui->labelName, OkColor(this));
     }
 
@@ -963,5 +964,5 @@ auto DialogGraduatedCurve::IsValid() const -> bool
                                         m_offsets.constEnd(),
                                         [](const auto &offset) -> auto { return !offset.formula.error(); });
 
-    return !m_offsets.isEmpty() && flagOffset && m_flagSuffix && m_flagAlias;
+    return !m_offsets.isEmpty() && flagOffset && m_flagName && m_flagAlias;
 }

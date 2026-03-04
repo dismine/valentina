@@ -117,7 +117,7 @@ private:
     Q_DISABLE_COPY_MOVE(DialogGraduatedCurve) // NOLINT
     Ui::DialogGraduatedCurve *ui;
 
-    bool m_flagSuffix{true};
+    bool m_flagName{true};
     bool m_flagAlias{true};
 
     QString m_originName{};

@@ -370,10 +370,11 @@ void DialogParallelCurve::changeEvent(QEvent *event)
 void DialogParallelCurve::ValidateName()
 {
     const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(GetOriginCurveId());
-    VSplinePath const splPath = curve->Offset(0, GetName());
+    const QString namePrefix = GetName();
+    VSplinePath const splPath = curve->Offset(0, namePrefix);
 
-    if (QRegularExpression const rx(NameRegExp()); GetName().isEmpty() || not rx.match(splPath.name()).hasMatch()
-                                                   || (m_originName != GetName() && not data->IsUnique(splPath.name())))
+    if (QRegularExpression const rx(NameRegExp()); namePrefix.isEmpty() || not rx.match(splPath.name()).hasMatch()
+                                                   || (m_originName != namePrefix && not data->IsUnique(splPath.name())))
     {
         m_flagName = false;
         ChangeColor(ui->labelName, errorColor);
