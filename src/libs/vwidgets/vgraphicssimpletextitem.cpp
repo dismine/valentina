@@ -344,27 +344,19 @@ void VGraphicsSimpleTextItem::RefreshScale()
         return;
     }
 
-    auto UpdateLine = [this]() -> void
-    {
-        if (auto *parent = dynamic_cast<VScenePoint *>(parentItem()))
-        {
-            parent->RefreshLine();
-        }
-    };
-
     const qreal scale = SceneScale(scene);
     if (scale > 1 && not VFuzzyComparePossibleNulls(m_oldScale, scale))
     {
         setScale(1 / scale);
         CorrectLabelPosition();
-        UpdateLine();
+        emit UpdateLine();
         m_oldScale = scale;
     }
     else if (scale <= 1 && not VFuzzyComparePossibleNulls(m_oldScale, 1.0))
     {
         setScale(1);
         CorrectLabelPosition();
-        UpdateLine();
+        emit UpdateLine();
         m_oldScale = 1;
     }
 
@@ -392,4 +384,16 @@ void VGraphicsSimpleTextItem::Init()
             this,
             &VGraphicsSimpleTextItem::UpdateFontSize);
     connect(VTheme::Instance(), &VTheme::ThemeSettingsChanged, this, [this]() -> void { RefreshColor(); });
+    connect(
+        this,
+        &VGraphicsSimpleTextItem::UpdateLine,
+        this,
+        [this]() -> void
+        {
+            if (auto *parent = dynamic_cast<VScenePoint *>(parentItem()))
+            {
+                parent->RefreshLine();
+            }
+        },
+        Qt::QueuedConnection);
 }

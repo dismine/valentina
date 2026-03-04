@@ -172,7 +172,10 @@ void VScenePoint::RefreshLine()
 {
     if (m_onlyPoint)
     {
-        m_lineName->setVisible(false);
+        if (m_lineName != nullptr)
+        {
+            m_lineName->setVisible(false);
+        }
         return;
     }
 

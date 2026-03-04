@@ -94,6 +94,7 @@ signals:
     void DeleteTool();
     void PointChoosed();
     void PointSelected(bool selected);
+    void UpdateLine();
 
 protected:
     auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
