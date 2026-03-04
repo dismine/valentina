@@ -55,8 +55,6 @@ public:
     virtual void RefreshPointGeometry(const VPointF &point);
     auto boundingRect() const -> QRectF override;
 
-    void RefreshLine();
-
     auto GetColorRole() const -> VColorRole;
     void SetColorRole(VColorRole role);
 
@@ -68,6 +66,9 @@ public:
 
     auto GetLabelTextHoverColorRole() const -> VColorRole;
     void SetLabelTextHoverColorRole(VColorRole role);
+
+public slots:
+    void RefreshLine();
 
 protected:
     /** @brief namePoint point label. */
