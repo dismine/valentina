@@ -229,8 +229,9 @@ void DialogCubicBezier::ValidateAlias()
     VCubicBezier spline = spl;
     spline.SetAliasSuffix(ui->lineEditAlias->text());
     if (QRegularExpression const rx(NameRegExp());
-        ui->lineEditAlias->text().isEmpty() || !rx.match(spline.GetAlias()).hasMatch()
-        || (originAliasSuffix != ui->lineEditAlias->text() && !data->IsUnique(spline.GetAlias())))
+        !ui->lineEditAlias->text().isEmpty()
+        && (!rx.match(spline.GetAlias()).hasMatch()
+            || (originAliasSuffix != ui->lineEditAlias->text() && !data->IsUnique(spline.GetAlias()))))
     {
         flagAlias = false;
         ChangeColor(ui->labelAlias, errorColor);
