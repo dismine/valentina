@@ -82,8 +82,7 @@ void VPE::VPropertyFormWidget::build()
     {
         while (layout()->count() > 0)
         {
-            QLayoutItem  const*child = layout()->takeAt(0);
-            if (child != nullptr)
+            if (QLayoutItem *const child = layout()->takeAt(0)) // NOLINT(misc-const-correctness)
             {
                 delete child->widget();
                 delete child;

@@ -44,7 +44,7 @@ VPE::VPropertyFactoryManager::~VPropertyFactoryManager()
     QList<VAbstractPropertyFactory *> tmpFactories = vproperty_d_ptr->Factories.values();
     while (!tmpFactories.isEmpty())
     {
-        VAbstractPropertyFactory  const*tmpFactory = tmpFactories.takeLast();
+        VAbstractPropertyFactory *tmpFactory = tmpFactories.takeLast(); // NOLINT(misc-const-correctness)
         tmpFactories.removeAll(tmpFactory);
         delete tmpFactory;
     }
