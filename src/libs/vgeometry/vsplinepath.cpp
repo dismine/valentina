@@ -213,6 +213,7 @@ auto VSplinePath::Flip(const QLineF &axis, const QString &name) const -> VSpline
     splPath.SetColor(GetColor());
     splPath.SetPenStyle(GetPenStyle());
     splPath.SetApproximationScale(GetApproximationScale());
+    splPath.SetDerivative(true);
     return splPath;
 }
 
@@ -243,6 +244,7 @@ auto VSplinePath::Move(qreal length, qreal angle, const QString &name) const -> 
     splPath.SetColor(GetColor());
     splPath.SetPenStyle(GetPenStyle());
     splPath.SetApproximationScale(GetApproximationScale());
+    splPath.SetDerivative(true);
     return splPath;
 }
 
