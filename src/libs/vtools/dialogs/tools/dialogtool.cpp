@@ -277,15 +277,17 @@ void DialogTool::FillComboBoxCurves(QComboBox *box) const
     QMap<QString, quint32> list;
     for (auto i = objs->constBegin(); i != objs->constEnd(); ++i)
     {
-        if (i.key() != toolId)
+        if (i.key() == toolId)
         {
-            QSharedPointer<VGObject> const obj = i.value();
-            if (obj->getType() == GOType::Arc || obj->getType() == GOType::EllipticalArc ||
-                obj->getType() == GOType::Spline || obj->getType() == GOType::SplinePath ||
-                obj->getType() == GOType::CubicBezier || obj->getType() == GOType::CubicBezierPath)
-            {
-                PrepareList<VAbstractCurve>(list, i.key());
-            }
+            continue;
+        }
+
+        if (QSharedPointer<VGObject> const &obj = i.value();
+            obj->getType() == GOType::Arc || obj->getType() == GOType::EllipticalArc || obj->getType() == GOType::Spline
+            || obj->getType() == GOType::SplinePath || obj->getType() == GOType::CubicBezier
+            || obj->getType() == GOType::CubicBezierPath)
+        {
+            PrepareList<VAbstractCurve>(list, i.key());
         }
     }
     FillList(box, list);
@@ -563,8 +565,7 @@ auto DialogTool::getCurrentObjectId(QComboBox *box) -> quint32
 auto DialogTool::SetObject(const quint32 &id, QComboBox *box, const QString &toolTip) -> bool
 {
     SCASSERT(box != nullptr)
-    const qint32 index = box->findData(id);
-    if (index != -1)
+    if (const qint32 index = box->findData(id); index != -1)
     { // -1 for not found
         box->setCurrentIndex(index);
         emit ToolTip(toolTip);
