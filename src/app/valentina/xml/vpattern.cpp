@@ -3157,6 +3157,7 @@ void VPattern::ParseToolParallelCurve(VMainGraphicsScene *scene, QDomElement &do
             const QSharedPointer<VAbstractCurve> curve = initData.data->GeometricObject<VAbstractCurve>(
                 initData.originCurveId);
             initData.name = curve->HeadlessName() + suffix;
+            SetAttribute(domElement, AttrName, initData.name);
         }
 
         VToolParallelCurve::Create(initData);
@@ -3225,6 +3226,7 @@ void VPattern::ParseToolGraduatedCurve(VMainGraphicsScene *scene, QDomElement &d
             const QSharedPointer<VAbstractCurve> curve = initData.data->GeometricObject<VAbstractCurve>(
                 initData.originCurveId);
             initData.name = curve->HeadlessName() + suffix;
+            SetAttribute(domElement, AttrName, initData.name);
         }
 
         VToolGraduatedCurve::Create(initData);
