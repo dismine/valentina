@@ -116,7 +116,11 @@ auto VPE::VPropertyModel::index(int row, int column, const QModelIndex &parent) 
             VProperty const* childItem = parentItem->getChild(row);
             if (childItem)
             {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
                 return createIndex(row, column, childItem);
+#else
+                return createIndex(row, column, const_cast<VProperty *>(childItem));
+#endif
             }
         }
     }
