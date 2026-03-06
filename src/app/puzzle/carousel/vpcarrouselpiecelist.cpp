@@ -274,7 +274,7 @@ void VPCarrouselPieceList::contextMenuEvent(QContextMenuEvent *event)
         removeAction->setVisible(true);
     }
 
-    QAction  const*selectedAction = menu.exec(event->globalPos());
+    QAction *const selectedAction = menu.exec(event->globalPos()); // NOLINT(misc-const-correctness)
 
     if (selectedAction == moveAction)
     {
