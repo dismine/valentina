@@ -2381,9 +2381,9 @@ void DialogIncrements::closeEvent(QCloseEvent *event)
 {
     RefreshPattern();
 
-    ui->plainTextEditFormula->blockSignals(true);
-    ui->lineEditName->blockSignals(true);
-    ui->plainTextEditDescription->blockSignals(true);
+    const QSignalBlocker blockerFormula(ui->plainTextEditFormula);
+    const QSignalBlocker blockerName(ui->lineEditName);
+    const QSignalBlocker blockerDescription(ui->plainTextEditDescription);
 
     disconnect(this->m_patternDoc, &VPattern::FullUpdateFromFile, this, &DialogIncrements::FullUpdateFromFile);
 
