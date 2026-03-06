@@ -104,17 +104,15 @@ auto VPE::VPropertyModel::index(int row, int column, const QModelIndex &parent) 
 {
     if (vproperty_d_ptr->Properties == nullptr || (parent.isValid() && parent.column() > 1))
     {
-            return QModelIndex();
+        return {};
     }
 
     if (parent.isValid())
     {
         // Get the parent index
-        VProperty const* parentItem = getProperty(parent);
-        if (parentItem)
+        if (VProperty const *parentItem = getProperty(parent))
         {
-            VProperty const* childItem = parentItem->getChild(row);
-            if (childItem)
+            if (VProperty const *childItem = parentItem->getChild(row))
             {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
                 return createIndex(row, column, childItem);
@@ -129,7 +127,7 @@ auto VPE::VPropertyModel::index(int row, int column, const QModelIndex &parent) 
         return createIndex(row, column, vproperty_d_ptr->Properties->getRootProperty(row));
     }
 
-    return QModelIndex();
+    return {};
 }
 
 //! Returns the parent of one model index
