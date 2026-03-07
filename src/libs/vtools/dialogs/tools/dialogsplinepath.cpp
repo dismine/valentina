@@ -175,7 +175,10 @@ void DialogSplinePath::SetPath(const VSplinePath &value)
     flagLength1.clear();
     flagLength2.clear();
 
-    this->path = value;
+    path = value;
+
+    m_oldName = path.name();
+
     ui->listWidget->blockSignals(true);
     ui->listWidget->clear();
     for (qint32 i = 0; i < path.CountPoints(); ++i)
@@ -253,9 +256,17 @@ void DialogSplinePath::ChosenObject(quint32 id, const SceneObject &type)
  */
 void DialogSplinePath::SaveData()
 {
-    const quint32 d = path.GetDuplicate(); // Save previous value
     SavePath();
-    newDuplicate <= -1 ? path.SetDuplicate(d) : path.SetDuplicate(static_cast<quint32>(newDuplicate));
+
+    if (!m_oldName.isEmpty() && m_oldName != path.name())
+    {
+        path.SetDuplicate(0);
+        if (!data->IsUnique(path.name()))
+        {
+            path.SetDuplicate(DNumber(path.name()));
+            m_oldName = path.name();
+        }
+    }
 
     auto *visPath = qobject_cast<VisToolSplinePath *>(vis);
     SCASSERT(visPath != nullptr)
@@ -729,20 +740,18 @@ void DialogSplinePath::currentPointChanged(int index)
 
             if (first.P().id() == path.at(0).P().id() && last.P().id() == path.at(path.CountPoints() - 1).P().id())
             {
-                newDuplicate = -1;
                 ui->lineEditSplPathName->setText(VAbstractApplication::VApp()->TrVars()->VarToUser(path.name()));
             }
             else
             {
-                VSplinePath newPath = ExtractPath();
+                SavePath();
 
-                if (not data->IsUnique(newPath.name()))
+                if (not data->IsUnique(path.name()))
                 {
-                    newDuplicate = static_cast<qint32>(DNumber(newPath.name()));
-                    newPath.SetDuplicate(static_cast<quint32>(newDuplicate));
+                    path.SetDuplicate(DNumber(path.name()));
                 }
 
-                ui->lineEditSplPathName->setText(VAbstractApplication::VApp()->TrVars()->VarToUser(newPath.name()));
+                ui->lineEditSplPathName->setText(VAbstractApplication::VApp()->TrVars()->VarToUser(path.name()));
             }
         }
     }
@@ -1034,12 +1043,14 @@ void DialogSplinePath::DataPoint(const VSplinePoint &p)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSplinePath::SavePath()
 {
+    const quint32 d = path.GetDuplicate(); // Save previous value
     path.Clear();
     path = ExtractPath();
     path.SetApproximationScale(ui->doubleSpinBoxApproximationScale->value());
     path.SetPenStyle(GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine));
     path.SetColor(ui->pushButtonColor->currentColor().name());
     path.SetAliasSuffix(ui->lineEditAlias->text());
+    path.SetDuplicate(d);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

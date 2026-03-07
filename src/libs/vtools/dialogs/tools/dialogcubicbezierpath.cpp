@@ -56,13 +56,12 @@
 class QWidget;
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogCubicBezierPath::DialogCubicBezierPath(const VContainer *data, VAbstractPattern *doc, quint32 toolId,
+DialogCubicBezierPath::DialogCubicBezierPath(const VContainer *data,
+                                             VAbstractPattern *doc,
+                                             quint32 toolId,
                                              QWidget *parent)
   : DialogTool(data, doc, toolId, parent),
-    ui(new Ui::DialogCubicBezierPath),
-    path(),
-    newDuplicate(-1),
-    flagError(false)
+    ui(new Ui::DialogCubicBezierPath)
 {
     ui->setupUi(this);
 
@@ -117,7 +116,10 @@ auto DialogCubicBezierPath::GetPath() const -> VCubicBezierPath
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCubicBezierPath::SetPath(const VCubicBezierPath &value)
 {
-    this->path = value;
+    path = value;
+
+    m_oldName = path.name();
+
     ui->listWidget->blockSignals(true);
     ui->listWidget->clear();
     for (qint32 i = 0; i < path.CountPoints(); ++i)
@@ -216,14 +218,17 @@ void DialogCubicBezierPath::ShowVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCubicBezierPath::SaveData()
 {
-    const quint32 d = path.GetDuplicate(); // Save previous value
     SavePath();
-    newDuplicate <= -1 ? path.SetDuplicate(d) : path.SetDuplicate(static_cast<quint32>(newDuplicate));
 
-    path.SetPenStyle(GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine));
-    path.SetColor(ui->pushButtonColor->currentColor().name());
-    path.SetApproximationScale(ui->doubleSpinBoxApproximationScale->value());
-    path.SetAliasSuffix(ui->lineEditAlias->text());
+    if (!m_oldName.isEmpty() && m_oldName != path.name())
+    {
+        path.SetDuplicate(0);
+        if (!data->IsUnique(path.name()))
+        {
+            path.SetDuplicate(DNumber(path.name()));
+            m_oldName = path.name();
+        }
+    }
 
     auto *visPath = qobject_cast<VisToolCubicBezierPath *>(vis);
     SCASSERT(visPath != nullptr)
@@ -408,8 +413,14 @@ void DialogCubicBezierPath::DataPoint(const VPointF &p)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCubicBezierPath::SavePath()
 {
+    const quint32 d = path.GetDuplicate(); // Save previous value
     path.Clear();
     path = ExtractPath();
+    path.SetPenStyle(GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine));
+    path.SetColor(ui->pushButtonColor->currentColor().name());
+    path.SetApproximationScale(ui->doubleSpinBoxApproximationScale->value());
+    path.SetAliasSuffix(ui->lineEditAlias->text());
+    path.SetDuplicate(d);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -479,20 +490,18 @@ void DialogCubicBezierPath::ValidatePath()
 
         if (first.id() == path.at(0).id() && last.id() == path.at(path.CountPoints() - 1).id())
         {
-            newDuplicate = -1;
             ui->lineEditSplPathName->setText(VAbstractApplication::VApp()->TrVars()->VarToUser(path.name()));
         }
         else
         {
-            VCubicBezierPath newPath = ExtractPath();
+            SavePath();
 
-            if (not data->IsUnique(newPath.name()))
+            if (not data->IsUnique(path.name()))
             {
-                newDuplicate = static_cast<qint32>(DNumber(newPath.name()));
-                newPath.SetDuplicate(static_cast<quint32>(newDuplicate));
+                path.SetDuplicate(DNumber(path.name()));
             }
 
-            ui->lineEditSplPathName->setText(VAbstractApplication::VApp()->TrVars()->VarToUser(newPath.name()));
+            ui->lineEditSplPathName->setText(VAbstractApplication::VApp()->TrVars()->VarToUser(path.name()));
         }
     }
 

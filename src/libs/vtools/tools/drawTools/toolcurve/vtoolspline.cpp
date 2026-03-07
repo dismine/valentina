@@ -170,6 +170,8 @@ auto VToolSpline::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene 
  */
 auto VToolSpline::Create(VToolSplineInitData &initData, VSpline *spline) -> VToolSpline *
 {
+    const bool curveUnique = initData.data->IsUnique(spline->name());
+
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(spline);
@@ -183,6 +185,15 @@ auto VToolSpline::Create(VToolSplineInitData &initData, VSpline *spline) -> VToo
         {
             initData.doc->UpdateToolData(initData.id, initData.data);
         }
+    }
+
+    if (!curveUnique)
+    {
+        const QString errorMsg
+            = QObject::tr("Curve '%1' with id %2 has not unique name.").arg(spline->name()).arg(initData.id);
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(errorMsg)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 
     if (initData.parse == Document::FullParse)

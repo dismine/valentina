@@ -88,14 +88,14 @@ private:
     Ui::DialogCubicBezierPath *ui;
 
     /** @brief path cubic bezier path */
-    VCubicBezierPath path;
+    VCubicBezierPath path{};
 
-    qint32 newDuplicate;
-
-    bool flagError;
+    bool flagError{false};
     bool flagAlias{true};
 
     QString originAliasSuffix{};
+
+    QString m_oldName{};
 
     void NewItem(const VPointF &point);
     void DataPoint(const VPointF &p);

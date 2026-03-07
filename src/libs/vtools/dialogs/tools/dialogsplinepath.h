@@ -115,8 +115,6 @@ private:
     /** @brief path spline path */
     VSplinePath path{};
 
-    qint32 newDuplicate{-1};
-
     /** @brief formulaBaseHeight base height defined by dialogui */
     int formulaBaseHeightAngle1{0};
     int formulaBaseHeightAngle2{0};
@@ -132,6 +130,8 @@ private:
     bool flagAlias{true};
 
     QString originAliasSuffix{};
+
+    QString m_oldName{};
 
     void EvalAngle1();
     void EvalAngle2();
