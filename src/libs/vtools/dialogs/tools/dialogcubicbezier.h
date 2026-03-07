@@ -67,6 +67,7 @@ public:
 public slots:
     void ChosenObject(quint32 id, const SceneObject &type) override;
     void PointNameChanged() override;
+    void ShowDialog(bool click) override;
 
 protected:
     void ShowVisualization() override;
@@ -84,11 +85,9 @@ private:
     Ui::DialogCubicBezier *ui;
 
     /** @brief spl spline */
-    VCubicBezier spl;
+    VCubicBezier spl{};
 
-    qint32 newDuplicate;
-
-    bool flagError;
+    bool flagError{false};
     bool flagAlias{true};
 
     QString originAliasSuffix{};
@@ -96,10 +95,14 @@ private:
     /** @brief number number of handled objects */
     qint32 number{0};
 
+    QString m_oldName{};
+
     auto GetP1() const -> QSharedPointer<VPointF>;
     auto GetP2() const -> QSharedPointer<VPointF>;
     auto GetP3() const -> QSharedPointer<VPointF>;
     auto GetP4() const -> QSharedPointer<VPointF>;
+
+    void SaveSpline();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

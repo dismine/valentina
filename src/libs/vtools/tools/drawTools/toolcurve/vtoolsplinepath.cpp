@@ -155,6 +155,8 @@ auto VToolSplinePath::Create(const QPointer<DialogTool> &dialog, VMainGraphicsSc
  */
 auto VToolSplinePath::Create(VToolSplinePathInitData &initData, VSplinePath *path) -> VToolSplinePath *
 {
+    const bool curveUnique = initData.data->IsUnique(path->name());
+
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(path);
@@ -162,6 +164,15 @@ auto VToolSplinePath::Create(VToolSplinePathInitData &initData, VSplinePath *pat
     else
     {
         initData.data->UpdateGObject(initData.id, path);
+    }
+
+    if (!curveUnique)
+    {
+        const QString errorMsg
+            = QObject::tr("Curve '%1' with id %2 has not unique name.").arg(path->name()).arg(initData.id);
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(errorMsg)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 
     VPatternGraph *patternGraph = initData.doc->PatternGraph();

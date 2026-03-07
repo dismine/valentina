@@ -103,6 +103,8 @@ auto VToolCubicBezier::Create(const QPointer<DialogTool> &dialog, VMainGraphicsS
 //---------------------------------------------------------------------------------------------------------------------
 auto VToolCubicBezier::Create(VToolCubicBezierInitData initData) -> VToolCubicBezier *
 {
+    const bool curveUnique = initData.data->IsUnique(initData.spline->name());
+
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(initData.spline);
@@ -110,6 +112,15 @@ auto VToolCubicBezier::Create(VToolCubicBezierInitData initData) -> VToolCubicBe
     else
     {
         initData.data->UpdateGObject(initData.id, initData.spline);
+    }
+
+    if (!curveUnique)
+    {
+        const QString errorMsg
+            = QObject::tr("Curve '%1' with id %2 has not unique name.").arg(initData.spline->name()).arg(initData.id);
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(errorMsg)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 
     VPatternGraph *patternGraph = initData.doc->PatternGraph();

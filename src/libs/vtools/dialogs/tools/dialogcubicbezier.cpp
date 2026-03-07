@@ -46,10 +46,7 @@
 //---------------------------------------------------------------------------------------------------------------------
 DialogCubicBezier::DialogCubicBezier(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
   : DialogTool(data, doc, toolId, parent),
-    ui(new Ui::DialogCubicBezier),
-    spl(),
-    newDuplicate(-1),
-    flagError(false)
+    ui(new Ui::DialogCubicBezier)
 {
     ui->setupUi(this);
     InitOkCancelApply(ui);
@@ -94,6 +91,8 @@ auto DialogCubicBezier::GetSpline() const -> VCubicBezier
 void DialogCubicBezier::SetSpline(const VCubicBezier &spline)
 {
     spl = spline;
+
+    m_oldName = spl.name();
 
     setCurrentPointId(ui->comboBoxP1, spl.GetP1().id());
     setCurrentPointId(ui->comboBoxP2, spl.GetP2().id());
@@ -161,7 +160,6 @@ void DialogCubicBezier::ChosenObject(quint32 id, const SceneObject &type)
                     path->SetPoint4Id(id);
                     path->RefreshGeometry();
                     prepare = true;
-                    DialogAccepted();
                 }
                 break;
             default:
@@ -190,6 +188,23 @@ void DialogCubicBezier::PointNameChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogCubicBezier::ShowDialog(bool click)
+{
+    if (click && number == 4)
+    {
+        SaveSpline();
+        emit ToolTip(QString());
+
+        if (not data->IsUnique(spl.name()))
+        {
+            spl.SetDuplicate(DNumber(spl.name()));
+        }
+
+        DialogAccepted();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogCubicBezier::ShowVisualization()
 {
     AddVisualization<VisToolCubicBezier>();
@@ -198,27 +213,25 @@ void DialogCubicBezier::ShowVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCubicBezier::SaveData()
 {
-    const auto p1 = GetP1();
-    const auto p2 = GetP2();
-    const auto p3 = GetP3();
-    const auto p4 = GetP4();
+    SaveSpline();
 
-    spl = VCubicBezier(*p1, *p2, *p3, *p4);
-    spl.SetApproximationScale(ui->doubleSpinBoxApproximationScale->value());
-    spl.SetPenStyle(GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine));
-    spl.SetColor(ui->pushButtonColor->currentColor().name());
-    spl.SetAliasSuffix(ui->lineEditAlias->text());
-
-    const quint32 d = spl.GetDuplicate(); // Save previous value
-    newDuplicate <= -1 ? spl.SetDuplicate(d) : spl.SetDuplicate(static_cast<quint32>(newDuplicate));
+    if (!m_oldName.isEmpty() && m_oldName != spl.name())
+    {
+        spl.SetDuplicate(0);
+        if (!data->IsUnique(spl.name()))
+        {
+            spl.SetDuplicate(DNumber(spl.name()));
+            m_oldName = spl.name();
+        }
+    }
 
     auto *path = qobject_cast<VisToolCubicBezier *>(vis);
     SCASSERT(path != nullptr)
     path->SetApproximationScale(ui->doubleSpinBoxApproximationScale->value());
-    path->SetPoint1Id(p1->id());
-    path->SetPoint2Id(p2->id());
-    path->SetPoint3Id(p3->id());
-    path->SetPoint4Id(p4->id());
+    path->SetPoint1Id(GetP1()->id());
+    path->SetPoint2Id(GetP2()->id());
+    path->SetPoint3Id(GetP3()->id());
+    path->SetPoint4Id(GetP4()->id());
     path->SetMode(Mode::Show);
     path->RefreshGeometry();
 }
@@ -267,6 +280,18 @@ auto DialogCubicBezier::GetP3() const -> QSharedPointer<VPointF>
 auto DialogCubicBezier::GetP4() const -> QSharedPointer<VPointF>
 {
     return data->GeometricObject<VPointF>(getCurrentObjectId(ui->comboBoxP4));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCubicBezier::SaveSpline()
+{
+    const quint32 d = spl.GetDuplicate(); // Save previous value
+    spl = VCubicBezier(*GetP1(), *GetP2(), *GetP3(), *GetP4());
+    spl.SetApproximationScale(ui->doubleSpinBoxApproximationScale->value());
+    spl.SetPenStyle(GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine));
+    spl.SetColor(ui->pushButtonColor->currentColor().name());
+    spl.SetAliasSuffix(ui->lineEditAlias->text());
+    spl.SetDuplicate(d);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

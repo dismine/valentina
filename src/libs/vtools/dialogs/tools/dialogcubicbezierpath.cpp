@@ -56,13 +56,12 @@
 class QWidget;
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogCubicBezierPath::DialogCubicBezierPath(const VContainer *data, VAbstractPattern *doc, quint32 toolId,
+DialogCubicBezierPath::DialogCubicBezierPath(const VContainer *data,
+                                             VAbstractPattern *doc,
+                                             quint32 toolId,
                                              QWidget *parent)
   : DialogTool(data, doc, toolId, parent),
-    ui(new Ui::DialogCubicBezierPath),
-    path(),
-    newDuplicate(-1),
-    flagError(false)
+    ui(new Ui::DialogCubicBezierPath)
 {
     ui->setupUi(this);
 
@@ -117,7 +116,10 @@ auto DialogCubicBezierPath::GetPath() const -> VCubicBezierPath
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCubicBezierPath::SetPath(const VCubicBezierPath &value)
 {
-    this->path = value;
+    path = value;
+
+    m_oldName = path.name();
+
     {
         const QSignalBlocker blocker(ui->listWidget);
         ui->listWidget->clear();
@@ -216,14 +218,17 @@ void DialogCubicBezierPath::ShowVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCubicBezierPath::SaveData()
 {
-    const quint32 d = path.GetDuplicate(); // Save previous value
     SavePath();
-    newDuplicate <= -1 ? path.SetDuplicate(d) : path.SetDuplicate(static_cast<quint32>(newDuplicate));
 
-    path.SetPenStyle(GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine));
-    path.SetColor(ui->pushButtonColor->currentColor().name());
-    path.SetApproximationScale(ui->doubleSpinBoxApproximationScale->value());
-    path.SetAliasSuffix(ui->lineEditAlias->text());
+    if (!m_oldName.isEmpty() && m_oldName != path.name())
+    {
+        path.SetDuplicate(0);
+        if (!data->IsUnique(path.name()))
+        {
+            path.SetDuplicate(DNumber(path.name()));
+            m_oldName = path.name();
+        }
+    }
 
     auto *visPath = qobject_cast<VisToolCubicBezierPath *>(vis);
     SCASSERT(visPath != nullptr)
@@ -404,8 +409,14 @@ void DialogCubicBezierPath::DataPoint(const VPointF &p)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCubicBezierPath::SavePath()
 {
+    const quint32 d = path.GetDuplicate(); // Save previous value
     path.Clear();
     path = ExtractPath();
+    path.SetPenStyle(GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine));
+    path.SetColor(ui->pushButtonColor->currentColor().name());
+    path.SetApproximationScale(ui->doubleSpinBoxApproximationScale->value());
+    path.SetAliasSuffix(ui->lineEditAlias->text());
+    path.SetDuplicate(d);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

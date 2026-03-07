@@ -197,10 +197,17 @@ void DialogSpline::ChosenObject(quint32 id, const SceneObject &type)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSpline::SaveData()
 {
-    const quint32 d = spl.GetDuplicate(); // Save previous value
-    spl = CurrentSpline();
+    SaveSpline();
 
-    newDuplicate <= -1 ? spl.SetDuplicate(d) : spl.SetDuplicate(static_cast<quint32>(newDuplicate));
+    if (!m_oldName.isEmpty() && m_oldName != spl.name())
+    {
+        spl.SetDuplicate(0);
+        if (!data->IsUnique(spl.name()))
+        {
+            spl.SetDuplicate(DNumber(spl.name()));
+            m_oldName = spl.name();
+        }
+    }
 
     auto *path = qobject_cast<VisToolSpline *>(vis);
     SCASSERT(path != nullptr)
@@ -447,7 +454,7 @@ void DialogSpline::ValidateAlias()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto DialogSpline::CurrentSpline() const -> VSpline
+void DialogSpline::SaveSpline()
 {
     QString angle1F = ui->plainTextEditAngle1F->toPlainText();
     QString angle2F = ui->plainTextEditAngle2F->toPlainText();
@@ -468,13 +475,14 @@ auto DialogSpline::CurrentSpline() const -> VSpline
     length1F = VTranslateVars::TryFormulaFromUser(length1F, separator);
     length2F = VTranslateVars::TryFormulaFromUser(length2F, separator);
 
-    VSpline spline(*GetP1(), *GetP4(), angle1, angle1F, angle2, angle2F, length1, length1F, length2, length2F);
-    spline.SetApproximationScale(ui->doubleSpinBoxApproximationScale->value());
-    spline.SetPenStyle(GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine));
-    spline.SetColor(ui->pushButtonColor->currentColor().name());
-    spline.SetAliasSuffix(ui->lineEditAlias->text());
+    const quint32 d = spl.GetDuplicate(); // Save previous value
 
-    return spline;
+    spl = VSpline(*GetP1(), *GetP4(), angle1, angle1F, angle2, angle2F, length1, length1F, length2, length2F);
+    spl.SetApproximationScale(ui->doubleSpinBoxApproximationScale->value());
+    spl.SetPenStyle(GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine));
+    spl.SetColor(ui->pushButtonColor->currentColor().name());
+    spl.SetAliasSuffix(ui->lineEditAlias->text());
+    spl.SetDuplicate(d);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -560,6 +568,8 @@ auto DialogSpline::GetSpline() const -> VSpline
 void DialogSpline::SetSpline(const VSpline &spline)
 {
     spl = spline;
+
+    m_oldName = spl.name();
 
     ui->doubleSpinBoxApproximationScale->setValue(spl.GetApproximationScale());
     ui->pushButtonColor->setCurrentColor(spl.GetColor());

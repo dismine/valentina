@@ -175,7 +175,10 @@ void DialogSplinePath::SetPath(const VSplinePath &value)
     flagLength1.clear();
     flagLength2.clear();
 
-    this->path = value;
+    path = value;
+
+    m_oldName = path.name();
+
     {
         const QSignalBlocker blocker(ui->listWidget);
         ui->listWidget->clear();
@@ -253,9 +256,17 @@ void DialogSplinePath::ChosenObject(quint32 id, const SceneObject &type)
  */
 void DialogSplinePath::SaveData()
 {
-    const quint32 d = path.GetDuplicate(); // Save previous value
     SavePath();
-    newDuplicate <= -1 ? path.SetDuplicate(d) : path.SetDuplicate(static_cast<quint32>(newDuplicate));
+
+    if (!m_oldName.isEmpty() && m_oldName != path.name())
+    {
+        path.SetDuplicate(0);
+        if (!data->IsUnique(path.name()))
+        {
+            path.SetDuplicate(DNumber(path.name()));
+            m_oldName = path.name();
+        }
+    }
 
     auto *visPath = qobject_cast<VisToolSplinePath *>(vis);
     SCASSERT(visPath != nullptr)
@@ -994,12 +1005,14 @@ void DialogSplinePath::DataPoint(const VSplinePoint &p)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSplinePath::SavePath()
 {
+    const quint32 d = path.GetDuplicate(); // Save previous value
     path.Clear();
     path = ExtractPath();
     path.SetApproximationScale(ui->doubleSpinBoxApproximationScale->value());
     path.SetPenStyle(GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine));
     path.SetColor(ui->pushButtonColor->currentColor().name());
     path.SetAliasSuffix(ui->lineEditAlias->text());
+    path.SetDuplicate(d);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

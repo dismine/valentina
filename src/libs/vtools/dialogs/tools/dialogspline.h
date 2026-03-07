@@ -108,8 +108,6 @@ private:
     /** @brief spl spline */
     VSpline spl{};
 
-    qint32 newDuplicate{-1};
-
     /** @brief formulaBaseHeight base height defined by dialogui */
     int formulaBaseHeightAngle1{0};
     int formulaBaseHeightAngle2{0};
@@ -135,10 +133,12 @@ private:
     /** @brief number number of handled objects */
     qint32 number{0};
 
+    QString m_oldName{};
+
     auto GetP1() const -> QSharedPointer<VPointF>;
     auto GetP4() const -> QSharedPointer<VPointF>;
 
-    auto CurrentSpline() const -> VSpline;
+    void SaveSpline();
 
     void InitIcons();
 };
