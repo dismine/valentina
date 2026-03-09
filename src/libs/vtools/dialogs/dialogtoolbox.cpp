@@ -294,12 +294,22 @@ auto EvalToolFormula(QDialog *dialog, const FormulaData &data, bool &flag) -> qr
 
     qreal result = INT_MIN; // Value can be 0, so use max imposible value
 
+    auto ShowErrorResult = [data](const QString &reason)
+    {
+        QString message = QObject::tr("Error");
+        if (!data.postfix.isEmpty())
+        {
+            message += " ("_L1 + data.postfix + ")"_L1;
+        }
+        data.labelResult->setText(message);
+        data.labelResult->setToolTip(reason);
+    };
+
     if (data.formula.isEmpty())
     {
         flag = false;
         ChangeColor(data.labelEditFormula, errorColor);
-        data.labelResult->setText(QObject::tr("Error") + " (" + data.postfix + ")");
-        data.labelResult->setToolTip(QObject::tr("Empty formula"));
+        ShowErrorResult(QObject::tr("Empty formula"));
     }
     else
     {
@@ -315,9 +325,8 @@ auto EvalToolFormula(QDialog *dialog, const FormulaData &data, bool &flag) -> qr
             {
                 flag = false;
                 ChangeColor(data.labelEditFormula, errorColor);
-                data.labelResult->setText(QObject::tr("Error") + " (" + data.postfix + ")");
-                data.labelResult->setToolTip(QObject::tr("Invalid result. Value is infinite or NaN. Please, check "
-                                                         "your calculations."));
+                ShowErrorResult(
+                    QObject::tr("Invalid result. Value is infinite or NaN. Please, check your calculations."));
             }
             else
             {
@@ -326,20 +335,22 @@ auto EvalToolFormula(QDialog *dialog, const FormulaData &data, bool &flag) -> qr
                 {
                     flag = false;
                     ChangeColor(data.labelEditFormula, errorColor);
-                    data.labelResult->setText(QObject::tr("Error") + " (" + data.postfix + ")");
-                    data.labelResult->setToolTip(QObject::tr("Value can't be 0"));
+                    ShowErrorResult(QObject::tr("Value can't be 0"));
                 }
                 else if (data.checkLessThanZero && result < 0)
                 {
                     flag = false;
                     ChangeColor(data.labelEditFormula, errorColor);
-                    data.labelResult->setText(QObject::tr("Error") + " (" + data.postfix + ")");
-                    data.labelResult->setToolTip(QObject::tr("Value can't be less than 0"));
+                    ShowErrorResult(QObject::tr("Value can't be less than 0"));
                 }
                 else
                 {
-                    data.labelResult->setText(VAbstractApplication::VApp()->LocaleToString(result) +
-                                              QChar(QChar::Space) + data.postfix);
+                    QString message = VAbstractApplication::VApp()->LocaleToString(result);
+                    if (!data.postfix.isEmpty())
+                    {
+                        message += QChar(QChar::Space) + data.postfix;
+                    }
+                    data.labelResult->setText(message);
                     flag = true;
                     ChangeColor(data.labelEditFormula, OkColor(dialog));
                     data.labelResult->setToolTip(QObject::tr("Value"));
@@ -348,10 +359,9 @@ auto EvalToolFormula(QDialog *dialog, const FormulaData &data, bool &flag) -> qr
         }
         catch (qmu::QmuParserError &e)
         {
-            data.labelResult->setText(QObject::tr("Error") + " (" + data.postfix + ")");
             flag = false;
             ChangeColor(data.labelEditFormula, errorColor);
-            data.labelResult->setToolTip(QObject::tr("Parser error: %1").arg(e.GetMsg()));
+            ShowErrorResult(QObject::tr("Parser error: %1").arg(e.GetMsg()));
             qDebug() << "\nMath parser error:\n"
                      << "--------------------------------------\n"
                      << "Message:     " << e.GetMsg() << "\n"
