@@ -338,7 +338,7 @@ void VPGraphicsPiece::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     // remove from layout action
     QAction  const*removeAction = menu.addAction(tr("Remove from Sheet"));
 
-    QAction  const*selectedAction = menu.exec(event->screenPos());
+    QAction *const selectedAction = menu.exec(event->screenPos()); // NOLINT(misc-const-correctness)
 
     if (moveToActions.contains(selectedAction))
     {
