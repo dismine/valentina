@@ -988,8 +988,7 @@ auto VPiecePath::IsVisible(const QHash<QString, QSharedPointer<VInternalVariable
         {
             qWarning() << QObject::tr("Visibility trigger contains error and will be ignored");
         }
-
-        if (qFuzzyIsNull(result))
+        else if (qFuzzyIsNull(result))
         {
             visible = false;
         }
@@ -1107,6 +1106,7 @@ auto VPiecePath::PreparePointEkv(const VPieceNode &node, const VContainer *data)
     p.SetManualPasskmarkAngle(node.IsManualPassmarkAngle());
     p.SetPasskmarkAngle(node.GetPassmarkAngle(data));
     p.SetPassmarkClockwiseOpening(node.IsPassmarkClockwiseOpening());
+    p.SetPasskmarkVisible(node.IsPassmarkVisible(data));
 
     return p;
 }

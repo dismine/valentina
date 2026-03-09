@@ -75,6 +75,7 @@ public:
     QString m_formulaPassmarkLength{};                  // NOLINT(misc-non-private-member-variables-in-classes)
     QString m_formulaPassmarkWidth{};                   // NOLINT(misc-non-private-member-variables-in-classes)
     QString m_formulaPassmarkAngle{};                   // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_formulaPassmarkVisibility{'1'};           // NOLINT(misc-non-private-member-variables-in-classes)
 
     PieceNodeAngle m_angleType{PieceNodeAngle::ByLength}; // NOLINT(misc-non-private-member-variables-in-classes)
 
@@ -103,7 +104,7 @@ private:
     Q_DISABLE_ASSIGN_MOVE(VPieceNodeData) // NOLINT
 
     static constexpr quint32 streamHeader = 0x2198CBC8; // CRC-32Q string "VPieceNodeData"
-    static constexpr quint16 classVersion = 3;
+    static constexpr quint16 classVersion = 4;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -128,7 +129,7 @@ inline auto operator<<(QDataStream &out, const VPieceNodeData &p) -> QDataStream
         << p.m_formulaWidthAfter << p.m_formulaPassmarkLength << p.m_angleType << p.m_passmarkLineType
         << p.m_passmarkAngleType << p.m_isShowSecondPassmark << p.m_checkUniqueness << p.m_manualPassmarkLength
         << p.m_turnPoint << p.m_formulaPassmarkWidth << p.m_formulaPassmarkAngle << p.m_manualPassmarkWidth
-        << p.m_manualPassmarkAngle << p.m_isPassmarkClockwiseOpening;
+        << p.m_manualPassmarkAngle << p.m_isPassmarkClockwiseOpening << p.m_formulaPassmarkVisibility;
 
     return out;
 }
@@ -173,6 +174,11 @@ inline auto operator>>(QDataStream &in, VPieceNodeData &p) -> QDataStream &
     {
         in >> p.m_formulaPassmarkWidth >> p.m_formulaPassmarkAngle >> p.m_manualPassmarkWidth >>
             p.m_manualPassmarkAngle >> p.m_isPassmarkClockwiseOpening;
+    }
+
+    if (actualClassVersion >= 4)
+    {
+        in >> p.m_formulaPassmarkVisibility;
     }
 
     return in;

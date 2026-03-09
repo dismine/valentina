@@ -16,6 +16,7 @@
 - Dependency graph.
 - End of support for Windows versions below 10.
 - New option to disable mirroring a notch.
+- Valentina app. Improved control over notch visibility.
 
 # Valentina 1.0.1 (unreleased)
 - Tool Normal. Fixed formula values were not saved.

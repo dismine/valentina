@@ -65,6 +65,8 @@ public:
     constexpr auto GetPasskmarkWidth() const -> qreal;
     constexpr auto GetPasskmarkAngle() const -> qreal;
 
+    constexpr auto IsPasskmarkVisible() const -> bool;
+
     constexpr auto GetSABefore(qreal width, bool trueZeroWidth) const -> qreal;
     constexpr auto GetSAAfter(qreal width, bool trueZeroWidth) const -> qreal;
 
@@ -80,6 +82,8 @@ public:
     constexpr void SetPasskmarkLength(qreal value);
     constexpr void SetPasskmarkWidth(qreal value);
     constexpr void SetPasskmarkAngle(qreal value);
+
+    constexpr void SetPasskmarkVisible(bool value);
 
     constexpr auto MaxLocalSA(qreal width, bool trueZeroWidth) const -> qreal;
     constexpr auto PassmarkLength(qreal width, bool trueZeroWidth) const -> qreal;
@@ -106,6 +110,7 @@ private:
     qreal m_passmarkLength{0};
     qreal m_passmarkWidth{0};
     qreal m_passmarkAngle{0};
+    bool m_passmarkVisible{true};
     bool m_passmarkClockwiseOpening{false};
     bool m_customSA{false};
 };
@@ -259,6 +264,12 @@ constexpr auto VSAPoint::GetPasskmarkAngle() const -> qreal
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+constexpr auto VSAPoint::IsPasskmarkVisible() const -> bool
+{
+    return m_passmarkVisible;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 constexpr void VSAPoint::SetPasskmarkLength(qreal value)
 {
     m_passmarkLength = value;
@@ -274,6 +285,12 @@ constexpr void VSAPoint::SetPasskmarkWidth(qreal value)
 constexpr void VSAPoint::SetPasskmarkAngle(qreal value)
 {
     m_passmarkAngle = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+constexpr void VSAPoint::SetPasskmarkVisible(bool value)
+{
+    m_passmarkVisible = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

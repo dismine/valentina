@@ -93,6 +93,7 @@ private slots:
     void EvalPassmarkLength();
     void EvalPassmarkWidth();
     void EvalPassmarkAngle();
+    void EvalPassmarkVisible();
 
     void FXWidth();
     void FXWidthBefore();
@@ -101,6 +102,7 @@ private slots:
     void FXPassmarkLength();
     void FXPassmarkWidth();
     void FXPassmarkAngle();
+    void FXPassmarkVisible();
 
     void DeployWidthFormulaTextEdit();
     void DeployWidthBeforeFormulaTextEdit();
@@ -109,6 +111,7 @@ private slots:
     void DeployPassmarkLength();
     void DeployPassmarkWidth();
     void DeployPassmarkAngle();
+    void DeployPassmarkVisible();
 
     void SetMoveControls();
     void SetOptionControls();
@@ -119,13 +122,14 @@ private:
     bool m_showMode{false};
     qreal m_saWidth{0};
 
-    QTimer *m_timerWidth;
-    QTimer *m_timerWidthBefore;
-    QTimer *m_timerWidthAfter;
-    QTimer *m_timerVisible;
-    QTimer *m_timerPassmarkLength;
-    QTimer *m_timerPassmarkWidth;
-    QTimer *m_timerPassmarkAngle;
+    QTimer *m_timerWidth{nullptr};
+    QTimer *m_timerWidthBefore{nullptr};
+    QTimer *m_timerWidthAfter{nullptr};
+    QTimer *m_timerVisible{nullptr};
+    QTimer *m_timerPassmarkLength{nullptr};
+    QTimer *m_timerPassmarkWidth{nullptr};
+    QTimer *m_timerPassmarkAngle{nullptr};
+    QTimer *m_timerPassmarkVisible{nullptr};
 
     int m_formulaBaseWidth{0};
     int m_formulaBaseWidthBefore{0};
@@ -134,6 +138,7 @@ private:
     int m_formulaBasePassmarkLength{0};
     int m_formulaBasePassmarkWidth{0};
     int m_formulaBasePassmarkAngle{0};
+    int m_formulaBasePassmarkVisible{0};
 
     bool m_flagFormulaBefore{true};
     bool m_flagFormulaAfter{true};
@@ -141,6 +146,7 @@ private:
     bool m_flagFormulaPassmarkLength{true};
     bool m_flagFormulaPassmarkWidth{true};
     bool m_flagFormulaPassmarkAngle{true};
+    bool m_flagFormulaPassmarkVisible{true};
     bool m_flagName{true}; // We have default name of piece.
     bool m_flagError{false};
     bool m_flagFormula{false};
@@ -181,6 +187,7 @@ private:
     void UpdateNodePassmarkLength(const QString &formula);
     void UpdateNodePassmarkWidth(const QString &formula);
     void UpdateNodePassmarkAngle(const QString &formula);
+    void UpdateNodePassmarkVisibility(const QString &formula);
 
     void EnabledManualPassmarkLength();
     void EnabledManualPassmarkWidth();
@@ -201,6 +208,9 @@ private:
     auto GetFormulaPassmarkAngle() const -> QString;
     void SetFormulaPassmarkAngle(const QString &formula);
 
+    auto GetFormulaPassmarkVisibility() const -> QString;
+    void SetFormulaPassmarkVisibility(const QString &formula);
+
     auto IsShowNotch() const -> bool;
 
     void RefreshPathList(const VPiecePath &path);
@@ -208,6 +218,7 @@ private:
     void InitPassmarkLengthFormula(const VPieceNode &node);
     void InitPassmarkWidthFormula(const VPieceNode &node);
     void InitPassmarkAngleFormula(const VPieceNode &node);
+    void InitPassmarkVisibilityFormula(const VPieceNode &node);
     void InitPassmarkShapeType(const VPieceNode &node);
     void InitPassmarkAngleType(const VPieceNode &node);
 
@@ -219,8 +230,8 @@ private:
 //---------------------------------------------------------------------------------------------------------------------
 inline auto DialogPiecePath::IsValid() const -> bool
 {
-    return m_flagName && m_flagError && m_flagFormula && m_flagFormulaBefore && m_flagFormulaAfter &&
-           m_flagFormulaVisible && m_flagFormulaPassmarkLength;
+    return m_flagName && m_flagError && m_flagFormula && m_flagFormulaBefore && m_flagFormulaAfter
+           && m_flagFormulaVisible && m_flagFormulaPassmarkLength && m_flagFormulaPassmarkVisible;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

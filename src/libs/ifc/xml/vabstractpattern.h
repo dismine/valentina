@@ -364,6 +364,7 @@ public:
     static const QString AttrPassmarkWidth;
     static const QString AttrManualPassmarkAngle;
     static const QString AttrPassmarkAngle;
+    static const QString AttrPassmarkVisibility;
     static const QString AttrOpacity;
     static const QString AttrTags;
     static const QString AttrTransform;

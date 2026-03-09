@@ -349,6 +349,21 @@ void VPieceNode::SetFormulaPassmarkAngle(const QString &formula)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VPieceNode::GetFormulaPassmarkVisibility() const -> QString
+{
+    return d->m_formulaPassmarkVisibility;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceNode::SetFormulaPassmarkVisibility(const QString &formula)
+{
+    if (d->m_typeTool == Tool::NodePoint)
+    {
+        d->m_formulaPassmarkVisibility = formula;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VPieceNode::GetPassmarkLength(const VContainer *data, Unit unit) const -> qreal
 {
     if (d->m_manualPassmarkLength)
@@ -367,6 +382,7 @@ auto VPieceNode::GetPassmarkLength(const VContainer *data, Unit unit) const -> q
             }
             catch (const VExceptionBadId &)
             {
+                nodeName = QStringLiteral("ID:%1").arg(d->m_id);
             }
 
             const QString errorMsg = QObject::tr("Cannot calculate passmark length for point '%1'. Reason: %2.")
@@ -400,6 +416,7 @@ auto VPieceNode::GetPassmarkWidth(const VContainer *data, Unit unit) const -> qr
             }
             catch (const VExceptionBadId &)
             {
+                nodeName = QStringLiteral("ID:%1").arg(d->m_id);
             }
 
             const QString errorMsg = QObject::tr("Cannot calculate passmark width for point '%1'. Reason: %2.")
@@ -432,6 +449,7 @@ auto VPieceNode::GetPassmarkAngle(const VContainer *data) const -> qreal
             }
             catch (const VExceptionBadId &)
             {
+                nodeName = QStringLiteral("ID:%1").arg(d->m_id);
             }
 
             const QString errorMsg = QObject::tr("Cannot calculate passmark angle for point '%1'. Reason: %2.")
@@ -445,6 +463,36 @@ auto VPieceNode::GetPassmarkAngle(const VContainer *data) const -> qreal
         return formula.getDoubleValue();
     }
     return 0;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPieceNode::IsPassmarkVisible(const VContainer *data) const -> bool
+{
+    VFormula formula(d->m_formulaPassmarkVisibility, data);
+    formula.Eval();
+
+    if (formula.error())
+    {
+        QString nodeName;
+        try
+        {
+            nodeName = data->GetGObject(d->m_id)->name();
+        }
+        catch (const VExceptionBadId &)
+        {
+            nodeName = QStringLiteral("ID:%1").arg(d->m_id);
+        }
+
+        const QString errorMsg = QObject::tr("Cannot calculate passmark visibility for point '%1'. Reason: %2. "
+                                             "Visibility trigger will be ignored.")
+                                     .arg(nodeName, formula.Reason());
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(errorMsg)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        return true;
+    }
+
+    return !qFuzzyIsNull(formula.getDoubleValue());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

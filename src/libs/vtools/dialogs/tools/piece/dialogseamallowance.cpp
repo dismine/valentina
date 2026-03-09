@@ -177,6 +177,7 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, VAbstractPatter
     m_timerPassmarkLength(new QTimer(this)),
     m_timerPassmarkWidth(new QTimer(this)),
     m_timerPassmarkAngle(new QTimer(this)),
+    m_timerPassmarkVisible(new QTimer(this)),
     m_timerFoldHeight(new QTimer(this)),
     m_timerFoldWidth(new QTimer(this)),
     m_timerFoldCenter(new QTimer(this)),
@@ -655,15 +656,20 @@ void DialogSeamAllowance::CheckTabPassmarksState()
         flagFormulaPassmarkLength = true;
         flagFormulaPassmarkWidth = true;
         flagFormulaPassmarkAngle = true;
+        flagFormulaPassmarkVisible = true;
     }
 
-    const bool allFormulasValid = flagFormulaPassmarkLength && flagFormulaPassmarkWidth && flagFormulaPassmarkAngle;
+    const bool allFormulasValid = flagFormulaPassmarkLength && flagFormulaPassmarkWidth && flagFormulaPassmarkAngle &&
+            flagFormulaPassmarkVisible;
 
     m_ftb->SetTabText(TabOrder::Passmarks, tr("Passmarks") + (allFormulasValid ? QString() : QChar('*')));
 
     const QIcon icon = FromTheme(VThemeIcon::DialogWarning);
+    uiTabPassmarks->tabWidget->setTabIcon(uiTabPassmarks->tabWidget->indexOf(uiTabPassmarks->tabControl),
+                                          flagFormulaPassmarkVisible ? QIcon() : icon);
+    bool const allShapeFormulasValid = flagFormulaPassmarkLength && flagFormulaPassmarkWidth && flagFormulaPassmarkAngle;
     uiTabPassmarks->tabWidget->setTabIcon(uiTabPassmarks->tabWidget->indexOf(uiTabPassmarks->tabManualShape),
-                                          allFormulasValid ? QIcon() : icon);
+                                          allShapeFormulasValid ? QIcon() : icon);
 
     uiTabPassmarks->comboBoxPassmarks->setEnabled(allFormulasValid);
 }
@@ -969,6 +975,7 @@ void DialogSeamAllowance::closeEvent(QCloseEvent *event)
     uiTabPassmarks->plainTextEditPassmarkLength->blockSignals(true);
     uiTabPassmarks->plainTextEditPassmarkWidth->blockSignals(true);
     uiTabPassmarks->plainTextEditPassmarkAngle->blockSignals(true);
+    uiTabPassmarks->plainTextEditPassmarkVisible->blockSignals(true);
     uiTabFoldLine->plainTextEditHeight->blockSignals(true);
     uiTabFoldLine->plainTextEditWidth->blockSignals(true);
     uiTabFoldLine->plainTextEditCenter->blockSignals(true);
@@ -1547,6 +1554,13 @@ void DialogSeamAllowance::PassmarkChanged(int index)
     uiTabPassmarks->labelEditPassmarkWidth->setDisabled(true);
     uiTabPassmarks->labelEditPassmarkAngle->setDisabled(true);
 
+    uiTabPassmarks->labelEditPassmarkVisible->setDisabled(true);
+    uiTabPassmarks->toolButtonExprPassmarkVisible->setDisabled(true);
+    uiTabPassmarks->labelEqual_6->setDisabled(true);
+    uiTabPassmarks->labelResultPassmarkVisible->setDisabled(true);
+    uiTabPassmarks->plainTextEditPassmarkVisible->setDisabled(true);
+    uiTabPassmarks->pushButtonGrowPassmarkVisible->setDisabled(true);
+
     uiTabPassmarks->checkBoxClockwiseOpening->setDisabled(true);
     uiTabPassmarks->checkBoxNotMirrored->setDisabled(true);
     uiTabPassmarks->checkBoxShowSecondPassmark->setDisabled(true);
@@ -1585,6 +1599,7 @@ void DialogSeamAllowance::PassmarkChanged(int index)
     InitPassmarkLengthFormula(node);
     InitPassmarkWidthFormula(node);
     InitPassmarkAngleFormula(node);
+    InitPassmarkVisibilityFormula(node);
     InitPassmarkShapeType(node);
     InitPassmarkAngleType(node);
 
@@ -2891,6 +2906,27 @@ void DialogSeamAllowance::EvalPassmarkAngle()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::EvalPassmarkVisible()
+{
+    if (uiTabPassmarks->comboBoxPassmarks->count() > 0)
+    {
+        Eval({.formula = uiTabPassmarks->plainTextEditPassmarkVisible->toPlainText(),
+              .variables = data->DataVariables(),
+              .labelEditFormula = uiTabPassmarks->labelEditPassmarkVisible,
+              .labelResult = uiTabPassmarks->labelResultPassmarkVisible,
+              .checkLessThanZero = true}, flagFormulaPassmarkVisible);
+
+        UpdateNodePassmarkVisibility(GetFormulaFromUser(uiTabPassmarks->plainTextEditPassmarkVisible));
+    }
+    else
+    {
+        ChangeColor(uiTabPassmarks->labelEditPassmarkVisible, OkColor(this));
+        uiTabPassmarks->labelResultPassmarkVisible->setText(tr("<Empty>"));
+        flagFormulaPassmarkVisible = true;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::EvalFoldHeight()
 {
     if (uiTabFoldLine->groupBoxManualHeight->isChecked())
@@ -3033,6 +3069,18 @@ void DialogSeamAllowance::FXPassmarkAngle()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::FXPassmarkVisible()
+{
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(data, toolId, this));
+    dialog->setWindowTitle(tr("Edit notch visibility"));
+    dialog->SetFormula(GetFormulaFromUser(uiTabPassmarks->plainTextEditPassmarkVisible));
+    if (dialog->exec() == QDialog::Accepted)
+    {
+        SetFormulaPassmarkVisibility(dialog->GetFormula());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::FXFoldHeight()
 {
     QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(data, toolId, this));
@@ -3113,6 +3161,13 @@ void DialogSeamAllowance::DeployPassmarkAngle()
 {
     DeployFormula(this, uiTabPassmarks->plainTextEditPassmarkAngle, uiTabPassmarks->pushButtonGrowPassmarkAngle,
                   m_formulaBasePassmarkAngle);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::DeployPassmarkVisible()
+{
+    DeployFormula(this, uiTabPassmarks->plainTextEditPassmarkVisible, uiTabPassmarks->pushButtonGrowPassmarkVisible,
+                  m_formulaBasePassmarkVisible);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3676,11 +3731,9 @@ void DialogSeamAllowance::SetCurrentSAAfter(const QString &formula)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::UpdateNodeSABefore(const QString &formula)
 {
-    const int index = uiTabPaths->comboBoxNodes->currentIndex();
-    if (index != -1)
+    if (const int index = uiTabPaths->comboBoxNodes->currentIndex();index != -1)
     {
-        QListWidgetItem *rowItem = GetItemById(uiTabPaths->comboBoxNodes->currentData().toUInt());
-        if (rowItem)
+        if (QListWidgetItem *rowItem = GetItemById(uiTabPaths->comboBoxNodes->currentData().toUInt()))
         {
             auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
             rowNode.SetFormulaSABefore(formula);
@@ -3692,11 +3745,9 @@ void DialogSeamAllowance::UpdateNodeSABefore(const QString &formula)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::UpdateNodeSAAfter(const QString &formula)
 {
-    const int index = uiTabPaths->comboBoxNodes->currentIndex();
-    if (index != -1)
+    if (const int index = uiTabPaths->comboBoxNodes->currentIndex();index != -1)
     {
-        QListWidgetItem *rowItem = GetItemById(uiTabPaths->comboBoxNodes->currentData().toUInt());
-        if (rowItem)
+        if (QListWidgetItem *rowItem = GetItemById(uiTabPaths->comboBoxNodes->currentData().toUInt()))
         {
             auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
             rowNode.SetFormulaSAAfter(formula);
@@ -3708,11 +3759,9 @@ void DialogSeamAllowance::UpdateNodeSAAfter(const QString &formula)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::UpdateNodePassmarkLength(const QString &formula)
 {
-    const int index = uiTabPassmarks->comboBoxPassmarks->currentIndex();
-    if (index != -1)
+    if (const int index = uiTabPassmarks->comboBoxPassmarks->currentIndex();index != -1)
     {
-        QListWidgetItem *rowItem = GetItemById(uiTabPassmarks->comboBoxPassmarks->currentData().toUInt());
-        if (rowItem)
+        if (QListWidgetItem *rowItem = GetItemById(uiTabPassmarks->comboBoxPassmarks->currentData().toUInt()))
         {
             auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
             rowNode.SetFormulaPassmarkLength(formula);
@@ -3724,11 +3773,9 @@ void DialogSeamAllowance::UpdateNodePassmarkLength(const QString &formula)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::UpdateNodePassmarkWidth(const QString &formula)
 {
-    const int index = uiTabPassmarks->comboBoxPassmarks->currentIndex();
-    if (index != -1)
+    if (const int index = uiTabPassmarks->comboBoxPassmarks->currentIndex();index != -1)
     {
-        QListWidgetItem *rowItem = GetItemById(uiTabPassmarks->comboBoxPassmarks->currentData().toUInt());
-        if (rowItem)
+        if (QListWidgetItem *rowItem = GetItemById(uiTabPassmarks->comboBoxPassmarks->currentData().toUInt()))
         {
             auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
             rowNode.SetFormulaPassmarkWidth(formula);
@@ -3740,14 +3787,26 @@ void DialogSeamAllowance::UpdateNodePassmarkWidth(const QString &formula)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::UpdateNodePassmarkAngle(const QString &formula)
 {
-    const int index = uiTabPassmarks->comboBoxPassmarks->currentIndex();
-    if (index != -1)
+    if (const int index = uiTabPassmarks->comboBoxPassmarks->currentIndex();index != -1)
     {
-        QListWidgetItem *rowItem = GetItemById(uiTabPassmarks->comboBoxPassmarks->currentData().toUInt());
-        if (rowItem)
+        if (QListWidgetItem *rowItem = GetItemById(uiTabPassmarks->comboBoxPassmarks->currentData().toUInt()))
         {
             auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
             rowNode.SetFormulaPassmarkAngle(formula);
+            rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::UpdateNodePassmarkVisibility(const QString& formula)
+{
+    if (const int index = uiTabPassmarks->comboBoxPassmarks->currentIndex(); index != -1)
+    {
+        if (QListWidgetItem *rowItem = GetItemById(uiTabPassmarks->comboBoxPassmarks->currentData().toUInt()))
+        {
+            auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+            rowNode.SetFormulaPassmarkVisibility(formula);
             rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
         }
     }
@@ -4446,7 +4505,7 @@ void DialogSeamAllowance::InitPassmarksTab()
             &DialogSeamAllowance::EnabledManualPassmarkLength);
     connect(uiTabPassmarks->toolButtonExprLength, &QPushButton::clicked, this, &DialogSeamAllowance::FXPassmarkLength);
     connect(uiTabPassmarks->plainTextEditPassmarkLength, &QPlainTextEdit::textChanged, this,
-            [this]() { m_timerPassmarkLength->start(formulaTimerTimeout); });
+            [this]() -> void { m_timerPassmarkLength->start(formulaTimerTimeout); });
     connect(uiTabPassmarks->pushButtonGrowPassmarkLength, &QPushButton::clicked, this,
             &DialogSeamAllowance::DeployPassmarkLength);
 
@@ -4460,7 +4519,7 @@ void DialogSeamAllowance::InitPassmarksTab()
             &DialogSeamAllowance::EnabledManualPassmarkWidth);
     connect(uiTabPassmarks->toolButtonExprWidth, &QPushButton::clicked, this, &DialogSeamAllowance::FXPassmarkWidth);
     connect(uiTabPassmarks->plainTextEditPassmarkWidth, &QPlainTextEdit::textChanged, this,
-            [this]() { m_timerPassmarkWidth->start(formulaTimerTimeout); });
+            [this]() -> void { m_timerPassmarkWidth->start(formulaTimerTimeout); });
     connect(uiTabPassmarks->pushButtonGrowPassmarkWidth, &QPushButton::clicked, this,
             &DialogSeamAllowance::DeployPassmarkWidth);
 
@@ -4474,7 +4533,7 @@ void DialogSeamAllowance::InitPassmarksTab()
             &DialogSeamAllowance::EnabledManualPassmarkAngle);
     connect(uiTabPassmarks->toolButtonExprAngle, &QPushButton::clicked, this, &DialogSeamAllowance::FXPassmarkAngle);
     connect(uiTabPassmarks->plainTextEditPassmarkAngle, &QPlainTextEdit::textChanged, this,
-            [this]() { m_timerPassmarkAngle->start(formulaTimerTimeout); });
+            [this]() -> void { m_timerPassmarkAngle->start(formulaTimerTimeout); });
     connect(uiTabPassmarks->pushButtonGrowPassmarkAngle, &QPushButton::clicked, this,
             &DialogSeamAllowance::DeployPassmarkAngle);
 
@@ -4493,6 +4552,19 @@ void DialogSeamAllowance::InitPassmarksTab()
             &DialogSeamAllowance::PassmarkClockwiseOrientationChanged);
     connect(uiTabPassmarks->checkBoxNotMirrored, CHECKBOX_STATE_CHANGED, this,
             &DialogSeamAllowance::PassmarkNotMirroredStateChanged);
+
+    // Visibility formula
+    this->m_formulaBasePassmarkVisible = uiTabPassmarks->plainTextEditPassmarkVisible->height();
+    uiTabPassmarks->plainTextEditPassmarkVisible->installEventFilter(this);
+    m_timerPassmarkVisible->setSingleShot(true);
+
+    connect(m_timerPassmarkVisible, &QTimer::timeout, this, &DialogSeamAllowance::EvalPassmarkVisible);
+    connect(uiTabPassmarks->toolButtonExprPassmarkVisible, &QPushButton::clicked, this,
+            &DialogSeamAllowance::FXPassmarkVisible);
+    connect(uiTabPassmarks->plainTextEditPassmarkVisible, &QPlainTextEdit::textChanged, this,
+            [this]() -> void { m_timerPassmarkVisible->start(formulaTimerTimeout); });
+    connect(uiTabPassmarks->pushButtonGrowPassmarkVisible, &QPushButton::clicked, this,
+            &DialogSeamAllowance::DeployPassmarkVisible);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -4702,16 +4774,31 @@ void DialogSeamAllowance::SetFormulaPassmarkWidth(const QString &formula)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::SetFormulaPassmarkAngle(const QString &formula)
 {
-    const QString width = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+    const QString angle = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
         formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
-    if (width.length() > 80)
+    if (angle.length() > 80)
     {
         this->DeployPassmarkAngle();
     }
-    uiTabPassmarks->plainTextEditPassmarkAngle->setPlainText(width);
+    uiTabPassmarks->plainTextEditPassmarkAngle->setPlainText(angle);
 
     MoveCursorToEnd(uiTabPassmarks->plainTextEditPassmarkAngle);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::SetFormulaPassmarkVisibility(const QString& formula)
+{
+    const QString visibility = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    // increase height if needed.
+    if (visibility.length() > 80)
+    {
+        this->DeployPassmarkVisible();
+    }
+    uiTabPassmarks->plainTextEditPassmarkVisible->setPlainText(visibility);
+
+    MoveCursorToEnd(uiTabPassmarks->plainTextEditPassmarkVisible);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -5350,6 +5437,32 @@ void DialogSeamAllowance::InitPassmarkAngleFormula(const VPieceNode &node)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::InitPassmarkVisibilityFormula(const VPieceNode& node)
+{
+    uiTabPassmarks->labelEditPassmarkVisible->setEnabled(true);
+    uiTabPassmarks->toolButtonExprPassmarkVisible->setEnabled(true);
+    uiTabPassmarks->labelEqual_6->setEnabled(true);
+    uiTabPassmarks->labelResultPassmarkVisible->setEnabled(true);
+    uiTabPassmarks->plainTextEditPassmarkVisible->setEnabled(true);
+    uiTabPassmarks->pushButtonGrowPassmarkVisible->setEnabled(true);
+
+    QString passmarkVisibility = node.GetFormulaPassmarkVisibility();
+    passmarkVisibility = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        passmarkVisibility, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    if (passmarkVisibility.length() > 80) // increase height if needed.
+    {
+        this->DeployPassmarkVisible();
+    }
+
+    uiTabPassmarks->plainTextEditPassmarkVisible->setPlainText(passmarkVisibility.isEmpty() ? QString::number(1)
+                                                                                            : passmarkVisibility);
+
+    MoveCursorToEnd(uiTabPassmarks->plainTextEditPassmarkVisible);
+
+    ChangeColor(uiTabPassmarks->labelEditPassmarkVisible, OkColor(this));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::InitPassmarkShapeType(const VPieceNode &node)
 {
     // Line type
@@ -5443,6 +5556,7 @@ void DialogSeamAllowance::InitIcons()
     uiTabPassmarks->toolButtonExprLength->setIcon(VTheme::GetIconResource(resource, fxIcon));
     uiTabPassmarks->toolButtonExprWidth->setIcon(VTheme::GetIconResource(resource, fxIcon));
     uiTabPassmarks->toolButtonExprAngle->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    uiTabPassmarks->toolButtonExprPassmarkVisible->setIcon(VTheme::GetIconResource(resource, fxIcon));
     uiTabPaths->toolButtonExprWidth->setIcon(VTheme::GetIconResource(resource, fxIcon));
     uiTabPaths->toolButtonExprBefore->setIcon(VTheme::GetIconResource(resource, fxIcon));
     uiTabPaths->toolButtonExprAfter->setIcon(VTheme::GetIconResource(resource, fxIcon));
@@ -5459,6 +5573,10 @@ void DialogSeamAllowance::InitIcons()
     uiTabPaths->label_2->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
     uiTabPaths->label_6->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
     uiTabPaths->label_10->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    uiTabPassmarks->label_3->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    uiTabPassmarks->label_4->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    uiTabPassmarks->label_5->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    uiTabPassmarks->labelEqual_6->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
 
     uiTabPaths->label_3->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("32x32/clockwise.png")));
 }

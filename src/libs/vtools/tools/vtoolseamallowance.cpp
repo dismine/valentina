@@ -740,6 +740,12 @@ void VToolSeamAllowance::AddPieceDependencies(quint32 id,
         doc->FindFormulaDependencies(node.GetFormulaPassmarkLength(), id, variables);
         doc->FindFormulaDependencies(node.GetFormulaPassmarkWidth(), id, variables);
         doc->FindFormulaDependencies(node.GetFormulaPassmarkAngle(), id, variables);
+
+        if (node.GetFormulaPassmarkVisibility() != '1')
+        {
+            doc->FindFormulaDependencies(node.GetFormulaPassmarkVisibility(), id, variables);
+        }
+
         patternGraph->AddEdge(node.GetId(), id);
     }
 

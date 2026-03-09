@@ -446,6 +446,10 @@ inline auto AbstractTest::ItemFromJson(const QJsonObject &pointObject, VSAPoint 
         AbstractTest::ReadDoubleValue(pointObject, QStringLiteral("passmarkAngle"), passmarkAngle, QStringLiteral("0"));
         point.SetPasskmarkAngle(passmarkAngle);
     }
+
+    bool passmarkVisible = true;
+    AbstractTest::ReadBooleanValue(pointObject, QLatin1String("passmarkVisible"), passmarkVisible, QStringLiteral("1"));
+    point.SetPasskmarkVisible(passmarkVisible);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -155,6 +155,7 @@ const QString VAbstractPattern::AttrManualPassmarkWidth = QStringLiteral("manual
 const QString VAbstractPattern::AttrPassmarkWidth = QStringLiteral("passmarkWidth");
 const QString VAbstractPattern::AttrManualPassmarkAngle = QStringLiteral("manualPassmarkAngle");
 const QString VAbstractPattern::AttrPassmarkAngle = QStringLiteral("passmarkAngleFormula");
+const QString VAbstractPattern::AttrPassmarkVisibility = QStringLiteral("passmarkVisibilityFormula");
 const QString VAbstractPattern::AttrOpacity = QStringLiteral("opacity");
 const QString VAbstractPattern::AttrTags = QStringLiteral("tags");
 const QString VAbstractPattern::AttrTransform = QStringLiteral("transform");
@@ -623,6 +624,10 @@ auto VAbstractPattern::ParseSANode(const QDomElement &domElement) -> VPieceNode
         VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrManualPassmarkAngle, falseStr);
     const QString passmarkAngle = VDomDocument::GetParametrEmptyString(domElement, VAbstractPattern::AttrPassmarkAngle);
 
+    const QString passmarkVisibility = VDomDocument::GetParametrString(domElement,
+                                                                       VAbstractPattern::AttrPassmarkVisibility,
+                                                                       QChar('1'));
+
     const bool turnPoint = VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrNodeTurnPoint, trueStr);
 
     const QString t = VDomDocument::GetParametrString(domElement, AttrType, VAbstractPattern::NodePoint);
@@ -669,6 +674,7 @@ auto VAbstractPattern::ParseSANode(const QDomElement &domElement) -> VPieceNode
     node.SetFormulaPassmarkWidth(passmarkWidth);
     node.SetManualPassmarkAngle(manualPassmarkAngle);
     node.SetFormulaPassmarkAngle(passmarkAngle);
+    node.SetFormulaPassmarkVisibility(passmarkVisibility);
     node.SetTurnPoint(turnPoint);
 
     return node;

@@ -2058,6 +2058,11 @@ auto VSAPoint::toJson() const -> QJsonObject
         pointObject["customSA"_L1] = m_customSA;
     }
 
+    if (!m_passmarkVisible)
+    {
+        pointObject["passmarkVisible"_L1] = m_passmarkVisible;
+    }
+
     return pointObject;
 }
 

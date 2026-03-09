@@ -365,7 +365,7 @@ auto VPiece::Passmarks(const VContainer *data) const -> QVector<VPassmark>
     for (int i = 0; i < unitedPath.size(); ++i)
     {
         const VPieceNode &node = unitedPath.at(i);
-        if (node.IsExcluded() || not node.IsPassmark())
+        if (node.IsExcluded() || !node.IsPassmark() || !node.IsPassmarkVisible(data))
         {
             continue; // skip node
         }

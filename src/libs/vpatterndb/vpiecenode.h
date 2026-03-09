@@ -88,9 +88,14 @@ public:
     auto GetFormulaPassmarkAngle() const -> QString;
     void SetFormulaPassmarkAngle(const QString &formula);
 
+    auto GetFormulaPassmarkVisibility() const -> QString;
+    void SetFormulaPassmarkVisibility(const QString &formula);
+
     auto GetPassmarkLength(const VContainer *data, Unit unit) const -> qreal;
     auto GetPassmarkWidth(const VContainer *data, Unit unit) const -> qreal;
     auto GetPassmarkAngle(const VContainer *data) const -> qreal;
+
+    auto IsPassmarkVisible(const VContainer *data) const -> bool;
 
     auto GetAngleType() const -> PieceNodeAngle;
     void SetAngleType(PieceNodeAngle type);

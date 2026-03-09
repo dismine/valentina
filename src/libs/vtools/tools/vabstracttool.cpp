@@ -420,10 +420,14 @@ auto VAbstractTool::AddSANode(VAbstractPattern *doc, const QString &tagName, con
         }
     }
 
-    doc->SetAttributeOrRemoveIf<bool>(nod, VAbstractPattern::AttrNodeExcluded, node.IsExcluded(),
-                                      [](bool exclude) noexcept { return not exclude; });
-    doc->SetAttributeOrRemoveIf<bool>(nod, VAbstractPattern::AttrCheckUniqueness, node.IsCheckUniqueness(),
-                                      [](bool uniqueness) noexcept { return uniqueness; });
+    doc->SetAttributeOrRemoveIf<bool>(nod,
+                                      VAbstractPattern::AttrNodeExcluded,
+                                      node.IsExcluded(),
+                                      [](bool exclude) noexcept -> bool { return not exclude; });
+    doc->SetAttributeOrRemoveIf<bool>(nod,
+                                      VAbstractPattern::AttrCheckUniqueness,
+                                      node.IsCheckUniqueness(),
+                                      [](bool uniqueness) noexcept -> bool { return uniqueness; });
 
     switch (type)
     {
@@ -458,70 +462,104 @@ auto VAbstractTool::AddSANode(VAbstractPattern *doc, const QString &tagName, con
 
     if (type == Tool::NodePoint)
     {
-        doc->SetAttributeOrRemoveIf<bool>(nod, VAbstractPattern::AttrNodePassmark, node.IsPassmark(),
-                                          [node](bool passmark) noexcept
+        doc->SetAttributeOrRemoveIf<bool>(nod,
+                                          VAbstractPattern::AttrNodePassmark,
+                                          node.IsPassmark(),
+                                          [node](bool passmark) noexcept -> bool
                                           {
                                               return not passmark &&
                                                      node.GetPassmarkLineType() == PassmarkLineType::OneLine &&
                                                      node.GetPassmarkAngleType() == PassmarkAngleType::Straightforward;
                                           });
-        doc->SetAttributeOrRemoveIf<QString>(
-            nod, VAbstractPattern::AttrNodePassmarkLine, PassmarkLineTypeToString(node.GetPassmarkLineType()),
-            [node](const QString &) noexcept
-            {
-                return not node.IsPassmark() && node.GetPassmarkLineType() == PassmarkLineType::OneLine &&
-                       node.GetPassmarkAngleType() == PassmarkAngleType::Straightforward;
-            });
-        doc->SetAttributeOrRemoveIf<QString>(
-            nod, VAbstractPattern::AttrNodePassmarkAngle, PassmarkAngleTypeToString(node.GetPassmarkAngleType()),
-            [node](const QString &) noexcept
-            {
-                return not node.IsPassmark() && node.GetPassmarkLineType() == PassmarkLineType::OneLine &&
-                       node.GetPassmarkAngleType() == PassmarkAngleType::Straightforward;
-            });
+        doc->SetAttributeOrRemoveIf<QString>(nod,
+                                             VAbstractPattern::AttrNodePassmarkLine,
+                                             PassmarkLineTypeToString(node.GetPassmarkLineType()),
+                                             [node](const QString &) noexcept -> bool
+                                             {
+                                                 return not node.IsPassmark()
+                                                        && node.GetPassmarkLineType() == PassmarkLineType::OneLine
+                                                        && node.GetPassmarkAngleType()
+                                                               == PassmarkAngleType::Straightforward;
+                                             });
+        doc->SetAttributeOrRemoveIf<QString>(nod,
+                                             VAbstractPattern::AttrNodePassmarkAngle,
+                                             PassmarkAngleTypeToString(node.GetPassmarkAngleType()),
+                                             [node](const QString &) noexcept -> bool
+                                             {
+                                                 return not node.IsPassmark()
+                                                        && node.GetPassmarkLineType() == PassmarkLineType::OneLine
+                                                        && node.GetPassmarkAngleType()
+                                                               == PassmarkAngleType::Straightforward;
+                                             });
 
-        doc->SetAttributeOrRemoveIf<bool>(nod, VAbstractPattern::AttrNodeTurnPoint, node.IsTurnPoint(),
-                                          [](bool value) noexcept { return value; });
+        doc->SetAttributeOrRemoveIf<bool>(nod,
+                                          VAbstractPattern::AttrNodeTurnPoint,
+                                          node.IsTurnPoint(),
+                                          [](bool value) noexcept -> bool { return value; });
 
-        doc->SetAttributeOrRemoveIf<bool>(nod, VAbstractPattern::AttrNodeShowSecondPassmark,
-                                          node.IsShowSecondPassmark(), [](bool show) noexcept { return show; });
+        doc->SetAttributeOrRemoveIf<bool>(nod,
+                                          VAbstractPattern::AttrNodeShowSecondPassmark,
+                                          node.IsShowSecondPassmark(),
+                                          [](bool show) noexcept -> bool { return show; });
         doc->SetAttributeOrRemoveIf<bool>(nod,
                                           VAbstractPattern::AttrNodePassmarkNotMirrored,
                                           node.IsPassmarkNotMirrored(),
                                           [](bool notMirrored) noexcept -> bool { return !notMirrored; });
-        doc->SetAttributeOrRemoveIf<bool>(nod, VAbstractPattern::AttrNodePassmarkOpening,
+        doc->SetAttributeOrRemoveIf<bool>(nod,
+                                          VAbstractPattern::AttrNodePassmarkOpening,
                                           node.IsPassmarkClockwiseOpening(),
-                                          [](bool opening) noexcept { return not opening; });
+                                          [](bool opening) noexcept -> bool { return not opening; });
 
-        doc->SetAttributeOrRemoveIf<bool>(nod, VAbstractPattern::AttrManualPassmarkLength,
+        doc->SetAttributeOrRemoveIf<bool>(nod,
+                                          VAbstractPattern::AttrManualPassmarkLength,
                                           node.IsManualPassmarkLength(),
-                                          [](bool manualPassmarkLength) noexcept { return not manualPassmarkLength; });
-        doc->SetAttributeOrRemoveIf<QString>(nod, VAbstractPattern::AttrPassmarkLength, node.GetFormulaPassmarkLength(),
-                                             [node](const QString &) noexcept
+                                          [](bool manualPassmarkLength) noexcept -> bool
+                                          { return not manualPassmarkLength; });
+        doc->SetAttributeOrRemoveIf<QString>(nod,
+                                             VAbstractPattern::AttrPassmarkLength,
+                                             node.GetFormulaPassmarkLength(),
+                                             [node](const QString &) noexcept -> bool
                                              { return not node.IsManualPassmarkLength(); });
 
-        doc->SetAttributeOrRemoveIf<bool>(nod, VAbstractPattern::AttrManualPassmarkWidth, node.IsManualPassmarkWidth(),
-                                          [node](bool manualPassmarkWidth) noexcept {
+        doc->SetAttributeOrRemoveIf<bool>(nod,
+                                          VAbstractPattern::AttrManualPassmarkWidth,
+                                          node.IsManualPassmarkWidth(),
+                                          [node](bool manualPassmarkWidth) noexcept -> bool
+                                          {
                                               return not manualPassmarkWidth ||
                                                      node.GetPassmarkLineType() == PassmarkLineType::OneLine;
                                           });
-        doc->SetAttributeOrRemoveIf<QString>(nod, VAbstractPattern::AttrPassmarkWidth, node.GetFormulaPassmarkWidth(),
-                                             [node](const QString &) noexcept {
+        doc->SetAttributeOrRemoveIf<QString>(nod,
+                                             VAbstractPattern::AttrPassmarkWidth,
+                                             node.GetFormulaPassmarkWidth(),
+                                             [node](const QString &) noexcept -> bool
+                                             {
                                                  return not node.IsManualPassmarkWidth() ||
                                                         node.GetPassmarkLineType() == PassmarkLineType::OneLine;
                                              });
 
-        doc->SetAttributeOrRemoveIf<bool>(nod, VAbstractPattern::AttrManualPassmarkAngle, node.IsManualPassmarkAngle(),
-                                          [node](bool manualPassmarkAngle) noexcept {
+        doc->SetAttributeOrRemoveIf<bool>(nod,
+                                          VAbstractPattern::AttrManualPassmarkAngle,
+                                          node.IsManualPassmarkAngle(),
+                                          [node](bool manualPassmarkAngle) noexcept -> bool
+                                          {
                                               return not manualPassmarkAngle ||
                                                      node.GetPassmarkAngleType() != PassmarkAngleType::Straightforward;
                                           });
-        doc->SetAttributeOrRemoveIf<QString>(nod, VAbstractPattern::AttrPassmarkAngle, node.GetFormulaPassmarkAngle(),
-                                             [node](const QString &) noexcept {
+        doc->SetAttributeOrRemoveIf<QString>(nod,
+                                             VAbstractPattern::AttrPassmarkAngle,
+                                             node.GetFormulaPassmarkAngle(),
+                                             [node](const QString &) noexcept -> bool
+                                             {
                                                  return not node.IsManualPassmarkAngle() ||
                                                         node.GetPassmarkAngleType() !=
                                                             PassmarkAngleType::Straightforward;
                                              });
+        doc->SetAttributeOrRemoveIf<QString>(nod,
+                                             VAbstractPattern::AttrPassmarkVisibility,
+                                             node.GetFormulaPassmarkVisibility(),
+                                             [node](const QString &formula) noexcept -> bool
+                                             { return formula == '1'; });
     }
     else
     { // Wrong configuration.

@@ -146,6 +146,7 @@ private slots:
     void EvalPassmarkLength();
     void EvalPassmarkWidth();
     void EvalPassmarkAngle();
+    void EvalPassmarkVisible();
     void EvalFoldHeight();
     void EvalFoldWidth();
     void EvalFoldCenter();
@@ -156,6 +157,7 @@ private slots:
     void FXPassmarkLength();
     void FXPassmarkWidth();
     void FXPassmarkAngle();
+    void FXPassmarkVisible();
     void FXFoldHeight();
     void FXFoldWidth();
     void FXFoldCenter();
@@ -166,6 +168,7 @@ private slots:
     void DeployPassmarkLength();
     void DeployPassmarkWidth();
     void DeployPassmarkAngle();
+    void DeployPassmarkVisible();
     void DeployFoldHeight();
     void DeployFoldWidth();
     void DeployFoldCenter();
@@ -220,6 +223,7 @@ private:
     bool flagFormulaPassmarkLength{true};
     bool flagFormulaPassmarkWidth{true};
     bool flagFormulaPassmarkAngle{true};
+    bool flagFormulaPassmarkVisible{true};
     bool flagFormulaFoldHeight{true};
     bool flagFormulaFoldWidth{true};
     bool flagFormulaFoldCenter{true};
@@ -255,6 +259,7 @@ private:
     int m_formulaBasePassmarkLength{0};
     int m_formulaBasePassmarkWidth{0};
     int m_formulaBasePassmarkAngle{0};
+    int m_formulaBasePassmarkVisible{0};
     int m_formulaBaseFoldHeight{0};
     int m_formulaBaseFoldWidth{0};
     int m_formulaBaseFoldCenter{0};
@@ -265,6 +270,7 @@ private:
     QTimer *m_timerPassmarkLength{nullptr};
     QTimer *m_timerPassmarkWidth{nullptr};
     QTimer *m_timerPassmarkAngle{nullptr};
+    QTimer *m_timerPassmarkVisible{nullptr};
     QTimer *m_timerFoldHeight{nullptr};
     QTimer *m_timerFoldWidth{nullptr};
     QTimer *m_timerFoldCenter{nullptr};
@@ -306,6 +312,7 @@ private:
     void UpdateNodePassmarkLength(const QString &formula);
     void UpdateNodePassmarkWidth(const QString &formula);
     void UpdateNodePassmarkAngle(const QString &formula);
+    void UpdateNodePassmarkVisibility(const QString &formula);
 
     void InitFancyTabBar();
     void InitMainPathTab();
@@ -335,6 +342,7 @@ private:
     void SetFormulaPassmarkLength(const QString &formula);
     void SetFormulaPassmarkWidth(const QString &formula);
     void SetFormulaPassmarkAngle(const QString &formula);
+    void SetFormulaPassmarkVisibility(const QString &formula);
     void SetFormulaFoldHeight(const QString &formula);
     void SetFormulaFoldWidth(const QString &formula);
     void SetFormulaFoldCenter(const QString &formula);
@@ -372,6 +380,7 @@ private:
     void InitPassmarkLengthFormula(const VPieceNode &node);
     void InitPassmarkWidthFormula(const VPieceNode &node);
     void InitPassmarkAngleFormula(const VPieceNode &node);
+    void InitPassmarkVisibilityFormula(const VPieceNode &node);
     void InitPassmarkShapeType(const VPieceNode &node);
     void InitPassmarkAngleType(const VPieceNode &node);
 
@@ -404,11 +413,11 @@ private:
 //---------------------------------------------------------------------------------------------------------------------
 inline auto DialogSeamAllowance::IsValid() const -> bool
 {
-    return flagName && flagUUID && flagMainPathIsValid && flagFormula && flagFormulaBefore && flagFormulaAfter &&
-           (flagGFormulas || flagGPin) && flagDLAngle && (flagDLFormulas || flagDPin) && flagPLAngle &&
-           (flagPLFormulas || flagPPin) && flagFormulaPassmarkLength && flagFormulaPassmarkWidth &&
-           flagFormulaPassmarkAngle && flagMirrorLineIsValid && flagFormulaFoldHeight && flagFormulaFoldWidth &&
-           flagFormulaFoldCenter;
+    return flagName && flagUUID && flagMainPathIsValid && flagFormula && flagFormulaBefore && flagFormulaAfter
+           && (flagGFormulas || flagGPin) && flagDLAngle && (flagDLFormulas || flagDPin) && flagPLAngle
+           && (flagPLFormulas || flagPPin) && flagFormulaPassmarkLength && flagFormulaPassmarkWidth
+           && flagFormulaPassmarkAngle && flagMirrorLineIsValid && flagFormulaFoldHeight && flagFormulaFoldWidth
+           && flagFormulaFoldCenter && flagFormulaPassmarkVisible;
 }
 
 #endif // DIALOGSEAMALLOWANCE_H
