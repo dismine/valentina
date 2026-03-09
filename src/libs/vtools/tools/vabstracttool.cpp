@@ -558,8 +558,7 @@ auto VAbstractTool::AddSANode(VAbstractPattern *doc, const QString &tagName, con
         doc->SetAttributeOrRemoveIf<QString>(nod,
                                              VAbstractPattern::AttrPassmarkVisibility,
                                              node.GetFormulaPassmarkVisibility(),
-                                             [node](const QString &formula) noexcept -> bool
-                                             { return formula == '1'; });
+                                             [](const QString &formula) noexcept -> bool { return formula == '1'; });
     }
     else
     { // Wrong configuration.
