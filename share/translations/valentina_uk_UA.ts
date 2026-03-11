@@ -1212,6 +1212,60 @@
     </message>
 </context>
 <context>
+    <name>DialogBulkRename</name>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="24"/>
+        <source>Rename…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="43"/>
+        <source>Base name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="48"/>
+        <source>New name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="58"/>
+        <source>Text:</source>
+        <translation type="unfinished">Текст:</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="65"/>
+        <source>Use %n, %0n, %00n, %000n for counting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="75"/>
+        <source>Position:</source>
+        <translation type="unfinished">Позиція:</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="84"/>
+        <source>Append</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="97"/>
+        <source>Prepand</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="107"/>
+        <source>Replace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.cpp" line="182"/>
+        <source>Enable renaming for this item</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogCredits</name>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogcredits.ui" line="14"/>
@@ -3630,7 +3684,7 @@
         <translation type="vanished">Діалог</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="114"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="134"/>
         <source>Origin point:</source>
         <translation>Початкова точка:</translation>
     </message>
@@ -3639,69 +3693,69 @@
         <translation type="vanished">Суфікс:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="124"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="144"/>
         <source>Axis type:</source>
         <translation>Тип вісі:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="222"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="224"/>
         <source>Select origin point</source>
         <translation>Виберіть початкову точку</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="268"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="270"/>
         <source>Select origin point that is not part of the list of objects</source>
         <translation>Виберіть початкову точку, що не є частиною списку об&apos;єктів</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="436"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="438"/>
         <source>Invalid name</source>
         <translation>Неправильне ім&apos;я</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="537"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="548"/>
         <source>Vertical axis</source>
         <translation>Вертикальна вісь</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="538"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="549"/>
         <source>Horizontal axis</source>
         <translation>Горизонтальна вісь</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="14"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="158"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="178"/>
         <source>Flipping by axis</source>
         <translation>Відзеркалити по вісі</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="139"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="159"/>
         <source>Visibility Group</source>
         <translation>Група видимості</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="42"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="151"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="62"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="171"/>
         <source>Name:</source>
         <translation>Ім&apos;я:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="152"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="154"/>
         <source>Rotation</source>
         <translation>Обертання</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="168"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="188"/>
         <source>Tags:</source>
         <translation>Теги:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="175"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="195"/>
         <source>Separate each tag with comma.</source>
         <translation>Розділіть кожен тег комою.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="178"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="198"/>
         <source>Add tags</source>
         <translation>Додайте теги</translation>
     </message>
@@ -3711,48 +3765,48 @@
         <translation>Інструмент</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="59"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="79"/>
         <source>Pen style:</source>
         <translation>Тип пера:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="94"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="114"/>
         <source>Color:</source>
         <translation>Колір:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="191"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="604"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="211"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="615"/>
         <source>Ready</source>
         <translation>Готово</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="212"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="232"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="320"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="322"/>
         <source>Invalid group name</source>
         <translation>Недійсна назва групи</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="382"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="384"/>
         <source>Default</source>
         <translation>По замовчуванню</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="520"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="531"/>
         <source>Invalid point</source>
         <translation>Неправильна точка</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="436"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="438"/>
         <source>Invalid label</source>
         <translation>Неправильна мітка</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="136"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="156"/>
         <source>Enable to create a visibility group from original objects</source>
         <translation>Увімкніть для створення групи видимості з вихідних об&apos;єктів</translation>
     </message>
@@ -3764,7 +3818,7 @@
         <translation type="vanished">Діалог</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="114"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="134"/>
         <source>First line point:</source>
         <translation>Перша точка лінії:</translation>
     </message>
@@ -3773,64 +3827,64 @@
         <translation type="vanished">Суфікс:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="124"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="144"/>
         <source>Second line point:</source>
         <translation>Друга точка лінії:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="216"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="218"/>
         <source>Select first line point</source>
         <translation>Виберіть першу точку лінії</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="263"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="265"/>
         <source>Select first line point that is not part of the list of objects</source>
         <translation>Виберіть першу точку лінії, що не є частиною списку об&apos;єктів</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="267"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="269"/>
         <source>Select second line point</source>
         <translation>Виберіть другу точку лінії</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="279"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="281"/>
         <source>Select second line point that is not part of the list of objects</source>
         <translation>Виберіть другу точку лінії, що не є частиною списку об&apos;єктів</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="14"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="158"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="178"/>
         <source>Flipping by line</source>
         <translation>Відзеркалити по лінії</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="139"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="159"/>
         <source>Visibility Group</source>
         <translation>Група видимості</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="42"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="151"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="62"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="171"/>
         <source>Name:</source>
         <translation>Ім&apos;я:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="146"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="148"/>
         <source>Rotation</source>
         <translation>Обертання</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="168"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="188"/>
         <source>Tags:</source>
         <translation>Теги:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="175"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="195"/>
         <source>Separate each tag with comma.</source>
         <translation>Розділіть кожен тег комою.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="178"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="198"/>
         <source>Add tags</source>
         <translation>Додайте теги</translation>
     </message>
@@ -3840,63 +3894,63 @@
         <translation>Інструмент</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="59"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="79"/>
         <source>Pen style:</source>
         <translation>Тип пера:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="94"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="114"/>
         <source>Color:</source>
         <translation>Колір:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="191"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="643"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="211"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="654"/>
         <source>Ready</source>
         <translation>Готово</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="212"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="232"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="337"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="339"/>
         <source>Invalid group name</source>
         <translation>Неправильна назва групи</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="400"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="402"/>
         <source>Default</source>
         <translation>По замовчуванню</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="454"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="456"/>
         <source>Invalid name</source>
         <translation>Неправильне ім&apos;я</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="560"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="571"/>
         <source>Invalid line points</source>
         <translation>Недійсні точки лінії</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="567"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="578"/>
         <source>Invalid first line point</source>
         <translation>Недійсна перша точка лінії</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="574"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="585"/>
         <source>Invalid second line point</source>
         <translation>Недійсна друга точка лінії</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="454"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="456"/>
         <source>Invalid label</source>
         <translation>Неправильна мітка</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="136"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="156"/>
         <source>Enable to create a visibility group from original objects</source>
         <translation>Увімкніть для створення групи видимості з вихідних об&apos;єктів</translation>
     </message>
@@ -6087,33 +6141,33 @@ Apply settings anyway?</source>
         <translation type="vanished">Діалог</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="161"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="181"/>
         <source>Angle:</source>
         <translation>Кут:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="181"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="360"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="539"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="201"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="380"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="559"/>
         <source>Formula wizard</source>
         <translation>Майстер формул</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="223"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="402"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="581"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="243"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="422"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="601"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="271"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="450"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="629"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="291"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="470"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="649"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="340"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="360"/>
         <source>Length:</source>
         <translation>Довжина:</translation>
     </message>
@@ -6122,76 +6176,76 @@ Apply settings anyway?</source>
         <translation type="vanished">Суфікс:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="446"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="448"/>
         <source>Edit angle</source>
         <translation>Редагувати кут</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="474"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="476"/>
         <source>Edit length</source>
         <translation>Редагувати довжину</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="249"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="428"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="607"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="269"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="448"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="627"/>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="17"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="692"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="712"/>
         <source>Move</source>
         <translation>Перемістити</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="519"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="539"/>
         <source>Rotation angle:</source>
         <translation>Кут обертання:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="460"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="462"/>
         <source>Edit rotation angle</source>
         <translation>Редагувати кут обертання</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="658"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="678"/>
         <source>Rotation origin point:</source>
         <translation>Початкова точка обертання:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="114"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="115"/>
         <source>Center point</source>
         <translation>Точка центру</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="673"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="693"/>
         <source>Visibility Group</source>
         <translation>Група видимості</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="49"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="685"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="69"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="705"/>
         <source>Name:</source>
         <translation>Ім&apos;я:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="256"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="258"/>
         <source>Rotation</source>
         <translation>Обертання</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="702"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="722"/>
         <source>Tags:</source>
         <translation>Теги:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="709"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="729"/>
         <source>Separate each tag with comma.</source>
         <translation>Розділіть кожен тег комою.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="712"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="732"/>
         <source>Add tags</source>
         <translation>Додайте теги</translation>
     </message>
@@ -6201,63 +6255,63 @@ Apply settings anyway?</source>
         <translation>Інструмент</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="63"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="83"/>
         <source>Pen style:</source>
         <translation>Тип пера:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="98"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="118"/>
         <source>Color:</source>
         <translation>Колір:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="725"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="849"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="745"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="860"/>
         <source>Ready</source>
         <translation>Готово</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="746"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="766"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="494"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="496"/>
         <source>Invalid group name</source>
         <translation>Неправильна назва групи</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="557"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="559"/>
         <source>Default</source>
         <translation>По замовчуванню</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="611"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="613"/>
         <source>Invalid name</source>
         <translation>Неправильне ім&apos;я</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="734"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="745"/>
         <source>Invalid angle formula</source>
         <translation>Недійсна формула кута</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="750"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="761"/>
         <source>Invalid rotation angle formula</source>
         <translation>Недійсна формула кута повороту</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="766"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="777"/>
         <source>Invalid length formula</source>
         <translation>Недійсна формула довжини</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="611"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="613"/>
         <source>Invalid label</source>
         <translation>Неправильна мітка</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="670"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="690"/>
         <source>Enable to create a visibility group from original objects</source>
         <translation>Увімкніть для створення групи видимості з вихідних об&apos;єктів</translation>
     </message>
@@ -7231,12 +7285,12 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2182"/>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a notch visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Створіть формулу, яка регулює видимість. Значення, які відрізняються від &quot;0&quot;, роблять надсічку видимою</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2420"/>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Створіть формулу, яка регулює видимість. Значення, які відрізняються від &quot;0&quot;, роблять шлях видимим</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1069"/>
@@ -7266,7 +7320,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1165"/>
         <source>Edit notch visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Редагувати видимість надсічки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1659"/>
@@ -7468,10 +7522,6 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2329"/>
         <source>Visible</source>
         <translation>Видимий</translation>
-    </message>
-    <message>
-        <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible.</source>
-        <translation type="vanished">Створіть формулу, яка регулює видимість. Значення, які відрізняються від &quot;0&quot;, роблять шлях видимим.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2188"/>
@@ -8608,23 +8658,23 @@ Apply settings anyway?</source>
     <name>DialogRotation</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="14"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="327"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="175"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="347"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="177"/>
         <source>Rotation</source>
         <translation>Обертання</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="157"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="177"/>
         <source>Angle:</source>
         <translation>Кут:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="177"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="197"/>
         <source>Formula wizard</source>
         <translation>Майстер формул</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="219"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="239"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
@@ -8633,12 +8683,12 @@ Apply settings anyway?</source>
         <translation type="vanished">Розрахунок</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="267"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="287"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="293"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="313"/>
         <source>Origin Point:</source>
         <translation>Осьова точка:</translation>
     </message>
@@ -8647,12 +8697,12 @@ Apply settings anyway?</source>
         <translation type="vanished">Суфікс:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="389"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="391"/>
         <source>Edit angle</source>
         <translation>Редагувати кут</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="245"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="247"/>
         <source>Select origin point</source>
         <translation>Виберіть початкову точку</translation>
     </message>
@@ -8661,38 +8711,38 @@ Apply settings anyway?</source>
         <translation type="vanished">Виберіть початкову точку, що не є частиною списку об&apos;єктів</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="245"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="265"/>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="334"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="336"/>
         <source>This point cannot be origin point. Please, select another origin point</source>
         <translation>Ця точка може бути вихідною точкою. Будь ласка, виберіть іншу відправну точку операції</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="308"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="328"/>
         <source>Visibility Group</source>
         <translation>Група видимості</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="42"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="337"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="62"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="357"/>
         <source>Name:</source>
         <translation>Ім&apos;я:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="320"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="340"/>
         <source>Tags:</source>
         <translation>Теги:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="344"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="364"/>
         <source>Separate each tag with comma.</source>
         <translation>Розділіть кожен тег комою.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="347"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="367"/>
         <source>Add tags</source>
         <translation>Додайте теги</translation>
     </message>
@@ -8702,58 +8752,58 @@ Apply settings anyway?</source>
         <translation>Інструмент</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="59"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="79"/>
         <source>Pen style:</source>
         <translation>Тип пера:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="94"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="114"/>
         <source>Color:</source>
         <translation>Колір:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="360"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="737"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="380"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="748"/>
         <source>Ready</source>
         <translation>Готово</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="381"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="401"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="409"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="411"/>
         <source>Invalid group name</source>
         <translation>Неправильна назва групи</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="492"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="494"/>
         <source>Invalid rotation point</source>
         <translation>Недійсна точка обертання</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="677"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="679"/>
         <source>Invalid label</source>
         <translation>Неправильна мітка</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="677"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="679"/>
         <source>Invalid name</source>
         <translation>Неправильне ім&apos;я</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="568"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="570"/>
         <source>Invalid angle formula</source>
         <translation>Недійсна формула кута</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="623"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="625"/>
         <source>Default</source>
         <translation>По замовчуванню</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="305"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="325"/>
         <source>Enable to create a visibility group from original objects</source>
         <translation>Увімкніть для створення групи видимості з вихідних об&apos;єктів</translation>
     </message>
@@ -9569,7 +9619,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3075"/>
         <source>Edit notch visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Редагувати видимість надсічки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3087"/>
@@ -15636,7 +15686,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/libs/vpatterndb/vpiecenode.cpp" line="486"/>
         <source>Cannot calculate passmark visibility for point &apos;%1&apos;. Reason: %2. Visibility trigger will be ignored.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неможливо обчислити видимість надсічки для точки «%1». Причина: %2. Тригер видимості буде проігноровано.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vpiecenode.cpp" line="388"/>
@@ -16007,7 +16057,7 @@ This option will take an affect after restart.</source>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolspline.cpp" line="192"/>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolsplinepath.cpp" line="172"/>
         <source>Curve &apos;%1&apos; with id %2 has not unique name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Крива «%1» з id %2 має не унікальну назву.</translation>
     </message>
 </context>
 <context>
@@ -18750,7 +18800,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="343"/>
         <source>Not Mirrored</source>
-        <translation type="unfinished">Не віддзеркалено</translation>
+        <translation>Не віддзеркалено</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="351"/>
@@ -18788,17 +18838,17 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1039"/>
         <source>Control</source>
-        <translation type="unfinished">Контроль</translation>
+        <translation>Контроль</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1093"/>
         <source>Visible</source>
-        <translation type="unfinished">Видимий</translation>
+        <translation>Видимий</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1193"/>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a notch visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Створіть формулу, яка регулює видимість. Значення, які відрізняються від &quot;0&quot;, роблять надсічку видимою</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1268"/>

@@ -1212,6 +1212,60 @@
     </message>
 </context>
 <context>
+    <name>DialogBulkRename</name>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="24"/>
+        <source>Rename…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="43"/>
+        <source>Base name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="48"/>
+        <source>New name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="58"/>
+        <source>Text:</source>
+        <translation type="unfinished">Testo:</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="65"/>
+        <source>Use %n, %0n, %00n, %000n for counting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="75"/>
+        <source>Position:</source>
+        <translation type="unfinished">Posizione:</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="84"/>
+        <source>Append</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="97"/>
+        <source>Prepand</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="107"/>
+        <source>Replace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.cpp" line="182"/>
+        <source>Enable renaming for this item</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogCredits</name>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogcredits.ui" line="14"/>
@@ -3618,74 +3672,74 @@
         <translation type="vanished">Dialogo</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="114"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="134"/>
         <source>Origin point:</source>
         <translation>Punto di origine:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="124"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="144"/>
         <source>Axis type:</source>
         <translation>Tipo di asse:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="222"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="224"/>
         <source>Select origin point</source>
         <translation>Seleziona un punto di origine</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="268"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="270"/>
         <source>Select origin point that is not part of the list of objects</source>
         <translation>Seleziona un punto di origine che non fa parte della lista di oggetti</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="436"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="438"/>
         <source>Invalid name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="537"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="548"/>
         <source>Vertical axis</source>
         <translation>Asse verticale</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="538"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="549"/>
         <source>Horizontal axis</source>
         <translation>Asse orizzontale</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="14"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="158"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="178"/>
         <source>Flipping by axis</source>
         <translation>Ruotare sull&apos;asse</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="139"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="159"/>
         <source>Visibility Group</source>
         <translation>Gruppo di Visibilità</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="42"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="151"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="62"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="171"/>
         <source>Name:</source>
         <translation>Nome:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="152"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="154"/>
         <source>Rotation</source>
         <translation>Rotazione</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="168"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="188"/>
         <source>Tags:</source>
         <translation>Tag:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="175"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="195"/>
         <source>Separate each tag with comma.</source>
         <translation>Separa ogni tag con le virgole.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="178"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="198"/>
         <source>Add tags</source>
         <translation>Aggiungi tag</translation>
     </message>
@@ -3695,48 +3749,48 @@
         <translation>Strumento</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="59"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="79"/>
         <source>Pen style:</source>
         <translation>Stile penna:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="94"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="114"/>
         <source>Color:</source>
         <translation>Colore:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="191"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="604"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="211"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="615"/>
         <source>Ready</source>
         <translation>Pronto</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="212"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="232"/>
         <source>Notes</source>
         <translation>nota</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="320"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="322"/>
         <source>Invalid group name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="382"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="384"/>
         <source>Default</source>
         <translation>Default</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="520"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="531"/>
         <source>Invalid point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="436"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="438"/>
         <source>Invalid label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="136"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="156"/>
         <source>Enable to create a visibility group from original objects</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3748,69 +3802,69 @@
         <translation type="vanished">Dialogo</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="114"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="134"/>
         <source>First line point:</source>
         <translation type="unfinished">Primo punto della linea:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="124"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="144"/>
         <source>Second line point:</source>
         <translation>Punto della seconda linea:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="216"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="218"/>
         <source>Select first line point</source>
         <translation>Seleziona il primo punto della linea</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="263"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="265"/>
         <source>Select first line point that is not part of the list of objects</source>
         <translation>Seleziona il primo punto della linea che non fa parte della lista degli oggetti</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="267"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="269"/>
         <source>Select second line point</source>
         <translation>Seleziona il secondo punto della linea</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="279"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="281"/>
         <source>Select second line point that is not part of the list of objects</source>
         <translation>Seleziona il secondo punto della linea che non fa parte della lista degli oggetti</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="14"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="158"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="178"/>
         <source>Flipping by line</source>
         <translation>Ruota sulla linea</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="139"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="159"/>
         <source>Visibility Group</source>
         <translation>Gruppo di Visibilità</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="42"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="151"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="62"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="171"/>
         <source>Name:</source>
         <translation>Nome:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="146"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="148"/>
         <source>Rotation</source>
         <translation>Rotazione</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="168"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="188"/>
         <source>Tags:</source>
         <translation>Tag:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="175"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="195"/>
         <source>Separate each tag with comma.</source>
         <translation>Separa ogni tag con le virgole.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="178"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="198"/>
         <source>Add tags</source>
         <translation>Aggiungi tag</translation>
     </message>
@@ -3820,63 +3874,63 @@
         <translation>Strumento</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="59"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="79"/>
         <source>Pen style:</source>
         <translation>Stile penna:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="94"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="114"/>
         <source>Color:</source>
         <translation>Colore:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="191"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="643"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="211"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="654"/>
         <source>Ready</source>
         <translation>Pronto</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="212"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="232"/>
         <source>Notes</source>
         <translation>nota</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="337"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="339"/>
         <source>Invalid group name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="400"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="402"/>
         <source>Default</source>
         <translation>Default</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="454"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="456"/>
         <source>Invalid name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="560"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="571"/>
         <source>Invalid line points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="567"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="578"/>
         <source>Invalid first line point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="574"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="585"/>
         <source>Invalid second line point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="454"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="456"/>
         <source>Invalid label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="136"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="156"/>
         <source>Enable to create a visibility group from original objects</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6063,107 +6117,107 @@ Applicare la configurazione comunque?</translation>
         <translation type="vanished">Dialogo</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="161"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="181"/>
         <source>Angle:</source>
         <translation>Angolo:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="181"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="360"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="539"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="201"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="380"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="559"/>
         <source>Formula wizard</source>
         <translation type="unfinished">Formula magica</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="223"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="402"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="581"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="243"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="422"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="601"/>
         <source>Value</source>
         <translation>Valore</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="271"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="450"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="629"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="291"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="470"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="649"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostra calcolo intero nella finestra di dialogo&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="340"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="360"/>
         <source>Length:</source>
         <translation>Lunghezza:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="446"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="448"/>
         <source>Edit angle</source>
         <translation type="unfinished">Modifica angolo</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="474"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="476"/>
         <source>Edit length</source>
         <translation type="unfinished">Modifica lunghezza</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="249"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="428"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="607"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="269"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="448"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="627"/>
         <source>Calculation</source>
         <translation>Calcolo</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="17"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="692"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="712"/>
         <source>Move</source>
         <translation>Sposta</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="519"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="539"/>
         <source>Rotation angle:</source>
         <translation>Angolo di rotazione:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="460"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="462"/>
         <source>Edit rotation angle</source>
         <translation>Modifica angolo di rotazione</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="658"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="678"/>
         <source>Rotation origin point:</source>
         <translation>Ruota punto d&apos;origine:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="114"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="115"/>
         <source>Center point</source>
         <translation>Punto centrale</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="673"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="693"/>
         <source>Visibility Group</source>
         <translation>Gruppo di Visibilità</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="49"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="685"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="69"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="705"/>
         <source>Name:</source>
         <translation>Nome:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="256"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="258"/>
         <source>Rotation</source>
         <translation>Rotazione</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="702"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="722"/>
         <source>Tags:</source>
         <translation>Tag:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="709"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="729"/>
         <source>Separate each tag with comma.</source>
         <translation>Separa ogni tag con le virgole.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="712"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="732"/>
         <source>Add tags</source>
         <translation>Aggiungi tag</translation>
     </message>
@@ -6173,63 +6227,63 @@ Applicare la configurazione comunque?</translation>
         <translation>Strumento</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="63"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="83"/>
         <source>Pen style:</source>
         <translation>Stile penna:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="98"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="118"/>
         <source>Color:</source>
         <translation>Colore:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="725"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="849"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="745"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="860"/>
         <source>Ready</source>
         <translation>Pronto</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="746"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="766"/>
         <source>Notes</source>
         <translation>nota</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="494"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="496"/>
         <source>Invalid group name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="557"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="559"/>
         <source>Default</source>
         <translation>Default</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="611"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="613"/>
         <source>Invalid name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="734"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="745"/>
         <source>Invalid angle formula</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="750"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="761"/>
         <source>Invalid rotation angle formula</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="766"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="777"/>
         <source>Invalid length formula</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="611"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="613"/>
         <source>Invalid label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="670"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="690"/>
         <source>Enable to create a visibility group from original objects</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7442,10 +7496,6 @@ Applicare la configurazione comunque?</translation>
         <translation>Visibile</translation>
     </message>
     <message>
-        <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible.</source>
-        <translation type="vanished">Crea una formula che regola la visibilità. Valori differenti da 0 rendono un tracciato visibile.</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2188"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2426"/>
         <source>1</source>
@@ -8578,23 +8628,23 @@ Applicare la configurazione comunque?</translation>
     <name>DialogRotation</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="14"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="327"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="175"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="347"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="177"/>
         <source>Rotation</source>
         <translation>Rotazione</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="157"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="177"/>
         <source>Angle:</source>
         <translation>Angolo:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="177"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="197"/>
         <source>Formula wizard</source>
         <translation>Formula magica</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="219"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="239"/>
         <source>Value</source>
         <translation>Valore</translation>
     </message>
@@ -8603,12 +8653,12 @@ Applicare la configurazione comunque?</translation>
         <translation type="vanished">Calcolo</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="267"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="287"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostra calcolo intero nella finestra di dialogo&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="293"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="313"/>
         <source>Origin Point:</source>
         <translation>Punto d&apos;origine:</translation>
     </message>
@@ -8617,12 +8667,12 @@ Applicare la configurazione comunque?</translation>
         <translation type="vanished">Suffisso:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="389"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="391"/>
         <source>Edit angle</source>
         <translation>Modifica angolo</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="245"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="247"/>
         <source>Select origin point</source>
         <translation>Seleziona un punto di origine</translation>
     </message>
@@ -8631,38 +8681,38 @@ Applicare la configurazione comunque?</translation>
         <translation type="vanished">Seleziona un punto di origine che non fa parte della lista di oggetti</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="245"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="265"/>
         <source>Calculation</source>
         <translation>Calcolo</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="334"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="336"/>
         <source>This point cannot be origin point. Please, select another origin point</source>
         <translation>Questo non può essere il punto di origine. Selezionane un altro, grazie</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="308"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="328"/>
         <source>Visibility Group</source>
         <translation>Gruppo di Visibilità</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="42"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="337"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="62"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="357"/>
         <source>Name:</source>
         <translation>Nome:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="320"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="340"/>
         <source>Tags:</source>
         <translation>Tag:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="344"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="364"/>
         <source>Separate each tag with comma.</source>
         <translation>Separa ogni tag con le virgole.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="347"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="367"/>
         <source>Add tags</source>
         <translation>Aggiungi tag</translation>
     </message>
@@ -8672,58 +8722,58 @@ Applicare la configurazione comunque?</translation>
         <translation>Strumento</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="59"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="79"/>
         <source>Pen style:</source>
         <translation>Stile penna:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="94"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="114"/>
         <source>Color:</source>
         <translation>Colore:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="360"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="737"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="380"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="748"/>
         <source>Ready</source>
         <translation>Pronto</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="381"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="401"/>
         <source>Notes</source>
         <translation>nota</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="409"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="411"/>
         <source>Invalid group name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="492"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="494"/>
         <source>Invalid rotation point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="677"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="679"/>
         <source>Invalid label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="677"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="679"/>
         <source>Invalid name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="568"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="570"/>
         <source>Invalid angle formula</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="623"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="625"/>
         <source>Default</source>
         <translation>Default</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="305"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="325"/>
         <source>Enable to create a visibility group from original objects</source>
         <translation type="unfinished"></translation>
     </message>
