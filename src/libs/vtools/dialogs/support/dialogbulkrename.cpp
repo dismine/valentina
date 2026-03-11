@@ -59,7 +59,7 @@ auto ApplyPlaceholders(const QString &text, int orderIndex) -> QString
 } // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogBulkRename::DialogBulkRename(const QList<SourceItem> &items, const VContainer *data, QWidget *parent)
+DialogBulkRename::DialogBulkRename(const QVector<SourceItem> &items, const VContainer *data, QWidget *parent)
   : QDialog(parent),
     ui(new Ui::DialogBulkRename),
     m_items(items),

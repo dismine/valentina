@@ -42,7 +42,7 @@ class DialogBulkRename : public QDialog
     Q_OBJECT // NOLINT
 
 public:
-    DialogBulkRename(const QList<SourceItem> &items, const VContainer *data, QWidget *parent = nullptr);
+    DialogBulkRename(const QVector<SourceItem> &items, const VContainer *data, QWidget *parent = nullptr);
     ~DialogBulkRename() override;
 
     /** Returns true if the user actually changed at least one name. */
