@@ -372,7 +372,8 @@ Q_GLOBAL_STATIC_WITH_ARGS(const ThemeIconStringHash,
                             {VThemeIcon::ObjectOrderFront, "object-order-front"_L1},
                             {VThemeIcon::ObjectOrderRaise, "object-order-raise"_L1},
                             {VThemeIcon::ObjectOrderLower, "object-order-lower"_L1},
-                            {VThemeIcon::ObjectOrderBack, "object-order-back"_L1}}))
+                            {VThemeIcon::ObjectOrderBack, "object-order-back"_L1},
+                            {VThemeIcon::EditRename, "edit-rename"_L1}}))
 QT_WARNING_POP
 } // namespace
 

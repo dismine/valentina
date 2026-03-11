@@ -1324,7 +1324,7 @@
         <!-- <file>icons/Eleven-Dark/16/actions/edit-link.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/edit-map.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/edit-mark.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/16/actions/edit-rename.svg</file> -->
+        <file>icons/Eleven-Dark/16/actions/edit-rename.svg</file>
         <!-- <file>icons/Eleven-Dark/16/actions/edit-table-delete-row.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/edit-undo-history.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/editclear.svg</file> -->
@@ -3730,7 +3730,7 @@
         <!-- <file>icons/Eleven-Dark/22/actions/edit-map.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22/actions/edit-mark.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22/actions/edit-none.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/22/actions/edit-rename.svg</file> -->
+        <file>icons/Eleven-Dark/22/actions/edit-rename.svg</file>
         <!-- <file>icons/Eleven-Dark/22/actions/edit-undo-history.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22/actions/edit_animation.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22/actions/editclear.svg</file> -->
@@ -6007,7 +6007,7 @@
         <!-- <file>icons/Eleven-Dark/24/actions/edit-map.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24/actions/edit-mark.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24/actions/edit-none.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/24/actions/edit-rename.svg</file> -->
+        <file>icons/Eleven-Dark/24/actions/edit-rename.svg</file>
         <!-- <file>icons/Eleven-Dark/24/actions/edit-undo-history.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24/actions/edit_animation.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24/actions/editclear.svg</file> -->
@@ -9259,7 +9259,7 @@
         <!-- <file>icons/Eleven-Dark/16@2x/actions/edit-link.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/edit-map.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/edit-mark.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/16@2x/actions/edit-rename.svg</file> -->
+        <file>icons/Eleven-Dark/16@2x/actions/edit-rename.svg</file>
         <!-- <file>icons/Eleven-Dark/16@2x/actions/edit-table-delete-row.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/edit-undo-history.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/editclear.svg</file> -->
@@ -11665,7 +11665,7 @@
         <!-- <file>icons/Eleven-Dark/22@2x/actions/edit-map.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22@2x/actions/edit-mark.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22@2x/actions/edit-none.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/22@2x/actions/edit-rename.svg</file> -->
+        <file>icons/Eleven-Dark/22@2x/actions/edit-rename.svg</file>
         <!-- <file>icons/Eleven-Dark/22@2x/actions/edit-undo-history.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22@2x/actions/edit_animation.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22@2x/actions/editclear.svg</file> -->
@@ -13942,7 +13942,7 @@
         <!-- <file>icons/Eleven-Dark/24@2x/actions/edit-map.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24@2x/actions/edit-mark.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24@2x/actions/edit-none.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/24@2x/actions/edit-rename.svg</file> -->
+        <file>icons/Eleven-Dark/24@2x/actions/edit-rename.svg</file>
         <!-- <file>icons/Eleven-Dark/24@2x/actions/edit-undo-history.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24@2x/actions/edit_animation.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24@2x/actions/editclear.svg</file> -->

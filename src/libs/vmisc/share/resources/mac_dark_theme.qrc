@@ -874,7 +874,7 @@
         <!-- <file>icons/La-Sierra-Dark/actions/22x22/edit-find.svg</file> -->
         <!-- <file>icons/La-Sierra-Dark/actions/22x22/edit-image-face-add.svg</file> -->
         <!-- <file>icons/La-Sierra-Dark/actions/22x22/edit-redo-amarok.svg</file> -->
-        <!-- <file>icons/La-Sierra-Dark/actions/22x22/edit-rename.svg</file> -->
+        <file>icons/La-Sierra-Dark/actions/22x22/edit-rename.svg</file>
         <!-- <file>icons/La-Sierra-Dark/actions/22x22/edit-undo-amarok.svg</file> -->
         <!-- <file>icons/La-Sierra-Dark/actions/22x22/edit-undo-history.svg</file> -->
         <!-- <file>icons/La-Sierra-Dark/actions/22x22/edit.svg</file> -->
@@ -2382,7 +2382,7 @@
         <!-- <file>icons/La-Sierra-Dark/actions/22x22@2x/edit-find.svg</file> -->
         <!-- <file>icons/La-Sierra-Dark/actions/22x22@2x/edit-image-face-add.svg</file> -->
         <!-- <file>icons/La-Sierra-Dark/actions/22x22@2x/edit-redo-amarok.svg</file> -->
-        <!-- <file>icons/La-Sierra-Dark/actions/22x22@2x/edit-rename.svg</file> -->
+        <file>icons/La-Sierra-Dark/actions/22x22@2x/edit-rename.svg</file>
         <!-- <file>icons/La-Sierra-Dark/actions/22x22@2x/edit-undo-amarok.svg</file> -->
         <!-- <file>icons/La-Sierra-Dark/actions/22x22@2x/edit-undo-history.svg</file> -->
         <!-- <file>icons/La-Sierra-Dark/actions/22x22@2x/edit.svg</file> -->

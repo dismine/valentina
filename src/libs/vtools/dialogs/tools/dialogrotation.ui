@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>408</width>
-    <height>467</height>
+    <width>405</width>
+    <height>525</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -27,13 +27,33 @@
       <attribute name="title">
        <string>Tool</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout">
+      <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
         <widget class="QSplitter" name="splitter">
          <property name="orientation">
           <enum>Qt::Orientation::Horizontal</enum>
          </property>
-         <widget class="QListWidget" name="listWidget"/>
+         <widget class="QWidget" name="">
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <item>
+            <widget class="QListWidget" name="listWidget"/>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_2">
+             <item>
+              <widget class="QToolButton" name="toolButtonBulkRename">
+               <property name="text">
+                <string notr="true">...</string>
+               </property>
+               <property name="icon">
+                <iconset theme="edit-rename"/>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
          <widget class="QWidget" name="formLayoutWidget">
           <layout class="QFormLayout" name="formLayout_2">
            <item row="0" column="0">
@@ -402,14 +422,14 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>VPE::QtColorPicker</class>
-   <extends>QPushButton</extends>
-   <header>../vpropertyexplorer/qtcolorpicker.h</header>
-  </customwidget>
-  <customwidget>
    <class>VPlainTextEdit</class>
    <extends>QPlainTextEdit</extends>
    <header>../vwidgets/vplaintextedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>VPE::QtColorPicker</class>
+   <extends>QPushButton</extends>
+   <header>../vpropertyexplorer/qtcolorpicker.h</header>
   </customwidget>
   <customwidget>
    <class>VCompleterLineEdit</class>

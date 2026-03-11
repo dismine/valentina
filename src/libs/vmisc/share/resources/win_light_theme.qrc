@@ -13,6 +13,7 @@
         <file>icons/Eleven-Light/16/actions/draw-star.svg</file>
         <file>icons/Eleven-Light/16/actions/edit-clear-history.svg</file>
         <file>icons/Eleven-Light/16/actions/edit-clear.svg</file>
+        <file>icons/Eleven-Light/16/actions/edit-rename.svg</file>
         <file>icons/Eleven-Light/16/actions/edit-delete.svg</file>
         <file>icons/Eleven-Light/16/actions/edit-redo.svg</file>
         <file>icons/Eleven-Light/16/actions/edit-undo.svg</file>
@@ -63,6 +64,7 @@
         <file>icons/Eleven-Light/22/actions/document-save.svg</file>
         <file>icons/Eleven-Light/22/actions/edit-clear-history.svg</file>
         <file>icons/Eleven-Light/22/actions/edit-clear.svg</file>
+        <file>icons/Eleven-Light/22/actions/edit-rename.svg</file>
         <file>icons/Eleven-Light/22/actions/edit-delete.svg</file>
         <file>icons/Eleven-Light/22/actions/edit-redo.svg</file>
         <file>icons/Eleven-Light/22/actions/edit-undo.svg</file>
@@ -110,6 +112,7 @@
         <file>icons/Eleven-Light/24/actions/document-save.svg</file>
         <file>icons/Eleven-Light/24/actions/edit-clear-history.svg</file>
         <file>icons/Eleven-Light/24/actions/edit-clear.svg</file>
+        <file>icons/Eleven-Light/24/actions/edit-rename.svg</file>
         <file>icons/Eleven-Light/24/actions/edit-delete.svg</file>
         <file>icons/Eleven-Light/24/actions/edit-redo.svg</file>
         <file>icons/Eleven-Light/24/actions/edit-undo.svg</file>
@@ -160,6 +163,7 @@
         <file>icons/Eleven-Light/16@2x/actions/draw-star.svg</file>
         <file>icons/Eleven-Light/16@2x/actions/edit-clear-history.svg</file>
         <file>icons/Eleven-Light/16@2x/actions/edit-clear.svg</file>
+        <file>icons/Eleven-Light/16@2x/actions/edit-rename.svg</file>
         <file>icons/Eleven-Light/16@2x/actions/edit-delete.svg</file>
         <file>icons/Eleven-Light/16@2x/actions/edit-redo.svg</file>
         <file>icons/Eleven-Light/16@2x/actions/edit-undo.svg</file>
@@ -210,6 +214,7 @@
         <file>icons/Eleven-Light/22@2x/actions/document-save.svg</file>
         <file>icons/Eleven-Light/22@2x/actions/edit-clear-history.svg</file>
         <file>icons/Eleven-Light/22@2x/actions/edit-clear.svg</file>
+        <file>icons/Eleven-Light/22@2x/actions/edit-rename.svg</file>
         <file>icons/Eleven-Light/22@2x/actions/edit-delete.svg</file>
         <file>icons/Eleven-Light/22@2x/actions/edit-redo.svg</file>
         <file>icons/Eleven-Light/22@2x/actions/edit-undo.svg</file>
@@ -257,6 +262,7 @@
         <file>icons/Eleven-Light/24@2x/actions/document-save.svg</file>
         <file>icons/Eleven-Light/24@2x/actions/edit-clear-history.svg</file>
         <file>icons/Eleven-Light/24@2x/actions/edit-clear.svg</file>
+        <file>icons/Eleven-Light/24@2x/actions/edit-rename.svg</file>
         <file>icons/Eleven-Light/24@2x/actions/edit-delete.svg</file>
         <file>icons/Eleven-Light/24@2x/actions/edit-redo.svg</file>
         <file>icons/Eleven-Light/24@2x/actions/edit-undo.svg</file>

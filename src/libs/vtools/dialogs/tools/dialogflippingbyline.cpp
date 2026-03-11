@@ -47,6 +47,7 @@
 #include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../qmuparser/qmudef.h"
+#include "../support/dialogbulkrename.h"
 #include "../vmisc/vvalentinasettings.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
@@ -90,6 +91,7 @@ DialogFlippingByLine::DialogFlippingByLine(const VContainer *data,
     connect(ui->comboBoxPenStyle, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &DialogFlippingByLine::PenStyleChanged);
     connect(ui->pushButtonColor, &VPE::QtColorPicker::colorChanged, this, &DialogFlippingByLine::ColorChanged);
+    connect(ui->toolButtonBulkRename, &QToolButton::clicked, this, &DialogFlippingByLine::BulkRename);
 
     vis = new VisToolFlippingByLine(data);
 
@@ -489,6 +491,15 @@ void DialogFlippingByLine::ColorChanged()
         QColor const color = ui->pushButtonColor->currentColor();
         sourceItem.color = color.isValid() ? color.name() : ColorDefault;
         item->setData(Qt::UserRole, QVariant::fromValue(sourceItem));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByLine::BulkRename()
+{
+    if (DialogBulkRename dlg(m_sourceObjects, data, this); dlg.exec() == QDialog::Accepted && dlg.HasChanges())
+    {
+        SetSourceObjects(dlg.RenamedItems());
     }
 }
 

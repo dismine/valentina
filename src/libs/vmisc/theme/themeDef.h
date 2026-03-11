@@ -73,7 +73,7 @@ Q_DECL_CONST_FUNCTION inline auto qHash(VColorRole key, uint seed = 0) noexcept 
 }
 #endif
 
-enum class VThemeIcon
+enum class VThemeIcon : quint8
 {
     // AddressBookNew,
     ApplicationExit,
@@ -242,7 +242,8 @@ enum class VThemeIcon
     ObjectOrderFront,
     ObjectOrderRaise,
     ObjectOrderLower,
-    ObjectOrderBack
+    ObjectOrderBack,
+    EditRename
 };
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)

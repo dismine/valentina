@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>456</width>
-    <height>613</height>
+    <width>482</width>
+    <height>681</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -36,10 +36,30 @@
          <property name="orientation">
           <enum>Qt::Orientation::Horizontal</enum>
          </property>
-         <widget class="QListWidget" name="listWidget">
-          <property name="editTriggers">
-           <set>QAbstractItemView::EditTrigger::CurrentChanged</set>
-          </property>
+         <widget class="QWidget" name="">
+          <layout class="QVBoxLayout" name="verticalLayout_4">
+           <item>
+            <widget class="QListWidget" name="listWidget">
+             <property name="editTriggers">
+              <set>QAbstractItemView::EditTrigger::CurrentChanged</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <item>
+              <widget class="QToolButton" name="toolButtonBulkRename">
+               <property name="text">
+                <string notr="true">...</string>
+               </property>
+               <property name="icon">
+                <iconset theme="edit-rename"/>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
          </widget>
          <widget class="QWidget" name="formLayoutWidget">
           <layout class="QFormLayout" name="formLayout_2">

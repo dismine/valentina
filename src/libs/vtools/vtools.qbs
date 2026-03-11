@@ -11,6 +11,9 @@ VLib {
         name: "dialogs"
         prefix: "dialogs/"
         files: [
+            "support/dialogbulkrename.cpp",
+            "support/dialogbulkrename.h",
+            "support/dialogbulkrename.ui",
             "tooldialogs.h",
             "tools/dialogalongline.h",
             "tools/dialogarc.h",

@@ -50,6 +50,7 @@
 #include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../qmuparser/qmudef.h"
+#include "../support/dialogbulkrename.h"
 #include "../support/dialogeditwrongformula.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/theme/vtheme.h"
@@ -109,6 +110,7 @@ DialogRotation::DialogRotation(const VContainer *data, VAbstractPattern *doc, qu
     connect(ui->comboBoxPenStyle, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &DialogRotation::PenStyleChanged);
     connect(ui->pushButtonColor, &VPE::QtColorPicker::colorChanged, this, &DialogRotation::ColorChanged);
+    connect(ui->toolButtonBulkRename, &QToolButton::clicked, this, &DialogRotation::BulkRename);
 
     vis = new VisToolRotation(data);
 
@@ -712,6 +714,15 @@ void DialogRotation::ColorChanged()
         QColor const color = ui->pushButtonColor->currentColor();
         sourceItem.color = color.isValid() ? color.name() : ColorDefault;
         item->setData(Qt::UserRole, QVariant::fromValue(sourceItem));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogRotation::BulkRename()
+{
+    if (DialogBulkRename dlg(m_sourceObjects, data, this); dlg.exec() == QDialog::Accepted && dlg.HasChanges())
+    {
+        SetSourceObjects(dlg.RenamedItems());
     }
 }
 

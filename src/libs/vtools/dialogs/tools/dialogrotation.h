@@ -94,6 +94,7 @@ private slots:
     void NameChanged(const QString &text);
     void PenStyleChanged();
     void ColorChanged();
+    void BulkRename();
 
 protected:
     void ShowVisualization() override;
