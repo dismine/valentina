@@ -294,7 +294,7 @@ auto EvalToolFormula(QDialog *dialog, const FormulaData &data, bool &flag) -> qr
 
     qreal result = INT_MIN; // Value can be 0, so use max imposible value
 
-    auto ShowErrorResult = [data](const QString &reason)
+    auto ShowErrorResult = [&data](const QString &reason)
     {
         QString message = QObject::tr("Error");
         if (!data.postfix.isEmpty())
