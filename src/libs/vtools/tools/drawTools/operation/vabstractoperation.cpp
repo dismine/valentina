@@ -1134,12 +1134,11 @@ void VAbstractOperation::ProcessOperationToolOptions(const QDomElement &oldDomEl
     // Process rename operations, connecting signal only for the last one
     for (int i = 0; i < renames.size(); ++i)
     {
-        const auto &rename = renames.at(i);
+        const auto &[id, names] = renames.at(i);
 
-        if (const QSharedPointer<VGObject> obj = VDataTool::data.GetGObject(rename.first);
-            obj->getType() == GOType::Point)
+        if (const QSharedPointer<VGObject> obj = VDataTool::data.GetGObject(id); obj->getType() == GOType::Point)
         {
-            auto *renameLabel = new RenameLabel(rename.second.first, rename.second.second, doc, rename.first, newGroup);
+            auto *renameLabel = new RenameLabel(names.first, names.second, doc, id, newGroup);
 
             if (i == renames.size() - 1) // Last rename operation
             {
@@ -1149,8 +1148,7 @@ void VAbstractOperation::ProcessOperationToolOptions(const QDomElement &oldDomEl
         else
         {
             const CurveAliasType type = RenameAlias::CurveType(obj->getType());
-            auto *renameName
-                = new RenameAlias(type, rename.second.first, rename.second.second, doc, rename.first, newGroup);
+            auto *renameName = new RenameAlias(type, names.first, names.second, doc, id, newGroup);
 
             if (i == renames.size() - 1) // Last rename operation
             {
