@@ -1096,7 +1096,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="97"/>
-        <source>Prepand</source>
+        <source>Prepend</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
