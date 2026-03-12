@@ -94,7 +94,7 @@
        <item>
         <widget class="QRadioButton" name="radioButtonPrepend">
          <property name="text">
-          <string>Prepand</string>
+          <string>Prepend</string>
          </property>
          <attribute name="buttonGroup">
           <string notr="true">buttonGroup</string>
