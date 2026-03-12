@@ -112,7 +112,7 @@ void VToolSinglePoint::setName(const QString &name)
 {
     UpdatePointName(m_id,
                     name,
-                    [&](const QDomElement &oldElem, const QDomElement &newElem, const ToolChanges &changes) -> void
+                    [this](const QDomElement &oldElem, const QDomElement &newElem, const ToolChanges &changes) -> void
                     { ProcessPointToolOptions(oldElem, newElem, changes); });
 }
 
