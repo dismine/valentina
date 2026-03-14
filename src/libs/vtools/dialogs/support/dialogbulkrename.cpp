@@ -364,8 +364,14 @@ auto DialogBulkRename::IsNameValid(const QString &name, int currentRow) const ->
         return true;
     }
 
+    if (currentRow >= m_items.size())
+    {
+        return false;
+    }
+
     // Must be unique in the data container
-    if ((m_data != nullptr) && !m_data->IsUnique(name))
+    if (NewFullBaseName(m_items.at(currentRow).name, m_items.at(currentRow).id) != name && (m_data != nullptr)
+        && !m_data->IsUnique(name))
     {
         return false;
     }
