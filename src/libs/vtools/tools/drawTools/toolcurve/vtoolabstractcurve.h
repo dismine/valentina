@@ -292,6 +292,7 @@ protected:
         QString newP4Label{};
         QString oldAliasSuffix{};
         QString newAliasSuffix{};
+        quint32 newDuplicate{0};
 
         auto HasChanges() const -> bool
         {

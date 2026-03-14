@@ -292,5 +292,6 @@ auto VToolCubicBezierPath::GatherToolChanges() const -> VToolAbstractBezier::Too
             .oldP4Label = oldCurve->LastPoint().name(),
             .newP4Label = newCurve.LastPoint().name(),
             .oldAliasSuffix = oldCurve->GetAliasSuffix(),
-            .newAliasSuffix = newCurve.GetAliasSuffix()};
+            .newAliasSuffix = newCurve.GetAliasSuffix(),
+            .newDuplicate = newCurve.GetDuplicate()};
 }

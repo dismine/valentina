@@ -134,13 +134,15 @@ public:
 
     Q_REQUIRED_RESULT static auto CreateForSpline(const ObjectPair_t &oldPair,
                                                   const ObjectPair_t &newPair,
-                                                  quint32 duplicate,
+                                                  quint32 oldDuplicate,
+                                                  quint32 newDuplicate,
                                                   VAbstractPattern *doc,
                                                   quint32 id,
                                                   QUndoCommand *parent = nullptr) -> RenamePair *;
     Q_REQUIRED_RESULT static auto CreateForSplinePath(const ObjectPair_t &oldPair,
                                                       const ObjectPair_t &newPair,
-                                                      quint32 duplicate,
+                                                      quint32 oldDuplicate,
+                                                      quint32 newDuplicate,
                                                       VAbstractPattern *doc,
                                                       quint32 id,
                                                       QUndoCommand *parent = nullptr) -> RenamePair *;
@@ -155,12 +157,14 @@ private:
     RenameObjectType m_type;
     ObjectPair_t m_oldPair;
     ObjectPair_t m_newPair;
-    quint32 m_duplicate;
+    quint32 m_oldDuplicate;
+    quint32 m_newDuplicate;
 
     RenamePair(RenameObjectType type,
                ObjectPair_t oldPair,
                ObjectPair_t newPair,
-               quint32 duplicate,
+               quint32 oldDuplicate,
+               quint32 newDuplicate,
                VAbstractPattern *doc,
                quint32 id,
                QUndoCommand *parent = nullptr);
@@ -214,7 +218,14 @@ public:
     RenameArc(RenameArcType type,
               QString oldCenterLabel,
               QString newCenterLabel,
-              int duplicate,
+              VAbstractPattern *doc,
+              quint32 id,
+              QUndoCommand *parent = nullptr);
+    RenameArc(RenameArcType type,
+              QString oldCenterLabel,
+              QString newCenterLabel,
+              quint32 oldDuplicate,
+              quint32 newDuplicate,
               VAbstractPattern *doc,
               quint32 id,
               QUndoCommand *parent = nullptr);
@@ -228,7 +239,8 @@ private:
     RenameArcType m_type;
     QString m_oldCenterLabel;
     QString m_newCenterLabel;
-    int m_duplicate;
+    quint32 m_oldDuplicate{0};
+    quint32 m_newDuplicate{0};
 };
 
 class RenameSegmentCurves : public AbstractObjectRename

@@ -559,7 +559,7 @@ void VToolAbstractArc::ProcessArcToolOptions(const QDomElement &oldDomElement,
         const RenameArcType arcType = arc->getType() == GOType::Arc ? RenameArcType::Arc : RenameArcType::ElArc;
 
         // Share the same center point as a base arc
-        auto *renameArc = new RenameArc(arcType, changes.oldCenterLabel, changes.newCenterLabel, 0, doc, m_id, newGroup);
+        auto *renameArc = new RenameArc(arcType, changes.oldCenterLabel, changes.newCenterLabel, doc, m_id, newGroup);
         if (!changes.AliasSuffixChanged())
         {
             connect(renameArc, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
@@ -891,6 +891,7 @@ void VToolAbstractBezier::ProcessSplineToolOptions(const QDomElement &oldDomElem
         auto *renamePair = RenamePair::CreateForSpline(std::make_pair(changes.oldP1Label, changes.oldP4Label),
                                                        std::make_pair(changes.newP1Label, changes.newP4Label),
                                                        oldSpline->GetDuplicate(),
+                                                       changes.newDuplicate,
                                                        doc,
                                                        m_id,
                                                        newGroup);
@@ -940,6 +941,7 @@ void VToolAbstractBezier::ProcessSplinePathToolOptions(const QDomElement &oldDom
         auto *renamePair = RenamePair::CreateForSplinePath(std::make_pair(changes.oldP1Label, changes.oldP4Label),
                                                            std::make_pair(changes.newP1Label, changes.newP4Label),
                                                            oldSplinePath->GetDuplicate(),
+                                                           changes.newDuplicate,
                                                            doc,
                                                            m_id,
                                                            newGroup);

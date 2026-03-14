@@ -156,7 +156,8 @@ auto ReplaceTokenPair(const QString &token,
                       RenameObjectType type,
                       const ObjectPair_t &oldPair,
                       const ObjectPair_t &newPair,
-                      quint32 duplicate) -> QString
+                      quint32 oldDuplicate,
+                      quint32 newDuplicate) -> QString
 {
     // Check if all variable types handled when we have new tool
     Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64);
@@ -180,11 +181,11 @@ auto ReplaceTokenPair(const QString &token,
     {
         QString expectedToken;
 
-        if (duplicate > 0)
+        if (oldDuplicate > 0)
         {
             // With specific duplicate number
             expectedToken = QStringLiteral("%1_%2_%3_%4")
-                                .arg(prefix, oldPair.first, oldPair.second, QString::number(duplicate));
+                                .arg(prefix, oldPair.first, oldPair.second, QString::number(oldDuplicate));
         }
         else
         {
@@ -195,10 +196,10 @@ auto ReplaceTokenPair(const QString &token,
         // Check for exact match with label1_label2 order
         if (token == expectedToken)
         {
-            if (duplicate > 0)
+            if (newDuplicate > 0)
             {
                 return QStringLiteral("%1_%2_%3_%4")
-                    .arg(prefix, newPair.first, newPair.second, QString::number(duplicate));
+                    .arg(prefix, newPair.first, newPair.second, QString::number(newDuplicate));
             }
             return QStringLiteral("%1_%2_%3").arg(prefix, newPair.first, newPair.second);
         }
@@ -328,7 +329,8 @@ auto ReplaceTokenArc(const QString &token,
                      const QString &oldCenterLabel,
                      const QString &newCenterLabel,
                      quint32 id,
-                     int duplicate) -> QString
+                     quint32 oldDuplicate,
+                     quint32 newDuplicate) -> QString
 {
     // Check if all variable types handled when we have new tool
     Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64);
@@ -348,11 +350,11 @@ auto ReplaceTokenArc(const QString &token,
     {
         QString expectedToken;
 
-        if (duplicate > 0)
+        if (oldDuplicate > 0)
         {
             // With specific duplicate number
             expectedToken
-                = QStringLiteral("%1_%2_%3_%4").arg(prefix, oldCenterLabel).arg(id).arg(QString::number(duplicate));
+                = QStringLiteral("%1_%2_%3_%4").arg(prefix, oldCenterLabel).arg(id).arg(QString::number(oldDuplicate));
         }
         else
         {
@@ -363,9 +365,12 @@ auto ReplaceTokenArc(const QString &token,
         // Check for exact match with label1_label2 order
         if (token == expectedToken)
         {
-            if (duplicate > 0)
+            if (newDuplicate > 0)
             {
-                return QStringLiteral("%1_%2_%3_%4").arg(prefix, newCenterLabel).arg(id).arg(QString::number(duplicate));
+                return QStringLiteral("%1_%2_%3_%4")
+                    .arg(prefix, newCenterLabel)
+                    .arg(id)
+                    .arg(QString::number(newDuplicate));
             }
             return QStringLiteral("%1_%2_%3").arg(prefix, newCenterLabel).arg(id);
         }
@@ -795,7 +800,8 @@ auto RenameLabel::ProcessToken(const QString &token) const -> QString
 RenamePair::RenamePair(RenameObjectType type,
                        ObjectPair_t oldPair,
                        ObjectPair_t newPair,
-                       quint32 duplicate,
+                       quint32 oldDuplicate,
+                       quint32 newDuplicate,
                        VAbstractPattern *doc,
                        quint32 id,
                        QUndoCommand *parent)
@@ -803,7 +809,8 @@ RenamePair::RenamePair(RenameObjectType type,
     m_type(type),
     m_oldPair(std::move(oldPair)),
     m_newPair(std::move(newPair)),
-    m_duplicate(duplicate)
+    m_oldDuplicate(oldDuplicate),
+    m_newDuplicate(newDuplicate)
 {
 }
 
@@ -814,29 +821,31 @@ auto RenamePair::CreateForLine(const ObjectPair_t &oldPair,
                                quint32 id,
                                QUndoCommand *parent) -> RenamePair *
 {
-    return new RenamePair(RenameObjectType::Line, oldPair, newPair, 0, doc, id, parent);
+    return new RenamePair(RenameObjectType::Line, oldPair, newPair, 0, 0, doc, id, parent);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto RenamePair::CreateForSpline(const ObjectPair_t &oldPair,
                                  const ObjectPair_t &newPair,
-                                 quint32 duplicate,
+                                 quint32 oldDuplicate,
+                                 quint32 newDuplicate,
                                  VAbstractPattern *doc,
                                  quint32 id,
                                  QUndoCommand *parent) -> RenamePair *
 {
-    return new RenamePair(RenameObjectType::Spline, oldPair, newPair, duplicate, doc, id, parent);
+    return new RenamePair(RenameObjectType::Spline, oldPair, newPair, oldDuplicate, newDuplicate, doc, id, parent);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto RenamePair::CreateForSplinePath(const ObjectPair_t &oldPair,
                                      const ObjectPair_t &newPair,
-                                     quint32 duplicate,
+                                     quint32 oldDuplicate,
+                                     quint32 newDuplicate,
                                      VAbstractPattern *doc,
                                      quint32 id,
                                      QUndoCommand *parent) -> RenamePair *
 {
-    return new RenamePair(RenameObjectType::SplinePath, oldPair, newPair, duplicate, doc, id, parent);
+    return new RenamePair(RenameObjectType::SplinePath, oldPair, newPair, oldDuplicate, newDuplicate, doc, id, parent);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -849,10 +858,10 @@ auto RenamePair::ProcessToken(const QString &token) const -> QString
 
     if (ProcessType() == OperationType::Redo)
     {
-        return ReplaceTokenPair(token, m_type, m_oldPair, m_newPair, m_duplicate);
+        return ReplaceTokenPair(token, m_type, m_oldPair, m_newPair, m_oldDuplicate, m_newDuplicate);
     }
 
-    return ReplaceTokenPair(token, m_type, m_newPair, m_oldPair, m_duplicate);
+    return ReplaceTokenPair(token, m_type, m_newPair, m_oldPair, m_newDuplicate, m_oldDuplicate);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -908,7 +917,24 @@ auto RenameAlias::ProcessToken(const QString &token) const -> QString
 RenameArc::RenameArc(RenameArcType type,
                      QString oldCenterLabel,
                      QString newCenterLabel,
-                     int duplicate,
+                     VAbstractPattern *doc,
+                     quint32 id,
+                     QUndoCommand *parent)
+  : AbstractObjectRename(doc, id, parent),
+    m_type(type),
+    m_oldCenterLabel(std::move(oldCenterLabel)),
+    m_newCenterLabel(std::move(newCenterLabel))
+{
+    SCASSERT(!m_oldCenterLabel.isEmpty());
+    SCASSERT(!m_newCenterLabel.isEmpty());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+RenameArc::RenameArc(RenameArcType type,
+                     QString oldCenterLabel,
+                     QString newCenterLabel,
+                     quint32 oldDuplicate,
+                     quint32 newDuplicate,
                      VAbstractPattern *doc,
                      quint32 id,
                      QUndoCommand *parent)
@@ -916,7 +942,8 @@ RenameArc::RenameArc(RenameArcType type,
     m_type(type),
     m_oldCenterLabel(std::move(oldCenterLabel)),
     m_newCenterLabel(std::move(newCenterLabel)),
-    m_duplicate(duplicate)
+    m_oldDuplicate(oldDuplicate),
+    m_newDuplicate(newDuplicate)
 {
     SCASSERT(!m_oldCenterLabel.isEmpty());
     SCASSERT(!m_newCenterLabel.isEmpty());
@@ -932,10 +959,22 @@ auto RenameArc::ProcessToken(const QString &token) const -> QString
 
     if (ProcessType() == OperationType::Redo)
     {
-        return ReplaceTokenArc(token, m_type, m_oldCenterLabel, m_newCenterLabel, ElementId(), m_duplicate);
+        return ReplaceTokenArc(token,
+                               m_type,
+                               m_oldCenterLabel,
+                               m_newCenterLabel,
+                               ElementId(),
+                               m_oldDuplicate,
+                               m_newDuplicate);
     }
 
-    return ReplaceTokenArc(token, m_type, m_newCenterLabel, m_oldCenterLabel, ElementId(), m_duplicate);
+    return ReplaceTokenArc(token,
+                           m_type,
+                           m_newCenterLabel,
+                           m_oldCenterLabel,
+                           ElementId(),
+                           m_oldDuplicate,
+                           m_newDuplicate);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
