@@ -69,7 +69,8 @@ void VToolFlippingByAxis::SetDialog()
     dialogTool->SetOriginPointId(m_originPointId);
     dialogTool->SetAxisType(m_axisType);
     dialogTool->SetNotes(m_notes);
-    dialogTool->SetSourceObjects(source);
+    dialogTool->SetSourceObjects(m_source);
+    dialogTool->SetDestinationObjects(m_destination);
 
     SetDialogVisibilityGroupData(dialogTool);
 }
@@ -222,7 +223,7 @@ void VToolFlippingByAxis::SetVisualization()
         auto *visual = qobject_cast<VisToolFlippingByAxis *>(vis);
         SCASSERT(visual != nullptr)
 
-        visual->SetObjects(SourceToObjects(source));
+        visual->SetObjects(SourceToObjects(m_source));
         visual->SetOriginPointId(m_originPointId);
         visual->SetAxisType(m_axisType);
         visual->SetMode(Mode::Show);
@@ -251,8 +252,9 @@ void VToolFlippingByAxis::SaveDialog(QDomElement &domElement)
         domElement.removeAttribute(AttrSuffix);
     }
 
-    source = dialogTool->GetSourceObjects();
-    SaveSourceDestination(domElement);
+    const QVector<SourceItem> source = dialogTool->GetSourceObjects();
+    const QVector<DestinationItem> destination = SyncDestination(source);
+    SaveSourceDestination(domElement, source, destination);
 
     // Save visibility data for later use
     SaveVisibilityGroupData(dialogTool);
@@ -305,4 +307,60 @@ VToolFlippingByAxis::VToolFlippingByAxis(const VToolFlippingByAxisInitData &init
 {
     InitOperatedObjects();
     ToolCreation(initData.typeCreation);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VToolFlippingByAxis::SyncDestination(const QVector<SourceItem> &source) -> QVector<DestinationItem>
+{
+    // Build lookup of existing destination items by recordId
+    QMap<QUuid, DestinationItem> existingByRecord;
+    for (const auto &dest : std::as_const(m_destination))
+    {
+        if (!dest.recordId.isNull())
+        {
+            existingByRecord.insert(dest.recordId, dest);
+        }
+    }
+
+    // Check if source set changed (additions or removals)
+    QSet<QUuid> const oldRecords = ConvertToSet<QUuid>(existingByRecord.keys());
+    QSet<QUuid> newRecords;
+    for (const auto &item : std::as_const(source))
+    {
+        if (!item.recordId.isNull())
+        {
+            newRecords.insert(item.recordId);
+        }
+    }
+
+    if (oldRecords == newRecords)
+    {
+        return m_destination;
+    }
+
+    const auto originPoint = *getData()->GeometricObject<VPointF>(m_originPointId);
+    const auto fPoint = static_cast<QPointF>(originPoint);
+
+    QPointF const sPoint = m_axisType == AxisType::VerticalAxis ? QPointF(fPoint.x(), fPoint.y() + 100)
+                                                                : QPointF(fPoint.x() + 100, fPoint.y());
+
+    QVector<DestinationItem> newDestination;
+    newDestination.reserve(source.size());
+
+    for (const auto &srcItem : std::as_const(source))
+    {
+        if (existingByRecord.contains(srcItem.recordId))
+        {
+            // Preserve existing destination item
+            newDestination.append(existingByRecord.value(srcItem.recordId));
+        }
+        else
+        {
+            // Create destination item for newly added source
+            const QSharedPointer<VGObject> obj = getData()->GetGObject(srcItem.id);
+            newDestination.append(CreateDestinationObject(m_id, srcItem, obj->getType(), fPoint, sPoint, getData()));
+        }
+    }
+
+    return newDestination;
 }

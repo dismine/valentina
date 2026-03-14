@@ -172,6 +172,10 @@ protected:
                             quint32 ch2 = NULL_ID) const;
     void FillComboBoxArcs(QComboBox *box, FillComboBox rule = FillComboBox::Whole, quint32 ch1 = NULL_ID,
                           quint32 ch2 = NULL_ID) const;
+    void FillComboBoxEllipticalArcs(QComboBox *box,
+                                    FillComboBox rule = FillComboBox::Whole,
+                                    quint32 ch1 = NULL_ID,
+                                    quint32 ch2 = NULL_ID) const;
     void FillComboBoxArcCurves(QComboBox *box,
                                FillComboBox rule = FillComboBox::Whole,
                                quint32 ch1 = NULL_ID,
@@ -225,7 +229,6 @@ protected:
 
 private:
     Q_DISABLE_COPY_MOVE(DialogTool) // NOLINT
-    void FillList(QComboBox *box, const QMap<QString, quint32> &list) const;
 
     template <typename T> void PrepareList(QMap<QString, quint32> &list, quint32 id) const;
 

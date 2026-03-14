@@ -85,6 +85,8 @@ private:
     AxisType m_axisType;
 
     explicit VToolFlippingByAxis(const VToolFlippingByAxisInitData &initData, QGraphicsItem *parent = nullptr);
+
+    auto SyncDestination(const QVector<SourceItem> &source) -> QVector<DestinationItem>;
 };
 
 #endif // VTOOLFLIPPINGBYAXIS_H

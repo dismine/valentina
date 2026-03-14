@@ -57,7 +57,14 @@ void SaveToolOptions::undo()
 
     domElement.parentNode().replaceChild(oldXml, domElement);
 
-    emit NeedLiteParsing(Document::LiteParse);
+    if (!m_fullParse)
+    {
+        emit NeedLiteParsing(Document::LiteParse);
+    }
+    else
+    {
+        emit NeedFullParsing();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -76,7 +83,14 @@ void SaveToolOptions::redo()
 
     if (!m_inGroup)
     {
-        emit NeedLiteParsing(Document::LiteParse);
+        if (!m_fullParse)
+        {
+            emit NeedLiteParsing(Document::LiteParse);
+        }
+        else
+        {
+            emit NeedFullParsing();
+        }
     }
 }
 

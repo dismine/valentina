@@ -50,6 +50,8 @@ public:
     void undo() override;
     void redo() override;
 
+    void SetFullParse(bool newFullParse);
+
 protected:
     auto ProcessType() const -> OperationType;
 
@@ -62,6 +64,8 @@ private:
 
     QVector<VNode> m_dependencies{};
     OperationType m_operationType{OperationType::Unknown};
+
+    bool m_fullParse{false};
 
     void RenameFormulas();
 
@@ -83,6 +87,12 @@ private:
 inline auto AbstractObjectRename::ProcessType() const -> OperationType
 {
     return m_operationType;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void AbstractObjectRename::SetFullParse(bool newFullParse)
+{
+    m_fullParse = newFullParse;
 }
 
 class RenameLabel : public AbstractObjectRename

@@ -53,7 +53,8 @@ auto CreatePoint(quint32 idTool,
     return {.id = data->AddGObject(new VPointF(rotated)),
             .mx = rotated.mx(),
             .my = rotated.my(),
-            .showLabel = rotated.IsShowLabel()};
+            .showLabel = rotated.IsShowLabel(),
+            .recordId = sItem.recordId};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -76,7 +77,7 @@ auto CreateItem(
         rotated.SetColor(sItem.color);
     }
 
-    return {.id = data->AddGObject(new Item(rotated))};
+    return {.id = data->AddGObject(new Item(rotated)), .recordId = sItem.recordId};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -110,57 +111,6 @@ auto CreateArc(
     const DestinationItem item = CreateItem<Item>(idTool, sItem, firstPoint, secondPoint, data);
     data->AddArc(data->GeometricObject<Item>(item.id), item.id);
     return item;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto CreateDestinationObject(
-    quint32 id, const SourceItem &object, GOType type, const QPointF &fPoint, const QPointF &sPoint, VContainer *data)
-    -> DestinationItem
-{
-    // This check helps to find missed objects in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects were handled.");
-
-    QT_WARNING_PUSH
-    QT_WARNING_DISABLE_GCC("-Wswitch-default")
-    QT_WARNING_DISABLE_CLANG("-Wswitch-default")
-
-    switch (type)
-    {
-        case GOType::Point:
-            return CreatePoint(id, object, fPoint, sPoint, data);
-        case GOType::Arc:
-            return CreateArc<VArc>(id, object, fPoint, sPoint, data);
-        case GOType::EllipticalArc:
-            return CreateArc<VEllipticalArc>(id, object, fPoint, sPoint, data);
-        case GOType::Spline:
-            return CreateCurve<VSpline>(id, object, fPoint, sPoint, data);
-        case GOType::SplinePath:
-            return CreateCurveWithSegments<VSplinePath>(id, object, fPoint, sPoint, data);
-        case GOType::CubicBezier:
-            return CreateCurve<VCubicBezier>(id, object, fPoint, sPoint, data);
-        case GOType::CubicBezierPath:
-            return CreateCurveWithSegments<VCubicBezierPath>(id, object, fPoint, sPoint, data);
-        case GOType::Unknown:
-        case GOType::PlaceLabel:
-            Q_UNREACHABLE();
-            break;
-    }
-
-    QT_WARNING_POP
-    Q_UNREACHABLE();
-    return {};
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void CreateDestinationObjects(VAbstractOperationInitData &initData, const QPointF &fPoint, const QPointF &sPoint)
-{
-    for (const auto &object : std::as_const(initData.source))
-    {
-        const QSharedPointer<VGObject> obj = initData.data->GetGObject(object.id);
-        const DestinationItem item
-            = CreateDestinationObject(initData.id, object, obj->getType(), fPoint, sPoint, initData.data);
-        initData.destination.append(item);
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -329,5 +279,58 @@ void VAbstractFlipping::CreateDestination(VAbstractOperationInitData &initData, 
     else
     {
         UpdateDestinationObjects(initData, fPoint, sPoint);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractFlipping::CreateDestinationObject(
+    quint32 id, const SourceItem &object, GOType type, const QPointF &fPoint, const QPointF &sPoint, VContainer *data)
+    -> DestinationItem
+{
+    // This check helps to find missed objects in the switch
+    Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects were handled.");
+
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wswitch-default")
+    QT_WARNING_DISABLE_CLANG("-Wswitch-default")
+
+    switch (type)
+    {
+        case GOType::Point:
+            return CreatePoint(id, object, fPoint, sPoint, data);
+        case GOType::Arc:
+            return CreateArc<VArc>(id, object, fPoint, sPoint, data);
+        case GOType::EllipticalArc:
+            return CreateArc<VEllipticalArc>(id, object, fPoint, sPoint, data);
+        case GOType::Spline:
+            return CreateCurve<VSpline>(id, object, fPoint, sPoint, data);
+        case GOType::SplinePath:
+            return CreateCurveWithSegments<VSplinePath>(id, object, fPoint, sPoint, data);
+        case GOType::CubicBezier:
+            return CreateCurve<VCubicBezier>(id, object, fPoint, sPoint, data);
+        case GOType::CubicBezierPath:
+            return CreateCurveWithSegments<VCubicBezierPath>(id, object, fPoint, sPoint, data);
+        case GOType::Unknown:
+        case GOType::PlaceLabel:
+            Q_UNREACHABLE();
+            break;
+    }
+
+    QT_WARNING_POP
+    Q_UNREACHABLE();
+    return {};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractFlipping::CreateDestinationObjects(VAbstractOperationInitData &initData,
+                                                 const QPointF &fPoint,
+                                                 const QPointF &sPoint)
+{
+    for (const auto &object : std::as_const(initData.source))
+    {
+        const QSharedPointer<VGObject> obj = initData.data->GetGObject(object.id);
+        const DestinationItem item
+            = CreateDestinationObject(initData.id, object, obj->getType(), fPoint, sPoint, initData.data);
+        initData.destination.append(item);
     }
 }

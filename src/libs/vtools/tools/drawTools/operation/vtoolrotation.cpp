@@ -84,7 +84,8 @@ auto CreatePoint(quint32 idTool, const SourceItem &sItem, const QPointF &origin,
     return {.id = data->AddGObject(new VPointF(rotated)),
             .mx = rotated.mx(),
             .my = rotated.my(),
-            .showLabel = rotated.IsShowLabel()};
+            .showLabel = rotated.IsShowLabel(),
+            .recordId = sItem.recordId};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -106,7 +107,7 @@ auto CreateItem(quint32 idTool, const SourceItem &sItem, const QPointF &origin, 
         rotated.SetColor(sItem.color);
     }
 
-    return {.id = data->AddGObject(new Item(rotated))};
+    return {.id = data->AddGObject(new Item(rotated)), .recordId = sItem.recordId};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -344,11 +345,67 @@ void CreateDestination(VToolRotationInitData &initData)
 //---------------------------------------------------------------------------------------------------------------------
 VToolRotation::VToolRotation(const VToolRotationInitData &initData, QGraphicsItem *parent)
   : VAbstractOperation(initData, parent),
-    origPointId(initData.origin),
-    formulaAngle(initData.angle)
+    m_origPointId(initData.origin),
+    m_formulaAngle(initData.angle)
 {
     InitOperatedObjects();
     ToolCreation(initData.typeCreation);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VToolRotation::SyncDestination(const QVector<SourceItem> &source, QString &formulaAngle)
+    -> QVector<DestinationItem>
+{
+    // Build lookup of existing destination items by recordId
+    QMap<QUuid, DestinationItem> existingByRecord;
+    for (const auto &dest : std::as_const(m_destination))
+    {
+        if (!dest.recordId.isNull())
+        {
+            existingByRecord.insert(dest.recordId, dest);
+        }
+    }
+
+    // Check if source set changed (additions or removals)
+    QSet<QUuid> const oldRecords = ConvertToSet<QUuid>(existingByRecord.keys());
+    QSet<QUuid> newRecords;
+    for (const auto &item : std::as_const(source))
+    {
+        if (!item.recordId.isNull())
+        {
+            newRecords.insert(item.recordId);
+        }
+    }
+
+    if (oldRecords == newRecords)
+    {
+        return m_destination;
+    }
+
+    qreal const calcAngle = CheckFormula(m_id, formulaAngle, getData());
+
+    const auto originPoint = *getData()->GeometricObject<VPointF>(m_origPointId);
+    const auto oPoint = static_cast<QPointF>(originPoint);
+
+    QVector<DestinationItem> newDestination;
+    newDestination.reserve(source.size());
+
+    for (const auto &srcItem : std::as_const(source))
+    {
+        if (existingByRecord.contains(srcItem.recordId))
+        {
+            // Preserve existing destination item
+            newDestination.append(existingByRecord.value(srcItem.recordId));
+        }
+        else
+        {
+            // Create destination item for newly added source
+            const QSharedPointer<VGObject> obj = getData()->GetGObject(srcItem.id);
+            newDestination.append(CreateDestinationObject(m_id, srcItem, obj->getType(), calcAngle, oPoint, getData()));
+        }
+    }
+
+    return newDestination;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -358,10 +415,11 @@ void VToolRotation::SetDialog()
     const QPointer<DialogRotation> dialogTool = qobject_cast<DialogRotation *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     dialogTool->CheckDependencyTreeComplete();
-    dialogTool->SetOrigPointId(origPointId);
-    dialogTool->SetAngle(formulaAngle);
+    dialogTool->SetOrigPointId(m_origPointId);
+    dialogTool->SetAngle(m_formulaAngle);
     dialogTool->SetNotes(m_notes);
-    dialogTool->SetSourceObjects(source);
+    dialogTool->SetSourceObjects(m_source);
+    dialogTool->SetDestinationObjects(m_destination);
 
     SetDialogVisibilityGroupData(dialogTool);
 }
@@ -465,13 +523,13 @@ auto VToolRotation::Create(VToolRotationInitData &initData) -> VToolRotation *
 //---------------------------------------------------------------------------------------------------------------------
 auto VToolRotation::OriginPointName() const -> QString
 {
-    return VAbstractTool::data.GetGObject(origPointId)->name();
+    return VAbstractTool::data.GetGObject(m_origPointId)->name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VToolRotation::GetFormulaAngle() const -> VFormula
 {
-    VFormula fAngle(formulaAngle, getData());
+    VFormula fAngle(m_formulaAngle, getData());
     fAngle.setToolId(m_id);
     fAngle.setPostfix(degreeSymbol);
     fAngle.Eval();
@@ -483,7 +541,7 @@ void VToolRotation::SetFormulaAngle(const VFormula &value)
 {
     if (!value.error())
     {
-        formulaAngle = value.GetFormula(FormulaType::FromUser);
+        m_formulaAngle = value.GetFormula(FormulaType::FromUser);
 
         QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(m_id);
         SaveOption(obj);
@@ -518,10 +576,10 @@ void VToolRotation::SetVisualization()
         auto *visual = qobject_cast<VisToolRotation *>(vis);
         SCASSERT(visual != nullptr)
 
-        visual->SetObjects(SourceToObjects(source));
-        visual->SetOriginPointId(origPointId);
+        visual->SetObjects(SourceToObjects(m_source));
+        visual->SetOriginPointId(m_origPointId);
         visual->SetAngle(VAbstractApplication::VApp()->TrVars()->FormulaToUser(
-            formulaAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+            m_formulaAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
         visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
@@ -534,8 +592,9 @@ void VToolRotation::SaveDialog(QDomElement &domElement)
     const QPointer<DialogRotation> dialogTool = qobject_cast<DialogRotation *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
+    QString formulaAngle = dialogTool->GetAngle();
+
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetOrigPointId()));
-    doc->SetAttribute(domElement, AttrAngle, dialogTool->GetAngle());
     doc->SetAttributeOrRemoveIf<QString>(domElement,
                                          AttrNotes,
                                          dialogTool->GetNotes(),
@@ -548,8 +607,12 @@ void VToolRotation::SaveDialog(QDomElement &domElement)
         domElement.removeAttribute(AttrSuffix);
     }
 
-    source = dialogTool->GetSourceObjects();
-    SaveSourceDestination(domElement);
+    const QVector<SourceItem> source = dialogTool->GetSourceObjects();
+    const QVector<DestinationItem> destination = SyncDestination(source, formulaAngle);
+    // Sync destination may require a formula fix. Saving after synchronization
+    doc->SetAttribute(domElement, AttrAngle, formulaAngle);
+
+    SaveSourceDestination(domElement, source, destination);
 
     // Save visibility data for later use
     SaveVisibilityGroupData(dialogTool);
@@ -560,8 +623,8 @@ void VToolRotation::ReadToolAttributes(const QDomElement &domElement)
 {
     VAbstractOperation::ReadToolAttributes(domElement);
 
-    origPointId = VAbstractPattern::GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
-    formulaAngle = VDomDocument::GetParametrString(domElement, AttrAngle, QChar('0'));
+    m_origPointId = VAbstractPattern::GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
+    m_formulaAngle = VDomDocument::GetParametrString(domElement, AttrAngle, QChar('0'));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -570,8 +633,8 @@ void VToolRotation::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     VAbstractOperation::SaveOptions(tag, obj);
 
     doc->SetAttribute(tag, AttrType, ToolType);
-    doc->SetAttribute(tag, AttrCenter, QString().setNum(origPointId));
-    doc->SetAttribute(tag, AttrAngle, formulaAngle);
+    doc->SetAttribute(tag, AttrCenter, QString().setNum(m_origPointId));
+    doc->SetAttribute(tag, AttrAngle, m_formulaAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

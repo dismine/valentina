@@ -41,14 +41,6 @@
 #include "../vdrawtool.h"
 #include "../vwidgets/vsimplecurve.h"
 
-struct DestinationItem
-{
-    quint32 id{NULL_ID};
-    qreal mx{1};
-    qreal my{1};
-    bool showLabel{true};
-};
-
 struct VAbstractOperationInitData : VDrawToolInitData
 {
     using VDrawToolInitData::VDrawToolInitData;
@@ -131,8 +123,8 @@ public slots:
     void LabelChangePosition(const QPointF &pos, quint32 labelId);
 
 protected:
-    QVector<SourceItem> source;
-    QVector<DestinationItem> destination;
+    QVector<SourceItem> m_source;
+    QVector<DestinationItem> m_destination;
 
     QMap<quint32, VAbstractSimple *> operatedObjects{};
 
@@ -150,7 +142,9 @@ protected:
     void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
 
     void UpdateNamePosition(quint32 id, const QPointF &pos) override;
-    void SaveSourceDestination(QDomElement &tag);
+    void SaveSourceDestination(QDomElement &tag,
+                               const QVector<SourceItem> &source,
+                               const QVector<DestinationItem> &destination);
 
     template <typename T> void ShowToolVisualization(bool show);
 

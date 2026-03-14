@@ -44,8 +44,19 @@ protected:
 
     static void CreateDestination(VAbstractOperationInitData &initData, const QPointF &fPoint, const QPointF &sPoint);
 
+    static auto CreateDestinationObject(quint32 id,
+                                        const SourceItem &object,
+                                        GOType type,
+                                        const QPointF &fPoint,
+                                        const QPointF &sPoint,
+                                        VContainer *data) -> DestinationItem;
+
 private:
     Q_DISABLE_COPY_MOVE(VAbstractFlipping) // NOLINT
+
+    static void CreateDestinationObjects(VAbstractOperationInitData &initData,
+                                         const QPointF &fPoint,
+                                         const QPointF &sPoint);
 };
 
 #endif // VABSTRACTFLIPPING_H

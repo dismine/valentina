@@ -43,7 +43,10 @@ VInteractiveTool::VInteractiveTool(VAbstractPattern *doc, VContainer *data, quin
 //---------------------------------------------------------------------------------------------------------------------
 void VInteractiveTool::DialogLinkDestroy()
 {
-    m_dialog->deleteLater();
+    if (!m_dialog.isNull())
+    {
+        m_dialog->deleteLater();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

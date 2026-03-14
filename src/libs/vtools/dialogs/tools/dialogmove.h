@@ -84,6 +84,8 @@ public:
     auto GetSourceObjects() const -> QVector<SourceItem>;
     void SetSourceObjects(const QVector<SourceItem> &value);
 
+    void SetDestinationObjects(const QVector<DestinationItem> &value);
+
     void CheckDependencyTreeComplete() override;
 
 public slots:
@@ -103,10 +105,15 @@ private slots:
     void GroupNameChanged();
 
     void ShowSourceDetails(int row);
+    void CurrentObjectChanged(int row);
     void NameChanged(const QString &text);
     void PenStyleChanged();
+    void ObjectTypeChanged(int index);
+    void NewObjectChanged();
+    void AddNewObject();
     void ColorChanged();
     void BulkRename();
+    void RemoveObject();
 
 protected:
     void ShowVisualization() override;
@@ -136,6 +143,7 @@ private:
     int formulaBaseHeightLength{0};
 
     QVector<SourceItem> m_sourceObjects{};
+    QVector<DestinationItem> m_destination{};
 
     bool stage1{true};
     bool stage2{false};

@@ -46,6 +46,7 @@
 #include "../../visualization/line/operation/vistoolflippingbyline.h"
 #include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../qmuparser/qmudef.h"
 #include "../support/dialogbulkrename.h"
 #include "../vmisc/vvalentinasettings.h"
@@ -72,6 +73,8 @@ DialogFlippingByLine::DialogFlippingByLine(const VContainer *data,
 
     InitOkCancelApply(ui);
 
+    FillComboBoxObjectTypes(ui->comboBoxObjectType);
+
     FillComboBoxPoints(ui->comboBoxFirstLinePoint);
     FillComboBoxPoints(ui->comboBoxSecondLinePoint);
     FillComboBoxTypeLine(ui->comboBoxPenStyle,
@@ -87,11 +90,25 @@ DialogFlippingByLine::DialogFlippingByLine(const VContainer *data,
     connect(ui->comboBoxSecondLinePoint, &QComboBox::currentTextChanged, this, &DialogFlippingByLine::PointChanged);
 
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogFlippingByLine::ShowSourceDetails);
+    connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogFlippingByLine::CurrentObjectChanged);
     connect(ui->lineEditName, &QLineEdit::textEdited, this, &DialogFlippingByLine::NameChanged);
     connect(ui->comboBoxPenStyle, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &DialogFlippingByLine::PenStyleChanged);
     connect(ui->pushButtonColor, &VPE::QtColorPicker::colorChanged, this, &DialogFlippingByLine::ColorChanged);
     connect(ui->toolButtonBulkRename, &QToolButton::clicked, this, &DialogFlippingByLine::BulkRename);
+
+    connect(ui->comboBoxObjectType,
+            QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this,
+            &DialogFlippingByLine::ObjectTypeChanged);
+    connect(ui->comboBoxNewObject,
+            QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this,
+            &DialogFlippingByLine::NewObjectChanged);
+    connect(ui->toolButtonNewObject, &QPushButton::clicked, this, &DialogFlippingByLine::AddNewObject);
+    connect(ui->toolButtonRemoveObject, &QPushButton::clicked, this, &DialogFlippingByLine::RemoveObject);
+
+    ObjectTypeChanged(ui->comboBoxObjectType->currentIndex());
 
     vis = new VisToolFlippingByLine(data);
 
@@ -240,6 +257,13 @@ void DialogFlippingByLine::SetSourceObjects(const QVector<SourceItem> &value)
     auto *operation = qobject_cast<VisToolFlippingByLine *>(vis);
     SCASSERT(operation != nullptr)
     operation->SetObjects(SourceToObjects(m_sourceObjects));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByLine::SetDestinationObjects(const QVector<DestinationItem> &value)
+{
+    m_destination = value;
+    CurrentObjectChanged(ui->listWidget->currentRow());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -421,10 +445,45 @@ void DialogFlippingByLine::ShowSourceDetails(int row)
     ui->lineEditName->setText(sourceItem.name);
     ui->lineEditName->setEnabled(m_dependencyReady);
 
-    const bool nameValid = IsValidSourceName(sourceItem.name, sourceItem.id, m_sourceObjects, data);
+    const QVector<SourceItem> sourceObjects = SaveSourceObjects();
+    const QSet<QString> freeNames = FindFreeNames(m_sourceObjects, sourceObjects);
+    const bool nameValid = IsValidSourceName(sourceItem.name, sourceItem.id, m_sourceObjects, data, freeNames);
     ChangeColor(ui->labelName, nameValid ? OkColor(this) : errorColor);
     flagName = nameValid;
     CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByLine::CurrentObjectChanged(int row)
+{
+    if (ui->listWidget->count() < 2)
+    {
+        ui->toolButtonRemoveObject->setDisabled(true);
+        return;
+    }
+
+    auto *item = ui->listWidget->item(row);
+    if (item == nullptr)
+    {
+        ui->toolButtonRemoveObject->setDisabled(true);
+        return;
+    }
+
+    const auto target = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
+    const QUuid recordId = target.recordId;
+
+    const auto it = std::find_if(m_destination.cbegin(),
+                                 m_destination.cend(),
+                                 [recordId](const DestinationItem &item) -> bool { return item.recordId == recordId; });
+
+    if (const quint32 targetId = it != m_destination.cend() ? it->id : NULL_ID;
+        !IsSafeToRemoveGroupObject(targetId, m_doc))
+    {
+        ui->toolButtonRemoveObject->setDisabled(true);
+        return;
+    }
+
+    ui->toolButtonRemoveObject->setEnabled(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -440,7 +499,8 @@ void DialogFlippingByLine::NameChanged(const QString &text)
         auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
 
         const QVector<SourceItem> objects = SaveSourceObjects();
-        const bool valid = IsValidSourceName(text, sourceItem.id, objects, data);
+        const QSet<QString> freeNames = FindFreeNames(m_sourceObjects, objects);
+        const bool valid = IsValidSourceName(text, sourceItem.id, objects, data, freeNames);
 
         if (valid)
         {
@@ -478,6 +538,87 @@ void DialogFlippingByLine::PenStyleChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByLine::ObjectTypeChanged(int index)
+{
+    ui->toolButtonNewObject->setDisabled(true);
+
+    const QSignalBlocker blocker(ui->comboBoxNewObject);
+    ui->comboBoxNewObject->clear();
+
+    if (index == -1)
+    {
+        return;
+    }
+
+    auto const type = ui->comboBoxObjectType->itemData(index).value<GOType>();
+
+    switch (type)
+    {
+        case GOType::Point:
+            FillComboBoxPoints(ui->comboBoxNewObject);
+            break;
+        case GOType::Arc:
+            FillComboBoxArcs(ui->comboBoxNewObject);
+            break;
+        case GOType::EllipticalArc:
+            FillComboBoxEllipticalArcs(ui->comboBoxNewObject);
+            break;
+        case GOType::Spline:
+        case GOType::CubicBezier:
+            FillComboBoxSplines(ui->comboBoxNewObject);
+            break;
+        case GOType::SplinePath:
+        case GOType::CubicBezierPath:
+            FillComboBoxSplinesPath(ui->comboBoxNewObject);
+            break;
+        case GOType::PlaceLabel:
+        case GOType::Unknown:
+        default:
+            return;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByLine::NewObjectChanged()
+{
+    quint32 const id = getCurrentObjectId(ui->comboBoxNewObject);
+    if (id == NULL_ID)
+    {
+        return;
+    }
+
+    const QVector<SourceItem> sourceObjects = SaveSourceObjects();
+    const auto it = std::find_if(sourceObjects.cbegin(),
+                                 sourceObjects.cend(),
+                                 [id](const SourceItem &item) -> bool { return item.id == id; });
+    ui->toolButtonNewObject->setDisabled(it != sourceObjects.cend());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByLine::AddNewObject()
+{
+    quint32 const id = getCurrentObjectId(ui->comboBoxNewObject);
+    if (id == NULL_ID)
+    {
+        return;
+    }
+
+    QVector<SourceItem> sourceObjects = SaveSourceObjects();
+    QSet<QString> occupiedNames;
+    for (const auto &sourceItem : std::as_const(sourceObjects))
+    {
+        if (!sourceItem.name.isEmpty())
+        {
+            occupiedNames.insert(sourceItem.name);
+        }
+    }
+
+    sourceObjects.append({.id = id, .name = GetDefSourceName(id, data, "m"_L1, occupiedNames)});
+    SetSourceObjects(sourceObjects);
+    ui->toolButtonNewObject->setDisabled(true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByLine::ColorChanged()
 {
     if (ui->listWidget->count() == 0)
@@ -497,10 +638,47 @@ void DialogFlippingByLine::ColorChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByLine::BulkRename()
 {
-    if (DialogBulkRename dlg(m_sourceObjects, data, this); dlg.exec() == QDialog::Accepted && dlg.HasChanges())
+    if (DialogBulkRename dlg(SaveSourceObjects(), data, this); dlg.exec() == QDialog::Accepted && dlg.HasChanges())
     {
         SetSourceObjects(dlg.RenamedItems());
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByLine::RemoveObject()
+{
+    if (ui->listWidget->count() < 2)
+    {
+        ui->toolButtonRemoveObject->setDisabled(true);
+        return;
+    }
+
+    const QListWidgetItem *item = ui->listWidget->currentItem();
+    if (!item)
+    {
+        return;
+    }
+
+    const SourceItem target = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
+    const QUuid recordId = target.recordId;
+
+    const auto it = std::find_if(m_destination.cbegin(),
+                                 m_destination.cend(),
+                                 [recordId](const DestinationItem &item) -> bool { return item.recordId == recordId; });
+
+    if (const quint32 targetId = it != m_destination.cend() ? it->id : NULL_ID;
+        !IsSafeToRemoveGroupObject(targetId, m_doc))
+    {
+        ui->toolButtonRemoveObject->setDisabled(true);
+        return;
+    }
+
+    const int currentRow = ui->listWidget->row(item);
+    delete ui->listWidget->takeItem(currentRow);
+
+    SetSourceObjects(SaveSourceObjects());
+
+    ui->toolButtonRemoveObject->setDisabled(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

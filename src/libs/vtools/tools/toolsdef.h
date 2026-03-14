@@ -30,6 +30,7 @@
 
 #include <QMetaType>
 #include <QString>
+#include <QUuid>
 
 #include "../ifc/ifcdef.h"
 
@@ -49,10 +50,23 @@ struct SourceItem
     QString name{};
     QString penStyle{TypeLineDefault};
     QString color{ColorDefault};
+    QUuid recordId{QUuid::createUuid()};
 };
 
 Q_DECLARE_METATYPE(SourceItem)
 Q_DECLARE_TYPEINFO(SourceItem, Q_MOVABLE_TYPE); // NOLINT
+
+struct DestinationItem
+{
+    quint32 id{NULL_ID};
+    qreal mx{1};
+    qreal my{1};
+    bool showLabel{true};
+    QUuid recordId{};
+};
+
+Q_DECLARE_METATYPE(DestinationItem)
+Q_DECLARE_TYPEINFO(DestinationItem, Q_MOVABLE_TYPE); // NOLINT
 
 // Default label position
 const int labelMX = 10;
@@ -62,9 +76,16 @@ auto SourceToObjects(const QVector<SourceItem> &source) -> QVector<quint32>;
 
 void FillDefSourceNames(QVector<SourceItem> &source, const VContainer *data, const QString &suffix);
 
+auto GetDefSourceName(quint32 id, const VContainer *data, const QString &suffix, const QSet<QString> &occupiedNames)
+    -> QString;
+
 auto GetSourceItemName(const QString &name, quint32 id, const VContainer *data) -> QString;
-auto IsValidSourceName(const QString &newName, quint32 id, const QVector<SourceItem> &source, const VContainer *data)
-    -> bool;
+auto FindFreeNames(const QVector<SourceItem> &oldSource, const QVector<SourceItem> &newSource) -> QSet<QString>;
+auto IsValidSourceName(const QString &newName,
+                       quint32 id,
+                       const QVector<SourceItem> &source,
+                       const VContainer *data,
+                       const QSet<QString> &freeNames) -> bool;
 
 auto OperationLineStylesPics(QColor backgroundColor, QColor textColor) -> QMap<QString, QIcon>;
 

@@ -84,18 +84,19 @@ public:
 
     static bool m_suppressContextMenu;
 
-    static auto CheckFormula(const quint32 &toolId, QString &formula, VContainer *data) -> qreal;
+    static auto CheckFormula(const quint32 &toolId, QString &formula, const VContainer *data) -> qreal;
 
     static auto Colors() -> QStringList;
     static auto ColorsList() -> QMap<QString, QString>;
 
-    static auto GetRecord(const quint32 id, const Tool &toolType, VAbstractPattern *doc) -> VToolRecord;
+    static auto GetRecord(quint32 id, const Tool &toolType, VAbstractPattern *doc) -> VToolRecord;
     static void AddRecord(const VToolRecord &record, VAbstractPattern *doc);
     static void AddRecord(quint32 id, const Tool &toolType, VAbstractPattern *doc);
     static void AddNodes(VAbstractPattern *doc, QDomElement &domElement, const VPiecePath &path);
     static void AddNodes(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
 
     auto getData() const -> const VContainer *;
+    auto getData() -> VContainer *;
 
     auto PointsList() const -> QMap<QString, quint32>;
     virtual auto getTagName() const -> QString = 0;
@@ -185,6 +186,12 @@ inline auto VAbstractTool::getId() const -> quint32
  * @return container.
  */
 inline auto VAbstractTool::getData() const -> const VContainer *
+{
+    return &data;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VAbstractTool::getData() -> VContainer *
 {
     return &data;
 }

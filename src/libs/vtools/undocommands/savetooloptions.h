@@ -57,12 +57,15 @@ public:
 
     void SetInGroup(bool newInGroup);
 
+    void SetFullParse(bool newFullParse);
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(SaveToolOptions) // NOLINT
     const QDomElement oldXml;
     QDomElement newXml;
     bool m_inGroup{false};
+    bool m_fullParse{false};
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -75,6 +78,12 @@ inline auto SaveToolOptions::id() const -> int
 inline void SaveToolOptions::SetInGroup(bool newInGroup)
 {
     m_inGroup = newInGroup;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void SaveToolOptions::SetFullParse(bool newFullParse)
+{
+    m_fullParse = newFullParse;
 }
 
 #endif // SAVETOOLOPTIONS_H

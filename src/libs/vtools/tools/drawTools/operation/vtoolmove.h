@@ -98,12 +98,17 @@ protected:
 
 private:
     Q_DISABLE_COPY_MOVE(VToolMove) // NOLINT
-    QString formulaAngle;
-    QString formulaRotationAngle;
-    QString formulaLength;
-    quint32 origPointId;
+    QString m_formulaAngle;
+    QString m_formulaRotationAngle;
+    QString m_formulaLength;
+    quint32 m_origPointId;
 
     explicit VToolMove(const VToolMoveInitData &initData, QGraphicsItem *parent = nullptr);
+
+    auto SyncDestination(const QVector<SourceItem> &source,
+                         QString &formulaLength,
+                         QString &formulaAngle,
+                         QString &formulaRotationAngle) -> QVector<DestinationItem>;
 };
 
 #endif // VTOOLMOVING_H

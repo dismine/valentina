@@ -77,6 +77,8 @@ private:
     quint32 m_secondLinePointId;
 
     explicit VToolFlippingByLine(const VToolFlippingByLineInitData &initData, QGraphicsItem *parent = nullptr);
+
+    auto SyncDestination(const QVector<SourceItem> &source) -> QVector<DestinationItem>;
 };
 
 #endif // VTOOLFLIPPINGBYLINE_H

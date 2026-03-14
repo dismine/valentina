@@ -193,6 +193,12 @@ void DialogTool::FillComboBoxArcs(QComboBox *box, FillComboBox rule, quint32 ch1
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogTool::FillComboBoxEllipticalArcs(QComboBox *box, FillComboBox rule, quint32 ch1, quint32 ch2) const
+{
+    FillCombo<VAbstractCurve>(box, GOType::EllipticalArc, rule, ch1, ch2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::FillComboBoxArcCurves(QComboBox *box, FillComboBox rule, quint32 ch1, quint32 ch2) const
 {
     SCASSERT(box != nullptr)
@@ -241,7 +247,7 @@ void DialogTool::FillComboBoxSplines(QComboBox *box) const
     QMap<QString, quint32> list;
     for (auto i = objs->constBegin(); i != objs->constEnd(); ++i)
     {
-        if (i.key() != toolId && IsSpline(i.value()))
+        if (i.key() != toolId && i.value()->getIdTool() != toolId && IsSpline(i.value()))
         {
             PrepareList<VAbstractCurve>(list, i.key());
         }
@@ -260,7 +266,7 @@ void DialogTool::FillComboBoxSplinesPath(QComboBox *box) const
     QMap<QString, quint32> list;
     for (auto i = objs->constBegin(); i != objs->constEnd(); ++i)
     {
-        if (i.key() != toolId && IsSplinePath(i.value()))
+        if (i.key() != toolId && i.value()->getIdTool() != toolId && IsSplinePath(i.value()))
         {
             PrepareList<VAbstractCurve>(list, i.key());
         }
@@ -575,25 +581,6 @@ auto DialogTool::SetObject(const quint32 &id, QComboBox *box, const QString &too
     qWarning() << "Can't find object by id" << id;
 
     return false;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief FillList fill combobox list
- * @param box combobox
- * @param list list with ids and names
- */
-void DialogTool::FillList(QComboBox *box, const QMap<QString, quint32> &list) const
-{
-    SCASSERT(box != nullptr)
-    box->clear();
-
-    QMapIterator iter(list);
-    while (iter.hasNext())
-    {
-        iter.next();
-        box->addItem(iter.key(), iter.value());
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

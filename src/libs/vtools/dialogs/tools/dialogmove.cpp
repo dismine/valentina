@@ -49,6 +49,7 @@
 #include "../../visualization/line/operation/vistoolmove.h"
 #include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../ifc/xml/vpatterngraph.h"
 #include "../qmuparser/qmudef.h"
 #include "../support/dialogbulkrename.h"
 #include "../support/dialogeditwrongformula.h"
@@ -101,6 +102,8 @@ DialogMove::DialogMove(const VContainer *data, VAbstractPattern *doc, quint32 to
 
     InitOkCancelApply(ui);
 
+    FillComboBoxObjectTypes(ui->comboBoxObjectType);
+
     FillComboBoxTypeLine(ui->comboBoxPenStyle,
                          OperationLineStylesPics(ui->comboBoxPenStyle->palette().color(QPalette::Base),
                                                  ui->comboBoxPenStyle->palette().color(QPalette::Text)),
@@ -119,25 +122,45 @@ DialogMove::DialogMove(const VContainer *data, VAbstractPattern *doc, quint32 to
     connect(ui->toolButtonExprAngle, &QPushButton::clicked, this, &DialogMove::FXAngle);
     connect(ui->toolButtonExprRotationAngle, &QPushButton::clicked, this, &DialogMove::FXRotationAngle);
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogMove::FXLength);
-    connect(ui->plainTextEditAngle, &QPlainTextEdit::textChanged, this,
-            [this]() { timerAngle->start(formulaTimerTimeout); });
+    connect(ui->plainTextEditAngle,
+            &QPlainTextEdit::textChanged,
+            this,
+            [this]() -> void { timerAngle->start(formulaTimerTimeout); });
 
-    connect(ui->plainTextEditRotationAngle, &QPlainTextEdit::textChanged, this,
-            [this]() { timerRotationAngle->start(formulaTimerTimeout); });
+    connect(ui->plainTextEditRotationAngle,
+            &QPlainTextEdit::textChanged,
+            this,
+            [this]() -> void { timerRotationAngle->start(formulaTimerTimeout); });
 
-    connect(ui->plainTextEditLength, &QPlainTextEdit::textChanged, this,
-            [this]() { timerLength->start(formulaTimerTimeout); });
+    connect(ui->plainTextEditLength,
+            &QPlainTextEdit::textChanged,
+            this,
+            [this]() -> void { timerLength->start(formulaTimerTimeout); });
 
     connect(ui->pushButtonGrowAngle, &QPushButton::clicked, this, &DialogMove::DeployAngleTextEdit);
     connect(ui->pushButtonGrowRotationAngle, &QPushButton::clicked, this, &DialogMove::DeployRotationAngleTextEdit);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogMove::DeployLengthTextEdit);
 
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogMove::ShowSourceDetails);
+    connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogMove::CurrentObjectChanged);
     connect(ui->lineEditName, &QLineEdit::textEdited, this, &DialogMove::NameChanged);
     connect(ui->comboBoxPenStyle, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &DialogMove::PenStyleChanged);
     connect(ui->pushButtonColor, &VPE::QtColorPicker::colorChanged, this, &DialogMove::ColorChanged);
     connect(ui->toolButtonBulkRename, &QToolButton::clicked, this, &DialogMove::BulkRename);
+
+    connect(ui->comboBoxObjectType,
+            QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this,
+            &DialogMove::ObjectTypeChanged);
+    connect(ui->comboBoxNewObject,
+            QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this,
+            &DialogMove::NewObjectChanged);
+    connect(ui->toolButtonNewObject, &QPushButton::clicked, this, &DialogMove::AddNewObject);
+    connect(ui->toolButtonRemoveObject, &QPushButton::clicked, this, &DialogMove::RemoveObject);
+
+    ObjectTypeChanged(ui->comboBoxObjectType->currentIndex());
 
     vis = new VisToolMove(data);
 
@@ -578,10 +601,45 @@ void DialogMove::ShowSourceDetails(int row)
     ui->lineEditName->setText(sourceItem.name);
     ui->lineEditName->setEnabled(m_dependencyReady);
 
-    const bool nameValid = IsValidSourceName(sourceItem.name, sourceItem.id, m_sourceObjects, data);
+    const QVector<SourceItem> sourceObjects = SaveSourceObjects();
+    const QSet<QString> freeNames = FindFreeNames(m_sourceObjects, sourceObjects);
+    const bool nameValid = IsValidSourceName(sourceItem.name, sourceItem.id, sourceObjects, data, freeNames);
     ChangeColor(ui->labelName, nameValid ? OkColor(this) : errorColor);
     flagName = nameValid;
     CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::CurrentObjectChanged(int row)
+{
+    if (ui->listWidget->count() < 2)
+    {
+        ui->toolButtonRemoveObject->setDisabled(true);
+        return;
+    }
+
+    auto *item = ui->listWidget->item(row);
+    if (item == nullptr)
+    {
+        ui->toolButtonRemoveObject->setDisabled(true);
+        return;
+    }
+
+    const auto target = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
+    const QUuid recordId = target.recordId;
+
+    const auto it = std::find_if(m_destination.cbegin(),
+                                 m_destination.cend(),
+                                 [recordId](const DestinationItem &item) -> bool { return item.recordId == recordId; });
+
+    if (const quint32 targetId = it != m_destination.cend() ? it->id : NULL_ID;
+        !IsSafeToRemoveGroupObject(targetId, m_doc))
+    {
+        ui->toolButtonRemoveObject->setDisabled(true);
+        return;
+    }
+
+    ui->toolButtonRemoveObject->setEnabled(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -597,7 +655,8 @@ void DialogMove::NameChanged(const QString &text)
         auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
 
         const QVector<SourceItem> objects = SaveSourceObjects();
-        const bool valid = IsValidSourceName(text, sourceItem.id, objects, data);
+        const QSet<QString> freeNames = FindFreeNames(m_sourceObjects, objects);
+        const bool valid = IsValidSourceName(text, sourceItem.id, objects, data, freeNames);
 
         if (valid)
         {
@@ -635,6 +694,87 @@ void DialogMove::PenStyleChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogMove::ObjectTypeChanged(int index)
+{
+    ui->toolButtonNewObject->setDisabled(true);
+
+    const QSignalBlocker blocker(ui->comboBoxNewObject);
+    ui->comboBoxNewObject->clear();
+
+    if (index == -1)
+    {
+        return;
+    }
+
+    auto const type = ui->comboBoxObjectType->itemData(index).value<GOType>();
+
+    switch (type)
+    {
+        case GOType::Point:
+            FillComboBoxPoints(ui->comboBoxNewObject);
+            break;
+        case GOType::Arc:
+            FillComboBoxArcs(ui->comboBoxNewObject);
+            break;
+        case GOType::EllipticalArc:
+            FillComboBoxEllipticalArcs(ui->comboBoxNewObject);
+            break;
+        case GOType::Spline:
+        case GOType::CubicBezier:
+            FillComboBoxSplines(ui->comboBoxNewObject);
+            break;
+        case GOType::SplinePath:
+        case GOType::CubicBezierPath:
+            FillComboBoxSplinesPath(ui->comboBoxNewObject);
+            break;
+        case GOType::PlaceLabel:
+        case GOType::Unknown:
+        default:
+            return;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::NewObjectChanged()
+{
+    quint32 const id = getCurrentObjectId(ui->comboBoxNewObject);
+    if (id == NULL_ID)
+    {
+        return;
+    }
+
+    const QVector<SourceItem> sourceObjects = SaveSourceObjects();
+    const auto it = std::find_if(sourceObjects.cbegin(),
+                                 sourceObjects.cend(),
+                                 [id](const SourceItem &item) -> bool { return item.id == id; });
+    ui->toolButtonNewObject->setDisabled(it != sourceObjects.cend());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::AddNewObject()
+{
+    quint32 const id = getCurrentObjectId(ui->comboBoxNewObject);
+    if (id == NULL_ID)
+    {
+        return;
+    }
+
+    QVector<SourceItem> sourceObjects = SaveSourceObjects();
+    QSet<QString> occupiedNames;
+    for (const auto &sourceItem : std::as_const(sourceObjects))
+    {
+        if (!sourceItem.name.isEmpty())
+        {
+            occupiedNames.insert(sourceItem.name);
+        }
+    }
+
+    sourceObjects.append({.id = id, .name = GetDefSourceName(id, data, "m"_L1, occupiedNames)});
+    SetSourceObjects(sourceObjects);
+    ui->toolButtonNewObject->setDisabled(true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogMove::ColorChanged()
 {
     if (ui->listWidget->count() == 0)
@@ -654,10 +794,47 @@ void DialogMove::ColorChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::BulkRename()
 {
-    if (DialogBulkRename dlg(m_sourceObjects, data, this); dlg.exec() == QDialog::Accepted && dlg.HasChanges())
+    if (DialogBulkRename dlg(SaveSourceObjects(), data, this); dlg.exec() == QDialog::Accepted && dlg.HasChanges())
     {
         SetSourceObjects(dlg.RenamedItems());
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::RemoveObject()
+{
+    if (ui->listWidget->count() < 2)
+    {
+        ui->toolButtonRemoveObject->setDisabled(true);
+        return;
+    }
+
+    const QListWidgetItem *item = ui->listWidget->currentItem();
+    if (!item)
+    {
+        return;
+    }
+
+    const SourceItem target = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
+    const QUuid recordId = target.recordId;
+
+    const auto it = std::find_if(m_destination.cbegin(),
+                                 m_destination.cend(),
+                                 [recordId](const DestinationItem &item) -> bool { return item.recordId == recordId; });
+
+    if (const quint32 targetId = it != m_destination.cend() ? it->id : NULL_ID;
+        !IsSafeToRemoveGroupObject(targetId, m_doc))
+    {
+        ui->toolButtonRemoveObject->setDisabled(true);
+        return;
+    }
+
+    const int currentRow = ui->listWidget->row(item);
+    delete ui->listWidget->takeItem(currentRow);
+
+    SetSourceObjects(SaveSourceObjects());
+
+    ui->toolButtonRemoveObject->setDisabled(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -721,6 +898,13 @@ void DialogMove::SetSourceObjects(const QVector<SourceItem> &value)
     auto *operation = qobject_cast<VisToolMove *>(vis);
     SCASSERT(operation != nullptr)
     operation->SetObjects(SourceToObjects(m_sourceObjects));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::SetDestinationObjects(const QVector<DestinationItem> &value)
+{
+    m_destination = value;
+    CurrentObjectChanged(ui->listWidget->currentRow());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

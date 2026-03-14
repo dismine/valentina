@@ -439,7 +439,14 @@ void AbstractObjectRename::RenameFormulas()
 
     if (m_operationType != OperationType::Undo)
     {
-        emit NeedLiteParsing(Document::LiteParse);
+        if (!m_fullParse)
+        {
+            emit NeedLiteParsing(Document::LiteParse);
+        }
+        else
+        {
+            emit NeedFullParsing();
+        }
     }
 }
 

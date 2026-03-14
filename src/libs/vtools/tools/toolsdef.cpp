@@ -51,6 +51,21 @@
 
 using namespace Qt::Literals::StringLiterals;
 
+namespace
+{
+auto GetBaseName(quint32 id, const VContainer *data) -> QString
+{
+    if (const QSharedPointer<VGObject> obj = data->GetGObject(id); obj->getType() == GOType::Point)
+    {
+        return obj->name();
+    }
+
+    // Assume it's a curve for other types
+    const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(id);
+    return curve->HeadlessName();
+}
+} // namespace
+
 //---------------------------------------------------------------------------------------------------------------------
 auto SourceToObjects(const QVector<SourceItem> &source) -> QVector<quint32>
 {
@@ -108,19 +123,6 @@ void FillDefSourceNames(QVector<SourceItem> &source, const VContainer *data, con
 
     QRegularExpression const rx(NameRegExp());
 
-    // Lambda to get base name for an item
-    auto GetBaseName = [data](quint32 id) -> QString
-    {
-        if (const QSharedPointer<VGObject> obj = data->GetGObject(id); obj->getType() == GOType::Point)
-        {
-            return obj->name();
-        }
-
-        // Assume it's a curve for other types
-        const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(id);
-        return curve->HeadlessName();
-    };
-
     // Try each suffix number until we find one that works for all items
     for (int suffixIndex = 1; suffixIndex <= maxTries; ++suffixIndex)
     {
@@ -137,7 +139,7 @@ void FillDefSourceNames(QVector<SourceItem> &source, const VContainer *data, con
 
             try
             {
-                const QString baseName = GetBaseName(sourceItem.id);
+                const QString baseName = GetBaseName(sourceItem.id, data);
                 const QString candidateName = u"%1__%2%3"_s.arg(baseName, suffix).arg(suffixIndex);
 
                 // Check if name matches the regex
@@ -175,7 +177,7 @@ void FillDefSourceNames(QVector<SourceItem> &source, const VContainer *data, con
 
                 try
                 {
-                    const QString baseName = GetBaseName(sourceItem.id);
+                    const QString baseName = GetBaseName(sourceItem.id, data);
                     sourceItem.name = u"%1__%2%3"_s.arg(baseName, suffix).arg(suffixIndex);
                 }
                 catch (const VExceptionBadId &)
@@ -193,8 +195,11 @@ void FillDefSourceNames(QVector<SourceItem> &source, const VContainer *data, con
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto IsValidSourceName(const QString &newName, quint32 id, const QVector<SourceItem> &source, const VContainer *data)
-    -> bool
+auto IsValidSourceName(const QString &newName,
+                       quint32 id,
+                       const QVector<SourceItem> &source,
+                       const VContainer *data,
+                       const QSet<QString> &freeNames) -> bool
 {
     if (id == NULL_ID || newName.isEmpty())
     {
@@ -225,7 +230,7 @@ auto IsValidSourceName(const QString &newName, quint32 id, const QVector<SourceI
     }
 
     // Check if name is unique in data
-    if (newName != item->name && !data->IsUnique(name))
+    if (!freeNames.contains(newName) && newName != item->name && !data->IsUnique(name))
     {
         return false;
     }
@@ -276,4 +281,52 @@ auto GetSourceItemName(const QString &name, quint32 id, const VContainer *data) 
     {
         return {};
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto GetDefSourceName(quint32 id, const VContainer *data, const QString &suffix, const QSet<QString> &occupiedNames)
+    -> QString
+{
+    SCASSERT(data != nullptr)
+    SCASSERT(!suffix.isEmpty())
+    constexpr int maxTries = 100;
+    QRegularExpression const rx(NameRegExp());
+
+    try
+    {
+        const QString baseName = GetBaseName(id, data);
+        for (int suffixIndex = 1; suffixIndex <= maxTries; ++suffixIndex)
+        {
+            const QString candidateName = u"%1__%2%3"_s.arg(baseName, suffix).arg(suffixIndex);
+            if (rx.match(candidateName).hasMatch() && data->IsUnique(candidateName)
+                && !occupiedNames.contains(candidateName))
+            {
+                return candidateName;
+            }
+        }
+    }
+    catch (const VExceptionBadId &)
+    {
+        return {};
+    }
+
+    return {};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto FindFreeNames(const QVector<SourceItem> &oldSource, const QVector<SourceItem> &newSource) -> QSet<QString>
+{
+    QSet<QString> oldNames;
+    for (const auto &item : oldSource)
+    {
+        oldNames.insert(item.name);
+    }
+
+    QSet<QString> newNames;
+    for (const auto &item : newSource)
+    {
+        newNames.insert(item.name);
+    }
+
+    return oldNames - newNames;
 }

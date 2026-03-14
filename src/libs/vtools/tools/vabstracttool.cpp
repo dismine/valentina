@@ -122,7 +122,7 @@ VAbstractTool::~VAbstractTool()
  * @throw VExceptionUndo If the user fails to fix the wrong formula and decides to undo.
  * @return result of calculation formula.
  */
-auto VAbstractTool::CheckFormula(const quint32 &toolId, QString &formula, VContainer *data) -> qreal
+auto VAbstractTool::CheckFormula(const quint32 &toolId, QString &formula, const VContainer *data) -> qreal
 {
     SCASSERT(data != nullptr)
     qreal result = 0;
@@ -338,7 +338,7 @@ void VAbstractTool::ToolCreation(const Source &typeCreation)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstractTool::GetRecord(const quint32 id, const Tool &toolType, VAbstractPattern *doc) -> VToolRecord
+auto VAbstractTool::GetRecord(quint32 id, const Tool &toolType, VAbstractPattern *doc) -> VToolRecord
 {
     const QVector<VToolRecord> *history = doc->getHistory();
     for (const auto &record : *history)
