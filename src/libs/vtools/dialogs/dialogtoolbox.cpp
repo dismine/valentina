@@ -1237,7 +1237,7 @@ void FillComboBoxObjectTypes(QComboBox *box)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto IsSafeToRemoveGroupObject(quint32 targetId, VAbstractPattern *doc) -> bool
+auto IsSafeToRemoveGroupObject(quint32 targetId, const VAbstractPattern *doc) -> bool
 {
     SCASSERT(doc != nullptr)
 
