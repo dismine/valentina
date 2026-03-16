@@ -72,11 +72,21 @@ const QString VToolCurveIntersectAxis::ToolType = QStringLiteral("curveIntersect
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolCurveIntersectAxis::VToolCurveIntersectAxis(const VToolCurveIntersectAxisInitData &initData, QGraphicsItem *parent)
-  : VToolLinePoint(initData.doc, initData.data, initData.id, initData.typeLine, initData.lineColor, QString(),
-                   initData.basePointId, 0, initData.notes, parent),
+  : VToolLinePoint(initData.doc,
+                   initData.data,
+                   initData.id,
+                   initData.typeLine,
+                   initData.lineColor,
+                   QString(),
+                   initData.basePointId,
+                   0,
+                   initData.notes,
+                   parent),
     formulaAngle(initData.formulaAngle),
     curveId(initData.curveId),
     m_segments(initData.segments),
+    m_name1(initData.name1),
+    m_name2(initData.name2),
     m_aliasSuffix1(initData.aliasSuffix1),
     m_aliasSuffix2(initData.aliasSuffix2)
 {
