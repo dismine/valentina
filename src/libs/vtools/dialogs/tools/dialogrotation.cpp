@@ -49,7 +49,6 @@
 #include "../../visualization/line/operation/vistoolrotation.h"
 #include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
-#include "../ifc/xml/vpatterngraph.h"
 #include "../qmuparser/qmudef.h"
 #include "../support/dialogbulkrename.h"
 #include "../support/dialogeditwrongformula.h"

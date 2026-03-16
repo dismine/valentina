@@ -46,7 +46,6 @@
 #include "../../visualization/line/operation/vistoolflippingbyline.h"
 #include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
-#include "../ifc/xml/vpatterngraph.h"
 #include "../qmuparser/qmudef.h"
 #include "../support/dialogbulkrename.h"
 #include "../vmisc/vvalentinasettings.h"
