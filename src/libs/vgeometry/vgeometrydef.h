@@ -47,6 +47,9 @@ enum class GOType : qint8
     PlaceLabel,
     Unknown
 };
+
+Q_DECLARE_METATYPE(GOType) // NOLINT
+
 enum class SplinePointPosition : qint8
 {
     FirstPoint,
