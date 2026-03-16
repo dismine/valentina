@@ -380,7 +380,7 @@ auto VNodePoint::InitContextMenu(QMenu *menu, vidtype pieceId, RemoveStatus stat
     showFullPieceOption->setCheckable(true);
     {
         // We cannot use current VContainer because it doesn't have current seam allowance value
-        const VContainer pData = VAbstractPattern::getTool(pieceId)->getData();
+        const VContainer pData = VAbstractPattern::getTool(pieceId)->GetDataCopy();
         const QLineF mirrorLine = detail.SeamAllowanceMirrorLine(&pData);
         showFullPieceOption->setEnabled(not mirrorLine.isNull());
         showFullPieceOption->setChecked(true);

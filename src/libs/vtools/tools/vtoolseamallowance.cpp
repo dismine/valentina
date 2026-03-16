@@ -630,7 +630,7 @@ auto VToolSeamAllowance::Duplicate(const QPointer<DialogTool> &dialog, VMainGrap
     initData.typeCreation = Source::FromGui;
     initData.drawName = doc->PieceDrawName(dialogTool->Duplicate());
 
-    VContainer toolData = VAbstractPattern::getTool(dialogTool->Duplicate())->getData();
+    VContainer toolData = VAbstractPattern::getTool(dialogTool->Duplicate())->GetDataCopy();
     initData.data = &toolData;
 
     VPiece detail = initData.data->GetPiece(dialogTool->Duplicate());

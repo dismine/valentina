@@ -1698,7 +1698,7 @@ void CreateUnitedDetail(const VToolUnionDetailsInitData &initData, qreal dx, qre
         initPieceData.typeCreation = Source::FromGui;
         initPieceData.drawName = initData.doc->PieceDrawName(id);
 
-        VContainer toolData = VAbstractPattern::getTool(id)->getData();
+        VContainer toolData = VAbstractPattern::getTool(id)->GetDataCopy();
         initPieceData.data = &toolData;
 
         initPieceData.detail = initData.data->GetPiece(id);

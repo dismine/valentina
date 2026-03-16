@@ -294,7 +294,7 @@ void VToolPiecePath::RefreshGeometry()
     {
         VPiece const piece = VAbstractTool::data.GetPiece(pieceId);
         // We cannot use current VContainer because it doesn't have current seam allowance value
-        const VContainer pData = VAbstractPattern::getTool(pieceId)->getData();
+        const VContainer pData = VAbstractPattern::getTool(pieceId)->GetDataCopy();
         cuttingPath = piece.CuttingPathPoints(&pData);
 
         showFullPiece = piece.IsShowFullPiece();

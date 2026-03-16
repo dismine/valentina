@@ -366,7 +366,7 @@ void VPattern::setCurrentData()
     }
 
     const VDataTool *vTool = tools.value(id);
-    *data = vTool->getData();
+    *data = vTool->GetDataCopy();
     // Delete special variables if exist
     data->RemoveVariable(currentLength);
     data->RemoveVariable(currentSeamAllowance);
@@ -417,7 +417,7 @@ auto VPattern::GetCompleteData() const -> VContainer
 
     const VDataTool *vTool = tools.value(id);
     SCASSERT(vTool != nullptr)
-    VContainer lastData = vTool->getData();
+    VContainer lastData = vTool->GetDataCopy();
     // Delete special variables if exist
     lastData.RemoveVariable(currentLength);
     lastData.RemoveVariable(currentSeamAllowance);
@@ -452,7 +452,7 @@ auto VPattern::GetCompletePPData(const QString &name) const -> VContainer
 
     const VDataTool *vTool = tools.value(id);
     SCASSERT(vTool != nullptr)
-    VContainer lastData = vTool->getData();
+    VContainer lastData = vTool->GetDataCopy();
     // Delete special variables if exist
     lastData.RemoveVariable(currentLength);
     lastData.RemoveVariable(currentSeamAllowance);

@@ -51,7 +51,7 @@ public:
     explicit VDataTool(VContainer *data, QObject *parent = nullptr);
     ~VDataTool() override = default;
 
-    auto getData() const -> VContainer;
+    auto GetDataCopy() const -> VContainer;
     void setData(const VContainer *value);
 
     virtual void GroupVisibility(quint32 object, bool visible) = 0;
@@ -66,10 +66,10 @@ private:
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief getData return data container.
+ * @brief GetDataCopy return data container.
  * @return container.
  */
-inline auto VDataTool::getData() const -> VContainer
+inline auto VDataTool::GetDataCopy() const -> VContainer
 {
     return data;
 }
