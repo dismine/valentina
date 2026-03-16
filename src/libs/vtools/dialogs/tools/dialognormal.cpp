@@ -70,6 +70,9 @@ DialogNormal::DialogNormal(const VContainer *data, VAbstractPattern *doc, quint3
 
     InitIcons();
 
+    MakeFilterableComboBox(ui->comboBoxFirstPoint);
+    MakeFilterableComboBox(ui->comboBoxSecondPoint);
+
     m_timerFormula->setSingleShot(true);
     connect(m_timerFormula, &QTimer::timeout, this, &DialogNormal::EvalFormula);
 

@@ -47,6 +47,9 @@ DialogPointFromArcAndTangent::DialogPointFromArcAndTangent(const VContainer *dat
 {
     ui->setupUi(this);
 
+    MakeFilterableComboBox(ui->comboBoxTangentPoint);
+    MakeFilterableComboBox(ui->comboBoxArc);
+
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
     ui->lineEditNamePoint->setText(

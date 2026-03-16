@@ -74,6 +74,8 @@ DialogFlippingByAxis::DialogFlippingByAxis(const VContainer *data,
 
     FillComboBoxObjectTypes(ui->comboBoxObjectType);
 
+    MakeFilterableComboBox(ui->comboBoxNewObject);
+
     FillComboBoxPoints(ui->comboBoxOriginPoint);
     FillComboBoxAxisType(ui->comboBoxAxisType);
     FillComboBoxTypeLine(ui->comboBoxPenStyle,

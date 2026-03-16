@@ -64,6 +64,9 @@ DialogPointOfIntersectionCircles::DialogPointOfIntersectionCircles(const VContai
 
     InitIcons();
 
+    MakeFilterableComboBox(ui->comboBoxCircle1Center);
+    MakeFilterableComboBox(ui->comboBoxCircle2Center);
+
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
     ui->lineEditNamePoint->setText(

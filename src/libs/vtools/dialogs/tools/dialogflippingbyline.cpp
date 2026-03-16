@@ -74,6 +74,8 @@ DialogFlippingByLine::DialogFlippingByLine(const VContainer *data,
 
     FillComboBoxObjectTypes(ui->comboBoxObjectType);
 
+    MakeFilterableComboBox(ui->comboBoxNewObject);
+
     FillComboBoxPoints(ui->comboBoxFirstLinePoint);
     FillComboBoxPoints(ui->comboBoxSecondLinePoint);
     FillComboBoxTypeLine(ui->comboBoxPenStyle,

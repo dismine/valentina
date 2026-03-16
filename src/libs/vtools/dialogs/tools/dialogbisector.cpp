@@ -70,6 +70,10 @@ DialogBisector::DialogBisector(const VContainer *data, VAbstractPattern *doc, qu
 
     InitIcons();
 
+    MakeFilterableComboBox(ui->comboBoxFirstPoint);
+    MakeFilterableComboBox(ui->comboBoxSecondPoint);
+    MakeFilterableComboBox(ui->comboBoxThirdPoint);
+
     m_timerFormula->setSingleShot(true);
     connect(m_timerFormula, &QTimer::timeout, this, &DialogBisector::EvalFormula);
 

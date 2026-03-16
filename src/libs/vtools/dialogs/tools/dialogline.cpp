@@ -57,6 +57,9 @@ DialogLine::DialogLine(const VContainer *data, VAbstractPattern *doc, quint32 to
     ui->setupUi(this);
     InitOkCancelApply(ui);
 
+    MakeFilterableComboBox(ui->comboBoxFirstPoint);
+    MakeFilterableComboBox(ui->comboBoxSecondPoint);
+
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);
     InitColorPicker(ui->pushButtonLineColor, VAbstractValApplication::VApp()->ValentinaSettings()->GetUserToolColors());

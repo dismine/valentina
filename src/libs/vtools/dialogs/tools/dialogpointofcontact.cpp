@@ -69,6 +69,10 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, VAbstractPatt
 
     InitIcons();
 
+    MakeFilterableComboBox(ui->comboBoxCenter);
+    MakeFilterableComboBox(ui->comboBoxFirstPoint);
+    MakeFilterableComboBox(ui->comboBoxSecondPoint);
+
     m_timerFormula->setSingleShot(true);
     connect(m_timerFormula, &QTimer::timeout, this, &DialogPointOfContact::EvalFormula);
 

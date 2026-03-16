@@ -62,6 +62,9 @@ DialogPointFromCircleAndTangent::DialogPointFromCircleAndTangent(const VContaine
 
     InitIcons();
 
+    MakeFilterableComboBox(ui->comboBoxCircleCenter);
+    MakeFilterableComboBox(ui->comboBoxTangentPoint);
+
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
     ui->lineEditNamePoint->setText(

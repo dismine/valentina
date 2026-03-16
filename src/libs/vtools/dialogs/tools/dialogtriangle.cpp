@@ -56,6 +56,11 @@ DialogTriangle::DialogTriangle(const VContainer *data, VAbstractPattern *doc, qu
 {
     ui->setupUi(this);
 
+    MakeFilterableComboBox(ui->comboBoxAxisP1);
+    MakeFilterableComboBox(ui->comboBoxAxisP2);
+    MakeFilterableComboBox(ui->comboBoxFirstPoint);
+    MakeFilterableComboBox(ui->comboBoxSecondPoint);
+
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
     ui->lineEditNamePoint->setText(

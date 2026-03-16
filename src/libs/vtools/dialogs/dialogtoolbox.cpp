@@ -50,6 +50,7 @@
 
 #include <qnumeric.h>
 #include <QBuffer>
+#include <QCompleter>
 #include <QDebug>
 #include <QDialog>
 #include <QDialogButtonBox>
@@ -1269,4 +1270,17 @@ auto IsSafeToRemoveGroupObject(quint32 targetId, VAbstractPattern *doc) -> bool
     }
 
     return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MakeFilterableComboBox(QComboBox *combo, Qt::CaseSensitivity cs)
+{
+    SCASSERT(combo != nullptr)
+
+    combo->setEditable(true);
+    auto *completer = new QCompleter(combo->model(), combo);
+    completer->setCompletionMode(QCompleter::PopupCompletion);
+    completer->setFilterMode(Qt::MatchContains);
+    completer->setCaseSensitivity(cs);
+    combo->setCompleter(completer);
 }

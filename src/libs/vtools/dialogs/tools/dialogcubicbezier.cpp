@@ -51,6 +51,11 @@ DialogCubicBezier::DialogCubicBezier(const VContainer *data, VAbstractPattern *d
     ui->setupUi(this);
     InitOkCancelApply(ui);
 
+    MakeFilterableComboBox(ui->comboBoxP1);
+    MakeFilterableComboBox(ui->comboBoxP2);
+    MakeFilterableComboBox(ui->comboBoxP3);
+    MakeFilterableComboBox(ui->comboBoxP4);
+
     FillComboBoxPoints(ui->comboBoxP1);
     FillComboBoxPoints(ui->comboBoxP2);
     FillComboBoxPoints(ui->comboBoxP3);

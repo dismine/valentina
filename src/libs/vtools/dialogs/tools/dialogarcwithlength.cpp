@@ -63,6 +63,8 @@ DialogArcWithLength::DialogArcWithLength(const VContainer *data, VAbstractPatter
 
     InitIcons();
 
+    MakeFilterableComboBox(ui->comboBoxCenter);
+
     this->m_formulaBaseHeightRadius = ui->plainTextEditRadius->height();
     this->m_formulaBaseHeightF1 = ui->plainTextEditF1->height();
     this->m_formulaBaseHeightLength = ui->plainTextEditLength->height();

@@ -68,6 +68,9 @@ DialogCubicBezierPath::DialogCubicBezierPath(const VContainer *data,
     InitOkCancelApply(ui);
     bOk->setEnabled(false);
 
+    MakeFilterableComboBox(ui->comboBoxNewPoint);
+    MakeFilterableComboBox(ui->comboBoxPoint);
+
     FillComboBoxPoints(ui->comboBoxNewPoint);
     FillComboBoxPoints(ui->comboBoxPoint);
     InitColorPicker(ui->pushButtonColor, VAbstractValApplication::VApp()->ValentinaSettings()->GetUserToolColors());

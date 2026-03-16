@@ -80,6 +80,8 @@ DialogEndLine::DialogEndLine(const VContainer *data, VAbstractPattern *doc, quin
 
     InitIcons();
 
+    MakeFilterableComboBox(ui->comboBoxBasePoint);
+
     timerFormulaLength->setSingleShot(true);
     timerFormulaAngle->setSingleShot(true);
 

@@ -71,6 +71,8 @@ DialogCutSpline::DialogCutSpline(const VContainer *data, VAbstractPattern *doc, 
 
     InitIcons();
 
+    MakeFilterableComboBox(ui->comboBoxSpline);
+
     m_timerFormula->setSingleShot(true);
     connect(m_timerFormula, &QTimer::timeout, this, &DialogCutSpline::EvalFormula);
 

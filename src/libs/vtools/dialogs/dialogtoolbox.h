@@ -126,6 +126,7 @@ auto GenerateDefOffsetCurveName(const VContainer *data, quint32 curveId, const Q
     -> QString;
 void FillComboBoxObjectTypes(QComboBox *box);
 auto IsSafeToRemoveGroupObject(quint32 targetId, VAbstractPattern *doc) -> bool;
+void MakeFilterableComboBox(QComboBox *combo, Qt::CaseSensitivity cs = Qt::CaseInsensitive);
 
 //---------------------------------------------------------------------------------------------------------------------
 template<typename T>

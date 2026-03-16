@@ -56,6 +56,9 @@ DialogPointOfIntersection::DialogPointOfIntersection(const VContainer *data, VAb
 {
     ui->setupUi(this);
 
+    MakeFilterableComboBox(ui->comboBoxFirstPoint);
+    MakeFilterableComboBox(ui->comboBoxSecondPoint);
+
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
     ui->lineEditNamePoint->setText(

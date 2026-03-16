@@ -62,6 +62,10 @@ DialogHeight::DialogHeight(const VContainer *data, VAbstractPattern *doc, quint3
 {
     ui->setupUi(this);
 
+    MakeFilterableComboBox(ui->comboBoxBasePoint);
+    MakeFilterableComboBox(ui->comboBoxP1Line);
+    MakeFilterableComboBox(ui->comboBoxP2Line);
+
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
     ui->lineEditNamePoint->setText(

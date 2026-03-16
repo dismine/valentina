@@ -96,6 +96,8 @@ DialogGraduatedCurve::DialogGraduatedCurve(const VContainer *data,
 
     InitIcons();
 
+    MakeFilterableComboBox(ui->comboBoxCurve);
+
     FillComboBoxCurves(ui->comboBoxCurve);
 
     InitColorPicker(ui->pushButtonColor, VAbstractValApplication::VApp()->ValentinaSettings()->GetUserToolColors());

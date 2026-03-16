@@ -50,6 +50,9 @@ DialogPointOfIntersectionArcs::DialogPointOfIntersectionArcs(const VContainer *d
 {
     ui->setupUi(this);
 
+    MakeFilterableComboBox(ui->comboBoxArc1);
+    MakeFilterableComboBox(ui->comboBoxArc2);
+
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
     ui->lineEditNamePoint->setText(

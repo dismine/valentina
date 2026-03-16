@@ -81,6 +81,8 @@ DialogRotation::DialogRotation(const VContainer *data, VAbstractPattern *doc, qu
 
     InitIcons();
 
+    MakeFilterableComboBox(ui->comboBoxNewObject);
+
     this->formulaBaseHeightAngle = ui->plainTextEditFormula->height();
     ui->plainTextEditFormula->installEventFilter(this);
 

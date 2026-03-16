@@ -89,6 +89,9 @@ DialogSplinePath::DialogSplinePath(const VContainer *data, VAbstractPattern *doc
 
     InitIcons();
 
+    MakeFilterableComboBox(ui->comboBoxNewPoint);
+    MakeFilterableComboBox(ui->comboBoxPoint);
+
     formulaBaseHeightAngle1 = ui->plainTextEditAngle1F->height();
     formulaBaseHeightAngle2 = ui->plainTextEditAngle2F->height();
     formulaBaseHeightLength1 = ui->plainTextEditLength1F->height();

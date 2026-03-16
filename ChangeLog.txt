@@ -18,6 +18,7 @@
 - New option to disable mirroring a notch.
 - Valentina app. Improved control over notch visibility.
 - Valentina app. Editing group operations.
+- Valentina app. Added filterable lists.
 
 # Valentina 1.0.1 (unreleased)
 - Tool Normal. Fixed formula values were not saved.

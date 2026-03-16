@@ -55,6 +55,8 @@ DialogParallelCurve::DialogParallelCurve(const VContainer *data, VAbstractPatter
 
     InitIcons();
 
+    MakeFilterableComboBox(ui->comboBoxCurve);
+
     this->m_formulaBaseHeightWidth = ui->plainTextEditWidth->height();
 
     ui->plainTextEditWidth->installEventFilter(this);

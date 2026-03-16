@@ -81,6 +81,8 @@ DialogMove::DialogMove(const VContainer *data, VAbstractPattern *doc, quint32 to
 
     InitIcons();
 
+    MakeFilterableComboBox(ui->comboBoxNewObject);
+
     this->formulaBaseHeightAngle = ui->plainTextEditAngle->height();
     ui->plainTextEditAngle->installEventFilter(this);
 

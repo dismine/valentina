@@ -71,6 +71,8 @@ DialogCutSplinePath::DialogCutSplinePath(const VContainer *data, VAbstractPatter
 
     InitIcons();
 
+    MakeFilterableComboBox(ui->comboBoxSplinePath);
+
     m_timerFormula->setSingleShot(true);
     connect(m_timerFormula, &QTimer::timeout, this, &DialogCutSplinePath::EvalFormula);
 

@@ -77,6 +77,10 @@ DialogLineIntersectAxis::DialogLineIntersectAxis(const VContainer *data, VAbstra
 
     InitIcons();
 
+    MakeFilterableComboBox(ui->comboBoxAxisPoint);
+    MakeFilterableComboBox(ui->comboBoxFirstLinePoint);
+    MakeFilterableComboBox(ui->comboBoxSecondLinePoint);
+
     timerFormula->setSingleShot(true);
 
     ui->lineEditNamePoint->setClearButtonEnabled(true);

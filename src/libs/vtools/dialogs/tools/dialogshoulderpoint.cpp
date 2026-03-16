@@ -69,6 +69,10 @@ DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, VAbstractPatter
 
     InitIcons();
 
+    MakeFilterableComboBox(ui->comboBoxP1Line);
+    MakeFilterableComboBox(ui->comboBoxP2Line);
+    MakeFilterableComboBox(ui->comboBoxP3);
+
     m_timerFormula->setSingleShot(true);
     connect(m_timerFormula, &QTimer::timeout, this, &DialogShoulderPoint::EvalFormula);
 

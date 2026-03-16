@@ -68,6 +68,8 @@ DialogArc::DialogArc(const VContainer *data, VAbstractPattern *doc, quint32 tool
 
     InitIcons();
 
+    MakeFilterableComboBox(ui->comboBoxBasePoint);
+
     ui->doubleSpinBoxApproximationScale->setMaximum(maxCurveApproximationScale);
 
     this->m_formulaBaseHeight = ui->plainTextEditFormula->height();

@@ -80,6 +80,9 @@ DialogCurveIntersectAxis::DialogCurveIntersectAxis(const VContainer *data, VAbst
 
     InitIcons();
 
+    MakeFilterableComboBox(ui->comboBoxAxisPoint);
+    MakeFilterableComboBox(ui->comboBoxCurve);
+
     timerFormula->setSingleShot(true);
 
     ui->lineEditNamePoint->setClearButtonEnabled(true);

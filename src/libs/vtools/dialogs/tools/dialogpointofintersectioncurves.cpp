@@ -59,6 +59,9 @@ DialogPointOfIntersectionCurves::DialogPointOfIntersectionCurves(const VContaine
 {
     ui->setupUi(this);
 
+    MakeFilterableComboBox(ui->comboBoxCurve1);
+    MakeFilterableComboBox(ui->comboBoxCurve2);
+
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
     ui->lineEditNamePoint->setText(

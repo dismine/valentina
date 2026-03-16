@@ -71,6 +71,8 @@ DialogCutArc::DialogCutArc(const VContainer *data, VAbstractPattern *doc, quint3
 
     InitIcons();
 
+    MakeFilterableComboBox(ui->comboBoxArc);
+
     m_timerFormula->setSingleShot(true);
     connect(m_timerFormula, &QTimer::timeout, this, &DialogCutArc::EvalFormula);
 

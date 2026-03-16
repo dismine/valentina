@@ -75,6 +75,9 @@ DialogSpline::DialogSpline(const VContainer *data, VAbstractPattern *doc, quint3
 
     InitIcons();
 
+    MakeFilterableComboBox(ui->comboBoxP1);
+    MakeFilterableComboBox(ui->comboBoxP4);
+
     formulaBaseHeightAngle1 = ui->plainTextEditAngle1F->height();
     formulaBaseHeightAngle2 = ui->plainTextEditAngle2F->height();
     formulaBaseHeightLength1 = ui->plainTextEditLength1F->height();

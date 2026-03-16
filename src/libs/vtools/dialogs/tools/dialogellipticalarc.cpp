@@ -70,6 +70,8 @@ DialogEllipticalArc::DialogEllipticalArc(const VContainer *data, VAbstractPatter
 
     InitIcons();
 
+    MakeFilterableComboBox(ui->comboBoxBasePoint);
+
     this->m_formulaBaseHeightRadius1 = ui->plainTextEditRadius1->height();
     this->m_formulaBaseHeightRadius2 = ui->plainTextEditRadius2->height();
     this->m_formulaBaseHeightF1 = ui->plainTextEditF1->height();
