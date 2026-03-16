@@ -688,7 +688,7 @@ void DialogRotation::CurrentObjectChanged(int row)
         return;
     }
 
-    auto *item = ui->listWidget->item(row);
+    const auto *item = ui->listWidget->item(row);
     if (item == nullptr)
     {
         ui->toolButtonRemoveObject->setDisabled(true);
