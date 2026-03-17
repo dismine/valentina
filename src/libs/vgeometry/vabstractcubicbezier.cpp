@@ -89,8 +89,7 @@ auto PointBezier_r(QPointF p1, QPointF p2, QPointF p3, QPointF p4, qint16 level,
         return {};
     }
 
-    double m_distance_tolerance_square;
-
+    double m_distance_tolerance_square = 0;
     m_distance_tolerance_square = 0.5 / approximationScale;
     m_distance_tolerance_square *= m_distance_tolerance_square;
 
