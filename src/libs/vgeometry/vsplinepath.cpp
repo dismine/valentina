@@ -270,6 +270,18 @@ auto VSplinePath::Offset(qreal distance, const QString &name) const -> VSplinePa
         offsetPath.append(subSplines);
     }
 
+    if (offsetPath.size() == 1)
+    {
+        const VSpline spl = offsetPath.constFirst();
+
+        VSpline left;
+        VSpline right;
+        spl.CutSplineAtParam(0.5, left, right, "X"_L1);
+
+        offsetPath.clear();
+        offsetPath = {left, right};
+    }
+
     VSplinePath splPath(offsetPath);
     if (!name.isEmpty())
     {
@@ -369,6 +381,18 @@ auto VSplinePath::Outline(const QVector<qreal> &distances, const QString &name) 
             const QVector<VSpline> subSplines = seg.OutlinePath(distances);
             outlinePath.append(subSplines);
         }
+    }
+
+    if (outlinePath.size() == 1)
+    {
+        const VSpline spl = outlinePath.constFirst();
+
+        VSpline left;
+        VSpline right;
+        spl.CutSplineAtParam(0.5, left, right, "X"_L1);
+
+        outlinePath.clear();
+        outlinePath = {left, right};
     }
 
     VSplinePath splPath(outlinePath);

@@ -150,7 +150,19 @@ auto VCubicBezier::Offset(qreal distance, const QString &name) const -> VSplineP
     VSpline spl(GetP1(), GetP2().toQPointF(), GetP3().toQPointF(), GetP4());
     spl.SetApproximationScale(GetApproximationScale());
 
-    QVector<VSpline> const subSplines = spl.OffsetPath(distance);
+    QVector<VSpline> subSplines = spl.OffsetPath(distance);
+
+    if (subSplines.size() == 1)
+    {
+        const VSpline spl = subSplines.constFirst();
+
+        VSpline left;
+        VSpline right;
+        spl.CutSplineAtParam(0.5, left, right, "X"_L1);
+
+        subSplines.clear();
+        subSplines = {left, right};
+    }
 
     VSplinePath splPath(subSplines);
     if (!name.isEmpty())
@@ -172,7 +184,19 @@ auto VCubicBezier::Outline(const QVector<qreal> &distances, const QString &name)
     VSpline spl(GetP1(), GetP2().toQPointF(), GetP3().toQPointF(), GetP4());
     spl.SetApproximationScale(GetApproximationScale());
 
-    QVector<VSpline> const subSplines = spl.OutlinePath(distances);
+    QVector<VSpline> subSplines = spl.OutlinePath(distances);
+
+    if (subSplines.size() == 1)
+    {
+        const VSpline segSpl = subSplines.constFirst();
+
+        VSpline left;
+        VSpline right;
+        segSpl.CutSplineAtParam(0.5, left, right, "X"_L1);
+
+        subSplines.clear();
+        subSplines = {left, right};
+    }
 
     VSplinePath splPath(subSplines);
     if (!name.isEmpty())

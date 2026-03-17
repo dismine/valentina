@@ -448,7 +448,19 @@ VSpline::~VSpline() = default;
 //---------------------------------------------------------------------------------------------------------------------
 auto VSpline::Offset(qreal distance, const QString &name) const -> VSplinePath
 {
-    QVector<VSpline> const subSplines = OffsetPath(distance);
+    QVector<VSpline> subSplines = OffsetPath(distance);
+
+    if (subSplines.size() == 1)
+    {
+        const VSpline spl = subSplines.constFirst();
+
+        VSpline left;
+        VSpline right;
+        spl.CutSplineAtParam(0.5, left, right, "X"_L1);
+
+        subSplines.clear();
+        subSplines = {left, right};
+    }
 
     VSplinePath splPath(subSplines);
     if (!name.isEmpty())
@@ -467,7 +479,19 @@ auto VSpline::Offset(qreal distance, const QString &name) const -> VSplinePath
 //---------------------------------------------------------------------------------------------------------------------
 auto VSpline::Outline(const QVector<qreal> &distances, const QString &name) const -> VSplinePath
 {
-    QVector<VSpline> const subSplines = OutlinePath(distances);
+    QVector<VSpline> subSplines = OutlinePath(distances);
+
+    if (subSplines.size() == 1)
+    {
+        const VSpline spl = subSplines.constFirst();
+
+        VSpline left;
+        VSpline right;
+        spl.CutSplineAtParam(0.5, left, right, "X"_L1);
+
+        subSplines.clear();
+        subSplines = {left, right};
+    }
 
     VSplinePath splPath(subSplines);
     if (!name.isEmpty())
@@ -505,9 +529,15 @@ auto VSpline::CutSpline(qreal length, VSpline &spl1, VSpline &spl2, const QStrin
 
     spl1 = VSpline(GetP1(), spl1p2, spl1p3, VPointF(cutPoint, pointName));
     spl1.SetApproximationScale(GetApproximationScale());
+    spl1.SetColor(GetColor());
+    spl1.SetPenStyle(GetPenStyle());
+    spl1.SetDerivative(true);
 
     spl2 = VSpline(VPointF(cutPoint, pointName), spl2p2, spl2p3, GetP4());
     spl2.SetApproximationScale(GetApproximationScale());
+    spl2.SetColor(GetColor());
+    spl2.SetPenStyle(GetPenStyle());
+    spl2.SetDerivative(true);
     return cutPoint;
 }
 
@@ -523,9 +553,15 @@ auto VSpline::CutSplineAtParam(qreal t, VSpline &left, VSpline &right, const QSt
 
     left = VSpline(GetP1(), spl1p2, spl1p3, VPointF(cutPoint, midPointName));
     left.SetApproximationScale(GetApproximationScale());
+    left.SetColor(GetColor());
+    left.SetPenStyle(GetPenStyle());
+    left.SetDerivative(true);
 
     right = VSpline(VPointF(cutPoint, midPointName), spl2p2, spl2p3, GetP4());
     right.SetApproximationScale(GetApproximationScale());
+    right.SetColor(GetColor());
+    right.SetPenStyle(GetPenStyle());
+    right.SetDerivative(true);
     return cutPoint;
 }
 
