@@ -604,7 +604,7 @@ auto VDomDocument::GetParametrDouble(const QDomElement &domElement, const QStrin
  * @param domElement tag in xml tree.
  * @return id value.
  */
-auto VDomDocument::GetParametrId(const QDomElement &domElement) -> quint32
+auto VDomDocument::GetParametrId(const QDomElement &domElement, const QString &name) -> quint32
 {
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
@@ -613,7 +613,7 @@ auto VDomDocument::GetParametrId(const QDomElement &domElement) -> quint32
     const QString message = QObject::tr("Got wrong parameter id. Need only id > 0.");
     try
     {
-        id = GetParametrUInt(domElement, VDomDocument::AttrId, NULL_ID_STR);
+        id = GetParametrUInt(domElement, name, NULL_ID_STR);
         if (id == NULL_ID)
         {
             throw VExceptionWrongId(message, domElement);
