@@ -1477,8 +1477,9 @@ void VPattern::PointsCommonAttributes(const QDomElement &domElement, VToolSingle
 void VPattern::PointsCommonAttributes(const QDomElement &domElement, quint32 &id, qreal &mx, qreal &my)
 {
     ToolsCommonAttributes(domElement, id);
-    mx = VAbstractValApplication::VApp()->toPixel(GetParametrDouble(domElement, AttrMx, QString::number(labelMX)));
-    my = VAbstractValApplication::VApp()->toPixel(GetParametrDouble(domElement, AttrMy, QString::number(labelMY)));
+    const VAbstractValApplication *app = VAbstractValApplication::VApp();
+    mx = app->toPixel(GetParametrDouble(domElement, AttrMx, QString::number(app->fromPixel(labelMX))));
+    my = app->toPixel(GetParametrDouble(domElement, AttrMy, QString::number(app->fromPixel(labelMY))));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1486,8 +1487,9 @@ void VPattern::DrawPointsCommonAttributes(const QDomElement &domElement, quint32
                                           QString &notes)
 {
     DrawToolsCommonAttributes(domElement, id, notes);
-    mx = VAbstractValApplication::VApp()->toPixel(GetParametrDouble(domElement, AttrMx, QString::number(labelMX)));
-    my = VAbstractValApplication::VApp()->toPixel(GetParametrDouble(domElement, AttrMy, QString::number(labelMY)));
+    const VAbstractValApplication *app = VAbstractValApplication::VApp();
+    mx = app->toPixel(GetParametrDouble(domElement, AttrMx, QString::number(app->fromPixel(labelMX))));
+    my = app->toPixel(GetParametrDouble(domElement, AttrMy, QString::number(app->fromPixel(labelMY))));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2774,18 +2776,19 @@ void VPattern::ParseToolTrueDarts(VMainGraphicsScene *scene, const QDomElement &
         initData.dartP2Id = GetParametrUInt(domElement, AttrDartP2, NULL_ID_STR);
         initData.dartP3Id = GetParametrUInt(domElement, AttrDartP3, NULL_ID_STR);
 
+        const VAbstractValApplication *app = VAbstractValApplication::VApp();
+
+        const QString labelMXStr = QString::number(app->fromPixel(labelMX));
+        const QString labelMYStr = QString::number(app->fromPixel(labelMY));
+
         initData.name1 = GetParametrString(domElement, AttrName1, QChar('A'));
-        initData.mx1 =
-            VAbstractValApplication::VApp()->toPixel(GetParametrDouble(domElement, AttrMx1, QString::number(labelMX)));
-        initData.my1 =
-            VAbstractValApplication::VApp()->toPixel(GetParametrDouble(domElement, AttrMy1, QString::number(labelMY)));
+        initData.mx1 = app->toPixel(GetParametrDouble(domElement, AttrMx1, labelMXStr));
+        initData.my1 = app->toPixel(GetParametrDouble(domElement, AttrMy1, labelMYStr));
         initData.showLabel1 = GetParametrBool(domElement, AttrShowLabel1, trueStr);
 
         initData.name2 = GetParametrString(domElement, AttrName2, QChar('A'));
-        initData.mx2 =
-            VAbstractValApplication::VApp()->toPixel(GetParametrDouble(domElement, AttrMx2, QString::number(labelMX)));
-        initData.my2 =
-            VAbstractValApplication::VApp()->toPixel(GetParametrDouble(domElement, AttrMy2, QString::number(labelMY)));
+        initData.mx2 = app->toPixel(GetParametrDouble(domElement, AttrMx2, labelMXStr));
+        initData.my2 = app->toPixel(GetParametrDouble(domElement, AttrMy2, labelMYStr));
         initData.showLabel2 = GetParametrBool(domElement, AttrShowLabel2, trueStr);
 
         VToolTrueDarts::Create(initData);

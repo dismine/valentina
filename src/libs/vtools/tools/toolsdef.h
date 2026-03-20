@@ -69,8 +69,8 @@ Q_DECLARE_METATYPE(DestinationItem)
 Q_DECLARE_TYPEINFO(DestinationItem, Q_MOVABLE_TYPE); // NOLINT
 
 // Default label position
-const int labelMX = 10;
-const int labelMY = 15;
+constexpr qreal labelMX = ToPixel(10, Unit::Mm);
+constexpr qreal labelMY = ToPixel(15, Unit::Mm);
 
 auto SourceToObjects(const QVector<SourceItem> &source) -> QVector<quint32>;
 
