@@ -134,6 +134,13 @@ VNodePoint::VNodePoint(const VAbstractNodeInitData &initData, QObject *qoParent,
             &VGraphicsSimpleTextItem::ShowContextMenu,
             this,
             [this](QGraphicsSceneContextMenuEvent *event) -> void { contextMenuEvent(event); });
+    // Ugly, but there is no other way
+    connect(
+        m_namePoint,
+        &VGraphicsSimpleTextItem::UpdateLine,
+        this,
+        [this]() -> void { RefreshLine(); },
+        Qt::QueuedConnection);
     m_lineName->SetColorRole(VColorRole::PieceNodeLabelLineColor);
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(initData.id));
     ToolCreation(initData.typeCreation);

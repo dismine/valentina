@@ -55,6 +55,13 @@ VSimplePoint::VSimplePoint(quint32 id, VColorRole role, QObject *parent)
     connect(m_namePoint, &VGraphicsSimpleTextItem::PointChoosed, this, &VSimplePoint::PointChoosed);
     connect(m_namePoint, &VGraphicsSimpleTextItem::PointSelected, this, &VSimplePoint::PointSelected);
     connect(m_namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this, &VSimplePoint::ChangedPosition);
+    // Ugly, but there is no other way
+    connect(
+        m_namePoint,
+        &VGraphicsSimpleTextItem::UpdateLine,
+        this,
+        [this]() -> void { RefreshLine(); },
+        Qt::QueuedConnection);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

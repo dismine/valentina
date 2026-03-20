@@ -67,7 +67,6 @@ public:
     auto GetLabelTextHoverColorRole() const -> VColorRole;
     void SetLabelTextHoverColorRole(VColorRole role);
 
-public slots:
     void RefreshLine();
 
 protected:

@@ -98,6 +98,15 @@ VToolSinglePoint::VToolSinglePoint(VAbstractPattern *doc, VContainer *data, quin
     connect(m_namePoint, &VGraphicsSimpleTextItem::PointChoosed, this, &VToolSinglePoint::PointChoosed);
     connect(m_namePoint, &VGraphicsSimpleTextItem::PointSelected, this, &VToolSinglePoint::PointSelected);
     connect(m_namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this, &VToolSinglePoint::NameChangePosition);
+
+    // Ugly, but there is no other way
+    connect(
+        m_namePoint,
+        &VGraphicsSimpleTextItem::UpdateLine,
+        this,
+        [this]() -> void { RefreshLine(); },
+        Qt::QueuedConnection);
+
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
 }
 
