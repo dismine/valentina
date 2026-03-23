@@ -499,6 +499,8 @@ void DialogCurveIntersectAxis::ValidateCurveNames()
         m_flagCurveName2 = false; // Conflicts with other identifiers
     }
     ChangeColor(ui->labelName2, m_flagCurveName2 ? OkColor(this) : errorColor);
+
+    CheckState();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
