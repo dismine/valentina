@@ -33,28 +33,25 @@
 #include "../vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-MoveAbstractLabel::MoveAbstractLabel(VAbstractPattern *doc, quint32 pointId, const QPointF &pos, QUndoCommand *parent)
+MoveAbstractLabel::MoveAbstractLabel(
+    VAbstractPattern *doc, quint32 pointId, const QPointF &oldPos, const QPointF &newPos, QUndoCommand *parent)
   : VUndoCommand(doc, pointId, parent),
-    m_oldPos(),
-    m_newPos(pos)
+    m_oldPos(oldPos),
+    m_newPos(newPos)
 {
-    qCDebug(vUndo, "Point id %u", pointId);
-
-    qCDebug(vUndo, "Label new position (%f;%f)", m_newPos.x(), m_newPos.y());
+    qCDebug(vUndo, "Point id %u  old(%f;%f) → new(%f;%f)", pointId, oldPos.x(), oldPos.y(), newPos.x(), newPos.y());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void MoveAbstractLabel::undo()
 {
     qCDebug(vUndo, "Undo.");
-
-    Do(m_oldPos);
+    WritePos(m_oldPos);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void MoveAbstractLabel::redo()
 {
     qCDebug(vUndo, "Redo.");
-
-    Do(m_newPos);
+    WritePos(m_newPos);
 }

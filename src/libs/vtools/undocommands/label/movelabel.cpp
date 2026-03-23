@@ -32,49 +32,57 @@
 
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vmisc/def.h"
+#include "../vmisc/compatibility.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vtools/tools/vabstracttool.h"
 #include "../vundocommand.h"
 #include "moveabstractlabel.h"
 
+using namespace Qt::Literals::StringLiterals;
+
+namespace
+{
+
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
+
+// Better to use global variables because repeating QStringLiteral blows up code size
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, defPos, ("0.0"_L1)) // NOLINT
+
+QT_WARNING_POP
+
 //---------------------------------------------------------------------------------------------------------------------
-MoveLabel::MoveLabel(VAbstractPattern *doc, const QPointF &pos, const quint32 &id, QUndoCommand *parent)
-  : MoveAbstractLabel(doc, id, pos, parent),
-    m_scene(VAbstractValApplication::VApp()->getCurrentScene())
+auto ReadLabelPos(VAbstractPattern *doc, quint32 id) -> QPointF
+{
+    const QDomElement el = doc->FindElementById(id, VAbstractPattern::TagPoint);
+    if (!el.isElement())
+    {
+        qCWarning(vUndo, "MoveLabel: point id=%u not found; using (0,0) as old position", id);
+        return {};
+    }
+    return {VAbstractValApplication::VApp()->toPixel(VDomDocument::GetParametrDouble(el, AttrMx, *defPos)),
+            VAbstractValApplication::VApp()->toPixel(VDomDocument::GetParametrDouble(el, AttrMy, *defPos))};
+}
+} // namespace
+
+//---------------------------------------------------------------------------------------------------------------------
+MoveLabel::MoveLabel(VAbstractPattern *doc, const QPointF &newPos, const quint32 &id, QUndoCommand *parent)
+  : MoveAbstractLabel(doc, id, ReadLabelPos(doc, id), newPos, parent)
 {
     setText(tr("move point label"));
-
-    QDomElement const domElement = doc->FindElementById(id, VAbstractPattern::TagPoint);
-    if (domElement.isElement())
-    {
-        m_oldPos.rx() = VAbstractValApplication::VApp()->toPixel(VDomDocument::GetParametrDouble(domElement, AttrMx, "0.0"));
-        m_oldPos.ry() = VAbstractValApplication::VApp()->toPixel(VDomDocument::GetParametrDouble(domElement, AttrMy, "0.0"));
-
-        qCDebug(vUndo, "Label old Mx %f", m_oldPos.x());
-        qCDebug(vUndo, "Label old My %f", m_oldPos.y());
-    }
-    else
-    {
-        qCDebug(vUndo, "Can't find point with id = %u.", id);
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto MoveLabel::mergeWith(const QUndoCommand *command) -> bool
 {
-    const auto *moveCommand = static_cast<const MoveLabel *>(command);
-    SCASSERT(moveCommand != nullptr)
-
-    if (moveCommand->ElementId() != ElementId())
+    const auto *other = dynamic_cast<const MoveLabel *>(command);
+    if ((other == nullptr) || other->ElementId() != ElementId())
     {
         return false;
     }
 
-    qCDebug(vUndo, "Mergin undo.");
-    m_newPos = moveCommand->GetNewPos();
-    qCDebug(vUndo, "Label new Mx %f", m_newPos.x());
-    qCDebug(vUndo, "Label new My %f", m_newPos.y());
+    qCDebug(vUndo, "Merging: new position (%f;%f)", other->GetNewPos().x(), other->GetNewPos().y());
+    SetNewPos(other->GetNewPos());
     return true;
 }
 
@@ -85,24 +93,25 @@ auto MoveLabel::id() const -> int
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MoveLabel::Do(const QPointF &pos)
+auto MoveLabel::ReadCurrentPos() const -> QPointF
 {
-    qCDebug(vUndo, "New mx %f", pos.x());
-    qCDebug(vUndo, "New my %f", pos.y());
+    return ReadLabelPos(Doc(), ElementId());
+}
 
-    QDomElement domElement = Doc()->FindElementById(ElementId(), VAbstractPattern::TagPoint);
-    if (domElement.isElement())
+//---------------------------------------------------------------------------------------------------------------------
+void MoveLabel::WritePos(const QPointF &pos)
+{
+    QDomElement el = Doc()->FindElementById(ElementId(), VAbstractPattern::TagPoint);
+    if (!el.isElement())
     {
-        Doc()->SetAttribute(domElement, AttrMx, QString().setNum(VAbstractValApplication::VApp()->fromPixel(pos.x())));
-        Doc()->SetAttribute(domElement, AttrMy, QString().setNum(VAbstractValApplication::VApp()->fromPixel(pos.y())));
-
-        if (auto *tool = qobject_cast<VAbstractTool *>(VAbstractPattern::getTool(ElementId())))
-        {
-            tool->ChangeLabelPosition(ElementId(), pos);
-        }
+        qCWarning(vUndo, "MoveLabel: cannot find point id=%u to write position", ElementId());
+        return;
     }
-    else
+    Doc()->SetAttribute(el, AttrMx, QString::number(VAbstractValApplication::VApp()->fromPixel(pos.x())));
+    Doc()->SetAttribute(el, AttrMy, QString::number(VAbstractValApplication::VApp()->fromPixel(pos.y())));
+
+    if (auto *tool = qobject_cast<VAbstractTool *>(VAbstractPattern::getTool(ElementId())))
     {
-        qCDebug(vUndo, "Can't find point with id = %u.", ElementId());
+        tool->ChangeLabelPosition(ElementId(), pos);
     }
 }

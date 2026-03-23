@@ -107,35 +107,36 @@ void VUndoCommand::UndoDeleteAfterSibling(QDomNode &parentNode, quint32 siblingI
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VUndoCommand::GetDestinationObject(quint32 idTool, quint32 idPoint) const -> QDomElement
+auto VUndoCommand::GetDestinationObject(VAbstractPattern *doc, quint32 idTool, quint32 idPoint) -> QDomElement
 {
-    if (const QDomElement tool = m_doc->FindElementById(idTool, VAbstractPattern::TagOperation); tool.isElement())
+    const QDomElement tool = doc->FindElementById(idTool, VAbstractPattern::TagOperation);
+    if (!tool.isElement())
     {
-        QDomElement correctDest;
-        const QDomNodeList nodeList = tool.childNodes();
-        QDOM_LOOP(nodeList, i)
-        {
-            if (const QDomElement dest = QDOM_ELEMENT(nodeList, i).toElement();
-                not dest.isNull() && dest.isElement() && dest.tagName() == VAbstractOperation::TagDestination)
-            {
-                correctDest = dest;
-                break;
-            }
-        }
+        return {};
+    }
 
-        if (not correctDest.isNull())
+    QDomElement correctDest;
+    const QDomNodeList nodeList = tool.childNodes();
+    QDOM_LOOP(nodeList, i)
+    {
+        if (const QDomElement dest = QDOM_ELEMENT(nodeList, i).toElement();
+            not dest.isNull() && dest.isElement() && dest.tagName() == VAbstractOperation::TagDestination)
         {
-            const QDomNodeList destObjects = correctDest.childNodes();
-            QDOM_LOOP(destObjects, i)
+            correctDest = dest;
+            break;
+        }
+    }
+
+    if (not correctDest.isNull())
+    {
+        const QDomNodeList destObjects = correctDest.childNodes();
+        QDOM_LOOP(destObjects, i)
+        {
+            if (const QDomElement obj = QDOM_ELEMENT(destObjects, i).toElement(); not obj.isNull() && obj.isElement())
             {
-                if (const QDomElement obj = QDOM_ELEMENT(destObjects, i).toElement();
-                    not obj.isNull() && obj.isElement())
+                if (const quint32 id = VAbstractPattern::GetParametrUInt(obj, AttrIdObject, NULL_ID_STR); idPoint == id)
                 {
-                    if (const quint32 id = VAbstractPattern::GetParametrUInt(obj, AttrIdObject, NULL_ID_STR);
-                        idPoint == id)
-                    {
-                        return obj;
-                    }
+                    return obj;
                 }
             }
         }

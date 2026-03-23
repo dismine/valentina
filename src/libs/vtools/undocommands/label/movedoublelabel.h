@@ -49,36 +49,21 @@ class MoveDoubleLabel : public MoveAbstractLabel
 public:
     MoveDoubleLabel(VAbstractPattern *doc, const QPointF &pos, MoveDoublePoint type, quint32 toolId, quint32 pointId,
                     QUndoCommand *parent = nullptr);
-    ~MoveDoubleLabel() = default;
+    ~MoveDoubleLabel() override = default;
 
     auto mergeWith(const QUndoCommand *command) -> bool override;
     auto id() const -> int override;
 
-    auto GetToolId() const -> quint32;
-    auto GetPointType() const -> MoveDoublePoint;
-
 protected:
-    void Do(const QPointF &pos) override;
+    auto ReadCurrentPos() const -> QPointF override;
+    void WritePos(const QPointF &pos) override;
 
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(MoveDoubleLabel) // NOLINT
+
     MoveDoublePoint m_type;
     quint32 m_idTool;
-    // Need for resizing scene rect
-    QGraphicsScene *m_scene;
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto MoveDoubleLabel::GetPointType() const -> MoveDoublePoint
-{
-    return m_type;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto MoveDoubleLabel::GetToolId() const -> quint32
-{
-    return m_idTool;
-}
 
 #endif // MOVEDOUBLELABEL_H

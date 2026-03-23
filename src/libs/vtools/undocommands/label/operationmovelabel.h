@@ -49,23 +49,14 @@ public:
     auto mergeWith(const QUndoCommand *command) -> bool override;
     auto id() const -> int override;
 
-    auto GetToolId() const -> quint32;
-
 protected:
-    void Do(const QPointF &pos) override;
+    auto ReadCurrentPos() const -> QPointF override;
+    void WritePos(const QPointF &pos) override;
 
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(OperationMoveLabel) // NOLINT
     quint32 m_idTool;
-    // Need for resizing scene rect
-    QGraphicsScene *m_scene;
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto OperationMoveLabel::GetToolId() const -> quint32
-{
-    return m_idTool;
-}
 
 #endif // OPERATIONMOVELABEL_H
