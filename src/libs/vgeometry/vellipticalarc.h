@@ -102,6 +102,8 @@ public:
 
     auto ToSplinePath() const -> VSplinePath override;
 
+    auto GetMidpoint() const -> VPointF override;
+
     static auto OptimizeAngle(qreal angle) -> qreal;
 
     auto HeadlessName() const -> QString override;

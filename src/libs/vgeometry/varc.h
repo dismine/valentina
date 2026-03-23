@@ -83,6 +83,8 @@ public:
 
     auto ToSplinePath() const -> VSplinePath override;
 
+    auto GetMidpoint() const -> VPointF override;
+
     static auto OptimalApproximationScale(qreal radius, qreal f1, qreal f2, qreal tolerance) -> qreal;
 
     auto HeadlessName() const -> QString override;

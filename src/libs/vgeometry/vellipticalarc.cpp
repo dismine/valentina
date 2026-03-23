@@ -743,6 +743,22 @@ auto VEllipticalArc::ToSplinePath() const -> VSplinePath
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VEllipticalArc::GetMidpoint() const -> VPointF
+{
+    const double midAngleRad = qDegreesToRadians(GetStartAngle() + AngleArc() / 2.0);
+
+    // Qt's Y-axis is inverted compared to standard math
+    const VPointF center = GetCenter();
+    const double x = center.x() + d->radius1 * qCos(midAngleRad);
+    const double y = center.y() - d->radius2 * qSin(midAngleRad); // note the minus
+
+    VPointF pos(QPointF(x, y));
+    pos.setId(id());
+    pos.setName(ObjectName());
+    return pos;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VEllipticalArc::CreateName()
 {
     if (!IsDerivative())

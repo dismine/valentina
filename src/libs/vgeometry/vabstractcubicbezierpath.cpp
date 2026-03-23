@@ -370,6 +370,56 @@ auto VAbstractCubicBezierPath::HeadlessName() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VAbstractCubicBezierPath::GetMidpoint() const -> VPointF
+{
+    VPointF pos;
+    pos.setId(id());
+    pos.setName(ObjectName());
+
+    if (CountSubSpl() < 1)
+    {
+        return pos;
+    }
+
+    const qreal fullLength = GetLength();
+
+    if (qFuzzyIsNull(fullLength))
+    {
+        return pos;
+    }
+
+    const qreal halfLength = fullLength / 2.0;
+
+    // Walk sub-splines accumulating length, same as CutSplinePath
+    qreal accumulated = 0.0;
+    for (qint32 i = 1; i <= CountSubSpl(); ++i)
+    {
+        const VSpline spl = GetSpline(i);
+        const qreal splLength = spl.GetLength();
+        accumulated += splLength;
+
+        if (accumulated >= halfLength)
+        {
+            // Offset within this sub-spline
+            const qreal localLength = halfLength - (accumulated - splLength);
+
+            // Reuse CutSpline to get the exact point (discard control points)
+            QPointF spl1p2;
+            QPointF spl1p3;
+            QPointF spl2p2;
+            QPointF spl2p3;
+            const QPointF midPoint = spl.CutSpline(localLength, spl1p2, spl1p3, spl2p2, spl2p3);
+
+            pos.setX(midPoint.x());
+            pos.setY(midPoint.y());
+            return pos;
+        }
+    }
+
+    return pos;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VAbstractCubicBezierPath::GetTypeHead() const -> QString
 {
     return splPath_V + '_'_L1;

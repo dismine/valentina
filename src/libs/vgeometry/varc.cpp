@@ -380,6 +380,21 @@ auto VArc::ToSplinePath() const -> VSplinePath
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VArc::GetMidpoint() const -> VPointF
+{
+    const double midAngleRad = qDegreesToRadians(GetStartAngle() + AngleArc() / 2.0);
+
+    // Qt's Y-axis is inverted compared to standard math
+    const double x = GetCenter().x() + d->radius * qCos(midAngleRad);
+    const double y = GetCenter().y() - d->radius * qSin(midAngleRad); // note the minus
+
+    VPointF pos(QPointF(x, y));
+    pos.setId(id());
+    pos.setName(ObjectName());
+    return pos;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VArc::OptimalApproximationScale(qreal radius, qreal f1, qreal f2, qreal tolerance) -> qreal
 {
     if (qFuzzyIsNull(radius))

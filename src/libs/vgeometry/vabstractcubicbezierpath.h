@@ -84,6 +84,8 @@ public:
 
     auto HeadlessName() const -> QString override;
 
+    auto GetMidpoint() const -> VPointF override;
+
     auto GetTypeHead() const -> QString override;
     void SetNameSuffix(const QString &suffix) override;
 
