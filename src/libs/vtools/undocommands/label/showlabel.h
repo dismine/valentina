@@ -38,10 +38,11 @@ class ShowLabel : public VUndoCommand
     Q_OBJECT // NOLINT
 public:
     ShowLabel(VAbstractPattern *doc, quint32 id, bool visible, QUndoCommand *parent = nullptr);
-    virtual ~ShowLabel()=default;
+    ~ShowLabel() override = default;
 
-    virtual void undo() override;
-    virtual void redo() override;
+    void undo() override;
+    void redo() override;
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(ShowLabel) // NOLINT

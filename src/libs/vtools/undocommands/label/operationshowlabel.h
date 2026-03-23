@@ -39,10 +39,10 @@ class OperationShowLabel : public VUndoCommand
 public:
     OperationShowLabel(VAbstractPattern *doc, quint32 idTool, quint32 idPoint, bool visible,
                        QUndoCommand *parent = nullptr);
-    virtual ~OperationShowLabel()=default;
+    ~OperationShowLabel() override = default;
 
-    virtual void undo() override;
-    virtual void redo() override;
+    void undo() override;
+    void redo() override;
 
 private:
     // cppcheck-suppress unknownMacro
