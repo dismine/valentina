@@ -2328,6 +2328,18 @@ void VPattern::ParseToolCutSpline(VMainGraphicsScene *scene, QDomElement &domEle
         initData.baseCurveId = GetParametrUInt(domElement, VToolCutSpline::AttrSpline, NULL_ID_STR);
         initData.aliasSuffix1 = GetParametrEmptyString(domElement, AttrAlias1);
         initData.aliasSuffix2 = GetParametrEmptyString(domElement, AttrAlias2);
+        initData.segment1Id = GetParametrId(domElement, AttrSegment1Id);
+        initData.segment2Id = GetParametrId(domElement, AttrSegment2Id);
+
+        const VAbstractValApplication *app = VAbstractValApplication::VApp();
+
+        const QString labelMXStr = QString::number(app->fromPixel(labelMX));
+        const QString labelMYStr = QString::number(app->fromPixel(labelMY));
+
+        initData.segment1Mx = app->toPixel(GetParametrDouble(domElement, AttrSegment1Mx, labelMXStr));
+        initData.segment1My = app->toPixel(GetParametrDouble(domElement, AttrSegment1My, labelMYStr));
+        initData.segment2Mx = app->toPixel(GetParametrDouble(domElement, AttrSegment2Mx, labelMXStr));
+        initData.segment2My = app->toPixel(GetParametrDouble(domElement, AttrSegment2My, labelMYStr));
 
         // Make name1 and name2 mandatory
         Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
@@ -2378,6 +2390,18 @@ void VPattern::ParseToolCutSplinePath(VMainGraphicsScene *scene, QDomElement &do
         initData.baseCurveId = GetParametrUInt(domElement, VToolCutSplinePath::AttrSplinePath, NULL_ID_STR);
         initData.aliasSuffix1 = GetParametrEmptyString(domElement, AttrAlias1);
         initData.aliasSuffix2 = GetParametrEmptyString(domElement, AttrAlias2);
+        initData.segment1Id = GetParametrId(domElement, AttrSegment1Id);
+        initData.segment2Id = GetParametrId(domElement, AttrSegment2Id);
+
+        const VAbstractValApplication *app = VAbstractValApplication::VApp();
+
+        const QString labelMXStr = QString::number(app->fromPixel(labelMX));
+        const QString labelMYStr = QString::number(app->fromPixel(labelMY));
+
+        initData.segment1Mx = app->toPixel(GetParametrDouble(domElement, AttrSegment1Mx, labelMXStr));
+        initData.segment1My = app->toPixel(GetParametrDouble(domElement, AttrSegment1My, labelMYStr));
+        initData.segment2Mx = app->toPixel(GetParametrDouble(domElement, AttrSegment2Mx, labelMXStr));
+        initData.segment2My = app->toPixel(GetParametrDouble(domElement, AttrSegment2My, labelMYStr));
 
         // Make name1 and name2 mandatory
         Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
@@ -2428,6 +2452,18 @@ void VPattern::ParseToolCutArc(VMainGraphicsScene *scene, QDomElement &domElemen
         initData.baseCurveId = GetParametrUInt(domElement, AttrArc, NULL_ID_STR);
         initData.aliasSuffix1 = GetParametrEmptyString(domElement, AttrAlias1);
         initData.aliasSuffix2 = GetParametrEmptyString(domElement, AttrAlias2);
+        initData.segment1Id = GetParametrId(domElement, AttrSegment1Id);
+        initData.segment2Id = GetParametrId(domElement, AttrSegment2Id);
+
+        const VAbstractValApplication *app = VAbstractValApplication::VApp();
+
+        const QString labelMXStr = QString::number(app->fromPixel(labelMX));
+        const QString labelMYStr = QString::number(app->fromPixel(labelMY));
+
+        initData.segment1Mx = app->toPixel(GetParametrDouble(domElement, AttrSegment1Mx, labelMXStr));
+        initData.segment1My = app->toPixel(GetParametrDouble(domElement, AttrSegment1My, labelMYStr));
+        initData.segment2Mx = app->toPixel(GetParametrDouble(domElement, AttrSegment2Mx, labelMXStr));
+        initData.segment2My = app->toPixel(GetParametrDouble(domElement, AttrSegment2My, labelMYStr));
 
         // Make name1 and name2 mandatory
         Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));

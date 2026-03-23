@@ -85,6 +85,8 @@ public:
     virtual auto GetStartAngle() const -> qreal = 0;
     virtual auto GetEndAngle() const -> qreal = 0;
 
+    auto SceneObjectType() const -> SceneObject;
+
     auto GetDuplicate() const -> quint32;
     void SetDuplicate(quint32 number);
 

@@ -47,6 +47,7 @@
 #include "../vtools/tools/backgroundimage/vbackgroundsvgitem.h"
 #include "../vwidgets/vcontrolpointspline.h"
 #include "../vwidgets/vgraphicssimpletextitem.h"
+#include "../vwidgets/vsegmentlabel.h"
 #include "../vwidgets/vsimplecurve.h"
 #include "../vwidgets/vsimplepoint.h"
 #include "ifcdef.h"
@@ -230,6 +231,7 @@ void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
         case VControlPointSpline::Type:
         case VSimplePoint::Type:
         case VSimpleCurve::Type:
+        case VSegmentLabel::Type:
             m_currentItem = item->parentItem();
             ShowItemOptions(m_currentItem);
             break;

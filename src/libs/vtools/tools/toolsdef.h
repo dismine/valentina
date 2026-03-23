@@ -68,6 +68,14 @@ struct DestinationItem
 Q_DECLARE_METATYPE(DestinationItem)
 Q_DECLARE_TYPEINFO(DestinationItem, Q_MOVABLE_TYPE); // NOLINT
 
+enum class SegmentLabel : quint8
+{
+    Segment1,
+    Segment2,
+    // Segment3,
+    // Segment4
+};
+
 // Default label position
 constexpr qreal labelMX = ToPixel(10, Unit::Mm);
 constexpr qreal labelMY = ToPixel(15, Unit::Mm);

@@ -160,6 +160,12 @@ const QString AttrOffset = QStringLiteral("offset");
 const QString AttrDescription = QStringLiteral("description");
 const QString AttrCurveName1 = QStringLiteral("curveName1");
 const QString AttrCurveName2 = QStringLiteral("curveName2");
+const QString AttrSegment1Id = QStringLiteral("segment1Id");
+const QString AttrSegment2Id = QStringLiteral("segment2Id");
+const QString AttrSegment1Mx = QStringLiteral("segment1Mx");
+const QString AttrSegment1My = QStringLiteral("segment1My");
+const QString AttrSegment2Mx = QStringLiteral("segment2Mx");
+const QString AttrSegment2My = QStringLiteral("segment2My");
 
 const QString TypeLineDefault = QStringLiteral("default");
 const QString TypeLineNone = QStringLiteral("none");

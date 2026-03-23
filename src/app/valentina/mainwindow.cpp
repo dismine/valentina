@@ -661,6 +661,12 @@ void MainWindow::InitScenes()
     connect(this, &MainWindow::EnableSplineHover, m_sceneDraw, &VMainGraphicsScene::ToggleSplineHover);
     connect(this, &MainWindow::EnableSplinePathHover, m_sceneDraw, &VMainGraphicsScene::ToggleSplinePathHover);
 
+    connect(this, &MainWindow::ShowArcSegmentLabel, m_sceneDraw, &VMainGraphicsScene::ToggleArcSegmentVisibility);
+    connect(this, &MainWindow::ShowElArcSegmentLabel, m_sceneDraw, &VMainGraphicsScene::ToggleElArcSegmentVisibility);
+    connect(this, &MainWindow::ShowSplineSegmentLabel, m_sceneDraw, &VMainGraphicsScene::ToggleSplineSegmentVisibility);
+    connect(this, &MainWindow::ShowSplinePathSegmentLabel, m_sceneDraw,
+            &VMainGraphicsScene::ToggleSplinePathSegmentVisibility);
+
     connect(m_sceneDraw, &VMainGraphicsScene::mouseMove, this, &MainWindow::MouseMove);
     connect(m_sceneDraw, &VMainGraphicsScene::AddBackgroundImage, this, &MainWindow::PlaceBackgroundImage);
 
@@ -1674,7 +1680,7 @@ void MainWindow::RemoveBackgroundImage(const QUuid &id)
  */
 void MainWindow::ToolCutArc(bool checked)
 {
-    ToolSelectArc();
+    ToolSelectArcCurve();
     SetToolButtonWithApply<DialogCutArc>(checked, Tool::CutArc, QStringLiteral("arc_cut_cursor.png"), tr("Select arc"),
                                          &MainWindow::ClosedDrawDialogWithApply<VToolCutArc>,
                                          &MainWindow::ApplyDrawDialog<VToolCutArc>);
@@ -3978,6 +3984,11 @@ void MainWindow::ArrowTool(bool checked)
         emit EnableNodePointHover(true);
         emit EnableDetailHover(true);
         emit EnableImageBackgroundHover(true);
+
+        emit ShowArcSegmentLabel(false);
+        emit ShowElArcSegmentLabel(false);
+        emit ShowSplineSegmentLabel(false);
+        emit ShowSplinePathSegmentLabel(false);
 
         ui->view->AllowRubberBand(true);
         ui->view->viewport()->unsetCursor();
@@ -7934,6 +7945,8 @@ void MainWindow::ToolSelectSpline()
     emit EnableSplinePathHover(false);
     emit EnableImageBackgroundHover(false);
 
+    emit ShowSplineSegmentLabel(true);
+
     emit ItemsSelection(SelectionType::ByMouseRelease);
 
     ui->view->AllowRubberBand(false);
@@ -7961,6 +7974,8 @@ void MainWindow::ToolSelectSplinePath()
     emit EnableSplineHover(false);
     emit EnableSplinePathHover(true);
     emit EnableImageBackgroundHover(false);
+
+    emit ShowSplinePathSegmentLabel(true);
 
     emit ItemsSelection(SelectionType::ByMouseRelease);
 
@@ -7990,6 +8005,39 @@ void MainWindow::ToolSelectArc()
     emit EnableSplinePathHover(false);
     emit EnableImageBackgroundHover(false);
 
+    emit ShowArcSegmentLabel(true);
+
+    emit ItemsSelection(SelectionType::ByMouseRelease);
+
+    ui->view->AllowRubberBand(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolSelectArcCurve()
+{
+    // Only true for rubber band selection
+    emit EnableLabelSelection(false);
+    emit EnablePointSelection(false);
+    emit EnableLineSelection(false);
+    emit EnableArcSelection(false);
+    emit EnableElArcSelection(false);
+    emit EnableSplineSelection(false);
+    emit EnableSplinePathSelection(false);
+    emit EnableBackgroundImageSelection(false);
+
+    // Hovering
+    emit EnableLabelHover(false);
+    emit EnablePointHover(false);
+    emit EnableLineHover(false);
+    emit EnableArcHover(true);
+    emit EnableElArcHover(true);
+    emit EnableSplineHover(false);
+    emit EnableSplinePathHover(false);
+    emit EnableImageBackgroundHover(false);
+
+    emit ShowArcSegmentLabel(true);
+    emit ShowElArcSegmentLabel(true);
+
     emit ItemsSelection(SelectionType::ByMouseRelease);
 
     ui->view->AllowRubberBand(false);
@@ -8017,6 +8065,8 @@ void MainWindow::ToolSelectPointArc()
     emit EnableSplineHover(false);
     emit EnableSplinePathHover(false);
     emit EnableImageBackgroundHover(false);
+
+    emit ShowArcSegmentLabel(true);
 
     emit ItemsSelection(SelectionType::ByMouseRelease);
 
@@ -8046,6 +8096,11 @@ void MainWindow::ToolSelectCurve()
     emit EnableSplinePathHover(true);
     emit EnableImageBackgroundHover(false);
 
+    emit ShowArcSegmentLabel(true);
+    emit ShowElArcSegmentLabel(true);
+    emit ShowSplineSegmentLabel(true);
+    emit ShowSplinePathSegmentLabel(true);
+
     emit ItemsSelection(SelectionType::ByMouseRelease);
 
     ui->view->AllowRubberBand(false);
@@ -8073,6 +8128,11 @@ void MainWindow::ToolSelectAllDrawObjects()
     emit EnableSplineHover(true);
     emit EnableSplinePathHover(true);
     emit EnableImageBackgroundHover(false);
+
+    emit ShowArcSegmentLabel(true);
+    emit ShowElArcSegmentLabel(true);
+    emit ShowSplineSegmentLabel(true);
+    emit ShowSplinePathSegmentLabel(true);
 
     emit ItemsSelection(SelectionType::ByMouseRelease);
 

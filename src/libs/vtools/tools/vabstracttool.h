@@ -40,6 +40,7 @@
 #include "../vmisc/def.h"
 #include "../vtools/visualization/visualization.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "toolsdef.h"
 #include "vdatatool.h"
 
 class VGraphicsSimpleTextItem;
@@ -102,6 +103,7 @@ public:
     virtual auto getTagName() const -> QString = 0;
     virtual void ShowVisualization(bool show) = 0;
     virtual void ChangeLabelPosition(quint32 id, const QPointF &pos);
+    virtual void ChangeSegmentLabelPosition(SegmentLabel segment, const QPointF &pos);
     virtual void SetLabelVisible(quint32 id, bool visible);
 public slots:
     /**

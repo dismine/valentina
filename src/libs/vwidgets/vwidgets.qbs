@@ -22,6 +22,8 @@ VLib {
         "vmaingraphicsview.cpp",
         "vmousewheelwidgetadjustmentguard.cpp",
         "vmousewheelwidgetadjustmentguard.h",
+        "vsegmentlabel.cpp",
+        "vsegmentlabel.h",
         "vsponsorcredits.cpp",
         "vsponsorcredits.h",
         "vtoolbuttonpopup.cpp",

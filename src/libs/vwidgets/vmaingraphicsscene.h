@@ -100,6 +100,12 @@ public slots:
     void          ToggleNodeLabelHover(bool enabled);
     void          ToggleNodePointHover(bool enabled);
     void          ToggleDetailHover(bool enabled);
+
+    void ToggleArcSegmentVisibility(bool visible);
+    void ToggleElArcSegmentVisibility(bool visible);
+    void ToggleSplineSegmentVisibility(bool visible);
+    void ToggleSplinePathSegmentVisibility(bool visible);
+
 protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
@@ -155,6 +161,11 @@ signals:
     void          EnableLineItemHover(bool enabled);
     void          DimensionsChanged();
     void          LanguageChanged();
+
+    void ShowArcSegmentLabel(bool show);
+    void ShowElArcSegmentLabel(bool show);
+    void ShowSplineSegmentLabel(bool show);
+    void ShowSplinePathSegmentLabel(bool show);
 
 private:
     Q_DISABLE_COPY_MOVE(VMainGraphicsScene) // NOLINT

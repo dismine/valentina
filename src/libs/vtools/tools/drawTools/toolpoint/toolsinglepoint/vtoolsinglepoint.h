@@ -88,8 +88,8 @@ public slots:
     void FullUpdateFromFile() override;
     void AllowHover(bool enabled) override;
     void AllowSelecting(bool enabled) override;
-    void AllowLabelHover(bool enabled);
-    void AllowLabelSelecting(bool enabled);
+    virtual void AllowLabelHover(bool enabled);
+    virtual void AllowLabelSelecting(bool enabled);
     void ToolSelectionType(const SelectionType &selectionType) override;
 
 protected:

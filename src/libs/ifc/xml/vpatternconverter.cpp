@@ -60,7 +60,7 @@ class QDomElement;
 
 const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.4");                     // NOLINT
 const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("1.1.3");                     // NOLINT
-const QString VPatternConverter::CurrentSchema = QStringLiteral("://schema/pattern/v1.1.3.xsd"); // NOLINT
+const QString VPatternConverter::CurrentSchema = QStringLiteral("://schema/pattern/v1.2.0.xsd"); // NOLINT
 
 // VPatternConverter::PatternMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 // VPatternConverter::PatternMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
@@ -278,7 +278,8 @@ auto VPatternConverter::XSDSchemas() -> QHash<unsigned int, QString>
         std::make_pair(FormatVersion(1, 1, 0), QStringLiteral("://schema/pattern/v1.1.0.xsd")),
         std::make_pair(FormatVersion(1, 1, 1), QStringLiteral("://schema/pattern/v1.1.1.xsd")),
         std::make_pair(FormatVersion(1, 1, 2), QStringLiteral("://schema/pattern/v1.1.2.xsd")),
-        std::make_pair(FormatVersion(1, 1, 3), CurrentSchema)};
+        std::make_pair(FormatVersion(1, 1, 3), QStringLiteral("://schema/pattern/v1.1.3.xsd")),
+        std::make_pair(FormatVersion(1, 2, 0), CurrentSchema)};
 
     return schemas;
 }
@@ -415,10 +416,11 @@ void VPatternConverter::ApplyPatches()
         case (FormatVersion(1, 1, 0)):
         case (FormatVersion(1, 1, 1)):
         case (FormatVersion(1, 1, 2)):
-            ToV1_1_3();
+        case (FormatVersion(1, 1, 3)):
+            ToV1_2_0();
             ValidateXML(CurrentSchema);
             Q_FALLTHROUGH();
-        case (FormatVersion(1, 1, 3)):
+        case (FormatVersion(1, 2, 0)):
             break;
         default:
             InvalidVersion(m_ver);
@@ -436,7 +438,7 @@ void VPatternConverter::DowngradeToCurrentMaxVersion()
 auto VPatternConverter::IsReadOnly() const -> bool
 {
     // Check if attribute readOnly was not changed in file format
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMaxVer == FormatVersion(1, 1, 3), "Check attribute readOnly.");
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMaxVer == FormatVersion(1, 2, 0), "Check attribute readOnly.");
 
     // Possibly in future attribute readOnly will change position etc.
     // For now position is the same for all supported format versions.
@@ -648,12 +650,12 @@ void VPatternConverter::ToV1_1_0()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPatternConverter::ToV1_1_3()
+void VPatternConverter::ToV1_2_0()
 {
-    // TODO. Delete if minimal supported version is 1.1.3
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 3), "Time to refactor the code.");
+    // TODO. Delete if minimal supported version is 1.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(1, 2, 0), "Time to refactor the code.");
 
-    SetVersion(QStringLiteral("1.1.3"));
+    SetVersion(QStringLiteral("1.2.0"));
     Save();
 }
 

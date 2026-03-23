@@ -225,6 +225,8 @@ void VGraphicsSimpleTextItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
     }
 
     QGraphicsSimpleTextItem::hoverEnterEvent(event);
+
+    emit HoverCurve(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -237,6 +239,8 @@ void VGraphicsSimpleTextItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
     m_hoverFlag = false;
     RefreshColor();
     QGraphicsSimpleTextItem::hoverLeaveEvent(event);
+
+    emit HoverCurve(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

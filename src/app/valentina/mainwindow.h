@@ -116,6 +116,11 @@ signals:
     void EnableDetailHover(bool enable);
     void EnableImageBackgroundHover(bool enable);
 
+    void ShowArcSegmentLabel(bool show);
+    void ShowElArcSegmentLabel(bool show);
+    void ShowSplineSegmentLabel(bool show);
+    void ShowSplinePathSegmentLabel(bool show);
+
 protected:
     void keyPressEvent(QKeyEvent *event) override;
     void showEvent(QShowEvent *event) override;
@@ -467,6 +472,7 @@ private:
     void ToolSelectSpline();
     void ToolSelectSplinePath();
     void ToolSelectArc();
+    void ToolSelectArcCurve();
     void ToolSelectPointArc();
     void ToolSelectCurve();
     void ToolSelectAllDrawObjects();

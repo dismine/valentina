@@ -208,10 +208,14 @@ auto VToolCutSplinePath::Create(VToolCutInitData &initData) -> VToolCutSplinePat
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(p);
+        initData.segment1Id = initData.data->AddGObject(path1);
+        initData.segment2Id = initData.data->AddGObject(path2);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, p);
+        initData.data->UpdateGObject(initData.segment1Id, path1);
+        initData.data->UpdateGObject(initData.segment2Id, path2);
     }
 
     VPatternGraph *patternGraph = initData.doc->PatternGraph();
@@ -222,18 +226,14 @@ auto VToolCutSplinePath::Create(VToolCutInitData &initData) -> VToolCutSplinePat
     const auto varData = initData.data->DataDependencyVariables();
     initData.doc->FindFormulaDependencies(initData.formula, initData.id, varData);
 
-    initData.data->AddSpline(path1, NULL_ID, initData.id);
-    initData.data->RegisterUniqueName(path1);
+    initData.data->AddSpline(initData.data->GeometricObject<VAbstractBezier>(initData.segment1Id), initData.segment1Id);
+    initData.data->AddSpline(initData.data->GeometricObject<VAbstractBezier>(initData.segment2Id), initData.segment2Id);
 
-    initData.data->AddSpline(path2, NULL_ID, initData.id);
-    initData.data->RegisterUniqueName(path2);
+    patternGraph->AddVertex(initData.segment1Id, VNodeType::OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
+    patternGraph->AddVertex(initData.segment2Id, VNodeType::OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
 
-    // TODO: Add segments to graph when we start showing them for users
-    // patternGraph->AddVertex(initData.segment1Id, VNodeType::OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
-    // patternGraph->AddVertex(initData.segment2Id, VNodeType::OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
-
-    // patternGraph->AddEdge(initData.id, initData.segment1Id);
-    // patternGraph->AddEdge(initData.id, initData.segment2Id);
+    patternGraph->AddEdge(initData.id, initData.segment1Id);
+    patternGraph->AddEdge(initData.id, initData.segment2Id);
 
     patternGraph->AddEdge(initData.baseCurveId, initData.id);
 
@@ -249,6 +249,10 @@ auto VToolCutSplinePath::Create(VToolCutInitData &initData) -> VToolCutSplinePat
         tool = new VToolCutSplinePath(initData);
         initData.scene->addItem(tool);
         InitToolConnections(initData.scene, tool);
+        QObject::connect(initData.scene,
+                         &VMainGraphicsScene::ShowSplinePathSegmentLabel,
+                         tool,
+                         &VToolCutSplinePath::SetSegmentLabelVisible);
         VAbstractPattern::AddTool(initData.id, tool);
     }
     // Very important to delete it. Only this tool need this special variable.
@@ -260,6 +264,7 @@ auto VToolCutSplinePath::Create(VToolCutInitData &initData) -> VToolCutSplinePat
 void VToolCutSplinePath::ShowVisualization(bool show)
 {
     ShowToolVisualization<VisToolCutSplinePath>(show);
+    VToolCut::ShowVisualization(show);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

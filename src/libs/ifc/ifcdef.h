@@ -162,6 +162,12 @@ extern const QString AttrOffset;
 extern const QString AttrDescription;
 extern const QString AttrCurveName1;
 extern const QString AttrCurveName2;
+extern const QString AttrSegment1Id;
+extern const QString AttrSegment2Id;
+extern const QString AttrSegment1Mx;
+extern const QString AttrSegment1My;
+extern const QString AttrSegment2Mx;
+extern const QString AttrSegment2My;
 
 extern const QString TypeLineDefault;
 extern const QString TypeLineNone;

@@ -332,6 +332,8 @@ VLib {
             "image/rotatebackgroundimage.h",
             "image/scalebackgroundimage.h",
             "image/zvaluemovebackgroundimage.h",
+            "label/movesegmentlabel.cpp",
+            "label/movesegmentlabel.h",
             "movespoint.h",
             "movespline.h",
             "movesplinepath.h",
