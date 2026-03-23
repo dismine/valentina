@@ -4904,26 +4904,43 @@ auto VPattern::ActiveDrawBoundingRect() const -> QRectF
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T> auto VPattern::ToolBoundingRect(const QRectF &rec, quint32 id) const -> QRectF
 {
-    QRectF recTool = rec;
-    if (tools.contains(id))
+    VDataTool *dataTool = tools.value(id, nullptr);
+    if (dataTool == nullptr)
     {
-        if (const T *vTool = qobject_cast<T *>(tools.value(id)); vTool != nullptr)
-        {
-            QRectF childrenRect = vTool->childrenBoundingRect();
-            // map to scene coordinate.
-            childrenRect.translate(vTool->scenePos());
+        qDebug() << "Can't find tool or null pointer for id=" << id;
+        return rec;
+    }
 
-            recTool = recTool.united(vTool->sceneBoundingRect());
-            recTool = recTool.united(childrenRect);
-        }
-        else
-        {
-            qDebug() << "qobject_cast failed for tool with id=" << id;
-        }
-    }
-    else
+    const T *vTool = qobject_cast<T *>(dataTool);
+    if (vTool == nullptr)
     {
-        qDebug() << "Can't find tool with id=" << id;
+        qDebug() << "qobject_cast<" << T::staticMetaObject.className() << "> failed for id=" << id
+                 << "actual type:" << dataTool->metaObject()->className();
+        return rec;
     }
+
+    // sceneBoundingRect() and scenePos() are undefined if the item has no scene.
+    if (vTool->scene() == nullptr)
+    {
+        qDebug() << "Tool id=" << id << "(" << dataTool->metaObject()->className()
+                 << ") has no scene, skipping bounding rect";
+        return rec;
+    }
+
+    QRectF recTool = rec;
+
+    if (const QRectF sceneBounds = vTool->sceneBoundingRect(); sceneBounds.isValid())
+    {
+        recTool = recTool.united(sceneBounds);
+    }
+
+    if (const QRectF childrenRect = vTool->childrenBoundingRect(); childrenRect.isValid())
+    {
+        // childrenBoundingRect() is in item-local coords — translate to scene space.
+        QRectF childrenSceneRect = childrenRect;
+        childrenSceneRect.translate(vTool->scenePos());
+        recTool = recTool.united(childrenSceneRect);
+    }
+
     return recTool;
 }

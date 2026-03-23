@@ -690,7 +690,8 @@ void MainWindow::InitScenes()
 
     connect(ui->view, &VMainGraphicsView::MouseRelease, this, [this]() -> void { EndVisualization(true); });
     connect(ui->view, &VMainGraphicsView::ScaleChanged, this, &MainWindow::ScaleChanged);
-    connect(ui->view, &VMainGraphicsView::ZoomFitBestCurrent, this, [this]() -> void { ZoomFitBestCurrent(); });
+    connect(ui->view, &VMainGraphicsView::ZoomFitBestCurrent, this, &MainWindow::ZoomFitBestCurrent,
+            Qt::QueuedConnection);
     QSizePolicy policy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     policy.setHorizontalStretch(12);
     ui->view->setSizePolicy(policy);
@@ -3169,7 +3170,8 @@ void MainWindow::ToolBarTools()
     connect(ui->actionZoomFitBest, &QAction::triggered, ui->view, &VMainGraphicsView::ZoomFitBest);
 
     m_shortcutActions.insert(VShortcutAction::ZoomFitBestCurrent, ui->actionZoomFitBestCurrent);
-    connect(ui->actionZoomFitBestCurrent, &QAction::triggered, this, &MainWindow::ZoomFitBestCurrent);
+    connect(ui->actionZoomFitBestCurrent, &QAction::triggered, this, &MainWindow::ZoomFitBestCurrent,
+            Qt::QueuedConnection);
 
     connect(ui->actionPreviousPatternPiece, &QAction::triggered, this, &MainWindow::PreviousPatternPiece);
     connect(ui->actionNextPatternPiece, &QAction::triggered, this, &MainWindow::NextPatternPiece);
