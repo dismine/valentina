@@ -332,6 +332,8 @@ void DialogCutArc::ValidateCurveNames()
         m_flagCurveName2 = true;
         ChangeColor(ui->labelName2, OkColor(this));
     }
+
+    CheckState();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
