@@ -420,16 +420,13 @@ void VDependencyTreeModel::UpdateTree(const QVector<vidtype> &newRootObjects)
     // Refresh existing nodes if their children were loaded
     for (int i = 0; i < m_rootNode->children.size(); ++i)
     {
-        auto &child = m_rootNode->children[i];
+        const auto &child = m_rootNode->children.at(i);
+        QModelIndex const parentIdx = index(i, 0, QModelIndex());
 
-        // Update display name
-        if (const QString newName = GetDisplayNameForObject(child->objectId); child->displayName != newName)
-        {
-            child->displayName = newName;
-            QModelIndex const idx = index(i, 0, QModelIndex());
-            emit dataChanged(idx, idx, {Qt::DisplayRole});
-        }
+        // Update this node and all its children recursively
+        UpdateNodeNamesRecursive(child.get(), parentIdx);
 
+        // Refresh children if they were loaded
         if (child->childrenLoaded)
         {
             QVector<vidtype> const newDeps = FetchDependenciesForObject(child->objectId);
@@ -864,6 +861,33 @@ auto VDependencyTreeModel::GetDisplayToolTipForObject(vidtype objectId) const ->
         case VNodeType::OBJECT:
         default:
             return {};
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDependencyTreeModel::UpdateNodeNamesRecursive(VDependencyNode *node, const QModelIndex &nodeIndex)
+{
+    if (!node)
+    {
+        return;
+    }
+
+    // Update this node's name
+
+    if (const QString newName = GetDisplayNameForObject(node->objectId); node->displayName != newName)
+    {
+        node->displayName = newName;
+        emit dataChanged(nodeIndex, nodeIndex, {Qt::DisplayRole});
+    }
+
+    // Update children recursively if loaded
+    if (node->childrenLoaded)
+    {
+        for (int i = 0; i < node->children.size(); ++i)
+        {
+            const QModelIndex childIdx = index(i, 0, nodeIndex);
+            UpdateNodeNamesRecursive(node->children.at(i).get(), childIdx);
+        }
     }
 }
 

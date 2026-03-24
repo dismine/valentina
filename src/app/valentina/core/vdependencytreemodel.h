@@ -119,6 +119,7 @@ private:
     auto FetchDependenciesForObject(vidtype objectId) const -> QVector<vidtype>;
     auto GetDisplayNameForObject(vidtype objectId) const -> QString; // Fetch display name
     auto GetDisplayToolTipForObject(vidtype objectId) const -> QString;
+    void UpdateNodeNamesRecursive(VDependencyNode *node, const QModelIndex &nodeIndex);
 
     // Smart update helpers
     void UpdateNodeChildren(VDependencyNode *node, const QVector<vidtype> &newDependencies);
