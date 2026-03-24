@@ -363,7 +363,7 @@ void VDependencyTreeModel::UpdateTree(const QVector<vidtype> &newRootObjects)
         currentOrder.append(child->objectId);
     }
 
-    QSet<vidtype> const newIds = QSet<vidtype>(newRootObjects.begin(), newRootObjects.end());
+    QSet<vidtype> const newIds = ConvertToSet(newRootObjects);
 
     // Find what to remove and what to add
     QSet<vidtype> const toRemove = currentIds - newIds;
@@ -418,8 +418,15 @@ void VDependencyTreeModel::UpdateTree(const QVector<vidtype> &newRootObjects)
     }
 
     // Refresh existing nodes if their children were loaded
-    for (auto &child : m_rootNode->children)
+    for (int i = 0; i < m_rootNode->children.size(); ++i)
     {
+        const auto &child = m_rootNode->children.at(i);
+        QModelIndex const parentIdx = index(i, 0, QModelIndex());
+
+        // Update this node and all its children recursively
+        UpdateNodeNamesRecursive(child.get(), parentIdx);
+
+        // Refresh children if they were loaded
         if (child->childrenLoaded)
         {
             QVector<vidtype> const newDeps = FetchDependenciesForObject(child->objectId);
@@ -791,7 +798,7 @@ auto VDependencyTreeModel::FetchDependenciesForObject(vidtype objectId) const ->
 //---------------------------------------------------------------------------------------------------------------------
 auto VDependencyTreeModel::GetDisplayNameForObject(vidtype objectId) const -> QString
 {
-    QString defaultName = QStringLiteral("Object_%1").arg(objectId);
+    const QString defaultName = QStringLiteral("Object_%1").arg(objectId);
 
     if (m_doc == nullptr)
     {
@@ -854,6 +861,33 @@ auto VDependencyTreeModel::GetDisplayToolTipForObject(vidtype objectId) const ->
         case VNodeType::OBJECT:
         default:
             return {};
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDependencyTreeModel::UpdateNodeNamesRecursive(VDependencyNode *node, const QModelIndex &nodeIndex)
+{
+    if (!node)
+    {
+        return;
+    }
+
+    // Update this node's name
+
+    if (const QString newName = GetDisplayNameForObject(node->objectId); node->displayName != newName)
+    {
+        node->displayName = newName;
+        emit dataChanged(nodeIndex, nodeIndex, {Qt::DisplayRole});
+    }
+
+    // Update children recursively if loaded
+    if (node->childrenLoaded)
+    {
+        for (int i = 0; i < node->children.size(); ++i)
+        {
+            const QModelIndex childIdx = index(i, 0, nodeIndex);
+            UpdateNodeNamesRecursive(node->children.at(i).get(), childIdx);
+        }
     }
 }
 
