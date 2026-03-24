@@ -154,11 +154,11 @@ auto VCubicBezier::Offset(qreal distance, const QString &name) const -> VSplineP
 
     if (subSplines.size() == 1)
     {
-        const VSpline spl = subSplines.constFirst();
+        const VSpline subSpline = subSplines.constFirst();
 
         VSpline left;
         VSpline right;
-        spl.CutSplineAtParam(0.5, left, right, "X"_L1);
+        subSpline.CutSplineAtParam(0.5, left, right, "X"_L1);
 
         subSplines.clear();
         subSplines = {left, right};
