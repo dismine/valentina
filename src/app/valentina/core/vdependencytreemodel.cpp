@@ -363,7 +363,7 @@ void VDependencyTreeModel::UpdateTree(const QVector<vidtype> &newRootObjects)
         currentOrder.append(child->objectId);
     }
 
-    QSet<vidtype> const newIds = QSet<vidtype>(newRootObjects.begin(), newRootObjects.end());
+    QSet<vidtype> const newIds = ConvertToSet(newRootObjects);
 
     // Find what to remove and what to add
     QSet<vidtype> const toRemove = currentIds - newIds;
@@ -418,8 +418,18 @@ void VDependencyTreeModel::UpdateTree(const QVector<vidtype> &newRootObjects)
     }
 
     // Refresh existing nodes if their children were loaded
-    for (auto &child : m_rootNode->children)
+    for (int i = 0; i < m_rootNode->children.size(); ++i)
     {
+        auto &child = m_rootNode->children[i];
+
+        // Update display name
+        if (const QString newName = GetDisplayNameForObject(child->objectId); child->displayName != newName)
+        {
+            child->displayName = newName;
+            QModelIndex const idx = index(i, 0, QModelIndex());
+            emit dataChanged(idx, idx, {Qt::DisplayRole});
+        }
+
         if (child->childrenLoaded)
         {
             QVector<vidtype> const newDeps = FetchDependenciesForObject(child->objectId);
@@ -791,7 +801,7 @@ auto VDependencyTreeModel::FetchDependenciesForObject(vidtype objectId) const ->
 //---------------------------------------------------------------------------------------------------------------------
 auto VDependencyTreeModel::GetDisplayNameForObject(vidtype objectId) const -> QString
 {
-    QString defaultName = QStringLiteral("Object_%1").arg(objectId);
+    const QString defaultName = QStringLiteral("Object_%1").arg(objectId);
 
     if (m_doc == nullptr)
     {
