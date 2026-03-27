@@ -2571,6 +2571,18 @@ void VPattern::ParseToolCurveIntersectAxis(VMainGraphicsScene *scene, QDomElemen
         initData.name2 = GetParametrEmptyString(domElement, AttrName2);
         initData.aliasSuffix1 = GetParametrEmptyString(domElement, AttrAlias1);
         initData.aliasSuffix2 = GetParametrEmptyString(domElement, AttrAlias2);
+        initData.segment1Id = GetParametrId(domElement, AttrSegment1Id);
+        initData.segment2Id = GetParametrId(domElement, AttrSegment2Id);
+
+        const VAbstractValApplication *app = VAbstractValApplication::VApp();
+
+        const QString labelMXStr = QString::number(app->fromPixel(labelMX));
+        const QString labelMYStr = QString::number(app->fromPixel(labelMY));
+
+        initData.segment1Mx = app->toPixel(GetParametrDouble(domElement, AttrSegment1Mx, labelMXStr));
+        initData.segment1My = app->toPixel(GetParametrDouble(domElement, AttrSegment1My, labelMYStr));
+        initData.segment2Mx = app->toPixel(GetParametrDouble(domElement, AttrSegment2Mx, labelMXStr));
+        initData.segment2My = app->toPixel(GetParametrDouble(domElement, AttrSegment2My, labelMYStr));
 
         VToolCurveIntersectAxis::Create(initData);
         // Rewrite attribute formula. Need for situation when we have wrong formula.
@@ -2704,6 +2716,24 @@ void VPattern::ParseToolPointOfIntersectionCurves(VMainGraphicsScene *scene, QDo
         initData.curve1AliasSuffix2 = GetParametrEmptyString(domElement, AttrCurve1Alias2);
         initData.curve2AliasSuffix1 = GetParametrEmptyString(domElement, AttrCurve2Alias1);
         initData.curve2AliasSuffix2 = GetParametrEmptyString(domElement, AttrCurve2Alias2);
+        initData.curve1Segment1Id = GetParametrId(domElement, AttrSegment1Id);
+        initData.curve1Segment2Id = GetParametrId(domElement, AttrSegment2Id);
+        initData.curve2Segment1Id = GetParametrId(domElement, AttrSegment3Id);
+        initData.curve2Segment2Id = GetParametrId(domElement, AttrSegment4Id);
+
+        const VAbstractValApplication *app = VAbstractValApplication::VApp();
+
+        const QString labelMXStr = QString::number(app->fromPixel(labelMX));
+        const QString labelMYStr = QString::number(app->fromPixel(labelMY));
+
+        initData.curve1Segment1Mx = app->toPixel(GetParametrDouble(domElement, AttrSegment1Mx, labelMXStr));
+        initData.curve1Segment1My = app->toPixel(GetParametrDouble(domElement, AttrSegment1My, labelMYStr));
+        initData.curve1Segment2Mx = app->toPixel(GetParametrDouble(domElement, AttrSegment2Mx, labelMXStr));
+        initData.curve1Segment2My = app->toPixel(GetParametrDouble(domElement, AttrSegment2My, labelMYStr));
+        initData.curve2Segment1Mx = app->toPixel(GetParametrDouble(domElement, AttrSegment3Mx, labelMXStr));
+        initData.curve2Segment1My = app->toPixel(GetParametrDouble(domElement, AttrSegment3My, labelMYStr));
+        initData.curve2Segment2Mx = app->toPixel(GetParametrDouble(domElement, AttrSegment4Mx, labelMXStr));
+        initData.curve2Segment2My = app->toPixel(GetParametrDouble(domElement, AttrSegment4My, labelMYStr));
 
         VToolPointOfIntersectionCurves::Create(initData);
     }

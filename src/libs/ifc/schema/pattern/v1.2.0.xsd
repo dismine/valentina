@@ -207,10 +207,16 @@
                           <xs:attribute name="curveName2" type="nameSuffix"/>
                           <xs:attribute name="segment1Id" type="xs:unsignedInt"/>
                           <xs:attribute name="segment2Id" type="xs:unsignedInt"/>
+                          <xs:attribute name="segment3Id" type="xs:unsignedInt"/>
+                          <xs:attribute name="segment4Id" type="xs:unsignedInt"/>
                           <xs:attribute name="segment1Mx" type="xs:double"/>
                           <xs:attribute name="segment1My" type="xs:double"/>
                           <xs:attribute name="segment2Mx" type="xs:double"/>
                           <xs:attribute name="segment2My" type="xs:double"/>
+                          <xs:attribute name="segment3Mx" type="xs:double"/>
+                          <xs:attribute name="segment3My" type="xs:double"/>
+                          <xs:attribute name="segment4Mx" type="xs:double"/>
+                          <xs:attribute name="segment4My" type="xs:double"/>
                         </xs:complexType>
                       </xs:element>
                       <xs:element name="line" minOccurs="0" maxOccurs="unbounded">

@@ -74,58 +74,43 @@ VToolCut::VToolCut(const VToolCutInitData &initData, QGraphicsItem *parent)
 {
     Q_ASSERT_X(initData.baseCurveId != 0, Q_FUNC_INFO, "curveCutId == 0"); //-V654 //-V712
 
-    if (m_segment1Id != NULL_ID)
+    auto const CreateSegmentLabel =
+        [this](quint32 segmentId, qreal mx, qreal my, auto chooseSlot, auto selectSlot, auto posChangedSlot)
+        -> VSegmentLabel *
     {
-        QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_segment1Id);
-
+        QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(segmentId);
         VPointF pos = curve->GetMidpoint();
-        pos.setMx(m_segment1Mx);
-        pos.setMy(m_segment1My);
-
+        pos.setMx(mx);
+        pos.setMy(my);
         pos.setX(pos.x() - this->pos().x());
         pos.setY(pos.y() - this->pos().y());
 
-        m_segment1Label = new VSegmentLabel(pos, curve, this);
+        auto *label = new VSegmentLabel(pos, curve, this);
+        connect(label, &VSegmentLabel::SegmentChoosed, this, chooseSlot);
+        connect(label, &VSegmentLabel::SegmentSelected, this, selectSlot);
+        connect(label, &VSegmentLabel::LabelPositionChanged, this, posChangedSlot);
+        return label;
+    };
 
-        connect(m_segment1Label, &VSegmentLabel::SegmentChoosed, this, &VToolCut::SegmentChoosed);
-        connect(m_segment1Label, &VSegmentLabel::SegmentSelected, this, &VToolCut::PointSelected);
-        connect(m_segment1Label, &VSegmentLabel::LabelPositionChanged, this, &VToolCut::Segment1LabelPositionChanged);
-    }
+    m_segment1Label = CreateSegmentLabel(m_segment1Id,
+                                         m_segment1Mx,
+                                         m_segment1My,
+                                         &VToolCut::SegmentChoosed,
+                                         &VToolCut::PointSelected,
+                                         &VToolCut::Segment1LabelPositionChanged);
 
-    if (m_segment2Id != NULL_ID)
-    {
-        QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_segment2Id);
-
-        VPointF pos = curve->GetMidpoint();
-        pos.setMx(m_segment2Mx);
-        pos.setMy(m_segment2My);
-
-        pos.setX(pos.x() - this->pos().x());
-        pos.setY(pos.y() - this->pos().y());
-
-        m_segment2Label = new VSegmentLabel(pos, curve, this);
-
-        connect(m_segment2Label, &VSegmentLabel::SegmentChoosed, this, &VToolCut::SegmentChoosed);
-        connect(m_segment2Label, &VSegmentLabel::SegmentSelected, this, &VToolCut::PointSelected);
-        connect(m_segment2Label, &VSegmentLabel::LabelPositionChanged, this, &VToolCut::Segment2LabelPositionChanged);
-    }
+    m_segment2Label = CreateSegmentLabel(m_segment2Id,
+                                         m_segment2Mx,
+                                         m_segment2My,
+                                         &VToolCut::SegmentChoosed,
+                                         &VToolCut::PointSelected,
+                                         &VToolCut::Segment2LabelPositionChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCut::SetDetailsMode(bool mode)
 {
     detailsMode = mode;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief FullUpdateFromFile update tool data form file.
- */
-void VToolCut::FullUpdateFromFile()
-{
-    ReadAttributes();
-    RefreshGeometry();
-    SetVisualization();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -148,12 +133,10 @@ void VToolCut::EnableToolMove(bool move)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCut::AllowLabelHover(bool enabled)
+void VToolCut::AllowSegmentHover(bool enabled)
 {
     m_segment1Label->AllowLabelHover(enabled);
     m_segment2Label->AllowLabelHover(enabled);
-
-    VToolSinglePoint::AllowLabelHover(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -379,39 +362,24 @@ void VToolCut::ChangeSegmentLabelPosition(SegmentLabel segment, const QPointF &p
  */
 void VToolCut::RefreshGeometry()
 {
-    VToolSinglePoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<VPointF>(m_id));
+    VToolSinglePoint::RefreshGeometry();
 
-    if (m_segment1Id != NULL_ID)
+    auto const UpdateSegmentLabel = [this](quint32 segmentId, qreal mx, qreal my, VSegmentLabel *label)
     {
-        QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_segment1Id);
+        QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(segmentId);
 
         VPointF pos = curve->GetMidpoint();
-        pos.setMx(m_segment1Mx);
-        pos.setMy(m_segment1My);
-
+        pos.setMx(mx);
+        pos.setMy(my);
         pos.setX(pos.x() - this->pos().x());
         pos.setY(pos.y() - this->pos().y());
 
-        m_segment1Label->SetLabelData(pos);
+        label->SetLabelData(pos);
+        label->SetSegmentShape(curve);
+    };
 
-        m_segment1Label->SetSegmentShape(curve);
-    }
-
-    if (m_segment2Id != NULL_ID)
-    {
-        QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_segment2Id);
-
-        VPointF pos = curve->GetMidpoint();
-        pos.setMx(m_segment2Mx);
-        pos.setMy(m_segment2My);
-
-        pos.setX(pos.x() - this->pos().x());
-        pos.setY(pos.y() - this->pos().y());
-
-        m_segment2Label->SetLabelData(pos);
-
-        m_segment2Label->SetSegmentShape(curve);
-    }
+    UpdateSegmentLabel(m_segment1Id, m_segment1Mx, m_segment1My, m_segment1Label);
+    UpdateSegmentLabel(m_segment2Id, m_segment2Mx, m_segment2My, m_segment2Label);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

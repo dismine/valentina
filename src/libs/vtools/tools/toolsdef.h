@@ -72,8 +72,8 @@ enum class SegmentLabel : quint8
 {
     Segment1,
     Segment2,
-    // Segment3,
-    // Segment4
+    Segment3,
+    Segment4
 };
 
 // Default label position

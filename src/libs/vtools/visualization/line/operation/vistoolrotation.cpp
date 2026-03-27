@@ -36,7 +36,6 @@
 #include <QSharedPointer>
 #include <QtAlgorithms>
 #include <climits>
-#include <new>
 
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
@@ -72,13 +71,20 @@ void VisToolRotation::RefreshGeometry()
         return;
     }
 
-    auto origin = QSharedPointer<VPointF>(new VPointF());
+    int iPoint = -1;
+    int iCurve = -1;
+
+    if (const QVector<QGraphicsItem *> originObjects = CreateOriginObjects(iPoint, iCurve);
+        originObjects.isEmpty() || !ObjectSelected())
+    {
+        return;
+    }
 
     qreal tempAngle = 0;
 
     if (m_originPointId != NULL_ID)
     {
-        origin = GetData()->GeometricObject<VPointF>(m_originPointId);
+        QSharedPointer<VPointF> origin = GetData()->GeometricObject<VPointF>(m_originPointId);
         DrawPoint(m_point, static_cast<QPointF>(*origin));
 
         QLineF rLine;
@@ -112,76 +118,7 @@ void VisToolRotation::RefreshGeometry()
                        .arg(AngleToUser(tempAngle), VModifierKey::Shift()));
     }
 
-    int iPoint = -1;
-    int iCurve = -1;
-    for (auto id : Objects())
-    {
-        const QSharedPointer<VGObject> obj = GetData()->GetGObject(id);
-
-        // This check helps to find missed objects in the switch
-        Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects was handled.");
-
-        QT_WARNING_PUSH
-        QT_WARNING_DISABLE_GCC("-Wswitch-default")
-        QT_WARNING_DISABLE_CLANG("-Wswitch-default")
-
-        switch (obj->getType())
-        {
-            case GOType::Point:
-            {
-                const QSharedPointer<VPointF> p = GetData()->GeometricObject<VPointF>(id);
-
-                ++iPoint;
-                VScaledEllipse *point = GetPoint(static_cast<quint32>(iPoint), VColorRole::VisSupportColor2);
-                DrawPoint(point, static_cast<QPointF>(*p));
-
-                ++iPoint;
-                point = GetPoint(static_cast<quint32>(iPoint), VColorRole::VisSupportColor);
-
-                if (m_originPointId != NULL_ID)
-                {
-                    DrawPoint(point, static_cast<QPointF>(p->Rotate(static_cast<QPointF>(*origin), tempAngle)));
-                }
-                break;
-            }
-            case GOType::Arc:
-            {
-                iCurve = AddCurve<VArc>(tempAngle, static_cast<QPointF>(*origin), id, iCurve);
-                break;
-            }
-            case GOType::EllipticalArc:
-            {
-                iCurve = AddCurve<VEllipticalArc>(tempAngle, static_cast<QPointF>(*origin), id, iCurve);
-                break;
-            }
-            case GOType::Spline:
-            {
-                iCurve = AddCurve<VSpline>(tempAngle, static_cast<QPointF>(*origin), id, iCurve);
-                break;
-            }
-            case GOType::SplinePath:
-            {
-                iCurve = AddCurve<VSplinePath>(tempAngle, static_cast<QPointF>(*origin), id, iCurve);
-                break;
-            }
-            case GOType::CubicBezier:
-            {
-                iCurve = AddCurve<VCubicBezier>(tempAngle, static_cast<QPointF>(*origin), id, iCurve);
-                break;
-            }
-            case GOType::CubicBezierPath:
-            {
-                iCurve = AddCurve<VCubicBezierPath>(tempAngle, static_cast<QPointF>(*origin), id, iCurve);
-                break;
-            }
-            case GOType::Unknown:
-            case GOType::PlaceLabel:
-                Q_UNREACHABLE();
-                break;
-        }
-
-        QT_WARNING_POP
-    }
+    CreateRotatedObjects(iPoint, iCurve, tempAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -197,21 +134,86 @@ void VisToolRotation::SetAngle(const QString &expression)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <class Item> auto VisToolRotation::AddCurve(qreal angle, const QPointF &origin, quint32 id, int i) -> int
+auto VisToolRotation::AddRotatedPoint(qreal angle, quint32 id, int i) -> int
 {
+    if (m_originPointId == NULL_ID)
+    {
+        return i;
+    }
+
+    const QSharedPointer<VPointF> p = GetData()->GeometricObject<VPointF>(id);
+
+    ++i;
+    VScaledEllipse *point = GetPoint(static_cast<quint32>(i), VColorRole::VisSupportColor);
+    const QSharedPointer<VPointF> origin = GetData()->GeometricObject<VPointF>(m_originPointId);
+    DrawPoint(point, static_cast<QPointF>(p->Rotate(static_cast<QPointF>(*origin), angle)));
+
+    return i;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolRotation::CreateRotatedObjects(int &iPoint, int &iCurve, qreal angle)
+{
+    for (auto id : Objects())
+    {
+        const QSharedPointer<VGObject> obj = GetData()->GetGObject(id);
+
+        // This check helps to find missed objects in the switch
+        Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects was handled.");
+
+        QT_WARNING_PUSH
+        QT_WARNING_DISABLE_GCC("-Wswitch-default")
+        QT_WARNING_DISABLE_CLANG("-Wswitch-default")
+
+        switch (obj->getType())
+        {
+            case GOType::Point:
+                iPoint = AddRotatedPoint(angle, id, iPoint);
+                break;
+            case GOType::Arc:
+                iCurve = AddRotatedCurve<VArc>(angle, id, iCurve);
+                break;
+            case GOType::EllipticalArc:
+                iCurve = AddRotatedCurve<VEllipticalArc>(angle, id, iCurve);
+                break;
+            case GOType::Spline:
+                iCurve = AddRotatedCurve<VSpline>(angle, id, iCurve);
+                break;
+            case GOType::SplinePath:
+                iCurve = AddRotatedCurve<VSplinePath>(angle, id, iCurve);
+                break;
+            case GOType::CubicBezier:
+                iCurve = AddRotatedCurve<VCubicBezier>(angle, id, iCurve);
+                break;
+            case GOType::CubicBezierPath:
+                iCurve = AddRotatedCurve<VCubicBezierPath>(angle, id, iCurve);
+                break;
+            case GOType::Unknown:
+            case GOType::PlaceLabel:
+                Q_UNREACHABLE();
+                break;
+        }
+
+        QT_WARNING_POP
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Item>
+auto VisToolRotation::AddRotatedCurve(qreal angle, quint32 id, int i) -> int
+{
+    if (m_originPointId == NULL_ID)
+    {
+        return i;
+    }
+
     const QSharedPointer<Item> curve = GetData()->template GeometricObject<Item>(id);
 
     ++i;
-    VCurvePathItem *path = GetCurve(static_cast<quint32>(i), VColorRole::VisSupportColor2);
-    DrawPath(path, curve->GetPath(), curve->DirectionArrows(), Qt::SolidLine, Qt::RoundCap);
-
-    ++i;
-    path = GetCurve(static_cast<quint32>(i), VColorRole::VisSupportColor);
-    if (m_originPointId != NULL_ID)
-    {
-        const Item rotated = curve->Rotate(origin, angle);
-        DrawPath(path, rotated.GetPath(), rotated.DirectionArrows(), Qt::SolidLine, Qt::RoundCap);
-    }
+    VCurvePathItem *path = GetCurve(static_cast<quint32>(i), VColorRole::VisSupportColor);
+    const QSharedPointer<VPointF> origin = GetData()->GeometricObject<VPointF>(m_originPointId);
+    const Item rotated = curve->Rotate(static_cast<QPointF>(*origin), angle);
+    DrawPath(path, rotated.GetPath(), rotated.DirectionArrows(), Qt::SolidLine, Qt::RoundCap);
 
     return i;
 }

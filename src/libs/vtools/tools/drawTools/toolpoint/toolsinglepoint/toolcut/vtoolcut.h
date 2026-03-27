@@ -109,10 +109,9 @@ public:
 
 public slots:
     void SetDetailsMode(bool mode) override;
-    void FullUpdateFromFile() override;
     void Enable() override;
     void EnableToolMove(bool move) override;
-    void AllowLabelHover(bool enabled) override;
+    void AllowSegmentHover(bool enabled);
     void ToolSelectionType(const SelectionType &selectionType) override;
     void SetSegmentLabelVisible(bool visible);
     void AllowLabelSelecting(bool enabled) override;
@@ -172,7 +171,7 @@ protected:
                                const ToolChanges &changes);
 
     auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
-    void RefreshGeometry();
+    void RefreshGeometry() override;
     void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     void ReadToolAttributes(const QDomElement &domElement) override;
 

@@ -43,25 +43,27 @@ public:
     ~VisOperation() override;
 
     void SetObjects(const QVector<quint32> &objects);
+    void StartAction();
     void VisualMode(quint32 id) override;
 
     auto type() const -> int override { return Type; }
     enum
     {
-        Type = UserType + static_cast<int>(Vis::ToolRotation)
+        Type = UserType + static_cast<int>(Vis::GroupOperation)
     };
 
 protected:
     auto GetPoint(quint32 i, VColorRole role) -> VScaledEllipse *;
     auto GetCurve(quint32 i, VColorRole role) -> VCurvePathItem *;
 
-    template <class Item>
-    auto AddFlippedCurve(quint32 originPointId, const QPointF &firstPoint, const QPointF &secondPoint, quint32 id,
-                         int i) -> int;
-
-    void RefreshFlippedObjects(quint32 originPointId, const QPointF &firstPoint, const QPointF &secondPoint);
-
     auto Objects() const -> const QVector<quint32> &;
+
+    auto ObjectSelected() const -> bool;
+
+    auto AddOriginCurve(quint32 id, int &i) -> QGraphicsPathItem *;
+    auto AddOriginPoint(quint32 id, int &i) -> VScaledEllipse *;
+
+    auto CreateOriginObjects(int &iPoint, int &iCurve) -> QVector<QGraphicsItem *>;
 
 private:
     // cppcheck-suppress unknownMacro
@@ -71,28 +73,14 @@ private:
 
     QVector<VScaledEllipse *> m_points{};
     QVector<VCurvePathItem *> m_curves{};
+
+    bool m_startAction{false};
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-template <class Item>
-auto VisOperation::AddFlippedCurve(quint32 originPointId, const QPointF &firstPoint, const QPointF &secondPoint,
-                                   quint32 id, int i) -> int
+inline void VisOperation::StartAction()
 {
-    const QSharedPointer<Item> curve = GetData()->template GeometricObject<Item>(id);
-
-    ++i;
-    VCurvePathItem *path = GetCurve(static_cast<quint32>(i), VColorRole::VisSupportColor2);
-    DrawPath(path, curve->GetPath(), curve->DirectionArrows(), Qt::SolidLine, Qt::RoundCap);
-
-    ++i;
-    path = GetCurve(static_cast<quint32>(i), VColorRole::VisSupportColor);
-    if (originPointId != NULL_ID)
-    {
-        const Item flipped = curve->Flip(QLineF(firstPoint, secondPoint));
-        DrawPath(path, flipped.GetPath(), flipped.DirectionArrows(), Qt::SolidLine, Qt::RoundCap);
-    }
-
-    return i;
+    m_startAction = true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

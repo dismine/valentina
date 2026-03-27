@@ -66,10 +66,10 @@ auto AttrsForSegment(SegmentLabel segment) -> SegmentAttrs
             return {AttrSegment1Mx, AttrSegment1My};
         case SegmentLabel::Segment2:
             return {AttrSegment2Mx, AttrSegment2My};
-            // case SegmentLabel::Segment3:
-            //     return {AttrSegment3Mx, AttrSegment3My};
-            // case SegmentLabel::Segment4:
-            //     return {AttrSegment4Mx, AttrSegment4My};
+        case SegmentLabel::Segment3:
+            return {AttrSegment3Mx, AttrSegment3My};
+        case SegmentLabel::Segment4:
+            return {AttrSegment4Mx, AttrSegment4My};
         default:
             break;
     }

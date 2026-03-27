@@ -244,7 +244,7 @@ void VToolSinglePoint::PointSelected(bool selected)
 void VToolSinglePoint::FullUpdateFromFile()
 {
     ReadAttributes();
-    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(m_id));
+    RefreshGeometry();
     SetVisualization();
 }
 
@@ -348,6 +348,12 @@ void VToolSinglePoint::ChangeLabelVisibility(quint32 id, bool visible)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSinglePoint::RefreshGeometry()
+{
+    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(m_id));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::ChangeLabelPosition(quint32 id, const QPointF &pos)
 {
     if (id == m_id)
@@ -399,7 +405,7 @@ void VToolSinglePoint::ToolSelectionType(const SelectionType &selectionType)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VToolSinglePoint::InitSegments(SegmentDetails &details) -> QPair<QString, QString>
+void VToolSinglePoint::InitSegments(SegmentDetails &details)
 {
     // This check helps to find missed objects in the switch
     Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects were handled.");
@@ -411,15 +417,19 @@ auto VToolSinglePoint::InitSegments(SegmentDetails &details) -> QPair<QString, Q
     switch (details.curveType)
     {
         case GOType::EllipticalArc:
-            return InitArc<VEllipticalArc>(details);
+            InitArc<VEllipticalArc>(details);
+            break;
         case GOType::Arc:
-            return InitArc<VArc>(details);
+            InitArc<VArc>(details);
+            break;
         case GOType::CubicBezier:
         case GOType::Spline:
-            return InitSpline(details);
+            InitSpline(details);
+            break;
         case GOType::CubicBezierPath:
         case GOType::SplinePath:
-            return InitSplinePath(details);
+            InitSplinePath(details);
+            break;
         case GOType::Point:
         case GOType::PlaceLabel:
         case GOType::Unknown:
@@ -428,13 +438,10 @@ auto VToolSinglePoint::InitSegments(SegmentDetails &details) -> QPair<QString, Q
     }
 
     QT_WARNING_POP
-
-    Q_UNREACHABLE();
-    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VToolSinglePoint::InitSplinePath(SegmentDetails &details) -> QPair<QString, QString>
+void VToolSinglePoint::InitSplinePath(SegmentDetails &details)
 {
     const auto splPath = details.data->GeometricObject<VAbstractCubicBezierPath>(details.curveId);
     VSplinePath *splPath1 = nullptr;
@@ -480,14 +487,23 @@ auto VToolSinglePoint::InitSplinePath(SegmentDetails &details) -> QPair<QString,
     splP1->SetAliasSuffix(details.alias1);
     splP2->SetAliasSuffix(details.alias2);
 
-    details.data->AddSpline(splP1, NULL_ID, details.p.id());
-    details.data->AddSpline(splP2, NULL_ID, details.p.id());
+    if (details.typeCreation == Source::FromGui)
+    {
+        details.segment1Id = details.data->AddGObject(splP1);
+        details.segment2Id = details.data->AddGObject(splP2);
+    }
+    else
+    {
+        details.data->UpdateGObject(details.segment1Id, splP1);
+        details.data->UpdateGObject(details.segment2Id, splP2);
+    }
 
-    return qMakePair(splP1->ObjectName(), splP2->ObjectName());
+    details.data->AddSpline(details.data->GeometricObject<VAbstractBezier>(details.segment1Id), details.segment1Id);
+    details.data->AddSpline(details.data->GeometricObject<VAbstractBezier>(details.segment2Id), details.segment2Id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VToolSinglePoint::InitSpline(SegmentDetails &details) -> QPair<QString, QString>
+void VToolSinglePoint::InitSpline(SegmentDetails &details)
 {
     QSharedPointer<VAbstractCubicBezier> spline1;
     QSharedPointer<VAbstractCubicBezier> spline2;
@@ -530,10 +546,19 @@ auto VToolSinglePoint::InitSpline(SegmentDetails &details) -> QPair<QString, QSt
     spline1->SetAliasSuffix(details.alias1);
     spline2->SetAliasSuffix(details.alias2);
 
-    details.data->AddSpline(spline1, NULL_ID, details.p.id());
-    details.data->AddSpline(spline2, NULL_ID, details.p.id());
+    if (details.typeCreation == Source::FromGui)
+    {
+        details.segment1Id = details.data->AddGObject(spline1);
+        details.segment2Id = details.data->AddGObject(spline2);
+    }
+    else
+    {
+        details.data->UpdateGObject(details.segment1Id, spline1);
+        details.data->UpdateGObject(details.segment2Id, spline2);
+    }
 
-    return qMakePair(spline1->ObjectName(), spline2->ObjectName());
+    details.data->AddSpline(details.data->GeometricObject<VAbstractBezier>(details.segment1Id), details.segment1Id);
+    details.data->AddSpline(details.data->GeometricObject<VAbstractBezier>(details.segment2Id), details.segment2Id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -607,7 +632,7 @@ void VToolSinglePoint::FixSubCurveNames(SegmentDetails &details,
 
 //---------------------------------------------------------------------------------------------------------------------
 template<class Item>
-auto VToolSinglePoint::InitArc(SegmentDetails &details) -> QPair<QString, QString>
+void VToolSinglePoint::InitArc(SegmentDetails &details)
 {
     const QSharedPointer<Item> arc = details.data->GeometricObject<Item>(details.curveId);
     Item arc1;
@@ -621,10 +646,6 @@ auto VToolSinglePoint::InitArc(SegmentDetails &details) -> QPair<QString, QStrin
     {
         arc->CutArc(0, &arc1, &arc2, details.p.name());
     }
-
-    // Arc highly depend on id. Need for creating the name.
-    arc1.setId(details.p.id() + 1);
-    arc2.setId(details.p.id() + 2);
 
     QSharedPointer<Item> a1;
     QSharedPointer<Item> a2;
@@ -653,12 +674,17 @@ auto VToolSinglePoint::InitArc(SegmentDetails &details) -> QPair<QString, QStrin
     a1->SetAliasSuffix(details.alias1);
     a2->SetAliasSuffix(details.alias2);
 
-    details.data->AddArc(a1, /*arc1.id()*/ NULL_ID, details.p.id());
-    details.data->AddArc(a2, /*arc2.id()*/ NULL_ID, details.p.id());
+    if (details.typeCreation == Source::FromGui)
+    {
+        details.segment1Id = details.data->AddGObject(a1);
+        details.segment2Id = details.data->AddGObject(a2);
+    }
+    else
+    {
+        details.data->UpdateGObject(details.segment1Id, a1);
+        details.data->UpdateGObject(details.segment2Id, a2);
+    }
 
-    // Because we don't store segments, but only data about them we must register the names manually
-    details.data->RegisterUniqueName(a1);
-    details.data->RegisterUniqueName(a2);
-
-    return qMakePair(arc1.ObjectName(), arc2.ObjectName());
+    details.data->AddArc(details.data->GeometricObject<VAbstractCurve>(details.segment1Id), details.segment1Id);
+    details.data->AddArc(details.data->GeometricObject<VAbstractCurve>(details.segment2Id), details.segment2Id);
 }

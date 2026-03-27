@@ -253,20 +253,7 @@ auto VToolCutArc::Create(VToolCutInitData &initData) -> VToolCutArc *
         tool = new VToolCutArc(initData);
         initData.scene->addItem(tool);
         InitPointToolConnections(initData.scene, tool);
-        if (arc->getType() == GOType::Arc)
-        {
-            QObject::connect(initData.scene,
-                             &VMainGraphicsScene::ShowArcSegmentLabel,
-                             tool,
-                             &VToolCutArc::SetSegmentLabelVisible);
-        }
-        else if (arc->getType() == GOType::EllipticalArc)
-        {
-            QObject::connect(initData.scene,
-                             &VMainGraphicsScene::ShowElArcSegmentLabel,
-                             tool,
-                             &VToolCutArc::SetSegmentLabelVisible);
-        }
+        InitSegmentConnections(initData.scene, tool, arc->getType());
         VAbstractPattern::AddTool(initData.id, tool);
     }
     // Very important to delete it. Only this tool need this special variable.

@@ -54,6 +54,12 @@ VisOperation::~VisOperation()
 void VisOperation::SetObjects(const QVector<quint32> &objects)
 {
     m_objects = objects;
+
+    qDeleteAll(m_points);
+    qDeleteAll(m_curves);
+
+    m_points.clear();
+    m_curves.clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -83,12 +89,42 @@ auto VisOperation::GetCurve(quint32 i, VColorRole role) -> VCurvePathItem *
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-
-void VisOperation::RefreshFlippedObjects(quint32 originPointId, const QPointF &firstPoint, const QPointF &secondPoint)
+auto VisOperation::ObjectSelected() const -> bool
 {
-    int iPoint = -1;
-    int iCurve = -1;
-    for (auto id : std::as_const(m_objects))
+    return m_startAction;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VisOperation::AddOriginCurve(quint32 id, int &i) -> QGraphicsPathItem *
+{
+    const QSharedPointer<VAbstractCurve> curve = GetData()->template GeometricObject<VAbstractCurve>(id);
+
+    ++i;
+    VCurvePathItem *path = GetCurve(static_cast<quint32>(i), VColorRole::VisSupportColor2);
+    DrawPath(path, curve->GetPath(), curve->DirectionArrows(), Qt::SolidLine, Qt::RoundCap);
+
+    return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VisOperation::AddOriginPoint(quint32 id, int &i) -> VScaledEllipse *
+{
+    const QSharedPointer<VPointF> p = GetData()->GeometricObject<VPointF>(id);
+
+    ++i;
+    VScaledEllipse *point = GetPoint(static_cast<quint32>(i), VColorRole::VisSupportColor2);
+    DrawPoint(point, static_cast<QPointF>(*p));
+
+    return point;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VisOperation::CreateOriginObjects(int &iPoint, int &iCurve) -> QVector<QGraphicsItem *>
+{
+    QVector<QGraphicsItem *> originObjects;
+    originObjects.reserve(Objects().size());
+
+    for (auto id : Objects())
     {
         const QSharedPointer<VGObject> obj = GetData()->GetGObject(id);
 
@@ -102,52 +138,16 @@ void VisOperation::RefreshFlippedObjects(quint32 originPointId, const QPointF &f
         switch (obj->getType())
         {
             case GOType::Point:
-            {
-                const QSharedPointer<VPointF> p = GetData()->GeometricObject<VPointF>(id);
-
-                ++iPoint;
-                VScaledEllipse *point = GetPoint(static_cast<quint32>(iPoint), VColorRole::VisSupportColor2);
-                DrawPoint(point, static_cast<QPointF>(*p));
-
-                ++iPoint;
-                point = GetPoint(static_cast<quint32>(iPoint), VColorRole::VisSupportColor);
-
-                if (originPointId != NULL_ID)
-                {
-                    DrawPoint(point, static_cast<QPointF>(p->Flip(QLineF(firstPoint, secondPoint))));
-                }
+                originObjects.append(AddOriginPoint(id, iPoint));
                 break;
-            }
             case GOType::Arc:
-            {
-                iCurve = AddFlippedCurve<VArc>(originPointId, firstPoint, secondPoint, id, iCurve);
-                break;
-            }
             case GOType::EllipticalArc:
-            {
-                iCurve = AddFlippedCurve<VEllipticalArc>(originPointId, firstPoint, secondPoint, id, iCurve);
-                break;
-            }
             case GOType::Spline:
-            {
-                iCurve = AddFlippedCurve<VSpline>(originPointId, firstPoint, secondPoint, id, iCurve);
-                break;
-            }
             case GOType::SplinePath:
-            {
-                iCurve = AddFlippedCurve<VSplinePath>(originPointId, firstPoint, secondPoint, id, iCurve);
-                break;
-            }
             case GOType::CubicBezier:
-            {
-                iCurve = AddFlippedCurve<VCubicBezier>(originPointId, firstPoint, secondPoint, id, iCurve);
-                break;
-            }
             case GOType::CubicBezierPath:
-            {
-                iCurve = AddFlippedCurve<VCubicBezierPath>(originPointId, firstPoint, secondPoint, id, iCurve);
+                originObjects.append(AddOriginCurve(id, iCurve));
                 break;
-            }
             case GOType::Unknown:
             case GOType::PlaceLabel:
                 Q_UNREACHABLE();
@@ -156,4 +156,6 @@ void VisOperation::RefreshFlippedObjects(quint32 originPointId, const QPointF &f
 
         QT_WARNING_POP
     }
+
+    return originObjects;
 }

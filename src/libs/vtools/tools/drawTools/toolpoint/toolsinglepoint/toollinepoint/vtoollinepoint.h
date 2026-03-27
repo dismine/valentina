@@ -82,7 +82,6 @@ public:
 
 public slots:
     void Enable() override;
-    void FullUpdateFromFile() override;
 
 protected:
     /** @brief formula string with length formula. */
@@ -100,7 +99,7 @@ protected:
     /** @brief lineColor color of a line. */
     QString lineColor;
 
-    virtual void RefreshGeometry();
+    void RefreshGeometry() override;
     void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
     void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;

@@ -434,6 +434,8 @@ VLib {
             "line/vistoolpointfromarcandtangent.h",
             "line/operation/vistoolrotation.h",
             "line/operation/vistoolflippingbyline.h",
+            "line/operation/visflippingoperation.cpp",
+            "line/operation/visflippingoperation.h",
             "path/vispath.h",
             "path/vistoolarc.h",
             "path/vistoolcutarc.h",

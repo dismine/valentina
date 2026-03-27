@@ -244,10 +244,7 @@ auto VToolCutSpline::Create(VToolCutInitData &initData) -> VToolCutSpline *
         tool = new VToolCutSpline(initData);
         initData.scene->addItem(tool);
         InitPointToolConnections(initData.scene, tool);
-        QObject::connect(initData.scene,
-                         &VMainGraphicsScene::ShowSplineSegmentLabel,
-                         tool,
-                         &VToolCutSpline::SetSegmentLabelVisible);
+        InitSegmentConnections(initData.scene, tool, spl->getType());
         VAbstractPattern::AddTool(initData.id, tool);
     }
     // Very important to delete it. Only this tool need this special variable.

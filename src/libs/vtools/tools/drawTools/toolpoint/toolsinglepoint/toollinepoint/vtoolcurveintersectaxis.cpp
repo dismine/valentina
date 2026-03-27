@@ -38,6 +38,7 @@
 
 #include "../../../../../dialogs/tools/dialogcurveintersectaxis.h"
 #include "../../../../../dialogs/tools/dialogtool.h"
+#include "../../../../../undocommands/label/movesegmentlabel.h"
 #include "../../../../../undocommands/renameobject.h"
 #include "../../../../../undocommands/savetooloptions.h"
 #include "../../../../vabstracttool.h"
@@ -58,6 +59,7 @@
 #include "../vtools/visualization/line/vistoolcurveintersectaxis.h"
 #include "../vtools/visualization/visualization.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/vsegmentlabel.h"
 #include "vtoollinepoint.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
@@ -84,12 +86,49 @@ VToolCurveIntersectAxis::VToolCurveIntersectAxis(const VToolCurveIntersectAxisIn
                    parent),
     formulaAngle(initData.formulaAngle),
     curveId(initData.curveId),
-    m_segments(initData.segments),
     m_name1(initData.name1),
     m_name2(initData.name2),
     m_aliasSuffix1(initData.aliasSuffix1),
-    m_aliasSuffix2(initData.aliasSuffix2)
+    m_aliasSuffix2(initData.aliasSuffix2),
+    m_segment1Id(initData.segment1Id),
+    m_segment2Id(initData.segment2Id),
+    m_segment1Mx(initData.segment1Mx),
+    m_segment1My(initData.segment1My),
+    m_segment2Mx(initData.segment2Mx),
+    m_segment2My(initData.segment2My)
 {
+    auto const CreateSegmentLabel =
+        [this](quint32 segmentId, qreal mx, qreal my, auto chooseSlot, auto selectSlot, auto posChangedSlot)
+        -> VSegmentLabel *
+    {
+        QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(segmentId);
+        VPointF pos = curve->GetMidpoint();
+        pos.setMx(mx);
+        pos.setMy(my);
+        pos.setX(pos.x() - this->pos().x());
+        pos.setY(pos.y() - this->pos().y());
+
+        auto *label = new VSegmentLabel(pos, curve, this);
+        connect(label, &VSegmentLabel::SegmentChoosed, this, chooseSlot);
+        connect(label, &VSegmentLabel::SegmentSelected, this, selectSlot);
+        connect(label, &VSegmentLabel::LabelPositionChanged, this, posChangedSlot);
+        return label;
+    };
+
+    m_segment1Label = CreateSegmentLabel(m_segment1Id,
+                                         m_segment1Mx,
+                                         m_segment1My,
+                                         &VToolCurveIntersectAxis::SegmentChoosed,
+                                         &VToolCurveIntersectAxis::PointSelected,
+                                         &VToolCurveIntersectAxis::Segment1LabelPositionChanged);
+
+    m_segment2Label = CreateSegmentLabel(m_segment2Id,
+                                         m_segment2Mx,
+                                         m_segment2My,
+                                         &VToolCurveIntersectAxis::SegmentChoosed,
+                                         &VToolCurveIntersectAxis::PointSelected,
+                                         &VToolCurveIntersectAxis::Segment2LabelPositionChanged);
+
     ToolCreation(initData.typeCreation);
 }
 
@@ -122,15 +161,12 @@ void VToolCurveIntersectAxis::ProcessToolOptions(const QDomElement &oldDomElemen
         }
     }
 
-    const quint32 subCurve1Id = m_id /*+ 1*/;
-    const quint32 subCurve2Id = m_id /*+ 2*/;
-
     const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(curveId);
     const CurveAliasType curveType = RenameAlias::CurveType(curve->getType());
 
     if (changes.Name1Changed())
     {
-        auto *renameName = new RenameAlias(curveType, changes.oldName1, changes.newName1, doc, subCurve1Id, newGroup);
+        auto *renameName = new RenameAlias(curveType, changes.oldName1, changes.newName1, doc, m_segment1Id, newGroup);
         if (!changes.Name2Changed() && !changes.AliasSuffix1Changed() && !changes.AliasSuffix2Changed())
         {
             connect(renameName, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
@@ -139,7 +175,7 @@ void VToolCurveIntersectAxis::ProcessToolOptions(const QDomElement &oldDomElemen
 
     if (changes.Name2Changed())
     {
-        auto *renameName = new RenameAlias(curveType, changes.oldName2, changes.newName2, doc, subCurve2Id, newGroup);
+        auto *renameName = new RenameAlias(curveType, changes.oldName2, changes.newName2, doc, m_segment2Id, newGroup);
         if (!changes.AliasSuffix1Changed() && !changes.AliasSuffix2Changed())
         {
             connect(renameName, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
@@ -149,7 +185,7 @@ void VToolCurveIntersectAxis::ProcessToolOptions(const QDomElement &oldDomElemen
     if (changes.AliasSuffix1Changed())
     {
         auto *renameAlias
-            = new RenameAlias(curveType, changes.oldAliasSuffix1, changes.newAliasSuffix1, doc, subCurve1Id, newGroup);
+            = new RenameAlias(curveType, changes.oldAliasSuffix1, changes.newAliasSuffix1, doc, m_segment1Id, newGroup);
         if (!changes.AliasSuffix2Changed())
         {
             connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
@@ -159,7 +195,7 @@ void VToolCurveIntersectAxis::ProcessToolOptions(const QDomElement &oldDomElemen
     if (changes.AliasSuffix2Changed())
     {
         auto *renameAlias
-            = new RenameAlias(curveType, changes.oldAliasSuffix1, changes.newAliasSuffix1, doc, subCurve2Id, newGroup);
+            = new RenameAlias(curveType, changes.oldAliasSuffix1, changes.newAliasSuffix1, doc, m_segment2Id, newGroup);
         connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     }
 
@@ -401,7 +437,8 @@ auto VToolCurveIntersectAxis::Create(VToolCurveIntersectAxisInitData &initData) 
 
     initData.data->AddLine(initData.basePointId, initData.id);
 
-    SegmentDetails details{.curveType = curve->getType(),
+    SegmentDetails details{.typeCreation = initData.typeCreation,
+                           .curveType = curve->getType(),
                            .segLength = segLength,
                            .p = *p,
                            .curveId = initData.curveId,
@@ -413,15 +450,29 @@ auto VToolCurveIntersectAxis::Create(VToolCurveIntersectAxisInitData &initData) 
                            .alias2 = initData.aliasSuffix2,
                            .id = initData.id,
                            .name1AttrName = AttrName1,
-                           .name2AttrName = AttrName2};
+                           .name2AttrName = AttrName2,
+                           .segment1Id = initData.segment1Id,
+                           .segment2Id = initData.segment2Id};
 
-    initData.segments = VToolSinglePoint::InitSegments(details);
+    VToolSinglePoint::InitSegments(details);
 
     initData.name1 = details.name1;
     initData.name2 = details.name2;
 
     patternGraph->AddEdge(initData.basePointId, initData.id);
     patternGraph->AddEdge(initData.curveId, initData.id);
+
+    if (initData.typeCreation == Source::FromGui)
+    {
+        initData.segment1Id = details.segment1Id;
+        initData.segment2Id = details.segment2Id;
+    }
+
+    patternGraph->AddVertex(initData.segment1Id, VNodeType::OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
+    patternGraph->AddVertex(initData.segment2Id, VNodeType::OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
+
+    patternGraph->AddEdge(initData.id, initData.segment1Id);
+    patternGraph->AddEdge(initData.id, initData.segment2Id);
 
     if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
     {
@@ -433,13 +484,11 @@ auto VToolCurveIntersectAxis::Create(VToolCurveIntersectAxisInitData &initData) 
         VAbstractTool::AddRecord(initData.id, Tool::CurveIntersectAxis, initData.doc);
         auto *point = new VToolCurveIntersectAxis(initData);
         initData.scene->addItem(point);
-        InitToolConnections(initData.scene, point);
+        InitPointToolConnections(initData.scene, point);
+        InitSegmentConnections(initData.scene, point, curve->getType());
         VAbstractPattern::AddTool(initData.id, point);
         return point;
     }
-
-    auto *tool = qobject_cast<VToolCurveIntersectAxis *>(VAbstractPattern::getTool(initData.id));
-    tool->SetSegments(initData.segments);
 
     return nullptr;
 }
@@ -531,6 +580,21 @@ auto VToolCurveIntersectAxis::CurveName() const -> QString
 void VToolCurveIntersectAxis::ShowVisualization(bool show)
 {
     ShowToolVisualization<VisToolCurveIntersectAxis>(show);
+    m_segment1Label->SetLabelVisible(show);
+    m_segment2Label->SetLabelVisible(show);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCurveIntersectAxis::ChangeSegmentLabelPosition(SegmentLabel segment, const QPointF &pos)
+{
+    if (segment == SegmentLabel::Segment1)
+    {
+        m_segment1Label->SetLabelPosition(pos);
+    }
+    else if (segment == SegmentLabel::Segment2)
+    {
+        m_segment2Label->SetLabelPosition(pos);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -595,6 +659,14 @@ void VToolCurveIntersectAxis::SaveOptions(QDomElement &tag, QSharedPointer<VGObj
                                          AttrAlias2,
                                          m_aliasSuffix2,
                                          [](const QString &suffix) noexcept -> bool { return suffix.isEmpty(); });
+    doc->SetAttribute(tag, AttrSegment1Id, m_segment1Id);
+    doc->SetAttribute(tag, AttrSegment2Id, m_segment2Id);
+
+    const VAbstractValApplication *app = VAbstractValApplication::VApp();
+    doc->SetAttribute(tag, AttrSegment1Mx, app->fromPixel(m_segment1Mx));
+    doc->SetAttribute(tag, AttrSegment1My, app->fromPixel(m_segment1My));
+    doc->SetAttribute(tag, AttrSegment2Mx, app->fromPixel(m_segment2Mx));
+    doc->SetAttribute(tag, AttrSegment2My, app->fromPixel(m_segment2Mx));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -611,6 +683,18 @@ void VToolCurveIntersectAxis::ReadToolAttributes(const QDomElement &domElement)
     m_name2 = VAbstractPattern::GetParametrEmptyString(domElement, AttrName2);
     m_aliasSuffix1 = VAbstractPattern::GetParametrEmptyString(domElement, AttrAlias1);
     m_aliasSuffix2 = VAbstractPattern::GetParametrEmptyString(domElement, AttrAlias2);
+    m_segment1Id = VAbstractPattern::GetParametrId(domElement, AttrSegment1Id);
+    m_segment2Id = VAbstractPattern::GetParametrId(domElement, AttrSegment2Id);
+
+    const VAbstractValApplication *app = VAbstractValApplication::VApp();
+
+    const QString labelMXStr = QString::number(app->fromPixel(labelMX));
+    const QString labelMYStr = QString::number(app->fromPixel(labelMY));
+
+    m_segment1Mx = app->toPixel(VAbstractPattern::GetParametrDouble(domElement, AttrSegment1Mx, labelMXStr));
+    m_segment1My = app->toPixel(VAbstractPattern::GetParametrDouble(domElement, AttrSegment1My, labelMYStr));
+    m_segment2Mx = app->toPixel(VAbstractPattern::GetParametrDouble(domElement, AttrSegment2Mx, labelMXStr));
+    m_segment2My = app->toPixel(VAbstractPattern::GetParametrDouble(domElement, AttrSegment2My, labelMYStr));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -639,21 +723,27 @@ auto VToolCurveIntersectAxis::MakeToolTip() const -> QString
 
     const QLineF line(static_cast<QPointF>(*first), static_cast<QPointF>(*second));
 
-    const QString toolTip =
-        u"<table>"
-        u"<tr> <td><b>%6:</b> %7</td> </tr>"
-        u"<tr> <td><b>%1:</b> %2 %3</td> </tr>"
-        u"<tr> <td><b>%4:</b> %5°</td> </tr>"
-        u"<tr> <td><b>%8:</b> %9</td> </tr>"
-        u"<tr> <td><b>%10:</b> %11</td> </tr>"
-        u"</table>"_s
-            .arg(tr("Length"))                                                                   // 1
-            .arg(VAbstractValApplication::VApp()->fromPixel(line.length()))                      // 2
-            .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), tr("Angle")) // 3, 4
-            .arg(line.angle())                                                                   // 5
-            .arg(tr("Label"), second->name(),                                                    /* 6, 7 */
-                 tr("Segment 1"), m_segments.first,                                              /* 8, 9 */
-                 tr("Segment 2"), m_segments.second);                                            /* 10, 11 */
+    QSharedPointer<VGObject> const segment1 = VAbstractTool::data.GetGObject(m_segment1Id);
+    QSharedPointer<VGObject> const segment2 = VAbstractTool::data.GetGObject(m_segment2Id);
+
+    const QString toolTip = u"<table>"
+                            u"<tr> <td><b>%6:</b> %7</td> </tr>"
+                            u"<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                            u"<tr> <td><b>%4:</b> %5°</td> </tr>"
+                            u"<tr> <td><b>%8:</b> %9</td> </tr>"
+                            u"<tr> <td><b>%10:</b> %11</td> </tr>"
+                            u"</table>"_s
+                                .arg(tr("Length"))                                              // 1
+                                .arg(VAbstractValApplication::VApp()->fromPixel(line.length())) // 2
+                                .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+                                     tr("Angle"))  // 3, 4
+                                .arg(line.angle()) // 5
+                                .arg(tr("Label"),
+                                     second->name(), /* 6, 7 */
+                                     tr("Segment 1"),
+                                     segment1->ObjectName(), /* 8, 9 */
+                                     tr("Segment 2"),
+                                     segment2->ObjectName()); /* 10, 11 */
     return toolTip;
 }
 
@@ -665,13 +755,125 @@ void VToolCurveIntersectAxis::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCurveIntersectAxis::SetSegments(const QPair<QString, QString> &segments)
-{
-    m_segments = segments;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolCurveIntersectAxis::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
 {
     ProcessToolOptions(oldDomElement, newDomElement, GatherToolChanges());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VToolCurveIntersectAxis::itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant
+{
+    if (change == QGraphicsItem::ItemSelectedHasChanged)
+    {
+        if (not m_selectedFromChild)
+        {
+            if (m_segment1Id != NULL_ID)
+            {
+                const QSignalBlocker blockerSegment1Label(m_segment1Label);
+                m_segment1Label->SetLabelVisible(value.toBool());
+                m_segment1Label->setSelected(value.toBool());
+            }
+
+            if (m_segment1Id != NULL_ID)
+            {
+                const QSignalBlocker blockeSegment2Label(m_segment2Label);
+                m_segment2Label->setSelected(value.toBool());
+                m_segment2Label->SetLabelVisible(value.toBool());
+            }
+        }
+    }
+
+    return VToolLinePoint::itemChange(change, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCurveIntersectAxis::RefreshGeometry()
+{
+    VToolLinePoint::RefreshGeometry();
+
+    auto const UpdateSegmentLabel = [this](quint32 segmentId, qreal mx, qreal my, VSegmentLabel *label)
+    {
+        QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(segmentId);
+
+        VPointF pos = curve->GetMidpoint();
+        pos.setMx(mx);
+        pos.setMy(my);
+        pos.setX(pos.x() - this->pos().x());
+        pos.setY(pos.y() - this->pos().y());
+
+        label->SetLabelData(pos);
+        label->SetSegmentShape(curve);
+    };
+
+    UpdateSegmentLabel(m_segment1Id, m_segment1Mx, m_segment1My, m_segment1Label);
+    UpdateSegmentLabel(m_segment2Id, m_segment2Mx, m_segment2My, m_segment2Label);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCurveIntersectAxis::SegmentChoosed(quint32 id, SceneObject type)
+{
+    emit ChoosedTool(id, type);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCurveIntersectAxis::Segment1LabelPositionChanged(const QPointF &pos)
+{
+    VAbstractApplication::VApp()->getUndoStack()->push(new MoveSegmentLabel(doc, pos, m_id, SegmentLabel::Segment1));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCurveIntersectAxis::Segment2LabelPositionChanged(const QPointF &pos)
+{
+    VAbstractApplication::VApp()->getUndoStack()->push(new MoveSegmentLabel(doc, pos, m_id, SegmentLabel::Segment2));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCurveIntersectAxis::Enable()
+{
+    const bool enabled = m_indexActivePatternBlock == doc->PatternBlockMapper()->GetActiveId();
+    m_segment1Label->SetEnabledState(enabled);
+    m_segment2Label->SetEnabledState(enabled);
+
+    VToolLinePoint::Enable();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCurveIntersectAxis::EnableToolMove(bool move)
+{
+    m_segment1Label->SetLabelMovable(move);
+    m_segment2Label->SetLabelMovable(move);
+
+    VToolLinePoint::EnableToolMove(move);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCurveIntersectAxis::AllowSegmentHover(bool enabled)
+{
+    m_segment1Label->AllowLabelHover(enabled);
+    m_segment2Label->AllowLabelHover(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCurveIntersectAxis::ToolSelectionType(const SelectionType &selectionType)
+{
+    m_segment1Label->LabelSelectionType(selectionType);
+    m_segment2Label->LabelSelectionType(selectionType);
+
+    VToolLinePoint::ToolSelectionType(selectionType);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCurveIntersectAxis::SetSegmentLabelVisible(bool visible)
+{
+    m_segment1Label->SetLabelVisible(visible);
+    m_segment2Label->SetLabelVisible(visible);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCurveIntersectAxis::AllowLabelSelecting(bool enabled)
+{
+    m_segment1Label->SetLabelSelectable(enabled);
+    m_segment2Label->SetLabelSelectable(enabled);
+
+    VToolLinePoint::AllowLabelSelecting(enabled);
 }
