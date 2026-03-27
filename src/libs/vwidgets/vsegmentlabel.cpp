@@ -187,6 +187,11 @@ void VSegmentLabel::SetLabelVisible(bool visible)
     m_showLabel = visible;
     m_label->setVisible(visible);
     UpdateLabelLine();
+
+    if (!visible)
+    {
+        HoverSegment(false);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
