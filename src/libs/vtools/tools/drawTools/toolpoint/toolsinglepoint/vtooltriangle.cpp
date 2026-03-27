@@ -194,7 +194,7 @@ auto VToolTriangle::Create(VToolTriangleInitData initData) -> VToolTriangle *
         VAbstractTool::AddRecord(initData.id, Tool::Triangle, initData.doc);
         auto *point = new VToolTriangle(initData);
         initData.scene->addItem(point);
-        InitToolConnections(initData.scene, point);
+        InitPointToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
         return point;
     }

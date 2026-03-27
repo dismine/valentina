@@ -180,7 +180,7 @@ auto VToolLineIntersectAxis::Create(VToolLineIntersectAxisInitData &initData) ->
         VAbstractTool::AddRecord(initData.id, Tool::LineIntersectAxis, initData.doc);
         auto *point = new VToolLineIntersectAxis(initData);
         initData.scene->addItem(point);
-        InitToolConnections(initData.scene, point);
+        InitPointToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
         return point;
     }

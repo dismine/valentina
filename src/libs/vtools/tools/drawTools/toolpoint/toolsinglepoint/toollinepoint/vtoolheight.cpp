@@ -180,7 +180,7 @@ auto VToolHeight::Create(VToolHeightInitData initData) -> VToolHeight *
         VAbstractTool::AddRecord(initData.id, Tool::Height, initData.doc);
         auto *point = new VToolHeight(initData);
         initData.scene->addItem(point);
-        InitToolConnections(initData.scene, point);
+        InitPointToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
         return point;
     }

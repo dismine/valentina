@@ -374,7 +374,7 @@ auto VToolAlongLine::Create(VToolAlongLineInitData &initData) -> VToolAlongLine 
         VAbstractTool::AddRecord(initData.id, Tool::AlongLine, initData.doc);
         point = new VToolAlongLine(initData);
         initData.scene->addItem(point);
-        InitToolConnections(initData.scene, point);
+        InitPointToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
     }
     // Very important to delete it. Only this tool need this special variable.

@@ -252,7 +252,7 @@ auto VToolCutArc::Create(VToolCutInitData &initData) -> VToolCutArc *
         VAbstractTool::AddRecord(initData.id, Tool::CutArc, initData.doc);
         tool = new VToolCutArc(initData);
         initData.scene->addItem(tool);
-        InitToolConnections(initData.scene, tool);
+        InitPointToolConnections(initData.scene, tool);
         if (arc->getType() == GOType::Arc)
         {
             QObject::connect(initData.scene,

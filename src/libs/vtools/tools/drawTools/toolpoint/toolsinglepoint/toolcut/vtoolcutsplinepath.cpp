@@ -248,7 +248,7 @@ auto VToolCutSplinePath::Create(VToolCutInitData &initData) -> VToolCutSplinePat
         VAbstractTool::AddRecord(initData.id, Tool::CutSplinePath, initData.doc);
         tool = new VToolCutSplinePath(initData);
         initData.scene->addItem(tool);
-        InitToolConnections(initData.scene, tool);
+        InitPointToolConnections(initData.scene, tool);
         QObject::connect(initData.scene,
                          &VMainGraphicsScene::ShowSplinePathSegmentLabel,
                          tool,

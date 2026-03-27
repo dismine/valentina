@@ -166,7 +166,7 @@ auto VToolPointFromArcAndTangent::Create(VToolPointFromArcAndTangentInitData ini
         VAbstractTool::AddRecord(initData.id, Tool::PointFromArcAndTangent, initData.doc);
         auto *point = new VToolPointFromArcAndTangent(initData);
         initData.scene->addItem(point);
-        InitToolConnections(initData.scene, point);
+        InitPointToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
         return point;
     }

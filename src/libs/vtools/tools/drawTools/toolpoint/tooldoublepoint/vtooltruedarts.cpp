@@ -215,7 +215,7 @@ auto VToolTrueDarts::Create(VToolTrueDartsInitData initData) -> VToolTrueDarts *
         VAbstractTool::AddRecord(initData.id, Tool::TrueDarts, initData.doc);
         auto *points = new VToolTrueDarts(initData);
         initData.scene->addItem(points);
-        InitToolConnections(initData.scene, points);
+        InitPointToolConnections(initData.scene, points);
         VAbstractPattern::AddTool(initData.id, points);
         return points;
     }

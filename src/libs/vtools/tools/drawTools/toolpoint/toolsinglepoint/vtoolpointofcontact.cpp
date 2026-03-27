@@ -261,7 +261,7 @@ auto VToolPointOfContact::Create(VToolPointOfContactInitData &initData) -> VTool
         VAbstractTool::AddRecord(initData.id, Tool::PointOfContact, initData.doc);
         auto *point = new VToolPointOfContact(initData);
         initData.scene->addItem(point);
-        InitToolConnections(initData.scene, point);
+        InitPointToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
         return point;
     }
