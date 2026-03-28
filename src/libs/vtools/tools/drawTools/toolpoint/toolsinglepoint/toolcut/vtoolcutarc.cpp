@@ -212,12 +212,18 @@ auto VToolCutArc::Create(VToolCutInitData &initData) -> VToolCutArc *
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(p);
+
+        a1->setIdObject(initData.id);
+        a2->setIdObject(initData.id);
         initData.segment1Id = initData.data->AddGObject(a1);
         initData.segment2Id = initData.data->AddGObject(a2);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, p);
+
+        a1->setIdObject(initData.id);
+        a2->setIdObject(initData.id);
         initData.data->UpdateGObject(initData.segment1Id, a1);
         initData.data->UpdateGObject(initData.segment2Id, a2);
     }

@@ -203,12 +203,18 @@ auto VToolCutSpline::Create(VToolCutInitData &initData) -> VToolCutSpline *
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(p);
+
+        spline1->setIdObject(initData.id);
+        spline2->setIdObject(initData.id);
         initData.segment1Id = initData.data->AddGObject(spline1);
         initData.segment2Id = initData.data->AddGObject(spline2);
     }
     else
     {
         initData.data->UpdateGObject(initData.id, p);
+
+        spline1->setIdObject(initData.id);
+        spline2->setIdObject(initData.id);
         initData.data->UpdateGObject(initData.segment1Id, spline1);
         initData.data->UpdateGObject(initData.segment2Id, spline2);
     }

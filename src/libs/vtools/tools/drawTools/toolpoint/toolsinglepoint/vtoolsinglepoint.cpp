@@ -487,6 +487,9 @@ void VToolSinglePoint::InitSplinePath(SegmentDetails &details)
     splP1->SetAliasSuffix(details.alias1);
     splP2->SetAliasSuffix(details.alias2);
 
+    splP1->setIdObject(details.id);
+    splP2->setIdObject(details.id);
+
     if (details.typeCreation == Source::FromGui)
     {
         details.segment1Id = details.data->AddGObject(splP1);
@@ -545,6 +548,9 @@ void VToolSinglePoint::InitSpline(SegmentDetails &details)
 
     spline1->SetAliasSuffix(details.alias1);
     spline2->SetAliasSuffix(details.alias2);
+
+    spline1->setIdObject(details.id);
+    spline2->setIdObject(details.id);
 
     if (details.typeCreation == Source::FromGui)
     {
@@ -647,6 +653,12 @@ void VToolSinglePoint::InitArc(SegmentDetails &details)
         arc->CutArc(0, &arc1, &arc2, details.p.name());
     }
 
+    if (details.typeCreation != Source::FromGui)
+    {
+        arc1.setId(details.segment1Id);
+        arc2.setId(details.segment2Id);
+    }
+
     QSharedPointer<Item> a1;
     QSharedPointer<Item> a2;
 
@@ -673,6 +685,9 @@ void VToolSinglePoint::InitArc(SegmentDetails &details)
 
     a1->SetAliasSuffix(details.alias1);
     a2->SetAliasSuffix(details.alias2);
+
+    a1->setIdObject(details.id);
+    a2->setIdObject(details.id);
 
     if (details.typeCreation == Source::FromGui)
     {
