@@ -86,7 +86,7 @@ void VisToolMove::RefreshGeometry()
         return;
     }
 
-    if (!ObjectSelected())
+    if (GetMode() == Mode::Creation && !ObjectSelected())
     {
         return;
     }

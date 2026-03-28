@@ -75,7 +75,7 @@ void VisToolRotation::RefreshGeometry()
     int iCurve = -1;
 
     if (const QVector<QGraphicsItem *> originObjects = CreateOriginObjects(iPoint, iCurve);
-        originObjects.isEmpty() || !ObjectSelected())
+        originObjects.isEmpty() || (GetMode() == Mode::Creation && !ObjectSelected()))
     {
         return;
     }
