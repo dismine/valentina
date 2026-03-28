@@ -6386,7 +6386,8 @@ void MainWindow::InitDocksContain()
     m_toolOptions = new VToolOptionsPropertyBrowser(ui->dockWidgetToolOptions);
 
     connect(ui->view, &VMainGraphicsView::itemClicked, m_toolOptions, &VToolOptionsPropertyBrowser::itemClicked);
-    connect(doc, &VPattern::FullUpdateFromFile, m_toolOptions, &VToolOptionsPropertyBrowser::UpdateOptions);
+    connect(doc, &VPattern::FullUpdateFromFile, m_toolOptions, &VToolOptionsPropertyBrowser::UpdateOptions,
+            Qt::QueuedConnection);
 
     qCDebug(vMainWindow, "Initialization groups dock.");
     m_groupsWidget = new VWidgetGroups(doc, this);
