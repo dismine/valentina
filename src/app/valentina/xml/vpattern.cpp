@@ -2627,6 +2627,32 @@ void VPattern::ParseToolPointOfIntersectionArcs(VMainGraphicsScene *scene, const
         initData.firstArcId = GetParametrUInt(domElement, AttrFirstArc, NULL_ID_STR);
         initData.secondArcId = GetParametrUInt(domElement, AttrSecondArc, NULL_ID_STR);
         initData.pType = static_cast<CrossCirclesPoint>(GetParametrUInt(domElement, AttrCrossPoint, QChar('1')));
+        initData.arc1Name1 = GetParametrEmptyString(domElement, AttrCurve1Name1);
+        initData.arc1Name2 = GetParametrEmptyString(domElement, AttrCurve1Name2);
+        initData.arc2Name1 = GetParametrEmptyString(domElement, AttrCurve2Name1);
+        initData.arc2Name2 = GetParametrEmptyString(domElement, AttrCurve2Name2);
+        initData.arc1AliasSuffix1 = GetParametrEmptyString(domElement, AttrCurve1Alias1);
+        initData.arc1AliasSuffix2 = GetParametrEmptyString(domElement, AttrCurve1Alias2);
+        initData.arc2AliasSuffix1 = GetParametrEmptyString(domElement, AttrCurve2Alias1);
+        initData.arc2AliasSuffix2 = GetParametrEmptyString(domElement, AttrCurve2Alias2);
+        initData.arc1Segment1Id = GetParametrId(domElement, AttrSegment1Id);
+        initData.arc1Segment2Id = GetParametrId(domElement, AttrSegment2Id);
+        initData.arc2Segment1Id = GetParametrId(domElement, AttrSegment3Id);
+        initData.arc2Segment2Id = GetParametrId(domElement, AttrSegment4Id);
+
+        const VAbstractValApplication *app = VAbstractValApplication::VApp();
+
+        const QString labelMXStr = QString::number(app->fromPixel(labelMX));
+        const QString labelMYStr = QString::number(app->fromPixel(labelMY));
+
+        initData.arc1Segment1Mx = app->toPixel(GetParametrDouble(domElement, AttrSegment1Mx, labelMXStr));
+        initData.arc1Segment1My = app->toPixel(GetParametrDouble(domElement, AttrSegment1My, labelMYStr));
+        initData.arc1Segment2Mx = app->toPixel(GetParametrDouble(domElement, AttrSegment2Mx, labelMXStr));
+        initData.arc1Segment2My = app->toPixel(GetParametrDouble(domElement, AttrSegment2My, labelMYStr));
+        initData.arc2Segment1Mx = app->toPixel(GetParametrDouble(domElement, AttrSegment3Mx, labelMXStr));
+        initData.arc2Segment1My = app->toPixel(GetParametrDouble(domElement, AttrSegment3My, labelMYStr));
+        initData.arc2Segment2Mx = app->toPixel(GetParametrDouble(domElement, AttrSegment4Mx, labelMXStr));
+        initData.arc2Segment2My = app->toPixel(GetParametrDouble(domElement, AttrSegment4My, labelMYStr));
 
         VToolPointOfIntersectionArcs::Create(initData);
     }
