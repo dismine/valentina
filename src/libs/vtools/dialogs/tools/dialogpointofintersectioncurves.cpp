@@ -73,11 +73,6 @@ DialogPointOfIntersectionCurves::DialogPointOfIntersectionCurves(const VContaine
     FillComboBoxVCrossCurvesPoint(ui->comboBoxVCorrection);
     FillComboBoxHCrossCurvesPoint(ui->comboBoxHCorrection);
 
-    ui->lineEditCurve1Name1->setText(GenerateDefCurve1LeftSubName());
-    ui->lineEditCurve1Name2->setText(GenerateDefCurve1RightSubName());
-    ui->lineEditCurve2Name1->setText(GenerateDefCurve2LeftSubName());
-    ui->lineEditCurve2Name2->setText(GenerateDefCurve2RightSubName());
-
     connect(ui->lineEditNamePoint,
             &QLineEdit::textChanged,
             this,
@@ -217,6 +212,11 @@ void DialogPointOfIntersectionCurves::ChosenObject(quint32 id, const SceneObject
             case 1:
                 if (getCurrentObjectId(ui->comboBoxCurve1) != id && SetObject(id, ui->comboBoxCurve2, QString()))
                 {
+                    ui->lineEditCurve1Name1->setText(GenerateDefCurve1LeftSubName());
+                    ui->lineEditCurve1Name2->setText(GenerateDefCurve1RightSubName());
+                    ui->lineEditCurve2Name1->setText(GenerateDefCurve2LeftSubName());
+                    ui->lineEditCurve2Name2->setText(GenerateDefCurve2RightSubName());
+
                     number = 0;
                     point->SetCurve2Id(id);
                     point->RefreshGeometry();
