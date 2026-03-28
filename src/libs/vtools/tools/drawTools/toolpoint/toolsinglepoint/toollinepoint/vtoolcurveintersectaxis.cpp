@@ -421,9 +421,6 @@ auto VToolCurveIntersectAxis::Create(VToolCurveIntersectAxisInitData &initData) 
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(p);
-
-        initData.data->getNextId();
-        initData.data->getNextId();
     }
     else
     {
