@@ -199,6 +199,12 @@ auto VToolCutArc::Create(VToolCutInitData &initData) -> VToolCutArc *
     a1->SetAliasSuffix(initData.aliasSuffix1);
     a2->SetAliasSuffix(initData.aliasSuffix2);
 
+    if (initData.typeCreation != Source::FromGui)
+    {
+        a1->setId(initData.segment1Id);
+        a2->setId(initData.segment2Id);
+    }
+
     // This fix can be removed since name1 and name2 no longer should be empty
     Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
     FixSubCurveNames(initData, arc, a1, a2);
