@@ -53,7 +53,6 @@
 #include "../vpatterndb/variables/vcurvelength.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vtranslatevars.h"
-#include "../vtools/undocommands/renameobject.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "vtoolcut.h"
 
