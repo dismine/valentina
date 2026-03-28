@@ -606,10 +606,11 @@ auto VToolPointOfIntersectionCurves::Create(VToolPointOfIntersectionCurvesInitDa
     auto curve2 = initData.data->GeometricObject<VAbstractCurve>(initData.secondCurveId);
 
     QPointF fPoint;
-    const bool success = VToolPointOfIntersectionCurves::FindPoint(curve1->GetPoints(), curve2->GetPoints(),
-                                                                   initData.vCrossPoint, initData.hCrossPoint, &fPoint);
-
-    if (not success)
+    if (!VToolPointOfIntersectionCurves::FindPoint(curve1->GetPoints(),
+                                                   curve2->GetPoints(),
+                                                   initData.vCrossPoint,
+                                                   initData.hCrossPoint,
+                                                   &fPoint))
     {
         const QString errorMsg = tr("Error calculating point '%1'. Curves '%2' and '%3' have no point of intersection")
                                      .arg(initData.name, curve1->name(), curve2->name());
@@ -617,9 +618,6 @@ auto VToolPointOfIntersectionCurves::Create(VToolPointOfIntersectionCurvesInitDa
             ? throw VExceptionObjectError(errorMsg)
             : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
-
-    const qreal segLength1 = curve1->GetLengthByPoint(fPoint);
-    const qreal segLength2 = curve2->GetLengthByPoint(fPoint);
 
     auto *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
@@ -640,7 +638,7 @@ auto VToolPointOfIntersectionCurves::Create(VToolPointOfIntersectionCurvesInitDa
 
     SegmentDetails curve1Details{.typeCreation = initData.typeCreation,
                                  .curveType = curve1->getType(),
-                                 .segLength = segLength1,
+                                 .segLength = curve1->GetLengthByPoint(fPoint),
                                  .p = *p,
                                  .curveId = initData.firstCurveId,
                                  .data = initData.data,
@@ -661,7 +659,7 @@ auto VToolPointOfIntersectionCurves::Create(VToolPointOfIntersectionCurvesInitDa
 
     SegmentDetails curve2Details{.typeCreation = initData.typeCreation,
                                  .curveType = curve2->getType(),
-                                 .segLength = segLength2,
+                                 .segLength = curve2->GetLengthByPoint(fPoint),
                                  .p = *p,
                                  .curveId = initData.secondCurveId,
                                  .data = initData.data,
