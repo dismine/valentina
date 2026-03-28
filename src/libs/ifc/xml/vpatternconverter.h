@@ -162,6 +162,10 @@ private:
     void ConvertMirrorLineToV0_9_7() const;
 
     void RemoveInUseAttributeV1_1_0() const;
+
+    auto MaxIdV1_2_0() const -> std::pair<quint32, QSet<quint32>>;
+    void AddSegmentIdsV1_2_0(quint32 maxId, const QSet<quint32> &arcs) const;
+    void ExplicitSegmentIdsV1_2_0() const;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

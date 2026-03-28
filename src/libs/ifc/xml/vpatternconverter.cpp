@@ -87,6 +87,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, strC1Radius, ("c1Radius"_L1))          
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strC2Radius, ("c2Radius"_L1))                       // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCRadius, ("cRadius"_L1))                         // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strArc, ("arc"_L1))                                 // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strElArc, ("elArc"_L1))                             // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAngle1, ("angle1"_L1))                           // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAngle2, ("angle2"_L1))                           // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strRadius, ("radius"_L1))                           // NOLINT
@@ -183,6 +184,15 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, strEnabled, ("enabled"_L1))            
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strP1, ("p1"_L1))                             // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strP2, ("p2"_L1))                             // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strInUse, ("inUse"_L1))                       // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCalculation, ("calculation"_L1))           // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strOperation, ("operation"_L1))               // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strDestination, ("destination"_L1))           // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strItem, ("item"_L1))                         // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strDetails, ("details"_L1))                   // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSegment1Id, ("segment1Id"_L1))             // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSegment2Id, ("segment2Id"_L1))             // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSegment3Id, ("segment3Id"_L1))             // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSegment4Id, ("segment4Id"_L1))             // NOLINT
 
 QT_WARNING_POP
 } // anonymous namespace
@@ -654,6 +664,8 @@ void VPatternConverter::ToV1_2_0()
 {
     // TODO. Delete if minimal supported version is 1.2.0
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(1, 2, 0), "Time to refactor the code.");
+
+    ExplicitSegmentIdsV1_2_0();
 
     SetVersion(QStringLiteral("1.2.0"));
     Save();
@@ -2336,6 +2348,248 @@ void VPatternConverter::RemoveInUseAttributeV1_1_0() const
             domNode = domNode.nextSibling();
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPatternConverter::MaxIdV1_2_0() const -> std::pair<quint32, QSet<quint32>>
+{
+    // TODO. Delete if minimal supported version is 1.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(1, 2, 0), "Time to refactor the code.");
+
+    quint32 maxId = 0;
+    QSet<quint32> arcs;
+
+    auto ToId = [](const QString &val, bool *ok = nullptr) -> quint32 { return val.toUInt(ok); };
+
+    auto UpdateMax = [&maxId, &ToId](const QString &val, quint32 extra = 0)
+    {
+        bool ok = false;
+        const quint32 id = ToId(val, &ok);
+        if (ok && (id + extra) > maxId)
+        {
+            maxId = id + extra;
+        }
+    };
+
+    auto IterateSection = [this, &UpdateMax](const QString &tag)
+    {
+        const QDomNodeList sections = elementsByTagName(tag);
+        for (int s = 0; s < sections.size(); ++s)
+        {
+            const QDomNodeList children = sections.at(s).childNodes();
+            for (int i = 0; i < children.size(); ++i)
+            {
+                if (const QDomElement el = children.at(i).toElement(); !el.isNull())
+                {
+                    UpdateMax(el.attribute(*strId));
+                }
+            }
+        }
+    };
+
+    // --- <calculation> ---
+    const QDomNodeList calcSections = elementsByTagName(*strCalculation);
+
+    for (int s = 0; s < calcSections.size(); ++s)
+    {
+        const QDomNodeList children = calcSections.at(s).childNodes();
+        for (int i = 0; i < children.size(); ++i)
+        {
+            const QDomElement el = children.at(i).toElement();
+            if (el.isNull())
+            {
+                continue;
+            }
+
+            const QString idVal = el.attribute(*strId);
+            UpdateMax(idVal);
+
+            // Track arc/elliptic arc ids for curve-intersection checks below
+            if (el.tagName() == *strArc || el.tagName() == *strElArc)
+            {
+                bool ok = false;
+                const quint32 id = ToId(idVal, &ok);
+                if (ok)
+                {
+                    arcs.insert(id);
+                }
+            }
+
+            // Certain types implicitly consume the next id as well
+            if (const QString type = el.attribute(*strType); type == *strCutArc)
+            {
+                UpdateMax(idVal, 2);
+            }
+            else if (type == *strPointOfIntersectionArcs)
+            {
+                UpdateMax(idVal, 4);
+            }
+            else if (type == *strCurveIntersectAxis)
+            {
+                if (bool ok = false; arcs.contains(ToId(el.attribute(*strCurve), &ok)) && ok)
+                {
+                    UpdateMax(idVal, 2);
+                }
+            }
+            else if (type == *strPointOfIntersectionCurves)
+            {
+                if (bool ok = false; arcs.contains(ToId(el.attribute(*strCurve1), &ok)) && ok)
+                {
+                    UpdateMax(idVal, 2);
+                }
+
+                if (bool ok = false; arcs.contains(ToId(el.attribute(*strCurve2), &ok)) && ok)
+                {
+                    UpdateMax(idVal, 2);
+                }
+            }
+
+            // <operation> additionally tracks <destination><item idObject="...">
+            if (el.tagName() == *strOperation)
+            {
+                const QDomNodeList destSections = el.elementsByTagName(*strDestination);
+
+                for (int d = 0; d < destSections.size(); ++d)
+                {
+                    const QDomElement destSecEl = destSections.at(d).toElement();
+                    if (destSecEl.isNull())
+                    {
+                        continue;
+                    }
+
+                    const QDomNodeList items = destSecEl.elementsByTagName(*strItem);
+
+                    for (int j = 0; j < items.size(); ++j)
+                    {
+                        UpdateMax(items.at(j).toElement().attribute(*strIdObject));
+                    }
+                }
+            }
+        }
+    }
+
+    // --- <modeling> and <details> ---
+    IterateSection(*strModeling);
+    IterateSection(*strDetails);
+
+    return {maxId, arcs};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::AddSegmentIdsV1_2_0(quint32 maxId, const QSet<quint32> &arcs) const
+{
+    // TODO. Delete if minimal supported version is 1.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(1, 2, 0), "Time to refactor the code.");
+
+    auto SetAttrId = [this](QDomElement &el, const QString &attr, quint32 val) -> void
+    { SetAttribute(el, attr, QString::number(val)); };
+
+    auto AllocFromMax = [&maxId, &SetAttrId](QDomElement &el, const QString &attr1, const QString &attr2) -> void
+    {
+        SetAttrId(el, attr1, maxId + 1);
+        SetAttrId(el, attr2, maxId + 2);
+        maxId += 2;
+    };
+
+    const QDomNodeList calcSections = elementsByTagName(*strCalculation);
+
+    for (int s = 0; s < calcSections.size(); ++s)
+    {
+        const QDomNodeList children = calcSections.at(s).childNodes();
+        for (int i = 0; i < children.size(); ++i)
+        {
+            QDomElement el = children.at(i).toElement();
+            if (el.isNull() || el.tagName() != *strPoint)
+            {
+                continue;
+            }
+
+            bool ok = false;
+            const quint32 id = el.attribute(*strId).toUInt(&ok);
+            if (!ok)
+            {
+                continue;
+            }
+
+            const QString type = el.attribute(*strType);
+
+            if (type == *strCutArc)
+            {
+                SetAttrId(el, *strSegment1Id, id + 1);
+                SetAttrId(el, *strSegment2Id, id + 2);
+            }
+            else if (type == *strCutSpline || type == *strCutSplinePath)
+            {
+                AllocFromMax(el, *strSegment1Id, *strSegment2Id);
+            }
+            else if (type == *strCurveIntersectAxis)
+            {
+                bool curveOk = false;
+                const quint32 curveId = el.attribute(*strCurve).toUInt(&curveOk);
+                if (curveOk && arcs.contains(curveId))
+                {
+                    SetAttrId(el, *strSegment1Id, id + 1);
+                    SetAttrId(el, *strSegment2Id, id + 2);
+                }
+                else
+                {
+                    AllocFromMax(el, *strSegment1Id, *strSegment2Id);
+                }
+            }
+            else if (type == *strPointOfIntersectionArcs)
+            {
+                SetAttrId(el, *strSegment1Id, id + 1);
+                SetAttrId(el, *strSegment2Id, id + 2);
+                SetAttrId(el, *strSegment3Id, id + 3);
+                SetAttrId(el, *strSegment4Id, id + 4);
+            }
+            else if (type == *strPointOfIntersectionCurves)
+            {
+                bool curve1Ok = false;
+                const quint32 curve1Id = el.attribute(*strCurve1).toUInt(&curve1Ok);
+                const bool curve1IsArc = curve1Ok && arcs.contains(curve1Id);
+
+                bool curve2Ok = false;
+                const quint32 curve2Id = el.attribute(*strCurve2).toUInt(&curve2Ok);
+                const bool curve2IsArc = curve2Ok && arcs.contains(curve2Id);
+
+                if (curve1IsArc && curve2IsArc)
+                {
+                    SetAttrId(el, *strSegment1Id, id + 1);
+                    SetAttrId(el, *strSegment2Id, id + 2);
+                    SetAttrId(el, *strSegment3Id, id + 3);
+                    SetAttrId(el, *strSegment4Id, id + 4);
+                }
+                else if (curve1IsArc) // curve2 is not an arc
+                {
+                    SetAttrId(el, *strSegment1Id, id + 1);
+                    SetAttrId(el, *strSegment2Id, id + 2);
+                    AllocFromMax(el, *strSegment3Id, *strSegment4Id);
+                }
+                else if (curve2IsArc) // curve1 is not an arc
+                {
+                    AllocFromMax(el, *strSegment1Id, *strSegment2Id);
+                    SetAttrId(el, *strSegment3Id, id + 1);
+                    SetAttrId(el, *strSegment4Id, id + 2);
+                }
+                else // neither is an arc
+                {
+                    AllocFromMax(el, *strSegment1Id, *strSegment2Id);
+                    AllocFromMax(el, *strSegment3Id, *strSegment4Id);
+                }
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ExplicitSegmentIdsV1_2_0() const
+{
+    // TODO. Delete if minimal supported version is 1.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(1, 2, 0), "Time to refactor the code.");
+
+    const auto [maxId, arcs] = MaxIdV1_2_0();
+    AddSegmentIdsV1_2_0(maxId, arcs);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
