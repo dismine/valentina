@@ -87,8 +87,7 @@ DialogCurveIntersectAxis::DialogCurveIntersectAxis(const VContainer *data, VAbst
 
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
-    ui->lineEditNamePoint->setText(
-        VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
+    SetPointName(VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     formulaBaseHeightAngle = ui->plainTextEditFormula->height();
     ui->plainTextEditFormula->installEventFilter(this);
 

@@ -78,8 +78,7 @@ DialogCutArc::DialogCutArc(const VContainer *data, VAbstractPattern *doc, quint3
 
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
-    ui->lineEditNamePoint->setText(
-        VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
+    SetPointName(VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     m_formulaBaseHeight = ui->plainTextEditFormula->height();
     ui->plainTextEditFormula->installEventFilter(this);
 

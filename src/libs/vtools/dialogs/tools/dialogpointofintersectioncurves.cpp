@@ -64,8 +64,7 @@ DialogPointOfIntersectionCurves::DialogPointOfIntersectionCurves(const VContaine
 
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
-    ui->lineEditNamePoint->setText(
-        VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
+    SetPointName(VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
 
     InitOkCancelApply(ui);
 
