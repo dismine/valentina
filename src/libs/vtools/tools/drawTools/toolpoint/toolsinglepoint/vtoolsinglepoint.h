@@ -140,9 +140,82 @@ protected:
     template<typename T>
     static void InitSegmentConnections(VMainGraphicsScene *scene, T *tool, GOType type);
 
+    template<typename T>
+    static void InitUniqueSegmentConnections(VMainGraphicsScene *scene, T *tool, GOType type);
+
 private:
     Q_DISABLE_COPY_MOVE(VToolSinglePoint) // NOLINT
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+template<typename T>
+inline void VToolSinglePoint::InitUniqueSegmentConnections(VMainGraphicsScene *scene, T *tool, GOType type)
+{
+    SCASSERT(scene != nullptr)
+    SCASSERT(tool != nullptr)
+
+    // This check helps to find missed objects in the switch
+    Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects were handled.");
+
+    switch (type)
+    {
+        case GOType::Arc:
+            QObject::connect(scene,
+                             &VMainGraphicsScene::ShowArcSegmentLabel,
+                             tool,
+                             &T::SetArcSegmentLabelVisible,
+                             Qt::UniqueConnection);
+            QObject::connect(scene,
+                             &VMainGraphicsScene::EnableArcItemHover,
+                             tool,
+                             &T::AllowArcSegmentHover,
+                             Qt::UniqueConnection);
+            break;
+        case GOType::EllipticalArc:
+            QObject::connect(scene,
+                             &VMainGraphicsScene::ShowElArcSegmentLabel,
+                             tool,
+                             &T::SetElArcSegmentLabelVisible,
+                             Qt::UniqueConnection);
+            QObject::connect(scene,
+                             &VMainGraphicsScene::EnableElArcItemHover,
+                             tool,
+                             &T::AllowElArcSegmentHover,
+                             Qt::UniqueConnection);
+            break;
+        case GOType::Spline:
+        case GOType::CubicBezier:
+            QObject::connect(scene,
+                             &VMainGraphicsScene::ShowSplineSegmentLabel,
+                             tool,
+                             &T::SetSplineSegmentLabelVisible,
+                             Qt::UniqueConnection);
+            QObject::connect(scene,
+                             &VMainGraphicsScene::EnableSplineItemHover,
+                             tool,
+                             &T::AllowSplineSegmentHover,
+                             Qt::UniqueConnection);
+            break;
+        case GOType::SplinePath:
+        case GOType::CubicBezierPath:
+            QObject::connect(scene,
+                             &VMainGraphicsScene::ShowSplinePathSegmentLabel,
+                             tool,
+                             &T::SetSplinePathSegmentLabelVisible,
+                             Qt::UniqueConnection);
+            QObject::connect(scene,
+                             &VMainGraphicsScene::EnableSplinePathItemHover,
+                             tool,
+                             &T::AllowSplinePathSegmentHover,
+                             Qt::UniqueConnection);
+            break;
+        case GOType::Point:
+        case GOType::PlaceLabel:
+        case GOType::Unknown:
+        default:
+            break;
+    }
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 template<typename T>
