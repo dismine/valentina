@@ -95,6 +95,7 @@ signals:
     void PointChoosed();
     void PointSelected(bool selected);
     void UpdateLine();
+    void HoverCurve(bool hover);
 
 protected:
     auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;

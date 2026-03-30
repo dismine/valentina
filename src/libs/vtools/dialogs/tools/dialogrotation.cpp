@@ -246,8 +246,7 @@ void DialogRotation::ShowDialog(bool click)
 
         auto *operation = qobject_cast<VisToolRotation *>(vis);
         SCASSERT(operation != nullptr)
-        operation->SetObjects(SourceToObjects(m_sourceObjects));
-        operation->VisualMode(NULL_ID);
+        operation->StartAction();
 
         scene->ToggleArcSelection(false);
         scene->ToggleElArcSelection(false);
@@ -340,7 +339,33 @@ void DialogRotation::CheckDependencyTreeComplete()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogRotation::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (not stage1 && not prepare && type == SceneObject::Point) // After first choose we ignore all objects
+    if (stage1)
+    {
+        auto obj = std::find_if(m_sourceObjects.begin(),
+                                m_sourceObjects.end(),
+                                [id](const SourceItem &sItem) { return sItem.id == id; });
+        if (obj == m_sourceObjects.end())
+        {
+            m_sourceObjects.push_back(SourceItem{id});
+        }
+        else
+        {
+            m_sourceObjects.erase(obj);
+        }
+
+        auto *operation = qobject_cast<VisToolRotation *>(vis);
+        SCASSERT(operation != nullptr)
+        operation->SetObjects(SourceToObjects(m_sourceObjects));
+        if (!VAbstractValApplication::VApp()->getCurrentScene()->items().contains(operation))
+        {
+            operation->VisualMode(NULL_ID);
+        }
+        else
+        {
+            operation->RefreshGeometry();
+        }
+    }
+    else if (not prepare && type == SceneObject::Point) // After first choose we ignore all objects
     {
         auto *operation = qobject_cast<VisToolRotation *>(vis);
         SCASSERT(operation != nullptr)
@@ -375,32 +400,6 @@ void DialogRotation::ChosenObject(quint32 id, const SceneObject &type)
             operation->RefreshGeometry();
 
             prepare = true;
-        }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogRotation::SelectedObject(bool selected, quint32 object, quint32 tool)
-{
-    Q_UNUSED(tool)
-    if (stage1)
-    {
-        auto obj = std::find_if(m_sourceObjects.begin(),
-                                m_sourceObjects.end(),
-                                [object](const SourceItem &sItem) { return sItem.id == object; });
-        if (selected)
-        {
-            if (obj == m_sourceObjects.end())
-            {
-                m_sourceObjects.append({.id = object});
-            }
-        }
-        else
-        {
-            if (obj != m_sourceObjects.end())
-            {
-                m_sourceObjects.erase(obj);
-            }
         }
     }
 }

@@ -31,9 +31,9 @@
 
 #include <QtGlobal>
 
-#include "visoperation.h"
+#include "visflippingoperation.h"
 
-class VisToolFlippingByLine : public VisOperation
+class VisToolFlippingByLine : public VisFlippingOperation
 {
     Q_OBJECT // NOLINT
 public:

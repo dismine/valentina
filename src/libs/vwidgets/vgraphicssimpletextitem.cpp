@@ -225,6 +225,8 @@ void VGraphicsSimpleTextItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
     }
 
     QGraphicsSimpleTextItem::hoverEnterEvent(event);
+
+    emit HoverCurve(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -237,6 +239,8 @@ void VGraphicsSimpleTextItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
     m_hoverFlag = false;
     RefreshColor();
     QGraphicsSimpleTextItem::hoverLeaveEvent(event);
+
+    emit HoverCurve(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -384,16 +388,4 @@ void VGraphicsSimpleTextItem::Init()
             this,
             &VGraphicsSimpleTextItem::UpdateFontSize);
     connect(VTheme::Instance(), &VTheme::ThemeSettingsChanged, this, [this]() -> void { RefreshColor(); });
-    connect(
-        this,
-        &VGraphicsSimpleTextItem::UpdateLine,
-        this,
-        [this]() -> void
-        {
-            if (auto *parent = dynamic_cast<VScenePoint *>(parentItem()))
-            {
-                parent->RefreshLine();
-            }
-        },
-        Qt::QueuedConnection);
 }

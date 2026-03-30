@@ -67,14 +67,13 @@ public:
     auto GetLabelTextHoverColorRole() const -> VColorRole;
     void SetLabelTextHoverColorRole(VColorRole role);
 
-public slots:
     void RefreshLine();
 
 protected:
     /** @brief namePoint point label. */
     VGraphicsSimpleTextItem *m_namePoint; // NOLINT(cppcoreguidelines-non-private-member-variables-in-classes)
 
-    /** @brief lineName line what we see if label moved too away from point. */
+    /** @brief lineName line what we see if label moved too far away from point. */
     VScaledLine *m_lineName; // NOLINT(cppcoreguidelines-non-private-member-variables-in-classes)
 
     bool m_onlyPoint{false}; // NOLINT(cppcoreguidelines-non-private-member-variables-in-classes)

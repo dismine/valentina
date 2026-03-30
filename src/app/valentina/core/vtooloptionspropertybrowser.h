@@ -146,6 +146,30 @@ private:
     template<class Tool>
     void SetCurve2Alias2(VPE::VProperty *property);
 
+    template<class Tool>
+    void SetArc1Name1(VPE::VProperty *property);
+
+    template<class Tool>
+    void SetArc1Name2(VPE::VProperty *property);
+
+    template<class Tool>
+    void SetArc2Name1(VPE::VProperty *property);
+
+    template<class Tool>
+    void SetArc2Name2(VPE::VProperty *property);
+
+    template<class Tool>
+    void SetArc1Alias1(VPE::VProperty *property);
+
+    template<class Tool>
+    void SetArc1Alias2(VPE::VProperty *property);
+
+    template<class Tool>
+    void SetArc2Alias1(VPE::VProperty *property);
+
+    template<class Tool>
+    void SetArc2Alias2(VPE::VProperty *property);
+
     template <class Tool> void SetLineType(VPE::VProperty *property);
 
     template <class Tool> void SetLineColor(VPE::VProperty *property);
@@ -200,6 +224,30 @@ private:
 
     template<class Tool>
     void AddPropertyCurve2Alias2(Tool *i, const QString &propertyName);
+
+    template<class Tool>
+    void AddPropertyArc1Name1(Tool *i, const QString &propertyName);
+
+    template<class Tool>
+    void AddPropertyArc1Name2(Tool *i, const QString &propertyName);
+
+    template<class Tool>
+    void AddPropertyArc2Name1(Tool *i, const QString &propertyName);
+
+    template<class Tool>
+    void AddPropertyArc2Name2(Tool *i, const QString &propertyName);
+
+    template<class Tool>
+    void AddPropertyArc1Alias1(Tool *i, const QString &propertyName);
+
+    template<class Tool>
+    void AddPropertyArc1Alias2(Tool *i, const QString &propertyName);
+
+    template<class Tool>
+    void AddPropertyArc2Alias1(Tool *i, const QString &propertyName);
+
+    template<class Tool>
+    void AddPropertyArc2Alias2(Tool *i, const QString &propertyName);
 
     template <class Tool> void AddPropertyAlias(Tool *i, const QString &propertyName);
 

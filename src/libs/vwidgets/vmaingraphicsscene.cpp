@@ -466,3 +466,27 @@ void VMainGraphicsScene::ToggleDetailHover(bool enabled)
 {
     emit EnableDetailItemHover(enabled);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::ToggleArcSegmentVisibility(bool visible)
+{
+    emit ShowArcSegmentLabel(visible);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::ToggleElArcSegmentVisibility(bool visible)
+{
+    emit ShowElArcSegmentLabel(visible);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::ToggleSplineSegmentVisibility(bool visible)
+{
+    emit ShowSplineSegmentLabel(visible);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::ToggleSplinePathSegmentVisibility(bool visible)
+{
+    emit ShowSplinePathSegmentLabel(visible);
+}

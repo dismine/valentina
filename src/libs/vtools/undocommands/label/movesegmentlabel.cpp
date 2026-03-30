@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   movelabel.cpp
+ **  @file   movesegmentlabel.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   25 12, 2014
+ **  @date   21 3, 2026
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2026 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -25,8 +25,7 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-
-#include "movelabel.h"
+#include "movesegmentlabel.h"
 
 #include <QDomElement>
 
@@ -52,31 +51,61 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, defPos, ("0.0"_L1)) // NOLINT
 QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
-auto ReadLabelPos(VAbstractPattern *doc, quint32 id) -> QPointF
+struct SegmentAttrs
+{
+    QString mx;
+    QString my;
+};
+
+//---------------------------------------------------------------------------------------------------------------------
+auto AttrsForSegment(SegmentLabel segment) -> SegmentAttrs
+{
+    switch (segment)
+    {
+        case SegmentLabel::Segment1:
+            return {AttrSegment1Mx, AttrSegment1My};
+        case SegmentLabel::Segment2:
+            return {AttrSegment2Mx, AttrSegment2My};
+        case SegmentLabel::Segment3:
+            return {AttrSegment3Mx, AttrSegment3My};
+        case SegmentLabel::Segment4:
+            return {AttrSegment4Mx, AttrSegment4My};
+        default:
+            break;
+    }
+    Q_UNREACHABLE();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto ReadLabelPos(VAbstractPattern *doc, quint32 id, SegmentLabel segment) -> QPointF
 {
     const QDomElement el = doc->FindElementById(id, VAbstractPattern::TagPoint);
     if (!el.isElement())
     {
-        qCWarning(vUndo, "MoveLabel: point id=%u not found; using (0,0) as old position", id);
+        qCWarning(vUndo, "MoveSegmentLabel: point id=%u not found; using (0,0) as old position", id);
         return {};
     }
-    return {VAbstractValApplication::VApp()->toPixel(VDomDocument::GetParametrDouble(el, AttrMx, *defPos)),
-            VAbstractValApplication::VApp()->toPixel(VDomDocument::GetParametrDouble(el, AttrMy, *defPos))};
+
+    const auto [mxAttr, myAttr] = AttrsForSegment(segment);
+    return {VAbstractValApplication::VApp()->toPixel(VDomDocument::GetParametrDouble(el, mxAttr, *defPos)),
+            VAbstractValApplication::VApp()->toPixel(VDomDocument::GetParametrDouble(el, myAttr, *defPos))};
 }
 } // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
-MoveLabel::MoveLabel(VAbstractPattern *doc, const QPointF &newPos, const quint32 &id, QUndoCommand *parent)
-  : MoveAbstractLabel(doc, id, ReadLabelPos(doc, id), newPos, parent)
+MoveSegmentLabel::MoveSegmentLabel(
+    VAbstractPattern *doc, const QPointF &newPos, quint32 id, SegmentLabel segment, QUndoCommand *parent)
+  : MoveAbstractLabel(doc, id, ReadLabelPos(doc, id, segment), newPos, parent),
+    m_segment(segment)
 {
-    setText(tr("move point label"));
+    setText(tr("move segment label"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto MoveLabel::mergeWith(const QUndoCommand *command) -> bool
+auto MoveSegmentLabel::mergeWith(const QUndoCommand *command) -> bool
 {
-    const auto *other = dynamic_cast<const MoveLabel *>(command);
-    if ((other == nullptr) || other->ElementId() != ElementId())
+    const auto *other = dynamic_cast<const MoveSegmentLabel *>(command);
+    if ((other == nullptr) || other->ElementId() != ElementId() || other->m_segment != m_segment)
     {
         return false;
     }
@@ -87,31 +116,33 @@ auto MoveLabel::mergeWith(const QUndoCommand *command) -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto MoveLabel::id() const -> int
+auto MoveSegmentLabel::id() const -> int
 {
-    return static_cast<int>(UndoCommand::MoveLabel);
+    return static_cast<int>(UndoCommand::MoveSegmentLabel);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto MoveLabel::ReadCurrentPos() const -> QPointF
+auto MoveSegmentLabel::ReadCurrentPos() const -> QPointF
 {
-    return ReadLabelPos(Doc(), ElementId());
+    return ReadLabelPos(Doc(), ElementId(), m_segment);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MoveLabel::WritePos(const QPointF &pos)
+void MoveSegmentLabel::WritePos(const QPointF &pos)
 {
     QDomElement el = Doc()->FindElementById(ElementId(), VAbstractPattern::TagPoint);
     if (!el.isElement())
     {
-        qCWarning(vUndo, "MoveLabel: cannot find point id=%u to write position", ElementId());
+        qCWarning(vUndo, "MoveSegmentLabel: cannot find point id=%u to write position", ElementId());
         return;
     }
-    Doc()->SetAttribute(el, AttrMx, QString::number(VAbstractValApplication::VApp()->fromPixel(pos.x())));
-    Doc()->SetAttribute(el, AttrMy, QString::number(VAbstractValApplication::VApp()->fromPixel(pos.y())));
+
+    const auto [mxAttr, myAttr] = AttrsForSegment(m_segment);
+    Doc()->SetAttribute(el, mxAttr, QString::number(VAbstractValApplication::VApp()->fromPixel(pos.x())));
+    Doc()->SetAttribute(el, myAttr, QString::number(VAbstractValApplication::VApp()->fromPixel(pos.y())));
 
     if (auto *tool = qobject_cast<VAbstractTool *>(VAbstractPattern::getTool(ElementId())))
     {
-        tool->ChangeLabelPosition(ElementId(), pos);
+        tool->ChangeSegmentLabelPosition(m_segment, pos);
     }
 }

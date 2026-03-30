@@ -199,6 +199,12 @@ auto VToolCutArc::Create(VToolCutInitData &initData) -> VToolCutArc *
     a1->SetAliasSuffix(initData.aliasSuffix1);
     a2->SetAliasSuffix(initData.aliasSuffix2);
 
+    if (initData.typeCreation != Source::FromGui)
+    {
+        a1->setId(initData.segment1Id);
+        a2->setId(initData.segment2Id);
+    }
+
     // This fix can be removed since name1 and name2 no longer should be empty
     Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
     FixSubCurveNames(initData, arc, a1, a2);
@@ -209,6 +215,25 @@ auto VToolCutArc::Create(VToolCutInitData &initData) -> VToolCutArc *
     auto *p = new VPointF(cutPoint, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
 
+    if (initData.typeCreation == Source::FromGui)
+    {
+        initData.id = initData.data->AddGObject(p);
+
+        a1->setIdObject(initData.id);
+        a2->setIdObject(initData.id);
+        initData.segment1Id = initData.data->AddGObject(a1);
+        initData.segment2Id = initData.data->AddGObject(a2);
+    }
+    else
+    {
+        initData.data->UpdateGObject(initData.id, p);
+
+        a1->setIdObject(initData.id);
+        a2->setIdObject(initData.id);
+        initData.data->UpdateGObject(initData.segment1Id, a1);
+        initData.data->UpdateGObject(initData.segment2Id, a2);
+    }
+
     VPatternGraph *patternGraph = initData.doc->PatternGraph();
     SCASSERT(patternGraph != nullptr)
 
@@ -217,37 +242,14 @@ auto VToolCutArc::Create(VToolCutInitData &initData) -> VToolCutArc *
     const auto varData = initData.data->DataDependencyVariables();
     initData.doc->FindFormulaDependencies(initData.formula, initData.id, varData);
 
-    if (initData.typeCreation == Source::FromGui)
-    {
-        initData.id = initData.data->AddGObject(p);
+    initData.data->AddArc(initData.data->GeometricObject<VAbstractCurve>(initData.segment1Id), initData.segment1Id);
+    initData.data->AddArc(initData.data->GeometricObject<VAbstractCurve>(initData.segment2Id), initData.segment2Id);
 
-        a1->setId(initData.data->getNextId());
-        initData.data->RegisterUniqueName(a1);
-        initData.data->AddArc(a1, NULL_ID, initData.id);
+    patternGraph->AddVertex(initData.segment1Id, VNodeType::OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
+    patternGraph->AddVertex(initData.segment2Id, VNodeType::OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
 
-        a2->setId(initData.data->getNextId());
-        initData.data->RegisterUniqueName(a2);
-        initData.data->AddArc(a2, NULL_ID, initData.id);
-    }
-    else
-    {
-        initData.data->UpdateGObject(initData.id, p);
-
-        a1->setId(initData.id + 1);
-        initData.data->RegisterUniqueName(a1);
-        initData.data->AddArc(a1, NULL_ID, initData.id);
-
-        a2->setId(initData.id + 2);
-        initData.data->RegisterUniqueName(a2);
-        initData.data->AddArc(a2, NULL_ID, initData.id);
-    }
-
-    // TODO: Add segments to graph when we start showing them for users
-    // patternGraph->AddVertex(initData.segment1Id, VNodeType::OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
-    // patternGraph->AddVertex(initData.segment2Id, VNodeType::OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
-
-    // patternGraph->AddEdge(initData.id, initData.segment1Id);
-    // patternGraph->AddEdge(initData.id, initData.segment2Id);
+    patternGraph->AddEdge(initData.id, initData.segment1Id);
+    patternGraph->AddEdge(initData.id, initData.segment2Id);
 
     patternGraph->AddEdge(initData.baseCurveId, initData.id);
 
@@ -262,7 +264,8 @@ auto VToolCutArc::Create(VToolCutInitData &initData) -> VToolCutArc *
         VAbstractTool::AddRecord(initData.id, Tool::CutArc, initData.doc);
         tool = new VToolCutArc(initData);
         initData.scene->addItem(tool);
-        InitToolConnections(initData.scene, tool);
+        InitPointToolConnections(initData.scene, tool);
+        InitSegmentConnections(initData.scene, tool, arc->getType());
         VAbstractPattern::AddTool(initData.id, tool);
     }
     // Very important to delete it. Only this tool need this special variable.
@@ -274,6 +277,7 @@ auto VToolCutArc::Create(VToolCutInitData &initData) -> VToolCutArc *
 void VToolCutArc::ShowVisualization(bool show)
 {
     ShowToolVisualization<VisToolCutArc>(show);
+    VToolCut::ShowVisualization(show);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -43,28 +43,48 @@ class MoveAbstractLabel : public VUndoCommand
     Q_OBJECT // NOLINT
 
 public:
-    MoveAbstractLabel(VAbstractPattern *doc, quint32 pointId, const QPointF &pos, QUndoCommand *parent = nullptr);
+    MoveAbstractLabel(VAbstractPattern *doc,
+                      quint32 pointId,
+                      const QPointF &oldPos,
+                      const QPointF &newPos,
+                      QUndoCommand *parent = nullptr);
     ~MoveAbstractLabel() override = default;
 
-    void undo() override;
-    void redo() override;
+    void undo() final;
+    void redo() final;
 
-    auto GetNewPos() const -> QPointF;
+    auto GetNewPos() const noexcept -> QPointF;
+    auto GetOldPos() const noexcept -> QPointF;
 
 protected:
-    QPointF m_oldPos;
-    QPointF m_newPos;
+    virtual auto ReadCurrentPos() const -> QPointF = 0;
+    virtual void WritePos(const QPointF &pos) = 0;
 
-    virtual void Do(const QPointF &pos) = 0;
+    void SetNewPos(const QPointF &pos);
 
 private:
     Q_DISABLE_COPY_MOVE(MoveAbstractLabel) // NOLINT
+
+    QPointF m_oldPos;
+    QPointF m_newPos;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline auto MoveAbstractLabel::GetNewPos() const -> QPointF
+inline auto MoveAbstractLabel::GetNewPos() const noexcept -> QPointF
 {
     return m_newPos;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto MoveAbstractLabel::GetOldPos() const noexcept -> QPointF
+{
+    return m_oldPos;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void MoveAbstractLabel::SetNewPos(const QPointF &pos)
+{
+    m_newPos = pos;
 }
 
 #endif // MOVEABSTRACTLABEL_H

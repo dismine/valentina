@@ -661,6 +661,12 @@ void MainWindow::InitScenes()
     connect(this, &MainWindow::EnableSplineHover, m_sceneDraw, &VMainGraphicsScene::ToggleSplineHover);
     connect(this, &MainWindow::EnableSplinePathHover, m_sceneDraw, &VMainGraphicsScene::ToggleSplinePathHover);
 
+    connect(this, &MainWindow::ShowArcSegmentLabel, m_sceneDraw, &VMainGraphicsScene::ToggleArcSegmentVisibility);
+    connect(this, &MainWindow::ShowElArcSegmentLabel, m_sceneDraw, &VMainGraphicsScene::ToggleElArcSegmentVisibility);
+    connect(this, &MainWindow::ShowSplineSegmentLabel, m_sceneDraw, &VMainGraphicsScene::ToggleSplineSegmentVisibility);
+    connect(this, &MainWindow::ShowSplinePathSegmentLabel, m_sceneDraw,
+            &VMainGraphicsScene::ToggleSplinePathSegmentVisibility);
+
     connect(m_sceneDraw, &VMainGraphicsScene::mouseMove, this, &MainWindow::MouseMove);
     connect(m_sceneDraw, &VMainGraphicsScene::AddBackgroundImage, this, &MainWindow::PlaceBackgroundImage);
 
@@ -684,7 +690,8 @@ void MainWindow::InitScenes()
 
     connect(ui->view, &VMainGraphicsView::MouseRelease, this, [this]() -> void { EndVisualization(true); });
     connect(ui->view, &VMainGraphicsView::ScaleChanged, this, &MainWindow::ScaleChanged);
-    connect(ui->view, &VMainGraphicsView::ZoomFitBestCurrent, this, [this]() -> void { ZoomFitBestCurrent(); });
+    connect(ui->view, &VMainGraphicsView::ZoomFitBestCurrent, this, &MainWindow::ZoomFitBestCurrent,
+            Qt::QueuedConnection);
     QSizePolicy policy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     policy.setHorizontalStretch(12);
     ui->view->setSizePolicy(policy);
@@ -957,7 +964,10 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
         m_dialogTool = dialogTool;
 
         connect(scene, &VMainGraphicsScene::ChoosedObject, m_dialogTool.data(), &DialogTool::ChosenObject);
-        connect(scene, &VMainGraphicsScene::SelectedObject, m_dialogTool.data(), &DialogTool::SelectedObject);
+        if (t == Tool::Group || t == Tool::InsertNode)
+        {
+            connect(scene, &VMainGraphicsScene::SelectedObject, m_dialogTool.data(), &DialogTool::SelectedObject);
+        }
         connect(m_dialogTool.data(), &DialogTool::DialogClosed, this, closeDialogSlot);
         connect(m_dialogTool.data(), &DialogTool::ToolTip, this, &MainWindow::ShowToolTip);
         connect(m_dialogTool.data(), &DialogTool::destroyed, this, [this] () -> void { ShowToolTip(QString()); });
@@ -1475,9 +1485,8 @@ void MainWindow::ToolGroup(bool checked)
 void MainWindow::ToolRotation(bool checked)
 {
     ToolSelectOperationObjects();
-    const QString tooltip = tr("Select one or more objects, hold <b>%1</b> - for multiple selection, "
-                               "<b>%2</b> - confirm selection")
-                                .arg(VModifierKey::Control(), VModifierKey::EnterKey());
+    const QString tooltip = tr("Select one or more objects, <b>%1</b> - confirm selection")
+                                .arg(VModifierKey::EnterKey());
     SetToolButtonWithApply<DialogRotation>(checked, Tool::Rotation, QStringLiteral("rotation_cursor.png"), tooltip,
                                            &MainWindow::ClosedDrawDialogWithApply<VToolRotation>,
                                            &MainWindow::ApplyDrawDialog<VToolRotation>);
@@ -1488,9 +1497,8 @@ void MainWindow::ToolRotation(bool checked)
 void MainWindow::ToolFlippingByLine(bool checked)
 {
     ToolSelectOperationObjects();
-    const QString tooltip = tr("Select one or more objects, hold <b>%1</b> - for multiple selection, "
-                               "<b>%2</b> - confirm selection")
-                                .arg(VModifierKey::Control(), VModifierKey::EnterKey());
+    const QString tooltip = tr("Select one or more objects, <b>%1</b> - confirm selection")
+                                .arg(VModifierKey::EnterKey());
     SetToolButtonWithApply<DialogFlippingByLine>(
         checked, Tool::FlippingByLine, QStringLiteral("flipping_line_cursor.png"), tooltip,
         &MainWindow::ClosedDrawDialogWithApply<VToolFlippingByLine>, &MainWindow::ApplyDrawDialog<VToolFlippingByLine>);
@@ -1501,9 +1509,8 @@ void MainWindow::ToolFlippingByLine(bool checked)
 void MainWindow::ToolFlippingByAxis(bool checked)
 {
     ToolSelectOperationObjects();
-    const QString tooltip = tr("Select one or more objects, hold <b>%1</b> - for multiple selection, "
-                               "<b>%2</b> - confirm selection")
-                                .arg(VModifierKey::Control(), VModifierKey::EnterKey());
+    const QString tooltip = tr("Select one or more objects, <b>%1</b> - confirm selection")
+                                .arg(VModifierKey::EnterKey());
     SetToolButtonWithApply<DialogFlippingByAxis>(
         checked, Tool::FlippingByAxis, QStringLiteral("flipping_axis_cursor.png"), tooltip,
         &MainWindow::ClosedDrawDialogWithApply<VToolFlippingByAxis>, &MainWindow::ApplyDrawDialog<VToolFlippingByAxis>);
@@ -1514,9 +1521,8 @@ void MainWindow::ToolFlippingByAxis(bool checked)
 void MainWindow::ToolMove(bool checked)
 {
     ToolSelectOperationObjects();
-    const QString tooltip = tr("Select one or more objects, hold <b>%1</b> - for multiple selection, "
-                               "<b>%2</b> - confirm selection")
-                                .arg(VModifierKey::Control(), VModifierKey::EnterKey());
+    const QString tooltip = tr("Select one or more objects, <b>%1</b> - confirm selection")
+                                .arg(VModifierKey::EnterKey());
     SetToolButtonWithApply<DialogMove>(checked, Tool::Move, QStringLiteral("move_cursor.png"), tooltip,
                                        &MainWindow::ClosedDrawDialogWithApply<VToolMove>,
                                        &MainWindow::ApplyDrawDialog<VToolMove>);
@@ -1674,7 +1680,7 @@ void MainWindow::RemoveBackgroundImage(const QUuid &id)
  */
 void MainWindow::ToolCutArc(bool checked)
 {
-    ToolSelectArc();
+    ToolSelectArcCurve();
     SetToolButtonWithApply<DialogCutArc>(checked, Tool::CutArc, QStringLiteral("arc_cut_cursor.png"), tr("Select arc"),
                                          &MainWindow::ClosedDrawDialogWithApply<VToolCutArc>,
                                          &MainWindow::ApplyDrawDialog<VToolCutArc>);
@@ -3163,7 +3169,8 @@ void MainWindow::ToolBarTools()
     connect(ui->actionZoomFitBest, &QAction::triggered, ui->view, &VMainGraphicsView::ZoomFitBest);
 
     m_shortcutActions.insert(VShortcutAction::ZoomFitBestCurrent, ui->actionZoomFitBestCurrent);
-    connect(ui->actionZoomFitBestCurrent, &QAction::triggered, this, &MainWindow::ZoomFitBestCurrent);
+    connect(ui->actionZoomFitBestCurrent, &QAction::triggered, this, &MainWindow::ZoomFitBestCurrent,
+            Qt::QueuedConnection);
 
     connect(ui->actionPreviousPatternPiece, &QAction::triggered, this, &MainWindow::PreviousPatternPiece);
     connect(ui->actionNextPatternPiece, &QAction::triggered, this, &MainWindow::NextPatternPiece);
@@ -3978,6 +3985,11 @@ void MainWindow::ArrowTool(bool checked)
         emit EnableNodePointHover(true);
         emit EnableDetailHover(true);
         emit EnableImageBackgroundHover(true);
+
+        emit ShowArcSegmentLabel(false);
+        emit ShowElArcSegmentLabel(false);
+        emit ShowSplineSegmentLabel(false);
+        emit ShowSplinePathSegmentLabel(false);
 
         ui->view->AllowRubberBand(true);
         ui->view->viewport()->unsetCursor();
@@ -6374,7 +6386,8 @@ void MainWindow::InitDocksContain()
     m_toolOptions = new VToolOptionsPropertyBrowser(ui->dockWidgetToolOptions);
 
     connect(ui->view, &VMainGraphicsView::itemClicked, m_toolOptions, &VToolOptionsPropertyBrowser::itemClicked);
-    connect(doc, &VPattern::FullUpdateFromFile, m_toolOptions, &VToolOptionsPropertyBrowser::UpdateOptions);
+    connect(doc, &VPattern::FullUpdateFromFile, m_toolOptions, &VToolOptionsPropertyBrowser::UpdateOptions,
+            Qt::QueuedConnection);
 
     qCDebug(vMainWindow, "Initialization groups dock.");
     m_groupsWidget = new VWidgetGroups(doc, this);
@@ -7934,6 +7947,8 @@ void MainWindow::ToolSelectSpline()
     emit EnableSplinePathHover(false);
     emit EnableImageBackgroundHover(false);
 
+    emit ShowSplineSegmentLabel(true);
+
     emit ItemsSelection(SelectionType::ByMouseRelease);
 
     ui->view->AllowRubberBand(false);
@@ -7961,6 +7976,8 @@ void MainWindow::ToolSelectSplinePath()
     emit EnableSplineHover(false);
     emit EnableSplinePathHover(true);
     emit EnableImageBackgroundHover(false);
+
+    emit ShowSplinePathSegmentLabel(true);
 
     emit ItemsSelection(SelectionType::ByMouseRelease);
 
@@ -7990,6 +8007,39 @@ void MainWindow::ToolSelectArc()
     emit EnableSplinePathHover(false);
     emit EnableImageBackgroundHover(false);
 
+    emit ShowArcSegmentLabel(true);
+
+    emit ItemsSelection(SelectionType::ByMouseRelease);
+
+    ui->view->AllowRubberBand(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolSelectArcCurve()
+{
+    // Only true for rubber band selection
+    emit EnableLabelSelection(false);
+    emit EnablePointSelection(false);
+    emit EnableLineSelection(false);
+    emit EnableArcSelection(false);
+    emit EnableElArcSelection(false);
+    emit EnableSplineSelection(false);
+    emit EnableSplinePathSelection(false);
+    emit EnableBackgroundImageSelection(false);
+
+    // Hovering
+    emit EnableLabelHover(false);
+    emit EnablePointHover(false);
+    emit EnableLineHover(false);
+    emit EnableArcHover(true);
+    emit EnableElArcHover(true);
+    emit EnableSplineHover(false);
+    emit EnableSplinePathHover(false);
+    emit EnableImageBackgroundHover(false);
+
+    emit ShowArcSegmentLabel(true);
+    emit ShowElArcSegmentLabel(true);
+
     emit ItemsSelection(SelectionType::ByMouseRelease);
 
     ui->view->AllowRubberBand(false);
@@ -8017,6 +8067,8 @@ void MainWindow::ToolSelectPointArc()
     emit EnableSplineHover(false);
     emit EnableSplinePathHover(false);
     emit EnableImageBackgroundHover(false);
+
+    emit ShowArcSegmentLabel(true);
 
     emit ItemsSelection(SelectionType::ByMouseRelease);
 
@@ -8046,6 +8098,11 @@ void MainWindow::ToolSelectCurve()
     emit EnableSplinePathHover(true);
     emit EnableImageBackgroundHover(false);
 
+    emit ShowArcSegmentLabel(true);
+    emit ShowElArcSegmentLabel(true);
+    emit ShowSplineSegmentLabel(true);
+    emit ShowSplinePathSegmentLabel(true);
+
     emit ItemsSelection(SelectionType::ByMouseRelease);
 
     ui->view->AllowRubberBand(false);
@@ -8074,6 +8131,11 @@ void MainWindow::ToolSelectAllDrawObjects()
     emit EnableSplinePathHover(true);
     emit EnableImageBackgroundHover(false);
 
+    emit ShowArcSegmentLabel(true);
+    emit ShowElArcSegmentLabel(true);
+    emit ShowSplineSegmentLabel(true);
+    emit ShowSplinePathSegmentLabel(true);
+
     emit ItemsSelection(SelectionType::ByMouseRelease);
 
     ui->view->AllowRubberBand(false);
@@ -8083,13 +8145,13 @@ void MainWindow::ToolSelectAllDrawObjects()
 void MainWindow::ToolSelectOperationObjects()
 {
     // Only true for rubber band selection
-    emit EnableLabelSelection(true);
-    emit EnablePointSelection(true);
+    emit EnableLabelSelection(false);
+    emit EnablePointSelection(false);
     emit EnableLineSelection(false);
-    emit EnableArcSelection(true);
-    emit EnableElArcSelection(true);
-    emit EnableSplineSelection(true);
-    emit EnableSplinePathSelection(true);
+    emit EnableArcSelection(false);
+    emit EnableElArcSelection(false);
+    emit EnableSplineSelection(false);
+    emit EnableSplinePathSelection(false);
     emit EnableBackgroundImageSelection(false);
 
     // Hovering
@@ -8102,20 +8164,47 @@ void MainWindow::ToolSelectOperationObjects()
     emit EnableSplinePathHover(true);
     emit EnableImageBackgroundHover(false);
 
+    emit ShowArcSegmentLabel(true);
+    emit ShowElArcSegmentLabel(true);
+    emit ShowSplineSegmentLabel(true);
+    emit ShowSplinePathSegmentLabel(true);
+
     emit ItemsSelection(SelectionType::ByMouseRelease);
 
-    ui->view->AllowRubberBand(true);
+    ui->view->AllowRubberBand(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolSelectGroupObjects()
 {
-    ToolSelectOperationObjects();
     // Only true for rubber band selection
+    emit EnableLabelSelection(true);
+    emit EnablePointSelection(true);
     emit EnableLineSelection(true);
+    emit EnableArcSelection(true);
+    emit EnableElArcSelection(true);
+    emit EnableSplineSelection(true);
+    emit EnableSplinePathSelection(true);
+    emit EnableBackgroundImageSelection(false);
 
     // Hovering
+    emit EnableLabelHover(true);
+    emit EnablePointHover(true);
     emit EnableLineHover(true);
+    emit EnableArcHover(true);
+    emit EnableElArcHover(true);
+    emit EnableSplineHover(true);
+    emit EnableSplinePathHover(true);
+    emit EnableImageBackgroundHover(false);
+
+    emit ShowArcSegmentLabel(false);
+    emit ShowElArcSegmentLabel(false);
+    emit ShowSplineSegmentLabel(false);
+    emit ShowSplinePathSegmentLabel(false);
+
+    emit ItemsSelection(SelectionType::ByMouseRelease);
+
+    ui->view->AllowRubberBand(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

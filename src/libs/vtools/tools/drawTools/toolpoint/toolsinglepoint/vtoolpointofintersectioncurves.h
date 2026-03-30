@@ -44,6 +44,7 @@
 #include "vtoolsinglepoint.h"
 
 template <class T> class QSharedPointer;
+class VSegmentLabel;
 
 struct VToolPointOfIntersectionCurvesInitData : VToolSinglePointInitData
 {
@@ -51,8 +52,6 @@ struct VToolPointOfIntersectionCurvesInitData : VToolSinglePointInitData
     quint32 secondCurveId{NULL_ID};
     VCrossCurvesPoint vCrossPoint{VCrossCurvesPoint::HighestPoint};
     HCrossCurvesPoint hCrossPoint{HCrossCurvesPoint::LeftmostPoint};
-    QPair<QString, QString> curve1Segments{};
-    QPair<QString, QString> curve2Segments{};
     QString curve1Name1{};
     QString curve1Name2{};
     QString curve2Name1{};
@@ -61,6 +60,18 @@ struct VToolPointOfIntersectionCurvesInitData : VToolSinglePointInitData
     QString curve1AliasSuffix2{};
     QString curve2AliasSuffix1{};
     QString curve2AliasSuffix2{};
+    quint32 curve1Segment1Id{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
+    quint32 curve1Segment2Id{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal curve1Segment1Mx{labelMX};   // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal curve1Segment1My{labelMY};   // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal curve1Segment2Mx{labelMX};   // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal curve1Segment2My{labelMY};   // NOLINT(misc-non-private-member-variables-in-classes)
+    quint32 curve2Segment1Id{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
+    quint32 curve2Segment2Id{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal curve2Segment1Mx{labelMX};   // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal curve2Segment1My{labelMY};   // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal curve2Segment2Mx{labelMX};   // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal curve2Segment2My{labelMY};   // NOLINT(misc-non-private-member-variables-in-classes)
 };
 
 // Helper enum to identify which field is being updated
@@ -134,6 +145,22 @@ public:
     void SetHCrossPoint(HCrossCurvesPoint value);
 
     void ShowVisualization(bool show) override;
+    void ChangeSegmentLabelPosition(SegmentLabel segment, const QPointF &pos) override;
+
+public slots:
+    void Enable() override;
+    void EnableToolMove(bool move) override;
+    void AllowArcSegmentHover(bool enabled);
+    void AllowElArcSegmentHover(bool enabled);
+    void AllowSplineSegmentHover(bool enabled);
+    void AllowSplinePathSegmentHover(bool enabled);
+    void ToolSelectionType(const SelectionType &selectionType) override;
+    void SetArcSegmentLabelVisible(bool visible);
+    void SetElArcSegmentLabelVisible(bool visible);
+    void SetSplineSegmentLabelVisible(bool visible);
+    void SetSplinePathSegmentLabelVisible(bool visible);
+    void AllowLabelSelecting(bool enabled) override;
+
 protected slots:
     void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) override;
 
@@ -144,9 +171,16 @@ protected:
     void SetVisualization() override;
     auto MakeToolTip() const -> QString override;
     void ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement) override;
+    auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
+    void RefreshGeometry() override;
 
-    void SetCurve1Segments(const QPair<QString, QString> &segments);
-    void SetCurve2Segments(const QPair<QString, QString> &segments);
+private slots:
+    void SegmentChoosed(quint32 id, SceneObject type);
+    void Curve1Segment1LabelPositionChanged(const QPointF &pos);
+    void Curve1Segment2LabelPositionChanged(const QPointF &pos);
+    void Curve2Segment1LabelPositionChanged(const QPointF &pos);
+    void Curve2Segment2LabelPositionChanged(const QPointF &pos);
+
 private:
     Q_DISABLE_COPY_MOVE(VToolPointOfIntersectionCurves) // NOLINT
 
@@ -155,9 +189,6 @@ private:
 
     VCrossCurvesPoint vCrossPoint;
     HCrossCurvesPoint hCrossPoint;
-
-    QPair<QString, QString> m_curve1Segments{};
-    QPair<QString, QString> m_curve2Segments{};
 
     QString m_curve1Name1{};
     QString m_curve1Name2{};
@@ -168,6 +199,27 @@ private:
     QString m_curve1AliasSuffix2{};
     QString m_curve2AliasSuffix1{};
     QString m_curve2AliasSuffix2{};
+
+    quint32 m_curve1Segment1Id{NULL_ID};
+    quint32 m_curve1Segment2Id{NULL_ID};
+    quint32 m_curve2Segment1Id{NULL_ID};
+    quint32 m_curve2Segment2Id{NULL_ID};
+
+    qreal m_curve1Segment1Mx{labelMX};
+    qreal m_curve1Segment1My{labelMY};
+    qreal m_curve1Segment2Mx{labelMX};
+    qreal m_curve1Segment2My{labelMY};
+    qreal m_curve2Segment1Mx{labelMX};
+    qreal m_curve2Segment1My{labelMY};
+    qreal m_curve2Segment2Mx{labelMX};
+    qreal m_curve2Segment2My{labelMY};
+
+    VSegmentLabel *m_curve1Segment1Label{nullptr};
+    VSegmentLabel *m_curve1Segment2Label{nullptr};
+    VSegmentLabel *m_curve2Segment1Label{nullptr};
+    VSegmentLabel *m_curve2Segment2Label{nullptr};
+
+    int segLableVisRefCount{0};
 
     struct ToolChanges
     {
@@ -221,6 +273,18 @@ private:
     auto GetFieldMetadata(VToolPointOfIntersectionCurvesNameField field) -> VToolPointOfIntersectionCurvesFieldMetadata;
     auto HasConflict(const QString &value, VToolPointOfIntersectionCurvesNameField currentField) const -> bool;
     void UpdateNameField(VToolPointOfIntersectionCurvesNameField field, const QString &value);
+
+    void SetSegmentLabelVisible(quint32 curveId,
+                                bool visible,
+                                int &refCount,
+                                VSegmentLabel *seg1Label,
+                                VSegmentLabel *seg2Label,
+                                std::initializer_list<GOType> types);
+    void SetSegmentLabelHover(quint32 curveId,
+                              bool enabled,
+                              VSegmentLabel *seg1Label,
+                              VSegmentLabel *seg2Label,
+                              std::initializer_list<GOType> types);
 };
 
 #endif // VTOOLPOINTOFINTERSECTIONCURVES_H

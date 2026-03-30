@@ -67,6 +67,30 @@ public:
     void SetNotes(const QString &notes);
     auto GetNotes() const -> QString;
 
+    void SetArc1Name1(const QString &name);
+    auto GetArc1Name1() const -> QString;
+
+    void SetArc1Name2(const QString &name);
+    auto GetArc1Name2() const -> QString;
+
+    void SetArc2Name1(const QString &name);
+    auto GetArc2Name1() const -> QString;
+
+    void SetArc2Name2(const QString &name);
+    auto GetArc2Name2() const -> QString;
+
+    void SetArc1AliasSuffix1(const QString &alias);
+    auto GetArc1AliasSuffix1() const -> QString;
+
+    void SetArc1AliasSuffix2(const QString &alias);
+    auto GetArc1AliasSuffix2() const -> QString;
+
+    void SetArc2AliasSuffix1(const QString &alias);
+    auto GetArc2AliasSuffix1() const -> QString;
+
+    void SetArc2AliasSuffix2(const QString &alias);
+    auto GetArc2AliasSuffix2() const -> QString;
+
     void CheckDependencyTreeComplete() override;
 
 public slots:
@@ -81,6 +105,10 @@ protected:
     void SaveData() override;
     auto IsValid() const -> bool override;
 
+private slots:
+    void ValidateAlias();
+    void ValidateName();
+
 private:
     Q_DISABLE_COPY_MOVE(DialogPointOfIntersectionArcs) // NOLINT
 
@@ -91,14 +119,40 @@ private:
     bool flagName;
     bool flagError;
 
+    bool flagArc1Name1{true};
+    bool flagArc1Name2{true};
+    bool flagArc2Name1{true};
+    bool flagArc2Name2{true};
+
+    bool flagArc1Alias1{true};
+    bool flagArc1Alias2{true};
+    bool flagArc2Alias1{true};
+    bool flagArc2Alias2{true};
+
+    QString originArc1AliasSuffix1{};
+    QString originArc1AliasSuffix2{};
+    QString originArc2AliasSuffix1{};
+    QString originArc2AliasSuffix2{};
+
+    QString originArc1Name1{};
+    QString originArc1Name2{};
+    QString originArc2Name1{};
+    QString originArc2Name2{};
+
     /** @brief number number of handled objects */
     qint32 number{0};
+
+    auto GenerateDefArc1LeftSubName() const -> QString;
+    auto GenerateDefArc1RightSubName() const -> QString;
+    auto GenerateDefArc2LeftSubName() const -> QString;
+    auto GenerateDefArc2RightSubName() const -> QString;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
 inline auto DialogPointOfIntersectionArcs::IsValid() const -> bool
 {
-    return flagName && flagError;
+    return flagName && flagError && flagArc1Alias1 && flagArc1Alias2 && flagArc2Alias1 && flagArc2Alias2
+           && flagArc1Name1 && flagArc1Name2 && flagArc2Name1 && flagArc2Name2;
 }
 
 #endif // DIALOGPOINTOFINTERSECTIONARCS_H

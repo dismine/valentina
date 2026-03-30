@@ -47,6 +47,7 @@
 #include "../vtools/tools/backgroundimage/vbackgroundsvgitem.h"
 #include "../vwidgets/vcontrolpointspline.h"
 #include "../vwidgets/vgraphicssimpletextitem.h"
+#include "../vwidgets/vsegmentlabel.h"
 #include "../vwidgets/vsimplecurve.h"
 #include "../vwidgets/vsimplepoint.h"
 #include "ifcdef.h"
@@ -230,6 +231,7 @@ void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
         case VControlPointSpline::Type:
         case VSimplePoint::Type:
         case VSimpleCurve::Type:
+        case VSegmentLabel::Type:
             m_currentItem = item->parentItem();
             ShowItemOptions(m_currentItem);
             break;
@@ -2049,6 +2051,30 @@ void VToolOptionsPropertyBrowser::ChangeDataToolPointOfIntersectionArcs(VPE::VPr
         case 47: // AttrFirstArc (read only)
         case 48: // AttrSecondArc (read only)
             break;
+        case 71: // AttrCurve1Name1
+            SetArc1Name1<VToolPointOfIntersectionArcs>(property);
+            break;
+        case 72: // AttrCurve1Name2
+            SetArc1Name2<VToolPointOfIntersectionArcs>(property);
+            break;
+        case 73: // AttrCurve2Name1
+            SetArc2Name1<VToolPointOfIntersectionArcs>(property);
+            break;
+        case 74: // AttrCurve2Name2
+            SetArc2Name2<VToolPointOfIntersectionArcs>(property);
+            break;
+        case 75: // AttrCurve1Alias1
+            SetArc1Alias1<VToolPointOfIntersectionArcs>(property);
+            break;
+        case 76: // AttrCurve1Alias2
+            SetArc1Alias2<VToolPointOfIntersectionArcs>(property);
+            break;
+        case 77: // AttrCurve2Alias1
+            SetArc2Alias1<VToolPointOfIntersectionArcs>(property);
+            break;
+        case 78: // AttrCurve2Alias2
+            SetArc2Alias2<VToolPointOfIntersectionArcs>(property);
+            break;
         default:
             qWarning() << "Unknown property type. id = " << id;
             break;
@@ -3316,6 +3342,14 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolPointOfIntersectionArcs(QGraphi
     AddPropertyParentPointName(i->FirstArcName(), tr("First arc:"), AttrFirstArc);
     AddPropertyParentPointName(i->SecondArcName(), tr("Second arc:"), AttrSecondArc);
     AddPropertyCrossPoint(i, tr("Take:"));
+    AddPropertyArc1Name1(i, tr("First arc. Left sub arc name:"));
+    AddPropertyArc1Name2(i, tr("First arc. Right sub arc name:"));
+    AddPropertyArc1Alias1(i, tr("First arc. Left sub arc alias:"));
+    AddPropertyArc1Alias2(i, tr("First arc. Right sub arc alias:"));
+    AddPropertyArc2Name1(i, tr("Second arc. Left sub arc name:"));
+    AddPropertyArc2Name2(i, tr("Second arc. Right sub arc name:"));
+    AddPropertyArc2Alias1(i, tr("Second arc. Left sub arc alias:"));
+    AddPropertyArc2Alias2(i, tr("Second arc. Right sub arc alias:"));
     AddPropertyText(tr("Notes:"), i->GetNotes(), AttrNotes);
 }
 
@@ -4216,6 +4250,16 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolPointOfIntersectionArcs()
     m_idToProperty[AttrSecondArc]->setValue(valueSecondArc);
 
     m_idToProperty[AttrNotes]->setValue(i->GetNotes());
+
+    m_idToProperty[AttrCurve1Name1]->setValue(i->GetArc1Name1());
+    m_idToProperty[AttrCurve1Name2]->setValue(i->GetArc1Name2());
+    m_idToProperty[AttrCurve2Name1]->setValue(i->GetArc2Name1());
+    m_idToProperty[AttrCurve2Name2]->setValue(i->GetArc2Name2());
+
+    m_idToProperty[AttrCurve1Alias1]->setValue(i->GetArc1AliasSuffix1());
+    m_idToProperty[AttrCurve1Alias2]->setValue(i->GetArc1AliasSuffix2());
+    m_idToProperty[AttrCurve2Alias1]->setValue(i->GetArc2AliasSuffix1());
+    m_idToProperty[AttrCurve2Alias2]->setValue(i->GetArc2AliasSuffix2());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -4952,4 +4996,140 @@ auto VToolOptionsPropertyBrowser::PropertiesList() -> QStringList
         AttrCurve2Alias2                    /* 78 */
     };
     return attr;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::SetArc1Name1(VPE::VProperty *property)
+{
+    SetStringPropertyGeneric<Tool>(property, &Tool::GetArc1Name1, &Tool::SetArc1Name1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::SetArc1Name2(VPE::VProperty *property)
+{
+    SetStringPropertyGeneric<Tool>(property, &Tool::GetArc1Name2, &Tool::SetArc1Name2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::SetArc2Name1(VPE::VProperty *property)
+{
+    SetStringPropertyGeneric<Tool>(property, &Tool::GetArc2Name1, &Tool::SetArc2Name1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::SetArc2Name2(VPE::VProperty *property)
+{
+    SetStringPropertyGeneric<Tool>(property, &Tool::GetArc2Name2, &Tool::SetArc2Name2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::SetArc1Alias1(VPE::VProperty *property)
+{
+    SetStringPropertyGeneric<Tool>(property, &Tool::GetArc1AliasSuffix1, &Tool::SetArc1AliasSuffix1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::SetArc1Alias2(VPE::VProperty *property)
+{
+    SetStringPropertyGeneric<Tool>(property, &Tool::GetArc1AliasSuffix2, &Tool::SetArc1AliasSuffix2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::SetArc2Alias1(VPE::VProperty *property)
+{
+    SetStringPropertyGeneric<Tool>(property, &Tool::GetArc2AliasSuffix1, &Tool::SetArc2AliasSuffix1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::SetArc2Alias2(VPE::VProperty *property)
+{
+    SetStringPropertyGeneric<Tool>(property, &Tool::GetArc2AliasSuffix2, &Tool::SetArc2AliasSuffix2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::AddPropertyArc1Name1(Tool *i, const QString &propertyName)
+{
+    auto *itemName = new VPE::VStringProperty(propertyName);
+    itemName->setClearButtonEnable(true);
+    itemName->setValue(i->GetArc1Name1());
+    AddProperty(itemName, AttrCurve1Name1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::AddPropertyArc1Name2(Tool *i, const QString &propertyName)
+{
+    auto *itemName = new VPE::VStringProperty(propertyName);
+    itemName->setClearButtonEnable(true);
+    itemName->setValue(i->GetArc1Name2());
+    AddProperty(itemName, AttrCurve1Name2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::AddPropertyArc2Name1(Tool *i, const QString &propertyName)
+{
+    auto *itemName = new VPE::VStringProperty(propertyName);
+    itemName->setClearButtonEnable(true);
+    itemName->setValue(i->GetArc2Name1());
+    AddProperty(itemName, AttrCurve2Name1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::AddPropertyArc2Name2(Tool *i, const QString &propertyName)
+{
+    auto *itemName = new VPE::VStringProperty(propertyName);
+    itemName->setClearButtonEnable(true);
+    itemName->setValue(i->GetArc2Name2());
+    AddProperty(itemName, AttrCurve2Name2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::AddPropertyArc1Alias1(Tool *i, const QString &propertyName)
+{
+    auto *itemName = new VPE::VStringProperty(propertyName);
+    itemName->setClearButtonEnable(true);
+    itemName->setValue(i->GetArc1AliasSuffix1());
+    AddProperty(itemName, AttrCurve1Alias1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::AddPropertyArc1Alias2(Tool *i, const QString &propertyName)
+{
+    auto *itemName = new VPE::VStringProperty(propertyName);
+    itemName->setClearButtonEnable(true);
+    itemName->setValue(i->GetArc1AliasSuffix2());
+    AddProperty(itemName, AttrCurve1Alias2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::AddPropertyArc2Alias1(Tool *i, const QString &propertyName)
+{
+    auto *itemName = new VPE::VStringProperty(propertyName);
+    itemName->setClearButtonEnable(true);
+    itemName->setValue(i->GetArc2AliasSuffix1());
+    AddProperty(itemName, AttrCurve2Alias1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::AddPropertyArc2Alias2(Tool *i, const QString &propertyName)
+{
+    auto *itemName = new VPE::VStringProperty(propertyName);
+    itemName->setClearButtonEnable(true);
+    itemName->setValue(i->GetArc2AliasSuffix2());
+    AddProperty(itemName, AttrCurve2Alias2);
 }

@@ -332,9 +332,7 @@ void DialogMove::ShowDialog(bool click)
 
         auto *operation = qobject_cast<VisToolMove *>(vis);
         SCASSERT(operation != nullptr)
-        operation->SetObjects(SourceToObjects(m_sourceObjects));
-        operation->VisualMode(NULL_ID);
-
+        operation->StartAction();
         auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
         SCASSERT(window != nullptr)
         connect(operation, &VisToolMove::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
@@ -407,9 +405,35 @@ void DialogMove::ShowDialog(bool click)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (not stage1 && stage2 && prepare && type == SceneObject::Point &&
-        QGuiApplication::keyboardModifiers() == Qt::ControlModifier &&
-        SetObject(id, ui->comboBoxRotationOriginPoint, QString())) // After first choose we ignore all objects
+    if (stage1)
+    {
+        auto obj = std::find_if(m_sourceObjects.begin(),
+                                m_sourceObjects.end(),
+                                [id](const SourceItem &sItem) { return sItem.id == id; });
+        if (obj == m_sourceObjects.end())
+        {
+            m_sourceObjects.push_back(SourceItem{id});
+        }
+        else
+        {
+            m_sourceObjects.erase(obj);
+        }
+
+        auto *operation = qobject_cast<VisToolMove *>(vis);
+        SCASSERT(operation != nullptr)
+        operation->SetObjects(SourceToObjects(m_sourceObjects));
+        if (!VAbstractValApplication::VApp()->getCurrentScene()->items().contains(operation))
+        {
+            operation->VisualMode(NULL_ID);
+        }
+        else
+        {
+            operation->RefreshGeometry();
+        }
+    }
+    else if (stage2 && prepare && type == SceneObject::Point
+             && QGuiApplication::keyboardModifiers() == Qt::ControlModifier
+             && SetObject(id, ui->comboBoxRotationOriginPoint, QString())) // After first choose we ignore all objects
     {
         auto *operation = qobject_cast<VisToolMove *>(vis);
         SCASSERT(operation != nullptr)
@@ -417,32 +441,6 @@ void DialogMove::ChosenObject(quint32 id, const SceneObject &type)
         operation->SetRotationOriginPointId(id);
         operation->RefreshGeometry();
         optionalRotationOrigin = true;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogMove::SelectedObject(bool selected, quint32 object, quint32 tool)
-{
-    Q_UNUSED(tool)
-    if (stage1)
-    {
-        auto obj = std::find_if(m_sourceObjects.begin(),
-                                m_sourceObjects.end(),
-                                [object](const SourceItem &sItem) { return sItem.id == object; });
-        if (selected)
-        {
-            if (obj == m_sourceObjects.end())
-            {
-                m_sourceObjects.append({.id = object});
-            }
-        }
-        else
-        {
-            if (obj != m_sourceObjects.end())
-            {
-                m_sourceObjects.erase(obj);
-            }
-        }
     }
 }
 

@@ -181,7 +181,7 @@ auto VToolPointFromCircleAndTangent::Create(VToolPointFromCircleAndTangentInitDa
         VAbstractTool::AddRecord(initData.id, Tool::PointFromCircleAndTangent, initData.doc);
         auto *point = new VToolPointFromCircleAndTangent(initData);
         initData.scene->addItem(point);
-        InitToolConnections(initData.scene, point);
+        InitPointToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
         return point;
     }

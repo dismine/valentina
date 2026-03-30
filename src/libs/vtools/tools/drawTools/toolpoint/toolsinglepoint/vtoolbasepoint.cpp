@@ -144,7 +144,7 @@ auto VToolBasePoint::Create(VToolBasePointInitData initData) -> VToolBasePoint *
         VAbstractTool::AddRecord(initData.id, Tool::BasePoint, initData.doc);
         auto *spoint = new VToolBasePoint(initData);
         initData.scene->addItem(spoint);
-        InitToolConnections(initData.scene, spoint);
+        InitPointToolConnections(initData.scene, spoint);
         VAbstractPattern::AddTool(initData.id, spoint);
         return spoint;
     }

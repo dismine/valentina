@@ -78,8 +78,7 @@ DialogCutArc::DialogCutArc(const VContainer *data, VAbstractPattern *doc, quint3
 
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
-    ui->lineEditNamePoint->setText(
-        VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
+    SetPointName(VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     m_formulaBaseHeight = ui->plainTextEditFormula->height();
     ui->plainTextEditFormula->installEventFilter(this);
 
@@ -358,13 +357,13 @@ void DialogCutArc::InitIcons()
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogCutArc::GenerateDefLeftSubName() const -> QString
 {
-    return GenerateDefSubCurveName(data, getArcId(), "__ls"_L1, "LSubCurve"_L1, GetPointName());
+    return GenerateDefSubCurveName(data, getArcId(), "__ls"_L1, "LSubArc"_L1, GetPointName());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogCutArc::GenerateDefRightSubName() const -> QString
 {
-    return GenerateDefSubCurveName(data, getArcId(), "__rs"_L1, "RSubCurve"_L1, GetPointName());
+    return GenerateDefSubCurveName(data, getArcId(), "__rs"_L1, "RSubArc"_L1, GetPointName());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

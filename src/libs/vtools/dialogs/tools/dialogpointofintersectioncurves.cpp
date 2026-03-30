@@ -64,8 +64,7 @@ DialogPointOfIntersectionCurves::DialogPointOfIntersectionCurves(const VContaine
 
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
-    ui->lineEditNamePoint->setText(
-        VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
+    SetPointName(VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
 
     InitOkCancelApply(ui);
 
@@ -73,11 +72,6 @@ DialogPointOfIntersectionCurves::DialogPointOfIntersectionCurves(const VContaine
     FillComboBoxCurves(ui->comboBoxCurve2);
     FillComboBoxVCrossCurvesPoint(ui->comboBoxVCorrection);
     FillComboBoxHCrossCurvesPoint(ui->comboBoxHCorrection);
-
-    ui->lineEditCurve1Name1->setText(GenerateDefCurve1LeftSubName());
-    ui->lineEditCurve1Name2->setText(GenerateDefCurve1RightSubName());
-    ui->lineEditCurve2Name1->setText(GenerateDefCurve2LeftSubName());
-    ui->lineEditCurve2Name2->setText(GenerateDefCurve2RightSubName());
 
     connect(ui->lineEditNamePoint,
             &QLineEdit::textChanged,
@@ -218,6 +212,11 @@ void DialogPointOfIntersectionCurves::ChosenObject(quint32 id, const SceneObject
             case 1:
                 if (getCurrentObjectId(ui->comboBoxCurve1) != id && SetObject(id, ui->comboBoxCurve2, QString()))
                 {
+                    ui->lineEditCurve1Name1->setText(GenerateDefCurve1LeftSubName());
+                    ui->lineEditCurve1Name2->setText(GenerateDefCurve1RightSubName());
+                    ui->lineEditCurve2Name1->setText(GenerateDefCurve2LeftSubName());
+                    ui->lineEditCurve2Name2->setText(GenerateDefCurve2RightSubName());
+
                     number = 0;
                     point->SetCurve2Id(id);
                     point->RefreshGeometry();
@@ -504,7 +503,7 @@ void DialogPointOfIntersectionCurves::SetCurve1Name1(const QString &name)
 {
     originCurve1Name1 = name;
     ui->lineEditCurve1Name1->setText(originCurve1Name1);
-    ValidateAlias();
+    ValidateName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -518,7 +517,7 @@ void DialogPointOfIntersectionCurves::SetCurve1Name2(const QString &name)
 {
     originCurve1Name2 = name;
     ui->lineEditCurve1Name2->setText(originCurve1Name2);
-    ValidateAlias();
+    ValidateName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -532,7 +531,7 @@ void DialogPointOfIntersectionCurves::SetCurve2Name1(const QString &name)
 {
     originCurve2Name1 = name;
     ui->lineEditCurve2Name1->setText(originCurve2Name1);
-    ValidateAlias();
+    ValidateName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -546,7 +545,7 @@ void DialogPointOfIntersectionCurves::SetCurve2Name2(const QString &name)
 {
     originCurve2Name2 = name;
     ui->lineEditCurve2Name2->setText(originCurve2Name2);
-    ValidateAlias();
+    ValidateName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -80,7 +80,8 @@ protected:
                                  const QDomElement &newDomElement,
                                  const ToolChanges &changes);
 
-    template <typename T> static void InitToolConnections(VMainGraphicsScene *scene, T *tool);
+    template<typename T>
+    static void InitPointToolConnections(VMainGraphicsScene *scene, T *tool);
 
 private:
     Q_DISABLE_COPY_MOVE(VAbstractPoint) // NOLINT
@@ -111,7 +112,8 @@ template <typename T> void VAbstractPoint::ShowToolVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T> void VAbstractPoint::InitToolConnections(VMainGraphicsScene *scene, T *tool)
+template<typename T>
+void VAbstractPoint::InitPointToolConnections(VMainGraphicsScene *scene, T *tool)
 {
     SCASSERT(scene != nullptr)
     SCASSERT(tool != nullptr)

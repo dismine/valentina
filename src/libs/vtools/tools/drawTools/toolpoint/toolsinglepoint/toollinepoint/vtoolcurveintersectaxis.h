@@ -44,17 +44,23 @@
 #include "vtoollinepoint.h"
 
 template <class T> class QSharedPointer;
+class VSegmentLabel;
 
 struct VToolCurveIntersectAxisInitData : VToolLinePointInitData
 {
     QString formulaAngle{'0'};
     quint32 basePointId{NULL_ID};
     quint32 curveId{NULL_ID};
-    QPair<QString, QString> segments{};
     QString aliasSuffix1{};
     QString aliasSuffix2{};
     QString name1{}; // NOLINT(misc-non-private-member-variables-in-classes)
     QString name2{}; // NOLINT(misc-non-private-member-variables-in-classes)
+    quint32 segment1Id{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
+    quint32 segment2Id{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal segment1Mx{labelMX};   // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal segment1My{labelMY};   // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal segment2Mx{labelMX};   // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal segment2My{labelMY};   // NOLINT(misc-non-private-member-variables-in-classes)
 };
 
 enum class VToolCurveIntersectAxisNameField : quint8
@@ -101,6 +107,16 @@ public:
     auto CurveName() const -> QString;
 
     void ShowVisualization(bool show) override;
+    void ChangeSegmentLabelPosition(SegmentLabel segment, const QPointF &pos) override;
+
+public slots:
+    void Enable() override;
+    void EnableToolMove(bool move) override;
+    void AllowSegmentHover(bool enabled);
+    void ToolSelectionType(const SelectionType &selectionType) override;
+    void SetSegmentLabelVisible(bool visible);
+    void AllowLabelSelecting(bool enabled) override;
+
 protected slots:
     void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) override;
 
@@ -111,18 +127,34 @@ protected:
     void SetVisualization() override;
     auto MakeToolTip() const -> QString override;
     void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
-    void SetSegments(const QPair<QString, QString> &segments);
     void ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement) override;
+    auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
+    void RefreshGeometry() override;
+
+private slots:
+    void SegmentChoosed(quint32 id, SceneObject type);
+    void Segment1LabelPositionChanged(const QPointF &pos);
+    void Segment2LabelPositionChanged(const QPointF &pos);
 
 private:
     Q_DISABLE_COPY_MOVE(VToolCurveIntersectAxis) // NOLINT
     QString formulaAngle;
     quint32 curveId;
-    QPair<QString, QString> m_segments{};
-    QString m_name1{}; // NOLINT(misc-non-private-member-variables-in-classes)
-    QString m_name2{}; // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_name1{};
+    QString m_name2{};
     QString m_aliasSuffix1{};
     QString m_aliasSuffix2{};
+
+    quint32 m_segment1Id{NULL_ID};
+    quint32 m_segment2Id{NULL_ID};
+
+    qreal m_segment1Mx{labelMX};
+    qreal m_segment1My{labelMY};
+    qreal m_segment2Mx{labelMX};
+    qreal m_segment2My{labelMY};
+
+    VSegmentLabel *m_segment1Label{nullptr};
+    VSegmentLabel *m_segment2Label{nullptr};
 
     struct ToolChanges
     {

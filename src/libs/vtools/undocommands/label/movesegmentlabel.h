@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file
+ **  @file   movesegmentlabel.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   20 9, 2017
+ **  @date   21 3, 2026
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2017 Valentina project
+ **  Copyright (C) 2026 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -25,35 +25,37 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
+#ifndef MOVESEGMENTLABEL_H
+#define MOVESEGMENTLABEL_H
 
-#ifndef OPERATIONSHOWLABEL_H
-#define OPERATIONSHOWLABEL_H
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QtGlobal>
 
-#include "../vundocommand.h"
+#include "../../tools/toolsdef.h"
+#include "moveabstractlabel.h"
 
-class QGraphicsScene;
-
-class OperationShowLabel : public VUndoCommand
+class MoveSegmentLabel : public MoveAbstractLabel
 {
     Q_OBJECT // NOLINT
-public:
-    OperationShowLabel(VAbstractPattern *doc, quint32 idTool, quint32 idPoint, bool visible,
-                       QUndoCommand *parent = nullptr);
-    ~OperationShowLabel() override = default;
 
-    void undo() override;
-    void redo() override;
+public:
+    MoveSegmentLabel(
+        VAbstractPattern *doc, const QPointF &newPos, quint32 id, SegmentLabel segment, QUndoCommand *parent = nullptr);
+    ~MoveSegmentLabel() override = default;
+
+    auto mergeWith(const QUndoCommand *command) -> bool override;
+    auto id() const -> int override;
+
+protected:
+    auto ReadCurrentPos() const -> QPointF override;
+    void WritePos(const QPointF &pos) override;
 
 private:
-    // cppcheck-suppress unknownMacro
-    Q_DISABLE_COPY_MOVE(OperationShowLabel) // NOLINT
-    bool m_visible;
-    bool m_oldVisible;
-    //Need for resizing scene rect
-    QGraphicsScene *m_scene;
-    quint32 m_idTool;
+    Q_DISABLE_COPY_MOVE(MoveSegmentLabel) // NOLINT
 
-    void Do(bool visible);
+    SegmentLabel m_segment;
 };
 
-#endif // OPERATIONSHOWLABEL_H
+#endif // MOVESEGMENTLABEL_H

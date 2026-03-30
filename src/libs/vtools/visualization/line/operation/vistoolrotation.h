@@ -67,8 +67,12 @@ private:
     VScaledLine    *m_xAxis{nullptr};
     quint32         m_originPointId{NULL_ID};
 
-    template <class Item>
-    auto AddCurve(qreal angle, const QPointF &origin, quint32 id, int i) -> int;
+    auto AddRotatedPoint(qreal angle, quint32 id, int i) -> int;
+
+    template<class Item>
+    auto AddRotatedCurve(qreal angle, quint32 id, int i) -> int;
+
+    void CreateRotatedObjects(int &iPoint, int &iCurve, qreal angle);
 };
 
 //---------------------------------------------------------------------------------------------------------------------

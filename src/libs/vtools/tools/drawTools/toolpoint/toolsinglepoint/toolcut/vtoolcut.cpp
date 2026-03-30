@@ -32,12 +32,14 @@
 #include <QSharedPointer>
 #include <QUndoStack>
 
+#include "../../../../..//undocommands/label/movesegmentlabel.h"
 #include "../../../../../undocommands/renameobject.h"
 #include "../../../../../undocommands/savetooloptions.h"
 #include "../../../../vabstracttool.h"
 #include "../../../vdrawtool.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vdomdocument.h"
+#include "../ifc/xml/vpatternblockmapper.h"
 #include "../qmuparser/qmudef.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
@@ -45,6 +47,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vformula.h"
 #include "../vtoolsinglepoint.h"
+#include "../vwidgets/vsegmentlabel.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
@@ -61,9 +64,47 @@ VToolCut::VToolCut(const VToolCutInitData &initData, QGraphicsItem *parent)
     m_name1(initData.name1),
     m_name2(initData.name2),
     m_aliasSuffix1(initData.aliasSuffix1),
-    m_aliasSuffix2(initData.aliasSuffix2)
+    m_aliasSuffix2(initData.aliasSuffix2),
+    m_segment1Id(initData.segment1Id),
+    m_segment2Id(initData.segment2Id),
+    m_segment1Mx(initData.segment1Mx),
+    m_segment1My(initData.segment1My),
+    m_segment2Mx(initData.segment2Mx),
+    m_segment2My(initData.segment2My)
 {
     Q_ASSERT_X(initData.baseCurveId != 0, Q_FUNC_INFO, "curveCutId == 0"); //-V654 //-V712
+
+    auto const CreateSegmentLabel =
+        [this](quint32 segmentId, qreal mx, qreal my, auto chooseSlot, auto selectSlot, auto posChangedSlot)
+        -> VSegmentLabel *
+    {
+        QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(segmentId);
+        VPointF pos = curve->GetMidpoint();
+        pos.setMx(mx);
+        pos.setMy(my);
+        pos.setX(pos.x() - this->pos().x());
+        pos.setY(pos.y() - this->pos().y());
+
+        auto *label = new VSegmentLabel(pos, curve, this);
+        connect(label, &VSegmentLabel::SegmentChoosed, this, chooseSlot);
+        connect(label, &VSegmentLabel::SegmentSelected, this, selectSlot);
+        connect(label, &VSegmentLabel::LabelPositionChanged, this, posChangedSlot);
+        return label;
+    };
+
+    m_segment1Label = CreateSegmentLabel(m_segment1Id,
+                                         m_segment1Mx,
+                                         m_segment1My,
+                                         &VToolCut::SegmentChoosed,
+                                         &VToolCut::PointSelected,
+                                         &VToolCut::Segment1LabelPositionChanged);
+
+    m_segment2Label = CreateSegmentLabel(m_segment2Id,
+                                         m_segment2Mx,
+                                         m_segment2My,
+                                         &VToolCut::SegmentChoosed,
+                                         &VToolCut::PointSelected,
+                                         &VToolCut::Segment2LabelPositionChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -73,14 +114,54 @@ void VToolCut::SetDetailsMode(bool mode)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief FullUpdateFromFile update tool data form file.
- */
-void VToolCut::FullUpdateFromFile()
+void VToolCut::Enable()
 {
-    ReadAttributes();
-    RefreshGeometry();
-    SetVisualization();
+    const bool enabled = m_indexActivePatternBlock == doc->PatternBlockMapper()->GetActiveId();
+    m_segment1Label->SetEnabledState(enabled);
+    m_segment2Label->SetEnabledState(enabled);
+
+    VToolSinglePoint::Enable();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCut::EnableToolMove(bool move)
+{
+    m_segment1Label->SetLabelMovable(move);
+    m_segment2Label->SetLabelMovable(move);
+
+    VToolSinglePoint::EnableToolMove(move);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCut::AllowSegmentHover(bool enabled)
+{
+    m_segment1Label->AllowLabelHover(enabled);
+    m_segment2Label->AllowLabelHover(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCut::ToolSelectionType(const SelectionType &selectionType)
+{
+    m_segment1Label->LabelSelectionType(selectionType);
+    m_segment2Label->LabelSelectionType(selectionType);
+
+    VToolSinglePoint::ToolSelectionType(selectionType);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCut::SetSegmentLabelVisible(bool visible)
+{
+    m_segment1Label->SetLabelVisible(visible);
+    m_segment2Label->SetLabelVisible(visible);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCut::AllowLabelSelecting(bool enabled)
+{
+    m_segment1Label->SetLabelSelectable(enabled);
+    m_segment2Label->SetLabelSelectable(enabled);
+
+    VToolSinglePoint::AllowLabelSelecting(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -115,12 +196,9 @@ void VToolCut::ProcessToolCutOptions(const QDomElement &oldDomElement,
     const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(baseCurveId);
     const CurveAliasType curveType = RenameAlias::CurveType(curve->getType());
 
-    const quint32 subSpl1Id = m_id /*+ 1*/;
-    const quint32 subSpl2Id = m_id /*+ 2*/;
-
     if (changes.Name1Changed())
     {
-        auto *renameName = new RenameAlias(curveType, changes.oldName1, changes.newName1, doc, subSpl1Id, newGroup);
+        auto *renameName = new RenameAlias(curveType, changes.oldName1, changes.newName1, doc, m_segment1Id, newGroup);
         if (!changes.Name2Changed() && !changes.AliasSuffix1Changed() && !changes.AliasSuffix2Changed())
         {
             connect(renameName, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
@@ -129,7 +207,7 @@ void VToolCut::ProcessToolCutOptions(const QDomElement &oldDomElement,
 
     if (changes.Name2Changed())
     {
-        auto *renameName = new RenameAlias(curveType, changes.oldName2, changes.newName2, doc, subSpl2Id, newGroup);
+        auto *renameName = new RenameAlias(curveType, changes.oldName2, changes.newName2, doc, m_segment2Id, newGroup);
         if (!changes.AliasSuffix1Changed() && !changes.AliasSuffix2Changed())
         {
             connect(renameName, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
@@ -139,7 +217,7 @@ void VToolCut::ProcessToolCutOptions(const QDomElement &oldDomElement,
     if (changes.AliasSuffix1Changed())
     {
         auto *renameAlias
-            = new RenameAlias(curveType, changes.oldAliasSuffix1, changes.newAliasSuffix1, doc, subSpl1Id, newGroup);
+            = new RenameAlias(curveType, changes.oldAliasSuffix1, changes.newAliasSuffix1, doc, m_segment1Id, newGroup);
         if (!changes.AliasSuffix2Changed())
         {
             connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
@@ -149,11 +227,37 @@ void VToolCut::ProcessToolCutOptions(const QDomElement &oldDomElement,
     if (changes.AliasSuffix2Changed())
     {
         auto *renameAlias
-            = new RenameAlias(curveType, changes.oldAliasSuffix1, changes.newAliasSuffix1, doc, subSpl2Id, newGroup);
+            = new RenameAlias(curveType, changes.oldAliasSuffix1, changes.newAliasSuffix1, doc, m_segment2Id, newGroup);
         connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     }
 
     undoStack->push(newGroup);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VToolCut::itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant
+{
+    if (change == QGraphicsItem::ItemSelectedHasChanged)
+    {
+        if (not m_selectedFromChild)
+        {
+            if (m_segment1Id != NULL_ID)
+            {
+                const QSignalBlocker blockerSegment1Label(m_segment1Label);
+                m_segment1Label->SetLabelVisible(value.toBool());
+                m_segment1Label->setSelected(value.toBool());
+            }
+
+            if (m_segment1Id != NULL_ID)
+            {
+                const QSignalBlocker blockeSegment2Label(m_segment2Label);
+                m_segment2Label->setSelected(value.toBool());
+                m_segment2Label->SetLabelVisible(value.toBool());
+            }
+        }
+    }
+
+    return VToolSinglePoint::itemChange(change, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -233,12 +337,49 @@ auto VToolCut::CurveName() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolCut::ShowVisualization(bool show)
+{
+    m_segment1Label->SetLabelVisible(show);
+    m_segment2Label->SetLabelVisible(show);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCut::ChangeSegmentLabelPosition(SegmentLabel segment, const QPointF &pos)
+{
+    if (segment == SegmentLabel::Segment1)
+    {
+        m_segment1Label->SetLabelPosition(pos);
+    }
+    else if (segment == SegmentLabel::Segment2)
+    {
+        m_segment2Label->SetLabelPosition(pos);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief RefreshGeometry  refresh item on scene.
  */
 void VToolCut::RefreshGeometry()
 {
-    VToolSinglePoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<VPointF>(m_id));
+    VToolSinglePoint::RefreshGeometry();
+
+    auto const UpdateSegmentLabel = [this](quint32 segmentId, qreal mx, qreal my, VSegmentLabel *label)
+    {
+        QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(segmentId);
+
+        VPointF pos = curve->GetMidpoint();
+        pos.setMx(mx);
+        pos.setMy(my);
+        pos.setX(pos.x() - this->pos().x());
+        pos.setY(pos.y() - this->pos().y());
+
+        label->SetLabelData(pos);
+        label->SetSegmentShape(curve);
+    };
+
+    UpdateSegmentLabel(m_segment1Id, m_segment1Mx, m_segment1My, m_segment1Label);
+    UpdateSegmentLabel(m_segment2Id, m_segment2Mx, m_segment2My, m_segment2Label);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -256,6 +397,14 @@ void VToolCut::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
                                          AttrAlias2,
                                          m_aliasSuffix2,
                                          [](const QString &suffix) noexcept -> bool { return suffix.isEmpty(); });
+    doc->SetAttribute(tag, AttrSegment1Id, m_segment1Id);
+    doc->SetAttribute(tag, AttrSegment2Id, m_segment2Id);
+
+    const VAbstractValApplication *app = VAbstractValApplication::VApp();
+    doc->SetAttribute(tag, AttrSegment1Mx, app->fromPixel(m_segment1Mx));
+    doc->SetAttribute(tag, AttrSegment1My, app->fromPixel(m_segment1My));
+    doc->SetAttribute(tag, AttrSegment2Mx, app->fromPixel(m_segment2Mx));
+    doc->SetAttribute(tag, AttrSegment2My, app->fromPixel(m_segment2Mx));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -267,6 +416,36 @@ void VToolCut::ReadToolAttributes(const QDomElement &domElement)
     m_name2 = VAbstractPattern::GetParametrEmptyString(domElement, AttrCurveName2);
     m_aliasSuffix1 = VAbstractPattern::GetParametrEmptyString(domElement, AttrAlias1);
     m_aliasSuffix2 = VAbstractPattern::GetParametrEmptyString(domElement, AttrAlias2);
+    m_segment1Id = VAbstractPattern::GetParametrId(domElement, AttrSegment1Id);
+    m_segment2Id = VAbstractPattern::GetParametrId(domElement, AttrSegment2Id);
+
+    const VAbstractValApplication *app = VAbstractValApplication::VApp();
+
+    const QString labelMXStr = QString::number(app->fromPixel(labelMX));
+    const QString labelMYStr = QString::number(app->fromPixel(labelMY));
+
+    m_segment1Mx = app->toPixel(VAbstractPattern::GetParametrDouble(domElement, AttrSegment1Mx, labelMXStr));
+    m_segment1My = app->toPixel(VAbstractPattern::GetParametrDouble(domElement, AttrSegment1My, labelMYStr));
+    m_segment2Mx = app->toPixel(VAbstractPattern::GetParametrDouble(domElement, AttrSegment2Mx, labelMXStr));
+    m_segment2My = app->toPixel(VAbstractPattern::GetParametrDouble(domElement, AttrSegment2My, labelMYStr));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCut::SegmentChoosed(quint32 id, SceneObject type)
+{
+    emit ChoosedTool(id, type);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCut::Segment1LabelPositionChanged(const QPointF &pos)
+{
+    VAbstractApplication::VApp()->getUndoStack()->push(new MoveSegmentLabel(doc, pos, m_id, SegmentLabel::Segment1));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCut::Segment2LabelPositionChanged(const QPointF &pos)
+{
+    VAbstractApplication::VApp()->getUndoStack()->push(new MoveSegmentLabel(doc, pos, m_id, SegmentLabel::Segment2));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

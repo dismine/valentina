@@ -1477,8 +1477,9 @@ void VPattern::PointsCommonAttributes(const QDomElement &domElement, VToolSingle
 void VPattern::PointsCommonAttributes(const QDomElement &domElement, quint32 &id, qreal &mx, qreal &my)
 {
     ToolsCommonAttributes(domElement, id);
-    mx = VAbstractValApplication::VApp()->toPixel(GetParametrDouble(domElement, AttrMx, QString::number(labelMX)));
-    my = VAbstractValApplication::VApp()->toPixel(GetParametrDouble(domElement, AttrMy, QString::number(labelMY)));
+    const VAbstractValApplication *app = VAbstractValApplication::VApp();
+    mx = app->toPixel(GetParametrDouble(domElement, AttrMx, QString::number(app->fromPixel(labelMX))));
+    my = app->toPixel(GetParametrDouble(domElement, AttrMy, QString::number(app->fromPixel(labelMY))));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1486,8 +1487,9 @@ void VPattern::DrawPointsCommonAttributes(const QDomElement &domElement, quint32
                                           QString &notes)
 {
     DrawToolsCommonAttributes(domElement, id, notes);
-    mx = VAbstractValApplication::VApp()->toPixel(GetParametrDouble(domElement, AttrMx, QString::number(labelMX)));
-    my = VAbstractValApplication::VApp()->toPixel(GetParametrDouble(domElement, AttrMy, QString::number(labelMY)));
+    const VAbstractValApplication *app = VAbstractValApplication::VApp();
+    mx = app->toPixel(GetParametrDouble(domElement, AttrMx, QString::number(app->fromPixel(labelMX))));
+    my = app->toPixel(GetParametrDouble(domElement, AttrMy, QString::number(app->fromPixel(labelMY))));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2326,6 +2328,18 @@ void VPattern::ParseToolCutSpline(VMainGraphicsScene *scene, QDomElement &domEle
         initData.baseCurveId = GetParametrUInt(domElement, VToolCutSpline::AttrSpline, NULL_ID_STR);
         initData.aliasSuffix1 = GetParametrEmptyString(domElement, AttrAlias1);
         initData.aliasSuffix2 = GetParametrEmptyString(domElement, AttrAlias2);
+        initData.segment1Id = GetParametrId(domElement, AttrSegment1Id);
+        initData.segment2Id = GetParametrId(domElement, AttrSegment2Id);
+
+        const VAbstractValApplication *app = VAbstractValApplication::VApp();
+
+        const QString labelMXStr = QString::number(app->fromPixel(labelMX));
+        const QString labelMYStr = QString::number(app->fromPixel(labelMY));
+
+        initData.segment1Mx = app->toPixel(GetParametrDouble(domElement, AttrSegment1Mx, labelMXStr));
+        initData.segment1My = app->toPixel(GetParametrDouble(domElement, AttrSegment1My, labelMYStr));
+        initData.segment2Mx = app->toPixel(GetParametrDouble(domElement, AttrSegment2Mx, labelMXStr));
+        initData.segment2My = app->toPixel(GetParametrDouble(domElement, AttrSegment2My, labelMYStr));
 
         // Make name1 and name2 mandatory
         Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
@@ -2376,6 +2390,18 @@ void VPattern::ParseToolCutSplinePath(VMainGraphicsScene *scene, QDomElement &do
         initData.baseCurveId = GetParametrUInt(domElement, VToolCutSplinePath::AttrSplinePath, NULL_ID_STR);
         initData.aliasSuffix1 = GetParametrEmptyString(domElement, AttrAlias1);
         initData.aliasSuffix2 = GetParametrEmptyString(domElement, AttrAlias2);
+        initData.segment1Id = GetParametrId(domElement, AttrSegment1Id);
+        initData.segment2Id = GetParametrId(domElement, AttrSegment2Id);
+
+        const VAbstractValApplication *app = VAbstractValApplication::VApp();
+
+        const QString labelMXStr = QString::number(app->fromPixel(labelMX));
+        const QString labelMYStr = QString::number(app->fromPixel(labelMY));
+
+        initData.segment1Mx = app->toPixel(GetParametrDouble(domElement, AttrSegment1Mx, labelMXStr));
+        initData.segment1My = app->toPixel(GetParametrDouble(domElement, AttrSegment1My, labelMYStr));
+        initData.segment2Mx = app->toPixel(GetParametrDouble(domElement, AttrSegment2Mx, labelMXStr));
+        initData.segment2My = app->toPixel(GetParametrDouble(domElement, AttrSegment2My, labelMYStr));
 
         // Make name1 and name2 mandatory
         Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
@@ -2426,6 +2452,18 @@ void VPattern::ParseToolCutArc(VMainGraphicsScene *scene, QDomElement &domElemen
         initData.baseCurveId = GetParametrUInt(domElement, AttrArc, NULL_ID_STR);
         initData.aliasSuffix1 = GetParametrEmptyString(domElement, AttrAlias1);
         initData.aliasSuffix2 = GetParametrEmptyString(domElement, AttrAlias2);
+        initData.segment1Id = GetParametrId(domElement, AttrSegment1Id);
+        initData.segment2Id = GetParametrId(domElement, AttrSegment2Id);
+
+        const VAbstractValApplication *app = VAbstractValApplication::VApp();
+
+        const QString labelMXStr = QString::number(app->fromPixel(labelMX));
+        const QString labelMYStr = QString::number(app->fromPixel(labelMY));
+
+        initData.segment1Mx = app->toPixel(GetParametrDouble(domElement, AttrSegment1Mx, labelMXStr));
+        initData.segment1My = app->toPixel(GetParametrDouble(domElement, AttrSegment1My, labelMYStr));
+        initData.segment2Mx = app->toPixel(GetParametrDouble(domElement, AttrSegment2Mx, labelMXStr));
+        initData.segment2My = app->toPixel(GetParametrDouble(domElement, AttrSegment2My, labelMYStr));
 
         // Make name1 and name2 mandatory
         Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
@@ -2533,6 +2571,18 @@ void VPattern::ParseToolCurveIntersectAxis(VMainGraphicsScene *scene, QDomElemen
         initData.name2 = GetParametrEmptyString(domElement, AttrName2);
         initData.aliasSuffix1 = GetParametrEmptyString(domElement, AttrAlias1);
         initData.aliasSuffix2 = GetParametrEmptyString(domElement, AttrAlias2);
+        initData.segment1Id = GetParametrId(domElement, AttrSegment1Id);
+        initData.segment2Id = GetParametrId(domElement, AttrSegment2Id);
+
+        const VAbstractValApplication *app = VAbstractValApplication::VApp();
+
+        const QString labelMXStr = QString::number(app->fromPixel(labelMX));
+        const QString labelMYStr = QString::number(app->fromPixel(labelMY));
+
+        initData.segment1Mx = app->toPixel(GetParametrDouble(domElement, AttrSegment1Mx, labelMXStr));
+        initData.segment1My = app->toPixel(GetParametrDouble(domElement, AttrSegment1My, labelMYStr));
+        initData.segment2Mx = app->toPixel(GetParametrDouble(domElement, AttrSegment2Mx, labelMXStr));
+        initData.segment2My = app->toPixel(GetParametrDouble(domElement, AttrSegment2My, labelMYStr));
 
         VToolCurveIntersectAxis::Create(initData);
         // Rewrite attribute formula. Need for situation when we have wrong formula.
@@ -2577,6 +2627,32 @@ void VPattern::ParseToolPointOfIntersectionArcs(VMainGraphicsScene *scene, const
         initData.firstArcId = GetParametrUInt(domElement, AttrFirstArc, NULL_ID_STR);
         initData.secondArcId = GetParametrUInt(domElement, AttrSecondArc, NULL_ID_STR);
         initData.pType = static_cast<CrossCirclesPoint>(GetParametrUInt(domElement, AttrCrossPoint, QChar('1')));
+        initData.arc1Name1 = GetParametrEmptyString(domElement, AttrCurve1Name1);
+        initData.arc1Name2 = GetParametrEmptyString(domElement, AttrCurve1Name2);
+        initData.arc2Name1 = GetParametrEmptyString(domElement, AttrCurve2Name1);
+        initData.arc2Name2 = GetParametrEmptyString(domElement, AttrCurve2Name2);
+        initData.arc1AliasSuffix1 = GetParametrEmptyString(domElement, AttrCurve1Alias1);
+        initData.arc1AliasSuffix2 = GetParametrEmptyString(domElement, AttrCurve1Alias2);
+        initData.arc2AliasSuffix1 = GetParametrEmptyString(domElement, AttrCurve2Alias1);
+        initData.arc2AliasSuffix2 = GetParametrEmptyString(domElement, AttrCurve2Alias2);
+        initData.arc1Segment1Id = GetParametrId(domElement, AttrSegment1Id);
+        initData.arc1Segment2Id = GetParametrId(domElement, AttrSegment2Id);
+        initData.arc2Segment1Id = GetParametrId(domElement, AttrSegment3Id);
+        initData.arc2Segment2Id = GetParametrId(domElement, AttrSegment4Id);
+
+        const VAbstractValApplication *app = VAbstractValApplication::VApp();
+
+        const QString labelMXStr = QString::number(app->fromPixel(labelMX));
+        const QString labelMYStr = QString::number(app->fromPixel(labelMY));
+
+        initData.arc1Segment1Mx = app->toPixel(GetParametrDouble(domElement, AttrSegment1Mx, labelMXStr));
+        initData.arc1Segment1My = app->toPixel(GetParametrDouble(domElement, AttrSegment1My, labelMYStr));
+        initData.arc1Segment2Mx = app->toPixel(GetParametrDouble(domElement, AttrSegment2Mx, labelMXStr));
+        initData.arc1Segment2My = app->toPixel(GetParametrDouble(domElement, AttrSegment2My, labelMYStr));
+        initData.arc2Segment1Mx = app->toPixel(GetParametrDouble(domElement, AttrSegment3Mx, labelMXStr));
+        initData.arc2Segment1My = app->toPixel(GetParametrDouble(domElement, AttrSegment3My, labelMYStr));
+        initData.arc2Segment2Mx = app->toPixel(GetParametrDouble(domElement, AttrSegment4Mx, labelMXStr));
+        initData.arc2Segment2My = app->toPixel(GetParametrDouble(domElement, AttrSegment4My, labelMYStr));
 
         VToolPointOfIntersectionArcs::Create(initData);
     }
@@ -2666,6 +2742,24 @@ void VPattern::ParseToolPointOfIntersectionCurves(VMainGraphicsScene *scene, QDo
         initData.curve1AliasSuffix2 = GetParametrEmptyString(domElement, AttrCurve1Alias2);
         initData.curve2AliasSuffix1 = GetParametrEmptyString(domElement, AttrCurve2Alias1);
         initData.curve2AliasSuffix2 = GetParametrEmptyString(domElement, AttrCurve2Alias2);
+        initData.curve1Segment1Id = GetParametrId(domElement, AttrSegment1Id);
+        initData.curve1Segment2Id = GetParametrId(domElement, AttrSegment2Id);
+        initData.curve2Segment1Id = GetParametrId(domElement, AttrSegment3Id);
+        initData.curve2Segment2Id = GetParametrId(domElement, AttrSegment4Id);
+
+        const VAbstractValApplication *app = VAbstractValApplication::VApp();
+
+        const QString labelMXStr = QString::number(app->fromPixel(labelMX));
+        const QString labelMYStr = QString::number(app->fromPixel(labelMY));
+
+        initData.curve1Segment1Mx = app->toPixel(GetParametrDouble(domElement, AttrSegment1Mx, labelMXStr));
+        initData.curve1Segment1My = app->toPixel(GetParametrDouble(domElement, AttrSegment1My, labelMYStr));
+        initData.curve1Segment2Mx = app->toPixel(GetParametrDouble(domElement, AttrSegment2Mx, labelMXStr));
+        initData.curve1Segment2My = app->toPixel(GetParametrDouble(domElement, AttrSegment2My, labelMYStr));
+        initData.curve2Segment1Mx = app->toPixel(GetParametrDouble(domElement, AttrSegment3Mx, labelMXStr));
+        initData.curve2Segment1My = app->toPixel(GetParametrDouble(domElement, AttrSegment3My, labelMYStr));
+        initData.curve2Segment2Mx = app->toPixel(GetParametrDouble(domElement, AttrSegment4Mx, labelMXStr));
+        initData.curve2Segment2My = app->toPixel(GetParametrDouble(domElement, AttrSegment4My, labelMYStr));
 
         VToolPointOfIntersectionCurves::Create(initData);
     }
@@ -2774,18 +2868,19 @@ void VPattern::ParseToolTrueDarts(VMainGraphicsScene *scene, const QDomElement &
         initData.dartP2Id = GetParametrUInt(domElement, AttrDartP2, NULL_ID_STR);
         initData.dartP3Id = GetParametrUInt(domElement, AttrDartP3, NULL_ID_STR);
 
+        const VAbstractValApplication *app = VAbstractValApplication::VApp();
+
+        const QString labelMXStr = QString::number(app->fromPixel(labelMX));
+        const QString labelMYStr = QString::number(app->fromPixel(labelMY));
+
         initData.name1 = GetParametrString(domElement, AttrName1, QChar('A'));
-        initData.mx1 =
-            VAbstractValApplication::VApp()->toPixel(GetParametrDouble(domElement, AttrMx1, QString::number(labelMX)));
-        initData.my1 =
-            VAbstractValApplication::VApp()->toPixel(GetParametrDouble(domElement, AttrMy1, QString::number(labelMY)));
+        initData.mx1 = app->toPixel(GetParametrDouble(domElement, AttrMx1, labelMXStr));
+        initData.my1 = app->toPixel(GetParametrDouble(domElement, AttrMy1, labelMYStr));
         initData.showLabel1 = GetParametrBool(domElement, AttrShowLabel1, trueStr);
 
         initData.name2 = GetParametrString(domElement, AttrName2, QChar('A'));
-        initData.mx2 =
-            VAbstractValApplication::VApp()->toPixel(GetParametrDouble(domElement, AttrMx2, QString::number(labelMX)));
-        initData.my2 =
-            VAbstractValApplication::VApp()->toPixel(GetParametrDouble(domElement, AttrMy2, QString::number(labelMY)));
+        initData.mx2 = app->toPixel(GetParametrDouble(domElement, AttrMx2, labelMXStr));
+        initData.my2 = app->toPixel(GetParametrDouble(domElement, AttrMy2, labelMYStr));
         initData.showLabel2 = GetParametrBool(domElement, AttrShowLabel2, trueStr);
 
         VToolTrueDarts::Create(initData);
@@ -4865,26 +4960,43 @@ auto VPattern::ActiveDrawBoundingRect() const -> QRectF
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T> auto VPattern::ToolBoundingRect(const QRectF &rec, quint32 id) const -> QRectF
 {
-    QRectF recTool = rec;
-    if (tools.contains(id))
+    VDataTool *dataTool = tools.value(id, nullptr);
+    if (dataTool == nullptr)
     {
-        if (const T *vTool = qobject_cast<T *>(tools.value(id)); vTool != nullptr)
-        {
-            QRectF childrenRect = vTool->childrenBoundingRect();
-            // map to scene coordinate.
-            childrenRect.translate(vTool->scenePos());
+        qDebug() << "Can't find tool or null pointer for id=" << id;
+        return rec;
+    }
 
-            recTool = recTool.united(vTool->sceneBoundingRect());
-            recTool = recTool.united(childrenRect);
-        }
-        else
-        {
-            qDebug() << "qobject_cast failed for tool with id=" << id;
-        }
-    }
-    else
+    const T *vTool = qobject_cast<T *>(dataTool);
+    if (vTool == nullptr)
     {
-        qDebug() << "Can't find tool with id=" << id;
+        qDebug() << "qobject_cast<" << T::staticMetaObject.className() << "> failed for id=" << id
+                 << "actual type:" << dataTool->metaObject()->className();
+        return rec;
     }
+
+    // sceneBoundingRect() and scenePos() are undefined if the item has no scene.
+    if (vTool->scene() == nullptr)
+    {
+        qDebug() << "Tool id=" << id << "(" << dataTool->metaObject()->className()
+                 << ") has no scene, skipping bounding rect";
+        return rec;
+    }
+
+    QRectF recTool = rec;
+
+    if (const QRectF sceneBounds = vTool->sceneBoundingRect(); sceneBounds.isValid())
+    {
+        recTool = recTool.united(sceneBounds);
+    }
+
+    if (const QRectF childrenRect = vTool->childrenBoundingRect(); childrenRect.isValid())
+    {
+        // childrenBoundingRect() is in item-local coords — translate to scene space.
+        QRectF childrenSceneRect = childrenRect;
+        childrenSceneRect.translate(vTool->scenePos());
+        recTool = recTool.united(childrenSceneRect);
+    }
+
     return recTool;
 }

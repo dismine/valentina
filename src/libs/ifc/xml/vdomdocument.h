@@ -113,7 +113,7 @@ public:
                                   const QString &defValue = QString()) -> QString;
     static auto GetParametrEmptyString(const QDomElement &domElement, const QString &name) -> QString;
     static auto GetParametrDouble(const QDomElement &domElement, const QString &name, const QString &defValue) -> qreal;
-    static auto GetParametrId(const QDomElement &domElement) -> quint32;
+    static auto GetParametrId(const QDomElement &domElement, const QString &name = VDomDocument::AttrId) -> quint32;
 
     virtual void setXMLContent(const QString &fileName);
     static auto UnitsHelpString() -> QString;

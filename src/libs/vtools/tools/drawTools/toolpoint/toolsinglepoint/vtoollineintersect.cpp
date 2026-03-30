@@ -199,7 +199,7 @@ auto VToolLineIntersect::Create(VToolLineIntersectInitData initData) -> VToolLin
         VAbstractTool::AddRecord(initData.id, Tool::LineIntersect, initData.doc);
         auto *point = new VToolLineIntersect(initData);
         initData.scene->addItem(point);
-        InitToolConnections(initData.scene, point);
+        InitPointToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
         return point;
     }

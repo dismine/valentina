@@ -568,6 +568,22 @@ auto VAbstractCubicBezier::HeadlessName() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VAbstractCubicBezier::GetMidpoint() const -> VPointF
+{
+    QPointF spl1p2;
+    QPointF spl1p3;
+    QPointF spl2p2;
+    QPointF spl2p3;
+
+    const QPointF cutPoint = CutSplineAtParam(0.5, spl1p2, spl1p3, spl2p2, spl2p3);
+
+    VPointF pos(cutPoint);
+    pos.setId(id());
+    pos.setName(ObjectName());
+    return pos;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VAbstractCubicBezier::GetTypeHead() const -> QString
 {
     return SPL_;

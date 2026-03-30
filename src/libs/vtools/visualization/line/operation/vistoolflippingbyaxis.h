@@ -31,10 +31,10 @@
 
 #include <QtGlobal>
 
-#include "visoperation.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "visflippingoperation.h"
 
-class VisToolFlippingByAxis : public VisOperation
+class VisToolFlippingByAxis : public VisFlippingOperation
 {
     Q_OBJECT // NOLINT
 public:

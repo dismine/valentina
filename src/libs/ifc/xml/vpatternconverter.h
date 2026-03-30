@@ -54,7 +54,7 @@ public:
     static const QString PatternMaxVerStr;
     static const QString CurrentSchema;
     static constexpr const unsigned PatternMinVer = FormatVersion(0, 1, 4);
-    static constexpr const unsigned PatternMaxVer = FormatVersion(1, 1, 3);
+    static constexpr const unsigned PatternMaxVer = FormatVersion(1, 2, 0);
 
     static auto XSDSchemas() -> QHash<unsigned, QString>;
 
@@ -94,7 +94,7 @@ private:
     void ToV0_9_6();
     void ToV0_9_7();
     void ToV1_1_0();
-    void ToV1_1_3();
+    void ToV1_2_0();
 
     void TagUnitToV0_2_0();
     void TagIncrementToV0_2_0();
@@ -162,6 +162,10 @@ private:
     void ConvertMirrorLineToV0_9_7() const;
 
     void RemoveInUseAttributeV1_1_0() const;
+
+    auto MaxIdV1_2_0() const -> std::pair<quint32, QSet<quint32>>;
+    void AddSegmentIdsV1_2_0(quint32 maxId, const QSet<quint32> &arcs) const;
+    void ExplicitSegmentIdsV1_2_0() const;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

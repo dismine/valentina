@@ -39,6 +39,7 @@
 #include "../vmisc/typedef.h"
 #include "vgeometrydef.h"
 #include "vgobject.h"
+#include "vpointf.h"
 
 using DirectionArrow = QPair<QLineF, QLineF>;
 
@@ -74,6 +75,7 @@ public:
     auto GetLengthByPoint(const QPointF &point) const -> qreal;
     virtual auto IntersectLine(const QLineF &line) const -> QVector<QPointF>;
     virtual auto IsIntersectLine(const QLineF &line) const -> bool;
+    virtual auto GetMidpoint() const -> VPointF = 0;
 
     static auto IsPointOnCurve(const QVector<QPointF> &points, const QPointF &p) -> bool;
     auto IsPointOnCurve(const QPointF &p) const -> bool;
@@ -82,6 +84,8 @@ public:
 
     virtual auto GetStartAngle() const -> qreal = 0;
     virtual auto GetEndAngle() const -> qreal = 0;
+
+    auto SceneObjectType() const -> SceneObject;
 
     auto GetDuplicate() const -> quint32;
     void SetDuplicate(quint32 number);

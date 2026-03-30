@@ -41,10 +41,11 @@ class ShowDoubleLabel : public VUndoCommand
 public:
     ShowDoubleLabel(VAbstractPattern *doc, quint32 toolId, quint32 pointId, bool visible, ShowDoublePoint type,
                     QUndoCommand *parent = nullptr);
-    virtual ~ShowDoubleLabel()=default;
+    ~ShowDoubleLabel() override = default;
 
-    virtual void undo() override;
-    virtual void redo() override;
+    void undo() override;
+    void redo() override;
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(ShowDoubleLabel) // NOLINT

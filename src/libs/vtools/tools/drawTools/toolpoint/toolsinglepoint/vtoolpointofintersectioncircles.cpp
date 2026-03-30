@@ -187,7 +187,7 @@ auto VToolPointOfIntersectionCircles::Create(VToolPointOfIntersectionCirclesInit
         VAbstractTool::AddRecord(initData.id, Tool::PointOfIntersectionCircles, initData.doc);
         auto *point = new VToolPointOfIntersectionCircles(initData);
         initData.scene->addItem(point);
-        InitToolConnections(initData.scene, point);
+        InitPointToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
         return point;
     }

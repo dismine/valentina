@@ -213,7 +213,7 @@ auto VToolBisector::Create(VToolBisectorInitData &initData) -> VToolBisector *
         VAbstractTool::AddRecord(initData.id, Tool::Bisector, initData.doc);
         auto *point = new VToolBisector(initData);
         initData.scene->addItem(point);
-        InitToolConnections(initData.scene, point);
+        InitPointToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
         return point;
     }

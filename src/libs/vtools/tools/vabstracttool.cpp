@@ -306,6 +306,13 @@ void VAbstractTool::ChangeLabelPosition(quint32 id, const QPointF &pos)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractTool::ChangeSegmentLabelPosition(SegmentLabel segment, const QPointF &pos)
+{
+    Q_UNUSED(segment)
+    Q_UNUSED(pos)
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractTool::SetLabelVisible(quint32 id, bool visible)
 {
     Q_UNUSED(id)

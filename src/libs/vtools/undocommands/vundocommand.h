@@ -58,6 +58,7 @@ enum class UndoCommand : qint8
     DeletePatternPiece,
     RenamePP,
     MoveLabel,
+    MoveSegmentLabel,
     MoveDoubleLabel,
     RotationMoveLabel,
     MoveBackGroundImage,
@@ -80,6 +81,8 @@ public:
     VUndoCommand(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
     ~VUndoCommand() override = default;
 
+    static auto GetDestinationObject(VAbstractPattern *doc, quint32 idTool, quint32 idPoint) -> QDomElement;
+
 signals:
     void ClearScene();
     void NeedFullParsing();
@@ -88,8 +91,6 @@ signals:
 protected:
     virtual void RedoFullParsing();
     void UndoDeleteAfterSibling(QDomNode &parentNode, quint32 siblingId, const QString &tagName = QString()) const;
-
-    auto GetDestinationObject(quint32 idTool, quint32 idPoint) const -> QDomElement;
 
     static void DisablePieceNodes(const VPiecePath &path);
     static void EnablePieceNodes(const VPiecePath &path);

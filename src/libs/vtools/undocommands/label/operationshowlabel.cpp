@@ -49,7 +49,7 @@ OperationShowLabel::OperationShowLabel(
 
     qCDebug(vUndo, "Tool id %u", m_idTool);
 
-    const QDomElement element = GetDestinationObject(m_idTool, idPoint);
+    const QDomElement element = GetDestinationObject(Doc(), m_idTool, idPoint);
     if (element.isElement())
     {
         m_oldVisible = VDomDocument::GetParametrBool(element, AttrShowLabel, trueStr);
@@ -79,7 +79,7 @@ void OperationShowLabel::redo()
 //---------------------------------------------------------------------------------------------------------------------
 void OperationShowLabel::Do(bool visible)
 {
-    QDomElement domElement = GetDestinationObject(m_idTool, ElementId());
+    QDomElement domElement = GetDestinationObject(Doc(), m_idTool, ElementId());
     if (not domElement.isNull() && domElement.isElement())
     {
         Doc()->SetAttribute<bool>(domElement, AttrShowLabel, visible);

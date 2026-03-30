@@ -177,7 +177,7 @@ auto VToolNormal::Create(VToolNormalInitData &initData) -> VToolNormal *
         VAbstractTool::AddRecord(initData.id, Tool::Normal, initData.doc);
         auto *point = new VToolNormal(initData);
         initData.scene->addItem(point);
-        InitToolConnections(initData.scene, point);
+        InitPointToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
         return point;
     }

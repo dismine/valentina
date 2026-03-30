@@ -84,15 +84,12 @@ private:
     VScaledLine *m_xAxis{nullptr};
     quint32 m_rotationOriginId{NULL_ID};
 
-    template <class Item> auto AddOriginCurve(quint32 id, int &i) -> QGraphicsPathItem *;
-
     template <class Item>
     auto AddMovedRotatedCurve(qreal angle, qreal length, quint32 id, int i, qreal rotationAngle,
                               const QPointF &rotationOrigin) -> int;
 
     static auto GetOriginPoint(const QVector<QGraphicsItem *> &objects) -> QPointF;
 
-    auto CreateOriginObjects(int &iPoint, int &iCurve) -> QVector<QGraphicsItem *>;
     void CreateMovedRotatedObjects(int &iPoint, int &iCurve, qreal length, qreal angle, qreal rotationAngle,
                                    const QPointF &rotationOrigin);
 };

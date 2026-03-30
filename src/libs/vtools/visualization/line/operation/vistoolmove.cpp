@@ -80,6 +80,17 @@ void VisToolMove::RefreshGeometry()
 
     const QVector<QGraphicsItem *> originObjects = CreateOriginObjects(iPoint, iCurve);
 
+    if (originObjects.isEmpty())
+    {
+        m_pointOrigin->setVisible(false);
+        return;
+    }
+
+    if (GetMode() == Mode::Creation && !ObjectSelected())
+    {
+        return;
+    }
+
     QPointF origin = GetOriginPoint(originObjects);
     DrawPoint(m_pointOrigin, origin);
 
@@ -153,7 +164,8 @@ void VisToolMove::RefreshGeometry()
         DrawLine(m_xAxis, QLineF(origin, Ray(origin, 0)), Qt::DashLine);
 
         VArc const arc(VPointF(origin),
-                       ScaledRadius(SceneScale(VAbstractValApplication::VApp()->getCurrentScene())) * 2, 0,
+                       ScaledRadius(SceneScale(VAbstractValApplication::VApp()->getCurrentScene())) * 2,
+                       0,
                        tempRoationAngle);
         DrawPath(m_angleArc, arc.GetPath(), Qt::SolidLine, Qt::RoundCap);
     }
@@ -179,8 +191,12 @@ void VisToolMove::RefreshGeometry()
         {
             SetToolTip(tr("Length = %1%2, angle = %3°, rotation angle = %4°, <b>%5</b> - sticking angle, "
                           "<b>%6</b> - change rotation origin point, <b>Mouse click</b> - finish creating")
-                           .arg(LengthToUser(tempLength), prefix, AngleToUser(tempAngle), AngleToUser(tempRoationAngle),
-                                VModifierKey::Shift(), VModifierKey::Control()));
+                           .arg(LengthToUser(tempLength),
+                                prefix,
+                                AngleToUser(tempAngle),
+                                AngleToUser(tempRoationAngle),
+                                VModifierKey::Shift(),
+                                VModifierKey::Control()));
         }
     }
 
@@ -230,18 +246,6 @@ void VisToolMove::SetLength(const QString &expression)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <class Item> auto VisToolMove::AddOriginCurve(quint32 id, int &i) -> QGraphicsPathItem *
-{
-    const QSharedPointer<Item> curve = GetData()->template GeometricObject<Item>(id);
-
-    ++i;
-    VCurvePathItem *path = GetCurve(static_cast<quint32>(i), VColorRole::VisSupportColor2);
-    DrawPath(path, curve->GetPath(), curve->DirectionArrows(), Qt::SolidLine, Qt::RoundCap);
-
-    return path;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 template <class Item>
 auto VisToolMove::AddMovedRotatedCurve(qreal angle, qreal length, quint32 id, int i, qreal rotationAngle,
                                        const QPointF &rotationOrigin) -> int
@@ -278,66 +282,6 @@ auto VisToolMove::GetOriginPoint(const QVector<QGraphicsItem *> &objects) -> QPo
     }
 
     return boundingRect.center();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VisToolMove::CreateOriginObjects(int &iPoint, int &iCurve) -> QVector<QGraphicsItem *>
-{
-    QVector<QGraphicsItem *> originObjects;
-    originObjects.reserve(Objects().size());
-
-    for (auto id : Objects())
-    {
-        const QSharedPointer<VGObject> obj = GetData()->GetGObject(id);
-
-        // This check helps to find missed objects in the switch
-        Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects were handled.");
-
-        QT_WARNING_PUSH
-        QT_WARNING_DISABLE_GCC("-Wswitch-default")
-        QT_WARNING_DISABLE_CLANG("-Wswitch-default")
-
-        switch (obj->getType())
-        {
-            case GOType::Point:
-            {
-                const QSharedPointer<VPointF> p = GetData()->GeometricObject<VPointF>(id);
-
-                ++iPoint;
-                VScaledEllipse *point = GetPoint(static_cast<quint32>(iPoint), VColorRole::VisSupportColor2);
-                DrawPoint(point, static_cast<QPointF>(*p));
-                originObjects.append(point);
-
-                break;
-            }
-            case GOType::Arc:
-                originObjects.append(AddOriginCurve<VArc>(id, iCurve));
-                break;
-            case GOType::EllipticalArc:
-                originObjects.append(AddOriginCurve<VEllipticalArc>(id, iCurve));
-                break;
-            case GOType::Spline:
-                originObjects.append(AddOriginCurve<VSpline>(id, iCurve));
-                break;
-            case GOType::SplinePath:
-                originObjects.append(AddOriginCurve<VSplinePath>(id, iCurve));
-                break;
-            case GOType::CubicBezier:
-                originObjects.append(AddOriginCurve<VCubicBezier>(id, iCurve));
-                break;
-            case GOType::CubicBezierPath:
-                originObjects.append(AddOriginCurve<VCubicBezierPath>(id, iCurve));
-                break;
-            case GOType::Unknown:
-            case GOType::PlaceLabel:
-                Q_UNREACHABLE();
-                break;
-        }
-
-        QT_WARNING_POP
-    }
-
-    return originObjects;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

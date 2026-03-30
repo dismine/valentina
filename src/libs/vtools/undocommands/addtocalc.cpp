@@ -93,7 +93,7 @@ void AddToCalc::redo()
     qCDebug(vUndo, "Redo.");
 
     // Without this user will not see this change
-    Doc()->ShowPatternBlock(Doc()->PatternBlockMapper()->FindName(m_indexActiveBlock));
+    emit Doc()->ShowPatternBlock(Doc()->PatternBlockMapper()->FindName(m_indexActiveBlock));
 
     QDomElement calcElement;
     if (Doc()->GetActivNodeElement(VAbstractPattern::TagCalculation, calcElement))

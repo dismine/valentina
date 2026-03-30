@@ -239,7 +239,7 @@ auto VToolShoulderPoint::Create(VToolShoulderPointInitData &initData) -> VToolSh
         VAbstractTool::AddRecord(initData.id, Tool::ShoulderPoint, initData.doc);
         auto *point = new VToolShoulderPoint(initData);
         initData.scene->addItem(point);
-        InitToolConnections(initData.scene, point);
+        InitPointToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
         return point;
     }

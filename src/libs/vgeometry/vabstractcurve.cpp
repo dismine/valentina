@@ -322,6 +322,29 @@ auto VAbstractCurve::ClosestPoint(QPointF scenePoint) const -> QPointF
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VAbstractCurve::SceneObjectType() const -> SceneObject
+{
+    switch (getType())
+    {
+        case GOType::Arc:
+            return SceneObject::Arc;
+        case GOType::EllipticalArc:
+            return SceneObject::ElArc;
+        case GOType::Spline:
+        case GOType::CubicBezier:
+            return SceneObject::Spline;
+        case GOType::SplinePath:
+        case GOType::CubicBezierPath:
+            return SceneObject::SplinePath;
+        case GOType::Point:
+        case GOType::PlaceLabel:
+        case GOType::Unknown:
+        default:
+            return SceneObject::Unknown;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VAbstractCurve::GetPath() const -> QPainterPath
 {
     QPainterPath path;
