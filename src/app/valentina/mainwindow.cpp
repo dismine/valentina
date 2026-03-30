@@ -4882,6 +4882,11 @@ void MainWindow::FullParseFile()
 void MainWindow::GlobalChangePP(const QString &patternPiece)
 {
     const qint32 index = m_comboBoxDraws->findText(patternPiece);
+    if (index == m_comboBoxDraws->currentIndex())
+    {
+        return;
+    }
+
     try
     {
         if (index != -1)
