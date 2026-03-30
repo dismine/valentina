@@ -4746,7 +4746,11 @@ void MainWindow::Clear()
     m_sceneDraw->SetAcceptDrop(false);
     m_sceneDetails->clear();
     ArrowTool(true);
-    m_comboBoxDraws->clear();
+    {
+        const QSignalBlocker blocker(m_comboBoxDraws);
+        m_comboBoxDraws->clear();
+        m_comboBoxDraws->setDisabled(true);
+    }
     ui->actionDraw->setEnabled(false);
     ui->actionDetails->setEnabled(false);
     ui->actionLayout->setEnabled(false);
