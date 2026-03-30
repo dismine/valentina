@@ -3692,6 +3692,7 @@ void MainWindow::CancelTool()
         case Tool::Arrow:
             ui->actionToolSelect->setChecked(false);
             m_statusLabel->setText(QString());
+            m_comboBoxDraws->setEnabled(false);
 
             // Crash: using CRTL+Z while using line tool.
             // related bug report:
@@ -3955,6 +3956,7 @@ void MainWindow::ArrowTool(bool checked)
         qCDebug(vMainWindow, "Arrow tool.");
         CancelTool();
         ui->actionToolSelect->setChecked(true);
+        m_comboBoxDraws->setEnabled(true);
         m_currentTool = Tool::Arrow;
         emit EnableItemMove(true);
         emit ItemsSelection(SelectionType::ByMouseRelease);
@@ -7389,13 +7391,9 @@ void MainWindow::ChangePP(int index, bool zoomBestFit)
     {
         doc->PatternBlockMapper()->SetActive(m_comboBoxDraws->itemText(index));
         doc->setCurrentData();
-        if (m_drawMode)
+        if (m_drawMode && zoomBestFit)
         {
-            ArrowTool(true);
-            if (zoomBestFit)
-            {
-                ZoomFitBestCurrent();
-            }
+            ZoomFitBestCurrent();
         }
         m_toolOptions->itemClicked(nullptr); // hide options for tool in previous pattern piece
         m_groupsWidget->UpdateGroups();
