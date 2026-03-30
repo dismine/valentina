@@ -828,7 +828,18 @@ void VAbstractOperation::ReadToolAttributes(const QDomElement &domElement)
 {
     VDrawTool::ReadToolAttributes(domElement);
 
-    m_source = ExtractSourceData(domElement);
+    QVector<SourceItem> source = ExtractSourceData(domElement);
+    for (auto &item : source)
+    {
+        auto it = std::find_if(m_source.cbegin(),
+                               m_source.cend(),
+                               [&item](const SourceItem &s) { return s.id == item.id; });
+        if (it != m_source.cend())
+        {
+            item.recordId = it->recordId;
+        }
+    }
+
     m_destination = ExtractDestinationData(domElement);
 
     if (m_source.size() != m_destination.size())
