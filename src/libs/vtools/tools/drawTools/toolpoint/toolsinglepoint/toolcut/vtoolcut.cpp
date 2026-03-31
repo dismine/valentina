@@ -32,7 +32,7 @@
 #include <QSharedPointer>
 #include <QUndoStack>
 
-#include "../../../../..//undocommands/label/movesegmentlabel.h"
+#include "../../../../../undocommands/label/movesegmentlabel.h"
 #include "../../../../../undocommands/renameobject.h"
 #include "../../../../../undocommands/savetooloptions.h"
 #include "../../../../vabstracttool.h"
