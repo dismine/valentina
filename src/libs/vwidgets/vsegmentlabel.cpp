@@ -37,7 +37,12 @@
 
 #include <utility>
 #include <QPainter>
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 9, 0)
+#include "../vmisc/backport/qpainterstateguard.h"
+#else
 #include <QPainterStateGuard>
+#endif
 
 namespace
 {
