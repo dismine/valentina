@@ -2351,21 +2351,29 @@ void VPatternConverter::RemoveInUseAttributeV1_1_0() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPatternConverter::MaxIdV1_2_0() const -> std::pair<quint32, QSet<quint32>>
+auto VPatternConverter::MaxIdV1_2_0() const -> std::tuple<quint32, QSet<quint32>, QSet<quint32>>
 {
     // TODO. Delete if minimal supported version is 1.2.0
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(1, 2, 0), "Time to refactor the code.");
 
     quint32 maxId = 0;
+    QSet<quint32> usedIds;
     QSet<quint32> arcs;
 
     auto ToId = [](const QString &val, bool *ok = nullptr) -> quint32 { return val.toUInt(ok); };
 
-    auto UpdateMax = [&maxId, &ToId](const QString &val, quint32 extra = 0)
+    auto UpdateMax = [&maxId, &usedIds, &ToId](const QString &val, quint32 extra = 0)
     {
         bool ok = false;
         const quint32 id = ToId(val, &ok);
-        if (ok && (id + extra) > maxId)
+        if (!ok)
+        {
+            return;
+        }
+
+        usedIds.insert(id);
+
+        if ((id + extra) > maxId)
         {
             maxId = id + extra;
         }
@@ -2472,23 +2480,49 @@ auto VPatternConverter::MaxIdV1_2_0() const -> std::pair<quint32, QSet<quint32>>
     IterateSection(*strModeling);
     IterateSection(*strDetails);
 
-    return {maxId, arcs};
+    return {maxId, arcs, usedIds};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPatternConverter::AddSegmentIdsV1_2_0(quint32 maxId, const QSet<quint32> &arcs) const
+void VPatternConverter::AddSegmentIdsV1_2_0(quint32 maxId, const QSet<quint32> &arcs, const QSet<quint32> &usedIds) const
 {
     // TODO. Delete if minimal supported version is 1.2.0
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(1, 2, 0), "Time to refactor the code.");
 
+    QSet<quint32> allocated = usedIds;
+
     auto SetAttrId = [this](QDomElement &el, const QString &attr, quint32 val) -> void
     { SetAttribute(el, attr, QString::number(val)); };
 
-    auto AllocFromMax = [&maxId, &SetAttrId](QDomElement &el, const QString &attr1, const QString &attr2) -> void
+    auto AllocNext = [&maxId, &allocated]() -> quint32
     {
-        SetAttrId(el, attr1, maxId + 1);
-        SetAttrId(el, attr2, maxId + 2);
-        maxId += 2;
+        while (allocated.contains(maxId + 1))
+        {
+            ++maxId;
+        }
+        ++maxId;
+        allocated.insert(maxId);
+        return maxId;
+    };
+
+    auto AllocFromMax = [&AllocNext, &SetAttrId](QDomElement &el, const QString &attr1, const QString &attr2) -> void
+    {
+        SetAttrId(el, attr1, AllocNext());
+        SetAttrId(el, attr2, AllocNext());
+    };
+
+    auto TrySetOrAlloc =
+        [&allocated, &SetAttrId, &AllocNext](QDomElement &el, const QString &attr, quint32 candidate) -> void
+    {
+        if (!allocated.contains(candidate))
+        {
+            allocated.insert(candidate);
+            SetAttrId(el, attr, candidate);
+        }
+        else
+        {
+            SetAttrId(el, attr, AllocNext());
+        }
     };
 
     const QDomNodeList calcSections = elementsByTagName(*strCalculation);
@@ -2515,8 +2549,8 @@ void VPatternConverter::AddSegmentIdsV1_2_0(quint32 maxId, const QSet<quint32> &
 
             if (type == *strCutArc)
             {
-                SetAttrId(el, *strSegment1Id, id + 1);
-                SetAttrId(el, *strSegment2Id, id + 2);
+                TrySetOrAlloc(el, *strSegment1Id, id + 1);
+                TrySetOrAlloc(el, *strSegment2Id, id + 2);
             }
             else if (type == *strCutSpline || type == *strCutSplinePath)
             {
@@ -2528,8 +2562,8 @@ void VPatternConverter::AddSegmentIdsV1_2_0(quint32 maxId, const QSet<quint32> &
                 const quint32 curveId = el.attribute(*strCurve).toUInt(&curveOk);
                 if (curveOk && arcs.contains(curveId))
                 {
-                    SetAttrId(el, *strSegment1Id, id + 1);
-                    SetAttrId(el, *strSegment2Id, id + 2);
+                    TrySetOrAlloc(el, *strSegment1Id, id + 1);
+                    TrySetOrAlloc(el, *strSegment2Id, id + 2);
                 }
                 else
                 {
@@ -2553,22 +2587,22 @@ void VPatternConverter::AddSegmentIdsV1_2_0(quint32 maxId, const QSet<quint32> &
 
                 if (curve1IsArc && curve2IsArc)
                 {
-                    SetAttrId(el, *strSegment1Id, id + 1);
-                    SetAttrId(el, *strSegment2Id, id + 2);
-                    SetAttrId(el, *strSegment3Id, id + 3);
-                    SetAttrId(el, *strSegment4Id, id + 4);
+                    TrySetOrAlloc(el, *strSegment1Id, id + 1);
+                    TrySetOrAlloc(el, *strSegment2Id, id + 2);
+                    TrySetOrAlloc(el, *strSegment3Id, id + 3);
+                    TrySetOrAlloc(el, *strSegment4Id, id + 4);
                 }
                 else if (curve1IsArc) // curve2 is not an arc
                 {
-                    SetAttrId(el, *strSegment1Id, id + 1);
-                    SetAttrId(el, *strSegment2Id, id + 2);
+                    TrySetOrAlloc(el, *strSegment1Id, id + 1);
+                    TrySetOrAlloc(el, *strSegment2Id, id + 2);
                     AllocFromMax(el, *strSegment3Id, *strSegment4Id);
                 }
                 else if (curve2IsArc) // curve1 is not an arc
                 {
                     AllocFromMax(el, *strSegment1Id, *strSegment2Id);
-                    SetAttrId(el, *strSegment3Id, id + 1);
-                    SetAttrId(el, *strSegment4Id, id + 2);
+                    TrySetOrAlloc(el, *strSegment3Id, id + 1);
+                    TrySetOrAlloc(el, *strSegment4Id, id + 2);
                 }
                 else // neither is an arc
                 {
@@ -2586,8 +2620,8 @@ void VPatternConverter::ExplicitSegmentIdsV1_2_0() const
     // TODO. Delete if minimal supported version is 1.2.0
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(1, 2, 0), "Time to refactor the code.");
 
-    const auto [maxId, arcs] = MaxIdV1_2_0();
-    AddSegmentIdsV1_2_0(maxId, arcs);
+    const auto [maxId, arcs, usedIds] = MaxIdV1_2_0();
+    AddSegmentIdsV1_2_0(maxId, arcs, usedIds);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
