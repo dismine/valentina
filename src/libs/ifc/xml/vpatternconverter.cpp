@@ -2538,10 +2538,8 @@ void VPatternConverter::AddSegmentIdsV1_2_0(quint32 maxId, const QSet<quint32> &
             }
             else if (type == *strPointOfIntersectionArcs)
             {
-                SetAttrId(el, *strSegment1Id, id + 1);
-                SetAttrId(el, *strSegment2Id, id + 2);
-                SetAttrId(el, *strSegment3Id, id + 3);
-                SetAttrId(el, *strSegment4Id, id + 4);
+                AllocFromMax(el, *strSegment1Id, *strSegment2Id);
+                AllocFromMax(el, *strSegment3Id, *strSegment4Id);
             }
             else if (type == *strPointOfIntersectionCurves)
             {
