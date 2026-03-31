@@ -36,7 +36,6 @@
 #include "../../../../../undocommands/renameobject.h"
 #include "../../../../../undocommands/savetooloptions.h"
 #include "../../../../vabstracttool.h"
-#include "../../../vdrawtool.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vdomdocument.h"
 #include "../ifc/xml/vpatternblockmapper.h"
