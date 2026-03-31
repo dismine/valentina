@@ -839,6 +839,7 @@ void VAbstractOperation::ReadToolAttributes(const QDomElement &domElement)
             item.recordId = it->recordId;
         }
     }
+    m_source = source;
 
     m_destination = ExtractDestinationData(domElement);
 
