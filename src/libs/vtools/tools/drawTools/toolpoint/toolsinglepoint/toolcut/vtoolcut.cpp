@@ -236,23 +236,20 @@ void VToolCut::ProcessToolCutOptions(const QDomElement &oldDomElement,
 //---------------------------------------------------------------------------------------------------------------------
 auto VToolCut::itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant
 {
-    if (change == QGraphicsItem::ItemSelectedHasChanged)
+    if (change == QGraphicsItem::ItemSelectedHasChanged && !m_selectedFromChild)
     {
-        if (not m_selectedFromChild)
+        if (m_segment1Id != NULL_ID)
         {
-            if (m_segment1Id != NULL_ID)
-            {
-                const QSignalBlocker blockerSegment1Label(m_segment1Label);
-                m_segment1Label->SetLabelVisible(value.toBool());
-                m_segment1Label->setSelected(value.toBool());
-            }
+            const QSignalBlocker blockerSegment1Label(m_segment1Label);
+            m_segment1Label->SetLabelVisible(value.toBool());
+            m_segment1Label->setSelected(value.toBool());
+        }
 
-            if (m_segment1Id != NULL_ID)
-            {
-                const QSignalBlocker blockeSegment2Label(m_segment2Label);
-                m_segment2Label->setSelected(value.toBool());
-                m_segment2Label->SetLabelVisible(value.toBool());
-            }
+        if (m_segment1Id != NULL_ID)
+        {
+            const QSignalBlocker blockeSegment2Label(m_segment2Label);
+            m_segment2Label->setSelected(value.toBool());
+            m_segment2Label->SetLabelVisible(value.toBool());
         }
     }
 
