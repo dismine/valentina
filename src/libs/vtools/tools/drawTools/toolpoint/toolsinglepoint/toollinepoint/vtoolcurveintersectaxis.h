@@ -109,6 +109,8 @@ public:
     void ShowVisualization(bool show) override;
     void ChangeSegmentLabelPosition(SegmentLabel segment, const QPointF &pos) override;
 
+    auto IsRemovable() const -> RemoveStatus override;
+
 public slots:
     void Enable() override;
     void EnableToolMove(bool move) override;

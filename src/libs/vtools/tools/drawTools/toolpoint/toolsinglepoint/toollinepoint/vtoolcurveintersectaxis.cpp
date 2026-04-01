@@ -597,6 +597,45 @@ void VToolCurveIntersectAxis::ChangeSegmentLabelPosition(SegmentLabel segment, c
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VToolCurveIntersectAxis::IsRemovable() const -> RemoveStatus
+{
+    if (!doc->IsPatternGraphComplete())
+    {
+        return RemoveStatus::Pending; // Data not ready yet
+    }
+
+    VPatternGraph const *patternGraph = doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    auto Filter = [](const auto &node) -> auto
+    { return node.type != VNodeType::MODELING_TOOL && node.type != VNodeType::MODELING_OBJECT; };
+
+    auto const segment1Dependecies = patternGraph->TryGetDependentNodes(m_segment1Id, 500, Filter);
+    if (!segment1Dependecies)
+    {
+        return RemoveStatus::Pending; // Lock timeout
+    }
+
+    if (!segment1Dependecies->isEmpty())
+    {
+        return RemoveStatus::Blocked;
+    }
+
+    auto const segment2Dependecies = patternGraph->TryGetDependentNodes(m_segment2Id, 500, Filter);
+    if (!segment2Dependecies)
+    {
+        return RemoveStatus::Pending; // Lock timeout
+    }
+
+    if (!segment2Dependecies->isEmpty())
+    {
+        return RemoveStatus::Blocked;
+    }
+
+    return RemoveStatus::Removable;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolCurveIntersectAxis::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
 {
     try

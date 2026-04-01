@@ -877,6 +877,67 @@ void VToolPointOfIntersectionArcs::ChangeSegmentLabelPosition(SegmentLabel segme
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VToolPointOfIntersectionArcs::IsRemovable() const -> RemoveStatus
+{
+    if (!doc->IsPatternGraphComplete())
+    {
+        return RemoveStatus::Pending; // Data not ready yet
+    }
+
+    VPatternGraph const *patternGraph = doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    auto Filter = [](const auto &node) -> auto
+    { return node.type != VNodeType::MODELING_TOOL && node.type != VNodeType::MODELING_OBJECT; };
+
+    auto const arc1Segment1Dependecies = patternGraph->TryGetDependentNodes(m_arc1Segment1Id, 500, Filter);
+    if (!arc1Segment1Dependecies)
+    {
+        return RemoveStatus::Pending; // Lock timeout
+    }
+
+    if (!arc1Segment1Dependecies->isEmpty())
+    {
+        return RemoveStatus::Blocked;
+    }
+
+    auto const arc1Segment2Dependecies = patternGraph->TryGetDependentNodes(m_arc1Segment2Id, 500, Filter);
+    if (!arc1Segment2Dependecies)
+    {
+        return RemoveStatus::Pending; // Lock timeout
+    }
+
+    if (!arc1Segment2Dependecies->isEmpty())
+    {
+        return RemoveStatus::Blocked;
+    }
+
+    auto const arc2Segment1Dependecies = patternGraph->TryGetDependentNodes(m_arc2Segment1Id, 500, Filter);
+    if (!arc2Segment1Dependecies)
+    {
+        return RemoveStatus::Pending; // Lock timeout
+    }
+
+    if (!arc2Segment1Dependecies->isEmpty())
+    {
+        return RemoveStatus::Blocked;
+    }
+
+    auto const arc2Segment2Dependecies = patternGraph->TryGetDependentNodes(m_arc2Segment2Id, 500, Filter);
+    if (!arc2Segment2Dependecies)
+    {
+        return RemoveStatus::Pending; // Lock timeout
+    }
+
+    if (!arc2Segment2Dependecies->isEmpty())
+    {
+        return RemoveStatus::Blocked;
+    }
+
+    return RemoveStatus::Removable;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersectionArcs::Enable()
 {
     const bool enabled = m_indexActivePatternBlock == doc->PatternBlockMapper()->GetActiveId();
