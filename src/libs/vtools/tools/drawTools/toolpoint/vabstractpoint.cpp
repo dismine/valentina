@@ -121,7 +121,7 @@ void VAbstractPoint::ProcessPointToolOptions(const QDomElement &oldDomElement,
     saveOptions->SetInGroup(true);
     connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
 
-    auto *renameLabel = new RenameLabel(changes.oldLabel, changes.newLabel, doc, changes.pointId, newGroup);
+    const auto *renameLabel = new RenameLabel(changes.oldLabel, changes.newLabel, doc, changes.pointId, newGroup);
     connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
 
     undoStack->push(newGroup);

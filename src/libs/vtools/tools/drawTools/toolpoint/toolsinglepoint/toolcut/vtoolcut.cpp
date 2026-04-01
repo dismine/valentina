@@ -184,7 +184,7 @@ void VToolCut::ProcessToolCutOptions(const QDomElement &oldDomElement,
 
     if (changes.LabelChanged())
     {
-        auto *renameLabel = new RenameLabel(changes.oldLabel, changes.newLabel, doc, m_id, newGroup);
+        const auto *renameLabel = new RenameLabel(changes.oldLabel, changes.newLabel, doc, m_id, newGroup);
         if (!changes.Name1Changed() && !changes.Name2Changed() && !changes.AliasSuffix1Changed()
             && !changes.AliasSuffix2Changed())
         {
@@ -197,7 +197,8 @@ void VToolCut::ProcessToolCutOptions(const QDomElement &oldDomElement,
 
     if (changes.Name1Changed())
     {
-        auto *renameName = new RenameAlias(curveType, changes.oldName1, changes.newName1, doc, m_segment1Id, newGroup);
+        const auto *renameName
+            = new RenameAlias(curveType, changes.oldName1, changes.newName1, doc, m_segment1Id, newGroup);
         if (!changes.Name2Changed() && !changes.AliasSuffix1Changed() && !changes.AliasSuffix2Changed())
         {
             connect(renameName, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
@@ -206,7 +207,8 @@ void VToolCut::ProcessToolCutOptions(const QDomElement &oldDomElement,
 
     if (changes.Name2Changed())
     {
-        auto *renameName = new RenameAlias(curveType, changes.oldName2, changes.newName2, doc, m_segment2Id, newGroup);
+        const auto *renameName
+            = new RenameAlias(curveType, changes.oldName2, changes.newName2, doc, m_segment2Id, newGroup);
         if (!changes.AliasSuffix1Changed() && !changes.AliasSuffix2Changed())
         {
             connect(renameName, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
@@ -215,7 +217,7 @@ void VToolCut::ProcessToolCutOptions(const QDomElement &oldDomElement,
 
     if (changes.AliasSuffix1Changed())
     {
-        auto *renameAlias
+        const auto *renameAlias
             = new RenameAlias(curveType, changes.oldAliasSuffix1, changes.newAliasSuffix1, doc, m_segment1Id, newGroup);
         if (!changes.AliasSuffix2Changed())
         {
@@ -225,7 +227,7 @@ void VToolCut::ProcessToolCutOptions(const QDomElement &oldDomElement,
 
     if (changes.AliasSuffix2Changed())
     {
-        auto *renameAlias
+        const auto *renameAlias
             = new RenameAlias(curveType, changes.oldAliasSuffix1, changes.newAliasSuffix1, doc, m_segment2Id, newGroup);
         connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     }

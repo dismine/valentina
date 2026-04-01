@@ -155,7 +155,7 @@ void VToolPointOfIntersectionArcs::ProcessToolOptions(const QDomElement &oldDomE
 
     if (changes.LabelChanged())
     {
-        auto *renameLabel = new RenameLabel(changes.oldLabel, changes.newLabel, doc, m_id, newGroup);
+        const auto *renameLabel = new RenameLabel(changes.oldLabel, changes.newLabel, doc, m_id, newGroup);
         if (!changes.Arc1Name1Changed() && !changes.Arc1Name2Changed() && !changes.Arc2Name1Changed()
             && !changes.Arc2Name2Changed() && !changes.Arc1AliasSuffix1Changed() && !changes.Arc1AliasSuffix2Changed()
             && !changes.Arc2AliasSuffix1Changed() && !changes.Arc2AliasSuffix2Changed())
@@ -169,7 +169,7 @@ void VToolPointOfIntersectionArcs::ProcessToolOptions(const QDomElement &oldDomE
 
     if (changes.Arc1Name1Changed())
     {
-        auto *renameName
+        const auto *renameName
             = new RenameAlias(curve1Type, changes.oldArc1Name1, changes.newArc1Name1, doc, m_arc1Segment1Id, newGroup);
         if (!changes.Arc1Name2Changed() && !changes.Arc2Name1Changed() && !changes.Arc2Name2Changed()
             && !changes.Arc1AliasSuffix1Changed() && !changes.Arc1AliasSuffix2Changed()
@@ -181,7 +181,7 @@ void VToolPointOfIntersectionArcs::ProcessToolOptions(const QDomElement &oldDomE
 
     if (changes.Arc1Name2Changed())
     {
-        auto *renameName
+        const auto *renameName
             = new RenameAlias(curve1Type, changes.oldArc1Name2, changes.newArc1Name2, doc, m_arc1Segment2Id, newGroup);
         if (!changes.Arc2Name1Changed() && !changes.Arc2Name2Changed() && !changes.Arc1AliasSuffix1Changed()
             && !changes.Arc1AliasSuffix2Changed() && !changes.Arc2AliasSuffix1Changed()
@@ -193,12 +193,12 @@ void VToolPointOfIntersectionArcs::ProcessToolOptions(const QDomElement &oldDomE
 
     if (changes.Arc1AliasSuffix1Changed())
     {
-        auto *renameAlias = new RenameAlias(curve1Type,
-                                            changes.oldArc1AliasSuffix1,
-                                            changes.newArc1AliasSuffix1,
-                                            doc,
-                                            m_arc1Segment1Id,
-                                            newGroup);
+        const auto *renameAlias = new RenameAlias(curve1Type,
+                                                  changes.oldArc1AliasSuffix1,
+                                                  changes.newArc1AliasSuffix1,
+                                                  doc,
+                                                  m_arc1Segment1Id,
+                                                  newGroup);
         if (!changes.Arc2Name1Changed() && !changes.Arc2Name2Changed() && !changes.Arc1AliasSuffix2Changed()
             && !changes.Arc2AliasSuffix1Changed() && !changes.Arc2AliasSuffix2Changed())
         {
@@ -208,12 +208,12 @@ void VToolPointOfIntersectionArcs::ProcessToolOptions(const QDomElement &oldDomE
 
     if (changes.Arc1AliasSuffix2Changed())
     {
-        auto *renameAlias = new RenameAlias(curve1Type,
-                                            changes.oldArc1AliasSuffix1,
-                                            changes.newArc1AliasSuffix1,
-                                            doc,
-                                            m_arc1Segment2Id,
-                                            newGroup);
+        const auto *renameAlias = new RenameAlias(curve1Type,
+                                                  changes.oldArc1AliasSuffix1,
+                                                  changes.newArc1AliasSuffix1,
+                                                  doc,
+                                                  m_arc1Segment2Id,
+                                                  newGroup);
         if (!changes.Arc2Name1Changed() && !changes.Arc2Name2Changed() && !changes.Arc2AliasSuffix1Changed()
             && !changes.Arc2AliasSuffix2Changed())
         {
@@ -226,7 +226,7 @@ void VToolPointOfIntersectionArcs::ProcessToolOptions(const QDomElement &oldDomE
 
     if (changes.Arc2Name1Changed())
     {
-        auto *renameName
+        const auto *renameName
             = new RenameAlias(curve2Type, changes.oldArc2Name1, changes.newArc2Name1, doc, m_arc2Segment1Id, newGroup);
         if (!changes.Arc2Name2Changed() && !changes.Arc2AliasSuffix1Changed() && !changes.Arc2AliasSuffix2Changed())
         {
@@ -236,7 +236,7 @@ void VToolPointOfIntersectionArcs::ProcessToolOptions(const QDomElement &oldDomE
 
     if (changes.Arc2Name2Changed())
     {
-        auto *renameName
+        const auto *renameName
             = new RenameAlias(curve2Type, changes.oldArc2Name2, changes.newArc2Name2, doc, m_arc2Segment2Id, newGroup);
         if (!changes.Arc2AliasSuffix1Changed() && !changes.Arc2AliasSuffix2Changed())
         {
@@ -246,12 +246,12 @@ void VToolPointOfIntersectionArcs::ProcessToolOptions(const QDomElement &oldDomE
 
     if (changes.Arc2AliasSuffix1Changed())
     {
-        auto *renameAlias = new RenameAlias(curve2Type,
-                                            changes.oldArc2AliasSuffix1,
-                                            changes.newArc2AliasSuffix1,
-                                            doc,
-                                            m_arc2Segment1Id,
-                                            newGroup);
+        const auto *renameAlias = new RenameAlias(curve2Type,
+                                                  changes.oldArc2AliasSuffix1,
+                                                  changes.newArc2AliasSuffix1,
+                                                  doc,
+                                                  m_arc2Segment1Id,
+                                                  newGroup);
         if (!changes.Arc2AliasSuffix2Changed())
         {
             connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
@@ -260,12 +260,12 @@ void VToolPointOfIntersectionArcs::ProcessToolOptions(const QDomElement &oldDomE
 
     if (changes.Arc2AliasSuffix2Changed())
     {
-        auto *renameAlias = new RenameAlias(curve2Type,
-                                            changes.oldArc2AliasSuffix1,
-                                            changes.newArc2AliasSuffix1,
-                                            doc,
-                                            m_arc2Segment2Id,
-                                            newGroup);
+        const auto *renameAlias = new RenameAlias(curve2Type,
+                                                  changes.oldArc2AliasSuffix1,
+                                                  changes.newArc2AliasSuffix1,
+                                                  doc,
+                                                  m_arc2Segment2Id,
+                                                  newGroup);
 
         connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     }

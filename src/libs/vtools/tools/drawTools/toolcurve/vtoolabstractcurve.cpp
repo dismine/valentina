@@ -570,7 +570,8 @@ void VToolAbstractArc::ProcessArcToolOptions(const QDomElement &oldDomElement,
     {
         const CurveAliasType arcType = arc->getType() == GOType::Arc ? CurveAliasType::Arc : CurveAliasType::ElArc;
 
-        auto *renameAlias = new RenameAlias(arcType, changes.oldAliasSuffix, changes.newAliasSuffix, doc, m_id, newGroup);
+        const auto *renameAlias
+            = new RenameAlias(arcType, changes.oldAliasSuffix, changes.newAliasSuffix, doc, m_id, newGroup);
         connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     }
 
@@ -673,7 +674,7 @@ void VToolAbstractOffsetCurve::ProcessOffsetCurveToolOptions(const QDomElement &
 
     if (changes.NameChanged())
     {
-        auto *renameName
+        const auto *renameName
             = new RenameAlias(CurveAliasType::SplinePath, changes.oldName, changes.newName, doc, m_id, newGroup);
         if (!changes.AliasSuffixChanged())
         {
@@ -683,12 +684,12 @@ void VToolAbstractOffsetCurve::ProcessOffsetCurveToolOptions(const QDomElement &
 
     if (changes.AliasSuffixChanged())
     {
-        auto *renameAlias = new RenameAlias(CurveAliasType::SplinePath,
-                                            changes.oldAliasSuffix,
-                                            changes.newAliasSuffix,
-                                            doc,
-                                            m_id,
-                                            newGroup);
+        const auto *renameAlias = new RenameAlias(CurveAliasType::SplinePath,
+                                                  changes.oldAliasSuffix,
+                                                  changes.newAliasSuffix,
+                                                  doc,
+                                                  m_id,
+                                                  newGroup);
         connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     }
 
@@ -903,12 +904,12 @@ void VToolAbstractBezier::ProcessSplineToolOptions(const QDomElement &oldDomElem
 
     if (changes.AliasSuffixChanged())
     {
-        auto *renameAlias = new RenameAlias(CurveAliasType::Spline,
-                                            changes.oldAliasSuffix,
-                                            changes.newAliasSuffix,
-                                            doc,
-                                            m_id,
-                                            newGroup);
+        const auto *renameAlias = new RenameAlias(CurveAliasType::Spline,
+                                                  changes.oldAliasSuffix,
+                                                  changes.newAliasSuffix,
+                                                  doc,
+                                                  m_id,
+                                                  newGroup);
         connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     }
 
@@ -953,12 +954,12 @@ void VToolAbstractBezier::ProcessSplinePathToolOptions(const QDomElement &oldDom
 
     if (changes.AliasSuffixChanged())
     {
-        auto *renameAlias = new RenameAlias(CurveAliasType::SplinePath,
-                                            changes.oldAliasSuffix,
-                                            changes.newAliasSuffix,
-                                            doc,
-                                            m_id,
-                                            newGroup);
+        const auto *renameAlias = new RenameAlias(CurveAliasType::SplinePath,
+                                                  changes.oldAliasSuffix,
+                                                  changes.newAliasSuffix,
+                                                  doc,
+                                                  m_id,
+                                                  newGroup);
         connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     }
 

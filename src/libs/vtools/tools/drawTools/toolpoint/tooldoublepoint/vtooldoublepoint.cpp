@@ -530,7 +530,7 @@ void VToolDoublePoint::ProcessTrueDartsToolOptions(const QDomElement &oldDomElem
 
     if (changes.P1LabelChanged())
     {
-        auto *renameLabel = new RenameLabel(changes.oldP1Label, changes.newP1Label, doc, p1id, newGroup);
+        const auto *renameLabel = new RenameLabel(changes.oldP1Label, changes.newP1Label, doc, p1id, newGroup);
         if (!changes.P2LabelChanged())
         {
             connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
@@ -539,7 +539,7 @@ void VToolDoublePoint::ProcessTrueDartsToolOptions(const QDomElement &oldDomElem
 
     if (changes.P2LabelChanged())
     {
-        auto *renameLabel = new RenameLabel(changes.oldP2Label, changes.newP2Label, doc, p2id, newGroup);
+        const auto *renameLabel = new RenameLabel(changes.oldP2Label, changes.newP2Label, doc, p2id, newGroup);
         connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     }
 
