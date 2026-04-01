@@ -466,7 +466,7 @@ void VToolPointOfIntersectionCurves::SetSegmentLabelVisible(quint32 curveId,
                                                             int &refCount,
                                                             VSegmentLabel *seg1Label,
                                                             VSegmentLabel *seg2Label,
-                                                            std::initializer_list<GOType> types)
+                                                            std::initializer_list<GOType> types) const
 {
     const QSharedPointer<VGObject> curve = VAbstractTool::data.GetGObject(curveId);
     const GOType type = curve->getType();
@@ -488,7 +488,7 @@ void VToolPointOfIntersectionCurves::SetSegmentLabelHover(quint32 curveId,
                                                           bool enabled,
                                                           VSegmentLabel *seg1Label,
                                                           VSegmentLabel *seg2Label,
-                                                          std::initializer_list<GOType> types)
+                                                          std::initializer_list<GOType> types) const
 {
     const QSharedPointer<VGObject> curve = VAbstractTool::data.GetGObject(curveId);
     const GOType type = curve->getType();

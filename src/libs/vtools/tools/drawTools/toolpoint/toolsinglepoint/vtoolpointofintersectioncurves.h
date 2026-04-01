@@ -279,12 +279,12 @@ private:
                                 int &refCount,
                                 VSegmentLabel *seg1Label,
                                 VSegmentLabel *seg2Label,
-                                std::initializer_list<GOType> types);
+                                std::initializer_list<GOType> types) const;
     void SetSegmentLabelHover(quint32 curveId,
                               bool enabled,
                               VSegmentLabel *seg1Label,
                               VSegmentLabel *seg2Label,
-                              std::initializer_list<GOType> types);
+                              std::initializer_list<GOType> types) const;
 };
 
 #endif // VTOOLPOINTOFINTERSECTIONCURVES_H
