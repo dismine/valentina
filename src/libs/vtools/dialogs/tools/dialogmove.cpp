@@ -407,10 +407,10 @@ void DialogMove::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (stage1)
     {
-        auto obj = std::find_if(m_sourceObjects.begin(),
-                                m_sourceObjects.end(),
-                                [id](const SourceItem &sItem) { return sItem.id == id; });
-        if (obj == m_sourceObjects.end())
+        if (auto obj = std::find_if(m_sourceObjects.begin(),
+                                    m_sourceObjects.end(),
+                                    [id](const SourceItem &sItem) { return sItem.id == id; });
+            obj == m_sourceObjects.end())
         {
             m_sourceObjects.push_back(SourceItem{id});
         }
