@@ -595,7 +595,7 @@
         <translation type="vanished">Εμφάνιση γραμμής απο το πρώτο ως αυτό το σημείο</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.cpp" line="206"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.cpp" line="209"/>
         <source>Select second point of line</source>
         <translation>Επιλέξτε το δεύτερο σημείο της γραμμής</translation>
     </message>
@@ -609,7 +609,7 @@
         <translation type="vanished">Χρώμα γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.cpp" line="148"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.cpp" line="151"/>
         <source>Edit length</source>
         <translation>Επεξεργασία μήκους</translation>
     </message>
@@ -752,17 +752,17 @@
         <translation type="vanished">Χρώμα</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="481"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="483"/>
         <source>Edit radius</source>
         <translation>Επεξεργασία ακτίνας</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="495"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="497"/>
         <source>Edit first angle</source>
         <translation>Επεξεργασία πρώτης γωνίας</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="509"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="511"/>
         <source>Edit second angle</source>
         <translation>Επεξεργασία δεύτερης γωνίας</translation>
     </message>
@@ -902,17 +902,17 @@
         <translation type="vanished">Χρώμα</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="410"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="412"/>
         <source>Edit radius</source>
         <translation>Επεξεργασία ακτίνας</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="424"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="426"/>
         <source>Edit the first angle</source>
         <translation>Επεξεργασία της πρώτης γωνίας</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="438"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="440"/>
         <source>Edit the arc length</source>
         <translation>Επεξεργασία του μήκους τόξου</translation>
     </message>
@@ -1105,12 +1105,12 @@
         <translation type="vanished">Εμφάνιση γραμμής απο το δεύτερο σε αυτό το σημείο</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.cpp" line="210"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.cpp" line="214"/>
         <source>Select second point of angle</source>
         <translation>Επιλέξτε το δεύτερο σημείο της γωνίας</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.cpp" line="218"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.cpp" line="222"/>
         <source>Select third point of angle</source>
         <translation>Επιλέξτε το τρίτο σημείο της γωνίας</translation>
     </message>
@@ -1124,7 +1124,7 @@
         <translation type="vanished">Χρώμα γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.cpp" line="143"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.cpp" line="147"/>
         <source>Edit length</source>
         <translation>Επεξεργασία μήκους</translation>
     </message>
@@ -1303,17 +1303,17 @@
         <translation>Τέταρτο σημείο:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.cpp" line="131"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.cpp" line="136"/>
         <source>Select the second point of curve</source>
         <translation>Επιλέξτε το δεύτερο σημείο της καμπύλης</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.cpp" line="138"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.cpp" line="143"/>
         <source>Select the third point of curve</source>
         <translation>Επιλέξτε το τρίτο σημείο της καμπύλης</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.cpp" line="147"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.cpp" line="152"/>
         <source>Select the fourth point of curve</source>
         <translation>Επιλέξτε το τέταρτο σημείο της καμπύλης</translation>
     </message>
@@ -1475,7 +1475,7 @@
         <translation type="vanished">Εμφάνιση γραμμής απο το πρώτο ως αυτό το σημείο</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.cpp" line="288"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.cpp" line="290"/>
         <source>Select axis point</source>
         <translation>Επιλογή σημείου άξονα</translation>
     </message>
@@ -1493,7 +1493,7 @@
         <translation type="vanished">Χρώμα γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.cpp" line="344"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.cpp" line="346"/>
         <source>Edit angle</source>
         <translation>Επεξεργασία γωνίας</translation>
     </message>
@@ -1630,7 +1630,7 @@
         <translation type="vanished">Χρώμα</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.cpp" line="118"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.cpp" line="119"/>
         <source>Edit length</source>
         <translation>Επεξεργασία μήκους</translation>
     </message>
@@ -1756,7 +1756,7 @@
         <translation type="vanished">Χρώμα</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.cpp" line="403"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.cpp" line="406"/>
         <source>Edit length</source>
         <translation>Επεξεργασία μήκους</translation>
     </message>
@@ -1886,7 +1886,7 @@
         <translation type="vanished">Χρώμα</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.cpp" line="401"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.cpp" line="404"/>
         <source>Edit length</source>
         <translation>Επεξεργασία μήκους</translation>
     </message>
@@ -3049,27 +3049,27 @@
         <translation>Χρώμα:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="475"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="477"/>
         <source>Edit radius1</source>
         <translation>Επεξεργασία ακτίνας1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="489"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="491"/>
         <source>Edit radius2</source>
         <translation>Επεξεργασία ακτίνας2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="503"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="505"/>
         <source>Edit first angle</source>
         <translation>Επεξεργασία πρώτης γωνίας</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="517"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="519"/>
         <source>Edit second angle</source>
         <translation>Επεξεργασία δεύτερης γωνίας</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="531"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="533"/>
         <source>Edit rotation angle</source>
         <translation>Αλλαγή γωνίας περιστροφής</translation>
     </message>
@@ -3218,27 +3218,27 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="561"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="563"/>
         <source>Edit radius1</source>
         <translation type="unfinished">Επεξεργασία ακτίνας1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="575"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="577"/>
         <source>Edit radius2</source>
         <translation type="unfinished">Επεξεργασία ακτίνας2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="589"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="591"/>
         <source>Edit the first angle</source>
         <translation type="unfinished">Επεξεργασία της πρώτης γωνίας</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="603"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="605"/>
         <source>Edit the elliptical arc length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="617"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="619"/>
         <source>Edit rotation angle</source>
         <translation type="unfinished">Αλλαγή γωνίας περιστροφής</translation>
     </message>
@@ -3297,12 +3297,12 @@
         <translation type="vanished">Χρώμα γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.cpp" line="174"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.cpp" line="176"/>
         <source>Edit angle</source>
         <translation>Επεξεργασία γωνίας</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.cpp" line="188"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.cpp" line="190"/>
         <source>Edit length</source>
         <translation>Επεξεργασία μήκους</translation>
     </message>
@@ -3636,7 +3636,7 @@
         <translation type="vanished">Διάλογος</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="134"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="197"/>
         <source>Origin point:</source>
         <translation>Σημείο αρχής:</translation>
     </message>
@@ -3645,69 +3645,69 @@
         <translation type="vanished">Κατάληξη:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="144"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="207"/>
         <source>Axis type:</source>
         <translation>Τύπος άξονα:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="224"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="241"/>
         <source>Select origin point</source>
         <translation>Επιλογή σημείου αρχής</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="270"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="320"/>
         <source>Select origin point that is not part of the list of objects</source>
         <translation>Επιλέξτε σημείο προέλευσης που δεν είναι μέρος της λίστας αντικειμένων</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="438"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="498"/>
         <source>Invalid name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="548"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="726"/>
         <source>Vertical axis</source>
         <translation>Κάθετος άξονας</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="549"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="727"/>
         <source>Horizontal axis</source>
         <translation>Οριζόντιος άξονας</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="14"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="178"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="241"/>
         <source>Flipping by axis</source>
         <translation>Αναστροφή κατά άξονα</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="159"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="222"/>
         <source>Visibility Group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="62"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="171"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="125"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="234"/>
         <source>Name:</source>
         <translation>Όνομα:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="154"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="172"/>
         <source>Rotation</source>
         <translation>Περιστροφή</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="188"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="251"/>
         <source>Tags:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="195"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="258"/>
         <source>Separate each tag with comma.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="198"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="261"/>
         <source>Add tags</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3717,48 +3717,53 @@
         <translation>Εργαλείο</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="42"/>
+        <source>New:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="142"/>
         <source>Pen style:</source>
         <translation>Στυλ μαρκαδόρου:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="114"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="177"/>
         <source>Color:</source>
         <translation>Χρώμα:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="211"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="615"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="274"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="793"/>
         <source>Ready</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="232"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="295"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="322"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="346"/>
         <source>Invalid group name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="384"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="408"/>
         <source>Default</source>
         <translation>Προεπιλογή</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="531"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="709"/>
         <source>Invalid point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="438"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="498"/>
         <source>Invalid label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="156"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="219"/>
         <source>Enable to create a visibility group from original objects</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3770,7 +3775,7 @@
         <translation type="vanished">Διάλογος</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="134"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="197"/>
         <source>First line point:</source>
         <translation>Πρώτο σημείο γραμμής:</translation>
     </message>
@@ -3779,64 +3784,64 @@
         <translation type="vanished">Κατάληξη:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="144"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="207"/>
         <source>Second line point:</source>
         <translation>Δεύτερο σημείο γραμμής:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="218"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="235"/>
         <source>Select first line point</source>
         <translation>Επιλογή πρώτου σημείου γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="265"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="314"/>
         <source>Select first line point that is not part of the list of objects</source>
         <translation>Επιλέξτε πρώτο σημείο γραμμής που δεν είναι μέρος της λίστας αντικειμένων</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="269"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="318"/>
         <source>Select second line point</source>
         <translation>Επιλογή δεύτερου σημείου γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="281"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="330"/>
         <source>Select second line point that is not part of the list of objects</source>
         <translation>Επιλέξτε δεύτερο σημείο γραμμής που δεν είναι μέρος της λίστας αντικειμένων</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="14"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="178"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="241"/>
         <source>Flipping by line</source>
         <translation>Αναστροφή κατά γραμμή</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="159"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="222"/>
         <source>Visibility Group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="62"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="171"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="125"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="234"/>
         <source>Name:</source>
         <translation>Όνομα:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="148"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="166"/>
         <source>Rotation</source>
         <translation>Περιστροφή</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="188"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="251"/>
         <source>Tags:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="195"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="258"/>
         <source>Separate each tag with comma.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="198"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="261"/>
         <source>Add tags</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3846,63 +3851,68 @@
         <translation>Εργαλείο</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="42"/>
+        <source>New:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="142"/>
         <source>Pen style:</source>
         <translation>Στυλ μαρκαδόρου:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="114"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="177"/>
         <source>Color:</source>
         <translation>Χρώμα:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="211"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="654"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="274"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="822"/>
         <source>Ready</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="232"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="295"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="339"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="362"/>
         <source>Invalid group name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="402"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="425"/>
         <source>Default</source>
         <translation>Προεπιλογή</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="456"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="515"/>
         <source>Invalid name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="571"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="739"/>
         <source>Invalid line points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="578"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="746"/>
         <source>Invalid first line point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="585"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="753"/>
         <source>Invalid second line point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="456"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="515"/>
         <source>Invalid label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="156"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="219"/>
         <source>Enable to create a visibility group from original objects</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4032,29 +4042,29 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.cpp" line="218"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.cpp" line="220"/>
         <source>Offset %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.cpp" line="514"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.cpp" line="783"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.cpp" line="516"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.cpp" line="785"/>
         <source>Error</source>
         <translation type="unfinished">Σφάλμα</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.cpp" line="520"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.cpp" line="789"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.cpp" line="522"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.cpp" line="791"/>
         <source>Value</source>
         <translation type="unfinished">Τιμή</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.cpp" line="689"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.cpp" line="691"/>
         <source>Edit offset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.cpp" line="784"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.cpp" line="786"/>
         <source>Parser error: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4128,12 +4138,12 @@
         <translation type="vanished">Εμφάνιση γραμμής απο το πρώτο σημείο ως το σημείο μας</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.cpp" line="206"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.cpp" line="210"/>
         <source>Select first point of line</source>
         <translation>Επιλέξτε το πρώτο σημείο της γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.cpp" line="214"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.cpp" line="218"/>
         <source>Select second point of line</source>
         <translation>Επιλέξτε το δεύτερο σημείο της γραμμής</translation>
     </message>
@@ -5513,7 +5523,7 @@ Apply settings anyway?</source>
         <translation type="vanished">Εμφάνιση γραμμής απο το πρώτο ως αυτό το σημείο</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogline.cpp" line="187"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogline.cpp" line="190"/>
         <source>Select second point</source>
         <translation>Επιλέξτε δεύτερο σημείο</translation>
     </message>
@@ -5582,17 +5592,17 @@ Apply settings anyway?</source>
         <translation>Δεύτερη γραμμή</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.cpp" line="119"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.cpp" line="124"/>
         <source>Select second point of first line</source>
         <translation>Επιλέξτε το δεύτερο σημείο της πρώτης γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.cpp" line="127"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.cpp" line="132"/>
         <source>Select first point of second line</source>
         <translation>Επιλέξτε το πρώτο σημείο της δεύτερης γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.cpp" line="135"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.cpp" line="140"/>
         <source>Select second point of second line</source>
         <translation>Επιλέξτε το δεύτερο σημείο της δεύτερης γραμμής</translation>
     </message>
@@ -5685,12 +5695,12 @@ Apply settings anyway?</source>
         <translation>Εμφάνιση γραμμής απο το πρώτο ως αυτό το σημείο</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.cpp" line="300"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.cpp" line="304"/>
         <source>Select second point of line</source>
         <translation>Επιλέξτε το δεύτερο σημείο της γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.cpp" line="312"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.cpp" line="316"/>
         <source>Select axis point</source>
         <translation>Επιλογή σημείου άξονα</translation>
     </message>
@@ -5714,7 +5724,7 @@ Apply settings anyway?</source>
         <translation type="vanished">Χρώμα γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.cpp" line="393"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.cpp" line="397"/>
         <source>Edit angle</source>
         <translation>Επεξεργασία γωνίας</translation>
     </message>
@@ -6042,33 +6052,33 @@ Apply settings anyway?</source>
         <translation type="vanished">Διάλογος</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="181"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="256"/>
         <source>Angle:</source>
         <translation>Γωνία:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="201"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="380"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="559"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="276"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="455"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="634"/>
         <source>Formula wizard</source>
         <translation>Βοηθός φόρμουλας</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="243"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="422"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="601"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="318"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="497"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="676"/>
         <source>Value</source>
         <translation>Τιμή</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="291"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="470"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="649"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="366"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="545"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="724"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού σε πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="360"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="435"/>
         <source>Length:</source>
         <translation>Μήκος:</translation>
     </message>
@@ -6077,76 +6087,76 @@ Apply settings anyway?</source>
         <translation type="vanished">Κατάληξη:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="448"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="470"/>
         <source>Edit angle</source>
         <translation>Επεξεργασία γωνίας</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="476"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="498"/>
         <source>Edit length</source>
         <translation>Επεξεργασία μήκους</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="269"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="448"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="627"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="344"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="523"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="702"/>
         <source>Calculation</source>
         <translation>Υπολογισμός</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="17"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="712"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="787"/>
         <source>Move</source>
         <translation>Μετακίνηση</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="539"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="614"/>
         <source>Rotation angle:</source>
         <translation>Γωνία περιστροφής:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="462"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="484"/>
         <source>Edit rotation angle</source>
         <translation>Αλλαγή γωνίας περιστροφής</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="678"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="753"/>
         <source>Rotation origin point:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="115"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="119"/>
         <source>Center point</source>
         <translation>Κεντρικό σημείο</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="693"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="768"/>
         <source>Visibility Group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="69"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="705"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="138"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="780"/>
         <source>Name:</source>
         <translation>Όνομα:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="258"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="282"/>
         <source>Rotation</source>
         <translation>Περιστροφή</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="722"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="797"/>
         <source>Tags:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="729"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="804"/>
         <source>Separate each tag with comma.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="732"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="807"/>
         <source>Add tags</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6156,63 +6166,78 @@ Apply settings anyway?</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="83"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="45"/>
+        <source>New:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="103"/>
+        <source>Bulk rename</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="119"/>
+        <source>Remove object</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="152"/>
         <source>Pen style:</source>
         <translation>Στυλ μαρκαδόρου:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="118"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="193"/>
         <source>Color:</source>
         <translation>Χρώμα:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="745"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="860"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="820"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="1043"/>
         <source>Ready</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="766"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="841"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="496"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="518"/>
         <source>Invalid group name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="559"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="581"/>
         <source>Default</source>
         <translation>Προεπιλογή</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="613"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="671"/>
         <source>Invalid name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="745"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="928"/>
         <source>Invalid angle formula</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="761"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="944"/>
         <source>Invalid rotation angle formula</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="777"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="960"/>
         <source>Invalid length formula</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="613"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="671"/>
         <source>Invalid label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="690"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="765"/>
         <source>Enable to create a visibility group from original objects</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6394,7 +6419,7 @@ Apply settings anyway?</source>
         <translation type="vanished">Εμφάνιση γραμμής απο το πρώτο ως αυτό το σημείο</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.cpp" line="215"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.cpp" line="218"/>
         <source>Select second point of line</source>
         <translation>Επιλέξτε το δεύτερο σημείο της γραμμής</translation>
     </message>
@@ -6416,7 +6441,7 @@ Apply settings anyway?</source>
         <translation type="vanished">Χρώμα γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.cpp" line="148"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.cpp" line="151"/>
         <source>Edit length</source>
         <translation>Επεξεργασία μήκους</translation>
     </message>
@@ -6569,7 +6594,7 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.cpp" line="314"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.cpp" line="316"/>
         <source>Edit width to parallel curve</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7776,7 +7801,7 @@ Apply settings anyway?</source>
         <translation type="vanished">Πάρε</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.cpp" line="157"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.cpp" line="160"/>
         <source>Select an arc</source>
         <translation>Επιλογή ενός τόξου</translation>
     </message>
@@ -7858,22 +7883,22 @@ Apply settings anyway?</source>
         <translation type="vanished">Πάρε</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="257"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="260"/>
         <source>Select a circle center</source>
         <translation>Επιλέξτε ένα κέντρο κύκλου</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="318"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="321"/>
         <source>Edit radius</source>
         <translation>Επεξεργασία ακτίνας</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="342"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="345"/>
         <source>Error</source>
         <translation>Σφάλμα</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="343"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="346"/>
         <source>Radius can&apos;t be negative</source>
         <translation>Η τιμή της ακτίνας δε μπορεί να είναι αρνητική</translation>
     </message>
@@ -7962,7 +7987,7 @@ Apply settings anyway?</source>
         <translation type="vanished">Κέντρο του κύκλου</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.cpp" line="256"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.cpp" line="260"/>
         <source>Select point of center of arc</source>
         <translation>Επιλέξτε το κεντρικό σημείο του τόξου</translation>
     </message>
@@ -7975,7 +8000,7 @@ Apply settings anyway?</source>
         <translation type="vanished">Τέλος γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.cpp" line="248"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.cpp" line="252"/>
         <source>Select second point of line</source>
         <translation>Επιλέξτε το δεύτερο σημείο της γραμμής</translation>
     </message>
@@ -7985,7 +8010,7 @@ Apply settings anyway?</source>
         <translation>Σημείο στην τομή τόξου και γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.cpp" line="150"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.cpp" line="154"/>
         <source>Edit radius</source>
         <translation>Επεξεργασία ακτίνας</translation>
     </message>
@@ -8078,7 +8103,7 @@ Apply settings anyway?</source>
         <translation type="vanished">Υ: οριζόντιο σημείο</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.cpp" line="128"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.cpp" line="131"/>
         <source>Select point for Y value (horizontal)</source>
         <translation>Επιλέξτε σημείο για την τιμή του Υ (οριζόντια)</translation>
     </message>
@@ -8145,37 +8170,36 @@ Apply settings anyway?</source>
         <translation type="vanished">Πάρε</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.cpp" line="161"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.cpp" line="181"/>
         <source>Select second an arc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="43"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="42"/>
         <source>Point label:</source>
         <translation>Ετικέτα σημείου:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="50"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="49"/>
         <source>Unique label</source>
         <translation>Μοναδική ετικέτα</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="53"/>
         <source>Choose unique label.</source>
-        <translation>Επιλογή μοναδικής ετικέτας.</translation>
+        <translation type="vanished">Επιλογή μοναδικής ετικέτας.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="66"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="65"/>
         <source>First arc:</source>
         <translation>Πρώτο τόξο:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="82"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="81"/>
         <source>Second arc:</source>
         <translation>Δεύτερο τόξο:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="92"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="91"/>
         <source>Take:</source>
         <translation>Πάρε:</translation>
     </message>
@@ -8190,7 +8214,58 @@ Apply settings anyway?</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="52"/>
+        <source>Choose unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="103"/>
+        <source>Arc 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="109"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="202"/>
+        <source>Alias2:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="123"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="216"/>
+        <source>Name1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="137"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="195"/>
+        <source>Alias1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="144"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="223"/>
+        <source>Name2:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="151"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="181"/>
+        <source>Choose unique name for left sub arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="158"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="209"/>
+        <source>Choose unique name for right sub arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="168"/>
+        <source>Arc 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="234"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8236,30 +8311,30 @@ Apply settings anyway?</source>
         <translation type="vanished">Πάρε</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="276"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="327"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="279"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="330"/>
         <source>Select second circle center</source>
         <translation>Επιλέξτε κέντρο δεύτερου κύκλου</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="398"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="401"/>
         <source>Edit first circle radius</source>
         <translation>Επεξεργασία πρώτης ακτίνας κύκλου</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="412"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="415"/>
         <source>Edit second circle radius</source>
         <translation>Επεξεργασία δεύτερης ακτίνας κύκλου</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="436"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="457"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="439"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="460"/>
         <source>Error</source>
         <translation>Σφάλμα</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="437"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="458"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="440"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="461"/>
         <source>Radius can&apos;t be negative</source>
         <translation>Η τιμή της ακτίνας δε μπορεί να είναι αρνητική</translation>
     </message>
@@ -8380,7 +8455,7 @@ Apply settings anyway?</source>
         <translation>Οριζόντια διόρθωση:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.cpp" line="209"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.cpp" line="206"/>
         <source>Select second curve</source>
         <translation>Επιλογή δεύτερης καμπύλης</translation>
     </message>
@@ -8545,23 +8620,23 @@ Apply settings anyway?</source>
     <name>DialogRotation</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="14"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="347"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="177"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="410"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="197"/>
         <source>Rotation</source>
         <translation>Περιστροφή</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="177"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="240"/>
         <source>Angle:</source>
         <translation>Γωνία:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="197"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="260"/>
         <source>Formula wizard</source>
         <translation>Βοηθός φόρμουλας</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="239"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="302"/>
         <source>Value</source>
         <translation>Τιμή</translation>
     </message>
@@ -8570,12 +8645,12 @@ Apply settings anyway?</source>
         <translation type="vanished">Υπολογισμός</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="287"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="350"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού στ πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="313"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="376"/>
         <source>Origin Point:</source>
         <translation>Αρχικό σημείο:</translation>
     </message>
@@ -8584,12 +8659,12 @@ Apply settings anyway?</source>
         <translation type="vanished">Κατάληξη:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="391"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="417"/>
         <source>Edit angle</source>
         <translation>Επεξεργασία γωνίας</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="247"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="266"/>
         <source>Select origin point</source>
         <translation>Επιλογή σημείου αρχής</translation>
     </message>
@@ -8598,38 +8673,38 @@ Apply settings anyway?</source>
         <translation type="vanished">Επιλέξτε σημείο προέλευσης που δεν είναι μέρος της λίστας αντικειμένων</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="265"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="328"/>
         <source>Calculation</source>
         <translation>Υπολογισμός</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="336"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="388"/>
         <source>This point cannot be origin point. Please, select another origin point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="328"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="391"/>
         <source>Visibility Group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="62"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="357"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="125"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="420"/>
         <source>Name:</source>
         <translation>Όνομα:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="340"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="403"/>
         <source>Tags:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="364"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="427"/>
         <source>Separate each tag with comma.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="367"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="430"/>
         <source>Add tags</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8639,58 +8714,63 @@ Apply settings anyway?</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="42"/>
+        <source>New:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="142"/>
         <source>Pen style:</source>
         <translation>Στυλ μαρκαδόρου:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="114"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="177"/>
         <source>Color:</source>
         <translation>Χρώμα:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="380"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="748"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="443"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="928"/>
         <source>Ready</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="401"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="464"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="411"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="437"/>
         <source>Invalid group name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="494"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="520"/>
         <source>Invalid rotation point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="679"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="741"/>
         <source>Invalid label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="679"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="741"/>
         <source>Invalid name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="570"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="596"/>
         <source>Invalid angle formula</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="625"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="651"/>
         <source>Default</source>
         <translation>Προεπιλογή</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="325"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="388"/>
         <source>Enable to create a visibility group from original objects</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9994,12 +10074,12 @@ Apply settings anyway?</source>
         <translation type="vanished">Εμφάνιση γραμμής απο το πρώτο σημείο ως το σημείο μας</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.cpp" line="209"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.cpp" line="213"/>
         <source>Select first point of line</source>
         <translation>Επιλέξτε το πρώτο σημείο της γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.cpp" line="217"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.cpp" line="221"/>
         <source>Select second point of line</source>
         <translation>Επιλέξτε το δεύτερο σημείο της γραμμής</translation>
     </message>
@@ -10013,7 +10093,7 @@ Apply settings anyway?</source>
         <translation type="vanished">Χρώμα γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.cpp" line="142"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.cpp" line="146"/>
         <source>Edit length</source>
         <translation>Επεξεργασία μήκους</translation>
     </message>
@@ -10172,7 +10252,7 @@ Apply settings anyway?</source>
         <translation type="vanished">Συντελεστής καμπυλότητας της καμπύλης</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="173"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="176"/>
         <source>Select last point of curve</source>
         <translation>Επιλέξτε το τελευταίο σημείο της καμπύλης</translation>
     </message>
@@ -10263,22 +10343,22 @@ Apply settings anyway?</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού στ πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="283"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="286"/>
         <source>Edit first control point angle</source>
         <translation>Επεξεργασία γωνίας του πρώτου σημείου ελέγχου</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="307"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="310"/>
         <source>Edit second control point angle</source>
         <translation>Επεξεργασία γωνίας του δεύτερου σημείου ελέγχου</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="331"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="334"/>
         <source>Edit first control point length</source>
         <translation>Επεξεργασία μήκους του πρώτου σημείου ελέγχου</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="355"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="358"/>
         <source>Edit second control point length</source>
         <translation>Επεξεργασία μήκους του δεύτερου σημείου ελέγχου</translation>
     </message>
@@ -10366,7 +10446,7 @@ Apply settings anyway?</source>
         <translation type="vanished">Συντελεστής καμπυλότητας της καμπύλης</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="229"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="232"/>
         <source>Select point of curve path</source>
         <translation>Επιλέξτε σημείο σε καμπύλο μονοπάτι</translation>
     </message>
@@ -10436,10 +10516,10 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="417"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="609"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="788"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="902"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="912"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="939"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="949"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="905"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="915"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="942"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="952"/>
         <source>Value</source>
         <translation>Τιμή</translation>
     </message>
@@ -10456,22 +10536,22 @@ Apply settings anyway?</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού στ πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="454"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="457"/>
         <source>Edit first control point angle</source>
         <translation>Επεξεργασία γωνίας του πρώτου σημείου ελέγχου</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="480"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="483"/>
         <source>Edit second control point angle</source>
         <translation>Επεξεργασία γωνίας του δεύτερου σημείου ελέγχου</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="506"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="509"/>
         <source>Edit first control point length</source>
         <translation>Επεξεργασία μήκους του πρώτου σημείου ελέγχου</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="532"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="535"/>
         <source>Edit second control point length</source>
         <translation>Επεξεργασία μήκους του δεύτερου σημείου ελέγχου</translation>
     </message>
@@ -10484,7 +10564,7 @@ Apply settings anyway?</source>
         <translation type="vanished">Το μήκος δεν είναι δυνατό να έχει αρνητική τιμή</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="895"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="898"/>
         <source>Not used</source>
         <translation>Δε χρησιμοποιείται</translation>
     </message>
@@ -10592,32 +10672,32 @@ Apply settings anyway?</source>
         <translation type="vanished">Τιμή</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="301"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="307"/>
         <source>First point</source>
         <translation>Πρώτο σημείο</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="302"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="308"/>
         <source>Second point</source>
         <translation>Δεύτερο σημείο</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="310"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="316"/>
         <source>Highest point</source>
         <translation>Ψηλότερο σημείο</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="311"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="317"/>
         <source>Lowest point</source>
         <translation>Χαμηλότερο σημείο</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="319"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="325"/>
         <source>Leftmost point</source>
         <translation>Σημείο στην αριστερή ακρη</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="320"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="326"/>
         <source>Rightmost point</source>
         <translation>Σημείο στη δεξιά άκρη</translation>
     </message>
@@ -10626,32 +10706,32 @@ Apply settings anyway?</source>
         <translation type="vanished">Άκυρη τιμή</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="399"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="405"/>
         <source>by length</source>
         <translation>κατά μήκος</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="400"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="406"/>
         <source>by points intersetions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="401"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="407"/>
         <source>by first edge symmetry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="402"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="408"/>
         <source>by second edge symmetry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="403"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="409"/>
         <source>by first edge right angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="404"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="410"/>
         <source>by second edge right angle</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10683,17 +10763,17 @@ Apply settings anyway?</source>
         <translation type="vanished">Δεύτερο σημείο</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.cpp" line="110"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.cpp" line="115"/>
         <source>Select second point of axis</source>
         <translation>Επιλέξτε δεύτερο σημείο του άξονα</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.cpp" line="118"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.cpp" line="123"/>
         <source>Select first point</source>
         <translation>Επιλέξτε πρώτο σημείο</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.cpp" line="132"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.cpp" line="137"/>
         <source>Select second point</source>
         <translation>Επιλέξτε δεύτερο σημείο</translation>
     </message>
@@ -10812,22 +10892,22 @@ Apply settings anyway?</source>
         <translation type="vanished">Δεύτερο νέο σημείο πένσας</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.cpp" line="227"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.cpp" line="233"/>
         <source>Select the second base point</source>
         <translation>Επιλέξτε το δεύτερο σημείο αναφοράς</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.cpp" line="235"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.cpp" line="241"/>
         <source>Select the first dart point</source>
         <translation>Επιλέξτε το πρώτο σημείο πένσας</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.cpp" line="249"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.cpp" line="255"/>
         <source>Select the second dart point</source>
         <translation>Επιλέξτε το δεύτεεο σημείο πένσας</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.cpp" line="265"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.cpp" line="271"/>
         <source>Select the third dart point</source>
         <translation>Επιλέξτε το τρίτο σημείο πένσας</translation>
     </message>
@@ -11399,7 +11479,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="134"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="451"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="474"/>
         <source>Measurements</source>
         <translation>Μετρήσεις</translation>
     </message>
@@ -11535,7 +11615,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="759"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6018"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6052"/>
         <source>Save</source>
         <translation>Αποθήκευση</translation>
     </message>
@@ -11636,8 +11716,8 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="833"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1937"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4172"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1954"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4197"/>
         <source>Details</source>
         <translation>Λεπτομέρειες</translation>
     </message>
@@ -11696,7 +11776,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1003"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="488"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="511"/>
         <source>Preferences</source>
         <translation>Προτιμήσεις</translation>
     </message>
@@ -11770,63 +11850,63 @@ Apply settings anyway?</source>
         <translation type="vanished">Εμφάνιση βοήθειας online</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5050"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5401"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5084"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5435"/>
         <source>Pattern piece %1</source>
         <translation>Κομμάτι πατρόν %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1107"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1135"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1146"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1160"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1128"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1156"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1167"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1181"/>
         <source>Select point</source>
         <translation>Επιλογή σημείου</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1120"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1141"/>
         <source>Select first point</source>
         <translation>Επιλέξτε πρώτο σημείο</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1174"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1322"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1690"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1195"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1343"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1707"/>
         <source>Select first point of line</source>
         <translation>Επιλέξτε το πρώτο σημείο της γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1188"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1209"/>
         <source>Select first point of angle</source>
         <translation>Επιλογή πρώτου σημείου γωνίας</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1202"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1223"/>
         <source>Select first point of first line</source>
         <translation>Επιλέξτε το πρώτο σημείο της πρώτης γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1216"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1237"/>
         <source>Select first point curve</source>
         <translation>Επιλέξτε το πρώτο σημείο καμπύλης</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1240"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1261"/>
         <source>Select simple curve</source>
         <translation>Επιλογή απλής καμπύλης</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1254"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1275"/>
         <source>Select point of center of arc</source>
         <translation>Επιλέξτε το κεντρικό σημείο του τόξου</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1283"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1304"/>
         <source>Select point of curve path</source>
         <translation>Επιλέξτε σημείο σε καμπύλο μονοπάτι</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1308"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1329"/>
         <source>Select curve path</source>
         <translation>Επέλεξε διαδρομή καμπύλης</translation>
     </message>
@@ -11835,38 +11915,46 @@ Apply settings anyway?</source>
         <translation type="vanished">Επιλέξτε σημεία, τόξα, καμπύλες δεξιόστροφα.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1380"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1401"/>
         <source>Select base point</source>
         <translation>Επιλέξτε σημείο αναφοράς</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1394"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1415"/>
         <source>Select first point of axis</source>
         <translation>Επιλέξτε το πρώτο σημείο του άξονα</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1423"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1442"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1444"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1463"/>
         <source>Select detail</source>
         <translation>Επιλογή λεπτομέρειας</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1678"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1712"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1812"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1822"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1499"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1511"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1523"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1535"/>
+        <source>Select one or more objects, &lt;b&gt;%1&lt;/b&gt; - confirm selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1695"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1729"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1829"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1839"/>
         <source>Select arc</source>
         <translation>Επιλέξτε τόξο</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1700"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1846"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1857"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1717"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1863"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1874"/>
         <source>Select curve</source>
         <translation>Επιλέξτε καμπύλη</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6435"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6470"/>
         <source>About Qt</source>
         <translation>Σχετικά με το Qt</translation>
     </message>
@@ -11887,68 +11975,68 @@ Apply settings anyway?</source>
         <translation type="vanished">Αρχεία πατρόν (*.val)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4315"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4340"/>
         <source>pattern</source>
         <translation>πατρόν</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4322"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4347"/>
         <source>Save as</source>
         <translation>Αποθήκευση ως</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2819"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2836"/>
         <source>Could not save file</source>
         <translation>Δεν είναι δυνατή η αποθήκευση αρχείου</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2213"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2451"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4422"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7250"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2230"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2468"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4447"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7285"/>
         <source>Open file</source>
         <translation>Άνοιγμα αρχείου</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2942"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2970"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2959"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2987"/>
         <source>Error parsing file.</source>
         <translation>Σφάλμα κατά την ανάλυση του αρχείου.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2949"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2966"/>
         <source>Error can&apos;t convert value.</source>
         <translation>Σφάλμα λόγω αδυναμίας μετατροπής της τιμής.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2956"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4893"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2973"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4927"/>
         <source>Error empty parameter.</source>
         <translation>Σφάλμα κενής παραμέτρου.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2927"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2963"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2944"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2980"/>
         <source>Error wrong id.</source>
         <translation>Σφάλμα λόγω λάθους ταυτότητας.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2977"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2994"/>
         <source>Error parsing file (std::bad_alloc).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4882"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4916"/>
         <source>Bad id.</source>
         <translation>Κακή ταυτότητα.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5849"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5883"/>
         <source>File saved</source>
         <translation>Αποθηκευμένο αρχείο</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7796"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7827"/>
         <source>untitled.val</source>
         <translation>Ανώνυμο.val</translation>
     </message>
@@ -11959,24 +12047,24 @@ Do you want to save your changes?</source>
 Θέλετε να αποθηκελυσετε τις αλλαγές;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1925"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6065"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1942"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6099"/>
         <source>&amp;Undo</source>
         <translation>&amp;Αναίρεση</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1926"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6080"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1943"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6114"/>
         <source>&amp;Redo</source>
         <translation>&amp;Ακύρωση αναίρεσης</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6591"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6626"/>
         <source>Pattern piece:</source>
         <translation>Κομμάτι πατρόν:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6593"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6628"/>
         <source>Enter a new label for the pattern piece.</source>
         <translation>Εισάγετε μια νέα ετικέτα για το κομμάτι πατρόν.</translation>
     </message>
@@ -11993,10 +12081,10 @@ Do you want to save your changes?</source>
         <translation type="vanished">Η εφαρμογή δεν υποστηρίζει στάνταρ πίνακα με ίντσες.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="730"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="777"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6692"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6883"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="760"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="807"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6727"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6918"/>
         <source>File error.</source>
         <translation>Σφάλμα στο αρχείο.</translation>
     </message>
@@ -12005,12 +12093,12 @@ Do you want to save your changes?</source>
         <translation type="vanished">Το αρχείο φορτώθηκε</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7212"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7247"/>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
         <translation>Το Valentina δεν τερματίστηκε σωστά. Θέλετε να ανοίξετε εκ νέου τα αρχεία (%1) που είχατε ανοιχτά;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7214"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7249"/>
         <source>Reopen files.</source>
         <translation>Άνοιγμα αρχείων εκ νέου.</translation>
     </message>
@@ -12104,7 +12192,7 @@ Do you want to save your changes?</source>
         <translation>Επανενεργοποίηση τελευταίου εργαλείου</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1409"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1430"/>
         <source>Select point for X value (vertical)</source>
         <translation>Επιλέξτε σημείο για τιμή Χ (κάθετα)</translation>
     </message>
@@ -12229,7 +12317,7 @@ Do you want to save your changes?</source>
         <translation>Εξαγωγή αρχικής διάταξης</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1724"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1741"/>
         <source>Select first an arc</source>
         <translation>Επιλέξτε πρώτα ένα τόξο</translation>
     </message>
@@ -12242,17 +12330,17 @@ Do you want to save your changes?</source>
         <translation type="vanished">Επιλέξτε σημείο στην εφαπτομένη</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1779"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1796"/>
         <source>Select point of the center of the arc</source>
         <translation>Επιλέξτε το κεντρικό σημείο του τόξου</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1789"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1806"/>
         <source>Select the first base line point</source>
         <translation>Επιλέξτε το πρώτο σημείο αναφοράς της γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4142"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4167"/>
         <source>Detail mode</source>
         <translation>Λειτουργία λεπτομερειών</translation>
     </message>
@@ -12261,12 +12349,12 @@ Do you want to save your changes?</source>
         <translation type="vanished">Δε μπορείτε ακόμα να χρησιμοποιήσετε τη λειτουργία λεπτομερειών. Παρακαλώ, δημιουργήστε τουλάχιστον ένα κομμάτι εργασίας.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4227"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4240"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4263"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4455"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4534"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7140"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4252"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4265"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4288"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4480"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4559"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7175"/>
         <source>Layout mode</source>
         <translation>Λειτουργία τοποθέτησης</translation>
     </message>
@@ -12275,7 +12363,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Δε μπορείτε ακόμα να χρησιμοποιήσετε τη λειτουργία τοποθέτησης. Παρακαλώ, δημιουργήστε τουλάχιστον ένα κομμάτι εργασίας.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6007"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6041"/>
         <source>Unsaved changes</source>
         <translation>Αλλαγές χωρίς αποθήκευση</translation>
     </message>
@@ -12304,7 +12392,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Ατομικές μετρήσεις (*.vit);;Στάνταρ μετρήσεις (*.vst)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2239"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2256"/>
         <source>Measurements loaded</source>
         <translation>Οι μετρήσεις φορτώθηκαν</translation>
     </message>
@@ -12313,7 +12401,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Στάνταρ μετρήσεις (*.vst);;Ατομικές μετρήσεις (*.vit)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7444"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7475"/>
         <source>You can&apos;t export empty scene.</source>
         <translation>Δεν μπορείς να εξάγεις άδεια σκηνή.</translation>
     </message>
@@ -12336,12 +12424,12 @@ Do you want to save your changes?</source>
         <translation type="vanished">%1, %2 (%3)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4349"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4374"/>
         <source>Failed to lock. This file already opened in another window.</source>
         <translation>Αποτυχία κλειδώματος. Το αρχείο έχει ήδη ανοιχτεί σε ένα άλλο παράθυρο.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2861"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2878"/>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
         <translation>Αποτυχία κλειδώματος. Αυτό το αρχείο έχει ήδη ανοιχτεί σε ένα άλλο παράθυρο. Αναμένετε συγκρούσεις όταν τρέχετε 2 αντίγραφα του προγράμματος.</translation>
     </message>
@@ -12350,7 +12438,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Το αρχείο μετρήσεων περιλαμβάνει μη έγκυρες γνωστές μετρήσεις.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7360"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7395"/>
         <source>Measurement file has unknown format.</source>
         <translation>Το αρχείο μετρήσεων είναι άγνωστης μορφής.</translation>
     </message>
@@ -12363,7 +12451,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Παρακαλώ, παρέχετε επιπλέον: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="763"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="793"/>
         <source>Measurement files types have not match.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12372,18 +12460,18 @@ Do you want to save your changes?</source>
         <translation type="vanished">Οι μετρήσεις συγχρονίστηκαν.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2416"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2433"/>
         <source>Couldn&apos;t sync measurements.</source>
         <translation>Δεν ήταν δυνατός ο συγχρονισμός των μετρήσεων.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5182"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5216"/>
         <source>Couldn&apos;t update measurements.</source>
         <translation>Δεν ήταν δυνατή η ενημέρωση των μετρήσεων.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6810"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6827"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6845"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6862"/>
         <source>The measurements file &apos;%1&apos; could not be found.</source>
         <translation>Το αρχείο μετρήσεων &apos;%1&apos; δε βρέθηκε.</translation>
     </message>
@@ -12392,7 +12480,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Το αρχείο μετρήσεων &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; δε βρέθηκε. Θέλετε να ενημερώσετε τη θέση του αρχείου</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7281"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7316"/>
         <source>Loading measurements file</source>
         <translation>Φόρτωση αρχείου μετρήσεων</translation>
     </message>
@@ -12409,9 +12497,9 @@ Do you want to save your changes?</source>
         <translation type="vanished">Δεν ήταν δυνατός ο ορισμός μεγέθους. Το αρχείο δεν ανοίχτηκε.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7627"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7670"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7713"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7658"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7701"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7744"/>
         <source>The method %1 does nothing in GUI mode</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12420,15 +12508,15 @@ Do you want to save your changes?</source>
         <translation type="vanished">Δεν ήταν δυνατός ο ορισμός ύψους. Το αρχείο δεν ανοίχτηκε.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7123"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7179"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7492"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7532"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7158"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7214"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7523"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7563"/>
         <source>Export error.</source>
         <translation>Σφάλμα εξαγωγής.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7740"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7771"/>
         <source>Please, provide one input file.</source>
         <translation>Παρακαλώ, δώστε ένα αρχείο εισόδου.</translation>
     </message>
@@ -12463,12 +12551,12 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2300"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2317"/>
         <source>Measurements unloaded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2307"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2324"/>
         <source>Couldn&apos;t unload measurements. Some of them are used in the pattern.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12478,17 +12566,17 @@ Do you want to save your changes?</source>
         <translation>Εξομάλυνση πενσών</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="476"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="499"/>
         <source>New pattern</source>
         <translation>Νέο πατρόν</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="480"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="503"/>
         <source>Open pattern</source>
         <translation>Άνοιγμα πατρόν</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="484"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="507"/>
         <source>Create/Edit measurements</source>
         <translation>Δημιουργία/Επεξεργασία μετρήσεων</translation>
     </message>
@@ -12497,7 +12585,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Αποθήκευση...</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6023"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6057"/>
         <source>Don&apos;t Save</source>
         <translation>Χωρίς αποθήκευση</translation>
     </message>
@@ -12523,7 +12611,7 @@ Do you want to save your changes?</source>
         <translation>Σημείο τομής καμπυλών</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1746"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1763"/>
         <source>Select first curve</source>
         <translation>Επιλογή πρώτης καμπύλης</translation>
     </message>
@@ -12541,12 +12629,12 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1226"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1247"/>
         <source>Select first curve point</source>
         <translation>Επιλέξτε πρώτο σημείο καμπύλης</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1294"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1315"/>
         <source>Select point of cubic bezier path</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12593,14 +12681,14 @@ Do you want to save your changes?</source>
         <translation>Ομάδα</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1933"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4102"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1950"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4127"/>
         <source>Contains all visibility groups</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1938"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4174"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1955"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4199"/>
         <source>Show which details will go in layout</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12611,19 +12699,19 @@ Do you want to save your changes?</source>
         <translation>Αρχικό zoom</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1735"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1752"/>
         <source>Select first circle center</source>
         <translation>Επιλέξτε το κέντρο του πρώτου κύκλου</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1757"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1768"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1774"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1785"/>
         <source>Select point on tangent</source>
         <translation>Επιλέξτε σημείο στην εφαπτομένη</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1928"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3070"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1945"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3087"/>
         <source>Pattern Piece:</source>
         <translation>Κομμάτι πατρόν:</translation>
     </message>
@@ -12636,7 +12724,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Μέγεθος:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7276"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7311"/>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12656,12 +12744,12 @@ Do you want to save your changes?</source>
         <translation>Μετακίνηση αντικειμένων</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="452"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="475"/>
         <source>Measurements were changed. Do you want to sync measurements now?</source>
         <translation>Έγινε αλλαγή των μετρήσεων. Θέλετε να συγχρονίσετε τις μετρήσεις τώρα;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2402"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2419"/>
         <source>Measurements have been synced</source>
         <translation>Οι μετρήσεις συγχρονίστηκαν</translation>
     </message>
@@ -12671,22 +12759,22 @@ Do you want to save your changes?</source>
         <translation>Ελλειπτικό Τόξο</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1268"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1289"/>
         <source>Select point of center of elliptical arc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1336"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1357"/>
         <source>Select main path objects clockwise.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4392"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4417"/>
         <source>Could not save the file</source>
         <translation>Δεν ήταν δυνατή η αποθήκευση του αρχείου</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7846"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7877"/>
         <source>read only</source>
         <translation>μόνο για ανάγνωση</translation>
     </message>
@@ -12741,22 +12829,22 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2197"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7322"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7336"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2214"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7357"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7371"/>
         <source>Individual measurements</source>
         <translation>Ατομικές μετρήσεις</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2203"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7322"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7336"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2220"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7357"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7371"/>
         <source>Multisize measurements</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4321"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4408"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4346"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4433"/>
         <source>Pattern files</source>
         <translation>Αρχεία πατρόν</translation>
     </message>
@@ -12766,7 +12854,7 @@ Do you want to save your changes?</source>
         <translation>Εργαλειο πινέζας</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1357"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1378"/>
         <source>Select pin point</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12781,37 +12869,37 @@ Do you want to save your changes?</source>
         <translation>Ανοίξτε την εφαρμογή Tape για δημιουργία ή διόρθωση του αρχείου μετρήσεων</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3287"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3305"/>
         <source>Point at the intersections of lines/axis tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3330"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3348"/>
         <source>Point segmenting curves/arcs tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3344"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3362"/>
         <source>Points intersecting with 2 curves/arcs/circles tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4143"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4168"/>
         <source>You can&apos;t use Detail mode yet. Please, create at least one workpiece.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4228"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4253"/>
         <source>You can&apos;t use Layout mode yet. Please, create at least one workpiece.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4241"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4266"/>
         <source>You can&apos;t use Layout mode yet. Please, include at least one detail in layout.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4264"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4289"/>
         <source>You can&apos;t use Layout mode yet.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12831,23 +12919,23 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4456"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4535"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7141"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4481"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4560"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7176"/>
         <source>You don&apos;t have enough details to export. Please, include at least one detail in layout.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4469"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4548"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7154"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4494"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4573"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7189"/>
         <source>Export details</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4469"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4548"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7154"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4494"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4573"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7189"/>
         <source>Can&apos;t export details.</source>
         <translation>Δεν μπορεί να γίνει εξαγωγή λεπτομερειών.</translation>
     </message>
@@ -12882,7 +12970,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6017"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6051"/>
         <source>Save…</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12897,17 +12985,17 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7454"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7485"/>
         <source>You can&apos;t export empty scene. Please, include at least one detail in layout.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7560"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7591"/>
         <source>Export final measurements error.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7561"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7592"/>
         <source>Destination path is empty.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12957,32 +13045,32 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1367"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1388"/>
         <source>Select placelabel center point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6841"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6876"/>
         <source>The measurements file &apos;%1&apos; could not be found or provides not enough information.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3028"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3045"/>
         <source>Scale:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="417"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="440"/>
         <source>Create new pattern piece to start working.</source>
         <translation>Δημιουργήστε νέο κομμάτι πατρόν για να ξεκινήσετε να δουλεύετε.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1927"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1944"/>
         <source>Changes applied.</source>
         <translation>Οι αλλαγές εφαρμόστηκαν.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5993"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6027"/>
         <source>Cannot save settings. Access denied.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12992,27 +13080,19 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5968"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6002"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1348"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1369"/>
         <source>Select path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1466"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1798"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1487"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1815"/>
         <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1478"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1491"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1504"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1517"/>
-        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - confirm selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -13041,29 +13121,29 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1932"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4100"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1949"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4125"/>
         <source>Groups of visibility</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1500"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5375"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5409"/>
         <source>Export recipe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5373"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5407"/>
         <source>Recipe files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5375"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5409"/>
         <source>recipe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5388"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5422"/>
         <source>Could not save recipe. %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13089,7 +13169,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="410"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8176"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8256"/>
         <source>Pattern messages</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13104,27 +13184,27 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8151"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8231"/>
         <source>DEBUG</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8154"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8234"/>
         <source>WARNING</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8157"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8237"/>
         <source>CRITICAL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8160"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8240"/>
         <source>FATAL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8163"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8243"/>
         <source>INFO</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13164,7 +13244,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2448"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2465"/>
         <source>Watermark files</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13204,78 +13284,78 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4503"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4578"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4528"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4603"/>
         <source>Unable to prepare raw layout data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4510"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4535"/>
         <source>Manual layout files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4517"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4542"/>
         <source>Select manual layout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4619"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4644"/>
         <source>Select folder</source>
         <translation>Επιλογή φακέλου</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6008"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6042"/>
         <source>The pattern has been modified. Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7608"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7639"/>
         <source>Not supported dimension A value &apos;%1&apos; for this pattern file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7615"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7646"/>
         <source>Couldn&apos;t set dimension A. Need a file with multisize measurements.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7621"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7652"/>
         <source>Couldn&apos;t set dimension A. File wasn&apos;t opened.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7651"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7682"/>
         <source>Not supported dimension B value &apos;%1&apos; for this pattern file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7658"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7689"/>
         <source>Couldn&apos;t set dimension B. Need a file with multisize measurements.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7664"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7695"/>
         <source>Couldn&apos;t set dimension B. File wasn&apos;t opened.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7694"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7725"/>
         <source>Not supported dimension C value &apos;%1&apos; for this pattern file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7701"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7732"/>
         <source>Couldn&apos;t set dimension C. Need a file with multisize measurements.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7707"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7738"/>
         <source>Couldn&apos;t set dimension C. File wasn&apos;t opened.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5393"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5427"/>
         <source>Could not create recipe file. %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13285,12 +13365,12 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7075"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7110"/>
         <source>Scalable Vector Graphics files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7077"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7112"/>
         <source>Save draw</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13310,136 +13390,136 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1629"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1646"/>
         <source>Unable to add background image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1649"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1666"/>
         <source>Invalid image. Error: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1834"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1851"/>
         <source>Select point of the center of the elliptical arc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1951"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3097"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1968"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3114"/>
         <source>Pen style:</source>
         <translation type="unfinished">Στυλ μαρκαδόρου:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1952"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3121"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1969"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3138"/>
         <source>Color:</source>
         <translation type="unfinished">Χρώμα:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3102"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3119"/>
         <source>Sets the &lt;b&gt;default pen style&lt;/b&gt; for all newly created objects. This style is applied the first time an object is drawn.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3125"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3142"/>
         <source>Defines the &lt;b&gt;global object color property&lt;/b&gt;. This color is applied automatically the first time a new object is drawn.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3260"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3278"/>
         <source>Point at a given distance tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3274"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3292"/>
         <source>Perpendicular/Bisector tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3300"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3318"/>
         <source>Triangular tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3314"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3332"/>
         <source>Point intersecting with axis tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3359"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3377"/>
         <source>Points intersecting with arcs/curves and tangents/segments tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3419"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3437"/>
         <source>Curves and arcs tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3452"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3470"/>
         <source>Flipping objects tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3465"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3483"/>
         <source>Rotating/moving objects tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3500"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3518"/>
         <source>Merge/duplicate pieces tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3515"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3533"/>
         <source>Adding objects for Details mode tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4586"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4611"/>
         <source>Select background image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4646"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4671"/>
         <source>All Single-Line Fonts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4647"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4672"/>
         <source>TrueType Fonts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4648"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4673"/>
         <source>OpenType Fonts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4649"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4674"/>
         <source>SVG Fonts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4650"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4675"/>
         <source>All Files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4655"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4680"/>
         <source>Select Font Files to Install</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4689"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4714"/>
         <source>Failed to install font file: %1
 
 Reason: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4695"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4720"/>
         <source>Font Installation Summary:
 
 Successful Installations: %1
@@ -13447,40 +13527,40 @@ Failed Installations: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4701"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4726"/>
         <source>Installation Complete with Errors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4705"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4730"/>
         <source>Installation Successful</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5310"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5350"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5344"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5384"/>
         <source>Unable to save image. Error: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5316"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5350"/>
         <source>Unable to save image. No data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5322"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5356"/>
         <source>untitled</source>
         <translation>ανώνυμο</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2197"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2203"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5335"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2214"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2220"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5369"/>
         <source>All files</source>
         <translation>Όλα τα αρχεία</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5339"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5373"/>
         <source>Save Image</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13695,12 +13775,12 @@ Would you like to select another file?</source>
 <context>
     <name>MoveDoubleLabel</name>
     <message>
-        <location filename="../../src/libs/vtools/undocommands/label/movedoublelabel.cpp" line="50"/>
+        <location filename="../../src/libs/vtools/undocommands/label/movedoublelabel.cpp" line="106"/>
         <source>move the first dart label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/undocommands/label/movedoublelabel.cpp" line="54"/>
+        <location filename="../../src/libs/vtools/undocommands/label/movedoublelabel.cpp" line="110"/>
         <source>move the second dart label</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13708,7 +13788,7 @@ Would you like to select another file?</source>
 <context>
     <name>MoveLabel</name>
     <message>
-        <location filename="../../src/libs/vtools/undocommands/label/movelabel.cpp" line="46"/>
+        <location filename="../../src/libs/vtools/undocommands/label/movelabel.cpp" line="72"/>
         <source>move point label</source>
         <translation>μετακίνηση ετικέτας σημείου</translation>
     </message>
@@ -13718,6 +13798,14 @@ Would you like to select another file?</source>
     <message>
         <location filename="../../src/libs/vtools/undocommands/movespoint.cpp" line="53"/>
         <source>move single point</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MoveSegmentLabel</name>
+    <message>
+        <location filename="../../src/libs/vtools/undocommands/label/movesegmentlabel.cpp" line="101"/>
+        <source>move segment label</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13764,7 +13852,7 @@ Would you like to select another file?</source>
 <context>
     <name>OperationMoveLabel</name>
     <message>
-        <location filename="../../src/libs/vtools/undocommands/label/operationmovelabel.cpp" line="48"/>
+        <location filename="../../src/libs/vtools/undocommands/label/operationmovelabel.cpp" line="76"/>
         <source>move point label</source>
         <translation>μετακίνηση ετικέτας σημείου</translation>
     </message>
@@ -15238,7 +15326,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/vpropertymodel_p.h" line="54"/>
-        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="356"/>
+        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="358"/>
         <source>Value</source>
         <extracomment>The text that appears in the second column header</extracomment>
         <translation>Τιμή</translation>
@@ -15324,34 +15412,59 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="299"/>
+        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="301"/>
         <source>Error</source>
         <translation>Σφάλμα</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="312"/>
+        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="314"/>
         <source>Empty formula</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="329"/>
+        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="331"/>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
         <translation>Μη έγκυρο αποτέλεσμα. Η τιμή είναι άπειρη ή NaN. Παρακαλώ, ελέγξτε τους υπολογισμούς σας.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="338"/>
+        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="340"/>
         <source>Value can&apos;t be 0</source>
         <translation>Η τιμή δεν μπορεί να είναι 0</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="344"/>
+        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="346"/>
         <source>Value can&apos;t be less than 0</source>
         <translation>Η τιμή δεν μπορεί να είναι λιγότερο από 0</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="364"/>
+        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="366"/>
         <source>Parser error: %1</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="1232"/>
+        <source>Point</source>
+        <translation type="unfinished">Σημείο</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="1233"/>
+        <source>Spline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="1234"/>
+        <source>Spline path</source>
+        <translation type="unfinished">μονοπάτι Spline</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="1235"/>
+        <source>Arc</source>
+        <translation type="unfinished">Τόξο</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="1236"/>
+        <source>Elliptical arc</source>
+        <translation type="unfinished">Ελλειπτικό τόξο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vbank.cpp" line="422"/>
@@ -15593,36 +15706,36 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="391"/>
-        <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="1087"/>
+        <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="390"/>
+        <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="1103"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too small. Optimize it to minimal value.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="408"/>
-        <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="1105"/>
+        <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="407"/>
+        <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="1121"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too big. Optimize it to maximal value.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="102"/>
-        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="111"/>
+        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="104"/>
+        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="113"/>
         <source>Point &apos;%1&apos; repeats twice</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="124"/>
+        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="126"/>
         <source>Points &apos;%1&apos; and &apos;%2&apos; have the same coordinates.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="157"/>
-        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="166"/>
+        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="159"/>
+        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="168"/>
         <source>Leave only one copy of curve &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="967"/>
+        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="969"/>
         <source>Point &apos;%1&apos; does not lie on a curve &apos;%2&apos;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -15637,12 +15750,12 @@ This option will take an affect after restart.</source>
         <translation>Όλα τα αρχεία</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/toolsdef.cpp" line="85"/>
+        <location filename="../../src/libs/vtools/tools/toolsdef.cpp" line="100"/>
         <source>Confirm deletion</source>
         <translation>Επικύρωση διαγραφής</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/toolsdef.cpp" line="86"/>
+        <location filename="../../src/libs/vtools/tools/toolsdef.cpp" line="101"/>
         <source>Do you really want to delete?</source>
         <translation>Θέλετε σίγουρα να κάνετε διαγραφή;</translation>
     </message>
@@ -15681,14 +15794,14 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="385"/>
-        <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="1081"/>
+        <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="384"/>
+        <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="1097"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too small. Optimize it to minimal value.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="403"/>
-        <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="1100"/>
+        <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="402"/>
+        <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="1116"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -19751,38 +19864,38 @@ Do you want to save your changes?</source>
 <context>
     <name>VAbstractOperation</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="1008"/>
-        <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="1021"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="1115"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="1128"/>
         <source>Label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="1021"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="1128"/>
         <source>Length</source>
         <translation type="unfinished">Μήκος</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="672"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="754"/>
         <source>operation options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="319"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="401"/>
         <source>default</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="725"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="807"/>
         <source>delete operation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="1034"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="1141"/>
         <source>Visibility group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="1110"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="1225"/>
         <source>save tool options</source>
         <translation type="unfinished"></translation>
     </message>
@@ -20523,26 +20636,26 @@ Do you want to save your changes?</source>
 <context>
     <name>VArc</name>
     <message>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="626"/>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="680"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="641"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="695"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too small. Optimize it to minimal value.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="632"/>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="686"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="647"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="701"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too small. Optimize it to minimal value.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="643"/>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="697"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="658"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="712"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="648"/>
-        <location filename="../../src/libs/vgeometry/varc.cpp" line="702"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="663"/>
+        <location filename="../../src/libs/vgeometry/varc.cpp" line="717"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too big. Optimize it to maximal value.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -21361,188 +21474,188 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="851"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="858"/>
         <source>Piece &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="908"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="942"/>
         <source>True darts</source>
         <comment>operation</comment>
         <translation type="unfinished">Εξομάλυνση πενσών</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="910"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="944"/>
         <source>Rotation</source>
         <comment>operation</comment>
         <translation type="unfinished">Περιστροφή</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="912"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="946"/>
         <source>Flipping by line</source>
         <comment>operation</comment>
         <translation type="unfinished">Αναστροφή κατά γραμμή</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="914"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="948"/>
         <source>Flipping by axis</source>
         <comment>operation</comment>
         <translation type="unfinished">Αναστροφή κατά άξονα</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="916"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="950"/>
         <source>Move</source>
         <comment>operation</comment>
         <translation type="unfinished">Μετακίνηση</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="937"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="971"/>
         <source>Base point</source>
         <translation type="unfinished">Βασικό σημείο</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="939"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="973"/>
         <source>Point at distance and angle</source>
         <translation type="unfinished">Σημείο με απόσταση και γωνία</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="941"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="975"/>
         <source>Point along line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="943"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="977"/>
         <source>Shoulder point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="945"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="979"/>
         <source>Point along perpendicular</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="947"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="981"/>
         <source>Bisector</source>
         <translation type="unfinished">Διχοτόμος</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="949"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="983"/>
         <source>Point at line intersection</source>
         <translation type="unfinished">Σημείο στην τομή γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="952"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="986"/>
         <source>Spline</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="954"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="988"/>
         <source>Arc</source>
         <translation type="unfinished">Τόξο</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="956"/>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="995"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="990"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1029"/>
         <source>Elliptical arc with given length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="958"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="992"/>
         <source>Parallel curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="960"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="994"/>
         <source>Graduated curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="963"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="997"/>
         <source>Spline path</source>
         <translation type="unfinished">μονοπάτι Spline</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="965"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="999"/>
         <source>Point of intersection circle and segment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="967"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1001"/>
         <source>Perpendicular point along line</source>
         <translation type="unfinished">Κάθετο σημείο κατα μήκος της γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="969"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1003"/>
         <source>Point located at the triangle&apos;s right-angled corner, lying along the axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="971"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1005"/>
         <source>Point from X and Y of two other points</source>
         <translation type="unfinished">Σημείο απο τα Χ και Υ δύο άλλων σημείων</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="973"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1007"/>
         <source>Point segmenting an arc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="975"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1009"/>
         <source>Point segmenting a spline</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="977"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1011"/>
         <source>Point segmenting a spline path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="979"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1013"/>
         <source>Point of intersection line and axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="981"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1015"/>
         <source>Point of intersection curve and axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="983"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1017"/>
         <source>Point of intersection arcs</source>
         <translation type="unfinished">Σημείο σε τομή τόξων</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="985"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1019"/>
         <source>Point of intersection circles</source>
         <translation type="unfinished">Σημείο σε τομή κύκλων</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="987"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1021"/>
         <source>Point of intersection curves</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="989"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1023"/>
         <source>Point from circle and tangent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="991"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1025"/>
         <source>Point from arc and tangent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="993"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1027"/>
         <source>Elliptical arc</source>
         <translation type="unfinished">Ελλειπτικό τόξο</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="997"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1031"/>
         <source>Line connecting two points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1014"/>
+        <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1048"/>
         <source>Line_%1_%2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -22063,192 +22176,192 @@ Do you want to save your changes?</source>
 <context>
     <name>VNodePoint</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="360"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="367"/>
         <source>Options</source>
         <translation type="unfinished">Επιλογές</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="364"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="371"/>
         <source>In layout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="400"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="407"/>
         <source>Delete</source>
         <translation type="unfinished">Διαγραφή</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="369"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="376"/>
         <source>Forbid flipping</source>
         <translation>Αποτροπή αντιστροφής</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="500"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="507"/>
         <source>by length</source>
         <translation>κατά μήκος</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="502"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="509"/>
         <source>by points intersetions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="504"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="511"/>
         <source>by first edge symmetry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="506"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="513"/>
         <source>by second edge symmetry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="508"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="515"/>
         <source>by first edge right angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="510"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="517"/>
         <source>by second edge right angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="427"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="434"/>
         <source>Passmark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="341"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="348"/>
         <source>Show label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="349"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="356"/>
         <source>Exclude</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="374"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="381"/>
         <source>Force flipping</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="379"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="386"/>
         <source>Show full piece</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="395"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="402"/>
         <source>Reset piece label template</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="404"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="411"/>
         <source>Pending</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="429"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="436"/>
         <source>None</source>
         <translation>Κανένα</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="473"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="480"/>
         <source>Seam allowance angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="526"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="533"/>
         <source>Passmark angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="539"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="546"/>
         <source>Straightforward</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="541"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="548"/>
         <source>Bisector</source>
         <translation>Διχοτόμος</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="543"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="550"/>
         <source>Intersection</source>
         <translation>Διατομή</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="546"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="553"/>
         <source>Intersection (only left)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="549"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="556"/>
         <source>Intersection (only right)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="551"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="558"/>
         <source>Intersection 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="554"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="561"/>
         <source>Intersection 2 (only left)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="557"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="564"/>
         <source>Intersection 2 (only right)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="446"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="453"/>
         <source>One line</source>
         <translation>Μια γραμμή</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="448"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="455"/>
         <source>Two lines</source>
         <translation>Δυο γραμμές</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="450"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="457"/>
         <source>Three lines</source>
         <translation>Τρείς γραμμές</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="452"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="459"/>
         <source>T mark</source>
         <translation>Σημάδι Τ</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="454"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="461"/>
         <source>External V mark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="456"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="463"/>
         <source>Internal V mark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="462"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="469"/>
         <source>Check mark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="458"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="465"/>
         <source>U mark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="460"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="467"/>
         <source>Box mark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="464"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="471"/>
         <source>Turn point</source>
         <translation type="unfinished"></translation>
     </message>
@@ -23713,37 +23826,37 @@ Do you want to save your changes?</source>
         <translation>Σφάλμα κατα τη δημιουργία ή ενημέρωση λεπτομέρειας</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1768"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1770"/>
         <source>Error creating or updating single point</source>
         <translation>Σφάλμα κατα τη δημιουργία ή ενημέρωση ενός σημείου</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1813"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1819"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1815"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1821"/>
         <source>Error creating or updating point of end line</source>
         <translation>Σφάλμα κατα τη δημιουργία ή ενημέρωση σημείου στο τέλος γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1863"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1869"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1865"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1871"/>
         <source>Error creating or updating point along line</source>
         <translation>Σφάλμα κατα τη δημιουργία ή ενημέρωση σημείου κατα μήκος τηςγραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1908"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1914"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1910"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1916"/>
         <source>Error creating or updating point of shoulder</source>
         <translation>Σφάλμα κατα τη δημιουργία ή ενημέρωση σημείου του σημείου ώμου</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1953"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1959"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1955"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1961"/>
         <source>Error creating or updating point of normal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1998"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2004"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2000"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2006"/>
         <source>Error creating or updating point of bisector</source>
         <translation>Σφάλμα κατα τη δημιουργία ή ενημέρωση σημείου του σημείου της διχοτόμου</translation>
     </message>
@@ -23752,146 +23865,146 @@ Do you want to save your changes?</source>
         <translation type="vanished">Σφάλμα κατα τη δημιουργία ή ενημέρωση του σημείου της τομής με γραμμή</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2074"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2080"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2076"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2082"/>
         <source>Error creating or updating point of contact</source>
         <translation>Σφάλμα κατα τη δημιουργία ή ενημέρωση του σημείου επαφής</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2109"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2111"/>
         <source>Error creating or updating modeling point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2241"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2243"/>
         <source>Error creating or updating height</source>
         <translation>Σφάλμα κατα τη δημιουργία ή ενημέρωση σημείου του ύψους</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2272"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2274"/>
         <source>Error creating or updating triangle</source>
         <translation>Σφάλμα κατα τη δημιουργία ή ενημέρωση σημείου τριγώνου</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2302"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2304"/>
         <source>Error creating or updating point of intersection</source>
         <translation>Σφάλμα κατα τη δημιουργία ή ενημέρωση σημείου διχοτόμου</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2346"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2352"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2360"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2366"/>
         <source>Error creating or updating cut spline point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2396"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2402"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2422"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2428"/>
         <source>Error creating or updating cut spline path point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2446"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2452"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2484"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2490"/>
         <source>Error creating or updating cut arc point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2493"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2499"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2531"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2537"/>
         <source>Error creating or updating point of intersection line and axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2548"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2554"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2598"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2604"/>
         <source>Error creating or updating point of intersection curve and axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1644"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1646"/>
         <source>Error creating or updating line</source>
         <translation>Σφάλμα κατα τη δημιουργία ή ενημέρωση γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2845"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2908"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2940"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3003"/>
         <source>Error creating or updating simple curve</source>
         <translation>Σφάλμα κατα τη δημιουργία ή ενημέρωση απλής καμπύλης</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3036"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3115"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3131"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3210"/>
         <source>Error creating or updating curve path</source>
         <translation>Σφάλμα κατα τη δημιουργία ή ενημέρωση μονοπατιού καμπύλης</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3174"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3180"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3269"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3275"/>
         <source>Error creating or updating a parallel curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3249"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3255"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3344"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3350"/>
         <source>Error creating or updating a graduated curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3336"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3431"/>
         <source>Error creating or updating modeling simple curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3361"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3456"/>
         <source>Error creating or updating modeling curve path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3408"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3414"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3637"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3643"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3503"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3509"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3732"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3738"/>
         <source>Error creating or updating simple arc</source>
         <translation>Σφάλμα κατα τη δημιουργία ή ενημέρωση απλού τόξου</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3557"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3563"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3652"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3658"/>
         <source>Error creating or updating elliptical arc with length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3590"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3685"/>
         <source>Error creating or updating modeling arc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4290"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4385"/>
         <source>Error creating or updating union details</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2585"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2661"/>
         <source>Error creating or updating point of intersection arcs</source>
         <translation>Σφάλμα κατα τη δημιουργία ή ενημέρωση του σημείου τομής τόξων</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2628"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2704"/>
         <source>Error creating or updating point of intersection circles</source>
         <translation>Σφάλμα κατα τη δημιουργία ή ενημέρωση του σημείου τομής κύκλων</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2714"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2808"/>
         <source>Error creating or updating point from circle and tangent</source>
         <translation>Σφάλμα κατα τη δημιουργία ή ενημέρωση σημείου απο κύκλο και εφαπτομένη</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2745"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2839"/>
         <source>Error creating or updating point from arc and tangent</source>
         <translation>Σφάλμα κατα τη δημιουργία ή ενημέρωση σημείου απο τόξο και εφαπτομένη</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2795"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2890"/>
         <source>Error creating or updating true darts</source>
         <translation type="unfinished"></translation>
     </message>
@@ -23903,22 +24016,22 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1611"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1613"/>
         <source>Unknown point type &apos;%1&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4177"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4272"/>
         <source>Unknown spline type &apos;%1&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4212"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4307"/>
         <source>Unknown arc type &apos;%1&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4296"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4391"/>
         <source>Unknown tools type &apos;%1&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -23928,75 +24041,75 @@ Do you want to save your changes?</source>
         <translation>Σφάλμα λόγω μη μοναδικής ταυτότητας.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2674"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2768"/>
         <source>Error creating or updating point of intersection curves</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2914"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3009"/>
         <source>Error creating or updating simple interactive spline</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3121"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3216"/>
         <source>Error creating or updating interactive spline path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2968"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3063"/>
         <source>Error creating or updating cubic bezier curve</source>
         <translation>Σφάλμα στη δημιουργία ή ενημέρωση της κυβικής καμπύλης Bezier</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3311"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3406"/>
         <source>Error creating or updating cubic bezier path curve</source>
         <translation>Σφάλμα στη δημιουργία ή ενημέρωση της</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3686"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3692"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3781"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3787"/>
         <source>Error creating or updating operation of rotation</source>
         <translation>Σφάλμα στη δημιουργία ή ενημέρωση της λειτουργίας περιστροφής</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4328"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4423"/>
         <source>Unknown operation type &apos;%1&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3727"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3822"/>
         <source>Error creating or updating operation of flipping by line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3762"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3857"/>
         <source>Error creating or updating operation of flipping by axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3811"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3817"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3906"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3912"/>
         <source>Error creating or updating operation of moving</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2035"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2037"/>
         <source>Error creating or updating point of line intersection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3468"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3474"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3563"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3569"/>
         <source>Error creating or updating simple elliptical arc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4249"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4344"/>
         <source>Unknown elliptical arc type &apos;%1&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3501"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3596"/>
         <source>Error creating or updating modeling elliptical arc</source>
         <translation type="unfinished"></translation>
     </message>
@@ -24006,34 +24119,34 @@ Do you want to save your changes?</source>
         <translation type="unfinished">Λεπτομέρεια</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4362"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4457"/>
         <source>Unnamed path</source>
         <translation>Ανώνυμο μονοπάτι</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4355"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4378"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4450"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4473"/>
         <source>Error creating or updating a piece path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2136"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2138"/>
         <source>Error creating or updating pin point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4356"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4451"/>
         <source>Piece path doesn&apos;t contain nodes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2205"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2211"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2207"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2213"/>
         <source>Error creating or updating place label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4531"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4626"/>
         <source>Can&apos;t find increment &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -24049,7 +24162,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Σφάλμα στην επαναφορά του αρχείου ασφαλείας: %1.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vpatternconverter.cpp" line="296"/>
+        <location filename="../../src/libs/ifc/xml/vpatternconverter.cpp" line="561"/>
         <source>Error no unique id.</source>
         <translation>Σφάλμα λόγω μη μοναδικής ταυτότητας.</translation>
     </message>
@@ -24310,14 +24423,14 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
 <context>
     <name>VSplinePath</name>
     <message>
-        <location filename="../../src/libs/vgeometry/vsplinepath.cpp" line="426"/>
+        <location filename="../../src/libs/vgeometry/vsplinepath.cpp" line="450"/>
         <source>Not enough points to create the spline.</source>
         <translation>Δεν υπάρχουν αρκετά σημεία για τη δημιουργία της καμπύλης spline.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vsplinepath.cpp" line="431"/>
-        <location filename="../../src/libs/vgeometry/vsplinepath.cpp" line="453"/>
-        <location filename="../../src/libs/vgeometry/vsplinepath.cpp" line="476"/>
+        <location filename="../../src/libs/vgeometry/vsplinepath.cpp" line="455"/>
+        <location filename="../../src/libs/vgeometry/vsplinepath.cpp" line="477"/>
+        <location filename="../../src/libs/vgeometry/vsplinepath.cpp" line="500"/>
         <source>This spline does not exist.</source>
         <translation>Αυτή η καμπύλη spline δεν υπάρχει.</translation>
     </message>
@@ -24422,8 +24535,8 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
 <context>
     <name>VToolAbstractBezier</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolabstractcurve.cpp" line="883"/>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolabstractcurve.cpp" line="932"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolabstractcurve.cpp" line="884"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolabstractcurve.cpp" line="934"/>
         <source>save tool options</source>
         <translation type="unfinished"></translation>
     </message>
@@ -24444,7 +24557,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
 <context>
     <name>VToolAbstractOffsetCurve</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolabstractcurve.cpp" line="668"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolabstractcurve.cpp" line="669"/>
         <source>save tool options</source>
         <translation type="unfinished"></translation>
     </message>
@@ -24539,37 +24652,37 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
 <context>
     <name>VToolCurveIntersectAxis</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolcurveintersectaxis.cpp" line="99"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolcurveintersectaxis.cpp" line="148"/>
         <source>save tool options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolcurveintersectaxis.cpp" line="361"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolcurveintersectaxis.cpp" line="409"/>
         <source>Error calculating point &apos;%1&apos;. There is no intersection with curve &apos;%2&apos; and axis through point &apos;%3&apos; with angle %4°</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolcurveintersectaxis.cpp" line="640"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolcurveintersectaxis.cpp" line="735"/>
         <source>Length</source>
         <translation>Μήκος</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolcurveintersectaxis.cpp" line="642"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolcurveintersectaxis.cpp" line="738"/>
         <source>Angle</source>
         <translation>Γωνία</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolcurveintersectaxis.cpp" line="644"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolcurveintersectaxis.cpp" line="740"/>
         <source>Label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolcurveintersectaxis.cpp" line="645"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolcurveintersectaxis.cpp" line="742"/>
         <source>Segment 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolcurveintersectaxis.cpp" line="646"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolcurveintersectaxis.cpp" line="744"/>
         <source>Segment 2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -24577,7 +24690,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
 <context>
     <name>VToolCut</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcut.cpp" line="99"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcut.cpp" line="179"/>
         <source>save tool options</source>
         <translation type="unfinished"></translation>
     </message>
@@ -24585,47 +24698,47 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
 <context>
     <name>VToolCutArc</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="371"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="375"/>
         <source>Arc</source>
         <translation type="unfinished">Τόξο</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="372"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="376"/>
         <source>Elliptical arc</source>
         <translation type="unfinished">Ελλειπτικό τόξο</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="373"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="377"/>
         <source>length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="374"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="378"/>
         <source>start angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="375"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="379"/>
         <source>end angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="376"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="380"/>
         <source>radius</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="377"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="381"/>
         <source>label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="378"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="382"/>
         <source>radius1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="379"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="383"/>
         <source>radius2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -24633,18 +24746,18 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
 <context>
     <name>VToolCutSpline</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutspline.cpp" line="367"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutspline.cpp" line="375"/>
         <source>Curve</source>
         <translation type="unfinished">Καμπύλη</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutspline.cpp" line="368"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutspline.cpp" line="376"/>
         <source>length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutspline.cpp" line="380"/>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutspline.cpp" line="382"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutspline.cpp" line="388"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutspline.cpp" line="390"/>
         <source>label</source>
         <translation type="unfinished"></translation>
     </message>
@@ -24652,18 +24765,18 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
 <context>
     <name>VToolCutSplinePath</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutsplinepath.cpp" line="459"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutsplinepath.cpp" line="466"/>
         <source>Curve</source>
         <translation type="unfinished">Καμπύλη</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutsplinepath.cpp" line="460"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutsplinepath.cpp" line="467"/>
         <source>length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutsplinepath.cpp" line="472"/>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutsplinepath.cpp" line="474"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutsplinepath.cpp" line="479"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutsplinepath.cpp" line="481"/>
         <source>label</source>
         <translation type="unfinished"></translation>
     </message>
@@ -24798,12 +24911,12 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
 <context>
     <name>VToolFlippingByAxis</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/operation/flipping/vtoolflippingbyaxis.cpp" line="285"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/operation/flipping/vtoolflippingbyaxis.cpp" line="287"/>
         <source>Origin point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/operation/flipping/vtoolflippingbyaxis.cpp" line="156"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/operation/flipping/vtoolflippingbyaxis.cpp" line="157"/>
         <source>Flipping by axis</source>
         <translation>Αναστροφή κατά άξονα</translation>
     </message>
@@ -24811,17 +24924,17 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
 <context>
     <name>VToolFlippingByLine</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/operation/flipping/vtoolflippingbyline.cpp" line="278"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/operation/flipping/vtoolflippingbyline.cpp" line="280"/>
         <source>First line point</source>
         <translation type="unfinished">Πρώτο σημείο γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/operation/flipping/vtoolflippingbyline.cpp" line="280"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/operation/flipping/vtoolflippingbyline.cpp" line="282"/>
         <source>Second line point</source>
         <translation type="unfinished">Δεύτερο σημείο γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/operation/flipping/vtoolflippingbyline.cpp" line="157"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/operation/flipping/vtoolflippingbyline.cpp" line="158"/>
         <source>flipping by line</source>
         <translation type="unfinished"></translation>
     </message>
@@ -24939,7 +25052,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoollinepoint.cpp" line="263"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoollinepoint.cpp" line="252"/>
         <source>save tool options</source>
         <translation type="unfinished"></translation>
     </message>
@@ -24947,12 +25060,12 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
 <context>
     <name>VToolMove</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolmove.cpp" line="813"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolmove.cpp" line="824"/>
         <source>Rotation angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolmove.cpp" line="810"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolmove.cpp" line="821"/>
         <source>Length</source>
         <translation type="unfinished">Μήκος</translation>
     </message>
@@ -24962,12 +25075,12 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation>Κεντρικό σημείο</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolmove.cpp" line="808"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolmove.cpp" line="819"/>
         <source>Angle</source>
         <translation>Γωνία</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolmove.cpp" line="815"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolmove.cpp" line="826"/>
         <source>Rotation origin point</source>
         <translation type="unfinished"></translation>
     </message>
@@ -24980,7 +25093,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
 <context>
     <name>VToolOptionsPropertyBrowser</name>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3017"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3043"/>
         <source>Base point</source>
         <translation>Βασικό σημείο</translation>
     </message>
@@ -24993,7 +25106,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation type="vanished">Θέση</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3033"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3059"/>
         <source>Point at distance and angle</source>
         <translation>Σημείο με απόσταση και γωνία</translation>
     </message>
@@ -25010,12 +25123,12 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation type="vanished">Γωνία</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3052"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3078"/>
         <source>Point at distance along line</source>
         <translation>Σημείο με απόσταση κατα μήκος της γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3071"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3097"/>
         <source>Arc</source>
         <translation>Τόξο</translation>
     </message>
@@ -25032,42 +25145,42 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation type="vanished">Δεύτερη γωνία</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3117"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3143"/>
         <source>Point along bisector</source>
         <translation>Σημείο κατα μήκος της διχοτόμου</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3154"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3180"/>
         <source>Cut arc tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3171"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3197"/>
         <source>Tool for segmenting a curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3188"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3214"/>
         <source>Tool segment a pathed curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3205"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3231"/>
         <source>Perpendicular point along line</source>
         <translation>Κάθετο σημείο κατα μήκος της γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3224"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3250"/>
         <source>Line between points</source>
         <translation>Γραμμή ανάμεσα σε σημεία</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3243"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3269"/>
         <source>Point at line intersection</source>
         <translation>Σημείο στην τομή γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3258"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3284"/>
         <source>Point along perpendicular</source>
         <translation>Σημείο κατα μήκος της καθέτου</translation>
     </message>
@@ -25080,32 +25193,32 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation type="vanished">Σημείο στην τομή τόξου και γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3300"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3326"/>
         <source>Tool to make point from x &amp; y of two other points</source>
         <translation>Εργαλείο για τη δημιουργία σημείου απο τα Χ και Υ δύο άλλων σημείων</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3395"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3429"/>
         <source>Special point on shoulder</source>
         <translation>Ειδικό σημειο στον ώμο</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3415"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3449"/>
         <source>Curve tool</source>
         <translation>Εργαλείο καμπύλης</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3484"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3518"/>
         <source>Tool for path curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3522"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3556"/>
         <source>Tool triangle</source>
         <translation>Εργαλείο τριγώνου</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3537"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3571"/>
         <source>Point intersection line and axis</source>
         <translation type="unfinished"></translation>
     </message>
@@ -25118,27 +25231,27 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation type="vanished">Χρώμα</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3557"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3591"/>
         <source>Point intersection curve and axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="840"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="842"/>
         <source>First point</source>
         <translation>Πρώτο σημείο</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="840"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="842"/>
         <source>Second point</source>
         <translation>Δεύτερο σημείο</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3094"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3120"/>
         <source>Arc with given length</source>
         <translation>Τόξο με δεδομένο μήκος</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3137"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3163"/>
         <source>True darts</source>
         <translation>Εξομάλυνση πενσών</translation>
     </message>
@@ -25151,7 +25264,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation type="vanished">Ετικέτα σημείου 2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3313"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3339"/>
         <source>Tool to make point from intersection two arcs</source>
         <translation>Εργαλείο δημιουργίας σημείου στην τομή δυο τόξων</translation>
     </message>
@@ -25160,7 +25273,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation type="vanished">Πάρε</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3327"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3361"/>
         <source>Tool to make point from intersection two circles</source>
         <translation>Εργαλείο δημιουργίας σημείου στην τομή δυο κύκλων</translation>
     </message>
@@ -25173,7 +25286,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation type="vanished">Ακτίνα δεύτερου κύκλου</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3366"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3400"/>
         <source>Tool to make point from circle and tangent</source>
         <translation>Εργαλείο δημιουργίας σημείου απο κύκλο και εφαπτομένη</translation>
     </message>
@@ -25182,32 +25295,32 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation type="vanished">Ακτίνα κύκλου</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3381"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3415"/>
         <source>Tool to make point from arc and tangent</source>
         <translation>Εργαλείο δημιουργίας σημείου απο τόξο και εφαπτομένη</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="850"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="852"/>
         <source>Highest point</source>
         <translation>Ψηλότερο σημείο</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="850"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="852"/>
         <source>Lowest point</source>
         <translation>Χαμηλότερο σημείο</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="860"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="862"/>
         <source>Leftmost point</source>
         <translation>Σημείο στην αριστερή ακρη</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="860"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="862"/>
         <source>Rightmost point</source>
         <translation>Σημείο στη δεξιά άκρη</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3343"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3377"/>
         <source>Tool to make point from intersection two curves</source>
         <translation>Εργαλείο δημιουργίας σημείου στην τομή δυο καμπυλών</translation>
     </message>
@@ -25240,17 +25353,17 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation type="vanished">C2: μήκος</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3461"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3495"/>
         <source>Cubic bezier curve</source>
         <translation>κυβική καμπύλη Bezier</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3503"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3537"/>
         <source>Tool cubic bezier curve</source>
         <translation>Εργαλείο κυβικής καμπύλης Bezier</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3580"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3614"/>
         <source>Tool rotation</source>
         <translation>Εργαλείο περιστροφής</translation>
     </message>
@@ -25259,27 +25372,27 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation type="vanished">Κατάληξη</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="870"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="872"/>
         <source>Vertical axis</source>
         <translation>Κάθετος άξονας</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="870"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="872"/>
         <source>Horizontal axis</source>
         <translation>Οριζόντιος άξονας</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3592"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3626"/>
         <source>Tool move</source>
         <translation>Εργαλείο μετακίνησης</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3606"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3640"/>
         <source>Tool flipping by line</source>
         <translation>Εργαλείο αντιστροφής με γραμμή</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3618"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3652"/>
         <source>Tool flipping by axis</source>
         <translation>Εργαλείο αντιστροφής με άξονα</translation>
     </message>
@@ -25288,655 +25401,695 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation type="vanished">Τύπος άξονα</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3630"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3664"/>
         <source>Elliptical arc</source>
         <translation>Ελλειπτικό τόξο</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3019"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3037"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3056"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3121"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3156"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3173"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3190"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3209"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3245"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3263"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3287"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3302"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3315"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3329"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3345"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3368"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3383"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3399"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3524"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3541"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3561"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3045"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3063"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3082"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3147"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3182"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3199"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3216"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3235"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3271"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3289"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3313"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3328"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3341"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3363"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3379"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3402"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3417"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3433"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3558"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3575"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3595"/>
         <source>Point label:</source>
         <translation type="unfinished">Ετικέτα σημείου:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3021"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3047"/>
         <source>Position:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3038"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3210"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3064"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3236"/>
         <source>Base point:</source>
         <translation type="unfinished">Βασικό σημείο:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3039"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3059"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3125"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3213"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3233"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3266"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3403"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3545"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3568"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3065"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3085"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3151"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3239"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3259"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3292"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3437"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3579"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3602"/>
         <source>Line type:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3041"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3061"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3127"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3215"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3234"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3268"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3405"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3547"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3570"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3067"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3087"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3153"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3241"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3260"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3294"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3439"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3581"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3604"/>
         <source>Line color:</source>
         <translation type="unfinished">Χρώμα γραμμής:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3042"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3062"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3102"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3068"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3088"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3128"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3162"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3179"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3196"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3262"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3406"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3595"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3689"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3154"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3188"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3205"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3222"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3288"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3440"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3629"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3723"/>
         <source>Length:</source>
         <translation type="unfinished">Μήκος:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3043"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3548"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3571"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3583"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3594"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3069"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3582"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3605"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3617"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3628"/>
         <source>Angle:</source>
         <translation type="unfinished">Γωνία:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3057"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3122"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3228"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3264"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3400"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3466"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3527"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3083"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3148"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3254"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3290"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3434"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3500"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3561"/>
         <source>First point:</source>
         <translation type="unfinished">Πρώτο σημείο:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3058"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3123"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3229"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3265"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3401"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3467"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3528"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3084"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3149"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3255"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3291"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3435"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3501"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3562"/>
         <source>Second point:</source>
         <translation type="unfinished">Δεύτερο σημείο:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3076"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3099"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3635"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3685"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3102"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3125"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3669"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3719"/>
         <source>Center point:</source>
         <translation type="unfinished">Κεντρικό σημείο:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3077"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3100"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3291"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3636"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3637"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3103"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3126"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3317"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3670"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3671"/>
         <source>Radius:</source>
         <translation type="unfinished">Ακτίνα:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3078"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3101"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3638"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3688"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3104"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3127"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3672"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3722"/>
         <source>First angle:</source>
         <translation>Πρώτη γωνία:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3079"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3639"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3105"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3673"/>
         <source>Second angle:</source>
         <translation>Δεύτερη γωνία:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3084"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3107"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3451"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3474"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3493"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3512"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3646"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3696"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3719"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3741"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3110"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3133"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3485"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3508"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3527"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3546"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3680"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3730"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3753"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3775"/>
         <source>Color:</source>
         <translation type="unfinished">Χρώμα:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3124"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3402"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3468"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3150"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3436"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3502"/>
         <source>Third point:</source>
         <translation type="unfinished">Τρίτο σημείο:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3139"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3165"/>
         <source>Point 1 label:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3140"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3166"/>
         <source>Point 2 label:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3141"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3167"/>
         <source>First base point:</source>
         <translation type="unfinished">Πρώτο σημείο αναφοράς:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3142"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3168"/>
         <source>Second base point:</source>
         <translation type="unfinished">Δεύτερο σημείο αναφοράς:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3143"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3169"/>
         <source>First dart point:</source>
         <translation type="unfinished">Πρώτο σημείο πένσας:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3144"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3170"/>
         <source>Second dart point:</source>
         <translation>Δεύτερο σημείο πένσας:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3145"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3171"/>
         <source>Third dart point:</source>
         <translation>Τρίτο σημείο πένσας:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3157"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3385"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3183"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3419"/>
         <source>Arc:</source>
         <translation type="unfinished">Τόξο:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3158"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3175"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3192"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3564"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3184"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3201"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3218"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3598"/>
         <source>Name1:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3159"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3176"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3193"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3565"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3185"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3202"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3219"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3599"/>
         <source>Name2:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3174"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3191"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3563"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3711"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3734"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3200"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3217"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3597"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3745"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3768"/>
         <source>Curve:</source>
         <translation type="unfinished">Καμπύλη:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3211"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3543"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3608"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3237"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3577"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3642"/>
         <source>First line point:</source>
         <translation type="unfinished">Πρώτο σημείο γραμμής:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3212"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3544"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3609"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3238"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3578"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3643"/>
         <source>Second line point:</source>
         <translation type="unfinished">Δεύτερο σημείο γραμμής:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3246"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3272"/>
         <source>First line (first point):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3247"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3273"/>
         <source>First line (second point):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3248"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3274"/>
         <source>Second line (first point):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3249"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3275"/>
         <source>Second line (second point):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3270"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3296"/>
         <source>Additional angle degrees:</source>
         <translation type="unfinished">Πρόσθετες μοίρες γωνίας:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3288"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3314"/>
         <source>Center of arc:</source>
         <translation type="unfinished">Κέντρο του κύκλου:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3289"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3315"/>
         <source>Top of the line:</source>
         <translation type="unfinished">Κορυφή γραμμής:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3290"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3316"/>
         <source>End of the line:</source>
         <translation type="unfinished">Τέλος γραμμής:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3303"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3329"/>
         <source>X: vertical point:</source>
         <translation type="unfinished">X: κάθετο σημείο:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3304"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3330"/>
         <source>Y: horizontal point:</source>
         <translation type="unfinished">Υ: οριζόντιο σημείο:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3316"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3342"/>
         <source>First arc:</source>
         <translation type="unfinished">Πρώτο τόξο:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3317"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3343"/>
         <source>Second arc:</source>
         <translation type="unfinished">Δεύτερο τόξο:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3318"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3334"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3372"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3386"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3344"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3368"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3406"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3420"/>
         <source>Take:</source>
         <translation>Πάρε:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3330"/>
-        <source>Center of the first circle:</source>
-        <translation type="unfinished">Κέντρο του πρώτου κύκλου:</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3331"/>
-        <source>Center of the second circle:</source>
-        <translation type="unfinished">Κέντρο του δεύτερου κύκλου:</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3332"/>
-        <source>First circle radius:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3333"/>
-        <source>Second circle radius:</source>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3345"/>
+        <source>First arc. Left sub arc name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3346"/>
-        <source>First curve:</source>
-        <translation type="unfinished">Πρώτη καμπύλη:</translation>
+        <source>First arc. Right sub arc name:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3347"/>
-        <source>Second curve:</source>
-        <translation type="unfinished">Δεύτερη καμπύλη:</translation>
+        <source>First arc. Left sub arc alias:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3348"/>
-        <source>Vertical correction:</source>
-        <translation type="unfinished">Κάθετη διόρθωση:</translation>
+        <source>First arc. Right sub arc alias:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3349"/>
-        <source>Horizontal correction:</source>
-        <translation type="unfinished">Οριζόντια διόρθωση:</translation>
+        <source>Second arc. Left sub arc name:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3350"/>
-        <source>First curve. Left sub curve name:</source>
+        <source>Second arc. Right sub arc name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3351"/>
-        <source>First curve. Right sub curve name:</source>
+        <source>Second arc. Left sub arc alias:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3352"/>
+        <source>Second arc. Right sub arc alias:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3364"/>
+        <source>Center of the first circle:</source>
+        <translation type="unfinished">Κέντρο του πρώτου κύκλου:</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3365"/>
+        <source>Center of the second circle:</source>
+        <translation type="unfinished">Κέντρο του δεύτερου κύκλου:</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3366"/>
+        <source>First circle radius:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3367"/>
+        <source>Second circle radius:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3380"/>
+        <source>First curve:</source>
+        <translation type="unfinished">Πρώτη καμπύλη:</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3381"/>
+        <source>Second curve:</source>
+        <translation type="unfinished">Δεύτερη καμπύλη:</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3382"/>
+        <source>Vertical correction:</source>
+        <translation type="unfinished">Κάθετη διόρθωση:</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3383"/>
+        <source>Horizontal correction:</source>
+        <translation type="unfinished">Οριζόντια διόρθωση:</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3384"/>
+        <source>First curve. Left sub curve name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3385"/>
+        <source>First curve. Right sub curve name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3386"/>
         <source>First curve. Left sub curve alias:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3353"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3387"/>
         <source>First curve. Right sub curve alias:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3354"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3388"/>
         <source>Second curve. Left sub curve name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3355"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3389"/>
         <source>Second curve. Right sub curve name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3356"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3390"/>
         <source>Second curve. Left sub curve alias:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3357"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3391"/>
         <source>Second curve. Right sub curve alias:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3369"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3403"/>
         <source>Center of the circle:</source>
         <translation type="unfinished">Κέντρο του κύκλου:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3370"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3384"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3404"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3418"/>
         <source>Tangent point:</source>
         <translation type="unfinished">Σημείο εφαπτομένης:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3371"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3405"/>
         <source>Circle radius:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3680"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3714"/>
         <source>Elliptical arc with given length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3686"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3720"/>
         <source>Radius1:</source>
         <translation type="unfinished">Ακτίνα1:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3687"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3721"/>
         <source>Radius2:</source>
         <translation type="unfinished">Ακτίνα2:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3706"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3740"/>
         <source>Parallel curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3710"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3733"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3744"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3767"/>
         <source>Full name:</source>
         <translation type="unfinished">Πλήρες όνομα:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3712"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3746"/>
         <source>Width:</source>
         <translation type="unfinished">Φάρδος:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3729"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3763"/>
         <source>Graduated curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3075"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3098"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3419"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3465"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3488"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3507"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3634"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3657"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3669"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3684"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3713"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3735"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3101"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3124"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3453"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3499"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3522"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3541"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3668"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3691"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3703"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3718"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3747"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3769"/>
         <source>Name:</source>
         <translation>Όνομα:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3425"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3459"/>
         <source>C1: angle:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3431"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3465"/>
         <source>C1: length:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3437"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3471"/>
         <source>C2: angle:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3443"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3477"/>
         <source>C2: length:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3525"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3559"/>
         <source>First point of axis:</source>
         <translation type="unfinished">Πρώτο σημείο του άξονα:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3526"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3560"/>
         <source>Second point of axis:</source>
         <translation type="unfinished">Δεύτερο σημείο του άξονα:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3542"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3562"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3576"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3596"/>
         <source>Axis point:</source>
         <translation type="unfinished">Σημείο άξονα:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3582"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3621"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3616"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3655"/>
         <source>Origin point:</source>
         <translation>Σημείο προέλευσης:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3620"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3654"/>
         <source>Axis type:</source>
         <translation type="unfinished">Τύπος άξονα:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3596"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3640"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3690"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3630"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3674"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3724"/>
         <source>Rotation angle:</source>
         <translation>Γωνία περιστροφής:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3469"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3503"/>
         <source>Fourth point:</source>
         <translation type="unfinished">Τέταρτο σημείο:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3082"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3105"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3449"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3472"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3491"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3510"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3643"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3693"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3716"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3738"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3108"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3131"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3483"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3506"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3525"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3544"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3677"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3727"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3750"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3772"/>
         <source>Pen style:</source>
         <translation>Στυλ μαρκαδόρου:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3085"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3108"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3452"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3475"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3494"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3513"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3647"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3697"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3720"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3742"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3111"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3134"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3486"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3509"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3528"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3547"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3681"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3731"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3754"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3776"/>
         <source>Approximation scale:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3597"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3631"/>
         <source>Rotation origin point:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3025"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3044"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3063"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3086"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3109"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3129"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3146"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3163"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3180"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3197"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3216"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3235"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3250"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3277"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3292"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3305"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3319"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3335"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3358"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3373"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3387"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3051"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3070"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3089"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3112"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3135"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3155"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3172"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3189"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3206"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3223"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3242"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3261"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3276"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3303"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3318"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3331"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3353"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3369"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3392"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3407"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3453"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3476"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3495"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3514"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3421"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3441"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3487"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3510"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3529"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3549"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3572"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3584"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3598"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3610"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3622"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3648"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3698"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3721"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3743"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3548"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3563"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3583"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3606"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3618"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3632"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3644"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3656"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3682"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3732"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3755"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3777"/>
         <source>Notes:</source>
         <translation>Σημειώσεις:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3080"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3103"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3447"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3470"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3489"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3508"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3641"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3691"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3714"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3736"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3106"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3129"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3481"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3504"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3523"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3542"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3675"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3725"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3748"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3770"/>
         <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3160"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3177"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3194"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3566"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3186"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3203"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3220"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3600"/>
         <source>Alias1:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3161"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3178"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3195"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3567"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3187"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3204"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3221"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3601"/>
         <source>Alias2:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3285"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3311"/>
         <source>Point of intersection circle and segment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3655"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3667"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3689"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3701"/>
         <source>Background image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3658"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3670"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3692"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3704"/>
         <source>Hold:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3659"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3671"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3693"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3705"/>
         <source>Visible:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3660"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3672"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3694"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3706"/>
         <source>Opacity:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -25988,7 +26141,12 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
 <context>
     <name>VToolPointOfIntersectionArcs</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectionarcs.cpp" line="131"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectionarcs.cpp" line="150"/>
+        <source>save tool options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectionarcs.cpp" line="518"/>
         <source>Error calculating point &apos;%1&apos;. Arcs &apos;%2&apos; and &apos;%3&apos; have no point of intersection</source>
         <translation type="unfinished"></translation>
     </message>
@@ -26004,37 +26162,37 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
 <context>
     <name>VToolPointOfIntersectionCurves</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.cpp" line="98"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.cpp" line="156"/>
         <source>save tool options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.cpp" line="498"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.cpp" line="615"/>
         <source>Error calculating point &apos;%1&apos;. Curves &apos;%2&apos; and &apos;%3&apos; have no point of intersection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.cpp" line="964"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.cpp" line="1328"/>
         <source>Label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.cpp" line="965"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.cpp" line="1330"/>
         <source>Curve 1 segment 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.cpp" line="966"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.cpp" line="1332"/>
         <source>Curve 1 segment 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.cpp" line="967"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.cpp" line="1334"/>
         <source>Curve 2 segment 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.cpp" line="968"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.cpp" line="1336"/>
         <source>Curve 2 segment 2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -26042,17 +26200,17 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
 <context>
     <name>VToolRotation</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolrotation.cpp" line="583"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolrotation.cpp" line="646"/>
         <source>Origin point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolrotation.cpp" line="583"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolrotation.cpp" line="646"/>
         <source>Rotation angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolrotation.cpp" line="445"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolrotation.cpp" line="503"/>
         <source>rotate</source>
         <translation type="unfinished"></translation>
     </message>
@@ -28255,12 +28413,12 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation type="vanished">Μήκος = %1%2, γωνία = %3°, &lt;b&gt;Shift&lt;/b&gt; - σταθεροποίηση γωνίας, &lt;b&gt;κλικ ποντικιού&lt;/b&gt; - τέλος δημιουργίας</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/visualization/line/operation/vistoolmove.cpp" line="174"/>
+        <location filename="../../src/libs/vtools/visualization/line/operation/vistoolmove.cpp" line="186"/>
         <source>Length = %1%2, angle = %3°, &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting a position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/visualization/line/operation/vistoolmove.cpp" line="180"/>
+        <location filename="../../src/libs/vtools/visualization/line/operation/vistoolmove.cpp" line="192"/>
         <source>Length = %1%2, angle = %3°, rotation angle = %4°, &lt;b&gt;%5&lt;/b&gt; - sticking angle, &lt;b&gt;%6&lt;/b&gt; - change rotation origin point, &lt;b&gt;Mouse click&lt;/b&gt; - finish creating</source>
         <translation type="unfinished"></translation>
     </message>
@@ -28317,7 +28475,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation type="vanished">Γωνία περιστροφής = %1°, &lt;b&gt;Shift&lt;/b&gt; - σταθεροποίηση γωνίας, &lt;b&gt;κλικ ποντικιού&lt;/b&gt; - τέλος δημιουργίας</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/visualization/line/operation/vistoolrotation.cpp" line="110"/>
+        <location filename="../../src/libs/vtools/visualization/line/operation/vistoolrotation.cpp" line="116"/>
         <source>Rotating angle = %1°, &lt;b&gt;%2&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creation</source>
         <translation type="unfinished"></translation>
     </message>
