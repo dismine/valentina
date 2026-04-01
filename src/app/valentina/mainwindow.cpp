@@ -8150,35 +8150,8 @@ void MainWindow::ToolSelectAllDrawObjects()
 
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolSelectOperationObjects()
-{
-    // Only true for rubber band selection
-    emit EnableLabelSelection(false);
-    emit EnablePointSelection(false);
-    emit EnableLineSelection(false);
-    emit EnableArcSelection(false);
-    emit EnableElArcSelection(false);
-    emit EnableSplineSelection(false);
-    emit EnableSplinePathSelection(false);
-    emit EnableBackgroundImageSelection(false);
-
-    // Hovering
-    emit EnableLabelHover(true);
-    emit EnablePointHover(true);
-    emit EnableLineHover(false);
-    emit EnableArcHover(true);
-    emit EnableElArcHover(true);
-    emit EnableSplineHover(true);
-    emit EnableSplinePathHover(true);
-    emit EnableImageBackgroundHover(false);
-
-    emit ShowArcSegmentLabel(true);
-    emit ShowElArcSegmentLabel(true);
-    emit ShowSplineSegmentLabel(true);
-    emit ShowSplinePathSegmentLabel(true);
-
-    emit ItemsSelection(SelectionType::ByMouseRelease);
-
-    ui->view->AllowRubberBand(false);
+{ // Keep separate method in case we will need something special in this case
+    ToolSelectAllDrawObjects();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
