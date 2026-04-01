@@ -273,7 +273,7 @@ void DialogPointOfIntersectionArcs::ValidateAlias()
         {
             return false;
         }
-        return !conflictSet.contains(alias);
+        return alias.isEmpty() || !conflictSet.contains(alias);
     };
 
     auto ValidateSingleAlias = [&](const QString &alias,
