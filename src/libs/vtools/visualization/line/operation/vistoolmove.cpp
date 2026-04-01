@@ -36,7 +36,6 @@
 #include <QSharedPointer>
 #include <QtAlgorithms>
 #include <climits>
-#include <new>
 
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
@@ -52,6 +51,19 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/global.h"
 #include "visoperation.h"
+
+namespace
+{
+
+//---------------------------------------------------------------------------------------------------------------------
+void SnapLineAngleIfShiftHeld(QLineF &line)
+{
+    if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
+    {
+        line.setAngle(VisLine::CorrectAngle(line.angle()));
+    }
+}
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolMove::VisToolMove(const VContainer *data, QGraphicsItem *parent)
@@ -101,16 +113,8 @@ void VisToolMove::RefreshGeometry()
     QLineF line;
     if (qIsInf(m_length))
     {
-        if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
-        {
-            line = QLineF(origin, ScenePos());
-            line.setAngle(CorrectAngle(line.angle()));
-        }
-        else
-        {
-            line = QLineF(origin, ScenePos());
-        }
-
+        line = QLineF(origin, ScenePos());
+        SnapLineAngleIfShiftHeld(line);
         tempAngle = line.angle();
         tempLength = line.length();
     }
@@ -135,11 +139,7 @@ void VisToolMove::RefreshGeometry()
         if (VFuzzyComparePossibleNulls(m_rotationAngle, INT_MIN))
         {
             rLine = QLineF(origin, ScenePos());
-
-            if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
-            {
-                rLine.setAngle(CorrectAngle(rLine.angle()));
-            }
+            SnapLineAngleIfShiftHeld(rLine);
 
             qreal const cursorLength = rLine.length();
             rLine.setP2(Ray(origin, rLine.angle()));

@@ -195,6 +195,260 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSegment3Id, ("segment3Id"_L1))      
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSegment4Id, ("segment4Id"_L1))             // NOLINT
 
 QT_WARNING_POP
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Returns the quint32 id stored in @p val, or nullopt when the
+ *        string is not a valid unsigned integer.
+ */
+auto ParseId(const QString &val) -> std::optional<quint32>
+{
+    // TODO. Delete if minimal supported version is 1.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(1, 2, 0), "Time to refactor the code.");
+
+    bool ok = false;
+    const quint32 id = val.toUInt(&ok);
+    return ok ? std::optional{id} : std::nullopt;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Registers @p id in @p usedIds and advances @p maxId if
+ *        (id + @p extra) exceeds the current maximum.
+ */
+void TrackId(quint32 id, quint32 extra, quint32 &maxId, QSet<quint32> &usedIds)
+{
+    // TODO. Delete if minimal supported version is 1.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(1, 2, 0), "Time to refactor the code.");
+
+    usedIds.insert(id);
+    if ((id + extra) > maxId)
+    {
+        maxId = id + extra;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Computes the id-offset that an element's @p type implicitly
+ *        reserves in addition to the element's own id.
+ *
+ * Arc-dependent types (CurveIntersectAxis, PointOfIntersectionCurves) look
+ * up the referenced curve attribute(s) in @p arcs; if the curve is an arc the
+ * implicit reservation is 2.
+ */
+auto ExtraIdsForType(const QDomElement &el, const QString &type, const QSet<quint32> &arcs) -> quint32
+{
+    // TODO. Delete if minimal supported version is 1.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(1, 2, 0), "Time to refactor the code.");
+
+    if (type == *strCutArc)
+    {
+        return 2;
+    }
+
+    if (type == *strPointOfIntersectionArcs)
+    {
+        return 4;
+    }
+
+    if (type == *strCurveIntersectAxis)
+    {
+        if (const auto id = ParseId(el.attribute(*strCurve)); id && arcs.contains(*id))
+        {
+            return 2;
+        }
+        return 0;
+    }
+
+    if (type == *strPointOfIntersectionCurves)
+    {
+        quint32 extra = 0;
+        if (const auto id1 = ParseId(el.attribute(*strCurve1)); id1 && arcs.contains(*id1))
+        {
+            extra += 2;
+        }
+        if (const auto id2 = ParseId(el.attribute(*strCurve2)); id2 && arcs.contains(*id2))
+        {
+            extra += 2;
+        }
+        return extra;
+    }
+
+    return 0;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+struct AllocState
+{
+    using SetFn = std::function<void(QDomElement &, const QString &, quint32)>;
+
+    AllocState(quint32 startMax, const QSet<quint32> &used, SetFn setter)
+      : m_maxId(startMax),
+        m_allocated(used),
+        m_setAttr(std::move(setter))
+    {
+        // TODO. Delete if minimal supported version is 1.2.0
+        Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(1, 2, 0), "Time to refactor the code.");
+    }
+
+    void TrySetOrAlloc(QDomElement &el, const QString &attr, quint32 candidate)
+    {
+        if (!m_allocated.contains(candidate))
+        {
+            m_allocated.insert(candidate);
+            m_setAttr(el, attr, candidate);
+        }
+        else
+        {
+            m_setAttr(el, attr, AllocNext());
+        }
+    }
+
+    void AllocFromMax(QDomElement &el, const QString &attr1, const QString &attr2)
+    {
+        m_setAttr(el, attr1, AllocNext());
+        m_setAttr(el, attr2, AllocNext());
+    }
+
+private:
+    auto AllocNext() -> quint32
+    {
+        while (m_allocated.contains(m_maxId + 1))
+        {
+            ++m_maxId;
+        }
+        ++m_maxId;
+        m_allocated.insert(m_maxId);
+        return m_maxId;
+    }
+
+    quint32 m_maxId;
+    QSet<quint32> m_allocated;
+    SetFn m_setAttr;
+};
+
+//---------------------------------------------------------------------------------------------------------------------
+void AssignSegmentsCutArc(QDomElement &el, quint32 id, AllocState &alloc)
+{
+    // TODO. Delete if minimal supported version is 1.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(1, 2, 0), "Time to refactor the code.");
+
+    alloc.TrySetOrAlloc(el, *strSegment1Id, id + 1);
+    alloc.TrySetOrAlloc(el, *strSegment2Id, id + 2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void AssignSegmentsCutSpline(QDomElement &el, AllocState &alloc)
+{
+    // TODO. Delete if minimal supported version is 1.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(1, 2, 0), "Time to refactor the code.");
+
+    alloc.AllocFromMax(el, *strSegment1Id, *strSegment2Id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void AssignSegmentsCurveIntersectAxis(QDomElement &el, quint32 id, const QSet<quint32> &arcs, AllocState &alloc)
+{
+    // TODO. Delete if minimal supported version is 1.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(1, 2, 0), "Time to refactor the code.");
+
+    bool ok = false;
+    const quint32 curveId = el.attribute(*strCurve).toUInt(&ok);
+    if (ok && arcs.contains(curveId))
+    {
+        alloc.TrySetOrAlloc(el, *strSegment1Id, id + 1);
+        alloc.TrySetOrAlloc(el, *strSegment2Id, id + 2);
+    }
+    else
+    {
+        alloc.AllocFromMax(el, *strSegment1Id, *strSegment2Id);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void AssignSegmentsPointOfIntersectionArcs(QDomElement &el, AllocState &alloc)
+{
+    // TODO. Delete if minimal supported version is 1.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(1, 2, 0), "Time to refactor the code.");
+
+    alloc.AllocFromMax(el, *strSegment1Id, *strSegment2Id);
+    alloc.AllocFromMax(el, *strSegment3Id, *strSegment4Id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void AssignSegmentsPointOfIntersectionCurves(QDomElement &el, quint32 id, const QSet<quint32> &arcs, AllocState &alloc)
+{
+    // TODO. Delete if minimal supported version is 1.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(1, 2, 0), "Time to refactor the code.");
+
+    bool ok1 = false;
+    const bool curve1IsArc = arcs.contains(el.attribute(*strCurve1).toUInt(&ok1)) && ok1;
+
+    bool ok2 = false;
+    const bool curve2IsArc = arcs.contains(el.attribute(*strCurve2).toUInt(&ok2)) && ok2;
+
+    // Segments 1-2: owned by curve1
+    if (curve1IsArc)
+    {
+        alloc.TrySetOrAlloc(el, *strSegment1Id, id + 1);
+        alloc.TrySetOrAlloc(el, *strSegment2Id, id + 2);
+    }
+    else
+    {
+        alloc.AllocFromMax(el, *strSegment1Id, *strSegment2Id);
+    }
+
+    // Segments 3-4: owned by curve2
+    if (curve2IsArc)
+    {
+        alloc.TrySetOrAlloc(el, *strSegment3Id, id + 3);
+        alloc.TrySetOrAlloc(el, *strSegment4Id, id + 4);
+    }
+    else
+    {
+        alloc.AllocFromMax(el, *strSegment3Id, *strSegment4Id);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Dispatches segment-id assignment for a single <point> element based
+ *        on its type attribute.  Returns false when the type is not one that
+ *        requires segment ids, so the caller can skip silently.
+ */
+auto AssignSegmentsForPointType(QDomElement &el, quint32 id, const QSet<quint32> &arcs, AllocState &alloc) -> bool
+{
+    // TODO. Delete if minimal supported version is 1.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(1, 2, 0), "Time to refactor the code.");
+
+    if (const QString type = el.attribute(*strType); type == *strCutArc)
+    {
+        AssignSegmentsCutArc(el, id, alloc);
+    }
+    else if (type == *strCutSpline || type == *strCutSplinePath)
+    {
+        AssignSegmentsCutSpline(el, alloc);
+    }
+    else if (type == *strCurveIntersectAxis)
+    {
+        AssignSegmentsCurveIntersectAxis(el, id, arcs, alloc);
+    }
+    else if (type == *strPointOfIntersectionArcs)
+    {
+        AssignSegmentsPointOfIntersectionArcs(el, alloc);
+    }
+    else if (type == *strPointOfIntersectionCurves)
+    {
+        AssignSegmentsPointOfIntersectionCurves(el, id, arcs, alloc);
+    }
+    else
+    {
+        return false;
+    }
+
+    return true;
+}
 } // anonymous namespace
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2351,6 +2605,98 @@ void VPatternConverter::RemoveInUseAttributeV1_1_0() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Walks every child element of every <calculation> section and
+ *        delegates processing to ProcessCalculationElement().
+ */
+void VPatternConverter::ProcessCalculationSectionsV1_2_0(quint32 &maxId,
+                                                         QSet<quint32> &usedIds,
+                                                         QSet<quint32> &arcs) const
+{
+    // TODO. Delete if minimal supported version is 1.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(1, 2, 0), "Time to refactor the code.");
+
+    const QDomNodeList calcSections = elementsByTagName(*strCalculation);
+    for (int s = 0; s < calcSections.size(); ++s)
+    {
+        const QDomNodeList children = calcSections.at(s).childNodes();
+        for (int i = 0; i < children.size(); ++i)
+        {
+            if (const QDomElement el = children.at(i).toElement(); !el.isNull())
+            {
+                ProcessCalculationElementV1_2_0(el, maxId, usedIds, arcs);
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Processes a single child element of a <calculation> section,
+ *        updating @p maxId, @p usedIds, and @p arcs as required.
+ */
+void VPatternConverter::ProcessCalculationElementV1_2_0(const QDomElement &el,
+                                                        quint32 &maxId,
+                                                        QSet<quint32> &usedIds,
+                                                        QSet<quint32> &arcs) const
+{
+    // TODO. Delete if minimal supported version is 1.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(1, 2, 0), "Time to refactor the code.");
+
+    const QString idVal = el.attribute(*strId);
+    const auto id = ParseId(idVal);
+    if (!id)
+    {
+        return;
+    }
+
+    if (el.tagName() == *strArc || el.tagName() == *strElArc)
+    {
+        arcs.insert(*id);
+    }
+
+    const quint32 extra = ExtraIdsForType(el, el.attribute(*strType), arcs);
+    TrackId(*id, extra, maxId, usedIds);
+
+    if (el.tagName() == *strOperation)
+    {
+        TrackOperationDestinationsV1_2_0(el, maxId, usedIds);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Tracks every idObject attribute found inside the
+ *        <destination><item> subtree of an <operation> element.
+ */
+void VPatternConverter::TrackOperationDestinationsV1_2_0(const QDomElement &opEl,
+                                                         quint32 &maxId,
+                                                         QSet<quint32> &usedIds) const
+{
+    // TODO. Delete if minimal supported version is 1.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(1, 2, 0), "Time to refactor the code.");
+
+    const QDomNodeList destSections = opEl.elementsByTagName(*strDestination);
+    for (int d = 0; d < destSections.size(); ++d)
+    {
+        const QDomElement destSecEl = destSections.at(d).toElement();
+        if (destSecEl.isNull())
+        {
+            continue;
+        }
+
+        const QDomNodeList items = destSecEl.elementsByTagName(*strItem);
+        for (int j = 0; j < items.size(); ++j)
+        {
+            if (const auto id = ParseId(items.at(j).toElement().attribute(*strIdObject)))
+            {
+                TrackId(*id, 0, maxId, usedIds);
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VPatternConverter::MaxIdV1_2_0() const -> std::tuple<quint32, QSet<quint32>, QSet<quint32>>
 {
     // TODO. Delete if minimal supported version is 1.2.0
@@ -2360,26 +2706,9 @@ auto VPatternConverter::MaxIdV1_2_0() const -> std::tuple<quint32, QSet<quint32>
     QSet<quint32> usedIds;
     QSet<quint32> arcs;
 
-    auto ToId = [](const QString &val, bool *ok = nullptr) -> quint32 { return val.toUInt(ok); };
+    ProcessCalculationSectionsV1_2_0(maxId, usedIds, arcs);
 
-    auto UpdateMax = [&maxId, &usedIds, &ToId](const QString &val, quint32 extra = 0)
-    {
-        bool ok = false;
-        const quint32 id = ToId(val, &ok);
-        if (!ok)
-        {
-            return;
-        }
-
-        usedIds.insert(id);
-
-        if ((id + extra) > maxId)
-        {
-            maxId = id + extra;
-        }
-    };
-
-    auto IterateSection = [this, &UpdateMax](const QString &tag)
+    auto IterateSection = [this, &maxId, &usedIds](const QString &tag)
     {
         const QDomNodeList sections = elementsByTagName(tag);
         for (int s = 0; s < sections.size(); ++s)
@@ -2389,94 +2718,15 @@ auto VPatternConverter::MaxIdV1_2_0() const -> std::tuple<quint32, QSet<quint32>
             {
                 if (const QDomElement el = children.at(i).toElement(); !el.isNull())
                 {
-                    UpdateMax(el.attribute(*strId));
+                    if (const auto id = ParseId(el.attribute(*strId)))
+                    {
+                        TrackId(*id, 0, maxId, usedIds);
+                    }
                 }
             }
         }
     };
 
-    // --- <calculation> ---
-    const QDomNodeList calcSections = elementsByTagName(*strCalculation);
-
-    for (int s = 0; s < calcSections.size(); ++s)
-    {
-        const QDomNodeList children = calcSections.at(s).childNodes();
-        for (int i = 0; i < children.size(); ++i)
-        {
-            const QDomElement el = children.at(i).toElement();
-            if (el.isNull())
-            {
-                continue;
-            }
-
-            const QString idVal = el.attribute(*strId);
-            UpdateMax(idVal);
-
-            // Track arc/elliptic arc ids for curve-intersection checks below
-            if (el.tagName() == *strArc || el.tagName() == *strElArc)
-            {
-                bool ok = false;
-                const quint32 id = ToId(idVal, &ok);
-                if (ok)
-                {
-                    arcs.insert(id);
-                }
-            }
-
-            // Certain types implicitly consume the next id as well
-            if (const QString type = el.attribute(*strType); type == *strCutArc)
-            {
-                UpdateMax(idVal, 2);
-            }
-            else if (type == *strPointOfIntersectionArcs)
-            {
-                UpdateMax(idVal, 4);
-            }
-            else if (type == *strCurveIntersectAxis)
-            {
-                if (bool ok = false; arcs.contains(ToId(el.attribute(*strCurve), &ok)) && ok)
-                {
-                    UpdateMax(idVal, 2);
-                }
-            }
-            else if (type == *strPointOfIntersectionCurves)
-            {
-                if (bool ok = false; arcs.contains(ToId(el.attribute(*strCurve1), &ok)) && ok)
-                {
-                    UpdateMax(idVal, 2);
-                }
-
-                if (bool ok = false; arcs.contains(ToId(el.attribute(*strCurve2), &ok)) && ok)
-                {
-                    UpdateMax(idVal, 2);
-                }
-            }
-
-            // <operation> additionally tracks <destination><item idObject="...">
-            if (el.tagName() == *strOperation)
-            {
-                const QDomNodeList destSections = el.elementsByTagName(*strDestination);
-
-                for (int d = 0; d < destSections.size(); ++d)
-                {
-                    const QDomElement destSecEl = destSections.at(d).toElement();
-                    if (destSecEl.isNull())
-                    {
-                        continue;
-                    }
-
-                    const QDomNodeList items = destSecEl.elementsByTagName(*strItem);
-
-                    for (int j = 0; j < items.size(); ++j)
-                    {
-                        UpdateMax(items.at(j).toElement().attribute(*strIdObject));
-                    }
-                }
-            }
-        }
-    }
-
-    // --- <modeling> and <details> ---
     IterateSection(*strModeling);
     IterateSection(*strDetails);
 
@@ -2489,44 +2739,12 @@ void VPatternConverter::AddSegmentIdsV1_2_0(quint32 maxId, const QSet<quint32> &
     // TODO. Delete if minimal supported version is 1.2.0
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(1, 2, 0), "Time to refactor the code.");
 
-    QSet<quint32> allocated = usedIds;
-
-    auto SetAttrId = [this](QDomElement &el, const QString &attr, quint32 val) -> void
-    { SetAttribute(el, attr, QString::number(val)); };
-
-    auto AllocNext = [&maxId, &allocated]() -> quint32
-    {
-        while (allocated.contains(maxId + 1))
-        {
-            ++maxId;
-        }
-        ++maxId;
-        allocated.insert(maxId);
-        return maxId;
-    };
-
-    auto AllocFromMax = [&AllocNext, &SetAttrId](QDomElement &el, const QString &attr1, const QString &attr2) -> void
-    {
-        SetAttrId(el, attr1, AllocNext());
-        SetAttrId(el, attr2, AllocNext());
-    };
-
-    auto TrySetOrAlloc =
-        [&allocated, &SetAttrId, &AllocNext](QDomElement &el, const QString &attr, quint32 candidate) -> void
-    {
-        if (!allocated.contains(candidate))
-        {
-            allocated.insert(candidate);
-            SetAttrId(el, attr, candidate);
-        }
-        else
-        {
-            SetAttrId(el, attr, AllocNext());
-        }
-    };
+    AllocState alloc(maxId,
+                     usedIds,
+                     [this](QDomElement &el, const QString &attr, quint32 val) -> void
+                     { SetAttribute(el, attr, QString::number(val)); });
 
     const QDomNodeList calcSections = elementsByTagName(*strCalculation);
-
     for (int s = 0; s < calcSections.size(); ++s)
     {
         const QDomNodeList children = calcSections.at(s).childNodes();
@@ -2540,75 +2758,9 @@ void VPatternConverter::AddSegmentIdsV1_2_0(quint32 maxId, const QSet<quint32> &
 
             bool ok = false;
             const quint32 id = el.attribute(*strId).toUInt(&ok);
-            if (!ok)
+            if (ok)
             {
-                continue;
-            }
-
-            const QString type = el.attribute(*strType);
-
-            if (type == *strCutArc)
-            {
-                TrySetOrAlloc(el, *strSegment1Id, id + 1);
-                TrySetOrAlloc(el, *strSegment2Id, id + 2);
-            }
-            else if (type == *strCutSpline || type == *strCutSplinePath)
-            {
-                AllocFromMax(el, *strSegment1Id, *strSegment2Id);
-            }
-            else if (type == *strCurveIntersectAxis)
-            {
-                bool curveOk = false;
-                const quint32 curveId = el.attribute(*strCurve).toUInt(&curveOk);
-                if (curveOk && arcs.contains(curveId))
-                {
-                    TrySetOrAlloc(el, *strSegment1Id, id + 1);
-                    TrySetOrAlloc(el, *strSegment2Id, id + 2);
-                }
-                else
-                {
-                    AllocFromMax(el, *strSegment1Id, *strSegment2Id);
-                }
-            }
-            else if (type == *strPointOfIntersectionArcs)
-            {
-                AllocFromMax(el, *strSegment1Id, *strSegment2Id);
-                AllocFromMax(el, *strSegment3Id, *strSegment4Id);
-            }
-            else if (type == *strPointOfIntersectionCurves)
-            {
-                bool curve1Ok = false;
-                const quint32 curve1Id = el.attribute(*strCurve1).toUInt(&curve1Ok);
-                const bool curve1IsArc = curve1Ok && arcs.contains(curve1Id);
-
-                bool curve2Ok = false;
-                const quint32 curve2Id = el.attribute(*strCurve2).toUInt(&curve2Ok);
-                const bool curve2IsArc = curve2Ok && arcs.contains(curve2Id);
-
-                if (curve1IsArc && curve2IsArc)
-                {
-                    TrySetOrAlloc(el, *strSegment1Id, id + 1);
-                    TrySetOrAlloc(el, *strSegment2Id, id + 2);
-                    TrySetOrAlloc(el, *strSegment3Id, id + 3);
-                    TrySetOrAlloc(el, *strSegment4Id, id + 4);
-                }
-                else if (curve1IsArc) // curve2 is not an arc
-                {
-                    TrySetOrAlloc(el, *strSegment1Id, id + 1);
-                    TrySetOrAlloc(el, *strSegment2Id, id + 2);
-                    AllocFromMax(el, *strSegment3Id, *strSegment4Id);
-                }
-                else if (curve2IsArc) // curve1 is not an arc
-                {
-                    AllocFromMax(el, *strSegment1Id, *strSegment2Id);
-                    TrySetOrAlloc(el, *strSegment3Id, id + 1);
-                    TrySetOrAlloc(el, *strSegment4Id, id + 2);
-                }
-                else // neither is an arc
-                {
-                    AllocFromMax(el, *strSegment1Id, *strSegment2Id);
-                    AllocFromMax(el, *strSegment3Id, *strSegment4Id);
-                }
+                AssignSegmentsForPointType(el, id, arcs, alloc);
             }
         }
     }

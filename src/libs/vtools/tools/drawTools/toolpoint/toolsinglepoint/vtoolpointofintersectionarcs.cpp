@@ -153,121 +153,107 @@ void VToolPointOfIntersectionArcs::ProcessToolOptions(const QDomElement &oldDomE
     saveOptions->SetInGroup(true);
     connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
 
-    if (changes.LabelChanged())
-    {
-        const auto *renameLabel = new RenameLabel(changes.oldLabel, changes.newLabel, doc, m_id, newGroup);
-        if (!changes.Arc1Name1Changed() && !changes.Arc1Name2Changed() && !changes.Arc2Name1Changed()
-            && !changes.Arc2Name2Changed() && !changes.Arc1AliasSuffix1Changed() && !changes.Arc1AliasSuffix2Changed()
-            && !changes.Arc2AliasSuffix1Changed() && !changes.Arc2AliasSuffix2Changed())
-        {
-            connect(renameLabel, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        }
-    }
-
     const QSharedPointer<VAbstractCurve> curve1 = VAbstractTool::data.GeometricObject<VAbstractCurve>(firstArcId);
     const CurveAliasType curve1Type = RenameAlias::CurveType(curve1->getType());
-
-    if (changes.Arc1Name1Changed())
-    {
-        const auto *renameName
-            = new RenameAlias(curve1Type, changes.oldArc1Name1, changes.newArc1Name1, doc, m_arc1Segment1Id, newGroup);
-        if (!changes.Arc1Name2Changed() && !changes.Arc2Name1Changed() && !changes.Arc2Name2Changed()
-            && !changes.Arc1AliasSuffix1Changed() && !changes.Arc1AliasSuffix2Changed()
-            && !changes.Arc2AliasSuffix1Changed() && !changes.Arc2AliasSuffix2Changed())
-        {
-            connect(renameName, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        }
-    }
-
-    if (changes.Arc1Name2Changed())
-    {
-        const auto *renameName
-            = new RenameAlias(curve1Type, changes.oldArc1Name2, changes.newArc1Name2, doc, m_arc1Segment2Id, newGroup);
-        if (!changes.Arc2Name1Changed() && !changes.Arc2Name2Changed() && !changes.Arc1AliasSuffix1Changed()
-            && !changes.Arc1AliasSuffix2Changed() && !changes.Arc2AliasSuffix1Changed()
-            && !changes.Arc2AliasSuffix2Changed())
-        {
-            connect(renameName, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        }
-    }
-
-    if (changes.Arc1AliasSuffix1Changed())
-    {
-        const auto *renameAlias = new RenameAlias(curve1Type,
-                                                  changes.oldArc1AliasSuffix1,
-                                                  changes.newArc1AliasSuffix1,
-                                                  doc,
-                                                  m_arc1Segment1Id,
-                                                  newGroup);
-        if (!changes.Arc2Name1Changed() && !changes.Arc2Name2Changed() && !changes.Arc1AliasSuffix2Changed()
-            && !changes.Arc2AliasSuffix1Changed() && !changes.Arc2AliasSuffix2Changed())
-        {
-            connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        }
-    }
-
-    if (changes.Arc1AliasSuffix2Changed())
-    {
-        const auto *renameAlias = new RenameAlias(curve1Type,
-                                                  changes.oldArc1AliasSuffix1,
-                                                  changes.newArc1AliasSuffix1,
-                                                  doc,
-                                                  m_arc1Segment2Id,
-                                                  newGroup);
-        if (!changes.Arc2Name1Changed() && !changes.Arc2Name2Changed() && !changes.Arc2AliasSuffix1Changed()
-            && !changes.Arc2AliasSuffix2Changed())
-        {
-            connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        }
-    }
 
     const QSharedPointer<VAbstractCurve> curve2 = VAbstractTool::data.GeometricObject<VAbstractCurve>(secondArcId);
     const CurveAliasType curve2Type = RenameAlias::CurveType(curve1->getType());
 
+    // Collect rename commands in order; only the last one triggers a reparse.
+    QVector<const AbstractObjectRename *> renameCommands;
+    renameCommands.resize(9);
+
+    if (changes.LabelChanged())
+    {
+        renameCommands << new RenameLabel(changes.oldLabel, changes.newLabel, doc, m_id, newGroup);
+    }
+
+    if (changes.Arc1Name1Changed())
+    {
+        renameCommands << new RenameAlias(curve1Type,
+                                          changes.oldArc1Name1,
+                                          changes.newArc1Name1,
+                                          doc,
+                                          m_arc1Segment1Id,
+                                          newGroup);
+    }
+
+    if (changes.Arc1Name2Changed())
+    {
+        renameCommands << new RenameAlias(curve1Type,
+                                          changes.oldArc1Name2,
+                                          changes.newArc1Name2,
+                                          doc,
+                                          m_arc1Segment2Id,
+                                          newGroup);
+    }
+
+    if (changes.Arc1AliasSuffix1Changed())
+    {
+        renameCommands << new RenameAlias(curve1Type,
+                                          changes.oldArc1AliasSuffix1,
+                                          changes.newArc1AliasSuffix1,
+                                          doc,
+                                          m_arc1Segment1Id,
+                                          newGroup);
+    }
+
+    if (changes.Arc1AliasSuffix2Changed())
+    {
+        renameCommands << new RenameAlias(curve1Type,
+                                          changes.oldArc1AliasSuffix1,
+                                          changes.newArc1AliasSuffix1,
+                                          doc,
+                                          m_arc1Segment2Id,
+                                          newGroup);
+    }
+
     if (changes.Arc2Name1Changed())
     {
-        const auto *renameName
-            = new RenameAlias(curve2Type, changes.oldArc2Name1, changes.newArc2Name1, doc, m_arc2Segment1Id, newGroup);
-        if (!changes.Arc2Name2Changed() && !changes.Arc2AliasSuffix1Changed() && !changes.Arc2AliasSuffix2Changed())
-        {
-            connect(renameName, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        }
+        renameCommands << new RenameAlias(curve2Type,
+                                          changes.oldArc2Name1,
+                                          changes.newArc2Name1,
+                                          doc,
+                                          m_arc2Segment1Id,
+                                          newGroup);
     }
 
     if (changes.Arc2Name2Changed())
     {
-        const auto *renameName
-            = new RenameAlias(curve2Type, changes.oldArc2Name2, changes.newArc2Name2, doc, m_arc2Segment2Id, newGroup);
-        if (!changes.Arc2AliasSuffix1Changed() && !changes.Arc2AliasSuffix2Changed())
-        {
-            connect(renameName, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        }
+        renameCommands << new RenameAlias(curve2Type,
+                                          changes.oldArc2Name2,
+                                          changes.newArc2Name2,
+                                          doc,
+                                          m_arc2Segment2Id,
+                                          newGroup);
     }
 
     if (changes.Arc2AliasSuffix1Changed())
     {
-        const auto *renameAlias = new RenameAlias(curve2Type,
-                                                  changes.oldArc2AliasSuffix1,
-                                                  changes.newArc2AliasSuffix1,
-                                                  doc,
-                                                  m_arc2Segment1Id,
-                                                  newGroup);
-        if (!changes.Arc2AliasSuffix2Changed())
-        {
-            connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        }
+        renameCommands << new RenameAlias(curve2Type,
+                                          changes.oldArc2AliasSuffix1,
+                                          changes.newArc2AliasSuffix1,
+                                          doc,
+                                          m_arc2Segment1Id,
+                                          newGroup);
     }
 
     if (changes.Arc2AliasSuffix2Changed())
     {
-        const auto *renameAlias = new RenameAlias(curve2Type,
-                                                  changes.oldArc2AliasSuffix1,
-                                                  changes.newArc2AliasSuffix1,
-                                                  doc,
-                                                  m_arc2Segment2Id,
-                                                  newGroup);
+        renameCommands << new RenameAlias(curve2Type,
+                                          changes.oldArc2AliasSuffix1,
+                                          changes.newArc2AliasSuffix1,
+                                          doc,
+                                          m_arc2Segment2Id,
+                                          newGroup);
+    }
 
-        connect(renameAlias, &RenameLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    if (!renameCommands.isEmpty())
+    {
+        connect(renameCommands.constLast(),
+                &AbstractObjectRename::NeedLiteParsing,
+                doc,
+                &VAbstractPattern::LiteParseTree);
     }
 
     undoStack->push(newGroup);

@@ -357,6 +357,29 @@ void WarningNotUniquePieceName(const QHash<quint32, VPiece> *allDetails)
     }
 }
 
+/**
+ * @brief Resolves the cursor resource path, preferring a HiDPI variant when
+ *        the device pixel ratio is >= 2 and the @2x asset exists.
+ * @param resource  The Qt resource prefix (e.g. "toolcursor").
+ * @param cursor    The base cursor filename (e.g. "arrow.png").
+ * @return Absolute resource path to use for QPixmap construction.
+ */
+auto ResolveToolCursorResource(const QString &resource, const QString &cursor) -> QString
+{
+    auto cursorResource = VTheme::GetResourceName(resource, cursor);
+
+    if (qApp->devicePixelRatio() >= 2) // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
+    {
+        const auto hiDPICursor = QString(cursor).replace(".png"_L1, "@2x.png"_L1);
+        const auto hiDPIResource = VTheme::GetResourceName(resource, hiDPICursor);
+        if (QFileInfo::exists(hiDPIResource))
+        {
+            cursorResource = hiDPIResource;
+        }
+    }
+
+    return cursorResource;
+}
 } // anonymous namespace
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -869,117 +892,105 @@ template <typename Dialog, typename Func>
 void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, const QString &toolTip,
                                Func closeDialogSlot)
 {
-    if (checked)
-    {
-        CancelTool();
-        emit EnableItemMove(false);
-        m_currentTool = m_lastUsedTool = t;
-
-        if (const VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
-            settings->GetPointerMode() == VToolPointerMode::ToolIcon)
-        {
-            const auto resource = QStringLiteral("toolcursor");
-            auto cursorResource = VTheme::GetResourceName(resource, cursor);
-            if (qApp->devicePixelRatio() >= 2) // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
-            {
-                // Try to load HiDPI versions of the cursors if availible
-                auto hiDPICursor = QString(cursor).replace(".png"_L1, "@2x.png"_L1);
-                auto cursorHiDPIResource = VTheme::GetResourceName(resource, hiDPICursor);
-                if (QFileInfo::exists(cursorHiDPIResource))
-                {
-                    cursorResource = cursorHiDPIResource;
-                }
-            }
-            QPixmap const pixmap(cursorResource);
-            QCursor const cur(pixmap, 2, 2);
-            ui->view->viewport()->setCursor(cur);
-            ui->view->setCurrentCursorShape(); // Hack to fix problem with a cursor
-        }
-
-        m_statusLabel->setText(toolTip);
-        ui->view->setShowToolOptions(false);
-        auto *dialogTool = new Dialog(pattern, doc, 0, this);
-
-        // This check helps to find missed tools in the switch
-        Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64, "Check if need to extend.");
-
-        switch (t)
-        {
-            case Tool::ArcStart:
-            case Tool::ArcEnd:
-            case Tool::Midpoint:
-                dialogTool->Build(t);
-                break;
-            case Tool::PiecePath:
-            case Tool::Pin:
-            case Tool::InsertNode:
-            case Tool::PlaceLabel:
-                dialogTool->SetPiecesList(doc->GetActivePPPieces());
-                break;
-            case Tool::Rotation:
-            case Tool::Move:
-            case Tool::FlippingByAxis:
-            case Tool::FlippingByLine:
-            case Tool::Group:
-                dialogTool->SetGroupCategories(doc->GetGroupCategories());
-                break;
-            case Tool::Piece:
-                dialogTool->SetPatternDoc(doc);
-                break;
-            default:
-                break;
-        }
-
-        VValentinaSettings  const*settings = VApplication::VApp()->ValentinaSettings();
-
-        if constexpr (std::is_same_v<Dialog,DialogEndLine> || std::is_same_v<Dialog,DialogAlongLine> ||
-                      std::is_same_v<Dialog,DialogBisector> || std::is_same_v<Dialog,DialogCurveIntersectAxis> ||
-                      std::is_same_v<Dialog,DialogHeight> || std::is_same_v<Dialog,DialogLine> ||
-                      std::is_same_v<Dialog,DialogLineIntersectAxis> || std::is_same_v<Dialog,DialogNormal> ||
-                      std::is_same_v<Dialog,DialogShoulderPoint>)
-        {
-            dialogTool->SetTypeLine(settings->GetGlobalPenStyle());
-            dialogTool->SetLineColor(settings->GetGlobalToolColor());
-        }
-
-        if constexpr (std::is_same_v<Dialog,DialogArc> || std::is_same_v<Dialog,DialogArcWithLength> ||
-                      std::is_same_v<Dialog,DialogEllipticalArc> ||
-                      std::is_same_v<Dialog,DialogEllipticalArcWithLength> ||
-                      std::is_same_v<Dialog,DialogParallelCurve> || std::is_same_v<Dialog,DialogGraduatedCurve>)
-        {
-            dialogTool->SetPenStyle(settings->GetGlobalPenStyle());
-            dialogTool->SetColor(settings->GetGlobalToolColor());
-        }
-
-        if constexpr (std::is_same_v<Dialog,DialogCubicBezier> || std::is_same_v<Dialog,DialogCubicBezierPath> ||
-                      std::is_same_v<Dialog,DialogSpline> || std::is_same_v<Dialog,DialogSplinePath>)
-        {
-            dialogTool->SetDefPenStyle(settings->GetGlobalPenStyle());
-            dialogTool->SetDefColor(settings->GetGlobalToolColor());
-        }
-
-        auto *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
-        SCASSERT(scene != nullptr)
-
-        m_dialogTool = dialogTool;
-
-        connect(scene, &VMainGraphicsScene::ChoosedObject, m_dialogTool.data(), &DialogTool::ChosenObject);
-        if (t == Tool::Group || t == Tool::InsertNode)
-        {
-            connect(scene, &VMainGraphicsScene::SelectedObject, m_dialogTool.data(), &DialogTool::SelectedObject);
-        }
-        connect(m_dialogTool.data(), &DialogTool::DialogClosed, this, closeDialogSlot);
-        connect(m_dialogTool.data(), &DialogTool::ToolTip, this, &MainWindow::ShowToolTip);
-        connect(m_dialogTool.data(), &DialogTool::destroyed, this, [this] () -> void { ShowToolTip(QString()); });
-        emit ui->view->itemClicked(nullptr);
-    }
-    else
+    if (!checked)
     {
         if (auto *tButton = qobject_cast<QAction *>(this->sender()))
         {
             tButton->setChecked(true);
         }
+        return;
     }
+
+    CancelTool();
+    emit EnableItemMove(false);
+    m_currentTool = m_lastUsedTool = t;
+
+    if (const VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+        settings->GetPointerMode() == VToolPointerMode::ToolIcon)
+    {
+        const auto resource = QStringLiteral("toolcursor");
+        QPixmap const pixmap(ResolveToolCursorResource(resource, cursor));
+        QCursor const cur(pixmap, 2, 2);
+        ui->view->viewport()->setCursor(cur);
+        ui->view->setCurrentCursorShape(); // Hack to fix problem with a cursor
+    }
+
+    m_statusLabel->setText(toolTip);
+    ui->view->setShowToolOptions(false);
+    auto *dialogTool = new Dialog(pattern, doc, 0, this);
+
+    // This check helps to find missed tools in the switch
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64, "Check if need to extend.");
+
+    switch (t)
+    {
+        case Tool::ArcStart:
+        case Tool::ArcEnd:
+        case Tool::Midpoint:
+            dialogTool->Build(t);
+            break;
+        case Tool::PiecePath:
+        case Tool::Pin:
+        case Tool::InsertNode:
+        case Tool::PlaceLabel:
+            dialogTool->SetPiecesList(doc->GetActivePPPieces());
+            break;
+        case Tool::Rotation:
+        case Tool::Move:
+        case Tool::FlippingByAxis:
+        case Tool::FlippingByLine:
+        case Tool::Group:
+            dialogTool->SetGroupCategories(doc->GetGroupCategories());
+            break;
+        case Tool::Piece:
+            dialogTool->SetPatternDoc(doc);
+            break;
+        default:
+            break;
+    }
+
+    VValentinaSettings  const*settings = VApplication::VApp()->ValentinaSettings();
+
+    if constexpr (std::is_same_v<Dialog,DialogEndLine> || std::is_same_v<Dialog,DialogAlongLine> ||
+                  std::is_same_v<Dialog,DialogBisector> || std::is_same_v<Dialog,DialogCurveIntersectAxis> ||
+                  std::is_same_v<Dialog,DialogHeight> || std::is_same_v<Dialog,DialogLine> ||
+                  std::is_same_v<Dialog,DialogLineIntersectAxis> || std::is_same_v<Dialog,DialogNormal> ||
+                  std::is_same_v<Dialog,DialogShoulderPoint>)
+    {
+        dialogTool->SetTypeLine(settings->GetGlobalPenStyle());
+        dialogTool->SetLineColor(settings->GetGlobalToolColor());
+    }
+
+    if constexpr (std::is_same_v<Dialog,DialogArc> || std::is_same_v<Dialog,DialogArcWithLength> ||
+                  std::is_same_v<Dialog,DialogEllipticalArc> ||
+                  std::is_same_v<Dialog,DialogEllipticalArcWithLength> ||
+                  std::is_same_v<Dialog,DialogParallelCurve> || std::is_same_v<Dialog,DialogGraduatedCurve>)
+    {
+        dialogTool->SetPenStyle(settings->GetGlobalPenStyle());
+        dialogTool->SetColor(settings->GetGlobalToolColor());
+    }
+
+    if constexpr (std::is_same_v<Dialog,DialogCubicBezier> || std::is_same_v<Dialog,DialogCubicBezierPath> ||
+                  std::is_same_v<Dialog,DialogSpline> || std::is_same_v<Dialog,DialogSplinePath>)
+    {
+        dialogTool->SetDefPenStyle(settings->GetGlobalPenStyle());
+        dialogTool->SetDefColor(settings->GetGlobalToolColor());
+    }
+
+    auto *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
+    SCASSERT(scene != nullptr)
+
+    m_dialogTool = dialogTool;
+
+    connect(scene, &VMainGraphicsScene::ChoosedObject, m_dialogTool.data(), &DialogTool::ChosenObject);
+    if (t == Tool::Group || t == Tool::InsertNode)
+    {
+        connect(scene, &VMainGraphicsScene::SelectedObject, m_dialogTool.data(), &DialogTool::SelectedObject);
+    }
+    connect(m_dialogTool.data(), &DialogTool::DialogClosed, this, closeDialogSlot);
+    connect(m_dialogTool.data(), &DialogTool::ToolTip, this, &MainWindow::ShowToolTip);
+    connect(m_dialogTool.data(), &DialogTool::destroyed, this, [this] () -> void { ShowToolTip(QString()); });
+    emit ui->view->itemClicked(nullptr);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

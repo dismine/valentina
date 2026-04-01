@@ -163,6 +163,12 @@ private:
 
     void RemoveInUseAttributeV1_1_0() const;
 
+    void ProcessCalculationSectionsV1_2_0(quint32 &maxId, QSet<quint32> &usedIds, QSet<quint32> &arcs) const;
+    void ProcessCalculationElementV1_2_0(const QDomElement &el,
+                                         quint32 &maxId,
+                                         QSet<quint32> &usedIds,
+                                         QSet<quint32> &arcs) const;
+    void TrackOperationDestinationsV1_2_0(const QDomElement &opEl, quint32 &maxId, QSet<quint32> &usedIds) const;
     auto MaxIdV1_2_0() const -> std::tuple<quint32, QSet<quint32>, QSet<quint32>>;
     void AddSegmentIdsV1_2_0(quint32 maxId, const QSet<quint32> &arcs, const QSet<quint32> &usedIds) const;
     void ExplicitSegmentIdsV1_2_0() const;
