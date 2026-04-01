@@ -261,34 +261,26 @@ void DialogPointOfIntersectionArcs::ValidateAlias()
 
     QRegularExpression const rx(NameRegExp());
 
-    // Helper lambda to validate a single alias
-    auto ValidateAlias = [&](const QString &alias,
+    auto IsAliasFormatValid = [&](const QString &alias, const QString &suffix) -> bool
+    { return suffix.isEmpty() || rx.match(alias).hasMatch(); };
+
+    auto IsAliasUnique = [&](const QString &alias,
                              const QString &suffix,
                              const QString &originSuffix,
                              const QSet<QString> &conflictSet) -> bool
     {
-        if (suffix.isEmpty())
-        {
-            return true;
-        }
-
-        if (!rx.match(alias).hasMatch())
-        {
-            return false;
-        }
-
         if (originSuffix != suffix && !data->IsUnique(alias))
         {
             return false;
         }
-
-        if (conflictSet.contains(alias))
-        {
-            return false;
-        }
-
-        return true;
+        return !conflictSet.contains(alias);
     };
+
+    auto ValidateSingleAlias = [&](const QString &alias,
+                                   const QString &suffix,
+                                   const QString &originSuffix,
+                                   const QSet<QString> &conflictSet) -> bool
+    { return IsAliasFormatValid(alias, suffix) && IsAliasUnique(alias, suffix, originSuffix, conflictSet); };
 
     // Build conflict sets (excluding the alias being validated)
     const QSet<QString> conflictsForArc1Alias1{arc1AliasSecond,
@@ -321,22 +313,22 @@ void DialogPointOfIntersectionArcs::ValidateAlias()
                                                arc2Name2};
 
     // Validate all aliases
-    flagArc1Alias1 = ValidateAlias(arc1AliasFirst,
-                                   GetArc1AliasSuffix1(),
-                                   originArc1AliasSuffix1,
-                                   conflictsForArc1Alias1);
-    flagArc1Alias2 = ValidateAlias(arc1AliasSecond,
-                                   GetArc1AliasSuffix2(),
-                                   originArc1AliasSuffix2,
-                                   conflictsForArc1Alias2);
-    flagArc2Alias1 = ValidateAlias(arc2AliasFirst,
-                                   GetArc2AliasSuffix1(),
-                                   originArc2AliasSuffix1,
-                                   conflictsForArc2Alias1);
-    flagArc2Alias2 = ValidateAlias(arc2AliasSecond,
-                                   GetArc2AliasSuffix2(),
-                                   originArc2AliasSuffix2,
-                                   conflictsForArc2Alias2);
+    flagArc1Alias1 = ValidateSingleAlias(arc1AliasFirst,
+                                         GetArc1AliasSuffix1(),
+                                         originArc1AliasSuffix1,
+                                         conflictsForArc1Alias1);
+    flagArc1Alias2 = ValidateSingleAlias(arc1AliasSecond,
+                                         GetArc1AliasSuffix2(),
+                                         originArc1AliasSuffix2,
+                                         conflictsForArc1Alias2);
+    flagArc2Alias1 = ValidateSingleAlias(arc2AliasFirst,
+                                         GetArc2AliasSuffix1(),
+                                         originArc2AliasSuffix1,
+                                         conflictsForArc2Alias1);
+    flagArc2Alias2 = ValidateSingleAlias(arc2AliasSecond,
+                                         GetArc2AliasSuffix2(),
+                                         originArc2AliasSuffix2,
+                                         conflictsForArc2Alias2);
 
     // Update UI colors
     ChangeColor(ui->labelArc1Alias1, flagArc1Alias1 ? OkColor(this) : errorColor);
@@ -364,34 +356,26 @@ void DialogPointOfIntersectionArcs::ValidateName()
 
     QRegularExpression const rx(NameRegExp());
 
-    // Helper lambda to validate a single name
-    auto ValidateName = [&](const QString &name,
+    auto IsNameFormatValid = [&](const QString &name, const QString &inputName) -> bool
+    { return !inputName.isEmpty() && rx.match(name).hasMatch(); };
+
+    auto IsNameUnique = [&](const QString &name,
                             const QString &inputName,
                             const QString &originName,
                             const QSet<QString> &conflictSet) -> bool
     {
-        if (inputName.isEmpty())
-        {
-            return false;
-        }
-
-        if (!rx.match(name).hasMatch())
-        {
-            return false;
-        }
-
         if (originName != inputName && !data->IsUnique(name))
         {
             return false;
         }
-
-        if (conflictSet.contains(name))
-        {
-            return false;
-        }
-
-        return true;
+        return !conflictSet.contains(name);
     };
+
+    auto ValidateSingleName = [&](const QString &name,
+                                  const QString &inputName,
+                                  const QString &originName,
+                                  const QSet<QString> &conflictSet) -> bool
+    { return IsNameFormatValid(name, inputName) && IsNameUnique(name, inputName, originName, conflictSet); };
 
     // Build conflict sets (excluding the name being validated)
     const QSet<QString> conflictsForArc1Name1{arc1AliasFirst,
@@ -424,10 +408,10 @@ void DialogPointOfIntersectionArcs::ValidateName()
                                               arc2Name1};
 
     // Validate all names
-    flagArc1Name1 = ValidateName(arc1Name1, GetArc1Name1(), originArc1Name1, conflictsForArc1Name1);
-    flagArc1Name2 = ValidateName(arc1Name2, GetArc1Name2(), originArc1Name2, conflictsForArc1Name2);
-    flagArc2Name1 = ValidateName(arc2Name1, GetArc2Name1(), originArc2Name1, conflictsForArc2Name1);
-    flagArc2Name2 = ValidateName(arc2Name2, GetArc2Name2(), originArc2Name2, conflictsForArc2Name2);
+    flagArc1Name1 = ValidateSingleName(arc1Name1, GetArc1Name1(), originArc1Name1, conflictsForArc1Name1);
+    flagArc1Name2 = ValidateSingleName(arc1Name2, GetArc1Name2(), originArc1Name2, conflictsForArc1Name2);
+    flagArc2Name1 = ValidateSingleName(arc2Name1, GetArc2Name1(), originArc2Name1, conflictsForArc2Name1);
+    flagArc2Name2 = ValidateSingleName(arc2Name2, GetArc2Name2(), originArc2Name2, conflictsForArc2Name2);
 
     // Update UI colors
     ChangeColor(ui->labelArc1Name1, flagArc1Name1 ? OkColor(this) : errorColor);
