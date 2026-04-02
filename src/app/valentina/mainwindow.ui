@@ -2650,6 +2650,9 @@
    <property name="checkable">
     <bool>true</bool>
    </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
      <normaloff>:/toolicon/light/parallel_curve.png</normaloff>:/toolicon/light/parallel_curve.png</iconset>
@@ -2664,6 +2667,9 @@
   <action name="actionGraduatedCurveTool">
    <property name="checkable">
     <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
