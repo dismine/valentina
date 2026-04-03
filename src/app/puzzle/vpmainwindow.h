@@ -518,7 +518,8 @@ private:
     auto CheckPieceGapePosition(const VPPiecePtr &piece, bool &pieceGapePositionChecked) -> bool;
 
     void PrintLayoutSheets(QPrinter *printer, const QList<VPSheetPtr> &sheets);
-    static auto PrintLayoutSheetPage(QPrinter *printer, QPainter &painter, const VPSheetPtr &sheet) -> bool;
+    static auto PrintLayoutSheetPage(QPrinter *printer, QPainter &painter, const VPSheetPtr &sheet, bool isFirstPage)
+        -> bool;
     void PrintLayoutTiledSheets(QPrinter *printer, const QList<VPSheetPtr> &sheets);
     auto PrepareLayoutTilePages(const QList<VPSheetPtr> &sheets) -> QVector<VPLayoutPrinterPage>;
     auto PrintLayoutTiledSheetPage(QPrinter *printer, QPainter &painter, const VPLayoutPrinterPage &page,

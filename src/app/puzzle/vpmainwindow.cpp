@@ -3205,7 +3205,8 @@ void VPMainWindow::PrintLayoutSheets(QPrinter *printer, const QList<VPSheetPtr> 
                 continue;
             }
 
-            if (not PrintLayoutSheetPage(printer, painter, sheet))
+            bool const isFirstPage = (i == 0 && j == 0);
+            if (not PrintLayoutSheetPage(printer, painter, sheet, isFirstPage))
             {
                 return;
             }
@@ -3214,7 +3215,8 @@ void VPMainWindow::PrintLayoutSheets(QPrinter *printer, const QList<VPSheetPtr> 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPMainWindow::PrintLayoutSheetPage(QPrinter *printer, QPainter &painter, const VPSheetPtr &sheet) -> bool
+auto VPMainWindow::PrintLayoutSheetPage(QPrinter *printer, QPainter &painter, const VPSheetPtr &sheet, bool isFirstPage)
+    -> bool
 {
     SCASSERT(printer != nullptr)
 
@@ -3230,7 +3232,9 @@ auto VPMainWindow::PrintLayoutSheetPage(QPrinter *printer, QPainter &painter, co
         }
     }
 
-    if (not printer->newPage())
+    // Only advance to a new page if this isn't the very first page —
+    // QPainter::begin() already opened page 1.
+    if (not isFirstPage && not printer->newPage())
     {
         qCritical() << tr("Failed in flushing page to disk, disk full?");
         return false;

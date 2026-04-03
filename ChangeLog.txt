@@ -43,6 +43,7 @@
 - Valentina app. Fix crash on multi monitor systems.
 - Tape app. Fixed showing and saving a measurement image from database of known measurements.
 - Valentina app. Fixed generation duplicate curve names.
+- Puzzle app. Fix blank first page when printing to PDF.
 
 # Valentina 1.0.0 July 21, 2025
 - Fix Puzzle app crash when application closing.
