@@ -330,31 +330,42 @@ template <typename T> void VContainer::AddVariable(const QSharedPointer<T> &var)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T> void VContainer::AddVariable(const QSharedPointer<T> &var, const QString &name)
+template<typename T>
+void VContainer::AddVariable(const QSharedPointer<T> &var, const QString &name)
 {
     if (name.isEmpty())
     {
+        qDebug() << "AddVariable: rejected empty name";
         return;
     }
 
     if (d->variables.contains(name))
     {
+        qDebug() << "AddVariable: variable already exists for name =" << name
+                 << "| existing type =" << d->variables.value(name)->GetType() << "| incoming type =" << var->GetType();
+
         if (d->variables.value(name)->GetType() == var->GetType())
         {
             QSharedPointer<T> v = qSharedPointerDynamicCast<T>(d->variables.value(name));
             if (v.isNull())
             {
+                qDebug() << "AddVariable: dynamic cast failed for name =" << name;
                 throw VExceptionBadId(tr("Can't cast object."), name);
             }
+
+            qDebug() << "AddVariable: updating existing variable name =" << name;
             *v = *var;
         }
         else
         {
+            qDebug() << "AddVariable: type mismatch for name =" << name;
             throw VExceptionBadId(tr("Can't find object. Type mismatch."), name);
         }
     }
     else
     {
+        qDebug() << "AddVariable: inserting new variable name =" << name
+                 << "| type =" << static_cast<int>(var->GetType());
         d->variables.insert(name, var);
     }
 }

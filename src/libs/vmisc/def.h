@@ -34,12 +34,13 @@
 #include <qt_windows.h>
 #endif /*Q_OS_WIN*/
 
+#include <csignal>
 #include <QLineF>
 #include <QMargins>
 #include <QPrinter>
 #include <QString>
 #include <QStringList>
-#include <csignal>
+#include <QtDebug>
 
 #include "debugbreak.h"
 #include "defglobal.h"
@@ -367,6 +368,56 @@ enum class VarType : qint8
     PieceSeamLineArea,
     Unknown
 };
+
+inline auto operator<<(QDebug debug, VarType type) -> QDebug
+{
+    switch (type)
+    {
+        case VarType::Measurement:
+            debug << "Measurement";
+            break;
+        case VarType::MeasurementSeparator:
+            debug << "MeasurementSeparator";
+            break;
+        case VarType::Increment:
+            debug << "Increment";
+            break;
+        case VarType::IncrementSeparator:
+            debug << "IncrementSeparator";
+            break;
+        case VarType::LineLength:
+            debug << "LineLength";
+            break;
+        case VarType::CurveLength:
+            debug << "CurveLength";
+            break;
+        case VarType::CurveCLength:
+            debug << "CurveCLength";
+            break;
+        case VarType::LineAngle:
+            debug << "LineAngle";
+            break;
+        case VarType::CurveAngle:
+            debug << "CurveAngle";
+            break;
+        case VarType::ArcRadius:
+            debug << "ArcRadius";
+            break;
+        case VarType::PieceExternalArea:
+            debug << "PieceExternalArea";
+            break;
+        case VarType::PieceSeamLineArea:
+            debug << "PieceSeamLineArea";
+            break;
+        case VarType::Unknown:
+            debug << "Unknown";
+            break;
+        default:
+            debug << "VarType(" << static_cast<qint8>(type) << ")";
+            break;
+    }
+    return debug;
+}
 
 enum class IncrementType : qint8
 {
