@@ -747,52 +747,15 @@ void VAbstractOperation::ChangeLabelVisibility(quint32 id, bool visible)
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractOperation::ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement)
 {
-    bool const updateVisibilityOptions = NeedUpdateVisibilityGroup();
+    auto *newGroup = new QUndoCommand(); // an empty command
+    newGroup->setText(tr("save tool options"));
 
-    if (updateVisibilityOptions)
-    {
-        VAbstractApplication::VApp()->getUndoStack()->beginMacro(tr("operation options"));
-    }
-
-    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id, newGroup);
     connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-    VAbstractApplication::VApp()->getUndoStack()->push(saveOptions);
 
-    if (updateVisibilityOptions)
-    {
-        vidtype const group = doc->GroupLinkedToTool(m_id);
+    HandleVisibilityGroupChange(newGroup);
 
-        if (hasLinkedGroup)
-        {
-            if (group != null_id)
-            {
-                auto *groupOptions = new ChangeGroupOptions(doc, group, groupName, groupTags);
-                connect(groupOptions, &ChangeGroupOptions::UpdateGroups, doc, &VAbstractPattern::UpdateVisiblityGroups);
-                VAbstractApplication::VApp()->getUndoStack()->push(groupOptions);
-            }
-            else
-            {
-                VAbstractOperationInitData initData;
-                initData.id = m_id;
-                initData.hasLinkedVisibilityGroup = hasLinkedGroup;
-                initData.visibilityGroupName = groupName;
-                initData.visibilityGroupTags = groupTags;
-                initData.data = &(VDataTool::data);
-                initData.doc = doc;
-                initData.source = m_source;
-
-                VAbstractOperation::CreateVisibilityGroup(initData);
-            }
-        }
-        else
-        {
-            auto *delGroup = new DelGroup(doc, group);
-            connect(delGroup, &DelGroup::UpdateGroups, doc, &VAbstractPattern::UpdateVisiblityGroups);
-            VAbstractApplication::VApp()->getUndoStack()->push(delGroup);
-        }
-
-        VAbstractApplication::VApp()->getUndoStack()->endMacro();
-    }
+    VAbstractApplication::VApp()->getUndoStack()->push(newGroup);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1020,11 +983,11 @@ auto VAbstractOperation::NeedUpdateVisibilityGroup() const -> bool
 {
     vidtype const group = doc->GroupLinkedToTool(m_id);
 
-    if (hasLinkedGroup)
+    if (m_hasLinkedGroup)
     {
         if (group != null_id)
         {
-            if (groupName != doc->GetGroupName(group) || groupTags != doc->GetGroupTags(group))
+            if (m_groupName != doc->GetGroupName(group) || m_groupTags != doc->GetGroupTags(group))
             {
                 return true; // rename group
             }
@@ -1040,6 +1003,46 @@ auto VAbstractOperation::NeedUpdateVisibilityGroup() const -> bool
     }
 
     return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractOperation::HandleVisibilityGroupChange(QUndoCommand *parent)
+{
+    if (!NeedUpdateVisibilityGroup())
+    {
+        return;
+    }
+
+    SCASSERT(parent != nullptr)
+
+    vidtype const group = doc->GroupLinkedToTool(m_id);
+
+    if (m_hasLinkedGroup)
+    {
+        if (group != null_id)
+        {
+            auto *groupOptions = new ChangeGroupOptions(doc, group, m_groupName, m_groupTags, parent);
+            connect(groupOptions, &ChangeGroupOptions::UpdateGroups, doc, &VAbstractPattern::UpdateVisiblityGroups);
+        }
+        else
+        {
+            VAbstractOperationInitData initData;
+            initData.id = m_id;
+            initData.hasLinkedVisibilityGroup = m_hasLinkedGroup;
+            initData.visibilityGroupName = m_groupName;
+            initData.visibilityGroupTags = m_groupTags;
+            initData.data = &(VDataTool::data);
+            initData.doc = doc;
+            initData.source = m_source;
+
+            VAbstractOperation::CreateVisibilityGroup(initData, parent);
+        }
+    }
+    else
+    {
+        auto *delGroup = new DelGroup(doc, group, parent);
+        connect(delGroup, &DelGroup::UpdateGroups, doc, &VAbstractPattern::UpdateVisiblityGroups);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1145,7 +1148,7 @@ auto VAbstractOperation::VisibilityGroupToolTip() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractOperation::CreateVisibilityGroup(const VAbstractOperationInitData &initData)
+void VAbstractOperation::CreateVisibilityGroup(const VAbstractOperationInitData &initData, QUndoCommand *parent)
 {
     if (not initData.hasLinkedVisibilityGroup && not initData.visibilityGroupName.isEmpty())
     {
@@ -1159,9 +1162,12 @@ void VAbstractOperation::CreateVisibilityGroup(const VAbstractOperationInitData 
                                                             initData.visibilityGroupTags, groupData, initData.id);
         not group.isNull())
     {
-        auto *addGroup = new AddGroup(group, initData.doc);
+        auto *addGroup = new AddGroup(group, initData.doc, parent);
         connect(addGroup, &AddGroup::UpdateGroups, initData.doc, &VAbstractPattern::UpdateVisiblityGroups);
-        VAbstractApplication::VApp()->getUndoStack()->push(addGroup);
+        if (parent == nullptr)
+        {
+            VAbstractApplication::VApp()->getUndoStack()->push(addGroup);
+        }
     }
 }
 
@@ -1208,7 +1214,7 @@ void VAbstractOperation::ProcessOperationToolOptions(const QDomElement &oldDomEl
     // Check if there are any name changes
     if (oldNames == newNames)
     {
-        VDrawTool::ApplyToolOptions(oldDomElement, newDomElement);
+        VAbstractOperation::ApplyToolOptions(oldDomElement, newDomElement);
         return;
     }
 
@@ -1227,6 +1233,8 @@ void VAbstractOperation::ProcessOperationToolOptions(const QDomElement &oldDomEl
     auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id, newGroup);
     saveOptions->SetInGroup(!renames.isEmpty());
     SetupRenameCommand(saveOptions, sourceSetChanged, /*isLast=*/true, doc);
+
+    HandleVisibilityGroupChange(newGroup);
 
     // Process rename operations, connecting signal only for the last one
     for (int i = 0; i < renames.size(); ++i)

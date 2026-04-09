@@ -41,6 +41,8 @@
 #include "../vdrawtool.h"
 #include "../vwidgets/vsimplecurve.h"
 
+class QUndoCommand;
+
 struct VAbstractOperationInitData : VDrawToolInitData
 {
     using VDrawToolInitData::VDrawToolInitData;
@@ -128,9 +130,9 @@ protected:
 
     QMap<quint32, VAbstractSimple *> operatedObjects{};
 
-    bool hasLinkedGroup{false};
-    QString groupName{};
-    QStringList groupTags{};
+    bool m_hasLinkedGroup{false};
+    QString m_groupName{};
+    QStringList m_groupTags{};
 
     explicit VAbstractOperation(const VAbstractOperationInitData &initData, QGraphicsItem *parent = nullptr);
 
@@ -162,7 +164,7 @@ protected:
     auto ComplexCurveToolTip(quint32 itemId) const -> QString;
     auto VisibilityGroupToolTip() const -> QString;
 
-    static void CreateVisibilityGroup(const VAbstractOperationInitData &initData);
+    static void CreateVisibilityGroup(const VAbstractOperationInitData &initData, QUndoCommand *parent = nullptr);
 
     static void PrepareNames(VAbstractOperationInitData &initData);
 
@@ -177,6 +179,7 @@ private:
     void AllowCurveSelecting(bool enabled, GOType type);
 
     auto NeedUpdateVisibilityGroup() const -> bool;
+    void HandleVisibilityGroupChange(QUndoCommand *parent);
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -204,9 +207,9 @@ template <typename T> void VAbstractOperation::SaveVisibilityGroupData(QPointer<
     SCASSERT(not dialogTool.isNull())
 
     // Save for later use.
-    hasLinkedGroup = dialogTool->HasLinkedVisibilityGroup();
-    groupName = dialogTool->GetVisibilityGroupName();
-    groupTags = dialogTool->GetVisibilityGroupTags();
+    m_hasLinkedGroup = dialogTool->HasLinkedVisibilityGroup();
+    m_groupName = dialogTool->GetVisibilityGroupName();
+    m_groupTags = dialogTool->GetVisibilityGroupTags();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
