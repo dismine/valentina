@@ -750,7 +750,7 @@ void VAbstractOperation::ApplyToolOptions(const QDomElement &oldDomElement, cons
     auto *newGroup = new QUndoCommand(); // an empty command
     newGroup->setText(tr("save tool options"));
 
-    auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id, newGroup);
+    const auto *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id, newGroup);
     connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
 
     HandleVisibilityGroupChange(newGroup);
@@ -1021,7 +1021,7 @@ void VAbstractOperation::HandleVisibilityGroupChange(QUndoCommand *parent)
     {
         if (group != null_id)
         {
-            auto *groupOptions = new ChangeGroupOptions(doc, group, m_groupName, m_groupTags, parent);
+            const auto *groupOptions = new ChangeGroupOptions(doc, group, m_groupName, m_groupTags, parent);
             connect(groupOptions, &ChangeGroupOptions::UpdateGroups, doc, &VAbstractPattern::UpdateVisiblityGroups);
         }
         else
@@ -1040,7 +1040,7 @@ void VAbstractOperation::HandleVisibilityGroupChange(QUndoCommand *parent)
     }
     else
     {
-        auto *delGroup = new DelGroup(doc, group, parent);
+        const auto *delGroup = new DelGroup(doc, group, parent);
         connect(delGroup, &DelGroup::UpdateGroups, doc, &VAbstractPattern::UpdateVisiblityGroups);
     }
 }
