@@ -299,9 +299,9 @@ auto ReplaceTokenSegmentCurve(const QString &token,
 
         if (!leftSub.isEmpty())
         {
-            // Match: prefix_pointName_<someLabel> -> prefix_pointName<leftSub>
+            // Match: prefix_<someLabel>_pointName -> prefix_pointName<leftSub>
             const QRegularExpression regex(
-                QStringLiteral("^(%1)_(%2)_(%3)$").arg(escapedPrefix, escapedPointName, validName));
+                QStringLiteral("^(%1)_(%2)_(%3)$").arg(escapedPrefix, validName, escapedPointName));
             if (const QRegularExpressionMatch match = regex.match(token); match.hasMatch())
             {
                 return QStringLiteral("%1_%2").arg(match.captured(1), leftSub);
@@ -310,9 +310,9 @@ auto ReplaceTokenSegmentCurve(const QString &token,
 
         if (!rightSub.isEmpty())
         {
-            // Match: prefix_<someLabel>_pointName -> prefix_pointName<rightSub>
+            // Match: prefix_pointName_<someLabel> -> prefix_pointName<rightSub>
             const QRegularExpression regex(
-                QStringLiteral("^(%1)_(%2)_(%3)$").arg(escapedPrefix, validName, escapedPointName));
+                QStringLiteral("^(%1)_(%2)_(%3)$").arg(escapedPrefix, escapedPointName, validName));
             if (const QRegularExpressionMatch match = regex.match(token); match.hasMatch())
             {
                 return QStringLiteral("%1_%2").arg(match.captured(1), rightSub);
