@@ -54,6 +54,8 @@ public:
     explicit VWidgetDependencies(VAbstractPattern *doc, QWidget *parent = nullptr);
     ~VWidgetDependencies() override;
 
+    void Clear();
+
 public slots:
     void UpdateDependencies();
     void ShowDependency(QGraphicsItem *item);

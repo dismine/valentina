@@ -141,6 +141,8 @@ public:
 
     void RefreshElementIdCache();
 
+    virtual void Clear();
+
 protected:
     auto setTagText(const QString &tag, const QString &text) -> bool;
     auto setTagText(QDomElement &domElement, const QString &text) -> bool;

@@ -144,6 +144,23 @@ VWidgetDependencies::~VWidgetDependencies()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VWidgetDependencies::Clear()
+{
+    if (m_doc == nullptr)
+    {
+        return;
+    }
+
+    m_historyManager.RebuildIndex();
+
+    m_indexPatternBlock = -1;
+
+    m_dependencyModel->ClearModel();
+
+    EnableMoveButtons(ui->treeView->currentIndex());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VWidgetDependencies::UpdateDependencies()
 {
     if (m_doc == nullptr)

@@ -468,7 +468,7 @@ void VAbstractPattern::setXMLContent(const QString &fileName)
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractPattern::Clear()
 {
-    clear();
+    VDomDocument::Clear();
     m_patternNumber.clear();
     m_labelDateFormat.clear();
     m_patternName.clear();

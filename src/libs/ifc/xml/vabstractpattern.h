@@ -147,7 +147,7 @@ public:
 
     virtual void UpdateToolData(const quint32 &id, VContainer *data) = 0;
 
-    virtual void Clear();
+    void Clear() override;
 
     static auto getTool(quint32 id) -> VDataTool *;
     static void AddTool(quint32 id, VDataTool *tool);

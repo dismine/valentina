@@ -689,6 +689,18 @@ void VDomDocument::RefreshElementIdCache()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VDomDocument::Clear()
+{
+    clear();
+    if (m_watcher->isRunning())
+    {
+        m_watcher->cancel();
+        m_watcher->waitForFinished();
+    }
+    m_elementIdCache.clear();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VDomDocument::CacheRefreshed()
 {
     if (m_watcher->isCanceled())

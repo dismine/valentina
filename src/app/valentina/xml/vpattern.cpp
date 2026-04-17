@@ -318,6 +318,24 @@ void VPattern::Parse(const Document &parse)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPattern::Clear()
+{
+    VAbstractPattern::Clear();
+    updatePieces.clear();
+
+    if (m_refreshPieceGeometryWatcher->isRunning())
+    {
+        m_refreshPieceGeometryWatcher->cancel();
+        m_refreshPieceGeometryWatcher->waitForFinished();
+    }
+
+    m_pieceGeometryDirty = true;
+
+    m_garbageCollected = false;
+    m_garbageCollectBackupFilePath.clear();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setCurrentData set current data set.
  *

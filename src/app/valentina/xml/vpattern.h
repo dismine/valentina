@@ -55,6 +55,8 @@ public:
 
     void Parse(const Document &parse);
 
+    void Clear() override;
+
     void setCurrentData();
     void UpdateToolData(const quint32 &id, VContainer *data) override;
 

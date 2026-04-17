@@ -4754,6 +4754,7 @@ void MainWindow::Clear()
     UpdateVisibilityGroups();
     m_detailsWidget->UpdateList();
     m_backgroundImagesWidget->UpdateImages();
+    m_dependenciesWidget->Clear();
     qCDebug(vMainWindow, "Clearing scenes.");
     m_sceneDraw->clear();
     m_sceneDraw->SetAcceptDrop(false);
