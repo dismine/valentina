@@ -641,99 +641,103 @@ void VToolSplinePath::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     // event, you can be certain that this item also received a mouse press event, and that this item is the current
     // mouse grabber.".
 
-    if (IsMovable(splIndex))
+    if (!IsMovable(splIndex) || !(flags() & QGraphicsItem::ItemIsMovable))
     {
-        const auto oldSplPath = VAbstractTool::data.GeometricObject<VSplinePath>(m_id);
+        return;
+    }
 
-        if (VAbstractApplication::VApp()->Settings()->IsFreeCurveMode() && not moved)
+    const auto oldSplPath = VAbstractTool::data.GeometricObject<VSplinePath>(m_id);
+
+    if (VAbstractApplication::VApp()->Settings()->IsFreeCurveMode() && not moved)
+    {
+        oldMoveSplinePath = QSharedPointer<VSplinePath>::create(*oldSplPath);
+        moved = true;
+    }
+
+    newMoveSplinePath = QSharedPointer<VSplinePath>::create(*oldSplPath);
+
+    VSpline const spline = newMoveSplinePath->GetSpline(splIndex);
+    const qreal t = spline.ParamT(oldPosition);
+
+    if (qFloor(t) == -1)
+    {
+        return;
+    }
+
+    // Magic Bezier Drag Equations follow!
+    // "weight" describes how the influence of the drag should be distributed
+    // among the handles; 0 = front handle only, 1 = back handle only.
+
+    double weight;
+    if (t <= 1.0 / 6.0)
+    {
+        weight = 0;
+    }
+    else if (t <= 0.5)
+    {
+        weight = (pow((6 * t - 1) / 2.0, 3)) / 2;
+    }
+    else if (t <= 5.0 / 6.0)
+    {
+        weight = (1 - pow((6 * (1 - t) - 1) / 2.0, 3)) / 2 + 0.5;
+    }
+    else
+    {
+        weight = 1;
+    }
+
+    const QPointF delta = event->scenePos() - oldPosition;
+    const QPointF offset0 = ((1 - weight) / (3 * t * (1 - t) * (1 - t))) * delta;
+    const QPointF offset1 = (weight / (3 * t * t * (1 - t))) * delta;
+
+    const auto p2 = static_cast<QPointF>(spline.GetP2()) + offset0;
+    const auto p3 = static_cast<QPointF>(spline.GetP3()) + offset1;
+
+    oldPosition = event->scenePos(); // Now mouse here
+
+    const auto spl = VSpline(spline.GetP1(), p2, p3, spline.GetP4());
+
+    UpdateControlPoints(spl, newMoveSplinePath, splIndex);
+
+    if (not VAbstractApplication::VApp()->Settings()->IsFreeCurveMode())
+    {
+        UndoCommandMove(*oldSplPath, *newMoveSplinePath);
+    }
+    else
+    {
+        VAbstractTool::data.UpdateGObject(m_id, newMoveSplinePath);
+        RefreshGeometry();
+
+        if (QGraphicsScene *sc = scene())
         {
-            oldMoveSplinePath = QSharedPointer<VSplinePath>::create(*oldSplPath);
-            moved = true;
+            VMainGraphicsView::NewSceneRect(sc, VAbstractValApplication::VApp()->getSceneView(), this);
         }
+    }
 
-        newMoveSplinePath = QSharedPointer<VSplinePath>::create(*oldSplPath);
+    // Each time we move something we call recalculation scene rect. In some cases this can cause moving
+    // objects positions. And this cause infinite redrawing. That's why we wait the finish of saving the last move.
+    static bool changeFinished = true;
+    if (changeFinished)
+    {
+        changeFinished = false;
 
-        VSpline const spline = newMoveSplinePath->GetSpline(splIndex);
-        const qreal t = spline.ParamT(oldPosition);
-
-        if (qFloor(t) == -1)
+        const QList<QGraphicsView *> viewList = scene()->views();
+        if (not viewList.isEmpty())
         {
-            return;
-        }
-
-        // Magic Bezier Drag Equations follow!
-        // "weight" describes how the influence of the drag should be distributed
-        // among the handles; 0 = front handle only, 1 = back handle only.
-
-        double weight;
-        if (t <= 1.0 / 6.0)
-        {
-            weight = 0;
-        }
-        else if (t <= 0.5)
-        {
-            weight = (pow((6 * t - 1) / 2.0, 3)) / 2;
-        }
-        else if (t <= 5.0 / 6.0)
-        {
-            weight = (1 - pow((6 * (1 - t) - 1) / 2.0, 3)) / 2 + 0.5;
-        }
-        else
-        {
-            weight = 1;
-        }
-
-        const QPointF delta = event->scenePos() - oldPosition;
-        const QPointF offset0 = ((1 - weight) / (3 * t * (1 - t) * (1 - t))) * delta;
-        const QPointF offset1 = (weight / (3 * t * t * (1 - t))) * delta;
-
-        const auto p2 = static_cast<QPointF>(spline.GetP2()) + offset0;
-        const auto p3 = static_cast<QPointF>(spline.GetP3()) + offset1;
-
-        oldPosition = event->scenePos(); // Now mouse here
-
-        const auto spl = VSpline(spline.GetP1(), p2, p3, spline.GetP4());
-
-        UpdateControlPoints(spl, newMoveSplinePath, splIndex);
-
-        if (not VAbstractApplication::VApp()->Settings()->IsFreeCurveMode())
-        {
-            UndoCommandMove(*oldSplPath, *newMoveSplinePath);
-        }
-        else
-        {
-            VAbstractTool::data.UpdateGObject(m_id, newMoveSplinePath);
-            RefreshGeometry();
-
-            if (QGraphicsScene *sc = scene())
+            if (auto *view = qobject_cast<VMainGraphicsView *>(viewList.at(0)))
             {
-                VMainGraphicsView::NewSceneRect(sc, VAbstractValApplication::VApp()->getSceneView(), this);
+                auto *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
+                SCASSERT(currentScene)
+                const QPointF cursorPosition = currentScene->getScenePos();
+                const qreal scale = SceneScale(scene());
+                view->EnsureVisibleWithDelay(QRectF(cursorPosition.x() - 5 / scale,
+                                                    cursorPosition.y() - 5 / scale,
+                                                    10 / scale,
+                                                    10 / scale),
+                                             VMainGraphicsView::scrollDelay);
             }
         }
-
-        // Each time we move something we call recalculation scene rect. In some cases this can cause moving
-        // objects positions. And this cause infinite redrawing. That's why we wait the finish of saving the last move.
-        static bool changeFinished = true;
-        if (changeFinished)
-        {
-            changeFinished = false;
-
-            const QList<QGraphicsView *> viewList = scene()->views();
-            if (not viewList.isEmpty())
-            {
-                if (auto *view = qobject_cast<VMainGraphicsView *>(viewList.at(0)))
-                {
-                    auto *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
-                    SCASSERT(currentScene)
-                    const QPointF cursorPosition = currentScene->getScenePos();
-                    const qreal scale = SceneScale(scene());
-                    view->EnsureVisibleWithDelay(
-                        QRectF(cursorPosition.x() - 5 / scale, cursorPosition.y() - 5 / scale, 10 / scale, 10 / scale),
-                        VMainGraphicsView::scrollDelay);
-                }
-            }
-            changeFinished = true;
-        }
+        changeFinished = true;
     }
 }
 
