@@ -425,7 +425,7 @@ void VToolSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (!IsMovable())
+    if (!IsMovable() || !(flags() & QGraphicsItem::ItemIsMovable))
     {
         return;
     }
