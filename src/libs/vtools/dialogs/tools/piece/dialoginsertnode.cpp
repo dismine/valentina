@@ -29,6 +29,8 @@
 #include "dialoginsertnode.h"
 #include "../vmisc/theme/themeDef.h"
 #include "../vpatterndb/vcontainer.h"
+#include "../vtools/tools/toolsdef.h"
+#include "../vtools/visualization/path/vistoolinsertnode.h"
 #include "ui_dialoginsertnode.h"
 
 #include <QMenu>
@@ -49,6 +51,8 @@ DialogInsertNode::DialogInsertNode(const VContainer *data, VAbstractPattern *doc
     connect(ui->listWidget, &QListWidget::itemSelectionChanged, this, &DialogInsertNode::NodeSelected);
     connect(ui->spinBoxNodeNumber, QOverload<int>::of(&QSpinBox::valueChanged), this,
             &DialogInsertNode::NodeNumberChanged);
+
+    vis = new VisToolInsertNode(data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -144,69 +148,76 @@ void DialogInsertNode::CheckDependencyTreeComplete()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogInsertNode::SelectedObject(bool selected, quint32 object, quint32 tool)
+void DialogInsertNode::ChosenObject(quint32 id, const SceneObject &type)
 {
-    Q_UNUSED(tool)
+    Q_UNUSED(type)
 
     if (prepare)
     {
         return;
     }
 
-    auto nodeIterator = std::find_if(m_nodes.begin(), m_nodes.end(),
-                                     [object](const VPieceNode &node) { return node.GetId() == object; });
-    if (selected)
+    if (auto nodeIterator = std::find_if(m_nodes.begin(),
+                                         m_nodes.end(),
+                                         [id](const VPieceNode &node) -> bool { return node.GetId() == id; });
+        nodeIterator == m_nodes.cend())
     {
-        if (nodeIterator == m_nodes.cend())
+        GOType type = GOType::Unknown;
+        try
         {
-            GOType type = GOType::Unknown;
-            try
-            {
-                type = data->GetGObject(object)->getType();
-            }
-            catch (const VExceptionBadId &)
-            {
-                qDebug() << "Cannot find an object with id" << object;
-                return;
-            }
-
-            VPieceNode node;
-            switch (type)
-            {
-                case GOType::Arc:
-                    node = VPieceNode(object, Tool::NodeArc);
-                    break;
-                case GOType::EllipticalArc:
-                    node = VPieceNode(object, Tool::NodeElArc);
-                    break;
-                case GOType::Point:
-                    node = VPieceNode(object, Tool::NodePoint);
-                    break;
-                case GOType::Spline:
-                case GOType::CubicBezier:
-                    node = VPieceNode(object, Tool::NodeSpline);
-                    break;
-                case GOType::SplinePath:
-                case GOType::CubicBezierPath:
-                    node = VPieceNode(object, Tool::NodeSplinePath);
-                    break;
-                case GOType::Unknown:
-                case GOType::PlaceLabel:
-                default:
-                    qDebug() << "Got unexpected object type. Ignore.";
-                    return;
-            }
-
-            node.SetExcluded(true);
-            m_nodes.append(node);
+            type = data->GetGObject(id)->getType();
         }
+        catch (const VExceptionBadId &)
+        {
+            qDebug() << "Cannot find an object with id" << id;
+            return;
+        }
+
+        VPieceNode node;
+        switch (type)
+        {
+            case GOType::Arc:
+                node = VPieceNode(id, Tool::NodeArc);
+                break;
+            case GOType::EllipticalArc:
+                node = VPieceNode(id, Tool::NodeElArc);
+                break;
+            case GOType::Point:
+                node = VPieceNode(id, Tool::NodePoint);
+                break;
+            case GOType::Spline:
+            case GOType::CubicBezier:
+                node = VPieceNode(id, Tool::NodeSpline);
+                break;
+            case GOType::SplinePath:
+            case GOType::CubicBezierPath:
+                node = VPieceNode(id, Tool::NodeSplinePath);
+                break;
+            case GOType::Unknown:
+            case GOType::PlaceLabel:
+            default:
+                qDebug() << "Got unexpected object type. Ignore.";
+                return;
+        }
+
+        node.SetExcluded(true);
+        m_nodes.append(node);
     }
     else
     {
-        if (nodeIterator != m_nodes.end())
-        {
-            m_nodes.erase(nodeIterator);
-        }
+        m_nodes.erase(nodeIterator);
+    }
+
+    auto *operation = qobject_cast<VisToolInsertNode *>(vis);
+    SCASSERT(operation != nullptr)
+    operation->SetNodes(NodesToObjects(m_nodes));
+    if (!VAbstractValApplication::VApp()->getCurrentScene()->items().contains(operation))
+    {
+        operation->VisualMode(NULL_ID);
+    }
+    else
+    {
+        operation->RefreshGeometry();
     }
 }
 

@@ -342,6 +342,7 @@ enum class Vis : ToolVisHolderType
     ToolEllipticalArcWithLength,
     ToolParallelCurve,
     ToolGraduatedCurve,
+    ToolInsertNode,
     LAST_ONE_DO_NOT_USE // add new stuffs above this, this constant must be last and never used
 };
 

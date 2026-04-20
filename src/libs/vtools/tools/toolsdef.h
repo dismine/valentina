@@ -36,6 +36,7 @@
 
 class VGObject;
 class VContainer;
+class VPieceNode;
 
 struct VRawGraduatedCurveOffset
 {
@@ -81,6 +82,7 @@ constexpr qreal labelMX = ToPixel(10, Unit::Mm);
 constexpr qreal labelMY = ToPixel(15, Unit::Mm);
 
 auto SourceToObjects(const QVector<SourceItem> &source) -> QVector<quint32>;
+auto NodesToObjects(const QVector<VPieceNode> &nodes) -> QVector<quint32>;
 
 void FillDefSourceNames(QVector<SourceItem> &source, const VContainer *data, const QString &suffix);
 

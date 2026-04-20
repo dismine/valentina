@@ -57,7 +57,7 @@ public:
     void CheckDependencyTreeComplete() override;
 
 public slots:
-    void SelectedObject(bool selected, quint32 object, quint32 tool) override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
 
 protected:
     auto IsValid() const -> bool override;

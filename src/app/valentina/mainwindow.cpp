@@ -983,7 +983,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
     m_dialogTool = dialogTool;
 
     connect(scene, &VMainGraphicsScene::ChoosedObject, m_dialogTool.data(), &DialogTool::ChosenObject);
-    if (t == Tool::Group || t == Tool::InsertNode)
+    if (t == Tool::Group)
     {
         connect(scene, &VMainGraphicsScene::SelectedObject, m_dialogTool.data(), &DialogTool::SelectedObject);
     }
@@ -1812,9 +1812,8 @@ void MainWindow::ToolTrueDarts(bool checked)
 void MainWindow::ToolInsertNode(bool checked)
 {
     ToolSelectOperationObjects();
-    const QString tooltip = tr("Select one or more objects, hold <b>%1</b> - for multiple selection, "
-                               "<b>%2</b> - finish creation")
-                                .arg(VModifierKey::Control(), VModifierKey::EnterKey());
+    const QString tooltip = tr("Select one or more objects, <b>%1</b> - confirm selection")
+                                .arg(VModifierKey::EnterKey());
     SetToolButton<DialogInsertNode>(checked, Tool::InsertNode, QStringLiteral("insert_node_cursor.png"), tooltip,
                                     &MainWindow::ClosedDialogInsertNode);
     LogPatternToolUsed(checked, QStringLiteral("Insert node tool"));

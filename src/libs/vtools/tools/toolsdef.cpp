@@ -43,6 +43,7 @@
 #include "../vgeometry/vgobject.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vpiecenode.h"
 #include "../vpropertyexplorer/checkablemessagebox.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
@@ -329,4 +330,18 @@ auto FindFreeNames(const QVector<SourceItem> &oldSource, const QVector<SourceIte
     }
 
     return oldNames - newNames;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto NodesToObjects(const QVector<VPieceNode> &nodes) -> QVector<quint32>
+{
+    QVector<quint32> ids;
+    ids.reserve(nodes.size());
+
+    for (const auto &node : nodes)
+    {
+        ids.append(node.GetId());
+    }
+
+    return ids;
 }

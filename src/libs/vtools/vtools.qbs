@@ -412,6 +412,8 @@ VLib {
             "path/vistoolellipticalarcwithlength.h",
             "path/vistoolgraduatedcurve.cpp",
             "path/vistoolgraduatedcurve.h",
+            "path/vistoolinsertnode.cpp",
+            "path/vistoolinsertnode.h",
             "visualization.h",
             "line/visline.h",
             "line/vistoolline.h",
