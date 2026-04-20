@@ -280,7 +280,7 @@ void DialogFlippingByLine::ChosenObject(quint32 id, const SceneObject &type)
     {
         if (auto obj = std::find_if(m_sourceObjects.begin(),
                                     m_sourceObjects.end(),
-                                    [id](const SourceItem &sItem) { return sItem.id == id; });
+                                    [id](const SourceItem &sItem) -> bool { return sItem.id == id; });
             obj == m_sourceObjects.end())
         {
             m_sourceObjects.push_back(SourceItem{id});
@@ -305,7 +305,7 @@ void DialogFlippingByLine::ChosenObject(quint32 id, const SceneObject &type)
     {
         auto obj = std::find_if(m_sourceObjects.begin(),
                                 m_sourceObjects.end(),
-                                [id](const SourceItem &sItem) { return sItem.id == id; });
+                                [id](const SourceItem &sItem) -> bool { return sItem.id == id; });
         switch (number)
         {
             case 0:
