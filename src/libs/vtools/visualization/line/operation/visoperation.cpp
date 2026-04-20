@@ -27,15 +27,9 @@
  *************************************************************************/
 
 #include "visoperation.h"
-#include "../vgeometry/varc.h"
-#include "../vgeometry/vcubicbezier.h"
-#include "../vgeometry/vcubicbezierpath.h"
-#include "../vgeometry/vellipticalarc.h"
 #include "../vgeometry/vgeometrydef.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
-#include "../vgeometry/vspline.h"
-#include "../vgeometry/vsplinepath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisOperation::VisOperation(const VContainer *data, QGraphicsItem *parent)
