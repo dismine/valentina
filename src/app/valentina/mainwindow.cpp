@@ -2161,15 +2161,6 @@ void MainWindow::ToolBarStyle(QToolBar *bar) const
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ScaleChanged(qreal scale)
 {
-    if (not m_doubleSpinBoxScale.isNull())
-    {
-        const QSignalBlocker blocker(m_doubleSpinBoxScale);
-        m_doubleSpinBoxScale->setMaximum(qFloor(VMainGraphicsView::MaxScale() * 1000) / 10.0);
-        m_doubleSpinBoxScale->setMinimum(qFloor(VMainGraphicsView::MinScale() * 1000) / 10.0);
-        m_doubleSpinBoxScale->setValue(qFloor(scale * 1000) / 10.0);
-        m_doubleSpinBoxScale->setSingleStep(1);
-    }
-
     VMainGraphicsScene const *scene = nullptr;
     if (ui->view->scene() == m_sceneDraw)
     {
@@ -2182,6 +2173,15 @@ void MainWindow::ScaleChanged(qreal scale)
     else
     {
         return;
+    }
+
+    if (not m_doubleSpinBoxScale.isNull())
+    {
+        const QSignalBlocker blocker(m_doubleSpinBoxScale);
+        m_doubleSpinBoxScale->setMaximum(qFloor(VMainGraphicsView::MaxScale() * 1000) / 10.0);
+        m_doubleSpinBoxScale->setMinimum(qFloor(VMainGraphicsView::MinScale() * 1000) / 10.0);
+        m_doubleSpinBoxScale->setValue(qFloor(scale * 1000) / 10.0);
+        m_doubleSpinBoxScale->setSingleStep(1);
     }
 
     for (QGraphicsItem *item : scene->items())
@@ -4078,6 +4078,7 @@ void MainWindow::RestoreCurrentScene()
     horScrollBar->setValue(scene->getHorScrollBar());
     QScrollBar *verScrollBar = ui->view->verticalScrollBar();
     verScrollBar->setValue(scene->getVerScrollBar());
+    ScaleChanged(ui->view->transform().m11());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
