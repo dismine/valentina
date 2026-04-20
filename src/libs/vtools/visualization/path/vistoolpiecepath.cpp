@@ -55,15 +55,15 @@ void VisToolPiecePath::RefreshGeometry()
         for (int i = 0; i < nodes.size(); ++i)
         {
             VSimplePoint *point = GetPoint(static_cast<quint32>(i), VColorRole::VisSupportColor);
-            point->RefreshPointGeometry(nodes.at(i)); // Keep first, you can hide only objects those have shape
-            point->SetOnlyPoint(GetMode() == Mode::Creation);
+            const VPointF &node = nodes.at(i);
+            point->RefreshPointGeometry(node); // Keep first, you can hide only objects those have shape
+            point->SetOnlyPoint(GetMode() == Mode::Creation || !node.IsShowLabel());
             point->setVisible(true);
         }
 
         if (GetMode() == Mode::Creation)
         {
-            const QVector<VLayoutPoint> points = m_path.PathPoints(GetData());
-            if (not points.empty())
+            if (const QVector<VLayoutPoint> points = m_path.PathPoints(GetData()); !points.empty())
             {
                 DrawLine(m_line, QLineF(points.constLast(), ScenePos()), Qt::DashLine);
             }

@@ -232,6 +232,7 @@ private:
 
     void InitNodes(const VPiece &detail, VMainGraphicsScene *scene);
     static void InitNode(const VPieceNode &node, VMainGraphicsScene *scene, VToolSeamAllowance *parent);
+    static void InitInternalNode(const VPieceNode &node, VToolSeamAllowance *parent);
     void InitInternalPaths(const VPiece &detail);
 
     auto PrepareLabelData(const VPatternLabelData &labelData, const QVector<quint32> &pins,

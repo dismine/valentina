@@ -465,17 +465,17 @@ auto VPiecePath::PathNodePoints(const VContainer *data, bool showExcluded) const
     QVector<VPointF> points;
     for (int i = 0; i < CountNodes(); ++i)
     {
-        switch (at(i).GetTypeTool())
+        switch (const VPieceNode &node = at(i); node.GetTypeTool())
         {
             case Tool::NodePoint:
-            {
-                if (showExcluded || not at(i).IsExcluded())
+                if (showExcluded || !node.IsExcluded())
                 {
-                    const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(at(i).GetId());
-                    points.append(*point);
+                    const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(node.GetId());
+                    VPointF p = *point;
+                    p.SetShowLabel(GetType() == PiecePathType::InternalPath ? node.IsExcluded() : true);
+                    points.append(p);
                 }
-            }
-            break;
+                break;
             case Tool::NodeArc:
             case Tool::NodeElArc:
             case Tool::NodeSpline:

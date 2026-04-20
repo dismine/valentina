@@ -477,24 +477,19 @@ void VNodePoint::InitPassmarkMenu(QMenu *menu, vidtype pieceId, QHash<int, QActi
 //---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::InitAngleTypeMenu(QMenu *menu, vidtype pieceId, QHash<int, QAction *> &contextMenu)
 {
-    QMenu *angleTypeMenu = menu->addMenu(tr("Seam allowance angle"));
-    PieceNodeAngle curType = PieceNodeAngle::ByLength;
-
     const VPiece detail = VAbstractTool::data.GetPiece(pieceId);
     const VPiecePath &path = detail.GetPath();
     const int nodeIndex = path.indexOfNode(m_id);
-    if (nodeIndex != -1)
+    if (nodeIndex == -1)
     {
-        curType = path.at(nodeIndex).GetAngleType();
-
-        angleTypeMenu->setEnabled(detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn());
-    }
-    else
-    {
-        angleTypeMenu->setVisible(false);
+        return;
     }
 
-    auto InitAngleAction = [angleTypeMenu, curType](const QString &name, PieceNodeAngle checkType)
+    const PieceNodeAngle curType = path.at(nodeIndex).GetAngleType();
+    QMenu *angleTypeMenu = menu->addMenu(tr("Seam allowance angle"));
+    angleTypeMenu->setEnabled(detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn());
+
+    auto InitAngleAction = [angleTypeMenu, curType](const QString &name, PieceNodeAngle checkType) -> QAction *
     {
         QAction *action = angleTypeMenu->addAction(name);
         action->setCheckable(true);

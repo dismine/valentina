@@ -197,13 +197,17 @@ void VUndoCommand::EnablePieceNodes(const VPiecePath &path)
 //---------------------------------------------------------------------------------------------------------------------
 void VUndoCommand::DisableInternalPaths(const QVector<quint32> &paths)
 {
-    for (auto path : paths)
+    for (auto pathId : paths)
     {
         try
         {
-            if (auto *tool = qobject_cast<VToolPiecePath *>(VAbstractPattern::getTool(path)))
+            if (auto *tool = qobject_cast<VToolPiecePath *>(VAbstractPattern::getTool(pathId)))
             {
                 tool->setVisible(false);
+
+                auto *const varData = tool->getData();
+                const VPiecePath pathItem = varData->GetPiecePath(pathId);
+                DisablePieceNodes(pathItem);
             }
         }
         catch (const VExceptionBadId &)

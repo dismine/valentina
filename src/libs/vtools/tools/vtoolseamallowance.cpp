@@ -39,6 +39,7 @@
 #include "../undocommands/deletepiece.h"
 #include "../undocommands/movepiece.h"
 #include "../undocommands/savepieceoptions.h"
+#include "../undocommands/savepiecepathoptions.h"
 #include "../undocommands/togglepiecestate.h"
 #include "../vformat/vlabeltemplate.h"
 #include "../vgeometry/varc.h"
@@ -500,6 +501,22 @@ auto RenderMirrorLine(const VPiece &detail, const VContainer *data, bool combine
     path.moveTo(p1);
     path.lineTo(p2);
     return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void UpdatePathExcludeState(const VPiecePath &path)
+{
+    for (int i = 0; i < path.CountNodes(); ++i)
+    {
+        if (const VPieceNode &node = path.at(i); node.GetTypeTool() == Tool::NodePoint)
+        {
+            auto *tool = qobject_cast<VNodePoint *>(VAbstractPattern::getTool(node.GetId()));
+            SCASSERT(tool != nullptr);
+
+            tool->SetExluded(node.IsExcluded());
+            tool->setVisible(not node.IsExcluded()); // Hide excluded point
+        }
+    }
 }
 } // namespace
 
@@ -2034,19 +2051,7 @@ VToolSeamAllowance::VToolSeamAllowance(const VToolSeamAllowanceInitData &initDat
 void VToolSeamAllowance::UpdateExcludeState()
 {
     const VPiece detail = VAbstractTool::data.GetPiece(m_id);
-    const VPiecePath &path = detail.GetPath();
-    for (int i = 0; i < path.CountNodes(); ++i)
-    {
-        const VPieceNode &node = path.at(i);
-        if (node.GetTypeTool() == Tool::NodePoint)
-        {
-            auto *tool = qobject_cast<VNodePoint *>(VAbstractPattern::getTool(node.GetId()));
-            SCASSERT(tool != nullptr);
-
-            tool->SetExluded(node.IsExcluded());
-            tool->setVisible(not node.IsExcluded()); // Hide excluded point
-        }
-    }
+    UpdatePathExcludeState(detail.GetPath());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2055,13 +2060,19 @@ void VToolSeamAllowance::UpdateInternalPaths()
     VPiece piece = VAbstractTool::data.GetPiece(m_id);
     piece.TestInternalPaths(&(VAbstractTool::data));
     const QVector<quint32> paths = piece.GetInternalPaths();
-    for (auto path : paths)
+    for (auto pathId : paths)
     {
         try
         {
-            if (auto *tool = qobject_cast<VToolPiecePath *>(VAbstractPattern::getTool(path)))
+            if (auto *tool = qobject_cast<VToolPiecePath *>(VAbstractPattern::getTool(pathId)))
             {
                 tool->RefreshGeometry();
+
+                const VPiecePath pathItem = VAbstractTool::data.GetPiecePath(pathId);
+                for (int i = 0; i < pathItem.CountNodes(); ++i)
+                {
+                    InitInternalNode(pathItem.at(i), this);
+                }
             }
         }
         catch (const VExceptionBadId &)
@@ -2283,7 +2294,7 @@ void VToolSeamAllowance::ToggleForceFlipping(bool checked)
 void VToolSeamAllowance::ToggleShowFullPiece(bool checked)
 {
     auto *toggleShowFullPiece = new class ToggleShowFullPiece(m_id, checked, &(VAbstractTool::data), doc);
-    connect(toggleShowFullPiece, &ToggleShowFullPiece::Toggled, this, [this]() { RefreshGeometry(true); });
+    connect(toggleShowFullPiece, &ToggleShowFullPiece::Toggled, this, [this]() -> void { RefreshGeometry(true); });
     VAbstractApplication::VApp()->getUndoStack()->push(toggleShowFullPiece);
 }
 
@@ -2297,18 +2308,38 @@ void VToolSeamAllowance::DeleteFromMenu()
 void VToolSeamAllowance::ToggleExcludeState(quint32 id)
 {
     const VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
-    VPiece newDet = oldDet;
 
-    for (int i = 0; i < oldDet.GetPath().CountNodes(); ++i)
     {
-        VPieceNode node = oldDet.GetPath().at(i);
-        if (node.GetId() == id && node.GetTypeTool() == Tool::NodePoint)
+        VPiece newDet = oldDet;
+        for (int i = 0; i < oldDet.GetPath().CountNodes(); ++i)
         {
-            node.SetExcluded(not node.IsExcluded());
-            newDet.GetPath()[i] = node;
+            if (VPieceNode node = oldDet.GetPath().at(i); node.GetId() == id && node.GetTypeTool() == Tool::NodePoint)
+            {
+                node.SetExcluded(!node.IsExcluded());
+                newDet.GetPath()[i] = node;
 
-            VAbstractApplication::VApp()->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, m_id));
-            return;
+                VAbstractApplication::VApp()->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, m_id));
+                return;
+            }
+        }
+    }
+
+    const QVector<quint32> paths = oldDet.GetInternalPaths();
+    for (auto pathId : paths)
+    {
+        const VPiecePath oldPath = VAbstractTool::data.GetPiecePath(pathId);
+        VPiecePath newPath = oldPath;
+        for (int i = 0; i < newPath.CountNodes(); ++i)
+        {
+            if (VPieceNode node = newPath.at(i); node.GetId() == id && node.GetTypeTool() == Tool::NodePoint)
+            {
+                node.SetExcluded(!node.IsExcluded());
+                newPath[i] = node;
+
+                VAbstractApplication::VApp()->getUndoStack()->push(
+                    new SavePiecePathOptions(m_id, oldPath, newPath, doc, &(VAbstractTool::data), pathId));
+                return;
+            }
         }
     }
 }
@@ -2700,12 +2731,78 @@ void VToolSeamAllowance::InitNode(const VPieceNode &node, VMainGraphicsScene *sc
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::InitInternalNode(const VPieceNode &node, VToolSeamAllowance *parent)
+{
+    SCASSERT(parent != nullptr)
+
+    switch (node.GetTypeTool())
+    {
+        case (Tool::NodePoint):
+        {
+            auto *tool = qobject_cast<VNodePoint *>(VAbstractPattern::getTool(node.GetId()));
+            SCASSERT(tool != nullptr);
+
+            if (tool->parent() != parent)
+            {
+                connect(tool, &VNodePoint::ShowOptions, parent, &VToolSeamAllowance::ShowOptions, Qt::UniqueConnection);
+                connect(tool,
+                        &VNodePoint::ToggleInLayout,
+                        parent,
+                        &VToolSeamAllowance::ToggleInLayout,
+                        Qt::UniqueConnection);
+                connect(tool,
+                        &VNodePoint::ToggleForbidFlipping,
+                        parent,
+                        &VToolSeamAllowance::ToggleForbidFlipping,
+                        Qt::UniqueConnection);
+                connect(tool,
+                        &VNodePoint::ToggleForceFlipping,
+                        parent,
+                        &VToolSeamAllowance::ToggleForceFlipping,
+                        Qt::UniqueConnection);
+                connect(tool,
+                        &VNodePoint::ToggleShowFullPiece,
+                        parent,
+                        &VToolSeamAllowance::ToggleShowFullPiece,
+                        Qt::UniqueConnection);
+                connect(tool, &VNodePoint::Delete, parent, &VToolSeamAllowance::DeleteFromMenu, Qt::UniqueConnection);
+                connect(tool,
+                        &VNodePoint::ResetPieceLabelTemplate,
+                        parent,
+                        &VToolSeamAllowance::ResetPieceLabelTemplate,
+                        Qt::UniqueConnection);
+                connect(tool,
+                        &VNodePoint::ToggleExcludeState,
+                        parent,
+                        &VToolSeamAllowance::ToggleExcludeState,
+                        Qt::UniqueConnection);
+
+                tool->setParentItem(parent);
+                tool->SetParentType(ParentType::Item);
+                tool->SetExluded(node.IsExcluded());
+            }
+            tool->setVisible(not node.IsExcluded()); // Hide excluded point
+            break;
+        }
+        case (Tool::NodeArc):
+        case (Tool::NodeElArc):
+        case (Tool::NodeSpline):
+        case (Tool::NodeSplinePath):
+            // Do nothing
+            break;
+        default:
+            qDebug() << "Get wrong tool type. Ignore.";
+            break;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::InitInternalPaths(const VPiece &detail)
 {
     const QVector<quint32> paths = detail.GetInternalPaths();
-    for (auto path : paths)
+    for (auto pathId : paths)
     {
-        auto *tool = qobject_cast<VToolPiecePath *>(VAbstractPattern::getTool(path));
+        auto *tool = qobject_cast<VToolPiecePath *>(VAbstractPattern::getTool(pathId));
         SCASSERT(tool != nullptr);
 
         if (tool->parent() != this)
@@ -2714,6 +2811,12 @@ void VToolSeamAllowance::InitInternalPaths(const VPiece &detail)
             tool->SetParentType(ParentType::Item);
         }
         tool->show();
+
+        const VPiecePath pathItem = VAbstractTool::data.GetPiecePath(pathId);
+        for (int i = 0; i < pathItem.CountNodes(); ++i)
+        {
+            InitInternalNode(pathItem.at(i), this);
+        }
     }
 }
 
