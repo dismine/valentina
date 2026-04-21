@@ -162,10 +162,10 @@ void DialogInsertNode::ChosenObject(quint32 id, const SceneObject &type)
                                          [id](const VPieceNode &node) -> bool { return node.GetId() == id; });
         nodeIterator == m_nodes.cend())
     {
-        GOType type = GOType::Unknown;
+        GOType objectType = GOType::Unknown;
         try
         {
-            type = data->GetGObject(id)->getType();
+            objectType = data->GetGObject(id)->getType();
         }
         catch (const VExceptionBadId &)
         {
@@ -174,7 +174,7 @@ void DialogInsertNode::ChosenObject(quint32 id, const SceneObject &type)
         }
 
         VPieceNode node;
-        switch (type)
+        switch (objectType)
         {
             case GOType::Arc:
                 node = VPieceNode(id, Tool::NodeArc);
