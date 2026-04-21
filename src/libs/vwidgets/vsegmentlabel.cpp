@@ -28,6 +28,7 @@
 #include "vsegmentlabel.h"
 
 #include "../ifc/ifcdef.h"
+#include "../vmisc/compatibility.h"
 #include "../vmisc/theme/themeDef.h"
 #include "../vmisc/theme/vscenestylesheet.h"
 #include "../vmisc/vabstractapplication.h"
@@ -44,12 +45,14 @@
 #include <QPainterStateGuard>
 #endif
 
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, segmentSign, ("•〜•")) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, segmentSign, (u"⌒\u2009"_s)) // NOLINT
 
 QT_WARNING_POP
 } // namespace
@@ -111,7 +114,7 @@ void VSegmentLabel::SetLabelData(const VPointF &pos)
 {
     m_labelPos = pos;
     setPos(m_labelPos.toQPointF());
-    m_label->setToolTip(m_labelPos.name());
+    m_label->setText(*segmentSign + m_labelPos.name());
     {
         const QSignalBlocker blocker(m_label);
         m_label->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
@@ -261,9 +264,14 @@ void VSegmentLabel::Init()
         m_label->SetRealPos(QPointF(m_labelPos.mx(), m_labelPos.my()));
         m_label->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     }
-    m_label->setText(*segmentSign);
-    m_label->SetShowParentTooltip(false);
-    m_label->setToolTip(m_labelPos.name());
+    QFont font = m_label->font();
+    font.setFamily(QString()); // clear inherited family so hint is respected
+    font.setItalic(true);
+    font.setFixedPitch(true);
+    font.setStyleHint(QFont::Monospace);
+    m_label->setFont(font);
+    m_label->SetFontAdjustRatio(0.6);
+    m_label->setText(*segmentSign + m_labelPos.name());
     m_label->setVisible(m_showLabel);
 
     connect(m_label,

@@ -80,6 +80,8 @@ public:
     auto GetTextHoverColor() const -> VColorRole;
     void SetTextHoverColor(VColorRole newTextHoverColor);
 
+    void SetFontAdjustRatio(qreal ration);
+
 signals:
     /**
      * @brief NameChangePosition emit when label change position.
@@ -119,6 +121,7 @@ private:
     bool m_hoverFlag{false};
     VColorRole m_textColor;
     VColorRole m_textHoverColor;
+    qreal m_fontAdjustRatio{1.0}; // 1.0 = same size, 0.6 = 60% of primary
 
     void Init();
 

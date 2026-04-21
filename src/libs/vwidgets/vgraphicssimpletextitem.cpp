@@ -319,11 +319,13 @@ void VGraphicsSimpleTextItem::keyReleaseEvent(QKeyEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VGraphicsSimpleTextItem::UpdateFontSize(int size)
 {
-    QFont font = this->font();
-    if (font.pointSize() != size)
+    const int adjusted = qMax(qRound(size * m_fontAdjustRatio), static_cast<int>(minVisibleFontSize));
+
+    if (QFont font = this->font(); font.pointSize() != adjusted)
     {
-        font.setPointSize(qMax(size, static_cast<int>(minVisibleFontSize)));
+        font.setPointSize(adjusted);
         setFont(font);
+        emit UpdateLine();
     }
 }
 
@@ -388,4 +390,12 @@ void VGraphicsSimpleTextItem::Init()
             this,
             &VGraphicsSimpleTextItem::UpdateFontSize);
     connect(VTheme::Instance(), &VTheme::ThemeSettingsChanged, this, [this]() -> void { RefreshColor(); });
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VGraphicsSimpleTextItem::SetFontAdjustRatio(qreal ration)
+{
+    m_fontAdjustRatio = ration;
+
+    UpdateFontSize(font().pointSize());
 }
