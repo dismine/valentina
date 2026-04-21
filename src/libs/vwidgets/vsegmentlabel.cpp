@@ -49,7 +49,7 @@ namespace
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, labelPrefix, ("⌒ ")) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, segmentSign, ("•〜•")) // NOLINT
 
 QT_WARNING_POP
 } // namespace
@@ -111,7 +111,7 @@ void VSegmentLabel::SetLabelData(const VPointF &pos)
 {
     m_labelPos = pos;
     setPos(m_labelPos.toQPointF());
-    m_label->setText(*labelPrefix + m_labelPos.name());
+    m_label->setToolTip(m_labelPos.name());
     {
         const QSignalBlocker blocker(m_label);
         m_label->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
@@ -261,7 +261,9 @@ void VSegmentLabel::Init()
         m_label->SetRealPos(QPointF(m_labelPos.mx(), m_labelPos.my()));
         m_label->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     }
-    m_label->setText(*labelPrefix + m_labelPos.name());
+    m_label->setText(*segmentSign);
+    m_label->SetShowParentTooltip(false);
+    m_label->setToolTip(m_labelPos.name());
     m_label->setVisible(m_showLabel);
 
     connect(m_label,
