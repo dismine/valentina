@@ -58,7 +58,7 @@ private:
     QVector<VScaledEllipse *> m_points{};
     QVector<VCurvePathItem *> m_curves{};
 
-    QVector<quint32> m_nodes;
+    QVector<quint32> m_nodes{};
 
     void HideAllItems();
 
