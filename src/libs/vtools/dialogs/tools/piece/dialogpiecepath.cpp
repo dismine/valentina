@@ -159,9 +159,9 @@ void DialogPiecePath::ChosenObject(quint32 id, const SceneObject &type)
                 case SceneObject::SplinePath:
                     NewItem(VPieceNode(id, Tool::NodeSplinePath, reverse));
                     break;
-                case (SceneObject::Line):
-                case (SceneObject::Detail):
-                case (SceneObject::Unknown):
+                case SceneObject::Line:
+                case SceneObject::Detail:
+                case SceneObject::Unknown:
                 default:
                     qDebug() << "Got wrong scene object. Ignore.";
                     break;

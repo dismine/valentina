@@ -93,11 +93,11 @@ void VWatermarkConverter::ApplyPatches()
 {
     switch (m_ver)
     {
-        case (FormatVersion(1, 0, 0)):
+        case FormatVersion(1, 0, 0):
             ToV1_1_0();
             ValidateXML(XSDSchema(FormatVersion(1, 1, 0)));
             Q_FALLTHROUGH();
-        case (FormatVersion(1, 1, 0)):
+        case FormatVersion(1, 1, 0):
             break;
         default:
             InvalidVersion(m_ver);

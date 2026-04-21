@@ -284,7 +284,7 @@ void DialogCurveIntersectAxis::ChosenObject(quint32 id, const SceneObject &type)
 
         switch (number)
         {
-            case (0):
+            case 0:
                 if ((type == SceneObject::Spline || type == SceneObject::Arc || type == SceneObject::ElArc ||
                      type == SceneObject::SplinePath) &&
                     SetObject(id, ui->comboBoxCurve, tr("Select axis point")))
@@ -297,7 +297,7 @@ void DialogCurveIntersectAxis::ChosenObject(quint32 id, const SceneObject &type)
                     connect(line, &VisToolCurveIntersectAxis::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
                 }
                 break;
-            case (1):
+            case 1:
                 if (type == SceneObject::Point && SetObject(id, ui->comboBoxAxisPoint, QString()))
                 {
                     line->setAxisPointId(id);

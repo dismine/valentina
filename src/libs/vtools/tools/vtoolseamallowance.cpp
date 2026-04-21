@@ -2679,7 +2679,7 @@ void VToolSeamAllowance::InitNode(const VPieceNode &node, VMainGraphicsScene *sc
 
     switch (node.GetTypeTool())
     {
-        case (Tool::NodePoint):
+        case Tool::NodePoint:
         {
             auto *tool = qobject_cast<VNodePoint *>(VAbstractPattern::getTool(node.GetId()));
             SCASSERT(tool != nullptr);
@@ -2718,10 +2718,10 @@ void VToolSeamAllowance::InitNode(const VPieceNode &node, VMainGraphicsScene *sc
             tool->setVisible(not node.IsExcluded()); // Hide excluded point
             break;
         }
-        case (Tool::NodeArc):
-        case (Tool::NodeElArc):
-        case (Tool::NodeSpline):
-        case (Tool::NodeSplinePath):
+        case Tool::NodeArc:
+        case Tool::NodeElArc:
+        case Tool::NodeSpline:
+        case Tool::NodeSplinePath:
             // Do nothing
             break;
         default:
@@ -2737,7 +2737,7 @@ void VToolSeamAllowance::InitInternalNode(const VPieceNode &node, VToolSeamAllow
 
     switch (node.GetTypeTool())
     {
-        case (Tool::NodePoint):
+        case Tool::NodePoint:
         {
             auto *tool = qobject_cast<VNodePoint *>(VAbstractPattern::getTool(node.GetId()));
             SCASSERT(tool != nullptr);
@@ -2784,10 +2784,10 @@ void VToolSeamAllowance::InitInternalNode(const VPieceNode &node, VToolSeamAllow
             tool->setVisible(not node.IsExcluded()); // Hide excluded point
             break;
         }
-        case (Tool::NodeArc):
-        case (Tool::NodeElArc):
-        case (Tool::NodeSpline):
-        case (Tool::NodeSplinePath):
+        case Tool::NodeArc:
+        case Tool::NodeElArc:
+        case Tool::NodeSpline:
+        case Tool::NodeSplinePath:
             // Do nothing
             break;
         default:
@@ -2983,26 +2983,26 @@ auto VToolSeamAllowance::DuplicateNode(const VPieceNode &node, const VToolSeamAl
 
     switch (node.GetTypeTool())
     {
-        case (Tool::NodePoint):
+        case Tool::NodePoint:
         {
             auto point = QSharedPointer<VPointF>(new VPointF(*qSharedPointerDynamicCast<VPointF>(gobj).data()));
             initNodeData.id = VAbstractTool::CreateNodePoint(initData.data, gobj->getIdObject(), point);
             VNodePoint::Create(initNodeData);
             break;
         }
-        case (Tool::NodeArc):
+        case Tool::NodeArc:
             initNodeData.id = VAbstractTool::CreateNode<VArc>(initData.data, gobj->getIdObject());
             VNodeArc::Create(initNodeData);
             break;
-        case (Tool::NodeElArc):
+        case Tool::NodeElArc:
             initNodeData.id = VAbstractTool::CreateNode<VEllipticalArc>(initData.data, gobj->getIdObject());
             VNodeEllipticalArc::Create(initNodeData);
             break;
-        case (Tool::NodeSpline):
+        case Tool::NodeSpline:
             initNodeData.id = VAbstractTool::CreateNodeSpline(initData.data, gobj->getIdObject());
             VNodeSpline::Create(initNodeData);
             break;
-        case (Tool::NodeSplinePath):
+        case Tool::NodeSplinePath:
             initNodeData.id = VAbstractTool::CreateNodeSplinePath(initData.data, gobj->getIdObject());
             VNodeSplinePath::Create(initNodeData);
             break;

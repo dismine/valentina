@@ -110,35 +110,35 @@ void VVSTConverter::ApplyPatches()
 {
     switch (m_ver)
     {
-        case (FormatVersion(0, 3, 0)):
+        case FormatVersion(0, 3, 0):
             ToV0_4_0();
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 4, 0)):
+        case FormatVersion(0, 4, 0):
             ToV0_4_1();
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 4, 1)):
+        case FormatVersion(0, 4, 1):
             ToV0_4_2();
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 4, 2)):
-        case (FormatVersion(0, 4, 3)):
-        case (FormatVersion(0, 4, 4)):
+        case FormatVersion(0, 4, 2):
+        case FormatVersion(0, 4, 3):
+        case FormatVersion(0, 4, 4):
             ToV0_5_0();
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 5, 0)):
-        case (FormatVersion(0, 5, 1)):
-        case (FormatVersion(0, 5, 2)):
-        case (FormatVersion(0, 5, 3)):
+        case FormatVersion(0, 5, 0):
+        case FormatVersion(0, 5, 1):
+        case FormatVersion(0, 5, 2):
+        case FormatVersion(0, 5, 3):
             ToV0_5_4();
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 5, 4)):
-        case (FormatVersion(0, 6, 0)):
+        case FormatVersion(0, 5, 4):
+        case FormatVersion(0, 6, 0):
             ToV0_6_1();
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 6, 1)):
+        case FormatVersion(0, 6, 1):
             ToV0_6_2();
             ValidateXML(CurrentSchema);
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 6, 2)):
+        case FormatVersion(0, 6, 2):
             break;
         default:
             InvalidVersion(m_ver);

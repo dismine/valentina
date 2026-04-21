@@ -110,33 +110,33 @@ void VVITConverter::ApplyPatches()
 {
     switch (m_ver)
     {
-        case (FormatVersion(0, 2, 0)):
+        case FormatVersion(0, 2, 0):
             ToV0_3_0();
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 3, 0)):
+        case FormatVersion(0, 3, 0):
             ToV0_3_1();
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 3, 1)):
+        case FormatVersion(0, 3, 1):
             ToV0_3_2();
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 3, 2)):
+        case FormatVersion(0, 3, 2):
             ToV0_3_3();
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 3, 3)):
+        case FormatVersion(0, 3, 3):
             ToV0_4_0();
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 4, 0)):
-        case (FormatVersion(0, 5, 0)):
-        case (FormatVersion(0, 5, 1)):
-        case (FormatVersion(0, 5, 2)):
-        case (FormatVersion(0, 6, 0)):
+        case FormatVersion(0, 4, 0):
+        case FormatVersion(0, 5, 0):
+        case FormatVersion(0, 5, 1):
+        case FormatVersion(0, 5, 2):
+        case FormatVersion(0, 6, 0):
             ToV0_6_1();
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 6, 1)):
+        case FormatVersion(0, 6, 1):
             ToV0_6_2();
             ValidateXML(CurrentSchema);
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 6, 2)):
+        case FormatVersion(0, 6, 2):
             break;
         default:
             InvalidVersion(m_ver);

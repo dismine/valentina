@@ -501,10 +501,10 @@ auto VPiecePath::PathCurvePoints(const VContainer *data) const -> QVector<QVecto
 
         switch (at(i).GetTypeTool())
         {
-            case (Tool::NodeArc):
-            case (Tool::NodeElArc):
-            case (Tool::NodeSpline):
-            case (Tool::NodeSplinePath):
+            case Tool::NodeArc:
+            case Tool::NodeElArc:
+            case Tool::NodeSpline:
+            case Tool::NodeSplinePath:
             {
                 const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(at(i).GetId());
 
@@ -514,7 +514,7 @@ auto VPiecePath::PathCurvePoints(const VContainer *data) const -> QVector<QVecto
                 curves.append(curve->GetSegmentPoints(begin, end, at(i).GetReverse(), GetName()));
                 break;
             }
-            case (Tool::NodePoint):
+            case Tool::NodePoint:
             default:
                 break;
         }
@@ -539,15 +539,15 @@ auto VPiecePath::SeamAllowancePoints(const VContainer *data, qreal width, bool r
 
         switch (node.GetTypeTool())
         {
-            case (Tool::NodePoint):
+            case Tool::NodePoint:
             {
                 pointsEkv.append(PreparePointEkv(node, data));
             }
             break;
-            case (Tool::NodeArc):
-            case (Tool::NodeElArc):
-            case (Tool::NodeSpline):
-            case (Tool::NodeSplinePath):
+            case Tool::NodeArc:
+            case Tool::NodeElArc:
+            case Tool::NodeSpline:
+            case Tool::NodeSplinePath:
             {
                 const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(node.GetId());
                 pointsEkv += CurveSeamAllowanceSegment(data, d->m_nodes, curve, i, node.GetReverse(), width, QLineF(),
@@ -894,12 +894,12 @@ auto VPiecePath::NodePreviousPoint(const VContainer *data, int i) const -> QPoin
         const VPieceNode &node = d->m_nodes.at(index);
         switch (node.GetTypeTool())
         {
-            case (Tool::NodePoint):
+            case Tool::NodePoint:
                 return static_cast<QPointF>(*data->GeometricObject<VPointF>(node.GetId()));
-            case (Tool::NodeArc):
-            case (Tool::NodeElArc):
-            case (Tool::NodeSpline):
-            case (Tool::NodeSplinePath):
+            case Tool::NodeArc:
+            case Tool::NodeElArc:
+            case Tool::NodeSpline:
+            case Tool::NodeSplinePath:
             {
                 const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(node.GetId());
 
@@ -946,12 +946,12 @@ auto VPiecePath::NodeNextPoint(const VContainer *data, int i) const -> QPointF
         const VPieceNode &node = d->m_nodes.at(index);
         switch (node.GetTypeTool())
         {
-            case (Tool::NodePoint):
+            case Tool::NodePoint:
                 return static_cast<QPointF>(*data->GeometricObject<VPointF>(node.GetId()));
-            case (Tool::NodeArc):
-            case (Tool::NodeElArc):
-            case (Tool::NodeSpline):
-            case (Tool::NodeSplinePath):
+            case Tool::NodeArc:
+            case Tool::NodeElArc:
+            case Tool::NodeSpline:
+            case Tool::NodeSplinePath:
             {
                 const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(node.GetId());
 
@@ -1269,7 +1269,7 @@ auto VPiecePath::NodesToPoints(const VContainer *data, const QVector<VPieceNode>
 
         switch (node.GetTypeTool())
         {
-            case (Tool::NodePoint):
+            case Tool::NodePoint:
             {
                 const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(node.GetId());
                 VLayoutPoint layoutPoint(point->toQPointF());
@@ -1277,10 +1277,10 @@ auto VPiecePath::NodesToPoints(const VContainer *data, const QVector<VPieceNode>
                 points.append(layoutPoint);
             }
             break;
-            case (Tool::NodeArc):
-            case (Tool::NodeElArc):
-            case (Tool::NodeSpline):
-            case (Tool::NodeSplinePath):
+            case Tool::NodeArc:
+            case Tool::NodeElArc:
+            case Tool::NodeSpline:
+            case Tool::NodeSplinePath:
             {
                 const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(node.GetId());
 

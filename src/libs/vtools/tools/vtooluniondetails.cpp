@@ -730,19 +730,19 @@ void AddNodeToNewPath(const VToolUnionDetailsInitData &initData, VPiecePath &new
     quint32 id = 0;
     switch (node.GetTypeTool())
     {
-        case (Tool::NodePoint):
+        case Tool::NodePoint:
             id = AddNodePoint(node, initData, children, drawName, dx, dy, pRotate, angle);
             break;
-        case (Tool::NodeArc):
+        case Tool::NodeArc:
             id = AddNodeArc(node, initData, children, drawName, dx, dy, pRotate, angle);
             break;
-        case (Tool::NodeElArc):
+        case Tool::NodeElArc:
             id = AddNodeElArc(node, initData, children, drawName, dx, dy, pRotate, angle);
             break;
-        case (Tool::NodeSpline):
+        case Tool::NodeSpline:
             id = AddNodeSpline(node, initData, children, drawName, dx, dy, pRotate, angle);
             break;
-        case (Tool::NodeSplinePath):
+        case Tool::NodeSplinePath:
             id = AddNodeSplinePath(node, initData, children, drawName, dx, dy, pRotate, angle);
             break;
         default:
@@ -1088,19 +1088,19 @@ void UpdatePathNode(VContainer *data, const VPieceNode &node, QVector<quint32> &
 {
     switch (node.GetTypeTool())
     {
-        case (Tool::NodePoint):
+        case Tool::NodePoint:
             UpdateNodePoint(data, node, children, dx, dy, pRotate, angle);
             break;
-        case (Tool::NodeArc):
+        case Tool::NodeArc:
             UpdateNodeArc(data, node, children, dx, dy, pRotate, angle);
             break;
-        case (Tool::NodeElArc):
+        case Tool::NodeElArc:
             UpdateNodeElArc(data, node, children, dx, dy, pRotate, angle);
             break;
-        case (Tool::NodeSpline):
+        case Tool::NodeSpline:
             UpdateNodeSpline(data, node, children, dx, dy, pRotate, angle);
             break;
-        case (Tool::NodeSplinePath):
+        case Tool::NodeSplinePath:
             UpdateNodeSplinePath(data, node, children, dx, dy, pRotate, angle);
             break;
         default:

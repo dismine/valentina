@@ -1774,11 +1774,11 @@ auto VAbstractPiece::EkvPoint(QVector<VRawSAPoint> points,
 
     switch (const QLineF::IntersectType type = bigLine1.intersects(bigLine2, &crosPoint); type)
     { // There are at least three big cases
-        case (QLineF::BoundedIntersection):
+        case QLineF::BoundedIntersection:
             // The easiest, real intersection
             points.append(VRawSAPoint(crosPoint, p2Line1.CurvePoint(), p2Line1.TurnPoint()));
             return points;
-        case (QLineF::UnboundedIntersection):
+        case QLineF::UnboundedIntersection:
             // Most common case
             if (HandleUnbounded(points,
                                 p1Line1,
@@ -1796,7 +1796,7 @@ auto VAbstractPiece::EkvPoint(QVector<VRawSAPoint> points,
                 return points;
             }
             break;
-        case (QLineF::NoIntersection):
+        case QLineF::NoIntersection:
             return HandleParallel(points, bigLine1, bigLine2, p2Line1);
         default:
             break;

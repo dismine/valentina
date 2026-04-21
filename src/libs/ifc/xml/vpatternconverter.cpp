@@ -569,122 +569,122 @@ void VPatternConverter::ApplyPatches()
 {
     switch (m_ver)
     {
-        case (FormatVersion(0, 1, 4)):
+        case FormatVersion(0, 1, 4):
             ToV0_2_0();
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 2, 0)):
+        case FormatVersion(0, 2, 0):
             ToV0_2_1();
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 2, 1)):
-        case (FormatVersion(0, 2, 2)):
-        case (FormatVersion(0, 2, 3)):
+        case FormatVersion(0, 2, 1):
+        case FormatVersion(0, 2, 2):
+        case FormatVersion(0, 2, 3):
             ToV0_2_4();
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 2, 4)):
-        case (FormatVersion(0, 2, 5)):
-        case (FormatVersion(0, 2, 6)):
-        case (FormatVersion(0, 2, 7)):
+        case FormatVersion(0, 2, 4):
+        case FormatVersion(0, 2, 5):
+        case FormatVersion(0, 2, 6):
+        case FormatVersion(0, 2, 7):
             ToV0_3_0();
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 3, 0)):
+        case FormatVersion(0, 3, 0):
             ToV0_3_1();
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 3, 1)):
-        case (FormatVersion(0, 3, 2)):
-        case (FormatVersion(0, 3, 3)):
-        case (FormatVersion(0, 3, 4)):
-        case (FormatVersion(0, 3, 5)):
-        case (FormatVersion(0, 3, 6)):
-        case (FormatVersion(0, 3, 7)):
-        case (FormatVersion(0, 3, 8)):
-        case (FormatVersion(0, 3, 9)):
+        case FormatVersion(0, 3, 1):
+        case FormatVersion(0, 3, 2):
+        case FormatVersion(0, 3, 3):
+        case FormatVersion(0, 3, 4):
+        case FormatVersion(0, 3, 5):
+        case FormatVersion(0, 3, 6):
+        case FormatVersion(0, 3, 7):
+        case FormatVersion(0, 3, 8):
+        case FormatVersion(0, 3, 9):
             ToV0_4_0();
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 4, 0)):
-        case (FormatVersion(0, 4, 1)):
-        case (FormatVersion(0, 4, 2)):
-        case (FormatVersion(0, 4, 3)):
+        case FormatVersion(0, 4, 0):
+        case FormatVersion(0, 4, 1):
+        case FormatVersion(0, 4, 2):
+        case FormatVersion(0, 4, 3):
             ToV0_4_4();
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 4, 4)):
-        case (FormatVersion(0, 4, 5)):
-        case (FormatVersion(0, 4, 6)):
-        case (FormatVersion(0, 4, 7)):
-        case (FormatVersion(0, 4, 8)):
-        case (FormatVersion(0, 5, 0)):
-        case (FormatVersion(0, 5, 1)):
+        case FormatVersion(0, 4, 4):
+        case FormatVersion(0, 4, 5):
+        case FormatVersion(0, 4, 6):
+        case FormatVersion(0, 4, 7):
+        case FormatVersion(0, 4, 8):
+        case FormatVersion(0, 5, 0):
+        case FormatVersion(0, 5, 1):
             ToV0_6_0();
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 6, 0)):
-        case (FormatVersion(0, 6, 1)):
+        case FormatVersion(0, 6, 0):
+        case FormatVersion(0, 6, 1):
             ToV0_6_2();
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 6, 2)):
-        case (FormatVersion(0, 6, 3)):
-        case (FormatVersion(0, 6, 4)):
-        case (FormatVersion(0, 6, 5)):
-        case (FormatVersion(0, 6, 6)):
-        case (FormatVersion(0, 7, 0)):
-        case (FormatVersion(0, 7, 1)):
-        case (FormatVersion(0, 7, 2)):
-        case (FormatVersion(0, 7, 3)):
-        case (FormatVersion(0, 7, 4)):
-        case (FormatVersion(0, 7, 5)):
-        case (FormatVersion(0, 7, 6)):
-        case (FormatVersion(0, 7, 7)):
-        case (FormatVersion(0, 7, 8)):
-        case (FormatVersion(0, 7, 9)):
-        case (FormatVersion(0, 7, 10)):
-        case (FormatVersion(0, 7, 11)):
-        case (FormatVersion(0, 7, 12)):
-        case (FormatVersion(0, 7, 13)):
-        case (FormatVersion(0, 8, 0)):
-        case (FormatVersion(0, 8, 1)):
-        case (FormatVersion(0, 8, 2)):
-        case (FormatVersion(0, 8, 3)):
-        case (FormatVersion(0, 8, 4)):
-        case (FormatVersion(0, 8, 5)):
-        case (FormatVersion(0, 8, 6)):
-        case (FormatVersion(0, 8, 7)):
-        case (FormatVersion(0, 8, 8)):
+        case FormatVersion(0, 6, 2):
+        case FormatVersion(0, 6, 3):
+        case FormatVersion(0, 6, 4):
+        case FormatVersion(0, 6, 5):
+        case FormatVersion(0, 6, 6):
+        case FormatVersion(0, 7, 0):
+        case FormatVersion(0, 7, 1):
+        case FormatVersion(0, 7, 2):
+        case FormatVersion(0, 7, 3):
+        case FormatVersion(0, 7, 4):
+        case FormatVersion(0, 7, 5):
+        case FormatVersion(0, 7, 6):
+        case FormatVersion(0, 7, 7):
+        case FormatVersion(0, 7, 8):
+        case FormatVersion(0, 7, 9):
+        case FormatVersion(0, 7, 10):
+        case FormatVersion(0, 7, 11):
+        case FormatVersion(0, 7, 12):
+        case FormatVersion(0, 7, 13):
+        case FormatVersion(0, 8, 0):
+        case FormatVersion(0, 8, 1):
+        case FormatVersion(0, 8, 2):
+        case FormatVersion(0, 8, 3):
+        case FormatVersion(0, 8, 4):
+        case FormatVersion(0, 8, 5):
+        case FormatVersion(0, 8, 6):
+        case FormatVersion(0, 8, 7):
+        case FormatVersion(0, 8, 8):
             ToV0_8_8();
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 8, 9)):
-        case (FormatVersion(0, 8, 10)):
-        case (FormatVersion(0, 8, 11)):
-        case (FormatVersion(0, 8, 12)):
-        case (FormatVersion(0, 8, 13)):
+        case FormatVersion(0, 8, 9):
+        case FormatVersion(0, 8, 10):
+        case FormatVersion(0, 8, 11):
+        case FormatVersion(0, 8, 12):
+        case FormatVersion(0, 8, 13):
             ToV0_9_0();
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 9, 0)):
+        case FormatVersion(0, 9, 0):
             ToV0_9_1();
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 9, 1)):
+        case FormatVersion(0, 9, 1):
             ToV0_9_2();
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 9, 2)):
-        case (FormatVersion(0, 9, 3)):
-        case (FormatVersion(0, 9, 4)):
-        case (FormatVersion(0, 9, 5)):
+        case FormatVersion(0, 9, 2):
+        case FormatVersion(0, 9, 3):
+        case FormatVersion(0, 9, 4):
+        case FormatVersion(0, 9, 5):
             ToV0_9_6();
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 9, 6)):
+        case FormatVersion(0, 9, 6):
             ToV0_9_7();
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 9, 7)):
-        case (FormatVersion(0, 9, 8)):
-        case (FormatVersion(0, 9, 9)):
-        case (FormatVersion(1, 0, 0)):
+        case FormatVersion(0, 9, 7):
+        case FormatVersion(0, 9, 8):
+        case FormatVersion(0, 9, 9):
+        case FormatVersion(1, 0, 0):
             ToV1_1_0();
             Q_FALLTHROUGH();
-        case (FormatVersion(1, 1, 0)):
-        case (FormatVersion(1, 1, 1)):
-        case (FormatVersion(1, 1, 2)):
-        case (FormatVersion(1, 1, 3)):
+        case FormatVersion(1, 1, 0):
+        case FormatVersion(1, 1, 1):
+        case FormatVersion(1, 1, 2):
+        case FormatVersion(1, 1, 3):
             ToV1_2_0();
             ValidateXML(CurrentSchema);
             Q_FALLTHROUGH();
-        case (FormatVersion(1, 2, 0)):
+        case FormatVersion(1, 2, 0):
             break;
         default:
             InvalidVersion(m_ver);

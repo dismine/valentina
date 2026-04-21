@@ -180,27 +180,27 @@ void VLayoutConverter::ApplyPatches()
 {
     switch (m_ver)
     {
-        case (FormatVersion(0, 1, 0)):
-        case (FormatVersion(0, 1, 1)):
-        case (FormatVersion(0, 1, 2)):
+        case FormatVersion(0, 1, 0):
+        case FormatVersion(0, 1, 1):
+        case FormatVersion(0, 1, 2):
             ToV0_1_3();
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 1, 3)):
-        case (FormatVersion(0, 1, 4)):
+        case FormatVersion(0, 1, 3):
+        case FormatVersion(0, 1, 4):
             ToV0_1_5();
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 1, 5)):
-        case (FormatVersion(0, 1, 6)):
+        case FormatVersion(0, 1, 5):
+        case FormatVersion(0, 1, 6):
             ToV0_1_7();
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 1, 7)):
-        case (FormatVersion(0, 1, 8)):
-        case (FormatVersion(0, 1, 9)):
-        case (FormatVersion(0, 2, 0)):
+        case FormatVersion(0, 1, 7):
+        case FormatVersion(0, 1, 8):
+        case FormatVersion(0, 1, 9):
+        case FormatVersion(0, 2, 0):
             ToV0_2_1();
             ValidateXML(CurrentSchema);
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 2, 1)):
+        case FormatVersion(0, 2, 1):
             break;
         default:
             InvalidVersion(m_ver);

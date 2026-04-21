@@ -91,45 +91,45 @@ auto VSceneStylesheet::Color(VColorRole role) -> QColor
 {
     switch (role)
     {
-        case (VColorRole::PatternColor):
+        case VColorRole::PatternColor:
             return ToolStyle().PatternColor();
-        case (VColorRole::DraftPointColor):
+        case VColorRole::DraftPointColor:
             return ToolStyle().PointColor();
-        case (VColorRole::DraftLabelColor):
+        case VColorRole::DraftLabelColor:
             return ToolStyle().LabelColor();
-        case (VColorRole::DraftLabelHoverColor):
+        case VColorRole::DraftLabelHoverColor:
             return ToolStyle().LabelHoverColor();
-        case (VColorRole::DraftLabelLineColor):
+        case VColorRole::DraftLabelLineColor:
             return ToolStyle().LabelLineColor();
-        case (VColorRole::ControlLineColor):
+        case VColorRole::ControlLineColor:
             return ToolStyle().ControlLineColor();
-        case (VColorRole::ControlPointColor):
+        case VColorRole::ControlPointColor:
             return ToolStyle().ControlPointColor();
-        case (VColorRole::AccuracyRadiusColor):
+        case VColorRole::AccuracyRadiusColor:
             return ToolStyle().AccuracyRadiusColor();
-        case (VColorRole::VisMainColor):
+        case VColorRole::VisMainColor:
             return ToolStyle().VisMainColor();
-        case (VColorRole::VisSupportColor):
+        case VColorRole::VisSupportColor:
             return ToolStyle().VisSupportColor();
-        case (VColorRole::VisSupportColor2):
+        case VColorRole::VisSupportColor2:
             return ToolStyle().VisSupportColor2();
-        case (VColorRole::VisSupportColor3):
+        case VColorRole::VisSupportColor3:
             return ToolStyle().VisSupportColor3();
-        case (VColorRole::VisSupportColor4):
+        case VColorRole::VisSupportColor4:
             return ToolStyle().VisSupportColor4();
-        case (VColorRole::BasePointColor):
+        case VColorRole::BasePointColor:
             return ToolStyle().BasePointColor();
-        case (VColorRole::PieceColor):
+        case VColorRole::PieceColor:
             return PatternPieceStyle().PieceColor();
-        case (VColorRole::PiecePointColor):
+        case VColorRole::PiecePointColor:
             return PatternPieceStyle().PointColor();
-        case (VColorRole::PieceNodeLabelColor):
+        case VColorRole::PieceNodeLabelColor:
             return PatternPieceStyle().NodeLabelColor();
-        case (VColorRole::PieceNodeLabelHoverColor):
+        case VColorRole::PieceNodeLabelHoverColor:
             return PatternPieceStyle().NodeLabelHoverColor();
-        case (VColorRole::PieceNodeLabelLineColor):
+        case VColorRole::PieceNodeLabelLineColor:
             return PatternPieceStyle().NodeLabelLineColor();
-        case (VColorRole::DefaultColor):
+        case VColorRole::DefaultColor:
         default:
             return Qt::black;
     }

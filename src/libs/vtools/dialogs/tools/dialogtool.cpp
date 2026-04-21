@@ -360,11 +360,11 @@ void DialogTool::NewNodeItem(QListWidget *listWidget, const VPieceNode &node, bo
     QString name;
     switch (node.GetTypeTool())
     {
-        case (Tool::NodePoint):
-        case (Tool::NodeArc):
-        case (Tool::NodeElArc):
-        case (Tool::NodeSpline):
-        case (Tool::NodeSplinePath):
+        case Tool::NodePoint:
+        case Tool::NodeArc:
+        case Tool::NodeElArc:
+        case Tool::NodeSpline:
+        case Tool::NodeSplinePath:
             name = GetNodeName(data, node, showPassmark);
             break;
         default:

@@ -109,7 +109,7 @@ void VKnownMeasurementsConverter::ApplyPatches()
 {
     switch (m_ver)
     {
-        case (FormatVersion(1, 0, 0)):
+        case FormatVersion(1, 0, 0):
             break;
         default:
             InvalidVersion(m_ver);

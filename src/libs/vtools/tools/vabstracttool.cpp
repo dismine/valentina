@@ -438,19 +438,19 @@ auto VAbstractTool::AddSANode(VAbstractPattern *doc, const QString &tagName, con
 
     switch (type)
     {
-        case (Tool::NodeArc):
+        case Tool::NodeArc:
             doc->SetAttribute(nod, AttrType, VAbstractPattern::NodeArc);
             break;
-        case (Tool::NodeElArc):
+        case Tool::NodeElArc:
             doc->SetAttribute(nod, AttrType, VAbstractPattern::NodeElArc);
             break;
-        case (Tool::NodePoint):
+        case Tool::NodePoint:
             doc->SetAttribute(nod, AttrType, VAbstractPattern::NodePoint);
             break;
-        case (Tool::NodeSpline):
+        case Tool::NodeSpline:
             doc->SetAttribute(nod, AttrType, VAbstractPattern::NodeSpline);
             break;
-        case (Tool::NodeSplinePath):
+        case Tool::NodeSplinePath:
             doc->SetAttribute(nod, AttrType, VAbstractPattern::NodeSplinePath);
             break;
         default:
@@ -619,23 +619,23 @@ auto VAbstractTool::PrepareNode(const VPieceNode &node, VMainGraphicsScene *scen
 
     switch (node.GetTypeTool())
     {
-        case (Tool::NodePoint):
+        case Tool::NodePoint:
             initData.id = CreateNode<VPointF>(data, node.GetId());
             VNodePoint::Create(initData);
             break;
-        case (Tool::NodeArc):
+        case Tool::NodeArc:
             initData.id = CreateNode<VArc>(data, node.GetId());
             VNodeArc::Create(initData);
             break;
-        case (Tool::NodeElArc):
+        case Tool::NodeElArc:
             initData.id = CreateNode<VEllipticalArc>(data, node.GetId());
             VNodeEllipticalArc::Create(initData);
             break;
-        case (Tool::NodeSpline):
+        case Tool::NodeSpline:
             initData.id = CreateNodeSpline(data, node.GetId());
             VNodeSpline::Create(initData);
             break;
-        case (Tool::NodeSplinePath):
+        case Tool::NodeSplinePath:
             initData.id = CreateNodeSplinePath(data, node.GetId());
             VNodeSplinePath::Create(initData);
             break;

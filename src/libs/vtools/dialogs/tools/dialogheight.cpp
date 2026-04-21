@@ -206,14 +206,14 @@ void DialogHeight::ChosenObject(quint32 id, const SceneObject &type)
 
         switch (m_number)
         {
-            case (0):
+            case 0:
                 if (SetObject(id, ui->comboBoxBasePoint, tr("Select first point of line")))
                 {
                     m_number++;
                     line->VisualMode(id);
                 }
                 break;
-            case (1):
+            case 1:
                 if (getCurrentObjectId(ui->comboBoxBasePoint) != id &&
                     SetObject(id, ui->comboBoxP1Line, tr("Select second point of line")))
                 {
@@ -222,7 +222,7 @@ void DialogHeight::ChosenObject(quint32 id, const SceneObject &type)
                     line->RefreshGeometry();
                 }
                 break;
-            case (2):
+            case 2:
             {
                 QSet<quint32> set;
                 set.insert(getCurrentObjectId(ui->comboBoxBasePoint));

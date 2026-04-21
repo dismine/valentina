@@ -111,14 +111,14 @@ void DialogTriangle::ChosenObject(quint32 id, const SceneObject &type)
 
         switch (number)
         {
-            case (0):
+            case 0:
                 if (SetObject(id, ui->comboBoxAxisP1, tr("Select second point of axis")))
                 {
                     number++;
                     line->VisualMode(id);
                 }
                 break;
-            case (1):
+            case 1:
                 if (getCurrentObjectId(ui->comboBoxAxisP1) != id &&
                     SetObject(id, ui->comboBoxAxisP2, tr("Select first point")))
                 {
@@ -127,7 +127,7 @@ void DialogTriangle::ChosenObject(quint32 id, const SceneObject &type)
                     line->RefreshGeometry();
                 }
                 break;
-            case (2):
+            case 2:
             {
                 QSet<quint32> set;
                 set.insert(getCurrentObjectId(ui->comboBoxAxisP1));
@@ -142,7 +142,7 @@ void DialogTriangle::ChosenObject(quint32 id, const SceneObject &type)
                 }
             }
             break;
-            case (3):
+            case 3:
             {
                 QSet<quint32> set;
                 set.insert(getCurrentObjectId(ui->comboBoxAxisP1));
