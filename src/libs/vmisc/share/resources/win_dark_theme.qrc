@@ -1330,7 +1330,6 @@
         <!-- <file>icons/Eleven-Dark/16/actions/editclear.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/editcopy.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/editcut.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/16/actions/editdelete.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/editimage.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/editor.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/editpaste.svg</file> -->
@@ -3736,7 +3735,6 @@
         <!-- <file>icons/Eleven-Dark/22/actions/editclear.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22/actions/editcopy.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22/actions/editcut.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/22/actions/editdelete.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22/actions/editimage.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22/actions/editor.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22/actions/editpaste.svg</file> -->
@@ -6013,7 +6011,6 @@
         <!-- <file>icons/Eleven-Dark/24/actions/editclear.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24/actions/editcopy.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24/actions/editcut.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/24/actions/editdelete.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24/actions/editimage.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24/actions/editor.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24/actions/editpaste.svg</file> -->
@@ -9265,7 +9262,6 @@
         <!-- <file>icons/Eleven-Dark/16@2x/actions/editclear.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/editcopy.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/editcut.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/16@2x/actions/editdelete.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/editimage.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/editor.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/editpaste.svg</file> -->
@@ -11671,7 +11667,6 @@
         <!-- <file>icons/Eleven-Dark/22@2x/actions/editclear.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22@2x/actions/editcopy.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22@2x/actions/editcut.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/22@2x/actions/editdelete.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22@2x/actions/editimage.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22@2x/actions/editor.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22@2x/actions/editpaste.svg</file> -->
@@ -13948,7 +13943,6 @@
         <!-- <file>icons/Eleven-Dark/24@2x/actions/editclear.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24@2x/actions/editcopy.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24@2x/actions/editcut.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/24@2x/actions/editdelete.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24@2x/actions/editimage.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24@2x/actions/editor.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24@2x/actions/editpaste.svg</file> -->
