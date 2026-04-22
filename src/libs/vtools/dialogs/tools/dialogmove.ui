@@ -122,7 +122,7 @@
                 <string notr="true">...</string>
                </property>
                <property name="icon">
-                <iconset theme="editdelete"/>
+                <iconset theme="edit-delete"/>
                </property>
               </widget>
              </item>
@@ -862,11 +862,6 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>VPlainTextEdit</class>
-   <extends>QPlainTextEdit</extends>
-   <header>../vwidgets/vplaintextedit.h</header>
-  </customwidget>
-  <customwidget>
    <class>VPE::QtColorPicker</class>
    <extends>QPushButton</extends>
    <header>../vpropertyexplorer/qtcolorpicker.h</header>
@@ -875,6 +870,11 @@
    <class>VCompleterLineEdit</class>
    <extends>QLineEdit</extends>
    <header>../vwidgets/vlineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>VPlainTextEdit</class>
+   <extends>QPlainTextEdit</extends>
+   <header>../vwidgets/vplaintextedit.h</header>
   </customwidget>
  </customwidgets>
  <resources>

@@ -442,7 +442,7 @@
                  <string notr="true"/>
                 </property>
                 <property name="icon">
-                 <iconset theme="editdelete"/>
+                 <iconset theme="edit-delete"/>
                 </property>
                </widget>
               </item>

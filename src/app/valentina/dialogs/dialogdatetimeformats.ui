@@ -65,7 +65,7 @@
         <string notr="true">Remove</string>
        </property>
        <property name="icon">
-        <iconset theme="Qeditdelete"/>
+        <iconset theme="edit-delete"/>
        </property>
       </widget>
      </item>
