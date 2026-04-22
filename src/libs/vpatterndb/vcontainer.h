@@ -341,31 +341,28 @@ void VContainer::AddVariable(const QSharedPointer<T> &var, const QString &name)
 
     if (d->variables.contains(name))
     {
-        qDebug() << "AddVariable: variable already exists for name =" << name
-                 << "| existing type =" << d->variables.value(name)->GetType() << "| incoming type =" << var->GetType();
-
         if (d->variables.value(name)->GetType() == var->GetType())
         {
             QSharedPointer<T> v = qSharedPointerDynamicCast<T>(d->variables.value(name));
             if (v.isNull())
             {
-                qDebug() << "AddVariable: dynamic cast failed for name =" << name;
+                qDebug() << "AddVariable: dynamic cast failed for name =" << name
+                         << "| type =" << d->variables.value(name)->GetType();
                 throw VExceptionBadId(tr("Can't cast object."), name);
             }
 
-            qDebug() << "AddVariable: updating existing variable name =" << name;
             *v = *var;
         }
         else
         {
-            qDebug() << "AddVariable: type mismatch for name =" << name;
+            qDebug() << "AddVariable: type mismatch for name =" << name
+                     << "| existing type =" << d->variables.value(name)->GetType()
+                     << "| incoming type =" << var->GetType();
             throw VExceptionBadId(tr("Can't find object. Type mismatch."), name);
         }
     }
     else
     {
-        qDebug() << "AddVariable: inserting new variable name =" << name
-                 << "| type =" << static_cast<int>(var->GetType());
         d->variables.insert(name, var);
     }
 }
