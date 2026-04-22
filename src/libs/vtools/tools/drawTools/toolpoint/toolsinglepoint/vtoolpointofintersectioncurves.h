@@ -162,6 +162,7 @@ public slots:
     void SetSplineSegmentLabelVisible(bool visible);
     void SetSplinePathSegmentLabelVisible(bool visible);
     void AllowLabelSelecting(bool enabled) override;
+    void SetDetailsMode(bool mode) override;
 
 protected slots:
     void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) override;

@@ -80,6 +80,7 @@ signals:
 
 public slots:
     void SetLabelVisible(bool visible);
+    void ShowExplicitly(bool show);
 
 protected:
     auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
@@ -93,6 +94,7 @@ private:
     VPointF m_labelPos{};
 
     bool m_showLabel{false};
+    bool m_forcedVisible{false};
 
     bool m_hoverSegment{false};
 

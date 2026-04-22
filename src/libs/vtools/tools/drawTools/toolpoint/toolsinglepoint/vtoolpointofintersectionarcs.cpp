@@ -1001,6 +1001,15 @@ void VToolPointOfIntersectionArcs::AllowLabelSelecting(bool enabled)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolPointOfIntersectionArcs::SetDetailsMode(bool mode)
+{
+    m_arc1Segment1Label->ShowExplicitly(mode);
+    m_arc1Segment2Label->ShowExplicitly(mode);
+    m_arc2Segment1Label->ShowExplicitly(mode);
+    m_arc2Segment2Label->ShowExplicitly(mode);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersectionArcs::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
 {
     try

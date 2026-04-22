@@ -1248,6 +1248,15 @@ void VToolPointOfIntersectionCurves::AllowLabelSelecting(bool enabled)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolPointOfIntersectionCurves::SetDetailsMode(bool mode)
+{
+    m_curve1Segment1Label->ShowExplicitly(mode);
+    m_curve1Segment2Label->ShowExplicitly(mode);
+    m_curve2Segment1Label->ShowExplicitly(mode);
+    m_curve2Segment2Label->ShowExplicitly(mode);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersectionCurves::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(not m_dialog.isNull())

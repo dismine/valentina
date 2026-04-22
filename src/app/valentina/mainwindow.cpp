@@ -6528,11 +6528,11 @@ void MainWindow::CreateActions()
 
     ui->actionShowCurveDetails->setChecked(VAbstractValApplication::VApp()->ValentinaSettings()->IsShowCurveDetails());
     connect(ui->actionShowCurveDetails, &QAction::triggered, this,
-            [this](bool checked)
+            [this](bool checked) -> void
             {
                 emit ui->view->itemClicked(nullptr);
-                m_sceneDraw->EnableDetailsMode(checked);
                 VAbstractValApplication::VApp()->ValentinaSettings()->SetShowCurveDetails(checked);
+                m_sceneDraw->EnableDetailsMode(checked);
             });
 
     ui->actionShowAccuracyRadius->setChecked(

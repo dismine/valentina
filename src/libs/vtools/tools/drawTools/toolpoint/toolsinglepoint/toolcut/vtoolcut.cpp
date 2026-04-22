@@ -111,6 +111,8 @@ VToolCut::VToolCut(const VToolCutInitData &initData, QGraphicsItem *parent)
 void VToolCut::SetDetailsMode(bool mode)
 {
     detailsMode = mode;
+    m_segment1Label->ShowExplicitly(mode);
+    m_segment2Label->ShowExplicitly(mode);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

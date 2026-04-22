@@ -118,6 +118,7 @@ public slots:
     void ToolSelectionType(const SelectionType &selectionType) override;
     void SetSegmentLabelVisible(bool visible);
     void AllowLabelSelecting(bool enabled) override;
+    void SetDetailsMode(bool mode) override;
 
 protected slots:
     void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) override;

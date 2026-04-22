@@ -912,3 +912,10 @@ void VToolCurveIntersectAxis::AllowLabelSelecting(bool enabled)
 
     VToolLinePoint::AllowLabelSelecting(enabled);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCurveIntersectAxis::SetDetailsMode(bool mode)
+{
+    m_segment1Label->ShowExplicitly(mode);
+    m_segment2Label->ShowExplicitly(mode);
+}

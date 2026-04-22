@@ -32,6 +32,8 @@
 #include "../vmisc/theme/themeDef.h"
 #include "../vmisc/theme/vscenestylesheet.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
+#include "../vmisc/vvalentinasettings.h"
 #include "global.h"
 #include "scalesceneitems.h"
 #include "vgraphicssimpletextitem.h"
@@ -192,11 +194,35 @@ void VSegmentLabel::UpdateLabelLine()
 //---------------------------------------------------------------------------------------------------------------------
 void VSegmentLabel::SetLabelVisible(bool visible)
 {
-    m_showLabel = visible;
-    m_label->setVisible(visible);
+    const bool showDetails = VAbstractValApplication::VApp()->ValentinaSettings()->IsShowCurveDetails();
+
+    // Respect forced-visible state: once the user explicitly shows a label,
+    // it stays visible regardless of activation/deactivation.
+    // Also respect showDetails: if curve details are enabled, labels are
+    // always shown even when the segment would normally be hidden.
+    m_showLabel = visible || m_forcedVisible || showDetails;
+
+    m_label->setVisible(m_showLabel);
     UpdateLabelLine();
 
-    if (!visible)
+    if (!m_showLabel)
+    {
+        HoverSegment(false);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSegmentLabel::ShowExplicitly(bool show)
+{
+    // Track the user's explicit intent separately so it survives
+    // activation/deactivation cycles.
+    m_forcedVisible = show;
+
+    m_showLabel = show;
+    m_label->setVisible(m_showLabel);
+    UpdateLabelLine();
+
+    if (!m_showLabel)
     {
         HoverSegment(false);
     }
@@ -254,6 +280,8 @@ void VSegmentLabel::LabelSelectionType(const SelectionType &type)
 //---------------------------------------------------------------------------------------------------------------------
 void VSegmentLabel::Init()
 {
+    m_showLabel = VAbstractValApplication::VApp()->ValentinaSettings()->IsShowCurveDetails();
+
     setPos(m_labelPos.toQPointF());
 
     // ── Label ────────────────────────────────────────────────────────────
