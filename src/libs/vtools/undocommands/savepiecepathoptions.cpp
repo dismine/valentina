@@ -78,8 +78,11 @@ void SavePiecePathOptions::undo()
 
     patternGraph->RemoveIncomingEdges(ElementId());
 
-    DisablePieceNodes(m_newPath);
-    EnablePieceNodes(m_oldPath);
+    if (m_newPath.GetType() == PiecePathType::InternalPath)
+    {
+        DisablePieceNodes(m_newPath);
+        EnablePieceNodes(m_oldPath);
+    }
 
     SCASSERT(m_data);
 
@@ -126,8 +129,11 @@ void SavePiecePathOptions::redo()
 
     patternGraph->RemoveIncomingEdges(ElementId());
 
-    DisablePieceNodes(m_oldPath);
-    EnablePieceNodes(m_newPath);
+    if (m_oldPath.GetType() == PiecePathType::InternalPath)
+    {
+        DisablePieceNodes(m_oldPath);
+        EnablePieceNodes(m_newPath);
+    }
 
     SCASSERT(m_data);
 
