@@ -674,13 +674,16 @@ void DialogFlippingByAxis::SaveData()
 {
     m_sourceObjects = SaveSourceObjects();
 
-    auto *operation = qobject_cast<VisToolFlippingByAxis *>(vis);
-    SCASSERT(operation != nullptr)
+    if (!vis.isNull())
+    {
+        auto *operation = qobject_cast<VisToolFlippingByAxis *>(vis);
+        SCASSERT(operation != nullptr)
 
-    operation->SetObjects(SourceToObjects(m_sourceObjects));
-    operation->SetOriginPointId(GetOriginPointId());
-    operation->SetAxisType(GetAxisType());
-    operation->RefreshGeometry();
+        operation->SetObjects(SourceToObjects(m_sourceObjects));
+        operation->SetOriginPointId(GetOriginPointId());
+        operation->SetAxisType(GetAxisType());
+        operation->RefreshGeometry();
+    }
 
     QStringList groupTags = ui->lineEditGroupTags->text().split(',');
     for (auto &tag : groupTags)

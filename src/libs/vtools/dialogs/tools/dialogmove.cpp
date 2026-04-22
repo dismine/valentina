@@ -850,15 +850,18 @@ void DialogMove::SaveData()
     formulaLength = ui->plainTextEditLength->toPlainText();
     m_sourceObjects = SaveSourceObjects();
 
-    auto *operation = qobject_cast<VisToolMove *>(vis);
-    SCASSERT(operation != nullptr)
+    if (!vis.isNull())
+    {
+        auto *operation = qobject_cast<VisToolMove *>(vis);
+        SCASSERT(operation != nullptr)
 
-    operation->SetObjects(SourceToObjects(m_sourceObjects));
-    operation->SetAngle(formulaAngle);
-    operation->SetLength(formulaLength);
-    operation->SetRotationAngle(formulaRotationAngle);
-    operation->SetRotationOriginPointId(GetRotationOrigPointId());
-    operation->RefreshGeometry();
+        operation->SetObjects(SourceToObjects(m_sourceObjects));
+        operation->SetAngle(formulaAngle);
+        operation->SetLength(formulaLength);
+        operation->SetRotationAngle(formulaRotationAngle);
+        operation->SetRotationOriginPointId(GetRotationOrigPointId());
+        operation->RefreshGeometry();
+    }
 
     QStringList groupTags = ui->lineEditGroupTags->text().split(',');
     for (auto &tag : groupTags)

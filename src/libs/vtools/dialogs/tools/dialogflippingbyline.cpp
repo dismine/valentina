@@ -691,13 +691,16 @@ void DialogFlippingByLine::SaveData()
 {
     m_sourceObjects = SaveSourceObjects();
 
-    auto *operation = qobject_cast<VisToolFlippingByLine *>(vis);
-    SCASSERT(operation != nullptr)
+    if (!vis.isNull())
+    {
+        auto *operation = qobject_cast<VisToolFlippingByLine *>(vis);
+        SCASSERT(operation != nullptr)
 
-    operation->SetObjects(SourceToObjects(m_sourceObjects));
-    operation->SetFirstLinePointId(GetFirstLinePointId());
-    operation->SetSecondLinePointId(GetSecondLinePointId());
-    operation->RefreshGeometry();
+        operation->SetObjects(SourceToObjects(m_sourceObjects));
+        operation->SetFirstLinePointId(GetFirstLinePointId());
+        operation->SetSecondLinePointId(GetSecondLinePointId());
+        operation->RefreshGeometry();
+    }
 
     QStringList groupTags = ui->lineEditGroupTags->text().split(',');
     for (auto &tag : groupTags)
