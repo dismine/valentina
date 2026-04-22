@@ -269,25 +269,6 @@ void VPattern::CreateEmptyFile()
  */
 void VPattern::Parse(const Document &parse)
 {
-    qCDebug(vXML, "Parsing pattern.");
-    switch (parse)
-    {
-        case Document::FullParse:
-            qCDebug(vXML, "Full parse.");
-            break;
-        case Document::LiteParse:
-            qCDebug(vXML, "Lite parse.");
-            break;
-        case Document::FullLiteParse:
-            qCDebug(vXML, "Full lite parse.");
-            break;
-        case Document::LitePPParse:
-            qCDebug(vXML, "Lite pattern piece parse.");
-            break;
-        default:
-            break;
-    }
-
     emit PreParseState();
     SCASSERT(sceneDraw != nullptr)
     SCASSERT(sceneDetail != nullptr)
@@ -933,7 +914,6 @@ void VPattern::ParseRootElement(const Document &parse, const QDomNode &node)
     {
         case 0: // TagDraw
         {
-            qCDebug(vXML, "Tag draw.");
             VPatternBlockMapper *blocks = PatternBlockMapper();
             if (parse == Document::FullParse)
             {
@@ -951,19 +931,16 @@ void VPattern::ParseRootElement(const Document &parse, const QDomNode &node)
         case 1: // TagIncrements
             if (parse != Document::LiteParse)
             {
-                qCDebug(vXML, "Tag increments.");
                 ParseIncrementsElement(domElement, parse);
             }
             break;
         case 2: // TagPreviewCalculations
             if (parse != Document::LiteParse)
             {
-                qCDebug(vXML, "Tag preview calculations.");
                 ParseIncrementsElement(domElement, parse);
             }
             break;
         default:
-            qCDebug(vXML, "Ignoring tag %s", qUtf8Printable(domElement.tagName()));
             break;
     }
 }
@@ -996,20 +973,16 @@ void VPattern::ParseDrawElement(const QDomNode &node, const Document &parse)
         switch (tags.indexOf(domElement.tagName()))
         {
             case 0: // TagCalculation
-                qCDebug(vXML, "Tag calculation.");
                 data->ClearCalculationGObjects();
                 ParseDrawMode(domElement, parse, Draw::Calculation);
                 break;
             case 1: // TagModeling
-                qCDebug(vXML, "Tag modeling.");
                 ParseDrawMode(domElement, parse, Draw::Modeling);
                 break;
             case 2: // TagDetails
-                qCDebug(vXML, "Tag details.");
                 ParseDetails(domElement, parse);
                 break;
             case 3: // TagGroups
-                qCDebug(vXML, "Tag groups.");
                 ParseGroups(domElement);
                 break;
             default:
@@ -1058,35 +1031,27 @@ void VPattern::ParseDrawModeElement(QDomElement &domElement, const Document &par
     switch (tags.indexOf(domElement.tagName()))
     {
         case 0: // TagPoint
-            qCDebug(vXML, "Tag point.");
             ParsePointElement(scene, domElement, parse, domElement.attribute(AttrType, QString()));
             break;
         case 1: // TagLine
-            qCDebug(vXML, "Tag line.");
             ParseLineElement(scene, domElement, parse);
             break;
         case 2: // TagSpline
-            qCDebug(vXML, "Tag spline.");
             ParseSplineElement(scene, domElement, parse, domElement.attribute(AttrType, QString()));
             break;
         case 3: // TagArc
-            qCDebug(vXML, "Tag arc.");
             ParseArcElement(scene, domElement, parse, domElement.attribute(AttrType, QString()));
             break;
         case 4: // TagTools
-            qCDebug(vXML, "Tag tools.");
             ParseToolsElement(scene, domElement, parse, domElement.attribute(AttrType, QString()));
             break;
         case 5: // TagOperation
-            qCDebug(vXML, "Tag operation.");
             ParseOperationElement(scene, domElement, parse, domElement.attribute(AttrType, QString()));
             break;
         case 6: // TagElArc
-            qCDebug(vXML, "Tag elliptical arc.");
             ParseEllipticalArcElement(scene, domElement, parse, domElement.attribute(AttrType, QString()));
             break;
         case 7: // TagPath
-            qCDebug(vXML, "Tag path.");
             ParsePathElement(scene, domElement, parse);
             break;
         default:

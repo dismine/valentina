@@ -4843,8 +4843,6 @@ void MainWindow::FileClosedCorrect()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::FullParseFile()
 {
-    qCDebug(vMainWindow, "Full parsing file");
-
     m_toolOptions->ClearPropertyBrowser();
 
     if (not FullParsePattern())

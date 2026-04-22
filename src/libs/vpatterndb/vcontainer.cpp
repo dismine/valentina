@@ -382,7 +382,6 @@ void VContainer::Clear()
 //---------------------------------------------------------------------------------------------------------------------
 void VContainer::ClearForFullParse()
 {
-    qCDebug(vCon, "Clearing container data for full parse.");
     _id[d->nspace] = NULL_ID;
 
     d->pieces->clear();
