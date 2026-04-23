@@ -217,10 +217,10 @@ void DialogFlippingByLine::ShowDialog(bool click)
         SCASSERT(operation != nullptr)
         operation->StartAction();
 
-        scene->ToggleArcSelection(false);
-        scene->ToggleElArcSelection(false);
-        scene->ToggleSplineSelection(false);
-        scene->ToggleSplinePathSelection(false);
+        scene->ToggleArcSegmentVisibility(false);
+        scene->ToggleElArcSegmentVisibility(false);
+        scene->ToggleSplineSegmentVisibility(false);
+        scene->ToggleSplinePathSegmentVisibility(false);
 
         scene->ToggleArcHover(false);
         scene->ToggleElArcHover(false);
