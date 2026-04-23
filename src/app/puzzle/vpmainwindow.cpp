@@ -3332,8 +3332,6 @@ auto VPMainWindow::PrepareLayoutTilePages(const QList<VPSheetPtr> &sheets) -> QV
 auto VPMainWindow::PrintLayoutTiledSheetPage(QPrinter *printer, QPainter &painter, const VPLayoutPrinterPage &page,
                                              bool firstPage) -> bool
 {
-    qCDebug(pWindow, "VPMainWindow::PrintLayoutTiledSheetPage: Printing layout tiled sheets page");
-
     page.sheet->SceneData()->PrepareForExport(LayoutExportFormats::PDFTiled);
 
     const VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
