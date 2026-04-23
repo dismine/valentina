@@ -3376,21 +3376,22 @@ auto VPMainWindow::PrintLayoutTiledSheetPage(QPrinter *printer, QPainter &painte
         m_layout->TileFactory()->InitTileSingleStrokeOutlineFont();
     }
 
+    bool needNewPage = !firstPage;
     if (page.tilesScheme)
     {
-        if (not DrawTilesScheme(printer, &painter, page.sheet, firstPage))
+        if (!DrawTilesScheme(printer, &painter, page.sheet, firstPage))
         {
             return false;
         }
 
-        firstPage = false;
+        needNewPage = false;
     }
 
-    if (not firstPage)
+    if (needNewPage)
     {
         printer->setPageOrientation(m_layout->LayoutSettings().GetTilesOrientation());
 
-        if (not printer->newPage())
+        if (!printer->newPage())
         {
             qWarning("failed in flushing page to disk, disk full?");
             return false;
