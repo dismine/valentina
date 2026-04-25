@@ -170,7 +170,7 @@ jobs:
         run: conan install . --build=missing -o '&:with_crash_reporting=${{ env.WITH_CRASH_REPORTING }}' -o '&:with_xerces=True' -pr:a=share/ci/conan/profiles/windows
 
       - name: Cache SimplySign Installer
-        if: env.SIGN == true
+        if: ${{ matrix.qt.sign == true }}
         uses: actions/cache@v5
         with:
           # This is the path where the installer will be saved by the action
@@ -179,7 +179,7 @@ jobs:
           key: simplysign-msi-${{ env.SIMPLYSIGN_URL }}
 
       - name: Setup Certum SimplySign environment
-        if: env.SIGN == true
+        if: ${{ matrix.qt.sign == true }}
         uses: dismine/windows-app-signing-setup-action@v1
         with:
           certum-username: ${{ secrets.CERTUM_USERNAME }}
@@ -187,7 +187,7 @@ jobs:
           certum-key-id: ${{ secrets.CERTUM_KEY_ID }}
 
       - name: Add SignTool to PATH
-        if: env.SIGN == true
+        if: ${{ matrix.qt.sign == true }}
         shell: pwsh
         run: |
           $signtool = Get-ChildItem -Path "C:\Program Files (x86)\Windows Kits\10\bin\" -Filter signtool.exe -Recurse | Where-Object { $_.FullName -match 'x64' } | Select-Object -First 1
@@ -259,7 +259,7 @@ jobs:
         run: qbs -p autotest-runner ${{ env.COMMON_QBS_ARGS }}
 
       - name: Sign binaries
-        if: github.event_name != 'pull_request' && env.DEPLOY == 'true' && env.SIGN == true
+        if: github.event_name != 'pull_request' && env.DEPLOY == 'true' && env.SIGN == 'true'
         shell: pwsh
         env:
           CERTUM_KEY_ID: ${{ secrets.CERTUM_KEY_ID }}
@@ -374,7 +374,7 @@ jobs:
           qbs-config --list profiles
 
       - name: Cache SimplySign Installer
-        if: env.SIGN == true
+        if: ${{ matrix.qt.sign == true }}
         uses: actions/cache@v5
         with:
           # This is the path where the installer will be saved by the action
@@ -383,7 +383,7 @@ jobs:
           key: simplysign-msi-${{ env.SIMPLYSIGN_URL }}
 
       - name: Setup Certum SimplySign environment
-        if: env.SIGN == true
+        if: ${{ matrix.qt.sign == true }}
         uses: dismine/windows-app-signing-setup-action@v1
         with:
           certum-username: ${{ secrets.CERTUM_USERNAME }}
@@ -391,7 +391,7 @@ jobs:
           certum-key-id: ${{ secrets.CERTUM_KEY_ID }}
 
       - name: Add SignTool to PATH
-        if: env.SIGN == true
+        if: ${{ matrix.qt.sign == true }}
         shell: pwsh
         run: |
           $signtool = Get-ChildItem -Path "C:\Program Files (x86)\Windows Kits\10\bin\" -Filter signtool.exe -Recurse | Where-Object { $_.FullName -match 'x64' } | Select-Object -First 1
@@ -430,7 +430,7 @@ jobs:
         run: qbs -p autotest-runner ${{ env.COMMON_QBS_ARGS }}
 
       - name: Sign binaries
-        if: github.event_name != 'pull_request' && env.DEPLOY == 'true' && env.SIGN == true
+        if: github.event_name != 'pull_request' && env.DEPLOY == 'true' && env.SIGN == 'true'
         shell: pwsh
         env:
           CERTUM_KEY_ID: ${{ secrets.CERTUM_KEY_ID }}
@@ -445,7 +445,7 @@ jobs:
         run: qbs build -p ValentinaSetup ${{ env.COMMON_QBS_ARGS }}
 
       - name: Sign binaries
-        if: github.event_name != 'pull_request' && env.DEPLOY == 'true' && env.SIGN == true
+        if: github.event_name != 'pull_request' && env.DEPLOY == 'true' && env.SIGN == 'true'
         shell: pwsh
         env:
           CERTUM_KEY_ID: ${{ secrets.CERTUM_KEY_ID }}
