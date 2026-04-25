@@ -72,7 +72,7 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Fetch tags
         run: git fetch --prune --unshallow --tags
@@ -124,7 +124,7 @@ jobs:
         run: echo "CONAN_HOME=${{ runner.temp }}/.conan2" >> $GITHUB_ENV
 
       - name: Cache Conan packages (Conan 2.x)
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ${{ env.CONAN_HOME }}/p
           key: conan2-packages-${{ runner.os }}-v1-${{ hashFiles('**/conanfile.py') }}
@@ -352,7 +352,7 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Fetch tags
         run: git fetch --prune --unshallow --tags
@@ -401,7 +401,7 @@ jobs:
           python -m pip install -r share/ci/requirements-ci.txt
 
       - name: Cache Conan packages (Conan 2.x)
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ${{ env.CONAN_HOME }}/p
           key: conan2-packages-${{ runner.os }}-v1-${{ hashFiles('**/conanfile.py') }}
