@@ -83,7 +83,7 @@ jobs:
           xcode-version: ${{ matrix.qt.xcode }}
 
       - name: Install Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.x'
           architecture: "x64"
@@ -302,7 +302,7 @@ jobs:
       - name: Commit hash
         id: commit
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
-        uses: prompt/actions-commit-hash@v3
+        uses: prompt/actions-commit-hash@v4
 
       - name: Deploy
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
@@ -363,7 +363,7 @@ jobs:
           xcode-version: ${{ matrix.qt.xcode }}
 
       - name: Install Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.x'
           architecture: "x64"
@@ -579,7 +579,7 @@ jobs:
       - name: Commit hash
         id: commit
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
-        uses: prompt/actions-commit-hash@v3
+        uses: prompt/actions-commit-hash@v4
 
       - name: Deploy
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
