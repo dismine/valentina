@@ -22,6 +22,8 @@ env:
   INNOSETUP_VERSION: 6.7.1
   VALENTINA_VERSION: 1_1_0
   ACCESS_TOKEN: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
+  # Set the URL as an environment variable for the cache key
+  SIMPLYSIGN_URL: 'https://files.certum.eu/software/SimplySignDesktop/Windows/9.4.2.86/SimplySignDesktop-9.4.2.86-64-bit-en.msi'
 
 jobs:
   build:
@@ -39,6 +41,7 @@ jobs:
             with_iconv: 'False'
             withBigCodecs: 'False'
             deploy: 'true'
+            sign: true 
           - install: 6.10.2
             label: Qt6_10
             run_tests: 'true'
@@ -46,9 +49,11 @@ jobs:
             with_iconv: 'True'
             with_big_codecs: 'True'
             deploy: 'false'
+            sign: false
 
     env:
       DEPLOY: ${{ matrix.qt.deploy }}
+      SIGN: ${{ matrix.qt.sign }}
       RUN_TESTS: ${{ matrix.qt.run_tests }}
       WITH_CRASH_REPORTING: 'True'
       WITH_ICU: ${{ matrix.qt.with_icu }}
@@ -177,7 +182,39 @@ jobs:
       - name: Build Conan dependencies
         shell: bash
         run: conan install . --build=missing -o '&:with_crash_reporting=${{ env.WITH_CRASH_REPORTING }}' -o '&:with_xerces=True' -o '&:with_icu=${{ env.WITH_ICU }}' -o '&:with_iconv=${{ env.WITH_ICONV }}' -pr:a=share/ci/conan/profiles/windows
-        
+
+      - name: Cache SimplySign Installer
+        if: ${{ matrix.qt.sign == true }}
+        uses: actions/cache@v5
+        with:
+          # This is the path where the installer will be saved by the action
+          path: SimplySignDesktop.msi
+          # The key ensures we get a new download if the URL changes
+          key: simplysign-msi-${{ env.SIMPLYSIGN_URL }}
+
+      - name: Setup Certum SimplySign environment
+        if: ${{ matrix.qt.sign == true }}
+        uses: dismine/windows-app-signing-setup-action@v1
+        with:
+          certum-username: ${{ secrets.CERTUM_USERNAME }}
+          certum-otp-uri: ${{ secrets.CERTUM_OTP_URI }}
+          certum-key-id: ${{ secrets.CERTUM_KEY_ID }}
+
+      - name: Add SignTool to PATH
+        if: ${{ matrix.qt.sign == true }}
+        shell: pwsh
+        run: |
+          $signtool = Get-ChildItem -Path "C:\Program Files (x86)\Windows Kits\10\bin\" -Filter signtool.exe -Recurse | Where-Object { $_.FullName -match 'x64' } | Select-Object -First 1
+          
+          if ($signtool) {
+              $signtoolDir = Split-Path $signtool.FullName
+              Write-Host "✅ Adding SignTool to PATH: $signtoolDir"
+              echo "$signtoolDir" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          } else {
+              Write-Error "❌ SignTool.exe not found in Windows SDK folders."
+              exit 1
+          }
+
       - name: Set up common Qbs args
         shell: bash
         run: >
@@ -187,6 +224,8 @@ jobs:
           config:release
           qbs.installRoot:\"$RUNNER_TEMP/build/release/install-root/valentina\"
           profile:qt6
+          project.enableSigning:${{ env.SIGN }}
+          modules.buildconfig.signingThumbprint:${{ secrets.CERTUM_KEY_ID }}
           project.enableConan:true
           project.conanWithCrashReporting:${{ env.WITH_CRASH_REPORTING }}
           project.conanWithXerces:true
@@ -237,6 +276,16 @@ jobs:
         if: env.RUN_TESTS == 'true'
         shell: bash
         run: qbs -p autotest-runner ${{ env.COMMON_QBS_ARGS }}
+
+      - name: Sign binaries
+        if: github.event_name != 'pull_request' && env.DEPLOY == 'true' && env.SIGN == 'true'
+        shell: pwsh
+        env:
+          CERTUM_KEY_ID: ${{ secrets.CERTUM_KEY_ID }}
+        run: |
+          & "./scripts/sign-binaries.ps1" `
+            -InstallRoot "$env:RUNNER_TEMP\build\release\install-root\valentina" `
+            -CertumKeyId $env:CERTUM_KEY_ID  
 
       - name: Create installer
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
