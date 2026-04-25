@@ -186,11 +186,6 @@ jobs:
         shell: bash
         run: qbs build ${{ env.COMMON_QBS_ARGS }}
 
-      - name: Tests
-        if: env.RUN_TESTS == 'true'
-        shell: bash
-        run: qbs -p autotest-runner ${{ env.COMMON_QBS_ARGS }}
-
       - name: Deploy symbols
         if: env.WITH_CRASH_REPORTING == 'True'
         shell: pwsh
@@ -219,6 +214,11 @@ jobs:
             --app-version $env:VALENTINA_VERSION `
             --git-hash    "g$shortSha" `
             --qt-version  $qtVersion
+
+      - name: Tests
+        if: env.RUN_TESTS == 'true'
+        shell: bash
+        run: qbs -p autotest-runner ${{ env.COMMON_QBS_ARGS }}
 
       - name: Create installer
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'

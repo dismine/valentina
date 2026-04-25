@@ -235,10 +235,6 @@ jobs:
       - name: Build Valentina
         run: qbs build ${{ env.COMMON_QBS_ARGS }}
 
-      - name: Tests
-        if: env.RUN_TESTS == 'true'
-        run: qbs -p autotest-runner ${{ env.COMMON_QBS_ARGS }}
-
       - name: Deploy symbols
         if: env.WITH_CRASH_REPORTING == 'True'
         env:
@@ -270,6 +266,10 @@ jobs:
             --git-hash    "g$CRASH_SHORT_SHA" \
             --qt-version  "$CRASH_QT_VERSION" \
             $MULTIBUNDLE_FLAG
+
+      - name: Tests
+        if: env.RUN_TESTS == 'true'
+        run: qbs -p autotest-runner ${{ env.COMMON_QBS_ARGS }}
 
       - name: Create DMG
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
@@ -512,10 +512,6 @@ jobs:
       - name: Build Valentina
         run: qbs build ${{ env.COMMON_QBS_ARGS }}
 
-      - name: Tests
-        if: env.RUN_TESTS == 'true'
-        run: qbs -p autotest-runner ${{ env.COMMON_QBS_ARGS }}
-
       - name: Deploy symbols
         if: env.WITH_CRASH_REPORTING == 'True'
         env:
@@ -547,6 +543,10 @@ jobs:
             --git-hash    "g$CRASH_SHORT_SHA" \
             --qt-version  "$CRASH_QT_VERSION" \
             $MULTIBUNDLE_FLAG
+
+      - name: Tests
+        if: env.RUN_TESTS == 'true'
+        run: qbs -p autotest-runner ${{ env.COMMON_QBS_ARGS }}
 
       - name: Create DMG
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
