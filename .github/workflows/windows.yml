@@ -19,7 +19,7 @@ defaults:
 env:
   SOURCE_DIR: ${{ github.workspace }}
   QBS_VERSION: 3.1.1
-  INNOSETUP_VERSION: 6.4.0
+  INNOSETUP_VERSION: 6.7.1
   VALENTINA_VERSION: 1_1_0
   ACCESS_TOKEN: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
 
