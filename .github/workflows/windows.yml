@@ -444,6 +444,7 @@ jobs:
         shell: bash
         run: qbs build -p ValentinaSetup ${{ env.COMMON_QBS_ARGS }}
 
+      # Remove this step when Qbs starts supporting signing with MinGW
       - name: Sign binaries
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true' && env.SIGN == 'true'
         shell: pwsh
