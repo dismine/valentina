@@ -93,17 +93,26 @@ CppApplication {
             if (qbs.toolchainType.contains("mingw"))
                 files.push("msvcr120.dll");
 
-            // Minimal supported OpenSSL version since Qt 5.12.4 is 1.1.1.
-            if (qbs.architecture.contains("x86_64")) {
+            const isQt6 = Qt.core.versionMajor >= 6 && Qt.core.versionMinor >= 2;
+
+            // Qt 6.2+ requires OpenSSL 3.x (x64 only); Qt 5.15 requires OpenSSL 1.1.1.
+            if (isQt6) {
                 files.push(
-                    "openssl/win64/libcrypto-1_1-x64.dll",
-                    "openssl/win64/libssl-1_1-x64.dll"
+                    "openssl/win64/libcrypto-3-x64.dll",
+                    "openssl/win64/libssl-3-x64.dll"
                 );
             } else {
-                files.push(
-                    "openssl/win32/libcrypto-1_1.dll",
-                    "openssl/win32/libssl-1_1.dll"
-                );
+                if (qbs.architecture.contains("x86_64")) {
+                    files.push(
+                        "openssl/win64/libcrypto-1_1-x64.dll",
+                        "openssl/win64/libssl-1_1-x64.dll"
+                    );
+                } else {
+                    files.push(
+                        "openssl/win32/libcrypto-1_1.dll",
+                        "openssl/win32/libssl-1_1.dll"
+                    );
+                }
             }
 
             return files;
