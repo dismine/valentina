@@ -12,7 +12,13 @@ Project {
     property string minimumMacosVersion: undefined
     property string minimumQtVersion: "5.15"
     property stringList conanProfiles: []
-    property bool enableSigning: true
+
+    property bool enableSigning: {
+        if (qbs.targetOS.contains("macos"))
+            return true;
+
+        return false;
+    }
 
     property string conanInstallPath: conanProbe.generatedFilesPath
     ConanfileProbe {

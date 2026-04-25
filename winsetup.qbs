@@ -4,6 +4,7 @@ import qbs.TemporaryDir
 
 InnoSetup {
     Depends { name: "buildconfig" }
+    Depends { name: "codesign" }
 
     property bool _test: {
         if (qbs.targetOS.contains("windows")) {
@@ -107,6 +108,12 @@ InnoSetup {
         "InnoLanguagesPath=" + project.sourceDirectory + "/dist/win/inno/Languages"
     ]
     innosetup.compilerFlags: ["/V9"]
+
+    codesign.enableCodeSigning: buildconfig.enableCodeSigning
+    codesign.hashAlgorithm: buildconfig.signingHashAlgorithm
+    codesign.signingTimestamp: buildconfig.signingTimestamp
+    codesign.timestampAlgorithm: buildconfig.signingTimestampAlgorithm
+    codesign.codesignFlags: ["/sha1", buildconfig.signingThumbprint]
 
     Group {
         fileTagsFilter: ['innosetup.exe']

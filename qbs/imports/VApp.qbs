@@ -28,6 +28,15 @@ CppApplication {
     }
 
     Properties {
+        condition: qbs.targetOS.contains("windows")
+        codesign.enableCodeSigning: buildconfig.enableCodeSigning
+        codesign.hashAlgorithm: buildconfig.signingHashAlgorithm
+        codesign.signingTimestamp: buildconfig.signingTimestamp
+        codesign.timestampAlgorithm: buildconfig.signingTimestampAlgorithm
+        codesign.codesignFlags: ["/sha1", buildconfig.signingThumbprint]
+    }
+
+    Properties {
         condition: qbs.targetOS.contains("macos") && qbs.buildVariant !== "release"
         codesign.codesignFlags: ["--deep"]
         codesign.signingType: "ad-hoc"
