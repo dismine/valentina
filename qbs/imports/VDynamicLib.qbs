@@ -23,7 +23,7 @@ VLib {
     }
 
     Properties {
-        condition: qbs.targetOS.contains("windows")
+        condition: qbs.targetOS.contains("windows") && qbs.toolchain.includes("msvc")
         codesign.enableCodeSigning: buildconfig.enableCodeSigning
         codesign.hashAlgorithm: buildconfig.signingHashAlgorithm
         codesign.signingTimestamp: buildconfig.signingTimestamp

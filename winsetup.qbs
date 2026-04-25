@@ -109,11 +109,14 @@ InnoSetup {
     ]
     innosetup.compilerFlags: ["/V9"]
 
-    codesign.enableCodeSigning: buildconfig.enableCodeSigning
-    codesign.hashAlgorithm: buildconfig.signingHashAlgorithm
-    codesign.signingTimestamp: buildconfig.signingTimestamp
-    codesign.timestampAlgorithm: buildconfig.signingTimestampAlgorithm
-    codesign.codesignFlags: ["/sha1", buildconfig.signingThumbprint]
+    Properties {
+        condition: qbs.toolchain.includes("msvc")
+        codesign.enableCodeSigning: buildconfig.enableCodeSigning
+        codesign.hashAlgorithm: buildconfig.signingHashAlgorithm
+        codesign.signingTimestamp: buildconfig.signingTimestamp
+        codesign.timestampAlgorithm: buildconfig.signingTimestampAlgorithm
+        codesign.codesignFlags: ["/sha1", buildconfig.signingThumbprint]
+    }
 
     Group {
         fileTagsFilter: ['innosetup.exe']
