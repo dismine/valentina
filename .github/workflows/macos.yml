@@ -102,7 +102,7 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Fetch tags
         run: git fetch --prune --unshallow --tags
@@ -113,7 +113,7 @@ jobs:
           xcode-version: ${{ matrix.qt.xcode }}
 
       - name: Install Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.x'
           architecture: "x64"
@@ -154,7 +154,7 @@ jobs:
         run: echo "CONAN_HOME=${{ runner.temp }}/.conan2" >> $GITHUB_ENV
 
       - name: Cache Conan packages (Conan 2.x)
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ${{ env.CONAN_HOME }}/p
           key: conan2-packages-${{ runner.os }}-v1-${{ hashFiles('**/conanfile.py') }}
@@ -337,7 +337,7 @@ jobs:
       - name: Commit hash
         id: commit
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
-        uses: prompt/actions-commit-hash@v3
+        uses: prompt/actions-commit-hash@v4
 
       - name: Deploy
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
@@ -417,7 +417,7 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Fetch tags
         run: git fetch --prune --unshallow --tags
@@ -428,7 +428,7 @@ jobs:
           xcode-version: ${{ matrix.qt.xcode }}
 
       - name: Install Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.x'
           architecture: "x64"
@@ -466,7 +466,7 @@ jobs:
           python -m pip install -r share/ci/requirements-ci.txt
 
       - name: Cache Conan packages (Conan 2.x)
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ${{ env.CONAN_HOME }}/p
           key: conan2-packages-${{ runner.os }}-v1-${{ hashFiles('**/conanfile.py') }}
@@ -649,7 +649,7 @@ jobs:
       - name: Commit hash
         id: commit
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
-        uses: prompt/actions-commit-hash@v3
+        uses: prompt/actions-commit-hash@v4
 
       - name: Deploy
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
