@@ -29,7 +29,7 @@ CppApplication {
   Properties {
       condition: qbs.targetOS.contains("macos")
       cpp.rpaths: [
-          FileInfo.joinPaths(cpp.rpathOrigin, "..", "install-root", product.qbs.installPrefix,  product.buildconfig.installAppPath + "/Valentina.app/Contents/Frameworks"),
+          FileInfo.joinPaths(qbs.installRoot, product.qbs.installPrefix, product.buildconfig.installAppPath, "Valentina.app/Contents/Frameworks"),
           Qt.core.libPath
       ]
   }
