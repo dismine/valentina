@@ -97,7 +97,6 @@ Name: "croatian"; MessagesFile: "{#InnoLanguagesPath}\Croatian.isl"
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
-Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 Name: "fileassoc1"; Description: "{cm:CreateFileAssocVal}"; GroupDescription: "{cm:FileAssoc}"
 Name: "fileassoc2"; Description: "{cm:CreateFileAssocVit}"; GroupDescription: "{cm:FileAssoc}"
 Name: "fileassoc3"; Description: "{cm:CreateFileAssocVst}"; GroupDescription: "{cm:FileAssoc}"
@@ -264,7 +263,6 @@ Name: "{group}\Puzzle"; Filename: "{app}\puzzle.exe"
 Name: "{autodesktop}\{#MyAppName}{#MyAppStatus}"; Filename: "{app}\valentina.exe"; Tasks: desktopicon
 Name: "{autodesktop}\Tape"; Filename: "{app}\tape.exe"; Tasks: desktopicon
 Name: "{autodesktop}\Puzzle"; Filename: "{app}\puzzle.exe"; Tasks: desktopicon
-Name: "{autoappdata}\Microsoft\Internet Explorer\Quick Launch\{#MyAppName}{#MyAppStatus}"; Filename: "{app}\valentina.exe"; Tasks: quicklaunchicon
 
 [Run]
 Filename: "{app}\valentina.exe"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
