@@ -11,6 +11,7 @@ CppApplication {
              Utilities.versionCompare(Qt.core.version, "6") >= 0 &&
              project.withTextCodec &&
              qbs.targetOS.contains("unix")
+  install: false
 
   qbsModuleProviders: {
       var providers = ["Qt"];

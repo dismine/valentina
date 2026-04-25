@@ -9,6 +9,7 @@ CppApplication {
   name: "readLineStdinProcess"
   condition: buildconfig.enableUnitTests &&
              Utilities.versionCompare(Qt.core.version, "6") >= 0
+  install: false
 
   qbsModuleProviders: {
       var providers = ["Qt"];
