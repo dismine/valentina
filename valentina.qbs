@@ -14,7 +14,13 @@ Project {
     property string minimumMacosVersion: undefined
     property string minimumQtVersion: "5.15"
     property stringList conanProfiles: []
-    property bool enableSigning: true
+
+    property bool enableSigning: {
+        if (qbs.targetOS.contains("macos"))
+            return true;
+
+        return false;
+    }
 
     // Enable the QTextCodec API and support for character encodings.
     // Required for any text codec functionality.

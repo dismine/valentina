@@ -74,6 +74,10 @@ Module {
     readonly property bool enableCodeSigning: project.enableSigning
 
     property string signingIdentity: "-"
+    property string signingThumbprint: undefined
+    property string signingHashAlgorithm: "sha256"
+    property string signingTimestampAlgorithm: "sha256"
+    property string signingTimestamp: "http://time.certum.pl"
 
     property string libDirName: "lib"
 
