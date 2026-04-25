@@ -33,8 +33,7 @@ jobs:
     strategy:
       matrix:
         qt:
-          # LTS release
-          - install: 6.10.2
+          - install: 6.10.3
             label: Qt6_10
             run_tests: 'true'
             with_icu: 'True'
@@ -42,7 +41,7 @@ jobs:
             withBigCodecs: 'False'
             deploy: 'true'
             sign: true 
-          - install: 6.10.2
+          - install: 6.10.3
             label: Qt6_10
             run_tests: 'true'
             with_icu: 'False'
