@@ -57,7 +57,7 @@ MinVersion={#MyAppMinWinVersion}
 ; Remove the following line to run in administrative install mode (install for all users.)
 PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
-WizardStyle=modern
+WizardStyle=modern dynamic
 ;SignTool=MySign
 ;Uncomment the previous string for code signing
 ;The next string is an example of parameter SignTool. Should not be uncommented.
