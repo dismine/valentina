@@ -224,7 +224,7 @@ jobs:
       - name: Install Qt Creator
         uses: ./.github/actions/download-qtc
         with:
-          version: '18.0.1'
+          version: '19.0.1'
 
       - name: Before build
         run: |
@@ -536,7 +536,7 @@ jobs:
       - name: Install Qt Creator
         uses: ./.github/actions/download-qtc
         with:
-          version: '18.0.1'
+          version: '19.0.1'
 
       - name: Before build
         run: |
