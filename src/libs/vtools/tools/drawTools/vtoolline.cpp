@@ -448,7 +448,7 @@ void VToolLine::ApplyToolOptions(const QDomElement &oldDomElement, const QDomEle
     const QString newFirstPointLabel = VAbstractTool::data.GetGObject(dialogTool->GetFirstPoint())->name();
 
     const QString oldSecondPointLabel = SecondPointName();
-    const QString newSecondPointLabel = VAbstractTool::data.GetGObject(dialogTool->GetFirstPoint())->name();
+    const QString newSecondPointLabel = VAbstractTool::data.GetGObject(dialogTool->GetSecondPoint())->name();
 
     if (oldFirstPointLabel == newFirstPointLabel && oldSecondPointLabel == newSecondPointLabel)
     {
