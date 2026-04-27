@@ -4214,41 +4214,32 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, QDomElement &domEle
             ParseOldToolSpline(scene, domElement, parse);
             break;
         case 1: // VToolSpline::ToolType
-            qCDebug(vXML, "VToolSpline.");
             ParseToolSpline(scene, domElement, parse);
             break;
         case 2: // VToolSplinePath::OldToolType
-            qCDebug(vXML, "VOldToolSplinePath.");
             // TODO. Delete if minimal supported version is 0.2.7
             Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 2, 7), "Time to refactor the code.");
             ParseOldToolSplinePath(scene, domElement, parse);
             break;
         case 3: // VToolSplinePath::ToolType
-            qCDebug(vXML, "VToolSplinePath.");
             ParseToolSplinePath(scene, domElement, parse);
             break;
         case 4: // VNodeSpline::ToolType
-            qCDebug(vXML, "VNodeSpline.");
             ParseNodeSpline(domElement, parse);
             break;
         case 5: // VNodeSplinePath::ToolType
-            qCDebug(vXML, "VNodeSplinePath.");
             ParseNodeSplinePath(domElement, parse);
             break;
         case 6: // VToolCubicBezier::ToolType
-            qCDebug(vXML, "VToolCubicBezier.");
             ParseToolCubicBezier(scene, domElement, parse);
             break;
         case 7: // VToolCubicBezierPath::ToolType
-            qCDebug(vXML, "VToolCubicBezierPath.");
             ParseToolCubicBezierPath(scene, domElement, parse);
             break;
         case 8: // VToolParallelCurve::ToolType
-            qCDebug(vXML, "VToolParallelCurve.");
             ParseToolParallelCurve(scene, domElement, parse);
             break;
         case 9: // VToolGraduatedCurve::ToolType
-            qCDebug(vXML, "VToolGraduatedCurve.");
             ParseToolGraduatedCurve(scene, domElement, parse);
             break;
         default:
