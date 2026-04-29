@@ -411,6 +411,23 @@ void VPGraphicsTileGrid::PaintTileNumberOutlineFont(
     else if ((m_printMode && !m_textAsPaths && !settings->GetSingleStrokeOutlineFont())
              || (!m_printMode && font.pointSizeF() * SceneScale(scene()) >= minTextFontSize))
     {
+#ifdef Q_OS_MACOS
+        // On macOS, QPainter::drawText() routes through CoreText which applies its
+        // own font scaling independently of the painter's world transform, causing
+        // text to render larger than intended in print mode. Pre-shrinking the font
+        // by the world transform's scale factor cancels CoreText's extra correction
+        // while keeping text as real text in the output rather than paths.
+        // This does not affect Linux or Windows where drawText() correctly respects
+        // the painter's world transform.
+        QTransform const worldTransform = painter->worldTransform();
+        const qreal scale = std::hypot(worldTransform.m11(), worldTransform.m12());
+        if (!VFuzzyComparePossibleNulls(scale, 1.0))
+        {
+            QFont scaledFont = painter->font();
+            scaledFont.setPointSizeF(scaledFont.pointSizeF() * scale);
+            painter->setFont(scaledFont);
+        }
+#endif
         painter->drawText(img, Qt::AlignCenter, QString::number(j * nbCol + i + 1));
     }
     else
