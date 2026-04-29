@@ -522,7 +522,7 @@ void VLayoutExporter::ExportToPDF(QGraphicsScene *scene,
     qreal const height = FromPixel(m_imageRect.height() * m_yScale + m_margins.top() + m_margins.bottom(), Unit::Mm);
 
     QSizeF const pageSize = imageOrientation == QPageLayout::Portrait ? QSizeF(width, height) : QSizeF(height, width);
-    if (not printer.setPageSize(QPageSize(pageSize, QPageSize::Millimeter)))
+    if (not printer.setPageSize(VPrintLayout::ResolvePageSize(pageSize, QPageSize::Millimeter)))
     {
         qWarning() << tr("Cannot set printer page size");
     }
@@ -536,7 +536,9 @@ void VLayoutExporter::ExportToPDF(QGraphicsScene *scene,
         const qreal right = FromPixel(m_margins.right(), Unit::Mm);
         const qreal bottom = FromPixel(m_margins.bottom(), Unit::Mm);
 
-        if (not printer.setPageMargins(QMarginsF(left, top, right, bottom), QPageLayout::Millimeter))
+        if (not VPrintLayout::SetPrinterMarginsWithFallback(&printer,
+                                                            QMarginsF(left, top, right, bottom),
+                                                            QPageLayout::Millimeter))
         {
             qWarning() << tr("Cannot set printer margins");
         }

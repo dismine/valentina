@@ -474,8 +474,7 @@ void VPrintLayout::SetPrinterPrinterMargins(QPrinter *printer)
         }
     }
 
-    const bool success = printer->setPageMargins(printerMargins, QPageLayout::Millimeter);
-    if (not success)
+    if (not SetPrinterMarginsWithFallback(printer, printerMargins, QPageLayout::Millimeter))
     {
         qWarning() << tr("Cannot set printer margins");
     }
@@ -567,7 +566,7 @@ void VPrintLayout::SetPrinterPageSize(QPrinter *printer)
         const QPageSize::PageSizeId pSZ = FindPageSizeId(size);
         if (pSZ == QPageSize::Custom)
         {
-            if (not printer->setPageSize(QPageSize(size, QPageSize::Millimeter)))
+            if (not printer->setPageSize(ResolvePageSize(size, QPageSize::Millimeter)))
             {
                 qWarning() << tr("Cannot set custom printer page size");
             }
@@ -582,7 +581,7 @@ void VPrintLayout::SetPrinterPageSize(QPrinter *printer)
     }
     else
     {
-        if (not printer->setPageSize(QPageSize(m_tiledPDFPaperSize, QPageSize::Millimeter)))
+        if (not printer->setPageSize(ResolvePageSize(m_tiledPDFPaperSize, QPageSize::Millimeter)))
         {
             qWarning() << tr("Cannot set printer tiled page size");
         }
@@ -779,4 +778,54 @@ auto VPrintLayout::PrinterScaleDiff(QPrinter *printer) -> QPair<qreal, qreal>
     const double yscale = pageRect.height() / printerPageRect.height();
 
     return qMakePair(xscale, yscale);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// Helper: try to resolve a QSizeF to a named QPageSize (within 1 mm tolerance)
+auto VPrintLayout::ResolvePageSize(const QSizeF &size, QPageSize::Unit units) -> QPageSize
+{
+    // Qt already does this internally, but on macOS the tolerance is too tight.
+    // We do it explicitly with a 1 mm fuzz.
+    constexpr qreal kToleranceMm = 1.0;
+
+    if (const QPageSize candidate(size, units, QString(), QPageSize::FuzzyOrientationMatch); candidate.isValid())
+    {
+        // Double-check: make sure the resolved size is actually close enough.
+        const QSizeF resolvedMm = candidate.size(units);
+        const qreal dw = qAbs(resolvedMm.width() - size.width());
+        const qreal dh = qAbs(resolvedMm.height() - size.height());
+        if (dw <= kToleranceMm && dh <= kToleranceMm)
+        {
+            return candidate; // named page size matched
+        }
+    }
+    // Fall back to an exact custom size
+    return QPageSize(size, QPageSize::Millimeter);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPrintLayout::SetPrinterMarginsWithFallback(QPrinter *printer,
+                                                 const QMarginsF &requestedMargins,
+                                                 QPageLayout::Unit unit) -> bool
+{
+    SCASSERT(printer != nullptr)
+
+    // First attempt: set exactly what was requested
+    if (printer->setPageMargins(requestedMargins, unit))
+    {
+        return true;
+    }
+
+    // macOS drivers enforce hardware minimums ? clamp to whatever the driver allows
+    const QPageLayout layout = printer->pageLayout();
+    const QMarginsF minMargins = layout.minimumMargins(); // always in points internally
+
+    // Convert requested margins to the same unit as minimumMargins (which are in points)
+    // then clamp each edge
+    const QMarginsF clamped(qMax(requestedMargins.left(), minMargins.left()),
+                            qMax(requestedMargins.top(), minMargins.top()),
+                            qMax(requestedMargins.right(), minMargins.right()),
+                            qMax(requestedMargins.bottom(), minMargins.bottom()));
+
+    return printer->setPageMargins(clamped, unit);
 }

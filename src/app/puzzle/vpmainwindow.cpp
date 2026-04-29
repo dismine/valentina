@@ -203,9 +203,9 @@ void SetPrinterSheetPageSettings(const QSharedPointer<QPrinter> &printer, const 
     qreal const width = FromPixel(imageRect.width() * xScale + margins.left() + margins.right(), Unit::Mm);
     qreal const height = FromPixel(imageRect.height() * yScale + margins.top() + margins.bottom(), Unit::Mm);
 
-    if (QSizeF const pageSize =
-            (sheetOrientation == QPageLayout::Portrait ? QSizeF(width, height) : QSizeF(height, width));
-        not printer->setPageSize(QPageSize(pageSize, QPageSize::Millimeter)))
+    if (QSizeF const pageSize = (sheetOrientation == QPageLayout::Portrait ? QSizeF(width, height)
+                                                                           : QSizeF(height, width));
+        not printer->setPageSize(VPrintLayout::ResolvePageSize(pageSize, QPageSize::Millimeter)))
     {
         qWarning() << QObject::tr("Cannot set printer page size");
     }
@@ -213,8 +213,10 @@ void SetPrinterSheetPageSettings(const QSharedPointer<QPrinter> &printer, const 
     printer->setPageOrientation(sheetOrientation);
     printer->setFullPage(sheet->IgnoreMargins());
 
-    if (not sheet->IgnoreMargins() &&
-        not printer->setPageMargins(UnitConvertor(margins, Unit::Px, Unit::Mm), QPageLayout::Millimeter))
+    if (not sheet->IgnoreMargins()
+        && not VPrintLayout::SetPrinterMarginsWithFallback(printer.data(),
+                                                           UnitConvertor(margins, Unit::Px, Unit::Mm),
+                                                           QPageLayout::Millimeter))
     {
         qWarning() << QObject::tr("Cannot set printer margins");
     }
@@ -253,7 +255,7 @@ void SetPrinterTiledPageSettings(const QSharedPointer<QPrinter> &printer, const 
         }
     }
 
-    if (not printer->setPageSize(QPageSize(pageSize, QPageSize::Millimeter)))
+    if (not printer->setPageSize(VPrintLayout::ResolvePageSize(pageSize, QPageSize::Millimeter)))
     {
         qWarning() << QObject::tr("Cannot set printer page size");
     }
@@ -261,10 +263,13 @@ void SetPrinterTiledPageSettings(const QSharedPointer<QPrinter> &printer, const 
     printer->setPageOrientation(orientation);
     printer->setFullPage(layout->LayoutSettings().IgnoreTilesMargins());
 
-    if (not layout->LayoutSettings().IgnoreTilesMargins() &&
-        not printer->setPageMargins(layout->LayoutSettings().GetTilesMargins(Unit::Mm), QPageLayout::Millimeter))
+    if (not layout->LayoutSettings().IgnoreTilesMargins())
     {
-        qWarning() << QObject::tr("Cannot set printer margins");
+        if (const QMarginsF margins = layout->LayoutSettings().GetTilesMargins(Unit::Mm);
+            not VPrintLayout::SetPrinterMarginsWithFallback(printer.data(), margins, QPageLayout::Millimeter))
+        {
+            qWarning() << QObject::tr("Cannot set printer margins");
+        }
     }
 }
 
@@ -3223,13 +3228,12 @@ auto VPMainWindow::PrintLayoutSheetPage(QPrinter *printer, QPainter &painter, co
     printer->setPageOrientation(sheet->GetSheetOrientation());
     printer->setFullPage(sheet->IgnoreMargins());
 
-    if (not sheet->IgnoreMargins())
+    if (not sheet->IgnoreMargins()
+        && not VPrintLayout::SetPrinterMarginsWithFallback(printer,
+                                                           UnitConvertor(sheet->GetSheetMargins(), Unit::Px, Unit::Mm),
+                                                           QPageLayout::Millimeter))
     {
-        if (QMarginsF const margins = sheet->GetSheetMargins();
-            not printer->setPageMargins(UnitConvertor(margins, Unit::Px, Unit::Mm), QPageLayout::Millimeter))
-        {
-            qWarning() << QObject::tr("Cannot set printer margins");
-        }
+        qWarning() << QObject::tr("Cannot set printer margins");
     }
 
     // Only advance to a new page if this isn't the very first page —

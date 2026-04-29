@@ -132,6 +132,10 @@ public:
     static auto ContinueIfLayoutStale(QWidget *parent) -> int;
     static auto SceneTargetRect(QPrinter *printer, const QRectF &source) -> QRectF;
     static auto PrinterScaleDiff(QPrinter *printer) -> QPair<qreal, qreal>;
+    static auto ResolvePageSize(const QSizeF &size, QPageSize::Unit units) -> QPageSize;
+    static auto SetPrinterMarginsWithFallback(QPrinter *printer,
+                                              const QMarginsF &requestedMargins,
+                                              QPageLayout::Unit unit) -> bool;
 
 private slots:
     void PrintPages(QPrinter *printer);
