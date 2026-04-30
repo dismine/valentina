@@ -118,6 +118,7 @@ const QString AttrYScale = QStringLiteral("yScale");                            
 const QString AttrIgnoreMargins = QStringLiteral("ignoreMargins");                             // NOLINT(cert-err58-cpp)
 const QString AttrShowPreview = QStringLiteral("showPreview");                                 // NOLINT(cert-err58-cpp)
 const QString AttrPrintScheme = QStringLiteral("printScheme");                                 // NOLINT(cert-err58-cpp)
+const QString AttrPrintTextAsPaths = QStringLiteral("printTextAsPaths");                       // NOLINT(cert-err58-cpp)
 const QString AttrTileNumber = QStringLiteral("tileNumber");                                   // NOLINT(cert-err58-cpp)
 const QString AttrZValue = QStringLiteral("zValue");                                           // NOLINT(cert-err58-cpp)
 const QString AttrX = QStringLiteral("x");                                                     // NOLINT(cert-err58-cpp)

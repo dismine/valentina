@@ -394,6 +394,18 @@ void VPLayoutSettings::SetPrintTilesScheme(bool newPrintTilesScheme)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VPLayoutSettings::GetPrintTextAsPaths() const -> bool
+{
+    return m_printTextAsPaths;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayoutSettings::SetPrintTextAsPaths(bool newPrintTextAsPaths)
+{
+    m_printTextAsPaths = newPrintTextAsPaths;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VPLayoutSettings::GetShowTileNumber() const -> bool
 {
     return m_showTileNumbers;

@@ -364,6 +364,7 @@ private:
     {
         VPSheetPtr sheet{};
         bool tilesScheme{false};
+        bool textAsPaths{false};
         int tileRow{-1};
         int tileCol{-1};
     };

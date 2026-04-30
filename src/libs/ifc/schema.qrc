@@ -122,6 +122,7 @@
         <file>schema/layout/v0.1.9.xsd</file>
         <file>schema/layout/v0.2.0.xsd</file>
         <file>schema/layout/v0.2.1.xsd</file>
+        <file>schema/layout/v0.2.2.xsd</file>
         <file>schema/known_measurements/v1.0.0.xsd</file>
     </qresource>
 </RCC>

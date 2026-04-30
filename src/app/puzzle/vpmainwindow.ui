@@ -281,7 +281,7 @@
               <x>0</x>
               <y>0</y>
               <width>385</width>
-              <height>894</height>
+              <height>886</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_23">
@@ -815,7 +815,7 @@
               <x>0</x>
               <y>0</y>
               <width>385</width>
-              <height>829</height>
+              <height>827</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_12">
@@ -1650,6 +1650,13 @@
                  </widget>
                 </item>
                 <item>
+                 <widget class="QCheckBox" name="checkBoxPrintTextAsPaths">
+                  <property name="text">
+                   <string>Print text as paths</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
                  <widget class="QCheckBox" name="checkBoxShowTileNumber">
                   <property name="text">
                    <string>Show tile number</string>
@@ -1722,7 +1729,7 @@
               <x>0</x>
               <y>0</y>
               <width>385</width>
-              <height>710</height>
+              <height>703</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_27">
@@ -2549,8 +2556,8 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupTileOrientation"/>
   <buttongroup name="buttonGroupSheetOrientation"/>
   <buttongroup name="buttonGroupRotationDirection"/>
+  <buttongroup name="buttonGroupTileOrientation"/>
  </buttongroups>
 </ui>

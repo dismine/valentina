@@ -240,6 +240,9 @@ void VPLayoutFileWriter::WriteTiles(const VPLayoutPtr &layout)
     SetAttributeOrRemoveIf<bool>(ML::AttrPrintScheme,
                                  layout->LayoutSettings().GetPrintTilesScheme(),
                                  [](bool print) noexcept -> bool { return not print; });
+    SetAttributeOrRemoveIf<bool>(ML::AttrPrintTextAsPaths,
+                                 layout->LayoutSettings().GetPrintTextAsPaths(),
+                                 [](bool print) noexcept -> bool { return not print; });
     SetAttributeOrRemoveIf<bool>(ML::AttrTileNumber,
                                  layout->LayoutSettings().GetShowTileNumber(),
                                  [](bool show) noexcept -> bool { return not show; });

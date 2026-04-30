@@ -319,6 +319,9 @@ public:
     auto GetPrintTilesScheme() const -> bool;
     void SetPrintTilesScheme(bool newPrintTilesScheme);
 
+    auto GetPrintTextAsPaths() const -> bool;
+    void SetPrintTextAsPaths(bool newPrintTextAsPaths);
+
     auto GetShowTileNumber() const -> bool;
     void SetShowTileNumber(bool newTileNumbers);
 
@@ -385,6 +388,7 @@ private:
     QString m_watermarkPath{};
 
     bool m_printTilesScheme{false};
+    bool m_printTextAsPaths{false};
 
     bool m_showTileNumbers{false};
 

@@ -1285,6 +1285,17 @@ void VPMainWindow::InitPropertyTabTiles()
                     LayoutWasSaved(false);
                 }
             });
+    connect(ui->checkBoxPrintTextAsPaths,
+            &QCheckBox::toggled,
+            this,
+            [this](bool checked)
+            {
+                if (not m_layout.isNull())
+                {
+                    m_layout->LayoutSettings().SetPrintTextAsPaths(checked);
+                    LayoutWasSaved(false);
+                }
+            });
 
     connect(ui->checkBoxShowTileNumber, &QCheckBox::toggled, this,
             [this](bool checked)
@@ -1672,6 +1683,7 @@ void VPMainWindow::SetPropertyTabTilesData()
         SetCheckBoxValue(ui->checkBoxTilesShowTiles, m_layout->LayoutSettings().GetShowTiles());
         SetCheckBoxValue(ui->checkBoxTilesShowWatermark, m_layout->LayoutSettings().GetShowWatermark());
         SetCheckBoxValue(ui->checkBoxPrintTilesScheme, m_layout->LayoutSettings().GetPrintTilesScheme());
+        SetCheckBoxValue(ui->checkBoxPrintTextAsPaths, m_layout->LayoutSettings().GetPrintTextAsPaths());
         SetCheckBoxValue(ui->checkBoxShowTileNumber, m_layout->LayoutSettings().GetShowTileNumber());
     }
     else
@@ -3315,16 +3327,18 @@ auto VPMainWindow::PrepareLayoutTilePages(const QList<VPSheetPtr> &sheets) -> QV
 
     for (const auto &sheet : sheets)
     {
+        const bool textAsPaths = m_layout->LayoutSettings().GetPrintTextAsPaths();
+
         if (m_layout->LayoutSettings().GetPrintTilesScheme())
         {
-            pages.append({.sheet = sheet, .tilesScheme = true});
+            pages.append({.sheet = sheet, .tilesScheme = true, .textAsPaths = textAsPaths});
         }
 
         for (int row = 0; row < m_layout->TileFactory()->RowNb(sheet); row++) // for each row of the tiling grid
         {
             for (int col = 0; col < m_layout->TileFactory()->ColNb(sheet); col++) // for each column of tiling grid
             {
-                pages.append({.sheet = sheet, .tileRow = row, .tileCol = col});
+                pages.append({.sheet = sheet, .textAsPaths = textAsPaths, .tileRow = row, .tileCol = col});
             }
         }
     }
@@ -3339,7 +3353,8 @@ auto VPMainWindow::PrintLayoutTiledSheetPage(QPrinter *printer, QPainter &painte
     page.sheet->SceneData()->PrepareForExport(LayoutExportFormats::PDFTiled);
 
     const VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
-    page.sheet->SceneData()->SetTextAsPaths(settings->GetSingleLineFonts() || settings->GetSingleStrokeOutlineFont());
+    page.sheet->SceneData()->SetTextAsPaths(page.textAsPaths || settings->GetSingleLineFonts()
+                                            || settings->GetSingleStrokeOutlineFont());
 
     auto clean = qScopeGuard(
         [page]() -> void

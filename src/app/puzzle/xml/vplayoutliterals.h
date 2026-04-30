@@ -117,6 +117,7 @@ extern const QString AttrYScale;
 extern const QString AttrIgnoreMargins;
 extern const QString AttrShowPreview;
 extern const QString AttrPrintScheme;
+extern const QString AttrPrintTextAsPaths;
 extern const QString AttrTileNumber;
 extern const QString AttrZValue;
 extern const QString AttrX;
