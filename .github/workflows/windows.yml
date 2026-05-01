@@ -185,6 +185,7 @@ jobs:
           certum-username: ${{ secrets.CERTUM_USERNAME }}
           certum-otp-uri: ${{ secrets.CERTUM_OTP_URI }}
           certum-key-id: ${{ secrets.CERTUM_KEY_ID }}
+          simplysign-url: ${{ env.SIMPLYSIGN_URL }}
 
       - name: Add SignTool to PATH
         if: ${{ matrix.qt.sign == true }}
@@ -389,6 +390,7 @@ jobs:
           certum-username: ${{ secrets.CERTUM_USERNAME }}
           certum-otp-uri: ${{ secrets.CERTUM_OTP_URI }}
           certum-key-id: ${{ secrets.CERTUM_KEY_ID }}
+          simplysign-url: ${{ env.SIMPLYSIGN_URL }}
 
       - name: Add SignTool to PATH
         if: ${{ matrix.qt.sign == true }}
