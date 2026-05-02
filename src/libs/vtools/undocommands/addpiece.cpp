@@ -72,7 +72,7 @@ void AddPiece::undo()
     }
 
     QDomElement const domElement = Doc()->FindElementById(ElementId(), VAbstractPattern::TagDetail);
-    if (domElement.isElement())
+    if (!domElement.isElement())
     {
         qCDebug(vUndo, "Can't get node by id = %u.", ElementId());
         return;
