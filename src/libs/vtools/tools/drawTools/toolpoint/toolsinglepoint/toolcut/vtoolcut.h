@@ -206,6 +206,8 @@ inline void VToolCut::FixSubCurveNames(VToolCutInitData &initData,
 {
     bool fixName1 = false;
     bool fixName2 = false;
+    bool saveName1 = false;
+    bool saveName2 = false;
     if (initData.name1.isEmpty())
     {
         if (!baseCurve->IsDerivative())
@@ -220,6 +222,8 @@ inline void VToolCut::FixSubCurveNames(VToolCutInitData &initData,
                                                      initData.name);
             fixName1 = true;
         }
+
+        saveName1 = true;
     }
 
     if (initData.name2.isEmpty())
@@ -236,6 +240,8 @@ inline void VToolCut::FixSubCurveNames(VToolCutInitData &initData,
                                                      initData.name);
             fixName2 = true;
         }
+
+        saveName2 = true;
     }
 
     if (fixName1 || fixName2)
@@ -246,7 +252,10 @@ inline void VToolCut::FixSubCurveNames(VToolCutInitData &initData,
                                     fixName1 ? initData.name1 : QString(),
                                     fixName2 ? initData.name2 : QString(),
                                     initData.doc));
+    }
 
+    if (saveName1 || saveName2)
+    {
         QDomElement domElement = initData.doc->FindElementById(initData.id);
         if (!domElement.isElement())
         {
@@ -254,12 +263,12 @@ inline void VToolCut::FixSubCurveNames(VToolCutInitData &initData,
             return;
         }
 
-        if (fixName1)
+        if (saveName1)
         {
             initData.doc->SetAttribute(domElement, AttrCurveName1, initData.name1);
         }
 
-        if (fixName2)
+        if (saveName2)
         {
             initData.doc->SetAttribute(domElement, AttrCurveName2, initData.name2);
         }
