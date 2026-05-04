@@ -605,21 +605,25 @@ auto VEllipticalArc::GetPoints() const -> QVector<QPointF>
     t.rotate(-d->rotationAngle);
     t.translate(-center.x(), -center.y());
 
-    std::transform(points.begin(), points.end(), points.begin(), [&t](const QPointF &point) { return t.map(point); });
+    std::transform(points.begin(),
+                   points.end(),
+                   points.begin(),
+                   [&t](const QPointF &point) -> QPointF { return t.map(point); });
 
-    return IsFlipped() ? Reverse(points) : points;
+    // Check for flipping not needed, because m_transform already includes it
+    return points;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VEllipticalArc::GetStartAngle() const -> qreal
 {
-    return QLineF(GetCenter().toQPointF(), GetP1()).angle() - d->rotationAngle;
+    return QLineF(GetCenter().toQPointF(), GetP1()).angle() + (IsFlipped() ? d->rotationAngle : -d->rotationAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VEllipticalArc::GetEndAngle() const -> qreal
 {
-    return QLineF(GetCenter().toQPointF(), GetP2()).angle() - d->rotationAngle;
+    return QLineF(GetCenter().toQPointF(), GetP2()).angle() + (IsFlipped() ? d->rotationAngle : -d->rotationAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -636,7 +640,7 @@ auto VEllipticalArc::ToSplinePath() const -> VSplinePath
     // 2. Rotation of ellipse (Qt uses degrees CCW)
     QTransform ellipseTf;
     ellipseTf.translate(center.x(), center.y());
-    ellipseTf.rotate(-d->rotationAngle);     // <-- Qt CCW rotation
+    ellipseTf.rotate(IsFlipped() ? d->rotationAngle : -d->rotationAngle); // <-- Qt CCW rotation
     ellipseTf.scale(d->radius1, d->radius2); // <-- Scale unit circle to ellipse
 
     // 3. Angle logic
@@ -657,17 +661,10 @@ auto VEllipticalArc::ToSplinePath() const -> VSplinePath
         return qRadiansToDegrees(paramRad);
     };
 
-    qreal startDeg = ToParametric(GetStartAngle());
+    qreal const startDeg = ToParametric(GetStartAngle());
     qreal const endDeg = ToParametric(GetEndAngle());
     qreal const sweepDeg = AngleArc(startDeg, endDeg); // always signed
-    qreal direction = 1.0;
-
-    // If flipped, reverse parametrization
-    if (IsFlipped())
-    {
-        startDeg = endDeg;
-        direction = -1.0;
-    }
+    qreal const direction = IsFlipped() ? -1.0 : 1.0;
 
     // 4. Split arc into chunks
     QVector<qreal> segments;
