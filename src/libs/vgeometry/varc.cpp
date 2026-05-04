@@ -292,17 +292,7 @@ auto VArc::ToSplinePath() const -> VSplinePath
         return VSplinePath();
     }
 
-    QPointF pStart = GetP1();
-    qreal direction = 1.0;
-
-    if (IsFlipped())
-    {
-        pStart = GetP2();
-        direction = -1.0;
-    }
-
     QVector<qreal> sectionAngle;
-
     {
         qreal angle = AngleArc();
 
@@ -326,12 +316,14 @@ auto VArc::ToSplinePath() const -> VSplinePath
             sectionAngle.append(angleInterpolation);
         }
 
-        const qreal tail = angle - sections * angleInterpolation;
-        if (tail > 0)
+        if (const qreal tail = angle - sections * angleInterpolation; tail > 0)
         {
             sectionAngle.append(tail);
         }
     }
+
+    QPointF pStart = GetP1();
+    const qreal direction = IsFlipped() ? -1.0 : 1.0;
 
     QVector<VSpline> allSegments;
     allSegments.reserve(sectionAngle.size());

@@ -424,6 +424,25 @@ void TST_VArc::TestFlip_data()
         << center << radius << QLineF(center, p1).angle() << QLineF(center, p2).angle() << axis << "a2";
     QTest::newRow("Diagonal axis, negative radius")
         << center << -radius << QLineF(center, p1).angle() << QLineF(center, p2).angle() << axis << "a2";
+
+    // Arc crossing the axis
+    axis = QLineF(QPointF(4, 5), QPointF(16, 5)); // horizontal through center
+    QTest::newRow("Arc crosses axis, positive radius") << center << radius << 45.0 << 315.0 << axis << "a2";
+    QTest::newRow("Arc crosses axis, negative radius") << center << -radius << 45.0 << 315.0 << axis << "a2";
+
+    // Full circle
+    QTest::newRow("Full circle, positive radius")
+        << center << radius << 0.0 << 360.0 << QLineF(QPointF(4, 6), QPointF(12, 6)) << "a2";
+    QTest::newRow("Full circle, negative radius")
+        << center << -radius << 0.0 << 360.0 << QLineF(QPointF(4, 6), QPointF(12, 6)) << "a2";
+
+    // Very small arc
+    QTest::newRow("Small arc 1 degree, positive radius")
+        << center << radius << 0.0 << 1.0 << QLineF(QPointF(4, 6), QPointF(12, 6)) << "a2";
+
+    // Arc on the axis itself (start point lies on axis)
+    axis = QLineF(QPointF(10, 0), QPointF(10, 10)); // vertical through center
+    QTest::newRow("Start point on axis, positive radius") << center << radius << 270.0 << 180.0 << axis << "a2";
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -437,17 +456,44 @@ void TST_VArc::TestFlip()
     QFETCH(QString, prefix);
 
     VArc const originArc(VPointF(center), radius, startAngle, endAngle);
-    const VArc res = originArc.Flip(axis, prefix);
+    const VArc flipped = originArc.Flip(axis, prefix);
 
-    // cppcheck-suppress unreadVariable
+    // Name contains prefix
     const QString errorMsg = u"The name doesn't contain the prefix '%1'."_s.arg(prefix);
-    QVERIFY2(res.name().endsWith(prefix), qUtf8Printable(errorMsg));
+    QVERIFY2(flipped.name().endsWith(prefix), qUtf8Printable(errorMsg));
 
-    QVERIFY2(res.IsFlipped() == (radius > 0), qUtf8Printable("The arc is not flipped"));
+    // IsFlipped is toggled
+    QVERIFY2(flipped.IsFlipped() == (radius > 0), qUtf8Printable("The arc is not flipped"));
 
-    QCOMPARE(originArc.GetLength() * -1, res.GetLength());
-    QCOMPARE(originArc.GetRadius(), res.GetRadius());
-    QCOMPARE(originArc.AngleArc(), res.AngleArc());
+    // Length is negated
+    QCOMPARE(originArc.GetLength() * -1, flipped.GetLength());
+
+    // Radius and sweep angle are preserved
+    QCOMPARE(originArc.GetRadius(), flipped.GetRadius());
+    QCOMPARE(originArc.AngleArc(), flipped.AngleArc());
+
+    // Geometric correctness: center, p1, p2 are mirrored onto the axis
+    const QPointF expectedCenter = VPointF::FlipPF(axis, center);
+    const QPointF expectedP1 = VPointF::FlipPF(axis, originArc.GetP1());
+    const QPointF expectedP2 = VPointF::FlipPF(axis, originArc.GetP2());
+
+    const auto flippedCenter = static_cast<QPointF>(flipped.GetCenter());
+    QVERIFY2(VFuzzyComparePoints(flippedCenter, expectedCenter), qUtf8Printable(u"Center mismatch after flip"_s));
+    QVERIFY2(VFuzzyComparePoints(flipped.GetP1(), expectedP1), qUtf8Printable(u"P1 mismatch after flip"_s));
+    QVERIFY2(VFuzzyComparePoints(flipped.GetP2(), expectedP2), qUtf8Printable(u"P2 mismatch after flip"_s));
+
+    // Double flip restores original arc
+    const VArc doubleFlipped = flipped.Flip(axis, prefix);
+    QVERIFY2(VFuzzyComparePoints(static_cast<QPointF>(doubleFlipped.GetCenter()), center),
+             qUtf8Printable(u"Center mismatch after double flip"_s));
+    QVERIFY2(VFuzzyComparePoints(doubleFlipped.GetP1(), originArc.GetP1()),
+             qUtf8Printable(u"P1 mismatch after double flip"_s));
+    QVERIFY2(VFuzzyComparePoints(doubleFlipped.GetP2(), originArc.GetP2()),
+             qUtf8Printable(u"P2 mismatch after double flip"_s));
+    QCOMPARE(doubleFlipped.GetLength(), originArc.GetLength());
+    QCOMPARE(doubleFlipped.AngleArc(), originArc.AngleArc());
+    QVERIFY2(doubleFlipped.IsFlipped() == originArc.IsFlipped(),
+             qUtf8Printable(u"IsFlipped mismatch after double flip"_s));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
