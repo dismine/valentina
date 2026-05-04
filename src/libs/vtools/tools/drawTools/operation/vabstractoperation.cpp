@@ -724,6 +724,19 @@ void VAbstractOperation::AddToFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractOperation::RefreshDataInFile()
+{
+    // We no longer need to handle suffix and names here. The code can be removed.
+    Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
+    QDomElement domElement = doc->FindElementById(m_id, getTagName());
+    if (domElement.hasAttribute(AttrSuffix))
+    {
+        domElement.removeAttribute(AttrSuffix);
+        SaveSourceDestination(domElement, m_source, m_destination);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractOperation::ChangeLabelVisibility(quint32 id, bool visible)
 {
     if (!operatedObjects.contains(id))

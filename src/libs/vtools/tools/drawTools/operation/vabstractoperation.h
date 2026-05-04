@@ -137,6 +137,7 @@ protected:
     explicit VAbstractOperation(const VAbstractOperationInitData &initData, QGraphicsItem *parent = nullptr);
 
     void AddToFile() override;
+    void RefreshDataInFile() override;
     void ChangeLabelVisibility(quint32 id, bool visible) override;
     void ApplyToolOptions(const QDomElement &oldDomElement, const QDomElement &newDomElement) override;
     void PerformDelete() override;

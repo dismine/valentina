@@ -576,6 +576,8 @@ void VToolSinglePoint::FixSubCurveNames(SegmentDetails &details,
 {
     bool fixName1 = false;
     bool fixName2 = false;
+    bool saveName1 = false;
+    bool saveName2 = false;
     if (details.name1.isEmpty())
     {
         if (!baseCurve->IsDerivative())
@@ -590,6 +592,8 @@ void VToolSinglePoint::FixSubCurveNames(SegmentDetails &details,
                                                     details.p.name());
             fixName1 = true;
         }
+
+        saveName1 = true;
     }
 
     if (details.name2.isEmpty())
@@ -606,6 +610,8 @@ void VToolSinglePoint::FixSubCurveNames(SegmentDetails &details,
                                                     details.p.name());
             fixName2 = true;
         }
+
+        saveName2 = true;
     }
 
     if (fixName1 || fixName2)
@@ -616,7 +622,10 @@ void VToolSinglePoint::FixSubCurveNames(SegmentDetails &details,
                                     fixName1 ? details.name1 : QString(),
                                     fixName2 ? details.name2 : QString(),
                                     details.doc));
+    }
 
+    if (saveName1 || saveName2)
+    {
         QDomElement domElement = details.doc->FindElementById(details.id);
         if (!domElement.isElement())
         {
@@ -624,12 +633,12 @@ void VToolSinglePoint::FixSubCurveNames(SegmentDetails &details,
             return;
         }
 
-        if (fixName1)
+        if (saveName1)
         {
             details.doc->SetAttribute(domElement, details.name1AttrName, details.name1);
         }
 
-        if (fixName2)
+        if (saveName2)
         {
             details.doc->SetAttribute(domElement, details.name2AttrName, details.name2);
         }
