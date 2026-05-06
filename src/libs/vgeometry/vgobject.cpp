@@ -569,13 +569,13 @@ auto VGObject::FlippingMatrix(const QLineF &axis) -> QTransform
 
     m.reset();
     m.translate(p2.x(), p2.y());
-    m.scale(m.m11(), m.m22() * -1);
+    m.scale(1.0, -1.0);
     m.translate(-p2.x(), -p2.y());
     matrix *= m;
 
     m.reset();
     m.translate(p2.x(), p2.y());
-    m.rotate(-(360 - angle));
+    m.rotate(angle);
     m.translate(-p2.x(), -p2.y());
     matrix *= m;
 
