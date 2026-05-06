@@ -430,12 +430,7 @@ auto VEllipticalArc::Rotate(QPointF originPoint, qreal degrees, const QString &n
 
     VPointF center = VAbstractArc::GetCenter();
     center.setName("X"_L1);
-    VEllipticalArc elArc(center,
-                         d->radius1,
-                         d->radius2,
-                         VAbstractArc::GetStartAngle(),
-                         VAbstractArc::GetEndAngle(),
-                         d->rotationAngle);
+    VEllipticalArc elArc(center, d->radius1, d->radius2, GetStartAngle(), GetEndAngle(), d->rotationAngle);
     if (!name.isEmpty())
     {
         elArc.setName(elArc.GetTypeHead() + name);
@@ -454,12 +449,7 @@ auto VEllipticalArc::Flip(const QLineF &axis, const QString &name) const -> VEll
 {
     VPointF center = VAbstractArc::GetCenter();
     center.setName("X"_L1);
-    VEllipticalArc elArc(center,
-                         d->radius1,
-                         d->radius2,
-                         VAbstractArc::GetStartAngle(),
-                         VAbstractArc::GetEndAngle(),
-                         d->rotationAngle);
+    VEllipticalArc elArc(center, d->radius1, d->radius2, GetStartAngle(), GetEndAngle(), d->rotationAngle);
     if (!name.isEmpty())
     {
         elArc.setName(elArc.GetTypeHead() + name);
@@ -485,8 +475,7 @@ auto VEllipticalArc::Move(qreal length, qreal angle, const QString &name) const 
     QTransform t = d->m_transform;
     t.translate(position.x(), position.y());
 
-    VEllipticalArc elArc(oldCenter, d->radius1, d->radius2, VAbstractArc::GetStartAngle(), VAbstractArc::GetEndAngle(),
-                         d->rotationAngle);
+    VEllipticalArc elArc(oldCenter, d->radius1, d->radius2, GetStartAngle(), GetEndAngle(), d->rotationAngle);
     if (!name.isEmpty())
     {
         elArc.setName(elArc.GetTypeHead() + name);
@@ -527,7 +516,7 @@ auto VEllipticalArc::GetLength() const -> qreal
  */
 auto VEllipticalArc::GetP1() const -> QPointF
 {
-    return GetTransform().map(GetP(VAbstractArc::GetStartAngle()));
+    return GetTransform().map(GetP(GetStartAngle()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -537,7 +526,7 @@ auto VEllipticalArc::GetP1() const -> QPointF
  */
 auto VEllipticalArc::GetP2() const -> QPointF
 {
-    return GetTransform().map(GetP(VAbstractArc::GetEndAngle()));
+    return GetTransform().map(GetP(GetEndAngle()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -612,18 +601,6 @@ auto VEllipticalArc::GetPoints() const -> QVector<QPointF>
 
     // Check for flipping not needed, because m_transform already includes it
     return points;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VEllipticalArc::GetStartAngle() const -> qreal
-{
-    return QLineF(GetCenter().toQPointF(), GetP1()).angle() + (IsFlipped() ? d->rotationAngle : -d->rotationAngle);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VEllipticalArc::GetEndAngle() const -> qreal
-{
-    return QLineF(GetCenter().toQPointF(), GetP2()).angle() + (IsFlipped() ? d->rotationAngle : -d->rotationAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

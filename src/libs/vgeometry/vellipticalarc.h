@@ -97,8 +97,6 @@ public:
 
     auto GetCenter() const -> VPointF override;
     auto GetPoints() const -> QVector<QPointF> override;
-    auto GetStartAngle() const -> qreal override;
-    auto GetEndAngle() const -> qreal override;
 
     auto ToSplinePath() const -> VSplinePath override;
 
