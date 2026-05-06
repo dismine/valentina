@@ -314,6 +314,7 @@ void VPattern::Clear()
 
     m_garbageCollected = false;
     m_garbageCollectBackupFilePath.clear();
+    history.clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -326,16 +327,9 @@ void VPattern::Clear()
  */
 void VPattern::setCurrentData()
 {
-    const int countPP = CountPatternBlockTags();
-    // don't need upadate data if we have only one pattern piece
-    if (VAbstractValApplication::VApp()->GetDrawMode() != Draw::Calculation || countPP <= 1)
-    {
-        return;
-    }
-
     qCDebug(vXML, "Setting current data");
     qCDebug(vXML, "Current PP name %s", qUtf8Printable(PatternBlockMapper()->GetActive()));
-    qCDebug(vXML, "PP count %d", countPP);
+    qCDebug(vXML, "PP count %d", CountPatternBlockTags());
 
     const QVector<VToolRecord> localHistory = GetLocalHistory();
     if (localHistory.isEmpty())

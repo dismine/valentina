@@ -477,6 +477,7 @@ void VAbstractPattern::Clear()
     m_companyName.clear();
     m_units = Unit::LAST_UNIT_DO_NOT_USE;
     modified = false;
+    m_patternBlockMapper->Clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
