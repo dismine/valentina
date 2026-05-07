@@ -78,8 +78,8 @@ enum class SegmentLabel : quint8
 };
 
 // Default label position
-constexpr qreal labelMX = ToPixel(20, Unit::Mm);
-constexpr qreal labelMY = ToPixel(25, Unit::Mm);
+constexpr qreal labelMX = ToPixel(4, Unit::Mm);
+constexpr qreal labelMY = ToPixel(6.5, Unit::Mm);
 
 auto SourceToObjects(const QVector<SourceItem> &source) -> QVector<quint32>;
 auto NodesToObjects(const QVector<VPieceNode> &nodes) -> QVector<quint32>;
