@@ -349,10 +349,14 @@ void VToolCut::ChangeSegmentLabelPosition(SegmentLabel segment, const QPointF &p
 {
     if (segment == SegmentLabel::Segment1)
     {
+        m_segment1Mx = pos.x();
+        m_segment1My = pos.y();
         m_segment1Label->SetLabelPosition(pos);
     }
     else if (segment == SegmentLabel::Segment2)
     {
+        m_segment2Mx = pos.x();
+        m_segment2My = pos.y();
         m_segment2Label->SetLabelPosition(pos);
     }
 }

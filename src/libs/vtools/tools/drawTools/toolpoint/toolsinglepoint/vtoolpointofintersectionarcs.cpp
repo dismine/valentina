@@ -860,15 +860,23 @@ void VToolPointOfIntersectionArcs::ChangeSegmentLabelPosition(SegmentLabel segme
     switch (segment)
     {
         case SegmentLabel::Segment1:
+            m_arc1Segment1Mx = pos.x();
+            m_arc1Segment1My = pos.y();
             m_arc1Segment1Label->SetLabelPosition(pos);
             break;
         case SegmentLabel::Segment2:
+            m_arc1Segment2Mx = pos.x();
+            m_arc1Segment2My = pos.y();
             m_arc1Segment2Label->SetLabelPosition(pos);
             break;
         case SegmentLabel::Segment3:
+            m_arc2Segment1Mx = pos.x();
+            m_arc2Segment1My = pos.y();
             m_arc2Segment1Label->SetLabelPosition(pos);
             break;
         case SegmentLabel::Segment4:
+            m_arc2Segment2Mx = pos.x();
+            m_arc2Segment2My = pos.y();
             m_arc2Segment2Label->SetLabelPosition(pos);
             break;
         default:

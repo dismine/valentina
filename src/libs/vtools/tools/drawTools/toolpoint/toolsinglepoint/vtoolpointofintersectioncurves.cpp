@@ -999,15 +999,23 @@ void VToolPointOfIntersectionCurves::ChangeSegmentLabelPosition(SegmentLabel seg
     switch (segment)
     {
         case SegmentLabel::Segment1:
+            m_curve1Segment1Mx = pos.x();
+            m_curve1Segment1My = pos.y();
             m_curve1Segment1Label->SetLabelPosition(pos);
             break;
         case SegmentLabel::Segment2:
+            m_curve1Segment2Mx = pos.x();
+            m_curve1Segment2My = pos.y();
             m_curve1Segment2Label->SetLabelPosition(pos);
             break;
         case SegmentLabel::Segment3:
+            m_curve2Segment1Mx = pos.x();
+            m_curve2Segment1My = pos.y();
             m_curve2Segment1Label->SetLabelPosition(pos);
             break;
         case SegmentLabel::Segment4:
+            m_curve2Segment2Mx = pos.x();
+            m_curve2Segment2My = pos.y();
             m_curve2Segment2Label->SetLabelPosition(pos);
             break;
         default:
