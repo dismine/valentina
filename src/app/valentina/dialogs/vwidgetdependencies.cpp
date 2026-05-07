@@ -383,7 +383,17 @@ void VWidgetDependencies::GoToObject(vidtype id) const
             return;
         }
 
-        emit ShowTool(rect);
+        // Ensure the view zooms out enough to show small items (e.g. single points) comfortably.
+        constexpr qreal minViewSize = 1100.0; // Adjust if need
+        if (const qreal shortSide = qMin(rect.width(), rect.height()); shortSide < minViewSize)
+        {
+            const qreal margin = (minViewSize - shortSide) / 2.0;
+            emit ShowTool(rect.adjusted(-margin, -margin, margin, margin));
+        }
+        else
+        {
+            emit ShowTool(rect);
+        }
     }
 }
 

@@ -546,6 +546,7 @@ void VMainGraphicsView::EnsureToolVisible(const QRectF &rect)
                         transform.m33());
     setTransform(transform);
     ensureVisible(rect);
+    emit ScaleChanged(transform.m11());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
