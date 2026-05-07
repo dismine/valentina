@@ -97,12 +97,10 @@ void VisToolGraduatedCurve::RefreshGeometry()
             return str;
         };
 
-        SetToolTip(tr("<b>Graduated curve</b>: offset(s) = %1; "
+        SetToolTip(tr("<b>Graduated curve</b>: offsets = %1; "
                       "<b>Mouse click</b> - selecting next width, "
                       "<b>%2</b> - negative width, "
-                      "<b>%3</b> - finish",
-                      nullptr,
-                      static_cast<int>(tmpOffsets.size()))
+                      "<b>%3</b> - finish")
                        .arg(PrepareOffsetValues(tmpOffsets), VModifierKey::Shift(), VModifierKey::EnterKey()));
     }
 }
