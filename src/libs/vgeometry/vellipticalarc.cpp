@@ -700,6 +700,7 @@ auto VEllipticalArc::DoCutArc(qreal length, VAbstractArc *arc1, VAbstractArc *ar
         newArc1.SetFlipped(IsFlipped());
         newArc1.SetAllowEmpty(true);
         newArc1.SetReversed(IsReversed());
+        newArc1.SetAllowEmpty(true);
 
         *vArc1Ptr = newArc1;
         *vArc2Ptr = *this;
@@ -728,6 +729,7 @@ auto VEllipticalArc::DoCutArc(qreal length, VAbstractArc *arc1, VAbstractArc *ar
         newArc2.SetFlipped(IsFlipped());
         newArc2.SetAllowEmpty(true);
         newArc2.SetReversed(IsReversed());
+        newArc2.SetAllowEmpty(true);
 
         *vArc2Ptr = newArc2;
 

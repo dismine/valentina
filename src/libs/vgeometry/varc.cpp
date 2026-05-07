@@ -541,6 +541,7 @@ auto VArc::DoCutArc(qreal length, VAbstractArc *arc1, VAbstractArc *arc2, const 
         newArc1.SetFlipped(IsFlipped());
         newArc1.SetAllowEmpty(true);
         newArc1.SetReversed(IsReversed());
+        newArc1.SetAllowEmpty(true);
 
         *vArc1Ptr = newArc1;
         *vArc2Ptr = *this;
@@ -565,6 +566,7 @@ auto VArc::DoCutArc(qreal length, VAbstractArc *arc1, VAbstractArc *arc2, const 
         newArc2.SetFlipped(IsFlipped());
         newArc2.SetAllowEmpty(true);
         newArc2.SetReversed(IsReversed());
+        newArc2.SetAllowEmpty(true);
 
         *vArc2Ptr = newArc2;
 
@@ -586,6 +588,7 @@ auto VArc::DoCutArc(qreal length, VAbstractArc *arc1, VAbstractArc *arc2, const 
     newArc1.SetApproximationScale(GetApproximationScale());
     newArc1.SetFlipped(IsFlipped());
     newArc1.SetReversed(IsReversed());
+    newArc1.SetAllowEmpty(true);
 
     *vArc1Ptr = newArc1;
 
@@ -601,6 +604,7 @@ auto VArc::DoCutArc(qreal length, VAbstractArc *arc1, VAbstractArc *arc2, const 
     newArc2.SetApproximationScale(GetApproximationScale());
     newArc2.SetFlipped(IsFlipped());
     newArc2.SetReversed(IsReversed());
+    newArc2.SetAllowEmpty(true);
 
     *vArc2Ptr = newArc2;
 
