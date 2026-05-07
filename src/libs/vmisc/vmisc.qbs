@@ -154,15 +154,6 @@ VLib {
     }
 
     Group {
-        name: "fpm"
-        prefix: "fpm/"
-        files: [
-            "fixed.hpp",
-            "math.hpp",
-        ]
-    }
-
-    Group {
         name: "svgfont"
         prefix: "svgfont/"
         files: [

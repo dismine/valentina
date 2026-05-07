@@ -101,13 +101,13 @@ void TST_VArc::ArcByLength_data()
     QTest::addColumn<qreal>("startAngle");
     QTest::addColumn<qreal>("endAngle");
     QTest::addColumn<qreal>("arcAngle");
-    QTest::addColumn<bool>("flipped");
+    QTest::addColumn<bool>("reversed");
     QTest::addColumn<int>("direction");
 
     QTest::newRow("Positive radius, positive length") << 100. << 1. << 316. << 315. << false << 1;
     QTest::newRow("Positive radius, negative length") << 100. << 1. << 316. << 45. << true << -1;
     QTest::newRow("Negative radius, negative length") << -100. << 1. << 316. << 45. << true << -1;
-    QTest::newRow("Negative radius, positive length") << -100. << 1. << 316. << 45. << true << -1;
+    QTest::newRow("Negative radius, positive length") << -100. << 1. << 316. << 45. << true << 1;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -117,15 +117,16 @@ void TST_VArc::ArcByLength()
     QFETCH(qreal, startAngle);
     QFETCH(qreal, endAngle);
     QFETCH(qreal, arcAngle);
-    QFETCH(bool, flipped);
+    QFETCH(bool, reversed);
     QFETCH(int, direction);
 
     const qreal length = (M_PI * qAbs(radius) / 180 * arcAngle) * direction;
     VArc const arc(length, VPointF(), radius, startAngle);
 
-    QCOMPARE(arc.GetLength(), length);
+    QCOMPARE(qAbs(arc.GetLength()), qAbs(length));
     QCOMPARE(arc.GetEndAngle(), endAngle);
-    QCOMPARE(arc.IsFlipped(), flipped);
+    QCOMPARE(arc.IsFlipped(), false);
+    QCOMPARE(arc.IsReversed(), reversed);
     QCOMPARE(arc.GetRadius(), radius);
     QCOMPARE(arc.AngleArc(), arcAngle);
 }
@@ -367,6 +368,7 @@ void TST_VArc::TestRotation()
     QCOMPARE(arcOrigin.AngleArc(), rotatedArc.AngleArc());
     QCOMPARE(arcOrigin.GetRadius(), rotatedArc.GetRadius());
     QCOMPARE(arcOrigin.IsFlipped(), rotatedArc.IsFlipped());
+    QCOMPARE(arcOrigin.IsReversed(), rotatedArc.IsReversed());
     // cppcheck-suppress unreadVariable
     const QString errorMsg = u"The name doesn't contain the prefix '%1'."_s.arg(prefix);
     QVERIFY2(rotatedArc.name().endsWith(prefix), qUtf8Printable(errorMsg));
@@ -456,17 +458,22 @@ void TST_VArc::TestFlip()
     QFETCH(QString, prefix);
 
     VArc const originArc(VPointF(center), radius, startAngle, endAngle);
+    const qreal length1 = qAbs(originArc.GetLength());
+
     const VArc flipped = originArc.Flip(axis, prefix);
+    const qreal length2 = qAbs(flipped.GetLength());
 
     // Name contains prefix
     const QString errorMsg = u"The name doesn't contain the prefix '%1'."_s.arg(prefix);
     QVERIFY2(flipped.name().endsWith(prefix), qUtf8Printable(errorMsg));
 
     // IsFlipped is toggled
-    QVERIFY2(flipped.IsFlipped() == (radius > 0), qUtf8Printable("The arc is not flipped"));
+    QCOMPARE(flipped.IsFlipped(), true);
 
-    // Length is negated
-    QCOMPARE(originArc.GetLength() * -1, flipped.GetLength());
+    QString const errorLengthMsg
+        = u"Difference between original and flipped lengthes bigger than eps = %1. l1 = %2; l2 = %3"_s;
+    QVERIFY2(qAbs(length1 - length2) <= ToPixel(1, Unit::Mm),
+             qUtf8Printable(errorLengthMsg.arg(ToPixel(1, Unit::Mm)).arg(length1).arg(length2)));
 
     // Radius and sweep angle are preserved
     QCOMPARE(originArc.GetRadius(), flipped.GetRadius());
@@ -585,6 +592,9 @@ void TST_VArc::TestCutArcByLength()
     QCOMPARE(arc1.IsFlipped(), arc.IsFlipped());
     QCOMPARE(arc2.IsFlipped(), arc.IsFlipped());
 
+    QCOMPARE(arc1.IsReversed(), arc.IsReversed());
+    QCOMPARE(arc2.IsReversed(), arc.IsReversed());
+
     QCOMPARE(arc1.GetApproximationScale(), arc.GetApproximationScale());
     QCOMPARE(arc2.GetApproximationScale(), arc.GetApproximationScale());
 
@@ -593,7 +603,11 @@ void TST_VArc::TestCutArcByLength()
 
     QVERIFY(VFuzzyComparePossibleNulls(arc1.GetEndAngle(), arc2.GetStartAngle()));
 
-    QCOMPARE(arc1.GetLength() + arc2.GetLength(), arc.GetLength());
+    const qreal lengthArc = arc.GetLength();
+    const qreal lengthArc1 = arc1.GetLength();
+    const qreal lengthArc2 = arc2.GetLength();
+
+    QCOMPARE(lengthArc1 + lengthArc2, lengthArc);
 
     qreal const segmentsLength =
         VAbstractCurve::PathLength(arc1.GetPoints()) + VAbstractCurve::PathLength(arc2.GetPoints());

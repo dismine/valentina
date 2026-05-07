@@ -59,6 +59,20 @@ private slots:
     void TestFlip();
     void EmptyArc_data();
     void EmptyArc();
+    void TestCutArc_data();
+    void TestCutArc();
+    // Edge cases
+    void TestCutArc_ZeroLength_data();
+    void TestCutArc_ZeroLength();
+    void TestCutArc_FullLength_data();
+    void TestCutArc_FullLength();
+    void TestCutArc_LengthExceedsArc_data();
+    void TestCutArc_LengthExceedsArc();
+    void TestCutArc_HalfLength_data();
+    void TestCutArc_HalfLength();
+    // Repeated cuts chain three pieces
+    void TestCutArc_RepeatedCut_Consistent_data();
+    void TestCutArc_RepeatedCut_Consistent();
 
 private:
     // cppcheck-suppress unknownMacro
