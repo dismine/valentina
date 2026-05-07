@@ -215,6 +215,18 @@ auto VAbstractArc::IsFlipped() const -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VAbstractArc::IsReversed() const -> bool
+{
+    return d->isReversed;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractArc::IsNegative() const -> bool
+{
+    return IsFlipped() != IsReversed();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VAbstractArc::AngleArc() const -> qreal
 {
     return AngleArc(GetStartAngle(), GetEndAngle());
@@ -256,7 +268,7 @@ auto VAbstractArc::CutArc(qreal length, const QString &pointName) const -> QPoin
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractArc::Offset(qreal distance, const QString &name) const -> VSplinePath
 {
-    VSplinePath splPath = ToSplinePath().Offset(IsFlipped() ? -distance : distance, name);
+    VSplinePath splPath = ToSplinePath().Offset(IsNegative() ? -distance : distance, name);
     splPath.SetColor(GetColor());
     splPath.SetPenStyle(GetPenStyle());
     splPath.SetApproximationScale(GetApproximationScale());
@@ -268,7 +280,7 @@ auto VAbstractArc::Offset(qreal distance, const QString &name) const -> VSplineP
 auto VAbstractArc::Outline(const QVector<qreal> &distances, const QString &name) const -> VSplinePath
 {
     QVector<qreal> tmpDistances = distances;
-    if (IsFlipped())
+    if (IsNegative())
     {
         for (auto &dist : tmpDistances)
         {
@@ -288,6 +300,12 @@ auto VAbstractArc::Outline(const QVector<qreal> &distances, const QString &name)
 void VAbstractArc::SetFlipped(bool value)
 {
     d->isFlipped = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractArc::SetReversed(bool value)
+{
+    d->isReversed = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -325,7 +343,7 @@ auto VAbstractArc::AngleArc(qreal startAngle, qreal endAngle) const -> qreal
 
     qreal ang = l1.angleTo(l2);
 
-    if (IsFlipped())
+    if (IsNegative())
     {
         ang = 360 - ang;
     }

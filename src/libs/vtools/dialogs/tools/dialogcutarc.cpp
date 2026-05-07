@@ -541,7 +541,7 @@ void DialogCutArc::ShowDialog(bool click)
         QPointF const p = arc->ClosestPoint(scene->getScenePos());
         qreal len = arc->GetLengthByPoint(p);
 
-        len = !arc->IsFlipped() ? qBound(0.0, len, arc->GetLength()) : qBound(arc->GetLength(), -len, 0.0);
+        len = !arc->IsNegative() ? qBound(0.0, len, arc->GetLength()) : qBound(arc->GetLength(), -len, 0.0);
         SetFormula(QString::number(FromPixel(len, *data->GetPatternUnit())));
     }
 

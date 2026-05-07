@@ -64,6 +64,9 @@ public:
 
     bool isFlipped{false}; // NOLINT(misc-non-private-member-variables-in-classes)
 
+    /** @brief reversed true for reverse arcs. */
+    bool isReversed{false}; // NOLINT(misc-non-private-member-variables-in-classes)
+
     QString formulaLength{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     bool isAllowEmpty{false}; // NOLINT(misc-non-private-member-variables-in-classes)

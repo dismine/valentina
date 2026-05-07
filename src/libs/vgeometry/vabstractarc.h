@@ -81,6 +81,9 @@ public:
     auto GetMainNameForHistory() const -> QString override;
 
     auto IsFlipped() const -> bool;
+    auto IsReversed() const -> bool;
+    auto IsNegative() const -> bool;
+
     auto AngleArc() const -> qreal;
 
     auto GetPath() const -> QPainterPath override;
@@ -95,6 +98,7 @@ public:
 
 protected:
     void SetFlipped(bool value);
+    void SetReversed(bool value);
     void SetAllowEmpty(bool value);
     auto IsAllowEmpty() const -> bool;
 

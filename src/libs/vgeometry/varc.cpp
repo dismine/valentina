@@ -73,7 +73,7 @@ VArc::VArc(const VPointF &center, qreal radius, const QString &formulaRadius, qr
     d(new VArcData(radius, formulaRadius))
 {
     VArc::CreateName();
-    SetFlipped(radius < 0);
+    SetReversed(radius < 0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -82,7 +82,7 @@ VArc::VArc(const VPointF &center, qreal radius, qreal f1, qreal f2)
     d(new VArcData(radius))
 {
     VArc::CreateName();
-    SetFlipped(radius < 0);
+    SetReversed(radius < 0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -222,7 +222,7 @@ VArc::~VArc() = default;
 auto VArc::GetLength() const -> qreal
 {
     qreal length = qAbs(d->radius) * qDegreesToRadians(AngleArc());
-    if (IsFlipped())
+    if (IsNegative())
     {
         length *= -1;
     }
@@ -270,7 +270,7 @@ auto VArc::GetPoints() const -> QVector<QPointF>
 
     if (qFuzzyIsNull(AngleArc()))
     {
-        return {IsFlipped() ? GetP2() : GetP1()};
+        return {GetP1()};
     }
 
     return ToSplinePath().GetPoints();
@@ -323,7 +323,7 @@ auto VArc::ToSplinePath() const -> VSplinePath
     }
 
     QPointF pStart = GetP1();
-    const qreal direction = IsFlipped() ? -1.0 : 1.0;
+    const qreal direction = IsNegative() ? -1.0 : 1.0;
 
     QVector<VSpline> allSegments;
     allSegments.reserve(sectionAngle.size());
@@ -482,7 +482,7 @@ auto VArc::GetTypeHead() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VArc::FindF2(qreal length)
 {
-    SetFlipped(length < 0 || d->radius < 0);
+    SetReversed(length < 0 || d->radius < 0);
 
     if (qAbs(length) >= qAbs(MaxLength()))
     {
@@ -491,9 +491,9 @@ void VArc::FindF2(qreal length)
 
     qreal arcAngle = qAbs(qRadiansToDegrees(qAbs(length) / qAbs(d->radius)));
 
-    if (IsFlipped())
+    if (IsNegative())
     {
-        arcAngle = arcAngle * -1;
+        arcAngle *= -1;
     }
 
     QLineF startAngle(0, 0, 100, 0);
@@ -540,6 +540,7 @@ auto VArc::DoCutArc(qreal length, VAbstractArc *arc1, VAbstractArc *arc2, const 
         newArc1.SetApproximationScale(GetApproximationScale());
         newArc1.SetFlipped(IsFlipped());
         newArc1.SetAllowEmpty(true);
+        newArc1.SetReversed(IsReversed());
 
         *vArc1Ptr = newArc1;
         *vArc2Ptr = *this;
@@ -563,14 +564,15 @@ auto VArc::DoCutArc(qreal length, VAbstractArc *arc1, VAbstractArc *arc2, const 
         newArc2.SetApproximationScale(GetApproximationScale());
         newArc2.SetFlipped(IsFlipped());
         newArc2.SetAllowEmpty(true);
+        newArc2.SetReversed(IsReversed());
 
         *vArc2Ptr = newArc2;
 
         return GetP2();
     }
 
-    QLineF const line = not IsFlipped() ? CutPoint(length, fullLength, pointName)
-                                        : CutPointFlipped(length, fullLength, pointName);
+    QLineF const line = not IsNegative() ? CutPoint(length, fullLength, pointName)
+                                         : CutPointFlipped(length, fullLength, pointName);
 
     VArc newArc1(GetCenter(),
                  d->radius,
@@ -583,6 +585,7 @@ auto VArc::DoCutArc(qreal length, VAbstractArc *arc1, VAbstractArc *arc2, const 
                  getMode());
     newArc1.SetApproximationScale(GetApproximationScale());
     newArc1.SetFlipped(IsFlipped());
+    newArc1.SetReversed(IsReversed());
 
     *vArc1Ptr = newArc1;
 
@@ -597,6 +600,7 @@ auto VArc::DoCutArc(qreal length, VAbstractArc *arc1, VAbstractArc *arc2, const 
                  getMode());
     newArc2.SetApproximationScale(GetApproximationScale());
     newArc2.SetFlipped(IsFlipped());
+    newArc2.SetReversed(IsReversed());
 
     *vArc2Ptr = newArc2;
 

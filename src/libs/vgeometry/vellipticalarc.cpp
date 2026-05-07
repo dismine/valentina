@@ -347,7 +347,7 @@ VEllipticalArc::VEllipticalArc(const VPointF &center, qreal radius1, qreal radiu
     d(new VEllipticalArcData(radius1, radius2, formulaRadius1, formulaRadius2, rotationAngle, formulaRotationAngle))
 {
     VEllipticalArc::CreateName();
-    SetFlipped(radius1 < 0 || radius2 < 0);
+    SetReversed(radius1 < 0 || radius2 < 0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -357,7 +357,7 @@ VEllipticalArc::VEllipticalArc(const VPointF &center, qreal radius1, qreal radiu
     d(new VEllipticalArcData(radius1, radius2, rotationAngle))
 {
     VEllipticalArc::CreateName();
-    SetFlipped(radius1 < 0 || radius2 < 0);
+    SetReversed(radius1 < 0 || radius2 < 0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -501,7 +501,7 @@ auto VEllipticalArc::GetLength() const -> qreal
 {
     qreal length = PathLength(GetPoints());
 
-    if (IsFlipped())
+    if (IsNegative())
     {
         length *= -1;
     }
@@ -641,7 +641,7 @@ auto VEllipticalArc::ToSplinePath() const -> VSplinePath
     qreal const startDeg = ToParametric(GetStartAngle());
     qreal const endDeg = ToParametric(GetEndAngle());
     qreal const sweepDeg = AngleArc(startDeg, endDeg); // always signed
-    qreal const direction = IsFlipped() ? -1.0 : 1.0;
+    qreal const direction = IsReversed() ? -1.0 : 1.0;
 
     // 4. Split arc into chunks
     QVector<qreal> segments;
@@ -893,6 +893,7 @@ auto VEllipticalArc::DoCutArc(qreal length, VAbstractArc *arc1, VAbstractArc *ar
         newArc1.SetApproximationScale(GetApproximationScale());
         newArc1.SetFlipped(IsFlipped());
         newArc1.SetAllowEmpty(true);
+        newArc1.SetReversed(IsReversed());
 
         *vArc1Ptr = newArc1;
         *vArc2Ptr = *this;
@@ -920,6 +921,7 @@ auto VEllipticalArc::DoCutArc(qreal length, VAbstractArc *arc1, VAbstractArc *ar
         newArc2.SetApproximationScale(GetApproximationScale());
         newArc2.SetFlipped(IsFlipped());
         newArc2.SetAllowEmpty(true);
+        newArc2.SetReversed(IsReversed());
 
         *vArc2Ptr = newArc2;
 
@@ -944,6 +946,8 @@ auto VEllipticalArc::DoCutArc(qreal length, VAbstractArc *arc1, VAbstractArc *ar
                            getMode());
     newArc1.SetApproximationScale(GetApproximationScale());
     newArc1.SetFlipped(IsFlipped());
+    newArc1.SetReversed(IsReversed());
+    newArc1.SetAllowEmpty(true);
 
     *vArc1Ptr = newArc1;
 
@@ -964,6 +968,8 @@ auto VEllipticalArc::DoCutArc(qreal length, VAbstractArc *arc1, VAbstractArc *ar
                            getMode());
     newArc2.SetApproximationScale(GetApproximationScale());
     newArc2.SetFlipped(IsFlipped());
+    newArc2.SetReversed(IsReversed());
+    newArc2.SetAllowEmpty(true);
 
     *vArc2Ptr = newArc2;
 
@@ -984,7 +990,7 @@ auto VEllipticalArc::MaxLength() const -> qreal
     const qreal h = qPow(qAbs(d->radius1) - qAbs(d->radius2), 2) / qPow(qAbs(d->radius1) + qAbs(d->radius2), 2);
     qreal ellipseLength = M_PI * (qAbs(d->radius1) + qAbs(d->radius2)) * (1 + 3 * h / (10 + qSqrt(4 - 3 * h)));
 
-    if (d->radius1 < 0 || d->radius2 < 0)
+    if (IsReversed())
     {
         ellipseLength *= -1;
     }
@@ -1100,7 +1106,7 @@ auto VEllipticalArc::CorrectCutLength(qreal length, qreal fullLength, const QStr
             : qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
     };
 
-    if (!IsFlipped())
+    if (!IsNegative())
     {
         if (length < 0)
         {
