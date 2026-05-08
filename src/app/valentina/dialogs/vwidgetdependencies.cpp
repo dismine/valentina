@@ -129,6 +129,7 @@ VWidgetDependencies::VWidgetDependencies(VAbstractPattern *doc, QWidget *parent)
             &QLineEdit::textChanged,
             this,
             [this](const QString &text) -> void { m_proxyModel->setFilterFixedString(text); });
+    connect(ui->treeView, &QAbstractItemView::clicked, this, &VWidgetDependencies::OnNodeClicked);
     connect(ui->treeView->selectionModel(),
             &QItemSelectionModel::currentChanged,
             this,
@@ -468,6 +469,40 @@ void VWidgetDependencies::EnableMoveButtons(const QModelIndex &current)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VWidgetDependencies::HighlightCurrentNode(const QModelIndex &current)
+{
+    if (m_doc == nullptr)
+    {
+        return;
+    }
+
+    const vidtype currentObjectId = ObjectId(current);
+    if (currentObjectId == NULL_ID)
+    {
+        return;
+    }
+
+    VPatternGraph const *graph = m_doc->PatternGraph();
+    auto currentVertex = graph->GetVertex(currentObjectId);
+    if (!currentVertex)
+    {
+        return;
+    }
+
+    switch (currentVertex->type)
+    {
+        case VNodeType::OBJECT:
+            m_activeTool = HighlightObject(currentVertex->id, currentVertex->indexPatternBlock, true);
+            break;
+        case VNodeType::TOOL:
+            m_activeTool = HighlightTool(currentVertex->id, true);
+            break;
+        default:
+            break;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VWidgetDependencies::OnNodeSelectionChanged(const QModelIndex &current, const QModelIndex &previous)
 {
     if (m_doc == nullptr)
@@ -500,29 +535,24 @@ void VWidgetDependencies::OnNodeSelectionChanged(const QModelIndex &current, con
         }
     }
 
-    const vidtype currentObjectId = ObjectId(current);
-    if (currentObjectId == NULL_ID)
+    HighlightCurrentNode(current);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VWidgetDependencies::OnNodeClicked(const QModelIndex &index)
+{
+    Q_UNUSED(index)
+
+    if (m_activeTool != NULL_ID)
     {
-        // No selection
         return;
     }
 
-    auto currentVertex = graph->GetVertex(currentObjectId);
-    if (!currentVertex)
+    // Ignore the clicked index entirely — get it from selectionModel
+    // which is guaranteed proxy space, same as currentChanged
+    if (const QModelIndex current = ui->treeView->selectionModel()->currentIndex(); current.isValid())
     {
-        return;
-    }
-
-    switch (currentVertex->type)
-    {
-        case VNodeType::OBJECT:
-            m_activeTool = HighlightObject(currentVertex->id, currentVertex->indexPatternBlock, true);
-            break;
-        case VNodeType::TOOL:
-            m_activeTool = HighlightTool(currentVertex->id, true);
-            break;
-        default:
-            break;
+        HighlightCurrentNode(current);
     }
 }
 

@@ -69,6 +69,7 @@ protected:
 
 private slots:
     void OnNodeSelectionChanged(const QModelIndex &current, const QModelIndex &previous);
+    void OnNodeClicked(const QModelIndex &index);
     void OnContextMenuRequested(const QPoint &pos);
 
     void MoveTop();
@@ -101,6 +102,8 @@ private:
     auto CanGoToObject(vidtype id) const -> bool;
 
     void EnableMoveButtons(const QModelIndex &current);
+
+    void HighlightCurrentNode(const QModelIndex &current);
 };
 
 #endif // VWIDGETDEPENDENCIES_H
