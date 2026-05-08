@@ -98,7 +98,9 @@ private:
     void ExpandAllChildren(const QModelIndex &index);
     void CollapseAllChildren(const QModelIndex &index);
     void GoToObject(vidtype id) const;
+    void DeleteTool(vidtype id) const;
 
+    auto CanDeleteObject(vidtype id) const -> bool;
     auto CanGoToObject(vidtype id) const -> bool;
 
     void EnableMoveButtons(const QModelIndex &current);

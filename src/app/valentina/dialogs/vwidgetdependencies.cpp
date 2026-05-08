@@ -35,6 +35,7 @@
 #include "../ifc/xml/vpatternblockmapper.h"
 #include "../ifc/xml/vpatterngraph.h"
 #include "../vtools/tools/vabstracttool.h"
+#include "../vtools/tools/vinteractivetool.h"
 #include "../vtools/undocommands/movetool.h"
 #include "../vwidgets/vcontrolpointspline.h"
 #include "../vwidgets/vgraphicssimpletextitem.h"
@@ -418,6 +419,72 @@ void VWidgetDependencies::GoToObject(vidtype id) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VWidgetDependencies::DeleteTool(vidtype id) const
+{
+    if (id == NULL_ID)
+    {
+        return;
+    }
+
+    SCASSERT(m_doc != nullptr)
+
+    if (auto vertex = m_doc->PatternGraph()->GetVertex(id); vertex && vertex->type != VNodeType::TOOL)
+    {
+        return;
+    }
+
+    try
+    {
+        if (auto *tool = qobject_cast<VInteractiveTool *>(VAbstractPattern::getTool(id)))
+        {
+            try
+            {
+                tool->DeleteToolWithConfirm(true);
+            }
+            catch (const VExceptionToolWasDeleted &e)
+            {
+                Q_UNUSED(e)
+                return; // Leave this method immediately!!!
+            }
+        }
+    }
+    catch (const VExceptionBadId &)
+    {
+        return;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VWidgetDependencies::CanDeleteObject(vidtype id) const -> bool
+{
+    if (id == NULL_ID)
+    {
+        return false;
+    }
+
+    SCASSERT(m_doc != nullptr)
+
+    if (auto vertex = m_doc->PatternGraph()->GetVertex(id); vertex && vertex->type != VNodeType::TOOL)
+    {
+        return false;
+    }
+
+    try
+    {
+        if (auto *tool = qobject_cast<VInteractiveTool *>(VAbstractPattern::getTool(id)))
+        {
+            return tool->IsRemovable() == RemoveStatus::Removable;
+        }
+    }
+    catch (const VExceptionBadId &)
+    {
+        return false;
+    }
+
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VWidgetDependencies::CanGoToObject(vidtype id) const -> bool
 {
     if (id == NULL_ID)
@@ -584,6 +651,8 @@ void VWidgetDependencies::OnContextMenuRequested(const QPoint &pos)
     contextMenu.addSeparator();
     QAction *actionGoToObject = contextMenu.addAction(FromTheme(VThemeIcon::SystemSearch), tr("Go to Object"));
     actionGoToObject->setEnabled(CanGoToObject(node->objectId));
+    QAction *actionDeleteObject = contextMenu.addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
+    actionDeleteObject->setEnabled(CanDeleteObject(node->objectId));
 
     // Show menu and get selected action
     QAction const *selectedAction = contextMenu.exec(ui->treeView->viewport()->mapToGlobal(pos));
@@ -603,6 +672,10 @@ void VWidgetDependencies::OnContextMenuRequested(const QPoint &pos)
     else if (selectedAction == actionGoToObject)
     {
         GoToObject(node->objectId);
+    }
+    else if (selectedAction == actionDeleteObject)
+    {
+        DeleteTool(node->objectId);
     }
 }
 
