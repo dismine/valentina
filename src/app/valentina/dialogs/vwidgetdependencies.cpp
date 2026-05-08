@@ -567,6 +567,11 @@ void VWidgetDependencies::HighlightCurrentNode(const QModelIndex &current)
         default:
             break;
     }
+
+    if (ui->toolButtonAutoGoToObject->isChecked())
+    {
+        GoToObject(m_activeTool);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
