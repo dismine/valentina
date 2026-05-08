@@ -27,6 +27,7 @@
  *************************************************************************/
 #include "vwidgetdependencies.h"
 #include "dialogmovesteps.h"
+
 #include "ui_vwidgetdependencies.h"
 
 #include "../core/vdependencytreemodel.h"
@@ -351,6 +352,35 @@ void VWidgetDependencies::GoToObject(vidtype id) const
         return;
     }
 
+    SCASSERT(m_doc != nullptr)
+
+    auto vertex = m_doc->PatternGraph()->GetVertex(id);
+    if (!vertex)
+    {
+        return;
+    }
+
+    if (vertex->type == VNodeType::OBJECT)
+    {
+        if (vertex->indexPatternBlock < 0)
+        {
+            return;
+        }
+
+        VContainer const patternData = m_doc->GetCompletePPData(
+            m_doc->PatternBlockMapper()->FindName(vertex->indexPatternBlock));
+
+        try
+        {
+            const QSharedPointer<VGObject> obj = patternData.GetGObject(vertex->id);
+            id = obj->getIdTool();
+        }
+        catch (const VExceptionBadId &)
+        {
+            return;
+        }
+    }
+
     VDataTool *tool = nullptr;
 
     try
@@ -362,39 +392,46 @@ void VWidgetDependencies::GoToObject(vidtype id) const
         return;
     }
 
-    if (auto *sceneItem = dynamic_cast<QGraphicsItem *>(tool))
+    auto *sceneItem = dynamic_cast<QGraphicsItem *>(tool);
+    if (sceneItem == nullptr)
     {
-        bool makeInvisible = false;
-        if (!sceneItem->isVisible())
-        {
-            sceneItem->setVisible(true);
-            makeInvisible = true;
-        }
-
-        const QRectF rect = ItemBoundingRect(sceneItem);
-
-        if (makeInvisible)
-        {
-            sceneItem->setVisible(false);
-        }
-
-        if (rect.isEmpty())
-        {
-            return;
-        }
-
-        // Ensure the view zooms out enough to show small items (e.g. single points) comfortably.
-        constexpr qreal minViewSize = 1100.0; // Adjust if need
-        if (const qreal shortSide = qMin(rect.width(), rect.height()); shortSide < minViewSize)
-        {
-            const qreal margin = (minViewSize - shortSide) / 2.0;
-            emit ShowTool(rect.adjusted(-margin, -margin, margin, margin));
-        }
-        else
-        {
-            emit ShowTool(rect);
-        }
+        return;
     }
+
+    const QRectF rect = ItemBoundingRect(sceneItem);
+    if (rect.isEmpty())
+    {
+        return;
+    }
+
+    // Ensure the view zooms out enough to show small items (e.g. single points) comfortably.
+    static constexpr qreal minViewSize = 1100.0; // px; Adjust if need
+    QRectF viewRect = rect;
+    if (const qreal shortSide = qMin(rect.width(), rect.height()); shortSide < minViewSize)
+    {
+        const qreal margin = (minViewSize - shortSide) / 2.0;
+        viewRect = rect.adjusted(-margin, -margin, margin, margin);
+    }
+
+    emit ShowTool(viewRect);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VWidgetDependencies::CanGoToObject(vidtype id) const -> bool
+{
+    if (id == NULL_ID)
+    {
+        return false;
+    }
+
+    SCASSERT(m_doc != nullptr)
+
+    if (auto vertex = m_doc->PatternGraph()->GetVertex(id); vertex)
+    {
+        return vertex->type != VNodeType::PIECE;
+    }
+
+    return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -516,14 +553,7 @@ void VWidgetDependencies::OnContextMenuRequested(const QPoint &pos)
     QAction const *actionCopyId = contextMenu.addAction(tr("Copy ID"));
     contextMenu.addSeparator();
     QAction *actionGoToObject = contextMenu.addAction(FromTheme(VThemeIcon::SystemSearch), tr("Go to Object"));
-
-    if (m_doc != nullptr)
-    {
-        if (auto vertex = m_doc->PatternGraph()->GetVertex(node->objectId); vertex)
-        {
-            actionGoToObject->setEnabled(vertex->type != VNodeType::PIECE);
-        }
-    }
+    actionGoToObject->setEnabled(CanGoToObject(node->objectId));
 
     // Show menu and get selected action
     QAction const *selectedAction = contextMenu.exec(ui->treeView->viewport()->mapToGlobal(pos));

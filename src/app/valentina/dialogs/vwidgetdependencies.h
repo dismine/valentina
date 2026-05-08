@@ -98,6 +98,8 @@ private:
     void CollapseAllChildren(const QModelIndex &index);
     void GoToObject(vidtype id) const;
 
+    auto CanGoToObject(vidtype id) const -> bool;
+
     void EnableMoveButtons(const QModelIndex &current);
 };
 
