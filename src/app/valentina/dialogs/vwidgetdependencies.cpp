@@ -467,7 +467,7 @@ auto VWidgetDependencies::CanDeleteObject(vidtype id) const -> bool
 
     try
     {
-        if (auto *tool = qobject_cast<VInteractiveTool *>(VAbstractPattern::getTool(id)))
+        if (const auto *tool = qobject_cast<VInteractiveTool *>(VAbstractPattern::getTool(id)))
         {
             return tool->IsRemovable() == RemoveStatus::Removable;
         }
