@@ -437,20 +437,16 @@ void VWidgetDependencies::DeleteTool(vidtype id) const
     {
         if (auto *tool = qobject_cast<VInteractiveTool *>(VAbstractPattern::getTool(id)))
         {
-            try
-            {
-                tool->DeleteToolWithConfirm(true);
-            }
-            catch (const VExceptionToolWasDeleted &e)
-            {
-                Q_UNUSED(e)
-                return; // Leave this method immediately!!!
-            }
+            tool->DeleteToolWithConfirm(true);
         }
     }
     catch (const VExceptionBadId &)
     {
         return;
+    }
+    catch (const VExceptionToolWasDeleted &)
+    {
+        return; // Leave this method immediately!!!
     }
 }
 
