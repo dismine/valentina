@@ -422,7 +422,7 @@ auto VEllipticalArc::ToSplinePath() const -> VSplinePath
         return VSplinePath();
     }
 
-    const QPointF rawCenter = static_cast<QPointF>(VAbstractArc::GetCenter());
+    const auto rawCenter = static_cast<QPointF>(VAbstractArc::GetCenter());
 
     // 2. Rotation of ellipse (Qt uses degrees CCW)
     QTransform ellipseTf = d->m_transform;
