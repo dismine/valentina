@@ -122,7 +122,6 @@ private:
 
     auto MaxLength() const -> qreal;
     auto GetP(qreal angle) const -> QPointF;
-    auto ArcPoints(QVector<QPointF> points) const -> QVector<QPointF>;
 
     auto CorrectCutLength(qreal length, qreal fullLength, const QString &pointName) const -> qreal;
 };
