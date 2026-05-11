@@ -579,6 +579,24 @@ void VToolAbstractArc::ProcessArcToolOptions(const QDomElement &oldDomElement,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolAbstractArc::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
+{
+    if (GetAcceptHoverEvents())
+    {
+        VToolAbstractCurve::hoverEnterEvent(event);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolAbstractArc::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+{
+    if (GetAcceptHoverEvents())
+    {
+        VToolAbstractCurve::hoverLeaveEvent(event);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VToolAbstractOffsetCurve::VToolAbstractOffsetCurve(VAbstractPattern *doc,
                                                    VContainer *data,
                                                    quint32 id,

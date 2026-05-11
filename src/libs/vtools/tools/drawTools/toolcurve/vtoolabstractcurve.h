@@ -346,6 +346,9 @@ protected:
                                const QDomElement &newDomElement,
                                const ToolChanges &changes);
 
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
+
 private:
     Q_DISABLE_COPY_MOVE(VToolAbstractArc) // NOLINT
 };
