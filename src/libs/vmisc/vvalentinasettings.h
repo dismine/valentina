@@ -273,6 +273,9 @@ public:
     auto IsCollectGarbage() const -> bool;
     void SetCollectGarbage(bool value);
 
+    auto IsAutoGoToObject() const -> bool;
+    void SetAutoGoToObject(bool value);
+
 signals:
     void UserToolColorsChanged();
 

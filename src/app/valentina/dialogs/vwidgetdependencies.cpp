@@ -34,6 +34,7 @@
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/xml/vpatternblockmapper.h"
 #include "../ifc/xml/vpatterngraph.h"
+#include "../vmisc/vvalentinasettings.h"
 #include "../vtools/tools/vabstracttool.h"
 #include "../vtools/tools/vinteractivetool.h"
 #include "../vtools/undocommands/movetool.h"
@@ -118,10 +119,17 @@ VWidgetDependencies::VWidgetDependencies(VAbstractPattern *doc, QWidget *parent)
     ui->toolButtonDown->setIcon(FromTheme(VThemeIcon::ObjectOrderLower));
     ui->toolButtonBottom->setIcon(FromTheme(VThemeIcon::ObjectOrderBack));
 
+    ui->toolButtonAutoGoToObject->setChecked(VAbstractValApplication::VApp()->ValentinaSettings()->IsAutoGoToObject());
+
     connect(ui->toolButtonTop, &QToolButton::clicked, this, &VWidgetDependencies::MoveTop);
     connect(ui->toolButtonUp, &QToolButton::clicked, this, &VWidgetDependencies::MoveUp);
     connect(ui->toolButtonDown, &QToolButton::clicked, this, &VWidgetDependencies::MoveDown);
     connect(ui->toolButtonBottom, &QToolButton::clicked, this, &VWidgetDependencies::MoveBottom);
+    connect(ui->toolButtonAutoGoToObject,
+            &QToolButton::clicked,
+            this,
+            [](bool checked) -> void
+            { VAbstractValApplication::VApp()->ValentinaSettings()->SetAutoGoToObject(checked); });
 
     // NOLINTNEXTLINE(cppcoreguidelines-prefer-member-initializer)
     m_stateManager = new VTreeStateManager(ui->treeView, m_dependencyModel, this);
