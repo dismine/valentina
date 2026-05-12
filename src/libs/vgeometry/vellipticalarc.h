@@ -92,10 +92,6 @@ public:
     auto GetP1() const -> QPointF;
     auto GetP2() const -> QPointF;
 
-    auto GetTransform() const -> QTransform;
-    void SetTransform(const QTransform &matrix, bool combine = false);
-
-    auto GetCenter() const -> VPointF override;
     auto GetPoints() const -> QVector<QPointF> override;
 
     auto ToSplinePath() const -> VSplinePath override;
@@ -121,7 +117,7 @@ private:
     QSharedDataPointer<VEllipticalArcData> d;
 
     auto MaxLength() const -> qreal;
-    auto GetP(qreal angle) const -> QPointF;
+    auto GetP(qreal angle, bool addRotation = true) const -> QPointF;
 
     auto CorrectCutLength(qreal length, qreal fullLength, const QString &pointName) const -> qreal;
 };

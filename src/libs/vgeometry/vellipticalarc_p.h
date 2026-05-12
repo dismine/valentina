@@ -32,7 +32,6 @@ public:
     qreal rotationAngle{0}; // NOLINT(misc-non-private-member-variables-in-classes)
     /** @brief formulaRotationAngle formula for rotationAngle. */
     QString formulaRotationAngle{}; // NOLINT(misc-non-private-member-variables-in-classes)
-    QTransform m_transform{};       // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
     Q_DISABLE_ASSIGN_MOVE(VEllipticalArcData) // NOLINT

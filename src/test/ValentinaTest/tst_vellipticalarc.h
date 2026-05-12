@@ -57,6 +57,8 @@ private slots:
     void TestRotation();
     void TestFlip_data();
     void TestFlip();
+    void TestRotateAndFlip_data();
+    void TestRotateAndFlip();
     void EmptyArc_data();
     void EmptyArc();
     void TestCutArc_data();
