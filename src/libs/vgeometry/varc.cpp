@@ -192,13 +192,7 @@ auto VArc::Move(qreal length, qreal angle, const QString &name) const -> VArc
 {
     const VPointF center = GetCenter().Move(length, angle);
 
-    const QPointF p1 = VPointF::MovePF(GetP1(), length, angle);
-    const QPointF p2 = VPointF::MovePF(GetP2(), length, angle);
-
-    const qreal f1 = QLineF(static_cast<QPointF>(center), p1).angle();
-    const qreal f2 = QLineF(static_cast<QPointF>(center), p2).angle();
-
-    VArc arc(center, d->radius, f1, f2);
+    VArc arc(center, d->radius, GetStartAngle(), GetEndAngle());
     if (!name.isEmpty())
     {
         arc.SetNameSuffix(name);
