@@ -160,25 +160,22 @@ void VSegmentLabel::UpdateLabelLine()
         return;
     }
 
-    // ── 1. Check overlap in local coordinates ────────────────────────────
-    QRectF labelLocalRect = m_label->sceneBoundingRect();
-    labelLocalRect.translate(-scenePos());
-
-    if (boundingRect().intersects(labelLocalRect))
+    // ── 1. Check overlap ────────────────────────────
+    const QRectF labelSceneRect = m_label->sceneBoundingRect();
+    if (labelSceneRect.contains(scenePos()))
     {
         m_labelLine->setVisible(false);
         return;
     }
 
     // ── 2. Find where the line hits the label rect edge ──────────────────
-    const QRectF labelSceneRect = m_label->sceneBoundingRect();
     const QPointF pRec = VGObject::LineIntersectRect(labelSceneRect, QLineF(scenePos(), labelSceneRect.center()));
 
     // Convert to local coordinates (line is drawn in item space)
     const QPointF pRecLocal = pRec - scenePos();
 
-    // ── 3. Hide if the label is still too close (< 4mm scaled) ───────────
-    const qreal minLength = ToPixel(4.0 / qMax(1.0, SceneScale(scene())), Unit::Mm);
+    // ── 3. Hide if the label is still too close (< 8mm scaled) ───────────
+    const qreal minLength = ToPixel(8.0 / qMax(1.0, SceneScale(scene())), Unit::Mm);
 
     if (QLineF(QPointF(), pRecLocal).length() <= minLength)
     {
