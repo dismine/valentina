@@ -293,11 +293,14 @@ auto VEllipticalArc::ToSplinePath() const -> VSplinePath
 
     const auto rawCenter = static_cast<QPointF>(GetCenter());
 
+    const qreal radius1 = !qFuzzyIsNull(d->radius1) ? qAbs(d->radius1) : accuracyPointOnLine;
+    const qreal radius2 = !qFuzzyIsNull(d->radius2) ? qAbs(d->radius2) : accuracyPointOnLine;
+
     // 2. Rotation of ellipse (Qt uses degrees CCW)
     QTransform ellipseTf;
     ellipseTf.translate(rawCenter.x(), rawCenter.y());
     ellipseTf.rotate(-d->rotationAngle);                 // <-- Qt CCW rotation
-    ellipseTf.scale(qAbs(d->radius1), qAbs(d->radius2)); // <-- Scale unit circle to ellipse
+    ellipseTf.scale(radius1, radius2);                   // <-- Scale unit circle to ellipse
 
     // 3. Angle logic
     // Helper lambda to convert Visual Angle -> Parametric Angle
@@ -309,8 +312,8 @@ auto VEllipticalArc::ToSplinePath() const -> VSplinePath
         // 2. Apply the scaling factor to the tangent
         //    Math: tan(t) = (r1 / r2) * tan(theta)
         //    We use atan2 for correct quadrant handling
-        qreal const y = qAbs(d->radius1) * qSin(localRad);
-        qreal const x = qAbs(d->radius2) * qCos(localRad);
+        qreal const y = radius1 * qSin(localRad);
+        qreal const x = radius2 * qCos(localRad);
 
         qreal const paramRad = qAtan2(y, x);
         qreal paramDeg = qRadiansToDegrees(paramRad);
@@ -665,8 +668,11 @@ auto VEllipticalArc::DoCutArcByLength(qreal length, const QString &pointName) co
 //---------------------------------------------------------------------------------------------------------------------
 auto VEllipticalArc::MaxLength() const -> qreal
 {
-    const qreal h = qPow(qAbs(d->radius1) - qAbs(d->radius2), 2) / qPow(qAbs(d->radius1) + qAbs(d->radius2), 2);
-    qreal ellipseLength = M_PI * (qAbs(d->radius1) + qAbs(d->radius2)) * (1 + 3 * h / (10 + qSqrt(4 - 3 * h)));
+    const qreal radius1 = !qFuzzyIsNull(d->radius1) ? qAbs(d->radius1) : accuracyPointOnLine;
+    const qreal radius2 = !qFuzzyIsNull(d->radius2) ? qAbs(d->radius2) : accuracyPointOnLine;
+
+    const qreal h = qPow(radius1 - radius2, 2) / qPow(radius1 + radius2, 2);
+    qreal ellipseLength = M_PI * (radius1 + radius2) * (1 + 3 * h / (10 + qSqrt(4 - 3 * h)));
 
     if (IsReversed())
     {
@@ -687,8 +693,11 @@ auto VEllipticalArc::GetP(qreal angle, bool addRotation) const -> QPointF
     QLineF line(0, 0, 100, 0);
     line.setAngle(angle);
 
-    const qreal a = not qFuzzyIsNull(d->radius1) ? line.p2().x() / qAbs(d->radius1) : 0;
-    const qreal b = not qFuzzyIsNull(d->radius2) ? line.p2().y() / qAbs(d->radius2) : 0;
+    const qreal radius1 = !qFuzzyIsNull(d->radius1) ? qAbs(d->radius1) : accuracyPointOnLine;
+    const qreal radius2 = !qFuzzyIsNull(d->radius2) ? qAbs(d->radius2) : accuracyPointOnLine;
+
+    const qreal a = not qFuzzyIsNull(radius1) ? line.p2().x() / radius1 : 0;
+    const qreal b = not qFuzzyIsNull(radius2) ? line.p2().y() / radius2 : 0;
     const qreal k = qSqrt(a * a + b * b);
 
     if (qFuzzyIsNull(k))
