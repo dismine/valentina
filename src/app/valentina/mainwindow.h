@@ -472,6 +472,7 @@ private:
     void ToolSelectSpline();
     void ToolSelectSplinePath();
     void ToolSelectArc();
+    void ToolSelectArcElArc();
     void ToolSelectArcCurve();
     void ToolSelectPointArc();
     void ToolSelectCurve();

@@ -1822,7 +1822,7 @@ void MainWindow::ToolInsertNode(bool checked)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolArcStart(bool checked)
 {
-    ToolSelectArc();
+    ToolSelectArcElArc();
     // Reuse DialogCutArc and VToolCutArc but with different cursor
     SetToolButtonWithApply<DialogCutArc>(checked, Tool::ArcStart, QStringLiteral("arc_start_cursor.png"),
                                          tr("Select arc"), &MainWindow::ClosedDrawDialogWithApply<VToolCutArc>,
@@ -1833,7 +1833,7 @@ void MainWindow::ToolArcStart(bool checked)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolArcEnd(bool checked)
 {
-    ToolSelectArc();
+    ToolSelectArcElArc();
     // Reuse DialogCutArc and VToolCutArc but with different cursor
     SetToolButtonWithApply<DialogCutArc>(checked, Tool::ArcEnd, QStringLiteral("arc_end_cursor.png"), tr("Select arc"),
                                          &MainWindow::ClosedDrawDialogWithApply<VToolCutArc>,
@@ -8025,6 +8025,37 @@ void MainWindow::ToolSelectArc()
     emit EnableImageBackgroundHover(false);
 
     emit ShowArcSegmentLabel(true);
+
+    emit ItemsSelection(SelectionType::ByMouseRelease);
+
+    ui->view->AllowRubberBand(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolSelectArcElArc()
+{
+    // Only true for rubber band selection
+    emit EnableLabelSelection(false);
+    emit EnablePointSelection(false);
+    emit EnableLineSelection(false);
+    emit EnableArcSelection(false);
+    emit EnableElArcSelection(false);
+    emit EnableSplineSelection(false);
+    emit EnableSplinePathSelection(false);
+    emit EnableBackgroundImageSelection(false);
+
+    // Hovering
+    emit EnableLabelHover(false);
+    emit EnablePointHover(false);
+    emit EnableLineHover(false);
+    emit EnableArcHover(true);
+    emit EnableElArcHover(true);
+    emit EnableSplineHover(false);
+    emit EnableSplinePathHover(false);
+    emit EnableImageBackgroundHover(false);
+
+    emit ShowArcSegmentLabel(true);
+    emit ShowElArcSegmentLabel(true);
 
     emit ItemsSelection(SelectionType::ByMouseRelease);
 
